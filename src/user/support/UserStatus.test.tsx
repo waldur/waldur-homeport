@@ -1,19 +1,20 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { usersPartialUpdate } from 'waldur-js-client';
 
-import { waitForConfirmation } from '@/modal/actions';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { UserStatus } from './UserStatus';
 
+const mockConfirm = vi.fn();
+
 vi.mock('waldur-js-client');
 vi.mock('@tanstack/react-query');
-vi.mock('react-redux');
-vi.mock('@/modal/actions');
-vi.mock('@/store/hooks');
+vi.mock('@/modal/actions', () => ({
+  useModal: () => ({ confirm: mockConfirm }),
+}));
+vi.mock('@/store/notify');
 
 describe('UserStatus', () => {
   let user;
@@ -36,12 +37,11 @@ describe('UserStatus', () => {
       setQueryData: setQueryDataMock,
       invalidateQueries: vi.fn(),
     } as any);
-    vi.mocked(useDispatch).mockReturnValue(vi.fn());
     vi.mocked(useNotify).mockReturnValue({
       showErrorResponse: showErrorResponseMock,
       showSuccess: showSuccessMock,
     } as any);
-    vi.mocked(waitForConfirmation).mockResolvedValue(true);
+    mockConfirm.mockResolvedValue(true);
   });
 
   it('renders the component with the enabled user', () => {

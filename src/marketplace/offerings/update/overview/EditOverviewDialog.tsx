@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
@@ -13,9 +12,8 @@ import {
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { OVERVIEW_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';
@@ -31,32 +29,25 @@ export const EditOverviewDialog = connect(
   reduxForm<{}, { resolve: EditOfferingProps }>({
     form: OVERVIEW_FORM_ID,
   })((props) => {
-    const dispatch = useDispatch();
-    const update = useCallback(
-      async (formData) => {
-        try {
-          await marketplaceProviderOfferingsUpdateOverview({
-            path: { uuid: props.resolve.offering.uuid },
-            body: {
-              ...pickOverview(props.resolve.offering),
-              [props.resolve.attribute.key]: formData.value,
-            },
-          });
-          dispatch(
-            showSuccess(translate('Offering has been updated successfully.')),
-          );
-          await props.resolve.refetch();
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to update offering.')),
-          );
-        }
-      },
-      [dispatch],
-    );
+    const updateOfferingMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        marketplaceProviderOfferingsUpdateOverview({
+          path: { uuid: props.resolve.offering.uuid },
+          body: {
+            ...pickOverview(props.resolve.offering),
+            [props.resolve.attribute.key]: formData.value,
+          },
+        }),
+      successMessage: translate('Offering has been updated successfully.'),
+      errorMessage: translate('Unable to update offering.'),
+      refetch: props.resolve.refetch,
+    });
     return (
-      <form onSubmit={props.handleSubmit(update)}>
+      <form
+        onSubmit={props.handleSubmit((values) =>
+          updateOfferingMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={props.resolve.attribute.title}
           footer={

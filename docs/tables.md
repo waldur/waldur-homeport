@@ -693,12 +693,11 @@ For a clean UI, use `ActionsDropdownComponent` with `ActionItem` to create a 3-d
 ```ts
 import { FC, useCallback } from 'react';
 import { PencilSimple, Trash, EnvelopeSimple } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
+
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/hooks';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 interface RowActionsProps {
@@ -706,33 +705,23 @@ interface RowActionsProps {
   refetch: () => void;
 }
 
+// Usage with useManagedMutation
 export const RowActions: FC<RowActionsProps> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
-
-  const deleteMutation = useMutation({
+  const { mutate: handleDelete, isPending: isDeleting } = useManagedMutation({
     mutationFn: () => deleteItem({ path: { uuid: row.uuid } }),
-    onSuccess: () => {
-      showSuccess(translate('Item deleted successfully.'));
-      refetch();
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Failed to delete item.'));
+    successMessage: translate('Item deleted successfully.'),
+    errorMessage: translate('Failed to delete item.'),
+    refetch,
+    confirmation: {
+      title: translate('Delete item'),
+      body: translate('Are you sure you want to delete {name}?', {
+        name: row.name,
+      }),
     },
   });
 
-  const handleDelete = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Delete item'),
-        translate('Are you sure you want to delete {name}?', { name: row.name }),
-      );
-      deleteMutation.mutate();
-    } catch {
-      // User cancelled confirmation
-    }
-  }, [dispatch, row, deleteMutation]);
+  // NOTE: Use .mutate() for button actions, not .mutateAsync()
+  const onDelete = () => handleDelete({});
 
   // Conditionally show actions based on row state
   const canEdit = row.status === 'draft';
@@ -755,11 +744,11 @@ export const RowActions: FC<RowActionsProps> = ({ row, refetch }) => {
       {canDelete && (
         <ActionItem
           title={translate('Delete')}
-          action={handleDelete}
+          action={onDelete}
           iconNode={<Trash weight="bold" />}
           className="text-danger"
           iconColor="danger"
-          disabled={deleteMutation.isPending}
+          disabled={isDeleting}
         />
       )}
     </ActionsDropdownComponent>

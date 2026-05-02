@@ -19,7 +19,7 @@ import { EmailField } from '@/form/EmailField';
 import { FormContainer } from '@/form/FormContainer';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -52,12 +52,13 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
   reduxForm<FormData, { resolve: EditCustomerProps }>({
     form: EDIT_CUSTOMER_FORM_ID,
   })((props) => {
+    const { closeDialog } = useModal();
     const processRequest = useCallback(
       (values: FormData, dispatch) => {
         return props.resolve
           .callback(values, dispatch)
           .then(() => {
-            dispatch(closeModalDialog());
+            closeDialog();
           })
           .catch((e) => {
             if (e.response && e.response.status === 400) {
@@ -65,7 +66,7 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
             }
           });
       },
-      [props.resolve.callback],
+      [props.resolve.callback, closeDialog],
     );
 
     const {

@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { Screenshot } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 interface ImageThumbnailProps {
   image: Screenshot;
@@ -19,17 +18,15 @@ const ImageDetailsDialog = lazyComponent(() =>
 export const ImageThumbnail: FunctionComponent<ImageThumbnailProps> = (
   props,
 ) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <img
       src={props.image.thumbnail || props.image.image}
       alt={translate('Image here')}
       onClick={() =>
-        dispatch(
-          openModalDialog(ImageDetailsDialog, {
-            resolve: props.image,
-          }),
-        )
+        openDialog(ImageDetailsDialog, {
+          resolve: props.image,
+        })
       }
       style={{ cursor: 'pointer', maxWidth: 100 }}
       aria-hidden="true"

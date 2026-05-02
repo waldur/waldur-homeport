@@ -5,7 +5,7 @@ import { initMatomoTracker, MatomoInstance } from '@/afterBootstrap';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { DeploymentFeatures } from '@/FeaturesEnums';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 import { getConsent, setConsent } from './CookiesStorage';
 

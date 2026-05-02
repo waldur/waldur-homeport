@@ -1,9 +1,8 @@
-import { useCallback } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import {
-  CustomerUser,
-  NestedProjectPermission,
+  type CustomerUser,
+  type NestedProjectPermission,
   projectsAddUser,
   projectsDeleteUser,
   projectsUpdateUser,
@@ -11,14 +10,13 @@ import {
 
 import { FormContainer, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { Role } from '@/permissions/types';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { type Role } from '@/permissions/types';
 import { getProjectRoles } from '@/permissions/utils';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@/project/team/RoleGroup';
-import { showErrorResponse } from '@/store/notify';
 
 import { ProjectGroup } from './ProjectGroup';
 import { UserGroup } from './UserGroup';
@@ -86,36 +84,31 @@ export const EditProjectUserDialog = connect(
   reduxForm<EditProjectUserDialogFormData, EditProjectUserDialogOwnProps>({
     form: FORM_ID,
   })(({ submitting, handleSubmit, resolve }) => {
-    const dispatch = useDispatch();
-
-    const saveUser = useCallback(
-      async (formData) => {
-        try {
-          await savePermissions(formData, resolve);
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to update permission.')),
-          );
-        }
-      },
-      [dispatch, resolve],
-    );
+    const saveMutation = useManagedMutation<
+      any,
+      any,
+      EditProjectUserDialogFormData
+    >({
+      mutationFn: (formData) => savePermissions(formData, resolve),
+      errorMessage: translate('Unable to update permission.'),
+    });
 
     return (
-      <form onSubmit={handleSubmit(saveUser)}>
+      <form
+        onSubmit={handleSubmit((values) => saveMutation.mutateAsync(values))}
+      >
         <ModalDialog
           title={translate('Edit project member')}
           footer={
             <>
               <CloseDialogButton />
-              <SubmitButton submitting={submitting}>
+              <SubmitButton submitting={saveMutation.isPending}>
                 {translate('Save')}
               </SubmitButton>
             </>
           }
         >
-          <FormContainer submitting={submitting}>
+          <FormContainer submitting={saveMutation.isPending}>
             <UserGroup permission={resolve.customer} />
             <ProjectGroup project={resolve.project} />
             <RoleGroup types={['project']} legacyField />

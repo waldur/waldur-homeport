@@ -1,12 +1,8 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
 import {
   myAssignmentBatchesList,
   myAssignmentBatchesRetrieve,
-  assignmentItemsAccept,
-  assignmentItemsDecline,
   MyAssignmentBatch,
   MyAssignmentItem,
 } from 'waldur-js-client';
@@ -16,14 +12,13 @@ import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { createFetcher } from '@/table/api';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
+import { AcceptAssignmentAction } from './AcceptAssignmentAction';
+import { DeclineAssignmentAction } from './DeclineAssignmentAction';
 import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
@@ -57,84 +52,20 @@ const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
 interface AssignmentItemActionsProps {
   item: MyAssignmentItem;
   batchUuid: string;
-  onSuccess: () => void;
 }
 
 const AssignmentItemActions: FC<AssignmentItemActionsProps> = ({
   item,
-  onSuccess,
+  batchUuid,
 }) => {
-  const dispatch = useDispatch();
-
-  const acceptMutation = useMutation({
-    mutationFn: () =>
-      assignmentItemsAccept({
-        path: { uuid: item.uuid },
-      }),
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Assignment accepted.')));
-      onSuccess();
-    },
-    onError: (error: any) => {
-      dispatch(showErrorResponse(error, translate('Unable to accept.')));
-    },
-  });
-
-  const declineMutation = useMutation({
-    mutationFn: (reason: string) =>
-      assignmentItemsDecline({
-        path: { uuid: item.uuid },
-        body: { reason },
-      }),
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Assignment declined.')));
-      onSuccess();
-    },
-    onError: (error: any) => {
-      dispatch(showErrorResponse(error, translate('Unable to decline.')));
-    },
-  });
-
-  const handleDecline = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Decline assignment'),
-        translate(
-          'Are you sure you want to decline reviewing this proposal: {proposal}?',
-          { proposal: item.proposal_name },
-        ),
-        {
-          positiveButton: translate('Decline'),
-          positiveButtonVariant: 'danger',
-        },
-      );
-    } catch {
-      return;
-    }
-    declineMutation.mutate(translate('User declined'));
-  };
-
   if (item.status !== 'pending') {
     return null;
   }
 
   return (
     <div className="d-flex gap-2">
-      <CompactActionButton
-        action={() => acceptMutation.mutate()}
-        title={translate('Accept')}
-        iconNode={<CheckIcon weight="bold" />}
-        variant="success"
-        pending={acceptMutation.isPending}
-      />
-      <CompactActionButton
-        action={handleDecline}
-        title={translate('Decline')}
-        iconNode={<XIcon weight="bold" />}
-        variant="outline-danger"
-        pending={declineMutation.isPending}
-      />
+      <AcceptAssignmentAction item={item} batchUuid={batchUuid} />
+      <DeclineAssignmentAction item={item} batchUuid={batchUuid} />
     </div>
   );
 };
@@ -144,8 +75,6 @@ interface BatchExpandableRowProps {
 }
 
 const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
-  const queryClient = useQueryClient();
-
   const { data: batch, isLoading } = useQuery({
     queryKey: ['myAssignmentBatchDetail', row.uuid],
     queryFn: () =>
@@ -154,15 +83,6 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
       ),
     staleTime: FAST_STALE_TIME,
   });
-
-  const handleItemSuccess = useCallback(() => {
-    queryClient.invalidateQueries({
-      queryKey: ['myAssignmentBatchDetail', row.uuid],
-    });
-    queryClient.invalidateQueries({
-      queryKey: ['table', 'MyAssignmentBatchesTable'],
-    });
-  }, [queryClient, row.uuid]);
 
   if (isLoading) {
     return (
@@ -233,11 +153,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
                   )}
                 </td>
                 <td>
-                  <AssignmentItemActions
-                    item={item}
-                    batchUuid={row.uuid}
-                    onSuccess={handleItemSuccess}
-                  />
+                  <AssignmentItemActions item={item} batchUuid={row.uuid} />
                 </td>
               </tr>
             ))}

@@ -1,6 +1,6 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   marketplaceOfferingRolesList,
@@ -20,9 +20,8 @@ import { SelectField, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface RemapGroupDialogProps {
   resolve: {
@@ -33,9 +32,6 @@ interface RemapGroupDialogProps {
 }
 
 export const RemapGroupDialog: FC<RemapGroupDialogProps> = ({ resolve }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   const {
     data: remoteGroups,
     isLoading: isLoadingRemote,
@@ -95,41 +91,36 @@ export const RemapGroupDialog: FC<RemapGroupDialogProps> = ({ resolve }) => {
     return [...new Set(roles.map((r) => r.content_type).filter(Boolean))];
   }, [roles]);
 
-  const save = useCallback(
-    async (formData) => {
-      try {
-        const body: {
-          backend_id: string;
-          resource_uuid?: string | null;
-          scope_id?: string | null;
-        } = {
-          backend_id: formData.remote_group.id,
-        };
-        if (formData.resource) {
-          body.resource_uuid = formData.resource.uuid;
-        } else if (resolve.group.resource) {
-          body.resource_uuid = null;
-        }
-        if (formData.scope_id) {
-          body.scope_id = formData.scope_id;
-        }
-        await offeringKeycloakGroupsSetBackendId({
-          path: { uuid: resolve.group.uuid },
-          body,
-        });
-        showSuccess(translate('Group has been remapped.'));
-        await resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to remap group.'));
+  const saveMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
+      const body: {
+        backend_id: string;
+        resource_uuid?: string | null;
+        scope_id?: string | null;
+      } = {
+        backend_id: formData.remote_group.id,
+      };
+      if (formData.resource) {
+        body.resource_uuid = formData.resource.uuid;
+      } else if (resolve.group.resource) {
+        body.resource_uuid = null;
       }
+      if (formData.scope_id) {
+        body.scope_id = formData.scope_id;
+      }
+      return offeringKeycloakGroupsSetBackendId({
+        path: { uuid: resolve.group.uuid },
+        body,
+      });
     },
-    [resolve, showSuccess, showErrorResponse, closeDialog],
-  );
+    successMessage: translate('Group has been remapped.'),
+    errorMessage: translate('Unable to remap group.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={save}
+      onSubmit={(values) => saveMutation.mutateAsync(values)}
       initialValues={{
         resource: resolve.group.resource_uuid
           ? resources?.find((r) => r.uuid === resolve.group.resource_uuid)

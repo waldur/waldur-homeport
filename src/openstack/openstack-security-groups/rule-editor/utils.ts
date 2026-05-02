@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector, reduxForm } from 'redux-form';
 import {
@@ -12,8 +11,7 @@ import {
 
 import { getAllPages } from '@/core/api';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { type RootState } from '@/store/reducers';
 
 import { SecurityGroupRulesFormData, Rule } from './types';
@@ -54,28 +52,24 @@ export const useRulesEditor = (resource: OpenStackSecurityGroup) => {
       ),
     [tenant],
   );
-  const dispatch = useDispatch();
-  const submitRequest = async (formData: SecurityGroupRulesFormData) => {
-    try {
-      await openstackSecurityGroupsSetRules({
+  const updateMutation = useManagedMutation<
+    any,
+    any,
+    SecurityGroupRulesFormData
+  >({
+    mutationFn: (formData) =>
+      openstackSecurityGroupsSetRules({
         path: { uuid: resource.uuid },
         body: serializeRulesPayload(formData),
-      });
-      dispatch(
-        showSuccess(
-          translate('Security group rules update has been scheduled.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to update security group rules.'),
-        ),
-      );
-    }
-  };
+      }),
+    successMessage: translate(
+      'Security group rules update has been scheduled.',
+    ),
+    errorMessage: translate('Unable to update security group rules.'),
+  });
+
+  const submitRequest = (formData: SecurityGroupRulesFormData) =>
+    updateMutation.mutateAsync(formData);
   return {
     asyncState,
     submitRequest,

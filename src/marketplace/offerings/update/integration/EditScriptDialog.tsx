@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
@@ -16,9 +16,9 @@ import { SubmitButton } from '@/form';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
-import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 
 import { EDIT_SCRIPT_FORM_ID } from './constants';
@@ -52,7 +52,10 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
       dry_run: props.resolve.dry_run,
     });
 
-    const dispatch = useDispatch();
+    const { showError, showErrorResponse, showSuccess } = useNotify();
+
+    const { closeDialog: closeModal, confirm } = useModal();
+
     const [executing, setExecuting] = useState<boolean>(false);
     const [scriptExecutionResult, setScriptExecutionResult] = useState('');
     const language = props.resolve.offering.secret_options.language;
@@ -74,8 +77,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
       if (isDirty) {
         switchAllowed = false;
         try {
-          await waitForConfirmation(
-            dispatch,
+          await confirm(
             translate('Unsaved changes'),
             translate(
               'Switching scripts will discard your changes. Do you want to continue?',
@@ -114,8 +116,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
     const closeDialog = async () => {
       if (isDirty) {
         try {
-          await waitForConfirmation(
-            dispatch,
+          await confirm(
             translate('Unsaved changes'),
             translate('Do you want to save or discard changes?'),
             {
@@ -125,12 +126,12 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
             },
           );
         } catch {
-          dispatch(closeModalDialog());
+          closeModal();
           return;
         }
         handleSaveAndExit();
       } else {
-        dispatch(closeModalDialog());
+        closeModal();
       }
     };
 
@@ -147,21 +148,17 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           });
           setInitialSecretOptions(secret_options);
           props.initialize({ script: formData.script });
-          dispatch(
-            showSuccess(translate('Script has been updated successfully.')),
-          );
+          showSuccess(translate('Script has been updated successfully.'));
           if (props.resolve.refetch) {
             await props.resolve.refetch();
           }
           return true;
         } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to update script.')),
-          );
+          showErrorResponse(error, translate('Unable to update script.'));
           return false;
         }
       },
-      [dispatch, props.resolve, scriptOption, initialSecretOptions],
+      [scriptOption, initialSecretOptions],
     );
 
     const handleSave = props.handleSubmit(updateScript);
@@ -169,7 +166,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
     const handleSaveAndExit = (event?: React.FormEvent<HTMLFormElement>) => {
       if (event) event.preventDefault();
       handleSave().then((res) => {
-        if (res) dispatch(closeModalDialog());
+        if (res) closeModal();
       });
     };
 
@@ -210,27 +207,21 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           response.data.uuid,
         );
         if (asyncDryRunResult.data.get_state_display === 'erred') {
-          dispatch(
-            showError(translate('An error occurred during script execution.')),
-          );
+          showError(translate('An error occurred during script execution.'));
         } else {
-          dispatch(
-            showSuccess(
-              translate('{type} script was executed successfully', {
-                type: scriptOption.dry_run,
-              }),
-            ),
+          showSuccess(
+            translate('{type} script was executed successfully', {
+              type: scriptOption.dry_run,
+            }),
           );
         }
         setScriptExecutionResult(asyncDryRunResult.data.output);
       } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('{type} script got an error', {
-              type: scriptOption.dry_run,
-            }),
-          ),
+        showErrorResponse(
+          e,
+          translate('{type} script got an error', {
+            type: scriptOption.dry_run,
+          }),
         );
       }
     };

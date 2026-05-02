@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 import {
@@ -11,10 +10,9 @@ import { OpenStackInstance } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadSecurityGroups } from '@/openstack/api';
 import { OPENSTACK_PORT_TYPE } from '@/openstack/constants';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface UpdateSecurityGroupsFormData {
   security_groups: Option[];
@@ -37,18 +35,22 @@ export const useUpdateSecurityGroupsForm = (
       ),
     [resource.service_settings_uuid],
   );
-  const dispatch = useDispatch();
-  const submitRequest = async (formData: UpdateSecurityGroupsFormData) => {
-    const resourceLabel =
-      resource.resource_type === OPENSTACK_PORT_TYPE
-        ? translate('OpenStack port')
-        : translate('OpenStack instance');
-    try {
+  const resourceLabel =
+    resource.resource_type === OPENSTACK_PORT_TYPE
+      ? translate('OpenStack port')
+      : translate('OpenStack instance');
+
+  const updateMutation = useManagedMutation<
+    any,
+    any,
+    UpdateSecurityGroupsFormData
+  >({
+    mutationFn: (formData) => {
       const api =
         resource.resource_type === OPENSTACK_PORT_TYPE
           ? openstackPortsUpdateSecurityGroups
           : openstackInstancesUpdateSecurityGroups;
-      await api({
+      return api({
         path: { uuid: resource.uuid },
         body: {
           security_groups: (formData.security_groups || []).map(
@@ -56,29 +58,19 @@ export const useUpdateSecurityGroupsForm = (
           ),
         },
       });
-      dispatch(
-        showSuccess(
-          translate(
-            'Update of {resource} security groups has been scheduled.',
-            { resource: resourceLabel },
-          ),
-        ),
-      );
-      if (refetch) {
-        await refetch();
-      }
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to update security groups of {resource}.', {
-            resource: resourceLabel,
-          }),
-        ),
-      );
-    }
-  };
+    },
+    successMessage: translate(
+      'Update of {resource} security groups has been scheduled.',
+      { resource: resourceLabel },
+    ),
+    errorMessage: translate('Unable to update security groups of {resource}.', {
+      resource: resourceLabel,
+    }),
+    refetch,
+  });
+
+  const submitRequest = (formData: UpdateSecurityGroupsFormData) =>
+    updateMutation.mutateAsync(formData);
   const initialValues = useMemo<UpdateSecurityGroupsFormData>(
     () => ({
       security_groups: resource.security_groups.map((group) => ({
@@ -86,7 +78,7 @@ export const useUpdateSecurityGroupsForm = (
         value: group.url,
       })),
     }),
-    [resource.security_groups],
+    [],
   );
   return { resource, asyncState, submitRequest, initialValues };
 };

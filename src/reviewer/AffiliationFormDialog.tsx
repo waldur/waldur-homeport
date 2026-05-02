@@ -13,9 +13,8 @@ import { FormGroup, SelectField, StringField, SubmitButton } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 const AFFILIATION_TYPE_OPTIONS = [
   { value: 'employment', label: translate('Employment') },
@@ -36,9 +35,6 @@ interface AffiliationFormDialogProps {
 export const AffiliationFormDialog = ({
   resolve,
 }: AffiliationFormDialogProps) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-
   const isEdit = Boolean(resolve.affiliation);
 
   const initialValues = isEdit
@@ -58,8 +54,8 @@ export const AffiliationFormDialog = ({
         affiliation_type: AFFILIATION_TYPE_OPTIONS[0],
       };
 
-  const onSubmit = async (formValues) => {
-    try {
+  const { mutateAsync, isPending } = useManagedMutation<any, any, any>({
+    mutationFn: (formValues) => {
       const body: ReviewerAffiliationRequest = {
         organization_name: formValues.organization_name,
         organization_identifier:
@@ -73,42 +69,33 @@ export const AffiliationFormDialog = ({
           ?.value as AffiliationTypeEnum,
       };
 
-      if (isEdit) {
-        // Update existing affiliation
-        await nestedReviewerProfileAffiliationsPartialUpdate({
-          path: {
-            reviewer_profile_uuid: resolve.profile.uuid,
-            uuid: resolve.affiliation.uuid,
-          },
-          body,
-        });
-        showSuccess(translate('Affiliation has been updated.'));
-      } else {
-        // Create new affiliation
-        await nestedReviewerProfileAffiliationsCreate({
-          path: { reviewer_profile_uuid: resolve.profile.uuid },
-          body,
-        });
-        showSuccess(translate('Affiliation has been added.'));
-      }
-
-      closeDialog();
-      await resolve.refetch();
-    } catch (error) {
-      showErrorResponse(
-        error,
-        isEdit
-          ? translate('Unable to update affiliation.')
-          : translate('Unable to add affiliation.'),
-      );
-    }
-  };
+      return isEdit
+        ? nestedReviewerProfileAffiliationsPartialUpdate({
+            path: {
+              reviewer_profile_uuid: resolve.profile.uuid,
+              uuid: resolve.affiliation.uuid,
+            },
+            body,
+          })
+        : nestedReviewerProfileAffiliationsCreate({
+            path: { reviewer_profile_uuid: resolve.profile.uuid },
+            body,
+          });
+    },
+    successMessage: isEdit
+      ? translate('Affiliation has been updated.')
+      : translate('Affiliation has been added.'),
+    errorMessage: isEdit
+      ? translate('Unable to update affiliation.')
+      : translate('Unable to add affiliation.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={onSubmit}
-      render={({ handleSubmit, submitting, invalid }) => (
+      onSubmit={(formData) => mutateAsync(formData)}
+      render={({ handleSubmit, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -132,7 +119,7 @@ export const AffiliationFormDialog = ({
               <>
                 <CloseDialogButton className="min-w-125px" />
                 <SubmitButton
-                  submitting={submitting}
+                  submitting={isPending}
                   disabled={invalid}
                   label={isEdit ? translate('Update') : translate('Add')}
                   className="btn btn-primary min-w-125px"

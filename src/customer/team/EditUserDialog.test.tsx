@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import {
@@ -17,7 +18,7 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock store hooks
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
@@ -173,13 +174,28 @@ const mockResolve = {
   refetch: vi.fn(),
 };
 
+const renderDialog = (resolve = mockResolve) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <EditUserDialog resolve={resolve} />
+    </QueryClientProvider>,
+  );
+};
+
 describe('EditUserDialog (Customer)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it('renders dialog with correct title and user information', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     expect(screen.getByText('Edit organization member')).toBeInTheDocument();
     expect(screen.getByText('User')).toBeInTheDocument();
@@ -195,21 +211,21 @@ describe('EditUserDialog (Customer)', () => {
   });
 
   it('renders role selection with customer roles', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     expect(screen.getByText('Role')).toBeInTheDocument();
     expect(screen.getByTestId('customer-select')).toBeInTheDocument();
   });
 
   it('renders expiration time field', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     expect(screen.getByText('Role expires on')).toBeInTheDocument();
     expect(screen.getByTestId('customer-date')).toBeInTheDocument();
   });
 
   it('renders submit and close buttons in correct order', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     expect(screen.getByText('Save')).toBeInTheDocument();
     expect(screen.getByText('Close')).toBeInTheDocument();
@@ -220,7 +236,7 @@ describe('EditUserDialog (Customer)', () => {
   });
 
   it('pre-populates form with existing customer user data', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     // The form should be initialized with current customer user values
     expect(screen.getByTestId('customer-modal')).toBeInTheDocument();
@@ -230,7 +246,7 @@ describe('EditUserDialog (Customer)', () => {
     const mockCustomersUpdateUser = vi.mocked(customersUpdateUser);
     mockCustomersUpdateUser.mockResolvedValue({} as any);
 
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     // This would require form interaction to actually submit
     expect(mockCustomersUpdateUser).toHaveBeenCalledTimes(0);
@@ -243,7 +259,7 @@ describe('EditUserDialog (Customer)', () => {
     mockCustomersDeleteUser.mockResolvedValue({} as any);
     mockCustomersAddUser.mockResolvedValue({} as any);
 
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     // This would require form interaction to test role change logic
     expect(mockCustomersDeleteUser).toHaveBeenCalledTimes(0);
@@ -256,11 +272,7 @@ describe('EditUserDialog (Customer)', () => {
       role_name: null,
     };
 
-    render(
-      <EditUserDialog
-        resolve={{ ...mockResolve, customer: customerWithoutRole }}
-      />,
-    );
+    renderDialog({ ...mockResolve, customer: customerWithoutRole });
 
     expect(screen.getByText('Edit organization member')).toBeInTheDocument();
     expect(
@@ -273,7 +285,7 @@ describe('EditUserDialog (Customer)', () => {
     const mockError = new Error('API Error');
     mockCustomersUpdateUser.mockRejectedValue(mockError);
 
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     // Error handling would be tested through form submission
     expect(screen.getByText('Edit organization member')).toBeInTheDocument();
@@ -285,11 +297,7 @@ describe('EditUserDialog (Customer)', () => {
       email: null,
     };
 
-    render(
-      <EditUserDialog
-        resolve={{ ...mockResolve, customer: customerWithoutEmail }}
-      />,
-    );
+    renderDialog({ ...mockResolve, customer: customerWithoutEmail });
 
     expect(
       screen.getByText((content) => content.includes('Jane Smith')),
@@ -304,11 +312,7 @@ describe('EditUserDialog (Customer)', () => {
       full_name: null,
     };
 
-    render(
-      <EditUserDialog
-        resolve={{ ...mockResolve, customer: customerWithoutName }}
-      />,
-    );
+    renderDialog({ ...mockResolve, customer: customerWithoutName });
 
     expect(
       screen.getByText((content) => content.includes('—')),

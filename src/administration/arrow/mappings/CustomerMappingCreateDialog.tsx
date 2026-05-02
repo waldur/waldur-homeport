@@ -1,8 +1,8 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
-import { useCallback, useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Alert, Form as BSForm } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
+import { adminArrowCustomerMappingsCreate } from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
@@ -10,15 +10,15 @@ import { Select } from '@/form/AsyncSelectField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 import {
+  arrowQueryKeys,
   useArrowSettings,
   useAvailableArrowCustomers,
-  useCreateCustomerMapping,
 } from '../api';
 
 interface CustomerMappingCreateDialogProps {
@@ -56,9 +56,9 @@ interface FormValues {
 export const CustomerMappingCreateDialog = ({
   resolve,
 }: CustomerMappingCreateDialogProps) => {
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
+
   const [error, setError] = useState<string | null>(null);
-  const createMapping = useCreateCustomerMapping();
   const { data: settings } = useArrowSettings();
   const {
     data: availableData,
@@ -86,33 +86,35 @@ export const CustomerMappingCreateDialog = ({
     }));
   }, [availableData?.waldur_customers]);
 
-  const handleSubmit = useCallback(
-    async (values: FormValues) => {
-      setError(null);
-      try {
-        await createMapping.mutateAsync({
+  const createMappingMutation = useManagedMutation<any, any, FormValues>({
+    mutationFn: (values) =>
+      adminArrowCustomerMappingsCreate({
+        body: {
           settings: settings!.uuid,
           arrow_reference: values.arrow_customer.reference,
           arrow_company_name: values.arrow_customer.companyName,
           waldur_customer: values.waldur_customer.uuid,
-        });
-        dispatch(showSuccess(translate('Customer mapping created')));
-        resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (e: any) {
-        setError(
-          e.response?.data?.detail ||
-            e.message ||
-            translate('Failed to create mapping'),
-        );
-      }
-    },
-    [createMapping, settings, dispatch, resolve],
-  );
+        },
+      }),
 
-  const handleClose = useCallback(() => {
-    dispatch(closeModalDialog());
-  }, [dispatch]);
+    successMessage: translate('Customer mapping created'),
+    errorMessage: translate('Failed to create mapping'),
+    refetch: resolve.refetch,
+
+    onError: (e: any) => {
+      setError(
+        e.response?.data?.detail ||
+          e.message ||
+          translate('Failed to create mapping'),
+      );
+    },
+
+    invalidateQueries: [
+      {
+        queryKey: arrowQueryKeys.customerMappings(),
+      },
+    ],
+  });
 
   if (!settings) {
     return (
@@ -143,7 +145,7 @@ export const CustomerMappingCreateDialog = ({
         </Alert>
         <div className="d-flex justify-content-end">
           <ActionButton
-            action={handleClose}
+            action={closeDialog}
             variant="secondary"
             title={translate('Close')}
           />
@@ -164,7 +166,7 @@ export const CustomerMappingCreateDialog = ({
         </Alert>
         <div className="d-flex justify-content-end">
           <ActionButton
-            action={handleClose}
+            action={closeDialog}
             variant="secondary"
             title={translate('Close')}
           />
@@ -175,8 +177,8 @@ export const CustomerMappingCreateDialog = ({
 
   return (
     <ModalDialog title={translate('Create Customer Mapping')}>
-      <Form
-        onSubmit={handleSubmit}
+      <Form<FormValues>
+        onSubmit={(values) => createMappingMutation.mutateAsync(values)}
         render={({ handleSubmit, invalid, form }) => (
           <form onSubmit={handleSubmit}>
             <FormGroup
@@ -345,12 +347,12 @@ export const CustomerMappingCreateDialog = ({
 
             <div className="d-flex justify-content-end gap-2">
               <ActionButton
-                action={handleClose}
+                action={closeDialog}
                 variant="secondary"
                 title={translate('Cancel')}
               />
               <SubmitButton
-                submitting={createMapping.isPending}
+                submitting={createMappingMutation.isPending}
                 disabled={invalid}
                 label={translate('Create')}
               />

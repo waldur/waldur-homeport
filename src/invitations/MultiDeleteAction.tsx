@@ -1,41 +1,41 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { userInvitationsDelete } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useBatchMutation } from '@/modal/useBatchMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useUser } from '@/workspace/hooks';
 
 export const MultiDeleteAction = ({ rows, refetch }) => {
   const user = useUser();
-  const dispatch = useDispatch();
 
-  const callback = () => {
-    try {
-      Promise.all(
-        rows.map((row) => userInvitationsDelete({ path: { uuid: row.uuid } })),
-      ).then(() => {
-        refetch();
-        dispatch(showSuccess(translate('Invitations have been deleted.')));
-      });
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to delete invitations.')),
-      );
-    }
-  };
+  const { mutate, isPending } = useBatchMutation<any, void>({
+    rows,
+    refetch,
+    mutationFn: (row) => userInvitationsDelete({ path: { uuid: row.uuid } }),
+    successMessage: translate('Invitations have been deleted.'),
+    renderPartialSuccessMessage: (n) =>
+      translate('{n} invitations have been deleted.', { n }),
+    errorMessage: translate('Unable to delete invitations.'),
+    renderErrorMessage: (n) =>
+      translate('{n} invitations could not be deleted.', { n }),
+    confirmation: {
+      title: translate('Delete invitations'),
+      body: translate('Are you sure you want to delete {count} invitations?', {
+        count: rows.length,
+      }),
+      options: { forDeletion: true },
+    },
+  });
 
   const tooltip = user.is_staff
     ? translate('Delete all selected invitations.')
     : translate('You do not have permission to delete invitations.');
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      action={callback}
-      iconNode={<TrashIcon weight="bold" />}
-      disabled={!user.is_staff}
+      action={mutate}
+      disabled={!user.is_staff || isPending}
       tooltip={tooltip}
     />
   );

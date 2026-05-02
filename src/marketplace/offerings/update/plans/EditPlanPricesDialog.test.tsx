@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
@@ -13,7 +14,7 @@ vi.mock('waldur-js-client', () => ({
   formDataBodySerializer: vi.fn(),
 }));
 
-vi.mock('@/modal/hooks', () => ({
+vi.mock('@/modal/actions', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
@@ -44,18 +45,27 @@ const renderComponent = () => {
     }),
   );
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+
   return render(
-    <Provider store={store}>
-      <EditPlanPricesDialog
-        resolve={
-          {
-            plan: mockPlan,
-            offering: mockOffering,
-            refetch: vi.fn(),
-          } as any
-        }
-      />
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <EditPlanPricesDialog
+          resolve={
+            {
+              plan: mockPlan,
+              offering: mockOffering,
+              refetch: vi.fn(),
+            } as any
+          }
+        />
+      </Provider>
+    </QueryClientProvider>,
   );
 };
 

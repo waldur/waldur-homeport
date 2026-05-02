@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
+import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   Resource,
   ResourceProject,
@@ -15,9 +15,8 @@ import { NumberField } from '@/form/NumberField';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { renderFieldOrDash } from '@/table/utils';
 
 type LimitComponent = {
@@ -42,9 +41,10 @@ interface ResourceProjectFormProps {
   };
 }
 
-export const ResourceProjectForm = ({ resolve }: ResourceProjectFormProps) => {
+export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
+  resolve,
+}) => {
   const isEdit = Boolean(resolve.resourceProject?.uuid);
-  const dispatch = useDispatch();
 
   const limitComponents = (resolve.offering?.components ?? []).filter(
     (c) => c.billing_type === 'limit',
@@ -97,17 +97,17 @@ export const ResourceProjectForm = ({ resolve }: ResourceProjectFormProps) => {
     if (typeof existing === 'number') initialLimits[c.type] = existing;
   });
 
-  const onSubmit = async (values: FormValues) => {
-    const limitsPayload: Record<string, number> = {};
-    limitComponents.forEach((c) => {
-      const raw = values.limits?.[c.type];
-      if (raw === undefined || raw === null || raw === '') return;
-      const n = Number(raw);
-      if (!Number.isNaN(n)) limitsPayload[c.type] = n;
-    });
-    try {
-      if (isEdit) {
-        await marketplaceResourceProjectsPartialUpdate({
+  const mutation = useManagedMutation<any, FormValues, any>({
+    mutationFn: (values) => {
+      const limitsPayload: Record<string, number> = {};
+      limitComponents.forEach((c) => {
+        const raw = values.limits?.[c.type];
+        if (raw === undefined || raw === null || raw === '') return;
+        const n = Number(raw);
+        if (!Number.isNaN(n)) limitsPayload[c.type] = n;
+      });
+      if (isEdit && resolve.resourceProject) {
+        return marketplaceResourceProjectsPartialUpdate({
           path: { uuid: resolve.resourceProject.uuid },
           body: {
             name: values.name,
@@ -116,7 +116,7 @@ export const ResourceProjectForm = ({ resolve }: ResourceProjectFormProps) => {
           },
         });
       } else {
-        await marketplaceResourceProjectsCreate({
+        return marketplaceResourceProjectsCreate({
           body: {
             resource: resolve.resource.uuid,
             name: values.name,
@@ -125,30 +125,23 @@ export const ResourceProjectForm = ({ resolve }: ResourceProjectFormProps) => {
           },
         });
       }
-      resolve.refetch();
-      dispatch(
-        showSuccess(
-          isEdit
-            ? translate('The project has been updated.')
-            : translate('The project has been created.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          isEdit
-            ? translate('Unable to update project.')
-            : translate('Unable to create project.'),
-        ),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('The project has been updated.')
+      : translate('The project has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update project.')
+      : translate('Unable to create project.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) =>
+        mutation.mutateAsync(values).catch(() => {
+          /* error handled by useManagedMutation */
+        })
+      }
       initialValues={
         resolve.resourceProject
           ? {
@@ -166,7 +159,7 @@ export const ResourceProjectForm = ({ resolve }: ResourceProjectFormProps) => {
             title={
               isEdit
                 ? translate('Edit {name}', {
-                    name: resolve.resourceProject.name,
+                    name: resolve.resourceProject?.name,
                   })
                 : translate('Create project')
             }

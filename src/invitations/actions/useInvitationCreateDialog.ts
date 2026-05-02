@@ -1,18 +1,19 @@
 import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { userInvitationsCreate } from 'waldur-js-client';
 import { userInvitationsCheckDuplicates } from 'waldur-js-client/sdk.gen';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 import { GroupInvitationFormData, InvitationContext } from './types';
 
 export const useInvitationCreateDialog = (context: InvitationContext) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
 
   const defaultProject = useMemo(
     () =>
@@ -145,13 +146,9 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
           });
           Promise.all(promises)
             .then(() => {
-              dispatch(
-                showSuccess(
-                  translate(
-                    'All invitation emails have been successfully sent.',
-                  ),
-                  translate('Invitation emails sent'),
-                ),
+              showSuccess(
+                translate('All invitation emails have been successfully sent.'),
+                translate('Invitation emails sent'),
               );
               if (context.refetch) {
                 context.refetch();
@@ -159,9 +156,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
               resolve(true);
             })
             .catch((e) => {
-              dispatch(
-                showErrorResponse(e, translate('Unable to send invitations.')),
-              );
+              showErrorResponse(e, translate('Unable to send invitations.'));
               reject(e);
             });
         } catch (e) {
@@ -169,10 +164,10 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
         }
       });
     },
-    [dispatch, context],
+    [context],
   );
 
-  const finish = () => dispatch(closeModalDialog());
+  const finish = () => closeDialog();
 
   return {
     checkDuplicates,

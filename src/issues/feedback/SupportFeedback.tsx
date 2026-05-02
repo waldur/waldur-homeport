@@ -1,6 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { Form } from 'react-bootstrap';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { supportFeedbacksCreate } from 'waldur-js-client';
@@ -11,13 +11,12 @@ import { SUPPORT_FEEDBACK_FORM_ID } from '@/issues/feedback/constants';
 import { useTitle } from '@/navigation/title';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
 import { router } from '@/router';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-
+import { useNotify } from '@/store/notify';
 import './SupportFeedback.scss';
 
 const SupportFeedbackContainer = (props) => {
   useTitle(translate('Feedback'));
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
   const router = useRouter();
 
   const submitRequest = async (formData) => {
@@ -28,10 +27,10 @@ const SupportFeedbackContainer = (props) => {
           token: router.globals.params.token,
         },
       });
-      dispatch(showSuccess(translate('Thank you for your response!')));
+      showSuccess(translate('Thank you for your response!'));
       router.stateService.go('login');
     } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to send feedback.')));
+      showErrorResponse(error, translate('Unable to send feedback.'));
     }
   };
 

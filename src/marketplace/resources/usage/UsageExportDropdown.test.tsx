@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import exportAs from '@/table/exporters';
 
 import {
@@ -16,7 +16,7 @@ vi.mock('@/i18n', () => ({
 
 vi.mock('@/table/exporters');
 
-vi.mock('@/store/hooks');
+vi.mock('@/store/notify');
 
 const mockShowError = vi.fn();
 

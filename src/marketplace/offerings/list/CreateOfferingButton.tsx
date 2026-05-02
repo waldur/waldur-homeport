@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
@@ -23,16 +23,14 @@ export const CreateOfferingButton = ({
   className?;
   showProvider?: boolean;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const customer = useSelector(getCustomer);
   const user = useUser();
 
   const callback = () => {
-    dispatch(
-      openModalDialog(OfferingCreateDialog, {
-        resolve: { fetch, showProvider },
-      }),
-    );
+    openDialog(OfferingCreateDialog, {
+      resolve: { fetch, showProvider },
+    });
   };
 
   if (

@@ -1,39 +1,28 @@
 import { CheckIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import { marketplaceOrdersApproveByConsumer } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 export const ConsumerApproveAll = ({ orders, refetch }) => {
-  const dispatch = useDispatch();
-  const { mutate, isPending: isLoading } = useMutation({
-    mutationFn: async () => {
-      try {
-        await Promise.all(
-          orders.map((order) =>
-            marketplaceOrdersApproveByConsumer({ path: { uuid: order.uuid } }),
-          ),
-        );
-        await refetch();
-        dispatch(showSuccess(translate('All orders have been approved.')));
-      } catch (response) {
-        dispatch(
-          showErrorResponse(
-            response,
-            translate('Unable to approve all orders.'),
-          ),
-        );
-      }
-    },
+  const { mutate, isPending } = useBatchMutation<any, void>({
+    rows: orders,
+    refetch,
+    mutationFn: (order) =>
+      marketplaceOrdersApproveByConsumer({ path: { uuid: order.uuid } }),
+    successMessage: translate('All orders have been approved.'),
+    renderPartialSuccessMessage: (n) =>
+      translate('{n} orders have been approved.', { n }),
+    errorMessage: translate('Unable to approve all orders.'),
+    renderErrorMessage: (n) =>
+      translate('{n} orders could not be approved.', { n }),
   });
   return (
     <ActionButton
       variant="primary"
-      action={() => mutate()}
-      pending={isLoading}
+      action={mutate}
+      pending={isPending}
       iconNode={<CheckIcon weight="bold" />}
       title={translate('Approve all')}
     />

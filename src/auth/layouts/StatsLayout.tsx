@@ -20,10 +20,10 @@ import { UserAuthWarning } from '../UserAuthWarning';
 import './StatsLayout.css';
 
 const DEFAULT_STATS = [
-  { value: '10K+', label: 'Active Users' },
-  { value: '50+', label: 'Organizations' },
-  { value: '99.9%', label: 'Uptime' },
-  { value: '24/7', label: 'Support' },
+  { value: '10K+', label: translate('Active Users') },
+  { value: '50+', label: translate('Organizations') },
+  { value: '99.9%', label: translate('Uptime') },
+  { value: '24/7', label: translate('Support') },
 ];
 
 export const StatsLayout = () => {

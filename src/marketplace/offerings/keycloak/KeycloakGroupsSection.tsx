@@ -2,10 +2,8 @@ import {
   ArrowsClockwiseIcon,
   CloudArrowDownIcon,
   LinkBreakIcon,
-  TrashIcon,
 } from '@phosphor-icons/react';
-import { FC, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useMemo } from 'react';
 import {
   OfferingKeycloakGroup,
   offeringKeycloakGroupsDestroy,
@@ -16,9 +14,11 @@ import {
 
 import { Badge } from '@/core/Badge';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
@@ -41,16 +41,14 @@ const RemapAction = ({
   refetch;
   offering_uuid: string;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionItem
       title={translate('Remap')}
       action={() =>
-        dispatch(
-          openModalDialog(RemapGroupDialog, {
-            resolve: { group: row, offering_uuid, refetch },
-          }),
-        )
+        openDialog(RemapGroupDialog, {
+          resolve: { group: row, offering_uuid, refetch },
+        })
       }
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
     />
@@ -64,36 +62,31 @@ const PullMembersAction = ({
   row: OfferingKeycloakGroup;
   refetch;
 }) => {
-  const dispatch = useDispatch();
-  const [pending, setPending] = useState(false);
+  const { showSuccess } = useNotify();
   if (!row.backend_id) return null;
-  const pull = async () => {
-    setPending(true);
-    try {
+
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: async () => {
       const response = await offeringKeycloakGroupsPullMembers({
         path: { uuid: row.uuid },
       });
       const { created, updated, total_remote } = response.data;
-      dispatch(
-        showSuccess(
-          translate(
-            'Synced {total_remote} members ({created} new, {updated} updated).',
-            { total_remote, created, updated },
-          ),
+      showSuccess(
+        translate(
+          'Synced {total_remote} members ({created} new, {updated} updated).',
+          { total_remote, created, updated },
         ),
       );
-      refetch();
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to sync members.')));
-    } finally {
-      setPending(false);
-    }
-  };
+    },
+    errorMessage: translate('Unable to sync members.'),
+    refetch,
+  });
+
   return (
     <ActionItem
-      title={pending ? translate('Syncing...') : translate('Sync members')}
-      action={pull}
-      disabled={pending}
+      title={isPending ? translate('Syncing...') : translate('Sync members')}
+      action={mutate}
+      disabled={isPending}
       iconNode={<CloudArrowDownIcon weight="bold" />}
     />
   );
@@ -106,39 +99,34 @@ const UnlinkAction = ({
   row: OfferingKeycloakGroup;
   refetch;
 }) => {
-  const dispatch = useDispatch();
-  const openDialog = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to unlink {name} from its remote Keycloak group?',
-          {
-            name: <strong>{row.name}</strong>,
-          },
-          formatJsxTemplate,
-        ),
-      );
-    } catch {
-      return;
-    }
-    try {
-      await offeringKeycloakGroupsSetBackendId({
+  if (!row.backend_id) return null;
+
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      offeringKeycloakGroupsSetBackendId({
         path: { uuid: row.uuid },
         body: { backend_id: null },
-      });
-      dispatch(showSuccess(translate('Group has been unlinked.')));
-      refetch();
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to unlink group.')));
-    }
-  };
-  if (!row.backend_id) return null;
+      }),
+    successMessage: translate('Group has been unlinked.'),
+    errorMessage: translate('Unable to unlink group.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to unlink {name} from its remote Keycloak group?',
+        {
+          name: <strong>{row.name}</strong>,
+        },
+        formatJsxTemplate,
+      ),
+    },
+  });
+
   return (
     <ActionItem
       title={translate('Unlink')}
-      action={openDialog}
+      action={mutate}
+      disabled={isPending}
       iconNode={<LinkBreakIcon weight="bold" />}
       className="text-warning"
       iconColor="warning"
@@ -153,49 +141,37 @@ const DeleteGroupAction = ({
   row: OfferingKeycloakGroup;
   refetch;
 }) => {
-  const dispatch = useDispatch();
-  const openDialog = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete group {name}? This will also remove it from Keycloak if synced.',
-          {
-            name: <strong>{row.name}</strong>,
-          },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await offeringKeycloakGroupsDestroy({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Group has been deleted.')));
-      refetch();
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to delete group.')));
-    }
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      offeringKeycloakGroupsDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Group has been deleted.'),
+    errorMessage: translate('Unable to delete group.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to delete group {name}? This will also remove it from Keycloak if synced.',
+        {
+          name: <strong>{row.name}</strong>,
+        },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      action={openDialog}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-      iconColor="danger"
+      action={mutate}
+      disabled={isPending}
     />
   );
 };
 
 export const KeycloakGroupsSection: FC<OfferingSectionProps> = (props) => {
-  const dispatch = useDispatch();
-  const filter = useMemo(
-    () => ({ offering_uuid: props.offering.uuid }),
-    [props.offering.uuid],
-  );
+  const { openDialog } = useModal();
+  const filter = useMemo(() => ({ offering_uuid: props.offering.uuid }), []);
   const tableProps = useTable({
     table: 'OfferingKeycloakGroupsList',
     fetchData: createFetcher(offeringKeycloakGroupsList),
@@ -252,14 +228,12 @@ export const KeycloakGroupsSection: FC<OfferingSectionProps> = (props) => {
         <ActionButton
           title={translate('Import remote group')}
           action={() =>
-            dispatch(
-              openModalDialog(ImportRemoteGroupDialog, {
-                resolve: {
-                  offering: props.offering,
-                  refetch: tableProps.fetch,
-                },
-              }),
-            )
+            openDialog(ImportRemoteGroupDialog, {
+              resolve: {
+                offering: props.offering,
+                refetch: tableProps.fetch,
+              },
+            })
           }
           variant="primary"
         />

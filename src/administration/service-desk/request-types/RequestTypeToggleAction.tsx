@@ -7,8 +7,8 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/hooks';
 
 export const RequestTypeToggleAction = ({
   row,
@@ -17,33 +17,25 @@ export const RequestTypeToggleAction = ({
   row: RequestTypeAdmin;
   refetch: () => void;
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-
-  const handleToggle = async () => {
-    try {
-      if (row.is_active) {
-        await supportRequestTypesAdminDeactivate({
-          path: { uuid: row.uuid },
-          body: {} as RequestTypeAdminRequest,
-        });
-        showSuccess(translate('Request type has been deactivated.'));
-      } else {
-        await supportRequestTypesAdminActivate({
-          path: { uuid: row.uuid },
-          body: {} as RequestTypeAdminRequest,
-        });
-        showSuccess(translate('Request type has been activated.'));
-      }
-      refetch();
-    } catch (error) {
-      showErrorResponse(
-        error,
-        row.is_active
-          ? translate('Unable to deactivate request type.')
-          : translate('Unable to activate request type.'),
-      );
-    }
-  };
+  const toggleMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      row.is_active
+        ? supportRequestTypesAdminDeactivate({
+            path: { uuid: row.uuid },
+            body: {} as RequestTypeAdminRequest,
+          })
+        : supportRequestTypesAdminActivate({
+            path: { uuid: row.uuid },
+            body: {} as RequestTypeAdminRequest,
+          }),
+    successMessage: row.is_active
+      ? translate('Request type has been deactivated.')
+      : translate('Request type has been activated.'),
+    errorMessage: row.is_active
+      ? translate('Unable to deactivate request type.')
+      : translate('Unable to activate request type.'),
+    refetch,
+  });
 
   return (
     <ActionItem
@@ -55,7 +47,7 @@ export const RequestTypeToggleAction = ({
           <CheckCircleIcon weight="bold" />
         )
       }
-      action={handleToggle}
+      action={() => toggleMutation.mutate()}
     />
   );
 };

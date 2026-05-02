@@ -1,8 +1,7 @@
 import arrayMutators from 'final-form-arrays';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   Checklist,
   checklistsAdminQuestionOptionsCreate,
@@ -17,9 +16,8 @@ import {
 import { translate } from '@/i18n';
 import { QuestionGeneralForm } from '@/marketplace-checklist/checklists/questions/QuestionGeneralForm';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { PredefinedQuestion } from './predefinedQuestions';
 
@@ -45,14 +43,8 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
   resolve: { question, checklistType, checklist, onSave },
 }) => {
   const isEdit = Boolean(question);
-  const { closeDialog } = useModal();
-  const dispatch = useDispatch();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (formData: PredefinedQuestion) => {
-    setIsSubmitting(true);
-
-    try {
+  const questionMutation = useManagedMutation<any, any, PredefinedQuestion>({
+    mutationFn: async (formData) => {
       const questionData: any = {
         checklist: checklist.url,
         description: formData.description,
@@ -181,30 +173,15 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
           });
         }
       }
-
-      dispatch(
-        showSuccess(
-          isEdit
-            ? translate('Question has been updated.')
-            : translate('Question has been created.'),
-        ),
-      );
-
-      await onSave();
-      closeDialog();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          isEdit
-            ? translate('Failed to update question.')
-            : translate('Failed to create question.'),
-        ),
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('Question has been updated.')
+      : translate('Question has been created.'),
+    errorMessage: isEdit
+      ? translate('Failed to update question.')
+      : translate('Failed to create question.'),
+    refetch: onSave,
+  });
 
   // Map checklistType to checklist_type format
   const mockChecklist = {
@@ -218,7 +195,7 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
 
   return (
     <Form
-      onSubmit={handleSubmit}
+      onSubmit={(values) => questionMutation.mutateAsync(values)}
       mutators={{ ...arrayMutators }}
       initialValues={question || emptyQuestion}
       render={({ handleSubmit, values }) => (
@@ -236,10 +213,14 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
                   type="submit"
                   className="btn btn-primary"
                   disabled={
-                    !values.description || !values.question_type || isSubmitting
+                    !values.description ||
+                    !values.question_type ||
+                    questionMutation.isPending
                   }
                 >
-                  {isSubmitting ? translate('Saving...') : translate('Save')}
+                  {questionMutation.isPending
+                    ? translate('Saving...')
+                    : translate('Save')}
                 </button>
               </>
             }

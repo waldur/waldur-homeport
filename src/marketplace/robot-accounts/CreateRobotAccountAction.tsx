@@ -1,9 +1,8 @@
 import { RobotIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -19,16 +18,14 @@ const CreateRobotAccountDialog = lazyComponent(() =>
 );
 
 export const CreateRobotAccountAction: ActionItemType = ({ resource }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const callback = () =>
-    dispatch(
-      openModalDialog(CreateRobotAccountDialog, {
-        resolve: {
-          resource,
-        },
-      }),
-    );
+    openDialog(CreateRobotAccountDialog, {
+      resolve: {
+        resource,
+      },
+    });
   const user = useUser();
   if (
     !hasPermission(user, {

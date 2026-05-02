@@ -1,9 +1,8 @@
 import { EyeIcon, PlusIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { ProjectCreateButton } from '@/project/create/ProjectCreateButton';
 import { ProjectsList } from '@/project/ProjectsList';
@@ -17,7 +16,7 @@ const ProjectDetailsDialog = lazyComponent(() =>
 );
 
 const ProjectsListActions = ({ row, fetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionsDropdown
       row={row}
@@ -28,12 +27,10 @@ const ProjectsListActions = ({ row, fetch }) => {
             title={translate('View details')}
             iconNode={<EyeIcon weight="bold" />}
             action={() =>
-              dispatch(
-                openModalDialog(ProjectDetailsDialog, {
-                  project: row,
-                  size: 'lg',
-                }),
-              )
+              openDialog(ProjectDetailsDialog, {
+                project: row,
+                size: 'lg',
+              })
             }
           />
         ),

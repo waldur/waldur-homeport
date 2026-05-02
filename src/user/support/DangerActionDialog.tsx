@@ -8,10 +8,10 @@ import { ENV } from '@/core/config';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ISSUE_IDS } from '@/issues/types/constants';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { DangerActionPanelProps } from './DangerActionPanelProps';
 

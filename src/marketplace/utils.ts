@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -7,7 +6,7 @@ import { translate } from '@/i18n';
 import { useExtraTabs } from '@/navigation/context';
 import { useOfferingCategories } from '@/navigation/sidebar/utils';
 import { Tab } from '@/navigation/Tab';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { getCategoryItems } from './category/utils';
 
@@ -34,7 +33,7 @@ export const validateIP = (value) => {
 };
 
 export const useMarketplacePublicTabs = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const categories = useOfferingCategories();
 
   const tabs = useMemo(() => {

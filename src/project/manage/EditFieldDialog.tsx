@@ -12,10 +12,9 @@ import MarkdownEditor from '@/form/MarkdownEditor';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentProject } from '@/workspace/actions';
 import { getCustomer } from '@/workspace/selectors';
 
@@ -51,29 +50,28 @@ const formatValue = (key, value) => {
 
 export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
   const dispatch = useDispatch();
+
   const customer = useSelector(getCustomer);
   const { loading: loadingProjects } = useCustomerProjects();
-  const { showSuccess, showErrorResponse } = useNotify();
 
-  const onSubmit = async (formData: FormData) => {
-    try {
-      const project = await projectsPartialUpdate({
+  const updateMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (formData) =>
+      projectsPartialUpdate({
         path: { uuid: resolve.project.uuid },
         body: {
           [resolve.name]: formatValue(resolve.name, formData[resolve.name]),
         },
-      });
-      dispatch(setCurrentProject(project.data as any as Project));
-      showSuccess(translate('Project has been updated.'));
-      dispatch(closeModalDialog());
-    } catch (e) {
-      showErrorResponse(e, translate('Project could not be updated.'));
-    }
-  };
+      }),
+    successMessage: translate('Project has been updated.'),
+    errorMessage: translate('Project could not be updated.'),
+    onSuccess: (response: any) => {
+      dispatch(setCurrentProject(response.data as any as Project));
+    },
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values: FormData) => updateMutation.mutateAsync(values)}
       initialValues={pick(resolve.project, resolve.name)}
       subscription={{
         values: true,

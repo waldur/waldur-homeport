@@ -1,8 +1,8 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   marketplaceOfferingProfilesList,
   marketplaceProviderOfferingsSetProfile,
@@ -10,10 +10,10 @@ import {
 
 import { SelectField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog, openModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 import { getUser } from '@/workspace/selectors';
 
@@ -25,8 +25,6 @@ interface DialogResolve {
 }
 
 const Dialog: FC<{ resolve: DialogResolve }> = ({ resolve }) => {
-  const dispatch = useDispatch();
-
   const { data: profiles = [] } = useQuery({
     queryKey: ['offering-profiles-options'],
     queryFn: () =>
@@ -42,30 +40,26 @@ const Dialog: FC<{ resolve: DialogResolve }> = ({ resolve }) => {
     (o) => o.value === (resolve.offering.profile_uuid || ''),
   );
 
-  const submit = useCallback(
-    async (values) => {
-      try {
-        await marketplaceProviderOfferingsSetProfile({
-          path: { uuid: resolve.offering.uuid },
-          body: { profile: values.profile?.value || null } as any,
-        });
-        dispatch(showSuccess(translate('Service profile updated.')));
-        if (resolve.refetch) await resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to update service profile.'),
-          ),
-        );
-      }
-    },
-    [dispatch, resolve],
-  );
+  const mutation = useManagedMutation<any, any, any>({
+    mutationFn: (values) =>
+      marketplaceProviderOfferingsSetProfile({
+        path: { uuid: resolve.offering.uuid },
+        body: { profile: values.profile?.value || null } as any,
+      }),
+    successMessage: translate('Service profile updated.'),
+    errorMessage: translate('Unable to update service profile.'),
+    refetch: resolve.refetch,
+  });
 
   return (
-    <Form onSubmit={submit} initialValues={{ profile: initial }}>
+    <Form
+      onSubmit={(values) =>
+        mutation.mutateAsync(values).catch(() => {
+          /* error handled by useManagedMutation */
+        })
+      }
+      initialValues={{ profile: initial }}
+    >
       {({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -106,7 +100,7 @@ export const EditOfferingProfileButton: FC<{
   offering;
   refetch();
 }> = ({ offering, refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useSelector(getUser);
   if (!user?.is_staff) {
     return null;
@@ -116,11 +110,9 @@ export const EditOfferingProfileButton: FC<{
       title={translate('Edit')}
       iconNode={<PencilSimpleIcon weight="bold" />}
       action={() =>
-        dispatch(
-          openModalDialog(Dialog, {
-            resolve: { offering, refetch },
-          }),
-        )
+        openDialog(Dialog, {
+          resolve: { offering, refetch },
+        })
       }
     />
   );

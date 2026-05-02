@@ -1,21 +1,34 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { openstackSnapshotsRestore } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import {
   createLatinNameField,
   createDescriptionField,
 } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const RestoreSnapshotDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<
+    any,
+    any,
+    { name: string; description?: string }
+  >({
+    mutationFn: (formData) =>
+      openstackSnapshotsRestore({
+        path: { uuid: resource.uuid },
+        body: formData,
+      }),
+
+    successMessage: translate('Volume snapshot has been restored.'),
+    errorMessage: translate('Unable to restore volume snapshot.'),
+    refetch: refetch,
+  });
+
   return (
     <ResourceActionDialog
       dialogTitle={translate('Restore volume snapshot')}
@@ -23,28 +36,7 @@ export const RestoreSnapshotDialog: FC<ActionDialogProps> = ({
       initialValues={{
         mtu: resource.mtu,
       }}
-      submitForm={async (formData) => {
-        try {
-          await openstackSnapshotsRestore({
-            path: { uuid: resource.uuid },
-            body: formData,
-          });
-          dispatch(
-            showSuccess(translate('Volume snapshot has been restored.')),
-          );
-          dispatch(closeModalDialog());
-          if (refetch) {
-            await refetch();
-          }
-        } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              translate('Unable to restore volume snapshot.'),
-            ),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

@@ -1,13 +1,11 @@
-import { useCallback } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplacePlansUpdateQuotas } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { EDIT_PLAN_FORM_ID } from './constants';
 import { QuotasTable } from './QuotasTable';
@@ -30,38 +28,31 @@ export const EditPlanQuotasDialog = connect<
   reduxForm<{}, { resolve: { offering; plan; refetch; components } }>({
     form: EDIT_PLAN_FORM_ID,
   })((props) => {
-    const dispatch = useDispatch();
-    const update = useCallback(
-      async (formData) => {
-        try {
-          await marketplacePlansUpdateQuotas({
-            path: { uuid: props.resolve.plan.uuid },
-            body: {
-              quotas: formData.quotas,
-            },
-          });
-          dispatch(
-            showSuccess(translate('Quotas have been updated successfully.')),
-          );
-          await props.resolve.refetch();
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to update quotas.')),
-          );
-        }
-      },
-      [dispatch],
-    );
+    const updateMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        marketplacePlansUpdateQuotas({
+          path: { uuid: props.resolve.plan.uuid },
+          body: {
+            quotas: formData.quotas,
+          },
+        }),
+      successMessage: translate('Quotas have been updated successfully.'),
+      errorMessage: translate('Unable to update quotas.'),
+      refetch: props.resolve.refetch,
+    });
 
     return (
-      <form onSubmit={props.handleSubmit(update)}>
+      <form
+        onSubmit={props.handleSubmit((values) =>
+          updateMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={translate('Edit quotas')}
           footer={
             <SubmitButton
               disabled={props.invalid}
-              submitting={props.submitting}
+              submitting={updateMutation.isPending}
               label={translate('Save')}
             />
           }

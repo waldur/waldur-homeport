@@ -1,28 +1,29 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { userInvitationsCancel } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { getCustomer, getProject, getUser } from '@/workspace/selectors';
+import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
 export const InvitationCancelButton = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { showErrorResponse, showSuccess } = useNotify();
+  const user = useUser();
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
 
   const callback = async () => {
     try {
       await userInvitationsCancel({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Invitation has been canceled.')));
+      showSuccess(translate('Invitation has been canceled.'));
       refetch();
     } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to cancel invitation.')));
+      showErrorResponse(e, translate('Unable to cancel invitation.'));
     }
   };
 

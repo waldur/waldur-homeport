@@ -2,13 +2,12 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { FormGroup } from 'react-bootstrap';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { freeipaProfilesCreate } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { useNotify } from '@/store/hooks';
-import { getUser } from '@/workspace/selectors';
+import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { UsernameGroup } from './UsernameGroup';
 
@@ -29,7 +28,7 @@ export const FreeIPAAccountCreate: React.FC<FreeIPAAccountCreateOwnProps> = ({
   onProfileAdded,
 }) => {
   const { showSuccess, showError, showErrorResponse } = useNotify();
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const onSubmit = useCallback(
     async (formData: FreeIPAAccountCreateFormData) => {

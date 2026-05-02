@@ -2,7 +2,6 @@ import { SignInIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { useMountedState } from 'react-use';
 import { Field, reduxForm } from 'redux-form';
 import {
@@ -18,7 +17,7 @@ import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showError, showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { loginUser } from '../AuthService';
 
@@ -28,7 +27,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
   handleSubmit,
 }) => {
   const [challengeCode, setChallengeCode] = useState<string>();
-  const dispatch = useDispatch();
+  const { showError, showErrorResponse } = useNotify();
   const router = useRouter();
   const isMounted = useMountedState();
 
@@ -56,18 +55,16 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
       router.stateService.go('profile.details');
     } else if (result.state === 'Canceled') {
       if (result.details === 'User is not registered.') {
-        dispatch(showError(result.details));
+        showError(result.details);
         return;
       }
       const message = translate(
         'Authentication with Mobile ID has been canceled by user or timed out. Details:',
       );
-      dispatch(showError(message + result.details));
+      showError(message + result.details);
     } else {
-      dispatch(
-        showError(
-          translate('Unexpected exception happened during login process.'),
-        ),
+      showError(
+        translate('Unexpected exception happened during login process.'),
       );
     }
   };
@@ -85,11 +82,9 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
       const authResult = await pollAuthResult(uuid);
       parseAuthResult(authResult);
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to authenticate using Mobile ID.'),
-        ),
+      showErrorResponse(
+        error,
+        translate('Unable to authenticate using Mobile ID.'),
       );
     }
   };

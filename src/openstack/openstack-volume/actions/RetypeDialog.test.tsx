@@ -5,16 +5,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { openstackVolumesRetype, OpenStackVolumeType } from 'waldur-js-client';
 import { OpenStackVolume } from 'waldur-js-client';
 
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import * as api from '@/openstack/api';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { RetypeDialog } from './RetypeDialog';
 
 vi.mock('waldur-js-client');
 vi.mock('@/openstack/api');
-vi.mock('@/store/hooks');
-vi.mock('@/modal/hooks');
+vi.mock('@/store/notify');
+vi.mock('@/modal/actions');
 
 const apiMock = vi.mocked(api);
 
@@ -125,11 +125,13 @@ describe('RetypeDialog', () => {
     const submitButton = screen.getByRole('button', { name: /submit/i });
     await user.click(submitButton);
 
-    expect(vi.mocked(openstackVolumesRetype)).toHaveBeenCalledWith({
-      path: { uuid: resource.uuid },
-      body: {
-        type: 'prod',
-      },
+    await waitFor(() => {
+      expect(vi.mocked(openstackVolumesRetype)).toHaveBeenCalledWith({
+        path: { uuid: resource.uuid },
+        body: {
+          type: 'prod',
+        },
+      });
     });
   });
 
@@ -152,10 +154,12 @@ describe('RetypeDialog', () => {
     const submitButton = screen.getByRole('button', { name: /submit/i });
     await user.click(submitButton);
 
-    expect(mockShowErrorResponse).toHaveBeenCalledWith(
-      error,
-      'Unable to retype volume.',
-    );
+    await waitFor(() => {
+      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        error,
+        'Unable to retype volume.',
+      );
+    });
   });
 
   it('submit button is disabled when volume type is not selected', async () => {

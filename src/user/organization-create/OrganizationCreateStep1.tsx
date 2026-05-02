@@ -18,7 +18,7 @@ import { FormGroup } from '@/form/FormGroup';
 import { SelectField } from '@/form/SelectField';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { getValidationMethodInfo } from './constants';
 import { PersonIdentifierFieldConfig } from './PersonIdentifierFieldsRenderer';
@@ -116,7 +116,7 @@ export const OrganizationCreateStep1: FunctionComponent<
   useEffect(() => {
     dispatch(change(props.form, 'validationMethod', validationMethod));
     dispatch(change(props.form, 'personIdentifierFieldConfig', fieldConfig));
-  }, [validationMethod, fieldConfig, dispatch, props.form]);
+  }, [validationMethod, fieldConfig, props.form]);
 
   // Sync with form state
   useEffect(() => {

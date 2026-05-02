@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { projectEndDateChangeRequestsList, Project } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ChangeEndDateRequestDialog } from './ChangeEndDateRequestDialog';
 import { PendingRequestDialog } from './PendingRequestDialog';
@@ -19,7 +18,7 @@ interface ChangeEndDateRequestFlowDialogProps {
 export const ChangeEndDateRequestFlowDialog: FC<
   ChangeEndDateRequestFlowDialogProps
 > = ({ resolve: { project, refetch } }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const { data: response, isLoading } = useQuery({
     queryKey: ['project-end-date-change-requests', project.uuid, user?.uuid],

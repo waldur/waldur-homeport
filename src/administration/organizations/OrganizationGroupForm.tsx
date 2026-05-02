@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   organizationGroupsCreate,
   organizationGroupsUpdate,
@@ -10,55 +9,37 @@ import { required } from '@/core/validators';
 import { FormGroup, SubmitButton } from '@/form';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { SelectOrganizationGroupField } from './SelectOrganizationGroupField';
 
-interface FormData {
-  name: string;
-}
-
 export const OrganizationGroupForm = ({ resolve }) => {
   const isEdit = Boolean(resolve.organizationGroup?.uuid);
-  const dispatch = useDispatch();
-
-  const onSubmit = async (values: FormData) => {
-    values['parent'] = values['parent']?.url;
-    try {
+  const onSubmitMutation = useManagedMutation<any, any, any>({
+    mutationFn: (values) => {
+      values['parent'] = values['parent']?.url;
       if (isEdit) {
-        await organizationGroupsUpdate({
+        return organizationGroupsUpdate({
           path: { uuid: resolve.organizationGroup.uuid },
           body: values,
         });
       } else {
-        await organizationGroupsCreate({ body: values });
+        return organizationGroupsCreate({ body: values });
       }
-      resolve.refetch();
-      dispatch(
-        showSuccess(
-          isEdit
-            ? translate('The organization group has been updated.')
-            : translate('The organization group has been created.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          isEdit
-            ? translate('Unable to update organization group.')
-            : translate('Unable to create organization group.'),
-        ),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('The organization group has been updated.')
+      : translate('The organization group has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update organization group.')
+      : translate('Unable to create organization group.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       initialValues={
         resolve.organizationGroup
           ? {

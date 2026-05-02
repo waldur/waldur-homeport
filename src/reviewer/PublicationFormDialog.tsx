@@ -15,9 +15,8 @@ import {
 } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface PublicationFormDialogProps {
   resolve: {
@@ -30,9 +29,6 @@ interface PublicationFormDialogProps {
 export const PublicationFormDialog = ({
   resolve,
 }: PublicationFormDialogProps) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-
   const isEdit = Boolean(resolve.publication);
   const currentYear = new Date().getFullYear();
 
@@ -48,8 +44,8 @@ export const PublicationFormDialog = ({
         publication_year: currentYear,
       };
 
-  const onSubmit = async (formValues) => {
-    try {
+  const publicationMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formValues) => {
       const body = {
         title: formValues.title,
         doi: formValues.doi || null,
@@ -57,40 +53,34 @@ export const PublicationFormDialog = ({
         venue: formValues.venue,
         abstract: formValues.abstract || undefined,
       };
-
       if (isEdit) {
-        await nestedReviewerProfilePublicationsPartialUpdate({
+        return nestedReviewerProfilePublicationsPartialUpdate({
           path: {
             reviewer_profile_uuid: resolve.profile.uuid,
             uuid: resolve.publication.uuid,
           },
           body,
         });
-        showSuccess(translate('Publication has been updated.'));
       } else {
-        await nestedReviewerProfilePublicationsCreate({
+        return nestedReviewerProfilePublicationsCreate({
           path: { reviewer_profile_uuid: resolve.profile.uuid },
           body,
         });
-        showSuccess(translate('Publication has been added.'));
       }
-
-      closeDialog();
-      await resolve.refetch();
-    } catch (error) {
-      showErrorResponse(
-        error,
-        isEdit
-          ? translate('Unable to update publication.')
-          : translate('Unable to add publication.'),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('Publication has been updated.')
+      : translate('Publication has been added.'),
+    errorMessage: isEdit
+      ? translate('Unable to update publication.')
+      : translate('Unable to add publication.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={(values) => publicationMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

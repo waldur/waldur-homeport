@@ -1,16 +1,17 @@
-import { BillingUnit } from 'waldur-js-client';
+import { BillingUnit, ProviderPlanDetailsRequest } from 'waldur-js-client';
 
 import { getFormLimitSerializer } from '@/marketplace/common/registry';
 
 import { PlanFormData, OptionFormData } from './types';
 
-export const formatPlan = (plan: PlanFormData) => ({
-  name: plan.name,
-  unit: plan.unit.value as BillingUnit,
-  unit_price: plan.unit_price ? String(plan.unit_price) : undefined,
-  article_code: plan.article_code,
-  description: plan.description,
-});
+export const formatPlan = (plan: PlanFormData) =>
+  ({
+    name: plan.name,
+    unit: plan.unit.value as BillingUnit,
+    unit_price: plan.unit_price ? String(plan.unit_price) : undefined,
+    article_code: plan.article_code,
+    description: plan.description,
+  }) as ProviderPlanDetailsRequest;
 
 export const formatOption = (option: OptionFormData) => {
   const {

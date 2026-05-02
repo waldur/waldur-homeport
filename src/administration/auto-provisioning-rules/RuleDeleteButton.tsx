@@ -1,24 +1,34 @@
 import { autoprovisioningRulesDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
-export const RuleDeleteButton = ({ row, refetch }) => (
-  <DeleteButton
-    row={row}
-    apiFunction={(r) =>
-      autoprovisioningRulesDestroy({ path: { uuid: r.uuid } })
-    }
-    refetch={refetch}
-    confirmTitle={translate('Confirmation')}
-    confirmMessage={(r) =>
-      translate(
+export const RuleDeleteButton = ({ row, refetch }) => {
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      autoprovisioningRulesDestroy({ path: { uuid: row.uuid } }),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
         'Are you sure you want to delete the rule {name}?',
-        { name: <strong>{r.name}</strong> },
+        { name: <strong>{row.name}</strong> },
         formatJsxTemplate,
-      )
-    }
-    successMessage={translate('Rule deleted')}
-    errorMessage={translate('Unable to delete rule.')}
-  />
-);
+      ),
+      options: {
+        forDeletion: true,
+      },
+    },
+    successMessage: translate('Rule deleted'),
+    errorMessage: translate('Unable to delete rule.'),
+  });
+
+  return (
+    <RemovalActionItem
+      title={translate('Delete')}
+      action={mutate}
+      disabled={isPending}
+    />
+  );
+};

@@ -1,19 +1,26 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { keysList, KeysListData } from 'waldur-js-client';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { keyCreateDialog } from '@/user/keys/actions';
 import { keysListTable } from '@/user/keys/constants';
 import { getUser } from '@/workspace/selectors';
+
+const KeyCreateDialog = lazyComponent(() =>
+  import('@/user/keys/KeyCreateDialog').then((module) => ({
+    default: module.KeyCreateDialog,
+  })),
+);
 
 const filtersSelector = createSelector(getUser, (user) => {
   const result: KeysListData['query'] = {};
@@ -38,8 +45,11 @@ export const FormSSHPublicKeysField = ({ change, ...props }: OwnProps) => {
     filter,
   });
 
-  const dispatch = useDispatch();
-  const openFormDialog = useCallback(() => dispatch(keyCreateDialog()), []);
+  const { openDialog } = useModal();
+  const openFormDialog = useCallback(
+    () => openDialog(KeyCreateDialog, { size: 'lg' }),
+    [openDialog],
+  );
 
   return (
     <Table

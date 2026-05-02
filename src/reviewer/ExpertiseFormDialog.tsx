@@ -1,7 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
 import {
-  ReviewerExpertiseRequest,
   ProficiencyLevelEnum,
   nestedReviewerProfileExpertiseCreate,
 } from 'waldur-js-client';
@@ -9,16 +8,15 @@ import {
 import { required } from '@/core/validators';
 import {
   FormGroup,
+  NumberField,
   SelectField,
   StringField,
-  NumberField,
   SubmitButton,
 } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 const PROFICIENCY_LEVEL_OPTIONS = [
   { value: 'expert', label: translate('Expert') },
@@ -34,39 +32,30 @@ interface ExpertiseFormDialogProps {
 }
 
 export const ExpertiseFormDialog = ({ resolve }: ExpertiseFormDialogProps) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-
   const initialValues = {
     proficiency_level: PROFICIENCY_LEVEL_OPTIONS[0],
   };
 
-  const onSubmit = async (formValues) => {
-    try {
-      const body: ReviewerExpertiseRequest = {
-        expertise_keyword: formValues.expertise_keyword,
-        proficiency_level: formValues.proficiency_level
-          ?.value as ProficiencyLevelEnum,
-        years_experience: formValues.years_experience || null,
-      };
-
-      await nestedReviewerProfileExpertiseCreate({
+  const addExpertiseMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formValues) =>
+      nestedReviewerProfileExpertiseCreate({
         path: { reviewer_profile_uuid: resolve.profile.uuid },
-        body,
-      });
-
-      showSuccess(translate('Expertise keyword has been added.'));
-      closeDialog();
-      await resolve.refetch();
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to add expertise keyword.'));
-    }
-  };
+        body: {
+          expertise_keyword: formValues.expertise_keyword,
+          proficiency_level: formValues.proficiency_level
+            ?.value as ProficiencyLevelEnum,
+          years_experience: formValues.years_experience || null,
+        },
+      }),
+    successMessage: translate('Expertise keyword has been added.'),
+    errorMessage: translate('Unable to add expertise keyword.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={(values) => addExpertiseMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

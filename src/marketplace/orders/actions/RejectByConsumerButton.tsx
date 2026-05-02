@@ -1,59 +1,40 @@
 import { XCircleIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceOrdersRejectByConsumer } from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { OrderActionProps } from './types';
 
 export const RejectByConsumerButton: FC<
   OrderActionProps & { className?: string }
 > = ({ order, as, className, refetch, size }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
-  const { mutate, isPending: isLoading } = useMutation({
-    mutationFn: async () => {
-      let result;
-      try {
-        result = await waitForConfirmation(
-          dispatch,
-          translate('Reject order'),
-          translate('Are you sure you want to reject this order?'),
-          {
-            showInput: true,
-            inputLabel: translate('Rejection reason (optional)'),
-            positiveButton: translate('Reject'),
-          },
-        );
-      } catch {
-        return;
-      }
-      try {
-        await marketplaceOrdersRejectByConsumer({
-          path: { uuid: order.uuid },
-          body: { consumer_rejection_comment: result?.input },
-        });
-        if (refetch) {
-          await refetch();
-        }
-        // Close modal dialog, if performed action from there
-        dispatch(closeModalDialog());
-        dispatch(showSuccess(translate('Order has been rejected.')));
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to reject order.')),
-        );
-      }
+  const user = useUser();
+
+  const { mutate, isPending: isLoading } = useManagedMutation<any, any, any>({
+    mutationFn: (variables) =>
+      marketplaceOrdersRejectByConsumer({
+        path: { uuid: order.uuid },
+        body: { consumer_rejection_comment: variables?.input },
+      }),
+    confirmation: {
+      title: translate('Reject order'),
+      body: translate('Are you sure you want to reject this order?'),
+      options: {
+        showInput: true,
+        inputLabel: translate('Rejection reason (optional)'),
+        positiveButton: translate('Reject'),
+      },
     },
+    successMessage: translate('Order has been rejected.'),
+    errorMessage: translate('Unable to reject order.'),
+    refetch,
   });
   if (
     !hasPermission(user, {

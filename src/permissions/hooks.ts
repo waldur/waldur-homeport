@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux';
-
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { hasPermission } from './hasPermission';
 import { PermissionRequest } from './types';
 
 export const usePermission = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   return (request: PermissionRequest) => hasPermission(user, request);
 };

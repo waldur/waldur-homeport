@@ -22,10 +22,9 @@ import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { UserListOptionInline } from '@/project/team/UserListOptionInline';
-import { useNotify } from '@/store/hooks';
 
 import { ScopeOption } from './AddScopeOptionDialog';
 
@@ -46,9 +45,6 @@ interface AddKeycloakMembershipDialogProps {
 export const AddKeycloakMembershipDialog: FC<
   AddKeycloakMembershipDialogProps
 > = ({ resolve }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   const [userType, setUserType] = useState<'external-user' | 'project-member'>(
     'project-member',
   );
@@ -145,40 +141,35 @@ export const AddKeycloakMembershipDialog: FC<
     staleTime: UI_STALE_TIME,
   });
 
-  const save = useCallback(
-    async (formData) => {
-      try {
-        const body: any = {
-          username:
-            userType === 'project-member'
-              ? formData.user?.user_username
-              : formData.username,
-          email:
-            userType === 'project-member'
-              ? formData.user?.user_email
-              : formData.email,
-          offering: resolve.offering.url,
-          role: formData.role?.url,
-        };
-        if (resolve.resource) {
-          body.resource = resolve.resource.url;
-        }
-        if (formData.scope_id) {
-          body.scope_id = formData.scope_id;
-        }
-        if (formData.user?.user_uuid) {
-          body.user = formData.user.user_uuid;
-        }
-        await offeringKeycloakMembershipsCreate({ body });
-        showSuccess(translate('Resource access has been added.'));
-        await resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to add resource access.'));
+  const addMembershipMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
+      const body: any = {
+        username:
+          userType === 'project-member'
+            ? formData.user?.user_username
+            : formData.username,
+        email:
+          userType === 'project-member'
+            ? formData.user?.user_email
+            : formData.email,
+        offering: resolve.offering.url,
+        role: formData.role?.url,
+      };
+      if (resolve.resource) {
+        body.resource = resolve.resource.url;
       }
+      if (formData.scope_id) {
+        body.scope_id = formData.scope_id;
+      }
+      if (formData.user?.user_uuid) {
+        body.user = formData.user.user_uuid;
+      }
+      return offeringKeycloakMembershipsCreate({ body });
     },
-    [resolve, userType, showSuccess, showErrorResponse, closeDialog],
-  );
+    successMessage: translate('Resource access has been added.'),
+    errorMessage: translate('Unable to add resource access.'),
+    refetch: resolve.refetch,
+  });
 
   const getRolesForScopeType = useCallback(
     (scopeType: string | undefined) => {
@@ -190,7 +181,7 @@ export const AddKeycloakMembershipDialog: FC<
   );
 
   return (
-    <Form onSubmit={save}>
+    <Form onSubmit={(values) => addMembershipMutation.mutateAsync(values)}>
       {({ handleSubmit, submitting, invalid, form, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

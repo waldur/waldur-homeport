@@ -17,10 +17,9 @@ import {
 } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentCustomer } from '@/workspace/actions';
 import { getCustomer } from '@/workspace/selectors';
 
@@ -29,6 +28,7 @@ import { getCustomer as getCustomerApi } from '../utils';
 const PaymentProfileCreate = (props) => {
   const [isFixedPrice, setIsFixedPrice] = useState(false);
   const dispatch = useDispatch();
+
   const customer = useSelector(getCustomer);
 
   const paymentProfileTypeOptions = useMemo(
@@ -36,8 +36,8 @@ const PaymentProfileCreate = (props) => {
     [],
   );
 
-  const addPaymentProfile = async (formData) => {
-    try {
+  const addPaymentProfileMutation = useManagedMutation<any, any, any>({
+    mutationFn: async (formData) => {
       const paymentProfile = await paymentProfilesCreate({
         body: {
           is_active: false,
@@ -54,29 +54,23 @@ const PaymentProfileCreate = (props) => {
       if (paymentProfile?.uuid && formData.enabled) {
         await paymentProfilesEnable({ path: { uuid: paymentProfile.uuid } });
       }
-      dispatch(
-        showSuccess(
-          formData.enabled
-            ? translate('Payment profile has been created and enabled.')
-            : translate('Payment profile has been created.'),
-        ),
-      );
+      return formData;
+    },
+    successMessage: translate('Payment profile has been created.'),
+    errorMessage: translate('Unable to create payment profile.'),
+    refetch: props.resolve.refetch,
+    onSuccess: async () => {
       const updatedCustomer = await getCustomerApi(customer.uuid);
       dispatch(setCurrentCustomer(updatedCustomer));
-      await props.resolve.refetch();
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to create payment profile.'),
-        ),
-      );
-    }
-  };
+    },
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(addPaymentProfile)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        addPaymentProfileMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Add payment profile')}
         footer={

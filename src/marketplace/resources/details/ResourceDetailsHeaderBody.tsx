@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 import {
   PublicOfferingDetails,
   Resource,
@@ -9,7 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { BackendIdField } from './BackendIdField';
 import { EndDateField } from './EndDateField';
@@ -24,7 +23,7 @@ interface ResourceDetailsHeaderBodyProps {
 export const ResourceDetailsHeaderBody: FunctionComponent<
   ResourceDetailsHeaderBodyProps
 > = ({ resource, offering }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const { data: project } = useQuery({
     queryKey: ['display-project-billing', resource.project_uuid],

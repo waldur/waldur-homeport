@@ -1,6 +1,5 @@
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { projectsMoveProject } from 'waldur-js-client';
 
 import { format } from '@/core/ErrorMessageFormatter';
@@ -11,49 +10,46 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showError, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 
 export const MoveProjectDialog: FunctionComponent<{
   resolve: { project; refetch };
 }> = ({ resolve: { project, refetch } }) => {
-  const dispatch = useDispatch();
-  const onSubmit = useCallback(
-    async (formData) => {
-      try {
-        await projectsMoveProject({
-          path: { uuid: project.uuid },
-          body: {
-            customer: formData.organization.url,
-            preserve_permissions: formData.preserve_permissions,
+  const { showError, showSuccess } = useNotify();
+
+  const moveProjectMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      projectsMoveProject({
+        path: { uuid: project.uuid },
+        body: {
+          customer: formData.organization.url,
+          preserve_permissions: formData.preserve_permissions,
+        },
+      }),
+    refetch,
+    onSuccess: (_data, formData) => {
+      showSuccess(
+        translate(
+          '{projectName} project has been moved to {organizationName} organization.',
+          {
+            projectName: project.name,
+            organizationName: formData.organization.name,
           },
-        });
-        dispatch(
-          showSuccess(
-            translate(
-              '{projectName} project has been moved to {organizationName} organization.',
-              {
-                projectName: project.name,
-                organizationName: formData.organization.name,
-              },
-            ),
-          ),
-        );
-        await refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        const errorMessage = `${translate('Project could not be moved.')} ${format(error)}`;
-        dispatch(showError(errorMessage));
-      }
+        ),
+      );
     },
-    [dispatch, project],
-  );
+    onError: (error) => {
+      const errorMessage = `${translate('Project could not be moved.')} ${format(error)}`;
+      showError(errorMessage);
+    },
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => moveProjectMutation.mutateAsync(values)}
       initialValues={{ preserve_permissions: false }}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

@@ -6,13 +6,11 @@ import {
   scienceSubDomainsDestroy,
 } from 'waldur-js-client';
 
-import {
-  CreateModalButton,
-  DeleteButton,
-  EditModalButton,
-} from '@/core/buttons';
+import { CreateModalButton, EditModalButton } from '@/core/buttons';
 import { lazyComponent } from '@/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -53,23 +51,40 @@ const SubDomainDeleteButton = ({
 }: {
   row: ScienceSubDomain;
   refetch;
-}) => (
-  <DeleteButton
-    row={row}
-    apiFunction={(r) => scienceSubDomainsDestroy({ path: { uuid: r.uuid } })}
-    refetch={refetch}
-    confirmTitle={translate('Confirmation')}
-    confirmMessage={(r) =>
-      translate(
+}) => {
+  const { mutate: mutate, isPending: isPending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () => scienceSubDomainsDestroy({ path: { uuid: row.uuid } }),
+    refetch: refetch,
+
+    confirmation: {
+      title: translate('Confirmation'),
+
+      body: translate(
         'Are you sure you want to delete the {name} sub-domain?',
-        { name: <strong>{r.name}</strong> },
+        { name: <strong>{row.name}</strong> },
         formatJsxTemplate,
-      )
-    }
-    errorMessage={translate('Unable to remove science sub-domain.')}
-    title={translate('Remove')}
-  />
-);
+      ),
+
+      options: {
+        forDeletion: true,
+      },
+    },
+
+    errorMessage: translate('Unable to remove science sub-domain.'),
+  });
+
+  return (
+    <RemovalActionItem
+      title={translate('Remove')}
+      action={mutate}
+      disabled={isPending}
+    />
+  );
+};
 
 const SubDomainRowActions = ({ row, fetch }) => (
   <ActionsDropdown

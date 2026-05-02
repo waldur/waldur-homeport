@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { getServiceProviderByCustomer } from '@/marketplace/common/api';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 import { SITE_AGENT_PLUGIN } from './constants';
@@ -32,7 +31,7 @@ interface SlurmOfferingActionsProps {
 export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
   offering,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const { data: serviceProvider, isLoading } = useQuery({
     queryKey: ['service-provider', offering.customer_uuid],
@@ -43,35 +42,31 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
 
   const openSiteAgentConfig = () => {
     if (!serviceProvider) return;
-    dispatch(
-      openModalDialog(SiteAgentConfigDialog, {
-        resolve: {
-          provider: {
-            uuid: serviceProvider.uuid,
-            customer_name: serviceProvider.customer_name,
-          },
-          fixedOffering: {
-            uuid: offering.uuid,
-            name: offering.name,
-          },
+    openDialog(SiteAgentConfigDialog, {
+      resolve: {
+        provider: {
+          uuid: serviceProvider.uuid,
+          customer_name: serviceProvider.customer_name,
         },
-        size: 'lg',
-      }),
-    );
+        fixedOffering: {
+          uuid: offering.uuid,
+          name: offering.name,
+        },
+      },
+      size: 'lg',
+    });
   };
 
   const openLdapAgentEnv = () => {
-    dispatch(
-      openModalDialog(LdapAgentEnvDialog, {
-        resolve: {
-          offering: {
-            uuid: offering.uuid,
-            name: offering.name,
-          },
+    openDialog(LdapAgentEnvDialog, {
+      resolve: {
+        offering: {
+          uuid: offering.uuid,
+          name: offering.name,
         },
-        size: 'lg',
-      }),
-    );
+      },
+      size: 'lg',
+    });
   };
 
   const showSiteAgentConfig = offering.type === SITE_AGENT_PLUGIN;

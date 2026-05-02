@@ -5,8 +5,8 @@ import { invoicesImportUsage } from 'waldur-js-client';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showError, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { Step1UploadFile } from './Step1UploadFile';
 import { Step2ColumnMapping } from './Step2ColumnMapping';
@@ -47,6 +47,9 @@ const steps: ProgressStep[] = [
 export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
   props,
 ) => {
+  const { showError, showSuccess } = useNotify();
+  const { closeDialog } = useModal();
+
   const [parseResult, setParseResult] = useState<ExcelParseResult | null>(null);
 
   const handleFileParsed = useCallback((result: ExcelParseResult) => {
@@ -54,14 +57,14 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
   }, []);
 
   const submitForm = useCallback(
-    async (formData, dispatch, formProps) => {
+    async (formData, formProps) => {
       try {
         const mappedData: UsageImportRow[] = formData.mappedData || [];
         const year = formData.year?.value;
         const month = formData.month?.value;
 
         if (!year || !month) {
-          dispatch(showError(translate('Please select a billing period')));
+          showError(translate('Please select a billing period'));
           return;
         }
 
@@ -69,7 +72,7 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
         const readyRows = mappedData.filter((row) => row.status === 'ready');
 
         if (readyRows.length === 0) {
-          dispatch(showError(translate('No valid items to import')));
+          showError(translate('No valid items to import'));
           return;
         }
 
@@ -93,39 +96,35 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
         const result = (await invoicesImportUsage({ body: payload })).data;
 
         if (result.created > 0) {
-          dispatch(
-            showSuccess(
-              translate('Successfully imported {n} items', {
-                n: result.created,
-              }),
-            ),
+          showSuccess(
+            translate('Successfully imported {n} items', {
+              n: result.created,
+            }),
           );
         }
 
         if (result.errors?.length > 0) {
-          dispatch(
-            showError(
-              translate('{n} items failed to import', {
-                n: result.errors.length,
-              }),
-            ),
+          showError(
+            translate('{n} items failed to import', {
+              n: result.errors.length,
+            }),
           );
         }
 
         if (result.created > 0 && !result.errors?.length) {
           props.resolve?.refetch?.();
           formProps.destroy();
-          dispatch(closeModalDialog());
+          closeDialog();
         }
       } catch (error) {
         const message =
           error instanceof Error
             ? error.message
             : translate('Failed to import usage data');
-        dispatch(showError(message));
+        showError(message);
       }
     },
-    [props.resolve],
+    [props.resolve, showError, showSuccess, closeDialog],
   );
 
   return (

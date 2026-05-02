@@ -1,12 +1,11 @@
 import { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { isProjectMember } from '@/permissions/isProjectMember';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ChangeEndDateRequestFlowDialog } from './ChangeEndDateRequestFlowDialog';
 
@@ -15,8 +14,8 @@ import { ChangeEndDateRequestFlowDialog } from './ChangeEndDateRequestFlowDialog
  * without UPDATE_PROJECT can request an end date change.
  */
 export function useChangeEndDateRequest(project: Project, refetch: () => void) {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const user = useUser();
+  const { openDialog } = useModal();
 
   const hasUpdatePermission = useMemo(
     () =>
@@ -39,12 +38,10 @@ export function useChangeEndDateRequest(project: Project, refetch: () => void) {
   const showRequest = !hasUpdatePermission && isMember;
 
   const open = useCallback(() => {
-    dispatch(
-      openModalDialog(ChangeEndDateRequestFlowDialog, {
-        resolve: { project, refetch },
-      }),
-    );
-  }, [dispatch, project, refetch]);
+    openDialog(ChangeEndDateRequestFlowDialog, {
+      resolve: { project, refetch },
+    });
+  }, [project, refetch]);
 
   return { showRequest, open };
 }

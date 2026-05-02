@@ -1,7 +1,6 @@
 import { BuildingsIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { customersRetrieve, Project } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
@@ -17,7 +16,7 @@ import {
 import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { usePermission } from '@/permissions/hooks';
 import { ActionButton } from '@/table/ActionButton';
@@ -50,7 +49,7 @@ const getRestrictionsTooltip = () =>
 export const ProjectMembershipRestrictions: FC<
   ProjectMembershipRestrictionsProps
 > = ({ project }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const hasPermission = usePermission();
 
   // Fetch customer data for inherited restrictions
@@ -91,25 +90,21 @@ export const ProjectMembershipRestrictions: FC<
 
   const openEditDialog = useCallback(
     (field: RestrictionField) => {
-      dispatch(
-        openModalDialog(EditProjectMembershipRestrictionsDialog, {
-          resolve: { project, field },
-          initialValues: getInitialValues(project, field),
-        }),
-      );
+      openDialog(EditProjectMembershipRestrictionsDialog, {
+        resolve: { project, field },
+        initialValues: getInitialValues(project, field),
+      });
     },
-    [dispatch, project],
+    [project],
   );
 
   const openOrganizationRestrictionsDialog = useCallback(() => {
     if (customer) {
-      dispatch(
-        openModalDialog(OrganizationRestrictionsDialog, {
-          resolve: { customer },
-        }),
-      );
+      openDialog(OrganizationRestrictionsDialog, {
+        resolve: { customer },
+      });
     }
-  }, [dispatch, customer]);
+  }, [customer]);
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -14,7 +14,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { EndingField } from '@/proposals/EndingField';
 import { Call } from '@/proposals/types';
 import { Field } from '@/resource/summary';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { UsersService } from '@/user/UsersService';
 
 interface FormData {

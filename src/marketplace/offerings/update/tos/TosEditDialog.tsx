@@ -2,7 +2,6 @@ import { PencilIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { marketplaceOfferingTermsOfServiceUpdate } from 'waldur-js-client';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
@@ -15,10 +14,9 @@ import { StringField } from '@/form/StringField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 const addAsOptions = [
   { value: 'markdown', label: translate('Markdown') },
@@ -26,11 +24,10 @@ const addAsOptions = [
 ];
 
 export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
-  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('write');
 
-  const onSubmit = async (formData) => {
-    try {
+  const updateTosMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
       const updateData: any = {
         version: formData.version,
         is_active: formData.is_active,
@@ -49,31 +46,21 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
         updateData.grace_period_days = formData.grace_period_days;
       }
 
-      await marketplaceOfferingTermsOfServiceUpdate({
+      return marketplaceOfferingTermsOfServiceUpdate({
         path: { uuid: tos.uuid },
         body: updateData,
       });
-
-      dispatch(
-        showSuccess(
-          translate('Terms of Service has been updated successfully.'),
-        ),
-      );
-      await refetch();
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to update Terms of Service.'),
-        ),
-      );
-    }
-  };
+    },
+    successMessage: translate(
+      'Terms of Service has been updated successfully.',
+    ),
+    errorMessage: translate('Unable to update Terms of Service.'),
+    refetch,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => updateTosMutation.mutateAsync(values)}
       initialValues={{
         version: tos.version,
         terms_of_service: tos.terms_of_service || '',

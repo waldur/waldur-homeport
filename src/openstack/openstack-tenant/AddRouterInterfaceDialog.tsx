@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import {
   openstackRoutersAddRouterInterface,
@@ -9,10 +9,9 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { RootState } from '@/store/reducers';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -25,7 +24,26 @@ const typeChoices = [
 ];
 
 export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<
+    any,
+    any,
+    { type: 'subnet' | 'port'; resource: string }
+  >({
+    mutationFn: (formData) => {
+      const body =
+        formData.type === 'subnet'
+          ? { subnet: formData.resource }
+          : { port: formData.resource };
+
+      return openstackRoutersAddRouterInterface({
+        path: { uuid: router.uuid },
+        body,
+      });
+    },
+    successMessage: translate('Router interface was added.'),
+    errorMessage: translate('Unable to add router interface.'),
+  });
+
   const type = useSelector(typeSelector);
 
   const query = useQuery({
@@ -92,7 +110,7 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
             },
           ]
         : [],
-    [type, query.data],
+    [type],
   );
 
   return (
@@ -102,24 +120,7 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
       loading={query.isLoading}
       error={query.error}
       initialValues={{ type: typeChoices[0].value, resource: '' }}
-      submitForm={async (formData) => {
-        try {
-          const body =
-            formData.type === 'subnet'
-              ? { subnet: formData.resource }
-              : { port: formData.resource };
-          await openstackRoutersAddRouterInterface({
-            path: { uuid: router.uuid },
-            body,
-          });
-          dispatch(showSuccess(translate('Router interface was added.')));
-          dispatch(closeModalDialog());
-        } catch (e) {
-          dispatch(
-            showErrorResponse(e, translate('Unable to add router interface.')),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

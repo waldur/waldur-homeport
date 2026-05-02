@@ -1,11 +1,10 @@
 import { ChatTeardropTextIcon, PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -27,7 +26,7 @@ export const ProviderOfferingUserUpdateButton: FC<
     offering?: PublicOfferingDetails;
   }
 > = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useUser();
   const canUpdateOfferingUser = hasPermission(user, {
     permission: PermissionEnum.UPDATE_OFFERING_USER,
@@ -56,12 +55,10 @@ export const ProviderOfferingUserUpdateButton: FC<
               : translate('Edit external username')
         }
         action={() =>
-          dispatch(
-            openModalDialog(ProviderOfferingUserUpdateDialog, {
-              resolve: props,
-              size: 'lg',
-            }),
-          )
+          openDialog(ProviderOfferingUserUpdateDialog, {
+            resolve: props,
+            size: 'lg',
+          })
         }
         iconNode={icon}
       />

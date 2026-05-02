@@ -1,18 +1,30 @@
-import { useDispatch } from 'react-redux';
 import {
   invoiceItemsPartialUpdate,
   PatchedInvoiceItemUpdateRequest,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const InvoiceItemUpdateDialog = ({
   resolve: { resource, refreshInvoiceItems },
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<
+    any,
+    any,
+    PatchedInvoiceItemUpdateRequest
+  >({
+    mutationFn: (formData) =>
+      invoiceItemsPartialUpdate({
+        path: { uuid: resource.uuid },
+        body: formData,
+      }),
+    successMessage: translate('Invoice item has been updated.'),
+    errorMessage: translate('Unable to update invoice item.'),
+    refetch: refreshInvoiceItems,
+  });
+
   const fields = [
     {
       name: 'article_code',
@@ -65,21 +77,7 @@ export const InvoiceItemUpdateDialog = ({
         name: resource.name,
       })}
       formFields={fields}
-      submitForm={async (formData: PatchedInvoiceItemUpdateRequest) => {
-        try {
-          await invoiceItemsPartialUpdate({
-            path: { uuid: resource.uuid },
-            body: formData,
-          });
-          dispatch(showSuccess(translate('Invoice item has been updated.')));
-          await refreshInvoiceItems();
-          dispatch(closeModalDialog());
-        } catch (e) {
-          dispatch(
-            showErrorResponse(e, translate('Unable to update invoice item.')),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
       initialValues={initialValues}
     />
   );

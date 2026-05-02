@@ -1,13 +1,9 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAsyncFn } from 'react-use';
 import { openportalManagedProjectsDeleteDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const DeleteManagedProjectButton: FC<{ row; refetch }> = ({
   row,
@@ -19,51 +15,32 @@ export const DeleteManagedProjectButton: FC<{ row; refetch }> = ({
     return null;
   }
 
-  const dispatch = useDispatch();
-
-  const action = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Delete managed project'),
-        translate(
-          'Are you sure you would like to delete this managed project?',
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await openportalManagedProjectsDeleteDestroy({
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      openportalManagedProjectsDeleteDestroy({
         path: {
           identifier: project.identifier,
           destination: project.destination,
         },
-      });
-      await refetch();
-      dispatch(showSuccess(translate('Managed project has been deleted.')));
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to delete this managed project.'),
-        ),
-      );
-    }
-  };
-
-  const [{ loading }, callback] = useAsyncFn(action);
+      }),
+    successMessage: translate('Managed project has been deleted.'),
+    errorMessage: translate('Unable to delete this managed project.'),
+    refetch,
+    confirmation: {
+      title: translate('Delete managed project'),
+      body: translate(
+        'Are you sure you would like to delete this managed project?',
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      disabled={loading}
-      action={callback}
-      iconNode={<TrashIcon weight="bold" />}
+      disabled={deleteMutation.isPending}
+      action={() => deleteMutation.mutate()}
       size="sm"
-      className="text-danger"
-      iconColor="danger"
     />
   );
 };

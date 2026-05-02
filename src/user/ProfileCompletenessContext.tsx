@@ -5,9 +5,8 @@ import {
   useContext,
   useMemo,
 } from 'react';
-import { useSelector } from 'react-redux';
 
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { getProfileCompleteness } from './useProfileCompleteness';
 
@@ -38,7 +37,7 @@ const ProfileCompletenessContext =
 export const ProfileCompletenessProvider: FC<PropsWithChildren> = ({
   children,
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const value = useMemo<ProfileCompletenessContextValue>(() => {
     if (!user) {

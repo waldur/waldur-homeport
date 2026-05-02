@@ -1,11 +1,11 @@
 import { isEqual } from 'lodash-es';
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { isEmpty, orderByFilter } from '@/core/utils';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { type RootState } from '@/store/reducers';
 import { fetchAll } from '@/table/api';
 
@@ -18,6 +18,8 @@ import { makeSelectTableRows, getTableState } from './selectors';
 import { TableRequest } from './types';
 
 export function useTableExport(table, props?) {
+  const { closeDialog } = useModal();
+  const { showSuccess, showErrorResponse } = useNotify();
   const {
     exportFields,
     exportKeys,
@@ -154,21 +156,18 @@ export function useTableExport(table, props?) {
     return data;
   }
 
-  const dispatch = useDispatch();
   return async (config: ExportConfig) => {
     try {
       const data = await fetchRows(config);
       await exportAs(config.format, table, data);
-      dispatch(
-        showSuccess(
-          translate('Table has been exported to {format}.', {
-            format: config.format,
-          }),
-        ),
+      showSuccess(
+        translate('Table has been exported to {format}.', {
+          format: config.format,
+        }),
       );
-      dispatch(closeModalDialog());
+      closeDialog();
     } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to export table.')));
+      showErrorResponse(e, translate('Unable to export table.'));
     }
   };
 }

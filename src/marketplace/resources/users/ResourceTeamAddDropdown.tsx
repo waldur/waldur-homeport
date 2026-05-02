@@ -5,7 +5,6 @@ import {
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
@@ -54,7 +53,6 @@ export const ResourceTeamAddDropdown: FC<ResourceTeamAddDropdownProps> = ({
   showAssign = true,
   refetch,
 }) => {
-  const dispatch = useDispatch();
   const user = useUser();
   const canInvite = hasPermission(user, {
     permission:
@@ -88,7 +86,7 @@ export const ResourceTeamAddDropdown: FC<ResourceTeamAddDropdownProps> = ({
           title={translate('Invite')}
           iconNode={<EnvelopeSimpleIcon weight="bold" />}
           action={() =>
-            openResourceInvitationDialog(dispatch, {
+            openResourceInvitationDialog({
               scopeUrl,
               scopeUuid,
               scopeLabel,

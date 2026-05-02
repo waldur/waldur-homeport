@@ -7,11 +7,10 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { FormFooter } from '@/form';
 import { ChoicesTable } from '@/form/ChoicesTable';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { usePermission } from '@/permissions/hooks';
-import { useNotify } from '@/store/hooks';
 
 import { FetchedData, loadData } from './utils';
 
@@ -32,33 +31,26 @@ const ChangePlanComponent = (props: FetchedData & { refetch? }) => {
     projectId: props.resource.project_uuid,
   });
 
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-
-  const handleSwitchPlan = async (data) => {
-    try {
-      await marketplaceResourcesSwitchPlan({
+  const switchPlanMutation = useManagedMutation<any, any, any>({
+    mutationFn: (data) =>
+      marketplaceResourcesSwitchPlan({
         path: { uuid: props.resource.uuid },
         body: { plan: data.plan.url },
-      });
-      showSuccess(
-        translate('Resource plan change request has been submitted.'),
-      );
-      closeDialog();
-      if (props.refetch) {
-        await props.refetch();
-      }
-    } catch (error) {
-      showErrorResponse(
-        error,
-        translate('Unable to submit plan change request.'),
-      );
-    }
-  };
+      }),
+    successMessage: translate(
+      'Resource plan change request has been submitted.',
+    ),
+    errorMessage: translate('Unable to submit plan change request.'),
+    refetch: props.refetch,
+  });
 
   return (
     <Form
-      onSubmit={handleSwitchPlan}
+      onSubmit={(values) =>
+        switchPlanMutation.mutateAsync(values).catch(() => {
+          /* error handled by useManagedMutation */
+        })
+      }
       initialValues={props.initialValues}
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>

@@ -64,51 +64,49 @@ export const useOrganizationGroups = () => {
 
 ## Data Refresh Mechanisms
 
-### CRUD Operations Refresh
+## Mutations with Notifications and Table Reload
 
-**Create Operations:**
+For form and modal mutations (CRUD operations) that need to display notifications, update data caches, and potentially close dialogs, use the custom `useManagedMutation` hook.
+
+### Best Practice: `useManagedMutation`
+
+This hook encapsulates the try-catch block, notification logic (`useNotify`), and modal closure (`useModal`) in a declarative API. It is the preferred way to handle mutations in Waldur.
+
+For detailed documentation, examples, and edge cases, see the [useManagedMutation Guide](./useManagedMutation.md).
 
 ```typescript
-const onSubmit = async (formData: ProjectFormData) => {
-  try {
-    const response = await projectsCreate({
+import { useManagedMutation } from '@/modal/useManagedMutation';
+
+const saveProjectMutation = useManagedMutation({
+  mutationFn: (formData: ProjectFormData) =>
+    projectsCreate({
       body: {
         name: formData.name,
-        description: formData.description,
         customer: formData.customer.url,
       },
-    });
-
-    if (refetch) {
-      await refetch(); // Refresh parent data
-    }
-
-    showSuccess(translate('Project has been created.'));
-    closeDialog();
-  } catch (e) {
-    showErrorResponse(e, translate('Unable to create project.'));
-  }
-};
-```
-
-**Edit Operations:**
-
-```typescript
-// Manual refresh after edit
-await updateResource(resourceData);
-refetch(); // Refresh data
-```
-
-**Delete Operations:**
-
-```typescript
-await marketplaceProviderOfferingsRemoveOfferingComponent({
-  path: { uuid: offering.uuid },
-  body: { uuid: component.uuid },
+    }),
+  successMessage: translate('Project has been created.'),
+  errorMessage: translate('Unable to create project.'),
+  refetch, // Option 1: Pass a refetch callback directly
+  // Option 2: Provide an array of query filters to automatically invalidate
+  invalidateQueries: [
+    { queryKey: ['CustomerProjects'] },
+  ],
 });
-refetch(); // Refresh parent data
-dispatch(showSuccess(translate('Component has been removed.')));
+
+// Use .mutateAsync for form submission
+const onSubmit = (formData) => saveProjectMutation.mutateAsync(formData);
+
+// Use .mutate for simple action buttons
+const onDelete = () => deleteMutation.mutate({});
 ```
+
+**Benefits:**
+
+- **Automatic modal closure** upon successful completion.
+- **Declarative notifications** for success/error handling.
+- **Easy state sync** with table reloads using `refetch` or `invalidateQueries`.
+- **Integrated confirmation** dialog support.
 
 ### Refresh Strategies
 

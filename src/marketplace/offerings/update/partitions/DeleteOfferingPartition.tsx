@@ -1,68 +1,44 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsRemovePartition,
   NestedPartition,
 } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const DeleteOfferingPartition: FC<{
   row: NestedPartition;
   offering;
   refetch;
 }> = ({ offering, row, refetch }) => {
-  const dispatch = useDispatch();
-
-  const handler = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        formatJsxTemplate(
-          translate(
-            'Are you sure you want to delete offering partition {name}?',
-          ),
-          {
-            name: <strong>{row.partition_name || translate('Unknown')}</strong>,
-          },
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-
-    try {
-      await marketplaceProviderOfferingsRemovePartition({
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceProviderOfferingsRemovePartition({
         path: { uuid: offering.uuid },
         body: { partition_uuid: row.uuid },
-      });
-      dispatch(showSuccess(translate('Offering partition has been deleted.')));
-      if (refetch) {
-        await refetch();
-      }
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to delete offering partition.'),
-        ),
-      );
-    }
-  };
+      }),
+    successMessage: translate('Offering partition has been deleted.'),
+    errorMessage: translate('Unable to delete offering partition.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: formatJsxTemplate(
+        translate('Are you sure you want to delete offering partition {name}?'),
+        {
+          name: <strong>{row.partition_name || translate('Unknown')}</strong>,
+        },
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionItem
-      className="text-danger"
-      iconColor="danger"
+    <RemovalActionItem
       title={translate('Delete')}
-      action={handler}
-      iconNode={<TrashIcon weight="bold" />}
+      action={() => deleteMutation.mutate()}
+      disabled={deleteMutation.isPending}
     />
   );
 };

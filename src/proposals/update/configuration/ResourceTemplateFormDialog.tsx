@@ -12,11 +12,10 @@ import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { Offering, Plan } from '@/marketplace/types';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormSecondPage as Step2Plan } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage';
 import { ResourceRequestWizardFormThirdPage as Step3AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
 import { Call } from '@/proposals/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { Step1General } from './Step1General';
 import { Step4FinalConfig } from './Step4FinalConfig';
@@ -70,45 +69,51 @@ export const ResourceTemplateFormDialog: FC<ResourceTemplateFormDialogProps> = (
 ) => {
   const isEdit = Boolean(props.resolve.uuid);
 
-  const submitForm = useCallback(
-    async (formData: ResourceTemplateFormData, dispatch, formProps) => {
-      try {
-        const body: CallResourceTemplateRequest = {
-          name: formData.name,
-          requested_offering: formData.offering.url,
-          description: formData.description,
-          limits: formData.limits || {},
-          attributes: formData.attributes || {},
-        };
-        if (isEdit) {
-          await proposalProtectedCallsResourceTemplatesUpdate({
-            path: {
-              uuid: props.resolve.call.uuid,
-              obj_uuid: props.resolve.uuid,
-            },
-            body,
-          });
-          dispatch(showSuccess(translate('Resource template updated')));
-        } else {
-          await proposalProtectedCallsResourceTemplatesSet({
-            path: { uuid: props.resolve.call.uuid },
-            body,
-          });
-          dispatch(
-            showSuccess(
-              translate('Resource template added to the call successfully'),
-            ),
-          );
-        }
-
-        formProps.destroy();
-        if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error));
+  const submitFormMutation = useManagedMutation<
+    any,
+    any,
+    {
+      formData: ResourceTemplateFormData;
+      formProps: any;
+    }
+  >({
+    mutationFn: (args) => {
+      const { formData } = args;
+      const body: CallResourceTemplateRequest = {
+        name: formData.name,
+        requested_offering: formData.offering.url,
+        description: formData.description,
+        limits: formData.limits || {},
+        attributes: formData.attributes || {},
+      };
+      if (isEdit) {
+        return proposalProtectedCallsResourceTemplatesUpdate({
+          path: {
+            uuid: props.resolve.call.uuid,
+            obj_uuid: props.resolve.uuid,
+          },
+          body,
+        });
+      } else {
+        return proposalProtectedCallsResourceTemplatesSet({
+          path: { uuid: props.resolve.call.uuid },
+          body,
+        });
       }
     },
-    [props.resolve.refetch],
+    successMessage: isEdit
+      ? translate('Resource template updated')
+      : translate('Resource template added to the call successfully'),
+    refetch: props.resolve.refetch,
+    onSuccess: (_data, args) => {
+      args.formProps.destroy();
+    },
+  });
+
+  const submitForm = useCallback(
+    (formData, _dispatch, formProps) =>
+      submitFormMutation.mutateAsync({ formData, formProps }),
+    [submitFormMutation],
   );
 
   /** Auto filling `mainOffering` in step 2 */

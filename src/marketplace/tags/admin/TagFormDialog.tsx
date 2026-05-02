@@ -1,6 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { SubmissionError, reduxForm } from 'redux-form';
+import { reduxForm, SubmissionError } from 'redux-form';
 import {
   marketplaceTagsCreate,
   marketplaceTagsPartialUpdate,
@@ -14,9 +13,8 @@ import { FormContainer } from '@/form/FormContainer';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface OwnProps {
   resolve: { tag?: Tag; refetch: () => void };
@@ -32,53 +30,44 @@ export const TagFormDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
   })((props) => {
     const isEdit = Boolean(props.resolve.tag?.uuid);
 
-    const processRequest = React.useCallback(
-      async (values: TagRequest, dispatch) => {
-        try {
-          if (isEdit) {
-            await marketplaceTagsPartialUpdate({
+    const tagMutation = useManagedMutation<any, any, TagRequest>({
+      mutationFn: (values) =>
+        isEdit
+          ? marketplaceTagsPartialUpdate({
               path: { uuid: props.resolve.tag.uuid },
               body: {
                 name: values.name,
                 description: values.description,
               },
-            });
-          } else {
-            await marketplaceTagsCreate({
+            })
+          : marketplaceTagsCreate({
               body: {
                 name: values.name,
                 description: values.description,
               },
-            });
-          }
-          props.resolve.refetch();
-          dispatch(
-            showSuccess(
-              isEdit
-                ? translate('The tag has been updated.')
-                : translate('The tag has been created.'),
-            ),
-          );
-          dispatch(closeModalDialog());
-        } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              isEdit
-                ? translate('Unable to update tag.')
-                : translate('Unable to create tag.'),
-            ),
-          );
-          if (e.response && e.response.status === 400) {
-            throw new SubmissionError(e.response.data);
-          }
-        }
-      },
-      [props.resolve, isEdit],
-    );
+            }),
+      successMessage: isEdit
+        ? translate('The tag has been updated.')
+        : translate('The tag has been created.'),
+      errorMessage: isEdit
+        ? translate('Unable to update tag.')
+        : translate('Unable to create tag.'),
+      refetch: props.resolve.refetch,
+    });
 
     return (
-      <form onSubmit={props.handleSubmit(processRequest)}>
+      <form
+        onSubmit={props.handleSubmit(async (values) => {
+          try {
+            await tagMutation.mutateAsync(values);
+          } catch (e) {
+            if (e.response && e.response.status === 400) {
+              throw new SubmissionError(e.response.data);
+            }
+            throw e;
+          }
+        })}
+      >
         <ModalDialog
           title={
             isEdit

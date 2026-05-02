@@ -9,7 +9,7 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { RoleEnum } from '@/permissions/enums';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { getCurrentUser } from '@/user/UsersService';
 import { useSetUser, useUser } from '@/workspace/hooks';
 

@@ -1,18 +1,16 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, useCallback } from 'react';
 import { marketplaceOrdersApproveByConsumer } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/hooks';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { OrderActionProps } from './types';
 
@@ -25,27 +23,20 @@ const UploadPurchaseOrderDialog = lazyComponent(() =>
 export const ApproveByConsumerButton: FC<
   OrderActionProps & { className?: string }
 > = ({ order, offering, as, className, refetch, size }) => {
-  const user = useSelector(getUser);
-  const { openDialog, closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { mutate, isPending: isLoading } = useMutation({
-    mutationFn: async () => {
-      try {
-        await marketplaceOrdersApproveByConsumer({
-          path: { uuid: order.uuid },
-        });
-        if (refetch) {
-          await refetch();
-        }
-        // Close modal dialog, if performed action from there
-        closeDialog();
-        showSuccess(translate('Order has been approved.'));
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to approve order.'));
-      }
-    },
+  const user = useUser();
+  const { openDialog } = useModal();
+
+  const { mutate, isPending: isLoading } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceOrdersApproveByConsumer({
+        path: { uuid: order.uuid },
+      }),
+    refetch,
+    successMessage: translate('Order has been approved.'),
+    errorMessage: translate('Unable to approve order.'),
   });
-  const callback = () => {
+
+  const callback = useCallback(() => {
     if (offering?.plugin_options?.['enable_purchase_order_upload']) {
       openDialog(UploadPurchaseOrderDialog, {
         order,
@@ -55,7 +46,8 @@ export const ApproveByConsumerButton: FC<
     } else {
       mutate();
     }
-  };
+  }, [offering, openDialog, order, refetch, mutate]);
+
   if (
     !hasPermission(user, {
       permission: PermissionEnum.APPROVE_ORDER,
@@ -65,6 +57,7 @@ export const ApproveByConsumerButton: FC<
   ) {
     return null;
   }
+
   return isLoading ? (
     <LoadingSpinnerSimple className="me-1" />
   ) : (

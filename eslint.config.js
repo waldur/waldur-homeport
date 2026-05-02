@@ -32,6 +32,7 @@ import noEditButtonSizeOverride from './eslint-rules/no-edit-button-size-overrid
 import noManualIconColorsInBadges from './eslint-rules/no-manual-icon-colors-in-badges.js';
 import noTemplateInTranslate from './eslint-rules/no-template-in-translate.js';
 import preferClassnamesUtility from './eslint-rules/prefer-classnames-utility.js';
+import preferMutateOverMutateAsync from './eslint-rules/prefer-mutate-over-mutateAsync.js';
 
 // Design system rules
 
@@ -76,6 +77,7 @@ export default tseslint
             'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
             'prefer-classnames-utility': preferClassnamesUtility,
             'enforce-render-field-or-dash': enforceRenderFieldOrDash,
+            'prefer-mutate-over-mutateAsync': preferMutateOverMutateAsync,
             'enforce-disabled-button-tooltip': enforceDisabledButtonTooltip,
 
             // Design system rules
@@ -127,6 +129,7 @@ export default tseslint
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',
+        'waldur-custom/prefer-mutate-over-mutateAsync': 'warn',
         'waldur-custom/enforce-disabled-button-tooltip': 'warn',
         'waldur-custom/enforce-noresult-with-cta': 'warn',
 

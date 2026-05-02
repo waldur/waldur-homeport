@@ -25,7 +25,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { MenuComponent } from '@/metronic/components';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';
@@ -47,6 +47,8 @@ const SaveFilterDialog = lazyComponent(() =>
 
 const SaveFilterItems = ({ table, formId, apply }) => {
   const dispatch = useDispatch();
+
+  const { openDialog } = useModal();
 
   const formValues = useSelector(getFormValues(formId));
   const selectedSavedFilter = useSelector((state: any) =>
@@ -93,18 +95,16 @@ const SaveFilterItems = ({ table, formId, apply }) => {
   );
 
   const onSaveFilter = (e, update = false) => {
-    dispatch(
-      openModalDialog(SaveFilterDialog, {
-        resolve: {
-          saveFilter,
-        },
-        size: 'sm',
-        initialValues:
-          update && selectedSavedFilter
-            ? { name: selectedSavedFilter.title }
-            : undefined,
-      }),
-    );
+    openDialog(SaveFilterDialog, {
+      resolve: {
+        saveFilter,
+      },
+      size: 'sm',
+      initialValues:
+        update && selectedSavedFilter
+          ? { name: selectedSavedFilter.title }
+          : undefined,
+    });
     e.stopPropagation();
   };
 

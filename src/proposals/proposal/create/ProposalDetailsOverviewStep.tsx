@@ -1,6 +1,5 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { Col, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import {
@@ -8,7 +7,7 @@ import {
   VStepperFormStepProps,
 } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { EndingField } from '@/proposals/EndingField';
 import { Proposal } from '@/proposals/types';
 import { Field } from '@/resource/summary';
@@ -21,15 +20,13 @@ const ProposalDetailsDialog = lazyComponent(() =>
 );
 
 const DetailsOverviewButton = ({ proposal }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionButton
       action={() =>
-        dispatch(
-          openModalDialog(ProposalDetailsDialog, {
-            proposal,
-          }),
-        )
+        openDialog(ProposalDetailsDialog, {
+          proposal,
+        })
       }
       title={translate('More details')}
       iconNode={<EyeIcon weight="bold" />}

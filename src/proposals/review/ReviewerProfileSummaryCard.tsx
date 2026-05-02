@@ -2,7 +2,6 @@ import { ArrowRightIcon, UserIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { reviewerProfilesMeRetrieve, ReviewerProfile } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -12,7 +11,7 @@ import { OrcidLogo } from '@/core/OrcidLogo';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { router } from '@/router';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 interface ReviewerProfileSummaryCardProps {
   onProfileStatus?: (hasProfile: boolean) => void;
@@ -21,7 +20,7 @@ interface ReviewerProfileSummaryCardProps {
 export const ReviewerProfileSummaryCard: FC<
   ReviewerProfileSummaryCardProps
 > = ({ onProfileStatus }) => {
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
 
   const { data: profile, isLoading } = useQuery({
     queryKey: ['reviewer-profile-me-summary'],

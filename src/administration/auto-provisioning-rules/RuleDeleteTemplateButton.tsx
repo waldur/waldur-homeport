@@ -1,32 +1,13 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { autoprovisioningRulesPartialUpdate } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const RuleDeleteTemplateButton = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const openDialog = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to remove the template of rule {name}?',
-          { name: <strong>{row.name}</strong> },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-
-    try {
-      await autoprovisioningRulesPartialUpdate({
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      autoprovisioningRulesPartialUpdate({
         path: { uuid: row.uuid },
         body: {
           plan_attributes: {},
@@ -34,21 +15,26 @@ export const RuleDeleteTemplateButton = ({ row, refetch }) => {
           plan: null,
           project_role_name: row.project_role_display_name,
         },
-      });
-      dispatch(showSuccess(translate('Template removed')));
-      refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to remove template.')));
-    }
-  };
+      }),
+    successMessage: translate('Template removed'),
+    errorMessage: translate('Unable to remove template.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to remove the template of rule {name}?',
+        { name: <strong>{row.name}</strong> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Remove template')}
-      action={openDialog}
-      iconNode={<TrashIcon weight="bold" />}
-      iconColor="danger"
-      className="text-danger"
+      action={() => deleteMutation.mutate()}
+      disabled={deleteMutation.isPending}
     />
   );
 };

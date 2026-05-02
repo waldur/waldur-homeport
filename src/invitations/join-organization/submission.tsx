@@ -9,8 +9,7 @@ import { format } from '@/core/ErrorMessageFormatter';
 import { GroupInvitationTokenStorage } from '@/core/StorageManager';
 import { FieldErrorMessage } from '@/form/FieldError';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { openModalDialog } from '@/modal/actions';
+import { ModalService } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
 import { UsersService } from '@/user/UsersService';
 
@@ -23,7 +22,7 @@ const isDuplicateOrConflictError = (errorMessage: unknown): boolean =>
 
 const submitRequest = (
   groupInvitationUuid: string,
-  dispatch,
+  _dispatch,
   body?: { project_name?: string; project_description?: string },
 ) =>
   userGroupInvitationsSubmitRequest({
@@ -35,8 +34,7 @@ const submitRequest = (
       GroupInvitationTokenStorage.remove();
       if (groupInvitation.auto_approved) {
         await UsersService.refreshCurrentUser();
-        await waitForConfirmation(
-          dispatch,
+        await ModalService.confirm(
           translate('You have successfully joined {organization}', {
             organization: renderFieldOrDash(groupInvitation.scope_name),
           }),
@@ -53,8 +51,7 @@ const submitRequest = (
           },
         );
       } else {
-        await waitForConfirmation(
-          dispatch,
+        await ModalService.confirm(
           translate('Request has been sent for approval'),
           translate(
             "Your request to join the organization {name} has been submitted. You'll receive a notification once it's reviewed and approved.",
@@ -80,8 +77,7 @@ const submitRequest = (
       GroupInvitationTokenStorage.remove();
       const errorMessage = format(err);
       if (isDuplicateOrConflictError(errorMessage)) {
-        await waitForConfirmation(
-          dispatch,
+        await ModalService.confirm(
           translate('You already have access'),
           translate(
             'You already have the requested role or a pending request for this organization.',
@@ -108,8 +104,7 @@ const submitRequest = (
           </div>
         );
 
-        await waitForConfirmation(
-          dispatch,
+        await ModalService.confirm(
           translate('Access restricted'),
           formattedMessage,
           {
@@ -140,22 +135,20 @@ export const requestToAccessOrganization = async (
 
   if (invitation.allow_custom_project_details) {
     return new Promise<void>((resolve) => {
-      dispatch(
-        openModalDialog(ProjectDetailsDialog, {
-          resolve: {
-            onSubmit: (data) => {
-              submitRequest(invitation.uuid, dispatch, data).then(() =>
-                resolve(),
-              );
-            },
-            onCancel: () => {
-              GroupInvitationTokenStorage.remove();
-              resolve();
-            },
+      ModalService.open(ProjectDetailsDialog, {
+        resolve: {
+          onSubmit: (data) => {
+            submitRequest(invitation.uuid, dispatch, data).then(() =>
+              resolve(),
+            );
           },
-          size: 'md',
-        }),
-      );
+          onCancel: () => {
+            GroupInvitationTokenStorage.remove();
+            resolve();
+          },
+        },
+        size: 'md',
+      });
     });
   }
   return submitRequest(invitation.uuid, dispatch);

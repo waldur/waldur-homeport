@@ -1,17 +1,14 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
-  projectEndDateChangeRequestsCancel,
   ProjectEndDateChangeRequest,
+  projectEndDateChangeRequestsCancel,
 } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 interface PendingRequestDialogProps {
@@ -23,27 +20,24 @@ export const PendingRequestDialog: FC<PendingRequestDialogProps> = ({
   request,
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
-  const queryClient = useQueryClient();
-
-  const cancelMutation = useMutation({
+  const cancelMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
       projectEndDateChangeRequestsCancel({
         path: { uuid: request.uuid },
       }),
-    onSuccess: () => {
-      showSuccess(
-        translate('Project end date change request has been canceled.'),
-      );
-      dispatch(closeModalDialog());
-      refetch();
-      queryClient.invalidateQueries({
+    successMessage: translate(
+      'Project end date change request has been canceled.',
+    ),
+    errorMessage: translate('Unable to cancel request.'),
+    refetch,
+    invalidateQueries: [
+      {
         queryKey: ['project-end-date-change-requests'],
-      });
-    },
-    onError: (error) => {
-      showErrorResponse(error);
+      },
+    ],
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Are you sure you want to cancel the request?'),
     },
   });
 

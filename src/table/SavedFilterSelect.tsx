@@ -11,8 +11,8 @@ import {
   WindowedSelect,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import {
@@ -76,7 +76,11 @@ export const SavedFilterSelect = ({
   filterPosition,
   onSelect,
 }: SavedFilterSelectProps) => {
+  const { confirm } = useModal();
+
   const dispatch = useDispatch();
+
+  const { showErrorResponse } = useNotify();
 
   const formValues = useSelector(getFormValues(formId));
 
@@ -121,8 +125,7 @@ export const SavedFilterSelect = ({
     async (e, item) => {
       e.stopPropagation();
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Delete filter'),
           translate(
             'Are you sure you want to delete this filter? This action cannot be undone.',
@@ -137,12 +140,10 @@ export const SavedFilterSelect = ({
         setSelected(null);
         if (onSelect) onSelect();
       } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to remove the filter.')),
-        );
+        showErrorResponse(error, translate('Unable to remove the filter.'));
       }
     },
-    [dispatch, setSelected, key, onSelect],
+    [setSelected, key, onSelect],
   );
 
   return (

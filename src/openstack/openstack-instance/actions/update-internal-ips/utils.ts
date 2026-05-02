@@ -1,14 +1,12 @@
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 import { openstackInstancesUpdatePorts } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadSubnets } from '@/openstack/api';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface PortFormEntry {
   subnet: any;
@@ -24,10 +22,9 @@ export const useUpdatePortsForm = (resource: OpenStackInstance, refetch) => {
     () => loadSubnets({ tenant_uuid: resource.tenant_uuid }),
     [resource.tenant_uuid],
   );
-  const dispatch = useDispatch();
-  const submitRequest = async (formData: UpdatePortsFormData) => {
-    try {
-      await openstackInstancesUpdatePorts({
+  const updateMutation = useManagedMutation<any, any, UpdatePortsFormData>({
+    mutationFn: (formData) =>
+      openstackInstancesUpdatePorts({
         path: { uuid: resource.uuid },
         body: {
           ports: formData.ports.map((item) => {
@@ -45,25 +42,18 @@ export const useUpdatePortsForm = (resource: OpenStackInstance, refetch) => {
             return port;
           }),
         },
-      });
-      dispatch(
-        showSuccess(
-          translate(
-            'Update of OpenStack instance internal IPs has been scheduled.',
-          ),
-        ),
-      );
-      dispatch(closeModalDialog());
-      await refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to update internal IPs of OpenStack instance.'),
-        ),
-      );
-    }
-  };
+      }),
+    successMessage: translate(
+      'Update of OpenStack instance internal IPs has been scheduled.',
+    ),
+    errorMessage: translate(
+      'Unable to update internal IPs of OpenStack instance.',
+    ),
+    refetch,
+  });
+
+  const submitRequest = (formData: UpdatePortsFormData) =>
+    updateMutation.mutateAsync(formData);
 
   // Build initial values by matching current ports to full subnet objects
   const initialValues = useMemo<UpdatePortsFormData>(() => {

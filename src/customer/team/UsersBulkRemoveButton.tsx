@@ -1,68 +1,24 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { customersDeleteUser, projectsDeleteUser } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
+import { useNotify } from '@/store/notify';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 import { getCustomer } from '@/workspace/selectors';
 
 export const UsersBulkRemoveButton = ({ rows, refetch }) => {
+  const { showErrorResponse } = useNotify();
+
   const currentUser = useUser();
   const currentCustomer = useSelector(getCustomer);
-  const canRemoveUsers = hasPermission(currentUser, {
-    permission: PermissionEnum.DELETE_CUSTOMER_PERMISSION,
-    customerId: currentCustomer.uuid,
-  });
-  if (!canRemoveUsers) {
-    return null;
-  }
 
-  const [isRemoving, setIsRemoving] = useState(false);
-  const dispatch = useDispatch();
-
-  const callback = async () => {
-    try {
-      const userList = rows.map((row) => (
-        <li key={row.uuid}>
-          {row.full_name || row.username} ({renderFieldOrDash(row.email)})
-        </li>
-      ));
-
-      const confirmationText = translate(
-        "You are about to remove these users from the organization. Once removed, they'll immediately lose access and all associated permissions.",
-      );
-
-      const formattedMessage = (
-        <div>
-          <p>{confirmationText}</p>
-          <ul>{userList}</ul>
-        </div>
-      );
-
-      await waitForConfirmation(
-        dispatch,
-        translate(
-          'Remove selected users from the organization: {customerName}',
-          {
-            customerName: <strong>{currentCustomer.name}</strong>,
-          },
-          formatJsxTemplate,
-        ),
-        formattedMessage,
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      setIsRemoving(true);
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: async () => {
       for (const user of rows) {
         try {
           await Promise.all(
@@ -87,37 +43,60 @@ export const UsersBulkRemoveButton = ({ rows, refetch }) => {
             });
           }
         } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              translate('Unable to remove user {userName}.', {
-                userName: user.full_name || user.username,
-              }),
-            ),
+          showErrorResponse(
+            e,
+            translate('Unable to remove user {userName}.', {
+              userName: user.full_name || user.username,
+            }),
           );
         }
       }
-      await refetch();
-      dispatch(
-        showSuccess(
-          translate('Selected users have been successfully removed.'),
-        ),
-      );
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to remove users.')));
-    } finally {
-      setIsRemoving(false);
-    }
-  };
+    },
+    confirmation: {
+      title: translate(
+        'Remove selected users from the organization: {customerName}',
+        {
+          customerName: <strong>{currentCustomer.name}</strong>,
+        },
+        formatJsxTemplate,
+      ),
+      body: (
+        <div>
+          <p>
+            {translate(
+              "You are about to remove these users from the organization. Once removed, they'll immediately lose access and all associated permissions.",
+            )}
+          </p>
+          <ul>
+            {rows.map((row) => (
+              <li key={row.uuid}>
+                {row.full_name || row.username} ({renderFieldOrDash(row.email)})
+              </li>
+            ))}
+          </ul>
+        </div>
+      ),
+      options: { forDeletion: true },
+    },
+    successMessage: translate('Selected users have been successfully removed.'),
+    errorMessage: translate('Unable to remove users.'),
+    refetch,
+  });
+
+  const canRemoveUsers = hasPermission(currentUser, {
+    permission: PermissionEnum.DELETE_CUSTOMER_PERMISSION,
+    customerId: currentCustomer.uuid,
+  });
+  if (!canRemoveUsers) {
+    return null;
+  }
 
   return (
-    <ActionButton
+    <RemovalActionButton
       title={translate('Remove')}
-      action={callback}
-      iconNode={<TrashIcon weight="bold" />}
-      variant="danger"
+      action={mutate}
       tooltip={translate('Remove all selected users from organization.')}
-      disabled={isRemoving}
+      disabled={isPending}
     />
   );
 };

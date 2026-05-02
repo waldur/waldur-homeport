@@ -1,6 +1,5 @@
 import { FC, useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   assignmentBatchesExtendDeadline,
   AssignmentBatchList,
@@ -13,10 +12,9 @@ import { DateTimeField } from '@/form/DateTimeField';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ExtendDeadlineDialogProps {
   resolve: {
@@ -32,33 +30,23 @@ interface FormValues {
 export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
   const { batch, refetch } = resolve;
 
-  const handleSubmit = useCallback(
-    async (values: FormValues) => {
-      try {
-        await assignmentBatchesExtendDeadline({
-          path: { uuid: batch.uuid },
-          body: {
-            expires_at:
-              values.expires_at instanceof Date
-                ? values.expires_at.toISOString()
-                : new Date(values.expires_at).toISOString(),
-          },
-        });
-
-        dispatch(showSuccess(translate('Deadline extended successfully.')));
-        refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Failed to extend deadline.')),
-        );
-      }
-    },
-    [batch.uuid, refetch, dispatch],
-  );
+  const handleSubmitMutation = useManagedMutation<any, any, FormValues>({
+    mutationFn: (values) =>
+      assignmentBatchesExtendDeadline({
+        path: { uuid: batch.uuid },
+        body: {
+          expires_at:
+            values.expires_at instanceof Date
+              ? values.expires_at.toISOString()
+              : new Date(values.expires_at).toISOString(),
+        },
+      }),
+    successMessage: translate('Deadline extended successfully.'),
+    errorMessage: translate('Failed to extend deadline.'),
+    refetch,
+  });
 
   const validateExpiresAt = useCallback((value: Date) => {
     if (!value) {
@@ -72,7 +60,7 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
 
   return (
     <Form<FormValues>
-      onSubmit={handleSubmit}
+      onSubmit={(values) => handleSubmitMutation.mutateAsync(values)}
       initialValues={{
         expires_at: batch.expires_at ? new Date(batch.expires_at) : undefined,
       }}

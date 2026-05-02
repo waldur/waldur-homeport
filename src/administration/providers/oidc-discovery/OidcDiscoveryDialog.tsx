@@ -1,6 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   identityProvidersCreate,
   identityProvidersUpdate,
@@ -9,8 +7,7 @@ import {
 
 import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Wizard } from '@/wizard';
 
 import { ConfigurationStep } from './steps/ConfigurationStep';
@@ -47,9 +44,6 @@ interface OidcDiscoveryDialogProps {
 export const OidcDiscoveryDialog: FC<OidcDiscoveryDialogProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-
   const initialValues = useMemo((): OidcFormValues => {
     const provider = resolve.provider;
     return {
@@ -104,8 +98,12 @@ export const OidcDiscoveryDialog: FC<OidcDiscoveryDialogProps> = ({
       .filter(Boolean);
   };
 
-  const onSubmit = useCallback(
-    async (values: OidcFormValues) => {
+  const { mutateAsync: saveProvider } = useManagedMutation<
+    any,
+    any,
+    OidcFormValues
+  >({
+    mutationFn: (values) => {
       const providerData: IdentityProviderRequest = {
         provider: resolve.type,
         discovery_url: values.discovery_url,
@@ -124,38 +122,28 @@ export const OidcDiscoveryDialog: FC<OidcDiscoveryDialogProps> = ({
         is_active: values.is_active,
         attribute_mapping: buildAttributeMapping(values.fieldMappings),
       };
-
-      try {
-        if (resolve.provider) {
-          await identityProvidersUpdate({
-            path: { provider: resolve.type },
-            body: providerData,
-          });
-          dispatch(
-            showSuccess(translate('Identity provider updated successfully')),
-          );
-        } else {
-          await identityProvidersCreate({
-            body: providerData,
-          });
-          dispatch(
-            showSuccess(translate('Identity provider created successfully')),
-          );
-        }
-
-        queryClient.invalidateQueries({
-          queryKey: ['IdentityProviders'],
+      if (resolve.provider) {
+        return identityProvidersUpdate({
+          path: { provider: resolve.type },
+          body: providerData,
         });
-        resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (e: any) {
-        dispatch(
-          showErrorResponse(e, translate('Failed to save identity provider')),
-        );
-        throw e; // Re-throw to keep form in submitting state
+      } else {
+        return identityProvidersCreate({
+          body: providerData,
+        });
       }
     },
-    [dispatch, queryClient, resolve],
+    successMessage: resolve.provider
+      ? translate('Identity provider updated successfully')
+      : translate('Identity provider created successfully'),
+    errorMessage: translate('Failed to save identity provider'),
+    invalidateQueries: [{ queryKey: ['IdentityProviders'] }],
+    refetch: resolve.refetch,
+  });
+
+  const onSubmit = useCallback(
+    (values: OidcFormValues) => saveProvider(values),
+    [saveProvider],
   );
 
   const title = resolve.provider

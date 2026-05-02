@@ -5,9 +5,9 @@ import { UserAction, userActionsExecuteAction } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { SilenceAction } from './SilenceAction';
 import {
@@ -37,9 +37,10 @@ const PendingOrderDetailsDialog = lazyComponent(() =>
 const createActionHandler = (
   action: CorrectiveAction,
   row: UserAction,
-  refetch?: () => void,
-  router?: any,
-  dispatch?: any,
+  refetch: () => void,
+  router: any,
+  dispatch: any,
+  { showErrorResponse, showSuccess, openDialog, confirm },
 ) => {
   const needsConfirmation =
     action.confirmation_required ||
@@ -49,24 +50,21 @@ const createActionHandler = (
     // Special handling for Renew Resource action - open dialog directly
     if (action.label === 'Renew Resource') {
       const extRow = row as unknown as ExtendedUserAction;
-      dispatch?.(
-        openModalDialog(RenewAllocationDialog, {
-          size: 'xl',
-          fullscreen: 'lg-down',
-          resolve: {
-            resource_uuid: extRow.resource_uuid,
-            refetch,
-          },
-        }),
-      );
+      openDialog(RenewAllocationDialog, {
+        size: 'xl',
+        fullscreen: 'lg-down',
+        resolve: {
+          resource_uuid: extRow.resource_uuid,
+          refetch,
+        },
+      });
       return;
     }
 
     // Confirmation for destructive or flagged actions
     if (needsConfirmation && dispatch) {
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Confirm action'),
           translate('Are you sure you want to perform "{action}"?', {
             action: action.label,
@@ -87,7 +85,7 @@ const createActionHandler = (
           path: { uuid: row.uuid as any },
           body: { action_label: action.label },
         });
-        dispatch?.(showSuccess(translate('Action executed successfully.')));
+        showSuccess(translate('Action executed successfully.'));
         refetch?.();
       } else {
         // Handle navigation using route-based approach only
@@ -97,16 +95,12 @@ const createActionHandler = (
       }
     } catch (e) {
       if (e.response?.status === 404) {
-        dispatch?.(
-          showErrorResponse(
-            e,
-            translate('Action not found or no longer available.'),
-          ),
+        showErrorResponse(
+          e,
+          translate('Action not found or no longer available.'),
         );
       } else {
-        dispatch?.(
-          showErrorResponse(e, translate('Unable to execute action.')),
-        );
+        showErrorResponse(e, translate('Unable to execute action.'));
       }
     }
   };
@@ -116,9 +110,10 @@ const createActionHandler = (
 const createDynamicAction = (
   action: CorrectiveAction,
   row: UserAction,
-  refetch?: () => void,
-  router?: any,
-  dispatch?: any,
+  refetch: () => void,
+  router: any,
+  dispatch: any,
+  notify: any,
 ) => {
   const config =
     ACTION_CATEGORY_CONFIG[
@@ -129,7 +124,14 @@ const createDynamicAction = (
   return () => (
     <ActionItem
       title={action.label}
-      action={createActionHandler(action, row, refetch, router, dispatch)}
+      action={createActionHandler(
+        action,
+        row,
+        refetch,
+        router,
+        dispatch,
+        notify,
+      )}
       iconNode={<IconComponent weight="bold" />}
     />
   );
@@ -182,6 +184,9 @@ export const usePendingActionActions = (
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const { openDialog, confirm } = useModal();
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const correctiveActions = (row.corrective_actions ||
     []) as CorrectiveAction[];
   const extendedRow = row as unknown as ExtendedUserAction;
@@ -195,15 +200,13 @@ export const usePendingActionActions = (
     primaryAction = {
       label: translate('Review'),
       handler: () => {
-        dispatch(
-          openModalDialog(PendingOrderDetailsDialog, {
-            size: 'lg',
-            resolve: {
-              row: extendedRow,
-              refetch,
-            },
-          }),
-        );
+        openDialog(PendingOrderDetailsDialog, {
+          size: 'lg',
+          resolve: {
+            row: extendedRow,
+            refetch,
+          },
+        });
       },
       icon: ClipboardTextIcon,
       variant: 'warning',
@@ -229,6 +232,7 @@ export const usePendingActionActions = (
           refetch,
           router,
           dispatch,
+          { showErrorResponse, showSuccess, openDialog, confirm },
         ),
         icon: config.icon,
         variant: config.variant,
@@ -245,7 +249,12 @@ export const usePendingActionActions = (
       return;
     }
     remainingActions.push(
-      createDynamicAction(action, row, refetch, router, dispatch),
+      createDynamicAction(action, row, refetch, router, dispatch, {
+        showErrorResponse,
+        showSuccess,
+        openDialog,
+        confirm,
+      }),
     );
   });
 

@@ -1,6 +1,5 @@
 import { CaretRightIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   promotionsCampaignsCreate,
   promotionsCampaignsUpdate,
@@ -9,8 +8,8 @@ import {
 import { translate } from '@/i18n';
 import * as api from '@/marketplace/common/api';
 import { serializeCampaign } from '@/marketplace/service-providers/utils';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { getCustomer } from '@/workspace/selectors';
 
@@ -31,7 +30,8 @@ export const CampaignFooter = ({
   refetch;
   isUpdate?;
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
+
   const customer = useSelector(getCustomer);
   async function getServiceProvider() {
     try {
@@ -39,48 +39,32 @@ export const CampaignFooter = ({
         customer_uuid: customer.uuid,
       });
     } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to load service provider.')),
-      );
+      showErrorResponse(e, translate('Unable to load service provider.'));
     }
   }
 
-  const saveAndSend = useCallback(
-    async (formData: CampaignFormData) => {
-      try {
-        formData.service_provider = await getServiceProvider();
-        await promotionsCampaignsCreate({ body: serializeCampaign(formData) });
-        refetch();
-        dispatch(showSuccess(translate('Campaign has been created.')));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to create a campaign.')),
-        );
-      }
+  const createMutation = useManagedMutation<any, any, CampaignFormData>({
+    mutationFn: async (formData) => {
+      formData.service_provider = await getServiceProvider();
+      return promotionsCampaignsCreate({ body: serializeCampaign(formData) });
     },
-    [dispatch],
-  );
+    successMessage: translate('Campaign has been created.'),
+    errorMessage: translate('Unable to create a campaign.'),
+    refetch,
+  });
 
-  const saveAndUpdate = useCallback(
-    async (formData: CampaignFormData) => {
-      try {
-        formData.service_provider = await getServiceProvider();
-        await promotionsCampaignsUpdate({
-          path: { uuid: formData.uuid },
-          body: serializeCampaign(formData),
-        });
-        refetch();
-        dispatch(showSuccess(translate('Campaign has been updated.')));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to update a campaign.')),
-        );
-      }
+  const updateMutation = useManagedMutation<any, any, CampaignFormData>({
+    mutationFn: async (formData) => {
+      formData.service_provider = await getServiceProvider();
+      return promotionsCampaignsUpdate({
+        path: { uuid: formData.uuid },
+        body: serializeCampaign(formData),
+      });
     },
-    [dispatch],
-  );
+    successMessage: translate('Campaign has been updated.'),
+    errorMessage: translate('Unable to update a campaign.'),
+    refetch,
+  });
 
   return step === 0 ? (
     <ActionButton
@@ -98,7 +82,7 @@ export const CampaignFooter = ({
         <ActionButton
           disabled={disabled}
           disabledReason={translate('Please fill in the required fields')}
-          action={handleSubmit(saveAndSend)}
+          action={handleSubmit(createMutation.mutateAsync)}
           iconNode={<PaperPlaneTiltIcon weight="bold" />}
           title={translate('Create a campaign')}
           variant="primary"
@@ -107,7 +91,7 @@ export const CampaignFooter = ({
         <ActionButton
           disabled={disabled}
           disabledReason={translate('Please fill in the required fields')}
-          action={handleSubmit(saveAndUpdate)}
+          action={handleSubmit(updateMutation.mutateAsync)}
           iconNode={<PaperPlaneTiltIcon weight="bold" />}
           title={translate('Update a campaign')}
           variant="primary"

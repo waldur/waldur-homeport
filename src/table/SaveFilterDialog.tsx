@@ -5,10 +5,10 @@ import { required } from '@/core/validators';
 import { StringField, SubmitButton } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 interface SaveFilterDialogProps {
   resolve: {
@@ -19,19 +19,22 @@ interface SaveFilterDialogProps {
 export const SaveFilterDialog = reduxForm<{ name }, SaveFilterDialogProps>({
   form: 'tableSaveFilterForm',
 })((props) => {
+  const { showSuccess } = useNotify();
+  const { closeDialog } = useModal();
+
   const isEdit = Boolean(props.initialValues);
 
   const callback = useCallback(
-    (formData: { name }, dispatch) => {
+    (formData: { name }) => {
       props.resolve.saveFilter(formData.name, isEdit);
       if (!isEdit) {
-        dispatch(showSuccess(translate('Filter saved')));
+        showSuccess(translate('Filter saved'));
       } else {
-        dispatch(showSuccess(translate('Filter updated successfully')));
+        showSuccess(translate('Filter updated successfully'));
       }
-      dispatch(closeModalDialog());
+      closeDialog();
     },
-    [props.resolve.saveFilter],
+    [props.resolve.saveFilter, showSuccess, closeDialog],
   );
 
   return (

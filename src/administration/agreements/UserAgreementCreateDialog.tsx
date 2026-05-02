@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
-import { userAgreementsCreate } from 'waldur-js-client';
+import { AgreementTypeEnum, userAgreementsCreate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
@@ -8,14 +8,16 @@ import { SelectField, SubmitButton } from '@/form';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+
+interface UserAgreementCreateDialogFormValues {
+  agreement_type: { value: AgreementTypeEnum };
+  content: string;
+  language?: { value: string };
+}
 
 export const UserAgreementCreateDialog = ({ resolve }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-
   const languageOptions = useMemo(
     () => [
       { label: translate('Default'), value: '' },
@@ -27,26 +29,27 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
     [],
   );
 
-  const onSubmit = async (formValues) => {
-    try {
-      await userAgreementsCreate({
+  const { mutateAsync } = useManagedMutation<
+    any,
+    any,
+    UserAgreementCreateDialogFormValues
+  >({
+    mutationFn: (formValues) =>
+      userAgreementsCreate({
         body: {
           agreement_type: formValues.agreement_type.value,
           content: formValues.content,
           language: formValues.language?.value ?? '',
         },
-      });
-      showSuccess(translate('User agreement has been created'));
-      closeDialog();
-      await resolve.refetch();
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to create a user agreement.'));
-    }
-  };
+      }),
+    successMessage: translate('User agreement has been created'),
+    errorMessage: translate('Unable to create a user agreement.'),
+    refetch: resolve?.refetch,
+  });
 
   return (
-    <Form
-      onSubmit={onSubmit}
+    <Form<UserAgreementCreateDialogFormValues>
+      onSubmit={(values) => mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

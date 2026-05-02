@@ -1,5 +1,4 @@
-import { useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { useAsyncFn, useToggle } from 'react-use';
 import { reduxForm, Field } from 'redux-form';
 
@@ -9,8 +8,7 @@ import { SubmitButton } from '@/form';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
 import { ActionDialog } from '@/modal/ActionDialog';
-import { closeModalDialog } from '@/modal/actions';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const ViewYAMLDialog = reduxForm<
   { yaml: string },
@@ -21,8 +19,6 @@ export const ViewYAMLDialog = reduxForm<
   submitting,
   initialize,
 }) => {
-  const dispatch = useDispatch();
-
   const [{ loading, error, value }, fetch] = useAsyncFn(() =>
     resolve
       .yamlRetrieve({ path: { uuid: resolve.resource.uuid } })
@@ -39,23 +35,17 @@ export const ViewYAMLDialog = reduxForm<
     }
   }, [value, initialize]);
 
-  const updateYAML = useCallback(
-    async (formData: { yaml: string }) => {
-      try {
-        await resolve.yamlUpdate({
-          uuid: resolve.resource.uuid,
-          body: {
-            yaml: formData.yaml,
-          },
-        });
-        dispatch(showSuccess(translate('YAML has been updated.')));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to update YAML.')));
-      }
-    },
-    [dispatch, resolve.resource.uuid],
-  );
+  const updateYamlMutation = useManagedMutation<any, any, { yaml: string }>({
+    mutationFn: (formData) =>
+      resolve.yamlUpdate({
+        uuid: resolve.resource.uuid,
+        body: {
+          yaml: formData.yaml,
+        },
+      }),
+    successMessage: translate('YAML has been updated.'),
+    errorMessage: translate('Unable to update YAML.'),
+  });
 
   const [showDiff, toggleShowDiff] = useToggle(false);
 
@@ -67,7 +57,9 @@ export const ViewYAMLDialog = reduxForm<
     <ActionDialog
       title={translate('Edit YAML')}
       submitLabel={translate('Submit')}
-      onSubmit={handleSubmit(updateYAML)}
+      onSubmit={handleSubmit((values) =>
+        updateYamlMutation.mutateAsync(values),
+      )}
       submitting={submitting}
       loading={loading}
     >

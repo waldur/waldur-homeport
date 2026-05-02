@@ -14,7 +14,7 @@ vi.mock('./utils');
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/modal/hooks', () => ({
+vi.mock('@/modal/actions', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),

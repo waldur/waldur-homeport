@@ -1,6 +1,5 @@
 import { XIcon, ShieldIcon, UserMinusIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   ConflictOfInterest,
   conflictsOfInterestDismiss,
@@ -9,10 +8,9 @@ import {
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 const WaiveCOIDialog = lazyComponent(() =>
@@ -27,14 +25,16 @@ interface COIRowActionsProps {
 }
 
 export const COIRowActions: FC<COIRowActionsProps> = ({ row, fetch }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { openDialog, confirm } = useModal();
+
   const [isDismissing, setIsDismissing] = useState(false);
   const [isRecusing, setIsRecusing] = useState(false);
 
   const handleDismiss = useCallback(async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Dismiss conflict of interest'),
         <div>
           <p>
@@ -87,21 +87,18 @@ export const COIRowActions: FC<COIRowActionsProps> = ({ row, fetch }) => {
         path: { uuid: row.uuid },
         body: { status: 'dismissed' },
       });
-      dispatch(showSuccess(translate('Conflict of interest dismissed.')));
+      showSuccess(translate('Conflict of interest dismissed.'));
       fetch();
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Failed to dismiss conflict.')),
-      );
+      showErrorResponse(error, translate('Failed to dismiss conflict.'));
     } finally {
       setIsDismissing(false);
     }
-  }, [row, dispatch, fetch]);
+  }, [row, fetch]);
 
   const handleRecuse = useCallback(async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Recuse reviewer'),
         <div>
           <p>
@@ -156,25 +153,21 @@ export const COIRowActions: FC<COIRowActionsProps> = ({ row, fetch }) => {
         path: { uuid: row.uuid },
         body: { status: 'recused' },
       });
-      dispatch(showSuccess(translate('Reviewer recused from proposal.')));
+      showSuccess(translate('Reviewer recused from proposal.'));
       fetch();
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Failed to recuse reviewer.')),
-      );
+      showErrorResponse(error, translate('Failed to recuse reviewer.'));
     } finally {
       setIsRecusing(false);
     }
-  }, [row, dispatch, fetch]);
+  }, [row, fetch]);
 
   const handleWaive = useCallback(() => {
-    dispatch(
-      openModalDialog(WaiveCOIDialog, {
-        resolve: { coi: row, fetch },
-        size: 'lg',
-      }),
-    );
-  }, [row, fetch, dispatch]);
+    openDialog(WaiveCOIDialog, {
+      resolve: { coi: row, fetch },
+      size: 'lg',
+    });
+  }, [row, fetch]);
 
   // Don't show actions if already reviewed (not pending)
   if (row.status !== 'pending') {

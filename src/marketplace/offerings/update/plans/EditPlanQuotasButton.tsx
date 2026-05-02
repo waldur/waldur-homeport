@@ -1,11 +1,10 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { EDIT_PLAN_FORM_ID } from './constants';
 
@@ -20,7 +19,7 @@ export const EditPlanQuotasButton: FunctionComponent<{
   plan;
   refetch;
 }> = ({ offering, plan, refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const components = offering.components.filter(
     (c) =>
       c.billing_type === 'fixed' ||
@@ -31,13 +30,11 @@ export const EditPlanQuotasButton: FunctionComponent<{
     return null;
   }
   const callback = () => {
-    dispatch(
-      openModalDialog(EditPlanQuotasDialog, {
-        resolve: { offering, plan, refetch, components },
-        formId: EDIT_PLAN_FORM_ID,
-        size: 'lg',
-      }),
-    );
+    openDialog(EditPlanQuotasDialog, {
+      resolve: { offering, plan, refetch, components },
+      formId: EDIT_PLAN_FORM_ID,
+      size: 'lg',
+    });
   };
   return (
     <Dropdown.Item onClick={callback}>

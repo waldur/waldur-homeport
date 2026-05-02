@@ -10,6 +10,8 @@ const mockStore = configureMockStore();
 
 vi.mock('@/i18n', () => ({
   translate: (key) => key,
+  formatJsx: (key) => key,
+  formatJsxTemplate: (key) => key,
 }));
 
 vi.mock('@/features/connect', () => ({

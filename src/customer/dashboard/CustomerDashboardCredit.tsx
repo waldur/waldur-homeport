@@ -10,7 +10,7 @@ import { Tip } from '@/core/Tooltip';
 import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { Customer } from '@/workspace/types';
 
 import { useCustomerCreditChart } from './utils';

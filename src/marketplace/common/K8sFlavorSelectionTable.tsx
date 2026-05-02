@@ -7,7 +7,6 @@ import {
 import React, { useMemo, useState } from 'react';
 // eslint-disable-next-line waldur-custom/no-direct-bootstrap-button -- Complex selector button with custom children, tooltip, and nested click handler
 import { Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
@@ -18,9 +17,8 @@ import { required } from '@/core/validators';
 import { FilterBox } from '@/form/FilterBox';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -204,31 +202,29 @@ export const K8sFlavorSelectionTable: React.FC<
   datacenterName,
   minimalSettings,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openModal = () =>
-    dispatch(
-      openModalDialog(FlavorSelectionModal, {
-        resolve: {
-          offeringUuid: offeringUuid,
-          onFlavorSelect: onFlavorSelect,
-          nodeGroupType: nodeGroupType,
-          datacenterName: datacenterName,
-          minimalSettings: minimalSettings,
-        },
-        initialValues: selectedFlavor
-          ? {
-              flavor: {
-                uuid: selectedFlavor.uuid,
-                name: selectedFlavor.name,
-                cores: selectedFlavor.vcpus,
-                ram: selectedFlavor.ram,
-                disk: selectedFlavor.disk,
-              } satisfies OpenStackFlavor,
-            }
-          : undefined,
-        size: 'lg',
-      }),
-    );
+    openDialog(FlavorSelectionModal, {
+      resolve: {
+        offeringUuid: offeringUuid,
+        onFlavorSelect: onFlavorSelect,
+        nodeGroupType: nodeGroupType,
+        datacenterName: datacenterName,
+        minimalSettings: minimalSettings,
+      },
+      initialValues: selectedFlavor
+        ? {
+            flavor: {
+              uuid: selectedFlavor.uuid,
+              name: selectedFlavor.name,
+              cores: selectedFlavor.vcpus,
+              ram: selectedFlavor.ram,
+              disk: selectedFlavor.disk,
+            } satisfies OpenStackFlavor,
+          }
+        : undefined,
+      size: 'lg',
+    });
 
   return (
     <div className="d-grid">

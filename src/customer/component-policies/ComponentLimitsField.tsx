@@ -1,4 +1,4 @@
-import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
@@ -10,6 +10,7 @@ import { translate } from '@/i18n';
 import { validateNonNegative } from '@/marketplace/common/utils';
 import { useComponentLimitsArrayFieldFunctions } from '@/marketplace/offerings/details/policies/ComponentLimitsField';
 import { ActionButton } from '@/table/ActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { policyPeriodOptions } from '../cost-policies/utils';
 
@@ -87,14 +88,12 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                         />
                       </td>
                       <td>
-                        <ActionButton
-                          variant="danger"
+                        <RemovalActionButton
                           action={() => removeRow(i)}
                           disabled={fields.length === 1}
                           disabledReason={translate(
                             'At least one component limit is required',
                           )}
-                          iconNode={<TrashIcon weight="bold" />}
                         />
                       </td>
                     </tr>

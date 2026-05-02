@@ -1,6 +1,6 @@
 import { LightbulbFilamentIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
 
@@ -9,11 +9,11 @@ import { getNameFieldValidators } from '@/core/validators';
 import { FormGroup, StringField } from '@/form';
 import { translate } from '@/i18n';
 import { orderFormAttributesSelector } from '@/marketplace/deploy/selectors';
-import { showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 
 const ResourceNameField = (props) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
   const project = props.project;
   const attributes = useSelector(orderFormAttributesSelector);
   const { mutate: suggestName, isPending: isLoading } = useMutation({
@@ -31,7 +31,7 @@ const ResourceNameField = (props) => {
       );
     },
     onError: (error) => {
-      dispatch(showErrorResponse(error as any));
+      showErrorResponse(error as any);
     },
   });
 

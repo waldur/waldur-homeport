@@ -1,6 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   OnboardingJustification,
   OnboardingVerification,
@@ -9,13 +8,13 @@ import {
 
 import { OnboardingJustificationDetails } from '@/administration/organizations/OnboardingJustificationDetails';
 import { translate } from '@/i18n';
-import { showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 export const UserOnboardingJustificationDetailsPage = () => {
   const {
     params: { uuid },
   } = useCurrentStateAndParams();
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
   const [justification, setJustification] =
     useState<OnboardingJustification>(null);
   const [verification, setVerification] =
@@ -40,16 +39,14 @@ export const UserOnboardingJustificationDetailsPage = () => {
         setJustification(null);
       }
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to load verification details.'),
-        ),
+      showErrorResponse(
+        error,
+        translate('Unable to load verification details.'),
       );
     } finally {
       setLoading(false);
     }
-  }, [uuid, dispatch]);
+  }, [uuid]);
 
   useEffect(() => {
     loadData();

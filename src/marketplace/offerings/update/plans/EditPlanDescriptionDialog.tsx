@@ -1,15 +1,12 @@
+import { FORM_ERROR } from 'final-form';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
-import {
-  marketplacePlansUpdate,
-  ProviderPlanDetailsRequest,
-} from 'waldur-js-client';
+import { marketplacePlansUpdate } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { formatPlan } from '../../store/utils';
 
@@ -27,31 +24,27 @@ interface EditPlanDescriptionDialogProps {
 export const EditPlanDescriptionDialog: FC<EditPlanDescriptionDialogProps> = ({
   resolve,
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   const initialValues = {
     ...resolve.plan,
     unit: getBillingPeriods().find(({ value }) => value === resolve.plan.unit),
   };
 
-  const onSubmit = async (formData) => {
-    try {
-      await marketplacePlansUpdate({
+  const updatePlanMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplacePlansUpdate({
         path: { uuid: resolve.plan.uuid },
-        body: formatPlan(formData) as ProviderPlanDetailsRequest,
-      });
-      showSuccess(translate('Plan has been updated successfully.'));
-      await resolve.refetch();
-      closeDialog();
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to update plan.'));
-    }
-  };
+        body: formatPlan(formData),
+      }).catch((error) => ({
+        [FORM_ERROR]: error.message,
+      })),
+    successMessage: translate('Plan has been updated successfully.'),
+    errorMessage: translate('Unable to update plan.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => updatePlanMutation.mutateAsync(values)}
       initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

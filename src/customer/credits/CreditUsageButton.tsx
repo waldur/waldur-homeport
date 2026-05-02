@@ -1,11 +1,10 @@
 import { AddressBookIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const CreditUsageDialog = lazyComponent(() =>
   import('./CreditUsageDialog').then((module) => ({
@@ -14,23 +13,21 @@ const CreditUsageDialog = lazyComponent(() =>
 );
 
 export const CreditUsageButton = ({ row, scope }) => {
-  const dispatch = useDispatch();
+  const { openDialog: openModal } = useModal();
   const openDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(CreditUsageDialog, {
-          size: 'xl',
-          creditUuid: row.uuid,
-          ...(row?.project_uuid
-            ? { projectUuid: row.project_uuid, projectName: row.project_name }
-            : {
-                customerUuid: row.customer_uuid,
-                customerName: row.customer_name,
-              }),
-          scope,
-        }),
-      ),
-    [dispatch, row],
+      openModal(CreditUsageDialog, {
+        size: 'xl',
+        creditUuid: row.uuid,
+        ...(row?.project_uuid
+          ? { projectUuid: row.project_uuid, projectName: row.project_name }
+          : {
+              customerUuid: row.customer_uuid,
+              customerName: row.customer_name,
+            }),
+        scope,
+      }),
+    [row],
   );
   return (
     <Dropdown.Item as="button" onClick={openDialog}>

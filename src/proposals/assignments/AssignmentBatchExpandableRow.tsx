@@ -1,7 +1,6 @@
 import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   assignmentBatchesRetrieve,
   assignmentItemsForceUnblock,
@@ -13,7 +12,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -103,7 +102,7 @@ const createClientPaginatedFetcher =
 export const AssignmentBatchExpandableRow: FC<
   AssignmentBatchExpandableRowProps
 > = ({ row }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const queryClient = useQueryClient();
 
   const { data: batch, isLoading } = useQuery({
@@ -123,7 +122,7 @@ export const AssignmentBatchExpandableRow: FC<
 
   const fetchData = useMemo(
     () => createClientPaginatedFetcher(batch?.items || []),
-    [batch?.items],
+    [],
   );
 
   const tableProps = useTable({
@@ -133,29 +132,27 @@ export const AssignmentBatchExpandableRow: FC<
 
   const handleForceUnblock = useCallback(
     (item: { uuid: string; proposal_name?: string }) => {
-      dispatch(
-        openModalDialog(StaffOverrideDialog, {
-          resolve: {
-            onSubmit: (reason: string) =>
-              assignmentItemsForceUnblock({
-                path: { uuid: item.uuid },
-                body: { override_reason: reason },
-              }),
-            title: translate('Force unblock assignment'),
-            description: translate(
-              'This assignment item is blocked due to a conflict of interest. Forcing an unblock will allow the reviewer to proceed with reviewing the proposal "{proposal}". A reason is required for audit purposes.',
-              { proposal: item.proposal_name || '' },
-            ),
-            successMessage: translate('Assignment item unblocked.'),
-            errorMessage: translate('Failed to unblock assignment item.'),
-            submitLabel: translate('Force unblock'),
-            fetch: refetchBatch,
-          },
-          size: 'lg',
-        }),
-      );
+      openDialog(StaffOverrideDialog, {
+        resolve: {
+          onSubmit: (reason: string) =>
+            assignmentItemsForceUnblock({
+              path: { uuid: item.uuid },
+              body: { override_reason: reason },
+            }),
+          title: translate('Force unblock assignment'),
+          description: translate(
+            'This assignment item is blocked due to a conflict of interest. Forcing an unblock will allow the reviewer to proceed with reviewing the proposal "{proposal}". A reason is required for audit purposes.',
+            { proposal: item.proposal_name || '' },
+          ),
+          successMessage: translate('Assignment item unblocked.'),
+          errorMessage: translate('Failed to unblock assignment item.'),
+          submitLabel: translate('Force unblock'),
+          fetch: refetchBatch,
+        },
+        size: 'lg',
+      });
     },
-    [dispatch, refetchBatch],
+    [refetchBatch],
   );
 
   if (isLoading) {

@@ -1,9 +1,8 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 const DetailsOverviewDialog = lazyComponent(() =>
@@ -25,7 +24,7 @@ export const DetailsOverviewButton = ({
   project,
   className = undefined,
 }: OwnProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionButton
       variant="tertiary"
@@ -33,14 +32,12 @@ export const DetailsOverviewButton = ({
       disabled={!offering}
       disabledReason={translate('Offering information is not available')}
       action={() =>
-        dispatch(
-          openModalDialog(DetailsOverviewDialog, {
-            offering,
-            customer,
-            project,
-            size: 'lg',
-          }),
-        )
+        openDialog(DetailsOverviewDialog, {
+          offering,
+          customer,
+          project,
+          size: 'lg',
+        })
       }
       iconNode={<EyeIcon weight="bold" />}
       title={translate('More details')}

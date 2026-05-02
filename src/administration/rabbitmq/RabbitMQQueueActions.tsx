@@ -1,12 +1,10 @@
 import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showError, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 import { TableDropdownToggle } from '@/table/ActionsDropdown';
 
 import {
@@ -24,59 +22,25 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
   vhost,
   queue,
 }) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
+  const { showSuccess } = useNotify();
 
-  const purgeMutation = useMutation({
+  const { mutate: handlePurge, isPending: isPurging } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
     mutationFn: () => purgeRabbitMQQueues({ vhost, queue_name: queue.name }),
-    onSuccess: (data) => {
-      dispatch(
-        showSuccess(
-          translate('Purged {count} messages from queue', {
-            count: data.purged_messages.toLocaleString(),
-          }),
-        ),
-      );
-      queryClient.invalidateQueries({ queryKey: ['RabbitMQStats'] });
-    },
-    onError: (error) => {
-      dispatch(
-        showError(
-          translate('Failed to purge queue: {error}', {
-            error: error instanceof Error ? error.message : String(error),
-          }),
-        ),
+    onSuccess: (data: any) => {
+      showSuccess(
+        translate('Purged {count} messages from queue', {
+          count: data.purged_messages.toLocaleString(),
+        }),
       );
     },
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: () =>
-      deleteRabbitMQQueues({
-        vhost,
-        queue_name: queue.name,
-        delete_queue: true,
-      }),
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Queue deleted successfully')));
-      queryClient.invalidateQueries({ queryKey: ['RabbitMQStats'] });
-    },
-    onError: (error) => {
-      dispatch(
-        showError(
-          translate('Failed to delete queue: {error}', {
-            error: error instanceof Error ? error.message : String(error),
-          }),
-        ),
-      );
-    },
-  });
-
-  const handlePurge = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Purge queue'),
+    invalidateQueries: [{ queryKey: ['RabbitMQStats'] }],
+    confirmation: {
+      title: translate('Purge queue'),
+      body: (
         <>
           <p>{translate('Are you sure you want to purge this queue?')}</p>
           <p>
@@ -89,23 +53,31 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
           <p className="text-danger mb-0">
             {translate('This action cannot be undone.')}
           </p>
-        </>,
-        {
-          forDeletion: true,
-          positiveButton: translate('Purge queue'),
-        },
-      );
-      purgeMutation.mutate();
-    } catch {
-      // User cancelled
-    }
-  }, [dispatch, queue, purgeMutation]);
+        </>
+      ),
+      options: {
+        forDeletion: true,
+        positiveButton: translate('Purge queue'),
+      },
+    },
+  });
 
-  const handleDelete = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Delete queue'),
+  const { mutate: handleDelete, isPending: isDeleting } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      deleteRabbitMQQueues({
+        vhost,
+        queue_name: queue.name,
+        delete_queue: true,
+      }),
+    successMessage: translate('Queue deleted successfully'),
+    invalidateQueries: [{ queryKey: ['RabbitMQStats'] }],
+    confirmation: {
+      title: translate('Delete queue'),
+      body: (
         <>
           <p className="text-danger fw-bold">
             {translate('Are you sure you want to DELETE this queue entirely?')}
@@ -125,30 +97,27 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
               'This will permanently remove the queue and all its messages. Connected consumers will be disconnected.',
             )}
           </p>
-        </>,
-        {
-          forDeletion: true,
-          positiveButton: translate('Delete queue'),
-        },
-      );
-      deleteMutation.mutate();
-    } catch {
-      // User cancelled
-    }
-  }, [dispatch, queue, deleteMutation]);
+        </>
+      ),
+      options: {
+        forDeletion: true,
+        positiveButton: translate('Delete queue'),
+      },
+    },
+  });
 
-  const isPending = purgeMutation.isPending || deleteMutation.isPending;
+  const isPending = isPurging || isDeleting;
 
   return (
     <Dropdown>
       <TableDropdownToggle disabled={isPending} />
       <Dropdown.Menu>
-        <Dropdown.Item onClick={handlePurge}>
+        <Dropdown.Item onClick={() => handlePurge()}>
           <EraserIcon size={18} weight="bold" className="me-2" />
           {translate('Purge messages')}
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item onClick={handleDelete} className="text-danger">
+        <Dropdown.Item onClick={() => handleDelete()} className="text-danger">
           <TrashIcon size={18} weight="bold" className="me-2" />
           {translate('Delete queue')}
         </Dropdown.Item>

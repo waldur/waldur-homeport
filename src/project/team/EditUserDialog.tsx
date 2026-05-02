@@ -1,4 +1,4 @@
-import { useCallback, FC } from 'react';
+import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
@@ -11,11 +11,10 @@ import {
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { GenericPermission, Role } from '@/permissions/types';
 import { getProjectRoles } from '@/permissions/utils';
-import { useNotify } from '@/store/hooks';
 import { getProject } from '@/workspace/selectors';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
@@ -76,8 +75,6 @@ const savePermissions = async (
 };
 
 export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
   const currentProject = useSelector(getProject);
 
   const project = resolve.project || currentProject;
@@ -89,21 +86,19 @@ export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
     expiration_time: resolve.permission.expiration_time,
   };
 
-  const saveUser = useCallback(
-    async (formData: EditUserDialogFormData) => {
-      try {
-        await savePermissions(project, formData, resolve);
-        showSuccess(translate('Permission has been updated.'));
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to update permission.'));
-      }
+  const saveUserMutation = useManagedMutation<any, any, EditUserDialogFormData>(
+    {
+      mutationFn: (formData) => savePermissions(project, formData, resolve),
+      successMessage: translate('Permission has been updated.'),
+      errorMessage: translate('Unable to update permission.'),
     },
-    [project, resolve, showSuccess, showErrorResponse, closeDialog],
   );
 
   return (
-    <Form onSubmit={saveUser} initialValues={initialValues}>
+    <Form<EditUserDialogFormData>
+      onSubmit={(values) => saveUserMutation.mutateAsync(values)}
+      initialValues={initialValues}
+    >
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

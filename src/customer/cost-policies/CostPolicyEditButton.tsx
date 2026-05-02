@@ -1,6 +1,5 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceCustomerEstimatedCostPoliciesUpdate,
   MarketplaceCustomerEstimatedCostPoliciesUpdateData,
@@ -11,7 +10,7 @@ import { Project } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { Customer } from '@/workspace/types';
 
@@ -80,48 +79,46 @@ export const CostPolicyEditButton = ({
   refetch,
   type,
 }: CostPolicyEditButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog, closeDialog } = useModal();
   const openCostPolicyEditDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(CostPolicyFormDialog, {
-          size: 'lg',
-          formId: 'CostPolicyEditForm',
-          submitFn: (formData) => {
-            return submit(row.uuid, formData, type).then(() => {
-              dispatch(closeModalDialog());
-              refetch();
-            });
-          },
-          type,
-          initialValues: {
-            scope: [
-              {
-                name: row.scope_name,
-                uuid: row.scope_uuid,
-                url: row.scope,
-                ...(type === 'project'
-                  ? {
-                      billing_price_estimate: row.billing_price_estimate,
-                      project_credit: row.project_credit,
-                    }
-                  : {
-                      billing_price_estimate: row.billing_price_estimate,
-                      customer_credit: row.customer_credit,
-                    }),
-              },
-            ],
+      openDialog(CostPolicyFormDialog, {
+        size: 'lg',
+        formId: 'CostPolicyEditForm',
+        submitFn: (formData) => {
+          return submit(row.uuid, formData, type).then(() => {
+            closeDialog();
+            refetch();
+          });
+        },
+        type,
+        initialValues: {
+          scope: [
+            {
+              name: row.scope_name,
+              uuid: row.scope_uuid,
+              url: row.scope,
+              ...(type === 'project'
+                ? {
+                    billing_price_estimate: row.billing_price_estimate,
+                    project_credit: row.project_credit,
+                  }
+                : {
+                    billing_price_estimate: row.billing_price_estimate,
+                    customer_credit: row.customer_credit,
+                  }),
+            },
+          ],
 
-            actions: getCostPolicyActionOptions(type).find(
-              (option) => option.value === row.actions,
-            ),
-            limit_cost: row.limit_cost,
-            period: row.period,
-            options: row.options,
-          },
-        }),
-      ),
-    [dispatch],
+          actions: getCostPolicyActionOptions(type).find(
+            (option) => option.value === row.actions,
+          ),
+          limit_cost: row.limit_cost,
+          period: row.period,
+          options: row.options,
+        },
+      }),
+    [],
   );
 
   return (

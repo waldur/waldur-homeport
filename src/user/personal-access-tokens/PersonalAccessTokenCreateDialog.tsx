@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   personalAccessTokensCreate,
   personalAccessTokensAvailableScopesList,
@@ -8,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { PermissionOptions } from '@/administration/roles/PermissionOptions';
+import { lazyComponent } from '@/core/lazyComponent';
 import { required } from '@/core/validators';
 import { DateField } from '@/form/DateField';
 import { SelectField } from '@/form/SelectField';
@@ -15,11 +15,15 @@ import { StringField } from '@/form/StringField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
-import { personalAccessTokenSecretDialog } from './secretActions';
+const PersonalAccessTokenSecretDialog = lazyComponent(() =>
+  import('./PersonalAccessTokenSecretDialog').then((module) => ({
+    default: module.PersonalAccessTokenSecretDialog,
+  })),
+);
 
 interface PersonalAccessTokenCreateDialogProps {
   resolve: {
@@ -30,9 +34,8 @@ interface PersonalAccessTokenCreateDialogProps {
 export const PersonalAccessTokenCreateDialog: React.FC<
   PersonalAccessTokenCreateDialogProps
 > = ({ resolve: { refetch } }) => {
-  const dispatch = useDispatch();
   const { showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
+  const { openDialog, closeDialog } = useModal();
 
   const [availableScopes, setAvailableScopes] = useState<Set<string>>();
 
@@ -71,12 +74,15 @@ export const PersonalAccessTokenCreateDialog: React.FC<
           await refetch();
         }
         closeDialog();
-        dispatch(personalAccessTokenSecretDialog(created.token, created.name));
+        openDialog(PersonalAccessTokenSecretDialog, {
+          size: 'lg',
+          resolve: { token: created.token, tokenName: created.name },
+        });
       } catch (e) {
         showErrorResponse(e, translate('Unable to create token.'));
       }
     },
-    [dispatch, showErrorResponse, closeDialog, refetch],
+    [showErrorResponse, openDialog, closeDialog, refetch],
   );
 
   return (

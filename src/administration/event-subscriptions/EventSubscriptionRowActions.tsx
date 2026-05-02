@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { EventSubscription, eventSubscriptionsDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
-import { useInvalidateEventSubscriptions } from './utils';
+import { EVENT_SUBSCRIPTIONS_QUERY_KEY } from './utils';
 
 interface EventSubscriptionRowActionsProps {
   row: EventSubscription;
@@ -16,23 +17,26 @@ const EventSubscriptionDeleteAction: FC<{
   row: EventSubscription;
   refetch: () => void;
 }> = ({ row, refetch }) => {
-  const invalidateEventSubscriptions = useInvalidateEventSubscriptions();
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => eventSubscriptionsDestroy({ path: { uuid: row.uuid } }),
+    refetch,
+    invalidateQueries: [{ queryKey: EVENT_SUBSCRIPTIONS_QUERY_KEY }],
+    confirmation: {
+      title: translate('Delete event subscription'),
+      body: translate(
+        'Are you sure you want to delete this event subscription? External systems will no longer receive notifications.',
+      ),
+      options: {
+        forDeletion: true,
+      },
+    },
+  });
 
   return (
-    <DeleteButton
-      row={row}
-      apiFunction={(r) =>
-        eventSubscriptionsDestroy({
-          path: { uuid: r.uuid },
-        })
-      }
-      refetch={refetch}
-      onSuccess={invalidateEventSubscriptions}
-      confirmTitle={translate('Delete event subscription')}
-      confirmMessage={translate(
-        'Are you sure you want to delete this event subscription? External systems will no longer receive notifications.',
-      )}
+    <RemovalActionItem
       title={translate('Delete')}
+      action={mutate}
+      disabled={isPending}
     />
   );
 };

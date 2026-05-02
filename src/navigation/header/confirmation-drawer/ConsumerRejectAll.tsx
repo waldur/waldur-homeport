@@ -1,39 +1,31 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import { marketplaceOrdersRejectByConsumer } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 export const ConsumerRejectAll = ({ orders, refetch }) => {
-  const dispatch = useDispatch();
-  const { mutate, isPending: isLoading } = useMutation({
-    mutationFn: async () => {
-      try {
-        await Promise.all(
-          orders.map((order) =>
-            marketplaceOrdersRejectByConsumer({ path: { uuid: order.uuid } }),
-          ),
-        );
-        await refetch();
-        dispatch(showSuccess(translate('All orders have been rejected.')));
-      } catch (response) {
-        dispatch(
-          showErrorResponse(
-            response,
-            translate('Unable to reject all orders.'),
-          ),
-        );
-      }
+  const batchMutation = useBatchMutation({
+    rows: orders,
+    mutationFn: (order) =>
+      marketplaceOrdersRejectByConsumer({ path: { uuid: order.uuid } }),
+    successMessage: translate('All orders have been rejected.'),
+    errorMessage: translate('Unable to reject all orders.'),
+    refetch,
+    confirmation: {
+      title: translate('Reject all orders'),
+      body: translate('Are you sure you want to reject {count} orders?', {
+        count: orders.length,
+      }),
     },
   });
+
   return (
     <ActionButton
       variant="danger"
-      action={() => mutate()}
-      pending={isLoading}
+      action={() => batchMutation.mutate()}
+      pending={batchMutation.isPending}
       iconNode={<ProhibitIcon weight="bold" />}
       title={translate('Reject all')}
     />

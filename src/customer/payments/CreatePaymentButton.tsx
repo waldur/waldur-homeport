@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-import { getUser } from '@/workspace/selectors';
+import { useModal } from '@/modal/actions';
+import { useUser } from '@/workspace/hooks';
 
 const PaymentCreateDialogContainer = lazyComponent(() =>
   import('@/customer/payments/PaymentCreateDialog').then((module) => ({
@@ -12,18 +10,17 @@ const PaymentCreateDialogContainer = lazyComponent(() =>
   })),
 );
 
-export const CreatePaymentButton = ({ activePaymentProfile }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+export const CreatePaymentButton = ({ activePaymentProfile, refetch }) => {
+  const { openDialog } = useModal();
+  const user = useUser();
   const action = () =>
-    dispatch(
-      openModalDialog(PaymentCreateDialogContainer, {
-        resolve: {
-          profileUrl: activePaymentProfile.url,
-        },
-        size: 'lg',
-      }),
-    );
+    openDialog(PaymentCreateDialogContainer, {
+      resolve: {
+        profileUrl: activePaymentProfile.url,
+        refetch,
+      },
+      size: 'lg',
+    });
   return (
     <AddButton
       action={action}

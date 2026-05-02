@@ -3,7 +3,6 @@ import {
   PencilSimpleIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -13,7 +12,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -42,14 +41,12 @@ const EditFieldDialog = lazyComponent(() =>
 );
 
 export const UserEditRow = (props: RowProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(EditFieldDialog, {
-        resolve: props,
-        size: 'sm',
-      }),
-    );
+    openDialog(EditFieldDialog, {
+      resolve: props,
+      size: 'sm',
+    });
   };
 
   const isEmpty = !props.value;

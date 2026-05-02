@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   CallResourceTemplate,
@@ -12,11 +12,11 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { Call } from '@/proposals/types';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { fetchListStart } from '@/table/actions';
 import { useUser } from '@/workspace/hooks';
 
@@ -24,7 +24,6 @@ export const useProposalDecisionActions = (
   proposal: Proposal,
   refetch: () => void,
 ) => {
-  const dispatch = useDispatch();
   const user = useUser();
 
   const stateIsValid = ['submitted', 'in_review'].includes(proposal.state);
@@ -37,64 +36,51 @@ export const useProposalDecisionActions = (
 
   const canPerformDecisionActions = stateIsValid && hasPermissionForDecision;
 
-  const handleApproveProposal = useCallback(async () => {
-    await waitForConfirmation(
-      dispatch,
-      translate('Confirmation'),
-      translate(
+  const approveProposal = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      proposalProposalsApprove({ path: { uuid: proposal.uuid } }),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
         'Are you sure you want to approve the proposal {name} in state {state}?',
         {
           name: proposal.name,
           state: proposal.state,
         },
       ),
-    );
-    try {
-      await proposalProposalsApprove({ path: { uuid: proposal.uuid } });
-      dispatch(showSuccess(translate('Proposal has been approved.')));
-      refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to approve the proposal.')),
-      );
-    }
-  }, [dispatch, proposal.uuid, proposal.name, proposal.state, refetch]);
+    },
+    successMessage: translate('Proposal has been approved.'),
+    errorMessage: translate('Unable to approve the proposal.'),
+  });
 
-  const handleRejectProposal = useCallback(async () => {
-    try {
-      const reason = await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate('Are you sure you want to reject the proposal: {name}?', {
-          name: proposal.name,
-        }),
-        {
-          showInput: true,
-          inputLabel: translate('Rejection reason'),
-          inputPlaceholder: translate('Enter reason for rejection'),
-          inputRequired: true,
-        },
-      );
-
-      await proposalProposalsReject({
+  const rejectProposal = useManagedMutation<any, any, { input: string }>({
+    mutationFn: (variables) =>
+      proposalProposalsReject({
         path: { uuid: proposal.uuid },
-        body: { allocation_comment: reason.input },
-      });
-
-      dispatch(showSuccess(translate('Proposal has been rejected.')));
-      refetch();
-    } catch (error) {
-      if (!error) return;
-      dispatch(
-        showErrorResponse(error, translate('Unable to reject the proposal.')),
-      );
-    }
-  }, [dispatch, proposal.uuid, proposal.name, refetch]);
+        body: { allocation_comment: variables.input },
+      }),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Are you sure you want to reject the proposal: {name}?', {
+        name: proposal.name,
+      }),
+      options: {
+        showInput: true,
+        inputLabel: translate('Rejection reason'),
+        inputPlaceholder: translate('Enter reason for rejection'),
+        inputRequired: true,
+      },
+    },
+    successMessage: translate('Proposal has been rejected.'),
+    errorMessage: translate('Unable to reject the proposal.'),
+  });
 
   return {
     canPerformDecisionActions,
-    handleApproveProposal,
-    handleRejectProposal,
+    handleApproveProposal: () => approveProposal.mutate(),
+    handleRejectProposal: () => rejectProposal.mutate(),
   };
 };
 
@@ -106,6 +92,8 @@ export const useSubmitProposalResourcesFromTemplates = (
 ) => {
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
+
+  const { showErrorResponse, showSuccess } = useNotify();
 
   const newSelections = useMemo(() => {
     if (!selectedTemplates?.length) return [];
@@ -163,21 +151,17 @@ export const useSubmitProposalResourcesFromTemplates = (
         await sendRequests(addPromises);
         if (showMessages) {
           if (success) {
-            dispatch(
-              showSuccess(translate('Resource requests has been updated.')),
-            );
+            showSuccess(translate('Resource requests has been updated.'));
           }
           if (error) {
-            dispatch(
-              showErrorResponse(error, translate('Something went wrong')),
-            );
+            showErrorResponse(error, translate('Something went wrong'));
           }
         }
         // Refresh table
         dispatch(fetchListStart('ProposalResourcesList'));
       } catch (error) {
         if (showMessages)
-          dispatch(showErrorResponse(error, translate('Something went wrong')));
+          showErrorResponse(error, translate('Something went wrong'));
       }
     },
   });

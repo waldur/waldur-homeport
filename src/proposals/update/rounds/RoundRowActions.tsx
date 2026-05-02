@@ -1,46 +1,13 @@
-import {
-  CalendarIcon,
-  CheckSquareIcon,
-  ListChecksIcon,
-  TrashIcon,
-} from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  proposalProtectedCallsRoundsDestroy,
-  ProtectedRound,
-} from 'waldur-js-client';
+import { FC } from 'react';
+import { ProtectedRound } from 'waldur-js-client';
 
-import { lazyComponent } from '@/core/lazyComponent';
-import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { openModalDialog } from '@/modal/actions';
 import { Call } from '@/proposals/types';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
-const EditRoundSubmissionDialog = lazyComponent(() =>
-  import('@/proposals/round/submission/EditRoundSubmissionDialog').then(
-    (m) => ({
-      default: m.EditRoundSubmissionDialog,
-    }),
-  ),
-);
-
-const EditRoundReviewDialog = lazyComponent(() =>
-  import('@/proposals/round/review/EditRoundReviewDialog').then((m) => ({
-    default: m.EditRoundReviewDialog,
-  })),
-);
-
-const EditRoundAllocationDialog = lazyComponent(() =>
-  import('@/proposals/round/allocation/EditRoundAllocationDialog').then(
-    (m) => ({
-      default: m.EditRoundAllocationDialog,
-    }),
-  ),
-);
+import { EditRoundAllocationAction } from './EditRoundAllocationAction';
+import { EditRoundReviewAction } from './EditRoundReviewAction';
+import { EditRoundSubmissionAction } from './EditRoundSubmissionAction';
+import { RoundDeleteAction } from './RoundDeleteAction';
 
 interface RoundRowActionsProps {
   row: ProtectedRound;
@@ -48,99 +15,13 @@ interface RoundRowActionsProps {
   call: Call;
 }
 
-export const RoundRowActions: FC<RoundRowActionsProps> = ({
-  row,
-  refetch,
-  call,
-}) => {
-  const dispatch = useDispatch();
-
-  const openEditSubmissionDialog = useCallback(() => {
-    dispatch(
-      openModalDialog(EditRoundSubmissionDialog, {
-        resolve: { round: row, call, refetch },
-        size: 'lg',
-      }),
-    );
-  }, [dispatch, row, call, refetch]);
-
-  const openEditReviewDialog = useCallback(() => {
-    dispatch(
-      openModalDialog(EditRoundReviewDialog, {
-        resolve: { round: row, call, refetch },
-        size: 'lg',
-      }),
-    );
-  }, [dispatch, row, call, refetch]);
-
-  const openEditAllocationDialog = useCallback(() => {
-    dispatch(
-      openModalDialog(EditRoundAllocationDialog, {
-        resolve: { round: row, call, refetch },
-        size: 'lg',
-      }),
-    );
-  }, [dispatch, row, call, refetch]);
-
-  const handleDelete = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirm deletion'),
-        translate(
-          'Are you sure you want to delete round "{name}"? This action cannot be undone.',
-          { name: row.name },
-        ),
-      );
-      await proposalProtectedCallsRoundsDestroy({
-        path: {
-          uuid: call.uuid,
-          obj_uuid: row.uuid,
-        },
-      });
-      dispatch(showSuccess(translate('Round has been deleted.')));
-      refetch();
-    } catch (error) {
-      if (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to delete round.')),
-        );
-      }
-    }
-  }, [dispatch, row, call, refetch]);
-
-  const hasProposals = row.proposals?.length > 0;
-
+export const RoundRowActions: FC<RoundRowActionsProps> = (props) => {
   return (
     <ActionsDropdownComponent>
-      <ActionItem
-        title={translate('Edit submission settings')}
-        action={openEditSubmissionDialog}
-        iconNode={<CalendarIcon weight="bold" />}
-      />
-      <ActionItem
-        title={translate('Edit review settings')}
-        action={openEditReviewDialog}
-        iconNode={<CheckSquareIcon weight="bold" />}
-      />
-      <ActionItem
-        title={translate('Edit allocation settings')}
-        action={openEditAllocationDialog}
-        iconNode={<ListChecksIcon weight="bold" />}
-      />
-      <ActionItem
-        title={translate('Delete')}
-        action={handleDelete}
-        iconNode={<TrashIcon weight="bold" />}
-        className="text-danger"
-        iconColor="danger"
-        disabled={hasProposals}
-        tooltip={
-          hasProposals
-            ? translate('Cannot delete a round that has proposals')
-            : undefined
-        }
-      />
+      <EditRoundSubmissionAction {...props} />
+      <EditRoundReviewAction {...props} />
+      <EditRoundAllocationAction {...props} />
+      <RoundDeleteAction {...props} />
     </ActionsDropdownComponent>
   );
 };

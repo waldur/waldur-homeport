@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   proposalProposalsDetachDocuments,
   ProposalDocumentation,
@@ -9,12 +8,12 @@ import {
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { DocumentationFiles } from './DocumentationFiles';
 
 export const UploadDocumentationFiles = (props) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
 
   const handleDrop = (newFiles: File[]) => {
     // Combine existing pending files with new files
@@ -33,15 +32,13 @@ export const UploadDocumentationFiles = (props) => {
       });
     },
     onSuccess: () => {
-      dispatch(showSuccess(translate('Document removed successfully')));
+      showSuccess(translate('Document removed successfully'));
       if (props.refetch) {
         props.refetch();
       }
     },
     onError: (error: any) => {
-      dispatch(
-        showErrorResponse(error, translate('Failed to remove document')),
-      );
+      showErrorResponse(error, translate('Failed to remove document'));
     },
   });
 

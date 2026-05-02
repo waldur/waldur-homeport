@@ -6,10 +6,9 @@ import { customersDestroy } from 'waldur-js-client';
 
 import { FormContainer, SubmitButton, TextField } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentCustomer } from '@/workspace/actions';
 import { Customer } from '@/workspace/types';
 
@@ -28,23 +27,21 @@ export const CustomerRemoveDialog = reduxForm<
   form: DELETE_CUSTOMER_FORM_ID,
 })((props) => {
   const dispatch = useDispatch();
+
   const router = useRouter();
 
-  const callback = async () => {
-    try {
-      await customersDestroy({ path: { uuid: props.resolve.customer.uuid } });
+  const callbackMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      customersDestroy({ path: { uuid: props.resolve.customer.uuid } }),
+    errorMessage: translate('Unable to delete organization.'),
+    onSuccess: async () => {
       await router.stateService.go('organizations');
       dispatch(setCurrentCustomer(null));
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to delete organization.')),
-      );
-    }
-  };
+    },
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(callback)}>
+    <form onSubmit={props.handleSubmit(() => callbackMutation.mutateAsync())}>
       <ModalDialog
         title={translate('Organization removal')}
         subtitle={
@@ -59,7 +56,7 @@ export const CustomerRemoveDialog = reduxForm<
           <>
             <CloseDialogButton className="flex-equal" />
             <SubmitButton
-              submitting={props.submitting}
+              submitting={callbackMutation.isPending}
               variant="danger"
               className="flex-equal"
               label={translate('Delete')}
@@ -67,7 +64,7 @@ export const CustomerRemoveDialog = reduxForm<
           </>
         }
       >
-        <FormContainer submitting={props.submitting}>
+        <FormContainer submitting={callbackMutation.isPending}>
           <TextField
             name="reason"
             label={translate('Reason')}

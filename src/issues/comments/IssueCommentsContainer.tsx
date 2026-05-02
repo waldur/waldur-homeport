@@ -1,23 +1,38 @@
+import { useQuery } from '@tanstack/react-query';
+import { FC } from 'react';
 import { Card } from 'react-bootstrap';
-import { Issue } from 'waldur-js-client';
+import { Issue, supportCommentsList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
+import { RefreshButton } from '@/marketplace/common/RefreshButton';
 
-import { useIssueComments } from './api';
+import { ISSUE_COMMENTS_QUERY_KEY } from './constants';
 import { IssueCommentButton } from './IssueCommentButton';
 import { IssueCommentsContext } from './IssueCommentsContext';
 import { IssueCommentsList } from './IssueCommentsList';
+import { Comment } from './types';
 
 interface IssueCommentsContainerProps {
   issue: Issue;
 }
 
-export const IssueCommentsContainer = ({
+const sortComments = (comments: Comment[]) =>
+  [...comments].sort((a, b) => Date.parse(b.created) - Date.parse(a.created));
+
+export const IssueCommentsContainer: FC<IssueCommentsContainerProps> = ({
   issue,
-}: IssueCommentsContainerProps) => {
-  const { data, isLoading, refetch } = useIssueComments(issue.url);
+}) => {
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: [ISSUE_COMMENTS_QUERY_KEY, issue.url],
+    queryFn: async () => {
+      const response = await supportCommentsList({
+        query: { issue: issue.url },
+      });
+      return sortComments(response.data as Comment[]);
+    },
+    enabled: !!issue.url,
+  });
   const comments = data ?? [];
 
   return (
@@ -26,7 +41,7 @@ export const IssueCommentsContainer = ({
         <Card.Header>
           <Card.Title>
             <span className="me-2">{translate('Comments')}</span>
-            <RefreshButton refetch={refetch} loading={isLoading} />
+            <RefreshButton refetch={refetch} isLoading={isLoading} />
           </Card.Title>
           <div className="card-toolbar">
             <IssueCommentButton />

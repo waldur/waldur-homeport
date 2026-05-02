@@ -1,14 +1,13 @@
 import { ArrowDownIcon } from '@phosphor-icons/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   marketplaceProviderResourcesSetDownscaled,
   Resource,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 interface SetDownscaledActionProps {
@@ -20,36 +19,26 @@ export const SetDownscaledAction = ({
   resource,
   refetch,
 }: SetDownscaledActionProps) => {
-  const dispatch = useDispatch();
   const isStaff = useSelector(isStaffSelector);
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: (downscaled: boolean) =>
+  const { mutate, isPending: isLoading } = useManagedMutation<
+    any,
+    any,
+    boolean
+  >({
+    mutationFn: (downscaled) =>
       marketplaceProviderResourcesSetDownscaled({
         path: { uuid: resource.uuid },
         body: { downscaled },
       }),
-    onSuccess: () => {
-      dispatch(
-        showSuccess(translate('Resource downscaled status has been updated.')),
-      );
-      refetch?.();
-      queryClient.invalidateQueries({ queryKey: ['marketplace-resources'] });
-    },
-    onError: (error) => {
-      dispatch(
-        showErrorResponse(
-          error as any,
-          translate('Unable to update resource downscaled status.'),
-        ),
-      );
-    },
+    invalidateQueries: [{ queryKey: ['marketplace-resources'] }],
+    refetch,
+    successMessage: translate('Resource downscaled status has been updated.'),
+    errorMessage: translate('Unable to update resource downscaled status.'),
   });
 
   const handleToggleDownscaled = () => {
     const newDownscaledState = !resource.downscaled;
-    mutation.mutate(newDownscaledState);
+    mutate(newDownscaledState);
   };
 
   const supportsDownscaling =
@@ -69,7 +58,7 @@ export const SetDownscaledAction = ({
       action={handleToggleDownscaled}
       staff
       iconNode={<ArrowDownIcon weight="bold" />}
-      disabled={mutation.isPending}
+      disabled={isLoading}
     />
   );
 };

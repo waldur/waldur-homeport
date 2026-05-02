@@ -1,9 +1,8 @@
 import { FileCsvIcon, FileXlsIcon, PrinterIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { showInfo } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import exportAs from '@/table/exporters';
 import { ExportData } from '@/table/exporters/types';
 
@@ -54,8 +53,6 @@ export const EChartActions: FC<EChartActionsProps> = ({
   chartInstance,
   ...props
 }) => {
-  const dispatch = useDispatch();
-
   const makePdf = useCallback(() => {
     const imagePng = decodeURIComponent(
       chartInstance.getDataURL({
@@ -68,13 +65,15 @@ export const EChartActions: FC<EChartActionsProps> = ({
     generatePDF(imagePng, props.exportTitle);
   }, [chartInstance]);
 
+  const { showInfo } = useNotify();
+
   const exportData = useCallback(
     (format) => {
       const options = chartInstance.getOption();
       const hasData = options.series[0]?.data?.length;
 
       if (!hasData) {
-        dispatch(showInfo(translate('Chart is empty')));
+        showInfo(translate('Chart is empty'));
         return;
       }
 
@@ -96,7 +95,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
 
       exportAs(format, props.exportTitle, exportData);
     },
-    [chartInstance],
+    [chartInstance, showInfo],
   );
 
   return (

@@ -1,13 +1,12 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { CeleryTask } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -43,12 +42,12 @@ const formatDuration = (startTime: number | null): string => {
 };
 
 const CopyButton = ({ value }: { value: string }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
   const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(value).then(() => {
-      dispatch(showSuccess(translate('Copied to clipboard')));
+      showSuccess(translate('Copied to clipboard'));
     });
-  }, [dispatch, value]);
+  }, [value]);
 
   return (
     <button

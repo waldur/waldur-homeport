@@ -1,41 +1,34 @@
 import { BellIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { UserAction, userActionsUnsilence } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 export const UnsilenceAction: FC<{ row: UserAction; refetch?: () => void }> = ({
   row,
   refetch,
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
 
   const handleUnsilence = async () => {
     try {
       await userActionsUnsilence({
         path: { uuid: row.uuid as any },
       });
-      dispatch(
-        showSuccess(translate('Action has been unsilenced successfully.')),
-      );
+      showSuccess(translate('Action has been unsilenced successfully.'));
       if (refetch) {
         refetch();
       }
     } catch (e) {
       if (e.response?.status === 404) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Action not found or no longer available.'),
-          ),
+        showErrorResponse(
+          e,
+          translate('Action not found or no longer available.'),
         );
       } else {
-        dispatch(
-          showErrorResponse(e, translate('Unable to unsilence action.')),
-        );
+        showErrorResponse(e, translate('Unable to unsilence action.'));
       }
     }
   };

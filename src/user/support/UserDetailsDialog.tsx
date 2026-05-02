@@ -1,7 +1,6 @@
 import { UserGearIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -16,7 +15,7 @@ import { DataAccessDialogContent } from '@/user/data-access/DataAccessDialogCont
 import { KeysList } from '@/user/keys/KeysList';
 import { UserDetailsTable } from '@/user/support/UserDetailsTable';
 import { UserOfferingList } from '@/user/UserOfferingList';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
@@ -34,7 +33,7 @@ interface UserDetailsDialogProps {
 export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
   resolve: { user, loading, error, refetch },
 }) => {
-  const currentUser = useSelector(getUser) as User;
+  const currentUser = useUser() as User;
   return (
     <ModalDialog
       title={translate('User details of {fullName}', {

@@ -1,9 +1,10 @@
-import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { Form } from 'react-bootstrap';
 import { BaseFieldArrayProps, FieldArray, FormSection } from 'redux-form';
 
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { StringField } from './StringField';
 
@@ -38,11 +39,7 @@ const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
                         <StringField name="external_ip" />
                       </td>
                       <td>
-                        <ActionButton
-                          action={() => removeRow(i)}
-                          iconNode={<TrashIcon weight="bold" />}
-                          variant="danger"
-                        />
+                        <RemovalActionButton action={() => removeRow(i)} />
                       </td>
                     </tr>
                   </FormSection>

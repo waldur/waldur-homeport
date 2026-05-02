@@ -10,7 +10,8 @@ import {
   supportAttachmentsDestroy,
 } from 'waldur-js-client';
 
-import { showError, showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
+import store from '@/store/store';
 
 import {
   useIssueAttachments,
@@ -25,10 +26,13 @@ vi.mock('waldur-js-client', () => ({
   supportAttachmentsDestroy: vi.fn(),
 }));
 
-// Mock store notify
+// Mock store hooks
 vi.mock('@/store/notify', () => ({
-  showError: vi.fn(() => ({ type: 'SHOW_ERROR' })),
-  showErrorResponse: vi.fn(() => ({ type: 'SHOW_ERROR_RESPONSE' })),
+  useNotify: vi.fn().mockReturnValue({
+    showError: vi.fn(),
+    showErrorResponse: vi.fn(),
+    showSuccess: vi.fn(),
+  }),
 }));
 
 // Mock store
@@ -202,6 +206,7 @@ describe('Issue Attachments API Hooks', () => {
     it('handles upload errors', async () => {
       const error = new Error('Upload failed');
       vi.mocked(supportAttachmentsCreate).mockRejectedValue(error);
+      const { showErrorResponse } = useNotify();
 
       const { result } = renderHook(() => useUploadAttachments(mockIssue.url), {
         wrapper: createWrapper(),
@@ -220,6 +225,7 @@ describe('Issue Attachments API Hooks', () => {
         error,
         'Unable to upload attachment.',
       );
+      expect(store.dispatch).not.toHaveBeenCalled(); // useNotify functions are self-dispatching
     });
 
     it('retries failed uploads', async () => {
@@ -301,6 +307,7 @@ describe('Issue Attachments API Hooks', () => {
       const { result } = renderHook(() => useUploadAttachments(mockIssue.url), {
         wrapper: createWrapper(),
       });
+      const { showError } = useNotify();
 
       const exeFile = new File(['content'], 'malware.exe', {
         type: 'application/x-msdownload',
@@ -310,8 +317,10 @@ describe('Issue Attachments API Hooks', () => {
         await result.current.upload([exeFile]);
       });
 
-      expect(showError).toHaveBeenCalled();
-      expect(supportAttachmentsCreate).not.toHaveBeenCalled();
+      expect(showError).toHaveBeenCalledWith(
+        'File: malware.exe. \n Restricted, because of type.',
+      );
+      expect(store.dispatch).not.toHaveBeenCalled();
     });
 
     it('uploads multiple files in parallel', async () => {
@@ -393,6 +402,7 @@ describe('Issue Attachments API Hooks', () => {
     it('shows error on delete failure', async () => {
       const error = new Error('Delete failed');
       vi.mocked(supportAttachmentsDestroy).mockRejectedValue(error);
+      const { showErrorResponse } = useNotify();
 
       const { result } = renderHook(() => useDeleteAttachment(mockIssue.url), {
         wrapper: createWrapper(),

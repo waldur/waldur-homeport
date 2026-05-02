@@ -2,7 +2,7 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionButton } from '@/table/ActionButton';
 import { CompactActionButton } from '@/table/CompactActionButton';
@@ -54,10 +54,9 @@ export function EditModalButton<
   buttonSize = 'sm',
   renderAs = 'action-item',
 }: EditModalButtonProps<TRow, TResolve>) {
-  const { openDialog } = useModal();
-
   const finalResolve = buildResolve ? buildResolve(row) : resolve;
   const initialValues = getInitialValues ? getInitialValues(row) : undefined;
+  const { openDialog } = useModal();
 
   const handleClick = useCallback(() => {
     openDialog(dialog, {

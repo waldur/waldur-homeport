@@ -1,4 +1,3 @@
-import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { rancherCatalogsCreate } from 'waldur-js-client';
@@ -6,9 +5,8 @@ import { rancherCatalogsCreate } from 'waldur-js-client';
 import { StringField, TextField, SecretField } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialog } from '@/modal/ActionDialog';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Resource } from '@/resource/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { createEntity } from '@/table/actions';
 
 interface FormData {
@@ -27,35 +25,27 @@ interface OwnProps {
 }
 
 const useCatalogCreateDialog = (cluster) => {
-  const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch();
-  const callback = useCallback(
-    async (formData) => {
-      try {
-        setSubmitting(true);
-        const response = await rancherCatalogsCreate({
-          body: {
-            scope: cluster.url,
-            ...formData,
-          },
-        });
-        const catalog = response.data;
-        dispatch(createEntity('rancher-catalogs', catalog.uuid, catalog));
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to create catalog.')),
-        );
-        setSubmitting(false);
-        return;
-      }
-      dispatch(showSuccess(translate('Catalog has been created.')));
-      dispatch(closeModalDialog());
+
+  const createCatalogMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      rancherCatalogsCreate({
+        body: {
+          scope: cluster.url,
+          ...formData,
+        },
+      }),
+    successMessage: translate('Catalog has been created.'),
+    errorMessage: translate('Unable to create catalog.'),
+    onSuccess: (response: any) => {
+      const catalog = response.data;
+      dispatch(createEntity('rancher-catalogs', catalog.uuid, catalog));
     },
-    [dispatch, cluster],
-  );
+  });
+
   return {
-    submitting,
-    createCatalog: callback,
+    submitting: createCatalogMutation.isPending,
+    createCatalog: (formData) => createCatalogMutation.mutateAsync(formData),
   };
 };
 

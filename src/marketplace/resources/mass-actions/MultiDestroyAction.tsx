@@ -1,18 +1,16 @@
 import { XIcon } from '@phosphor-icons/react';
-import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useMemo } from 'react';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
-import { waitForConfirmation } from '@/modal/actions';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
 export const MultiDestroyAction = ({ rows, refetch }) => {
-  const dispatch = useDispatch();
   const user = useUser();
 
   const permittedResources = useMemo(
@@ -32,27 +30,25 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
     [rows, user],
   );
 
-  const callback = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Perform mass action'),
-        translate('Are you sure you want to destroy {count} resources?', {
-          count: permittedResources.length,
-        }),
-      );
-    } catch {
-      return;
-    }
-
-    Promise.all(
-      permittedResources.map((resource) =>
-        marketplaceResourcesTerminate({ path: { uuid: resource.uuid } }),
-      ),
-    ).then(() => {
-      refetch();
-    });
-  }, [dispatch, permittedResources, refetch]);
+  const { mutate, isPending } = useBatchMutation<any, void>({
+    rows: permittedResources,
+    refetch,
+    mutationFn: (resource) =>
+      marketplaceResourcesTerminate({ path: { uuid: resource.uuid } }),
+    successMessage: translate('Resources have been destroyed.'),
+    renderPartialSuccessMessage: (n) =>
+      translate('{n} resources have been destroyed.', { n }),
+    errorMessage: translate('Unable to destroy resources.'),
+    renderErrorMessage: (n) =>
+      translate('{n} resources could not be destroyed.', { n }),
+    confirmation: {
+      title: translate('Destroy resources'),
+      body: translate('Are you sure you want to destroy {count} resources?', {
+        count: permittedResources.length,
+      }),
+      options: { forDeletion: true },
+    },
+  });
 
   if (permittedResources.length === 0) {
     return null;
@@ -61,8 +57,8 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
   return (
     <ActionItem
       title={translate('Destroy')}
-      action={callback}
-      disabled={permittedResources.length !== rows.length}
+      action={mutate}
+      disabled={permittedResources.length !== rows.length || isPending}
       iconNode={<XIcon weight="bold" />}
       iconColor="danger"
       className="text-danger"

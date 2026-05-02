@@ -1,4 +1,4 @@
-import { useCallback, FC } from 'react';
+import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
@@ -11,13 +11,12 @@ import {
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Role } from '@/permissions/types';
 import { getCustomerRoles } from '@/permissions/utils';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@/project/team/RoleGroup';
-import { useNotify } from '@/store/hooks';
 import { getCustomer } from '@/workspace/selectors';
 import { Customer } from '@/workspace/types';
 
@@ -76,8 +75,6 @@ const savePermissions = async (
 };
 
 export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
   const currentCustomer = useSelector(getCustomer);
 
   const initialValues = {
@@ -87,21 +84,18 @@ export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
     expiration_time: resolve.customer.expiration_time,
   };
 
-  const saveUser = useCallback(
-    async (formData: EditUserDialogFormData) => {
-      try {
-        await savePermissions(currentCustomer, formData, resolve);
-        showSuccess(translate('Permission has been updated.'));
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to update permission.'));
-      }
-    },
-    [currentCustomer, resolve, showSuccess, showErrorResponse, closeDialog],
-  );
+  const updateMutation = useManagedMutation<any, any, EditUserDialogFormData>({
+    mutationFn: (formData) =>
+      savePermissions(currentCustomer, formData, resolve),
+    successMessage: translate('Permission has been updated.'),
+    errorMessage: translate('Unable to update permission.'),
+  });
 
   return (
-    <Form onSubmit={saveUser} initialValues={initialValues}>
+    <Form<EditUserDialogFormData>
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
+      initialValues={initialValues}
+    >
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

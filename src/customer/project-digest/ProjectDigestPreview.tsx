@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ProjectDigestPreviewResponse } from 'waldur-js-client';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { getCustomer } from '@/workspace/selectors';
 
 import { useCustomerProjects } from '../workspace/fetchCustomer';
@@ -23,16 +23,13 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
   customerUuid,
 }) => {
   const customer = useSelector(getCustomer);
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
   const { loading: projectsLoading } = useCustomerProjects();
   const [preview, setPreview] = useState<ProjectDigestPreviewResponse | null>(
     null,
   );
 
-  const projects = useMemo(
-    () => customer?.projects ?? [],
-    [customer?.projects],
-  );
+  const projects = useMemo(() => customer?.projects ?? [], []);
 
   const {
     mutate: loadPreview,
@@ -46,11 +43,9 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
     },
     onError: (error) => {
       setPreview(null);
-      dispatch(
-        showErrorResponse(
-          error as any,
-          translate('Unable to load digest preview.'),
-        ),
+      showErrorResponse(
+        error as any,
+        translate('Unable to load digest preview.'),
       );
     },
   });

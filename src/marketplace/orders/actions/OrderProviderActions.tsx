@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ApproveByProviderButton } from './ApproveByProviderButton';
 import { OrderUnlinkButton } from './OrderUnlinkButton';
@@ -21,7 +20,7 @@ export const OrderProviderActions = ({
   size,
   labeledDropdown,
 }: OrderActionProps) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   if (order.state !== 'pending-provider') {
     return null;

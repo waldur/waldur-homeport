@@ -1,17 +1,16 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
-import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { translate } from '@/i18n/translate';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 export const ProjectEditAction = ({ project }: { project: Project }) => {
   const router = useRouter();
-  const user = useSelector(getUser);
+  const user = useUser();
 
   if (
     !hasPermission(user, {

@@ -1,6 +1,6 @@
 import { GraduationCapIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -8,7 +8,7 @@ import { hasManageCourseAccountPermission } from '@/customer/team/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { InvitationsFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 const CourseAccountFormDialog = lazyComponent(() =>
@@ -29,13 +29,11 @@ export const CourseAccountCreateButton: FC<{
     canManageCourseAccount &&
     project.kind === 'course';
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(CourseAccountFormDialog, {
-        resolve: { refetch },
-      }),
-    );
+    openDialog(CourseAccountFormDialog, {
+      resolve: { refetch },
+    });
 
   if (!showCourseAccounts) {
     return null;

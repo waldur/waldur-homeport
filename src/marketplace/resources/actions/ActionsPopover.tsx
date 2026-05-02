@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { loadData } from './loadData';
@@ -48,17 +47,15 @@ export const ActionsPopover = ({
     () => Promise.all([refetchParent(), refetchChild()]),
     [refetchParent, refetchChild],
   );
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(ModalActionsDialog, {
-        name,
-        refetch,
-        ActionsList,
-        className: 'resource-actions-modal',
-        ...value,
-      }),
-    );
+    openDialog(ModalActionsDialog, {
+      name,
+      refetch,
+      ActionsList,
+      className: 'resource-actions-modal',
+      ...value,
+    });
   };
 
   return loading ? (

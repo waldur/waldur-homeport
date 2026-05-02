@@ -1,13 +1,12 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-import { showError } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 import { getCustomer, isStaff } from '@/workspace/selectors';
 
 const CustomerRemoveDialog = lazyComponent(() =>
@@ -19,7 +18,9 @@ const CustomerRemoveDialog = lazyComponent(() =>
 export const CustomerRemovePanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const canDeleteCustomer = useSelector(isStaff);
-  const dispatch = useDispatch();
+  const { showError } = useNotify();
+
+  const { openDialog } = useModal();
 
   const removeCustomer = () => {
     const hasProjects = customer.projects_count > 0;
@@ -27,17 +28,15 @@ export const CustomerRemovePanel: FunctionComponent = () => {
       const notification = translate(
         'Before removing organization, please make sure that all projects are removed.',
       );
-      return dispatch(showError(notification));
+      return showError(notification);
     }
     // Show confirmation dialog
-    dispatch(
-      openModalDialog(CustomerRemoveDialog, {
-        resolve: {
-          customer,
-        },
-        size: 'sm',
-      }),
-    );
+    openDialog(CustomerRemoveDialog, {
+      resolve: {
+        customer,
+      },
+      size: 'sm',
+    });
   };
 
   return canDeleteCustomer ? (
@@ -62,11 +61,9 @@ export const CustomerRemovePanel: FunctionComponent = () => {
           <li>{translate('Removed organizations cannot be restored!')}</li>
         </ul>
         <div>
-          <ActionButton
+          <RemovalActionButton
             action={removeCustomer}
-            variant="danger"
             title={translate('Remove organization')}
-            iconNode={<TrashIcon weight="bold" />}
           />
         </div>
       </Card.Body>

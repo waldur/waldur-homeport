@@ -1,24 +1,29 @@
 import { useEffect, FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openIssueCreateDialog } from '@/issues/create/actions';
+import { ISSUE_CREATION_FORM_ID } from '@/issues/create/constants';
 import { ISSUE_IDS } from '@/issues/types/constants';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+
+const IssueCreateDialog = lazyComponent(() =>
+  import('@/issues/create/IssueCreateDialog').then((module) => ({
+    default: module.IssueCreateDialog,
+  })),
+);
 
 export const RequestLimitsChangeDialog: FunctionComponent<{
   resolve: { resource };
 }> = ({ resolve: { resource } }) => {
-  const { closeDialog } = useModal();
-  const dispatch = useDispatch();
+  const { openDialog, closeDialog } = useModal();
   useEffect(() => {
     if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       closeDialog();
-      dispatch(
-        openIssueCreateDialog({
+      openDialog(IssueCreateDialog, {
+        resolve: {
           issue: {
             type: ISSUE_IDS.CHANGE_REQUEST,
             summary: translate('Request change of limits of SLURM allocation'),
@@ -33,10 +38,13 @@ export const RequestLimitsChangeDialog: FunctionComponent<{
             hideTitle: true,
           },
           hideProjectAndResourceFields: true,
-        }),
-      );
+        },
+        dialogClassName: 'modal-dialog-centered mw-650px',
+        formId: ISSUE_CREATION_FORM_ID,
+      });
     }
-  });
+  }, [closeDialog, openDialog, resource]);
+
   return (
     <ModalDialog
       title={translate('Change of limits of SLURM allocation {name}', {

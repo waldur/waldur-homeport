@@ -1,39 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
-  adminArrowSettingsList,
-  adminArrowSettingsDestroy,
-  adminArrowSettingsPartialUpdate,
-  adminArrowSettingsValidateCredentials,
-  adminArrowSettingsDiscoverCustomers,
-  adminArrowSettingsSaveSettings,
-  adminArrowCustomerMappingsCreate,
-  adminArrowCustomerMappingsDestroy,
-  adminArrowCustomerMappingsPartialUpdate,
-  adminArrowCustomerMappingsSyncFromArrow,
-  adminArrowCustomerMappingsFetchArrowDataRetrieve,
-  adminArrowCustomerMappingsDiscoverLicensesRetrieve,
-  adminArrowCustomerMappingsLinkResource,
-  adminArrowCustomerMappingsAvailableCustomersRetrieve,
-  adminArrowBillingSyncsTriggerSync,
-  adminArrowBillingSyncsTriggerReconciliation,
-  adminArrowBillingSyncsTriggerConsumptionSync,
-  adminArrowBillingSyncsPauseSync,
-  adminArrowBillingSyncsResumeSync,
-  adminArrowBillingSyncsCleanupConsumption,
-  adminArrowBillingSyncsConsumptionStatusRetrieve,
   adminArrowBillingSyncItemsList,
+  adminArrowBillingSyncsConsumptionStatusRetrieve,
   adminArrowConsumptionRecordsList,
+  adminArrowCustomerMappingsAvailableCustomersRetrieve,
+  adminArrowCustomerMappingsDiscoverLicensesRetrieve,
+  adminArrowCustomerMappingsFetchArrowDataRetrieve,
+  adminArrowSettingsDiscoverCustomers,
+  adminArrowSettingsList,
+  adminArrowSettingsValidateCredentials,
   type ArrowCredentialsRequest,
-  type ArrowCustomerMappingCreateRequest,
-  type PatchedArrowCustomerMappingRequest,
-  type PatchedArrowSettingsRequest,
-  type SyncFromArrowRequestRequest,
   type DiscoverCustomersRequestRequest,
-  type SaveSettingsRequestRequest,
-  type TriggerSyncRequestRequest,
-  type ReconcileRequestRequest,
-  type TriggerConsumptionSyncRequestRequest,
-  type LinkResourceRequestRequest,
 } from 'waldur-js-client';
 
 import { FAST_STALE_TIME, SHORT_STALE_TIME } from '@/core/constants';
@@ -121,40 +98,6 @@ export const useDiscoverLicenses = (mappingUuid: string) =>
     staleTime: SHORT_STALE_TIME,
   });
 
-/** Link a Waldur resource to an Arrow license */
-export const useLinkResource = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: ({
-      mappingUuid,
-      data,
-    }: {
-      mappingUuid: string;
-      data: LinkResourceRequestRequest;
-    }) =>
-      adminArrowCustomerMappingsLinkResource({
-        path: { uuid: mappingUuid },
-        body: data,
-      }),
-    onSuccess: (_, variables) => {
-      // Invalidate discover licenses query to refresh the list
-      queryClient.invalidateQueries({
-        queryKey: [
-          ...arrowQueryKeys.customerBillingSummary(variables.mappingUuid),
-          'discover',
-        ],
-      });
-      // Invalidate the fetch arrow data query as well
-      queryClient.invalidateQueries({
-        queryKey: [
-          ...arrowQueryKeys.customerBillingSummary(variables.mappingUuid),
-          'arrow',
-        ],
-      });
-    },
-  });
-};
-
 /** Fetch billing sync items */
 export const useArrowBillingSyncItems = (billingSyncUuid?: string) =>
   useQuery({
@@ -211,187 +154,5 @@ export const useDiscoverArrowCustomers = () => {
   return useMutation({
     mutationFn: (credentials: DiscoverCustomersRequestRequest) =>
       adminArrowSettingsDiscoverCustomers({ body: credentials }),
-  });
-};
-
-/** Save Arrow settings (setup wizard) */
-export const useSaveArrowSettings = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (data: SaveSettingsRequestRequest) =>
-      adminArrowSettingsSaveSettings({ body: data }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: arrowQueryKeys.all });
-    },
-  });
-};
-
-/** Update Arrow settings */
-export const useUpdateArrowSettings = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: ({
-      uuid,
-      data,
-    }: {
-      uuid: string;
-      data: PatchedArrowSettingsRequest;
-    }) => adminArrowSettingsPartialUpdate({ path: { uuid }, body: data }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: arrowQueryKeys.settings() });
-    },
-  });
-};
-
-/** Delete Arrow settings */
-export const useDeleteArrowSettings = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (uuid: string) => adminArrowSettingsDestroy({ path: { uuid } }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: arrowQueryKeys.all });
-    },
-  });
-};
-
-/** Create customer mapping */
-export const useCreateCustomerMapping = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (data: ArrowCustomerMappingCreateRequest) =>
-      adminArrowCustomerMappingsCreate({ body: data }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.customerMappings(),
-      });
-    },
-  });
-};
-
-/** Update customer mapping */
-export const useUpdateCustomerMapping = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: ({
-      uuid,
-      data,
-    }: {
-      uuid: string;
-      data: PatchedArrowCustomerMappingRequest;
-    }) =>
-      adminArrowCustomerMappingsPartialUpdate({ path: { uuid }, body: data }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.customerMappings(),
-      });
-    },
-  });
-};
-
-/** Delete customer mapping */
-export const useDeleteCustomerMapping = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (uuid: string) =>
-      adminArrowCustomerMappingsDestroy({ path: { uuid } }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.customerMappings(),
-      });
-    },
-  });
-};
-
-/** Sync from Arrow */
-export const useSyncFromArrow = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (data?: SyncFromArrowRequestRequest) =>
-      adminArrowCustomerMappingsSyncFromArrow({ body: data }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.customerMappings(),
-      });
-    },
-  });
-};
-
-/** Trigger billing sync */
-export const useTriggerBillingSync = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (data: TriggerSyncRequestRequest) =>
-      adminArrowBillingSyncsTriggerSync({ body: data }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.billingSyncs(),
-      });
-    },
-  });
-};
-
-/** Trigger reconciliation */
-export const useTriggerReconciliation = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (data: ReconcileRequestRequest) =>
-      adminArrowBillingSyncsTriggerReconciliation({ body: data }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.billingSyncs(),
-      });
-    },
-  });
-};
-
-/** Trigger consumption sync */
-export const useTriggerConsumptionSync = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (data: TriggerConsumptionSyncRequestRequest) =>
-      adminArrowBillingSyncsTriggerConsumptionSync({ body: data }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.consumptionRecords(),
-      });
-    },
-  });
-};
-
-/** Pause sync */
-export const usePauseSync = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: () => adminArrowBillingSyncsPauseSync(),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: arrowQueryKeys.settings() });
-    },
-  });
-};
-
-/** Resume sync */
-export const useResumeSync = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: () => adminArrowBillingSyncsResumeSync(),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: arrowQueryKeys.settings() });
-    },
-  });
-};
-
-/** Cleanup consumption */
-export const useCleanupConsumption = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: () => adminArrowBillingSyncsCleanupConsumption(),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.consumptionRecords(),
-      });
-      queryClient.invalidateQueries({
-        queryKey: arrowQueryKeys.billingSyncs(),
-      });
-    },
   });
 };

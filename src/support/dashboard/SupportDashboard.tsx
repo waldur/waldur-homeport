@@ -1,18 +1,17 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import { BroadcastList } from '@/broadcasts/BroadcastList';
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { IssuesList } from '@/issues/list/IssuesList';
 import { PAGE_SIZE_COMPACT } from '@/table/constants';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { SupportStatistics } from './SupportStatistics';
 
 export const SupportDashboard: FC = () => {
   const isSupportEnabled = ENV.plugins.WALDUR_SUPPORT?.ENABLED;
-  const user = useSelector(getUser);
+  const user = useUser();
 
   return (
     <>

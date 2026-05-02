@@ -1,6 +1,5 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import {
   MaintenanceAnnouncement,
   MaintenanceAnnouncementRequest,
@@ -15,8 +14,7 @@ import { parseDate } from '@/core/dateUtils';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Wizard } from '@/wizard';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
@@ -54,102 +52,90 @@ const steps: ProgressStep[] = [
 export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
   props,
 ) => {
-  const { closeDialog } = useModal();
-  const dispatch = useDispatch();
+  const submitMutation = useManagedMutation<any, any, MaintenanceForm>({
+    mutationFn: async (formData) => {
+      const startTime = parseDate(formData.scheduled_start_time);
+      const startDate = parseDate(formData.scheduled_start_date).set({
+        hour: startTime.hour,
+        minute: startTime.minute,
+      });
+      const endTime = parseDate(formData.scheduled_end_time);
+      const endDate = parseDate(formData.scheduled_end_date).set({
+        hour: endTime.hour,
+        minute: endTime.minute,
+      });
 
-  const submitForm = useCallback(
-    async (formData: MaintenanceForm) => {
-      try {
-        const startTime = parseDate(formData.scheduled_start_time);
-        const startDate = parseDate(formData.scheduled_start_date).set({
-          hour: startTime.hour,
-          minute: startTime.minute,
-        });
-        const endTime = parseDate(formData.scheduled_end_time);
-        const endDate = parseDate(formData.scheduled_end_date).set({
-          hour: endTime.hour,
-          minute: endTime.minute,
-        });
+      const body: MaintenanceAnnouncementRequest = {
+        name: formData.name,
+        message: formData.message,
+        scheduled_start: startDate.toISO(),
+        scheduled_end: endDate.toISO(),
+        service_provider: props.resolve.provider.url,
+        maintenance_type: formData.maintenance_type,
+        external_reference_url: formData.external_reference_url || '',
+        internal_notes: formData.internal_notes || '',
+      };
 
-        const body: MaintenanceAnnouncementRequest = {
-          name: formData.name,
-          message: formData.message,
-          scheduled_start: startDate.toISO(),
-          scheduled_end: endDate.toISO(),
-          service_provider: props.resolve.provider.url,
-          maintenance_type: formData.maintenance_type,
-          external_reference_url: formData.external_reference_url || '',
-          internal_notes: formData.internal_notes || '',
-        };
+      const {
+        newOfferings,
+        updatedAffectedOfferings,
+        removedAffectedOfferings,
+      } = getMaintenanceOfferings(formData);
 
-        const {
-          newOfferings,
-          updatedAffectedOfferings,
-          removedAffectedOfferings,
-        } = getMaintenanceOfferings(formData);
-
-        let maintenance: MaintenanceAnnouncement;
-        if (props.resolve?.maintenanceUuid) {
-          // Edit current
-          maintenance = await maintenanceAnnouncementsUpdate({
-            path: { uuid: props.resolve.maintenanceUuid },
-            body,
-          }).then((res) => res.data);
-        } else {
-          // Add new
-          maintenance = await maintenanceAnnouncementsCreate({
-            body,
-          }).then((res) => res.data);
-        }
-
-        const promisesNew = newOfferings.map((offering) => {
-          return maintenanceAnnouncementOfferingsCreate({
-            body: {
-              maintenance: maintenance.url,
-              offering: offering.url,
-              impact_description: formData.impact_description?.[offering.uuid],
-              impact_level: formData.impact_level[offering.uuid],
-            },
-          });
-        });
-        const promisesUpdate = updatedAffectedOfferings.map((item) => {
-          const offeringUuid = getUUID(item.offering);
-          return maintenanceAnnouncementOfferingsPartialUpdate({
-            path: { uuid: item.uuid },
-            body: {
-              impact_description: formData.impact_description?.[offeringUuid],
-              impact_level: formData.impact_level[offeringUuid],
-            },
-          });
-        });
-        const promisesRemove = removedAffectedOfferings.map((item) => {
-          return maintenanceAnnouncementOfferingsDestroy({
-            path: { uuid: item.uuid },
-          });
-        });
-
-        await Promise.all(promisesRemove);
-        await Promise.all(promisesUpdate);
-        await Promise.all(promisesNew);
-
-        if (props.resolve?.maintenanceUuid) {
-          dispatch(showSuccess(translate('Maintenance edited successfully')));
-        } else {
-          dispatch(showSuccess(translate('Maintenance added successfully')));
-        }
-
-        if (props.resolve.refetch) await props.resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        dispatch(showErrorResponse(error));
+      let maintenance: MaintenanceAnnouncement;
+      if (props.resolve?.maintenanceUuid) {
+        // Edit current
+        maintenance = await maintenanceAnnouncementsUpdate({
+          path: { uuid: props.resolve.maintenanceUuid },
+          body,
+        }).then((res) => res.data);
+      } else {
+        // Add new
+        maintenance = await maintenanceAnnouncementsCreate({
+          body,
+        }).then((res) => res.data);
       }
+
+      const promisesNew = newOfferings.map((offering) => {
+        return maintenanceAnnouncementOfferingsCreate({
+          body: {
+            maintenance: maintenance.url,
+            offering: offering.url,
+            impact_description: formData.impact_description?.[offering.uuid],
+            impact_level: formData.impact_level[offering.uuid],
+          },
+        });
+      });
+      const promisesUpdate = updatedAffectedOfferings.map((item) => {
+        const offeringUuid = getUUID(item.offering);
+        return maintenanceAnnouncementOfferingsPartialUpdate({
+          path: { uuid: item.uuid },
+          body: {
+            impact_description: formData.impact_description?.[offeringUuid],
+            impact_level: formData.impact_level[offeringUuid],
+          },
+        });
+      });
+      const promisesRemove = removedAffectedOfferings.map((item) => {
+        return maintenanceAnnouncementOfferingsDestroy({
+          path: { uuid: item.uuid },
+        });
+      });
+
+      await Promise.all(promisesRemove);
+      await Promise.all(promisesUpdate);
+      await Promise.all(promisesNew);
     },
-    [props.resolve, closeDialog, dispatch],
-  );
+    successMessage: props.resolve?.maintenanceUuid
+      ? translate('Maintenance edited successfully')
+      : translate('Maintenance added successfully'),
+    errorMessage: translate('Unable to save maintenance announcement.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
     <Wizard<MaintenanceForm>
-      onSubmit={submitForm}
+      onSubmit={(values) => submitMutation.mutateAsync(values)}
       submitLabel={translate('Confirm')}
       steps={steps}
       wizardForms={WizardForms}

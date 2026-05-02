@@ -1,7 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceCategoriesCreate,
   marketplaceCategoriesRetrieve,
@@ -20,9 +19,8 @@ import { ImageField } from '@/form/ImageField';
 import { translate } from '@/i18n';
 import { getCategoryGroups } from '@/marketplace/common/api';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface CategoryEditDialogProps {
   resolve: {
@@ -34,7 +32,6 @@ interface CategoryEditDialogProps {
 export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
   resolve: { category, refetch },
 }) => {
-  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const isEdit = Boolean(category?.uuid);
 
@@ -67,11 +64,14 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
     staleTime: FAST_STALE_TIME,
   });
 
-  const onSubmit = async (formData: MarketplaceCategoryRequest) => {
-    try {
-      let result;
+  const saveCategoryMutation = useManagedMutation<
+    any,
+    any,
+    MarketplaceCategoryRequest
+  >({
+    mutationFn: (formData) => {
       if (isEdit) {
-        result = await marketplaceCategoriesUpdate({
+        return marketplaceCategoriesUpdate({
           path: { uuid: category.uuid },
           body: {
             ...formData,
@@ -80,7 +80,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
           ...formDataOptions,
         }).then((response) => response.data);
       } else {
-        result = await marketplaceCategoriesCreate({
+        return marketplaceCategoriesCreate({
           body: {
             ...formData,
             icon: fileSerializer(formData.icon),
@@ -88,30 +88,20 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
           ...formDataOptions,
         }).then((response) => response.data);
       }
-
-      // Update the cached data
-      queryClient.setQueryData(['CategoryData', category?.uuid], result);
-
-      refetch();
-      dispatch(
-        showSuccess(
-          isEdit
-            ? translate('The category has been updated.')
-            : translate('The category has been created.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          isEdit
-            ? translate('Unable to update category.')
-            : translate('Unable to create category.'),
-        ),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('The category has been updated.')
+      : translate('The category has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update category.')
+      : translate('Unable to create category.'),
+    refetch,
+    onSuccess: (result) => {
+      if (category?.uuid) {
+        queryClient.setQueryData(['CategoryData', category.uuid], result);
+      }
+    },
+  });
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -121,7 +111,9 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values: MarketplaceCategoryRequest) =>
+        saveCategoryMutation.mutateAsync(values)
+      }
       initialValues={categoryData}
       render={({ handleSubmit, submitting, pristine, invalid }) => (
         <form onSubmit={handleSubmit}>

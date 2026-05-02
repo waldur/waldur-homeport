@@ -1,9 +1,7 @@
-import { useDispatch } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { EditProjectProps } from '../types';
 
@@ -19,19 +17,19 @@ const EditEndDateDialog = lazyComponent(() =>
 );
 
 export const FieldEditButton = (props: EditProjectProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      props.name === 'end_date'
-        ? openModalDialog(EditEndDateDialog, { resolve: props, size: 'lg' })
-        : openModalDialog(EditFieldDialog, {
-            resolve: props,
-            size:
-              props.name === 'staff_notes' || props.name === 'description'
-                ? 'lg'
-                : 'sm',
-          }),
-    );
+    if (props.name === 'end_date') {
+      openDialog(EditEndDateDialog, { resolve: props, size: 'lg' });
+    } else {
+      openDialog(EditFieldDialog, {
+        resolve: props,
+        size:
+          props.name === 'staff_notes' || props.name === 'description'
+            ? 'lg'
+            : 'sm',
+      });
+    }
   };
 
   // Disable editing if project is removed

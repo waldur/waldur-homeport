@@ -2,7 +2,7 @@ import { FC, useCallback } from 'react';
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 import { CHECKLIST_FORM_ID } from './constants';
 

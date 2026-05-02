@@ -1,32 +1,27 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { openstackMigrationsDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const DeleteMigrationAction = ({ resource, refetch }) => {
-  const dispatch = useDispatch();
-  const openDialog = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate('Are you sure you want to delete the replication?'),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    await openstackMigrationsDestroy({ path: { uuid: resource.uuid } });
-    await refetch();
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      openstackMigrationsDestroy({ path: { uuid: resource.uuid } }),
+    successMessage: translate('Replication has been deleted.'),
+    errorMessage: translate('Unable to delete replication.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Are you sure you want to delete the replication?'),
+      options: { forDeletion: true },
+    },
+  });
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Remove')}
-      action={openDialog}
-      iconNode={<TrashIcon weight="bold" />}
+      action={mutate}
+      disabled={isPending}
       size="sm"
     />
   );

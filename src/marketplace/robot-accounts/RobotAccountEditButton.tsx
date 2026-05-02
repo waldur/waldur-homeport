@@ -1,8 +1,6 @@
-import { useDispatch } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
@@ -14,13 +12,11 @@ const RobotAccountEditDialog = lazyComponent(() =>
 );
 
 export const RobotAccountEditButton = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(RobotAccountEditDialog, {
-        resolve: { resource: props.row, refetch: props.refetch },
-      }),
-    );
+    openDialog(RobotAccountEditDialog, {
+      resolve: { resource: props.row, refetch: props.refetch },
+    });
   const user = useUser();
   if (
     !hasPermission(user, {

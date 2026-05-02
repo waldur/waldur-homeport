@@ -22,7 +22,7 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { TableQuery } from '@/table/TableQuery';
 
 import { useSettingsUrlSync } from './settings/useSettingsUrlSync';

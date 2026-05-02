@@ -1,6 +1,5 @@
 import { ArrowsClockwiseIcon, EnvelopeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   User,
   userActionsList,
@@ -12,7 +11,7 @@ import {
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
@@ -29,30 +28,24 @@ const TableActions: FC<{ userUuid: string; refetch: () => void }> = ({
   userUuid,
   refetch,
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
 
   const onRecalculate = async () => {
     try {
       await usersUpdateActions({ path: { uuid: userUuid } });
-      dispatch(
-        showSuccess(
-          translate('User actions recalculation has been scheduled.'),
-        ),
-      );
+      showSuccess(translate('User actions recalculation has been scheduled.'));
       refetch();
     } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to recalculate user actions.')),
-      );
+      showErrorResponse(e, translate('Unable to recalculate user actions.'));
     }
   };
 
   const onSendNotification = async () => {
     try {
       await usersSendNotification({ path: { uuid: userUuid } });
-      dispatch(showSuccess(translate('Notification has been scheduled.')));
+      showSuccess(translate('Notification has been scheduled.'));
     } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to send notification.')));
+      showErrorResponse(e, translate('Unable to send notification.'));
     }
   };
 

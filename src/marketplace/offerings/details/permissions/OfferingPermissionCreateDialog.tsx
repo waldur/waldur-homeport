@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { marketplaceProviderOfferingsAddUser } from 'waldur-js-client';
@@ -12,10 +12,9 @@ import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RoleEnum } from '@/permissions/enums';
-import { useNotify } from '@/store/hooks';
 import { getCustomer } from '@/workspace/selectors';
 
 interface OwnProps {
@@ -29,34 +28,26 @@ interface OwnProps {
 export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
   resolve: { refetch, offering },
 }) => {
-  const { closeDialog } = useModal();
-  const { showErrorResponse } = useNotify();
-
   const customer = useSelector(getCustomer);
 
-  const saveUser = useCallback(
-    async (formData) => {
+  const saveUserMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
       const _offering = offering || formData.offering;
-      try {
-        await marketplaceProviderOfferingsAddUser({
-          path: { uuid: _offering.uuid },
-          body: {
-            role: RoleEnum.OFFERING_MANAGER,
-            user: formData.user.uuid,
-            expiration_time: formData.expiration_time,
-          },
-        });
-        closeDialog();
-        await refetch();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to grant permission.'));
-      }
+      return marketplaceProviderOfferingsAddUser({
+        path: { uuid: _offering.uuid },
+        body: {
+          role: RoleEnum.OFFERING_MANAGER,
+          user: formData.user.uuid,
+          expiration_time: formData.expiration_time,
+        },
+      });
     },
-    [closeDialog, showErrorResponse, offering, refetch],
-  );
+    errorMessage: translate('Unable to grant permission.'),
+    refetch,
+  });
 
   return (
-    <Form onSubmit={saveUser}>
+    <Form onSubmit={(values) => saveUserMutation.mutateAsync(values)}>
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

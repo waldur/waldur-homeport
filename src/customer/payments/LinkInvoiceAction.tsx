@@ -6,8 +6,9 @@ import { Invoice, invoicesList, paymentsLinkToInvoice } from 'waldur-js-client';
 import { getAllPages } from '@/core/api';
 import { InvoicesDropdown } from '@/customer/payments/InvoicesDropdown';
 import { translate } from '@/i18n';
-import { showSuccess, showErrorResponse } from '@/store/notify';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 import { Customer } from '@/workspace/types';
 
 import { updatePaymentsList } from './utils';
@@ -24,7 +25,8 @@ export const LinkInvoiceAction: FunctionComponent<{ row }> = ({
 }) => {
   const customer = useSelector(getCustomer);
   const dispatch = useDispatch();
-  const user = useSelector(getUser);
+
+  const user = useUser();
 
   const [{ loading, error, value }, getInvoices] = useAsyncFn(
     () => loadInvoices(customer),
@@ -39,39 +41,32 @@ export const LinkInvoiceAction: FunctionComponent<{ row }> = ({
 
   useEffect(loadInvoicesIfOpen, [open]);
 
-  const triggerAction = async (selectedInvoice: Invoice) => {
-    try {
-      await paymentsLinkToInvoice({
+  const { mutate, isPending } = useManagedMutation<any, any, Invoice>({
+    mutationFn: (selectedInvoice) =>
+      paymentsLinkToInvoice({
         path: { uuid: payment.uuid },
         body: {
           invoice: selectedInvoice.url,
         },
-      });
-      dispatch(
-        showSuccess(
-          translate('Invoice has been successfully linked to payment.'),
-        ),
-      );
+      }),
+    successMessage: translate(
+      'Invoice has been successfully linked to payment.',
+    ),
+    errorMessage: translate('Unable to link invoice to the payment.'),
+    onSuccess: () => {
       dispatch(updatePaymentsList(customer));
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to link invoice to the payment.'),
-        ),
-      );
-    }
-  };
+    },
+  });
 
   return (
     <InvoicesDropdown
       open={open}
-      disabled={!user.is_staff}
+      disabled={!user.is_staff || isPending}
       loading={loading}
       error={error}
       invoices={value}
       onToggle={onToggle}
-      onSelect={triggerAction}
+      onSelect={mutate}
       variant="outline"
     />
   );

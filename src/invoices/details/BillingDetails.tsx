@@ -1,6 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 import { invoicesRetrieve } from 'waldur-js-client';
 
@@ -8,7 +7,7 @@ import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
-import { showError, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { BillingRecordDetails } from './BillingRecordDetails';
 import { InvoiceDetails } from './InvoiceDetails';
@@ -41,24 +40,24 @@ export const BillingDetails: FunctionComponent = () => {
     } else {
       callback();
     }
-  }, [invoiceId, router.stateService, callback]);
+  }, [invoiceId, callback]);
 
   useEffect(() => {
     if ((error as any)?.status === 404) {
       router.stateService.go('errorPage.notFound');
     }
-  }, [error, router.stateService]);
+  }, [error]);
 
-  const dispatch = useDispatch();
+  const { showError, showSuccess } = useNotify();
   useEffect(() => {
     if (status === 'succeeded') {
-      dispatch(showSuccess(translate('Payment succeeded.')));
+      showSuccess(translate('Payment succeeded.'));
     } else if (status === 'failed') {
-      dispatch(showError(translate('Payment failed.')));
+      showError(translate('Payment failed.'));
     } else if (status === 'skipped') {
-      dispatch(showSuccess(translate('Payment has already been done.')));
+      showSuccess(translate('Payment has already been done.'));
     }
-  }, [status, dispatch]);
+  }, [status]);
 
   return loading ? (
     <LoadingSpinner />

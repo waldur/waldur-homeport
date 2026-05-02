@@ -1,10 +1,10 @@
 import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Offering } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { isStaff } from '@/workspace/selectors';
 
@@ -21,14 +21,12 @@ export const MoveOfferingAction = ({
   row: Offering;
   refetch;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const callback = () => {
-    dispatch(
-      openModalDialog(MoveOfferingDialog, {
-        resolve: { offering: row, refetch },
-      }),
-    );
+    openDialog(MoveOfferingDialog, {
+      resolve: { offering: row, refetch },
+    });
   };
 
   const isUserStaff = useSelector(isStaff);

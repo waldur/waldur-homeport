@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
 import { Alert, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceServiceProvidersGenerateSiteAgentConfig,
   marketplaceServiceProvidersOfferingsList,
@@ -10,10 +9,10 @@ import {
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { SITE_AGENT_PLUGIN } from './constants';
 import { SiteAgentConfigPreview } from './SiteAgentConfigPreview';
@@ -35,7 +34,10 @@ interface SiteAgentConfigDialogProps {
 export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
   resolve: { provider, fixedOffering },
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
+
   const [selectedOfferings, setSelectedOfferings] = useState<string[]>(
     fixedOffering ? [fixedOffering.uuid] : [],
   );
@@ -74,15 +76,10 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
     },
     onSuccess: (data) => {
       setGeneratedConfig(data as unknown as string);
-      dispatch(showSuccess(translate('Configuration generated successfully.')));
+      showSuccess(translate('Configuration generated successfully.'));
     },
     onError: (error: Response) => {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Failed to generate configuration.'),
-        ),
-      );
+      showErrorResponse(error, translate('Failed to generate configuration.'));
     },
   });
 
@@ -133,7 +130,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       <SiteAgentConfigPreview
         config={generatedConfig}
         onBack={() => setGeneratedConfig(null)}
-        onClose={() => dispatch(closeModalDialog())}
+        onClose={() => closeDialog()}
       />
     );
   }

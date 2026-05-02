@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
@@ -20,7 +20,7 @@ import { ResourceFlags } from '@/marketplace/resources/details/ResourceFlags';
 import { ExpandableResourceSummary } from '@/marketplace/resources/list/ExpandableResourceSummary';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category, Offering } from '@/marketplace/types';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -62,13 +62,11 @@ const ResourceDetailsDialog = lazyComponent(() =>
 );
 
 const ResourceField = ({ row }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(ResourceDetailsDialog, {
-        resolve: { resource: row },
-      }),
-    );
+    openDialog(ResourceDetailsDialog, {
+      resolve: { resource: row },
+    });
   };
   return (
     <div className="d-flex align-items-center gap-1">

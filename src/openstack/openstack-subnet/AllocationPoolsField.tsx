@@ -1,4 +1,4 @@
-import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,8 +9,8 @@ import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { RootState } from '@/store/reducers';
-import { ActionButton } from '@/table/ActionButton';
 import { CompactActionButton } from '@/table/CompactActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import {
   getDefaultAllocationPool,
@@ -126,7 +126,6 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
           {translate('No allocation pools defined. Default pool will be used.')}
         </p>
       )}
-
       {fields.map((pool, index) => (
         <div key={index} className="mb-3">
           <InputGroup>
@@ -149,8 +148,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
               onChange={(e) => validateField(e.target.value, index, 'end')}
             />
 
-            <ActionButton
-              variant="danger"
+            <RemovalActionButton
               action={() => {
                 fields.remove(index);
                 setValidationErrors((prev) => {
@@ -161,7 +159,6 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
                 });
               }}
               tooltip={translate('Remove')}
-              iconNode={<TrashIcon weight="bold" />}
             />
           </InputGroup>
           {validationErrors[`${index}-start`] && (
@@ -176,7 +173,6 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
           )}
         </div>
       ))}
-
       <div className="mb-3">
         <CompactActionButton
           action={addPool}
@@ -184,7 +180,6 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
           iconNode={<PlusCircleIcon weight="bold" />}
         />
       </div>
-
       {meta.error && meta.submitFailed && (
         <div className="text-danger">{meta.error}</div>
       )}

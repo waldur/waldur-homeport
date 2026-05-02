@@ -1,11 +1,10 @@
 import { ThumbsDownIcon, ThumbsUpIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import type { FeedbackCategoryEnum } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { FeedbackDialog } from './FeedbackDialog';
 
@@ -22,23 +21,21 @@ export const FeedbackButtons: FC<Props> = ({
   feedbackComment,
   feedbackCategory,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog: openModal } = useModal();
 
   const openDialog = (score: boolean) => {
     // When the user flips their vote, drop the prior comment/category —
     // they don't belong on a newly-opposite score.
     const keepPriorDetails = score === feedbackScore;
-    dispatch(
-      openModalDialog(FeedbackDialog, {
-        resolve: {
-          messageUuid,
-          score,
-          currentComment: keepPriorDetails ? feedbackComment : null,
-          currentCategory: keepPriorDetails ? feedbackCategory : null,
-        },
-        size: 'md',
-      }),
-    );
+    openModal(FeedbackDialog, {
+      resolve: {
+        messageUuid,
+        score,
+        currentComment: keepPriorDetails ? feedbackComment : null,
+        currentCategory: keepPriorDetails ? feedbackCategory : null,
+      },
+      size: 'md',
+    });
   };
 
   const upActive = feedbackScore === true;

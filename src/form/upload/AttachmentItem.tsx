@@ -1,7 +1,6 @@
 import { FileIcon, TrashIcon, WarningIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
 import { formatDateTime } from '@/core/dateUtils';
@@ -9,7 +8,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { decodeFileName, formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { FileDownloader } from './FileDownloader';
 import { ImageFetcher } from './ImageFetcher';
@@ -36,13 +35,11 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
   isDeleting,
   iconSize = 22,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openModal = () =>
-    dispatch(
-      openModalDialog(AttachmentModal, {
-        resolve: { attachment },
-      }),
-    );
+    openDialog(AttachmentModal, {
+      resolve: { attachment },
+    });
 
   const fileName = decodeFileName(attachment.file_name);
 

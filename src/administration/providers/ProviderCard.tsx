@@ -1,12 +1,11 @@
 import { FC } from 'react';
 import { Card, Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { OIDC_TYPES } from '@/auth/providers/constants';
 import { IdentityProviderLogo } from '@/auth/providers/IdentityProviderLogo';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 const CreateProviderDialog = lazyComponent(() =>
@@ -56,50 +55,40 @@ export const ProviderCard: FC<ProviderCardProps> = ({
   refetch,
   editable = true,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const createProvider = () => {
-    dispatch(
-      openModalDialog(CreateProviderDialog, {
-        resolve: { type, refetch },
-      }),
-    );
+    openDialog(CreateProviderDialog, {
+      resolve: { type, refetch },
+    });
   };
 
   const updateProvider = () => {
-    dispatch(
-      openModalDialog(UpdateProviderDialog, {
-        resolve: { provider, type, refetch },
-      }),
-    );
+    openDialog(UpdateProviderDialog, {
+      resolve: { provider, type, refetch },
+    });
   };
 
   const showUsers = () => {
-    dispatch(
-      openModalDialog(ProviderUsersDialog, {
-        resolve: { type, refetch },
-        size: 'lg',
-      }),
-    );
+    openDialog(ProviderUsersDialog, {
+      resolve: { type, refetch },
+      size: 'lg',
+    });
   };
 
   const showDetails = () => {
-    dispatch(
-      openModalDialog(ProviderDetailsDialog, {
-        resolve: { type, refetch },
-        size: 'lg',
-        provider: provider,
-      }),
-    );
+    openDialog(ProviderDetailsDialog, {
+      resolve: { type, refetch },
+      size: 'lg',
+      provider: provider,
+    });
   };
 
   const openDiscovery = () => {
-    dispatch(
-      openModalDialog(OidcDiscoveryDialog, {
-        resolve: { provider, type, refetch },
-        size: 'xl',
-      }),
-    );
+    openDialog(OidcDiscoveryDialog, {
+      resolve: { provider, type, refetch },
+      size: 'xl',
+    });
   };
 
   return (

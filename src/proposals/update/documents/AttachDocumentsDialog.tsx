@@ -12,10 +12,10 @@ import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { Attachment, AttachmentUploading } from '@/form/upload/types';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 interface AttachDocumentsFormData {
   files: { file: File }[];

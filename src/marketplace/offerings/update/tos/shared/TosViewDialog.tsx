@@ -1,22 +1,17 @@
 import { CheckIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceUserOfferingConsentsCreate } from 'waldur-js-client';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const TosViewDialog = ({
   resolve: { tos, offering = undefined, refetch = undefined },
 }) => {
-  const dispatch = useDispatch();
-  const { closeDialog } = useModal();
-  const [accepting, setAccepting] = useState(false);
   const [scrolledToBottom, setScrolledToBottom] = useState(false);
   const tosContentRef = useRef<HTMLDivElement>(null);
 
@@ -39,30 +34,17 @@ export const TosViewDialog = ({
     [scrolledToBottom],
   );
 
-  const handleAccept = useCallback(async () => {
-    setAccepting(true);
-    try {
-      await marketplaceUserOfferingConsentsCreate({
+  const acceptTosMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceUserOfferingConsentsCreate({
         body: { offering: offering.uuid },
-      });
-      await refetch();
-      dispatch(
-        showSuccess(
-          translate('Terms of Service has been accepted successfully.'),
-        ),
-      );
-      closeDialog();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to accept Terms of Service.'),
-        ),
-      );
-    } finally {
-      setAccepting(false);
-    }
-  }, [dispatch, offering, refetch, closeDialog]);
+      }),
+    successMessage: translate(
+      'Terms of Service has been accepted successfully.',
+    ),
+    errorMessage: translate('Unable to accept Terms of Service.'),
+    refetch,
+  });
 
   return (
     <ModalDialog
@@ -72,7 +54,7 @@ export const TosViewDialog = ({
           <CloseDialogButton label={translate('Close')} />
           {offering && refetch && !tos.has_user_consent && (
             <SubmitButton
-              submitting={accepting}
+              submitting={acceptTosMutation.isPending}
               disabled={!scrolledToBottom}
               disabledReason={
                 !scrolledToBottom
@@ -85,7 +67,7 @@ export const TosViewDialog = ({
               iconNode={<CheckIcon weight="bold" />}
               iconOnLeft
               type="button"
-              onClick={handleAccept}
+              onClick={() => acceptTosMutation.mutate()}
             />
           )}
         </>
@@ -103,7 +85,6 @@ export const TosViewDialog = ({
           </div>
         </div>
       )}
-
       {tos.terms_of_service_link && (
         <div className="mb-3">
           <strong>{translate('External link:')}</strong>

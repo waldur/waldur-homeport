@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useEffect, useState } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
@@ -10,12 +10,12 @@ import {
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useNotify } from '@/store/hooks';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 import { getCustomerURL } from '../utils';
 
@@ -68,10 +68,9 @@ export const ProjectTemplateDialog: React.FC<ProjectTemplateDialogProps> = ({
   resolve,
 }) => {
   const isEdit = !!resolve.uuid;
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
+
   const currentCustomer = useSelector(getCustomer);
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const [initialData, setInitialData] =
     useState<ProjectTemplateFormValues | null>(
@@ -116,40 +115,30 @@ export const ProjectTemplateDialog: React.FC<ProjectTemplateDialogProps> = ({
     [user, currentCustomer?.uuid],
   );
 
-  const handleSubmit = useCallback(
-    async (formValues: ProjectTemplateFormValues) => {
+  const saveTemplateMutation = useManagedMutation<
+    any,
+    any,
+    ProjectTemplateFormValues
+  >({
+    mutationFn: (formValues) => {
       const payload = prepareSubmitData(formValues, currentCustomer);
-      try {
-        if (isEdit) {
-          await openportalProjectTemplatePartialUpdate({
-            path: { uuid: formValues.uuid },
-            body: payload,
-          });
-          showSuccess(translate('Project template has been updated.'));
-        } else {
-          await openportalProjectTemplateCreate({ body: payload });
-          showSuccess(translate('Project template has been created.'));
-        }
-        closeDialog();
-        await resolve.refetch();
-      } catch (error) {
-        showErrorResponse(
-          error,
-          isEdit
-            ? translate('Unable to update the project template.')
-            : translate('Unable to create the project template.'),
-        );
+      if (isEdit) {
+        return openportalProjectTemplatePartialUpdate({
+          path: { uuid: formValues.uuid },
+          body: payload,
+        });
+      } else {
+        return openportalProjectTemplateCreate({ body: payload });
       }
     },
-    [
-      isEdit,
-      currentCustomer,
-      showSuccess,
-      showErrorResponse,
-      closeDialog,
-      resolve,
-    ],
-  );
+    successMessage: isEdit
+      ? translate('Project template has been updated.')
+      : translate('Project template has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update the project template.')
+      : translate('Unable to create the project template.'),
+    refetch: resolve.refetch,
+  });
 
   const dialogTitle = isEdit
     ? translate('Edit project template')
@@ -184,8 +173,8 @@ export const ProjectTemplateDialog: React.FC<ProjectTemplateDialogProps> = ({
   }
 
   return (
-    <Form
-      onSubmit={handleSubmit}
+    <Form<ProjectTemplateFormValues>
+      onSubmit={(values) => saveTemplateMutation.mutateAsync(values)}
       initialValues={initialData}
       subscription={{ submitting: true, invalid: true, pristine: true }}
       render={({ handleSubmit, submitting, invalid, pristine }) => (

@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { QuotasTable } from './QuotasTable';
 
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useTheme: () => 'light',
 }));
 

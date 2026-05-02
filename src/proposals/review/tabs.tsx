@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import {
   callReviewerPoolsList,
   myAssignmentBatchesList,
@@ -11,7 +10,7 @@ import { fetchResultCount } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { TableTab } from '@/table/types';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 interface TabLabelWithCountProps {
   label: string;
@@ -35,7 +34,7 @@ const TabLabelWithCount = ({
 );
 
 export const useMyReviewsTabs = (): TableTab[] => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   // Count all reviews assigned to user
   const { data: reviewsCount = 0 } = useQuery({

@@ -10,13 +10,13 @@ import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import {
   Proposal,
   ProposalResource,
   ProposalResourceFormData,
 } from '@/proposals/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { ResourceRequestWizardFormFirstPage } from './ResourceRequestWizardFormFirstPage';
 import { ResourceRequestWizardFormSecondPage } from './ResourceRequestWizardFormSecondPage';
@@ -47,8 +47,11 @@ const steps: ProgressStep[] = [
 ];
 
 export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
+  const { showErrorResponse, showSuccess } = useNotify();
+  const { closeDialog } = useModal();
+
   const callback = useCallback(
-    async (formData: ProposalResourceFormData, dispatch, formProps) => {
+    async (formData: ProposalResourceFormData, _dispatch, formProps) => {
       const attributes = {};
       if (formData.attributes) {
         Object.assign(attributes, formData.attributes);
@@ -70,14 +73,12 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
             },
             body: payload,
           });
-          dispatch(
-            showSuccess(translate('Resource request has been updated.')),
-          );
+          showSuccess(translate('Resource request has been updated.'));
           formProps.destroy();
-          dispatch(closeModalDialog());
+          closeDialog();
           props.resolve.refetch();
         } catch (error) {
-          dispatch(showErrorResponse(error, translate('Something went wrong')));
+          showErrorResponse(error, translate('Something went wrong'));
         }
       } else {
         // Create new
@@ -86,18 +87,16 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
             path: { uuid: props.resolve.proposal.uuid },
             body: payload,
           });
-          dispatch(
-            showSuccess(translate('Resource request has been submitted.')),
-          );
+          showSuccess(translate('Resource request has been submitted.'));
           formProps.destroy();
-          dispatch(closeModalDialog());
+          closeDialog();
           props.resolve.refetch();
         } catch (error) {
-          dispatch(showErrorResponse(error, translate('Something went wrong')));
+          showErrorResponse(error, translate('Something went wrong'));
         }
       }
     },
-    [props.resolve],
+    [props.resolve, showSuccess, showErrorResponse, closeDialog],
   );
 
   const isEdit = Boolean(props.resolve.resourceRequest);

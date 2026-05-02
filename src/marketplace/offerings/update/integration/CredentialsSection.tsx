@@ -1,6 +1,5 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { StringField } from '@/form';
@@ -10,7 +9,7 @@ import {
   getCredentialsForm,
   showBackendId,
 } from '@/marketplace/common/registry';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { TENANT_TYPE } from '@/openstack/constants';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 import { SlurmOfferingActions } from '@/site-agent/SlurmOfferingActions';
@@ -37,7 +36,7 @@ const OpenStackDiscoveryDialog = lazyComponent(() =>
 const getTitle = () => translate('Credentials');
 
 export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const { update } = useUpdateOfferingIntegration(
     props.offering,
     props.refetch,
@@ -67,15 +66,13 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
           {props.offering.type === TENANT_TYPE && (
             <ActionButton
               action={() =>
-                dispatch(
-                  openModalDialog(OpenStackDiscoveryDialog, {
-                    size: 'xl',
-                    resolve: {
-                      offering: props.offering,
-                      refetch: props.refetch,
-                    },
-                  }),
-                )
+                openDialog(OpenStackDiscoveryDialog, {
+                  size: 'xl',
+                  resolve: {
+                    offering: props.offering,
+                    refetch: props.refetch,
+                  },
+                })
               }
               variant="tertiary"
               iconNode={<MagnifyingGlassIcon weight="bold" />}

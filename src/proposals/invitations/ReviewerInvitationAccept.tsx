@@ -3,7 +3,6 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback } from 'react';
 import { Card, Container } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import {
   reviewerInvitationsRetrieve,
   reviewerInvitationsAccept,
@@ -17,8 +16,8 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import { router } from '@/router';
-import { useNotify } from '@/store/hooks';
-import { getUser } from '@/workspace/selectors';
+import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { COIPolicyCard } from './COIPolicyCard';
 import { ProfileRequiredMessage } from './ProfileRequiredMessage';
@@ -83,7 +82,7 @@ export const ReviewerInvitationAccept: FC = () => {
   const {
     params: { token },
   } = useCurrentStateAndParams();
-  const user = useSelector(getUser);
+  const user = useUser();
   const { showSuccess, showErrorResponse } = useNotify();
 
   useTitle(translate('Reviewer invitation'));

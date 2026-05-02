@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   checklistsAdminList,
   marketplaceProviderOfferingsUpdateComplianceChecklist,
@@ -13,37 +12,25 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SelectField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { EditOfferingChecklistProps } from './types';
 
 export const EditOfferingChecklistDialog: FC<{
   resolve: EditOfferingChecklistProps;
 }> = (props) => {
-  const dispatch = useDispatch();
-  const update = useCallback(
-    async (formData) => {
-      try {
-        await marketplaceProviderOfferingsUpdateComplianceChecklist({
-          path: { uuid: props.resolve.offering.uuid },
-          body: { compliance_checklist: formData.compliance_checklist },
-        });
-        dispatch(
-          showSuccess(translate('Offering has been updated successfully.')),
-        );
-        await props.resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to update offering.')),
-        );
-      }
-    },
-    [dispatch],
-  );
+  const updateChecklistMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsUpdateComplianceChecklist({
+        path: { uuid: props.resolve.offering.uuid },
+        body: { compliance_checklist: formData.compliance_checklist },
+      }),
+    successMessage: translate('Offering has been updated successfully.'),
+    errorMessage: translate('Unable to update offering.'),
+    refetch: props.resolve.refetch,
+  });
 
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ['checklistsAdminOffering'],
@@ -62,7 +49,7 @@ export const EditOfferingChecklistDialog: FC<{
 
   return (
     <Form
-      onSubmit={update}
+      onSubmit={(values) => updateChecklistMutation.mutateAsync(values)}
       initialValues={
         props.resolve.checklist?.uuid
           ? { compliance_checklist: props.resolve.checklist.uuid }

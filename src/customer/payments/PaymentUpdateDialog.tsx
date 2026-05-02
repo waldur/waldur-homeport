@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import { paymentsPartialUpdate } from 'waldur-js-client';
 
@@ -9,10 +8,7 @@ import { formatISODate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { EDIT_PAYMENT_FORM_ID } from '@/customer/payments/constants';
 import { PaymentProofRenderer } from '@/customer/payments/PaymentProofRenderer';
-import {
-  getInitialValues,
-  updatePaymentsList,
-} from '@/customer/payments/utils';
+import { getInitialValues } from '@/customer/payments/utils';
 import {
   FileUploadField,
   FormContainer,
@@ -21,41 +17,47 @@ import {
 } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
-import { getCustomer } from '@/workspace/selectors';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Payment } from '@/workspace/types';
 
 const PaymentUpdateDialog: FunctionComponent<
-  InjectedFormProps & { resolve: Payment }
+  InjectedFormProps & { resolve: Payment; refetch }
 > = (props) => {
-  const dispatch = useDispatch();
-  const customer = useSelector(getCustomer);
-
   useEffect(() => {
     props.initialize(getInitialValues(props));
   }, [props]);
 
-  const submitRequest = async (formData) => {
-    try {
-      await paymentsPartialUpdate({
+  const mutation = useManagedMutation<
+    any,
+    any,
+    {
+      date_of_payment: string;
+      sum: number | string;
+      proof: File;
+    }
+  >({
+    mutationFn: (formData) =>
+      paymentsPartialUpdate({
         path: { uuid: props.resolve.uuid },
         body: {
           date_of_payment: formatISODate(formData.date_of_payment),
-          sum: formData.sum,
+          sum: String(formData.sum),
           proof: fileSerializer(formData.proof),
         },
         ...formDataOptions,
-      });
-      dispatch(showSuccess(translate('Payment has been updated.')));
-      dispatch(closeModalDialog());
-      dispatch(updatePaymentsList(customer));
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to update payment.')),
-      );
+      }),
+
+    successMessage: translate('Payment has been updated.'),
+    errorMessage: translate('Unable to update payment.'),
+  });
+
+  const submitRequest = async (formData) => {
+    try {
+      await mutation.mutateAsync(formData);
+    } catch {
+      // Error is handled by useManagedMutation
     }
   };
 

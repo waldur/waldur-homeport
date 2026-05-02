@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { invoicesPaid } from 'waldur-js-client';
 
@@ -9,37 +8,31 @@ import { FileUploadField, FormContainer, FormFooter } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { MARK_AS_PAID_FORM_ID } from '@/invoices/constants';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 const MarkAsPaidDialogContainer: FunctionComponent<any> = (props) => {
-  const dispatch = useDispatch();
-  async function markInvoiceAsPaid(formData) {
-    try {
-      await invoicesPaid({
+  const markInvoiceAsPaidMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      invoicesPaid({
         path: { uuid: props.resolve.invoice.uuid },
         body: {
           date: formData.date ? formatISODate(formData.date) : undefined,
           proof: fileSerializer(formData.proof),
         },
         ...formDataOptions,
-      });
-      dispatch(showSuccess(translate('The invoice has been marked as paid.')));
-      dispatch(closeModalDialog());
-      await props.resolve.refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to mark the invoice as paid.'),
-        ),
-      );
-    }
-  }
+      }),
+    successMessage: translate('The invoice has been marked as paid.'),
+    errorMessage: translate('Unable to mark the invoice as paid.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(markInvoiceAsPaid)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        markInvoiceAsPaidMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Mark invoice as paid')}
         footer={<FormFooter submitting={props.submitting} />}

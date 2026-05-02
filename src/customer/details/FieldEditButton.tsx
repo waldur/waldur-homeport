@@ -1,8 +1,6 @@
-import { useDispatch } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { EditCustomerProps } from './types';
 
@@ -19,15 +17,13 @@ const EditCustomerChecklistDialog = lazyComponent(() =>
 );
 
 export const FieldEditButton = (props: EditCustomerProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(
-        props.name === 'project_metadata_checklist'
-          ? EditCustomerChecklistDialog
-          : EditFieldDialog,
-        { resolve: props },
-      ),
+    openDialog(
+      props.name === 'project_metadata_checklist'
+        ? EditCustomerChecklistDialog
+        : EditFieldDialog,
+      { resolve: props },
     );
   };
   return <CompactEditButton onClick={callback} variant="secondary" />;

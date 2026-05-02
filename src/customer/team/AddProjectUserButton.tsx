@@ -1,11 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { CustomerUser } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionButton } from '@/table/ActionButton';
 
@@ -26,16 +25,14 @@ export const AddProjectUserButton: React.FC<AddProjectUserButtonProps> = ({
   refetch,
   asDropdownItem,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(AddProjectUserDialog, {
-        resolve: {
-          customer,
-          refetch,
-        },
-      }),
-    );
+    openDialog(AddProjectUserDialog, {
+      resolve: {
+        customer,
+        refetch,
+      },
+    });
   return asDropdownItem ? (
     <ActionItem
       title={translate('Add project role')}

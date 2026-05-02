@@ -1,12 +1,13 @@
 import { ShareIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { userInvitationsSend } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { getCustomer, getProject, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 import { InvitationPolicyService } from './actions/InvitationPolicyService';
 
@@ -51,10 +52,9 @@ const showTooltip = (user, customer, project, rows) => {
 };
 
 export const MultiResendAction = ({ rows, refetch }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
-  const dispatch = useDispatch();
 
   const disabled = useMemo(() => {
     return isAnyDisabled(user, customer, project, rows);
@@ -64,27 +64,24 @@ export const MultiResendAction = ({ rows, refetch }) => {
     return showTooltip(user, customer, project, rows);
   }, [user, customer, project, rows]);
 
-  const callback = () => {
-    try {
-      Promise.all(
-        rows.map((row) => userInvitationsSend({ path: { uuid: row.uuid } })),
-      ).then(() => {
-        refetch();
-        dispatch(showSuccess(translate('Invitations have been sent again.')));
-      });
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to resend invitations.')),
-      );
-    }
-  };
+  const { mutate, isPending } = useBatchMutation<any, void>({
+    rows,
+    refetch,
+    mutationFn: (row) => userInvitationsSend({ path: { uuid: row.uuid } }),
+    successMessage: translate('Invitations have been sent again.'),
+    renderPartialSuccessMessage: (n) =>
+      translate('{n} invitations have been sent again.', { n }),
+    errorMessage: translate('Unable to resend invitations.'),
+    renderErrorMessage: (n) =>
+      translate('{n} invitations could not be resent.', { n }),
+  });
 
   return (
     <ActionItem
       title={translate('Resend')}
-      action={callback}
+      action={mutate}
       iconNode={<ShareIcon weight="bold" />}
-      disabled={disabled}
+      disabled={disabled || isPending}
       tooltip={tooltip}
     />
   );

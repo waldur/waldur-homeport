@@ -5,14 +5,12 @@ import { Panel } from '@/core/Panel';
 import { CustomerSupportRating } from '@/issues/CustomerSupportRating';
 import { IssuesList } from '@/issues/list/IssuesList';
 import { PAGE_SIZE_FULL } from '@/table/constants';
-import {
-  getUser,
-  isStaffOrSupport as isStaffOrSupportSelector,
-} from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { isStaffOrSupport as isStaffOrSupportSelector } from '@/workspace/selectors';
 
 export const SupportIssues: FunctionComponent = () => {
   const isStaffOrSupport = useSelector(isStaffOrSupportSelector);
-  const user = useSelector(getUser);
+  const user = useUser();
   return (
     <>
       {isStaffOrSupport && <CustomerSupportRating />}

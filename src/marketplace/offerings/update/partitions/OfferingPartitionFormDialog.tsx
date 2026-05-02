@@ -1,6 +1,6 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { omit } from 'lodash-es';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsAddPartition,
@@ -12,9 +12,8 @@ import {
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { OfferingPartitionForm } from './OfferingPartitionForm';
 
@@ -29,66 +28,44 @@ interface OfferingPartitionFormDialogProps {
 export const OfferingPartitionFormDialog: FC<
   OfferingPartitionFormDialogProps
 > = ({ resolve }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   const isEdit = Boolean(resolve.partition?.uuid);
 
-  const onSubmit = useCallback(
-    async (formData: OfferingPartitionRequest) => {
+  const savePartitionMutation = useManagedMutation<
+    any,
+    any,
+    OfferingPartitionRequest
+  >({
+    mutationFn: (formData) => {
       if (!isEdit) {
-        // Create
-        try {
-          await marketplaceProviderOfferingsAddPartition({
-            path: { uuid: resolve.offering.uuid },
-            body: {
-              ...formData,
-              offering: resolve.offering.uuid,
-            },
-          });
-          showSuccess(translate('Offering partition has been added.'));
-          await resolve.refetch();
-          closeDialog();
-        } catch (error) {
-          showErrorResponse(
-            error,
-            translate('Unable to add offering partition.'),
-          );
-        }
+        return marketplaceProviderOfferingsAddPartition({
+          path: { uuid: resolve.offering.uuid },
+          body: {
+            ...formData,
+            offering: resolve.offering.uuid,
+          },
+        });
       } else {
-        // Edit
-        try {
-          await marketplaceProviderOfferingsUpdatePartitionPartialUpdate({
-            path: { uuid: resolve.offering.uuid },
-            body: {
-              partition_uuid: resolve.partition.uuid,
-              ...formData,
-            },
-          });
-          showSuccess(translate('Offering partition has been updated.'));
-          await resolve.refetch();
-          closeDialog();
-        } catch (error) {
-          showErrorResponse(
-            error,
-            translate('Unable to update offering partition.'),
-          );
-        }
+        return marketplaceProviderOfferingsUpdatePartitionPartialUpdate({
+          path: { uuid: resolve.offering.uuid },
+          body: {
+            partition_uuid: resolve.partition.uuid,
+            ...formData,
+          },
+        });
       }
     },
-    [
-      resolve.offering,
-      resolve.partition,
-      resolve.refetch,
-      showSuccess,
-      closeDialog,
-      showErrorResponse,
-    ],
-  );
+    successMessage: isEdit
+      ? translate('Offering partition has been updated.')
+      : translate('Offering partition has been added.'),
+    errorMessage: isEdit
+      ? translate('Unable to update offering partition.')
+      : translate('Unable to add offering partition.'),
+    refetch: resolve.refetch,
+  });
 
   return (
-    <Form
-      onSubmit={onSubmit}
+    <Form<OfferingPartitionRequest>
+      onSubmit={(values) => savePartitionMutation.mutateAsync(values)}
       initialValues={
         isEdit ? { ...omit(resolve.partition, ['uuid']) } : undefined
       }

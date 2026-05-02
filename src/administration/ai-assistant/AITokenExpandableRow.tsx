@@ -1,5 +1,5 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useEffect, useMemo, useRef } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   User,
@@ -16,7 +16,7 @@ import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -215,8 +215,6 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
   refetch,
   isTableRefreshing,
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-
   const {
     data: quota,
     isLoading,
@@ -241,8 +239,12 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
     prevRefreshingRef.current = isTableRefreshing;
   }, [isTableRefreshing, refetchQuota]);
 
-  const mutation = useMutation({
-    mutationFn: async (values: FormValues) => {
+  const { mutateAsync: handleSubmit } = useManagedMutation<
+    any,
+    any,
+    FormValues
+  >({
+    mutationFn: async (values) => {
       await chatQuotaSetQuota({
         body: {
           user_uuid: row.uuid,
@@ -252,21 +254,13 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
         },
       });
     },
-  });
-
-  const handleSubmit = useCallback(
-    async (values: FormValues) => {
-      try {
-        await mutation.mutateAsync(values);
-        showSuccess(translate('Token quota has been updated.'));
-        refetch();
-        refetchQuota();
-      } catch (e) {
-        showErrorResponse(e, translate('Unable to update token quota.'));
-      }
+    successMessage: translate('Token quota has been updated.'),
+    errorMessage: translate('Unable to update token quota.'),
+    refetch,
+    onSuccess: () => {
+      refetchQuota();
     },
-    [mutation, showSuccess, showErrorResponse, refetch, refetchQuota],
-  );
+  });
 
   const initialValues: FormValues = {
     daily_limit: quota?.daily_limit ?? null,
@@ -306,7 +300,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
       </small>
 
       <Form<FormValues>
-        onSubmit={handleSubmit}
+        onSubmit={(values) => handleSubmit(values)}
         initialValues={initialValues}
         render={({ handleSubmit, submitting, pristine }) => (
           <form className="mt-6" onSubmit={handleSubmit}>

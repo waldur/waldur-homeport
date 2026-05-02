@@ -1,7 +1,7 @@
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo, useCallback, FunctionComponent } from 'react';
 import { Card, Accordion } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 import { rancherAppsCreate } from 'waldur-js-client';
@@ -11,7 +11,7 @@ import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import { TemplateQuestions } from '@/rancher/template/TemplateQuestions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { type RootState } from '@/store/reducers';
 
 import { FORM_ID } from './constants';
@@ -23,8 +23,6 @@ export const TemplateDetail: FunctionComponent = () => {
   const {
     params: { templateUuid, clusterUuid },
   } = useCurrentStateAndParams();
-
-  const router = useRouter();
 
   const state = useAsync(
     () => loadData(templateUuid, clusterUuid),
@@ -53,7 +51,7 @@ export const TemplateDetail: FunctionComponent = () => {
     [questions, answers],
   );
 
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
 
   const createApplication = useCallback(
     async (formData: FormData) => {
@@ -68,17 +66,12 @@ export const TemplateDetail: FunctionComponent = () => {
           ),
         });
       } catch (response) {
-        dispatch(
-          showErrorResponse(
-            response,
-            translate('Unable to create application.'),
-          ),
-        );
+        showErrorResponse(response, translate('Unable to create application.'));
         return;
       }
-      dispatch(showSuccess(translate('Application has been created.')));
+      showSuccess(translate('Application has been created.'));
     },
-    [dispatch, router.stateService, clusterUuid, state.value, visibleQuestions],
+    [clusterUuid, visibleQuestions],
   );
 
   if (state.loading) {

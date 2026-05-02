@@ -13,8 +13,8 @@ import { getCustomer } from '@/customer/utils';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { formatOrderForCreate } from '@/marketplace/details/utils';
-import { closeModalDialog } from '@/modal/actions';
-import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { Step1ImportType } from './Step1ImportType';
 import { Step2SelectOffering } from './Step2SelectOffering';
@@ -69,23 +69,24 @@ const steps: ProgressStep[] = [
 ];
 
 export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
+  const { showError, showErrorResponse, showSuccess } = useNotify();
+  const { closeDialog } = useModal();
+
   // On submitForm, sometimes some projects are created, but we get errors during the operation.
   // We remember the created projects so that we don't have to recreate them when we make a modification.
   const [createdProjects, setCreatedProjects] = useState<Project[]>([]);
 
   const submitForm = useCallback(
-    async (formData, dispatch, formProps) => {
+    async (formData, _dispatch, formProps) => {
       const _customer = props.resolve.customer;
       const projects = await parseProjectsAndResourcesFile(formData.file[0]);
       const offering = formData.offering as Offering;
       const hasResources = formData.import_type === 'projects_with_resources';
 
       if (!_customer && projects.some((proj) => !proj.customer_uuid)) {
-        dispatch(
-          showError(
-            translate(
-              'The organization UUID is not specified in one or more records.',
-            ),
+        showError(
+          translate(
+            'The organization UUID is not specified in one or more records.',
           ),
         );
         return;
@@ -186,7 +187,7 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
           }
         });
         if (promises.length === 0 && createdProjects.length === 0) {
-          dispatch(showError(translate('No valid projects to import')));
+          showError(translate('No valid projects to import'));
           return;
         }
         await Promise.all(promises);
@@ -201,23 +202,21 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
         }
 
         formProps.destroy();
-        dispatch(closeModalDialog());
+        closeDialog();
         if (props.resolve.refetch) props.resolve.refetch();
-        dispatch(
-          showSuccess(
-            formData.import_type === 'projects_only' ||
-              resourcesPayload.length === 0
-              ? translate('Successfully imported {n} projects', {
-                  n: projectsCounter,
-                })
-              : translate(
-                  'Successfully imported {n} projects and {m} resources',
-                  { n: projectsCounter, m: resourcesPayload.length },
-                ),
-          ),
+        showSuccess(
+          formData.import_type === 'projects_only' ||
+            resourcesPayload.length === 0
+            ? translate('Successfully imported {n} projects', {
+                n: projectsCounter,
+              })
+            : translate(
+                'Successfully imported {n} projects and {m} resources',
+                { n: projectsCounter, m: resourcesPayload.length },
+              ),
         );
       } catch (err) {
-        dispatch(showErrorResponse(err));
+        showErrorResponse(err);
       }
     },
     [
@@ -225,6 +224,10 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
       props.resolve.refetch,
       createdProjects,
       setCreatedProjects,
+      showError,
+      showErrorResponse,
+      showSuccess,
+      closeDialog,
     ],
   );
   return (

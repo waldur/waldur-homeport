@@ -1,14 +1,13 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { Panel } from '@/core/Panel';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { useNotify } from '@/store/hooks';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 const getConfirmationText = (isActive: boolean, name: string): string => {
   return isActive
@@ -25,15 +24,14 @@ const getConfirmationText = (isActive: boolean, name: string): string => {
 };
 
 export const UserStatus = ({ user }: { user: User }) => {
+  const { confirm } = useModal();
   const queryClient = useQueryClient();
-  const dispatch = useDispatch();
   const { showErrorResponse, showSuccess } = useNotify();
   const [isActive, setIsActive] = useState(user.is_active);
 
   const toggleUserStatus = async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Confirmation'),
         getConfirmationText(isActive, user.full_name),
         {

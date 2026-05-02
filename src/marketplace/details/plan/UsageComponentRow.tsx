@@ -1,13 +1,12 @@
 import { PlusMinusIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { defaultCurrency, formatCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 import { Component, PlanPeriod } from './types';
@@ -25,20 +24,18 @@ interface UsageComponentRowProps {
 }
 
 export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const onClick = useCallback(
     () =>
-      dispatch(
-        openModalDialog(EstimateUsageComponentDialog, {
-          size: 'lg',
-          resolve: {
-            component: props.offeringComponent,
-            period: props.period,
-            hidePrices: props.hidePrices,
-          },
-        }),
-      ),
-    [dispatch, props],
+      openDialog(EstimateUsageComponentDialog, {
+        size: 'lg',
+        resolve: {
+          component: props.offeringComponent,
+          period: props.period,
+          hidePrices: props.hidePrices,
+        },
+      }),
+    [props],
   );
 
   const perPeriod = !props.period

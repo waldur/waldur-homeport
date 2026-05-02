@@ -2,7 +2,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { FC, useCallback, useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   PatchedMatchingConfigurationRequest,
   proposalProtectedCallsMatchingConfigurationPartialUpdate,
@@ -14,10 +13,10 @@ import { NumberField, SelectField, SubmitButton, FieldError } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import {
   EditMatchingSettingProps,
@@ -97,7 +96,10 @@ const SELECT_FIELD_OPTIONS: Record<string, { value: string; label: string }[]> =
   };
 
 export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
+
   const queryClient = useQueryClient();
 
   const { data: config, isLoading } = useQuery({
@@ -124,12 +126,10 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
         await queryClient.invalidateQueries({
           queryKey: ['matching-config', resolve.call.uuid],
         });
-        dispatch(showSuccess(translate('Matching setting has been updated.')));
-        dispatch(closeModalDialog());
+        showSuccess(translate('Matching setting has been updated.'));
+        closeDialog();
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to update matching setting.')),
-        );
+        showErrorResponse(e, translate('Unable to update matching setting.'));
         if (e.response && e.response.status === 400) {
           return { [FORM_ERROR]: e.response.data };
         }
@@ -138,7 +138,7 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
         };
       }
     },
-    [resolve, dispatch, queryClient],
+    [resolve, queryClient],
   );
 
   const isNumberField = NUMBER_FIELDS.includes(resolve.name);

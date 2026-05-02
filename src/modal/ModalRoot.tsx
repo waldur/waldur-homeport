@@ -1,14 +1,13 @@
 import { ErrorBoundary } from '@sentry/react';
 import React, { FunctionComponent } from 'react';
 import { Modal } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { isDirty } from 'redux-form';
 
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { type RootState } from '@/store/reducers';
-
-import { closeModalDialog, waitForConfirmation } from './actions';
 
 import './ModalRoot.css';
 
@@ -33,15 +32,15 @@ export const ModalRoot: FunctionComponent = () => {
     ...rest
   } = modalProps || {};
 
-  const dispatch = useDispatch();
+  const { closeDialog, confirm } = useModal();
+
   const isDirtyForm = useSelector((state: RootState) =>
     formId ? isDirty(formId)(state) : false,
   );
   const onHide = async () => {
     if (isDirtyForm) {
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Closing dialog'),
           translate(
             'You have entered data in form. When dialog is closed form data would be lost.',
@@ -57,7 +56,7 @@ export const ModalRoot: FunctionComponent = () => {
         return;
       }
     }
-    dispatch(closeModalDialog());
+    closeDialog();
   };
   return (
     <Modal

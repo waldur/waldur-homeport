@@ -1,10 +1,9 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 const HPAUpdateDialog = lazyComponent(() =>
@@ -13,12 +12,9 @@ const HPAUpdateDialog = lazyComponent(() =>
   })),
 );
 
-const editHPADialog = (hpa) =>
-  openModalDialog(HPAUpdateDialog, { resolve: { hpa } });
-
 export const HPAUpdateButton: FunctionComponent<{ hpa }> = ({ hpa }) => {
-  const dispatch = useDispatch();
-  const callback = () => dispatch(editHPADialog(hpa));
+  const { openDialog } = useModal();
+  const callback = () => openDialog(HPAUpdateDialog, { resolve: { hpa } });
   return (
     <ActionItem
       title={translate('Edit')}

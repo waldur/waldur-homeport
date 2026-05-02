@@ -1,11 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
-import { useSelector } from 'react-redux';
 
 import { translate } from '@/i18n';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ActionItemType } from './types';
 
@@ -32,7 +31,7 @@ interface ResourceActionComponentProps {
 export const ResourceActionComponent: FunctionComponent<
   ResourceActionComponentProps
 > = (props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const extraAndResourceTypeActions = (props.extraActions || []).concat(
     props.resourceTypeActions || [],

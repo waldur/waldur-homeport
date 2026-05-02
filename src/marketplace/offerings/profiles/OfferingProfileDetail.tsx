@@ -3,7 +3,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOfferingProfilesAddRole,
   marketplaceOfferingProfilesRemoveRole,
@@ -14,15 +13,14 @@ import {
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
 const PROFILE_KEY = (uuid: string) => ['offering-profile', uuid];
 
 export const OfferingProfileDetail: FC = () => {
-  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const { params } = useCurrentStateAndParams();
   const uuid = params.uuid as string;
@@ -40,37 +38,28 @@ export const OfferingProfileDetail: FC = () => {
     [queryClient, uuid],
   );
 
-  const [showAdd, setShowAdd] = useState(false);
-
-  const remove = useCallback(
-    async (role: any) => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Confirmation'),
-          translate(
-            'Remove role {role} from profile? This will revoke all UserRole grants for this role on bound offerings.',
-            { role: <b>{role.name}</b> },
-            formatJsxTemplate,
-          ),
-          { forDeletion: true },
-        );
-      } catch {
-        return;
-      }
-      try {
-        await marketplaceOfferingProfilesRemoveRole({
-          path: { uuid },
-          body: { role: role.uuid } as any,
-        });
-        dispatch(showSuccess(translate('Role removed from profile.')));
-        await refetch();
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to remove role.')));
-      }
+  const removeMutation = useManagedMutation<any, any, any>({
+    mutationFn: (role) =>
+      marketplaceOfferingProfilesRemoveRole({
+        path: { uuid },
+        body: { role: role.uuid } as any,
+      }),
+    successMessage: translate('Role removed from profile.'),
+    errorMessage: translate('Unable to remove role.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: (role) =>
+        translate(
+          'Remove role {role} from profile? This will revoke all UserRole grants for this role on bound offerings.',
+          { role: <b>{role.name}</b> },
+          formatJsxTemplate,
+        ),
+      options: { forDeletion: true },
     },
-    [dispatch, uuid, refetch],
-  );
+  });
+
+  const [showAdd, setShowAdd] = useState(false);
 
   if (isLoading || !profile) {
     return <LoadingSpinner />;
@@ -134,7 +123,8 @@ export const OfferingProfileDetail: FC = () => {
                       <button
                         type="button"
                         className="btn btn-sm btn-light text-danger"
-                        onClick={() => remove(r)}
+                        onClick={() => removeMutation.mutate(r)}
+                        disabled={removeMutation.isPending}
                       >
                         <TrashIcon weight="bold" /> {translate('Remove')}
                       </button>
@@ -166,7 +156,7 @@ const AddRoleToProfileDialog: FC<{
   onClose(): void;
   onAdded(): void;
 }> = ({ profileUuid, onClose, onAdded }) => {
-  const dispatch = useDispatch();
+  const { showSuccess, showErrorResponse } = useNotify();
 
   // Available roles = system + offering roles whose content_type is
   // resource or resource_project.
@@ -196,20 +186,24 @@ const AddRoleToProfileDialog: FC<{
     },
   });
 
+  const [submitting, setSubmitting] = useState(false);
   const submit = useCallback(
     async (roleUuid: string) => {
+      setSubmitting(true);
       try {
         await marketplaceOfferingProfilesAddRole({
           path: { uuid: profileUuid },
           body: { role: roleUuid } as any,
         });
-        dispatch(showSuccess(translate('Role added to profile.')));
+        showSuccess(translate('Role added to profile.'));
         onAdded();
       } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to add role.')));
+        showErrorResponse(error, translate('Unable to add role.'));
+      } finally {
+        setSubmitting(false);
       }
     },
-    [dispatch, profileUuid, onAdded],
+    [showSuccess, showErrorResponse, profileUuid, onAdded],
   );
 
   return (
@@ -244,6 +238,7 @@ const AddRoleToProfileDialog: FC<{
                       type="button"
                       className="btn btn-sm btn-primary"
                       onClick={() => submit(r.uuid)}
+                      disabled={submitting}
                     >
                       {translate('Add')}
                     </button>

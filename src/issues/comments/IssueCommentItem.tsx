@@ -1,13 +1,19 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { FormattedJira } from '@/core/FormattedJira';
+import { lazyComponent } from '@/core/lazyComponent';
 import { getAbbreviation } from '@/core/utils';
 import { translate } from '@/i18n';
-import { openUserPopover } from '@/user/actions';
+import { useModal } from '@/modal/actions';
+
+const UserPopover = lazyComponent(() =>
+  import('@/user/UserPopover').then((module) => ({
+    default: module.UserPopover,
+  })),
+);
 
 import { CommentActions } from './CommentActions';
 import { Comment } from './types';
@@ -52,10 +58,13 @@ const CommentAvatar = ({ comment }) => {
 export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
   comment,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const openUserDialog = () => {
-    dispatch(openUserPopover({ user_uuid: comment.author_uuid }));
+    openDialog(UserPopover, {
+      resolve: { user_uuid: comment.author_uuid },
+      size: 'lg',
+    });
   };
 
   return (

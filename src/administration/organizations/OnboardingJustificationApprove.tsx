@@ -1,26 +1,26 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   onboardingJustificationsApprove,
   onboardingVerificationsCreateCustomer,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 export const OnboardingJustificationApprove: FunctionComponent<{
   row;
   refetch;
 }> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+
+  const { showErrorResponse, showSuccess } = useNotify();
 
   const callback = async () => {
     try {
-      const staff_notes = await waitForConfirmation(
-        dispatch,
+      const staff_notes = await confirm(
         translate('Approve justification'),
         translate(
           'Are you sure you want to approve this onboarding justification? This will create the organization automatically.',
@@ -37,9 +37,7 @@ export const OnboardingJustificationApprove: FunctionComponent<{
         body: { staff_notes: staff_notes.input },
       });
       await refetch();
-      dispatch(
-        showSuccess(translate('Onboarding justification has been approved.')),
-      );
+      showSuccess(translate('Onboarding justification has been approved.'));
       await onboardingVerificationsCreateCustomer({
         path: { uuid: row.verification_uuid },
       });
@@ -47,11 +45,9 @@ export const OnboardingJustificationApprove: FunctionComponent<{
         translate('Company verification successful. Organization created!'),
       );
     } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to approve onboarding justification.'),
-        ),
+      showErrorResponse(
+        e,
+        translate('Unable to approve onboarding justification.'),
       );
     }
   };

@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { translate } from '@/i18n';
 import { tryJoinOrganization } from '@/invitations/tryJoinOrganization';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { setCurrentUser } from '@/workspace/actions';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 export const useUpdateUser = (user: User) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const currentUser = useSelector(getUser) as any;
+  const currentUser = useUser() as any;
 
   const { showErrorResponse, showSuccess } = useNotify();
 

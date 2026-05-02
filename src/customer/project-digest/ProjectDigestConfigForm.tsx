@@ -1,16 +1,19 @@
-import { FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
 import { Field, Form, FormSpy } from 'react-final-form';
-import { useDispatch } from 'react-redux';
+import {
+  customersUpdateProjectDigestConfigUpdate,
+  ProjectDigestConfigRequest,
+} from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { NumberField } from '@/form/NumberField';
 import { SelectField } from '@/form/SelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { ProjectDigestConfig, updateProjectDigestConfig } from './api';
+import { ProjectDigestConfig } from './api';
 
 export interface DigestFormState {
   submitting: boolean;
@@ -62,8 +65,6 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
   onUpdated,
   onFormStateChange,
 }) => {
-  const dispatch = useDispatch();
-
   const frequencyOptions = useMemo(
     () => FREQUENCY_OPTIONS.map((o) => ({ value: o.value, label: o.label() })),
     [],
@@ -98,29 +99,24 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
 
   const availableSections = config?.available_sections ?? [];
 
-  const onSubmit = useCallback(
-    async (values: Record<string, unknown>) => {
-      try {
-        await updateProjectDigestConfig(customerUuid, values);
-        dispatch(
-          showSuccess(translate('Digest configuration updated successfully.')),
-        );
-        onUpdated();
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to update digest configuration.'),
-          ),
-        );
-      }
-    },
-    [customerUuid, onUpdated, dispatch],
-  );
+  const onSubmitMutation = useManagedMutation<
+    any,
+    any,
+    ProjectDigestConfigRequest
+  >({
+    mutationFn: (values) =>
+      customersUpdateProjectDigestConfigUpdate({
+        path: { uuid: customerUuid },
+        body: values,
+      }),
+    successMessage: translate('Digest configuration updated successfully.'),
+    errorMessage: translate('Unable to update digest configuration.'),
+    onSuccess: onUpdated,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       initialValues={initialValues}
       render={({ handleSubmit, values }) => (
         <form id={DIGEST_FORM_ID} onSubmit={handleSubmit}>

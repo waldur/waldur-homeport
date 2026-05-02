@@ -1,24 +1,19 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { FunctionComponent, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-import {
-  reviewerProfilesConnectOrcidRetrieve,
-  reviewerProfilesDisconnectOrcid,
-  reviewerProfilesSyncOrcid,
-  ReviewerProfile,
-} from 'waldur-js-client';
+import { FunctionComponent, useCallback } from 'react';
+import { ReviewerProfile } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { OrcidLogo } from '@/core/OrcidLogo';
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
-import { useNotify } from '@/store/hooks';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+
+import { ConnectOrcidAction } from './ConnectOrcidAction';
+import { DisconnectOrcidAction } from './DisconnectOrcidAction';
+import { SyncOrcidAction } from './SyncOrcidAction';
 
 const ProfileEditFieldDialog = lazyComponent(() =>
   import('./ProfileEditFieldDialog').then((module) => ({
@@ -37,15 +32,9 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
   profile,
   refetch,
 }) => {
-  const queryClient = useQueryClient();
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
   const isStaff = currentUser?.is_staff;
   const { openDialog } = useModal();
-
-  const [isConnectingOrcid, setIsConnectingOrcid] = useState(false);
-  const [isSyncingOrcid, setIsSyncingOrcid] = useState(false);
-  const [isDisconnectingOrcid, setIsDisconnectingOrcid] = useState(false);
-  const { showSuccess, showErrorResponse } = useNotify();
 
   const handleEditField = useCallback(
     (
@@ -60,62 +49,6 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
     },
     [openDialog, profile, refetch],
   );
-
-  const handleConnectOrcid = useCallback(async () => {
-    setIsConnectingOrcid(true);
-    try {
-      const result = await reviewerProfilesConnectOrcidRetrieve({
-        path: { uuid: profile.uuid },
-      });
-      const authUrl = result.data.authorization_url;
-      if (authUrl) {
-        window.location.href = authUrl;
-      }
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to connect ORCID.'));
-      setIsConnectingOrcid(false);
-    }
-  }, [profile.uuid, showErrorResponse]);
-
-  const handleSyncOrcid = useCallback(async () => {
-    setIsSyncingOrcid(true);
-    try {
-      await reviewerProfilesSyncOrcid({
-        path: { uuid: profile.uuid },
-      });
-      showSuccess(translate('ORCID data synchronized successfully.'));
-      refetch?.();
-      queryClient.invalidateQueries({ queryKey: ['reviewerAffiliationsList'] });
-      queryClient.invalidateQueries({ queryKey: ['reviewerExpertiseList'] });
-      queryClient.invalidateQueries({ queryKey: ['reviewerPublicationsList'] });
-      queryClient.invalidateQueries({
-        queryKey: ['reviewerAffiliationsCount'],
-      });
-      queryClient.invalidateQueries({ queryKey: ['reviewerExpertiseCount'] });
-      queryClient.invalidateQueries({
-        queryKey: ['reviewerPublicationsCount'],
-      });
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to sync ORCID data.'));
-    } finally {
-      setIsSyncingOrcid(false);
-    }
-  }, [profile.uuid, showSuccess, showErrorResponse, refetch, queryClient]);
-
-  const handleDisconnectOrcid = useCallback(async () => {
-    setIsDisconnectingOrcid(true);
-    try {
-      await reviewerProfilesDisconnectOrcid({
-        path: { uuid: profile.uuid },
-      });
-      showSuccess(translate('ORCID disconnected successfully.'));
-      refetch?.();
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to disconnect ORCID.'));
-    } finally {
-      setIsDisconnectingOrcid(false);
-    }
-  }, [profile.uuid, showSuccess, showErrorResponse, refetch]);
 
   const renderOrcidValue = () => {
     if (profile.orcid_id) {
@@ -150,29 +83,11 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
       <div className="d-flex gap-2">
         {profile.orcid_id ? (
           <>
-            <CompactSubmitButton
-              type="button"
-              variant="outline-primary"
-              onClick={handleSyncOrcid}
-              submitting={isSyncingOrcid}
-              label={translate('Sync ORCID')}
-            />
-            <CompactSubmitButton
-              type="button"
-              variant="danger"
-              onClick={handleDisconnectOrcid}
-              submitting={isDisconnectingOrcid}
-              label={translate('Disconnect ORCID')}
-            />
+            <SyncOrcidAction profile={profile} refetch={refetch} />
+            <DisconnectOrcidAction profile={profile} refetch={refetch} />
           </>
         ) : (
-          <CompactSubmitButton
-            type="button"
-            variant="success"
-            onClick={handleConnectOrcid}
-            submitting={isConnectingOrcid}
-            label={translate('Connect ORCID')}
-          />
+          <ConnectOrcidAction profile={profile} />
         )}
         {isStaff && (
           <ActionButton

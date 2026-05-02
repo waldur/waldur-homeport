@@ -1,6 +1,5 @@
 import { FORM_ERROR } from 'final-form';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceOfferingEstimatedCostPoliciesCreate } from 'waldur-js-client';
 
 import { AddButton } from '@/core/AddButton';
@@ -9,8 +8,8 @@ import { PolicyPeriod } from '@/customer/cost-policies/types';
 import { policyPeriodOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
-import { closeModalDialog, openModalDialog } from '@/modal/actions';
-import { showErrorResponse } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { OfferingCostPolicyFormData } from './types';
 
@@ -29,38 +28,37 @@ export const CostPolicyCreateButton = ({
   offering,
   refetch,
 }: CostPolicyCreateButtonProps) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
+
+  const { openDialog, closeDialog } = useModal();
+
   const openPolicyCreateDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(PolicyCreateDialog, {
-          size: 'lg',
-          submitFn: async (formData: OfferingCostPolicyFormData) => {
-            try {
-              await marketplaceOfferingEstimatedCostPoliciesCreate({
-                body: formData,
-              });
-              dispatch(closeModalDialog());
-              refetch();
-            } catch (e) {
-              dispatch(
-                showErrorResponse(e, translate('Unable to create policy.')),
-              );
-              if (e.response && e.response.status === 400) {
-                return e.response.data;
-              }
-              return { [FORM_ERROR]: translate('Unable to create policy.') };
+      openDialog(PolicyCreateDialog, {
+        size: 'lg',
+        submitFn: async (formData: OfferingCostPolicyFormData) => {
+          try {
+            await marketplaceOfferingEstimatedCostPoliciesCreate({
+              body: formData,
+            });
+            closeDialog();
+            refetch();
+          } catch (e) {
+            showErrorResponse(e, translate('Unable to create policy.'));
+            if (e.response && e.response.status === 400) {
+              return e.response.data;
             }
-          },
-          initialValues: {
-            scope: offering.url,
-            period: policyPeriodOptions.oneMonth.value as PolicyPeriod,
-          },
-          type: 'cost',
-          offering,
-        }),
-      ),
-    [dispatch, offering, refetch],
+            return { [FORM_ERROR]: translate('Unable to create policy.') };
+          }
+        },
+        initialValues: {
+          scope: offering.url,
+          period: policyPeriodOptions.oneMonth.value as PolicyPeriod,
+        },
+        type: 'cost',
+        offering,
+      }),
+    [offering, refetch],
   );
 
   return <AddButton action={openPolicyCreateDialog} />;

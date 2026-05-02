@@ -1,7 +1,5 @@
 import arrayMutators from 'final-form-arrays';
-import { useCallback } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsUpdateOptions,
   marketplaceProviderOfferingsUpdateResourceOptions,
@@ -9,9 +7,8 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { formatOption } from '../../store/utils';
 
@@ -20,9 +17,8 @@ import { OptionForm } from './OptionForm';
 import { validateOptionForm } from './validation';
 
 export const AddOptionDialog = ({ resolve }) => {
-  const dispatch = useDispatch();
-  const update = useCallback(
-    async (formData) => {
+  const addMutation = useManagedMutation<any, any, any>({
+    mutationFn: async (formData) => {
       const oldOptions = resolve.offering[resolve.type];
       const newOptions = {
         order: oldOptions?.order
@@ -33,35 +29,31 @@ export const AddOptionDialog = ({ resolve }) => {
           [formData.name]: formatOption(formData),
         },
       };
-      try {
-        if (resolve.type === 'options') {
-          await marketplaceProviderOfferingsUpdateOptions({
-            path: { uuid: resolve.offering.uuid },
-            body: {
-              options: newOptions,
-            },
-          });
-        } else if (resolve.type === 'resource_options') {
-          await marketplaceProviderOfferingsUpdateResourceOptions({
-            path: { uuid: resolve.offering.uuid },
-            body: {
-              resource_options: newOptions,
-            },
-          });
-        }
-        dispatch(showSuccess(translate('Option has been added successfully.')));
-        if (resolve.refetch) await resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to add option.')));
+
+      if (resolve.type === 'options') {
+        await marketplaceProviderOfferingsUpdateOptions({
+          path: { uuid: resolve.offering.uuid },
+          body: {
+            options: newOptions,
+          },
+        });
+      } else if (resolve.type === 'resource_options') {
+        await marketplaceProviderOfferingsUpdateResourceOptions({
+          path: { uuid: resolve.offering.uuid },
+          body: {
+            resource_options: newOptions,
+          },
+        });
       }
     },
-    [dispatch, resolve],
-  );
+    successMessage: translate('Option has been added successfully.'),
+    errorMessage: translate('Unable to add option.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={update}
+      onSubmit={(values) => addMutation.mutateAsync(values)}
       validate={validateOptionForm}
       initialValues={{
         type: FIELD_TYPES[0],

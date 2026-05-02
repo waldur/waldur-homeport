@@ -1,11 +1,10 @@
 import { FC, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { Tip } from '@/core/Tooltip';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -56,7 +55,7 @@ const buildEnvContent = (values: {
 export const LdapAgentEnvDialog: FC<LdapAgentEnvDialogProps> = ({
   resolve: { offering },
 }) => {
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   const [waldurUrl, setWaldurUrl] = useState('');
   const [waldurToken, setWaldurToken] = useState('CHANGEME');
   const [verifyTls, setVerifyTls] = useState(true);
@@ -88,7 +87,7 @@ export const LdapAgentEnvDialog: FC<LdapAgentEnvDialogProps> = ({
       <LdapAgentEnvPreview
         config={generatedEnv}
         onBack={() => setGeneratedEnv(null)}
-        onClose={() => dispatch(closeModalDialog())}
+        onClose={() => closeDialog()}
       />
     );
   }

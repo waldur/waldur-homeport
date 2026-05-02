@@ -1,43 +1,32 @@
 import { ShareIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { invoicesSendNotification } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
-  const user = useSelector(getUser);
-  const dispatch = useDispatch();
+  const user = useUser();
   if (!user.is_staff) {
     return null;
   }
 
-  const onClick = async () => {
-    try {
-      await invoicesSendNotification({ path: { uuid: row.uuid } });
-      dispatch(
-        showSuccess(
-          translate(
-            'Record notification has been sent to organization owners.',
-          ),
-        ),
-      );
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to send record notification.')),
-      );
-    }
-  };
+  const { mutate, isPending = false } = useManagedMutation<any, any, void>({
+    mutationFn: () => invoicesSendNotification({ path: { uuid: row.uuid } }),
+    successMessage: translate(
+      'Record notification has been sent to organization owners.',
+    ),
+    errorMessage: translate('Unable to send record notification.'),
+  });
 
   return (
     <ActionItem
       title={translate('Send notification')}
-      action={onClick}
+      action={mutate}
       iconNode={<ShareIcon weight="bold" />}
-      disabled={row.state !== 'created'}
+      disabled={row.state !== 'created' || isPending}
       tooltip={
         row.state !== 'created'
           ? translate('Notification can be sent only for created invoice.')

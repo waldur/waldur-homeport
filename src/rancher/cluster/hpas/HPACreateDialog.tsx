@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm, formValueSelector, change } from 'redux-form';
@@ -12,9 +12,8 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { StringField, SelectField, NumberField, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialog } from '@/modal/ActionDialog';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Resource } from '@/resource/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { type RootState } from '@/store/reducers';
 import { createEntity } from '@/table/actions';
 
@@ -33,45 +32,32 @@ interface OwnProps {
   };
 }
 
-const useHPACreateDialog = (cluster) => {
-  const [submitting, setSubmitting] = useState(false);
+const useHPACreateDialog = () => {
   const dispatch = useDispatch();
-  const callback = useCallback(
-    async (formData: HPACreateFormData) => {
-      try {
-        setSubmitting(true);
-        const response = await rancherHpasCreate({
-          body: {
-            name: formData.name,
-            description: formData.description,
-            workload: formData.workload.url,
-            min_replicas: formData.min_replicas,
-            max_replicas: formData.max_replicas,
-            metrics: serializeMetrics(formData),
-          },
-        });
-        const hpa = response.data;
-        dispatch(createEntity('rancher-hpas', hpa.uuid, hpa));
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to create horizontal pod autoscaler.'),
-          ),
-        );
-        setSubmitting(false);
-        return;
-      }
-      dispatch(
-        showSuccess(translate('Horizontal pod autoscaler has been created.')),
-      );
-      dispatch(closeModalDialog());
+
+  const createHPAMutation = useManagedMutation<any, any, HPACreateFormData>({
+    mutationFn: (formData) =>
+      rancherHpasCreate({
+        body: {
+          name: formData.name,
+          description: formData.description,
+          workload: formData.workload.url,
+          min_replicas: formData.min_replicas,
+          max_replicas: formData.max_replicas,
+          metrics: serializeMetrics(formData),
+        },
+      }),
+    successMessage: translate('Horizontal pod autoscaler has been created.'),
+    errorMessage: translate('Unable to create horizontal pod autoscaler.'),
+    onSuccess: (response: any) => {
+      const hpa = response.data;
+      dispatch(createEntity('rancher-hpas', hpa.uuid, hpa));
     },
-    [dispatch, cluster],
-  );
+  });
+
   return {
-    submitting,
-    createHPA: callback,
+    submitting: createHPAMutation.isPending,
+    createHPA: (formData) => createHPAMutation.mutateAsync(formData),
   };
 };
 
@@ -85,7 +71,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
     max_replicas: 10,
   },
 })((props) => {
-  const { submitting, createHPA } = useHPACreateDialog(props.resolve.cluster);
+  const { submitting, createHPA } = useHPACreateDialog();
 
   const { loading, value } = useAsync(async () => {
     const namespaces = await getAllPages((page) =>

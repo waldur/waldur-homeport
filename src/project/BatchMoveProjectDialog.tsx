@@ -1,9 +1,7 @@
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { Project, projectsMoveProject } from 'waldur-js-client';
 
-import { format } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
 import { Select } from '@/form/AsyncSelectField';
@@ -11,62 +9,43 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showError, showSuccess } from '@/store/notify';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 
 export const BatchMoveProjectDialog: FunctionComponent<{
   resolve: { rows: Project[]; refetch() };
 }> = ({ resolve: { rows, refetch } }) => {
-  const dispatch = useDispatch();
-  const onSubmit = useCallback(
-    async (formData) => {
-      const results = await Promise.allSettled(
-        rows.map((project) =>
-          projectsMoveProject({
-            path: { uuid: project.uuid },
-            body: {
-              customer: formData.organization.url,
-              preserve_permissions: formData.preserve_permissions,
-            },
-          }),
-        ),
-      );
-      const succeeded = results.filter((r) => r.status === 'fulfilled').length;
-      const failed = results.filter((r) => r.status === 'rejected');
-      if (succeeded > 0) {
-        dispatch(
-          showSuccess(
-            translate('{count} project(s) moved to {organizationName}.', {
-              count: succeeded,
-              organizationName: formData.organization.name,
-            }),
-          ),
-        );
-      }
-      if (failed.length > 0) {
-        const errorMessage = format(
-          (failed[0] as PromiseRejectedResult).reason,
-        );
-        dispatch(
-          showError(
-            translate('{count} project(s) could not be moved. {error}', {
-              count: failed.length,
-              error: errorMessage,
-            }),
-          ),
-        );
-      }
-      await refetch();
-      dispatch(closeModalDialog());
-    },
-    [dispatch, rows, refetch],
-  );
+  const { mutate, isPending } = useBatchMutation({
+    rows,
+    refetch,
+    mutationFn: (project, formData) =>
+      projectsMoveProject({
+        path: { uuid: project.uuid },
+        body: {
+          customer: formData.organization.url,
+          preserve_permissions: formData.preserve_permissions,
+        },
+      }),
+    successMessage: (formData) =>
+      translate('{count} project(s) moved to {organizationName}.', {
+        count: rows.length,
+        organizationName: formData.organization.name,
+      }),
+    renderPartialSuccessMessage: (count, formData) =>
+      translate('{count} project(s) moved to {organizationName}.', {
+        count,
+        organizationName: formData.organization.name,
+      }),
+    renderErrorMessage: (count) =>
+      translate('{count} project(s) could not be moved.', {
+        count,
+      }),
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(formData) => mutate(formData)}
       initialValues={{ preserve_permissions: false }}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
@@ -78,7 +57,7 @@ export const BatchMoveProjectDialog: FunctionComponent<{
               <>
                 <CloseDialogButton />
                 <SubmitButton
-                  submitting={submitting}
+                  submitting={submitting || isPending}
                   label={translate('Move')}
                   disabled={invalid}
                 />

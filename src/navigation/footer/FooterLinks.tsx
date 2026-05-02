@@ -37,7 +37,6 @@ export const FooterLinks = () => {
           <MenuItem {...config.tos} />
         </>
       )}
-
       {/* Support is always at the end in both layouts */}
       <SupportMenu />
     </ul>

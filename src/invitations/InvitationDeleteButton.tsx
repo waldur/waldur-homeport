@@ -1,29 +1,22 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { userInvitationsDelete } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const InvitationDeleteButton = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = async () => {
-    try {
-      await userInvitationsDelete({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Invitation has been deleted.')));
-      refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to delete invitation.')));
-    }
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => userInvitationsDelete({ path: { uuid: row.uuid } }),
+    refetch,
+    successMessage: translate('Invitation has been deleted.'),
+    errorMessage: translate('Unable to delete invitation.'),
+  });
+
   return (
-    <ActionItem
-      action={callback}
+    <RemovalActionItem
+      action={mutate}
       title={translate('Delete')}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-      iconColor="danger"
+      disabled={isPending}
     />
   );
 };

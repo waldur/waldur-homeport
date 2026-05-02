@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { IssueRequest } from 'waldur-js-client';
 
 import { IssueCreateButtonProps } from '../list/IssueCreateButton';
@@ -7,7 +6,7 @@ import { ISSUE_IDS } from '../types/constants';
 
 import { IssueCreateForm } from './IssueCreateForm';
 import { IssueFormData } from './types';
-import { sendIssueCreateRequest } from './utils';
+import { useIssueCreateMutation } from './utils';
 
 interface CreateIssueDialogProps {
   resolve: IssueCreateButtonProps;
@@ -16,7 +15,8 @@ interface CreateIssueDialogProps {
 export const IssueCreateDialog: FunctionComponent<CreateIssueDialogProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
+  const { mutateAsync: createIssue, isPending: submitting } =
+    useIssueCreateMutation(resolve.refetch);
 
   const onCreateIssue = async (formData: IssueFormData) => {
     const description = formData.description;
@@ -43,13 +43,14 @@ export const IssueCreateDialog: FunctionComponent<CreateIssueDialogProps> = ({
     if (formData.issueTemplate) {
       payload.template = formData.issueTemplate.url;
     }
-    await sendIssueCreateRequest(
-      payload,
-      dispatch,
-      resolve.refetch,
-      formData.files,
-    );
+    await createIssue({ payload, files: formData.files });
   };
 
-  return <IssueCreateForm onCreateIssue={onCreateIssue} resolve={resolve} />;
+  return (
+    <IssueCreateForm
+      onCreateIssue={onCreateIssue}
+      resolve={resolve}
+      submitting={submitting}
+    />
+  );
 };

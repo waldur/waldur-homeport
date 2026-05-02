@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const MultilingualImageEditDialog = lazyComponent(() =>
   import('./MultilingualImageEditDialog').then((module) => ({
@@ -20,16 +19,14 @@ export const MultilingualImageEditButton = ({
   item,
   value,
 }: MultilingualImageEditButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openFormDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(MultilingualImageEditDialog, {
-          resolve: { item, initialValues: value },
-          size: 'lg',
-        }),
-      ),
-    [dispatch, item, value],
+      openDialog(MultilingualImageEditDialog, {
+        resolve: { item, initialValues: value },
+        size: 'lg',
+      }),
+    [item, value],
   );
 
   return <CompactEditButton onClick={openFormDialog} />;

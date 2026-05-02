@@ -1,7 +1,5 @@
 import { XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceResourcesList,
   marketplaceUserOfferingConsentsRevoke,
@@ -13,17 +11,14 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameField';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { renderFieldOrDash } from '@/table/utils';
 
 export const RevokeTosDialog = ({
   resolve: { tos, offering, refetch, offeringUuid },
 }) => {
-  const dispatch = useDispatch();
-
   const { data: resources, isLoading: resourcesLoading } = useQuery({
     queryKey: ['offering-resources-for-revoke', offeringUuid],
     queryFn: () =>
@@ -32,28 +27,17 @@ export const RevokeTosDialog = ({
       }).then((response) => response.data || []),
   });
 
-  const handleRevoke = useCallback(async () => {
-    try {
-      await marketplaceUserOfferingConsentsRevoke({
+  const revokeMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceUserOfferingConsentsRevoke({
         path: { uuid: tos.user_consent.uuid },
-      });
-
-      dispatch(
-        showSuccess(
-          translate('Terms of service consent has been revoked successfully.'),
-        ),
-      );
-      if (refetch) await refetch();
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to revoke Terms of service consent.'),
-        ),
-      );
-    }
-  }, [dispatch, tos.user_consent.uuid, refetch]);
+      }),
+    successMessage: translate(
+      'Terms of service consent has been revoked successfully.',
+    ),
+    errorMessage: translate('Unable to revoke Terms of service consent.'),
+    refetch,
+  });
 
   return (
     <ModalDialog
@@ -64,10 +48,10 @@ export const RevokeTosDialog = ({
         <>
           <CloseDialogButton className="flex-equal" />
           <SubmitButton
-            submitting={false}
+            submitting={revokeMutation.isPending}
             variant="danger"
             className="flex-equal"
-            onClick={handleRevoke}
+            onClick={() => revokeMutation.mutate()}
             type="button"
             label={translate('Revoke')}
           />
@@ -83,7 +67,6 @@ export const RevokeTosDialog = ({
           },
         )}
       </p>
-
       {resourcesLoading ? (
         <div className="text-center py-4">
           <LoadingSpinner />

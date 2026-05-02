@@ -13,7 +13,7 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock store hooks
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useNotify: () => ({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),
@@ -21,7 +21,7 @@ vi.mock('@/store/hooks', () => ({
 }));
 
 // Mock modal hooks
-vi.mock('@/modal/hooks', () => ({
+vi.mock('@/modal/actions', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),

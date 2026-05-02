@@ -1,20 +1,15 @@
 import { FORM_ERROR } from 'final-form';
-import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
-import {
-  EmailInvitationRequest,
-  proposalProtectedCallsInviteByEmail,
-} from 'waldur-js-client';
+import { proposalProtectedCallsInviteByEmail } from 'waldur-js-client';
 
 import { StringField, SubmitButton, TextField } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 
 import { Call } from '../../types';
 
@@ -49,39 +44,38 @@ const composeValidators =
 export const DirectEmailInviteDialog = ({
   resolve,
 }: DirectEmailInviteDialogProps) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
 
-  const processRequest = useCallback(
-    async (values: FormValues) => {
-      try {
-        await proposalProtectedCallsInviteByEmail({
-          path: { uuid: resolve.call.uuid },
-          body: {
-            email: values.email,
-            invitation_message: values.invitation_message || undefined,
-          } as EmailInvitationRequest,
-        });
-        resolve.refetch();
-        dispatch(
-          showSuccess(
-            translate('Invitation sent to {email}.', { email: values.email }),
-          ),
-        );
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to send invitation.')));
-        if (e.response && e.response.status === 400) {
-          return { [FORM_ERROR]: e.response.data };
-        }
-        return { [FORM_ERROR]: translate('Unable to send invitation.') };
-      }
+  const inviteMutation = useManagedMutation<any, any, FormValues>({
+    mutationFn: (values) =>
+      proposalProtectedCallsInviteByEmail({
+        path: { uuid: resolve.call.uuid },
+        body: {
+          email: values.email,
+          invitation_message: values.invitation_message || undefined,
+        },
+      }),
+    errorMessage: translate('Unable to send invitation.'),
+    refetch: resolve.refetch,
+    onSuccess: (_, variables) => {
+      showSuccess(
+        translate('Invitation sent to {email}.', { email: variables.email }),
+      );
     },
-    [resolve, dispatch],
-  );
+  });
 
   return (
     <Form
-      onSubmit={processRequest}
+      onSubmit={async (values: FormValues) => {
+        try {
+          await inviteMutation.mutateAsync(values);
+        } catch (e) {
+          if (e.response && e.response.status === 400) {
+            return { [FORM_ERROR]: e.response.data };
+          }
+          return { [FORM_ERROR]: translate('Unable to send invitation.') };
+        }
+      }}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

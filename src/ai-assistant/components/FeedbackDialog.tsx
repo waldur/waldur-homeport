@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Form as FinalForm, Field, FormSpy } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import type { FeedbackCategoryEnum } from 'waldur-js-client';
 
 import { useMessageFeedbackMutation } from '@/ai-assistant/hooks/useMessageFeedbackMutation';
@@ -11,7 +10,7 @@ import { SubmitButton } from '@/form/SubmitButton';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -31,7 +30,7 @@ interface Resolve {
 }
 
 export const FeedbackDialog: FC<{ resolve: Resolve }> = ({ resolve }) => {
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   const { patchMessageByBackendUuid } = useThreadContext();
   const { submitAsync, isSubmitting } = useMessageFeedbackMutation(
     resolve.messageUuid,
@@ -57,7 +56,7 @@ export const FeedbackDialog: FC<{ resolve: Resolve }> = ({ resolve }) => {
           feedback_submitted_at: updated.feedback_submitted_at,
         });
       }
-      dispatch(closeModalDialog());
+      closeDialog();
     } catch {
       // mutation's onError already shows a toast; keep dialog open.
     }

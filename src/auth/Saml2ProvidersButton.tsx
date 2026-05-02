@@ -1,8 +1,7 @@
 import { GlobeIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { LoginButton } from './LoginButton';
 
@@ -13,13 +12,13 @@ const AuthSaml2Dialog = lazyComponent(() =>
 );
 
 export const Saml2ProvidersButton = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   return (
     <LoginButton
       icon={<GlobeIcon weight="bold" />}
       label="eduGAIN"
-      onClick={() => dispatch(openModalDialog(AuthSaml2Dialog))}
+      onClick={() => openDialog(AuthSaml2Dialog)}
     />
   );
 };

@@ -6,7 +6,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 const ServiceProcessesDetailsDialog = lazyComponent(() =>

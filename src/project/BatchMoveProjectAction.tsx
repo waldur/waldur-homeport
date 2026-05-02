@@ -1,10 +1,10 @@
 import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import {
   hasPermission,
@@ -27,7 +27,7 @@ export const BatchMoveProjectAction = ({
   rows: Project[];
   refetch;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useUser();
   const isStaff = useSelector(isStaffSelector);
 
@@ -52,11 +52,9 @@ export const BatchMoveProjectAction = ({
   }
 
   const callback = () =>
-    dispatch(
-      openModalDialog(BatchMoveProjectDialog, {
-        resolve: { rows, refetch },
-      }),
-    );
+    openDialog(BatchMoveProjectDialog, {
+      resolve: { rows, refetch },
+    });
 
   return (
     <ActionItem

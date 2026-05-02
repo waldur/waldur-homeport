@@ -1,14 +1,14 @@
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
-import { useDispatch, useStore } from 'react-redux';
+import { useStore } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { adminArrowCustomerMappingsImportLicense } from 'waldur-js-client';
 
 import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showError, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { Step1SelectCustomer } from './Step1SelectCustomer';
 import { Step2SelectVendorOffering } from './Step2SelectVendorOffering';
@@ -54,7 +54,10 @@ const steps: ProgressStep[] = [
 ];
 
 export const ArrowImportWizard: FC<ArrowImportWizardProps> = (props) => {
-  const dispatch = useDispatch();
+  const { showError, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
+
   const store = useStore();
 
   const submitForm = useCallback(
@@ -88,14 +91,12 @@ export const ArrowImportWizard: FC<ArrowImportWizardProps> = (props) => {
       const selectedLicenses = formValues?.selectedLicenses || [];
 
       if (!customerMapping || !vendorOffering || !project) {
-        dispatch(showError(translate('Please complete all steps')));
+        showError(translate('Please complete all steps'));
         return;
       }
 
       if (selectedLicenses.length === 0) {
-        dispatch(
-          showError(translate('Please select at least one license to import')),
-        );
+        showError(translate('Please select at least one license to import'));
         return;
       }
 
@@ -120,32 +121,28 @@ export const ArrowImportWizard: FC<ArrowImportWizardProps> = (props) => {
       }
 
       if (successCount > 0) {
-        dispatch(
-          showSuccess(
-            translate('Successfully imported {n} license(s)', {
-              n: successCount,
-            }),
-          ),
+        showSuccess(
+          translate('Successfully imported {n} license(s)', {
+            n: successCount,
+          }),
         );
       }
 
       if (errorCount > 0) {
-        dispatch(
-          showError(
-            translate('Failed to import {n} license(s)', {
-              n: errorCount,
-            }),
-          ),
+        showError(
+          translate('Failed to import {n} license(s)', {
+            n: errorCount,
+          }),
         );
       }
 
       if (successCount > 0) {
         props.resolve?.refetch?.();
         formProps.destroy();
-        dispatch(closeModalDialog());
+        closeDialog();
       }
     },
-    [dispatch, store, props.resolve],
+    [store],
   );
 
   return (

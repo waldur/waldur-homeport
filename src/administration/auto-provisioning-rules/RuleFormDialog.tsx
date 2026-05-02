@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Form } from 'react-final-form';
 import {
   autoprovisioningRulesCreate,
@@ -10,9 +10,8 @@ import {
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { RuleForm } from './RuleForm';
 
@@ -30,8 +29,6 @@ interface AutoProvisioningRuleForm {
 }
 
 export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
   const isEdit = resolve.rule;
 
   const initialValues = isEdit
@@ -48,8 +45,12 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
       }
     : undefined;
 
-  const onSubmit = useCallback(
-    async (formData: AutoProvisioningRuleForm) => {
+  const onSubmitMutation = useManagedMutation<
+    any,
+    any,
+    AutoProvisioningRuleForm
+  >({
+    mutationFn: (formData) => {
       const payload = {
         name: formData.name,
         customer: formData.customer?.url ?? null,
@@ -75,37 +76,26 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
           : [],
       };
 
-      try {
-        if (isEdit) {
-          await autoprovisioningRulesUpdate({
-            path: { uuid: resolve.rule.uuid },
-            body: payload,
-          });
-          showSuccess(translate('Rule edited successfully'));
-        } else {
-          await autoprovisioningRulesCreate({
-            body: payload,
-          });
-          showSuccess(translate('Rule has been successfully created'));
-        }
-        if (resolve.refetch) await resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error);
+      if (isEdit) {
+        return autoprovisioningRulesUpdate({
+          path: { uuid: resolve.rule.uuid },
+          body: payload,
+        });
+      } else {
+        return autoprovisioningRulesCreate({
+          body: payload,
+        });
       }
     },
-    [
-      resolve.rule,
-      resolve.refetch,
-      showSuccess,
-      showErrorResponse,
-      closeDialog,
-    ],
-  );
+    successMessage: isEdit
+      ? translate('Rule edited successfully')
+      : translate('Rule has been successfully created'),
+    refetch: resolve.refetch,
+  });
 
   return (
-    <Form
-      onSubmit={onSubmit}
+    <Form<AutoProvisioningRuleForm>
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       initialValues={initialValues}
       validate={(values) => {
         const errors: any = {};

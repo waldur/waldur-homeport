@@ -1,14 +1,13 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const ProjectCreateDialog = lazyComponent(() =>
   import('./ProjectCreateDialog').then((module) => ({
@@ -17,7 +16,7 @@ const ProjectCreateDialog = lazyComponent(() =>
 );
 
 export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const disabled =
     !user.is_staff &&
     user.permissions
@@ -29,7 +28,7 @@ export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
             customerId: perm.scope_uuid,
           }),
       );
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   if (disabled) {
     return null;
   }
@@ -37,13 +36,11 @@ export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
     <ActionButton
       title={translate('Add')}
       action={() =>
-        dispatch(
-          openModalDialog(ProjectCreateDialog, {
-            size: 'lg',
-            formId: 'projectCreate',
-            refetch,
-          }),
-        )
+        openDialog(ProjectCreateDialog, {
+          size: 'lg',
+          formId: 'projectCreate',
+          refetch,
+        })
       }
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"

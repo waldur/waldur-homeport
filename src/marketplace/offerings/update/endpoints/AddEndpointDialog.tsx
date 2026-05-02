@@ -1,14 +1,14 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { marketplaceProviderOfferingsAddEndpoint } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsAddEndpoint,
+  NestedEndpointRequest,
+} from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { FormGroup } from '../../FormGroup';
 
@@ -20,30 +20,23 @@ export const AddEndpointDialog = reduxForm<
 >({
   form: ENDPOINT_FORM_ID,
 })((props) => {
-  const dispatch = useDispatch();
-  const update = useCallback(
-    async (formData) => {
-      try {
-        await marketplaceProviderOfferingsAddEndpoint({
-          path: { uuid: props.resolve.offering.uuid },
-          body: formData,
-        });
-        dispatch(
-          showSuccess(translate('Endpoint has been added successfully.')),
-        );
-        if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to add endpoint.')),
-        );
-      }
-    },
-    [dispatch],
-  );
+  const addMutation = useManagedMutation<any, any, NestedEndpointRequest>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsAddEndpoint({
+        path: { uuid: props.resolve.offering.uuid },
+        body: formData,
+      }),
+    successMessage: translate('Endpoint has been added successfully.'),
+    errorMessage: translate('Unable to add endpoint.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(update)}>
+    <form
+      onSubmit={props.handleSubmit((values: NestedEndpointRequest) =>
+        addMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Add endpoint')}
         footer={

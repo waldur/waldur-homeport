@@ -1,11 +1,10 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const PaymentUpdateDialogContainer = lazyComponent(() =>
   import('@/customer/payments/PaymentUpdateDialog').then((module) => ({
@@ -13,19 +12,18 @@ const PaymentUpdateDialogContainer = lazyComponent(() =>
   })),
 );
 
-export const EditPaymentButton = ({ row: payment }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+export const EditPaymentButton = ({ row: payment, refetch }) => {
+  const { openDialog } = useModal();
+  const user = useUser();
   return (
     <ActionItem
       title={translate('Edit')}
       action={() =>
-        dispatch(
-          openModalDialog(PaymentUpdateDialogContainer, {
-            resolve: payment,
-            size: 'lg',
-          }),
-        )
+        openDialog(PaymentUpdateDialogContainer, {
+          resolve: payment,
+          refetch,
+          size: 'lg',
+        })
       }
       iconNode={<PencilSimpleIcon weight="bold" />}
       disabled={!user.is_staff}

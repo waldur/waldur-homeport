@@ -1,17 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { userInvitationsDetailsRetrieve } from 'waldur-js-client';
 
 import { getInvitationLinkProps } from '@/administration/getInvitationLinkProps';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { InvitationTokenStorage } from '@/core/StorageManager';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { formatInvitationState } from './choices';
 import { InvitationButtons } from './InvitationButtons';
@@ -23,7 +22,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
 }> = ({ resolve: { token, deferred } }) => {
   const router = useRouter();
 
-  const user = useSelector(getUser);
+  const user = useUser();
   const asyncResult = useQuery({
     queryKey: ['invitation', token],
 

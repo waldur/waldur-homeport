@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import {
@@ -9,9 +8,8 @@ import {
 import { SubmitButton, SelectField, FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { EDIT_SCRIPT_FORM_ID } from './constants';
 import { ScriptEditorProps } from './types';
@@ -43,40 +41,30 @@ export const EditScriptLanguageDialog = connect<{}, {}, OwnProps>(
   reduxForm<{}, OwnProps>({
     form: EDIT_SCRIPT_FORM_ID,
   })((props) => {
-    const { closeDialog } = useModal();
-    const { showSuccess, showErrorResponse } = useNotify();
-
-    const update = useCallback(
-      async (formData) => {
-        try {
-          await marketplaceProviderOfferingsUpdateIntegration({
-            path: { uuid: props.resolve.offering.uuid },
-            body: {
-              secret_options: {
-                ...props.resolve.offering.secret_options,
-                [props.resolve.type]: formData.language,
-              } as MergedSecretOptionsRequest,
-            },
-          });
-          showSuccess(
-            translate('Script language has been updated successfully.'),
-          );
-          if (props.resolve.refetch) {
-            await props.resolve.refetch();
-          }
-          closeDialog();
-        } catch (error) {
-          showErrorResponse(
-            error,
-            translate('Unable to update script language.'),
-          );
-        }
-      },
-      [props.resolve],
-    );
+    const updateMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        marketplaceProviderOfferingsUpdateIntegration({
+          path: { uuid: props.resolve.offering.uuid },
+          body: {
+            secret_options: {
+              ...props.resolve.offering.secret_options,
+              [props.resolve.type]: formData.language,
+            } as MergedSecretOptionsRequest,
+          },
+        }),
+      successMessage: translate(
+        'Script language has been updated successfully.',
+      ),
+      errorMessage: translate('Unable to update script language.'),
+      refetch: props.resolve.refetch,
+    });
 
     return (
-      <form onSubmit={props.handleSubmit(update)}>
+      <form
+        onSubmit={props.handleSubmit((values) =>
+          updateMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={props.resolve.label}
           subtitle={translate(

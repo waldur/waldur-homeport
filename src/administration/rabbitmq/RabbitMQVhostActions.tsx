@@ -2,11 +2,10 @@ import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showError, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { TableDropdownToggle } from '@/table/ActionsDropdown';
 
 import {
@@ -28,30 +27,29 @@ const PRESET_PATTERNS = [
 export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
   vhost,
 }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+
+  const { showError, showSuccess } = useNotify();
+
   const queryClient = useQueryClient();
 
   const purgeMutation = useMutation({
     mutationFn: (pattern: string) =>
       purgeRabbitMQQueues({ vhost: vhost.name, queue_pattern: pattern }),
     onSuccess: (data) => {
-      dispatch(
-        showSuccess(
-          translate('Purged {messages} messages from {queues} queues', {
-            messages: data.purged_messages.toLocaleString(),
-            queues: data.purged_queues,
-          }),
-        ),
+      showSuccess(
+        translate('Purged {messages} messages from {queues} queues', {
+          messages: data.purged_messages.toLocaleString(),
+          queues: data.purged_queues,
+        }),
       );
       queryClient.invalidateQueries({ queryKey: ['RabbitMQStats'] });
     },
     onError: (error) => {
-      dispatch(
-        showError(
-          translate('Failed to purge queues: {error}', {
-            error: error instanceof Error ? error.message : String(error),
-          }),
-        ),
+      showError(
+        translate('Failed to purge queues: {error}', {
+          error: error instanceof Error ? error.message : String(error),
+        }),
       );
     },
   });
@@ -64,43 +62,33 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
         delete_queue: true,
       }),
     onSuccess: (data) => {
-      dispatch(
-        showSuccess(
-          translate('Deleted {count} queues', {
-            count: data.deleted_queues,
-          }),
-        ),
+      showSuccess(
+        translate('Deleted {count} queues', {
+          count: data.deleted_queues,
+        }),
       );
       queryClient.invalidateQueries({ queryKey: ['RabbitMQStats'] });
     },
     onError: (error) => {
-      dispatch(
-        showError(
-          translate('Failed to delete queues: {error}', {
-            error: error instanceof Error ? error.message : String(error),
-          }),
-        ),
+      showError(
+        translate('Failed to delete queues: {error}', {
+          error: error instanceof Error ? error.message : String(error),
+        }),
       );
     },
   });
 
-  const countMatchingQueues = useCallback(
-    (pattern: string) => {
-      const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$');
-      return vhost.queues.filter((q) => regex.test(q.name)).length;
-    },
-    [vhost.queues],
-  );
+  const countMatchingQueues = useCallback((pattern: string) => {
+    const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$');
+    return vhost.queues.filter((q) => regex.test(q.name)).length;
+  }, []);
 
-  const countMatchingMessages = useCallback(
-    (pattern: string) => {
-      const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$');
-      return vhost.queues
-        .filter((q) => regex.test(q.name))
-        .reduce((sum, q) => sum + q.messages, 0);
-    },
-    [vhost.queues],
-  );
+  const countMatchingMessages = useCallback((pattern: string) => {
+    const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$');
+    return vhost.queues
+      .filter((q) => regex.test(q.name))
+      .reduce((sum, q) => sum + q.messages, 0);
+  }, []);
 
   const handlePurgePattern = useCallback(
     async (pattern: string) => {
@@ -108,13 +96,12 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
       const matchingMessages = countMatchingMessages(pattern);
 
       if (matchingQueues === 0) {
-        dispatch(showError(translate('No queues match this pattern')));
+        showError(translate('No queues match this pattern'));
         return;
       }
 
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Purge queues by pattern'),
           <>
             <p>
@@ -149,13 +136,7 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
         // User cancelled
       }
     },
-    [
-      dispatch,
-      vhost,
-      purgeMutation,
-      countMatchingQueues,
-      countMatchingMessages,
-    ],
+    [vhost, purgeMutation, countMatchingQueues, countMatchingMessages],
   );
 
   const handleDeletePattern = useCallback(
@@ -164,13 +145,12 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
       const matchingMessages = countMatchingMessages(pattern);
 
       if (matchingQueues === 0) {
-        dispatch(showError(translate('No queues match this pattern')));
+        showError(translate('No queues match this pattern'));
         return;
       }
 
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Delete queues by pattern'),
           <>
             <p className="text-danger fw-bold">
@@ -207,13 +187,7 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
         // User cancelled
       }
     },
-    [
-      dispatch,
-      vhost,
-      deleteMutation,
-      countMatchingQueues,
-      countMatchingMessages,
-    ],
+    [vhost, deleteMutation, countMatchingQueues, countMatchingMessages],
   );
 
   const hasAnyMatchingQueues = PRESET_PATTERNS.some(

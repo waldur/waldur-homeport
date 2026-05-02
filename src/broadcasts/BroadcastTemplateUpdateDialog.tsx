@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import {
   broadcastMessageTemplatesUpdate,
@@ -10,9 +9,8 @@ import { BroadcastTemplateForm } from '@/broadcasts/BroadcastTemplateForm';
 import { BROADCAST_TEMPLATE_CREATE_FORM_ID } from '@/broadcasts/constants';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface OwnProps {
   refetch?(): void;
@@ -29,34 +27,23 @@ export const BroadcastTemplateUpdateDialog = connect<{}, {}, OwnProps>(
   }),
 )(
   enhance(({ submitting, handleSubmit, resolve }) => {
-    const dispatch = useDispatch();
-
-    const callback = useCallback(
-      async (formData: MessageTemplate) => {
-        try {
-          await broadcastMessageTemplatesUpdate({
-            path: { uuid: formData.uuid },
-            body: formData,
-          });
-          await resolve.refetch();
-          dispatch(
-            showSuccess(translate('Broadcast template has been updated.')),
-          );
-          dispatch(closeModalDialog());
-        } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              translate('Unable to update a broadcast template.'),
-            ),
-          );
-        }
-      },
-      [dispatch, resolve],
-    );
+    const callbackMutation = useManagedMutation<any, any, MessageTemplate>({
+      mutationFn: (formData) =>
+        broadcastMessageTemplatesUpdate({
+          path: { uuid: formData.uuid },
+          body: formData,
+        }),
+      successMessage: translate('Broadcast template has been updated.'),
+      errorMessage: translate('Unable to update a broadcast template.'),
+      refetch: resolve.refetch,
+    });
 
     return (
-      <form onSubmit={handleSubmit(callback)}>
+      <form
+        onSubmit={handleSubmit((values) =>
+          callbackMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={translate('Update a broadcast template')}
           footer={

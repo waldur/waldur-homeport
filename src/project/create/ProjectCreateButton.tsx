@@ -1,15 +1,16 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 import { Customer } from '@/workspace/types';
 
 const ProjectCreateDialog = lazyComponent(() =>
@@ -37,14 +38,14 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
 }) => {
   const currentCustomer = useSelector(getCustomer);
   const customer = _customer || currentCustomer;
-  const user = useSelector(getUser);
+  const user = useUser();
   const disabled =
     !customer ||
     !hasPermission(user, {
       permission: PermissionEnum.CREATE_PROJECT,
       customerId: customer.uuid,
     });
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   return (
     <ActionButton
@@ -52,14 +53,12 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
       variant={variant}
       className={className}
       action={() =>
-        dispatch(
-          openModalDialog(ProjectCreateDialog, {
-            size: 'lg',
-            formId: 'projectCreate',
-            customer,
-            refetch,
-          }),
-        )
+        openDialog(ProjectCreateDialog, {
+          size: 'lg',
+          formId: 'projectCreate',
+          customer,
+          refetch,
+        })
       }
       tooltip={
         !customer

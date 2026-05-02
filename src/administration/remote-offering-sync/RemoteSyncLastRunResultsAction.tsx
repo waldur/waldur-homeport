@@ -1,8 +1,7 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
@@ -23,10 +22,10 @@ const LastRunResultDialog = ({ remoteSync }) => {
 export const RemoteSyncLastRunResultsAction = (
   props: RemoteSyncActionProps,
 ) => {
-  const dispatch = useDispatch();
+  const { openDialog: openModal } = useModal();
 
   const openDialog = () => {
-    dispatch(openModalDialog(LastRunResultDialog, { remoteSync: props.row }));
+    openModal(LastRunResultDialog, { remoteSync: props.row });
   };
 
   return (

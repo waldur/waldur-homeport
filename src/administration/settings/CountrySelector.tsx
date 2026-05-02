@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
@@ -8,11 +7,11 @@ import { SubmitButton } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { SettingsDescription } from '@/SettingsDescription';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { TableQuery } from '@/table/TableQuery';
 
 // Get the list of all available country codes from settings configuration default value
@@ -33,7 +32,7 @@ interface CountrySelectorProps {
 export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   const { value = [], settingKey } = resolve;
   const [query, setQuery] = useState('');
   const { showError, showErrorResponse, showSuccess } = useNotify();
@@ -62,7 +61,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
           ...formDataOptions,
         });
         showSuccess(translate('Country list has been updated'));
-        dispatch(closeModalDialog());
+        closeDialog();
         window.location.reload();
       } catch (e) {
         showErrorResponse(e, translate('Unable to update country list'));

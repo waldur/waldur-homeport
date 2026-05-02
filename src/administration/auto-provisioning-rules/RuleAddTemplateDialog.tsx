@@ -8,9 +8,8 @@ import { AtLeast } from '@/core/types';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { Category, Offering, Plan } from '@/marketplace/types';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormThirdPage as Step2AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { Step1OfferingAndPlan } from './Step1OfferingAndPlan';
 import { Step3FinalConfig } from './Step3FinalConfig';
@@ -53,36 +52,29 @@ const steps: ProgressStep[] = [
 export const RuleAddTemplateDialog: FC<RuleAddTemplateDialogProps> = (
   props,
 ) => {
-  const submitForm = useCallback(
-    async (formData, dispatch, formProps) => {
-      try {
-        await autoprovisioningRulesPartialUpdate({
-          path: { uuid: props.resolve.rule.uuid },
-          body: {
-            plan_attributes: formData.attributes,
-            plan_limits: formData.limits || {},
-            plan: formData.plan.url,
-            project_role_name: props.resolve.rule.project_role_display_name,
-          },
-        });
-        if (props.resolve.rule.plan) {
-          // Edit current
-          dispatch(showSuccess(translate('Template edited successfully')));
-        } else {
-          // Add new
-          dispatch(
-            showSuccess(translate('Template added to the rule successfully')),
-          );
-        }
+  const submitMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      autoprovisioningRulesPartialUpdate({
+        path: { uuid: props.resolve.rule.uuid },
+        body: {
+          plan_attributes: formData.attributes,
+          plan_limits: formData.limits || {},
+          plan: formData.plan.url,
+          project_role_name: props.resolve.rule.project_role_display_name,
+        },
+      }),
+    successMessage: props.resolve.rule.plan
+      ? translate('Template edited successfully')
+      : translate('Template added to the rule successfully'),
+    refetch: props.resolve.refetch,
+  });
 
-        formProps.destroy();
-        if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error));
-      }
+  const submitForm = useCallback(
+    async (formData, formProps) => {
+      await submitMutation.mutateAsync(formData);
+      formProps.destroy();
     },
-    [props.resolve.refetch],
+    [submitMutation],
   );
 
   /** Auto filling `offering` in step 1 */

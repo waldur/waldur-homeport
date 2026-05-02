@@ -1,7 +1,6 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { Col, Form, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import {
@@ -17,9 +16,8 @@ import { makeAccountingPeriods } from '@/customer/list/utils';
 import { SubmitButton } from '@/form';
 import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 async function oldestInvoice() {
@@ -58,17 +56,9 @@ export const ExportAsEmailDialog = reduxForm<{}, any>({
   enableReinitialize: true,
 })(({ submitting, handleSubmit }) => {
   const { loading, error, value: data } = useAsync(loadData);
-  const dispatch = useDispatch();
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-  if (error) {
-    return <>{translate('Unable to load financial overview.')}</>;
-  }
-
-  const submit = async (formData: any) => {
-    try {
-      await invoiceSendFinancialReportByMail({
+  const submitMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      invoiceSendFinancialReportByMail({
         body: {
           emails: formData.emails || [],
           month: formData.accounting_period
@@ -78,16 +68,22 @@ export const ExportAsEmailDialog = reduxForm<{}, any>({
             ? formData.accounting_period.value.year || null
             : null,
         },
-      });
-      dispatch(showSuccess(translate('Report has been sent')));
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Something went wrong')));
-    }
-  };
+      }),
+    successMessage: translate('Report has been sent'),
+    errorMessage: translate('Something went wrong'),
+  });
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  if (error) {
+    return <>{translate('Unable to load financial overview.')}</>;
+  }
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form
+      onSubmit={handleSubmit((values) => submitMutation.mutateAsync(values))}
+    >
       <ModalDialog
         title={translate('Send report')}
         footer={

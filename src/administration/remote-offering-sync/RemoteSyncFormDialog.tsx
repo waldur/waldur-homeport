@@ -28,9 +28,8 @@ import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { Category, ServiceProvider } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { CategoryMappingRulesField } from './CategoryMappingRulesField';
 
@@ -55,54 +54,44 @@ export const RemoteSyncFormDialog: FC<RemoteSyncFormDialogProps> = ({
   remoteSync,
   refetch,
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   const isEdit = Boolean(remoteSync?.uuid);
 
-  const onSubmit = async (values: FormData) => {
-    const payload: RemoteSynchronisationRequest = {
-      api_url: values.api_url,
-      token: values.token,
-      is_active: values.is_active,
-      remote_organization_uuid: values.remote_organization.uuid,
-      remote_organization_name: values.remote_organization.name,
-      local_service_provider: values.local_service_provider.url,
-      remotelocalcategory_set: values.remotelocalcategory_set.map((item) => ({
-        local_category: item.local_category.url,
-        remote_category: item.remote_category.uuid,
-        remote_category_name: item.remote_category.title,
-      })),
-    };
-    try {
+  const saveRemoteSyncMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (values) => {
+      const payload: RemoteSynchronisationRequest = {
+        api_url: values.api_url,
+        token: values.token,
+        is_active: values.is_active,
+        remote_organization_uuid: values.remote_organization.uuid,
+        remote_organization_name: values.remote_organization.name,
+        local_service_provider: values.local_service_provider.url,
+        remotelocalcategory_set: values.remotelocalcategory_set.map((item) => ({
+          local_category: item.local_category.url,
+          remote_category: item.remote_category.uuid,
+          remote_category_name: item.remote_category.title,
+        })),
+      };
       if (isEdit) {
-        await marketplaceRemoteSynchronisationsUpdate({
+        return marketplaceRemoteSynchronisationsUpdate({
           path: { uuid: remoteSync.uuid },
           body: payload,
         });
       } else {
-        await marketplaceRemoteSynchronisationsCreate({ body: payload });
+        return marketplaceRemoteSynchronisationsCreate({ body: payload });
       }
-      if (refetch) await refetch();
-      showSuccess(
-        isEdit
-          ? translate('Remote synchronization has been updated.')
-          : translate('Remote synchronization added successfully'),
-      );
-      closeDialog();
-    } catch (e) {
-      showErrorResponse(
-        e,
-        isEdit
-          ? translate('Unable to update remote synchronization.')
-          : translate('Unable to create remote synchronization.'),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('Remote synchronization has been updated.')
+      : translate('Remote synchronization added successfully'),
+    errorMessage: isEdit
+      ? translate('Unable to update remote synchronization.')
+      : translate('Unable to create remote synchronization.'),
+    refetch,
+  });
 
   return (
     <Form<FormData>
-      onSubmit={onSubmit}
+      onSubmit={(values) => saveRemoteSyncMutation.mutateAsync(values)}
       initialValues={
         isEdit
           ? {

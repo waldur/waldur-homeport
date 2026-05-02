@@ -1,5 +1,4 @@
 import { FunctionComponent, MouseEvent, useCallback } from 'react';
-import { useSelector } from 'react-redux';
 
 import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -16,7 +15,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { Field } from '@/resource/summary';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 interface OrganizationCardProps {
@@ -28,7 +27,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
   organization,
   onClickDetails,
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const shouldConcealPrices =
     isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
     organization.display_billing_info_in_projects === false;

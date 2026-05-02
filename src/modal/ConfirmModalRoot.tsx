@@ -2,12 +2,11 @@ import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
 import { Modal } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ErrorMessage } from '@/ErrorMessage';
+import { useModal } from '@/modal/actions';
 import { type RootState } from '@/store/reducers';
-
-import { closeModalDialog } from './actions';
 
 interface TState {
   confirmComponent: React.ComponentType | string;
@@ -21,10 +20,10 @@ export const ConfirmModalRoot: FunctionComponent = () => {
   >((state: RootState) => state.modal);
   const { modalStyle, className, backdropClassName, resolve, ...rest } =
     confirmProps || {};
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   const onHide = () => {
     if (resolve.deferred) resolve.deferred.reject();
-    dispatch(closeModalDialog('HIDE_CONFIRM'));
+    closeDialog('HIDE_CONFIRM');
   };
   return (
     <Modal

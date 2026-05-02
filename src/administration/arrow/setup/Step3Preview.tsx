@@ -1,32 +1,25 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Alert, Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
-import { useDispatch } from 'react-redux';
+import { adminArrowSettingsSaveSettings } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { ExternalLink } from '@/core/ExternalLink';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
-import { arrowQueryKeys, useSaveArrowSettings } from '../api';
+import { arrowQueryKeys } from '../api';
 import type { ArrowSetupFormValues } from '../types';
 
 export const Step3Preview: FC<WizardStepProps> = (props) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
   const { values } = useFormState<ArrowSetupFormValues>();
-  const [saving, setSaving] = useState(false);
-  const saveSettings = useSaveArrowSettings();
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
+  const handleSaveMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => {
       const customerMappings = Object.entries(values.selectedMappings).map(
         ([arrowRef, waldurUuid]) => ({
           arrow_reference: arrowRef,
@@ -34,25 +27,19 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
         }),
       );
 
-      await saveSettings.mutateAsync({
-        api_url: values.api_url,
-        api_key: values.api_key,
-        customer_mappings: customerMappings,
+      return adminArrowSettingsSaveSettings({
+        body: {
+          api_url: values.api_url,
+          api_key: values.api_key,
+          customer_mappings: customerMappings,
+        },
       });
+    },
 
-      queryClient.invalidateQueries({ queryKey: arrowQueryKeys.all });
-      dispatch(
-        showSuccess(translate('Arrow integration configured successfully')),
-      );
-      dispatch(closeModalDialog());
-    } catch (e: any) {
-      dispatch(
-        showErrorResponse(e, translate('Failed to save Arrow settings')),
-      );
-    } finally {
-      setSaving(false);
-    }
-  };
+    successMessage: translate('Arrow integration configured successfully'),
+    errorMessage: translate('Failed to save Arrow settings'),
+    invalidateQueries: [{ queryKey: arrowQueryKeys.all }],
+  });
 
   const mappingCount = Object.keys(values.selectedMappings).length;
 
@@ -70,9 +57,9 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
       />
       <CloseDialogButton className="min-w-125px" />
       <SubmitButton
-        submitting={saving}
+        submitting={handleSaveMutation.isPending}
         label={translate('Save & Complete')}
-        onClick={handleSave}
+        onClick={() => handleSaveMutation.mutate()}
         type="button"
       />
     </>

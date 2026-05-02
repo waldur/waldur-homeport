@@ -1,22 +1,22 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { IssueTypeEnum } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { SubmitButton } from '@/form';
-import { translate, formatJsxTemplate } from '@/i18n';
-import { sendIssueCreateRequest } from '@/issues/create/utils';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { useIssueCreateMutation } from '@/issues/create/utils';
 import { ISSUE_IDS } from '@/issues/types/constants';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { mutateAsync: createIssue, isPending: submitting } =
+    useIssueCreateMutation(resolve.refetch);
+  const user = useUser();
   const description = useMemo<string[]>(() => {
     const parts = [];
     if (resolve.customer.name != resolve.formData.name) {
@@ -232,7 +232,7 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
       description: description.join('\n'),
       caller: user.url,
     };
-    sendIssueCreateRequest(payload, dispatch, resolve.refetch);
+    createIssue({ payload });
   };
   return (
     <ModalDialog
@@ -242,7 +242,7 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
           <CloseDialogButton />
           {ENV.plugins.WALDUR_SUPPORT.ENABLED && (
             <SubmitButton
-              submitting={false}
+              submitting={submitting}
               onClick={onCreateIssue}
               type="button"
               label={translate('Propose changes')}

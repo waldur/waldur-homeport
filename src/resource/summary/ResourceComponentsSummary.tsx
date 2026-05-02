@@ -38,7 +38,6 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
       if (useProviderEndpoint) {
         return marketplaceProviderOfferingsRetrieve({
           path: { uuid: resource.offering_uuid },
-          // @ts-ignore
           query: { field: ['components'] },
         }).then((response) => response.data);
       }

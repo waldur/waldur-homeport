@@ -1,9 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { GenericPermission } from '@/permissions/types';
 
 const EditUserDialog = lazyComponent(() =>
@@ -27,19 +26,17 @@ export const EditUserButton: React.FC<EditUserButtonProps> = ({
   customerUuid,
   project,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const callback = () =>
-    dispatch(
-      openModalDialog(EditUserDialog, {
-        resolve: {
-          permission,
-          refetch,
-          projectUuid,
-          customerUuid,
-          project,
-        },
-      }),
-    );
+    openDialog(EditUserDialog, {
+      resolve: {
+        permission,
+        refetch,
+        projectUuid,
+        customerUuid,
+        project,
+      },
+    });
   return <EditAction action={callback} size="sm" />;
 };

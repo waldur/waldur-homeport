@@ -7,7 +7,6 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceResourcesOfferingRetrieve,
   Resource,
@@ -21,7 +20,7 @@ import { translate } from '@/i18n';
 import { getQuotaCellProps } from '@/marketplace/resources/details/ResourceComponentItem';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { getResourceAccessEndpoints, isSshFormat } from '@/resource/utils';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 interface ResourceQuickInfoProps {
   resource: Resource;
@@ -35,7 +34,7 @@ const formatSshCommand = (url: string, username: string) => {
 };
 
 export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
 
   // Fetch offering details for endpoints, components, getting_started, and description
   const { data: offering, isLoading: isLoadingOffering } = useQuery({
@@ -61,10 +60,10 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
           ? formatSshCommand(value, resource.username)
           : value;
       navigator.clipboard.writeText(valueToCopy).then(() => {
-        dispatch(showSuccess(translate('Text has been copied')));
+        showSuccess(translate('Text has been copied'));
       });
     },
-    [dispatch, resource.username],
+    [resource.username],
   );
 
   // Get components with their values

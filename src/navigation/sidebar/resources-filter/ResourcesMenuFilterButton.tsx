@@ -1,10 +1,10 @@
 import { FunnelSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { selectFiltersStorage } from '@/table/selectors';
 
@@ -25,14 +25,12 @@ export const ResourcesMenuFilterButton = () => {
     return { project: project?.value, organization: organization?.value };
   }, [filters]);
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = (e) => {
-    dispatch(
-      openModalDialog(FilterByOrgAndProjectDialog, {
-        size: 'sm',
-        initialValues: values,
-      }),
-    );
+    openDialog(FilterByOrgAndProjectDialog, {
+      size: 'sm',
+      initialValues: values,
+    });
     e.stopPropagation();
   };
   return (

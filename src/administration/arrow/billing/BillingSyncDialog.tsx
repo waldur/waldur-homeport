@@ -1,20 +1,22 @@
 import { DateTime } from 'luxon';
 import { useCallback, useMemo, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { Resource } from 'waldur-js-client';
+import {
+  Resource,
+  adminArrowBillingSyncsTriggerSync,
+  adminArrowBillingSyncsTriggerReconciliation,
+} from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { AsyncPaginate, Select } from '@/form/themed-select';
 import { PeriodOption } from '@/form/types';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { useTriggerBillingSync, useTriggerReconciliation } from '../api';
+import { arrowQueryKeys } from '../api';
 
 interface BillingSyncDialogProps {
   resolve: {
@@ -42,7 +44,6 @@ const makePeriodOptions = (): PeriodChoice[] => {
 
 export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
   const { refetch } = resolve;
-  const dispatch = useDispatch();
 
   const periodOptions = useMemo(() => makePeriodOptions(), []);
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodChoice>(
@@ -51,9 +52,6 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
   const [selectedResource, setSelectedResource] = useState<Resource | null>(
     null,
   );
-
-  const triggerSync = useTriggerBillingSync();
-  const triggerReconciliation = useTriggerReconciliation();
 
   const loadResources = useCallback(
     (query: string, prevOptions, { page }) =>
@@ -68,37 +66,49 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
     [],
   );
 
-  const handleSync = async () => {
-    try {
+  const syncMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => {
       const { year, month } = selectedPeriod.value;
-      await triggerSync.mutateAsync({
-        year,
-        month,
-        ...(selectedResource ? { resource_uuid: selectedResource.uuid } : {}),
-      } as any);
-      dispatch(showSuccess(translate('Billing sync triggered')));
-      refetch?.();
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Failed to trigger sync')));
-    }
-  };
+      return adminArrowBillingSyncsTriggerSync({
+        body: {
+          year,
+          month,
+          ...(selectedResource ? { resource_uuid: selectedResource.uuid } : {}),
+        },
+      });
+    },
 
-  const handleReconcile = async () => {
-    try {
+    successMessage: translate('Billing sync triggered'),
+    errorMessage: translate('Failed to trigger sync'),
+    refetch,
+
+    invalidateQueries: [
+      {
+        queryKey: arrowQueryKeys.billingSyncs(),
+      },
+    ],
+  });
+
+  const reconcileMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => {
       const { year, month } = selectedPeriod.value;
-      await triggerReconciliation.mutateAsync({ year, month });
-      dispatch(showSuccess(translate('Reconciliation triggered')));
-      refetch?.();
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Failed to trigger reconciliation')),
-      );
-    }
-  };
+      return adminArrowBillingSyncsTriggerReconciliation({
+        body: { year, month },
+      });
+    },
 
-  const isPending = triggerSync.isPending || triggerReconciliation.isPending;
+    successMessage: translate('Reconciliation triggered'),
+    errorMessage: translate('Failed to trigger reconciliation'),
+    refetch,
+
+    invalidateQueries: [
+      {
+        queryKey: arrowQueryKeys.billingSyncs(),
+      },
+    ],
+  });
+
+  const isPending = syncMutation.isPending || reconcileMutation.isPending;
 
   return (
     <ModalDialog
@@ -107,17 +117,17 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
         <>
           <CloseDialogButton label={translate('Cancel')} />
           <SubmitButton
-            submitting={triggerReconciliation.isPending}
+            submitting={reconcileMutation.isPending}
             disabled={isPending}
             label={translate('Reconcile')}
-            onClick={handleReconcile}
+            onClick={() => reconcileMutation.mutate()}
             className="btn btn-secondary"
           />
           <SubmitButton
-            submitting={triggerSync.isPending}
+            submitting={syncMutation.isPending}
             disabled={isPending}
             label={translate('Sync billing')}
-            onClick={handleSync}
+            onClick={() => syncMutation.mutate()}
           />
         </>
       }

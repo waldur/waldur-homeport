@@ -3,7 +3,6 @@ import { FORM_ERROR } from 'final-form';
 import { pick } from 'lodash-es';
 import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   proposalProtectedCallsAvailableComplianceChecklistsList,
   proposalProtectedCallsPartialUpdate,
@@ -24,11 +23,11 @@ import MarkdownEditor from '@/form/MarkdownEditor';
 import { SlugTemplateHelpText } from '@/form/SlugTemplateHelpText';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { EditCallProps } from '@/proposals/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 const PROPOSAL_SLUG_PLACEHOLDERS = [
   { name: 'call_slug', description: 'Call slug', example: 'TEST-CALL' },
@@ -65,7 +64,10 @@ interface Props {
 }
 
 export const EditGeneralInfoDialog = ({ resolve }: Props) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog, confirm } = useModal();
+
   const initialValues = pick(resolve.call, resolve.name);
 
   // Query compliance checklists if editing compliance_checklist field
@@ -87,8 +89,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
     async (values: FormData) => {
       if (values.fixed_duration_in_days) {
         try {
-          await waitForConfirmation(
-            dispatch,
+          await confirm(
             translate('Confirmation'),
             translate(
               'This will also update durations of connected proposals in Draft or In Review states. Continue?',
@@ -118,17 +119,17 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
           body,
         });
         resolve.refetch();
-        dispatch(showSuccess(translate('The call has been updated.')));
-        dispatch(closeModalDialog());
+        showSuccess(translate('The call has been updated.'));
+        closeDialog();
       } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to update call.')));
+        showErrorResponse(e, translate('Unable to update call.'));
         if (e.response && e.response.status === 400) {
           return { [FORM_ERROR]: e.response.data };
         }
         return { [FORM_ERROR]: translate('Unable to update call.') };
       }
     },
-    [resolve, dispatch],
+    [resolve],
   );
 
   return (

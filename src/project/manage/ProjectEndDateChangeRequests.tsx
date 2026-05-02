@@ -1,12 +1,9 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  projectEndDateChangeRequestsApprove,
   projectEndDateChangeRequestsList,
-  projectEndDateChangeRequestsReject,
   projectsRetrieve,
   Project,
 } from 'waldur-js-client';
@@ -14,15 +11,15 @@ import {
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { setCurrentProject } from '@/workspace/actions';
+
+import { ApproveRequestAction } from './ApproveRequestAction';
+import { RejectRequestAction } from './RejectRequestAction';
 
 interface ProjectEndDateChangeRequestsProps {
   project: Project;
@@ -49,6 +46,7 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
   ProjectEndDateChangeRequestsProps
 > = ({ project }) => {
   const dispatch = useDispatch();
+
   const queryClient = useQueryClient();
   const { params } = useCurrentStateAndParams();
   const activeTab = params.subtab || 'pending';
@@ -72,7 +70,7 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
     queryClient.invalidateQueries({
       queryKey: ['project-end-date-change-requests'],
     });
-  }, [tableProps.fetch, queryClient]);
+  }, [queryClient, tableProps.fetch]);
 
   const refetchProject = useCallback(async () => {
     if (!project?.uuid) return;
@@ -81,73 +79,6 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
     });
     dispatch(setCurrentProject(response.data as Project));
   }, [project?.uuid, dispatch]);
-
-  const approveMutation = useMutation({
-    mutationFn: ({ uuid, comment }: { uuid: string; comment?: string }) =>
-      projectEndDateChangeRequestsApprove({
-        path: { uuid },
-        body: comment ? { comment } : {},
-      }),
-    onSuccess: async () => {
-      dispatch(showSuccess(translate('Request has been approved.')));
-      refetch();
-      await refetchProject();
-    },
-    onError: (error) => {
-      dispatch(
-        showErrorResponse(error, translate('Unable to approve request.')),
-      );
-    },
-  });
-
-  const rejectMutation = useMutation({
-    mutationFn: ({ uuid, comment }: { uuid: string; comment?: string }) =>
-      projectEndDateChangeRequestsReject({
-        path: { uuid },
-        body: comment ? { comment } : {},
-      }),
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Request has been rejected.')));
-      refetch();
-    },
-    onError: (error) => {
-      dispatch(
-        showErrorResponse(error, translate('Unable to reject request.')),
-      );
-    },
-  });
-
-  const handleApprove = useCallback(
-    async (row: { uuid: string }) => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Confirmation'),
-          translate('Are you sure you want to approve this request?'),
-        );
-        approveMutation.mutate({ uuid: row.uuid });
-      } catch {
-        // User cancelled
-      }
-    },
-    [dispatch, approveMutation],
-  );
-
-  const handleReject = useCallback(
-    async (row: { uuid: string }) => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Confirmation'),
-          translate('Are you sure you want to reject this request?'),
-        );
-        rejectMutation.mutate({ uuid: row.uuid });
-      } catch {
-        // User cancelled
-      }
-    },
-    [dispatch, rejectMutation],
-  );
 
   return (
     <Table
@@ -242,16 +173,12 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
       rowActions={({ row }) =>
         isPending(row) ? (
           <ActionsDropdown row={row}>
-            <ActionItem
-              action={() => handleApprove(row)}
-              title={translate('Approve')}
-              iconNode={<CheckIcon weight="bold" />}
+            <ApproveRequestAction
+              row={row}
+              refetch={refetch}
+              onSuccess={refetchProject}
             />
-            <ActionItem
-              action={() => handleReject(row)}
-              title={translate('Reject')}
-              iconNode={<XIcon weight="bold" />}
-            />
+            <RejectRequestAction row={row} refetch={refetch} />
           </ActionsDropdown>
         ) : null
       }

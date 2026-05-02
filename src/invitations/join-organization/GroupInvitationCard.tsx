@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { FC, useCallback } from 'react';
 import { Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { GroupInvitation } from 'waldur-js-client';
 
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
@@ -11,7 +10,7 @@ import { getAbbreviation } from '@/core/utils';
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { BoxRadioField } from '@/marketplace/deploy/steps/BoxRadioField';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const GroupInvitationDetails = lazyComponent(() =>
   import('./GroupInvitationDetails').then((module) => ({
@@ -22,17 +21,15 @@ const GroupInvitationDetails = lazyComponent(() =>
 export const GroupInvitationCard: FC<{ row: GroupInvitation }> = ({
   row: invitation,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openDetailsModal = useCallback(
     (event) => {
       event.stopPropagation();
-      dispatch(
-        openModalDialog(GroupInvitationDetails, {
-          resolve: { invitation },
-        }),
-      );
+      openDialog(GroupInvitationDetails, {
+        resolve: { invitation },
+      });
     },
-    [invitation, dispatch],
+    [invitation],
   );
 
   const description = invitation.custom_text || invitation.scope_description;

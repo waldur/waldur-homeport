@@ -1,11 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { OrganizationGroup } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 const OrganizationGroupDetailsDialog = lazyComponent(() =>
@@ -18,22 +17,20 @@ interface OrganizationGroupDetailsButtonProps {
   row: OrganizationGroup;
 }
 
-const openOrganizationGroupsDialog = (row: OrganizationGroup) => {
-  return openModalDialog(OrganizationGroupDetailsDialog, {
-    resolve: { organizationGroup: row },
-    size: 'xl',
-  });
-};
-
 export const OrganizationGroupDetailsButton: FunctionComponent<
   OrganizationGroupDetailsButtonProps
 > = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionItem
       title={translate('Details')}
       iconNode={<EyeIcon weight="bold" />}
-      action={() => dispatch(openOrganizationGroupsDialog(props.row))}
+      action={() =>
+        openDialog(OrganizationGroupDetailsDialog, {
+          resolve: { organizationGroup: props.row },
+          size: 'xl',
+        })
+      }
       size="sm"
     />
   );

@@ -1,11 +1,9 @@
-import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import { bookingResourcesReject } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface RejectBookingButtonProps {
   resourceUuid: string;
@@ -20,32 +18,22 @@ export const RejectBookingButton: FC<RejectBookingButtonProps> = ({
   isServiceProviderContext,
   refetch,
 }) => {
-  const [isRejecting, setIsRejecting] = useState(false);
-  const dispatch = useDispatch();
-
-  const rejectRequest = async () => {
-    try {
-      setIsRejecting(true);
-      await bookingResourcesReject({ path: { uuid: resourceUuid } });
-      setIsRejecting(false);
-      if (refetch) refetch();
-      dispatch(showSuccess(translate('Booking has been cancelled.')));
-      dispatch(closeModalDialog());
-    } catch (e) {
-      setIsRejecting(false);
-      dispatch(showErrorResponse(e, translate('Unable to cancel booking.')));
-    }
-  };
+  const rejectMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => bookingResourcesReject({ path: { uuid: resourceUuid } }),
+    successMessage: translate('Booking has been cancelled.'),
+    errorMessage: translate('Unable to cancel booking.'),
+    refetch,
+  });
 
   return (
     <SubmitButton
       disabled={pending}
-      submitting={isRejecting}
+      submitting={rejectMutation.isPending}
       label={
         isServiceProviderContext ? translate('Deny') : translate('Cancel order')
       }
       className="btn btn-danger"
-      onClick={rejectRequest}
+      onClick={() => rejectMutation.mutate()}
     />
   );
 };

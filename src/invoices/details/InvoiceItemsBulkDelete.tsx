@@ -1,13 +1,10 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { invoiceItemsDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
+import { useUser } from '@/workspace/hooks';
 
 import { InvoiceTableItem } from '../types';
 
@@ -18,25 +15,33 @@ export const InvoiceItemsBulkDelete = ({
   rows: InvoiceTableItem[];
   refetch(): void;
 }) => {
-  const user = useSelector(getUser);
+  const { showErrorResponse } = useNotify();
+
+  const user = useUser();
   if (!user.is_staff) {
     return null;
   }
 
-  const [isDeleting, setIsDeleting] = useState(false);
-  const dispatch = useDispatch();
-
   const allItems = rows.flatMap((row) => row.items);
 
-  const callback = async () => {
-    try {
-      const itemList = allItems.map((item) => (
-        <li key={item.uuid}>{item.name}</li>
-      ));
-
-      await waitForConfirmation(
-        dispatch,
-        translate('Remove invoice items'),
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: async () => {
+      for (const item of allItems) {
+        try {
+          await invoiceItemsDestroy({ path: { uuid: item.uuid } });
+        } catch (e) {
+          showErrorResponse(
+            e,
+            translate('Unable to delete invoice item {name}.', {
+              name: item.name,
+            }),
+          );
+        }
+      }
+    },
+    confirmation: {
+      title: translate('Remove invoice items'),
+      body: (
         <div>
           <p>
             {translate(
@@ -44,47 +49,25 @@ export const InvoiceItemsBulkDelete = ({
               { count: allItems.length },
             )}
           </p>
-          <ul>{itemList}</ul>
-        </div>,
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      setIsDeleting(true);
-      for (const item of allItems) {
-        try {
-          await invoiceItemsDestroy({ path: { uuid: item.uuid } });
-        } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              translate('Unable to delete invoice item {name}.', {
-                name: item.name,
-              }),
-            ),
-          );
-        }
-      }
-      await refetch();
-      dispatch(showSuccess(translate('Invoice items have been removed.')));
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to delete invoice items.')),
-      );
-    } finally {
-      setIsDeleting(false);
-    }
-  };
+          <ul>
+            {allItems.map((item) => (
+              <li key={item.uuid}>{item.name}</li>
+            ))}
+          </ul>
+        </div>
+      ),
+      options: { forDeletion: true },
+    },
+    successMessage: translate('Invoice items have been removed.'),
+    errorMessage: translate('Unable to delete invoice items.'),
+    refetch,
+  });
 
   return (
-    <ActionButton
+    <RemovalActionButton
       title={translate('Remove')}
-      action={callback}
-      iconNode={<TrashIcon weight="bold" />}
-      variant="danger"
-      disabled={isDeleting}
+      action={mutate}
+      disabled={isPending}
       disabledReason={translate('Deletion in progress')}
     />
   );

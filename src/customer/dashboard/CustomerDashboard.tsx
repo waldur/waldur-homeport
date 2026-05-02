@@ -8,10 +8,10 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
 import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
 import { ProjectsList } from '@/project/ProjectsList';
+import { useUser } from '@/workspace/hooks';
 import {
   checkIsServiceManager,
   getCustomer,
-  getUser,
   isOwnerOrStaff,
 } from '@/workspace/selectors';
 
@@ -21,7 +21,7 @@ import { CustomerProfile } from './CustomerProfile';
 import { filterComponentsWithUsage } from './utils';
 
 export const CustomerDashboard: FunctionComponent = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const customer = useSelector(getCustomer);
   const isServiceManager = useMemo(
     () => checkIsServiceManager(customer, user),

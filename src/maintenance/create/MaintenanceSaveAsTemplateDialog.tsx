@@ -1,7 +1,7 @@
 import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import {
   MaintenanceAnnouncementTemplate,
@@ -24,9 +24,9 @@ import { getUUID } from '@/core/utils';
 import { required } from '@/core/validators';
 import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
@@ -55,7 +55,9 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
   form: 'MaintenanceSaveAsTemplate',
 })(({ submitting, handleSubmit, resolve, invalid, form, change }) => {
   const formValues = useSelector<{}, IForm>(getFormValues(form));
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { openDialog } = useModal();
 
   const {
     data: templates,
@@ -103,18 +105,16 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
   });
 
   const backToMainForm = () =>
-    dispatch(
-      openModalDialog(resolve.formComponent, {
-        resolve: {
-          provider: resolve.provider,
-          refetch: resolve.refetch,
-          maintenanceUuid: resolve.maintenanceUuid,
-        },
-        size: 'lg',
-        formId: MAINTENANCE_ANNOUNCEMENT_FORM_ID,
-        initialValues: resolve.data,
-      }),
-    );
+    openDialog(resolve.formComponent, {
+      resolve: {
+        provider: resolve.provider,
+        refetch: resolve.refetch,
+        maintenanceUuid: resolve.maintenanceUuid,
+      },
+      size: 'lg',
+      formId: MAINTENANCE_ANNOUNCEMENT_FORM_ID,
+      initialValues: resolve.data,
+    });
 
   const callback = useCallback(
     async (formData: IForm) => {
@@ -209,20 +209,16 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
 
         refetchOfferings();
         resolve.onSave(template);
-        dispatch(
-          showSuccess(translate('Maintenance has been save as a template.')),
-        );
+        showSuccess(translate('Maintenance has been save as a template.'));
         backToMainForm();
       } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to save a maintenance as a template.'),
-          ),
+        showErrorResponse(
+          e,
+          translate('Unable to save a maintenance as a template.'),
         );
       }
     },
-    [dispatch, resolve, templateOfferings],
+    [resolve, templateOfferings],
   );
 
   return (

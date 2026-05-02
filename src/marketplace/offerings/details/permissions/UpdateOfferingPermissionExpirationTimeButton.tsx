@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
@@ -26,13 +26,11 @@ export const UpdateOfferingPermissionExpirationTimeButton: FunctionComponent<{
     customerId: customer.uuid,
   });
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(UpdateOfferingPermissionExpirationTimeDialog, {
-        resolve: { permission, refetch },
-      }),
-    );
+    openDialog(UpdateOfferingPermissionExpirationTimeDialog, {
+      resolve: { permission, refetch },
+    });
   };
   return canUpdatePermission ? <EditAction action={callback} /> : null;
 };

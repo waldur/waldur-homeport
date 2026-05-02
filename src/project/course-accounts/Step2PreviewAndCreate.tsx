@@ -1,12 +1,11 @@
 import Papa from 'papaparse';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useField, useForm } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 
 import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
-import { showError } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -70,7 +69,7 @@ const parseFile = (file: File) => {
 };
 
 export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
-  const dispatch = useDispatch();
+  const { showError } = useNotify();
   const [data, setData] = useState<RawCourseAccount[]>([]);
 
   const field = useField('file');
@@ -81,7 +80,7 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
       const _file = acceptedFiles[0];
 
       if (!_file) {
-        dispatch(showError(translate('No file has been imported')));
+        showError(translate('No file has been imported'));
         return;
       }
       parseFile(_file).then((_data) => {
@@ -89,14 +88,14 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
         form.change('data', _data);
       });
     },
-    [dispatch, setData, form],
+    [setData, form],
   );
 
   useEffect(() => {
     if (field.input.value?.length > 0) {
       parseCsvFile(field.input.value);
     }
-  }, [field.input.value, parseCsvFile]);
+  }, [parseCsvFile, field.input.value]);
 
   const tableProps = useTable({
     table: 'ImportCoursesPreview',

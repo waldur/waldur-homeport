@@ -1,10 +1,16 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { openUserPopover } from '@/user/actions';
+
+const UserPopover = lazyComponent(() =>
+  import('@/user/UserPopover').then((module) => ({
+    default: module.UserPopover,
+  })),
+);
 
 interface UserDetailsButtonProps {
   userId: string;
@@ -13,14 +19,13 @@ interface UserDetailsButtonProps {
 export const UserDetailsButton: React.FC<UserDetailsButtonProps> = ({
   userId,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const callback = () =>
-    dispatch(
-      openUserPopover({
-        user_uuid: userId,
-      }),
-    );
+    openDialog(UserPopover, {
+      resolve: { user_uuid: userId },
+      size: 'lg',
+    });
   return (
     <ActionItem
       title={translate('Details')}

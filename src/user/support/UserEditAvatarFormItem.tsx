@@ -1,6 +1,5 @@
 import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import FormTable from '@/form/FormTable';
@@ -8,7 +7,7 @@ import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
 import { CompactActionButton } from '@/table/CompactActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { useUpdateUser } from './useUpdateUser';
 
@@ -21,7 +20,7 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
   user,
   disabled,
 }) => {
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
   const [image, setImage] = useState(user.image);
   const { callback, isLoading } = useUpdateUser(user);
 

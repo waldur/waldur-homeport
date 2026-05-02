@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
@@ -13,7 +14,7 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock store hooks
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useNotify: () => ({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),
@@ -21,7 +22,7 @@ vi.mock('@/store/hooks', () => ({
 }));
 
 // Mock modal hooks
-vi.mock('@/modal/hooks', () => ({
+vi.mock('@/modal/actions', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
@@ -67,7 +68,18 @@ const mockResolveWithPlan = {
 };
 
 const renderComponent = (resolve = mockResolve) => {
-  return render(<AddPlanDialog resolve={resolve} />);
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <AddPlanDialog resolve={resolve} />
+    </QueryClientProvider>,
+  );
 };
 
 describe('AddPlanDialog', () => {

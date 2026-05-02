@@ -14,7 +14,8 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 import { formatUserStatus } from '@/user/support/utils';
-import { getUser, isStaffOrSupport, isStaff } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { isStaffOrSupport, isStaff } from '@/workspace/selectors';
 
 import {
   formatGender,
@@ -466,7 +467,7 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
 // System Tab
 const SystemTab = ({ user, disabled }: TabContentProps) => {
   const isVisibleStaffOrSupport = useSelector(isStaffOrSupport);
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
   const hasEdupersonAssurance =
     isProfileAttributeEnabled('eduperson_assurance') &&
     Array.isArray(user.eduperson_assurance) &&
@@ -782,7 +783,7 @@ export const UserProfileTabs = ({
   disabled = false,
 }: UserProfileTabsProps) => {
   const { params } = useCurrentStateAndParams();
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
   const isSelf = currentUser.uuid === user.uuid;
   const isVisibleStaffOrSupport = useSelector(isStaffOrSupport);
 

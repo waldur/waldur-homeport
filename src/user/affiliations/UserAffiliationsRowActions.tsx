@@ -1,12 +1,10 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { Permission } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
+import { useNotify } from '@/store/notify';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
@@ -23,18 +21,20 @@ interface UserAffiliationsRowActionsProps {
 export const UserAffiliationsRowActions: FC<UserAffiliationsRowActionsProps> = (
   props,
 ) => {
+  const { confirm } = useModal();
   const user = useUser();
+
   // Check user permission based on the scope type
   const canDeletePermission = useMemo(
     () => canDeletePermissionFn(user, props.row),
-    [user, props.row],
+    [user],
   );
 
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const callback = async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Confirmation'),
         translate('Are you sure you want to revoke this permission?'),
       );
@@ -43,20 +43,17 @@ export const UserAffiliationsRowActions: FC<UserAffiliationsRowActionsProps> = (
     }
     try {
       await revokePermission(props.row);
-      dispatch(showSuccess(translate('Permission has been revoked.')));
+      showSuccess(translate('Permission has been revoked.'));
       await props.fetch();
     } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to revoke permission.')));
+      showErrorResponse(e, translate('Unable to revoke permission.'));
     }
   };
   return (
     <ActionsDropdownComponent>
-      <ActionItem
+      <RemovalActionItem
         action={callback}
         title={translate('Revoke')}
-        iconNode={<TrashIcon weight="bold" />}
-        className="text-danger"
-        iconColor="danger"
         disabled={!canDeletePermission}
         tooltip={
           !canDeletePermission &&

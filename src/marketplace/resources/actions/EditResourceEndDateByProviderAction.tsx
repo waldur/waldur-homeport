@@ -1,6 +1,5 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   marketplaceProviderResourcesOfferingRetrieve,
   marketplaceProviderResourcesSetEndDate,
@@ -10,11 +9,11 @@ import {
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const EditResourceEndDateDialog = lazyComponent(() =>
   import('./EditResourceEndDateDialog').then((module) => ({
@@ -31,8 +30,8 @@ export const EditResourceEndDateByProviderAction = ({
   resource,
   refetch,
 }: EditResourceEndDateByProviderActionProps) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { openDialog } = useModal();
+  const user = useUser();
 
   const resourceUuid =
     (resource as any).marketplace_resource_uuid || resource.uuid;
@@ -53,19 +52,17 @@ export const EditResourceEndDateByProviderAction = ({
   );
 
   const callback = () =>
-    dispatch(
-      openModalDialog(EditResourceEndDateDialog, {
-        resolve: {
-          resource,
-          refetch,
-          updateEndDate: (uuid, end_date) =>
-            marketplaceProviderResourcesSetEndDate({
-              path: { uuid },
-              body: { end_date },
-            }),
-        },
-      }),
-    );
+    openDialog(EditResourceEndDateDialog, {
+      resolve: {
+        resource,
+        refetch,
+        updateEndDate: (uuid, end_date) =>
+          marketplaceProviderResourcesSetEndDate({
+            path: { uuid },
+            body: { end_date },
+          }),
+      },
+    });
 
   const hasPermissionToSet =
     hasPermission(user, {

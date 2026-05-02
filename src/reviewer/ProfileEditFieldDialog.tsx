@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   reviewerProfilesMePartialUpdate,
@@ -10,9 +9,8 @@ import { SubmitButton, TextField, StringField } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ProfileEditFieldDialogProps {
   resolve: {
@@ -27,36 +25,28 @@ interface ProfileEditFieldDialogProps {
 export const ProfileEditFieldDialog: React.FC<ProfileEditFieldDialogProps> = ({
   resolve,
 }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
-
-  const processRequest = useCallback(
-    async (values) => {
-      try {
-        const value = values[resolve.name] || null;
-        if (resolve.isStaffEdit) {
-          await reviewerProfilesPartialUpdate({
-            path: { uuid: resolve.profile.uuid },
-            body: { [resolve.name]: value },
-          });
-        } else {
-          await reviewerProfilesMePartialUpdate({
-            body: { [resolve.name]: value },
-          });
-        }
-        showSuccess(translate('Profile updated successfully.'));
-        closeDialog();
-        resolve.refetch?.();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to update profile.'));
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (values) => {
+      const value = values[resolve.name] || null;
+      if (resolve.isStaffEdit) {
+        return reviewerProfilesPartialUpdate({
+          path: { uuid: resolve.profile.uuid },
+          body: { [resolve.name]: value },
+        });
+      } else {
+        return reviewerProfilesMePartialUpdate({
+          body: { [resolve.name]: value },
+        });
       }
     },
-    [resolve, closeDialog, showSuccess, showErrorResponse],
-  );
+    successMessage: translate('Profile updated successfully.'),
+    errorMessage: translate('Unable to update profile.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={processRequest}
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={{ [resolve.name]: resolve.profile[resolve.name] || '' }}
       render={({ handleSubmit, submitting, invalid, dirty }) => (
         <form onSubmit={handleSubmit}>

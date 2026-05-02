@@ -1,10 +1,8 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
 import { SupportMenu } from './SupportMenu';
 
-vi.mock('react-redux');
 vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
@@ -30,15 +28,16 @@ vi.mock('./IssuesLink', () => ({
 vi.mock('@/navigation/header/DocsLink', () => ({
   DocsLink: () => <div data-testid="docs-link">Docs</div>,
 }));
+
+const mockShowSuccess = vi.fn();
 vi.mock('@/store/notify', () => ({
-  showSuccess: vi.fn(),
+  useNotify: () => ({
+    showSuccess: mockShowSuccess,
+  }),
 }));
 
 describe('SupportMenu', () => {
-  const dispatch = vi.fn();
-
   beforeEach(() => {
-    vi.mocked(useDispatch).mockReturnValue(dispatch);
     vi.clearAllMocks();
   });
 
@@ -51,7 +50,7 @@ describe('SupportMenu', () => {
     expect(screen.getByTestId('docs-link')).toBeInTheDocument();
   });
 
-  it('handles copying email/phone', () => {
+  it('handles copying email/phone', async () => {
     Object.assign(navigator, {
       clipboard: {
         writeText: vi.fn().mockImplementation(() => Promise.resolve()),
@@ -64,5 +63,8 @@ describe('SupportMenu', () => {
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       'support@example.com',
     );
+    await waitFor(() => {
+      expect(mockShowSuccess).toHaveBeenCalled();
+    });
   });
 });

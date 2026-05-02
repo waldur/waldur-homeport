@@ -15,7 +15,8 @@ import {
 } from '@/table/generated/InvoicesItemsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 import { Invoice, InvoiceTableItem } from '../types';
 import { formatPeriod } from '../utils';
@@ -50,7 +51,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
 }) => {
   const filter = useSelector(selectInvoicesItemsFilter);
   const customer = useSelector(getCustomer);
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const fetchItems = useMemo(() => {
     return createFetcher(invoicesItemsRetrieve, {

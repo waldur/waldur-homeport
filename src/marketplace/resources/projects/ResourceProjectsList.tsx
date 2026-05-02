@@ -1,7 +1,6 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { useMemo, FC, useCallback } from 'react';
+import { useMemo, FC } from 'react';
 import { Badge as BsBadge } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   Resource,
   marketplaceResourceProjectsList,
@@ -11,11 +10,10 @@ import {
 
 import { Badge } from '@/core/Badge';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -81,40 +79,30 @@ const DeleteProjectAction: FC<{
   row: ResourceProject;
   refetch(): void;
 }> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-
-  const handler = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete project {name}?',
-          { name: <b>{row.name}</b> },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await marketplaceResourceProjectsDestroy({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Project deleted.')));
-      await refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to delete project.')),
-      );
-    }
-  }, [dispatch, row, refetch]);
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceResourceProjectsDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Project deleted.'),
+    errorMessage: translate('Unable to delete project.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to delete project {name}?',
+        { name: <b>{row.name}</b> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
     <ActionItem
       title={translate('Delete')}
-      action={handler}
+      action={() => deleteMutation.mutate()}
       iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
+      disabled={deleteMutation.isPending}
     />
   );
 };

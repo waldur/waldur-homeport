@@ -1,9 +1,8 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 const ArrowImportWizard = lazyComponent(() =>
@@ -19,15 +18,13 @@ interface ArrowResourceImportButtonProps {
 export const ArrowResourceImportButton = ({
   refetch,
 }: ArrowResourceImportButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog: openModal } = useModal();
 
   const openDialog = () => {
-    dispatch(
-      openModalDialog(ArrowImportWizard, {
-        resolve: { refetch },
-        size: 'lg',
-      }),
-    );
+    openModal(ArrowImportWizard, {
+      resolve: { refetch },
+      size: 'lg',
+    });
   };
 
   return (

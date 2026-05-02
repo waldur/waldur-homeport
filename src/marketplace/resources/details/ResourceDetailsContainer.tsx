@@ -13,7 +13,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { ErrorView } from '@/ErrorView';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import {
   useBreadcrumbs,
   usePageHero,
@@ -49,6 +49,9 @@ const ResourceTeamDialog = lazyComponent(() =>
 export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   const { params } = useCurrentStateAndParams();
   const dispatch = useDispatch();
+
+  const { openDialog } = useModal();
+
   const user = useUser();
 
   const {
@@ -226,7 +229,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     return () => {
       dispatch(setCurrentResource(undefined));
     };
-  }, [resource, dispatch]);
+  }, [resource]);
 
   usePageHero(
     !data || isLoading ? null : (
@@ -312,12 +315,10 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
 
   const openTeamModal = useCallback(() => {
     if (data.offering.state === 'Unavailable') return;
-    dispatch(
-      openModalDialog(ResourceTeamDialog, {
-        size: 'xl',
-        resolve: { resource },
-      }),
-    );
+    openDialog(ResourceTeamDialog, {
+      size: 'xl',
+      resolve: { resource },
+    });
   }, [resource]);
 
   useToolbarActions(

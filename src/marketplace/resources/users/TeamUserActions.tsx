@@ -1,7 +1,6 @@
 import { ClockIcon, TrashIcon } from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceResourceProjectsDeleteUser,
   marketplaceResourceProjectsUpdateUser,
@@ -11,16 +10,12 @@ import {
 
 import { SubmitButton } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
-import {
-  closeModalDialog,
-  openModalDialog,
-  waitForConfirmation,
-} from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 type RoleScope = 'resource' | 'resource_project';
 
@@ -31,45 +26,40 @@ export const DeleteUserAction: FC<{ row; refetch(): void }> = ({
   row,
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const handler = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to remove {name} from this scope?',
-          {
-            name: <b>{row.user_full_name || row.user_username}</b>,
-          },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => {
       const apiFn =
         resolveScope(row) === 'resource_project'
           ? marketplaceResourceProjectsDeleteUser
           : marketplaceResourcesDeleteUser;
-      await apiFn({
+      return apiFn({
         path: { uuid: row.scope_uuid },
         body: { user: row.user_uuid, role: row.role_name } as any,
       });
-      dispatch(showSuccess(translate('User has been removed.')));
-      await refetch();
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to remove user.')));
-    }
-  }, [dispatch, row, refetch]);
+    },
+    successMessage: translate('User has been removed.'),
+    errorMessage: translate('Unable to remove user.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to remove {name} from this scope?',
+        {
+          name: <b>{row.user_full_name || row.user_username}</b>,
+        },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
   return (
     <ActionItem
       title={translate('Remove')}
-      action={handler}
+      action={() => deleteMutation.mutate()}
       iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
+      disabled={deleteMutation.isPending}
     />
   );
 };
@@ -77,35 +67,37 @@ export const DeleteUserAction: FC<{ row; refetch(): void }> = ({
 const UpdateUserExpirationDialog: FC<{
   resolve: { row; refetch(): void };
 }> = ({ resolve }) => {
-  const dispatch = useDispatch();
-  const submit = useCallback(
-    async (values) => {
-      try {
-        const apiFn =
-          resolveScope(resolve.row) === 'resource_project'
-            ? marketplaceResourceProjectsUpdateUser
-            : marketplaceResourcesUpdateUser;
-        await apiFn({
-          path: { uuid: resolve.row.scope_uuid },
-          body: {
-            user: resolve.row.user_uuid,
-            role: resolve.row.role_name,
-            expiration_time: values.expiration_time || null,
-          } as any,
-        });
-        dispatch(showSuccess(translate('Role expiration updated.')));
-        await resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to update role.')));
-      }
+  const updateMutation = useManagedMutation<
+    any,
+    any,
+    { expiration_time: string }
+  >({
+    mutationFn: (values) => {
+      const apiFn =
+        resolveScope(resolve.row) === 'resource_project'
+          ? marketplaceResourceProjectsUpdateUser
+          : marketplaceResourcesUpdateUser;
+      return apiFn({
+        path: { uuid: resolve.row.scope_uuid },
+        body: {
+          user: resolve.row.user_uuid,
+          role: resolve.row.role_name,
+          expiration_time: values.expiration_time || null,
+        } as any,
+      });
     },
-    [dispatch, resolve],
-  );
+    successMessage: translate('Role expiration updated.'),
+    errorMessage: translate('Unable to update role.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={submit}
+      onSubmit={(values: { expiration_time: string }) =>
+        updateMutation.mutateAsync(values).catch(() => {
+          /* error handled by useManagedMutation */
+        })
+      }
       initialValues={{ expiration_time: resolve.row.expiration_time }}
     >
       {({ handleSubmit, submitting }) => (
@@ -136,18 +128,16 @@ export const UpdateUserExpirationAction: FC<{ row; refetch(): void }> = ({
   row,
   refetch,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionItem
       title={translate('Update expiration')}
       iconNode={<ClockIcon weight="bold" />}
       action={() =>
-        dispatch(
-          openModalDialog(UpdateUserExpirationDialog, {
-            resolve: { row, refetch },
-            size: 'sm',
-          }),
-        )
+        openDialog(UpdateUserExpirationDialog, {
+          resolve: { row, refetch },
+          size: 'sm',
+        })
       }
     />
   );

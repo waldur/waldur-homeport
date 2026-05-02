@@ -1,7 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useCallback, FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   AttributeSourceDetail,
   IdentityBridgeUserStatus,
@@ -22,10 +21,10 @@ import FormTable from '@/form/FormTable';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { formatIsdName, IsdBadges } from './IsdBadges';
@@ -63,45 +62,43 @@ interface EditManagedIsdsDialogProps {
 }
 
 const EditManagedIsdsDialog: FC<EditManagedIsdsDialogProps> = ({ resolve }) => {
-  const dispatch = useDispatch();
   const queryClient = useQueryClient();
-  const { showSuccess, showErrorResponse } = useNotify();
 
   const initialValues = {
     managed_isds: resolve.managedIsds?.join(', ') || '',
   };
 
-  const processRequest = useCallback(
-    async (values: { managed_isds: string }) => {
-      const raw = values.managed_isds.trim();
-      const isds = raw
-        ? raw
-            .split(',')
-            .map((s) => s.trim())
-            .filter(Boolean)
-            .map((s) => (s.startsWith('isd:') ? s : `isd:${s}`))
-        : [];
-      try {
+  const updateMutation = useManagedMutation<any, any, { managed_isds: string }>(
+    {
+      mutationFn: async (values) => {
+        const raw = values.managed_isds.trim();
+        const isds = raw
+          ? raw
+              .split(',')
+              .map((s) => s.trim())
+              .filter(Boolean)
+              .map((s) => (s.startsWith('isd:') ? s : `isd:${s}`))
+          : [];
         await usersPartialUpdate({
           path: { uuid: resolve.user.uuid },
           body: { managed_isds: isds } as any,
         });
+        return isds;
+      },
+      successMessage: translate('Managed ISDs have been updated.'),
+      errorMessage: translate('Unable to update managed ISDs.'),
+      onSuccess: async (isds) => {
         resolve.onUpdated(isds);
-        showSuccess(translate('Managed ISDs have been updated.'));
         await queryClient.invalidateQueries({
           queryKey: ['user-identity-bridge-status', resolve.user.uuid],
         });
-        dispatch(closeModalDialog());
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to update managed ISDs.'));
-      }
+      },
     },
-    [resolve.user.uuid, dispatch, queryClient, showSuccess, showErrorResponse],
   );
 
   return (
-    <Form
-      onSubmit={processRequest}
+    <Form<{ managed_isds: string }>
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={initialValues}
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>
@@ -139,18 +136,15 @@ const EditManagedIsdsDialog: FC<EditManagedIsdsDialogProps> = ({ resolve }) => {
 };
 
 const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const queryClient = useQueryClient();
-  const { showSuccess, showErrorResponse } = useNotify();
-  const [toggling, setToggling] = useState(false);
   const [isManager, setIsManager] = useState(Boolean(user.is_identity_manager));
   const [managedIsds, setManagedIsds] = useState<string[]>(
     (user.managed_isds as string[]) || [],
   );
 
-  const toggleIdentityManager = async (checked: boolean) => {
-    setToggling(true);
-    try {
+  const toggleMutation = useManagedMutation<any, any, boolean>({
+    mutationFn: async (checked) => {
       const body: any = { is_identity_manager: checked };
       if (!checked) {
         body.managed_isds = [];
@@ -159,28 +153,29 @@ const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
         path: { uuid: user.uuid },
         body,
       });
+      return checked;
+    },
+    successMessage: translate('User has been updated.'),
+    errorMessage: translate('Unable to update user.'),
+    onSuccess: async (checked) => {
       setIsManager(checked);
       if (!checked) {
         setManagedIsds([]);
       }
-      showSuccess(translate('User has been updated.'));
       await queryClient.invalidateQueries({
         queryKey: ['user-identity-bridge-status', user.uuid],
       });
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to update user.'));
-    } finally {
-      setToggling(false);
-    }
-  };
+    },
+  });
+
+  const toggleIdentityManager = (checked: boolean) =>
+    toggleMutation.mutateAsync(checked);
 
   const openEditIsdsDialog = () => {
-    dispatch(
-      openModalDialog(EditManagedIsdsDialog, {
-        resolve: { user, managedIsds, onUpdated: setManagedIsds },
-        size: 'sm',
-      }),
-    );
+    openDialog(EditManagedIsdsDialog, {
+      resolve: { user, managedIsds, onUpdated: setManagedIsds },
+      size: 'sm',
+    });
   };
 
   return (
@@ -192,7 +187,7 @@ const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
             value={isManager}
             onChange={toggleIdentityManager}
             label={isManager ? translate('Enabled') : translate('Disabled')}
-            disabled={toggling}
+            disabled={toggleMutation.isPending}
           />
         }
       />

@@ -17,7 +17,7 @@ import {
   DependencyInfo,
   evaluateQuestionVisibility,
 } from '@/marketplace-checklist/questionDependencies';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { ComplianceFileUpload } from './ComplianceFileUpload';
 import { QuestionDependencyHint } from './QuestionDependencyHint';

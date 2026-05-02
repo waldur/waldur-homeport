@@ -1,7 +1,6 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
-import { useCallback, useEffect, useState } from 'react';
-import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { Field, Form } from 'react-final-form';
 import {
   ScienceDomainPreset,
   scienceDomainsLoadPreset,
@@ -12,14 +11,15 @@ import { required } from '@/core/validators';
 import { FormGroup, SubmitButton } from '@/form';
 import { SelectField } from '@/form/SelectField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 
 const LoadPresetDialog = ({ resolve }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
+
   const [presets, setPresets] = useState<ScienceDomainPreset[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,39 +29,35 @@ const LoadPresetDialog = ({ resolve }) => {
       .finally(() => setLoading(false));
   }, []);
 
-  const onSubmit = async (values: { preset: ScienceDomainPreset }) => {
-    try {
-      const response = await scienceDomainsLoadPreset({
+  const loadPresetMutation = useManagedMutation<
+    any,
+    any,
+    { preset: ScienceDomainPreset }
+  >({
+    mutationFn: (values) =>
+      scienceDomainsLoadPreset({
         body: { preset: values.preset.name as 'cscs' | 'oecd_fos_2007' },
-      });
-      resolve.refetch();
-      dispatch(
-        showSuccess(
-          translate(
-            'Created {domains} domains and {subdomains} sub-domains, skipped {skippedDomains} domains and {skippedSubdomains} sub-domains.',
-            {
-              domains: response.data.created_domains,
-              subdomains: response.data.created_subdomains,
-              skippedDomains: response.data.skipped_domains,
-              skippedSubdomains: response.data.skipped_subdomains,
-            },
-          ),
+      }),
+    errorMessage: translate('Unable to load science domain preset.'),
+    refetch: resolve.refetch,
+    onSuccess: (response) => {
+      showSuccess(
+        translate(
+          'Created {domains} domains and {subdomains} sub-domains, skipped {skippedDomains} domains and {skippedSubdomains} sub-domains.',
+          {
+            domains: response.data.created_domains,
+            subdomains: response.data.created_subdomains,
+            skippedDomains: response.data.skipped_domains,
+            skippedSubdomains: response.data.skipped_subdomains,
+          },
         ),
       );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to load science domain preset.'),
-        ),
-      );
-    }
-  };
+    },
+  });
 
   return (
-    <Form
-      onSubmit={onSubmit}
+    <Form<{ preset: ScienceDomainPreset }>
+      onSubmit={(values) => loadPresetMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -104,21 +100,17 @@ const LoadPresetDialog = ({ resolve }) => {
 };
 
 export const ScienceDomainLoadPresetButton = ({ refetch }) => {
-  const dispatch = useDispatch();
-
-  const openDialog = useCallback(() => {
-    dispatch(
-      openModalDialog(LoadPresetDialog, {
-        resolve: { refetch },
-      }),
-    );
-  }, [dispatch, refetch]);
+  const { openDialog } = useModal();
 
   return (
     <ActionButton
       title={translate('Load preset')}
       iconNode={<DownloadSimpleIcon weight="bold" />}
-      action={openDialog}
+      action={() => {
+        openDialog(LoadPresetDialog, {
+          resolve: { refetch },
+        });
+      }}
       variant="outline btn-outline-default"
     />
   );

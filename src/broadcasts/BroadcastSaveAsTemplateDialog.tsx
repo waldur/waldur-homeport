@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import {
   broadcastMessageTemplatesCreate,
@@ -9,10 +7,9 @@ import {
 import { required } from '@/core/validators';
 import { FormContainer, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { BroadcastFormData } from './types';
 
@@ -22,36 +19,24 @@ export const BroadcastSaveAsTemplateDialog = reduxForm<
 >({
   form: 'BroadcastSaveAsTemplateDialog',
 })(({ submitting, handleSubmit, resolve }) => {
-  const dispatch = useDispatch();
-  const callback = useCallback(
-    async (formData: MessageTemplateRequest) => {
-      try {
-        await broadcastMessageTemplatesCreate({
-          body: {
-            ...formData,
-            ...resolve.broadcastData,
-          },
-        });
-        await resolve.refetch();
-        dispatch(
-          showSuccess(translate('Broadcast has been saved as a template.')),
-        );
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to save a broadcast as a template.'),
-          ),
-        );
-      }
-    },
-    [dispatch, resolve],
-  );
+  const saveMutation = useManagedMutation<any, any, MessageTemplateRequest>({
+    mutationFn: (formData) =>
+      broadcastMessageTemplatesCreate({
+        body: {
+          ...formData,
+          ...resolve.broadcastData,
+        },
+      }),
+    successMessage: translate('Broadcast has been saved as a template.'),
+    errorMessage: translate('Unable to save a broadcast as a template.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <ModalDialog title={translate('Create a broadcast template')}>
-      <form onSubmit={handleSubmit(callback)}>
+      <form
+        onSubmit={handleSubmit((values) => saveMutation.mutateAsync(values))}
+      >
         <FormContainer submitting={submitting}>
           <StringField
             name="name"

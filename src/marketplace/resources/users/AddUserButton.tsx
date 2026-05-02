@@ -1,10 +1,9 @@
 import { UserPlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 const AddUserDialog = lazyComponent(() =>
@@ -41,13 +40,11 @@ export const AddUserButton: FunctionComponent<AddUserButtonProps> = ({
   disabled,
   tooltip,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(AddUserDialog, {
-        resolve: { scope, scopeUuid, projectUuid, offering, refetch },
-      }),
-    );
+    openDialog(AddUserDialog, {
+      resolve: { scope, scopeUuid, projectUuid, offering, refetch },
+    });
   };
   return (
     <ActionItem

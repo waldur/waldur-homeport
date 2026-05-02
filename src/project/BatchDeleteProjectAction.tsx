@@ -1,14 +1,10 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Project, projectsDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useUser } from '@/workspace/hooks';
 
 export const BatchDeleteProjectAction = ({
@@ -18,9 +14,7 @@ export const BatchDeleteProjectAction = ({
   rows: Project[];
   refetch;
 }) => {
-  const dispatch = useDispatch();
   const user = useUser();
-  const [pending, setPending] = useState(false);
 
   const deletableRows = rows.filter(
     (project) =>
@@ -39,89 +33,54 @@ export const BatchDeleteProjectAction = ({
     return null;
   }
 
-  const callback = async () => {
-    try {
-      const projectList = deletableRows.map((project) => (
-        <li key={project.uuid}>{project.name}</li>
-      ));
-
-      await waitForConfirmation(
-        dispatch,
-        translate('Delete {count} project(s)', {
-          count: deletableRows.length,
-        }),
+  const { mutate, isPending } = useBatchMutation({
+    rows: deletableRows,
+    mutationFn: (project) => projectsDestroy({ path: { uuid: project.uuid } }),
+    refetch,
+    successMessage: translate('{count} project(s) deleted successfully.', {
+      count: deletableRows.length,
+    }),
+    renderPartialSuccessMessage: (count) =>
+      translate('{count} project(s) deleted successfully.', {
+        count,
+      }),
+    renderErrorMessage: (count) =>
+      translate('{count} project(s) could not be deleted.', {
+        count,
+      }),
+    confirmation: {
+      title: translate('Delete {count} project(s)', {
+        count: deletableRows.length,
+      }),
+      body: (
         <div>
           <p>
             {translate(
               'Are you sure you want to delete the following projects? This action cannot be undone.',
             )}
           </p>
-          <ul>{projectList}</ul>
+          <ul>
+            {deletableRows.map((project) => (
+              <li key={project.uuid}>{project.name}</li>
+            ))}
+          </ul>
           {deletableRows.length !== rows.length &&
             translate(
               '{count} project(s) were excluded because you lack permission to delete them.',
               { count: rows.length - deletableRows.length },
               formatJsxTemplate,
             )}
-        </div>,
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      setPending(true);
-      const results = await Promise.allSettled(
-        deletableRows.map((project) =>
-          projectsDestroy({ path: { uuid: project.uuid } }),
-        ),
-      );
-      const succeeded = results.filter((r) => r.status === 'fulfilled').length;
-      const failed = results.filter((r) => r.status === 'rejected').length;
-      if (succeeded > 0) {
-        dispatch(
-          showSuccess(
-            translate('{count} project(s) deleted successfully.', {
-              count: succeeded,
-            }),
-          ),
-        );
-      }
-      if (failed > 0) {
-        dispatch(
-          showErrorResponse(
-            (
-              results.find(
-                (r) => r.status === 'rejected',
-              ) as PromiseRejectedResult
-            )?.reason,
-            translate('{count} project(s) could not be deleted.', {
-              count: failed,
-            }),
-          ),
-        );
-      }
-      await refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('An error occurred on project removal.'),
-        ),
-      );
-    } finally {
-      setPending(false);
-    }
-  };
+        </div>
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      action={callback}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-      iconColor="danger"
-      disabled={pending || deletableRows.length !== rows.length}
+      action={mutate}
+      disabled={isPending || deletableRows.length !== rows.length}
       tooltip={
         deletableRows.length !== rows.length
           ? translate(

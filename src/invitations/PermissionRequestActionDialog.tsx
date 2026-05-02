@@ -1,6 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { reduxForm, InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { FormContainer, SubmitButton, TextField } from '@/form';
@@ -9,7 +9,10 @@ import { USER_PERMISSION_REQUESTS_ACTION_FORM_ID } from '@/invitations/constants
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Field } from '@/resource/summary';
 
-import { useUserPermissionRequestActions } from './useUserPermissionRequestActions';
+import {
+  useApprovePermissionRequest,
+  useRejectPermissionRequest,
+} from './useUserPermissionRequestActions';
 
 interface OwnProps {
   resolve: {
@@ -24,11 +27,13 @@ const PurePermissionRequestActionDialog: FunctionComponent<
 > = (props) => {
   const permissionRequest = props.resolve.permissionRequest;
   const readOnly = props.resolve.readOnly;
-  const { approveRequest, rejectRequest } = useUserPermissionRequestActions(
+  const { approveRequest, isPending: isApproving } =
+    useApprovePermissionRequest(permissionRequest, props.resolve.refetch);
+  const { rejectRequest, isPending: isRejecting } = useRejectPermissionRequest(
     permissionRequest,
     props.resolve.refetch,
   );
-
+  const isPending = isApproving || isRejecting;
   return (
     <ModalDialog
       title={translate('Request review')}
@@ -37,8 +42,8 @@ const PurePermissionRequestActionDialog: FunctionComponent<
         !readOnly && (
           <>
             <SubmitButton
-              submitting={props.submitting}
-              disabled={props.invalid}
+              submitting={isRejecting}
+              disabled={props.invalid || isPending}
               variant="danger"
               className="w-150px"
               type="button"
@@ -52,8 +57,8 @@ const PurePermissionRequestActionDialog: FunctionComponent<
               {translate('Decline')}
             </SubmitButton>
             <SubmitButton
-              submitting={props.submitting}
-              disabled={props.invalid}
+              submitting={isApproving}
+              disabled={props.invalid || isPending}
               className="w-150px"
               type="button"
               onClick={props.handleSubmit((values) => {
@@ -133,7 +138,7 @@ const PurePermissionRequestActionDialog: FunctionComponent<
       </div>
       {!readOnly && <hr />}
       {!readOnly && (
-        <FormContainer submitting={props.submitting} className="size-lg">
+        <FormContainer submitting={isPending} className="size-lg">
           <TextField
             name="comment"
             label={translate('Reason')}

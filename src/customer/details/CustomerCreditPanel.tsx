@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { customerCreditsList } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
@@ -11,7 +10,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { minimalConsumptionLogicOptions } from '../credits/constants';
 import { CreditFieldEditButton } from '../credits/CreditFieldEditButton';
@@ -20,7 +19,7 @@ import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
 
 export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const {
     data: creditData,

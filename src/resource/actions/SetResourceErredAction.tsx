@@ -1,10 +1,8 @@
 import { CloudXIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useUser } from '@/workspace/hooks';
 
 import { ActionItem } from './ActionItem';
@@ -16,60 +14,35 @@ interface SetResourceErredActionProps<T> {
   refetch?(): void;
 }
 
-const useSetErred = ({
-  resource,
-  apiMethod,
-  refetch,
-}: SetResourceErredActionProps<any>) => {
-  const dispatch = useDispatch();
+export const SetResourceErredAction: <
+  T extends { uuid?: string; name?: string },
+>(
+  props: SetResourceErredActionProps<T>,
+) => ReactElement = ({ resource, apiMethod, refetch }) => {
   const user = useUser();
+
+  const mutation = useManagedMutation<any, any, void>({
+    mutationFn: () => apiMethod({ path: { uuid: resource.uuid } }),
+    successMessage: translate('Resource has been marked as ERRED.'),
+    errorMessage: translate('Unable to mark resource as ERRED.'),
+    refetch,
+    confirmation: {
+      title: translate('Mark as erred'),
+      body: translate('Are you sure you want to mark {name} as ERRED?', {
+        name: resource.name,
+      }),
+    },
+  });
 
   if (!user.is_staff) {
     return null;
   }
 
-  const action = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Mark as erred'),
-        translate('Are you sure you want to mark {name} as ERRED?', {
-          name: resource.name,
-        }),
-      );
-    } catch {
-      return;
-    }
-
-    try {
-      await apiMethod({ path: { uuid: resource.uuid } });
-      dispatch(showSuccess(translate('Resource has been marked as ERRED.')));
-      if (refetch) {
-        await refetch();
-      }
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to mark resource as ERRED.')),
-      );
-    }
-  };
-
-  return { action };
-};
-
-export const SetResourceErredAction: <
-  T extends { uuid?: string; name?: string },
->(
-  props: SetResourceErredActionProps<T>,
-) => ReactElement = (props) => {
-  const result = useSetErred(props);
-  if (!result) {
-    return null;
-  }
   return (
     <ActionItem
       title={translate('Mark as ERRED')}
-      action={result.action}
+      action={() => mutation.mutate()}
+      disabled={mutation.isPending}
       className="text-danger"
       staff
       iconNode={<CloudXIcon weight="bold" />}

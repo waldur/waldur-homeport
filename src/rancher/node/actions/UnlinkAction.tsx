@@ -1,50 +1,34 @@
 import { LinkBreakIcon } from '@phosphor-icons/react';
-import { useDispatch, useSelector } from 'react-redux';
 import { rancherNodesUnlinkOpenstack } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionItemType } from '@/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 export const UnlinkAction: ActionItemType = ({ resource, refetch }) => {
-  const user = useSelector(getUser);
-  const dispatch = useDispatch();
-  const callback = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Unlink instance'),
-        translate(
-          'Do you want to unlink instance {name}? Unlinking will only remove object from the database, it will not trigger any cleanup',
-          {
-            name: resource.instance_name,
-          },
-        ),
-      );
-    } catch {
-      return;
-    }
+  const user = useUser();
 
-    try {
-      await rancherNodesUnlinkOpenstack({ path: { uuid: resource.uuid } });
-      dispatch(
-        showSuccess(
-          translate('OpenStack instance has been unlinked from Rancher node.'),
-        ),
-      );
-      if (refetch) {
-        await refetch();
-      }
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to unlink instance from node.')),
-      );
-    }
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      rancherNodesUnlinkOpenstack({ path: { uuid: resource.uuid } }),
+    successMessage: translate(
+      'OpenStack instance has been unlinked from Rancher node.',
+    ),
+    errorMessage: translate('Unable to unlink instance from node.'),
+    refetch,
+    confirmation: {
+      title: translate('Unlink instance'),
+      body: translate(
+        'Do you want to unlink instance {name}? Unlinking will only remove object from the database, it will not trigger any cleanup',
+        {
+          name: resource.instance_name,
+        },
+      ),
+    },
+  });
   if (
     resource.instance !== null &&
     user?.is_staff &&
@@ -53,7 +37,8 @@ export const UnlinkAction: ActionItemType = ({ resource, refetch }) => {
     return (
       <ActionItem
         title={translate('Unlink instance')}
-        action={callback}
+        action={mutate}
+        disabled={isPending}
         staff
         iconNode={<LinkBreakIcon weight="bold" />}
       />

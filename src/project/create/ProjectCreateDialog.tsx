@@ -15,8 +15,8 @@ import { formDataOptions, fileSerializer } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
-import { useNotify } from '@/store/hooks';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { Wizard } from '@/wizard';
 import { Customer } from '@/workspace/types';
 

@@ -1,12 +1,11 @@
-import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceResourcesMoveResource, Resource } from 'waldur-js-client';
 
 import { FormContainer, FormFooter } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 
 import { MOVE_RESOURCE_FORM_ID } from './constants';
 import { MoveToProjectAutocomplete } from './MoveToProjectAutocomplete';
@@ -28,40 +27,39 @@ export const MoveResourceDialog = reduxForm<
 >({
   form: MOVE_RESOURCE_FORM_ID,
 })((props) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
 
-  const submitRequest = async (formData: FormData) => {
-    try {
-      await marketplaceResourcesMoveResource({
+  const submitRequestMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (formData) =>
+      marketplaceResourcesMoveResource({
         path: { uuid: props.resolve.resource.marketplace_resource_uuid },
         body: {
           project: {
             url: formData.project.url,
           },
         },
-      });
-      dispatch(
-        showSuccess(
-          translate(
-            '{resourceName} resource has been moved to {projectName} project.',
-            {
-              resourceName: props.resolve.resource.name,
-              projectName: formData.project.name,
-            },
-          ),
+      }),
+    errorMessage: translate('Unable to move resource.'),
+    refetch: props.resolve.refetch,
+    onSuccess: (_data, formData) => {
+      showSuccess(
+        translate(
+          '{resourceName} resource has been moved to {projectName} project.',
+          {
+            resourceName: props.resolve.resource.name,
+            projectName: formData.project.name,
+          },
         ),
       );
-      if (props.resolve.refetch) {
-        await props.resolve.refetch();
-      }
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to move resource.')));
-    }
-  };
+    },
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
+    <form
+      onSubmit={props.handleSubmit((values: FormData) =>
+        submitRequestMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate(
           'Move resource {resourceName} from {projectName} ({customerName})',

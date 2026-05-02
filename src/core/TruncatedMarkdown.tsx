@@ -1,8 +1,7 @@
 import { FC, useRef, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { Badge } from './Badge';
 import { SafeMarkdown } from './SafeMarkdown';
@@ -54,7 +53,7 @@ export const TruncatedMarkdown: FC<TruncatedMarkdownProps> = ({
 }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isTruncated, setIsTruncated] = useState(false);
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   useEffect(() => {
     const checkTruncation = () => {
@@ -84,12 +83,10 @@ export const TruncatedMarkdown: FC<TruncatedMarkdownProps> = ({
   }, [text, maxHeight]);
 
   const handleShowMore = () => {
-    dispatch(
-      openModalDialog(FullMarkdownModal, {
-        resolve: { text, title, smallTitles, showInternalBadge },
-        size: 'lg',
-      }),
-    );
+    openDialog(FullMarkdownModal, {
+      resolve: { text, title, smallTitles, showInternalBadge },
+      size: 'lg',
+    });
   };
 
   return (

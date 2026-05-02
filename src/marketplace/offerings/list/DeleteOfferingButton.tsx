@@ -1,19 +1,15 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsDestroy } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useUser } from '@/workspace/hooks';
 
 export const DeleteOfferingButton = ({ row, refetch }) => {
   const user = useUser();
-  const dispatch = useDispatch();
 
   const canManageOfferingLifecycle =
     user.is_staff ||
@@ -29,39 +25,27 @@ export const DeleteOfferingButton = ({ row, refetch }) => {
     return null;
   }
 
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceProviderOfferingsDestroy({ path: { uuid: row.uuid } }),
+    confirmation: {
+      title: translate('Delete confirmation'),
+      body: translate('Are you sure you want to delete this offering?'),
+      options: { forDeletion: true },
+    },
+    successMessage: translate('Offering deleted successfully.'),
+    errorMessage: translate('Error while deleting offering.'),
+    refetch,
+  });
+
   const isNotDraft = row.state !== 'Draft';
   // Staff can delete non-draft offerings; non-staff cannot
-  const disabled = isNotDraft && !user.is_staff;
-
-  const handleDeleteConfirmation = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Delete confirmation'),
-        translate('Are you sure you want to delete this offering?'),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await marketplaceProviderOfferingsDestroy({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Offering deleted successfully.')));
-      refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Error while deleting offering.')),
-      );
-    }
-  };
+  const disabled = (isNotDraft && !user.is_staff) || isPending;
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      action={handleDeleteConfirmation}
-      iconNode={<TrashIcon weight="bold" />}
-      iconColor="danger"
-      className="text-danger"
+      action={mutate}
       disabled={disabled}
       tooltip={
         disabled ? translate('Only draft offerings can be deleted') : undefined

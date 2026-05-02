@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { PlanUsageResponse } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 const PlanUsageDialog = lazyComponent(() =>
@@ -16,7 +15,7 @@ const PlanUsageDialog = lazyComponent(() =>
 export const PlanUsageButton: FunctionComponent<{ row: PlanUsageResponse }> = (
   props,
 ) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionItem
       title={translate('Show chart')}
@@ -25,11 +24,9 @@ export const PlanUsageButton: FunctionComponent<{ row: PlanUsageResponse }> = (
         props.row.limit === null ? translate('Plan does not have limit') : ''
       }
       action={() =>
-        dispatch(
-          openModalDialog(PlanUsageDialog, {
-            resolve: { row: props.row },
-          }),
-        )
+        openDialog(PlanUsageDialog, {
+          resolve: { row: props.row },
+        })
       }
     />
   );

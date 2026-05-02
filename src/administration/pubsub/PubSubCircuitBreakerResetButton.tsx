@@ -1,12 +1,9 @@
 import { ArrowCounterClockwiseIcon, WarningIcon } from '@phosphor-icons/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showError, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { resetCircuitBreaker } from './api';
 import { formatCircuitBreakerState } from './utils';
@@ -18,32 +15,14 @@ interface PubSubCircuitBreakerResetButtonProps {
 export const PubSubCircuitBreakerResetButton: FC<
   PubSubCircuitBreakerResetButtonProps
 > = ({ currentState }) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: resetCircuitBreaker,
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Circuit breaker has been reset.')));
-      queryClient.invalidateQueries({ queryKey: ['PubSubOverview'] });
-      queryClient.invalidateQueries({ queryKey: ['PubSubCircuitBreaker'] });
-    },
-    onError: (error) => {
-      dispatch(
-        showError(
-          translate('Failed to reset circuit breaker: {error}', {
-            error: error instanceof Error ? error.message : String(error),
-          }),
-        ),
-      );
-    },
-  });
+    successMessage: translate('Circuit breaker has been reset.'),
+    errorMessage: translate('Failed to reset circuit breaker.'),
 
-  const handleReset = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Reset circuit breaker'),
+    confirmation: {
+      title: translate('Reset circuit breaker'),
+      body: (
         <>
           <p>
             {translate('Current state: {state}', {
@@ -60,20 +39,21 @@ export const PubSubCircuitBreakerResetButton: FC<
               'Only do this if you have confirmed that the underlying issue has been resolved.',
             )}
           </p>
-        </>,
-        {
-          type: 'warning',
-          iconNode: <WarningIcon weight="bold" />,
-          positiveButton: translate('Reset circuit breaker'),
-          positiveButtonVariant: 'warning',
-        },
-      );
+        </>
+      ),
+      options: {
+        type: 'warning',
+        iconNode: <WarningIcon weight="bold" />,
+        positiveButton: translate('Reset circuit breaker'),
+        positiveButtonVariant: 'warning',
+      },
+    },
 
-      mutation.mutate();
-    } catch {
-      // User cancelled
-    }
-  }, [dispatch, currentState, mutation]);
+    invalidateQueries: [
+      { queryKey: ['PubSubOverview'] },
+      { queryKey: ['PubSubCircuitBreaker'] },
+    ],
+  });
 
   // Only show button when circuit breaker is not in CLOSED state
   if (currentState === 'closed') {
@@ -82,10 +62,10 @@ export const PubSubCircuitBreakerResetButton: FC<
 
   return (
     <SubmitButton
-      submitting={mutation.isPending}
+      submitting={isPending}
       type="button"
       variant="warning"
-      onClick={handleReset}
+      onClick={() => mutate()}
       label={translate('Reset circuit breaker')}
       iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
       iconOnLeft

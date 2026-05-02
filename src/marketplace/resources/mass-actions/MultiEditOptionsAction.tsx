@@ -1,12 +1,11 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
@@ -27,7 +26,7 @@ export const MultiEditOptionsAction = ({
   refetch;
   asButton?: boolean;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const user = useUser();
   const canShow = useMemo(() => {
@@ -45,14 +44,12 @@ export const MultiEditOptionsAction = ({
   }, [rows, user]);
 
   const callback = () =>
-    dispatch(
-      openModalDialog(MultiEditOptionsDialog, {
-        resolve: {
-          rows,
-          refetch,
-        },
-      }),
-    );
+    openDialog(MultiEditOptionsDialog, {
+      resolve: {
+        rows,
+        refetch,
+      },
+    });
 
   return canShow ? (
     asButton ? (

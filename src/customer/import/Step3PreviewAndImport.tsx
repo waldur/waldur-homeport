@@ -1,5 +1,4 @@
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useToggle } from 'react-use';
 import { Customer } from 'waldur-js-client';
 
@@ -7,7 +6,7 @@ import { Badge } from '@/core/Badge';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
-import { showError } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -37,7 +36,7 @@ const StatusField = ({ row }) => {
 };
 
 export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
-  const dispatch = useDispatch();
+  const { showError } = useNotify();
   const [data, setData] = useState<Customer[]>([]);
   const [skipErrors, setSkipErrors] = useToggle(false);
 
@@ -46,7 +45,7 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       const _file = acceptedFiles[0];
 
       if (!_file) {
-        dispatch(showError(translate('No file has been imported')));
+        showError(translate('No file has been imported'));
         return;
       }
       parseOrganizationsFile(_file).then((_data) => {
@@ -56,18 +55,16 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           'email',
         ]);
         if (duplicates) {
-          dispatch(
-            showError(
-              translate('{count} duplicate records were removed.', {
-                count: duplicates,
-              }),
-            ),
+          showError(
+            translate('{count} duplicate records were removed.', {
+              count: duplicates,
+            }),
           );
         }
         setData(rows);
       });
     },
-    [dispatch, setData],
+    [setData],
   );
 
   const refToolbar = useRef<HTMLDivElement>(null);

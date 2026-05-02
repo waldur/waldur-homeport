@@ -5,9 +5,8 @@ import { marketplacePlansUpdatePrices } from 'waldur-js-client';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { Offering, OfferingComponent, Plan } from '@/marketplace/types';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { EDIT_PLAN_FORM_ID } from './constants';
 import { PricesTable } from './PricesTable';
@@ -55,26 +54,25 @@ export const EditPlanPricesDialog = connect<
   reduxForm<{}, { resolve: { offering; plan; refetch } }>({
     form: EDIT_PLAN_FORM_ID,
   })((props) => {
-    const { showErrorResponse, showSuccess } = useNotify();
-    const { closeDialog } = useModal();
-    const update = async (formData) => {
-      try {
-        await marketplacePlansUpdatePrices({
+    const updatePricesMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        marketplacePlansUpdatePrices({
           path: { uuid: props.resolve.plan.uuid },
           body: {
             prices: formData.new_prices,
           },
-        });
-        showSuccess(translate('Prices have been updated successfully.'));
-        await props.resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to update prices.'));
-      }
-    };
+        }),
+      successMessage: translate('Prices have been updated successfully.'),
+      errorMessage: translate('Unable to update prices.'),
+      refetch: props.resolve.refetch,
+    });
 
     return (
-      <form onSubmit={props.handleSubmit(update)}>
+      <form
+        onSubmit={props.handleSubmit((values) =>
+          updatePricesMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={
             props.resolve.plan.resources_count > 0

@@ -1,9 +1,8 @@
 import { TerminalIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { ActionItem } from './ActionItem';
 import { ActionValidator } from './types';
@@ -19,14 +18,14 @@ interface OpenConsoleActionItemProps<T> {
 export const OpenConsoleActionItem: <T extends { uuid?: string }>(
   props: OpenConsoleActionItemProps<T>,
 ) => ReactElement = ({ resource, apiMethod, validators, staff }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
   const validationState = useValidators(validators, resource);
   const callback = async () => {
     try {
       const consoleUrl = await apiMethod(resource.uuid);
       window.open(consoleUrl);
     } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to open console.')));
+      showErrorResponse(e, translate('Unable to open console.'));
     }
   };
   return (

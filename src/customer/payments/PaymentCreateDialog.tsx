@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import { paymentsCreate } from 'waldur-js-client';
 
-import { formDataOptions, fileSerializer } from '@/core/api';
+import { fileSerializer, formDataOptions } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
 import { ADD_PAYMENT_FORM_ID } from '@/customer/payments/constants';
 import {
@@ -14,45 +13,46 @@ import {
 } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { getCustomer } from '@/workspace/selectors';
-
-import { updatePaymentsList } from './utils';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface PaymentCreateDialogProps extends InjectedFormProps {
   resolve: {
     profileUrl: string;
+    refetch;
   };
 }
 
 const PaymentCreateDialog: FunctionComponent<PaymentCreateDialogProps> = (
   props,
 ) => {
-  const dispatch = useDispatch();
-  const customer = useSelector(getCustomer);
-
-  const submitRequest = async (formData) => {
-    try {
-      await paymentsCreate({
+  const mutation = useManagedMutation<
+    any,
+    any,
+    {
+      date_of_payment: string;
+      sum: number | string;
+      proof: File;
+    }
+  >({
+    mutationFn: (formData) =>
+      paymentsCreate({
         body: {
           date_of_payment: formatISODate(formData.date_of_payment),
-          sum: formData.sum,
+          sum: String(formData.sum),
           proof: fileSerializer(formData.proof),
           profile: props.resolve.profileUrl,
         },
         ...formDataOptions,
-      });
-      dispatch(showSuccess(translate('Payment has been created.')));
-      dispatch(closeModalDialog());
-      dispatch(updatePaymentsList(customer));
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to create payment.')),
-      );
-    }
+      }),
+    successMessage: translate('Payment has been created.'),
+    errorMessage: translate('Unable to create payment.'),
+    refetch: props.resolve.refetch,
+  });
+
+  const submitRequest = async (formData) => {
+    await mutation.mutateAsync(formData);
   };
 
   return (

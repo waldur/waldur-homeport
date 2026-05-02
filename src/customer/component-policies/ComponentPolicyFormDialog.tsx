@@ -1,22 +1,21 @@
 import arrayMutators from 'final-form-arrays';
 import { lowerCase, upperFirst } from 'lodash-es';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
-  CustomerComponentUsagePolicy,
-  CustomerComponentUsagePolicyRequest,
+  type CustomerComponentUsagePolicy,
+  type CustomerComponentUsagePolicyRequest,
   marketplaceCustomerComponentUsagePoliciesCreate,
   marketplaceCustomerComponentUsagePoliciesUpdate,
-  NestedCustomerUsagePolicyComponentRequest,
+  type NestedCustomerUsagePolicyComponentRequest,
 } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { getCustomer } from '@/workspace/selectors';
 
 import { ComponentPolicyForm } from './ComponentPolicyForm';
@@ -36,53 +35,35 @@ interface ComponentPolicyFormData {
 export const ComponentPolicyFormDialog: FC<ComponentPolicyFormDialogProps> = ({
   resolve,
 }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
   const customer = useSelector(getCustomer);
 
   const isEdit = Boolean(resolve.policy?.uuid);
 
-  const submitFn = useCallback(
-    async (formData: ComponentPolicyFormData) => {
+  const submitMutation = useManagedMutation<any, any, ComponentPolicyFormData>({
+    mutationFn: (formData) => {
       const body: CustomerComponentUsagePolicyRequest = {
         scope: isEdit ? resolve.policy.scope : customer.url,
         actions: formData.actions.value,
         component_limits_set: formData.component_limits_set,
         options: formData.options,
       };
-      try {
-        if (isEdit) {
-          await marketplaceCustomerComponentUsagePoliciesUpdate({
+      return isEdit
+        ? marketplaceCustomerComponentUsagePoliciesUpdate({
             path: { uuid: resolve.policy.uuid },
             body,
-          });
-          showSuccess(translate('Policy has been updated.'));
-        } else {
-          await marketplaceCustomerComponentUsagePoliciesCreate({
+          })
+        : marketplaceCustomerComponentUsagePoliciesCreate({
             body,
           });
-          showSuccess(translate('Policy has been created.'));
-        }
-        resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(
-          error,
-          isEdit
-            ? translate('Unable to update policy.')
-            : translate('Unable to create policy.'),
-        );
-      }
     },
-    [
-      resolve.policy,
-      resolve.refetch,
-      customer,
-      showSuccess,
-      showErrorResponse,
-      closeDialog,
-    ],
-  );
+    successMessage: isEdit
+      ? translate('Policy has been updated.')
+      : translate('Policy has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update policy.')
+      : translate('Unable to create policy.'),
+    refetch: resolve.refetch,
+  });
 
   const initialValues = useMemo(() => {
     if (!isEdit) {
@@ -104,11 +85,11 @@ export const ComponentPolicyFormDialog: FC<ComponentPolicyFormDialogProps> = ({
 
   return (
     <Form
-      onSubmit={submitFn}
+      onSubmit={(values) => submitMutation.mutateAsync(values)}
       mutators={{ ...arrayMutators }}
       initialValues={initialValues}
     >
-      {({ handleSubmit, submitting, invalid, dirty, values, submitErrors }) => (
+      {({ handleSubmit, invalid, dirty, values, submitErrors }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -121,7 +102,7 @@ export const ComponentPolicyFormDialog: FC<ComponentPolicyFormDialogProps> = ({
                 <CloseDialogButton className="min-w-125px" />
                 <SubmitButton
                   disabled={invalid || !dirty}
-                  submitting={submitting}
+                  submitting={submitMutation.isPending}
                   label={isEdit ? translate('Edit') : translate('Create')}
                   className="btn btn-primary min-w-125px"
                 />

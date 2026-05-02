@@ -1,17 +1,16 @@
 import { DownloadSimpleIcon, EnvelopeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { OrderDetails } from 'waldur-js-client';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const SetConsumerInfoDialog = lazyComponent(() =>
   import('../actions/SetConsumerInfoDialog').then((module) => ({
@@ -30,8 +29,8 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
   offering,
   refetch,
 }) => {
-  const user = useSelector(getUser);
-  const dispatch = useDispatch();
+  const user = useUser();
+  const { openDialog } = useModal();
 
   const canRespond = useMemo(() => {
     return (
@@ -47,12 +46,10 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
   }, [order, offering, user]);
 
   const openRespondDialog = () => {
-    dispatch(
-      openModalDialog(SetConsumerInfoDialog, {
-        resolve: { order, refetch },
-        size: 'lg',
-      }),
-    );
+    openDialog(SetConsumerInfoDialog, {
+      resolve: { order, refetch },
+      size: 'lg',
+    });
   };
 
   return (

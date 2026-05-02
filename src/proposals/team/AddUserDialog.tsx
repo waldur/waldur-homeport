@@ -1,5 +1,5 @@
 import { UserCirclePlusIcon } from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { RoleDetails } from 'waldur-js-client';
 
@@ -12,12 +12,11 @@ import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@/project/team/RoleGroup';
 import { UserListOptionInline } from '@/project/team/UserListOptionInline';
-import { useNotify } from '@/store/hooks';
 
 import { AddUserDialogProps } from './types';
 
@@ -38,27 +37,17 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   roleTypes,
   roles,
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
-  const saveUser = useCallback(
-    async (formData: AddUserDialogFormData) => {
-      try {
-        await post(`${scope.url}add_user/`, {
-          user: formData.user.uuid,
-          expiration_time: formData.expiration_time,
-          role: roles && roles.length === 1 ? roles[0] : formData.role.name,
-        });
-
-        await refetch();
-        showSuccess(translate('User has been added.'));
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to add user.'));
-      }
-    },
-    [scope, roles, refetch, showSuccess, closeDialog, showErrorResponse],
-  );
+  const saveUserMutation = useManagedMutation<any, any, AddUserDialogFormData>({
+    mutationFn: (formData) =>
+      post(`${scope.url}add_user/`, {
+        user: formData.user.uuid,
+        expiration_time: formData.expiration_time,
+        role: roles && roles.length === 1 ? roles[0] : formData.role.name,
+      }),
+    successMessage: translate('User has been added.'),
+    errorMessage: translate('Unable to add user.'),
+    refetch,
+  });
 
   const initialValues =
     roles && roles.length === 1
@@ -66,7 +55,10 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
       : {};
 
   return (
-    <Form onSubmit={saveUser} initialValues={initialValues}>
+    <Form<AddUserDialogFormData>
+      onSubmit={(values) => saveUserMutation.mutateAsync(values)}
+      initialValues={initialValues}
+    >
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

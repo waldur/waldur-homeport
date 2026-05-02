@@ -23,10 +23,10 @@ import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { selectSelectedRows } from '@/table/selectors';
 import Table from '@/table/Table';
@@ -304,6 +304,9 @@ export const EditEndDateDialog = ({
 }) => {
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
+
+  const { closeDialog } = useModal();
+
   const { showSuccess, showErrorResponse, showError } = useNotify();
 
   const resources = queryClient.getQueryData<Resource[]>([
@@ -384,7 +387,7 @@ export const EditEndDateDialog = ({
               { list: ignoredResources.join(', ') },
             );
           }
-          dispatch(showSuccess(title, message));
+          showSuccess(title, message);
           if (erredResources.length > 0) {
             showError(
               translate(
@@ -397,12 +400,12 @@ export const EditEndDateDialog = ({
           showSuccess(title);
         }
 
-        dispatch(closeModalDialog());
+        closeDialog();
       } catch (e) {
         showErrorResponse(e, translate('Project could not be updated.'));
       }
     },
-    [dispatch, resolve, resources, selectedResources],
+    [resolve, resources, selectedResources],
   );
 
   return (

@@ -35,10 +35,10 @@ import { translate } from '@/i18n';
 import { CHECKLIST_TABLE_ID } from '@/marketplace-checklist/constants';
 import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
 import { CHECKLIST_FLAGS } from '@/marketplace-checklist/utils';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { fetchListStart, updateEntity } from '@/table/actions';
 
 import { QuestionGeneralForm } from './QuestionGeneralForm';

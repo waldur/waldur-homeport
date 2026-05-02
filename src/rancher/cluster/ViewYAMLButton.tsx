@@ -1,9 +1,8 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 const ViewYAMLDialog = lazyComponent(() =>
@@ -23,17 +22,15 @@ export const ViewYAMLButton = ({
   yamlRetrieve: any;
   yamlUpdate: any;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionItem
       title={translate('View YAML')}
       action={() =>
-        dispatch(
-          openModalDialog(ViewYAMLDialog, {
-            resolve: { resource, yamlRetrieve, yamlUpdate },
-            size: 'lg',
-          }),
-        )
+        openDialog(ViewYAMLDialog, {
+          resolve: { resource, yamlRetrieve, yamlUpdate },
+          size: 'lg',
+        })
       }
       iconNode={<PencilSimpleIcon weight="bold" />}
       disabled={disabled}

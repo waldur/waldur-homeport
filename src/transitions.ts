@@ -14,14 +14,14 @@ import { MarketplaceFeatures } from './FeaturesEnums';
 import { translate } from './i18n';
 import { tryAcceptInvitation } from './invitations/tryAcceptInvitation';
 import { tryJoinOrganization } from './invitations/tryJoinOrganization';
-import { closeModalDialog } from './modal/actions';
+import { ModalService } from './modal/actions';
 import { router } from './router';
-import { showRedirectMessage } from './store/notify';
+import { NotifyService } from './store/notify';
 import { UsersService } from './user/UsersService';
 
 export function attachTransitions() {
   router.transitionService.onSuccess({}, function () {
-    store.dispatch(closeModalDialog());
+    ModalService.close();
     store.dispatch(closeDrawerDialog());
   });
 
@@ -103,13 +103,9 @@ export function attachTransitions() {
         const token = transition.params().token;
         if (token) {
           GroupInvitationTokenStorage.set(token);
-          store.dispatch(
-            showRedirectMessage(
-              translate('Authentication required'),
-              translate(
-                'Please log in to request access to this organization.',
-              ),
-            ),
+          NotifyService.warning(
+            translate('Authentication required'),
+            translate('Please log in to request access to this organization.'),
           );
         }
       }

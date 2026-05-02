@@ -1,10 +1,9 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 const OfferingPermissionCreateDialog = lazyComponent(() =>
@@ -17,13 +16,11 @@ export const OfferingPermissionCreateButton: React.FC<{
   offering;
   refetch;
 }> = ({ offering, refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(OfferingPermissionCreateDialog, {
-        resolve: { offering, refetch },
-      }),
-    );
+    openDialog(OfferingPermissionCreateDialog, {
+      resolve: { offering, refetch },
+    });
   };
   return (
     <ActionButton

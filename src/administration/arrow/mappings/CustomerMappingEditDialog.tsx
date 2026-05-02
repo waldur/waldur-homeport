@@ -1,8 +1,9 @@
-import { useCallback, useState } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
-import type { ArrowCustomerMapping } from 'waldur-js-client';
+import {
+  type ArrowCustomerMapping,
+  adminArrowCustomerMappingsPartialUpdate,
+} from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { StringField } from '@/form';
@@ -12,12 +13,12 @@ import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
-import { useUpdateCustomerMapping } from '../api';
+import { arrowQueryKeys } from '../api';
 
 interface CustomerMappingEditDialogProps {
   resolve: {
@@ -36,46 +37,41 @@ interface FormValues {
 export const CustomerMappingEditDialog = ({
   resolve,
 }: CustomerMappingEditDialogProps) => {
-  const dispatch = useDispatch();
-  const [error, setError] = useState<string | null>(null);
-  const updateMapping = useUpdateCustomerMapping();
+  const { closeDialog } = useModal();
   const { mapping, refetch } = resolve;
 
-  const handleSubmit = useCallback(
-    async (values: FormValues) => {
-      setError(null);
-      try {
-        await updateMapping.mutateAsync({
-          uuid: mapping.uuid,
-          data: {
-            arrow_reference: values.arrow_reference,
-            arrow_company_name: values.arrow_company_name,
-            waldur_customer: values.waldur_customer.uuid,
-            is_active: values.is_active,
-          },
-        });
-        dispatch(showSuccess(translate('Customer mapping updated')));
-        refetch();
-        dispatch(closeModalDialog());
-      } catch (e: any) {
-        setError(
-          e.response?.data?.detail ||
-            e.message ||
-            translate('Failed to update mapping'),
-        );
-      }
-    },
-    [updateMapping, mapping.uuid, dispatch, refetch],
-  );
+  const submitMutation = useManagedMutation<any, any, FormValues>({
+    mutationFn: (values) =>
+      adminArrowCustomerMappingsPartialUpdate({
+        path: { uuid: mapping.uuid },
+        body: {
+          arrow_reference: values.arrow_reference,
+          arrow_company_name: values.arrow_company_name,
+          waldur_customer: values.waldur_customer.uuid,
+          is_active: values.is_active,
+        },
+      }),
 
-  const handleClose = useCallback(() => {
-    dispatch(closeModalDialog());
-  }, [dispatch]);
+    successMessage: translate('Customer mapping updated'),
+    refetch,
+
+    invalidateQueries: [
+      {
+        queryKey: arrowQueryKeys.customerMappings(),
+      },
+    ],
+  });
+
+  const mutationError = submitMutation.error
+    ? (submitMutation.error as any).response?.data?.detail ||
+      (submitMutation.error as any).message ||
+      translate('Failed to update mapping')
+    : null;
 
   return (
     <ModalDialog title={translate('Edit Customer Mapping')}>
-      <Form
-        onSubmit={handleSubmit}
+      <Form<FormValues>
+        onSubmit={(values) => submitMutation.mutateAsync(values)}
         initialValues={{
           arrow_reference: mapping.arrow_reference,
           arrow_company_name: mapping.arrow_company_name,
@@ -140,20 +136,20 @@ export const CustomerMappingEditDialog = ({
               />
             </FormGroup>
 
-            {error && (
+            {mutationError && (
               <Alert variant="danger" className="mb-4">
-                {error}
+                {mutationError}
               </Alert>
             )}
 
             <div className="d-flex justify-content-end gap-2">
               <ActionButton
-                action={handleClose}
+                action={closeDialog}
                 variant="secondary"
                 title={translate('Cancel')}
               />
               <SubmitButton
-                submitting={updateMapping.isPending}
+                submitting={submitMutation.isPending}
                 disabled={invalid}
                 label={translate('Save')}
               />

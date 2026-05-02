@@ -5,8 +5,8 @@ import { rolesUpdateDescriptionsUpdate } from 'waldur-js-client';
 import { ENV } from '@/core/config';
 import { StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 import { getRoles } from './utils';

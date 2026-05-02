@@ -1,15 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsCreateOfferingComponent } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { formatComponent } from '../../store/utils';
 
@@ -22,34 +19,24 @@ export const AddComponentDialog = reduxForm<
 >({
   form: ADD_COMPONENT_FORM_ID,
 })((props) => {
-  const dispatch = useDispatch();
-  const update = useCallback(
-    async (formData) => {
-      try {
-        await marketplaceProviderOfferingsCreateOfferingComponent({
-          path: { uuid: props.resolve.offering.uuid },
-          body: formatComponent(formData, props.resolve.offering),
-        });
-        dispatch(
-          showSuccess(
-            translate('Billing component has been created successfully.'),
-          ),
-        );
-        props.resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to create billing component.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
+  const createMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsCreateOfferingComponent({
+        path: { uuid: props.resolve.offering.uuid },
+        body: formatComponent(formData, props.resolve.offering),
+      }),
+    successMessage: translate(
+      'Billing component has been created successfully.',
+    ),
+    errorMessage: translate('Unable to create billing component.'),
+    refetch: props.resolve.refetch,
+  });
   return (
-    <form onSubmit={props.handleSubmit(update)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        createMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Add component')}
         iconNode={<PlusCircleIcon weight="bold" />}

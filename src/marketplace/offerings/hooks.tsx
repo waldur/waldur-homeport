@@ -1,10 +1,10 @@
 import { GearIcon, PlusIcon, UploadSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { IBreadcrumbItem } from '@/navigation/types';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -38,7 +38,7 @@ const SingleOfferingImportDialog = lazyComponent(() =>
 );
 
 export const useOfferingDropdownActions = (refetch?) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const customer = useSelector(getCustomer);
   const user = useUser();
   const canCreateOffering = hasPermission(user, {
@@ -67,13 +67,11 @@ export const useOfferingDropdownActions = (refetch?) => {
       key="connect-remote-offerings"
       title={translate('Connect remote offerings')}
       action={() => {
-        dispatch(
-          openModalDialog(OfferingImportDialog, {
-            refetch,
-            size: 'lg',
-            formId: OFFERING_IMPORT_FORM_ID,
-          }),
-        );
+        openDialog(OfferingImportDialog, {
+          refetch,
+          size: 'lg',
+          formId: OFFERING_IMPORT_FORM_ID,
+        });
       }}
       iconNode={<PlusIcon weight="bold" />}
     />,
@@ -81,13 +79,11 @@ export const useOfferingDropdownActions = (refetch?) => {
       key="import-offering"
       title={translate('Import offering')}
       action={() => {
-        dispatch(
-          openModalDialog(SingleOfferingImportDialog, {
-            resolve: { refetch },
-            size: 'lg',
-            formId: SINGLE_OFFERING_IMPORT_FORM_ID,
-          }),
-        );
+        openDialog(SingleOfferingImportDialog, {
+          resolve: { refetch },
+          size: 'lg',
+          formId: SINGLE_OFFERING_IMPORT_FORM_ID,
+        });
       }}
       iconNode={<UploadSimpleIcon weight="bold" />}
     />,
@@ -95,12 +91,10 @@ export const useOfferingDropdownActions = (refetch?) => {
       key="generate-site-agent-config"
       title={translate('Generate Site Agent Config')}
       action={() => {
-        dispatch(
-          openModalDialog(SiteAgentConfigDialog, {
-            resolve: { provider: { uuid: serviceProvider?.uuid } },
-            size: 'lg',
-          }),
-        );
+        openDialog(SiteAgentConfigDialog, {
+          resolve: { provider: { uuid: serviceProvider?.uuid } },
+          size: 'lg',
+        });
       }}
       iconNode={<GearIcon weight="bold" />}
       disabled={!serviceProvider}

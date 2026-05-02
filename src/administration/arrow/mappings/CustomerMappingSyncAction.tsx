@@ -1,13 +1,15 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import type { ArrowCustomerMapping } from 'waldur-js-client';
+import {
+  adminArrowCustomerMappingsSyncFromArrow,
+  type ArrowCustomerMapping,
+  type SyncFromArrowRequestRequest,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
-import { useSyncFromArrow } from '../api';
+import { arrowQueryKeys } from '../api';
 
 export const CustomerMappingSyncAction = ({
   row,
@@ -16,31 +18,31 @@ export const CustomerMappingSyncAction = ({
   row: ArrowCustomerMapping;
   refetch: () => void;
 }) => {
-  const dispatch = useDispatch();
-  const syncFromArrow = useSyncFromArrow();
-  const [loading, setLoading] = useState(false);
+  const { mutate, isPending } = useManagedMutation<
+    any,
+    any,
+    SyncFromArrowRequestRequest
+  >({
+    mutationFn: (data?) =>
+      adminArrowCustomerMappingsSyncFromArrow({ body: data }),
 
-  const handleSync = useCallback(async () => {
-    setLoading(true);
-    try {
-      await syncFromArrow.mutateAsync({
-        settings_uuid: row.settings_uuid,
-      });
-      dispatch(showSuccess(translate('Sync from Arrow triggered')));
-      refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Failed to trigger sync')));
-    } finally {
-      setLoading(false);
-    }
-  }, [dispatch, syncFromArrow, row.settings_uuid, refetch]);
+    successMessage: translate('Sync from Arrow triggered'),
+    errorMessage: translate('Failed to trigger sync'),
+    refetch,
+
+    invalidateQueries: [
+      {
+        queryKey: arrowQueryKeys.customerMappings(),
+      },
+    ],
+  });
 
   return (
     <ActionItem
-      action={handleSync}
+      action={() => mutate({ settings_uuid: row.settings_uuid })}
       title={translate('Sync from Arrow')}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
-      disabled={loading}
+      disabled={isPending}
     />
   );
 };

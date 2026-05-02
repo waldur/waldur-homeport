@@ -13,9 +13,8 @@ import { SubmitButton } from '@/form/SubmitButton';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createEntity } from '@/table/actions';
 
 import * as constants from './constants';
@@ -79,37 +78,29 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
   refetch,
 }) => {
   const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
-  const processRequest = React.useCallback(
-    async (values: SshKeyRequest) => {
+  const createKeyMutation = useManagedMutation<any, any, SshKeyRequest>({
+    mutationFn: async (values) => {
       let data = { ...values };
-      try {
-        if (!values.name) {
-          const name = extractNameFromKey(values.public_key);
-          data = { ...values, name };
-        }
-        const response = await keysCreate({ body: data });
-        const createdKey = response.data;
-        dispatch(
-          createEntity(constants.keysListTable, createdKey.uuid, createdKey),
-        );
-        if (refetch) {
-          await refetch();
-        }
-        showSuccess(translate('The key has been created.'));
-        closeDialog();
-      } catch (e) {
-        showErrorResponse(e, translate('Unable to create key.'));
+      if (!values.name) {
+        const name = extractNameFromKey(values.public_key);
+        data = { ...values, name };
       }
+      const response = await keysCreate({ body: data });
+      return response.data;
     },
-    [dispatch, showSuccess, showErrorResponse, closeDialog, refetch],
-  );
+    successMessage: translate('The key has been created.'),
+    errorMessage: translate('Unable to create key.'),
+    refetch,
+    onSuccess: (createdKey) => {
+      dispatch(
+        createEntity(constants.keysListTable, createdKey.uuid, createdKey),
+      );
+    },
+  });
 
   return (
-    <Form
-      onSubmit={processRequest}
+    <Form<SshKeyRequest>
+      onSubmit={(values) => createKeyMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

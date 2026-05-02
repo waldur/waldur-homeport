@@ -1,16 +1,13 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { capitalize } from 'lodash-es';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { SupportSettingsForm } from './SupportSettingsForm';
 
@@ -24,33 +21,30 @@ interface AdministrationServiceDeskUpdateDialogProps {
 export const AdministrationServiceDeskUpdateDialog = ({
   resolve,
 }: AdministrationServiceDeskUpdateDialogProps) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-
-  const onSubmit = async (formData) => {
-    const relevantFormData = {};
-    Object.keys(formData).forEach((fieldName) => {
-      if (fieldName.startsWith(resolve.name.toUpperCase())) {
-        relevantFormData[fieldName] = formData[fieldName];
-      }
-    });
-    try {
-      await overrideSettings({ body: relevantFormData, ...formDataOptions });
-      queryClient.invalidateQueries({
-        queryKey: ['AdministrationServiceDesk'],
+  const updateServiceDeskMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
+      const relevantFormData = {};
+      Object.keys(formData).forEach((fieldName) => {
+        if (fieldName.startsWith(resolve.name.toUpperCase())) {
+          relevantFormData[fieldName] = formData[fieldName];
+        }
       });
-      dispatch(showSuccess(translate('Configurations have been updated')));
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to update the configurations.')),
-      );
-    }
-  };
+      return overrideSettings({ body: relevantFormData, ...formDataOptions });
+    },
+
+    successMessage: translate('Configurations have been updated'),
+    errorMessage: translate('Unable to update the configurations.'),
+
+    invalidateQueries: [
+      {
+        queryKey: ['AdministrationServiceDesk'],
+      },
+    ],
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => updateServiceDeskMutation.mutateAsync(values)}
       initialValues={resolve.initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit} autoComplete="off">

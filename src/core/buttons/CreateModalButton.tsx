@@ -2,7 +2,7 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
@@ -46,7 +46,6 @@ export function CreateModalButton<TResolve extends Record<string, unknown>>({
   initialValues,
 }: CreateModalButtonProps<TResolve>) {
   const { openDialog } = useModal();
-
   const handleClick = useCallback(() => {
     openDialog(dialog, {
       resolve,

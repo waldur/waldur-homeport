@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { invoiceItemsMigrateTo, invoicesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { getCustomer } from '@/workspace/selectors';
 
 const formatDate = (invoice) => `${invoice.year}-${invoice.month}`;
@@ -15,7 +15,44 @@ const formatDate = (invoice) => `${invoice.year}-${invoice.month}`;
 export const InvoiceItemMoveDialog = ({
   resolve: { invoice, resource, refreshInvoiceItems },
 }) => {
-  const dispatch = useDispatch();
+  const { showSuccess, showErrorResponse } = useNotify();
+
+  const mutation = useManagedMutation<any, any, { invoice: { url: string } }>({
+    mutationFn: (formData) =>
+      invoiceItemsMigrateTo({
+        path: { uuid: resource.uuid },
+        body: {
+          invoice: formData.invoice.url,
+        },
+      }),
+    onSuccess: (_data, formData) => {
+      showSuccess(
+        translate(
+          'Item {item} has been moved from invoice {origin} to {target}.',
+          {
+            item: resource.name,
+            origin: formatDate(invoice),
+            target: formatDate(formData.invoice),
+          },
+        ),
+      );
+    },
+    onError: (error, formData) => {
+      showErrorResponse(
+        error,
+        translate(
+          'Unable to move item {item} from invoice {origin} to {target}.',
+          {
+            item: resource.name,
+            origin: formatDate(invoice),
+            target: formatDate(formData.invoice),
+          },
+        ),
+      );
+    },
+    refetch: refreshInvoiceItems,
+  });
+
   const customer = useSelector(getCustomer);
 
   const asyncState = useQuery({
@@ -63,44 +100,7 @@ export const InvoiceItemMoveDialog = ({
       formFields={fields}
       loading={asyncState.isLoading}
       error={asyncState.error}
-      submitForm={async (formData) => {
-        try {
-          await invoiceItemsMigrateTo({
-            path: { uuid: resource.uuid },
-            body: {
-              invoice: formData.invoice.url,
-            },
-          });
-          dispatch(
-            showSuccess(
-              translate(
-                'Item {item} has been moved from invoice {origin} to {target}.',
-                {
-                  item: resource.name,
-                  origin: formatDate(invoice),
-                  target: formatDate(formData.invoice),
-                },
-              ),
-            ),
-          );
-          await refreshInvoiceItems();
-          dispatch(closeModalDialog());
-        } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              translate(
-                'Unable to move item {item} from invoice {origin} to {target}.',
-                {
-                  item: resource.name,
-                  origin: formatDate(invoice),
-                  target: formatDate(formData.invoice),
-                },
-              ),
-            ),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

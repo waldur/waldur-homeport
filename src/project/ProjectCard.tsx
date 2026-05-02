@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -13,7 +12,7 @@ import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ChangeEndDateCardButton } from './ChangeEndDateCardButton';
 import { ProjectLifecycleBadge } from './ProjectLifecycleBadge';
@@ -31,7 +30,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
   onClickDetails,
   refetch = () => {},
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const shouldConcealPrices =
     isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
     project.customer_display_billing_info_in_projects === false;

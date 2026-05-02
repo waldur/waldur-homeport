@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { get } from 'lodash-es';
 import { createRef, FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   proposalProposalsAttachDocument,
   proposalProposalsChecklistRetrieve,
@@ -19,8 +18,8 @@ import { isEmpty } from '@/core/utils';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { evaluateCondition } from '@/marketplace-checklist/questionDependencies';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { extractComplianceAnswers } from './complianceUtils';
 import { ProposalSidebar } from './ProposalSidebar';
@@ -116,7 +115,10 @@ export const ProposalSubmissionStep: FC<{
   reviews?: ProposalReview[];
   refetch;
 }> = ({ proposal, reviews, refetch }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const queryClient = useQueryClient();
   const proposal_uuid = proposal.uuid;
 
@@ -263,14 +265,14 @@ export const ProposalSubmissionStep: FC<{
           proposal_uuid,
           formValues.supporting_documentation,
         );
-        dispatch(showSuccess(translate('Proposal updated successfully')));
+        showSuccess(translate('Proposal updated successfully'));
         // Invalidate checklist query to refresh compliance answers with stored file info
         await queryClient.invalidateQueries({
           queryKey: ['ProposalChecklist', proposal_uuid],
         });
         if (refetch) refetch();
       } catch (error) {
-        dispatch(showErrorResponse(error, translate('Something went wrong')));
+        showErrorResponse(error, translate('Something went wrong'));
       }
     },
   });
@@ -278,8 +280,7 @@ export const ProposalSubmissionStep: FC<{
   const submitForm = useCallback(
     async (formValues: any) => {
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Confirmation'),
           translate('Are you sure you want to submit the proposal?'),
         );
@@ -298,12 +299,12 @@ export const ProposalSubmissionStep: FC<{
         );
         await proposalProposalsSubmit({ path: { uuid: proposal_uuid } });
         if (refetch) refetch();
-        dispatch(showSuccess(translate('Proposal submitted successfully')));
+        showSuccess(translate('Proposal submitted successfully'));
       } catch (error) {
-        dispatch(showErrorResponse(error, translate('Something went wrong')));
+        showErrorResponse(error, translate('Something went wrong'));
       }
     },
-    [proposal, proposal_uuid, checklistData, dispatch, refetch],
+    [proposal, proposal_uuid, checklistData, refetch],
   );
 
   return (

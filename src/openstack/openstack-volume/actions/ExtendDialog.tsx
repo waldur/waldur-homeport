@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm, change } from 'redux-form';
@@ -9,9 +9,8 @@ import { FormFooter } from '@/form';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { parseIntField, formatIntField } from '@/marketplace/common/utils';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface VolumeExtendDialogOwnProps {
   resolve: { resource: OpenStackVolume; refetch };
@@ -35,32 +34,30 @@ export const VolumeExtendDialog = reduxForm<
 
   useEffect(() => {
     dispatch(change('VolumeExtendDialog', 'size', minSize));
-  }, [dispatch, minSize]);
+  }, [minSize]);
 
-  const extendVolume = useCallback(
-    async (formData: VolumeExtendDialogFormData) => {
-      try {
-        await openstackVolumesExtend({
-          path: { uuid: resource.uuid },
-          body: {
-            disk_size: formData.size * 1024,
-          },
-        });
-        dispatch(
-          showSuccess(translate('Volume extension has been scheduled.')),
-        );
-        dispatch(closeModalDialog());
-        if (refetch) {
-          await refetch();
-        }
-      } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to extend volume.')));
-      }
-    },
-    [resource, dispatch],
-  );
+  const extendMutation = useManagedMutation<
+    any,
+    any,
+    VolumeExtendDialogFormData
+  >({
+    mutationFn: (formData) =>
+      openstackVolumesExtend({
+        path: { uuid: resource.uuid },
+        body: {
+          disk_size: formData.size * 1024,
+        },
+      }),
+    successMessage: translate('Volume extension has been scheduled.'),
+    errorMessage: translate('Unable to extend volume.'),
+    refetch,
+  });
   return (
-    <form onSubmit={handleSubmit(extendVolume)}>
+    <form
+      onSubmit={handleSubmit((formData) =>
+        extendMutation.mutateAsync(formData),
+      )}
+    >
       <ModalDialog
         title={translate('Extend OpenStack volume')}
         footer={<FormFooter submitting={submitting} />}

@@ -1,59 +1,36 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import { marketplaceRemoteSynchronisationsDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 import { RemoteSyncActionProps } from './types';
 
 export const RemoteSyncDeleteAction = (props: RemoteSyncActionProps) => {
-  const dispatch = useDispatch();
-
-  const { mutate, isPending: isLoading } = useMutation({
-    mutationFn: async () => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Delete remote synchronization'),
-          translate(
-            'You are about to delete {connection} synchronisation. This action cannot be undone.',
-            { connection: <strong>{props.row.api_url}</strong> },
-            formatJsxTemplate,
-          ),
-          { forDeletion: true },
-        );
-      } catch {
-        return;
-      }
-      try {
-        await marketplaceRemoteSynchronisationsDestroy({
-          path: { uuid: props.row.uuid },
-        });
-        dispatch(showSuccess(translate('Remote synchronization deleted')));
-        props.refetch();
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to delete remote synchronization.'),
-          ),
-        );
-      }
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceRemoteSynchronisationsDestroy({
+        path: { uuid: props.row.uuid },
+      }),
+    successMessage: translate('Remote synchronization deleted'),
+    errorMessage: translate('Unable to delete remote synchronization.'),
+    refetch: props.refetch,
+    confirmation: {
+      title: translate('Delete remote synchronization'),
+      body: translate(
+        'You are about to delete {connection} synchronisation. This action cannot be undone.',
+        { connection: <strong>{props.row.api_url}</strong> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
     },
   });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      className="text-danger"
-      iconColor="danger"
-      action={mutate}
-      iconNode={<TrashIcon weight="bold" />}
-      disabled={isLoading}
+      action={() => deleteMutation.mutate()}
+      disabled={deleteMutation.isPending}
     />
   );
 };

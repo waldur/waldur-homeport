@@ -1,6 +1,5 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
-import { useCallback, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useCallback, useMemo } from 'react';
 import {
   marketplaceSoftwareCatalogsDiscoverList,
   marketplaceSoftwareCatalogsImportCatalog,
@@ -10,8 +9,8 @@ import type { NameEnum, SoftwareCatalogDiscover } from 'waldur-js-client';
 import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -24,30 +23,22 @@ const ImportCatalogAction = ({
   row: SoftwareCatalogDiscover;
   refetch(): void;
 }) => {
-  const dispatch = useDispatch();
-  const [pending, setPending] = useState(false);
-
-  const handleImport = useCallback(async () => {
-    setPending(true);
-    try {
-      await marketplaceSoftwareCatalogsImportCatalog({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceSoftwareCatalogsImportCatalog({
         body: { name: row.name as NameEnum },
-      });
-      dispatch(showSuccess(translate('Catalog import started.')));
-      refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to import catalog.')));
-    } finally {
-      setPending(false);
-    }
-  }, [dispatch, row.name, refetch]);
+      }),
+    successMessage: translate('Catalog import started.'),
+    errorMessage: translate('Unable to import catalog.'),
+    refetch,
+  });
 
   return (
     <ActionItem
       title={translate('Import')}
-      action={handleImport}
+      action={mutate}
       iconNode={<DownloadSimpleIcon weight="bold" />}
-      disabled={row.existing || pending}
+      disabled={row.existing || isPending}
       tooltip={
         row.existing ? translate('Catalog is already imported.') : undefined
       }

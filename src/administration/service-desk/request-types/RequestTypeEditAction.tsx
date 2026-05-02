@@ -1,9 +1,8 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { RequestTypeAdmin } from './api';
@@ -21,18 +20,16 @@ export const RequestTypeEditAction = ({
   row: RequestTypeAdmin;
   refetch: () => void;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionItem
       title={translate('Edit')}
       iconNode={<PencilSimpleIcon weight="bold" />}
       action={() =>
-        dispatch(
-          openModalDialog(RequestTypeFormDialog, {
-            size: 'lg',
-            resolve: { requestType: row, refetch },
-          }),
-        )
+        openDialog(RequestTypeFormDialog, {
+          size: 'lg',
+          resolve: { requestType: row, refetch },
+        })
       }
     />
   );

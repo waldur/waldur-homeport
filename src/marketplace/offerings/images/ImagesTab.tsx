@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { NestedScreenshot } from 'waldur-js-client';
 
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { ImageDetailsDialog } from './ImageDetailsDialog';
 
@@ -12,7 +11,7 @@ interface ImagesTabProps {
 }
 
 export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <Row>
       {props.images.map((item, index) => (
@@ -22,11 +21,9 @@ export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
             alt="thumb"
             className="img-thumbnail m-xs"
             onClick={() =>
-              dispatch(
-                openModalDialog(ImageDetailsDialog, {
-                  resolve: item,
-                }),
-              )
+              openDialog(ImageDetailsDialog, {
+                resolve: item,
+              })
             }
             style={{ cursor: 'pointer' }}
             aria-hidden="true"

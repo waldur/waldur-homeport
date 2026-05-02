@@ -2,17 +2,16 @@ import {
   ArrowsClockwiseIcon,
   ClockCounterClockwiseIcon,
 } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
 import { Table } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { isStaffOrSupport } from '@/workspace/selectors';
 
 interface ProcessingLogEntry {
@@ -74,7 +73,7 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
 };
 
 export const IssueLogButton = ({ issue }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const staffOrSupport = useSelector(isStaffOrSupport);
 
   if (!staffOrSupport) {
@@ -82,12 +81,10 @@ export const IssueLogButton = ({ issue }) => {
   }
 
   const callback = () =>
-    dispatch(
-      openModalDialog(IssueLogDialog, {
-        size: 'lg',
-        issue,
-      }),
-    );
+    openDialog(IssueLogDialog, {
+      size: 'lg',
+      issue,
+    });
 
   return (
     <SubmitButton
@@ -109,24 +106,17 @@ export const IssueSyncButton = ({
   issue: Issue;
   refetch: () => void;
 }) => {
-  const dispatch = useDispatch();
   const staffOrSupport = useSelector(isStaffOrSupport);
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: async () => {
-      // The sync endpoint doesn't need a body, but the generated types require it
-      await supportIssuesSync({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      supportIssuesSync({
         path: { uuid: issue.uuid },
         body: {} as any,
-      });
-    },
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Issue synchronized successfully.')));
-      refetch();
-    },
-    onError: (error: Response) => {
-      dispatch(showErrorResponse(error, translate('Unable to sync issue.')));
-    },
+      }),
+    successMessage: translate('Issue synchronized successfully.'),
+    errorMessage: translate('Unable to sync issue.'),
+    refetch,
   });
 
   if (!staffOrSupport) {

@@ -1,11 +1,10 @@
-import { Dispatch } from 'redux';
 import { marketplaceOfferingRolesList } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { ModalService } from '@/modal/actions';
 import { Role } from '@/permissions/types';
-import { showErrorResponse } from '@/store/notify';
+import { NotifyService } from '@/store/notify';
 import { User } from '@/workspace/types';
 
 const InvitationCreateDialog = lazyComponent(() =>
@@ -31,10 +30,7 @@ interface ScopeArgs {
  * server-side) and supplied via the wizard's `rolesOverride` hook —
  * bypassing the org-only ENV.roles + InvitationPolicyService filtering.
  */
-export const openResourceInvitationDialog = async (
-  dispatch: Dispatch,
-  args: ScopeArgs,
-) => {
+export const openResourceInvitationDialog = async (args: ScopeArgs) => {
   let roles: Role[] = [];
   if (args.offeringUuid) {
     try {
@@ -46,24 +42,23 @@ export const openResourceInvitationDialog = async (
         (r) => !r.content_type || r.content_type === args.contentType,
       ) as unknown as Role[];
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to load offering roles.')),
+      NotifyService.errorResponse(
+        error,
+        translate('Unable to load offering roles.'),
       );
       return;
     }
   }
-  dispatch(
-    openModalDialog(InvitationCreateDialog, {
-      resolve: {
-        user: args.user,
-        scope: { url: args.scopeUrl, uuid: args.scopeUuid },
-        scopeLabel: args.scopeLabel,
-        rolesOverride: roles,
-        roleTypes: [],
-        enableBulkUpload: true,
-        refetch: args.refetch,
-      },
-      size: 'xl',
-    }),
-  );
+  ModalService.open(InvitationCreateDialog, {
+    resolve: {
+      user: args.user,
+      scope: { url: args.scopeUrl, uuid: args.scopeUuid },
+      scopeLabel: args.scopeLabel,
+      rolesOverride: roles,
+      roleTypes: [],
+      enableBulkUpload: true,
+      refetch: args.refetch,
+    },
+    size: 'xl',
+  });
 };

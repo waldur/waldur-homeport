@@ -1,11 +1,10 @@
 import { ChartPieIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { UsageReportContext } from '@/marketplace/resources/usage/types';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -24,14 +23,12 @@ const ResourceCreateUsageDialog = lazyComponent(() =>
 const validators = [validateState('OK')];
 
 export const ReportUsageAction = ({ resource }: { resource: Resource }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const callback = (props: UsageReportContext) => {
-    dispatch(
-      openModalDialog(ResourceCreateUsageDialog, {
-        resolve: props,
-      }),
-    );
+    openDialog(ResourceCreateUsageDialog, {
+      resolve: props,
+    });
   };
 
   const user = useUser();

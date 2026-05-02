@@ -8,11 +8,21 @@ import thunk from 'redux-thunk';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as sdk from 'waldur-js-client';
 
-import * as modalActions from '@/modal/actions';
-
 import { FeedbackButtons } from './FeedbackButtons';
 
 vi.mock('waldur-js-client');
+
+const mockOpenDialog = vi.fn();
+vi.mock('@/modal/actions', async (importOriginal) => {
+  const actual = await importOriginal<any>();
+  return {
+    ...actual,
+    useModal: () => ({
+      openDialog: mockOpenDialog,
+      closeDialog: vi.fn(),
+    }),
+  };
+});
 
 const renderBtns = (
   props: Partial<Parameters<typeof FeedbackButtons>[0]> = {},
@@ -58,42 +68,39 @@ describe('FeedbackButtons', () => {
   });
 
   it('dispatches the dialog with score=true on thumbs-up click', async () => {
-    const openSpy = vi.spyOn(modalActions, 'openModalDialog');
     renderBtns();
     await userEvent.click(screen.getByLabelText('Helpful'));
-    expect(openSpy).toHaveBeenCalled();
-    const resolveArg = openSpy.mock.calls[0][1]?.resolve as any;
+    expect(mockOpenDialog).toHaveBeenCalled();
+    const resolveArg = mockOpenDialog.mock.calls[0][1]?.resolve as any;
     expect(resolveArg.score).toBe(true);
     expect(resolveArg.currentCategory).toBeNull();
     expect(sdk.chatMessagesFeedback).not.toHaveBeenCalled();
   });
 
   it('pre-fills category and comment when re-opening the same vote', async () => {
-    const openSpy = vi.spyOn(modalActions, 'openModalDialog');
     renderBtns({
       feedbackScore: false,
       feedbackComment: 'wrong info',
-      feedbackCategory: 'inaccurate',
+      feedbackCategory: 'inaccurate' as any,
     });
     // Down is the currently-selected vote; its aria-label uses the selected form.
     const downBtn = screen.getByRole('button', { pressed: true });
     await userEvent.click(downBtn);
-    const resolveArg = openSpy.mock.calls[0][1]?.resolve as any;
+    const resolveArg = mockOpenDialog.mock.calls[0][1]?.resolve as any;
     expect(resolveArg.score).toBe(false);
     expect(resolveArg.currentCategory).toBe('inaccurate');
     expect(resolveArg.currentComment).toBe('wrong info');
   });
 
   it('clears prior comment and category when the user flips the vote', async () => {
-    const openSpy = vi.spyOn(modalActions, 'openModalDialog');
     renderBtns({
       feedbackScore: false,
       feedbackComment: 'wrong info',
-      feedbackCategory: 'inaccurate',
+      feedbackCategory: 'inaccurate' as any,
     });
     // Up is unselected when the user previously voted down — exact label match.
     await userEvent.click(screen.getByRole('button', { name: 'Helpful' }));
-    const resolveArg = openSpy.mock.calls[0][1]?.resolve as any;
+    const resolveArg = mockOpenDialog.mock.calls[0][1]?.resolve as any;
     expect(resolveArg.score).toBe(true);
     expect(resolveArg.currentComment).toBeNull();
     expect(resolveArg.currentCategory).toBeNull();

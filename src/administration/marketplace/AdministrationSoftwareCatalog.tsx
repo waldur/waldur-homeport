@@ -1,8 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceSoftwareCatalogsList,
   marketplaceSoftwareCatalogsUpdateCatalog,
@@ -15,8 +14,8 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -52,37 +51,29 @@ const UpdateCatalogButton = ({
   row: SoftwareCatalog;
   refetch(): void;
 }) => {
-  const dispatch = useDispatch();
-  const [pending, setPending] = useState(false);
-
-  const handleUpdate = useCallback(async () => {
-    setPending(true);
-    try {
-      await marketplaceSoftwareCatalogsUpdateCatalog({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceSoftwareCatalogsUpdateCatalog({
         path: { uuid: row.uuid },
         body: { name: row.name, version: row.version },
-      });
-      dispatch(showSuccess(translate('Catalog update started.')));
-      refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to update catalog.')));
-    } finally {
-      setPending(false);
-    }
-  }, [dispatch, row.uuid, row.name, row.version, refetch]);
+      }),
+    successMessage: translate('Catalog update started.'),
+    errorMessage: translate('Unable to update catalog.'),
+    refetch,
+  });
 
   return (
     <ActionButton
-      action={handleUpdate}
+      action={mutate}
       title={translate('Update')}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
-      pending={pending}
+      pending={isPending}
     />
   );
 };
 
 const CatalogsTab = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const filter = useMemo(() => ({}), []);
   const tableProps = useTable({
     table: 'AdminSoftwareCatalogs',
@@ -91,9 +82,8 @@ const CatalogsTab = () => {
   });
 
   const openDiscover = useCallback(
-    () =>
-      dispatch(openModalDialog(SoftwareCatalogDiscoverDialog, { size: 'lg' })),
-    [dispatch],
+    () => openDialog(SoftwareCatalogDiscoverDialog, { size: 'lg' }),
+    [],
   );
 
   return (

@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { marketplacePlansList } from 'waldur-js-client';
 
 import { StateIndicator } from '@/core/StateIndicator';
@@ -14,7 +13,7 @@ import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { OfferingSectionProps } from '../types';
 import { useOfferingAccountingTableTabs } from '../utils';
@@ -24,7 +23,7 @@ import { PlanActions } from './PlanActions';
 import { PlanExpandableRow } from './PlanExpandableRow';
 
 export const PlansSection: FC<OfferingSectionProps> = (props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const columns = [
     {

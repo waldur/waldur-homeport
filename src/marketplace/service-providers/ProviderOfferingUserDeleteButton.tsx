@@ -1,17 +1,14 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOfferingUsersDestroy,
   OfferingUser,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useUser } from '@/workspace/hooks';
 
 import { ServiceProvider } from '../types';
@@ -22,7 +19,24 @@ export const ProviderOfferingUserDeleteButton: FC<{
   offering?: any;
   refetch;
 }> = (props) => {
-  const dispatch = useDispatch();
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceOfferingUsersDestroy({ path: { uuid: props.row.uuid } }),
+    successMessage: translate('Offering user has been deleted.'),
+    errorMessage: translate('Unable to delete offering user.'),
+    refetch: props.refetch,
+    confirmation: {
+      title: translate('Delete offering user'),
+      body: translate(
+        'Are you sure you want to delete offering user {username}?',
+        {
+          username: props.row.username,
+        },
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
   const user = useUser();
   const canDeleteOfferingUser = hasPermission(user, {
     permission: PermissionEnum.DELETE_OFFERING_USER,
@@ -32,33 +46,13 @@ export const ProviderOfferingUserDeleteButton: FC<{
         ? props.offering.customer_uuid
         : props.row.customer_uuid, // Use row's customer_uuid for admin context
   });
-  const handleDelete = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Delete offering user'),
-        translate('Are you sure you want to delete offering user {username}?', {
-          username: props.row.username,
-        }),
-        { forDeletion: true },
-      );
-      await marketplaceOfferingUsersDestroy({ path: { uuid: props.row.uuid } });
-      dispatch(showSuccess(translate('Offering user has been deleted.')));
-      props.refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to delete offering user.')),
-      );
-    }
-  };
+
   return (
     canDeleteOfferingUser && (
-      <ActionItem
+      <RemovalActionItem
         title={translate('Delete')}
-        iconNode={<TrashIcon weight="bold" />}
-        className="text-danger"
-        iconColor="danger"
-        action={handleDelete}
+        action={mutate}
+        disabled={isPending}
       />
     )
   );

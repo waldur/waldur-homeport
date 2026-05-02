@@ -1,18 +1,16 @@
 import { CloudXIcon } from '@phosphor-icons/react';
-import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useMemo } from 'react';
 import { marketplaceProviderResourcesSetAsErred } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
-import { waitForConfirmation } from '@/modal/actions';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
 export const MultiSetErredAction = ({ rows, refetch }) => {
-  const dispatch = useDispatch();
   const user = useUser();
 
   const permittedResources = useMemo(
@@ -30,28 +28,29 @@ export const MultiSetErredAction = ({ rows, refetch }) => {
     [rows, user],
   );
 
-  const callback = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Perform mass action'),
-        translate('Are you sure you want to set {count} resources to erred?', {
+  const { mutate, isPending } = useBatchMutation<any, void>({
+    rows: permittedResources,
+    refetch,
+    mutationFn: (resource) =>
+      marketplaceProviderResourcesSetAsErred({
+        path: { uuid: resource.uuid },
+      }),
+    successMessage: translate('Resources have been set to erred.'),
+    renderPartialSuccessMessage: (n) =>
+      translate('{n} resources have been set to erred.', { n }),
+    errorMessage: translate('Unable to set resources to erred.'),
+    renderErrorMessage: (n) =>
+      translate('Unable to set {n} resources to erred.', { n }),
+    confirmation: {
+      title: translate('Perform mass action'),
+      body: translate(
+        'Are you sure you want to set {count} resources to erred?',
+        {
           count: permittedResources.length,
-        }),
-      );
-    } catch {
-      return;
-    }
-    Promise.all(
-      permittedResources.map((resource) =>
-        marketplaceProviderResourcesSetAsErred({
-          path: { uuid: resource.uuid },
-        }),
+        },
       ),
-    ).then(() => {
-      refetch();
-    });
-  }, [dispatch, permittedResources, refetch]);
+    },
+  });
 
   if (permittedResources.length === 0) {
     return null;
@@ -60,12 +59,12 @@ export const MultiSetErredAction = ({ rows, refetch }) => {
   return (
     <ActionItem
       title={translate('Set erred')}
-      action={callback}
+      action={mutate}
       className="text-danger"
       iconNode={<CloudXIcon weight="bold" />}
       iconColor="danger"
       staff
-      disabled={permittedResources.length !== rows.length}
+      disabled={permittedResources.length !== rows.length || isPending}
     />
   );
 };

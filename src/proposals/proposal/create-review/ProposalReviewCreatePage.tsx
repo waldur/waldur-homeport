@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { getFormValues, submit as submitForm } from 'redux-form';
 import {
   Proposal,
@@ -20,18 +19,14 @@ import { Form } from '@/form/Form';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { PageBarProvider } from '@/marketplace/context';
-import {
-  closeModalDialog,
-  openModalDialog,
-  waitForConfirmation,
-} from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { useTitle } from '@/navigation/title';
 import {
   PROPOSAL_UPDATE_REVIEW_FORM_ID,
   REVIEW_SUMMARY_FORM_ID,
 } from '@/proposals/constants';
 import { ProposalReview } from '@/proposals/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { RootState } from '@/store/reducers';
 import store from '@/store/store';
 
@@ -93,7 +88,9 @@ export const ProposalReviewCreatePage = (props) => {
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { openDialog, closeDialog, confirm } = useModal();
 
   const captureFormValues = useCallback(() => {
     store.dispatch(submitForm(REVIEW_SUMMARY_FORM_ID));
@@ -115,19 +112,18 @@ export const ProposalReviewCreatePage = (props) => {
         path: { uuid: data.review.uuid },
       });
       setReviewObject(response.data);
-      dispatch(showSuccess(translate('Review has been updated.')));
+      showSuccess(translate('Review has been updated.'));
     } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to update review.')));
+      showErrorResponse(e, translate('Unable to update review.'));
     } finally {
       setIsSaving(false);
     }
-  }, [dispatch, data?.review]);
+  }, [data?.review]);
 
   const submit = useCallback(async () => {
     await handleSaveSummary();
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Confirm your review'),
         translate(
           'Are you sure you want to submit this review for the {name} proposal?',
@@ -144,41 +140,35 @@ export const ProposalReviewCreatePage = (props) => {
       await proposalReviewsSubmit({
         path: { uuid: data.review.uuid },
       });
-      dispatch(
-        showSuccess(translate('Proposal review submitted successfully')),
-      );
+      showSuccess(translate('Proposal review submitted successfully'));
       refetch();
     } catch (error) {
-      dispatch(showErrorResponse(error, translate('Something went wrong')));
+      showErrorResponse(error, translate('Something went wrong'));
     }
-  }, [data, dispatch]);
+  }, [data]);
 
   const openCommentFormDialog = useCallback(
     ({ commentField, label }) =>
-      dispatch(
-        openModalDialog(CommentFormDialog, {
-          resolve: {
-            title: label,
-            value: reviewObject[commentField],
-            onSubmit: async (formData) => {
-              try {
-                const res = await proposalReviewsPartialUpdate({
-                  path: { uuid: data.review.uuid },
-                  body: { [commentField]: formData.comment },
-                });
-                setReviewObject(res.data);
-                dispatch(closeModalDialog());
-              } catch (error) {
-                dispatch(
-                  showErrorResponse(error, translate('Something went wrong')),
-                );
-              }
-            },
+      openDialog(CommentFormDialog, {
+        resolve: {
+          title: label,
+          value: reviewObject[commentField],
+          onSubmit: async (formData) => {
+            try {
+              const res = await proposalReviewsPartialUpdate({
+                path: { uuid: data.review.uuid },
+                body: { [commentField]: formData.comment },
+              });
+              setReviewObject(res.data);
+              closeDialog();
+            } catch (error) {
+              showErrorResponse(error, translate('Something went wrong'));
+            }
           },
-          size: 'sm',
-        }),
-      ),
-    [dispatch, data, setReviewObject, reviewObject],
+        },
+        size: 'sm',
+      }),
+    [data, setReviewObject, reviewObject],
   );
 
   if (isLoading) {

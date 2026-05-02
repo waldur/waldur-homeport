@@ -67,7 +67,7 @@ export const Component = ({ onSubmit }) => (
 ### Key Migration Changes
 1. **Form State**: Redux HOC → `<Form>` component
 2. **Initial Values**: `initialValues` prop instead of `useEffect` + `change`
-3. **Error Handling**: `useNotify` hook instead of Redux actions
+3. **Error Handling**: `useManagedMutation` hook (or `useNotify` directly) instead of Redux actions
 4. **Field Pattern**: Standard `<Field component={FieldType as any} />`
 
 ## Modal Form Architecture
@@ -122,6 +122,20 @@ React Final Form requires all form-related components within `<Form>` context:
 ## Validation and Error Handling
 
 ### Error Handling Migration
+
+**Best Practice:** For form submissions within modals, prefer using the declarative `useManagedMutation` hook to abstract away the try/catch logic, notifications, and modal closures:
+
+```typescript
+const mutation = useManagedMutation({
+  mutationFn: (values) => saveData(values),
+  successMessage: translate('Saved successfully'),
+  errorMessage: translate('Unable to save.'),
+});
+
+const onSubmit = (values) => mutation.mutateAsync(values);
+```
+
+For manual handling (e.g., when mapped fields should receive validation errors):
 ```typescript
 // Before: Redux Form SubmissionError
 if (e.response?.status === 400) {
@@ -134,7 +148,6 @@ if (e.response?.status === 400) {
 }
 catch (e) {
   showErrorResponse(e, translate('Unable to save.'));
-  // No need to re-throw - error is handled
 }
 ```
 

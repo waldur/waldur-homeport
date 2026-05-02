@@ -19,10 +19,9 @@ import {
 } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentCustomer } from '@/workspace/actions';
 import { getCustomer } from '@/workspace/selectors';
 
@@ -30,6 +29,7 @@ import { getCustomer as getCustomerApi } from '../utils';
 
 const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     props.initialize(getInitialValues(props.resolve.profile));
   }, [props.resolve.profile]);
@@ -45,9 +45,9 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
 
   const customer = useSelector(getCustomer);
 
-  const submitRequest = async (formData) => {
-    try {
-      await paymentProfilesPartialUpdate({
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      paymentProfilesPartialUpdate({
         path: { uuid: props.resolve.profile.uuid },
         body: {
           name: formData.name,
@@ -58,24 +58,22 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
             contract_sum: formData.contract_sum,
           },
         },
-      });
-      dispatch(showSuccess(translate('Payment profile has been updated.')));
-      dispatch(closeModalDialog());
-      await props.resolve.refetch();
+      }),
+    successMessage: translate('Payment profile has been updated.'),
+    errorMessage: translate('Unable to update payment profile.'),
+    refetch: props.resolve.refetch,
+    onSuccess: async () => {
       const updatedCustomer = await getCustomerApi(customer.uuid);
       dispatch(setCurrentCustomer(updatedCustomer));
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to update payment profile.'),
-        ),
-      );
-    }
-  };
+    },
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        updateMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Update payment profile')}
         footer={

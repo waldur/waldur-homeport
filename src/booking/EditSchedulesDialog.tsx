@@ -1,14 +1,12 @@
-import { useCallback } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { FieldArray, reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { pick } from '@/core/utils';
 import { FormContainer, FormFooter } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { EDIT_SCHEDULES_FORM_ID } from './constants';
 import { OfferingScheduler } from './OfferingScheduler';
@@ -33,33 +31,26 @@ export const EditSchedulesDialog = connect(
   reduxForm<{}, { resolve: { offering; refetch } }>({
     form: EDIT_SCHEDULES_FORM_ID,
   })((props) => {
-    const dispatch = useDispatch();
-    const update = useCallback(
-      async (formData) => {
-        try {
-          await marketplaceProviderOfferingsUpdateAttributes({
-            path: { uuid: props.resolve.offering.uuid },
-            body: {
-              ...props.resolve.offering.attributes,
-              schedules: formatSchedules(formData.schedules),
-            },
-          });
-          dispatch(
-            showSuccess(translate('Schedules have been updated successfully.')),
-          );
-          await props.resolve.refetch();
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to update schedules.')),
-          );
-        }
-      },
-      [dispatch],
-    );
+    const updateMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        marketplaceProviderOfferingsUpdateAttributes({
+          path: { uuid: props.resolve.offering.uuid },
+          body: {
+            ...props.resolve.offering.attributes,
+            schedules: formatSchedules(formData.schedules),
+          },
+        }),
+      successMessage: translate('Schedules have been updated successfully.'),
+      errorMessage: translate('Unable to update schedules.'),
+      refetch: props.resolve.refetch,
+    });
 
     return (
-      <form onSubmit={props.handleSubmit(update)}>
+      <form
+        onSubmit={props.handleSubmit((values: any) =>
+          updateMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={translate('Update schedule')}
           footer={

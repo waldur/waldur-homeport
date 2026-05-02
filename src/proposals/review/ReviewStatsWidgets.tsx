@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import {
   callReviewerPoolsList,
   proposalReviewsList,
@@ -11,10 +10,10 @@ import {
 import { fetchResultCount } from '@/core/api';
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 export const ReviewStatsWidgets: FC = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const { data: profile, isLoading: profileLoading } = useQuery({
     queryKey: ['reviewer-profile-me-stats'],

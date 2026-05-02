@@ -1,7 +1,7 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import {
@@ -14,10 +14,9 @@ import { SubmitButton } from '@/form';
 import { renderValidationWrapper } from '@/form/FieldValidationWrapper';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 import { validatePrivateCIDR } from '../utils';
@@ -110,27 +109,26 @@ const enhance = compose(
 
 export const SetAllowedAddressPairsDialog = enhance(
   ({ resolve, invalid, submitting, handleSubmit }) => {
-    const dispatch = useDispatch();
-    const setAllowedAddressPairs = async (formData: FormData) => {
-      try {
-        await openstackInstancesUpdateAllowedAddressPairs({
+    const mutation = useManagedMutation<any, any, FormData>({
+      mutationFn: (formData) =>
+        openstackInstancesUpdateAllowedAddressPairs({
           path: { uuid: resolve.instance.uuid },
           body: {
             subnet: resolve.port.subnet,
             allowed_address_pairs: formData.pairs || [],
           },
-        });
-        dispatch(
-          showSuccess(translate('Allowed address pairs update was scheduled.')),
-        );
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to update allowed address pairs.'),
-          ),
-        );
+        }),
+
+      successMessage: translate('Allowed address pairs update was scheduled.'),
+      errorMessage: translate('Unable to update allowed address pairs.'),
+      refetch: resolve.refetch,
+    });
+
+    const setAllowedAddressPairs = async (formData: FormData) => {
+      try {
+        await mutation.mutateAsync(formData);
+      } catch {
+        // Error is handled by useManagedMutation
       }
     };
 

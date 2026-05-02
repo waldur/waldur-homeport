@@ -1,7 +1,6 @@
 import { useQueries } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { ProjectsListData } from 'waldur-js-client';
 
 import { getResourcesCount } from '@/administration/api';
@@ -13,7 +12,7 @@ import { getStates } from '@/marketplace/resources/list/ResourceStateFilter';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { TableTabsContainer } from '../../customer/list/TableTabsContainer';
@@ -39,7 +38,7 @@ interface OwnProps {
 }
 
 export const OrganizationExpandableRow: FC<OwnProps> = (props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const canListUsers =
     hasPermission(user, {
       permission: PermissionEnum.LIST_CUSTOMER_USERS,

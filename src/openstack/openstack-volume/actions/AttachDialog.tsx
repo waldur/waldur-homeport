@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   openstackInstancesList,
   openstackVolumesAttach,
@@ -9,15 +8,24 @@ import {
 import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const AttachDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<any, any, { instance: string }>({
+    mutationFn: (formData) =>
+      openstackVolumesAttach({
+        path: { uuid: resource.uuid },
+        body: { instance: formData.instance },
+      }),
+
+    successMessage: translate('Volume has been attached to instance.'),
+    errorMessage: translate('Unable to attach volume to instance.'),
+    refetch: refetch,
+  });
 
   const asyncState = useQuery({
     queryKey: ['attachableInstances', resource.uuid],
@@ -57,29 +65,7 @@ export const AttachDialog: FC<ActionDialogProps> = ({
     <ResourceActionDialog
       dialogTitle={translate('Attach OpenStack Volume to Instance')}
       formFields={fields}
-      submitForm={async (formData) => {
-        try {
-          await openstackVolumesAttach({
-            path: { uuid: resource.uuid },
-            body: { instance: formData.instance },
-          });
-
-          dispatch(
-            showSuccess(translate('Volume has been attached to instance.')),
-          );
-          dispatch(closeModalDialog());
-          if (refetch) {
-            await refetch();
-          }
-        } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              translate('Unable to attach volume to instance.'),
-            ),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

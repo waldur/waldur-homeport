@@ -8,7 +8,8 @@ import { GroupInvitationDeleteButton } from '@/invitations/GroupInvitationDelete
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 interface GroupInvitationRowActionsProps {
   refetch;
@@ -19,7 +20,7 @@ export const GroupInvitationRowActions: FunctionComponent<
   GroupInvitationRowActionsProps
 > = ({ row, refetch }) => {
   const customer = useSelector(getCustomer);
-  const user = useSelector(getUser);
+  const user = useUser();
   const canCancel = hasPermission(user, {
     permission: PermissionEnum.DELETE_CUSTOMER_PERMISSION,
     customerId: customer.uuid,

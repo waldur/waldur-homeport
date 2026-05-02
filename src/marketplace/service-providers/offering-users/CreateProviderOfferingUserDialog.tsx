@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOfferingUsersCreate,
   ServiceProvider,
@@ -10,11 +9,11 @@ import {
   providerOfferingsAutocomplete,
   userAutocomplete,
 } from '@/marketplace/common/autocompletes';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
@@ -24,46 +23,49 @@ interface OwnProps {
   };
 }
 
-const handleSubmit =
-  ({ formData, dispatch, curretUser, refetch }) =>
-  async () => {
+export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
+  resolve: { provider, refetch },
+}) => {
+  const curretUser = useUser();
+  const { showError } = useNotify();
+
+  const mutation = useManagedMutation<
+    any,
+    any,
+    {
+      offering: { url: string; customer_uuid: string };
+      user: { url: string };
+      username?: string;
+    }
+  >({
+    mutationFn: (formData) =>
+      marketplaceOfferingUsersCreate({
+        body: {
+          offering: formData.offering.url,
+          user: formData.user.url,
+          username: formData.username,
+        },
+      }),
+    successMessage: translate('Offering user has been created.'),
+    errorMessage: translate('Unable to create offering user.'),
+    refetch,
+  });
+
+  const handleSubmit = async (formData) => {
     const canCreateOfferingUser = hasPermission(curretUser, {
       permission: PermissionEnum.CREATE_OFFERING_USER,
       customerId: formData.offering.customer_uuid,
     });
 
     if (!canCreateOfferingUser) {
-      dispatch(
-        showError(
-          translate('You do not have permission to perform this action.'),
-        ),
+      showError(
+        translate('You do not have permission to perform this action.'),
       );
       return;
     }
 
-    try {
-      await marketplaceOfferingUsersCreate({
-        body: {
-          offering: formData.offering.url,
-          user: formData.user.url,
-          username: formData.username,
-        },
-      });
-      dispatch(showSuccess(translate('Offering user has been created.')));
-      dispatch(closeModalDialog());
-      refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to create offering user.')),
-      );
-    }
+    await mutation.mutateAsync(formData);
   };
-
-export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
-  resolve: { provider, refetch },
-}) => {
-  const dispatch = useDispatch();
-  const curretUser = useUser();
 
   const fields = [
     {
@@ -105,9 +107,7 @@ export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
     <ResourceActionDialog
       dialogTitle={translate('Create offering user')}
       formFields={fields}
-      submitForm={(formData) =>
-        handleSubmit({ formData, dispatch, curretUser, refetch })()
-      }
+      submitForm={handleSubmit}
     />
   );
 };

@@ -5,12 +5,13 @@ import { Project } from 'waldur-js-client';
 
 import { getCustomer as getCustomerApi } from '@/customer/utils';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { setCurrentCustomer, setCurrentProject } from '@/workspace/actions';
-import { getProject, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getProject } from '@/workspace/selectors';
 
 export const useProjectDelete = ({
   project,
@@ -19,10 +20,14 @@ export const useProjectDelete = ({
   project: Project;
   refetch?: () => void;
 }) => {
+  const { confirm } = useModal();
+
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const user = useSelector(getUser);
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const user = useUser();
   const currentProject = useSelector(getProject);
 
   const isCurrentProject = project.uuid === currentProject?.uuid;
@@ -39,8 +44,7 @@ export const useProjectDelete = ({
 
   const callback = async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Project removal'),
         translate(
           'Are you sure you would like to delete project {projectName}?',
@@ -67,24 +71,17 @@ export const useProjectDelete = ({
         });
         dispatch(setCurrentProject(undefined));
       }
-      dispatch(
-        showSuccess(
-          translate(
-            'Project {project} from {organization} was successfully removed',
-            {
-              project: project.name,
-              organization: project.customer_name,
-            },
-          ),
+      showSuccess(
+        translate(
+          'Project {project} from {organization} was successfully removed',
+          {
+            project: project.name,
+            organization: project.customer_name,
+          },
         ),
       );
     } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('An error occurred on project removal.'),
-        ),
-      );
+      showErrorResponse(e, translate('An error occurred on project removal.'));
     }
   };
   return { canDelete, callback };

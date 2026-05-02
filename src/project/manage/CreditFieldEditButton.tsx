@@ -1,8 +1,6 @@
-import { useDispatch } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { EditProjectCreditProps } from '../types';
 
@@ -13,9 +11,9 @@ const EditCreditFieldDialog = lazyComponent(() =>
 );
 
 export const CreditFieldEditButton = (props: EditProjectCreditProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(openModalDialog(EditCreditFieldDialog, { resolve: props }));
+    openDialog(EditCreditFieldDialog, { resolve: props });
   };
   return <CompactEditButton onClick={callback} />;
 };

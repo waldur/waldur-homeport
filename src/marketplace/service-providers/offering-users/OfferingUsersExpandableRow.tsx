@@ -103,7 +103,6 @@ export const OfferingUsersExpandableRow = ({
           )}
         </>
       )}
-
       <Field
         label={translate('Comment')}
         value={
@@ -119,13 +118,11 @@ export const OfferingUsersExpandableRow = ({
         labelClass="mw-175px"
         className="align-baseline"
       />
-
       <Field
         label={translate('Comment URL')}
         value={renderFieldOrDash(offeringUser.service_provider_comment_url)}
         labelClass="mw-175px"
       />
-
       {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
         <>
           <Field
@@ -155,7 +152,6 @@ export const OfferingUsersExpandableRow = ({
           )}
         </>
       )}
-
       <Table<QuestionWithAnswer>
         {...tableProps}
         columns={[

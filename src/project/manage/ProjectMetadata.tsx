@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { Project, projectsChecklistRetrieve } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -12,10 +11,10 @@ import { CompactEditButton } from '@/form/CompactEditButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { usePermission } from '@/permissions/hooks';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -40,7 +39,7 @@ interface ProjectMetadataProps {
 export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
   project,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useUser();
   const { showErrorResponse } = useNotify();
   const { data, isLoading, error, refetch } = useQuery({
@@ -82,13 +81,11 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
     : null;
 
   const openAffiliatedOrgsDialog = useCallback(() => {
-    dispatch(
-      openModalDialog(UpdateAffiliatedOrganizationsDialog, {
-        resolve: { project },
-        size: 'lg',
-      }),
-    );
-  }, [dispatch, project]);
+    openDialog(UpdateAffiliatedOrganizationsDialog, {
+      resolve: { project },
+      size: 'lg',
+    });
+  }, [project]);
 
   return (
     <FormTable.Card className="card-bordered">

@@ -29,7 +29,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
               submitting={submitting}
               label={translate('Request change')}
               className="btn btn-primary flex-equal"
-              onClick={handleSubmit}
+              onClick={() => handleSubmit()}
             />
           ) : (
             <SubmitButton
@@ -37,7 +37,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
               submitting={submitting}
               label={translate('Cancel request')}
               className="btn btn-danger flex-equal"
-              onClick={cancelRequest}
+              onClick={() => cancelRequest()}
             />
           )}
         </>

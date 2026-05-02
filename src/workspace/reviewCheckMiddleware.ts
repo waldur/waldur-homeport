@@ -9,7 +9,7 @@ import {
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
-import { openModalDialog } from '@/modal/actions';
+import { ModalService } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { RootState } from '@/store/reducers';
@@ -61,12 +61,10 @@ async function checkProjectPendingReview(store, action, signal: AbortSignal) {
     }
     const review: ProjectPermissionReview = response.data[0];
     if (review) {
-      store.dispatch(
-        openModalDialog(PendingReviewDialog, {
-          resolve: { reviewId: review.uuid, scope: 'project' },
-          size: 'xl',
-        }),
-      );
+      ModalService.open(PendingReviewDialog, {
+        resolve: { reviewId: review.uuid, scope: 'project' },
+        size: 'xl',
+      });
     }
   } catch {
     // Silently swallow error (including abort errors)
@@ -101,12 +99,10 @@ async function checkCustomerPendingReview(store, action, signal: AbortSignal) {
     }
     const review: CustomerPermissionReview = response.data[0];
     if (review) {
-      store.dispatch(
-        openModalDialog(PendingReviewDialog, {
-          resolve: { reviewId: review.uuid, scope: 'customer' },
-          size: 'xl',
-        }),
-      );
+      ModalService.open(PendingReviewDialog, {
+        resolve: { reviewId: review.uuid, scope: 'customer' },
+        size: 'xl',
+      });
     }
   } catch {
     // Silently swallow error (including abort errors)

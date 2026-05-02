@@ -1,11 +1,11 @@
 import { get, set } from 'lodash-es';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -23,14 +23,14 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditOfferingProps }>(
     form: EDIT_INTEGRATION_FORM_ID,
     destroyOnUnmount: true,
   })((props) => {
-    const dispatch = useDispatch();
+    const { closeDialog } = useModal();
     return (
       <form
         onSubmit={props.handleSubmit((formData) =>
           props.resolve
             .callback(set({}, props.resolve.name, formData.value))
             .then(() => {
-              dispatch(closeModalDialog());
+              closeDialog();
             }),
         )}
       >

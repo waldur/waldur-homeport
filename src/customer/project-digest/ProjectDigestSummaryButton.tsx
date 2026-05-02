@@ -1,9 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 const ProjectDigestSummaryDialog = lazyComponent(() =>
@@ -13,15 +12,13 @@ const ProjectDigestSummaryDialog = lazyComponent(() =>
 );
 
 export const ProjectDigestSummaryButton = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionButton
       action={() =>
-        dispatch(
-          openModalDialog(ProjectDigestSummaryDialog, {
-            size: 'xl',
-          }),
-        )
+        openDialog(ProjectDigestSummaryDialog, {
+          size: 'xl',
+        })
       }
       title={translate('How it works')}
       iconNode={<QuestionIcon weight="bold" />}

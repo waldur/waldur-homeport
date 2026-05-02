@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   ComponentsUsageStats,
   Customer,
@@ -12,7 +11,7 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -40,7 +39,7 @@ export const AggregateLimitDetailsDialog = ({
     components: ComponentsUsageStats['components'];
   };
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
   const initialComponent = components?.[0] || null;
   const [selectedComponentType, setSelectedComponentType] =
     useState(initialComponent);
@@ -65,9 +64,7 @@ export const AggregateLimitDetailsDialog = ({
       );
       setAllRows(response || []);
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to load resource data.')),
-      );
+      showErrorResponse(error, translate('Unable to load resource data.'));
     }
   };
 

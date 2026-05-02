@@ -1,7 +1,6 @@
 import { FORM_ERROR } from 'final-form';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceComponentUsagesSetUsage,
   marketplaceComponentUsagesSetUserUsage,
@@ -13,8 +12,8 @@ import {
 
 import { translate } from '@/i18n';
 import { OfferingComponent } from '@/marketplace/types';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { ResourceUsageForm } from './ResourceUsageForm';
 import { ResourceUsageSubmitButton } from './ResourceUsageSubmitButton';
@@ -50,7 +49,9 @@ const mapComponents = (components: BaseComponentUsage[], userUsage = false) =>
 export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
   props,
 ) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
 
   const initialValues = props.periods
     ? {
@@ -99,13 +100,11 @@ export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
           body: requestBody,
         });
       }
-      dispatch(showSuccess(translate('Usage report has been submitted.')));
-      dispatch(closeModalDialog());
+      showSuccess(translate('Usage report has been submitted.'));
+      closeDialog();
     } catch (error: any) {
       // Show user-friendly error notification (existing pattern)
-      dispatch(
-        showErrorResponse(error, translate('Unable to submit usage report.')),
-      );
+      showErrorResponse(error, translate('Unable to submit usage report.'));
 
       // Return form-level errors for React Final Form
       if (error.response?.status === 400 && error.response?.data) {

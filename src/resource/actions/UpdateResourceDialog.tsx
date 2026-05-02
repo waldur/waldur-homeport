@@ -1,9 +1,7 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { Resource } from '../types';
 
@@ -28,35 +26,26 @@ export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
   fields,
   initialValues,
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<
+    any,
+    any,
+    Record<string, string | number | boolean>
+  >({
+    mutationFn: (formData) => updateResource(resource.uuid, formData),
+    successMessage: translate('{verboseName} has been updated.', {
+      verboseName,
+    }),
+
+    errorMessage: translate('Unable to update {verboseName}.', {
+      verboseName,
+    }),
+
+    refetch: refetch,
+  });
+
   return (
     <ResourceActionDialog
-      submitForm={async (formData) => {
-        try {
-          if (formData.disable_gateway) {
-            delete formData.gateway_ip;
-          }
-          await updateResource(resource.uuid, formData);
-          dispatch(
-            showSuccess(
-              translate('{verboseName} has been updated.', { verboseName }),
-            ),
-          );
-          if (refetch) {
-            await refetch();
-          }
-          dispatch(closeModalDialog());
-        } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              translate('Unable to update {verboseName}.', {
-                verboseName,
-              }),
-            ),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
       dialogTitle={
         resource.name
           ? translate('Update {resourceType} {resourceName}', {

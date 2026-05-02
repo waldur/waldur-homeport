@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -9,7 +9,7 @@ import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
 import { getCustomer } from '@/workspace/selectors';
 
@@ -24,7 +24,7 @@ import { ProjectDigestSummaryButton } from './ProjectDigestSummaryButton';
 
 export const ProjectDigestConfigPage: FC = () => {
   const customer = useSelector(getCustomer);
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
 
   const {
     data: config,
@@ -40,14 +40,12 @@ export const ProjectDigestConfigPage: FC = () => {
 
   useEffect(() => {
     if (error) {
-      dispatch(
-        showErrorResponse(
-          error as any,
-          translate('Unable to load digest configuration.'),
-        ),
+      showErrorResponse(
+        error as any,
+        translate('Unable to load digest configuration.'),
       );
     }
-  }, [error, dispatch]);
+  }, [error]);
 
   const handleUpdated = useCallback(() => {
     refetch();
@@ -62,20 +60,13 @@ export const ProjectDigestConfigPage: FC = () => {
   const handleSendTest = useCallback(async () => {
     try {
       await sendTestDigest(customer.uuid);
-      dispatch(
-        showSuccess(
-          translate('Test digest email has been sent to your email address.'),
-        ),
+      showSuccess(
+        translate('Test digest email has been sent to your email address.'),
       );
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to send test digest email.'),
-        ),
-      );
+      showErrorResponse(error, translate('Unable to send test digest email.'));
     }
-  }, [customer?.uuid, dispatch]);
+  }, [error, customer?.uuid]);
 
   if (isLoading) {
     return <LoadingSpinner />;

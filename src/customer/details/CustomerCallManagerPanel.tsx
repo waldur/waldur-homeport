@@ -13,17 +13,21 @@ import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { setCurrentCustomer } from '@/workspace/actions';
 import { getCustomer } from '@/workspace/selectors';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
 export const CustomerCallManagerPanel: FunctionComponent = () => {
+  const { confirm } = useModal();
+
   const customer = useSelector(getCustomer);
   const [infoUuid, setInfoUuid] = useState('');
   const dispatch = useDispatch();
+
+  const { showErrorResponse } = useNotify();
 
   const { error: errorInfo, refetch } = useQuery({
     queryKey: ['callManagingOrganization', customer.uuid],
@@ -42,8 +46,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
   const [{ loading: loadingToggle }, toggleCallManager] = useAsyncFn(
     async (value: boolean) => {
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Confirmation'),
           value
             ? translate(
@@ -70,9 +73,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
           setInfoUuid(result.uuid);
           return result;
         } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to perform operation.')),
-          );
+          showErrorResponse(error, translate('Unable to perform operation.'));
           throw error;
         }
       } else {
@@ -85,9 +86,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
           dispatch(setCurrentCustomer(newCustomer));
           return result;
         } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to perform operation.')),
-          );
+          showErrorResponse(error, translate('Unable to perform operation.'));
           throw error;
         }
       }

@@ -1,15 +1,13 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { openstackVolumesAttach, openstackVolumesList } from 'waldur-js-client';
 import { OpenStackVolume } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 const getAttachableVolumes = (instanceId, query) =>
   getAllPages((page) =>
@@ -35,7 +33,18 @@ const getOptionLabel = (option: OpenStackVolume) =>
 export const AttachVolumeDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<any, any, { volume: { uuid: string } }>({
+    mutationFn: (formData) =>
+      openstackVolumesAttach({
+        path: { uuid: formData.volume.uuid },
+        body: { instance: resource.url },
+      }),
+
+    successMessage: translate('Attach has been scheduled.'),
+    errorMessage: translate('Unable to attach volume.'),
+    refetch: refetch,
+  });
+
   return (
     <ResourceActionDialog
       dialogTitle={translate('Attach volume')}
@@ -48,21 +57,7 @@ export const AttachVolumeDialog: FC<ActionDialogProps> = ({
           getOptionLabel,
         },
       ]}
-      submitForm={async (formData) => {
-        try {
-          await openstackVolumesAttach({
-            path: { uuid: formData.volume.uuid },
-            body: { instance: resource.url },
-          });
-          dispatch(showSuccess(translate('Attach has been scheduled.')));
-          dispatch(closeModalDialog());
-          if (refetch) {
-            await refetch();
-          }
-        } catch (e) {
-          dispatch(showErrorResponse(e, translate('Unable to attach volume.')));
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

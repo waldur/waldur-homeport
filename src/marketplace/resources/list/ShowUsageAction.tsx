@@ -1,10 +1,9 @@
 import { ChartPieIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { ResourceAction } from '../actions/constants';
@@ -16,16 +15,14 @@ const ResourceShowUsageDialog = lazyComponent(() =>
 );
 
 export const ShowUsageAction = ({ resource }: { resource: Resource }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = (resource) => {
-    dispatch(
-      openModalDialog(ResourceShowUsageDialog, {
-        resolve: {
-          resource,
-        },
-        size: 'lg',
-      }),
-    );
+    openDialog(ResourceShowUsageDialog, {
+      resolve: {
+        resource,
+      },
+      size: 'lg',
+    });
   };
   const isDisabled = !resource.is_usage_based && !resource.is_limit_based;
   return (

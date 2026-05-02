@@ -14,13 +14,13 @@ import {
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { USER_PERMISSION_REQUESTS_TABLE_ID } from '@/user/constants';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { UserPermissionRequestActions } from './UserPermissionRequestActions';
 import { UserPermissionRequestExpandableRow } from './UserPermissionRequestExpandableRow';
 
 export const UserPermissionRequestsList = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const formFilter = useSelector(selectUserPermissionRequestsFilter);
   const filter = useMemo(
     () => ({

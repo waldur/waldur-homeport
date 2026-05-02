@@ -1,12 +1,11 @@
 import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
@@ -26,7 +25,7 @@ interface CreateResourceButtonProps {
 
 export const CreateResourceButton: FC<CreateResourceButtonProps> = (props) => {
   const user = useUser();
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   if (
     isFeatureVisible(MarketplaceFeatures.hide_marketplace_from_end_users) &&
@@ -41,13 +40,11 @@ export const CreateResourceButton: FC<CreateResourceButtonProps> = (props) => {
 
   const openFormDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(MarketplacePopup, {
-          size: 'lg',
-          resolve: props,
-        }),
-      ),
-    [dispatch],
+      openDialog(MarketplacePopup, {
+        size: 'lg',
+        resolve: props,
+      }),
+    [],
   );
   return <AddButton action={openFormDialog} />;
 };

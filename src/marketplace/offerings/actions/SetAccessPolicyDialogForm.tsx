@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 import {
@@ -14,10 +14,9 @@ import { translate } from '@/i18n';
 import { SET_ACCESS_POLICY_FORM_ID } from '@/marketplace/offerings/actions/constants';
 import { formatRequestBodyForSetAccessPolicyForm } from '@/marketplace/offerings/actions/utils';
 import { Offering, Plan } from '@/marketplace/types';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { SetAccessPolicyFormContainer } from './SetAccessPolicyFormContainer';
 
@@ -30,9 +29,8 @@ interface SetAccessPolicyDialogFormOwnProps {
 }
 
 const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => {
-  const dispatch = useDispatch();
-  const submitRequest = async (formData) => {
-    try {
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
       const updateAccessPolicy = props.plan
         ? marketplacePlansUpdateOrganizationGroups
         : props.offering
@@ -44,7 +42,7 @@ const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => {
           ? props.offering.uuid
           : props.customer.uuid;
 
-      await updateAccessPolicy({
+      return updateAccessPolicy({
         path: { uuid },
         body: {
           organization_groups: formatRequestBodyForSetAccessPolicyForm(
@@ -53,19 +51,17 @@ const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => {
           ),
         },
       });
-      dispatch(
-        showSuccess(translate('Access policy has been updated successfully.')),
-      );
-      props.refetch();
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to update access policy.')),
-      );
-    }
-  };
+    },
+    successMessage: translate('Access policy has been updated successfully.'),
+    errorMessage: translate('Unable to update access policy.'),
+    refetch: props.refetch,
+  });
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        updateMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={
           props.plan

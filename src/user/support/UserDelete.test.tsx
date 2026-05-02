@@ -1,16 +1,19 @@
-import { useQueryClient } from '@tanstack/react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { useRouter } from '@uirouter/react';
-import { useDispatch } from 'react-redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { usersDestroy } from 'waldur-js-client';
 
-import { waitForConfirmation } from '@/modal/actions';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { UserDelete } from './UserDelete';
 
-vi.mock('react-redux');
+const mockConfirm = vi.fn();
+
 vi.mock('@uirouter/react', async (importOriginal) => {
   const mod = await importOriginal<typeof import('@uirouter/react')>();
   return {
@@ -18,17 +21,27 @@ vi.mock('@uirouter/react', async (importOriginal) => {
     useRouter: vi.fn(),
   };
 });
-vi.mock('@tanstack/react-query');
-vi.mock('@/modal/actions');
+vi.mock('@tanstack/react-query', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@tanstack/react-query')>();
+  return {
+    ...mod,
+    useQueryClient: vi.fn(),
+  };
+});
+vi.mock('@/modal/hooks', () => ({
+  useModal: () => ({
+    confirm: mockConfirm,
+    closeDialog: vi.fn(),
+  }),
+}));
 vi.mock('@/navigation/useTabs', () => ({
   isDescendantOf: vi.fn(),
 }));
-vi.mock('@/store/hooks');
+vi.mock('@/store/notify');
 vi.mock('waldur-js-client');
 
 describe('UserDelete', () => {
   let user;
-  let dispatch;
   let router;
   let queryClient;
   let notify;
@@ -38,9 +51,6 @@ describe('UserDelete', () => {
       uuid: 'test-uuid',
       full_name: 'Test User',
     };
-
-    dispatch = vi.fn();
-    vi.mocked(useDispatch).mockReturnValue(dispatch);
 
     router = {
       stateService: {
@@ -52,9 +62,13 @@ describe('UserDelete', () => {
     };
     vi.mocked(useRouter).mockReturnValue(router);
 
-    queryClient = {
-      setQueryData: vi.fn(),
-    };
+    queryClient = new QueryClient({
+      defaultOptions: {
+        queries: { retry: false },
+        mutations: { retry: false },
+      },
+    });
+    vi.spyOn(queryClient, 'setQueryData');
     vi.mocked(useQueryClient).mockReturnValue(queryClient);
 
     notify = {
@@ -64,15 +78,23 @@ describe('UserDelete', () => {
     vi.mocked(useNotify).mockReturnValue(notify);
   });
 
+  const renderComponent = () => {
+    return render(
+      <QueryClientProvider client={queryClient}>
+        <UserDelete user={user} />
+      </QueryClientProvider>,
+    );
+  };
+
   it('handles user deletion successfully', async () => {
-    vi.mocked(waitForConfirmation).mockResolvedValueOnce(null);
+    mockConfirm.mockResolvedValueOnce(null);
     vi.mocked(usersDestroy).mockResolvedValueOnce(null);
 
-    render(<UserDelete user={user} />);
+    renderComponent();
     fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
 
     await waitFor(() => {
-      expect(waitForConfirmation).toHaveBeenCalled();
+      expect(mockConfirm).toHaveBeenCalled();
       expect(usersDestroy).toHaveBeenCalledWith({
         path: { uuid: 'test-uuid' },
       });
@@ -86,27 +108,27 @@ describe('UserDelete', () => {
   });
 
   it('proceeds only with confirmation', async () => {
-    vi.mocked(waitForConfirmation).mockRejectedValueOnce(null);
+    mockConfirm.mockRejectedValueOnce(null);
 
-    render(<UserDelete user={user} />);
+    renderComponent();
     fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
 
     await waitFor(() => {
-      expect(waitForConfirmation).toHaveBeenCalled();
+      expect(mockConfirm).toHaveBeenCalled();
       expect(notify.showSuccess).not.toHaveBeenCalled();
       expect(router.stateService.go).not.toHaveBeenCalled();
     });
   });
 
   it('handles user deletion failure', async () => {
-    vi.mocked(waitForConfirmation).mockResolvedValueOnce(null);
+    mockConfirm.mockResolvedValueOnce(null);
     vi.mocked(usersDestroy).mockRejectedValueOnce(new Error('Test error'));
 
-    render(<UserDelete user={user} />);
+    renderComponent();
     fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
 
     await waitFor(() => {
-      expect(waitForConfirmation).toHaveBeenCalled();
+      expect(mockConfirm).toHaveBeenCalled();
       expect(usersDestroy).toHaveBeenCalledWith({
         path: { uuid: 'test-uuid' },
       });

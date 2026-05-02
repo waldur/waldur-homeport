@@ -1,6 +1,5 @@
 import { TextColumnsIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsList,
   MarketplaceProviderOfferingsListData,
@@ -11,7 +10,7 @@ import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
@@ -142,7 +141,7 @@ export const BaseOfferingsList: FunctionComponent<{
     SLUG_COLUMN as Column<ProviderOfferingDetails>,
   ];
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useUser();
   const providerDropdownActions = useOfferingDropdownActions(props.fetch);
 
@@ -154,12 +153,10 @@ export const BaseOfferingsList: FunctionComponent<{
             key="update-article-codes"
             title={translate('Update article codes')}
             action={() => {
-              dispatch(
-                openModalDialog(ArticleCodeUpdateDialog, {
-                  resolve: { refetch: props.fetch },
-                  size: 'xl',
-                }),
-              );
+              openDialog(ArticleCodeUpdateDialog, {
+                resolve: { refetch: props.fetch },
+                size: 'xl',
+              });
             }}
             iconNode={<TextColumnsIcon weight="bold" />}
             staff

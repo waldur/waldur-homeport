@@ -1,11 +1,10 @@
 import { EnvelopeIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   marketplaceOrdersSetConsumerInfo,
-  OrderConsumerInfoRequest,
-  OrderDetails,
+  type OrderConsumerInfoRequest,
+  type OrderDetails,
 } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
@@ -16,9 +15,8 @@ import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface SetConsumerInfoDialogProps {
   resolve: {
@@ -30,11 +28,12 @@ interface SetConsumerInfoDialogProps {
 export const SetConsumerInfoDialog: FC<SetConsumerInfoDialogProps> = ({
   resolve,
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: async (formData: OrderConsumerInfoRequest) => {
+  const setConsumerMutation = useManagedMutation<
+    any,
+    any,
+    OrderConsumerInfoRequest
+  >({
+    mutationFn: async (formData) => {
       await marketplaceOrdersSetConsumerInfo({
         path: { uuid: resolve.order.uuid },
         body: {
@@ -46,14 +45,9 @@ export const SetConsumerInfoDialog: FC<SetConsumerInfoDialogProps> = ({
         ...formDataOptions,
       });
     },
-    onSuccess: async () => {
-      showSuccess(translate('Response has been sent.'));
-      if (resolve.refetch) await resolve.refetch();
-      closeDialog();
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Unable to send response.'));
-    },
+    successMessage: translate('Response has been sent.'),
+    errorMessage: translate('Unable to send response.'),
+    refetch: resolve.refetch,
   });
 
   const initialValues = {
@@ -62,7 +56,7 @@ export const SetConsumerInfoDialog: FC<SetConsumerInfoDialogProps> = ({
 
   return (
     <Form
-      onSubmit={(values) => mutate(values)}
+      onSubmit={(values) => setConsumerMutation.mutate(values)}
       initialValues={initialValues}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
@@ -74,7 +68,7 @@ export const SetConsumerInfoDialog: FC<SetConsumerInfoDialogProps> = ({
               <>
                 <CloseDialogButton className="min-w-125px" />
                 <SubmitButton
-                  submitting={isPending}
+                  submitting={setConsumerMutation.isPending}
                   label={translate('Send')}
                   className="btn btn-primary min-w-125px"
                 />

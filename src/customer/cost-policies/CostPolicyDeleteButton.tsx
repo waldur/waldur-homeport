@@ -1,13 +1,11 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceCustomerEstimatedCostPoliciesDestroy,
   marketplaceProjectEstimatedCostPoliciesDestroy,
 } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 import { CostPolicyType } from './types';
 
@@ -20,12 +18,21 @@ export const CostPolicyDeleteButton = ({
   refetch;
   type: CostPolicyType;
 }) => {
-  const dispatch = useDispatch();
-  const openDialog = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      type === 'project'
+        ? marketplaceProjectEstimatedCostPoliciesDestroy({
+            path: { uuid: row.uuid },
+          })
+        : marketplaceCustomerEstimatedCostPoliciesDestroy({
+            path: { uuid: row.uuid },
+          }),
+    successMessage: translate('Cost policy has been deleted.'),
+    errorMessage: translate('Unable to delete cost policy.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body:
         type === 'project'
           ? translate(
               'Are you sure you want to delete the cost policy for project {name}?',
@@ -37,30 +44,14 @@ export const CostPolicyDeleteButton = ({
               { name: <strong>{row.scope_name}</strong> },
               formatJsxTemplate,
             ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    if (type === 'project') {
-      await marketplaceProjectEstimatedCostPoliciesDestroy({
-        path: { uuid: row.uuid },
-      });
-      refetch();
-    } else {
-      await marketplaceCustomerEstimatedCostPoliciesDestroy({
-        path: { uuid: row.uuid },
-      });
-      refetch();
-    }
-  };
+      options: { forDeletion: true },
+    },
+  });
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Remove')}
-      action={openDialog}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-      iconColor="danger"
+      action={mutate}
+      disabled={isPending}
     />
   );
 };

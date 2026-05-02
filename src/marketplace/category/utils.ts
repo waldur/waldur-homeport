@@ -11,8 +11,7 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { translate } from '@/i18n';
 import { Category, CategoryGroup } from '@/marketplace/types';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const countSelectedFilters = (filterValues) => {
   const selectedFilters = [];
@@ -119,8 +118,8 @@ export const useCategoryColumnsEditor = (category: Category) => {
   );
   const dispatch = useDispatch();
 
-  const submitRequest = async (formData: FormData) => {
-    try {
+  const submitMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: async (formData) => {
       const columnRequests = formData.columns.map((column: CategoryColumn) => {
         if (column.uuid) {
           return marketplaceCategoryColumnsUpdate({
@@ -135,23 +134,15 @@ export const useCategoryColumnsEditor = (category: Category) => {
       });
 
       await Promise.all(columnRequests);
+    },
+    successMessage: translate('Category columns have been successfully saved.'),
+    errorMessage: translate(
+      'Unable to save category columns. Please try again.',
+    ),
+  });
 
-      dispatch(
-        showSuccess(
-          translate('Category columns have been successfully saved.'),
-        ),
-      );
-
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to save category columns. Please try again.'),
-        ),
-      );
-    }
-  };
+  const submitRequest = (values: FormData) =>
+    submitMutation.mutateAsync(values);
 
   const initialValues = { columns: asyncState.value || [] };
 
