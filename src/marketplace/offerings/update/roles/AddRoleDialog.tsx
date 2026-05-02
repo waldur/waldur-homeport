@@ -1,71 +1,105 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
+import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { marketplaceOfferingUserRolesCreate } from 'waldur-js-client';
+import { marketplaceOfferingRolesCreate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { StringField, SubmitButton } from '@/form';
+import { SelectField, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/hooks';
 
 import { FormGroup } from '../../FormGroup';
 
-import { ROLE_FORM_ID } from './constants';
+const SCOPE_OPTIONS = [
+  { value: 'resource', label: translate('Resource') },
+  { value: 'resource_project', label: translate('Resource project') },
+];
 
-export const AddRoleDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
-  form: ROLE_FORM_ID,
-})((props) => {
+interface AddRoleResolve {
+  offering: { uuid: string; name?: string };
+  refetch(): void;
+}
+
+export const AddRoleDialog: FC<{ resolve: AddRoleResolve }> = ({ resolve }) => {
   const dispatch = useDispatch();
-  const update = useCallback(
+  const { showSuccess, showErrorResponse } = useNotify();
+
+  const submit = useCallback(
     async (formData) => {
       try {
-        await marketplaceOfferingUserRolesCreate({
+        await marketplaceOfferingRolesCreate({
           body: {
-            offering: props.resolve.offering.url,
+            offering: resolve.offering.uuid,
             name: formData.name,
-            scope_type: formData.scope_type || '',
-          },
+            content_type_input: formData.scope?.value || 'resource_project',
+            description: formData.description || '',
+          } as any,
         });
-        dispatch(showSuccess(translate('Role has been added successfully.')));
-        if (props.resolve.refetch) await props.resolve.refetch();
+        showSuccess(translate('Role has been added successfully.'));
+        if (resolve.refetch) await resolve.refetch();
         dispatch(closeModalDialog());
       } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to add role.')));
+        showErrorResponse(error, translate('Unable to add role.'));
       }
     },
-    [dispatch],
+    [dispatch, resolve, showSuccess, showErrorResponse],
   );
 
   return (
-    <form onSubmit={props.handleSubmit(update)}>
-      <ModalDialog
-        title={translate('Add role')}
-        footer={
-          <SubmitButton
-            disabled={props.invalid}
-            submitting={props.submitting}
-            label={translate('Create')}
-          />
-        }
-      >
-        <FormGroup label={translate('Name')} required={true}>
-          <Field name="name" validate={required} component={StringField} />
-        </FormGroup>
-        <FormGroup
-          label={translate('Scope type')}
-          description={translate(
-            'Level this role applies at, e.g. "cluster", "project". Leave empty for offering-wide roles.',
-          )}
-        >
-          <Field
-            name="scope_type"
-            component={StringField}
-            placeholder={translate('e.g. cluster, project')}
-          />
-        </FormGroup>
-      </ModalDialog>
-    </form>
+    <Form onSubmit={submit} initialValues={{ scope: SCOPE_OPTIONS[1] }}>
+      {({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Add role')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={translate('Create')}
+                  className="btn btn-primary"
+                />
+              </>
+            }
+          >
+            <FormGroup label={translate('Role name')} required>
+              <Field
+                name="name"
+                validate={required}
+                component={StringField as any}
+                placeholder={translate('e.g. Cluster Admin, Project Member')}
+              />
+            </FormGroup>
+            <FormGroup
+              label={translate('Scope')}
+              description={translate(
+                'Whether the role is granted on the whole resource or on individual resource sub-projects.',
+              )}
+              required
+            >
+              <Field
+                name="scope"
+                validate={required}
+                component={SelectField}
+                options={SCOPE_OPTIONS}
+                getOptionValue={(o) => o.value}
+                getOptionLabel={(o) => o.label}
+              />
+            </FormGroup>
+            <FormGroup label={translate('Description')}>
+              <Field
+                name="description"
+                component={StringField as any}
+                placeholder={translate('Role description (optional)')}
+              />
+            </FormGroup>
+          </ModalDialog>
+        </form>
+      )}
+    </Form>
   );
-});
+};

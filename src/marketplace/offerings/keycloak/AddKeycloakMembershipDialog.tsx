@@ -4,9 +4,9 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import {
-  marketplaceOfferingUserRolesList,
+  marketplaceOfferingRolesList,
   offeringKeycloakMembershipsCreate,
-  OfferingUserRole,
+  OfferingRole,
   projectsListUsersList,
   PublicOfferingDetails,
   Resource,
@@ -67,11 +67,11 @@ export const AddKeycloakMembershipDialog: FC<
     queryKey: ['OfferingRoles', resolve.offering.uuid],
     queryFn: () =>
       getAllPages((page) =>
-        marketplaceOfferingUserRolesList({
+        marketplaceOfferingRolesList({
           query: {
             page,
             page_size: MAX_PAGE_SIZE,
-            offering_uuid: [resolve.offering.uuid],
+            offering_uuid: resolve.offering.uuid,
           },
         }),
       ),
@@ -94,16 +94,16 @@ export const AddKeycloakMembershipDialog: FC<
     return roles
       .filter(
         (r) =>
-          r.scope_type &&
-          scopeTypesWithScopes.has(r.scope_type) &&
-          !seen.has(r.scope_type) &&
-          (seen.add(r.scope_type), true),
+          r.content_type &&
+          scopeTypesWithScopes.has(r.content_type) &&
+          !seen.has(r.content_type) &&
+          (seen.add(r.content_type), true),
       )
       .map((r) => ({
-        value: r.scope_type,
+        value: r.content_type,
         label:
-          r.scope_type_label ||
-          r.scope_type.charAt(0).toUpperCase() + r.scope_type.slice(1),
+          r.content_type ||
+          r.content_type.charAt(0).toUpperCase() + r.content_type.slice(1),
       }));
   }, [availableScopes, roles]);
 
@@ -183,8 +183,8 @@ export const AddKeycloakMembershipDialog: FC<
   const getRolesForScopeType = useCallback(
     (scopeType: string | undefined) => {
       if (!roles) return [];
-      if (!scopeType) return roles.filter((r) => !r.scope_type);
-      return roles.filter((r) => r.scope_type === scopeType);
+      if (!scopeType) return roles.filter((r) => !r.content_type);
+      return roles.filter((r) => r.content_type === scopeType);
     },
     [roles],
   );
@@ -304,7 +304,7 @@ export const AddKeycloakMembershipDialog: FC<
                 <div className="col-md-6">
                   <FormGroup label={translate('Scope type')} required>
                     <Field
-                      name="scope_type"
+                      name="content_type"
                       validate={required}
                       component={SelectField as any}
                       options={configurableScopeTypes}
@@ -326,12 +326,12 @@ export const AddKeycloakMembershipDialog: FC<
                     />
                   </FormGroup>
                 </div>
-                {values?.scope_type && (
+                {values?.content_type && (
                   <div className="col-md-6">
                     <FormGroup
                       label={
                         configurableScopeTypes.find(
-                          (st) => st.value === values.scope_type,
+                          (st) => st.value === values.content_type,
                         )?.label || translate('Scope')
                       }
                       required
@@ -341,7 +341,7 @@ export const AddKeycloakMembershipDialog: FC<
                         validate={required}
                         component={SelectField as any}
                         options={availableScopes.filter(
-                          (s) => s.scope_type === values?.scope_type,
+                          (s) => s.scope_type === values?.content_type,
                         )}
                         getOptionValue={(opt: ScopeOption) => opt.scope_id}
                         getOptionLabel={(opt: ScopeOption) => opt.label}
@@ -361,11 +361,11 @@ export const AddKeycloakMembershipDialog: FC<
                 isLoading={isLoadingRoles}
                 options={
                   configurableScopeTypes.length > 0
-                    ? getRolesForScopeType(values?.scope_type)
-                    : (roles || []).filter((r) => !r.scope_type)
+                    ? getRolesForScopeType(values?.content_type)
+                    : (roles || []).filter((r) => !r.content_type)
                 }
-                getOptionValue={(opt: OfferingUserRole) => opt.uuid}
-                getOptionLabel={(opt: OfferingUserRole) => opt.name}
+                getOptionValue={(opt: OfferingRole) => opt.uuid}
+                getOptionLabel={(opt: OfferingRole) => opt.name}
               />
             </FormGroup>
           </ModalDialog>

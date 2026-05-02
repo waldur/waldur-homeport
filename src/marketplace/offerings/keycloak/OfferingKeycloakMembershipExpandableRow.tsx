@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import {
   OfferingKeycloakMembership,
   offeringKeycloakMembershipsList,
-  OfferingUserRole,
+  OfferingRole,
 } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -27,7 +27,7 @@ interface ExpandableRowProps {
   offering_uuid: string;
   resource_uuid?: string;
   scopeTypes: ScopeTypeInfo[];
-  roles: OfferingUserRole[];
+  roles: OfferingRole[];
 }
 
 const ScopeTypeTable: FC<{
@@ -35,11 +35,11 @@ const ScopeTypeTable: FC<{
   offering_uuid: string;
   resource_uuid?: string;
   scopeType: ScopeTypeInfo;
-  roles: OfferingUserRole[];
+  roles: OfferingRole[];
 }> = ({ row, offering_uuid, resource_uuid, scopeType, roles }) => {
   const scopeRoleUuids = useMemo(
     () =>
-      roles.filter((r) => r.scope_type === scopeType.key).map((r) => r.uuid),
+      roles.filter((r) => r.content_type === scopeType.key).map((r) => r.uuid),
     [roles, scopeType.key],
   );
 

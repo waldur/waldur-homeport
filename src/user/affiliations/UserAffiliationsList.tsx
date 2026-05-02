@@ -88,17 +88,44 @@ export const UserAffiliationsList: FunctionComponent<
     },
     {
       title: translate('Scope name'),
-      render: ({ row }) =>
-        row.scope_type === 'project' ? (
-          <Link
-            state="project.dashboard"
-            params={{ uuid: row.scope_uuid }}
-            label={row.scope_name}
-          />
-        ) : (
-          <>{row.scope_name}</>
-        ),
-
+      render: ({ row }) => {
+        if (row.scope_type === 'project') {
+          return (
+            <Link
+              state="project.dashboard"
+              params={{ uuid: row.scope_uuid }}
+              label={row.scope_name}
+            />
+          );
+        }
+        if (row.scope_type === 'resource') {
+          return (
+            <Link
+              state="marketplace-resource-details"
+              params={{ resource_uuid: row.scope_uuid }}
+              label={row.scope_name}
+            />
+          );
+        }
+        if (row.scope_type === 'resource_project') {
+          // ResourceProjects don't have a standalone page; deep-link to
+          // the parent resource's Resource projects tab so the user can
+          // expand the relevant row.
+          return row.resource_uuid ? (
+            <Link
+              state="marketplace-resource-details"
+              params={{
+                resource_uuid: row.resource_uuid,
+                tab: 'resource-projects',
+              }}
+              label={row.scope_name}
+            />
+          ) : (
+            <>{row.scope_name}</>
+          );
+        }
+        return <>{row.scope_name}</>;
+      },
       filter: 'scope_name',
     },
     {

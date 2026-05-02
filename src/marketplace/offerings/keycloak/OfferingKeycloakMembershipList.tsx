@@ -4,7 +4,7 @@ import { FunctionComponent, memo, useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import {
-  marketplaceOfferingUserRolesList,
+  marketplaceOfferingRolesList,
   OfferingKeycloakMembership,
   offeringKeycloakMembershipsList,
   OfferingKeycloakMembershipsListData,
@@ -118,11 +118,11 @@ export const OfferingKeycloakMembershipList: FunctionComponent<{
     queryKey: ['OfferingRoles', offering.uuid],
     queryFn: () =>
       getAllPages((page) =>
-        marketplaceOfferingUserRolesList({
+        marketplaceOfferingRolesList({
           query: {
             page,
             page_size: MAX_PAGE_SIZE,
-            offering_uuid: [offering.uuid],
+            offering_uuid: offering.uuid,
           },
         }),
       ),
@@ -135,15 +135,15 @@ export const OfferingKeycloakMembershipList: FunctionComponent<{
     return roles
       .filter(
         (r) =>
-          r.scope_type &&
-          !seen.has(r.scope_type) &&
-          (seen.add(r.scope_type), true),
+          r.content_type &&
+          !seen.has(r.content_type) &&
+          (seen.add(r.content_type), true),
       )
       .map((r) => ({
-        key: r.scope_type,
+        key: r.content_type,
         label:
-          r.scope_type_label ||
-          r.scope_type.charAt(0).toUpperCase() + r.scope_type.slice(1),
+          r.content_type ||
+          r.content_type.charAt(0).toUpperCase() + r.content_type.slice(1),
       }));
   }, [roles]);
 

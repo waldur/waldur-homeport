@@ -1,50 +1,89 @@
-import { useMemo } from 'react';
-import { marketplaceResourceUsersList } from 'waldur-js-client';
+import {
+  marketplaceResourcesTeamMembersList,
+  MarketplaceResourcesTeamMembersListData,
+} from 'waldur-js-client';
 
+import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
 import { translate } from '@/i18n';
-import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
-import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
-import { AddUserButton } from './AddUserButton';
-import { DeleteUserAction } from './DeleteUserButton';
+import { ResourcePermissionsLogButton } from './ResourcePermissionsLogButton';
+import { ResourceTeamAddDropdown } from './ResourceTeamAddDropdown';
+import { ResourceUsersListExpandableRow } from './ResourceUsersListExpandableRow';
 
-export const ResourceUsersList = ({ resource, offering }) => {
-  const filter = useMemo(() => ({ resource_uuid: resource.uuid }), [resource]);
+export const ResourceUsersList = ({
+  resource,
+  offering,
+  tableTabs,
+  title,
+}: any) => {
   const tableProps = useTable({
-    table: `ResourceUsersList`,
-    filter,
-    fetchData: createFetcher(marketplaceResourceUsersList),
+    table: 'ResourceUsersList',
+    // The new team_members endpoint returns one row per user with their
+    // direct Resource role and a nested resource_projects[] array of
+    // their per-ResourceProject grants — mirroring the org-level
+    // customers/{uuid}/users/ shape.
+    fetchData: createFetcher(marketplaceResourcesTeamMembersList, {
+      path: {
+        uuid: resource.uuid,
+      } satisfies MarketplaceResourcesTeamMembersListData['path'],
+    }),
+    queryField: 'search_string',
+    // Without explicit mandatory fields the fetcher only requests the
+    // fields the visible columns declare via `keys`. The expandable
+    // body and the "in N projects" hint both need `resource_projects`,
+    // which is not declared by any column.
+    mandatoryFields: [
+      'uuid',
+      'username',
+      'full_name',
+      'email',
+      'image',
+      'role_name',
+      'role_uuid',
+      'expiration_time',
+      'resource_projects',
+    ],
   });
 
   return (
-    <Table
+    <TeamTableComponent
       {...tableProps}
-      title={translate('Roles')}
-      columns={[
-        {
-          title: translate('User'),
-          render: ({ row }) => <>{row.user_full_name || row.user_username}</>,
-        },
-        {
-          title: translate('Role'),
-          render: ({ row }) => <>{row.role_name}</>,
-        },
-      ]}
-      verboseName={translate('roles')}
-      rowActions={({ row }) => (
-        <ActionsDropdown row={row} refetch={tableProps.fetch}>
-          <DeleteUserAction row={row} refetch={tableProps.fetch} />
-        </ActionsDropdown>
-      )}
+      title={title ?? translate('Team')}
+      tabs={tableTabs}
       tableActions={
-        <AddUserButton
-          resource={resource}
+        <ResourceTeamAddDropdown
+          scope="resource"
+          scopeUuid={resource.uuid}
+          scopeUrl={resource.url}
+          scopeLabel={resource.name}
+          projectUuid={resource.project_uuid}
+          customerUuid={resource.customer_uuid}
           offering={offering}
           refetch={tableProps.fetch}
         />
       }
+      dropdownActions={<ResourcePermissionsLogButton scopeUrl={resource.url} />}
+      enableExport
+      showExportInDropdown
+      // Inline hint when the user has no direct Resource role but has
+      // grants on sub-projects; surfaced in the otherwise-empty Role
+      // column.
+      roleSuffix={(row) =>
+        !row.role_name && row.resource_projects?.length
+          ? translate('in {count} projects', {
+              count: row.resource_projects.length,
+            })
+          : null
+      }
+      expandableRow={({ row }) => (
+        <ResourceUsersListExpandableRow
+          row={row}
+          resourceUuid={resource.uuid}
+          refetch={tableProps.fetch}
+        />
+      )}
     />
   );
 };

@@ -21,6 +21,7 @@ import { OfferingSectionProps } from '../types';
 
 import { EditChecklistButton } from './EditChecklistButton';
 import { EditGettingStartedButton } from './EditGettingStartedButton';
+import { EditOfferingProfileButton } from './EditOfferingProfileButton';
 import { EditOverviewButton } from './EditOverviewButton';
 import { EditTagsButton } from './EditTagsButton';
 import { OfferingLocationButton } from './OfferingLocationButton';
@@ -319,6 +320,22 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
                   )}
                   actions={
                     <EditTagsButton
+                      offering={props.offering}
+                      refetch={props.refetch}
+                    />
+                  }
+                />
+                <FormTable.Item
+                  label={translate('Service profile')}
+                  value={
+                    (props.offering as any).profile_name ||
+                    translate('— None —')
+                  }
+                  description={translate(
+                    'Bind to a profile to use a centrally-managed role catalog (staff-only).',
+                  )}
+                  actions={
+                    <EditOfferingProfileButton
                       offering={props.offering}
                       refetch={props.refetch}
                     />

@@ -5,7 +5,11 @@ import { GenericInvitationContext } from '../types';
 
 export interface InvitationContext extends GenericInvitationContext {
   user: User;
-  customer: Customer;
+  /**
+   * Org/project context. Optional — scoped callers (resource invites) omit
+   * this and supply `scope` + `rolesOverride` instead.
+   */
+  customer?: Customer;
   project?: Project;
   refetch?(): void;
   enableBulkUpload?: boolean;

@@ -2,6 +2,8 @@ import {
   callManagingOrganisationsDeleteUser,
   customersDeleteUser,
   marketplaceProviderOfferingsDeleteUser,
+  marketplaceResourceProjectsDeleteUser,
+  marketplaceResourcesDeleteUser,
   marketplaceServiceProvidersDeleteUser,
   Permission,
   projectsDeleteUser,
@@ -34,6 +36,12 @@ export const canDeletePermission = (user: User, perm: Permission) => {
       break;
     case 'proposal':
       permission = PermissionEnum.DELETE_PROPOSAL_PERMISSION;
+      break;
+    case 'resource':
+      permission = PermissionEnum.DELETE_RESOURCE_PERMISSION;
+      break;
+    case 'resource_project':
+      permission = PermissionEnum.DELETE_RESOURCE_PROJECT_PERMISSION;
       break;
   }
   return hasPermission(user, {
@@ -69,6 +77,12 @@ export const revokePermission = async (perm: Permission) => {
       break;
     case 'proposal':
       await proposalProposalsDeleteUser(body);
+      break;
+    case 'resource':
+      await marketplaceResourcesDeleteUser(body as any);
+      break;
+    case 'resource_project':
+      await marketplaceResourceProjectsDeleteUser(body as any);
       break;
 
     default:

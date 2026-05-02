@@ -56,6 +56,56 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   const filter = useMemo(() => ({ customer_uuid: customer.uuid }), [customer.uuid]);
   ```
 
+- **Table imports** — there is no barrel `@/table` export. Always import from subpaths:
+
+  ```typescript
+  import Table from '@/table/Table';
+  import { useTable } from '@/table/useTable';
+  import { createFetcher } from '@/table/api';
+  import { ActionsDropdown } from '@/table/ActionsDropdown';
+  import { ActionButton } from '@/table/ActionButton';
+  ```
+
+  `createFetcher` takes an SDK function (not a string endpoint name):
+
+  ```typescript
+  // CORRECT
+  fetchData: createFetcher(marketplaceResourceProjectsList)
+  // WRONG — string endpoints are not supported
+  fetchData: createFetcher('marketplace-resource-projects')
+  ```
+
+- **Row actions** must use the 3-dots dropdown pattern (`ActionsDropdown` + `ActionItem`), not standalone buttons:
+
+  ```typescript
+  // CORRECT — 3-dots dropdown with ActionItem children
+  import { ActionsDropdown } from '@/table/ActionsDropdown';
+  import { ActionItem } from '@/resource/actions/ActionItem';
+
+  rowActions={({ row }) => (
+    <ActionsDropdown row={row} refetch={tableProps.fetch}>
+      <DeleteAction row={row} refetch={tableProps.fetch} />
+    </ActionsDropdown>
+  )}
+
+  // Where DeleteAction uses ActionItem:
+  const DeleteAction = ({ row, refetch }) => (
+    <ActionItem
+      title={translate('Delete')}
+      action={handler}
+      iconNode={<TrashIcon weight="bold" />}
+      className="text-danger"
+    />
+  );
+
+  // WRONG — bare ActionButton in rowActions
+  rowActions={({ row }) => (
+    <ActionButton title="Delete" action={handler} />
+  )}
+  ```
+
+  Reference: `src/marketplace/resources/users/ResourceUsersList.tsx` and `TeamUserActions.tsx`
+
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
 
 - Use **generated filters** for table filter components (see `docs/filter-migration-guide.md`):

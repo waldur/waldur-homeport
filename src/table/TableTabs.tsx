@@ -10,11 +10,20 @@ export const TableTabs = ({ tabs }: { tabs: TableTab[] }) => {
   const router = useRouter();
   const goTo = (key) => {
     const tab = tabs.find((t) => t.key === key);
+    if (tab.onSelect) {
+      tab.onSelect(String(key));
+      return;
+    }
     router.stateService.go(tab.state ?? state.name, tab.params);
   };
 
   const activeKey = useMemo(() => {
-    // Find tab that matches current state and params
+    // Local-state mode: caller marks one tab as active explicitly.
+    const explicitlyActive = tabs.find((t) => t.active);
+    if (explicitlyActive) {
+      return explicitlyActive.key;
+    }
+    // URL-driven mode: find tab that matches current state and params
     const matchedTab = tabs.find(
       (t) => (!t.state || t.state === state.name) && isMatch(params, t.params),
     );

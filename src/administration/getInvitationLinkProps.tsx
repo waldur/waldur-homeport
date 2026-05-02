@@ -17,6 +17,11 @@ export const getInvitationLinkProps = (row) => {
         state: 'public-call.details',
         params: { call_uuid: row.scope_uuid },
       };
+    case 'resource':
+      return {
+        state: 'marketplace-resource-details',
+        params: { resource_uuid: row.scope_uuid },
+      };
     default:
       return null;
   }

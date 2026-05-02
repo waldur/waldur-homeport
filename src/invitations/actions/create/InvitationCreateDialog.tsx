@@ -142,8 +142,8 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
               )
             : defaultRole;
           const project =
-            item.project && resolve.roleTypes.includes('customer')
-              ? resolve.customer.projects?.find(
+            item.project && resolve.roleTypes?.includes('customer')
+              ? resolve.customer?.projects?.find(
                   (project) =>
                     project.name.toLocaleLowerCase() ===
                       item.project.toLocaleLowerCase() ||
@@ -170,7 +170,13 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
       render={({ handleSubmit, submitting, valid, form }) => (
         <form onSubmit={handleSubmit} className="invitation-create-dialog">
           <ModalDialog
-            title={translate('Invite by email')}
+            title={
+              resolve.scopeLabel
+                ? translate('Invite users to {label}', {
+                    label: resolve.scopeLabel,
+                  })
+                : translate('Invite by email')
+            }
             subtitle={translate(
               "We'll email them instructions and a link to accept the invitation.",
             )}

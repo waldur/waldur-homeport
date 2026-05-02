@@ -161,6 +161,20 @@ export interface TableTab {
   component?: ComponentType<any>;
   /** Mark this tab as default when no other tab matches */
   default?: boolean;
+  /**
+   * Local-state mode: when set, clicking the tab calls this callback
+   * instead of navigating via ui-router state.go(). Use together with
+   * `active` so TableTabs knows which tab to highlight without reading
+   * URL params. Useful when multiple instances of the table coexist on
+   * one page and a single URL param can't disambiguate them (e.g.
+   * sub-tabs inside expandable rows).
+   */
+  onSelect?: (key: string) => void;
+  /**
+   * Local-state mode companion to `onSelect`: explicitly marks this tab
+   * as the active one, overriding the default URL-based detection.
+   */
+  active?: boolean;
 }
 
 interface TablePortal {

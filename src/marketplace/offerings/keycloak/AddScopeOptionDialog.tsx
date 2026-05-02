@@ -96,7 +96,7 @@ export const AddScopeOptionDialog: FC<AddScopeOptionDialogProps> = ({
           >
             <FormGroup label={translate('Scope type')} required>
               <Field
-                name="scope_type"
+                name="content_type"
                 validate={required}
                 component={StringField as any}
                 placeholder={translate('e.g. project, cluster')}
