@@ -176,7 +176,9 @@ export const HypervisorSummaryCharts: FC<{
   }
 
   const usedVcpus = data.used_vcpus ?? 0;
-  const totalVcpus = data.effective_vcpus ?? data.total_vcpus ?? 0;
+  // total_vcpus is the effective (overcommit-applied) value as of the
+  // Placement-API migration on the backend; no further multiplier needed.
+  const totalVcpus = data.total_vcpus ?? 0;
   const usedMemory = data.used_memory_mb ?? 0;
   const totalMemory = data.total_memory_mb ?? 0;
   const usedDisk = data.used_local_gb ?? 0;
