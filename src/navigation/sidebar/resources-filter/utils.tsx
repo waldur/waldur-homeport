@@ -3,6 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { change } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { getQueryParams, syncFiltersToURL } from '@/core/filters';
 import { ResourcesFilterStorage } from '@/core/StorageManager';
@@ -313,12 +314,18 @@ export const useOrganizationAndProjectFiltersForResources = (
   return { syncResourceFilters, clearAllFilters, removeFilter };
 };
 
-export const sidebarResourcesFilterSelector = (
-  state: RootState,
-): ResourceFilterValues => {
-  const filters = selectFiltersStorage(state, ALL_RESOURCES_TABLE_ID);
-  if (!filters?.length) return null;
-  const project = filters.find((item) => item.name === 'project');
-  const organization = filters.find((item) => item.name === 'organization');
-  return { project: project?.value, organization: organization?.value };
-};
+// Memoised so that consumers (notably MarketplacePopup) don't re-render every
+// time anything else in the redux store changes. Without reselect this returns
+// a fresh `{ project, organization }` object on every store update, even when
+// the underlying filters haven't changed -- defeating react-redux's
+// reference-equality bail-out and feeding the render-storm path that surfaced
+// the May 2 Add Resource modal flake (waldur-integration-testing!73).
+export const sidebarResourcesFilterSelector = createSelector(
+  (state: RootState) => selectFiltersStorage(state, ALL_RESOURCES_TABLE_ID),
+  (filters): ResourceFilterValues => {
+    if (!filters?.length) return null;
+    const project = filters.find((item) => item.name === 'project');
+    const organization = filters.find((item) => item.name === 'organization');
+    return { project: project?.value, organization: organization?.value };
+  },
+);
