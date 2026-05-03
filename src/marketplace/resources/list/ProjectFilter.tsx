@@ -1,5 +1,5 @@
 import { FactoryIcon } from '@phosphor-icons/react';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Props as SelectProps } from 'react-select';
 import { BaseFieldProps, Field } from 'redux-form';
 
@@ -29,29 +29,44 @@ const getOptionLabel = (option) => (
   </div>
 );
 
-export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
-  <Field
-    name="project"
-    validate={props.validator}
-    component={(fieldProps) => (
+const getOptionValue = (option) => option.uuid;
+const noOptionsMessage = () => translate('No projects');
+
+export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => {
+  // The Field `component` prop must be a stable reference. An inline
+  // arrow here would be a fresh function on every parent render, causing
+  // redux-form to unmount and re-mount the underlying AsyncPaginate
+  // each time. The Add Resource modal hits this path twice per
+  // org-change (once on customer_uuid prop change, again on isDisabled
+  // flip) and the resulting DOM thrash is what makes Playwright's
+  // SelectComponent click race in CI. useCallback closes over the props
+  // the inner closure depends on so we only re-create the renderer
+  // when those props actually change.
+  const { placeholder, customer_uuid, isDisabled, reactSelectProps } = props;
+  const renderField = useCallback(
+    (fieldProps) => (
       <AsyncPaginate
-        placeholder={props.placeholder || translate('Select project...')}
+        placeholder={placeholder || translate('Select project...')}
         loadOptions={(query, prevOptions, { page }) =>
-          projectAutocomplete(props.customer_uuid, query, prevOptions, page)
+          projectAutocomplete(customer_uuid, query, prevOptions, page)
         }
         defaultOptions
-        getOptionValue={(option) => option.uuid}
+        getOptionValue={getOptionValue}
         getOptionLabel={getOptionLabel as any}
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
-        noOptionsMessage={() => translate('No projects')}
+        noOptionsMessage={noOptionsMessage}
         isClearable={true}
-        isDisabled={props.isDisabled}
+        isDisabled={isDisabled}
         className="metronic-select-container"
         classNamePrefix="metronic-select"
         inputId="project-selector-input"
-        {...props.reactSelectProps}
+        {...reactSelectProps}
       />
-    )}
-  />
-);
+    ),
+    [placeholder, customer_uuid, isDisabled, reactSelectProps],
+  );
+  return (
+    <Field name="project" validate={props.validator} component={renderField} />
+  );
+};
