@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { Props as SelectProps } from 'react-select';
 import { BaseFieldProps, Field } from 'redux-form';
 
@@ -17,36 +17,54 @@ interface OrganizationAutocompleteProps extends FormField {
   onChange?(value: any): void;
 }
 
+const loadOptions = (query, prevOptions, { page }) =>
+  organizationAutocomplete(query, prevOptions, page, {
+    field: ['name', 'uuid', 'abbreviation'],
+    o: 'name',
+  });
+
+const getOptionValue = (option) => option.uuid;
+const getOptionLabel = (option) => option.name;
+
 export const OrganizationAutocomplete: FunctionComponent<
   OrganizationAutocompleteProps
-> = (props) => (
-  <Field
-    name={props.name || 'organization'}
-    validate={props.validator}
-    onChange={props.onChange}
-    component={(fieldProps) => (
+> = (props) => {
+  // The Field `component` prop must be a stable reference. An inline
+  // arrow here would be a fresh function on every parent render, causing
+  // redux-form to unmount and re-mount the underlying AsyncPaginate
+  // each time — destroying focus, ongoing API calls, and the inner
+  // `.metronic-select__control` DOM node. useCallback fixes this; props
+  // that the inner closure depends on are listed in the deps array.
+  const placeholder = props.placeholder || translate('Select organization...');
+  const noOptionsMessage =
+    props.noOptionsMessage || translate('No organizations');
+  const reactSelectProps = props.reactSelectProps;
+  const renderField = useCallback(
+    (fieldProps) => (
       <AsyncPaginate
-        placeholder={props.placeholder || translate('Select organization...')}
-        loadOptions={(query, prevOptions, { page }) =>
-          organizationAutocomplete(query, prevOptions, page, {
-            field: ['name', 'uuid', 'abbreviation'],
-            o: 'name',
-          })
-        }
+        placeholder={placeholder}
+        loadOptions={loadOptions}
         defaultOptions
-        getOptionValue={(option) => option.uuid}
-        getOptionLabel={(option) => option.name}
+        getOptionValue={getOptionValue}
+        getOptionLabel={getOptionLabel}
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
-        noOptionsMessage={() =>
-          props.noOptionsMessage || translate('No organizations')
-        }
+        noOptionsMessage={() => noOptionsMessage}
         isClearable={true}
         className="metronic-select-container"
         classNamePrefix="metronic-select"
         inputId="organization-selector-input"
-        {...props.reactSelectProps}
+        {...reactSelectProps}
       />
-    )}
-  />
-);
+    ),
+    [placeholder, noOptionsMessage, reactSelectProps],
+  );
+  return (
+    <Field
+      name={props.name || 'organization'}
+      validate={props.validator}
+      onChange={props.onChange}
+      component={renderField}
+    />
+  );
+};
