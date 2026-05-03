@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { notify } from 'reapop';
 
@@ -53,16 +54,22 @@ const showErrorResponse = (error: unknown, message?: string) => {
 
 export const useNotify = () => {
   const dispatch = useDispatch();
-  return {
-    showSuccess: (title: string, message?: string) =>
-      dispatch(showSuccess(title, message)),
-    showError: (message: string) => dispatch(showError(message)),
-    showInfo: (message: string) => dispatch(showInfo(message)),
-    showRedirectMessage: (title: string, message?: string) =>
-      dispatch(showRedirectMessage(title, message)),
-    showErrorResponse: (error: any, message: string | null = null) =>
-      dispatch(showErrorResponse(error, message)),
-  };
+  // Memoize the returned object so that callers using these handlers in
+  // useEffect / useCallback dependency arrays don't refire on every parent
+  // render. `dispatch` is stable across renders, so the deps array is empty.
+  return useMemo(
+    () => ({
+      showSuccess: (title: string, message?: string) =>
+        dispatch(showSuccess(title, message)),
+      showError: (message: string) => dispatch(showError(message)),
+      showInfo: (message: string) => dispatch(showInfo(message)),
+      showRedirectMessage: (title: string, message?: string) =>
+        dispatch(showRedirectMessage(title, message)),
+      showErrorResponse: (error: any, message: string | null = null) =>
+        dispatch(showErrorResponse(error, message)),
+    }),
+    [dispatch],
+  );
 };
 
 export const NotifyService = {

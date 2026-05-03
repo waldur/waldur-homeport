@@ -1,4 +1,4 @@
-import { ComponentType, ReactNode } from 'react';
+import { ComponentType, ReactNode, useMemo } from 'react';
 import { ModalProps } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -73,19 +73,33 @@ const confirmWith = (
 
 export const useModal = () => {
   const dispatch = useDispatch();
-  return {
-    openDialog: <T>(component: ComponentType<T>, props?: T & AppModalProps) => {
-      dispatch(openModalDialog(component, props));
-    },
-    closeDialog: (type: ModalAction = 'HIDE_MODAL') => {
-      dispatch(closeModalDialog(type));
-    },
-    confirm: (
-      title: ReactNode,
-      body: ReactNode,
-      options?: ConfirmationOptions,
-    ) => confirmWith(dispatch, title, body, options),
-  };
+  // Memoize the returned object so that callers using these handlers in
+  // useEffect / useCallback dependency arrays don't refire on every parent
+  // render. Critical for ModalRoot in particular: it's the immediate parent
+  // of every modal dialog rendered through this subsystem, so any extra
+  // re-renders here cascade into the dialog tree (and have been observed to
+  // tip latent React anti-patterns -- e.g. inline arrow `component` props on
+  // redux-form `Field` -- into visible flakes on slow CI runners).
+  // `dispatch` is stable across renders, so the deps array is just [dispatch].
+  return useMemo(
+    () => ({
+      openDialog: <T>(
+        component: ComponentType<T>,
+        props?: T & AppModalProps,
+      ) => {
+        dispatch(openModalDialog(component, props));
+      },
+      closeDialog: (type: ModalAction = 'HIDE_MODAL') => {
+        dispatch(closeModalDialog(type));
+      },
+      confirm: (
+        title: ReactNode,
+        body: ReactNode,
+        options?: ConfirmationOptions,
+      ) => confirmWith(dispatch, title, body, options),
+    }),
+    [dispatch],
+  );
 };
 
 export const ModalService = {
