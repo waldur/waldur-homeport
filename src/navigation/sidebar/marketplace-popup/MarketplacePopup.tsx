@@ -57,13 +57,33 @@ export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
     setReady(true);
   }, []);
 
+  // `formValues` from redux-form's getFormValues selector is a fresh object on
+  // every store update, so depending on it directly causes these effects to
+  // refire on every render -- including spurious ones triggered by ancestor
+  // re-renders, react-query subscriptions, or our own dispatches below
+  // (the second effect dispatches setMarketplaceFilter which updates store
+  // state that the form selector reads, completing a render-storm loop).
+  // Pluck the only fields actually consumed and depend on those primitive /
+  // small-object references instead.
+  const organization = formValues?.organization;
+  const project = formValues?.project;
+  const organizationUuid = organization?.uuid;
+  const projectCustomerUuid = project?.customer_uuid;
+
   // Clear project filter if organization is cleared
   useEffect(() => {
-    if (!formValues?.project || !formValues?.organization) return;
-    if (formValues.organization?.uuid !== formValues.project.customer_uuid) {
+    if (!project || !organization) return;
+    if (organizationUuid !== projectCustomerUuid) {
       dispatch(props.change('project', undefined));
     }
-  }, [formValues, props.change]);
+  }, [
+    organization,
+    project,
+    organizationUuid,
+    projectCustomerUuid,
+    dispatch,
+    props.change,
+  ]);
 
   useEffect(() => {
     if (!formValues) {
@@ -72,13 +92,15 @@ export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
     dispatch(
       setMarketplaceFilter({
         name: 'organization',
-        value: formValues.organization,
+        value: organization,
       }),
     );
-    dispatch(
-      setMarketplaceFilter({ name: 'project', value: formValues.project }),
-    );
-  }, [formValues, props.change]);
+    dispatch(setMarketplaceFilter({ name: 'project', value: project }));
+    // Depending on `organization`/`project` (the actual values dispatched)
+    // rather than the wrapping `formValues` reference avoids refiring on
+    // every render. The values themselves are still react-redux references
+    // that change only when the underlying form state genuinely changes.
+  }, [organization, project, dispatch, formValues]);
 
   const applyQuery = useCallback(
     debounce((value) => {
