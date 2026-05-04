@@ -1,4 +1,4 @@
-import { userInvitationsDelete } from 'waldur-js-client';
+import { Invitation, userInvitationsDelete } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -8,7 +8,7 @@ import { useUser } from '@/workspace/hooks';
 export const MultiDeleteAction = ({ rows, refetch }) => {
   const user = useUser();
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<Invitation, void>({
     rows,
     refetch,
     mutationFn: (row) => userInvitationsDelete({ path: { uuid: row.uuid } }),

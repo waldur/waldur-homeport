@@ -1,6 +1,9 @@
 import { ArrowDownIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { marketplaceProviderResourcesSetDownscaled } from 'waldur-js-client';
+import {
+  marketplaceProviderResourcesSetDownscaled,
+  Resource,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -36,7 +39,7 @@ export const MultiSetDownscaledAction = ({ rows, refetch }) => {
     }
   }, [supportedResources]);
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<Resource, void>({
     rows: supportedResources,
     refetch,
     mutationFn: (resource) =>

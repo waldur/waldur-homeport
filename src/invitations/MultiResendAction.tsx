@@ -1,7 +1,7 @@
 import { ShareIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { userInvitationsSend } from 'waldur-js-client';
+import { Invitation, userInvitationsSend } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -64,7 +64,7 @@ export const MultiResendAction = ({ rows, refetch }) => {
     return showTooltip(user, customer, project, rows);
   }, [user, customer, project, rows]);
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<Invitation, void>({
     rows,
     refetch,
     mutationFn: (row) => userInvitationsSend({ path: { uuid: row.uuid } }),

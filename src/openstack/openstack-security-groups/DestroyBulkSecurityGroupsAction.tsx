@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { openstackSecurityGroupsDestroy } from 'waldur-js-client';
+import {
+  OpenStackSecurityGroup,
+  openstackSecurityGroupsDestroy,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -11,7 +14,7 @@ export const DestroyBulkSecurityGroupsAction = ({ rows, refetch }) => {
     [rows],
   );
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<OpenStackSecurityGroup, void>({
     rows: filteredRows,
     refetch,
     mutationFn: (row) =>

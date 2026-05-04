@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { openstackFloatingIpsDestroy } from 'waldur-js-client';
+import {
+  OpenStackFloatingIp,
+  openstackFloatingIpsDestroy,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -40,7 +43,7 @@ export const DestroyBulkFloatingIpsAction = ({ rows, refetch }) => {
     </div>
   );
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<OpenStackFloatingIp, void>({
     rows: rowsData.rows,
     refetch,
     mutationFn: (row) =>

@@ -1,6 +1,6 @@
 import { LinkBreakIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { marketplaceResourcesUnlink } from 'waldur-js-client';
+import { marketplaceResourcesUnlink, Resource } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
@@ -20,7 +20,7 @@ export const MultiUnlinkAction = ({ rows, refetch }) => {
     [rows],
   );
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<Resource, void>({
     rows: permittedResources,
     refetch,
     mutationFn: (resource) =>

@@ -1,6 +1,9 @@
 import { CloudXIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { marketplaceProviderResourcesSetAsErred } from 'waldur-js-client';
+import {
+  marketplaceProviderResourcesSetAsErred,
+  Resource,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
@@ -28,7 +31,7 @@ export const MultiSetErredAction = ({ rows, refetch }) => {
     [rows, user],
   );
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<Resource, void>({
     rows: permittedResources,
     refetch,
     mutationFn: (resource) =>

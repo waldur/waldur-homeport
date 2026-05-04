@@ -1,7 +1,7 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { userInvitationsCancel } from 'waldur-js-client';
+import { Invitation, userInvitationsCancel } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -65,7 +65,7 @@ export const MultiCancelAction = ({ rows, refetch }) => {
     return showTooltip(user, customer, project, rows);
   }, [user, customer, project, rows]);
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<Invitation, void>({
     rows,
     refetch,
     mutationFn: (row) => userInvitationsCancel({ path: { uuid: row.uuid } }),

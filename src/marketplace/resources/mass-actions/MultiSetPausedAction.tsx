@@ -1,6 +1,9 @@
 import { PauseIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { marketplaceProviderResourcesSetPaused } from 'waldur-js-client';
+import {
+  marketplaceProviderResourcesSetPaused,
+  Resource,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -34,7 +37,7 @@ export const MultiSetPausedAction = ({ rows, refetch }) => {
     }
   }, [supportedResources]);
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<Resource, void>({
     rows: supportedResources,
     refetch,
     mutationFn: (resource) =>

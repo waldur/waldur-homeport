@@ -1,12 +1,15 @@
 import { CheckIcon } from '@phosphor-icons/react';
-import { marketplaceOrdersApproveByConsumer } from 'waldur-js-client';
+import {
+  marketplaceOrdersApproveByConsumer,
+  OrderDetails,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 export const ConsumerApproveAll = ({ orders, refetch }) => {
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<OrderDetails, void>({
     rows: orders,
     refetch,
     mutationFn: (order) =>

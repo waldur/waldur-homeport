@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Resource } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -15,7 +16,7 @@ export const VirtualMachineMultiAction = ({
   iconNode,
   refetch,
 }: {
-  rows;
+  rows: Resource[];
   validators;
   apiMethod;
   title;
@@ -41,7 +42,7 @@ export const VirtualMachineMultiAction = ({
     [vms, user, validators],
   );
 
-  const { mutate, isPending } = useBatchMutation<any, void>({
+  const { mutate, isPending } = useBatchMutation<Resource, void>({
     rows: validVms,
     refetch,
     mutationFn: (vm) => apiMethod(vm.resource_uuid),
