@@ -1,27 +1,59 @@
-import { FunctionComponent, useMemo } from 'react';
+import { XCircleIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   OpenStackPort,
   openstackPortsList,
   OpenstackPortsListData,
+  openstackPortsRetrieve,
 } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { ResourceRowActions } from '@/resource/actions/ResourceRowActions';
 import { ResourceSummary } from '@/resource/summary/ResourceSummary';
+import { setToggled } from '@/table/actions';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { ToolbarButton } from '@/table/ToolbarButton';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { CreatePortAction } from './actions/CreatePortAction';
 
+const TABLE_ID = 'openstack-ports';
+
 export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
+  const dispatch = useDispatch();
+  const { state, params } = useCurrentStateAndParams();
+  const router = useRouter();
+  const targetPortUuid = params?.object as string | undefined;
+
+  const clearPortFilter = useCallback(() => {
+    router.stateService.go(state.name, { ...params, object: null });
+  }, [router, state, params]);
+
+  // Fetch backend_id of target port so we can filter the table to exactly that port
+  const { data: targetPort } = useQuery({
+    queryKey: ['port-for-expand', targetPortUuid],
+    queryFn: () =>
+      openstackPortsRetrieve({
+        path: { uuid: targetPortUuid },
+        query: { field: ['uuid', 'backend_id'] },
+      }).then((res) => res.data),
+    enabled: Boolean(targetPortUuid),
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
+
   const filter = useMemo(
     (): OpenstackPortsListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
+      ...(targetPort?.backend_id ? { backend_id: targetPort.backend_id } : {}),
       field: [
         'uuid',
         'url',
@@ -50,17 +82,25 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
         'project_uuid',
         'backend_id',
       ],
-
       o: ['network_name'],
     }),
-    [resourceScope],
+    [resourceScope, targetPort?.backend_id],
   );
   const props = useTable({
-    table: 'openstack-ports',
+    table: TABLE_ID,
     fetchData: createFetcher(openstackPortsList),
     queryField: 'query',
     filter,
   });
+
+  useEffect(() => {
+    if (!targetPortUuid || !props.rows?.length) return;
+    const match = props.rows.find((r) => r.uuid === targetPortUuid);
+    if (match) {
+      dispatch(setToggled(TABLE_ID, { [targetPortUuid]: true }));
+    }
+  }, [props.rows, targetPortUuid, dispatch]);
+
   return (
     <Table<OpenStackPort>
       {...props}
@@ -127,7 +167,17 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       tableActions={
-        <CreatePortAction resource={resourceScope} refetch={props.fetch} />
+        <>
+          {targetPortUuid && (
+            <ToolbarButton
+              iconNode={<XCircleIcon weight="bold" />}
+              title={translate('Show all ports')}
+              onClick={clearPortFilter}
+              className="me-2"
+            />
+          )}
+          <CreatePortAction resource={resourceScope} refetch={props.fetch} />
+        </>
       }
       rowActions={({ row }) => (
         <ResourceRowActions resource={row} refetch={props.fetch} />

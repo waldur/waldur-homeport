@@ -8,6 +8,7 @@ import {
   remoteWaldurApiPullOfferingUsers,
   remoteWaldurApiPushProjectData,
 } from 'waldur-js-client';
+import { client } from 'waldur-js-client/client.gen';
 
 import { translate } from '@/i18n';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
@@ -19,6 +20,13 @@ import {
 } from '@/workspace/selectors';
 
 import { ActionsDropdown } from '../../actions/ActionsDropdown';
+
+/** POST /api/remote-waldur-api/pull_offering_invoices/{uuid}/ — not yet in published waldur-js-client exports. */
+const postPullOfferingInvoices = (uuid: string) =>
+  client.post({
+    url: '/api/remote-waldur-api/pull_offering_invoices/{uuid}/',
+    path: { uuid },
+  });
 
 export const RemoteActions = ({ offering }) => {
   const user = useUser();
@@ -103,6 +111,18 @@ export const RemoteActions = ({ offering }) => {
     errorMessage: translate('Unable to synchronize offering orders.'),
   });
 
+  const { mutate: pullRemoteOfferingInvoices } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () => postPullOfferingInvoices(offering.uuid),
+    successMessage: translate(
+      'Offering invoices synchronization has been scheduled.',
+    ),
+    errorMessage: translate('Unable to synchronize offering invoices.'),
+  });
+
   const { mutate: pullRemoteOfferingRobotAccounts } = useManagedMutation<
     any,
     any,
@@ -143,6 +163,10 @@ export const RemoteActions = ({ offering }) => {
     {
       label: translate('Pull orders'),
       handler: () => pullRemoteOfferingOrders(),
+    },
+    {
+      label: translate('Pull offering invoices'),
+      handler: () => pullRemoteOfferingInvoices(),
     },
     {
       label: translate('Push project data'),

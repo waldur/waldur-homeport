@@ -198,6 +198,12 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         },
       };
 
+    case actions.SET_TOGGLED:
+      return {
+        ...state,
+        toggled: action.payload.toggled,
+      };
+
     case actions.SELECT_ROW: {
       const row = action.payload.row;
       const index = state.selectedRows.findIndex(

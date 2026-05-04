@@ -69,6 +69,14 @@ const consoleFields: OfferingEditField[] = [
 // Network fields
 const networkFields: OfferingEditField[] = [
   {
+    label: translate('Enable LBaaS'),
+    description: translate(
+      'Enable Load Balancer as a Service (Octavia) for this offering. When enabled, the Load balancers tab will be visible in the VPC Networking section.',
+    ),
+    key: 'plugin_options.lbaas_enabled',
+    component: AwesomeCheckboxField,
+  },
+  {
     label: translate('Default DNS servers'),
     description: translate(
       'Default value for new subnets DNS name servers. Should be defined as list.',

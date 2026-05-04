@@ -168,6 +168,7 @@ export function TableProvider<TData = any>({
         hideRefresh: props.hideRefresh ?? false,
         hideTitle: props.hideTitle ?? false,
         hideIfEmpty: props.hideIfEmpty ?? false,
+        hideExpandToggle: props.hideExpandToggle ?? false,
         placeholderHasRetry: props.placeholderHasRetry ?? true,
       },
 

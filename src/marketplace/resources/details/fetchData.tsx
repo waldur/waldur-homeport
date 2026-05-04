@@ -23,6 +23,13 @@ import { getTabs } from '@/resource/tabs/registry';
 import { getResourceAccessEndpoints } from '@/resource/utils';
 import { SLURM_PLUGIN } from '@/slurm/constants';
 
+function isOfferingLbaasEnabled(offering: PublicOfferingDetails): boolean {
+  return Boolean(
+    (offering.plugin_options as { lbaas_enabled?: boolean } | undefined)
+      ?.lbaas_enabled,
+  );
+}
+
 export const getResourceTabs = ({
   resource,
   offering,
@@ -145,7 +152,25 @@ export const getResourceTabs = ({
   }
 
   if (scope) {
-    tabs.push(...(getTabs(scope.resource_type) as any));
+    const resourceTabs = getTabs(scope.resource_type) as any[];
+    if (
+      resource.offering_type === TENANT_TYPE &&
+      !isOfferingLbaasEnabled(offering)
+    ) {
+      const filteredTabs = resourceTabs.map((tab) =>
+        tab.key === 'networking'
+          ? {
+              ...tab,
+              children: tab.children?.filter(
+                (child: any) => child.key !== 'load_balancers',
+              ),
+            }
+          : tab,
+      );
+      tabs.push(...filteredTabs);
+    } else {
+      tabs.push(...resourceTabs);
+    }
   }
 
   if (lexisLinksCount) {

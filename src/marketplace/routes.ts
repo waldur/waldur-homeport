@@ -664,11 +664,12 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'marketplace-resource-details',
-    url: '/resource-details/:resource_uuid?tab&team_tab',
+    url: '/resource-details/:resource_uuid?tab&team_tab&object',
     parent: 'marketplace-resource-container',
     params: {
       tab: { dynamic: true },
       team_tab: { dynamic: true },
+      object: { dynamic: true },
     },
     component: lazyComponent(() =>
       import('@/marketplace/resources/details/ResourceDetailsPage').then(

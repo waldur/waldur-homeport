@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 
 import { NumberField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import {
   DefaultOfferingEditPanel,
@@ -15,6 +16,14 @@ export const OpenStackPluginOptionsForm: FunctionComponent<
     () =>
       (
         [
+          {
+            label: translate('Enable LBaaS'),
+            key: 'plugin_options.lbaas_enabled',
+            component: AwesomeCheckboxField,
+            description: translate(
+              'Enable Load Balancer as a Service (Octavia) for this offering. When enabled, the Load balancers tab will be visible in the VPC Networking section.',
+            ),
+          },
           {
             label: translate('Default internal network MTU'),
             key: 'plugin_options.default_internal_network_mtu',
