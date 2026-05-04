@@ -62,7 +62,7 @@ const NotificationTabs = ({
             <Field
               name={`${name}.content`}
               component={TextField as any}
-              rows={template.path.endsWith('subject.txt') ? 1 : 10}
+              rows={template.path.endsWith('subject.txt') ? 4 : 10}
               type="text"
               placeholder={template.original_content}
               validate={required}
