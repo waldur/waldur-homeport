@@ -13,6 +13,8 @@ export const getStateMessages = (translate) => ({
   start: translate('Starting'),
   stop: translate('Stopping'),
   restart: translate('Restarting'),
+  rescue: translate('Rescuing'),
+  unrescue: translate('Unrescuing'),
   update_security_groups: translate('Updating security groups'),
   backup: translate('Backing up'),
   create_backup_schedule: translate('Creating a backup schedule'),
