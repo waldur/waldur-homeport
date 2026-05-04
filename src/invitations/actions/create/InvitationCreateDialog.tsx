@@ -28,7 +28,6 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
   const {
     checkDuplicates,
     createInvitations,
-    finish,
     roles,
     defaultRole,
     defaultProject,
@@ -38,11 +37,6 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
   const [_duplicateEmails, setDuplicateEmails] = useState<string[]>([]);
   const [isCheckingDuplicates, setIsCheckingDuplicates] = useState(false);
   const rowsSnapshotRef = useRef<string>('');
-
-  const submit = useCallback(
-    (formData) => createInvitations(formData).then(() => finish()),
-    [createInvitations, finish],
-  );
 
   const handleContinueClick = useCallback(
     async (formApi: {
@@ -161,7 +155,7 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
 
   return (
     <Form
-      onSubmit={submit}
+      onSubmit={createInvitations}
       initialValues={initialValues}
       mutators={{ ...arrayMutators }}
       render={({ handleSubmit, submitting, valid, form }) => (

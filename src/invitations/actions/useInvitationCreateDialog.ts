@@ -4,17 +4,12 @@ import { userInvitationsCheckDuplicates } from 'waldur-js-client/sdk.gen';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
-import { useNotify } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 import { GroupInvitationFormData, InvitationContext } from './types';
 
 export const useInvitationCreateDialog = (context: InvitationContext) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-
-  const { closeDialog } = useModal();
-
   const defaultProject = useMemo(
     () =>
       context.roleTypes?.includes('project') &&
@@ -110,69 +105,42 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     [getScopeForRow],
   );
 
-  const createInvitations = useCallback(
-    (formData: GroupInvitationFormData) => {
-      return new Promise((resolve, reject) => {
-        try {
-          if (!formData.rows?.length) return;
-
-          // Filter out rows that don't have valid role_project data
-          const validRows = formData.rows.filter(
-            (row) => row.role_project && row.role_project.role && row.email,
-          );
-
-          if (validRows.length === 0) {
-            reject(new Error('No valid invitations to send'));
-            return;
-          }
-
-          const promises = validRows.map((row) => {
-            let scope;
-            if (row.role_project.role.content_type === 'project') {
-              scope = row.role_project.project?.url;
-            } else if (row.role_project.role.content_type === 'customer') {
-              scope = context.customer?.url;
-            } else if (context.scope) {
-              scope = context.scope.url;
-            }
-            return userInvitationsCreate({
-              body: {
-                role: row.role_project.role.uuid,
-                email: row.email,
-                extra_invitation_text: formData.extra_invitation_text,
-                scope,
-              },
-            });
-          });
-          Promise.all(promises)
-            .then(() => {
-              showSuccess(
-                translate('All invitation emails have been successfully sent.'),
-                translate('Invitation emails sent'),
-              );
-              if (context.refetch) {
-                context.refetch();
-              }
-              resolve(true);
-            })
-            .catch((e) => {
-              showErrorResponse(e, translate('Unable to send invitations.'));
-              reject(e);
-            });
-        } catch (e) {
-          reject(e);
+  const { mutateAsync: createInvitations } = useManagedMutation<
+    any[],
+    any,
+    GroupInvitationFormData
+  >({
+    mutationFn: (formData) => {
+      const promises = formData.rows.map((row) => {
+        let scope;
+        if (row.role_project.role.content_type === 'project') {
+          scope = row.role_project.project?.url;
+        } else if (row.role_project.role.content_type === 'customer') {
+          scope = context.customer?.url;
+        } else if (context.scope) {
+          scope = context.scope.url;
         }
+        return userInvitationsCreate({
+          body: {
+            role: row.role_project.role.uuid,
+            email: row.email,
+            extra_invitation_text: formData.extra_invitation_text,
+            scope,
+          },
+        });
       });
+      return Promise.all(promises);
     },
-    [context],
-  );
-
-  const finish = () => closeDialog();
+    successMessage: translate(
+      'All invitation emails have been successfully sent.',
+    ),
+    errorMessage: translate('Unable to send invitations.'),
+    refetch: context.refetch,
+  });
 
   return {
     checkDuplicates,
     createInvitations,
-    finish,
     roles,
     defaultRole,
     defaultProject,
