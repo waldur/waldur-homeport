@@ -87,9 +87,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
           const response = await userInvitationsCheckDuplicates({
             body: { scope, invitations },
           });
-          const data = response.data as {
-            duplicates?: Array<{ email: string; role: string }>;
-          };
+          const data = response.data;
           if (data?.duplicates?.length) {
             duplicatePairs.push(
               ...data.duplicates.map((d) => ({

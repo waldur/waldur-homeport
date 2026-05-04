@@ -1,10 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import {
-  marketplaceStatsOrderStatsRetrieve,
-  OrderStatsResponse,
-} from 'waldur-js-client';
+import { marketplaceStatsOrderStatsRetrieve } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 
@@ -36,7 +33,7 @@ export const useOrdersStats = (options: UseOrdersStatsOptions = {}) => {
         signal,
       });
 
-      return response.data as OrderStatsResponse;
+      return response.data;
     },
     staleTime: STALE_TIME,
   });

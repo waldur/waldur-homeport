@@ -80,7 +80,7 @@ export const UpdateAffiliatedOrganizationsDialog: FunctionComponent<
       const response = await projectsRetrieve({
         path: { uuid: project.uuid },
       });
-      dispatch(setCurrentProject(response.data as unknown as Project));
+      dispatch(setCurrentProject(response.data));
     },
   });
 

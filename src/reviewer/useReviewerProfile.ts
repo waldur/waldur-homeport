@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { ReviewerProfile, reviewerProfilesMeRetrieve } from 'waldur-js-client';
+import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
 export const useReviewerProfile = () => {
   const {
@@ -12,7 +12,7 @@ export const useReviewerProfile = () => {
     queryFn: async () => {
       try {
         const response = await reviewerProfilesMeRetrieve();
-        return response.data as ReviewerProfile;
+        return response.data;
       } catch (e) {
         if (e.response?.status === 404) {
           return null;

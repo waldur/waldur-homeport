@@ -29,7 +29,7 @@ export const IssueCommentsContainer: FC<IssueCommentsContainerProps> = ({
       const response = await supportCommentsList({
         query: { issue: issue.url },
       });
-      return sortComments(response.data as Comment[]);
+      return sortComments(response.data);
     },
     enabled: !!issue.url,
   });

@@ -4,7 +4,6 @@ import {
   callReviewerPoolsList,
   proposalReviewsList,
   reviewerProfilesMeRetrieve,
-  ReviewerProfile,
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@/core/api';
@@ -20,7 +19,7 @@ export const ReviewStatsWidgets: FC = () => {
     queryFn: async () => {
       try {
         const response = await reviewerProfilesMeRetrieve();
-        return response.data as ReviewerProfile;
+        return response.data;
       } catch (error) {
         if ((error as any)?.response?.status === 404) {
           return null;

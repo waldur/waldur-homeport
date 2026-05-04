@@ -14,7 +14,6 @@ import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 
 import { CallTabs } from '../details/CallTabs';
-import { Call } from '../types';
 import { CallUpdateHero } from '../update/CallUpdateHero';
 import { ReviewerPoolContainer } from '../update/reviewer-pool/ReviewerPoolContainer';
 import { useCallBreadcrumbItems } from '../utils';
@@ -91,7 +90,7 @@ export const CallManageContainer: FunctionComponent = () => {
     queryKey: ['CallManageContainer', call_uuid],
     queryFn: () =>
       proposalProtectedCallsRetrieve({ path: { uuid: call_uuid } }).then(
-        (r) => r.data as any as Call,
+        (r) => r.data,
       ),
     refetchOnWindowFocus: false,
   });

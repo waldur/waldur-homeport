@@ -42,7 +42,7 @@ const fetchMatchingConfig = async (
     const response = await proposalProtectedCallsMatchingConfigurationRetrieve({
       path: { uuid: callUuid },
     });
-    return response.data as unknown as MatchingConfig;
+    return response.data;
   } catch {
     // Return default config if endpoint not available yet
     return DEFAULT_CONFIG;

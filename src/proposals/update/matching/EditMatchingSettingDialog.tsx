@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { FC, useCallback, useMemo } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import {
   PatchedMatchingConfigurationRequest,
   proposalProtectedCallsMatchingConfigurationPartialUpdate,
@@ -9,7 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { NumberField, SelectField, SubmitButton, FieldError } from '@/form';
+import { FieldError, NumberField, SelectField, SubmitButton } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -19,10 +19,9 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 
 import {
-  EditMatchingSettingProps,
-  MatchingConfig,
   AFFINITY_METHOD_LABELS,
   ALGORITHM_LABELS,
+  EditMatchingSettingProps,
 } from './types';
 
 interface Props {
@@ -33,7 +32,7 @@ const fetchMatchingConfiguration = async (callUuid: string) => {
   const response = await proposalProtectedCallsMatchingConfigurationRetrieve({
     path: { uuid: callUuid },
   });
-  return response.data as unknown as MatchingConfig;
+  return response.data;
 };
 
 // Field labels for display

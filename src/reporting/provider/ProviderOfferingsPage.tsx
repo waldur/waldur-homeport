@@ -7,7 +7,6 @@ import {
   marketplaceProviderOfferingsList,
   marketplaceStatsProviderOfferingsRetrieve,
   ProviderOffering,
-  ProviderOfferingStats,
 } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -131,7 +130,7 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
       const response = await marketplaceStatsProviderOfferingsRetrieve({
         query: { provider_uuid: providerUuid },
       });
-      return response.data as ProviderOfferingStats;
+      return response.data;
     },
     enabled: !!providerUuid,
   });

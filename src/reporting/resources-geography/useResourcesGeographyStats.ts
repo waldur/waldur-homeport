@@ -3,7 +3,6 @@ import {
   marketplaceStatsCountActiveResourcesGroupedByOfferingCountryList,
   marketplaceStatsCountActiveResourcesGroupedByOrganizationGroupList,
   marketplaceStatsResourcesGeographySummaryRetrieve,
-  ResourcesGeographySummary as ApiResourcesGeographySummary,
 } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
@@ -34,7 +33,7 @@ async function fetchResourcesGeographySummary(
   const response = await marketplaceStatsResourcesGeographySummaryRetrieve({
     signal,
   });
-  const data = response.data as ApiResourcesGeographySummary;
+  const data = response.data;
   return {
     totalResources: data.total_resources,
     countriesWithResources: data.countries_count,

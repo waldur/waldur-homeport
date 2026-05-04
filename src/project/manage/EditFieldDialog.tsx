@@ -2,7 +2,6 @@ import { pick } from 'lodash-es';
 import { Field, Form } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsPartialUpdate } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
 
 import { formatISODate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -65,7 +64,7 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
     successMessage: translate('Project has been updated.'),
     errorMessage: translate('Project could not be updated.'),
     onSuccess: (response: any) => {
-      dispatch(setCurrentProject(response.data as any as Project));
+      dispatch(setCurrentProject(response.data));
     },
   });
 

@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import {
-  marketplaceStatsResourceUsageByCreatorAffiliationList,
-  ResourceUsageByAffiliation,
-} from 'waldur-js-client';
+import { marketplaceStatsResourceUsageByCreatorAffiliationList } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -18,7 +15,7 @@ export function useUsageByAffiliation() {
         await marketplaceStatsResourceUsageByCreatorAffiliationList({
           signal,
         });
-      return response.data as ResourceUsageByAffiliation[];
+      return response.data;
     },
     staleTime: STALE_TIME,
   });

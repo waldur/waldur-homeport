@@ -1,8 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import {
-  maintenanceAnnouncementsMaintenanceStatsRetrieve,
-  MaintenanceStatsResponse,
-} from 'waldur-js-client';
+import { maintenanceAnnouncementsMaintenanceStatsRetrieve } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 
@@ -30,7 +27,7 @@ export const useMaintenanceStatsAggregated = (
         signal,
       });
 
-      return response.data as MaintenanceStatsResponse;
+      return response.data;
     },
     staleTime: STALE_TIME,
   });

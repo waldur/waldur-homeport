@@ -36,7 +36,7 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
         path: { uuid: policyUuid },
       }),
     onSuccess: (response) => {
-      setDryRunResult(response.data as SlurmPolicyDryRunResponse);
+      setDryRunResult(response.data);
       setEvaluateResult(null);
     },
   });
@@ -47,7 +47,7 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
         path: { uuid: policyUuid },
       }),
     onSuccess: (response) => {
-      setEvaluateResult(response.data as SlurmPolicyEvaluateResponse);
+      setEvaluateResult(response.data);
       setDryRunResult(null);
       // Invalidate related queries so status summary and logs refresh
       queryClient.invalidateQueries({

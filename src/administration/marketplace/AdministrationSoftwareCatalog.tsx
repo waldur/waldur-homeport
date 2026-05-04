@@ -2,12 +2,12 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
+import type { SoftwareCatalog } from 'waldur-js-client';
 import {
   marketplaceSoftwareCatalogsList,
   marketplaceSoftwareCatalogsUpdateCatalog,
   overrideSettingsRetrieve,
 } from 'waldur-js-client';
-import type { SoftwareCatalog } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -55,7 +55,6 @@ const UpdateCatalogButton = ({
     mutationFn: () =>
       marketplaceSoftwareCatalogsUpdateCatalog({
         path: { uuid: row.uuid },
-        body: { name: row.name, version: row.version },
       }),
     successMessage: translate('Catalog update started.'),
     errorMessage: translate('Unable to update catalog.'),

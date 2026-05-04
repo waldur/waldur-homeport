@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { Invitation, User, userInvitationsList } from 'waldur-js-client';
+import { User, userInvitationsList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -23,7 +23,7 @@ export const ActiveInvitationsList: FunctionComponent<
           email_exact: user.email,
         },
       });
-      return response.data as Invitation[];
+      return response.data;
     },
   });
 

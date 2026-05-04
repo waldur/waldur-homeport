@@ -330,7 +330,7 @@ export const EditEndDateDialog = ({
             [resolve.name]: formatISODate(endDate),
           },
         });
-        dispatch(setCurrentProject(project.data as any as Project));
+        dispatch(setCurrentProject(project.data));
 
         const title = translate(
           'Project end date was successfully updated to {date}',

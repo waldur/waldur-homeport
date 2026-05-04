@@ -40,7 +40,7 @@ export function useUsageByCustomer() {
       const response = await marketplaceStatsResourceUsageByCustomerList({
         signal,
       });
-      return response.data as ResourceUsageByCustomer[];
+      return response.data;
     },
     staleTime: STALE_TIME,
   });

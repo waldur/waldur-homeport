@@ -1,10 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import {
-  OpenStackInstance,
-  openstackInstancesRetrieve,
-  Resource,
-} from 'waldur-js-client';
+import { openstackInstancesRetrieve, Resource } from 'waldur-js-client';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -69,7 +65,7 @@ export const PlacementMapBatchDialog: FC<Props> = ({ resolve }) => {
           openstackInstancesRetrieve({
             path: { uuid: row.resource_uuid },
             query: { field: SPARSE_FIELDS },
-          }).then((res) => res.data as OpenStackInstance),
+          }).then((res) => res.data),
         ),
       ),
     staleTime: FAST_STALE_TIME,

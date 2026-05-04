@@ -2,12 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import {
   marketplaceStatsCountProjectsGroupedByProviderAndIndustryFlagList,
   marketplaceStatsCountProjectsGroupedByProviderAndOecdList,
+  marketplaceStatsProjectClassificationSummaryRetrieve,
   marketplaceStatsProjectsLimitsGroupedByIndustryFlagRetrieve,
   marketplaceStatsProjectsLimitsGroupedByOecdRetrieve,
   marketplaceStatsProjectsUsagesGroupedByIndustryFlagRetrieve,
   marketplaceStatsProjectsUsagesGroupedByOecdRetrieve,
-  marketplaceStatsProjectClassificationSummaryRetrieve,
-  ProjectClassificationSummary as ApiProjectClassificationSummary,
 } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
@@ -61,7 +60,7 @@ async function fetchProjectClassificationSummary(
   const response = await marketplaceStatsProjectClassificationSummaryRetrieve({
     signal,
   });
-  const data = response.data as ApiProjectClassificationSummary;
+  const data = response.data;
   return {
     totalProjects: data.total_projects,
     academicProjects: data.academic_projects,

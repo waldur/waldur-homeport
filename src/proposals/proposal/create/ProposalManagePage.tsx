@@ -15,7 +15,6 @@ import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { PageBarProvider } from '@/marketplace/context';
 import { useTitle } from '@/navigation/title';
-import { Proposal } from '@/proposals/types';
 import { useUser } from '@/workspace/hooks';
 
 import { ProposalDetails } from '../ProposalDetails';
@@ -42,7 +41,7 @@ export const ProposalManagePage = () => {
     queryFn: () =>
       proposalProposalsRetrieve({
         path: { uuid: proposal_uuid },
-      }).then((response) => response.data as any as Proposal),
+      }).then((response) => response.data),
 
     refetchOnWindowFocus: false,
   });

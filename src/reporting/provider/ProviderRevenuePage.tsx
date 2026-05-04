@@ -3,10 +3,7 @@ import { FC, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import {
-  marketplaceServiceProvidersRevenueList,
-  ServiceProviderRevenues,
-} from 'waldur-js-client';
+import { marketplaceServiceProvidersRevenueList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -29,7 +26,7 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
       const response = await marketplaceServiceProvidersRevenueList({
         path: { uuid: providerUuid },
       });
-      return response.data as ServiceProviderRevenues[];
+      return response.data;
     },
     enabled: !!providerUuid,
   });

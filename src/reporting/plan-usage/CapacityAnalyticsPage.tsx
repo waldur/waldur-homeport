@@ -2,10 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  marketplacePlansUsageStatsList,
-  PlanUsageResponse,
-} from 'waldur-js-client';
+import { marketplacePlansUsageStatsList } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -58,7 +55,7 @@ export const CapacityAnalyticsPage: FC = () => {
       const response = await marketplacePlansUsageStatsList({
         query: filter,
       });
-      return response.data as PlanUsageResponse[];
+      return response.data;
     },
   });
 

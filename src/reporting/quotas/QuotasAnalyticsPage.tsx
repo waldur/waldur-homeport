@@ -244,9 +244,9 @@ export const QuotasAnalyticsPage: FC = () => {
       const response = await customerQuotasList({
         query: {
           quota_name: formValues?.quota_name || 'nc_resource_count',
-        } as any,
+        },
       });
-      return response.data as CustomerQuota[];
+      return response.data;
     },
   });
 

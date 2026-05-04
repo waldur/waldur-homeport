@@ -2,7 +2,7 @@ import { ArrowRightIcon, UserIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
-import { reviewerProfilesMeRetrieve, ReviewerProfile } from 'waldur-js-client';
+import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
@@ -27,7 +27,7 @@ export const ReviewerProfileSummaryCard: FC<
     queryFn: async () => {
       try {
         const response = await reviewerProfilesMeRetrieve();
-        const profileData = response.data as ReviewerProfile;
+        const profileData = response.data;
         onProfileStatus?.(true);
         return profileData;
       } catch (error) {

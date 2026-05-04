@@ -42,7 +42,7 @@ export const EditProjectMembershipRestrictionsDialog = reduxForm<
   const { field } = resolve;
   const config = fieldConfig[field];
 
-  const { mutate, isPending } = useManagedMutation<any, any, FormData>({
+  const { mutate, isPending } = useManagedMutation<Project, any, FormData>({
     mutationFn: (values) => {
       // Ensure value is always an array (defensive check)
       let arrayValue: string[];
@@ -62,14 +62,12 @@ export const EditProjectMembershipRestrictionsDialog = reduxForm<
         body: {
           [field]: arrayValue,
         },
-      });
+      }).then((response) => response.data);
     },
     successMessage: translate('Membership restrictions updated successfully.'),
     errorMessage: translate('Failed to update membership restrictions.'),
-    onSuccess: (response) => {
-      if (response.data) {
-        dispatch(setCurrentProject(response.data as unknown as Project));
-      }
+    onSuccess: (project) => {
+      dispatch(setCurrentProject(project));
     },
   });
 

@@ -6,7 +6,6 @@ import { getFormValues } from 'redux-form';
 import {
   marketplaceResourcesList,
   marketplaceStatsProviderResourcesRetrieve,
-  ProviderResourceStats,
   Resource,
 } from 'waldur-js-client';
 
@@ -123,7 +122,7 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
       const response = await marketplaceStatsProviderResourcesRetrieve({
         query: { provider_uuid: providerUuid },
       });
-      return response.data as ProviderResourceStats;
+      return response.data;
     },
     enabled: !!providerUuid,
   });

@@ -143,11 +143,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
           body,
         });
 
-        const data = response.data as {
-          suggestions_created: number;
-          reviewers_evaluated: number;
-          source_used: string;
-        };
+        const data = response.data;
 
         resolve.refetch();
         showSuccess(

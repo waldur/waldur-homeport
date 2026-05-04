@@ -477,8 +477,8 @@ export function buildStorageTimeseriesOptions(
   ];
 
   const allSeriesData = [
-    ...projectSeries.map((s) => s.data as number[]),
-    ...userSeries.map((s) => s.data as number[]),
+    ...projectSeries.map((s) => s.data),
+    ...userSeries.map((s) => s.data),
   ];
   const zoom = computeDataZoomRange(labels, allSeriesData);
 
@@ -765,7 +765,7 @@ export function buildStorageProjectTimeseriesOptions(
   ];
   const zoom = computeDataZoomRange(
     labels,
-    allSeries.map((s) => s.data as number[]),
+    allSeries.map((s) => s.data),
   );
 
   return {

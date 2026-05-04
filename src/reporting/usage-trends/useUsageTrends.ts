@@ -1,17 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import {
-  AggregatedUsageTrend,
-  marketplaceStatsAggregatedUsageTrendsList,
-} from 'waldur-js-client';
+import { marketplaceStatsAggregatedUsageTrendsList } from 'waldur-js-client';
 
 import { LONG_STALE_TIME } from '@/core/constants';
 
 import { MonthlyUsageData } from './types';
 import {
-  calculateYearOverYearComparison,
   calculateGrowthStats,
+  calculateYearOverYearComparison,
   getAvailableYears,
 } from './utils';
 
@@ -36,7 +33,7 @@ export const useUsageTrends = (options: UseUsageTrendsOptions = {}) => {
       });
 
       // Transform to our format
-      const data = response.data as AggregatedUsageTrend[];
+      const data = response.data;
       return data.map(
         (item): MonthlyUsageData => ({
           period: item.period,

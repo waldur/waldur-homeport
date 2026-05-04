@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import {
-  marketplaceStatsResourceUsageByOrganizationTypeList,
-  ResourceUsageByOrgType,
-} from 'waldur-js-client';
+import { marketplaceStatsResourceUsageByOrganizationTypeList } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -18,7 +15,7 @@ export function useUsageByOrgType() {
         await marketplaceStatsResourceUsageByOrganizationTypeList({
           signal,
         });
-      return response.data as ResourceUsageByOrgType[];
+      return response.data;
     },
     staleTime: STALE_TIME,
   });

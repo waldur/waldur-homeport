@@ -25,7 +25,7 @@ export const useIssueAttachments = (issueUrl: string) => {
       const response = await supportAttachmentsList({
         query: { issue: issueUrl },
       });
-      return sortAttachments(response.data as Attachment[]);
+      return sortAttachments(response.data);
     },
     enabled: !!issueUrl,
   });

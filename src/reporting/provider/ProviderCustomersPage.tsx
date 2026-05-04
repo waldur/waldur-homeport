@@ -3,10 +3,7 @@ import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import {
-  marketplaceStatsProviderCustomersRetrieve,
-  ProviderCustomerStats,
-} from 'waldur-js-client';
+import { marketplaceStatsProviderCustomersRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -31,7 +28,7 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
       const response = await marketplaceStatsProviderCustomersRetrieve({
         query: { provider_uuid: providerUuid },
       });
-      return response.data as ProviderCustomerStats;
+      return response.data;
     },
     enabled: !!providerUuid,
   });

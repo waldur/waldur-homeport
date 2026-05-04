@@ -56,7 +56,7 @@ export function useProvisioningStats(
         },
         signal,
       });
-      return response.data as OrderStatsResponse;
+      return response.data;
     },
     staleTime: STALE_TIME,
   });

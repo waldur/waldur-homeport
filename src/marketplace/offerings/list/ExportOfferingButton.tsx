@@ -56,7 +56,7 @@ export const ExportOfferingButton = ({ row }: ExportOfferingButtonProps) => {
       });
 
       if (response.data) {
-        const exportData = response.data as OfferingExportResponse;
+        const exportData = response.data;
 
         // Create YAML content from the structured export data
         const yamlContent = generateYamlFromExportData(exportData);

@@ -109,11 +109,7 @@ export const IssueSyncButton = ({
   const staffOrSupport = useSelector(isStaffOrSupport);
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
-    mutationFn: () =>
-      supportIssuesSync({
-        path: { uuid: issue.uuid },
-        body: {} as any,
-      }),
+    mutationFn: () => supportIssuesSync({ path: { uuid: issue.uuid } }),
     successMessage: translate('Issue synchronized successfully.'),
     errorMessage: translate('Unable to sync issue.'),
     refetch,

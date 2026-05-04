@@ -9,5 +9,5 @@ export const fetchDataAccessVisibility = async (
   const response = await usersDataAccessRetrieve({
     path: { uuid: userUuid },
   });
-  return response.data as DataAccessVisibility;
+  return response.data;
 };

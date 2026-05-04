@@ -15,7 +15,6 @@ import { RoleEnum } from '@/permissions/enums';
 
 import { CallTabs } from '../details/CallTabs';
 import { TeamSection } from '../team/TeamSection';
-import { Call } from '../types';
 import { useCallBreadcrumbItems } from '../utils';
 
 import { CallUpdateHero } from './CallUpdateHero';
@@ -133,7 +132,7 @@ export const CallUpdateContainer: FunctionComponent = () => {
 
     queryFn: () =>
       proposalProtectedCallsRetrieve({ path: { uuid: call_uuid } }).then(
-        (r) => r.data as any as Call,
+        (r) => r.data,
       ),
 
     refetchOnWindowFocus: false,

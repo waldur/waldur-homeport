@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import {
-  OpenStackInstanceAggregate,
+  MarketplaceStatsOpenstackInstancesAggregateListData,
   OpenStackInstanceAggregateGroupByEnum,
   marketplaceStatsOpenstackInstancesAggregateList,
   marketplaceStatsOpenstackInstancesList,
@@ -13,31 +13,34 @@ export const openstackInstancesFetcher = createFetcher(
   marketplaceStatsOpenstackInstancesList,
 );
 
-const fetchAggregate = async (
-  groupBy: OpenStackInstanceAggregateGroupByEnum,
-  filter?: Record<string, any>,
-): Promise<OpenStackInstanceAggregate[]> => {
-  const result = await marketplaceStatsOpenstackInstancesAggregateList({
-    query: { group_by: groupBy, ...filter },
-  });
-  return result.data as OpenStackInstanceAggregate[];
-};
-
 export const useOpenstackInstancesAggregate = (
   groupBy: OpenStackInstanceAggregateGroupByEnum,
-  filter?: Record<string, any>,
+  filter?: Omit<
+    MarketplaceStatsOpenstackInstancesAggregateListData['query'],
+    'group_by'
+  >,
 ) =>
   useQuery({
     queryKey: ['openstackInstancesAggregate', groupBy, filter],
-    queryFn: () => fetchAggregate(groupBy, filter),
+    queryFn: () =>
+      marketplaceStatsOpenstackInstancesAggregateList({
+        query: { group_by: groupBy, ...filter },
+      }).then((response) => response.data),
     staleTime: STALE_TIME,
   });
 
-export const useOpenstackInstancesSummary = (filter?: Record<string, any>) =>
+export const useOpenstackInstancesSummary = (
+  filter?: Omit<
+    MarketplaceStatsOpenstackInstancesAggregateListData['query'],
+    'group_by'
+  >,
+) =>
   useQuery({
     queryKey: ['openstackInstancesSummary', filter],
     queryFn: async () => {
-      const data = await fetchAggregate('runtime_state', filter);
+      const data = await marketplaceStatsOpenstackInstancesAggregateList({
+        query: { group_by: 'runtime_state', ...filter },
+      }).then((response) => response.data);
       let totalInstances = 0;
       let activeInstances = 0;
       let totalCores = 0;

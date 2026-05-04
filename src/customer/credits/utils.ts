@@ -1,6 +1,8 @@
-import { CustomerCreditRequest } from 'waldur-js-client';
+import { CreateCustomerCreditRequest } from 'waldur-js-client';
 
-export const serializeCustomerCredit = (formData): CustomerCreditRequest => ({
+export const serializeCustomerCredit = (
+  formData,
+): CreateCustomerCreditRequest => ({
   ...formData,
   customer: formData.customer.url,
   offerings: formData.offerings

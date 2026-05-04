@@ -84,7 +84,7 @@ export const ForceImportConsumptionDialog = ({
             period_to: periodTo,
             dry_run: true,
             force: true,
-          } as any,
+          },
         });
       return response.data as any;
     },

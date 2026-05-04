@@ -1,9 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import {
-  IdentityBridgeStats,
-  identityBridgeStatsRetrieve,
-} from 'waldur-js-client';
+import { identityBridgeStatsRetrieve } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -46,10 +43,7 @@ export const IdentityBridgeTab: FC = () => {
     refetch,
   } = useQuery({
     queryKey: ['identity-bridge-stats'],
-    queryFn: () =>
-      identityBridgeStatsRetrieve().then(
-        (res) => res.data as IdentityBridgeStats,
-      ),
+    queryFn: () => identityBridgeStatsRetrieve().then((res) => res.data),
     staleTime: SHORT_STALE_TIME,
   });
 

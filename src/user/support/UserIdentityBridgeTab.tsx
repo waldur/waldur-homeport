@@ -3,7 +3,6 @@ import { FC, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   AttributeSourceDetail,
-  IdentityBridgeUserStatus,
   User,
   usersIdentityBridgeStatusRetrieve,
   usersPartialUpdate,
@@ -213,7 +212,7 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
     queryFn: () =>
       usersIdentityBridgeStatusRetrieve({
         path: { uuid: user.uuid },
-      }).then((res) => res.data as IdentityBridgeUserStatus),
+      }).then((res) => res.data),
     staleTime: SHORT_STALE_TIME,
   });
 

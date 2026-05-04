@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import {
-  marketplaceStatsTotalCostOfActiveResourcesPerOfferingList,
   marketplaceStatsOfferingCostsSummaryRetrieve,
-  OfferingCostsSummary as ApiOfferingCostsSummary,
+  marketplaceStatsTotalCostOfActiveResourcesPerOfferingList,
 } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 
-import { OfferingCostsSummary, OfferingCostsStats } from './types'; // 5 minutes
+import { OfferingCostsStats, OfferingCostsSummary } from './types';
 
 async function fetchOfferingCosts(
   signal?: AbortSignal,
@@ -28,7 +27,7 @@ async function fetchOfferingCostsSummary(
   const response = await marketplaceStatsOfferingCostsSummaryRetrieve({
     signal,
   });
-  const data = response.data as ApiOfferingCostsSummary;
+  const data = response.data;
   return {
     totalCost: parseFloat(data.total_cost),
     offeringCount: data.offering_count,

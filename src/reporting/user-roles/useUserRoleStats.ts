@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import {
   marketplaceStatsCustomerMemberCountList,
   marketplaceStatsCustomerMemberSummaryRetrieve,
-  CustomerMemberSummary as ApiCustomerMemberSummary,
 } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
@@ -24,7 +23,7 @@ async function fetchUserRolesSummary(
   const response = await marketplaceStatsCustomerMemberSummaryRetrieve({
     signal,
   });
-  const data = response.data as ApiCustomerMemberSummary;
+  const data = response.data;
   return {
     totalOrganizations: data.total_organizations,
     totalMembers: data.total_members,

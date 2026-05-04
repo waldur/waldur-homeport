@@ -77,7 +77,7 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
     const response = await projectsRetrieve({
       path: { uuid: project.uuid },
     });
-    dispatch(setCurrentProject(response.data as Project));
+    dispatch(setCurrentProject(response.data));
   }, [project?.uuid, dispatch]);
 
   return (

@@ -46,7 +46,7 @@ const PurePreviewOfferingDialog = (props: PreviewOfferingDialogProps) => {
     queryFn: () =>
       marketplaceProviderOfferingsRetrieve({
         path: { uuid: initialOffering.uuid },
-      }).then((response) => response.data as Offering),
+      }).then((response) => response.data),
     enabled: shouldLoadFullOffering,
     refetchOnWindowFocus: false,
   });

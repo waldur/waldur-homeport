@@ -62,7 +62,7 @@ export const SoftwareCatalogDiscoverDialog = () => {
   const fetchData = useCallback(
     () =>
       marketplaceSoftwareCatalogsDiscoverList().then((response) => ({
-        rows: response.data as SoftwareCatalogDiscover[],
+        rows: response.data,
         resultCount: response.data?.length ?? 0,
       })),
     [],

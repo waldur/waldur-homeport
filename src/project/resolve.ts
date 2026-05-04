@@ -1,6 +1,5 @@
 import { Transition } from '@uirouter/react';
 import { projectsRetrieve } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
 
 import { getCustomer } from '@/customer/utils';
 import { router } from '@/router';
@@ -39,7 +38,7 @@ export function loadProject(transition: Transition) {
         'user_identity_sources',
       ]);
       store.dispatch(setCurrentCustomer(customer));
-      store.dispatch(setCurrentProject(project.data as unknown as Project));
+      store.dispatch(setCurrentProject(project.data));
     } catch (error) {
       if (error.response?.status === 404) {
         router.stateService.go('errorPage.notFound');
