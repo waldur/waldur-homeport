@@ -19,7 +19,7 @@ export class SecretField extends Component<
             <EyeIcon size={20} weight="bold" />
           )}
         </button>{' '}
-        {this.getValue()}
+        <span className="text-break">{this.getValue()}</span>
       </>
     );
   }
@@ -33,8 +33,7 @@ export class SecretField extends Component<
   getValue = () =>
     this.state.showSecret
       ? this.props.value
-      : (this.props.value || '')
-          .split('')
-          .map(() => '*')
-          .join('');
+      : this.props.value
+        ? '••••••••••••'
+        : '';
 }
