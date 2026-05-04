@@ -1,10 +1,13 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 import { RoleField } from '@/user/affiliations/RoleField';
 
 import {
@@ -42,12 +45,14 @@ interface ResourceTeamMember {
  */
 const RowActions: FunctionComponent<{
   member: ResourceTeamMember;
-  grant: ResourceProjectGrant;
+  // grant.uuid is the synthetic composite key; grant.rp_uuid is the
+  // real RP uuid that the action API calls need.
+  grant: ResourceProjectGrant & { rp_uuid?: string };
   refetch: () => void;
 }> = ({ member, grant, refetch }) => {
   const syntheticRow = {
     scope_type: 'resource_project' as const,
-    scope_uuid: grant.uuid,
+    scope_uuid: grant.rp_uuid ?? grant.uuid,
     scope_url: grant.url,
     scope_name: grant.name,
     role_name: grant.role_name,
@@ -70,6 +75,29 @@ export const ResourceUsersListExpandableRow: FunctionComponent<{
   resourceUuid: string;
   refetch: () => void;
 }> = ({ row, resourceUuid, refetch }) => {
+  // Composite uuid (rp_uuid + role_uuid) survives the table's
+  // entity-dict de-dup in `transformRows` (src/table/utils.tsx);
+  // without it, two grants on the same RP with different roles
+  // collapse to one row. Original RP uuid preserved as `rp_uuid` for
+  // the action handlers (need the real id for the API call).
+  const tableProps = useTable<
+    ResourceProjectGrant & { uuid: string; rp_uuid: string }
+  >({
+    table: 'ResourceUsersListExpandableRow-' + row.uuid,
+    fetchData: () =>
+      Promise.resolve({
+        rows: (row.resource_projects ?? []).map((g) => ({
+          ...g,
+          rp_uuid: g.uuid,
+          uuid: `${g.uuid}-${g.role_uuid}`,
+        })),
+      }),
+  });
+
+  useEffect(() => {
+    tableProps.fetch();
+  }, [row.resource_projects]);
+
   if (!row.resource_projects || row.resource_projects.length === 0) {
     return (
       <div className="text-center py-4">
@@ -79,47 +107,41 @@ export const ResourceUsersListExpandableRow: FunctionComponent<{
   }
   return (
     <ExpandableContainer hasMultiSelect>
-      <table className="table align-middle gy-0 mb-0">
-        <thead className="border-bottom">
-          <tr>
-            <th className="text-dark">{translate('Project name')}</th>
-            <th />
-            <th className="text-dark w-25">{translate('Role')}</th>
-            <th className="text-dark w-45px">{translate('Expiration time')}</th>
-            <th className="header-actions text-dark">{translate('Actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {row.resource_projects.map((grant) => (
-            <tr key={grant.uuid}>
-              <td>
-                <Link
-                  state="marketplace-resource-details"
-                  params={{
-                    resource_uuid: resourceUuid,
-                    tab: 'resource-projects',
-                  }}
-                  label={grant.name}
-                />
-              </td>
-              <td />
-              <td>
-                <RoleField row={grant} />
-              </td>
-              <td>
-                {grant.expiration_time
-                  ? formatDateTime(grant.expiration_time)
-                  : translate('N/A')}
-              </td>
-              <td className="row-actions">
-                <div>
-                  <RowActions member={row} grant={grant} refetch={refetch} />
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table<ResourceProjectGrant & { uuid: string; rp_uuid: string }>
+        {...tableProps}
+        columns={[
+          {
+            title: translate('Project name'),
+            render: ({ row: grant }) => (
+              <Link
+                state="marketplace-resource-details"
+                params={{
+                  resource_uuid: resourceUuid,
+                  tab: 'resource-projects',
+                }}
+                label={grant.name}
+              />
+            ),
+          },
+          {
+            title: translate('Role'),
+            render: ({ row: grant }) => <RoleField row={grant} />,
+          },
+          {
+            title: translate('Expiration time'),
+            render: ({ row: grant }) =>
+              grant.expiration_time
+                ? formatDateTime(grant.expiration_time)
+                : renderFieldOrDash(null),
+          },
+        ]}
+        rowActions={({ row: grant }) => (
+          <RowActions member={row} grant={grant} refetch={refetch} />
+        )}
+        verboseName={translate('Project grants')}
+        hasActionBar={false}
+        minHeight="auto"
+      />
     </ExpandableContainer>
   );
 };
