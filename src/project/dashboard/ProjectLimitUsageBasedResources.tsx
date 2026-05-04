@@ -93,6 +93,7 @@ export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
                 tableProps.rows.map((row) => row.offering_uuid),
               ).join(','),
               field: ['uuid', 'components', 'plans'],
+              page_size: tableProps.rows.length,
             },
           }).then((response) => response.data)
         : [],
