@@ -20,6 +20,7 @@ export const SET_SAVED_FILTERS = 'waldur/table/SET_SAVED_FILTERS';
 export const SELECT_SAVED_FILTER = 'waldur/table/SELECT_SAVED_FILTER';
 export const APPLY_FILTERS = 'waldur/table/APPLY_FILTERS';
 export const TOGGLE_ROW = 'waldur/table/TOGGLE_ROW';
+export const SET_TOGGLED = 'waldur/table/SET_TOGGLED';
 export const SELECT_ROW = 'waldur/table/SELECT_ROW';
 export const SELECT_ALL_ROWS = 'waldur/table/SELECT_ALL_ROWS';
 export const RESET_SELECTION = 'waldur/table/RESET_SELECTION';
@@ -196,6 +197,14 @@ export const toggleRow = (table: string, row: string | number) => ({
     table,
     row,
   },
+});
+
+export const setToggled = (
+  table: string,
+  toggled: Record<string, boolean>,
+) => ({
+  type: SET_TOGGLED,
+  payload: { table, toggled },
 });
 
 export const selectRow = (table: string, row: any) => ({

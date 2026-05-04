@@ -18,6 +18,7 @@ interface TableHeaderProps {
   onSortClick?(sorting: Sorting): void;
   currentSorting?: Sorting;
   expandableRow?: boolean;
+  hideExpandToggle?: boolean;
   showActions?: boolean;
   rows: any[];
   enableMultiSelect?: boolean;
@@ -94,6 +95,7 @@ const TableTh = ({
   toggleFilterMenu,
   isFirstDataColumn,
   expandableRow,
+  hideExpandToggle,
   toggledAll,
   toggleAll,
   hasLeadingCheckbox,
@@ -126,7 +128,7 @@ const TableTh = ({
               : undefined
           }
         >
-          {isFirstDataColumn && expandableRow && (
+          {isFirstDataColumn && expandableRow && !hideExpandToggle && (
             <span
               className={classNames(
                 'all-rows-expander',
@@ -176,6 +178,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
   onSortClick,
   currentSorting,
   expandableRow = false,
+  hideExpandToggle = false,
   showActions,
   rows,
   enableMultiSelect,
@@ -316,6 +319,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
                         toggleFilterMenu={toggleFilterMenu}
                         isFirstDataColumn={index === firstVisibleDataIndex}
                         expandableRow={expandableRow}
+                        hideExpandToggle={hideExpandToggle}
                         toggledAll={toggledAll}
                         toggleAll={toggleAll}
                         hasLeadingCheckbox={hasLeadingCheckbox}
@@ -342,6 +346,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
                       toggleFilterMenu={toggleFilterMenu}
                       isFirstDataColumn={index === firstVisibleDataIndex}
                       expandableRow={expandableRow}
+                      hideExpandToggle={hideExpandToggle}
                       toggledAll={toggledAll}
                       toggleAll={toggleAll}
                       hasLeadingCheckbox={hasLeadingCheckbox}

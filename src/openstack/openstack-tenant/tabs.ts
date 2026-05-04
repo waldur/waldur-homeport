@@ -113,6 +113,17 @@ export const OpenStackTenantTabConfiguration: ResourceTabsConfiguration = {
             })),
           ),
         },
+        {
+          key: 'load_balancers',
+          title: translate('Load balancers'),
+          component: lazyComponent(() =>
+            import('../openstack-lbaas/TenantLoadBalancersList').then(
+              (module) => ({
+                default: module.TenantLoadBalancersList,
+              }),
+            ),
+          ),
+        },
       ],
     },
     {

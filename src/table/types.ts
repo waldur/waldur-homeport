@@ -269,6 +269,7 @@ export interface TableProps<RowType = any> extends TableState {
   hideRefresh?: boolean;
   hideTitle?: boolean;
   hideIfEmpty?: boolean;
+  hideExpandToggle?: boolean;
   portal?: TablePortal;
   /**
    * Function to determine if a row is expandable.
