@@ -53,7 +53,19 @@ export const DefaultOfferingEditPanel: FunctionComponent<
             ) : field.component === CommaSeparatedListField ? (
               (get(props.offering, field.key) || []).join(', ')
             ) : field.component === SelectField ? (
-              (get(props.offering, field.key) || []).join(', ')
+              // SelectField is used in two shapes: multi-select (value is
+              // string[], render comma-joined) and single-select (value is
+              // string, render the matching option label or the raw value).
+              (() => {
+                const v = get(props.offering, field.key);
+                if (Array.isArray(v)) return v.join(', ');
+                if (v == null || v === '') return DASH_ESCAPE_CODE;
+                const opts = field.fieldProps?.options as
+                  | { value: any; label: string }[]
+                  | undefined;
+                const match = opts?.find((o) => o.value === v);
+                return match ? match.label : String(v);
+              })()
             ) : (
               get(props.offering, field.key, 'N/A')
             )
