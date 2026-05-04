@@ -2,7 +2,6 @@ import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import {
   RequestTypeAdmin,
-  RequestTypeAdminRequest,
   supportRequestTypesAdminActivate,
 } from 'waldur-js-client';
 
@@ -27,10 +26,7 @@ export const BatchActivateAction: FC<BatchActivateActionProps> = ({
     rows: inactiveRows,
     refetch,
     mutationFn: (row) =>
-      supportRequestTypesAdminActivate({
-        path: { uuid: row.uuid },
-        body: {} as RequestTypeAdminRequest,
-      }),
+      supportRequestTypesAdminActivate({ path: { uuid: row.uuid } }),
     successMessage: translate(
       'Request types have been activated successfully.',
     ),

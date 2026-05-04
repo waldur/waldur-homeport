@@ -2,7 +2,6 @@ import { XCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import {
   RequestTypeAdmin,
-  RequestTypeAdminRequest,
   supportRequestTypesAdminDeactivate,
 } from 'waldur-js-client';
 
@@ -24,10 +23,7 @@ export const BatchDeactivateAction: FC<BatchDeactivateActionProps> = ({
     rows: activeRows,
     refetch,
     mutationFn: (row) =>
-      supportRequestTypesAdminDeactivate({
-        path: { uuid: row.uuid },
-        body: {} as RequestTypeAdminRequest,
-      }),
+      supportRequestTypesAdminDeactivate({ path: { uuid: row.uuid } }),
     successMessage: translate(
       'Request types have been deactivated successfully.',
     ),

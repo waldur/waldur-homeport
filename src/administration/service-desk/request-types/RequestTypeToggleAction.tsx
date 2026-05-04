@@ -1,7 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import {
   RequestTypeAdmin,
-  RequestTypeAdminRequest,
   supportRequestTypesAdminActivate,
   supportRequestTypesAdminDeactivate,
 } from 'waldur-js-client';
@@ -20,14 +19,8 @@ export const RequestTypeToggleAction = ({
   const toggleMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
       row.is_active
-        ? supportRequestTypesAdminDeactivate({
-            path: { uuid: row.uuid },
-            body: {} as RequestTypeAdminRequest,
-          })
-        : supportRequestTypesAdminActivate({
-            path: { uuid: row.uuid },
-            body: {} as RequestTypeAdminRequest,
-          }),
+        ? supportRequestTypesAdminDeactivate({ path: { uuid: row.uuid } })
+        : supportRequestTypesAdminActivate({ path: { uuid: row.uuid } }),
     successMessage: row.is_active
       ? translate('Request type has been deactivated.')
       : translate('Request type has been activated.'),
