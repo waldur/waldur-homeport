@@ -74,6 +74,20 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
     });
   });
 
+  // Effective per-component cap. Returns null when there's no parent
+  // limit OR when the offering policy is 'none' (free-form): in those
+  // cases the input is not bounded.
+  const computeCap = (c: LimitComponent): number | null => {
+    const total = resourceLimits[c.type];
+    if (total == null) return null;
+    if (policy === 'per_project') return total;
+    if (policy === 'aggregate') {
+      const used = siblingTotals[c.type] ?? 0;
+      return Math.max(total - used, 0);
+    }
+    return null;
+  };
+
   const renderLimitHint = (c: LimitComponent) => {
     const cap = resourceLimits[c.type];
     if (cap == null) return null; // No parent cap → no hint.
@@ -141,6 +155,12 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
       ? translate('Unable to update project.')
       : translate('Unable to create project.'),
     refetch: resolve.refetch,
+    // Refresh the parent resource so the quota header (e.g. "CPU
+    // 25/100") reflects the new RP's allocation immediately instead
+    // of waiting for the next page load.
+    invalidateQueries: [
+      { queryKey: ['resource-details', resolve.resource.uuid] },
+    ],
   });
 
   return (
@@ -234,21 +254,24 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                       <tbody>
                         {limitComponents.map((c) => {
                           const hint = renderLimitHint(c);
-                          // When the offering requires limits, every
-                          // component must have a positive value. The
-                          // backend mirrors this rule -- enforcing it
-                          // inline avoids a round-trip + opaque API
-                          // error message.
-                          const validateRequired = (v: unknown) => {
-                            if (!limitsRequired) return undefined;
-                            const n = Number(v);
-                            if (
-                              v == null ||
-                              v === '' ||
-                              Number.isNaN(n) ||
-                              n <= 0
-                            ) {
-                              return translate('Required');
+                          const cap = computeCap(c);
+                          // Combined validator: required-rule (when the
+                          // offering enforces limits) AND cap-rule (when
+                          // a parent quota exists). Backend mirrors both
+                          // rules -- doing them inline avoids a
+                          // round-trip plus opaque API error message.
+                          const validateLimit = (v: unknown) => {
+                            const isEmpty =
+                              v == null || v === '' || Number.isNaN(Number(v));
+                            if (limitsRequired) {
+                              if (isEmpty || Number(v) <= 0) {
+                                return translate('Required');
+                              }
+                            }
+                            if (cap != null && !isEmpty && Number(v) > cap) {
+                              return translate('Exceeds maximum of {cap}', {
+                                cap,
+                              });
                             }
                             return undefined;
                           };
@@ -276,7 +299,8 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                                       : Number(v)
                                   }
                                   min={0}
-                                  validate={validateRequired}
+                                  max={cap ?? undefined}
+                                  validate={validateLimit}
                                 />
                               </td>
                               <td className="text-muted">
