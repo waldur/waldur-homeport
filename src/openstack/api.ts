@@ -3,6 +3,8 @@ import {
   OpenstackFlavorsListData,
   openstackFloatingIpsList,
   OpenstackFloatingIpsListData,
+  openstackImagesList,
+  OpenstackImagesListData,
   openstackNetworksList,
   OpenstackNetworksListData,
   openstackSecurityGroupsList,
@@ -45,3 +47,6 @@ export const loadFloatingIps = (query: OpenstackFloatingIpsListData['query']) =>
   getAllPages((page) =>
     openstackFloatingIpsList({ query: { page, ...query } }),
   );
+
+export const loadImages = (query: OpenstackImagesListData['query']) =>
+  getAllPages((page) => openstackImagesList({ query: { page, ...query } }));

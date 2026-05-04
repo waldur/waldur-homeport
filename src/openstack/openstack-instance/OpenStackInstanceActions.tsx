@@ -22,9 +22,11 @@ import { DestroyAction } from './actions/DestroyAction';
 import { EditAction } from './actions/EditAction';
 import { ForceDestroyAction } from './actions/ForceDestroyAction';
 import { PullInstanceAction } from './actions/PullInstanceAction';
+import { RescueAction } from './actions/RescueAction';
 import { RestartAction } from './actions/RestartAction';
 import { StartAction } from './actions/StartAction';
 import { StopAction } from './actions/StopAction';
+import { UnrescueAction } from './actions/UnrescueAction';
 import { UpdateFloatingIpsAction } from './actions/update-floating-ips/UpdateFloatingIpsAction';
 import { UpdateSecurityGroupsAction } from './actions/update-security-groups/UpdateSecurityGroupsAction';
 import { UnlinkOpenStackInstanceAction } from './UnlinkOpenStackInstanceAction';
@@ -35,6 +37,8 @@ export const OpenStackInstanceActions = (props) => (
       <StartAction {...props} />
       <StopAction {...props} />
       <RestartAction {...props} />
+      <RescueAction {...props} />
+      <UnrescueAction {...props} />
       <EditAction {...props} />
       <ChangeFlavorAction {...props} />
       <UpdateSecurityGroupsAction {...props} />
