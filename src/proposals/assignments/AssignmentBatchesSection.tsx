@@ -147,7 +147,6 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
     mutationFn: () =>
       proposalProtectedCallsGenerateAssignments({
         path: { uuid: call.uuid },
-        body: {},
       }),
     onSuccess: (response) => {
       const data = response.data;
@@ -174,7 +173,6 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
     mutationFn: () =>
       proposalProtectedCallsSendAllAssignments({
         path: { uuid: call.uuid },
-        body: {},
       }),
     onSuccess: (response) => {
       const data = response.data;

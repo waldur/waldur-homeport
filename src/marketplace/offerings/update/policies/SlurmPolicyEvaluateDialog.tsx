@@ -34,7 +34,6 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
     mutationFn: () =>
       marketplaceSlurmPeriodicUsagePoliciesDryRun({
         path: { uuid: policyUuid },
-        body: {},
       }),
     onSuccess: (response) => {
       setDryRunResult(response.data as SlurmPolicyDryRunResponse);
@@ -46,7 +45,6 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
     mutationFn: () =>
       marketplaceSlurmPeriodicUsagePoliciesEvaluate({
         path: { uuid: policyUuid },
-        body: {},
       }),
     onSuccess: (response) => {
       setEvaluateResult(response.data as SlurmPolicyEvaluateResponse);

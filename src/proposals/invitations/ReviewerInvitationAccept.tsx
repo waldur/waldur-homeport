@@ -60,7 +60,6 @@ const acceptInvitation = async (token: string) => {
   // not at pool invitation acceptance (Stage 1)
   const response = await reviewerInvitationsAccept({
     path: { token },
-    body: {},
   });
   return response.data;
 };

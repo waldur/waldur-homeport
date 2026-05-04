@@ -51,8 +51,6 @@ export function useManagedMutation<TData, TError, TVariables>({
   const mutation = useMutation({
     ...options,
     onSuccess: async (data, variables, onMutateResult, context) => {
-      if (successMessage) showSuccess(successMessage);
-
       const asyncTasks: Promise<any>[] = [];
 
       if (refetch) {
@@ -76,6 +74,7 @@ export function useManagedMutation<TData, TError, TVariables>({
         closeDialog();
       }
 
+      if (successMessage) showSuccess(successMessage);
       if (onSuccess) onSuccess(data, variables, onMutateResult, context);
     },
     onError: (error, variables, onMutateResult, context) => {
