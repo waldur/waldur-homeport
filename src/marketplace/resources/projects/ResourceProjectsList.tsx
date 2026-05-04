@@ -9,7 +9,6 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
-import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
@@ -166,7 +165,8 @@ export const ResourceProjectsList: FC<ResourceProjectsListProps> = ({
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <FieldWithCopy value={row.name} />,
+          render: ({ row }) => row.name,
+          copyField: (row) => row.name,
           keys: ['name'],
         },
         {
