@@ -1,6 +1,6 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useMemo, FC } from 'react';
-import { Badge as BsBadge } from 'react-bootstrap';
+import { Badge as BsBadge, Spinner } from 'react-bootstrap';
 import {
   Resource,
   marketplaceResourceProjectsList,
@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
@@ -25,6 +26,11 @@ import { AddProjectButton } from './AddProjectDialog';
 import { ResourceProjectEditButton } from './ResourceProjectEditButton';
 import { ResourceProjectExpandable } from './ResourceProjectExpandable';
 
+// In-flight states that warrant an inline spinner alongside the badge,
+// so users can see at-a-glance which RPs are still being reconciled by
+// the site-agent + downstream operator.
+const PROGRESSING_STATES = new Set(['Creating', 'Updating', 'Terminating']);
+
 const StateLabel: FC<{ state: string }> = ({ state }) => {
   const variant =
     {
@@ -36,7 +42,19 @@ const StateLabel: FC<{ state: string }> = ({ state }) => {
       Terminated: 'secondary',
     }[state] || 'secondary';
 
-  return <BsBadge bg={variant}>{state}</BsBadge>;
+  return (
+    <span className="d-inline-flex align-items-center gap-1">
+      <BsBadge bg={variant}>{state}</BsBadge>
+      {PROGRESSING_STATES.has(state) && (
+        <Spinner
+          animation="border"
+          size="sm"
+          role="status"
+          aria-label={translate('In progress')}
+        />
+      )}
+    </span>
+  );
 };
 
 type ComponentLike = {
@@ -77,14 +95,19 @@ const LimitsDisplay: FC<{
 
 const DeleteProjectAction: FC<{
   row: ResourceProject;
+  resourceUuid: string;
   refetch(): void;
-}> = ({ row, refetch }) => {
+}> = ({ row, resourceUuid, refetch }) => {
   const deleteMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
       marketplaceResourceProjectsDestroy({ path: { uuid: row.uuid } }),
     successMessage: translate('Project deleted.'),
     errorMessage: translate('Unable to delete project.'),
     refetch,
+    // Refresh the parent resource so the quota header (e.g. "CPU 0/100")
+    // reflects the freed allocation immediately instead of waiting for
+    // the next page load.
+    invalidateQueries: [{ queryKey: ['resource-details', resourceUuid] }],
     confirmation: {
       title: translate('Confirmation'),
       body: translate(
@@ -143,7 +166,7 @@ export const ResourceProjectsList: FC<ResourceProjectsListProps> = ({
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => row.name,
+          render: ({ row }) => <FieldWithCopy value={row.name} />,
           keys: ['name'],
         },
         {
@@ -184,7 +207,11 @@ export const ResourceProjectsList: FC<ResourceProjectsListProps> = ({
               offering={offering}
               siblings={tableProps.rows as ResourceProject[]}
             />
-            <DeleteProjectAction row={row} refetch={tableProps.fetch} />
+            <DeleteProjectAction
+              row={row}
+              resourceUuid={resource.uuid}
+              refetch={tableProps.fetch}
+            />
           </ActionsDropdown>
         ) : null
       }
