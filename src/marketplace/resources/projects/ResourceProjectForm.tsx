@@ -52,6 +52,14 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
 
   const policy = ((resolve.offering?.plugin_options as any)
     ?.resource_projects_limit_policy ?? 'none') as LimitPolicy;
+  // When the offering requires limits, every limit-billing component
+  // must have a non-empty, non-zero value. Backend mirrors this rule
+  // (see ResourceProjectSerializer.validate); the frontend rule is
+  // here so users see the failure inline instead of via API error.
+  const limitsRequired = Boolean(
+    (resolve.offering?.plugin_options as any)
+      ?.resource_projects_limits_required,
+  );
   const resourceLimits = ((resolve.resource as any)?.limits ?? {}) as Record<
     string,
     number
@@ -192,9 +200,20 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
               <div className="mb-7">
                 <label className="form-label fw-bold">
                   {translate('Limits')}
+                  {limitsRequired && (
+                    <span className="text-danger ms-1" aria-hidden="true">
+                      *
+                    </span>
+                  )}
                 </label>
                 <p className="form-text text-muted mt-0 mb-2">
-                  {translate('Optional per-component caps for this project.')}
+                  {limitsRequired
+                    ? translate(
+                        'Required: every component must have a value greater than zero.',
+                      )
+                    : translate(
+                        'Optional per-component caps for this project.',
+                      )}
                 </p>
                 <Card className="card-table card-bordered full-width">
                   <Card.Body className="p-0">
@@ -215,11 +234,37 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                       <tbody>
                         {limitComponents.map((c) => {
                           const hint = renderLimitHint(c);
+                          // When the offering requires limits, every
+                          // component must have a positive value. The
+                          // backend mirrors this rule -- enforcing it
+                          // inline avoids a round-trip + opaque API
+                          // error message.
+                          const validateRequired = (v: unknown) => {
+                            if (!limitsRequired) return undefined;
+                            const n = Number(v);
+                            if (
+                              v == null ||
+                              v === '' ||
+                              Number.isNaN(n) ||
+                              n <= 0
+                            ) {
+                              return translate('Required');
+                            }
+                            return undefined;
+                          };
                           return (
                             <tr key={c.type}>
                               <td>
                                 {c.name ?? c.type}
                                 {c.measured_unit ? ` (${c.measured_unit})` : ''}
+                                {limitsRequired && (
+                                  <span
+                                    className="text-danger ms-1"
+                                    aria-hidden="true"
+                                  >
+                                    *
+                                  </span>
+                                )}
                               </td>
                               <td>
                                 <Field
@@ -231,6 +276,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                                       : Number(v)
                                   }
                                   min={0}
+                                  validate={validateRequired}
                                 />
                               </td>
                               <td className="text-muted">
