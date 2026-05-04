@@ -6,6 +6,7 @@ import { CreatePoolAction } from './actions/CreatePoolAction';
 import { DetachFloatingIpAction } from './actions/DetachFloatingIpAction';
 import { EditLoadBalancerAction } from './actions/EditLoadBalancerAction';
 import { PullLoadBalancerAction } from './actions/PullLoadBalancerAction';
+import { SetSecurityGroupsAction } from './actions/SetSecurityGroupsAction';
 import { DestroyLoadBalancerAction } from './DestroyLoadBalancerAction';
 
 export const OpenStackLoadBalancerActions: ActionConfiguration = {
@@ -15,6 +16,7 @@ export const OpenStackLoadBalancerActions: ActionConfiguration = {
     CreatePoolAction,
     AttachFloatingIpAction,
     DetachFloatingIpAction,
+    SetSecurityGroupsAction,
     PullLoadBalancerAction,
     EditLoadBalancerAction,
     DestroyLoadBalancerAction,

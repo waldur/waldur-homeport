@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import {
   OpenStackLoadBalancer,
   OpenStackListener,
   OpenStackPool,
+  OpenStackSecurityGroup,
   openstackFloatingIpsRetrieve,
   openstackListenersList,
   openstackPoolsList,
@@ -18,7 +19,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
-import { OpenStackSecurityGroupsTable } from '@/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog';
+import { SecurityGroupRulesList } from '@/openstack/openstack-security-groups/SecurityGroupRulesList';
 import { ResourceState } from '@/resource/state/ResourceState';
 import { ResourceSummaryBase } from '@/resource/summary/ResourceSummaryBase';
 import { createFetcher } from '@/table/api';
@@ -26,6 +27,8 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+
+export const LB_VIP_SECURITY_GROUPS_QUERY_KEY = 'lb-vip-security-groups';
 
 import { ListenerRowActions } from './ListenerRowActions';
 import { OperatingStatusBadge } from './OperatingStatusBadge';
@@ -152,64 +155,93 @@ const PoolsTable: FC<{ loadBalancerUuid: string }> = ({ loadBalancerUuid }) => {
   );
 };
 
-const SecurityGroupsTab: FC<{ vipPort?: string | null }> = ({ vipPort }) => {
+const SecurityGroupsTab: FC<{
+  loadBalancerUuid: string;
+  vipPort?: string | null;
+}> = ({ loadBalancerUuid, vipPort }) => {
   const portUuid = vipPort ? getUUID(vipPort) : null;
 
   const {
-    data: port,
-    isLoading: isLoadingPort,
-    error: portError,
+    data: securityGroups,
+    isLoading,
+    error,
     refetch,
-  } = useQuery({
-    queryKey: ['lb-vip-port', portUuid],
-    queryFn: () =>
-      openstackPortsRetrieve({
+  } = useQuery<OpenStackSecurityGroup[]>({
+    queryKey: [LB_VIP_SECURITY_GROUPS_QUERY_KEY, loadBalancerUuid],
+    queryFn: async () => {
+      if (!portUuid) return [];
+      const portRes = await openstackPortsRetrieve({
         path: { uuid: portUuid },
         query: { field: ['uuid', 'security_groups'] },
-      }).then((res) => res.data),
+      });
+      const sgUuids = (portRes.data?.security_groups || [])
+        .map((sg) => sg.uuid)
+        .filter(Boolean);
+      if (sgUuids.length === 0) return [];
+      const results = await Promise.all(
+        sgUuids.map((uuid) =>
+          openstackSecurityGroupsRetrieve({
+            path: { uuid },
+            query: {
+              field: [
+                'uuid',
+                'url',
+                'name',
+                'description',
+                'state',
+                'rules',
+                'resource_type',
+              ],
+            },
+          }).then((res) => res.data as OpenStackSecurityGroup),
+        ),
+      );
+      return results;
+    },
     enabled: Boolean(portUuid),
     refetchOnWindowFocus: false,
     staleTime: 60 * 1000,
   });
 
-  const sgUuids = useMemo(
-    () => (port?.security_groups || []).map((sg) => sg.uuid).filter(Boolean),
-    [port],
-  );
-
-  const { data: securityGroups, isLoading: isLoadingSgs } = useQuery({
-    queryKey: ['lb-vip-port-sgs', sgUuids],
-    queryFn: () =>
-      Promise.all(
-        sgUuids.map((uuid) =>
-          openstackSecurityGroupsRetrieve({
-            path: { uuid },
-            query: { field: ['uuid', 'name', 'description', 'rules'] },
-          }).then((res) => res.data),
-        ),
-      ),
-    enabled: sgUuids.length > 0,
-    refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+  const tableProps = useTable({
+    table: `lb-vip-sgs-${loadBalancerUuid}`,
+    fetchData: () => Promise.resolve({ rows: securityGroups || [] }),
   });
+
+  useEffect(() => {
+    tableProps.fetch();
+  }, [securityGroups]);
 
   if (!portUuid) {
     return (
       <p className="text-muted py-3">{translate('No VIP port assigned.')}</p>
     );
   }
-  if (isLoadingPort || isLoadingSgs) return <LoadingSpinner />;
-  if (portError) return <LoadingErred loadData={refetch} />;
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <LoadingErred loadData={refetch} />;
 
-  if (!securityGroups?.length) {
-    return (
-      <p className="text-muted py-3">
-        {translate('No security groups on VIP port.')}
-      </p>
-    );
-  }
   return (
-    <OpenStackSecurityGroupsTable securityGroups={securityGroups as any} />
+    <Table<OpenStackSecurityGroup>
+      {...tableProps}
+      columns={[
+        {
+          title: translate('Name'),
+          render: ({ row }) => <>{row.name}</>,
+        },
+        {
+          title: translate('Description'),
+          render: ({ row }) => renderFieldOrDash(row.description),
+        },
+        {
+          title: translate('State'),
+          render: ({ row }) => <ResourceState resource={row} />,
+        },
+      ]}
+      verboseName={translate('security groups')}
+      expandableRow={SecurityGroupRulesList}
+      hasActionBar={false}
+      minHeight="auto"
+    />
   );
 };
 
@@ -363,7 +395,7 @@ export const LoadBalancerExpandableRow: FC<LoadBalancerExpandableRowProps> = ({
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="security-groups">
-              {translate('Security Group Rules')}
+              {translate('Security group rules')}
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -383,7 +415,10 @@ export const LoadBalancerExpandableRow: FC<LoadBalancerExpandableRowProps> = ({
             <FloatingIpDetails floatingIpUrl={row.attached_floating_ip} />
           </Tab.Pane>
           <Tab.Pane eventKey="security-groups" unmountOnExit>
-            <SecurityGroupsTab vipPort={row.vip_port} />
+            <SecurityGroupsTab
+              loadBalancerUuid={row.uuid}
+              vipPort={row.vip_port}
+            />
           </Tab.Pane>
           <Tab.Pane eventKey="listeners" unmountOnExit>
             <ListenersTable loadBalancerUuid={row.uuid} />
