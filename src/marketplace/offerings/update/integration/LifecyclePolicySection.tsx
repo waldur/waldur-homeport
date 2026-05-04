@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
 import { useSettingsUrlSync } from '@/administration/settings/useSettingsUrlSync';
-import { NumberField, StringField } from '@/form';
+import { NumberField, SelectField, StringField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import FormTable from '@/form/FormTable';
@@ -16,6 +16,23 @@ import {
 
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
+
+const RESOURCE_PROJECTS_LIMIT_POLICY_OPTIONS = [
+  {
+    value: 'none',
+    label: translate('None — limits accepted as-is, no parent comparison'),
+  },
+  {
+    value: 'per_project',
+    label: translate('Per project — each RP limit ≤ parent resource limit'),
+  },
+  {
+    value: 'aggregate',
+    label: translate(
+      'Aggregate — sum of all RP limits ≤ parent resource limit',
+    ),
+  },
+];
 
 // Order approval fields
 const orderApprovalFields: OfferingEditField[] = [
@@ -128,6 +145,27 @@ const resourceCapabilitiesFields: OfferingEditField[] = [
     component: AwesomeCheckboxField,
     description: translate(
       'When enabled, a Projects tab is shown on resource detail pages, allowing management of sub-projects within a resource',
+    ),
+  },
+  {
+    label: translate('Resource project limit policy'),
+    key: 'plugin_options.resource_projects_limit_policy',
+    component: SelectField,
+    fieldProps: {
+      options: RESOURCE_PROJECTS_LIMIT_POLICY_OPTIONS,
+      simpleValue: true,
+      isClearable: true,
+    },
+    description: translate(
+      'How parent resource limits are enforced on child resource projects. Default is none.',
+    ),
+  },
+  {
+    label: translate('Require limits on resource projects'),
+    key: 'plugin_options.resource_projects_limits_required',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'When enabled, every limit-billing component must have a positive value when creating or updating a resource project. Use this for backends that reject projects without resource quotas (e.g. the rancher-keycloak-operator).',
     ),
   },
   {
