@@ -40,7 +40,7 @@ describe('UserTokenLifetime component', () => {
     render(<UserTokenLifetime user={mockUser} />);
 
     // Check if the token is displayed as masked
-    expect(screen.getByText(/\*\*\*\*\*\*/)).toBeInTheDocument();
+    expect(screen.getByText('••••••••••••')).toBeInTheDocument();
 
     // Verify that the initial token lifetime value is selected
     expect(screen.getByText('1 hour')).toBeInTheDocument();
