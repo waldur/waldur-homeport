@@ -9,8 +9,6 @@ import {
   proposalProposalsReject,
 } from 'waldur-js-client';
 
-import { useNotify } from '@/store/notify';
-
 import { useProposalDecisionActions } from './utils';
 
 const mockStore = configureMockStore();
@@ -19,14 +17,16 @@ const mockConfirm = vi.fn();
 
 vi.mock('waldur-js-client');
 vi.mock('@/modal/actions', () => ({
-  useModal: () => ({ confirm: mockConfirm }),
+  useModal: () => ({ confirm: mockConfirm, closeDialog: vi.fn() }),
 }));
 
-// Mock store hooks
+const mockShowSuccess = vi.fn();
+const mockShowErrorResponse = vi.fn();
+
 vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
+  useNotify: () => ({
+    showSuccess: mockShowSuccess,
+    showErrorResponse: mockShowErrorResponse,
   }),
 }));
 
@@ -124,7 +124,6 @@ describe('useProposalDecisionActions', () => {
 
     it('should call API and show success message on approval', async () => {
       const { result } = renderUseProposalDecisionActions();
-      const { showSuccess } = useNotify();
 
       result.current.handleApproveProposal();
 
@@ -133,21 +132,22 @@ describe('useProposalDecisionActions', () => {
           path: { uuid: mockProposal.uuid },
         });
       });
-      expect(showSuccess).toHaveBeenCalledWith('Proposal has been approved.');
+      expect(mockShowSuccess).toHaveBeenCalledWith(
+        'Proposal has been approved.',
+      );
       expect(mockRefetch).toHaveBeenCalled();
     });
 
     it('should handle API error and show error message', async () => {
       const error = new Error('API Error');
       vi.mocked(proposalProposalsApprove).mockRejectedValue(error);
-      const { showErrorResponse } = useNotify();
 
       const { result } = renderUseProposalDecisionActions();
 
       result.current.handleApproveProposal();
 
       await waitFor(() => {
-        expect(showErrorResponse).toHaveBeenCalledWith(
+        expect(mockShowErrorResponse).toHaveBeenCalledWith(
           error,
           'Unable to approve the proposal.',
         );
@@ -181,7 +181,6 @@ describe('useProposalDecisionActions', () => {
       mockConfirm.mockResolvedValue({
         input: rejectionReason,
       });
-      const { showSuccess } = useNotify();
 
       const { result } = renderUseProposalDecisionActions();
 
@@ -193,7 +192,9 @@ describe('useProposalDecisionActions', () => {
           body: { allocation_comment: rejectionReason },
         });
       });
-      expect(showSuccess).toHaveBeenCalledWith('Proposal has been rejected.');
+      expect(mockShowSuccess).toHaveBeenCalledWith(
+        'Proposal has been rejected.',
+      );
       expect(mockRefetch).toHaveBeenCalled();
     });
 
@@ -215,14 +216,13 @@ describe('useProposalDecisionActions', () => {
     it('should handle API error and show error message', async () => {
       const error = new Error('API Error');
       vi.mocked(proposalProposalsReject).mockRejectedValue(error);
-      const { showErrorResponse } = useNotify();
 
       const { result } = renderUseProposalDecisionActions();
 
       result.current.handleRejectProposal();
 
       await waitFor(() => {
-        expect(showErrorResponse).toHaveBeenCalledWith(
+        expect(mockShowErrorResponse).toHaveBeenCalledWith(
           error,
           'Unable to reject the proposal.',
         );
@@ -266,14 +266,13 @@ describe('useProposalDecisionActions', () => {
       const timeoutError = new Error('Network timeout');
       timeoutError.name = 'TimeoutError';
       vi.mocked(proposalProposalsApprove).mockRejectedValue(timeoutError);
-      const { showErrorResponse } = useNotify();
 
       const { result } = renderUseProposalDecisionActions();
 
       result.current.handleApproveProposal();
 
       await waitFor(() => {
-        expect(showErrorResponse).toHaveBeenCalledWith(
+        expect(mockShowErrorResponse).toHaveBeenCalledWith(
           timeoutError,
           'Unable to approve the proposal.',
         );
@@ -288,14 +287,13 @@ describe('useProposalDecisionActions', () => {
         },
       };
       vi.mocked(proposalProposalsReject).mockRejectedValue(detailedError);
-      const { showErrorResponse } = useNotify();
 
       const { result } = renderUseProposalDecisionActions();
 
       result.current.handleRejectProposal();
 
       await waitFor(() => {
-        expect(showErrorResponse).toHaveBeenCalledWith(
+        expect(mockShowErrorResponse).toHaveBeenCalledWith(
           detailedError,
           'Unable to reject the proposal.',
         );

@@ -4,12 +4,18 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportRequestTypesAdminDestroy } from 'waldur-js-client';
 
 import { useModal } from '@/modal/hooks';
-import { useNotify } from '@/store/notify';
 
 import { BatchDeleteAction } from './BatchDeleteAction';
 
 vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
+const mockShowSuccess = vi.fn();
+const mockShowErrorResponse = vi.fn();
+vi.mock('@/store/notify', () => ({
+  useNotify: () => ({
+    showSuccess: mockShowSuccess,
+    showErrorResponse: mockShowErrorResponse,
+  }),
+}));
 vi.mock('@/modal/hooks');
 vi.mock('@/i18n', () => ({
   translate: (key, context) => {
@@ -37,7 +43,6 @@ const createWrapper = () => {
 
 describe('BatchDeleteAction', () => {
   const mockRefetch = vi.fn();
-  const mockShowSuccess = vi.fn();
   const mockConfirm = vi.fn();
 
   const rows = [
@@ -47,11 +52,9 @@ describe('BatchDeleteAction', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-    } as any);
     vi.mocked(useModal).mockReturnValue({
       confirm: mockConfirm,
+      closeDialog: vi.fn(),
     } as any);
   });
 

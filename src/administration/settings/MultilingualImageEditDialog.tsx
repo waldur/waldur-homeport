@@ -1,6 +1,6 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { overrideSettings } from 'waldur-js-client';
+import { ConstanceSettingsRequest, overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
 import { ENV } from '@/core/config';
@@ -58,7 +58,7 @@ export const MultilingualImageEditDialog: FC<
       // Build body with bracket notation keys: LOGIN_LOGO_MULTILINGUAL[de], etc.
       // The formDataBodySerializer will convert this to FormData
       // Include all values (files and strings) since backend replaces the entire setting
-      const body: Record<string, File | string> = {};
+      const body: ConstanceSettingsRequest = {};
 
       for (const [langCode, image] of Object.entries(images)) {
         const key = `${item.key}[${langCode}]`;

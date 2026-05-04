@@ -7,7 +7,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const CreateProfilePrompt: FC = () => {
   const { mutate, isPending: isCreating } = useManagedMutation<any, any, void>({
-    mutationFn: () => reviewerProfilesMe({ body: {} }),
+    mutationFn: () => reviewerProfilesMe(),
     successMessage: translate('Reviewer profile created.'),
     errorMessage: translate('Unable to create reviewer profile.'),
     invalidateQueries: [{ queryKey: ['reviewer-profile-me'] }],
