@@ -1,25 +1,29 @@
-import { Field, reduxForm } from 'redux-form';
+import { FC } from 'react';
+import { Field, Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsAddEndpoint,
   NestedEndpointRequest,
 } from 'waldur-js-client';
 
-import { required } from '@/core/validators';
-import { StringField, SubmitButton } from '@/form';
+import {
+  composeValidators,
+  required,
+  url,
+  validateMaxLength,
+} from '@/core/validators';
+import { FormGroup, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { FormGroup } from '../../FormGroup';
+interface AddEndpointDialogProps {
+  resolve: {
+    offering: any;
+    refetch: () => void;
+  };
+}
 
-import { ENDPOINT_FORM_ID } from './constants';
-
-export const AddEndpointDialog = reduxForm<
-  {},
-  { resolve: { offering; refetch } }
->({
-  form: ENDPOINT_FORM_ID,
-})((props) => {
+export const AddEndpointDialog: FC<AddEndpointDialogProps> = (props) => {
   const addMutation = useManagedMutation<any, any, NestedEndpointRequest>({
     mutationFn: (formData) =>
       marketplaceProviderOfferingsAddEndpoint({
@@ -32,28 +36,41 @@ export const AddEndpointDialog = reduxForm<
   });
 
   return (
-    <form
-      onSubmit={props.handleSubmit((values: NestedEndpointRequest) =>
-        addMutation.mutateAsync(values),
+    <Form<NestedEndpointRequest>
+      onSubmit={(values) => addMutation.mutateAsync(values)}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Add endpoint')}
+            footer={
+              <SubmitButton
+                disabled={invalid}
+                submitting={submitting}
+                label={translate('Create')}
+              />
+            }
+          >
+            <Field
+              name="name"
+              validate={composeValidators(required, validateMaxLength(150))}
+              component={FormGroup as any}
+              label={translate('Name')}
+              required={true}
+            >
+              <StringField />
+            </Field>
+            <Field
+              name="url"
+              validate={composeValidators(required, url)}
+              component={FormGroup as any}
+              label={translate('URL')}
+              required={true}
+            >
+              <StringField />
+            </Field>
+          </ModalDialog>
+        </form>
       )}
-    >
-      <ModalDialog
-        title={translate('Add endpoint')}
-        footer={
-          <SubmitButton
-            disabled={props.invalid}
-            submitting={props.submitting}
-            label={translate('Create')}
-          />
-        }
-      >
-        <FormGroup label={translate('Name')} required={true}>
-          <Field name="name" validate={required} component={StringField} />
-        </FormGroup>
-        <FormGroup label={translate('URL')} required={true}>
-          <Field name="url" validate={required} component={StringField} />
-        </FormGroup>
-      </ModalDialog>
-    </form>
+    />
   );
-});
+};
