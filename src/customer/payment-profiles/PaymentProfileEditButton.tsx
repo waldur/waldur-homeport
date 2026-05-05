@@ -2,16 +2,16 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
 import { useModal } from '@/modal/actions';
 
-const PaymentProfileUpdateDialogContainer = lazyComponent(() =>
+const PaymentProfileUpdateDialog = lazyComponent(() =>
   import('./PaymentProfileUpdateDialog').then((module) => ({
-    default: module.PaymentProfileUpdateDialogContainer,
+    default: module.PaymentProfileUpdateDialog,
   })),
 );
 
 export const PaymentProfileEditButton = (props) => {
   const { openDialog } = useModal();
   const callback = () =>
-    openDialog(PaymentProfileUpdateDialogContainer, {
+    openDialog(PaymentProfileUpdateDialog, {
       resolve: { profile: props.row, refetch: props.refetch },
     });
 

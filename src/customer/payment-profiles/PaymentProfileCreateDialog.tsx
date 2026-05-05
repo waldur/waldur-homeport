@@ -1,14 +1,13 @@
-import { useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
+import { Form, Field, FormSpy } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
 import { paymentProfilesCreate, paymentProfilesEnable } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { required } from '@/core/validators';
-import { ADD_PAYMENT_PROFILE_FORM_ID } from '@/customer/payment-profiles/constants';
 import { getPaymentProfileTypeOptions } from '@/customer/payment-profiles/utils';
 import {
-  FormContainer,
+  FormGroup,
   NumberField,
   SelectField,
   StringField,
@@ -25,7 +24,7 @@ import { getCustomer } from '@/workspace/selectors';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
-const PaymentProfileCreate = (props) => {
+export const PaymentProfileCreateDialog: FC<any> = (props) => {
   const [isFixedPrice, setIsFixedPrice] = useState(false);
   const dispatch = useDispatch();
 
@@ -66,81 +65,98 @@ const PaymentProfileCreate = (props) => {
   });
 
   return (
-    <form
-      onSubmit={props.handleSubmit((values) =>
-        addPaymentProfileMutation.mutateAsync(values),
-      )}
-    >
-      <ModalDialog
-        title={translate('Add payment profile')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={translate('Submit')}
-            />
-          </>
-        }
-      >
-        <FormContainer submitting={false} clearOnUnmount={false}>
-          <StringField
-            name="name"
-            label={translate('Name')}
-            required={true}
-            validate={required}
-            maxLength={150}
+    <Form
+      onSubmit={(values) => addPaymentProfileMutation.mutateAsync(values)}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <FormSpy
+            subscription={{ values: true }}
+            onChange={(state) => {
+              setIsFixedPrice(
+                state.values.payment_type?.value === 'fixed_price',
+              );
+            }}
           />
-
-          <SelectField
-            name="payment_type"
-            label={translate('Type')}
-            required={true}
-            options={paymentProfileTypeOptions}
-            isClearable={false}
-            validate={required}
-            onChange={(value: any) =>
-              setIsFixedPrice(value.value === 'fixed_price')
+          <ModalDialog
+            title={translate('Add payment profile')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={translate('Submit')}
+                />
+              </>
             }
-          />
+          >
+            <Field
+              name="name"
+              label={translate('Name')}
+              component={FormGroup as any}
+              required={true}
+              validate={required}
+            >
+              <StringField maxLength={150} />
+            </Field>
 
-          {isFixedPrice ? (
-            <DateField name="end_date" label={translate('End date')} />
-          ) : null}
-
-          {isFixedPrice && (
-            <TextField
-              name="agreement_number"
-              label={translate('Agreement number')}
-              maxLength={150}
-            />
-          )}
-
-          {isFixedPrice && (
-            <NumberField
-              name="contract_sum"
-              label={translate('Contract sum')}
-            />
-          )}
-
-          <Field
-            name="enabled"
-            component={(prop) => (
-              <AwesomeCheckbox
-                label={translate('Enable profile after creation')}
-                {...prop.input}
+            <Field
+              name="payment_type"
+              label={translate('Type')}
+              component={FormGroup as any}
+              required={true}
+              validate={required}
+            >
+              <SelectField
+                options={paymentProfileTypeOptions}
+                isClearable={false}
               />
+            </Field>
+
+            {isFixedPrice && (
+              <Field
+                name="end_date"
+                label={translate('End date')}
+                component={FormGroup as any}
+              >
+                <DateField />
+              </Field>
             )}
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+
+            {isFixedPrice && (
+              <Field
+                name="agreement_number"
+                label={translate('Agreement number')}
+                component={FormGroup as any}
+              >
+                <TextField maxLength={150} />
+              </Field>
+            )}
+
+            {isFixedPrice && (
+              <Field
+                name="contract_sum"
+                label={translate('Contract sum')}
+                component={FormGroup as any}
+              >
+                <NumberField />
+              </Field>
+            )}
+
+            <Field
+              name="enabled"
+              render={({ input }) => (
+                <AwesomeCheckbox
+                  {...input}
+                  type="checkbox"
+                  id="payment-profile-enabled"
+                  label={translate('Enable profile after creation')}
+                />
+              )}
+            />
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };
-
-const enhance = reduxForm({
-  form: ADD_PAYMENT_PROFILE_FORM_ID,
-});
-
-export const PaymentProfileCreateDialog = enhance(PaymentProfileCreate);
