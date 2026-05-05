@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { FC, useMemo } from 'react';
+import { Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { FormFooter } from '@/form';
@@ -11,67 +11,68 @@ import { formatAttribute } from '../../store/utils';
 import { parseAttribute } from '../utils';
 
 import { AttributeCell } from './AttributeCell';
-import { ATTRIBUTE_FORM_ID } from './constants';
 import { EditAttributeDialogProps } from './types';
 
-type OwnProps = {
+interface EditAttributeDialogWrapperProps {
   resolve: EditAttributeDialogProps;
-};
-
-interface FormData {
-  value: any;
 }
 
-export const EditAttributeDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
-  initialValues: {
-    value: parseAttribute(ownProps.resolve.attribute, ownProps.resolve.value),
-  },
-}))(
-  reduxForm<FormData, OwnProps>({
-    form: ATTRIBUTE_FORM_ID,
-  })(({ resolve, handleSubmit, invalid, submitting }) => {
-    const updateMutation = useManagedMutation<any, any, FormData>({
-      mutationFn: (formData) =>
-        marketplaceProviderOfferingsUpdateAttributes({
-          path: { uuid: resolve.offering.uuid },
-          body: {
-            ...resolve.offering.attributes,
-            [resolve.attribute.key]: formatAttribute(
-              resolve.attribute,
-              formData.value,
-            ),
-          },
-        }),
-      successMessage: translate('Attribute has been updated.'),
-      errorMessage: translate('Unable to update attribute'),
-      refetch: resolve.refetch,
-    });
+export const EditAttributeDialog: FC<EditAttributeDialogWrapperProps> = ({
+  resolve,
+}) => {
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsUpdateAttributes({
+        path: { uuid: resolve.offering.uuid },
+        body: {
+          ...resolve.offering.attributes,
+          [resolve.attribute.key]: formatAttribute(
+            resolve.attribute,
+            formData.value,
+          ),
+        },
+      }),
+    successMessage: translate('Attribute has been updated.'),
+    errorMessage: translate('Unable to update attribute'),
+    refetch: resolve.refetch,
+  });
 
-    return (
-      <form
-        onSubmit={handleSubmit((values) => updateMutation.mutateAsync(values))}
-      >
-        <ModalDialog
-          title={translate('Edit attribute')}
-          footer={
-            <FormFooter
-              submitting={submitting}
-              invalid={invalid}
-              submitLabel={translate('Save')}
-            />
-          }
-        >
-          <p>
-            <strong>{translate('Section')}:</strong> {resolve.section.title}
-          </p>
-          <p>
-            <strong>{translate('Attribute')}:</strong> {resolve.attribute.title}
-          </p>
-          <p>
-            <AttributeCell attribute={resolve.attribute} />
-          </p>
-        </ModalDialog>
-      </form>
-    );
-  }),
-);
+  const initialValues = useMemo(
+    () => ({
+      value: parseAttribute(resolve.attribute, resolve.value),
+    }),
+    [resolve.attribute, resolve.value],
+  );
+
+  return (
+    <Form
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit attribute')}
+            footer={
+              <FormFooter
+                submitting={submitting}
+                invalid={invalid}
+                submitLabel={translate('Save')}
+              />
+            }
+          >
+            <p>
+              <strong>{translate('Section')}:</strong> {resolve.section.title}
+            </p>
+            <p>
+              <strong>{translate('Attribute')}:</strong>{' '}
+              {resolve.attribute.title}
+            </p>
+            <p className="mt-5">
+              <AttributeCell attribute={resolve.attribute} />
+            </p>
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

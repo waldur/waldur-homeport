@@ -1,31 +1,38 @@
-import { Field } from 'redux-form';
+import { FC } from 'react';
+import { Field } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
-import { FieldError } from '@/form';
+import { FormGroup } from '@/form';
 import { InputField } from '@/form/InputField';
 
 import { configAttrField } from './utils';
 
-export const AttributeCell = ({ attribute }) => {
+export const AttributeCell: FC<{ attribute }> = ({ attribute }) => {
   if (attribute.type === 'boolean') {
     return (
       <Field
         name="value"
-        component={(prop) => (
-          <AwesomeCheckbox label={attribute.title} {...prop.input} />
+        render={(prop) => (
+          <AwesomeCheckbox
+            {...prop.input}
+            type="switch"
+            label={attribute.title}
+          />
         )}
       />
     );
   }
   const attr = configAttrField(attribute);
+  const Component = attr.component || InputField;
   return (
-    <>
-      <Field name="value" component={InputField} {...attr} />
-      <Field
-        name="value"
-        {...attr}
-        component={(fieldProps) => <FieldError error={fieldProps.meta.error} />}
-      />
-    </>
+    <Field
+      name="value"
+      {...attr}
+      component={FormGroup as any}
+      hideLabel={true}
+      spaceless={true}
+    >
+      <Component />
+    </Field>
   );
 };

@@ -1,34 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { change, Field, reduxForm } from 'redux-form';
+import { FC, useMemo } from 'react';
+import { Form, Field } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormFooter, SelectField } from '@/form';
+import { FormFooter, SelectField, FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { CATEGORY_FORM_ID } from './constants';
-
-type OwnProps = {
+interface EditCategoryDialogProps {
   resolve: { offering; refetch };
-};
-
-interface FormData {
-  category: any;
 }
 
-export const EditCategoryDialog = reduxForm<FormData, OwnProps>({
-  form: CATEGORY_FORM_ID,
-})(({ resolve, handleSubmit, invalid, submitting }) => {
-  const dispatch = useDispatch();
-
-  const submitRequestMutation = useManagedMutation<any, any, FormData>({
+export const EditCategoryDialog: FC<EditCategoryDialogProps> = ({
+  resolve,
+}) => {
+  const submitRequestMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>
       marketplaceProviderOfferingsUpdateDescription({
         path: { uuid: resolve.offering.uuid },
@@ -46,51 +37,56 @@ export const EditCategoryDialog = reduxForm<FormData, OwnProps>({
     queryFn: getCategories,
   });
 
-  useEffect(() => {
+  const initialValues = useMemo(() => {
     if (queryData.data) {
-      dispatch(
-        change(
-          CATEGORY_FORM_ID,
-          'category',
-          queryData.data.find((item) => item.url === resolve.offering.category),
+      return {
+        category: queryData.data.find(
+          (item) => item.url === resolve.offering.category,
         ),
-      );
+      };
     }
+    return {};
   }, [queryData.data, resolve.offering.category]);
 
   return (
-    <form
-      onSubmit={handleSubmit((values) =>
-        submitRequestMutation.mutateAsync(values),
+    <Form
+      onSubmit={(values) => submitRequestMutation.mutateAsync(values)}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit category')}
+            footer={
+              <FormFooter
+                submitting={submitting}
+                invalid={invalid}
+                submitLabel={translate('Save')}
+              />
+            }
+          >
+            {queryData.isLoading ? (
+              <LoadingSpinner />
+            ) : queryData.isError ? (
+              <LoadingErred loadData={queryData.refetch} />
+            ) : (
+              <Field
+                name="category"
+                label={translate('Category')}
+                component={FormGroup as any}
+                required={true}
+                validate={required}
+              >
+                <SelectField
+                  options={queryData.data}
+                  isClearable={false}
+                  getOptionValue={(option) => option.url}
+                  getOptionLabel={(option) => option.title}
+                />
+              </Field>
+            )}
+          </ModalDialog>
+        </form>
       )}
-    >
-      <ModalDialog
-        title={translate('Edit category')}
-        footer={
-          <FormFooter
-            submitting={submitting}
-            invalid={invalid}
-            submitLabel={translate('Save')}
-          />
-        }
-      >
-        {queryData.isLoading ? (
-          <LoadingSpinner />
-        ) : queryData.isError ? (
-          <LoadingErred loadData={queryData.refetch} />
-        ) : (
-          <Field
-            name="category"
-            options={queryData.data}
-            required={true}
-            isClearable={false}
-            component={SelectField}
-            getOptionValue={(option) => option.url}
-            getOptionLabel={(option) => option.title}
-            validate={required}
-          />
-        )}
-      </ModalDialog>
-    </form>
+    />
   );
-});
+};
