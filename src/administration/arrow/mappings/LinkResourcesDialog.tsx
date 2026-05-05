@@ -33,7 +33,6 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
     <ModalDialog
       title={translate('Link Resources to Arrow Licenses')}
       subtitle={mapping.arrow_company_name}
-      closeButton
     >
       {isLoading ? (
         <LoadingSpinner />

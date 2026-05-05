@@ -67,7 +67,6 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
                   })
                 : translate('Create affiliated organization')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid || submitting}

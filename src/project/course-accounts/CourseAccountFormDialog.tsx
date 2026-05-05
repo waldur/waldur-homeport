@@ -227,7 +227,6 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
               title={translate('Create course account')}
               iconNode={<PlusCircleIcon weight="bold" />}
               iconColor="success"
-              closeButton
               footer={
                 <>
                   {activeTab === 'batch' && step === 1 && (

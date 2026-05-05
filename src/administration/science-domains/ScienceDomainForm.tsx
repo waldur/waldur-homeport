@@ -58,7 +58,6 @@ export const ScienceDomainForm = ({ resolve }) => {
                   })
                 : translate('Create science domain')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid || submitting}

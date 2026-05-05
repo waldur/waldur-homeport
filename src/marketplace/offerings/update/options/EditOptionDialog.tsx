@@ -105,7 +105,6 @@ export const EditOptionDialog = ({ resolve }) => {
                 label={translate('Save')}
               />
             }
-            closeButton
           >
             <OptionForm
               resourceType={resolve.type}

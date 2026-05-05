@@ -71,7 +71,6 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
                 ? translate('Edit the announcement')
                 : translate('Create new announcement')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid}

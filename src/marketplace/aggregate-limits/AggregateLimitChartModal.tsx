@@ -25,7 +25,7 @@ export const AggregateLimitChartModal: React.FC<
   }
 
   return (
-    <ModalDialog title={title} closeButton>
+    <ModalDialog title={title}>
       <div style={{ height: '400px', width: '100%' }}>
         <EChart options={options} exportTitle={title} />
       </div>

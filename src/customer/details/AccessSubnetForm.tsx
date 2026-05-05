@@ -92,7 +92,6 @@ export const AccessSubnetForm = ({ resolve }: AccessSubnetFormProps) => {
             ? translate('Edit access subnet')
             : translate('Create access subnet')
         }
-        closeButton
         footer={
           <CompactSubmitButton
             submitting={isPending}

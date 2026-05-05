@@ -591,7 +591,6 @@ export const ArrowHowItWorksDialog: FC = () => {
   return (
     <ModalDialog
       title={translate('How Arrow Integration works')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       <div className="d-flex flex-column gap-8">

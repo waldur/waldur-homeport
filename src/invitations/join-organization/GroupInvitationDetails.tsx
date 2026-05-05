@@ -12,7 +12,6 @@ export const GroupInvitationDetails = ({
   return (
     <ModalDialog
       title={translate('Details')}
-      closeButton
       footer={
         <CloseDialogButton
           variant="primary"

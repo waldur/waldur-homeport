@@ -80,7 +80,6 @@ export const GroupFromDialog = connect<
                 })
               : translate('Create category group')
           }
-          closeButton
           footer={
             <SubmitButton
               disabled={props.invalid}

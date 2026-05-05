@@ -60,7 +60,6 @@ export const OrganizationGroupForm = ({ resolve }) => {
                   })
                 : translate('Create organization group')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid || submitting}

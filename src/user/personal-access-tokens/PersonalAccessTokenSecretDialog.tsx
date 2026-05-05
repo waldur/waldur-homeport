@@ -46,7 +46,6 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
   return (
     <ModalDialog
       title={translate('Personal access token created')}
-      closeButton
       footer={<CloseDialogButton label={translate('Done')} />}
     >
       <Card className="card-bordered bg-light-warning mb-4">

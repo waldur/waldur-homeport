@@ -203,7 +203,7 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
   // Wait for config to load before rendering form to ensure initial values are set
   if (isLoading) {
     return (
-      <ModalDialog title={resolve.title} closeButton>
+      <ModalDialog title={resolve.title}>
         <LoadingSpinner />
       </ModalDialog>
     );
@@ -217,7 +217,6 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={resolve.title}
-            closeButton
             footer={
               <>
                 <SubmitButton

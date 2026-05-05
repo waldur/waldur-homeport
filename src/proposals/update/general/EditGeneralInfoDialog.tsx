@@ -140,7 +140,6 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={resolve.title}
-            closeButton
             footer={
               <>
                 <SubmitButton

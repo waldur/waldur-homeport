@@ -16,7 +16,6 @@ export const ServiceProviderCommentModal: FC<
   return (
     <ModalDialog
       title={translate('Service provider message')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       {commentUrl && (

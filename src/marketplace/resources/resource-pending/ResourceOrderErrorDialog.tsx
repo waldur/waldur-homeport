@@ -4,7 +4,7 @@ import { Field } from '@/resource/summary';
 
 export const ResourceOrderErrorDialog = ({ resolve }) => {
   return (
-    <ModalDialog title={translate('Order errors')} closeButton>
+    <ModalDialog title={translate('Order errors')}>
       <Field label={translate('Error message')}>
         {resolve.resource.creation_order.error_message}
       </Field>

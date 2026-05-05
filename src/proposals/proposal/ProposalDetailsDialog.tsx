@@ -39,7 +39,7 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
   });
 
   return (
-    <ModalDialog title={translate('Proposal details overview')} closeButton>
+    <ModalDialog title={translate('Proposal details overview')}>
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (

@@ -80,7 +80,6 @@ export const DirectEmailInviteDialog = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Invite reviewer by email')}
-            closeButton
             footer={
               <>
                 <SubmitButton

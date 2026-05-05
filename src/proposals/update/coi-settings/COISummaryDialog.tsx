@@ -237,7 +237,6 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
   return (
     <ModalDialog
       title={translate('How Conflict of Interest detection works')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       <div className="d-flex flex-column gap-8">

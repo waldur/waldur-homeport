@@ -140,7 +140,6 @@ export const ServiceAccountFormDialog = reduxForm<
           )
         }
         iconColor="success"
-        closeButton
         footer={
           <>
             <CloseDialogButton className="min-w-125px" />

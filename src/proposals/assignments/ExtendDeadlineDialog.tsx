@@ -71,7 +71,6 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
             subtitle={translate(
               'Set a new expiration date for this assignment batch.',
             )}
-            closeButton
             footer={
               <>
                 <SubmitButton

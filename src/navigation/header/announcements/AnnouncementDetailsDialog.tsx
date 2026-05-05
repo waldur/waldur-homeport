@@ -149,7 +149,6 @@ export const AnnouncementDetailsDialog: FC<{
   return (
     <ModalDialog
       title={getTitle()}
-      closeButton
       className="announcement-details"
       iconNode={<icon.icon weight="bold" />}
       iconColor={icon.variant}

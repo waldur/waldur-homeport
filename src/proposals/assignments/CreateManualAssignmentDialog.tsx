@@ -161,7 +161,6 @@ export const CreateManualAssignmentDialog: FC<
             subtitle={translate(
               'Manually assign proposals to a reviewer. A draft batch will be created which can then be sent.',
             )}
-            closeButton
             footer={
               <>
                 <SubmitButton

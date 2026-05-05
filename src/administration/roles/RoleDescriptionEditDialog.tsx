@@ -52,7 +52,6 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
                 />
               </>
             }
-            closeButton
           >
             <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <table className="table">

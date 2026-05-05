@@ -292,7 +292,6 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
   return (
     <ModalDialog
       title={translate('How SLURM periodic usage policy works')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       <div className="d-flex flex-column gap-8">

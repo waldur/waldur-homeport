@@ -60,7 +60,6 @@ export const ProviderDetailsDialog = (props) => {
         <ModalDialog
           title={translate('Edit user agreement')}
           footer={<CloseDialogButton label={translate('OK')} />}
-          closeButton
         >
           <ListGroup>
             {data[neededProvider] && (

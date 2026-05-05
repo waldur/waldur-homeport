@@ -123,7 +123,6 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
                 ? translate('Edit {title}', { title: categoryData.title })
                 : translate('Create category')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid || pristine}

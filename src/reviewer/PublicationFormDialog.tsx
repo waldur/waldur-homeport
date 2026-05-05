@@ -92,7 +92,6 @@ export const PublicationFormDialog = ({
             subtitle={translate(
               'Add publications for co-authorship conflict detection and expertise matching.',
             )}
-            closeButton
             iconNode={
               isEdit ? (
                 <PencilSimpleIcon weight="bold" />

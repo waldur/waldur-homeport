@@ -211,7 +211,6 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
             )}
           </>
         }
-        closeButton
         headerClassName="pb-5"
         {...(modalProps || {})}
       >

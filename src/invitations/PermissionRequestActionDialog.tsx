@@ -37,7 +37,6 @@ const PurePermissionRequestActionDialog: FunctionComponent<
   return (
     <ModalDialog
       title={translate('Request review')}
-      closeButton
       footer={
         !readOnly && (
           <>

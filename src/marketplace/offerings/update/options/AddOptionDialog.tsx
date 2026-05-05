@@ -70,7 +70,6 @@ export const AddOptionDialog = ({ resolve }) => {
                 label={translate('Create')}
               />
             }
-            closeButton
           >
             <OptionForm
               resourceType={resolve.type}

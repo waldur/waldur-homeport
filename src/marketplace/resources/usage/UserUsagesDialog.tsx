@@ -23,7 +23,6 @@ export const UserUsagesDialog: FC<UserUsagesDialogProps> = ({
   return (
     <ModalDialog
       title={component.name + ': ' + sumUsages + ' ' + component.measured_unit}
-      closeButton
     >
       <ul className="mb-0">
         {userUsages.map((item, i) => (

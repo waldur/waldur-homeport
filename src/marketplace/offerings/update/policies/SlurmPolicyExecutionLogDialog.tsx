@@ -268,11 +268,7 @@ export const SlurmPolicyExecutionLogDialog: FC<
   SlurmPolicyExecutionLogDialogProps
 > = ({ resolve: { policyUuid } }) => {
   return (
-    <ModalDialog
-      title={translate('Policy execution log')}
-      closeButton
-      bodyClassName="p-0"
-    >
+    <ModalDialog title={translate('Policy execution log')} bodyClassName="p-0">
       <div className="p-4">
         <Tabs
           defaultActiveKey="evaluations"

@@ -202,7 +202,6 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Generate reviewer matches')}
-            closeButton
             footer={
               <>
                 <SubmitButton

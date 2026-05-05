@@ -168,7 +168,6 @@ export const GroupInvitationEditDialog = ({
               title={translate('Edit group invitation')}
               iconNode={<PencilSimpleIcon weight="bold" />}
               iconColor="info"
-              closeButton
               footer={
                 <>
                   <CloseDialogButton />

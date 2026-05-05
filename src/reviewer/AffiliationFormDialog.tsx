@@ -106,7 +106,6 @@ export const AffiliationFormDialog = ({
             subtitle={translate(
               'Add your institutional affiliations for conflict of interest detection.',
             )}
-            closeButton
             iconNode={
               isEdit ? (
                 <PencilSimpleIcon weight="bold" />

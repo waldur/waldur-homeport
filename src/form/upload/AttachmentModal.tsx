@@ -25,7 +25,6 @@ export const AttachmentModal = ({
         size={30}
       />
     }
-    closeButton
   >
     <ImageFetcher url={attachment.file} name={attachment.file_name} />
   </ModalDialog>

@@ -191,7 +191,6 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                   })
                 : translate('Create project')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid || submitting}

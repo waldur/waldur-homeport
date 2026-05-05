@@ -220,7 +220,6 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
                 ? translate('Edit the issue template')
                 : translate('Create new issue template')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid}

@@ -24,7 +24,6 @@ export const ProjectDetailsDialog: FC<{
       subtitle={translate('Project owned by {name}', {
         name: project.customer_name,
       })}
-      closeButton
       iconNode={<ClipboardTextIcon weight="bold" />}
       iconColor="success"
     >

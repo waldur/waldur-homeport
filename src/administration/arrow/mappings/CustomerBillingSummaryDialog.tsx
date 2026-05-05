@@ -31,7 +31,6 @@ export const CustomerBillingSummaryDialog: FC<
       title={translate('Billing summary: {name}', {
         name: mapping.arrow_company_name,
       })}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       {isLoading ? (

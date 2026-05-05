@@ -62,7 +62,6 @@ export const UpdateProviderDialog = ({
                 label={translate('Save')}
               />
             }
-            closeButton
           >
             {resolve.type === FREEIPA_IDP ? (
               <ProviderFreeIPAForm />

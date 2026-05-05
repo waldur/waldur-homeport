@@ -13,7 +13,6 @@ export const ProjectDigestPreviewDialog: FC = () => {
   return (
     <ModalDialog
       title={translate('Digest preview')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       <ProjectDigestPreview customerUuid={customer.uuid} />

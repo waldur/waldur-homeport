@@ -74,7 +74,7 @@ export const ServiceProcessesDetailsDialog: FC<{
   });
 
   return (
-    <ModalDialog title={agentService.name} closeButton>
+    <ModalDialog title={agentService.name}>
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (

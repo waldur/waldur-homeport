@@ -147,7 +147,7 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
   // Wait for config to load before rendering form
   if (isLoading) {
     return (
-      <ModalDialog title={resolve.title} closeButton>
+      <ModalDialog title={resolve.title}>
         <LoadingSpinner />
       </ModalDialog>
     );
@@ -161,7 +161,6 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={resolve.title}
-            closeButton
             footer={
               <>
                 <SubmitButton

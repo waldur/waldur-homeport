@@ -59,7 +59,6 @@ export const EditOfferingChecklistDialog: FC<{
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Assigned compliance checklist')}
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="w-125px" />

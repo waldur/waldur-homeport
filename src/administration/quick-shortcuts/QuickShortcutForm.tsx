@@ -75,7 +75,6 @@ export const QuickShortcutForm = ({ resolve }) => {
                   })
                 : translate('Create quick shortcut')
             }
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="flex-equal" />

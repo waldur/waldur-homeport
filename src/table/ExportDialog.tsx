@@ -47,7 +47,6 @@ export const ExportDialog = connect<
       <form onSubmit={props.handleSubmit(callback)}>
         <ModalDialog
           title={translate('Export as')}
-          closeButton
           footer={
             <SubmitButton
               disabled={props.invalid}

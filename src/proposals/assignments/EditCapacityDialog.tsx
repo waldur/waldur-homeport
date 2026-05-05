@@ -48,7 +48,6 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Edit reviewer capacity')}
-            closeButton
             footer={
               <>
                 <SubmitButton

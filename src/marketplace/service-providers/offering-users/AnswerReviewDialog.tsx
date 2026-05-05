@@ -41,7 +41,6 @@ export const AnswerReviewDialog: FC<AnswerReviewDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Review')}
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="min-w-125px" />

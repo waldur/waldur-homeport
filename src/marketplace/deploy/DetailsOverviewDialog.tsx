@@ -100,7 +100,6 @@ export const DetailsOverviewDialog: FC<{
       subtitle={translate(
         'View key details about the organization, project, offering, and provider for your resource.',
       )}
-      closeButton
       className="resource-details-overview"
     >
       {isLoading ? (

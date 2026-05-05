@@ -105,7 +105,6 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Import public key')}
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid}

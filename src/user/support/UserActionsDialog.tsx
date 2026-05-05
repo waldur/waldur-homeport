@@ -124,7 +124,6 @@ export const UserActionsDialog: FC<UserActionsDialogProps> = ({
       )}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
       iconColor="info"
-      closeButton
     >
       <Table
         {...tableProps}

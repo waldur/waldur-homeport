@@ -111,7 +111,6 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
                 ? translate('Edit auto-provisioning rule')
                 : translate('Add auto-provisioning rule')
             }
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="min-w-125px" />

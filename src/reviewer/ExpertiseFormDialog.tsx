@@ -63,7 +63,6 @@ export const ExpertiseFormDialog = ({ resolve }: ExpertiseFormDialogProps) => {
             subtitle={translate(
               'Add keywords describing your areas of expertise for proposal matching.',
             )}
-            closeButton
             iconNode={<PlusCircleIcon weight="bold" />}
             iconColor="success"
             footer={

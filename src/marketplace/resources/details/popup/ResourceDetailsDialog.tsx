@@ -15,7 +15,6 @@ export const ResourceDetailsDialog: FC<ActionDialogProps> = ({
     <ModalDialog
       title={translate('Resource details')}
       subtitle={translate('Key information about the resource.')}
-      closeButton
       iconNode={<CopySimpleIcon weight="bold" />}
       iconColor="success"
       bodyClassName="h-350px"

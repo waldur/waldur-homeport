@@ -71,7 +71,6 @@ export const EditScriptLanguageDialog = connect<{}, {}, OwnProps>(
             "Select the language to be used for the offering {name}'s custom scripts",
             { name: props.resolve.offering.name },
           )}
-          closeButton
           footer={
             <>
               <CloseDialogButton className="flex-equal" />

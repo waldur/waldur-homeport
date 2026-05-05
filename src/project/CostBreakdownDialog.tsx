@@ -11,7 +11,7 @@ export const CostBreakdownDialog = ({
   resolve: { items: InvoiceCostItem[] };
 }) => {
   return (
-    <ModalDialog title={translate('Cost breakdown')} closeButton>
+    <ModalDialog title={translate('Cost breakdown')}>
       <table className="table table-hover mb-0">
         <thead>
           <tr>

@@ -24,7 +24,6 @@ export const OrderSummaryDialog: React.FC<OrderSummaryDialogProps> = (
       subtitle={translate(
         'Review the details of your order, before confirming',
       )}
-      closeButton
     >
       <CheckoutSummaryComponent offering={props.offering} onlyDetails />
     </ModalDialog>

@@ -67,7 +67,6 @@ export const SuggestionRejectDialog = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Reject suggestion')}
-            closeButton
             footer={
               <>
                 <SubmitButton

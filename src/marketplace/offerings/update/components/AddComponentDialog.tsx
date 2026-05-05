@@ -41,7 +41,6 @@ export const AddComponentDialog = reduxForm<
         title={translate('Add component')}
         iconNode={<PlusCircleIcon weight="bold" />}
         iconColor="success"
-        closeButton
         footer={
           <>
             <CloseDialogButton className="min-w-125px" />

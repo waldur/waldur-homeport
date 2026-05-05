@@ -69,7 +69,7 @@ export const OpenStackSecurityGroupsTable: FunctionComponent<{
 export const OpenStackSecurityGroupsDialog = (
   props: OpenStackSecurityGroupsDialogProps,
 ) => (
-  <ModalDialog title={translate('Security groups details')} closeButton>
+  <ModalDialog title={translate('Security groups details')}>
     {props.resolve.securityGroups.length === 0 &&
       translate('Instance does not have any security groups yet.')}
     {props.resolve.securityGroups.length > 0 && (

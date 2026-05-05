@@ -93,7 +93,6 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
         title={translate('Edit agent identity: {name}', {
           name: resolve.identity.name,
         })}
-        closeButton
         footer={<CloseDialogButton className="flex-equal" />}
       >
         <LoadingSpinner />
@@ -115,7 +114,6 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
                   })
                 : translate('Create agent identity')
             }
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="flex-equal" />

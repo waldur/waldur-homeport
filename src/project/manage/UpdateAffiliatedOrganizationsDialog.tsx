@@ -87,7 +87,6 @@ export const UpdateAffiliatedOrganizationsDialog: FunctionComponent<
   return (
     <ModalDialog
       title={translate('Update affiliated organizations')}
-      closeButton
       footer={
         <>
           <CloseDialogButton />

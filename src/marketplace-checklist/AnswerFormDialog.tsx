@@ -80,7 +80,6 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={resolve.title || question.description}
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="min-w-125px" />

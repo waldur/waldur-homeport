@@ -76,7 +76,6 @@ export const TagFormDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                 })
               : translate('Create tag')
           }
-          closeButton
           footer={
             <SubmitButton
               disabled={props.invalid}

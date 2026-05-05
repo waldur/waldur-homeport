@@ -4,7 +4,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 
 export const CostPoliciesDetailsDialog = ({ resolve: { project } }) => {
   return (
-    <ModalDialog title={translate('View policy')} closeButton>
+    <ModalDialog title={translate('View policy')}>
       <CostPoliciesListTable
         table="ProjectCostPoliciesList"
         filter={{ project_uuid: project.uuid }}

@@ -140,7 +140,6 @@ export const GroupInvitationCreateDialog = ({
               title={translate('Create group invitation')}
               iconNode={<UsersThreeIcon weight="bold" />}
               iconColor="success"
-              closeButton
             >
               <div className="pb-5 mb-5 border-bottom">
                 <FormGroup label={translate('Invitation type')} required>

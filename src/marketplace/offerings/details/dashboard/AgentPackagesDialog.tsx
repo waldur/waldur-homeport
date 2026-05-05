@@ -23,7 +23,7 @@ export const AgentPackagesDialog: FC<{
   });
 
   return (
-    <ModalDialog title={translate('Packages')} closeButton>
+    <ModalDialog title={translate('Packages')}>
       <Table
         {...tableProps}
         columns={[

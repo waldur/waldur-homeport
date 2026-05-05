@@ -12,7 +12,6 @@ const LastRunResultDialog = ({ remoteSync }) => {
     <ModalDialog
       title={translate('Result of last run')}
       subtitle={remoteSync.api_url}
-      closeButton
     >
       <pre>{remoteSync.last_output || translate('No results to display.')}</pre>
     </ModalDialog>

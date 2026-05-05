@@ -62,7 +62,6 @@ export const ProviderUsersDialog = (props) => (
       provider: props.resolve.type,
     })}
     footer={<CloseDialogButton label={translate('OK')} />}
-    closeButton
   >
     {props.resolve.type === FREEIPA_IDP ? (
       <FreeIPAUsersList />

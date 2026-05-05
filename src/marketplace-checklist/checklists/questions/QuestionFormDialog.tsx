@@ -412,7 +412,6 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
             title={
               isEdit ? translate('Edit question') : translate('Add question')
             }
-            closeButton
             bodyClassName="h-500px mh-500px"
             footer={
               <>

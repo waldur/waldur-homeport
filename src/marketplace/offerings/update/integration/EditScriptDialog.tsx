@@ -234,7 +234,6 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
               ? translate('Manage custom scripts ({language})', { language })
               : translate('Manage custom scripts')
           }
-          closeButton
           onHide={closeDialog}
           bodyClassName="py-0"
           extraClassName="editor-header gap-4 py-5"

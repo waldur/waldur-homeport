@@ -92,7 +92,6 @@ export const ExportAsEmailDialog = reduxForm<{}, any>({
             label={translate('Send report')}
           />
         }
-        closeButton
       >
         <Row>
           <Col md={12} lg={8} className="d-flex flex-column">

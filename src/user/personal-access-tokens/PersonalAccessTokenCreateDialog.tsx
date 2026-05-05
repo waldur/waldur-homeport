@@ -92,7 +92,6 @@ export const PersonalAccessTokenCreateDialog: React.FC<
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Create personal access token')}
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid}

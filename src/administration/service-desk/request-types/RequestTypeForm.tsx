@@ -82,7 +82,6 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
                 ? translate('Edit request type')
                 : translate('Create request type')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid}

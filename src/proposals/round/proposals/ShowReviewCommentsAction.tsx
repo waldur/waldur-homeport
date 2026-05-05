@@ -19,7 +19,6 @@ const ShowReviewCommentsDialog = ({
       title={translate('Comments by {reviewer}', {
         reviewer: review.reviewer_full_name,
       })}
-      closeButton
       iconNode={<InfoIcon weight="bold" />}
     >
       <FormTable hideActions alignTop detailsMode>

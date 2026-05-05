@@ -64,7 +64,6 @@ const LoadPresetDialog = ({ resolve }) => {
             iconNode={<DownloadSimpleIcon weight="bold" />}
             iconColor="info"
             title={translate('Load science domain preset')}
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid || submitting}

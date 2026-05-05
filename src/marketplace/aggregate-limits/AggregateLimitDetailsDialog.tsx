@@ -134,7 +134,6 @@ export const AggregateLimitDetailsDialog = ({
       title={translate('Usage and limits details for {object}', {
         object: project?.name || customer.name,
       })}
-      closeButton
     >
       <div className="row d-flex justify-content-end">
         <div className="col-md-4">

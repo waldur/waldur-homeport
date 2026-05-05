@@ -86,7 +86,6 @@ export const RoleMappingFormDialog = ({ resolve }) => {
             subtitle={translate(
               'If the project role is not set, corresponding users in proposal role will not be transferred to the project.',
             )}
-            closeButton
             iconNode={!isEdit ? <PlusCircleIcon weight="bold" /> : null}
             iconColor={isEdit ? 'warning' : 'success'}
             footer={

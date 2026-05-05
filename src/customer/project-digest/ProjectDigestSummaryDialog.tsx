@@ -8,7 +8,6 @@ export const ProjectDigestSummaryDialog: FC = () => {
   return (
     <ModalDialog
       title={translate('How project digest works')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       <div className="d-flex flex-column gap-8">

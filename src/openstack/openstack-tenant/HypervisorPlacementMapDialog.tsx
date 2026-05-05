@@ -47,7 +47,6 @@ export const HypervisorPlacementMapDialog: FC<Props> = ({ resolve }) => {
   return (
     <ModalDialog
       title={translate('Hypervisor placement map')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       {isLoading ? (

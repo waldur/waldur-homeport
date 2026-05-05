@@ -116,7 +116,6 @@ export const PoolSummaryDialog: FC = () => {
   return (
     <ModalDialog
       title={translate('How the Reviewer Pool Works')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       <div className="d-flex flex-column gap-8">

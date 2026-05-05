@@ -168,7 +168,6 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
                 })
               : translate('Create call')
           }
-          closeButton
           footer={
             <SubmitButton
               disabled={props.invalid}

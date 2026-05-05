@@ -33,11 +33,7 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
     | undefined;
 
   return (
-    <ModalDialog
-      title={translate('Processing log')}
-      closeButton
-      bodyClassName="p-0"
-    >
+    <ModalDialog title={translate('Processing log')} bodyClassName="p-0">
       {processingLog && processingLog.length > 0 ? (
         <Table responsive striped className="mb-0">
           <thead>

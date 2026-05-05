@@ -100,7 +100,6 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
             </>
           )
         }
-        closeButton
         headerClassName="pb-5"
         {...(modalProps || {})}
       >

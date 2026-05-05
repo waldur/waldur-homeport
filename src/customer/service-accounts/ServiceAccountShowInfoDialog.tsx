@@ -13,7 +13,7 @@ interface OwnProps {
 
 export const ServiceAccountShowInfoDialog = ({ resolve }: OwnProps) => {
   return (
-    <ModalDialog title={translate('Your API token')} closeButton>
+    <ModalDialog title={translate('Your API token')}>
       <Form.Group className="mb-7">
         <Form.Label>{translate('Username')}</Form.Label>
         <Form.Control value={resolve.username} disabled />

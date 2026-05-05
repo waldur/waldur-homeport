@@ -92,7 +92,6 @@ export const IssueStatusForm: FC<IssueStatusFormProps> = ({ resolve }) => {
                 ? translate('Edit issue status')
                 : translate('Create issue status')
             }
-            closeButton
             footer={
               <SubmitButton
                 disabled={invalid}

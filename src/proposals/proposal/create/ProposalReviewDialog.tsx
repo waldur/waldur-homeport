@@ -24,7 +24,7 @@ export const ProposalReviewDialog: FC<ProposalReviewDialogProps> = ({
   }, [reviews]);
 
   return (
-    <ModalDialog title={translate('Proposal review details')} closeButton>
+    <ModalDialog title={translate('Proposal review details')}>
       <FormLabel className="mb-0">{translate('Rate')}</FormLabel>
       <div className="d-flex align-items-center flex-grow-1 flex-wrap gap-4">
         <RateStars value={overallScore} className="mb-4" />

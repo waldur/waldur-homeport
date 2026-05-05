@@ -77,7 +77,6 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
               version: tos.version,
             })}
             iconNode={<PencilIcon weight="bold" />}
-            closeButton
             footer={
               <div className="d-flex gap-3 justify-content-end mt-4">
                 <CloseDialogButton className="min-w-125px" />

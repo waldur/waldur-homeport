@@ -24,7 +24,6 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
   return (
     <ModalDialog
       title={translate('Reviewer profile')}
-      closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
       <div className="d-flex flex-column gap-4">

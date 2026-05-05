@@ -66,7 +66,6 @@ export const EventSubscriptionForm = ({
                 ? translate('Edit event subscription')
                 : translate('Create event subscription')
             }
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="flex-equal" />

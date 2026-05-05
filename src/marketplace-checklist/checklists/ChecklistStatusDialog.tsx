@@ -40,7 +40,6 @@ export const ChecklistStatusDialog: FC<ChecklistStatusDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Change status')}
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="flex-equal" />
