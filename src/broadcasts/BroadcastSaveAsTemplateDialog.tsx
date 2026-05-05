@@ -1,11 +1,12 @@
-import { reduxForm } from 'redux-form';
+import { FC } from 'react';
+import { Field, Form } from 'react-final-form';
 import {
   broadcastMessageTemplatesCreate,
   MessageTemplateRequest,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormContainer, StringField, SubmitButton } from '@/form';
+import { FormGroup, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -13,12 +14,16 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { BroadcastFormData } from './types';
 
-export const BroadcastSaveAsTemplateDialog = reduxForm<
-  MessageTemplateRequest,
-  { resolve: { refetch; broadcastData: BroadcastFormData } }
->({
-  form: 'BroadcastSaveAsTemplateDialog',
-})(({ submitting, handleSubmit, resolve }) => {
+interface BroadcastSaveAsTemplateDialogProps {
+  resolve: {
+    refetch: () => void;
+    broadcastData: BroadcastFormData;
+  };
+}
+
+export const BroadcastSaveAsTemplateDialog: FC<
+  BroadcastSaveAsTemplateDialogProps
+> = ({ resolve }) => {
   const saveMutation = useManagedMutation<any, any, MessageTemplateRequest>({
     mutationFn: (formData) =>
       broadcastMessageTemplatesCreate({
@@ -33,25 +38,35 @@ export const BroadcastSaveAsTemplateDialog = reduxForm<
   });
 
   return (
-    <ModalDialog title={translate('Create a broadcast template')}>
-      <form
-        onSubmit={handleSubmit((values) => saveMutation.mutateAsync(values))}
-      >
-        <FormContainer submitting={submitting}>
-          <StringField
-            name="name"
-            label={translate('Name')}
-            maxLength={150}
-            required={true}
-            validate={required}
-          />
-
-          <div className="d-flex justify-content-end gap-2">
-            <CloseDialogButton />
-            <SubmitButton submitting={submitting} label={translate('Save')} />
-          </div>
-        </FormContainer>
-      </form>
-    </ModalDialog>
+    <Form<MessageTemplateRequest>
+      onSubmit={(values) => saveMutation.mutateAsync(values)}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Create a broadcast template')}
+            footer={
+              <div className="d-flex justify-content-end gap-2">
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={submitting}
+                  invalid={invalid}
+                  label={translate('Save')}
+                />
+              </div>
+            }
+          >
+            <Field
+              name="name"
+              label={translate('Name')}
+              component={FormGroup as any}
+              required={true}
+              validate={required}
+            >
+              <StringField maxLength={150} />
+            </Field>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};

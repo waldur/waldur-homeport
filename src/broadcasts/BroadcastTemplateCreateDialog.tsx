@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 import {
   broadcastMessageTemplatesCreate,
   MessageTemplateRequest,
@@ -11,17 +11,11 @@ import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { BROADCAST_TEMPLATE_CREATE_FORM_ID } from './constants';
-
-export const BroadcastTemplateCreateDialog = connect()(
-  reduxForm<MessageTemplateRequest, { resolve: { refetch } }>({
-    form: BROADCAST_TEMPLATE_CREATE_FORM_ID,
-  })(({ submitting, handleSubmit, resolve }) => {
-    const callbackMutation = useManagedMutation<
-      any,
-      any,
-      MessageTemplateRequest
-    >({
+export const BroadcastTemplateCreateDialog: FC<{
+  resolve: { refetch };
+}> = ({ resolve }) => {
+  const callbackMutation = useManagedMutation<any, any, MessageTemplateRequest>(
+    {
       mutationFn: (formData) =>
         broadcastMessageTemplatesCreate({
           body: formData,
@@ -29,23 +23,24 @@ export const BroadcastTemplateCreateDialog = connect()(
       successMessage: translate('Broadcast template has been created.'),
       errorMessage: translate('Unable to create a broadcast template.'),
       refetch: resolve.refetch,
-    });
+    },
+  );
 
-    return (
-      <form
-        onSubmit={handleSubmit((values) =>
-          callbackMutation.mutateAsync(values),
-        )}
-      >
-        <ModalDialog
-          title={translate('Create a broadcast template')}
-          footer={
-            <SubmitButton submitting={submitting} label={translate('Save')} />
-          }
-        >
-          <BroadcastTemplateForm submitting={submitting} />
-        </ModalDialog>
-      </form>
-    );
-  }),
-);
+  return (
+    <Form<MessageTemplateRequest>
+      onSubmit={(values) => callbackMutation.mutateAsync(values)}
+      render={({ handleSubmit, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Create a broadcast template')}
+            footer={
+              <SubmitButton submitting={submitting} label={translate('Save')} />
+            }
+          >
+            <BroadcastTemplateForm />
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};
