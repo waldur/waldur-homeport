@@ -49,10 +49,12 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'request_comment',
 ];
 
-const formatName = (row: OrderDetails) =>
-  typeof row.attributes['name'] === 'string' && row.attributes['name']
-    ? row.attributes['name']
-    : row.uuid;
+const formatName = (row: OrderDetails) => {
+  if (typeof row.attributes['name'] === 'string' && row.attributes['name']) {
+    return row.attributes['name'];
+  }
+  return row.resource_name || row.uuid;
+};
 
 export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
   table,
