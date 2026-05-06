@@ -1,14 +1,13 @@
 import { FunctionComponent } from 'react';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateImage,
   marketplaceProviderOfferingsUpdateThumbnail,
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
-import { FormContainer, SubmitButton } from '@/form';
+import { FormContainerFinal, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { UPDATE_OFFERING_MEDIA_FORM_ID } from '@/marketplace/offerings/actions/constants';
 import { ImageUploadField } from '@/marketplace/offerings/update/ImageUploadField';
 import { Offering } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -29,14 +28,8 @@ interface UpdateOfferingMediaProps {
   };
 }
 
-type PureUpdateOfferingMediaDialogProps = InjectedFormProps<
-  FormData,
+export const UpdateOfferingMediaDialog: FunctionComponent<
   UpdateOfferingMediaProps
-> &
-  UpdateOfferingMediaProps;
-
-const PureUpdateOfferingMediaDialog: FunctionComponent<
-  PureUpdateOfferingMediaDialogProps
 > = (props) => {
   const { mediaType, offering } = props.resolve;
 
@@ -75,51 +68,46 @@ const PureUpdateOfferingMediaDialog: FunctionComponent<
       : translate('Update image');
 
   return (
-    <form
-      onSubmit={props.handleSubmit((values) =>
-        submitRequestMutation.mutateAsync(values),
-      )}
-    >
-      <ModalDialog
-        title={title}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={props.submitting}
-              label={translate('Save')}
-            />
-          </>
-        }
-      >
-        {mediaUrl && (
-          <img
-            src={mediaUrl}
-            alt={
-              mediaType === 'thumbnail'
-                ? translate('Logo here')
-                : translate('Image here')
+    <Form<FormData>
+      onSubmit={(values) => submitRequestMutation.mutateAsync(values)}
+      render={({ handleSubmit, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={title}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={submitting}
+                  label={translate('Save')}
+                />
+              </>
             }
-            className="img-fluid mb-3"
-          />
-        )}
-        <FormContainer submitting={props.submitting}>
-          <ImageUploadField
-            name="images"
-            label={translate('Image: ')}
-            accept={'image/*'}
-            buttonLabel={translate('Browse')}
-            className="btn btn-secondary"
-            required={true}
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+          >
+            {mediaUrl && (
+              <img
+                src={mediaUrl as string}
+                alt={
+                  mediaType === 'thumbnail'
+                    ? translate('Logo here')
+                    : translate('Image here')
+                }
+                className="img-fluid mb-3"
+              />
+            )}
+            <FormContainerFinal submitting={submitting}>
+              <ImageUploadField
+                name="images"
+                label={translate('Image: ')}
+                accept={'image/*'}
+                buttonLabel={translate('Browse')}
+                className="btn btn-secondary"
+                required={true}
+              />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };
-
-const enhance = reduxForm({
-  form: UPDATE_OFFERING_MEDIA_FORM_ID,
-});
-
-export const UpdateOfferingMediaDialog = enhance(PureUpdateOfferingMediaDialog);

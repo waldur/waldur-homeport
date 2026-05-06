@@ -4,7 +4,6 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
 
-import { OVERVIEW_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';
 
 const EditOverviewDialog = lazyComponent(() =>
@@ -18,7 +17,6 @@ export const EditOverviewButton: FC<EditOfferingProps> = (props) => {
   const callback = () => {
     openDialog(EditOverviewDialog, {
       resolve: props,
-      formId: OVERVIEW_FORM_ID,
       size: 'lg',
     });
   };

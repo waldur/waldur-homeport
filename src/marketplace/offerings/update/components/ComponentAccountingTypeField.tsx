@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { Select } from '@/form/themed-select';
@@ -23,7 +23,12 @@ export const getAccountingTypeOptions = () => [
 export const ComponentAccountingTypeField: React.FC<
   ComponentAccountingTypeFieldProps
 > = (props) => (
-  <FormGroup label={translate('Accounting type')} required={true} space={5}>
+  <FormGroup
+    label={translate('Accounting type')}
+    controlId="billing_type"
+    required={true}
+    space={5}
+  >
     <Field
       name="billing_type"
       validate={required}
@@ -43,6 +48,7 @@ export const ComponentAccountingTypeField: React.FC<
           fieldProps.input.value.label
         ) : (
           <Select
+            inputId="billing_type"
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             options={getAccountingTypeOptions()}

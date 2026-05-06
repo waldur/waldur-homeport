@@ -1,26 +1,42 @@
+import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { customersDestroy } from 'waldur-js-client';
 
-import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
+import { setCurrentCustomer } from '@/workspace/actions';
 import { getCustomer, isStaff } from '@/workspace/selectors';
-
-const CustomerRemoveDialog = lazyComponent(() =>
-  import('@/customer/details/CustomerRemoveDialog').then((module) => ({
-    default: module.CustomerRemoveDialog,
-  })),
-);
 
 export const CustomerRemovePanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const canDeleteCustomer = useSelector(isStaff);
   const { showError } = useNotify();
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const { openDialog } = useModal();
+  const callbackMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => customersDestroy({ path: { uuid: customer.uuid } }),
+    errorMessage: translate('Unable to delete organization.'),
+    onSuccess: async () => {
+      await router.stateService.go('organizations');
+      dispatch(setCurrentCustomer(null));
+    },
+    confirmation: {
+      title: translate('Organization removal'),
+      body: (
+        <>
+          {translate('Organization')}: <strong>{customer.name}</strong>
+        </>
+      ),
+      options: {
+        forDeletion: true,
+      },
+    },
+  });
 
   const removeCustomer = () => {
     const hasProjects = customer.projects_count > 0;
@@ -30,13 +46,9 @@ export const CustomerRemovePanel: FunctionComponent = () => {
       );
       return showError(notification);
     }
-    // Show confirmation dialog
-    openDialog(CustomerRemoveDialog, {
-      resolve: {
-        customer,
-      },
-      size: 'sm',
-    });
+
+    // Trigger the mutation which will handle the confirmation internally
+    callbackMutation.mutate();
   };
 
   return canDeleteCustomer ? (

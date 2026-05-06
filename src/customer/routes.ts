@@ -333,8 +333,8 @@ export const states: StateDeclaration[] = [
     url: 'payments/',
     parent: 'organization-billing',
     component: lazyComponent(() =>
-      import('./details/CustomerPayments').then((module) => ({
-        default: module.CustomerPayments,
+      import('./payments/PaymentsPanel').then((module) => ({
+        default: module.PaymentsPanel,
       })),
     ),
     data: {

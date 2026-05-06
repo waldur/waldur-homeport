@@ -21,7 +21,7 @@ export const ComponentForm = ({
     <DisplayNameField name="name" readOnly={readOnly} />
     <ComponentMeasuredUnitField readOnly={readOnly} />
     <ComponentAccountingTypeField readOnly={readOnly} />
-    <ArticleCodeField legacyField />
+    <ArticleCodeField />
     <ComponentPrepaidFieldGroup offering={offering} />
     <ComponentLimit readOnly={readOnly} />
   </>

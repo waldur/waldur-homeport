@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Form, Field } from 'react-final-form';
 
 import { FormFooter } from '@/form';
 import { translate } from '@/i18n';
@@ -18,20 +17,19 @@ interface SetLocationDialogProps {
   };
 }
 
-export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> =
-  connect<{}, {}, SetLocationDialogProps>((_, props) => ({
-    initialValues: {
-      location: props.resolve.location,
-    },
-  }))(
-    reduxForm<{ location: GeolocationPoint }, SetLocationDialogProps>({
-      form: 'LocationEditor',
-    })(({ submitting, handleSubmit, invalid, resolve }) => {
-      const updateLocationHandler = ({ location }) => {
-        resolve.setLocationFn(location);
-      };
-      return (
-        <form onSubmit={handleSubmit(updateLocationHandler)}>
+export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = ({
+  resolve,
+}) => {
+  const updateLocationHandler = ({ location }) => {
+    resolve.setLocationFn(location);
+  };
+
+  return (
+    <Form
+      initialValues={{ location: resolve.location || {} }}
+      onSubmit={updateLocationHandler}
+      render={({ submitting, handleSubmit, invalid }) => (
+        <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
               resolve.location
@@ -48,11 +46,12 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> =
           >
             <Field
               name="location"
-              component={LocationContainer}
+              component={LocationContainer as any}
               label={resolve.label}
             />
           </ModalDialog>
         </form>
-      );
-    }),
+      )}
+    />
   );
+};

@@ -1,17 +1,16 @@
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { Form as FinalForm } from 'react-final-form';
 import { paymentsPartialUpdate } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
-import { EDIT_PAYMENT_FORM_ID } from '@/customer/payments/constants';
 import { PaymentProofRenderer } from '@/customer/payments/PaymentProofRenderer';
 import { getInitialValues } from '@/customer/payments/utils';
 import {
   FileUploadField,
-  FormContainer,
+  FormContainerFinal,
   NumberField,
   SubmitButton,
 } from '@/form';
@@ -22,13 +21,13 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Payment } from '@/workspace/types';
 
-const PaymentUpdateDialog: FunctionComponent<
-  InjectedFormProps & { resolve: Payment; refetch }
-> = (props) => {
-  useEffect(() => {
-    props.initialize(getInitialValues(props));
-  }, [props]);
+interface PaymentUpdateDialogProps {
+  resolve: Payment & { refetch?: () => void };
+}
 
+export const PaymentUpdateDialog: FunctionComponent<
+  PaymentUpdateDialogProps
+> = (props) => {
   const mutation = useManagedMutation<
     any,
     any,
@@ -51,6 +50,7 @@ const PaymentUpdateDialog: FunctionComponent<
 
     successMessage: translate('Payment has been updated.'),
     errorMessage: translate('Unable to update payment.'),
+    refetch: props.resolve.refetch,
   });
 
   const submitRequest = async (formData) => {
@@ -62,67 +62,69 @@ const PaymentUpdateDialog: FunctionComponent<
   };
 
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
-      <ModalDialog
-        title={translate('Update payment')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={translate('Update')}
-            />
-          </>
-        }
-      >
-        <FormContainer submitting={false} clearOnUnmount={false}>
-          <DateField
-            name="date_of_payment"
-            label={translate('Date')}
-            required
-          />
+    <FinalForm
+      initialValues={getInitialValues(props)}
+      onSubmit={submitRequest}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Update payment')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={translate('Update')}
+                />
+              </>
+            }
+          >
+            <FormContainerFinal submitting={submitting}>
+              <DateField
+                name="date_of_payment"
+                label={translate('Date')}
+                required
+              />
 
-          <NumberField name="sum" label={translate('Sum')} required />
+              <NumberField name="sum" label={translate('Sum')} required />
 
-          <FileUploadField
-            name="proof"
-            label={translate('Proof')}
-            showFileName={true}
-            buttonLabel={translate('Browse')}
-          />
+              <FileUploadField
+                name="proof"
+                label={translate('Proof')}
+                showFileName={true}
+                buttonLabel={translate('Browse')}
+              />
 
-          {props.resolve.proof ? (
-            <span style={{ marginLeft: '145px' }}>
-              <PaymentProofRenderer row={props.resolve} />
-            </span>
-          ) : null}
+              {props.resolve.proof ? (
+                <span style={{ marginLeft: '145px' }}>
+                  <PaymentProofRenderer row={props.resolve} />
+                </span>
+              ) : null}
 
-          {props.resolve.invoice_uuid && props.resolve.invoice_period ? (
-            <Form.Group>
-              <Form.Label className="col-sm-2">
-                {translate('Invoice')}
-              </Form.Label>
-              <div className="col-sm-8" style={{ marginTop: '8px' }}>
-                <Link
-                  state="billingDetails"
-                  params={{
-                    uuid: props.resolve.customer_uuid,
-                    invoice_uuid: props.resolve.invoice_uuid,
-                  }}
-                  target="_blank"
-                >
-                  {props.resolve.invoice_period}
-                </Link>
-              </div>
-            </Form.Group>
-          ) : null}
-        </FormContainer>
-      </ModalDialog>
-    </form>
+              {props.resolve.invoice_uuid && props.resolve.invoice_period ? (
+                <Form.Group>
+                  <Form.Label className="col-sm-2">
+                    {translate('Invoice')}
+                  </Form.Label>
+                  <div className="col-sm-8" style={{ marginTop: '8px' }}>
+                    <Link
+                      state="billingDetails"
+                      params={{
+                        uuid: props.resolve.customer_uuid,
+                        invoice_uuid: props.resolve.invoice_uuid,
+                      }}
+                      target="_blank"
+                    >
+                      {props.resolve.invoice_period}
+                    </Link>
+                  </div>
+                </Form.Group>
+              ) : null}
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };
-
-export const PaymentUpdateDialogContainer = reduxForm({
-  form: EDIT_PAYMENT_FORM_ID,
-})(PaymentUpdateDialog);

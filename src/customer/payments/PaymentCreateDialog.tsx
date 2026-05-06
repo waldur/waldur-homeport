@@ -1,13 +1,12 @@
 import { FunctionComponent } from 'react';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { Form } from 'react-final-form';
 import { paymentsCreate } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
-import { ADD_PAYMENT_FORM_ID } from '@/customer/payments/constants';
 import {
   FileUploadField,
-  FormContainer,
+  FormContainerFinal,
   NumberField,
   SubmitButton,
 } from '@/form';
@@ -17,16 +16,16 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-interface PaymentCreateDialogProps extends InjectedFormProps {
+interface PaymentCreateDialogProps {
   resolve: {
-    profileUrl: string;
-    refetch;
+    profileUrl?: string;
+    refetch: () => void;
   };
 }
 
-const PaymentCreateDialog: FunctionComponent<PaymentCreateDialogProps> = (
-  props,
-) => {
+export const PaymentCreateDialog: FunctionComponent<
+  PaymentCreateDialogProps
+> = (props) => {
   const mutation = useManagedMutation<
     any,
     any,
@@ -56,43 +55,44 @@ const PaymentCreateDialog: FunctionComponent<PaymentCreateDialogProps> = (
   };
 
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
-      <ModalDialog
-        title={translate('Add payment')}
-        footer={
-          <>
-            <CloseDialogButton className="me-3" />
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={translate('Submit')}
-            />
-          </>
-        }
-      >
-        <div style={{ paddingBottom: '50px' }}>
-          <FormContainer submitting={false} clearOnUnmount={false}>
-            <DateField
-              name="date_of_payment"
-              label={translate('Date')}
-              required
-            />
+    <Form
+      onSubmit={submitRequest}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Add payment')}
+            footer={
+              <>
+                <CloseDialogButton className="me-3" />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={translate('Submit')}
+                />
+              </>
+            }
+          >
+            <div style={{ paddingBottom: '50px' }}>
+              <FormContainerFinal submitting={submitting}>
+                <DateField
+                  name="date_of_payment"
+                  label={translate('Date')}
+                  required
+                />
 
-            <NumberField name="sum" label={translate('Sum')} required />
+                <NumberField name="sum" label={translate('Sum')} required />
 
-            <FileUploadField
-              name="proof"
-              label={translate('Proof')}
-              showFileName={true}
-              buttonLabel={translate('Browse')}
-            />
-          </FormContainer>
-        </div>
-      </ModalDialog>
-    </form>
+                <FileUploadField
+                  name="proof"
+                  label={translate('Proof')}
+                  showFileName={true}
+                  buttonLabel={translate('Browse')}
+                />
+              </FormContainerFinal>
+            </div>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };
-
-export const PaymentCreateDialogContainer = reduxForm({
-  form: ADD_PAYMENT_FORM_ID,
-})(PaymentCreateDialog);
