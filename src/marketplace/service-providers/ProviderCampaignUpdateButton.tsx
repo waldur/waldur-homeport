@@ -4,9 +4,9 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
 
-const CampaignUpdateDialog = lazyComponent(() =>
-  import('./CampaignUpdateDialog').then((module) => ({
-    default: module.CampaignUpdateDialog,
+const CampaignDialog = lazyComponent(() =>
+  import('./CampaignDialog').then((module) => ({
+    default: module.CampaignDialog,
   })),
 );
 
@@ -16,7 +16,7 @@ export const ProviderCampaignUpdateButton: FunctionComponent<{
 }> = ({ campaign, fetch }) => {
   const { openDialog } = useModal();
   const callback = () => {
-    openDialog(CampaignUpdateDialog, {
+    openDialog(CampaignDialog, {
       resolve: { campaign, fetch },
       size: 'lg',
     });
