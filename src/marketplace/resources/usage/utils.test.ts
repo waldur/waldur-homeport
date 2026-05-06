@@ -65,10 +65,13 @@ describe('ResourceUsageChart', () => {
       vi.fn(),
     );
 
-    // Verify that only RAM usage is included
-    expect(result.series[1].data).toHaveLength(1);
-    expect(result.series[1].data[0].value).toBe(10);
-    expect(result.series[1].data[0].description).toBe('RAM usage');
+    // Limit series is hidden because all total_allocated values are 0.
+    expect(result.series).toHaveLength(1);
+    const usageSeries = result.series[0];
+    expect(usageSeries.name).toBe('Usage');
+    expect(usageSeries.data).toHaveLength(1);
+    expect(usageSeries.data[0].value).toBe(10);
+    expect(usageSeries.data[0].description).toBe('RAM usage');
   });
 
   it('should filter usages by billing period', () => {
@@ -110,12 +113,15 @@ describe('ResourceUsageChart', () => {
       vi.fn(),
     );
 
-    // Verify that only last 2 months of data are included
-    expect(result.series[1].data).toHaveLength(2);
-    expect(result.series[1].data[0].value).toBe(8);
-    expect(result.series[1].data[0].description).toBe('February usage');
-    expect(result.series[1].data[1].value).toBe(10);
-    expect(result.series[1].data[1].description).toBe('March usage');
+    // Limit series hidden (no allocations); usage is the only series.
+    expect(result.series).toHaveLength(1);
+    const usageSeries = result.series[0];
+    expect(usageSeries.name).toBe('Usage');
+    expect(usageSeries.data).toHaveLength(2);
+    expect(usageSeries.data[0].value).toBe(8);
+    expect(usageSeries.data[0].description).toBe('February usage');
+    expect(usageSeries.data[1].value).toBe(10);
+    expect(usageSeries.data[1].description).toBe('March usage');
   });
 
   it('should generate tooltip with user usage details', () => {
@@ -205,6 +211,7 @@ describe('ResourceUsageChart', () => {
       '#1f77b4',
       vi.fn(),
     );
+    const usageSeries = result.series[0];
     const tooltipFormatter = result.tooltip.formatter;
     const tooltipParams = [
       {
@@ -212,7 +219,7 @@ describe('ResourceUsageChart', () => {
         marker:
           '<span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:#1f77b4;"></span>',
         seriesName: 'Usage',
-        data: result.series[1].data[0],
+        data: usageSeries.data[0],
       },
     ];
 
@@ -226,7 +233,7 @@ describe('ResourceUsageChart', () => {
     expect(tooltipContent).toContain('Alice - 10 cores');
     expect(tooltipContent).toContain('Bob - 6 cores');
 
-    expect(result.series[1].data[0]).toEqual({
+    expect(usageSeries.data[0]).toEqual({
       value: 16,
       description: 'Total CPU cores used',
       details: expect.arrayContaining([
@@ -242,6 +249,160 @@ describe('ResourceUsageChart', () => {
         }),
       ]),
     });
+  });
+
+  it('should hide limit series when all allocations are zero', () => {
+    const component: OfferingComponent = {
+      type: 'cpu',
+      name: 'CPU',
+      measured_unit: 'cores',
+      billing_type: 'usage',
+    } as OfferingComponent;
+
+    const usages: ComponentUsage[] = [
+      {
+        type: 'cpu',
+        usage: 10,
+        description: 'CPU usage',
+        billing_period: '2024-03-01',
+      },
+    ] as ComponentUsage[];
+
+    const result = getEChartOptions(component, usages, [], 1, '#1f77b4');
+
+    expect(result.series).toHaveLength(1);
+    expect(result.series[0].name).toBe('Usage');
+  });
+
+  it('should show limit series when at least one allocation is non-zero', () => {
+    const component: OfferingComponent = {
+      type: 'cpu',
+      name: 'CPU',
+      measured_unit: 'cores',
+      billing_type: 'limit',
+    } as OfferingComponent;
+
+    const usages: ComponentUsage[] = [
+      {
+        type: 'cpu',
+        usage: 10,
+        total_allocated: 100,
+        description: 'CPU usage',
+        billing_period: '2024-03-01',
+      },
+    ] as ComponentUsage[];
+
+    const result = getEChartOptions(component, usages, [], 1, '#1f77b4');
+
+    expect(result.series).toHaveLength(2);
+    expect(result.series[0].name).toBe('Limit');
+    expect(result.series[0].data[0].value).toBe(100);
+    expect(result.series[1].name).toBe('Usage');
+  });
+
+  it('should omit Limit row from tooltip when its value is zero on usage-based components', () => {
+    const component: OfferingComponent = {
+      type: 'cpu',
+      name: 'CPU',
+      measured_unit: 'cores',
+      billing_type: 'usage',
+    } as OfferingComponent;
+
+    const usages: ComponentUsage[] = [
+      {
+        type: 'cpu',
+        usage: 10,
+        total_allocated: 100,
+        description: 'February usage',
+        billing_period: '2024-02-01',
+      },
+      {
+        type: 'cpu',
+        usage: 5,
+        total_allocated: 0,
+        description: 'March usage',
+        billing_period: '2024-03-01',
+      },
+    ] as ComponentUsage[];
+
+    const result = getEChartOptions(component, usages, [], 2, '#1f77b4');
+    const tooltipFormatter = result.tooltip.formatter;
+
+    const marchTooltip = tooltipFormatter([
+      {
+        axisValue: 'March 2024',
+        marker: '',
+        seriesName: 'Limit',
+        data: result.series[0].data[1],
+      },
+      {
+        axisValue: 'March 2024',
+        marker: '',
+        seriesName: 'Usage',
+        data: result.series[1].data[1],
+      },
+    ]);
+    expect(marchTooltip).not.toContain('Limit:');
+    expect(marchTooltip).toContain('Usage: <b>5</b>');
+
+    const februaryTooltip = tooltipFormatter([
+      {
+        axisValue: 'February 2024',
+        marker: '',
+        seriesName: 'Limit',
+        data: result.series[0].data[0],
+      },
+      {
+        axisValue: 'February 2024',
+        marker: '',
+        seriesName: 'Usage',
+        data: result.series[1].data[0],
+      },
+    ]);
+    expect(februaryTooltip).toContain('Limit: <b>100</b>');
+    expect(februaryTooltip).toContain('Usage: <b>10</b>');
+  });
+
+  it('should always show Limit on limit-based components even when value is zero', () => {
+    const component: OfferingComponent = {
+      type: 'cpu',
+      name: 'CPU',
+      measured_unit: 'cores',
+      billing_type: 'limit',
+    } as OfferingComponent;
+
+    const usages: ComponentUsage[] = [
+      {
+        type: 'cpu',
+        usage: 0,
+        total_allocated: 0,
+        description: 'March usage',
+        billing_period: '2024-03-01',
+      },
+    ] as ComponentUsage[];
+
+    const result = getEChartOptions(component, usages, [], 1, '#1f77b4');
+
+    expect(result.series).toHaveLength(2);
+    expect(result.series[0].name).toBe('Limit');
+
+    const tooltipFormatter = result.tooltip.formatter;
+    const marchTooltip = tooltipFormatter([
+      {
+        axisValue: 'March 2024',
+        marker: '',
+        seriesName: 'Limit',
+        data: result.series[0].data[0],
+      },
+      {
+        axisValue: 'March 2024',
+        marker: '',
+        seriesName: 'Usage',
+        data: result.series[1].data[0],
+      },
+    ]);
+    expect(marchTooltip).toContain('Limit: <b>0</b>');
+    expect(marchTooltip).toContain('Usage: <b>0</b>');
   });
 
   describe('getUsageHistoryPeriodOptions', () => {
