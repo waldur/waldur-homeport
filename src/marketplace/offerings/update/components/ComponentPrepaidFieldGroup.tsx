@@ -6,7 +6,6 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { required } from '@/core/validators';
 import { NumberField, SelectField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
@@ -40,7 +39,6 @@ export const ComponentPrepaidFieldGroup = enhance(
         <FormGroup space={5}>
           <Field
             name="is_prepaid"
-            validate={required}
             component={AwesomeCheckboxField}
             label={translate('Pre-paid component')}
             alignMiddle
