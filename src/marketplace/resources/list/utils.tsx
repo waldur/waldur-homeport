@@ -42,6 +42,8 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     hasExpandableView ? 'parent_uuid' : null, // Expandable view
     hasExpandableView ? 'parent_name' : null, // Expandable view
     'customer_uuid', // SetBackendIdAction
+    'customer_name', // TerminateAction confirmation dialog
+    'project_name', // TerminateAction confirmation dialog
     'description', // EditAction
     'resource_type', // EditAction, TerminateAction, UnlinkActionItem, Mass-actions
     'resource_uuid', // Mass-actions
