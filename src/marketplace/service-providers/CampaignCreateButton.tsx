@@ -6,9 +6,9 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
-const CampaignCreateDialog = lazyComponent(() =>
-  import('./CampaignCreateDialog').then((module) => ({
-    default: module.CampaignCreateDialog,
+const CampaignDialog = lazyComponent(() =>
+  import('./CampaignDialog').then((module) => ({
+    default: module.CampaignDialog,
   })),
 );
 
@@ -17,7 +17,7 @@ export const CampaignCreateButton: FunctionComponent<{ refetch }> = ({
 }) => {
   const { openDialog } = useModal();
   const callback = () =>
-    openDialog(CampaignCreateDialog, {
+    openDialog(CampaignDialog, {
       dialogClassName: 'modal-dialog-centered',
       resolve: {
         refetch,
