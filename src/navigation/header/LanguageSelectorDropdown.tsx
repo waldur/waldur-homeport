@@ -30,7 +30,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
   const { currentLanguage, languageChoices, setLanguage } =
     useLanguageSelector();
 
-  if (currentLanguage) {
+  if (!currentLanguage) {
     return null;
   }
 
