@@ -6,9 +6,9 @@ import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
-const PaymentUpdateDialogContainer = lazyComponent(() =>
+const PaymentUpdateDialog = lazyComponent(() =>
   import('@/customer/payments/PaymentUpdateDialog').then((module) => ({
-    default: module.PaymentUpdateDialogContainer,
+    default: module.PaymentUpdateDialog,
   })),
 );
 
@@ -19,9 +19,8 @@ export const EditPaymentButton = ({ row: payment, refetch }) => {
     <ActionItem
       title={translate('Edit')}
       action={() =>
-        openDialog(PaymentUpdateDialogContainer, {
-          resolve: payment,
-          refetch,
+        openDialog(PaymentUpdateDialog, {
+          resolve: { ...payment, refetch },
           size: 'lg',
         })
       }

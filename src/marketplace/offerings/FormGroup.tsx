@@ -1,7 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
-import { ReactNode, FC, PropsWithChildren } from 'react';
+import { ReactNode, FC, PropsWithChildren, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 
@@ -38,36 +38,42 @@ const FormLabel = (props) => (
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
   space = 7,
   ...props
-}) => (
-  <Form.Group
-    className={classNames(
-      props.className,
-      props.spaceless ? undefined : `mb-${space}`,
-    )}
-    controlId={props.controlId}
-    id={props.id}
-  >
-    {props.quickAction || (props.help && props.helpEnd) ? (
-      <div className="d-flex align-items-end">
-        {!!props.label && <FormLabel {...props} />}
-        {props.quickAction}
-        {props.help && props.helpEnd && (
-          <Tip
-            id={uniqueId('form-field-tooltip-')}
-            className="align-self-center ms-2 mb-2"
-            label={props.help}
-          >
-            <QuestionIcon weight="bold" size={16} className="text-muted" />
-          </Tip>
-        )}
-      </div>
-    ) : props.label ? (
-      <FormLabel {...props} />
-    ) : null}
-    <div>{props.children}</div>
-    {props.description && <Form.Text>{props.description}</Form.Text>}
-    {props.meta?.touched && props.meta?.error && (
-      <FieldError error={props.meta.error} />
-    )}
-  </Form.Group>
-);
+}) => {
+  const controlId = useMemo(
+    () => props.controlId || uniqueId('form-group-'),
+    [props.controlId],
+  );
+  return (
+    <Form.Group
+      className={classNames(
+        props.className,
+        props.spaceless ? undefined : `mb-${space}`,
+      )}
+      controlId={controlId}
+      id={props.id}
+    >
+      {props.quickAction || (props.help && props.helpEnd) ? (
+        <div className="d-flex align-items-end">
+          {!!props.label && <FormLabel {...props} />}
+          {props.quickAction}
+          {props.help && props.helpEnd && (
+            <Tip
+              id={uniqueId('form-field-tooltip-')}
+              className="align-self-center ms-2 mb-2"
+              label={props.help}
+            >
+              <QuestionIcon weight="bold" size={16} className="text-muted" />
+            </Tip>
+          )}
+        </div>
+      ) : props.label ? (
+        <FormLabel {...props} />
+      ) : null}
+      <div>{props.children}</div>
+      {props.description && <Form.Text>{props.description}</Form.Text>}
+      {props.meta?.touched && props.meta?.error && (
+        <FieldError error={props.meta.error} />
+      )}
+    </Form.Group>
+  );
+};

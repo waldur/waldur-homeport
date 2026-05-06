@@ -1,5 +1,5 @@
+import { Field } from 'react-final-form';
 import { createFilter } from 'react-select';
-import { Field } from 'redux-form';
 import { apiAuthSaml2ProvidersList } from 'waldur-js-client';
 
 import { parseSelectData } from '@/core/api';

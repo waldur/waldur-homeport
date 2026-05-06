@@ -1,20 +1,25 @@
+import { FunctionComponent } from 'react';
+
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useUser } from '@/workspace/hooks';
 
-const PaymentCreateDialogContainer = lazyComponent(() =>
+const PaymentCreateDialog = lazyComponent(() =>
   import('@/customer/payments/PaymentCreateDialog').then((module) => ({
-    default: module.PaymentCreateDialogContainer,
+    default: module.PaymentCreateDialog,
   })),
 );
 
-export const CreatePaymentButton = ({ activePaymentProfile, refetch }) => {
+export const CreatePaymentButton: FunctionComponent<{
+  activePaymentProfile: { url?: string };
+  refetch: () => void;
+}> = ({ activePaymentProfile, refetch }) => {
   const { openDialog } = useModal();
   const user = useUser();
   const action = () =>
-    openDialog(PaymentCreateDialogContainer, {
+    openDialog(PaymentCreateDialog, {
       resolve: {
         profileUrl: activePaymentProfile.url,
         refetch,

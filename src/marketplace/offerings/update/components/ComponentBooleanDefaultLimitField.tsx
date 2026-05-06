@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
@@ -9,7 +9,7 @@ export const ComponentBooleanDefaultLimitField: FunctionComponent = () => (
   <FormGroup space={5}>
     <Field
       name="default_limit"
-      component={AwesomeCheckboxField}
+      component={AwesomeCheckboxField as any}
       label={translate('Enable by default')}
       parse={Boolean}
       normalize={(v) => (v ? 1 : 0)}

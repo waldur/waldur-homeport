@@ -1,5 +1,6 @@
+import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { formValues } from 'redux-form';
+import { useFormState } from 'react-final-form';
 import { BillingTypeEnum } from 'waldur-js-client';
 
 import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper';
@@ -15,80 +16,73 @@ import { ComponentMaxValueField } from './ComponentMaxValueField';
 import { ComponentMinValueField } from './ComponentMinValueField';
 
 interface Values {
-  billingType: {
+  billing_type?: {
     value: BillingTypeEnum;
   };
-  limitPeriod: LimitPeriodOption;
-  isBoolean: boolean;
-  limitAmount?: number;
+  limit_period?: LimitPeriodOption;
+  is_boolean?: boolean;
+  limit_amount?: number;
 }
 
-const enhance = formValues<any, { readOnly?: boolean }>(() => ({
-  billingType: 'billing_type',
-  limitPeriod: 'limit_period',
-  isBoolean: 'is_boolean',
-  limitAmount: 'limit_amount',
-}));
+export const ComponentLimit: FC<{ readOnly?: boolean }> = (props) => {
+  const { values } = useFormState<Values>();
+  const billingType = values.billing_type?.value;
 
-export const ComponentLimit = enhance(
-  (props: Values & { readOnly?: boolean }) => {
-    const billingType = props.billingType?.value;
-    if (billingType == 'limit') {
-      if (props.isBoolean) {
-        return (
-          <ComponentAccountingTypeWrapper>
-            <ComponentBooleanLimitField />
-            <ComponentBooleanDefaultLimitField />
-          </ComponentAccountingTypeWrapper>
-        );
-      } else {
-        return (
-          <ComponentAccountingTypeWrapper>
-            <ComponentBooleanLimitField />
-            <Row className="g-5">
-              <Col xs>
-                <ComponentMinValueField />
-              </Col>
-              <Col xs>
-                <ComponentMaxValueField />
-              </Col>
-              <Col xs={5}>
-                <ComponentLimitPeriodField
-                  limitPeriod={props.limitPeriod}
-                  readOnly={props.readOnly}
-                  spaceless
-                />
-              </Col>
-            </Row>
-          </ComponentAccountingTypeWrapper>
-        );
-      }
-    } else if (billingType == 'usage') {
-      if (typeof props.limitAmount === 'number') {
-        return (
-          <ComponentAccountingTypeWrapper>
-            <ComponentLimitEnableField />
-            <Row className="g-5">
-              <Col xs={6}>
-                <ComponentLimitPeriodField
-                  limitPeriod={props.limitPeriod}
-                  readOnly={props.readOnly}
-                />
-              </Col>
-              <Col xs={6}>
-                <ComponentLimitAmountField />
-              </Col>
-            </Row>
-          </ComponentAccountingTypeWrapper>
-        );
-      } else {
-        return (
-          <ComponentAccountingTypeWrapper>
-            <ComponentLimitEnableField />
-          </ComponentAccountingTypeWrapper>
-        );
-      }
+  if (billingType == 'limit') {
+    if (values.is_boolean) {
+      return (
+        <ComponentAccountingTypeWrapper>
+          <ComponentBooleanLimitField />
+          <ComponentBooleanDefaultLimitField />
+        </ComponentAccountingTypeWrapper>
+      );
+    } else {
+      return (
+        <ComponentAccountingTypeWrapper>
+          <ComponentBooleanLimitField />
+          <Row className="g-5">
+            <Col xs>
+              <ComponentMinValueField />
+            </Col>
+            <Col xs>
+              <ComponentMaxValueField />
+            </Col>
+            <Col xs={5}>
+              <ComponentLimitPeriodField
+                limitPeriod={values.limit_period}
+                readOnly={props.readOnly}
+                spaceless
+              />
+            </Col>
+          </Row>
+        </ComponentAccountingTypeWrapper>
+      );
     }
-    return null;
-  },
-);
+  } else if (billingType == 'usage') {
+    if (typeof values.limit_amount === 'number') {
+      return (
+        <ComponentAccountingTypeWrapper>
+          <ComponentLimitEnableField />
+          <Row className="g-5">
+            <Col xs={6}>
+              <ComponentLimitPeriodField
+                limitPeriod={values.limit_period}
+                readOnly={props.readOnly}
+              />
+            </Col>
+            <Col xs={6}>
+              <ComponentLimitAmountField />
+            </Col>
+          </Row>
+        </ComponentAccountingTypeWrapper>
+      );
+    } else {
+      return (
+        <ComponentAccountingTypeWrapper>
+          <ComponentLimitEnableField />
+        </ComponentAccountingTypeWrapper>
+      );
+    }
+  }
+  return null;
+};

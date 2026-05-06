@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { translate } from '@/i18n';
 import { FormGroupWithError } from '@/marketplace/offerings/FormGroupWithError';

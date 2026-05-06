@@ -2,8 +2,8 @@ import { SignInIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
+import { Form as FinalForm, Field } from 'react-final-form';
 import { useMountedState } from 'react-use';
-import { Field, reduxForm } from 'redux-form';
 import {
   AuthResult,
   authValimoCreate,
@@ -21,11 +21,7 @@ import { useNotify } from '@/store/notify';
 
 import { loginUser } from '../AuthService';
 
-export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
-  submitting,
-  invalid,
-  handleSubmit,
-}) => {
+export const AuthValimoDialog = () => {
   const [challengeCode, setChallengeCode] = useState<string>();
   const { showError, showErrorResponse } = useNotify();
   const router = useRouter();
@@ -90,43 +86,48 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
   };
 
   return (
-    <form onSubmit={handleSubmit(authenticateValimo)}>
-      <ModalDialog
-        title={translate('Authenticate using Mobile ID')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton invalid={invalid} submitting={submitting}>
-              <span className="svg-icon svg-icon-2">
-                <SignInIcon weight="bold" />
-              </span>{' '}
-              {translate('Sign in')}
-            </SubmitButton>
-          </>
-        }
-      >
-        <Form.Group>
-          <Form.Label>{translate('Mobile phone number')}</Form.Label>
-          <InputGroup>
-            <InputGroup.Text>
-              {ENV.plugins.WALDUR_AUTH_VALIMO.MOBILE_PREFIX}
-            </InputGroup.Text>
-            <Field
-              type="tel"
-              name="phoneNumber"
-              required={true}
-              component={InputField}
-              disabled={submitting}
-            />
-          </InputGroup>
-        </Form.Group>
-        {challengeCode && (
-          <Form.Group>
-            <Form.Label>{translate('Challenge code')}</Form.Label>
-            <p>{challengeCode}</p>
-          </Form.Group>
-        )}
-      </ModalDialog>
-    </form>
+    <FinalForm
+      onSubmit={authenticateValimo}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Authenticate using Mobile ID')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton invalid={invalid} submitting={submitting}>
+                  <span className="svg-icon svg-icon-2">
+                    <SignInIcon weight="bold" />
+                  </span>{' '}
+                  {translate('Sign in')}
+                </SubmitButton>
+              </>
+            }
+          >
+            <Form.Group>
+              <Form.Label>{translate('Mobile phone number')}</Form.Label>
+              <InputGroup>
+                <InputGroup.Text>
+                  {ENV.plugins.WALDUR_AUTH_VALIMO.MOBILE_PREFIX}
+                </InputGroup.Text>
+                <Field
+                  type="tel"
+                  name="phoneNumber"
+                  required={true}
+                  component={InputField as any}
+                  disabled={submitting}
+                />
+              </InputGroup>
+            </Form.Group>
+            {challengeCode && (
+              <Form.Group>
+                <Form.Label>{translate('Challenge code')}</Form.Label>
+                <p>{challengeCode}</p>
+              </Form.Group>
+            )}
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};

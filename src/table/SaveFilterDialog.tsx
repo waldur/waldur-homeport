@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
-import { reduxForm } from 'redux-form';
+import { Form } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { StringField, SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
+import { FormContainerFinal } from '@/form/FormContainerFinal';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -12,20 +12,19 @@ import { useNotify } from '@/store/notify';
 
 interface SaveFilterDialogProps {
   resolve: {
-    saveFilter(name, update: boolean): void;
+    saveFilter(name: string, update: boolean): void;
   };
+  initialValues?: { name: string };
 }
 
-export const SaveFilterDialog = reduxForm<{ name }, SaveFilterDialogProps>({
-  form: 'tableSaveFilterForm',
-})((props) => {
+export const SaveFilterDialog = (props: SaveFilterDialogProps) => {
   const { showSuccess } = useNotify();
   const { closeDialog } = useModal();
 
   const isEdit = Boolean(props.initialValues);
 
   const callback = useCallback(
-    (formData: { name }) => {
+    (formData: { name: string }) => {
       props.resolve.saveFilter(formData.name, isEdit);
       if (!isEdit) {
         showSuccess(translate('Filter saved'));
@@ -34,37 +33,45 @@ export const SaveFilterDialog = reduxForm<{ name }, SaveFilterDialogProps>({
       }
       closeDialog();
     },
-    [props.resolve.saveFilter, showSuccess, closeDialog],
+    [props.resolve, showSuccess, closeDialog, isEdit],
   );
 
   return (
-    <form onSubmit={props.handleSubmit(callback)}>
-      <ModalDialog
-        title={isEdit ? translate('Update filter') : translate('Save filter')}
-        subtitle={translate('Filters can be saved and reused on any pages')}
-        footer={
-          <>
-            <CloseDialogButton className="flex-equal" />
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={isEdit ? translate('Update') : translate('Save')}
-              className="btn btn-primary flex-equal"
-            />
-          </>
-        }
-      >
-        <FormContainer submitting={props.submitting}>
-          <StringField
-            name="name"
-            label={translate('Filter name')}
-            placeholder={translate('e.g. New filter')}
-            required={true}
-            validate={required}
-            spaceless
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+    <Form
+      onSubmit={callback}
+      initialValues={props.initialValues}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
+              isEdit ? translate('Update filter') : translate('Save filter')
+            }
+            subtitle={translate('Filters can be saved and reused on any pages')}
+            footer={
+              <>
+                <CloseDialogButton className="flex-equal" />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={isEdit ? translate('Update') : translate('Save')}
+                  className="btn btn-primary flex-equal"
+                />
+              </>
+            }
+          >
+            <FormContainerFinal submitting={submitting}>
+              <StringField
+                name="name"
+                label={translate('Filter name')}
+                placeholder={translate('e.g. New filter')}
+                required={true}
+                validate={required}
+                spaceless
+              />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};

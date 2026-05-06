@@ -6,8 +6,6 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
-import { EDIT_PLAN_FORM_ID } from './constants';
-
 const EditPlanQuotasDialog = lazyComponent(() =>
   import('./EditPlanQuotasDialog').then((module) => ({
     default: module.EditPlanQuotasDialog,
@@ -32,7 +30,6 @@ export const EditPlanQuotasButton: FunctionComponent<{
   const callback = () => {
     openDialog(EditPlanQuotasDialog, {
       resolve: { offering, plan, refetch, components },
-      formId: EDIT_PLAN_FORM_ID,
       size: 'lg',
     });
   };
