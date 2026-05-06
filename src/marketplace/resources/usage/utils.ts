@@ -34,125 +34,136 @@ const formatChart = (
   labels: string[],
   usages: RowData[],
   limits: RowData[] = [],
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _serieName: string = undefined,
   openDialog?: (details) => void,
-) => ({
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'cross',
-      crossStyle: {
-        color: '#999',
-      },
-    },
-    enterable: true,
-    renderMode: 'html',
-    appendToBody: true,
-    position: (point, _, __, ___, size) => {
-      const x = point[0];
-      const y = point[1];
-      const tipW = size.contentSize[0];
-      const tipH = size.contentSize[1];
-      const viewW = size.viewSize[0];
-      const viewH = size.viewSize[1];
-
-      let pointX = x + TOOLTIP_OFFSET;
-      let pointY = y + TOOLTIP_OFFSET;
-      if (x + tipW > viewW) {
-        pointX = x - tipW - TOOLTIP_OFFSET;
-      }
-      if (y + tipH > viewH) {
-        pointY = y - tipH - TOOLTIP_OFFSET;
-      }
-
-      return [pointX, pointY];
-    },
-    formatter: (params) => {
-      const date = params[0].axisValue;
-      let tooltip = `<div class="mb-1"><b>${date}</b></div>`;
-
-      params.forEach((param) => {
-        const val = param.data.value;
-        const description = param.data.description;
-        const details: RowData['details'] = param.data.details;
-
-        tooltip += `<br/>${param.marker} ${param.seriesName}: <b>${formatUsageValue(val, true)}</b>`;
-        if (description) {
-          tooltip += ` (${description})`;
-        }
-
-        if (details?.length) {
-          tooltip += `<br/><div class="mt-2 text-decoration-underline"><b>${translate('Details')}:</b></div>`;
-          tooltip += `<ul class="mb-0">`;
-          const hasMoreBtn =
-            details.length > MAX_SHOW_ITEMS + 1 && Boolean(openDialog);
-          const len = hasMoreBtn ? MAX_SHOW_ITEMS : Infinity;
-          details.slice(0, len).forEach((d) => {
-            tooltip += `<li>${d.username} - ${formatUsageValue(d.usage, true)} ${d.measured_unit}</li>`;
-          });
-          tooltip += `</ul>`;
-
-          if (hasMoreBtn) {
-            tooltip += `<div class="text-center mt-3">`;
-            tooltip += `<button id="see-more-btn" class="btn btn-link btn-icon-right py-0">${translate('See more')}`;
-            tooltip += `<span class="svg-icon svg-icon-2 svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm48.49-108.49a12,12,0,0,1,0,17l-40,40a12,12,0,0,1-17,0l-40-40a12,12,0,0,1,17-17L128,135l31.51-31.52A12,12,0,0,1,176.49,103.51Z"></path></svg></span>`;
-            tooltip += `</button></div>`;
-
-            setTimeout(() => {
-              const btn = document.getElementById('see-more-btn');
-              if (btn) {
-                btn.onclick = () => openDialog(details);
-              }
-            }, 100);
-          }
-        }
-      });
-
-      return tooltip;
-    },
-  },
-  xAxis: [
-    {
-      type: 'category',
-      data: labels,
+  alwaysShowLimit: boolean = false,
+) => {
+  const limitSeriesName = translate('Limit');
+  const showLimitSeries = alwaysShowLimit || limits.some((l) => l.value > 0);
+  return {
+    tooltip: {
+      trigger: 'axis',
       axisPointer: {
-        type: 'shadow',
+        type: 'cross',
+        crossStyle: {
+          color: '#999',
+        },
+      },
+      enterable: true,
+      renderMode: 'html',
+      appendToBody: true,
+      position: (point, _, __, ___, size) => {
+        const x = point[0];
+        const y = point[1];
+        const tipW = size.contentSize[0];
+        const tipH = size.contentSize[1];
+        const viewW = size.viewSize[0];
+        const viewH = size.viewSize[1];
+
+        let pointX = x + TOOLTIP_OFFSET;
+        let pointY = y + TOOLTIP_OFFSET;
+        if (x + tipW > viewW) {
+          pointX = x - tipW - TOOLTIP_OFFSET;
+        }
+        if (y + tipH > viewH) {
+          pointY = y - tipH - TOOLTIP_OFFSET;
+        }
+
+        return [pointX, pointY];
+      },
+      formatter: (params) => {
+        const date = params[0].axisValue;
+        let tooltip = `<div class="mb-1"><b>${date}</b></div>`;
+
+        params.forEach((param) => {
+          const val = param.data.value;
+          const description = param.data.description;
+          const details: RowData['details'] = param.data.details;
+
+          if (
+            param.seriesName === limitSeriesName &&
+            !val &&
+            !alwaysShowLimit
+          ) {
+            return;
+          }
+
+          tooltip += `<br/>${param.marker} ${param.seriesName}: <b>${formatUsageValue(val, true)}</b>`;
+          if (description) {
+            tooltip += ` (${description})`;
+          }
+
+          if (details?.length) {
+            tooltip += `<br/><div class="mt-2 text-decoration-underline"><b>${translate('Details')}:</b></div>`;
+            tooltip += `<ul class="mb-0">`;
+            const hasMoreBtn =
+              details.length > MAX_SHOW_ITEMS + 1 && Boolean(openDialog);
+            const len = hasMoreBtn ? MAX_SHOW_ITEMS : Infinity;
+            details.slice(0, len).forEach((d) => {
+              tooltip += `<li>${d.username} - ${formatUsageValue(d.usage, true)} ${d.measured_unit}</li>`;
+            });
+            tooltip += `</ul>`;
+
+            if (hasMoreBtn) {
+              tooltip += `<div class="text-center mt-3">`;
+              tooltip += `<button id="see-more-btn" class="btn btn-link btn-icon-right py-0">${translate('See more')}`;
+              tooltip += `<span class="svg-icon svg-icon-2 svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm48.49-108.49a12,12,0,0,1,0,17l-40,40a12,12,0,0,1-17,0l-40-40a12,12,0,0,1,17-17L128,135l31.51-31.52A12,12,0,0,1,176.49,103.51Z"></path></svg></span>`;
+              tooltip += `</button></div>`;
+
+              setTimeout(() => {
+                const btn = document.getElementById('see-more-btn');
+                if (btn) {
+                  btn.onclick = () => openDialog(details);
+                }
+              }, 100);
+            }
+          }
+        });
+
+        return tooltip;
       },
     },
-  ],
-  yAxis: [
-    {
-      type: 'value',
-      name,
-      axisLabel: {
-        formatter: '{value}',
+    xAxis: [
+      {
+        type: 'category',
+        data: labels,
+        axisPointer: {
+          type: 'shadow',
+        },
       },
-      axisLine: { show: true },
-      axisTick: { show: true },
-    },
-  ],
-  series: [
-    {
-      type: 'bar',
-      name: translate('Limit'),
-      data: limits,
-      color: '#e0e0e0', // Light gray for limit bars
-      barMaxWidth: 50,
-    },
-    {
-      type: 'line',
-      name: translate('Usage'),
-      data: usages,
-      color,
-      smooth: true,
-      lineStyle: {
-        width: 3,
+    ],
+    yAxis: [
+      {
+        type: 'value',
+        name,
+        axisLabel: {
+          formatter: '{value}',
+        },
+        axisLine: { show: true },
+        axisTick: { show: true },
       },
-      symbolSize: 8,
-    },
-  ],
-});
+    ],
+    series: [
+      ...(showLimitSeries
+        ? [
+            {
+              type: 'bar',
+              name: limitSeriesName,
+              data: limits,
+              color: '#e0e0e0', // Light gray for limit bars
+              barMaxWidth: 50,
+            },
+          ]
+        : []),
+      {
+        type: 'bar',
+        name: translate('Usage'),
+        data: usages,
+        color,
+        barMaxWidth: 50,
+      },
+    ],
+  };
+};
 
 const getMonthsPeriods = (months): DateTime[] => {
   const periods = [];
@@ -255,8 +266,8 @@ export const getEChartOptions = (
     labels,
     formattedUsages,
     formattedLimits,
-    component.name,
     openDialog,
+    component.billing_type === 'limit',
   );
 };
 
