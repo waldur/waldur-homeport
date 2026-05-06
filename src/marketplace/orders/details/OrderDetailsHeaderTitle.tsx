@@ -15,11 +15,11 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
     <div className="d-flex flex-wrap gap-2 mb-2 align-items-center">
       <div className="btn btn-flush d-flex align-items-center">
         <h3 className="text-start mb-0 me-2">
-          {order.attributes.name || DASH_ESCAPE_CODE}
+          {order.attributes.name || order.resource_name || DASH_ESCAPE_CODE}
         </h3>
       </div>
       <CopyToClipboardButton
-        value={order.attributes.name}
+        value={order.attributes.name || order.resource_name}
         className="text-hover-primary cursor-pointer"
         size={20}
       />
