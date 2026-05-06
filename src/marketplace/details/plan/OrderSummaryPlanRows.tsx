@@ -116,8 +116,11 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
                   key={i}
                   label={getRowLabel(row)}
                   value={
-                    defaultCurrency(row.subTotal) +
-                    getPerLimitPeriod(row.limit_period as any)
+                    defaultCurrency(
+                      row.limit_period === 'month'
+                        ? (row.prices[monthlyPriceIndex] ?? row.subTotal)
+                        : row.subTotal,
+                    ) + getPerLimitPeriod(row.limit_period as any)
                   }
                 />
               ))

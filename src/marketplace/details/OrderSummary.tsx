@@ -40,7 +40,12 @@ export const SummaryTable: FC<OrderSummaryProps> = (props) => {
 const OrderCheckout: FC<OrderSummaryProps> = (props) => {
   const { periodic, oneTime } = useComponentsDetailPrices(props.prices);
 
-  const total = periodic.total + oneTime.oneTimeTotal;
+  const monthlyPriceIndex = Math.max(
+    props.prices.periodKeys.indexOf('monthly'),
+    0,
+  );
+  const total =
+    (periodic.totalPeriods[monthlyPriceIndex] || 0) + oneTime.oneTimeTotal;
 
   return (
     <DeployPageTotalCard
