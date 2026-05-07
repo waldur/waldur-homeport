@@ -8,6 +8,7 @@ import { getUserLocale } from '@/i18n/LanguageUtilsService';
 export const formatUsageValue = (
   value: number | string,
   compact?: boolean,
+  maximumFractionDigits: number = 1,
 ): string => {
   if (value === null || value === undefined) return '';
   const num = typeof value === 'string' ? parseFloat(value) : value;
@@ -18,7 +19,7 @@ export const formatUsageValue = (
   if (compact) {
     return new Intl.NumberFormat(locale, {
       notation: 'compact',
-      maximumFractionDigits: 1,
+      maximumFractionDigits,
     }).format(num);
   }
 
