@@ -87,7 +87,7 @@ const formatChart = (
             return;
           }
 
-          tooltip += `<br/>${param.marker} ${param.seriesName}: <b>${formatUsageValue(val, true)}</b>`;
+          tooltip += `<br/>${param.marker} ${param.seriesName}: <b>${formatUsageValue(val, true, 2)}</b>`;
           if (description) {
             tooltip += ` (${description})`;
           }
@@ -99,7 +99,7 @@ const formatChart = (
               details.length > MAX_SHOW_ITEMS + 1 && Boolean(openDialog);
             const len = hasMoreBtn ? MAX_SHOW_ITEMS : Infinity;
             details.slice(0, len).forEach((d) => {
-              tooltip += `<li>${d.username} - ${formatUsageValue(d.usage, true)} ${d.measured_unit}</li>`;
+              tooltip += `<li>${d.username} - ${formatUsageValue(d.usage, true, 2)} ${d.measured_unit}</li>`;
             });
             tooltip += `</ul>`;
 
@@ -136,7 +136,7 @@ const formatChart = (
         type: 'value',
         name,
         axisLabel: {
-          formatter: '{value}',
+          formatter: (value: number) => formatUsageValue(value, true, 2),
         },
         axisLine: { show: true },
         axisTick: { show: true },
