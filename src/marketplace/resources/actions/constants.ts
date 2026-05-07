@@ -1,5 +1,3 @@
-export const MOVE_RESOURCE_FORM_ID = 'MoveResourceForm';
-
 // It is critical to keep this enum in sync with ResourceAction enum from API
 export enum ResourceAction {
   TERMINATE = 'terminate',

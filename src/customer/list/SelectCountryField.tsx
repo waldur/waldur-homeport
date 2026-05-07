@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
+import { Field } from 'react-final-form';
 import { components } from 'react-select';
-import { Field } from 'redux-form';
 import { customersCountriesList } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';

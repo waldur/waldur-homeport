@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useCallback, useState } from 'react';
+import { Field, Form } from 'react-final-form';
 import { components } from 'react-select';
-import { change, Field, reduxForm } from 'redux-form';
 import {
   marketplaceProviderOfferingsUpdateTags,
   marketplaceTagsCreate,
@@ -29,8 +28,6 @@ const CreatableMultiSelectOption = (props) => {
   return <MultiSelectOption {...props} />;
 };
 
-const EDIT_TAGS_FORM_ID = 'EditTagsForm';
-
 interface FormData {
   tags: (Tag | NestedTag)[];
 }
@@ -39,11 +36,7 @@ type OwnProps = {
   resolve: { offering: ProviderOfferingDetails; refetch: () => void };
 };
 
-export const EditTagsDialog = reduxForm<FormData, OwnProps>({
-  form: EDIT_TAGS_FORM_ID,
-})(({ resolve, handleSubmit, invalid, submitting }) => {
-  const dispatch = useDispatch();
-
+export const EditTagsDialog = ({ resolve }: OwnProps) => {
   const { showErrorResponse, showSuccess } = useNotify();
 
   const [isCreating, setIsCreating] = useState(false);
@@ -62,12 +55,6 @@ export const EditTagsDialog = reduxForm<FormData, OwnProps>({
     errorMessage: translate('Unable to update tags'),
     refetch: resolve.refetch,
   });
-
-  useEffect(() => {
-    if (resolve.offering.tags) {
-      dispatch(change(EDIT_TAGS_FORM_ID, 'tags', resolve.offering.tags));
-    }
-  }, [resolve.offering.tags]);
 
   const handleCreateTag = useCallback(
     async (
@@ -91,67 +78,75 @@ export const EditTagsDialog = reduxForm<FormData, OwnProps>({
         setIsCreating(false);
       }
     },
-    [],
+    [showErrorResponse, showSuccess],
   );
 
   return (
-    <form
-      onSubmit={handleSubmit((values) => updateMutation.mutateAsync(values))}
-    >
-      <ModalDialog
-        title={translate('Edit tags')}
-        footer={
-          <FormFooter
-            submitting={submitting}
-            invalid={invalid}
-            submitLabel={translate('Save')}
-          />
-        }
-      >
-        <Field
-          name="tags"
-          component={(fieldProps) => (
-            <AsyncCreatablePaginate
-              placeholder={translate('Select or type to add tags...')}
-              loadOptions={(query: string, prevOptions, { page }) =>
-                tagAutocomplete(query, prevOptions, { page })
-              }
-              defaultOptions
-              getOptionValue={(option) => option.uuid}
-              getOptionLabel={(option) => option.name}
-              value={fieldProps.input.value || []}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              onCreateOption={(inputValue) =>
-                handleCreateTag(
-                  inputValue,
-                  fieldProps.input.value,
-                  fieldProps.input.onChange,
-                )
-              }
-              noOptionsMessage={() => translate('No tags')}
-              formatCreateLabel={(inputValue) =>
-                translate('Create tag "{name}"', { name: inputValue })
-              }
-              isValidNewOption={(inputValue, _selectValue, selectOptions) => {
-                const trimmed = inputValue.trim().toLowerCase();
-                if (!trimmed) return false;
-                // Don't show "Create" if an option with the same name already exists
-                return !selectOptions.some(
-                  (option) => option.name?.toLowerCase() === trimmed,
-                );
-              }}
-              isClearable={true}
-              isMulti={true}
-              isLoading={isCreating}
-              isDisabled={isCreating}
-              components={{
-                Option: CreatableMultiSelectOption,
-                ValueContainer: components.ValueContainer,
-              }}
+    <Form<FormData>
+      initialValues={{ tags: resolve.offering.tags }}
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit tags')}
+            footer={
+              <FormFooter
+                submitting={submitting}
+                invalid={invalid}
+                submitLabel={translate('Save')}
+              />
+            }
+          >
+            <Field
+              name="tags"
+              component={(fieldProps) => (
+                <AsyncCreatablePaginate
+                  placeholder={translate('Select or type to add tags...')}
+                  loadOptions={(query: string, prevOptions, { page }) =>
+                    tagAutocomplete(query, prevOptions, { page })
+                  }
+                  defaultOptions
+                  getOptionValue={(option) => option.uuid}
+                  getOptionLabel={(option) => option.name}
+                  value={fieldProps.input.value || []}
+                  onChange={(value) => fieldProps.input.onChange(value)}
+                  onCreateOption={(inputValue) =>
+                    handleCreateTag(
+                      inputValue,
+                      fieldProps.input.value,
+                      fieldProps.input.onChange,
+                    )
+                  }
+                  noOptionsMessage={() => translate('No tags')}
+                  formatCreateLabel={(inputValue) =>
+                    translate('Create tag "{name}"', { name: inputValue })
+                  }
+                  isValidNewOption={(
+                    inputValue,
+                    _selectValue,
+                    selectOptions,
+                  ) => {
+                    const trimmed = inputValue.trim().toLowerCase();
+                    if (!trimmed) return false;
+                    // Don't show "Create" if an option with the same name already exists
+                    return !selectOptions.some(
+                      (option) => option.name?.toLowerCase() === trimmed,
+                    );
+                  }}
+                  isClearable={true}
+                  isMulti={true}
+                  isLoading={isCreating}
+                  isDisabled={isCreating}
+                  components={{
+                    Option: CreatableMultiSelectOption,
+                    ValueContainer: components.ValueContainer,
+                  }}
+                />
+              )}
             />
-          )}
-        />
-      </ModalDialog>
-    </form>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};
