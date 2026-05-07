@@ -32,6 +32,7 @@ export const OrganizationGroup = ({
                 'url',
                 'customer_unallocated_credit',
                 'project_metadata_checklist',
+                'default_affiliations',
               ],
               o: 'name',
             })

@@ -4,8 +4,10 @@ import { FC, useMemo } from 'react';
 import { STALE_TIME } from '@/core/constants';
 import { fetchCustomerProjects } from '@/customer/workspace/fetchCustomer';
 import { WizardModal, WizardStepProps } from '@/wizard';
+import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
+import { AffiliationGroup } from './AffiliationGroup';
 import { CreditGroup } from './CreditGroup';
 import { DescriptionGroup } from './DescriptionGroup';
 import { EndDateGroup } from './EndDateGroup';
@@ -26,6 +28,8 @@ export const Step1ProjectInfo: FC<WizardStepProps> = (props) => {
   const setSelectedCustomer = props.data.setSelectedCustomer as React.Dispatch<
     React.SetStateAction<Customer>
   >;
+  const user = useUser();
+  const isStaff = Boolean(user?.is_staff);
 
   // Fetch customer projects
   const {
@@ -66,6 +70,7 @@ export const Step1ProjectInfo: FC<WizardStepProps> = (props) => {
       <IndustryGroup />
       <OecdCodeGroup />
       <ScienceDomainGroup />
+      <AffiliationGroup customer={customer as Customer} isStaff={isStaff} />
       <KindGroup create />
 
       <TypeGroup create />

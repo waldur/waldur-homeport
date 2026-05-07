@@ -13,6 +13,7 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { AffiliatedOrganizationCreateButton } from './AffiliatedOrganizationCreateButton';
+import { AffiliatedOrganizationProjects } from './AffiliatedOrganizationProjects';
 import { AffiliatedOrganizationRowActions } from './AffiliatedOrganizationRowActions';
 
 export const AffiliatedOrganizationsList: FunctionComponent = () => {
@@ -61,7 +62,8 @@ export const AffiliatedOrganizationsList: FunctionComponent = () => {
           orderField: 'created',
         },
       ]}
-      verboseName={translate('Affiliated organizations')}
+      verboseName={translate('Affiliations')}
+      expandableRow={AffiliatedOrganizationProjects}
       rowActions={AffiliatedOrganizationRowActions}
       tableActions={
         <AffiliatedOrganizationCreateButton refetch={tableProps.fetch} />

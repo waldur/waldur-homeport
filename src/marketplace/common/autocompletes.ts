@@ -1,4 +1,5 @@
 import {
+  affiliatedOrganizationsList,
   customersList,
   marketplaceCategoriesList,
   marketplaceProviderOfferingsList,
@@ -247,6 +248,28 @@ export const resourceAutocomplete = async (
     parseSelectData(response),
     prevOptions,
     currentPage,
+  );
+};
+
+export const affiliationAutocomplete = async (
+  query: string,
+  prevOptions,
+  page,
+  extraParams?,
+) => {
+  const response = await affiliatedOrganizationsList({
+    query: {
+      query,
+      o: 'name',
+      page,
+      page_size: ENV.pageSize,
+      ...extraParams,
+    },
+  });
+  return returnReactSelectAsyncPaginateObject(
+    parseSelectData(response),
+    prevOptions,
+    page,
   );
 };
 

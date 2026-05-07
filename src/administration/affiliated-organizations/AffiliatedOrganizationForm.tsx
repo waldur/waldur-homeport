@@ -30,11 +30,11 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
           })
         : affiliatedOrganizationsCreate({ body: values }),
     successMessage: isEdit
-      ? translate('The affiliated organization has been updated.')
-      : translate('The affiliated organization has been created.'),
+      ? translate('The affiliation has been updated.')
+      : translate('The affiliation has been created.'),
     errorMessage: isEdit
-      ? translate('Unable to update affiliated organization.')
-      : translate('Unable to create affiliated organization.'),
+      ? translate('Unable to update affiliation.')
+      : translate('Unable to create affiliation.'),
     refetch: resolve.refetch,
   });
 
@@ -65,7 +65,7 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
                 ? translate('Edit {name}', {
                     name: resolve.affiliatedOrganization.name,
                   })
-                : translate('Create affiliated organization')
+                : translate('Create affiliation')
             }
             footer={
               <SubmitButton
