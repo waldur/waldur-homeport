@@ -363,7 +363,7 @@ describe('ResourceUsageChart', () => {
     expect(februaryTooltip).toContain('Usage: <b>10</b>');
   });
 
-  it('should always show Limit on limit-based components even when value is zero', () => {
+  it('should keep Limit series on limit-based components but omit Limit: 0 from the tooltip', () => {
     const component: OfferingComponent = {
       type: 'cpu',
       name: 'CPU',
@@ -401,7 +401,7 @@ describe('ResourceUsageChart', () => {
         data: result.series[1].data[0],
       },
     ]);
-    expect(marchTooltip).toContain('Limit: <b>0</b>');
+    expect(marchTooltip).not.toContain('Limit:');
     expect(marchTooltip).toContain('Usage: <b>0</b>');
   });
 

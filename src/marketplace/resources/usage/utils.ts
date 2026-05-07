@@ -79,11 +79,7 @@ const formatChart = (
           const description = param.data.description;
           const details: RowData['details'] = param.data.details;
 
-          if (
-            param.seriesName === limitSeriesName &&
-            !val &&
-            !alwaysShowLimit
-          ) {
+          if (param.seriesName === limitSeriesName && !val) {
             return;
           }
 
