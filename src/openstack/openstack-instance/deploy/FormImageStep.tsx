@@ -38,6 +38,7 @@ export const FormImageStep = (props: FormStepProps) => {
                 page,
                 tenant_uuid: props.offering.scope_uuid,
                 name: query,
+                is_rescue_image: false,
               },
             }),
           )
