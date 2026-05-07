@@ -23,9 +23,9 @@ import { ParsedAnswer } from '../metadata/ParsedAnswer';
 import { FieldEditButton } from './FieldEditButton';
 import { MetadataEditButton } from './MetadataEditButton';
 
-const UpdateAffiliatedOrganizationsDialog = lazyComponent(() =>
-  import('./UpdateAffiliatedOrganizationsDialog').then((module) => ({
-    default: module.UpdateAffiliatedOrganizationsDialog,
+const UpdateAffiliationDialog = lazyComponent(() =>
+  import('./UpdateAffiliationDialog').then((module) => ({
+    default: module.UpdateAffiliationDialog,
   })),
 );
 
@@ -72,16 +72,15 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
       projectId: project.uuid,
     });
 
-  const affiliatedOrgsDisplay = project.affiliated_organizations?.length
-    ? project.affiliated_organizations
-        .map((org) =>
-          org.abbreviation ? `${org.name} (${org.abbreviation})` : org.name,
-        )
-        .join(', ')
+  const affiliation = project.affiliation;
+  const affiliationDisplay = affiliation
+    ? affiliation.abbreviation
+      ? `${affiliation.name} (${affiliation.abbreviation})`
+      : affiliation.name
     : null;
 
-  const openAffiliatedOrgsDialog = useCallback(() => {
-    openDialog(UpdateAffiliatedOrganizationsDialog, {
+  const openAffiliationDialog = useCallback(() => {
+    openDialog(UpdateAffiliationDialog, {
       resolve: { project },
       size: 'lg',
     });
@@ -135,12 +134,12 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
         />
 
         <FormTable.Item
-          label={translate('Affiliated organizations')}
-          value={renderFieldOrDash(affiliatedOrgsDisplay)}
+          label={translate('Affiliation')}
+          value={renderFieldOrDash(affiliationDisplay)}
           actions={
             canUpdateProject ? (
               <CompactEditButton
-                onClick={openAffiliatedOrgsDialog}
+                onClick={openAffiliationDialog}
                 disabled={project.is_removed}
                 tooltip={
                   project.is_removed

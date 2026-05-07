@@ -1,19 +1,28 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { checklistsAdminRetrieve, customersRetrieve } from 'waldur-js-client';
 
 import { CheckOrX } from '@/core/CheckOrX';
 import { ENV } from '@/core/config';
+import { UI_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
+import { CompactEditButton } from '@/form/CompactEditButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
+import { setCurrentCustomer } from '@/workspace/actions';
 import { useUser } from '@/workspace/hooks';
 
-import { CustomerChecklistPanel } from './CustomerChecklistPanel';
 import { CustomerLocationRow } from './CustomerLocationRow';
 import { CustomerMediaPanel } from './CustomerMediaPanel';
 import { CustomerOrganizationGroupsRow } from './CustomerOrganizationGroupsRow';
@@ -56,8 +65,8 @@ const useTabStats = (isStaff: boolean) => {
 
     const address = 11; // address, country, city, state, parish, street, house_nr, postal, apartment_nr, household, location
 
-    let settings = 1; // grace_period_days
-    if (isStaff) settings += 3; // max_service_accounts, display_billing_info_in_projects, project_slug_template
+    let settings = 2; // grace_period_days, default_affiliations
+    if (isStaff) settings += 4; // max_service_accounts, display_billing_info_in_projects, project_slug_template, project_metadata_checklist
 
     const identifiers = 5; // uuid, slug, registration_code, agreement_number, sponsor_number
 
@@ -73,7 +82,69 @@ const STAFF_ONLY_FIELDS = [
   'domain',
   'sponsor_number',
   'project_slug_template',
+  'default_affiliations',
+  'project_metadata_checklist',
 ];
+
+const ProjectMetadataSchemaValue: FC<{ customer }> = ({ customer }) => {
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ['checklistAdmin', customer.project_metadata_checklist],
+    queryFn: () =>
+      customer.project_metadata_checklist
+        ? checklistsAdminRetrieve({
+            path: { uuid: customer.project_metadata_checklist },
+          }).then((response) => response.data)
+        : null,
+    staleTime: UI_STALE_TIME,
+  });
+
+  if (!customer.project_metadata_checklist) return <>—</>;
+  if (isLoading) {
+    return (
+      <>
+        {customer.project_metadata_checklist} <LoadingSpinnerSimple />
+      </>
+    );
+  }
+  if (error) {
+    return (
+      <LoadingErred loadData={refetch} className="d-flex flex-center gap-4" />
+    );
+  }
+  if (!data) return <>—</>;
+  return (
+    <>
+      {data.name}
+      <span className="text-muted ms-2">
+        ({translate('{count} questions', { count: data.questions_count })})
+      </span>
+    </>
+  );
+};
+
+const EditDefaultAffiliationsDialog = lazyComponent(() =>
+  import('./EditDefaultAffiliationsDialog').then((module) => ({
+    default: module.EditDefaultAffiliationsDialog,
+  })),
+);
+
+const AffiliationsEditButton: FC<{ customer }> = ({ customer }) => {
+  const { openDialog } = useModal();
+  const dispatch = useDispatch();
+  const refresh = useCallback(async () => {
+    const response = await customersRetrieve({
+      path: { uuid: customer.uuid },
+    });
+    dispatch(setCurrentCustomer(response.data));
+  }, [customer.uuid, dispatch]);
+  const onClick = useCallback(() => {
+    openDialog(EditDefaultAffiliationsDialog, {
+      resolve: { customer, callback: refresh },
+      size: 'lg',
+    });
+  }, [customer, refresh, openDialog]);
+  return <CompactEditButton onClick={onClick} variant="secondary" />;
+};
 
 const FieldActions: FC<{
   fieldKey: string;
@@ -258,6 +329,24 @@ const AddressTab: FC<CustomerEditPanelProps> = (props) => {
 const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
   const user = useUser();
 
+  const affiliations = props.customer.default_affiliations ?? [];
+  const AFFILIATIONS_PREVIEW = 5;
+  const affiliationsDisplay = useMemo(() => {
+    if (affiliations.length === 0) return null;
+    const labels = affiliations.map((o) => o.abbreviation || o.name);
+    if (labels.length <= AFFILIATIONS_PREVIEW) {
+      return translate('{count} enabled: {names}', {
+        count: affiliations.length,
+        names: labels.join(', '),
+      });
+    }
+    return translate('{count} enabled: {preview}, +{remaining} more', {
+      count: affiliations.length,
+      preview: labels.slice(0, AFFILIATIONS_PREVIEW).join(', '),
+      remaining: labels.length - AFFILIATIONS_PREVIEW,
+    });
+  }, [affiliations]);
+
   const rows = useMemo(
     () =>
       [
@@ -274,6 +363,15 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
           key: 'grace_period_days',
           value: renderFieldOrDash(props.customer.grace_period_days),
         },
+        {
+          label: translate('Available affiliations'),
+          description: translate(
+            'Affiliations offered to project creators in this organization. Staff can pick from the full registry.',
+          ),
+          key: 'default_affiliations',
+          value: renderFieldOrDash(affiliationsDisplay),
+          customAction: <AffiliationsEditButton customer={props.customer} />,
+        },
         user?.is_staff && {
           label: translate('Display billing info in projects'),
           key: 'display_billing_info_in_projects',
@@ -289,8 +387,16 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
           key: 'project_slug_template',
           value: renderFieldOrDash(props.customer.project_slug_template),
         },
+        user?.is_staff && {
+          label: translate('Project metadata schema'),
+          description: translate(
+            'Checklist used for project metadata collection.',
+          ),
+          key: 'project_metadata_checklist',
+          value: <ProjectMetadataSchemaValue customer={props.customer} />,
+        },
       ].filter(Boolean),
-    [props.customer, user?.is_staff],
+    [props.customer, user?.is_staff, affiliationsDisplay],
   );
 
   return (
@@ -302,13 +408,22 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
           description={row.description}
           value={renderFieldOrDash(row.value)}
           actions={
-            <FieldActions
-              fieldKey={row.key}
-              customer={props.customer}
-              canUpdate={props.canUpdate}
-              callback={props.callback}
-              isStaff={user?.is_staff}
-            />
+            row.customAction ? (
+              props.canUpdate && user?.is_staff ? (
+                <>
+                  <StaffOnlyIndicator />
+                  {row.customAction}
+                </>
+              ) : null
+            ) : (
+              <FieldActions
+                fieldKey={row.key}
+                customer={props.customer}
+                canUpdate={props.canUpdate}
+                callback={props.callback}
+                isStaff={user?.is_staff}
+              />
+            )
           }
         />
       ))}
@@ -468,37 +583,33 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
   };
 
   return (
-    <>
-      <Card className="card-bordered mb-7">
-        <Card.Header>
-          <Card.Title>{translate('Details')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <Tab.Container
-            activeKey={activeTab}
-            onSelect={(k) => handleTabChange(k as TabKey)}
-          >
-            <Nav variant="tabs" className="nav-line-tabs mb-4">
-              {visibleTabs.map((tab) => (
-                <Nav.Item key={tab.key}>
-                  <Nav.Link eventKey={tab.key} className="cursor-pointer">
-                    {tab.title}
-                  </Nav.Link>
-                </Nav.Item>
-              ))}
-            </Nav>
-            <Tab.Content>
-              {visibleTabs.map((tab) => (
-                <Tab.Pane key={tab.key} eventKey={tab.key}>
-                  {tabContent[tab.key]}
-                </Tab.Pane>
-              ))}
-            </Tab.Content>
-          </Tab.Container>
-        </Card.Body>
-      </Card>
-
-      <CustomerChecklistPanel {...props} />
-    </>
+    <Card className="card-bordered mb-7">
+      <Card.Header>
+        <Card.Title>{translate('Details')}</Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <Tab.Container
+          activeKey={activeTab}
+          onSelect={(k) => handleTabChange(k as TabKey)}
+        >
+          <Nav variant="tabs" className="nav-line-tabs mb-4">
+            {visibleTabs.map((tab) => (
+              <Nav.Item key={tab.key}>
+                <Nav.Link eventKey={tab.key} className="cursor-pointer">
+                  {tab.title}
+                </Nav.Link>
+              </Nav.Item>
+            ))}
+          </Nav>
+          <Tab.Content>
+            {visibleTabs.map((tab) => (
+              <Tab.Pane key={tab.key} eventKey={tab.key}>
+                {tabContent[tab.key]}
+              </Tab.Pane>
+            ))}
+          </Tab.Content>
+        </Tab.Container>
+      </Card.Body>
+    </Card>
   );
 };

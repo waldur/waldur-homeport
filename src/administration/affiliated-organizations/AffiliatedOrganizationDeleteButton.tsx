@@ -28,7 +28,7 @@ export const AffiliatedOrganizationDeleteButton = (
       title: translate('Confirmation'),
 
       body: translate(
-        'Are you sure you want to delete the {name} affiliated organization?',
+        'Are you sure you want to delete the {name} affiliation?',
         { name: <strong>{props.row.name}</strong> },
         formatJsxTemplate,
       ),
@@ -38,7 +38,7 @@ export const AffiliatedOrganizationDeleteButton = (
       },
     },
 
-    errorMessage: translate('Unable to remove affiliated organization.'),
+    errorMessage: translate('Unable to remove affiliation.'),
   });
 
   return (
