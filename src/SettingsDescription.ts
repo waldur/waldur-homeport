@@ -232,6 +232,12 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'AFFILIATION_REQUIRED_AT_PROJECT_CREATION',
+        description: translate('If true, the affiliation field is required when creating or updating projects.'),
+        default: false,
+        type: 'boolean',
+      },
     ],
   },
   {
