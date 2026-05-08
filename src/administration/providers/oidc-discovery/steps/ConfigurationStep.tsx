@@ -56,7 +56,7 @@ const AllowedRedirectsField: FC = () => {
           <FormGroup
             label={translate('Allowed Redirect URIs')}
             description={translate(
-              'Add individual redirect URIs that are allowed for this provider. Leave empty to allow any URL.',
+              'Add individual redirect URIs that are allowed for this provider. Leave empty to fall back to the HOMEPORT_URL branding setting (Administration → Branding) — verify that value is correct, otherwise SSO logins will redirect to the wrong host.',
             )}
           >
             {urls.map((url, index) => {
