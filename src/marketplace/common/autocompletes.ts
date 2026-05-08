@@ -1,6 +1,7 @@
 import {
   affiliatedOrganizationsList,
   customersList,
+  CustomersListData,
   marketplaceCategoriesList,
   marketplaceProviderOfferingsList,
   MarketplaceProviderOfferingsListData,
@@ -25,7 +26,7 @@ export const organizationAutocomplete = async (
   query: string,
   prevOptions,
   page,
-  extraQueryParams?,
+  extraQueryParams?: CustomersListData['query'],
 ) => {
   const response = await customersList({
     query: {

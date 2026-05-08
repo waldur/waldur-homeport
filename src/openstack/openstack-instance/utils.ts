@@ -138,7 +138,9 @@ export function flavorValidator(model, choice) {
 }
 
 export const formatAddressList = (row: OpenStackNestedPort) =>
-  renderFieldOrDash(row.fixed_ips.map((fip) => fip.ip_address).join(', '));
+  renderFieldOrDash(
+    row.fixed_ips?.map((fip) => fip.ip_address).join(', ') || null,
+  );
 
 export const getQuotas = ({ formData, usages, limits }) => {
   const quotas: Quota[] = [

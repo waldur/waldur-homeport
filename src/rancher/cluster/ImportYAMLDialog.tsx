@@ -1,19 +1,26 @@
-import { reduxForm } from 'redux-form';
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 import { rancherClustersImportYaml } from 'waldur-js-client';
 
+import { FormContainerFinal } from '@/form';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
 import { ActionDialog } from '@/modal/ActionDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-export const ImportYAMLDialog = reduxForm<
-  { yaml: string },
-  { resolve: { cluster_id } }
->({ form: 'ImportYAMLDialog' })(({ resolve, handleSubmit, submitting }) => {
+interface ImportYAMLDialogProps {
+  resolve: {
+    cluster_id: string;
+  };
+}
+
+export const ImportYAMLDialog: FC<ImportYAMLDialogProps> = ({
+  resolve: { cluster_id },
+}) => {
   const { mutateAsync } = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>
       rancherClustersImportYaml({
-        path: { uuid: resolve.cluster_id },
+        path: { uuid: cluster_id },
         body: { yaml: formData.yaml },
       }),
     successMessage: translate('YAML has been imported.'),
@@ -21,13 +28,21 @@ export const ImportYAMLDialog = reduxForm<
   });
 
   return (
-    <ActionDialog
-      title={translate('Import YAML')}
-      submitLabel={translate('Submit')}
-      onSubmit={handleSubmit((values) => mutateAsync(values))}
-      submitting={submitting}
-    >
-      <MonacoField name="yaml" language="yaml" height={200} />
-    </ActionDialog>
+    <Form
+      onSubmit={mutateAsync}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <ActionDialog
+          title={translate('Import YAML')}
+          submitLabel={translate('Submit')}
+          onSubmit={handleSubmit}
+          submitting={submitting}
+          invalid={invalid}
+        >
+          <FormContainerFinal submitting={submitting}>
+            <MonacoField name="yaml" language="yaml" height={200} />
+          </FormContainerFinal>
+        </ActionDialog>
+      )}
+    />
   );
-});
+};

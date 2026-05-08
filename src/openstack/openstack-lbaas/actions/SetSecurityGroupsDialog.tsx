@@ -1,13 +1,13 @@
 import { FC, useMemo } from 'react';
-import { Form } from 'react-bootstrap';
+import { Field, Form } from 'react-final-form';
 import { useAsync } from 'react-use';
-import { Field, reduxForm } from 'redux-form';
 import {
   OpenStackLoadBalancer,
   openstackLoadbalancersSetSecurityGroups,
 } from 'waldur-js-client';
 
-import { SelectField } from '@/form';
+import { FormGroup } from '@/form/FormGroup';
+import { SelectField } from '@/form/SelectField';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -20,8 +20,6 @@ import { LB_VIP_SECURITY_GROUPS_QUERY_KEY } from '../LoadBalancerExpandableRow';
 interface FormData {
   security_groups: Option[];
 }
-
-const FORM_NAME = 'SetLoadBalancerSecurityGroups';
 
 const useSetSecurityGroupsForm = (
   resource: OpenStackLoadBalancer,
@@ -73,55 +71,53 @@ const useSetSecurityGroupsForm = (
         value: g.url,
       })),
     }),
-    [],
+    [resource.vip_security_groups],
   );
 
   return { resource, asyncState, submitRequest, initialValues };
 };
 
-type OwnProps = ReturnType<typeof useSetSecurityGroupsForm>;
-
-const SetSecurityGroupsForm = reduxForm<FormData, OwnProps>({
-  form: FORM_NAME,
-})(
-  ({
-    handleSubmit,
-    submitting,
-    invalid,
-    submitRequest,
-    asyncState,
-    resource,
-  }) => (
-    <form onSubmit={handleSubmit(submitRequest)}>
-      <AsyncActionDialog
-        title={translate('Set security groups for load balancer {name}', {
-          name: resource.name,
-        })}
-        loading={asyncState.loading}
-        error={asyncState.error}
-        submitting={submitting}
-        invalid={invalid}
-      >
-        {asyncState.value ? (
-          <Form.Group>
-            <Form.Label>{translate('Security groups')}</Form.Label>
-            <Field
-              component={SelectField}
-              name="security_groups"
-              placeholder={translate('Select security groups...')}
-              options={asyncState.value}
-              isMulti={true}
-            />
-          </Form.Group>
-        ) : null}
-      </AsyncActionDialog>
-    </form>
-  ),
-);
-
 export const SetSecurityGroupsDialog: FC<
   ActionDialogProps<OpenStackLoadBalancer>
 > = ({ resolve: { resource, refetch } }) => {
-  const formState = useSetSecurityGroupsForm(resource, refetch);
-  return <SetSecurityGroupsForm {...formState} />;
+  const {
+    resource: lb,
+    asyncState,
+    submitRequest,
+    initialValues,
+  } = useSetSecurityGroupsForm(resource, refetch);
+
+  return (
+    <Form<FormData>
+      onSubmit={submitRequest}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <AsyncActionDialog
+            title={translate('Set security groups for load balancer {name}', {
+              name: lb.name,
+            })}
+            loading={asyncState.loading}
+            error={asyncState.error}
+            submitting={submitting}
+            invalid={invalid}
+          >
+            {asyncState.value ? (
+              <Field
+                component={FormGroup as any}
+                name="security_groups"
+                label={translate('Security groups')}
+              >
+                <SelectField
+                  placeholder={translate('Select security groups...')}
+                  options={asyncState.value}
+                  isMulti={true}
+                />
+              </Field>
+            ) : null}
+          </AsyncActionDialog>
+        </form>
+      )}
+    />
+  );
 };

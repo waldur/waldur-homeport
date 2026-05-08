@@ -1,10 +1,9 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
-import { Form } from 'react-bootstrap';
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
-import { Field } from 'redux-form';
 import {
   BillingUnit,
   marketplaceProviderOfferingsCreate,
@@ -13,8 +12,13 @@ import {
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
-import { AsyncPaginate } from '@/form/themed-select';
+import {
+  FormContainerFinal,
+  SelectField,
+  StringField,
+  SubmitButton,
+} from '@/form';
+import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -24,18 +28,16 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { getCustomer } from '@/workspace/selectors';
 
-import { OFFERING_CREATE_FORM_ID } from './constants';
 import { OfferingCreateFormData } from './types';
 
-export const OfferingCreateDialog = reduxForm<
-  OfferingCreateFormData,
-  { resolve: { fetch; showProvider?: boolean } }
->({
-  form: OFFERING_CREATE_FORM_ID,
-})(({
-  handleSubmit,
-  submitting,
-  invalid,
+interface OfferingCreateDialogProps {
+  resolve: {
+    fetch;
+    showProvider?: boolean;
+  };
+}
+
+export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
   resolve: { fetch, showProvider = false },
 }) => {
   const { data, isLoading, error, refetch } = useQuery({
@@ -85,6 +87,7 @@ export const OfferingCreateDialog = reduxForm<
       });
     },
   });
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -97,92 +100,82 @@ export const OfferingCreateDialog = reduxForm<
       />
     );
   }
+
   return (
-    <form
-      onSubmit={handleSubmit((values) =>
-        saveOfferingMutation.mutateAsync(values),
-      )}
-      data-testid="offering-create-dialog"
-    >
-      <ModalDialog
-        title={translate('New offering')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={submitting}
-              disabled={invalid}
-              label={translate('Create')}
-              data-testid="offering-create-submit"
-            />
-          </>
-        }
-        iconNode={<PlusCircleIcon weight="bold" />}
-        iconColor="success"
-      >
-        <FormContainer submitting={submitting}>
-          {showProvider && (
-            <div className="form-group mb-5">
-              <Form.Label>{translate('Service provider')}</Form.Label>
-              <Field
-                name="organisation"
+    <Form<OfferingCreateFormData>
+      onSubmit={(values) => saveOfferingMutation.mutateAsync(values)}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit} data-testid="offering-create-dialog">
+          <ModalDialog
+            title={translate('New offering')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={invalid}
+                  label={translate('Create')}
+                  data-testid="offering-create-submit"
+                />
+              </>
+            }
+            iconNode={<PlusCircleIcon weight="bold" />}
+            iconColor="success"
+          >
+            <FormContainerFinal submitting={submitting}>
+              {showProvider && (
+                <AsyncSelectFieldFinal
+                  name="organisation"
+                  label={translate('Service provider')}
+                  validate={required}
+                  required
+                  placeholder={translate('Select service provider...')}
+                  loadOptions={(query, prevOptions, page) =>
+                    organizationAutocomplete(query, prevOptions, page, {
+                      field: ['name', 'url', 'uuid'],
+                      o: 'name',
+                      is_service_provider: true,
+                    })
+                  }
+                  getOptionValue={(option) => option.url}
+                  noOptionsMessage={() => translate('No service providers')}
+                  isClearable={true}
+                />
+              )}
+              <StringField
+                name="name"
+                label={translate('Name')}
+                required={true}
                 validate={required}
-                component={(fieldProps) => (
-                  <AsyncPaginate
-                    placeholder={translate('Select service provider...')}
-                    loadOptions={(query, prevOptions, { page }) =>
-                      organizationAutocomplete(query, prevOptions, page, {
-                        field: ['name', 'url', 'uuid'],
-                        o: 'name',
-                        is_service_provider: true,
-                      })
-                    }
-                    defaultOptions
-                    getOptionValue={(option) => option.url}
-                    getOptionLabel={(option) => option.name}
-                    value={fieldProps.input.value}
-                    onChange={(value) => fieldProps.input.onChange(value)}
-                    noOptionsMessage={() => translate('No service providers')}
-                    isClearable={true}
-                    className="metronic-select-container"
-                    classNamePrefix="metronic-select"
-                  />
-                )}
+                maxLength={150}
               />
-            </div>
-          )}
-          <StringField
-            name="name"
-            label={translate('Name')}
-            required={true}
-            validate={required}
-            maxLength={150}
-          />
 
-          <SelectField
-            name="category"
-            label={translate('Category')}
-            options={data.categories}
-            required={true}
-            getOptionValue={(option) => option.url}
-            getOptionLabel={(option) => option.title}
-            isClearable={false}
-            validate={required}
-            data-testid="offering-category"
-          />
+              <SelectField
+                name="category"
+                label={translate('Category')}
+                options={data.categories}
+                required={true}
+                getOptionValue={(option) => option.url}
+                getOptionLabel={(option) => option.title}
+                isClearable={false}
+                validate={required}
+                data-testid="offering-category"
+              />
 
-          <SelectField
-            name="type"
-            label={translate('Type')}
-            required={true}
-            options={data.offeringTypes}
-            isClearable={false}
-            validate={required}
-            spaceless
-            data-testid="offering-type"
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+              <SelectField
+                name="type"
+                label={translate('Type')}
+                required={true}
+                options={data.offeringTypes}
+                isClearable={false}
+                validate={required}
+                spaceless
+                data-testid="offering-type"
+              />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};
