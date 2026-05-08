@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { FieldArray, reduxForm } from 'redux-form';
+import arrayMutators from 'final-form-arrays';
+import { Form } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import {
   OpenStackRouter,
   openstackRoutersSetRoutes,
@@ -24,52 +24,48 @@ interface FormData {
   routes: OpenStackStaticRouteRequest[];
 }
 
-const enhance = compose(
-  connect<{}, {}, OwnProps>((_, ownProps) => ({
-    initialValues: { routes: ownProps.resolve.router.routes },
-  })),
-  reduxForm<FormData, OwnProps>({
-    form: 'SetRoutesDialog',
-  }),
-);
+export const SetRoutesDialog = ({ resolve }: OwnProps) => {
+  const setRoutesMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (formData) =>
+      openstackRoutersSetRoutes({
+        path: { uuid: resolve.router.uuid },
+        body: {
+          routes: formData.routes || [],
+        },
+      }),
+    successMessage: translate('Static routes update was scheduled.'),
+    errorMessage: translate('Unable to update static routes.'),
+  });
 
-export const SetRoutesDialog = enhance(
-  ({ resolve, invalid, submitting, handleSubmit }) => {
-    const setRoutesMutation = useManagedMutation<any, any, FormData>({
-      mutationFn: (formData) =>
-        openstackRoutersSetRoutes({
-          path: { uuid: resolve.router.uuid },
-          body: {
-            routes: formData.routes,
-          },
-        }),
-      successMessage: translate('Static routes update was scheduled.'),
-      errorMessage: translate('Unable to update static routes.'),
-    });
-
-    return (
-      <form
-        onSubmit={handleSubmit((values) =>
-          setRoutesMutation.mutateAsync(values),
-        )}
-      >
-        <ModalDialog
-          title={translate('Update static routes')}
-          footer={
-            <FormFooter
-              submitting={submitting}
-              invalid={invalid}
-              submitLabel={translate('Update')}
+  return (
+    <Form<FormData>
+      onSubmit={(values) => setRoutesMutation.mutateAsync(values)}
+      initialValues={{ routes: resolve.router.routes } as any}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Update static routes')}
+            footer={
+              <FormFooter
+                submitting={submitting}
+                invalid={invalid}
+                submitLabel={translate('Update')}
+              />
+            }
+          >
+            <FieldArray
+              name="routes"
+              render={({ fields }) => (
+                <StaticRoutesTable
+                  fields={fields}
+                  fixedIps={resolve.router.fixed_ips}
+                />
+              )}
             />
-          }
-        >
-          <FieldArray
-            name="routes"
-            component={StaticRoutesTable}
-            fixedIps={resolve.router.fixed_ips}
-          />
-        </ModalDialog>
-      </form>
-    );
-  },
-);
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

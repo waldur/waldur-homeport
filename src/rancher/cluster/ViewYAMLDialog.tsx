@@ -1,39 +1,41 @@
-import { useEffect } from 'react';
-import { useAsyncFn, useToggle } from 'react-use';
-import { reduxForm, Field } from 'redux-form';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
+import { Form, Field } from 'react-final-form';
+import { useToggle } from 'react-use';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { LoadingErred } from '@/core/LoadingErred';
-import { SubmitButton } from '@/form';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { FormFooter, SubmitButton } from '@/form';
+import { FormContainerFinal } from '@/form/FormContainerFinal';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
-import { ActionDialog } from '@/modal/ActionDialog';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-export const ViewYAMLDialog = reduxForm<
-  { yaml: string },
-  { resolve: { resource: { uuid?: string }; yamlRetrieve; yamlUpdate } }
->({ form: 'ViewYAMLDialog', enableReinitialize: true })(({
-  resolve,
-  handleSubmit,
-  submitting,
-  initialize,
-}) => {
-  const [{ loading, error, value }, fetch] = useAsyncFn(() =>
-    resolve
-      .yamlRetrieve({ path: { uuid: resolve.resource.uuid } })
-      .then((response) => response.data.yaml),
-  );
+interface ViewYAMLDialogProps {
+  resolve: {
+    resource: { uuid?: string };
+    yamlRetrieve;
+    yamlUpdate;
+  };
+}
 
-  useEffect(() => {
-    fetch();
-  }, []);
+export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
+  const {
+    data: value,
+    isLoading: loading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ['cluster-yaml', resolve.resource.uuid],
+    queryFn: () =>
+      resolve
+        .yamlRetrieve({ path: { uuid: resolve.resource.uuid } })
+        .then((response) => response.data.yaml),
+  });
 
-  useEffect(() => {
-    if (value) {
-      initialize({ yaml: value as string });
-    }
-  }, [value, initialize]);
+  const initialValues = useMemo(() => ({ yaml: value as string }), [value]);
 
   const updateYamlMutation = useManagedMutation<any, any, { yaml: string }>({
     mutationFn: (formData) =>
@@ -50,40 +52,58 @@ export const ViewYAMLDialog = reduxForm<
   const [showDiff, toggleShowDiff] = useToggle(false);
 
   if (error) {
-    return <LoadingErred loadData={fetch} />;
+    return <LoadingErred loadData={() => refetch()} />;
   }
 
   return (
-    <ActionDialog
-      title={translate('Edit YAML')}
-      submitLabel={translate('Submit')}
-      onSubmit={handleSubmit((values) =>
-        updateYamlMutation.mutateAsync(values),
-      )}
-      submitting={submitting}
-      loading={loading}
-    >
-      <Field
-        name="yaml"
-        language="yaml"
-        component={MonacoField}
-        original={value as string}
-        diff={showDiff}
-        height={400}
-        options={{ scrollBeyondLastLine: false }}
-      />
+    <Form<{ yaml: string }>
+      onSubmit={(values) => updateYamlMutation.mutateAsync(values)}
+      initialValues={initialValues}
+      enableReinitialize={true}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit YAML')}
+            footer={
+              <FormFooter
+                submitting={submitting}
+                invalid={invalid}
+                submitLabel={translate('Submit')}
+              />
+            }
+          >
+            {loading ? (
+              <LoadingSpinner />
+            ) : (
+              <FormContainerFinal submitting={submitting}>
+                <Field
+                  name="yaml"
+                  language="yaml"
+                  component={MonacoField as any}
+                  original={value as string}
+                  diff={showDiff}
+                  height={400}
+                  options={{ scrollBeyondLastLine: false }}
+                />
+              </FormContainerFinal>
+            )}
 
-      {value && (
-        <>
-          <CopyToClipboard value={value} textButton className="my-2" />{' '}
-          <SubmitButton
-            submitting={false}
-            onClick={toggleShowDiff}
-            type="button"
-            label={showDiff ? translate('Hide diff') : translate('Show diff')}
-          />
-        </>
+            {value && !loading && (
+              <div className="d-flex align-items-center gap-2 mt-4">
+                <CopyToClipboard value={value as string} textButton />
+                <SubmitButton
+                  submitting={false}
+                  onClick={toggleShowDiff}
+                  type="button"
+                  label={
+                    showDiff ? translate('Hide diff') : translate('Show diff')
+                  }
+                />
+              </div>
+            )}
+          </ModalDialog>
+        </form>
       )}
-    </ActionDialog>
+    />
   );
-});
+};

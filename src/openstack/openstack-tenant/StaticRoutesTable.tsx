@@ -1,39 +1,43 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
+import { OpenStackFixedIp } from 'waldur-js-client';
 
-import { required } from '@/core/validators';
-import { renderValidationWrapper } from '@/form/FieldValidationWrapper';
-import { InputField } from '@/form/InputField';
+import { required, composeValidators } from '@/core/validators';
+import { StringField, FieldError } from '@/form';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { validateIPv4 } from '../utils';
 
-const validateFixedIPs = (fixedIps: string[]) => (value) => {
-  if (fixedIps.includes(value)) {
+const validateFixedIPs = (fixedIps: OpenStackFixedIp[]) => (value: string) => {
+  if (fixedIps.some((ip) => ip.ip_address === value)) {
     return translate('IP address is already used by router.');
   }
 };
 
-const ValidatedInputField = renderValidationWrapper(InputField);
-
 const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
   <tr>
     <td>
-      <Field
-        name={`${route}.destination`}
-        component={ValidatedInputField}
-        validate={required}
-      />
+      <Field name={`${route}.destination`} validate={required}>
+        {({ input, meta }) => (
+          <>
+            <StringField input={input as any} />
+            <FieldError error={meta.touched && meta.error} />
+          </>
+        )}
+      </Field>
     </td>
     <td>
-      <Field
-        name={`${route}.nexthop`}
-        component={ValidatedInputField}
-        validate={nexthopValidator}
-      />
+      <Field name={`${route}.nexthop`} validate={nexthopValidator}>
+        {({ input, meta }) => (
+          <>
+            <StringField input={input as any} />
+            <FieldError error={meta.touched && meta.error} />
+          </>
+        )}
+      </Field>
     </td>
     <td>
       <CompactActionButton
@@ -55,12 +59,12 @@ const StaticRouteAddButton = ({ onClick }) => (
   />
 );
 
-export const StaticRoutesTable: FC<{ fields; fixedIps: string[] }> = ({
-  fields,
-  fixedIps = [],
-}) => {
+export const StaticRoutesTable: FC<{
+  fields;
+  fixedIps: OpenStackFixedIp[];
+}> = ({ fields, fixedIps = [] }) => {
   const nexthopValidator = useMemo(
-    () => [required, validateIPv4, validateFixedIPs(fixedIps)],
+    () => composeValidators(required, validateIPv4, validateFixedIPs(fixedIps)),
     [fixedIps],
   );
 

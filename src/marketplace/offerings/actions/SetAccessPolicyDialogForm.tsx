@@ -1,7 +1,5 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { reduxForm } from 'redux-form';
+import { FunctionComponent, useMemo } from 'react';
+import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateOrganizationGroups,
   marketplacePlansUpdateOrganizationGroups,
@@ -11,7 +9,6 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { SET_ACCESS_POLICY_FORM_ID } from '@/marketplace/offerings/actions/constants';
 import { formatRequestBodyForSetAccessPolicyForm } from '@/marketplace/offerings/actions/utils';
 import { Offering, Plan } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -20,7 +17,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { SetAccessPolicyFormContainer } from './SetAccessPolicyFormContainer';
 
-interface SetAccessPolicyDialogFormOwnProps {
+interface SetAccessPolicyDialogFormProps {
   offering?: Offering;
   plan?: Plan;
   customer?: any;
@@ -28,7 +25,26 @@ interface SetAccessPolicyDialogFormOwnProps {
   refetch: any;
 }
 
-const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => {
+export const SetAccessPolicyDialogForm: FunctionComponent<
+  SetAccessPolicyDialogFormProps
+> = (props) => {
+  const initialValues = useMemo(() => {
+    const values = {};
+    props.organizationGroups.forEach((group) => {
+      values[group.uuid] =
+        props.offering?.organization_groups?.some(
+          (selectedGroup) => selectedGroup.uuid === group.uuid,
+        ) ||
+        props.plan?.organization_groups?.some(
+          (selectedGroup) => selectedGroup.uuid === group.uuid,
+        ) ||
+        props.customer?.organization_groups?.some(
+          (selectedGroup) => selectedGroup.uuid === group.uuid,
+        );
+    });
+    return values;
+  }, [props.organizationGroups, props.offering, props.plan, props.customer]);
+
   const updateMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
       const updateAccessPolicy = props.plan
@@ -56,73 +72,44 @@ const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => {
     errorMessage: translate('Unable to update access policy.'),
     refetch: props.refetch,
   });
+
   return (
-    <form
-      onSubmit={props.handleSubmit((values) =>
-        updateMutation.mutateAsync(values),
-      )}
-    >
-      <ModalDialog
-        title={
-          props.plan
-            ? translate('Set access policy for {planName}', {
-                planName: props.plan?.name,
-              })
-            : props.offering
-              ? translate('Set access policy for {offeringName}', {
-                  offeringName: props.offering?.name,
-                })
-              : translate('Set organization groups for {customerName}', {
-                  customerName: props.customer?.name,
-                })
-        }
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={props.submitting}
-              label={translate('Save')}
+    <Form
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
+              props.plan
+                ? translate('Set access policy for {planName}', {
+                    planName: props.plan?.name,
+                  })
+                : props.offering
+                  ? translate('Set access policy for {offeringName}', {
+                      offeringName: props.offering?.name,
+                    })
+                  : translate('Set organization groups for {customerName}', {
+                      customerName: props.customer?.name,
+                    })
+            }
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={submitting}
+                  label={translate('Save')}
+                />
+              </>
+            }
+          >
+            <SetAccessPolicyFormContainer
+              organizationGroups={props.organizationGroups}
+              submitting={submitting}
             />
-          </>
-        }
-      >
-        <SetAccessPolicyFormContainer
-          organizationGroups={props.organizationGroups}
-          submitting={props.submitting}
-        />
-      </ModalDialog>
-    </form>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };
-
-const mapStateToProps = (
-  _state,
-  ownProps: SetAccessPolicyDialogFormOwnProps,
-) => {
-  const initialValues = {};
-  ownProps.organizationGroups.forEach((group) => {
-    initialValues[group.uuid] =
-      ownProps.offering?.organization_groups?.some(
-        (selectedGroup) => selectedGroup.uuid === group.uuid,
-      ) ||
-      ownProps.plan?.organization_groups?.some(
-        (selectedGroup) => selectedGroup.uuid === group.uuid,
-      ) ||
-      ownProps.customer?.organization_groups?.some(
-        (selectedGroup) => selectedGroup.uuid === group.uuid,
-      );
-  });
-  return { initialValues };
-};
-
-const connector = connect(mapStateToProps);
-
-const enhance = compose(
-  connector,
-  reduxForm<SetAccessPolicyDialogFormOwnProps>({
-    form: SET_ACCESS_POLICY_FORM_ID,
-    enableReinitialize: true,
-  }),
-);
-
-export const SetAccessPolicyDialogForm = enhance(PureSetAccessPolicyDialogForm);

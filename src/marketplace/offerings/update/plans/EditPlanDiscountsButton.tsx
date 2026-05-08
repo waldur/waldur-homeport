@@ -6,8 +6,6 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
-import { EDIT_PLAN_DISCOUNTS_FORM_ID } from './constants';
-
 const EditPlanDiscountsDialog = lazyComponent(() =>
   import('./EditPlanDiscountsDialog').then((module) => ({
     default: module.EditPlanDiscountsDialog,
@@ -23,7 +21,6 @@ export const EditPlanDiscountsButton: FunctionComponent<{
   const callback = () => {
     openDialog(EditPlanDiscountsDialog, {
       resolve: { offering, plan, refetch },
-      formId: EDIT_PLAN_DISCOUNTS_FORM_ID,
       size: 'lg',
     });
   };

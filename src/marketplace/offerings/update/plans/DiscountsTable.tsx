@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
@@ -34,7 +34,7 @@ export const DiscountsTable: FunctionComponent<DiscountsTableProps> = ({
           <td>
             <Field
               name={`discounts.${component.type}.discount_threshold`}
-              component={InputField}
+              component={InputField as any}
               type="number"
               placeholder={translate('e.g. 100')}
               min={0}
@@ -44,7 +44,7 @@ export const DiscountsTable: FunctionComponent<DiscountsTableProps> = ({
           <td>
             <Field
               name={`discounts.${component.type}.discount_rate`}
-              component={InputField}
+              component={InputField as any}
               type="number"
               placeholder={translate('e.g. 15')}
               min={0}

@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { OrganizationGroup } from 'waldur-js-client';
 
 import { translate } from '@/i18n';

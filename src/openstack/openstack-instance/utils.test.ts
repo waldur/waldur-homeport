@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { validateOpenstackInstanceName } from './utils';
+import { formatAddressList, validateOpenstackInstanceName } from './utils';
 
 describe('OpenStack Instance Name Validator', () => {
   it('allows trailing slash', () => {
@@ -49,5 +49,28 @@ describe('OpenStack Instance Name Validator', () => {
     expect(validateOpenstackInstanceName('aaa.999')).toEqual(
       'TLD "999" must not be all numeric',
     );
+  });
+});
+
+describe('formatAddressList', () => {
+  it('formats address list correctly', () => {
+    const row: any = {
+      fixed_ips: [{ ip_address: '192.168.1.1' }, { ip_address: '192.168.1.2' }],
+    };
+    expect(formatAddressList(row)).toBe('192.168.1.1, 192.168.1.2');
+  });
+
+  it('handles null fixed_ips correctly', () => {
+    const row: any = {
+      fixed_ips: null,
+    };
+    expect(formatAddressList(row)).toBe('—');
+  });
+
+  it('handles empty fixed_ips correctly', () => {
+    const row: any = {
+      fixed_ips: [],
+    };
+    expect(formatAddressList(row)).toBe('—');
   });
 });

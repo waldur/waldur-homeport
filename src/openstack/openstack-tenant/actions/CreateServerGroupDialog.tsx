@@ -1,19 +1,19 @@
-import { useQuery } from '@tanstack/react-query';
-import { Form } from 'react-bootstrap';
-import { Field, reduxForm } from 'redux-form';
+import { FC, useMemo } from 'react';
+import { Form } from 'react-final-form';
 import {
   type OpenStackServerGroupRequest,
-  openstackServerGroupsList,
   openstackTenantsCreateServerGroup,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@/core/api';
-import { getLatinNameValidators, required } from '@/core/validators';
-import { InputField } from '@/form/InputField';
-import { Select } from '@/form/themed-select';
+import {
+  composeValidators,
+  getLatinNameValidators,
+  required,
+} from '@/core/validators';
+import { FormContainerFinal, SelectField, StringField } from '@/form';
 import { translate } from '@/i18n';
+import { ActionDialog } from '@/modal/ActionDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { OpenStackTenant } from '../types';
 
@@ -31,32 +31,9 @@ const getPolicies = () => [
   { value: 'soft-anti-affinity', label: translate('Soft anti-affinity') },
 ];
 
-const SERVER_GROUP_FORM_NAME = 'CreateServerGroupForm';
-
-export const CreateServerGroupDialog = reduxForm<
-  OpenStackServerGroupRequest,
-  CreateServerGroupDialogProps
->({
-  form: SERVER_GROUP_FORM_NAME,
-})(({ handleSubmit, submitting, invalid, resolve: { resource, refetch } }) => {
-  const {
-    data: serverGroups,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['openstack-server-groups', resource.url],
-    queryFn: () =>
-      getAllPages((page) =>
-        openstackServerGroupsList({
-          query: {
-            page,
-            tenant: resource.url,
-            field: ['name', 'url'],
-          },
-        }),
-      ),
-  });
-
+export const CreateServerGroupDialog: FC<CreateServerGroupDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const submitMutation = useManagedMutation<
     any,
     any,
@@ -75,47 +52,48 @@ export const CreateServerGroupDialog = reduxForm<
     refetch,
   });
 
+  const initialValues = useMemo(
+    () => ({
+      policy: getPolicies()[0],
+    }),
+    [],
+  );
+
   return (
-    <form
-      onSubmit={handleSubmit((values) => submitMutation.mutateAsync(values))}
-    >
-      <AsyncActionDialog
-        title={translate('Create server group for OpenStack tenant {name}', {
-          name: resource.name,
-        })}
-        loading={isLoading}
-        error={error}
-        submitting={submitting}
-        invalid={invalid}
-      >
-        {serverGroups ? (
-          <>
-            <Form.Label>{translate('Name')}</Form.Label>
-            <Field
-              component={InputField}
+    <Form<OpenStackServerGroupRequest>
+      onSubmit={(values) => submitMutation.mutateAsync(values)}
+      initialValues={initialValues as any}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <ActionDialog
+          onSubmit={handleSubmit}
+          submitLabel={translate('Submit')}
+          title={translate('Create server group for OpenStack tenant {name}', {
+            name: resource.name,
+          })}
+          submitting={submitting}
+          invalid={invalid}
+        >
+          <FormContainerFinal submitting={submitting}>
+            <StringField
+              label={translate('Name')}
               name="name"
-              validate={getLatinNameValidators()}
+              validate={composeValidators(...getLatinNameValidators())}
               maxLength={150}
+              required={true}
             />
 
-            <Form.Label>{translate('Policy')}</Form.Label>
-            <Field
+            <SelectField
+              label={translate('Policy')}
               name="policy"
-              component={(fieldProps) => (
-                <Select
-                  placeholder={translate('Select policy...')}
-                  options={getPolicies()}
-                  value={fieldProps.input.value}
-                  onChange={(value) => fieldProps.input.onChange(value)}
-                  isClearable={true}
-                  required={true}
-                  validate={required}
-                />
-              )}
+              placeholder={translate('Select policy...')}
+              options={getPolicies()}
+              isClearable={false}
+              required={true}
+              validate={required}
             />
-          </>
-        ) : null}
-      </AsyncActionDialog>
-    </form>
+          </FormContainerFinal>
+        </ActionDialog>
+      )}
+    />
   );
-});
+};
