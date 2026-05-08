@@ -57,7 +57,7 @@ const AllowedRedirectsField = () => {
           <FormGroup
             label={translate('Allowed Redirect URIs')}
             help={translate(
-              'Add individual redirect URIs that are allowed for this provider. Must be origin-only (HTTPS unless localhost, no paths/query/fragments, no trailing slashes). Leave empty to allow any URL.',
+              'Add individual redirect URIs that are allowed for this provider. Must be origin-only (HTTPS unless localhost, no paths/query/fragments, no trailing slashes). Leave empty to fall back to the HOMEPORT_URL branding setting (Administration → Branding) — verify that value is correct, otherwise SSO logins will redirect to the wrong host.',
             )}
           >
             {urls.map((url, index) => {

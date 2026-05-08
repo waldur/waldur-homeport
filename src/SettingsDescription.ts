@@ -32,7 +32,9 @@ export const SettingsDescription = [
       },
       {
         key: 'HOMEPORT_URL',
-        description: translate('It is used for rendering callback URL in HomePort'),
+        description: translate(
+          'Public URL of this Waldur instance. Used as the fallback origin for SSO/OAuth callbacks (Keycloak, OIDC, ORCID, etc.) when a provider has no explicit redirect URIs configured. Must be set before configuring SSO — leaving the default (https://example.com/) will redirect users to a non-existent host after login.',
+        ),
         default: 'https://example.com/',
         type: 'string',
       },
