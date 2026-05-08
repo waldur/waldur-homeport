@@ -20,7 +20,9 @@ import { EditButton } from '@/form/EditButton';
 import { translate } from '@/i18n';
 import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
 import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
+import { ExperimentalUsageSection } from '@/marketplace/aggregate-limits/experimental/ExperimentalUsageSection';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -296,6 +298,9 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           <ProjectDashboardCredit project={project} className="mb-5" />
         )}
       </Row>
+      {isExperimentalUiComponentsVisible() && (
+        <ExperimentalUsageSection project={project} />
+      )}
     </>
   );
 };
