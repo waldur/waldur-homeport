@@ -21,6 +21,7 @@ import { CustomerEditPanels } from './CustomerEditPanels';
 import { CustomerManagePageBar } from './CustomerManagePageBar';
 import { CustomerMarketplacePanel } from './CustomerMarketplacePanel';
 import { CustomerRemovePanel } from './CustomerRemovePanel';
+import { serializeNotificationEmails } from './utils';
 
 const CustomerErrorDialog = lazyComponent(() =>
   import('./CustomerErrorDialog').then((module) => ({
@@ -52,6 +53,11 @@ export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
             path: { uuid: customer.uuid },
             body: {
               ...formData,
+              ...('notification_emails' in formData && {
+                notification_emails: serializeNotificationEmails(
+                  formData.notification_emails,
+                ),
+              }),
               image: fileSerializer(formData.image),
               country:
                 'country' in formData && formData.country
