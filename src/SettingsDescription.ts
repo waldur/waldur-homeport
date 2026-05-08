@@ -32,9 +32,7 @@ export const SettingsDescription = [
       },
       {
         key: 'HOMEPORT_URL',
-        description: translate(
-          'Public URL of this Waldur instance. Used as the fallback origin for SSO/OAuth callbacks (Keycloak, OIDC, ORCID, etc.) when a provider has no explicit redirect URIs configured. Must be set before configuring SSO — leaving the default (https://example.com/) will redirect users to a non-existent host after login.',
-        ),
+        description: translate('It is used for rendering callback URL in HomePort'),
         default: 'https://example.com/',
         type: 'string',
       },
@@ -1395,10 +1393,10 @@ export const SettingsDescription = [
       },
       {
         key: 'AI_ASSISTANT_ENABLED_ROLES',
-        description: translate('Controls which user roles can access the AI Assistant. \'disabled\': No role-based access. \'staff\': Staff users only. \'staff_and_support\': Staff and support users. \'all\': All authenticated users.'),
+        description: translate('Controls which user roles can access the AI Assistant. \'disabled\': No role-based access. \'staff\': Staff users only. \'staff_and_support\': Staff and support users. \'all\': All authenticated users. \'anonymous\': All users including anonymous (enables the public anonymous chat endpoint).'),
         default: 'disabled',
         type: 'choice_field',
-        options: [{ value: 'disabled', label: 'Disabled' }, { value: 'staff', label: 'Staff users' }, { value: 'staff_and_support', label: 'Staff and support users' }, { value: 'all', label: 'All users' }],
+        options: [{ value: 'disabled', label: 'Disabled' }, { value: 'staff', label: 'Staff users' }, { value: 'staff_and_support', label: 'Staff and support users' }, { value: 'all', label: 'All users' }, { value: 'anonymous', label: 'All users including anonymous' }],
       },
       {
         key: 'AI_ASSISTANT_BACKEND_TYPE',
@@ -1437,21 +1435,39 @@ export const SettingsDescription = [
         type: 'dict_field',
       },
       {
+        key: 'AI_ASSISTANT_STREAM_TIMEOUT_SECONDS',
+        description: translate('Hard timeout in seconds for a full streaming request including LLM completion.'),
+        default: 120,
+        type: 'integer',
+      },
+      {
         key: 'AI_ASSISTANT_TOKEN_LIMIT_DAILY',
-        description: translate('Default daily token limit (integer). -1 means unlimited.'),
+        description: translate('Per-actor daily token cap (authenticated OR anonymous). -1 means unlimited.'),
         default: -1,
         type: 'integer',
       },
       {
         key: 'AI_ASSISTANT_TOKEN_LIMIT_WEEKLY',
-        description: translate('Default weekly token limit (integer). -1 means unlimited.'),
+        description: translate('Per-actor (authenticated OR anonymous) weekly token cap. -1 means unlimited.'),
         default: -1,
         type: 'integer',
       },
       {
         key: 'AI_ASSISTANT_TOKEN_LIMIT_MONTHLY',
-        description: translate('Default monthly token limit (integer). -1 means unlimited.'),
+        description: translate('Per-actor (authenticated OR anonymous) monthly token cap. -1 means unlimited.'),
         default: -1,
+        type: 'integer',
+      },
+      {
+        key: 'AI_ASSISTANT_GLOBAL_DAILY_TOKEN_BUDGET',
+        description: translate('Site-wide daily token cap across all assistant traffic (auth + anonymous). -1 means unlimited.'),
+        default: 5000000,
+        type: 'integer',
+      },
+      {
+        key: 'AI_ASSISTANT_GLOBAL_REQUESTS_PER_MINUTE',
+        description: translate('Site-wide burst cap across all assistant traffic.'),
+        default: 60,
         type: 'integer',
       },
       {
@@ -1471,6 +1487,42 @@ export const SettingsDescription = [
         description: translate('Comma-separated allowlist phrases that bypass injection detection.'),
         default: '',
         type: 'string',
+      },
+      {
+        key: 'ANONYMOUS_CHAT_USER_SLUG_SALT',
+        description: translate('Scrypt salt for per-IP user_slug derivation. Empty disables slug computation (interactions are written without it).'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'ANONYMOUS_CHAT_FEEDBACK_TOKEN_SECRET',
+        description: translate('HMAC-SHA256 secret for /feedback/ anti-replay tokens. Loss of secrecy invalidates all in-flight feedback submissions.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'ANONYMOUS_CHAT_CATALOG_MAX_ENTRIES',
+        description: translate('Hard cap on the number of offerings injected into the anonymous assistant\'s system prompt catalog summary. Past this, drop the tail.'),
+        default: 50,
+        type: 'integer',
+      },
+      {
+        key: 'ANONYMOUS_CHAT_REVIEW_ENABLED',
+        description: translate('Master toggle for the nightly LLM-as-judge review of completed anonymous sessions. On by default — cost is bounded by ANONYMOUS_CHAT_REVIEW_DAILY_TOKEN_BUDGET.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'ANONYMOUS_CHAT_REVIEW_DAILY_TOKEN_BUDGET',
+        description: translate('Independent budget for the LLM judge so review can\'t starve user-facing traffic. Reuses AI_ASSISTANT_API_URL/TOKEN/MODEL.'),
+        default: 2000000,
+        type: 'integer',
+      },
+      {
+        key: 'ANONYMOUS_CHAT_ARTIFACT_RETENTION_DAYS',
+        description: translate('Days of inactivity after which pseudonymous bookkeeping rows (SessionBinding, AnonymousChatBudget) are purged. Active blocks are always retained until they expire. Set to -1 to disable.'),
+        default: 30,
+        type: 'integer',
       },
     ],
   },
@@ -1790,6 +1842,17 @@ export const SettingsDescription = [
         key: 'PAT_MAX_TOKENS_PER_USER',
         description: translate('Maximum number of active PATs per user.'),
         default: 20,
+        type: 'integer',
+      },
+    ],
+  },
+  {
+    description: translate('Site Agent Logs'),
+    items: [
+      {
+        key: 'SITE_AGENT_LOG_MAX_ROWS_PER_IDENTITY',
+        description: translate('Maximum number of log rows to keep per agent identity. Oldest rows are deleted when exceeded.'),
+        default: 10000,
         type: 'integer',
       },
     ],
