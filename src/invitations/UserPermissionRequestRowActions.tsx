@@ -25,6 +25,7 @@ export const UserPermissionRequestRowActions: FunctionComponent<
     canManageRequest = hasPermission(user, {
       permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
       projectId: row.scope_uuid,
+      customerId: row.customer_uuid,
     });
   } else if (row.role_name.startsWith('CUSTOMER.')) {
     canManageRequest = hasPermission(user, {
