@@ -19,6 +19,7 @@ import { ShowUsageAction } from '../list/ShowUsageAction';
 import { ReallocateLimitsAction } from '../reallocate-limits/ReallocateLimitsAction';
 import { RenewAllocationActionAction } from '../renew-allocation/RenewAllocationAction';
 
+import { AdjustResourceDatesAction } from './AdjustResourceDatesAction';
 import { EditAction } from './EditAction';
 import { EditResourceEndDateByProviderAction } from './EditResourceEndDateByProviderAction';
 import { PullMarketplaceResourceAction } from './PullMarketplaceResourceAction';
@@ -80,6 +81,7 @@ export const StaffActions = [
   SetSlugAction,
   SetDownscaledAction,
   SetPausedAction,
+  AdjustResourceDatesAction,
   // Resource sync actions
   PullResourceAction,
   PullOrderAction,
