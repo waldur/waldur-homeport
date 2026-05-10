@@ -1,6 +1,12 @@
-import { TrashIcon } from '@phosphor-icons/react';
+import {
+  TrashIcon,
+  FireIcon,
+  ArrowCounterClockwiseIcon,
+} from '@phosphor-icons/react';
 import { useMemo, FC } from 'react';
 import { Badge as BsBadge, Spinner } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 import {
   Resource,
   marketplaceResourceProjectsList,
@@ -9,7 +15,9 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
+import { lazyComponent } from '@/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -24,6 +32,16 @@ import { useUser } from '@/workspace/hooks';
 import { AddProjectButton } from './AddProjectDialog';
 import { ResourceProjectEditButton } from './ResourceProjectEditButton';
 import { ResourceProjectExpandable } from './ResourceProjectExpandable';
+import {
+  RESOURCE_PROJECTS_FILTER_FORM_ID,
+  ResourceProjectsFilter,
+} from './ResourceProjectsFilter';
+
+const RestoreProjectDialog = lazyComponent(() =>
+  import('./RestoreProjectDialog').then((module) => ({
+    default: module.RestoreProjectDialog,
+  })),
+);
 
 // In-flight states that warrant an inline spinner alongside the badge,
 // so users can see at-a-glance which RPs are still being reconciled by
@@ -92,6 +110,18 @@ const LimitsDisplay: FC<{
   );
 };
 
+const NameCell: FC<{ row: ResourceProject }> = ({ row }) =>
+  row.is_removed ? (
+    <span className="text-muted">
+      <s>{row.name}</s>{' '}
+      <Badge variant="danger" pill outline className="fs-8 ms-1">
+        {translate('Removed')}
+      </Badge>
+    </span>
+  ) : (
+    <>{row.name}</>
+  );
+
 const DeleteProjectAction: FC<{
   row: ResourceProject;
   resourceUuid: string;
@@ -129,6 +159,62 @@ const DeleteProjectAction: FC<{
   );
 };
 
+const ForceDeleteProjectAction: FC<{
+  row: ResourceProject;
+  resourceUuid: string;
+  refetch(): void;
+}> = ({ row, resourceUuid, refetch }) => {
+  const forceDeleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceResourceProjectsDestroy({
+        path: { uuid: row.uuid },
+        query: { force: true },
+      }),
+    successMessage: translate('Project permanently deleted.'),
+    errorMessage: translate('Unable to permanently delete project.'),
+    refetch,
+    invalidateQueries: [{ queryKey: ['resource-details', resourceUuid] }],
+    confirmation: {
+      title: translate('Permanent deletion'),
+      body: translate(
+        'This will hard-delete project {name} from the database, bypassing soft delete. The action cannot be undone. Continue?',
+        { name: <b>{row.name}</b> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
+  return (
+    <ActionItem
+      title={translate('Permanently delete')}
+      action={() => forceDeleteMutation.mutate()}
+      iconNode={<FireIcon weight="bold" />}
+      className="text-danger"
+      staff
+      disabled={forceDeleteMutation.isPending}
+    />
+  );
+};
+
+const RestoreProjectAction: FC<{
+  row: ResourceProject;
+  refetch(): void;
+}> = ({ row, refetch }) => {
+  const { openDialog } = useModal();
+  return (
+    <ActionItem
+      title={translate('Recover')}
+      action={() =>
+        openDialog(RestoreProjectDialog, {
+          resolve: { resource_project: row, refetch },
+        })
+      }
+      iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+    />
+  );
+};
+
 interface ResourceProjectsListProps {
   resource: Resource;
   offering?;
@@ -138,9 +224,16 @@ export const ResourceProjectsList: FC<ResourceProjectsListProps> = ({
   resource,
   offering,
 }) => {
+  const filterValues: { include_removed?: boolean } | undefined = useSelector(
+    getFormValues(RESOURCE_PROJECTS_FILTER_FORM_ID),
+  );
+
   const filter = useMemo(
-    () => ({ resource_uuid: resource.uuid }),
-    [resource.uuid],
+    () => ({
+      resource_uuid: resource.uuid,
+      ...(filterValues?.include_removed && { include_removed: true }),
+    }),
+    [resource.uuid, filterValues?.include_removed],
   );
 
   const tableProps = useTable({
@@ -161,11 +254,12 @@ export const ResourceProjectsList: FC<ResourceProjectsListProps> = ({
     <Table
       {...tableProps}
       title={translate('Resource projects')}
+      filters={<ResourceProjectsFilter />}
       hasQuery={true}
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => row.name,
+          render: ({ row }) => <NameCell row={row} />,
           copyField: (row) => row.name,
           keys: ['name'],
         },
@@ -200,18 +294,31 @@ export const ResourceProjectsList: FC<ResourceProjectsListProps> = ({
       rowActions={({ row }) =>
         canManageProjects ? (
           <ActionsDropdown row={row} refetch={tableProps.fetch}>
-            <ResourceProjectEditButton
-              row={row}
-              refetch={tableProps.fetch}
-              resource={resource}
-              offering={offering}
-              siblings={tableProps.rows as ResourceProject[]}
-            />
-            <DeleteProjectAction
-              row={row}
-              resourceUuid={resource.uuid}
-              refetch={tableProps.fetch}
-            />
+            {row.is_removed ? (
+              <RestoreProjectAction row={row} refetch={tableProps.fetch} />
+            ) : (
+              <>
+                <ResourceProjectEditButton
+                  row={row}
+                  refetch={tableProps.fetch}
+                  resource={resource}
+                  offering={offering}
+                  siblings={tableProps.rows as ResourceProject[]}
+                />
+                <DeleteProjectAction
+                  row={row}
+                  resourceUuid={resource.uuid}
+                  refetch={tableProps.fetch}
+                />
+              </>
+            )}
+            {user.is_staff && (
+              <ForceDeleteProjectAction
+                row={row}
+                resourceUuid={resource.uuid}
+                refetch={tableProps.fetch}
+              />
+            )}
           </ActionsDropdown>
         ) : null
       }
