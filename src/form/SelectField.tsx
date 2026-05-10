@@ -8,6 +8,8 @@ export const SelectField: FunctionComponent<any> = (props) => {
   return (
     <Select
       {...rest}
+      id={undefined}
+      inputId={input.name}
       data-testid={props['data-testid']}
       name={input.name}
       value={

@@ -10,3 +10,4 @@ export { FormGroup } from './FormGroup';
 export { SecretField } from './SecretField';
 export { FileUploadField } from './FileUploadField';
 export { FormContainerFinal } from './FormContainerFinal';
+export { FormGroupFinal } from './FormGroupFinal';

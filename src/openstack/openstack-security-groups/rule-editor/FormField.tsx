@@ -1,32 +1,30 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { WrappedFieldProps } from 'redux-form';
+import { Form as BootstrapForm } from 'react-bootstrap';
 
-export const FormField: FC<WrappedFieldProps & { tooltip?: string }> = ({
+interface FormFieldProps {
+  input: any;
+  meta: { error?: string; touched?: boolean };
+  as?: any;
+  children?: React.ReactNode;
+  [key: string]: any;
+}
+
+export const FormField: FC<FormFieldProps> = ({
   input,
-  meta: { error },
-  tooltip,
+  meta: { error, touched },
+  as: Component = BootstrapForm.Control,
+  children,
   ...rest
 }) => (
-  <Form.Group as="td" style={{ position: 'relative' }}>
-    <Form.Control
-      value={input.value}
-      onChange={input.onChange}
+  <BootstrapForm.Group as="td">
+    <Component
+      {...input}
       {...rest}
-      title={error}
-      isInvalid={!!error}
-    />
-
-    {tooltip ? (
-      <OverlayTrigger
-        placement="top"
-        overlay={<Tooltip id={input.name}>{tooltip}</Tooltip>}
-      >
-        <span style={{ position: 'absolute', right: 20, top: 20 }}>
-          <QuestionIcon weight="bold" />
-        </span>
-      </OverlayTrigger>
-    ) : null}
-  </Form.Group>
+      isInvalid={touched && !!error}
+      title={touched && error ? error : undefined}
+      className="form-control"
+    >
+      {children}
+    </Component>
+  </BootstrapForm.Group>
 );

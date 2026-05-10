@@ -1,6 +1,6 @@
 import { CopyIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useField } from 'react-final-form';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
@@ -8,10 +8,11 @@ import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 
 import { SelectField } from './SelectField';
-import { getPairSelector } from './utils';
 
-export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
-  const pair = useSelector(getPairSelector(row));
+export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
+  const {
+    input: { value: pair },
+  } = useField(name);
 
   const { showSuccess } = useNotify();
 
@@ -26,7 +27,7 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
         {pair.address ? (
           <div className="btn-text-align">{pair.subnet_name}</div>
         ) : (
-          <SelectField name="subnet" options={subnets} />
+          <SelectField name={`${name}.subnet`} options={subnets} />
         )}
       </td>
       <td className="col-md-5">
@@ -45,7 +46,7 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
           </div>
         ) : (
           <SelectField
-            name="floating_ip"
+            name={`${name}.floating_ip`}
             options={floatingIps}
             disabled={!pair.subnet}
           />
@@ -54,7 +55,7 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
       <td>
         <ActionButton
           action={onRemove}
-          tooltip={translate('Delete')}
+          title={translate('Remove')}
           iconNode={<TrashIcon weight="bold" />}
           variant="text-secondary"
         />

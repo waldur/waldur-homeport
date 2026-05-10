@@ -1,18 +1,23 @@
-import { FC, useMemo } from 'react';
-import { Field } from 'redux-form';
+import { FC } from 'react';
+import { Field } from 'react-final-form';
 
 import { translate } from '@/i18n';
 
 import { FormField } from './FormField';
 import { Rule } from './types';
-import { getPortMax } from './utils';
 
-interface PortRangeFieldProps {
-  rule: Rule;
-}
+const getPortMax = (rule: Rule) => {
+  if (rule.protocol === 'any' || !rule.protocol) {
+    return -1;
+  } else if (rule.protocol === 'icmp') {
+    return 255;
+  } else {
+    return 65535;
+  }
+};
 
-const parsePortRange = (value: string) => {
-  if (!value) {
+const parsePortRange = (value: any) => {
+  if (!value || typeof value !== 'string') {
     return { min: -1, max: -1 };
   }
   const parts = value.split('-');
@@ -25,7 +30,8 @@ const parsePortRange = (value: string) => {
   }
 };
 
-const formatPortRange = (value) => {
+const formatPortRange = (value: any) => {
+  if (!value || typeof value !== 'object') return '';
   const { min, max } = value;
   if (min === -1 && max === -1) {
     return '';
@@ -39,14 +45,30 @@ const formatPortRange = (value) => {
   return `${min}-${max}`;
 };
 
-export const PortRangeField: FC<PortRangeFieldProps> = ({ rule }) => {
-  const portMax = getPortMax(rule);
-  const validate = useMemo(
-    () => (value) => {
-      if (!value) {
+interface PortRangeFieldProps {
+  name: string;
+  protocol: string;
+  component?: any;
+}
+
+export const PortRangeField: FC<PortRangeFieldProps> = ({
+  name,
+  protocol,
+  component = FormField,
+}) => (
+  <Field
+    name={name}
+    component={component}
+    parse={parsePortRange}
+    format={formatPortRange}
+    disabled={protocol === 'any'}
+    placeholder={translate('All ports')}
+    validate={(value) => {
+      if (!value || (value.min === -1 && value.max === -1)) {
         return;
       }
       const { min, max } = value;
+      const portMax = getPortMax({ protocol } as Rule);
       if (min > max) {
         return translate(
           'The minimum port number should not exceed the maximum port number.',
@@ -63,20 +85,6 @@ export const PortRangeField: FC<PortRangeFieldProps> = ({ rule }) => {
       if (min != undefined && max != undefined && isNaN(max)) {
         return translate('The maximum port number is not specified.');
       }
-    },
-    [portMax],
-  );
-  return (
-    <Field
-      name="port_range"
-      component={FormField}
-      validate={validate}
-      parse={parsePortRange}
-      format={formatPortRange}
-      placeholder={translate('All ports')}
-      tooltip={translate(
-        'Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.',
-      )}
-    />
-  );
-};
+    }}
+  />
+);

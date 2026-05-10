@@ -1,13 +1,13 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { FormSection, WrappedFieldArrayProps } from 'redux-form';
 
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
 
 import { FloatingIpRow } from './FloatingIpRow';
 
-interface FloatingIpsListProps extends WrappedFieldArrayProps {
+interface FloatingIpsListProps {
+  fields;
   floatingIps;
   subnets;
 }
@@ -30,15 +30,14 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
         ) : (
           <table className="table table-borderless mb-1">
             <tbody>
-              {fields.map((row, index) => (
-                <FormSection name={row} key={index}>
-                  <FloatingIpRow
-                    row={row}
-                    subnets={subnets}
-                    floatingIps={floatingIps}
-                    onRemove={() => fields.remove(index)}
-                  />
-                </FormSection>
+              {fields.map((name, index) => (
+                <FloatingIpRow
+                  key={index}
+                  name={name}
+                  subnets={subnets}
+                  floatingIps={floatingIps}
+                  onRemove={() => fields.remove(index)}
+                />
               ))}
             </tbody>
           </table>
