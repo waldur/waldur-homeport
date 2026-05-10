@@ -1,4 +1,4 @@
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { translate } from '@/i18n';
 import { EthernetType } from '@/openstack/types';
@@ -31,10 +31,18 @@ export const getCIDRPlaceholder = (ethertype: EthernetType) => {
   }
 };
 
-export const CIDRField = ({ ethertype }: { ethertype: EthernetType }) => (
+export const CIDRField = ({
+  name,
+  ethertype,
+  component = FormField,
+}: {
+  name: string;
+  ethertype: EthernetType;
+  component?: any;
+}) => (
   <Field
-    name="cidr"
-    component={FormField}
+    name={name}
+    component={component}
     validate={ethertype === 'IPv4' ? validateIPv4CIDR : validateIPv6CIDR}
     placeholder={getCIDRPlaceholder(ethertype)}
   />

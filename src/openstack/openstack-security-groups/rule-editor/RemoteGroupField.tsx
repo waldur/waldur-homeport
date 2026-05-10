@@ -1,25 +1,21 @@
 import { FC } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
+import { OpenStackSecurityGroup } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 
 import { FormField } from './FormField';
 
-interface Choice {
-  url?: string;
-  name?: string;
-}
-
-interface RemoteGroupFieldProps {
-  choices: Choice[];
-}
-
-export const RemoteGroupField: FC<RemoteGroupFieldProps> = ({ choices }) => (
-  <Field name="remote_group" component={FormField} as="select">
+export const RemoteGroupField: FC<{
+  name: string;
+  choices: OpenStackSecurityGroup[];
+  component?: any;
+}> = ({ name, choices, component = FormField }) => (
+  <Field name={name} component={component} as="select">
     <option value="">{translate('None')}</option>
-    {choices.map((choice, index) => (
-      <option key={index} value={choice.url}>
-        {choice.name}
+    {choices.map((sg) => (
+      <option key={sg.url} value={sg.url}>
+        {sg.name}
       </option>
     ))}
   </Field>

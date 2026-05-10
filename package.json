@@ -216,7 +216,8 @@
       "src/metronic/sass/core/components/buttons/_theme.scss",
       "src/metronic/sass/core/base/functions/_get.scss",
       "src/table/generated/ProposalProposalsFilter.tsx",
-      "src/table/generated/MarketplaceStatsOpenstackInstancesFilter.tsx"
+      "src/table/generated/MarketplaceStatsOpenstackInstancesFilter.tsx",
+      "src/openstack/openstack-instance/actions/update-internal-ips/CustomIpFieldFinal.tsx"
     ]
   },
   "resolutions": {

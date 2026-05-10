@@ -1,56 +1,37 @@
 import { useQuery } from '@tanstack/react-query';
+import arrayMutators from 'final-form-arrays';
+import { FC } from 'react';
 import { Form } from 'react-bootstrap';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Field, Form as FinalForm } from 'react-final-form';
 import {
   openstackSecurityGroupsList,
   openstackTenantsCreateSecurityGroup,
 } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
-import { getLatinNameValidators } from '@/core/validators';
+import { composeValidators, getLatinNameValidators } from '@/core/validators';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RulesList } from '@/openstack/openstack-security-groups/rule-editor/RulesList';
-import {
-  type EthernetType,
-  type SecurityGroupDirection,
-  type SecurityGroupProtocol,
-} from '@/openstack/types';
+import { Rule } from '@/openstack/openstack-security-groups/rule-editor/types';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { TenantActionProps } from './types';
 
-interface CreateSecurityGroupRuleRequestBody {
-  ethertype: EthernetType;
-  direction: SecurityGroupDirection;
-  protocol: SecurityGroupProtocol;
-  from_port: number;
-  to_port: number;
-  port_range?: { min: number; max: number };
-  cidr: string;
-  remote_group?: string;
-  description?: string;
-}
-
 interface CreateSecurityGroupFormData {
   name: string;
   description?: string;
-  rules: CreateSecurityGroupRuleRequestBody[];
+  rules: Rule[];
 }
-
-const FORM_NAME = 'CreateSecurityGroupForm';
 
 interface CreateSecurityGroupDialogProps {
   resolve: TenantActionProps;
 }
 
-export const CreateSecurityGroupDialog = reduxForm<
-  CreateSecurityGroupFormData,
-  CreateSecurityGroupDialogProps
->({
-  form: FORM_NAME,
-})(({ handleSubmit, submitting, invalid, resolve: { resource, refetch } }) => {
+export const CreateSecurityGroupDialog: FC<CreateSecurityGroupDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
   const {
     data: securityGroups,
     isLoading,
@@ -65,7 +46,7 @@ export const CreateSecurityGroupDialog = reduxForm<
       ),
   });
 
-  const submitMutation = useManagedMutation<
+  const { mutateAsync } = useManagedMutation<
     any,
     any,
     CreateSecurityGroupFormData
@@ -80,10 +61,11 @@ export const CreateSecurityGroupDialog = reduxForm<
               ? []
               : formData.rules.map(({ port_range, ...rule }) => ({
                   ...rule,
-                  protocol:
-                    rule.protocol === 'any' || rule.protocol === null
-                      ? ''
-                      : rule.protocol,
+                  protocol: (rule.protocol === 'any' || rule.protocol === null
+                    ? ''
+                    : rule.protocol) as any,
+
+                  direction: rule.direction as any,
                   from_port: port_range.min,
                   to_port: port_range.max,
                 })),
@@ -95,47 +77,56 @@ export const CreateSecurityGroupDialog = reduxForm<
   });
 
   return (
-    <form
-      onSubmit={handleSubmit((values) => submitMutation.mutateAsync(values))}
-    >
-      <AsyncActionDialog
-        title={translate('Create security group for OpenStack tenant {name}', {
-          name: resource.name,
-        })}
-        loading={isLoading}
-        error={error}
-        submitting={submitting}
-        invalid={invalid}
-      >
-        {securityGroups ? (
-          <>
-            <Form.Group>
-              <Form.Label>{translate('Name')}</Form.Label>
-              <Field
-                component={InputField}
-                name="name"
-                validate={getLatinNameValidators()}
-                maxLength={150}
-              />
-            </Form.Group>
+    <FinalForm<CreateSecurityGroupFormData>
+      onSubmit={mutateAsync}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <AsyncActionDialog
+            title={translate(
+              'Create security group for OpenStack tenant {name}',
+              {
+                name: resource.name,
+              },
+            )}
+            loading={isLoading}
+            error={error}
+            submitting={submitting}
+            invalid={invalid}
+          >
+            {securityGroups ? (
+              <>
+                <Form.Group>
+                  <Form.Label htmlFor="create-sg-name">
+                    {translate('Name')}
+                  </Form.Label>
+                  <Field
+                    id="create-sg-name"
+                    component={InputField as any}
+                    name="name"
+                    validate={composeValidators(...getLatinNameValidators())}
+                    maxLength={150}
+                  />
+                </Form.Group>
 
-            <Form.Group>
-              <Form.Label>{translate('Description')}</Form.Label>
-              <Field
-                component={InputField}
-                name="description"
-                maxLength={4096}
-              />
-            </Form.Group>
+                <Form.Group>
+                  <Form.Label htmlFor="create-sg-description">
+                    {translate('Description')}
+                  </Form.Label>
+                  <Field
+                    id="create-sg-description"
+                    component={InputField as any}
+                    name="description"
+                    maxLength={4096}
+                  />
+                </Form.Group>
 
-            <FieldArray
-              name="rules"
-              component={RulesList}
-              remoteSecurityGroups={securityGroups}
-            />
-          </>
-        ) : null}
-      </AsyncActionDialog>
-    </form>
+                <RulesList remoteSecurityGroups={securityGroups} />
+              </>
+            ) : null}
+          </AsyncActionDialog>
+        </form>
+      )}
+    />
   );
-});
+};

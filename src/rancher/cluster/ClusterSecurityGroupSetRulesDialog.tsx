@@ -1,4 +1,6 @@
-import { FieldArray, reduxForm } from 'redux-form';
+import arrayMutators from 'final-form-arrays';
+import { FC, useMemo } from 'react';
+import { Form as FinalForm } from 'react-final-form';
 import { rancherClusterSecurityGroupsUpdate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -8,41 +10,62 @@ import { RulesList } from '@/openstack/openstack-security-groups/rule-editor/Rul
 import { SecurityGroupRulesFormData } from '@/openstack/openstack-security-groups/rule-editor/types';
 import { serializeRulesPayload } from '@/openstack/openstack-security-groups/rule-editor/utils';
 
-export const ClusterSecurityGroupSetRulesDialog = reduxForm<{}, { resolve }>({
-  form: 'ClusterSecurityGroupSetRulesDialog',
-})(({ handleSubmit, invalid, resolve }) => {
-  const { mutate, isPending } = useManagedMutation<
+interface ClusterSecurityGroupSetRulesDialogProps {
+  resolve: {
+    resource: any;
+    refetch?: () => void;
+  };
+}
+
+export const ClusterSecurityGroupSetRulesDialog: FC<
+  ClusterSecurityGroupSetRulesDialogProps
+> = ({ resolve: { resource, refetch } }) => {
+  const { mutateAsync, isPending } = useManagedMutation<
     any,
     any,
     SecurityGroupRulesFormData
   >({
     mutationFn: (formData) =>
       rancherClusterSecurityGroupsUpdate({
-        path: { uuid: resolve.resource.uuid },
+        path: { uuid: resource.uuid },
         body: { rules: serializeRulesPayload(formData) },
       }),
     successMessage: translate('Rules have been updated.'),
     errorMessage: translate('Unable to update rules.'),
-    refetch: resolve.refetch,
+    refetch,
   });
 
-  return (
-    <ActionDialog
-      title={translate('Set rules in {name} security group', {
-        name: resolve.resource.name,
-      })}
-      submitting={isPending}
-      invalid={invalid}
-      onSubmit={handleSubmit((values: SecurityGroupRulesFormData) =>
-        mutate(values),
-      )}
-      submitLabel={translate('Set rules')}
-    >
-      <FieldArray
-        name="rules"
-        component={RulesList}
-        remoteSecurityGroups={[]}
-      />
-    </ActionDialog>
+  const initialValues = useMemo(
+    () => ({
+      rules: (resource.rules || []).map(({ from_port, to_port, ...rest }) => ({
+        ...rest,
+        port_range: {
+          min: from_port,
+          max: to_port,
+        },
+      })),
+    }),
+    [resource.rules],
   );
-});
+
+  return (
+    <FinalForm<SecurityGroupRulesFormData>
+      onSubmit={mutateAsync}
+      mutators={{ ...arrayMutators }}
+      initialValues={initialValues}
+      render={({ handleSubmit, invalid }) => (
+        <ActionDialog
+          title={translate('Set rules in {name} security group', {
+            name: resource.name,
+          })}
+          submitting={isPending}
+          invalid={invalid}
+          onSubmit={handleSubmit}
+          submitLabel={translate('Set rules')}
+        >
+          <RulesList remoteSecurityGroups={[]} />
+        </ActionDialog>
+      )}
+    />
+  );
+};

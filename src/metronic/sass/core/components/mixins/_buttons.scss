@@ -2,6 +2,43 @@
 // Button Mixins
 //
 
+@mixin button-state-hover {
+  .btn-check:checked + &,
+  .btn-check:active + &,
+  &:focus:not(.btn-active),
+  &:hover:not(.btn-active),
+  &:active:not(.btn-active),
+  &.hover,
+  &.active,
+  &.show,
+  .show > & {
+    @content;
+  }
+}
+
+@mixin button-state-focus {
+  .btn-check:focus + &,
+  &:focus:not(.btn-active) {
+    @content;
+  }
+}
+
+@mixin button-state-active {
+  .btn-check:active + &,
+  &:active:not(.btn-active),
+  &.active,
+  &.show {
+    @content;
+  }
+}
+
+@mixin button-state-disabled {
+  &.disabled,
+  &:disabled {
+    @content;
+  }
+}
+
 @function validate-button-variant($variant) {
   $required-states: ('enabled', 'hovered', 'focused', 'pressed', 'disabled');
   $required-inner-keys: ('bg', 'text');
@@ -89,15 +126,7 @@
   @include button-declaration($bg, $color, $icon, $border);
 
   // Hover
-  .btn-check:checked + &,
-  .btn-check:active + &,
-  &:focus:not(.btn-active),
-  &:hover:not(.btn-active),
-  &:active:not(.btn-active),
-  &.hover,
-  &.active,
-  &.show,
-  .show > & {
+  @include button-state-hover {
     @include button-declaration(
       $bg-hovered,
       $color-hovered,
@@ -107,8 +136,7 @@
   }
 
   // Focused
-  .btn-check:focus + &,
-  &:focus:not(.btn-active) {
+  @include button-state-focus {
     @include button-declaration(
       $bg-focused,
       $color-focused,
@@ -122,10 +150,7 @@
   }
 
   // Pressed
-  .btn-check:active + &,
-  &:active:not(.btn-active),
-  &.active,
-  &.show {
+  @include button-state-active {
     @include button-declaration(
       $bg-pressed,
       $color-pressed,
@@ -136,8 +161,7 @@
   }
 
   // Disabled
-  &.disabled,
-  &:disabled {
+  @include button-state-disabled {
     @include button-declaration(
       $bg-disabled,
       $color-disabled,
@@ -188,15 +212,7 @@
     background-color: $bg-color;
   }
 
-  .btn-check:checked + &,
-  .btn-check:active + &,
-  &:focus:not(.btn-active),
-  &:hover:not(.btn-active),
-  &:active:not(.btn-active),
-  &.hover,
-  &.active,
-  &.show,
-  .show > & {
+  @include button-state-hover {
     @if ($color-active != null) {
       color: $color-active;
     }
@@ -225,17 +241,13 @@
   }
 
   @if ($bg-color-active != null) {
-    .btn-check:focus + &,
-    &:focus:not(.btn-active) {
+    @include button-state-focus {
       outline: 0;
       box-shadow: 0 0 0 0.25rem rgba($bg-color-active, 0.25);
     }
   }
 
-  .btn-check:active + &,
-  &:active:not(.btn-active),
-  &.active,
-  &.show {
+  @include button-state-active {
     @if ($color-dark != null) {
       color: $color-dark;
     }
@@ -264,8 +276,7 @@
   }
 
   @if ($bg-color-disabled != null) {
-    &.disabled,
-    &:disabled {
+    @include button-state-disabled {
       background-color: $bg-color-disabled;
     }
   }
