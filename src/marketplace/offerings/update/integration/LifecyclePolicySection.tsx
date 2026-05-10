@@ -148,6 +148,14 @@ const resourceCapabilitiesFields: OfferingEditField[] = [
     ),
   },
   {
+    label: translate('Auto-OK resource projects on creation'),
+    key: 'plugin_options.auto_ok_resource_projects',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'When enabled, newly-created resource projects are immediately marked as OK on save, bypassing the provider/site-agent reconciliation callback. Use for offerings without an external backend to reconcile against.',
+    ),
+  },
+  {
     label: translate('Resource project limit policy'),
     key: 'plugin_options.resource_projects_limit_policy',
     component: SelectField,
