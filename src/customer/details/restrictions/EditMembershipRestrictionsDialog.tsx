@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import { customersPartialUpdate } from 'waldur-js-client';
 
 import {
@@ -10,15 +10,13 @@ import {
 } from '@/core/restrictions';
 import { SubmitButton } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
-import { FormContainer } from '@/form/FormContainer';
+import { FormContainerFinal } from '@/form/FormContainerFinal';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentCustomer } from '@/workspace/actions';
 import { Customer } from '@/workspace/types';
-
-const FORM_ID = 'EditMembershipRestrictionsDialog';
 
 interface FormData {
   value: string[] | string;
@@ -31,96 +29,88 @@ interface EditMembershipRestrictionsDialogProps {
   };
 }
 
-export const EditMembershipRestrictionsDialog = reduxForm<
-  FormData,
-  EditMembershipRestrictionsDialogProps
->({
-  form: FORM_ID,
-})(({ resolve, handleSubmit, submitting, invalid, dirty }) => {
-  const dispatch = useDispatch();
-
-  const { showErrorResponse, showSuccess } = useNotify();
-
-  const { closeDialog } = useModal();
-
-  const { field } = resolve;
-  const config = fieldConfig[field];
-
-  const processRequest = useCallback(
-    async (values: FormData) => {
-      try {
-        // Ensure value is always an array (defensive check)
-        let arrayValue: string[];
-        if (Array.isArray(values.value)) {
-          arrayValue = values.value.filter(Boolean);
-        } else if (typeof values.value === 'string') {
-          arrayValue = (values.value as string)
-            .split(',')
-            .map((v) => v.trim())
-            .filter(Boolean);
-        } else {
-          arrayValue = [];
-        }
-
-        const response = await customersPartialUpdate({
-          path: { uuid: resolve.customer.uuid },
-          body: {
-            [field]: arrayValue,
-          },
-        });
-        showSuccess(translate('Membership restrictions updated successfully.'));
-        if (response.data) {
-          dispatch(setCurrentCustomer(response.data));
-        }
-        closeDialog();
-      } catch (e) {
-        showErrorResponse(
-          e,
-          translate('Failed to update membership restrictions.'),
-        );
-      }
-    },
-    [field],
-  );
-
-  return (
-    <form onSubmit={handleSubmit(processRequest)}>
-      <ModalDialog
-        title={config.title}
-        footer={
-          <>
-            <button
-              type="button"
-              className="btn btn-secondary flex-equal"
-              onClick={() => closeDialog()}
-            >
-              {translate('Cancel')}
-            </button>
-            <SubmitButton
-              disabled={invalid || !dirty}
-              submitting={submitting}
-              label={translate('Save')}
-              className="btn btn-primary flex-equal"
-            />
-          </>
-        }
-      >
-        <FormContainer submitting={submitting}>
-          <CommaSeparatedListField
-            name="value"
-            label={config.label}
-            placeholder={config.placeholder}
-            description={config.description}
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
-  );
-});
-
 export const getInitialValues = (
   customer: Customer,
   field: RestrictionField,
 ): FormData => ({
   value: getRestrictionsArray(customer[field]),
 });
+
+export const EditMembershipRestrictionsDialog: FC<
+  EditMembershipRestrictionsDialogProps
+> = ({ resolve }) => {
+  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
+
+  const { field } = resolve;
+  const config = fieldConfig[field];
+
+  const { mutate, isPending } = useManagedMutation<Customer, any, FormData>({
+    mutationFn: (values) => {
+      // Ensure value is always an array (defensive check)
+      let arrayValue: string[];
+      if (Array.isArray(values.value)) {
+        arrayValue = values.value.filter(Boolean);
+      } else if (typeof values.value === 'string') {
+        arrayValue = (values.value as string)
+          .split(',')
+          .map((v) => v.trim())
+          .filter(Boolean);
+      } else {
+        arrayValue = [];
+      }
+
+      return customersPartialUpdate({
+        path: { uuid: resolve.customer.uuid },
+        body: {
+          [field]: arrayValue,
+        },
+      }).then((response) => response.data);
+    },
+    successMessage: translate('Membership restrictions updated successfully.'),
+    errorMessage: translate('Failed to update membership restrictions.'),
+    onSuccess: (customer) => {
+      dispatch(setCurrentCustomer(customer));
+    },
+  });
+
+  return (
+    <Form<FormData>
+      onSubmit={mutate}
+      initialValues={getInitialValues(resolve.customer, field)}
+      render={({ handleSubmit, invalid, dirty }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={config.title}
+            footer={
+              <>
+                <button
+                  type="button"
+                  className="btn btn-secondary flex-equal"
+                  onClick={() => closeDialog()}
+                >
+                  {translate('Cancel')}
+                </button>
+                <SubmitButton
+                  disabled={invalid || !dirty}
+                  submitting={isPending}
+                  label={translate('Save')}
+                  className="btn btn-primary flex-equal"
+                />
+              </>
+            }
+          >
+            <FormContainerFinal submitting={isPending}>
+              <CommaSeparatedListField
+                name="value"
+                label={config.label}
+                placeholder={config.placeholder}
+                description={config.description}
+              />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

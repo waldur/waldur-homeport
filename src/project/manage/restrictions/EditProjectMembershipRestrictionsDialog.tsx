@@ -1,6 +1,7 @@
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
-import { projectsPartialUpdate, Project } from 'waldur-js-client';
+import { Project, projectsPartialUpdate } from 'waldur-js-client';
 
 import {
   fieldConfig,
@@ -9,14 +10,12 @@ import {
 } from '@/core/restrictions';
 import { SubmitButton } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
-import { FormContainer } from '@/form/FormContainer';
+import { FormContainerFinal } from '@/form/FormContainerFinal';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentProject } from '@/workspace/actions';
-
-const FORM_ID = 'EditProjectMembershipRestrictionsDialog';
 
 interface FormData {
   value: string[] | string;
@@ -29,14 +28,17 @@ interface EditProjectMembershipRestrictionsDialogProps {
   };
 }
 
-export const EditProjectMembershipRestrictionsDialog = reduxForm<
-  FormData,
-  EditProjectMembershipRestrictionsDialogProps
->({
-  form: FORM_ID,
-})(({ resolve, handleSubmit, invalid, dirty }) => {
-  const dispatch = useDispatch();
+export const getInitialValues = (
+  project: Project,
+  field: RestrictionField,
+): FormData => ({
+  value: getRestrictionsArray(project[field]),
+});
 
+export const EditProjectMembershipRestrictionsDialog: FC<
+  EditProjectMembershipRestrictionsDialogProps
+> = ({ resolve }) => {
+  const dispatch = useDispatch();
   const { closeDialog } = useModal();
 
   const { field } = resolve;
@@ -72,43 +74,42 @@ export const EditProjectMembershipRestrictionsDialog = reduxForm<
   });
 
   return (
-    <form onSubmit={handleSubmit((values) => mutate(values))}>
-      <ModalDialog
-        title={config.title}
-        footer={
-          <>
-            <button
-              type="button"
-              className="btn btn-secondary flex-equal"
-              onClick={() => closeDialog()}
-            >
-              {translate('Cancel')}
-            </button>
-            <SubmitButton
-              disabled={invalid || !dirty}
-              submitting={isPending}
-              label={translate('Save')}
-              className="btn btn-primary flex-equal"
-            />
-          </>
-        }
-      >
-        <FormContainer submitting={isPending}>
-          <CommaSeparatedListField
-            name="value"
-            label={config.label}
-            placeholder={config.placeholder}
-            description={config.description}
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+    <Form<FormData>
+      onSubmit={mutate}
+      initialValues={getInitialValues(resolve.project, field)}
+      render={({ handleSubmit, invalid, dirty }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={config.title}
+            footer={
+              <>
+                <button
+                  type="button"
+                  className="btn btn-secondary flex-equal"
+                  onClick={() => closeDialog()}
+                >
+                  {translate('Cancel')}
+                </button>
+                <SubmitButton
+                  disabled={invalid || !dirty}
+                  submitting={isPending}
+                  label={translate('Save')}
+                  className="btn btn-primary flex-equal"
+                />
+              </>
+            }
+          >
+            <FormContainerFinal submitting={isPending}>
+              <CommaSeparatedListField
+                name="value"
+                label={config.label}
+                placeholder={config.placeholder}
+                description={config.description}
+              />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
-
-export const getInitialValues = (
-  project: Project,
-  field: RestrictionField,
-): FormData => ({
-  value: getRestrictionsArray(project[field]),
-});
+};

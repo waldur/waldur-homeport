@@ -1,7 +1,7 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
@@ -10,10 +10,10 @@ import { CompactActionButton } from '@/table/CompactActionButton';
 const SubNetRow = ({ SubNet: subnet, onRemove }) => (
   <tr>
     <td>
-      <Field name={`${subnet}.source`} component={InputField} />
+      <Field name={`${subnet}.source`} component={InputField as any} />
     </td>
     <td>
-      <Field name={`${subnet}.destination`} component={InputField} />
+      <Field name={`${subnet}.destination`} component={InputField as any} />
     </td>
     <td>
       <CompactActionButton

@@ -1,45 +1,45 @@
 import { XIcon } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
-import { Field, FormSection } from 'redux-form';
+import { FC } from 'react';
+import { Field } from 'react-final-form';
 
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
-interface OwnProps {
+interface EnvironmentVariablePanelProps {
   index: number;
   variable: string;
   onRemove(index: number): void;
 }
 
-export const EnvironmentVariablePanel: FunctionComponent<OwnProps> = (
-  props,
-) => {
+export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
+  index,
+  variable,
+  onRemove,
+}) => {
   return (
-    <FormSection name={props.variable}>
-      <tr className="border-bottom">
-        <td>
-          <Field
-            name="name"
-            component={InputField}
-            placeholder={translate('Key')}
-          />
-        </td>
-        <td>
-          <Field
-            name="value"
-            component={InputField}
-            placeholder={translate('Value')}
-          />
-        </td>
-        <td>
-          <CompactActionButton
-            variant="text-danger"
-            action={() => props.onRemove(props.index)}
-            iconNode={<XIcon weight="bold" />}
-          />
-        </td>
-      </tr>
-    </FormSection>
+    <tr className="border-bottom">
+      <td>
+        <Field
+          name={`${variable}.name`}
+          component={InputField as any}
+          placeholder={translate('Key')}
+        />
+      </td>
+      <td>
+        <Field
+          name={`${variable}.value`}
+          component={InputField as any}
+          placeholder={translate('Value')}
+        />
+      </td>
+      <td>
+        <CompactActionButton
+          variant="text-danger"
+          action={() => onRemove(index)}
+          iconNode={<XIcon weight="bold" />}
+        />
+      </td>
+    </tr>
   );
 };

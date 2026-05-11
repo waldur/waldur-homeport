@@ -1,7 +1,8 @@
-import { reduxForm } from 'redux-form';
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 import { CustomerUser, Project, projectsAddUser } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton } from '@/form';
+import { FormContainerFinal, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -12,8 +13,6 @@ import { RoleGroup } from '@/project/team/RoleGroup';
 
 import { OrganizationProjectSelectField } from './OrganizationProjectSelectField';
 import { UserGroup } from './UserGroup';
-
-const FORM_ID = 'AddProjectUserDialog';
 
 interface AddProjectUserDialogFormData {
   role: Role;
@@ -26,16 +25,13 @@ interface AddProjectUserDialogResolve {
   refetch;
 }
 
-interface AddProjectUserDialogOwnProps {
+interface AddProjectUserDialogProps {
   resolve: AddProjectUserDialogResolve;
 }
 
-export const AddProjectUserDialog = reduxForm<
-  AddProjectUserDialogFormData,
-  AddProjectUserDialogOwnProps
->({
-  form: FORM_ID,
-})(({ handleSubmit, resolve }) => {
+export const AddProjectUserDialog: FC<AddProjectUserDialogProps> = ({
+  resolve,
+}) => {
   const updateMutation = useManagedMutation<
     any,
     any,
@@ -55,30 +51,33 @@ export const AddProjectUserDialog = reduxForm<
   });
 
   return (
-    <form
-      onSubmit={handleSubmit((values) => updateMutation.mutateAsync(values))}
-    >
-      <ModalDialog
-        title={translate('Add project role')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton submitting={updateMutation.isPending}>
-              {translate('Save')}
-            </SubmitButton>
-          </>
-        }
-      >
-        <FormContainer submitting={updateMutation.isPending}>
-          <UserGroup permission={resolve.customer} />
-          <OrganizationProjectSelectField legacyField />
-          <RoleGroup types={['project']} legacyField />
-          <ExpirationTimeGroup
-            disabled={updateMutation.isPending}
-            legacyField
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+    <Form<AddProjectUserDialogFormData>
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
+      render={({ handleSubmit, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Add project role')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={updateMutation.isPending}
+                  disabled={invalid}
+                >
+                  {translate('Save')}
+                </SubmitButton>
+              </>
+            }
+          >
+            <FormContainerFinal submitting={updateMutation.isPending}>
+              <UserGroup permission={resolve.customer} />
+              <OrganizationProjectSelectField />
+              <RoleGroup types={['project']} />
+              <ExpirationTimeGroup disabled={updateMutation.isPending} />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};

@@ -1,7 +1,7 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';

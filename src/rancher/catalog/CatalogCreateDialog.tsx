@@ -1,10 +1,19 @@
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import { rancherCatalogsCreate } from 'waldur-js-client';
 
-import { StringField, TextField, SecretField } from '@/form';
+import { required } from '@/core/validators';
+import {
+  StringField,
+  TextField,
+  SecretField,
+  FormContainerFinal,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
-import { ActionDialog } from '@/modal/ActionDialog';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Resource } from '@/resource/types';
 import { createEntity } from '@/table/actions';
@@ -18,20 +27,20 @@ interface FormData {
   password?: string;
 }
 
-interface OwnProps {
+interface CatalogCreateDialogProps {
   resolve: {
     cluster: Resource;
   };
 }
 
-const useCatalogCreateDialog = (cluster) => {
+export const CatalogCreateDialog: FC<CatalogCreateDialogProps> = (props) => {
   const dispatch = useDispatch();
 
-  const createCatalogMutation = useManagedMutation<any, any, any>({
+  const createCatalogMutation = useManagedMutation<any, FormData, any>({
     mutationFn: (formData) =>
       rancherCatalogsCreate({
         body: {
-          scope: cluster.url,
+          scope: props.resolve.cluster.url,
           ...formData,
         },
       }),
@@ -43,36 +52,51 @@ const useCatalogCreateDialog = (cluster) => {
     },
   });
 
-  return {
-    submitting: createCatalogMutation.isPending,
-    createCatalog: (formData) => createCatalogMutation.mutateAsync(formData),
-  };
-};
-
-export const CatalogCreateDialog = reduxForm<FormData, OwnProps>({
-  form: 'RancherCatalogCreate',
-})((props) => {
-  const { submitting, createCatalog } = useCatalogCreateDialog(
-    props.resolve.cluster,
-  );
   return (
-    <ActionDialog
-      title={translate('Create catalog')}
-      submitLabel={translate('Submit')}
-      onSubmit={props.handleSubmit(createCatalog)}
-      submitting={submitting}
-    >
-      <StringField name="name" label={translate('Name')} required={true} />
-      <TextField name="description" label={translate('Description')} />
-      <StringField
-        name="catalog_url"
-        label={translate('Catalog URL')}
-        required={true}
-      />
+    <Form<FormData>
+      onSubmit={createCatalogMutation.mutateAsync}
+      render={({ handleSubmit, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Create catalog')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={createCatalogMutation.isPending}
+                  label={translate('Submit')}
+                  disabled={invalid}
+                />
+              </>
+            }
+          >
+            <FormContainerFinal submitting={createCatalogMutation.isPending}>
+              <StringField
+                name="name"
+                label={translate('Name')}
+                required={true}
+                validate={required}
+              />
+              <TextField name="description" label={translate('Description')} />
+              <StringField
+                name="catalog_url"
+                label={translate('Catalog URL')}
+                required={true}
+                validate={required}
+              />
 
-      <StringField name="branch" label={translate('Branch')} required={true} />
-      <StringField name="username" label={translate('Username')} />
-      <SecretField name="password" label={translate('Password')} />
-    </ActionDialog>
+              <StringField
+                name="branch"
+                label={translate('Branch')}
+                required={true}
+                validate={required}
+              />
+              <StringField name="username" label={translate('Username')} />
+              <SecretField name="password" label={translate('Password')} />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};

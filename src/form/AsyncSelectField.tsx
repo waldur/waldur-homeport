@@ -5,20 +5,24 @@ import { Field } from 'redux-form';
 import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
 
-export const Select = ({ input, loadOptions, ...rest }) => (
-  <AsyncPaginate
-    value={input.value}
-    onChange={input.onChange}
-    loadOptions={(query, prevOptions, { page }) =>
-      loadOptions(query, prevOptions, page)
-    }
-    classNamePrefix="metronic-select"
-    {...rest}
-    className={
-      'metronic-select-container' + (rest.className ? ` ${rest.className}` : '')
-    }
-  />
-);
+export const Select = (props) => {
+  const { input, loadOptions, ...rest } = props;
+  return (
+    <AsyncPaginate
+      value={input.value}
+      onChange={input.onChange}
+      loadOptions={(query, prevOptions, { page }) =>
+        loadOptions(query, prevOptions, page)
+      }
+      classNamePrefix="metronic-select"
+      {...rest}
+      className={
+        'metronic-select-container' +
+        (rest.className ? ` ${rest.className}` : '')
+      }
+    />
+  );
+};
 
 export const AsyncSelectField: FunctionComponent<any> = (props) => {
   const { name, placeholder, ...rest } = props;

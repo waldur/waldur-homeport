@@ -41,7 +41,7 @@ export const RoleGroup: FunctionComponent<{
   const Component = (legacyField ? Field : FinalField) as any;
 
   return (
-    <FormGroup label={translate('Role')}>
+    <FormGroup label={translate('Role')} controlId="role">
       <Component
         name="role"
         component={SelectField as any}

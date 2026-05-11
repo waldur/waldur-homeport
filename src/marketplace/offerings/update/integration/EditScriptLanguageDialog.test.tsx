@@ -1,0 +1,89 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { marketplaceProviderOfferingsUpdateIntegration } from 'waldur-js-client';
+
+import { EditScriptLanguageDialog } from './EditScriptLanguageDialog';
+
+vi.mock('waldur-js-client', async (importOriginal) => {
+  const mod = await importOriginal<any>();
+  return {
+    ...mod,
+    marketplaceProviderOfferingsUpdateIntegration: vi.fn(),
+  };
+});
+
+const fakeOffering = {
+  uuid: 'offering-uuid',
+  name: 'Test Offering',
+  secret_options: {
+    language: 'python',
+  },
+};
+
+const renderDialog = (type = 'language') => {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+  const store = createStore((state) => state, {
+    notifications: [],
+  });
+  return render(
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <EditScriptLanguageDialog
+          resolve={
+            {
+              offering: fakeOffering as any,
+              type: type,
+              label: 'Script Language',
+              refetch: vi.fn(),
+            } as any
+          }
+        />
+      </QueryClientProvider>
+    </Provider>,
+  );
+};
+
+describe('EditScriptLanguageDialog', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('renders with initial value from offering secret_options', () => {
+    renderDialog();
+    expect(screen.getByText('Python')).toBeInTheDocument();
+  });
+
+  it('updates offering integration on submission', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplaceProviderOfferingsUpdateIntegration).mockResolvedValue(
+      {} as any,
+    );
+    renderDialog();
+
+    // Open select and change value
+    const select = screen.getByRole('combobox');
+    await user.click(select);
+    await user.click(screen.getByText('Bash'));
+
+    await user.click(screen.getByText('Confirm'));
+
+    await waitFor(() => {
+      expect(
+        marketplaceProviderOfferingsUpdateIntegration,
+      ).toHaveBeenCalledWith({
+        path: { uuid: 'offering-uuid' },
+        body: {
+          secret_options: {
+            language: 'shell',
+          },
+        },
+      });
+    });
+  });
+});

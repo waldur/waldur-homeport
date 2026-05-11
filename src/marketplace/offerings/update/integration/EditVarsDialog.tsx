@@ -1,6 +1,8 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { connect } from 'react-redux';
-import { FieldArray, reduxForm } from 'redux-form';
+import arrayMutators from 'final-form-arrays';
+import { FC } from 'react';
+import { Form } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
   ProviderOfferingDetails,
@@ -13,75 +15,68 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { ENVIRON_FORM_ID } from './constants';
 import { EnvironmentVariablesList } from './EnvironmentVariablesList';
 
-export interface EditVarsDialogOwnProps {
+export interface EditVarsDialogProps {
   resolve: { offering: ProviderOfferingDetails; type?; refetch?(): void };
 }
 
-export const EditVarsDialog = connect<{}, {}, EditVarsDialogOwnProps>(
-  (_, ownProps) => ({
-    initialValues: {
-      environ: ownProps.resolve.offering.secret_options.environ,
-    },
-  }),
-)(
-  reduxForm<{}, EditVarsDialogOwnProps>({
-    form: ENVIRON_FORM_ID,
-  })((props) => {
-    const updateMutation = useManagedMutation<any, any, any>({
-      mutationFn: (formData) =>
-        marketplaceProviderOfferingsUpdateIntegration({
-          path: { uuid: props.resolve.offering.uuid },
-          body: {
-            // @ts-ignore
-            secret_options: {
-              ...props.resolve.offering.secret_options,
-              environ: formData.environ,
-            },
+export const EditVarsDialog: FC<EditVarsDialogProps> = ({ resolve }) => {
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsUpdateIntegration({
+        path: { uuid: resolve.offering.uuid },
+        body: {
+          secret_options: {
+            ...resolve.offering.secret_options,
+            environ: formData.environ,
           },
-        }),
-      successMessage: translate(
-        'Environment variables have been updated successfully.',
-      ),
-      errorMessage: translate('Unable to update environment variables.'),
-      refetch: props.resolve.refetch,
-    });
-    return (
-      <FieldArray
-        name="environ"
-        component={(nestedProps) => (
-          <form
-            onSubmit={props.handleSubmit((values) =>
-              updateMutation.mutateAsync(values),
-            )}
-          >
-            <ModalDialog
-              title={translate('Edit environment variables')}
-              actions={
-                <IconButton
-                  iconNode={<PlusCircleIcon weight="bold" />}
-                  tooltip={translate('Add variable')}
-                  onClick={() => nestedProps.fields.push({})}
-                />
-              }
-              footer={
-                <>
-                  <CloseDialogButton />
-                  <SubmitButton
-                    disabled={props.invalid}
-                    submitting={props.submitting}
-                    label={translate('Save')}
+        } as any,
+      }),
+    successMessage: translate(
+      'Environment variables have been updated successfully.',
+    ),
+    errorMessage: translate('Unable to update environment variables.'),
+    refetch: resolve.refetch,
+  });
+
+  return (
+    <Form
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
+      initialValues={{
+        environ: resolve.offering.secret_options.environ,
+      }}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, invalid, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <FieldArray name="environ">
+            {(nestedProps) => (
+              <ModalDialog
+                title={translate('Edit environment variables')}
+                actions={
+                  <IconButton
+                    iconNode={<PlusCircleIcon weight="bold" />}
+                    tooltip={translate('Add variable')}
+                    onClick={() => nestedProps.fields.push({})}
                   />
-                </>
-              }
-            >
-              <EnvironmentVariablesList fields={nestedProps.fields} />
-            </ModalDialog>
-          </form>
-        )}
-      />
-    );
-  }),
-);
+                }
+                footer={
+                  <>
+                    <CloseDialogButton />
+                    <SubmitButton
+                      disabled={invalid}
+                      submitting={submitting}
+                      label={translate('Save')}
+                    />
+                  </>
+                }
+              >
+                <EnvironmentVariablesList fields={nestedProps.fields} />
+              </ModalDialog>
+            )}
+          </FieldArray>
+        </form>
+      )}
+    />
+  );
+};
