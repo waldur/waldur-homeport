@@ -124,6 +124,29 @@ const hasFilterMenu = (key: string) => {
   return Boolean(item);
 };
 
+// When a cell's content is wider than its visible width (i.e. the
+// `ellipsis` CSS class has truncated it), expose the full value as a
+// native browser tooltip on hover. The check runs lazily — only when
+// the user actually hovers a cell — so there's no cost on initial
+// render. `innerText` is used in preference to `textContent` so
+// CSS-hidden affordances (e.g. inline filter buttons) don't leak
+// into the tooltip.
+const showTruncationTooltip = (e: React.MouseEvent<HTMLTableCellElement>) => {
+  const td = e.currentTarget;
+  // +1 px tolerance avoids sub-pixel false positives reported by some
+  // browsers/zoom levels.
+  if (td.scrollWidth > td.clientWidth + 1) {
+    const inner = td.querySelector('.td-data') as HTMLElement | null;
+    const source = inner ?? td;
+    const text = (source.innerText || '').trim();
+    if (text && td.getAttribute('title') !== text) {
+      td.setAttribute('title', text);
+    }
+  } else if (td.hasAttribute('title')) {
+    td.removeAttribute('title');
+  }
+};
+
 const TableCell = memo(
   ({
     column,
@@ -160,11 +183,15 @@ const TableCell = memo(
     const valueToCopy = column.copyField ? column.copyField(row) : '';
     const hasFilter = column.inlineFilter && hasFilterMenu(column.filter);
 
+    const ellipsisEnabled = column.ellipsis ?? true;
     const cellClassName = classNames(
       column.className,
       column.inlineFilter && 'has-filter',
-      (column.ellipsis ?? true) && 'ellipsis',
+      ellipsisEnabled && 'ellipsis',
     );
+    const onCellMouseEnter = ellipsisEnabled
+      ? showTruncationTooltip
+      : undefined;
 
     const content = column.copyField ? (
       <>
@@ -195,6 +222,7 @@ const TableCell = memo(
         <td
           className={cellClassName}
           onClick={handleClick}
+          onMouseEnter={onCellMouseEnter}
           style={{ paddingLeft: 0, paddingRight: 0 }}
         >
           <div
@@ -221,7 +249,11 @@ const TableCell = memo(
     }
 
     return (
-      <td className={cellClassName} onClick={handleClick}>
+      <td
+        className={cellClassName}
+        onClick={handleClick}
+        onMouseEnter={onCellMouseEnter}
+      >
         {content}
       </td>
     );
