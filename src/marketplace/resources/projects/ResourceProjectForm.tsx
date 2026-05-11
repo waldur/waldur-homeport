@@ -24,7 +24,12 @@ type LimitComponent = {
   name?: string;
   measured_unit?: string;
   billing_type?: string;
+  is_prepaid?: boolean;
 };
+
+const isLimitEligible = (c: LimitComponent): boolean =>
+  c.billing_type === 'limit' ||
+  (c.billing_type === 'one' && c.is_prepaid === true);
 
 type LimitPolicy = 'none' | 'per_project' | 'aggregate';
 
@@ -46,8 +51,10 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
 }) => {
   const isEdit = Boolean(resolve.resourceProject?.uuid);
 
+  // Sub-allocatable components: LIMIT-billed plus prepaid ONE_TIME
+  // (mirrors backend utils.get_components_map).
   const limitComponents = (resolve.offering?.components ?? []).filter(
-    (c) => c.billing_type === 'limit',
+    isLimitEligible,
   );
 
   const policy = ((resolve.offering?.plugin_options as any)
@@ -92,9 +99,6 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
     const cap = resourceLimits[c.type];
     if (cap == null) return null; // No parent cap → no hint.
     const unit = c.measured_unit ? ` ${c.measured_unit}` : '';
-    if (policy === 'per_project') {
-      return translate('{cap}{unit}', { cap, unit });
-    }
     if (policy === 'aggregate') {
       const used = siblingTotals[c.type] ?? 0;
       const remaining = Math.max(cap - used, 0);
@@ -103,6 +107,9 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
         cap,
         unit,
       });
+    }
+    if (policy === 'per_project') {
+      return translate('{cap}{unit}', { cap, unit });
     }
     return null;
   };
