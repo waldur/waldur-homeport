@@ -17,6 +17,8 @@ import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getFormLimitSerializer } from '@/marketplace/common/registry';
 
+import { getMarketplaceResourceUuid } from '../actions/utils';
+
 import { RenewAllocationFormData } from './types';
 
 interface RenewalCostBreakdownProps {
@@ -76,8 +78,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
     project?.customer_display_billing_info_in_projects === false;
   const { values } = useFormState<RenewAllocationFormData>();
 
-  const resourceUuid =
-    (resource as any).marketplace_resource_uuid || resource.uuid;
+  const resourceUuid = getMarketplaceResourceUuid(resource);
 
   const serializedLimits = useMemo(() => {
     const formLimits = values[resourceUuid]?.limits || {};
@@ -96,13 +97,13 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
     ],
     queryFn: () =>
       marketplaceResourcesEstimateRenewal({
-        path: { uuid: resource.uuid },
+        path: { uuid: resourceUuid },
         body: {
           extension_months: extensionMonths,
           limits: serializedLimits,
         },
       }).then((res) => res.data),
-    enabled: extensionMonths >= 1,
+    enabled: extensionMonths >= 1 && Boolean(resourceUuid),
     staleTime: FAST_STALE_TIME,
   });
 

@@ -15,6 +15,7 @@ import { useValidators } from '@/resource/actions/useValidators';
 import { useUser } from '@/workspace/hooks';
 
 import { ResourceAction } from '../actions/constants';
+import { getMarketplaceResourceUuid } from '../actions/utils';
 
 const ChangeLimitsDialog = lazyComponent(() =>
   import('./ChangeLimitsDialog').then((module) => ({
@@ -67,7 +68,7 @@ export const ChangeLimitsAction: ActionItemType = ({
   }
 
   // Check if resource has limit-based or prepaid components
-  const resourceUuid = resource.marketplace_resource_uuid || resource.uuid;
+  const resourceUuid = getMarketplaceResourceUuid(resource);
   const { data: offering } = useQuery({
     queryKey: ['resource-offering', resourceUuid],
     queryFn: () =>

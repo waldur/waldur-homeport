@@ -14,6 +14,8 @@ import { useModalDialogCallback } from '@/resource/actions/useModalDialogCallbac
 import { useValidators } from '@/resource/actions/useValidators';
 import { useUser } from '@/workspace/hooks';
 
+import { getMarketplaceResourceUuid } from '../actions/utils';
+
 const RenewAllocationDialog = lazyComponent(() =>
   import('./RenewAllocationDialog').then((module) => ({
     default: module.RenewAllocationDialog,
@@ -26,16 +28,14 @@ const useRenewAllocationAction = ({ resource, refetch }) => {
   const { tooltip, disabled } = useValidators(validators, resource);
 
   // Check if resource has prepaid components by fetching offering data
+  const resourceUuid = getMarketplaceResourceUuid(resource);
   const { data: offering, isLoading } = useQuery({
-    queryKey: [
-      'resource-offering',
-      resource.marketplace_resource_uuid || resource.uuid,
-    ],
+    queryKey: ['resource-offering', resourceUuid],
     queryFn: () =>
       marketplaceResourcesOfferingRetrieve({
-        path: { uuid: resource.marketplace_resource_uuid || resource.uuid },
+        path: { uuid: resourceUuid },
       }).then((response) => response.data),
-    enabled: Boolean(resource.marketplace_resource_uuid || resource.uuid),
+    enabled: Boolean(resourceUuid),
     staleTime: STALE_TIME, // Cache for 5 minutes
     refetchOnWindowFocus: false,
   });
@@ -83,11 +83,12 @@ export const RenewAllocationActionAction: ActionItemType = ({
   ) {
     return null;
   }
+  const resourceUuid = getMarketplaceResourceUuid(resource);
 
-  // Only show the action if resource has a plan and resource UUID (needed for prepaid check)
+  // Only show the action if resource has a plan and marketplace resource UUID (needed for prepaid check)
   if (
     !(resource.plan_uuid || resource.marketplace_plan_uuid) ||
-    !(resource.marketplace_resource_uuid || resource.uuid)
+    !resourceUuid
   ) {
     return null;
   }

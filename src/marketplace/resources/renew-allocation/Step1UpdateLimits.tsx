@@ -14,6 +14,7 @@ import { translate } from '@/i18n';
 import { filterOfferingComponents } from '@/marketplace/common/registry';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
+import { getMarketplaceResourceUuid } from '../actions/utils';
 import { ChangeLimitsComponent } from '../change-limits/ChangeLimitsComponent';
 import { getLimitChangeData, loadData } from '../change-limits/utils';
 
@@ -23,8 +24,7 @@ interface OwnProps extends WizardStepProps {
   data: { resources: Array<Resource & { marketplace_resource_uuid }> };
 }
 
-const getUuid = (resource) =>
-  resource.marketplace_resource_uuid || resource.uuid;
+const getUuid = (resource) => getMarketplaceResourceUuid(resource);
 
 // Component to display one-time component pricing when no limit components exist
 const OneTimeComponentsSummary: FC<{

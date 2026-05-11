@@ -8,6 +8,8 @@ import { validateState } from '@/resource/actions/base';
 import { ActionContext } from '@/resource/actions/types';
 import { useValidators } from '@/resource/actions/useValidators';
 
+import { getMarketplaceResourceUuid } from './utils';
+
 const SUPPORTED_OFFERING_TYPES = [
   'Marketplace.Slurm',
   'OpenStack.Tenant',
@@ -36,7 +38,7 @@ export const PullMarketplaceResourceAction = ({
     mutationFn: () =>
       marketplaceResourcesPull({
         path: {
-          uuid: resource.marketplace_resource_uuid || resource.uuid,
+          uuid: getMarketplaceResourceUuid(resource),
         },
       }),
     refetch,
@@ -45,6 +47,7 @@ export const PullMarketplaceResourceAction = ({
   });
 
   if (
+    !getMarketplaceResourceUuid(resource) ||
     !SUPPORTED_OFFERING_TYPES.includes(
       resource.marketplace_offering_type || resource.offering_type,
     )

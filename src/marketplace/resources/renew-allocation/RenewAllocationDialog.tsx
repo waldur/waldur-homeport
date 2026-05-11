@@ -19,6 +19,8 @@ import {
 import { useBatchMutation } from '@/modal/useBatchMutation';
 import { Wizard } from '@/wizard';
 
+import { getMarketplaceResourceUuid } from '../actions/utils';
+
 import { Step1UpdateLimits } from './Step1UpdateLimits';
 import { Step2ExtendDuration } from './Step2ExtendDuration';
 import { Step3ReviewConfirm } from './Step3ReviewConfirm';
@@ -57,8 +59,7 @@ const steps: ProgressStep[] = [
   },
 ];
 
-const getResourceUuid = (resource) =>
-  resource.marketplace_resource_uuid || resource.uuid;
+const getResourceUuid = (resource) => getMarketplaceResourceUuid(resource);
 
 export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
   resolve,
