@@ -1,37 +1,53 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { useFormState } from 'react-final-form';
 import { useMediaQuery } from 'react-responsive';
-import { BasePublicPlan } from 'waldur-js-client';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { translate } from '@/i18n';
-import { OfferingLimits } from '@/marketplace/offerings/store/types';
 import { PriceTooltip } from '@/price/PriceTooltip';
 
 import { ComponentRow } from './ComponentRow';
 import { ComponentTotalRow } from './ComponentTotalRow';
-import { StateProps } from './connector';
+import { FetchedData, getLimitChangeData } from './utils';
 
-interface ChangeLimitsComponentProps extends StateProps {
-  plan: BasePublicPlan;
-  offeringLimits: OfferingLimits;
+interface ChangeLimitsComponentProps {
+  data: FetchedData;
+  orderCanBeApproved: boolean;
   /** For nested fields */
   parentName?: string;
-  finalForm?: boolean;
 }
 
-export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = (
-  props,
-) => {
+export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
+  data,
+  orderCanBeApproved,
+  parentName,
+}) => {
   const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
 
   const periodsCountToShow = isMd ? 1 : 3;
 
+  const { values } = useFormState();
+  const limitChangeData = React.useMemo(
+    () =>
+      getLimitChangeData(
+        data.plan,
+        data.offering,
+        values.limits || {},
+        data.limits,
+        data.usages,
+        orderCanBeApproved,
+        data.concealBillingInfo,
+        data.resource.end_date,
+      ),
+    [data, values.limits, orderCanBeApproved],
+  );
+
   return (
     <div>
-      {props.plan ? (
+      {data.plan ? (
         <p>
-          <strong>{translate('Current plan')}</strong>: {props.plan.name}
+          <strong>{translate('Current plan')}</strong>: {data.plan.name}
         </p>
       ) : (
         <p>{translate('Resource does not have any plan.')}</p>
@@ -48,9 +64,9 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = (
                     <th>{translate('Current limit')}</th>
                     <th>{translate('New limit')}</th>
                     <th>{translate('Difference')}</th>
-                    {props.shouldConcealPrices
+                    {limitChangeData.shouldConcealPrices
                       ? null
-                      : props.periods
+                      : limitChangeData.periods
                           .slice(0, periodsCountToShow)
                           .map((period, index) => (
                             <th className="col-sm-1" key={index}>
@@ -61,26 +77,25 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = (
                   </tr>
                 </thead>
                 <tbody>
-                  {props.components.map((component, index) => (
+                  {limitChangeData.components.map((component, index) => (
                     <ComponentRow
                       key={index}
                       component={component}
-                      limits={props.offeringLimits[component.type]}
-                      shouldConcealPrices={props.shouldConcealPrices}
+                      limits={data.offeringLimits[component.type]}
+                      shouldConcealPrices={limitChangeData.shouldConcealPrices}
                       periodsCountToShow={periodsCountToShow}
-                      periods={props.periods}
-                      parentName={props.parentName}
-                      finalForm={props.finalForm}
+                      periods={limitChangeData.periods}
+                      parentName={parentName}
                     />
                   ))}
                 </tbody>
                 <tfoot>
-                  {props.shouldConcealPrices ? null : (
+                  {limitChangeData.shouldConcealPrices ? null : (
                     <ComponentTotalRow
-                      totalPeriods={props.totalPeriods}
-                      changedTotalPeriods={props.changedTotalPeriods}
+                      totalPeriods={limitChangeData.totalPeriods}
+                      changedTotalPeriods={limitChangeData.changedTotalPeriods}
                       periodsCountToShow={periodsCountToShow}
-                      periods={props.periods}
+                      periods={limitChangeData.periods}
                     />
                   )}
                 </tfoot>

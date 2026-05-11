@@ -1,11 +1,10 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { FunctionComponent, useRef } from 'react';
+import { Form } from 'react-final-form';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { FormContainer, SubmitButton, TextField } from '@/form';
+import { FormContainerFinal, SubmitButton, TextField } from '@/form';
 import { translate } from '@/i18n';
-import { USER_PERMISSION_REQUESTS_ACTION_FORM_ID } from '@/invitations/constants';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Field } from '@/resource/summary';
 
@@ -22,9 +21,9 @@ interface OwnProps {
   };
 }
 
-const PurePermissionRequestActionDialog: FunctionComponent<
-  InjectedFormProps & OwnProps & { handleSubmit }
-> = (props) => {
+export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
+  props,
+) => {
   const permissionRequest = props.resolve.permissionRequest;
   const readOnly = props.resolve.readOnly;
   const { approveRequest, isPending: isApproving } =
@@ -34,127 +33,143 @@ const PurePermissionRequestActionDialog: FunctionComponent<
     props.resolve.refetch,
   );
   const isPending = isApproving || isRejecting;
+
+  const actionRef = useRef<'approve' | 'reject' | null>(null);
+
+  const onSubmit = (values) => {
+    if (actionRef.current === 'approve') {
+      return approveRequest(values.comment);
+    } else if (actionRef.current === 'reject') {
+      return rejectRequest(values.comment);
+    }
+  };
+
   return (
-    <ModalDialog
-      title={translate('Request review')}
-      footer={
-        !readOnly && (
-          <>
-            <SubmitButton
-              submitting={isRejecting}
-              disabled={props.invalid || isPending}
-              variant="danger"
-              className="w-150px"
-              type="button"
-              onClick={props.handleSubmit((values) => {
-                rejectRequest(values.comment);
-              })}
-            >
-              <span className="svg-icon svg-icon-2">
-                <XCircleIcon weight="bold" />
-              </span>
-              {translate('Decline')}
-            </SubmitButton>
-            <SubmitButton
-              submitting={isApproving}
-              disabled={props.invalid || isPending}
-              className="w-150px"
-              type="button"
-              onClick={props.handleSubmit((values) => {
-                approveRequest(values.comment);
-              })}
-            >
-              <span className="svg-icon svg-icon-2">
-                <CheckCircleIcon weight="bold" />
-              </span>
-              {translate('Approve')}
-            </SubmitButton>
-          </>
-        )
-      }
-    >
-      <div className="d-flex flex-column gap-4">
-        <Field
-          label={translate('Name')}
-          value={permissionRequest.created_by_full_name}
-        />
-        <Field
-          label={translate('Email')}
-          value={permissionRequest.created_by_email}
-        />
-        <Field
-          label={translate('Organization')}
-          value={permissionRequest.customer_name}
-        />
-        {permissionRequest.role_name.startsWith('PROJECT.') && (
-          <>
-            <Field
-              label={translate('Project')}
-              value={permissionRequest.scope_name}
-            />
-            <Field
-              label={translate('Project role')}
-              value={
-                permissionRequest.role_description ||
-                permissionRequest.role_name
-              }
-            />
-            <Field
-              label={translate('Project name template')}
-              value={permissionRequest.project_name_template}
-              labelTooltipLen={false}
-            />
-            {permissionRequest.project_name && (
+    <Form
+      onSubmit={onSubmit}
+      render={({ handleSubmit, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Request review')}
+            footer={
+              !readOnly && (
+                <>
+                  <SubmitButton
+                    submitting={isRejecting}
+                    disabled={invalid || isPending}
+                    variant="danger"
+                    className="w-150px"
+                    type="button"
+                    onClick={() => {
+                      actionRef.current = 'reject';
+                      handleSubmit();
+                    }}
+                  >
+                    <span className="svg-icon svg-icon-2">
+                      <XCircleIcon weight="bold" />
+                    </span>
+                    {translate('Decline')}
+                  </SubmitButton>
+                  <SubmitButton
+                    submitting={isApproving}
+                    disabled={invalid || isPending}
+                    className="w-150px"
+                    type="button"
+                    onClick={() => {
+                      actionRef.current = 'approve';
+                      handleSubmit();
+                    }}
+                  >
+                    <span className="svg-icon svg-icon-2">
+                      <CheckCircleIcon weight="bold" />
+                    </span>
+                    {translate('Approve')}
+                  </SubmitButton>
+                </>
+              )
+            }
+          >
+            <div className="d-flex flex-column gap-4">
               <Field
-                label={translate('Requested project name')}
-                value={permissionRequest.project_name}
+                label={translate('Name')}
+                value={permissionRequest.created_by_full_name}
               />
-            )}
-            {permissionRequest.project_description && (
               <Field
-                label={translate('Requested project description')}
-                value={permissionRequest.project_description}
+                label={translate('Email')}
+                value={permissionRequest.created_by_email}
               />
+              <Field
+                label={translate('Organization')}
+                value={permissionRequest.customer_name}
+              />
+              {permissionRequest.role_name.startsWith('PROJECT.') && (
+                <>
+                  <Field
+                    label={translate('Project')}
+                    value={permissionRequest.scope_name}
+                  />
+                  <Field
+                    label={translate('Project role')}
+                    value={
+                      permissionRequest.role_description ||
+                      permissionRequest.role_name
+                    }
+                  />
+                  <Field
+                    label={translate('Project name template')}
+                    value={permissionRequest.project_name_template}
+                    labelTooltipLen={false}
+                  />
+                  {permissionRequest.project_name && (
+                    <Field
+                      label={translate('Requested project name')}
+                      value={permissionRequest.project_name}
+                    />
+                  )}
+                  {permissionRequest.project_description && (
+                    <Field
+                      label={translate('Requested project description')}
+                      value={permissionRequest.project_description}
+                    />
+                  )}
+                </>
+              )}
+              <Field
+                label={translate('Date of request')}
+                value={formatDateTime(permissionRequest.created)}
+              />
+              {readOnly && (
+                <>
+                  <Field
+                    label={translate('Reviewed at')}
+                    value={formatDateTime(permissionRequest.reviewed_at)}
+                  />
+                  <Field
+                    label={translate('Review comment')}
+                    value={permissionRequest.review_comment}
+                  />
+                </>
+              )}
+            </div>
+            {!readOnly && <hr />}
+            {!readOnly && (
+              <FormContainerFinal submitting={isPending} className="size-lg">
+                <TextField
+                  name="comment"
+                  label={translate('Reason')}
+                  placeholder={translate('Enter a message...')}
+                  description={translate(
+                    'Optionally provide a reason to improve transparency and record decisions.',
+                  )}
+                  maxLength={150}
+                  rows={4}
+                  space={4}
+                />
+              </FormContainerFinal>
             )}
-          </>
-        )}
-        <Field
-          label={translate('Date of request')}
-          value={formatDateTime(permissionRequest.created)}
-        />
-        {readOnly && (
-          <>
-            <Field
-              label={translate('Reviewed at')}
-              value={formatDateTime(permissionRequest.reviewed_at)}
-            />
-            <Field
-              label={translate('Review comment')}
-              value={permissionRequest.review_comment}
-            />
-          </>
-        )}
-      </div>
-      {!readOnly && <hr />}
-      {!readOnly && (
-        <FormContainer submitting={isPending} className="size-lg">
-          <TextField
-            name="comment"
-            label={translate('Reason')}
-            placeholder={translate('Enter a message...')}
-            description={translate(
-              'Optionally provide a reason to improve transparency and record decisions.',
-            )}
-            maxLength={150}
-            rows={4}
-            space={4}
-          />
-        </FormContainer>
+          </ModalDialog>
+        </form>
       )}
-    </ModalDialog>
+    />
   );
 };
-
-export const PermissionRequestActionDialog = reduxForm({
-  form: USER_PERMISSION_REQUESTS_ACTION_FORM_ID,
-})(PurePermissionRequestActionDialog);

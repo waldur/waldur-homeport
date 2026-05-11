@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { FC, useMemo } from 'react';
+import { Form } from 'react-final-form';
 import {
   type CustomerUser,
   type NestedProjectPermission,
@@ -8,7 +8,7 @@ import {
   projectsUpdateUser,
 } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton } from '@/form';
+import { FormContainerFinal, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -21,8 +21,6 @@ import { RoleGroup } from '@/project/team/RoleGroup';
 import { ProjectGroup } from './ProjectGroup';
 import { UserGroup } from './UserGroup';
 
-const FORM_ID = 'EditProjectUserDialog';
-
 interface EditProjectUserDialogFormData {
   role: Role;
   expiration_time: string;
@@ -34,7 +32,7 @@ interface EditProjectUserDialogResolve {
   refetch;
 }
 
-interface EditProjectUserDialogOwnProps {
+interface EditProjectUserDialogProps {
   resolve: EditProjectUserDialogResolve;
 }
 
@@ -44,7 +42,7 @@ const savePermissions = async (
 ) => {
   if (resolve.project.role_name === formData.role.name) {
     await projectsUpdateUser({
-      path: { uuid: resolve.project.uuid },
+      path: { uuid: resolve.project['project_uuid'] },
       body: {
         user: resolve.customer.uuid,
         role: formData.role.name,
@@ -53,14 +51,14 @@ const savePermissions = async (
     });
   } else {
     await projectsDeleteUser({
-      path: { uuid: resolve.project.uuid },
+      path: { uuid: resolve.project['project_uuid'] },
       body: {
         user: resolve.customer.uuid,
         role: resolve.project.role_name,
       },
     });
     await projectsAddUser({
-      path: { uuid: resolve.project.uuid },
+      path: { uuid: resolve.project['project_uuid'] },
       body: {
         user: resolve.customer.uuid,
         role: formData.role.name,
@@ -71,51 +69,57 @@ const savePermissions = async (
   await resolve.refetch();
 };
 
-export const EditProjectUserDialog = connect(
-  (_, ownProps: EditProjectUserDialogOwnProps) => ({
-    initialValues: {
-      role: getProjectRoles().find(
-        ({ name }) => name === ownProps.resolve.project.role_name,
-      ),
-      expiration_time: ownProps.resolve.project.expiration_time,
-    },
-  }),
-)(
-  reduxForm<EditProjectUserDialogFormData, EditProjectUserDialogOwnProps>({
-    form: FORM_ID,
-  })(({ submitting, handleSubmit, resolve }) => {
-    const saveMutation = useManagedMutation<
-      any,
-      any,
-      EditProjectUserDialogFormData
-    >({
-      mutationFn: (formData) => savePermissions(formData, resolve),
-      errorMessage: translate('Unable to update permission.'),
-    });
+export const EditProjectUserDialog: FC<EditProjectUserDialogProps> = ({
+  resolve,
+}) => {
+  const saveMutation = useManagedMutation<
+    any,
+    any,
+    EditProjectUserDialogFormData
+  >({
+    mutationFn: (formData) => savePermissions(formData, resolve),
+    errorMessage: translate('Unable to update permission.'),
+  });
 
-    return (
-      <form
-        onSubmit={handleSubmit((values) => saveMutation.mutateAsync(values))}
-      >
-        <ModalDialog
-          title={translate('Edit project member')}
-          footer={
-            <>
-              <CloseDialogButton />
-              <SubmitButton submitting={saveMutation.isPending}>
-                {translate('Save')}
-              </SubmitButton>
-            </>
-          }
-        >
-          <FormContainer submitting={saveMutation.isPending}>
-            <UserGroup permission={resolve.customer} />
-            <ProjectGroup project={resolve.project} />
-            <RoleGroup types={['project']} legacyField />
-            <ExpirationTimeGroup disabled={submitting} legacyField />
-          </FormContainer>
-        </ModalDialog>
-      </form>
-    );
-  }),
-);
+  const initialValues = useMemo(
+    () => ({
+      role: getProjectRoles().find(
+        ({ name }) => name === resolve.project.role_name,
+      ),
+      expiration_time: resolve.project.expiration_time,
+    }),
+    [resolve.project],
+  );
+
+  return (
+    <Form<EditProjectUserDialogFormData>
+      onSubmit={(values) => saveMutation.mutateAsync(values)}
+      initialValues={initialValues}
+      render={({ handleSubmit, invalid, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit project member')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={saveMutation.isPending}
+                  disabled={invalid}
+                >
+                  {translate('Save')}
+                </SubmitButton>
+              </>
+            }
+          >
+            <FormContainerFinal submitting={saveMutation.isPending}>
+              <UserGroup permission={resolve.customer} />
+              <ProjectGroup project={resolve.project} />
+              <RoleGroup types={['project']} />
+              <ExpirationTimeGroup disabled={submitting} />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

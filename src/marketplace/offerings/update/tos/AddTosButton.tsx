@@ -6,8 +6,6 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
-import { TOS_FORM_ID } from './constants';
-
 const AddTosDialog = lazyComponent(() =>
   import('./AddTosDialog').then((module) => ({
     default: module.AddTosDialog,
@@ -22,7 +20,6 @@ export const AddTosButton: FunctionComponent<{
   const callback = () => {
     openDialog(AddTosDialog, {
       resolve: { offering, refetch },
-      formId: TOS_FORM_ID,
     });
   };
 

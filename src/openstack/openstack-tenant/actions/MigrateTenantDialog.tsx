@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import { Form } from 'react-bootstrap';
-import { connect, useSelector } from 'react-redux';
-import { Field, FieldArray, formValueSelector, reduxForm } from 'redux-form';
+import arrayMutators from 'final-form-arrays';
+import { FC, useEffect } from 'react';
+import { Form as BootstrapForm } from 'react-bootstrap';
+import { Form, Field, useForm, useFormState } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import {
   Offering,
   openstackMigrationsCreate,
@@ -10,8 +11,9 @@ import {
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { FormGroup, SelectField, SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { required } from '@/core/validators';
+import { FormGroupFinal, SelectField, SubmitButton } from '@/form';
+import { Select as AsyncSelect } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
@@ -21,101 +23,90 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadVolumeTypes } from '@/openstack/api';
 import { TENANT_TYPE } from '@/openstack/constants';
-import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
-import { type RootState } from '@/store/reducers';
 
 import { SubnetsTable } from './SubnetsTable';
 import { VolumeTypesTable } from './VolumeTypesTable';
 
-const selector = formValueSelector(RESOURCE_ACTION_FORM);
+interface MigrateTenantDialogProps {
+  resolve: {
+    resource: any;
+    refetch(): void;
+  };
+}
 
-const offeringSelector = (state: RootState): Offering =>
-  selector(state, 'offering');
+interface MigrateTenantFormData {
+  name: string;
+  offering: Offering;
+  plan: any;
+  volumeTypes?: Array<{
+    source: { uuid: string; name: string };
+    destination: { uuid: string; name: string };
+  }>;
+  subnets?: Array<{
+    source: string;
+    destination: string;
+  }>;
+  networks?: Array<{ label: string; value: string }>;
+  skip_connection_extnet?: boolean;
+  sync_instance_ports?: boolean;
+}
 
-export const MigrateTenantDialog = connect<
-  {},
-  {},
-  { resolve: { resource; refetch } }
->((_, ownProps) => ({
-  initialValues: { name: ownProps.resolve.resource.name },
-}))(
-  reduxForm<{}, { resolve: { resource; refetch } }>({
-    form: RESOURCE_ACTION_FORM,
-  })(
-    ({
-      handleSubmit,
-      submitting,
-      invalid,
-      resolve: { resource, refetch },
-      change,
-    }) => {
-      const offering = useSelector(offeringSelector);
+const FormWatcher: FC = () => {
+  const { change } = useForm();
+  const { values } = useFormState({ subscription: { values: true } });
+  const offering = values.offering;
 
-      const migrateMutation = useManagedMutation<any, any, any>({
-        mutationFn: (formData) =>
-          openstackMigrationsCreate({
-            body: {
-              name: formData.name,
-              src_resource: resource.marketplace_resource_uuid,
-              dst_offering: formData.offering.uuid,
-              dst_plan: formData.plan.uuid,
-              mappings: {
-                volume_types: formData.volumeTypes?.map((type) => ({
-                  src_type_uuid: type.source.uuid,
-                  dst_type_uuid: type.destination.uuid,
-                })),
-                subnets: formData.subnets?.map((type) => ({
-                  src_cidr: type.source,
-                  dst_cidr: type.destination,
-                })),
-                skip_connection_extnet: formData.skip_connection_extnet,
-                sync_instance_ports: formData.sync_instance_ports,
-                networks: formData.networks?.map(({ value }) => value),
-              },
-            },
-          }),
-        successMessage: translate('OpenStack replication has been initiated.'),
-        errorMessage: translate('Unable to replicate OpenStack tenant.'),
-        refetch,
-      });
+  useEffect(() => {
+    if (offering) {
+      change('plan', offering.plans?.[0] || null);
+    } else {
+      change('plan', null);
+    }
+    change('volumeTypes', []);
+  }, [offering, change]);
 
-      useEffect(() => {
-        change('plan', offering ? offering.plans[0] : null);
-        change('volumeTypes', []);
-      }, [offering]);
+  return null;
+};
 
-      const queryResult = useQuery({
-        queryKey: ['MigrateTenantDialog', offering?.uuid],
-
-        queryFn: async () => {
-          if (!offering) {
-            return {};
-          }
-          const sourceVolumeTypes = await loadVolumeTypes({
-            tenant_uuid: resource.uuid,
-          });
-          const destinationVolumeTypes = await loadVolumeTypes({
-            settings_uuid: offering.scope_uuid,
-          });
-          const networks = (
-            await openstackNetworksList({
-              query: {
-                tenant_uuid: resource.uuid,
-                field: ['name', 'uuid'],
-                direct_only: true,
-              },
-            })
-          ).data.map(({ uuid, name }) => ({ label: name, value: uuid }));
-          return { sourceVolumeTypes, destinationVolumeTypes, networks };
+export const MigrateTenantDialog: FC<MigrateTenantDialogProps> = ({
+  resolve: { resource, refetch },
+}) => {
+  const migrateMutation = useManagedMutation<any, any, MigrateTenantFormData>({
+    mutationFn: (formData) =>
+      openstackMigrationsCreate({
+        body: {
+          name: formData.name,
+          src_resource: resource.marketplace_resource_uuid,
+          dst_offering: formData.offering.uuid,
+          dst_plan: formData.plan.uuid,
+          mappings: {
+            volume_types: formData.volumeTypes?.map((type) => ({
+              src_type_uuid: type.source.uuid,
+              dst_type_uuid: type.destination.uuid,
+            })),
+            subnets: formData.subnets?.map((type) => ({
+              src_cidr: type.source,
+              dst_cidr: type.destination,
+            })),
+            skip_connection_extnet: formData.skip_connection_extnet,
+            sync_instance_ports: formData.sync_instance_ports,
+            networks: formData.networks?.map(({ value }) => value),
+          },
         },
-      });
+      }),
+    successMessage: translate('OpenStack replication has been initiated.'),
+    errorMessage: translate('Unable to replicate OpenStack tenant.'),
+    refetch,
+  });
 
-      return (
-        <form
-          onSubmit={handleSubmit((values) =>
-            migrateMutation.mutateAsync(values),
-          )}
-        >
+  return (
+    <Form<MigrateTenantFormData>
+      onSubmit={(values) => migrateMutation.mutateAsync(values)}
+      initialValues={{ name: resource.name } as any}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid, values }) => (
+        <form onSubmit={handleSubmit}>
+          <FormWatcher />
           <ModalDialog
             title={translate(
               'Replicate tenant to another OpenStack deployment',
@@ -131,15 +122,21 @@ export const MigrateTenantDialog = connect<
               </div>
             }
           >
-            <Field name="name" label={translate('Name')} component={FormGroup}>
+            <Field
+              name="name"
+              label={translate('Name')}
+              component={FormGroupFinal}
+              validate={required}
+            >
               <InputField />
             </Field>
             <Field
               name="offering"
               label={translate('Offering')}
-              component={FormGroup}
+              component={FormGroupFinal}
+              validate={required}
             >
-              <AsyncSelectField
+              <AsyncSelect
                 loadOptions={(query, prevOptions, currentPage) =>
                   publicOfferingsAutocomplete(
                     {
@@ -157,71 +154,105 @@ export const MigrateTenantDialog = connect<
                     {name} | {customer_name}
                   </>
                 )}
-                getOptionKey={({ uuid }) => uuid}
+                getOptionValue={({ uuid }) => uuid}
               />
             </Field>
 
-            {offering && (
-              <>
-                <Field
-                  name="plan"
-                  label={translate('Plan')}
-                  component={FormGroup}
-                >
-                  <SelectField
-                    options={offering.plans}
-                    getOptionLabel={({ name }) => name}
-                    getOptionKey={({ uuid }) => uuid}
-                  />
-                </Field>
-                {queryResult.isLoading ? (
-                  <LoadingSpinner />
-                ) : queryResult.data ? (
-                  <>
-                    <Form.Group>
-                      <Form.Label>{translate('Volume types')}</Form.Label>
-                      <FieldArray
-                        name="volumeTypes"
-                        component={VolumeTypesTable}
-                        options={queryResult.data}
-                      />
-                    </Form.Group>
-                    <Field
-                      name="networks"
-                      label={translate('Networks')}
-                      component={FormGroup}
-                    >
-                      <SelectField
-                        options={queryResult.data.networks}
-                        isMulti
-                      />
-                    </Field>
-                    <Form.Group>
-                      <Form.Label>{translate('Subnets')}</Form.Label>
-                      <FieldArray name="subnets" component={SubnetsTable} />
-                    </Form.Group>
-                  </>
-                ) : null}
-
-                <Field
-                  name="skip_connection_extnet"
-                  label={translate('Skip connection to external network')}
-                  component={FormGroup}
-                >
-                  <AwesomeCheckboxField />
-                </Field>
-                <Field
-                  name="sync_instance_ports"
-                  label={translate('Copy ports connected to instances')}
-                  component={FormGroup}
-                >
-                  <AwesomeCheckboxField />
-                </Field>
-              </>
+            {values.offering && (
+              <MigrateTenantFields
+                offering={values.offering}
+                resource={resource}
+              />
             )}
           </ModalDialog>
         </form>
-      );
+      )}
+    />
+  );
+};
+
+const MigrateTenantFields = ({ offering, resource }) => {
+  const queryResult = useQuery({
+    queryKey: ['MigrateTenantDialog', offering?.uuid],
+    queryFn: async () => {
+      const sourceVolumeTypes = await loadVolumeTypes({
+        tenant_uuid: resource.uuid,
+      });
+      const destinationVolumeTypes = await loadVolumeTypes({
+        settings_uuid: offering.scope_uuid,
+      });
+      const networks = (
+        await openstackNetworksList({
+          query: {
+            tenant_uuid: resource.uuid,
+            field: ['name', 'uuid'],
+            direct_only: true,
+          },
+        })
+      ).data.map(({ uuid, name }) => ({ label: name, value: uuid }));
+      return { sourceVolumeTypes, destinationVolumeTypes, networks };
     },
-  ),
-);
+    enabled: Boolean(offering),
+  });
+
+  return (
+    <>
+      <Field
+        name="plan"
+        label={translate('Plan')}
+        component={FormGroupFinal}
+        validate={required}
+      >
+        <SelectField
+          options={offering.plans}
+          getOptionLabel={({ name }) => name}
+          getOptionValue={({ uuid }) => uuid}
+        />
+      </Field>
+      {queryResult.isLoading ? (
+        <LoadingSpinner />
+      ) : queryResult.data ? (
+        <>
+          <BootstrapForm.Group className="mb-7">
+            <BootstrapForm.Label className="form-label">
+              {translate('Volume types')}
+            </BootstrapForm.Label>
+            <FieldArray
+              name="volumeTypes"
+              component={VolumeTypesTable as any}
+              options={queryResult.data}
+            />
+          </BootstrapForm.Group>
+          <Field
+            name="networks"
+            label={translate('Networks')}
+            component={FormGroupFinal}
+          >
+            <SelectField options={queryResult.data.networks} isMulti />
+          </Field>
+          <BootstrapForm.Group className="mb-7">
+            <BootstrapForm.Label className="form-label">
+              {translate('Subnets')}
+            </BootstrapForm.Label>
+            <FieldArray name="subnets" component={SubnetsTable as any} />
+          </BootstrapForm.Group>
+        </>
+      ) : null}
+
+      <Field
+        name="skip_connection_extnet"
+        label={translate('Skip connection to external network')}
+        component={FormGroupFinal}
+      >
+        <AwesomeCheckboxField />
+      </Field>
+      <Field
+        name="sync_instance_ports"
+        label={translate('Copy ports connected to instances')}
+        component={FormGroupFinal}
+      >
+        <AwesomeCheckboxField />
+      </Field>
+    </>
+  );
+};

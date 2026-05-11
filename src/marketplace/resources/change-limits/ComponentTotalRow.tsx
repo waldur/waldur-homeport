@@ -7,7 +7,7 @@ import { PriceField } from '@/marketplace/resources/change-limits/PriceField';
 import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
-import { StateProps } from './connector';
+import { StateProps } from './utils';
 
 export const ComponentTotalRow: FC<
   Pick<StateProps, 'totalPeriods' | 'changedTotalPeriods' | 'periods'> & {

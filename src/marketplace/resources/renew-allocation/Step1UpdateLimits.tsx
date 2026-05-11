@@ -190,16 +190,9 @@ const UpdateLimitsTable: FC<{
 
   return (
     <ChangeLimitsComponent
-      plan={data.plan}
-      periods={tableData.periods}
-      components={tableData.components}
+      data={data}
       orderCanBeApproved={tableData.orderCanBeApproved}
-      totalPeriods={tableData.totalPeriods}
-      changedTotalPeriods={tableData.changedTotalPeriods}
-      offeringLimits={data.offeringLimits}
-      shouldConcealPrices={tableData.shouldConcealPrices}
       parentName={getUuid(resource)}
-      finalForm
     />
   );
 };

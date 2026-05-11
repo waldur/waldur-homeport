@@ -1,6 +1,7 @@
-import { StateProps } from '@/marketplace/resources/change-limits/connector';
 import { Offering } from '@/marketplace/types';
 import { TENANT_TYPE } from '@/openstack/constants';
+
+import { StateProps } from './utils';
 
 export const plan = {
   prices: {

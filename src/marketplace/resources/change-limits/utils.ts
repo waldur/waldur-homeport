@@ -22,7 +22,30 @@ import { LimitParser, Limits } from '@/marketplace/common/types';
 import { getBillingPeriods } from '@/marketplace/common/utils';
 import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@/marketplace/offerings/store/types';
-import { StateProps } from '@/marketplace/resources/change-limits/connector';
+export interface ComponentRowType {
+  type: string;
+  name: string;
+  measured_unit: string;
+  is_boolean: boolean;
+  limit: number;
+  usage: number;
+  prices: number[];
+  subTotal: number;
+  changedSubTotal: number;
+  changedLimit: number;
+  changedPrices: number[];
+}
+
+export interface StateProps {
+  periods: string[];
+  components: ComponentRowType[];
+  totalPeriods: number[];
+  changedTotalPeriods: number[];
+  orderCanBeApproved: boolean;
+  shouldConcealPrices?: boolean;
+  offering?: Offering;
+  newLimits?: Limits;
+}
 
 export interface FetchedData {
   resource: Resource;
@@ -69,23 +92,26 @@ export const getLimitChangeRequirements = (
 };
 
 export async function loadData(resource_uuid): Promise<FetchedData> {
-  const resource = await marketplaceResourcesRetrieve({
-    path: { uuid: resource_uuid },
-  }).then((r) => r.data);
-  const offering = await marketplaceResourcesOfferingRetrieve({
-    path: { uuid: resource_uuid },
-  }).then((response) => response.data);
+  const resource = (
+    await marketplaceResourcesRetrieve({
+      path: { uuid: resource_uuid },
+    })
+  ).data;
+  const offering = (
+    await marketplaceResourcesOfferingRetrieve({
+      path: { uuid: resource_uuid },
+    })
+  ).data;
 
   let plan: BasePublicPlan;
-  await marketplacePublicOfferingsPlansRetrieve({
-    path: { uuid: resource.offering_uuid, plan_uuid: resource.plan_uuid },
-  })
-    .then((response) => {
-      plan = response.data;
-    })
-    .catch(() => {
-      plan = offering.plans.find((p) => p.uuid === resource.plan_uuid);
+  try {
+    const response = await marketplacePublicOfferingsPlansRetrieve({
+      path: { uuid: resource.offering_uuid, plan_uuid: resource.plan_uuid },
     });
+    plan = response.data;
+  } catch {
+    plan = offering.plans.find((p) => p.uuid === resource.plan_uuid);
+  }
   if (!plan) {
     throw Error(`Plan with uuid of ${resource.plan_uuid} does not exist.`);
   }
@@ -96,10 +122,12 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
   let concealBillingInfo = false;
   if (resource.project_uuid) {
     try {
-      const project = await projectsRetrieve({
-        path: { uuid: resource.project_uuid },
-        query: { field: ['customer_display_billing_info_in_projects'] },
-      }).then((response) => response.data);
+      const project = (
+        await projectsRetrieve({
+          path: { uuid: resource.project_uuid },
+          query: { field: ['customer_display_billing_info_in_projects'] },
+        })
+      ).data;
       concealBillingInfo =
         project?.customer_display_billing_info_in_projects === false;
     } catch {

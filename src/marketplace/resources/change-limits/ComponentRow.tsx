@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field as FinalFormField } from 'react-final-form';
 import { useBoolean } from 'react-use';
-import { Field as FormField } from 'redux-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { composeValidators } from '@/core/validators';
@@ -17,7 +16,7 @@ import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { ComponentRowType } from './connector';
+import { ComponentRowType } from './utils';
 
 interface ComponentRowProps {
   shouldConcealPrices: boolean;
@@ -27,7 +26,6 @@ interface ComponentRowProps {
   periodsCountToShow: number;
   /** For nested fields */
   parentName?: string;
-  finalForm?: boolean;
 }
 
 const CellWrapper: FC<any> = (props) => (
@@ -56,12 +54,9 @@ export const ComponentRow: FC<ComponentRowProps> = ({
   periods,
   periodsCountToShow,
   parentName,
-  finalForm,
 }) => {
   const [toggled, setToggle] = useBoolean(false);
   const canExpand = component.prices.length > periodsCountToShow;
-
-  const FieldComponent: any = finalForm ? FinalFormField : FormField;
 
   return (
     <>
@@ -80,15 +75,11 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         </td>
         <td>{renderFieldOrDash(component.usage)}</td>
         <td>{renderFieldOrDash(component.limit)}</td>
-        <FieldComponent
+        <FinalFormField
           name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
           parse={parseIntField}
           format={formatIntField}
-          validate={
-            finalForm
-              ? composeValidators(...getResourceComponentValidator(limits))
-              : getResourceComponentValidator(limits)
-          }
+          validate={composeValidators(...getResourceComponentValidator(limits))}
           min={0}
           component={CellWrapper}
           offeringComponent={component}

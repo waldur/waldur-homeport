@@ -25,7 +25,9 @@ export const useApprovePermissionRequest = (
     confirmation: confirm
       ? {
           title: translate('Approve permission request by {name}', {
-            name: permissionRequest.created_by_full_name,
+            name:
+              permissionRequest.created_by_full_name ||
+              permissionRequest.created_by_username,
           }),
           body: null,
           options: {
@@ -65,7 +67,9 @@ export const useRejectPermissionRequest = (
     confirmation: confirm
       ? {
           title: translate('Decline permission request by {name}', {
-            name: permissionRequest.created_by_full_name,
+            name:
+              permissionRequest.created_by_full_name ||
+              permissionRequest.created_by_username,
           }),
           body: null,
           options: {

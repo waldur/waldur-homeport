@@ -7,7 +7,7 @@ import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 import { ENVIRON_FORM_ID } from './constants';
-import { EditVarsDialogOwnProps } from './EditVarsDialog';
+import { EditVarsDialogProps } from './EditVarsDialog';
 
 const EditVarsDialog = lazyComponent(() =>
   import('./EditVarsDialog').then((module) => ({
@@ -16,7 +16,7 @@ const EditVarsDialog = lazyComponent(() =>
 );
 
 export const EditVarsButton: FunctionComponent<
-  EditVarsDialogOwnProps['resolve']
+  EditVarsDialogProps['resolve']
 > = ({ offering, refetch }) => {
   const { openDialog } = useModal();
   const callback = () => {

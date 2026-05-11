@@ -1,23 +1,38 @@
 import { useRouter } from '@uirouter/react';
-import { Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { useMemo } from 'react';
+import { Form as BootstrapForm } from 'react-bootstrap';
+import { Form } from 'react-final-form';
 import { supportFeedbacksCreate } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton, TextField } from '@/form';
+import { FormContainerFinal, SubmitButton, TextField } from '@/form';
 import { translate } from '@/i18n';
-import { SUPPORT_FEEDBACK_FORM_ID } from '@/issues/feedback/constants';
 import { useTitle } from '@/navigation/title';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
-import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 import './SupportFeedback.scss';
 
-const SupportFeedbackContainer = (props) => {
+const EvaluationField = (props) => (
+  <RateStars
+    count={10}
+    size={24}
+    edit
+    isHalf={false}
+    value={props.input.value}
+    onChange={props.input.onChange}
+  />
+);
+
+export const SupportFeedback = () => {
   useTitle(translate('Feedback'));
   const { showErrorResponse, showSuccess } = useNotify();
   const router = useRouter();
+
+  const initialValues = useMemo(
+    () => ({
+      evaluation: parseInt(router.globals.params?.evaluation || '0', 10),
+    }),
+    [router.globals.params?.evaluation],
+  );
 
   const submitRequest = async (formData) => {
     try {
@@ -35,60 +50,36 @@ const SupportFeedbackContainer = (props) => {
   };
 
   return (
-    <form
-      onSubmit={props.handleSubmit(submitRequest)}
-      className="center-vertically"
-    >
-      <FormContainer submitting={props.submitting}>
-        <Field
-          name="evaluation"
-          label={translate('Evaluation')}
-          component={(fieldProps) => (
-            <RateStars
-              count={10}
-              size={24}
-              edit
-              isHalf={false}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
+    <Form
+      onSubmit={submitRequest}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit} className="center-vertically">
+          <FormContainerFinal submitting={submitting}>
+            <EvaluationField
+              name="evaluation"
+              label={translate('Evaluation')}
             />
-          )}
-        />
 
-        <TextField
-          name="comment"
-          label={translate('Comment')}
-          maxLength={150}
-          rows={2}
-        />
-
-        <Form.Group>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={translate('Submit')}
+            <TextField
+              name="comment"
+              label={translate('Comment')}
+              maxLength={150}
+              rows={2}
             />
-          </div>
-        </Form.Group>
-      </FormContainer>
-    </form>
+
+            <BootstrapForm.Group>
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={translate('Submit')}
+                />
+              </div>
+            </BootstrapForm.Group>
+          </FormContainerFinal>
+        </form>
+      )}
+    />
   );
 };
-
-const mapStateToProps = () => ({
-  initialValues: {
-    evaluation: parseInt(router.globals.params?.evaluation || 0, 10),
-  },
-});
-
-const connector = connect(mapStateToProps);
-
-const enhance = compose(
-  connector,
-  reduxForm({
-    form: SUPPORT_FEEDBACK_FORM_ID,
-  }),
-);
-
-export const SupportFeedback = enhance(SupportFeedbackContainer);

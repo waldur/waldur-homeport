@@ -190,8 +190,8 @@ export const states: StateDeclaration[] = [
     name: 'organization-users',
     url: 'users/',
     component: lazyComponent(() =>
-      import('./team/CustomerUsersTab').then((module) => ({
-        default: module.CustomerUsersTab,
+      import('./team/CustomerUsersList').then((module) => ({
+        default: module.CustomerUsersList,
       })),
     ),
     parent: 'organization-team',
