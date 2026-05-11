@@ -13,11 +13,10 @@ import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseO
 import { Field as SummaryField } from '@/resource/summary';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
+import { getMarketplaceResourceUuid } from '../actions/utils';
+
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';
-
-const getResourceUuid = (resource) =>
-  resource.marketplace_resource_uuid || resource.uuid;
 
 const LimitChangesSummary: FC<{
   resource: Resource;
@@ -97,7 +96,7 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
 
   const { showPurchaseOrder, isRequired } = getPurchaseOrderConfig(resource);
 
-  const newLimits = values[getResourceUuid(resource)]?.limits || {};
+  const newLimits = values[getMarketplaceResourceUuid(resource)]?.limits || {};
 
   return (
     <WizardModal {...props}>

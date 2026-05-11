@@ -10,6 +10,10 @@ export const validateStaffAction = (ctx: ActionContext) => {
   return translate('Only staff users are allowed to perform this action.');
 };
 
+export const getMarketplaceResourceUuid = (resource) =>
+  resource.marketplace_resource_uuid ||
+  (resource.offering_type ? resource.uuid : null);
+
 export const getResourceActionOptions = () =>
   [
     { value: ResourceAction.SWITCH_PLAN, label: translate('Change plan') },

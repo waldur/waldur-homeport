@@ -16,6 +16,7 @@ import { ActionItemType } from '@/resource/actions/types';
 import { useUser } from '@/workspace/hooks';
 
 import { ResourceAction } from './constants';
+import { getMarketplaceResourceUuid } from './utils';
 
 const EditResourceEndDateDialog = lazyComponent(() =>
   import('./EditResourceEndDateDialog').then((module) => ({
@@ -33,7 +34,7 @@ export const EditResourceEndDateAction: ActionItemType = ({
   const { openDialog } = useModal();
   const user = useUser();
 
-  const resourceUuid = _resource.marketplace_resource_uuid || _resource.uuid;
+  const resourceUuid = getMarketplaceResourceUuid(_resource);
 
   const { data: offering } = useQuery({
     queryKey: ['resource-offering', resourceUuid],

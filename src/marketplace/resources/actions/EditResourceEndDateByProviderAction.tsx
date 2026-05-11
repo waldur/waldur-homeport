@@ -15,6 +15,8 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
+import { getMarketplaceResourceUuid } from './utils';
+
 const EditResourceEndDateDialog = lazyComponent(() =>
   import('./EditResourceEndDateDialog').then((module) => ({
     default: module.EditResourceEndDateDialog,
@@ -33,8 +35,7 @@ export const EditResourceEndDateByProviderAction = ({
   const { openDialog } = useModal();
   const user = useUser();
 
-  const resourceUuid =
-    (resource as any).marketplace_resource_uuid || resource.uuid;
+  const resourceUuid = getMarketplaceResourceUuid(resource);
 
   const { data: offering } = useQuery({
     queryKey: ['resource-offering', resourceUuid],
