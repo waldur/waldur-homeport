@@ -7,7 +7,7 @@ import { User, usersList, UsersListData } from 'waldur-js-client';
 
 import { AITokenExpandableRow } from '@/administration/ai-assistant/AITokenExpandableRow';
 import { ENV } from '@/core/config';
-import { formatDateTime } from '@/core/dateUtils';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { Tip } from '@/core/Tooltip';
 import { formatPhoneNumber } from '@/core/utils';
@@ -340,6 +340,15 @@ export const UserList: FunctionComponent = () => {
       keys: ['date_joined'],
       id: 'date_joined',
       export: (row) => formatDateTime(row.date_joined),
+    },
+    {
+      title: translate('Birth date'),
+      render: ({ row }) =>
+        row.birth_date ? formatDate(row.birth_date) : DASH_ESCAPE_CODE,
+      keys: ['birth_date'],
+      id: 'birth_date',
+      export: (row) =>
+        row.birth_date ? formatDate(row.birth_date) : DASH_ESCAPE_CODE,
     },
     {
       title: translate('Agreement date'),
