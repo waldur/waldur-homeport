@@ -40,4 +40,46 @@ describe('Rancher application provision utils', () => {
       expect(parsed).toMatchSnapshot();
     });
   });
+
+  describe('parseVisibleQuestions with complex conditions', () => {
+    const questions: Question[] = [
+      {
+        variable: 'q1',
+        label: 'Q1',
+        type: 'string',
+        // @ts-ignore
+        showIf: { varA: 'valA', varB: true },
+      },
+      {
+        variable: 'q2',
+        label: 'Q2',
+        type: 'string',
+        // @ts-ignore
+        showIf: { varA: 'valB' },
+      },
+    ];
+
+    it('shows question if all conditions are met', () => {
+      const visible = parseVisibleQuestions(questions, {
+        varA: 'valA',
+        varB: true,
+      });
+      expect(visible.length).toBe(1);
+      expect(visible[0].variable).toBe('q1');
+    });
+
+    it('hides question if some conditions are not met', () => {
+      const visible = parseVisibleQuestions(questions, {
+        varA: 'valA',
+        varB: false,
+      });
+      expect(visible.length).toBe(0);
+    });
+
+    it('shows second question if its condition is met', () => {
+      const visible = parseVisibleQuestions(questions, { varA: 'valB' });
+      expect(visible.length).toBe(1);
+      expect(visible[0].variable).toBe('q2');
+    });
+  });
 });

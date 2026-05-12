@@ -1,23 +1,19 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useForm, useFormState } from 'react-final-form';
 import { useAsync } from 'react-use';
-import { formValueSelector, clearFields } from 'redux-form';
 import { rancherProjectsSecretsRetrieve } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { type RootState } from '@/store/reducers';
 
 import { FieldProps } from '../types';
 
-import { FORM_ID } from './constants';
 import { DecoratedField } from './DecoratedField';
 import { SelectControl } from './SelectControl';
 
 export const SecretField: React.FC<FieldProps> = (props) => {
-  const project = useSelector((state: RootState) =>
-    formValueSelector(FORM_ID)(state, 'project'),
-  );
+  const { values } = useFormState({ subscription: { values: true } });
+  const project = values?.project;
   const {
     loading,
     error,
@@ -32,13 +28,13 @@ export const SecretField: React.FC<FieldProps> = (props) => {
     [project],
   );
 
-  const dispatch = useDispatch();
+  const form = useForm();
 
   const { variable } = props;
 
   const resetSecret = React.useCallback(() => {
-    dispatch(clearFields(FORM_ID, false, false, variable));
-  }, [dispatch, variable]);
+    form.change(variable, undefined);
+  }, [form, variable]);
 
   React.useEffect(() => resetSecret, [project, resetSecret]);
 

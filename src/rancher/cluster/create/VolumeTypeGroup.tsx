@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
@@ -11,7 +11,7 @@ export const VolumeTypeGroup: FunctionComponent<any> = (props) =>
   props.volumeTypes.length > 0 ? (
     <FormGroup label={translate('Volume type')} required={true}>
       <Field
-        name="volume_type"
+        name={props.name || 'volume_type'}
         options={props.volumeTypes}
         component={SimpleSelectField}
         validate={required}

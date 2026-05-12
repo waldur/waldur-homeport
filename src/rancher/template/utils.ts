@@ -9,9 +9,9 @@ import {
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 
-import { Question, QuestionType } from '../types';
+import { QuestionType } from '../types';
 
-import { FormData } from './types';
+import { Question, FormData } from './types';
 
 export const groupQuestions = (
   questions: Question[],

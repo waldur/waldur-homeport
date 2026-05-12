@@ -27,6 +27,10 @@ export const VendorNameSelect = ({
   input,
   settingsUuid,
   defaultOption = undefined,
+}: {
+  input?;
+  settingsUuid: string | null;
+  defaultOption?: VendorChoice | string;
 }) => {
   const loadVendorChoices = useCallback(
     async (query: string, _prevOptions, { page }) => {
@@ -74,7 +78,13 @@ export const VendorNameSelect = ({
   );
 };
 
-export const PlanSelect = ({ input, offeringUuid }) => {
+export const PlanSelect = ({
+  input,
+  offeringUuid,
+}: {
+  input?;
+  offeringUuid: string | null;
+}) => {
   const [plans, setPlans] = useState<PlanOption[]>([]);
   const [loading, setLoading] = useState(false);
 

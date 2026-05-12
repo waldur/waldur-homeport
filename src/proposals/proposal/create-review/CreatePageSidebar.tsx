@@ -1,11 +1,12 @@
 import { FC } from 'react';
+import { proposalReviewsReject } from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
 import { FloatingSubmitButton } from '@/form/FloatingSubmitButton';
 import { TosNotification } from '@/form/TosNotification';
-import { translate } from '@/i18n';
+import { formatJsxTemplate, translate } from '@/i18n';
 import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
-import { useReviewActions } from '@/proposals/review/utils';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ProposalReview } from '@/proposals/types';
 import { isReviewInFinalState } from '@/proposals/utils';
 import { ActionButton } from '@/table/ActionButton';
@@ -32,7 +33,24 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
   isSaving,
   refetch,
 }) => {
-  const { reject, isRejecting } = useReviewActions(review, refetch);
+  const rejectMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => proposalReviewsReject({ path: { uuid: review.uuid } }),
+    successMessage: translate('Review has been rejected.'),
+    errorMessage: translate('Unable to reject review.'),
+    refetch,
+    confirmation: {
+      title: translate('Reject review'),
+      body: review
+        ? translate(
+            'Are you sure you want to reject the {name} proposal review?',
+            {
+              name: <b>{review.proposal_name}</b>,
+            },
+            formatJsxTemplate,
+          )
+        : undefined,
+    },
+  });
   return (
     <>
       <Panel title={translate('Progress')} cardBordered className="mb-5">
@@ -55,13 +73,13 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
           />
 
           <ActionButton
-            action={reject as any}
+            action={() => rejectMutation.mutate()}
             title={translate('Send back')}
             variant="danger"
             className="w-100 mt-2"
             disabled={submitting}
             disabledReason={translate('Please wait...')}
-            pending={isRejecting}
+            pending={rejectMutation.isPending}
           />
           <TosNotification className="text-center text-gray-500 mt-2" />
         </>

@@ -3,16 +3,16 @@ import { Row } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 
-import { Question } from '../types';
-
 import { GroupHeader } from './GroupHeader';
 import { QuestionItem } from './QuestionItem';
+import { Question } from './types';
 import { groupByN } from './utils';
 
 export const QuestionGroup: React.FC<{
   title: string;
   questions: Question[];
-}> = ({ title, questions }) => {
+  parentName?: string;
+}> = ({ title, questions, parentName }) => {
   const groups = React.useMemo(() => groupByN(2, questions), [questions]);
   return (
     <>
@@ -20,7 +20,11 @@ export const QuestionGroup: React.FC<{
       {groups.map((group, groupIndex) => (
         <Row key={groupIndex}>
           {group.map((question) => (
-            <QuestionItem key={question.variable} question={question} />
+            <QuestionItem
+              key={question.variable}
+              question={question}
+              parentName={parentName}
+            />
           ))}
         </Row>
       ))}

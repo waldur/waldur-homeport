@@ -20,6 +20,7 @@ export const EnumField: React.FC<EnumFieldProps> = ({
   const renderField = React.useCallback(
     (fieldProps) => (
       <SelectControl
+        id={fieldProps.id}
         options={options}
         input={fieldProps.input}
         getLabel={getLabel}

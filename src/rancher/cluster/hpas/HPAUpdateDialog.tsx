@@ -1,12 +1,11 @@
-import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffectOnce } from 'react-use';
-import { reduxForm } from 'redux-form';
+import { FC, useMemo } from 'react';
+import { Form } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import { RancherHpa, rancherHpasUpdate } from 'waldur-js-client';
 
 import { StringField, SelectField, NumberField, TextField } from '@/form';
 import { translate } from '@/i18n';
-import { ActionDialog } from '@/modal/ActionDialog';
+import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { updateEntity } from '@/table/actions';
 
@@ -15,11 +14,9 @@ import {
   getMetricNameOptions,
   getTargetTypeOptions,
   serializeMetrics,
-  metricSelector,
-  FORM_ID,
 } from './utils';
 
-interface OwnProps {
+interface HPAUpdateDialogProps {
   resolve: {
     hpa: RancherHpa;
   };
@@ -28,45 +25,41 @@ interface OwnProps {
 const useHPAUpdateDialog = (originalHPA: RancherHpa) => {
   const dispatch = useDispatch();
 
-  const updateHPAMutation = useManagedMutation<any, any, HPAUpdateFormData>({
-    mutationFn: (formData) =>
-      rancherHpasUpdate({
-        path: { uuid: originalHPA.uuid },
-        body: {
-          name: formData.name,
-          description: formData.description,
-          min_replicas: formData.min_replicas,
-          max_replicas: formData.max_replicas,
-          metrics: serializeMetrics(formData),
-        },
-      }),
-    successMessage: translate('Horizontal pod autoscaler has been updated.'),
-    errorMessage: translate('Unable to update horizontal pod autoscaler.'),
-    onSuccess: (response: any) => {
-      const hpa = response.data;
-      dispatch(updateEntity('rancher-hpas', hpa.uuid, hpa));
+  const { mutate, isPending } = useManagedMutation<any, any, HPAUpdateFormData>(
+    {
+      mutationFn: (formData) =>
+        rancherHpasUpdate({
+          path: { uuid: originalHPA.uuid },
+          body: {
+            name: formData.name,
+            description: formData.description,
+            min_replicas: formData.min_replicas,
+            max_replicas: formData.max_replicas,
+            metrics: serializeMetrics(formData),
+          },
+        }),
+      successMessage: translate('Horizontal pod autoscaler has been updated.'),
+      errorMessage: translate('Unable to update horizontal pod autoscaler.'),
+      onSuccess: (response: any) => {
+        const hpa = response.data;
+        dispatch(updateEntity('rancher-hpas', hpa.uuid, hpa));
+      },
     },
-  });
+  );
 
-  return {
-    submitting: updateHPAMutation.isPending,
-    callback: (formData) => updateHPAMutation.mutateAsync(formData),
-  };
+  return { mutate, isPending };
 };
 
-export const HPAUpdateDialog = reduxForm<HPAUpdateFormData, OwnProps>({
-  form: FORM_ID,
-})((props) => {
+export const HPAUpdateDialog: FC<HPAUpdateDialogProps> = (props) => {
   const { hpa } = props.resolve;
-  const { submitting, callback } = useHPAUpdateDialog(hpa);
+  const { mutate, isPending } = useHPAUpdateDialog(hpa);
 
   const metricNameOptions = useMemo<MetricOption[]>(getMetricNameOptions, []);
-
   const targetTypeOptions = useMemo(getTargetTypeOptions, []);
 
-  useEffectOnce(() => {
+  const initialValues = useMemo<Partial<HPAUpdateFormData>>(() => {
     const metric = hpa.metrics[0];
-    props.initialize({
+    return {
       name: hpa.name,
       description: hpa.description,
       min_replicas: hpa.min_replicas,
@@ -79,64 +72,81 @@ export const HPAUpdateDialog = reduxForm<HPAUpdateFormData, OwnProps>({
           option.value.toLocaleLowerCase() ===
           metric.target.type.toLocaleLowerCase(),
       ),
-      quantity: metric.target.utilization || metric.target.averageValue,
-    });
-  });
-
-  const metric: MetricOption = useSelector(metricSelector);
+      quantity:
+        metric.target.utilization ||
+        (metric.target.averageValue
+          ? parseFloat(metric.target.averageValue)
+          : undefined),
+    };
+  }, [hpa, metricNameOptions, targetTypeOptions]);
 
   return (
-    <ActionDialog
-      title={translate('Update horizontal pod autoscaler')}
-      submitLabel={translate('Submit')}
-      onSubmit={props.handleSubmit(callback)}
-      submitting={submitting}
-    >
-      <StringField name="name" label={translate('Name')} required={true} />
-      <TextField
-        name="description"
-        label={translate('Description')}
-        required={false}
-      />
+    <Form<HPAUpdateFormData>
+      onSubmit={mutate}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, values, invalid }) => {
+        const metric = values.metric_name;
 
-      <NumberField
-        name="min_replicas"
-        label={translate('Min replicas')}
-        required={true}
-        min={1}
-        max={10}
-      />
+        return (
+          <ActionDialogFinal
+            title={translate('Update horizontal pod autoscaler')}
+            submitLabel={translate('Submit')}
+            onSubmit={handleSubmit}
+            submitting={submitting || isPending}
+            invalid={invalid}
+          >
+            <StringField
+              name="name"
+              label={translate('Name')}
+              required={true}
+            />
+            <TextField
+              name="description"
+              label={translate('Description')}
+              required={false}
+            />
 
-      <NumberField
-        name="max_replicas"
-        label={translate('Max replicas')}
-        required={true}
-        min={1}
-        max={10}
-      />
+            <NumberField
+              name="min_replicas"
+              label={translate('Min replicas')}
+              required={true}
+              min={1}
+              max={10}
+            />
 
-      <SelectField
-        name="metric_name"
-        label={translate('Metric name')}
-        required={true}
-        options={metricNameOptions}
-        isClearable={true}
-      />
+            <NumberField
+              name="max_replicas"
+              label={translate('Max replicas')}
+              required={true}
+              min={1}
+              max={10}
+            />
 
-      <SelectField
-        name="target_type"
-        label={translate('Target type')}
-        required={true}
-        options={targetTypeOptions}
-        isClearable={true}
-      />
+            <SelectField
+              name="metric_name"
+              label={translate('Metric name')}
+              required={true}
+              options={metricNameOptions}
+              isClearable={true}
+            />
 
-      <NumberField
-        name="quantity"
-        label={translate('Quantity')}
-        required={true}
-        unit={metric ? metric.unitDisplay : undefined}
-      />
-    </ActionDialog>
+            <SelectField
+              name="target_type"
+              label={translate('Target type')}
+              required={true}
+              options={targetTypeOptions}
+              isClearable={true}
+            />
+
+            <NumberField
+              name="quantity"
+              label={translate('Quantity')}
+              required={true}
+              unit={metric ? metric.unitDisplay : undefined}
+            />
+          </ActionDialogFinal>
+        );
+      }}
+    />
   );
-});
+};

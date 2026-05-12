@@ -1,7 +1,8 @@
-import { FC, useEffect, useState } from 'react';
-import { Form, Table } from 'react-bootstrap';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useEffect, useRef } from 'react';
+import { Table } from 'react-bootstrap';
+import { useForm, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
 import {
   invoiceItemsCustomerCostsForPeriodRetrieve,
   invoiceItemsProjectCostsForPeriodRetrieve,
@@ -9,67 +10,51 @@ import {
 
 import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { required } from '@/core/validators';
+import { composeValidators, required } from '@/core/validators';
 import {
-  FormContainer,
-  FieldError,
+  FormContainerFinal,
   NumberField,
   SelectField,
   StringField,
 } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { Select } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
   projectAutocomplete,
 } from '@/marketplace/common/autocompletes';
-import { Option } from '@/marketplace/common/registry';
 import { ProjectCostField } from '@/project/ProjectCostField';
 import { getCustomer } from '@/workspace/selectors';
 
-import { CostPolicyFormData, CostPolicyType } from './types';
+import { CostPolicyType } from './types';
 import {
   getCostPolicyActionOptions,
   policyPeriodOptions,
   validateEmails,
 } from './utils';
 
-interface CostPolicyFormProps extends Partial<
-  InjectedFormProps<CostPolicyFormData>
-> {
+interface CostPolicyFormProps {
   type: CostPolicyType;
   isEdit: boolean;
 }
 
 export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
   const currentOrganization = useSelector(getCustomer);
+  const { values } = useFormState({ subscription: { values: true } });
 
-  const [selectedEntities, setSelectedEntities] = useState<any[]>(
-    props.isEdit && Array.isArray(props.initialValues?.scope)
-      ? props.initialValues.scope
-      : [],
-  );
+  const selectedEntities = values.scope || [];
+  const selectedPeriod = values.period;
+  const selectedAction = values.actions;
 
-  const [selectedPeriod, setSelectedPeriod] = useState<number | null>(
-    props.isEdit && typeof props.initialValues?.period === 'number'
-      ? props.initialValues.period
-      : null,
-  );
-
-  const [selectedAction, setSelectedAction] = useState<Option | null>(
-    typeof props.initialValues?.actions === 'string'
-      ? {
-          value: props.initialValues.actions,
-          label: props.initialValues.actions,
-        }
-      : props.initialValues?.actions || null,
-  );
-
-  const [costsData, setCostsData] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (selectedEntities.length && selectedPeriod) {
-      Promise.all(
+  const { data: costsData = [] } = useQuery({
+    queryKey: [
+      'cost-policies-costs',
+      props.type,
+      selectedEntities.map((e) => e.uuid),
+      selectedPeriod,
+    ],
+    queryFn: async () => {
+      const costs = await Promise.all(
         selectedEntities.map((entity) => {
           if (props.type === 'project') {
             return invoiceItemsProjectCostsForPeriodRetrieve({
@@ -87,42 +72,31 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
             }).then((r) => r.data);
           }
         }),
-      ).then((costs) => {
-        setCostsData(
-          costs.map((cost, index) => {
-            const previousMonths = cost.total_price
-              ? parseFloat(cost.total_price)
-              : 0;
-            const currentMonth = parseFloat(
-              selectedEntities[index].billing_price_estimate.current || 0,
-            );
-            const total = parseFloat(
-              (previousMonths + currentMonth).toFixed(2),
-            );
-            return {
-              name:
-                props.type === 'project'
-                  ? selectedEntities[index].name
-                  : selectedEntities[index].name,
-              previous_months: previousMonths,
-              current_month: currentMonth,
-              total,
-            };
-          }),
+      );
+      return costs.map((cost, index) => {
+        const previousMonths = cost.total_price
+          ? parseFloat(cost.total_price)
+          : 0;
+        const currentMonth = parseFloat(
+          selectedEntities[index].billing_price_estimate?.current || 0,
         );
+        const total = parseFloat((previousMonths + currentMonth).toFixed(2));
+        return {
+          name: selectedEntities[index].name,
+          previous_months: previousMonths,
+          current_month: currentMonth,
+          total,
+        };
       });
-    }
-  }, [selectedEntities, selectedPeriod, props.type]);
-
-  const handleActionChange = (value) => {
-    setSelectedAction(value);
-    props.change('options', {});
-  };
+    },
+    enabled: selectedEntities.length > 0 && !!selectedPeriod,
+  });
 
   return (
-    <FormContainer submitting={props.submitting} className="size-lg">
+    <FormContainerFinal className="size-lg">
+      <FormWatcher />
       {props.type === 'project' ? (
-        <AsyncSelectField
+        <Select
           name="scope"
           label={translate('Select project(s)')}
           validate={required}
@@ -158,12 +132,9 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           }}
           getOptionValue={(option) => option.url}
           noOptionsMessage={() => translate('No projects')}
-          onChange={(value) => {
-            setSelectedEntities(value);
-          }}
         />
       ) : (
-        <AsyncSelectField
+        <Select
           name="scope"
           label={translate('Select organization(s)')}
           validate={required}
@@ -192,9 +163,6 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
             return `${option.name}${creditInfo}`;
           }}
           noOptionsMessage={() => translate('No organizations')}
-          onChange={(value) => {
-            setSelectedEntities(value);
-          }}
         />
       )}
       <SelectField
@@ -205,7 +173,6 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         options={Object.values(policyPeriodOptions)}
         getOptionValue={(option) => option.value}
         getOptionLabel={(option) => option.label}
-        onChange={(value) => setSelectedPeriod(value)}
         simpleValue
       />
 
@@ -255,7 +222,6 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         options={getCostPolicyActionOptions(props.type)}
         getOptionValue={(option) => option.value}
         getOptionLabel={(option) => option.label}
-        onChange={(value) => handleActionChange(value)}
       />
 
       {selectedAction?.value === 'notify_external_user' && (
@@ -265,12 +231,26 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           placeholder={translate(
             'Enter email addresses separated by commas (e.g., user1@example.com, user2@example.com)',
           )}
-          validate={[required, validateEmails]}
+          validate={composeValidators(required, validateEmails)}
         />
       )}
-      <Form.Group>
-        <FieldError error={props.error} />
-      </Form.Group>
-    </FormContainer>
+    </FormContainerFinal>
   );
+};
+
+const FormWatcher = () => {
+  const { values } = useFormState({ subscription: { values: true } });
+  const { change } = useForm();
+  const prevActionRef = useRef(values.actions?.value);
+
+  useEffect(() => {
+    if (values.actions?.value !== prevActionRef.current) {
+      if (prevActionRef.current !== undefined) {
+        change('options', {});
+      }
+      prevActionRef.current = values.actions?.value;
+    }
+  }, [values.actions, change]);
+
+  return null;
 };

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { Select } from '@/form/themed-select';
@@ -12,6 +12,7 @@ const SelectFlavorField: FC<any> = (props) => (
     onChange={props.input.onChange}
     options={props.options}
     isClearable={true}
+    instanceId="flavor"
   />
 );
 
@@ -27,7 +28,6 @@ export const NodeFlavorGroup: FC<NodeFlavorGroupProps> = (props) => {
         component={SelectFlavorField}
         options={props.options}
         validate={required}
-        isClearable={true}
       />
     </FormGroup>
   );

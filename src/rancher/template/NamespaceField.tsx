@@ -1,12 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormControl } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { Field, formValueSelector } from 'redux-form';
+import { Field, useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { FieldError } from '@/form';
 import { translate } from '@/i18n';
-import { type RootState } from '@/store/reducers';
 
 import { Namespace } from '../types';
 
@@ -35,15 +33,15 @@ interface NamespaceFieldProps {
 }
 
 export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
-  const useNew = useSelector((state: RootState) =>
-    formValueSelector('RancherTemplateQuestions')(state, 'useNewNamespace'),
-  );
+  const { values } = useFormState({ subscription: { values: true } });
+  const useNew = values?.useNewNamespace;
 
   const renderControl = React.useCallback(
     (fieldProps) =>
       useNew ? (
         <>
           <FormControl
+            id={fieldProps.id}
             {...fieldProps.input}
             placeholder={translate('e.g. MyApp')}
           />
@@ -54,6 +52,7 @@ export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
         </>
       ) : (
         <SelectControl
+          id={fieldProps.id}
           options={options}
           input={fieldProps.input}
           getLabel={({ name }) => name}
