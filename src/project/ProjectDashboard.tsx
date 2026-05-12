@@ -30,6 +30,7 @@ import { useUser } from '@/workspace/hooks';
 import { getProject } from '@/workspace/selectors';
 
 import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
+import { ExperimentalPolicyWatchSection } from './policy-watch/ExperimentalPolicyWatchSection';
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
 import { ProjectDashboardCredit } from './ProjectDashboardCredit';
 import { getProjectTeamChart } from './utils';
@@ -300,6 +301,9 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
       </Row>
       {isExperimentalUiComponentsVisible() && (
         <ExperimentalUsageSection project={project} />
+      )}
+      {isExperimentalUiComponentsVisible() && (
+        <ExperimentalPolicyWatchSection project={project} />
       )}
     </>
   );
