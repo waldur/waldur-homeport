@@ -13,6 +13,7 @@ import { MultiPullAction } from './MultiPullAction';
 import { MultiRenewAllocationsAction } from './MultiRenewAllocationsAction';
 import { MultiRestartAction } from './MultiRestartAction';
 import { MultiSetDownscaledAction } from './MultiSetDownscaledAction';
+import { MultiSetEndDateAction } from './MultiSetEndDateAction';
 import { MultiSetErredAction } from './MultiSetErredAction';
 import { MultiSetPausedAction } from './MultiSetPausedAction';
 import { MultiStartAction } from './MultiStartAction';
@@ -30,6 +31,7 @@ export const ResourceMultiSelectAction = ({
   return (
     <ActionDropdownButton variant="primary" title={translate('All actions')}>
       <MultiRenewAllocationsAction rows={rows} refetch={refetch} />
+      <MultiSetEndDateAction rows={rows} refetch={refetch} />
       <MultiEditOptionsAction rows={rows} refetch={refetch} />
       <MultiStopAction rows={rows} refetch={refetch} />
       <MultiStartAction rows={rows} refetch={refetch} />
