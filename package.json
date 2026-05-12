@@ -97,7 +97,7 @@
     "redux-thunk": "^2.4.2",
     "reselect": "^3.0.1",
     "text-security": "^3.2.1",
-    "waldur-js-client": "^8.0.9-dev.8",
+    "waldur-js-client": "^8.0.9-dev.10",
     "yjs": "^13.5.22"
   },
   "devDependencies": {
