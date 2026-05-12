@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { formatPhoneNumber } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
@@ -74,6 +74,17 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
       <FormTable.Item
         label={translate('Registration method')}
         value={<FieldWithCopy value={props.user.identity_provider_label} />}
+      />
+
+      <FormTable.Item
+        label={translate('Birth date')}
+        value={
+          <FieldWithCopy
+            value={
+              props.user.birth_date ? formatDate(props.user.birth_date) : null
+            }
+          />
+        }
       />
 
       <FormTable.Item
