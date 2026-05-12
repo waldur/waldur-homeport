@@ -71,6 +71,16 @@ export const PersonalAccessTokensList: FunctionComponent = () => {
       render: ({ row }) => <TokenStatus row={row} />,
     },
     {
+      title: translate('Scope'),
+      render: ({ row }) => {
+        const n = row.allowed_scopes?.length ?? 0;
+        if (n === 0) return translate('Unrestricted');
+        return n === 1
+          ? translate('1 binding')
+          : translate('{n} bindings', { n });
+      },
+    },
+    {
       title: translate('Expires'),
       render: ({ row }) => formatDate(row.expires_at),
       export: 'expires_at',
