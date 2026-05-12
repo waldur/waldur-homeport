@@ -1211,7 +1211,7 @@ export const SettingsDescription = [
     ],
   },
   {
-    description: translate('SCIM settings'),
+    description: translate('SCIM Entitlements (outbound push)'),
     items: [
       {
         key: 'SCIM_MEMBERSHIP_SYNC_ENABLED',
@@ -1235,6 +1235,48 @@ export const SettingsDescription = [
         key: 'SCIM_URN_NAMESPACE',
         description: translate('URN namespace for SCIM entitlements.'),
         default: '',
+        type: 'string',
+      },
+    ],
+  },
+  {
+    description: translate('SCIM Identity Provider'),
+    items: [
+      {
+        key: 'SCIM_INBOUND_ENABLED',
+        description: translate('Enable inbound SCIM 2.0 service provider at /scim/v2/. Allows external identity providers (Okta, Entra ID, Keycloak) to provision users and groups.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'SCIM_INBOUND_SOURCE_NAME',
+        description: translate('Source label written to User.attribute_sources for inbound SCIM writes. Used by the multi-source attribute merge to track ownership.'),
+        default: 'scim:default',
+        type: 'string',
+      },
+      {
+        key: 'SCIM_INBOUND_ALLOWED_ATTRIBUTES',
+        description: translate('User attributes settable via inbound SCIM.'),
+        default: ['first_name', 'last_name', 'email', 'organization', 'affiliations'],
+        type: 'multiple_choice_field',
+        options: [{ value: 'username', label: 'Username' }, { value: 'registration_method', label: 'Registration method' }, { value: 'first_name', label: 'First name' }, { value: 'last_name', label: 'Last name' }, { value: 'full_name', label: 'Full name' }, { value: 'email', label: 'Email' }, { value: 'phone_number', label: 'Phone number' }, { value: 'organization', label: 'Organization' }, { value: 'job_title', label: 'Job title' }, { value: 'affiliations', label: 'Affiliations' }, { value: 'gender', label: 'Gender' }, { value: 'personal_title', label: 'Personal title' }, { value: 'birth_date', label: 'Birth date' }, { value: 'place_of_birth', label: 'Place of birth' }, { value: 'country_of_residence', label: 'Country of residence' }, { value: 'nationality', label: 'Nationality' }, { value: 'nationalities', label: 'Nationalities' }, { value: 'organization_country', label: 'Organization country' }, { value: 'organization_type', label: 'Organization type' }, { value: 'organization_registry_code', label: 'Organization registry code' }, { value: 'eduperson_assurance', label: 'Eduperson assurance' }, { value: 'civil_number', label: 'Civil number' }, { value: 'identity_source', label: 'Identity source' }],
+      },
+      {
+        key: 'SCIM_PULL_API_URL',
+        description: translate('Base URL for outbound SCIM pull (fetching user attributes from an external IdP).'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'SCIM_PULL_API_KEY',
+        description: translate('Bearer token for outbound SCIM pull.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'SCIM_PULL_SOURCE_NAME',
+        description: translate('Source label written to User.attribute_sources for attributes pulled from a remote SCIM directory.'),
+        default: 'scim:pull',
         type: 'string',
       },
     ],
