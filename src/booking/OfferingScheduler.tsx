@@ -8,9 +8,10 @@ import {
   useState,
 } from 'react';
 import { Card } from 'react-bootstrap';
+import { Field } from 'react-final-form';
+import { type FieldArrayRenderProps } from 'react-final-form-arrays';
 import { type DateTimePickerProps } from 'react-flatpickr';
 import { usePrevious } from 'react-use';
-import { Field, WrappedFieldArrayProps } from 'redux-form';
 
 import { CustomRangeDatePicker } from '@/booking/deploy/CustomRangeDatePicker';
 import { BookingProps } from '@/booking/types';
@@ -39,7 +40,7 @@ const INITIAL_CONFIG = {
   },
 };
 
-type OfferingSchedulerProps = WrappedFieldArrayProps<BookingProps>;
+type OfferingSchedulerProps = FieldArrayRenderProps<BookingProps, any>;
 
 const getDisabledRangeOfDates = (weekends, daysOfWeek) => {
   const disabledRanges: DateTimePickerProps['options']['disable'] = [];
@@ -54,9 +55,9 @@ const getDisabledRangeOfDates = (weekends, daysOfWeek) => {
   return disabledRanges;
 };
 
-export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
-  props,
-) => {
+export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
+  fields,
+}) => {
   const [weekends, setWeekends] = useState<boolean>(INITIAL_CONFIG.weekends);
   const [slotDuration, setSlotDuration] = useState<any>(
     INITIAL_CONFIG.slotDuration,
@@ -94,8 +95,8 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
   }, [updateWeekends, weekends]);
 
   const addRow = useCallback(() => {
-    props.fields.push({} as any);
-  }, [props.fields]);
+    fields.push({} as any);
+  }, [fields]);
 
   const durationSlot = useMemo(
     () =>
@@ -104,10 +105,10 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
   );
 
   useEffect(() => {
-    if (props.fields?.length === 0) {
+    if (fields?.length === 0) {
       addRow();
     }
-  }, [addRow]);
+  }, [addRow, fields]);
 
   const parseField = useCallback(
     (v: [Date, Date]) => {
@@ -163,33 +164,32 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
         </Card.Body>
       </Card>
       <>
-        {props.fields.map((schedule, index) => (
+        {fields.map((schedule, index) => (
           <div key={index} className="mb-6">
             <div className="d-flex justify-content-between align-items-center mb-2">
               <label>
                 <b>{translate('Period {i}', { i: index + 1 })}:</b>&nbsp;
-                {props.fields.get(index).start &&
-                  props.fields.get(index).end && (
-                    <span>
-                      {parseDate(props.fields.get(index).start).toFormat(
-                        'dd LLLL yyyy HH:mm',
-                      )}
-                      &nbsp;{translate('To')}&nbsp;
-                      {parseDate(props.fields.get(index).end).toFormat(
-                        'dd LLLL yyyy HH:mm',
-                      )}
-                    </span>
-                  )}
+                {fields.value[index]?.start && fields.value[index]?.end && (
+                  <span>
+                    {parseDate(fields.value[index].start).toFormat(
+                      'dd LLLL yyyy HH:mm',
+                    )}
+                    &nbsp;{translate('To')}&nbsp;
+                    {parseDate(fields.value[index].end).toFormat(
+                      'dd LLLL yyyy HH:mm',
+                    )}
+                  </span>
+                )}
               </label>
               <ActionButton
                 variant="text-danger"
-                action={() => props.fields.remove(index)}
+                action={() => fields.remove(index)}
                 iconNode={<XIcon weight="bold" />}
               />
             </div>
             <Field
               name={schedule}
-              component={CustomRangeDatePicker}
+              component={CustomRangeDatePicker as any}
               options={{
                 minDate: 'today',
                 disable: getDisabledRangeOfDates(weekends, daysOfWeek),
@@ -197,7 +197,7 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
               }}
               parse={parseField}
               format={(schedule) =>
-                schedule.start ? [schedule.start, schedule.end] : []
+                schedule['start'] ? [schedule['start'], schedule['end']] : []
               }
             />
           </div>

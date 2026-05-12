@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
@@ -8,15 +8,17 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { IntegerUnitField } from './IntegerUnitField';
 
-export const VolumeSizeGroup: FunctionComponent<{}> = () => (
+export const VolumeSizeGroup: FunctionComponent<{ name?: string }> = ({
+  name = 'size',
+}) => (
   <FormGroup label={translate('Volume size')} required={true}>
     <Field
-      name="size"
+      name={name}
       units={translate('GB')}
       component={IntegerUnitField}
       parse={parseIntField}
       format={formatIntField}
-      validate={[required]}
+      validate={required}
     />
   </FormGroup>
 );

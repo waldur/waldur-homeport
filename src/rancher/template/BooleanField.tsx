@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Form } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { FieldProps } from '../types';
 
@@ -22,6 +22,7 @@ export const BooleanField: React.FC<FieldProps> = (props) => (
     <Form.Group>
       <Field
         name={props.variable}
+        type="checkbox"
         component={renderControl}
         label={props.label}
         required={props.required}

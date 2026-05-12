@@ -1,14 +1,15 @@
-import { connect } from 'react-redux';
-import { FieldArray, reduxForm } from 'redux-form';
+import arrayMutators from 'final-form-arrays';
+import { useMemo } from 'react';
+import { Form } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { pick } from '@/core/utils';
-import { FormContainer, FormFooter } from '@/form';
+import { FormContainerFinal, FormFooter } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { EDIT_SCHEDULES_FORM_ID } from './constants';
 import { OfferingScheduler } from './OfferingScheduler';
 
 const formatSchedules = (schedules: any[]) =>
@@ -16,59 +17,65 @@ const formatSchedules = (schedules: any[]) =>
     .filter((item) => Object.keys(item).length > 0)
     .map(pick(['start', 'end', 'title', 'allDay', 'extendedProps', 'id']));
 
-export const EditSchedulesDialog = connect(
-  (_, ownProps: { resolve: { offering } }) => ({
-    initialValues: {
-      schedules: ownProps.resolve.offering.attributes?.schedules.map((sch) => {
-        // Convert string dates to JS Dates
-        if (typeof sch.start === 'string') sch.start = new Date(sch.start);
-        if (typeof sch.end === 'string') sch.end = new Date(sch.end);
-        return sch;
-      }),
-    },
-  }),
-)(
-  reduxForm<{}, { resolve: { offering; refetch } }>({
-    form: EDIT_SCHEDULES_FORM_ID,
-  })((props) => {
-    const updateMutation = useManagedMutation<any, any, any>({
-      mutationFn: (formData) =>
-        marketplaceProviderOfferingsUpdateAttributes({
-          path: { uuid: props.resolve.offering.uuid },
-          body: {
-            ...props.resolve.offering.attributes,
-            schedules: formatSchedules(formData.schedules),
-          },
-        }),
-      successMessage: translate('Schedules have been updated successfully.'),
-      errorMessage: translate('Unable to update schedules.'),
-      refetch: props.resolve.refetch,
-    });
+export const EditSchedulesDialog = (props: {
+  resolve: { offering; refetch };
+}) => {
+  const initialValues = useMemo(
+    () => ({
+      schedules:
+        props.resolve.offering.attributes?.schedules?.map((sch) => {
+          // Convert string dates to JS Dates
+          const newSch = { ...sch };
+          if (typeof newSch.start === 'string')
+            newSch.start = new Date(newSch.start);
+          if (typeof newSch.end === 'string') newSch.end = new Date(newSch.end);
+          return newSch;
+        }) || [],
+    }),
+    [props.resolve.offering.attributes?.schedules],
+  );
 
-    return (
-      <form
-        onSubmit={props.handleSubmit((values: any) =>
-          updateMutation.mutateAsync(values),
-        )}
-      >
-        <ModalDialog
-          title={translate('Update schedule')}
-          footer={
-            <FormFooter
-              submitting={props.submitting}
-              submitLabel={translate('Update')}
-            />
-          }
-        >
-          <FormContainer {...props} className="size-xl">
-            <FieldArray
-              name="schedules"
-              rerenderOnEveryChange
-              component={OfferingScheduler}
-            />
-          </FormContainer>
-        </ModalDialog>
-      </form>
-    );
-  }),
-);
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsUpdateAttributes({
+        path: { uuid: props.resolve.offering.uuid },
+        body: {
+          ...props.resolve.offering.attributes,
+          schedules: formatSchedules(formData.schedules),
+        },
+      }),
+    successMessage: translate('Schedules have been updated successfully.'),
+    errorMessage: translate('Unable to update schedules.'),
+    refetch: props.resolve.refetch,
+  });
+
+  return (
+    <Form
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
+      initialValues={initialValues}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Update schedule')}
+            footer={
+              <FormFooter
+                submitting={submitting}
+                submitLabel={translate('Update')}
+                invalid={invalid}
+              />
+            }
+          >
+            <FormContainerFinal submitting={submitting} className="size-xl">
+              <FieldArray
+                name="schedules"
+                rerenderOnEveryChange
+                component={OfferingScheduler}
+              />
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

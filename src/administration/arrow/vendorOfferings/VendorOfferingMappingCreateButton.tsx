@@ -5,9 +5,9 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
-const VendorOfferingMappingCreateDialog = lazyComponent(() =>
-  import('./VendorOfferingMappingCreateDialog').then((module) => ({
-    default: module.VendorOfferingMappingCreateDialog,
+const VendorOfferingMappingDialog = lazyComponent(() =>
+  import('./VendorOfferingMappingDialog').then((module) => ({
+    default: module.VendorOfferingMappingDialog,
   })),
 );
 
@@ -26,7 +26,7 @@ export const VendorOfferingMappingCreateButton = ({
     <ActionButton
       title={translate('Add mapping')}
       action={() =>
-        openDialog(VendorOfferingMappingCreateDialog, {
+        openDialog(VendorOfferingMappingDialog, {
           resolve: { settings, refetch },
         })
       }

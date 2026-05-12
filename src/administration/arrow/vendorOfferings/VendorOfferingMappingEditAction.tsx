@@ -6,9 +6,9 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
-const VendorOfferingMappingEditDialog = lazyComponent(() =>
-  import('./VendorOfferingMappingEditDialog').then((module) => ({
-    default: module.VendorOfferingMappingEditDialogWrapper,
+const VendorOfferingMappingDialog = lazyComponent(() =>
+  import('./VendorOfferingMappingDialog').then((module) => ({
+    default: module.VendorOfferingMappingDialog,
   })),
 );
 
@@ -22,7 +22,7 @@ export const VendorOfferingMappingEditAction = ({
   const { openDialog } = useModal();
 
   const handleEdit = () => {
-    openDialog(VendorOfferingMappingEditDialog, {
+    openDialog(VendorOfferingMappingDialog, {
       resolve: { mapping: row, refetch },
     });
   };

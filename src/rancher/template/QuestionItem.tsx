@@ -1,12 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { change } from 'redux-form';
+import { useForm } from 'react-final-form';
 
-import { Question } from '../types';
-
-import { FORM_ID } from './constants';
 import { FIELD_MAP } from './fields';
 import { StringField } from './StringField';
+import { Question } from './types';
 
 const parseDefaultValue = (question: Question) => {
   if (question.type === 'boolean') {
@@ -18,17 +15,28 @@ const parseDefaultValue = (question: Question) => {
 
 export const QuestionItem: React.FC<{
   question: Question;
-}> = ({ question }) => {
-  const dispatch = useDispatch();
+  parentName?: string;
+}> = ({ question, parentName }) => {
+  const form = useForm();
 
   const setInitialValue = React.useCallback(() => {
     const value = parseDefaultValue(question);
     if (value) {
-      dispatch(change(FORM_ID, `answers.${question.variable}`, value));
+      const name = parentName
+        ? `${parentName}.${question.variable}`
+        : question.variable;
+      form.change(name, value);
     }
-  }, [question, dispatch]);
+  }, [question, form, parentName]);
 
   React.useEffect(setInitialValue, [question]);
 
-  return React.createElement(FIELD_MAP[question.type] || StringField, question);
+  const variable = parentName
+    ? `${parentName}.${question.variable}`
+    : question.variable;
+
+  return React.createElement(FIELD_MAP[question.type] || StringField, {
+    ...question,
+    variable,
+  });
 };

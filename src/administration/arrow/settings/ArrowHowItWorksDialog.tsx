@@ -582,7 +582,8 @@ export const ArrowHowItWorksDialog: FC = () => {
     () => getReconciliationDiagram(priceSource),
     [priceSource],
   );
-  const invoiceItemPrefix = settings.invoice_item_prefix || 'Arrow consumption';
+  const invoiceItemPrefix =
+    settings?.invoice_item_prefix || 'Arrow consumption';
   const invoiceItemTypes = useMemo(
     () => getInvoiceItemTypes(priceSource, invoiceItemPrefix),
     [priceSource, invoiceItemPrefix],

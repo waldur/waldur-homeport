@@ -1,4 +1,4 @@
-import { PolicyPeriod } from '@/customer/cost-policies/types';
+import { PolicyPeriodEnum } from 'waldur-js-client';
 
 export interface OfferingCostPolicyFormData {
   scope: string;
@@ -6,7 +6,7 @@ export interface OfferingCostPolicyFormData {
   organization_groups: string[];
   limit_cost: number;
   project_credit?: number;
-  period: PolicyPeriod;
+  period: PolicyPeriodEnum;
 }
 
 export interface OfferingUsagePolicyFormData {
@@ -14,7 +14,7 @@ export interface OfferingUsagePolicyFormData {
   actions: string;
   organization_groups: string[];
   component_limits_set: Array<{ type: string; limit: number }>;
-  period: PolicyPeriod;
+  period: PolicyPeriodEnum;
 }
 
 export type OfferingPolicyType = 'cost' | 'usage';

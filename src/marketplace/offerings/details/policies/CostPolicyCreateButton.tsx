@@ -1,10 +1,12 @@
 import { FORM_ERROR } from 'final-form';
 import { useCallback } from 'react';
-import { marketplaceOfferingEstimatedCostPoliciesCreate } from 'waldur-js-client';
+import {
+  marketplaceOfferingEstimatedCostPoliciesCreate,
+  PolicyPeriodEnum,
+} from 'waldur-js-client';
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
-import { PolicyPeriod } from '@/customer/cost-policies/types';
 import { policyPeriodOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
@@ -53,7 +55,7 @@ export const CostPolicyCreateButton = ({
         },
         initialValues: {
           scope: offering.url,
-          period: policyPeriodOptions.oneMonth.value as PolicyPeriod,
+          period: policyPeriodOptions.oneMonth.value as PolicyPeriodEnum,
         },
         type: 'cost',
         offering,

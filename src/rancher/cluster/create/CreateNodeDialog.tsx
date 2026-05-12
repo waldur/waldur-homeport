@@ -1,5 +1,7 @@
+import arrayMutators from 'final-form-arrays';
+import { FC, useMemo } from 'react';
+import { Form } from 'react-final-form';
 import { useAsync } from 'react-use';
-import { reduxForm } from 'redux-form';
 import { RancherCluster, rancherNodesCreate } from 'waldur-js-client';
 import { OpenStackFlavor } from 'waldur-js-client';
 
@@ -18,15 +20,14 @@ import { loadNodeCreateData } from './utils';
 
 interface OwnProps {
   resolve: { resource: RancherCluster };
-  flavors: any[];
-  subnets: any[];
 }
 
 interface FormData {
+  role: string;
   flavor: OpenStackFlavor;
   system_volume_size: number;
   system_volume_type: string;
-  roles: string[];
+  data_volumes: any[];
   attributes: {
     subnet: string;
   };
@@ -40,16 +41,14 @@ const serializeDataVolume = ({ size, ...volumeRest }) => ({
 const serializeNode = (cluster: RancherCluster, formData) => ({
   cluster: cluster.url,
   role: formData.role,
-  subnet: formData.attributes.subnet,
-  flavor: formData.flavor.url,
+  subnet: formData.attributes?.subnet,
+  flavor: formData.flavor?.url,
   system_volume_size: formData.system_volume_size * 1024,
   system_volume_type: formData.system_volume_type,
   data_volumes: (formData.data_volumes || []).map(serializeDataVolume),
 });
 
-export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
-  form: 'RancherNodeCreate',
-})((props) => {
+export const CreateNodeDialog: FC<OwnProps> = (props) => {
   const cluster = props.resolve.resource;
   const state = useAsync(() => loadNodeCreateData(cluster), [cluster]);
 
@@ -60,42 +59,54 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
     errorMessage: translate('Unable to create node.'),
   });
 
-  return (
-    <form
-      onSubmit={props.handleSubmit((values) =>
-        createNodeMutation.mutateAsync(values),
-      )}
-    >
-      <ModalDialog
-        title={translate('Create node')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              disabled={state.loading || props.invalid || props.submitting}
-              submitting={props.submitting}
-              label={translate('Create node')}
-            />
-          </>
-        }
-      >
-        {state.loading ? (
-          <LoadingSpinner />
-        ) : state.error ? (
-          <p>{translate('Unable to load data.')}</p>
-        ) : (
-          <>
-            <NodeRoleGroup />
-            <NodeFlavorGroup options={state.value.flavors} />
-            <SubnetGroup options={state.value.subnets} />
-            <NodeStorageGroup
-              volumeTypes={state.value.volumeTypes}
-              defaultVolumeType={state.value.defaultVolumeType}
-              sm={{ span: 9, offset: 3 }}
-            />
-          </>
-        )}
-      </ModalDialog>
-    </form>
+  const initialValues = useMemo(
+    () => ({
+      role: 'worker',
+      system_volume_size: 1,
+      system_volume_type: state.value?.defaultVolumeType,
+      data_volumes: [],
+    }),
+    [state.value?.defaultVolumeType],
   );
-});
+
+  return (
+    <Form
+      onSubmit={(values) => createNodeMutation.mutateAsync(values)}
+      initialValues={initialValues}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Create node')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  disabled={state.loading || invalid || submitting}
+                  submitting={submitting}
+                  label={translate('Create node')}
+                />
+              </>
+            }
+          >
+            {state.loading ? (
+              <LoadingSpinner />
+            ) : state.error ? (
+              <p>{translate('Unable to load data.')}</p>
+            ) : (
+              <>
+                <NodeRoleGroup />
+                <NodeFlavorGroup options={state.value.flavors} />
+                <SubnetGroup options={state.value.subnets} />
+                <NodeStorageGroup
+                  volumeTypes={state.value.volumeTypes}
+                  defaultVolumeType={state.value.defaultVolumeType}
+                />
+              </>
+            )}
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

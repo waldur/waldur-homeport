@@ -1,13 +1,11 @@
-import { Customer, Project } from 'waldur-js-client';
-
-export type PolicyPeriod = 1 | 2 | 3 | 4;
+import { Customer, PolicyPeriodEnum, Project } from 'waldur-js-client';
 
 export interface CostPolicyFormData {
   limit_cost: number;
   project_credit?: number;
   scope: Array<Project | Customer>;
   actions: { value; label };
-  period: PolicyPeriod;
+  period: PolicyPeriodEnum;
   options?: {
     notify_external_user?: string;
   };
