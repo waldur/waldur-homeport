@@ -19,7 +19,12 @@ const ReallocateLimitsDialog = lazyComponent(() =>
 
 const validators = [validateState('OK')];
 
-const useReallocateLimits = ({ resource, refetch }) => {
+export const ReallocateLimitsAction: ActionItemType = ({
+  resource,
+  refetch,
+  ...rest
+}) => {
+  const user = useUser();
   const { tooltip, disabled } = useValidators(validators, resource);
   const action = useModalDialogCallback(
     ReallocateLimitsDialog,
@@ -27,23 +32,6 @@ const useReallocateLimits = ({ resource, refetch }) => {
     { refetch },
     { size: 'xl', fullscreen: 'lg-down', contentClassName: 'overflow-auto' },
   );
-  return {
-    title: translate('Reallocate resource limits'),
-    action,
-    tooltip,
-    disabled,
-    iconNode: <ArrowsClockwiseIcon weight="bold" />,
-    important: true,
-  };
-};
-
-export const ReallocateLimitsAction: ActionItemType = ({
-  resource,
-  refetch,
-  ...rest
-}) => {
-  const user = useUser();
-  const buttonProps = useReallocateLimits({ resource, refetch });
 
   if (
     !hasPermission(user, {
@@ -57,6 +45,14 @@ export const ReallocateLimitsAction: ActionItemType = ({
 
   return (resource.plan_uuid || resource.marketplace_plan_uuid) &&
     resource.is_limit_based ? (
-    <ActionItem {...buttonProps} {...rest} />
+    <ActionItem
+      title={translate('Reallocate resource limits')}
+      action={action}
+      tooltip={tooltip}
+      disabled={disabled}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
+      important
+      {...rest}
+    />
   ) : null;
 };

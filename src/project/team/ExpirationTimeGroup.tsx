@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
@@ -9,16 +8,15 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const ExpirationTimeGroup: FunctionComponent<{
   disabled?: boolean;
-  legacyField?: boolean;
-}> = ({ disabled, legacyField }) => {
-  const Component = (legacyField ? Field : FinalField) as any;
+}> = ({ disabled }) => {
   return (
     <FormGroup
       id="expiration-time-group"
       label={translate('Role expires on')}
+      controlId="expiration_time"
       spaceless
     >
-      <Component
+      <Field
         name="expiration_time"
         component={DateField as any}
         disabled={disabled}

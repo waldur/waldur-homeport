@@ -1,7 +1,7 @@
 import {
+  FeaturesEnum,
   MarketplaceFeatures,
   SupportFeatures,
-  FeaturesEnum,
 } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { ProfileAttribute } from '@/user/support/profileAttributes';

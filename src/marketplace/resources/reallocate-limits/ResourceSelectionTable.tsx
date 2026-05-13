@@ -32,6 +32,7 @@ const AllocationInputCell: FC<{
     componentType: string,
     amount: number,
   ) => void;
+  rowTestId?: string;
 }> = ({
   resource,
   isSelected,
@@ -43,6 +44,7 @@ const AllocationInputCell: FC<{
   totalAllocated,
   component,
   onAllocationChange,
+  rowTestId,
 }) => {
   const [localValue, setLocalValue] = useState<string>(
     allocated !== undefined && allocated !== null ? String(allocated) : '',
@@ -71,7 +73,7 @@ const AllocationInputCell: FC<{
   };
 
   return (
-    <tr>
+    <tr data-testid={rowTestId}>
       <td>
         <div>
           <strong>{resource.name}</strong>
@@ -86,6 +88,12 @@ const AllocationInputCell: FC<{
           <div style={{ maxWidth: '200px' }}>
             <InputGroup className="input-group-number">
               <Form.Control
+                id={`allocation-${resource.uuid}`}
+                data-testid={`allocation-${resource.uuid}`}
+                name={`allocation-${resource.uuid}`}
+                aria-label={translate('Allocation for {resource}', {
+                  resource: resource.name,
+                })}
                 type="number"
                 min={0}
                 value={localValue}
@@ -222,8 +230,7 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
     <div>
       <div className="mb-3">
         <strong>{translate('Freed capacity')}</strong>: {freedAmount}{' '}
-        {component.name}
-        {component.measured_unit}
+        {component.name} {component.measured_unit}
         {totalAllocated > 0 && (
           <span className="ms-3">
             <strong>{translate('Allocated')}</strong>: {totalAllocated}{' '}
@@ -268,6 +275,7 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
                 return (
                   <AllocationInputCell
                     key={resource.uuid}
+                    rowTestId={`row-${resource.uuid}`}
                     resource={resource}
                     isSelected={isSelected}
                     currentLimit={currentLimit}

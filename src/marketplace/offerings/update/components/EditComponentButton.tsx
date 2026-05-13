@@ -3,9 +3,9 @@ import { FunctionComponent } from 'react';
 import { EditModalButton } from '@/core/buttons';
 import { lazyComponent } from '@/core/lazyComponent';
 
-const EditComponentDialog = lazyComponent(() =>
-  import('./EditComponentDialog').then((module) => ({
-    default: module.EditComponentDialog,
+const OfferingComponentDialog = lazyComponent(() =>
+  import('./OfferingComponentDialog').then((module) => ({
+    default: module.OfferingComponentDialog,
   })),
 );
 
@@ -15,7 +15,7 @@ export const EditComponentButton: FunctionComponent<{
   refetch;
 }> = ({ offering, component, refetch }) => (
   <EditModalButton
-    dialog={EditComponentDialog}
+    dialog={OfferingComponentDialog}
     row={component}
     buildResolve={(r) => ({ offering, component: r, refetch })}
   />

@@ -45,6 +45,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         submitting={submitting}
         label={submitLabel || translate('Confirm')}
         className="btn btn-primary min-w-125px"
+        data-testid="confirm-button"
       />
     ) : (
       <ActionButton
@@ -54,6 +55,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         className="min-w-125px"
         disabled={invalid}
         tooltip={tooltip}
+        data-testid={isFirstStep ? 'next-button-step-0' : 'next-button-step-1'}
       />
     )}
   </>

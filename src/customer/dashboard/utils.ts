@@ -35,9 +35,10 @@ async function getCustomerCostData(customer: Scope) {
 
 export function useCustomerCostChart(customer: Scope) {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['CustomerCostData', customer.url],
-    queryFn: () => getCustomerCostData(customer),
+    queryKey: ['CustomerCostData', customer?.url],
+    queryFn: () => (customer ? getCustomerCostData(customer) : null),
     staleTime: STALE_TIME,
+    enabled: Boolean(customer),
   });
 
   const chartData = useMemo(() => {

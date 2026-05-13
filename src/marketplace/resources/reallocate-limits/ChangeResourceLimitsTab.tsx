@@ -1,17 +1,15 @@
 import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
+import { useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
-import { Limits } from '@/marketplace/common/types';
 import { getBillingPeriods } from '@/marketplace/common/utils';
 
 import { FetchedData, getRemainingMonths } from '../change-limits/utils';
 
 import { ComponentRow } from './ComponentRow';
 import { ComponentTotalRow } from './ComponentTotalRow';
-import { REALLOCATE_LIMITS_FORM_ID } from './constants';
+import { ReallocateFormData } from './types';
 import { calculateFreedCapacity } from './utils';
 
 interface ChangeResourceLimitsTabProps {
@@ -25,10 +23,8 @@ interface ChangeResourceLimitsTabProps {
 export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
   context,
 }) => {
-  const formSelector = formValueSelector(REALLOCATE_LIMITS_FORM_ID);
-  const newLimits = useSelector((state) =>
-    formSelector(state, 'limits'),
-  ) as Limits;
+  const { values } = useFormState<ReallocateFormData>();
+  const newLimits = values.limits;
 
   const {
     resource,
@@ -108,7 +104,6 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
         <strong>{translate('Total freed')}</strong>{' '}
         {freedCapacitySummary && ` - ${freedCapacitySummary}`}
       </p>
-
       <div className="table-responsive">
         <Table className="table-row-bordered table-expandable align-middle table-rounded border border-gray-200">
           <thead>

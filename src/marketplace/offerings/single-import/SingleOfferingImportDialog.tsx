@@ -1,7 +1,8 @@
 import { useRouter } from '@uirouter/react';
 import * as yaml from 'js-yaml';
+import { FunctionComponent } from 'react';
+import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import {
   marketplaceProviderOfferingsImportOffering,
   OfferingExportDataRequest,
@@ -17,7 +18,6 @@ import { getCustomer } from '@/workspace/selectors';
 import { WizardButtons } from '../import/WizardButtons';
 import { WizardTabs } from '../import/WizardTabs';
 
-import { SINGLE_OFFERING_IMPORT_FORM_ID } from './constants';
 import { ImportErrorBoundary } from './ImportErrorBoundary';
 import {
   SINGLE_OFFERING_IMPORT_STEPS,
@@ -31,24 +31,22 @@ interface SingleOfferingImportProps {
   };
 }
 
-export const SingleOfferingImportDialog = reduxForm<
-  SingleOfferingImportFormData,
+const initialValues: Partial<SingleOfferingImportFormData> = {
+  import_components: true,
+  import_plans: true,
+  import_screenshots: true,
+  import_files: true,
+  import_endpoints: true,
+  import_organization_groups: true,
+  import_terms_of_service: true,
+  import_plugin_options: true,
+  import_secret_options: true,
+  overwrite_existing: true,
+};
+
+export const SingleOfferingImportDialog: FunctionComponent<
   SingleOfferingImportProps
->({
-  form: SINGLE_OFFERING_IMPORT_FORM_ID,
-  initialValues: {
-    import_components: true,
-    import_plans: true,
-    import_screenshots: true,
-    import_files: true,
-    import_endpoints: true,
-    import_organization_groups: true,
-    import_terms_of_service: true,
-    import_plugin_options: true,
-    import_secret_options: true,
-    overwrite_existing: true,
-  },
-})(({ handleSubmit, submitting, invalid, resolve }) => {
+> = ({ resolve }) => {
   const refetch = resolve?.refetch;
   const { step, setStep, goBack, goNext, isFirstStep, isLastStep } = useWizard(
     SINGLE_OFFERING_IMPORT_STEPS,
@@ -94,7 +92,7 @@ export const SingleOfferingImportDialog = reduxForm<
       };
 
       const response = await marketplaceProviderOfferingsImportOffering({
-        body: importParams,
+        body: importParams as any,
       });
 
       if (response.data) {
@@ -271,44 +269,51 @@ export const SingleOfferingImportDialog = reduxForm<
 
   return (
     <ImportErrorBoundary>
-      <form
-        onSubmit={handleSubmit((values) => importMutation.mutateAsync(values))}
+      <Form<SingleOfferingImportFormData>
+        onSubmit={(values) =>
+          importMutation.mutateAsync(values).catch(() => {})
+        }
+        initialValues={initialValues}
       >
-        <ModalDialog
-          title={translate('Import offering')}
-          subtitle={translate(
-            'Import a single offering from an exported JSON or YAML file with configurable options.',
-          )}
-          bodyClassName="h-400px"
-          footer={
-            <WizardButtons
-              isLastStep={isLastStep}
-              isFirstStep={isFirstStep}
-              goBack={goBack}
-              goNext={goNext}
-              submitting={submitting}
-              invalid={invalid}
-              submitLabel={translate('Import')}
-            />
-          }
-        >
-          <StepsList
-            steps={SINGLE_OFFERING_IMPORT_STEPS}
-            value={step}
-            onClick={(_, i) =>
-              !invalid && setStep(SINGLE_OFFERING_IMPORT_STEPS[i])
-            }
-            disabled={submitting}
-          />
+        {({ handleSubmit, submitting, invalid }) => (
+          <form onSubmit={handleSubmit}>
+            <ModalDialog
+              title={translate('Import offering')}
+              subtitle={translate(
+                'Import a single offering from an exported JSON or YAML file with configurable options.',
+              )}
+              bodyClassName="h-400px"
+              footer={
+                <WizardButtons
+                  isLastStep={isLastStep}
+                  isFirstStep={isFirstStep}
+                  goBack={goBack}
+                  goNext={goNext}
+                  submitting={submitting}
+                  invalid={invalid}
+                  submitLabel={translate('Import')}
+                />
+              }
+            >
+              <StepsList
+                steps={SINGLE_OFFERING_IMPORT_STEPS}
+                value={step}
+                onClick={(_, i) =>
+                  !invalid && setStep(SINGLE_OFFERING_IMPORT_STEPS[i])
+                }
+                disabled={submitting}
+              />
 
-          <WizardTabs
-            steps={SINGLE_OFFERING_IMPORT_STEPS}
-            currentStep={step}
-            tabs={SINGLE_OFFERING_IMPORT_TABS}
-            mountOnEnter={true}
-          />
-        </ModalDialog>
-      </form>
+              <WizardTabs
+                steps={SINGLE_OFFERING_IMPORT_STEPS}
+                currentStep={step}
+                tabs={SINGLE_OFFERING_IMPORT_TABS}
+                mountOnEnter={true}
+              />
+            </ModalDialog>
+          </form>
+        )}
+      </Form>
     </ImportErrorBoundary>
   );
-});
+};

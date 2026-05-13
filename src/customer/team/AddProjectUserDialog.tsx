@@ -63,6 +63,7 @@ export const AddProjectUserDialog: FC<AddProjectUserDialogProps> = ({
                 <SubmitButton
                   submitting={updateMutation.isPending}
                   disabled={invalid}
+                  data-testid="submit-button"
                 >
                   {translate('Save')}
                 </SubmitButton>

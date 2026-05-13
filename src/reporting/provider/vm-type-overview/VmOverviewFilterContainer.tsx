@@ -1,5 +1,4 @@
 import { useAsync } from 'react-use';
-import { reduxForm } from 'redux-form';
 import { openstackTenantsList } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
@@ -9,7 +8,7 @@ import { translate } from '@/i18n';
 import { formatServiceProviders } from './utils';
 import { VmOverviewFilter } from './VmOverviewFilter';
 
-const VmOverviewFilterComponent = (props) => {
+export const VmOverviewFilterContainer = (props) => {
   const { error, value, loading } = useAsync(async () => {
     const serviceProviders = await getAllPages((page) =>
       openstackTenantsList({ query: { page } }),
@@ -28,10 +27,3 @@ const VmOverviewFilterComponent = (props) => {
   }
   return <VmOverviewFilter {...props} serviceProviders={value} />;
 };
-
-const enhance = reduxForm({
-  form: 'vmOverviewFilter',
-  initialValues: { shared: true },
-});
-
-export const VmOverviewFilterContainer = enhance(VmOverviewFilterComponent);

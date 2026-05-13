@@ -1,7 +1,6 @@
 import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
+import { useFormState } from 'react-final-form';
 import {
   marketplaceResourcesReallocateLimits,
   type ResourceReallocateLimitsRequest,
@@ -12,7 +11,6 @@ import { Limits } from '@/marketplace/common/types';
 
 import { FetchedData } from '../change-limits/utils';
 
-import { REALLOCATE_LIMITS_FORM_ID } from './constants';
 import { ReallocateFormData } from './types';
 import { calculateFreedCapacity } from './utils';
 
@@ -30,16 +28,9 @@ interface ReviewAndConfirmTabProps {
 export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
   context,
 }) => {
-  const formSelector = formValueSelector(REALLOCATE_LIMITS_FORM_ID);
-  const limits = useSelector((state) =>
-    formSelector(state, 'limits'),
-  ) as Limits;
-  const targets =
-    (useSelector((state) => formSelector(state, 'targets')) as Array<{
-      resource_uuid: string;
-      resource_name?: string;
-      allocated_limits: Limits;
-    }>) || [];
+  const { values } = useFormState<ReallocateFormData>();
+  const limits = values.limits;
+  const targets = values.targets || [];
 
   const {
     resource,
@@ -116,7 +107,10 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
           </thead>
           <tbody>
             {summaryData.map((row) => (
-              <tr key={row.resourceUuid}>
+              <tr
+                key={row.resourceUuid}
+                data-testid={`summary-row-${row.resourceUuid}`}
+              >
                 <td>
                   <strong>{row.resourceName}</strong>
                 </td>
@@ -148,79 +142,48 @@ export const ReviewAndConfirmTab: FC<ReviewAndConfirmTabProps> = ({
   );
 };
 
-export const submitReallocation = async (
+export const reallocateLimits = async (
   formData: ReallocateFormData,
-  context: {
-    asyncState: {
-      value: FetchedData;
-    };
-    resolve: {
-      refetch?(): void;
-    };
-  },
-  { showSuccess, showErrorResponse, closeDialog },
+  asyncState: FetchedData,
 ) => {
-  const {
-    resource,
-    limitSerializer,
-    limits: currentLimits,
-  } = context.asyncState.value;
+  const { limitSerializer, limits: currentLimits, resource } = asyncState;
   const { limits: newLimits, targets } = formData;
 
   if (!newLimits || !targets || targets.length === 0) {
-    showErrorResponse(
-      { detail: translate('Please complete all steps.') } as any,
-      translate('Unable to reallocate limits.'),
-    );
-    return;
+    throw new Error(translate('Please complete all steps.'));
   }
 
-  try {
-    const freedCapacity = calculateFreedCapacity(currentLimits, newLimits);
+  const freedCapacity = calculateFreedCapacity(currentLimits, newLimits);
 
-    const limitsToReallocate: Limits = {};
-    Object.keys(freedCapacity).forEach((key) => {
-      if (freedCapacity[key] > 0) {
-        limitsToReallocate[key] = freedCapacity[key];
+  const limitsToReallocate: Limits = {};
+  Object.keys(freedCapacity).forEach((key) => {
+    if (freedCapacity[key] > 0) {
+      limitsToReallocate[key] = freedCapacity[key];
+    }
+  });
+
+  const serializedFreedLimits = limitSerializer(limitsToReallocate);
+
+  const preparedTargets = targets.map((target) => {
+    const allocatedLimits: Limits = {};
+    Object.keys(target.allocated_limits).forEach((key) => {
+      const amount = target.allocated_limits[key];
+      if (amount > 0) {
+        allocatedLimits[key] = amount;
       }
     });
-
-    const serializedFreedLimits = limitSerializer(limitsToReallocate);
-
-    const preparedTargets = targets.map((target) => {
-      const allocatedLimits: Limits = {};
-      Object.keys(target.allocated_limits).forEach((key) => {
-        const amount = target.allocated_limits[key];
-        if (amount > 0) {
-          allocatedLimits[key] = amount;
-        }
-      });
-      return {
-        resource_uuid: target.resource_uuid,
-        allocated_limits: limitSerializer(allocatedLimits),
-      };
-    });
-
-    const requestBody: ResourceReallocateLimitsRequest = {
-      limits: serializedFreedLimits,
-      targets: preparedTargets,
+    return {
+      resource_uuid: target.resource_uuid,
+      allocated_limits: limitSerializer(allocatedLimits),
     };
-    await marketplaceResourcesReallocateLimits({
-      path: { uuid: resource.uuid },
-      body: requestBody,
-    });
+  });
 
-    showSuccess(
-      translate('Resource limits reallocation request has been submitted.'),
-    );
-    closeDialog();
-    if (context.resolve.refetch) {
-      await context.resolve.refetch();
-    }
-  } catch (error) {
-    showErrorResponse(
-      error,
-      translate('Unable to submit reallocation request.'),
-    );
-  }
+  const requestBody: ResourceReallocateLimitsRequest = {
+    limits: serializedFreedLimits,
+    targets: preparedTargets,
+  };
+  return await marketplaceResourcesReallocateLimits({
+    path: { uuid: resource.uuid },
+    body: requestBody,
+  });
 };

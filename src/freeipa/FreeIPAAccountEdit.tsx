@@ -1,12 +1,10 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-import { FormContainer } from '@/form';
 import { translate } from '@/i18n';
 
 interface FreeIPAAccountEditOwnProps {
   profile: any;
-  loading: boolean;
 }
 
 const UsernameGroup = ({ profile }) => (
@@ -22,10 +20,9 @@ const UsernameGroup = ({ profile }) => (
 
 export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
   profile,
-  loading,
 }) => {
   return (
-    <FormContainer submitting={loading}>
+    <div>
       <UsernameGroup profile={profile} />
       <Form.Group>
         <div className="pull-right">
@@ -34,6 +31,6 @@ export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
             : translate('Profile is disabled.')}
         </div>
       </Form.Group>
-    </FormContainer>
+    </div>
   );
 };

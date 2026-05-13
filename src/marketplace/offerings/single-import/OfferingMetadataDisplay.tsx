@@ -78,6 +78,7 @@ export const OfferingMetadataDisplay: FunctionComponent<
                 <strong>{translate('State:')}</strong>{' '}
                 <Badge
                   bg={offeringInfo.state === 'Active' ? 'success' : 'secondary'}
+                  text={offeringInfo.state === 'Active' ? 'white' : 'dark'}
                 >
                   {offeringInfo.state}
                 </Badge>

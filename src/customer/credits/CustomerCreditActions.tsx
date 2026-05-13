@@ -4,7 +4,7 @@ import { CreditUsageButton } from './CreditUsageButton';
 import { DeleteCreditButton } from './DeleteCreditButton';
 import { EditCreditButton } from './EditCreditButton';
 
-export const CreditActions = ({ row, fetch }) => (
+export const CustomerCreditActions = ({ row, fetch }) => (
   <ActionsDropdown
     row={row}
     refetch={fetch}

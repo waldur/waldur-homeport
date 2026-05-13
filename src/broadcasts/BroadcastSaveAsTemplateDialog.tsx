@@ -6,7 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, StringField, SubmitButton } from '@/form';
+import { FormGroupFinal, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -58,7 +58,7 @@ export const BroadcastSaveAsTemplateDialog: FC<
             <Field
               name="name"
               label={translate('Name')}
-              component={FormGroup as any}
+              component={FormGroupFinal}
               required={true}
               validate={required}
             >

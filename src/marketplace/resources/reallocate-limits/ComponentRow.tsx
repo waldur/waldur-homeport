@@ -1,13 +1,15 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
-import { Field as FormField } from 'redux-form';
+import { Field } from 'react-final-form';
 import { BasePublicPlan } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
+import { ENV } from '@/core/config';
+import { composeValidators } from '@/core/validators';
 import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
-import { parseIntField, formatIntField } from '@/marketplace/common/utils';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { getResourceComponentValidator } from '@/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@/marketplace/offerings/store/types';
 import { ChangedLimitField } from '@/marketplace/resources/change-limits/ChangedLimitField';
@@ -63,6 +65,11 @@ const CellWrapper: FC<any> = (props) => {
         <InputGroup className="input-group-number">
           <Form.Control
             type="number"
+            name={`row-${props.offeringComponent.type}-input`}
+            aria-label={translate('Limit for {component}', {
+              component: props.offeringComponent.name,
+            })}
+            data-testid={`row-${props.offeringComponent.type}-input`}
             min={props.limits?.min || 0}
             max={currentLimit}
             value={props.input.value}
@@ -105,17 +112,20 @@ export const ComponentRow: FC<ComponentRowProps> = ({
     }
     return undefined;
   };
-  const validators = [...baseValidators, currentLimitValidator];
+  const validate = useMemo(
+    () => composeValidators(...baseValidators, currentLimitValidator),
+    [baseValidators, currentLimitValidator],
+  );
 
   return (
     <tr data-testid={`row-${component.type}`}>
       <td className="text-nowrap">{component.name}</td>
       <td>{renderFieldOrDash(component.limit)}</td>
-      <FormField
+      <Field
         name={`limits.${component.type}`}
         parse={parseIntField}
         format={formatIntField}
-        validate={validators}
+        validate={validate}
         min={0}
         component={CellWrapper}
         offeringComponent={component}
@@ -125,8 +135,12 @@ export const ComponentRow: FC<ComponentRowProps> = ({
       <td>
         <ChangedLimitField changedLimit={component.changedLimit} />
       </td>
-      <td>EUR {pricePerMonth.toFixed(2)}</td>
-      <td>EUR {pricePerSecondary.toFixed(2)}</td>
+      <td>
+        {ENV.plugins.WALDUR_CORE.CURRENCY_NAME} {pricePerMonth.toFixed(2)}
+      </td>
+      <td>
+        {ENV.plugins.WALDUR_CORE.CURRENCY_NAME} {pricePerSecondary.toFixed(2)}
+      </td>
     </tr>
   );
 };

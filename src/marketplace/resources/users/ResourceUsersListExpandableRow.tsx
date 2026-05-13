@@ -10,10 +10,8 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { RoleField } from '@/user/affiliations/RoleField';
 
-import {
-  DeleteUserAction,
-  UpdateUserExpirationAction,
-} from './TeamUserActions';
+import { DeleteUserAction } from './DeleteUserAction';
+import { UpdateUserExpirationAction } from './UpdateUserExpirationAction';
 
 interface ResourceProjectGrant {
   uuid: string;

@@ -1,17 +1,15 @@
 import { FunctionComponent, useState, useCallback, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { Field, change } from 'redux-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 
-import { FormContainer } from '@/form/FormContainer';
+import { FormContainerFinal } from '@/form/FormContainerFinal';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
 
-import { SINGLE_OFFERING_IMPORT_FORM_ID } from './constants';
 import { validateOfferingExportFile, ValidationResult } from './fileValidation';
 import { OfferingMetadataDisplay } from './OfferingMetadataDisplay';
-import { useFormData } from './utils';
+import { SingleOfferingImportFormData } from './types';
 
 // Define accepted file types for YAML and JSON offerings
 const YAML_JSON_FILE_TYPES = {
@@ -22,31 +20,24 @@ const YAML_JSON_FILE_TYPES = {
 };
 
 export const FileUploadTab: FunctionComponent = () => {
-  const formData = useFormData();
+  const { values: formData } = useFormState<SingleOfferingImportFormData>();
+  const form = useForm();
 
   const [validationResult, setValidationResult] =
     useState<ValidationResult | null>(null);
   const [isValidating, setIsValidating] = useState<boolean>(false);
 
-  const dispatch = useDispatch();
-
   const handleFileSelect = useCallback(
     async (file: File) => {
       setIsValidating(true);
-      dispatch(change(SINGLE_OFFERING_IMPORT_FORM_ID, 'importFile', file));
+      form.change('importFile', file);
 
       // Validate the file
       try {
         const result = await validateOfferingExportFile(file);
         setValidationResult(result);
         if (result.metadata?.category_name) {
-          dispatch(
-            change(
-              SINGLE_OFFERING_IMPORT_FORM_ID,
-              '_category_name',
-              result.metadata.category_name,
-            ),
-          );
+          form.change('_category_name', result.metadata.category_name);
         }
       } catch {
         setValidationResult({
@@ -57,7 +48,7 @@ export const FileUploadTab: FunctionComponent = () => {
         setIsValidating(false);
       }
     },
-    [dispatch],
+    [form],
   );
 
   const onDrop = useCallback(
@@ -78,8 +69,8 @@ export const FileUploadTab: FunctionComponent = () => {
 
   const clearFile = useCallback(() => {
     setValidationResult(null);
-    dispatch(change(SINGLE_OFFERING_IMPORT_FORM_ID, 'importFile', null));
-  }, [dispatch]);
+    form.change('importFile', null);
+  }, [form]);
 
   const validateFileField = useCallback(
     (file: File | null) => {
@@ -95,13 +86,13 @@ export const FileUploadTab: FunctionComponent = () => {
   );
 
   return (
-    <FormContainer submitting={false}>
+    <FormContainerFinal submitting={false}>
       <Row>
         <Col md={12}>
           <Field
             name="importFile"
             validate={validateFileField}
-            component={() => null} // Hidden field
+            render={() => null} // Hidden field
           />
 
           {!formData.importFile ? (
@@ -148,6 +139,6 @@ export const FileUploadTab: FunctionComponent = () => {
           )}
         </Col>
       </Row>
-    </FormContainer>
+    </FormContainerFinal>
   );
 };

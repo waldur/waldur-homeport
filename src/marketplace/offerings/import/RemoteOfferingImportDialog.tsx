@@ -1,7 +1,8 @@
 import { useRouter } from '@uirouter/react';
+import arrayMutators from 'final-form-arrays';
 import { useState } from 'react';
+import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import { remoteWaldurApiImportOffering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -12,19 +13,12 @@ import { useNotify } from '@/store/notify';
 import { useWizard } from '@/wizard/useWizard';
 import { getCustomer } from '@/workspace/selectors';
 
-import { OFFERING_IMPORT_FORM_ID } from './constants';
-import { importOfferingSelector } from './selectors';
 import { OFFERING_IMPORT_STEPS, OFFERING_IMPORT_TABS } from './tabs';
 import { OfferingImportFormData } from './types';
 import { WizardButtons } from './WizardButtons';
 import { WizardTabs } from './WizardTabs';
 
-export const OfferingImportDialog = reduxForm<
-  OfferingImportFormData,
-  { refetch? }
->({
-  form: OFFERING_IMPORT_FORM_ID,
-})(({ handleSubmit, submitting, invalid, change, refetch }) => {
+export const RemoteOfferingImportDialog = ({ refetch }: { refetch?() }) => {
   const { step, setStep, goBack, goNext, isFirstStep, isLastStep } = useWizard(
     OFFERING_IMPORT_STEPS,
   );
@@ -33,12 +27,7 @@ export const OfferingImportDialog = reduxForm<
   const customer = useSelector(getCustomer);
   const router = useRouter();
 
-  const saveOffering = async (
-    formData: OfferingImportFormData,
-    _,
-    formProps,
-  ) => {
-    if (formProps.invalid) return;
+  const saveOffering = async (formData: OfferingImportFormData) => {
     try {
       const promises = formData.offerings.map((offering) => {
         const categoryMap = formData.categories_set.find(
@@ -59,6 +48,7 @@ export const OfferingImportDialog = reduxForm<
       if (response.length === 1) {
         router.stateService.go('marketplace-offering-update', {
           offering_uuid: response[0].data.uuid,
+          uuid: formData.customer.uuid,
         });
       } else if (refetch) {
         refetch();
@@ -70,54 +60,61 @@ export const OfferingImportDialog = reduxForm<
     }
   };
 
-  // Clear all fields if API URL or Token change
   const [credentials, setCredentials] = useState({ api_url: '', token: '' });
-  const formData = useSelector(importOfferingSelector);
-  const next = () => {
-    if (
-      formData.api_url !== credentials.api_url ||
-      formData.token !== credentials.token
-    ) {
-      change('customer', null);
-      change('offerings', null);
-      setCredentials({ api_url: formData.api_url, token: formData.token });
-    }
-    goNext();
-  };
 
   return (
-    <form onSubmit={handleSubmit(saveOffering)}>
-      <ModalDialog
-        title={translate('Connect remote offerings')}
-        subtitle={translate(
-          'Connect offerings from remote organizations with configurable rules and mappings.',
-        )}
-        bodyClassName="h-400px"
-        footer={
-          <WizardButtons
-            isLastStep={isLastStep}
-            isFirstStep={isFirstStep}
-            goBack={goBack}
-            goNext={next}
-            submitting={submitting}
-            invalid={invalid}
-          />
-        }
-      >
-        <StepsList
-          steps={OFFERING_IMPORT_STEPS}
-          value={step}
-          onClick={setStep}
-          disabled={submitting}
-        />
+    <Form<OfferingImportFormData>
+      onSubmit={saveOffering}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid, form, values }) => {
+        const next = () => {
+          if (
+            values.api_url !== credentials.api_url ||
+            values.token !== credentials.token
+          ) {
+            form.change('customer', null);
+            form.change('offerings', null);
+            setCredentials({ api_url: values.api_url, token: values.token });
+          }
+          goNext();
+        };
 
-        <WizardTabs
-          steps={OFFERING_IMPORT_STEPS}
-          currentStep={step}
-          tabs={OFFERING_IMPORT_TABS}
-          mountOnEnter={true}
-        />
-      </ModalDialog>
-    </form>
+        return (
+          <form onSubmit={handleSubmit}>
+            <ModalDialog
+              title={translate('Connect remote offerings')}
+              subtitle={translate(
+                'Connect offerings from remote organizations with configurable rules and mappings.',
+              )}
+              bodyClassName="h-400px"
+              footer={
+                <WizardButtons
+                  isLastStep={isLastStep}
+                  isFirstStep={isFirstStep}
+                  goBack={goBack}
+                  goNext={next}
+                  submitting={submitting}
+                  invalid={invalid}
+                />
+              }
+            >
+              <StepsList
+                steps={OFFERING_IMPORT_STEPS}
+                value={step}
+                onClick={setStep}
+                disabled={submitting}
+              />
+
+              <WizardTabs
+                steps={OFFERING_IMPORT_STEPS}
+                currentStep={step}
+                tabs={OFFERING_IMPORT_TABS}
+                mountOnEnter={true}
+              />
+            </ModalDialog>
+          </form>
+        );
+      }}
+    />
   );
-});
+};

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { FormGroup, StringField, TextField } from '@/form';
+import { FormGroupFinal, StringField, TextField } from '@/form';
 import { translate } from '@/i18n';
 
 export const BroadcastTemplateForm: FC = () => {
@@ -11,7 +11,7 @@ export const BroadcastTemplateForm: FC = () => {
       <Field
         name="name"
         label={translate('Name')}
-        component={FormGroup as any}
+        component={FormGroupFinal}
         required={true}
         validate={required}
       >
@@ -21,7 +21,7 @@ export const BroadcastTemplateForm: FC = () => {
       <Field
         name="subject"
         label={translate('Subject')}
-        component={FormGroup as any}
+        component={FormGroupFinal}
         required={true}
         validate={required}
       >
@@ -31,7 +31,7 @@ export const BroadcastTemplateForm: FC = () => {
       <Field
         name="body"
         label={translate('Message')}
-        component={FormGroup as any}
+        component={FormGroupFinal}
         required={true}
         validate={required}
       >

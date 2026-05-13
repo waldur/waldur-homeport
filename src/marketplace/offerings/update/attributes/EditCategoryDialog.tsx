@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormFooter, SelectField, FormGroup } from '@/form';
+import { FormFooter, FormGroupFinal, SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -72,7 +72,7 @@ export const EditCategoryDialog: FC<EditCategoryDialogProps> = ({
               <Field
                 name="category"
                 label={translate('Category')}
-                component={FormGroup as any}
+                component={FormGroupFinal}
                 required={true}
                 validate={required}
               >

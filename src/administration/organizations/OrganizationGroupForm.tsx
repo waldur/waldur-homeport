@@ -6,7 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
+import { FormGroupFinal, SubmitButton } from '@/form';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -70,7 +70,7 @@ export const OrganizationGroupForm = ({ resolve }) => {
           >
             <Field
               name="name"
-              component={FormGroup as any}
+              component={FormGroupFinal}
               label={translate('Name')}
               required
               validate={required}
@@ -79,7 +79,7 @@ export const OrganizationGroupForm = ({ resolve }) => {
             </Field>
             <Field
               name="parent"
-              component={FormGroup as any}
+              component={FormGroupFinal}
               label={translate('Parent group')}
             >
               <SelectOrganizationGroupField

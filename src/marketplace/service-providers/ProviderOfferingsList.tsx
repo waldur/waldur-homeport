@@ -13,9 +13,9 @@ import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
-import { useOfferingDropdownActions } from '../offerings/hooks';
 import { CreateOfferingButton } from '../offerings/list/CreateOfferingButton';
 import { OfferingActions } from '../offerings/list/OfferingActions';
+import { OfferingDropdownActions } from '../offerings/list/OfferingDropdownActions';
 import { getStates } from '../offerings/list/OfferingStateFilter';
 import { OfferingStateField } from '../offerings/OfferingStateField';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
@@ -70,7 +70,6 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
     queryField: 'name',
     mandatoryFields,
   });
-  const dropdownActions = useOfferingDropdownActions(tableProps.fetch);
 
   return (
     <Table
@@ -116,7 +115,7 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
         SLUG_COLUMN,
       ]}
       verboseName={translate('Offerings')}
-      dropdownActions={dropdownActions}
+      dropdownActions={<OfferingDropdownActions refetch={tableProps.fetch} />}
       tableActions={<CreateOfferingButton fetch={tableProps.fetch} />}
       rowActions={(row) => (
         <OfferingActions row={row.row} refetch={tableProps.fetch} />

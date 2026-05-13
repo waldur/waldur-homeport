@@ -12,23 +12,28 @@ interface AccountingPeriodFieldProps {
   name?: string;
 }
 
+export const AccountingPeriodFieldComponent: FunctionComponent<any> = (
+  props,
+) => (
+  <Select
+    placeholder={translate('Select accounting period')}
+    value={props.input.value}
+    onChange={props.input.onChange}
+    onBlur={(e) => e.preventDefault()}
+    options={props.options}
+    isClearable={false}
+    className="accounting-period-selector metronic-select-container"
+    classNamePrefix="metronic-select"
+    {...props.reactSelectProps}
+  />
+);
+
 export const AccountingPeriodField: FunctionComponent<
   AccountingPeriodFieldProps
 > = (props) => (
   <Field
     name={props.name || 'accounting_period'}
-    component={(prop) => (
-      <Select
-        placeholder={translate('Select accounting period')}
-        value={prop.input.value}
-        onChange={prop.input.onChange}
-        onBlur={(e) => e.preventDefault()}
-        options={props.options}
-        isClearable={false}
-        className="accounting-period-selector metronic-select-container"
-        classNamePrefix="metronic-select"
-        {...props.reactSelectProps}
-      />
-    )}
+    component={AccountingPeriodFieldComponent}
+    {...props}
   />
 );

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
-import { FormGroup } from '@/form';
+import { FormGroupFinal } from '@/form';
 import { InputField } from '@/form/InputField';
 
 import { configAttrField } from './utils';
@@ -28,7 +28,7 @@ export const AttributeCell: FC<{ attribute }> = ({ attribute }) => {
     <Field
       name="value"
       {...attr}
-      component={FormGroup as any}
+      component={FormGroupFinal}
       hideLabel={true}
       spaceless={true}
     >

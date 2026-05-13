@@ -21,17 +21,22 @@ export const SelectField: FunctionComponent<any> = (props) => {
             : options.filter((option) => getOptionValue(option) === input.value)
           : input.value
       }
-      onChange={(newValue: any) =>
-        simpleValue
-          ? input.onChange(
-              newValue
-                ? props.isMulti
-                  ? newValue.map((v) => getOptionValue(v))
-                  : getOptionValue(newValue)
-                : null,
-            )
-          : input.onChange(newValue)
-      }
+      onChange={(newValue: any) => {
+        if (simpleValue) {
+          input.onChange(
+            newValue
+              ? props.isMulti
+                ? newValue.map((v) => getOptionValue(v))
+                : getOptionValue(newValue)
+              : null,
+          );
+        } else {
+          input.onChange(newValue);
+        }
+        if (props.onChange) {
+          props.onChange(newValue);
+        }
+      }}
       options={options}
       onBlur={() => {
         if (!props.noUpdateOnBlur) {

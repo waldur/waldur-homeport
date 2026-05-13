@@ -1,4 +1,3 @@
-import { TextColumnsIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import {
   marketplaceProviderOfferingsList,
@@ -7,11 +6,8 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
-import { useModal } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
 import { SLUG_COLUMN } from '@/table/slug';
@@ -19,21 +15,13 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { useUser } from '@/workspace/hooks';
-
-import { useOfferingDropdownActions } from '../hooks';
 
 import { CreateOfferingButton } from './CreateOfferingButton';
 import { OfferingActions } from './OfferingActions';
+import { OfferingDropdownActions } from './OfferingDropdownActions';
 import { OfferingNameColumn } from './OfferingNameColumn';
 import { OfferingStateCell } from './OfferingStateCell';
 import { getStates } from './OfferingStateFilter';
-
-const ArticleCodeUpdateDialog = lazyComponent(() =>
-  import('../article-codes/ArticleCodeUpdateDialog').then((module) => ({
-    default: module.ArticleCodeUpdateDialog,
-  })),
-);
 
 const mandatoryFields: MarketplaceProviderOfferingsListData['query']['field'] =
   ['customer_uuid', 'components', 'plans'];
@@ -141,30 +129,6 @@ export const BaseOfferingsList: FunctionComponent<{
     SLUG_COLUMN as Column<ProviderOfferingDetails>,
   ];
 
-  const { openDialog } = useModal();
-  const user = useUser();
-  const providerDropdownActions = useOfferingDropdownActions(props.fetch);
-
-  const dropdownActions = [
-    ...(providerDropdownActions || []),
-    ...(user?.is_staff
-      ? [
-          <ActionItem
-            key="update-article-codes"
-            title={translate('Update article codes')}
-            action={() => {
-              openDialog(ArticleCodeUpdateDialog, {
-                resolve: { refetch: props.fetch },
-                size: 'xl',
-              });
-            }}
-            iconNode={<TextColumnsIcon weight="bold" />}
-            staff
-          />,
-        ]
-      : []),
-  ];
-
   return (
     <Table
       {...props}
@@ -181,7 +145,7 @@ export const BaseOfferingsList: FunctionComponent<{
       }
       columns={columns}
       verboseName={translate('Offerings')}
-      dropdownActions={dropdownActions.length > 0 ? dropdownActions : undefined}
+      dropdownActions={<OfferingDropdownActions refetch={props.fetch} />}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       rowActions={

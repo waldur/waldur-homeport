@@ -1,5 +1,5 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 import { freeipaProfilesUpdateSshKeys } from 'waldur-js-client';
 
 import { Tip } from '@/core/Tooltip';
@@ -10,9 +10,8 @@ import { useNotify } from '@/store/notify';
 
 export const SyncProfile: FunctionComponent<{
   profile;
-  setLoading;
   refreshProfile;
-}> = ({ profile, setLoading, refreshProfile }) => {
+}> = ({ profile, refreshProfile }) => {
   const { showSuccess } = useNotify();
 
   const { mutate: syncProfile, isPending } = useManagedMutation<any, any, void>(
@@ -34,10 +33,6 @@ export const SyncProfile: FunctionComponent<{
       errorMessage: translate('Unable to sync FreeIPA profile.'),
     },
   );
-
-  useEffect(() => {
-    setLoading(isPending);
-  }, [isPending, setLoading]);
 
   return (
     <Tip

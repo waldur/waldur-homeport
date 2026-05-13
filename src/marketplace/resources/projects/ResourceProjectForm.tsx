@@ -10,7 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
+import { FormGroupFinal, SubmitButton } from '@/form';
 import { NumberField } from '@/form/NumberField';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
@@ -208,7 +208,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
           >
             <Field
               name="name"
-              component={FormGroup as any}
+              component={FormGroupFinal}
               label={translate('Name')}
               required
               validate={required}
@@ -217,7 +217,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
             </Field>
             <Field
               name="description"
-              component={FormGroup as any}
+              component={FormGroupFinal}
               label={translate('Description')}
             >
               <TextField />
