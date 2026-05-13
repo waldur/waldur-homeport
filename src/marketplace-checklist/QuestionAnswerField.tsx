@@ -2,6 +2,7 @@ import { ComponentType } from 'react';
 import { Field } from 'react-final-form';
 import { QuestionAdmin, QuestionTypeEnum } from 'waldur-js-client';
 
+import { composeValidators, required } from '@/core/validators';
 import {
   FileUploadField,
   NumberField,
@@ -51,6 +52,12 @@ export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
   const isSelectType = isQuestionSelectType(type);
   const numberValidator = useQuestionNumberValidator(question);
 
+  const validators = [];
+  if (question.required) validators.push(required);
+  if (type === 'number' && numberValidator) validators.push(numberValidator);
+  const validate =
+    validators.length > 0 ? composeValidators(...validators) : undefined;
+
   return (
     <Field
       name={name}
@@ -77,7 +84,7 @@ export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
             buttonLabel: translate('Browse'),
           }
         : {})}
-      validate={type === 'number' ? numberValidator : undefined}
+      validate={validate}
       format={(value) => {
         if (type === 'single_select' && value) return value[0];
         if (type === 'multi_select' && !value?.length) return [];
