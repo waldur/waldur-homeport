@@ -16,12 +16,10 @@ import { TableTab } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
 
+import { DeleteUserAction } from '../users/DeleteUserAction';
 import { ResourcePermissionsLogButton } from '../users/ResourcePermissionsLogButton';
 import { ResourceTeamAddDropdown } from '../users/ResourceTeamAddDropdown';
-import {
-  DeleteUserAction,
-  UpdateUserExpirationAction,
-} from '../users/TeamUserActions';
+import { UpdateUserExpirationAction } from '../users/UpdateUserExpirationAction';
 
 import { ResourceUserInvitationsList } from './ResourceUserInvitationsList';
 

@@ -50,6 +50,7 @@ export function useProjectCostChart(project: Project) {
     queryKey: ['ProjectCostData', project?.uuid],
     queryFn: () => (project ? getProjectCostData(project) : null),
     staleTime: STALE_TIME,
+    enabled: Boolean(project),
   });
 
   const chartData = useMemo(() => {
@@ -104,9 +105,10 @@ export function useProjectCreditChart(project: Project) {
     error: costError,
     refetch: refetchCost,
   } = useQuery({
-    queryKey: ['ProjectCostData', project.uuid],
-    queryFn: () => getProjectCostData(project),
+    queryKey: ['ProjectCostData', project?.uuid],
+    queryFn: () => (project ? getProjectCostData(project) : null),
     staleTime: STALE_TIME,
+    enabled: Boolean(project),
   });
 
   const {
@@ -124,6 +126,7 @@ export function useProjectCreditChart(project: Project) {
 
     refetchOnWindowFocus: false,
     staleTime: SHORT_STALE_TIME,
+    enabled: Boolean(project),
   });
 
   const chartData = useMemo(() => {

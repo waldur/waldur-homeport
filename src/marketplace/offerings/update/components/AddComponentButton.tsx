@@ -6,9 +6,9 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
-const AddComponentDialog = lazyComponent(() =>
-  import('./AddComponentDialog').then((module) => ({
-    default: module.AddComponentDialog,
+const OfferingComponentDialog = lazyComponent(() =>
+  import('./OfferingComponentDialog').then((module) => ({
+    default: module.OfferingComponentDialog,
   })),
 );
 
@@ -18,7 +18,7 @@ export const AddComponentButton: FunctionComponent<{
 }> = ({ offering, refetch }) => {
   const { openDialog } = useModal();
   const callback = () => {
-    openDialog(AddComponentDialog, {
+    openDialog(OfferingComponentDialog, {
       resolve: { offering, refetch },
     });
   };

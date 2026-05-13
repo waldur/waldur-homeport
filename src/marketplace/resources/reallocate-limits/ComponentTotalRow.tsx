@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 import { BasePublicPlan } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 
 interface ComponentTotalRowProps {
@@ -30,9 +31,12 @@ export const ComponentTotalRow: FC<ComponentTotalRowProps> = ({
       <td colSpan={4} className="text-end fw-bold">
         {translate('Total:')}
       </td>
-      <td className="fw-bold">EUR {total.toFixed(2)}</td>
       <td className="fw-bold">
-        EUR {(total * secondaryMultiplier).toFixed(2)}
+        {ENV.plugins.WALDUR_CORE.CURRENCY_NAME} {total.toFixed(2)}
+      </td>
+      <td className="fw-bold">
+        {ENV.plugins.WALDUR_CORE.CURRENCY_NAME}{' '}
+        {(total * secondaryMultiplier).toFixed(2)}
       </td>
     </tr>
   );

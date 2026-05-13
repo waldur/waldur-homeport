@@ -1,26 +1,24 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
-import { reduxForm, formValueSelector } from 'redux-form';
+import { useQuery } from '@tanstack/react-query';
+import React, { FunctionComponent } from 'react';
+import { Form } from 'react-final-form';
 
+import { STALE_TIME } from '@/core/constants';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
 import { StepsList } from '@/marketplace/common/StepsList';
 import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
 import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
-import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useWizard } from '@/wizard/useWizard';
 
 import { loadData } from '../change-limits/utils';
 
 import { ChangeResourceLimitsTab } from './ChangeResourceLimitsTab';
-import { REALLOCATE_LIMITS_FORM_ID } from './constants';
 import { ReallocateCapacityTab } from './ReallocateCapacityTab';
-import { ReviewAndConfirmTab, submitReallocation } from './ReviewAndConfirmTab';
+import { reallocateLimits, ReviewAndConfirmTab } from './ReviewAndConfirmTab';
 import { ReallocateFormData } from './types';
-import { calculateFreedCapacity } from './utils';
+import { getValidationState } from './utils';
 
 interface ReallocateLimitsDialogProps {
   resolve: {
@@ -29,7 +27,6 @@ interface ReallocateLimitsDialogProps {
     };
     refetch?(): void;
   };
-  submitting: boolean;
 }
 
 const steps: ProgressStep[] = [
@@ -56,102 +53,57 @@ const tabs = {
   review: ReviewAndConfirmTab,
 };
 
-export const ReallocateLimitsDialog = reduxForm<
-  ReallocateFormData,
-  ReallocateLimitsDialogProps
->({
-  form: REALLOCATE_LIMITS_FORM_ID,
-})(({ resolve, handleSubmit, submitting, invalid, initialize }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-  const asyncState = useAsync(
-    () => loadData(resolve.resource.marketplace_resource_uuid),
-    [resolve.resource.marketplace_resource_uuid],
-  );
+const ReallocateLimitsDialogSubtitle = ({ resource, offering }) => (
+  <>
+    <div className="mb-0">
+      {translate(
+        'Adjust limits for a resource and redistribute freed capacity to other resources',
+      )}
+    </div>
+    {resource && offering && (
+      <div className="mt-3 mb-0">
+        {translate('Source')}: {resource.customer_name} /{' '}
+        {resource.project_name} / {resource.name} — {translate('Offering')}:{' '}
+        {offering.name}
+      </div>
+    )}
+  </>
+);
 
-  React.useEffect(() => {
-    if (asyncState.value) {
-      initialize({
-        limits: asyncState.value.initialValues.limits,
-        targets: [],
-      });
-    }
-  }, [asyncState.value, initialize]);
+export const ReallocateLimitsDialog: FunctionComponent<
+  ReallocateLimitsDialogProps
+> = ({ resolve }) => {
+  const dataQuery = useQuery({
+    queryKey: ['reallocate-limits', resolve.resource.marketplace_resource_uuid],
+    queryFn: () => loadData(resolve.resource.marketplace_resource_uuid),
+    staleTime: STALE_TIME,
+  });
 
   const { step, setStep, goBack, goNext, isFirstStep, isLastStep } =
     useWizard(steps);
 
-  const formSelector = formValueSelector(REALLOCATE_LIMITS_FORM_ID);
-  const limits = useSelector((state) => formSelector(state, 'limits'));
-  const targets = useSelector((state) => formSelector(state, 'targets'));
+  const { mutate: submitReallocation, isPending: submittingMutation } =
+    useManagedMutation({
+      mutationFn: (values: ReallocateFormData) =>
+        reallocateLimits(values, dataQuery.data),
+      successMessage: translate(
+        'Resource limits reallocation request has been submitted.',
+      ),
+      errorMessage: translate('Unable to submit reallocation request.'),
+      refetch: resolve.refetch,
+    });
 
-  const isStep1 = step.key === 'change-limits';
-  const isStep2 = step.key === 'reallocate';
-  let canProceed = !invalid;
-  let nextButtonTooltip: string;
+  const initialValues = React.useMemo(
+    () => ({
+      limits: dataQuery.data?.initialValues?.limits || {},
+      targets: [],
+    }),
+    [dataQuery.data],
+  );
 
-  if (isStep1 && asyncState.value) {
-    const currentLimits = asyncState.value.limits;
-
-    if (limits && currentLimits) {
-      const freedCapacity = calculateFreedCapacity(currentLimits, limits);
-      const hasFreedCapacity = Object.values(freedCapacity).some(
-        (amount) => amount > 0,
-      );
-      canProceed = hasFreedCapacity;
-    } else {
-      canProceed = false;
-    }
-  } else if (isStep2 && asyncState.value) {
-    const currentLimits = asyncState.value.limits;
-
-    if (limits && currentLimits) {
-      const freedCapacity = calculateFreedCapacity(currentLimits, limits);
-      const components =
-        asyncState.value.offering?.components?.filter(
-          (c) => c.billing_type === 'limit',
-        ) || [];
-
-      const allAllocated = components.every((component) => {
-        const freed = freedCapacity[component.type] || 0;
-        if (freed === 0) return true;
-
-        // Sum the allocated numbers for the component across multile resources
-        const totalAllocated = (targets || []).reduce((sum, target) => {
-          return sum + (target.allocated_limits[component.type] || 0);
-        }, 0);
-
-        return totalAllocated === freed;
-      });
-
-      canProceed = allAllocated && (targets?.length || 0) > 0;
-      if (!canProceed) {
-        nextButtonTooltip = translate('Allocate all free capacity to continue');
-      }
-    } else {
-      canProceed = false;
-    }
-  }
-
-  const onSubmit = async (formData: ReallocateFormData) => {
-    if (isLastStep && asyncState.value) {
-      await submitReallocation(
-        formData,
-        {
-          asyncState: { value: asyncState.value },
-          resolve,
-        },
-        { showSuccess, showErrorResponse, closeDialog },
-      );
-    } else {
-      goNext();
-    }
-    return Promise.resolve();
-  };
-
-  if (asyncState.loading) {
+  if (dataQuery.isLoading) {
     return (
-      <ModalDialog title={translate('Reallocate Resource Limits')}>
+      <ModalDialog title={translate('Reallocate resource limits')}>
         <div className="text-center p-5">
           <div className="spinner-border" role="status">
             <span className="visually-hidden">{translate('Loading...')}</span>
@@ -161,9 +113,9 @@ export const ReallocateLimitsDialog = reduxForm<
     );
   }
 
-  if (asyncState.error) {
+  if (dataQuery.error) {
     return (
-      <ModalDialog title={translate('Reallocate Resource Limits')}>
+      <ModalDialog title={translate('Reallocate resource limits')}>
         <div className="text-center p-5">
           <h3>{translate('Unable to load data.')}</h3>
         </div>
@@ -171,73 +123,83 @@ export const ReallocateLimitsDialog = reduxForm<
     );
   }
 
-  const resource = asyncState.value?.resource;
-  const offering = asyncState.value?.offering;
+  const resource = dataQuery.data?.resource;
+  const offering = dataQuery.data?.offering;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ModalDialog
-        title={translate('Reallocate Resource Limits')}
-        subtitle={
-          <>
-            <div className="mb-0">
-              {translate(
-                'Adjust limits for a resource and redistribute freed capacity to other resources',
-              )}
-            </div>
-            {resource && offering && (
-              <div className="mt-3 mb-0">
-                {translate('Source')}: {resource.customer_name} /{' '}
-                {resource.project_name} / {resource.name} —{' '}
-                {translate('Offering')}: {offering.name}
-              </div>
-            )}
-          </>
+    <Form<ReallocateFormData>
+      onSubmit={(values) => {
+        if (isLastStep && dataQuery.data) {
+          submitReallocation(values);
+        } else {
+          goNext();
         }
-        headerClassName="pb-0"
-        footer={
-          <WizardButtons
-            isLastStep={isLastStep}
-            isFirstStep={isFirstStep}
-            goBack={goBack}
-            goNext={goNext}
-            submitting={submitting}
-            invalid={!canProceed}
-            submitLabel={translate('Confirm')}
-            tooltip={nextButtonTooltip}
-          />
-        }
-        className="overflow-hidden"
-        bodyClassName="overflow-hidden border-0 pt-0"
-      >
-        <div className="pt-4">
-          <StepsList
-            steps={steps}
-            value={step}
-            onClick={setStep}
-            disabled={submitting}
-          />
-        </div>
+      }}
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      {({ handleSubmit, submitting, invalid, values }) => {
+        const { canProceed, nextButtonTooltip, freedCapacity } =
+          getValidationState(step.key, values, dataQuery.data, invalid);
 
-        <div
-          className="min-h-400px"
-          style={{
-            maxHeight: '400px',
-            overflowY: 'auto',
-          }}
-        >
-          <WizardTabs
-            steps={steps}
-            currentStep={step}
-            tabs={tabs}
-            mountOnEnter={true}
-            context={{
-              asyncState,
-              resolve,
-            }}
-          />
-        </div>
-      </ModalDialog>
-    </form>
+        return (
+          <form onSubmit={handleSubmit}>
+            <ModalDialog
+              title={translate('Reallocate resource limits')}
+              subtitle={
+                <ReallocateLimitsDialogSubtitle
+                  resource={resource}
+                  offering={offering}
+                />
+              }
+              headerClassName="pb-0"
+              footer={
+                <WizardButtons
+                  isLastStep={isLastStep}
+                  isFirstStep={isFirstStep}
+                  goBack={goBack}
+                  goNext={goNext}
+                  submitting={submitting || submittingMutation}
+                  invalid={!canProceed}
+                  submitLabel={translate('Confirm')}
+                  tooltip={nextButtonTooltip}
+                />
+              }
+              className="overflow-hidden"
+              bodyClassName="overflow-hidden border-0 pt-0"
+            >
+              <div className="pt-4">
+                <StepsList
+                  steps={steps}
+                  value={step}
+                  onClick={setStep}
+                  disabled={submitting || submittingMutation}
+                />
+              </div>
+
+              <div
+                className="min-h-400px"
+                style={{
+                  maxHeight: '400px',
+                  overflowY: 'auto',
+                }}
+              >
+                <WizardTabs
+                  steps={steps}
+                  currentStep={step}
+                  tabs={tabs}
+                  mountOnEnter={true}
+                  context={{
+                    asyncState: { value: dataQuery.data },
+                    freedCapacity,
+                    resolve,
+                  }}
+                />
+              </div>
+            </ModalDialog>
+          </form>
+        );
+      }}
+    </Form>
   );
-});
+};

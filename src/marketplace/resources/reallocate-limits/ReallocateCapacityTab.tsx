@@ -1,7 +1,6 @@
 import { FC, useEffect, useMemo, useState } from 'react';
 import { Form, Nav, Tab } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { change, formValueSelector } from 'redux-form';
+import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import { AsyncPaginate } from '@/form/themed-select';
@@ -13,9 +12,8 @@ import { formatResourceShort } from '@/marketplace/utils';
 
 import { FetchedData } from '../change-limits/utils';
 
-import { REALLOCATE_LIMITS_FORM_ID } from './constants';
 import { ResourceSelectionTable } from './ResourceSelectionTable';
-import { ResourceSelection } from './types';
+import { ReallocateFormData, ResourceSelection } from './types';
 import { calculateFreedCapacity } from './utils';
 
 interface ReallocateCapacityTabProps {
@@ -29,20 +27,13 @@ interface ReallocateCapacityTabProps {
 export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
   context,
 }) => {
-  const dispatch = useDispatch();
+  const form = useForm();
+  const { values } = useFormState<ReallocateFormData>();
+  const limits = values.limits;
+  const targets = values.targets || [];
+
   const [selectedResources, setSelectedResources] = useState<Resource[]>([]);
   const [activeComponentTab, setActiveComponentTab] = useState<string>('');
-
-  const formSelector = formValueSelector(REALLOCATE_LIMITS_FORM_ID);
-  const limits = useSelector((state) =>
-    formSelector(state, 'limits'),
-  ) as Limits;
-  const targets =
-    (useSelector((state) => formSelector(state, 'targets')) as Array<{
-      resource_uuid: string;
-      resource_name?: string;
-      allocated_limits: Limits;
-    }>) || [];
 
   const {
     resource,
@@ -96,6 +87,9 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
     const selectedUuids = new Set(selectedResources.map((r) => r.uuid));
     const targetUuids = new Set(currentTargets.map((t) => t.resource_uuid));
 
+    let changed = false;
+    const newTargets = [...currentTargets];
+
     // Add new selections
     selectedResources.forEach((r) => {
       if (!targetUuids.has(r.uuid)) {
@@ -106,32 +100,27 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
           }
         });
 
-        dispatch(
-          change(REALLOCATE_LIMITS_FORM_ID, 'targets', [
-            ...currentTargets,
-            {
-              resource_uuid: r.uuid,
-              resource_name: r.name,
-              allocated_limits: initialAllocatedLimits,
-            },
-          ]),
-        );
+        newTargets.push({
+          resource_uuid: r.uuid,
+          resource_name: r.name,
+          allocated_limits: initialAllocatedLimits,
+        });
+        changed = true;
       }
     });
 
-    const toRemove = currentTargets.filter(
-      (t) => !selectedUuids.has(t.resource_uuid),
+    // Remove unselected targets
+    const filteredTargets = newTargets.filter((t) =>
+      selectedUuids.has(t.resource_uuid),
     );
-    if (toRemove.length > 0) {
-      dispatch(
-        change(
-          REALLOCATE_LIMITS_FORM_ID,
-          'targets',
-          currentTargets.filter((t) => selectedUuids.has(t.resource_uuid)),
-        ),
-      );
+    if (filteredTargets.length !== currentTargets.length) {
+      changed = true;
     }
-  }, [selectedResources, targets, dispatch]);
+
+    if (changed) {
+      form.change('targets', filteredTargets);
+    }
+  }, [selectedResources, targets, form, components, freedCapacity]);
 
   const handleAllocationChange = (
     resourceUuid: string,
@@ -152,7 +141,7 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
           [componentType]: amount,
         },
       };
-      dispatch(change(REALLOCATE_LIMITS_FORM_ID, 'targets', updatedTargets));
+      form.change('targets', updatedTargets);
     }
   };
 

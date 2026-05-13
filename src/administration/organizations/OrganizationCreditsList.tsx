@@ -4,8 +4,8 @@ import { CustomerCredit, customerCreditsList } from 'waldur-js-client';
 import { Link } from '@/core/Link';
 import { COMMON_CREDIT_COLUMNS } from '@/customer/credits/constants';
 import { CreateCreditButton } from '@/customer/credits/CreateCreditButton';
-import { CreditActions } from '@/customer/credits/CreditActions';
 import { CreditExpandableRow } from '@/customer/credits/CreditExpandableRow';
+import { CustomerCreditActions } from '@/customer/credits/CustomerCreditActions';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -42,7 +42,7 @@ export const OrganizationCreditsList: FC<{}> = () => {
       verboseName={translate('Credits')}
       hasQuery
       enableExport
-      rowActions={CreditActions}
+      rowActions={CustomerCreditActions}
       expandableRow={CreditExpandableRow}
       tableActions={
         <>

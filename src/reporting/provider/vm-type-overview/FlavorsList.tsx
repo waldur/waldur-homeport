@@ -1,7 +1,5 @@
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
+import { FunctionComponent, useMemo } from 'react';
+import { useFormState } from 'react-final-form';
 import { openstackFlavorsUsageStatsRetrieve } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -20,13 +18,10 @@ const NumOfCreatedInstancesField = ({ row }) => (
   <>{row.created_instances_count}</>
 );
 
-const mapStateToFilter = createSelector(
-  getFormValues('vmOverviewFilter'),
-  formatFilter,
-);
-
 export const FlavorsList: FunctionComponent<{}> = () => {
-  const filter = useSelector(mapStateToFilter);
+  const { values } = useFormState({ subscription: { values: true } });
+  const filter = useMemo(() => formatFilter(values), [values]);
+
   const tableProps = useTable({
     table: 'flavorsList',
     fetchData: createFetcher(openstackFlavorsUsageStatsRetrieve),

@@ -1,8 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Form } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form';
+import { Field, useFormState } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -15,18 +15,14 @@ import { SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { Category, Offering } from '@/marketplace/types';
 
-import { importOfferingSelector } from './selectors';
-
-interface FieldValue {
-  remote_category?;
-  local_category?;
-}
+import { OfferingImportFormData } from './types';
 
 const FieldsListMapping = ({
   fields,
   offerings,
   categories,
-}: WrappedFieldArrayProps<FieldValue> & {
+}: {
+  fields: any;
   offerings: Offering[];
   categories: Category[];
 }) => {
@@ -44,7 +40,7 @@ const FieldsListMapping = ({
             component ? (
               <tr key={component}>
                 <td className="text-dark">
-                  {fields.get(i).remote_category}
+                  {fields.value[i].remote_category}
                   <Tip
                     id={`tip-offerings-${component}`}
                     label={
@@ -57,7 +53,7 @@ const FieldsListMapping = ({
                             .filter(
                               (item) =>
                                 item.category_title ===
-                                fields.get(i).remote_category,
+                                fields.value[i].remote_category,
                             )
                             .map((offering) => (
                               <li key={offering.uuid}>{offering.name}</li>
@@ -114,17 +110,19 @@ export const SelectCategoryTab = () => {
 
     staleTime: UI_STALE_TIME,
   });
-  const formData = useSelector(importOfferingSelector);
+  const { values: formData } = useFormState<OfferingImportFormData>();
 
   return (
     <>
-      <FieldArray
-        name="categories_set"
-        component={FieldsListMapping}
-        validate={requiredArray}
-        offerings={formData.offerings}
-        categories={categories}
-      />
+      <FieldArray name="categories_set" validate={requiredArray}>
+        {(props) => (
+          <FieldsListMapping
+            {...props}
+            offerings={formData.offerings}
+            categories={categories}
+          />
+        )}
+      </FieldArray>
 
       {isLoading ? (
         <LoadingSpinner />

@@ -1,17 +1,20 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
+import arrayMutators from 'final-form-arrays';
 import { DateTime } from 'luxon';
+import { FC } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
+import { Field, Form as FinalForm } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { useAsync } from 'react-use';
-import { Field, FieldArray, reduxForm } from 'redux-form';
 import {
   invoiceSendFinancialReportByMail,
   invoicesList,
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { AccountingPeriodField } from '@/customer/list/AccountingPeriodField';
+import { composeValidators, email, required } from '@/core/validators';
+import { AccountingPeriodFieldComponent } from '@/customer/list/AccountingPeriodField';
 import { getOptions } from '@/customer/list/AccountingRunningField';
-import { EXPORT_AS_EMAIL_FORM_ID } from '@/customer/list/constants';
 import { makeAccountingPeriods } from '@/customer/list/utils';
 import { SubmitButton } from '@/form';
 import { EmailField } from '@/form/EmailField';
@@ -51,10 +54,7 @@ async function loadData() {
   return { initialValues, accountingPeriods };
 }
 
-export const ExportAsEmailDialog = reduxForm<{}, any>({
-  form: EXPORT_AS_EMAIL_FORM_ID,
-  enableReinitialize: true,
-})(({ submitting, handleSubmit }) => {
+export const ExportAsEmailDialog: FC = () => {
   const { loading, error, value: data } = useAsync(loadData);
   const submitMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>
@@ -81,47 +81,58 @@ export const ExportAsEmailDialog = reduxForm<{}, any>({
   }
 
   return (
-    <form
-      onSubmit={handleSubmit((values) => submitMutation.mutateAsync(values))}
-    >
-      <ModalDialog
-        title={translate('Send report')}
-        footer={
-          <SubmitButton
-            submitting={submitting}
-            label={translate('Send report')}
-          />
-        }
-      >
-        <Row>
-          <Col md={12} lg={8} className="d-flex flex-column">
-            <div>
-              <Form.Label>{translate('Emails')}</Form.Label>
-              <FieldArray name="emails" component={renderEmails} />
-            </div>
+    <FinalForm
+      onSubmit={(values) => submitMutation.mutateAsync(values)}
+      initialValues={data.initialValues}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Send report')}
+            footer={
+              <SubmitButton
+                submitting={submitting}
+                invalid={invalid}
+                label={translate('Send report')}
+              />
+            }
+          >
+            <Row>
+              <Col md={12} lg={8} className="d-flex flex-column">
+                <div>
+                  <Form.Label>{translate('Emails')}</Form.Label>
+                  <FieldArray name="emails" component={renderEmails} />
+                </div>
 
-            <div className="mt-4">
-              <AccountingPeriodField options={data.accountingPeriods} />
-            </div>
+                <div className="mt-4">
+                  <Field
+                    name="accounting_period"
+                    component={AccountingPeriodFieldComponent}
+                    options={data.accountingPeriods}
+                  />
+                </div>
 
-            <div className="mt-4" />
-          </Col>
-        </Row>
-      </ModalDialog>
-    </form>
+                <div className="mt-4" />
+              </Col>
+            </Row>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};
 
 const renderEmails = ({ fields }: any) => (
   <>
-    {fields.map((email: any, index: number) => (
-      <Row key={index} className="mb-3">
+    {fields.map((emailName: any, index: number) => (
+      <Row key={emailName} className="mb-3">
         <Col md={10}>
           <Field
-            name={`${email}`}
+            name={emailName}
             type="email"
-            component={EmailField}
+            component={EmailField as any}
             label={translate('Email')}
+            validate={composeValidators(required, email)}
             required={true}
           />
         </Col>
@@ -142,7 +153,7 @@ const renderEmails = ({ fields }: any) => (
       <Col>
         <ActionButton
           title={translate('Add email')}
-          action={() => fields.push()}
+          action={() => fields.push(undefined)}
           iconNode={<PlusCircleIcon weight="bold" />}
           variant="primary"
         />

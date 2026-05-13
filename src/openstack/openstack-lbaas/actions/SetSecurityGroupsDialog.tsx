@@ -6,7 +6,7 @@ import {
   openstackLoadbalancersSetSecurityGroups,
 } from 'waldur-js-client';
 
-import { FormGroup } from '@/form/FormGroup';
+import { FormGroupFinal } from '@/form';
 import { SelectField } from '@/form/SelectField';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
@@ -104,7 +104,7 @@ export const SetSecurityGroupsDialog: FC<
           >
             {asyncState.value ? (
               <Field
-                component={FormGroup as any}
+                component={FormGroupFinal}
                 name="security_groups"
                 label={translate('Security groups')}
               >

@@ -6,7 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
+import { FormGroupFinal, SubmitButton } from '@/form';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -80,7 +80,7 @@ export const ScienceSubDomainForm = ({ resolve }) => {
           >
             <Field
               name="code"
-              component={FormGroup as any}
+              component={FormGroupFinal}
               label={translate('Code')}
               description={translate('Auto-generated if left blank.')}
             >
@@ -88,7 +88,7 @@ export const ScienceSubDomainForm = ({ resolve }) => {
             </Field>
             <Field
               name="name"
-              component={FormGroup as any}
+              component={FormGroupFinal}
               label={translate('Name')}
               required
               validate={required}

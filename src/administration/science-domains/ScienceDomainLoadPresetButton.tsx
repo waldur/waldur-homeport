@@ -8,7 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
+import { FormGroupFinal, SubmitButton } from '@/form';
 import { SelectField } from '@/form/SelectField';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -74,7 +74,7 @@ const LoadPresetDialog = ({ resolve }) => {
           >
             <Field
               name="preset"
-              component={FormGroup as any}
+              component={FormGroupFinal}
               label={translate('Preset')}
               required
               validate={required}

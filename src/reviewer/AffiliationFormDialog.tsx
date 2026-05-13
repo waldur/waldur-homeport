@@ -2,14 +2,14 @@ import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { FormCheck } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import {
-  nestedReviewerProfileAffiliationsPartialUpdate,
-  ReviewerAffiliationRequest,
   AffiliationTypeEnum,
   nestedReviewerProfileAffiliationsCreate,
+  nestedReviewerProfileAffiliationsPartialUpdate,
+  ReviewerAffiliationRequest,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SelectField, StringField, SubmitButton } from '@/form';
+import { FormGroupFinal, SelectField, StringField, SubmitButton } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -129,7 +129,7 @@ export const AffiliationFormDialog = ({
             <Field
               name="organization_name"
               label={translate('Organization name')}
-              component={FormGroup as any}
+              component={FormGroupFinal}
               validate={required}
             >
               <StringField />
@@ -141,7 +141,7 @@ export const AffiliationFormDialog = ({
               description={translate(
                 'ROR, GRID, or other external identifier (optional)',
               )}
-              component={FormGroup as any}
+              component={FormGroupFinal}
             >
               <StringField />
             </Field>
@@ -149,7 +149,7 @@ export const AffiliationFormDialog = ({
             <Field
               name="department"
               label={translate('Department')}
-              component={FormGroup as any}
+              component={FormGroupFinal}
             >
               <StringField />
             </Field>
@@ -157,7 +157,7 @@ export const AffiliationFormDialog = ({
             <Field
               name="position_title"
               label={translate('Position title')}
-              component={FormGroup as any}
+              component={FormGroupFinal}
               validate={required}
             >
               <StringField />
@@ -166,7 +166,7 @@ export const AffiliationFormDialog = ({
             <Field
               name="affiliation_type"
               label={translate('Affiliation type')}
-              component={FormGroup as any}
+              component={FormGroupFinal}
               options={AFFILIATION_TYPE_OPTIONS}
               getOptionLabel={(option) => option.label}
               getOptionValue={(option) => option.value}
@@ -179,7 +179,7 @@ export const AffiliationFormDialog = ({
             <Field
               name="start_date"
               label={translate('Start date')}
-              component={FormGroup as any}
+              component={FormGroupFinal}
               validate={required}
             >
               <DateField />
@@ -189,7 +189,7 @@ export const AffiliationFormDialog = ({
               name="end_date"
               label={translate('End date')}
               description={translate('Leave empty for current affiliation')}
-              component={FormGroup as any}
+              component={FormGroupFinal}
             >
               <DateField />
             </Field>
@@ -197,7 +197,7 @@ export const AffiliationFormDialog = ({
             <Field
               name="is_primary"
               label={translate('Primary affiliation')}
-              component={FormGroup as any}
+              component={FormGroupFinal}
               type="checkbox"
             >
               {({ input }) => (

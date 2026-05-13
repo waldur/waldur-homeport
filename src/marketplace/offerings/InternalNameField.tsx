@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { composeValidators, required } from '@/core/validators';
 import { translate } from '@/i18n';
@@ -11,7 +10,6 @@ interface InternalNameFieldProps {
   name: string;
   disabled?: boolean;
   readOnly?: boolean;
-  legacyField?: boolean;
 }
 
 const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_\\-/:]+$');
@@ -28,9 +26,8 @@ const validators = composeValidators(required, validateInternalName);
 export const InternalNameField: FunctionComponent<InternalNameFieldProps> = (
   props,
 ) => {
-  const Component = (props.legacyField ? Field : FinalField) as any;
   return (
-    <Component
+    <Field
       name={props.name}
       validate={validators}
       parse={(v) => v?.replace('.', '')}

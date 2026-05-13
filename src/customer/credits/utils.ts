@@ -1,15 +1,3 @@
-import { CreateCustomerCreditRequest } from 'waldur-js-client';
-
-export const serializeCustomerCredit = (
-  formData,
-): CreateCustomerCreditRequest => ({
-  ...formData,
-  customer: formData.customer.url,
-  offerings: formData.offerings
-    ? formData.offerings.map((offering) => offering.url)
-    : undefined,
-});
-
 export const getCreditInitialValues = (row) => ({
   value: row.value,
   end_date: row.end_date,

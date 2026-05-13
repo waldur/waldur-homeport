@@ -37,43 +37,49 @@ vi.mock('../workspace/fetchCustomer', () => ({
   useCustomerProjects: () => ({ loading: false }),
 }));
 
-vi.mock('@/marketplace/offerings/FormGroup', () => ({
-  FormGroup: ({ label, children }) => (
-    <div>
-      {label && (
-        <label>
-          {label}
-          {children}
-        </label>
-      )}
-      {!label && children}
-    </div>
-  ),
+vi.mock('@/form/useFlatpickrTheme', () => ({
+  useFlatpickrTheme: vi.fn(),
 }));
 
-// Mock form fields to avoid complex dependencies
-vi.mock('@/form/SelectField', () => ({
-  SelectField: ({ input, options, getOptionLabel, getOptionValue }) => (
-    <select
-      {...input}
-      onChange={(e) => {
-        const val = e.target.value;
-        const option = options.find((o) => getOptionValue(o) === val);
-        input.onChange(option || val);
-      }}
-    >
-      <option value="">Select...</option>
-      {options?.map((o) => (
-        <option key={getOptionValue(o)} value={getOptionValue(o)}>
-          {getOptionLabel(o)}
-        </option>
-      ))}
-    </select>
-  ),
-}));
+vi.mock('@/form/SelectField', () => {
+  return {
+    SelectField: (props) => (
+      <select
+        id={props.id || props.input?.name}
+        name={props.input?.name}
+        value={
+          typeof props.input?.value === 'object'
+            ? props.getOptionValue?.(props.input.value) || props.input.value.url
+            : props.input?.value || ''
+        }
+        onBlur={() => props.input?.onBlur?.()}
+        onChange={(e) => {
+          if (!props.input) return;
+          const val = e.target.value;
+          const option = props.options?.find(
+            (o) => (props.getOptionValue?.(o) || o.url || o.name) === val,
+          );
+          props.input.onChange(option || val);
+        }}
+      >
+        <option value="">Select...</option>
+        {props.options?.map((o) => (
+          <option
+            key={props.getOptionValue?.(o) || o.url || o.name}
+            value={props.getOptionValue?.(o) || o.url || o.name}
+          >
+            {props.getOptionLabel?.(o) || o.name || o.label}
+          </option>
+        ))}
+      </select>
+    ),
+  };
+});
 
 vi.mock('@/form/DateField', () => ({
-  DateField: ({ input }) => <input type="date" {...input} />,
+  DateField: (props) => (
+    <input type="date" id={props.id || props.input?.name} {...props.input} />
+  ),
 }));
 
 const mockStore = configureStore();
@@ -116,19 +122,23 @@ describe('AddProjectUserDialog', () => {
 
     // Fill the form
     // Project Select
-    const projectSelect = screen.getByLabelText('Project');
+    const projectSelect = await screen.findByLabelText('Project');
     fireEvent.change(projectSelect, { target: { value: 'project-url' } });
+    fireEvent.blur(projectSelect);
 
     // Role Select
-    const roleSelect = screen.getByLabelText('Role');
+    const roleSelect = await screen.findByLabelText('Role');
     fireEvent.change(roleSelect, { target: { value: 'admin' } });
+    fireEvent.blur(roleSelect);
 
     // Expiration Date
-    const dateInput = screen.getByLabelText('Role expires on');
+    const dateInput = await screen.findByLabelText('Role expires on');
     fireEvent.change(dateInput, { target: { value: '2025-01-01' } });
+    fireEvent.blur(dateInput);
 
     // Submit
-    const submitButton = screen.getByText('Save');
+    const submitButton = await screen.findByTestId('submit-button');
+    await waitFor(() => expect(submitButton).not.toBeDisabled());
     fireEvent.click(submitButton);
 
     await waitFor(() => {

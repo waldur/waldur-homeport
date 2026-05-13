@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 import { OptionProps, components } from 'react-select';
-import { Field } from 'redux-form';
 
 import { required } from '@/core/validators';
 import { SelectField } from '@/form/SelectField';
@@ -36,13 +35,10 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => (
 
 export const RoleGroup: FunctionComponent<{
   types: RoleType[];
-  legacyField?: boolean;
-}> = ({ types, legacyField }) => {
-  const Component = (legacyField ? Field : FinalField) as any;
-
+}> = ({ types }) => {
   return (
     <FormGroup label={translate('Role')} controlId="role">
-      <Component
+      <Field
         name="role"
         component={SelectField as any}
         options={getRoles(types)}

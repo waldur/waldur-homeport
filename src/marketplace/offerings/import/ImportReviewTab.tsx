@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useFormState } from 'react-final-form';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { importOfferingSelector } from './selectors';
+import { OfferingImportFormData } from './types';
 
 export const ImportReviewTab = () => {
-  const formData = useSelector(importOfferingSelector);
+  const { values: formData } = useFormState<OfferingImportFormData>();
 
   const tableData = useMemo(() => {
     return formData.offerings.map((offering) => {
@@ -19,8 +19,8 @@ export const ImportReviewTab = () => {
       return {
         uuid: offering.uuid,
         offering: offering.name,
-        remote_category: categoryMap.remote_category,
-        local_category: categoryMap.local_category.title,
+        remote_category: categoryMap?.remote_category,
+        local_category: categoryMap?.local_category?.title,
       };
     });
   }, [formData]);

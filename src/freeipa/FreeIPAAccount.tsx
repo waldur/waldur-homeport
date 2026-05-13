@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 import { freeipaProfilesList } from 'waldur-js-client';
@@ -35,8 +34,6 @@ export const FreeIpaAccount = () => {
   useEffectOnce(() => {
     refreshProfile();
   });
-  const [loading, setLoading] = React.useState<boolean>();
-
   if (isLoading) return <LoadingSpinner />;
 
   if (error) return <>{translate('Unable to load data.')}</>;
@@ -55,7 +52,6 @@ export const FreeIpaAccount = () => {
               <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3">
                 <SyncProfile
                   profile={profile}
-                  setLoading={setLoading}
                   refreshProfile={refreshProfile}
                 />
               </div>
@@ -65,7 +61,7 @@ export const FreeIpaAccount = () => {
       </Card.Header>
       <Card.Body>
         {profile ? (
-          <FreeIPAAccountEdit profile={profile} loading={loading} />
+          <FreeIPAAccountEdit profile={profile} />
         ) : (
           <FreeIPAAccountCreate onProfileAdded={refreshProfile} />
         )}

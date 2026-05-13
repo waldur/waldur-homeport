@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { InputField } from '@/form/InputField';
@@ -12,13 +11,11 @@ interface DisplayNameFieldProps {
   name: string;
   disabled?: boolean;
   readOnly?: boolean;
-  legacyField?: boolean;
 }
 
 export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
   props,
 ) => {
-  const Component = (props.legacyField ? Field : FinalField) as any;
   return (
     <FormGroup
       label={translate('Display name')}
@@ -27,8 +24,8 @@ export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
       helpEnd
       space={5}
     >
-      <Component
-        component={InputField}
+      <Field
+        component={InputField as any}
         name={props.name}
         type="text"
         validate={required}

@@ -1,55 +1,25 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
-import { SubmissionError } from 'redux-form';
-import { projectCreditsUpdate } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { useNotify } from '@/store/notify';
 
-import { getCreditInitialValues } from './utils';
-
-const ProjectCreditFormDialog = lazyComponent(() =>
-  import('./ProjectCreditFormDialog').then((module) => ({
-    default: module.ProjectCreditFormDialog,
+const ProjectCreditDialog = lazyComponent(() =>
+  import('./ProjectCreditDialog').then((module) => ({
+    default: module.ProjectCreditDialog,
   })),
 );
 
 export const ProjectEditCreditButton = ({ row, refetch }) => {
-  const { closeDialog, openDialog } = useModal();
-  const { showErrorResponse, showSuccess } = useNotify();
+  const { openDialog } = useModal();
 
   const openCreditFormDialog = () =>
-    openDialog(ProjectCreditFormDialog, {
+    openDialog(ProjectCreditDialog, {
       size: 'lg',
-      formId: 'ProjectCreditEditForm',
-      initialValues: {
-        project: {
-          uuid: row.project_uuid,
-          name: row.project_name,
-          url: row.project,
-        },
-        ...getCreditInitialValues(row),
-      },
-      submitFn: async (formData) => {
-        try {
-          await projectCreditsUpdate({
-            path: { uuid: row.uuid },
-            body: {
-              ...formData,
-              project: formData.project.url,
-            },
-          });
-          closeDialog();
-          refetch();
-          showSuccess(translate('Credit has been updated.'));
-        } catch (e) {
-          showErrorResponse(e, translate('Unable to edit the credit'));
-          if (e.response && e.response.status === 400) {
-            throw new SubmissionError(e.response.data);
-          }
-        }
+      resolve: {
+        credit: row,
+        refetch,
       },
     });
 

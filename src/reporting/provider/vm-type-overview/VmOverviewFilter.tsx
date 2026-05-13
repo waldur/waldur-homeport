@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { Select } from '@/form/themed-select';
@@ -20,7 +20,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
       <form className="form-inline" id="vm-overview-filter">
         <Field
           name="shared"
-          component={AwesomeCheckboxField}
+          component={AwesomeCheckboxField as any}
           label={translate('Show shared')}
         />
 

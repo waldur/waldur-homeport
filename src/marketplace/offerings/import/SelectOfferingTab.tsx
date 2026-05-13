@@ -1,24 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
 import { groupBy } from 'lodash-es';
-import { useDispatch, useSelector } from 'react-redux';
-import { change } from 'redux-form';
+import { useForm, useFormState } from 'react-final-form';
 import { remoteWaldurApiSharedOfferings } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField } from '@/form';
+import { FormContainerFinal, SelectField } from '@/form';
 import { MultiSelectOption } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
 import { Offering } from '@/marketplace/types';
 import { Field } from '@/resource/summary';
 
-import { OFFERING_IMPORT_FORM_ID } from './constants';
 import { ErredRemoteConnection } from './ErredRemoteConnection';
-import { importOfferingSelector } from './selectors';
+import { OfferingImportFormData } from './types';
 
 export const SelectOfferingTab = () => {
-  const formData = useSelector(importOfferingSelector);
+  const { values: formData } = useFormState<OfferingImportFormData>();
+  const form = useForm();
+
   const {
     isLoading,
     error,
@@ -55,7 +55,6 @@ export const SelectOfferingTab = () => {
     retry: false,
   });
 
-  const dispatch = useDispatch();
   const updateCategoriesMapping = (offerings: Offering[]) => {
     const groupedByCategory = groupBy(
       offerings,
@@ -65,15 +64,11 @@ export const SelectOfferingTab = () => {
       remote_category: category,
       local_category: '',
     }));
-    dispatch(change(OFFERING_IMPORT_FORM_ID, 'categories_set', categoriesMap));
+    form.change('categories_set', categoriesMap);
   };
 
   return (
-    <FormContainer
-      submitting={false}
-      clearOnUnmount={false}
-      className="size-lg"
-    >
+    <FormContainerFinal submitting={false} className="size-lg">
       <Field
         label={translate('API URL')}
         value={formData?.api_url}
@@ -122,6 +117,6 @@ export const SelectOfferingTab = () => {
           {translate('There are no offerings yet.')}
         </p>
       ) : null}
-    </FormContainer>
+    </FormContainerFinal>
   );
 };

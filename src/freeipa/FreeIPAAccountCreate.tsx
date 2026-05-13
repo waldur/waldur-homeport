@@ -1,11 +1,12 @@
 import { PlusIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
+import React from 'react';
 import { FormGroup } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { freeipaProfilesCreate } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
@@ -27,31 +28,36 @@ const fixUsername = (username: string): string =>
 export const FreeIPAAccountCreate: React.FC<FreeIPAAccountCreateOwnProps> = ({
   onProfileAdded,
 }) => {
-  const { showSuccess, showError, showErrorResponse } = useNotify();
+  const { showError } = useNotify();
   const user = useUser();
 
-  const onSubmit = useCallback(
-    async (formData: FreeIPAAccountCreateFormData) => {
-      try {
-        await freeipaProfilesCreate({ body: { username: formData.username } });
-        showSuccess(translate('A profile has been created.'));
-        onProfileAdded();
-      } catch (response) {
-        if (response.data && response.data.username) {
-          showError(response.data.username);
-        }
-        showErrorResponse(
-          response,
-          translate('Unable to create a FreeIPA profile.'),
-        );
+  const { mutateAsync: submitMutation } = useManagedMutation<
+    any,
+    any,
+    FreeIPAAccountCreateFormData
+  >({
+    mutationFn: (formData) =>
+      freeipaProfilesCreate({ body: { username: formData.username } }),
+    successMessage: translate('A profile has been created.'),
+    errorMessage: translate('Unable to create a FreeIPA profile.'),
+    onSuccess: onProfileAdded,
+    onError: (response: any) => {
+      if (response.data && response.data.username) {
+        showError(response.data.username);
       }
     },
-    [showSuccess, showError, showErrorResponse, onProfileAdded],
-  );
+    closeModal: false,
+  });
 
   return (
-    <Form
-      onSubmit={onSubmit}
+    <Form<FreeIPAAccountCreateFormData>
+      onSubmit={async (formData) => {
+        try {
+          await submitMutation(formData);
+        } catch {
+          // Error is handled by onError in useManagedMutation
+        }
+      }}
       initialValues={{ username: fixUsername(user.username) }}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

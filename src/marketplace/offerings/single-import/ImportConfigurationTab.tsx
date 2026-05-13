@@ -1,23 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { change, Field } from 'redux-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 
 import { STALE_TIME } from '@/core/constants';
 import { SelectField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { FormContainer } from '@/form/FormContainer';
+import { FormContainerFinal } from '@/form/FormContainerFinal';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 
 import { FormGroup } from '../FormGroup';
 
-import { SINGLE_OFFERING_IMPORT_FORM_ID } from './constants';
-import { useFormData } from './utils';
+import { SingleOfferingImportFormData } from './types';
 
 export const ImportConfigurationTab: FunctionComponent = () => {
-  const formData = useFormData();
+  const { values: formData } = useFormState<SingleOfferingImportFormData>();
+  const form = useForm();
 
   const categoriesQuery = useQuery({
     queryKey: ['marketplaceCategories'],
@@ -25,7 +24,6 @@ export const ImportConfigurationTab: FunctionComponent = () => {
     staleTime: STALE_TIME,
   });
 
-  const dispatch = useDispatch();
   // Auto-set category based on imported file metadata
   useEffect(() => {
     if (
@@ -42,13 +40,13 @@ export const ImportConfigurationTab: FunctionComponent = () => {
         (cat) => cat.title === categoryName,
       );
       if (catObj) {
-        dispatch(change(SINGLE_OFFERING_IMPORT_FORM_ID, 'category', catObj));
+        form.change('category', catObj);
       }
     }
-  }, [categoriesQuery.data, formData._category_name, dispatch]);
+  }, [categoriesQuery.data, formData._category_name, form]);
 
   return (
-    <FormContainer submitting={false}>
+    <FormContainerFinal submitting={false}>
       <Row className="mb-7">
         <Col md={12}>
           <FormGroup
@@ -82,91 +80,102 @@ export const ImportConfigurationTab: FunctionComponent = () => {
         <Col md={6}>
           <Field
             name="import_components"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import components')}
             help_text={translate('Include offering components in the import')}
+            type="checkbox"
           />
 
           <Field
             name="import_plans"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import plans')}
             help_text={translate('Include pricing plans in the import')}
+            type="checkbox"
           />
 
           <Field
             name="import_screenshots"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import screenshots')}
             help_text={translate('Include offering screenshots in the import')}
+            type="checkbox"
           />
 
           <Field
             name="import_files"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import files')}
             help_text={translate('Include attached files in the import')}
+            type="checkbox"
           />
 
           <Field
             name="import_endpoints"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import access endpoints')}
             help_text={translate('Include access endpoint configurations')}
+            type="checkbox"
           />
         </Col>
         <Col md={6}>
           <Field
             name="import_organization_groups"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import organization groups')}
             help_text={translate(
               "Import organization groups associations (may fail if groups don't exist)",
             )}
+            type="checkbox"
           />
 
           <Field
             name="import_terms_of_service"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import terms of service')}
             help_text={translate('Include terms of service configurations')}
+            type="checkbox"
           />
 
           <Field
             name="import_plugin_options"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import plugin options')}
             help_text={translate('Include plugin-specific options')}
+            type="checkbox"
           />
 
           <Field
             name="import_secret_options"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Import secret options')}
             help_text={translate(
               'WARNING: Import secret options (will overwrite existing secrets)',
             )}
+            type="checkbox"
           />
 
           <Field
             name="overwrite_existing"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Overwrite existing')}
             help_text={translate(
               'Overwrite existing offering if one with the same name exists',
             )}
+            type="checkbox"
           />
 
           <Field
             name="preserve_state"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Preserve state')}
             help_text={translate(
               "Preserve offering state from export, otherwise set to 'Draft'",
             )}
+            type="checkbox"
           />
         </Col>
       </Row>
-    </FormContainer>
+    </FormContainerFinal>
   );
 };

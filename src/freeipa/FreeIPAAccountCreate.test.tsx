@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
@@ -12,6 +13,14 @@ import { FreeIPAAccountCreate } from './FreeIPAAccountCreate';
 // Mock API calls and dependencies
 vi.mock('waldur-js-client');
 vi.mock('@/core/config');
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 describe('FreeIPAAccountCreate', () => {
   const mockOnProfileAdded = vi.fn();
@@ -28,9 +37,11 @@ describe('FreeIPAAccountCreate', () => {
     }));
 
     return render(
-      <Provider store={mockStore}>
-        <FreeIPAAccountCreate onProfileAdded={mockOnProfileAdded} />
-      </Provider>,
+      <QueryClientProvider client={queryClient}>
+        <Provider store={mockStore}>
+          <FreeIPAAccountCreate onProfileAdded={mockOnProfileAdded} />
+        </Provider>
+      </QueryClientProvider>,
     );
   };
 
