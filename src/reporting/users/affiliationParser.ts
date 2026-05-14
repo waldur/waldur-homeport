@@ -193,6 +193,15 @@ export function getCountryLabel(countryCode: string | null): string {
 }
 
 /**
+ * Get human-readable category label
+ */
+export function getCategoryLabel(category: string | null): string {
+  if (!category) return CATEGORY_LABELS.other();
+  const labelFn = CATEGORY_LABELS[category as AffiliationCategory];
+  return labelFn ? labelFn() : CATEGORY_LABELS.other();
+}
+
+/**
  * Get attribute type label
  */
 function getAttributeLabel(attrType: string | null): string {
