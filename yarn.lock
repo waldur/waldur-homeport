@@ -11207,10 +11207,10 @@ synckit@^0.11.7:
   dependencies:
     "@pkgr/core" "^0.2.9"
 
-systeminformation@^5.31.0:
-  version "5.31.2"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.31.2.tgz#1bc258009df6e38a15206cdda9fdcd598dcb82f6"
-  integrity sha512-ietGQGFhhZNBPgNv9vljgT8gzbYgQr6t0yGAo0Vdb5Jyilb574Vp+AuX2Or9rpBq3ho4mJRawLIUa9+CiILJdg==
+systeminformation@^5.31.6:
+  version "5.31.6"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.31.6.tgz#2da4979a7262974fd068a3a306ded30aed6127c0"
+  integrity sha512-Uv2b2uGGM6ns+26czgW2cYRabYdnswM0ddSOOlryHOaelzsmDSet1iM/NT7VOYxW8x/BW+HkY+b1Ve2pLTSGSA==
 
 tabbable@^6.0.0:
   version "6.3.0"
