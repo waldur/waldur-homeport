@@ -24,6 +24,9 @@ const AnalyticsColumn = ({ report }: { report: ReportDefinition }) => {
   if (!report.analytics || report.analytics.length === 0) {
     return null;
   }
+  if (!isExperimentalUiComponentsVisible()) {
+    return null;
+  }
   const hasWhatIf = report.analytics.includes('what-if');
   const hasWhySo = report.analytics.includes('why-so');
 
