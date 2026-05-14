@@ -1,18 +1,26 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { UserAffiliationCount } from 'waldur-js-client';
+import {
+  marketplaceStatsUserAffiliationDetailsList,
+  UserAffiliationCount,
+  UserAffiliationDetail,
+} from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { SimpleTable } from '@/table/SimpleTable';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
 import { Column } from '@/table/types';
-import { getSimpleExportData, renderFieldOrDash } from '@/table/utils';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import {
   AffiliationCategory,
+  getCategoryLabel,
+  getCountryLabel,
   getUniqueCategories,
   getUniqueCountries,
   getUniqueOrganizations,
@@ -81,22 +89,28 @@ function aggregateBy(
     .sort((a, b) => b.value - a.value);
 }
 
-const tableColumns: Column<AffiliationWithCount>[] = [
+const detailsTableColumns: Column<UserAffiliationDetail>[] = [
   {
     title: translate('Organization'),
+    orderField: 'organization',
     render: ({ row }) => (
       <span className="fw-semibold">{renderFieldOrDash(row.organization)}</span>
     ),
+    export: 'organization',
   },
   {
     title: translate('Country'),
-    render: ({ row }) => <span>{row.countryLabel}</span>,
+    orderField: 'country',
+    render: ({ row }) => <span>{getCountryLabel(row.country)}</span>,
+    export: (row) => getCountryLabel(row.country),
   },
   {
     title: translate('Category'),
+    orderField: 'category',
     render: ({ row }) => (
-      <span className="text-muted">{row.categoryLabel}</span>
+      <span className="text-muted">{getCategoryLabel(row.category)}</span>
     ),
+    export: (row) => getCategoryLabel(row.category),
   },
   {
     title: translate('Identifier'),
@@ -105,10 +119,13 @@ const tableColumns: Column<AffiliationWithCount>[] = [
         {renderFieldOrDash(row.identifier)}
       </span>
     ),
+    export: 'identifier',
   },
   {
     title: translate('Users'),
+    orderField: 'count',
     render: ({ row }) => <span className="fw-bold">{row.count}</span>,
+    export: 'count',
   },
 ];
 
@@ -121,6 +138,24 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
   const [categoryFilter, setCategoryFilter] =
     useState<AffiliationCategory | null>(null);
   const [orgFilter, setOrgFilter] = useState<string | null>(null);
+
+  // Filter passed to the details table — same selections drive the chart
+  // (client-side, against the legacy aggregation) and the table (server-side,
+  // against marketplaceStatsUserAffiliationDetailsList).
+  const detailsFilter = useMemo(
+    () => ({
+      country: countryFilter ?? undefined,
+      category: categoryFilter ?? undefined,
+      organization: orgFilter ?? undefined,
+    }),
+    [countryFilter, categoryFilter, orgFilter],
+  );
+
+  const detailsTableProps = useTable<UserAffiliationDetail>({
+    table: 'user-affiliation-details',
+    fetchData: createFetcher(marketplaceStatsUserAffiliationDetailsList),
+    filter: detailsFilter,
+  });
 
   // Parse all affiliations
   const parsedData = useMemo(() => parseAffiliations(data), [data]);
@@ -333,24 +368,15 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
 
       <Row>
         <Col>
-          <ChartCard
+          <Table<UserAffiliationDetail>
+            {...detailsTableProps}
+            columns={detailsTableColumns}
             title={translate('Affiliation details')}
-            getExportData={() =>
-              getSimpleExportData(
-                tableColumns,
-                filteredData.sort((a, b) => b.count - a.count),
-              )
-            }
-            showPNG={false}
-            isEmpty={!filteredData || filteredData.length === 0}
-          >
-            {() => (
-              <SimpleTable<AffiliationWithCount>
-                columns={tableColumns}
-                rows={filteredData.sort((a, b) => b.count - a.count)}
-              />
-            )}
-          </ChartCard>
+            verboseName={translate('affiliations')}
+            hasQuery={false}
+            showPageSizeSelector
+            enableExport
+          />
         </Col>
       </Row>
     </>
