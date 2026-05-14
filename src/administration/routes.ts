@@ -125,6 +125,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Service profiles'),
+      priority: 30,
     },
   },
   {
@@ -360,6 +361,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Settings'),
+      priority: 80,
     },
   },
 
@@ -494,6 +496,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Category groups'),
+      priority: 50,
     },
   },
 
@@ -508,6 +511,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Categories'),
+      priority: 40,
     },
   },
 
@@ -522,6 +526,24 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Tags'),
+      priority: 60,
+    },
+  },
+
+  {
+    name: 'admin-marketplace-offering-groups',
+    url: 'offering-groups/',
+    parent: 'admin-marketplace',
+    component: lazyComponent(() =>
+      import('@/marketplace/service-providers/offering-groups/ProviderOfferingGroupsList').then(
+        (module) => ({
+          default: module.AdminOfferingGroupsList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Offering groups'),
+      priority: 20,
     },
   },
 
@@ -536,6 +558,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Remote offering sync'),
+      priority: 70,
     },
   },
 
@@ -551,6 +574,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Software catalog'),
       feature: MarketplaceFeatures.display_software_catalog,
+      priority: 90,
     },
   },
 
@@ -565,6 +589,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('SLURM policy'),
+      priority: 100,
     },
   },
 

@@ -393,6 +393,7 @@ export const states: StateDeclaration[] = [
     parent: 'provider-marketplace',
     data: {
       breadcrumb: () => translate('Offerings'),
+      priority: 10,
     },
   },
 
@@ -409,6 +410,7 @@ export const states: StateDeclaration[] = [
     parent: 'provider-marketplace',
     data: {
       breadcrumb: () => translate('Offering users'),
+      priority: 30,
     },
   },
 
@@ -477,6 +479,7 @@ export const states: StateDeclaration[] = [
     parent: 'provider-marketplace',
     data: {
       breadcrumb: () => translate('Offering managers'),
+      priority: 40,
     },
   },
 
@@ -693,6 +696,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Available offerings'),
+      priority: 10,
     },
   },
 
@@ -751,6 +755,24 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Campaigns'),
+      priority: 50,
+    },
+  },
+
+  {
+    name: 'marketplace-provider-offering-groups',
+    parent: 'provider-marketplace',
+    url: 'offering-groups/',
+    component: lazyComponent(() =>
+      import('./service-providers/offering-groups/ProviderOfferingGroupsList').then(
+        (module) => ({
+          default: module.ProviderOfferingGroupsList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Offering groups'),
+      priority: 20,
     },
   },
 
