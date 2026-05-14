@@ -1,15 +1,16 @@
+import { FC, useMemo } from 'react';
 import {
-  InfoIcon,
-  WarningCircleIcon,
-  WarningOctagonIcon,
-} from '@phosphor-icons/react';
-import { uniqueId } from 'lodash-es';
-import { FC } from 'react';
-import { Offering } from 'waldur-js-client';
+  LevelEnum,
+  Offering,
+  SiteAgentLog,
+  marketplaceSiteAgentLogsList,
+} from 'waldur-js-client';
 
+import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
-import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -17,94 +18,80 @@ interface OwnProps {
   offering: Offering;
 }
 
-const dummyData = () => [
-  {
-    uuid: uniqueId(),
-    type: 'warning',
-    title: 'Component - mup_backend',
-    description: 'Response time above threshold',
-    created: '2025-01-15T09:46:36.701555+00:00',
-  },
-  {
-    uuid: uniqueId(),
-    type: 'error',
-    title: 'Error 1',
-    description: 'Test description',
-    created: '2025-01-15T08:43:36.701555+00:00',
-  },
-  {
-    uuid: uniqueId(),
-    type: 'info',
-    title: 'Information 1',
-    description: 'Test description',
-    created: '2025-01-14T11:36:32.701555+00:00',
-  },
-  {
-    uuid: uniqueId(),
-    type: 'warning',
-    title: 'Component - mup_backend',
-    description: 'Response time above threshold',
-    created: '2025-01-14T09:46:36.701555+00:00',
-  },
-  {
-    uuid: uniqueId(),
-    type: 'info',
-    title: 'Information 2',
-    description: 'Test description 2',
-    created: '2025-01-14T07:36:32.701555+00:00',
-  },
+const levelVariant: Record<LevelEnum, string> = {
+  DEBUG: 'secondary',
+  INFO: 'primary',
+  WARNING: 'warning',
+  ERROR: 'orange',
+  CRITICAL: 'danger',
+};
+
+const mandatoryFields: Array<keyof SiteAgentLog> = [
+  'uuid',
+  'timestamp',
+  'level',
+  'message',
+  'module',
 ];
 
-const offeringAlertIcon = {
-  info: { icon: InfoIcon, variant: 'default' },
-  warning: { icon: WarningCircleIcon, variant: 'warning' },
-  error: { icon: WarningOctagonIcon, variant: 'danger' },
-};
+const ExpandableRow: FC<{ row: SiteAgentLog }> = ({ row }) => (
+  <ExpandableContainer>
+    <p>
+      <b className="me-2">{translate('Message')}:</b>
+      {row.message}
+    </p>
+  </ExpandableContainer>
+);
 
-const OfferingAlertItem: FC<{ row }> = ({ row }) => {
-  return (
-    <div className="d-flex gap-5 border-bottom pb-5">
-      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-      <FeaturedIcon
-        IconComponent={offeringAlertIcon[row.type].icon}
-        size="lg"
-        variant={offeringAlertIcon[row.type].variant}
-      />
-      <div>
-        <h6 className="mb-1 fw-bold">
-          {row.title}
-          <small className="text-muted fw-normal ms-2">
-            {formatDateTime(row.created)}
-          </small>
-        </h6>
-        <span className="text-muted fs-6">{row.description}</span>
-      </div>
-    </div>
+export const OfferingAlerts: FC<OwnProps> = ({ offering }) => {
+  const filter = useMemo(
+    () => ({ offering_uuid: offering.uuid }),
+    [offering.uuid],
   );
-};
 
-export const OfferingAlerts: FC<OwnProps> = () => {
   const tableProps = useTable({
     table: 'OfferingAlerts',
-    // FIX THIS
-    // fetchData: createFetcher(offeringAlerts),
-    fetchData: () => Promise.resolve({ rows: dummyData(), resultCount: 30 }),
+    fetchData: createFetcher(marketplaceSiteAgentLogsList),
+    mandatoryFields,
+    filter,
   });
 
   return (
     <Table
       {...tableProps}
       showPageSizeSelector
-      title={translate('Alerts')}
-      verboseName={translate('Alerts')}
+      title={translate('Agent logs')}
+      verboseName={translate('Agent log')}
       className="mb-5"
       headerClassName="min-h-60px"
       fullWidth
-      hideRefresh
-      gridItem={OfferingAlertItem}
-      gridSize={{ xs: 12 }}
-      gridSpace={5}
-      initialMode="grid"
+      expandableRow={ExpandableRow}
+      columns={[
+        {
+          title: translate('Timestamp'),
+          // API returns Unix timestamp in seconds
+          render: ({ row }) => <>{formatDateTime(row.timestamp * 1000)}</>,
+          width: '1%',
+        },
+        {
+          title: translate('Level'),
+          render: ({ row }) => (
+            <Badge variant={levelVariant[row.level]} pill outline>
+              {row.level}
+            </Badge>
+          ),
+          width: '1%',
+        },
+        {
+          title: translate('Module'),
+          render: ({ row }) => <>{row.module}</>,
+          width: '1%',
+        },
+        {
+          title: translate('Message'),
+          render: ({ row }) => <>{row.message}</>,
+        },
+      ]}
     />
   );
 };

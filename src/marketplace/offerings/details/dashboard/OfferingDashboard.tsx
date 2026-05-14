@@ -87,9 +87,6 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
           ) : (
             isAgentDataEmpty && <OfferingAgentInfo empty />
           )}
-          {showExperimentalUiComponents && (
-            <OfferingAlerts offering={offering} />
-          )}
         </>
       ) : (
         <Row>
@@ -112,12 +109,10 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
             ) : (
               isAgentDataEmpty && <OfferingAgentInfo empty />
             )}
-            {showExperimentalUiComponents && (
-              <OfferingAlerts offering={offering} />
-            )}
           </Col>
         </Row>
       )}
+      <OfferingAlerts offering={offering} />
     </>
   );
 };
