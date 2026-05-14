@@ -3,6 +3,7 @@ import {
   customersList,
   CustomersListData,
   marketplaceCategoriesList,
+  marketplaceOfferingGroupsList,
   marketplaceProviderOfferingsList,
   MarketplaceProviderOfferingsListData,
   marketplacePublicOfferingsList,
@@ -284,6 +285,27 @@ export const tagAutocomplete = async (
     query: {
       name: query,
       page: page,
+      page_size: ENV.pageSize,
+      ...extraParams,
+    },
+  });
+  return returnReactSelectAsyncPaginateObject(
+    parseSelectData(response),
+    prevOptions,
+    page,
+  );
+};
+
+export const offeringGroupAutocomplete = async (
+  query: string,
+  prevOptions,
+  page,
+  extraParams?,
+) => {
+  const response = await marketplaceOfferingGroupsList({
+    query: {
+      title: query,
+      page,
       page_size: ENV.pageSize,
       ...extraParams,
     },

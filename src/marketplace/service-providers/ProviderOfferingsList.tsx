@@ -12,6 +12,7 @@ import { createFetcher } from '@/table/api';
 import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { CreateOfferingButton } from '../offerings/list/CreateOfferingButton';
 import { OfferingActions } from '../offerings/list/OfferingActions';
@@ -54,6 +55,8 @@ const mandatoryFields = [
   'components', // PreviewOfferingButton
   'type', // PreviewOfferingButton
   'resources_count', // DeleteOfferingButton
+  'offering_group_uuid', // SetOfferingGroupAction (pre-populates current group)
+  'offering_group_title', // SetOfferingGroupAction
 ];
 
 const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
@@ -80,6 +83,12 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
           render: OfferingNameColumn,
           id: 'name',
           keys: ['name', 'backend_id', 'uuid', 'category_title'],
+        },
+        {
+          title: translate('Offering group'),
+          render: ({ row }) => renderFieldOrDash(row.offering_group_title),
+          id: 'offering_group',
+          keys: ['offering_group_uuid', 'offering_group_title'],
         },
         {
           title: translate('Type'),

@@ -1,6 +1,7 @@
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { ChangeOfferingAvailabilityAction } from '../actions/ChangeOfferingAvailabilityAction';
+import { SetOfferingGroupAction } from '../actions/SetOfferingGroupAction';
 import { SetOfferingTypeAction } from '../actions/SetOfferingTypeAction';
 
 import { DeleteOfferingButton } from './DeleteOfferingButton';
@@ -21,6 +22,7 @@ export const OfferingActions = ({ row, refetch }) => (
       ExportOfferingButton,
       MoveOfferingAction,
       SetOfferingTypeAction,
+      SetOfferingGroupAction,
       ChangeOfferingAvailabilityAction,
       DeleteOfferingButton,
     ]}
