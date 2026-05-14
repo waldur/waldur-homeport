@@ -5,7 +5,7 @@ metadata:
   labels:
     name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
   - host: homeport-testing.waldur.com
     http:
