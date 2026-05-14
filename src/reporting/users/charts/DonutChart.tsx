@@ -8,6 +8,7 @@ interface DonutChartItem {
   name: string;
   value: number;
   itemStyle?: { color: string };
+  children?: { name: string; value: number }[];
 }
 
 interface DonutChartProps {
@@ -16,23 +17,46 @@ interface DonutChartProps {
   showTotal?: boolean;
 }
 
+const MAX_OTHER_TOOLTIP_ROWS = 20;
+
+function escapeHtml(value: string): string {
+  return value.replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+      })[c] as string,
+  );
+}
+
 /**
  * Group small categories into "Other" if there are more than 8 items
- * Preserves itemStyle for top items
+ * Preserves itemStyle for top items, and keeps the bucketed rows on the
+ * Other slice as `children` so the tooltip can list them.
  */
 function prepareChartData(data: DonutChartItem[]): DonutChartItem[] {
   if (data.length <= 8) {
     return data;
   }
 
-  // Sort by value descending
   const sorted = [...data].sort((a, b) => b.value - a.value);
   const top7 = sorted.slice(0, 7);
   const rest = sorted.slice(7);
 
   const otherValue = rest.reduce((sum, item) => sum + item.value, 0);
 
-  return [...top7, { name: translate('Other'), value: otherValue }];
+  return [
+    ...top7,
+    {
+      name: translate('Other'),
+      value: otherValue,
+      children: rest.map((item) => ({ name: item.name, value: item.value })),
+    },
+  ];
 }
 
 /**
@@ -66,9 +90,46 @@ export const DonutChart = React.forwardRef<any, DonutChartProps>(
         color: palette,
         tooltip: {
           trigger: 'item',
+          enterable: true,
+          extraCssText:
+            'max-width: 320px; max-height: 320px; overflow: auto; pointer-events: auto;',
           formatter: (params: any) => {
             const percent = ((params.value / total) * 100).toFixed(1);
-            return `${params.name}: ${params.value.toLocaleString()} (${percent}%)`;
+            const header = `<div style="font-weight:600; margin-bottom:4px;">${escapeHtml(
+              params.name,
+            )}: ${params.value.toLocaleString()} (${percent}%)</div>`;
+
+            const children: { name: string; value: number }[] =
+              params.data?.children ?? [];
+            if (children.length === 0) {
+              return header;
+            }
+
+            const visible = children.slice(0, MAX_OTHER_TOOLTIP_ROWS);
+            const remaining = children.length - visible.length;
+
+            const rows = visible
+              .map((item) => {
+                const itemPercent =
+                  total > 0 ? ((item.value / total) * 100).toFixed(1) : '0.0';
+                return `<tr>
+                    <td style="padding:2px 8px 2px 0; white-space:nowrap; max-width:200px; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(
+                      item.name,
+                    )}</td>
+                    <td style="padding:2px 0; text-align:right; font-variant-numeric: tabular-nums;">${item.value.toLocaleString()}</td>
+                    <td style="padding:2px 0 2px 8px; text-align:right; color:#A1A5B7; font-variant-numeric: tabular-nums;">${itemPercent}%</td>
+                  </tr>`;
+              })
+              .join('');
+
+            const footer =
+              remaining > 0
+                ? `<div style="margin-top:4px; color:#A1A5B7; font-size:11px;">${escapeHtml(
+                    translate('… and {count} more', { count: remaining }),
+                  )}</div>`
+                : '';
+
+            return `${header}<table style="border-collapse:collapse; font-size:12px;">${rows}</table>${footer}`;
           },
         },
         legend: {
