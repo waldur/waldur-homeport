@@ -9,6 +9,7 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -30,6 +31,7 @@ interface AutoProvisioningRuleForm {
 
 export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
   const isEdit = resolve.rule;
+  const { confirm } = useModal();
 
   const initialValues = isEdit
     ? {
@@ -93,9 +95,27 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
     refetch: resolve.refetch,
   });
 
+  const handleSubmit = async (values: AutoProvisioningRuleForm) => {
+    const noFilters =
+      !values.user_email_patterns?.trim() && !values.user_affiliations?.trim();
+    if (values.use_user_organization_as_customer_name && noFilters) {
+      try {
+        await confirm(
+          translate('No filters configured'),
+          translate(
+            'No email patterns or affiliations are configured. This rule will apply to every authenticated user whose organization claim matches a Waldur organization. Proceed?',
+          ),
+        );
+      } catch {
+        return;
+      }
+    }
+    return onSubmitMutation.mutateAsync(values);
+  };
+
   return (
     <Form<AutoProvisioningRuleForm>
-      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
+      onSubmit={handleSubmit}
       initialValues={initialValues}
       validate={(values) => {
         const errors: any = {};

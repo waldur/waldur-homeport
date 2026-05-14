@@ -4,6 +4,7 @@ import { RuleAddTemplateButton } from './RuleAddTemplateButton';
 import { RuleDeleteButton } from './RuleDeleteButton';
 import { RuleDeleteTemplateButton } from './RuleDeleteTemplateButton';
 import { RuleEditButton } from './RuleEditButton';
+import { RuleTestMatchButton } from './RuleTestMatchButton';
 
 export const RuleActions = ({ row, refetch }) => (
   <ActionsDropdown
@@ -11,6 +12,7 @@ export const RuleActions = ({ row, refetch }) => (
     refetch={refetch}
     actions={[
       RuleEditButton,
+      RuleTestMatchButton,
       RuleAddTemplateButton,
       !!row.plan && RuleDeleteTemplateButton,
       RuleDeleteButton,
