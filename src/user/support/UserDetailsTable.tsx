@@ -1,9 +1,12 @@
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
+import { Badge } from '@/core/Badge';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { Tip } from '@/core/Tooltip';
 import { formatPhoneNumber } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
@@ -73,7 +76,28 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
       )}
       <FormTable.Item
         label={translate('Registration method')}
-        value={<FieldWithCopy value={props.user.identity_provider_label} />}
+        value={
+          <div className="d-inline-flex align-items-center gap-2">
+            <FieldWithCopy value={props.user.identity_provider_label} />
+            {props.user.should_protect_user_details && (
+              <Tip
+                id="user-details-protected"
+                label={translate(
+                  'Profile fields (organization, name, email) are managed by the identity provider and cannot be edited in Waldur.',
+                )}
+              >
+                <Badge variant="purple" outline>
+                  {translate('Details protected')}
+                </Badge>
+              </Tip>
+            )}
+          </div>
+        }
+      />
+
+      <FormTable.Item
+        label={translate('Identity source')}
+        value={<FieldWithCopy value={props.user.identity_source} />}
       />
 
       <FormTable.Item
@@ -93,7 +117,20 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
       />
 
       <FormTable.Item
-        label={translate('Organization')}
+        label={
+          <span className="d-inline-flex align-items-center gap-1">
+            {translate('Organization')}
+            <Tip
+              id="user-organization-tooltip"
+              placement="top"
+              label={translate(
+                'Supplied by the identity provider. Auto-provisioning rules that match by organization name compare this value against Waldur customer names.',
+              )}
+            >
+              <QuestionIcon size={16} weight="bold" className="text-muted" />
+            </Tip>
+          </span>
+        }
         value={<FieldWithCopy value={props.user.organization} />}
       />
 
