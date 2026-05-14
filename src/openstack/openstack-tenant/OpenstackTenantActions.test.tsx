@@ -76,6 +76,7 @@ describe('OpenstackTenantActions', () => {
       'Edit',
       'Replicate',
       'Synchronise',
+      'Change limits',
       'Show usage',
       'Report usage',
       'Set backend ID',

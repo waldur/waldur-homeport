@@ -63,11 +63,8 @@ export const ChangeLimitsAction: ActionItemType = ({
     return null;
   }
 
-  if (!(resource.plan_uuid || resource.marketplace_plan_uuid)) {
-    return null;
-  }
+  const hasPlan = Boolean(resource.plan_uuid || resource.marketplace_plan_uuid);
 
-  // Check if resource has limit-based or prepaid components
   const resourceUuid = getMarketplaceResourceUuid(resource);
   const { data: offering } = useQuery({
     queryKey: ['resource-offering', resourceUuid],
@@ -75,7 +72,7 @@ export const ChangeLimitsAction: ActionItemType = ({
       marketplaceResourcesOfferingRetrieve({
         path: { uuid: resourceUuid },
       }).then((response) => response.data),
-    enabled: Boolean(resourceUuid),
+    enabled: Boolean(resourceUuid) && hasPlan,
     staleTime: STALE_TIME,
     refetchOnWindowFocus: false,
   });
@@ -84,10 +81,23 @@ export const ChangeLimitsAction: ActionItemType = ({
     (c) => c.billing_type === 'limit' || c.is_prepaid,
   );
 
-  // Show only when offering has limit-based or prepaid components
+  // Hide when the offering is intrinsically not configured for editable limits.
   if (offering && !hasEditableComponents) {
     return null;
   }
 
-  return <ActionItem {...buttonProps} {...rest} />;
+  const disabledReason = !hasPlan
+    ? translate('Resource is not associated with a plan.')
+    : undefined;
+
+  // State-based tooltip (from validators) takes precedence over offering-level reasons.
+  const finalProps = disabledReason
+    ? {
+        ...buttonProps,
+        disabled: true,
+        tooltip: buttonProps.tooltip || disabledReason,
+      }
+    : buttonProps;
+
+  return <ActionItem {...finalProps} {...rest} />;
 };
