@@ -1,12 +1,8 @@
 import { useCallback } from 'react';
-import { rolesCreate } from 'waldur-js-client';
 
 import { AddButton } from '@/core/AddButton';
-import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { useModal } from '@/modal/actions';
-
-import { getRoles } from './utils';
 
 const RoleFormDialog = lazyComponent(() =>
   import('./RoleFormDialog').then((module) => ({
@@ -15,18 +11,15 @@ const RoleFormDialog = lazyComponent(() =>
 );
 
 export const RoleCreateButton = ({ refetch }) => {
-  const { openDialog, closeDialog } = useModal();
+  const { openDialog } = useModal();
   const openRoleCreateDialog = useCallback(
     () =>
       openDialog(RoleFormDialog, {
-        submitFn: async (formData) => {
-          await rolesCreate({ body: formData });
-          ENV.roles = await getRoles();
-          closeDialog();
-          refetch();
+        resolve: {
+          refetch,
         },
       }),
-    [refetch],
+    [openDialog, refetch],
   );
 
   return <AddButton action={openRoleCreateDialog} />;

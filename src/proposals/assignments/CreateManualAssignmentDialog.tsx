@@ -1,17 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import {
+  CallReviewerPool,
   callReviewerPoolsList,
+  Proposal,
   proposalProposalsList,
   proposalProtectedCallsCreateManualAssignment,
-  CallReviewerPool,
-  Proposal,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { SelectField, StringField, SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -172,7 +171,7 @@ export const CreateManualAssignmentDialog: FC<
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               <FormGroup label={translate('Reviewer')} required>
                 <Field
                   name="reviewer"
@@ -227,7 +226,7 @@ export const CreateManualAssignmentDialog: FC<
                   )}
                 />
               </FormGroup>
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

@@ -15,20 +15,18 @@ type CreateSubnetDialogResolve = {
   showNetworkField?: boolean;
 };
 
+type CreateSubnetFormData = {
+  network?: { uuid: string };
+  name: string;
+  description?: string;
+  cidr?: string;
+  allocation_pools?: Array<{ start: string; end: string }>;
+};
+
 export const CreateSubnetDialog: FC<
   Omit<ActionDialogProps, 'resolve'> & { resolve: CreateSubnetDialogResolve }
 > = ({ resolve: { resource, refetch, showNetworkField = false } }) => {
-  const mutation = useManagedMutation<
-    any,
-    any,
-    {
-      network?: { uuid: string };
-      name: string;
-      description?: string;
-      cidr?: string;
-      allocation_pools?: Array<{ start: string; end: string }>;
-    }
-  >({
+  const mutation = useManagedMutation<any, any, CreateSubnetFormData>({
     mutationFn: (formData) => {
       const networkUuid = showNetworkField
         ? formData.network?.uuid
@@ -81,7 +79,7 @@ export const CreateSubnetDialog: FC<
           type: 'string',
         },
         {
-          name: 'allocation_pool',
+          name: 'allocation_pools',
           component: InternalNetworkAllocationPool,
         },
       ]}

@@ -1,8 +1,7 @@
 import { ArrowLeftIcon } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues, reduxForm } from 'redux-form';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { FC, useCallback, useState } from 'react';
+import { Form, FormSpy } from 'react-final-form';
 import {
   MaintenanceAnnouncementTemplate,
   MaintenanceAnnouncementTemplateRequest,
@@ -22,7 +21,12 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
+import {
+  FormContainerFinal,
+  SelectField,
+  StringField,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -35,7 +39,7 @@ import {
   MAINTENANCE_ANNOUNCEMENT_FORM_ID,
 } from '../utils';
 
-interface IForm {
+interface FormValues {
   name?: string;
   template?: MaintenanceAnnouncementTemplate;
 }
@@ -46,17 +50,20 @@ interface OwnProps {
     data: MaintenanceForm;
     provider?: ServiceProvider;
     maintenanceUuid?: string;
-    onSave(template: MaintenanceAnnouncementTemplate): void;
+    onSave?(template: MaintenanceAnnouncementTemplate): void;
     refetch?(): void;
   };
+  initialValues?: FormValues;
 }
 
-export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
-  form: 'MaintenanceSaveAsTemplate',
-})(({ submitting, handleSubmit, resolve, invalid, form, change }) => {
-  const formValues = useSelector<{}, IForm>(getFormValues(form));
-  const { showErrorResponse, showSuccess } = useNotify();
+export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
+  const { resolve } = props;
+  const queryClient = useQueryClient();
+  const [selectedTemplateUuid, setSelectedTemplateUuid] = useState<string>(
+    props.initialValues?.template?.uuid,
+  );
 
+  const { showErrorResponse, showSuccess } = useNotify();
   const { openDialog } = useModal();
 
   const {
@@ -87,16 +94,16 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
     error: errorOfferings,
     refetch: refetchOfferings,
   } = useQuery({
-    queryKey: ['MaintenanceTemplateOfferings', formValues?.template?.uuid],
+    queryKey: ['MaintenanceTemplateOfferings', selectedTemplateUuid],
     queryFn: () =>
-      !formValues?.template?.uuid
+      !selectedTemplateUuid
         ? null
         : getAllPages((page) =>
             maintenanceAnnouncementTemplateOfferingsList({
               query: {
                 page,
                 page_size: MAX_PAGE_SIZE,
-                maintenance_template_uuid: formValues.template.uuid,
+                maintenance_template_uuid: selectedTemplateUuid,
               },
             }),
           ),
@@ -104,20 +111,23 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
     refetchOnWindowFocus: false,
   });
 
-  const backToMainForm = () =>
-    openDialog(resolve.formComponent, {
-      resolve: {
-        provider: resolve.provider,
-        refetch: resolve.refetch,
-        maintenanceUuid: resolve.maintenanceUuid,
-      },
-      size: 'lg',
-      formId: MAINTENANCE_ANNOUNCEMENT_FORM_ID,
-      initialValues: resolve.data,
-    });
+  const backToMainForm = useCallback(
+    () =>
+      openDialog(resolve.formComponent, {
+        resolve: {
+          provider: resolve.provider,
+          refetch: resolve.refetch,
+          maintenanceUuid: resolve.maintenanceUuid,
+        },
+        size: 'lg',
+        formId: MAINTENANCE_ANNOUNCEMENT_FORM_ID,
+        initialValues: resolve.data,
+      }),
+    [resolve, openDialog],
+  );
 
   const callback = useCallback(
-    async (formData: IForm) => {
+    async (formData: FormValues) => {
       try {
         let template;
         const body: MaintenanceAnnouncementTemplateRequest = {
@@ -208,7 +218,25 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
         await Promise.all(promisesNew);
 
         refetchOfferings();
-        resolve.onSave(template);
+        queryClient.setQueryData(
+          ['MaintenanceTemplates', resolve.provider?.uuid],
+          (cachedData: MaintenanceAnnouncementTemplate[] | undefined) => {
+            const foundIndex = (cachedData || []).findIndex(
+              (temp) => temp.uuid === template.uuid,
+            );
+            const newData = [...(cachedData || [])];
+
+            if (foundIndex >= 0) {
+              // Replace
+              newData.splice(foundIndex, 1, template);
+            } else {
+              // Add new
+              newData.unshift(template);
+            }
+            return newData;
+          },
+        );
+        resolve.onSave?.(template);
         showSuccess(translate('Maintenance has been save as a template.'));
         backToMainForm();
       } catch (e) {
@@ -218,98 +246,118 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
         );
       }
     },
-    [resolve, templateOfferings],
+    [
+      resolve,
+      templateOfferings,
+      refetchOfferings,
+      showSuccess,
+      backToMainForm,
+      queryClient,
+    ],
   );
 
   return (
-    <ModalDialog
-      title={
-        formValues?.template
-          ? translate('Update maintenance template')
-          : translate('Create a maintenance template')
-      }
-    >
-      <form onSubmit={handleSubmit(callback)}>
-        <FormContainer submitting={submitting}>
-          {!isLoading && error ? (
-            <LoadingErred
-              loadData={refetch}
-              message={translate('Unable to load templates')}
+    <Form
+      onSubmit={callback}
+      initialValues={props.initialValues}
+      render={({ handleSubmit, submitting, invalid, form, values }) => (
+        <ModalDialog
+          title={
+            values?.template
+              ? translate('Update maintenance template')
+              : translate('Create a maintenance template')
+          }
+        >
+          <form onSubmit={handleSubmit}>
+            <FormSpy
+              subscription={{ values: true }}
+              onChange={(state) => {
+                const value = state.values?.template;
+                if (value?.uuid !== selectedTemplateUuid) {
+                  setSelectedTemplateUuid(value?.uuid);
+                  if (value) {
+                    form.change('name', value.name);
+                  } else {
+                    form.change('name', null);
+                  }
+                }
+              }}
             />
-          ) : null}
-          <SelectField
-            name="template"
-            label={translate('Template')}
-            description={translate(
-              'Select a previously saved template to update form fields',
-            )}
-            placeholder={translate('Select or leave it empty')}
-            options={templates}
-            isClearable
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.uuid}
-            isLoading={isLoading}
-            onChange={(value) => {
-              if (value) {
-                change('name', value.name);
-              } else {
-                change('name', null);
-              }
-            }}
-          />
+            <FormContainerFinal submitting={submitting}>
+              {!isLoading && error ? (
+                <LoadingErred
+                  loadData={refetch}
+                  message={translate('Unable to load templates')}
+                />
+              ) : null}
+              <SelectField
+                name="template"
+                label={translate('Template')}
+                description={translate(
+                  'Select a previously saved template to update form fields',
+                )}
+                placeholder={translate('Select or leave it empty')}
+                options={templates}
+                isClearable
+                getOptionLabel={(option) => option.name}
+                getOptionValue={(option) => option.uuid}
+                isLoading={isLoading}
+              />
 
-          {!isLoadingOfferings && errorOfferings ? (
-            <LoadingErred
-              loadData={refetchOfferings}
-              message={translate('Unable to load template offerings')}
-            />
-          ) : null}
+              {!isLoadingOfferings && errorOfferings ? (
+                <LoadingErred
+                  loadData={refetchOfferings}
+                  message={translate('Unable to load template offerings')}
+                />
+              ) : null}
 
-          <StringField
-            name="name"
-            label={translate('Name')}
-            placeholder={
-              formValues?.template
-                ? translate('Enter a name for the selected template')
-                : translate('Enter a name to save as a new template')
-            }
-            description={
-              formValues?.template
-                ? translate('Edit name for the selected template')
-                : undefined
-            }
-            maxLength={150}
-            required
-            validate={required}
-          />
+              <StringField
+                name="name"
+                label={translate('Name')}
+                placeholder={
+                  values?.template
+                    ? translate('Enter a name for the selected template')
+                    : translate('Enter a name to save as a new template')
+                }
+                description={
+                  values?.template
+                    ? translate('Edit name for the selected template')
+                    : undefined
+                }
+                maxLength={150}
+                required
+                validate={required}
+              />
 
-          <div className="d-flex justify-content-between">
-            <ActionButton
-              action={backToMainForm}
-              title={translate('Back')}
-              iconNode={<ArrowLeftIcon weight="bold" />}
-              variant="tertiary"
-              className="min-w-125px"
-            />
-            <SubmitButton
-              submitting={submitting}
-              disabled={
-                invalid || isLoadingOfferings || Boolean(errorOfferings)
-              }
-              label={translate('Save')}
-              className="btn btn-primary min-w-125px"
-              children={
-                isLoadingOfferings ? (
-                  <span className="svg-icon svg-icon-2">
-                    {}
-                    <LoadingSpinnerSimple />
-                  </span>
-                ) : null
-              }
-            />
-          </div>
-        </FormContainer>
-      </form>
-    </ModalDialog>
+              <div className="d-flex justify-content-between">
+                <ActionButton
+                  action={backToMainForm}
+                  title={translate('Back')}
+                  iconNode={<ArrowLeftIcon weight="bold" />}
+                  variant="tertiary"
+                  className="min-w-125px"
+                />
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={
+                    invalid || isLoadingOfferings || Boolean(errorOfferings)
+                  }
+                  label={translate('Save')}
+                  className="btn btn-primary min-w-125px"
+                  children={
+                    isLoadingOfferings ? (
+                      <span className="svg-icon svg-icon-2">
+                        {}
+                        <LoadingSpinnerSimple />
+                      </span>
+                    ) : null
+                  }
+                />
+              </div>
+            </FormContainerFinal>
+          </form>
+        </ModalDialog>
+      )}
+    />
   );
-});
+};

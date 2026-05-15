@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import { FieldArray } from 'redux-form';
+import { FieldArray } from 'react-final-form-arrays';
 
 import { translate } from '@/i18n';
 import { IpAddressList } from '@/openstack/openstack-tenant/IpAddressList';
@@ -12,15 +12,15 @@ import {
 
 const HostRoutesField: FunctionComponent = () => (
   <Form.Group>
-    <label>{translate('Host routes')}</label>
-    <FieldArray name="host_routes" component={StaticRoutesTable} />
+    <Form.Label>{translate('Host routes')}</Form.Label>
+    <FieldArray name="host_routes" component={StaticRoutesTable as any} />
   </Form.Group>
 );
 
 const NameserversField: FunctionComponent = () => (
   <Form.Group>
-    <label>{translate('DNS name servers')}</label>
-    <FieldArray name="dns_nameservers" component={IpAddressList} />
+    <Form.Label>{translate('DNS name servers')}</Form.Label>
+    <FieldArray name="dns_nameservers" component={IpAddressList as any} />
   </Form.Group>
 );
 

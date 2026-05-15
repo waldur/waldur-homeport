@@ -1,14 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { change } from 'redux-form';
+import { FC, useMemo } from 'react';
 import { OpenStackPort, openstackPortsUpdatePortIp } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadSubnets } from '@/openstack/api';
-import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 
@@ -17,8 +14,6 @@ import { FixedIPsField } from './CreatePortDialog';
 export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
-
   const {
     data: subnets,
     isLoading,
@@ -38,20 +33,21 @@ export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
     staleTime: SHORT_STALE_TIME,
   });
 
-  useEffect(() => {
+  const initialValues = useMemo(() => {
     if (subnets) {
       const subnet = subnets.find(
         (sub) => sub.backend_id === resource.fixed_ips[0].subnet_id,
       );
       if (subnet) {
-        dispatch(
-          change(RESOURCE_ACTION_FORM, 'fixed_ips', {
+        return {
+          fixed_ips: {
             fixed_ip: resource.fixed_ips[0].ip_address,
             subnet,
-          }),
-        );
+          },
+        };
       }
     }
+    return {};
   }, [subnets, resource]);
 
   const mutation = useManagedMutation<
@@ -81,6 +77,7 @@ export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
       error={error}
       refetch={refetchSubnets}
       submitForm={mutation.mutateAsync}
+      initialValues={initialValues}
       dialogSubmitLabel={translate('Save')}
       formFields={[
         {

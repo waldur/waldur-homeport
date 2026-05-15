@@ -19,7 +19,6 @@ interface CustomIpFieldFinalProps {
   hasAutoOption?: boolean;
 }
 
-/** RFF-compatible version of CustomIpField */
 export const CustomIpFieldFinal = ({
   parentName,
   data,
@@ -76,8 +75,11 @@ export const CustomIpFieldFinal = ({
     >
       {({ input, meta }) => (
         <div>
-          <FormLabel>{translate('Custom IP')}</FormLabel>
+          <FormLabel htmlFor={`${parentName}.fixed_ip`}>
+            {translate('Custom IP')}
+          </FormLabel>
           <Select
+            inputId={`${parentName}.fixed_ip`}
             placeholder={translate('e.g. 192.168.42.16')}
             options={options}
             value={options.find((opt) => opt.value === selected?.value)}

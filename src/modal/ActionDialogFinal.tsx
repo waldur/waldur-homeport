@@ -1,9 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton, FormContainerFinal, FieldError } from '@/form';
+import { FormContainerFinal, FieldError, FormFooter } from '@/form';
 
-import { CloseDialogButton } from './CloseDialogButton';
 import { ModalDialog } from './ModalDialog';
 
 interface ActionDialogProps {
@@ -24,20 +23,12 @@ export const ActionDialogFinal: React.FC<
     <ModalDialog
       title={props.title}
       footer={
-        <>
-          <CloseDialogButton
-            className={props.fullButtons ? 'flex-equal' : undefined}
-          />
-
-          <SubmitButton
-            disabled={props.invalid}
-            submitting={props.submitting}
-            label={props.submitLabel}
-            className={
-              props.fullButtons ? 'btn btn-primary flex-equal' : undefined
-            }
-          />
-        </>
+        <FormFooter
+          submitting={props.submitting}
+          submitLabel={props.submitLabel}
+          invalid={props.invalid}
+          fullWidth={props.fullButtons}
+        />
       }
     >
       {props.loading ? (

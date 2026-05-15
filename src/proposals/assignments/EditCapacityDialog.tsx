@@ -1,12 +1,11 @@
 import { FC } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import {
   CallReviewerPool,
   callReviewerPoolsPartialUpdate,
 } from 'waldur-js-client';
 
 import { NumberField, SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -58,7 +57,7 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               <div className="mb-4">
                 <strong>{poolMember.reviewer_name}</strong>
                 <div className="text-muted">{poolMember.reviewer_email}</div>
@@ -83,7 +82,7 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
                   max={50}
                 />
               </FormGroup>
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

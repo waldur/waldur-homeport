@@ -4,7 +4,7 @@ import { Form as FinalForm } from 'react-final-form';
 import { rancherClusterSecurityGroupsUpdate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { ActionDialog } from '@/modal/ActionDialog';
+import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RulesList } from '@/openstack/openstack-security-groups/rule-editor/RulesList';
 import { SecurityGroupRulesFormData } from '@/openstack/openstack-security-groups/rule-editor/types';
@@ -54,7 +54,7 @@ export const ClusterSecurityGroupSetRulesDialog: FC<
       mutators={{ ...arrayMutators }}
       initialValues={initialValues}
       render={({ handleSubmit, invalid }) => (
-        <ActionDialog
+        <ActionDialogFinal
           title={translate('Set rules in {name} security group', {
             name: resource.name,
           })}
@@ -64,7 +64,7 @@ export const ClusterSecurityGroupSetRulesDialog: FC<
           submitLabel={translate('Set rules')}
         >
           <RulesList remoteSecurityGroups={[]} />
-        </ActionDialog>
+        </ActionDialogFinal>
       )}
     />
   );

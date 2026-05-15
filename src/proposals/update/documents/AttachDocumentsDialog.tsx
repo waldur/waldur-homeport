@@ -1,11 +1,12 @@
-import { useCallback, useState } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { FC, useCallback, useState } from 'react';
+import { Form } from 'react-final-form';
 import { proposalProtectedCallsAttachDocuments } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { format } from '@/core/ErrorMessageFormatter';
-import { FormContainer, StringField, SubmitButton } from '@/form';
+import { FormContainerFinal, SubmitButton } from '@/form';
+import { StringField } from '@/form/StringField';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
@@ -17,21 +18,13 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 
-interface AttachDocumentsFormData {
-  files: { file: File }[];
-  description: string;
-}
-
 interface AttachDocumentsProps {
   resolve: { refetch; call };
 }
 
-export const AttachDocumentsDialog = reduxForm<
-  AttachDocumentsFormData,
-  AttachDocumentsProps
->({
-  form: 'AttachDocumentsDialog',
-})(({ resolve: { call, refetch }, submitting, handleSubmit }) => {
+export const AttachDocumentsDialog: FC<AttachDocumentsProps> = ({
+  resolve: { call, refetch },
+}) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
 
@@ -52,7 +45,7 @@ export const AttachDocumentsDialog = reduxForm<
   };
 
   const callback = useCallback(
-    async (formData: AttachDocumentsFormData) => {
+    async (formData: Record<string, any>) => {
       setPendingFiles((prev) =>
         prev.map((f) => {
           f.progress = 0;
@@ -122,7 +115,16 @@ export const AttachDocumentsDialog = reduxForm<
         });
       }
     },
-    [pendingFiles, setPendingFiles, setAttachments],
+    [
+      pendingFiles,
+      setPendingFiles,
+      setAttachments,
+      call.uuid,
+      refetch,
+      showSuccess,
+      showErrorResponse,
+      closeDialog,
+    ],
   );
 
   const cancelFile = useCallback(
@@ -133,58 +135,62 @@ export const AttachDocumentsDialog = reduxForm<
   );
 
   return (
-    <form onSubmit={handleSubmit(callback)}>
-      <ModalDialog
-        title={translate('Add call attachments')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={submitting}
-              disabled={!pendingFiles.length}
-              label={translate('Save')}
-            />
-          </>
-        }
-      >
-        <FormContainer submitting={submitting}>
-          <UploadContainer
-            onDrop={onDrop}
-            disabled={submitting}
-            message={translate(
-              'PDF, PNG, JPG, JPEG, DOCX, DOC or ODT (max. 2 MB)',
-            )}
-            maxSize={2 * 1024 * 1024} // 2MB
-            accept={ACCEPTED_FILE_TYPES}
-          />
-
-          <AttachmentsList
-            attachments={attachments}
-            uploading={pendingFiles}
-            className="mb-7"
-            ItemComponent={AttachmentItem}
-            ItemPendingComponent={(itemProps) => (
-              <AttachmentItemPending
-                {...itemProps}
-                onCancel={cancelFile}
-                onRetry={handleSubmit(callback)}
+    <Form
+      onSubmit={callback}
+      render={({ handleSubmit, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Add call attachments')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={!pendingFiles.length}
+                  label={translate('Save')}
+                />
+              </>
+            }
+          >
+            <FormContainerFinal submitting={submitting}>
+              <UploadContainer
+                onDrop={onDrop}
+                disabled={submitting}
+                message={translate(
+                  'PDF, PNG, JPG, JPEG, DOCX, DOC or ODT (max. 2 MB)',
+                )}
+                maxSize={2 * 1024 * 1024} // 2MB
+                accept={ACCEPTED_FILE_TYPES}
               />
-            )}
-          />
 
-          {pendingFiles.map((file, index) => (
-            <Field
-              key={index}
-              name={`description-${index}`}
-              component={StringField}
-              label={translate('Description for {file}', {
-                file: file.file.name,
-              })}
-              required={false}
-            />
-          ))}
-        </FormContainer>
-      </ModalDialog>
-    </form>
+              <AttachmentsList
+                attachments={attachments}
+                uploading={pendingFiles}
+                className="mb-7"
+                ItemComponent={AttachmentItem}
+                ItemPendingComponent={(itemProps) => (
+                  <AttachmentItemPending
+                    {...itemProps}
+                    onCancel={cancelFile}
+                    onRetry={() => handleSubmit()}
+                  />
+                )}
+              />
+
+              {pendingFiles.map((file, index) => (
+                <StringField
+                  key={index}
+                  name={`description-${index}`}
+                  label={translate('Description for {file}', {
+                    file: file.file.name,
+                  })}
+                  required={false}
+                />
+              ))}
+            </FormContainerFinal>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};

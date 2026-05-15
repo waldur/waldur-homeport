@@ -10,7 +10,6 @@ import {
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { FieldError, NumberField, SelectField, SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
@@ -172,7 +171,7 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               {isNumberField && (
                 <FormGroup label={FIELD_LABELS[resolve.name]}>
                   <Field
@@ -236,7 +235,7 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
                   )}
                 </FormGroup>
               )}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

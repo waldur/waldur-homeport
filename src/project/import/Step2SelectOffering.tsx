@@ -2,7 +2,6 @@ import { FC, useEffect } from 'react';
 import { Card, Form } from 'react-bootstrap';
 
 import { required } from '@/core/validators';
-import { FormContainer } from '@/form';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { OfferingsAutocompleteCommonFields } from '@/marketplace/common/autocompletes';
@@ -23,11 +22,7 @@ export const Step2SelectOffering: FC<WizardFormStepProps> = (props) => {
         }, []);
 
         return (
-          <FormContainer
-            submitting={false}
-            clearOnUnmount={false}
-            className="size-lg"
-          >
+          <div className="size-lg">
             <Form.Group className="mb-7">
               <Form.Label>{translate('Select offering')}</Form.Label>
               <OfferingAutocomplete
@@ -81,7 +76,7 @@ export const Step2SelectOffering: FC<WizardFormStepProps> = (props) => {
                 </Card.Body>
               </Card>
             )}
-          </FormContainer>
+          </div>
         );
       }}
     </WizardForm>

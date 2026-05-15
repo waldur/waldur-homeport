@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   OpenStackPool,
@@ -10,11 +10,10 @@ import {
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { useNotify } from '@/store/notify';
 import { fetchListStart } from '@/table/actions';
 
 import { subnetAutocomplete } from '../subnetAutocomplete';
@@ -30,8 +29,6 @@ export const CreateMemberDialog: FC<ActionDialogProps<OpenStackPool>> = ({
   resolve: { resource, refetch },
 }) => {
   const dispatch = useDispatch();
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
 
   const { data: loadBalancer, isLoading } = useQuery({
     queryKey: ['lb-for-member-create', resource.load_balancer_uuid],
@@ -45,38 +42,40 @@ export const CreateMemberDialog: FC<ActionDialogProps<OpenStackPool>> = ({
     staleTime: 60 * 1000,
   });
 
-  const submitForm = useCallback(
-    async (formData) => {
-      try {
-        await openstackPoolMembersCreate({
-          body: {
-            pool: resource.url,
-            name: formData.name || undefined,
-            address: formData.address,
-            protocol_port: Number(formData.protocol_port),
-            weight: formData.weight ? Number(formData.weight) : undefined,
-            subnet: getSubnetUrl(formData.subnet),
-          },
-        });
-        showSuccess(translate('Member has been added.'));
-        closeDialog();
-        dispatch(
-          fetchListStart(`pool-members-${resource.uuid}`, undefined, true),
-        );
-        if (refetch) await refetch();
-      } catch (e) {
-        showErrorResponse(e, translate('Unable to add member.'));
-      }
+  const createMutation = useManagedMutation({
+    mutationFn: (formData: any) =>
+      openstackPoolMembersCreate({
+        body: {
+          pool: resource.url,
+          name: formData.name || undefined,
+          address: formData.address,
+          protocol_port: Number(formData.protocol_port),
+          weight: formData.weight ? Number(formData.weight) : undefined,
+          subnet: getSubnetUrl(formData.subnet),
+        },
+      }),
+    successMessage: translate('Member has been added.'),
+    errorMessage: translate('Unable to add member.'),
+    onSuccess: () => {
+      dispatch(
+        fetchListStart(`pool-members-${resource.uuid}`, undefined, true),
+      );
     },
-    [closeDialog, dispatch, refetch, resource, showErrorResponse, showSuccess],
-  );
+    refetch,
+  });
 
   if (isLoading) return <LoadingSpinner />;
 
   return (
     <ResourceActionDialog
       dialogTitle={translate('Add member')}
-      submitForm={submitForm}
+      submitForm={async (values) => {
+        try {
+          await createMutation.mutateAsync(values);
+        } catch {
+          // Handled by useManagedMutation
+        }
+      }}
       formFields={[
         { ...createLatinNameField(), required: false },
         {

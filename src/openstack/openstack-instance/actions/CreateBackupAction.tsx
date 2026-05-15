@@ -6,7 +6,6 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { validateOpenStackInstanceManagePermission } from '@/openstack/utils';
 import { validateState } from '@/resource/actions/base';
-import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { DialogActionButton } from '@/resource/actions/DialogActionButton';
 
 const CreateBackupDialog = lazyComponent(() =>
@@ -31,7 +30,6 @@ export const CreateBackupAction: FC<CreateBackupActionProps> = ({
     title={translate('Create')}
     iconNode={<PlusCircleIcon weight="bold" />}
     modalComponent={CreateBackupDialog}
-    formId={RESOURCE_ACTION_FORM}
     resource={resource}
     validators={validators}
   />

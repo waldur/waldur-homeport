@@ -1,40 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { Field, useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
-import { Field, formValueSelector } from 'redux-form';
-import { openstackPortsCreate, OpenStackSubNet } from 'waldur-js-client';
+import { openstackPortsCreate } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { isMatchPattern, required } from '@/core/validators';
-import { FormGroup, SelectField } from '@/form';
+import { SelectField, FormGroupFinal } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadNetworks, loadSubnets } from '@/openstack/api';
-import {
-  CustomIpField,
-  SubnetValueContainer,
-} from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
+import { CustomIpFieldFinal as CustomIpField } from '@/openstack/openstack-instance/actions/update-internal-ips/CustomIpFieldFinal';
+import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
 import {
   createLatinNameField,
   createDescriptionField,
 } from '@/resource/actions/base';
-import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { RootState } from '@/store/reducers';
 
 const MAC_ADDRESS_PATTERN = new RegExp(
   '^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$',
   'gm',
 );
-
-const selector = formValueSelector(RESOURCE_ACTION_FORM);
-
-const networkSelector = (state: RootState) => selector(state, 'network');
-const fixedIpsSelector = (state: RootState) => selector(state, 'fixed_ips');
 
 const macAddressValidator = (value) =>
   isMatchPattern(
@@ -43,12 +33,40 @@ const macAddressValidator = (value) =>
   )(value);
 
 export const FixedIPsField: FC<{
-  subnets: OpenStackSubNet[];
+  networks?: any[];
+  resource?: any;
+  subnets?: any[];
   customIp?: boolean;
   change;
-}> = ({ subnets, customIp = false, change }) => {
+}> = ({
+  networks,
+  resource,
+  subnets: subnetsProp,
+  customIp = false,
+  change,
+}) => {
   const [customIpEnabled, setCustomIpEnabled] = useToggle(customIp);
-  const fixedIps = useSelector(fixedIpsSelector);
+  const { values } = useFormState();
+  const network = values.network;
+  const fixedIps = values.fixed_ips;
+
+  const { data: subnetsFetched } = useQuery({
+    queryKey: ['port-form-subnets', resource?.uuid, network],
+
+    queryFn: () => {
+      if (!network || !resource) return Promise.resolve([]);
+      const networkObj = networks?.find((net) => net.url === network);
+      if (!networkObj) return Promise.resolve([]);
+      return loadSubnets({
+        tenant_uuid: resource.uuid,
+        network_uuid: networkObj.uuid,
+      });
+    },
+    enabled: !subnetsProp && Boolean(networks && network && resource),
+    staleTime: SHORT_STALE_TIME,
+  });
+
+  const subnets = subnetsProp || subnetsFetched;
 
   const toggleCustomIp = (value) => {
     setCustomIpEnabled(value);
@@ -75,8 +93,8 @@ export const FixedIPsField: FC<{
             <Field
               name="fixed_ips.subnet"
               label={translate('Subnet')}
-              component={FormGroup}
-              options={subnets}
+              component={FormGroupFinal}
+              options={subnets || []}
               placeholder={translate('Select subnet')}
               getOptionValue={(option) => option.url}
               getOptionLabel={(option) => option.name}
@@ -101,8 +119,6 @@ export const FixedIPsField: FC<{
 export const CreatePortDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const network = useSelector(networkSelector);
-
   const {
     data: networks,
     error: errorNetworks,
@@ -116,21 +132,6 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         tenant_uuid: resource.uuid,
         field: ['name', 'uuid', 'url'],
       }),
-
-    staleTime: SHORT_STALE_TIME,
-  });
-
-  const { data: subnets } = useQuery({
-    queryKey: ['port-form-subnets', resource.uuid, network],
-
-    queryFn: () => {
-      if (!network) return Promise.resolve([]);
-      const networkObj = networks.find((net) => net.url === network);
-      return loadSubnets({
-        tenant_uuid: resource.uuid,
-        network_uuid: networkObj.uuid,
-      });
-    },
 
     staleTime: SHORT_STALE_TIME,
   });
@@ -169,15 +170,15 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         ];
       }
 
-      const body = {
-        ...formData,
-        network: formData.network?.url,
-        fixed_ips,
-        port_security_enabled: formData.port_security_enabled || false,
-        target_tenant: resource.url,
-      };
-
-      return openstackPortsCreate({ body });
+      return openstackPortsCreate({
+        body: {
+          ...formData,
+          network: formData.network?.url,
+          fixed_ips,
+          port_security_enabled: formData.port_security_enabled || false,
+          target_tenant: resource.url,
+        },
+      });
     },
     successMessage: translate('OpenStack network port has been created.'),
     errorMessage: translate('Unable to create OpenStack network port.'),
@@ -205,7 +206,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         {
           name: 'fixed_ips',
           component: FixedIPsField,
-          extraProps: { subnets },
+          extraProps: { networks, resource },
         },
         {
           name: 'mac_address',

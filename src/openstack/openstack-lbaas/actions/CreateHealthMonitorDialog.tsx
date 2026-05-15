@@ -1,13 +1,12 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { OpenStackPool, openstackHealthMonitorsCreate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { useNotify } from '@/store/notify';
 import { fetchListStart } from '@/table/actions';
 
 import { PROTOCOL_OPTIONS } from '../constants';
@@ -16,45 +15,41 @@ export const CreateHealthMonitorDialog: FC<
   ActionDialogProps<OpenStackPool>
 > = ({ resolve: { resource, refetch } }) => {
   const dispatch = useDispatch();
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
 
-  const submitForm = useCallback(
-    async (formData) => {
-      try {
-        await openstackHealthMonitorsCreate({
-          body: {
-            pool: resource.url,
-            name: formData.name || undefined,
-            type: formData.type,
-            delay: formData.delay ? Number(formData.delay) : undefined,
-            timeout: formData.timeout ? Number(formData.timeout) : undefined,
-            max_retries: formData.max_retries
-              ? Number(formData.max_retries)
-              : undefined,
-          },
-        });
-        showSuccess(translate('Health monitor has been created.'));
-        closeDialog();
-        dispatch(
-          fetchListStart(
-            `pool-healthmonitors-${resource.uuid}`,
-            undefined,
-            true,
-          ),
-        );
-        if (refetch) await refetch();
-      } catch (e) {
-        showErrorResponse(e, translate('Unable to create health monitor.'));
-      }
+  const createMutation = useManagedMutation({
+    mutationFn: (formData: any) =>
+      openstackHealthMonitorsCreate({
+        body: {
+          pool: resource.url,
+          name: formData.name || undefined,
+          type: formData.type,
+          delay: formData.delay ? Number(formData.delay) : undefined,
+          timeout: formData.timeout ? Number(formData.timeout) : undefined,
+          max_retries: formData.max_retries
+            ? Number(formData.max_retries)
+            : undefined,
+        },
+      }),
+    successMessage: translate('Health monitor has been created.'),
+    errorMessage: translate('Unable to create health monitor.'),
+    onSuccess: () => {
+      dispatch(
+        fetchListStart(`pool-healthmonitors-${resource.uuid}`, undefined, true),
+      );
     },
-    [closeDialog, dispatch, refetch, resource, showErrorResponse, showSuccess],
-  );
+    refetch,
+  });
 
   return (
     <ResourceActionDialog
       dialogTitle={translate('Add health monitor')}
-      submitForm={submitForm}
+      submitForm={async (values) => {
+        try {
+          await createMutation.mutateAsync(values);
+        } catch {
+          // Handled by useManagedMutation
+        }
+      }}
       formFields={[
         { ...createLatinNameField(), required: false },
         {

@@ -1,11 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { FORM_ERROR } from 'final-form';
 import nock from 'nock';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { marketplaceOfferingEstimatedCostPoliciesCreate } from 'waldur-js-client';
 import { client } from 'waldur-js-client/client.gen';
 
 import { waitForSpinner } from '@/core/test-utils';
@@ -13,6 +13,15 @@ import { waitForSpinner } from '@/core/test-utils';
 import { PolicyCreateDialog } from './PolicyCreateDialog';
 
 const mockStore = configureMockStore();
+
+vi.mock('waldur-js-client', async (importOriginal) => {
+  const original = await importOriginal<typeof import('waldur-js-client')>();
+  return {
+    ...original,
+    marketplaceOfferingEstimatedCostPoliciesCreate: vi.fn(),
+    marketplaceOfferingUsagePoliciesCreate: vi.fn(),
+  };
+});
 
 const fillAndSubmitCostForm = async () => {
   const costInput = screen.getByPlaceholderText(
@@ -26,8 +35,8 @@ const fillAndSubmitCostForm = async () => {
   );
   await userEvent.keyboard('{ArrowDown}{Enter}');
 
-  await userEvent.click(screen.getByText('Select period'));
-  await userEvent.keyboard('{ArrowDown}{Enter}');
+  await userEvent.click(screen.getByText(/month/i));
+  await userEvent.keyboard('Total{Enter}');
 
   await userEvent.click(screen.getByText('Select organization groups'));
   await userEvent.keyboard('{ArrowDown}{Enter}');
@@ -47,7 +56,13 @@ vi.mock('@/core/config', () => ({
 }));
 
 vi.mock('@/i18n', () => ({
-  translate: vi.fn((str) => str),
+  translate: vi.fn((str, values) => {
+    if (!values) return str;
+    return Object.entries(values).reduce(
+      (acc, [key, value]) => acc.replace(`{${key}}`, String(value)),
+      str,
+    );
+  }),
 }));
 
 const mockOffering = {
@@ -68,10 +83,10 @@ const mockOffering = {
 };
 
 const renderComponent = (
-  submitFn,
   type: 'cost' | 'usage' = 'cost',
-  initialValues = {},
-  offering = mockOffering,
+  refetch = vi.fn(),
+  initialValues = undefined,
+  offering = mockOffering as any,
 ) => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -96,9 +111,9 @@ const renderComponent = (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <PolicyCreateDialog
-          submitFn={submitFn}
           type={type}
           offering={offering}
+          refetch={refetch}
           initialValues={initialValues}
         />
       </QueryClientProvider>
@@ -107,10 +122,10 @@ const renderComponent = (
 };
 
 describe('PolicyCreateDialog', () => {
-  let submitFn: any;
+  let refetch: any;
 
   beforeEach(() => {
-    submitFn = vi.fn();
+    refetch = vi.fn();
     const orgGroups = [
       {
         name: 'Group 1',
@@ -139,7 +154,7 @@ describe('PolicyCreateDialog', () => {
 
   describe('Common behavior', () => {
     it('should render loading spinner and then the form', async () => {
-      renderComponent(submitFn, 'cost');
+      renderComponent('cost');
       expect(screen.getByTestId('spinner')).toBeInTheDocument();
       await waitForSpinner();
       expect(
@@ -153,7 +168,7 @@ describe('PolicyCreateDialog', () => {
         .get('/api/organization-groups/')
         .query(true)
         .reply(400, { detail: 'Error' });
-      renderComponent(submitFn, 'cost');
+      renderComponent('cost');
       await waitFor(() => {
         expect(
           screen.getByText('Unable to load organization groups.'),
@@ -162,10 +177,15 @@ describe('PolicyCreateDialog', () => {
     });
 
     it('should display server error on submission failure', async () => {
-      submitFn.mockReturnValue({
-        [FORM_ERROR]: 'Unable to create policy.',
-      });
-      renderComponent(submitFn, 'cost');
+      vi.mocked(
+        marketplaceOfferingEstimatedCostPoliciesCreate,
+      ).mockRejectedValue({
+        response: {
+          status: 400,
+          data: { non_field_errors: ['Unable to create policy.'] },
+        },
+      } as any);
+      renderComponent('cost');
       await waitForSpinner();
       await fillAndSubmitCostForm();
       await waitFor(() => {
@@ -178,7 +198,7 @@ describe('PolicyCreateDialog', () => {
 
   describe('Cost Policy Form', () => {
     it('should render cost policy form correctly', async () => {
-      renderComponent(submitFn, 'cost');
+      renderComponent('cost');
       await waitForSpinner();
       expect(
         screen.getByText('When estimated cost reaches'),
@@ -192,30 +212,38 @@ describe('PolicyCreateDialog', () => {
     });
 
     it('should disable create button when required fields are not filled', async () => {
-      renderComponent(submitFn, 'cost');
+      renderComponent('cost');
       await waitForSpinner();
       const createButton = screen.getByRole('button', { name: 'Create' });
       expect(createButton).toBeDisabled();
     });
 
     it('should submit form with valid data', async () => {
-      renderComponent(submitFn, 'cost');
+      vi.mocked(
+        marketplaceOfferingEstimatedCostPoliciesCreate,
+      ).mockResolvedValue({} as any);
+      renderComponent('cost', refetch);
       await waitForSpinner();
       await fillAndSubmitCostForm();
       await waitFor(() => {
-        expect(submitFn).toHaveBeenCalledWith({
-          limit_cost: '1000',
-          actions: 'notify_organization_owners',
-          period: 2,
-          organization_groups: ['group-2-url'],
+        expect(
+          marketplaceOfferingEstimatedCostPoliciesCreate,
+        ).toHaveBeenCalledWith({
+          body: expect.objectContaining({
+            limit_cost: '1000',
+            actions: 'notify_organization_owners',
+            period: 1,
+            organization_groups: ['group-2-url'],
+          }),
         });
+        expect(refetch).toHaveBeenCalled();
       });
     });
   });
 
   describe('Usage Policy Form', () => {
     it('should render usage policy form correctly', async () => {
-      renderComponent(submitFn, 'usage', { component_limits_set: [{}] });
+      renderComponent('usage', refetch, { component_limits_set: [{}] });
       await waitForSpinner();
       expect(
         screen.getByText('When component limits reaches'),
@@ -226,7 +254,7 @@ describe('PolicyCreateDialog', () => {
     });
 
     it('should initialize with one empty component limit row', async () => {
-      renderComponent(submitFn, 'usage', { component_limits_set: [{}] });
+      renderComponent('usage', refetch, { component_limits_set: [{}] });
       await waitForSpinner();
       const table = await screen.findByRole('table');
       const rows = within(table).getAllByRole('row');
@@ -234,7 +262,7 @@ describe('PolicyCreateDialog', () => {
     });
 
     it('should allow adding and removing component limit rows', async () => {
-      renderComponent(submitFn, 'usage', { component_limits_set: [{}] });
+      renderComponent('usage', refetch, { component_limits_set: [{}] });
       await waitForSpinner();
       const table = await screen.findByRole('table');
       await userEvent.click(screen.getByRole('button', { name: 'Add' }));
@@ -251,7 +279,7 @@ describe('PolicyCreateDialog', () => {
     });
 
     it('should disable remove button when only one component limit exists', async () => {
-      renderComponent(submitFn, 'usage', { component_limits_set: [{}] });
+      renderComponent('usage', refetch, { component_limits_set: [{}] });
       await waitForSpinner();
       const table = await screen.findByRole('table');
       const rows = within(table).getAllByRole('row');
@@ -263,7 +291,7 @@ describe('PolicyCreateDialog', () => {
     });
 
     it('should prevent adding more rows than available components', async () => {
-      renderComponent(submitFn, 'usage');
+      renderComponent('usage');
       await waitForSpinner();
 
       await userEvent.click(screen.getByRole('button', { name: 'Add' }));
@@ -278,7 +306,7 @@ describe('PolicyCreateDialog', () => {
     });
 
     it('should show correct measured units for components', async () => {
-      renderComponent(submitFn, 'usage', { component_limits_set: [{}] });
+      renderComponent('usage', refetch, { component_limits_set: [{}] });
       await waitForSpinner();
       const table = await screen.findByRole('table');
       const rows = within(table).getAllByRole('row');

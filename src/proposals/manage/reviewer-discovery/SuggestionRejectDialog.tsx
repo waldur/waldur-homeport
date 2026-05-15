@@ -7,7 +7,6 @@ import {
 } from 'waldur-js-client';
 
 import { SubmitButton, TextField } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
@@ -78,7 +77,7 @@ export const SuggestionRejectDialog = ({
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               <p className="text-muted mb-4">
                 {translate(
                   'Are you sure you want to reject {name} as a reviewer suggestion?',
@@ -100,7 +99,7 @@ export const SuggestionRejectDialog = ({
                   )}
                 </div>
               </FormGroup>
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

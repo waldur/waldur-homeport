@@ -1,9 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
+import { FormFooter } from '@/form';
 import { translate } from '@/i18n';
-import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 interface AsyncActionDialogProps {
@@ -20,14 +19,11 @@ export const AsyncActionDialog: FC<
   <ModalDialog
     title={props.title}
     footer={
-      <>
-        <CloseDialogButton />
-        <SubmitButton
-          submitting={props.submitting}
-          disabled={props.loading || props.invalid}
-          label={translate('Submit')}
-        />
-      </>
+      <FormFooter
+        submitting={props.submitting}
+        disabled={props.loading}
+        invalid={props.invalid}
+      />
     }
   >
     {props.loading ? (

@@ -1,16 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { FC, useCallback, useMemo } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import {
-  proposalProposalsList,
-  proposalProtectedCallsGenerateSuggestions,
   GenerateSuggestionsRequestRequest,
   Proposal,
+  proposalProposalsList,
+  proposalProtectedCallsGenerateSuggestions,
 } from 'waldur-js-client';
 
 import { SelectField, StringField, SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
@@ -213,7 +212,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               <FormGroup label={translate('Match reviewers against')} required>
                 <Field
                   name="source"
@@ -354,7 +353,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
                   </FormGroup>
                 </div>
               </details>
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

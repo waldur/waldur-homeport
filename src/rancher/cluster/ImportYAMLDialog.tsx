@@ -2,10 +2,9 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { rancherClustersImportYaml } from 'waldur-js-client';
 
-import { FormContainerFinal } from '@/form';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
-import { ActionDialog } from '@/modal/ActionDialog';
+import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ImportYAMLDialogProps {
@@ -31,17 +30,15 @@ export const ImportYAMLDialog: FC<ImportYAMLDialogProps> = ({
     <Form
       onSubmit={mutateAsync}
       render={({ handleSubmit, submitting, invalid }) => (
-        <ActionDialog
+        <ActionDialogFinal
           title={translate('Import YAML')}
           submitLabel={translate('Submit')}
           onSubmit={handleSubmit}
           submitting={submitting}
           invalid={invalid}
         >
-          <FormContainerFinal submitting={submitting}>
-            <MonacoField name="yaml" language="yaml" height={200} />
-          </FormContainerFinal>
-        </ActionDialog>
+          <MonacoField name="yaml" language="yaml" height={200} />
+        </ActionDialogFinal>
       )}
     />
   );
