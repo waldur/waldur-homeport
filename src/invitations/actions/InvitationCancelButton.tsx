@@ -4,28 +4,24 @@ import { useSelector } from 'react-redux';
 import { userInvitationsCancel } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 import { getCustomer, getProject } from '@/workspace/selectors';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
 export const InvitationCancelButton = ({ row, refetch }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
   const user = useUser();
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
 
-  const callback = async () => {
-    try {
-      await userInvitationsCancel({ path: { uuid: row.uuid } });
-      showSuccess(translate('Invitation has been canceled.'));
-      refetch();
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to cancel invitation.'));
-    }
-  };
+  const { mutate, isPending } = useManagedMutation({
+    mutationFn: () => userInvitationsCancel({ path: { uuid: row.uuid } }),
+    successMessage: translate('Invitation has been canceled.'),
+    errorMessage: translate('Unable to cancel invitation.'),
+    refetch,
+  });
 
   const isDisabled = useMemo(() => {
     if (
@@ -59,10 +55,10 @@ export const InvitationCancelButton = ({ row, refetch }) => {
 
   return (
     <ActionItem
-      action={callback}
+      action={() => mutate()}
       title={translate('Cancel')}
       iconNode={<ProhibitIcon weight="bold" />}
-      disabled={isDisabled}
+      disabled={isDisabled || isPending}
       tooltip={tooltip}
     />
   );

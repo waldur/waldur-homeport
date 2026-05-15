@@ -5,7 +5,6 @@ import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { FormContainer } from '@/form';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
@@ -44,11 +43,7 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
         ) : queryData.isError ? (
           <LoadingErred loadData={queryData.refetch} />
         ) : (
-          <FormContainer
-            submitting={wizardProps.submitting}
-            clearOnUnmount={false}
-            className="size-lg"
-          >
+          <div className="size-lg">
             <p>
               <strong>{translate('Offering')}: </strong>
               {queryData.data.category_title} / {queryData.data.name}
@@ -68,7 +63,7 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
                 />
               </>
             )}
-          </FormContainer>
+          </div>
         );
       }}
     </WizardForm>

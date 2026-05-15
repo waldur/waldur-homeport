@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField } from '@/form';
+import { SelectField } from '@/form';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
@@ -25,11 +25,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
       {(wizardProps) => {
         const { category_uuid, offering } = wizardProps.formValues || {};
         return (
-          <FormContainer
-            submitting={wizardProps.submitting}
-            clearOnUnmount={false}
-            className="size-lg row"
-          >
+          <div className="size-lg row">
             <Col lg={4} className="mb-7">
               <Field
                 name="category_uuid"
@@ -67,7 +63,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
                 </p>
               </Col>
             )}
-          </FormContainer>
+          </div>
         );
       }}
     </WizardForm>

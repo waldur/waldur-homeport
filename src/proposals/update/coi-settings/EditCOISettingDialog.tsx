@@ -1,16 +1,15 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { useCallback, useMemo } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import {
-  proposalProtectedCallsCoiConfigurationRetrieve,
   proposalProtectedCallsCoiConfigurationPartialUpdate,
+  proposalProtectedCallsCoiConfigurationRetrieve,
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { NumberField, SelectField, SubmitButton, FieldError } from '@/form';
+import { FieldError, NumberField, SelectField, SubmitButton } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
@@ -228,7 +227,7 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               {isNumberField && (
                 <FormGroup label={FIELD_LABELS[resolve.name]}>
                   <Field
@@ -293,7 +292,7 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
                   )}
                 </FormGroup>
               )}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

@@ -1,28 +1,28 @@
-import { useCallback } from 'react';
-import { reduxForm } from 'redux-form';
+import arrayMutators from 'final-form-arrays';
+import { FC, useCallback, useMemo } from 'react';
+import { Form, useForm, useFormState } from 'react-final-form';
 
 import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { LoadingErred } from '@/core/LoadingErred';
-import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
+import { composeValidators } from '@/core/validators';
 import { SelectField, StringField, TextField } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { Select as AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { MonacoField } from '@/form/MonacoField';
 import { NumberField } from '@/form/NumberField';
 import { TimezoneField } from '@/form/TimezoneField';
 import { translate } from '@/i18n';
-import { ActionDialog } from '@/modal/ActionDialog';
+import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 
-import { RESOURCE_ACTION_FORM } from './constants';
-
-interface ResourceActionDialogOwnProps {
+interface ResourceActionDialogProps {
   submitForm(formData): void;
   dialogTitle: string;
   dialogFullButtons?: boolean;
   dialogSubmitLabel?: string;
-  formFields?: any[];
+  formFields?: any[] | ((values: any) => any[]);
+  initialValues?: any;
   loading?: boolean;
   error?: Error;
   refetch?(): void;
@@ -30,18 +30,15 @@ interface ResourceActionDialogOwnProps {
 
 const validateJSON = (value: string) => {
   try {
-    JSON.parse(value);
+    if (value) {
+      JSON.parse(value);
+    }
   } catch {
     return translate('This value is invalid JSON.');
   }
 };
 
-export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
-  {
-    form: RESOURCE_ACTION_FORM,
-  },
-)(({
-  submitForm,
+const ResourceActionDialogInner: FC<any> = ({
   handleSubmit,
   submitting,
   invalid,
@@ -51,104 +48,113 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
   loading,
   error,
   refetch,
-  formFields: fields,
-  change,
+  formFields,
 }) => {
-  const getFieldComponent = useCallback((field, index, { key, ...props }) => {
-    if (field.component) {
-      return (
-        <field.component
-          key={key}
-          {...props}
-          {...(field.extraProps || {})}
-          change={change}
-        />
-      );
-    } else if (field.type === 'string') {
-      return (
-        <StringField
-          key={key}
-          {...props}
-          maxLength={field.maxlength}
-          pattern={field.pattern?.source}
-          validate={field.validate}
-          autoFocus={index === 0}
-        />
-      );
-    } else if (field.type === 'text') {
-      return <TextField key={key} {...props} maxLength={field.maxlength} />;
-    } else if (field.type === 'json') {
-      return (
-        <MonacoField
-          key={key}
-          {...props}
-          language="json"
-          validate={validateJSON}
-          height={300}
-        />
-      );
-    } else if (field.type === 'datetime') {
-      return <DateTimeField key={key} {...props} />;
-    } else if (field.type === 'timezone') {
-      return <TimezoneField key={key} {...props} />;
-    } else if (field.type === 'integer') {
-      return (
-        <NumberField
-          key={key}
-          {...props}
-          min={field.minValue}
-          max={field.maxValue}
-        />
-      );
-    } else if (field.type === 'boolean') {
-      return <AwesomeCheckboxField hideLabel={true} key={key} {...props} />;
-    } else if (field.type === 'select') {
-      return (
-        <SelectField
-          key={key}
-          {...props}
-          options={field.options}
-          simpleValue={true}
-        />
-      );
-    } else if (field.type === 'async_select') {
-      return (
-        <AsyncSelectField
-          key={key}
-          {...props}
-          {...field.extraProps}
-          loadOptions={field.loadOptions}
-          getOptionLabel={field.getOptionLabel}
-          getOptionValue={field.getOptionValue}
-          isMulti={field.isMulti}
-          isClearable={field.isClearable}
-        />
-      );
-    } else if (field.type === 'radio') {
-      return (
-        <AwesomeRadioButton
-          key={key}
-          {...props}
-          choices={field.choices}
-          direction={field.direction}
-          justify={field.justify}
-        />
-      );
-    }
-  }, []);
+  const form = useForm();
+  const { values } = useFormState();
+  const change = useCallback((name, value) => form.change(name, value), [form]);
+
+  const fields = useMemo(
+    () => (typeof formFields === 'function' ? formFields(values) : formFields),
+    [formFields, values],
+  );
+
+  const getFieldComponent = useCallback(
+    (field, index, { key, ...props }) => {
+      if (field.component) {
+        return (
+          <field.component
+            key={key}
+            {...props}
+            {...(field.extraProps || {})}
+            change={change}
+          />
+        );
+      } else if (field.type === 'string') {
+        return (
+          <StringField
+            key={key}
+            {...props}
+            maxLength={field.maxlength}
+            pattern={field.pattern?.source}
+            autoFocus={index === 0}
+          />
+        );
+      } else if (field.type === 'text') {
+        return <TextField key={key} {...props} maxLength={field.maxlength} />;
+      } else if (field.type === 'json') {
+        return (
+          <MonacoField
+            key={key}
+            {...props}
+            language="json"
+            validate={validateJSON}
+            height={300}
+          />
+        );
+      } else if (field.type === 'datetime') {
+        return <DateTimeField key={key} {...props} />;
+      } else if (field.type === 'timezone') {
+        return <TimezoneField key={key} {...props} />;
+      } else if (field.type === 'integer') {
+        return (
+          <NumberField
+            key={key}
+            {...props}
+            min={field.minValue}
+            max={field.maxValue}
+          />
+        );
+      } else if (field.type === 'boolean') {
+        return <AwesomeCheckboxField hideLabel={true} key={key} {...props} />;
+      } else if (field.type === 'select') {
+        return (
+          <SelectField
+            key={key}
+            {...props}
+            options={field.options}
+            simpleValue={true}
+          />
+        );
+      } else if (field.type === 'async_select') {
+        return (
+          <AsyncSelectField
+            key={key}
+            {...props}
+            {...field.extraProps}
+            loadOptions={field.loadOptions}
+            getOptionLabel={field.getOptionLabel}
+            getOptionValue={field.getOptionValue}
+            isMulti={field.isMulti}
+            isClearable={field.isClearable}
+          />
+        );
+      } else if (field.type === 'radio') {
+        return (
+          <AwesomeRadioButton
+            key={key}
+            {...props}
+            choices={field.choices}
+            direction={field.direction}
+            justify={field.justify}
+          />
+        );
+      }
+    },
+    [change],
+  );
 
   return (
-    <ActionDialog
+    <ActionDialogFinal
       title={dialogTitle}
       submitLabel={dialogSubmitLabel}
-      onSubmit={handleSubmit(submitForm)}
+      onSubmit={handleSubmit}
       submitting={submitting}
       invalid={invalid}
       fullButtons={dialogFullButtons}
+      loading={loading}
     >
-      {loading ? (
-        <LoadingSpinner />
-      ) : error ? (
+      {error ? (
         <LoadingErred loadData={refetch} />
       ) : (
         fields.map((field, index) => {
@@ -163,6 +169,9 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
             disabled: field.disabled,
             disabled_tooltip: field.disabled_tooltip,
             spaceless: field.spaceless,
+            validate: Array.isArray(field.validate)
+              ? composeValidators(...field.validate)
+              : field.validate,
           };
           return field.disabled && props.disabled_tooltip ? (
             <Tip
@@ -177,6 +186,17 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
           );
         })
       )}
-    </ActionDialog>
+    </ActionDialogFinal>
   );
-});
+};
+
+export const ResourceActionDialog: FC<ResourceActionDialogProps> = (props) => (
+  <Form
+    onSubmit={props.submitForm}
+    initialValues={props.initialValues}
+    mutators={{ ...arrayMutators }}
+    render={(formProps) => (
+      <ResourceActionDialogInner {...props} {...formProps} />
+    )}
+  />
+);

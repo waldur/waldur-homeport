@@ -30,7 +30,7 @@ import { getDefaultFloatingIps, formatSubnet } from '../utils';
 import { FormSecurityGroupsField } from './FormSecurityGroupsField';
 import { FormSSHPublicKeysField } from './FormSSHPublicKeysField';
 
-export const CustomIpField = ({
+const CustomIpField = ({
   parentName,
   data,
   autoFocus = false,

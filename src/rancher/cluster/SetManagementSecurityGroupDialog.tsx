@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 import {
   RancherClusterRequest,
   rancherClustersCreateManagementSecurityGroup,
@@ -12,16 +10,9 @@ import {
   validateIPv4CIDR,
   validateIPv6CIDR,
 } from '@/openstack/openstack-security-groups/rule-editor/CIDRField';
-import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { RootState } from '@/store/reducers';
-
-const selector = formValueSelector(RESOURCE_ACTION_FORM);
-
-const ethertypeSelector = (state: RootState) => selector(state, 'ethertype');
 
 export const SetManagementSecurityGroupDialog = ({ clusterId }) => {
-  const ethertype = useSelector(ethertypeSelector);
   const submitFormMutation = useManagedMutation<
     any,
     any,
@@ -40,7 +31,7 @@ export const SetManagementSecurityGroupDialog = ({ clusterId }) => {
     <ResourceActionDialog
       dialogTitle={translate('Set management security group')}
       submitForm={(values) => submitFormMutation.mutateAsync(values)}
-      formFields={[
+      formFields={(values) => [
         {
           name: 'ethertype',
           type: 'select',
@@ -55,8 +46,9 @@ export const SetManagementSecurityGroupDialog = ({ clusterId }) => {
           name: 'cidr',
           type: 'string',
           label: translate('CIDR'),
-          placeholder: getCIDRPlaceholder(ethertype),
-          validate: ethertype === 'IPv4' ? validateIPv4CIDR : validateIPv6CIDR,
+          placeholder: getCIDRPlaceholder(values.ethertype),
+          validate:
+            values.ethertype === 'IPv4' ? validateIPv4CIDR : validateIPv6CIDR,
           required: true,
         },
       ]}

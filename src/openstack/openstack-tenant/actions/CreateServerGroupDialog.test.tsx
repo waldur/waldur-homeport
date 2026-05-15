@@ -49,21 +49,25 @@ const queryClient = new QueryClient({
   },
 });
 
+const renderDialog = (refetch = vi.fn()) => {
+  return render(
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <CreateServerGroupDialog
+          resolve={{ resource: mockResource as any, refetch }}
+        />
+      </QueryClientProvider>
+    </Provider>,
+  );
+};
+
 describe('CreateServerGroupDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it('renders correctly', () => {
-    render(
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <CreateServerGroupDialog
-            resolve={{ resource: mockResource as any, refetch: vi.fn() }}
-          />
-        </QueryClientProvider>
-      </Provider>,
-    );
+    renderDialog();
 
     expect(
       screen.getByText('Create server group for OpenStack tenant test-tenant'),
@@ -73,15 +77,7 @@ describe('CreateServerGroupDialog', () => {
   });
 
   it('validates required fields', async () => {
-    render(
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <CreateServerGroupDialog
-            resolve={{ resource: mockResource as any, refetch: vi.fn() }}
-          />
-        </QueryClientProvider>
-      </Provider>,
-    );
+    renderDialog();
 
     const nameInput = screen.getByLabelText('Name');
     fireEvent.blur(nameInput);
@@ -93,15 +89,7 @@ describe('CreateServerGroupDialog', () => {
 
   it('validates latin name characters', async () => {
     const user = userEvent.setup();
-    render(
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <CreateServerGroupDialog
-            resolve={{ resource: mockResource as any, refetch: vi.fn() }}
-          />
-        </QueryClientProvider>
-      </Provider>,
-    );
+    renderDialog();
 
     const nameInput = screen.getByLabelText('Name');
     await user.type(nameInput, 'имя'); // Cyrillic characters
@@ -116,15 +104,12 @@ describe('CreateServerGroupDialog', () => {
 
   it('submits correctly with valid data', async () => {
     const user = userEvent.setup();
-    render(
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <CreateServerGroupDialog
-            resolve={{ resource: mockResource as any, refetch: vi.fn() }}
-          />
-        </QueryClientProvider>
-      </Provider>,
-    );
+    const mockRefetch = vi.fn();
+    vi.mocked(openstackTenantsCreateServerGroup).mockResolvedValue({
+      data: {},
+    } as any);
+
+    renderDialog(mockRefetch);
 
     const nameInput = screen.getByLabelText('Name');
     await user.type(nameInput, 'test-server-group');
@@ -136,11 +121,32 @@ describe('CreateServerGroupDialog', () => {
 
     expect(openstackTenantsCreateServerGroup).toHaveBeenCalledWith(
       expect.objectContaining({
+        path: { uuid: 'tenant-uuid' },
         body: expect.objectContaining({
           name: 'test-server-group',
           policy: 'affinity',
         }),
       }),
     );
+  });
+
+  it('handles API submission failure gracefully', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackTenantsCreateServerGroup).mockRejectedValue(
+      new Error('API Error'),
+    );
+
+    renderDialog();
+
+    const nameInput = screen.getByLabelText('Name');
+    await user.type(nameInput, 'failed-group');
+
+    const submitButton = screen.getByText('Submit');
+    await waitFor(() => expect(submitButton).not.toBeDisabled());
+    await user.click(submitButton);
+
+    await waitFor(() => {
+      expect(openstackTenantsCreateServerGroup).toHaveBeenCalled();
+    });
   });
 });

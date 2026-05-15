@@ -1,7 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 import {
   openstackRoutersAddRouterInterface,
   openstackPortsList,
@@ -10,13 +7,8 @@ import {
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { RootState } from '@/store/reducers';
 import { renderFieldOrDash } from '@/table/utils';
-
-const selector = formValueSelector(RESOURCE_ACTION_FORM);
-const typeSelector = (state: RootState): string => selector(state, 'type');
 
 const typeChoices = [
   { value: 'subnet', label: translate('Subnet') },
@@ -44,8 +36,6 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
     errorMessage: translate('Unable to add router interface.'),
   });
 
-  const type = useSelector(typeSelector);
-
   const query = useQuery({
     queryKey: ['AddRouterInterface', router.tenant_uuid],
 
@@ -70,57 +60,61 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
     },
   });
 
-  const fields = useMemo(
-    () =>
-      query.data
-        ? [
-            {
-              name: 'type',
-              label: translate('Type'),
-              type: 'radio',
-              required: true,
-              choices: typeChoices,
-              direction: 'horizontal',
-            },
-            {
-              name: 'resource',
-              label:
-                type === 'subnet'
-                  ? translate('Select subnet')
-                  : translate('Select existing port'),
-              type: 'select',
-              required: true,
-              options:
-                type === 'subnet'
-                  ? query.data.subnets.map((subnet) => ({
-                      value: subnet.url,
-                      label: `${subnet.name} (${subnet.cidr})`,
-                    }))
-                  : query.data.ports.map((port) => {
-                      const ips = port.fixed_ips?.length
-                        ? port.fixed_ips.map((fip) => fip.ip_address).join(', ')
-                        : '—';
-                      const mac = renderFieldOrDash(port.mac_address);
-                      const nameOrUuid = port.name || port.uuid;
-                      return {
-                        value: port.url,
-                        label: `${ips} (${mac}) / ${nameOrUuid}`.trim(),
-                      };
-                    }),
-            },
-          ]
-        : [],
-    [type],
-  );
-
   return (
     <ResourceActionDialog
       dialogTitle={translate('Add router interface')}
-      formFields={fields}
+      formFields={(values) =>
+        query.data
+          ? [
+              {
+                name: 'type',
+                label: translate('Type'),
+                type: 'radio',
+                required: true,
+                choices: typeChoices,
+                direction: 'horizontal',
+              },
+              {
+                name: 'resource',
+                label:
+                  values.type === 'subnet'
+                    ? translate('Select subnet')
+                    : translate('Select existing port'),
+                type: 'select',
+                required: true,
+                options:
+                  values.type === 'subnet'
+                    ? query.data.subnets.map((subnet) => ({
+                        value: subnet.url,
+                        label: `${subnet.name} (${subnet.cidr})`,
+                      }))
+                    : query.data.ports.map((port) => {
+                        const ips = port.fixed_ips?.length
+                          ? port.fixed_ips
+                              .map((fip) => fip.ip_address)
+                              .join(', ')
+                          : '—';
+                        const mac = renderFieldOrDash(port.mac_address);
+                        const nameOrUuid = port.name || port.uuid;
+                        return {
+                          value: port.url,
+                          label: `${ips} (${mac}) / ${nameOrUuid}`.trim(),
+                        };
+                      }),
+              },
+            ]
+          : []
+      }
       loading={query.isLoading}
       error={query.error}
       initialValues={{ type: typeChoices[0].value, resource: '' }}
-      submitForm={mutation.mutateAsync}
+      submitForm={async (values) => {
+        try {
+          await mutation.mutateAsync(values);
+        } catch {
+          // Handled by useManagedMutation
+        }
+      }}
     />
   );
 };

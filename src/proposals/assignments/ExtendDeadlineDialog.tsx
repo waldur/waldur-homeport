@@ -9,7 +9,6 @@ import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { SubmitButton } from '@/form';
 import { DateTimeField } from '@/form/DateTimeField';
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -82,7 +81,7 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               {batch.expires_at && (
                 <FormGroup label={translate('Current deadline')}>
                   <div className="form-control-plaintext">
@@ -113,7 +112,7 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
                   )}
                 </div>
               )}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

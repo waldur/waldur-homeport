@@ -1,16 +1,8 @@
-import {
-  ArchiveIcon,
-  ArrowClockwiseIcon,
-  PencilSimpleIcon,
-  ProhibitIcon,
-} from '@phosphor-icons/react';
-import { useRouter } from '@uirouter/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import type { MouseEvent } from 'react';
-import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
+import { ButtonGroup, Dropdown } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsActivate,
-  marketplaceProviderOfferingsArchive,
-  marketplaceProviderOfferingsDestroy,
   marketplaceProviderOfferingsDraft,
   marketplaceProviderOfferingsUnpause,
 } from 'waldur-js-client';
@@ -20,10 +12,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
 import { useModal } from '@/modal/actions';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
@@ -36,6 +25,11 @@ import {
   UNAVAILABLE,
 } from '../store/constants';
 
+import { ArchiveOfferingAction } from './ArchiveOfferingAction';
+import { DeleteOfferingAction } from './DeleteOfferingAction';
+import { MakeUnavailableAction } from './MakeUnavailableAction';
+import { RestoreOfferingAction } from './RestoreOfferingAction';
+
 const RequestActionDialog = lazyComponent(() =>
   import('@/marketplace/offerings/actions/RequestActionDialog').then(
     (module) => ({ default: module.RequestActionDialog }),
@@ -45,12 +39,6 @@ const RequestActionDialog = lazyComponent(() =>
 const PauseOfferingDialog = lazyComponent(() =>
   import('./PauseOfferingDialog').then((module) => ({
     default: module.PauseOfferingDialog,
-  })),
-);
-
-const ChangeOfferingAvailabilityDialog = lazyComponent(() =>
-  import('./ChangeOfferingAvailabilityDialog').then((module) => ({
-    default: module.ChangeOfferingAvailabilityDialog,
   })),
 );
 
@@ -87,10 +75,9 @@ export const OfferingStateActions = ({
 
   const { showError, showErrorResponse, showSuccess } = useNotify();
 
-  const { openDialog, closeDialog, confirm } = useModal();
+  const { openDialog, closeDialog } = useModal();
 
   const user = useUser();
-  const router = useRouter();
   const updateOfferingState = async (api) => {
     try {
       await api();
@@ -151,68 +138,6 @@ export const OfferingStateActions = ({
     );
   };
 
-  const archive = () =>
-    updateOfferingState(() =>
-      marketplaceProviderOfferingsArchive({ path: { uuid: offering.uuid } }),
-    );
-
-  const openChangeAvailabilityDialog = () => {
-    openDialog(ChangeOfferingAvailabilityDialog, {
-      resolve: { offering, refetch: refreshOffering },
-      size: 'lg',
-    });
-  };
-
-  const handleDelete = async () => {
-    try {
-      await confirm(
-        translate('Delete confirmation'),
-        translate('Are you sure you want to delete offering {name}?', {
-          name: offering.name,
-        }),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await marketplaceProviderOfferingsDestroy({
-        path: { uuid: offering.uuid },
-      });
-      showSuccess(
-        translate('Offering {name} deleted successfully.', {
-          name: offering.name,
-        }),
-      );
-      router.stateService.go('marketplace-vendor-offerings', {
-        uuid: offering.customer_uuid,
-      });
-    } catch (error) {
-      showErrorResponse(
-        error,
-        translate('Error while deleting offering {name}.', {
-          name: offering.name,
-        }),
-      );
-    }
-  };
-
-  const canDeleteOffering = hasPermission(user, {
-    permission: PermissionEnum.DELETE_OFFERING,
-    customerId: offering.customer_uuid,
-  });
-
-  const showDeleteAction = canManageOfferingLifecycle
-    ? user.is_staff ||
-      (offering.state === DRAFT &&
-        !offering.resources_count &&
-        canDeleteOffering)
-    : false;
-
-  const deletionRestricted =
-    offering.plugin_options?.restrict_deletion_with_active_resources &&
-    offering.resources_count > 0;
-
   const draftTitle = canManageOfferingLifecycle
     ? translate('Set to draft')
     : translate('Request editing');
@@ -239,16 +164,11 @@ export const OfferingStateActions = ({
     if (!canManageOfferingLifecycle) return null;
 
     return (
-      <Button
-        variant="tertiary"
-        onClick={openChangeAvailabilityDialog}
+      <RestoreOfferingAction
+        offering={offering}
+        refreshOffering={refreshOffering}
         className={className}
-      >
-        <span className="svg-icon svg-icon-2">
-          <ArrowClockwiseIcon weight="bold" />
-        </span>
-        {translate('Restore')}
-      </Button>
+      />
     );
   }
   if (offering.state == ARCHIVED) {
@@ -278,33 +198,19 @@ export const OfferingStateActions = ({
             iconNode={<PencilSimpleIcon weight="bold" />}
           />
         )}
-        <ActionItem
-          title={translate('Archive')}
-          action={() => archive()}
-          iconNode={<ArchiveIcon weight="bold" />}
+        <ArchiveOfferingAction
+          offering={offering}
+          refreshOffering={refreshOffering}
         />
-        {canManageOfferingLifecycle && (
-          <ActionItem
-            title={translate('Make unavailable')}
-            action={openChangeAvailabilityDialog}
-            iconNode={<ProhibitIcon weight="bold" />}
-          />
-        )}
-        {showDeleteAction && <div className="separator my-2" />}
-        {showDeleteAction && (
-          <RemovalActionItem
-            title={translate('Delete')}
-            action={handleDelete}
-            disabled={!!deletionRestricted}
-            tooltip={
-              deletionRestricted
-                ? translate(
-                    'Offering cannot be deleted while it has active resources.',
-                  )
-                : undefined
-            }
-          />
-        )}
+        <MakeUnavailableAction
+          offering={offering}
+          refreshOffering={refreshOffering}
+          canManageOfferingLifecycle={canManageOfferingLifecycle}
+        />
+        <DeleteOfferingAction
+          offering={offering}
+          canManageOfferingLifecycle={canManageOfferingLifecycle}
+        />
       </Dropdown.Menu>
     </Dropdown>
   );

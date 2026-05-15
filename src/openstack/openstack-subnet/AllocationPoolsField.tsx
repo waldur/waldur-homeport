@@ -1,14 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { FieldArray, Field, formValueSelector, change } from 'redux-form';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
+import { Field, useForm, useFormState } from 'react-final-form';
+import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { translate } from '@/i18n';
-import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
-import { RootState } from '@/store/reducers';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 
@@ -17,20 +13,12 @@ import {
   validateAllocationPool,
 } from '../openstack-network/utils';
 
-const selector = formValueSelector(RESOURCE_ACTION_FORM);
-const cidrSelector = (state: RootState) => selector(state, 'cidr');
-
-interface FieldArrayProps {
-  fields: FieldArrayFieldsProps<OpenStackSubNetAllocationPool>;
-  meta: FieldArrayMetaProps;
-}
-
-const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
-  fields,
-  meta,
-}) => {
-  const cidr = useSelector(cidrSelector);
-  const dispatch = useDispatch();
+const AllocationPoolsList: FunctionComponent<
+  FieldArrayRenderProps<any, any>
+> = ({ fields, meta }) => {
+  const { values } = useFormState();
+  const cidr = values.cidr;
+  const form = useForm();
   const prevCidrRef = useRef<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<{
     [key: string]: string;
@@ -56,27 +44,15 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
       const defaultPool = getDefaultAllocationPool(cidr);
 
       for (let i = 0; i < fields.length; i++) {
-        dispatch(
-          change(
-            RESOURCE_ACTION_FORM,
-            `allocation_pools[${i}].start`,
-            defaultPool.start,
-          ),
-        );
-        dispatch(
-          change(
-            RESOURCE_ACTION_FORM,
-            `allocation_pools[${i}].end`,
-            defaultPool.end,
-          ),
-        );
+        form.change(`allocation_pools[${i}].start`, defaultPool.start);
+        form.change(`allocation_pools[${i}].end`, defaultPool.end);
       }
 
       setValidationErrors({});
     }
 
     prevCidrRef.current = cidr;
-  }, [cidr, dispatch, fields]);
+  }, [cidr, form, fields]);
 
   const validateField = (
     value: string,
@@ -85,7 +61,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
   ) => {
     if (!cidr) return;
 
-    const currentValues = fields.getAll() || [];
+    const currentValues = fields.value || [];
     if (!currentValues[index]) return;
 
     const pool = {
@@ -126,11 +102,11 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
           {translate('No allocation pools defined. Default pool will be used.')}
         </p>
       )}
-      {fields.map((pool, index) => (
+      {fields.map((name, index) => (
         <div key={index} className="mb-3">
           <InputGroup>
             <Field
-              name={`${pool}.start`}
+              name={`${name}.start`}
               component="input"
               type="text"
               placeholder={translate('Start IP')}
@@ -140,7 +116,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
 
             <InputGroup.Text>-</InputGroup.Text>
             <Field
-              name={`${pool}.end`}
+              name={`${name}.end`}
               component="input"
               type="text"
               placeholder={translate('End IP')}

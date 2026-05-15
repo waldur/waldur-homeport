@@ -18,7 +18,6 @@ import {
   FieldError,
 } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { FormContainer } from '@/form/FormContainer';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { SlugTemplateHelpText } from '@/form/SlugTemplateHelpText';
 import { translate } from '@/i18n';
@@ -152,7 +151,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               {resolve.name === 'name' && (
                 <FormGroup label={translate('Name')} required>
                   <Field
@@ -284,7 +283,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                   />
                 </FormGroup>
               )}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

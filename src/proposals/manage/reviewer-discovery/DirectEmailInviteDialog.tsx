@@ -1,9 +1,9 @@
 import { FORM_ERROR } from 'final-form';
-import { Form, Field } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import { proposalProtectedCallsInviteByEmail } from 'waldur-js-client';
 
+import { composeValidators, email, required } from '@/core/validators';
 import { StringField, SubmitButton, TextField } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -24,22 +24,6 @@ interface FormValues {
   email: string;
   invitation_message?: string;
 }
-
-const required = (value) =>
-  value ? undefined : translate('This field is required.');
-
-const email = (value) =>
-  value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-    ? translate('Invalid email address.')
-    : undefined;
-
-const composeValidators =
-  (...validators) =>
-  (value) =>
-    validators.reduce(
-      (error, validator) => error || validator(value),
-      undefined,
-    );
 
 export const DirectEmailInviteDialog = ({
   resolve,
@@ -91,7 +75,7 @@ export const DirectEmailInviteDialog = ({
               </>
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
+            <div className="size-lg">
               <FormGroup label={translate('Email address')} required>
                 <Field
                   name="email"
@@ -116,7 +100,7 @@ export const DirectEmailInviteDialog = ({
                   )}
                 </div>
               </FormGroup>
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

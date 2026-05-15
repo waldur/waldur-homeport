@@ -10,9 +10,9 @@ import {
   getLatinNameValidators,
   required,
 } from '@/core/validators';
-import { FormContainerFinal, SelectField, StringField } from '@/form';
+import { SelectField, StringField } from '@/form';
 import { translate } from '@/i18n';
-import { ActionDialog } from '@/modal/ActionDialog';
+import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { OpenStackTenant } from '../types';
@@ -61,10 +61,16 @@ export const CreateServerGroupDialog: FC<CreateServerGroupDialogProps> = ({
 
   return (
     <Form<OpenStackServerGroupRequest>
-      onSubmit={(values) => submitMutation.mutateAsync(values)}
+      onSubmit={async (values) => {
+        try {
+          await submitMutation.mutateAsync(values);
+        } catch {
+          // Handled by useManagedMutation
+        }
+      }}
       initialValues={initialValues as any}
       render={({ handleSubmit, submitting, invalid }) => (
-        <ActionDialog
+        <ActionDialogFinal
           onSubmit={handleSubmit}
           submitLabel={translate('Submit')}
           title={translate('Create server group for OpenStack tenant {name}', {
@@ -73,26 +79,24 @@ export const CreateServerGroupDialog: FC<CreateServerGroupDialogProps> = ({
           submitting={submitting}
           invalid={invalid}
         >
-          <FormContainerFinal submitting={submitting}>
-            <StringField
-              label={translate('Name')}
-              name="name"
-              validate={composeValidators(...getLatinNameValidators())}
-              maxLength={150}
-              required={true}
-            />
+          <StringField
+            label={translate('Name')}
+            name="name"
+            validate={composeValidators(...getLatinNameValidators())}
+            maxLength={150}
+            required={true}
+          />
 
-            <SelectField
-              label={translate('Policy')}
-              name="policy"
-              placeholder={translate('Select policy...')}
-              options={getPolicies()}
-              isClearable={false}
-              required={true}
-              validate={required}
-            />
-          </FormContainerFinal>
-        </ActionDialog>
+          <SelectField
+            label={translate('Policy')}
+            name="policy"
+            placeholder={translate('Select policy...')}
+            options={getPolicies()}
+            isClearable={false}
+            required={true}
+            validate={required}
+          />
+        </ActionDialogFinal>
       )}
     />
   );

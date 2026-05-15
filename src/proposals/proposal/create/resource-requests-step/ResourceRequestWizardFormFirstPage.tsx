@@ -7,7 +7,7 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField } from '@/form';
+import { SelectField } from '@/form';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 
@@ -45,11 +45,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
       {(wizardProps) => {
         const { offering } = wizardProps.formValues;
         return (
-          <FormContainer
-            submitting={wizardProps.submitting}
-            clearOnUnmount={false}
-            className="size-lg row"
-          >
+          <div className="size-lg row">
             {isLoading ? (
               <LoadingSpinner />
             ) : error ? (
@@ -83,7 +79,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
                 {offering.provider_name}
               </p>
             )}
-          </FormContainer>
+          </div>
         );
       }}
     </WizardForm>

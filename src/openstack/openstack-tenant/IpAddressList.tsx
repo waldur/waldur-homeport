@@ -1,25 +1,26 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
-import { renderValidationWrapper } from '@/form/FieldValidationWrapper';
+import { FieldError } from '@/form/FieldError';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { validateIPv4 } from '../utils';
 
-const ValidatedInputField = renderValidationWrapper(InputField);
-
 const IPAddressRow = ({ address, onRemove }) => (
   <tr>
     <td>
-      <Field
-        name={address}
-        component={ValidatedInputField}
-        validate={validateIPv4}
-      />
+      <Field name={address} validate={validateIPv4}>
+        {({ input, meta }) => (
+          <>
+            <InputField {...input} />
+            <FieldError error={meta.touched && meta.error} />
+          </>
+        )}
+      </Field>
     </td>
     <td>
       <CompactActionButton
