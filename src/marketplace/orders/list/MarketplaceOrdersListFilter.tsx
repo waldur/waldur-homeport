@@ -15,6 +15,7 @@ import { TableFilterItem } from '@/table/TableFilterItem';
 import { createOrderStateOptions } from '../OrderStates';
 import { ProviderAutocomplete } from '../ProviderAutocomplete';
 
+import { OrderAutoApprovedFilter } from './OrderAutoApprovedFilter';
 import { OrderStateFilter } from './OrderStateFilter';
 import { OrderTypeFilter } from './OrderTypeFilter';
 
@@ -74,6 +75,14 @@ const PureMarketplaceOrdersListFilter = (props) => {
         ellipsis={true}
       >
         <OrderTypeFilter />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Auto-approved')}
+        name="was_auto_approved"
+        badgeValue={(value) => value?.label}
+        ellipsis={true}
+      >
+        <OrderAutoApprovedFilter />
       </TableFilterItem>
     </>
   );

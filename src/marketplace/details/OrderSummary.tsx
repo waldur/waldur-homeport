@@ -44,8 +44,8 @@ const OrderCheckout: FC<OrderSummaryProps> = (props) => {
     props.prices.periodKeys.indexOf('monthly'),
     0,
   );
-  const total =
-    (periodic.totalPeriods[monthlyPriceIndex] || 0) + oneTime.oneTimeTotal;
+  const monthlyRecurring = periodic.totalPeriods[monthlyPriceIndex] || 0;
+  const total = monthlyRecurring + oneTime.oneTimeTotal;
 
   return (
     <DeployPageTotalCard
@@ -55,6 +55,7 @@ const OrderCheckout: FC<OrderSummaryProps> = (props) => {
           : defaultCurrency(total || 0)
       }
       offering={props.offering}
+      monthlyRecurringCost={monthlyRecurring}
     >
       <SummaryTable {...props} />
       <OrderSubmitButton {...props} />

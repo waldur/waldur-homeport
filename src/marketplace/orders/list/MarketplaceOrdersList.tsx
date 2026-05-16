@@ -47,6 +47,10 @@ const useMarketplaceOrdersFilter = () => {
       if (filterValues.provider) {
         filter.provider_uuid = filterValues.provider.customer_uuid;
       }
+      if (filterValues.was_auto_approved) {
+        filter.was_auto_approved =
+          filterValues.was_auto_approved.value === 'true';
+      }
     }
     return filter;
   }, [filterValues]);
