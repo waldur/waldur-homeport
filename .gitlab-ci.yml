@@ -400,7 +400,7 @@ Test k8s deployment:
     name: test-${CI_MERGE_REQUEST_ID}
     action: start
     on_stop: Cleanup test k8s deployment
-    url: https://homeport-testing.waldur.com/${CI_MERGE_REQUEST_ID}/
+    url: https://helm-testing.waldur.com/${CI_MERGE_REQUEST_ID}/
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never

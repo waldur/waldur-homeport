@@ -4,10 +4,13 @@ metadata:
   name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
   labels:
     name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+  annotations:
+    cert-manager.io/cluster-issuer: vault-hpc-issuer
+    traefik.ingress.kubernetes.io/router.middlewares: waldur-helm-test-homeport-test-https@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
-  - host: homeport-testing.waldur.com
+  - host: helm-testing.waldur.com
     http:
       paths:
       - pathType: Prefix
@@ -17,3 +20,7 @@ spec:
             name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
             port:
               number: 80
+  tls:
+  - hosts:
+    - helm-testing.waldur.com
+    secretName: helm-testing.waldur.com
