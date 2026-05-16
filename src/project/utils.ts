@@ -6,6 +6,7 @@ import {
   invoiceItemsCostsList,
   KindEnum,
   marketplaceProjectEstimatedCostPoliciesList,
+  marketplaceProjectOrderAutoApprovalsList,
   projectCreditsList,
 } from 'waldur-js-client';
 
@@ -26,7 +27,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { Project, User } from '@/workspace/types';
 
 async function getProjectCostData(project: Project) {
-  const [invoices, costPolicies] = await Promise.all([
+  const [invoices, costPolicies, autoApprovalRules] = await Promise.all([
     invoiceItemsCostsList({
       query: {
         project_uuid: project.uuid,
@@ -41,8 +42,15 @@ async function getProjectCostData(project: Project) {
         page_size: 3,
       },
     }).then((response) => response.data),
+    marketplaceProjectOrderAutoApprovalsList({
+      query: { project_uuid: project.uuid },
+    }).then((response) => response.data),
   ]);
-  return { invoices, costPolicies };
+  return {
+    invoices,
+    costPolicies,
+    autoApprovalRule: autoApprovalRules?.[0] ?? null,
+  };
 }
 
 export function useProjectCostChart(project: Project) {
@@ -78,6 +86,14 @@ export function useProjectCostChart(project: Project) {
         value: totalCost,
       };
     });
+
+    if (data.autoApprovalRule?.enabled) {
+      const limit = parseFloat(data.autoApprovalRule.monthly_cost_limit);
+      hlines.push({
+        label: `${translate('Auto-approval limit')}: ${defaultCurrency(limit)} / ${translate('month')}`,
+        value: limit,
+      });
+    }
 
     // Extract items from the current month invoice entry
     const currentMonthEntry = data.invoices.find(

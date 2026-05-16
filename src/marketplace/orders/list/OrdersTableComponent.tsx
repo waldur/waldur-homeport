@@ -5,6 +5,7 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
+import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -47,6 +48,8 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'plan_name',
   'attachment',
   'request_comment',
+  // Approval badge
+  'auto_approved',
 ];
 
 const formatName = (row: OrderDetails) => {
@@ -163,11 +166,27 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
     },
     {
       title: translate('Approved by'),
-      render: ({ row }) =>
-        row.consumer_reviewed_by_full_name ||
-        row.consumer_reviewed_by_username ||
-        DASH_ESCAPE_CODE,
-      keys: ['consumer_reviewed_by_full_name', 'consumer_reviewed_by_username'],
+      render: ({ row }) => {
+        const name =
+          row.consumer_reviewed_by_full_name ||
+          row.consumer_reviewed_by_username ||
+          DASH_ESCAPE_CODE;
+        return (
+          <span className="d-inline-flex align-items-center gap-2">
+            {name}
+            {row.auto_approved ? (
+              <Badge variant="purple" pill outline>
+                {translate('Auto-approved')}
+              </Badge>
+            ) : null}
+          </span>
+        );
+      },
+      keys: [
+        'consumer_reviewed_by_full_name',
+        'consumer_reviewed_by_username',
+        'auto_approved',
+      ],
       id: 'approved_by',
       export: (row) =>
         row.consumer_reviewed_by_full_name ||

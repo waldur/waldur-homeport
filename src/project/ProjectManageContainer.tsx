@@ -6,6 +6,9 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 import { getProject } from '@/workspace/selectors';
 
 const ProjectGeneral = lazyComponent(() =>
@@ -28,6 +31,11 @@ const ProjectCredit = lazyComponent(() =>
     default: module.ProjectCredit,
   })),
 );
+const ProjectOrderAutoApproval = lazyComponent(() =>
+  import('./manage/ProjectOrderAutoApproval').then((module) => ({
+    default: module.ProjectOrderAutoApproval,
+  })),
+);
 const ProjectDelete = lazyComponent(() =>
   import('./manage/ProjectDelete').then((module) => ({
     default: module.ProjectDelete,
@@ -41,6 +49,20 @@ const ProjectEndDateChangeRequests = lazyComponent(() =>
 
 export const ProjectManageContainer = () => {
   const project = useSelector(getProject);
+  const user = useUser();
+
+  const canSeeOrderApproval = useMemo(() => {
+    if (!project) return false;
+    return (
+      user.is_staff ||
+      user.is_support ||
+      hasPermission(user, {
+        permission: PermissionEnum.APPROVE_ORDER,
+        projectId: project.uuid,
+        customerId: project.customer_uuid,
+      })
+    );
+  }, [user, project]);
 
   const tabs = useMemo<PageBarTab[]>(
     () =>
@@ -65,6 +87,11 @@ export const ProjectManageContainer = () => {
           component: ProjectCredit,
           title: translate('Credit management'),
         },
+        canSeeOrderApproval && {
+          key: 'order-approval',
+          component: ProjectOrderAutoApproval,
+          title: translate('Order approval'),
+        },
         !project?.is_removed && {
           key: 'end-date-change-requests',
           component: ProjectEndDateChangeRequests,
@@ -76,7 +103,7 @@ export const ProjectManageContainer = () => {
           title: translate('Remove'),
         },
       ].filter(Boolean),
-    [project],
+    [project, canSeeOrderApproval],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
 

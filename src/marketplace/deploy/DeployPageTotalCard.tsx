@@ -10,6 +10,7 @@ import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { OfferingTosNotification } from './OfferingTosNotification';
+import { OrderAutoApprovalNotice } from './OrderAutoApprovalNotice';
 
 export const DeployPageTotalCard: FC<
   PropsWithChildren<{
@@ -17,8 +18,9 @@ export const DeployPageTotalCard: FC<
     offering;
     header?;
     shouldConcealPrices?: boolean;
+    monthlyRecurringCost?: number;
   }>
-> = ({ total, offering, header, children, ...props }) => {
+> = ({ total, offering, header, children, monthlyRecurringCost, ...props }) => {
   const shouldConcealPrices =
     props.shouldConcealPrices ??
     isFeatureVisible(MarketplaceFeatures.conceal_prices);
@@ -73,6 +75,12 @@ export const DeployPageTotalCard: FC<
             </Tip>
           </div>
         ) : null}
+        {typeof monthlyRecurringCost === 'number' && (
+          <OrderAutoApprovalNotice
+            offering={offering}
+            monthlyCost={monthlyRecurringCost}
+          />
+        )}
         <TosNotification />
         <OfferingTosNotification offering={offering} />
       </Card.Body>

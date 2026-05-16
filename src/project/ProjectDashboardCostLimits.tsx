@@ -1,4 +1,9 @@
-import { EyeIcon, GearSixIcon, ListBulletsIcon } from '@phosphor-icons/react';
+import {
+  CheckCircleIcon,
+  EyeIcon,
+  GearSixIcon,
+  ListBulletsIcon,
+} from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
@@ -11,6 +16,9 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
 
 import { useProjectCostChart } from './utils';
@@ -33,7 +41,16 @@ export const ProjectDashboardCostLimits = ({
   project: Project;
 }) => {
   const router = useRouter();
+  const user = useUser();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const canManageAutoApproval =
+    !project.is_removed &&
+    (user.is_staff ||
+      hasPermission(user, {
+        permission: PermissionEnum.APPROVE_ORDER,
+        projectId: project.uuid,
+        customerId: project.customer_uuid,
+      }));
 
   const { chart, options, error, isLoading, refetch, currentMonthItems } =
     useProjectCostChart(project);
@@ -86,6 +103,17 @@ export const ProjectDashboardCostLimits = ({
               callback: () =>
                 router.stateService.go('organization-cost-policies', {
                   uuid: project.customer_uuid,
+                }),
+            }
+          : null,
+        canManageAutoApproval
+          ? {
+              label: translate('Manage order auto-approval'),
+              icon: <CheckCircleIcon weight="bold" />,
+              callback: () =>
+                router.stateService.go('project-manage', {
+                  uuid: project.uuid,
+                  tab: 'order-approval',
                 }),
             }
           : null,
