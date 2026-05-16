@@ -28,4 +28,23 @@ export interface ChecklistQuestionForm {
   // Onboarding metadata fields
   maps_to_customer_field?: string;
   intent_field?: string;
+  // Likert scale question type
+  likert_scale_length?: 3 | 5 | 7;
+  likert_low_label?: string;
+  likert_high_label?: string;
+  likert_allow_na?: boolean;
+  // Rich text question type
+  rich_text_char_limit?: string;
+  rich_text_toolbar_level?: RichTextToolbarLevel;
+}
+
+export type RichTextToolbarLevel = 'minimal' | 'standard' | 'extended';
+
+export type LikertScaleLength = 3 | 5 | 7;
+
+export interface LikertConfig {
+  likert_scale_length?: LikertScaleLength;
+  likert_low_label?: string;
+  likert_high_label?: string;
+  likert_allow_na?: boolean;
 }

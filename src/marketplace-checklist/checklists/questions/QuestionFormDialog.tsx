@@ -159,6 +159,21 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
         body.max_value = formData.max_value || null;
       }
 
+      if (formData.question_type === 'likert') {
+        body.likert_scale_length = formData.likert_scale_length ?? 5;
+        body.likert_low_label = formData.likert_low_label || '';
+        body.likert_high_label = formData.likert_high_label || '';
+        body.likert_allow_na = Boolean(formData.likert_allow_na);
+      }
+
+      if (formData.question_type === 'rich_text') {
+        body.rich_text_char_limit = formData.rich_text_char_limit
+          ? Number(formData.rich_text_char_limit)
+          : null;
+        body.rich_text_toolbar_level =
+          formData.rich_text_toolbar_level ?? 'standard';
+      }
+
       if (formData.conditions?.length) {
         body.dependency_logic_operator = formData.dependency_logic_operator;
       }
