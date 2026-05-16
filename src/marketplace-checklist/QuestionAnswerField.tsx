@@ -15,10 +15,13 @@ import { CountrySelectField } from '@/form/CountrySelectField';
 import { DateField } from '@/form/DateField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { EmailField } from '@/form/EmailField';
+import MarkdownEditor from '@/form/MarkdownEditor';
 import { PhoneNumberField } from '@/form/PhoneNumberField';
 import { YearField } from '@/form/YearField';
 import { translate } from '@/i18n';
+import { LikertField } from '@/marketplace-checklist/LikertField';
 import {
+  isQuestionLikertType,
   isQuestionSelectType,
   useQuestionNumberValidator,
 } from '@/marketplace-checklist/utils';
@@ -40,6 +43,8 @@ const questionComponent: Record<QuestionTypeEnum, ComponentType> = {
   phone_number: PhoneNumberField,
   year: YearField,
   rating: NumberField,
+  likert: LikertField as ComponentType,
+  rich_text: MarkdownEditor as ComponentType,
 };
 
 type OwnProps = {
@@ -84,6 +89,7 @@ export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
             buttonLabel: translate('Browse'),
           }
         : {})}
+      {...(isQuestionLikertType(type) ? { question } : {})}
       validate={validate}
       format={(value) => {
         if (type === 'single_select' && value) return value[0];

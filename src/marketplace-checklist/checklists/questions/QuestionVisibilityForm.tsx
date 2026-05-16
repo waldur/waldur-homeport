@@ -61,6 +61,10 @@ const questionComponent: Record<
   phone_number: CommaSeparatedListField,
   year: YearField,
   rating: NumberField,
+  likert: NumberField,
+  // No condition operators are compatible with RICH_TEXT, but the type
+  // requires an entry; CommaSeparatedListField is unreachable in practice.
+  rich_text: CommaSeparatedListField,
 };
 
 const FieldsListGroup = ({

@@ -34,10 +34,14 @@ export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [
   { label: translate('URL'), value: 'url' },
   { label: translate('Year'), value: 'year' },
   { label: translate('Country'), value: 'country' },
+  { label: translate('Likert scale'), value: 'likert' },
+  { label: translate('Rich text'), value: 'rich_text' },
 ];
 
 export const isQuestionSelectType = (questionType) =>
   ['single_select', 'multi_select'].includes(questionType);
+
+export const isQuestionLikertType = (questionType) => questionType === 'likert';
 
 export const questionConditionOperatorOptions: Array<{
   label;
@@ -47,12 +51,12 @@ export const questionConditionOperatorOptions: Array<{
   {
     label: translate('Exact match'),
     value: 'equals',
-    compatible: ['boolean', 'date', 'number'],
+    compatible: ['boolean', 'date', 'number', 'likert'],
   },
   {
     label: translate('Not equal to'),
     value: 'not_equals',
-    compatible: ['boolean', 'date', 'number'],
+    compatible: ['boolean', 'date', 'number', 'likert'],
   },
   {
     label: translate('Text contains substring'),
