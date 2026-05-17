@@ -3,6 +3,7 @@ import { OrganizationEvents } from '@/customer/events';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { InvoiceEvents } from '@/invoices/events';
 import { IssueEvents } from '@/issues/events';
+import { OpenStackEvents } from '@/openstack/events';
 import { RoleEvents } from '@/permissions/events';
 import { PolicyEvents } from '@/policy/events';
 import { ProjectEvents } from '@/project/events';
@@ -56,5 +57,6 @@ registry.registerGroup(PolicyEvents);
 registry.registerGroup(ResourceEvents);
 registry.registerGroup(UserEvents);
 registry.registerGroup(SshEvents);
+registry.registerGroup(OpenStackEvents);
 
 export default registry;
