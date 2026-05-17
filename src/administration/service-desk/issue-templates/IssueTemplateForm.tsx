@@ -1,12 +1,10 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Form as FinalForm, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   supportTemplatesCreate,
   supportTemplatesCreateAttachments,
   supportTemplatesDeleteAttachments,
-  supportTemplatesRetrieve,
   supportTemplatesUpdate,
 } from 'waldur-js-client';
 
@@ -20,7 +18,7 @@ import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { Attachment, AttachmentUploading } from '@/form/upload/types';
 import { UploadContainer } from '@/form/upload/UploadContainer';
-import { formatJsxTemplate, translate } from '@/i18n';
+import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -31,13 +29,13 @@ interface IssueTemplateFormProps {
 }
 
 export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
-  const dispatch = useDispatch();
-  const { openDialog, closeDialog, confirm } = useModal();
+  const { closeDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
   const isEdit = Boolean(resolve.issueTemplate?.uuid);
 
   const [pendingFiles, setPendingFiles] = useState<AttachmentUploading[]>([]);
   const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [pendingDeleteUuids, setPendingDeleteUuids] = useState<string[]>([]);
 
   useEffect(() => {
     if (isEdit && resolve.issueTemplate?.attachments) {
@@ -78,49 +76,27 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
   );
 
   const removeAttachment = useCallback(
-    async (attachment: Attachment) => {
+    (attachment: Attachment) => {
+      // Newly-dropped file (not yet uploaded) — drop it from the pending list
       if (!attachment.uuid) {
         cancelFile(attachment.file as File);
         return;
       }
-
-      try {
-        await confirm(
-          translate('Confirmation'),
-          translate(
-            'Are you sure you want to remove {doc_name}?',
-            { doc_name: <strong>{attachment.file_name}</strong> },
-            formatJsxTemplate,
-          ),
-          { forDeletion: true },
-        );
-      } catch {
-        return;
-      }
-
-      try {
-        await supportTemplatesDeleteAttachments({
-          path: { uuid: resolve.issueTemplate.uuid },
-          body: { attachment_ids: [attachment.uuid] },
-        });
-        showSuccess(translate('Document has been removed.'));
-        resolve.refetch();
-        setAttachments((prev) =>
-          prev.filter((a) => a.uuid !== attachment.uuid),
-        );
-        const response = await supportTemplatesRetrieve({
-          path: { uuid: resolve.issueTemplate.uuid },
-        });
-        openDialog(IssueTemplateForm, {
-          dialogClassName: 'modal-dialog-centered',
-          resolve: { issueTemplate: response.data, refetch: resolve.refetch },
-          size: 'lg',
-        });
-      } catch (e) {
-        showErrorResponse(e, translate('Unable to remove document.'));
-      }
+      // Existing attachment — mark for deletion locally. Actual API delete
+      // happens on form save so it's reversible by closing the dialog.
+      setPendingDeleteUuids((prev) =>
+        prev.includes(attachment.uuid) ? prev : [...prev, attachment.uuid],
+      );
     },
-    [resolve, cancelFile, showSuccess, showErrorResponse, dispatch, openDialog],
+    [cancelFile],
+  );
+
+  const visibleAttachments = useMemo(
+    () =>
+      attachments.filter(
+        (a) => !a.uuid || !pendingDeleteUuids.includes(a.uuid),
+      ),
+    [attachments, pendingDeleteUuids],
   );
 
   const attachFiles = async (templateUuid) => {
@@ -175,6 +151,14 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
         const response = await action;
         const templateUuid = response.data.uuid;
 
+        // Apply pending attachment deletions for the edit case
+        if (isEdit && pendingDeleteUuids.length) {
+          await supportTemplatesDeleteAttachments({
+            path: { uuid: resolve.issueTemplate.uuid },
+            body: { attachment_ids: pendingDeleteUuids },
+          });
+        }
+
         await attachFiles(templateUuid);
         resolve.refetch();
         showSuccess(
@@ -192,7 +176,15 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
         );
       }
     },
-    [resolve, attachFiles, isEdit, showSuccess, showErrorResponse, closeDialog],
+    [
+      resolve,
+      attachFiles,
+      isEdit,
+      pendingDeleteUuids,
+      showSuccess,
+      showErrorResponse,
+      closeDialog,
+    ],
   );
 
   const initialValues = useMemo(() => {
@@ -267,7 +259,7 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
             />
 
             <AttachmentsList
-              attachments={attachments}
+              attachments={visibleAttachments}
               uploading={pendingFiles}
               className="mb-7"
               ItemComponent={(itemProps) => (

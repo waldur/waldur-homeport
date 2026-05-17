@@ -252,6 +252,10 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
       dispatch(actions.swapColumns(table, column1, column2)),
     [dispatch, table],
   );
+  const resetColumns = useCallback(
+    () => dispatch(actions.resetColumns(table)),
+    [dispatch, table],
+  );
 
   const alterTitle = useSelector(getDefaultTitle);
 
@@ -295,6 +299,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     toggleColumn,
     initColumnPositions,
     swapColumns,
+    resetColumns,
     // Spread tableState for UI state (mode, toggled, selectedRows, etc.)
     ...tableState,
     // Override with React Query state

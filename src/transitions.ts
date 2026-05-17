@@ -138,7 +138,7 @@ export function attachTransitions() {
     (transition) => transition.router.stateService.target('profile.details'),
   );
   // If state data has `feature` field and this feature is disabled,
-  // user is redirected to 404 error page.
+  // user is redirected to the feature-disabled empty state.
 
   router.transitionService.onStart(
     {
@@ -149,7 +149,10 @@ export function attachTransitions() {
     },
     (transition) =>
       transition.router.stateService.target(
-        transition.options().custom?.fallbackState || 'errorPage.notFound',
+        transition.options().custom?.fallbackState ||
+          'errorPage.featureDisabled',
+        undefined,
+        { location: false },
       ),
   );
 

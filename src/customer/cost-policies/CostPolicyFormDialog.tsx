@@ -22,12 +22,13 @@ interface CostPolicyFormDialogProps {
     type: CostPolicyType;
     refetch(): void;
     row?: any;
+    isDuplicate?: boolean;
   };
 }
 
 export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
-  const { type, refetch, row } = props.resolve;
-  const isEdit = Boolean(row);
+  const { type, refetch, row, isDuplicate } = props.resolve;
+  const isEdit = Boolean(row) && !isDuplicate;
 
   const initialValues = useMemo<Partial<CostPolicyFormData>>(() => {
     if (!row) return { scope: [] };
@@ -116,7 +117,13 @@ export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
       render={({ handleSubmit, submitting, invalid, dirty }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={isEdit ? translate('Edit policy') : translate('New policy')}
+            title={
+              isEdit
+                ? translate('Edit policy')
+                : isDuplicate
+                  ? translate('Duplicate policy')
+                  : translate('New policy')
+            }
             footer={
               <>
                 <CloseDialogButton className="min-w-125px" />

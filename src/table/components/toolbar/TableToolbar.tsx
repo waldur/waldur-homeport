@@ -144,6 +144,8 @@ export function TableToolbarActions() {
                 columnPositions={columnPositions}
                 toggleColumn={actions.toggleColumn}
                 swapColumns={actions.swapColumns}
+                initColumnPositions={actions.initColumnPositions}
+                resetColumns={actions.resetColumns}
                 hasOptionalColumns={config.hasOptionalColumns}
                 enableExport={config.enableExport}
                 showExportInDropdown={config.showExportInDropdown}

@@ -1,10 +1,11 @@
 import { CheckIcon } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
-import { FC, useEffect } from 'react';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
-import { checklistsAdminRetrieve } from 'waldur-js-client';
+import { Checklist, checklistsAdminRetrieve, Offering } from 'waldur-js-client';
 
 import { useSettingsUrlSync } from '@/administration/settings/useSettingsUrlSync';
+import { Badge } from '@/core/Badge';
 import { CheckOrX } from '@/core/CheckOrX';
 import { UI_STALE_TIME } from '@/core/constants';
 import { FormattedHtml } from '@/core/FormattedHtml';
@@ -14,7 +15,10 @@ import { Tip } from '@/core/Tooltip';
 import { getUUID } from '@/core/utils';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { useFieldSearch } from '@/marketplace/offerings/update/integration/useFieldSearch';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { TableQuery } from '@/table/TableQuery';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { OfferingSectionProps } from '../types';
@@ -28,6 +32,20 @@ import { OfferingLocationButton } from './OfferingLocationButton';
 import { OfferingMediaButton } from './OfferingMediaButton';
 import { SetAccessPolicyButton } from './SetAccessPolicyButton';
 import { Attribute } from './types';
+
+interface RenderCtx {
+  refetch(): void;
+  checklistQuery: UseQueryResult<Checklist | null>;
+}
+
+interface OverviewItem {
+  key: string;
+  title: string;
+  description?: string;
+  warnTooltip?: string;
+  renderValue(offering: Offering, ctx: RenderCtx): ReactNode;
+  renderActions?(offering: Offering, ctx: RenderCtx): ReactNode;
+}
 
 const basicInfoAttributes: Attribute[] = [
   {
@@ -114,6 +132,215 @@ const identifiersAttributes: Attribute[] = [
   },
 ];
 
+const renderAttributeValue = (
+  attribute: Attribute,
+  offering: Offering,
+): ReactNode => {
+  if (attribute.type === 'html') {
+    return <FormattedHtml html={offering[attribute.key]} />;
+  }
+  if (attribute.type === 'boolean') {
+    return <CheckOrX value={offering[attribute.key]} />;
+  }
+  if (attribute.type === 'list') {
+    return renderFieldOrDash(offering[attribute.key]?.join(', '));
+  }
+  return renderFieldOrDash(offering[attribute.key]);
+};
+
+const renderAttributeActions = (
+  attribute: Attribute,
+  offering: Offering,
+  ctx: RenderCtx,
+): ReactNode =>
+  offering.type === REMOTE_OFFERING_TYPE ? (
+    <Tip
+      label={translate('Field is synchronised from the remote offering')}
+      id={`remote-offering-tip-${attribute.key}`}
+    >
+      <EditOverviewButton
+        offering={offering}
+        refetch={ctx.refetch}
+        attribute={attribute}
+        disabled={true}
+      />
+    </Tip>
+  ) : (
+    <EditOverviewButton
+      offering={offering}
+      refetch={ctx.refetch}
+      attribute={attribute}
+    />
+  );
+
+const fromAttribute = (attribute: Attribute): OverviewItem => ({
+  key: attribute.key,
+  title: attribute.title,
+  description: attribute.description,
+  warnTooltip:
+    attribute.required && attribute.requiredMsg
+      ? attribute.requiredMsg
+      : undefined,
+  renderValue: (offering) => renderAttributeValue(attribute, offering),
+  renderActions: (offering, ctx) =>
+    renderAttributeActions(attribute, offering, ctx),
+});
+
+const basicItems: OverviewItem[] = [
+  ...basicInfoAttributes.map(fromAttribute),
+  {
+    key: 'getting_started',
+    title: translate('Getting started instructions'),
+    description: translate(
+      'Provide steps to help users begin using the offering.',
+    ),
+    renderValue: (offering) => <CheckOrX value={offering.getting_started} />,
+    renderActions: (offering, ctx) => (
+      <EditGettingStartedButton offering={offering} refetch={ctx.refetch} />
+    ),
+  },
+];
+
+const linksItems: OverviewItem[] = linksAttributes.map(fromAttribute);
+
+const mediaItems: OverviewItem[] = [
+  {
+    key: 'thumbnail',
+    title: translate('Logo'),
+    description: translate(
+      'Upload an image to represent the offering visually.',
+    ),
+    renderValue: (offering) => <CheckOrX value={offering.thumbnail} />,
+    renderActions: (offering, ctx) => (
+      <OfferingMediaButton
+        offering={offering}
+        refetch={ctx.refetch}
+        mediaType="thumbnail"
+      />
+    ),
+  },
+  {
+    key: 'image',
+    title: translate('Image'),
+    description: translate('Upload a background image for the offering.'),
+    renderValue: (offering) => <CheckOrX value={offering.image} />,
+    renderActions: (offering, ctx) => (
+      <OfferingMediaButton
+        offering={offering}
+        refetch={ctx.refetch}
+        mediaType="image"
+      />
+    ),
+  },
+];
+
+const accessItems: OverviewItem[] = [
+  {
+    key: 'location',
+    title: translate('Location'),
+    description: translate('Specify where the offering is hosted.'),
+    renderValue: (offering) => (
+      <CheckOrX value={offering.latitude && offering.longitude} />
+    ),
+    renderActions: (offering, ctx) => (
+      <OfferingLocationButton offering={offering} refetch={ctx.refetch} />
+    ),
+  },
+  {
+    key: 'tags',
+    title: translate('Tags'),
+    description: translate(
+      'Add tags to help users find this offering more easily.',
+    ),
+    renderValue: (offering) =>
+      offering.tags?.length > 0
+        ? offering.tags.map((tag) => tag.name).join(', ')
+        : 'N/A',
+    renderActions: (offering, ctx) => (
+      <EditTagsButton offering={offering} refetch={ctx.refetch} />
+    ),
+  },
+  {
+    key: 'profile',
+    title: translate('Service profile'),
+    description: translate(
+      'Bind to a profile to use a centrally-managed role catalog (staff-only).',
+    ),
+    renderValue: (offering) =>
+      (offering as any).profile_name || translate('— None —'),
+    renderActions: (offering, ctx) => (
+      <EditOfferingProfileButton offering={offering} refetch={ctx.refetch} />
+    ),
+  },
+];
+
+const complianceItems: OverviewItem[] = [
+  {
+    key: 'access_policies',
+    title: translate('Access policies'),
+    description: translate(
+      'Define the organization groups that are allowed to access the offering.',
+    ),
+    renderValue: (offering) =>
+      offering.organization_groups?.length > 0
+        ? offering.organization_groups.map(({ name }) => name).join(', ')
+        : 'N/A',
+    renderActions: (offering, ctx) => (
+      <SetAccessPolicyButton offering={offering} refetch={ctx.refetch} />
+    ),
+  },
+  {
+    key: 'compliance_checklist',
+    title: translate('Compliance checklist'),
+    renderValue: (offering, ctx) => {
+      if (!offering.has_compliance_requirements) {
+        return 'N/A';
+      }
+      const { data: checklist, isLoading, error, refetch } = ctx.checklistQuery;
+      return (
+        <>
+          {!checklist && <CheckIcon weight="bold" className="text-info" />}
+          {isLoading ? (
+            <LoadingSpinnerSimple />
+          ) : error ? (
+            <LoadingErred
+              loadData={refetch}
+              className="d-inline-flex flex-center gap-4 ms-4"
+            />
+          ) : checklist ? (
+            <>
+              {checklist.name}
+              <span className="text-muted ms-2">
+                (
+                {translate('{count} questions', {
+                  count: checklist.questions_count,
+                })}
+                )
+              </span>
+            </>
+          ) : null}
+        </>
+      );
+    },
+    renderActions: (offering, ctx) => (
+      <EditChecklistButton
+        offering={offering}
+        checklist={ctx.checklistQuery.data ?? undefined}
+        refetch={ctx.refetch}
+      />
+    ),
+  },
+];
+
+const identifiersItems: OverviewItem[] = [
+  {
+    key: 'uuid',
+    title: translate('UUID'),
+    renderValue: (offering) => offering.uuid,
+  },
+  ...identifiersAttributes.map(fromAttribute),
+];
+
 const OVERVIEW_TABS = [
   { key: 'basic', title: translate('Basic info') },
   { key: 'links', title: translate('Links') },
@@ -123,49 +350,17 @@ const OVERVIEW_TABS = [
   { key: 'identifiers', title: translate('Identifiers') },
 ];
 
-const AttributeRow: FC<{
-  attribute: Attribute;
-  offering: OfferingSectionProps['offering'];
-  refetch: OfferingSectionProps['refetch'];
-}> = ({ attribute, offering, refetch }) => (
+const OverviewItemRow: FC<{
+  item: OverviewItem;
+  offering: Offering;
+  ctx: RenderCtx;
+}> = ({ item, offering, ctx }) => (
   <FormTable.Item
-    label={attribute.title}
-    value={
-      attribute.type === 'html' ? (
-        <FormattedHtml html={offering[attribute.key]} />
-      ) : attribute.type === 'boolean' ? (
-        <CheckOrX value={offering[attribute.key]} />
-      ) : attribute.type === 'list' ? (
-        renderFieldOrDash(offering[attribute.key]?.join(', '))
-      ) : (
-        renderFieldOrDash(offering[attribute.key])
-      )
-    }
-    description={attribute.description}
-    actions={
-      <>
-        {offering.type === REMOTE_OFFERING_TYPE ? (
-          <Tip
-            label={translate('Field is synchronised from the remote offering')}
-            id={`remote-offering-tip-${attribute.key}`}
-          >
-            <EditOverviewButton
-              offering={offering}
-              refetch={refetch}
-              attribute={attribute}
-              disabled={true}
-            />
-          </Tip>
-        ) : (
-          <EditOverviewButton
-            offering={offering}
-            refetch={refetch}
-            attribute={attribute}
-          />
-        )}
-      </>
-    }
-    warnTooltip={attribute.required && attribute.requiredMsg}
+    label={item.title}
+    description={item.description}
+    warnTooltip={item.warnTooltip}
+    value={item.renderValue(offering, ctx)}
+    actions={item.renderActions ? item.renderActions(offering, ctx) : undefined}
   />
 );
 
@@ -175,12 +370,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
     'section',
   );
 
-  const {
-    isLoading,
-    error,
-    data: checklist,
-    refetch,
-  } = useQuery({
+  const checklistQuery = useQuery({
     queryKey: ['offeringChecklist', props.offering.uuid],
     queryFn: () =>
       props.offering.has_compliance_requirements
@@ -192,8 +382,53 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
   });
 
   useEffect(() => {
-    refetch();
-  }, [props.offering.compliance_checklist, refetch]);
+    checklistQuery.refetch();
+  }, [props.offering.compliance_checklist, checklistQuery.refetch]);
+
+  const ctx: RenderCtx = useMemo(
+    () => ({ refetch: props.refetch, checklistQuery }),
+    [props.refetch, checklistQuery],
+  );
+
+  const [query, setQuery] = useState('');
+
+  const filteredBasic = useFieldSearch(basicItems, query);
+  const filteredLinks = useFieldSearch(linksItems, query);
+  const filteredMedia = useFieldSearch(mediaItems, query);
+  const filteredAccess = useFieldSearch(accessItems, query);
+  const filteredCompliance = useFieldSearch(complianceItems, query);
+  const filteredIdentifiers = useFieldSearch(identifiersItems, query);
+
+  const filteredByKey: Record<string, OverviewItem[]> = {
+    basic: filteredBasic,
+    links: filteredLinks,
+    media: filteredMedia,
+    access: filteredAccess,
+    compliance: filteredCompliance,
+    identifiers: filteredIdentifiers,
+  };
+
+  const hasQuery = query.trim().length > 0;
+
+  useEffect(() => {
+    if (!hasQuery) return;
+    if ((filteredByKey[activeKey]?.length ?? 0) > 0) return;
+    const next = OVERVIEW_TABS.find(
+      (tab) => (filteredByKey[tab.key]?.length ?? 0) > 0,
+    );
+    if (next && next.key !== activeKey) {
+      handleSelect(next.key);
+    }
+  }, [
+    hasQuery,
+    activeKey,
+    filteredBasic,
+    filteredLinks,
+    filteredMedia,
+    filteredAccess,
+    filteredCompliance,
+    filteredIdentifiers,
+  ]);
 
   return (
     <Card className="card-bordered">
@@ -203,229 +438,65 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
           activeKey={activeKey}
           onSelect={handleSelect}
         >
+          <div className="d-flex justify-content-end mb-3">
+            <TableQuery query={query} setQuery={setQuery} />
+          </div>
           <Nav variant="tabs" className="nav-line-tabs mb-5">
-            {OVERVIEW_TABS.map((tab) => (
-              <Nav.Item key={tab.key}>
-                <Nav.Link eventKey={tab.key}>{tab.title}</Nav.Link>
-              </Nav.Item>
-            ))}
+            {OVERVIEW_TABS.map((tab) => {
+              const count = filteredByKey[tab.key]?.length ?? 0;
+              const disabled = hasQuery && count === 0;
+              return (
+                <Nav.Item key={tab.key}>
+                  <Nav.Link
+                    eventKey={tab.key}
+                    disabled={disabled}
+                    className={disabled ? 'text-muted' : ''}
+                  >
+                    {tab.title}
+                    {hasQuery && (
+                      <Badge
+                        variant="secondary"
+                        size="sm"
+                        light
+                        className="ms-2"
+                      >
+                        {count}
+                      </Badge>
+                    )}
+                  </Nav.Link>
+                </Nav.Item>
+              );
+            })}
           </Nav>
           <Tab.Content>
-            {/* Basic info tab */}
-            <Tab.Pane eventKey="basic" unmountOnExit>
-              <FormTable>
-                {basicInfoAttributes.map((attribute) => (
-                  <AttributeRow
-                    key={attribute.key}
-                    attribute={attribute}
-                    offering={props.offering}
-                    refetch={props.refetch}
-                  />
-                ))}
-                <FormTable.Item
-                  label={translate('Getting started instructions')}
-                  value={<CheckOrX value={props.offering.getting_started} />}
-                  description={translate(
-                    'Provide steps to help users begin using the offering.',
+            {OVERVIEW_TABS.map((tab) => {
+              const items = filteredByKey[tab.key];
+              return (
+                <Tab.Pane key={tab.key} eventKey={tab.key} unmountOnExit>
+                  {items.length > 0 ? (
+                    <FormTable>
+                      {items.map((item) => (
+                        <OverviewItemRow
+                          key={item.key}
+                          item={item}
+                          offering={props.offering}
+                          ctx={ctx}
+                        />
+                      ))}
+                    </FormTable>
+                  ) : (
+                    <NoResult
+                      title={translate('No results found')}
+                      message={translate(
+                        'No matching fields. Try a different search term.',
+                      )}
+                      callback={() => setQuery('')}
+                      buttonTitle={translate('Clear search')}
+                    />
                   )}
-                  actions={
-                    <EditGettingStartedButton
-                      offering={props.offering}
-                      refetch={props.refetch}
-                    />
-                  }
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Links tab */}
-            <Tab.Pane eventKey="links" unmountOnExit>
-              <FormTable>
-                {linksAttributes.map((attribute) => (
-                  <AttributeRow
-                    key={attribute.key}
-                    attribute={attribute}
-                    offering={props.offering}
-                    refetch={props.refetch}
-                  />
-                ))}
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Media tab */}
-            <Tab.Pane eventKey="media" unmountOnExit>
-              <FormTable>
-                <FormTable.Item
-                  label={translate('Logo')}
-                  value={<CheckOrX value={props.offering.thumbnail} />}
-                  description={translate(
-                    'Upload an image to represent the offering visually.',
-                  )}
-                  actions={
-                    <OfferingMediaButton
-                      offering={props.offering}
-                      refetch={props.refetch}
-                      mediaType="thumbnail"
-                    />
-                  }
-                />
-                <FormTable.Item
-                  label={translate('Image')}
-                  value={<CheckOrX value={props.offering.image} />}
-                  description={translate(
-                    'Upload a background image for the offering.',
-                  )}
-                  actions={
-                    <OfferingMediaButton
-                      offering={props.offering}
-                      refetch={props.refetch}
-                      mediaType="image"
-                    />
-                  }
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Access & Discovery tab */}
-            <Tab.Pane eventKey="access" unmountOnExit>
-              <FormTable>
-                <FormTable.Item
-                  label={translate('Location')}
-                  value={
-                    <CheckOrX
-                      value={
-                        props.offering.latitude && props.offering.longitude
-                      }
-                    />
-                  }
-                  description={translate(
-                    'Specify where the offering is hosted.',
-                  )}
-                  actions={
-                    <OfferingLocationButton
-                      offering={props.offering}
-                      refetch={props.refetch}
-                    />
-                  }
-                />
-                <FormTable.Item
-                  label={translate('Tags')}
-                  value={
-                    props.offering.tags?.length > 0
-                      ? props.offering.tags.map((tag) => tag.name).join(', ')
-                      : 'N/A'
-                  }
-                  description={translate(
-                    'Add tags to help users find this offering more easily.',
-                  )}
-                  actions={
-                    <EditTagsButton
-                      offering={props.offering}
-                      refetch={props.refetch}
-                    />
-                  }
-                />
-                <FormTable.Item
-                  label={translate('Service profile')}
-                  value={
-                    (props.offering as any).profile_name ||
-                    translate('— None —')
-                  }
-                  description={translate(
-                    'Bind to a profile to use a centrally-managed role catalog (staff-only).',
-                  )}
-                  actions={
-                    <EditOfferingProfileButton
-                      offering={props.offering}
-                      refetch={props.refetch}
-                    />
-                  }
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Compliance tab */}
-            <Tab.Pane eventKey="compliance" unmountOnExit>
-              <FormTable>
-                <FormTable.Item
-                  label={translate('Access policies')}
-                  value={
-                    props.offering.organization_groups?.length > 0
-                      ? props.offering.organization_groups
-                          .map(({ name }) => name)
-                          .join(', ')
-                      : 'N/A'
-                  }
-                  description={translate(
-                    'Define the organization groups that are allowed to access the offering.',
-                  )}
-                  actions={
-                    <SetAccessPolicyButton
-                      offering={props.offering}
-                      refetch={props.refetch}
-                    />
-                  }
-                />
-                <FormTable.Item
-                  label={translate('Compliance checklist')}
-                  value={
-                    props.offering.has_compliance_requirements ? (
-                      <>
-                        {!checklist && (
-                          <CheckIcon weight="bold" className="text-info" />
-                        )}
-                        {isLoading ? (
-                          <LoadingSpinnerSimple />
-                        ) : error ? (
-                          <LoadingErred
-                            loadData={refetch}
-                            className="d-inline-flex flex-center gap-4 ms-4"
-                          />
-                        ) : checklist ? (
-                          <>
-                            {checklist.name}
-                            <span className="text-muted ms-2">
-                              (
-                              {translate('{count} questions', {
-                                count: checklist.questions_count,
-                              })}
-                              )
-                            </span>
-                          </>
-                        ) : null}
-                      </>
-                    ) : (
-                      'N/A'
-                    )
-                  }
-                  actions={
-                    <EditChecklistButton
-                      offering={props.offering}
-                      checklist={checklist}
-                      refetch={props.refetch}
-                    />
-                  }
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Identifiers tab */}
-            <Tab.Pane eventKey="identifiers" unmountOnExit>
-              <FormTable>
-                <FormTable.Item
-                  label={translate('UUID')}
-                  value={props.offering.uuid}
-                />
-                {identifiersAttributes.map((attribute) => (
-                  <AttributeRow
-                    key={attribute.key}
-                    attribute={attribute}
-                    offering={props.offering}
-                    refetch={props.refetch}
-                  />
-                ))}
-              </FormTable>
-            </Tab.Pane>
+                </Tab.Pane>
+              );
+            })}
           </Tab.Content>
         </Tab.Container>
       </Card.Body>

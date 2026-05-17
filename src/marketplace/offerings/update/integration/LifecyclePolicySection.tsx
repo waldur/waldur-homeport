@@ -1,13 +1,16 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
 import { useSettingsUrlSync } from '@/administration/settings/useSettingsUrlSync';
+import { Badge } from '@/core/Badge';
 import { NumberField, SelectField, StringField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { TableQuery } from '@/table/TableQuery';
 
 import {
   DefaultOfferingEditPanel,
@@ -15,6 +18,7 @@ import {
 } from '../DefaultOfferingEditPanel';
 
 import { OfferingEditPanelProps } from './types';
+import { useFieldSearch } from './useFieldSearch';
 import { useUpdateOfferingIntegration } from './utils';
 
 const RESOURCE_PROJECTS_LIMIT_POLICY_OPTIONS = [
@@ -274,13 +278,10 @@ const billingFields: OfferingEditField[] = [
   },
 ];
 
-const LIFECYCLE_TABS = [
-  { key: 'approval', title: translate('Order approval') },
+const OPERATIONS_TABS = [
+  { key: 'orders', title: translate('Orders & approval') },
   { key: 'lifecycle', title: translate('Resource lifecycle') },
-  { key: 'capabilities', title: translate('Resource capabilities') },
   { key: 'provisioning', title: translate('Provisioning') },
-  { key: 'messaging', title: translate('Messaging') },
-  { key: 'purchase-orders', title: translate('Purchase orders') },
   { key: 'billing', title: translate('Billing') },
 ];
 
@@ -291,16 +292,61 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
   );
 
   const { activeKey, handleSelect, defaultActiveKey } = useSettingsUrlSync(
-    LIFECYCLE_TABS,
+    OPERATIONS_TABS,
     'section',
   );
 
-  const approvalFields = useMemo(() => {
-    if (props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS) {
-      return [scriptAutoApprovalField, ...orderApprovalFields];
-    }
-    return orderApprovalFields;
+  const ordersFields = useMemo(() => {
+    const approval =
+      props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS
+        ? [scriptAutoApprovalField, ...orderApprovalFields]
+        : orderApprovalFields;
+    return [
+      ...approval,
+      ...purchaseOrderFields,
+      ...providerConsumerMessagingFields,
+    ];
   }, [props.offering.type]);
+
+  const lifecycleFields = useMemo(
+    () => [...resourceLifecycleFields, ...resourceCapabilitiesFields],
+    [],
+  );
+
+  const [query, setQuery] = useState('');
+
+  const filteredOrders = useFieldSearch(ordersFields, query);
+  const filteredLifecycle = useFieldSearch(lifecycleFields, query);
+  const filteredProvisioning = useFieldSearch(provisioningFields, query);
+  const filteredBilling = useFieldSearch(billingFields, query);
+
+  const filteredByKey: Record<string, OfferingEditField[]> = {
+    orders: filteredOrders,
+    lifecycle: filteredLifecycle,
+    provisioning: filteredProvisioning,
+    billing: filteredBilling,
+  };
+
+  const hasQuery = query.trim().length > 0;
+
+  // When the active sub-tab has 0 matches but another tab does, jump to it.
+  useEffect(() => {
+    if (!hasQuery) return;
+    if ((filteredByKey[activeKey]?.length ?? 0) > 0) return;
+    const next = OPERATIONS_TABS.find(
+      (tab) => (filteredByKey[tab.key]?.length ?? 0) > 0,
+    );
+    if (next && next.key !== activeKey) {
+      handleSelect(next.key);
+    }
+  }, [
+    hasQuery,
+    activeKey,
+    filteredOrders,
+    filteredLifecycle,
+    filteredProvisioning,
+    filteredBilling,
+  ]);
 
   return (
     <Card className="card-bordered">
@@ -310,90 +356,62 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
           activeKey={activeKey}
           onSelect={handleSelect}
         >
+          <div className="d-flex justify-content-end mb-3">
+            <TableQuery query={query} setQuery={setQuery} />
+          </div>
           <Nav variant="tabs" className="nav-line-tabs mb-5">
-            {LIFECYCLE_TABS.map((tab) => (
-              <Nav.Item key={tab.key}>
-                <Nav.Link eventKey={tab.key}>{tab.title}</Nav.Link>
-              </Nav.Item>
-            ))}
+            {OPERATIONS_TABS.map((tab) => {
+              const count = filteredByKey[tab.key]?.length ?? 0;
+              const disabled = hasQuery && count === 0;
+              return (
+                <Nav.Item key={tab.key}>
+                  <Nav.Link
+                    eventKey={tab.key}
+                    disabled={disabled}
+                    className={disabled ? 'text-muted' : ''}
+                  >
+                    {tab.title}
+                    {hasQuery && (
+                      <Badge
+                        variant="secondary"
+                        size="sm"
+                        light
+                        className="ms-2"
+                      >
+                        {count}
+                      </Badge>
+                    )}
+                  </Nav.Link>
+                </Nav.Item>
+              );
+            })}
           </Nav>
           <Tab.Content>
-            {/* Order approval tab */}
-            <Tab.Pane eventKey="approval" unmountOnExit>
-              <FormTable>
-                <DefaultOfferingEditPanel
-                  offering={props.offering}
-                  fields={approvalFields}
-                  callback={update}
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Resource lifecycle tab */}
-            <Tab.Pane eventKey="lifecycle" unmountOnExit>
-              <FormTable>
-                <DefaultOfferingEditPanel
-                  offering={props.offering}
-                  fields={resourceLifecycleFields}
-                  callback={update}
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Resource capabilities tab */}
-            <Tab.Pane eventKey="capabilities" unmountOnExit>
-              <FormTable>
-                <DefaultOfferingEditPanel
-                  offering={props.offering}
-                  fields={resourceCapabilitiesFields}
-                  callback={update}
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Provisioning tab */}
-            <Tab.Pane eventKey="provisioning" unmountOnExit>
-              <FormTable>
-                <DefaultOfferingEditPanel
-                  offering={props.offering}
-                  fields={provisioningFields}
-                  callback={update}
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Messaging tab */}
-            <Tab.Pane eventKey="messaging" unmountOnExit>
-              <FormTable>
-                <DefaultOfferingEditPanel
-                  offering={props.offering}
-                  fields={providerConsumerMessagingFields}
-                  callback={update}
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Purchase orders tab */}
-            <Tab.Pane eventKey="purchase-orders" unmountOnExit>
-              <FormTable>
-                <DefaultOfferingEditPanel
-                  offering={props.offering}
-                  fields={purchaseOrderFields}
-                  callback={update}
-                />
-              </FormTable>
-            </Tab.Pane>
-
-            {/* Billing tab */}
-            <Tab.Pane eventKey="billing" unmountOnExit>
-              <FormTable>
-                <DefaultOfferingEditPanel
-                  offering={props.offering}
-                  fields={billingFields}
-                  callback={update}
-                />
-              </FormTable>
-            </Tab.Pane>
+            {OPERATIONS_TABS.map((tab) => {
+              const fields = filteredByKey[tab.key];
+              return (
+                <Tab.Pane key={tab.key} eventKey={tab.key} unmountOnExit>
+                  {fields.length > 0 ? (
+                    <FormTable>
+                      <DefaultOfferingEditPanel
+                        offering={props.offering}
+                        fields={fields}
+                        callback={update}
+                      />
+                    </FormTable>
+                  ) : (
+                    <NoResult
+                      title={translate('No results found')}
+                      message={translate(
+                        'No matching fields. Try a different search term.',
+                      )}
+                      callback={() => setQuery('')}
+                      buttonTitle={translate('Clear search')}
+                    />
+                  )}
+                </Tab.Pane>
+              );
+            })}
           </Tab.Content>
         </Tab.Container>
       </Card.Body>

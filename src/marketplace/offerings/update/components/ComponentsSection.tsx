@@ -3,7 +3,6 @@ import { OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { showComponentsList } from '@/marketplace/common/registry';
-import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
 import { getBillingTypeLabel } from '@/marketplace/resources/usage/utils';
 import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@/openstack/constants';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
@@ -102,12 +101,7 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
         },
       ]}
       tabs={tableTabs}
-      title={
-        <>
-          <ValidationIcon value={props.offering.components.length > 0} />
-          <span className="me-2">{translate('Accounting')}</span>
-        </>
-      }
+      title={translate('Accounting')}
       subtitle={
         props.offering.type === TENANT_TYPE ? (
           <p className="mb-0">

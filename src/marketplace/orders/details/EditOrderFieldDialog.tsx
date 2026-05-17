@@ -25,6 +25,7 @@ interface EditOrderFieldDialogProps {
     offering: PublicOfferingDetails;
     name: 'start_date' | 'limits';
     component?: string;
+    selectedComponents?: string[];
   };
   initialValues?: any;
 }
@@ -86,7 +87,48 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
     ? resolve.offering.components.find((c) => c.type === resolve.component)
     : undefined;
 
+  const isBulkLimits = resolve.name === 'limits' && !resolve.component;
+
+  const componentsToEdit = isBulkLimits
+    ? resolve.selectedComponents?.length
+      ? resolve.offering.components.filter((c) =>
+          resolve.selectedComponents.includes(c.type),
+        )
+      : resolve.offering.components
+    : [];
+
   const dateFieldProps = useOrderStartDateBounds(undefined);
+
+  const renderComponentField = (c) =>
+    c.is_boolean ? (
+      <Field
+        name={`limits.${c.type}`}
+        render={(fieldProps) => (
+          <AwesomeCheckbox
+            label={c.name}
+            value={fieldProps.input.value === 1}
+            onChange={(value) => fieldProps.input.onChange(value ? 1 : 0)}
+          />
+        )}
+      />
+    ) : (
+      <Form.Group className="mb-4" key={c.type}>
+        <Form.Label>
+          {c.name}
+          {c.measured_unit ? ` (${c.measured_unit})` : null}
+        </Form.Label>
+        <Field
+          name={`limits.${c.type}`}
+          parse={parseIntField}
+          format={formatIntField}
+          validate={composeValidators(...getOfferingComponentValidator(c))}
+          component={LimitInput}
+          min={c.min_value || 0}
+          max={c.max_value}
+          unit={c.measured_unit}
+        />
+      </Form.Group>
+    );
 
   return (
     <FinalForm
@@ -98,9 +140,11 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
             title={
               resolve.name === 'start_date'
                 ? translate('Edit start date')
-                : component
-                  ? translate('Edit {name}', { name: component.name })
-                  : translate('Edit plan details')
+                : isBulkLimits
+                  ? translate('Edit limits')
+                  : component
+                    ? translate('Edit {name}', { name: component.name })
+                    : translate('Edit plan details')
             }
             footer={
               <>
@@ -126,36 +170,14 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
                 component={DateField}
                 {...dateFieldProps}
               />
+            ) : isBulkLimits ? (
+              <>
+                {componentsToEdit.map((c) => (
+                  <div key={c.type}>{renderComponentField(c)}</div>
+                ))}
+              </>
             ) : resolve.name === 'limits' && component ? (
-              <Form.Group>
-                {component.is_boolean ? (
-                  <Field
-                    name={`limits.${component.type}`}
-                    render={(fieldProps) => (
-                      <AwesomeCheckbox
-                        label={translate('Enable')}
-                        value={fieldProps.input.value === 1}
-                        onChange={(value) =>
-                          fieldProps.input.onChange(value ? 1 : 0)
-                        }
-                      />
-                    )}
-                  />
-                ) : (
-                  <Field
-                    name={`limits.${component.type}`}
-                    parse={parseIntField}
-                    format={formatIntField}
-                    validate={composeValidators(
-                      ...getOfferingComponentValidator(component),
-                    )}
-                    component={LimitInput}
-                    min={component.min_value || 0}
-                    max={component.max_value}
-                    unit={component.measured_unit}
-                  />
-                )}
-              </Form.Group>
+              <Form.Group>{renderComponentField(component)}</Form.Group>
             ) : null}
           </ModalDialog>
         </form>

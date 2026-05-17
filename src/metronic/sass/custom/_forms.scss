@@ -186,4 +186,15 @@
       @include svg-icon-color($fg-quinary);
     }
   }
+
+  &.has-icon-right {
+    input.form-control {
+      padding-right: 40px;
+    }
+
+    .input-group-icon-right {
+      left: auto;
+      right: 12px;
+    }
+  }
 }

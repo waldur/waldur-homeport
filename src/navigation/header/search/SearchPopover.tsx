@@ -1,4 +1,4 @@
-import { LockIcon, PlusIcon } from '@phosphor-icons/react';
+import { LockIcon, PlusIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { groupBy, isEmpty } from 'lodash-es';
 import { Fragment, useCallback } from 'react';
@@ -8,6 +8,7 @@ import { Badge } from '@/core/Badge';
 import { formatPhoneNumber } from '@/core/utils';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 
@@ -60,6 +61,7 @@ const AllResultsTabContent = ({
   isFavorite,
   recentSearchItems,
   addRecentSearch,
+  clearRecentSearches,
   close,
 }: TabContentProps) => {
   return (
@@ -67,7 +69,18 @@ const AllResultsTabContent = ({
       <Col md={12} lg={6} className="py-5 px-0">
         {Boolean(recentSearchItems?.length) && (
           <div className="mb-3">
-            <SectionTitle title={translate('Recent')} />
+            <div className="d-flex align-items-center justify-content-between mx-5 mb-3">
+              <h6 className="text-gray-700 fw-bold mb-0">
+                {translate('Recent')}
+              </h6>
+              <CompactActionButton
+                variant="text-secondary"
+                className="btn-no-focus"
+                action={clearRecentSearches}
+                iconNode={<XIcon weight="bold" />}
+                title={translate('Clear')}
+              />
+            </div>
             {recentSearchItems.map((item) => (
               <RecentSearchItem key={item.id} item={item} />
             ))}
@@ -453,7 +466,8 @@ export const SearchPopover = ({
     setQuery('');
   }, [setQuery]);
 
-  const { recentSearchItems, addRecentSearch } = useRecentSearch();
+  const { recentSearchItems, addRecentSearch, clearRecentSearches } =
+    useRecentSearch();
 
   return (
     <div className="pt-5">
@@ -538,6 +552,7 @@ export const SearchPopover = ({
               clearSearch={clearSearch}
               recentSearchItems={recentSearchItems}
               addRecentSearch={addRecentSearch}
+              clearRecentSearches={clearRecentSearches}
               favPages={favPages}
               addCurrentPageFavorite={addCurrentPageFavorite}
               isCurrentPageFavorite={isCurrentPageFavorite}
