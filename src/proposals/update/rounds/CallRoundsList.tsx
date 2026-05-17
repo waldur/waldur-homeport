@@ -111,6 +111,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
       tableActions={<RoundCreateButton call={call} refetch={refetch} />}
       expandableRow={ExpandableRow}
       rowActions={RowActions}
+      showPageSizeSelector
     />
   );
 };

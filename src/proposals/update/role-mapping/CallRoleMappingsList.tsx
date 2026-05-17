@@ -64,6 +64,7 @@ export const CallRoleMappingsList = (props) => {
       rowActions={({ row }) => (
         <CallRoleMappingsRowActions row={row} refetch={tableProps.fetch} />
       )}
+      showPageSizeSelector
     />
   );
 };

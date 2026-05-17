@@ -63,6 +63,7 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
       rowActions={({ row }) => (
         <CallOfferingRowActions row={row} refetch={tableProps.fetch} />
       )}
+      showPageSizeSelector
     />
   );
 };

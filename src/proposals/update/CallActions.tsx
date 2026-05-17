@@ -1,3 +1,4 @@
+import { ArchiveIcon, CopyIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import {
@@ -5,15 +6,20 @@ import {
   proposalProtectedCallsArchive,
 } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { Call } from '../types';
-import { getCallStateActions } from '../utils';
+
+const DuplicateCallDialog = lazyComponent(() =>
+  import('@/proposals/details/DuplicateCallDialog').then((m) => ({
+    default: m.DuplicateCallDialog,
+  })),
+);
 
 interface CallActionsProps {
   call: Call;
@@ -26,7 +32,7 @@ export const CallActions: FC<CallActionsProps> = ({
   refetch,
   className,
 }) => {
-  const { confirm } = useModal();
+  const { confirm, openDialog } = useModal();
 
   const { showErrorResponse, showSuccess } = useNotify();
 
@@ -56,58 +62,91 @@ export const CallActions: FC<CallActionsProps> = ({
     [call, refetch],
   );
 
+  const handleDuplicate = useCallback(() => {
+    openDialog(DuplicateCallDialog, {
+      resolve: { call, refetch },
+      size: 'lg',
+    });
+  }, [openDialog, call, refetch]);
+
   const tooltipMessage = !hasRounds
     ? translate('Call must have a round to be activated')
     : null;
 
   if (call.state === 'draft') {
     return (
-      <ActionDropdownButton title={translate('Actions')} className={className}>
-        {getCallStateActions()
-          .filter((state) => state.value !== call.state)
-          .map((state, i) => {
-            const isDisabled = state.action === 'activate' && !hasRounds;
-
-            return (
-              <Tip
-                key={state.value}
-                label={state.action === 'activate' ? tooltipMessage : null}
-                id={`tooltip-${state.value}`}
-                placement="top"
-              >
-                <Dropdown.Item
-                  eventKey={i + 1}
-                  onClick={() => editCallState(state.action, state.label)}
-                  disabled={isDisabled}
-                >
-                  {state.label}
-                </Dropdown.Item>
-              </Tip>
-            );
-          })}
-      </ActionDropdownButton>
+      <ActionsDropdownComponent
+        labeled
+        drop="down"
+        variant="secondary"
+        className={className}
+      >
+        <ActionItem
+          title={translate('Activate')}
+          action={() => editCallState('activate', translate('Activate'))}
+          disabled={!hasRounds}
+          tooltip={tooltipMessage}
+        />
+        <ActionItem
+          title={translate('Archive')}
+          action={() => editCallState('archive', translate('Archive'))}
+          iconNode={<ArchiveIcon weight="bold" />}
+          iconColor="danger"
+          className="text-danger"
+        />
+        <ActionItem
+          title={translate('Duplicate call')}
+          action={handleDuplicate}
+          iconNode={<CopyIcon weight="bold" />}
+        />
+      </ActionsDropdownComponent>
     );
   }
 
   if (call.state === 'archived') {
     return (
-      <ActionButton
-        title={translate('Activate')}
-        variant="primary"
-        action={() => editCallState('activate', translate('Activate'))}
+      <ActionsDropdownComponent
+        labeled
+        drop="down"
+        variant="secondary"
         className={className}
-        disabled={!hasRounds}
-        disabledReason={translate('Call must have a round to be activated')}
-      />
+      >
+        <ActionItem
+          title={translate('Activate')}
+          action={() => editCallState('activate', translate('Activate'))}
+          disabled={!hasRounds}
+          tooltip={tooltipMessage}
+        />
+        <ActionItem
+          title={translate('Duplicate call')}
+          action={handleDuplicate}
+          iconNode={<CopyIcon weight="bold" />}
+        />
+      </ActionsDropdownComponent>
     );
   }
 
+  // Active state: show dropdown with Duplicate + Archive
   return (
-    <ActionButton
-      title={translate('Archive')}
-      variant="primary"
-      action={() => editCallState('archive', translate('Archive'))}
+    <ActionsDropdownComponent
+      labeled
+      drop="down"
+      variant="secondary"
       className={className}
-    />
+    >
+      <ActionItem
+        title={translate('Duplicate call')}
+        action={handleDuplicate}
+        iconNode={<CopyIcon weight="bold" />}
+      />
+      <Dropdown.Divider className="border-secondary" />
+      <ActionItem
+        title={translate('Archive')}
+        action={() => editCallState('archive', translate('Archive'))}
+        iconNode={<ArchiveIcon weight="bold" />}
+        iconColor="danger"
+        className="text-danger"
+      />
+    </ActionsDropdownComponent>
   );
 };

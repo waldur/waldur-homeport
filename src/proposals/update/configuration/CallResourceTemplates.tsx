@@ -73,6 +73,7 @@ export const CallResourceTemplates: FC<CallResourceTemplatesProps> = (
         <RowActions row={row} fetch={fetch} call={props.call} />
       )}
       expandableRow={ResourceTemplateExpandableRow}
+      showPageSizeSelector
     />
   );
 };

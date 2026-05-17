@@ -58,12 +58,6 @@ export const formatRoundAllocationTime = (value: RoundAllocationTime) =>
     (option) => option.value === value?.toLowerCase(),
   )?.label || value;
 
-export const getCallStateActions = () =>
-  [
-    { label: translate('Activate'), value: 'active', action: 'activate' },
-    { label: translate('Archive'), value: 'archived', action: 'archive' },
-  ] as { value: CallState; label: string; action: string }[];
-
 export const getCallStateOptions = () =>
   [
     { value: 'archived', label: translate('Archived') },
