@@ -188,24 +188,21 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
               props.submitTooltip,
               <SubmitButton
                 submitting={props.submitting}
-                label={props.submitLabel}
+                label={
+                  props.step !== props.steps.length - 1
+                    ? translate('Next')
+                    : props.submitLabel
+                }
                 invalid={
                   props.submitDisabled ||
                   loading ||
                   (props.submitDisabledInvalid && props.invalid)
                 }
-                className="btn-icon-right min-w-125px"
-                children={
-                  loading ? (
-                    <span className="svg-icon svg-icon-2">
-                      {}
-                      <LoadingSpinnerSimple />
-                    </span>
-                  ) : props.step !== props.steps.length - 1 ? (
-                    <span className="svg-icon svg-icon-2">
-                      <CaretRightIcon weight="bold" />
-                    </span>
-                  ) : null
+                className="min-w-125px"
+                iconNode={
+                  props.step !== props.steps.length - 1 ? (
+                    <CaretRightIcon weight="bold" />
+                  ) : undefined
                 }
               />,
             )}

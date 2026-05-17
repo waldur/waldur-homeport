@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon';
 import { FC, useCallback } from 'react';
 import {
+  BulkRoundCreateRequestRequest,
+  proposalProtectedCallsRoundsBulkSet,
   proposalProtectedCallsRoundsSet,
   ProtectedRoundRequest,
 } from 'waldur-js-client';
@@ -73,16 +75,57 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
     refetch: props.resolve.refetch,
   });
 
+  const bulkCreateRoundsMutation = useManagedMutation<
+    any,
+    any,
+    BulkRoundCreateRequestRequest
+  >({
+    mutationFn: (formData) =>
+      proposalProtectedCallsRoundsBulkSet({
+        path: { uuid: props.resolve.call.uuid },
+        body: formData,
+      }),
+    successMessage: translate('Rounds have been created.'),
+    errorMessage: translate('Unable to create rounds.'),
+    refetch: props.resolve.refetch,
+  });
+
   const createRound = useCallback(
-    async (formData: ProtectedRoundRequest, _dispatch, formProps) => {
+    async (
+      formData: ProtectedRoundRequest & {
+        repeats?: boolean;
+        cadence?: string;
+        custom_interval_months?: number | null;
+        submission_window_days?: number;
+        number_of_rounds?: number;
+      },
+      _dispatch,
+      formProps,
+    ) => {
       try {
-        await createRoundMutation.mutateAsync(formData);
+        if (formData.repeats) {
+          await bulkCreateRoundsMutation.mutateAsync({
+            start_time: formData.start_time,
+            cadence: formData.cadence as any,
+            custom_interval_months: formData.custom_interval_months ?? null,
+            submission_window_days: formData.submission_window_days!,
+            number_of_rounds: formData.number_of_rounds!,
+            review_strategy: formData.review_strategy,
+            deciding_entity: formData.deciding_entity,
+            allocation_time: formData.allocation_time,
+            review_duration_in_days: formData.review_duration_in_days,
+            minimum_number_of_reviewers: formData.minimum_number_of_reviewers,
+            minimal_average_scoring: formData.minimal_average_scoring,
+          });
+        } else {
+          await createRoundMutation.mutateAsync(formData);
+        }
         formProps.destroy();
       } catch {
         // Error handled by useManagedMutation
       }
     },
-    [createRoundMutation],
+    [createRoundMutation, bulkCreateRoundsMutation],
   );
   return (
     <WizardFormContainer
@@ -94,6 +137,7 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
       initialValues={{ timezone: DateTime.local().zoneName }}
       submitLabel={translate('Create')}
       validate={validate}
+      modalProps={{ bodyClassName: 'min-h-600px' }}
     />
   );
 };

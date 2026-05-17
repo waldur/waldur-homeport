@@ -20,6 +20,8 @@ export const RoundCreateButton = ({
   <CreateModalButton
     dialog={CallRoundCreateDialog}
     resolve={{ call, refetch }}
-    size="lg"
+    size="md"
+    dialogClassName="modal-md modal-dialog-centered"
+    formId="CallRoundForm"
   />
 );

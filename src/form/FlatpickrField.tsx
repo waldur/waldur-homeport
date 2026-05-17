@@ -74,7 +74,8 @@ export const FlatpickrField: FC<FlatpickrFieldProps> = ({
           style={{
             position: 'absolute',
             right: 12,
-            top: 13,
+            top: '50%',
+            transform: 'translateY(-50%)',
             pointerEvents: 'none',
           }}
         >
