@@ -27,7 +27,7 @@ export const UserAffiliationsRowActions: FC<UserAffiliationsRowActionsProps> = (
   // Check user permission based on the scope type
   const canDeletePermission = useMemo(
     () => canDeletePermissionFn(user, props.row),
-    [user],
+    [user, props.row],
   );
 
   const { showErrorResponse, showSuccess } = useNotify();

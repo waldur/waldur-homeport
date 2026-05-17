@@ -47,6 +47,12 @@ export const canDeletePermission = (user: User, perm: Permission) => {
   return hasPermission(user, {
     permission,
     customerId: scopeType === 'customer' ? perm.scope_uuid : perm.customer_uuid,
+    projectId:
+      scopeType === 'project'
+        ? perm.scope_uuid
+        : scopeType === 'resource' || scopeType === 'resource_project'
+          ? perm.project_uuid
+          : undefined,
   });
 };
 
