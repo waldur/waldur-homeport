@@ -48,6 +48,10 @@ class RecentSearchServiceClass {
     const newList = prevList.filter((x) => x.id !== item.id);
     localStorage.setItem(RECENT_SEARCH_KEY, JSON.stringify(newList));
   };
+
+  clear = () => {
+    localStorage.removeItem(RECENT_SEARCH_KEY);
+  };
 }
 
 const RecentSearchService = new RecentSearchServiceClass();
@@ -90,8 +94,14 @@ export const useRecentSearch = () => {
     ],
   );
 
+  const clearRecentSearches = useCallback(() => {
+    RecentSearchService.clear();
+    setRecentSearchItems([]);
+  }, []);
+
   return {
     recentSearchItems,
     addRecentSearch,
+    clearRecentSearches,
   };
 };

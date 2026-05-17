@@ -26,12 +26,10 @@ import {
   getSecretOptionsForm,
   showComponentsList,
 } from '../common/registry';
-import { ValidationIcon } from '../common/ValidationIcon';
 
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { getOfferingBreadcrumbItems } from './hooks';
 import { OfferingViewHero } from './OfferingViewHero';
-import { SCRIPT_ROWS } from './update/integration/utils';
 
 const OverviewSection = lazyComponent(() =>
   import('./update/overview/OverviewSection').then((module) => ({
@@ -60,14 +58,9 @@ const UserManagementSection = lazyComponent(() =>
     default: module.UserManagementSection,
   })),
 );
-const UserAttributeConfigSection = lazyComponent(() =>
-  import('./update/integration/UserAttributeConfigSection').then((module) => ({
-    default: module.UserAttributeConfigSection,
-  })),
-);
-const LexisLinkIntegrationSection = lazyComponent(() =>
-  import('./update/integration/LexisLinkIntegrationSection').then((module) => ({
-    default: module.LexisLinkIntegrationSection,
+const AdvancedIntegrationSection = lazyComponent(() =>
+  import('./update/integration/AdvancedIntegrationSection').then((module) => ({
+    default: module.AdvancedIntegrationSection,
   })),
 );
 const TosManagementSection = lazyComponent(() =>
@@ -143,120 +136,115 @@ const getOfferingData = async (offering_uuid: string) => {
   return { offering, category };
 };
 
-const getTabs = (offering: Offering): PageBarTab[] => {
-  const tabs: PageBarTab[] = [
-    {
-      key: 'general',
-      component: OverviewSection,
-      title: translate('General'),
-    },
-  ];
-
-  // Integration
+const buildIntegrationTab = (offering: Offering): PageBarTab => {
   const CredentialsForm = getCredentialsForm(offering.type);
   const SecretOptionsForm = getSecretOptionsForm(offering.type);
   const PluginOptionsForm = getPluginOptionsForm(offering.type);
   const provisioningConfigForm = getProvisioningConfigForm(offering.type);
 
-  tabs.push({
+  return {
     key: 'integration',
-    title: (
-      <>
-        <ValidationIcon
-          value={
-            offering.type !== OFFERING_TYPE_CUSTOM_SCRIPTS ||
-            SCRIPT_ROWS.every((option) => offering.secret_options[option.type])
-          }
-        />
-
-        {translate('Integration')}
-      </>
-    ),
-
+    title: translate('Integration'),
     children: [
-      CredentialsForm
-        ? {
-            key: 'credentials',
-            component: CredentialsSection,
-            title: translate('Credentials'),
-          }
-        : null,
+      CredentialsForm && {
+        key: 'credentials',
+        component: CredentialsSection,
+        title: translate('Credentials'),
+      },
       {
         key: 'lifecycle-policy',
         component: LifecyclePolicySection,
-        title: translate('Lifecycle policy'),
+        title: translate('Operations'),
       },
       {
         key: 'resource-display-options',
         component: ResourceDisplayOptionsSection,
         title: translate('Resource display options'),
       },
-      SecretOptionsForm || PluginOptionsForm
-        ? {
-            key: 'user-management',
-            component: UserManagementSection,
-            title: translate('User management'),
-          }
-        : null,
-      offering.plugin_options?.service_provider_can_create_offering_user
-        ? {
-            key: 'user-attribute-config',
-            component: UserAttributeConfigSection,
-            title: translate('User attribute exposure'),
-          }
-        : null,
-      isFeatureVisible(MarketplaceFeatures.lexis_links)
-        ? {
-            key: 'lexis-link-integration',
-            component: LexisLinkIntegrationSection,
-            title: translate('LEXIS integration'),
-          }
-        : null,
-      provisioningConfigForm ||
-      [OFFERING_TYPE_CUSTOM_SCRIPTS, OFFERING_TYPE_BOOKING].includes(
-        offering.type,
-      )
-        ? {
-            key: 'provisioning-configuration',
-            component: ProvisioningConfigSection,
-            title: translate('Provisioning configuration'),
-          }
-        : null,
+      (SecretOptionsForm || PluginOptionsForm) && {
+        key: 'user-management',
+        component: UserManagementSection,
+        title: translate('User management'),
+      },
+      (offering.plugin_options?.service_provider_can_create_offering_user ||
+        isFeatureVisible(MarketplaceFeatures.lexis_links)) && {
+        key: 'advanced',
+        component: AdvancedIntegrationSection,
+        title: translate('Advanced'),
+      },
+      (provisioningConfigForm ||
+        [OFFERING_TYPE_CUSTOM_SCRIPTS, OFFERING_TYPE_BOOKING].includes(
+          offering.type,
+        )) && {
+        key: 'provisioning-configuration',
+        component: ProvisioningConfigSection,
+        title: translate('Provisioning configuration'),
+      },
     ].filter(Boolean),
-  });
+  };
+};
 
-  tabs.push(
+const buildPublicInfoTab = (): PageBarTab => ({
+  key: 'public_information',
+  title: translate('Public information'),
+  children: [
     {
-      key: 'public_information',
-      title: translate('Public information'),
-      children: [
-        {
-          key: 'endpoints',
-          component: OfferingEndpointsSection,
-          title: translate('Endpoints'),
-        },
-        isFeatureVisible(MarketplaceFeatures.display_software_catalog) && {
-          key: 'software_catalogs',
-          component: OfferingSoftwareCatalogsSection,
-          title: translate('Software catalogs'),
-        },
-        isFeatureVisible(MarketplaceFeatures.display_offering_partitions) && {
-          key: 'slurm_partitions',
-          component: OfferingPartitionsSection,
-          title: translate('Slurm partitions'),
-        },
-        {
-          key: 'category',
-          component: AttributesSection,
-          title: translate('Category'),
-        },
-        {
-          key: 'images',
-          component: OfferingImagesList,
-          title: translate('Images'),
-        },
-      ].filter(Boolean),
+      key: 'endpoints',
+      component: OfferingEndpointsSection,
+      title: translate('Endpoints'),
     },
+    isFeatureVisible(MarketplaceFeatures.display_software_catalog) && {
+      key: 'software_catalogs',
+      component: OfferingSoftwareCatalogsSection,
+      title: translate('Software catalogs'),
+    },
+    isFeatureVisible(MarketplaceFeatures.display_offering_partitions) && {
+      key: 'slurm_partitions',
+      component: OfferingPartitionsSection,
+      title: translate('Slurm partitions'),
+    },
+    {
+      key: 'category',
+      component: AttributesSection,
+      title: translate('Category'),
+    },
+    {
+      key: 'images',
+      component: OfferingImagesList,
+      title: translate('Images'),
+    },
+  ].filter(Boolean),
+});
+
+const buildAccountingTab = (offering: Offering): PageBarTab => ({
+  title: translate('Accounting'),
+  key: 'accounting',
+  defaultKey: 'plans',
+  children: [
+    {
+      title: translate('Accounting plans'),
+      key: 'plans',
+      component: PlansSection,
+      visible: false,
+    },
+    showComponentsList(offering.type) && {
+      key: 'components',
+      component: ComponentsSection,
+      title: translate('Accounting components'),
+      visible: false,
+    },
+  ].filter(Boolean),
+});
+
+const getTabs = (offering: Offering): PageBarTab[] =>
+  [
+    {
+      key: 'general',
+      component: OverviewSection,
+      title: translate('General'),
+    },
+    buildIntegrationTab(offering),
+    buildPublicInfoTab(),
     {
       key: 'options',
       component: OfferingOptionsSection,
@@ -273,42 +261,8 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       component: TosManagementSection,
       title: translate('ToS management'),
     },
-  );
-
-  tabs.push({
-    title: translate('Accounting'),
-    key: 'accounting',
-    defaultKey: 'plans',
-    children: [
-      {
-        title: (
-          <>
-            <ValidationIcon value={offering.plans.length > 0} />
-            {translate('Accounting plans')}
-          </>
-        ),
-
-        key: 'plans',
-        component: PlansSection,
-        visible: false,
-      },
-      showComponentsList(offering.type) && {
-        key: 'components',
-        component: ComponentsSection,
-        title: (
-          <>
-            <ValidationIcon value={offering.components.length > 0} />
-            {translate('Accounting components')}
-          </>
-        ),
-
-        visible: false,
-      },
-    ].filter(Boolean),
-  });
-
-  return tabs.filter(Boolean);
-};
+    buildAccountingTab(offering),
+  ].filter(Boolean) as PageBarTab[];
 
 export const OfferingEditUIView = ({
   provider,

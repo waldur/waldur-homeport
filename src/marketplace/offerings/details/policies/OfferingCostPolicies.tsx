@@ -11,6 +11,7 @@ import { useTable } from '@/table/useTable';
 import { CostPolicyCreateButton } from './CostPolicyCreateButton';
 import { PoliciesTable } from './PoliciesTable';
 import { PolicyDeleteAction } from './PolicyDeleteButton';
+import { PolicyDuplicateAction } from './PolicyDuplicateAction';
 
 interface OfferingCostPoliciesProps {
   offering: Offering;
@@ -38,6 +39,12 @@ export const OfferingCostPolicies: FC<OfferingCostPoliciesProps> = ({
       verboseName={translate('Cost policies')}
       rowActions={({ row }) => (
         <ActionsDropdown row={row} refetch={tableProps.fetch}>
+          <PolicyDuplicateAction
+            row={row}
+            type="cost"
+            offering={offering}
+            refetch={tableProps.fetch}
+          />
           <PolicyDeleteAction
             row={row}
             type="cost"

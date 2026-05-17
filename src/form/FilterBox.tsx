@@ -1,17 +1,19 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { FC, useEffect, useRef } from 'react';
+import { FC, ReactNode, useEffect, useRef } from 'react';
 import { Form, FormControlProps, InputGroup } from 'react-bootstrap';
 
 interface FilterBoxProps extends FormControlProps {
   autoFocus?: boolean;
   inputClassName?: string;
+  rightAction?: ReactNode;
 }
 
 export const FilterBox: FC<FilterBoxProps> = ({
   className,
   autoFocus,
   inputClassName,
+  rightAction,
   ...props
 }: any) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,7 +39,13 @@ export const FilterBox: FC<FilterBoxProps> = ({
   };
 
   return (
-    <InputGroup className={classNames('has-icon', className)}>
+    <InputGroup
+      className={classNames(
+        'has-icon',
+        rightAction && 'has-icon-right',
+        className,
+      )}
+    >
       <div className="input-group-icon">
         <MagnifyingGlassIcon weight="bold" />
       </div>
@@ -48,6 +56,11 @@ export const FilterBox: FC<FilterBoxProps> = ({
         ref={inputRef}
         onKeyDown={handleKeyDown}
       />
+      {rightAction && (
+        <div className="input-group-icon input-group-icon-right">
+          {rightAction}
+        </div>
+      )}
     </InputGroup>
   );
 };

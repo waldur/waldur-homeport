@@ -17,7 +17,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RuleForm } from './RuleForm';
 
 interface RuleFormDialogProps {
-  resolve: { refetch; rule?: Rule };
+  resolve: { refetch; rule?: Rule; isDuplicate?: boolean };
 }
 
 interface AutoProvisioningRuleForm {
@@ -30,10 +30,11 @@ interface AutoProvisioningRuleForm {
 }
 
 export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
-  const isEdit = resolve.rule;
+  const isEdit = Boolean(resolve.rule) && !resolve.isDuplicate;
+  const isDuplicate = Boolean(resolve.isDuplicate);
   const { confirm } = useModal();
 
-  const initialValues = isEdit
+  const initialValues = resolve.rule
     ? {
         name: resolve.rule.name,
         customer: resolve.rule.customer
@@ -129,7 +130,9 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
             title={
               isEdit
                 ? translate('Edit auto-provisioning rule')
-                : translate('Add auto-provisioning rule')
+                : isDuplicate
+                  ? translate('Duplicate auto-provisioning rule')
+                  : translate('Add auto-provisioning rule')
             }
             footer={
               <>

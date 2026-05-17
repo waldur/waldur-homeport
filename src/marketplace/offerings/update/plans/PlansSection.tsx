@@ -5,7 +5,6 @@ import { StateIndicator } from '@/core/StateIndicator';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
 import { hidePlanAddButton } from '@/marketplace/common/registry';
-import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
 import { Plan } from '@/marketplace/types';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -96,12 +95,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
     <Table<Plan>
       {...tableProps}
       columns={columns}
-      title={
-        <>
-          <ValidationIcon value={props.offering.plans?.length > 0} />
-          {translate('Accounting')}
-        </>
-      }
+      title={translate('Accounting')}
       verboseName={translate('plans')}
       tabs={tableTabs}
       tableActions={

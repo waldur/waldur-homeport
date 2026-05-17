@@ -1,8 +1,4 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
+import { translate } from '@/i18n';
 
 export const CheckOrX = ({ value }) =>
-  value ? (
-    <CheckIcon weight="bold" className="text-info" />
-  ) : (
-    <XIcon weight="bold" className="text-danger" />
-  );
+  value ? <>{translate('Enabled')}</> : <>{translate('Disabled')}</>;

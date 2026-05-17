@@ -33,12 +33,12 @@ const TABLE_TABS = [
     key: 'pending',
     title: translate('Pending'),
     default: true,
-    params: { tab: 'end-date-change-requests', subtab: 'pending' },
+    params: { tab: 'end-date-change-requests', section: 'pending' },
   },
   {
     key: 'all',
     title: translate('All'),
-    params: { tab: 'end-date-change-requests', subtab: 'all' },
+    params: { tab: 'end-date-change-requests', section: 'all' },
   },
 ];
 
@@ -49,7 +49,7 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
 
   const queryClient = useQueryClient();
   const { params } = useCurrentStateAndParams();
-  const activeTab = params.subtab || 'pending';
+  const activeTab = params.section || 'pending';
 
   const filter = useMemo(
     () => ({

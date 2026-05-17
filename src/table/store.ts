@@ -283,6 +283,13 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
       };
     }
 
+    case actions.RESET_COLUMNS:
+      return {
+        ...state,
+        activeColumns: {},
+        columnPositions: [],
+      };
+
     default:
       return state;
   }

@@ -13,7 +13,11 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { DotsSixVerticalIcon, GearIcon } from '@phosphor-icons/react';
+import {
+  ArrowCounterClockwiseIcon,
+  DotsSixVerticalIcon,
+  GearIcon,
+} from '@phosphor-icons/react';
 import { FC, useMemo, useState } from 'react';
 import {
   Button,
@@ -23,6 +27,7 @@ import {
   Popover,
 } from 'react-bootstrap';
 
+import { CompactIconButton } from '@/core/buttons/IconButton';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 
@@ -66,6 +71,7 @@ const ColumnsPopover = ({
   swapColumns,
   columnPositions,
   hasActions,
+  resetColumns,
 }) => {
   const [query, setQuery] = useState('');
 
@@ -115,6 +121,14 @@ const ColumnsPopover = ({
           type="search"
           placeholder={translate('Search...')}
           onChange={(e) => setQuery(e.target.value)}
+          rightAction={
+            <CompactIconButton
+              iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+              tooltip={translate('Reset settings to default')}
+              onClick={resetColumns}
+              variant="text-secondary"
+            />
+          }
         />
       </div>
       <div className="mh-300px overflow-auto pb-2">
@@ -166,35 +180,52 @@ export const TableColumnButton: FC<TableProps> = ({
   toggleColumn,
   swapColumns,
   columnPositions,
+  initColumnPositions,
+  resetColumns,
   rowActions,
   mode,
-}) => (
-  <OverlayTrigger
-    trigger="click"
-    placement="bottom"
-    overlay={
-      <Popover id="TableColumnButton">
-        <ColumnsPopover
-          columns={columns}
-          activeColumns={activeColumns}
-          toggleColumn={toggleColumn}
-          swapColumns={swapColumns}
-          columnPositions={columnPositions}
-          hasActions={Boolean(rowActions)}
-        />
-      </Popover>
+}) => {
+  const handleReset = () => {
+    resetColumns();
+    initColumnPositions(columns.map((column) => column.id));
+    // Re-run the same initialization Table.tsx uses on mount:
+    // column.optional === true → hidden by default; otherwise → visible.
+    columns.forEach((column) => {
+      toggleColumn(column.id, column, column.optional ? false : true);
+    });
+    if (rowActions) {
+      toggleColumn(COLUMN_ACTIONS_KEY, { keys: [] }, true);
     }
-    rootClose
-  >
-    <Button
-      disabled={mode !== 'table'}
-      variant="tertiary"
-      size="lg"
-      className="btn-icon"
+  };
+  return (
+    <OverlayTrigger
+      trigger="click"
+      placement="bottom"
+      overlay={
+        <Popover id="TableColumnButton">
+          <ColumnsPopover
+            columns={columns}
+            activeColumns={activeColumns}
+            toggleColumn={toggleColumn}
+            swapColumns={swapColumns}
+            columnPositions={columnPositions}
+            hasActions={Boolean(rowActions)}
+            resetColumns={handleReset}
+          />
+        </Popover>
+      }
+      rootClose
     >
-      <span className="svg-icon svg-icon-2">
-        <GearIcon weight="bold" />
-      </span>
-    </Button>
-  </OverlayTrigger>
-);
+      <Button
+        disabled={mode !== 'table'}
+        variant="tertiary"
+        size="lg"
+        className="btn-icon"
+      >
+        <span className="svg-icon svg-icon-2">
+          <GearIcon weight="bold" />
+        </span>
+      </Button>
+    </OverlayTrigger>
+  );
+};

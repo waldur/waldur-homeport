@@ -9,6 +9,7 @@ import { useTable } from '@/table/useTable';
 
 import { PoliciesTable } from './PoliciesTable';
 import { PolicyDeleteAction } from './PolicyDeleteButton';
+import { PolicyDuplicateAction } from './PolicyDuplicateAction';
 import { UsagePolicyCreateButton } from './UsagePolicyCreateButton';
 
 interface OfferingUsagePoliciesProps {
@@ -44,6 +45,12 @@ export const OfferingUsagePolicies: FC<OfferingUsagePoliciesProps> = ({
       verboseName={translate('Usage policies')}
       rowActions={({ row }) => (
         <ActionsDropdown row={row} refetch={tableProps.fetch}>
+          <PolicyDuplicateAction
+            row={row}
+            type="usage"
+            offering={offering}
+            refetch={tableProps.fetch}
+          />
           <PolicyDeleteAction
             row={row}
             type="usage"

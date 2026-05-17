@@ -21,6 +21,15 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'errorPage.featureDisabled',
+    component: lazyComponent(() =>
+      import('./FeatureDisabledPage').then((module) => ({
+        default: module.FeatureDisabledPage,
+      })),
+    ),
+  },
+
+  {
     name: 'errorPage.noPermission',
     component: lazyComponent(() =>
       import('./AccessDeniedPage').then((module) => ({
