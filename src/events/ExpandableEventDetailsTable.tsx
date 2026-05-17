@@ -2,6 +2,10 @@ import { FunctionComponent } from 'react';
 
 import { ExternalLink } from '@/core/ExternalLink';
 import { translate } from '@/i18n';
+import {
+  AllowedAddressPairsDiff,
+  SecurityGroupRulesDiff,
+} from '@/openstack/events';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { ExpandableEventField } from './ExpandableEventField';
@@ -131,6 +135,24 @@ export const ExpandableEventDetailsTable: FunctionComponent<
       <ExpandableEventField
         label={translate('New value')}
         value={event.context.new_value}
+      />
+    )}
+
+    {(event.context.added_rules ||
+      event.context.removed_rules ||
+      event.context.modified_rules) && (
+      <ExpandableEventField
+        label={translate('Rule changes')}
+        value={<SecurityGroupRulesDiff context={event.context as any} />}
+      />
+    )}
+
+    {(event.context.added_pairs ||
+      event.context.removed_pairs ||
+      event.context.modified_pairs) && (
+      <ExpandableEventField
+        label={translate('Allowed address pair changes')}
+        value={<AllowedAddressPairsDiff context={event.context as any} />}
       />
     )}
   </ExpandableContainer>
