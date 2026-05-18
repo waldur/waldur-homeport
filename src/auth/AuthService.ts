@@ -1,4 +1,4 @@
-import { apiAuthPassword } from 'waldur-js-client';
+import { apiAuthPassword, apiAuthTokenExchange } from 'waldur-js-client';
 
 import { initApiClient } from '@/core/api';
 import { router } from '@/router';
@@ -13,6 +13,11 @@ import {
 } from '../core/StorageManager';
 
 const DEFAULT_REDIRECT_STATE = 'profile.details';
+
+export async function exchangeToken(code: string) {
+  const response = await apiAuthTokenExchange({ body: { code } });
+  return response.data.token;
+}
 
 export async function loginUser(token: string, method: string) {
   AuthTokenStorage.set(token);
