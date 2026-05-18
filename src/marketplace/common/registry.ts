@@ -13,7 +13,6 @@ import { OpenStackInstanceOffering } from '@/openstack/openstack-instance/market
 import { OpenStackVolumeOffering } from '@/openstack/openstack-volume/marketplace';
 import { RancherOffering } from '@/rancher/cluster/create/marketplace';
 import { SiteAgentOffering } from '@/site-agent/marketplace';
-import { SlurmOffering } from '@/slurm/marketplace';
 import { BasicOffering, SupportOffering } from '@/support/marketplace';
 import { vmWareOffering } from '@/vmware/marketplace';
 
@@ -212,7 +211,6 @@ registerOfferingType(OpenStackTenantOffering);
 registerOfferingType(OpenStackInstanceOffering);
 registerOfferingType(OpenStackVolumeOffering);
 registerOfferingType(RancherOffering);
-registerOfferingType(SlurmOffering);
 registerOfferingType(SiteAgentOffering);
 registerOfferingType(SupportOffering);
 registerOfferingType(BasicOffering);

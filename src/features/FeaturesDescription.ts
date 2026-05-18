@@ -253,16 +253,6 @@ export const FeaturesDescription: FeatureSection[] = [
     ],
   },
   {
-    key: 'slurm',
-    description: translate('SLURM resources provisioning'),
-    items: [
-      {
-        key: 'jobs',
-        description: translate('Render list of SLURM jobs as a separate tab in allocation details page.'),
-      },
-    ],
-  },
-  {
     key: 'support',
     description: translate('Support workspace'),
     items: [

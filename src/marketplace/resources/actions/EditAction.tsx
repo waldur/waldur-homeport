@@ -19,7 +19,6 @@ const CUSTOM_EDIT_ACTION_RESOURCE_TYPES = [
   'OpenStack.Instance',
   'OpenStack.Tenant',
   'OpenStack.Volume',
-  'SLURM.Allocation',
   'VMware.VirtualMachine',
 ];
 
