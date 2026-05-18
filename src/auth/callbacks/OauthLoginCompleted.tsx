@@ -23,7 +23,8 @@ export const OauthLoginCompleted: FunctionComponent = () => {
     async function fetchToken() {
       const qs = Qs.parse(getQueryString());
       try {
-        const token = decodeURIComponent(qs.token as string);
+        const code = qs.code as string;
+        const token = await AuthService.exchangeToken(code);
         await loginUser(token, provider);
         // Only call tryJoinOrganization if NOT redirecting to user-group-invitation
         // (that route handles invitations via its own confirmation dialog)
@@ -33,7 +34,11 @@ export const OauthLoginCompleted: FunctionComponent = () => {
         }
         AuthService.redirectOnSuccess();
       } catch (e) {
-        setError(e.data?.detail || translate('Unknown error'));
+        setError(
+          e.response?.data?.detail ||
+            e.data?.detail ||
+            translate('Unknown error'),
+        );
       }
     }
     fetchToken();
