@@ -2,11 +2,9 @@ import { AZURE_SQL_TYPE, AZURE_VM_TYPE } from '@/azure/constants';
 import azureIcon from '@/images/appstore/icon-azure.png';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
 import rancherIcon from '@/images/appstore/icon-rancher.png';
-import slurmIcon from '@/images/appstore/icon-slurm.png';
 import vmwareIcon from '@/images/appstore/icon-vmware.png';
 import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
 import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
-import { SLURM_PLUGIN } from '@/slurm/constants';
 import { VMWARE_VM } from '@/vmware/constants';
 
 import { Offering } from '../types';
@@ -26,9 +24,6 @@ export const getOfferingImage = (offering: Offering) => {
 
     case MARKETPLACE_RANCHER:
       return rancherIcon;
-
-    case SLURM_PLUGIN:
-      return slurmIcon;
 
     case VMWARE_VM:
       return vmwareIcon;

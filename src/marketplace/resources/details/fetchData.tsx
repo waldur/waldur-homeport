@@ -8,11 +8,7 @@ import {
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
-import {
-  MarketplaceFeatures,
-  OpenstackFeatures,
-  SlurmFeatures,
-} from '@/FeaturesEnums';
+import { MarketplaceFeatures, OpenstackFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { countLexisLinks, countRobotAccounts } from '@/marketplace/common/api';
@@ -21,7 +17,6 @@ import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
 import { getTabs } from '@/resource/tabs/registry';
 import { getResourceAccessEndpoints } from '@/resource/utils';
-import { SLURM_PLUGIN } from '@/slurm/constants';
 
 function isOfferingLbaasEnabled(offering: PublicOfferingDetails): boolean {
   return Boolean(
@@ -102,28 +97,6 @@ export const getResourceTabs = ({
         })),
       ),
     });
-  } else if (resource.offering_type === SLURM_PLUGIN && scope) {
-    tabs.push({
-      key: 'allocation-users',
-      title: translate('Allocation users'),
-      component: lazyComponent(() =>
-        import('@/slurm/details/AllocationUsersTable').then((module) => ({
-          default: module.AllocationUsersTable,
-        })),
-      ),
-    });
-    const isSlurmJobsVisible = isFeatureVisible(SlurmFeatures.jobs);
-    if (isSlurmJobsVisible) {
-      tabs.push({
-        key: 'jobs',
-        title: translate('Jobs'),
-        component: lazyComponent(() =>
-          import('@/slurm/details/AllocationJobsTable').then((module) => ({
-            default: module.AllocationJobsTable,
-          })),
-        ),
-      });
-    }
   } else if ([MARKETPLACE_RANCHER].includes(resource.offering_type) && scope) {
     tabs.push({
       key: 'dashboard',

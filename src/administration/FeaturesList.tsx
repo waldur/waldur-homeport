@@ -28,7 +28,7 @@ import { TableQuery } from '@/table/TableQuery';
 import { useSettingsUrlSync } from './settings/useSettingsUrlSync';
 
 // Plugin sections that will be grouped into a single "Plugins" tab
-const PLUGIN_SECTION_KEYS = ['openstack', 'rancher', 'slurm'];
+const PLUGIN_SECTION_KEYS = ['openstack', 'rancher'];
 
 const FeatureSectionContent = ({ section }: { section: FeatureSection }) => (
   <FormTable>

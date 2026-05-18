@@ -4,7 +4,6 @@ import { Tip } from '@/core/Tooltip';
 import azureIcon from '@/images/appstore/icon-azure.png';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
 import rancherIcon from '@/images/appstore/icon-rancher.png';
-import slurmIcon from '@/images/appstore/icon-slurm.png';
 import vmwareIcon from '@/images/appstore/icon-vmware.png';
 
 import { formatResourceType, formatDefault } from './utils';
@@ -21,7 +20,6 @@ const ICONS = {
   Azure: azureIcon,
   OpenStack: openstackIcon,
   Rancher: rancherIcon,
-  SLURM: slurmIcon,
   VMware: vmwareIcon,
 };
 

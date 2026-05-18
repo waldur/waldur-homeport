@@ -196,7 +196,7 @@ export const SettingsDescription = [
         description: translate('List of offering types disabled for creation and selection.'),
         default: [],
         type: 'multiple_choice_field',
-        options: [{ value: 'Support.OfferingTemplate', label: 'Support' }, { value: 'Marketplace.Booking', label: 'Booking' }, { value: 'Marketplace.Basic', label: 'Basic' }, { value: 'OpenStack.Tenant', label: 'OpenStack Tenant' }, { value: 'OpenStack.Instance', label: 'OpenStack Instance' }, { value: 'OpenStack.Volume', label: 'OpenStack Volume' }, { value: 'Marketplace.Rancher', label: 'Rancher' }, { value: 'VMware.VirtualMachine', label: 'VMware Virtual Machine' }, { value: 'Waldur.RemoteOffering', label: 'Remote Offering' }, { value: 'Marketplace.Script', label: 'Script' }, { value: 'SlurmInvoices.SlurmPackage', label: 'SLURM Package' }, { value: 'Marketplace.Slurm', label: 'Site Agent' }],
+        options: [{ value: 'Support.OfferingTemplate', label: 'Support' }, { value: 'Marketplace.Booking', label: 'Booking' }, { value: 'Marketplace.Basic', label: 'Basic' }, { value: 'OpenStack.Tenant', label: 'OpenStack Tenant' }, { value: 'OpenStack.Instance', label: 'OpenStack Instance' }, { value: 'OpenStack.Volume', label: 'OpenStack Volume' }, { value: 'Marketplace.Rancher', label: 'Rancher' }, { value: 'VMware.VirtualMachine', label: 'VMware Virtual Machine' }, { value: 'Waldur.RemoteOffering', label: 'Remote Offering' }, { value: 'Marketplace.Script', label: 'Script' }, { value: 'Marketplace.Slurm', label: 'Site Agent' }],
       },
       {
         key: 'ENABLE_ORDER_START_DATE',

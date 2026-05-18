@@ -26,7 +26,6 @@ const RESOURCE_TYPE_LABELS = {
   'VMware.VirtualMachine': translate('vSphere virtual machine'),
   'VMware.Disk': translate('VM disk'),
   'VMware.Port': translate('VM network adapter'),
-  'SLURM.Allocation': translate('Batch processing allocation'),
 };
 
 export const formatResourceType = (resource) => {
