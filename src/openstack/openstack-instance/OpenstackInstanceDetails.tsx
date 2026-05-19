@@ -211,6 +211,13 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
           <pre>{attributes['user_data']}</pre>
         </FormTable.Item>
       )}
+      {typeof attributes['config_drive'] === 'boolean' && (
+        <FormTable.Item label={translate('Config drive')}>
+          {attributes['config_drive']
+            ? translate('Enabled')
+            : translate('Disabled')}
+        </FormTable.Item>
+      )}
     </>
   );
 };

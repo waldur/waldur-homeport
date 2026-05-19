@@ -10,7 +10,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { InjectedFormProps, reduxForm } from 'redux-form';
-import { OrderDetails } from 'waldur-js-client';
+import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
 import { parseDate } from '@/core/dateUtils';
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
@@ -19,6 +19,7 @@ import { getCustomer } from '@/customer/utils';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { Offering, Plan } from '@/marketplace/types';
+import { INSTANCE_TYPE } from '@/openstack/constants';
 import { calculateSystemVolumeSize } from '@/openstack/openstack-instance/utils';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
@@ -197,6 +198,15 @@ export const BaseDeployPage = ({
       }
       if (selectedOffering.type === MARKETPLACE_RANCHER) {
         props.change('attributes.nodes', []);
+      }
+      if (selectedOffering.type === INSTANCE_TYPE) {
+        props.change(
+          'attributes.config_drive',
+          Boolean(
+            (selectedOffering as unknown as PublicOfferingDetails)
+              .config_drive_default,
+          ),
+        );
       }
       props.change('limits', {
         ...getDefaultLimits(selectedOffering),

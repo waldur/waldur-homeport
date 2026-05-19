@@ -77,6 +77,7 @@ export const instanceSerializer = ({
   server_group,
   availability_zone,
   port_security_enabled,
+  config_drive,
 }) => ({
   name,
   description,
@@ -96,4 +97,5 @@ export const instanceSerializer = ({
   system_volume_type: system_volume_type && system_volume_type.value,
   data_volume_type: data_volume_type && data_volume_type.value,
   availability_zone,
+  config_drive,
 });
