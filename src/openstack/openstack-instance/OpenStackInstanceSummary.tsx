@@ -73,6 +73,17 @@ export const OpenStackInstanceSummary = (
         value={props.resource.hypervisor_hostname}
       />
 
+      {typeof props.resource.config_drive === 'boolean' && (
+        <Component
+          label={translate('Config drive')}
+          value={
+            props.resource.config_drive
+              ? translate('Enabled')
+              : translate('Disabled')
+          }
+        />
+      )}
+
       {props.resource.rancher_cluster && (
         <Component
           label={translate('Rancher cluster')}

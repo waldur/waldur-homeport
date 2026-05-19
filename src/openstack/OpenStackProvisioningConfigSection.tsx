@@ -94,6 +94,14 @@ const networkFields: OfferingEditField[] = [
 // Operations fields
 const operationsFields: OfferingEditField[] = [
   {
+    label: translate('Config drive enabled by default'),
+    description: translate(
+      'A config drive is a small read-only disk attached to the instance at boot, used by cloud-init to deliver metadata, SSH keys and user data without going through the network metadata service (http://169.254.169.254). Enable this when guests cannot reach the metadata service — for example, when the tenant network has no DHCP or sits on an isolated segment. Leave it off when the metadata service is reachable, which is the usual case. Users can override per-instance at order time.',
+    ),
+    key: 'service_attributes.config_drive',
+    component: AwesomeCheckboxField,
+  },
+  {
     label: translate('Allow live volume resize'),
     description: translate(
       'Allow live volume resize of system and data volumes.',
