@@ -36,7 +36,7 @@ export interface AccountingIsRunningOption {
   value: any;
 }
 
-const PureFinancialReportsFilter: FunctionComponent<
+export const FinancialReportsFilter: FunctionComponent<
   FinancialReportsFilterProps
 > = (props) => (
   <>
@@ -125,8 +125,6 @@ export interface FinancialReportsFilterFormData {
   accounting_period: any;
   accounting_is_running: AccountingIsRunningOption;
 }
-
-export const FinancialReportsFilter = PureFinancialReportsFilter;
 
 type FinancialReportsFilterQuery = FinancialReportsListData['query'];
 

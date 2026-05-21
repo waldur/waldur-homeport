@@ -38,7 +38,7 @@ export interface OfferingStateOption {
   value: OfferingState;
 }
 
-const PureMarketplaceProviderOfferingsFilter: FunctionComponent<{}> = () => (
+export const MarketplaceProviderOfferingsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
@@ -70,8 +70,6 @@ export interface MarketplaceProviderOfferingsFilterFormData {
   state: OfferingStateOption[];
 }
 
-export const MarketplaceProviderOfferingsFilter =
-  PureMarketplaceProviderOfferingsFilter;
 export const MarketplaceProviderOfferingsFilterInitialValues = {
   state: [
     { label: translate('Draft'), value: 'Draft' },

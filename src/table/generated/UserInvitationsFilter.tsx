@@ -90,7 +90,7 @@ export interface ScopeTypeOption {
   value: string;
 }
 
-const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
+export const UserInvitationsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -194,8 +194,6 @@ export interface UserInvitationsFilterFormData {
   customer: Customer;
   scope_type: ScopeTypeOption;
 }
-
-export const UserInvitationsFilter = PureUserInvitationsFilter;
 
 type UserInvitationsFilterQuery = UserInvitationsListData['query'];
 

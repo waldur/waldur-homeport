@@ -15,7 +15,7 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureMarketplaceResourcesFilter: FunctionComponent<
+export const MarketplaceResourcesFilter: FunctionComponent<
   MarketplaceResourcesFilterProps
 > = (props) => (
   <>
@@ -78,8 +78,6 @@ export interface MarketplaceResourcesFilterFormData {
   organization: Customer;
   project: Project;
 }
-
-export const MarketplaceResourcesFilter = PureMarketplaceResourcesFilter;
 
 type MarketplaceResourcesFilterQuery = MarketplaceResourcesListData['query'];
 

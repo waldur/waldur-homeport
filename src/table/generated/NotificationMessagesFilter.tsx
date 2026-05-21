@@ -23,7 +23,7 @@ export interface IsOverriddenOption {
   value: boolean;
 }
 
-const PureNotificationMessagesFilter: FunctionComponent<{}> = () => (
+export const NotificationMessagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="is_overridden"
@@ -52,8 +52,6 @@ export const NotificationMessagesFilterFormId = 'NotificationMessagesFilter';
 export interface NotificationMessagesFilterFormData {
   is_overridden: IsOverriddenOption;
 }
-
-export const NotificationMessagesFilter = PureNotificationMessagesFilter;
 
 type NotificationMessagesFilterQuery = NotificationMessagesListData['query'];
 

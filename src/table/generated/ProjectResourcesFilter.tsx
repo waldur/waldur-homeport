@@ -13,7 +13,7 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureProjectResourcesFilter: FunctionComponent<
+export const ProjectResourcesFilter: FunctionComponent<
   ProjectResourcesFilterProps
 > = (props) => (
   <TableFilterItem
@@ -58,8 +58,6 @@ interface ProjectResourcesFilterProps {
 export interface ProjectResourcesFilterFormData {
   offering: PublicOfferingDetails[];
 }
-
-export const ProjectResourcesFilter = PureProjectResourcesFilter;
 
 type ProjectResourcesFilterQuery = MarketplaceResourcesListData['query'];
 

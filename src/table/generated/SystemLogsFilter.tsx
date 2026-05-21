@@ -56,7 +56,7 @@ export interface SystemLogSourceOption {
   value: SystemLogSourceEnum;
 }
 
-const PureSystemLogsFilter: FunctionComponent<{}> = () => (
+export const SystemLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Source')}
@@ -145,8 +145,6 @@ export interface SystemLogsFilterFormData {
   start_date: string;
   end_date: string;
 }
-
-export const SystemLogsFilter = PureSystemLogsFilter;
 
 type SystemLogsFilterQuery = SystemLogsListData['query'];
 

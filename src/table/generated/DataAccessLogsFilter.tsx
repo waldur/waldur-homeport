@@ -46,7 +46,7 @@ export interface AccessorTypeOption {
   value: AccessorTypeEnum;
 }
 
-const PureDataAccessLogsFilter: FunctionComponent<{}> = () => (
+export const DataAccessLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Start date')} name="start_date">
       <Field
@@ -124,8 +124,6 @@ export interface DataAccessLogsFilterFormData {
   accessor_type: AccessorTypeOption;
   user: User;
 }
-
-export const DataAccessLogsFilter = PureDataAccessLogsFilter;
 
 type DataAccessLogsFilterQuery = DataAccessLogsListData['query'];
 

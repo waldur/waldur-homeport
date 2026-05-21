@@ -49,7 +49,7 @@ export interface ProposalStatesOption {
   value: ProposalStates;
 }
 
-const PureProposalsFilter: FunctionComponent<{}> = () => (
+export const ProposalsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -106,8 +106,6 @@ export interface ProposalsFilterFormData {
   state: ProposalStatesOption[];
   call: PublicCall;
 }
-
-export const ProposalsFilter = PureProposalsFilter;
 
 type ProposalsFilterQuery = ProposalProposalsListData['query'];
 

@@ -8,7 +8,7 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureUserGroupInvitationsFilter: FunctionComponent<{}> = () => (
+export const UserGroupInvitationsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Group invitations')}
     name="is_active"
@@ -31,8 +31,6 @@ export const UserGroupInvitationsFilterFormId = 'UserGroupInvitationsFilter';
 export interface UserGroupInvitationsFilterFormData {
   is_active: boolean;
 }
-
-export const UserGroupInvitationsFilter = PureUserGroupInvitationsFilter;
 
 type UserGroupInvitationsFilterQuery = UserGroupInvitationsListData['query'];
 

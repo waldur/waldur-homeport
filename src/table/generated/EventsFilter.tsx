@@ -36,7 +36,7 @@ export interface FeatureOption {
   value: string;
 }
 
-const PureEventsFilter: FunctionComponent<{}> = () => (
+export const EventsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -143,8 +143,6 @@ export interface EventsFilterFormData {
   user: User;
   feature: FeatureOption[];
 }
-
-export const EventsFilter = PureEventsFilter;
 
 type EventsFilterQuery = EventsListData['query'];
 

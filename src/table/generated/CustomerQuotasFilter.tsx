@@ -58,7 +58,7 @@ export interface CustomerQuotasQuotaNameOption {
   value: CustomerQuotasQuotaNameEnum;
 }
 
-const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
+export const CustomerQuotasFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Quota')}
     name="quota_name"
@@ -92,7 +92,6 @@ export interface CustomerQuotasFilterFormData {
   quota_name: CustomerQuotasQuotaNameOption;
 }
 
-export const CustomerQuotasFilter = PureCustomerQuotasFilter;
 export const CustomerQuotasFilterInitialValues = {
   quota_name: { label: translate('Resources'), value: 'estimated_price' },
 };

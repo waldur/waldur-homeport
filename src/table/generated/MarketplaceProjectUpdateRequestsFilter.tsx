@@ -46,7 +46,7 @@ export interface RemoteProjectUpdateRequestStateOption {
   value: RemoteProjectUpdateRequestStateEnum;
 }
 
-const PureMarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
+export const MarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
   () => (
     <>
       <TableFilterItem
@@ -110,8 +110,6 @@ export interface MarketplaceProjectUpdateRequestsFilterFormData {
   organization: Customer;
 }
 
-export const MarketplaceProjectUpdateRequestsFilter =
-  PureMarketplaceProjectUpdateRequestsFilter;
 export const MarketplaceProjectUpdateRequestsFilterInitialValues = {
   state: [{ value: 'pending', label: translate('Pending') }],
 };

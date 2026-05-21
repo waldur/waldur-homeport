@@ -55,7 +55,7 @@ export interface ProposalStatesOption {
   value: ProposalStates;
 }
 
-const PureProposalProposalsFilter: FunctionComponent<
+export const ProposalProposalsFilter: FunctionComponent<
   ProposalProposalsFilterProps
 > = (props) => (
   <>
@@ -200,8 +200,6 @@ export interface ProposalProposalsFilterFormData {
   organization: Customer;
   applicant: User;
 }
-
-export const ProposalProposalsFilter = PureProposalProposalsFilter;
 
 type ProposalProposalsFilterQuery = ProposalProposalsListData['query'];
 

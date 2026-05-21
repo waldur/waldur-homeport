@@ -8,7 +8,7 @@ import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureProjectsListUsersFilter: FunctionComponent<
+export const ProjectsListUsersFilter: FunctionComponent<
   ProjectsListUsersFilterProps
 > = (props) => (
   <TableFilterItem
@@ -43,8 +43,6 @@ interface ProjectsListUsersFilterProps {
 export interface ProjectsListUsersFilterFormData {
   project_role: any;
 }
-
-export const ProjectsListUsersFilter = PureProjectsListUsersFilter;
 
 type ProjectsListUsersFilterQuery = ProjectsListUsersListData['query'];
 

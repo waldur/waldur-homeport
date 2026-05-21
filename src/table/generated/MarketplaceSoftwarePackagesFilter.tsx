@@ -32,7 +32,7 @@ export interface CatalogTypeOption {
   value: CatalogTypeEnum;
 }
 
-const PureMarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
+export const MarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Catalog')} name="catalog_name">
       <Field
@@ -126,9 +126,6 @@ export interface MarketplaceSoftwarePackagesFilterFormData {
   has_gpu: boolean;
   gpu_arch: string;
 }
-
-export const MarketplaceSoftwarePackagesFilter =
-  PureMarketplaceSoftwarePackagesFilter;
 
 type MarketplaceSoftwarePackagesFilterQuery =
   MarketplaceSoftwarePackagesListData['query'];

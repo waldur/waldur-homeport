@@ -57,7 +57,7 @@ const formatRangeBadge = (value?: { min?: number; max?: number }) => {
   return '';
 };
 
-const PureChatThreadsFilter: FunctionComponent<{}> = () => (
+export const ChatThreadsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Created')} name="created">
       <Field
@@ -205,8 +205,6 @@ export interface ChatThreadsFilterFormData {
   output_tokens_range: { min?: number; max?: number };
   total_tokens_range: { min?: number; max?: number };
 }
-
-export const ChatThreadsFilter = PureChatThreadsFilter;
 
 type ChatThreadsFilterQuery = ChatThreadsListData['query'];
 

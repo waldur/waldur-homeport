@@ -9,7 +9,7 @@ import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureEmailLogsFilter: FunctionComponent<{}> = () => (
+export const EmailLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Emails')} name="emails">
       <Field
@@ -42,8 +42,6 @@ export interface EmailLogsFilterFormData {
   subject: string;
   sent_at: string;
 }
-
-export const EmailLogsFilter = PureEmailLogsFilter;
 
 type EmailLogsFilterQuery = EmailLogsListData['query'];
 

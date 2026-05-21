@@ -43,7 +43,7 @@ export interface UrgencyOption {
   value: UrgencyEnum;
 }
 
-const PureUserPendingActionsFilter: FunctionComponent<{}> = () => (
+export const UserPendingActionsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Action type')}
@@ -126,8 +126,6 @@ export interface UserPendingActionsFilterFormData {
   overdue: boolean;
   include_silenced: boolean;
 }
-
-export const UserPendingActionsFilter = PureUserPendingActionsFilter;
 
 type UserPendingActionsFilterQuery = UserActionsListData['query'];
 

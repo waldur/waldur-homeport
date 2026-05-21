@@ -30,7 +30,7 @@ export interface BroadcastMessageStateOption {
   value: BroadcastMessageStateEnum;
 }
 
-const PureBroadcastMessagesFilter: FunctionComponent<{}> = () => (
+export const BroadcastMessagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
@@ -61,8 +61,6 @@ export const BroadcastMessagesFilterFormId = 'BroadcastMessagesFilter';
 export interface BroadcastMessagesFilterFormData {
   state: BroadcastMessageStateOption;
 }
-
-export const BroadcastMessagesFilter = PureBroadcastMessagesFilter;
 
 type BroadcastMessagesFilterQuery = BroadcastMessagesListData['query'];
 

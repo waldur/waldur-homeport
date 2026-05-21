@@ -18,9 +18,9 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureInvoicesItemsFilter: FunctionComponent<InvoicesItemsFilterProps> = (
-  props,
-) => (
+export const InvoicesItemsFilter: FunctionComponent<
+  InvoicesItemsFilterProps
+> = (props) => (
   <>
     <TableFilterItem
       title={translate('Service provider')}
@@ -135,8 +135,6 @@ export interface InvoicesItemsFilterFormData {
   offering: PublicOfferingDetails;
   conceal_compensation_items: boolean;
 }
-
-export const InvoicesItemsFilter = PureInvoicesItemsFilter;
 
 type InvoicesItemsFilterQuery = InvoicesItemsRetrieveData['query'];
 

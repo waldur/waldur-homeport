@@ -47,7 +47,7 @@ export interface RuntimeStateOption {
   value: string;
 }
 
-const PureMarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
+export const MarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
   MarketplaceStatsOpenstackInstancesFilterProps
 > = (props) => (
   <>
@@ -159,9 +159,6 @@ export interface MarketplaceStatsOpenstackInstancesFilterFormData {
   flavor_name: string;
   image_name: string;
 }
-
-export const MarketplaceStatsOpenstackInstancesFilter =
-  PureMarketplaceStatsOpenstackInstancesFilter;
 
 type MarketplaceStatsOpenstackInstancesFilterQuery =
   MarketplaceStatsOpenstackInstancesListData['query'];

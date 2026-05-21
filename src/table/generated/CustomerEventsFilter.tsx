@@ -27,7 +27,7 @@ export interface CustomerEventsFeatureOption {
   value: string;
 }
 
-const PureCustomerEventsFilter: FunctionComponent<{}> = () => (
+export const CustomerEventsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Type')}
     name="feature"
@@ -60,7 +60,6 @@ export interface CustomerEventsFilterFormData {
   feature: CustomerEventsFeatureOption[];
 }
 
-export const CustomerEventsFilter = PureCustomerEventsFilter;
 export const CustomerEventsFilterInitialValues = {
   feature: [{ label: translate('Organization events'), value: 'customers' }],
 };

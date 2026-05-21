@@ -21,7 +21,7 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureInvoiceItemsFilter: FunctionComponent<InvoiceItemsFilterProps> = (
+export const InvoiceItemsFilter: FunctionComponent<InvoiceItemsFilterProps> = (
   props,
 ) => (
   <>
@@ -132,8 +132,6 @@ export interface InvoiceItemsFilterFormData {
   project: Project;
   offering: ProviderOfferingDetails;
 }
-
-export const InvoiceItemsFilter = PureInvoiceItemsFilter;
 
 type InvoiceItemsFilterQuery = InvoiceItemsListData['query'];
 

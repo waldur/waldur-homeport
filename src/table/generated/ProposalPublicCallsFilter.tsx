@@ -28,7 +28,7 @@ export interface CallStatesOption {
   value: CallStates;
 }
 
-const PureProposalPublicCallsFilter: FunctionComponent<{}> = () => (
+export const ProposalPublicCallsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -75,7 +75,6 @@ export interface ProposalPublicCallsFilterFormData {
   has_active_round: boolean;
 }
 
-export const ProposalPublicCallsFilter = PureProposalPublicCallsFilter;
 export const ProposalPublicCallsFilterInitialValues = {
   state: [{ label: translate('Active'), value: 'active' }],
   has_active_round: false,

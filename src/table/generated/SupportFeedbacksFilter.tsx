@@ -13,7 +13,7 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureSupportFeedbacksFilter: FunctionComponent<
+export const SupportFeedbacksFilter: FunctionComponent<
   SupportFeedbacksFilterProps
 > = (props) => (
   <>
@@ -96,8 +96,6 @@ export interface SupportFeedbacksFilterFormData {
   user: User;
   period: any;
 }
-
-export const SupportFeedbacksFilter = PureSupportFeedbacksFilter;
 
 type SupportFeedbacksFilterQuery = SupportFeedbacksListData['query'];
 

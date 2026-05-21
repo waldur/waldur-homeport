@@ -39,7 +39,7 @@ export interface AccountingIsRunningOption {
   value: any;
 }
 
-const PureCustomersFilter: FunctionComponent<{}> = () => (
+export const CustomersFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Accounting is running')}
@@ -136,8 +136,6 @@ export interface CustomersFilterFormData {
   is_call_managing_organization: boolean;
   organization_group: OrganizationGroup[];
 }
-
-export const CustomersFilter = PureCustomersFilter;
 
 type CustomersFilterQuery = CustomersListData['query'];
 

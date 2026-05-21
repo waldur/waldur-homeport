@@ -41,7 +41,7 @@ export interface RequestedOfferingStatesOption {
   value: RequestedOfferingStates;
 }
 
-const PureProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
+export const ProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -155,9 +155,6 @@ export interface ProposalRequestedOfferingsFilterFormData {
   state: RequestedOfferingStatesOption[];
   offering: PublicOfferingDetails;
 }
-
-export const ProposalRequestedOfferingsFilter =
-  PureProposalRequestedOfferingsFilter;
 
 type ProposalRequestedOfferingsFilterQuery =
   ProposalRequestedOfferingsListData['query'];

@@ -19,7 +19,7 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureCreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
+export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
   props,
 ) => (
   <>
@@ -135,8 +135,6 @@ export interface CreditUsageFilterFormData {
   year: any;
   month: any;
 }
-
-export const CreditUsageFilter = PureCreditUsageFilter;
 
 type CreditUsageFilterQuery = InvoiceItemsListData['query'];
 

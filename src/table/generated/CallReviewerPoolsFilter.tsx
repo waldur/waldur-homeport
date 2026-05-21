@@ -34,7 +34,7 @@ export interface InvitationStatusOption {
   value: InvitationStatusEnum;
 }
 
-const PureCallReviewerPoolsFilter: FunctionComponent<{}> = () => (
+export const CallReviewerPoolsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="invitation_status"
@@ -66,8 +66,6 @@ export const CallReviewerPoolsFilterFormId = 'CallReviewerPoolsFilter';
 export interface CallReviewerPoolsFilterFormData {
   invitation_status: InvitationStatusOption[];
 }
-
-export const CallReviewerPoolsFilter = PureCallReviewerPoolsFilter;
 
 type CallReviewerPoolsFilterQuery = CallReviewerPoolsListData['query'];
 

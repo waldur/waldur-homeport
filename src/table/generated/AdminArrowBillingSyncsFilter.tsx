@@ -31,7 +31,7 @@ export interface StateOption {
   value: number;
 }
 
-const PureAdminArrowBillingSyncsFilter: FunctionComponent<
+export const AdminArrowBillingSyncsFilter: FunctionComponent<
   AdminArrowBillingSyncsFilterProps
 > = (props) => (
   <>
@@ -109,8 +109,6 @@ export interface AdminArrowBillingSyncsFilterFormData {
   report_period_from: any;
   report_period_to: any;
 }
-
-export const AdminArrowBillingSyncsFilter = PureAdminArrowBillingSyncsFilter;
 
 type AdminArrowBillingSyncsFilterQuery =
   AdminArrowBillingSyncsListData['query'];

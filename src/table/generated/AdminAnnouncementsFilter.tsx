@@ -45,7 +45,7 @@ export interface IsActiveOption {
   value: boolean;
 }
 
-const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
+export const AdminAnnouncementsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Type')}
@@ -103,8 +103,6 @@ export interface AdminAnnouncementsFilterFormData {
   type: AdminAnnouncementTypeOption[];
   is_active: IsActiveOption;
 }
-
-export const AdminAnnouncementsFilter = PureAdminAnnouncementsFilter;
 
 type AdminAnnouncementsFilterQuery = AdminAnnouncementsListData['query'];
 

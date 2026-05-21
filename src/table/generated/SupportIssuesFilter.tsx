@@ -31,7 +31,7 @@ export interface StatusOption {
   value: string;
 }
 
-const PureSupportIssuesFilter: FunctionComponent<{}> = () => (
+export const SupportIssuesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="status"
@@ -60,8 +60,6 @@ export const SupportIssuesFilterFormId = 'SupportIssuesFilter';
 export interface SupportIssuesFilterFormData {
   status: StatusOption;
 }
-
-export const SupportIssuesFilter = PureSupportIssuesFilter;
 
 type SupportIssuesFilterQuery = SupportIssuesListData['query'];
 

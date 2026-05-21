@@ -15,7 +15,7 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureAdminArrowCustomerMappingsFilter: FunctionComponent<{}> = () => (
+export const AdminArrowCustomerMappingsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Waldur Organization')}
@@ -73,9 +73,6 @@ export interface AdminArrowCustomerMappingsFilterFormData {
   arrow_reference: string;
   is_active: boolean;
 }
-
-export const AdminArrowCustomerMappingsFilter =
-  PureAdminArrowCustomerMappingsFilter;
 
 type AdminArrowCustomerMappingsFilterQuery =
   AdminArrowCustomerMappingsListData['query'];

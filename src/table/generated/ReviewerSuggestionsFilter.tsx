@@ -35,7 +35,7 @@ export interface ReviewerSuggestionStatusOption {
   value: ReviewerSuggestionStatusEnum;
 }
 
-const PureReviewerSuggestionsFilter: FunctionComponent<{}> = () => (
+export const ReviewerSuggestionsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="status"
@@ -69,8 +69,6 @@ export const ReviewerSuggestionsFilterFormId = 'ReviewerSuggestionsFilter';
 export interface ReviewerSuggestionsFilterFormData {
   status: ReviewerSuggestionStatusOption[];
 }
-
-export const ReviewerSuggestionsFilter = PureReviewerSuggestionsFilter;
 
 type ReviewerSuggestionsFilterQuery = ReviewerSuggestionsListData['query'];
 

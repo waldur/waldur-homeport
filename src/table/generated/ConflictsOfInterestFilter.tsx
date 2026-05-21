@@ -166,7 +166,7 @@ export interface DetectionMethodOption {
   value: DetectionMethodEnum;
 }
 
-const PureConflictsOfInterestFilter: FunctionComponent<
+export const ConflictsOfInterestFilter: FunctionComponent<
   ConflictsOfInterestFilterProps
 > = (props) => (
   <>
@@ -312,8 +312,6 @@ export interface ConflictsOfInterestFilterFormData {
   coi_type: CoiTypeOption[];
   detection_method: DetectionMethodOption[];
 }
-
-export const ConflictsOfInterestFilter = PureConflictsOfInterestFilter;
 
 type ConflictsOfInterestFilterQuery = ConflictsOfInterestListData['query'];
 

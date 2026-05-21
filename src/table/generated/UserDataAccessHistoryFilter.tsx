@@ -37,7 +37,7 @@ export interface UserDataAccessHistoryAccessorTypeOption {
   value: string;
 }
 
-const PureUserDataAccessHistoryFilter: FunctionComponent<{}> = () => (
+export const UserDataAccessHistoryFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Start date')} name="start_date">
       <Field
@@ -92,8 +92,6 @@ export interface UserDataAccessHistoryFilterFormData {
   end_date: string;
   accessor_type: UserDataAccessHistoryAccessorTypeOption;
 }
-
-export const UserDataAccessHistoryFilter = PureUserDataAccessHistoryFilter;
 
 type UserDataAccessHistoryFilterQuery = UsersDataAccessHistoryListData['query'];
 

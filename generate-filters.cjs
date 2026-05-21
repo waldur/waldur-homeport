@@ -561,7 +561,6 @@ class Generator {
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             ${commonSelectProps}
-            className="metronic-select-container"
             ${spreads}
             ${autocompleteProps}
           />
@@ -753,7 +752,7 @@ ${jsx}    )}\n`
 
         const propsInterfaceName = pFields.size ? `${compName}Props` : '{}';
 
-        return `const Pure${compName}: FunctionComponent<${propsInterfaceName}> = (${pFields.size ? 'props' : ''}) => (
+        return `export const ${compName}: FunctionComponent<${propsInterfaceName}> = (${pFields.size ? 'props' : ''}) => (
   <>
 ${filters.map((f) => Generator.field(f, enumRegistry)).join('')}  </>
 );
@@ -764,7 +763,6 @@ ${propsInterface}export interface ${compName}FormData {
 ${interfaceFields}
 }
 
-export const ${compName} = Pure${compName};
 ${config.overrides[id]?.initialValues ? `export const ${compName}InitialValues = ${JSON.stringify(config.overrides[id].initialValues).replace(/"label":\s*"([^"]+)"/g, '"label": translate("$1")')};` : ''}
 
 type ${compName}Query = ${sdkDataType}['query'];

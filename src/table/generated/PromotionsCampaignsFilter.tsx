@@ -45,7 +45,7 @@ export interface DiscountTypeOption {
   value: string;
 }
 
-const PurePromotionsCampaignsFilter: FunctionComponent<{}> = () => (
+export const PromotionsCampaignsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -103,8 +103,6 @@ export interface PromotionsCampaignsFilterFormData {
   state: CampaignStateOption[];
   discount_type: DiscountTypeOption;
 }
-
-export const PromotionsCampaignsFilter = PurePromotionsCampaignsFilter;
 
 type PromotionsCampaignsFilterQuery = PromotionsCampaignsListData['query'];
 

@@ -23,7 +23,7 @@ export interface UserHasConsentOption {
   value: boolean;
 }
 
-const PureUserTosFiltersFilter: FunctionComponent<{}> = () => (
+export const UserTosFiltersFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Consent status')}
     name="user_has_consent"
@@ -54,8 +54,6 @@ export const UserTosFiltersFilterFormId = 'UserTosFiltersFilter';
 export interface UserTosFiltersFilterFormData {
   user_has_consent: UserHasConsentOption;
 }
-
-export const UserTosFiltersFilter = PureUserTosFiltersFilter;
 
 type UserTosFiltersFilterQuery = MarketplacePublicOfferingsListData['query'];
 

@@ -8,9 +8,9 @@ import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureCustomersUsersFilter: FunctionComponent<CustomersUsersFilterProps> = (
-  props,
-) => (
+export const CustomersUsersFilter: FunctionComponent<
+  CustomersUsersFilterProps
+> = (props) => (
   <>
     <TableFilterItem
       title={translate('Project role')}
@@ -70,8 +70,6 @@ export interface CustomersUsersFilterFormData {
   project_role: any[];
   organization_role: any[];
 }
-
-export const CustomersUsersFilter = PureCustomersUsersFilter;
 
 type CustomersUsersFilterQuery = CustomersUsersListData['query'];
 

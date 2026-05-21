@@ -35,7 +35,7 @@ export interface InvoiceStateOption {
   value: InvoiceStateEnum;
 }
 
-const PureInvoicesFilter: FunctionComponent<{}> = () => (
+export const InvoicesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
@@ -65,8 +65,6 @@ export const InvoicesFilterFormId = 'InvoicesFilter';
 export interface InvoicesFilterFormData {
   state: InvoiceStateOption[];
 }
-
-export const InvoicesFilter = PureInvoicesFilter;
 
 type InvoicesFilterQuery = InvoicesListData['query'];
 

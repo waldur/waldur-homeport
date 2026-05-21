@@ -8,7 +8,7 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureOpenstackImagesFilter: FunctionComponent<{}> = () => (
+export const OpenstackImagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Show duplicate names')}
     name="show_duplicate_names"
@@ -29,8 +29,6 @@ export const OpenstackImagesFilterFormId = 'OpenstackImagesFilter';
 export interface OpenstackImagesFilterFormData {
   show_duplicate_names: boolean;
 }
-
-export const OpenstackImagesFilter = PureOpenstackImagesFilter;
 
 type OpenstackImagesFilterQuery = OpenstackImagesListData['query'];
 

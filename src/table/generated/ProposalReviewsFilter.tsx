@@ -45,7 +45,7 @@ export interface ProposalReviewStateOption {
   value: ProposalReviewStateEnum;
 }
 
-const PureProposalReviewsFilter: FunctionComponent<
+export const ProposalReviewsFilter: FunctionComponent<
   ProposalReviewsFilterProps
 > = (props) => (
   <>
@@ -215,8 +215,6 @@ export interface ProposalReviewsFilterFormData {
   reviewer: User;
   proposal: Proposal;
 }
-
-export const ProposalReviewsFilter = PureProposalReviewsFilter;
 
 type ProposalReviewsFilterQuery = ProposalReviewsListData['query'];
 

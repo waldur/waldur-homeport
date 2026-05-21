@@ -32,7 +32,7 @@ export interface IsFinalizedOption {
   value: boolean;
 }
 
-const PureAdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
+export const AdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -87,9 +87,6 @@ export interface AdminArrowConsumptionRecordsFilterFormData {
   organization: Customer;
   is_finalized: IsFinalizedOption;
 }
-
-export const AdminArrowConsumptionRecordsFilter =
-  PureAdminArrowConsumptionRecordsFilter;
 
 type AdminArrowConsumptionRecordsFilterQuery =
   AdminArrowConsumptionRecordsListData['query'];

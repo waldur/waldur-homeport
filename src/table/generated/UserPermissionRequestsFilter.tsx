@@ -31,7 +31,7 @@ export interface UserPermissionRequestsRemoteProjectUpdateRequestStateOption {
   value: RemoteProjectUpdateRequestStateEnum;
 }
 
-const PureUserPermissionRequestsFilter: FunctionComponent<{}> = () => (
+export const UserPermissionRequestsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
@@ -69,7 +69,6 @@ export interface UserPermissionRequestsFilterFormData {
   state: UserPermissionRequestsRemoteProjectUpdateRequestStateOption[];
 }
 
-export const UserPermissionRequestsFilter = PureUserPermissionRequestsFilter;
 export const UserPermissionRequestsFilterInitialValues = {
   state: [{ value: 'pending', label: translate('Pending') }],
 };

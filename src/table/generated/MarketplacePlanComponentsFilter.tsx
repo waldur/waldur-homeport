@@ -13,7 +13,7 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureMarketplacePlanComponentsFilter: FunctionComponent<{}> = () => (
+export const MarketplacePlanComponentsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Offering')}
     name="offering"
@@ -51,9 +51,6 @@ export const MarketplacePlanComponentsFilterFormId =
 export interface MarketplacePlanComponentsFilterFormData {
   offering: ProviderOfferingDetails;
 }
-
-export const MarketplacePlanComponentsFilter =
-  PureMarketplacePlanComponentsFilter;
 
 type MarketplacePlanComponentsFilterQuery =
   MarketplacePlanComponentsListData['query'];

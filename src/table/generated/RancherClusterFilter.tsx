@@ -15,9 +15,9 @@ import { translate } from '@/i18n';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureRancherClusterFilter: FunctionComponent<RancherClusterFilterProps> = (
-  props,
-) => (
+export const RancherClusterFilter: FunctionComponent<
+  RancherClusterFilterProps
+> = (props) => (
   <>
     <TableFilterItem
       title={translate('Namespace')}
@@ -88,8 +88,6 @@ export interface RancherClusterFilterFormData {
   namespace: RancherNamespace;
   rancher_project: RancherProject;
 }
-
-export const RancherClusterFilter = PureRancherClusterFilter;
 
 type RancherClusterFilterQuery = RancherIngressesListData['query'];
 

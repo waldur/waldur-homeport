@@ -39,7 +39,7 @@ export interface RemoteProjectUpdateRequestStateOption {
   value: RemoteProjectUpdateRequestStateEnum;
 }
 
-const PureOpenportalManagedProjectsFilter: FunctionComponent<{}> = () => (
+export const OpenportalManagedProjectsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
@@ -76,9 +76,6 @@ export const OpenportalManagedProjectsFilterFormId =
 export interface OpenportalManagedProjectsFilterFormData {
   state: RemoteProjectUpdateRequestStateOption[];
 }
-
-export const OpenportalManagedProjectsFilter =
-  PureOpenportalManagedProjectsFilter;
 
 type OpenportalManagedProjectsFilterQuery =
   OpenportalManagedProjectsListData['query'];
