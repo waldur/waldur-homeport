@@ -11,11 +11,10 @@ import {
   UserRequest,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { Wizard } from '@/wizard';
+import { ProgressStep, Wizard } from '@/wizard';
 import { setCurrentUser } from '@/workspace/actions';
 import { useUser } from '@/workspace/hooks';
 

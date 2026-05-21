@@ -6,9 +6,8 @@ import { adminArrowVendorOfferingMappingsList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const VendorOfferingSelect = ({ input }: { input: any }) => {
   const formState = useFormState<{

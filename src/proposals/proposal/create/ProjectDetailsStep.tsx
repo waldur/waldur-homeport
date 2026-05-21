@@ -10,11 +10,11 @@ import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { SelectField, StringField, TextField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { VStepperFormStepProps } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { OECD_FOS_2007_CODES } from '@/project/OECD_FOS_2007_CODES';
 import { Call, ProposalReview } from '@/proposals/types';
+import { VStepperFormStepProps } from '@/wizard';
 
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 

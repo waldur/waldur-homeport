@@ -2,9 +2,8 @@ import { FunctionComponent } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { FormContainer, TextField } from '@/form';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
   props,

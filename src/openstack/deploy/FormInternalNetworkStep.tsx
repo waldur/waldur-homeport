@@ -4,9 +4,9 @@ import { useToggle } from 'react-use';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { FormGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { OpenStackAllocationPool } from '../OpenStackAllocationPool';
 import { OpenStackSubnetField } from '../OpenStackSubnetField';

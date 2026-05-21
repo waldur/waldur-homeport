@@ -9,13 +9,13 @@ import { format } from '@/core/ErrorMessageFormatter';
 import { LoadingErred } from '@/core/LoadingErred';
 import { FormContainer, SelectField } from '@/form';
 import { AsyncSelectField } from '@/form/AsyncSelectField';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
   const categoriesQuery = useQuery({

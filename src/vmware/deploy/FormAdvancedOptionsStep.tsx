@@ -10,9 +10,9 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
 import { FormContainer, SelectField } from '@/form';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 export const FormAdvancedOptionsStep = (props: FormStepProps) => {
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;

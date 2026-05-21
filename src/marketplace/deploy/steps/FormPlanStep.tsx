@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { OrderSummaryButton } from '@/marketplace/details/OrderSummaryButton';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';

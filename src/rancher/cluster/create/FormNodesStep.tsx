@@ -11,13 +11,13 @@ import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { FormGroup, SelectField, StringField } from '@/form';
 import { BoxNumberField } from '@/form/BoxNumberField';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { NODES_FIELD_ARRAY } from './constants';
 import { RANCHER_NODE_ROLES } from './RANCHER_NODE_ROLES';

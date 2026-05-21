@@ -1,5 +1,5 @@
-import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
+import { ProgressStep } from '@/wizard';
 
 import { FileUploadTab } from './FileUploadTab';
 import { ImportConfigurationTab } from './ImportConfigurationTab';

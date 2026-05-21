@@ -1,8 +1,8 @@
 import { AccordionCard } from '@/core/AccordionCard';
-import { VStepperFormStepProps } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { TeamSection } from '@/proposals/team/TeamSection';
 import { Proposal, ProposalReview } from '@/proposals/types';
+import { VStepperFormStepProps } from '@/wizard';
 
 import { StepHeaderContent } from './StepHeaderContent';
 

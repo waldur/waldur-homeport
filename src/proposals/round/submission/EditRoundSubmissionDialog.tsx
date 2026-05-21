@@ -6,13 +6,13 @@ import {
 } from 'waldur-js-client';
 
 import { parseDate } from '@/core/dateUtils';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import { WizardFormFirstPage } from '@/proposals/update/rounds/WizardFormFirstPage';
 import { getRoundInitialValues } from '@/proposals/utils';
+import { WizardFormContainer } from '@/wizard';
 
 interface EditRoundSubmissionDialogProps {
   resolve: {

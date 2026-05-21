@@ -6,11 +6,11 @@ import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
   props,

@@ -2,11 +2,10 @@ import { ArrowRightIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { adminArrowCustomerMappingsImportLicense } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { Step1SelectCustomer } from './Step1SelectCustomer';
 import { Step2SelectVendorOffering } from './Step2SelectVendorOffering';

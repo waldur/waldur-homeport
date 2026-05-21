@@ -1,10 +1,10 @@
 import { Fragment, useCallback } from 'react';
 
 import { required } from '@/core/validators';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 import {
   FormNodeStorageRow,

@@ -3,9 +3,9 @@ import { FormLabel } from 'react-bootstrap';
 import { loadLocationOptions } from '@/azure/vm/utils';
 import { required } from '@/core/validators';
 import { AsyncSelectField } from '@/form/AsyncSelectField';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 export const FormLocationStep = (props: FormStepProps) => (
   <VStepperFormStepCard

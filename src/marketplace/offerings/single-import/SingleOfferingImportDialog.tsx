@@ -9,10 +9,9 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { StepsList } from '@/marketplace/common/StepsList';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { useWizard } from '@/wizard/useWizard';
+import { WizardStepIndicator, useWizard } from '@/wizard';
 import { getCustomer } from '@/workspace/selectors';
 
 import { WizardButtons } from '../import/WizardButtons';
@@ -295,7 +294,7 @@ export const SingleOfferingImportDialog: FunctionComponent<
                 />
               }
             >
-              <StepsList
+              <WizardStepIndicator
                 steps={SINGLE_OFFERING_IMPORT_STEPS}
                 value={step}
                 onClick={(_, i) =>

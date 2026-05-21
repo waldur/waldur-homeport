@@ -10,8 +10,8 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { FormContainer, SelectField, StringField } from '@/form';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const getOfferings = (call_uuid: string) =>
   getAllPages<RequestedOffering>((page) =>

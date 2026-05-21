@@ -5,11 +5,10 @@ import { ArrowLicense } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { useDiscoverLicenses } from '../../api';
 

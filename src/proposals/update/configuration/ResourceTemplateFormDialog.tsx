@@ -6,8 +6,6 @@ import {
   ProviderRequestedOffering,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { Offering, Plan } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
@@ -15,6 +13,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormSecondPage as Step2Plan } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage';
 import { ResourceRequestWizardFormThirdPage as Step3AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
 import { Call } from '@/proposals/types';
+import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { Step1General } from './Step1General';
 import { Step4FinalConfig } from './Step4FinalConfig';

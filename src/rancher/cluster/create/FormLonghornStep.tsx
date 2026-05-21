@@ -1,13 +1,13 @@
 import { useQueries } from '@tanstack/react-query';
 import { openstackFlavorsList } from 'waldur-js-client';
 
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { Offering } from '@/marketplace/types';
 import { loadVolumeTypes } from '@/openstack/api';
 import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { InstallLonghornField } from './InstallLonghornField';
 

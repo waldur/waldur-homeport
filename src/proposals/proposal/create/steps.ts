@@ -1,8 +1,8 @@
 import { ENV } from '@/core/config';
-import { VStepperFormStep } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { Call } from '@/proposals/types';
+import { VStepperFormStep } from '@/wizard';
 
 import { ProjectDetailsStep } from './ProjectDetailsStep';
 import { ProposalComplianceStepExpanded } from './ProposalComplianceStepExpanded';

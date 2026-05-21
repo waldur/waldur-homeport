@@ -8,8 +8,8 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const ResourceRequestWizardFormFirstPage: FunctionComponent<
   WizardFormStepProps

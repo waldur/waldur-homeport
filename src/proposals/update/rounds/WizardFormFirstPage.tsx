@@ -7,9 +7,8 @@ import { FormContainer, NumberField, SelectField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { TimezoneField } from '@/form/TimezoneField';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const cadenceOptions = [
   { value: 'monthly', label: translate('Monthly') },

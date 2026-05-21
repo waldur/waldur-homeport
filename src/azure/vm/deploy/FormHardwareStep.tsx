@@ -8,10 +8,10 @@ import {
 } from '@/azure/vm/utils';
 import { required } from '@/core/validators';
 import { AsyncSelectField } from '@/form/AsyncSelectField';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 export const FormHardwareStep = (props: FormStepProps) => {
   const { attributes = {} } = useOrderFormData();

@@ -6,9 +6,8 @@ import { required } from '@/core/validators';
 import { FieldError, SelectField } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { ExcelParseResult } from './types';
 import { getMonthOptions, getYearOptions, parseExcelFile } from './utils';

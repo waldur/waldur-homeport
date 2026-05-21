@@ -6,11 +6,10 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { Step1UploadFile } from './Step1UploadFile';
 import { Step2PreviewAndImport } from './Step2PreviewAndImport';

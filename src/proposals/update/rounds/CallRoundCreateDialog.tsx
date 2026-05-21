@@ -8,12 +8,11 @@ import {
 } from 'waldur-js-client';
 
 import { parseDate } from '@/core/dateUtils';
-import { ProgressStep } from '@/core/ProgressSteps';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
+import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';

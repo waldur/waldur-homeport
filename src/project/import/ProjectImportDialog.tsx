@@ -8,17 +8,15 @@ import {
 } from 'waldur-js-client';
 
 import { formatISODate } from '@/core/dateUtils';
-import { ProgressStep } from '@/core/ProgressSteps';
 import { getCustomer } from '@/customer/utils';
 import { translate } from '@/i18n';
-import { StepsList } from '@/marketplace/common/StepsList';
 import { formatOrderForCreate } from '@/marketplace/details/utils';
 import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
 import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
-import { useWizard } from '@/wizard/useWizard';
+import { ProgressStep, WizardStepIndicator, useWizard } from '@/wizard';
 
 import { Step1ImportType } from './Step1ImportType';
 import { Step2SelectOffering } from './Step2SelectOffering';
@@ -307,7 +305,7 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
                 />
               }
             >
-              <StepsList
+              <WizardStepIndicator
                 steps={currentSteps}
                 value={effectiveStep}
                 onClick={(_, i) =>

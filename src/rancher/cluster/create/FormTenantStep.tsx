@@ -7,10 +7,10 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { FormGroup, SelectField } from '@/form';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 export const FormTenantStep = (props: FormStepProps) => {
   const { project } = useOrderFormData();

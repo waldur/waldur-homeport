@@ -4,8 +4,6 @@ import {
   proposalProposalsResourcesSet,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
@@ -15,6 +13,7 @@ import {
   ProposalResourceFormData,
 } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
+import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { ResourceRequestWizardFormFirstPage } from './ResourceRequestWizardFormFirstPage';
 import { ResourceRequestWizardFormSecondPage } from './ResourceRequestWizardFormSecondPage';

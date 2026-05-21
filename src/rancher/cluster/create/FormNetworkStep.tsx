@@ -6,12 +6,12 @@ import { Field, useForm } from 'react-final-form';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { FormGroup, SelectField } from '@/form';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { CompactActionButton } from '@/table/CompactActionButton';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { formatSubnets, useFormTenant } from './utils';
 

@@ -5,7 +5,6 @@ import { Field, useForm } from 'react-final-form';
 import { required } from '@/core/validators';
 import { BoxNumberField } from '@/form/BoxNumberField';
 import { FilterBox } from '@/form/FilterBox';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
@@ -14,6 +13,7 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { Offering } from '@/marketplace/types';
 import { FlavorTable } from '@/openstack/openstack-instance/deploy/FlavorTable';
 import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { LonghornWorkerWarning } from './LonghornWorkerWarning';
 

@@ -11,13 +11,13 @@ import { AccordionCard } from '@/core/AccordionCard';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { VStepperFormStepProps } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { VStepperFormStepProps } from '@/wizard';
 
 import { AddCommentButton } from '../../create-review/AddCommentButton';
 import { FieldReviewComments } from '../../create-review/FieldReviewComments';

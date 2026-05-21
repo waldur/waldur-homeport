@@ -5,13 +5,13 @@ import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
-import { ProgressSteps } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
 import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
 import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ProgressSteps } from '@/wizard';
 
 import { ResourceViewChangeButton } from './ResourceViewChangeButton';
 import {

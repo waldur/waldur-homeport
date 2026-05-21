@@ -7,13 +7,13 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { required } from '@/core/validators';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { BoxRadioField } from '@/marketplace/deploy/steps/BoxRadioField';
 import { StepCardTabs, TabSpec } from '@/marketplace/deploy/steps/StepCardTabs';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { generateSystemImageChoices } from '@/marketplace/deploy/utils';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { VStepperFormStepCard } from '@/wizard';
 
 const tabs: TabSpec[] = [
   { title: translate('Images'), key: 'images' },

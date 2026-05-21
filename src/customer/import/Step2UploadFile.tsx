@@ -3,10 +3,9 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { TemplateUploaderField } from '@/project/import/TemplateUploaderField';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 const MAX_LENGTH = 1000;
 

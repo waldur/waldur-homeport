@@ -2,9 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { supportSettingsAtlassianCurrentSettingsRetrieve } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
-import { Wizard } from '@/wizard';
+import { ProgressStep, Wizard } from '@/wizard';
 
 import { CredentialsStep } from './steps/CredentialsStep';
 import { FieldMappingStep } from './steps/FieldMappingStep';

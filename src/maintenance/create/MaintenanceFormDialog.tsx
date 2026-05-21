@@ -11,11 +11,10 @@ import {
 } from 'waldur-js-client';
 
 import { parseDate } from '@/core/dateUtils';
-import { ProgressStep } from '@/core/ProgressSteps';
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { Wizard } from '@/wizard';
+import { ProgressStep, Wizard } from '@/wizard';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
 import { getMaintenanceOfferings } from '../utils';

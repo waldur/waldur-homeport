@@ -9,7 +9,6 @@ import {
   promotionsCampaignsUpdate,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
 import { required, requiredArray } from '@/core/validators';
 import { NumberField, SelectField, StringField } from '@/form';
 import { AsyncSelectField } from '@/form/AsyncSelectField';
@@ -19,11 +18,11 @@ import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import * as api from '@/marketplace/common/api';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
-import { StepsList } from '@/marketplace/common/StepsList';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
+import { ProgressStep, WizardStepIndicator } from '@/wizard';
 import { getCustomer } from '@/workspace/selectors';
 
 import { CampaignFormData } from './types';
@@ -132,7 +131,7 @@ export const CampaignDialog = ({
             }
           >
             <div className="mb-7">
-              <StepsList
+              <WizardStepIndicator
                 steps={steps}
                 value={steps[step]}
                 onClick={(_, i) =>

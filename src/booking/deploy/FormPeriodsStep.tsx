@@ -8,10 +8,10 @@ import { FieldArray } from 'react-final-form-arrays';
 import { marketplaceBookingsList } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { ActionButton } from '@/table/ActionButton';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { BookingProps } from '../types';
 import {

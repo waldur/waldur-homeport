@@ -7,11 +7,10 @@ import { required } from '@/core/validators';
 import { FieldError } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
 import saveAsCsv from '@/table/exporters/csv';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import templateFile from './offering_users_template.json';
 

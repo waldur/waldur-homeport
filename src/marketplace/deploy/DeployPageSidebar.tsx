@@ -5,10 +5,10 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { FormSteps } from '@/form/FormSteps';
 import { SidebarProps } from '@/form/SidebarProps';
 import { translate } from '@/i18n';
 import { OrderSummary } from '@/marketplace/details/OrderSummary';
+import { FormSteps } from '@/wizard';
 
 import { getCheckoutSummaryComponent } from '../common/registry';
 

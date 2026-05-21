@@ -11,10 +11,10 @@ import {
 import { parseNextPage } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { CompactActionButton } from '@/table/CompactActionButton';
+import { VStepperFormStepCard } from '@/wizard';
 import { getProject } from '@/workspace/selectors';
 
 import { useOrderFormData } from '../selectors';

@@ -1,9 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
-import { Wizard, WizardStepProps } from '@/wizard';
+import { ProgressStep, Wizard, WizardStepProps } from '@/wizard';
 
 import { CredentialsStep } from './steps/CredentialsStep';
 import { InfrastructureStep } from './steps/InfrastructureStep';

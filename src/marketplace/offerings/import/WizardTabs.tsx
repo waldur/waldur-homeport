@@ -1,6 +1,6 @@
 import { ComponentType, createElement, FC } from 'react';
 
-import { ProgressStep } from '@/core/ProgressSteps';
+import { ProgressStep } from '@/wizard';
 
 interface WizardTabsProps {
   steps: ProgressStep[];

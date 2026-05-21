@@ -4,9 +4,8 @@ import { Field, useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { ExcelParseResult } from './types';
 

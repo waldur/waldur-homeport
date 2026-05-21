@@ -2,13 +2,12 @@ import { FC, useMemo } from 'react';
 import { marketplaceProviderOfferingsList, Offering } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step2SelectOfferings: FC<WizardFormStepProps> = (props) => {
   const filter = useMemo(

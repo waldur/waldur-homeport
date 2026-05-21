@@ -3,8 +3,8 @@ import { Field } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { FormGroup, TextField } from '@/form';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';

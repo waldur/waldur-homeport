@@ -2,12 +2,13 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { useForm } from 'react-final-form';
 
-import { ProgressStep } from '@/core/ProgressSteps';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { StepsList } from '@/marketplace/common/StepsList';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ProgressStep } from '@/wizard';
+
+import { WizardStepIndicator } from './WizardStepIndicator';
 
 import '@/wizard/wizard.scss';
 
@@ -96,7 +97,7 @@ export const WizardForm: FC<WizardFormProps> = ({
     >
       <div className="wizard-big wizard-body clearfix">
         {!props.hideStepper && (
-          <StepsList
+          <WizardStepIndicator
             steps={props.steps}
             value={props.steps[props.step]}
             onClick={handleStepClick}

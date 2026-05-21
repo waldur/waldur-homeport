@@ -11,11 +11,11 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { FilterBox } from '@/form/FilterBox';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { BoxRadioField } from '@/marketplace/deploy/steps/BoxRadioField';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { generateSystemImageChoices } from '@/marketplace/deploy/utils';
+import { VStepperFormStepCard } from '@/wizard';
 
 export const FormImageStep = (props: FormStepProps) => {
   const [query, setQuery] = useState('');

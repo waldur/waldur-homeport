@@ -4,7 +4,6 @@ import { vmwareNetworksList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
@@ -12,6 +11,7 @@ import { createFetcher } from '@/table/api';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { VStepperFormStepCard } from '@/wizard';
 
 export const FormNetworkStep = (props: FormStepProps) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();

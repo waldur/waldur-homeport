@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step3SelectProject: FC<WizardFormStepProps> = (props) => {
   const { values } = useFormState({

@@ -4,9 +4,9 @@ import { ProposalReview } from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
 import { FormGroup, TextField } from '@/form';
-import { VStepperFormStepProps } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { isReviewInFinalState } from '@/proposals/utils';
+import { VStepperFormStepProps } from '@/wizard';
 
 import { RateStars } from '../RateStars';
 

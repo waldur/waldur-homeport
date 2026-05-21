@@ -2,12 +2,11 @@ import { FC, useCallback } from 'react';
 import { proposalProtectedCallsOfferingsSet } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { ProgressStep } from '@/core/ProgressSteps';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call, CallOfferingFormData } from '@/proposals/types';
+import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';

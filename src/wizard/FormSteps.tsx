@@ -10,9 +10,9 @@ import { FC, useMemo } from 'react';
 
 import { Tip } from '@/core/Tooltip';
 import { flattenObject } from '@/core/utils';
+import { FieldErrorMessage } from '@/form/FieldError';
 import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
 
-import { FieldErrorMessage } from './FieldError';
 import { VStepperFormStep } from './VStepperFormStep';
 
 export const FormSteps: FC<{

@@ -1,9 +1,6 @@
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import {
-  VStepperFormStep,
-  VStepperFormStepProps,
-} from '@/form/VStepperFormStep';
+import { VStepperFormStep, VStepperFormStepProps } from '@/wizard';
 
 export interface FormStepProps extends VStepperFormStepProps {
   offering: PublicOfferingDetails;

@@ -6,11 +6,10 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { required } from '@/core/validators';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
   const { isLoading, error, data, refetch } = useQuery({

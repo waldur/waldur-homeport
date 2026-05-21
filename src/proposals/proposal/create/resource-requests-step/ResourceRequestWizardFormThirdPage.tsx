@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const ResourceRequestWizardFormThirdPage: FunctionComponent<
   WizardFormStepProps

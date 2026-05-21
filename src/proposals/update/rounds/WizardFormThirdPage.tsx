@@ -5,13 +5,12 @@ import { formatISOWithoutZone } from '@/core/dateUtils';
 import { required } from '@/core/validators';
 import { FormContainer, NumberField, SelectField } from '@/form';
 import { DateTimeField } from '@/form/DateTimeField';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import {
   getRoundAllocationStrategyOptions,
   getRoundAllocationTimeOptions,
 } from '@/proposals/utils';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
   props,

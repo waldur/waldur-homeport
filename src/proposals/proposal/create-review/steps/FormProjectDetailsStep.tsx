@@ -1,6 +1,6 @@
-import { VStepperFormStepProps } from '@/form/VStepperFormStep';
 import { ProjectDetailsSummary } from '@/proposals/proposal/create/ProjectDetailsSummary';
 import { Proposal, ProposalReview } from '@/proposals/types';
+import { VStepperFormStepProps } from '@/wizard';
 
 export const FormProjectDetailsStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params?.proposal;

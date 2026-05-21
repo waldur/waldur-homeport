@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 
 import { Panel } from '@/core/Panel';
 import { FloatingSubmitButton } from '@/form/FloatingSubmitButton';
-import { FormSteps } from '@/form/FormSteps';
 import { SidebarProps } from '@/form/SidebarProps';
 import { TosNotification } from '@/form/TosNotification';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
+import { FormSteps } from '@/wizard';
 
 interface CompletionPageSidebarProps extends SidebarProps {
   saveAsDraft(): void;

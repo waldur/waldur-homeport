@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import { useForm } from 'react-final-form';
 
 import { UI_STALE_TIME } from '@/core/constants';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { loadSecurityGroups } from '@/openstack/api';
 import { FormSecurityGroupsField } from '@/openstack/openstack-instance/deploy/FormSecurityGroupsField';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { useFormTenant } from './utils';
 

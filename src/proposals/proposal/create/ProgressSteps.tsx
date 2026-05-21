@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 
 import { Panel } from '@/core/Panel';
-import { ProgressSteps as MainProgressSteps } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
 import { Proposal } from '@/proposals/types';
+import { ProgressSteps as MainProgressSteps } from '@/wizard';
 
 interface ProgressStepsProps {
   proposal: Proposal;

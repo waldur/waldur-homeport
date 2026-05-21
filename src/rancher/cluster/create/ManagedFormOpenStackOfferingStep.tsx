@@ -6,9 +6,9 @@ import {
 } from 'waldur-js-client';
 
 import { SelectField } from '@/form/SelectField';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 export const ManagedFormOpenStackOfferingStep = (props: FormStepProps) => {
   const { data: offerings, isLoading } = useQuery<

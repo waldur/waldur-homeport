@@ -4,7 +4,6 @@ import { Field } from 'react-final-form';
 import { composeValidators } from '@/core/validators';
 import { FormGroup } from '@/form';
 import { SliderNumberField } from '@/form/SliderNumberField';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import {
   formatIntField,
@@ -12,6 +11,7 @@ import {
   parseIntField,
 } from '@/marketplace/common/utils';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { minOne, useVMwareLimitsLoader } from './utils';
 

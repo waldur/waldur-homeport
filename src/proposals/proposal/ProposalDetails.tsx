@@ -6,10 +6,10 @@ import { AccordionCard } from '@/core/AccordionCard';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
-import { FormSteps } from '@/form/FormSteps';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
+import { FormSteps } from '@/wizard';
 
 import { ProposalUsersListSummary } from '../team/ProposalUsersListSummary';
 import { Proposal, ProposalReview } from '../types';

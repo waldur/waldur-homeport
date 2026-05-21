@@ -4,11 +4,11 @@ import { FieldArray } from 'react-final-form-arrays';
 
 import { isFeatureVisible } from '@/features/connect';
 import { RancherFeatures } from '@/FeaturesEnums';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { ActionButton } from '@/table/ActionButton';
+import { VStepperFormStepCard } from '@/wizard';
 
 import {
   FormNodeStorageRow,

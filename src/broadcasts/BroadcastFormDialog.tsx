@@ -7,13 +7,12 @@ import {
 import { FC, useCallback, useMemo } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { ProgressStep } from '@/core/ProgressSteps';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ActionButton } from '@/table/ActionButton';
-import { Wizard, WizardFooterRenderProps } from '@/wizard';
+import { ProgressStep, Wizard, WizardFooterRenderProps } from '@/wizard';
 
 import { MessageStep, RecipientsStep } from './steps';
 import { BroadcastFormData } from './types';

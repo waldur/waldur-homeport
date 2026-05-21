@@ -5,13 +5,13 @@ import {
   ProtectedRoundRequest,
 } from 'waldur-js-client';
 
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import { WizardFormSecondPage } from '@/proposals/update/rounds/WizardFormSecondPage';
 import { getRoundInitialValues } from '@/proposals/utils';
+import { WizardFormContainer } from '@/wizard';
 
 interface EditRoundReviewDialogProps {
   resolve: {

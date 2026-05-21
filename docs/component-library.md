@@ -19,8 +19,8 @@ The application features a comprehensive set of reusable UI components organized
 
 | Component | Location | Description | Key Features |
 |-----------|----------|-------------|--------------|
-| **WizardForm** | `src/form/WizardForm.tsx` | Multi-step form wizard | Step navigation, validation, progress indicator |
-| **VStepperFormStepCard** | `src/form/VStepperFormStep.tsx` | Card-based form step | Loading state, disabled state with tooltip |
+| **WizardForm** | `src/wizard/WizardForm.tsx` | Multi-step form wizard | Step navigation, validation, progress indicator |
+| **VStepperFormStepCard** | `src/wizard/VStepperFormStep.tsx` | Card-based form step | Loading state, disabled state with tooltip |
 | **AwesomeCheckbox** | `src/core/AwesomeCheckbox.tsx` | Enhanced checkbox | Switch-style, tooltip support |
 | **SelectField** | `src/form/SelectField.tsx` | Dropdown selection | Options, search, validation |
 | **StringField** | `src/form/StringField.tsx` | Text input field | Validation, placeholder, help text |
@@ -286,7 +286,7 @@ export const MyDeleteButton = ({ row, refetch }) => (
 | **CopyToClipboard** | `src/core/CopyToClipboard.tsx` | Copy functionality | Click to copy, success feedback |
 | **CopyToClipboardButton** | `src/core/CopyToClipboardButton.tsx` | Copy button | Icon button, tooltip |
 | **Tooltip** | `src/core/Tooltip.tsx` | Tooltip wrapper | Help text, positioning |
-| **ProgressSteps** | `src/core/ProgressSteps.tsx` | Step indicator | Multi-step processes, progress |
+| **ProgressSteps** | `src/wizard/ProgressSteps.tsx` | Step indicator | Multi-step processes, progress |
 
 ## Component Design Principles
 

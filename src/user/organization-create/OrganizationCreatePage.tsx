@@ -5,13 +5,12 @@ import { Form, FormSpy } from 'react-final-form';
 import { onboardingVerificationsDestroy } from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { ProgressStep } from '@/core/ProgressSteps';
-import { VerticalProgressSteps } from '@/core/VerticalProgressSteps';
 import { SubmitButton } from '@/form';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { ProgressStep, VerticalProgressSteps } from '@/wizard';
 
 import { useAutoValidation, useChecklistCache } from './hooks';
 import { OrganizationCreateStep1 } from './OrganizationCreateStep1';

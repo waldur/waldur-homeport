@@ -14,7 +14,6 @@ import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
 import { FieldError, FormGroup, SelectField, StringField } from '@/form';
 import { Select } from '@/form/themed-select';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { loadFloatingIps, loadSubnets } from '@/openstack/api';
@@ -25,6 +24,7 @@ import {
 import { ActionButton } from '@/table/ActionButton';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { getDefaultFloatingIps, formatSubnet } from '../utils';
 

@@ -9,7 +9,6 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isEmpty } from '@/core/utils';
 import { StringField, TextField, NumberField, SelectField } from '@/form';
 import { DateField } from '@/form/DateField';
-import { VStepperFormStepProps } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
@@ -18,6 +17,7 @@ import {
   evaluateQuestionVisibility,
 } from '@/marketplace-checklist/questionDependencies';
 import { useNotify } from '@/store/notify';
+import { VStepperFormStepProps } from '@/wizard';
 
 import { ComplianceFileUpload } from './ComplianceFileUpload';
 import { QuestionDependencyHint } from './QuestionDependencyHint';

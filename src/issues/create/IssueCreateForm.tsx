@@ -2,13 +2,11 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Form } from 'react-final-form';
 
-import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
-import { StepsList } from '@/marketplace/common/StepsList';
 import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
 import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useWizard } from '@/wizard/useWizard';
+import { ProgressStep, WizardStepIndicator, useWizard } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
 import { useRequestTypes } from '../api';
@@ -111,7 +109,7 @@ export const IssueCreateForm: FunctionComponent<OwnProps> = ({
               }
               className="overflow-hidden"
             >
-              <StepsList
+              <WizardStepIndicator
                 steps={steps}
                 value={step}
                 onClick={setStep}

@@ -16,18 +16,17 @@ import {
   marketplaceCourseAccountsCreateBulk,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
 import { required } from '@/core/validators';
 import { SubmitButton, TextField } from '@/form';
 import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
-import { StepsList } from '@/marketplace/common/StepsList';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
+import { ProgressStep, WizardStepIndicator } from '@/wizard';
 import { getProject } from '@/workspace/selectors';
 
 import templateFile from './course_accounts_template.json';
@@ -307,7 +306,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                   </FormGroup>
                 </Tab>
                 <Tab eventKey="batch" title={translate('Batch import')}>
-                  <StepsList
+                  <WizardStepIndicator
                     steps={stepsBatch}
                     value={stepsBatch[step]}
                     onClick={(_, index) => {

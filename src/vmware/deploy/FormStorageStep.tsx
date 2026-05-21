@@ -4,11 +4,11 @@ import { Field } from 'react-final-form';
 import { composeValidators } from '@/core/validators';
 import { FieldError } from '@/form';
 import { StaticField } from '@/form/StaticField';
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { maxAmount } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { VStepperFormStepCard } from '@/wizard';
 
 import { useVMwareLimitsLoader } from './utils';
 

@@ -13,7 +13,6 @@ import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { deleteDuplicateRecords } from '@/customer/import/utils';
 import { FieldErrorMessage } from '@/form/FieldError';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
@@ -21,6 +20,7 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { OfferingUserRecord, RecordStatus } from './types';
 import { parseOfferingUsersFile, validateOfferingUserCreation } from './utils';

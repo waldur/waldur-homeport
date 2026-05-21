@@ -6,11 +6,10 @@ import { useSelector } from 'react-redux';
 import { remoteWaldurApiImportOffering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { StepsList } from '@/marketplace/common/StepsList';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
-import { useWizard } from '@/wizard/useWizard';
+import { WizardStepIndicator, useWizard } from '@/wizard';
 import { getCustomer } from '@/workspace/selectors';
 
 import { OFFERING_IMPORT_STEPS, OFFERING_IMPORT_TABS } from './tabs';
@@ -98,7 +97,7 @@ export const RemoteOfferingImportDialog = ({ refetch }: { refetch?() }) => {
                 />
               }
             >
-              <StepsList
+              <WizardStepIndicator
                 steps={OFFERING_IMPORT_STEPS}
                 value={step}
                 onClick={setStep}

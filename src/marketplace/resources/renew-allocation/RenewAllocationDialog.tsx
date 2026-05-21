@@ -10,14 +10,13 @@ import {
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
 import {
   getFormLimitParser,
   getFormLimitSerializer,
 } from '@/marketplace/common/registry';
 import { useBatchMutation } from '@/modal/useBatchMutation';
-import { Wizard } from '@/wizard';
+import { ProgressStep, Wizard } from '@/wizard';
 
 import { getMarketplaceResourceUuid } from '../actions/utils';
 

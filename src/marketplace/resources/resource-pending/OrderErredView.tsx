@@ -15,7 +15,6 @@ import {
 
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
-import { ProgressSteps } from '@/core/ProgressSteps';
 import { omit } from '@/core/utils';
 import { translate } from '@/i18n';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
@@ -24,6 +23,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { CompactActionButton } from '@/table/CompactActionButton';
+import { ProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
 const ResourceOrderErrorDialog = lazyComponent(() =>

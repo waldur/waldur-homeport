@@ -1,12 +1,11 @@
 import { FC, useCallback, useState } from 'react';
 import { Customer, CustomerRequest, customersCreate } from 'waldur-js-client';
 
-import { ProgressStep } from '@/core/ProgressSteps';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { cleanObjectEmptyFields } from '@/project/import/utils';
 import { useNotify } from '@/store/notify';
+import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { Step1DownloadTemplate } from './Step1DownloadTemplate';
 import { Step2UploadFile } from './Step2UploadFile';

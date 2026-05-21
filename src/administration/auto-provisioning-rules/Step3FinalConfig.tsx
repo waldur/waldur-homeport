@@ -3,9 +3,8 @@ import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
 import { FormContainer, TextField } from '@/form';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step3FinalConfig: FC<WizardFormStepProps> = (props) => {
   const { submitting } = useFormState({ subscription: { submitting: true } });

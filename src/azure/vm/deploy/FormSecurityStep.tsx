@@ -1,7 +1,7 @@
-import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { FormSSHPublicKeysField } from '@/openstack/openstack-instance/deploy/FormSSHPublicKeysField';
+import { VStepperFormStepCard } from '@/wizard';
 
 export const FormSecurityStep = (props: FormStepProps) => (
   <VStepperFormStepCard

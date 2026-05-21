@@ -7,12 +7,12 @@ import { Badge } from '@/core/Badge';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 import { fetchAllCustomers } from './api';
 import { ColumnMapping, ExcelParseResult, UsageImportRow } from './types';

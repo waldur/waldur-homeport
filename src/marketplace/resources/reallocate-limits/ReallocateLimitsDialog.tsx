@@ -3,14 +3,12 @@ import React, { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
 
 import { STALE_TIME } from '@/core/constants';
-import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
-import { StepsList } from '@/marketplace/common/StepsList';
 import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
 import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { useWizard } from '@/wizard/useWizard';
+import { ProgressStep, WizardStepIndicator, useWizard } from '@/wizard';
 
 import { loadData } from '../change-limits/utils';
 
@@ -169,7 +167,7 @@ export const ReallocateLimitsDialog: FunctionComponent<
               bodyClassName="overflow-hidden border-0 pt-0"
             >
               <div className="pt-4">
-                <StepsList
+                <WizardStepIndicator
                   steps={steps}
                   value={step}
                   onClick={setStep}
