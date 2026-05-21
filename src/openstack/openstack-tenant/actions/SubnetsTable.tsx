@@ -2,15 +2,27 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
+import { OpenStackSubNet } from 'waldur-js-client';
 
+import { SelectField } from '@/form';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
-const SubNetRow = ({ SubNet: subnet, onRemove }) => (
+const getSubnetLabel = (subnet: OpenStackSubNet) =>
+  subnet.name ? `${subnet.name} (${subnet.cidr})` : subnet.cidr;
+
+const SubNetRow = ({ SubNet: subnet, onRemove, sourceSubnets }) => (
   <tr>
     <td>
-      <Field name={`${subnet}.source`} component={InputField} />
+      <Field
+        name={`${subnet}.source`}
+        component={SelectField}
+        options={sourceSubnets}
+        getOptionLabel={getSubnetLabel}
+        getOptionValue={({ cidr }) => cidr}
+        simpleValue
+      />
     </td>
     <td>
       <Field name={`${subnet}.destination`} component={InputField} />
@@ -35,7 +47,10 @@ const SubNetAddButton = ({ onClick }) => (
   />
 );
 
-export const SubnetsTable: FC<{ fields }> = ({ fields }) => {
+export const SubnetsTable: FC<{ fields; sourceSubnets }> = ({
+  fields,
+  sourceSubnets,
+}) => {
   return (
     <>
       {fields.length > 0 ? (
@@ -59,6 +74,7 @@ export const SubnetsTable: FC<{ fields }> = ({ fields }) => {
                 <SubNetRow
                   key={subnet}
                   SubNet={subnet}
+                  sourceSubnets={sourceSubnets}
                   onRemove={() => fields.remove(index)}
                 />
               ))}
