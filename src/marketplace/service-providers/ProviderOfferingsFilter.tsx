@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
+import { Option } from '@/marketplace/common/registry';
 import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
 import {
   OfferingStateFilter,
@@ -23,7 +24,13 @@ export const getFiltersFromParams = (params) => {
   };
 };
 
-export const ProviderOfferingsFilter: FunctionComponent = () => (
+interface ProviderOfferingsFilterProps {
+  offeringTypes?: Option[];
+}
+
+export const ProviderOfferingsFilter: FunctionComponent<
+  ProviderOfferingsFilterProps
+> = ({ offeringTypes }) => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -33,8 +40,16 @@ export const ProviderOfferingsFilter: FunctionComponent = () => (
       <OfferingStateFilter />
     </TableFilterItem>
 
-    <TableFilterItem title={translate('Integration type')} name="offering_type">
-      <OfferingTypeAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+    <TableFilterItem
+      title={translate('Integration type ({count})', {
+        count: offeringTypes?.length ?? 0,
+      })}
+      name="offering_type"
+    >
+      <OfferingTypeAutocomplete
+        reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        options={offeringTypes}
+      />
     </TableFilterItem>
 
     <TableFilterItem

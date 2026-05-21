@@ -4,15 +4,16 @@ import { Props as SelectProps } from 'react-select';
 
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { getOfferingTypes } from '@/marketplace/common/registry';
+import { Option, getOfferingTypes } from '@/marketplace/common/registry';
 
 export const OfferingTypeAutocomplete: FunctionComponent<{
   reactSelectProps?: Partial<SelectProps>;
+  options?: Option[];
 }> = (props) => {
   const renderComponent = (fieldProps) => (
     <Select
       placeholder={translate('Select integration type...')}
-      options={getOfferingTypes()}
+      options={props.options ?? getOfferingTypes()}
       value={fieldProps.input.value}
       onChange={(value) => fieldProps.input.onChange(value)}
       isClearable={true}
