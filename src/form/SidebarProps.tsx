@@ -1,4 +1,4 @@
-import { VStepperFormStep } from './VStepperFormStep';
+import { VStepperFormStep } from '@/wizard';
 
 export interface SidebarProps {
   steps?: VStepperFormStep[];
