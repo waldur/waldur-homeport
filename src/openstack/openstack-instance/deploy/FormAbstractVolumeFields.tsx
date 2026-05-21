@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { get } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field } from 'react-final-form';
+import { Field, useForm } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { composeValidators } from '@/core/validators';
@@ -66,7 +66,7 @@ export const FormAbstractVolumeFields = (
     OpenstackFeatures.hide_volume_type_selector,
   );
 
-  const { change } = props;
+  const { change } = useForm();
 
   useEffect(() => {
     if (hideVolumeTypeSelector) {

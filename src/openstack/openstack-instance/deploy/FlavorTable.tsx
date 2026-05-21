@@ -3,7 +3,7 @@ import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatFilesize } from '@/core/utils';
-import { required } from '@/core/validators';
+import { composeValidators, required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { DeployFormData } from '@/marketplace/common/types';
 import { Offering } from '@/marketplace/types';
@@ -126,7 +126,7 @@ export const FlavorTable = ({
       hoverable
       fieldType="radio"
       fieldName={fieldName}
-      validate={[required, exceeds]}
+      validate={composeValidators(required, exceeds)}
       initialPageSize={PAGE_SIZE_FULL * 5}
     />
   );

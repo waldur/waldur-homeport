@@ -253,7 +253,7 @@ export interface TableProps<RowType = any> extends TableState {
   filter?: Record<string, any>;
   fieldType?: 'checkbox' | 'radio';
   fieldName?: string;
-  validate?: FieldValidator<any> | FieldValidator<any>[];
+  validate?: FieldValidator<any>;
   footer?: React.ReactNode;
   /** If enabled, set `keys` and `id` for each column. Also pass the required keys separately. */
   hasOptionalColumns?: boolean;
