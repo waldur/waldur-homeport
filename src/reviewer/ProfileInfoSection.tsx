@@ -8,7 +8,7 @@ import { OrcidLogo } from '@/core/OrcidLogo';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 import { useUser } from '@/workspace/hooks';
 
 import { ConnectOrcidAction } from './ConnectOrcidAction';
@@ -90,13 +90,13 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
           <ConnectOrcidAction profile={profile} />
         )}
         {isStaff && (
-          <ActionButton
+          <CompactActionButton
             action={() =>
               handleEditField('orcid_id', translate('ORCID iD'), true)
             }
             iconNode={<PencilSimpleIcon weight="bold" />}
             variant="secondary"
-            className="btn-sm btn-icon"
+            className="btn-icon"
           />
         )}
       </div>
@@ -104,65 +104,61 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
   };
 
   return (
-    <FormTable.Card className="card-bordered">
-      <FormTable>
-        <FormTable.Item
-          label={translate('ORCID iD')}
-          value={renderOrcidValue()}
-          actions={renderOrcidActions()}
-        />
-        <FormTable.Item
-          label={translate('Biography')}
-          value={
-            profile.biography || (
-              <span className="text-muted">{translate('Not provided')}</span>
-            )
-          }
-          actions={
-            <ActionButton
-              action={() =>
-                handleEditField('biography', translate('Biography'))
-              }
-              iconNode={<PencilSimpleIcon weight="bold" />}
-              variant="secondary"
-              className="btn-sm btn-icon"
-            />
-          }
-        />
-        <FormTable.Item
-          label={translate('Alternative names')}
-          value={
-            (profile.alternative_names as string) || (
-              <span className="text-muted">{translate('Not provided')}</span>
-            )
-          }
-          actions={
-            <ActionButton
-              action={() =>
-                handleEditField(
-                  'alternative_names',
-                  translate('Alternative names'),
-                )
-              }
-              iconNode={<PencilSimpleIcon weight="bold" />}
-              variant="secondary"
-              className="btn-sm btn-icon"
-            />
-          }
-        />
-        <FormTable.Item
-          label={translate('Reviews completed')}
-          value={profile.stats?.total_reviews_completed ?? 0}
-        />
-        {profile.stats?.average_review_time_days && (
-          <FormTable.Item
-            label={translate('Average review time')}
-            value={translate('{days} days', {
-              days: profile.stats.average_review_time_days.toFixed(1),
-            })}
+    <FormTable bordered={false}>
+      <FormTable.Item
+        label={translate('ORCID iD')}
+        value={renderOrcidValue()}
+        actions={renderOrcidActions()}
+      />
+      <FormTable.Item
+        label={translate('Biography')}
+        value={
+          profile.biography || (
+            <span className="text-muted">{translate('Not provided')}</span>
+          )
+        }
+        actions={
+          <CompactActionButton
+            action={() => handleEditField('biography', translate('Biography'))}
+            iconNode={<PencilSimpleIcon weight="bold" />}
+            variant="secondary"
+            className="btn-icon"
           />
-        )}
-      </FormTable>
-    </FormTable.Card>
+        }
+      />
+      <FormTable.Item
+        label={translate('Alternative names')}
+        value={
+          (profile.alternative_names as string) || (
+            <span className="text-muted">{translate('Not provided')}</span>
+          )
+        }
+        actions={
+          <CompactActionButton
+            action={() =>
+              handleEditField(
+                'alternative_names',
+                translate('Alternative names'),
+              )
+            }
+            iconNode={<PencilSimpleIcon weight="bold" />}
+            variant="secondary"
+            className="btn-icon"
+          />
+        }
+      />
+      <FormTable.Item
+        label={translate('Reviews completed')}
+        value={profile.stats?.total_reviews_completed ?? 0}
+      />
+      {profile.stats?.average_review_time_days && (
+        <FormTable.Item
+          label={translate('Average review time')}
+          value={translate('{days} days', {
+            days: profile.stats.average_review_time_days.toFixed(1),
+          })}
+        />
+      )}
+    </FormTable>
   );
 };

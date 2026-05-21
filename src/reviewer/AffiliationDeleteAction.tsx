@@ -3,7 +3,7 @@ import { nestedReviewerProfileAffiliationsDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const AffiliationDeleteAction: FunctionComponent<{
   row?;
@@ -26,7 +26,7 @@ export const AffiliationDeleteAction: FunctionComponent<{
   });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
       action={mutate}
       disabled={isPending}

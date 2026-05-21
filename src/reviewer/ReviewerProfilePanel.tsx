@@ -124,24 +124,12 @@ export const ReviewerProfilePanel = ({
 
   return (
     <Card className="card-bordered">
-      <Card.Header className="border-bottom-0 pt-4 pb-0">
+      <Card.Header className="border-bottom-0 pt-4">
         <div className="d-flex flex-column flex-lg-row w-100 gap-4">
           {/* Left side: Title, refresh, and status badges */}
           <div className="d-flex flex-column">
             <div className="d-flex align-items-center gap-2 mb-2">
               <h3 className="mb-0">{translate('Reviewer profile')}</h3>
-              <button
-                type="button"
-                className="btn btn-icon btn-text-secondary"
-                onClick={handleRefresh}
-                disabled={isRefreshing}
-              >
-                <ArrowsClockwiseIcon
-                  size={20}
-                  weight="bold"
-                  className={isRefreshing ? 'animation-spin' : ''}
-                />
-              </button>
               {profile.is_published ? (
                 <Badge variant="success" outline>
                   {translate('Published')}
@@ -151,9 +139,21 @@ export const ReviewerProfilePanel = ({
                   {translate('Not published')}
                 </Badge>
               )}
+              <button
+                type="button"
+                className="btn btn-icon btn-sm btn-text-secondary"
+                onClick={handleRefresh}
+                disabled={isRefreshing}
+              >
+                <ArrowsClockwiseIcon
+                  size={16}
+                  weight="bold"
+                  className={isRefreshing ? 'animation-spin' : ''}
+                />
+              </button>
             </div>
             {profile.is_published && profile.published_at && (
-              <span className="text-muted fs-7">
+              <span className="text-muted fw-normal fs-7">
                 {translate('Published {date}', {
                   date: formatDateTime(profile.published_at),
                 })}
@@ -183,9 +183,13 @@ export const ReviewerProfilePanel = ({
             )}
           </div>
         </div>
-
-        {/* Tabs navigation */}
-        <Nav variant="tabs" className="nav-line-tabs mt-4 border-bottom-0">
+      </Card.Header>
+      {/* Tabs navigation */}
+      <Card.Header className="border-bottom align-items-stretch py-0 min-h-auto">
+        <Nav
+          variant="tabs"
+          className="nav-line-tabs flex-nowrap mx-0 border-0 pt-4 pb-2"
+        >
           {tabs.map((tab) => (
             <Nav.Item key={tab.key}>
               <Nav.Link
@@ -199,7 +203,7 @@ export const ReviewerProfilePanel = ({
           ))}
         </Nav>
       </Card.Header>
-      <Card.Body className={activeTab === 'info' ? 'pt-4' : 'p-0'}>
+      <Card.Body className={activeTab === 'info' ? 'pt-4' : 'pt-0 pb-0'}>
         {children}
       </Card.Body>
     </Card>

@@ -1,3 +1,4 @@
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
@@ -26,6 +27,7 @@ import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 import { getProject } from '@/workspace/selectors';
 
@@ -176,8 +178,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                 title={translate('Description')}
                 actions={
                   canEditProject && (
-                    <EditButton
-                      onClick={handleEditDescription}
+                    <ActionButton
+                      title={translate('Edit')}
+                      iconNode={<PencilSimpleIcon weight="bold" />}
+                      iconRight
+                      action={handleEditDescription}
                       tooltip={translate('Edit description')}
                     />
                   )

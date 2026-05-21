@@ -142,7 +142,7 @@ export const ProjectMembershipRestrictions: FC<
           action={openOrganizationRestrictionsDialog}
           title={translate('Organization restrictions')}
           iconNode={<BuildingsIcon weight="bold" />}
-          variant="tertiary"
+          variant="secondary"
         />
       }
     >

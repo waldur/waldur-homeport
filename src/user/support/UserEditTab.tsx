@@ -41,9 +41,11 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
       <Card className="card-bordered mb-7">
         <Card.Header>
           <Card.Title>
-            {isSelf
-              ? translate('Personal information')
-              : translate('Profile settings')}
+            <h3 className="mb-0">
+              {isSelf
+                ? translate('Personal information')
+                : translate('Profile settings')}
+            </h3>
           </Card.Title>
           <div className="card-toolbar gap-4">
             <IdentityProviderIndicator user={user} showManagementLink={false} />

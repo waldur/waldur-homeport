@@ -5,20 +5,21 @@
  * using UsageReportVis / StorageReportVis.
  */
 
-/* eslint-disable waldur-custom/no-direct-bootstrap-button */
-
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Button, Card, Container, Form } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import {
   CachedProjectStorageReport as StorageReportApiItem,
   CachedProjectUsageReport as UsageReportApiItem,
 } from 'waldur-js-client';
 
+import { IconButton } from '@/core/buttons/IconButton';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 import { getProject } from '@/workspace/selectors';
 
 import {
@@ -201,127 +202,128 @@ export const OpenPortalReportsTab: FC = () => {
     !isLoading && project ? getCacheAge(`project-usage-${project.uuid}`) : null;
 
   return (
-    <Container fluid className="py-4">
-      <div className="d-flex align-items-center gap-3 mb-4">
-        <h4 className="mb-0">{translate('Usage Report')}</h4>
+    <Card className="card-bordered">
+      <Card.Header className="border-bottom">
+        <div className="d-flex align-items-center gap-3 flex-wrap w-100">
+          <div className="d-flex align-items-center me-2">
+            <span className="h3 mb-0">{translate('Usage Report')}</span>
+            <IconButton
+              iconNode={<ArrowsClockwiseIcon weight="bold" />}
+              tooltip={translate('Refresh')}
+              variant="text-secondary"
+              onClick={() => {
+                clearMappingCache();
+                if (project) {
+                  clearCached(
+                    `project-usage-${project.uuid}`,
+                    `project-storage-${project.uuid}`,
+                  );
+                }
+                refetchUsage();
+                refetchStorage();
+              }}
+            />
+          </div>
 
-        {/* Resource / destination picker */}
-        {allResources.length > 1 && (
-          <Form.Select
-            size="sm"
-            style={{ width: 'auto' }}
-            value={activeResource}
-            onChange={(e) => {
-              setSelectedResource(e.target.value);
-              setSelectedMonth('all');
-            }}
-          >
-            {allResources.map((r) => (
-              <option key={r} value={r}>
-                {nameMaps?.offering?.[r] ?? r}
-              </option>
-            ))}
-          </Form.Select>
-        )}
+          {/* Resource / destination picker */}
+          {allResources.length > 1 && (
+            <Form.Select
+              size="lg"
+              style={{ width: 'auto' }}
+              value={activeResource}
+              onChange={(e) => {
+                setSelectedResource(e.target.value);
+                setSelectedMonth('all');
+              }}
+            >
+              {allResources.map((r) => (
+                <option key={r} value={r}>
+                  {nameMaps?.offering?.[r] ?? r}
+                </option>
+              ))}
+            </Form.Select>
+          )}
 
-        {/* Month picker */}
-        {allMonths.length > 0 && (
-          <Form.Select
-            size="sm"
-            style={{ width: 'auto' }}
-            value={activeMonth}
-            onChange={(e) => setSelectedMonth(e.target.value)}
-          >
-            <option value="all">{translate('All time')}</option>
-            {allMonths.map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </Form.Select>
-        )}
+          {/* Month picker */}
+          {allMonths.length > 0 && (
+            <Form.Select
+              size="lg"
+              style={{ width: 'auto' }}
+              value={activeMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              <option value="all">{translate('All time')}</option>
+              {allMonths.map((m) => (
+                <option key={m} value={m}>
+                  {m}
+                </option>
+              ))}
+            </Form.Select>
+          )}
 
-        <div className="ms-auto d-flex align-items-center gap-2">
           {reportsCacheAge && (
-            <span className="text-muted small">
+            <span className="text-muted small ms-auto">
               {translate('Cached {age}', {
                 age: formatCacheAge(reportsCacheAge),
               })}
             </span>
           )}
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => {
-              clearMappingCache();
-              if (project) {
-                clearCached(
-                  `project-usage-${project.uuid}`,
-                  `project-storage-${project.uuid}`,
-                );
-              }
-              refetchUsage();
-              refetchStorage();
-            }}
-          >
-            {translate('Refresh')}
-          </Button>
         </div>
-      </div>
+      </Card.Header>
+      <Card.Body>
+        {isLoading && <LoadingSpinner />}
 
-      {isLoading && <LoadingSpinner />}
+        {usageError && (
+          <LoadingErred
+            message={translate('Failed to load usage reports')}
+            loadData={refetchUsage}
+          />
+        )}
 
-      {usageError && (
-        <LoadingErred
-          message={translate('Failed to load usage reports')}
-          loadData={refetchUsage}
-        />
-      )}
+        {storageError && (
+          <LoadingErred
+            message={translate('Failed to load storage reports')}
+            loadData={refetchStorage}
+          />
+        )}
 
-      {storageError && (
-        <LoadingErred
-          message={translate('Failed to load storage reports')}
-          loadData={refetchStorage}
-        />
-      )}
+        {!isLoading &&
+          !usageError &&
+          !storageError &&
+          allMonths.length === 0 && (
+            <NoResult
+              title={translate('No usage reports yet')}
+              message={translate(
+                'No OpenPortal reports have been generated for this project.',
+              )}
+              noAction
+            />
+          )}
 
-      {!isLoading && !usageError && !storageError && allMonths.length === 0 && (
-        <div className="text-muted py-4 text-center">
-          {translate('No OpenPortal reports found for this project.')}
-        </div>
-      )}
-
-      {/* Usage chart */}
-      {activeUsage.length > 0 && nameMaps !== undefined && (
-        <Card className="mb-4">
-          <Card.Header className="fw-semibold">
-            {translate('Usage')}
-          </Card.Header>
-          <Card.Body>
+        {/* Usage chart */}
+        {activeUsage.length > 0 && nameMaps !== undefined && (
+          <div className="mb-6">
+            <h4 className="fw-semibold mb-3">{translate('Usage')}</h4>
             <UsageReportVis
               reports={activeUsage}
               height="400px"
               nameMaps={nameMaps}
             />
-          </Card.Body>
-        </Card>
-      )}
+          </div>
+        )}
 
-      {/* Storage chart */}
-      {activeStorage.length > 0 && nameMaps !== undefined && (
-        <Card className="mb-4">
-          <Card.Header className="fw-semibold">
-            {translate('Storage')}
-          </Card.Header>
-          <Card.Body>
+        {/* Storage chart */}
+        {activeStorage.length > 0 && nameMaps !== undefined && (
+          <div>
+            <h4 className="fw-semibold mb-3">{translate('Storage')}</h4>
             <StorageReportVis
               reports={activeStorage}
               height="360px"
               nameMaps={nameMaps}
             />
-          </Card.Body>
-        </Card>
-      )}
-    </Container>
+          </div>
+        )}
+      </Card.Body>
+    </Card>
   );
 };

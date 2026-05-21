@@ -26,6 +26,39 @@ import { ScienceDomainGroup } from '../create/ScienceDomainGroup';
 import { StartDateGroup } from '../create/StartDateGroup';
 import { EditProjectProps } from '../types';
 
+const getFieldTitle = (key: string): string => {
+  switch (key) {
+    case 'customer_name':
+      return translate('Project owner');
+    case 'name':
+      return translate('Name');
+    case 'description':
+      return translate('Description');
+    case 'is_industry':
+      return translate('Industry');
+    case 'start_date':
+      return translate('Start date');
+    case 'end_date':
+      return translate('End date');
+    case 'oecd_fos_2007_code':
+      return translate('OECD code');
+    case 'backend_id':
+      return translate('Backend ID');
+    case 'slug':
+      return translate('Slug');
+    case 'staff_notes':
+      return translate('Staff notes');
+    case 'kind':
+      return translate('Project kind');
+    case 'max_service_accounts':
+      return translate('Maximum number of service accounts');
+    case 'grace_period_days':
+      return translate('Grace period (days)');
+    default:
+      return translate('Edit');
+  }
+};
+
 const formatValue = (key, value) => {
   if (['', undefined, null].includes(value)) {
     // For markdown fields, return empty string instead of null
@@ -82,7 +115,7 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
       {({ invalid, handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            headerLess
+            title={getFieldTitle(resolve.name)}
             footer={
               <>
                 <CloseDialogButton className="flex-equal" />
@@ -110,9 +143,7 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
                 <NameGroup customer={customer} />
               )
             ) : resolve.name === 'description' ? (
-              <FormGroup label={translate('Description')}>
-                <Field component={MarkdownEditor as any} name="description" />
-              </FormGroup>
+              <Field component={MarkdownEditor as any} name="description" />
             ) : resolve.name === 'is_industry' ? (
               <IndustryGroup />
             ) : resolve.name === 'start_date' ? (
