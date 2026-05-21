@@ -1,14 +1,13 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { projectCreditsDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 export const ProjectDeleteCreditButton = ({ row, refetch }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const deleteMutation = useManagedMutation<any, any, void>({
     mutationFn: () => projectCreditsDestroy({ path: { uuid: row.uuid } }),

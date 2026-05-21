@@ -1,9 +1,7 @@
-import { useSelector } from 'react-redux';
-
 import { ServiceAccountsList } from '@/customer/service-accounts/ServiceAccountsList';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 export const ProjectServiceAccountsList = () => {
-  const project = useSelector(getProject);
+  const project = useProject();
   return <ServiceAccountsList context="project" scope={project} />;
 };

@@ -1,6 +1,5 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import {
   customersDeleteUser,
   CustomerUser,
@@ -12,8 +11,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 interface UserRemoveButtonProps {
   customer: CustomerUser;
@@ -25,7 +23,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   refetch,
 }) => {
   const currentUser = useUser();
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: async () => {

@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   Project,
   projectsAddUser,
@@ -15,7 +14,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { GenericPermission, Role } from '@/permissions/types';
 import { getProjectRoles } from '@/permissions/utils';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
 import { RoleGroup } from './RoleGroup';
@@ -75,7 +74,7 @@ const savePermissions = async (
 };
 
 export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
-  const currentProject = useSelector(getProject);
+  const currentProject = useProject();
 
   const project = resolve.project || currentProject;
 

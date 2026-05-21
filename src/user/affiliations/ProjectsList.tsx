@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { Project, projectsList } from 'waldur-js-client';
 
@@ -29,7 +28,7 @@ import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
 import { Column, DisplayMode } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 import { ProjectsListFilter } from './ProjectsListFilter';
@@ -41,7 +40,7 @@ const ProjectsListTable = () => {
 
   const { values } = useFormState();
   const stateFilter = values;
-  const user = useSelector(getUser);
+  const user = useUser();
 
   // Sync filter form values to URL when they change
   useEffect(() => {

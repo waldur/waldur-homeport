@@ -1,14 +1,12 @@
 import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { translate } from '@/i18n';
 import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { IBreadcrumbItem } from '@/navigation/types';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
 import { ProjectProfile } from './ProjectProfile';
@@ -16,7 +14,7 @@ import { canEditProject } from './utils';
 
 const PageHero = ({ project }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const canEdit = canEditProject(user, { customer, project });
 
@@ -55,7 +53,7 @@ const PageHero = ({ project }) => {
 };
 
 const ProjectContainerWithHero = (props) => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   usePageHero(<PageHero project={project} />, [project]);
 
@@ -100,7 +98,7 @@ const ProjectContainerWithHero = (props) => {
 
 export const ProjectContainer = (props) => {
   const { state } = useCurrentStateAndParams();
-  const project = useSelector(getProject);
+  const project = useProject();
 
   if (!project) {
     return null;

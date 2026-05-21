@@ -1,6 +1,5 @@
 import { useMemo, useEffect, useState } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   openportalProjectTemplateCreate,
   openportalProjectTemplatePartialUpdate,
@@ -14,8 +13,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { getCustomerURL } from '../utils';
 
@@ -69,7 +67,7 @@ export const ProjectTemplateDialog: React.FC<ProjectTemplateDialogProps> = ({
 }) => {
   const isEdit = !!resolve.uuid;
 
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
   const user = useUser();
 
   const [initialData, setInitialData] =

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import { BookingStateField } from '@/booking/BookingStateField';
 import { BookingResource } from '@/booking/types';
@@ -7,7 +6,7 @@ import { parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { BOOKING_CREATING } from '../constants';
 
@@ -25,7 +24,7 @@ interface OwnProps {
 export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
   const resource = props.resolve.bookingResource;
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const isServiceProviderContext =
     resource.provider_uuid === customer.uuid ||
     props.resolve.fromServiceProvider;

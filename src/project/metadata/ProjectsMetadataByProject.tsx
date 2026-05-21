@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { customersProjectMetadataComplianceDetailsList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -7,14 +6,14 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ProjectsTableActions } from '../ProjectsTableActions';
 
 import { MetadataByProjectExpandableRow } from './MetadataByProjectExpandableRow';
 
 export const ProjectsMetadataByProject: FC<TableWithPortal> = ({ portal }) => {
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
 
   const tableProps = useTable({
     table: 'ProjectsMetadataByProject-' + currentCustomer.uuid,

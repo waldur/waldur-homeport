@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   BillingUnit,
   marketplaceProviderOfferingsCreate,
@@ -21,7 +20,7 @@ import { getCreatableOfferings } from '@/marketplace/common/registry';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { OfferingCreateFormData } from './types';
 
@@ -45,7 +44,7 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
     },
   });
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const router = useRouter();
 
   const saveOfferingMutation = useManagedMutation<

@@ -15,12 +15,8 @@ import { useSelector } from 'react-redux';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { isDescendantOf } from '@/navigation/useTabs';
-import { useUser } from '@/workspace/hooks';
-import {
-  getCustomer,
-  getProject,
-  isStaffOrSupport,
-} from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 type Permission = 'allowed' | 'limited' | 'restricted' | 'custom';
 interface PermissionMessage {
@@ -122,8 +118,8 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
 
   const hasAllAccess = useSelector(isStaffOrSupport);
   const user = useUser();
-  const project = useSelector(getProject);
-  const customer = useSelector(getCustomer);
+  const project = useProject();
+  const customer = useCustomer();
   const { state, params } = useCurrentStateAndParams();
 
   const [hasPermissionView, setHasPermissionView] = useState(false);

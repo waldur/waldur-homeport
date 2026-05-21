@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { marketplaceServiceProvidersDeleteUser } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -9,8 +8,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { GenericPermission } from '@/permissions/types';
 import { getPermissionDisabledTooltip } from '@/permissions/utils';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 interface UserRemoveButtonProps {
   user: GenericPermission;
@@ -22,7 +20,7 @@ export const UserRemoveButton: FC<UserRemoveButtonProps> = ({
   refetch,
 }) => {
   const currentUser = useUser();
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>

@@ -34,8 +34,7 @@ import { Role, RoleType } from '@/permissions/types';
 import { useNotify } from '@/store/notify';
 import { getCurrentUser } from '@/user/UsersService';
 import { setCurrentUser } from '@/workspace/actions';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 import { Project, User } from '@/workspace/types';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
@@ -116,8 +115,8 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   const { showSuccess, showErrorResponse } = useNotify();
 
   const currentUser = useUser() as User;
-  const currentProject = useSelector(getProject);
-  const currentCustomer = useSelector(getCustomer);
+  const currentProject = useProject();
+  const currentCustomer = useCustomer();
   const hasCustomerPermission = useSelector(hasCurrentCustomerPermission);
 
   const resolvedProject = project || currentProject;

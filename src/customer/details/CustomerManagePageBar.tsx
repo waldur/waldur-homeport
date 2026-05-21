@@ -1,9 +1,7 @@
-import { useSelector } from 'react-redux';
-
 import { translate } from '@/i18n';
 import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
 import { VersionHistoryButton } from '@/version-history';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 const tabs = [
   {
@@ -29,7 +27,7 @@ const tabs = [
 ];
 
 export const CustomerManagePageBar = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   return (
     <PageBarTabs

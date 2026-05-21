@@ -1,7 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Alert } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
 import { AccordionCard } from '@/core/AccordionCard';
@@ -12,7 +11,7 @@ import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { CompactActionButton } from '@/table/CompactActionButton';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { FormGroup } from '../offerings/FormGroup';
 
@@ -42,7 +41,7 @@ interface SingleDatacenterK8sConfigurationFormProps extends FormField {
 export const SingleDatacenterK8sConfigurationForm: React.FC<
   SingleDatacenterK8sConfigurationFormProps
 > = ({ field, input }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   // Extract default configurations from the field
   const defaultConfigs: K8sDefaultConfiguration | undefined = (field as any)

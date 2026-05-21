@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   Project,
   projectsListUsersList,
@@ -16,7 +15,7 @@ import {
   ProjectsListUsersFilterFormId,
 } from '@/table/generated/ProjectsListUsersFilter';
 import { useTable } from '@/table/useTable';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import { ProjectPermisionActions } from './ProjectPermisionActions';
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';
@@ -63,7 +62,7 @@ const ProjectUsersListTable = ({
 
   const filter = useMemo(() => selectProjectsListUsersFilter(values), [values]);
 
-  const currentProject = useSelector(getProject);
+  const currentProject = useProject();
 
   const _project = project || currentProject;
 

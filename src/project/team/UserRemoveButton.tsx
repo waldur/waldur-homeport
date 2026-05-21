@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { projectsDeleteUser } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { GenericPermission } from '@/permissions/types';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 interface UserRemoveButtonProps {
   row: GenericPermission;
@@ -20,7 +19,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   refetch,
   projectUuid,
 }) => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const projectId = projectUuid || project?.uuid;
 

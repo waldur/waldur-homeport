@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import {
   marketplaceCustomerServiceAccountsList,
   marketplaceProjectServiceAccountsList,
@@ -20,7 +19,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { OrganizationLink } from '../list/OrganizationLink';
 
@@ -162,6 +161,6 @@ export const ServiceAccountsList: FC<ServiceAccountsProps> = ({
 };
 
 export const OrganizationServiceAccountsList = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   return <ServiceAccountsList context="customer" scope={customer} />;
 };

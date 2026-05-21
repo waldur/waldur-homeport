@@ -1,13 +1,11 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Invitation, userInvitationsCancel } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { InvitationPolicyService } from './actions/InvitationPolicyService';
 
@@ -54,8 +52,8 @@ const showTooltip = (user, customer, project, rows) => {
 
 export const MultiCancelAction = ({ rows, refetch }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
-  const project = useSelector(getProject);
+  const customer = useCustomer();
+  const project = useProject();
 
   const disabled = useMemo(() => {
     return isAnyDisabled(user, customer, project, rows);

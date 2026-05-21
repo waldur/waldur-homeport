@@ -1,6 +1,6 @@
 import { pick } from 'lodash-es';
 import { Field, Form } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { projectsPartialUpdate } from 'waldur-js-client';
 
 import { formatISODate } from '@/core/dateUtils';
@@ -15,7 +15,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentProject } from '@/workspace/actions';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { EndDateGroup } from '../create/EndDateGroup';
 import { IndustryGroup } from '../create/IndustryGroup';
@@ -83,7 +83,7 @@ const formatValue = (key, value) => {
 export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
   const dispatch = useDispatch();
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { loading: loadingProjects } = useCustomerProjects();
 
   const updateMutation = useManagedMutation<any, any, FormData>({

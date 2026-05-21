@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { marketplaceProviderOfferingsDeleteUser } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -7,8 +6,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 interface OfferingPermissionRemoveButtonProps {
   row: any;
@@ -19,7 +17,7 @@ export const OfferingPermissionRemoveButton: React.FC<
   OfferingPermissionRemoveButtonProps
 > = (props) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const canDeletePermission = hasPermission(user, {
     permission: PermissionEnum.DELETE_OFFERING_PERMISSION,

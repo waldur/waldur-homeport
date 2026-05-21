@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
+import { useCustomer } from '@/workspace/hooks';
 import {
-  getCustomer,
   isStaff as isStaffSelector,
   isSupport as isSupportSelector,
   isOwner as isOwnerSelector,
@@ -12,7 +12,7 @@ import { PaymentProfileDetails } from './PaymentProfileDetails';
 import { PaymentProfileList } from './PaymentProfileList';
 
 export const PaymentProfilesPanel: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const isStaff = useSelector(isStaffSelector);
   const isSupport = useSelector(isSupportSelector);
   const isOwner = useSelector(isOwnerSelector);

@@ -2,7 +2,6 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   marketplaceOfferingProfilesList,
   marketplaceProviderOfferingsSetProfile,
@@ -15,7 +14,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { FormGroup } from '../../FormGroup';
 
@@ -101,7 +100,7 @@ export const EditOfferingProfileButton: FC<{
   refetch();
 }> = ({ offering, refetch }) => {
   const { openDialog } = useModal();
-  const user = useSelector(getUser);
+  const user = useUser();
   if (!user?.is_staff) {
     return null;
   }

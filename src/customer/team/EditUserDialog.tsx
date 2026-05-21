@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   customersAddUser,
   customersDeleteUser,
@@ -17,7 +16,7 @@ import { Role } from '@/permissions/types';
 import { getCustomerRoles } from '@/permissions/utils';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@/project/team/RoleGroup';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { UserGroup } from './UserGroup';
@@ -75,7 +74,7 @@ const savePermissions = async (
 };
 
 export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
 
   const initialValues = {
     role: getCustomerRoles().find(

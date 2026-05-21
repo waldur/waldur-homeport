@@ -17,10 +17,9 @@ import { IBreadcrumbItem } from '@/navigation/types';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
+import { useUser, useCustomer } from '@/workspace/hooks';
 import {
   checkIsServiceManager,
-  getCustomer,
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@/workspace/selectors';
 
@@ -138,7 +137,7 @@ const PageHero = ({ customer }) => {
 };
 
 const WithHero = (props) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   if (!customer) {
     return null;

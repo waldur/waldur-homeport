@@ -9,10 +9,11 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { getCustomer, isStaff } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
+import { isStaff } from '@/workspace/selectors';
 
 export const CustomerRemovePanel: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const canDeleteCustomer = useSelector(isStaff);
   const { showError } = useNotify();
   const dispatch = useDispatch();

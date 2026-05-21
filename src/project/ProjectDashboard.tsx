@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
 import { count, parseSelectData } from '@/core/api';
@@ -28,8 +27,7 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { useUser } from '@/workspace/hooks';
-import { getProject } from '@/workspace/selectors';
+import { useUser, useProject } from '@/workspace/hooks';
 
 import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
 import { ExperimentalPolicyWatchSection } from './policy-watch/ExperimentalPolicyWatchSection';
@@ -51,7 +49,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   const { openDialog } = useModal();
   const user = useUser();
   const userFromSelector = useUser();
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const router = useRouter();
   const goToUsers = () => router.stateService.go('project-users');

@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 import {
   customerPermissionsReviewsClose,
   projectPermissionsReviewsClose,
@@ -12,7 +11,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ProjectUsersList } from '@/project/team/ProjectUsersList';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 interface PendingMembershipReviewDialogProps {
   resolve: { reviewId: string; scope: 'customer' | 'project' };
@@ -21,7 +20,7 @@ interface PendingMembershipReviewDialogProps {
 export const PendingMembershipReviewDialog: FunctionComponent<
   PendingMembershipReviewDialogProps
 > = ({ resolve: { reviewId, scope } }) => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const closeReviewMutation = useManagedMutation<any, any, void>({
     mutationFn: () => {

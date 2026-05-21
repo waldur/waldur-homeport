@@ -1,18 +1,17 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { SummaryTable } from '@/marketplace/details/OrderSummary';
 import { useOrderPrices } from '@/marketplace/details/plan/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 export const OrderDetailsSummary: FC<{
   offering: PublicOfferingDetails;
   [key: string]: any;
 }> = (props) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const prices = useOrderPrices(props);
 
   const shouldConcealPrices =

@@ -18,10 +18,8 @@ import {
   CustomersUsersFilterFormId,
 } from '@/table/generated/CustomersUsersFilter';
 import { useTable } from '@/table/useTable';
-import {
-  getCustomer,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
+import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
 
 import { CustomerPermissionsLogButton } from './CustomerPermissionsLogButton';
 import { CustomerUserRowActions } from './CustomerUserRowActions';
@@ -43,7 +41,7 @@ const mandatoryFields: CustomersUsersListData['query']['field'] = [
 const CustomerUsersListTable: FunctionComponent = () => {
   const { values } = useFormState();
   const filter = useMemo(() => selectCustomersUsersFilter(values), [values]);
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const props = useTable({
     table: 'customer-users',
     fetchData: createFetcher(customersUsersList, {

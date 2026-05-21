@@ -1,6 +1,5 @@
 import { FC, useEffect, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
@@ -8,13 +7,13 @@ import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@/marketplace/resources/li
 import { createFetcher } from '@/table/api';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ResourcesAllListTable } from './ResourcesAllListTable';
 import { buildResourcesAllFilter, resourcesListRequiredFields } from './utils';
 
 const OrganizationResourcesAllListTable: FC<Partial<TableProps>> = (props) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const filterValues: any = values;
 

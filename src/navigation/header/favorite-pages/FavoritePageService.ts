@@ -19,8 +19,8 @@ import { translate } from '@/i18n';
 import { getTitle } from '@/navigation/title';
 import { isDescendantOf } from '@/navigation/useTabs';
 import store from '@/store/store';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer, getProject, getResource } from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
+import { getResource } from '@/workspace/selectors';
 import { Customer, Project, User } from '@/workspace/types';
 
 const FAVORITE_PAGES_KEY = 'waldur/favorite/pages';
@@ -178,8 +178,8 @@ export const useFavoritePages = () => {
   const pageTitle = useSelector(getTitle);
 
   const user = useUser();
-  const customer = useSelector(getCustomer);
-  const project = useSelector(getProject);
+  const customer = useCustomer();
+  const project = useProject();
   const resource = useSelector(getResource);
 
   const getPagesList = () => FavoritePageService.list().reverse();

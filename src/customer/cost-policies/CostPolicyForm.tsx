@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useRef } from 'react';
 import { Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   invoiceItemsCustomerCostsForPeriodRetrieve,
   invoiceItemsProjectCostsForPeriodRetrieve,
@@ -19,7 +18,7 @@ import {
   projectAutocomplete,
 } from '@/marketplace/common/autocompletes';
 import { ProjectCostField } from '@/project/ProjectCostField';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { CostPolicyType } from './types';
 import {
@@ -34,7 +33,7 @@ interface CostPolicyFormProps {
 }
 
 export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
-  const currentOrganization = useSelector(getCustomer);
+  const currentOrganization = useCustomer();
   const { values } = useFormState({ subscription: { values: true } });
 
   const selectedEntities = values.scope || [];

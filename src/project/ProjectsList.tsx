@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { projectsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -15,7 +14,7 @@ import Table from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { formatLongText } from '@/table/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { BatchProjectActions } from './BatchProjectActions';
@@ -149,7 +148,7 @@ export const ProjectsList: FC<ProjectsListProps> = ({
   optionalColumns = [],
   ...props
 }) => {
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
   const filter = useMemo(
     () => ({
       customer: customer ? customer.uuid : currentCustomer?.uuid,

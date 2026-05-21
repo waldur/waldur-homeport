@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { ReviewCloseAction } from '@/customer/team/ReviewCloseButton';
@@ -10,7 +9,7 @@ import { ActionsDropdown } from '@/table/ActionsDropdown';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 interface PermissionsReviewsListProps {
   tableProps: ReturnType<typeof useTable>;
@@ -20,7 +19,7 @@ interface PermissionsReviewsListProps {
 export const PermissionsReviewsList: FunctionComponent<
   PermissionsReviewsListProps
 > = ({ tableProps, scope }) => {
-  const project = useSelector(getProject);
+  const project = useProject();
   const tableTabs =
     scope === 'project' ? useProjectTeamTableTabs(project) : useTeamTableTabs();
   return (

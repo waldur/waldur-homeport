@@ -1,15 +1,14 @@
 import { Field } from 'react-final-form';
-import { useSelector } from 'react-redux';
 
 import { required } from '@/core/validators';
 import { FormGroup, SelectField } from '@/form';
 import { translate } from '@/i18n';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { useCustomerProjects } from '../workspace/fetchCustomer';
 
 export const OrganizationProjectSelectField = ({ disabled = false }) => {
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
   const { loading } = useCustomerProjects();
 
   return (

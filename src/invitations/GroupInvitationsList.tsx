@@ -6,7 +6,6 @@ import {
 } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -26,12 +25,12 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { RoleField } from '@/user/affiliations/RoleField';
 import { exportRoleField } from '@/user/affiliations/RolePopover';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { useTeamTableTabs } from '../customer/team/tabs';
 
 const GroupInvitationsListTable: FunctionComponent<{}> = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const filterValues = useMemo(
     () => selectUserGroupInvitationsFilter(values),

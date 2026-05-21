@@ -2,7 +2,6 @@ import { useRouter } from '@uirouter/react';
 import arrayMutators from 'final-form-arrays';
 import { useState } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { remoteWaldurApiImportOffering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -10,7 +9,7 @@ import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 import { WizardStepIndicator, useWizard } from '@/wizard';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { OFFERING_IMPORT_STEPS, OFFERING_IMPORT_TABS } from './tabs';
 import { OfferingImportFormData } from './types';
@@ -23,7 +22,7 @@ export const RemoteOfferingImportDialog = ({ refetch }: { refetch?() }) => {
   );
   const { showErrorResponse, showSuccess } = useNotify();
   const { closeDialog } = useModal();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const router = useRouter();
 
   const saveOffering = async (formData: OfferingImportFormData) => {

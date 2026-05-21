@@ -16,14 +16,13 @@ import {
   Modal,
   Row,
 } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { projectsList } from 'waldur-js-client';
 
 import { getNextPageUrl } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import {
   fetchOfferingMapping,
@@ -272,7 +271,7 @@ const ProjectFilterDialog: FC<ProjectFilterDialogProps> = ({
 // ── Main tab ──────────────────────────────────────────────────────────────────
 
 export const OrganisationReportsTab: FC = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const [loadTriggered, setLoadTriggered] = useState(false);
   const [showLoadPrompt, setShowLoadPrompt] = useState(true);
 

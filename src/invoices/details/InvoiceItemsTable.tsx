@@ -1,6 +1,5 @@
 import { FC, ReactNode, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { invoicesItemsRetrieve } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -17,8 +16,7 @@ import {
 } from '@/table/generated/InvoicesItemsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { Invoice, InvoiceTableItem } from '../types';
 import { formatPeriod } from '../utils';
@@ -53,7 +51,7 @@ const InvoiceItemsTableTable: FC<InvoiceItemsTableProps> = ({
 }) => {
   const { values } = useFormState();
   const filter = useMemo(() => selectInvoicesItemsFilter(values), [values]);
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const user = useUser();
 
   const fetchItems = useMemo(() => {

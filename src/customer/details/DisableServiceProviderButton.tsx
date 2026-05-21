@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { marketplaceServiceProvidersDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -7,7 +7,7 @@ import { ServiceProvider } from '@/marketplace/types';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 interface DisableServiceProviderButtonProps {
   serviceProvider: ServiceProvider;
@@ -17,7 +17,7 @@ interface DisableServiceProviderButtonProps {
 export const DisableServiceProviderButton: FC<
   DisableServiceProviderButtonProps
 > = ({ serviceProvider, setServiceProvider }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const dispatch = useDispatch();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({

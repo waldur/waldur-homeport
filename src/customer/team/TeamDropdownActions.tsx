@@ -6,7 +6,7 @@ import { translate } from '@/i18n';
 import { InvitationCreateButton } from '@/invitations/actions/create/InvitationCreateButton';
 import { GroupInvitationCreateButton } from '@/invitations/actions/GroupInvitationCreateButton';
 import { getTableState } from '@/table/selectors';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ServiceAccountCreateButton } from '../service-accounts/ServiceAccountCreateAction';
 
@@ -17,7 +17,7 @@ interface TeamDropdownActionsProps {
 }
 
 export const TeamDropdownActions = ({ refetch }: TeamDropdownActionsProps) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const tableState = useSelector(
     getTableState('marketplace-customer-service-accounts'),
   );

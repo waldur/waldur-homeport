@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   proposalRequestedOfferingsList,
   ProtectedRound,
@@ -18,7 +17,7 @@ import {
 } from '@/table/generated/ProposalRequestedOfferingsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { CallOfferingStateField } from '../details/CallOfferingStateField';
 
@@ -30,7 +29,7 @@ interface OfferingRequestsListProps {
 }
 
 const OfferingRequestsListTable: FC<OfferingRequestsListProps> = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
 
   const formFilters = useMemo(

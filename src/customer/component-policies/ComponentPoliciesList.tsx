@@ -1,6 +1,5 @@
 import { lowerCase, upperFirst } from 'lodash-es';
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import {
   CustomerComponentUsagePolicy,
   marketplaceCustomerComponentUsagePoliciesList,
@@ -13,7 +12,7 @@ import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ComponentPolicyCreateButton } from './ComponentPolicyCreateButton';
 import { ComponentPolicyDeleteButton } from './ComponentPolicyDeleteButton';
@@ -28,7 +27,7 @@ const ComponentPolicyActions = ({ row, refetch }) => (
 );
 
 export const ComponentPoliciesList: FC = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const filter = useMemo(() => {
     const result: MarketplaceProjectEstimatedCostPoliciesListData['query'] = {};
     if (customer) {

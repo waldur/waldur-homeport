@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useSelector } from 'react-redux';
 import { invoiceItemsMigrateTo, invoicesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -8,7 +7,7 @@ import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { useNotify } from '@/store/notify';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 const formatDate = (invoice) => `${invoice.year}-${invoice.month}`;
 
@@ -53,7 +52,7 @@ export const InvoiceItemMoveDialog = ({
     refetch: refreshInvoiceItems,
   });
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const asyncState = useQuery({
     queryKey: ['invoicesForMove', customer?.url, invoice.url],

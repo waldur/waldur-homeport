@@ -1,20 +1,18 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { userInvitationsCancel } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
 export const InvitationCancelButton = ({ row, refetch }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
-  const project = useSelector(getProject);
+  const customer = useCustomer();
+  const project = useProject();
 
   const { mutate, isPending } = useManagedMutation({
     mutationFn: () => userInvitationsCancel({ path: { uuid: row.uuid } }),

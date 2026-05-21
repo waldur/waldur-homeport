@@ -2,17 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
 import { Field } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { marketplaceRuntimeStatesList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 export const RuntimeStateFilter: React.FC = () => {
   const { params } = useCurrentStateAndParams();
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const { data, isLoading } = useQuery({
     queryKey: ['runtime-states', project?.uuid, params.category_uuid],

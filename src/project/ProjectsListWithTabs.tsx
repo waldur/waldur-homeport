@@ -1,10 +1,9 @@
 import { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { TableWithTabs } from '@/table/TableWithTabs';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { MetadataGroupBy } from './metadata/MetadataGroupBy';
 
@@ -27,7 +26,7 @@ const MetadataByProject = lazyComponent(() =>
 );
 
 export const ProjectsListWithTabs = () => {
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
   const [metadataGroupBy, setMetadataGroupBy] = useState('answer');
 
   const tabs = useMemo(() => {

@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { uniq } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   marketplacePublicOfferingsList,
   marketplaceResourcesList,
@@ -29,7 +28,7 @@ import {
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import { ResourceQuotaField } from './ResourceQuotaField';
 import { ResourceRateField } from './ResourceRateField';
@@ -57,7 +56,7 @@ const mandatoryFields = resourcesListRequiredFields(false).concat([
 const ProjectLimitUsageBasedResourcesTable: FC<{ showCost?: boolean }> = ({
   showCost,
 }) => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const { values } = useFormState();
 

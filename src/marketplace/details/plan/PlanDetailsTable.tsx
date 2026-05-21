@@ -1,14 +1,13 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { calculateMonthsDifference, formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import { PriceTooltip } from '@/price/PriceTooltip';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ComponentEditRow } from './ComponentEditRow';
 import { ComponentRow } from './ComponentRow';
@@ -78,7 +77,7 @@ const UsageRows = (props: {
 export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   props,
 ) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   if (props.components.length === 0) {
     return null;

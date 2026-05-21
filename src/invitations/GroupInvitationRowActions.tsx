@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 import { GroupInvitation } from 'waldur-js-client';
 
 import { GroupInvitationEditButton } from '@/invitations/actions/GroupInvitationEditButton';
@@ -8,8 +7,7 @@ import { GroupInvitationDeleteButton } from '@/invitations/GroupInvitationDelete
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 interface GroupInvitationRowActionsProps {
   refetch;
@@ -19,7 +17,7 @@ interface GroupInvitationRowActionsProps {
 export const GroupInvitationRowActions: FunctionComponent<
   GroupInvitationRowActionsProps
 > = ({ row, refetch }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const user = useUser();
   const canCancel = hasPermission(user, {
     permission: PermissionEnum.DELETE_CUSTOMER_PERMISSION,

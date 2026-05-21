@@ -1,12 +1,9 @@
-import { useSelector } from 'react-redux';
-
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 const OfferingCreateDialog = lazyComponent(() =>
   import('../actions/OfferingCreateDialog').then((module) => ({
@@ -24,7 +21,7 @@ export const CreateOfferingButton = ({
   showProvider?: boolean;
 }) => {
   const { openDialog } = useModal();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const user = useUser();
 
   const callback = () => {

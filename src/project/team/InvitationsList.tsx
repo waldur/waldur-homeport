@@ -1,7 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
 import Avatar from '@/core/Avatar';
@@ -23,8 +22,7 @@ import {
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { RoleField } from '@/user/affiliations/RoleField';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';
 import { useTeamTableTabs } from './tabs';
@@ -32,7 +30,7 @@ import { TeamDropdownActions } from './TeamDropdownActions';
 import { useRedirectCourseProjects } from './utils';
 
 const InvitationsListComponent: FunctionComponent = () => {
-  const project = useSelector(getProject);
+  const project = useProject();
   const { values } = useFormState();
   const stateFilter = useMemo(
     () => selectUserInvitationsFilter(values),
@@ -124,8 +122,8 @@ const InvitationsListComponent: FunctionComponent = () => {
 
 export const InvitationsList: FunctionComponent = () => {
   const user = useUser();
-  const project = useSelector(getProject);
-  const customer = useSelector(getCustomer);
+  const project = useProject();
+  const customer = useCustomer();
   const router = useRouter();
   useEffect(() => {
     if (

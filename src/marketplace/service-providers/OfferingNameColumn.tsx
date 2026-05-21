@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux';
-
 import { Link } from '@/core/Link';
 import { BackendIdTip } from '@/core/Tooltip';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 export const OfferingNameColumn = ({ row }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   return (
     <>
       <Link

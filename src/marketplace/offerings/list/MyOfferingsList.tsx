@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 
 import {
@@ -8,12 +7,12 @@ import {
   MarketplaceProviderOfferingsFilterFormId,
   selectMarketplaceProviderOfferingsFilter,
 } from '@/table/generated/MarketplaceProviderOfferingsFilter';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { BaseOfferingsList } from './OfferingsList';
 
 const MyOfferingsListTable = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const filterValues = useMemo(
     () => selectMarketplaceProviderOfferingsFilter(values),

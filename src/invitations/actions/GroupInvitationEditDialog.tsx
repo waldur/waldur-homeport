@@ -19,7 +19,8 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Role } from '@/permissions/types';
 import { useNotify } from '@/store/notify';
-import { getCustomer, isStaff } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
+import { isStaff } from '@/workspace/selectors';
 
 import { AdvancedSettingsGroup } from './AdvancedSettingsGroup';
 import { AutoCreateProjectGroup } from './AutoCreateProjectGroup';
@@ -40,7 +41,7 @@ export const GroupInvitationEditDialog = ({
   resolve: { refetch, roles, invitation },
 }: OwnProps) => {
   const { showSuccess, showErrorResponse } = useNotify();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const isStaffUser = useSelector(isStaff);
   const { loading } = useCustomerProjects();
 

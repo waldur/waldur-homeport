@@ -39,17 +39,20 @@ Centralized data fetching logic wrapped in reusable hooks:
 
 ```typescript
 export const useOrganizationGroups = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const query = useQuery({
     queryKey: ['organizationGroups'],
-    queryFn: () => getAllPages((page) =>
-      organizationGroupsList({ query: { page } })
-    ).then(items => items.map(item => ({ ...item, value: item.url }))),
+    queryFn: () =>
+      getAllPages((page) => organizationGroupsList({ query: { page } })).then(
+        (items) => items.map((item) => ({ ...item, value: item.url })),
+      ),
     staleTime: 5 * 60 * 1000,
   });
 
   const disabled = query.data?.length === 0 && !user.is_staff;
-  const tooltip = disabled ? translate('Access policies cannot be configured...') : undefined;
+  const tooltip = disabled
+    ? translate('Access policies cannot be configured...')
+    : undefined;
 
   return { ...query, disabled, tooltip };
 };
@@ -89,9 +92,7 @@ const saveProjectMutation = useManagedMutation({
   errorMessage: translate('Unable to create project.'),
   refetch, // Option 1: Pass a refetch callback directly
   // Option 2: Provide an array of query filters to automatically invalidate
-  invalidateQueries: [
-    { queryKey: ['CustomerProjects'] },
-  ],
+  invalidateQueries: [{ queryKey: ['CustomerProjects'] }],
 });
 
 // Use .mutateAsync for form submission
@@ -110,12 +111,12 @@ const onDelete = () => deleteMutation.mutate({});
 
 ### Refresh Strategies
 
-| Strategy | Implementation | Use Case |
-|----------|----------------|----------|
-| **Explicit Refetch** | `const { refetch } = useQuery(...); await refetch();` | Manual refresh after CRUD operations |
-| **Table Refresh Button** | `<TableRefreshButton onClick={() => props.fetch(true)} />` | User-initiated refresh |
-| **Automatic Polling** | `refetchInterval` in React Query | Real-time data updates |
-| **Query Invalidation** | `queryClient.invalidateQueries(['queryKey'])` | Cache invalidation |
+| Strategy                 | Implementation                                             | Use Case                             |
+| ------------------------ | ---------------------------------------------------------- | ------------------------------------ |
+| **Explicit Refetch**     | `const { refetch } = useQuery(...); await refetch();`      | Manual refresh after CRUD operations |
+| **Table Refresh Button** | `<TableRefreshButton onClick={() => props.fetch(true)} />` | User-initiated refresh               |
+| **Automatic Polling**    | `refetchInterval` in React Query                           | Real-time data updates               |
+| **Query Invalidation**   | `queryClient.invalidateQueries(['queryKey'])`              | Cache invalidation                   |
 
 ## Error Handling and Loading States
 
@@ -155,11 +156,7 @@ export const queryClient = new QueryClient({
 Primary API client with typed endpoints:
 
 ```typescript
-import {
-  projectsCreate,
-  projectsList,
-  customersList
-} from 'waldur-js-client';
+import { projectsCreate, projectsList, customersList } from 'waldur-js-client';
 
 // Typed API calls with request/response types
 const response = await projectsCreate({

@@ -1,13 +1,11 @@
 import { ShareIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { userInvitationsSend } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
@@ -15,8 +13,8 @@ const statesForResend = ['pending', 'expired', 'canceled'];
 
 export const InvitationSendButton = ({ row, refetch }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
-  const project = useSelector(getProject);
+  const customer = useCustomer();
+  const project = useProject();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => userInvitationsSend({ path: { uuid: row.uuid } }),

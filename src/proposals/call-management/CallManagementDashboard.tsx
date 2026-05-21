@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { callManagingOrganisationsStatsRetrieve } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
@@ -15,7 +14,7 @@ import {
   getProposalStateOptions,
   getReviewStateOptions,
 } from '@/proposals/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 const FlatStatistics = ({ count, title }) => {
   return (
@@ -60,7 +59,7 @@ const getReviewState = (states: string[]) => ({
 });
 
 export const CallManagementDashboard = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: [
       'call-management-dashboard',

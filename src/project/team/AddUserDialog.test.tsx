@@ -31,6 +31,16 @@ vi.mock('@/workspace/hooks', () => ({
     username: 'testuser',
     email: 'test@example.com',
   }),
+  useProject: () => ({
+    uuid: 'project-uuid',
+    name: 'Test Project',
+  }),
+  useCustomer: () => ({
+    uuid: 'customer-uuid',
+    name: 'Test Customer',
+    service_provider_uuid: 'sp-uuid',
+    call_managing_organization_uuid: 'cmo-uuid',
+  }),
 }));
 
 vi.mock('@/workspace/selectors', () => ({

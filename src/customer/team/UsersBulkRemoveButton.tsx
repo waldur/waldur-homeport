@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { customersDeleteUser, projectsDeleteUser } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -8,14 +7,13 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 import { renderFieldOrDash } from '@/table/utils';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 export const UsersBulkRemoveButton = ({ rows, refetch }) => {
   const { showErrorResponse } = useNotify();
 
   const currentUser = useUser();
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: async () => {

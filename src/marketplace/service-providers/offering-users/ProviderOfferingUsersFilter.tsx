@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Field } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { OfferingUserState } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -14,7 +13,7 @@ import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { ProviderAutocomplete } from '@/marketplace/orders/ProviderAutocomplete';
 import { TableFilterItem } from '@/table/TableFilterItem';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 export const PROVIDER_OFFERING_USERS_FORM_ID = 'ProviderOfferingUsersFilter';
 
@@ -68,7 +67,7 @@ const OfferingUserStateFilter = () => (
 export const ProviderOfferingUsersFilter: FunctionComponent<
   ProviderOfferingUsersFilterProps
 > = ({ hasOrganizationColumn }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const offeringFilter = useMemo(
     () => ({
       customer_uuid: hasOrganizationColumn ? undefined : customer?.uuid,

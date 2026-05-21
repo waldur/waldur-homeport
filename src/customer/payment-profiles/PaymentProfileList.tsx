@@ -8,8 +8,8 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { useCustomer } from '@/workspace/hooks';
 import {
-  getCustomer,
   isStaff as isStaffSelector,
   isSupport as isSupportSelector,
 } from '@/workspace/selectors';
@@ -18,7 +18,7 @@ import { PaymentProfileActions } from './PaymentProfileActions';
 import { PaymentProfileCreateButton } from './PaymentProfileCreateButton';
 
 export const PaymentProfileList: FunctionComponent<{}> = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const isStaff = useSelector(isStaffSelector);
   const isSupport = useSelector(isSupportSelector);
 

@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { proposalProposalsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -16,7 +15,7 @@ import {
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
@@ -25,7 +24,7 @@ import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
 
 const CustomerProposalsListTable: FC<{}> = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const formFilters = useMemo(() => selectProposalsFilter(values), [values]);
 

@@ -1,10 +1,9 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { StateIndicator } from '@/core/StateIndicator';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { getCallStatus } from '@/proposals/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { CallDetailsHeaderBody } from '../details/CallDetailsHeaderBody';
 import { Call } from '../types';
@@ -17,7 +16,7 @@ interface CallUpdateHeroProps {
 }
 
 export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const status = useMemo(() => getCallStatus(call), [call]);
   return (
     <PublicDashboardHero

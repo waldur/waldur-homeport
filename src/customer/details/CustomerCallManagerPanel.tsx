@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 import {
   callManagingOrganisationsCreate,
@@ -16,14 +16,14 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
 export const CustomerCallManagerPanel: FunctionComponent = () => {
   const { confirm } = useModal();
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const [infoUuid, setInfoUuid] = useState('');
   const dispatch = useDispatch();
 

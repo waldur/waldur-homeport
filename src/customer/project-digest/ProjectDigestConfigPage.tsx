@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -11,7 +10,7 @@ import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { getProjectDigestConfig, sendTestDigest } from './api';
 import {
@@ -23,7 +22,7 @@ import { ProjectDigestPreviewButton } from './ProjectDigestPreviewButton';
 import { ProjectDigestSummaryButton } from './ProjectDigestSummaryButton';
 
 export const ProjectDigestConfigPage: FC = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { showErrorResponse, showSuccess } = useNotify();
 
   const {

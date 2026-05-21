@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { PaymentProfile, paymentsList } from 'waldur-js-client';
 
@@ -8,14 +7,14 @@ import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 interface AgreementInfoProps {
   paymentProfiles?: PaymentProfile[];
 }
 
 export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
     customer ? customer.payment_profiles : props.paymentProfiles,
   );

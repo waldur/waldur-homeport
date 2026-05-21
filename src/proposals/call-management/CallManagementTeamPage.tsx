@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { callManagingOrganisationsListUsersList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -8,12 +7,12 @@ import { translate } from '@/i18n';
 import { GenericPermission } from '@/permissions/types';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { UserAddButton } from './UserAddButton';
 
 export const CallManagementTeamPage = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const scopeFilter = `${ENV.apiEndpoint}api/call-managing-organisations/${customer.call_managing_organization_uuid}/`;
   const usersFilter = useMemo(
     () => ({

@@ -2,7 +2,6 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Field, useForm } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   marketplacePublicOfferingsList,
   PublicOfferingDetails,
@@ -15,7 +14,7 @@ import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import { VStepperFormStepCard } from '@/wizard';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
@@ -57,7 +56,7 @@ export const FormCloudStep = (props: FormStepProps) => {
   const [tab, setTab] = useState<TabSpec>(tabs[0]);
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
-  const currentProject = useSelector(getProject);
+  const currentProject = useProject();
 
   const initialOffering = useRef(props.offering);
   const initialProjectUuid = useRef(currentProject?.uuid);

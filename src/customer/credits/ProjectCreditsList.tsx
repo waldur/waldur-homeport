@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { ProjectCredit, projectCreditsList } from 'waldur-js-client';
 
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
@@ -8,7 +7,7 @@ import { ProjectLink } from '@/project/ProjectLink';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { COMMON_CREDIT_COLUMNS } from './constants';
 import { CreditExpandableRow } from './CreditExpandableRow';
@@ -16,7 +15,7 @@ import { ProjectCreateCreditButton } from './ProjectCreateCreditButton';
 import { ProjectCreditActions } from './ProjectCreditActions';
 
 export const ProjectCreditsList: FC = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const filter = useMemo(
     () => ({ customer_uuid: customer.uuid }),
     [customer.uuid],

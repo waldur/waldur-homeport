@@ -1,6 +1,5 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -27,7 +26,7 @@ import Table from '@/table/Table';
 import { Column, DisplayMode } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { OrganizationExpandableRow } from './OrganizationExpandableRow';
 
@@ -48,7 +47,7 @@ const mandatoryFields: CustomersListData['query']['field'] = [
 const OrganizationsListTable: FunctionComponent = () => {
   useTitle(translate('Organizations'), '', 'browser');
 
-  const user = useSelector(getUser);
+  const user = useUser();
   const { values } = useFormState();
   const filterValues = useMemo(() => selectCustomersFilter(values), [values]);
 

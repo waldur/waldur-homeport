@@ -1,8 +1,6 @@
-import { useSelector } from 'react-redux';
-
 import { ENV } from '@/core/config';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 export const ProjectPermissionsLogButton = ({
   projectId,
@@ -11,7 +9,7 @@ export const ProjectPermissionsLogButton = ({
   projectId?: string;
   asDropdownItem?: boolean;
 }) => {
-  const project = useSelector(getProject);
+  const project = useProject();
   return (
     <FilteredEventsButton
       filter={{

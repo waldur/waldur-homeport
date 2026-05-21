@@ -1,11 +1,10 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { ProjectResourcesList } from '@/marketplace/resources/list/ProjectResourcesList';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 export const ProjectResourcesPage: FunctionComponent<{}> = () => {
-  const project = useSelector(getProject);
+  const project = useProject();
   if (!project) {
     return null;
   }

@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { projectsDestroy } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
@@ -10,8 +10,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { setCurrentCustomer, setCurrentProject } from '@/workspace/actions';
-import { useUser } from '@/workspace/hooks';
-import { getProject } from '@/workspace/selectors';
+import { useUser, useProject } from '@/workspace/hooks';
 
 export const useProjectDelete = ({
   project,
@@ -28,7 +27,7 @@ export const useProjectDelete = ({
   const { showErrorResponse, showSuccess } = useNotify();
 
   const user = useUser();
-  const currentProject = useSelector(getProject);
+  const currentProject = useProject();
 
   const isCurrentProject = project.uuid === currentProject?.uuid;
   const canDelete =

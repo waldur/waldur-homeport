@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { customersPartialUpdate } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@/core/api';
@@ -13,8 +13,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
 import { CustomerEditPanels } from './CustomerEditPanels';
@@ -38,7 +37,7 @@ export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
   const { showErrorResponse, showSuccess } = useNotify();
   const { openDialog } = useModal();
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const user = useUser();
   const canEditCustomer = hasPermission(user, {
     permission: PermissionEnum.UPDATE_CUSTOMER,

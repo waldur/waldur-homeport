@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -16,13 +15,13 @@ import {
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ReviewsRowActions } from './ReviewsRowActons';
 import { ReviewStateRenderer } from './ReviewStateRenderer';
 
 const CustomerReviewsListTable: FC<{}> = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const filterValues = useMemo(
     () => selectProposalReviewsFilter(values),

@@ -2,7 +2,6 @@ import arrayMutators from 'final-form-arrays';
 import { lowerCase, upperFirst } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   type CustomerComponentUsagePolicy,
   type CustomerComponentUsagePolicyRequest,
@@ -16,7 +15,7 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ComponentPolicyForm } from './ComponentPolicyForm';
 
@@ -35,7 +34,7 @@ interface ComponentPolicyFormData {
 export const ComponentPolicyFormDialog: FC<ComponentPolicyFormDialogProps> = ({
   resolve,
 }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const isEdit = Boolean(resolve.policy?.uuid);
 

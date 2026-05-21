@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { EventsListData } from 'waldur-js-client';
 
 import { isEmpty } from '@/core/utils';
@@ -10,10 +9,10 @@ import {
   CustomerEventsFilterFormId,
   selectCustomerEventsFilter,
 } from '@/table/generated/CustomerEventsFilter';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 const CustomerEventsListTable = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const userFilter = useMemo(
     () => selectCustomerEventsFilter(values),

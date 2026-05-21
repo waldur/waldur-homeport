@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { marketplaceProviderOfferingsAddUser } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
@@ -15,7 +14,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RoleEnum } from '@/permissions/enums';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 interface OwnProps {
   resolve: {
@@ -28,7 +27,7 @@ interface OwnProps {
 export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
   resolve: { refetch, offering },
 }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const saveUserMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {

@@ -5,12 +5,8 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { UserDetailsButton } from '@/user/UserDetailsButton';
-import {
-  getCustomer,
-  getProject,
-  getUser,
-  isStaffOrSupport,
-} from '@/workspace/selectors';
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { EditUserButton } from './EditUserButton';
 import { UserRemoveButton } from './UserRemoveButton';
@@ -23,9 +19,9 @@ export const ProjectPermisionActions = ({
   project,
 }) => {
   const userIsStaffOrSupport = useSelector(isStaffOrSupport);
-  const user = useSelector(getUser);
-  const currentProject = useSelector(getProject);
-  const customer = useSelector(getCustomer);
+  const user = useUser();
+  const currentProject = useProject();
+  const customer = useCustomer();
 
   const hasContext = projectUuid || customerUuid;
   const projectId = hasContext ? projectUuid : currentProject?.uuid;

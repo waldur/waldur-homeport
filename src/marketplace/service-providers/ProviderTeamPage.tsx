@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { marketplaceServiceProvidersListUsersList } from 'waldur-js-client';
 
 import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
@@ -8,7 +7,7 @@ import { GenericPermission } from '@/permissions/types';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { UserAddButton } from './UserAddButton';
 import { UserRemoveButton } from './UserRemoveButton';
@@ -22,7 +21,7 @@ const RowActions = ({ row, fetch }) => {
 };
 
 export const ProviderTeamPage = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const usersFilter = useMemo(
     () => ({
       scope: customer.service_provider,

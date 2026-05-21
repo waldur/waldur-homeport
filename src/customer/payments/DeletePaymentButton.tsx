@@ -1,18 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { paymentsDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { updatePaymentsList } from './utils';
 
 export const DeletePaymentButton = ({ row: payment }) => {
   const dispatch = useDispatch();
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => paymentsDestroy({ path: { uuid: payment.uuid } }),

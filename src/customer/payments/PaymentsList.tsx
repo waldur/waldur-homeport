@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Payment, paymentsList, PaymentsListData } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -12,13 +11,13 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { CreatePaymentButton } from './CreatePaymentButton';
 import { PaymentActions } from './PaymentActions';
 
 export const PaymentsList: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const profile = useMemo(
     () => getActivePaymentProfile(customer.payment_profiles),
     [customer],

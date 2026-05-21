@@ -33,7 +33,6 @@ import {
   Tab,
   Tabs,
 } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import type { ProjectAccountingSummary } from 'waldur-js-client';
 import {
   openportalAccountingSummaryList,
@@ -47,7 +46,7 @@ import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
 import { Tip } from '@/core/Tooltip';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import type { OpenPortalProject } from './api';
 import {
@@ -608,7 +607,7 @@ const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
 // ── Main tab ──────────────────────────────────────────────────────────────────
 
 export const OrganisationAllocationTab: FC = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   // ── Lazy-load — don't fire until user clicks "Load data" ─────────────────
   const [loadTriggered, setLoadTriggered] = useState(false);

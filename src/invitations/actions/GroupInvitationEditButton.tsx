@@ -1,6 +1,5 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { GroupInvitation } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -8,8 +7,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
@@ -24,7 +22,7 @@ export const GroupInvitationEditButton: FC<{
   refetch(): void;
 }> = ({ row, refetch }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { openDialog } = useModal();
 
   const roles = useMemo(

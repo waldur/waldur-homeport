@@ -1,6 +1,5 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import React, { PropsWithChildren } from 'react';
-import { useSelector } from 'react-redux';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -10,7 +9,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import { renderFieldOrDash } from '@/table/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ComponentCost } from './ComponentCost';
 import { Component, PlanPeriod } from './types';
@@ -27,7 +26,7 @@ interface ComponentRowProps {
 export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
   props,
 ) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const activeFixedPriceProfile =
     customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 

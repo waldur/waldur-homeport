@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { paymentProfilesPartialUpdate } from 'waldur-js-client';
 
 import {
@@ -13,7 +13,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
@@ -22,7 +22,7 @@ import { PaymentProfileFormFields } from './PaymentProfileFormFields';
 export const PaymentProfileUpdateDialog: FC<any> = (props) => {
   const dispatch = useDispatch();
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const paymentProfileTypeOptions = useMemo(
     () => getPaymentProfileTypeOptions(),

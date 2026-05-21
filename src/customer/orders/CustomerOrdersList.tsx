@@ -1,13 +1,12 @@
 import { FunctionComponent, useEffect, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { MarketplaceOrdersListData } from 'waldur-js-client';
 
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { OrdersBulkActions } from '@/marketplace/orders/actions/OrdersBulkActions';
 import { OrdersListFilter } from '@/marketplace/orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '@/marketplace/orders/list/OrdersTableComponent';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import {
   CUSTOMER_ORDERS_LIST_FILTER_FORM_ID,
@@ -15,7 +14,7 @@ import {
 } from '../constants';
 
 const CustomerOrdersListTable: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const filterValues: any = values;
 

@@ -8,11 +8,8 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useUser } from '@/workspace/hooks';
-import {
-  getCustomer,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
+import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
 
 interface UserAddButtonProps {
   refetch;
@@ -29,7 +26,7 @@ export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
 }) => {
   const { openDialog } = useModal();
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
 

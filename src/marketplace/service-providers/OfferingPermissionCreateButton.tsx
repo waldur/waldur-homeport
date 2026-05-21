@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -8,8 +7,7 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 const OfferingPermissionCreateDialog = lazyComponent(() =>
   import('../offerings/details/permissions/OfferingPermissionCreateDialog').then(
@@ -23,7 +21,7 @@ export const OfferingPermissionCreateButton: React.FC<{ fetch }> = ({
   fetch,
 }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const canCreatePermission = hasPermission(user, {
     permission: PermissionEnum.CREATE_OFFERING_PERMISSION,
     customerId: customer.uuid,

@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { marketplaceProjectUpdateRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -16,7 +15,7 @@ import {
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
 
@@ -36,7 +35,7 @@ const ProjectUpdateRequestsListTable: FunctionComponent = () => {
     [values],
   );
 
-  const project = useSelector(getProject);
+  const project = useProject();
   const filter = {
     ...filterState,
     project_uuid: project.uuid,

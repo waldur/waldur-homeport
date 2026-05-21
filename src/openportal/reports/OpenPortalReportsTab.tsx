@@ -9,7 +9,6 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { Card, Form } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import {
   CachedProjectStorageReport as StorageReportApiItem,
   CachedProjectUsageReport as UsageReportApiItem,
@@ -20,7 +19,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import {
   fetchUsageReports,
@@ -58,7 +57,7 @@ const groupByMonth = <T extends { year: number; month: number }>(
 };
 
 export const OpenPortalReportsTab: FC = () => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const {
     data: usageReports,

@@ -1,5 +1,4 @@
 import { useEffect, FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -9,8 +8,7 @@ import { ISSUE_IDS } from '@/issues/types/constants';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 const IssueCreateDialog = lazyComponent(() =>
   import('@/issues/create/IssueCreateDialog').then((module) => ({
@@ -22,7 +20,7 @@ export const RequestActionDialog: FunctionComponent<{
   resolve: { offering; offeringRequestMode };
 }> = ({ resolve: { offering, offeringRequestMode } }) => {
   const { openDialog, closeDialog } = useModal();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const user = useUser();
   useEffect(() => {
     if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {

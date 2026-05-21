@@ -1,7 +1,6 @@
 import { CaretRightIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   CampaignRequest,
   DiscountTypeEnum,
@@ -23,7 +22,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { ProgressStep, WizardStepIndicator } from '@/wizard';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { CampaignFormData } from './types';
 
@@ -43,7 +42,7 @@ export const CampaignDialog = ({
 }) => {
   const [step, setStep] = useState(0);
   const { showErrorResponse } = useNotify();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const isUpdate = Boolean(resolve.campaign?.uuid);
 
   const getServiceProvider = async () => {

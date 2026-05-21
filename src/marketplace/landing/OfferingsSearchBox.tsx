@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import {
   marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
@@ -16,7 +15,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useCustomer, useProject } from '@/workspace/hooks';
 
 import { OfferingDetailsLink } from '../links/OfferingDetailsLink';
 import { OfferingLink } from '../links/OfferingLink';
@@ -74,8 +73,8 @@ const OfferingListItem: FC<{ row: Offering }> = ({ row }) => {
 };
 
 export const OfferingsSearchBox = () => {
-  const customer = useSelector(getCustomer);
-  const project = useSelector(getProject);
+  const customer = useCustomer();
+  const project = useProject();
 
   const params = useMemo(() => {
     const field = [

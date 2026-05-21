@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   marketplaceRobotAccountsList,
   RobotAccountDetails,
@@ -18,7 +17,7 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
@@ -31,7 +30,7 @@ const ProviderRobotAccountListTable: FC<{ provider }> = ({ provider }) => {
     [values],
   );
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const filter = useMemo(() => {
     const baseFilter: any = {
       ...formFilter,

@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { CourseAccount, marketplaceCourseAccountsList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -11,7 +10,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import { ProjectLink } from '../ProjectLink';
 import { ProjectPermissionsLogButton } from '../team/ProjectPermissionsLogButton';
@@ -28,7 +27,7 @@ const courseAccountState = {
 };
 
 export const ProjectCourseAccountsList = ({ admin = false }) => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const filter = useMemo(
     () => (admin ? undefined : { project_uuid: project.uuid }),

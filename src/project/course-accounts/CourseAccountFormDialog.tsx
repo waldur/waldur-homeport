@@ -7,7 +7,6 @@ import Papa from 'papaparse';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { useToggle } from 'react-use';
 import {
   CourseAccount,
@@ -27,7 +26,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { ProgressStep, WizardStepIndicator } from '@/wizard';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import templateFile from './course_accounts_template.json';
 import { Step1UploadFile } from './Step1UploadFile';
@@ -134,7 +133,7 @@ const validator = (values) =>
 export const CourseAccountFormDialog: FC<OwnProps> = ({
   resolve: { refetch },
 }) => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const { showErrorResponse, showSuccess, showInfo } = useNotify();
 

@@ -1,6 +1,5 @@
 import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -8,8 +7,7 @@ import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getProject } from '@/workspace/selectors';
+import { useUser, useProject } from '@/workspace/hooks';
 
 const ProjectGeneral = lazyComponent(() =>
   import('./manage/ProjectGeneral').then((module) => ({
@@ -48,7 +46,7 @@ const ProjectEndDateChangeRequests = lazyComponent(() =>
 );
 
 export const ProjectManageContainer = () => {
-  const project = useSelector(getProject);
+  const project = useProject();
   const user = useUser();
 
   const canSeeOrderApproval = useMemo(() => {

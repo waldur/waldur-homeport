@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 
 import { BaseEventsList } from '@/events/BaseEventsList';
 import { translate } from '@/i18n';
@@ -9,10 +8,10 @@ import {
   EventsFilter as SupportEventsFilter,
   EventsFilterFormId,
 } from '@/table/generated/EventsFilter';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 const ProjectEventsViewTable: FunctionComponent = () => {
-  const project = useSelector(getProject);
+  const project = useProject();
   const { values } = useFormState();
   const filter = useMemo(() => selectSupportEventsFilter(values), [values]);
   return (

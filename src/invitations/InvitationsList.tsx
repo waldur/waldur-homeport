@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { userInvitationsList } from 'waldur-js-client';
 
 import { CustomerPermissionsLogButton } from '@/customer/team/CustomerPermissionsLogButton';
@@ -17,7 +16,7 @@ import {
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { getInvitationColumns } from './columns';
 import { InvitationActions } from './InvitationActions';
@@ -25,7 +24,7 @@ import { InvitationsMultiSelectActions } from './InvitationsMultiSelectActions';
 
 const InvitationsListTable: FunctionComponent = () => {
   useTitle(translate('Invitations'));
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
 
   const stateFilter = useMemo(

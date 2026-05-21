@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { OfferingUser } from 'waldur-js-client';
 
 import { OfferingUserDetailsButton } from '@/marketplace/offerings/details/OfferingUserDetailsButton';
@@ -9,8 +8,7 @@ import { ServiceProvider } from '@/marketplace/types';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 type OfferingUserRowActionsProps = {
   row: OfferingUser;
@@ -26,7 +24,7 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
   offering,
 }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const canUpdateRestrictedStatus = customer
     ? hasPermission(user, {
         permission: PermissionEnum.UPDATE_OFFERING_USER_RESTRICTION,

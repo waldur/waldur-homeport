@@ -14,7 +14,8 @@ import { translate } from '@/i18n';
 import { ServiceProvider } from '@/marketplace/types';
 import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
-import { getCustomer, isStaff } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
+import { isStaff } from '@/workspace/selectors';
 
 import { SecretValueField } from '../SecretValueField';
 
@@ -31,7 +32,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
 }) => {
   const { showErrorResponse } = useNotify();
 
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const isStaffUser = useSelector(isStaff);
 
   const { data: secretCode, error } = useQuery({

@@ -1,15 +1,14 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import { formatDate } from '@/core/dateUtils';
 import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { translate } from '@/i18n';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 export const GracePeriodWarningBar: FC = () => {
-  const project = useSelector(getProject);
+  const project = useProject();
   const { state } = useCurrentStateAndParams();
 
   const isProjectPage =

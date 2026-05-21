@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Field, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 
 import {
   AttributeValidator,
@@ -22,7 +21,7 @@ import { TimeSelectField } from '@/form/TimeSelectField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { FormGroup } from '../offerings/FormGroup';
 import { Offering } from '../types';
@@ -286,7 +285,7 @@ export const OptionsForm = ({
   customer?: DeployFormData['customer'];
 }) => {
   const { values } = useFormState({ subscription: { values: true } });
-  const selectedCustomer = useSelector(getCustomer);
+  const selectedCustomer = useCustomer();
   const customer = preferedCustomer || selectedCustomer;
 
   return (

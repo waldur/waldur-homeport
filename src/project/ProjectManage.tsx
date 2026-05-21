@@ -1,14 +1,13 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 interface OwnProps {
   tabSpec;
 }
 
 export const ProjectManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   if (tabSpec) {
     return <tabSpec.component project={project} />;

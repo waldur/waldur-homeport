@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { bookingResourcesAccept } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
@@ -7,8 +6,7 @@ import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 interface AcceptBookingButtonProps {
   resourceUuid: string;
@@ -22,7 +20,7 @@ export const AcceptBookingButton: FC<AcceptBookingButtonProps> = ({
   refetch,
 }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const acceptMutation = useManagedMutation<any, any, void>({
     mutationFn: () => bookingResourcesAccept({ path: { uuid: resourceUuid } }),

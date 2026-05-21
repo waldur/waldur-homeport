@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { customersPartialUpdate } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -9,7 +9,7 @@ import { GeolocationPoint } from '@/map/types';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 const SetLocationDialog = lazyComponent(() =>
@@ -25,7 +25,7 @@ interface SetLocationButtonProps {
 export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
   const dispatch = useDispatch();
   const { openDialog } = useModal();
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
 
   const { mutateAsync: updateLocation } = useManagedMutation<
     any,

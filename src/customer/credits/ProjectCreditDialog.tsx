@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   customerCreditsList,
   ProjectCreditRequest,
@@ -17,7 +16,7 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { OrganizationProjectSelectField } from '../team/OrganizationProjectSelectField';
 
@@ -38,7 +37,7 @@ interface ProjectCreditDialogProps {
 export const ProjectCreditDialog: FC<ProjectCreditDialogProps> = ({
   resolve,
 }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
 
   const {
     data: organizationCredit,

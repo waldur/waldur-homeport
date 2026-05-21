@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   proposalProtectedCallsList,
   ProposalProtectedCallsListData,
@@ -18,7 +17,7 @@ import {
 } from '@/table/generated/ProposalPublicCallsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { formatCallState, getCallStateOptions } from '../utils';
 
@@ -27,7 +26,7 @@ import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
 
 const CallManagementPageTable: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const filterValues = useMemo(
     () => selectProposalPublicCallsFilter(values),

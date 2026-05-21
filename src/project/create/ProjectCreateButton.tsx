@@ -1,7 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
@@ -9,8 +8,7 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 const ProjectCreateDialog = lazyComponent(() =>
@@ -36,7 +34,7 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
   refetch,
   className,
 }) => {
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
   const customer = _customer || currentCustomer;
   const user = useUser();
   const disabled =

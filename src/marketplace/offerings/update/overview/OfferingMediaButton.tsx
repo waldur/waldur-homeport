@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -7,8 +6,7 @@ import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { ACTIVE, DRAFT, PAUSED } from '../../store/constants';
 
@@ -26,7 +24,7 @@ export const OfferingMediaButton: FC<{
   mediaType: MediaType;
 }> = (props) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { openDialog } = useModal();
 
   const callback = () =>

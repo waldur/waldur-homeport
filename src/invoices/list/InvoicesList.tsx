@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { invoicesList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -19,7 +18,7 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { InvoicePayButton } from '../details/InvoicePayButton';
 
@@ -39,7 +38,7 @@ const RowActions = ({ row, fetch }) => (
 );
 
 const InvoicesListTable: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const stateFilter = useMemo(() => selectInvoicesFilter(values), [values]);
 

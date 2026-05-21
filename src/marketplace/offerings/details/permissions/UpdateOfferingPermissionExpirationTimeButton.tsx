@@ -1,13 +1,11 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 const UpdateOfferingPermissionExpirationTimeDialog = lazyComponent(() =>
   import('./UpdateOfferingPermissionExpirationTimeDialog').then((module) => ({
@@ -20,7 +18,7 @@ export const UpdateOfferingPermissionExpirationTimeButton: FunctionComponent<{
   refetch;
 }> = ({ row: permission, refetch }) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const canUpdatePermission = hasPermission(user, {
     permission: PermissionEnum.UPDATE_OFFERING_PERMISSION,
     customerId: customer.uuid,

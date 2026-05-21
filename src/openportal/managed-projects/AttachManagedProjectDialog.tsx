@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   ManagedProject,
   openportalManagedProjectsAttach,
@@ -14,8 +13,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { ProjectAutocompleteField } from './ProjectAutocompleteField';
 
@@ -49,7 +47,7 @@ export const AttachManagedProjectDialog: React.FC<
     );
   }
 
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
   const user = useUser();
 
   const projectTemplate = useMemo(() => {

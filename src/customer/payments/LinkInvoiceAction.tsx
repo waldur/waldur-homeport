@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useAsyncFn, useBoolean } from 'react-use';
 import { Invoice, invoicesList, paymentsLinkToInvoice } from 'waldur-js-client';
 
@@ -7,8 +7,7 @@ import { getAllPages } from '@/core/api';
 import { InvoicesDropdown } from '@/customer/payments/InvoicesDropdown';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { updatePaymentsList } from './utils';
@@ -23,7 +22,7 @@ const loadInvoices = (customer: Customer) =>
 export const LinkInvoiceAction: FunctionComponent<{ row }> = ({
   row: payment,
 }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const dispatch = useDispatch();
 
   const user = useUser();

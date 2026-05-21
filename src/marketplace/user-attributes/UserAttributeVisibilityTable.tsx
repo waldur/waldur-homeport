@@ -1,6 +1,5 @@
 import { get } from 'lodash-es';
 import { FC, ReactNode, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { CheckOrX } from '@/core/CheckOrX';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -12,7 +11,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { FieldEditButton } from '@/marketplace/offerings/update/integration/FieldEditButton';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ALL_ATTRIBUTE_FIELDS } from './fields';
 
@@ -43,7 +42,7 @@ export const UserAttributeVisibilityTable: FC<
   className = 'card-bordered mb-7',
   editGate = 'staff',
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const canEdit = editGate === 'always' || Boolean(user?.is_staff);
 
   const visibleFields = useMemo(

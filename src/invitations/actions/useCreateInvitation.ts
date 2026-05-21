@@ -1,13 +1,11 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { useCustomerProjects } from '@/customer/workspace/fetchCustomer';
 import { useModal } from '@/modal/actions';
 import { PermissionMap } from '@/permissions/enums';
 import { checkScope } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { InvitationContext } from './types';
 
@@ -21,9 +19,9 @@ export const useCreateInvitation = (
   context: Omit<InvitationContext, 'customer' | 'user'>,
 ) => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { loading: loadingProjects } = useCustomerProjects();
-  const project = useSelector(getProject);
+  const project = useProject();
   const { openDialog } = useModal();
   const callback = () =>
     openDialog(InvitationCreateDialog, {

@@ -6,15 +6,15 @@ import { Link } from '@/core/Link';
 import { PaymentsList } from '@/customer/payments/PaymentsList';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { getActivePaymentProfile } from '@/invoices/details/utils';
+import { useCustomer } from '@/workspace/hooks';
 import {
-  getCustomer,
   isStaff as isStaffSelector,
   isSupport as isSupportSelector,
   isOwner as isOwnerSelector,
 } from '@/workspace/selectors';
 
 export const PaymentsPanel: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const [activePaymentProfile, setActivePaymentProfile] = useState(
     getActivePaymentProfile(customer.payment_profiles),
   );

@@ -10,12 +10,8 @@ import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLi
 import { ExperimentalUsageSection } from '@/marketplace/aggregate-limits/experimental/ExperimentalUsageSection';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { ProjectsList } from '@/project/ProjectsList';
-import { useUser } from '@/workspace/hooks';
-import {
-  checkIsServiceManager,
-  getCustomer,
-  isOwnerOrStaff,
-} from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
+import { checkIsServiceManager, isOwnerOrStaff } from '@/workspace/selectors';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerDashboardCredit } from './CustomerDashboardCredit';
@@ -24,7 +20,7 @@ import { filterComponentsWithUsage } from './utils';
 
 export const CustomerDashboard: FunctionComponent = () => {
   const user = useUser();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const isServiceManager = useMemo(
     () => checkIsServiceManager(customer, user),
     [customer, user],

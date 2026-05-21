@@ -1,6 +1,5 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { CustomerUser } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -9,8 +8,7 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 const EditUserDialog = lazyComponent(() =>
   import('./EditUserDialog').then((module) => ({
@@ -29,7 +27,7 @@ export const UserEditButton: React.FC<UserEditButtonProps> = ({
 }) => {
   const { openDialog } = useModal();
   const user = useUser();
-  const currentCustomer = useSelector(getCustomer);
+  const currentCustomer = useCustomer();
   const callback = () =>
     openDialog(EditUserDialog, {
       resolve: {

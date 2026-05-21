@@ -1,12 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import { getServiceProviderByCustomer } from '@/marketplace/common/api';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { ConnectRemoteOfferingsAction } from './ConnectRemoteOfferingsAction';
 import { SingleOfferingImportAction } from './SingleOfferingImportAction';
@@ -20,7 +18,7 @@ interface OfferingDropdownActionsProps {
 export const OfferingDropdownActions: FC<OfferingDropdownActionsProps> = ({
   refetch,
 }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const user = useUser();
   const canCreateOffering = hasPermission(user, {
     permission: PermissionEnum.CREATE_OFFERING,

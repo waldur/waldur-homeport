@@ -1,18 +1,17 @@
 import { useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 
 import {
   MarketplaceProjectUpdateRequestsFilter,
   selectMarketplaceProjectUpdateRequestsFilter,
   MarketplaceProjectUpdateRequestsFilterFormId,
 } from '@/table/generated/MarketplaceProjectUpdateRequestsFilter';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { BaseProjectUpdateRequestsList } from './BaseProjectUpdateRequestsList';
 
 const OrganizationProjectUpdateRequestsListTable = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
 
   const formFilter = useMemo(

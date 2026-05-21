@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import { Field, Form, useForm } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   callManagingOrganisationsList,
   proposalProtectedCallsAvailableComplianceChecklistsList,
@@ -25,7 +24,7 @@ import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 interface CallFormData {
   name: string;
@@ -57,7 +56,7 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
 }) => {
   const { showErrorResponse, showSuccess } = useNotify();
   const { closeDialog } = useModal();
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const router = useRouter();
 
   const {

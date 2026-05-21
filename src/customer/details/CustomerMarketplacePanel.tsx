@@ -11,14 +11,13 @@ import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-pro
 import { ServiceProviderManagement } from '@/marketplace/service-providers/ServiceProviderManagement';
 import { ServiceProvider } from '@/marketplace/types';
 import { useNotify } from '@/store/notify';
-import { useUser } from '@/workspace/hooks';
-import { getCustomer } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
 
 import { DisableServiceProviderButton } from './DisableServiceProviderButton';
 import { RegisterServiceProviderButton } from './RegisterServiceProviderButton';
 
 export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const user = useUser();
 
   const { showErrorResponse } = useNotify();

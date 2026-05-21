@@ -1,7 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { startCase } from 'lodash-es';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import {
   marketplacePluginsList,
@@ -13,7 +12,7 @@ import { formatDate, parseDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 import { DeployPage } from '../deploy/DeployPage';
 import { Offering } from '../types';
@@ -50,7 +49,7 @@ export const OfferingDetailsPage: React.FC = () => {
       : translate('Add resource'),
   );
 
-  const project = useSelector(getProject);
+  const project = useProject();
   usePermissionView(() => {
     if (project?.end_date) {
       const endDate = parseDate(project.end_date);

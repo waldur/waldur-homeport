@@ -2,7 +2,6 @@ import { useRouter } from '@uirouter/react';
 import * as yaml from 'js-yaml';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   marketplaceProviderOfferingsImportOffering,
   OfferingExportDataRequest,
@@ -12,7 +11,7 @@ import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { WizardStepIndicator, useWizard } from '@/wizard';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { WizardButtons } from '../import/WizardButtons';
 import { WizardTabs } from '../import/WizardTabs';
@@ -50,7 +49,7 @@ export const SingleOfferingImportDialog: FunctionComponent<
   const { step, setStep, goBack, goNext, isFirstStep, isLastStep } = useWizard(
     SINGLE_OFFERING_IMPORT_STEPS,
   );
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const router = useRouter();
 
   const importMutation = useManagedMutation<

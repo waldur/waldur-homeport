@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { ProjectDigestPreviewResponse } from 'waldur-js-client';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
@@ -9,7 +8,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { useCustomerProjects } from '../workspace/fetchCustomer';
 
@@ -22,7 +21,7 @@ interface ProjectDigestPreviewProps {
 export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
   customerUuid,
 }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { showErrorResponse } = useNotify();
   const { loading: projectsLoading } = useCustomerProjects();
   const [preview, setPreview] = useState<ProjectDigestPreviewResponse | null>(

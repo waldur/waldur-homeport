@@ -1,11 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { IssuesList } from '@/issues/list/IssuesList';
-import { getProject } from '@/workspace/selectors';
+import { useProject } from '@/workspace/hooks';
 
 export const ProjectIssuesList: FunctionComponent = () => {
-  const project = useSelector(getProject);
+  const project = useProject();
 
   const filter = useMemo(
     () => ({ project: project && project.url }),

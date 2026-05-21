@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   marketplaceProviderResourcesList,
   MarketplaceProviderResourcesListData,
@@ -28,7 +27,7 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import {
@@ -310,7 +309,7 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
   ];
 
 const ProviderResourcesListTable: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
+  const customer = useCustomer();
   const { values } = useFormState();
   const filterValues: ResourceFilter = values;
 
