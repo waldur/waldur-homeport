@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import {
   ComponentUserUsage,
   marketplaceComponentUserUsagesList,
@@ -7,6 +7,7 @@ import {
 
 import { formatDateTime } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
+import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
 import { translate } from '@/i18n';
 import { ResourceLink } from '@/resource/ResourceLink';
 import { createFetcher } from '@/table/api';
@@ -18,11 +19,13 @@ import { ReportingTitle } from '../ReportingTitle';
 import { usageTableTabs } from '../utils';
 
 import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
-import { mapStateToFilter } from './ResourceUsageList';
+import { selectResourceUsageFilter } from './ResourceUsageList';
 import { UsageExpandableRow } from './UserUsageExpandableRow';
 
-export const UserUsageList: FC = () => {
-  const filter = useSelector(mapStateToFilter);
+const UserUsageListTable: FC = () => {
+  const { values } = useFormState();
+  const filter = useMemo(() => selectResourceUsageFilter(values), [values]);
+
   const tableProps = useTable({
     table: 'UserUsageReports',
     fetchData: createFetcher(marketplaceComponentUserUsagesList),
@@ -118,8 +121,22 @@ export const UserUsageList: FC = () => {
         expandableRow={({ row }) => (
           <UsageExpandableRow row={row} type="user-usage" />
         )}
-        filters={<ResourceUsageFilter form={FORM_ID} />}
+        filters={<ResourceUsageFilter />}
+        formId={FORM_ID}
       />
     </>
   );
 };
+
+export const UserUsageList: FC = () => (
+  <Form
+    id={FORM_ID}
+    onSubmit={() => {}}
+    initialValues={{
+      accounting_period: makeLastTwelveMonthsFilterPeriods()[0],
+    }}
+    subscription={{ values: true }}
+  >
+    {() => <UserUsageListTable />}
+  </Form>
+);

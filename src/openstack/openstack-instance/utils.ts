@@ -142,27 +142,27 @@ export const formatAddressList = (row: OpenStackNestedPort) =>
     row.fixed_ips?.map((fip) => fip.ip_address).join(', ') || null,
   );
 
-export const getQuotas = ({ formData, usages, limits }) => {
+export const getQuotas = ({ attributes, usages, limits }) => {
   const quotas: Quota[] = [
     {
       name: 'vcpu',
       usage: usages.cores,
       limit: limits.cores,
-      required: formData.flavor ? formData.flavor.cores : 0,
+      required: attributes.flavor ? attributes.flavor.cores : 0,
     },
     {
       name: 'ram',
       usage: usages.ram,
       limit: limits.ram,
-      required: formData.flavor ? formData.flavor.ram : 0,
+      required: attributes.flavor ? attributes.flavor.ram : 0,
     },
     {
       name: 'storage',
       usage: usages.disk,
       limit: limits.disk,
-      required: getTotalStorage(formData) || 0,
+      required: getTotalStorage(attributes) || 0,
     },
-    ...extendVolumeTypeQuotas(formData, usages, limits),
+    ...extendVolumeTypeQuotas(attributes, usages, limits),
   ];
   return quotas;
 };

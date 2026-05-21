@@ -157,7 +157,7 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
             <div style={{ maxWidth: 300 }}>
               <Field
                 name="request_comment"
-                component={StringField as any}
+                component={StringField}
                 placeholder={translate('Optional')}
               />
             </div>

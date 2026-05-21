@@ -1,12 +1,11 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useState, useMemo, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import Select from 'react-select';
 import { projectsRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncPaginate, Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
@@ -297,8 +296,6 @@ export const ProjectDetailPage: FC = () => {
             getOptionLabel={(option: OrganizationOption) => option.name}
             isClearable
             noOptionsMessage={() => translate('No organizations')}
-            className="metronic-select-container"
-            classNamePrefix="metronic-select"
           />
         </FormGroup>
 
@@ -326,8 +323,6 @@ export const ProjectDetailPage: FC = () => {
             isDisabled={!selectedOrganization}
             isLoading={projectLoading}
             noOptionsMessage={() => translate('No projects')}
-            className="metronic-select-container"
-            classNamePrefix="metronic-select"
           />
         </FormGroup>
 
@@ -335,7 +330,7 @@ export const ProjectDetailPage: FC = () => {
           label={translate('Resource')}
           className="flex-grow-1 mw-400px"
         >
-          <Select<ResourceOption>
+          <Select
             placeholder={translate('Select resource...')}
             options={resourceOptions}
             value={selectedResource}
@@ -347,8 +342,6 @@ export const ProjectDetailPage: FC = () => {
             isClearable
             isDisabled={!projectUuid || resourcesLoading}
             isLoading={resourcesLoading}
-            className="metronic-select-container"
-            classNamePrefix="metronic-select"
           />
         </FormGroup>
 
@@ -356,7 +349,7 @@ export const ProjectDetailPage: FC = () => {
           label={translate('Component type')}
           className="flex-grow-1 mw-300px"
         >
-          <Select<ComponentTypeOption>
+          <Select
             placeholder={translate('All types')}
             options={typeOptions}
             value={selectedType}
@@ -366,8 +359,6 @@ export const ProjectDetailPage: FC = () => {
             isClearable
             isDisabled={!selectedResource || typesLoading}
             isLoading={typesLoading}
-            className="metronic-select-container"
-            classNamePrefix="metronic-select"
           />
         </FormGroup>
       </div>

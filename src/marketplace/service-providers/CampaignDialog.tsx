@@ -12,10 +12,10 @@ import {
 import { ProgressStep } from '@/core/ProgressSteps';
 import { required, requiredArray } from '@/core/validators';
 import { NumberField, SelectField, StringField } from '@/form';
-import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import * as api from '@/marketplace/common/api';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
@@ -142,7 +142,7 @@ export const CampaignDialog = ({
             </div>
 
             {step === 0 ? (
-              <FormContainerFinal submitting={submitting} className="size-lg">
+              <FormContainer submitting={submitting} className="size-lg">
                 <StringField
                   name="name"
                   label={translate('Campaign name')}
@@ -179,7 +179,7 @@ export const CampaignDialog = ({
                   validate={required}
                 />
 
-                <AsyncSelectFieldFinal
+                <AsyncSelectField
                   name="offerings"
                   label={translate('Offerings')}
                   placeholder={translate('Select offerings...')}
@@ -196,9 +196,9 @@ export const CampaignDialog = ({
                   required
                   validate={requiredArray}
                 />
-              </FormContainerFinal>
+              </FormContainer>
             ) : (
-              <FormContainerFinal submitting={submitting} className="size-lg">
+              <FormContainer submitting={submitting} className="size-lg">
                 <NumberField
                   name="discount"
                   label={translate('Discount')}
@@ -213,7 +213,7 @@ export const CampaignDialog = ({
                   label={translate('Auto apply')}
                   hideLabel
                 />
-              </FormContainerFinal>
+              </FormContainer>
             )}
           </ModalDialog>
         </form>

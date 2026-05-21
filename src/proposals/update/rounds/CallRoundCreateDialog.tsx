@@ -11,6 +11,7 @@ import { parseDate } from '@/core/dateUtils';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 
@@ -60,6 +61,8 @@ const validate = (values: ProtectedRoundRequest) => {
 export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
   props,
 ) => {
+  const { closeDialog } = useModal();
+
   const createRoundMutation = useManagedMutation<
     any,
     any,
@@ -99,8 +102,6 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
         submission_window_days?: number;
         number_of_rounds?: number;
       },
-      _dispatch,
-      formProps,
     ) => {
       try {
         if (formData.repeats) {
@@ -120,12 +121,12 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
         } else {
           await createRoundMutation.mutateAsync(formData);
         }
-        formProps.destroy();
+        closeDialog();
       } catch {
         // Error handled by useManagedMutation
       }
     },
-    [createRoundMutation, bulkCreateRoundsMutation],
+    [createRoundMutation, bulkCreateRoundsMutation, closeDialog],
   );
   return (
     <WizardFormContainer

@@ -2,13 +2,11 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { change } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { getQueryParams, syncFiltersToURL } from '@/core/filters';
 import { ResourcesFilterStorage } from '@/core/StorageManager';
 import { translate } from '@/i18n';
-import { MARKETPLACE_LANDING_FILTER_FORM } from '@/marketplace/constants';
 import { setMarketplaceFilter } from '@/marketplace/landing/filter/store/actions';
 import { getMarketplaceFilters } from '@/marketplace/landing/filter/store/selectors';
 import {
@@ -56,7 +54,7 @@ const _setFilter = ({
           getValueLabel={(value) => value?.name}
           remove={() => {
             dispatch(applyFilters(table, false));
-            dispatch(change(form, name, null, true));
+
             _setFilter({ table, form, label, name, value: null, dispatch });
             dispatch(applyFilters(table, true));
           }}
@@ -81,46 +79,6 @@ export const useOrganizationAndProjectFiltersForResources = (
   const syncResourceFilters = useCallback(
     (formData: ResourceFilterValues) => {
       batch(() => {
-        // Update all resources table filter
-        if (!from || from === 'category-resources') {
-          dispatch(
-            change(
-              PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
-              'organization',
-              formData?.organization,
-              true,
-            ),
-          );
-          dispatch(
-            change(
-              PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
-              'project',
-              formData?.project,
-              true,
-            ),
-          );
-        }
-
-        // Update resources by category table filter
-        if (!from || from === 'all-resources') {
-          dispatch(
-            change(
-              CATEGORY_RESOURCES_ALL_FILTER_FORM_ID,
-              'organization',
-              formData?.organization,
-              true,
-            ),
-          );
-          dispatch(
-            change(
-              CATEGORY_RESOURCES_ALL_FILTER_FORM_ID,
-              'project',
-              formData?.project,
-              true,
-            ),
-          );
-        }
-
         // Update table filter storages
         if (!from || from === 'category-resources') {
           _setFilter({
@@ -198,23 +156,6 @@ export const useOrganizationAndProjectFiltersForResources = (
           : formData?.project;
 
         dispatch(
-          change(
-            MARKETPLACE_LANDING_FILTER_FORM,
-            'organization',
-            organizationValue,
-            true,
-          ),
-        );
-        dispatch(
-          change(
-            MARKETPLACE_LANDING_FILTER_FORM,
-            'project',
-            projectValue,
-            true,
-          ),
-        );
-
-        dispatch(
           setMarketplaceFilter({
             name: 'organization',
             value: organizationValue,
@@ -246,7 +187,6 @@ export const useOrganizationAndProjectFiltersForResources = (
   const clearAllFilters = useCallback(() => {
     const emptyFilters: Record<string, null> = {};
     filters?.forEach((item) => {
-      dispatch(change(MARKETPLACE_LANDING_FILTER_FORM, item.name, null, true));
       dispatch(setMarketplaceFilter({ name: item.name, value: null }));
       emptyFilters[item.name] = null;
     });
@@ -256,12 +196,8 @@ export const useOrganizationAndProjectFiltersForResources = (
 
   const removeFilter = useCallback(
     (name: string) => {
-      dispatch(change(MARKETPLACE_LANDING_FILTER_FORM, name, null, true));
       dispatch(setMarketplaceFilter({ name, value: null }));
       if (name === 'organization') {
-        dispatch(
-          change(MARKETPLACE_LANDING_FILTER_FORM, 'project', null, true),
-        );
         dispatch(setMarketplaceFilter({ name: 'project', value: null }));
         syncResourceFilters({ organization: null, project: null });
       } else if (name === 'project') {

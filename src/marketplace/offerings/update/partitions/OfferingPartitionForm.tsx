@@ -16,7 +16,7 @@ const NonNegativeField = ({ label, name }) => (
   <FormGroup label={label}>
     <Field
       name={name}
-      component={NumberField as any}
+      component={NumberField}
       min={0}
       validate={validateNonNegative}
     />
@@ -29,7 +29,7 @@ export const OfferingPartitionForm: FC = () => {
       <FormGroup label={translate('Partition name')} required>
         <Field
           name="partition_name"
-          component={StringField as any}
+          component={StringField}
           validate={required}
         />
       </FormGroup>
@@ -37,10 +37,10 @@ export const OfferingPartitionForm: FC = () => {
       {/* Architecture */}
       <GroupHeader>{translate('Architecture')}</GroupHeader>
       <FormGroup label={translate('CPU architecture (e.g., x86_64/amd/zen3)')}>
-        <Field name="cpu_arch" component={StringField as any} />
+        <Field name="cpu_arch" component={StringField} />
       </FormGroup>
       <FormGroup label={translate('GPU architecture (e.g., nvidia/cc90)')}>
-        <Field name="gpu_arch" component={StringField as any} />
+        <Field name="gpu_arch" component={StringField} />
       </FormGroup>
 
       {/* CPU Configuration */}
@@ -114,7 +114,7 @@ export const OfferingPartitionForm: FC = () => {
         <Field
           label={translate('Exclusive topology access required')}
           name="exclusive_topo"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           alignMiddle
         />
       </FormGroup>
@@ -122,7 +122,7 @@ export const OfferingPartitionForm: FC = () => {
         <Field
           label={translate('Exclusive user access required')}
           name="exclusive_user"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           alignMiddle
         />
       </FormGroup>
@@ -134,13 +134,13 @@ export const OfferingPartitionForm: FC = () => {
         name="priority_tier"
       />
       <FormGroup label={translate('Quality of service (QOS) name')}>
-        <Field name="qos" component={StringField as any} />
+        <Field name="qos" component={StringField} />
       </FormGroup>
       <FormGroup>
         <Field
           label={translate('Require reservation for job allocation')}
           name="req_resv"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           alignMiddle
         />
       </FormGroup>

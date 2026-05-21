@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { Campaign, promotionsCampaignsList } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
@@ -12,6 +12,7 @@ import {
   PromotionsCampaignsFilter,
   selectPromotionsCampaignsFilter,
   CampaignStateOptions,
+  PromotionsCampaignsFilterFormId,
 } from '@/table/generated/PromotionsCampaignsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -28,7 +29,13 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
     ({ row }) => <ProviderCampaignResourceExpandable campaign={row} />,
     [],
   );
-  const formFilter = useSelector(selectPromotionsCampaignsFilter);
+  const { values } = useFormState();
+
+  const formFilter = useMemo(
+    () => selectPromotionsCampaignsFilter(values),
+    [values],
+  );
+
   const filter = useMemo(
     () => ({
       service_provider_uuid: provider?.uuid,
@@ -82,13 +89,26 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
       rowActions={ProviderCampaignActions}
       expandableRow={ExpandableRow}
       filters={<PromotionsCampaignsFilter />}
+      formId={PromotionsCampaignsFilterFormId}
     />
   );
 };
 
-export const ProviderCampaignsList = ({ provider }) => {
+const ProviderCampaignsListTable = ({ provider }) => {
   if (!provider) {
     return <CustomerResourcesListPlaceholder />;
   }
   return <ProviderCampaignsListComponent provider={provider} />;
 };
+
+export const ProviderCampaignsList = (props) => (
+  <Form
+    id={PromotionsCampaignsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ProviderCampaignsListTable {...props} />}
+  </Form>
+);

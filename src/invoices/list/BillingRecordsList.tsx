@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { invoicesList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -12,6 +12,7 @@ import { createFetcher } from '@/table/api';
 import {
   InvoicesFilter,
   InvoicesFilterFormId,
+  selectInvoicesFilter,
 } from '@/table/generated/InvoicesFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -35,14 +36,16 @@ const RowActions = ({ row, fetch }) => (
   />
 );
 
-export const BillingRecordsList: FunctionComponent = () => {
+const BillingRecordsListTable: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
-  const stateFilter: any = useSelector(getFormValues(InvoicesFilterFormId));
+  const { values } = useFormState();
+
+  const stateFilter = useMemo(() => selectInvoicesFilter(values), [values]);
+
   const filter = useMemo(
     () => ({
       ...stateFilter,
       customer: customer.url,
-      state: stateFilter?.state?.map((option) => option.value),
       field: [
         'uuid',
         'state',
@@ -118,6 +121,19 @@ export const BillingRecordsList: FunctionComponent = () => {
       title={translate('Invoices')}
       enableExport={true}
       showPageSizeSelector
+      formId={InvoicesFilterFormId}
     />
   );
 };
+
+export const BillingRecordsList = (props) => (
+  <Form
+    id={InvoicesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <BillingRecordsListTable {...props} />}
+  </Form>
+);

@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { InvoiceItemDetail, invoiceItemsList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -11,6 +11,7 @@ import { createFetcher } from '@/table/api';
 import {
   selectInvoiceItemsFilter,
   InvoiceItemsFilter,
+  InvoiceItemsFilterFormId,
 } from '@/table/generated/InvoiceItemsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -21,10 +22,14 @@ interface SupportInvoiceItemsListProps {
   accountingPeriods: { label: string; value: PeriodOption }[];
 }
 
-export const SupportInvoiceItemsList: FunctionComponent<
+const SupportInvoiceItemsListTable: FunctionComponent<
   SupportInvoiceItemsListProps
-> = ({ initialValues, accountingPeriods }) => {
-  const filterValues = useSelector(selectInvoiceItemsFilter);
+> = ({ accountingPeriods }) => {
+  const { values } = useFormState();
+  const filterValues = useMemo(
+    () => selectInvoiceItemsFilter(values),
+    [values],
+  );
 
   const tableProps = useTable({
     table: 'supportInvoiceItems',
@@ -36,12 +41,8 @@ export const SupportInvoiceItemsList: FunctionComponent<
   return (
     <Table<InvoiceItemDetail>
       {...tableProps}
-      filters={
-        <InvoiceItemsFilter
-          accountingPeriods={accountingPeriods}
-          initialValues={initialValues}
-        />
-      }
+      formId={InvoiceItemsFilterFormId}
+      filters={<InvoiceItemsFilter accountingPeriods={accountingPeriods} />}
       columns={[
         {
           title: translate('Name'),
@@ -126,3 +127,16 @@ export const SupportInvoiceItemsList: FunctionComponent<
     />
   );
 };
+
+export const SupportInvoiceItemsList: FunctionComponent<
+  SupportInvoiceItemsListProps
+> = (props) => (
+  <Form
+    id={InvoiceItemsFilterFormId}
+    initialValues={props.initialValues}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <SupportInvoiceItemsListTable {...props} />}
+  </Form>
+);

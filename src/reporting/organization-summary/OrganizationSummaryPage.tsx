@@ -1,30 +1,17 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form, useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import {
-  OrganizationFilter,
-  ORGANIZATION_FILTER_FORM,
-} from './OrganizationFilter';
+import { OrganizationFilter } from './OrganizationFilter';
 import { OrganizationResourcesTable } from './OrganizationResourcesTable';
 
-interface OrganizationFilterFormValues {
-  organization?: {
-    uuid: string;
-    name: string;
-  };
-}
-
-export const OrganizationSummaryPage: FC = () => {
-  const formValues = useSelector(
-    getFormValues(ORGANIZATION_FILTER_FORM),
-  ) as OrganizationFilterFormValues;
-  const customerUuid = formValues?.organization?.uuid;
+const OrganizationSummaryContent: FC = () => {
+  const { values } = useFormState();
+  const customerUuid = values?.organization?.uuid;
 
   return (
     <>
@@ -53,3 +40,14 @@ export const OrganizationSummaryPage: FC = () => {
     </>
   );
 };
+
+export const OrganizationSummaryPage: FC = () => (
+  <Form
+    onSubmit={() => {}}
+    render={({ handleSubmit }) => (
+      <form onSubmit={handleSubmit}>
+        <OrganizationSummaryContent />
+      </form>
+    )}
+  />
+);

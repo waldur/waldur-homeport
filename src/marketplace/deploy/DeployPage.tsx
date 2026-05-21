@@ -1,5 +1,9 @@
+import { useRouter } from '@uirouter/react';
+import { FORM_ERROR } from 'final-form';
+import arrayMutators from 'final-form-arrays';
 import { get } from 'lodash-es';
 import {
+  FC,
   createRef,
   useCallback,
   useEffect,
@@ -7,11 +11,16 @@ import {
   useRef,
   useState,
 } from 'react';
+import { Form, useForm } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { useEffectOnce } from 'react-use';
-import { InjectedFormProps, reduxForm } from 'redux-form';
-import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
+import {
+  OrderDetails,
+  PublicOfferingDetails,
+  marketplaceOrdersCreate,
+  marketplaceOrdersUpdateAttachment,
+} from 'waldur-js-client';
 
+import { fileSerializer, formDataOptions } from '@/core/api';
 import { parseDate } from '@/core/dateUtils';
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -19,32 +28,32 @@ import { getCustomer } from '@/customer/utils';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { Offering, Plan } from '@/marketplace/types';
+import { useModal } from '@/modal/actions';
 import { INSTANCE_TYPE } from '@/openstack/constants';
 import { calculateSystemVolumeSize } from '@/openstack/openstack-instance/utils';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
+import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 import {
-  getProject as currentProjectSelector,
   getCustomer as currentCustomerSelector,
+  getProject as currentProjectSelector,
 } from '@/workspace/selectors';
 
 import { getOrderFormComponent } from '../common/registry';
 import { DeployFormData, Limits } from '../common/types';
 import { PageBarProvider } from '../context';
-import { ORDER_FORM_ID } from '../details/constants';
+import { formatOrderForCreate } from '../details/utils';
 import { getMarketplaceFilters } from '../landing/filter/store/selectors';
-import { getDefaultLimits } from '../offerings/utils';
+import { getDefaultLimits, scrollToSectionById } from '../offerings/utils';
 import { isExperimentalUiComponentsVisible } from '../utils';
 
-import { DeployForm } from './DeployForm';
 import { DeployPageActions } from './DeployPageActions';
 import { DeployPageSidebar } from './DeployPageSidebar';
 import { resolveCustomer, resolveProject } from './initUtils';
-import { orderFormDataSelector } from './selectors';
-import { orderCustomerSelector } from './selectors';
-import { orderProjectSelector } from './selectors';
+import { NavigationBlocker } from './NavigationBlocker';
+import { useOrderFormData } from './selectors';
 import { OfferingConfigurationFormStep } from './types';
 import { hasStepWithField } from './utils';
 
@@ -54,12 +63,12 @@ interface DeployPageProps {
   offering: Offering;
   limits?: Limits;
   previewMode?: boolean;
+  initialLimits?: Limits;
+  plan?: Plan;
 }
 
-interface BaseDeployPageProps
-  extends Partial<InjectedFormProps>, DeployPageProps {
+interface BaseDeployPageProps extends DeployPageProps {
   order?: OrderDetails;
-  formData: DeployFormData;
   selectedOffering: Offering;
   inputFormSteps: OfferingConfigurationFormStep[];
   initialLimits?: Limits;
@@ -68,23 +77,18 @@ interface BaseDeployPageProps
 }
 
 export const BaseDeployPage = ({
-  formData,
   inputFormSteps,
   selectedOffering,
   ...props
 }: BaseDeployPageProps) => {
+  const form = useForm();
+  const formData = useOrderFormData();
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
-
-  const marketplaceFilters = useSelector(getMarketplaceFilters);
 
   const isEdit = useMemo(() => Boolean(props.order), [props]);
 
   const user = useUser();
-  const customer = useSelector(orderCustomerSelector);
-  const project = useSelector(orderProjectSelector);
-
-  const currentCustomer = useSelector(currentCustomerSelector);
-  const currentProject = useSelector(currentProjectSelector);
+  const { customer, project } = formData;
 
   const isProjectInactive = useMemo(() => {
     if (project?.end_date) {
@@ -135,72 +139,18 @@ export const BaseDeployPage = ({
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Initialize project and cloud and initial attributes
-  useEffectOnce(() => {
-    const initializeFormValues = async () => {
-      const initialValues: DeployFormData = {};
-      const urlParams = getInitialValues();
-
-      const context = {
-        urlParams,
-        marketplaceFilters,
-        currentProject,
-        currentCustomer,
-        selectedOffering,
-      };
-
-      // Initialize project
-      const resolved = await resolveProject(context);
-      if (resolved.project) {
-        initialValues.project = resolved.project;
-      }
-      if (resolved.customer) {
-        initialValues.customer = resolved.customer;
-      }
-
-      // Initialize customer (organization) if not already set
-      if (!initialValues.customer) {
-        const customer = await resolveCustomer(context);
-        if (customer) {
-          initialValues.customer = customer;
-        }
-      }
-
-      if (hasStepWithField(formSteps, 'offering') && selectedOffering) {
-        initialValues.offering = selectedOffering;
-      }
-
-      if (props.initialLimits || props.limits) {
-        initialValues.limits = props.initialLimits || props.limits;
-      }
-      if (props.plan) {
-        initialValues.plan = props.plan;
-      }
-
-      Object.entries(initialValues).forEach(([key, value]) => {
-        props.change(key, value);
-      });
-
-      setIsLoading(false);
-    };
-
-    initializeFormValues();
-  });
-
   // Initialize limits and plan when the offering changes
   useEffect(() => {
     if (isEdit) return;
     if (selectedOffering) {
       if (hasStepWithField(formSteps, 'attributes.subnet_cidr')) {
-        props.change('attributes.subnet_cidr', '192.168.42.0/24');
+        form.change('attributes.subnet_cidr', '192.168.42.0/24');
       }
       if (selectedOffering.type === MARKETPLACE_RANCHER) {
-        props.change('attributes.nodes', []);
+        form.change('attributes.nodes', []);
       }
       if (selectedOffering.type === INSTANCE_TYPE) {
-        props.change(
+        form.change(
           'attributes.config_drive',
           Boolean(
             (selectedOffering as unknown as PublicOfferingDetails)
@@ -208,16 +158,16 @@ export const BaseDeployPage = ({
           ),
         );
       }
-      props.change('limits', {
+      form.change('limits', {
         ...getDefaultLimits(selectedOffering),
         ...props.limits,
       });
     }
     if (hasStepWithField(formSteps, 'plan') && plans) {
       if (props.plan) {
-        props.change('plan', props.plan);
+        form.change('plan', props.plan);
       } else if (plans.length === 1) {
-        props.change('plan', plans[0]);
+        form.change('plan', plans[0]);
       }
     }
   }, [selectedOffering, plans, project]);
@@ -268,8 +218,9 @@ export const BaseDeployPage = ({
       }
       if (completed !== completedSteps[i]) {
         setCompletedSteps((value) => {
-          value[i] = completed;
-          return value;
+          const next = [...value];
+          next[i] = completed;
+          return next;
         });
         // Just for a force re-render
         setLastY(lastY + 1);
@@ -282,7 +233,7 @@ export const BaseDeployPage = ({
     setCompletedSteps,
     stepRefs.current,
     formSteps,
-    props.form,
+    form,
   ]);
 
   useEffect(() => {
@@ -292,12 +243,12 @@ export const BaseDeployPage = ({
         flavor: formData?.attributes?.flavor,
         system_volume_size: formData?.attributes?.system_volume_size,
       };
-      props.change(
+      form.change(
         'attributes.system_volume_size',
         calculateSystemVolumeSize(data),
       );
     }
-  }, [formData?.attributes?.flavor, formData?.attributes?.image, props.change]);
+  }, [formData?.attributes?.flavor, formData?.attributes?.image, form]);
 
   // Sync organization and project UUIDs to URL parameters
   useEffect(() => {
@@ -320,7 +271,7 @@ export const BaseDeployPage = ({
       const _customer = await getCustomer(customer.uuid, [
         'display_billing_info_in_projects',
       ]);
-      props.change('customer', { ...customer, ..._customer });
+      form.change('customer', { ...customer, ..._customer });
     } catch {
       return;
     }
@@ -332,10 +283,6 @@ export const BaseDeployPage = ({
     fetchCustomerBillingFlag(customer);
   }, [customer]);
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
   if (props.previewMode) {
     return (
       <form className="form">
@@ -346,7 +293,6 @@ export const BaseDeployPage = ({
                 id={step.id}
                 title={step.label}
                 offering={selectedOffering}
-                change={props.change}
                 params={step.params}
                 disabled={
                   step.id !== 'step-general' &&
@@ -364,7 +310,7 @@ export const BaseDeployPage = ({
   }
 
   return (
-    <DeployForm handleSubmit={props.handleSubmit} offering={selectedOffering}>
+    <form onSubmit={form.submit}>
       <PageBarProvider scrollOffset={100}>
         <SidebarLayout.Header>
           <div className="d-flex justify-content-between align-items-center w-100">
@@ -383,7 +329,6 @@ export const BaseDeployPage = ({
                   id={step.id}
                   title={step.label}
                   offering={selectedOffering}
-                  change={props.change}
                   params={step.params}
                   disabled={
                     step.id !== 'step-general' &&
@@ -421,34 +366,145 @@ export const BaseDeployPage = ({
           </SidebarLayout.Sidebar>
         </SidebarLayout.Container>
       </PageBarProvider>
-    </DeployForm>
+    </form>
   );
 };
 
-export const DeployPage = reduxForm<{}, DeployPageProps>({
-  form: ORDER_FORM_ID,
-  touchOnChange: true,
-})((props) => {
-  const formData = useSelector(orderFormDataSelector);
-  const selectedOffering: Offering = formData?.offering || props?.offering;
-  const OrderFormComponent = getOrderFormComponent(selectedOffering.type);
+export const DeployPage: FC<DeployPageProps> = (props) => {
+  const { confirm } = useModal();
+  const { showErrorResponse, showSuccess } = useNotify();
+  const router = useRouter();
 
-  // Reset the form when the offering changes
+  const marketplaceFilters = useSelector(getMarketplaceFilters);
+  const currentCustomer = useSelector(currentCustomerSelector);
+  const currentProject = useSelector(currentProjectSelector);
+
+  const [initialValues, setInitialValues] = useState<DeployFormData | null>(
+    null,
+  );
+
   useEffect(() => {
-    if (
-      props.offering &&
-      formData.offering &&
-      props.offering?.uuid !== formData.offering?.uuid
-    ) {
-      props.reset();
-    }
-  }, [props.offering, formData]);
+    const initializeFormValues = async () => {
+      const values: DeployFormData = {};
+      const urlParams = getInitialValues();
+
+      const context = {
+        urlParams,
+        marketplaceFilters,
+        currentProject,
+        currentCustomer,
+        selectedOffering: props.offering,
+      };
+
+      // Initialize project
+      const resolved = await resolveProject(context);
+      if (resolved.project) {
+        values.project = resolved.project;
+      }
+      if (resolved.customer) {
+        values.customer = resolved.customer;
+      }
+
+      // Initialize customer (organization) if not already set
+      if (!values.customer) {
+        const customer = await resolveCustomer(context);
+        if (customer) {
+          values.customer = customer;
+        }
+      }
+
+      values.offering = props.offering;
+
+      if (props.initialLimits || props.limits) {
+        values.limits = props.initialLimits || props.limits;
+      }
+      if (props.plan) {
+        values.plan = props.plan;
+      }
+
+      setInitialValues(values);
+    };
+
+    initializeFormValues();
+  }, [props.offering, marketplaceFilters, currentCustomer, currentProject]);
+
+  const handleMutate = useCallback(
+    async (values: DeployFormData) => {
+      await confirm(
+        translate('Confirmation'),
+        translate('Are you sure you want to submit the order?'),
+      );
+      try {
+        const order = await marketplaceOrdersCreate({
+          body: formatOrderForCreate(props.offering, values),
+        });
+        if (values.attachment instanceof File) {
+          await marketplaceOrdersUpdateAttachment({
+            path: { uuid: order.data.uuid },
+            body: {
+              attachment: fileSerializer(values.attachment),
+            },
+            ...formDataOptions,
+          });
+        }
+        showSuccess(translate('Order has been submitted.'));
+        router.stateService.go('marketplace-resource-details', {
+          resource_uuid: order.data.marketplace_resource_uuid,
+        });
+      } catch (error) {
+        const errorMessage = translate('Unable to submit order.');
+        showErrorResponse(error, errorMessage);
+        const errorData = {} as any;
+        const _errorData = error?.response?.data;
+        if (_errorData && typeof _errorData === 'object') {
+          for (const key of Object.keys(_errorData)) {
+            if (key === 'non_field_errors') {
+              Object.assign(errorData, { plan_entries: _errorData[key] });
+              // Scroll to plan step
+              scrollToSectionById('step-plan');
+            } else {
+              Object.assign(errorData, { [key]: _errorData[key] });
+            }
+          }
+        }
+        return {
+          [FORM_ERROR]: errorMessage,
+          ...errorData,
+        };
+      }
+    },
+    [props.offering, confirm, showErrorResponse, showSuccess, router],
+  );
+
+  if (!initialValues) {
+    return <LoadingSpinner />;
+  }
 
   return (
-    <OrderFormComponent
-      selectedOffering={selectedOffering}
-      formData={formData}
-      {...props}
+    <Form
+      key={props.offering?.uuid}
+      mutators={{ ...arrayMutators }}
+      onSubmit={handleMutate}
+      initialValues={initialValues}
+      subscription={{ values: true }}
+      render={({ values }) => {
+        const selectedOffering = values.offering || props.offering;
+        const OrderFormComponent = getOrderFormComponent(selectedOffering.type);
+
+        if (!OrderFormComponent) {
+          return null;
+        }
+
+        return (
+          <>
+            <NavigationBlocker />
+            <OrderFormComponent
+              selectedOffering={selectedOffering}
+              {...props}
+            />
+          </>
+        );
+      }}
     />
   );
-});
+};

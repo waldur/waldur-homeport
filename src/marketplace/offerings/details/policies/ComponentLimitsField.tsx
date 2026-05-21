@@ -82,7 +82,7 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                         <td>
                           <Field
                             name={`${component}.type`}
-                            component={SelectField as any}
+                            component={SelectField}
                             validate={required}
                             placeholder={translate('Select component...')}
                             options={getAvailableOptions(details)}
@@ -95,7 +95,7 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                         <td>
                           <Field
                             name={`${component}.limit`}
-                            component={NumberField as any}
+                            component={NumberField}
                             validate={required}
                             unit={details?.measured_unit}
                           />

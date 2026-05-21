@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
+import { Field } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { OfferingUserState } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -16,7 +16,7 @@ import { ProviderAutocomplete } from '@/marketplace/orders/ProviderAutocomplete'
 import { TableFilterItem } from '@/table/TableFilterItem';
 import { getCustomer } from '@/workspace/selectors';
 
-import { PROVIDER_OFFERING_USERS_FORM_ID } from '../constants';
+export const PROVIDER_OFFERING_USERS_FORM_ID = 'ProviderOfferingUsersFilter';
 
 interface ProviderOfferingUsersFilterProps {
   hasOrganizationColumn?: boolean;
@@ -52,7 +52,7 @@ const profileCompletenessOptions = [
 const OfferingUserStateFilter = () => (
   <Field
     name="state"
-    component={(fieldProps) => (
+    render={(fieldProps) => (
       <Select
         placeholder={translate('Select state...')}
         options={getOfferingUserStateFilterOptions()}
@@ -65,9 +65,8 @@ const OfferingUserStateFilter = () => (
   />
 );
 
-const PureProviderOfferingUsersFilter: FunctionComponent<
-  ProviderOfferingUsersFilterProps &
-    InjectedFormProps<{}, ProviderOfferingUsersFilterProps>
+export const ProviderOfferingUsersFilter: FunctionComponent<
+  ProviderOfferingUsersFilterProps
 > = ({ hasOrganizationColumn }) => {
   const customer = useSelector(getCustomer);
   const offeringFilter = useMemo(
@@ -77,7 +76,7 @@ const PureProviderOfferingUsersFilter: FunctionComponent<
       shared: true,
       state: undefined,
     }),
-    [customer],
+    [customer, hasOrganizationColumn],
   );
 
   return (
@@ -85,7 +84,7 @@ const PureProviderOfferingUsersFilter: FunctionComponent<
       <TableFilterItem
         title={translate('Offering')}
         name="offering"
-        badgeValue={(value) => value.name}
+        badgeValue={(value) => value?.name}
       >
         <OfferingAutocomplete
           offeringFilter={offeringFilter}
@@ -120,7 +119,7 @@ const PureProviderOfferingUsersFilter: FunctionComponent<
         >
           <Field
             name="has_complete_profile"
-            component={(fieldProps) => (
+            render={(fieldProps) => (
               <SelectField
                 {...fieldProps}
                 placeholder={translate('Select status')}
@@ -137,10 +136,3 @@ const PureProviderOfferingUsersFilter: FunctionComponent<
     </>
   );
 };
-
-const enhance = reduxForm<{}, ProviderOfferingUsersFilterProps>({
-  form: PROVIDER_OFFERING_USERS_FORM_ID,
-  destroyOnUnmount: false,
-})(PureProviderOfferingUsersFilter);
-
-export const ProviderOfferingUsersFilter = enhance;

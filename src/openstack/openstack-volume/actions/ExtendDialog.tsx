@@ -64,7 +64,7 @@ export const VolumeExtendDialog = ({
               <InputGroup>
                 <Field
                   name="size"
-                  component={InputField as any}
+                  component={InputField}
                   type="number"
                   required={true}
                   min={minSize}

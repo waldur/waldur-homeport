@@ -140,6 +140,9 @@ describe('ChangeLimitsDialog', () => {
     // In ComponentRow, it's a NumberField
     const coresInput = screen.getAllByRole('spinbutton')[0];
     fireEvent.change(coresInput, { target: { value: '10' } });
+    await waitFor(() => {
+      expect(coresInput).toHaveValue(10);
+    });
 
     const submitBtn = screen.getByText('Submit');
     await act(() => {
@@ -173,12 +176,17 @@ describe('ChangeLimitsDialog', () => {
     const coresInput = screen.getAllByRole('spinbutton')[0];
     // Set value above max (max is 100 in mockFetchedData)
     fireEvent.change(coresInput, { target: { value: '150' } });
+    await waitFor(() => {
+      expect(coresInput).toHaveValue(150);
+    });
 
     // In many Waldur forms, error messages appear as tooltips or text below fields
     // Assuming minAmount/maxAmount validators provide standard error messages
     // Let's just check if the form is invalid (SubmitButton should be disabled)
     const submitBtn = screen.getByText('Submit');
-    expect(submitBtn).toBeDisabled();
+    await waitFor(() => {
+      expect(submitBtn).toBeDisabled();
+    });
   });
 
   it('renders "Request for a change" label if order cannot be approved', async () => {

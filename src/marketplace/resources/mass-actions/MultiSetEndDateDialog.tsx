@@ -7,7 +7,7 @@ import { formatISODate } from '@/core/dateUtils';
 import { FormFooter } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -87,10 +87,10 @@ export const MultiSetEndDateDialog: FC<MultiSetEndDateDialogProps> = (
               />
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <Field
                 name="clear"
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 label={translate('Clear termination date')}
                 help_text={translate(
                   'Remove the termination date so the resource is not scheduled for expiration.',
@@ -107,7 +107,7 @@ export const MultiSetEndDateDialog: FC<MultiSetEndDateDialogProps> = (
                   minDate={DateTime.now().plus({ weeks: 1 }).toISO()}
                 />
               )}
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

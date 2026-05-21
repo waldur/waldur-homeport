@@ -48,7 +48,7 @@ export function TableToolbarActions() {
   const onClickFilterButton = useCallback(
     (event: React.MouseEvent) => {
       if (filterPosition === 'sidebar') {
-        actions.openFiltersDrawer(slots.filters);
+        actions.openFiltersDrawer(slots.filters, config.formId);
       } else {
         actions.toggleFilterMenu();
         const parent: HTMLElement = event.currentTarget.closest('.card-table');

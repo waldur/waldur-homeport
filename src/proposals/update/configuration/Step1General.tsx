@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
+import { useForm, useFormState } from 'react-final-form';
 import {
   proposalProtectedCallsOfferingsList,
   RequestedOffering,
@@ -37,55 +38,52 @@ export const Step1General: FC<WizardFormStepProps> = (props) => {
     [offeringsQuery],
   );
 
+  const { values, submitting } = useFormState({
+    subscription: { values: true, submitting: true },
+  });
+  const form = useForm();
+
+  const { offering } = values;
+
+  useEffect(() => {
+    if (!offering) return;
+    const fullOffering = (offeringsQuery?.data || []).find(
+      (item) => item.uuid === offering.uuid,
+    );
+    if (fullOffering) {
+      form.change('offering', fullOffering);
+      form.change('plan', fullOffering.plan_details);
+    } else {
+      form.change('offering', null);
+    }
+  }, [offeringsQuery?.data, offering]);
   return (
     <WizardForm {...props}>
-      {(wizardProps) => {
-        const { offering } = wizardProps.formValues;
-
-        useEffect(() => {
-          if (!offering) return;
-          const fullOffering = (offeringsQuery?.data || []).find(
-            (item) => item.uuid === offering.uuid,
-          );
-          if (fullOffering) {
-            wizardProps.change('offering', fullOffering);
-            wizardProps.change('plan', fullOffering.plan_details);
-          } else {
-            wizardProps.change('offering', null);
-          }
-        }, [offeringsQuery?.data, offering]);
-
-        return (
-          <FormContainer
-            submitting={wizardProps.submitting}
-            className="size-lg"
-          >
-            <StringField
-              name="name"
-              label={translate('Template name')}
-              placeholder={translate('e.g., Standard Compute Package')}
-              required
-              validate={required}
-            />
-            <SelectField
-              name="offering"
-              label={translate('Offering')}
-              options={offeringOptions}
-              isLoading={offeringsQuery.isLoading}
-              getOptionValue={(option) => option.uuid}
-              getOptionLabel={(option) => option.offering_name}
-              required
-              validate={required}
-              onChange={(v) => {
-                if (v.uuid !== offering?.uuid) {
-                  wizardProps.change('plan', v.plan_details);
-                  wizardProps.change('limits', null);
-                }
-              }}
-            />
-          </FormContainer>
-        );
-      }}
+      <FormContainer submitting={submitting} className="size-lg">
+        <StringField
+          name="name"
+          label={translate('Template name')}
+          placeholder={translate('e.g., Standard Compute Package')}
+          required
+          validate={required}
+        />
+        <SelectField
+          name="offering"
+          label={translate('Offering')}
+          options={offeringOptions}
+          isLoading={offeringsQuery.isLoading}
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={(option) => option.offering_name}
+          required
+          validate={required}
+          onChange={(v) => {
+            if (v.uuid !== offering?.uuid) {
+              form.change('plan', v.plan_details);
+              form.change('limits', null);
+            }
+          }}
+        />
+      </FormContainer>
     </WizardForm>
   );
 };

@@ -128,13 +128,13 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           )}
           required
         >
-          <Field name="api_url" component={StringField as any} validate={url} />
+          <Field name="api_url" component={StringField} validate={url} />
         </FormGroup>
 
         <FormGroup label={translate('Authentication Method')} required>
           <Field
             name="auth_method"
-            component={SelectField as any}
+            component={SelectField}
             options={AUTH_METHODS}
             simpleValue
           />
@@ -143,7 +143,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         <FormGroup>
           <Field
             name="verify_ssl"
-            component={AwesomeCheckboxField as any}
+            component={AwesomeCheckboxField}
             label={translate('Verify SSL Certificate')}
           />
         </FormGroup>
@@ -163,11 +163,11 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
             description={translate('Your Atlassian account email')}
             required
           >
-            <Field name="email" component={StringField as any} />
+            <Field name="email" component={StringField} />
           </FormGroup>
 
           <FormGroup label={translate('API Token')} required>
-            <Field name="token" component={SecretField as any} />
+            <Field name="token" component={SecretField} />
           </FormGroup>
         </div>
       )}
@@ -184,10 +184,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           </p>
 
           <FormGroup label={translate('Personal Access Token')} required>
-            <Field
-              name="personal_access_token"
-              component={SecretField as any}
-            />
+            <Field name="personal_access_token" component={SecretField} />
           </FormGroup>
         </div>
       )}
@@ -197,11 +194,11 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           <h4 className="mb-4">{translate('Basic Authentication')}</h4>
 
           <FormGroup label={translate('Username')} required>
-            <Field name="username" component={StringField as any} />
+            <Field name="username" component={StringField} />
           </FormGroup>
 
           <FormGroup label={translate('Password')} required>
-            <Field name="password" component={SecretField as any} />
+            <Field name="password" component={SecretField} />
           </FormGroup>
         </div>
       )}

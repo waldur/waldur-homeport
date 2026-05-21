@@ -11,9 +11,6 @@ export const QuestionReviewTriggersForm = () => (
       'Text answers containing these keywords will be flagged for review',
     )}
   >
-    <Field
-      component={CommaSeparatedListField as any}
-      name="review_answer_value"
-    />
+    <Field component={CommaSeparatedListField} name="review_answer_value" />
   </FormGroup>
 );

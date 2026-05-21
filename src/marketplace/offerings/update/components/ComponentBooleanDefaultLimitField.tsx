@@ -9,7 +9,7 @@ export const ComponentBooleanDefaultLimitField: FunctionComponent = () => (
   <FormGroup space={5}>
     <Field
       name="default_limit"
-      component={AwesomeCheckboxField as any}
+      component={AwesomeCheckboxField}
       label={translate('Enable by default')}
       parse={Boolean}
       normalize={(v) => (v ? 1 : 0)}

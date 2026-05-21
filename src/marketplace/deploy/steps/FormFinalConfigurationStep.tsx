@@ -1,13 +1,12 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { FormGroup, TextField } from '@/form';
 import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
 
-import { orderProjectSelector } from '../selectors';
+import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
 
 import { OrderStartDateField } from './OrderStartDateField';
@@ -15,7 +14,7 @@ import { ResourceNameGroup } from './ResourceNameGroup';
 import { TerminationDateField } from './TerminationDateField';
 
 export const FormFinalConfigurationStep = (props: FormStepProps) => {
-  const project = useSelector(orderProjectSelector);
+  const { project } = useOrderFormData();
 
   const hasPrepaidComponents = useMemo(
     () => props.offering?.components?.some((c) => c.is_prepaid),

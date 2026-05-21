@@ -171,6 +171,7 @@ export function TableProvider<TData = any>({
         hideIfEmpty: props.hideIfEmpty ?? false,
         hideExpandToggle: props.hideExpandToggle ?? false,
         placeholderHasRetry: props.placeholderHasRetry ?? true,
+        formId: props.formId,
       },
 
       // Slots

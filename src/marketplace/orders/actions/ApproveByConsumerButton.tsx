@@ -37,11 +37,11 @@ export const ApproveByConsumerButton: FC<
   });
 
   const callback = useCallback(() => {
-    if (offering?.plugin_options?.['enable_purchase_order_upload']) {
+    if (offering?.plugin_options?.enable_purchase_order_upload) {
       openDialog(UploadPurchaseOrderDialog, {
         order,
         refetch,
-        required: offering?.plugin_options['require_purchase_order_upload'],
+        required: offering?.plugin_options?.require_purchase_order_upload,
       });
     } else {
       mutate();

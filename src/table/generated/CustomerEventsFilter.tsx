@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { EventsListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const CustomerEventsFeatureOptions: CustomerEventsFeatureOption[] = [
@@ -58,29 +56,20 @@ const PureCustomerEventsFilter: FunctionComponent<{}> = () => (
 
 export const CustomerEventsFilterFormId = 'CustomerEventsFilter';
 
-interface CustomerEventsFilterFormData {
+export interface CustomerEventsFilterFormData {
   feature: CustomerEventsFeatureOption[];
 }
 
-export const CustomerEventsFilter = reduxForm<CustomerEventsFilterFormData, {}>(
-  {
-    form: CustomerEventsFilterFormId,
-    destroyOnUnmount: false,
-    initialValues: {
-      feature: [
-        { label: translate('Organization events'), value: 'customers' },
-      ],
-    },
-  },
-)(PureCustomerEventsFilter);
+export const CustomerEventsFilter = PureCustomerEventsFilter;
+export const CustomerEventsFilterInitialValues = {
+  feature: [{ label: translate('Organization events'), value: 'customers' }],
+};
 
 type CustomerEventsFilterQuery = EventsListData['query'];
 
-export const selectCustomerEventsFilter = createSelector<
-  RootState,
-  Partial<CustomerEventsFilterFormData>,
-  CustomerEventsFilterQuery
->(getFormValues(CustomerEventsFilterFormId), (values) => {
+export const selectCustomerEventsFilter = (
+  values?: Partial<CustomerEventsFilterFormData>,
+): CustomerEventsFilterQuery => {
   const filter: CustomerEventsFilterQuery = {} as any;
   if (values) {
     if (values.feature) {
@@ -88,4 +77,4 @@ export const selectCustomerEventsFilter = createSelector<
     }
   }
   return filter;
-});
+};

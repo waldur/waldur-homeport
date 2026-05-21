@@ -111,11 +111,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 'Pre-filled from the source call. The copy always starts in Draft state.',
               )}
             >
-              <Field
-                name="name"
-                component={StringField as any}
-                validate={required}
-              />
+              <Field name="name" component={StringField} validate={required} />
             </FormGroup>
 
             <h5 className="mb-4">{translate('Copy options')}</h5>
@@ -123,7 +119,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
               <Col md={6}>
                 <Field
                   name="copy_documents"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Documents')}
                   help_text={translate(
                     'Reuse the same document library entries.',
@@ -132,7 +128,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 />
                 <Field
                   name="copy_offerings"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Offerings')}
                   help_text={translate(
                     'Copy requested offerings (reset to "Requested" state).',
@@ -141,7 +137,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 />
                 <Field
                   name="copy_rounds"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Rounds')}
                   help_text={translate(
                     'Copy round schedule and configuration only; no proposals follow.',
@@ -150,7 +146,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 />
                 <Field
                   name="copy_workflow_steps"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Workflow steps')}
                   help_text={translate(
                     'Copy the proposal evaluation step definitions.',
@@ -159,7 +155,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 />
                 <Field
                   name="copy_resource_templates"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Resource templates')}
                   help_text={translate(
                     'Copy resource-request templates. Skipped automatically if "Offerings" is unchecked.',
@@ -170,7 +166,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
               <Col md={6}>
                 <Field
                   name="copy_role_mappings"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Role mappings')}
                   help_text={translate(
                     'Copy proposal-to-project role mappings.',
@@ -179,7 +175,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 />
                 <Field
                   name="copy_applicant_visibility_config"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Applicant visibility')}
                   help_text={translate(
                     'Copy applicant-data visibility settings.',
@@ -188,7 +184,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 />
                 <Field
                   name="copy_coi_configuration"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('COI configuration')}
                   help_text={translate(
                     'Copy conflict-of-interest detection settings.',
@@ -197,7 +193,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 />
                 <Field
                   name="copy_matching_configuration"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Matching configuration')}
                   help_text={translate(
                     'Copy reviewer-proposal affinity calculation settings.',
@@ -206,7 +202,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 />
                 <Field
                   name="copy_assignment_configuration"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Assignment configuration')}
                   help_text={translate(
                     'Copy reviewer assignment automation settings.',

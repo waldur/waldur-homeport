@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
 import { FC } from 'react';
 import { FormCheck, OverlayTrigger, Popover } from 'react-bootstrap';
+import { FieldProps } from 'react-final-form';
 import BaseSelect, {
   ClearIndicatorProps,
   components,
@@ -22,7 +23,6 @@ import {
   withAsyncPaginate,
 } from 'react-select-async-paginate';
 import BaseWindowedSelect from 'react-windowed-select';
-import { BaseFieldProps } from 'redux-form';
 
 import { Tag } from '@/core/Tag';
 import { translate } from '@/i18n';
@@ -203,7 +203,7 @@ type CustomSelectProps = {
   size?: 'sm';
   creatable?: boolean;
 } & SelectProps<any> &
-  Partial<Omit<BaseFieldProps, 'onChange'>>;
+  Partial<Omit<FieldProps<any, any>, 'onChange'>>;
 
 // Utility to reorder options: selected options at the top (for both isMulti and single)
 const reorderOptions = (options, value, getOptionValue, isMulti) => {
@@ -424,6 +424,8 @@ export const WindowedSelect = ({ components = undefined, ...props }) => {
       {...REACT_SELECT_MENU_PORTALING}
       components={composedComponents}
       {...(props as any)}
+      className={classNames('metronic-select-container', props.className)}
+      classNamePrefix="metronic-select"
     />
   );
 };

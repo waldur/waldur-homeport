@@ -1,7 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceStatsResourcesMissingUsageList,
   ResourceMissingUsage,
@@ -17,7 +15,12 @@ import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import { FORM_ID, UsageMonitoringFilter } from './UsageMonitoringFilter';
+import {
+  FORM_ID,
+  UsageMonitoringFilter,
+  billingPeriodOptions,
+} from './UsageMonitoringFilter';
+import { getCurrentBillingPeriod } from './utils';
 
 const ResourceNameColumn = ({ row }: { row: ResourceMissingUsage }) => (
   <Link
@@ -75,19 +78,17 @@ const StateColumn = ({ row }: { row: ResourceMissingUsage }) => {
   );
 };
 
-const mapStateToFilter = createSelector(
-  getFormValues(FORM_ID),
-  (filterValues: any) => {
-    const filter: any = {};
-    if (filterValues?.billing_period) {
-      filter.billing_period = filterValues.billing_period.value;
-    }
-    return filter;
-  },
-);
+const UsageMonitoringTable: FC = () => {
+  const { values } = useFormState();
+  const filterValues = values;
 
-export const UsageMonitoringPage: FC = () => {
-  const filter = useSelector(mapStateToFilter);
+  const filter = useMemo(() => {
+    const res: any = {};
+    if (filterValues?.billing_period) {
+      res.billing_period = filterValues.billing_period.value;
+    }
+    return res;
+  }, [filterValues]);
 
   const tableProps = useTable({
     table: 'MissingUsageTable',
@@ -148,7 +149,24 @@ export const UsageMonitoringPage: FC = () => {
         hasQuery
         enableExport
         filters={<UsageMonitoringFilter />}
+        formId={FORM_ID}
       />
     </>
   );
 };
+
+export const UsageMonitoringPage: FC = () => (
+  <Form
+    id={FORM_ID}
+    onSubmit={() => {}}
+    initialValues={{
+      billing_period:
+        billingPeriodOptions.find(
+          (o) => o.value === getCurrentBillingPeriod(),
+        ) || billingPeriodOptions[0],
+    }}
+    subscription={{ values: true }}
+  >
+    {() => <UsageMonitoringTable />}
+  </Form>
+);

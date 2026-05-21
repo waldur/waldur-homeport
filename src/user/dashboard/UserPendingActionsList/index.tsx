@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { userActionsList, UserAction } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -7,6 +7,7 @@ import { createFetcher } from '@/table/api';
 import {
   UserPendingActionsFilter,
   selectUserPendingActionsFilter,
+  UserPendingActionsFilterFormId,
 } from '@/table/generated/UserPendingActionsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -51,8 +52,13 @@ const createSortedFetcher = (baseFetcher: ReturnType<typeof createFetcher>) => {
   };
 };
 
-export const UserPendingActionsList: FC<OwnProps> = () => {
-  const filter = useSelector(selectUserPendingActionsFilter);
+const UserPendingActionsListTable: FC<OwnProps> = () => {
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectUserPendingActionsFilter(values),
+    [values],
+  );
 
   const fetchData = useMemo(
     () => createSortedFetcher(createFetcher(userActionsList)),
@@ -90,6 +96,19 @@ export const UserPendingActionsList: FC<OwnProps> = () => {
       tableActions={<RecalculateUserActionsButton refetch={tableProps.fetch} />}
       filters={<UserPendingActionsFilter />}
       hasQuery={true}
+      formId={UserPendingActionsFilterFormId}
     />
   );
 };
+
+export const UserPendingActionsList: FC<any> = (props) => (
+  <Form
+    id={UserPendingActionsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <UserPendingActionsListTable {...props} />}
+  </Form>
+);

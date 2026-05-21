@@ -23,16 +23,14 @@ export const GenderSelectField: FC<GenderSelectFieldProps> = ({
       value={options.find((option) => option.value === input.value) || null}
       onChange={(option: { value: GenderEnum; label: string } | null) => {
         input.onChange(option?.value ?? null);
-        input.onBlur(option?.value ?? null);
+        input.onBlur();
       }}
-      onBlur={() => input.onBlur(input.value)}
+      onBlur={() => input.onBlur()}
       options={options}
       getOptionLabel={(option) => option.label}
       getOptionValue={(option) => String(option.value)}
       isClearable={isClearable}
       isDisabled={isDisabled}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };

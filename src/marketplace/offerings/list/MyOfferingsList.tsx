@@ -1,38 +1,53 @@
+import { useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 
 import {
   MarketplaceProviderOfferingsFilter,
+  MarketplaceProviderOfferingsFilterFormId,
   selectMarketplaceProviderOfferingsFilter,
 } from '@/table/generated/MarketplaceProviderOfferingsFilter';
 import { getCustomer } from '@/workspace/selectors';
 
 import { BaseOfferingsList } from './OfferingsList';
 
-const mapStateToFilter = createSelector(
-  getCustomer,
-  selectMarketplaceProviderOfferingsFilter,
-  (customer, filterValues) => {
-    const filter: MarketplaceProviderOfferingsListData['query'] = {
+const MyOfferingsListTable = () => {
+  const customer = useSelector(getCustomer);
+  const { values } = useFormState();
+  const filterValues = useMemo(
+    () => selectMarketplaceProviderOfferingsFilter(values),
+    [values],
+  );
+
+  const filter = useMemo(() => {
+    const result: MarketplaceProviderOfferingsListData['query'] = {
       ...filterValues,
       billable: false,
     };
     if (customer) {
-      filter.customer_uuid = customer.uuid;
+      result.customer_uuid = customer.uuid;
     }
-    return filter;
-  },
-);
+    return result;
+  }, [customer, filterValues]);
 
-export const MyOfferingsList = () => {
-  const filter = useSelector(mapStateToFilter);
   return (
     <BaseOfferingsList
       table="marketplace-my-offerings"
+      formId={MarketplaceProviderOfferingsFilterFormId}
       filter={filter}
       showActions={false}
       filters={<MarketplaceProviderOfferingsFilter />}
     />
   );
 };
+
+export const MyOfferingsList = () => (
+  <Form
+    id={MarketplaceProviderOfferingsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <MyOfferingsListTable />}
+  </Form>
+);

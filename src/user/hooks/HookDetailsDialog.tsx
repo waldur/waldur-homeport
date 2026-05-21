@@ -145,9 +145,13 @@ export const HookDetailsDialog: FunctionComponent<{
                 {!hook ? (
                   <Field
                     name="hook_type"
-                    component={HookTypeField as any}
                     validate={required}
-                    hideLabel={true}
+                    render={({ input }) => (
+                      <HookTypeField
+                        input={input}
+                        defaultValue={initialValues.hook_type}
+                      />
+                    )}
                   />
                 ) : (
                   <>
@@ -156,7 +160,7 @@ export const HookDetailsDialog: FunctionComponent<{
                     </FormGroup>
                     <Field
                       name="is_active"
-                      component={AwesomeCheckboxField as any}
+                      component={AwesomeCheckboxField}
                       label={translate('Enabled')}
                     />
                   </>
@@ -165,7 +169,7 @@ export const HookDetailsDialog: FunctionComponent<{
                   <FormGroup label={translate('Email address')} required>
                     <Field
                       name="email"
-                      component={StringField as any}
+                      component={StringField}
                       type="email"
                       validate={required}
                       data-testid="email-address"
@@ -175,7 +179,7 @@ export const HookDetailsDialog: FunctionComponent<{
                   <FormGroup label={translate('Destination URL')} required>
                     <Field
                       name="destination_url"
-                      component={StringField as any}
+                      component={StringField}
                       type="url"
                       validate={required}
                       data-testid="destination-url"
@@ -184,9 +188,9 @@ export const HookDetailsDialog: FunctionComponent<{
                 ) : null}
                 <Field
                   name="event_groups"
-                  component={MultiSelectField as any}
-                  options={eventGroups}
-                  hideLabel={true}
+                  render={({ input }) => (
+                    <MultiSelectField input={input} options={eventGroups} />
+                  )}
                 />
               </>
             )}

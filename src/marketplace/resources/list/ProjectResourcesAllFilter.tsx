@@ -1,20 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { Field, getFormValues, reduxForm } from 'redux-form';
+import { Field as FinalField, useFormState } from 'react-final-form';
 import { MarketplacePublicOfferingsListData, Project } from 'waldur-js-client';
 
-import {
-  getInitialValues,
-  syncFiltersToURL,
-  useSyncInitialFiltersToURL,
-} from '@/core/filters';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
-import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@/marketplace/resources/list/constants';
 import { TableFilterItem } from '@/table/TableFilterItem';
 import { Customer } from '@/workspace/types';
 
@@ -28,18 +21,12 @@ interface ProjectResourcesAllFilterProps {
   hasCustomerFilter?: boolean;
   customer?: Customer;
   project?: Project;
-  change?: any;
-  initialValues?: any;
 }
 
-const PureProjectResourcesAllFilter: FunctionComponent<
+export const ProjectResourcesAllFilter: FunctionComponent<
   ProjectResourcesAllFilterProps
 > = (props) => {
-  useSyncInitialFiltersToURL(props.initialValues);
-
-  const formValues = useSelector(
-    getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID),
-  ) as { project: Project; organization: Customer };
+  const { values: formValues } = useFormState();
 
   const offeringFilter = useMemo(
     (): MarketplacePublicOfferingsListData['query'] => ({
@@ -125,8 +112,9 @@ const PureProjectResourcesAllFilter: FunctionComponent<
         name="include_terminated"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <Field
+        <FinalField
           name="include_terminated"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate('Include terminated')}
         />
@@ -136,8 +124,9 @@ const PureProjectResourcesAllFilter: FunctionComponent<
         name="paused"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <Field
+        <FinalField
           name="paused"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate('Paused')}
         />
@@ -147,8 +136,9 @@ const PureProjectResourcesAllFilter: FunctionComponent<
         name="downscaled"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <Field
+        <FinalField
           name="downscaled"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate('Downscaled')}
         />
@@ -158,8 +148,9 @@ const PureProjectResourcesAllFilter: FunctionComponent<
         name="restrict_member_access"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <Field
+        <FinalField
           name="restrict_member_access"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate('Restrict member access')}
         />
@@ -167,12 +158,3 @@ const PureProjectResourcesAllFilter: FunctionComponent<
     </>
   );
 };
-
-const enhance = reduxForm<{}, ProjectResourcesAllFilterProps>({
-  form: PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
-  destroyOnUnmount: false,
-  onChange: syncFiltersToURL,
-  initialValues: getInitialValues(),
-});
-
-export const ProjectResourcesAllFilter = enhance(PureProjectResourcesAllFilter);

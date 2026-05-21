@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   CustomerQuotasListData,
   CustomerQuotasQuotaNameEnum,
@@ -10,7 +9,6 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const CustomerQuotasQuotaNameOptions: CustomerQuotasQuotaNameOption[] = [
@@ -90,27 +88,20 @@ const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
 
 export const CustomerQuotasFilterFormId = 'CustomerQuotasFilter';
 
-interface CustomerQuotasFilterFormData {
+export interface CustomerQuotasFilterFormData {
   quota_name: CustomerQuotasQuotaNameOption;
 }
 
-export const CustomerQuotasFilter = reduxForm<CustomerQuotasFilterFormData, {}>(
-  {
-    form: CustomerQuotasFilterFormId,
-    destroyOnUnmount: false,
-    initialValues: {
-      quota_name: { label: translate('Resources'), value: 'estimated_price' },
-    },
-  },
-)(PureCustomerQuotasFilter);
+export const CustomerQuotasFilter = PureCustomerQuotasFilter;
+export const CustomerQuotasFilterInitialValues = {
+  quota_name: { label: translate('Resources'), value: 'estimated_price' },
+};
 
 type CustomerQuotasFilterQuery = CustomerQuotasListData['query'];
 
-export const selectCustomerQuotasFilter = createSelector<
-  RootState,
-  Partial<CustomerQuotasFilterFormData>,
-  CustomerQuotasFilterQuery
->(getFormValues(CustomerQuotasFilterFormId), (values) => {
+export const selectCustomerQuotasFilter = (
+  values?: Partial<CustomerQuotasFilterFormData>,
+): CustomerQuotasFilterQuery => {
   const filter: CustomerQuotasFilterQuery = {} as any;
   if (values) {
     if (values.quota_name) {
@@ -118,4 +109,4 @@ export const selectCustomerQuotasFilter = createSelector<
     }
   }
   return filter;
-});
+};

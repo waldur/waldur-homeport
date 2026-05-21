@@ -1,5 +1,4 @@
 import { WarningIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -12,7 +11,7 @@ interface UserActionsProps {
 }
 
 export const UserActions = ({ user }: UserActionsProps) => {
-  const showIssues = useSelector(hasSupport);
+  const showIssues = hasSupport();
   return (
     <div className="d-flex gap-2">
       {showIssues && (

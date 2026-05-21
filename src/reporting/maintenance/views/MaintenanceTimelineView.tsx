@@ -85,8 +85,6 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
           }
           options={groupingOptions}
           isClearable={false}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </FormGroup>
       <FormGroup label={translate('Color by')} className="mw-150px mb-0">
@@ -97,8 +95,6 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
           }
           options={colorOptions}
           isClearable={false}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </FormGroup>
     </div>

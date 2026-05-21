@@ -95,7 +95,7 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
               hideLabel
               placeholder={translate('Enter a comment...')}
               validate={required}
-              component={TextField as any}
+              component={TextField}
               autoFocus
             />
           </ModalDialog>

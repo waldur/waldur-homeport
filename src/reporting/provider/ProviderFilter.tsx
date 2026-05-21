@@ -1,20 +1,25 @@
 import { FC, useEffect } from 'react';
-import { Field, WrappedFieldProps, reduxForm } from 'redux-form';
+import { Field as FinalField, useForm } from 'react-final-form';
 
 import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 
-const ProviderSelectField: FC<WrappedFieldProps> = (fieldProps) => {
+const ProviderSelectField: FC<any> = (fieldProps) => {
+  const form = useForm();
+  /**
+   * Automatically pre-selects the first available service provider on component mount
+   * if no provider is currently selected in the form.
+   */
   useEffect(() => {
     if (!fieldProps.input.value) {
       providerAutocomplete('', [], { page: 1 }).then((result) => {
         if (result.options && result.options.length > 0) {
-          fieldProps.input.onChange(result.options[0]);
+          form.change('provider', result.options[0]);
         }
       });
     }
-  }, [fieldProps.input]);
+  }, [fieldProps.input.value, form]);
 
   return (
     <AsyncPaginate
@@ -27,17 +32,10 @@ const ProviderSelectField: FC<WrappedFieldProps> = (fieldProps) => {
       onChange={(value) => fieldProps.input.onChange(value)}
       noOptionsMessage={() => translate('No providers')}
       isClearable={true}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };
 
-const PureProviderFilter: FC = () => (
-  <Field name="provider" component={ProviderSelectField as any} />
+export const ProviderFilter: FC = () => (
+  <FinalField name="provider" component={ProviderSelectField} />
 );
-
-export const ProviderFilter = reduxForm({
-  form: 'ProviderReportingFilter',
-  destroyOnUnmount: false,
-})(PureProviderFilter);

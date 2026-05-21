@@ -5,7 +5,7 @@ import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
-import { FormGroupFinal } from '@/form/FormGroupFinal';
+import { FormGroup } from '@/form/FormGroup';
 import { translate } from '@/i18n';
 import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
 import { formatSubnet } from '@/openstack/openstack-instance/utils';
@@ -52,7 +52,7 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
                   label={translate('Subnet')}
                   validate={required}
                   required={true}
-                  component={FormGroupFinal}
+                  component={FormGroup}
                   options={freeSubnets}
                   placeholder={translate('Select subnet')}
                   getOptionValue={(option) => option.url}

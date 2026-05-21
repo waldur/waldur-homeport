@@ -33,6 +33,7 @@ export const BaseOfferingsList: FunctionComponent<{
   showActions?: boolean;
   showProvider?: boolean;
   filters?;
+  formId?: string;
 }> = ({
   table,
   filter,
@@ -40,6 +41,7 @@ export const BaseOfferingsList: FunctionComponent<{
   showActions,
   showProvider,
   filters,
+  formId,
 }) => {
   const props = useTable({
     table,
@@ -154,6 +156,7 @@ export const BaseOfferingsList: FunctionComponent<{
           : null
       }
       hasQuery={true}
+      formId={formId}
       filters={filters}
       hasOptionalColumns
     />

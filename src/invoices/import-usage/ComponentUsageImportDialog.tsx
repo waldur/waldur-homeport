@@ -1,5 +1,5 @@
 import { ArrowRightIcon } from '@phosphor-icons/react';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { invoicesImportUsage } from 'waldur-js-client';
 
 import { ProgressStep } from '@/core/ProgressSteps';
@@ -12,7 +12,11 @@ import { Step1UploadFile } from './Step1UploadFile';
 import { Step2ColumnMapping } from './Step2ColumnMapping';
 import { Step3PreviewAndImport } from './Step3PreviewAndImport';
 import { ExcelParseResult, UsageImportRow } from './types';
-import { COMPONENT_USAGE_IMPORT_FORM_ID } from './utils';
+import {
+  COMPONENT_USAGE_IMPORT_FORM_ID,
+  getMonthOptions,
+  getYearOptions,
+} from './utils';
 
 interface ComponentUsageImportDialogProps {
   resolve: {
@@ -50,6 +54,13 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
   const { showError, showSuccess } = useNotify();
   const { closeDialog } = useModal();
 
+  const yearOptions = useMemo(() => getYearOptions(), []);
+  const monthOptions = useMemo(() => getMonthOptions(), []);
+
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
+  const currentYear = currentDate.getFullYear();
+
   const [parseResult, setParseResult] = useState<ExcelParseResult | null>(null);
 
   const handleFileParsed = useCallback((result: ExcelParseResult) => {
@@ -57,7 +68,7 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
   }, []);
 
   const submitForm = useCallback(
-    async (formData, formProps) => {
+    async (formData) => {
       try {
         const mappedData: UsageImportRow[] = formData.mappedData || [];
         const year = formData.year?.value;
@@ -113,7 +124,6 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
 
         if (result.created > 0 && !result.errors?.length) {
           props.resolve?.refetch?.();
-          formProps.destroy();
           closeDialog();
         }
       } catch (error) {
@@ -143,6 +153,8 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
       submitLabel={translate('Import')}
       initialValues={{
         mappedData: [],
+        year: yearOptions.find((y) => y.value === currentYear),
+        month: monthOptions.find((m) => m.value === currentMonth),
       }}
       data={{ parseResult, onFileParsed: handleFileParsed }}
       modalProps={{ bodyClassName: 'h-500px' }}

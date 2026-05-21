@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   CallReviewerPoolsListData,
   InvitationStatusEnum,
@@ -10,7 +9,6 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const InvitationStatusOptions: InvitationStatusOption[] = [
@@ -65,25 +63,17 @@ const PureCallReviewerPoolsFilter: FunctionComponent<{}> = () => (
 
 export const CallReviewerPoolsFilterFormId = 'CallReviewerPoolsFilter';
 
-interface CallReviewerPoolsFilterFormData {
+export interface CallReviewerPoolsFilterFormData {
   invitation_status: InvitationStatusOption[];
 }
 
-export const CallReviewerPoolsFilter = reduxForm<
-  CallReviewerPoolsFilterFormData,
-  {}
->({
-  form: CallReviewerPoolsFilterFormId,
-  destroyOnUnmount: false,
-})(PureCallReviewerPoolsFilter);
+export const CallReviewerPoolsFilter = PureCallReviewerPoolsFilter;
 
 type CallReviewerPoolsFilterQuery = CallReviewerPoolsListData['query'];
 
-export const selectCallReviewerPoolsFilter = createSelector<
-  RootState,
-  Partial<CallReviewerPoolsFilterFormData>,
-  CallReviewerPoolsFilterQuery
->(getFormValues(CallReviewerPoolsFilterFormId), (values) => {
+export const selectCallReviewerPoolsFilter = (
+  values?: Partial<CallReviewerPoolsFilterFormData>,
+): CallReviewerPoolsFilterQuery => {
   const filter: CallReviewerPoolsFilterQuery = {} as any;
   if (values) {
     if (values.invitation_status) {
@@ -93,4 +83,4 @@ export const selectCallReviewerPoolsFilter = createSelector<
     }
   }
   return filter;
-});
+};

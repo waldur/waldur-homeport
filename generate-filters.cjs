@@ -760,31 +760,23 @@ ${filters.map((f) => Generator.field(f, enumRegistry)).join('')}  </>
 
 export const ${compName}FormId = '${compName}';
 
-${propsInterface}interface ${compName}FormData {
+${propsInterface}export interface ${compName}FormData {
 ${interfaceFields}
 }
 
-export const ${compName} = reduxForm<${compName}FormData, ${propsInterfaceName}>({
-  form: ${compName}FormId,
-  destroyOnUnmount: false,
-  ${config.overrides[id]?.initialValues ? `initialValues: ${JSON.stringify(config.overrides[id].initialValues).replace(/"label":\s*"([^"]+)"/g, '"label": translate("$1")')},` : ''}
-})(Pure${compName});
+export const ${compName} = Pure${compName};
+${config.overrides[id]?.initialValues ? `export const ${compName}InitialValues = ${JSON.stringify(config.overrides[id].initialValues).replace(/"label":\s*"([^"]+)"/g, '"label": translate("$1")')};` : ''}
 
 type ${compName}Query = ${sdkDataType}['query'];
 
-export const select${compName} = createSelector<
-  RootState,
-  Partial<${compName}FormData>,
-  ${compName}Query
->(
-  getFormValues(${compName}FormId),
-  (values) => {
-    const filter: ${compName}Query = {} as any;
-    if (values) {
-${filters.map(Generator.selector).join('')}    }
-    return filter;
-  }
-);
+export const select${compName} = (
+  values?: Partial<${compName}FormData>,
+): ${compName}Query => {
+  const filter: ${compName}Query = {} as any;
+  if (values) {
+${filters.map(Generator.selector).join('')}  }
+  return filter;
+};
 `;
       })
       .join('\n');
@@ -865,10 +857,8 @@ ${filters.map(Generator.selector).join('')}    }
 
     const lines = [
       `import { FunctionComponent } from 'react';`,
-      `import { Field, getFormValues, reduxForm } from 'redux-form';`,
-      `import { createSelector } from 'reselect';`,
+      `import { Field } from 'react-final-form';`,
       `import { translate } from '@/i18n';`,
-      `import { RootState } from '@/store/reducers';`,
       `import { TableFilterItem } from '@/table/TableFilterItem';`,
     ];
 

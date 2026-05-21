@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-final-form';
 import {
   RancherApplication,
   rancherAppsList,
@@ -9,7 +10,10 @@ import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
-import { RancherClusterFilter } from '@/table/generated/RancherClusterFilter';
+import {
+  RancherClusterFilter,
+  RancherClusterFilterFormId,
+} from '@/table/generated/RancherClusterFilter';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -26,10 +30,10 @@ const ApplicationActions = ({ row }) => (
   </ActionsDropdownComponent>
 );
 
-export const ClusterApplicationsList: FunctionComponent<
+const ClusterApplicationsListTable: FunctionComponent<
   TableWithPortal<{ resourceScope: RancherCluster }>
 > = ({ resourceScope, portal }) => {
-  const filter = useClusterResourceFilter(resourceScope);
+  const { filter } = useClusterResourceFilter(resourceScope);
 
   const props = useTable({
     table: 'rancher-apps',
@@ -40,6 +44,7 @@ export const ClusterApplicationsList: FunctionComponent<
   return (
     <Table<RancherApplication>
       {...props}
+      formId={RancherClusterFilterFormId}
       columns={[
         {
           title: translate('Name'),
@@ -79,3 +84,15 @@ export const ClusterApplicationsList: FunctionComponent<
     />
   );
 };
+
+export const ClusterApplicationsList: FunctionComponent<
+  TableWithPortal<{ resourceScope: RancherCluster }>
+> = (props) => (
+  <Form
+    id={RancherClusterFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <ClusterApplicationsListTable {...props} />}
+  </Form>
+);

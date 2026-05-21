@@ -10,12 +10,6 @@ import { getRoles } from './utils';
 vi.mock('waldur-js-client');
 vi.mock('./utils');
 
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-  }),
-}));
-
 vi.mock('@/store/notify', () => ({
   useNotify: () => ({
     showErrorResponse: vi.fn(),

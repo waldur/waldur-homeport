@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsList,
   marketplaceStatsProviderOfferingsRetrieve,
@@ -174,39 +173,41 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderOfferingsPage: FC = () => {
-  const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
-    provider?: { uuid: string; customer_uuid: string };
-  };
-  const providerUuid = formValues?.provider?.uuid;
-  const customerUuid = formValues?.provider?.customer_uuid;
-
   return (
-    <>
-      <ReportingTitle reportKey="provider-offerings">
-        <div className="d-flex align-items-center gap-4">
-          <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
-            {translate('Provider')}:
-          </label>
-          <div style={{ minWidth: 200 }}>
-            <ProviderFilter />
-          </div>
-        </div>
-      </ReportingTitle>
+    <Form onSubmit={() => {}} subscription={{ values: true }}>
+      {({ values }) => {
+        const providerUuid = values?.provider?.uuid;
+        const customerUuid = values?.provider?.customer_uuid;
+        return (
+          <>
+            <ReportingTitle reportKey="provider-offerings">
+              <div className="d-flex align-items-center gap-4">
+                <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+                  {translate('Provider')}:
+                </label>
+                <div style={{ minWidth: 200 }}>
+                  <ProviderFilter />
+                </div>
+              </div>
+            </ReportingTitle>
 
-      {providerUuid && customerUuid ? (
-        <>
-          <ProviderOfferingsSummary providerUuid={providerUuid} />
-          <OfferingsTable customerUuid={customerUuid} />
-        </>
-      ) : (
-        <NoResult
-          title={translate('Select a provider')}
-          message={translate(
-            'Choose a provider from the dropdown above to view offering statistics.',
-          )}
-          noAction
-        />
-      )}
-    </>
+            {providerUuid && customerUuid ? (
+              <>
+                <ProviderOfferingsSummary providerUuid={providerUuid} />
+                <OfferingsTable customerUuid={customerUuid} />
+              </>
+            ) : (
+              <NoResult
+                title={translate('Select a provider')}
+                message={translate(
+                  'Choose a provider from the dropdown above to view offering statistics.',
+                )}
+                noAction
+              />
+            )}
+          </>
+        );
+      }}
+    </Form>
   );
 };

@@ -25,9 +25,6 @@ const mockConfirm = vi.fn();
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({ closeDialog: vi.fn(), confirm: mockConfirm }),
-}));
 
 describe('CategoryManageColumnsDialog', () => {
   const renderDialog = () => {

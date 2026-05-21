@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   EventsListData,
@@ -19,7 +18,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -58,7 +56,6 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -81,7 +78,6 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -110,7 +106,6 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -142,25 +137,20 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
 
 export const EventsFilterFormId = 'EventsFilter';
 
-interface EventsFilterFormData {
+export interface EventsFilterFormData {
   organization: Customer;
   project: Project;
   user: User;
   feature: FeatureOption[];
 }
 
-export const EventsFilter = reduxForm<EventsFilterFormData, {}>({
-  form: EventsFilterFormId,
-  destroyOnUnmount: false,
-})(PureEventsFilter);
+export const EventsFilter = PureEventsFilter;
 
 type EventsFilterQuery = EventsListData['query'];
 
-export const selectEventsFilter = createSelector<
-  RootState,
-  Partial<EventsFilterFormData>,
-  EventsFilterQuery
->(getFormValues(EventsFilterFormId), (values) => {
+export const selectEventsFilter = (
+  values?: Partial<EventsFilterFormData>,
+): EventsFilterQuery => {
   const filter: EventsFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
@@ -177,4 +167,4 @@ export const selectEventsFilter = createSelector<
     }
   }
   return filter;
-});
+};

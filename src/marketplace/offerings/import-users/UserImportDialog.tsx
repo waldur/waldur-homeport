@@ -15,10 +15,7 @@ import { useNotify } from '@/store/notify';
 import { Step1UploadFile } from './Step1UploadFile';
 import { Step2PreviewAndImport } from './Step2PreviewAndImport';
 import { OfferingUserRecord, RecordStatus } from './types';
-import {
-  BULK_IMPORT_OFFERING_USERS_FORM_ID,
-  validateOfferingUserCreation,
-} from './utils';
+import { validateOfferingUserCreation } from './utils';
 
 interface UserImportDialogProps {
   resolve: {
@@ -52,7 +49,7 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
   const [status, setStatus] = useState<RecordStatus[]>([]);
 
   const submitForm = useCallback(
-    async (formData, formProps) => {
+    async (formData) => {
       try {
         const validRecords: OfferingUserRecord[] = formData.payload.filter(
           (row) => {
@@ -128,7 +125,6 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
           }
 
           if (!error.length) {
-            formProps.destroy();
             closeDialog();
           }
           return results;
@@ -151,7 +147,6 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
 
   return (
     <WizardFormContainer
-      form={BULK_IMPORT_OFFERING_USERS_FORM_ID}
       onSubmit={submitForm}
       steps={steps}
       hideStepper

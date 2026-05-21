@@ -11,7 +11,7 @@ import {
   url,
   validateMaxLength,
 } from '@/core/validators';
-import { FormGroupFinal, StringField, SubmitButton } from '@/form';
+import { FormGroup, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -53,7 +53,7 @@ export const AddEndpointDialog: FC<AddEndpointDialogProps> = (props) => {
             <Field
               name="name"
               validate={composeValidators(required, validateMaxLength(150))}
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Name')}
               required={true}
             >
@@ -62,7 +62,7 @@ export const AddEndpointDialog: FC<AddEndpointDialogProps> = (props) => {
             <Field
               name="url"
               validate={composeValidators(required, url)}
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('URL')}
               required={true}
             >

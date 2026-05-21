@@ -26,3 +26,8 @@ export const getTableOptions: (name: string) => TableOptionsType = (name) => {
 
   return registry[name];
 };
+
+export const resetTableRegistry = () => {
+  Object.keys(registry).forEach((k) => delete registry[k]);
+  Object.keys(refCounts).forEach((k) => delete refCounts[k]);
+};

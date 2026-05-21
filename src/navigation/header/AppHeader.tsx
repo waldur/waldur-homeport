@@ -3,16 +3,12 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { isDirty } from 'redux-form';
 
 import { getIconUrl } from '@/core/api';
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { hasSupport as hasSupportSelector } from '@/issues/hooks';
-import { ORDER_FORM_ID } from '@/marketplace/details/constants';
-import { useModal } from '@/modal/actions';
-import { RootState } from '@/store/reducers';
 import { useUser } from '@/workspace/hooks';
 
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
@@ -41,7 +37,6 @@ interface AppHeaderProps {
 export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   hasBreadcrumbs,
 }) => {
-  const { confirm } = useModal();
   const {
     state: { name: stateName },
   } = useCurrentStateAndParams();
@@ -50,33 +45,11 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   const [errorImg, setErrorImg] = useState(false);
 
   const hasSupport = useSelector(hasSupportSelector);
-  const isOrderFormDirty = useSelector((state: RootState) =>
-    isDirty(ORDER_FORM_ID)(state),
-  );
 
   const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.lg });
   const isResourceCreationView = stateName === 'marketplace-offering-public';
 
-  const onGoBack = async () => {
-    if (isOrderFormDirty) {
-      try {
-        await confirm(
-          translate('Unsaved changes'),
-          translate(
-            'You have unsaved changes. If you leave this page, your changes will be lost.',
-          ),
-          {
-            size: 'sm',
-            positiveButtonVariant: 'warning',
-            positiveButton: translate('Leave page'),
-            negativeButton: translate('Stay'),
-          },
-        );
-      } catch {
-        return;
-      }
-    }
-
+  const onGoBack = () => {
     window.history.back();
   };
 

@@ -1,7 +1,5 @@
 import { FunctionComponent } from 'react';
-import { reduxForm } from 'redux-form';
 
-import { getInitialValues } from '@/core/filters';
 import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
@@ -12,9 +10,7 @@ import {
 import { TagFilter } from '@/marketplace/tags/TagFilter';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-import { PROVIDER_OFFERINGS_FORM_ID } from './constants';
-
-const getFiltersFromParams = (params) => {
+export const getFiltersFromParams = (params) => {
   if (!params?.state) {
     return {
       ...params,
@@ -27,7 +23,7 @@ const getFiltersFromParams = (params) => {
   };
 };
 
-const PureProviderOfferingsFilter: FunctionComponent = () => (
+export const ProviderOfferingsFilter: FunctionComponent = () => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -50,11 +46,3 @@ const PureProviderOfferingsFilter: FunctionComponent = () => (
     </TableFilterItem>
   </>
 );
-
-const enhance = reduxForm({
-  form: PROVIDER_OFFERINGS_FORM_ID,
-  initialValues: getFiltersFromParams(getInitialValues()),
-  destroyOnUnmount: false,
-});
-
-export const ProviderOfferingsFilter = enhance(PureProviderOfferingsFilter);

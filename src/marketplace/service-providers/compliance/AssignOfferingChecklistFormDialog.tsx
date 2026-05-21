@@ -9,6 +9,7 @@ import {
 import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { ASSIGN_CHECKLIST_TO_OFFERINGS_FORM_ID } from '../constants';
@@ -39,16 +40,17 @@ interface OwnProps {
 }
 
 export const AssignOfferingChecklistFormDialog: FC<OwnProps> = (props) => {
+  const { closeDialog } = useModal();
+
   const assignMutation = useManagedMutation<
     any,
     any,
     {
       formData: { checklist: Checklist; offerings: ProviderOffering[] };
-      formProps: any;
     }
   >({
     mutationFn: async (args) => {
-      const { formData, formProps } = args;
+      const { formData } = args;
       if (!formData.checklist || !formData.offerings?.length) return;
       const promises = formData.offerings.map((offering) =>
         marketplaceProviderOfferingsUpdateComplianceChecklist({
@@ -57,7 +59,7 @@ export const AssignOfferingChecklistFormDialog: FC<OwnProps> = (props) => {
         }),
       );
       await Promise.all(promises);
-      formProps.destroy();
+      closeDialog();
     },
     successMessage: translate(
       'The checklist was assigned to the selected offerings',
@@ -67,8 +69,7 @@ export const AssignOfferingChecklistFormDialog: FC<OwnProps> = (props) => {
   });
 
   const submitForm = useCallback(
-    (formData, _dispatch, formProps) =>
-      assignMutation.mutateAsync({ formData, formProps }),
+    (formData) => assignMutation.mutateAsync({ formData }),
     [assignMutation],
   );
 

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { userPermissionRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -10,6 +10,7 @@ import {
   UserPermissionRequestsFilter,
   selectUserPermissionRequestsFilter,
   UserPermissionRequestsRemoteProjectUpdateRequestStateOptions as RemoteProjectUpdateRequestStateOptions,
+  UserPermissionRequestsFilterFormId,
 } from '@/table/generated/UserPermissionRequestsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -19,9 +20,15 @@ import { useUser } from '@/workspace/hooks';
 import { UserPermissionRequestActions } from './UserPermissionRequestActions';
 import { UserPermissionRequestExpandableRow } from './UserPermissionRequestExpandableRow';
 
-export const UserPermissionRequestsList = () => {
+const UserPermissionRequestsListTable = () => {
   const user = useUser();
-  const formFilter = useSelector(selectUserPermissionRequestsFilter);
+  const { values } = useFormState();
+
+  const formFilter = useMemo(
+    () => selectUserPermissionRequestsFilter(values),
+    [values],
+  );
+
   const filter = useMemo(
     () => ({
       created_by: user?.uuid,
@@ -72,6 +79,19 @@ export const UserPermissionRequestsList = () => {
       filters={<UserPermissionRequestsFilter />}
       rowActions={UserPermissionRequestActions}
       expandableRow={UserPermissionRequestExpandableRow}
+      formId={UserPermissionRequestsFilterFormId}
     />
   );
 };
+
+export const UserPermissionRequestsList = (props) => (
+  <Form
+    id={UserPermissionRequestsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <UserPermissionRequestsListTable {...props} />}
+  </Form>
+);

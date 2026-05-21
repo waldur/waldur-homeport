@@ -54,7 +54,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
       <FormGroup label={translate('Username')} required>
         <Field
           name="username"
-          component={StringField as any}
+          component={StringField}
           validate={composeValidators(
             required,
             usernameValidator,
@@ -66,7 +66,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
       <FormGroup label={translate('Email')} required>
         <Field
           name="email"
-          component={StringField as any}
+          component={StringField}
           validate={composeValidators(required, email)}
           placeholder={translate('e.g. john@example.com')}
         />
@@ -81,7 +81,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="is_active"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           type="checkbox"
         />
       </FormGroup>
@@ -93,7 +93,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="is_staff"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           type="checkbox"
         />
       </FormGroup>
@@ -105,7 +105,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="is_support"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           type="checkbox"
         />
       </FormGroup>
@@ -153,7 +153,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           >
             <div className="d-flex gap-2">
               <div className="flex-grow-1">
-                <Field name="password" component={SecretField as any} />
+                <Field name="password" component={SecretField} />
               </div>
               <button
                 type="button"

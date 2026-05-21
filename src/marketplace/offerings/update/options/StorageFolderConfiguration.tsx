@@ -69,7 +69,7 @@ export const StorageFolderConfiguration = ({
       >
         <Field
           name={`${name}.default_hard_quota_multiplier`}
-          component={InputField as any}
+          component={InputField}
           type="number"
           min="1"
           step="0.1"
@@ -87,7 +87,7 @@ export const StorageFolderConfiguration = ({
       >
         <Field
           name={`${name}.inode_soft_multiplier`}
-          component={InputField as any}
+          component={InputField}
           type="number"
           min="1"
           placeholder="7000"

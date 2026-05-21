@@ -51,7 +51,7 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
         >
           <FormLabel>URL</FormLabel>
           <Field
-            component={StringField as any}
+            component={StringField}
             name="url"
             id="url"
             placeholder="https://..."

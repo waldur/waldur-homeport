@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { userInvitationsList } from 'waldur-js-client';
 
@@ -12,6 +13,7 @@ import { createFetcher } from '@/table/api';
 import {
   selectUserInvitationsFilter,
   UserInvitationsFilter,
+  UserInvitationsFilterFormId,
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -21,10 +23,16 @@ import { getInvitationColumns } from './columns';
 import { InvitationActions } from './InvitationActions';
 import { InvitationsMultiSelectActions } from './InvitationsMultiSelectActions';
 
-export const InvitationsList: FunctionComponent = () => {
+const InvitationsListTable: FunctionComponent = () => {
   useTitle(translate('Invitations'));
   const customer = useSelector(getCustomer);
-  const stateFilter = useSelector(selectUserInvitationsFilter);
+  const { values } = useFormState();
+
+  const stateFilter = useMemo(
+    () => selectUserInvitationsFilter(values),
+    [values],
+  );
+
   const filter = useMemo(
     () => ({
       ...stateFilter,
@@ -61,6 +69,19 @@ export const InvitationsList: FunctionComponent = () => {
       expandableRow={InvitationExpandableRow}
       enableMultiSelect
       multiSelectActions={InvitationsMultiSelectActions}
+      formId={UserInvitationsFilterFormId}
     />
   );
 };
+
+export const InvitationsList = (props) => (
+  <Form
+    id={UserInvitationsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <InvitationsListTable {...props} />}
+  </Form>
+);

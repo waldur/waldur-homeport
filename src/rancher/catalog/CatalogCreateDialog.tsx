@@ -8,7 +8,7 @@ import {
   StringField,
   TextField,
   SecretField,
-  FormContainerFinal,
+  FormContainer,
   SubmitButton,
 } from '@/form';
 import { translate } from '@/i18n';
@@ -70,7 +70,7 @@ export const CatalogCreateDialog: FC<CatalogCreateDialogProps> = (props) => {
               </>
             }
           >
-            <FormContainerFinal submitting={createCatalogMutation.isPending}>
+            <FormContainer submitting={createCatalogMutation.isPending}>
               <StringField
                 name="name"
                 label={translate('Name')}
@@ -93,7 +93,7 @@ export const CatalogCreateDialog: FC<CatalogCreateDialogProps> = (props) => {
               />
               <StringField name="username" label={translate('Username')} />
               <SecretField name="password" label={translate('Password')} />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

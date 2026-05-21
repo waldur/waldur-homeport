@@ -62,7 +62,7 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
                       <td>
                         <Field
                           name={`description_${code}`}
-                          component={StringField as any}
+                          component={StringField}
                           className="form-control"
                           disabled={submitting}
                         />

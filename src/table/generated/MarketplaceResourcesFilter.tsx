@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   MarketplaceResourcesListData,
@@ -13,7 +12,6 @@ import {
 
 import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -39,7 +37,6 @@ const PureMarketplaceResourcesFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -64,7 +61,6 @@ const PureMarketplaceResourcesFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -78,26 +74,18 @@ interface MarketplaceResourcesFilterProps {
   organizationUuid?: any;
 }
 
-interface MarketplaceResourcesFilterFormData {
+export interface MarketplaceResourcesFilterFormData {
   organization: Customer;
   project: Project;
 }
 
-export const MarketplaceResourcesFilter = reduxForm<
-  MarketplaceResourcesFilterFormData,
-  MarketplaceResourcesFilterProps
->({
-  form: MarketplaceResourcesFilterFormId,
-  destroyOnUnmount: false,
-})(PureMarketplaceResourcesFilter);
+export const MarketplaceResourcesFilter = PureMarketplaceResourcesFilter;
 
 type MarketplaceResourcesFilterQuery = MarketplaceResourcesListData['query'];
 
-export const selectMarketplaceResourcesFilter = createSelector<
-  RootState,
-  Partial<MarketplaceResourcesFilterFormData>,
-  MarketplaceResourcesFilterQuery
->(getFormValues(MarketplaceResourcesFilterFormId), (values) => {
+export const selectMarketplaceResourcesFilter = (
+  values?: Partial<MarketplaceResourcesFilterFormData>,
+): MarketplaceResourcesFilterQuery => {
   const filter: MarketplaceResourcesFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
@@ -108,4 +96,4 @@ export const selectMarketplaceResourcesFilter = createSelector<
     }
   }
   return filter;
-});
+};

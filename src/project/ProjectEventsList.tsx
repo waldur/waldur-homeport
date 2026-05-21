@@ -1,4 +1,5 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
 import { BaseEventsList } from '@/events/BaseEventsList';
@@ -6,12 +7,14 @@ import { translate } from '@/i18n';
 import {
   selectEventsFilter as selectSupportEventsFilter,
   EventsFilter as SupportEventsFilter,
+  EventsFilterFormId,
 } from '@/table/generated/EventsFilter';
 import { getProject } from '@/workspace/selectors';
 
-export const ProjectEventsView: FunctionComponent = () => {
+const ProjectEventsViewTable: FunctionComponent = () => {
   const project = useSelector(getProject);
-  const filter = useSelector(selectSupportEventsFilter);
+  const { values } = useFormState();
+  const filter = useMemo(() => selectSupportEventsFilter(values), [values]);
   return (
     <BaseEventsList
       table={`project-events-${project?.uuid}`}
@@ -25,3 +28,15 @@ export const ProjectEventsView: FunctionComponent = () => {
     />
   );
 };
+
+export const ProjectEventsView = (props) => (
+  <Form
+    id={EventsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ProjectEventsViewTable {...props} />}
+  </Form>
+);

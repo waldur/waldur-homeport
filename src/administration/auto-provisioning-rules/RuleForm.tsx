@@ -4,7 +4,7 @@ import { Field } from 'react-final-form';
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
-import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
 import { StringField } from '@/form/StringField';
@@ -23,7 +23,7 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
     <>
       <FormGroup label={translate('Rule name')} required>
         <Field
-          component={StringField as any}
+          component={StringField}
           name="name"
           placeholder={translate('e.g. Default users')}
           validate={required}
@@ -32,7 +32,7 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
 
       <FormGroup label={translate('Affiliations')}>
         <Field
-          component={CommaSeparatedListField as any}
+          component={CommaSeparatedListField}
           name="user_affiliations"
           placeholder="student, faculty, researcher (comma-separated)"
           description={translate(
@@ -43,7 +43,7 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
 
       <FormGroup label={translate('Email patterns')}>
         <Field
-          component={CommaSeparatedListField as any}
+          component={CommaSeparatedListField}
           name="user_email_patterns"
           placeholder={translate('e.g. .*@example.com')}
           description={translate(
@@ -57,7 +57,7 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
       <FormGroup>
         <Field
           name="use_user_organization_as_customer_name"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Use user organization as customer name')}
           tooltip={translate(
             'If enabled, the customer name will be taken from the user’s organization provided by IdP.',
@@ -96,7 +96,7 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
         label={translate('Organization')}
         required={!values.use_user_organization_as_customer_name}
       >
-        <AsyncSelectFieldFinal
+        <AsyncSelectField
           name="customer"
           loadOptions={(query, prevOptions, page) =>
             organizationAutocomplete(query, prevOptions, page, {
@@ -113,7 +113,7 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
 
       <FormGroup label={translate('Project role')} required>
         <Field
-          component={SelectField as any}
+          component={SelectField}
           name="project_role"
           options={getProjectRoles()}
           getOptionLabel={(role: Role) => role.description || role.name}

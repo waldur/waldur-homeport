@@ -44,7 +44,6 @@ vi.mock('@/form/monacoSetup', () => {
 });
 
 vi.mock('waldur-js-client');
-vi.mock('@/modal/actions');
 vi.mock('@/store/notify');
 vi.mock('@/i18n', () => ({
   translate: (str: string) => str,

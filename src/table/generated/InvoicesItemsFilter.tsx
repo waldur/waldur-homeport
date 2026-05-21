@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   InvoicesItemsRetrieveData,
   Project,
@@ -16,7 +15,6 @@ import {
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -49,7 +47,6 @@ const PureInvoicesItemsFilter: FunctionComponent<InvoicesItemsFilterProps> = (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -74,7 +71,6 @@ const PureInvoicesItemsFilter: FunctionComponent<InvoicesItemsFilterProps> = (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -105,7 +101,6 @@ const PureInvoicesItemsFilter: FunctionComponent<InvoicesItemsFilterProps> = (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -134,28 +129,20 @@ interface InvoicesItemsFilterProps {
   customerUuid?: any;
 }
 
-interface InvoicesItemsFilterFormData {
+export interface InvoicesItemsFilterFormData {
   provider: ServiceProvider;
   project: Project;
   offering: PublicOfferingDetails;
   conceal_compensation_items: boolean;
 }
 
-export const InvoicesItemsFilter = reduxForm<
-  InvoicesItemsFilterFormData,
-  InvoicesItemsFilterProps
->({
-  form: InvoicesItemsFilterFormId,
-  destroyOnUnmount: false,
-})(PureInvoicesItemsFilter);
+export const InvoicesItemsFilter = PureInvoicesItemsFilter;
 
 type InvoicesItemsFilterQuery = InvoicesItemsRetrieveData['query'];
 
-export const selectInvoicesItemsFilter = createSelector<
-  RootState,
-  Partial<InvoicesItemsFilterFormData>,
-  InvoicesItemsFilterQuery
->(getFormValues(InvoicesItemsFilterFormId), (values) => {
+export const selectInvoicesItemsFilter = (
+  values?: Partial<InvoicesItemsFilterFormData>,
+): InvoicesItemsFilterQuery => {
   const filter: InvoicesItemsFilterQuery = {} as any;
   if (values) {
     if (values.provider) {
@@ -172,4 +159,4 @@ export const selectInvoicesItemsFilter = createSelector<
     }
   }
   return filter;
-});
+};

@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   CustomersListData,
   OrganizationGroup,
@@ -18,7 +17,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -123,7 +121,6 @@ const PureCustomersFilter: FunctionComponent<{}> = () => (
             isClearable={true}
             isMulti={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -133,25 +130,20 @@ const PureCustomersFilter: FunctionComponent<{}> = () => (
 
 export const CustomersFilterFormId = 'CustomersFilter';
 
-interface CustomersFilterFormData {
+export interface CustomersFilterFormData {
   accounting_is_running: AccountingIsRunningOption;
   is_service_provider: boolean;
   is_call_managing_organization: boolean;
   organization_group: OrganizationGroup[];
 }
 
-export const CustomersFilter = reduxForm<CustomersFilterFormData, {}>({
-  form: CustomersFilterFormId,
-  destroyOnUnmount: false,
-})(PureCustomersFilter);
+export const CustomersFilter = PureCustomersFilter;
 
 type CustomersFilterQuery = CustomersListData['query'];
 
-export const selectCustomersFilter = createSelector<
-  RootState,
-  Partial<CustomersFilterFormData>,
-  CustomersFilterQuery
->(getFormValues(CustomersFilterFormId), (values) => {
+export const selectCustomersFilter = (
+  values?: Partial<CustomersFilterFormData>,
+): CustomersFilterQuery => {
   const filter: CustomersFilterQuery = {} as any;
   if (values) {
     if (values.accounting_is_running) {
@@ -171,4 +163,4 @@ export const selectCustomersFilter = createSelector<
     }
   }
   return filter;
-});
+};

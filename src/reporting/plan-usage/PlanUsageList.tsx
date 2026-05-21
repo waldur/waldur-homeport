@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import {
   marketplacePlansUsageStatsList,
   PlanUsageResponse,
@@ -11,6 +11,7 @@ import { createFetcher } from '@/table/api';
 import {
   MarketplacePlansUsageStatsFilter,
   selectMarketplacePlansUsageStatsFilter,
+  MarketplacePlansUsageStatsFilterFormId,
 } from '@/table/generated/MarketplacePlansUsageStatsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -22,8 +23,14 @@ import { ReportingTitle } from '../ReportingTitle';
 import { PlanUsageAnalytics } from './PlanUsageAnalytics';
 import { PlanUsageRowActions } from './PlanUsageRowActions';
 
-export const PlanUsageList: FunctionComponent = () => {
-  const formFilter = useSelector(selectMarketplacePlansUsageStatsFilter);
+const PlanUsageListTable: FunctionComponent = () => {
+  const { values } = useFormState();
+
+  const formFilter = useMemo(
+    () => selectMarketplacePlansUsageStatsFilter(values),
+    [values],
+  );
+
   const props = useTable({
     table: 'PlanUsages',
     fetchData: createFetcher(marketplacePlansUsageStatsList),
@@ -91,7 +98,20 @@ export const PlanUsageList: FunctionComponent = () => {
         tableActions={
           <PlanUsageAnalytics data={props.rows} loading={props.loading} />
         }
+        formId={MarketplacePlansUsageStatsFilterFormId}
       />
     </>
   );
 };
+
+export const PlanUsageList = (props) => (
+  <Form
+    id={MarketplacePlansUsageStatsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <PlanUsageListTable {...props} />}
+  </Form>
+);

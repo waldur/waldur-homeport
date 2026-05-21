@@ -114,7 +114,7 @@ export const AuthValimoDialog = () => {
                   type="tel"
                   name="phoneNumber"
                   required={true}
-                  component={InputField as any}
+                  component={InputField}
                   disabled={submitting}
                 />
               </InputGroup>

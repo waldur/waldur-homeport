@@ -35,8 +35,6 @@ export const UsageTrendsFilter: FC<UsageTrendsFilterProps> = ({
       }
       options={yearOptions}
       isClearable={false}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };

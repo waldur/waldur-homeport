@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { CustomerUser, Project, projectsAddUser } from 'waldur-js-client';
 
-import { FormContainerFinal, SubmitButton } from '@/form';
+import { FormContainer, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -70,12 +70,12 @@ export const AddProjectUserDialog: FC<AddProjectUserDialogProps> = ({
               </>
             }
           >
-            <FormContainerFinal submitting={updateMutation.isPending}>
+            <FormContainer submitting={updateMutation.isPending}>
               <UserGroup permission={resolve.customer} />
               <OrganizationProjectSelectField />
               <RoleGroup types={['project']} />
               <ExpirationTimeGroup disabled={updateMutation.isPending} />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

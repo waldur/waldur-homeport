@@ -1,5 +1,5 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { FC } from 'react';
+import { Field } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SelectField } from '@/form';
@@ -26,7 +26,7 @@ const getIsRemovedFilterOptions = () => [
   },
 ];
 
-const PureProjectsListFilter = () => (
+export const ProjectsListFilter: FC = () => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -98,8 +98,3 @@ const PureProjectsListFilter = () => (
     </TableFilterItem>
   </>
 );
-
-export const ProjectsListFilter = reduxForm({
-  form: 'affiliationProjectsListFilter',
-  destroyOnUnmount: false,
-})(PureProjectsListFilter) as React.ComponentType;

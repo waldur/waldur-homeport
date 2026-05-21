@@ -10,10 +10,10 @@ import { CompactActionButton } from '@/table/CompactActionButton';
 const SubNetRow = ({ SubNet: subnet, onRemove }) => (
   <tr>
     <td>
-      <Field name={`${subnet}.source`} component={InputField as any} />
+      <Field name={`${subnet}.source`} component={InputField} />
     </td>
     <td>
-      <Field name={`${subnet}.destination`} component={InputField as any} />
+      <Field name={`${subnet}.destination`} component={InputField} />
     </td>
     <td>
       <CompactActionButton

@@ -1,14 +1,11 @@
 import { DateTime } from 'luxon';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { change } from 'redux-form';
+import { useForm } from 'react-final-form';
 
 import { formatDate, formatISODate } from '@/core/dateUtils';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { orderProjectSelector } from '@/marketplace/deploy/selectors';
-
-import { ORDER_FORM_ID } from '../constants';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 
 import {
   calculateMonthsDifference,
@@ -16,7 +13,6 @@ import {
   PrepaidConstraints,
 } from './prepaidConstraints';
 import { Component } from './types';
-import { getEndDate, getStartDate } from './utils';
 
 const SelectFieldInline = ({ input, options }) => (
   <select
@@ -39,10 +35,11 @@ export const PrepaidDurationSelector = ({
   constraints: PrepaidConstraints;
   components: Component[];
 }) => {
-  const dispatch = useDispatch();
-  const endDate = useSelector(getEndDate);
-  const startDate = useSelector(getStartDate);
-  const project = useSelector(orderProjectSelector);
+  const form = useForm();
+  const formData = useOrderFormData();
+  const endDate = formData.attributes?.end_date;
+  const startDate = formData.start_date;
+  const project = formData.project;
 
   const effectiveStartDate = useMemo(
     () => startDate || formatISODate(DateTime.now()),
@@ -64,7 +61,7 @@ export const PrepaidDurationSelector = ({
       const defaultEnd = DateTime.fromISO(effectiveStartDate)
         .plus({ months: defaultMonths })
         .toISODate();
-      dispatch(change(ORDER_FORM_ID, 'attributes.end_date', defaultEnd));
+      form.change('attributes.end_date', defaultEnd);
     }
   }, []);
 
@@ -73,7 +70,7 @@ export const PrepaidDurationSelector = ({
     const newEnd = DateTime.fromISO(effectiveStartDate)
       .plus({ months: selectedMonths })
       .toISODate();
-    dispatch(change(ORDER_FORM_ID, 'attributes.end_date', newEnd));
+    form.change('attributes.end_date', newEnd);
   }, [effectiveStartDate]);
 
   // Reset selected months if current selection is no longer valid
@@ -86,7 +83,7 @@ export const PrepaidDurationSelector = ({
       const newEnd = DateTime.fromISO(effectiveStartDate)
         .plus({ months: newMonths })
         .toISODate();
-      dispatch(change(ORDER_FORM_ID, 'attributes.end_date', newEnd));
+      form.change('attributes.end_date', newEnd);
     }
   }, [monthOptions]);
 
@@ -96,9 +93,9 @@ export const PrepaidDurationSelector = ({
       const newEnd = DateTime.fromISO(effectiveStartDate)
         .plus({ months })
         .toISODate();
-      dispatch(change(ORDER_FORM_ID, 'attributes.end_date', newEnd));
+      form.change('attributes.end_date', newEnd);
     },
-    [effectiveStartDate, dispatch],
+    [effectiveStartDate, form],
   );
 
   const dateRangeText = useMemo(() => {

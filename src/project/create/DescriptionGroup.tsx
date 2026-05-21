@@ -15,7 +15,7 @@ export const DescriptionGroup = ({ create }: { create?: boolean }) =>
       controlId="project-description"
     >
       <Field
-        component={TextField as any}
+        component={TextField}
         name="description"
         placeholder={translate('Enter a description...')}
         validate={validateMaxLength(4096)}

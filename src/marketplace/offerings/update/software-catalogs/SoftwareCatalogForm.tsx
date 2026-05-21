@@ -85,8 +85,6 @@ export const SoftwareCatalogForm: FunctionComponent<{
               }
               disabled={isEdit}
               noOptionsMessage={() => translate('No results found')}
-              classNamePrefix="metronic-select"
-              className="metronic-select-container"
               value={
                 isEdit && initialCatalog
                   ? {
@@ -127,8 +125,6 @@ export const SoftwareCatalogForm: FunctionComponent<{
                 options={ARCHITECTURE_OPTIONS}
                 isMulti={true}
                 isClearable={true}
-                classNamePrefix="metronic-select"
-                className="metronic-select-container"
               />
             );
           }}
@@ -162,8 +158,6 @@ export const SoftwareCatalogForm: FunctionComponent<{
                 options={PLATFORM_OPTIONS}
                 isMulti={true}
                 isClearable={true}
-                classNamePrefix="metronic-select"
-                className="metronic-select-container"
               />
             );
           }}

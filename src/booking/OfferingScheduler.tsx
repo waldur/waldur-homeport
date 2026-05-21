@@ -189,7 +189,7 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = ({
             </div>
             <Field
               name={schedule}
-              component={CustomRangeDatePicker as any}
+              component={CustomRangeDatePicker}
               options={{
                 minDate: 'today',
                 disable: getDisabledRangeOfDates(weekends, daysOfWeek),

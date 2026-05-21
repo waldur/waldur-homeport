@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   MarketplaceRobotAccountsListData,
   NameUuid,
@@ -12,7 +11,6 @@ import {
 
 import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -43,7 +41,6 @@ const PureMarketplaceRobotAccountsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -71,7 +68,6 @@ const PureMarketplaceRobotAccountsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -86,27 +82,20 @@ interface MarketplaceRobotAccountsFilterProps {
   provider?: any;
 }
 
-interface MarketplaceRobotAccountsFilterFormData {
+export interface MarketplaceRobotAccountsFilterFormData {
   customer: NameUuid;
   project: NameUuid;
 }
 
-export const MarketplaceRobotAccountsFilter = reduxForm<
-  MarketplaceRobotAccountsFilterFormData,
-  MarketplaceRobotAccountsFilterProps
->({
-  form: MarketplaceRobotAccountsFilterFormId,
-  destroyOnUnmount: false,
-})(PureMarketplaceRobotAccountsFilter);
+export const MarketplaceRobotAccountsFilter =
+  PureMarketplaceRobotAccountsFilter;
 
 type MarketplaceRobotAccountsFilterQuery =
   MarketplaceRobotAccountsListData['query'];
 
-export const selectMarketplaceRobotAccountsFilter = createSelector<
-  RootState,
-  Partial<MarketplaceRobotAccountsFilterFormData>,
-  MarketplaceRobotAccountsFilterQuery
->(getFormValues(MarketplaceRobotAccountsFilterFormId), (values) => {
+export const selectMarketplaceRobotAccountsFilter = (
+  values?: Partial<MarketplaceRobotAccountsFilterFormData>,
+): MarketplaceRobotAccountsFilterQuery => {
   const filter: MarketplaceRobotAccountsFilterQuery = {} as any;
   if (values) {
     if (values.customer) {
@@ -117,4 +106,4 @@ export const selectMarketplaceRobotAccountsFilter = createSelector<
     }
   }
   return filter;
-});
+};

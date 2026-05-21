@@ -44,7 +44,7 @@ export const InternalNameField = () => {
         name="name"
         validate={validators}
         parse={(v) => v.replace('.', '')}
-        component={InputField as any}
+        component={InputField}
       />
     </FormGroup>
   );

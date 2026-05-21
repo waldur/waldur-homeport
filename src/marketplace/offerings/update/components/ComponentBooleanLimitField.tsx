@@ -9,7 +9,7 @@ export const ComponentBooleanLimitField: FunctionComponent = () => (
   <FormGroup space={5}>
     <Field
       name="is_boolean"
-      component={AwesomeCheckboxField as any}
+      component={AwesomeCheckboxField}
       label={translate('Allow to enable/disable component only')}
       size="sm"
       alignMiddle

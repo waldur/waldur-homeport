@@ -1,15 +1,14 @@
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { Tip } from '@/core/Tooltip';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 
-import { orderCustomerSelector } from '../selectors';
+import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
 
 export const FormAdditionalConfigurationStep = (props: FormStepProps) => {
-  const customer = useSelector(orderCustomerSelector);
+  const { customer } = useOrderFormData();
 
   return (
     <Tip id={`tip-${props.id}`} label={props.disabledTooltip}>

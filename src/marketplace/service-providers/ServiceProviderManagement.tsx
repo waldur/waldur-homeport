@@ -1,10 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { SubmissionError } from 'redux-form';
 import {
   marketplaceServiceProvidersPartialUpdate,
-  serviceProviderApiSecretCodeGenerate,
   serviceProviderApiSecretCodeRetrieve,
 } from 'waldur-js-client';
 
@@ -14,13 +12,13 @@ import { FieldEditButton } from '@/customer/details/FieldEditButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { ServiceProvider } from '@/marketplace/types';
-import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 import { getCustomer, isStaff } from '@/workspace/selectors';
 
 import { SecretValueField } from '../SecretValueField';
+
+import { RegenerateSecretCodeButton } from './RegenerateSecretCodeButton';
 
 interface OwnProps {
   serviceProvider: ServiceProvider;
@@ -31,11 +29,8 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
   serviceProvider,
   setServiceProvider,
 }) => {
-  const { confirm } = useModal();
+  const { showErrorResponse } = useNotify();
 
-  const { showErrorResponse, showSuccess } = useNotify();
-
-  const queryClient = useQueryClient();
   const customer = useSelector(getCustomer);
   const isStaffUser = useSelector(isStaff);
 
@@ -61,46 +56,6 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
     }
   }, [error]);
 
-  const { mutate: regenerateSecretCode, isPending: isGenerating } = useMutation(
-    {
-      mutationFn: async () => {
-        try {
-          await confirm(
-            translate('Regenerate secret API code'),
-            translate(
-              'After secret API code has been regenerated, it will not be possible to submit usage with the old key.',
-            ),
-            {
-              type: 'warning',
-              positiveButton: translate('Regenerate'),
-              negativeButton: translate('Cancel'),
-            },
-          );
-        } catch {
-          return;
-        }
-
-        try {
-          const data = await serviceProviderApiSecretCodeGenerate({
-            path: { uuid: serviceProvider.uuid },
-          }).then((r) => r.data);
-          queryClient.setQueryData(
-            ['ServiceProviderSecretCode', serviceProvider?.uuid],
-            data,
-          );
-          showSuccess(
-            translate('Service provider API secret code has been generated.'),
-          );
-        } catch (error) {
-          showErrorResponse(
-            error,
-            translate('Unable to generate service provider API secret code.'),
-          );
-        }
-      },
-    },
-  );
-
   const update = async (formData) => {
     try {
       const res = await marketplaceServiceProvidersPartialUpdate({
@@ -110,13 +65,8 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
       setServiceProvider(res.data);
       return res;
     } catch (error) {
-      const errorMessage =
-        error?.response?.message || translate('Something went wrong');
-      const errorData = error?.response?.data;
-      throw new SubmissionError({
-        _error: errorMessage,
-        ...errorData,
-      });
+      showErrorResponse(error);
+      throw error;
     }
   };
 
@@ -135,12 +85,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
             />
           }
           actions={
-            <ActionButton
-              title={translate('Regenerate')}
-              action={regenerateSecretCode}
-              pending={isGenerating}
-              className="btn btn-primary"
-            />
+            <RegenerateSecretCodeButton serviceProvider={serviceProvider} />
           }
         />
 

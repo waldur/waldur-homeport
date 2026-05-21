@@ -1,7 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { createRef, useCallback, useEffect, useRef, useState } from 'react';
-import { getFormValues, submit as submitForm } from 'redux-form';
+import {
+  createRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { Form } from 'react-final-form';
 import {
   Proposal,
   proposalProposalsRetrieve,
@@ -15,20 +22,13 @@ import {
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Form } from '@/form/Form';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { PageBarProvider } from '@/marketplace/context';
 import { useModal } from '@/modal/actions';
 import { useTitle } from '@/navigation/title';
-import {
-  PROPOSAL_UPDATE_REVIEW_FORM_ID,
-  REVIEW_SUMMARY_FORM_ID,
-} from '@/proposals/constants';
 import { ProposalReview } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
-import { RootState } from '@/store/reducers';
-import store from '@/store/store';
 
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
 
@@ -59,7 +59,7 @@ const loadData = async (reviewUuid: string) => {
   return { review, proposal, call };
 };
 
-export const ProposalReviewCreatePage = (props) => {
+export const ProposalReviewCreatePage = () => {
   useTitle(translate('Create review'));
 
   const {
@@ -92,18 +92,21 @@ export const ProposalReviewCreatePage = (props) => {
 
   const { openDialog, closeDialog, confirm } = useModal();
 
-  const captureFormValues = useCallback(() => {
-    store.dispatch(submitForm(REVIEW_SUMMARY_FORM_ID));
-    const values = getFormValues(REVIEW_SUMMARY_FORM_ID)(
-      store.getState() as RootState,
-    );
-    return values;
-  }, []);
+  const formValuesRef = useRef<any>({});
+
+  const initialValues = useMemo(() => {
+    if (!reviewObject) return {};
+    return {
+      summary_score: reviewObject.summary_score,
+      summary_public_comment: reviewObject.summary_public_comment,
+      summary_private_comment: reviewObject.summary_private_comment,
+    };
+  }, [reviewObject]);
 
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSaveSummary = useCallback(async () => {
-    const values = captureFormValues();
+    const values = formValuesRef.current;
 
     setIsSaving(true);
     try {
@@ -120,32 +123,49 @@ export const ProposalReviewCreatePage = (props) => {
     }
   }, [data?.review]);
 
-  const submit = useCallback(async () => {
-    await handleSaveSummary();
-    try {
-      await confirm(
-        translate('Confirm your review'),
-        translate(
-          'Are you sure you want to submit this review for the {name} proposal?',
-          {
-            name: <b>{data.proposal.name}</b>,
-          },
-          formatJsxTemplate,
-        ),
-      );
-    } catch {
-      return;
-    }
-    try {
-      await proposalReviewsSubmit({
-        path: { uuid: data.review.uuid },
-      });
-      showSuccess(translate('Proposal review submitted successfully'));
-      refetch();
-    } catch (error) {
-      showErrorResponse(error, translate('Something went wrong'));
-    }
-  }, [data]);
+  const submit = useCallback(
+    async (values) => {
+      setIsSaving(true);
+      try {
+        const response = await proposalReviewsPartialUpdate({
+          body: values,
+          path: { uuid: data.review.uuid },
+        });
+        setReviewObject(response.data);
+      } catch (e) {
+        showErrorResponse(e, translate('Unable to update review.'));
+        setIsSaving(false);
+        return;
+      } finally {
+        setIsSaving(false);
+      }
+
+      try {
+        await confirm(
+          translate('Confirm your review'),
+          translate(
+            'Are you sure you want to submit this review for the {name} proposal?',
+            {
+              name: <b>{data.proposal.name}</b>,
+            },
+            formatJsxTemplate,
+          ),
+        );
+      } catch {
+        return;
+      }
+      try {
+        await proposalReviewsSubmit({
+          path: { uuid: data.review.uuid },
+        });
+        showSuccess(translate('Proposal review submitted successfully'));
+        refetch();
+      } catch (error) {
+        showErrorResponse(error, translate('Something went wrong'));
+      }
+    },
+    [data, confirm, refetch, showSuccess, showErrorResponse],
+  );
 
   const openCommentFormDialog = useCallback(
     ({ commentField, label }) =>
@@ -179,49 +199,51 @@ export const ProposalReviewCreatePage = (props) => {
 
   return (
     <PageBarProvider scrollOffset={100}>
-      <Form form={PROPOSAL_UPDATE_REVIEW_FORM_ID} onSubmit={submit}>
-        {({ submitting }) => (
-          <>
-            <SidebarLayout.Header className="pb-5">
-              <div className="w-100">
-                <ProposalRoleBasedTabs
-                  review={data.review}
-                  proposal={data.proposal}
-                  call={data.call}
-                />
-                <ReviewHeader review={data.review} proposal={data.proposal} />
-              </div>
-            </SidebarLayout.Header>
-            <SidebarLayout.Container>
-              <SidebarLayout.Body>
-                {formSteps.map((step, i) => (
-                  <div ref={stepRefs.current[i]} key={step.id}>
-                    <step.component
-                      id={step.id}
-                      title={step.label}
-                      change={props.change}
-                      params={{
-                        proposal: data.proposal,
-                        reviews: reviewObject ? [reviewObject] : [],
-                        onAddCommentClick: openCommentFormDialog,
-                        readOnly: true,
-                      }}
-                    />
-                  </div>
-                ))}
-              </SidebarLayout.Body>
-              <SidebarLayout.Sidebar transparent>
-                <CreatePageSidebar
-                  review={reviewObject}
-                  submitting={submitting}
-                  saveAsDraft={handleSaveSummary}
-                  isSaving={isSaving}
-                  refetch={refetch}
-                />
-              </SidebarLayout.Sidebar>
-            </SidebarLayout.Container>
-          </>
-        )}
+      <Form onSubmit={submit} initialValues={initialValues}>
+        {({ handleSubmit, submitting, values }) => {
+          formValuesRef.current = values;
+          return (
+            <form onSubmit={handleSubmit}>
+              <SidebarLayout.Header className="pb-5">
+                <div className="w-100">
+                  <ProposalRoleBasedTabs
+                    review={data.review}
+                    proposal={data.proposal}
+                    call={data.call}
+                  />
+                  <ReviewHeader review={data.review} proposal={data.proposal} />
+                </div>
+              </SidebarLayout.Header>
+              <SidebarLayout.Container>
+                <SidebarLayout.Body>
+                  {formSteps.map((step, i) => (
+                    <div ref={stepRefs.current[i]} key={step.id}>
+                      <step.component
+                        id={step.id}
+                        title={step.label}
+                        params={{
+                          proposal: data.proposal,
+                          reviews: reviewObject ? [reviewObject] : [],
+                          onAddCommentClick: openCommentFormDialog,
+                          readOnly: true,
+                        }}
+                      />
+                    </div>
+                  ))}
+                </SidebarLayout.Body>
+                <SidebarLayout.Sidebar transparent>
+                  <CreatePageSidebar
+                    review={reviewObject}
+                    submitting={submitting}
+                    saveAsDraft={handleSaveSummary}
+                    isSaving={isSaving}
+                    refetch={refetch}
+                  />
+                </SidebarLayout.Sidebar>
+              </SidebarLayout.Container>
+            </form>
+          );
+        }}
       </Form>
     </PageBarProvider>
   );

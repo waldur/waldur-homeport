@@ -156,7 +156,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                 <FormGroup label={translate('Name')} required>
                   <Field
                     name="name"
-                    component={StringField as any}
+                    component={StringField}
                     validate={required}
                   />
                   <Field
@@ -173,7 +173,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                 <FormGroup>
                   <Field
                     name="description"
-                    component={MarkdownEditor as any}
+                    component={MarkdownEditor}
                     required
                     autoFocus
                     hideLabel
@@ -183,7 +183,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
               )}
               {resolve.name === 'reference_code' && (
                 <FormGroup label={translate('Reference code')}>
-                  <Field name="reference_code" component={StringField as any} />
+                  <Field name="reference_code" component={StringField} />
                   <Field
                     name="reference_code"
                     component={({ meta }) =>
@@ -198,7 +198,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                 <FormGroup label={translate('External URL')} required>
                   <Field
                     name="external_url"
-                    component={StringField as any}
+                    component={StringField}
                     validate={required}
                   />
                   <Field
@@ -216,7 +216,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                 <FormGroup>
                   <Field
                     name={resolve.name}
-                    component={AwesomeCheckboxField as any}
+                    component={AwesomeCheckboxField}
                     label={resolve.title}
                   />
                 </FormGroup>
@@ -229,7 +229,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                 >
                   <Field
                     name="fixed_duration_in_days"
-                    component={NumberField as any}
+                    component={NumberField}
                   />
                   <Field
                     name="fixed_duration_in_days"
@@ -245,7 +245,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                 <FormGroup label={translate('Compliance checklist')}>
                   <Field
                     name="compliance_checklist"
-                    component={SelectField as any}
+                    component={SelectField}
                     options={
                       complianceChecklists?.map((checklist) => ({
                         value: checklist.uuid,
@@ -268,7 +268,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                 <FormGroup label={translate('Proposal slug template')}>
                   <Field
                     name="proposal_slug_template"
-                    component={StringField as any}
+                    component={StringField}
                   />
                   <Field
                     name="proposal_slug_template"

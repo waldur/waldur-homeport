@@ -1,8 +1,9 @@
-import { FunctionComponent } from 'react';
+import { ComponentType, FunctionComponent, ReactNode } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   BasePublicPlan,
+  Customer,
   LimitPeriodEnum,
   PublicOfferingDetails,
 } from 'waldur-js-client';
@@ -13,11 +14,11 @@ import { Limits } from '@/marketplace/details/types';
 
 import { OneTimeTab } from './OneTimeTab';
 import { PeriodicTab } from './PeriodicTab';
-import { PlanDetailsTableProps, PricesData } from './types';
+import { PlanDetailsTableProps } from './types';
 import {
   LIMIT_PERIODS,
-  pricesSelector,
   useComponentsDetailPrices,
+  useOrderPrices,
 } from './utils';
 import { WarningTooltip } from './WarningTooltip';
 
@@ -169,10 +170,15 @@ interface TabbedPlanComponents {
   limits?: Limits;
   viewMode?: boolean;
   concealBillingInfo?: boolean;
+  customer?: Customer;
+  extraTabs?: Array<{
+    title: ReactNode;
+    eventKey: string | number;
+    component: ComponentType;
+  }>;
 }
 
-export const TabbedPlanComponents = connect<
-  PricesData,
-  {},
-  TabbedPlanComponents
->(pricesSelector)(PureDetailsTable);
+export const TabbedPlanComponents = (props: TabbedPlanComponents) => {
+  const prices = useOrderPrices(props);
+  return <PureDetailsTable {...props} {...prices} />;
+};

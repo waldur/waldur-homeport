@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   ReviewerSuggestionStatusEnum,
   ReviewerSuggestionsListData,
@@ -10,7 +9,6 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const ReviewerSuggestionStatusOptions: ReviewerSuggestionStatusOption[] =
@@ -68,25 +66,17 @@ const PureReviewerSuggestionsFilter: FunctionComponent<{}> = () => (
 
 export const ReviewerSuggestionsFilterFormId = 'ReviewerSuggestionsFilter';
 
-interface ReviewerSuggestionsFilterFormData {
+export interface ReviewerSuggestionsFilterFormData {
   status: ReviewerSuggestionStatusOption[];
 }
 
-export const ReviewerSuggestionsFilter = reduxForm<
-  ReviewerSuggestionsFilterFormData,
-  {}
->({
-  form: ReviewerSuggestionsFilterFormId,
-  destroyOnUnmount: false,
-})(PureReviewerSuggestionsFilter);
+export const ReviewerSuggestionsFilter = PureReviewerSuggestionsFilter;
 
 type ReviewerSuggestionsFilterQuery = ReviewerSuggestionsListData['query'];
 
-export const selectReviewerSuggestionsFilter = createSelector<
-  RootState,
-  Partial<ReviewerSuggestionsFilterFormData>,
-  ReviewerSuggestionsFilterQuery
->(getFormValues(ReviewerSuggestionsFilterFormId), (values) => {
+export const selectReviewerSuggestionsFilter = (
+  values?: Partial<ReviewerSuggestionsFilterFormData>,
+): ReviewerSuggestionsFilterQuery => {
   const filter: ReviewerSuggestionsFilterQuery = {} as any;
   if (values) {
     if (values.status) {
@@ -94,4 +84,4 @@ export const selectReviewerSuggestionsFilter = createSelector<
     }
   }
   return filter;
-});
+};

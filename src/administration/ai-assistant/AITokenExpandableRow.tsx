@@ -316,7 +316,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
                 >
                   <Field
                     name="daily_limit"
-                    component={NumberField as any}
+                    component={NumberField}
                     placeholder={systemDefaultPlaceholder.daily}
                     min={-1}
                     max={Number.MAX_SAFE_INTEGER}
@@ -333,7 +333,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
                 >
                   <Field
                     name="weekly_limit"
-                    component={NumberField as any}
+                    component={NumberField}
                     placeholder={systemDefaultPlaceholder.weekly}
                     min={-1}
                     max={Number.MAX_SAFE_INTEGER}
@@ -350,7 +350,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
                 >
                   <Field
                     name="monthly_limit"
-                    component={NumberField as any}
+                    component={NumberField}
                     placeholder={systemDefaultPlaceholder.monthly}
                     min={-1}
                     max={Number.MAX_SAFE_INTEGER}

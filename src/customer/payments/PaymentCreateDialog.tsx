@@ -6,7 +6,7 @@ import { fileSerializer, formDataOptions } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
 import {
   FileUploadField,
-  FormContainerFinal,
+  FormContainer,
   NumberField,
   SubmitButton,
 } from '@/form';
@@ -73,7 +73,7 @@ export const PaymentCreateDialog: FunctionComponent<
             }
           >
             <div style={{ paddingBottom: '50px' }}>
-              <FormContainerFinal submitting={submitting}>
+              <FormContainer submitting={submitting}>
                 <DateField
                   name="date_of_payment"
                   label={translate('Date')}
@@ -88,7 +88,7 @@ export const PaymentCreateDialog: FunctionComponent<
                   showFileName={true}
                   buttonLabel={translate('Browse')}
                 />
-              </FormContainerFinal>
+              </FormContainer>
             </div>
           </ModalDialog>
         </form>

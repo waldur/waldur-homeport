@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   AdminArrowCustomerMappingsListData,
   Customer,
@@ -13,7 +12,6 @@ import { StringField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -37,7 +35,6 @@ const PureAdminArrowCustomerMappingsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -71,28 +68,21 @@ const PureAdminArrowCustomerMappingsFilter: FunctionComponent<{}> = () => (
 export const AdminArrowCustomerMappingsFilterFormId =
   'AdminArrowCustomerMappingsFilter';
 
-interface AdminArrowCustomerMappingsFilterFormData {
+export interface AdminArrowCustomerMappingsFilterFormData {
   organization: Customer;
   arrow_reference: string;
   is_active: boolean;
 }
 
-export const AdminArrowCustomerMappingsFilter = reduxForm<
-  AdminArrowCustomerMappingsFilterFormData,
-  {}
->({
-  form: AdminArrowCustomerMappingsFilterFormId,
-  destroyOnUnmount: false,
-})(PureAdminArrowCustomerMappingsFilter);
+export const AdminArrowCustomerMappingsFilter =
+  PureAdminArrowCustomerMappingsFilter;
 
 type AdminArrowCustomerMappingsFilterQuery =
   AdminArrowCustomerMappingsListData['query'];
 
-export const selectAdminArrowCustomerMappingsFilter = createSelector<
-  RootState,
-  Partial<AdminArrowCustomerMappingsFilterFormData>,
-  AdminArrowCustomerMappingsFilterQuery
->(getFormValues(AdminArrowCustomerMappingsFilterFormId), (values) => {
+export const selectAdminArrowCustomerMappingsFilter = (
+  values?: Partial<AdminArrowCustomerMappingsFilterFormData>,
+): AdminArrowCustomerMappingsFilterQuery => {
   const filter: AdminArrowCustomerMappingsFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
@@ -106,4 +96,4 @@ export const selectAdminArrowCustomerMappingsFilter = createSelector<
     }
   }
   return filter;
-});
+};

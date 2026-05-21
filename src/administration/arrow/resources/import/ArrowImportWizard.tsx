@@ -1,7 +1,5 @@
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
-import { useStore } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { adminArrowCustomerMappingsImportLicense } from 'waldur-js-client';
 
 import { ProgressStep } from '@/core/ProgressSteps';
@@ -14,8 +12,6 @@ import { Step1SelectCustomer } from './Step1SelectCustomer';
 import { Step2SelectVendorOffering } from './Step2SelectVendorOffering';
 import { Step3SelectProject } from './Step3SelectProject';
 import { Step4SelectLicenses } from './Step4SelectLicenses';
-
-const FORM_ID = 'ArrowImportWizard';
 
 interface ArrowImportWizardProps {
   resolve: {
@@ -58,33 +54,8 @@ export const ArrowImportWizard: FC<ArrowImportWizardProps> = (props) => {
 
   const { closeDialog } = useModal();
 
-  const store = useStore();
-
   const submitForm = useCallback(
-    async (_formData, _dispatch, formProps) => {
-      const formValues = getFormValues(FORM_ID)(store.getState()) as {
-        customerMapping?: {
-          uuid: string;
-          waldur_customer_name: string;
-          waldur_customer_uuid: string;
-        };
-        vendorOffering?: {
-          uuid: string;
-          offering_uuid: string;
-          offering_name: string;
-          arrow_vendor_name: string;
-        };
-        project?: {
-          uuid: string;
-          name: string;
-        };
-        selectedLicenses?: Array<{
-          license_reference: string;
-          friendly_name: string;
-          offer_name: string;
-        }>;
-      };
-
+    async (formValues) => {
       const customerMapping = formValues?.customerMapping;
       const vendorOffering = formValues?.vendorOffering;
       const project = formValues?.project;
@@ -138,19 +109,16 @@ export const ArrowImportWizard: FC<ArrowImportWizardProps> = (props) => {
 
       if (successCount > 0) {
         props.resolve?.refetch?.();
-        formProps.destroy();
         closeDialog();
       }
     },
-    [store],
+    [closeDialog, props.resolve, showError, showSuccess],
   );
 
   return (
     <WizardFormContainer
-      form={FORM_ID}
       onSubmit={submitForm}
       steps={steps}
-      hideStepper={false}
       title={translate('Import Arrow licenses')}
       subtitle={translate(
         'Customer {arrow} Offering {arrow} Project {arrow} Select licenses',

@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import { FunctionComponent, useCallback, useMemo } from 'react';
 
 import { AsyncPaginate } from '@/form/themed-select';
@@ -66,8 +66,6 @@ export const OfferingAutocompleteField: FunctionComponent<
       }
       isClearable={true}
       isMulti={isMulti}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
       {...reactSelectProps}
     />
   );

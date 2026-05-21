@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
+import { composeValidators } from '@/core/validators';
 import { FormGroup } from '@/form';
 import { SliderNumberField } from '@/form/SliderNumberField';
 import { VStepperFormStepCard } from '@/form/VStepperFormStep';
@@ -30,7 +31,10 @@ export const FormProcessorStep = (props: FormStepProps) => {
   );
 
   const cpuValidator = useMemo(
-    () => (limits.max_cpu ? [minOne, maxAmount(limits.max_cpu)] : minOne),
+    () =>
+      limits.max_cpu
+        ? composeValidators(minOne, maxAmount(limits.max_cpu))
+        : minOne,
     [limits.max_cpu],
   );
 
@@ -39,7 +43,7 @@ export const FormProcessorStep = (props: FormStepProps) => {
     if (limits.max_cores_per_socket) {
       validators.push(maxAmount(limits.max_cores_per_socket));
     }
-    return validators;
+    return composeValidators(...validators);
   }, [limits.max_cores_per_socket]);
 
   return (

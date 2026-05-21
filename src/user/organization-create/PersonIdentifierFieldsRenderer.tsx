@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
-import { required } from '@/core/validators';
+import { composeValidators, required } from '@/core/validators';
 import { DateField } from '@/form/DateField';
 import { FormGroup } from '@/form/FormGroup';
 import { StringField } from '@/form/StringField';
@@ -66,20 +66,17 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
   // Handle string type (single field)
   if (person_identifier_fields.type === 'string') {
     const fieldName = `person_identifier_${person_identifier_fields.field}`;
-    const validators = person_identifier_fields.pattern
-      ? [
-          required,
-          (value) => {
-            const regex = new RegExp(person_identifier_fields.pattern);
-            return regex.test(value)
-              ? undefined
-              : translate(
-                  'Invalid format. {}',
-                  person_identifier_fields.help_text || '',
-                );
-          },
-        ]
-      : [required];
+    const validate = person_identifier_fields.pattern
+      ? composeValidators(required, (value) => {
+          const regex = new RegExp(person_identifier_fields.pattern);
+          return regex.test(value)
+            ? undefined
+            : translate(
+                'Invalid format. {}',
+                person_identifier_fields.help_text || '',
+              );
+        })
+      : required;
 
     return (
       <div className="mb-4">
@@ -98,7 +95,7 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
               label={person_identifier_fields.label}
               component={FormGroup}
               required={true}
-              validate={validators}
+              validate={validate}
               description={person_identifier_fields.help_text}
               placeholder={person_identifier_fields.example}
             >
@@ -129,7 +126,7 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
         <Row className="g-4">
           {fieldEntries.map(([fieldKey, fieldSpec], index) => {
             const fieldName = `person_identifier_${fieldKey}`;
-            const validators = fieldSpec.required ? [required] : [];
+            const validate = fieldSpec.required ? required : undefined;
             const isLastOdd =
               totalFields % 2 !== 0 && index === totalFields - 1;
 
@@ -140,7 +137,7 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
                   label={fieldSpec.label}
                   component={FormGroup}
                   required={fieldSpec.required}
-                  validate={validators}
+                  validate={validate}
                   description={fieldSpec.description}
                   placeholder={fieldSpec.example}
                   maxLength={fieldSpec.max_length}

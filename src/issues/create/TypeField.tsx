@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
+import { Field } from 'react-final-form';
 import { components } from 'react-select';
-import { Field } from 'redux-form';
 
+import { required } from '@/core/validators';
+import { FormGroup } from '@/form';
 import { SelectField } from '@/form/SelectField';
 import { translate } from '@/i18n';
 
@@ -25,14 +27,20 @@ export const TypeField: FunctionComponent<{ issueTypes; isDisabled }> = ({
 }) => (
   <Field
     name="type"
-    component={SelectField}
-    placeholder={translate('Select request type...')}
-    options={issueTypes}
-    isDisabled={isDisabled}
-    getOptionValue={(option) => option.id}
-    components={{ Option, SingleValue }}
-    isClearable={false}
+    component={FormGroup}
+    label={translate('Request type')}
     required={true}
-    noOptionsMessage={() => translate('No request types available')}
-  />
+    validate={required}
+  >
+    <SelectField
+      placeholder={translate('Select request type...')}
+      options={issueTypes}
+      isDisabled={isDisabled}
+      getOptionValue={(option) => option.id}
+      components={{ Option, SingleValue }}
+      isClearable={false}
+      required={true}
+      noOptionsMessage={() => translate('No request types available')}
+    />
+  </Field>
 );

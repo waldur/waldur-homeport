@@ -1,5 +1,4 @@
 import { WarningIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 import { Customer } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -11,7 +10,7 @@ interface CustomerActionsProps {
 }
 
 export const CustomerActions = ({ customer }: CustomerActionsProps) => {
-  const showIssues = useSelector(hasSupport);
+  const showIssues = hasSupport();
   return (
     <div>
       {showIssues && (

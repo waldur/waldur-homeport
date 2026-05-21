@@ -3,7 +3,7 @@ import { Form } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { SubmitButton, TextField } from '@/form';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -56,7 +56,7 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <TextField
                 label={translate('Comment')}
                 placeholder={translate('Enter a comment...')}
@@ -66,7 +66,7 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
                 hideLabel
                 spaceless
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

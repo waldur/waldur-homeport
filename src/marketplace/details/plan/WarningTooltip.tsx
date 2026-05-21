@@ -1,14 +1,16 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
+import { useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
 import { Tip } from '@/core/Tooltip';
 import { FieldError } from '@/form';
-import { formSubmitErrorsSelector } from '@/marketplace/deploy/selectors';
 import { concealPricesSelector } from '@/marketplace/deploy/utils';
 import { PriceTooltip } from '@/price/PriceTooltip';
 
 export const WarningTooltip = () => {
-  const submitErrors = useSelector(formSubmitErrorsSelector);
+  const { submitErrors } = useFormState({
+    subscription: { submitErrors: true },
+  });
   const shouldConcealPrices = useSelector(concealPricesSelector);
 
   return (

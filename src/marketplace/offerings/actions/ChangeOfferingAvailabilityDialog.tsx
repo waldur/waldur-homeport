@@ -163,7 +163,7 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
             <FormGroup>
               <Field
                 name="reason"
-                component={TextField as any}
+                component={TextField}
                 as="textarea"
                 placeholder={
                   offering.state === 'Unavailable'

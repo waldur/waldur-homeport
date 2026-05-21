@@ -5,7 +5,7 @@ import { FieldArray } from 'react-final-form-arrays';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { pick } from '@/core/utils';
-import { FormContainerFinal, FormFooter } from '@/form';
+import { FormContainer, FormFooter } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -66,13 +66,13 @@ export const EditSchedulesDialog = (props: {
               />
             }
           >
-            <FormContainerFinal submitting={submitting} className="size-xl">
+            <FormContainer submitting={submitting} className="size-xl">
               <FieldArray
                 name="schedules"
                 rerenderOnEveryChange
                 component={OfferingScheduler}
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

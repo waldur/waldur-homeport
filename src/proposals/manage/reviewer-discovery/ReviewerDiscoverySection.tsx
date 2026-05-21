@@ -1,6 +1,6 @@
 import { InfoIcon, UserIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import {
   reviewerSuggestionsList,
   ReviewerSuggestion,
@@ -24,6 +24,7 @@ import {
   ReviewerSuggestionsFilter,
   selectReviewerSuggestionsFilter,
   ReviewerSuggestionStatusOptions,
+  ReviewerSuggestionsFilterFormId,
 } from '@/table/generated/ReviewerSuggestionsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -216,11 +217,17 @@ const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
   );
 };
 
-export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
+const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
   call,
 }) => {
   const { openDialog } = useModal();
-  const formFilters = useSelector(selectReviewerSuggestionsFilter);
+  const { values } = useFormState();
+
+  const formFilters = useMemo(
+    () => selectReviewerSuggestionsFilter(values),
+    [values],
+  );
+
   const tabs = useReviewerPoolTabs();
 
   const filter = useMemo(
@@ -424,6 +431,19 @@ export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
       multiSelectActions={BulkActions}
       hasOptionalColumns
       expandableRow={SuggestionExpandableRow}
+      formId={ReviewerSuggestionsFilterFormId}
     />
   );
 };
+
+export const ReviewerDiscoverySection: FC<any> = (props) => (
+  <Form
+    id={ReviewerSuggestionsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ReviewerDiscoverySectionTable {...props} />}
+  </Form>
+);

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
-import { Field } from 'redux-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -39,49 +39,48 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
         .filter((opt) => Boolean(opt.plan))
     );
   }, [call]);
+  const {
+    values: { offering },
+  } = useFormState({ subscription: { values: true } });
+  const { change } = useForm();
 
   return (
-    <WizardForm {...(props as any)} submitDisabled={options.length === 0}>
-      {(wizardProps) => {
-        const { offering } = wizardProps.formValues;
-        return (
-          <div className="size-lg row">
-            {isLoading ? (
-              <LoadingSpinner />
-            ) : error ? (
-              <LoadingErred loadData={refetch} />
-            ) : options.length === 0 ? (
-              <h2 className="text-center text-muted">
-                {translate('There are no offerings')}
-              </h2>
-            ) : (
-              <Field<any>
-                name="offering"
-                options={options}
-                isClearable={true}
-                component={SelectField}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.offering_name}
-                placeholder={translate('Select offering...')}
-                isLoading={isLoading}
-                noUpdateOnBlur
-                validate={required}
-                onChange={(value) => {
-                  if (value?.uuid !== offering?.uuid) {
-                    wizardProps.change('plan', value.plan);
-                  }
-                }}
-              />
-            )}
-            {offering && (
-              <p>
-                <strong>{translate('Service provider')}: </strong>
-                {offering.provider_name}
-              </p>
-            )}
-          </div>
-        );
-      }}
+    <WizardForm {...(props as any)}>
+      <div className="size-lg row">
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <LoadingErred loadData={refetch} />
+        ) : options.length === 0 ? (
+          <h2 className="text-center text-muted">
+            {translate('There are no offerings')}
+          </h2>
+        ) : (
+          <Field<any>
+            name="offering"
+            options={options}
+            isClearable={true}
+            component={SelectField}
+            getOptionValue={(option) => option.uuid}
+            getOptionLabel={(option) => option.offering_name}
+            placeholder={translate('Select offering...')}
+            isLoading={isLoading}
+            noUpdateOnBlur
+            validate={required}
+            onChange={(value) => {
+              if (value?.uuid !== offering?.uuid) {
+                change('plan', value.plan);
+              }
+            }}
+          />
+        )}
+        {offering && (
+          <p>
+            <strong>{translate('Service provider')}: </strong>
+            {offering.provider_name}
+          </p>
+        )}
+      </div>
     </WizardForm>
   );
 };

@@ -26,7 +26,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="name"
-        component={StringField as any}
+        component={StringField}
         placeholder={translate('e.g., my-project-template')}
         maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECTCLASS_LENGTH}
         validate={composeValidators(
@@ -46,7 +46,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="offering"
-        component={StringField as any}
+        component={StringField}
         placeholder={translate('e.g. my-remote-offering')}
         maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_OFFERING_LENGTH}
         validate={composeValidators(
@@ -66,7 +66,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="portal"
-        component={StringField as any}
+        component={StringField}
         placeholder={translate('Portal identifier')}
         maxLength={
           PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PORTALIDENTIFIER_LENGTH
@@ -88,7 +88,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="customer"
-        component={OrganizationAutocompleteField as any}
+        component={OrganizationAutocompleteField}
         placeholder={translate('Select organisation')}
         validate={required}
         required
@@ -106,7 +106,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="key"
-        component={StringField as any}
+        component={StringField}
         placeholder={translate('e.g., a1b2c3d4e5f6g7h8i9j0')}
         maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_KEY_LENGTH}
         validate={validateMaxLength(
@@ -122,7 +122,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="shortname"
-        component={StringField as any}
+        component={StringField}
         placeholder={translate('e.g., a{year}{count}')}
         maxLength={
           PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECT_SHORTNAME_LENGTH
@@ -146,7 +146,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="offerings"
-        component={OfferingAutocompleteField as any}
+        component={OfferingAutocompleteField}
         placeholder={translate('Select offerings')}
         isMulti={true}
         reactSelectProps={{
@@ -160,7 +160,7 @@ export const ProjectTemplateFormFields = () => (
     <FormGroup controlId="role_mapping" label={translate('Role Mapping')}>
       <Field
         name="role_mapping"
-        component={RoleMappingField as any}
+        component={RoleMappingField}
         placeholder={translate('Map remote portal roles to local roles')}
         help={translate(
           'Map remote portal roles to local roles. For example, map "admin" to "Project Manager" and "user" to "Project Member".',
@@ -174,7 +174,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="allocation_units_mapping"
-        component={AllocationUnitsMappingField as any}
+        component={AllocationUnitsMappingField}
         placeholder={translate('Map allocation units to credits')}
         help={translate(
           'Map allocation units to credits. For example, 1 credit is 4 GPU hours.',
@@ -188,7 +188,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="approval_limit"
-        component={NumberField as any}
+        component={NumberField}
         placeholder={translate('e.g., 1000.00')}
         step="0.01"
         min="0"
@@ -207,7 +207,7 @@ export const ProjectTemplateFormFields = () => (
     >
       <Field
         name="max_credit_limit"
-        component={NumberField as any}
+        component={NumberField}
         placeholder={translate('e.g., 10000.00')}
         step="0.01"
         min="0"

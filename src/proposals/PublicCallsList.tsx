@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import {
   proposalPublicCallsList,
   ProposalPublicCallsListData,
@@ -14,6 +14,7 @@ import { createFetcher } from '@/table/api';
 import {
   ProposalPublicCallsFilter,
   selectProposalPublicCallsFilter,
+  ProposalPublicCallsFilterFormId,
 } from '@/table/generated/ProposalPublicCallsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -107,10 +108,15 @@ const CallColumns = [
   },
 ];
 
-export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
+const PublicCallsListTable: FunctionComponent<PublicCallsListProps> = (
   props,
 ) => {
-  const filters = useSelector(selectProposalPublicCallsFilter);
+  const { values } = useFormState();
+
+  const filters = useMemo(
+    () => selectProposalPublicCallsFilter(values),
+    [values],
+  );
 
   const filter = useMemo(() => {
     const result: ProposalPublicCallsListData['query'] = { ...filters };
@@ -147,6 +153,19 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
           <PublicCallApplyAction call={row} />
         </ActionsDropdown>
       )}
+      formId={ProposalPublicCallsFilterFormId}
     />
   );
 };
+
+export const PublicCallsList = (props) => (
+  <Form
+    id={ProposalPublicCallsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <PublicCallsListTable {...props} />}
+  </Form>
+);

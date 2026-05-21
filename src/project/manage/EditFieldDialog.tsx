@@ -130,11 +130,7 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
           >
             {resolve.name === 'customer_name' ? (
               <FormGroup label={translate('Project owner')}>
-                <Field
-                  component={StringField as any}
-                  name="customer_name"
-                  disabled
-                />
+                <Field component={StringField} name="customer_name" disabled />
               </FormGroup>
             ) : resolve.name === 'name' ? (
               loadingProjects ? (
@@ -143,7 +139,9 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
                 <NameGroup customer={customer} />
               )
             ) : resolve.name === 'description' ? (
-              <Field component={MarkdownEditor as any} name="description" />
+              <FormGroup label={translate('Description')}>
+                <Field component={MarkdownEditor} name="description" />
+              </FormGroup>
             ) : resolve.name === 'is_industry' ? (
               <IndustryGroup />
             ) : resolve.name === 'start_date' ? (
@@ -156,15 +154,15 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
               <ScienceDomainGroup />
             ) : resolve.name === 'backend_id' ? (
               <FormGroup label={translate('Backend ID')}>
-                <Field component={StringField as any} name="backend_id" />
+                <Field component={StringField} name="backend_id" />
               </FormGroup>
             ) : resolve.name === 'slug' ? (
               <FormGroup label={translate('Slug')}>
-                <Field component={StringField as any} name="slug" />
+                <Field component={StringField} name="slug" />
               </FormGroup>
             ) : resolve.name === 'staff_notes' ? (
               <FormGroup label={translate('Staff notes')}>
-                <Field component={MarkdownEditor as any} name="staff_notes" />
+                <Field component={MarkdownEditor} name="staff_notes" />
               </FormGroup>
             ) : resolve.name === 'kind' ? (
               <KindGroup />
@@ -173,7 +171,7 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
                 label={translate('Maximum number of service accounts')}
               >
                 <Field
-                  component={StringField as any}
+                  component={StringField}
                   name="max_service_accounts"
                   type="number"
                   min={0}
@@ -187,7 +185,7 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
                 )}
               >
                 <Field
-                  component={StringField as any}
+                  component={StringField}
                   name="grace_period_days"
                   type="number"
                   min={0}

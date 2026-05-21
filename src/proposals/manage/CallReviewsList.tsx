@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { proposalReviewsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -11,6 +11,7 @@ import {
   ProposalReviewsFilter,
   selectProposalReviewsFilter,
   ProposalReviewStateOptions,
+  ProposalReviewsFilterFormId,
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -28,8 +29,13 @@ interface CallReviewsListProps {
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
-export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
-  const formFilters = useSelector(selectProposalReviewsFilter);
+const CallReviewsListTable: FC<CallReviewsListProps> = ({ call }) => {
+  const { values } = useFormState();
+
+  const formFilters = useMemo(
+    () => selectProposalReviewsFilter(values),
+    [values],
+  );
 
   const filter = useMemo(
     () => ({
@@ -118,6 +124,19 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
       rowActions={ReviewsRowActions}
       filters={<ProposalReviewsFilter callUuid={call.uuid} />}
       expandableRow={CallReviewExpandableRow}
+      formId={ProposalReviewsFilterFormId}
     />
   );
 };
+
+export const CallReviewsList: FC<any> = (props) => (
+  <Form
+    id={ProposalReviewsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <CallReviewsListTable {...props} />}
+  </Form>
+);

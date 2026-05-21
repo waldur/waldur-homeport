@@ -1,16 +1,17 @@
 import classNames from 'classnames';
+import { get } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { composeValidators } from '@/core/validators';
 import { required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { OpenstackFeatures } from '@/FeaturesEnums';
 import { FormGroup, SelectField } from '@/form';
 import { translate } from '@/i18n';
-import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { QuotaUsageBarChart } from '@/quotas/QuotaUsageBarChart';
 
@@ -45,12 +46,9 @@ export const FormAbstractVolumeFields = (
   const { quotas } = useQuotasData(props.offering);
   const { data, isLoading } = useVolumeDataLoader(props.offering);
 
-  const volumeType: VolumeTypeChoice = useSelector((state) =>
-    orderFormSelector(state, props.typeField),
-  );
-  const volumeSize: number = useSelector((state) =>
-    orderFormSelector(state, props.sizeField),
-  );
+  const formData = useOrderFormData();
+  const volumeType: VolumeTypeChoice = get(formData, props.typeField);
+  const volumeSize: number = get(formData, props.sizeField);
 
   const extendedSizeOptions = useMemo(() => {
     const options = [...defaultSizeOptions];
@@ -129,7 +127,7 @@ export const FormAbstractVolumeFields = (
           <Field
             name={props.typeField}
             component={FormGroup}
-            validate={props.optional ? undefined : [required]}
+            validate={props.optional ? undefined : required}
             label={props.typeTitle}
             required={!props.optional}
             space={5}
@@ -158,10 +156,12 @@ export const FormAbstractVolumeFields = (
         <Field
           name={props.sizeField}
           component={FormGroup}
-          validate={!fieldsEnabled ? undefined : [required, exceeds]}
+          validate={
+            !fieldsEnabled ? undefined : composeValidators(required, exceeds)
+          }
           label={props.sizeTitle}
           format={formatVolumeSize}
-          normalize={(v) => Number(v) * 1024}
+          parse={(v) => Number(v) * 1024}
           required
           space={5}
           quickAction={

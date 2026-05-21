@@ -1,6 +1,6 @@
+import { FieldValidator } from 'final-form';
 import React, { ComponentType, ReactNode } from 'react';
 import { ColProps } from 'react-bootstrap';
-import { BaseFieldProps } from 'redux-form';
 
 import { TableFiltersGroup } from './TableFilterService';
 
@@ -200,8 +200,8 @@ export interface TableProps<RowType = any> extends TableState {
   gridSize?: ColProps;
   gridSpace?: number;
   gridFixedWidth?: boolean;
-  openFiltersDrawer?: (filters: React.ReactNode) => void;
-  renderFiltersDrawer?: (filters: React.ReactNode) => void;
+  openFiltersDrawer?: (filters: React.ReactNode, formId?: string) => void;
+  renderFiltersDrawer?: (filters: React.ReactNode, formId?: string) => void;
   dropdownActions?: ReactNode;
   dropdownActionsSize?: 'sm' | 'lg';
   tableActions?: React.ReactNode;
@@ -238,6 +238,7 @@ export interface TableProps<RowType = any> extends TableState {
   /** Prefered empty table message */
   emptyMessage?: React.ReactNode;
   filters?: JSX.Element;
+  formId?: string;
   title?: React.ReactNode;
   alterTitle?: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -252,7 +253,7 @@ export interface TableProps<RowType = any> extends TableState {
   filter?: Record<string, any>;
   fieldType?: 'checkbox' | 'radio';
   fieldName?: string;
-  validate?: BaseFieldProps['validate'];
+  validate?: FieldValidator<any> | FieldValidator<any>[];
   footer?: React.ReactNode;
   /** If enabled, set `keys` and `id` for each column. Also pass the required keys separately. */
   hasOptionalColumns?: boolean;

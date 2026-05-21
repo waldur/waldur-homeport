@@ -61,16 +61,12 @@ export const EditRoleDialog: FC<{ resolve: EditRoleResolve }> = ({
             }
           >
             <FormGroup label={translate('Name')} required>
-              <Field
-                name="name"
-                validate={required}
-                component={StringField as any}
-              />
+              <Field name="name" validate={required} component={StringField} />
             </FormGroup>
             <FormGroup label={translate('Description')}>
               <Field
                 name="description"
-                component={StringField as any}
+                component={StringField}
                 placeholder={translate('Role description')}
               />
             </FormGroup>

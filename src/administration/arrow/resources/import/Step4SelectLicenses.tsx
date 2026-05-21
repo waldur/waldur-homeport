@@ -1,34 +1,144 @@
 import { FC, useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { useFormState } from 'react-final-form';
+import { ArrowLicense } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
 import { useDiscoverLicenses } from '../../api';
 
-interface ArrowLicense {
-  license_reference: string;
-  vendor_name: string;
-  offer_name: string;
-  offer_sku: string;
-  friendly_name: string;
-  is_linked?: boolean;
-}
+const AvailableLicenseTable = ({
+  availableLicenses,
+  customerMappingUuid,
+  vendorName,
+}: {
+  availableLicenses: ArrowLicense[];
+  customerMappingUuid: string;
+  vendorName: string;
+}) => {
+  // Table props for available licenses (with selection)
+  const availableTableProps = useTable({
+    table: 'ArrowLicensesAvailable',
+    fetchData: () =>
+      Promise.resolve({
+        rows: availableLicenses,
+        resultCount: availableLicenses.length,
+      }),
+    filter: useMemo(
+      () => ({ customerMappingUuid, vendorName }),
+      [customerMappingUuid, vendorName],
+    ),
+  });
+
+  return (
+    <Table<ArrowLicense>
+      {...availableTableProps}
+      rows={availableLicenses}
+      columns={[
+        {
+          title: translate('License'),
+          render: ({ row }) => (
+            <div>
+              <div className="fw-bold">
+                {row.friendly_name || row.offer_name}
+              </div>
+              <div className="text-muted small">{row.license_reference}</div>
+            </div>
+          ),
+        },
+        {
+          title: translate('SKU'),
+          render: ({ row }) => <>{row.offer_sku}</>,
+        },
+      ]}
+      rowKey="license_reference"
+      verboseName={translate('licenses')}
+      hasActionBar={false}
+      hasPagination={false}
+      fieldType="checkbox"
+      fieldName="selectedLicenses"
+    />
+  );
+};
+
+const LinkedLicensesTable = ({
+  linkedLicenses,
+  customerMappingUuid,
+  vendorName,
+}: {
+  linkedLicenses: ArrowLicense[];
+  customerMappingUuid: string;
+  vendorName: string;
+}) => {
+  // Table props for linked licenses (display only)
+  const linkedTableProps = useTable({
+    table: 'ArrowLicensesLinked',
+    fetchData: () =>
+      Promise.resolve({
+        rows: linkedLicenses,
+        resultCount: linkedLicenses.length,
+      }),
+    filter: useMemo(
+      () => ({ customerMappingUuid, vendorName }),
+      [customerMappingUuid, vendorName],
+    ),
+  });
+
+  return (
+    <div className="mt-5">
+      <h6 className="text-muted mb-3">
+        {translate('Already imported licenses')}
+      </h6>
+      <Table<ArrowLicense>
+        {...linkedTableProps}
+        rows={linkedLicenses}
+        columns={[
+          {
+            title: translate('License'),
+            render: ({ row }) => (
+              <div className="text-muted">
+                <div>{row.friendly_name || row.offer_name}</div>
+                <div className="small">{row.license_reference}</div>
+              </div>
+            ),
+          },
+          {
+            title: translate('SKU'),
+            render: ({ row }) => (
+              <span className="text-muted">{row.offer_sku}</span>
+            ),
+          },
+          {
+            title: '',
+            render: () => (
+              <Badge variant="success" outline>
+                {translate('Imported')}
+              </Badge>
+            ),
+          },
+        ]}
+        rowKey="license_reference"
+        verboseName={translate('imported licenses')}
+        hasActionBar={false}
+        hasPagination={false}
+      />
+    </div>
+  );
+};
 
 export const Step4SelectLicenses: FC<WizardFormStepProps> = (props) => {
-  const formValues = useSelector(getFormValues(props.form)) as {
-    customerMapping?: { uuid: string };
-    vendorOffering?: { arrow_vendor_name: string };
-  };
+  const { values } = useFormState({
+    subscription: { values: true },
+  });
 
-  const customerMappingUuid = formValues?.customerMapping?.uuid;
-  const vendorName = formValues?.vendorOffering?.arrow_vendor_name;
+  const customerMappingUuid = values?.customerMapping?.uuid;
+  const vendorName = values?.vendorOffering?.arrow_vendor_name;
   const vendorNameLower = vendorName?.toLowerCase() || '';
 
   // Fetch licenses data using the existing hook
@@ -56,54 +166,18 @@ export const Step4SelectLicenses: FC<WizardFormStepProps> = (props) => {
       }));
 
     return {
-      availableLicenses: allLicenses.filter((lic) => !lic.is_linked),
-      linkedLicenses: allLicenses.filter((lic) => lic.is_linked),
+      availableLicenses: allLicenses.filter((lic) => !lic['is_linked']),
+      linkedLicenses: allLicenses.filter((lic) => lic['is_linked']),
     };
   }, [data, vendorNameLower]);
 
-  // Table props for available licenses (with selection)
-  const availableTableProps = useTable({
-    table: 'ArrowLicensesAvailable',
-    fetchData: () =>
-      Promise.resolve({
-        rows: availableLicenses,
-        resultCount: availableLicenses.length,
-      }),
-    filter: useMemo(
-      () => ({ customerMappingUuid, vendorName }),
-      [customerMappingUuid, vendorName],
-    ),
-  });
-
-  // Table props for linked licenses (display only)
-  const linkedTableProps = useTable({
-    table: 'ArrowLicensesLinked',
-    fetchData: () =>
-      Promise.resolve({
-        rows: linkedLicenses,
-        resultCount: linkedLicenses.length,
-      }),
-    filter: useMemo(
-      () => ({ customerMappingUuid, vendorName }),
-      [customerMappingUuid, vendorName],
-    ),
-  });
-
-  if (isLoading) {
-    return (
-      <WizardForm {...props}>
-        {() => (
-          <div className="text-center py-10">
-            <LoadingSpinner />
-          </div>
-        )}
-      </WizardForm>
-    );
-  }
-
   return (
     <WizardForm {...props}>
-      {() => (
+      {isLoading ? (
+        <div className="text-center py-10">
+          <LoadingSpinner />
+        </div>
+      ) : (
         <div>
           <p className="text-muted mb-5">
             {translate(
@@ -120,76 +194,19 @@ export const Step4SelectLicenses: FC<WizardFormStepProps> = (props) => {
           )}
 
           {availableLicenses.length > 0 && (
-            <Table<ArrowLicense>
-              {...availableTableProps}
-              rows={availableLicenses}
-              columns={[
-                {
-                  title: translate('License'),
-                  render: ({ row }) => (
-                    <div>
-                      <div className="fw-bold">
-                        {row.friendly_name || row.offer_name}
-                      </div>
-                      <div className="text-muted small">
-                        {row.license_reference}
-                      </div>
-                    </div>
-                  ),
-                },
-                {
-                  title: translate('SKU'),
-                  render: ({ row }) => <>{row.offer_sku}</>,
-                },
-              ]}
-              rowKey="license_reference"
-              verboseName={translate('licenses')}
-              hasActionBar={false}
-              hasPagination={false}
-              fieldType="checkbox"
-              fieldName="selectedLicenses"
+            <AvailableLicenseTable
+              availableLicenses={availableLicenses}
+              customerMappingUuid={customerMappingUuid}
+              vendorName={vendorName}
             />
           )}
 
           {linkedLicenses.length > 0 && (
-            <div className="mt-5">
-              <h6 className="text-muted mb-3">
-                {translate('Already imported licenses')}
-              </h6>
-              <Table<ArrowLicense>
-                {...linkedTableProps}
-                rows={linkedLicenses}
-                columns={[
-                  {
-                    title: translate('License'),
-                    render: ({ row }) => (
-                      <div className="text-muted">
-                        <div>{row.friendly_name || row.offer_name}</div>
-                        <div className="small">{row.license_reference}</div>
-                      </div>
-                    ),
-                  },
-                  {
-                    title: translate('SKU'),
-                    render: ({ row }) => (
-                      <span className="text-muted">{row.offer_sku}</span>
-                    ),
-                  },
-                  {
-                    title: '',
-                    render: () => (
-                      <Badge variant="success" outline>
-                        {translate('Imported')}
-                      </Badge>
-                    ),
-                  },
-                ]}
-                rowKey="license_reference"
-                verboseName={translate('imported licenses')}
-                hasActionBar={false}
-                hasPagination={false}
-              />
-            </div>
+            <LinkedLicensesTable
+              linkedLicenses={linkedLicenses}
+              customerMappingUuid={customerMappingUuid}
+              vendorName={vendorName}
+            />
           )}
         </div>
       )}

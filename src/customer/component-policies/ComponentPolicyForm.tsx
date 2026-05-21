@@ -104,7 +104,7 @@ export const ComponentPolicyForm: FC<ComponentPolicyFormProps> = ({
       <FormGroup label={translate('Then')} required>
         <Field
           name="actions"
-          component={SelectField as any}
+          component={SelectField}
           placeholder={translate(
             'Select action to take when the condition is met...',
           )}
@@ -121,7 +121,7 @@ export const ComponentPolicyForm: FC<ComponentPolicyFormProps> = ({
         <FormGroup label={translate('External user emails')} required>
           <Field
             name="options.notify_external_user"
-            component={StringField as any}
+            component={StringField}
             placeholder={translate(
               'Enter email addresses separated by commas (e.g., user1@example.com, user2@example.com)',
             )}

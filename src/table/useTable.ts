@@ -1,7 +1,7 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { queryClient } from '@/core/queryClient';
 import { openDrawerDialog, renderDrawerDialog } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { getTitle } from '@/navigation/title';
@@ -42,6 +42,7 @@ const getDefaultTitle = (state: RootState) => {
 export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   const { table } = options;
   const isRegisteredRef = useRef(false);
+  const queryClient = useQueryClient();
 
   // Register table on first render, unregister on unmount
   if (!isRegisteredRef.current) {
@@ -141,7 +142,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
       }
       refetch();
     },
-    [refetch, table],
+    [refetch, table, queryClient],
   );
 
   const gotoPage = useCallback(
@@ -149,7 +150,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [dispatch, table],
   );
   const openFiltersDrawer = useCallback(
-    (filters: JSX.Element) => {
+    (filters: JSX.Element, formId?: string) => {
       applyFiltersFn(false);
       return dispatch(
         openDrawerDialog(TableFilterContainer, {
@@ -159,6 +160,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
           props: {
             table,
             filters,
+            formId,
             filterPosition: 'sidebar' as const,
             setFilter: (item: FilterItem) =>
               dispatch(actions.setFilter(table, item)),
@@ -171,12 +173,13 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [dispatch, table],
   );
   const renderFiltersDrawer = useCallback(
-    (filters: JSX.Element) => {
+    (filters: JSX.Element, formId?: string) => {
       dispatch(
         renderDrawerDialog(TableFilterContainer, {
           props: {
             table,
             filters,
+            formId,
             filterPosition: 'sidebar' as const,
             setFilter: (item: FilterItem) =>
               dispatch(actions.setFilter(table, item)),
@@ -264,9 +267,10 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   // Each useTable instance gets its own selector to avoid cache thrashing
   // when multiple tables are active (e.g. page table + drawer table).
   const selectRows = useMemo(() => makeSelectTableRows(), []);
-  const rows = useSelector(
+  const reduxRows = useSelector(
     (state: RootState) => selectRows(state, table) as RowType[],
   );
+  const rows = data?.rows ?? reduxRows;
 
   // Memoize pagination to prevent infinite re-renders in Table's useEffect
   // that depends on props.pagination

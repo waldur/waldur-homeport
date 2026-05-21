@@ -14,7 +14,7 @@ export const ChoicesOptionConfig = () => (
     <Field
       name="choices"
       type="text"
-      component={InputField as any}
+      component={InputField}
       validate={required}
     />
   </FormGroup>

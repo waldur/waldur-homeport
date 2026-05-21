@@ -7,6 +7,6 @@ import { FormGroup } from '../../FormGroup';
 
 export const StringOptionConfig = () => (
   <FormGroup label={translate('Default value')}>
-    <Field name="default" type="text" component={InputField as any} />
+    <Field name="default" type="text" component={InputField} />
   </FormGroup>
 );

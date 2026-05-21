@@ -7,7 +7,7 @@ import {
 
 import { required } from '@/core/validators';
 import {
-  FormGroupFinal,
+  FormGroup,
   NumberField,
   SelectField,
   StringField,
@@ -83,7 +83,7 @@ export const ExpertiseFormDialog = ({ resolve }: ExpertiseFormDialogProps) => {
               description={translate(
                 'Enter a keyword or phrase describing your expertise',
               )}
-              component={FormGroupFinal}
+              component={FormGroup}
               validate={required}
             >
               <StringField />
@@ -92,7 +92,7 @@ export const ExpertiseFormDialog = ({ resolve }: ExpertiseFormDialogProps) => {
             <Field
               name="proficiency_level"
               label={translate('Proficiency level')}
-              component={FormGroupFinal}
+              component={FormGroup}
               options={PROFICIENCY_LEVEL_OPTIONS}
               getOptionLabel={(option) => option.label}
               getOptionValue={(option) => option.value}
@@ -104,7 +104,7 @@ export const ExpertiseFormDialog = ({ resolve }: ExpertiseFormDialogProps) => {
             <Field
               name="years_experience"
               label={translate('Years of experience')}
-              component={FormGroupFinal}
+              component={FormGroup}
             >
               <NumberField min={0} max={50} />
             </Field>

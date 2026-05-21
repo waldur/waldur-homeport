@@ -7,7 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroupFinal, SubmitButton } from '@/form';
+import { FormGroup, SubmitButton } from '@/form';
 import { Select } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
@@ -120,7 +120,7 @@ export const VendorOfferingMappingDialog: FC<
                 description={translate(
                   'Select from existing Arrow vendors or type a new name',
                 )}
-                component={FormGroupFinal}
+                component={FormGroup}
                 required
                 validate={required}
               >
@@ -132,7 +132,7 @@ export const VendorOfferingMappingDialog: FC<
               <Field
                 name="offering"
                 label={translate('Waldur offering')}
-                component={FormGroupFinal}
+                component={FormGroup}
                 required
                 validate={required}
               >
@@ -151,7 +151,7 @@ export const VendorOfferingMappingDialog: FC<
                 description={translate(
                   'Billing plan to use for resources created from this vendor offering',
                 )}
-                component={FormGroupFinal}
+                component={FormGroup}
               >
                 <PlanSelect offeringUuid={values.offering?.uuid} />
               </Field>

@@ -12,7 +12,7 @@ import {
 import { lazyComponent } from '@/core/lazyComponent';
 import { Link } from '@/core/Link';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionButton } from '@/table/ActionButton';

@@ -1,18 +1,17 @@
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
+import { Form, FormSpy } from 'react-final-form';
 import { onboardingVerificationsDestroy } from 'waldur-js-client';
 
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { VerticalProgressSteps } from '@/core/VerticalProgressSteps';
+import { SubmitButton } from '@/form';
 import { SidebarLayout } from '@/form/SidebarLayout';
-import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-
-import { ORGANIZATION_ONBOARDING_FORM_ID } from '../constants';
 
 import { useAutoValidation, useChecklistCache } from './hooks';
 import { OrganizationCreateStep1 } from './OrganizationCreateStep1';
@@ -20,11 +19,14 @@ import { OrganizationCreateStep2 } from './OrganizationCreateStep2';
 import { OrganizationCreateStep3 } from './OrganizationCreateStep3';
 import { OrganizationCreateStep4 } from './OrganizationCreateStep4';
 import { OrganizationReviewStatus } from './OrganizationReviewStatus';
+import { OrganizationCreateFormValues } from './types';
 import {
   handleAutoIntentAnswers,
   handleManualVerification,
   handleVerificationStatus,
 } from './utils';
+
+import '@/wizard/wizard.scss';
 
 export const OrganizationCreatePage: FC = () => {
   const { confirm } = useModal();
@@ -32,12 +34,14 @@ export const OrganizationCreatePage: FC = () => {
   const router = useRouter();
   const { showSuccess, showErrorResponse } = useNotify();
 
-  const selector = formValueSelector(ORGANIZATION_ONBOARDING_FORM_ID);
-  const validationMethod = useSelector((state) =>
-    selector(state, 'validationMethod'),
-  );
+  const [step, setStep] = useState(0);
+  const [lastVisitedStep, setLastVisitedStep] = useState(0);
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [validationMethod, setValidationMethod] = useState<string>('');
 
   const isManual = validationMethod === 'manual';
+  const skipSteps = useMemo(() => (isManual ? [2] : []), [isManual]);
+  const totalSteps = 4;
 
   const { getChecklistData } = useChecklistCache();
   const {
@@ -109,73 +113,43 @@ export const OrganizationCreatePage: FC = () => {
     };
   }, [router, verificationData, cleanupVerification]);
 
+  // Step navigation
+  const nextStep = useCallback(() => {
+    let nextStepIndex = step + 1;
+    while (skipSteps.includes(nextStepIndex) && nextStepIndex < totalSteps) {
+      nextStepIndex++;
+    }
+    setStep(nextStepIndex);
+    if (nextStepIndex > lastVisitedStep) {
+      setLastVisitedStep(nextStepIndex);
+    }
+  }, [step, skipSteps, lastVisitedStep]);
+
+  const prevStep = useCallback(() => {
+    let prevStepIndex = step - 1;
+    while (skipSteps.includes(prevStepIndex) && prevStepIndex >= 0) {
+      prevStepIndex--;
+    }
+    setStep(Math.max(0, prevStepIndex));
+  }, [step, skipSteps]);
+
+  const selectStep = useCallback(
+    (num: number) => {
+      if (num <= lastVisitedStep && !skipSteps.includes(num)) setStep(num);
+    },
+    [lastVisitedStep, skipSteps],
+  );
+
+  const isLast = step === totalSteps - 1;
+
   const handleStep2Submit = useCallback(
-    async (formData) => {
+    async (formData: OrganizationCreateFormValues) => {
       // Trigger auto-validation after person identifier input for automatic methods
       if (formData.validationMethod !== 'manual') {
         await runAutoValidation(formData);
       }
     },
     [runAutoValidation],
-  );
-
-  // Wrapper for Step 1 to fetch person identifier fields
-  const Step1Wrapper: FC<any> = useCallback((props) => {
-    return <OrganizationCreateStep1 {...props} />;
-  }, []);
-
-  // Wrapper for Step 2 to handle person identifier input
-  const Step2Wrapper: FC<any> = useCallback(
-    (props) => {
-      const customOnSubmit = async (formData, dispatch, formProps) => {
-        await handleStep2Submit(formData);
-        if (props.onSubmit) {
-          props.onSubmit(formData, dispatch, formProps);
-        }
-      };
-
-      return (
-        <OrganizationCreateStep2
-          {...props}
-          onSubmit={customOnSubmit}
-          getChecklistData={getChecklistData}
-        />
-      );
-    },
-    [handleStep2Submit, getChecklistData],
-  );
-
-  // Wrapper for Step 3 to pass validation data
-  const Step3Wrapper: FC<any> = useCallback(
-    (props) => {
-      return (
-        <OrganizationCreateStep3
-          {...props}
-          validationResult={validationResult}
-          validationLoading={validationLoading}
-          isManual={isManual}
-        />
-      );
-    },
-    [validationResult, validationLoading, isManual],
-  );
-
-  // Wrapper for Step 4 to pass checklist data
-  const Step4Wrapper: FC<any> = useCallback(
-    (props) => {
-      return (
-        <OrganizationCreateStep4
-          {...props}
-          getChecklistData={getChecklistData}
-        />
-      );
-    },
-    [getChecklistData],
-  );
-
-  const wizardForms = useMemo(
-    () => [Step1Wrapper, Step2Wrapper, Step3Wrapper, Step4Wrapper],
-    [Step1Wrapper, Step2Wrapper, Step3Wrapper, Step4Wrapper],
   );
 
   const steps: ProgressStep[] = useMemo(
@@ -210,6 +184,18 @@ export const OrganizationCreatePage: FC = () => {
     [isManual],
   );
 
+  const stepsWithCompletion = steps.map((s, i) => ({
+    ...s,
+    completed: i < step,
+  }));
+
+  const handleStepClick = (_step: ProgressStep, index: number) => {
+    if (submitDisabled) return;
+    if (index <= lastVisitedStep && !skipSteps.includes(index)) {
+      selectStep(index);
+    }
+  };
+
   const handleCancel = useCallback(async () => {
     await confirm(
       translate('Cancel organization creation'),
@@ -225,7 +211,7 @@ export const OrganizationCreatePage: FC = () => {
   }, [router, cleanupVerification]);
 
   const createOnboardingVerification = useCallback(
-    async (formData, _dispatch, formProps) => {
+    async (formData: OrganizationCreateFormValues) => {
       try {
         const isManualValidation = formData.validationMethod === 'manual';
         let validation = isManualValidation ? null : validationResult;
@@ -251,7 +237,6 @@ export const OrganizationCreatePage: FC = () => {
                 'Organization created! You can view your submitted applications in your dashboard.',
               ),
             );
-            formProps.destroy();
             router.stateService.go('profile.details');
           },
           onReview: (companyName) => {
@@ -278,6 +263,21 @@ export const OrganizationCreatePage: FC = () => {
     ],
   );
 
+  const handleFormSubmit = useCallback(
+    async (values: OrganizationCreateFormValues) => {
+      if (isLast) {
+        await createOnboardingVerification(values);
+      } else {
+        // For step 2 (identification), run auto-validation before advancing
+        if (step === 1) {
+          await handleStep2Submit(values);
+        }
+        nextStep();
+      }
+    },
+    [isLast, step, createOnboardingVerification, handleStep2Submit, nextStep],
+  );
+
   return (
     <>
       <SidebarLayout.Header>
@@ -295,7 +295,7 @@ export const OrganizationCreatePage: FC = () => {
           <div className="d-flex gap-7">
             <div className="flex-shrink-0" style={{ width: '300px' }}>
               <VerticalProgressSteps
-                steps={steps.map((step) => ({ ...step, completed: true }))}
+                steps={steps.map((s) => ({ ...s, completed: true }))}
               />
             </div>
             <div className="flex-grow-1">
@@ -308,17 +308,102 @@ export const OrganizationCreatePage: FC = () => {
             </div>
           </div>
         ) : (
-          <WizardFormContainer
-            form={ORGANIZATION_ONBOARDING_FORM_ID}
-            title=""
-            onSubmit={createOnboardingVerification}
-            steps={steps}
-            wizardForms={wizardForms}
-            submitLabel={translate('Create')}
-            nextLabel={translate('Next')}
-            verticalLayout={true}
-            onCancel={handleCancel}
-            skipSteps={isManual ? [2] : []}
+          <Form<OrganizationCreateFormValues>
+            onSubmit={handleFormSubmit}
+            render={({ handleSubmit, submitting }) => (
+              <form className="wizard wizard-vertical" onSubmit={handleSubmit}>
+                {/* Track validationMethod changes */}
+                <FormSpy<OrganizationCreateFormValues>
+                  subscription={{ values: true }}
+                  onChange={(formState) => {
+                    const vm = formState.values?.validationMethod || '';
+                    if (vm !== validationMethod) {
+                      setValidationMethod(vm);
+                    }
+                  }}
+                />
+
+                <div className="d-flex gap-7">
+                  {/* Left Sidebar with Stepper */}
+                  <div className="flex-shrink-0" style={{ width: '300px' }}>
+                    <VerticalProgressSteps
+                      steps={stepsWithCompletion}
+                      onClick={handleStepClick}
+                    />
+                  </div>
+
+                  {/* Main Content */}
+                  <div className="flex-grow-1">
+                    <div className="wizard-body-vertical">
+                      {step === 0 && <OrganizationCreateStep1 />}
+                      {step === 1 && (
+                        <OrganizationCreateStep2
+                          getChecklistData={getChecklistData}
+                        />
+                      )}
+                      {step === 2 && (
+                        <OrganizationCreateStep3
+                          validationResult={validationResult}
+                          validationLoading={validationLoading}
+                          isManual={isManual}
+                          onSubmitDisabledChange={setSubmitDisabled}
+                        />
+                      )}
+                      {step === 3 && (
+                        <OrganizationCreateStep4
+                          getChecklistData={getChecklistData}
+                        />
+                      )}
+                    </div>
+
+                    {/* Footer buttons */}
+                    <div className="d-flex justify-content-between mt-5 pt-5 border-top">
+                      <SubmitButton
+                        submitting={false}
+                        variant="secondary"
+                        onClick={prevStep}
+                        disabled={step === 0}
+                        className="min-w-125px"
+                        type="button"
+                        label={translate('Back')}
+                        iconNode={<CaretLeftIcon weight="bold" />}
+                        iconOnLeft
+                      />
+                      <div className="d-flex gap-3">
+                        <SubmitButton
+                          submitting={false}
+                          variant="tertiary"
+                          className="min-w-125px"
+                          onClick={handleCancel}
+                          type="button"
+                          label={translate('Cancel')}
+                        />
+                        <SubmitButton
+                          submitting={submitting}
+                          label={
+                            isLast ? translate('Create') : translate('Next')
+                          }
+                          invalid={submitDisabled}
+                          className="btn-icon-right min-w-125px"
+                          children={
+                            submitting ? (
+                              <span className="svg-icon svg-icon-2">
+                                {}
+                                <LoadingSpinnerSimple />
+                              </span>
+                            ) : !isLast ? (
+                              <span className="svg-icon svg-icon-2">
+                                <CaretRightIcon weight="bold" />
+                              </span>
+                            ) : null
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            )}
           />
         )}
       </div>

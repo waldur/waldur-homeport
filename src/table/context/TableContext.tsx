@@ -34,8 +34,8 @@ interface TableActions<TData = any> {
   swapColumns: (column1: string, column2: string) => void;
   resetColumns: () => void;
   toggleFilterMenu: (show?: boolean) => void;
-  openFiltersDrawer: (filters: ReactNode) => void;
-  renderFiltersDrawer: (filters: ReactNode) => void;
+  openFiltersDrawer: (filters: ReactNode, formId?: string) => void;
+  renderFiltersDrawer: (filters: ReactNode, formId?: string) => void;
 }
 
 /**
@@ -68,6 +68,7 @@ interface TableConfig {
   hideIfEmpty: boolean;
   placeholderHasRetry: boolean;
   hideExpandToggle: boolean;
+  formId?: string;
 }
 
 /**
@@ -162,7 +163,7 @@ export interface TableContextValue<TData = any> {
   // Display
   display: TableDisplay;
 
-  // Form field props (for redux-form integration)
+  // Form field props (for react-final-form integration)
   fieldType?: 'checkbox' | 'radio';
   fieldName?: string;
   validate?: any;

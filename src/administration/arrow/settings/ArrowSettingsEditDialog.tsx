@@ -95,7 +95,7 @@ export const ArrowSettingsEditDialog = ({
             >
               <Field
                 name="api_url"
-                component={StringField as any}
+                component={StringField}
                 validate={required}
               />
             </FormGroup>
@@ -104,7 +104,7 @@ export const ArrowSettingsEditDialog = ({
               label={translate('API Key')}
               description={translate('Arrow API key for authentication')}
             >
-              <Field name="api_key" component={SecretField as any} />
+              <Field name="api_key" component={SecretField} />
             </FormGroup>
 
             <FormGroup
@@ -113,10 +113,7 @@ export const ArrowSettingsEditDialog = ({
                 'Billing export template reference (optional)',
               )}
             >
-              <Field
-                name="export_type_reference"
-                component={StringField as any}
-              />
+              <Field name="export_type_reference" component={StringField} />
             </FormGroup>
 
             <FormGroup
@@ -125,10 +122,7 @@ export const ArrowSettingsEditDialog = ({
                 'Filter for IaaS/SaaS classification (optional)',
               )}
             >
-              <Field
-                name="classification_filter"
-                component={StringField as any}
-              />
+              <Field name="classification_filter" component={StringField} />
             </FormGroup>
 
             <FormGroup
@@ -139,7 +133,7 @@ export const ArrowSettingsEditDialog = ({
             >
               <Field
                 name="invoice_price_source"
-                component={SelectField as any}
+                component={SelectField}
                 options={INVOICE_PRICE_SOURCE_OPTIONS}
                 isClearable={false}
               />
@@ -148,7 +142,7 @@ export const ArrowSettingsEditDialog = ({
             <FormGroup>
               <Field
                 name="sync_enabled"
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 label={translate('Sync enabled')}
               />
             </FormGroup>

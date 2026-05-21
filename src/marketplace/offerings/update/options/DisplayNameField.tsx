@@ -15,7 +15,7 @@ export const DisplayNameField = () => (
     space={5}
   >
     <Field
-      component={InputField as any}
+      component={InputField}
       name="label"
       type="text"
       validate={required}

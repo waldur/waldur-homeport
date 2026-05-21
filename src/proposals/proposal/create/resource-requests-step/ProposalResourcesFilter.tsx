@@ -1,16 +1,17 @@
 import { FC } from 'react';
-import { reduxForm } from 'redux-form';
 
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { CallOfferingFilter } from './CallOfferingFilter';
 
+export const FORM_ID = 'ProposalResourcesFilter';
+
 interface OwnProps {
-  offerings: Parameters<typeof CallOfferingFilter>['0']['options'];
+  offerings?: Parameters<typeof CallOfferingFilter>['0']['options'];
 }
 
-const PureProposalResourcesFilter: FC<OwnProps> = ({ offerings }) => (
+export const ProposalResourcesFilter: FC<OwnProps> = ({ offerings }) => (
   <TableFilterItem
     title={translate('Offering')}
     name="offering"
@@ -19,8 +20,3 @@ const PureProposalResourcesFilter: FC<OwnProps> = ({ offerings }) => (
     <CallOfferingFilter options={offerings} />
   </TableFilterItem>
 );
-
-export const ProposalResourcesFilter = reduxForm<{}, OwnProps>({
-  form: 'ProposalResourcesFilter',
-  destroyOnUnmount: false,
-})(PureProposalResourcesFilter);

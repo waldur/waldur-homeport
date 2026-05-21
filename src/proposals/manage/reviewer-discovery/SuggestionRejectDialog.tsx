@@ -87,7 +87,7 @@ export const SuggestionRejectDialog = ({
               <FormGroup label={translate('Rejection reason')}>
                 <Field
                   name="reason"
-                  component={TextField as any}
+                  component={TextField}
                   rows={3}
                   placeholder={translate(
                     'Optional reason for rejecting this suggestion...',

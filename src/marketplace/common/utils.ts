@@ -6,7 +6,6 @@ import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
-// See also: https://github.com/erikras/redux-form/issues/1852
 export const parseIntField = (value) => parseInt(value, 10) || 0;
 export const formatIntField = (value) => (value ? value.toString() : 0);
 export const validateNonNegative = (value) =>

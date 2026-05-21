@@ -5,11 +5,9 @@ import {
   useCallback,
   useState,
 } from 'react';
-import { useDispatch } from 'react-redux';
-import { change } from 'redux-form';
+import { useForm } from 'react-final-form';
 
 import { FilterItem, TableProps, TableState } from './types';
-import { getFiltersFormId } from './utils';
 
 interface ITableFilterContext {
   filterPosition: TableState['filterPosition'];
@@ -29,6 +27,7 @@ interface FilterContextProviderProps extends Pick<
   TableProps,
   | 'table'
   | 'filters'
+  | 'formId'
   | 'filterPosition'
   | 'setFilter'
   | 'applyFiltersFn'
@@ -40,7 +39,7 @@ interface FilterContextProviderProps extends Pick<
 export const FilterContextProvider: FC<
   PropsWithChildren<FilterContextProviderProps>
 > = (props) => {
-  const filtersFormId = getFiltersFormId(props.filters);
+  const filtersFormId = props.formId || '';
 
   const [filterComponents, setFilterComponents] = useState([]);
 
@@ -55,12 +54,20 @@ export const FilterContextProvider: FC<
     props.toggleFilterMenu(true);
   };
 
-  const dispatch = useDispatch();
+  let form;
+  try {
+    form = useForm();
+  } catch {
+    form = null;
+  }
+
   const changeFormField = useCallback(
     (field: string, value) => {
-      dispatch(change(filtersFormId, field, value));
+      if (form) {
+        form.change(field, value);
+      }
     },
-    [dispatch, filtersFormId],
+    [form],
   );
 
   return (

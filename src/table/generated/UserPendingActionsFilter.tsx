@@ -1,14 +1,12 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { UrgencyEnum, UserActionsListData } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const ActionTypeOptions: ActionTypeOption[] = [
@@ -122,28 +120,20 @@ const PureUserPendingActionsFilter: FunctionComponent<{}> = () => (
 
 export const UserPendingActionsFilterFormId = 'UserPendingActionsFilter';
 
-interface UserPendingActionsFilterFormData {
+export interface UserPendingActionsFilterFormData {
   action_type: ActionTypeOption;
   urgency: UrgencyOption;
   overdue: boolean;
   include_silenced: boolean;
 }
 
-export const UserPendingActionsFilter = reduxForm<
-  UserPendingActionsFilterFormData,
-  {}
->({
-  form: UserPendingActionsFilterFormId,
-  destroyOnUnmount: false,
-})(PureUserPendingActionsFilter);
+export const UserPendingActionsFilter = PureUserPendingActionsFilter;
 
 type UserPendingActionsFilterQuery = UserActionsListData['query'];
 
-export const selectUserPendingActionsFilter = createSelector<
-  RootState,
-  Partial<UserPendingActionsFilterFormData>,
-  UserPendingActionsFilterQuery
->(getFormValues(UserPendingActionsFilterFormId), (values) => {
+export const selectUserPendingActionsFilter = (
+  values?: Partial<UserPendingActionsFilterFormData>,
+): UserPendingActionsFilterQuery => {
   const filter: UserPendingActionsFilterQuery = {} as any;
   if (values) {
     if (values.action_type) {
@@ -160,4 +150,4 @@ export const selectUserPendingActionsFilter = createSelector<
     }
   }
   return filter;
-});
+};

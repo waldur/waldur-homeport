@@ -90,7 +90,6 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
               options={usersFilterOptions}
               isLoading={teamIsLoading}
               className="metronic-select-container min-w-150px min-w-lg-200px"
-              classNamePrefix="metronic-select"
             />
           ) : null}
           {periodOptions.length > 1 && (

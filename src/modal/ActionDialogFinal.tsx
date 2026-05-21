@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { FormContainerFinal, FieldError, FormFooter } from '@/form';
+import { FormContainer, FieldError, FormFooter } from '@/form';
 
 import { ModalDialog } from './ModalDialog';
 
@@ -34,9 +34,9 @@ export const ActionDialogFinal: React.FC<
       {props.loading ? (
         <LoadingSpinner />
       ) : (
-        <FormContainerFinal submitting={props.submitting} className="col-l">
+        <FormContainer submitting={props.submitting} className="col-l">
           {props.children}
-        </FormContainerFinal>
+        </FormContainer>
       )}
 
       <FieldError error={props.error} />

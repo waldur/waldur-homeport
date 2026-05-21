@@ -57,13 +57,6 @@ vi.mock('@/router', () => ({
   },
 }));
 
-vi.mock('@/modal/hooks', () => ({
-  useModal: vi.fn(() => ({
-    closeDialog: vi.fn(),
-    confirm: vi.fn(),
-  })),
-}));
-
 vi.mock('@/navigation/title', async (importOriginal) => {
   const actual: any = await importOriginal();
   return {

@@ -91,7 +91,7 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
               <Field
                 name="version"
                 validate={required}
-                component={StringField as any}
+                component={StringField}
               />
             </FormGroup>
 
@@ -107,17 +107,14 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
             {(values?.add_as || 'markdown') === 'markdown' ? (
               <FormGroup label={translate('Terms of Service')}>
                 <div className="markdown-editor-wrapper">
-                  <Field
-                    name="terms_of_service"
-                    component={MarkdownEditor as any}
-                  />
+                  <Field name="terms_of_service" component={MarkdownEditor} />
                 </div>
               </FormGroup>
             ) : (
               <FormGroup label={translate('External link')} required={true}>
                 <Field
                   name="terms_of_service_link"
-                  component={StringField as any}
+                  component={StringField}
                   validate={required}
                 />
               </FormGroup>
@@ -126,7 +123,7 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
             <div className="mb-3">
               <Field
                 name="is_active"
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 type="checkbox"
                 label={translate('Is active')}
               />
@@ -135,7 +132,7 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
             <div className="mb-3">
               <Field
                 name="requires_reconsent"
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 type="checkbox"
                 label={translate('Requires re-consent')}
               />
@@ -154,7 +151,7 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
               >
                 <Field
                   name="grace_period_days"
-                  component={NumberField as any}
+                  component={NumberField}
                   min={0}
                   parse={(value) => (value === '' ? undefined : Number(value))}
                 />

@@ -58,7 +58,7 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
           >
             <Field
               name="project_name_template"
-              component={StringField as any}
+              component={StringField}
               placeholder={translate('e.g. {full_name} Research project')}
               disabled={disabled}
               validate={required}

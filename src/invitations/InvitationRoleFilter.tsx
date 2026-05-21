@@ -1,4 +1,4 @@
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { rolesList } from 'waldur-js-client';
 
 import { parseSelectData } from '@/core/api';

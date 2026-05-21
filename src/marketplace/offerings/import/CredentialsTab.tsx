@@ -1,9 +1,9 @@
 import { required } from '@/core/validators';
-import { StringField, FormContainerFinal, SecretField } from '@/form';
+import { StringField, FormContainer, SecretField } from '@/form';
 import { translate } from '@/i18n';
 
 export const CredentialsTab = () => (
-  <FormContainerFinal submitting={false} className="size-lg">
+  <FormContainer submitting={false} className="size-lg">
     <StringField
       name="api_url"
       label={translate('API URL')}
@@ -20,5 +20,5 @@ export const CredentialsTab = () => (
       required={true}
       validate={required}
     />
-  </FormContainerFinal>
+  </FormContainer>
 );

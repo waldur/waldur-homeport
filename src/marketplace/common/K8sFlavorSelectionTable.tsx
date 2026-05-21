@@ -7,7 +7,7 @@ import {
 import React, { useMemo, useState } from 'react';
 // eslint-disable-next-line waldur-custom/no-direct-bootstrap-button -- Complex selector button with custom children, tooltip, and nested click handler
 import { Button } from 'react-bootstrap';
-import { reduxForm } from 'redux-form';
+import { Form } from 'react-final-form';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -51,11 +51,7 @@ interface FlavorSelectionModalProps {
   };
 }
 
-const FlavorSelectionModal = reduxForm<{}, FlavorSelectionModalProps>({
-  form: 'flavorSelection',
-})(({
-  handleSubmit,
-  invalid,
+const FlavorSelectionModal: React.FC<FlavorSelectionModalProps> = ({
   resolve: {
     offeringUuid,
     onFlavorSelect,
@@ -63,6 +59,7 @@ const FlavorSelectionModal = reduxForm<{}, FlavorSelectionModalProps>({
     datacenterName,
     minimalSettings,
   },
+  initialValues,
 }) => {
   const { closeDialog } = useModal();
   const [query, setQuery] = useState('');
@@ -116,81 +113,85 @@ const FlavorSelectionModal = reduxForm<{}, FlavorSelectionModalProps>({
       minimalSettings.minimal_worker_ram_gb);
 
   return (
-    <form onSubmit={handleSubmit(handleConfirmSelection)}>
-      <ModalDialog
-        title={translate(
-          'Select OpenStack flavor for {datacenter} {type} nodes',
-          {
-            datacenter: datacenterName,
-            type: nodeGroupType,
-          },
-        )}
-        subtitle={
-          showMinimalSettingsLabels && (
-            <span className="text-muted">
-              {translate('Minimal requirements:')}
-              {minimalSettings.minimal_worker_vcpus && (
-                <> {minimalSettings.minimal_worker_vcpus}+ vCPUs</>
-              )}
-              {minimalSettings.minimal_worker_ram_gb && (
-                <>, {minimalSettings.minimal_worker_ram_gb}+ GB RAM</>
-              )}
-            </span>
-          )
-        }
-        footer={
-          <>
-            <CloseDialogButton className="w-125px" />
-            <SubmitButton
-              submitting={false}
-              disabled={invalid}
-              label={translate('Select flavor')}
-              iconNode={<CheckIcon weight="bold" />}
-              iconOnLeft
-            />
-          </>
-        }
-        bodyClassName="h-500px"
-      >
-        <div className="mb-3">
-          <FilterBox
-            type="search"
-            placeholder={translate('Search flavors...')}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </div>
+    <Form onSubmit={handleConfirmSelection} initialValues={initialValues}>
+      {({ handleSubmit, invalid, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate(
+              'Select OpenStack flavor for {datacenter} {type} nodes',
+              {
+                datacenter: datacenterName,
+                type: nodeGroupType,
+              },
+            )}
+            subtitle={
+              showMinimalSettingsLabels && (
+                <span className="text-muted">
+                  {translate('Minimal requirements:')}
+                  {minimalSettings.minimal_worker_vcpus && (
+                    <> {minimalSettings.minimal_worker_vcpus}+ vCPUs</>
+                  )}
+                  {minimalSettings.minimal_worker_ram_gb && (
+                    <>, {minimalSettings.minimal_worker_ram_gb}+ GB RAM</>
+                  )}
+                </span>
+              )
+            }
+            footer={
+              <>
+                <CloseDialogButton className="w-125px" />
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={invalid}
+                  label={translate('Select flavor')}
+                  iconNode={<CheckIcon weight="bold" />}
+                  iconOnLeft
+                />
+              </>
+            }
+            bodyClassName="h-500px"
+          >
+            <div className="mb-3">
+              <FilterBox
+                type="search"
+                placeholder={translate('Search flavors...')}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </div>
 
-        <Table
-          {...tableProps}
-          columns={[
-            {
-              title: translate('Flavor'),
-              render: ({ row }) => <strong>{row.name}</strong>,
-            },
-            {
-              title: translate('vCPUs'),
-              render: ({ row }) => row.cores || 0,
-              orderField: 'cores',
-            },
-            {
-              title: translate('RAM'),
-              render: ({ row }) => formatFilesize(row.ram || 0),
-              orderField: 'ram',
-            },
-          ]}
-          verboseName={translate('flavors')}
-          hasActionBar={false}
-          cardBordered={false}
-          fullWidth
-          minHeight="auto"
-          fieldType="radio"
-          fieldName="flavor"
-          validate={required}
-        />
-      </ModalDialog>
-    </form>
+            <Table
+              {...tableProps}
+              columns={[
+                {
+                  title: translate('Flavor'),
+                  render: ({ row }) => <strong>{row.name}</strong>,
+                },
+                {
+                  title: translate('vCPUs'),
+                  render: ({ row }) => row.cores || 0,
+                  orderField: 'cores',
+                },
+                {
+                  title: translate('RAM'),
+                  render: ({ row }) => formatFilesize(row.ram || 0),
+                  orderField: 'ram',
+                },
+              ]}
+              verboseName={translate('flavors')}
+              hasActionBar={false}
+              cardBordered={false}
+              fullWidth
+              minHeight="auto"
+              fieldType="radio"
+              fieldName="flavor"
+              validate={required}
+            />
+          </ModalDialog>
+        </form>
+      )}
+    </Form>
   );
-});
+};
 
 export const K8sFlavorSelectionTable: React.FC<
   K8sFlavorSelectionTableProps

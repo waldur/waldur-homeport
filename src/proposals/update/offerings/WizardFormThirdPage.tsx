@@ -1,45 +1,42 @@
 import { FunctionComponent } from 'react';
+import { useFormState } from 'react-final-form';
 
 import { FormContainer, TextField } from '@/form';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { WizardForm } from '@/form/WizardForm';
 import { formatJsxTemplate, translate } from '@/i18n';
 
 export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
   props,
 ) => {
+  const { values, submitting } = useFormState({
+    subscription: { values: true, submitting: true },
+  });
+  const { offering } = values;
+
   return (
     <WizardForm {...props}>
-      {(wizardProps) => {
-        const { offering } = wizardProps.formValues;
+      <FormContainer submitting={submitting} className="size-lg">
+        <p>
+          {translate(
+            'Are you sure you want to request {provider} to add {offering} to the {call}?',
+            {
+              provider: (
+                <span className="fst-italic">{offering.customer_name}</span>
+              ),
 
-        return (
-          <FormContainer
-            submitting={wizardProps.submitting}
-            clearOnUnmount={false}
-            className="size-lg"
-          >
-            <p>
-              {translate(
-                'Are you sure you want to request {provider} to add {offering} to the {call}?',
-                {
-                  provider: (
-                    <span className="fst-italic">{offering.customer_name}</span>
-                  ),
-
-                  offering: <u>{offering.name}</u>,
-                  call: props.data.call?.name,
-                },
-                formatJsxTemplate,
-              )}
-            </p>
-            <TextField
-              name="description"
-              placeholder={translate('Add a note to the provider')}
-              maxLength={1000}
-            />
-          </FormContainer>
-        );
-      }}
+              offering: <u>{offering.name}</u>,
+              call: props.data.call?.name,
+            },
+            formatJsxTemplate,
+          )}
+        </p>
+        <TextField
+          name="description"
+          placeholder={translate('Add a note to the provider')}
+          maxLength={1000}
+        />
+      </FormContainer>
     </WizardForm>
   );
 };

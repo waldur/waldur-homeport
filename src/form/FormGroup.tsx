@@ -6,31 +6,34 @@ import {
   PropsWithChildren,
   ReactNode,
   useContext,
-  useEffect,
 } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { clearFields, WrappedFieldMetaProps } from 'redux-form';
+import { FieldRenderProps } from 'react-final-form';
 
 import { Tip, TipProps } from '@/core/Tooltip';
 
 import { FormFieldsContext } from './context';
 import { FieldError } from './FieldError';
-import { FormField } from './types';
 
-export interface FormGroupProps extends FormField {
-  meta: WrappedFieldMetaProps;
-  clearOnUnmount?: boolean;
-  actions?: ReactNode;
-  quickAction?: ReactNode;
+export interface FormGroupProps extends Partial<FieldRenderProps<any, any>> {
+  required?: boolean;
+  label?: ReactNode;
+  description?: ReactNode;
+  tooltip?: ReactNode;
   tooltipEnd?: boolean;
   tooltipProps?: Partial<TipProps>;
+  hideLabel?: boolean;
   hideError?: boolean;
+  actions?: ReactNode;
+  quickAction?: ReactNode;
+  containerClassName?: string;
+  spaceless?: boolean;
+  space?: number;
+  noUpdateOnBlur?: boolean;
 }
 
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   const context = useContext(FormFieldsContext);
-  const dispatch = useDispatch();
 
   const {
     input,
@@ -46,39 +49,31 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     children,
     actions,
     quickAction,
-    clearOnUnmount,
     spaceless,
     containerClassName,
     space = 7,
     ...rest
   } = props;
 
-  useEffect(() => {
-    return () => {
-      if (!clearOnUnmount) {
-        return;
-      }
-      dispatch(clearFields(meta.form, false, false, input.name));
-    };
-  }, []);
-
   const newProps = {
     input,
     ...rest,
-    readOnly: context.readOnlyFields.includes(input.name) || rest.readOnly,
+    readOnly:
+      (input && context.readOnlyFields.includes(input.name)) || rest.readOnly,
     onBlur: (event) => {
-      if (!props.noUpdateOnBlur) {
-        props.input.onBlur(event);
+      if (!props.noUpdateOnBlur && input) {
+        input.onBlur(event);
       }
     },
-    isInvalid: meta.touched && !!meta.error,
+    isInvalid: meta && meta.touched && (!!meta.error || !!meta.submitError),
+    id: input?.name,
   };
 
   const labelNode = !hideLabel && (
-    <Form.Label className={classNames({ required })}>
+    <Form.Label className={classNames({ required })} htmlFor={input?.name}>
       {tooltip && !tooltipEnd && (
         <Tip
-          id={'form-field-tooltip-' + input.name}
+          id={'form-field-tooltip-' + (input ? input.name : 'field')}
           label={tooltip}
           {...tooltipProps}
         >
@@ -106,7 +101,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           {props.quickAction}
           {tooltip && tooltipEnd && (
             <Tip
-              id={'form-field-tooltip-' + input.name}
+              id={'form-field-tooltip-' + (input ? input.name : 'field')}
               className="align-self-center ms-2"
               label={tooltip}
               {...tooltipProps}
@@ -120,7 +115,9 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
       )}
       {cloneElement(children as any, newProps)}
       {description && <Form.Text>{description}</Form.Text>}
-      {!hideError && meta.touched && <FieldError error={meta.error} />}
+      {!hideError && meta && meta.touched && (
+        <FieldError error={meta.error || meta.submitError} />
+      )}
     </div>
   );
 

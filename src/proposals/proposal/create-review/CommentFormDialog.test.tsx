@@ -4,12 +4,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import { CommentFormDialog } from './CommentFormDialog';
 
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-  }),
-}));
-
 describe('CommentFormDialog', () => {
   const mockOnSubmit = vi.fn();
 

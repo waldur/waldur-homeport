@@ -262,10 +262,15 @@ export const RoleAndProjectSelectField: React.FC<
   ) : (
     <Field
       name={name}
-      component={FormControl as any}
-      placeholder={translate('Select...')}
-      disabled={disabled}
       validate={required}
+      render={({ input, meta }) => (
+        <FormControl
+          {...input}
+          placeholder={translate('Select...')}
+          disabled={disabled}
+          isInvalid={meta.touched && meta.invalid}
+        />
+      )}
     />
   );
 };

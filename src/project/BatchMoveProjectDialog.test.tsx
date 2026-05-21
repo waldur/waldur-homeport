@@ -3,14 +3,13 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { projectsMoveProject } from 'waldur-js-client';
 
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 
 import { BatchMoveProjectDialog } from './BatchMoveProjectDialog';
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/modal/hooks');
 vi.mock('@/modal/CloseDialogButton', () => ({
   CloseDialogButton: () => <button>Close</button>,
 }));

@@ -11,17 +11,8 @@ import {
   lessThanOrEqualField,
   required,
 } from '@/core/validators';
-import {
-  FormContainer,
-  NumberField,
-  SelectField,
-  StringField,
-  TextField,
-} from '@/form';
-import {
-  AsyncSelectField,
-  AsyncSelectFieldFinal,
-} from '@/form/AsyncSelectField';
+import { NumberField, SelectField, StringField, TextField } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { FormFieldError } from '@/form/FormFieldError';
@@ -114,19 +105,7 @@ export const buildOptionValidator = (
   return composeValidators(...validators);
 };
 
-interface OptionsFormProps {
-  options: Offering['options'];
-  submitting?: boolean;
-  customer?: DeployFormData['customer'];
-  finalForm?: boolean;
-}
-
-export const getComponentAndParams = (
-  option,
-  key,
-  customer,
-  finalForm = false,
-) => {
+export const getComponentAndParams = (option, key, customer) => {
   let OptionField: FC<Partial<FormGroupProps>> = StringField;
   let params: Record<string, any> = {};
   switch (option.type) {
@@ -176,7 +155,7 @@ export const getComponentAndParams = (
       OptionField = TimeSelectField;
       break;
     case 'select_openstack_tenant':
-      OptionField = finalForm ? AsyncSelectFieldFinal : AsyncSelectField;
+      OptionField = AsyncSelectField;
       params = {
         key: key + '-' + customer?.uuid,
         loadOptions: (query, prevOptions, currentPage) =>
@@ -193,7 +172,7 @@ export const getComponentAndParams = (
       };
       break;
     case 'select_multiple_openstack_tenants':
-      OptionField = finalForm ? AsyncSelectFieldFinal : AsyncSelectField;
+      OptionField = AsyncSelectField;
       params = {
         key: key + '-' + customer?.uuid,
         loadOptions: (query, prevOptions, currentPage) =>
@@ -211,7 +190,7 @@ export const getComponentAndParams = (
       };
       break;
     case 'select_openstack_instance':
-      OptionField = finalForm ? AsyncSelectFieldFinal : AsyncSelectField;
+      OptionField = AsyncSelectField;
       params = {
         key: key + '-' + customer?.uuid,
         loadOptions: (query, prevOptions, currentPage) =>
@@ -228,7 +207,7 @@ export const getComponentAndParams = (
       };
       break;
     case 'select_multiple_openstack_instances':
-      OptionField = finalForm ? AsyncSelectFieldFinal : AsyncSelectField;
+      OptionField = AsyncSelectField;
       params = {
         key: key + '-' + customer?.uuid,
         loadOptions: (query, prevOptions, currentPage) =>
@@ -299,14 +278,16 @@ export const getComponentAndParams = (
  * Inner component for react-final-form that uses useFormState for cross-field validation.
  * This is a separate component to ensure useFormState only subscribes when finalForm=true.
  */
-const OptionsFormFinal = ({
+export const OptionsForm = ({
   options,
-  customer,
+  customer: preferedCustomer,
 }: {
   options: Offering['options'];
   customer?: DeployFormData['customer'];
 }) => {
   const { values } = useFormState({ subscription: { values: true } });
+  const selectedCustomer = useSelector(getCustomer);
+  const customer = preferedCustomer || selectedCustomer;
 
   return (
     <>
@@ -320,7 +301,6 @@ const OptionsFormFinal = ({
             option,
             key,
             customer,
-            true,
           );
 
           // Build validator with cross-field support
@@ -341,7 +321,7 @@ const OptionsFormFinal = ({
             >
               <Field
                 name={`attributes.${key}`}
-                component={OptionField as any}
+                component={OptionField}
                 validate={validateFn}
                 {...params}
                 {...(OptionField === AwesomeCheckboxField
@@ -356,56 +336,4 @@ const OptionsFormFinal = ({
         })}
     </>
   );
-};
-
-export const OptionsForm = ({
-  options,
-  submitting,
-  customer: preferedCustomer,
-  finalForm,
-}: OptionsFormProps) => {
-  const selectedCustomer = useSelector(getCustomer);
-  const customer = preferedCustomer || selectedCustomer;
-
-  if (!finalForm) {
-    return (
-      <FormContainer submitting={submitting} className="size-xl">
-        {options.order &&
-          options.order.map((key) => {
-            const option = options.options[key];
-            if (!option) {
-              return null;
-            }
-            const { OptionField, params } = getComponentAndParams(
-              option,
-              key,
-              customer,
-            );
-
-            // Use custom validator if provided, otherwise use required validator
-            const validateFn = params.validate
-              ? params.validate
-              : option.required
-                ? required
-                : undefined;
-
-            return (
-              <OptionField
-                key={key}
-                label={option.label}
-                name={`attributes.${key}`}
-                tooltip={!params.hideHelp && option.help_text}
-                tooltipEnd
-                required={option.required}
-                validate={validateFn}
-                {...params}
-              />
-            );
-          })}
-      </FormContainer>
-    );
-  }
-
-  // Render fields for "react-final-form" with cross-field validation support
-  return <OptionsFormFinal options={options} customer={customer} />;
 };

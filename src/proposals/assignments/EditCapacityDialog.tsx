@@ -77,7 +77,7 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
               >
                 <Field
                   name="max_assignments"
-                  component={NumberField as any}
+                  component={NumberField}
                   min={1}
                   max={50}
                 />

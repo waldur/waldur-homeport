@@ -249,7 +249,7 @@ const MANAGED_RANCHER_FIELD: OfferingEditField[] = [
       getOptionLabel: ({ name }) => name,
       getOptionKey: ({ uuid }) => uuid,
       required: true,
-      validate: [required],
+      validate: required,
     },
   },
   {

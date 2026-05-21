@@ -9,7 +9,7 @@ import {
 
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
@@ -85,7 +85,7 @@ export const TagFormDialog: FC<TagFormDialogProps> = (props) => {
               />
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <StringField
                 label={translate('Name')}
                 name="name"
@@ -99,7 +99,7 @@ export const TagFormDialog: FC<TagFormDialogProps> = (props) => {
                 name="description"
                 required={false}
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

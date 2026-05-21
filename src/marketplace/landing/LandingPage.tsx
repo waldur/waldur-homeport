@@ -1,6 +1,5 @@
-import { FC, Suspense, useCallback } from 'react';
+import { FC, Suspense, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { change, getFormValues } from 'redux-form';
 import { NestedTag } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -16,7 +15,6 @@ import {
 import { useTitle } from '@/navigation/title';
 
 import { CardStyleType } from '../common/cards/index';
-import { MARKETPLACE_LANDING_FILTER_FORM } from '../constants';
 
 import { CardStyleProvider } from './CardStyleContext';
 import { PageBarFilters } from './filter/PageBarFilters';
@@ -42,9 +40,14 @@ export const LandingPage: FC<{}> = () => {
     'detailed';
 
   const dispatch = useDispatch();
-  const formValues = useSelector(
-    getFormValues(MARKETPLACE_LANDING_FILTER_FORM),
-  ) as Record<string, any>;
+  const filters = useSelector(getMarketplaceFilters);
+
+  const formValues = useMemo(() => {
+    const org = filters?.find((f) => f.name === 'organization')?.value;
+    const proj = filters?.find((f) => f.name === 'project')?.value;
+    const tag = filters?.find((f) => f.name === 'tag')?.value;
+    return { organization: org, project: proj, tag };
+  }, [filters]);
 
   const handleTagClick = useCallback(
     (tag: NestedTag) => {
@@ -56,13 +59,11 @@ export const LandingPage: FC<{}> = () => {
           getValueLabel: (v) => v?.name,
         }),
       );
-      dispatch(change(MARKETPLACE_LANDING_FILTER_FORM, 'tag', tag));
       syncFiltersToURL({ ...formValues, tag });
     },
     [dispatch, formValues],
   );
 
-  const filters = useSelector(getMarketplaceFilters);
   useToolbarActions(<MarketplaceLandingFilter />, []);
   useExtraToolbar(filters.length ? <PageBarFilters /> : null, [filters]);
 

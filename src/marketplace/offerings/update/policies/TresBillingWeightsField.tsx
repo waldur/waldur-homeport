@@ -49,7 +49,7 @@ const FieldsListGroup = ({
                       <td>
                         <Field
                           name={`${name}.key`}
-                          component={StringField as any}
+                          component={StringField}
                           validate={required}
                           placeholder={translate('e.g., CPU, Mem, GRES/gpu')}
                           list="tres-suggestions"
@@ -63,7 +63,7 @@ const FieldsListGroup = ({
                       <td>
                         <Field
                           name={`${name}.value`}
-                          component={NumberField as any}
+                          component={NumberField}
                           validate={required}
                           step="any"
                           min={0}

@@ -1,6 +1,6 @@
+import { FormApi } from 'final-form';
 import { useCallback, useMemo, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { change, getFormValues } from 'redux-form';
+import { useDispatch } from 'react-redux';
 import {
   ImportableResource,
   marketplaceProviderOfferingsImportResource,
@@ -14,15 +14,16 @@ import { useNotify } from '@/store/notify';
 import { createEntity } from '@/table/actions';
 import { Customer } from '@/workspace/types';
 
-export const IMPORT_RESOURCE_FORM_ID = 'ResourceImportDialog';
-
-interface FormData {
-  organization: Customer;
-  project: Project;
-  resources: ImportableResource[];
+export interface FormData {
+  organization?: Customer;
+  project?: Project;
+  resources?: ImportableResource[];
 }
 
-export const useImportDialog = () => {
+export const useImportDialog = (
+  form: FormApi<FormData>,
+  formValues: Partial<FormData>,
+) => {
   const [step, setStep] = useState(1); // 3 steps
   const [offering, setOffering] = useState<Offering>();
   const [plans, setPlans] = useState<Record<string, Plan>>({});
@@ -31,10 +32,6 @@ export const useImportDialog = () => {
   const { showErrorResponse, showSuccess } = useNotify();
 
   const { closeDialog } = useModal();
-
-  const formValues = useSelector((state) =>
-    getFormValues(IMPORT_RESOURCE_FORM_ID)(state),
-  ) as FormData;
 
   const submitEnabled = useMemo(
     () =>
@@ -48,23 +45,26 @@ export const useImportDialog = () => {
 
   const nextEnabled =
     step === 1
-      ? formValues?.organization && formValues?.project
+      ? Boolean(formValues?.organization && formValues?.project)
       : step === 2
-        ? offering
+        ? Boolean(offering)
         : false;
 
-  const selectOffering = useCallback((value: Offering) => {
-    setOffering(value);
-    dispatch(change(IMPORT_RESOURCE_FORM_ID, 'resources', []));
-  }, []);
+  const selectOffering = useCallback(
+    (value: Offering) => {
+      setOffering(value);
+      form.change('resources', []);
+    },
+    [form],
+  );
 
   const assignPlan = (resource: ImportableResource, plan: Plan) =>
     setPlans({ ...plans, [resource.backend_id]: plan });
 
-  const handleSubmit = useCallback(
+  const onSubmit = useCallback(
     async (_formValues: FormData) => {
       try {
-        for (const resource of _formValues.resources) {
+        for (const resource of _formValues.resources || []) {
           const marketplaceResource = (
             await marketplaceProviderOfferingsImportResource({
               path: { uuid: offering.uuid },
@@ -91,7 +91,7 @@ export const useImportDialog = () => {
       }
       closeDialog();
     },
-    [offering, plans],
+    [offering, plans, dispatch, showSuccess, showErrorResponse, closeDialog],
   );
 
   return {
@@ -105,6 +105,6 @@ export const useImportDialog = () => {
     assignPlan,
     nextEnabled,
     submitEnabled,
-    handleSubmit,
+    onSubmit,
   };
 };

@@ -446,7 +446,7 @@ The `DeployPageSidebar` provides:
 
 The BaseDeployPage component represents a well-architected, reusable foundation that allows different cloud services to implement their specific deployment workflows while maintaining consistency across the marketplace experience.
 
-## Type-Specific Fields in Redux Forms
+## Type-Specific Fields in React Final Form
 
 The application uses a sophisticated type-based field selection system for creating dynamic Redux forms, exemplified by the `SupportSettingsForm.tsx` component.
 
@@ -489,9 +489,9 @@ The application supports these field types:
 - **`integer`** - Numeric input using `NumberField`
 - **`secret_field`** - Password/secret input using `SecretField`
 
-### Redux Form Integration
+### React Final Form Integration
 
-All fields are wrapped with Redux Form's `Field` component and `FormGroup`:
+All fields are wrapped with React Final Form's `Field` component and `FormGroup`:
 
 ```js
 <Field
@@ -617,7 +617,7 @@ export const composeValidators = (...validators) => (value) =>
 2. **Fallback Strategy**: Always provide a default field type (typically `StringField`)
 3. **Props Interface**: Extend the base `FormField` interface for type safety
 4. **Validator Composition**: Use `composeValidators` for complex validation logic
-5. **Error Handling**: Integrate with Redux Form's meta.touched state for error display
+5. **Error Handling**: Integrate with React Final Form's meta.touched state for error display
 6. **Configuration-Driven**: Use data structures to define forms rather than hardcoding
 
 This type-specific field system enables dynamic form generation while maintaining type safety and consistent user experience across the application.
@@ -924,7 +924,7 @@ Key configuration props. Full interface is large — these are the most commonly
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 ```
 
-Use this version inside React Final Form. **Do not use `FormContainer` from `@/form`** — that is redux-form only and will cause errors.
+Use this version inside React Final Form.
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
@@ -949,7 +949,7 @@ Use this version inside React Final Form. **Do not use `FormContainer` from `@/f
 import { SelectField } from '@/form';
 ```
 
-Redux Form field component. In React Final Form use `<Field name="..." component={SelectField as any} />`.
+Form field component. Use as `<Field name="..." component={SelectField as any} />`.
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
@@ -961,7 +961,7 @@ Redux Form field component. In React Final Form use `<Field name="..." component
 | `isDisabled` | `boolean` | no | `false` | Disable the select |
 | `isClearable` | `boolean` | no | `false` | Show clear button |
 | `className` | `string` | no | — | Additional CSS classes |
-| `noUpdateOnBlur` | `boolean` | no | `false` | Skip redux-form blur update |
+| `noUpdateOnBlur` | `boolean` | no | `false` | Skip form blur update |
 
 ---
 
@@ -971,7 +971,7 @@ Redux Form field component. In React Final Form use `<Field name="..." component
 import { StringField } from '@/form';
 ```
 
-Redux Form field component. In React Final Form use `<Field name="..." component={StringField as any} />`.
+Form field component. Use as `<Field name="..." component={StringField as any} />`.
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|

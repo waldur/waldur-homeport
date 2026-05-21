@@ -1,8 +1,7 @@
 import { uniq } from 'lodash-es';
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useForm, useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
-import { change } from 'redux-form';
 import {
   marketplaceProviderOfferingsList,
   ServiceProvider,
@@ -24,11 +23,7 @@ import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
 import { OfferingUserRecord, RecordStatus } from './types';
-import {
-  BULK_IMPORT_OFFERING_USERS_FORM_ID,
-  parseOfferingUsersFile,
-  validateOfferingUserCreation,
-} from './utils';
+import { parseOfferingUsersFile, validateOfferingUserCreation } from './utils';
 
 const getStatusMessages = () => ({
   invalid: translate('Invalid user'),
@@ -87,7 +82,10 @@ const WithTooltip = ({ label = '', len = 24 }) =>
   );
 
 export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
-  const dispatch = useDispatch();
+  const form = useForm();
+  const { values } = useFormState({
+    subscription: { values: true },
+  });
 
   const { showError } = useNotify();
 
@@ -100,7 +98,7 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
 
   const getRecordStatus = useCallback(
     (row: OfferingUserRecord) => {
-      return recordsStatus.find(
+      return recordsStatus?.find(
         (rec) =>
           rec.data.offering_uuid === row.offering_uuid &&
           rec.data.user_uuid === row.user_uuid,
@@ -195,7 +193,11 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
             );
             const user = users.find((user) => row.username === user.username);
             let providerOwned = true;
-            if (provider && offering.customer_uuid !== provider.customer_uuid) {
+            if (
+              provider &&
+              offering &&
+              offering.customer_uuid !== provider.customer_uuid
+            ) {
               providerOwned = false;
             }
             return {
@@ -224,15 +226,13 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           }
 
           setData(uniqueRows);
-          dispatch(
-            change(BULK_IMPORT_OFFERING_USERS_FORM_ID, 'payload', uniqueRows),
-          );
+          form.change('payload', uniqueRows);
         })
         .finally(() => {
           setLoading(false);
         });
     },
-    [setData, setLoading],
+    [setData, setLoading, form, provider, showError],
   );
 
   const validation = useMemo(() => {
@@ -275,60 +275,52 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
     };
   }, [data]);
 
+  const file = values?.file;
+
+  useEffect(() => {
+    if (file?.length > 0) {
+      parseCsvFile(file);
+    }
+  }, []);
   return (
     <WizardForm
       {...props}
       submitDisabled={!!validation.message && !skipErrors}
       submitTooltip={!skipErrors && validation.message}
     >
-      {(wizardProps) => {
-        const file = wizardProps.formValues?.file;
-
-        useEffect(() => {
-          if (file?.length > 0) {
-            parseCsvFile(file);
+      <div>
+        <div className="d-flex justify-content-start mb-3">
+          <div ref={refToolbar}>{/* Portal destination */}</div>
+        </div>
+        <div className="d-flex justify-content-between text-muted mb-3">
+          <span>
+            {validation.invalid === 0
+              ? translate('{n} valid', { n: validation.valid })
+              : translate('{n} valid, {m} errors found', {
+                  n: validation.valid,
+                  m: validation.invalid,
+                })}
+          </span>
+          <span>{translate('Verify your data before importing')}</span>
+        </div>
+        <Table
+          {...tableProps}
+          columns={columns}
+          verboseName={translate('Users')}
+          hasActionBar={false}
+          fullWidth
+          cardBordered={false}
+          minHeight="auto"
+          portal={{ toolbar: refToolbar?.current }}
+          hasQuery
+          loading={loading}
+          footer={
+            Boolean(validation.message && data?.length) && (
+              <SkipErrorsCheck checked={skipErrors} onChange={setSkipErrors} />
+            )
           }
-        }, []);
-
-        return (
-          <div>
-            <div className="d-flex justify-content-start mb-3">
-              <div ref={refToolbar}>{/* Portal destination */}</div>
-            </div>
-            <div className="d-flex justify-content-between text-muted mb-3">
-              <span>
-                {validation.invalid === 0
-                  ? translate('{n} valid', { n: validation.valid })
-                  : translate('{n} valid, {m} errors found', {
-                      n: validation.valid,
-                      m: validation.invalid,
-                    })}
-              </span>
-              <span>{translate('Verify your data before importing')}</span>
-            </div>
-            <Table
-              {...tableProps}
-              columns={columns}
-              verboseName={translate('Users')}
-              hasActionBar={false}
-              fullWidth
-              cardBordered={false}
-              minHeight="auto"
-              portal={{ toolbar: refToolbar?.current }}
-              hasQuery
-              loading={loading}
-              footer={
-                Boolean(validation.message && data?.length) && (
-                  <SkipErrorsCheck
-                    checked={skipErrors}
-                    onChange={setSkipErrors}
-                  />
-                )
-              }
-            />
-          </div>
-        );
-      }}
+        />
+      </div>
     </WizardForm>
   );
 };

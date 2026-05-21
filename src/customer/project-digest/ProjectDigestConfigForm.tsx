@@ -126,7 +126,7 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
           <FormGroup label={translate('Enable digest emails')}>
             <Field
               name="is_enabled"
-              component={AwesomeCheckboxField as any}
+              component={AwesomeCheckboxField}
               label={translate(
                 'Send periodic summary emails to project members',
               )}
@@ -138,7 +138,7 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
               <FormGroup label={translate('Frequency')} required>
                 <Field
                   name="frequency"
-                  component={SelectField as any}
+                  component={SelectField}
                   options={frequencyOptions}
                   simpleValue
                   isClearable={false}
@@ -150,7 +150,7 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
                 <FormGroup label={translate('Day of week')} required>
                   <Field
                     name="day_of_week"
-                    component={SelectField as any}
+                    component={SelectField}
                     options={dayOfWeekOptions}
                     simpleValue
                     isClearable={false}
@@ -168,7 +168,7 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
                 >
                   <Field
                     name="day_of_month"
-                    component={NumberField as any}
+                    component={NumberField}
                     min={1}
                     max={28}
                   />

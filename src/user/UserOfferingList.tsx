@@ -1,6 +1,6 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form, useFormState } from 'react-final-form';
 import { marketplaceOfferingUsersList, User } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -22,15 +22,15 @@ interface OwnProps {
   hasActionBar?: boolean;
 }
 
-export const UserOfferingList: FunctionComponent<OwnProps> = ({
+const UserOfferingListTable: FunctionComponent<OwnProps> = ({
   hasActionBar = true,
   ...props
 }) => {
   const currentUser = useUser();
   const user = props.user || currentUser;
-  const filterValues = useSelector(
-    getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
-  ) as { offering?; provider?; state?: Array<{ value: any }> };
+  const { values } = useFormState();
+  const filterValues = values;
+
   const filter = useMemo(
     () => ({
       provider_uuid: filterValues?.provider?.customer_uuid,
@@ -83,6 +83,21 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       hasActionBar={hasActionBar}
       filters={<ProviderOfferingUsersFilter hasOrganizationColumn={true} />}
       expandableRow={OfferingUsersExpandableRow}
+      formId={PROVIDER_OFFERING_USERS_FORM_ID}
     />
+  );
+};
+
+export const UserOfferingList: FunctionComponent<OwnProps> = (props) => {
+  const { params } = useCurrentStateAndParams();
+  return (
+    <Form
+      id={PROVIDER_OFFERING_USERS_FORM_ID}
+      onSubmit={() => {}}
+      initialValues={{ state: params?.filterState }}
+      subscription={{ values: true }}
+    >
+      {() => <UserOfferingListTable {...props} />}
+    </Form>
   );
 };

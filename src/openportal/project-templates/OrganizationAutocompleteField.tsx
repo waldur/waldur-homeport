@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import { FunctionComponent, useCallback, useMemo } from 'react';
 
 import { AsyncPaginate } from '@/form/themed-select';
@@ -72,8 +72,6 @@ export const OrganizationAutocompleteField: FunctionComponent<
       onBlur={input.onBlur}
       noOptionsMessage={() => noOptionsMessage || translate('No organizations')}
       isClearable={true}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
       {...reactSelectProps}
     />
   );

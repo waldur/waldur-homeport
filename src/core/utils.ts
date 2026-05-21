@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { ENV } from '@/core/config';
 import { DEFAULT_PRIMARY_COLORS } from '@/core/constants';
 import { PhoneNumber } from '@/workspace/types';
@@ -250,15 +248,6 @@ export function returnReactSelectAsyncPaginateObject<T = any>(
 }
 
 export const cleanObject = (value: any) => JSON.parse(JSON.stringify(value));
-
-export const removeEmptyObjects = (obj) => {
-  return _(obj)
-    .pickBy(_.isObject) // pick objects only
-    .mapValues(removeEmptyObjects) // call only for object values
-    .omitBy(_.isEmpty) // remove all empty objects
-    .assign(_.omitBy(obj, _.isObject)) // assign back primitive values
-    .value();
-};
 
 export const createDeferred = () => {
   const deferred: any = {};

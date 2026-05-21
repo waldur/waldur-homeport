@@ -8,7 +8,7 @@ import { openstackPortsCreate } from 'waldur-js-client';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { isMatchPattern, required } from '@/core/validators';
-import { SelectField, FormGroupFinal } from '@/form';
+import { SelectField, FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadNetworks, loadSubnets } from '@/openstack/api';
@@ -93,7 +93,7 @@ export const FixedIPsField: FC<{
             <Field
               name="fixed_ips.subnet"
               label={translate('Subnet')}
-              component={FormGroupFinal}
+              component={FormGroup}
               options={subnets || []}
               placeholder={translate('Select subnet')}
               getOptionValue={(option) => option.url}

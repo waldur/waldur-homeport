@@ -6,7 +6,7 @@ import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client'
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormFooter, FormGroupFinal, SelectField } from '@/form';
+import { FormFooter, FormGroup, SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -72,7 +72,7 @@ export const EditCategoryDialog: FC<EditCategoryDialogProps> = ({
               <Field
                 name="category"
                 label={translate('Category')}
-                component={FormGroupFinal}
+                component={FormGroup}
                 required={true}
                 validate={required}
               >

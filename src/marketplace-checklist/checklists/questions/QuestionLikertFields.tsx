@@ -47,7 +47,7 @@ export const QuestionLikertFields: FC = () => (
         <FormGroup label={translate('Low end label')} required space={5}>
           <Field
             name="likert_low_label"
-            component={StringField as any}
+            component={StringField}
             placeholder={translate('Strongly disagree')}
             validate={required}
           />
@@ -57,7 +57,7 @@ export const QuestionLikertFields: FC = () => (
         <FormGroup label={translate('High end label')} required space={5}>
           <Field
             name="likert_high_label"
-            component={StringField as any}
+            component={StringField}
             placeholder={translate('Strongly agree')}
             validate={required}
           />
@@ -67,7 +67,7 @@ export const QuestionLikertFields: FC = () => (
     <FormGroup space={5}>
       <Field
         name="likert_allow_na"
-        component={AwesomeCheckboxField as any}
+        component={AwesomeCheckboxField}
         label={translate('Allow "N/A" answer')}
       />
     </FormGroup>

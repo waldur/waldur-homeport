@@ -1,32 +1,19 @@
-import React, { useEffect } from 'react';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
-import { ProposalReview, ReviewSubmitRequest } from 'waldur-js-client';
+import React from 'react';
+import { Field } from 'react-final-form';
+import { ProposalReview } from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
 import { FormGroup, TextField } from '@/form';
 import { VStepperFormStepProps } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
-import { REVIEW_SUMMARY_FORM_ID } from '@/proposals/constants';
 import { isReviewInFinalState } from '@/proposals/utils';
 
 import { RateStars } from '../RateStars';
 
-type FormSummaryStepProps = VStepperFormStepProps &
-  InjectedFormProps<ReviewSubmitRequest, VStepperFormStepProps>;
-
-const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
+const FormSummaryStep: React.FC<VStepperFormStepProps> = (props) => {
   const { params } = props;
 
   const review: ProposalReview = params.reviews?.[0];
-
-  useEffect(() => {
-    props.initialize({
-      summary_score: review?.summary_score,
-      summary_public_comment: review?.summary_public_comment,
-      summary_private_comment: review?.summary_private_comment,
-    });
-  }, [params]);
-
   const disabled = isReviewInFinalState(review?.state);
 
   return (
@@ -39,8 +26,10 @@ const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
           const ratingId = `rating-${fieldProps.input.name}`;
 
           return (
-            <div className="form-group">
-              <label htmlFor={ratingId}>{translate('Rate')}</label>
+            <div className="form-group mb-7">
+              <label className="form-label" htmlFor={ratingId}>
+                {translate('Rate')}
+              </label>
               <div className="d-flex align-items-center gap-4">
                 <div id={ratingId}>
                   <RateStars
@@ -89,7 +78,4 @@ const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
   );
 };
 
-export default reduxForm<ReviewSubmitRequest, VStepperFormStepProps>({
-  form: REVIEW_SUMMARY_FORM_ID,
-  enableReinitialize: false,
-})(FormSummaryStep);
+export default FormSummaryStep;

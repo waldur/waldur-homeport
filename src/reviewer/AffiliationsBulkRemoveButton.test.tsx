@@ -3,14 +3,13 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { vi, describe, beforeEach, it, expect } from 'vitest';
 import { nestedReviewerProfileAffiliationsDestroy } from 'waldur-js-client';
 
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 
 import { AffiliationsBulkRemoveButton } from './AffiliationsBulkRemoveButton';
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/modal/hooks');
 vi.mock('@/i18n', () => ({
   translate: (key, context) => {
     if (context) {

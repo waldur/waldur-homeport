@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   InvitationState,
@@ -18,7 +17,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -138,7 +136,6 @@ const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -161,7 +158,6 @@ const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -192,28 +188,20 @@ const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
 
 export const UserInvitationsFilterFormId = 'UserInvitationsFilter';
 
-interface UserInvitationsFilterFormData {
+export interface UserInvitationsFilterFormData {
   state: InvitationStateOption[];
   role: RoleDetails;
   customer: Customer;
   scope_type: ScopeTypeOption;
 }
 
-export const UserInvitationsFilter = reduxForm<
-  UserInvitationsFilterFormData,
-  {}
->({
-  form: UserInvitationsFilterFormId,
-  destroyOnUnmount: false,
-})(PureUserInvitationsFilter);
+export const UserInvitationsFilter = PureUserInvitationsFilter;
 
 type UserInvitationsFilterQuery = UserInvitationsListData['query'];
 
-export const selectUserInvitationsFilter = createSelector<
-  RootState,
-  Partial<UserInvitationsFilterFormData>,
-  UserInvitationsFilterQuery
->(getFormValues(UserInvitationsFilterFormId), (values) => {
+export const selectUserInvitationsFilter = (
+  values?: Partial<UserInvitationsFilterFormData>,
+): UserInvitationsFilterQuery => {
   const filter: UserInvitationsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -230,4 +218,4 @@ export const selectUserInvitationsFilter = createSelector<
     }
   }
   return filter;
-});
+};

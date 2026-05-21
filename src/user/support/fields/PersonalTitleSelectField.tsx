@@ -22,16 +22,14 @@ export const PersonalTitleSelectField: FC<PersonalTitleSelectFieldProps> = ({
       value={options.find((option) => option.value === input.value) || null}
       onChange={(option: { value: string; label: string } | null) => {
         input.onChange(option?.value ?? null);
-        input.onBlur(option?.value ?? null);
+        input.onBlur();
       }}
-      onBlur={() => input.onBlur(input.value)}
+      onBlur={() => input.onBlur()}
       options={options}
       getOptionLabel={(option) => option.label}
       getOptionValue={(option) => option.value}
       isClearable={isClearable}
       isDisabled={isDisabled}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };

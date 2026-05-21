@@ -1,43 +1,62 @@
 import { useEffect } from 'react';
-import { Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { change, Field, formValueSelector } from 'redux-form';
+import { Field, useFormState, useForm } from 'react-final-form';
 import { MarketplaceResourcesListData } from 'waldur-js-client';
 
+import { FormGroup } from '@/form';
 import { Select as AsyncSelectField } from '@/form/AsyncSelectField';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { formatResourceShort } from '@/marketplace/utils';
-import { RootState } from '@/store/reducers';
 
-import { ISSUE_CREATION_FORM_ID } from './constants';
-
-const projectSelector = (state: RootState) =>
-  formValueSelector(ISSUE_CREATION_FORM_ID)(state, 'project');
-
-const resourceSelector = (state: RootState) =>
-  formValueSelector(ISSUE_CREATION_FORM_ID)(state, 'resource');
+const StaticResourceSelect = ({
+  input,
+  resource,
+}: {
+  input?: any;
+  resource: any;
+}) => (
+  <Select
+    getOptionValue={(option) => option.uuid}
+    getOptionLabel={(option) => formatResourceShort(option)}
+    options={
+      resource
+        ? [
+            {
+              name: resource.name,
+              uuid: resource.uuid,
+              url: resource.url,
+              offering_name: resource.offering_name,
+            },
+          ]
+        : []
+    }
+    value={input?.value}
+    isDisabled
+  />
+);
 
 export const ResourceGroup = ({ disabled }) => {
-  const project = useSelector(projectSelector);
-  const resource = useSelector(resourceSelector);
-  const dispatch = useDispatch();
+  const form = useForm();
+  const { values } = useFormState();
+  const project = values.project;
+  const resource = values.resource;
 
   useEffect(() => {
     if (resource && project && resource.project_uuid !== project.uuid) {
-      dispatch(change(ISSUE_CREATION_FORM_ID, 'resource', undefined));
+      form.change('resource', undefined);
     }
-  }, [dispatch, project, resource]);
+  }, [form, project, resource]);
 
   return (
-    <Form.Group className="mb-5">
-      <Form.Label>{translate('Affected resource')}</Form.Label>
+    <Field
+      name="resource"
+      component={FormGroup}
+      label={translate('Affected resource')}
+    >
       {project ? (
-        <Field
-          name="resource"
-          component={AsyncSelectField}
+        <AsyncSelectField
           isClearable={true}
           defaultOptions
           loadOptions={(query, prevOptions, page) =>
@@ -60,32 +79,8 @@ export const ResourceGroup = ({ disabled }) => {
           key={project.uuid}
         />
       ) : (
-        <Field
-          name="resource"
-          component={({ input: { value } }) => (
-            <Select
-              getOptionValue={(option) => option.uuid}
-              getOptionLabel={(option) => formatResourceShort(option)}
-              options={
-                resource
-                  ? [
-                      {
-                        name: resource.name,
-                        uuid: resource.uuid,
-                        url: resource.url,
-                        offering_name: resource.offering_name,
-                      },
-                    ]
-                  : []
-              }
-              value={value}
-              isDisabled
-              className="metronic-select-container"
-              classNamePrefix="metronic-select"
-            />
-          )}
-        />
+        <StaticResourceSelect resource={resource} />
       )}
-    </Form.Group>
+    </Field>
   );
 };

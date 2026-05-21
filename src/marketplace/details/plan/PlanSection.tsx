@@ -1,4 +1,3 @@
-import { connect } from 'react-redux';
 import { OrderDetails as OrderResponse } from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
@@ -13,26 +12,30 @@ import { Offering } from '@/marketplace/types';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { Field } from '@/resource/summary';
 
-import { PricesData } from './types';
-import { pricesSelector } from './utils';
+import { useOrderPrices } from './utils';
 
 interface PlanDetailsProps {
   order: OrderResponse;
   offering: Offering;
 }
 
-const PurePlanCard = ({
+const PlanCard = ({
   title,
   planName,
   planDescription,
-  components,
   concealBillingInfo,
+  ...pricesProps
 }: {
   title: string;
   planName: string;
   planDescription?: string;
   concealBillingInfo?: boolean;
-} & PricesData) => {
+  offering: Offering;
+  order?: OrderResponse;
+  viewMode?: boolean;
+  type?: string;
+}) => {
+  const prices = useOrderPrices(pricesProps);
   const {
     usageRows,
     initialRows,
@@ -41,7 +44,7 @@ const PurePlanCard = ({
     totalLimitedRows,
     hasPeriodicRows,
     periodicComponents,
-  } = useGroupedComponents(components);
+  } = useGroupedComponents(prices.components);
 
   const renderValue = (value) => (value ? value : <>&mdash;</>);
 
@@ -131,8 +134,6 @@ const PurePlanCard = ({
   );
 };
 
-const ConnectedPlanCard = connect(pricesSelector)(PurePlanCard);
-
 export const PlanSection = (props: PlanDetailsProps) => {
   const shouldConcealPrices = useShouldConcealPrices(props.order.project_uuid);
   const { plan_name, plan_description, old_plan_name } = props.order;
@@ -160,7 +161,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
     <>
       {isPlanChange ? (
         <>
-          <ConnectedPlanCard
+          <PlanCard
             title={translate('Old plan')}
             planName={old_plan_name}
             planDescription={plan_description}
@@ -171,7 +172,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
             concealBillingInfo={shouldConcealPrices}
           />
           <hr />
-          <ConnectedPlanCard
+          <PlanCard
             title={translate('New plan')}
             planName={plan_name}
             planDescription={plan_description}
@@ -183,7 +184,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
           />
         </>
       ) : (
-        <ConnectedPlanCard
+        <PlanCard
           title={translate('Plan')}
           planName={plan_name}
           planDescription={plan_description}

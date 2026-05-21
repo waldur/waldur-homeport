@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { customerQuotasList } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { selectCustomerQuotasFilter } from '@/table/generated/CustomerQuotasFilter';
+import {
+  selectCustomerQuotasFilter,
+  CustomerQuotasFilterFormId,
+} from '@/table/generated/CustomerQuotasFilter';
 
 import {
   AnalyticsCapability,
@@ -224,13 +227,16 @@ const modeConfig: Record<
   },
 };
 
-export const QuotasAnalyticsPage: FC = () => {
+const QuotasAnalyticsPageTable: FC = () => {
   const { params } = useCurrentStateAndParams();
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
 
-  // Get filter values from the form if available
-  const formValues = useSelector(selectCustomerQuotasFilter);
+  const { values } = useFormState();
+  const formValues = useMemo(
+    () => selectCustomerQuotasFilter(values),
+    [values],
+  );
 
   // Fetch quota data
   const {
@@ -290,3 +296,15 @@ export const QuotasAnalyticsPage: FC = () => {
     </>
   );
 };
+
+export const QuotasAnalyticsPage: FC<any> = (props) => (
+  <Form
+    id={CustomerQuotasFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <QuotasAnalyticsPageTable {...props} />}
+  </Form>
+);

@@ -20,7 +20,7 @@ export const CustomerCreateForm = () => {
         </Form.Label>
         <Field
           name="name"
-          component={InputField as any}
+          component={InputField}
           placeholder={translate('e.g. My Organization')}
           maxLength={150}
           validate={composeValidators(...getNameFieldValidators())}
@@ -32,7 +32,7 @@ export const CustomerCreateForm = () => {
         </Form.Label>
         <Field
           name="email"
-          component={InputField as any}
+          component={InputField}
           placeholder={translate('e.g. someone@example.com')}
           type="email"
           validate={composeValidators(required, email)}

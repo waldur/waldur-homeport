@@ -1,132 +1,119 @@
-import { uniq } from 'lodash-es';
-import {
-  useState,
-  createElement,
-  FC,
-  useCallback,
-  useEffect,
-  ReactNode,
-} from 'react';
-import { useDispatch, useStore } from 'react-redux';
-import { change, destroy, getFormValues } from 'redux-form';
+import { FormApi } from 'final-form';
+import { ComponentType, useState } from 'react';
+import { Form, FormSpy } from 'react-final-form';
 
 import { ProgressStep } from '@/core/ProgressSteps';
-import { WizardFormStepProps } from '@/form/WizardForm';
-import { translate } from '@/i18n';
 
-interface WizardFormContainerProps {
-  form: string;
+interface WizardFormContainerProps<FormValues = any> {
+  form?: string;
   title: string;
   subtitle?: string;
-  onSubmit: WizardFormStepProps['onSubmit'];
+  onSubmit: (
+    values: FormValues,
+    form: FormApi<FormValues>,
+  ) => Promise<any> | void;
   submitLabel?: string;
   nextLabel?: string;
   steps: ProgressStep[];
-  hideStepper?: boolean;
-  verticalLayout?: boolean;
-  wizardForms: FC<WizardFormStepProps>[];
+  wizardForms: ComponentType<any>[];
   initialValues?: any;
-  actions?: WizardFormStepProps['actions'];
   data?: any;
-  validate?(values: any): any;
-  modalProps?: {
-    iconNode?: ReactNode;
-    iconColor?: string;
-    headerClassName?: string;
-    bodyClassName?: string;
-  };
+  modalProps?: any;
   onCancel?(): void;
+  onChange?(values: FormValues): void;
+  hideStepper?: boolean;
+  validate?: (values: FormValues) => any;
   skipSteps?: number[];
 }
 
-export const WizardFormContainer: FC<WizardFormContainerProps> = ({
-  form,
-  submitLabel = translate('Submit'),
-  nextLabel = translate('Next'),
-  ...props
-}) => {
+export const WizardFormContainer = <
+  FormValues extends Record<string, any> = any,
+>({
+  onSubmit,
+  initialValues,
+  steps,
+  wizardForms,
+  title,
+  subtitle,
+  data,
+  modalProps,
+  onCancel,
+  onChange,
+  hideStepper,
+  validate,
+  skipSteps = [],
+}: WizardFormContainerProps<FormValues>) => {
   const [step, setStep] = useState(0);
   const [lastVisitedStep, setLastVisitedStep] = useState(0);
-  const isLast = step === props.steps.length - 1;
-  const skipSteps = props.skipSteps || [];
+  const isLast = step === steps.length - 1;
 
   const nextStep = () => {
-    let nextStepIndex = step + 1;
-    while (
-      skipSteps.includes(nextStepIndex) &&
-      nextStepIndex < props.steps.length
-    ) {
-      nextStepIndex++;
+    let nextIdx = step + 1;
+    while (skipSteps.includes(nextIdx) && nextIdx < steps.length) {
+      nextIdx++;
     }
-    setStep(nextStepIndex);
-    if (nextStepIndex > lastVisitedStep) {
-      setLastVisitedStep(nextStepIndex);
+    setStep(nextIdx);
+    if (nextIdx > lastVisitedStep) {
+      setLastVisitedStep(nextIdx);
     }
   };
 
   const prevStep = () => {
-    let prevStepIndex = step - 1;
-    while (skipSteps.includes(prevStepIndex) && prevStepIndex >= 0) {
-      prevStepIndex--;
+    let prevIdx = step - 1;
+    while (skipSteps.includes(prevIdx) && prevIdx >= 0) {
+      prevIdx--;
     }
-    setStep(Math.max(0, prevStepIndex));
+    setStep(Math.max(0, prevIdx));
   };
 
   const selectStep = (num: number) => {
     if (num <= lastVisitedStep && !skipSteps.includes(num)) setStep(num);
   };
-  const _submitLabel = isLast ? submitLabel : nextLabel;
 
-  const [initialized, setInitialized] = useState(false);
-  const dispatch = useDispatch<any>();
-  const store = useStore();
-
-  // Initialize form values once on mount
-  useEffect(() => {
-    if (initialized || !props.initialValues) {
-      return;
+  const handleSubmitStep = (
+    values: FormValues,
+    formApi: FormApi<FormValues>,
+  ) => {
+    if (isLast) {
+      return onSubmit(values, formApi);
+    } else {
+      nextStep();
     }
-    const formValues = getFormValues(form)(store.getState()) || {};
-    uniq(
-      Object.keys(props.initialValues).concat(Object.keys(formValues)),
-    ).forEach((key) => {
-      if (props.initialValues?.[key]) {
-        dispatch(change(form, key, props.initialValues[key], false, false));
-      } else {
-        dispatch(change(form, key, null, false, false));
-      }
-    });
-    setInitialized(true);
-  }, [initialized, props.initialValues, form, dispatch, store]);
+  };
 
-  // Dummy reinitialize function for backward compatibility
-  const reinitialize = useCallback(() => {
-    // Initialization is handled in useEffect above
-  }, []);
+  const CurrentStep = wizardForms[step];
 
-  // Destroy the form on close wizard
-  useEffect(() => {
-    return () => dispatch(destroy(form));
-  }, []);
-
-  return createElement(props.wizardForms[step], {
-    form,
-    title: props.title,
-    subtitle: props.subtitle,
-    onSubmit: isLast ? props.onSubmit : nextStep,
-    onPrev: prevStep,
-    onStep: selectStep,
-    submitLabel: _submitLabel,
-    step,
-    steps: props.steps,
-    hideStepper: props.hideStepper,
-    verticalLayout: props.verticalLayout,
-    initialValues: props.initialValues,
-    actions: props.actions,
-    data: props.data,
-    reinitialize,
-    validate: props.validate,
-    modalProps: props.modalProps,
-    onCancel: props.onCancel,
-  });
+  return (
+    <Form<FormValues>
+      onSubmit={handleSubmitStep}
+      initialValues={initialValues}
+      validate={validate}
+      render={({ handleSubmit, submitting, invalid, values, form }) => (
+        <form onSubmit={handleSubmit} noValidate>
+          {onChange && (
+            <FormSpy<FormValues>
+              subscription={{ values: true }}
+              onChange={(formState) => onChange(formState.values as FormValues)}
+            />
+          )}
+          <CurrentStep
+            title={title}
+            subtitle={subtitle}
+            step={step}
+            steps={steps}
+            onPrev={prevStep}
+            onStep={selectStep}
+            submitting={submitting}
+            invalid={invalid}
+            values={values}
+            form={form}
+            data={data}
+            onCancel={onCancel}
+            modalProps={modalProps}
+            hideStepper={hideStepper}
+          />
+        </form>
+      )}
+    />
+  );
 };

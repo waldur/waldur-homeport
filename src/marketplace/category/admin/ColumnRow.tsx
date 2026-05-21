@@ -45,14 +45,14 @@ export const ColumnRow = ({ column, fields, index, name }) => {
       <td>
         <Field
           name={`${name}.title`}
-          component={StringField as any}
+          component={StringField}
           placeholder={translate('Title is rendered as column header')}
         />
       </td>
       <td>
         <Field
           name={`${name}.attribute`}
-          component={StringField as any}
+          component={StringField}
           placeholder={translate(
             'Resource attribute is rendered as table cell',
           )}
@@ -61,7 +61,7 @@ export const ColumnRow = ({ column, fields, index, name }) => {
       <td>
         <Field
           name={`${name}.widget`}
-          component={SelectField as any}
+          component={SelectField}
           placeholder={translate(
             'Widget field allows to customise table cell rendering',
           )}
@@ -80,7 +80,7 @@ export const ColumnRow = ({ column, fields, index, name }) => {
       <td>
         <Field
           name={`${name}.index`}
-          component={StringField as any}
+          component={StringField}
           placeholder={translate('Index allows to reorder columns')}
         />
       </td>

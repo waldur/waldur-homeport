@@ -162,11 +162,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
         )}
         required
       >
-        <Field
-          name="label"
-          component={StringField as any}
-          validate={required}
-        />
+        <Field name="label" component={StringField} validate={required} />
       </FormGroup>
 
       <FormGroup
@@ -175,7 +171,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
           'Space-separated list of scopes to request during authentication. Suggested scopes have been pre-filled.',
         )}
       >
-        <Field name="extra_scope" component={StringField as any} />
+        <Field name="extra_scope" component={StringField} />
       </FormGroup>
 
       <FormGroup
@@ -186,7 +182,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="user_field"
-          component={StringField as any}
+          component={StringField}
           placeholder="username"
         />
       </FormGroup>
@@ -197,11 +193,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
           'The OIDC claim to use as the value for user lookup.',
         )}
       >
-        <Field
-          name="user_claim"
-          component={StringField as any}
-          placeholder="sub"
-        />
+        <Field name="user_claim" component={StringField} placeholder="sub" />
       </FormGroup>
 
       <FormGroup
@@ -210,7 +202,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
           'Comma-separated list of user profile fields that should not be editable in Waldur.',
         )}
       >
-        <Field name="protected_fields" component={StringField as any} />
+        <Field name="protected_fields" component={StringField} />
       </FormGroup>
 
       <FormGroup
@@ -219,7 +211,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
           'URL where users can manage their identity provider account.',
         )}
       >
-        <Field name="management_url" component={StringField as any} />
+        <Field name="management_url" component={StringField} />
       </FormGroup>
 
       <AllowedRedirectsField />
@@ -227,7 +219,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
       <Form.Group className="mb-4">
         <Field
           name="enable_pkce"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Enable PKCE')}
         />
         <small className="text-muted d-block mt-1">
@@ -240,7 +232,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
       <Form.Group className="mb-4">
         <Field
           name="enable_post_logout_redirect"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Enable Post-Logout Redirect')}
         />
         <small className="text-muted d-block mt-1">
@@ -253,7 +245,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
       <Form.Group className="mb-4">
         <Field
           name="is_active"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Enable Provider')}
         />
         <small className="text-muted d-block mt-1">

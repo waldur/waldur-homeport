@@ -1,10 +1,14 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-final-form';
 import { RancherIngress, rancherIngressesList } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
-import { RancherClusterFilter } from '@/table/generated/RancherClusterFilter';
+import {
+  RancherClusterFilter,
+  RancherClusterFilterFormId,
+} from '@/table/generated/RancherClusterFilter';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -13,10 +17,10 @@ import { useClusterResourceFilter } from './ClusterFilterHooks';
 import { ImportYAMLButton } from './ImportYAMLButton';
 import { IngressActions } from './IngressActions';
 
-export const ClusterIngressesList: FunctionComponent<
+const ClusterIngressesListTable: FunctionComponent<
   TableWithPortal<{ resourceScope }>
 > = ({ resourceScope, portal }) => {
-  const filter = useClusterResourceFilter(resourceScope);
+  const { filter } = useClusterResourceFilter(resourceScope);
 
   const props = useTable({
     table: 'rancher-ingresses',
@@ -27,6 +31,7 @@ export const ClusterIngressesList: FunctionComponent<
   return (
     <Table<RancherIngress>
       {...props}
+      formId={RancherClusterFilterFormId}
       columns={[
         {
           title: translate('Name'),
@@ -75,3 +80,15 @@ export const ClusterIngressesList: FunctionComponent<
     />
   );
 };
+
+export const ClusterIngressesList: FunctionComponent<
+  TableWithPortal<{ resourceScope }>
+> = (props) => (
+  <Form
+    id={RancherClusterFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <ClusterIngressesListTable {...props} />}
+  </Form>
+);

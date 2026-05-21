@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { AdminAnnouncement, adminAnnouncementsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -8,6 +9,7 @@ import { createFetcher } from '@/table/api';
 import {
   AdminAnnouncementsFilter,
   selectAdminAnnouncementsFilter,
+  AdminAnnouncementsFilterFormId,
 } from '@/table/generated/AdminAnnouncementsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -45,8 +47,14 @@ const renderStatus = ({ row }) => (
   />
 );
 
-export const AnnouncementsList = () => {
-  const filter = useSelector(selectAdminAnnouncementsFilter);
+const AnnouncementsListTable = () => {
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectAdminAnnouncementsFilter(values),
+    [values],
+  );
+
   const tableProps = useTable({
     table: 'AdminAnnouncements',
     fetchData: createFetcher(adminAnnouncementsList),
@@ -112,6 +120,19 @@ export const AnnouncementsList = () => {
         <AnnouncementRowActions refetch={tableProps.fetch} row={row} />
       )}
       filters={<AdminAnnouncementsFilter />}
+      formId={AdminAnnouncementsFilterFormId}
     />
   );
 };
+
+export const AnnouncementsList = (props) => (
+  <Form
+    id={AdminAnnouncementsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <AnnouncementsListTable {...props} />}
+  </Form>
+);

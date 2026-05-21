@@ -5,10 +5,10 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useNotify } from '@/store/notify';
 
-import { useModal } from './hooks';
+import { useModal } from './actions';
 import { useBatchMutation } from './useBatchMutation';
 
-vi.mock('./hooks');
+vi.mock('./actions');
 vi.mock('@/store/notify');
 
 const createWrapper = () => {

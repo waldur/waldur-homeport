@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
   Project,
@@ -11,6 +13,7 @@ import { createFetcher } from '@/table/api';
 import {
   ProjectsListUsersFilter,
   selectProjectsListUsersFilter,
+  ProjectsListUsersFilterFormId,
 } from '@/table/generated/ProjectsListUsersFilter';
 import { useTable } from '@/table/useTable';
 import { getProject } from '@/workspace/selectors';
@@ -49,14 +52,17 @@ const TeamSecondaryDropdownActions = ({ project, refetch }) => {
   );
 };
 
-export const ProjectUsersList = ({
+const ProjectUsersListTable = ({
   hideTabs = false,
   project,
 }: {
   hideTabs?: boolean;
   project: Project;
 }) => {
-  const filter = useSelector(selectProjectsListUsersFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(() => selectProjectsListUsersFilter(values), [values]);
+
   const currentProject = useSelector(getProject);
 
   const _project = project || currentProject;
@@ -112,3 +118,15 @@ export const ProjectUsersList = ({
     />
   );
 };
+
+export const ProjectUsersList = (props) => (
+  <Form
+    id={ProjectsListUsersFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ProjectUsersListTable {...props} />}
+  </Form>
+);

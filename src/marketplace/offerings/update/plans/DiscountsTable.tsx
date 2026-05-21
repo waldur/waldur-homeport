@@ -34,7 +34,7 @@ export const DiscountsTable: FunctionComponent<DiscountsTableProps> = ({
           <td>
             <Field
               name={`discounts.${component.type}.discount_threshold`}
-              component={InputField as any}
+              component={InputField}
               type="number"
               placeholder={translate('e.g. 100')}
               min={0}
@@ -44,7 +44,7 @@ export const DiscountsTable: FunctionComponent<DiscountsTableProps> = ({
           <td>
             <Field
               name={`discounts.${component.type}.discount_rate`}
-              component={InputField as any}
+              component={InputField}
               type="number"
               placeholder={translate('e.g. 15')}
               min={0}

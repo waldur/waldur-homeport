@@ -1,6 +1,5 @@
-import { FC, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { FC, useCallback, useMemo, useState } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -10,13 +9,13 @@ import { getReviewStateOptions } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import {
   ProposalReviewsFilter,
+  ProposalReviewsFilterFormId,
   selectProposalReviewsFilter,
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
-import { getUser } from '@/workspace/selectors';
 
 import { EndingField } from '../EndingField';
 
@@ -27,21 +26,24 @@ import { ReviewStateRenderer } from './ReviewStateRenderer';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
 
-const filtersSelector = createSelector(
-  getUser,
-  selectProposalReviewsFilter,
-  (user, filters) => {
-    const result: ProposalReviewsListData['query'] = { ...filters };
-    result.reviewer_uuid = user.uuid;
-    return result;
-  },
-);
-
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
-export const MyReviewsPage: FC = () => {
+const MyReviewsPageTable: FC = () => {
   const user = useUser();
-  const filter = useSelector(filtersSelector);
+  const { values } = useFormState();
+  const filterValues = useMemo(
+    () => selectProposalReviewsFilter(values),
+    [values],
+  );
+
+  const filter = useMemo(() => {
+    const result: ProposalReviewsListData['query'] = { ...filterValues };
+    if (user) {
+      result.reviewer_uuid = user.uuid;
+    }
+    return result;
+  }, [user, filterValues]);
+
   const [hasProfile, setHasProfile] = useState<boolean | null>(null);
   const tabs = useMyReviewsTabs();
 
@@ -65,7 +67,6 @@ export const MyReviewsPage: FC = () => {
     <div className="d-flex flex-column" style={{ gap: 16 }}>
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard onProfileStatus={handleProfileStatus} />
-
       {/* Only show reviews content if user has a profile */}
       {hasProfile && (
         <>
@@ -75,6 +76,7 @@ export const MyReviewsPage: FC = () => {
           {/* Reviews table with tabs */}
           <Table<ProposalReview>
             {...tableProps}
+            formId={ProposalReviewsFilterFormId}
             title={translate('My reviews')}
             tabs={tabs}
             columns={[
@@ -159,3 +161,13 @@ export const MyReviewsPage: FC = () => {
     </div>
   );
 };
+
+export const MyReviewsPage: FC = () => (
+  <Form
+    id={ProposalReviewsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <MyReviewsPageTable />}
+  </Form>
+);

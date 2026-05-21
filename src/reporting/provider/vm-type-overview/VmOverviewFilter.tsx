@@ -20,7 +20,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
       <form className="form-inline" id="vm-overview-filter">
         <Field
           name="shared"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Show shared')}
         />
 

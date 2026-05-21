@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { invoicesList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -12,6 +12,7 @@ import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import {
   InvoicesFilter,
+  InvoicesFilterFormId,
   selectInvoicesFilter,
 } from '@/table/generated/InvoicesFilter';
 import Table from '@/table/Table';
@@ -37,33 +38,34 @@ const RowActions = ({ row, fetch }) => (
   />
 );
 
-const mapsStateToFilter = createSelector(
-  getCustomer,
-  selectInvoicesFilter,
-  (customer, stateFilter) => ({
-    ...stateFilter,
-    customer: customer.url,
-    field: [
-      'uuid',
-      'state',
-      'due_date',
-      'month',
-      'year',
-      'invoice_date',
-      'number',
-      'price',
-      'tax',
-      'total',
-      'payment_url',
-    ],
-  }),
-);
-
-export const InvoicesList: FunctionComponent = () => {
+const InvoicesListTable: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
-  const filter = useSelector(mapsStateToFilter);
+  const { values } = useFormState();
+  const stateFilter = useMemo(() => selectInvoicesFilter(values), [values]);
+
+  const filter = useMemo(
+    () => ({
+      ...stateFilter,
+      customer: customer?.url,
+      field: [
+        'uuid',
+        'state',
+        'due_date',
+        'month',
+        'year',
+        'invoice_date',
+        'number',
+        'price',
+        'tax',
+        'total',
+        'payment_url',
+      ],
+    }),
+    [stateFilter, customer],
+  );
+
   const props = useTable({
-    table: `${INVOICES_TABLE}-${customer.uuid}`,
+    table: `${INVOICES_TABLE}-${customer?.uuid}`,
     fetchData: createFetcher(invoicesList),
     filter,
     queryField: 'number',
@@ -133,6 +135,7 @@ export const InvoicesList: FunctionComponent = () => {
   return (
     <Table
       {...props}
+      formId={InvoicesFilterFormId}
       filters={<InvoicesFilter />}
       columns={columns}
       verboseName={translate('invoices')}
@@ -142,3 +145,13 @@ export const InvoicesList: FunctionComponent = () => {
     />
   );
 };
+
+export const InvoicesList: FunctionComponent = () => (
+  <Form
+    id={InvoicesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <InvoicesListTable />}
+  </Form>
+);

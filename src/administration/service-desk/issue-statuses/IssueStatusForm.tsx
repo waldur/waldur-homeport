@@ -102,7 +102,7 @@ export const IssueStatusForm: FC<IssueStatusFormProps> = ({ resolve }) => {
           >
             <FormGroup label={translate('Status name')} required>
               <Field
-                component={StringField as any}
+                component={StringField}
                 name="name"
                 validate={required}
                 placeholder={translate('e.g., Done, Completed, Cancelled')}

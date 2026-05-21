@@ -6,7 +6,7 @@ import { projectCreditsPartialUpdate } from 'waldur-js-client';
 
 import { MinimalConsumptionFields } from '@/customer/credits/MinimalConsumptionFields';
 import { ProjectAllocateCreditField } from '@/customer/credits/ProjectAllocateCreditField';
-import { FormContainerFinal, SubmitButton } from '@/form';
+import { FormContainer, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -62,7 +62,7 @@ export const EditCreditFieldDialog: FC<{
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               {resolve.name === 'value' ? (
                 <ProjectAllocateCreditField
                   organizationCredit={resolve.credit.customer_credit}
@@ -74,7 +74,7 @@ export const EditCreditFieldDialog: FC<{
                   filterField={resolve.name}
                 />
               )}
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

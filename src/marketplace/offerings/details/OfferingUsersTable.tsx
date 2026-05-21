@@ -4,7 +4,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { CreateOfferingUserButton } from '@/marketplace/offerings/details/CreateOfferingUserButton';
 import { TosReportingButton } from '@/marketplace/offerings/update/tos/TosReportingButton';
-import { ProviderOfferingUsersListComponent } from '@/marketplace/service-providers/offering-users/ProviderOfferingUsersList';
+import { ProviderOfferingUsersList } from '@/marketplace/service-providers/offering-users/ProviderOfferingUsersList';
 import { TableExportButton } from '@/table/TableExportButton';
 
 export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
@@ -18,7 +18,7 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
   );
 
   return (
-    <ProviderOfferingUsersListComponent
+    <ProviderOfferingUsersList
       provider={provider}
       offering={offering}
       tableActions={(tableProps) => (

@@ -1,22 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Alert, Form as BsForm } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { Field, getFormValues } from 'redux-form';
+import { Field, useFormState } from 'react-final-form';
 import { adminArrowVendorOfferingMappingsList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 
-const VendorOfferingSelect = ({
-  input,
-  settingsUuid,
-}: {
-  input: any;
-  settingsUuid: string;
-}) => {
+const VendorOfferingSelect = ({ input }: { input: any }) => {
+  const formState = useFormState<{
+    customerMapping: { settings_uuid: string };
+  }>({ subscription: { values: true } });
+  const settingsUuid = formState.values?.customerMapping?.settings_uuid;
+
   const { data, isLoading, error } = useQuery({
     queryKey: ['arrowVendorOfferings', settingsUuid],
     queryFn: async () => {
@@ -62,33 +61,19 @@ const VendorOfferingSelect = ({
   );
 };
 
-export const Step2SelectVendorOffering: FC<WizardFormStepProps> = (props) => {
-  const formValues = useSelector(getFormValues(props.form)) as {
-    customerMapping?: { settings_uuid: string };
-  };
-  const settingsUuid = useMemo(
-    () => formValues?.customerMapping?.settings_uuid,
-    [formValues?.customerMapping?.settings_uuid],
-  );
-
-  return (
-    <WizardForm {...props} submitDisabledInvalid>
-      {() => (
-        <div>
-          <p className="text-muted mb-5">
-            {translate(
-              'Select the vendor offering to determine which Arrow licenses to show and which Waldur offering to import into.',
-            )}
-          </p>
-          <Field
-            name="vendorOffering"
-            validate={required}
-            component={({ input }) => (
-              <VendorOfferingSelect input={input} settingsUuid={settingsUuid} />
-            )}
-          />
-        </div>
-      )}
-    </WizardForm>
-  );
-};
+export const Step2SelectVendorOffering: FC<WizardFormStepProps> = (props) => (
+  <WizardForm {...props}>
+    <div>
+      <p className="text-muted mb-5">
+        {translate(
+          'Select the vendor offering to determine which Arrow licenses to show and which Waldur offering to import into.',
+        )}
+      </p>
+      <Field
+        name="vendorOffering"
+        validate={required}
+        component={VendorOfferingSelect}
+      />
+    </div>
+  </WizardForm>
+);

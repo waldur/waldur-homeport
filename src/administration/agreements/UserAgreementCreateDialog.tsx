@@ -82,7 +82,7 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
               />
             </FormGroup>
             <FormGroup controlId="content" label={translate('Content')}>
-              <Field name="content" component={MarkdownEditor as any} />
+              <Field name="content" component={MarkdownEditor} />
             </FormGroup>
           </ModalDialog>
         </form>

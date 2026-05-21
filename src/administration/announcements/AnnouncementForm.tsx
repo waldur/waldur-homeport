@@ -86,7 +86,7 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
                 className="col-md-6"
               >
                 <Field
-                  component={SelectField as any}
+                  component={SelectField}
                   name="type"
                   options={AnnouncementTypeOptions}
                   getOptionValue={(option) => option.value}
@@ -102,19 +102,19 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
                 required
                 className="col-md-6"
               >
-                <Field component={DateTimeField as any} name="active_from" />
+                <Field component={DateTimeField} name="active_from" />
               </FormGroup>
               <FormGroup
                 label={translate('Active to')}
                 required
                 className="col-md-6"
               >
-                <Field component={DateTimeField as any} name="active_to" />
+                <Field component={DateTimeField} name="active_to" />
               </FormGroup>
             </Row>
 
             <FormGroup label={translate('Announcement')} required>
-              <Field component={MarkdownEditor as any} name="description" />
+              <Field component={MarkdownEditor} name="description" />
             </FormGroup>
           </ModalDialog>
         </form>

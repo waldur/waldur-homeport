@@ -1,6 +1,5 @@
 import { HeadsetIcon, WarningIcon } from '@phosphor-icons/react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -12,7 +11,7 @@ interface ProjectActionsProps {
 }
 
 export const ProjectActions = ({ project }: ProjectActionsProps) => {
-  const showIssues = useSelector(hasSupport);
+  const showIssues = hasSupport();
   const isCourseProject = project.kind === 'course';
 
   const supportButtonClass = isCourseProject

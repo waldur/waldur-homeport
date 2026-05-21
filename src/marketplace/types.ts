@@ -1,15 +1,9 @@
-import { InjectedFormProps } from 'redux-form';
 import {
   CategoryGroup as WaldurCategoryGroup,
   MarketplaceCategory as WaldurCategory,
   OrderDetails,
   PublicOfferingDetails,
-  ProviderOfferingDetails as Offering,
-  ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
-
-import { Customer } from '@/workspace/types';
 
 export {
   OfferingComponent,
@@ -29,16 +23,6 @@ export interface CategoryGroup extends WaldurCategoryGroup {
 export interface Category extends WaldurCategory {
   /** generated on frontend side */
   resource_count?: number;
-}
-
-export interface OfferingConfigurationFormProps extends InjectedFormProps {
-  offering: Offering;
-  project?: Project;
-  plan?: Plan;
-  initialLimits?: AttributesType;
-  customer?: Customer;
-  limits: string[];
-  previewMode?: boolean;
 }
 
 export interface OrderDetailsProps {

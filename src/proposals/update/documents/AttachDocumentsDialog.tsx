@@ -5,7 +5,7 @@ import { proposalProtectedCallsAttachDocuments } from 'waldur-js-client';
 import { formDataOptions } from '@/core/api';
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { format } from '@/core/ErrorMessageFormatter';
-import { FormContainerFinal, SubmitButton } from '@/form';
+import { FormContainer, SubmitButton } from '@/form';
 import { StringField } from '@/form/StringField';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
@@ -152,7 +152,7 @@ export const AttachDocumentsDialog: FC<AttachDocumentsProps> = ({
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <UploadContainer
                 onDrop={onDrop}
                 disabled={submitting}
@@ -187,7 +187,7 @@ export const AttachDocumentsDialog: FC<AttachDocumentsProps> = ({
                   required={false}
                 />
               ))}
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

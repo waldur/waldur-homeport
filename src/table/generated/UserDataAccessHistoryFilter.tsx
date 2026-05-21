@@ -1,14 +1,12 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { UsersDataAccessHistoryListData } from 'waldur-js-client';
 
 import { DateField } from '@/form/DateField';
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const UserDataAccessHistoryAccessorTypeOptions: UserDataAccessHistoryAccessorTypeOption[] =
@@ -89,27 +87,19 @@ const PureUserDataAccessHistoryFilter: FunctionComponent<{}> = () => (
 
 export const UserDataAccessHistoryFilterFormId = 'UserDataAccessHistoryFilter';
 
-interface UserDataAccessHistoryFilterFormData {
+export interface UserDataAccessHistoryFilterFormData {
   start_date: string;
   end_date: string;
   accessor_type: UserDataAccessHistoryAccessorTypeOption;
 }
 
-export const UserDataAccessHistoryFilter = reduxForm<
-  UserDataAccessHistoryFilterFormData,
-  {}
->({
-  form: UserDataAccessHistoryFilterFormId,
-  destroyOnUnmount: false,
-})(PureUserDataAccessHistoryFilter);
+export const UserDataAccessHistoryFilter = PureUserDataAccessHistoryFilter;
 
 type UserDataAccessHistoryFilterQuery = UsersDataAccessHistoryListData['query'];
 
-export const selectUserDataAccessHistoryFilter = createSelector<
-  RootState,
-  Partial<UserDataAccessHistoryFilterFormData>,
-  UserDataAccessHistoryFilterQuery
->(getFormValues(UserDataAccessHistoryFilterFormId), (values) => {
+export const selectUserDataAccessHistoryFilter = (
+  values?: Partial<UserDataAccessHistoryFilterFormData>,
+): UserDataAccessHistoryFilterQuery => {
   const filter: UserDataAccessHistoryFilterQuery = {} as any;
   if (values) {
     if (values.start_date) {
@@ -123,4 +113,4 @@ export const selectUserDataAccessHistoryFilter = createSelector<
     }
   }
   return filter;
-});
+};

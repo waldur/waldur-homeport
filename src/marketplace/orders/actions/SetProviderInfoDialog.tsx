@@ -80,14 +80,14 @@ export const SetProviderInfoDialog: FC<SetProviderInfoDialogProps> = ({
             <FormGroup label={translate('Message')}>
               <Field
                 name="provider_message"
-                component={TextField as any}
+                component={TextField}
                 placeholder={translate('Enter a message for the customer...')}
               />
             </FormGroup>
             <FormGroup label={translate('URL')}>
               <Field
                 name="provider_message_url"
-                component={StringField as any}
+                component={StringField}
                 placeholder="https://"
               />
             </FormGroup>

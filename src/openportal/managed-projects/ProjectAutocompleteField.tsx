@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import {
   openportalUnmanagedProjectsList,
@@ -155,8 +155,6 @@ export const ProjectAutocompleteField: FunctionComponent<
       onBlur={input.onBlur}
       noOptionsMessage={getNoOptionsMessage}
       isClearable={true}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
       {...reactSelectProps}
     />
   );

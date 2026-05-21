@@ -296,7 +296,7 @@ export const CustomerMappingCreateDialog = ({
             >
               <Field
                 name="waldur_customer"
-                component={Select as any}
+                component={Select}
                 validate={required}
                 placeholder={translate('Select organization...')}
                 options={waldurCustomerOptions}

@@ -21,11 +21,11 @@ export const ProviderFreeIPAForm = () => (
         help={item.description}
       >
         {item.type === 'boolean' ? (
-          <Field name={item.key} component={AwesomeCheckboxField as any} />
+          <Field name={item.key} component={AwesomeCheckboxField} />
         ) : item.type === 'secret_field' ? (
-          <Field name={item.key} component={SecretField as any} />
+          <Field name={item.key} component={SecretField} />
         ) : (
-          <Field name={item.key} component={StringField as any} />
+          <Field name={item.key} component={StringField} />
         )}
       </FormGroup>
     ))}

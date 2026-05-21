@@ -61,9 +61,9 @@ export const MultiCountrySelectField: FC<MultiCountrySelectFieldProps> = ({
       onChange={(options: readonly CountryOption[] | null) => {
         const values = options ? options.map((o) => o.value) : [];
         input.onChange(values);
-        input.onBlur(values);
+        input.onBlur();
       }}
-      onBlur={() => input.onBlur(input.value)}
+      onBlur={() => input.onBlur()}
       components={{ Option, MultiValueLabel }}
       placeholder={placeholder}
       getOptionLabel={(option: CountryOption) => option.label}
@@ -73,8 +73,6 @@ export const MultiCountrySelectField: FC<MultiCountrySelectFieldProps> = ({
       isClearable={isClearable}
       isDisabled={isDisabled}
       isMulti
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };

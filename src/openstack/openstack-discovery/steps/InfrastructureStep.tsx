@@ -240,7 +240,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
             ) : instanceAZOptions.length > 0 ? (
               <Field
                 name="selectedInstanceAZ"
-                component={SelectField as any}
+                component={SelectField}
                 options={instanceAZOptions}
                 simpleValue
                 isClearable
@@ -261,7 +261,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
             ) : volumeAZOptions.length > 0 ? (
               <Field
                 name="selectedVolumeAZ"
-                component={SelectField as any}
+                component={SelectField}
                 options={volumeAZOptions}
                 simpleValue
                 isClearable

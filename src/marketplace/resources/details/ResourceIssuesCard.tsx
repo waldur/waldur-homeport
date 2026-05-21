@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -39,7 +38,7 @@ const CreateIssueButton = ({ resource }) => {
 };
 
 export const ResourceIssuesCard = ({ resource }) => {
-  const showIssues = useSelector(hasSupport);
+  const showIssues = hasSupport();
   const filter = useMemo(() => ({ resource: resource.url }), [resource]);
 
   return showIssues ? (

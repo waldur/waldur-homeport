@@ -6,7 +6,7 @@ import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
 import { SelectField, SubmitButton } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -53,7 +53,7 @@ export const ExportDialog = (props: ExportDialogProps) => {
               />
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <SelectField
                 name="format"
                 label={translate('Format')}
@@ -88,7 +88,7 @@ export const ExportDialog = (props: ExportDialogProps) => {
                 }
                 hideLabel
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

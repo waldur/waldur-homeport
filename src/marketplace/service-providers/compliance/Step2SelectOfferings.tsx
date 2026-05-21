@@ -2,7 +2,8 @@ import { FC, useMemo } from 'react';
 import { marketplaceProviderOfferingsList, Offering } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
 import { createFetcher } from '@/table/api';
@@ -26,11 +27,7 @@ export const Step2SelectOfferings: FC<WizardFormStepProps> = (props) => {
   });
 
   return (
-    <WizardForm
-      {...props}
-      submitDisabled={tableProps.loading}
-      submitDisabledInvalid
-    >
+    <WizardForm {...props} submitDisabled={tableProps.loading}>
       <Table<Offering>
         {...tableProps}
         columns={[

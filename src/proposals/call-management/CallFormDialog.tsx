@@ -16,7 +16,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { FormContainerFinal, SubmitButton } from '@/form';
+import { FormContainer, SubmitButton } from '@/form';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { SelectField } from '@/form/SelectField';
 import { StringField } from '@/form/StringField';
@@ -192,7 +192,7 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
               />
             }
           >
-            <FormContainerFinal submitting={submitting} className="size-lg">
+            <FormContainer submitting={submitting} className="size-lg">
               <StringField
                 label={translate('Name')}
                 name="name"
@@ -203,7 +203,7 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
               {isEdit && (
                 <Field
                   name="description"
-                  component={MarkdownEditor as any}
+                  component={MarkdownEditor}
                   autoFocus
                 />
               )}
@@ -230,7 +230,7 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
                   )}
                 />
               )}
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 import { Customer } from 'waldur-js-client';
 
@@ -13,8 +14,8 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import {
-  getCustomerOptionalFields,
   deleteDuplicateRecords,
+  getCustomerOptionalFields,
   parseOrganizationsFile,
   validateOrganizationCreation,
 } from './utils';
@@ -64,7 +65,7 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
         setData(rows);
       });
     },
-    [setData],
+    [setData, showError],
   );
 
   const refToolbar = useRef<HTMLDivElement>(null);
@@ -107,7 +108,7 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           title: translate('Status'),
           render: StatusField,
         },
-      ].filter(Boolean),
+      ].filter(Boolean) as Column<Customer>[],
     [data],
   );
 
@@ -136,54 +137,47 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
     return null;
   }, [data]);
 
+  const { values } = useFormState({ subscription: { values: true } });
+  const file = values?.file;
+
+  useEffect(() => {
+    if (file?.length > 0) {
+      parseCsvFile(file);
+    }
+  }, []);
   return (
     <WizardForm
       {...props}
       submitDisabled={!!tooltip && !skipErrors}
-      submitTooltip={!skipErrors && tooltip}
+      submitTooltip={(!skipErrors && tooltip) || undefined}
     >
-      {(wizardProps) => {
-        const file = wizardProps.formValues?.file;
-
-        useEffect(() => {
-          if (file?.length > 0) {
-            parseCsvFile(file);
+      <div>
+        <div className="d-flex justify-content-start mb-3">
+          <div ref={refToolbar}>{/* Portal destination */}</div>
+        </div>
+        <div className="d-flex justify-content-between text-muted mb-3">
+          <span>
+            {data.length} {translate('Organizations')}
+          </span>
+          <span>{translate('Verify your data before importing')}</span>
+        </div>
+        <Table
+          {...tableProps}
+          columns={columns}
+          verboseName={translate('Organizations')}
+          hasActionBar={false}
+          fullWidth
+          cardBordered={false}
+          minHeight="auto"
+          portal={{ toolbar: refToolbar?.current }}
+          hasQuery
+          footer={
+            Boolean(tooltip && data?.length) && (
+              <SkipErrorsCheck checked={skipErrors} onChange={setSkipErrors} />
+            )
           }
-        }, []);
-
-        return (
-          <div>
-            <div className="d-flex justify-content-start mb-3">
-              <div ref={refToolbar}>{/* Portal destination */}</div>
-            </div>
-            <div className="d-flex justify-content-between text-muted mb-3">
-              <span>
-                {data.length} {translate('Organizations')}
-              </span>
-              <span>{translate('Verify your data before importing')}</span>
-            </div>
-            <Table
-              {...tableProps}
-              columns={columns}
-              verboseName={translate('Organizations')}
-              hasActionBar={false}
-              fullWidth
-              cardBordered={false}
-              minHeight="auto"
-              portal={{ toolbar: refToolbar?.current }}
-              hasQuery
-              footer={
-                Boolean(tooltip && data?.length) && (
-                  <SkipErrorsCheck
-                    checked={skipErrors}
-                    onChange={setSkipErrors}
-                  />
-                )
-              }
-            />
-          </div>
-        );
-      }}
+        />
+      </div>
     </WizardForm>
   );
 };

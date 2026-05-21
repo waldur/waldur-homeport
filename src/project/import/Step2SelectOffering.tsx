@@ -1,84 +1,101 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Card, Form } from 'react-bootstrap';
+import { Field, useForm, useFormState } from 'react-final-form';
+import { Customer } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { FieldError } from '@/form';
 import { translate } from '@/i18n';
-import { OfferingsAutocompleteCommonFields } from '@/marketplace/common/autocompletes';
-import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
+import {
+  OfferingsAutocompleteCommonFields,
+  publicOfferingsAutocomplete,
+} from '@/marketplace/common/autocompletes';
+import { AutocompleteField } from '@/marketplace/landing/AutocompleteField';
 
-export const Step2SelectOffering: FC<WizardFormStepProps> = (props) => {
+import { ProjectImportFormData } from './types';
+
+interface Step2Props {
+  context: {
+    customer?: Customer;
+  };
+}
+
+export const Step2SelectOffering: FC<Step2Props> = ({
+  context: { customer },
+}) => {
+  const form = useForm<ProjectImportFormData>();
+  const { values } = useFormState<ProjectImportFormData>();
+  const importType = values?.import_type;
+  const offering = values?.offering;
+
   return (
-    <WizardForm {...props}>
-      {(wizardProps) => {
-        const importType = wizardProps.formValues?.import_type;
-        const offering = wizardProps.formValues?.offering;
-
-        // Skip this step if the import type is only to import projects
-        useEffect(() => {
-          if (importType === 'projects_only') {
-            wizardProps.handleSubmit(props.onSubmit)();
+    <div className="size-lg">
+      <Form.Group className="mb-7">
+        <Form.Label>{translate('Select offering')}</Form.Label>
+        <Field
+          name="offering"
+          validate={
+            importType === 'projects_with_resources' ? required : undefined
           }
-        }, []);
-
-        return (
-          <div className="size-lg">
-            <Form.Group className="mb-7">
-              <Form.Label>{translate('Select offering')}</Form.Label>
-              <OfferingAutocomplete
-                offeringFilter={
-                  props.data?.customer
-                    ? { allowed_customer_uuid: props.data.customer.uuid }
-                    : undefined
+          render={({ input, meta }) => (
+            <>
+              <AutocompleteField
+                placeholder={translate('Select offering...')}
+                loadOfferings={(query, prevOptions, { page }) =>
+                  publicOfferingsAutocomplete(
+                    {
+                      name: query,
+                      ...(customer
+                        ? { allowed_customer_uuid: customer.uuid }
+                        : {}),
+                    },
+                    prevOptions,
+                    page,
+                    OfferingsAutocompleteCommonFields.concat(
+                      'components',
+                      'attributes',
+                      'plans',
+                    ) as any,
+                  )
                 }
-                onChange={(value) => {
-                  // Reset file when offering changes
-                  if (value.uuid !== offering?.uuid) {
-                    wizardProps.change('file', null);
+                value={input.value}
+                onChange={(value: any) => {
+                  input.onChange(value);
+                  if (value?.uuid !== offering?.uuid) {
+                    form.change('file', null);
                   }
                 }}
-                providerOfferings={false}
-                validate={
-                  importType === 'projects_with_resources'
-                    ? required
-                    : undefined
-                }
-                showError
-                description={translate(
+              />
+              <Form.Text className="text-muted">
+                {translate(
                   'Select an offering type to generate the appropriate template with resource fields.',
                 )}
-                field={OfferingsAutocompleteCommonFields.concat(
-                  'components',
-                  'attributes',
-                  'plans',
-                )}
-              />
-            </Form.Group>
-            {offering && (
-              <Card className="card-bordered text-muted bg-gray-50 offering-components">
-                <Card.Body className="p-5">
-                  <p className="fw-bold mb-0">
-                    {offering?.components?.length
-                      ? translate(
-                          'This offering includes the following components:',
-                        )
-                      : translate('The offering has no components!')}
-                  </p>
-                  {!!offering?.components?.length && (
-                    <ul className="mt-3 mb-0">
-                      {offering.components.map((component) => (
-                        <li key={component.uuid}>
-                          {component.name} ({component.type})
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </Card.Body>
-              </Card>
+              </Form.Text>
+              {meta.touched && meta.error && <FieldError error={meta.error} />}
+            </>
+          )}
+        />
+      </Form.Group>
+      {offering && (
+        <Card className="card-bordered text-muted bg-gray-50 offering-components">
+          <Card.Body className="p-5">
+            <p className="fw-bold mb-0">
+              {offering?.components?.length
+                ? translate('This offering includes the following components:')
+                : translate('The offering has no components!')}
+            </p>
+            {Boolean(offering?.components?.length) && (
+              <ul className="mt-3 mb-0">
+                {offering.components.map((component) => (
+                  <li key={component.uuid || component.type}>
+                    {component.name} ({component.type})
+                  </li>
+                ))}
+              </ul>
             )}
-          </div>
-        );
-      }}
-    </WizardForm>
+          </Card.Body>
+        </Card>
+      )}
+    </div>
   );
 };

@@ -11,8 +11,6 @@ import { OpenStackSecurityGroupsLink } from './OpenStackSecurityGroupsLink';
 const mockStore = configureStore();
 const store = mockStore();
 
-vi.mock('@/modal/actions');
-
 export const renderLink = (props) => {
   return render(
     <Provider store={store}>

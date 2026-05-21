@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { AdminArrowBillingSyncsListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const StateOptions: StateOption[] = [
@@ -106,28 +104,20 @@ interface AdminArrowBillingSyncsFilterProps {
   billingPeriods?: any[];
 }
 
-interface AdminArrowBillingSyncsFilterFormData {
+export interface AdminArrowBillingSyncsFilterFormData {
   state: StateOption;
   report_period_from: any;
   report_period_to: any;
 }
 
-export const AdminArrowBillingSyncsFilter = reduxForm<
-  AdminArrowBillingSyncsFilterFormData,
-  AdminArrowBillingSyncsFilterProps
->({
-  form: AdminArrowBillingSyncsFilterFormId,
-  destroyOnUnmount: false,
-})(PureAdminArrowBillingSyncsFilter);
+export const AdminArrowBillingSyncsFilter = PureAdminArrowBillingSyncsFilter;
 
 type AdminArrowBillingSyncsFilterQuery =
   AdminArrowBillingSyncsListData['query'];
 
-export const selectAdminArrowBillingSyncsFilter = createSelector<
-  RootState,
-  Partial<AdminArrowBillingSyncsFilterFormData>,
-  AdminArrowBillingSyncsFilterQuery
->(getFormValues(AdminArrowBillingSyncsFilterFormId), (values) => {
+export const selectAdminArrowBillingSyncsFilter = (
+  values?: Partial<AdminArrowBillingSyncsFilterFormData>,
+): AdminArrowBillingSyncsFilterQuery => {
   const filter: AdminArrowBillingSyncsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -141,4 +131,4 @@ export const selectAdminArrowBillingSyncsFilter = createSelector<
     }
   }
   return filter;
-});
+};

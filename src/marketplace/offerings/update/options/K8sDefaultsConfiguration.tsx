@@ -65,7 +65,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_controller_vcpus`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="16"
@@ -82,7 +82,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_controller_ram_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="64"
@@ -102,7 +102,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_controller_system_disk_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="500"
@@ -119,7 +119,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_controller_etcd_disk_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="1000"
@@ -144,7 +144,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_lb_vcpus`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="16"
@@ -161,7 +161,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_lb_ram_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="64"
@@ -181,7 +181,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_lb_system_disk_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="500"
@@ -198,7 +198,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_lb_logs_disk_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="1000"
@@ -223,7 +223,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.minimal_worker_vcpus`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="16"
@@ -240,7 +240,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.minimal_worker_ram_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="64"
@@ -263,7 +263,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_worker_data_disk_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="10000"
@@ -278,7 +278,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_storage_data_disk_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="10000"
@@ -295,7 +295,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.default_storage_san_disk_gb`}
-                component={InputField as any}
+                component={InputField}
                 type="number"
                 min="1"
                 max="50000"
@@ -325,7 +325,7 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             >
               <Field
                 name={`${name}.available_kubernetes_versions`}
-                component={InputField as any}
+                component={InputField}
                 type="text"
                 placeholder="1.32.0,1.33.0,1.34.0"
               />

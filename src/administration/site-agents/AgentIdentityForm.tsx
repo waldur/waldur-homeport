@@ -12,7 +12,7 @@ import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { StringField, TextField, FieldError, SubmitButton } from '@/form';
-import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -131,7 +131,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
                 <FormGroup label={translate('Name')} required>
                   <Field
                     name="name"
-                    component={StringField as any}
+                    component={StringField}
                     placeholder={translate('Enter agent name')}
                     validate={required}
                   />
@@ -149,7 +149,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
                 <FormGroup label={translate('Version')}>
                   <Field
                     name="version"
-                    component={StringField as any}
+                    component={StringField}
                     placeholder={translate('e.g., 1.0.0')}
                   />
                 </FormGroup>
@@ -157,7 +157,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
             </Row>
 
             <FormGroup label={translate('Offering')} required>
-              <AsyncSelectFieldFinal
+              <AsyncSelectField
                 name="offering"
                 placeholder={translate('Select offering...')}
                 loadOptions={(query, prevOptions, page) =>
@@ -185,7 +185,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
             <FormGroup label={translate('Config file path')}>
               <Field
                 name="config_file_path"
-                component={StringField as any}
+                component={StringField}
                 placeholder={translate('e.g., /etc/waldur/agent.yaml')}
               />
             </FormGroup>
@@ -193,7 +193,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
             <FormGroup label={translate('Config file content')}>
               <Field
                 name="config_file_content"
-                component={TextField as any}
+                component={TextField}
                 placeholder={translate('Paste configuration content here')}
                 rows={6}
               />

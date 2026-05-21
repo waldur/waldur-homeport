@@ -89,7 +89,7 @@ const FieldsListGroup = ({
               spaceless={i === fields.length - 1}
             >
               <Field
-                component={TextField as any}
+                component={TextField}
                 name={`${name}.solution`}
                 placeholder={translate(
                   'Add helpful guidance when users select specific answers that need correction or clarification...',

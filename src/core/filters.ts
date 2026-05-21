@@ -1,8 +1,3 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { change, destroy } from 'redux-form';
-
 import { router } from '@/router';
 
 import { isEmpty } from './utils';
@@ -136,40 +131,4 @@ export const getInitialValues = (initialValues?) => {
     }
   }
   return queryParamValues;
-};
-
-/** When switching between pages, existing filters are removed from the URL, we need to restore them. */
-export const useSyncInitialFiltersToURL = (initialValues) => {
-  useEffect(() => {
-    syncFiltersToURL(initialValues);
-  }, []);
-};
-
-export const useReinitializeFilterFromUrl = (
-  form: string,
-  initialValues?: any,
-  initializeFn: (urlInitialValues: any) => any = (v) => v,
-) => {
-  const dispatch = useDispatch();
-  const { state } = useCurrentStateAndParams();
-
-  // Re-initialize filters from URL on mount and when route changes
-
-  useEffect(() => {
-    const values = initializeFn(getInitialValues(initialValues));
-    if (values) {
-      Object.entries(values).forEach(([key, value]) => {
-        dispatch(change(form, key, value));
-      });
-    }
-  }, [state?.name, form]);
-};
-
-export const useDestroyFilterOnLeave = (form: string) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    return () => {
-      dispatch(destroy(form));
-    };
-  });
 };

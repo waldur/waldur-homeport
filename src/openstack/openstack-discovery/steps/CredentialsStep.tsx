@@ -86,13 +86,13 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           )}
           required
         >
-          <Field name="auth_url" component={StringField as any} />
+          <Field name="auth_url" component={StringField} />
         </FormGroup>
 
         <FormGroup label={translate('Authentication type')}>
           <Field
             name="auth_type"
-            component={SelectField as any}
+            component={SelectField}
             options={AUTH_TYPE_OPTIONS}
             simpleValue
             isClearable={false}
@@ -107,7 +107,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           }
           required
         >
-          <Field name="username" component={StringField as any} />
+          <Field name="username" component={StringField} />
         </FormGroup>
 
         <FormGroup
@@ -118,7 +118,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           }
           required
         >
-          <Field name="password" component={SecretField as any} />
+          <Field name="password" component={SecretField} />
         </FormGroup>
 
         <div className="row">
@@ -129,7 +129,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
             >
               <Field
                 name="user_domain_name"
-                component={StringField as any}
+                component={StringField}
                 placeholder="Default"
               />
             </FormGroup>
@@ -141,7 +141,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
             >
               <Field
                 name="project_domain_name"
-                component={StringField as any}
+                component={StringField}
                 placeholder="Default"
               />
             </FormGroup>
@@ -154,7 +154,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         >
           <Field
             name="project_name"
-            component={StringField as any}
+            component={StringField}
             placeholder="admin"
           />
         </FormGroup>
@@ -162,7 +162,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         <FormGroup>
           <Field
             name="verify_ssl"
-            component={AwesomeCheckboxField as any}
+            component={AwesomeCheckboxField}
             label={translate('Verify SSL certificate')}
           />
         </FormGroup>
@@ -173,7 +173,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
             'Optional PEM-encoded CA certificate for SSL verification',
           )}
         >
-          <Field name="certificate" component={TextField as any} rows={4} />
+          <Field name="certificate" component={TextField} rows={4} />
         </FormGroup>
       </div>
 

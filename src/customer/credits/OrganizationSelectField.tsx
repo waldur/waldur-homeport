@@ -3,7 +3,7 @@ import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { Select } from '@/form/AsyncSelectField';
-import { FormGroupFinal } from '@/form/FormGroupFinal';
+import { FormGroup } from '@/form/FormGroup';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -20,7 +20,7 @@ export const OrganizationSelectField: FC<OrganizationSelectFieldProps> = ({
       label={translate('Organization')}
       validate={required}
       required
-      component={FormGroupFinal}
+      component={FormGroup}
     >
       <Select
         loadOptions={(query, prevOptions, page) =>

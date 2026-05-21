@@ -20,7 +20,7 @@ import { required } from '@/core/validators';
 import { OrganizationProjectSelectField } from '@/customer/team/OrganizationProjectSelectField';
 import { usersAutocomplete } from '@/customer/team/utils';
 import { SubmitButton } from '@/form';
-import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { RestrictionsInfoCard } from '@/invitations/actions/RestrictionsInfoCard';
@@ -282,7 +282,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
               }
             />
             <FormGroup label={translate('User')} required>
-              <AsyncSelectFieldFinal
+              <AsyncSelectField
                 name="user"
                 key={values.showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
                 placeholder={translate('Select user...')}
@@ -311,7 +311,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
               <FormGroup>
                 <Field
                   name="showAllUsers"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Show users outside organization')}
                 />
               </FormGroup>

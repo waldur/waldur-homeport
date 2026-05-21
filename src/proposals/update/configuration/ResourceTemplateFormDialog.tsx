@@ -1,6 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
+import { FC, useCallback, useMemo, useState } from 'react';
 import {
   CallResourceTemplateRequest,
   proposalProtectedCallsResourceTemplatesSet,
@@ -12,6 +10,7 @@ import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { Offering, Plan } from '@/marketplace/types';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormSecondPage as Step2Plan } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage';
 import { ResourceRequestWizardFormThirdPage as Step3AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
@@ -68,13 +67,13 @@ export const ResourceTemplateFormDialog: FC<ResourceTemplateFormDialogProps> = (
   props,
 ) => {
   const isEdit = Boolean(props.resolve.uuid);
+  const { closeDialog } = useModal();
 
   const submitFormMutation = useManagedMutation<
     any,
     any,
     {
       formData: ResourceTemplateFormData;
-      formProps: any;
     }
   >({
     mutationFn: (args) => {
@@ -105,20 +104,25 @@ export const ResourceTemplateFormDialog: FC<ResourceTemplateFormDialogProps> = (
       ? translate('Resource template updated')
       : translate('Resource template added to the call successfully'),
     refetch: props.resolve.refetch,
-    onSuccess: (_data, args) => {
-      args.formProps.destroy();
+    onSuccess: () => {
+      closeDialog();
     },
   });
 
   const submitForm = useCallback(
-    (formData, _dispatch, formProps) =>
-      submitFormMutation.mutateAsync({ formData, formProps }),
+    (formData) => submitFormMutation.mutateAsync({ formData }),
     [submitFormMutation],
   );
 
-  /** Auto filling `mainOffering` in step 2 */
-  const mainOffering: Offering = useSelector((state) =>
-    formValueSelector('CallResourceTemplateForm')(state, 'mainOffering'),
+  const [mainOffering, setMainOffering] = useState<Offering>(null);
+
+  const handleFormChange = useCallback(
+    (values) => {
+      if (values?.mainOffering !== mainOffering) {
+        setMainOffering(values?.mainOffering);
+      }
+    },
+    [mainOffering],
   );
 
   const WizardStepsData = useMemo(() => {
@@ -145,6 +149,7 @@ export const ResourceTemplateFormDialog: FC<ResourceTemplateFormDialogProps> = (
       initialValues={props.initialValues}
       data={{ call: props.resolve.call }}
       modalProps={{ bodyClassName: 'h-500px' }}
+      onChange={handleFormChange}
     />
   );
 };

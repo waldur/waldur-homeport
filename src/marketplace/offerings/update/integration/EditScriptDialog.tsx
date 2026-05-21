@@ -319,7 +319,7 @@ export const EditScriptDialog = ({
                     name="script"
                     required={true}
                     language={resolve.offering.secret_options.language}
-                    component={MonacoField as any}
+                    component={MonacoField}
                     height={450}
                   />
                 </Card.Body>

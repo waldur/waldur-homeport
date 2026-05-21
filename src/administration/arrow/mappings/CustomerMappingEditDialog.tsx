@@ -92,7 +92,7 @@ export const CustomerMappingEditDialog = ({
             >
               <Field
                 name="arrow_reference"
-                component={StringField as any}
+                component={StringField}
                 validate={required}
               />
             </FormGroup>
@@ -101,7 +101,7 @@ export const CustomerMappingEditDialog = ({
               label={translate('Arrow Company Name')}
               description={translate('Optional company name for display')}
             >
-              <Field name="arrow_company_name" component={StringField as any} />
+              <Field name="arrow_company_name" component={StringField} />
             </FormGroup>
 
             <FormGroup
@@ -113,7 +113,7 @@ export const CustomerMappingEditDialog = ({
             >
               <Field
                 name="waldur_customer"
-                component={Select as any}
+                component={Select}
                 validate={required}
                 placeholder={translate('Select organization...')}
                 loadOptions={(query, prevOptions, page) =>
@@ -131,7 +131,7 @@ export const CustomerMappingEditDialog = ({
             <FormGroup>
               <Field
                 name="is_active"
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 label={translate('Active')}
               />
             </FormGroup>

@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-import { SubmissionError } from 'redux-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
   OfferingIntegrationUpdateRequest,
@@ -11,8 +9,7 @@ import {
   getPluginOptionsSerializer,
   getSecretOptionsSerializer,
 } from '@/marketplace/common/registry';
-import { useModal } from '@/modal/actions';
-import { useNotify } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const SCRIPT_ROWS = [
   { label: translate('Script language'), type: 'language' },
@@ -44,12 +41,12 @@ export const useUpdateOfferingIntegration = (
   offering: ProviderOfferingDetails,
   refetch?,
 ) => {
-  const { showError, showSuccess } = useNotify();
-
-  const { closeDialog } = useModal();
-
-  const update = useCallback(
-    async (formData: OfferingIntegrationUpdateRequest) => {
+  const { mutateAsync: update } = useManagedMutation<
+    any,
+    any,
+    OfferingIntegrationUpdateRequest
+  >({
+    mutationFn: async (formData) => {
       if (formData.plugin_options) {
         const serializer = getPluginOptionsSerializer(offering.type);
         if (serializer) {
@@ -62,21 +59,15 @@ export const useUpdateOfferingIntegration = (
           formData.secret_options = serializer(formData.secret_options);
         }
       }
-      try {
-        await marketplaceProviderOfferingsUpdateIntegration({
-          path: { uuid: offering.uuid },
-          body: formData,
-        });
-        showSuccess(translate('Offering has been updated successfully.'));
-        if (refetch) await refetch();
-        closeDialog();
-      } catch (error) {
-        showError(translate('Unable to update offering.'));
-        throw new SubmissionError(error);
-      }
+      return await marketplaceProviderOfferingsUpdateIntegration({
+        path: { uuid: offering.uuid },
+        body: formData,
+      });
     },
-    [offering, refetch],
-  );
+    successMessage: translate('Offering has been updated successfully.'),
+    errorMessage: translate('Unable to update offering.'),
+    refetch,
+  });
 
   return { update };
 };

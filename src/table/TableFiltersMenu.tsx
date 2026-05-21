@@ -17,8 +17,8 @@ import {
   useState,
 } from 'react';
 import { Button } from 'react-bootstrap';
+import { useForm, useFormState } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -47,10 +47,9 @@ const SaveFilterDialog = lazyComponent(() =>
 
 const SaveFilterItems = ({ table, formId, apply }) => {
   const dispatch = useDispatch();
-
   const { openDialog } = useModal();
+  const { values: formValues = {} } = useFormState();
 
-  const formValues = useSelector(getFormValues(formId));
   const selectedSavedFilter = useSelector((state: any) =>
     selectSelectedSavedFilter(state, table),
   );
@@ -63,9 +62,10 @@ const SaveFilterItems = ({ table, formId, apply }) => {
   const saveFilter = useCallback(
     (name, update: boolean) => {
       let newItem;
-      Object.entries(formValues).forEach(([key, value]) => {
+      const valuesCopy = { ...formValues };
+      Object.entries(valuesCopy).forEach(([key, value]) => {
         if (Array.isArray(value) && value.length === 0) {
-          delete formValues[key];
+          delete valuesCopy[key];
         }
       });
       if (update && selectedSavedFilter) {
@@ -74,7 +74,7 @@ const SaveFilterItems = ({ table, formId, apply }) => {
           ...selectedSavedFilter,
           title: name,
           date: new Date().toISOString(),
-          values: formValues,
+          values: valuesCopy,
         };
       } else {
         // New
@@ -83,7 +83,7 @@ const SaveFilterItems = ({ table, formId, apply }) => {
           id: `${table}-${formId}-${isoDate}`,
           title: name || formatDateTime(null),
           date: isoDate,
-          values: formValues,
+          values: valuesCopy,
         };
       }
 
@@ -91,7 +91,7 @@ const SaveFilterItems = ({ table, formId, apply }) => {
       dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
       dispatch(selectSavedFilter(table, newItem));
     },
-    [key, formValues, selectedSavedFilter, setSavedFilters, selectSavedFilter],
+    [key, formValues, selectedSavedFilter, table, formId, dispatch],
   );
 
   const onSaveFilter = (e, update = false) => {
@@ -193,6 +193,7 @@ const openSubmenu = throttle(
 interface TableFiltersMenuProps extends Pick<
   TableProps,
   | 'filters'
+  | 'formId'
   | 'filterPosition'
   | 'filtersStorage'
   | 'setFilter'
@@ -206,6 +207,8 @@ interface TableFiltersMenuProps extends Pick<
 
 export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
   const context = useContext(TableFilterContext);
+  const form = useForm();
+  const { values: formValues } = useFormState();
 
   const menuEl = useRef<HTMLDivElement>(null);
   const menuInstance = useRef(null);
@@ -232,7 +235,6 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
     }
   }, [menuEl?.current]);
 
-  const formValues = useSelector(getFormValues(context.form));
   // Add hide event listener on menu (cancel/reset the filter changes if they are not applied yet)
   useEffect(() => {
     if (menuEl?.current) {
@@ -246,7 +248,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
           keys.forEach((name) => {
             const filter = props.filtersStorage.find((fs) => fs.name === name);
             if (!isEqual(formValues?.[name], filter?.value)) {
-              context.changeFormField(name, filter?.value || null);
+              form.change(name, filter?.value ?? null);
             }
           });
         }, 100);
@@ -257,7 +259,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
         });
       }
     }
-  }, [menuEl?.current, props.filtersStorage, formValues]);
+  }, [menuEl?.current, props.filtersStorage, formValues, form]);
 
   const apply = useCallback(
     (hideMenu = true) => {
@@ -270,7 +272,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
       }
       if (props.toggleFilterMenu) props.toggleFilterMenu(true);
     },
-    [props.applyFiltersFn, props.toggleFilterMenu, menuInstance?.current],
+    [props.applyFiltersFn, props.toggleFilterMenu],
   );
 
   const [existed, setExisted] = useState(true);

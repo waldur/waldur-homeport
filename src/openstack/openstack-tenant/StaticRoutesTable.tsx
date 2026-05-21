@@ -61,7 +61,7 @@ const StaticRouteAddButton = ({ onClick }) => (
 
 export const StaticRoutesTable: FC<{
   fields;
-  fixedIps: OpenStackFixedIp[];
+  fixedIps?: OpenStackFixedIp[];
 }> = ({ fields, fixedIps = [] }) => {
   const nexthopValidator = useMemo(
     () => composeValidators(required, validateIPv4, validateFixedIPs(fixedIps)),

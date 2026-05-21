@@ -14,12 +14,7 @@ import {
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { required, email } from '@/core/validators';
-import {
-  FormContainerFinal,
-  StringField,
-  SubmitButton,
-  TextField,
-} from '@/form';
+import { FormContainer, StringField, SubmitButton, TextField } from '@/form';
 import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -152,7 +147,7 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <StringField
                 name={isEdit ? 'username' : 'preferred_identifier'}
                 label={
@@ -189,7 +184,7 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
                 label={translate('Description')}
                 placeholder={translate('e.g. Used for automated backups')}
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

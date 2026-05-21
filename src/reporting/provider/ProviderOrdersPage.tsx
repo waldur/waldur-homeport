@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form } from 'react-final-form';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -14,13 +13,11 @@ import { ReportingTitle } from '../ReportingTitle';
 
 import { ProviderFilter } from './ProviderFilter';
 
-export const ProviderOrdersPage: FC = () => {
-  const [days, setDays] = useState(30);
-  const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
-    provider?: { uuid: string };
-  };
-  const providerUuid = formValues?.provider?.uuid;
-
+const ProviderOrdersPageContent: FC<{
+  days: number;
+  setDays: (d: number) => void;
+  providerUuid?: string;
+}> = ({ days, setDays, providerUuid }) => {
   const { isLoading, error, refetch, data } = useOrdersStats({
     days,
     provider_uuid: providerUuid,
@@ -71,5 +68,21 @@ export const ProviderOrdersPage: FC = () => {
         />
       )}
     </>
+  );
+};
+
+export const ProviderOrdersPage: FC = () => {
+  const [days, setDays] = useState(30);
+
+  return (
+    <Form onSubmit={() => {}} subscription={{ values: true }}>
+      {({ values }) => (
+        <ProviderOrdersPageContent
+          days={days}
+          setDays={setDays}
+          providerUuid={values?.provider?.uuid}
+        />
+      )}
+    </Form>
   );
 };

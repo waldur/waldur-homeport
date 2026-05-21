@@ -7,7 +7,7 @@ import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { FormFooter, SubmitButton } from '@/form';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -75,17 +75,17 @@ export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
             {loading ? (
               <LoadingSpinner />
             ) : (
-              <FormContainerFinal submitting={submitting}>
+              <FormContainer submitting={submitting}>
                 <Field
                   name="yaml"
                   language="yaml"
-                  component={MonacoField as any}
+                  component={MonacoField}
                   original={value as string}
                   diff={showDiff}
                   height={400}
                   options={{ scrollBeyondLastLine: false }}
                 />
-              </FormContainerFinal>
+              </FormContainer>
             )}
 
             {value && !loading && (

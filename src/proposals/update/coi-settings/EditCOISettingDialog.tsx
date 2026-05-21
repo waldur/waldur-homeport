@@ -232,7 +232,7 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
                 <FormGroup label={FIELD_LABELS[resolve.name]}>
                   <Field
                     name={resolve.name}
-                    component={NumberField as any}
+                    component={NumberField}
                     min={1}
                     max={10}
                   />
@@ -255,7 +255,7 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
                 <FormGroup>
                   <Field
                     name={resolve.name}
-                    component={AwesomeCheckboxField as any}
+                    component={AwesomeCheckboxField}
                     label={FIELD_LABELS[resolve.name]}
                   />
                 </FormGroup>
@@ -264,7 +264,7 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
                 <FormGroup label={FIELD_LABELS[resolve.name]}>
                   <Field
                     name={resolve.name}
-                    component={SelectField as any}
+                    component={SelectField}
                     options={COI_TYPE_OPTIONS}
                     isMulti
                     placeholder={translate('Select COI types...')}
@@ -280,7 +280,7 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
                 <FormGroup label={FIELD_LABELS[resolve.name]}>
                   <Field
                     name={resolve.name}
-                    component={SelectField as any}
+                    component={SelectField}
                     options={SELECT_FIELD_OPTIONS[resolve.name] || []}
                     simpleValue
                     placeholder={translate('Select an option...')}

@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { CustomersUsersListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureCustomersUsersFilter: FunctionComponent<CustomersUsersFilterProps> = (
@@ -68,26 +66,18 @@ interface CustomersUsersFilterProps {
   projectRoles?: any[];
 }
 
-interface CustomersUsersFilterFormData {
+export interface CustomersUsersFilterFormData {
   project_role: any[];
   organization_role: any[];
 }
 
-export const CustomersUsersFilter = reduxForm<
-  CustomersUsersFilterFormData,
-  CustomersUsersFilterProps
->({
-  form: CustomersUsersFilterFormId,
-  destroyOnUnmount: false,
-})(PureCustomersUsersFilter);
+export const CustomersUsersFilter = PureCustomersUsersFilter;
 
 type CustomersUsersFilterQuery = CustomersUsersListData['query'];
 
-export const selectCustomersUsersFilter = createSelector<
-  RootState,
-  Partial<CustomersUsersFilterFormData>,
-  CustomersUsersFilterQuery
->(getFormValues(CustomersUsersFilterFormId), (values) => {
+export const selectCustomersUsersFilter = (
+  values?: Partial<CustomersUsersFilterFormData>,
+): CustomersUsersFilterQuery => {
   const filter: CustomersUsersFilterQuery = {} as any;
   if (values) {
     if (values.project_role) {
@@ -100,4 +90,4 @@ export const selectCustomersUsersFilter = createSelector<
     }
   }
   return filter;
-});
+};

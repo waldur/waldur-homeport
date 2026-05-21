@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form, useFormState } from 'react-final-form';
 import { marketplaceOfferingUsersList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -24,13 +23,14 @@ import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { PROVIDER_OFFERING_USERS_FORM_ID } from '../constants';
-
 import { CreateProviderOfferingUserButton } from './CreateProviderOfferingUserButton';
 import { OfferingUsersExpandableRow } from './OfferingUsersExpandableRow';
-import { ProviderOfferingUsersFilter } from './ProviderOfferingUsersFilter';
+import {
+  ProviderOfferingUsersFilter,
+  PROVIDER_OFFERING_USERS_FORM_ID,
+} from './ProviderOfferingUsersFilter';
 
-export const ProviderOfferingUsersListComponent: FunctionComponent<
+const ProviderOfferingUsersListComponent: FunctionComponent<
   Partial<TableWithPortal> & {
     provider?;
     hasOrganizationColumn?: boolean;
@@ -43,14 +43,9 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
     tableActions?: React.ReactNode | ((tableProps: any) => React.ReactNode);
   }
 > = ({ provider, hasOrganizationColumn, portal, offering, tableActions }) => {
-  const filterValues = useSelector(
-    getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
-  ) as {
-    offering?;
-    provider?;
-    state?: Array<{ value: any }>;
-    has_complete_profile?: boolean;
-  };
+  const { values } = useFormState();
+  const filterValues = values;
+
   const filter = useMemo(
     () => ({
       provider_uuid: hasOrganizationColumn
@@ -297,6 +292,17 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       )}
       hasQuery={true}
       expandableRow={showExpandableRow ? OfferingUsersExpandableRow : undefined}
+      formId={PROVIDER_OFFERING_USERS_FORM_ID}
     />
   );
 };
+
+export const ProviderOfferingUsersList: FunctionComponent<any> = (props) => (
+  <Form
+    id={PROVIDER_OFFERING_USERS_FORM_ID}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <ProviderOfferingUsersListComponent {...props} />}
+  </Form>
+);

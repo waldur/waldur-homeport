@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash-es';
 import { projectsList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';

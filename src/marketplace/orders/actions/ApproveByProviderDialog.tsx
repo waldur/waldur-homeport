@@ -43,7 +43,6 @@ const OptionRow: FC<{
     option,
     optionKey,
     null,
-    true,
   );
   const validateFn = buildOptionValidator(
     option,
@@ -61,7 +60,7 @@ const OptionRow: FC<{
       <td>
         <Field
           name={`attributes.${optionKey}`}
-          component={OptionField as any}
+          component={OptionField}
           validate={validateFn}
           {...params}
         />
@@ -186,7 +185,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
                     </table>
                   </div>
                 ) : (
-                  <OptionsForm options={resourceOptions} finalForm />
+                  <OptionsForm options={resourceOptions} />
                 )}
               </>
             ) : (

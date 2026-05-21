@@ -12,13 +12,8 @@ import {
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import {
-  FormContainerFinal,
-  SelectField,
-  StringField,
-  SubmitButton,
-} from '@/form';
-import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -122,9 +117,9 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
             iconNode={<PlusCircleIcon weight="bold" />}
             iconColor="success"
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               {showProvider && (
-                <AsyncSelectFieldFinal
+                <AsyncSelectField
                   name="organisation"
                   label={translate('Service provider')}
                   validate={required}
@@ -172,7 +167,7 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
                 spaceless
                 data-testid="offering-type"
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

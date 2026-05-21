@@ -89,7 +89,7 @@ export const OfferingProfileForm: FC<{ resolve: FormResolve }> = ({
               <Field
                 name="name"
                 validate={required}
-                component={StringField as any}
+                component={StringField}
                 placeholder={translate(
                   'e.g. Rancher cluster, SLURM allocation',
                 )}
@@ -98,7 +98,7 @@ export const OfferingProfileForm: FC<{ resolve: FormResolve }> = ({
             <FormGroup label={translate('Description')}>
               <Field
                 name="description"
-                component={StringField as any}
+                component={StringField}
                 placeholder={translate('Describe what this profile covers')}
               />
             </FormGroup>

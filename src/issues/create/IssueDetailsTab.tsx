@@ -1,28 +1,19 @@
 import { useCallback, useEffect } from 'react';
 import { Alert, Form, Stack } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { change, Field, formValueSelector, isSubmitting } from 'redux-form';
+import { Field, useFormState, useForm } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { ProjectGroup } from '@/issues/create/ProjectGroup';
-import { RootState } from '@/store/reducers';
 import { useUser } from '@/workspace/hooks';
 
 import { IssueTypeChoice } from '../types/constants';
 
-import { ISSUE_CREATION_FORM_ID } from './constants';
 import { OrganizationGroup } from './OrganizationGroup';
 import { ResourceGroup } from './ResourceGroup';
 import { TypeField } from './TypeField';
-
-const standaloneIssueSelector = (state: RootState) =>
-  formValueSelector(ISSUE_CREATION_FORM_ID)(state, 'standaloneIssue');
-
-const typeSelector = (state: RootState) =>
-  formValueSelector(ISSUE_CREATION_FORM_ID)(state, 'type');
 
 interface IssueDetailsTabContext {
   scope?: any;
@@ -37,20 +28,20 @@ export const IssueDetailsTab = ({
 }: {
   context: IssueDetailsTabContext;
 }) => {
-  const dispatch = useDispatch();
-  const standaloneIssue = useSelector(standaloneIssueSelector);
-  const type = useSelector(typeSelector);
+  const form = useForm();
+  const { values, submitting } = useFormState();
+  const standaloneIssue = values.standaloneIssue;
+  const type = values.type;
 
   const user = useUser();
   const isStaffOrSupport = user?.is_staff || user?.is_support;
-  const submitting = useSelector(isSubmitting(ISSUE_CREATION_FORM_ID));
 
   // Get request types data from context (fetched in IssueCreateForm)
   const { issueTypes, isLoading, error } = context;
 
   const setValue = useCallback(
-    (field, value) => dispatch(change(ISSUE_CREATION_FORM_ID, field, value)),
-    [dispatch],
+    (field, value) => form.change(field, value),
+    [form],
   );
 
   // Set default type to first available type when types are loaded
@@ -144,14 +135,12 @@ export const IssueDetailsTab = ({
   return (
     <>
       {showTypeSelector && (
-        <Form.Group className="mb-5">
-          <Form.Label>{translate('Request type')}</Form.Label>
-          <TypeField issueTypes={issueTypes} isDisabled={submitting} />
-        </Form.Group>
+        <TypeField issueTypes={issueTypes} isDisabled={submitting} />
       )}
       <Form.Group className="mb-5">
         <Field
           name="standaloneIssue"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate(
             'Issue is general and not tied to any specific organization, project, or resource',

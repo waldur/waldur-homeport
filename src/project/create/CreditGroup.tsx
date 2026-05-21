@@ -29,7 +29,7 @@ export const CreditGroup = ({ customer }: { customer: Customer }) => {
       controlId="project_credit"
     >
       <Field
-        component={NumberField as any}
+        component={NumberField}
         name="project_credit"
         placeholder={defaultCurrency(0)}
         customer={customer}

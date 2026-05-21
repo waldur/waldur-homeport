@@ -125,7 +125,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name="notifications_enabled"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
@@ -136,7 +136,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name="description"
-                  component={TextField as any}
+                  component={TextField}
                   validate={resolve.requiredMsg ? required : undefined}
                   maxLength={500}
                   spaceless
@@ -149,7 +149,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name="gender"
-                  component={GenderSelectField as any}
+                  component={GenderSelectField}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
@@ -160,7 +160,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name="personal_title"
-                  component={PersonalTitleSelectField as any}
+                  component={PersonalTitleSelectField}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
@@ -171,7 +171,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name="organization_type"
-                  component={OrganizationTypeSelectField as any}
+                  component={OrganizationTypeSelectField}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
@@ -182,7 +182,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name="birth_date"
-                  component={DateField as any}
+                  component={DateField}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
@@ -193,7 +193,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name={resolve.name}
-                  component={CountrySelectField as any}
+                  component={CountrySelectField}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
@@ -204,7 +204,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name={resolve.name}
-                  component={MultiCountrySelectField as any}
+                  component={MultiCountrySelectField}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
@@ -218,7 +218,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name="phone_number"
-                  component={PhoneNumberField as any}
+                  component={PhoneNumberField}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
@@ -229,7 +229,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               >
                 <Field
                   name={resolve.name}
-                  component={StringField as any}
+                  component={StringField}
                   validate={resolve.requiredMsg ? required : undefined}
                   spaceless
                 />

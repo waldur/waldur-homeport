@@ -33,7 +33,7 @@ For detailed guidance, see `docs/`:
 - `architecture.md` - Redux, component patterns
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns
-- `form-migration.md` - Redux → React Final Form
+- `forms.md` - React Final Form and VStepperForm patterns
 - `filter-migration-guide.md` - Generated table filters from OpenAPI schema
 - `development-setup.md` - Build, environment, tooling
 - `ui-consistency-guidelines.md` - Empty states, buttons, loading, tooltips
@@ -247,9 +247,7 @@ For wizards with non-standard buttons (e.g., "Save as Draft", "Save as Template"
 
 ### Form Field Layout (React Final Form)
 
-**NEVER use `FormContainer` from `@/form`** - it wraps children with redux-form's `Field` internally and will cause "Field must be inside a component decorated with reduxForm()" errors.
-
-**Correct pattern for React Final Form:**
+**Correct pattern for form fields:**
 
 ```tsx
 import { Field } from 'react-final-form';
@@ -295,7 +293,6 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 3. **Footer buttons use `type="button"`** - Prevent accidental form submission
 4. **Extract credentials helper** - Create reusable object from form values for API calls
 5. **Reset downstream state** - When user changes earlier step selection, clear dependent data
-6. **Use FormGroup, not FormContainer** - `FormContainer` is redux-form only; use `FormGroup` from `@/marketplace/offerings/FormGroup` for React Final Form
 
 ## Exposing New Fields from Backend to Frontend
 

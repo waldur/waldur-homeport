@@ -44,8 +44,6 @@ export const OrdersFilter: FC<OrdersFilterProps> = ({
             }
             options={dateRangeOptions}
             isClearable={false}
-            className="metronic-select-container"
-            classNamePrefix="metronic-select"
           />
         </div>
       </div>

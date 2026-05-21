@@ -1,8 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { Field, Form } from 'react-final-form';
 import { Provider } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import configureMockStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Offering, OptionField } from 'waldur-js-client';
@@ -10,14 +9,6 @@ import { Offering, OptionField } from 'waldur-js-client';
 import { StorageFolderManagerField } from './StorageFolderManagerField';
 
 const mockStore = configureMockStore();
-
-interface TestFormProps {
-  children?: React.ReactNode;
-}
-
-const TestForm = reduxForm<any, TestFormProps>({ form: 'TestForm' })(
-  ({ children }) => <form>{children}</form>,
-);
 
 const createMockField = (overrides = {}): OptionField =>
   ({
@@ -75,43 +66,62 @@ const renderComponent = ({
   offering = createMockOffering(),
   storageLimit = 10,
 }: RenderOptions = {}) => {
-  const onChange = vi.fn();
   const store = createStore(storageLimit);
+  const onChange = vi.fn();
 
-  const Wrapper = () => {
-    const [value, setValue] = React.useState(inputValue);
-
-    const handleChange = (newValue: any) => {
-      setValue(newValue);
-      onChange(newValue);
-    };
-
-    return (
-      <Provider store={store}>
-        <TestForm>
-          <StorageFolderManagerField
-            field={field}
-            input={
-              {
-                value,
-                onChange: handleChange,
-                onBlur: vi.fn(),
-                onFocus: vi.fn(),
-                onDragStart: vi.fn(),
-                onDrop: vi.fn(),
-                name: 'storage_folder_manager',
-              } as any
-            }
-            offering={offering}
-          />
-        </TestForm>
-      </Provider>
-    );
-  };
+  const Wrapper = ({ limit = storageLimit, val = inputValue }) => (
+    <Provider store={store}>
+      <Form
+        onSubmit={() => {}}
+        initialValues={{
+          limits: { storage: limit },
+          storage_folder_manager: val,
+        }}
+        enableReinitialize
+      >
+        {() => (
+          <Field name="storage_folder_manager">
+            {({ input }) => (
+              <StorageFolderManagerField
+                field={field}
+                input={{
+                  ...input,
+                  onChange: (value) => {
+                    input.onChange(value);
+                    onChange(value);
+                  },
+                }}
+                offering={offering}
+              />
+            )}
+          </Field>
+        )}
+      </Form>
+    </Provider>
+  );
 
   const result = render(<Wrapper />);
 
-  return { ...result, onChange, store };
+  return {
+    ...result,
+    onChange,
+    store,
+    rerender: (newOptions: RenderOptions = {}) =>
+      result.rerender(
+        <Wrapper
+          limit={
+            newOptions.storageLimit !== undefined
+              ? newOptions.storageLimit
+              : storageLimit
+          }
+          val={
+            newOptions.inputValue !== undefined
+              ? newOptions.inputValue
+              : inputValue
+          }
+        />,
+      ),
+  };
 };
 
 describe('StorageFolderManagerField', () => {
@@ -489,13 +499,15 @@ describe('StorageFolderManagerField', () => {
 
       render(
         <Provider store={store}>
-          <TestForm>
-            <StorageFolderManagerField
-              field={createMockField()}
-              input={{ value: '', onChange: vi.fn(), name: 'test' } as any}
-              offering={offering}
-            />
-          </TestForm>
+          <Form onSubmit={() => {}}>
+            {() => (
+              <StorageFolderManagerField
+                field={createMockField()}
+                input={{ value: '', onChange: vi.fn(), name: 'test' } as any}
+                offering={offering}
+              />
+            )}
+          </Form>
         </Provider>,
       );
 
@@ -522,29 +534,7 @@ describe('StorageFolderManagerField', () => {
 
       expect(screen.getByText('Soft: 5.0 TB')).toBeInTheDocument();
 
-      // Simulate store update
-      const newStore = createStore(10);
-      rerender(
-        <Provider store={newStore}>
-          <TestForm>
-            <StorageFolderManagerField
-              field={createMockField()}
-              input={
-                {
-                  value: '',
-                  onChange: vi.fn(),
-                  onBlur: vi.fn(),
-                  onFocus: vi.fn(),
-                  onDragStart: vi.fn(),
-                  onDrop: vi.fn(),
-                  name: 'storage_folder_manager',
-                } as any
-              }
-              offering={createMockOffering()}
-            />
-          </TestForm>
-        </Provider>,
-      );
+      rerender({ storageLimit: 10 });
 
       await waitFor(() => {
         expect(screen.getByText('Soft: 10.0 TB')).toBeInTheDocument();

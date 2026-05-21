@@ -1,4 +1,5 @@
-import { Field, reduxForm } from 'redux-form';
+import { FC } from 'react';
+import { Field } from 'react-final-form';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -10,11 +11,7 @@ import { InvitationScopeTypeFilter } from '@/invitations/InvitationScopeTypeFilt
 import { ROLE_TYPES } from '@/permissions/constants';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-export const UserAffiliationsFilter = reduxForm<any, {}>({
-  form: 'UserAffiliationsFilter',
-  touchOnChange: true,
-  destroyOnUnmount: false,
-})(() => {
+export const UserAffiliationsFilter: FC = () => {
   const hideCallScope = !isFeatureVisible(
     MarketplaceFeatures.show_call_management_functionality,
   );
@@ -45,4 +42,4 @@ export const UserAffiliationsFilter = reduxForm<any, {}>({
       <InvitationRoleFilter />
     </>
   );
-});
+};

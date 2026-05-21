@@ -1,4 +1,4 @@
-import { startCase } from 'lodash';
+import { startCase } from 'lodash-es';
 import { CustomerCredit, ProjectCredit } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';

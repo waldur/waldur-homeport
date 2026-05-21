@@ -7,8 +7,7 @@ import {
   useState,
 } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { change, Field, formValueSelector } from 'redux-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 import { BlankEnum, ValidationMethodEnum } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -16,32 +15,31 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { FormGroup } from '@/form/FormGroup';
 import { SelectField } from '@/form/SelectField';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
 import { getValidationMethodInfo } from './constants';
 import { PersonIdentifierFieldConfig } from './PersonIdentifierFieldsRenderer';
+import { OrganizationCreateFormValues } from './types';
 import { fetchPersonIdentifierFields } from './utils';
 
-interface OrganizationCreateStep1Props extends WizardFormStepProps {
+interface OrganizationCreateStep1Props {
   onFieldConfigFetched?: (config: PersonIdentifierFieldConfig | null) => void;
 }
 
 export const OrganizationCreateStep1: FunctionComponent<
   OrganizationCreateStep1Props
 > = (props) => {
-  const dispatch = useDispatch();
+  const form = useForm();
+  const { values } = useFormState<OrganizationCreateFormValues>({
+    subscription: { values: true },
+  });
   const { showError } = useNotify();
 
-  const selector = formValueSelector(props.form);
-  const formValidationMethod = useSelector((state) =>
-    selector(state, 'validationMethod'),
-  );
+  const validationMethod = (values.validationMethod || '') as
+    | ValidationMethodEnum
+    | BlankEnum;
 
-  const [validationMethod, setValidationMethod] = useState<
-    ValidationMethodEnum | BlankEnum
-  >(formValidationMethod || '');
   const [fieldConfig, setFieldConfig] =
     useState<PersonIdentifierFieldConfig | null>(null);
   const [loading, setLoading] = useState(false);
@@ -112,18 +110,10 @@ export const OrganizationCreateStep1: FunctionComponent<
     [],
   );
 
-  // Update form when validation method changes
+  // Update form when field config changes
   useEffect(() => {
-    dispatch(change(props.form, 'validationMethod', validationMethod));
-    dispatch(change(props.form, 'personIdentifierFieldConfig', fieldConfig));
-  }, [validationMethod, fieldConfig, props.form]);
-
-  // Sync with form state
-  useEffect(() => {
-    if (formValidationMethod && formValidationMethod !== validationMethod) {
-      setValidationMethod(formValidationMethod);
-    }
-  }, [formValidationMethod, validationMethod]);
+    form.change('personIdentifierFieldConfig', fieldConfig);
+  }, [fieldConfig, form]);
 
   // Fetch fields when validation method changes
   useEffect(() => {
@@ -133,70 +123,68 @@ export const OrganizationCreateStep1: FunctionComponent<
   }, [validationMethod]);
 
   return (
-    <WizardForm {...props}>
-      <div className="d-flex flex-column gap-5">
-        <Card className="border-0 shadow-sm">
-          <Card.Body className="p-8">
-            <h4 className="mb-4">{translate('Select verification method')}</h4>
-            <p className="text-gray-700 mb-6">
-              {translate(
-                'Choose how you would like to verify your organization. Automatic verification provides instant results if your company is registered in the selected business register.',
-              )}
-            </p>
-
-            <Field
-              name="validationMethod"
-              label={translate('Verification method')}
-              component={FormGroup}
-              required
-              validate={required}
-              description={translate(
-                'How would you like to verify your company?',
-              )}
-              simpleValue
-            >
-              <SelectField
-                options={validationMethodOptions}
-                placeholder={translate('Select a verification method')}
-                isClearable={false}
-              />
-            </Field>
-
-            {loading && (
-              <div className="mt-4">
-                <LoadingSpinner />
-                <p className="text-center text-muted mt-2">
-                  {translate('Loading required fields...')}
-                </p>
-              </div>
+    <div className="d-flex flex-column gap-5">
+      <Card className="border-0 shadow-sm">
+        <Card.Body className="p-8">
+          <h4 className="mb-4">{translate('Select verification method')}</h4>
+          <p className="text-gray-700 mb-6">
+            {translate(
+              'Choose how you would like to verify your organization. Automatic verification provides instant results if your company is registered in the selected business register.',
             )}
+          </p>
 
-            {!loading &&
-              validationMethod &&
-              (() => {
-                const methodInfo = getValidationMethodInfo(validationMethod);
+          <Field
+            name="validationMethod"
+            label={translate('Verification method')}
+            component={FormGroup}
+            required
+            validate={required}
+            description={translate(
+              'How would you like to verify your company?',
+            )}
+            simpleValue
+          >
+            <SelectField
+              options={validationMethodOptions}
+              placeholder={translate('Select a verification method')}
+              isClearable={false}
+            />
+          </Field>
 
-                return (
-                  <Card className="card-bordered">
-                    <Card.Body className="d-flex gap-3">
-                      <div className="flex-shrink-0">
-                        <InfoIcon size={24} weight="duotone" />
+          {loading && (
+            <div className="mt-4">
+              <LoadingSpinner />
+              <p className="text-center text-muted mt-2">
+                {translate('Loading required fields...')}
+              </p>
+            </div>
+          )}
+
+          {!loading &&
+            validationMethod &&
+            (() => {
+              const methodInfo = getValidationMethodInfo(validationMethod);
+
+              return (
+                <Card className="card-bordered">
+                  <Card.Body className="d-flex gap-3">
+                    <div className="flex-shrink-0">
+                      <InfoIcon size={24} weight="duotone" />
+                    </div>
+                    <div className="flex-grow-1">
+                      <div className="fw-semibold text-gray-800 mb-1">
+                        {methodInfo.title}
                       </div>
-                      <div className="flex-grow-1">
-                        <div className="fw-semibold text-gray-800 mb-1">
-                          {methodInfo.title}
-                        </div>
-                        <div className="text-gray-700">
-                          {methodInfo.description}
-                        </div>
+                      <div className="text-gray-700">
+                        {methodInfo.description}
                       </div>
-                    </Card.Body>
-                  </Card>
-                );
-              })()}
-          </Card.Body>
-        </Card>
-      </div>
-    </WizardForm>
+                    </div>
+                  </Card.Body>
+                </Card>
+              );
+            })()}
+        </Card.Body>
+      </Card>
+    </div>
   );
 };

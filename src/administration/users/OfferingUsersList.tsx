@@ -1,5 +1,5 @@
-import { ProviderOfferingUsersListComponent } from '@/marketplace/service-providers/offering-users/ProviderOfferingUsersList';
+import { ProviderOfferingUsersList } from '@/marketplace/service-providers/offering-users/ProviderOfferingUsersList';
 
 export const OfferingUsersList = () => {
-  return <ProviderOfferingUsersListComponent hasOrganizationColumn />;
+  return <ProviderOfferingUsersList hasOrganizationColumn />;
 };

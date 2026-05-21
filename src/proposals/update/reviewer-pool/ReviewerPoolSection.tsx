@@ -8,7 +8,7 @@ import {
   WarningIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import {
   callReviewerPoolsList,
   callReviewerPoolsForceAccept,
@@ -31,6 +31,7 @@ import {
   CallReviewerPoolsFilter,
   selectCallReviewerPoolsFilter,
   InvitationStatusOptions,
+  CallReviewerPoolsFilterFormId,
 } from '@/table/generated/CallReviewerPoolsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -128,12 +129,18 @@ const isExpired = (expiresAt: string | null): boolean => {
 
 const FORCE_ACCEPT_STATUSES = ['pending', 'declined', 'expired'];
 
-export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
+const ReviewerPoolSectionTable: FC<ReviewerPoolSectionProps> = ({ call }) => {
   const { showSuccess } = useNotify();
 
   const { openDialog } = useModal();
 
-  const formFilters = useSelector(selectCallReviewerPoolsFilter);
+  const { values } = useFormState();
+
+  const formFilters = useMemo(
+    () => selectCallReviewerPoolsFilter(values),
+    [values],
+  );
+
   const tabs = useReviewerPoolTabs();
 
   const filter = useMemo(
@@ -474,6 +481,19 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
           />
         </>
       }
+      formId={CallReviewerPoolsFilterFormId}
     />
   );
 };
+
+export const ReviewerPoolSection: FC<any> = (props) => (
+  <Form
+    id={CallReviewerPoolsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ReviewerPoolSectionTable {...props} />}
+  </Form>
+);

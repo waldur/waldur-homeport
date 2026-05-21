@@ -84,7 +84,7 @@ export const Step1Credentials: FC<WizardStepProps> = (props) => {
           )}
           required
         >
-          <Field name="api_url" component={StringField as any} validate={url} />
+          <Field name="api_url" component={StringField} validate={url} />
         </FormGroup>
 
         <FormGroup
@@ -92,11 +92,7 @@ export const Step1Credentials: FC<WizardStepProps> = (props) => {
           description={translate('Your Arrow API key')}
           required
         >
-          <Field
-            name="api_key"
-            component={SecretField as any}
-            validate={required}
-          />
+          <Field name="api_key" component={SecretField} validate={required} />
         </FormGroup>
       </div>
 

@@ -1,27 +1,18 @@
 import { ErrorBoundary } from '@sentry/react';
 import React, { FunctionComponent } from 'react';
 import { Modal } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { isDirty } from 'redux-form';
 
+import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { type RootState } from '@/store/reducers';
 
 import './ModalRoot.css';
 
-interface TState {
-  modalComponent: React.ComponentType | string;
-  modalProps: any;
-}
-
 export const ModalRoot: FunctionComponent = () => {
-  const { modalComponent, modalProps } = useSelector<{ modal: TState }, TState>(
-    (state: RootState) => state.modal,
-  );
+  const { modalComponent, modalProps, closeDialog, confirm } = useModal();
   const {
-    formId,
+    formId: _formId,
     modalStyle,
     // Filter out custom props that shouldn't be passed to Modal DOM element
     resolve: _resolve,
@@ -32,11 +23,8 @@ export const ModalRoot: FunctionComponent = () => {
     ...rest
   } = modalProps || {};
 
-  const { closeDialog, confirm } = useModal();
-
-  const isDirtyForm = useSelector((state: RootState) =>
-    formId ? isDirty(formId)(state) : false,
-  );
+  const [isDirtyContext, setIsDirtyContext] = React.useState(false);
+  const isDirtyForm = isDirtyContext;
   const onHide = async () => {
     if (isDirtyForm) {
       try {
@@ -69,12 +57,14 @@ export const ModalRoot: FunctionComponent = () => {
       {...rest}
     >
       <ErrorBoundary fallback={ErrorMessage}>
-        {modalComponent
-          ? React.createElement(modalComponent, {
-              ...modalProps,
-              close: onHide,
-            })
-          : null}
+        <DirtyFormContext.Provider value={{ setIsDirty: setIsDirtyContext }}>
+          {modalComponent
+            ? React.createElement(modalComponent, {
+                ...modalProps,
+                close: onHide,
+              })
+            : null}
+        </DirtyFormContext.Provider>
       </ErrorBoundary>
     </Modal>
   );

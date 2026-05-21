@@ -148,14 +148,14 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                 <Field component={VisualLayoutSelectorField} name="value" />
               ) : item.type === 'html_field' ? (
                 <Field
-                  component={MonacoField as any}
+                  component={MonacoField}
                   name="value"
                   language="html"
                   height={100}
                 />
               ) : item.type === 'dict_field' ? (
                 <Field
-                  component={MonacoField as any}
+                  component={MonacoField}
                   name="value"
                   language="json"
                   format={(value) => {
@@ -172,14 +172,14 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                   height={100}
                 />
               ) : item.type === 'text_field' ? (
-                <Field component={TextField as any} name="value" />
+                <Field component={TextField} name="value" />
               ) : (item.type === 'choice_field' ||
                   item.type === 'select' ||
                   item.options) &&
                 item.type !== 'multiple_choice_field' ? (
                 <>
                   <Field
-                    component={SelectField as any}
+                    component={SelectField}
                     name="value"
                     options={item.options}
                     simpleValue
@@ -198,7 +198,7 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                 </>
               ) : item.type === 'multiple_choice_field' && item.options ? (
                 <Field
-                  component={SelectField as any}
+                  component={SelectField}
                   name="value"
                   options={item.options}
                   isMulti
@@ -208,26 +208,26 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                 <Field component={ColorField} name="value" />
               ) : item.type === 'boolean' ? (
                 <Field
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   name="value"
                   label={item.description}
                   hideLabel
                 />
               ) : item.type === 'image_field' ? (
                 <Field
-                  component={WideImageField as any}
+                  component={WideImageField}
                   name="value"
                   initialValue={initialValues.value}
                 />
               ) : item.type === 'list_field' ? (
                 <Field
-                  component={CommaSeparatedListField as any}
+                  component={CommaSeparatedListField}
                   name="value"
                   placeholder={translate('Enter comma-separated values')}
                   height={100}
                 />
               ) : (
-                <Field component={StringField as any} name="value" />
+                <Field component={StringField} name="value" />
               )}
             </FormGroup>
           </ModalDialog>

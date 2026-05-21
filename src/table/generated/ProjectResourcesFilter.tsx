@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   MarketplaceResourcesListData,
   PublicOfferingDetails,
@@ -11,7 +10,6 @@ import {
 
 import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -45,7 +43,6 @@ const PureProjectResourcesFilter: FunctionComponent<
           isClearable={true}
           isMulti={true}
           {...REACT_SELECT_TABLE_FILTER}
-          className="metronic-select-container"
         />
       )}
     />
@@ -58,25 +55,17 @@ interface ProjectResourcesFilterProps {
   project?: any;
 }
 
-interface ProjectResourcesFilterFormData {
+export interface ProjectResourcesFilterFormData {
   offering: PublicOfferingDetails[];
 }
 
-export const ProjectResourcesFilter = reduxForm<
-  ProjectResourcesFilterFormData,
-  ProjectResourcesFilterProps
->({
-  form: ProjectResourcesFilterFormId,
-  destroyOnUnmount: false,
-})(PureProjectResourcesFilter);
+export const ProjectResourcesFilter = PureProjectResourcesFilter;
 
 type ProjectResourcesFilterQuery = MarketplaceResourcesListData['query'];
 
-export const selectProjectResourcesFilter = createSelector<
-  RootState,
-  Partial<ProjectResourcesFilterFormData>,
-  ProjectResourcesFilterQuery
->(getFormValues(ProjectResourcesFilterFormId), (values) => {
+export const selectProjectResourcesFilter = (
+  values?: Partial<ProjectResourcesFilterFormData>,
+): ProjectResourcesFilterQuery => {
   const filter: ProjectResourcesFilterQuery = {} as any;
   if (values) {
     if (values.offering) {
@@ -84,4 +73,4 @@ export const selectProjectResourcesFilter = createSelector<
     }
   }
   return filter;
-});
+};

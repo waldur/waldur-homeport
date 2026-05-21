@@ -236,7 +236,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
             )}
           >
             <Field
-              component={SelectField as any}
+              component={SelectField}
               name="period"
               options={props.periods}
               onChange={(value) => {
@@ -271,7 +271,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
             ) : (
               <FormGroup label={translate('User')}>
                 <Field
-                  component={SelectField as any}
+                  component={SelectField}
                   name="user"
                   options={team}
                   getOptionValue={(option) => option.uuid}
@@ -285,7 +285,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
             )}
             <FormGroup label={translate('Username')} required>
               <Field
-                component={StringField as any}
+                component={StringField}
                 name="username"
                 placeholder={translate('Enter username(s)')}
                 validate={required}
@@ -432,7 +432,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                       </div>
                     )}
                     <Field
-                      component={NumberField as any}
+                      component={NumberField}
                       name={`components.${component.type}.amount`}
                       unit={component.measured_unit}
                       max={
@@ -452,7 +452,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
 
                   <div className="mb-7">
                     <Field
-                      component={TextField as any}
+                      component={TextField}
                       name={`components.${component.type}.description`}
                       placeholder={translate('Enter a description...')}
                       rows={3}
@@ -464,7 +464,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                   </div>
 
                   <Field
-                    component={AwesomeCheckboxField as any}
+                    component={AwesomeCheckboxField}
                     name={`components.${component.type}.recurring`}
                     label={translate(
                       'Reported value is reused every month until changed.',

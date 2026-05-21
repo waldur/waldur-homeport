@@ -78,7 +78,7 @@ export const SetConsumerInfoDialog: FC<SetConsumerInfoDialogProps> = ({
             <FormGroup label={translate('Message')}>
               <Field
                 name="consumer_message"
-                component={TextField as any}
+                component={TextField}
                 placeholder={translate('Enter a message for the provider...')}
               />
             </FormGroup>

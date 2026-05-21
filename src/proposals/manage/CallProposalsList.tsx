@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { proposalProposalsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -10,6 +10,7 @@ import {
   ProposalProposalsFilter,
   selectProposalProposalsFilter,
   ProposalStatesOptions,
+  ProposalProposalsFilterFormId,
 } from '@/table/generated/ProposalProposalsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -26,8 +27,13 @@ interface CallProposalsListProps {
   call: Call;
 }
 
-export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
-  const formFilters = useSelector(selectProposalProposalsFilter);
+const CallProposalsListTable: FC<CallProposalsListProps> = ({ call }) => {
+  const { values } = useFormState();
+
+  const formFilters = useMemo(
+    () => selectProposalProposalsFilter(values),
+    [values],
+  );
 
   const filter = useMemo(
     () => ({
@@ -149,6 +155,19 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
         />
       )}
       filters={<ProposalProposalsFilter callUuid={call.uuid} />}
+      formId={ProposalProposalsFilterFormId}
     />
   );
 };
+
+export const CallProposalsList: FC<any> = (props) => (
+  <Form
+    id={ProposalProposalsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <CallProposalsListTable {...props} />}
+  </Form>
+);

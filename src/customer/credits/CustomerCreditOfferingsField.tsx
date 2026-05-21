@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 
 import { Select } from '@/form/AsyncSelectField';
-import { FormGroupFinal } from '@/form/FormGroupFinal';
+import { FormGroup } from '@/form/FormGroup';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -11,7 +11,7 @@ export const CustomerCreditOfferingsField: FC = () => {
     <Field
       name="offerings"
       label={translate('Offering(s)')}
-      component={FormGroupFinal}
+      component={FormGroup}
     >
       <Select
         placeholder={translate('All')}

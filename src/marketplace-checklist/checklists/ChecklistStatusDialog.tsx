@@ -54,7 +54,7 @@ export const ChecklistStatusDialog: FC<ChecklistStatusDialogProps> = ({
           >
             <Field
               name="status"
-              component={SelectField as any}
+              component={SelectField}
               options={[
                 { label: 'Test', value: 'test' },
                 { label: 'Test 2', value: 'test2' },

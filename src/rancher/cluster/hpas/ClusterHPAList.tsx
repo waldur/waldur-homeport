@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Form } from 'react-final-form';
 import {
   RancherCluster,
   RancherHpa,
@@ -11,7 +12,10 @@ import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
-import { RancherClusterFilter } from '@/table/generated/RancherClusterFilter';
+import {
+  RancherClusterFilter,
+  RancherClusterFilterFormId,
+} from '@/table/generated/RancherClusterFilter';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -36,10 +40,10 @@ const RowActions = ({ row, yamlRetrieve, yamlUpdate }) => (
   </ActionsDropdownComponent>
 );
 
-export const ClusterHPAList: FunctionComponent<
+const ClusterHPAListTable: FunctionComponent<
   TableWithPortal<{ resourceScope: RancherCluster }>
 > = ({ resourceScope, portal }) => {
-  const filter = useClusterFilter(resourceScope);
+  const { filter } = useClusterFilter(resourceScope);
   const props = useTable({
     table: 'rancher-hpas',
     fetchData: createFetcher(rancherHpasList),
@@ -49,6 +53,7 @@ export const ClusterHPAList: FunctionComponent<
   return (
     <Table<RancherHpa>
       {...props}
+      formId={RancherClusterFilterFormId}
       columns={[
         {
           title: translate('Name'),
@@ -112,3 +117,15 @@ export const ClusterHPAList: FunctionComponent<
     />
   );
 };
+
+export const ClusterHPAList: FunctionComponent<
+  TableWithPortal<{ resourceScope: RancherCluster }>
+> = (props) => (
+  <Form
+    id={RancherClusterFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <ClusterHPAListTable {...props} />}
+  </Form>
+);

@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import {
   InvoiceItem,
   invoiceItemsList,
@@ -15,6 +15,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { createFetcher } from '@/table/api';
 import {
   CreditUsageFilter,
+  CreditUsageFilterFormId,
   selectCreditUsageFilter,
 } from '@/table/generated/CreditUsageFilter';
 import Table from '@/table/Table';
@@ -47,10 +48,11 @@ const MONTH_OPTIONS = Array.from({ length: 12 }, (_, i) => ({
   value: i + 1,
 }));
 
-export const CreditUsageDialog: FC<CreditUsageDialogProps> = (props) => {
+const CreditUsageDialogTable: FC<CreditUsageDialogProps> = (props) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  const formValues = useSelector(selectCreditUsageFilter);
+  const { values } = useFormState();
+  const formValues = useMemo(() => selectCreditUsageFilter(values), [values]);
 
   const filter = useMemo(() => {
     const result: InvoiceItemsListData['query'] = {
@@ -110,6 +112,7 @@ export const CreditUsageDialog: FC<CreditUsageDialogProps> = (props) => {
     <ModalDialog headerLess bodyClassName="p-0">
       <Table<InvoiceItem>
         {...tableProps}
+        formId={CreditUsageFilterFormId}
         columns={[
           {
             title: translate('Name'),
@@ -171,3 +174,13 @@ export const CreditUsageDialog: FC<CreditUsageDialogProps> = (props) => {
     </ModalDialog>
   );
 };
+
+export const CreditUsageDialog: FC<CreditUsageDialogProps> = (props) => (
+  <Form
+    id={CreditUsageFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <CreditUsageDialogTable {...props} />}
+  </Form>
+);

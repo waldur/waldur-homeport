@@ -7,7 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroupFinal, SubmitButton } from '@/form';
+import { FormGroup, SubmitButton } from '@/form';
 import { CountrySelectField } from '@/form/CountrySelectField';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
@@ -77,7 +77,7 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
           >
             <Field
               name="name"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Name')}
               required
               validate={required}
@@ -86,7 +86,7 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
             </Field>
             <Field
               name="code"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Code')}
               required
               validate={required}
@@ -98,42 +98,42 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
             </Field>
             <Field
               name="abbreviation"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Abbreviation')}
             >
               <StringField />
             </Field>
             <Field
               name="description"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Description')}
             >
               <TextField />
             </Field>
             <Field
               name="email"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Email')}
             >
               <StringField />
             </Field>
             <Field
               name="homepage"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Homepage')}
             >
               <StringField />
             </Field>
             <Field
               name="country"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Country')}
             >
               <CountrySelectField />
             </Field>
             <Field
               name="address"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={translate('Address')}
             >
               <TextField />

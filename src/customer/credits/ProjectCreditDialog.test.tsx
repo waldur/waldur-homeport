@@ -45,13 +45,6 @@ vi.mock('@/workspace/selectors', () => ({
   getCustomer: () => ({ uuid: 'customer-uuid', url: 'customer-url' }),
 }));
 
-vi.mock('@/modal/hooks', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-    confirm: vi.fn().mockResolvedValue(undefined),
-  }),
-}));
-
 vi.mock('@/form/AsyncSelectField', () => ({
   Select: (props) => (
     <input

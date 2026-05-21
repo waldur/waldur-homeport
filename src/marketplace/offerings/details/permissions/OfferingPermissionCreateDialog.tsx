@@ -6,7 +6,7 @@ import { marketplaceProviderOfferingsAddUser } from 'waldur-js-client';
 import { required } from '@/core/validators';
 import { usersAutocomplete } from '@/customer/team/utils';
 import { SubmitButton } from '@/form';
-import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
@@ -65,7 +65,7 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
             }
           >
             <FormGroup label={translate('User')} required>
-              <AsyncSelectFieldFinal
+              <AsyncSelectField
                 name="user"
                 placeholder={translate('Select user...')}
                 loadOptions={(query, prevOptions, page) =>
@@ -78,7 +78,7 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
 
             {!offering && (
               <FormGroup label={translate('Offering')} required>
-                <AsyncSelectFieldFinal
+                <AsyncSelectField
                   name="offering"
                   placeholder={translate('Select offering...')}
                   loadOptions={(query, prevOptions, page) =>

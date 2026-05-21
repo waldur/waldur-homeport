@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';

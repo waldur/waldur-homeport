@@ -8,7 +8,7 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 export const ComponentMinValueField: React.FC = () => (
   <FormGroup label={translate('Min value')} controlId="min_value" spaceless>
     <Field
-      component={NumberField as any}
+      component={NumberField}
       name="min_value"
       id="min_value"
       parse={(value) => Number(value)}

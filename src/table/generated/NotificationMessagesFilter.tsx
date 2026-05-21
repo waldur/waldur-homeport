@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { NotificationMessagesListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const IsOverriddenOptions: IsOverriddenOption[] = [
@@ -51,25 +49,17 @@ const PureNotificationMessagesFilter: FunctionComponent<{}> = () => (
 
 export const NotificationMessagesFilterFormId = 'NotificationMessagesFilter';
 
-interface NotificationMessagesFilterFormData {
+export interface NotificationMessagesFilterFormData {
   is_overridden: IsOverriddenOption;
 }
 
-export const NotificationMessagesFilter = reduxForm<
-  NotificationMessagesFilterFormData,
-  {}
->({
-  form: NotificationMessagesFilterFormId,
-  destroyOnUnmount: false,
-})(PureNotificationMessagesFilter);
+export const NotificationMessagesFilter = PureNotificationMessagesFilter;
 
 type NotificationMessagesFilterQuery = NotificationMessagesListData['query'];
 
-export const selectNotificationMessagesFilter = createSelector<
-  RootState,
-  Partial<NotificationMessagesFilterFormData>,
-  NotificationMessagesFilterQuery
->(getFormValues(NotificationMessagesFilterFormId), (values) => {
+export const selectNotificationMessagesFilter = (
+  values?: Partial<NotificationMessagesFilterFormData>,
+): NotificationMessagesFilterQuery => {
   const filter: NotificationMessagesFilterQuery = {} as any;
   if (values) {
     if (values.is_overridden) {
@@ -77,4 +67,4 @@ export const selectNotificationMessagesFilter = createSelector<
     }
   }
   return filter;
-});
+};

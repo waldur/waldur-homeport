@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
   proposalRequestedOfferingsList,
@@ -13,6 +14,7 @@ import {
   ProposalRequestedOfferingsFilter,
   selectProposalRequestedOfferingsFilter,
   RequestedOfferingStatesOptions,
+  ProposalRequestedOfferingsFilterFormId,
 } from '@/table/generated/ProposalRequestedOfferingsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -27,9 +29,14 @@ interface OfferingRequestsListProps {
   round: ProtectedRound;
 }
 
-export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
+const OfferingRequestsListTable: FC<OfferingRequestsListProps> = () => {
   const customer = useSelector(getCustomer);
-  const formFilters = useSelector(selectProposalRequestedOfferingsFilter);
+  const { values } = useFormState();
+
+  const formFilters = useMemo(
+    () => selectProposalRequestedOfferingsFilter(values),
+    [values],
+  );
 
   const filter = useMemo(
     () => ({
@@ -96,6 +103,19 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
       expandableRow={OfferingRequestsListExpandableRow}
       rowActions={OfferingRequestItemActions}
       filters={<ProposalRequestedOfferingsFilter />}
+      formId={ProposalRequestedOfferingsFilterFormId}
     />
   );
 };
+
+export const OfferingRequestsList: FC<any> = (props) => (
+  <Form
+    id={ProposalRequestedOfferingsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <OfferingRequestsListTable {...props} />}
+  </Form>
+);

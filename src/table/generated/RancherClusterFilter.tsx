@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   RancherIngressesListData,
   RancherNamespace,
@@ -13,7 +12,6 @@ import {
 
 import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -45,7 +43,6 @@ const PureRancherClusterFilter: FunctionComponent<RancherClusterFilterProps> = (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -74,7 +71,6 @@ const PureRancherClusterFilter: FunctionComponent<RancherClusterFilterProps> = (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -88,26 +84,18 @@ interface RancherClusterFilterProps {
   cluster?: any;
 }
 
-interface RancherClusterFilterFormData {
+export interface RancherClusterFilterFormData {
   namespace: RancherNamespace;
   rancher_project: RancherProject;
 }
 
-export const RancherClusterFilter = reduxForm<
-  RancherClusterFilterFormData,
-  RancherClusterFilterProps
->({
-  form: RancherClusterFilterFormId,
-  destroyOnUnmount: false,
-})(PureRancherClusterFilter);
+export const RancherClusterFilter = PureRancherClusterFilter;
 
 type RancherClusterFilterQuery = RancherIngressesListData['query'];
 
-export const selectRancherClusterFilter = createSelector<
-  RootState,
-  Partial<RancherClusterFilterFormData>,
-  RancherClusterFilterQuery
->(getFormValues(RancherClusterFilterFormId), (values) => {
+export const selectRancherClusterFilter = (
+  values?: Partial<RancherClusterFilterFormData>,
+): RancherClusterFilterQuery => {
   const filter: RancherClusterFilterQuery = {} as any;
   if (values) {
     if (values.namespace) {
@@ -118,4 +106,4 @@ export const selectRancherClusterFilter = createSelector<
     }
   }
   return filter;
-});
+};

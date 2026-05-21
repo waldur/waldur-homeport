@@ -46,8 +46,6 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
         isDisabled
         placeholder={translate('Pick a type first')}
         loadOptions={() => Promise.resolve({ options: [], hasMore: false })}
-        className="metronic-select-container"
-        classNamePrefix="metronic-select"
       />
     );
   }
@@ -66,8 +64,6 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
       noOptionsMessage={() => translate('No matches')}
       isClearable
       isDisabled={isDisabled}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };

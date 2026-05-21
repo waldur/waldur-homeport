@@ -216,7 +216,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
               <FormGroup label={translate('Match reviewers against')} required>
                 <Field
                   name="source"
-                  component={SelectField as any}
+                  component={SelectField}
                   options={sourceOptions}
                   getOptionLabel={(option: SourceOption) => option.label}
                   getOptionValue={(option: SourceOption) => option.value}
@@ -282,7 +282,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
                 <FormGroup label={translate('Select proposals')} required>
                   <Field
                     name="selected_proposals"
-                    component={SelectField as any}
+                    component={SelectField}
                     options={proposalOptions}
                     isMulti
                     isLoading={proposalsLoading}
@@ -297,7 +297,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
                   <FormGroup label={translate('Keywords')} required>
                     <Field
                       name="keywords"
-                      component={StringField as any}
+                      component={StringField}
                       placeholder={translate(
                         'machine learning, climate science, AI',
                       )}
@@ -310,7 +310,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
                   <FormGroup label={translate('Search mode')}>
                     <Field
                       name="keyword_search_mode"
-                      component={SelectField as any}
+                      component={SelectField}
                       options={searchModeOptions}
                       getOptionLabel={(option) => option.label}
                       getOptionValue={(option) => option.value}

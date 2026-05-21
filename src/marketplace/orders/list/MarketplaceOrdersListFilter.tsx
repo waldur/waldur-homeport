@@ -1,15 +1,10 @@
-import { reduxForm } from 'redux-form';
+import React from 'react';
 
-import { syncFiltersToURL } from '@/core/filters';
-import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from '@/customer/constants';
 import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { OFFERING_ORDERS_LIST_FILTER_FORM_ID } from '@/marketplace/details/constants';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
-import { MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID } from '@/marketplace/orders/list/constants';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
-import { PROVIDER_ORDERS_LIST_FILTER_FORM_ID } from '@/marketplace/service-providers/constants';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { createOrderStateOptions } from '../OrderStates';
@@ -19,7 +14,13 @@ import { OrderAutoApprovedFilter } from './OrderAutoApprovedFilter';
 import { OrderStateFilter } from './OrderStateFilter';
 import { OrderTypeFilter } from './OrderTypeFilter';
 
-const PureMarketplaceOrdersListFilter = (props) => {
+interface OrdersListFilterProps {
+  hasOffering?: boolean;
+  hasOrganization?: boolean;
+  provider_uuid?: string;
+}
+
+export const OrdersListFilter: React.FC<OrdersListFilterProps> = (props) => {
   const { provider_uuid } = props;
 
   return (
@@ -87,38 +88,3 @@ const PureMarketplaceOrdersListFilter = (props) => {
     </>
   );
 };
-
-export const MarketplaceOrdersListFilter = reduxForm({
-  form: MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID,
-  onChange: syncFiltersToURL,
-  touchOnChange: true,
-  destroyOnUnmount: false,
-})((props) => (
-  <PureMarketplaceOrdersListFilter {...props} hasOffering hasOrganization />
-));
-
-export const ProviderOrdersListFilter = reduxForm({
-  form: PROVIDER_ORDERS_LIST_FILTER_FORM_ID,
-  onChange: syncFiltersToURL,
-  touchOnChange: true,
-  destroyOnUnmount: false,
-})((props) => (
-  <PureMarketplaceOrdersListFilter {...props} hasOffering hasOrganization />
-)) as React.ComponentType<{
-  provider_uuid?: string;
-}>;
-
-export const OfferingOrdersListFilter = reduxForm({
-  form: OFFERING_ORDERS_LIST_FILTER_FORM_ID,
-  touchOnChange: true,
-  initialValues: {
-    state: createOrderStateOptions()[0],
-  },
-  destroyOnUnmount: false,
-})((props) => <PureMarketplaceOrdersListFilter {...props} hasOrganization />);
-
-export const CustomerOrdersListFilter = reduxForm({
-  form: CUSTOMER_ORDERS_LIST_FILTER_FORM_ID,
-  touchOnChange: true,
-  destroyOnUnmount: false,
-})((props) => <PureMarketplaceOrdersListFilter {...props} hasOffering />);

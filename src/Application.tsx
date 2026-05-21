@@ -8,6 +8,7 @@ import { useAsync } from 'react-use';
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { queryClient } from '@/core/queryClient';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
+import { ModalProvider } from '@/modal/ModalContext';
 import { ModalRoot } from '@/modal/ModalRoot';
 import store from '@/store/store';
 
@@ -39,10 +40,12 @@ export const Application: FunctionComponent = () => {
               <ThemeProvider>
                 <ThreadProvider>
                   <NotificationContainer />
-                  <ModalRoot />
-                  <ConfirmModalRoot />
-                  <DrawerRoot />
-                  <UIView />
+                  <ModalProvider>
+                    <ModalRoot />
+                    <ConfirmModalRoot />
+                    <DrawerRoot />
+                    <UIView />
+                  </ModalProvider>
                   <MasterInit />
                 </ThreadProvider>
               </ThemeProvider>

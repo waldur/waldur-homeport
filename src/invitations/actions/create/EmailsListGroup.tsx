@@ -169,7 +169,7 @@ export const EmailsListGroup = ({
                             name={`${user}.email`}
                             placeholder={translate('Enter email address')}
                             required
-                            component={EmailField as any}
+                            component={EmailField}
                             validate={(value, allValues, meta) => {
                               const err = composeValidators(
                                 required,
@@ -200,7 +200,7 @@ export const EmailsListGroup = ({
                             <Field
                               name={`${user}.civil_number`}
                               placeholder={translate('e.g. EE123456789')}
-                              component={InputField as any}
+                              component={InputField}
                               disabled={disabled}
                               validate={
                                 isFeatureVisible(

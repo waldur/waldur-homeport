@@ -8,6 +8,7 @@ import {
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import { WizardFormThirdPage } from '@/proposals/update/rounds/WizardFormThirdPage';
 import { getRoundInitialValues } from '@/proposals/utils';
@@ -25,12 +26,17 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
 ) => {
   const initialValues = useMemo(
     () => getRoundInitialValues(props.resolve.round),
-    [],
+    [props.resolve.round],
   );
   const { closeDialog } = useModal();
-  const submit = useCallback(
-    (formData: ProtectedRoundRequest, _dispatch, formProps) => {
-      return proposalProtectedCallsRoundsUpdate({
+
+  const updateRoundMutation = useManagedMutation<
+    any,
+    any,
+    ProtectedRoundRequest
+  >({
+    mutationFn: (formData) =>
+      proposalProtectedCallsRoundsUpdate({
         path: {
           uuid: props.resolve.call.uuid,
           obj_uuid: props.resolve.round.uuid,
@@ -39,13 +45,17 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
           ...initialValues,
           ...formData,
         },
-      }).then(() => {
-        formProps.destroy();
-        closeDialog();
-        props.resolve.refetch();
-      });
-    },
-    [initialValues],
+      }),
+    successMessage: translate('Round has been updated.'),
+    errorMessage: translate('Unable to update round.'),
+    refetch: props.resolve.refetch,
+    onSuccess: closeDialog,
+  });
+
+  const submit = useCallback(
+    (formData: ProtectedRoundRequest) =>
+      updateRoundMutation.mutateAsync(formData),
+    [updateRoundMutation],
   );
 
   return (

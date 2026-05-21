@@ -104,7 +104,6 @@ const store = mockStore({
     title: '',
     subtitle: '',
   },
-  form: {}, // For redux-form filters
 });
 
 const renderComponent = () => {

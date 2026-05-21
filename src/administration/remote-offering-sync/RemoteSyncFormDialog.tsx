@@ -234,7 +234,7 @@ const RemoteSyncRenderer = ({
       >
         <FormGroup label={translate('Remote API URL')} required>
           <Field
-            component={StringField as any}
+            component={StringField}
             name="api_url"
             placeholder={translate('e.g. waldur.example.com')}
             validate={required}
@@ -243,7 +243,7 @@ const RemoteSyncRenderer = ({
         </FormGroup>
         <FormGroup label={translate('Authentication token')} required>
           <Field
-            component={SecretField as any}
+            component={SecretField}
             name="token"
             placeholder={translate('e.g. SECRET_TOKEN')}
             validate={required}
@@ -285,8 +285,6 @@ const RemoteSyncRenderer = ({
                     value={fieldProps.input.value}
                     onChange={(value) => fieldProps.input.onChange(value)}
                     noOptionsMessage={() => translate('No providers')}
-                    className="metronic-select-container"
-                    classNamePrefix="metronic-select"
                   />
                 )}
               </Field>
@@ -297,7 +295,7 @@ const RemoteSyncRenderer = ({
           <CategoryMappingRulesField remoteCategories={remoteCategories} />
         </FormGroup>
         <Field
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           name="is_active"
           label={translate('Enable synchronization')}
           className="text-gray-700"

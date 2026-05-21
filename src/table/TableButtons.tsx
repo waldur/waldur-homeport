@@ -26,7 +26,7 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
   const onClickFilterButton = useCallback(
     (event) => {
       if (props.filterPosition === 'sidebar') {
-        props.openFiltersDrawer(props.filters);
+        props.openFiltersDrawer(props.filters, props.formId);
       } else {
         props.toggleFilterMenu();
         const parent: HTMLElement = event.target.closest('.card-table');

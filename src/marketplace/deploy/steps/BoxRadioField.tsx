@@ -159,8 +159,6 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                     getOptionLabel={(option) =>
                       option.label || translate('Default')
                     }
-                    className="metronic-select-container"
-                    classNamePrefix="metronic-select"
                   />
                 )}
                 <div className="form-check form-check-custom form-check-sm d-block">

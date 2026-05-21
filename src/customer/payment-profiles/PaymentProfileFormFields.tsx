@@ -3,7 +3,7 @@ import { Field, useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import {
-  FormGroupFinal,
+  FormGroup,
   NumberField,
   SelectField,
   StringField,
@@ -27,7 +27,7 @@ export const PaymentProfileFormFields: FC<PaymentProfileFormFieldsProps> = ({
       <Field
         name="name"
         label={translate('Name')}
-        component={FormGroupFinal}
+        component={FormGroup}
         required={true}
         validate={required}
       >
@@ -37,7 +37,7 @@ export const PaymentProfileFormFields: FC<PaymentProfileFormFieldsProps> = ({
       <Field
         name="payment_type"
         label={translate('Type')}
-        component={FormGroupFinal}
+        component={FormGroup}
         required={true}
         validate={required}
       >
@@ -49,7 +49,7 @@ export const PaymentProfileFormFields: FC<PaymentProfileFormFieldsProps> = ({
           <Field
             name="end_date"
             label={translate('End date')}
-            component={FormGroupFinal}
+            component={FormGroup}
           >
             <DateField />
           </Field>
@@ -57,7 +57,7 @@ export const PaymentProfileFormFields: FC<PaymentProfileFormFieldsProps> = ({
           <Field
             name="agreement_number"
             label={translate('Agreement number')}
-            component={FormGroupFinal}
+            component={FormGroup}
           >
             <TextField maxLength={150} />
           </Field>
@@ -65,7 +65,7 @@ export const PaymentProfileFormFields: FC<PaymentProfileFormFieldsProps> = ({
           <Field
             name="contract_sum"
             label={translate('Contract sum')}
-            component={FormGroupFinal}
+            component={FormGroup}
           >
             <NumberField />
           </Field>

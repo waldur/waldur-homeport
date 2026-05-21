@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { FormGroup } from '@/form';
 import { DateField } from '@/form/DateField';

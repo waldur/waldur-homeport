@@ -1,3 +1,5 @@
+import { FormLabel } from 'react-bootstrap';
+
 import { loadLocationOptions } from '@/azure/vm/utils';
 import { required } from '@/core/validators';
 import { AsyncSelectField } from '@/form/AsyncSelectField';
@@ -12,10 +14,9 @@ export const FormLocationStep = (props: FormStepProps) => (
     disabled={props.disabled}
     disabledTooltip={props.disabledTooltip}
   >
+    <FormLabel className="required">{translate('Location')}</FormLabel>
     <AsyncSelectField
       name="attributes.location"
-      label={translate('Location')}
-      required={true}
       loadOptions={(query, prevOptions, currentPage) =>
         loadLocationOptions(
           props.offering.scope_uuid,

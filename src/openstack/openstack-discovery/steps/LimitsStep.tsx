@@ -55,10 +55,7 @@ export const LimitsStep: FC<WizardStepProps> = (props) => {
           'MTU value for internal networks. Valid range: 68–9000. Leave empty to use the cloud default.',
         )}
       >
-        <Field
-          name="default_internal_network_mtu"
-          component={NumberField as any}
-        />
+        <Field name="default_internal_network_mtu" component={NumberField} />
       </FormGroup>
 
       {showSnapshotLimit && (
@@ -70,7 +67,7 @@ export const LimitsStep: FC<WizardStepProps> = (props) => {
         >
           <Field
             name="snapshot_size_limit_gb"
-            component={NumberField as any}
+            component={NumberField}
             min={0}
             unit="GB"
             placeholder={translate('No limit')}
@@ -84,7 +81,7 @@ export const LimitsStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="max_instances"
-          component={NumberField as any}
+          component={NumberField}
           min={0}
           placeholder={translate('No limit')}
         />
@@ -97,7 +94,7 @@ export const LimitsStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="max_volumes"
-          component={NumberField as any}
+          component={NumberField}
           min={0}
           placeholder={translate('No limit')}
         />

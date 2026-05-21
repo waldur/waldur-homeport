@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form } from 'react-final-form';
 import { marketplaceStatsProviderCustomersRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -83,35 +82,37 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderCustomersPage: FC = () => {
-  const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
-    provider?: { uuid: string };
-  };
-  const providerUuid = formValues?.provider?.uuid;
-
   return (
-    <>
-      <ReportingTitle reportKey="provider-customers">
-        <div className="d-flex align-items-center gap-4">
-          <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
-            {translate('Provider')}:
-          </label>
-          <div style={{ minWidth: 200 }}>
-            <ProviderFilter />
-          </div>
-        </div>
-      </ReportingTitle>
+    <Form onSubmit={() => {}} subscription={{ values: true }}>
+      {({ values }) => {
+        const providerUuid = values?.provider?.uuid;
+        return (
+          <>
+            <ReportingTitle reportKey="provider-customers">
+              <div className="d-flex align-items-center gap-4">
+                <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+                  {translate('Provider')}:
+                </label>
+                <div style={{ minWidth: 200 }}>
+                  <ProviderFilter />
+                </div>
+              </div>
+            </ReportingTitle>
 
-      {providerUuid ? (
-        <ProviderCustomersContent providerUuid={providerUuid} />
-      ) : (
-        <NoResult
-          title={translate('Select a provider')}
-          message={translate(
-            'Choose a provider from the dropdown above to view customer statistics.',
-          )}
-          noAction
-        />
-      )}
-    </>
+            {providerUuid ? (
+              <ProviderCustomersContent providerUuid={providerUuid} />
+            ) : (
+              <NoResult
+                title={translate('Select a provider')}
+                message={translate(
+                  'Choose a provider from the dropdown above to view customer statistics.',
+                )}
+                noAction
+              />
+            )}
+          </>
+        );
+      }}
+    </Form>
   );
 };

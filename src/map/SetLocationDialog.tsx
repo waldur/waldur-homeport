@@ -46,7 +46,7 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = ({
           >
             <Field
               name="location"
-              component={LocationContainer as any}
+              component={LocationContainer}
               label={resolve.label}
             />
           </ModalDialog>

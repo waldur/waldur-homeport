@@ -1,9 +1,9 @@
-import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { FunctionComponent, useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -25,8 +25,8 @@ import { CategoryColumnField } from './CategoryColumnField';
 import {
   CATEGORY_RESOURCES_ALL_FILTER_FORM_ID,
   CATEGORY_RESOURCES_TABLE_ID,
+  NON_TERMINATED_STATES,
 } from './constants';
-import { NON_TERMINATED_STATES } from './constants';
 import { CreateResourceButton } from './CreateResourceButton';
 import { ExpandableResourceSummary } from './ExpandableResourceSummary';
 import { ResourceActionsButton } from './ResourceActionsButton';
@@ -42,61 +42,64 @@ interface OwnProps {
   standalone;
 }
 
-export const CategoryResourcesList: FunctionComponent<OwnProps> = (
-  ownProps,
-) => {
+const CategoryResourcesListTable: FunctionComponent<OwnProps> = (ownProps) => {
   useTitle(
     translate('{category} resources', { category: ownProps.category_title }),
     '',
     'browser',
   );
-  const filterValues: any = useSelector(
-    getFormValues(CATEGORY_RESOURCES_ALL_FILTER_FORM_ID),
-  );
+  const { values } = useFormState();
+  const filterValues: any = values;
+
+  useEffect(() => {
+    if (filterValues) {
+      syncFiltersToURL(filterValues);
+    }
+  }, [filterValues]);
 
   const filter = useMemo(() => {
-    const filter: Record<string, any> = {};
+    const filterObj: Record<string, any> = {};
     if (ownProps.category_uuid) {
-      filter.category_uuid = ownProps.category_uuid;
+      filterObj.category_uuid = ownProps.category_uuid;
     }
     if (filterValues?.offering) {
-      filter.offering_uuid = filterValues.offering.uuid;
+      filterObj.offering_uuid = filterValues.offering.uuid;
     }
     if (filterValues?.parent_offering) {
-      filter.parent_offering_uuid = filterValues.parent_offering.uuid;
+      filterObj.parent_offering_uuid = filterValues.parent_offering.uuid;
     }
     if (filterValues?.project) {
-      filter.project_uuid = filterValues.project.uuid;
+      filterObj.project_uuid = filterValues.project.uuid;
     }
     if (filterValues?.runtime_state) {
-      filter.runtime_state = filterValues.runtime_state.value;
+      filterObj.runtime_state = filterValues.runtime_state.value;
     }
     if (filterValues?.state) {
-      filter.state = filterValues.state.map((option) => option.value);
+      filterObj.state = filterValues.state.map((option) => option.value);
       if (filterValues.include_terminated) {
-        filter.state = [...filter.state, 'Terminated'];
+        filterObj.state = [...filterObj.state, 'Terminated'];
       }
     } else {
       if (!filterValues?.include_terminated) {
-        filter.state = NON_TERMINATED_STATES;
+        filterObj.state = NON_TERMINATED_STATES;
       }
     }
     if (filterValues?.organization) {
-      filter.customer_uuid = filterValues.organization.uuid;
+      filterObj.customer_uuid = filterValues.organization.uuid;
     }
     if (filterValues?.exclude_attached) {
-      filter.is_attached = false;
+      filterObj.is_attached = false;
     }
     if (filterValues?.paused) {
-      filter.paused = true;
+      filterObj.paused = true;
     }
     if (filterValues?.downscaled) {
-      filter.downscaled = true;
+      filterObj.downscaled = true;
     }
     if (filterValues?.restrict_member_access) {
-      filter.restrict_member_access = true;
+      filterObj.restrict_member_access = true;
     }
-    return filter;
+    return filterObj;
   }, [filterValues, ownProps.category_uuid]);
 
   const { syncResourceFilters } =
@@ -261,6 +264,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
   return (
     <Table
       {...props}
+      formId={CATEGORY_RESOURCES_ALL_FILTER_FORM_ID}
       title={ownProps.category_title}
       columns={columns}
       verboseName={translate('Resources')}
@@ -280,5 +284,20 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       filters={<AllResourcesFilter category_uuid={ownProps.category_uuid} />}
       hasOptionalColumns
     />
+  );
+};
+
+export const CategoryResourcesList: FunctionComponent<OwnProps> = (
+  ownProps,
+) => {
+  const initialValues = useMemo(() => getInitialValues(), []);
+  return (
+    <Form
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+      initialValues={initialValues}
+    >
+      {() => <CategoryResourcesListTable {...ownProps} />}
+    </Form>
   );
 };

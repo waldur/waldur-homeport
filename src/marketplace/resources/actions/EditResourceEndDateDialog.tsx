@@ -7,7 +7,7 @@ import { formatISODate, parseDate } from '@/core/dateUtils';
 import { WarnCard } from '@/core/WarnCard';
 import { SubmitButton } from '@/form';
 import { DateField } from '@/form/DateField';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -80,7 +80,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                 </>
               }
             >
-              <FormContainerFinal submitting={submitting}>
+              <FormContainer submitting={submitting}>
                 <DateField
                   name="end_date"
                   label={translate('Termination date')}
@@ -139,7 +139,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                     className="mt-5"
                   />
                 )}
-              </FormContainerFinal>
+              </FormContainer>
             </ModalDialog>
           </form>
         );

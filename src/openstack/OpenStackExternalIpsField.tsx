@@ -1,6 +1,7 @@
 import { PlusIcon } from '@phosphor-icons/react';
+import { FC } from 'react';
 import { Form } from 'react-bootstrap';
-import { BaseFieldArrayProps, FieldArray, FormSection } from 'redux-form';
+import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
@@ -8,12 +9,12 @@ import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { StringField } from './StringField';
 
-const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
+const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
   const addRow = () => {
     fields.push({});
   };
 
-  const removeRow = (index) => fields._isFieldArray && fields.remove(index);
+  const removeRow = (index) => fields.remove(index);
 
   return (
     <>
@@ -29,20 +30,18 @@ const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
                 </tr>
               </thead>
               <tbody>
-                {fields.map((component, i) => (
-                  <FormSection name={component} key={i}>
-                    <tr>
-                      <td>
-                        <StringField name="floating_ip" />
-                      </td>
-                      <td>
-                        <StringField name="external_ip" />
-                      </td>
-                      <td>
-                        <RemovalActionButton action={() => removeRow(i)} />
-                      </td>
-                    </tr>
-                  </FormSection>
+                {fields.map((member, i) => (
+                  <tr key={member}>
+                    <td>
+                      <StringField name={`${member}.floating_ip`} />
+                    </td>
+                    <td>
+                      <StringField name={`${member}.external_ip`} />
+                    </td>
+                    <td>
+                      <RemovalActionButton action={() => removeRow(i)} />
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </table>
@@ -62,5 +61,5 @@ const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
 };
 
 export const OpenStackExternalIpsField = () => (
-  <FieldArray name="value" component={FieldsListGroup} rerenderOnEveryChange />
+  <FieldArray name="value" component={FieldsListGroup} />
 );

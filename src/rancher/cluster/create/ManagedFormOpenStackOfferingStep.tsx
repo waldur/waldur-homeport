@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import {
   marketplacePublicOfferingsRetrieve,
   PublicOfferingDetails,

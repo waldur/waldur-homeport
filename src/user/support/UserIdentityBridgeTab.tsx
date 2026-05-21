@@ -122,7 +122,7 @@ const EditManagedIsdsDialog: FC<EditManagedIsdsDialogProps> = ({ resolve }) => {
             >
               <Field
                 name="managed_isds"
-                component={StringField as any}
+                component={StringField}
                 placeholder="e.g. isd:puhuri, isd:fenix"
                 spaceless
               />

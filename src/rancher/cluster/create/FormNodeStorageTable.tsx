@@ -1,9 +1,10 @@
 import { XIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
-import { BaseFieldProps, Field } from 'redux-form';
+import { Field, useForm } from 'react-final-form';
 
 import { ENV } from '@/core/config';
+import { composeValidators } from '@/core/validators';
 import { SelectField, StringField } from '@/form';
 import { BoxNumberField } from '@/form/BoxNumberField';
 import { translate } from '@/i18n';
@@ -24,9 +25,8 @@ interface FormNodeStorageRowProps {
   defaultVolumeType?: any;
   /** In GB */
   sizeLimit: number;
-  typeValidate?: BaseFieldProps['validate'];
-  sizeValidate?: BaseFieldProps['validate'];
-  change(field: string, value: any): void;
+  typeValidate?: any;
+  sizeValidate?: any;
   onDeleteRow?(): void;
 }
 
@@ -54,20 +54,29 @@ export const FormNodeStorageTable: FC<
 };
 
 export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
+  const form = useForm();
   useEffect(() => {
     if (props?.defaultVolumeType) {
-      props.change(
+      form.change(
         `${props.parentName}.${props.typeName}`,
         props.defaultVolumeType.value,
       );
     }
     if (props.sizeName === 'system_volume_size') {
-      props.change(
+      form.change(
         `${props.parentName}.${props.sizeName}`,
         ENV.plugins.WALDUR_RANCHER.SYSTEM_VOLUME_MIN_SIZE || 1,
       );
     }
-  }, [props?.defaultVolumeType, props.change]);
+  }, [props?.defaultVolumeType, form]);
+
+  const finalSizeValidate = Array.isArray(props.sizeValidate)
+    ? composeValidators(...props.sizeValidate)
+    : props.sizeValidate;
+
+  const finalTypeValidate = Array.isArray(props.typeValidate)
+    ? composeValidators(...props.typeValidate)
+    : props.typeValidate;
 
   return (
     <tr>
@@ -81,7 +90,7 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
           />
         ) : (
           <Field
-            name="name"
+            name={`${props.parentName}.name`}
             component={StringField}
             placeholder={translate('Node name')}
             readOnly
@@ -90,9 +99,9 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
       </td>
       <td>
         <Field
-          name={props.sizeName}
+          name={`${props.parentName}.${props.sizeName}`}
           component={BoxNumberField}
-          validate={props.sizeValidate}
+          validate={finalSizeValidate}
           min={1}
           max={props.sizeLimit}
           parse={parseIntField}
@@ -102,9 +111,9 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
       {props?.volumeTypeChoices?.length > 0 && (
         <td>
           <Field
-            name={props.typeName}
+            name={`${props.parentName}.${props.typeName}`}
             component={SelectField}
-            validate={props.typeValidate}
+            validate={finalTypeValidate}
             placeholder={translate('Select volume type...')}
             options={props.volumeTypeChoices}
             getOptionValue={(option) => option.value}

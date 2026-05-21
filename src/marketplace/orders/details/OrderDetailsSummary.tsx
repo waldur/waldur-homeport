@@ -1,34 +1,29 @@
-import { connect } from 'react-redux';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { formIsValidSelector } from '@/marketplace/deploy/selectors';
-import { orderFormDataSelector } from '@/marketplace/deploy/selectors';
 import { SummaryTable } from '@/marketplace/details/OrderSummary';
-import { pricesSelector } from '@/marketplace/details/plan/utils';
-import { OrderSummaryProps } from '@/marketplace/details/types';
-import { RootState } from '@/store/reducers';
-import { getCustomer, getProject } from '@/workspace/selectors';
+import { useOrderPrices } from '@/marketplace/details/plan/utils';
+import { getCustomer } from '@/workspace/selectors';
 
-type StateProps = ReturnType<typeof mapStateToProps>;
+export const OrderDetailsSummary: FC<{
+  offering: PublicOfferingDetails;
+  [key: string]: any;
+}> = (props) => {
+  const customer = useSelector(getCustomer);
+  const prices = useOrderPrices(props);
 
-const mapStateToProps = (state: RootState, ownProps: OrderSummaryProps) => {
-  const customer = getCustomer(state);
-  return {
-    customer,
-    project: getProject(state),
-    total: pricesSelector(state, ownProps).total,
-    formData: orderFormDataSelector(state),
-    formValid: formIsValidSelector(state),
-    shouldConcealPrices:
-      isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
-      customer?.display_billing_info_in_projects === false,
-  };
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+    customer?.display_billing_info_in_projects === false;
+
+  return (
+    <SummaryTable
+      prices={prices}
+      shouldConcealPrices={shouldConcealPrices}
+      {...props}
+    />
+  );
 };
-
-export const OrderDetailsSummary = connect<
-  StateProps,
-  {},
-  { offering: PublicOfferingDetails }
->(mapStateToProps)(SummaryTable);

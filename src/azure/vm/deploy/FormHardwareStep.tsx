@@ -1,6 +1,4 @@
 import { FormLabel } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 
 import {
   getImageLabel,
@@ -12,16 +10,13 @@ import { required } from '@/core/validators';
 import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { ORDER_FORM_ID } from '@/marketplace/details/constants';
 
 export const FormHardwareStep = (props: FormStepProps) => {
-  const location = useSelector((state) =>
-    formValueSelector(ORDER_FORM_ID)(state, 'attributes.location'),
-  );
-  const zone = useSelector((state) =>
-    formValueSelector(ORDER_FORM_ID)(state, 'attributes.availability_zone'),
-  );
+  const { attributes = {} } = useOrderFormData();
+  const location = attributes.location;
+  const zone = attributes.availability_zone;
 
   return (
     <VStepperFormStepCard
@@ -35,7 +30,6 @@ export const FormHardwareStep = (props: FormStepProps) => {
         <AsyncSelectField
           key={location?.uuid}
           name="attributes.image"
-          required={true}
           validate={required}
           loadOptions={(query, prevOptions, currentPage) =>
             location
@@ -67,7 +61,6 @@ export const FormHardwareStep = (props: FormStepProps) => {
         <AsyncSelectField
           key={`${location?.uuid}-${zone?.value}`}
           name="attributes.size"
-          required={true}
           validate={required}
           isDisabled={!location || !zone}
           loadOptions={(query, prevOptions, currentPage) =>

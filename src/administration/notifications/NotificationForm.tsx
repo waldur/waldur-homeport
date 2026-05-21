@@ -53,7 +53,7 @@ const NotificationTabs = ({
           template.path.endsWith('message.txt') ? (
             <Field
               name={`${name}.content`}
-              component={MonacoField as any}
+              component={MonacoField}
               validate={required}
               language="django-html"
               height={400}
@@ -61,7 +61,7 @@ const NotificationTabs = ({
           ) : (
             <Field
               name={`${name}.content`}
-              component={TextField as any}
+              component={TextField}
               rows={template.path.endsWith('subject.txt') ? 4 : 10}
               type="text"
               placeholder={template.original_content}

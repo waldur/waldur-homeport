@@ -65,7 +65,9 @@ export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
             >
               <Form.Check.Input
                 type="radio"
-                {...props.input} // Spreads name, onBlur, etc.
+                name={props.input.name}
+                onBlur={props.input.onBlur}
+                onFocus={props.input.onFocus}
                 value={choice.value}
                 checked={props.input?.value === choice.value}
                 onChange={() => {

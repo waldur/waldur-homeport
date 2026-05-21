@@ -138,8 +138,8 @@ export const OfferingsPanel: FunctionComponent<{
   const getPage = (page) => {
     if (category && category.uuid === RECENTLY_ADDED_OFFERINGS_UUID) {
       return Promise.resolve({
-        pageElements: lastOfferings,
-        itemCount: lastOfferings.length,
+        pageElements: lastOfferings || [],
+        itemCount: lastOfferings?.length || 0,
       });
     } else if (!category) {
       return Promise.resolve({

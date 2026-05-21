@@ -150,7 +150,7 @@ export const ProjectOrderAutoApprovalEditDialog: FC<EditDialogProps> = ({
             >
               <Field
                 name="enabled"
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 hideLabel
                 type="checkbox"
                 label={translate('Enabled')}
@@ -160,7 +160,7 @@ export const ProjectOrderAutoApprovalEditDialog: FC<EditDialogProps> = ({
             <FormGroup label={translate('Monthly cost limit')} required>
               <Field
                 name="monthly_cost_limit"
-                component={NumberField as any}
+                component={NumberField}
                 unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
                 min={0}
                 step="0.01"

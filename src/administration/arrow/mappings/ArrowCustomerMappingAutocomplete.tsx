@@ -1,7 +1,11 @@
+import { FieldValidator } from 'final-form';
 import { FunctionComponent, useCallback } from 'react';
+import { Field } from 'react-final-form';
 import { Props as SelectProps } from 'react-select';
-import { BaseFieldProps, Field } from 'redux-form';
-import { adminArrowCustomerMappingsList } from 'waldur-js-client';
+import {
+  adminArrowCustomerMappingsList,
+  ArrowCustomerMapping,
+} from 'waldur-js-client';
 
 import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
@@ -10,7 +14,7 @@ interface ArrowCustomerMappingAutocompleteProps {
   name?: string;
   placeholder?: string;
   reactSelectProps?: Partial<SelectProps>;
-  validator?: BaseFieldProps['validate'];
+  validator?: FieldValidator<ArrowCustomerMapping>;
 }
 
 /**
@@ -59,8 +63,6 @@ export const ArrowCustomerMappingAutocomplete: FunctionComponent<
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No Arrow customer mappings found')}
           isClearable={true}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
           {...props.reactSelectProps}
         />
       )}

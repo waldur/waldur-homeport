@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   MarketplaceProviderOfferingsListData,
   OfferingState,
@@ -10,7 +9,6 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const OfferingStateOptions: OfferingStateOption[] = [
@@ -68,32 +66,25 @@ const PureMarketplaceProviderOfferingsFilter: FunctionComponent<{}> = () => (
 export const MarketplaceProviderOfferingsFilterFormId =
   'MarketplaceProviderOfferingsFilter';
 
-interface MarketplaceProviderOfferingsFilterFormData {
+export interface MarketplaceProviderOfferingsFilterFormData {
   state: OfferingStateOption[];
 }
 
-export const MarketplaceProviderOfferingsFilter = reduxForm<
-  MarketplaceProviderOfferingsFilterFormData,
-  {}
->({
-  form: MarketplaceProviderOfferingsFilterFormId,
-  destroyOnUnmount: false,
-  initialValues: {
-    state: [
-      { label: translate('Draft'), value: 'Draft' },
-      { label: translate('Active'), value: 'Active' },
-    ],
-  },
-})(PureMarketplaceProviderOfferingsFilter);
+export const MarketplaceProviderOfferingsFilter =
+  PureMarketplaceProviderOfferingsFilter;
+export const MarketplaceProviderOfferingsFilterInitialValues = {
+  state: [
+    { label: translate('Draft'), value: 'Draft' },
+    { label: translate('Active'), value: 'Active' },
+  ],
+};
 
 type MarketplaceProviderOfferingsFilterQuery =
   MarketplaceProviderOfferingsListData['query'];
 
-export const selectMarketplaceProviderOfferingsFilter = createSelector<
-  RootState,
-  Partial<MarketplaceProviderOfferingsFilterFormData>,
-  MarketplaceProviderOfferingsFilterQuery
->(getFormValues(MarketplaceProviderOfferingsFilterFormId), (values) => {
+export const selectMarketplaceProviderOfferingsFilter = (
+  values?: Partial<MarketplaceProviderOfferingsFilterFormData>,
+): MarketplaceProviderOfferingsFilterQuery => {
   const filter: MarketplaceProviderOfferingsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -101,4 +92,4 @@ export const selectMarketplaceProviderOfferingsFilter = createSelector<
     }
   }
   return filter;
-});
+};

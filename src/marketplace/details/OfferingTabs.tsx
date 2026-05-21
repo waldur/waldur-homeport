@@ -48,7 +48,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
         !isFeatureVisible(
           MarketplaceFeatures.conceal_offering_pricing_tab_in_public_view,
         ) &&
-        !props.offering.plugin_options['conceal_billing_data'] &&
+        !props.offering.plugin_options?.conceal_billing_data &&
         props.offering.plans?.length > 0 &&
         !props.concealBillingInfo,
       title: translate('Pricing'),
@@ -60,7 +60,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
         !isFeatureVisible(
           MarketplaceFeatures.conceal_offering_pricing_tab_in_public_view,
         ) &&
-        !props.offering.plugin_options['conceal_billing_data'],
+        !props.offering.plugin_options?.conceal_billing_data,
       title: translate('Components'),
       component: () => (
         <PublicOfferingComponentsTable

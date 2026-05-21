@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   CampaignStateEnum,
   PromotionsCampaignsListData,
@@ -10,7 +9,6 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const CampaignStateOptions: CampaignStateOption[] = [
@@ -101,26 +99,18 @@ const PurePromotionsCampaignsFilter: FunctionComponent<{}> = () => (
 
 export const PromotionsCampaignsFilterFormId = 'PromotionsCampaignsFilter';
 
-interface PromotionsCampaignsFilterFormData {
+export interface PromotionsCampaignsFilterFormData {
   state: CampaignStateOption[];
   discount_type: DiscountTypeOption;
 }
 
-export const PromotionsCampaignsFilter = reduxForm<
-  PromotionsCampaignsFilterFormData,
-  {}
->({
-  form: PromotionsCampaignsFilterFormId,
-  destroyOnUnmount: false,
-})(PurePromotionsCampaignsFilter);
+export const PromotionsCampaignsFilter = PurePromotionsCampaignsFilter;
 
 type PromotionsCampaignsFilterQuery = PromotionsCampaignsListData['query'];
 
-export const selectPromotionsCampaignsFilter = createSelector<
-  RootState,
-  Partial<PromotionsCampaignsFilterFormData>,
-  PromotionsCampaignsFilterQuery
->(getFormValues(PromotionsCampaignsFilterFormId), (values) => {
+export const selectPromotionsCampaignsFilter = (
+  values?: Partial<PromotionsCampaignsFilterFormData>,
+): PromotionsCampaignsFilterQuery => {
   const filter: PromotionsCampaignsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -131,4 +121,4 @@ export const selectPromotionsCampaignsFilter = createSelector<
     }
   }
   return filter;
-});
+};

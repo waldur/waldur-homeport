@@ -4,7 +4,7 @@ import { remoteWaldurApiRemoteCustomers } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormContainerFinal, SelectField } from '@/form';
+import { FormContainer, SelectField } from '@/form';
 import { translate } from '@/i18n';
 
 import { ErredRemoteConnection } from './ErredRemoteConnection';
@@ -35,7 +35,7 @@ export const SelectOrganizationTab = () => {
   });
 
   return (
-    <FormContainerFinal submitting={false} className="size-lg">
+    <FormContainer submitting={false} className="size-lg">
       <SelectField
         name="customer"
         label={translate('Organization')}
@@ -59,6 +59,6 @@ export const SelectOrganizationTab = () => {
           {translate('There are no organizations yet.')}
         </p>
       ) : null}
-    </FormContainerFinal>
+    </FormContainer>
   );
 };

@@ -6,7 +6,7 @@ import { NestedRound, proposalProposalsCreate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -105,7 +105,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
               valueCol={8}
               space={2}
             />
-            <FormContainerFinal
+            <FormContainer
               submitting={submitting || isPending}
               className="mt-7"
             >
@@ -116,7 +116,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                 validate={required}
                 spaceless
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

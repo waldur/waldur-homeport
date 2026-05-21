@@ -1,10 +1,9 @@
 import { useQueries } from '@tanstack/react-query';
-import { useSelector } from 'react-redux';
 import { openstackFlavorsList } from 'waldur-js-client';
 
 import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
-import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { Offering } from '@/marketplace/types';
 import { loadVolumeTypes } from '@/openstack/api';
@@ -13,12 +12,9 @@ import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/
 import { InstallLonghornField } from './InstallLonghornField';
 
 export const FormLonghornStep = (props: FormStepProps) => {
-  const enabled: boolean = useSelector((state) =>
-    orderFormSelector(state, 'attributes.install_longhorn'),
-  );
-  const openstackOffering: Offering = useSelector((state) =>
-    orderFormSelector(state, 'attributes.openstack_offering'),
-  );
+  const { attributes = {} } = useOrderFormData();
+  const enabled: boolean = attributes.install_longhorn;
+  const openstackOffering: Offering = attributes.openstack_offering;
   const [_, _volume_types] = useQueries({
     queries: [
       {

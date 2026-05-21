@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   ProposalProposalsListData,
@@ -22,7 +21,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -103,7 +101,6 @@ const PureProposalProposalsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -135,7 +132,6 @@ const PureProposalProposalsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -158,7 +154,6 @@ const PureProposalProposalsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -185,7 +180,6 @@ const PureProposalProposalsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -199,7 +193,7 @@ interface ProposalProposalsFilterProps {
   callUuid?: any;
 }
 
-interface ProposalProposalsFilterFormData {
+export interface ProposalProposalsFilterFormData {
   state: ProposalStatesOption[];
   call: PublicCall;
   round: ProtectedRound;
@@ -207,21 +201,13 @@ interface ProposalProposalsFilterFormData {
   applicant: User;
 }
 
-export const ProposalProposalsFilter = reduxForm<
-  ProposalProposalsFilterFormData,
-  ProposalProposalsFilterProps
->({
-  form: ProposalProposalsFilterFormId,
-  destroyOnUnmount: false,
-})(PureProposalProposalsFilter);
+export const ProposalProposalsFilter = PureProposalProposalsFilter;
 
 type ProposalProposalsFilterQuery = ProposalProposalsListData['query'];
 
-export const selectProposalProposalsFilter = createSelector<
-  RootState,
-  Partial<ProposalProposalsFilterFormData>,
-  ProposalProposalsFilterQuery
->(getFormValues(ProposalProposalsFilterFormId), (values) => {
+export const selectProposalProposalsFilter = (
+  values?: Partial<ProposalProposalsFilterFormData>,
+): ProposalProposalsFilterQuery => {
   const filter: ProposalProposalsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -241,4 +227,4 @@ export const selectProposalProposalsFilter = createSelector<
     }
   }
   return filter;
-});
+};

@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { OpenstackImagesListData } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureOpenstackImagesFilter: FunctionComponent<{}> = () => (
@@ -28,25 +26,17 @@ const PureOpenstackImagesFilter: FunctionComponent<{}> = () => (
 
 export const OpenstackImagesFilterFormId = 'OpenstackImagesFilter';
 
-interface OpenstackImagesFilterFormData {
+export interface OpenstackImagesFilterFormData {
   show_duplicate_names: boolean;
 }
 
-export const OpenstackImagesFilter = reduxForm<
-  OpenstackImagesFilterFormData,
-  {}
->({
-  form: OpenstackImagesFilterFormId,
-  destroyOnUnmount: false,
-})(PureOpenstackImagesFilter);
+export const OpenstackImagesFilter = PureOpenstackImagesFilter;
 
 type OpenstackImagesFilterQuery = OpenstackImagesListData['query'];
 
-export const selectOpenstackImagesFilter = createSelector<
-  RootState,
-  Partial<OpenstackImagesFilterFormData>,
-  OpenstackImagesFilterQuery
->(getFormValues(OpenstackImagesFilterFormId), (values) => {
+export const selectOpenstackImagesFilter = (
+  values?: Partial<OpenstackImagesFilterFormData>,
+): OpenstackImagesFilterQuery => {
   const filter: OpenstackImagesFilterQuery = {} as any;
   if (values) {
     if (values.show_duplicate_names) {
@@ -54,4 +44,4 @@ export const selectOpenstackImagesFilter = createSelector<
     }
   }
   return filter;
-});
+};

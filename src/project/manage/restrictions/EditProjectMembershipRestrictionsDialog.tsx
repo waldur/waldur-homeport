@@ -10,7 +10,7 @@ import {
 } from '@/core/restrictions';
 import { SubmitButton } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -99,14 +99,14 @@ export const EditProjectMembershipRestrictionsDialog: FC<
               </>
             }
           >
-            <FormContainerFinal submitting={isPending}>
+            <FormContainer submitting={isPending}>
               <CommaSeparatedListField
                 name="value"
                 label={config.label}
                 placeholder={config.placeholder}
                 description={config.description}
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

@@ -1,10 +1,13 @@
-import { FC, useState } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { selectMarketplaceStatsOpenstackInstancesFilter } from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
+import {
+  selectMarketplaceStatsOpenstackInstancesFilter,
+  MarketplaceStatsOpenstackInstancesFilterFormId,
+} from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
 
 import { ReportingTitle } from '../ReportingTitle';
 
@@ -13,9 +16,15 @@ import { OpenstackInstancesAggregateView } from './OpenstackInstancesAggregateVi
 import { OpenstackInstancesSummaryCards } from './OpenstackInstancesSummaryCards';
 import { OpenstackInstancesTable } from './OpenstackInstancesTable';
 
-export const OpenstackInstancesPage: FC = () => {
+const OpenstackInstancesPageTable: FC = () => {
   const [activeTab, setActiveTab] = useState<string>('instances');
-  const filter = useSelector(selectMarketplaceStatsOpenstackInstancesFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectMarketplaceStatsOpenstackInstancesFilter(values),
+    [values],
+  );
+
   const { data: summary, isLoading: summaryLoading } =
     useOpenstackInstancesSummary(filter);
 
@@ -55,3 +64,15 @@ export const OpenstackInstancesPage: FC = () => {
     </>
   );
 };
+
+export const OpenstackInstancesPage: FC<any> = (props) => (
+  <Form
+    id={MarketplaceStatsOpenstackInstancesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <OpenstackInstancesPageTable {...props} />}
+  </Form>
+);

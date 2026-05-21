@@ -1,6 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
+import { FC, useCallback, useState } from 'react';
 import { autoprovisioningRulesPartialUpdate, Rule } from 'waldur-js-client';
 
 import { ProgressStep } from '@/core/ProgressSteps';
@@ -8,6 +6,7 @@ import { AtLeast } from '@/core/types';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { Category, Offering, Plan } from '@/marketplace/types';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormThirdPage as Step2AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
 
@@ -52,6 +51,17 @@ const steps: ProgressStep[] = [
 export const RuleAddTemplateDialog: FC<RuleAddTemplateDialogProps> = (
   props,
 ) => {
+  const { closeDialog } = useModal();
+  const [wizardSteps, setWizardSteps] = useState(() => {
+    const mainOffering = props.initialValues?.offering;
+    return mainOffering?.options?.order?.length
+      ? { steps, wizardForms: WizardForms }
+      : {
+          steps: [steps[0], steps[2]],
+          wizardForms: [WizardForms[0], WizardForms[2]],
+        };
+  });
+
   const submitMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>
       autoprovisioningRulesPartialUpdate({
@@ -70,34 +80,32 @@ export const RuleAddTemplateDialog: FC<RuleAddTemplateDialogProps> = (
   });
 
   const submitForm = useCallback(
-    async (formData, formProps) => {
+    async (formData) => {
       await submitMutation.mutateAsync(formData);
-      formProps.destroy();
+      closeDialog();
     },
-    [submitMutation],
+    [submitMutation, closeDialog],
   );
 
-  /** Auto filling `offering` in step 1 */
-  const mainOffering: Offering = useSelector((state) =>
-    formValueSelector('RuleAddTemplateForm')(state, 'offering'),
-  );
-
-  const WizardStepsData = useMemo(() => {
-    return mainOffering?.options?.order?.length
-      ? { steps, wizardForms: WizardForms }
-      : {
-          steps: [steps[0], steps[2]],
-          wizardForms: [WizardForms[0], WizardForms[2]],
-        };
-  }, [mainOffering]);
+  const handleFormChange = useCallback((values) => {
+    const mainOffering = values?.offering;
+    if (mainOffering?.options?.order?.length) {
+      setWizardSteps({ steps, wizardForms: WizardForms });
+    } else {
+      setWizardSteps({
+        steps: [steps[0], steps[2]],
+        wizardForms: [WizardForms[0], WizardForms[2]],
+      });
+    }
+  }, []);
 
   return (
     <WizardFormContainer
-      form="RuleAddTemplateForm"
       onSubmit={submitForm}
       submitLabel={translate('Confirm')}
-      steps={WizardStepsData.steps}
-      wizardForms={WizardStepsData.wizardForms}
+      steps={wizardSteps.steps}
+      wizardForms={wizardSteps.wizardForms}
+      onChange={handleFormChange}
       title={
         props.resolve.rule.plan
           ? translate('Edit template')

@@ -14,7 +14,7 @@ import React, {
   useMemo,
 } from 'react';
 import { FormCheck } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Tip } from '@/core/Tooltip';
@@ -631,10 +631,10 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
               {fieldType ? (
                 <Field
                   name={fieldName}
-                  component={(fieldProps) =>
-                    renderRow(row, rowIndex, fieldProps)
+                  render={({ input, meta }) =>
+                    renderRow(row, rowIndex, { input, meta })
                   }
-                  validate={validate}
+                  validate={validate as any}
                 />
               ) : (
                 renderRow(row, rowIndex)

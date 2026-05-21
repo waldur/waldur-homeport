@@ -1,13 +1,12 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import { Project, projectsList } from 'waldur-js-client';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
-import { syncFiltersToURL, useReinitializeFilterFromUrl } from '@/core/filters';
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
 import { isFeatureVisible } from '@/features/connect';
@@ -37,53 +36,50 @@ import { ProjectsListFilter } from './ProjectsListFilter';
 
 const FILTER_FORM_ID = 'affiliationProjectsListFilter';
 
-const mapStateToFilter = createSelector(
-  getFormValues(FILTER_FORM_ID),
-  getUser,
-  (stateFilter: any, user) => {
-    const filter: any = {};
+const ProjectsListTable = () => {
+  useTitle(translate('Projects'), '', 'browser');
+
+  const { values } = useFormState();
+  const stateFilter = values;
+  const user = useSelector(getUser);
+
+  // Sync filter form values to URL when they change
+  useEffect(() => {
+    if (stateFilter) {
+      syncFiltersToURL(stateFilter);
+    }
+  }, [stateFilter]);
+
+  const filter = useMemo(() => {
+    const filterObj: any = {};
     if (
       stateFilter &&
       stateFilter.organization &&
       Array.isArray(stateFilter.organization)
     ) {
-      filter.customer = stateFilter.organization.map((x) => x.uuid).join(',');
+      filterObj.customer = stateFilter.organization
+        .map((x) => x.uuid)
+        .join(',');
     }
     if (stateFilter && stateFilter.conceal_finished_projects) {
-      filter.conceal_finished_projects = stateFilter.conceal_finished_projects;
+      filterObj.conceal_finished_projects =
+        stateFilter.conceal_finished_projects;
     }
     if (stateFilter && stateFilter.include_terminated) {
-      filter.include_terminated = stateFilter.include_terminated;
+      filterObj.include_terminated = stateFilter.include_terminated;
     }
     if (
       stateFilter &&
       stateFilter.is_removed !== undefined &&
       stateFilter.is_removed !== ''
     ) {
-      filter.is_removed = stateFilter.is_removed;
+      filterObj.is_removed = stateFilter.is_removed;
     }
     if (user) {
-      filter.user_uuid = user.uuid;
+      filterObj.user_uuid = user.uuid;
     }
-    return filter;
-  },
-);
-
-export const ProjectsList = () => {
-  useTitle(translate('Projects'), '', 'browser');
-
-  // Load filters from URL on mount
-  useReinitializeFilterFromUrl(FILTER_FORM_ID);
-
-  const filter = useSelector(mapStateToFilter);
-  const formValues = useSelector(getFormValues(FILTER_FORM_ID));
-
-  // Sync filter form values to URL when they change
-  useEffect(() => {
-    if (formValues) {
-      syncFiltersToURL(formValues);
-    }
-  }, [formValues]);
+    return filterObj;
+  }, [stateFilter, user]);
 
   const props = useTable({
     table: PROJECTS_LIST,
@@ -336,6 +332,7 @@ export const ProjectsList = () => {
     <Table
       {...props}
       columns={columns}
+      formId={FILTER_FORM_ID}
       verboseName={translate('projects')}
       title={translate('Projects')}
       gridSize={{ md: 6, xl: 4 }}
@@ -369,5 +366,18 @@ export const ProjectsList = () => {
       enableMultiSelect
       multiSelectActions={BatchProjectActions}
     />
+  );
+};
+
+export const ProjectsList = () => {
+  const initialValues = useMemo(() => getInitialValues(), []);
+  return (
+    <Form
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+      initialValues={initialValues}
+    >
+      {() => <ProjectsListTable />}
+    </Form>
   );
 };

@@ -141,8 +141,6 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
           options={periodOptions}
           isClearable={false}
           isDisabled={isPending}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
         <Form.Text className="text-muted">
           {translate('Select the billing period to sync')}

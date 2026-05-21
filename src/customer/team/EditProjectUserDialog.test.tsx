@@ -12,15 +12,7 @@ import {
 
 import { EditProjectUserDialog } from './EditProjectUserDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    projectsAddUser: vi.fn(),
-    projectsDeleteUser: vi.fn(),
-    projectsUpdateUser: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/i18n', () => ({
   translate: (key) => key,

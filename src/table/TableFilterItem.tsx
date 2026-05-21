@@ -10,9 +10,8 @@ import React, {
   useState,
 } from 'react';
 import { Accordion } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useFormState } from 'react-final-form';
 import { useDebounce } from 'react-use';
-import { Field, change, formValueSelector } from 'redux-form';
 
 import { Badge } from '@/core/Badge';
 import { SubmitButton } from '@/form';
@@ -48,6 +47,7 @@ const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
   },
   ...props
 }) => {
+  const { values } = useFormState({ subscription: { values: true } });
   const [open, setOpen] = React.useState(false);
   const toggleClick = React.useCallback(
     (value, e) => {
@@ -61,6 +61,8 @@ const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
     [setOpen],
   );
 
+  const value = values?.[props.name];
+
   return (
     <button
       type="button"
@@ -71,23 +73,18 @@ const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
     >
       {props.title}
       {open && <div className="filter-field">{props.children}</div>}
-      <Field
-        name={props.name}
-        component={({ input: { value } }) =>
-          !['', undefined].includes(value) ? (
-            <div
-              className="filter-value"
-              style={!props.ellipsis ? { maxWidth: 'unset' } : undefined}
-            >
-              {badgeValue(value) ? (
-                <Badge variant="default" pill outline>
-                  {badgeValue(value)}
-                </Badge>
-              ) : null}
-            </div>
-          ) : null
-        }
-      />
+      {!['', undefined].includes(value) ? (
+        <div
+          className="filter-value"
+          style={!props.ellipsis ? { maxWidth: 'unset' } : undefined}
+        >
+          {badgeValue(value) ? (
+            <Badge variant="default" pill outline>
+              {badgeValue(value)}
+            </Badge>
+          ) : null}
+        </div>
+      ) : null}
 
       <span className="svg-icon svg-icon-3 rotate-90 ms-2 lh-base">
         <CaretDownIcon size={20} weight="bold" />
@@ -194,7 +191,8 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
   },
   ...props
 }) => {
-  const { setFilter, form } = React.useContext(TableFilterContext);
+  const { setFilter, changeFormField } = React.useContext(TableFilterContext);
+  const { values } = useFormState({ subscription: { values: true } });
 
   const _setFilter = useCallback(
     (value) => {
@@ -217,7 +215,6 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
     [props, setFilter],
   );
 
-  const dispatch = useDispatch();
   const removeValue = useCallback(
     (prevValue, value) => {
       let newValue;
@@ -226,15 +223,15 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
       } else {
         newValue = null;
       }
-      dispatch(change(form, props.name, newValue, true));
+      if (changeFormField) {
+        changeFormField(props.name, newValue);
+      }
       _setFilter(newValue);
     },
-    [dispatch, form, props.name, _setFilter],
+    [changeFormField, props.name, _setFilter],
   );
 
-  const itemValue = useSelector((state) =>
-    form ? formValueSelector(form)(state, props.name) : null,
-  );
+  const itemValue = values?.[props.name];
   useEffect(() => {
     _setFilter(itemValue);
     if (props.onApply)
@@ -253,18 +250,13 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
           {props.children}
         </div>
         {props.showValueBadge && (
-          <Field
-            name={props.name}
-            component={({ input: { value } }) => (
-              <TableSidebarFilterValues
-                value={value}
-                getValueLabel={getValueLabel}
-                badgeValue={props.badgeValue}
-                ellipsis={props.ellipsis}
-                remove={removeValue}
-                hideRemoveButton={props.hideRemoveButton}
-              />
-            )}
+          <TableSidebarFilterValues
+            value={itemValue}
+            getValueLabel={getValueLabel}
+            badgeValue={props.badgeValue}
+            ellipsis={props.ellipsis}
+            remove={removeValue}
+            hideRemoveButton={props.hideRemoveButton}
           />
         )}
       </Accordion.Body>
@@ -287,12 +279,13 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
 }) => {
   const {
     setFilter,
-    form,
+    changeFormField,
     apply,
     columnFilter,
     selectedSavedFilter,
     registerFilterComponent,
   } = React.useContext(TableFilterContext);
+  const { values } = useFormState({ subscription: { values: true } });
 
   const _setFilter = useCallback(
     (value) => {
@@ -323,7 +316,6 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
     });
   }, [props.name, _setFilter]);
 
-  const dispatch = useDispatch();
   const removeValue = useCallback(
     (prevValue, value) => {
       let newValue;
@@ -333,16 +325,16 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
         newValue = null;
       }
       apply(false);
-      dispatch(change(form, props.name, newValue, true));
+      if (changeFormField) {
+        changeFormField(props.name, newValue);
+      }
       _setFilter(newValue);
       apply(true);
     },
-    [dispatch, form, props.name, _setFilter],
+    [changeFormField, props.name, _setFilter, apply],
   );
 
-  const itemValue = useSelector((state) =>
-    form ? formValueSelector(form)(state, props.name) : null,
-  );
+  const itemValue = values?.[props.name];
 
   // The filter field must have an initial value (at least null) so that the filter menu popup does not close when setting this filter for the first time.
   // Wait a moment for the filters to set to the form. Then use them in the table state.
@@ -350,8 +342,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
   useDebounce(
     () => {
       _setFilter(itemValue);
-      if (itemValue === null) {
-        dispatch(change(form, props.name, null));
+      if (itemValue === null && changeFormField) {
+        changeFormField(props.name, null);
       }
     },
     DELAY_WAITING_FOR_FILTER,

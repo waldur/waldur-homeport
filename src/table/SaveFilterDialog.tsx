@@ -3,7 +3,7 @@ import { Form } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { StringField, SubmitButton } from '@/form';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -59,7 +59,7 @@ export const SaveFilterDialog = (props: SaveFilterDialogProps) => {
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <StringField
                 name="name"
                 label={translate('Filter name')}
@@ -68,7 +68,7 @@ export const SaveFilterDialog = (props: SaveFilterDialogProps) => {
                 validate={required}
                 spaceless
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

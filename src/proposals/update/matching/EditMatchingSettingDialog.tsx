@@ -176,7 +176,7 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
                 <FormGroup label={FIELD_LABELS[resolve.name]}>
                   <Field
                     name={resolve.name}
-                    component={NumberField as any}
+                    component={NumberField}
                     min={0}
                     max={1}
                     step={0.1}
@@ -200,7 +200,7 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
                 <FormGroup label={FIELD_LABELS[resolve.name]}>
                   <Field
                     name={resolve.name}
-                    component={NumberField as any}
+                    component={NumberField}
                     min={1}
                     max={20}
                   />
@@ -223,7 +223,7 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
                 <FormGroup label={FIELD_LABELS[resolve.name]}>
                   <Field
                     name={resolve.name}
-                    component={SelectField as any}
+                    component={SelectField}
                     options={SELECT_FIELD_OPTIONS[resolve.name] || []}
                     simpleValue
                     placeholder={translate('Select an option...')}

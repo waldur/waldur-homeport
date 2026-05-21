@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { adminArrowBillingSyncsList, ArrowBillingSync } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -12,6 +12,7 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   AdminArrowBillingSyncsFilter as BillingSyncFilter,
   selectAdminArrowBillingSyncsFilter as selectBillingSyncFilter,
+  AdminArrowBillingSyncsFilterFormId,
 } from '@/table/generated/AdminArrowBillingSyncsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -44,10 +45,11 @@ interface BillingSyncListProps {
   settings?: { uuid: string } | null;
 }
 
-export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
+const BillingSyncListTable: FunctionComponent<BillingSyncListProps> = ({
   settings,
 }) => {
-  const formFilter = useSelector(selectBillingSyncFilter);
+  const { values } = useFormState();
+  const formFilter = useMemo(() => selectBillingSyncFilter(values), [values]);
 
   const billingPeriods = useMemo(
     () =>
@@ -152,7 +154,20 @@ export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
         filters={<BillingSyncFilter billingPeriods={billingPeriods} />}
         rowActions={({ row }) => <BillingSyncActions row={row} />}
         tableActions={<BillingSyncButton refetch={tableProps.fetch} />}
+        formId={AdminArrowBillingSyncsFilterFormId}
       />
     </div>
   );
 };
+
+export const BillingSyncList = (props) => (
+  <Form
+    id={AdminArrowBillingSyncsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <BillingSyncListTable {...props} />}
+  </Form>
+);

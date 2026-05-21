@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
 import { useCallback, useMemo, useState } from 'react';
 import { FormLabel } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { openstackImagesList } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
@@ -77,14 +77,16 @@ export const FormImageStep = (props: FormStepProps) => {
           {translate('There are no option to choose.')}
         </p>
       ) : (
-        <Field
-          name="attributes.image"
-          validate={[required]}
-          component={BoxRadioField}
-          choices={choices}
-          vertical
-          required
-        />
+        <Field name="attributes.image" validate={required}>
+          {(fieldProps) => (
+            <BoxRadioField
+              {...fieldProps}
+              choices={choices}
+              vertical
+              required
+            />
+          )}
+        </Field>
       )}
     </VStepperFormStepCard>
   );

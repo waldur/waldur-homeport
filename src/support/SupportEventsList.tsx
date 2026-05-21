@@ -1,13 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 
 import { BaseEventsList } from '@/events/BaseEventsList';
 import {
   EventsFilter as SupportEventsFilter,
   selectEventsFilter as selectSupportEventsFilter,
+  EventsFilterFormId,
 } from '@/table/generated/EventsFilter';
 
-export const SupportEventsList = () => {
-  const filter = useSelector(selectSupportEventsFilter);
+const SupportEventsListTable = () => {
+  const { values } = useFormState();
+  const filter = useMemo(() => selectSupportEventsFilter(values), [values]);
 
   return (
     <BaseEventsList
@@ -17,3 +20,15 @@ export const SupportEventsList = () => {
     />
   );
 };
+
+export const SupportEventsList = (props) => (
+  <Form
+    id={EventsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <SupportEventsListTable {...props} />}
+  </Form>
+);

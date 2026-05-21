@@ -81,7 +81,7 @@ export const EventSubscriptionForm = ({
             <FormGroup label={translate('Description')}>
               <Field
                 name="description"
-                component={TextField as any}
+                component={TextField}
                 placeholder={translate(
                   'Enter a description for this subscription',
                 )}

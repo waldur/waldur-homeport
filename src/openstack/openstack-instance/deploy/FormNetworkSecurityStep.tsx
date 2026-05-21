@@ -2,9 +2,10 @@ import { PlusCircleIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Form, FormLabel, Row } from 'react-bootstrap';
+import { Field, useForm } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { components } from 'react-select';
 import { useToggle } from 'react-use';
-import { Field, FieldArray } from 'redux-form';
 import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
@@ -77,7 +78,14 @@ const CustomIpField = ({
   return (
     <Field
       name={`${parentName}.fixed_ip`}
-      component={(fieldProps) => (
+      validate={(value) => {
+        if (selected?.value === false) return undefined;
+        const req = required(value);
+        if (req) return req;
+        return isOutsideRange(value);
+      }}
+    >
+      {({ input, meta }) => (
         <div>
           <FormLabel>{translate('Custom IP')}</FormLabel>
           <Select
@@ -86,35 +94,31 @@ const CustomIpField = ({
             value={options.find((opt) => opt.value === selected?.value)}
             onChange={(opt) => {
               setSelected(opt);
-              fieldProps.input.onChange(opt.value === 'other' ? '' : opt.value);
+              input.onChange(opt.value === 'other' ? '' : opt.value);
             }}
+            onBlur={input.onBlur}
           />
 
           <StringField
             placeholder={translate('Enter custom IP')}
-            value={fieldProps.input?.value}
-            onChange={fieldProps.input.onChange}
+            value={input?.value}
+            onChange={input.onChange}
             hidden={selected?.value !== 'other'}
             className="mt-4"
             autoFocus={autoFocus}
           />
 
-          {fieldProps.meta.dirty &&
-            (fieldProps.meta.error ? (
-              <FieldError error={fieldProps.meta.error} />
-            ) : fieldProps.meta.warning ? (
+          {(meta.touched || meta.submitFailed) &&
+            (meta.error ? (
+              <FieldError error={meta.error} />
+            ) : isOutsideAllocationPool(input.value) ? (
               <Form.Text className="text-warning" as="div">
-                {fieldProps.meta.warning}
+                {isOutsideAllocationPool(input.value)}
               </Form.Text>
             ) : null)}
         </div>
       )}
-      validate={
-        selected?.value === false ? undefined : [required, isOutsideRange]
-      }
-      warn={selected?.value === false ? undefined : [isOutsideAllocationPool]}
-      required={true}
-    />
+    </Field>
   );
 };
 
@@ -174,9 +178,8 @@ const renderNetworkRows = ({
   const availableNetworkItemsFilter = useCallback(
     (itemType) => (item) => {
       let res = true;
-      if (fields.length > 0) {
-        fields.forEach((_, i) => {
-          const net = fields.get(i);
+      if (fields.length > 0 && fields.value) {
+        fields.value.forEach((net) => {
           if (net && net[itemType] && net[itemType].uuid === item.uuid) {
             res = false;
           }
@@ -225,15 +228,17 @@ const renderNetworkRows = ({
     if (fields?.length === 0) {
       addRow();
     }
-  }, []);
+  }, [fields, addRow]);
 
   useEffect(() => {
-    if (!hasCustomIp) {
-      fields.forEach((_, index) => {
-        delete fields.get(index).fixed_ip;
+    if (!hasCustomIp && fields.value) {
+      fields.value.forEach((val, index) => {
+        if (val && val.fixed_ip !== undefined) {
+          fields.update(index, { ...val, fixed_ip: undefined });
+        }
       });
     }
-  }, [hasCustomIp]);
+  }, [hasCustomIp, fields]);
 
   return (
     <div className="mb-5">
@@ -247,7 +252,7 @@ const renderNetworkRows = ({
                   label={translate('Subnet')}
                   component={FormGroup}
                   options={freeSubnets}
-                  validate={[required]}
+                  validate={required}
                   required={true}
                   placeholder={translate('Select subnet')}
                   getOptionValue={(option) => option.url}
@@ -265,9 +270,9 @@ const renderNetworkRows = ({
                   label={translate('Floating IP')}
                   component={FormGroup}
                   options={freeFloatingIps}
-                  validate={[required]}
+                  validate={required}
                   required={true}
-                  isDisabled={!fields.get(index)?.subnet?.uuid}
+                  isDisabled={!fields.value[index]?.subnet?.uuid}
                   getOptionValue={(option) => option.url}
                   getOptionLabel={(option) => option.address}
                   noUpdateOnBlur
@@ -288,7 +293,7 @@ const renderNetworkRows = ({
                   <Col sm={6}>
                     <CustomIpField
                       parentName={network}
-                      data={fields.get(index)}
+                      data={fields.value[index]}
                       hasAutoOption
                     />
                   </Col>
@@ -313,10 +318,11 @@ const renderNetworkRows = ({
 export const FormNetworkSecurityStep = (props: FormStepProps) => {
   const [customIpEnabled, setCustomIpEnabled] = useToggle(false);
   const [portSecurityEnabled, setPortSecurityEnabled] = useToggle(true);
+  const form = useForm();
 
   useEffect(() => {
-    props.change('attributes.port_security_enabled', portSecurityEnabled);
-  }, [portSecurityEnabled, props.change]);
+    form.change('attributes.port_security_enabled', portSecurityEnabled);
+  }, [portSecurityEnabled, form]);
 
   const { data, isLoading } = useQuery({
     queryKey: ['network-step', props.offering.scope_uuid],
@@ -348,7 +354,6 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
     >
       <div className="mb-5 mt-n4 border-bottom">
         <FormSSHPublicKeysField
-          change={props.change}
           cardBordered={false}
           minHeight="auto"
           headerClassName="mx-0"
@@ -379,7 +384,6 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
       <div className={!portSecurityEnabled ? 'opacity-50 pe-none' : ''}>
         <FormSecurityGroupsField
           offering={props.offering}
-          change={props.change}
           cardBordered={false}
           minHeight="auto"
           headerClassName="mx-0"

@@ -1,8 +1,8 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useEffect, useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import {
   marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
@@ -11,6 +11,7 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -29,7 +30,8 @@ import { CardStyleType } from '../common/cards/index';
 import { OfferingCard } from '../common/OfferingCard';
 import { useCardStyle } from '../landing/CardStyleContext';
 import { getOfferingGridSize } from '../landing/utils';
-import { mapStateToFilter } from '../offerings/admin/AdminOfferingsList';
+import { buildOfferingsFilter } from '../offerings/admin/AdminOfferingsList';
+import { OFFERINGS_FILTER_FORM_ID } from '../offerings/constants';
 import { OfferingsListFilter } from '../offerings/list/OfferingsListFilter';
 import { getStates } from '../offerings/list/OfferingStateFilter';
 import { OfferingStateField } from '../offerings/OfferingStateField';
@@ -94,7 +96,7 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   'project_uuid',
 ];
 
-export const PublicOfferingsList: FunctionComponent<{
+const PublicOfferingsListTable: FunctionComponent<{
   filter?;
   showCategory?;
   showOrganization?;
@@ -111,7 +113,20 @@ export const PublicOfferingsList: FunctionComponent<{
 }) => {
   const contextCardStyle = useCardStyle();
   const resolvedVariant = variant ?? contextCardStyle;
-  const baseFilter = useSelector(mapStateToFilter);
+
+  const { values } = useFormState();
+  const filterValues: any = values;
+
+  useEffect(() => {
+    if (filterValues) {
+      syncFiltersToURL(filterValues);
+    }
+  }, [filterValues]);
+
+  const baseFilter = useMemo(
+    () => buildOfferingsFilter(filterValues),
+    [filterValues],
+  );
 
   const mergedFilter = useMemo(
     () => ({ ...baseFilter, ...filter }),
@@ -218,6 +233,7 @@ export const PublicOfferingsList: FunctionComponent<{
         />
       )}
       hoverShadow={{ grid: false }}
+      formId={OFFERINGS_FILTER_FORM_ID}
       filters={
         <OfferingsListFilter
           showCategory={showCategory}
@@ -231,5 +247,25 @@ export const PublicOfferingsList: FunctionComponent<{
       rowActions={RowActions}
       hasOptionalColumns
     />
+  );
+};
+
+export const PublicOfferingsList: FunctionComponent<{
+  filter?;
+  showCategory?;
+  showOrganization?;
+  initialMode?;
+  variant?: CardStyleType;
+  onTagClick?(tag: NestedTag): void;
+}> = (props) => {
+  const initialValues = useMemo(() => getInitialValues(), []);
+  return (
+    <Form
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+      initialValues={initialValues}
+    >
+      {() => <PublicOfferingsListTable {...props} />}
+    </Form>
   );
 };

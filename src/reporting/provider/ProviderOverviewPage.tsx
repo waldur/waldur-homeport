@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form } from 'react-final-form';
 import { marketplaceServiceProvidersStatRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -89,28 +88,30 @@ const ProviderOverviewContent: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderOverviewPage: FC = () => {
-  const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
-    provider?: { uuid: string };
-  };
-  const providerUuid = formValues?.provider?.uuid;
-
   return (
-    <>
-      <ReportingTitle reportKey="provider-overview">
-        <ProviderFilter />
-      </ReportingTitle>
+    <Form onSubmit={() => {}} subscription={{ values: true }}>
+      {({ values }) => {
+        const providerUuid = values?.provider?.uuid;
+        return (
+          <>
+            <ReportingTitle reportKey="provider-overview">
+              <ProviderFilter />
+            </ReportingTitle>
 
-      {providerUuid ? (
-        <ProviderOverviewContent providerUuid={providerUuid} />
-      ) : (
-        <NoResult
-          title={translate('Select a provider')}
-          message={translate(
-            'Choose a provider from the dropdown above to view statistics.',
-          )}
-          noAction
-        />
-      )}
-    </>
+            {providerUuid ? (
+              <ProviderOverviewContent providerUuid={providerUuid} />
+            ) : (
+              <NoResult
+                title={translate('Select a provider')}
+                message={translate(
+                  'Choose a provider from the dropdown above to view statistics.',
+                )}
+                noAction
+              />
+            )}
+          </>
+        );
+      }}
+    </Form>
   );
 };

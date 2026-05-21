@@ -1,20 +1,15 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { OpenStackFlavor } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { orderFormSelector } from '@/marketplace/deploy/selectors';
-import { type RootState } from '@/store/reducers';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 
 export const LonghornWorkerWarning: FunctionComponent<{}> = () => {
-  const flavor: OpenStackFlavor = useSelector((state: RootState) =>
-    orderFormSelector(state, `attributes.worker_nodes_flavor`),
-  );
-  const longhornSelected = useSelector((state: RootState) =>
-    orderFormSelector(state, `attributes.install_longhorn`),
-  );
+  const { attributes = {} } = useOrderFormData();
+  const flavor: OpenStackFlavor = attributes.worker_nodes_flavor;
+  const longhornSelected = attributes.install_longhorn;
   if (!flavor || (flavor.cores >= 4 && flavor.ram >= 4 * 1024)) {
     return null;
   }

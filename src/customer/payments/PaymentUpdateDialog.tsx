@@ -10,7 +10,7 @@ import { PaymentProofRenderer } from '@/customer/payments/PaymentProofRenderer';
 import { getInitialValues } from '@/customer/payments/utils';
 import {
   FileUploadField,
-  FormContainerFinal,
+  FormContainer,
   NumberField,
   SubmitButton,
 } from '@/form';
@@ -80,7 +80,7 @@ export const PaymentUpdateDialog: FunctionComponent<
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <DateField
                 name="date_of_payment"
                 label={translate('Date')}
@@ -121,7 +121,7 @@ export const PaymentUpdateDialog: FunctionComponent<
                   </div>
                 </Form.Group>
               ) : null}
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

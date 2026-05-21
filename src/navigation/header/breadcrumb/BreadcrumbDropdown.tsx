@@ -6,16 +6,14 @@ import {
 } from '@tanstack/react-query';
 import { debounce, isEqual } from 'lodash-es';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { Field, Form, useFormState } from 'react-final-form';
 import { useBoolean } from 'react-use';
-import { Field, getFormValues } from 'redux-form';
 
 import { InfiniteList } from '@/core/async/InfiniteList';
 import { BaseAsyncListProps, RowData } from '@/core/async/types';
 import { IconButton } from '@/core/buttons/IconButton';
 import { isEmpty } from '@/core/utils';
 import { FilterBox } from '@/form/FilterBox';
-import { Form } from '@/form/Form';
 import { translate } from '@/i18n';
 import { DataPage, processApiResponse, SdkFunction } from '@/table/api';
 
@@ -24,8 +22,6 @@ import { HeaderButtonBullet } from '../HeaderButtonBullet';
 
 import { BreadcrumbDropdownContext } from './BreadcrumbDropdownContext';
 import { FilterSelect } from './FilterSelect';
-
-const FILTERS_FORM_ID = 'BreadcrumbsFiltersForm';
 
 interface BreadcrumbDropdownProps<
   Fetcher extends SdkFunction,
@@ -39,7 +35,7 @@ interface BreadcrumbDropdownProps<
   close?: () => void;
 }
 
-export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
+const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
   fetcher,
   queryKey,
   queryField,
@@ -50,7 +46,7 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
   emptyMessage = translate('There are no results for this keyword.'),
   placeholder = translate('Search'),
   close,
-}: BreadcrumbDropdownProps<Fetcher>): JSX.Element => {
+}: BreadcrumbDropdownProps<Fetcher>) => {
   const [query, setQuery] = useState('');
   const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
 
@@ -65,8 +61,8 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
   );
   const [filterOpen, setFilterOpen] = useBoolean(false);
 
-  // Get raw form values from Redux
-  const rawFormValues = useSelector(getFormValues(FILTERS_FORM_ID));
+  // Get raw form values from React Final Form
+  const { values: rawFormValues } = useFormState();
 
   // Memoize transformed values to prevent infinite re-renders
   const prevFormValuesRef = useRef({});
@@ -152,11 +148,7 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
         )}
       </div>
       {filterOpen && (
-        <Form
-          form={FILTERS_FORM_ID}
-          destroyOnUnmount={false}
-          className="d-flex border-bottom py-1 px-5"
-        >
+        <div className="d-flex border-bottom py-1 px-5">
           {filters.map((filter) => (
             <Field
               key={filter.field}
@@ -170,7 +162,7 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
               )}
             />
           ))}
-        </Form>
+        </div>
       )}
       <BreadcrumbDropdownContext.Provider value={contextValue}>
         <div className="mh-300px overflow-auto">
@@ -184,3 +176,16 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
     </div>
   );
 };
+
+export const BreadcrumbDropdown = <Fetcher extends SdkFunction>(
+  props: BreadcrumbDropdownProps<Fetcher>,
+): JSX.Element => (
+  <Form
+    onSubmit={() => {}}
+    render={({ handleSubmit }) => (
+      <form onSubmit={handleSubmit}>
+        <BreadcrumbDropdownContent {...props} />
+      </form>
+    )}
+  />
+);

@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   CatalogTypeEnum,
   MarketplaceSoftwarePackagesListData,
@@ -12,7 +11,6 @@ import { StringField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const CatalogTypeOptions: CatalogTypeOption[] = [
@@ -118,7 +116,7 @@ const PureMarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
 export const MarketplaceSoftwarePackagesFilterFormId =
   'MarketplaceSoftwarePackagesFilter';
 
-interface MarketplaceSoftwarePackagesFilterFormData {
+export interface MarketplaceSoftwarePackagesFilterFormData {
   catalog_name: string;
   catalog_version: string;
   catalog_type: CatalogTypeOption;
@@ -129,22 +127,15 @@ interface MarketplaceSoftwarePackagesFilterFormData {
   gpu_arch: string;
 }
 
-export const MarketplaceSoftwarePackagesFilter = reduxForm<
-  MarketplaceSoftwarePackagesFilterFormData,
-  {}
->({
-  form: MarketplaceSoftwarePackagesFilterFormId,
-  destroyOnUnmount: false,
-})(PureMarketplaceSoftwarePackagesFilter);
+export const MarketplaceSoftwarePackagesFilter =
+  PureMarketplaceSoftwarePackagesFilter;
 
 type MarketplaceSoftwarePackagesFilterQuery =
   MarketplaceSoftwarePackagesListData['query'];
 
-export const selectMarketplaceSoftwarePackagesFilter = createSelector<
-  RootState,
-  Partial<MarketplaceSoftwarePackagesFilterFormData>,
-  MarketplaceSoftwarePackagesFilterQuery
->(getFormValues(MarketplaceSoftwarePackagesFilterFormId), (values) => {
+export const selectMarketplaceSoftwarePackagesFilter = (
+  values?: Partial<MarketplaceSoftwarePackagesFilterFormData>,
+): MarketplaceSoftwarePackagesFilterQuery => {
   const filter: MarketplaceSoftwarePackagesFilterQuery = {} as any;
   if (values) {
     if (values.catalog_name) {
@@ -173,4 +164,4 @@ export const selectMarketplaceSoftwarePackagesFilter = createSelector<
     }
   }
   return filter;
-});
+};

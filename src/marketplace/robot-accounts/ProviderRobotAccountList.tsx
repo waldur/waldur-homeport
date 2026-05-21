@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
   marketplaceRobotAccountsList,
@@ -11,6 +12,7 @@ import { createFetcher } from '@/table/api';
 import {
   MarketplaceRobotAccountsFilter,
   selectMarketplaceRobotAccountsFilter,
+  MarketplaceRobotAccountsFilterFormId,
 } from '@/table/generated/MarketplaceRobotAccountsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -21,8 +23,14 @@ import { getCustomer } from '@/workspace/selectors';
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
-export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
-  const formFilter = useSelector(selectMarketplaceRobotAccountsFilter);
+const ProviderRobotAccountListTable: FC<{ provider }> = ({ provider }) => {
+  const { values } = useFormState();
+
+  const formFilter = useMemo(
+    () => selectMarketplaceRobotAccountsFilter(values),
+    [values],
+  );
+
   const customer = useSelector(getCustomer);
   const filter = useMemo(() => {
     const baseFilter: any = {
@@ -90,6 +98,19 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
       rowActions={({ row }) => (
         <RobotAccountActions refetch={tableProps.fetch} row={row} />
       )}
+      formId={MarketplaceRobotAccountsFilterFormId}
     />
   );
 };
+
+export const ProviderRobotAccountList: FC<any> = (props) => (
+  <Form
+    id={MarketplaceRobotAccountsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ProviderRobotAccountListTable {...props} />}
+  </Form>
+);

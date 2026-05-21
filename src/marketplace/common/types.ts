@@ -1,5 +1,4 @@
 import { ComponentType, LazyExoticComponent } from 'react';
-import { InjectedFormProps } from 'redux-form';
 import {
   Project,
   Customer,
@@ -83,10 +82,10 @@ export interface DeployFormData {
   limits?: Limits;
   plan?: Plan;
   start_date?: string;
+  attachment?: any;
 }
 
-export interface OrderFormComponentProps extends InjectedFormProps {
+export interface OrderFormComponentProps {
   offering: Offering;
-  formData: DeployFormData;
   selectedOffering: Offering;
 }

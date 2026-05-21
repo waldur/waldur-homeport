@@ -1,12 +1,9 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { change } from 'redux-form';
 
 import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { translate } from '@/i18n';
-import { PROVIDER_OFFERING_USERS_FORM_ID } from '@/marketplace/service-providers/constants';
 import { router } from '@/router';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
@@ -15,7 +12,6 @@ import { usePendingOfferingUsers } from './hooks/usePendingOfferingUsers';
 export const OfferingUsersWarningBar: FC = () => {
   const { state } = useCurrentStateAndParams();
   const { data: pendingUsers, isLoading } = usePendingOfferingUsers();
-  const dispatch = useDispatch();
 
   const isProfileRoute = state.name?.startsWith('profile');
 
@@ -31,23 +27,18 @@ export const OfferingUsersWarningBar: FC = () => {
   const count = pendingUsers.length;
 
   const handleViewAccounts = () => {
-    router.stateService.go('profile-remote-accounts').then(() => {
-      setTimeout(() => {
-        const pendingStates = [
-          {
-            value: 'Pending account linking',
-            label: translate('Pending account linking'),
-          },
-          {
-            value: 'Pending additional validation',
-            label: translate('Pending additional validation'),
-          },
-        ];
-
-        dispatch(
-          change(PROVIDER_OFFERING_USERS_FORM_ID, 'state', pendingStates),
-        );
-      }, 100);
+    const pendingStates = [
+      {
+        value: 'Pending account linking',
+        label: translate('Pending account linking'),
+      },
+      {
+        value: 'Pending additional validation',
+        label: translate('Pending additional validation'),
+      },
+    ];
+    router.stateService.go('profile-remote-accounts', {
+      filterState: pendingStates,
     });
   };
 

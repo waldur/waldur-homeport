@@ -25,7 +25,7 @@ export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
       space={5}
     >
       <Field
-        component={InputField as any}
+        component={InputField}
         name={props.name}
         type="text"
         validate={required}

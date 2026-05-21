@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
+import { Field, useForm } from 'react-final-form';
 import { openstackTenantsList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -10,11 +9,12 @@ import { required } from '@/core/validators';
 import { FormGroup, SelectField } from '@/form';
 import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
-import { orderProjectSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 
 export const FormTenantStep = (props: FormStepProps) => {
-  const project = useSelector(orderProjectSelector);
+  const { project } = useOrderFormData();
+  const form = useForm();
   const { data, isLoading } = useQuery({
     queryKey: ['tenant-step', project?.uuid],
 
@@ -37,9 +37,9 @@ export const FormTenantStep = (props: FormStepProps) => {
 
   useEffect(() => {
     if (data?.length === 1) {
-      props.change('attributes.tenant', data[0]);
+      form.change('attributes.tenant', data[0]);
     }
-  }, [data]);
+  }, [data, form]);
 
   return (
     <VStepperFormStepCard

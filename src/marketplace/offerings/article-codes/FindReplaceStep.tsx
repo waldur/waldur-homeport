@@ -80,7 +80,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           <FormGroup label={translate('Find')} required>
             <Field
               name="search"
-              component={StringField as any}
+              component={StringField}
               placeholder={translate('Substring to find...')}
               validate={required}
             />
@@ -90,7 +90,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           <FormGroup label={translate('Replace with')}>
             <Field
               name="replace"
-              component={StringField as any}
+              component={StringField}
               placeholder={translate('Replacement...')}
             />
           </FormGroup>
@@ -106,8 +106,6 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           getOptionValue={(option) => option.uuid}
           onChange={(val) => form.change('category', val)}
           isClearable
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </FormGroup>
 
@@ -120,8 +118,6 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           getOptionValue={(option) => option.uuid}
           onChange={(val) => form.change('customer', val)}
           isClearable
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </FormGroup>
 
@@ -136,8 +132,6 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
               getOptionValue={(option) => String(option.value)}
               onChange={(val) => form.change('offering_state', val)}
               isClearable
-              className="metronic-select-container"
-              classNamePrefix="metronic-select"
             />
           </FormGroup>
         </div>
@@ -145,7 +139,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           <FormGroup label={translate('Offering name')}>
             <Field
               name="offering_name"
-              component={StringField as any}
+              component={StringField}
               placeholder={translate('Filter by name...')}
             />
           </FormGroup>

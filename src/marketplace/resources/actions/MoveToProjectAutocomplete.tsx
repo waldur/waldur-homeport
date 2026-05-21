@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { required } from '@/core/validators';
-import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { moveToProjectAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -12,7 +12,7 @@ interface MoveToProjectAutocompleteProps {
 export const MoveToProjectAutocomplete: FunctionComponent<
   MoveToProjectAutocompleteProps
 > = ({ isDisabled }) => (
-  <AsyncSelectFieldFinal
+  <AsyncSelectField
     name="project"
     label={translate('Move to project')}
     validate={required}

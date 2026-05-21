@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { Form } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
@@ -282,10 +283,14 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
 
   if (props) {
     return (
-      <>
-        <Component />
-        <OrderAccordion {...props} loadData={props.refetch} />
-      </>
+      <Form onSubmit={() => {}}>
+        {() => (
+          <>
+            <Component />
+            <OrderAccordion {...props} loadData={props.refetch} />
+          </>
+        )}
+      </Form>
     );
   }
   return null;
