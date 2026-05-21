@@ -8,6 +8,7 @@ import {
   marketplacePublicOfferingsList,
   openstackMigrationsCreate,
   openstackNetworksList,
+  openstackSubnetsList,
   openstackVolumeTypesList,
 } from 'waldur-js-client';
 
@@ -82,6 +83,9 @@ describe('MigrateTenantDialog', () => {
     vi.mocked(openstackNetworksList).mockResolvedValue(
       mockResponse([], 0) as any,
     );
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockResponse([], 0) as any,
+    );
 
     renderDialog();
 
@@ -111,6 +115,9 @@ describe('MigrateTenantDialog', () => {
       mockResponse([], 0) as any,
     );
     vi.mocked(openstackNetworksList).mockResolvedValue(
+      mockResponse([], 0) as any,
+    );
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
       mockResponse([], 0) as any,
     );
     vi.mocked(openstackMigrationsCreate).mockResolvedValue({} as any);

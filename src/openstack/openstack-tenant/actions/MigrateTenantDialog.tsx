@@ -21,7 +21,7 @@ import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes'
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadVolumeTypes } from '@/openstack/api';
+import { loadSubnets, loadVolumeTypes } from '@/openstack/api';
 import { TENANT_TYPE } from '@/openstack/constants';
 
 import { SubnetsTable } from './SubnetsTable';
@@ -181,6 +181,10 @@ const MigrateTenantFields = ({ offering, resource }) => {
       const destinationVolumeTypes = await loadVolumeTypes({
         settings_uuid: offering.scope_uuid,
       });
+      const sourceSubnets = await loadSubnets({
+        tenant_uuid: resource.uuid,
+        field: ['name', 'cidr'],
+      });
       const networks = (
         await openstackNetworksList({
           query: {
@@ -190,7 +194,12 @@ const MigrateTenantFields = ({ offering, resource }) => {
           },
         })
       ).data.map(({ uuid, name }) => ({ label: name, value: uuid }));
-      return { sourceVolumeTypes, destinationVolumeTypes, networks };
+      return {
+        sourceVolumeTypes,
+        destinationVolumeTypes,
+        sourceSubnets,
+        networks,
+      };
     },
     enabled: Boolean(offering),
   });
@@ -234,7 +243,14 @@ const MigrateTenantFields = ({ offering, resource }) => {
             <BootstrapForm.Label className="form-label">
               {translate('Subnets')}
             </BootstrapForm.Label>
-            <FieldArray name="subnets" component={SubnetsTable} />
+            <FieldArray name="subnets">
+              {({ fields }) => (
+                <SubnetsTable
+                  fields={fields}
+                  sourceSubnets={queryResult.data.sourceSubnets}
+                />
+              )}
+            </FieldArray>
           </BootstrapForm.Group>
         </>
       ) : null}
