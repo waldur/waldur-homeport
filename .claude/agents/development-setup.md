@@ -5,6 +5,7 @@ Use this agent for build issues, dependency management, development environment 
 ## Specialization
 
 This agent specializes in:
+
 - **Build Configuration**: Vite 7.0 setup and optimization
 - **Development Environment**: Node.js, Yarn, and IDE configuration
 - **Asset Management**: SVG, images, fonts, and Sass processing
@@ -16,6 +17,7 @@ This agent specializes in:
 ## When to Use
 
 Use this agent when:
+
 - Setting up new development environments
 - Resolving build errors and configuration issues
 - Managing dependencies and detecting unused packages
@@ -28,18 +30,21 @@ Use this agent when:
 ## Essential Development Commands
 
 ### Development Server
+
 - `yarn start` - Development server on port 8001
 - `yarn devcontainer` - Containerized development (0.0.0.0:8001)
 - `yarn build` - Production build
 - `yarn preview` - Preview production build
 
 ### Code Quality Tools
+
 - `yarn lint:check` / `yarn lint:fix` - ESLint
 - `yarn format:check` / `yarn format:fix` - Prettier
 - `yarn style:check` - Stylelint for SCSS/CSS
 - `yarn tsc` - TypeScript type checking
 
 ### Dependency Management
+
 - `yarn deps:unused` - Knip for unused dependencies
 - `yarn deps:circular` - Madge for circular dependencies
 - `yarn install` - Install dependencies with lockfile integrity
@@ -47,25 +52,29 @@ Use this agent when:
 - `yarn info <package>` - Check specific package versions
 
 #### Version Management Best Practices
+
 - Never hardcode version numbers in documentation
 - Use commands to detect current and latest versions
 - Always run `yarn install` after updating package.json
 - Use `yarn outdated` to check for available updates
 
 ### Testing
+
 - `yarn test` - Vitest unit tests
-- `yarn ci:test` - Cypress integration tests
-- `yarn ci:run` - Headless Cypress tests
+- `yarn test:e2e` - Playwright E2E tests
+- `yarn test:visual` - Playwright visual regression tests
 
 ## Build System Configuration
 
 ### Modern Build Stack
+
 - **Vite 7.0**: ES modules, fast HMR, optimized bundling
 - **Node.js v23.7.0**: Latest LTS compatibility
 - **TypeScript 5.7.3**: Comprehensive typing with path mapping
 - **Yarn**: Package management with lockfile integrity
 
 ### Performance Features
+
 - **Code Splitting**: Automatic by route and feature
 - **Lazy Loading**: `lazyComponent` utility for components
 - **Dynamic Reducers**: Runtime Redux reducer injection
@@ -74,6 +83,7 @@ Use this agent when:
 ## Asset Management
 
 ### Supported Asset Types
+
 - **SVG**: Processed through SVGR 8.1.0 for React components
 - **Images**: Static assets in `src/images/`
 - **Fonts**: Managed through Vite asset pipeline
@@ -84,9 +94,11 @@ Use this agent when:
 ## Environment Configuration
 
 ### Environment Variables
+
 - `VITE_API_URL` - Backend API endpoint (default: http://localhost:8000/)
 
 ### Development Setup Steps
+
 1. **Prerequisites**: Node.js v23.7.0, Yarn, Backend API
 2. **Installation**: `yarn install`
 3. **Environment**: Configure `.env` file
@@ -96,6 +108,7 @@ Use this agent when:
 ## Development Tools
 
 ### Code Quality & Analysis
+
 - **ESLint 9.30.0**: Flat config with TypeScript/React rules
 - **Prettier 3.6.2**: 2 spaces, semicolons, single quotes
 - **Stylelint 16.14.1**: SCSS/CSS linting
@@ -105,6 +118,7 @@ Use this agent when:
 - **Lint-staged**: Pre-commit formatting
 
 ### IDE Configuration
+
 - **TypeScript**: Path mapping for `@/*` imports
 - **Module Resolution**: "Bundler" mode for Vite compatibility
 - **Integration**: ESLint, Prettier, Vitest support
@@ -112,24 +126,27 @@ Use this agent when:
 ## Performance Optimization
 
 ### Build Optimizations
+
 - **Bundle Analysis**: Size optimization and splitting
 - **Source Maps**: Development and production debugging
 - **Asset Processing**: Optimized loading for all asset types
 - **Tree Shaking**: Dead code elimination
 
 ### Runtime Optimizations
+
 - **Lazy Components**: Dynamic imports with `lazyComponent`
-- **Redux Optimization**: Dynamic reducer injection
 - **Query Optimization**: React Query caching strategies
 
 ## Backend Integration
 
 ### API Client Setup
+
 - **Waldur JS Client**: Auto-generated TypeScript client
 - **Authentication**: Token-based with auto-refresh
 - **Request Interceptors**: Error handling and logging
 - **CORS Configuration**: Required for local development
 
 ### Development vs Production
+
 - **Development**: Local backend on port 8000, CORS enabled
 - **Production**: Environment-specific API URLs and settings

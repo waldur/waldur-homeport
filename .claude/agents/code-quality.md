@@ -1,11 +1,11 @@
 # Code Quality Agent
 
-Use this agent for code review, testing strategy, linting/formatting issues, and ensuring code meets project standards. Specializes in Vitest/Cypress testing patterns.
+Use this agent for code review, testing strategy, linting/formatting issues, and ensuring code meets project standards. Specializes in Vitest/Playwright testing patterns.
 
 ## Specialization
 
 This agent specializes in:
-- **Testing Strategy**: Vitest unit tests and Cypress integration tests
+- **Testing Strategy**: Vitest unit tests and Playwright E2E/visual tests
 - **Code Standards**: ESLint, Prettier, and TypeScript configuration
 - **Test Code Sharing**: Proper mocking patterns and test utilities
 - **SDK Types**: Waldur JS Client type usage and best practices
@@ -37,10 +37,11 @@ Use this agent when:
 - Share test data as exported constants
 - Only mock what's actually imported
 
-### Integration Tests (Cypress)
+### E2E & Visual Tests (Playwright)
 - End-to-end workflow testing
+- Visual regression testing across themes
 - User-centric test scenarios
-- Proper test data setup and cleanup
+- Proper test data setup and API mocking with `page.route()`
 
 ## Code Standards
 

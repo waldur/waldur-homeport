@@ -8,7 +8,6 @@ COPY package.json yarn.lock /app/
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 # Skip unnecessary post-install scripts - not needed for production builds
-ENV CYPRESS_INSTALL_BINARY=0
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 ENV HUSKY=0
 RUN apk add --no-cache git && yarn install --frozen-lockfile

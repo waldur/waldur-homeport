@@ -29,7 +29,8 @@ yarn lint:fix       # Auto-fix linting
 For detailed guidance, see `docs/`:
 
 - `development-workflow.md` - Planning, TDD, problem-solving
-- `code-quality.md` - Testing, linting, TypeScript
+- `code-quality.md` - Linting, formatting, TypeScript
+- `testing.md` - Frameworks, strategy, unit & E2E standards
 - `architecture.md` - Redux, component patterns
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns

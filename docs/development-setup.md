@@ -23,9 +23,11 @@ This guide covers development environment setup, build configuration, and essent
 
 ### Testing
 
+For detailed testing standards and strategy, see [Testing Standards & Strategy](docs/testing.md).
+
 - `yarn test` - Run unit tests with Vitest
-- `yarn ci:test` - Run full integration test suite with Cypress
-- `yarn ci:run` - Run Cypress tests headless
+- `yarn test:e2e` - Run Playwright E2E tests
+- `yarn test:visual` - Run Playwright visual regression tests
 
 ### Dependency Management
 

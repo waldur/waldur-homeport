@@ -37,7 +37,8 @@ All documentation goes in `docs/` with this structure:
 ```
 docs/
 ├── development-workflow.md      # Planning and TDD processes
-├── code-quality.md             # Testing and quality standards
+├── code-quality.md             # Quality standards, linting, TS
+├── testing.md                  # Testing frameworks and strategy
 ├── architecture.md             # System architecture and patterns
 ├── component-library.md        # UI components and patterns
 ├── api-integration.md          # Data fetching and API patterns
@@ -61,7 +62,7 @@ docs/
 
 ### Development Guides  
 - Environment setup and build configuration
-- Testing strategies (Vitest/Cypress)
+- Testing strategies (Vitest/Playwright)
 - Form migration patterns
 - API integration with Waldur JS Client
 

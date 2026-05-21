@@ -3,9 +3,6 @@ build/
 .idea/
 node_modules
 coverage
-cypress/videos
-cypress/screenshots/
-cypress/results/
 junit.xml
 dist/
 yarn-error.log

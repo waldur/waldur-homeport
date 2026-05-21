@@ -31,69 +31,6 @@ This guide covers code quality standards, testing practices, and technical requi
 - Handle errors at appropriate level
 - Never silently swallow exceptions
 
-## Testing Strategy
-
-### Testing Frameworks
-
-- **Unit Tests**: Vitest with React Testing Library for component testing
-- **Integration Tests**: Cypress for end-to-end workflows
-
-#### Check Testing Framework Versions
-
-Check current versions
-
-yarn info vitest @testing-library/react cypress version```
-
-- Test files use `.test.ts/.test.tsx` extensions
-- Setup files in `test/setupTests.js`
-- Integrated coverage reporting
-
-### Test Guidelines
-
-- Test behavior, not implementation
-- One assertion per test when possible
-- Clear test names describing scenario
-- Use existing test utilities/helpers
-- Tests should be deterministic
-
-### Test Code Sharing & Mocking
-
-**Extracting Common Test Code**:
-
-- Extract shared test data into separate files (e.g., `test-utils.ts`)
-- Only mock what's actually imported by the component under test
-- Don't mock exports that aren't used - it adds unnecessary complexity
-- Verify import paths match actual usage (e.g., `./constants` vs `@/marketplace/common/constants`)
-
-**Vitest Mocking Constraints**:
-
-- `vi.mock()` calls must be at the top level, not inside functions
-- Vitest hoists mocks, so they can't reference variables defined later
-- Share test data as exported constants, not function calls
-- Mock the exact module path used in the component's imports
-
-**Example Pattern**:
-
-```js
-// test-utils.ts
-export const mockOffering = { uuid: '123', name: 'Test' };
-export const mockPlan = { uuid: '456', name: 'Plan' };
-
-// component.test.tsx
-import { mockOffering, mockPlan } from './test-utils';
-
-vi.mock('./constants', () => ({
-  getBillingPeriods: () => [...], // Only mock what's actually used
-  // Don't include ADD_PLAN_FORM_ID if component doesn't import it
-}));
-```
-
-**Code Duplication Detection**:
-
-- CI/CD uses `jscpd` with strict thresholds (typically 250 tokens)
-- Extract common patterns properly - don't game the detector with formatting
-- Shared test utilities reduce duplication and improve maintainability
-
 ## Development Guidelines
 
 ### TypeScript Configuration
@@ -112,10 +49,11 @@ vi.mock('./constants', () => ({
 
 #### Check Code Style Tool Versions
 
-```
+```bash
 Check current versions
 
-yarn info eslint prettier stylelint husky version```
+yarn info eslint prettier stylelint husky version
+```
 
 ### TypeScript and SDK Types
 
@@ -145,12 +83,6 @@ yarn info eslint prettier stylelint husky version```
 - `yarn style:check` - Check SCSS/CSS styles with Stylelint
 - `yarn deps:unused` - Check for unused dependencies with Knip
 - `yarn tsc` - Typescript type check
-
-#### Testing
-
-- `yarn test` - Run unit tests with Vitest
-- `yarn ci:test` - Run full integration test suite with Cypress
-- `yarn ci:run` - Run Cypress tests headless
 
 #### Dependency Management
 
