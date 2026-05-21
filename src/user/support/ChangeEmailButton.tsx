@@ -5,7 +5,7 @@ import { User } from 'waldur-js-client';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 const UserEmailChangeDialog = lazyComponent(() =>
   import('./UserEmailChangeDialog').then((module) => ({
@@ -30,11 +30,11 @@ export const ChangeEmailButton: FunctionComponent<ChangeEmailButtonProps> = (
     });
   }, [props.user, props.protected]);
   return (
-    <ActionButton
+    <CompactActionButton
       iconNode={<PencilSimpleIcon weight="bold" />}
       action={openChangeEmailDialog}
       variant="secondary"
-      className="btn-sm btn-icon"
+      className="btn-icon"
       disabled={props.disabled}
       disabledReason={translate('Profile editing is currently disabled')}
     />

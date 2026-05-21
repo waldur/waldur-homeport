@@ -3,7 +3,7 @@ import { nestedReviewerProfilePublicationsDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const PublicationDeleteAction: FunctionComponent<{
   row?;
@@ -26,7 +26,7 @@ export const PublicationDeleteAction: FunctionComponent<{
   });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
       action={() => deleteMutation.mutate()}
       disabled={deleteMutation.isPending}

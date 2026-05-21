@@ -36,6 +36,7 @@ export const MembershipRestrictionFormItems: FC<
         canEdit && (
           <CompactEditButton
             onClick={() => onEditField('user_email_patterns')}
+            variant="secondary"
           />
         )
       }
@@ -48,7 +49,10 @@ export const MembershipRestrictionFormItems: FC<
       value={<RestrictionsValue values={data.affiliations} />}
       actions={
         canEdit && (
-          <CompactEditButton onClick={() => onEditField('user_affiliations')} />
+          <CompactEditButton
+            onClick={() => onEditField('user_affiliations')}
+            variant="secondary"
+          />
         )
       }
     />
@@ -62,6 +66,7 @@ export const MembershipRestrictionFormItems: FC<
         canEdit && (
           <CompactEditButton
             onClick={() => onEditField('user_identity_sources')}
+            variant="secondary"
           />
         )
       }
@@ -76,6 +81,7 @@ export const MembershipRestrictionFormItems: FC<
         canEdit && (
           <CompactEditButton
             onClick={() => onEditField('user_nationalities')}
+            variant="secondary"
           />
         )
       }
@@ -90,6 +96,7 @@ export const MembershipRestrictionFormItems: FC<
         canEdit && (
           <CompactEditButton
             onClick={() => onEditField('user_organization_types')}
+            variant="secondary"
           />
         )
       }
@@ -104,6 +111,7 @@ export const MembershipRestrictionFormItems: FC<
         canEdit && (
           <CompactEditButton
             onClick={() => onEditField('user_assurance_levels')}
+            variant="secondary"
           />
         )
       }

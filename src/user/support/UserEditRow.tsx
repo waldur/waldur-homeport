@@ -13,7 +13,7 @@ import { UserFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { formatIsdName } from './IsdBadges';
@@ -106,7 +106,7 @@ export const UserEditRow = (props: RowProps) => {
       disabled={props.disabled}
       actions={
         props.actions || (
-          <ActionButton
+          <CompactActionButton
             action={callback}
             iconNode={
               isProtected ? (
@@ -116,7 +116,7 @@ export const UserEditRow = (props: RowProps) => {
               )
             }
             variant="secondary"
-            className="btn-sm btn-icon"
+            className="btn-icon"
             disabled={isProtected || props.disabled}
             tooltip={isProtected ? protectedTooltip : undefined}
             data-testid={`user-edit-row-${props.name}`}

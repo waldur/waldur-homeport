@@ -86,6 +86,7 @@ export const ExpertiseSection = ({
       columns={columns}
       hasActionBar={false}
       cardBordered={false}
+      bodyClassName="p-0"
       rowActions={({ row }) => (
         <ExpertiseRowActions
           row={row}

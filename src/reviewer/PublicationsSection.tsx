@@ -94,6 +94,7 @@ export const PublicationsSection = ({
       columns={columns}
       hasActionBar={false}
       cardBordered={false}
+      bodyClassName="p-0"
       rowActions={({ row }) => (
         <PublicationRowActions
           row={row}

@@ -83,7 +83,11 @@ export const ReviewerProfileAddDropdown = ({
 
   return (
     <Dropdown placement="bottom-end">
-      <Dropdown.Toggle variant="primary" className="no-arrow btn-icon-right">
+      <Dropdown.Toggle
+        variant="primary"
+        size="lg"
+        className="no-arrow btn-icon-right"
+      >
         <span className="svg-icon svg-icon-2">
           <PlusCircleIcon weight="bold" />
         </span>

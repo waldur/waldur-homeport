@@ -172,6 +172,8 @@ interface FormTableProps {
   detailsMode?: boolean;
   alignTop?: boolean;
   className?: string;
+  /** Show the outer table cell borders. Default true. Set false when nesting inside an already-bordered container. */
+  bordered?: boolean;
 }
 
 const TABLE_GY_SPACE_REGEX = /(?<=\s|^)(g[y]?-([1-9]\d*))( ?)(?=\s|$)/;
@@ -183,7 +185,7 @@ const FormTable: FC<PropsWithChildren<FormTableProps>> & {
 } = (props) => {
   return (
     <Table
-      bordered={true}
+      bordered={props.bordered ?? true}
       responsive={true}
       className={classNames(
         'form-table',

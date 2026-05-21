@@ -55,13 +55,8 @@
   max-width: $modal-md;
 }
 
-.modal-lg {
-  .modal-footer .btn.flex-equal {
-    max-width: 148px;
-  }
-}
-
-// Make all buttons in the footer large
+// Make all buttons in the footer large; size to content with a 150px floor.
+// Override flex-equal's stretch so buttons stay content-sized instead of filling the footer.
 .modal {
   .modal-footer {
     .btn {
@@ -73,6 +68,11 @@
       }
       &:not(.btn-icon) {
         padding: 0.692rem 1.153rem;
+        min-width: 150px;
+      }
+      &.flex-equal {
+        flex-grow: 0;
+        flex-basis: auto;
       }
     }
   }

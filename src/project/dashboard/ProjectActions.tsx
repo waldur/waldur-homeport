@@ -17,7 +17,7 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
 
   const supportButtonClass = isCourseProject
     ? 'btn btn-secondary btn-icon btn-sm'
-    : 'btn btn-secondary';
+    : 'btn btn-secondary btn-lg';
 
   const supportButton = (
     <Link
