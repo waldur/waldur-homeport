@@ -37,8 +37,8 @@ export const SelectOrganizationGroupField: FC<SelectFieldProps> = ({
           )
         }
         components={{
-          OrganizationGroupFieldOption,
-          OrganizationGroupFieldSingleValue,
+          Option: OrganizationGroupFieldOption,
+          SingleValue: OrganizationGroupFieldSingleValue,
         }}
         value={
           input.value
