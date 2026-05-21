@@ -1,7 +1,12 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { marketplaceServiceProvidersOfferingsList } from 'waldur-js-client';
+import {
+  marketplaceServiceProvidersOfferingsList,
+  marketplaceServiceProvidersOfferingsTypesList,
+} from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@/core/constants';
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -79,6 +84,21 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
     mandatoryFields,
   });
 
+  const { data: offeringTypeStrings } = useQuery({
+    queryKey: ['providerOfferingTypes', provider.uuid],
+    queryFn: () =>
+      marketplaceServiceProvidersOfferingsTypesList({
+        path: { service_provider_uuid: provider.uuid },
+      }).then((r) => r.data),
+    staleTime: UI_STALE_TIME,
+  });
+
+  const offeringTypes = useMemo(() => {
+    if (!offeringTypeStrings) return [];
+    const presentTypes = new Set(offeringTypeStrings);
+    return getOfferingTypes().filter((t) => presentTypes.has(t.value));
+  }, [offeringTypeStrings]);
+
   return (
     <Table
       {...tableProps}
@@ -135,7 +155,7 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
       rowActions={(row) => (
         <OfferingActions row={row.row} refetch={tableProps.fetch} />
       )}
-      filters={<ProviderOfferingsFilter />}
+      filters={<ProviderOfferingsFilter offeringTypes={offeringTypes} />}
       hasQuery={true}
       hasOptionalColumns
     />
