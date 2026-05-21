@@ -43,19 +43,6 @@ vi.mock('@/workspace/hooks', () => ({
   }),
 }));
 
-vi.mock('@/workspace/selectors', () => ({
-  getProject: () => ({
-    uuid: 'project-uuid',
-    name: 'Test Project',
-  }),
-  getCustomer: () => ({
-    uuid: 'customer-uuid',
-    name: 'Test Customer',
-    service_provider_uuid: 'sp-uuid',
-    call_managing_organization_uuid: 'cmo-uuid',
-  }),
-}));
-
 // Mock customer team utils
 vi.mock('@/customer/team/utils', () => ({
   usersAutocomplete: vi.fn().mockResolvedValue({
