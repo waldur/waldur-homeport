@@ -3,17 +3,23 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { Field } from '@/resource/summary';
 
 export const ResourceOrderErrorDialog = ({ resolve }) => {
-  const { error_message, error_traceback } = resolve.resource.creation_order;
+  const creationOrder = resolve.resource.creation_order;
+  const { error_message, error_traceback } = creationOrder;
+  const tracebackVisible = 'error_traceback' in creationOrder;
   return (
     <ModalDialog title={translate('Order errors')}>
       <Field label={translate('Error message')}>
         {error_message || translate('No error message reported.')}
       </Field>
-      {error_traceback ? (
+      {tracebackVisible ? (
         <Field label={translate('Error traceback')} valueClass="text-pre">
-          <div style={{ height: 300, overflow: 'scroll' }}>
-            {error_traceback}
-          </div>
+          {error_traceback ? (
+            <div style={{ height: 300, overflow: 'scroll' }}>
+              {error_traceback}
+            </div>
+          ) : (
+            translate('No traceback recorded for this order.')
+          )}
         </Field>
       ) : (
         <Field label={translate('Error traceback')}>
