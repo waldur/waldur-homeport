@@ -4,7 +4,7 @@ import { Form as BootstrapForm } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { supportFeedbacksCreate } from 'waldur-js-client';
 
-import { FormContainerFinal, SubmitButton, TextField } from '@/form';
+import { FormContainer, SubmitButton, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
@@ -55,7 +55,7 @@ export const SupportFeedback = () => {
       initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit} className="center-vertically">
-          <FormContainerFinal submitting={submitting}>
+          <FormContainer submitting={submitting}>
             <EvaluationField
               name="evaluation"
               label={translate('Evaluation')}
@@ -77,7 +77,7 @@ export const SupportFeedback = () => {
                 />
               </div>
             </BootstrapForm.Group>
-          </FormContainerFinal>
+          </FormContainer>
         </form>
       )}
     />

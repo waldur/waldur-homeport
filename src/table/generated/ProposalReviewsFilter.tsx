@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   Proposal,
@@ -24,7 +23,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -93,7 +91,6 @@ const PureProposalReviewsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -125,7 +122,6 @@ const PureProposalReviewsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -148,7 +144,6 @@ const PureProposalReviewsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -175,7 +170,6 @@ const PureProposalReviewsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -200,7 +194,6 @@ const PureProposalReviewsFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -214,7 +207,7 @@ interface ProposalReviewsFilterProps {
   callUuid?: any;
 }
 
-interface ProposalReviewsFilterFormData {
+export interface ProposalReviewsFilterFormData {
   state: ProposalReviewStateOption[];
   call: PublicCall;
   round: ProtectedRound;
@@ -223,21 +216,13 @@ interface ProposalReviewsFilterFormData {
   proposal: Proposal;
 }
 
-export const ProposalReviewsFilter = reduxForm<
-  ProposalReviewsFilterFormData,
-  ProposalReviewsFilterProps
->({
-  form: ProposalReviewsFilterFormId,
-  destroyOnUnmount: false,
-})(PureProposalReviewsFilter);
+export const ProposalReviewsFilter = PureProposalReviewsFilter;
 
 type ProposalReviewsFilterQuery = ProposalReviewsListData['query'];
 
-export const selectProposalReviewsFilter = createSelector<
-  RootState,
-  Partial<ProposalReviewsFilterFormData>,
-  ProposalReviewsFilterQuery
->(getFormValues(ProposalReviewsFilterFormId), (values) => {
+export const selectProposalReviewsFilter = (
+  values?: Partial<ProposalReviewsFilterFormData>,
+): ProposalReviewsFilterQuery => {
   const filter: ProposalReviewsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -260,4 +245,4 @@ export const selectProposalReviewsFilter = createSelector<
     }
   }
   return filter;
-});
+};

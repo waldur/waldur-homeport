@@ -57,7 +57,7 @@ export const NameGroup = ({
       }
     >
       <Field
-        component={StringField as any}
+        component={StringField}
         name="name"
         placeholder={translate('e.g. Community Health Outreach')}
         description={translate('This name will be visible in accounting data.')}

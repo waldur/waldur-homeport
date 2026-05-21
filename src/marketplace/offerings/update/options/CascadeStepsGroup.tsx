@@ -88,7 +88,7 @@ export const CascadeStepsGroup = ({
               <FormGroup label={translate('Name')} required={true}>
                 <Field
                   name={`${name}.name`}
-                  component={InputField as any}
+                  component={InputField}
                   validate={required}
                   placeholder={translate('Internal field name (e.g., country)')}
                 />
@@ -97,7 +97,7 @@ export const CascadeStepsGroup = ({
               <FormGroup label={translate('Label')} required={true}>
                 <Field
                   name={`${name}.label`}
-                  component={InputField as any}
+                  component={InputField}
                   validate={required}
                   placeholder={translate('Display label (e.g., Country)')}
                 />
@@ -162,7 +162,7 @@ export const CascadeStepsGroup = ({
                 >
                   <Field
                     name={`${name}.choices`}
-                    component={InputField as any}
+                    component={InputField}
                     as="textarea"
                     rows={4}
                     validate={required}
@@ -181,7 +181,7 @@ export const CascadeStepsGroup = ({
                 >
                   <Field
                     name={`${name}.choices_map`}
-                    component={InputField as any}
+                    component={InputField}
                     as="textarea"
                     rows={6}
                     validate={required}

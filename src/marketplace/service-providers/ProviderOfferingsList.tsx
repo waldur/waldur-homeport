@@ -1,10 +1,8 @@
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
+import { FC, useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { marketplaceServiceProvidersOfferingsList } from 'waldur-js-client';
 
-import { useDestroyFilterOnLeave } from '@/core/filters';
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
@@ -24,29 +22,15 @@ import { ServiceProvider } from '../types';
 
 import { PROVIDER_OFFERINGS_FORM_ID } from './constants';
 import { OfferingNameColumn } from './OfferingNameColumn';
-import { ProviderOfferingsFilter } from './ProviderOfferingsFilter';
+import {
+  getFiltersFromParams,
+  ProviderOfferingsFilter,
+} from './ProviderOfferingsFilter';
 import { ResourcesCountColumn } from './ResourcesCountColumn';
 
 interface ProviderOfferingsComponentProps {
   provider: ServiceProvider;
 }
-
-const mapStateToFilter = createSelector(
-  getFormValues(PROVIDER_OFFERINGS_FORM_ID),
-  (filters: any) => {
-    const result: Record<string, any> = {};
-    if (filters?.state) {
-      result.state = filters.state.map((option) => option.value);
-    }
-    if (filters?.offering_type) {
-      result.type = filters.offering_type.value;
-    }
-    if (filters?.tag) {
-      result.tag = filters.tag.uuid;
-    }
-    return result;
-  },
-);
 
 const mandatoryFields = [
   'uuid',
@@ -62,7 +46,28 @@ const mandatoryFields = [
 const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
   provider,
 }) => {
-  const filter = useSelector(mapStateToFilter);
+  const { values } = useFormState();
+  const filterValues: any = values;
+
+  useEffect(() => {
+    if (filterValues) {
+      syncFiltersToURL(filterValues);
+    }
+  }, [filterValues]);
+
+  const filter = useMemo(() => {
+    const result: Record<string, any> = {};
+    if (filterValues?.state) {
+      result.state = filterValues.state.map((option) => option.value);
+    }
+    if (filterValues?.offering_type) {
+      result.type = filterValues.offering_type.value;
+    }
+    if (filterValues?.tag) {
+      result.tag = filterValues.tag.uuid;
+    }
+    return result;
+  }, [filterValues]);
 
   const tableProps = useTable({
     table: 'ProviderOfferingsList',
@@ -77,6 +82,7 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
   return (
     <Table
       {...tableProps}
+      formId={PROVIDER_OFFERINGS_FORM_ID}
       columns={[
         {
           title: translate('Offering / Category'),
@@ -137,10 +143,21 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
 };
 
 export const ProviderOfferingsList = ({ provider }) => {
-  useDestroyFilterOnLeave(PROVIDER_OFFERINGS_FORM_ID);
+  const initialValues = useMemo(
+    () => getFiltersFromParams(getInitialValues()),
+    [],
+  );
 
   if (!provider) {
     return <CustomerResourcesListPlaceholder />;
   }
-  return <ProviderOfferingsComponent provider={provider} />;
+  return (
+    <Form
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+      initialValues={initialValues}
+    >
+      {() => <ProviderOfferingsComponent provider={provider} />}
+    </Form>
+  );
 };

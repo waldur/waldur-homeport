@@ -31,8 +31,6 @@ export const ProvisioningFilter: FC<ProvisioningFilterProps> = ({
           onChange={(option) => option && onDaysChange(option.value)}
           options={OPTIONS}
           isClearable={false}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </div>
     </div>

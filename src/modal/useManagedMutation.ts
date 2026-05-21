@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactNode, useCallback } from 'react';
 
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 
 import { ConfirmationOptions } from './actions';

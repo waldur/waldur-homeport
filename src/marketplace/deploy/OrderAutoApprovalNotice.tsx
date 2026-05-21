@@ -4,7 +4,6 @@ import {
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import {
   PublicOfferingDetails,
   marketplaceProjectOrderAutoApprovalsList,
@@ -14,7 +13,7 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
-import { orderProjectSelector } from './selectors';
+import { useOrderFormData } from './selectors';
 
 interface OrderAutoApprovalNoticeProps {
   offering?: Pick<PublicOfferingDetails, 'components'>;
@@ -25,7 +24,7 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
   offering,
   monthlyCost,
 }) => {
-  const project = useSelector(orderProjectSelector);
+  const { project } = useOrderFormData();
 
   const { data: rule } = useQuery({
     queryKey: ['ProjectOrderAutoApproval', project?.uuid],

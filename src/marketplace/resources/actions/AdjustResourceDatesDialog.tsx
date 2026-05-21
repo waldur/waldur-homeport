@@ -10,7 +10,7 @@ import { formatISODate, parseDate } from '@/core/dateUtils';
 import { WarnCard } from '@/core/WarnCard';
 import { SubmitButton, TextField } from '@/form';
 import { DateField } from '@/form/DateField';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -102,26 +102,26 @@ export const AdjustResourceDatesDialog: FunctionComponent<
             />
             <div className="row">
               <div className="col-sm-6">
-                <FormContainerFinal submitting={submitting}>
+                <FormContainer submitting={submitting}>
                   <DateField
                     name="start_date"
                     label={translate('Start date')}
                     disabled={submitting}
                   />
-                </FormContainerFinal>
+                </FormContainer>
               </div>
               <div className="col-sm-6">
-                <FormContainerFinal submitting={submitting}>
+                <FormContainer submitting={submitting}>
                   <DateField
                     name="end_date"
                     label={translate('End date')}
                     disabled={submitting}
                     minDate={today}
                   />
-                </FormContainerFinal>
+                </FormContainer>
               </div>
             </div>
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <TextField
                 name="comment"
                 label={translate('Comment')}
@@ -130,7 +130,7 @@ export const AdjustResourceDatesDialog: FunctionComponent<
                   'Optional reason captured in the audit trail.',
                 )}
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

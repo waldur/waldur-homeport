@@ -7,10 +7,10 @@ import { GRID_BREAKPOINTS } from '@/core/constants';
 import { TableFilterContext } from './FilterContextProvider';
 import { SavedFilterSelect } from './SavedFilterSelect';
 import { FilterItem, FilterPosition } from './types';
-import { getFiltersFormId } from './utils';
 
 interface TableFilterContainerProps {
   filters: JSX.Element;
+  formId?: string;
   table?: string;
   filterPosition?: FilterPosition;
   setFilter?: (item: FilterItem) => void;
@@ -18,7 +18,7 @@ interface TableFilterContainerProps {
 }
 
 export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
-  const filtersFormId = getFiltersFormId(props.filters);
+  const filtersFormId = props.formId || '';
 
   const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
   const filterPosition: FilterPosition = props.filterPosition || 'header';
@@ -34,7 +34,11 @@ export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
       {filterPosition === 'sidebar' ? (
         // Sidebar filters
         <div className="filter-container">
-          <SavedFilterSelect table={props.table} formId={filtersFormId} />
+          <SavedFilterSelect
+            table={props.table}
+            formId={filtersFormId}
+            filterPosition={filterPosition}
+          />
           <Accordion alwaysOpen>{props.filters}</Accordion>
         </div>
       ) : (

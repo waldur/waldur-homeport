@@ -31,7 +31,7 @@ const RoleForm: FC<{ role? }> = (props) => {
     <>
       <FormGroup label={translate('Name')} required>
         <Field
-          component={StringField as any}
+          component={StringField}
           name="name"
           validate={required}
           disabled={props.role?.is_system_role}
@@ -40,7 +40,7 @@ const RoleForm: FC<{ role? }> = (props) => {
 
       <FormGroup label={translate('Type')} required>
         <Field
-          component={SelectField as any}
+          component={SelectField}
           name="content_type"
           validate={required}
           isDisabled={props.role?.is_system_role}
@@ -51,7 +51,7 @@ const RoleForm: FC<{ role? }> = (props) => {
 
       <FormGroup label={translate('Permissions')} required>
         <Field
-          component={PermissionField as any}
+          component={PermissionField}
           name="permissions"
           validate={required}
         />

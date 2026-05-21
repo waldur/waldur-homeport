@@ -295,10 +295,8 @@ Filters are defined using the `filters` prop of the Table component. This prop a
 Example:
 
 ```ts
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-
-const getFilterValues = getFormValues('FilterForm');
+import { Form, Field, useFormState } from 'react-final-form';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const FilterSet = () => (
   <TableFilterItem title="Filter field" name="custom">
@@ -306,12 +304,12 @@ export const FilterSet = () => (
   </TableFilterItem>
 );
 
-export const FilteredList = () => {
-  const filter = useSelector(getFilterValues);
+const FilteredListTable = () => {
+  const { values } = useFormState();
   const tableProps = useTable({
     table: 'FilteredList',
     fetchData: createFetcher(hooksList),
-    filter,
+    filter: values,
   });
 
   return (
@@ -321,6 +319,12 @@ export const FilteredList = () => {
     />
   );
 };
+
+export const FilteredList = () => (
+  <Form onSubmit={() => {}}>
+    {() => <FilteredListTable />}
+  </Form>
+);
 ```
 
 ### Filter positions
@@ -346,13 +350,13 @@ The flow:
 ```text
 User changes filter field
     ↓
-Redux Form stores value
+React Final Form stores value
     ↓
-TableFilterItem calls setFilter() → updates filtersStorage[]
+TableFilterItem calls onChange() → updates form state
     ↓
 Table re-fetches with new filter
     ↓
-Filter badges rendered from filtersStorage
+Filter badges rendered from form state
 ```
 
 ### URL query parameter sync
@@ -360,28 +364,37 @@ Filter badges rendered from filtersStorage
 Filters can be synced to URL query parameters for shareable links. Use utilities from `@/core/filters`:
 
 ```ts
-import {
-  syncFiltersToURL,
-  useReinitializeFilterFromUrl,
-  getQueryParams,
-} from '@/core/filters';
+import { useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
+import { syncFiltersToURL, getInitialValues } from '@/core/filters';
 
-const FILTER_FORM_ID = 'MyFilterForm';
-
-export const MyList = () => {
-  // Load filters from URL on mount and route changes
-  useReinitializeFilterFromUrl(FILTER_FORM_ID);
-
-  const formValues = useSelector(getFormValues(FILTER_FORM_ID));
+const MyListTable = () => {
+  const { values } = useFormState();
 
   // Sync filter changes to URL
   useEffect(() => {
-    if (formValues) {
-      syncFiltersToURL(formValues);
+    if (values) {
+      syncFiltersToURL(values);
     }
-  }, [formValues]);
+  }, [values]);
 
   // ... rest of component
+  return null;
+};
+
+export const MyList = () => {
+  // Load filters from URL on mount
+  const initialValues = useMemo(() => getInitialValues(), []);
+
+  return (
+    <Form
+      onSubmit={() => {}}
+      initialValues={initialValues}
+      subscription={{ values: true }}
+    >
+      {() => <MyListTable />}
+    </Form>
+  );
 };
 ```
 
@@ -403,26 +416,25 @@ The compact `uuid::name` format keeps URLs shorter while preserving display name
 When navigating between pages in the SPA:
 
 1. **URL params persist** - query string is preserved during navigation
-2. **Form re-initialization** - `useReinitializeFilterFromUrl` re-populates the form when route changes
-3. **Auto-show filter bar** - when `filtersStorage` has items, the filter bar auto-expands
+2. **Form initialization** - `getInitialValues` reads the URL to populate the form on mount
+3. **Auto-show filter bar** - when the form state has items, the filter bar auto-expands
 
 ```text
 Page A with filter → Navigate to Page B → Navigate back to Page A
      ↓                      ↓                      ↓
 URL updated            URL preserved         URL read, form populated
-with filters           (SPA routing)         filtersStorage updated
-                                             Table re-fetches
+with filters           (SPA routing)         Table re-fetches
 ```
 
 ### Default/initial filters
 
-To set default filter values that can be overridden by URL params:
+To set default filter values that can be overridden by URL params, pass them as arguments to `getInitialValues`:
 
 ```ts
 const defaultValues = { status: 'active' };
 
 // URL params take precedence over defaults
-useReinitializeFilterFromUrl(FILTER_FORM_ID, defaultValues);
+const initialValues = useMemo(() => getInitialValues(defaultValues), []);
 ```
 
 ### Cross-page filters (Resources sidebar)
@@ -827,21 +839,16 @@ Here's an example of a complex table combining multiple features (based on the R
 
 ```ts
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Form, useFormState } from 'react-final-form';
 
 // Filter selector - transforms form values to API filter params
-const filtersSelector = createSelector(
-  getFormValues('ReviewerPoolFilter'),
-  (filters: any) => {
-    const result: Record<string, any> = {};
-    if (filters?.status) {
-      result.invitation_status = filters.status.value;
-    }
-    return result;
-  },
-);
+const selectReviewerPoolFilters = (filters: any) => {
+  const result: Record<string, any> = {};
+  if (filters?.status) {
+    result.invitation_status = filters.status.value;
+  }
+  return result;
+};
 
 // Tabs hook - defines sub-navigation within the table
 // Note: Include parent tab param (tab: 'reviewer-pool') to preserve context
@@ -873,10 +880,14 @@ const ExpandableRow = ({ row }) => (
   </div>
 );
 
-// Main component
-export const ReviewerPoolSection = ({ call }) => {
-  const formFilters = useSelector(filtersSelector);
+// Main table component
+const ReviewerPoolSectionTable = ({ call }) => {
+  const { values } = useFormState();
   const tabs = usePoolTabs();
+  const formFilters = useMemo(
+    () => selectReviewerPoolFilters(values),
+    [values]
+  );
 
   // Memoize filter to prevent infinite re-renders
   const filter = useMemo(
@@ -947,6 +958,12 @@ export const ReviewerPoolSection = ({ call }) => {
     />
   );
 };
+
+export const ReviewerPoolSection = ({ call }) => (
+  <Form onSubmit={() => {}}>
+    {() => <ReviewerPoolSectionTable call={call} />}
+  </Form>
+);
 ```
 
 ### Key patterns in complex tables

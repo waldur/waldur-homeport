@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { dataAccessLogsList, GlobalUserDataAccessLog } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -10,6 +10,7 @@ import { createFetcher } from '@/table/api';
 import {
   DataAccessLogsFilter as SupportDataAccessLogsFilter,
   selectDataAccessLogsFilter as selectSupportDataAccessLogsFilter,
+  DataAccessLogsFilterFormId,
 } from '@/table/generated/DataAccessLogsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -23,8 +24,13 @@ import { DataAccessLogsBulkDeleteAction } from './DataAccessLogsBulkDeleteAction
 import { DataAccessLogsRowActions } from './DataAccessLogsRowActions';
 import { SupportDataAccessLogsExpandableRow } from './SupportDataAccessLogsExpandableRow';
 
-export const SupportDataAccessLogsList = () => {
-  const filterValues = useSelector(selectSupportDataAccessLogsFilter);
+const SupportDataAccessLogsListTable = () => {
+  const { values } = useFormState();
+
+  const filterValues = useMemo(
+    () => selectSupportDataAccessLogsFilter(values),
+    [values],
+  );
 
   const filter = useMemo(
     () => ({
@@ -120,6 +126,19 @@ export const SupportDataAccessLogsList = () => {
       )}
       enableMultiSelect
       multiSelectActions={DataAccessLogsBulkDeleteAction}
+      formId={DataAccessLogsFilterFormId}
     />
   );
 };
+
+export const SupportDataAccessLogsList = (props) => (
+  <Form
+    id={DataAccessLogsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <SupportDataAccessLogsListTable {...props} />}
+  </Form>
+);

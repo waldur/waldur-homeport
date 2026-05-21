@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   ProposalRequestedOfferingsListData,
@@ -20,7 +19,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -63,7 +61,6 @@ const PureProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -86,7 +83,6 @@ const PureProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -143,7 +139,6 @@ const PureProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -154,29 +149,22 @@ const PureProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
 export const ProposalRequestedOfferingsFilterFormId =
   'ProposalRequestedOfferingsFilter';
 
-interface ProposalRequestedOfferingsFilterFormData {
+export interface ProposalRequestedOfferingsFilterFormData {
   organization: Customer;
   call: PublicCall;
   state: RequestedOfferingStatesOption[];
   offering: PublicOfferingDetails;
 }
 
-export const ProposalRequestedOfferingsFilter = reduxForm<
-  ProposalRequestedOfferingsFilterFormData,
-  {}
->({
-  form: ProposalRequestedOfferingsFilterFormId,
-  destroyOnUnmount: false,
-})(PureProposalRequestedOfferingsFilter);
+export const ProposalRequestedOfferingsFilter =
+  PureProposalRequestedOfferingsFilter;
 
 type ProposalRequestedOfferingsFilterQuery =
   ProposalRequestedOfferingsListData['query'];
 
-export const selectProposalRequestedOfferingsFilter = createSelector<
-  RootState,
-  Partial<ProposalRequestedOfferingsFilterFormData>,
-  ProposalRequestedOfferingsFilterQuery
->(getFormValues(ProposalRequestedOfferingsFilterFormId), (values) => {
+export const selectProposalRequestedOfferingsFilter = (
+  values?: Partial<ProposalRequestedOfferingsFilterFormData>,
+): ProposalRequestedOfferingsFilterQuery => {
   const filter: ProposalRequestedOfferingsFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
@@ -193,4 +181,4 @@ export const selectProposalRequestedOfferingsFilter = createSelector<
     }
   }
   return filter;
-});
+};

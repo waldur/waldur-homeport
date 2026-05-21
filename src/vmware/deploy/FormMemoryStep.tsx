@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
+import { composeValidators } from '@/core/validators';
 import { FormGroup } from '@/form';
 import { SliderNumberField } from '@/form/SliderNumberField';
 import { VStepperFormStepCard } from '@/form/VStepperFormStep';
@@ -20,7 +21,10 @@ export const FormMemoryStep = (props: FormStepProps) => {
   );
 
   const ramValidator = useMemo(
-    () => (limits.max_ram ? [minOne, maxAmount(limits.max_ram)] : minOne),
+    () =>
+      limits.max_ram
+        ? composeValidators(minOne, maxAmount(limits.max_ram))
+        : minOne,
     [limits.max_ram],
   );
 

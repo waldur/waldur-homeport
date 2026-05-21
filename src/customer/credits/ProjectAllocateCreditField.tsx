@@ -7,7 +7,7 @@ import {
   lessThanOrEqual,
   required,
 } from '@/core/validators';
-import { FormGroupFinal, NumberField } from '@/form';
+import { FormGroup, NumberField } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
 
 export const ProjectAllocateCreditField: FC<{
@@ -48,7 +48,7 @@ export const ProjectAllocateCreditField: FC<{
       }
       validate={validate}
       required
-      component={FormGroupFinal}
+      component={FormGroup}
     >
       <NumberField
         placeholder="0"

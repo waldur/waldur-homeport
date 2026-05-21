@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { composeValidators, email, required } from '@/core/validators';
 import { FileUploadField } from '@/form';
@@ -185,7 +185,7 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
       return (
         <Field
           {...commonProps}
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           description={question.user_guidance}
         />
       );

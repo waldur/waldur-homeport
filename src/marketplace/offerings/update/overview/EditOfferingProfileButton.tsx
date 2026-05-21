@@ -10,8 +10,8 @@ import {
 
 import { SelectField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';

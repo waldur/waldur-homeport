@@ -1,6 +1,5 @@
-import { FunctionComponent, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { FunctionComponent, useCallback, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { financialReportsList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -12,6 +11,7 @@ import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import {
   FinancialReportsFilter,
+  FinancialReportsFilterFormData,
   FinancialReportsFilterFormId,
   selectFinancialReportsFilter,
 } from '@/table/generated/FinancialReportsFilter';
@@ -56,15 +56,11 @@ const renderTitleWithPriceTooltip = (title) => (
   </>
 );
 
-export const CustomerList: FunctionComponent<{
-  initialValues;
+const CustomerListTable: FunctionComponent<{
   accountingPeriods;
-}> = ({ initialValues, accountingPeriods }) => {
-  const customerListFilter: any = useSelector(
-    getFormValues(FinancialReportsFilterFormId),
-  );
-  const accountingPeriodIsCurrent =
-    customerListFilter?.accounting_period?.value.current;
+}> = ({ accountingPeriods }) => {
+  const { values } = useFormState<FinancialReportsFilterFormData>();
+  const accountingPeriodIsCurrent = values?.accounting_period?.value?.current;
   const vatMessage =
     ENV.accountingMode === 'accounting'
       ? translate('VAT is not included')
@@ -129,7 +125,7 @@ export const CustomerList: FunctionComponent<{
     });
   }
 
-  const filter = useSelector(selectFinancialReportsFilter);
+  const filter = useMemo(() => selectFinancialReportsFilter(values), [values]);
 
   const props = useTable({
     table: 'customerList',
@@ -151,6 +147,7 @@ export const CustomerList: FunctionComponent<{
   return (
     <Table
       {...props}
+      formId={FinancialReportsFilterFormId}
       columns={columns}
       subtitle={<TotalCostContainer />}
       verboseName={translate('Organizations')}
@@ -159,12 +156,21 @@ export const CustomerList: FunctionComponent<{
       enableExport={true}
       expandableRow={expandableRow}
       tableActions={<FinancialReportSendButton />}
-      filters={
-        <FinancialReportsFilter
-          initialValues={initialValues}
-          accountingPeriods={accountingPeriods}
-        />
-      }
+      filters={<FinancialReportsFilter accountingPeriods={accountingPeriods} />}
     />
   );
 };
+
+export const CustomerList: FunctionComponent<{
+  initialValues;
+  accountingPeriods;
+}> = (props) => (
+  <Form
+    id={FinancialReportsFilterFormId}
+    initialValues={props.initialValues}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <CustomerListTable {...props} />}
+  </Form>
+);

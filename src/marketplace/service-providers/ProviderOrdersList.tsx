@@ -1,59 +1,82 @@
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { MarketplaceOrdersListData } from 'waldur-js-client';
 
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
+
 import { OrdersBulkActions } from '../orders/actions/OrdersBulkActions';
-import { ProviderOrdersListFilter } from '../orders/list/MarketplaceOrdersListFilter';
+import { OrdersListFilter } from '../orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '../orders/list/OrdersTableComponent';
 
 import { PROVIDER_ORDERS_LIST_FILTER_FORM_ID } from './constants';
 
-const useProviderOrdersFilter = (provider_uuid?: string) => {
-  const filterValues: any = useSelector(
-    getFormValues(PROVIDER_ORDERS_LIST_FILTER_FORM_ID),
-  );
-  return useMemo(() => {
-    const filter: MarketplaceOrdersListData['query'] = {};
+const ProviderOrdersListTable = ({ provider }) => {
+  const provider_uuid = provider.customer_uuid;
+  const { values } = useFormState();
+  const filterValues: any = values;
+
+  useEffect(() => {
+    if (filterValues) {
+      syncFiltersToURL(filterValues);
+    }
+  }, [filterValues]);
+
+  const filter = useMemo(() => {
+    const filterObj: MarketplaceOrdersListData['query'] = {};
     if (filterValues) {
       if (filterValues.organization) {
-        filter.customer_uuid = filterValues.organization.uuid;
+        filterObj.customer_uuid = filterValues.organization.uuid;
       }
       if (filterValues.project) {
-        filter.project_uuid = filterValues.project.uuid;
+        filterObj.project_uuid = filterValues.project.uuid;
       }
       if (filterValues.state) {
-        filter.state = filterValues.state.value;
+        filterObj.state = filterValues.state.value;
       }
       if (filterValues.type) {
-        filter.type = filterValues.type.value;
+        filterObj.type = filterValues.type.value;
       }
       if (filterValues.offering) {
-        filter.offering_uuid = filterValues.offering.uuid;
+        filterObj.offering_uuid = filterValues.offering.uuid;
       }
       if (filterValues.provider && !provider_uuid) {
-        filter.provider_uuid = filterValues.provider.customer_uuid;
+        filterObj.provider_uuid = filterValues.provider.customer_uuid;
       }
     }
     if (provider_uuid) {
-      filter.provider_uuid = provider_uuid;
+      filterObj.provider_uuid = provider_uuid;
     }
-    return filter;
+    return filterObj;
   }, [filterValues, provider_uuid]);
-};
 
-export const ProviderOrdersList = ({ provider }) => {
-  const filter = useProviderOrdersFilter(provider.customer_uuid);
   return (
     <OrdersTableComponent
       table="ProviderOrdersList"
+      formId={PROVIDER_ORDERS_LIST_FILTER_FORM_ID}
       filters={
-        <ProviderOrdersListFilter provider_uuid={provider.customer_uuid} />
+        <OrdersListFilter
+          provider_uuid={provider_uuid}
+          hasOffering
+          hasOrganization
+        />
       }
       filter={filter}
       standalone
       enableMultiSelect
       multiSelectActions={OrdersBulkActions}
     />
+  );
+};
+
+export const ProviderOrdersList = ({ provider }) => {
+  const initialValues = useMemo(() => getInitialValues(), []);
+  return (
+    <Form
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+      initialValues={initialValues}
+    >
+      {() => <ProviderOrdersListTable provider={provider} />}
+    </Form>
   );
 };

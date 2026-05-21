@@ -72,8 +72,6 @@ export const VendorNameSelect = ({
       placeholder={translate('Select or type vendor name...')}
       defaultOptions={defaultOption ? [defaultOption] : true}
       additional={{ page: 1 }}
-      classNamePrefix="metronic-select"
-      className="metronic-select-container"
     />
   );
 };
@@ -125,8 +123,6 @@ export const PlanSelect = ({
       isValidNewOption={() => false}
       placeholder={translate('Select plan...')}
       isClearable
-      classNamePrefix="metronic-select"
-      className="metronic-select-container"
       noOptionsMessage={() =>
         offeringUuid
           ? translate('No plans available')

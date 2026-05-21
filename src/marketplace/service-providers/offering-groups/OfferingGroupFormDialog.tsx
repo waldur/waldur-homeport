@@ -8,7 +8,7 @@ import {
 
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
@@ -102,7 +102,7 @@ export const OfferingGroupFormDialog: FC<OfferingGroupFormDialogProps> = (
               />
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <StringField
                 label={translate('Title')}
                 name="title"
@@ -116,7 +116,7 @@ export const OfferingGroupFormDialog: FC<OfferingGroupFormDialogProps> = (
                 name="description"
                 required={false}
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

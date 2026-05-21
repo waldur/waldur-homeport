@@ -2,11 +2,11 @@ import {
   marketplaceCategoriesList,
   marketplaceProviderOfferingsList,
   marketplacePublicOfferingsList,
+  Project,
 } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE, parseSelectData } from '@/core/api';
-import { Category, Offering } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 import { Customer } from '@/workspace/types';
 
 export const fetchCategories = (
@@ -98,6 +98,6 @@ export const fetchLastNOfferings = async (
         o: ['-created'],
       },
     })
-  ).data as any as Offering[];
+  ).data;
   return offerings;
 };

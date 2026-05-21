@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { OptionField } from 'waldur-js-client';
 
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 
-import { orderFormDataSelector } from '../deploy/selectors';
+import { useOrderFormData } from '../deploy/selectors';
 
 interface ComponentMultiplierFieldProps extends FormField {
   field: OptionField;
@@ -25,7 +24,7 @@ export const ComponentMultiplierField = ({
   inputRef.current = input;
 
   // Watch form values to detect limit changes
-  const formValues = useSelector(orderFormDataSelector);
+  const formValues = useOrderFormData();
   const currentLimit = config
     ? formValues?.limits?.[config.component_type]
     : null;

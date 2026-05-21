@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Form } from 'react-final-form';
 
-import { FormContainerFinal, FormFooter, TextField } from '@/form';
+import { FormContainer, FormFooter, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -28,9 +28,9 @@ export const ReviewDialog: FC<ReviewDialogProps> = ({ resolve }) => {
             title={translate('Review request')}
             footer={<FormFooter submitting={submitting} invalid={invalid} />}
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <TextField label={translate('Comment')} name="review_comment" />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

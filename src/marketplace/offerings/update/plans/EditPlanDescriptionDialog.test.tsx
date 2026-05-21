@@ -33,11 +33,6 @@ vi.mock('@/store/notify', () => ({
 }));
 
 // Mock modal hooks
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-  }),
-}));
 
 // Mock translation
 vi.mock('@/core/translate', () => ({

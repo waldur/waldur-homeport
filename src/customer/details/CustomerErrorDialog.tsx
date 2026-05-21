@@ -1,21 +1,22 @@
 import { FunctionComponent, useMemo } from 'react';
-import { IssueTypeEnum } from 'waldur-js-client';
+import { Issue, IssueTypeEnum, supportIssuesCreate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { SubmitButton } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { useIssueCreateMutation } from '@/issues/create/utils';
 import { ISSUE_IDS } from '@/issues/types/constants';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { router } from '@/router';
+import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
 export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
   resolve,
 }) => {
-  const { mutateAsync: createIssue, isPending: submitting } =
-    useIssueCreateMutation(resolve.refetch);
+  const { showSuccess } = useNotify();
   const user = useUser();
   const description = useMemo<string[]>(() => {
     const parts = [];
@@ -224,16 +225,33 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
 
     return parts;
   }, [resolve]);
-  const onCreateIssue = () => {
-    const payload = {
-      type: ISSUE_IDS.SERVICE_REQUEST as IssueTypeEnum,
-      summary: translate('Incorrect organization details'),
-      customer: resolve.customer.url,
-      description: description.join('\n'),
-      caller: user.url,
-    };
-    createIssue({ payload });
-  };
+  const { mutate: onCreateIssue, isPending: submitting } = useManagedMutation<
+    Issue,
+    any,
+    void
+  >({
+    mutationFn: async () => {
+      const payload = {
+        type: ISSUE_IDS.SERVICE_REQUEST as IssueTypeEnum,
+        summary: translate('Incorrect organization details'),
+        customer: resolve.customer.url,
+        description: description.join('\n'),
+        caller: user?.url,
+      };
+      const response = await supportIssuesCreate({ body: payload });
+      return response.data;
+    },
+    onSuccess: (issue) => {
+      showSuccess(
+        translate('Request {requestId} has been created.', {
+          requestId: issue.key,
+        }),
+      );
+      if (resolve.refetch) resolve.refetch();
+      router.stateService.go('support.detail', { issue_uuid: issue.uuid });
+    },
+    errorMessage: translate('Unable to create request.'),
+  });
   return (
     <ModalDialog
       title={translate('Incorrect organization details')}
@@ -243,7 +261,7 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
           {ENV.plugins.WALDUR_SUPPORT.ENABLED && (
             <SubmitButton
               submitting={submitting}
-              onClick={onCreateIssue}
+              onClick={() => onCreateIssue()}
               type="button"
               label={translate('Propose changes')}
             />

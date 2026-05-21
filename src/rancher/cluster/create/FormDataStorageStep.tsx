@@ -1,7 +1,6 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { FieldArray, FormSection } from 'redux-form';
+import { FieldArray } from 'react-final-form-arrays';
 
 import { isFeatureVisible } from '@/features/connect';
 import { RancherFeatures } from '@/FeaturesEnums';
@@ -15,11 +14,7 @@ import {
   FormNodeStorageRow,
   FormNodeStorageTable,
 } from './FormNodeStorageTable';
-import {
-  formNodesSelector,
-  formTenantSelector,
-  useVolumeDataLoader,
-} from './utils';
+import { useFormNodes, useFormTenant, useVolumeDataLoader } from './utils';
 import { VolumeMountPointGroup } from './VolumeMountPointGroup';
 
 import './FormDataStorageStep.scss';
@@ -31,15 +26,14 @@ const renderDataVolumeRows = ({
   defaultVolumeType,
   sizeLimit,
   sizeValidate,
-  change,
 }: any) => {
   return (
     <>
       {fields.length > 0 &&
         fields.map((volume, index) => (
-          <FormSection key={index} name={volume} component={Fragment}>
+          <Fragment key={index}>
             <FormNodeStorageRow
-              parentName={`${fields.name}[${index}]`}
+              parentName={volume}
               typeName="volume_type"
               sizeName="size"
               altRowName={'#' + (index + 1)}
@@ -47,7 +41,6 @@ const renderDataVolumeRows = ({
               defaultVolumeType={defaultVolumeType}
               sizeLimit={sizeLimit}
               sizeValidate={sizeValidate}
-              change={change}
               onDeleteRow={() => fields.remove(index)}
             />
 
@@ -58,7 +51,7 @@ const renderDataVolumeRows = ({
                 </td>
               </tr>
             )}
-          </FormSection>
+          </Fragment>
         ))}
       <tr>
         <td colSpan={4}>
@@ -78,8 +71,8 @@ const renderDataVolumeRows = ({
 };
 
 export const FormDataStorageStep = (props: FormStepProps) => {
-  const tenant = useSelector(formTenantSelector);
-  const nodes = useSelector(formNodesSelector);
+  const tenant = useFormTenant();
+  const nodes = useFormNodes();
   const { data, isLoading } = useVolumeDataLoader(tenant);
 
   const limit = 10240; // GB
@@ -109,18 +102,15 @@ export const FormDataStorageStep = (props: FormStepProps) => {
             volumeTypeChoices={data?.volumeTypeChoices}
             title={node.name}
           >
-            <FormSection name={String(`attributes.nodes[${i}]`)}>
-              <FieldArray
-                name="data_volumes"
-                component={renderDataVolumeRows}
-                volumeTypeChoices={data?.volumeTypeChoices}
-                defaultVolumeType={data?.defaultVolumeType}
-                sizeLimit={limit}
-                sizeValidate={[exceeds]}
-                change={props.change}
-                nodeIndex={i}
-              />
-            </FormSection>
+            <FieldArray
+              name={`attributes.nodes[${i}].data_volumes`}
+              component={renderDataVolumeRows}
+              volumeTypeChoices={data?.volumeTypeChoices}
+              defaultVolumeType={data?.defaultVolumeType}
+              sizeLimit={limit}
+              sizeValidate={[exceeds]}
+              nodeIndex={i}
+            />
           </FormNodeStorageTable>
         ))
       ) : (

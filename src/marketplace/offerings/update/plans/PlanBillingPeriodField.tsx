@@ -10,7 +10,7 @@ export const PlanBillingPeriodField: FunctionComponent = () => (
   <Field
     name="unit"
     validate={required}
-    component={SelectField as any}
+    component={SelectField}
     options={getBillingPeriods()}
     isClearable={false}
   />

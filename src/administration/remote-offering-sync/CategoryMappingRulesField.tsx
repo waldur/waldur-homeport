@@ -111,8 +111,6 @@ const FieldsListGroup = ({
                               fieldProps.input.onChange(value)
                             }
                             noOptionsMessage={() => translate('No categories')}
-                            className="metronic-select-container"
-                            classNamePrefix="metronic-select"
                           />
                         )}
                       </Field>

@@ -13,9 +13,9 @@ import { formatDate, parseDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
+import { getProject } from '@/workspace/selectors';
 
 import { DeployPage } from '../deploy/DeployPage';
-import { orderProjectSelector } from '../deploy/selectors';
 import { Offering } from '../types';
 
 async function loadData(offering_uuid: string) {
@@ -50,7 +50,7 @@ export const OfferingDetailsPage: React.FC = () => {
       : translate('Add resource'),
   );
 
-  const project = useSelector(orderProjectSelector);
+  const project = useSelector(getProject);
   usePermissionView(() => {
     if (project?.end_date) {
       const endDate = parseDate(project.end_date);

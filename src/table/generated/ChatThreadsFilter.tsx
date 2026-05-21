@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   ChatThreadsListData,
   InjectionSeverityEnum,
@@ -19,7 +18,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -97,7 +95,6 @@ const PureChatThreadsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -196,7 +193,7 @@ const PureChatThreadsFilter: FunctionComponent<{}> = () => (
 
 export const ChatThreadsFilterFormId = 'ChatThreadsFilter';
 
-interface ChatThreadsFilterFormData {
+export interface ChatThreadsFilterFormData {
   created: string;
   modified: string;
   user: User;
@@ -209,18 +206,13 @@ interface ChatThreadsFilterFormData {
   total_tokens_range: { min?: number; max?: number };
 }
 
-export const ChatThreadsFilter = reduxForm<ChatThreadsFilterFormData, {}>({
-  form: ChatThreadsFilterFormId,
-  destroyOnUnmount: false,
-})(PureChatThreadsFilter);
+export const ChatThreadsFilter = PureChatThreadsFilter;
 
 type ChatThreadsFilterQuery = ChatThreadsListData['query'];
 
-export const selectChatThreadsFilter = createSelector<
-  RootState,
-  Partial<ChatThreadsFilterFormData>,
-  ChatThreadsFilterQuery
->(getFormValues(ChatThreadsFilterFormId), (values) => {
+export const selectChatThreadsFilter = (
+  values?: Partial<ChatThreadsFilterFormData>,
+): ChatThreadsFilterQuery => {
   const filter: ChatThreadsFilterQuery = {} as any;
   if (values) {
     if (values.created) {
@@ -264,4 +256,4 @@ export const selectChatThreadsFilter = createSelector<
     }
   }
   return filter;
-});
+};

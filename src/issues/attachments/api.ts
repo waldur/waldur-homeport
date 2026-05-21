@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { uniqueId } from 'lodash';
+import { uniqueId } from 'lodash-es';
 import { useCallback, useState } from 'react';
 import {
   supportAttachmentsCreate,

@@ -1,7 +1,5 @@
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
+import { FC, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import {
   ComponentUsage,
   marketplaceComponentUsagesList,
@@ -10,6 +8,7 @@ import {
 
 import { formatDateTime } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
+import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
 import { translate } from '@/i18n';
 import { getStartAndEndDatesOfMonth } from '@/issues/utils';
 import { ResourceLink } from '@/resource/ResourceLink';
@@ -24,38 +23,37 @@ import { usageTableTabs } from '../utils';
 import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
 import { UsageExpandableRow } from './UserUsageExpandableRow';
 
-export const mapStateToFilter = createSelector(
-  getFormValues(FORM_ID),
-  (usageFilter: any) => {
-    const filter: MarketplaceComponentUsagesListData['query'] = {};
-    if (usageFilter) {
-      if (usageFilter.accounting_period) {
-        const { start } = getStartAndEndDatesOfMonth(
-          usageFilter.accounting_period.value,
-        );
-        const startDate = new Date(start);
-        filter.billing_period_year = startDate.getFullYear();
-        filter.billing_period_month = startDate.getMonth() + 1;
-      }
-      if (usageFilter.organization) {
-        filter.customer_uuid = usageFilter.organization.uuid;
-      }
-      if (usageFilter.project) {
-        filter.project_uuid = usageFilter.project.uuid;
-      }
-      if (usageFilter.offering) {
-        filter.offering_uuid = usageFilter.offering.uuid;
-      }
-      if (usageFilter.resource) {
-        filter.resource_uuid = usageFilter.resource.uuid;
-      }
+export const selectResourceUsageFilter = (usageFilter: any) => {
+  const filter: MarketplaceComponentUsagesListData['query'] = {};
+  if (usageFilter) {
+    if (usageFilter.accounting_period) {
+      const { start } = getStartAndEndDatesOfMonth(
+        usageFilter.accounting_period.value,
+      );
+      const startDate = new Date(start);
+      filter.billing_period_year = startDate.getFullYear();
+      filter.billing_period_month = startDate.getMonth() + 1;
     }
-    return filter;
-  },
-);
+    if (usageFilter.organization) {
+      filter.customer_uuid = usageFilter.organization.uuid;
+    }
+    if (usageFilter.project) {
+      filter.project_uuid = usageFilter.project.uuid;
+    }
+    if (usageFilter.offering) {
+      filter.offering_uuid = usageFilter.offering.uuid;
+    }
+    if (usageFilter.resource) {
+      filter.resource_uuid = usageFilter.resource.uuid;
+    }
+  }
+  return filter;
+};
 
-export const ResourceUsageList: FC = () => {
-  const filter = useSelector(mapStateToFilter);
+const ResourceUsageListTable: FC = () => {
+  const { values } = useFormState();
+  const filter = useMemo(() => selectResourceUsageFilter(values), [values]);
+
   const tableProps = useTable({
     table: 'ResourceUsageReports',
     fetchData: createFetcher(marketplaceComponentUsagesList),
@@ -145,8 +143,22 @@ export const ResourceUsageList: FC = () => {
         expandableRow={({ row }) => (
           <UsageExpandableRow row={row} type="resource-usage" />
         )}
-        filters={<ResourceUsageFilter form={FORM_ID} />}
+        filters={<ResourceUsageFilter />}
+        formId={FORM_ID}
       />
     </>
   );
 };
+
+export const ResourceUsageList: FC = () => (
+  <Form
+    id={FORM_ID}
+    onSubmit={() => {}}
+    initialValues={{
+      accounting_period: makeLastTwelveMonthsFilterPeriods()[0],
+    }}
+    subscription={{ values: true }}
+  >
+    {() => <ResourceUsageListTable />}
+  </Form>
+);

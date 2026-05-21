@@ -221,16 +221,12 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
             }
           >
             <FormGroup label={translate('Name')} required>
-              <Field
-                component={StringField as any}
-                name="name"
-                validate={required}
-              />
+              <Field component={StringField} name="name" validate={required} />
             </FormGroup>
 
             <FormGroup label={translate('Type')} required>
               <Field
-                component={SelectField as any}
+                component={SelectField}
                 name="issue_type"
                 options={IssueTemplateTypeOptions}
                 validate={required}
@@ -242,7 +238,7 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
 
             <FormGroup label={translate('Description')} required>
               <Field
-                component={TextField as any}
+                component={TextField}
                 name="description"
                 validate={required}
               />

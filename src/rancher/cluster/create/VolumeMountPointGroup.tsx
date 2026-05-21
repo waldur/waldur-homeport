@@ -38,7 +38,7 @@ export const VolumeMountPointGroup: FunctionComponent<{
     <FormGroup label={translate('Mount point')} required={true}>
       <Field
         name={props.name || 'mount_point'}
-        component={InputField as any}
+        component={InputField}
         validate={validateMountPoint}
       />
     </FormGroup>

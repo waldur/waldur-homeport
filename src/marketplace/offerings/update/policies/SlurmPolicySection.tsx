@@ -723,7 +723,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               required
             >
               <Field
-                component={SelectField as any}
+                component={SelectField}
                 name="actions"
                 options={slurmActionOptions}
                 getOptionValue={(option) => option.value}
@@ -749,7 +749,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
                     required
                   >
                     <Field
-                      component={StringField as any}
+                      component={StringField}
                       name="options.notify_external_user"
                       validate={validateEmails}
                       placeholder="admin@example.com, ops@example.com"
@@ -771,7 +771,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               required
             >
               <Field
-                component={SelectField as any}
+                component={SelectField}
                 name="period"
                 options={Object.values(policyPeriodOptions)}
                 getOptionValue={(option) => option.value}
@@ -782,7 +782,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
 
             <FormGroup label={translate('Limit Type')} required>
               <Field
-                component={SelectField as any}
+                component={SelectField}
                 name="limit_type"
                 options={limitTypeOptions}
                 getOptionValue={(option) => option.value}
@@ -797,7 +797,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               )}
             >
               <Field
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 name="tres_billing_enabled"
                 label={translate('TRES Billing Enabled')}
               />
@@ -817,7 +817,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               required
             >
               <Field
-                component={NumberField as any}
+                component={NumberField}
                 name="carryover_factor"
                 min={0}
                 max={100}
@@ -833,7 +833,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               required
             >
               <Field
-                component={NumberField as any}
+                component={NumberField}
                 name="grace_ratio"
                 min={0}
                 max={1}
@@ -847,7 +847,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               )}
             >
               <Field
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 name="carryover_enabled"
                 label={translate('Carryover Enabled')}
               />
@@ -859,7 +859,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               )}
             >
               <Field
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 name="raw_usage_reset"
                 label={translate('Raw Usage Reset')}
               />
@@ -867,7 +867,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
 
             <FormGroup label={translate('QoS Strategy')} required>
               <Field
-                component={SelectField as any}
+                component={SelectField}
                 name="qos_strategy"
                 options={qosStrategyOptions}
                 getOptionValue={(option) => option.value}
@@ -888,7 +888,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               }
             >
               <Field
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 name="apply_to_all"
                 label={translate('Apply to All Organization Groups')}
                 disabled={organizationGroups?.length === 0}
@@ -917,7 +917,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
                       required
                     >
                       <Field
-                        component={SelectField as any}
+                        component={SelectField}
                         name="organization_groups"
                         options={organizationGroups.map((group) => ({
                           value: group.url,

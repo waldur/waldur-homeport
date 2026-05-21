@@ -6,7 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroupFinal, SelectField, SubmitButton } from '@/form';
+import { FormGroup, SelectField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -104,7 +104,7 @@ export const RoleMappingFormDialog = ({ resolve }) => {
               <Field
                 name="proposal_role"
                 label={translate('Proposal role')}
-                component={FormGroupFinal}
+                component={FormGroup}
                 options={proposalRoleOptions}
                 getOptionLabel={(option) => option.label || option.name}
                 getOptionValue={(option) => option.name}
@@ -117,7 +117,7 @@ export const RoleMappingFormDialog = ({ resolve }) => {
             <Field
               name="project_role"
               label={translate('Project role')}
-              component={FormGroupFinal}
+              component={FormGroup}
               options={projectRoleOptions}
               getOptionLabel={(option) => option.label || option.name}
               getOptionValue={(option) => option.name || null}

@@ -1,18 +1,20 @@
-import { Form } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
+import { FormGroup } from '@/form';
 import { Select } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
 export const OrganizationGroup = ({ disabled }) => (
-  <Form.Group className="mb-5 flex-equal">
-    <Form.Label>{translate('Organization')}</Form.Label>
-    <Field
-      component={Select}
-      name="customer"
-      validate={!disabled ? [required] : undefined}
+  <Field
+    name="customer"
+    component={FormGroup}
+    label={translate('Organization')}
+    validate={!disabled ? required : undefined}
+    containerClassName="flex-equal"
+  >
+    <Select
       defaultOptions
       loadOptions={(query, prevOptions, page) =>
         organizationAutocomplete(query, prevOptions, page, {
@@ -24,5 +26,5 @@ export const OrganizationGroup = ({ disabled }) => (
       getOptionValue={(option) => option.uuid}
       isDisabled={disabled}
     />
-  </Form.Group>
+  </Field>
 );

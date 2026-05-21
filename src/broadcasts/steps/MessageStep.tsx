@@ -26,7 +26,7 @@ export const MessageStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="template"
-          component={Select as any}
+          component={Select}
           placeholder={translate('Select template...')}
           loadOptions={templateAutocomplete}
           getOptionLabel={(option) => option.name}
@@ -56,15 +56,11 @@ export const MessageStep: FC<WizardStepProps> = (props) => {
       </FormGroup>
 
       <FormGroup label={translate('Subject')} required>
-        <Field
-          name="subject"
-          component={StringField as any}
-          validate={required}
-        />
+        <Field name="subject" component={StringField} validate={required} />
       </FormGroup>
 
       <FormGroup label={translate('Message')} required>
-        <Field name="body" component={TextField as any} validate={required} />
+        <Field name="body" component={TextField} validate={required} />
       </FormGroup>
 
       <FormGroup
@@ -75,7 +71,7 @@ export const MessageStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="send_at"
-          component={DateField as any}
+          component={DateField}
           minDate={DateTime.now().plus({ days: 1 }).toISO()}
         />
       </FormGroup>

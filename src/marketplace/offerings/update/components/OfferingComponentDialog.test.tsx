@@ -19,12 +19,6 @@ vi.mock('waldur-js-client', () => ({
   formDataBodySerializer: vi.fn(),
 }));
 
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-  }),
-}));
-
 vi.mock('@/form/themed-select', () => ({
   Select: (props) => (
     <select

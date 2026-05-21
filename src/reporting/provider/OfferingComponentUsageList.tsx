@@ -1,7 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form, useFormState } from 'react-final-form';
 
 import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
@@ -20,11 +19,10 @@ import {
   OfferingComponentUsageFilter,
 } from './OfferingComponentUsageFilter';
 
-export const OfferingComponentUsageList = () => {
+const OfferingComponentUsageListTable = () => {
   const { params } = useCurrentStateAndParams();
-  const filterValues: any = useSelector(
-    getFormValues(COMPONENT_USAGE_FILTER_FORM_ID),
-  );
+  const { values } = useFormState();
+  const filterValues = values;
 
   const activeTab = params.tab || 'usage';
 
@@ -112,9 +110,7 @@ export const OfferingComponentUsageList = () => {
       <Table<OfferingComponentUsage>
         {...props}
         columns={columns}
-        filters={
-          <OfferingComponentUsageFilter form={COMPONENT_USAGE_FILTER_FORM_ID} />
-        }
+        filters={<OfferingComponentUsageFilter />}
         tabs={[
           {
             key: 'usage',
@@ -132,7 +128,18 @@ export const OfferingComponentUsageList = () => {
         hideTitle
         initialSorting={{ field: 'usage_percent', mode: 'desc' }}
         expandableRow={OfferingComponentUsageExpandableRow}
+        formId={COMPONENT_USAGE_FILTER_FORM_ID}
       />
     </>
   );
 };
+
+export const OfferingComponentUsageList = () => (
+  <Form
+    id={COMPONENT_USAGE_FILTER_FORM_ID}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <OfferingComponentUsageListTable />}
+  </Form>
+);

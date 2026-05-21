@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { openDrawerDialog } from '@/drawer/actions';
@@ -16,7 +16,7 @@ const QuickIssueContainer = lazyComponent(() =>
 export const IssuesLink: React.FC = () => {
   const dispatch = useDispatch();
   const user = useUser();
-  const showIssues = useSelector(hasSupport);
+  const showIssues = hasSupport();
 
   const openDrawer = () => {
     dispatch(

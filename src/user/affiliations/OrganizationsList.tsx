@@ -1,6 +1,6 @@
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, useCallback, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -19,6 +19,7 @@ import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   CustomersFilter,
+  CustomersFilterFormId,
   selectCustomersFilter,
 } from '@/table/generated/CustomersFilter';
 import { SLUG_COLUMN } from '@/table/slug';
@@ -44,19 +45,20 @@ const mandatoryFields: CustomersListData['query']['field'] = [
   'url', // Expand view - to create project
 ];
 
-const filterSelector = createSelector(
-  getUser,
-  selectCustomersFilter,
-  (user, filter) => ({
-    ...filter,
-    user_uuid: user?.uuid,
-  }),
-);
-
-export const OrganizationsList: FunctionComponent = () => {
+const OrganizationsListTable: FunctionComponent = () => {
   useTitle(translate('Organizations'), '', 'browser');
 
-  const filter = useSelector(filterSelector);
+  const user = useSelector(getUser);
+  const { values } = useFormState();
+  const filterValues = useMemo(() => selectCustomersFilter(values), [values]);
+
+  const filter = useMemo(
+    () => ({
+      ...filterValues,
+      user_uuid: user?.uuid,
+    }),
+    [filterValues, user],
+  );
 
   const props = useTable({
     table: 'customerList',
@@ -301,6 +303,7 @@ export const OrganizationsList: FunctionComponent = () => {
   return (
     <Table
       {...props}
+      formId={CustomersFilterFormId}
       columns={columns}
       verboseName={translate('organizations')}
       title={translate('Organizations')}
@@ -330,3 +333,13 @@ export const OrganizationsList: FunctionComponent = () => {
     />
   );
 };
+
+export const OrganizationsList: FunctionComponent = () => (
+  <Form
+    id={CustomersFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <OrganizationsListTable />}
+  </Form>
+);

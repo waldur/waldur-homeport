@@ -1,6 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
+import { FC, useCallback, useMemo, useState } from 'react';
 import {
   proposalProposalsResourcesPartialUpdate,
   proposalProposalsResourcesSet,
@@ -51,7 +49,7 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
   const { closeDialog } = useModal();
 
   const callback = useCallback(
-    async (formData: ProposalResourceFormData, _dispatch, formProps) => {
+    async (formData: ProposalResourceFormData) => {
       const attributes = {};
       if (formData.attributes) {
         Object.assign(attributes, formData.attributes);
@@ -74,7 +72,6 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
             body: payload,
           });
           showSuccess(translate('Resource request has been updated.'));
-          formProps.destroy();
           closeDialog();
           props.resolve.refetch();
         } catch (error) {
@@ -88,7 +85,6 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
             body: payload,
           });
           showSuccess(translate('Resource request has been submitted.'));
-          formProps.destroy();
           closeDialog();
           props.resolve.refetch();
         } catch (error) {
@@ -101,9 +97,15 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
 
   const isEdit = Boolean(props.resolve.resourceRequest);
 
-  /** Auto filling `mainOffering` in step 2 */
-  const mainOffering: Offering = useSelector((state) =>
-    formValueSelector('ProposalResourceForm')(state, 'mainOffering'),
+  const [mainOffering, setMainOffering] = useState<Offering>(null);
+
+  const handleFormChange = useCallback(
+    (values) => {
+      if (values?.mainOffering !== mainOffering) {
+        setMainOffering(values?.mainOffering);
+      }
+    },
+    [mainOffering],
   );
 
   const WizardStepsData = useMemo(() => {
@@ -142,6 +144,7 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
           name: props.resolve.proposal.call_name,
         },
       }}
+      onChange={handleFormChange}
     />
   );
 };

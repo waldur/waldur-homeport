@@ -1,34 +1,28 @@
 import { createElement, FC } from 'react';
-import { connect } from 'react-redux';
-import { isSubmitting } from 'redux-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { ORDER_FORM_ID } from '@/marketplace/details/constants';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { DeployPageTotalCard } from '../deploy/DeployPageTotalCard';
-import { formIsValidSelector } from '../deploy/selectors';
-import { formSubmitErrorsSelector } from '../deploy/selectors';
-import { formErrorsSelector } from '../deploy/selectors';
-import { orderCustomerSelector } from '../deploy/selectors';
-import { orderFormDataSelector } from '../deploy/selectors';
 
 import { OrderSubmitButton } from './OrderSubmitButton';
 import { OrderSummaryPlanRows } from './plan/OrderSummaryPlanRows';
-import { pricesSelector, useComponentsDetailPrices } from './plan/utils';
+import { useOrderPrices, useComponentsDetailPrices } from './plan/utils';
 import { OrderSummaryProps } from './types';
 
 export const SummaryTable: FC<OrderSummaryProps> = (props) => {
+  const formData = useOrderFormData();
   return (
     <div className={props.onlyDetails ? 'fs-6' : 'mb-8 fs-6'}>
       {props.extraComponent ? createElement(props.extraComponent, props) : null}
-      {props.formData && props.formData.plan && (
+      {formData && formData.plan && (
         <OrderSummaryPlanRows
           priceData={props.prices}
-          customer={props.formData.customer}
+          customer={formData.customer}
           hasTotal={props.onlyDetails}
           concealPrices={props.shouldConcealPrices}
         />
@@ -58,38 +52,32 @@ const OrderCheckout: FC<OrderSummaryProps> = (props) => {
       monthlyRecurringCost={monthlyRecurring}
     >
       <SummaryTable {...props} />
-      <OrderSubmitButton {...props} />
+      <OrderSubmitButton />
     </DeployPageTotalCard>
   );
 };
 
-const PureOrderSummary: FC<OrderSummaryProps> = (props) =>
-  props.onlyDetails ? (
-    <SummaryTable {...props} />
-  ) : (
-    <OrderCheckout {...props} />
-  );
+export const OrderSummary: FC<{
+  offering: PublicOfferingDetails;
+  onlyDetails?: boolean;
+  [key: string]: any;
+}> = (props) => {
+  const formData = useOrderFormData();
+  const customer = formData?.customer;
+  const prices = useOrderPrices(props);
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+    customer?.display_billing_info_in_projects === false;
 
-const mapStateToProps = (state, ownProps) => {
-  const customer = orderCustomerSelector(state);
-  return {
-    customer,
-    prices: pricesSelector(state, ownProps),
-    formData: orderFormDataSelector(state),
-    formValid: formIsValidSelector(state),
-    errors: {
-      ...formErrorsSelector(state),
-      ...formSubmitErrorsSelector(state),
-    },
-    isSubmitting: isSubmitting(ORDER_FORM_ID)(state),
-    shouldConcealPrices:
-      isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
-      customer?.display_billing_info_in_projects === false,
+  const summaryProps: OrderSummaryProps = {
+    ...props,
+    prices,
+    shouldConcealPrices,
   };
-};
 
-export const OrderSummary = connect<
-  ReturnType<typeof mapStateToProps>,
-  {},
-  { offering: PublicOfferingDetails; onlyDetails?: boolean }
->(mapStateToProps)(PureOrderSummary);
+  return props.onlyDetails ? (
+    <SummaryTable {...summaryProps} />
+  ) : (
+    <OrderCheckout {...summaryProps} />
+  );
+};

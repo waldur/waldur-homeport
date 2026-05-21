@@ -11,9 +11,6 @@ const mockConfirm = vi.fn();
 
 vi.mock('waldur-js-client');
 vi.mock('@tanstack/react-query');
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({ confirm: mockConfirm }),
-}));
 vi.mock('@/store/notify');
 
 describe('UserStatus', () => {

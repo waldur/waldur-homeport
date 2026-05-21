@@ -266,7 +266,6 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
           loadOptions={loadUsers}
           defaultOptions
           placeholder={translate('Search by name, email or username...')}
-          classNamePrefix="metronic-select"
           isClearable
           getOptionLabel={(opt) =>
             (opt as UserOption).full_name ||

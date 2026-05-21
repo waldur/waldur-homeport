@@ -29,7 +29,7 @@ export const StorageDataTypeArrayField = ({
             <Col md={6}>
               <Field
                 name={`${member}.key`}
-                component={InputField as any}
+                component={InputField}
                 label={translate('Key')}
                 help_text={translate(
                   'Internal identifier (lowercase, no spaces)',
@@ -41,7 +41,7 @@ export const StorageDataTypeArrayField = ({
             <Col md={6}>
               <Field
                 name={`${member}.label`}
-                component={InputField as any}
+                component={InputField}
                 label={translate('Display Label')}
                 help_text={translate('User-friendly name shown in dropdown')}
                 placeholder={translate('Display Label')}

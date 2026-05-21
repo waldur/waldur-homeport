@@ -1,7 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Form, useFormState } from 'react-final-form';
 import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -43,21 +41,18 @@ const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
 
 const mandatoryFields = ['uuid', 'invitation_expires_at'];
 
-// Filter selector to get form values
-const filtersSelector = createSelector(
-  getFormValues(MY_INVITATIONS_FILTER_FORM_ID),
-  (filters: any) => {
+const MyInvitationsTable: FC = () => {
+  const tabs = useMyReviewsTabs();
+  const { values } = useFormState();
+
+  const formFilters = useMemo(() => {
+    const filters = values;
     const result: Record<string, any> = {};
     if (filters?.invitation_status) {
       result.invitation_status = [filters.invitation_status.value];
     }
     return result;
-  },
-);
-
-export const MyInvitationsPage: FC = () => {
-  const tabs = useMyReviewsTabs();
-  const formFilters = useSelector(filtersSelector);
+  }, [values]);
 
   const filter = useMemo(
     () => ({
@@ -79,10 +74,8 @@ export const MyInvitationsPage: FC = () => {
     <div className="d-flex flex-column gap-6">
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard />
-
       {/* Stats widgets */}
       <ReviewStatsWidgets />
-
       {/* Invitations table */}
       <Table<CallReviewerPoolExtended>
         {...tableProps}
@@ -127,7 +120,21 @@ export const MyInvitationsPage: FC = () => {
         filters={<MyInvitationsFilter />}
         hasOptionalColumns
         hasQuery
+        formId={MY_INVITATIONS_FILTER_FORM_ID}
       />
     </div>
   );
 };
+
+export const MyInvitationsPage: FC = () => (
+  <Form
+    id={MY_INVITATIONS_FILTER_FORM_ID}
+    onSubmit={() => {}}
+    initialValues={{
+      invitation_status: { value: 'pending', label: translate('Pending') },
+    }}
+    subscription={{ values: true }}
+  >
+    {() => <MyInvitationsTable />}
+  </Form>
+);

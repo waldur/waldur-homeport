@@ -94,14 +94,14 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                 <Field
                   name="version"
                   validate={required}
-                  component={StringField as any}
+                  component={StringField}
                 />
               </FormGroup>
 
               <FormGroup label={translate('Add as')} required>
                 <Field
                   name="add_as"
-                  component={SelectField as any}
+                  component={SelectField}
                   options={addAsOptions}
                   simpleValue
                 />
@@ -119,7 +119,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                       <div className="markdown-editor-wrapper">
                         <Field
                           name="terms_of_service"
-                          component={MarkdownEditor as any}
+                          component={MarkdownEditor}
                           required
                           autoFocus
                           hideLabel
@@ -149,7 +149,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                   <Field
                     name="terms_of_service_link"
                     validate={required}
-                    component={StringField as any}
+                    component={StringField}
                   />
                 </FormGroup>
               )}
@@ -157,7 +157,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
               <div className="mb-3">
                 <Field
                   name="is_active"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Active')}
                 />
               </div>
@@ -165,7 +165,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
               <div className="mb-3">
                 <Field
                   name="requires_reconsent"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Requires re-consent')}
                 />
               </div>
@@ -183,7 +183,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                 >
                   <Field
                     name="grace_period_days"
-                    component={NumberField as any}
+                    component={NumberField}
                     min={0}
                     parse={(value) =>
                       value === '' ? undefined : Number(value)

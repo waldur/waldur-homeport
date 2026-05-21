@@ -1,18 +1,25 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { OpenstackImagesListData } from 'waldur-js-client';
 
 import {
   OpenstackImagesFilter,
   selectOpenstackImagesFilter,
+  OpenstackImagesFilterFormId,
 } from '@/table/generated/OpenstackImagesFilter';
 
 import { TenantImagesList } from './TenantImagesList';
 
-export const TenantImagesTable: FunctionComponent<{ resourceScope }> = ({
+const TenantImagesTableTable: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filterValues = useSelector(selectOpenstackImagesFilter);
+  const { values } = useFormState();
+
+  const filterValues = useMemo(
+    () => selectOpenstackImagesFilter(values),
+    [values],
+  );
+
   const filter = useMemo(
     (): OpenstackImagesListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
@@ -24,3 +31,15 @@ export const TenantImagesTable: FunctionComponent<{ resourceScope }> = ({
     <TenantImagesList filter={filter} filters={<OpenstackImagesFilter />} />
   );
 };
+
+export const TenantImagesTable = (props) => (
+  <Form
+    id={OpenstackImagesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <TenantImagesTableTable {...props} />}
+  </Form>
+);

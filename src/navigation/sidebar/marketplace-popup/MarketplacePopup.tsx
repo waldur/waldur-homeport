@@ -1,8 +1,8 @@
 import { debounce } from 'lodash-es';
-import { useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { Form, useForm, useFormState } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFormValues, reduxForm } from 'redux-form';
 import { Project } from 'waldur-js-client';
 
 import { FilterBox } from '@/form/FilterBox';
@@ -17,8 +17,6 @@ import { sidebarResourcesFilterSelector } from '../resources-filter/utils';
 
 import { DataLoader } from './DataLoader';
 
-const ADD_RESOURCE_DIALOG_FORM = 'AddResourceDialogForm';
-
 interface MarketplacePopupProps {
   resolve?: {
     organization?: Customer;
@@ -32,63 +30,28 @@ interface FormData {
   project?: Project;
 }
 
-export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
-  form: ADD_RESOURCE_DIALOG_FORM,
-  destroyOnUnmount: false,
-})((props) => {
+const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
+  categoryUuid,
+}) => {
   const [filter, setFilter] = useState('');
+  const dispatch = useDispatch();
+  const form = useForm();
+  const { values } = useFormState<FormData>();
 
-  const dispatch = useDispatch<any>();
-  const formValues = useSelector(getFormValues(props.form)) as FormData;
-
-  // Apply active sidebar resources filters
-  const sidebarResourcesFilters = useSelector(sidebarResourcesFilterSelector);
-
-  // Init filters (if exists)
-  // props.resolve filter is preferred over sidebar resources filter
-  const [ready, setReady] = useState(false); // To avoid unnecessary fetching of categories data
-  useEffect(() => {
-    const preferredFilter =
-      props.resolve?.organization || props.resolve?.project
-        ? props.resolve
-        : sidebarResourcesFilters;
-    dispatch(props.change('organization', preferredFilter?.organization));
-    dispatch(props.change('project', preferredFilter?.project));
-    setReady(true);
-  }, []);
-
-  // `formValues` from redux-form's getFormValues selector is a fresh object on
-  // every store update, so depending on it directly causes these effects to
-  // refire on every render -- including spurious ones triggered by ancestor
-  // re-renders, react-query subscriptions, or our own dispatches below
-  // (the second effect dispatches setMarketplaceFilter which updates store
-  // state that the form selector reads, completing a render-storm loop).
-  // Pluck the only fields actually consumed and depend on those primitive /
-  // small-object references instead.
-  const organization = formValues?.organization;
-  const project = formValues?.project;
+  const organization = values?.organization;
+  const project = values?.project;
   const organizationUuid = organization?.uuid;
   const projectCustomerUuid = project?.customer_uuid;
 
-  // Clear project filter if organization is cleared
+  // Clear project filter if organization is cleared or changed
   useEffect(() => {
     if (!project || !organization) return;
     if (organizationUuid !== projectCustomerUuid) {
-      dispatch(props.change('project', undefined));
+      form.change('project', undefined);
     }
-  }, [
-    organization,
-    project,
-    organizationUuid,
-    projectCustomerUuid,
-    dispatch,
-    props.change,
-  ]);
+  }, [organizationUuid, projectCustomerUuid, project, organization, form]);
 
   useEffect(() => {
-    if (!formValues) {
-      return;
-    }
     dispatch(
       setMarketplaceFilter({
         name: 'organization',
@@ -96,17 +59,13 @@ export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
       }),
     );
     dispatch(setMarketplaceFilter({ name: 'project', value: project }));
-    // Depending on `organization`/`project` (the actual values dispatched)
-    // rather than the wrapping `formValues` reference avoids refiring on
-    // every render. The values themselves are still react-redux references
-    // that change only when the underlying form state genuinely changes.
-  }, [organization, project, dispatch, formValues]);
+  }, [organization, project, dispatch]);
 
   const applyQuery = useCallback(
     debounce((value) => {
       setFilter(String(value).trim());
     }, 500),
-    [setFilter],
+    [],
   );
 
   return (
@@ -128,8 +87,8 @@ export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
             </Col>
             <Col lg={6}>
               <ProjectFilter
-                customer_uuid={formValues?.organization?.uuid}
-                isDisabled={!formValues?.organization?.uuid}
+                customer_uuid={values?.organization?.uuid}
+                isDisabled={!values?.organization?.uuid}
                 placeholder={translate('Select a project')}
               />
             </Col>
@@ -147,15 +106,39 @@ export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
           </Row>
         </div>
         <div className="border-bottom mx-7" />
-        {ready && (
-          <DataLoader
-            filter={filter}
-            customer={formValues?.organization}
-            project={formValues?.project}
-            categoryUuid={props.resolve?.categoryUuid}
-          />
-        )}
+        <DataLoader
+          filter={filter}
+          customer={values?.organization}
+          project={values?.project}
+          categoryUuid={categoryUuid}
+        />
       </div>
     </ModalDialog>
   );
-});
+};
+
+export const MarketplacePopup: FC<MarketplacePopupProps> = (props) => {
+  const sidebarResourcesFilters = useSelector(sidebarResourcesFilterSelector);
+
+  const initialValues = useMemo(() => {
+    const preferredFilter =
+      props.resolve?.organization || props.resolve?.project
+        ? props.resolve
+        : sidebarResourcesFilters;
+
+    return {
+      organization: preferredFilter?.organization,
+      project: preferredFilter?.project,
+    };
+  }, [props.resolve, sidebarResourcesFilters]);
+
+  return (
+    <Form<FormData>
+      onSubmit={() => {}}
+      initialValues={initialValues}
+      render={() => (
+        <MarketplacePopupForm categoryUuid={props.resolve?.categoryUuid} />
+      )}
+    />
+  );
+};

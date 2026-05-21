@@ -16,7 +16,7 @@ import {
   SelectField,
   SubmitButton,
   TextField,
-  FormContainerFinal,
+  FormContainer,
   StringField,
 } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
@@ -111,7 +111,7 @@ export const EditFieldDialog = (props: { resolve: EditCustomerProps }) => {
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               {props.resolve.name === 'name' ? (
                 <StringField name="name" label={translate('Name')} />
               ) : props.resolve.name === 'native_name' ? (
@@ -310,7 +310,7 @@ export const EditFieldDialog = (props: { resolve: EditCustomerProps }) => {
                   )}
                 />
               ) : null}
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

@@ -11,12 +11,7 @@ import {
 import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { composeValidators, required } from '@/core/validators';
-import {
-  FormContainerFinal,
-  NumberField,
-  SelectField,
-  StringField,
-} from '@/form';
+import { FormContainer, NumberField, SelectField, StringField } from '@/form';
 import { Select } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import {
@@ -93,7 +88,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
   });
 
   return (
-    <FormContainerFinal className="size-lg">
+    <FormContainer className="size-lg">
       <FormWatcher />
       {props.type === 'project' ? (
         <Select
@@ -234,7 +229,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           validate={composeValidators(required, validateEmails)}
         />
       )}
-    </FormContainerFinal>
+    </FormContainer>
   );
 };
 

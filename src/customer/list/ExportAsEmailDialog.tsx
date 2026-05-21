@@ -130,7 +130,7 @@ const renderEmails = ({ fields }: any) => (
           <Field
             name={emailName}
             type="email"
-            component={EmailField as any}
+            component={EmailField}
             label={translate('Email')}
             validate={composeValidators(required, email)}
             required={true}

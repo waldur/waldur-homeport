@@ -70,7 +70,7 @@ export const MoveProjectDialog: FunctionComponent<{
           >
             <FormGroup label={translate('Move to organization')} required>
               <Field
-                component={Select as any}
+                component={Select}
                 name="organization"
                 validate={required}
                 placeholder={translate('Select organization...')}
@@ -92,7 +92,7 @@ export const MoveProjectDialog: FunctionComponent<{
             </FormGroup>
             <FormGroup>
               <Field
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 name="preserve_permissions"
                 label={translate('Preserve project permissions')}
                 description={translate(

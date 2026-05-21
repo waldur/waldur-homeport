@@ -240,7 +240,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
               >
                 <Field
                   name="end_date"
-                  component={DateField as any}
+                  component={DateField}
                   placeholder="YYYY-MM-DD"
                 />
               </FormGroup>

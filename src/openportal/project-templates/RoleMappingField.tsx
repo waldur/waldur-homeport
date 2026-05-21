@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import React, {
   useState,
   FunctionComponent,
@@ -195,8 +195,6 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
               getOptionValue={(option) => option}
               getOptionLabel={(option) => option.description || option.name}
               onBlur={(event) => input.onBlur(event)}
-              className="metronic-select-container"
-              classNamePrefix="metronic-select"
               placeholder={translate('Select local role...')}
               aria-label={translate('Select local role')}
               noOptionsMessage={() => translate('No roles found')}

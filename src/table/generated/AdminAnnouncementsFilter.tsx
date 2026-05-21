@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   AdminAnnouncementTypeEnum,
   AdminAnnouncementsListData,
@@ -10,7 +9,6 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const AdminAnnouncementTypeOptions: AdminAnnouncementTypeOption[] = [
@@ -101,26 +99,18 @@ const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
 
 export const AdminAnnouncementsFilterFormId = 'AdminAnnouncementsFilter';
 
-interface AdminAnnouncementsFilterFormData {
+export interface AdminAnnouncementsFilterFormData {
   type: AdminAnnouncementTypeOption[];
   is_active: IsActiveOption;
 }
 
-export const AdminAnnouncementsFilter = reduxForm<
-  AdminAnnouncementsFilterFormData,
-  {}
->({
-  form: AdminAnnouncementsFilterFormId,
-  destroyOnUnmount: false,
-})(PureAdminAnnouncementsFilter);
+export const AdminAnnouncementsFilter = PureAdminAnnouncementsFilter;
 
 type AdminAnnouncementsFilterQuery = AdminAnnouncementsListData['query'];
 
-export const selectAdminAnnouncementsFilter = createSelector<
-  RootState,
-  Partial<AdminAnnouncementsFilterFormData>,
-  AdminAnnouncementsFilterQuery
->(getFormValues(AdminAnnouncementsFilterFormId), (values) => {
+export const selectAdminAnnouncementsFilter = (
+  values?: Partial<AdminAnnouncementsFilterFormData>,
+): AdminAnnouncementsFilterQuery => {
   const filter: AdminAnnouncementsFilterQuery = {} as any;
   if (values) {
     if (values.type) {
@@ -131,4 +121,4 @@ export const selectAdminAnnouncementsFilter = createSelector<
     }
   }
   return filter;
-});
+};

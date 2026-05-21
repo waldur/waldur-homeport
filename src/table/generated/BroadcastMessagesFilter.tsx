@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   BroadcastMessageStateEnum,
   BroadcastMessagesListData,
@@ -10,7 +9,6 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const BroadcastMessageStateOptions: BroadcastMessageStateOption[] = [
@@ -60,25 +58,17 @@ const PureBroadcastMessagesFilter: FunctionComponent<{}> = () => (
 
 export const BroadcastMessagesFilterFormId = 'BroadcastMessagesFilter';
 
-interface BroadcastMessagesFilterFormData {
+export interface BroadcastMessagesFilterFormData {
   state: BroadcastMessageStateOption;
 }
 
-export const BroadcastMessagesFilter = reduxForm<
-  BroadcastMessagesFilterFormData,
-  {}
->({
-  form: BroadcastMessagesFilterFormId,
-  destroyOnUnmount: false,
-})(PureBroadcastMessagesFilter);
+export const BroadcastMessagesFilter = PureBroadcastMessagesFilter;
 
 type BroadcastMessagesFilterQuery = BroadcastMessagesListData['query'];
 
-export const selectBroadcastMessagesFilter = createSelector<
-  RootState,
-  Partial<BroadcastMessagesFilterFormData>,
-  BroadcastMessagesFilterQuery
->(getFormValues(BroadcastMessagesFilterFormId), (values) => {
+export const selectBroadcastMessagesFilter = (
+  values?: Partial<BroadcastMessagesFilterFormData>,
+): BroadcastMessagesFilterQuery => {
   const filter: BroadcastMessagesFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -86,4 +76,4 @@ export const selectBroadcastMessagesFilter = createSelector<
     }
   }
   return filter;
-});
+};

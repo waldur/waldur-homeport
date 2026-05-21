@@ -14,7 +14,6 @@ import { RetypeDialog } from './RetypeDialog';
 vi.mock('waldur-js-client');
 vi.mock('@/openstack/api');
 vi.mock('@/store/notify');
-vi.mock('@/modal/actions');
 
 const apiMock = vi.mocked(api);
 

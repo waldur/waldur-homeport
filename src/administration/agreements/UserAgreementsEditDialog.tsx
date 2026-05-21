@@ -66,7 +66,7 @@ export const UserAgreementsEditDialog = ({
                   ]
                 }
               </Form.Label>
-              <Field name="content" component={MarkdownEditor as any} />
+              <Field name="content" component={MarkdownEditor} />
             </div>
           </ModalDialog>
         </form>

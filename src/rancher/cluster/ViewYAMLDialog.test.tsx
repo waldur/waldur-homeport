@@ -41,25 +41,12 @@ vi.mock('@/form/MonacoField', () => ({
 }));
 
 // Mock hooks that interact with Redux modal/notification state
-vi.mock('@/modal/hooks', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-    confirm: vi.fn(),
-  }),
-}));
 
 vi.mock('@/store/notify', () => ({
   useNotify: () => ({
     showSuccess: vi.fn(),
     showError: vi.fn(),
     showErrorResponse: vi.fn(),
-  }),
-}));
-
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-    confirm: vi.fn(),
   }),
 }));
 

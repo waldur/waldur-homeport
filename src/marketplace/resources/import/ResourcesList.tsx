@@ -93,7 +93,7 @@ export const ResourcesList: FunctionComponent<{
       hasQuery
       fieldType="checkbox"
       fieldName="resources"
-      validate={[requiredArray]}
+      validate={[requiredArray] as any}
     />
   );
 };

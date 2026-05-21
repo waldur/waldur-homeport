@@ -52,7 +52,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                       <td>
                         <Field
                           name={`${component}.component`}
-                          component={SelectField as any}
+                          component={SelectField}
                           validate={required}
                           placeholder={translate('Select component...')}
                           options={getAvailableOptions(details)}
@@ -67,7 +67,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                       <td>
                         <Field
                           name={`${component}.limit`}
-                          component={NumberField as any}
+                          component={NumberField}
                           validate={composeValidators(
                             required,
                             validateNonNegative,
@@ -80,7 +80,7 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                       <td>
                         <Field
                           name={`${component}.period`}
-                          component={SelectField as any}
+                          component={SelectField}
                           validate={required}
                           options={Object.values(policyPeriodOptions)}
                           simpleValue

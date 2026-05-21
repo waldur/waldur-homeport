@@ -23,11 +23,6 @@ vi.mock('@/i18n', () => ({
 }));
 
 // Mock modal hooks
-vi.mock('@/modal/hooks', () => ({
-  useModal: vi.fn().mockReturnValue({
-    closeDialog: vi.fn(),
-  }),
-}));
 
 // Mock notify
 vi.mock('@/store/notify', () => ({

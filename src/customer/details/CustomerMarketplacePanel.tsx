@@ -1,10 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FunctionComponent, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  marketplaceServiceProvidersCreate,
-  marketplaceServiceProvidersDestroy,
-} from 'waldur-js-client';
+import { useSelector } from 'react-redux';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -14,21 +10,18 @@ import * as api from '@/marketplace/common/api';
 import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-providers/selectors';
 import { ServiceProviderManagement } from '@/marketplace/service-providers/ServiceProviderManagement';
 import { ServiceProvider } from '@/marketplace/types';
-import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
-import { setCurrentCustomer } from '@/workspace/actions';
 import { useUser } from '@/workspace/hooks';
 import { getCustomer } from '@/workspace/selectors';
 
-export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
-  const { confirm } = useModal();
+import { DisableServiceProviderButton } from './DisableServiceProviderButton';
+import { RegisterServiceProviderButton } from './RegisterServiceProviderButton';
 
+export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
   const customer = useSelector(getCustomer);
   const user = useUser();
-  const dispatch = useDispatch();
 
-  const { showErrorResponse, showSuccess } = useNotify();
+  const { showErrorResponse } = useNotify();
 
   const canRegisterServiceProvider = useSelector(
     canRegisterServiceProviderForCustomer,
@@ -65,68 +58,6 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
     queryClient.setQueryData(['ServiceProvider', customer?.uuid], data);
   };
 
-  const { mutate: registerServiceProvider, isPending: isRegistering } =
-    useMutation({
-      mutationFn: async () => {
-        const successMessage = translate(
-          'Service provider has been registered.',
-        );
-        const errorMessage = translate('Unable to register service provider.');
-        try {
-          const serviceProvider = await marketplaceServiceProvidersCreate({
-            body: {
-              customer: customer.url,
-            },
-          });
-          setServiceProvider(serviceProvider.data);
-          showSuccess(successMessage);
-          dispatch(
-            setCurrentCustomer({
-              ...customer,
-              is_service_provider: true,
-            }),
-          );
-        } catch (error) {
-          showErrorResponse(error, errorMessage);
-        }
-      },
-    });
-
-  const { mutate: deleteServiceProvider, isPending: isDeleting } = useMutation({
-    mutationFn: async () => {
-      try {
-        await confirm(
-          translate('Disable service provider profile'),
-          translate(
-            'Are you sure you want to remove service provider profile?',
-          ),
-          { forDeletion: true },
-        );
-      } catch {
-        return;
-      }
-
-      try {
-        await marketplaceServiceProvidersDestroy({
-          path: { uuid: serviceProvider.uuid },
-        });
-        setServiceProvider(null);
-        showSuccess(translate('Service provider profile has been disabled.'));
-        dispatch(
-          setCurrentCustomer({
-            ...customer,
-            is_service_provider: false,
-          }),
-        );
-      } catch (error) {
-        showErrorResponse(
-          error,
-          translate('Unable to disable service provider profile.'),
-        );
-      }
-    },
-  });
-
   if (isLoading) {
     return <LoadingSpinner />;
   } else if (error) {
@@ -146,18 +77,13 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
         className="card-bordered"
         actions={
           serviceProvider && user.is_staff ? (
-            <ActionButton
-              title={translate('Disable service provider profile')}
-              action={deleteServiceProvider}
-              variant="danger"
-              pending={isDeleting}
+            <DisableServiceProviderButton
+              serviceProvider={serviceProvider}
+              setServiceProvider={setServiceProvider}
             />
           ) : !serviceProvider && canRegisterServiceProvider ? (
-            <ActionButton
-              title={translate('Register as service provider')}
-              action={registerServiceProvider}
-              variant="secondary"
-              pending={isRegistering}
+            <RegisterServiceProviderButton
+              setServiceProvider={setServiceProvider}
             />
           ) : null
         }

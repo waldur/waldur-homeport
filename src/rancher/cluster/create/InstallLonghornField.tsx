@@ -1,4 +1,4 @@
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { ExternalLink } from '@/core/ExternalLink';
 import { FormGroup } from '@/form';

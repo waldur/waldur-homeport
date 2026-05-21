@@ -70,7 +70,7 @@ export const AddRoleDialog: FC<{ resolve: AddRoleResolve }> = ({ resolve }) => {
               <Field
                 name="name"
                 validate={required}
-                component={StringField as any}
+                component={StringField}
                 placeholder={translate('e.g. Cluster Admin, Project Member')}
               />
             </FormGroup>
@@ -93,7 +93,7 @@ export const AddRoleDialog: FC<{ resolve: AddRoleResolve }> = ({ resolve }) => {
             <FormGroup label={translate('Description')}>
               <Field
                 name="description"
-                component={StringField as any}
+                component={StringField}
                 placeholder={translate('Role description (optional)')}
               />
             </FormGroup>

@@ -9,7 +9,7 @@ import {
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { ImageField } from '@/form/ImageField';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
@@ -83,7 +83,7 @@ export const GroupFromDialog: FC<GroupFromDialogProps> = ({ resolve }) => {
               />
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <ImageField
                 label={translate('Icon')}
                 name="icon"
@@ -102,7 +102,7 @@ export const GroupFromDialog: FC<GroupFromDialogProps> = ({ resolve }) => {
                 name="description"
                 required={false}
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

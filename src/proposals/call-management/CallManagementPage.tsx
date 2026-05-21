@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import {
   proposalProtectedCallsList,
   ProposalProtectedCallsListData,
@@ -13,6 +13,7 @@ import { Call } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import {
   ProposalPublicCallsFilter,
+  ProposalPublicCallsFilterFormId,
   selectProposalPublicCallsFilter,
 } from '@/table/generated/ProposalPublicCallsFilter';
 import Table from '@/table/Table';
@@ -25,20 +26,22 @@ import { CallCreateButton } from './CallCreateButton';
 import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
 
-const mapStateToFilter = createSelector(
-  getCustomer,
-  selectProposalPublicCallsFilter,
-  (customer, filters) => {
-    const result: ProposalProtectedCallsListData['query'] = { ...filters };
+const CallManagementPageTable: FunctionComponent = () => {
+  const customer = useSelector(getCustomer);
+  const { values } = useFormState();
+  const filterValues = useMemo(
+    () => selectProposalPublicCallsFilter(values),
+    [values],
+  );
+
+  const filter = useMemo(() => {
+    const result: ProposalProtectedCallsListData['query'] = { ...filterValues };
     if (customer) {
       result.customer_uuid = customer.uuid;
     }
     return result;
-  },
-);
+  }, [customer, filterValues]);
 
-export const CallManagementPage: FunctionComponent = () => {
-  const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: 'CallManagementList',
     fetchData: createFetcher(proposalProtectedCallsList),
@@ -49,6 +52,7 @@ export const CallManagementPage: FunctionComponent = () => {
   return (
     <Table<Call>
       {...tableProps}
+      formId={ProposalPublicCallsFilterFormId}
       columns={[
         {
           title: translate('Name'),
@@ -87,3 +91,13 @@ export const CallManagementPage: FunctionComponent = () => {
     />
   );
 };
+
+export const CallManagementPage: FunctionComponent = () => (
+  <Form
+    id={ProposalPublicCallsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <CallManagementPageTable />}
+  </Form>
+);

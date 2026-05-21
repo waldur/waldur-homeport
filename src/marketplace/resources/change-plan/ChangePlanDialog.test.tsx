@@ -14,7 +14,6 @@ import { loadData } from './utils';
 vi.mock('./utils');
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/modal/actions');
 vi.mock('@/permissions/hooks');
 
 const mockData = {

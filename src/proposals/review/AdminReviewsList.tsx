@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { proposalReviewsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -11,6 +11,7 @@ import {
   ProposalReviewsFilter,
   selectProposalReviewsFilter,
   ProposalReviewStateOptions,
+  ProposalReviewsFilterFormId,
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -21,8 +22,10 @@ import { ReviewStateRenderer } from './ReviewStateRenderer';
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
-export const AdminReviewsList: FC = () => {
-  const filter = useSelector(selectProposalReviewsFilter);
+const AdminReviewsListTable: FC = () => {
+  const { values } = useFormState();
+
+  const filter = useMemo(() => selectProposalReviewsFilter(values), [values]);
 
   const tableProps = useTable({
     table: 'AdminReviewsList',
@@ -122,6 +125,19 @@ export const AdminReviewsList: FC = () => {
       rowActions={ReviewsRowActions}
       showPageSizeSelector={true}
       hasOptionalColumns
+      formId={ProposalReviewsFilterFormId}
     />
   );
 };
+
+export const AdminReviewsList: FC<any> = (props) => (
+  <Form
+    id={ProposalReviewsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <AdminReviewsListTable {...props} />}
+  </Form>
+);

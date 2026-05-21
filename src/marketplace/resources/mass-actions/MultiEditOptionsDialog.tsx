@@ -102,10 +102,7 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
             ) : offeringQuery.error ? (
               <LoadingErred loadData={offeringQuery.refetch} className="mb-4" />
             ) : offeringQuery.data.resource_options.order.length ? (
-              <OptionsForm
-                options={offeringQuery.data.resource_options}
-                finalForm
-              />
+              <OptionsForm options={offeringQuery.data.resource_options} />
             ) : (
               translate(
                 'There are no resource options defined in the offering.',

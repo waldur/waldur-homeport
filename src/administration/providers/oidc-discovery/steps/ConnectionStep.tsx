@@ -34,7 +34,7 @@ export const ConnectionStep: FC<WizardStepProps> = (props) => {
         >
           <Field
             name="discovery_url"
-            component={StringField as any}
+            component={StringField}
             validate={(value) => required(value) || urlValidator(value)}
             placeholder="https://idp.example.com/.well-known/openid-configuration"
           />
@@ -47,11 +47,7 @@ export const ConnectionStep: FC<WizardStepProps> = (props) => {
           )}
           required
         >
-          <Field
-            name="client_id"
-            component={StringField as any}
-            validate={required}
-          />
+          <Field name="client_id" component={StringField} validate={required} />
         </FormGroup>
 
         <FormGroup
@@ -61,7 +57,7 @@ export const ConnectionStep: FC<WizardStepProps> = (props) => {
         >
           <Field
             name="client_secret"
-            component={SecretField as any}
+            component={SecretField}
             validate={required}
           />
         </FormGroup>
@@ -69,7 +65,7 @@ export const ConnectionStep: FC<WizardStepProps> = (props) => {
         <FormGroup>
           <Field
             name="verify_ssl"
-            component={AwesomeCheckboxField as any}
+            component={AwesomeCheckboxField}
             label={translate('Verify SSL Certificate')}
           />
         </FormGroup>

@@ -75,14 +75,14 @@ export const ProjectDetailsDialog: FC<ProjectDetailsDialogProps> = ({
               <FormGroup label={translate('Project name')}>
                 <Field
                   name="project_name"
-                  component={StringField as any}
+                  component={StringField}
                   placeholder={translate('Leave empty for auto-generated name')}
                 />
               </FormGroup>
               <FormGroup label={translate('Project description')} spaceless>
                 <Field
                   name="project_description"
-                  component={TextField as any}
+                  component={TextField}
                   placeholder={translate('Optional description')}
                 />
               </FormGroup>

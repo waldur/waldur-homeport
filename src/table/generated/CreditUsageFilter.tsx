@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   InvoiceItemsListData,
   PublicOfferingDetails,
@@ -17,7 +16,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -50,7 +48,6 @@ const PureCreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -79,7 +76,6 @@ const PureCreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -133,28 +129,20 @@ interface CreditUsageFilterProps {
   yearOptions?: any[];
 }
 
-interface CreditUsageFilterFormData {
+export interface CreditUsageFilterFormData {
   offering: PublicOfferingDetails;
   resource: Resource;
   year: any;
   month: any;
 }
 
-export const CreditUsageFilter = reduxForm<
-  CreditUsageFilterFormData,
-  CreditUsageFilterProps
->({
-  form: CreditUsageFilterFormId,
-  destroyOnUnmount: false,
-})(PureCreditUsageFilter);
+export const CreditUsageFilter = PureCreditUsageFilter;
 
 type CreditUsageFilterQuery = InvoiceItemsListData['query'];
 
-export const selectCreditUsageFilter = createSelector<
-  RootState,
-  Partial<CreditUsageFilterFormData>,
-  CreditUsageFilterQuery
->(getFormValues(CreditUsageFilterFormId), (values) => {
+export const selectCreditUsageFilter = (
+  values?: Partial<CreditUsageFilterFormData>,
+): CreditUsageFilterQuery => {
   const filter: CreditUsageFilterQuery = {} as any;
   if (values) {
     if (values.offering) {
@@ -171,4 +159,4 @@ export const selectCreditUsageFilter = createSelector<
     }
   }
   return filter;
-});
+};

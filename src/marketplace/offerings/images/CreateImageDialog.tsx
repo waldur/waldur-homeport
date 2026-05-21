@@ -4,12 +4,7 @@ import { marketplaceScreenshotsCreate } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { required } from '@/core/validators';
-import {
-  FormContainerFinal,
-  StringField,
-  SubmitButton,
-  TextField,
-} from '@/form';
+import { FormContainer, StringField, SubmitButton, TextField } from '@/form';
 import { ImageField } from '@/form/ImageField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -55,7 +50,7 @@ export const CreateImageDialog = (props: {
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               <ImageField
                 label={translate('Image')}
                 name="image"
@@ -80,7 +75,7 @@ export const CreateImageDialog = (props: {
                 maxLength={4096}
                 placeholder={translate('Enter a description...')}
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

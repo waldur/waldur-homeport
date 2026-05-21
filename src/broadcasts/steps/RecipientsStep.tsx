@@ -35,7 +35,7 @@ export const RecipientsStep: FC<WizardStepProps> = (props) => {
           <FormGroup>
             <Field
               name="all_users"
-              component={AwesomeCheckboxField as any}
+              component={AwesomeCheckboxField}
               label={translate('Send message to all users')}
               hideLabel={true}
             />
@@ -47,7 +47,7 @@ export const RecipientsStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="offerings"
-              component={Select as any}
+              component={Select}
               placeholder={translate('Select offerings...')}
               loadOptions={(query, prevOptions, page) =>
                 providerOfferingsAutocomplete(
@@ -69,7 +69,7 @@ export const RecipientsStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="customers"
-              component={Select as any}
+              component={Select}
               placeholder={translate('Select organizations...')}
               loadOptions={(query, prevOptions, page) =>
                 organizationAutocomplete(query, prevOptions, page, {

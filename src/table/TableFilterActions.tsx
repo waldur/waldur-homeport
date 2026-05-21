@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Stack } from 'react-bootstrap';
+import { useFormState } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
+import { TableFilterContext } from './FilterContextProvider';
 import { selectSelectedSavedFilter } from './selectors';
 import { TableFilterService } from './TableFilterService';
-import { getFiltersFormId, getSavedFiltersKey } from './utils';
+import { getSavedFiltersKey } from './utils';
 
 interface TableFilterActionsProps {
   filters: JSX.Element;
@@ -22,10 +23,14 @@ interface TableFilterActionsProps {
 export const TableFilterActions: React.FC<TableFilterActionsProps> = (
   props,
 ) => {
-  const dispatch = useDispatch();
-  const filtersFormId = getFiltersFormId(props.filters);
+  const context = useContext(TableFilterContext);
+  const filtersFormId = context.form || '';
 
-  const formValues = useSelector(getFormValues(filtersFormId));
+  const dispatch = useDispatch();
+
+  const { values: formValues = {} } = useFormState({
+    subscription: { values: true },
+  });
 
   const selectedSavedFilter = useSelector((state: any) =>
     selectSelectedSavedFilter(state, props.table),

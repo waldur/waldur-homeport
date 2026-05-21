@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { Form as RffForm, useFormState } from 'react-final-form';
 import { OpenStackInstanceAggregateGroupByEnum } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -8,7 +8,10 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { selectMarketplaceStatsOpenstackInstancesFilter } from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
+import {
+  selectMarketplaceStatsOpenstackInstancesFilter,
+  MarketplaceStatsOpenstackInstancesFilterFormId,
+} from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
 
 import { AggregateChart } from './AggregateChart';
 import { AggregateTable } from './AggregateTable';
@@ -27,10 +30,16 @@ const GROUP_BY_OPTIONS: Array<{
   { value: 'runtime_state', label: translate('Runtime state') },
 ];
 
-export const OpenstackInstancesAggregateView: FC = () => {
+const OpenstackInstancesAggregateViewTable: FC<any> = () => {
   const [groupBy, setGroupBy] =
     useState<OpenStackInstanceAggregateGroupByEnum>('customer');
-  const filter = useSelector(selectMarketplaceStatsOpenstackInstancesFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectMarketplaceStatsOpenstackInstancesFilter(values),
+    [values],
+  );
+
   const { data, isLoading, error, refetch } = useOpenstackInstancesAggregate(
     groupBy,
     filter,
@@ -75,3 +84,15 @@ export const OpenstackInstancesAggregateView: FC = () => {
     </div>
   );
 };
+
+export const OpenstackInstancesAggregateView: FC<any> = (props) => (
+  <RffForm
+    id={MarketplaceStatsOpenstackInstancesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <OpenstackInstancesAggregateViewTable {...props} />}
+  </RffForm>
+);

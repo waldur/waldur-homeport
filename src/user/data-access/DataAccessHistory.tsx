@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { usersDataAccessHistoryList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -10,6 +10,7 @@ import { createFetcher } from '@/table/api';
 import {
   UserDataAccessHistoryFilter,
   selectUserDataAccessHistoryFilter,
+  UserDataAccessHistoryFilterFormId,
 } from '@/table/generated/UserDataAccessHistoryFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -27,11 +28,16 @@ interface DataAccessHistoryProps {
   isViewerStaffOrSupport: boolean;
 }
 
-export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
+const DataAccessHistoryTable: FC<DataAccessHistoryProps> = ({
   userUuid,
   isViewerStaffOrSupport,
 }) => {
-  const filter = useSelector(selectUserDataAccessHistoryFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectUserDataAccessHistoryFilter(values),
+    [values],
+  );
 
   const fetchData = useMemo(
     () =>
@@ -134,6 +140,19 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
       filters={<UserDataAccessHistoryFilter />}
       verboseName={translate('Access history entries')}
       showPageSizeSelector
+      formId={UserDataAccessHistoryFilterFormId}
     />
   );
 };
+
+export const DataAccessHistory: FC<any> = (props) => (
+  <Form
+    id={UserDataAccessHistoryFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <DataAccessHistoryTable {...props} />}
+  </Form>
+);

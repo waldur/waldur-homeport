@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { Form } from 'react-bootstrap';
-import { Field, WrappedFieldProps } from 'redux-form';
+import { Field } from 'react-final-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { composeValidators } from '@/core/validators';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 
@@ -20,7 +21,7 @@ interface ComponentEditRowProps {
 }
 
 const RowWrapper = (
-  props: WrappedFieldProps & {
+  props: any & {
     offeringComponent: Component;
     concealBillingInfo?: boolean;
   },
@@ -51,12 +52,14 @@ export const ComponentEditRow: React.FC<ComponentEditRowProps> = (props) => {
     () => getOfferingComponentValidator(props.component),
     [props.component.min_value, props.component.max_value],
   );
+  const validateValue = composeValidators(...validate);
+
   return (
     <Field
       name={`limits.${props.component.type}`}
       parse={parseIntField}
       format={formatIntField}
-      validate={validate}
+      validate={validateValue}
       component={RowWrapper}
       offeringComponent={props.component}
       offering={props.offering}
@@ -65,7 +68,7 @@ export const ComponentEditRow: React.FC<ComponentEditRowProps> = (props) => {
 };
 
 const RowWrapper2 = (
-  props: WrappedFieldProps & {
+  props: any & {
     offeringComponent: Component;
     hidePrices?: boolean;
     period?: PlanPeriod;
@@ -101,12 +104,14 @@ export const ComponentEditRow2: React.FC<ComponentEditRowProps> = (props) => {
     () => getOfferingComponentValidator(props.component),
     [props.component.min_value, props.component.max_value],
   );
+  const validateValue = composeValidators(...validate);
+
   return (
     <Field
       name={`limits.${props.component.type}`}
       parse={parseIntField}
       format={formatIntField}
-      validate={validate}
+      validate={validateValue}
       component={RowWrapper2}
       offeringComponent={props.component}
       hidePrices={props.hidePrices}

@@ -53,21 +53,21 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
 
                 <Field
                   name="include_components"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include components')}
                   help_text={translate('Include offering components in export')}
                 />
 
                 <Field
                   name="include_plans"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include plans')}
                   help_text={translate('Include pricing plans in export')}
                 />
 
                 <Field
                   name="include_screenshots"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include screenshots')}
                   help_text={translate(
                     'Include offering screenshots in export',
@@ -76,14 +76,14 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
 
                 <Field
                   name="include_files"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include files')}
                   help_text={translate('Include offering files in export')}
                 />
 
                 <Field
                   name="include_endpoints"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include access endpoints')}
                   help_text={translate(
                     'Include offering access endpoints in export',
@@ -92,7 +92,7 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
 
                 <Field
                   name="include_organization_groups"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include organization groups')}
                   help_text={translate(
                     'Include organization groups associations in export',
@@ -105,7 +105,7 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
 
                 <Field
                   name="include_terms_of_service"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include terms of service')}
                   help_text={translate(
                     'Include terms of service configurations in export',
@@ -114,14 +114,14 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
 
                 <Field
                   name="include_plugin_options"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include plugin options')}
                   help_text={translate('Include plugin options in export')}
                 />
 
                 <Field
                   name="include_secret_options"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include secret options')}
                   help_text={translate(
                     'WARNING: Include secret options in export (sensitive data)',
@@ -130,21 +130,21 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
 
                 <Field
                   name="include_attributes"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include attributes')}
                   help_text={translate('Include offering attributes in export')}
                 />
 
                 <Field
                   name="include_options"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include options')}
                   help_text={translate('Include offering options in export')}
                 />
 
                 <Field
                   name="include_resource_options"
-                  component={AwesomeCheckboxField as any}
+                  component={AwesomeCheckboxField}
                   label={translate('Include resource options')}
                   help_text={translate('Include resource options in export')}
                 />

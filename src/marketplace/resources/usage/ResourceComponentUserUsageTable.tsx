@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceComponentUserUsagesList,
   MarketplaceComponentUserUsagesListData,
@@ -14,19 +13,23 @@ import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
-import { ResourceUsageFilter } from './ResourceUsageFilter';
+import {
+  ResourceUsageFilter,
+  RESOURCE_USAGE_FILTER_FORM_ID,
+} from './ResourceUsageFilter';
 
-export const ResourceComponentUserUsageTable: FC<TableWithPortal<any>> = ({
+const ResourceComponentUserUsageTableTable: FC<TableWithPortal<any>> = ({
   portal,
   ...props
 }) => {
-  const filterForm: any = useSelector(getFormValues('ResourceUsageFilterForm'));
+  const { values } = useFormState();
+  const filterForm = values;
 
   const filter = useMemo(() => {
     const result: MarketplaceComponentUserUsagesListData['query'] = {
       username: filterForm?.username,
-      billing_period_month: filterForm?.billing_period?.value.month,
-      billing_period_year: filterForm?.billing_period?.value.year,
+      billing_period_month: filterForm?.billing_period?.value?.month,
+      billing_period_year: filterForm?.billing_period?.value?.year,
       resource_uuid: props.resource.resource_uuid,
     };
     if (props.offeringComponent?.type) {
@@ -74,6 +77,19 @@ export const ResourceComponentUserUsageTable: FC<TableWithPortal<any>> = ({
       hasActionBar={false}
       cardBordered={false}
       fullWidth
+      formId={RESOURCE_USAGE_FILTER_FORM_ID}
     />
   );
 };
+
+export const ResourceComponentUserUsageTable: FC<TableWithPortal<any>> = (
+  props,
+) => (
+  <Form
+    id={RESOURCE_USAGE_FILTER_FORM_ID}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <ResourceComponentUserUsageTableTable {...props} />}
+  </Form>
+);

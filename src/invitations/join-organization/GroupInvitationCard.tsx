@@ -38,50 +38,55 @@ export const GroupInvitationCard: FC<{ row: GroupInvitation }> = ({
     <Field
       name="invitation"
       validate={required}
-      component={BoxRadioField as any}
-      ellipsisTitle
-      choices={[
-        {
-          label: invitation.scope_name,
-          value: invitation,
-          metadata: (
-            <div
-              className={classNames(
-                'fs-6 fw-semibold text-muted h-80px',
-                !description && 'fst-italic',
-              )}
-            >
-              {description ? (
-                <TruncatedDescription
-                  text={description}
-                  max={70}
-                  onClick={openDetailsModal}
+      render={({ input, meta }) => (
+        <BoxRadioField
+          input={input}
+          meta={meta}
+          ellipsisTitle
+          choices={[
+            {
+              label: invitation.scope_name,
+              value: invitation,
+              metadata: (
+                <div
+                  className={classNames(
+                    'fs-6 fw-semibold text-muted h-80px',
+                    !description && 'fst-italic',
+                  )}
+                >
+                  {description ? (
+                    <TruncatedDescription
+                      text={description}
+                      max={70}
+                      onClick={openDetailsModal}
+                    />
+                  ) : (
+                    translate('No description available')
+                  )}
+                </div>
+              ),
+              image: invitation.scope_image ? (
+                <img
+                  src={invitation.scope_image}
+                  alt="invitation logo"
+                  className="rounded"
+                  style={{ width: '24px', height: '24px' }}
                 />
-              ) : (
-                translate('No description available')
-              )}
-            </div>
-          ),
-          image: invitation.scope_image ? (
-            <img
-              src={invitation.scope_image}
-              alt="invitation logo"
-              className="rounded"
-              style={{ width: '24px', height: '24px' }}
-            />
-          ) : undefined,
-        },
-      ]}
-      vertical
-      alignTop
-      hasOptions={false}
-      hoverable
-      required
-      imagePlaceholder={
-        <ImagePlaceholder width="24px" height="24px" circle>
-          {getAbbreviation(invitation.customer_name, 2)}
-        </ImagePlaceholder>
-      }
+              ) : undefined,
+            },
+          ]}
+          vertical
+          alignTop
+          hasOptions={false}
+          hoverable
+          required
+          imagePlaceholder={
+            <ImagePlaceholder width="24px" height="24px" circle>
+              {getAbbreviation(invitation.customer_name, 2)}
+            </ImagePlaceholder>
+          }
+        />
+      )}
     />
   );
 };

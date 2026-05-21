@@ -1,5 +1,5 @@
+import { Field } from 'react-final-form';
 import { useToggle } from 'react-use';
-import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { FormGroup } from '@/form';

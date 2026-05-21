@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { Form, useFormState } from 'react-final-form';
 import {
   proposalProposalsList,
   ProposalProposalsListData,
@@ -16,6 +15,7 @@ import { createFetcher } from '@/table/api';
 import {
   ProposalProposalsFilter,
   selectProposalProposalsFilter,
+  ProposalProposalsFilterFormId,
 } from '@/table/generated/ProposalProposalsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -27,9 +27,14 @@ import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow'
 import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
 
-const filtersSelector = createSelector(
-  selectProposalProposalsFilter,
-  (filterValues) => {
+const AdminProposalsListTable: FC<any> = (props) => {
+  const { values } = useFormState();
+  const filterValues = useMemo(
+    () => selectProposalProposalsFilter(values),
+    [values],
+  );
+
+  const filter = useMemo(() => {
     const result: ProposalProposalsListData['query'] & { round_uuid?: string } =
       {
         ...filterValues,
@@ -39,12 +44,7 @@ const filtersSelector = createSelector(
       result.state = getNonCanceledProposalStates();
     }
     return result;
-  },
-);
-
-export const AdminProposalsList: FC = () => {
-  const filterValues = useSelector(filtersSelector);
-  const filter = useMemo(() => filterValues, [JSON.stringify(filterValues)]);
+  }, [filterValues]);
 
   const tableProps = useTable({
     table: 'AdminProposalsList',
@@ -56,6 +56,7 @@ export const AdminProposalsList: FC = () => {
   return (
     <Table
       {...tableProps}
+      formId={ProposalProposalsFilterFormId}
       columns={[
         {
           title: translate('Proposal'),
@@ -150,6 +151,17 @@ export const AdminProposalsList: FC = () => {
       expandableRow={ProposalExpandableRow}
       showPageSizeSelector={true}
       hasOptionalColumns
+      {...props}
     />
   );
 };
+
+export const AdminProposalsList: FC<any> = (props) => (
+  <Form
+    id={ProposalProposalsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <AdminProposalsListTable {...props} />}
+  </Form>
+);

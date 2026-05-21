@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
-import { compose } from 'redux';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { OrganizationRoleSelectField } from '@/customer/team/OrganizationRoleSelectField';
 import { ProjectRoleSelectField } from '@/customer/team/ProjectRoleSelectField';
@@ -17,11 +16,7 @@ import { getRoleFilterOptions, getUserStatusFilterOptions } from './utils';
 
 import './UserFilter.scss';
 
-interface UserFilterProps extends InjectedFormProps {
-  submitting: boolean;
-}
-
-const PureUserFilter: FunctionComponent<UserFilterProps> = () => {
+export const UserFilter: FunctionComponent = () => {
   return (
     <>
       <TableFilterItem
@@ -96,13 +91,3 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = () => {
     </>
   );
 };
-
-const enhance = compose(
-  reduxForm({
-    form: 'userFilter',
-    destroyOnUnmount: false,
-    enableReinitialize: true,
-  }),
-);
-
-export const UserFilter = enhance(PureUserFilter);

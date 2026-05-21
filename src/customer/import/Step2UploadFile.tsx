@@ -1,24 +1,27 @@
 import Papa from 'papaparse';
-import { FC, useEffect } from 'react';
-import { Field } from 'redux-form';
+import { FC } from 'react';
+import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { TemplateUploaderField } from '@/project/import/TemplateUploaderField';
 
 const MAX_LENGTH = 1000;
 
-const asyncValidate = (values) =>
-  new Promise((resolve, reject) => {
-    if (!values.file?.length)
-      reject({ file: translate('Please import a file.') });
+const validateFile = (valueList) => {
+  if (!valueList?.length) {
+    return translate('Please import a file.');
+  }
 
-    const file = values.file[0];
+  const file = valueList[0];
 
-    if (file.type !== 'text/csv')
-      reject({ file: translate('Invalid format, please import a .csv file') });
+  if (file.type !== 'text/csv') {
+    return translate('Invalid format, please import a .csv file');
+  }
 
+  return new Promise((resolve) => {
     Papa.parse(file, {
       skipEmptyLines: true,
       complete: function (results: { data: Array<Array<string>> }) {
@@ -42,54 +45,43 @@ const asyncValidate = (values) =>
         }
 
         if (_error === 'invalid') {
-          reject({
-            file: translate(
+          resolve(
+            translate(
               'The imported data format does not match the template format.',
             ),
-          });
+          );
         } else if (_error === 'empty') {
-          reject({ file: translate('The imported file is empty.') });
+          resolve(translate('The imported file is empty.'));
         } else if (_error === 'max') {
-          reject({
-            file: translate('The number of records exceeds the allowed limit.'),
-          });
+          resolve(
+            translate('The number of records exceeds the allowed limit.'),
+          );
         } else {
           // No error
-          resolve('');
+          resolve(undefined);
         }
       },
     });
   });
-
-export const Step2UploadFile: FC<WizardFormStepProps> = (props) => {
-  return (
-    <WizardForm
-      {...props}
-      asyncValidate={asyncValidate}
-      asyncChangeFields={['file']}
-    >
-      {(wizardProps) => {
-        const file = wizardProps.formValues?.file;
-
-        useEffect(() => {
-          if (file) {
-            wizardProps.asyncValidate();
-          }
-        }, [file]);
-
-        return (
-          <div className="text-muted">
-            <p className="mb-6">
-              {translate('Upload your completed organization template file')}
-            </p>
-            <Field
-              name="file"
-              validate={required}
-              component={TemplateUploaderField}
-            />
-          </div>
-        );
-      }}
-    </WizardForm>
-  );
 };
+
+const validateFileField = (value) => {
+  const reqErr = required(value);
+  if (reqErr) return reqErr;
+  return validateFile(value);
+};
+
+export const Step2UploadFile: FC<WizardFormStepProps> = (props) => (
+  <WizardForm {...props}>
+    <div className="text-muted">
+      <p className="mb-6">
+        {translate('Upload your completed organization template file')}
+      </p>
+      <Field
+        name="file"
+        validate={validateFileField}
+        component={TemplateUploaderField}
+      />
+    </div>
+  </WizardForm>
+);

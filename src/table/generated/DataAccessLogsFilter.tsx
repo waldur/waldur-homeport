@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   AccessorTypeEnum,
   DataAccessLogsListData,
@@ -17,7 +16,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -111,7 +109,6 @@ const PureDataAccessLogsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -121,27 +118,20 @@ const PureDataAccessLogsFilter: FunctionComponent<{}> = () => (
 
 export const DataAccessLogsFilterFormId = 'DataAccessLogsFilter';
 
-interface DataAccessLogsFilterFormData {
+export interface DataAccessLogsFilterFormData {
   start_date: string;
   end_date: string;
   accessor_type: AccessorTypeOption;
   user: User;
 }
 
-export const DataAccessLogsFilter = reduxForm<DataAccessLogsFilterFormData, {}>(
-  {
-    form: DataAccessLogsFilterFormId,
-    destroyOnUnmount: false,
-  },
-)(PureDataAccessLogsFilter);
+export const DataAccessLogsFilter = PureDataAccessLogsFilter;
 
 type DataAccessLogsFilterQuery = DataAccessLogsListData['query'];
 
-export const selectDataAccessLogsFilter = createSelector<
-  RootState,
-  Partial<DataAccessLogsFilterFormData>,
-  DataAccessLogsFilterQuery
->(getFormValues(DataAccessLogsFilterFormId), (values) => {
+export const selectDataAccessLogsFilter = (
+  values?: Partial<DataAccessLogsFilterFormData>,
+): DataAccessLogsFilterQuery => {
   const filter: DataAccessLogsFilterQuery = {} as any;
   if (values) {
     if (values.start_date) {
@@ -158,4 +148,4 @@ export const selectDataAccessLogsFilter = createSelector<
     }
   }
   return filter;
-});
+};

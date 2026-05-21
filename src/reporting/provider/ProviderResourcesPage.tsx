@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceResourcesList,
   marketplaceStatsProviderResourcesRetrieve,
@@ -173,38 +172,40 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderResourcesPage: FC = () => {
-  const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
-    provider?: { uuid: string };
-  };
-  const providerUuid = formValues?.provider?.uuid;
-
   return (
-    <>
-      <ReportingTitle reportKey="provider-resources">
-        <div className="d-flex align-items-center gap-4">
-          <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
-            {translate('Provider')}:
-          </label>
-          <div style={{ minWidth: 200 }}>
-            <ProviderFilter />
-          </div>
-        </div>
-      </ReportingTitle>
+    <Form onSubmit={() => {}} subscription={{ values: true }}>
+      {({ values }) => {
+        const providerUuid = values?.provider?.uuid;
+        return (
+          <>
+            <ReportingTitle reportKey="provider-resources">
+              <div className="d-flex align-items-center gap-4">
+                <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+                  {translate('Provider')}:
+                </label>
+                <div style={{ minWidth: 200 }}>
+                  <ProviderFilter />
+                </div>
+              </div>
+            </ReportingTitle>
 
-      {providerUuid ? (
-        <>
-          <ProviderResourcesContent providerUuid={providerUuid} />
-          <ProviderResourcesTable providerUuid={providerUuid} />
-        </>
-      ) : (
-        <NoResult
-          title={translate('Select a provider')}
-          message={translate(
-            'Choose a provider from the dropdown above to view resource statistics.',
-          )}
-          noAction
-        />
-      )}
-    </>
+            {providerUuid ? (
+              <>
+                <ProviderResourcesContent providerUuid={providerUuid} />
+                <ProviderResourcesTable providerUuid={providerUuid} />
+              </>
+            ) : (
+              <NoResult
+                title={translate('Select a provider')}
+                message={translate(
+                  'Choose a provider from the dropdown above to view resource statistics.',
+                )}
+                noAction
+              />
+            )}
+          </>
+        );
+      }}
+    </Form>
   );
 };

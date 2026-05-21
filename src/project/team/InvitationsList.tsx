@@ -1,7 +1,7 @@
 import { useRouter } from '@uirouter/react';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
 import Avatar from '@/core/Avatar';
@@ -18,6 +18,7 @@ import { createFetcher } from '@/table/api';
 import {
   selectUserInvitationsFilter,
   UserInvitationsFilter,
+  UserInvitationsFilterFormId,
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -31,20 +32,34 @@ import { TeamDropdownActions } from './TeamDropdownActions';
 import { useRedirectCourseProjects } from './utils';
 
 const InvitationsListComponent: FunctionComponent = () => {
-  const filter = useSelector(mapStateToFilter);
+  const project = useSelector(getProject);
+  const { values } = useFormState();
+  const stateFilter = useMemo(
+    () => selectUserInvitationsFilter(values),
+    [values],
+  );
+
+  const filter = useMemo(
+    () => ({
+      ...stateFilter,
+      scope: project?.url,
+    }),
+    [stateFilter, project],
+  );
+
   const props = useTable({
     table: 'user-invitations',
     fetchData: createFetcher(userInvitationsList),
     filter,
     queryField: 'email',
   });
-  const project = useSelector(getProject);
 
   const tabs = useTeamTableTabs(project);
 
   return (
     <Table<Invitation>
       {...props}
+      formId={UserInvitationsFilterFormId}
       columns={[
         {
           title: translate('Email'),
@@ -107,15 +122,6 @@ const InvitationsListComponent: FunctionComponent = () => {
   );
 };
 
-const mapStateToFilter = createSelector(
-  getProject,
-  selectUserInvitationsFilter,
-  (project, stateFilter: any) => ({
-    ...stateFilter,
-    scope: project.url,
-  }),
-);
-
 export const InvitationsList: FunctionComponent = () => {
   const user = useUser();
   const project = useSelector(getProject);
@@ -135,5 +141,13 @@ export const InvitationsList: FunctionComponent = () => {
 
   useRedirectCourseProjects(project);
 
-  return <InvitationsListComponent />;
+  return (
+    <Form
+      id={UserInvitationsFilterFormId}
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+    >
+      {() => <InvitationsListComponent />}
+    </Form>
+  );
 };

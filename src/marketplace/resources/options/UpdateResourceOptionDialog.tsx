@@ -76,7 +76,7 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
           invalid={invalid}
         >
           {name ? (
-            <OptionsForm options={options} finalForm />
+            <OptionsForm options={options} />
           ) : (
             translate('There are no resource options defined in the offering.')
           )}

@@ -2,9 +2,9 @@ import { XIcon } from '@phosphor-icons/react';
 import { ErrorBoundary } from '@sentry/react';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { isDirty } from 'redux-form';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
+import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
 import { DrawerComponent } from '@/metronic/components';
@@ -20,9 +20,8 @@ export const DrawerRoot: FunctionComponent = () => {
   >((state: RootState) => state.drawer);
   const componentProps = drawerProps?.props || {};
   const dispatch = useDispatch();
-  const isDirtyForm = useSelector((state: RootState) =>
-    drawerProps?.formId ? isDirty(drawerProps.formId)(state) : false,
-  );
+  const [isDirtyContext, setIsDirtyContext] = React.useState(false);
+  const isDirtyForm = isDirtyContext;
   const onHide = () => {
     if (
       isDirtyForm &&
@@ -82,16 +81,18 @@ export const DrawerRoot: FunctionComponent = () => {
           </div>
         </div>
         <div className="card-body scroll-y p-0" id="kt_drawer_body">
-          <div className="p-8">
-            <ErrorBoundary fallback={ErrorMessage}>
-              {drawerComponent
-                ? React.createElement(drawerComponent, {
-                    ...componentProps,
-                    close: onHide,
-                  })
-                : null}
-            </ErrorBoundary>
-          </div>
+          <DirtyFormContext.Provider value={{ setIsDirty: setIsDirtyContext }}>
+            <div className="p-8">
+              <ErrorBoundary fallback={ErrorMessage}>
+                {drawerComponent
+                  ? React.createElement(drawerComponent, {
+                      ...componentProps,
+                      close: onHide,
+                    })
+                  : null}
+              </ErrorBoundary>
+            </div>
+          </DirtyFormContext.Provider>
         </div>
         {drawerProps.footer && (
           <div className="card-footer py-5 text-center" id="kt_drawer_footer">

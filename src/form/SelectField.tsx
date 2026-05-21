@@ -40,7 +40,6 @@ export const SelectField: FunctionComponent<any> = (props) => {
       options={options}
       onBlur={() => {
         if (!props.noUpdateOnBlur) {
-          // See also: https://github.com/erikras/redux-form/issues/1185
           props.input.onBlur(props.input.value);
         }
       }}
@@ -48,7 +47,6 @@ export const SelectField: FunctionComponent<any> = (props) => {
         'metronic-select-container' +
         (props.className ? ` ${props.className}` : '')
       }
-      classNamePrefix="metronic-select"
     />
   );
 };

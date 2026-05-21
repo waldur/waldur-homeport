@@ -1,8 +1,7 @@
-import { FunctionComponent, useState, useCallback, useEffect } from 'react';
+import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import { FormContainerFinal } from '@/form/FormContainerFinal';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
@@ -86,59 +85,55 @@ export const FileUploadTab: FunctionComponent = () => {
   );
 
   return (
-    <FormContainerFinal submitting={false}>
-      <Row>
-        <Col md={12}>
-          <Field
-            name="importFile"
-            validate={validateFileField}
-            render={() => null} // Hidden field
+    <Row>
+      <Col md={12}>
+        <Field
+          name="importFile"
+          validate={validateFileField}
+          render={() => null} // Hidden field
+        />
+
+        {!formData.importFile ? (
+          <UploadContainer
+            onDrop={onDrop}
+            disabled={isValidating}
+            message={translate(
+              'JSON or YAML offering export files (.json, .yaml, .yml - max. 10 MB)',
+            )}
+            maxSize={10 * 1024 * 1024} // 10MB
+            accept={YAML_JSON_FILE_TYPES}
+            multiple={false}
           />
+        ) : (
+          <AttachmentItem
+            attachment={{
+              file: formData.importFile,
+              file_name: formData.importFile.name,
+              file_size: formData.importFile.size,
+              mime_type: formData.importFile.type,
+            }}
+            onDelete={clearFile}
+            error={validationResult?.error}
+          />
+        )}
 
-          {!formData.importFile ? (
-            <UploadContainer
-              onDrop={onDrop}
-              disabled={isValidating}
-              message={translate(
-                'JSON or YAML offering export files (.json, .yaml, .yml - max. 10 MB)',
-              )}
-              maxSize={10 * 1024 * 1024} // 10MB
-              accept={YAML_JSON_FILE_TYPES}
-              multiple={false}
-            />
-          ) : (
-            <AttachmentItem
-              attachment={{
-                file: formData.importFile,
-                file_name: formData.importFile.name,
-                file_size: formData.importFile.size,
-                mime_type: formData.importFile.type,
-              }}
-              onDelete={clearFile}
-              error={validationResult?.error}
-            />
-          )}
-
-          {isValidating && (
-            <div className="d-flex align-items-center justify-content-center p-4">
-              <div className="spinner-border text-primary me-2" role="status">
-                <span className="visually-hidden">
-                  {translate('Loading...')}
-                </span>
-              </div>
-              <span>{translate('Validating file...')}</span>
+        {isValidating && (
+          <div className="d-flex align-items-center justify-content-center p-4">
+            <div className="spinner-border text-primary me-2" role="status">
+              <span className="visually-hidden">{translate('Loading...')}</span>
             </div>
-          )}
+            <span>{translate('Validating file...')}</span>
+          </div>
+        )}
 
-          {validationResult && !isValidating && (
-            <OfferingMetadataDisplay
-              metadata={validationResult.metadata}
-              isValid={validationResult.isValid}
-              error={validationResult.error}
-            />
-          )}
-        </Col>
-      </Row>
-    </FormContainerFinal>
+        {validationResult && !isValidating && (
+          <OfferingMetadataDisplay
+            metadata={validationResult.metadata}
+            isValid={validationResult.isValid}
+            error={validationResult.error}
+          />
+        )}
+      </Col>
+    </Row>
   );
 };

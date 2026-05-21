@@ -175,7 +175,7 @@ export const CreateManualAssignmentDialog: FC<
               <FormGroup label={translate('Reviewer')} required>
                 <Field
                   name="reviewer"
-                  component={SelectField as any}
+                  component={SelectField}
                   options={reviewerOptions}
                   isLoading={reviewersLoading}
                   formatOptionLabel={formatReviewerLabel}
@@ -196,7 +196,7 @@ export const CreateManualAssignmentDialog: FC<
               <FormGroup label={translate('Proposals')} required>
                 <Field
                   name="proposals"
-                  component={SelectField as any}
+                  component={SelectField}
                   options={proposalOptions}
                   isMulti
                   isLoading={proposalsLoading}
@@ -220,7 +220,7 @@ export const CreateManualAssignmentDialog: FC<
               >
                 <Field
                   name="manager_notes"
-                  component={StringField as any}
+                  component={StringField}
                   placeholder={translate(
                     'e.g., Assigned due to expertise in...',
                   )}

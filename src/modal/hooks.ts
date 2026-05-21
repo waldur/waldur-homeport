@@ -1,1 +1,0 @@
-export { useModal } from './actions';

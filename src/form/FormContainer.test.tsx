@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Form } from 'react-final-form';
 import { describe, it, expect, vi } from 'vitest';
 
-import { FormContainerFinal } from './FormContainerFinal';
+import { FormContainer } from './FormContainer';
 
 // Mock translation
 vi.mock('@/i18n', () => ({
@@ -25,7 +25,7 @@ const renderTestForm = (props: any = {}) => {
       initialValues={props.initialValues}
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit} data-testid="form">
-          <FormContainerFinal
+          <FormContainer
             submitting={props.submitting || submitting}
             space={props.space}
           >
@@ -40,7 +40,7 @@ const renderTestForm = (props: any = {}) => {
               label="Description"
               required={props.required}
             />
-          </FormContainerFinal>
+          </FormContainer>
           <button type="submit">Submit</button>
         </form>
       )}
@@ -48,7 +48,7 @@ const renderTestForm = (props: any = {}) => {
   );
 };
 
-describe('FormContainerFinal', () => {
+describe('FormContainer', () => {
   describe('disable fields on submit', () => {
     it('enables all input fields by default', () => {
       renderTestForm({});
@@ -72,7 +72,7 @@ describe('FormContainerFinal', () => {
 
     it('indicates required field', () => {
       const { container } = renderTestForm({ required: true });
-      // In FormGroupFinal, label has class 'required' if required prop is true
+      // In FormGroup, label has class 'required' if required prop is true
       expect(container.querySelectorAll('.required').length).toBe(2);
     });
   });

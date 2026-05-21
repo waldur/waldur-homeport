@@ -8,8 +8,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useToggle } from 'react-use';
-import { Offering, Project, Resource } from 'waldur-js-client';
+import { useFormState } from 'react-final-form';
+import { Project, Resource } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { formatDate, parseDate } from '@/core/dateUtils';
@@ -17,7 +17,6 @@ import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import Table from '@/table/Table';
@@ -27,11 +26,17 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { ProjectPreviewExpandableRow } from './ProjectPreviewExpandableRow';
 import { SkipErrorsCheck } from './SkipErrorsCheck';
+import { ProjectImportFormData } from './types';
 import { parseProjectsAndResourcesFile } from './utils';
 
 interface ImportedProject extends Project {
   resources?: Resource[];
   project_type?: string;
+  start_date?: string;
+  end_date?: string;
+  customer_uuid?: string;
+  oecd_fos_2007_code?: string;
+  is_industry?: boolean;
 }
 
 const ExpandableRow = (columns) =>
@@ -39,31 +44,68 @@ const ExpandableRow = (columns) =>
     <ProjectPreviewExpandableRow row={row} columns={columns} />
   ));
 
-export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
+interface Step5Props {
+  context: {
+    skipErrors: boolean;
+    setSkipErrors: (val: boolean) => void;
+    setStepValidation?: (
+      stepKey: string,
+      valid: boolean,
+      tooltipMessage: string | null,
+    ) => void;
+  };
+}
+
+export const Step5PreviewAndImport: FC<Step5Props> = ({
+  context: { skipErrors, setSkipErrors, setStepValidation },
+}) => {
   const { showError } = useNotify();
+  const { values } = useFormState<ProjectImportFormData>();
+  const importType = values?.import_type;
+  const offering = values?.offering;
+  const file = values?.file;
+
   const [data, setData] = useState<ImportedProject[]>([]);
-  const [skipErrors, setSkipErrors] = useToggle(false);
 
   const resourcesCount = useMemo(
     () =>
-      data.reduce((count, project) => count + project?.resources?.length, 0),
+      data.reduce(
+        (count, project) => count + (project?.resources?.length || 0),
+        0,
+      ),
     [data],
   );
 
   const parseCsvFile = useCallback(
     (acceptedFiles: File[]) => {
       const _file = acceptedFiles[0];
-
       if (!_file) {
         showError(translate('No file has been imported'));
         return;
       }
-      parseProjectsAndResourcesFile(_file).then((_data) => setData(_data));
+      parseProjectsAndResourcesFile(_file)
+        .then((_data) => {
+          setData(_data);
+        })
+        .catch((err) => {
+          showError(err.message || String(err));
+        });
     },
-    [setData],
+    [showError],
   );
 
+  useEffect(() => {
+    if (file?.length) {
+      parseCsvFile(file);
+    }
+  }, [file, parseCsvFile]);
+
   const refToolbar = useRef<HTMLDivElement>(null);
+
+  const cacheFilter = useMemo(
+    () => ({ dataLength: data.length }),
+    [data.length],
+  );
 
   const tableProps = useTable({
     table: 'ImportProjectsPreview',
@@ -71,7 +113,9 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       let rows = [...data];
       const q = (request.filter?.query || '').trim().toLowerCase();
       if (q) {
-        rows = rows.filter((row) => row.name.toLowerCase().includes(q));
+        rows = rows.filter(
+          (row) => row.name && row.name.toLowerCase().includes(q),
+        );
       }
       return Promise.resolve({
         rows,
@@ -79,6 +123,7 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       });
     },
     queryField: 'query',
+    filter: cacheFilter,
   });
 
   const projectColumns = useMemo<Column<ImportedProject>[]>(
@@ -165,7 +210,7 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
             );
           },
         },
-      ].filter(Boolean),
+      ].filter(Boolean) as Column<ImportedProject>[],
     [data],
   );
 
@@ -195,124 +240,110 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
     return null;
   }, [data]);
 
+  useEffect(() => {
+    if (setStepValidation) {
+      const isValid = !tooltip || skipErrors;
+      setStepValidation('preview', isValid, !skipErrors ? tooltip : null);
+    }
+  }, [tooltip, skipErrors, setStepValidation]);
+
+  const resourceColumns = useMemo(() => {
+    if (importType !== 'projects_with_resources' || !offering) {
+      return null;
+    }
+    const fields = ['description', 'end_date', 'plan_name'].filter((field) =>
+      data.some(
+        (project) =>
+          project.resources &&
+          project.resources.some((resource) => resource[field]),
+      ),
+    );
+    return [
+      {
+        title: translate('Resource name'),
+        render: ({ row }) => <>{row.name}</>,
+      },
+      fields.includes('description') && {
+        title: translate('Description'),
+        render: ({ row }) => (
+          <>{row.description ? truncate(row.description) : 'N/A'}</>
+        ),
+      },
+      fields.includes('end_date') && {
+        title: translate('Termination date'),
+        render: ({ row }) => (
+          <>{row.end_date ? formatDate(row.end_date) : 'N/A'}</>
+        ),
+      },
+      fields.includes('plan_name') && {
+        title: translate('Plan'),
+        render: ({ row }) => <>{renderFieldOrDash(row.plan_name)}</>,
+      },
+    ]
+      .concat(
+        (offering.components || []).map((comp) => ({
+          title: comp.name,
+          render: ({ row }) => (
+            <>{renderFieldOrDash(row?.limits?.[comp.type])}</>
+          ),
+        })),
+        Object.keys(offering.attributes || {}).map((attr) => ({
+          title: attr,
+          render: ({ row }) => (
+            <>{renderFieldOrDash(row?.attributes?.[attr])}</>
+          ),
+        })),
+      )
+      .filter(Boolean) as Column<any>[];
+  }, [importType, offering, data]);
+
+  const MemoizedExpandableRow = useMemo(
+    () => (resourceColumns ? ExpandableRow(resourceColumns) : undefined),
+    [resourceColumns],
+  );
+
   return (
-    <WizardForm
-      {...props}
-      submitDisabled={!!tooltip && !skipErrors}
-      submitTooltip={!skipErrors && tooltip}
-    >
-      {(wizardProps) => {
-        const importType = wizardProps.formValues?.import_type;
-        const offering = wizardProps.formValues?.offering as Offering;
-        const file = wizardProps.formValues?.file;
-
-        useEffect(() => {
-          if (file?.length > 0) {
-            parseCsvFile(file);
-          }
-        }, [file, parseCsvFile]);
-
-        const resourceColumns = useMemo(() => {
-          if (importType !== 'projects_with_resources' || !offering) {
-            return null;
-          }
-          const fields = ['description', 'end_date', 'plan_name'].filter(
-            (field) =>
-              data.some(
-                (project) =>
-                  project.resources &&
-                  project.resources.some((resource) => resource[field]),
-              ),
-          );
-          return [
-            {
-              title: translate('Resource name'),
-              render: ({ row }) => <>{row.name}</>,
-            },
-            fields.includes('description') && {
-              title: translate('Description'),
-              render: ({ row }) => (
-                <>{row.description ? truncate(row.description) : 'N/A'}</>
-              ),
-            },
-            fields.includes('end_date') && {
-              title: translate('Termination date'),
-              render: ({ row }) => (
-                <>{row.end_date ? formatDate(row.end_date) : 'N/A'}</>
-              ),
-            },
-            fields.includes('plan_name') && {
-              title: translate('Plan'),
-              render: ({ row }) => <>{renderFieldOrDash(row.plan_name)}</>,
-            },
-          ]
-            .concat(
-              offering.components.map((comp) => ({
-                title: comp.name,
-                render: ({ row }) => (
-                  <>{renderFieldOrDash(row.limits[comp.type])}</>
-                ),
-              })),
-              Object.keys(offering.attributes).map((attr) => ({
-                title: attr,
-                render: ({ row }) => (
-                  <>{renderFieldOrDash(row.attributes[attr])}</>
-                ),
-              })),
-            )
-            .filter(Boolean);
-        }, [importType, offering, data]);
-
-        const MemoizedExpandableRow = useMemo(
-          () => ExpandableRow(resourceColumns),
-          [resourceColumns],
-        );
-
-        return (
-          <div>
-            <div className="d-flex justify-content-start mb-3">
-              <div ref={refToolbar}>{/* Portal destination */}</div>
-            </div>
-            <div className="d-flex justify-content-between text-muted mb-3">
-              {importType === 'projects_only' ? (
-                <span>
-                  {data.length} {translate('Projects')}
-                </span>
-              ) : (
-                <span>
-                  {data.length} {translate('Projects')}, {resourcesCount}{' '}
-                  {translate('Resources identified')}
-                </span>
-              )}
-              <span>{translate('Verify your data before importing')}</span>
-            </div>
-            <Table
-              {...tableProps}
-              columns={projectColumns}
-              verboseName={translate('Projects')}
-              hasActionBar={false}
-              fullWidth
-              cardBordered={false}
-              minHeight="auto"
-              portal={{ toolbar: refToolbar?.current }}
-              hasQuery
-              expandableRow={
-                importType === 'projects_with_resources'
-                  ? MemoizedExpandableRow
-                  : undefined
-              }
-              footer={
-                Boolean(tooltip && data?.length) && (
-                  <SkipErrorsCheck
-                    checked={skipErrors}
-                    onChange={setSkipErrors}
-                  />
-                )
-              }
+    <div>
+      <div className="d-flex justify-content-start mb-3">
+        <div ref={refToolbar}>{/* Portal destination */}</div>
+      </div>
+      <div className="d-flex justify-content-between text-muted mb-3">
+        {importType === 'projects_only' ? (
+          <span>
+            {data.length} {translate('Projects')}
+          </span>
+        ) : (
+          <span>
+            {data.length} {translate('Projects')}, {resourcesCount}{' '}
+            {translate('Resources identified')}
+          </span>
+        )}
+        <span>{translate('Verify your data before importing')}</span>
+      </div>
+      <Table
+        {...tableProps}
+        columns={projectColumns}
+        verboseName={translate('Projects')}
+        hasActionBar={false}
+        fullWidth
+        cardBordered={false}
+        minHeight="auto"
+        portal={{ toolbar: refToolbar?.current }}
+        hasQuery
+        expandableRow={
+          importType === 'projects_with_resources'
+            ? MemoizedExpandableRow
+            : undefined
+        }
+        footer={
+          Boolean(tooltip && data?.length) && (
+            <SkipErrorsCheck
+              checked={skipErrors}
+              onChange={(e) => setSkipErrors(e.target.checked)}
             />
-          </div>
-        );
-      }}
-    </WizardForm>
+          )
+        }
+      />
+    </div>
   );
 };

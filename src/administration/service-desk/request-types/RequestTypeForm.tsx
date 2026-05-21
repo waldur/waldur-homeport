@@ -92,7 +92,7 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
           >
             <FormGroup label={translate('Name')} required>
               <Field
-                component={StringField as any}
+                component={StringField}
                 name="name"
                 validate={required}
                 disabled={isEdit && resolve.requestType?.is_synced}
@@ -108,7 +108,7 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
 
             <FormGroup label={translate('Issue type name')} required>
               <Field
-                component={StringField as any}
+                component={StringField}
                 name="issue_type_name"
                 validate={required}
                 disabled={isEdit && resolve.requestType?.is_synced}
@@ -123,7 +123,7 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
             </FormGroup>
 
             <FormGroup label={translate('Order')}>
-              <Field component={NumberField as any} name="order" min={0} />
+              <Field component={NumberField} name="order" min={0} />
               <small className="text-muted">
                 {translate(
                   'Display order. First type (lowest order) is the default.',
@@ -133,7 +133,7 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
 
             <FormGroup>
               <Field
-                component={AwesomeCheckboxField as any}
+                component={AwesomeCheckboxField}
                 name="is_active"
                 label={translate('Active')}
               />

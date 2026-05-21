@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -14,6 +14,7 @@ import { createFetcher } from '@/table/api';
 import {
   selectUserInvitationsFilter,
   UserInvitationsFilter,
+  UserInvitationsFilterFormId,
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -21,9 +22,12 @@ import { RoleField } from '@/user/affiliations/RoleField';
 
 import { InvitationScopeLink } from './InvitationScopeLink';
 
-export const InvitationList: FunctionComponent = () => {
+const InvitationListTable: FunctionComponent = () => {
   useTitle(translate('Invitations'));
-  const filter = useSelector(selectUserInvitationsFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(() => selectUserInvitationsFilter(values), [values]);
+
   const props = useTable({
     table: 'admin-invitations',
     fetchData: createFetcher(userInvitationsList),
@@ -89,6 +93,19 @@ export const InvitationList: FunctionComponent = () => {
       ]}
       verboseName={translate('invitations')}
       hasQuery={true}
+      formId={UserInvitationsFilterFormId}
     />
   );
 };
+
+export const InvitationList = (props) => (
+  <Form
+    id={UserInvitationsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <InvitationListTable {...props} />}
+  </Form>
+);

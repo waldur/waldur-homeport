@@ -1,8 +1,7 @@
 import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { change, Field, formValueSelector } from 'redux-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -17,19 +16,16 @@ import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { AttachmentUploading } from '@/form/upload/types';
 import { UploadContainer } from '@/form/upload/UploadContainer';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
 import { ChecklistQuestionField } from './ChecklistQuestionField';
 import { getAuthMethodInfo } from './constants';
-import {
-  PersonIdentifierFieldConfig,
-  PersonIdentifierFieldsRenderer,
-} from './PersonIdentifierFieldsRenderer';
+import { PersonIdentifierFieldsRenderer } from './PersonIdentifierFieldsRenderer';
+import { OrganizationCreateFormValues } from './types';
 import { QuestionWithMetadata } from './utils';
 
-interface OrganizationCreateStep2Props extends WizardFormStepProps {
+interface OrganizationCreateStep2Props {
   getChecklistData?: () => Promise<{
     allQuestions: any[];
     customerQuestions: any[];
@@ -42,34 +38,22 @@ interface OrganizationCreateStep2Props extends WizardFormStepProps {
 export const OrganizationCreateStep2: FunctionComponent<
   OrganizationCreateStep2Props
 > = (props) => {
-  const dispatch = useDispatch();
+  const form = useForm();
+  const { values } = useFormState<OrganizationCreateFormValues>({
+    subscription: { values: true },
+  });
   const user = useUser();
 
-  const selector = formValueSelector(props.form);
-  const formValidationMethod = useSelector((state) =>
-    selector(state, 'validationMethod'),
-  );
-  const fieldConfig = useSelector((state) =>
-    selector(state, 'personIdentifierFieldConfig'),
-  ) as PersonIdentifierFieldConfig | null;
-  const uploadedFiles =
-    useSelector((state) => selector(state, 'uploadedFiles')) || [];
+  const validationMethod = values.validationMethod || '';
+  const fieldConfig = values.personIdentifierFieldConfig || null;
+  const uploadedFiles = values.uploadedFiles || [];
 
-  const [validationMethod, setValidationMethod] = useState<string>(
-    formValidationMethod || '',
-  );
   const isManual = validationMethod === 'manual';
   const [checklistQuestions, setChecklistQuestions] = useState<
     QuestionWithMetadata[]
   >([]);
   const [loading, setLoading] = useState(false);
   const [checklistFetched, setChecklistFetched] = useState(false);
-
-  useEffect(() => {
-    if (formValidationMethod && formValidationMethod !== validationMethod) {
-      setValidationMethod(formValidationMethod);
-    }
-  }, [formValidationMethod]);
 
   // Check if user already has required fields based on validation method
   const hasRequiredFields = () => {
@@ -91,9 +75,9 @@ export const OrganizationCreateStep2: FunctionComponent<
 
   const updateUploadedFiles = useCallback(
     (files: AttachmentUploading[]) => {
-      dispatch(change(props.form, 'uploadedFiles', files));
+      form.change('uploadedFiles', files);
     },
-    [dispatch, props.form],
+    [form],
   );
 
   const handleFileDrop = useCallback(
@@ -119,16 +103,14 @@ export const OrganizationCreateStep2: FunctionComponent<
   );
 
   // Get all form values for dependency evaluation
-  const allFormValues = useSelector((state) => {
-    const questionFields = checklistQuestions.reduce(
-      (acc, q) => {
-        acc[`question_${q.uuid}`] = selector(state, `question_${q.uuid}`);
-        return acc;
-      },
-      {} as Record<string, any>,
-    );
-    return questionFields;
-  }, shallowEqual);
+  const allFormValues = checklistQuestions.reduce(
+    (acc, q) => {
+      const key = `question_${q.uuid}`;
+      acc[key] = values[key];
+      return acc;
+    },
+    {} as Record<string, any>,
+  );
 
   // Render checklist questions in a responsive grid layout
   const renderChecklistQuestions = () => {
@@ -190,168 +172,161 @@ export const OrganizationCreateStep2: FunctionComponent<
   }, [checklistFetched, isManual]);
 
   return (
-    <WizardForm {...props}>
-      <div className="d-flex flex-column gap-5">
-        <Card className="border-0 shadow-sm">
-          <Card.Body className="p-8">
-            {!isManual &&
-              (() => {
-                const methodInfo = getAuthMethodInfo(validationMethod);
+    <div className="d-flex flex-column gap-5">
+      <Card className="border-0 shadow-sm">
+        <Card.Body className="p-8">
+          {!isManual &&
+            (() => {
+              const methodInfo = getAuthMethodInfo(validationMethod);
 
-                return (
-                  <>
-                    <p className="mb-3">{methodInfo.title}</p>
+              return (
+                <>
+                  <p className="mb-3">{methodInfo.title}</p>
 
-                    {hasRequiredFields() ? (
-                      <Card className="card-bordered mb-6">
+                  {hasRequiredFields() ? (
+                    <Card className="card-bordered mb-6">
+                      <Card.Body className="d-flex gap-3">
+                        <div className="flex-shrink-0">
+                          <CheckCircleIcon
+                            size={24}
+                            weight="duotone"
+                            className="text-success"
+                          />
+                        </div>
+                        <div className="flex-grow-1">
+                          <div className="fw-semibold text-gray-800 mb-1">
+                            {translate('Personal identity received')}
+                            {user?.civil_number && `: ${user.civil_number}`}
+                          </div>
+                          <div className="text-gray-700">
+                            {translate(
+                              'This will be used to check your company representative rights.',
+                            )}
+                          </div>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  ) : (
+                    <>
+                      <Card className="card-bordered mb-4">
                         <Card.Body className="d-flex gap-3">
                           <div className="flex-shrink-0">
-                            <CheckCircleIcon
-                              size={24}
-                              weight="duotone"
-                              className="text-success"
-                            />
+                            <InfoIcon size={24} weight="duotone" />
                           </div>
                           <div className="flex-grow-1">
                             <div className="fw-semibold text-gray-800 mb-1">
-                              {translate('Personal identity received')}
-                              {user?.civil_number && `: ${user.civil_number}`}
+                              {translate('Why do we need this?')}
                             </div>
                             <div className="text-gray-700">
-                              {translate(
-                                'This will be used to check your company representative rights.',
-                              )}
+                              {methodInfo.description}
                             </div>
                           </div>
                         </Card.Body>
                       </Card>
-                    ) : (
-                      <>
-                        <Card className="card-bordered mb-4">
-                          <Card.Body className="d-flex gap-3">
-                            <div className="flex-shrink-0">
-                              <InfoIcon size={24} weight="duotone" />
-                            </div>
-                            <div className="flex-grow-1">
-                              <div className="fw-semibold text-gray-800 mb-1">
-                                {translate('Why do we need this?')}
-                              </div>
-                              <div className="text-gray-700">
-                                {methodInfo.description}
-                              </div>
-                            </div>
-                          </Card.Body>
-                        </Card>
 
-                        {fieldConfig && (
-                          <PersonIdentifierFieldsRenderer
-                            fieldConfig={fieldConfig}
-                            loading={false}
-                          />
-                        )}
-                      </>
-                    )}
-
-                    {/* Registration code field for automatic validation */}
-                    <div className="mt-6">
-                      <Field
-                        name="registration_code"
-                        label={translate('Company registration code')}
-                        placeholder={translate('12345678')}
-                        component={FormGroup}
-                        required
-                        validate={required}
-                        description={translate(
-                          'The official registration number of your company',
-                        )}
-                      >
-                        <StringField />
-                      </Field>
-                    </div>
-
-                    {renderChecklistQuestions()}
-                  </>
-                );
-              })()}
-
-            {isManual && (
-              <div className="pt-2">
-                <p className="text-gray-700 mb-6">
-                  {translate(
-                    'Please provide your organization details. Supporting documents will help speed up the review process.',
-                  )}
-                </p>
-
-                <Row className="g-6">
-                  <Col md={6}>
-                    <Field
-                      name="name"
-                      label={translate('Organization name')}
-                      placeholder={translate('e.g., Acme Corporation')}
-                      maxLength={150}
-                      validate={composeValidators(...getNameFieldValidators())}
-                      required={true}
-                      component={FormGroup}
-                    >
-                      <StringField />
-                    </Field>
-                  </Col>
-                  <Col md={6}>
-                    <Field
-                      name="registration_code"
-                      label={translate('Registration code')}
-                      placeholder={translate('12345678')}
-                      component={FormGroup}
-                    >
-                      <StringField />
-                    </Field>
-                  </Col>
-                </Row>
-
-                {renderChecklistQuestions()}
-
-                {/* Documentation Upload Section */}
-                <div className="mt-8">
-                  <BootstrapForm.Group>
-                    <BootstrapForm.Label className="fs-6 fw-semibold mb-2">
-                      {translate(
-                        'Optional information and supporting documents',
-                      )}
-                    </BootstrapForm.Label>
-                    <UploadContainer
-                      onDrop={handleFileDrop}
-                      message={translate(
-                        'JPG, PNG, PDF or .asice (max {size})',
-                        {
-                          size: '2 GB',
-                        },
-                      )}
-                      multiple={true}
-                      maxSize={2 * 1024 * 1024 * 1024} // 2GB
-                      accept={ACCEPTED_FILE_TYPES}
-                    />
-                    <AttachmentsList
-                      uploading={uploadedFiles}
-                      className="mt-4"
-                      ItemPendingComponent={(itemProps) => (
-                        <AttachmentItemPending
-                          {...itemProps}
-                          onCancel={handleFileCancel}
+                      {fieldConfig && (
+                        <PersonIdentifierFieldsRenderer
+                          fieldConfig={fieldConfig}
+                          loading={false}
                         />
                       )}
-                    />
-                    <p className="mb-0 mt-1 text-muted small">
-                      {translate(
-                        'To speed up the review process, provide as much data as possible',
+                    </>
+                  )}
+
+                  {/* Registration code field for automatic validation */}
+                  <div className="mt-6">
+                    <Field
+                      name="registration_code"
+                      label={translate('Company registration code')}
+                      placeholder={translate('12345678')}
+                      component={FormGroup}
+                      required
+                      validate={required}
+                      description={translate(
+                        'The official registration number of your company',
                       )}
-                    </p>
-                  </BootstrapForm.Group>
-                </div>
+                    >
+                      <StringField />
+                    </Field>
+                  </div>
+
+                  {renderChecklistQuestions()}
+                </>
+              );
+            })()}
+
+          {isManual && (
+            <div className="pt-2">
+              <p className="text-gray-700 mb-6">
+                {translate(
+                  'Please provide your organization details. Supporting documents will help speed up the review process.',
+                )}
+              </p>
+
+              <Row className="g-6">
+                <Col md={6}>
+                  <Field
+                    name="name"
+                    label={translate('Organization name')}
+                    placeholder={translate('e.g., Acme Corporation')}
+                    maxLength={150}
+                    validate={composeValidators(...getNameFieldValidators())}
+                    required={true}
+                    component={FormGroup}
+                  >
+                    <StringField />
+                  </Field>
+                </Col>
+                <Col md={6}>
+                  <Field
+                    name="registration_code"
+                    label={translate('Registration code')}
+                    placeholder={translate('12345678')}
+                    component={FormGroup}
+                  >
+                    <StringField />
+                  </Field>
+                </Col>
+              </Row>
+
+              {renderChecklistQuestions()}
+
+              {/* Documentation Upload Section */}
+              <div className="mt-8">
+                <BootstrapForm.Group>
+                  <BootstrapForm.Label className="fs-6 fw-semibold mb-2">
+                    {translate('Optional information and supporting documents')}
+                  </BootstrapForm.Label>
+                  <UploadContainer
+                    onDrop={handleFileDrop}
+                    message={translate('JPG, PNG, PDF or .asice (max {size})', {
+                      size: '2 GB',
+                    })}
+                    multiple={true}
+                    maxSize={2 * 1024 * 1024 * 1024} // 2GB
+                    accept={ACCEPTED_FILE_TYPES}
+                  />
+                  <AttachmentsList
+                    uploading={uploadedFiles}
+                    className="mt-4"
+                    ItemPendingComponent={(itemProps) => (
+                      <AttachmentItemPending
+                        {...itemProps}
+                        onCancel={handleFileCancel}
+                      />
+                    )}
+                  />
+                  <p className="mb-0 mt-1 text-muted small">
+                    {translate(
+                      'To speed up the review process, provide as much data as possible',
+                    )}
+                  </p>
+                </BootstrapForm.Group>
               </div>
-            )}
-          </Card.Body>
-        </Card>
-      </div>
-    </WizardForm>
+            </div>
+          )}
+        </Card.Body>
+      </Card>
+    </div>
   );
 };

@@ -7,10 +7,6 @@ import { useModal } from '@/modal/actions';
 
 import { EditModalButton } from './EditModalButton';
 
-vi.mock('@/modal/actions', () => ({
-  useModal: vi.fn(),
-}));
-
 vi.mock('@/i18n', () => ({
   translate: (str: string) => str,
 }));

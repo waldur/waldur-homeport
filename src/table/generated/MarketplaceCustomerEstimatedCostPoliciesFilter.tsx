@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   MarketplaceCustomerEstimatedCostPoliciesListData,
@@ -11,7 +10,6 @@ import {
 
 import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -35,7 +33,6 @@ const PureMarketplaceCustomerEstimatedCostPoliciesFilter: FunctionComponent<{}> 
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -45,36 +42,24 @@ const PureMarketplaceCustomerEstimatedCostPoliciesFilter: FunctionComponent<{}> 
 export const MarketplaceCustomerEstimatedCostPoliciesFilterFormId =
   'MarketplaceCustomerEstimatedCostPoliciesFilter';
 
-interface MarketplaceCustomerEstimatedCostPoliciesFilterFormData {
+export interface MarketplaceCustomerEstimatedCostPoliciesFilterFormData {
   organization: Customer;
 }
 
-export const MarketplaceCustomerEstimatedCostPoliciesFilter = reduxForm<
-  MarketplaceCustomerEstimatedCostPoliciesFilterFormData,
-  {}
->({
-  form: MarketplaceCustomerEstimatedCostPoliciesFilterFormId,
-  destroyOnUnmount: false,
-})(PureMarketplaceCustomerEstimatedCostPoliciesFilter);
+export const MarketplaceCustomerEstimatedCostPoliciesFilter =
+  PureMarketplaceCustomerEstimatedCostPoliciesFilter;
 
 type MarketplaceCustomerEstimatedCostPoliciesFilterQuery =
   MarketplaceCustomerEstimatedCostPoliciesListData['query'];
 
-export const selectMarketplaceCustomerEstimatedCostPoliciesFilter =
-  createSelector<
-    RootState,
-    Partial<MarketplaceCustomerEstimatedCostPoliciesFilterFormData>,
-    MarketplaceCustomerEstimatedCostPoliciesFilterQuery
-  >(
-    getFormValues(MarketplaceCustomerEstimatedCostPoliciesFilterFormId),
-    (values) => {
-      const filter: MarketplaceCustomerEstimatedCostPoliciesFilterQuery =
-        {} as any;
-      if (values) {
-        if (values.organization) {
-          filter.customer_uuid = values.organization.uuid;
-        }
-      }
-      return filter;
-    },
-  );
+export const selectMarketplaceCustomerEstimatedCostPoliciesFilter = (
+  values?: Partial<MarketplaceCustomerEstimatedCostPoliciesFilterFormData>,
+): MarketplaceCustomerEstimatedCostPoliciesFilterQuery => {
+  const filter: MarketplaceCustomerEstimatedCostPoliciesFilterQuery = {} as any;
+  if (values) {
+    if (values.organization) {
+      filter.customer_uuid = values.organization.uuid;
+    }
+  }
+  return filter;
+};

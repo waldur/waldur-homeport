@@ -79,7 +79,7 @@ export const DirectEmailInviteDialog = ({
               <FormGroup label={translate('Email address')} required>
                 <Field
                   name="email"
-                  component={StringField as any}
+                  component={StringField}
                   validate={composeValidators(required, email)}
                   placeholder={translate('reviewer@example.com')}
                 />
@@ -88,7 +88,7 @@ export const DirectEmailInviteDialog = ({
               <FormGroup label={translate('Invitation message')}>
                 <Field
                   name="invitation_message"
-                  component={TextField as any}
+                  component={TextField}
                   rows={4}
                   placeholder={translate(
                     'Optional custom message for the invitation email...',

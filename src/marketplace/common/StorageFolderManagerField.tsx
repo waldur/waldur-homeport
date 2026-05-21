@@ -1,7 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
 import { Tip } from '@/core/Tooltip';
@@ -10,7 +9,7 @@ import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { STORAGE_FOLDER_PERMISSIONS } from '@/marketplace/offerings/update/options/constants';
 
-import { orderFormDataSelector } from '../deploy/selectors';
+import { useOrderFormData } from '../deploy/selectors';
 
 import { DeployFormData } from './types';
 
@@ -158,7 +157,7 @@ export const StorageFolderManagerField = ({
     [input?.value, config],
   );
 
-  const formValues = useSelector(orderFormDataSelector);
+  const formValues = useOrderFormData();
 
   const softQuota = useSoftQuota(config, formValues, offering);
   const calculatedQuotas = useCalculatedQuotas(currentValue, softQuota, config);

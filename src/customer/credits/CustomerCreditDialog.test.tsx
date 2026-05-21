@@ -44,13 +44,6 @@ vi.mock('@/workspace/selectors', () => ({
   getCustomer: () => ({ uuid: 'customer-uuid' }),
 }));
 
-vi.mock('@/modal/hooks', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-    confirm: vi.fn().mockResolvedValue(undefined),
-  }),
-}));
-
 vi.mock('@/marketplace/common/autocompletes', () => ({
   organizationAutocomplete: vi.fn(),
   providerOfferingsAutocomplete: vi.fn(),

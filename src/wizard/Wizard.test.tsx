@@ -1,9 +1,6 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { FC } from 'react';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { WizardStepProps } from './types';
 import { Wizard } from './Wizard';
@@ -79,12 +76,6 @@ const getForm = (container: HTMLElement) =>
   container.querySelector('form.wizard')!;
 
 const renderWizard = (props: Record<string, any> = {}) => {
-  const store = createStore(
-    combineReducers({
-      form: formReducer,
-    }),
-  );
-
   const defaultProps = {
     title: 'Test Wizard',
     subtitle: 'Test Subtitle',
@@ -95,11 +86,7 @@ const renderWizard = (props: Record<string, any> = {}) => {
     submitLabel: 'Submit',
   };
 
-  const result = render(
-    <Provider store={store}>
-      <Wizard {...defaultProps} {...props} />
-    </Provider>,
-  );
+  const result = render(<Wizard {...defaultProps} {...props} />);
 
   return {
     ...result,

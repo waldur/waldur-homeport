@@ -93,8 +93,6 @@
     "react-windowed-select": "^5.2.0",
     "reapop": "^4.2.2",
     "redux": "^4.2.1",
-    "redux-form": "^8.3.10",
-    "redux-thunk": "^2.4.2",
     "reselect": "^3.0.1",
     "text-security": "^3.2.1",
     "waldur-js-client": "^8.0.9-dev.23",
@@ -123,7 +121,6 @@
     "@types/react-redux": "^7.1.4",
     "@types/react-ultimate-pagination": "^1.2.1",
     "@types/react-window": "^1.8.8",
-    "@types/redux-form": "^8.3.10",
     "@vitejs/plugin-react": "5",
     "@vitest/coverage-v8": "3",
     "autoprefixer": "^10.4.20",
@@ -197,7 +194,8 @@
       "src/EventsEnums.ts",
       "locales/tools/*.cjs",
       "generate-filters.cjs",
-      "src/table/generated/*.tsx"
+      "src/table/generated/*.tsx",
+      "src/core/DirtyFormContext.tsx"
     ]
   },
   "stylelint": {

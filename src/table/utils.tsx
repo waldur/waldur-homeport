@@ -1,9 +1,8 @@
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n/translate';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
-
-import { ExportData } from './exporters/types';
-import { Column } from './types';
+import { ExportData } from '@/table/exporters/types';
+import { Column } from '@/table/types';
 
 export const getId = (row, index) => {
   if (row.uuid) {
@@ -64,11 +63,6 @@ export function getNoResultTitle({ verboseName, hasFilter = false }) {
   }
   return translate('No {verboseName} found', context);
 }
-
-export const getFiltersFormId = (filters: JSX.Element) => {
-  if (!filters) return '';
-  return filters.props?.form;
-};
 
 export const getSavedFiltersKey = (table, formId) =>
   `waldur/table/filters/${table}/${formId}`;

@@ -3,7 +3,7 @@ import { FunctionComponent, useRef } from 'react';
 import { Form } from 'react-final-form';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { FormContainerFinal, SubmitButton, TextField } from '@/form';
+import { FormContainer, SubmitButton, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Field } from '@/resource/summary';
@@ -153,7 +153,7 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
             </div>
             {!readOnly && <hr />}
             {!readOnly && (
-              <FormContainerFinal submitting={isPending} className="size-lg">
+              <FormContainer submitting={isPending} className="size-lg">
                 <TextField
                   name="comment"
                   label={translate('Reason')}
@@ -165,7 +165,7 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
                   rows={4}
                   space={4}
                 />
-              </FormContainerFinal>
+              </FormContainer>
             )}
           </ModalDialog>
         </form>

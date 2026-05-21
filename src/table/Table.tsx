@@ -317,7 +317,10 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
           {/* Header filters */}
           {props.filterPosition === 'header' && props.filters ? (
             <Card.Header className="table-filter border-bottom align-items-stretch">
-              <TableFilterContainer filters={props.filters} />
+              <TableFilterContainer
+                filters={props.filters}
+                formId={props.formId}
+              />
             </Card.Header>
           ) : null}
 
@@ -336,6 +339,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                     table={props.table}
                     filtersStorage={props.filtersStorage}
                     filters={props.filters}
+                    formId={props.formId}
                     renderFiltersDrawer={props.renderFiltersDrawer}
                     hideClearFilters={props.hideClearFilters}
                     filterPosition={props.filterPosition}
@@ -418,7 +422,7 @@ function Table<RowType = any>(props: TableProps<RowType>) {
   // Initialize filters
   useEffect(() => {
     if (filterPosition === 'sidebar') {
-      renderFiltersDrawer(filters);
+      renderFiltersDrawer(filters, props.formId);
     } else if (filterPosition === 'menu') {
       applyFiltersFn(true);
     }

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { ENV } from '@/core/config';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { orderProjectSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { OrderStartDateField } from '@/marketplace/deploy/steps/OrderStartDateField';
 import { concealPricesSelector } from '@/marketplace/deploy/utils';
 
@@ -23,7 +23,7 @@ export const OneTimeTab = ({
 }) => {
   const shouldConcealPrices =
     useSelector(concealPricesSelector) || concealBillingInfo;
-  const project = useSelector(orderProjectSelector);
+  const { project } = useOrderFormData();
 
   const prepaidConstraints = useMemo(
     () => mergePrepaidConstraints(oneTime.prepaidRows),

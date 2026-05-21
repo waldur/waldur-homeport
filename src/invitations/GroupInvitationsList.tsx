@@ -4,9 +4,9 @@ import {
   LockIcon,
   XIcon,
 } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -19,6 +19,7 @@ import { GroupInvitationsListExpandableRow } from '@/invitations/GroupInvitation
 import { createFetcher } from '@/table/api';
 import {
   UserGroupInvitationsFilter,
+  UserGroupInvitationsFilterFormId,
   selectUserGroupInvitationsFilter,
 } from '@/table/generated/UserGroupInvitationsFilter';
 import Table from '@/table/Table';
@@ -29,17 +30,22 @@ import { getCustomer } from '@/workspace/selectors';
 
 import { useTeamTableTabs } from '../customer/team/tabs';
 
-const mapStateToFilter = createSelector(
-  getCustomer,
-  selectUserGroupInvitationsFilter,
-  (customer, filter) => ({
-    ...filter,
-    customer_uuid: customer?.uuid,
-  }),
-);
+const GroupInvitationsListTable: FunctionComponent<{}> = () => {
+  const customer = useSelector(getCustomer);
+  const { values } = useFormState();
+  const filterValues = useMemo(
+    () => selectUserGroupInvitationsFilter(values),
+    [values],
+  );
 
-export const GroupInvitationsList: FunctionComponent<{}> = () => {
-  const filter = useSelector(mapStateToFilter);
+  const filter = useMemo(
+    () => ({
+      ...filterValues,
+      customer_uuid: customer?.uuid,
+    }),
+    [filterValues, customer],
+  );
+
   const props = useTable({
     table: 'group-invitations',
     fetchData: createFetcher(userGroupInvitationsList),
@@ -51,6 +57,7 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
   return (
     <Table<GroupInvitation>
       {...props}
+      formId={UserGroupInvitationsFilterFormId}
       filters={<UserGroupInvitationsFilter />}
       filterPosition="menu"
       hasQuery
@@ -138,3 +145,13 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
     />
   );
 };
+
+export const GroupInvitationsList: FunctionComponent<{}> = () => (
+  <Form
+    id={UserGroupInvitationsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <GroupInvitationsListTable />}
+  </Form>
+);

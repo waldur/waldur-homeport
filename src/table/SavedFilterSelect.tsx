@@ -1,9 +1,9 @@
 import { FunnelIcon, TrashIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo } from 'react';
+import { useForm, useFormState } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { components, OptionProps } from 'react-select';
-import { change, clearFields, getFormValues, reset } from 'redux-form';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
 import {
@@ -77,18 +77,17 @@ export const SavedFilterSelect = ({
   onSelect,
 }: SavedFilterSelectProps) => {
   const { confirm } = useModal();
-
   const dispatch = useDispatch();
-
   const { showErrorResponse } = useNotify();
 
-  const formValues = useSelector(getFormValues(formId));
+  const form = useForm();
+  const { values: formValues = {} } = useFormState();
 
   const key = useMemo(() => getSavedFiltersKey(table, formId), [table, formId]);
 
   useEffect(() => {
     dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
-  }, [table, key]);
+  }, [table, key, dispatch]);
 
   const list = useSelector((state: any) =>
     selectTableSavedFilters(state, table),
@@ -102,13 +101,13 @@ export const SavedFilterSelect = ({
       const deselect = selected && value?.id === selected.id;
       if (value) {
         if (formValues) {
-          dispatch(clearFields(formId, true, true, ...Object.keys(formValues)));
+          Object.keys(formValues).forEach((key) => form.change(key, null));
         }
-        Object.entries(value.values).forEach((field) => {
-          dispatch(change(formId, field[0], field[1]));
+        Object.entries(value.values).forEach(([k, v]) => {
+          form.change(k, v);
         });
       } else {
-        dispatch(reset(formId));
+        form.reset();
       }
       dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
       if (!deselect || !value) {
@@ -118,7 +117,7 @@ export const SavedFilterSelect = ({
         dispatch(selectSavedFilter(table, null));
       }
     },
-    [table, formId, formValues, key, onSelect, selected],
+    [table, form, formValues, key, onSelect, selected, dispatch],
   );
 
   const remove = useCallback(
@@ -143,7 +142,7 @@ export const SavedFilterSelect = ({
         showErrorResponse(error, translate('Unable to remove the filter.'));
       }
     },
-    [setSelected, key, onSelect],
+    [setSelected, key, onSelect, confirm, showErrorResponse],
   );
 
   return (

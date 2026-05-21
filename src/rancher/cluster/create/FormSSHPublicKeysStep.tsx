@@ -11,7 +11,7 @@ export const FormSSHPublicKeysStep = (props: FormStepProps) => {
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
-      <FormSSHPublicKeysField change={props.change} />
+      <FormSSHPublicKeysField />
     </VStepperFormStepCard>
   );
 };

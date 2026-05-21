@@ -47,7 +47,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
       >
         <Field
           name="user_email_patterns"
-          component={CommaSeparatedListField as any}
+          component={CommaSeparatedListField}
           validate={validateEmailPatterns}
           placeholder={translate('e.g. .*@example.com')}
           disabled={disabled}
@@ -64,7 +64,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
       >
         <Field
           name="user_affiliations"
-          component={CommaSeparatedListField as any}
+          component={CommaSeparatedListField}
           placeholder="student, faculty, researcher (comma-separated)"
           disabled={disabled}
         />
@@ -78,7 +78,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
       >
         <Field
           name="user_nationalities"
-          component={CommaSeparatedListField as any}
+          component={CommaSeparatedListField}
           placeholder={translate('e.g. DE, FR, US (comma-separated)')}
           disabled={disabled}
         />
@@ -92,7 +92,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
       >
         <Field
           name="user_organization_types"
-          component={CommaSeparatedListField as any}
+          component={CommaSeparatedListField}
           placeholder={translate(
             'e.g. urn:schac:homeOrganizationType:int:university',
           )}
@@ -109,7 +109,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
       >
         <Field
           name="user_assurance_levels"
-          component={CommaSeparatedListField as any}
+          component={CommaSeparatedListField}
           placeholder={translate(
             'e.g. https://refeds.org/assurance/IAP/medium',
           )}

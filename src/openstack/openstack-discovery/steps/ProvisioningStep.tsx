@@ -56,7 +56,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
           'Flavors matching this regex expression will not be pulled from the backend.',
         )}
       >
-        <Field name="flavor_exclude_regex" component={StringField as any} />
+        <Field name="flavor_exclude_regex" component={StringField} />
       </FormGroup>
 
       <FormGroup
@@ -65,7 +65,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
           'List of comma-separated volume types which should not be possible to select when creating VM/Volume.',
         )}
       >
-        <Field name="volume_type_blacklist" component={StringField as any} />
+        <Field name="volume_type_blacklist" component={StringField} />
       </FormGroup>
 
       <h5 className="mb-3 mt-6">{translate('Console Access')}</h5>
@@ -78,7 +78,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="console_type"
-          component={StringField as any}
+          component={StringField}
           placeholder="novnc"
         />
       </FormGroup>
@@ -89,7 +89,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
           'A client-accessible domain name override in case OpenStack is returning an internal domain. Leave empty to use the domain returned by OpenStack.',
         )}
       >
-        <Field name="console_domain_override" component={StringField as any} />
+        <Field name="console_domain_override" component={StringField} />
       </FormGroup>
 
       <h5 className="mb-3 mt-6">{translate('Network')}</h5>
@@ -100,16 +100,13 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
           'Default value for new subnets DNS name servers. Should be defined as list.',
         )}
       >
-        <Field
-          name="dns_nameservers"
-          component={CommaSeparatedListField as any}
-        />
+        <Field name="dns_nameservers" component={CommaSeparatedListField} />
       </FormGroup>
 
       <FormGroup>
         <Field
           name="create_ha_routers"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Create highly available Neutron routers')}
         />
       </FormGroup>
@@ -119,7 +116,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
       <FormGroup>
         <Field
           name="live_resize_of_volumes_enabled"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Allow live volume resize')}
         />
       </FormGroup>
@@ -132,7 +129,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="max_concurrent_provision_instance"
-          component={NumberField as any}
+          component={NumberField}
           min={0}
           placeholder={translate('Unlimited')}
         />
@@ -146,7 +143,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="max_concurrent_provision_volume"
-          component={NumberField as any}
+          component={NumberField}
           min={0}
           placeholder={translate('Unlimited')}
         />
@@ -161,7 +158,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="max_concurrent_provision_snapshot"
-          component={NumberField as any}
+          component={NumberField}
           min={0}
           placeholder={translate('Unlimited')}
         />

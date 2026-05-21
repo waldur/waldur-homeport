@@ -90,7 +90,7 @@ export const QuickShortcutForm = ({ resolve }) => {
             <FormGroup>
               <Field
                 name="image"
-                component={ImageField as any}
+                component={ImageField}
                 description={translate('Minimum image size of 250x250 pixels')}
               />
             </FormGroup>
@@ -100,7 +100,7 @@ export const QuickShortcutForm = ({ resolve }) => {
                 <FormGroup label={translate('Name')} required>
                   <Field
                     name="name"
-                    component={StringField as any}
+                    component={StringField}
                     placeholder={translate('Type a name')}
                     validate={required}
                   />
@@ -118,7 +118,7 @@ export const QuickShortcutForm = ({ resolve }) => {
                 <FormGroup label={translate('Link')} required>
                   <Field
                     name="link"
-                    component={StringField as any}
+                    component={StringField}
                     placeholder={translate('Add a link')}
                     validate={composeValidators(required, url)}
                   />
@@ -136,7 +136,7 @@ export const QuickShortcutForm = ({ resolve }) => {
             <FormGroup label={translate('Description')}>
               <Field
                 name="description"
-                component={TextField as any}
+                component={TextField}
                 placeholder={translate('Enter a description')}
               />
             </FormGroup>

@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   SystemLogLevelEnum,
   SystemLogSourceEnum,
@@ -13,7 +12,6 @@ import { StringField } from '@/form';
 import { DateField } from '@/form/DateField';
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const SystemLogLevelOptions: SystemLogLevelOption[] = [
@@ -139,7 +137,7 @@ const PureSystemLogsFilter: FunctionComponent<{}> = () => (
 
 export const SystemLogsFilterFormId = 'SystemLogsFilter';
 
-interface SystemLogsFilterFormData {
+export interface SystemLogsFilterFormData {
   source: SystemLogSourceOption;
   level: SystemLogLevelOption;
   instance: string;
@@ -148,18 +146,13 @@ interface SystemLogsFilterFormData {
   end_date: string;
 }
 
-export const SystemLogsFilter = reduxForm<SystemLogsFilterFormData, {}>({
-  form: SystemLogsFilterFormId,
-  destroyOnUnmount: false,
-})(PureSystemLogsFilter);
+export const SystemLogsFilter = PureSystemLogsFilter;
 
 type SystemLogsFilterQuery = SystemLogsListData['query'];
 
-export const selectSystemLogsFilter = createSelector<
-  RootState,
-  Partial<SystemLogsFilterFormData>,
-  SystemLogsFilterQuery
->(getFormValues(SystemLogsFilterFormId), (values) => {
+export const selectSystemLogsFilter = (
+  values?: Partial<SystemLogsFilterFormData>,
+): SystemLogsFilterQuery => {
   const filter: SystemLogsFilterQuery = {} as any;
   if (values) {
     if (values.source) {
@@ -176,4 +169,4 @@ export const selectSystemLogsFilter = createSelector<
     }
   }
   return filter;
-});
+};

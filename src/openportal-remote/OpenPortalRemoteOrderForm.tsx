@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { change } from 'redux-form';
+import { useForm } from 'react-final-form';
 
 import { getLatinNameValidators } from '@/core/validators';
 import { translate } from '@/i18n';
@@ -12,7 +11,6 @@ import {
   PlanStep,
 } from '@/marketplace/deploy/steps/constants';
 import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
-import { ORDER_FORM_ID } from '@/marketplace/details/constants';
 import { FinalConfigurationStep } from '@/openportal/constants';
 
 const deployOfferingSteps: OfferingConfigurationFormStep[] = [
@@ -29,17 +27,15 @@ const deployOfferingSteps: OfferingConfigurationFormStep[] = [
 ];
 
 export const OpenPortalRemoteOrderForm = (props: OrderFormComponentProps) => {
-  const dispatch = useDispatch();
+  const form = useForm();
   const hasInitialized = useRef(false);
 
   useEffect(() => {
     if (props.selectedOffering?.name && !hasInitialized.current) {
-      dispatch(
-        change(ORDER_FORM_ID, 'attributes.name', props.selectedOffering.name),
-      );
+      form.change('attributes.name', props.selectedOffering.name);
       hasInitialized.current = true;
     }
-  }, [props.selectedOffering?.name, dispatch]);
+  }, [props.selectedOffering?.name, form]);
 
   return <BaseDeployPage inputFormSteps={deployOfferingSteps} {...props} />;
 };

@@ -18,8 +18,6 @@ interface RawUser {
   offering_username?;
 }
 
-export const BULK_IMPORT_OFFERING_USERS_FORM_ID = 'BulkImportOfferingUsers';
-
 export const parseOfferingUsersFile = (file: File) => {
   return new Promise<RawUser[]>((resolve, reject) =>
     Papa.parse(file, {

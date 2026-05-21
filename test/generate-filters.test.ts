@@ -288,7 +288,7 @@ describe('generate-filters.cjs', () => {
         config,
       );
       expect(code).toContain(
-        'initialValues: {"type":{"label": translate("Active"),"value":"active"}}',
+        'export const UsersFilterInitialValues = {"type":{"label": translate("Active"),"value":"active"}};',
       );
     });
   });

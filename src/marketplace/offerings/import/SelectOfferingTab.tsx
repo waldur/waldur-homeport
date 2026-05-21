@@ -5,7 +5,7 @@ import { remoteWaldurApiSharedOfferings } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormContainerFinal, SelectField } from '@/form';
+import { FormContainer, SelectField } from '@/form';
 import { MultiSelectOption } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
@@ -68,7 +68,7 @@ export const SelectOfferingTab = () => {
   };
 
   return (
-    <FormContainerFinal submitting={false} className="size-lg">
+    <FormContainer submitting={false} className="size-lg">
       <Field
         label={translate('API URL')}
         value={formData?.api_url}
@@ -117,6 +117,6 @@ export const SelectOfferingTab = () => {
           {translate('There are no offerings yet.')}
         </p>
       ) : null}
-    </FormContainerFinal>
+    </FormContainer>
   );
 };

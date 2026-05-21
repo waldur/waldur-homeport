@@ -6,7 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { FormContainer } from '@/form/FormContainer';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -148,7 +148,7 @@ export const RestoreProjectDialog: FunctionComponent<
                   },
                 ]}
               />
-              <FormContainerFinal submitting={submitting}>
+              <FormContainer submitting={submitting}>
                 <AwesomeCheckboxField
                   name="restore_team_members"
                   label={translate(
@@ -165,7 +165,7 @@ export const RestoreProjectDialog: FunctionComponent<
                   onChange={onInviteChange}
                   disabled={previousMembers.length === 0}
                 />
-              </FormContainerFinal>
+              </FormContainer>
             </ModalDialog>
           </form>
         );

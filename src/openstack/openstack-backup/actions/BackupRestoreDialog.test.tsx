@@ -82,7 +82,6 @@ const fakeFlavors = [
 ] as unknown as OpenStackFlavor[];
 
 vi.mock('waldur-js-client');
-vi.mock('@/modal/actions');
 
 vi.mock('@/store/notify', () => ({
   useNotify: vi.fn().mockReturnValue({

@@ -58,7 +58,7 @@ export const OrganizationImportDialog: FC<OrganizationImportDialogProps> = (
   const [createdOrgs, setCreatedOrgs] = useState<Customer[]>([]);
 
   const submitForm = useCallback(
-    async (formData, formProps) => {
+    async (formData) => {
       const organizations = await parseOrganizationsFile(formData.file[0]);
       const validRecords = organizations.filter((row) => {
         const validate = validateOrganizationCreation(row);
@@ -117,7 +117,6 @@ export const OrganizationImportDialog: FC<OrganizationImportDialogProps> = (
           if (error.length) {
             showErrorResponse(error[0].reason);
           } else {
-            formProps.destroy();
             closeDialog();
           }
           return results;
@@ -129,7 +128,7 @@ export const OrganizationImportDialog: FC<OrganizationImportDialogProps> = (
     [
       createdOrgs,
       setCreatedOrgs,
-      props.resolve.refetch,
+      props.resolve,
       showError,
       showErrorResponse,
       showSuccess,

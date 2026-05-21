@@ -2,7 +2,7 @@ import { Field as FinalField } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
 import { required } from '@/core/validators';
-import { FormGroupFinal, SelectField } from '@/form';
+import { FormGroup, SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { getCustomer } from '@/workspace/selectors';
 
@@ -16,7 +16,7 @@ export const OrganizationProjectSelectField = ({ disabled = false }) => {
     <FinalField
       name="project"
       validate={required}
-      component={FormGroupFinal}
+      component={FormGroup}
       label={translate('Project')}
       required
     >

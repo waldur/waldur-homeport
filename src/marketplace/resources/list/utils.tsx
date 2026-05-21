@@ -1,4 +1,4 @@
-import { Resource } from 'waldur-js-client';
+import { MarketplaceResourcesListData, Resource } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
@@ -9,10 +9,56 @@ import { SLUG_COLUMN } from '@/table/slug';
 import { Column } from '@/table/types';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { NON_TERMINATED_STATES } from './constants';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 import { getStates } from './ResourceStateFilter';
 import { ResourceTerminationDateField } from './ResourceTerminationDateField';
+
+export const buildResourcesAllFilter = (
+  filters: any,
+  baseFilter?: any,
+): MarketplaceResourcesListData['query'] => {
+  const result: MarketplaceResourcesListData['query'] = { ...baseFilter };
+  if (filters?.offering) {
+    result.offering_uuid = filters.offering.uuid;
+  }
+  if (filters?.parent_offering) {
+    result.parent_offering_uuid = filters.parent_offering.uuid;
+  }
+  if (filters?.category) {
+    result.category_uuid = filters.category.uuid;
+  }
+  if (filters?.project) {
+    result.project_uuid = filters.project.uuid;
+  }
+  if (filters?.runtime_state) {
+    result.runtime_state = filters.runtime_state.value;
+  }
+  if (filters?.state && Array.isArray(filters.state)) {
+    result.state = filters.state.map((option) => option.value) as any;
+    if (filters?.include_terminated) {
+      result.state = [...result.state, 'Terminated'];
+    }
+  } else {
+    if (!filters?.include_terminated) {
+      result.state = NON_TERMINATED_STATES;
+    }
+  }
+  if (filters?.organization) {
+    result.customer_uuid = filters.organization.uuid;
+  }
+  if (filters?.paused) {
+    result.paused = true;
+  }
+  if (filters?.downscaled) {
+    result.downscaled = true;
+  }
+  if (filters?.restrict_member_access) {
+    result.restrict_member_access = true;
+  }
+  return result;
+};
 
 export const resourcesListRequiredFields = (hasExpandableView = true) =>
   [

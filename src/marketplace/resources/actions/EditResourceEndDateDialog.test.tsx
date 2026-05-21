@@ -8,7 +8,6 @@ import { useNotify } from '@/store/notify';
 import { EditResourceEndDateDialog } from './EditResourceEndDateDialog';
 
 vi.mock('@/store/notify');
-vi.mock('@/modal/actions');
 vi.mock('@/i18n', () => ({
   translate: vi.fn((str, context) => {
     if (context) {

@@ -1,17 +1,15 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { useFormState } from 'react-final-form';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { ORDER_FORM_ID } from '@/marketplace/details/constants';
+import { DeployFormData } from '@/marketplace/common/types';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 interface PlanDescriptionButtonProps {
   planDescription?: string;
   className?: string;
-  formId?: string;
 }
 
 const PlanDescription = lazyComponent(() =>
@@ -22,13 +20,13 @@ const PlanDescription = lazyComponent(() =>
 
 export const PlanDescriptionButton = (props: PlanDescriptionButtonProps) => {
   const { openDialog } = useModal();
-  const formData = useSelector(
-    getFormValues(props.formId || ORDER_FORM_ID),
-  ) as { plan: { description } };
+  const formState = useFormState<DeployFormData>({
+    subscription: { values: true },
+  });
 
   let planDescription = '';
-  if (formData && formData.plan && formData.plan.description) {
-    planDescription = (formData.plan.description as string).trim();
+  if (formState?.values?.plan?.description) {
+    planDescription = (formState.values.plan.description as string).trim();
   }
   if (props.planDescription) {
     planDescription = props.planDescription.trim();

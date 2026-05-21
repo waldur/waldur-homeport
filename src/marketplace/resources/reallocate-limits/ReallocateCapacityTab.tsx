@@ -204,8 +204,6 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
           isClearable={true}
           isMulti={true}
           defaultOptions
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
         <div className="form-text mt-2">
           {translate(

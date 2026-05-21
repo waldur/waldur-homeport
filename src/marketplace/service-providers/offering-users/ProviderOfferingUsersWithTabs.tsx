@@ -8,7 +8,7 @@ import { MetadataGroupBy } from '@/project/metadata/MetadataGroupBy';
 import { TableWithTabs } from '@/table/TableWithTabs';
 import { TableTab } from '@/table/types';
 
-import { ProviderOfferingUsersListComponent } from './ProviderOfferingUsersList';
+import { ProviderOfferingUsersList } from './ProviderOfferingUsersList';
 
 const MetadataByAnswer = lazyComponent(() =>
   import('./OfferingsMetadataByAnswer').then((module) => ({
@@ -22,13 +22,11 @@ const MetadataByOffering = lazyComponent(() =>
   })),
 );
 
-const ProviderOfferingUsersList = ({ portal, provider }) => {
+const ProviderOfferingUsersListTab = ({ portal, provider }) => {
   if (!provider) {
     return <CustomerResourcesListPlaceholder />;
   }
-  return (
-    <ProviderOfferingUsersListComponent provider={provider} portal={portal} />
-  );
+  return <ProviderOfferingUsersList provider={provider} portal={portal} />;
 };
 
 export const ProviderOfferingUsersWithTabs = ({ provider }) => {
@@ -40,7 +38,7 @@ export const ProviderOfferingUsersWithTabs = ({ provider }) => {
       {
         key: 'users',
         title: translate('Users'),
-        component: ProviderOfferingUsersList,
+        component: ProviderOfferingUsersListTab,
       },
     ];
     if (showExperimentalUiComponents) {

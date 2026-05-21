@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { marketplacePlanComponentsList, PlanComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -7,6 +7,7 @@ import { createFetcher } from '@/table/api';
 import {
   MarketplacePlanComponentsFilter,
   selectMarketplacePlanComponentsFilter,
+  MarketplacePlanComponentsFilterFormId,
 } from '@/table/generated/MarketplacePlanComponentsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -16,8 +17,14 @@ import { renderFieldOrDash } from '@/table/utils';
 import { BillingPeriod } from '../common/BillingPeriod';
 import { getBillingTypeLabel } from '../resources/usage/utils';
 
-export const PriceList = () => {
-  const formFilter = useSelector(selectMarketplacePlanComponentsFilter);
+const PriceListTable = () => {
+  const { values } = useFormState();
+
+  const formFilter = useMemo(
+    () => selectMarketplacePlanComponentsFilter(values),
+    [values],
+  );
+
   const filter = useMemo(() => formFilter, [formFilter?.offering_uuid]);
   const props = useTable({
     table: 'MarketplacePriceList',
@@ -82,6 +89,19 @@ export const PriceList = () => {
       showPageSizeSelector={true}
       enableExport={true}
       filters={<MarketplacePlanComponentsFilter />}
+      formId={MarketplacePlanComponentsFilterFormId}
     />
   );
 };
+
+export const PriceList = (props) => (
+  <Form
+    id={MarketplacePlanComponentsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <PriceListTable {...props} />}
+  </Form>
+);

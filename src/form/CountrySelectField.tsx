@@ -59,9 +59,9 @@ export const CountrySelectField: FC<CountrySelectFieldProps> = ({
       }
       onChange={(option: CountryOption | null) => {
         input.onChange(option?.value || null);
-        input.onBlur(option?.value || null);
+        input.onBlur();
       }}
-      onBlur={() => input.onBlur(input.value)}
+      onBlur={() => input.onBlur()}
       components={{ Option, SingleValue }}
       placeholder={placeholder}
       getOptionLabel={(option: CountryOption) => option.label}
@@ -70,8 +70,6 @@ export const CountrySelectField: FC<CountrySelectFieldProps> = ({
       isLoading={isLoading}
       isClearable={isClearable}
       isDisabled={isDisabled}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };

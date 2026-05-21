@@ -1,24 +1,21 @@
 import { FC, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Field, change } from 'redux-form';
+import { Field, useForm } from 'react-final-form';
 import { projectsList } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { AsyncPaginate } from '@/form/themed-select';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { useModal } from '@/modal/actions';
 
 import { organizationAutocomplete } from '../common/autocompletes';
-import { orderCustomerSelector } from '../deploy/selectors';
 import { FormGroup } from '../offerings/FormGroup';
-
-import { ORDER_FORM_ID } from './constants';
 
 const CustomerSelect = ({ input, organizationGroups }) => {
   const { confirm } = useModal();
 
-  const dispatch = useDispatch();
-  const customer = useSelector(orderCustomerSelector);
+  const form = useForm();
+  const { customer } = useOrderFormData();
 
   const onChange = useCallback(
     async (value) => {
@@ -29,7 +26,7 @@ const CustomerSelect = ({ input, organizationGroups }) => {
             customer: value.uuid,
           },
         }).then((r) => r.data[0]);
-        dispatch(change(ORDER_FORM_ID, 'project', project));
+        form.change('project', project);
         return;
       }
       try {
@@ -52,12 +49,12 @@ const CustomerSelect = ({ input, organizationGroups }) => {
             customer: value.uuid,
           },
         }).then((r) => r.data[0]);
-        dispatch(change(ORDER_FORM_ID, 'project', project));
+        form.change('project', project);
       } catch {
         // Swallow
       }
     },
-    [customer, dispatch, input],
+    [customer, form, input],
   );
 
   const loadOptions = useCallback(
@@ -86,23 +83,23 @@ const CustomerSelect = ({ input, organizationGroups }) => {
       noOptionsMessage={() => translate('No organizations found')}
       getOptionLabel={(option) => option.name}
       getOptionValue={(option) => option.uuid}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };
 
-export const CustomerField: FC<{ organizationGroups }> = ({
-  organizationGroups,
-}) => {
+export const CustomerField: FC<{
+  organizationGroups;
+}> = ({ organizationGroups }) => {
   return (
     <FormGroup label={translate('Organization')} required={true} spaceless>
-      <Field
-        name="customer"
-        validate={required}
-        component={CustomerSelect}
-        organizationGroups={organizationGroups}
-      />
+      <Field name="customer" validate={required}>
+        {(fieldProps) => (
+          <CustomerSelect
+            {...fieldProps}
+            organizationGroups={organizationGroups}
+          />
+        )}
+      </Field>
     </FormGroup>
   );
 };

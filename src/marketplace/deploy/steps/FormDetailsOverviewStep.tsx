@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { Col, Row, Stack } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { STALE_TIME } from '@/core/constants';
 import { Image } from '@/core/Image';
@@ -13,13 +12,11 @@ import { Field } from '@/resource/summary';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { DetailsOverviewButton } from '../DetailsOverviewButton';
-import { orderCustomerSelector } from '../selectors';
-import { orderProjectSelector } from '../selectors';
+import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
 
 export const FormDetailsOverviewStep = (props: FormStepProps) => {
-  const project = useSelector(orderProjectSelector);
-  const customer = useSelector(orderCustomerSelector);
+  const { customer, project } = useOrderFormData();
 
   const { data: provider } = useQuery({
     queryKey: ['DeployDetailsOverview', 'provider', props.offering?.uuid],

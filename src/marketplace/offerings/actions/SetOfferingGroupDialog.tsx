@@ -7,8 +7,8 @@ import {
 } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
-import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
-import { FormContainerFinal } from '@/form/FormContainerFinal';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { offeringGroupAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -76,8 +76,8 @@ export const SetOfferingGroupDialog = ({
               <SubmitButton submitting={submitting} label={translate('Save')} />
             }
           >
-            <FormContainerFinal submitting={submitting}>
-              <AsyncSelectFieldFinal
+            <FormContainer submitting={submitting}>
+              <AsyncSelectField
                 name="offering_group"
                 label={translate('Offering group')}
                 placeholder={translate('Select a group or leave empty…')}
@@ -90,7 +90,7 @@ export const SetOfferingGroupDialog = ({
                 getOptionLabel={(option) => option.title}
                 isClearable
               />
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

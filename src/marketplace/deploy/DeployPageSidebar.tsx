@@ -1,5 +1,5 @@
 import { Card } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useFormState } from 'react-final-form';
 import {
   OrderDetails as OrderResponse,
   PublicOfferingDetails,
@@ -12,9 +12,6 @@ import { OrderSummary } from '@/marketplace/details/OrderSummary';
 
 import { getCheckoutSummaryComponent } from '../common/registry';
 
-import { formSubmitErrorsSelector } from './selectors';
-import { formErrorsSelector } from './selectors';
-
 interface DeployPageSidebarProps extends SidebarProps {
   offering: PublicOfferingDetails;
   updateMode?: boolean;
@@ -25,8 +22,9 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
   const CheckoutSummaryComponent =
     getCheckoutSummaryComponent(props.offering.type) || OrderSummary;
 
-  const errors = useSelector(formErrorsSelector);
-  const submitErrors = useSelector(formSubmitErrorsSelector);
+  const { errors, submitErrors } = useFormState({
+    subscription: { errors: true, submitErrors: true },
+  });
 
   return (
     <>

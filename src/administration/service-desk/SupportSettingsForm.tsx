@@ -75,7 +75,7 @@ export const SupportSettingsForm = ({ name }) => {
           >
             <Field
               name={field.key}
-              component={FieldComponent as any}
+              component={FieldComponent}
               format={isDictField ? formatDictField : undefined}
               parse={isDictField ? parseDictField : undefined}
               {...(isBoolean

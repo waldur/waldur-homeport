@@ -1,13 +1,12 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
+import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { User, usersList, UsersListData } from 'waldur-js-client';
 
 import { AITokenExpandableRow } from '@/administration/ai-assistant/AITokenExpandableRow';
 import { ENV } from '@/core/config';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { Link } from '@/core/Link';
 import { Tip } from '@/core/Tooltip';
 import { formatPhoneNumber } from '@/core/utils';
@@ -140,29 +139,6 @@ const RowActions = ({ row, fetch }: { row: User; fetch? }) => {
   );
 };
 
-const mapStateToFilter = createSelector(
-  getFormValues('userFilter'),
-  (filters: any) => {
-    const roleFilter = formatRoleFilter(filters?.role) || {};
-    const filter: Record<string, string | boolean | string[]> = {};
-
-    if (filters?.organization?.uuid) {
-      filter.customer_uuid = filters.organization.uuid;
-    }
-    if (filters?.project_role) {
-      filter.project_roles = filters.project_role.map(({ name }) => name);
-    }
-    if (filters?.organization_role) {
-      filter.organization_roles = filters.organization_role.map(
-        ({ name }) => name,
-      );
-    }
-    filter.is_active = filters?.is_active;
-
-    return { ...filter, ...roleFilter };
-  },
-);
-
 const DEFAULT_ENABLED_COLUMNS = [
   'full_name',
   'email',
@@ -213,8 +189,38 @@ const mandatoryFields: UsersListData['query']['field'] = [
   'organization_registry_code',
 ];
 
-export const UserList: FunctionComponent = () => {
-  const filter = useSelector(mapStateToFilter);
+const UserListTable: FunctionComponent = () => {
+  const { values } = useFormState();
+  const filters = values;
+
+  useEffect(() => {
+    if (filters) {
+      syncFiltersToURL(filters);
+    }
+  }, [filters]);
+
+  const filter = useMemo(() => {
+    const roleFilter = formatRoleFilter(filters?.role) || {};
+    const filterObj: Record<string, string | boolean | string[]> = {};
+
+    if (filters?.organization?.uuid) {
+      filterObj.customer_uuid = filters.organization.uuid;
+    }
+    if (filters?.project_role) {
+      filterObj.project_roles = filters.project_role.map(({ name }) => name);
+    }
+    if (filters?.organization_role) {
+      filterObj.organization_roles = filters.organization_role.map(
+        ({ name }) => name,
+      );
+    }
+    if (filters?.is_active !== undefined && filters?.is_active !== '') {
+      filterObj.is_active = filters.is_active;
+    }
+
+    return { ...filterObj, ...roleFilter };
+  }, [filters]);
+
   const props = useTable({
     table: `userList`,
     fetchData: createFetcher(usersList),
@@ -463,6 +469,7 @@ export const UserList: FunctionComponent = () => {
   return (
     <Table
       {...props}
+      formId="userFilter"
       filters={<UserFilter />}
       columns={columns}
       rowActions={RowActions}
@@ -479,6 +486,19 @@ export const UserList: FunctionComponent = () => {
         aiAssistantEnabled ? (row) => !!row.is_active : undefined
       }
     />
+  );
+};
+
+export const UserList: FunctionComponent = () => {
+  const initialValues = useMemo(() => getInitialValues(), []);
+  return (
+    <Form
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+      initialValues={initialValues}
+    >
+      {() => <UserListTable />}
+    </Form>
   );
 };
 
@@ -501,7 +521,7 @@ export const getOrganizationsWhereOwner = (user: Partial<User>) =>
         .join(', ')
     : DASH_ESCAPE_CODE;
 
-const getProjectRole = (user: Partial<User>) => {
+export const getProjectRole = (user: Partial<User>) => {
   const permissions = user.permissions?.filter(
     ({ scope_type }) => scope_type === 'project',
   );

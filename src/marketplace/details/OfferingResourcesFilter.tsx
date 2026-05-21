@@ -1,13 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field as FinalField } from 'react-final-form';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { FILTER_OFFERING_RESOURCE } from '@/marketplace/details/constants';
 import { ResourceStateFilter } from '@/marketplace/resources/list/ResourceStateFilter';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
-const PureOfferingResourcesFilter: FunctionComponent = () => (
+export const OfferingResourcesFilter: FunctionComponent = () => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -22,18 +21,12 @@ const PureOfferingResourcesFilter: FunctionComponent = () => (
       name="include_terminated"
       badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
     >
-      <Field
+      <FinalField
         name="include_terminated"
+        type="checkbox"
         component={AwesomeCheckboxField}
         label={translate('Include terminated')}
       />
     </TableFilterItem>
   </>
 );
-
-const enhance = reduxForm({
-  form: FILTER_OFFERING_RESOURCE,
-  destroyOnUnmount: false,
-});
-
-export const OfferingResourcesFilter = enhance(PureOfferingResourcesFilter);

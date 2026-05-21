@@ -13,7 +13,7 @@ export const ComponentLimitAmountField: React.FC = () => (
     spaceless
   >
     <Field
-      component={NumberField as any}
+      component={NumberField}
       name="limit_amount"
       id="limit_amount"
       min={0}

@@ -272,11 +272,7 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
                 )}
               />
             ) : (
-              <Field
-                name={fieldName}
-                component={Component as any}
-                {...fieldProps}
-              />
+              <Field name={fieldName} component={Component} {...fieldProps} />
             )}
             {question.user_guidance && (
               <div className="form-text text-muted">

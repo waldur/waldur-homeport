@@ -113,7 +113,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="template"
-          component={SelectField as any}
+          component={SelectField}
           options={templates}
           isClearable
           getOptionLabel={(option) => option.name}
@@ -133,7 +133,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
       <FormGroup label={translate('Name')} required>
         <Field
           name="name"
-          component={StringField as any}
+          component={StringField}
           placeholder={translate('e.g. Database maintance')}
           validate={required}
         />
@@ -142,7 +142,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
       <FormGroup label={translate('Maintenance type')} required>
         <Field
           name="maintenance_type"
-          component={SelectField as any}
+          component={SelectField}
           options={maintenanceTypeOptions}
           isClearable={false}
           getOptionValue={(option) => option.value}
@@ -155,7 +155,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
       <FormGroup label={translate('Message')} required>
         <Field
           name="message"
-          component={TextField as any}
+          component={TextField}
           placeholder={translate(
             'Describe the public details of the maintenance...',
           )}
@@ -169,7 +169,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
           <FormGroup label={translate('Start date')} required>
             <Field
               name="scheduled_start_date"
-              component={DateField as any}
+              component={DateField}
               placeholder={translate('DD/MM/YYYY')}
               dateFormat="Y-m-d"
               validate={required}
@@ -180,7 +180,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
           <FormGroup label={translate('Start time')} required>
             <Field
               name="scheduled_start_time"
-              component={TimeField as any}
+              component={TimeField}
               placeholder={translate('HH:MM')}
               validate={required}
             />
@@ -193,7 +193,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
           <FormGroup label={translate('End date')} required>
             <Field
               name="scheduled_end_date"
-              component={DateField as any}
+              component={DateField}
               placeholder={translate('DD/MM/YYYY')}
               dateFormat="Y-m-d"
               validate={required}
@@ -204,7 +204,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
           <FormGroup label={translate('End time')} required>
             <Field
               name="scheduled_end_time"
-              component={TimeField as any}
+              component={TimeField}
               placeholder={translate('HH:mm')}
               validate={required}
             />
@@ -218,7 +218,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="external_reference_url"
-          component={StringField as any}
+          component={StringField}
           placeholder={translate(
             'e.g. https://status.example.com/maintenance/123',
           )}
@@ -234,7 +234,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
       >
         <Field
           name="internal_notes"
-          component={TextField as any}
+          component={TextField}
           placeholder={translate(
             'Add staff/provider-only information (not visible to customers)...',
           )}

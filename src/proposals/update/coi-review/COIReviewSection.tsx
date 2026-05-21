@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { conflictsOfInterestList, ConflictOfInterest } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -16,6 +16,7 @@ import {
   ConflictOfInterestStatusOptions,
   CoiTypeOptions,
   selectConflictsOfInterestFilter,
+  ConflictsOfInterestFilterFormId,
 } from '@/table/generated/ConflictsOfInterestFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -79,8 +80,14 @@ const StatusBadge: FC<{ status: string; display: string }> = ({
   );
 };
 
-export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
-  const formFilters = useSelector(selectConflictsOfInterestFilter);
+const COIReviewSectionTable: FC<COIReviewSectionProps> = ({ call }) => {
+  const { values } = useFormState();
+
+  const formFilters = useMemo(
+    () => selectConflictsOfInterestFilter(values),
+    [values],
+  );
+
   const tabs = useReviewerPoolTabs();
 
   const filter = useMemo(
@@ -206,6 +213,19 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
       hasOptionalColumns
       expandableRow={COIExpandableRow}
       tableActions={<PoolSummaryButton />}
+      formId={ConflictsOfInterestFilterFormId}
     />
   );
 };
+
+export const COIReviewSection: FC<any> = (props) => (
+  <Form
+    id={ConflictsOfInterestFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <COIReviewSectionTable {...props} />}
+  </Form>
+);

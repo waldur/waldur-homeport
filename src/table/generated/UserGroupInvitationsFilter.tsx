@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { UserGroupInvitationsListData } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureUserGroupInvitationsFilter: FunctionComponent<{}> = () => (
@@ -30,25 +28,17 @@ const PureUserGroupInvitationsFilter: FunctionComponent<{}> = () => (
 
 export const UserGroupInvitationsFilterFormId = 'UserGroupInvitationsFilter';
 
-interface UserGroupInvitationsFilterFormData {
+export interface UserGroupInvitationsFilterFormData {
   is_active: boolean;
 }
 
-export const UserGroupInvitationsFilter = reduxForm<
-  UserGroupInvitationsFilterFormData,
-  {}
->({
-  form: UserGroupInvitationsFilterFormId,
-  destroyOnUnmount: false,
-})(PureUserGroupInvitationsFilter);
+export const UserGroupInvitationsFilter = PureUserGroupInvitationsFilter;
 
 type UserGroupInvitationsFilterQuery = UserGroupInvitationsListData['query'];
 
-export const selectUserGroupInvitationsFilter = createSelector<
-  RootState,
-  Partial<UserGroupInvitationsFilterFormData>,
-  UserGroupInvitationsFilterQuery
->(getFormValues(UserGroupInvitationsFilterFormId), (values) => {
+export const selectUserGroupInvitationsFilter = (
+  values?: Partial<UserGroupInvitationsFilterFormData>,
+): UserGroupInvitationsFilterQuery => {
   const filter: UserGroupInvitationsFilterQuery = {} as any;
   if (values) {
     if (values.is_active) {
@@ -56,4 +46,4 @@ export const selectUserGroupInvitationsFilter = createSelector<
     }
   }
   return filter;
-});
+};

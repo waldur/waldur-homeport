@@ -3,7 +3,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportRequestTypesAdminDestroy } from 'waldur-js-client';
 
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 import { BatchDeleteAction } from './BatchDeleteAction';
 
@@ -16,7 +16,6 @@ vi.mock('@/store/notify', () => ({
     showErrorResponse: mockShowErrorResponse,
   }),
 }));
-vi.mock('@/modal/hooks');
 vi.mock('@/i18n', () => ({
   translate: (key, context) => {
     if (!context) return key;

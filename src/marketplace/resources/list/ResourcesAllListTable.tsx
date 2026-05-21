@@ -6,7 +6,6 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { ResourceImportButton } from '@/marketplace/resources/import/ResourceImportButton';
-import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@/marketplace/resources/list/constants';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
@@ -49,7 +48,6 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       {...props}
       filters={
         <ProjectResourcesAllFilter
-          form={PROJECT_RESOURCES_ALL_FILTER_FORM_ID}
           hasProjectFilter={props.hasProjectColumn}
           hasCustomerFilter={props.hasCustomerColumn}
           customer={customer}

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
+import { Field } from 'react-final-form';
 import { Props as SelectProps } from 'react-select';
-import { Field } from 'redux-form';
 import { ResourceState } from 'waldur-js-client';
 
 import { REACT_MULTI_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
@@ -16,19 +16,21 @@ export const getStates = (): Array<{ value: ResourceState; label: string }> => [
 
 export const ResourceStateFilter: FunctionComponent<{
   reactSelectProps?: Partial<SelectProps>;
-}> = (props) => (
-  <Field
-    name="state"
-    component={(fieldProps) => (
-      <Select
-        placeholder={translate('Select state...')}
-        options={getStates()}
-        value={fieldProps.input.value}
-        onChange={(value) => fieldProps.input.onChange(value)}
-        isClearable={true}
-        {...REACT_MULTI_SELECT_TABLE_FILTER}
-        {...props.reactSelectProps}
-      />
-    )}
-  />
-);
+}> = (props) => {
+  return (
+    <Field
+      name="state"
+      component={(fieldProps) => (
+        <Select
+          placeholder={translate('Select state...')}
+          options={getStates()}
+          value={fieldProps.input.value}
+          onChange={(value) => fieldProps.input.onChange(value)}
+          isClearable={true}
+          {...REACT_MULTI_SELECT_TABLE_FILTER}
+          {...props.reactSelectProps}
+        />
+      )}
+    />
+  );
+};

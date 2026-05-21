@@ -1,10 +1,8 @@
-import { connect } from 'react-redux';
-
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
 import { PricesData } from '@/marketplace/details/plan/types';
-import { pricesSelector } from '@/marketplace/details/plan/utils';
+import { useOrderPrices } from '@/marketplace/details/plan/utils';
 import { Field } from '@/resource/summary';
 
 import { OrderFieldEditButton } from '../OrderFieldEditButton';
@@ -122,14 +120,12 @@ const PureResourceCreation = ({
   );
 };
 
-const mapProps = (props: OrderTypeBasedProps) => ({
-  ...props,
-  viewMode: true,
-  type: 'new' as const,
-});
-
-const ConnectedResourceCreation = connect(pricesSelector)(PureResourceCreation);
-
-export const ResourceCreation = (props: OrderTypeBasedProps) => (
-  <ConnectedResourceCreation {...mapProps(props)} />
-);
+export const ResourceCreation = (props: OrderTypeBasedProps) => {
+  const prices = useOrderPrices({
+    ...props,
+    offering: props.offering!,
+    viewMode: true,
+    type: 'new',
+  });
+  return <PureResourceCreation {...props} {...prices} />;
+};

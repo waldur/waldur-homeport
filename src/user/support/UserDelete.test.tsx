@@ -28,7 +28,7 @@ vi.mock('@tanstack/react-query', async (importOriginal) => {
     useQueryClient: vi.fn(),
   };
 });
-vi.mock('@/modal/hooks', () => ({
+vi.mock('@/modal/actions', () => ({
   useModal: () => ({
     confirm: mockConfirm,
     closeDialog: vi.fn(),

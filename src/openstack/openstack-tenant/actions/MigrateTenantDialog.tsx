@@ -12,7 +12,7 @@ import {
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormGroupFinal, SelectField, SubmitButton } from '@/form';
+import { FormGroup, SelectField, SubmitButton } from '@/form';
 import { Select as AsyncSelect } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { InputField } from '@/form/InputField';
@@ -125,7 +125,7 @@ export const MigrateTenantDialog: FC<MigrateTenantDialogProps> = ({
             <Field
               name="name"
               label={translate('Name')}
-              component={FormGroupFinal}
+              component={FormGroup}
               validate={required}
             >
               <InputField />
@@ -133,7 +133,7 @@ export const MigrateTenantDialog: FC<MigrateTenantDialogProps> = ({
             <Field
               name="offering"
               label={translate('Offering')}
-              component={FormGroupFinal}
+              component={FormGroup}
               validate={required}
             >
               <AsyncSelect
@@ -200,7 +200,7 @@ const MigrateTenantFields = ({ offering, resource }) => {
       <Field
         name="plan"
         label={translate('Plan')}
-        component={FormGroupFinal}
+        component={FormGroup}
         validate={required}
       >
         <SelectField
@@ -217,16 +217,16 @@ const MigrateTenantFields = ({ offering, resource }) => {
             <BootstrapForm.Label className="form-label">
               {translate('Volume types')}
             </BootstrapForm.Label>
-            <FieldArray
-              name="volumeTypes"
-              component={VolumeTypesTable as any}
-              options={queryResult.data}
-            />
+            <FieldArray name="volumeTypes">
+              {({ fields }) => (
+                <VolumeTypesTable fields={fields} options={queryResult.data} />
+              )}
+            </FieldArray>
           </BootstrapForm.Group>
           <Field
             name="networks"
             label={translate('Networks')}
-            component={FormGroupFinal}
+            component={FormGroup}
           >
             <SelectField options={queryResult.data.networks} isMulti />
           </Field>
@@ -234,7 +234,7 @@ const MigrateTenantFields = ({ offering, resource }) => {
             <BootstrapForm.Label className="form-label">
               {translate('Subnets')}
             </BootstrapForm.Label>
-            <FieldArray name="subnets" component={SubnetsTable as any} />
+            <FieldArray name="subnets" component={SubnetsTable} />
           </BootstrapForm.Group>
         </>
       ) : null}
@@ -242,14 +242,14 @@ const MigrateTenantFields = ({ offering, resource }) => {
       <Field
         name="skip_connection_extnet"
         label={translate('Skip connection to external network')}
-        component={FormGroupFinal}
+        component={FormGroup}
       >
         <AwesomeCheckboxField />
       </Field>
       <Field
         name="sync_instance_ports"
         label={translate('Copy ports connected to instances')}
-        component={FormGroupFinal}
+        component={FormGroup}
       >
         <AwesomeCheckboxField />
       </Field>

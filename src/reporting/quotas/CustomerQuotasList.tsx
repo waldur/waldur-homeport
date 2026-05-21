@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { customerQuotasList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -6,6 +7,7 @@ import { createFetcher } from '@/table/api';
 import {
   CustomerQuotasFilter,
   selectCustomerQuotasFilter,
+  CustomerQuotasFilterFormId,
 } from '@/table/generated/CustomerQuotasFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -16,18 +18,16 @@ import { getQuotas } from './constants';
 import { QuotasAnalytics } from './QuotasAnalytics';
 import { CustomerQuota } from './types';
 
-export const CustomerQuotasList = () => {
-  const filter = useSelector(selectCustomerQuotasFilter);
+const CustomerQuotasListTable = () => {
+  const { values } = useFormState();
+  const filter = useMemo(() => selectCustomerQuotasFilter(values), [values]);
   const tableProps = useTable({
     table: 'CustomerQuotasList',
     fetchData: createFetcher(customerQuotasList),
     filter,
   });
-  const formValues = useSelector(selectCustomerQuotasFilter);
 
-  const activeQuota = getQuotas(true).find(
-    (q) => q.key === formValues?.quota_name,
-  );
+  const activeQuota = getQuotas(true).find((q) => q.key === filter?.quota_name);
 
   return (
     <>
@@ -67,7 +67,20 @@ export const CustomerQuotasList = () => {
             loading={tableProps.loading}
           />
         }
+        formId={CustomerQuotasFilterFormId}
       />
     </>
   );
 };
+
+export const CustomerQuotasList = (props) => (
+  <Form
+    id={CustomerQuotasFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <CustomerQuotasListTable {...props} />}
+  </Form>
+);

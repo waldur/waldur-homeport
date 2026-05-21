@@ -1,13 +1,14 @@
 import Papa from 'papaparse';
-import { FC, useEffect, useMemo } from 'react';
-import { Field } from 'redux-form';
+import { FC, useMemo } from 'react';
+import { Field } from 'react-final-form';
 
 import { formatFilesize } from '@/core/utils';
 import { required } from '@/core/validators';
 import { FieldError } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
 import saveAsCsv from '@/table/exporters/csv';
@@ -16,16 +17,18 @@ import templateFile from './offering_users_template.json';
 
 const MAX_LENGTH = 1000;
 
-const asyncValidate = (values) =>
-  new Promise((resolve, reject) => {
-    if (!values.file?.length)
-      reject({ file: translate('Please import a file.') });
+const validateFile = (valueList) => {
+  if (!valueList?.length) {
+    return translate('Please import a file.');
+  }
 
-    const file = values.file[0];
+  const file = valueList[0];
 
-    if (file.type !== 'text/csv')
-      reject({ file: translate('Invalid format, please import a .csv file') });
+  if (file.type !== 'text/csv') {
+    return translate('Invalid format, please import a .csv file');
+  }
 
+  return new Promise<string | undefined>((resolve) => {
     Papa.parse(file, {
       skipEmptyLines: true,
       complete: function (results: { data: Array<Array<string>> }) {
@@ -57,30 +60,37 @@ const asyncValidate = (values) =>
         }
 
         if (_error === 'invalid') {
-          reject({
-            file: translate(
+          resolve(
+            translate(
               'The imported data format does not match the template format.',
             ),
-          });
+          );
         } else if (_error === 'empty') {
-          reject({ file: translate('The imported file is empty.') });
+          resolve(translate('The imported file is empty.'));
         } else if (_error === 'max') {
-          reject({
-            file: translate('The number of records exceeds the allowed limit.'),
-          });
+          resolve(
+            translate('The number of records exceeds the allowed limit.'),
+          );
         } else if (_error === 'offering') {
-          reject({
-            file: translate(
+          resolve(
+            translate(
               'The offering UUID is not specified in one or more records.',
             ),
-          });
+          );
         } else {
           // No error
-          resolve('');
+          resolve(undefined);
         }
       },
     });
   });
+};
+
+const validateFileField = (value) => {
+  const reqErr = required(value);
+  if (reqErr) return reqErr;
+  return validateFile(value);
+};
 
 const getTemplateName = () => 'User file template';
 
@@ -95,76 +105,58 @@ export const Step1UploadFile: FC<WizardFormStepProps> = (props) => {
   }, []);
 
   return (
-    <WizardForm
-      {...props}
-      asyncValidate={asyncValidate}
-      asyncChangeFields={['file']}
-    >
-      {(wizardProps) => {
-        const file = wizardProps.formValues?.file;
+    <WizardForm {...props}>
+      <div className="text-muted">
+        <h6 className="fw-bold mb-5">1. {translate('Download template')}</h6>
+        <DownloadTemplateItem
+          name={getTemplateName()}
+          size={fileSize}
+          onClick={onDownloadClick}
+        />
+        <hr />
+        <h6 className="fw-bold mb-5">2. {translate('Upload your file')}</h6>
+        <Field
+          name="file"
+          validate={validateFileField}
+          render={({ input: { value, onChange }, meta }) => (
+            <>
+              <UploadContainer
+                onDrop={onChange}
+                message="CSV (max. 10 MB)"
+                accept={{
+                  'application/csv': ['.csv'],
+                  'text/csv': ['.csv'],
+                }}
+                multiple={false}
+                className="mb-3"
+                maxSize={10 * 1024 * 1024}
+              />
 
-        useEffect(() => {
-          if (file) {
-            wizardProps.asyncValidate();
-          }
-        }, [file]);
+              <ul className="mb-5">
+                <li>
+                  {translate('Required columns')}: Waldur username, offering,
+                  offering username
+                </li>
+                <li>{translate('Maximum rows')}: 1000</li>
+              </ul>
 
-        return (
-          <div className="text-muted">
-            <h6 className="fw-bold mb-5">
-              1. {translate('Download template')}
-            </h6>
-            <DownloadTemplateItem
-              name={getTemplateName()}
-              size={fileSize}
-              onClick={onDownloadClick}
-            />
-            <hr />
-            <h6 className="fw-bold mb-5">2. {translate('Upload your file')}</h6>
-            <Field
-              name="file"
-              validate={required}
-              component={({ input: { value, onChange }, meta }) => (
-                <>
-                  <UploadContainer
-                    onDrop={onChange}
-                    message="CSV (max. 10 MB)"
-                    accept={{
-                      'application/csv': ['.csv'],
-                      'text/csv': ['.csv'],
-                    }}
-                    multiple={false}
-                    className="mb-3"
-                    maxSize={10 * 1024 * 1024}
-                  />
-
-                  <ul className="mb-5">
-                    <li>
-                      {translate('Required columns')}: Waldur username,
-                      offering, offering username
-                    </li>
-                    <li>{translate('Maximum rows')}: 1000</li>
-                  </ul>
-
-                  {value?.length > 0 && (
-                    <AttachmentItem
-                      attachment={{
-                        file: value[0],
-                        file_name: value[0].name,
-                        file_size: value[0].size,
-                        mime_type: value[0].type,
-                      }}
-                      onDelete={() => onChange([])}
-                      error={meta.error}
-                    />
-                  )}
-                  <FieldError error={meta.dirty && meta.error} />
-                </>
+              {value?.length > 0 && (
+                <AttachmentItem
+                  attachment={{
+                    file: value[0],
+                    file_name: value[0].name,
+                    file_size: value[0].size,
+                    mime_type: value[0].type,
+                  }}
+                  onDelete={() => onChange([])}
+                  error={meta.error}
+                />
               )}
-            />
-          </div>
-        );
-      }}
+              <FieldError error={(meta.touched || meta.dirty) && meta.error} />
+            </>
+          )}
+        />
+      </div>
     </WizardForm>
   );
 };

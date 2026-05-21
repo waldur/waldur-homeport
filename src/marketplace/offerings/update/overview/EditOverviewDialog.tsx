@@ -5,7 +5,7 @@ import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 import {
   StringField,
   SelectField,
-  FormContainerFinal,
+  FormContainer,
   FormFooter,
   TextField,
 } from '@/form';
@@ -57,7 +57,7 @@ export const EditOverviewDialog: FC<{
               />
             }
           >
-            <FormContainerFinal
+            <FormContainer
               submitting={submitting}
               className={
                 props.resolve.attribute.type === 'html' ? 'size-lg' : undefined
@@ -89,7 +89,7 @@ export const EditOverviewDialog: FC<{
                   spaceless
                 />
               )}
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

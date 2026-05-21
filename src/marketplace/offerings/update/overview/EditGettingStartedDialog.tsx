@@ -6,7 +6,7 @@ import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
 import { CodePreview } from '@/core/CodePreview';
 import { Tip } from '@/core/Tooltip';
-import { FormContainerFinal, FormFooter, TextField } from '@/form';
+import { FormContainer, FormFooter, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -51,7 +51,7 @@ export const EditGettingStartedDialog: FC<{
             <Row>
               <Col md={12} lg={8} className="d-flex flex-column">
                 <div className="flex-grow-1 min-h-225px">
-                  <FormContainerFinal submitting={submitting}>
+                  <FormContainer submitting={submitting}>
                     <TextField
                       name="template"
                       rows={15}
@@ -71,7 +71,7 @@ export const EditGettingStartedDialog: FC<{
                         </Tip>
                       }
                     />
-                  </FormContainerFinal>
+                  </FormContainer>
                 </div>
               </Col>
               <Col

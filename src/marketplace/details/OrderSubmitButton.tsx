@@ -1,32 +1,39 @@
 import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
+import { useFormState } from 'react-final-form';
 
 import { parseDate } from '@/core/dateUtils';
 import { Tip } from '@/core/Tooltip';
-import { removeEmptyObjects } from '@/core/utils';
 import { SubmitButton } from '@/form';
 import { FieldErrorMessage } from '@/form/FieldError';
 import { FloatingButton } from '@/form/FloatingButton';
 import { translate } from '@/i18n';
 
-import { OrderSummaryProps } from './types';
+import { useOrderFormData } from '../deploy/selectors';
 
-export const OrderSubmitButton = (props: OrderSummaryProps) => {
+export const OrderSubmitButton = () => {
+  const { project } = useOrderFormData();
+  const formState = useFormState({
+    subscription: {
+      errors: true,
+      dirty: true,
+      invalid: true,
+      submitting: true,
+    },
+  });
+
   const projectError = useMemo(() => {
-    if (props.formData?.project?.end_date) {
-      const endDate = parseDate(props.formData.project.end_date);
+    if (project?.end_date) {
+      const endDate = parseDate(project.end_date);
       const now = parseDate(null);
       if (endDate.hasSame(now, 'day') || endDate < now) {
         return translate('Project has reached its end date.');
       }
     }
     return null;
-  }, [props.formData?.project]);
+  }, [project]);
 
-  const errors = useMemo(
-    () => removeEmptyObjects(props.errors),
-    [props.errors],
-  );
+  const errors = formState.errors;
 
   const errorsExist =
     projectError ||
@@ -36,8 +43,10 @@ export const OrderSubmitButton = (props: OrderSummaryProps) => {
 
   const Btn = (
     <SubmitButton
-      submitting={props.isSubmitting}
-      disabled={Boolean(errorsExist) || !props.formValid || props.isSubmitting}
+      submitting={formState.submitting}
+      disabled={
+        Boolean(errorsExist) || formState.invalid || formState.submitting
+      }
       type="submit"
       className="w-100"
       label={translate('Create')}

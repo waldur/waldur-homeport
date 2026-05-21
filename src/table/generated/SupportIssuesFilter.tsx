@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { SupportIssuesListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const StatusOptions: StatusOption[] = [
@@ -59,22 +57,17 @@ const PureSupportIssuesFilter: FunctionComponent<{}> = () => (
 
 export const SupportIssuesFilterFormId = 'SupportIssuesFilter';
 
-interface SupportIssuesFilterFormData {
+export interface SupportIssuesFilterFormData {
   status: StatusOption;
 }
 
-export const SupportIssuesFilter = reduxForm<SupportIssuesFilterFormData, {}>({
-  form: SupportIssuesFilterFormId,
-  destroyOnUnmount: false,
-})(PureSupportIssuesFilter);
+export const SupportIssuesFilter = PureSupportIssuesFilter;
 
 type SupportIssuesFilterQuery = SupportIssuesListData['query'];
 
-export const selectSupportIssuesFilter = createSelector<
-  RootState,
-  Partial<SupportIssuesFilterFormData>,
-  SupportIssuesFilterQuery
->(getFormValues(SupportIssuesFilterFormId), (values) => {
+export const selectSupportIssuesFilter = (
+  values?: Partial<SupportIssuesFilterFormData>,
+): SupportIssuesFilterQuery => {
   const filter: SupportIssuesFilterQuery = {} as any;
   if (values) {
     if (values.status) {
@@ -82,4 +75,4 @@ export const selectSupportIssuesFilter = createSelector<
     }
   }
   return filter;
-});
+};

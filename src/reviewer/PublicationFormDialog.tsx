@@ -7,7 +7,7 @@ import {
 
 import { required } from '@/core/validators';
 import {
-  FormGroupFinal,
+  FormGroup,
   NumberField,
   StringField,
   SubmitButton,
@@ -115,7 +115,7 @@ export const PublicationFormDialog = ({
             <Field
               name="title"
               label={translate('Title')}
-              component={FormGroupFinal}
+              component={FormGroup}
               validate={required}
             >
               <StringField />
@@ -127,7 +127,7 @@ export const PublicationFormDialog = ({
               description={translate(
                 'Digital Object Identifier (e.g., 10.1000/xyz123)',
               )}
-              component={FormGroupFinal}
+              component={FormGroup}
             >
               <StringField />
             </Field>
@@ -136,7 +136,7 @@ export const PublicationFormDialog = ({
               name="venue"
               label={translate('Venue')}
               description={translate('Journal or conference name')}
-              component={FormGroupFinal}
+              component={FormGroup}
               validate={required}
             >
               <StringField />
@@ -145,7 +145,7 @@ export const PublicationFormDialog = ({
             <Field
               name="publication_year"
               label={translate('Publication year')}
-              component={FormGroupFinal}
+              component={FormGroup}
               validate={required}
             >
               <NumberField min={1900} max={currentYear + 1} />
@@ -157,7 +157,7 @@ export const PublicationFormDialog = ({
               description={translate(
                 'Optional abstract for text-based expertise matching',
               )}
-              component={FormGroupFinal}
+              component={FormGroup}
             >
               <TextField rows={4} />
             </Field>

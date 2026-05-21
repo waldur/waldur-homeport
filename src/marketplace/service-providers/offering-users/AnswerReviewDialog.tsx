@@ -69,7 +69,7 @@ export const AnswerReviewDialog: FC<AnswerReviewDialogProps> = ({
               <Field
                 name="comment"
                 placeholder={translate('Enter a description...')}
-                component={TextField as any}
+                component={TextField}
               />
             </FormGroup>
           </ModalDialog>

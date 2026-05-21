@@ -1,14 +1,12 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { CallStates, ProposalPublicCallsListData } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const CallStatesOptions: CallStatesOption[] = [
@@ -72,30 +70,22 @@ const PureProposalPublicCallsFilter: FunctionComponent<{}> = () => (
 
 export const ProposalPublicCallsFilterFormId = 'ProposalPublicCallsFilter';
 
-interface ProposalPublicCallsFilterFormData {
+export interface ProposalPublicCallsFilterFormData {
   state: CallStatesOption[];
   has_active_round: boolean;
 }
 
-export const ProposalPublicCallsFilter = reduxForm<
-  ProposalPublicCallsFilterFormData,
-  {}
->({
-  form: ProposalPublicCallsFilterFormId,
-  destroyOnUnmount: false,
-  initialValues: {
-    state: [{ label: translate('Active'), value: 'active' }],
-    has_active_round: false,
-  },
-})(PureProposalPublicCallsFilter);
+export const ProposalPublicCallsFilter = PureProposalPublicCallsFilter;
+export const ProposalPublicCallsFilterInitialValues = {
+  state: [{ label: translate('Active'), value: 'active' }],
+  has_active_round: false,
+};
 
 type ProposalPublicCallsFilterQuery = ProposalPublicCallsListData['query'];
 
-export const selectProposalPublicCallsFilter = createSelector<
-  RootState,
-  Partial<ProposalPublicCallsFilterFormData>,
-  ProposalPublicCallsFilterQuery
->(getFormValues(ProposalPublicCallsFilterFormId), (values) => {
+export const selectProposalPublicCallsFilter = (
+  values?: Partial<ProposalPublicCallsFilterFormData>,
+): ProposalPublicCallsFilterQuery => {
   const filter: ProposalPublicCallsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -106,4 +96,4 @@ export const selectProposalPublicCallsFilter = createSelector<
     }
   }
   return filter;
-});
+};

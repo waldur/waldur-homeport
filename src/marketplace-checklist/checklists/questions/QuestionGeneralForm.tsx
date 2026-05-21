@@ -38,7 +38,7 @@ export const QuestionGeneralForm = ({
       <FormGroup label={translate('Question')} required space={5}>
         <Field
           name="description"
-          component={StringField as any}
+          component={StringField}
           placeholder={translate('Type your question here...')}
           maxLength={150}
           validate={required}
@@ -48,7 +48,7 @@ export const QuestionGeneralForm = ({
       <FormGroup label={translate('User guidance')} space={5}>
         <Field
           name="user_guidance"
-          component={TextField as any}
+          component={TextField}
           placeholder={translate('Input placeholder help text for user...')}
           maxLength={300}
         />
@@ -57,7 +57,7 @@ export const QuestionGeneralForm = ({
       <FormGroup label={translate('Question type')} required space={5}>
         <Field
           name="question_type"
-          component={SelectField as any}
+          component={SelectField}
           options={questionTypeOptions}
           validate={required}
           simpleValue
@@ -67,7 +67,7 @@ export const QuestionGeneralForm = ({
       <FormGroup space={5}>
         <Field
           name="required"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Is required?')}
         />
       </FormGroup>
@@ -75,7 +75,7 @@ export const QuestionGeneralForm = ({
       <FormGroup label={translate('Question order')} space={5}>
         <Field
           name="order"
-          component={NumberField as any}
+          component={NumberField}
           label={translate('Question order')}
           placeholder="0"
           min={0}
@@ -87,16 +87,12 @@ export const QuestionGeneralForm = ({
       ) : values.question_type === 'number' ? (
         <>
           <FormGroup label={translate('Min value')} space={5}>
-            <Field
-              name="min_value"
-              component={NumberField as any}
-              placeholder="0"
-            />
+            <Field name="min_value" component={NumberField} placeholder="0" />
           </FormGroup>
           <FormGroup label={translate('Max value')} space={5}>
             <Field
               name="max_value"
-              component={NumberField as any}
+              component={NumberField}
               placeholder="0"
               validate={gt}
             />
@@ -164,7 +160,7 @@ export const QuestionGeneralForm = ({
         >
           <Field
             name="maps_to_customer_field"
-            component={StringField as any}
+            component={StringField}
             placeholder="e.g., vat_code"
             required
           />
@@ -182,7 +178,7 @@ export const QuestionGeneralForm = ({
         >
           <Field
             name="intent_field"
-            component={StringField as any}
+            component={StringField}
             placeholder="e.g., intent"
             required
           />

@@ -1,5 +1,5 @@
+import { FieldValidator } from 'final-form';
 import { FC } from 'react';
-import { Validator } from 'redux-form';
 
 import { useTheme } from '@/theme/useTheme';
 
@@ -10,8 +10,8 @@ interface MonacoFieldProps {
   label?: string;
   required?: boolean;
   description?: string;
-  validate?: Validator;
-  input?: { value; onChange };
+  validate?: FieldValidator<string>;
+  input?: any;
   diff?: boolean;
   language?: string;
   height?: number;

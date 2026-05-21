@@ -271,8 +271,6 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
                 }
                 options={viewModeOptions}
                 isClearable={false}
-                className="metronic-select-container"
-                classNamePrefix="metronic-select"
               />
             </Col>
             <Col xs={12} sm={6} md={3}>
@@ -282,8 +280,6 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
                 onChange={(option) => setCountryFilter(option?.value || null)}
                 options={countryOptions}
                 isClearable
-                className="metronic-select-container"
-                classNamePrefix="metronic-select"
               />
             </Col>
             <Col xs={12} sm={6} md={3}>
@@ -297,8 +293,6 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
                 }
                 options={categoryOptions}
                 isClearable
-                className="metronic-select-container"
-                classNamePrefix="metronic-select"
               />
             </Col>
             <Col xs={12} sm={6} md={3}>
@@ -308,8 +302,6 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
                 onChange={(option) => setOrgFilter(option?.value || null)}
                 options={orgOptions}
                 isClearable
-                className="metronic-select-container"
-                classNamePrefix="metronic-select"
               />
             </Col>
           </Row>

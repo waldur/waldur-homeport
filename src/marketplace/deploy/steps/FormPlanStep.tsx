@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { VStepperFormStepCard } from '@/form/VStepperFormStep';
 import { translate } from '@/i18n';
@@ -8,7 +7,7 @@ import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptio
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 
-import { orderCustomerSelector } from '../selectors';
+import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
 
 export const FormPlanStep = (props: FormStepProps) => {
@@ -17,7 +16,7 @@ export const FormPlanStep = (props: FormStepProps) => {
     [props.offering],
   );
 
-  const customer = useSelector(orderCustomerSelector);
+  const { customer } = useOrderFormData();
   const concealBillingInfo =
     customer?.display_billing_info_in_projects === false;
 

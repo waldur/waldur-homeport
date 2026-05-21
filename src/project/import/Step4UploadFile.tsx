@@ -1,30 +1,37 @@
 import Papa from 'papaparse';
-import { FC, useEffect } from 'react';
-import { Field } from 'redux-form';
+import { FC } from 'react';
+import { Field, useFormState } from 'react-final-form';
+import { Customer } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 
 import { TemplateUploaderField } from './TemplateUploaderField';
+import { ProjectImportFormData } from './types';
 import { generateTemplateData } from './utils';
 
-const asyncValidate = (values) =>
-  new Promise((resolve, reject) => {
-    if (!values.file?.length)
-      reject({ file: translate('Please import a file.') });
+const validateCsvFile = (
+  values: ProjectImportFormData,
+  customer?: Customer,
+): Promise<string | undefined> => {
+  return new Promise((resolve) => {
+    if (!values?.file?.length) {
+      return resolve(translate('Please import a file.'));
+    }
 
     const file = values.file[0];
+    if (file.type !== 'text/csv' && !file.name.endsWith('.csv')) {
+      return resolve(translate('Invalid format, please import a .csv file'));
+    }
 
-    if (file.type !== 'text/csv')
-      reject({ file: translate('Invalid format, please import a .csv file') });
-
+    const customerUuid = customer?.uuid || values.customer_uuid;
     const template = generateTemplateData(
-      values.customer_uuid,
-      values.offering,
+      customerUuid,
+      values.import_type === 'projects_with_resources'
+        ? values.offering || undefined
+        : undefined,
     );
 
     Papa.parse(file, {
@@ -32,9 +39,13 @@ const asyncValidate = (values) =>
       complete: function (results: { data: Array<Array<string>> }) {
         let _error = 'invalid';
         if (Array.isArray(results?.data) && Array.isArray(results?.data[0])) {
-          const header = results.data[0];
+          const header = results.data[0].map((h) => h.split('(')[0].trim());
+          const templateHeader = template.fields.map((f) =>
+            f.split('(')[0].trim(),
+          );
+
           // Check headers
-          if (template.fields.every((field) => header.includes(field))) {
+          if (templateHeader.every((field) => header.includes(field))) {
             _error = '';
           }
 
@@ -50,9 +61,12 @@ const asyncValidate = (values) =>
           }
 
           // Check organizations
-          if (!_error && !values.customer_uuid) {
+          if (!_error && !customerUuid) {
             const customerIdx = header.indexOf('customer_uuid');
-            if (!results.data.slice(1).every((record) => record[customerIdx])) {
+            if (
+              customerIdx === -1 ||
+              !results.data.slice(1).every((record) => record[customerIdx])
+            ) {
               _error = 'customer';
             }
           }
@@ -74,7 +88,7 @@ const asyncValidate = (values) =>
           // Check OECD field
           if (!_error && isFeatureVisible(ProjectFeatures.oecd_fos_2007_code)) {
             const isOecdRequired =
-              ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
+              ENV.plugins.WALDUR_CORE?.OECD_FOS_2007_CODE_MANDATORY;
             const oecdIdx = header.indexOf('oecd_fos_2007_code');
 
             if (isOecdRequired && oecdIdx === -1) {
@@ -108,71 +122,66 @@ const asyncValidate = (values) =>
         }
 
         if (_error === 'invalid') {
-          reject({
-            file: translate(
+          resolve(
+            translate(
               'The imported data format does not match the template format.',
             ),
-          });
+          );
         } else if (_error === 'empty') {
-          reject({ file: translate('The imported file is empty.') });
+          resolve(translate('The imported file is empty.'));
         } else if (_error === 'customer') {
-          reject({
-            file: translate(
+          resolve(
+            translate(
               'The organization UUID is not specified in one or more records.',
             ),
-          });
+          );
         } else if (_error === 'oecd') {
-          reject({ file: translate('OECD code is required for projects.') });
+          resolve(translate('OECD code is required for projects.'));
         } else if (_error === 'invalid_oecd') {
-          reject({ file: translate('OECD code must be a number.') });
+          resolve(translate('OECD code must be a number.'));
         } else if (_error === 'plan') {
-          reject({
-            file: translate(
+          resolve(
+            translate(
               'The plan name is not specified in one or more resource records.',
             ),
-          });
+          );
         } else {
-          // No error
-          resolve('');
+          resolve(undefined);
         }
+      },
+      error: function () {
+        resolve(translate('Failed to parse CSV file.'));
       },
     });
   });
+};
 
-export const Step4UploadFile: FC<WizardFormStepProps> = (props) => {
+interface Step4Props {
+  context: {
+    customer?: Customer;
+  };
+}
+
+export const Step4UploadFile: FC<Step4Props> = ({ context: { customer } }) => {
+  const { values } = useFormState<ProjectImportFormData>();
+  const importType = values?.import_type;
+
   return (
-    <WizardForm
-      {...props}
-      asyncValidate={asyncValidate}
-      asyncChangeFields={['file']}
-    >
-      {(wizardProps) => {
-        const importType = wizardProps.formValues?.import_type;
-        const file = wizardProps.formValues?.file;
-
-        useEffect(() => {
-          if (file) {
-            wizardProps.asyncValidate();
-          }
-        }, [file]);
-
-        return (
-          <div className="text-muted">
-            <p className="mb-6">
-              {importType === 'projects_only'
-                ? translate('Upload your completed project template file')
-                : translate(
-                    'Upload your completed project and resources template file',
-                  )}
-            </p>
-            <Field
-              name="file"
-              validate={required}
-              component={TemplateUploaderField}
-            />
-          </div>
-        );
-      }}
-    </WizardForm>
+    <div className="text-muted">
+      <p className="mb-6">
+        {importType === 'projects_only'
+          ? translate('Upload your completed project template file')
+          : translate(
+              'Upload your completed project and resources template file',
+            )}
+      </p>
+      <Field
+        name="file"
+        validate={(value) =>
+          validateCsvFile({ ...values, file: value }, customer)
+        }
+        component={TemplateUploaderField}
+      />
+    </div>
   );
 };

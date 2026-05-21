@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { emailLogsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -9,13 +10,16 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import {
   selectEmailLogsFilter as selectSupportEmailLogsFilter,
   EmailLogsFilter as SupportEmailLogsFilter,
+  EmailLogsFilterFormId,
 } from '@/table/generated/EmailLogsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-export const SupportEmailLogsList = () => {
-  const filter = useSelector(selectSupportEmailLogsFilter);
+const SupportEmailLogsListTable = () => {
+  const { values } = useFormState();
+
+  const filter = useMemo(() => selectSupportEmailLogsFilter(values), [values]);
 
   const tableProps = useTable({
     table: `supportEmailLogs`,
@@ -55,6 +59,19 @@ export const SupportEmailLogsList = () => {
           <FormattedHtml html={row.body} />
         </ExpandableContainer>
       )}
+      formId={EmailLogsFilterFormId}
     />
   );
 };
+
+export const SupportEmailLogsList = (props) => (
+  <Form
+    id={EmailLogsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <SupportEmailLogsListTable {...props} />}
+  </Form>
+);

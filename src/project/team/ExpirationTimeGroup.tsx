@@ -18,7 +18,7 @@ export const ExpirationTimeGroup: FunctionComponent<{
     >
       <Field
         name="expiration_time"
-        component={DateField as any}
+        component={DateField}
         disabled={disabled}
         minDate={DateTime.now().plus({ days: 1 }).toISO()}
         placeholder="YYYY-MM-DD"

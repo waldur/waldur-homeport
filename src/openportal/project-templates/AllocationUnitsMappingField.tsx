@@ -149,8 +149,6 @@ export const AllocationUnitsMappingField: FunctionComponent<
               onChange={(option) => setAllocationUnit(option?.value || null)}
               options={AllocationUnitsOptions}
               onBlur={input.onBlur}
-              className="metronic-select-container"
-              classNamePrefix="metronic-select"
               placeholder={translate('Select unit...')}
               aria-label={translate('Select allocation unit')}
               isSearchable={false}

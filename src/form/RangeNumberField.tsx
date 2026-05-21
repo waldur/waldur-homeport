@@ -4,10 +4,7 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { translate } from '@/i18n';
 
 interface RangeNumberFieldProps {
-  input: {
-    value: { min?: number; max?: number };
-    onChange: (value: { min?: number; max?: number } | undefined) => void;
-  };
+  input: any;
   min?: number;
   placeholder?: string;
 }

@@ -13,14 +13,14 @@ import {
 const HostRoutesField: FunctionComponent = () => (
   <Form.Group>
     <Form.Label>{translate('Host routes')}</Form.Label>
-    <FieldArray name="host_routes" component={StaticRoutesTable as any} />
+    <FieldArray name="host_routes" component={StaticRoutesTable} />
   </Form.Group>
 );
 
 const NameserversField: FunctionComponent = () => (
   <Form.Group>
     <Form.Label>{translate('DNS name servers')}</Form.Label>
-    <FieldArray name="dns_nameservers" component={IpAddressList as any} />
+    <FieldArray name="dns_nameservers" component={IpAddressList} />
   </Form.Group>
 );
 

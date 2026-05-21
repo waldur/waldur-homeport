@@ -1,17 +1,14 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { Field as FinalField } from 'react-final-form';
+import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import { syncFiltersToURL, useReinitializeFilterFromUrl } from '@/core/filters';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
-import { PROVIDER_RESOURCES_LIST_FILTER_FORM_ID } from '@/marketplace/resources/list/constants';
-import { type RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 import {
   getCustomer,
@@ -21,14 +18,24 @@ import {
 } from '@/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
-import { getStates, ResourceStateFilter } from './ResourceStateFilter';
+import { ResourceStateFilter } from './ResourceStateFilter';
 
-type StateProps = ReturnType<typeof mapStateToProps> & InjectedFormProps;
+const filterSelector = createSelector(
+  getCustomer,
+  getUser,
+  isServiceManagerSelector,
+  isOwnerOrStaffSelector,
+  (customer, user, isServiceManager, isOwnerOrStaff) =>
+    isServiceManager && !isOwnerOrStaff
+      ? { customer_uuid: customer?.uuid, service_manager_uuid: user?.uuid }
+      : {
+          customer_uuid: customer?.uuid,
+        },
+);
 
-const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
-  useReinitializeFilterFromUrl(props.form, {
-    state: getStates().filter((state) => state.value !== 'Terminated'),
-  });
+export const ProviderResourcesFilter: FunctionComponent = () => {
+  const offeringFilter = useSelector(filterSelector);
+
   return (
     <>
       <TableFilterItem
@@ -37,7 +44,7 @@ const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
         badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
       >
         <OfferingAutocomplete
-          offeringFilter={props.offeringFilter}
+          offeringFilter={offeringFilter}
           reactSelectProps={REACT_SELECT_TABLE_FILTER}
         />
       </TableFilterItem>
@@ -80,8 +87,9 @@ const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
         name="include_terminated"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <Field
+        <FinalField
           name="include_terminated"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate('Include terminated')}
         />
@@ -91,8 +99,9 @@ const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
         name="paused"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <Field
+        <FinalField
           name="paused"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate('Paused')}
         />
@@ -102,8 +111,9 @@ const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
         name="downscaled"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <Field
+        <FinalField
           name="downscaled"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate('Downscaled')}
         />
@@ -113,8 +123,9 @@ const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
         name="restrict_member_access"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <Field
+        <FinalField
           name="restrict_member_access"
+          type="checkbox"
           component={AwesomeCheckboxField}
           label={translate('Restrict member access')}
         />
@@ -122,31 +133,3 @@ const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
     </>
   );
 };
-
-const filterSelector = createSelector(
-  getCustomer,
-  getUser,
-  isServiceManagerSelector,
-  isOwnerOrStaffSelector,
-  (customer, user, isServiceManager, isOwnerOrStaff) =>
-    isServiceManager && !isOwnerOrStaff
-      ? { customer_uuid: customer.uuid, service_manager_uuid: user.uuid }
-      : {
-          customer_uuid: customer.uuid,
-        },
-);
-
-const mapStateToProps = (state: RootState) => ({
-  offeringFilter: filterSelector(state),
-});
-
-const ConnectedComponent = connect(mapStateToProps)(
-  PureProviderResourcesFilter,
-);
-
-export const ProviderResourcesFilter = reduxForm({
-  form: PROVIDER_RESOURCES_LIST_FILTER_FORM_ID,
-  onChange: syncFiltersToURL,
-  destroyOnUnmount: false,
-  enableReinitialize: true,
-})(ConnectedComponent);

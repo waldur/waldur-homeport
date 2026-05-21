@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { openportalManagedProjectsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -9,6 +10,7 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   OpenportalManagedProjectsFilter,
   selectOpenportalManagedProjectsFilter,
+  OpenportalManagedProjectsFilterFormId,
 } from '@/table/generated/OpenportalManagedProjectsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -39,10 +41,15 @@ const renderOffering = (destination: string) => {
   return '-';
 };
 
-export const ManagedProjectsList = () => {
+const ManagedProjectsListTable = () => {
   useTitle(translate('Managed Projects'), '', 'browser');
 
-  const filter = useSelector(selectOpenportalManagedProjectsFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectOpenportalManagedProjectsFilter(values),
+    [values],
+  );
 
   const tableProps = useTable({
     table: `ManagedProjectsList`,
@@ -147,6 +154,19 @@ export const ManagedProjectsList = () => {
         <ManagedProjectActions project={row} refetch={tableProps.fetch} />
       )}
       filters={<OpenportalManagedProjectsFilter />}
+      formId={OpenportalManagedProjectsFilterFormId}
     />
   );
 };
+
+export const ManagedProjectsList = (props) => (
+  <Form
+    id={OpenportalManagedProjectsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ManagedProjectsListTable {...props} />}
+  </Form>
+);

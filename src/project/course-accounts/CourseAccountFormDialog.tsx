@@ -291,7 +291,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                 <Tab eventKey="single" title={translate('Single account')}>
                   <FormGroup label={translate('Email')} required>
                     <Field
-                      component={EmailField as any}
+                      component={EmailField}
                       name="email"
                       placeholder={translate('e.g. Courseaccount@example.com')}
                       validate={activeTab === 'single' ? required : undefined}
@@ -299,7 +299,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                   </FormGroup>
                   <FormGroup label={translate('Description')}>
                     <Field
-                      component={TextField as any}
+                      component={TextField}
                       name="description"
                       placeholder={translate('e.g. Used for automated backups')}
                       spaceless

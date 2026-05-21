@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Field } from 'redux-form';
+import { Field, useForm } from 'react-final-form';
 import { VmwareTemplate, vmwareTemplatesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -21,6 +21,7 @@ const tabs: TabSpec[] = [
 ];
 
 export const FormTemplateStep = (props: FormStepProps) => {
+  const form = useForm();
   const [tab, setTab] = useState<TabSpec>(tabs[0]);
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
@@ -60,12 +61,12 @@ export const FormTemplateStep = (props: FormStepProps) => {
 
   const onChangeImage = useCallback(
     (value: VmwareTemplate) => {
-      props.change('limits.cpu', value.cores);
-      props.change('limits.ram', value.ram / 1024);
-      props.change('limits.disk', value.disk / 1024);
-      props.change('attributes.cores_per_socket', value.cores_per_socket);
+      form.change('limits.cpu', value.cores);
+      form.change('limits.ram', value.ram / 1024);
+      form.change('limits.disk', value.disk / 1024);
+      form.change('attributes.cores_per_socket', value.cores_per_socket);
     },
-    [props.change],
+    [form],
   );
 
   // Initialize template
@@ -97,14 +98,20 @@ export const FormTemplateStep = (props: FormStepProps) => {
           {translate('There are no option to choose.')}
         </p>
       ) : (
-        <Field
-          name="attributes.template"
-          validate={[required]}
-          component={BoxRadioField}
-          choices={choices}
-          required
-          onChange={onChangeImage as any}
-        />
+        <Field name="attributes.template" validate={required}>
+          {({ input }) => (
+            <BoxRadioField
+              input={{
+                ...input,
+                onChange: (value) => {
+                  input.onChange(value);
+                  onChangeImage(value);
+                },
+              }}
+              choices={choices}
+            />
+          )}
+        </Field>
       )}
     </VStepperFormStepCard>
   );

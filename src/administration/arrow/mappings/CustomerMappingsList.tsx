@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import {
   adminArrowCustomerMappingsList,
   ArrowCustomerMapping,
@@ -12,6 +12,7 @@ import { createFetcher } from '@/table/api';
 import {
   AdminArrowCustomerMappingsFilter as CustomerMappingsFilter,
   selectAdminArrowCustomerMappingsFilter as selectCustomerMappingsFilter,
+  AdminArrowCustomerMappingsFilterFormId,
 } from '@/table/generated/AdminArrowCustomerMappingsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -35,10 +36,15 @@ interface CustomerMappingsListProps {
   settings?: { uuid: string } | null;
 }
 
-export const CustomerMappingsList: FunctionComponent<
+const CustomerMappingsListTable: FunctionComponent<
   CustomerMappingsListProps
 > = ({ settings }) => {
-  const formFilter = useSelector(selectCustomerMappingsFilter);
+  const { values } = useFormState();
+
+  const formFilter = useMemo(
+    () => selectCustomerMappingsFilter(values),
+    [values],
+  );
 
   const filter = useMemo(
     () => ({
@@ -111,6 +117,19 @@ export const CustomerMappingsList: FunctionComponent<
       tableActions={<CustomerMappingCreateButton refetch={tableProps.fetch} />}
       enableMultiSelect
       multiSelectActions={CustomerMappingsBulkDeleteAction}
+      formId={AdminArrowCustomerMappingsFilterFormId}
     />
   );
 };
+
+export const CustomerMappingsList = (props) => (
+  <Form
+    id={AdminArrowCustomerMappingsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <CustomerMappingsListTable {...props} />}
+  </Form>
+);

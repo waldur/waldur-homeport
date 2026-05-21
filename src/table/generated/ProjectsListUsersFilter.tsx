@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { ProjectsListUsersListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureProjectsListUsersFilter: FunctionComponent<
@@ -42,25 +40,17 @@ interface ProjectsListUsersFilterProps {
   projectRoles?: any[];
 }
 
-interface ProjectsListUsersFilterFormData {
+export interface ProjectsListUsersFilterFormData {
   project_role: any;
 }
 
-export const ProjectsListUsersFilter = reduxForm<
-  ProjectsListUsersFilterFormData,
-  ProjectsListUsersFilterProps
->({
-  form: ProjectsListUsersFilterFormId,
-  destroyOnUnmount: false,
-})(PureProjectsListUsersFilter);
+export const ProjectsListUsersFilter = PureProjectsListUsersFilter;
 
 type ProjectsListUsersFilterQuery = ProjectsListUsersListData['query'];
 
-export const selectProjectsListUsersFilter = createSelector<
-  RootState,
-  Partial<ProjectsListUsersFilterFormData>,
-  ProjectsListUsersFilterQuery
->(getFormValues(ProjectsListUsersFilterFormId), (values) => {
+export const selectProjectsListUsersFilter = (
+  values?: Partial<ProjectsListUsersFilterFormData>,
+): ProjectsListUsersFilterQuery => {
   const filter: ProjectsListUsersFilterQuery = {} as any;
   if (values) {
     if (values.project_role) {
@@ -68,4 +58,4 @@ export const selectProjectsListUsersFilter = createSelector<
     }
   }
   return filter;
-});
+};

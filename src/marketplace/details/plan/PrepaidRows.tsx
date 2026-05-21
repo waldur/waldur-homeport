@@ -1,17 +1,18 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { defaultCurrency } from '@/core/formatCurrency';
+import { composeValidators } from '@/core/validators';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 
 import { ComponentCost } from './ComponentCost';
 import { MeasuredUnitInput } from './MeasuredUnitInput';
 import { Component } from './types';
-import { getEndDate, getStartDate, getPrepaidCostParts } from './utils';
+import { getPrepaidCostParts } from './utils';
 
 const PrepaidRow = ({
   component,
@@ -20,13 +21,15 @@ const PrepaidRow = ({
   component: Component;
   overageComponent?: Component;
 }) => {
-  const endDate = useSelector(getEndDate);
-  const startDate = useSelector(getStartDate);
+  const formData = useOrderFormData();
+  const endDate = formData?.attributes?.end_date;
+  const startDate = formData?.start_date;
   const cost = getPrepaidCostParts(component, endDate, startDate);
   const validate = useMemo(
     () => getOfferingComponentValidator(component),
     [component.min_value, component.max_value],
   );
+  const validateValue = composeValidators(...validate);
 
   return (
     <>
@@ -39,9 +42,10 @@ const PrepaidRow = ({
             name={`limits.${component.type}`}
             parse={parseIntField}
             format={formatIntField}
-            validate={validate}
-            component={MeasuredUnitInput}
-            props={{ component }}
+            validate={validateValue}
+            render={({ input }) => (
+              <MeasuredUnitInput input={input} component={component} />
+            )}
           />
         }
         actions={

@@ -21,12 +21,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
 import { required } from '@/core/validators';
-import {
-  FormContainerFinal,
-  SelectField,
-  StringField,
-  SubmitButton,
-} from '@/form';
+import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -283,7 +278,7 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                 }
               }}
             />
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               {!isLoading && error ? (
                 <LoadingErred
                   loadData={refetch}
@@ -354,7 +349,7 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                   }
                 />
               </div>
-            </FormContainerFinal>
+            </FormContainer>
           </form>
         </ModalDialog>
       )}

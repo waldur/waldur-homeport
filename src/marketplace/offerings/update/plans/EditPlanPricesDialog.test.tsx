@@ -13,12 +13,6 @@ vi.mock('waldur-js-client', () => ({
   formDataBodySerializer: vi.fn(),
 }));
 
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-  }),
-}));
-
 const mockPlan = {
   uuid: 'plan-1',
   name: 'Basic Plan',

@@ -40,7 +40,7 @@ export const RoleGroup: FunctionComponent<{
     <FormGroup label={translate('Role')} controlId="role">
       <Field
         name="role"
-        component={SelectField as any}
+        component={SelectField}
         options={getRoles(types)}
         getOptionLabel={(role: Role) => role.description || role.name}
         getOptionValue={({ name }) => name}

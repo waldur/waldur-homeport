@@ -5,6 +5,7 @@ import { ENV } from '@/core/config';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call, CallOfferingFormData } from '@/proposals/types';
 
@@ -42,10 +43,12 @@ const steps: ProgressStep[] = [
 export const CallOfferingCreateDialog: FC<CallOfferingCreateDialogProps> = (
   props,
 ) => {
+  const { closeDialog } = useModal();
+
   const createOfferingMutation = useManagedMutation<
     any,
     any,
-    { formData: CallOfferingFormData; formProps: any }
+    { formData: CallOfferingFormData }
   >({
     mutationFn: (args) => {
       const { formData } = args;
@@ -67,14 +70,13 @@ export const CallOfferingCreateDialog: FC<CallOfferingCreateDialogProps> = (
     successMessage: translate('Offering request has been submitted.'),
     errorMessage: translate('Something went wrong'),
     refetch: props.resolve.refetch,
-    onSuccess: (_data, args) => {
-      args.formProps.destroy();
+    onSuccess: () => {
+      closeDialog();
     },
   });
 
   const createRound = useCallback(
-    (formData, _dispatch, formProps) =>
-      createOfferingMutation.mutateAsync({ formData, formProps }),
+    (formData) => createOfferingMutation.mutateAsync({ formData }),
     [createOfferingMutation],
   );
   return (

@@ -29,13 +29,7 @@ const SingleValue: FunctionComponent<any> = (props) => (
 );
 
 const WindowedSelectField = ({ input: { value, onChange }, ...props }) => (
-  <WindowedSelect
-    value={value}
-    onChange={onChange}
-    {...props}
-    className="metronic-select-container"
-    classNamePrefix="metronic-select"
-  />
+  <WindowedSelect value={value} onChange={onChange} {...props} />
 );
 
 export const SelectCountryField: FunctionComponent = () => {

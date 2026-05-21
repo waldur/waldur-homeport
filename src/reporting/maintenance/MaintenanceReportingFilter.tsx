@@ -126,8 +126,6 @@ export const MaintenanceReportingFilter: FC<
           options={presetOptions}
           isClearable={false}
           placeholder={translate('Custom')}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </FormGroup>
 
@@ -210,8 +208,6 @@ export const MaintenanceReportingFilter: FC<
           isMulti
           isClearable
           placeholder={translate('All states')}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </FormGroup>
 
@@ -227,8 +223,6 @@ export const MaintenanceReportingFilter: FC<
           options={maintenanceTypeOptions}
           isClearable
           placeholder={translate('All types')}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </FormGroup>
     </div>

@@ -3,7 +3,7 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { customerCreditsPartialUpdate } from 'waldur-js-client';
 
-import { FormContainerFinal, SubmitButton } from '@/form';
+import { FormContainer, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -63,7 +63,7 @@ export const EditCreditFieldDialog: FC<{
               </>
             }
           >
-            <FormContainerFinal submitting={submitting}>
+            <FormContainer submitting={submitting}>
               {resolve.name === 'offerings' ? (
                 <CustomerCreditOfferingsField />
               ) : resolve.name === 'value' ? (
@@ -74,7 +74,7 @@ export const EditCreditFieldDialog: FC<{
                   filterField={resolve.name}
                 />
               )}
-            </FormContainerFinal>
+            </FormContainer>
           </ModalDialog>
         </form>
       )}

@@ -158,7 +158,6 @@ export const RevenueGrowthChart: FC = () => {
       options={accountingOptions}
       isClearable={false}
       className="metronic-select-container flex-grow-0 mw-200px"
-      classNamePrefix="metronic-select"
     />
   );
 

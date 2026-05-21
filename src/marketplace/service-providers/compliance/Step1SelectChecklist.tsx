@@ -6,7 +6,8 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { required } from '@/core/validators';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -45,7 +46,7 @@ export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
   }, [data]);
 
   return (
-    <WizardForm {...props} submitDisabled={isLoading} submitDisabledInvalid>
+    <WizardForm {...props} submitDisabled={isLoading}>
       {!isLoading && error ? (
         <LoadingErred loadData={refetch} />
       ) : (
@@ -73,7 +74,7 @@ export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
           hoverable
           fieldType="radio"
           fieldName="checklist"
-          validate={[required]}
+          validate={required}
           loading={isLoading}
         />
       )}

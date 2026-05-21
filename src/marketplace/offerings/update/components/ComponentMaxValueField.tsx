@@ -8,7 +8,7 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 export const ComponentMaxValueField: React.FC = () => (
   <FormGroup label={translate('Max value')} controlId="max_value" spaceless>
     <Field
-      component={NumberField as any}
+      component={NumberField}
       name="max_value"
       id="max_value"
       parse={(value) => Number(value)}

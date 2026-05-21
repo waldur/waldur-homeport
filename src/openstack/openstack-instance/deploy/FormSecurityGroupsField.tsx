@@ -1,6 +1,6 @@
 import { EyeIcon, WarningCircleIcon } from '@phosphor-icons/react';
-import { useCallback, useMemo, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useCallback, useEffect, useMemo } from 'react';
+import { useForm } from 'react-final-form';
 import {
   OpenStackSecurityGroup,
   openstackSecurityGroupsList,
@@ -10,7 +10,7 @@ import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -51,9 +51,8 @@ const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
 };
 
 const ShowPreviewButton = () => {
-  const securityGroups = useSelector((state) =>
-    orderFormSelector(state, 'attributes.security_groups'),
-  );
+  const { attributes = {} } = useOrderFormData();
+  const securityGroups = attributes.security_groups;
   const { openDialog } = useModal();
   const callback = useCallback(() => {
     openDialog(OpenStackSecurityGroupsDialog, {
@@ -75,22 +74,18 @@ const ShowPreviewButton = () => {
 };
 
 interface OwnProps
-  extends Pick<FormStepProps, 'offering' | 'change'>, Partial<TableProps> {}
+  extends Pick<FormStepProps, 'offering'>, Partial<TableProps> {}
 
-export const FormSecurityGroupsField = ({
-  offering,
-  change,
-  ...props
-}: OwnProps) => {
+export const FormSecurityGroupsField = ({ offering, ...props }: OwnProps) => {
+  const form = useForm();
   const filter = useMemo(
     () => ({ tenant_uuid: offering.scope_uuid }),
     [offering.scope_uuid],
   );
 
   // Get the current value from the form state to check if default needs to be set.
-  const securityGroups = useSelector((state) =>
-    orderFormSelector(state, 'attributes.security_groups'),
-  );
+  const { attributes = {} } = useOrderFormData();
+  const securityGroups = attributes.security_groups;
 
   useEffect(() => {
     // Pre-fetch and set the default security group only if the field
@@ -116,14 +111,14 @@ export const FormSecurityGroupsField = ({
           defaultGroupList && defaultGroupList.length > 0
             ? defaultGroupList
             : [];
-        change('attributes.security_groups', valueToSet);
+        form.change('attributes.security_groups', valueToSet);
       })
       .catch(() => {
         // In case of an error, initialize with an empty array
         // to avoid repeated attempts on subsequent renders.
-        change('attributes.security_groups', []);
+        form.change('attributes.security_groups', []);
       });
-  }, [offering.scope_uuid, change, securityGroups]);
+  }, [offering.scope_uuid, form, securityGroups]);
 
   const tableProps = useTable({
     table: 'deploy-security-groups',

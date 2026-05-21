@@ -89,7 +89,7 @@ export const FeedbackDialog: FC<{ resolve: Resolve }> = ({ resolve }) => {
               >
                 <Field
                   name="category"
-                  component={SelectField as any}
+                  component={SelectField}
                   simpleValue
                   isClearable
                   placeholder={translate('Select a category')}
@@ -101,7 +101,7 @@ export const FeedbackDialog: FC<{ resolve: Resolve }> = ({ resolve }) => {
             <FormGroup label={translate('Comment (optional)')} spaceless>
               <Field
                 name="comment"
-                component={TextField as any}
+                component={TextField}
                 placeholder={
                   resolve.score
                     ? translate('What was helpful about this response?')

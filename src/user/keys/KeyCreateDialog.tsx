@@ -118,14 +118,14 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
               <SshKeyRestrictionsBanner />
               <FormGroup label={translate('Key name')}>
                 <Field
-                  component={StringField as any}
+                  component={StringField}
                   name="name"
                   placeholder={translate('e.g. my-ssh-key')}
                 />
               </FormGroup>
               <FormGroup label={translate('Public key')} required>
                 <Field
-                  component={TextField as any}
+                  component={TextField}
                   name="public_key"
                   validate={required}
                   style={{ height: 100 }}

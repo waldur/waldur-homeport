@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -11,6 +11,7 @@ import { getReviewStateOptions } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import {
   ProposalReviewsFilter,
+  ProposalReviewsFilterFormId,
   selectProposalReviewsFilter,
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
@@ -20,20 +21,21 @@ import { getCustomer } from '@/workspace/selectors';
 import { ReviewsRowActions } from './ReviewsRowActons';
 import { ReviewStateRenderer } from './ReviewStateRenderer';
 
-const filtersSelector = createSelector(
-  getCustomer,
-  selectProposalReviewsFilter,
-  (customer, filters) => {
-    const result: ProposalReviewsListData['query'] = { ...filters };
+const CustomerReviewsListTable: FC<{}> = () => {
+  const customer = useSelector(getCustomer);
+  const { values } = useFormState();
+  const filterValues = useMemo(
+    () => selectProposalReviewsFilter(values),
+    [values],
+  );
+
+  const filter = useMemo(() => {
+    const result: ProposalReviewsListData['query'] = { ...filterValues };
     if (customer) {
       result.organization_uuid = customer.uuid;
     }
     return result;
-  },
-);
-
-export const CustomerReviewsList: FC<{}> = () => {
-  const filter = useSelector(filtersSelector);
+  }, [customer, filterValues]);
 
   const tableProps = useTable({
     table: 'ReviewsList',
@@ -45,6 +47,7 @@ export const CustomerReviewsList: FC<{}> = () => {
   return (
     <Table<ProposalReview>
       {...tableProps}
+      formId={ProposalReviewsFilterFormId}
       columns={[
         {
           title: translate('UUID'),
@@ -113,3 +116,13 @@ export const CustomerReviewsList: FC<{}> = () => {
     />
   );
 };
+
+export const CustomerReviewsList: FC<{}> = () => (
+  <Form
+    id={ProposalReviewsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <CustomerReviewsListTable />}
+  </Form>
+);

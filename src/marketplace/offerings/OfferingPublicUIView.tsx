@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   customersList,
   marketplaceCategoriesRetrieve,
@@ -192,8 +191,6 @@ const getTabs = (
 };
 
 export const OfferingPublicUIView = () => {
-  const dispatch = useDispatch();
-
   const {
     params: { uuid },
   } = useCurrentStateAndParams();
@@ -280,8 +277,8 @@ export const OfferingPublicUIView = () => {
 
   const router = useRouter();
   const breadcrumbItems = useMemo(
-    () => getPublicOfferingBreadcrumbItems(data?.offering, dispatch, router),
-    [data?.offering, dispatch, router],
+    () => getPublicOfferingBreadcrumbItems(data?.offering, router),
+    [data?.offering, router],
   );
   useBreadcrumbs(breadcrumbItems);
 

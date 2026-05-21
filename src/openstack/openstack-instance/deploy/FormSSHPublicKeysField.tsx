@@ -1,12 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
+import { useForm } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { keysList, KeysListData } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { FormStepProps } from '@/marketplace/deploy/types';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
@@ -30,16 +30,15 @@ const filtersSelector = createSelector(getUser, (user) => {
   return result;
 });
 
-interface OwnProps extends Pick<FormStepProps, 'change'>, Partial<TableProps> {}
-
-export const FormSSHPublicKeysField = ({ change, ...props }: OwnProps) => {
+export const FormSSHPublicKeysField = (props: Partial<TableProps>) => {
+  const form = useForm();
   const filter = useSelector(filtersSelector);
   const tableProps = useTable({
     table: keysListTable,
     fetchData: createFetcher(keysList),
     onFetch: (rows, totalCount, firstFetch) => {
       if (firstFetch && totalCount === 1 && rows.length === 1) {
-        change('attributes.ssh_public_key', rows[0]);
+        form.change('attributes.ssh_public_key', rows[0]);
       }
     },
     filter,

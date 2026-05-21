@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   AdminArrowConsumptionRecordsListData,
   Customer,
@@ -15,7 +14,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -54,7 +52,6 @@ const PureAdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -86,27 +83,20 @@ const PureAdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
 export const AdminArrowConsumptionRecordsFilterFormId =
   'AdminArrowConsumptionRecordsFilter';
 
-interface AdminArrowConsumptionRecordsFilterFormData {
+export interface AdminArrowConsumptionRecordsFilterFormData {
   organization: Customer;
   is_finalized: IsFinalizedOption;
 }
 
-export const AdminArrowConsumptionRecordsFilter = reduxForm<
-  AdminArrowConsumptionRecordsFilterFormData,
-  {}
->({
-  form: AdminArrowConsumptionRecordsFilterFormId,
-  destroyOnUnmount: false,
-})(PureAdminArrowConsumptionRecordsFilter);
+export const AdminArrowConsumptionRecordsFilter =
+  PureAdminArrowConsumptionRecordsFilter;
 
 type AdminArrowConsumptionRecordsFilterQuery =
   AdminArrowConsumptionRecordsListData['query'];
 
-export const selectAdminArrowConsumptionRecordsFilter = createSelector<
-  RootState,
-  Partial<AdminArrowConsumptionRecordsFilterFormData>,
-  AdminArrowConsumptionRecordsFilterQuery
->(getFormValues(AdminArrowConsumptionRecordsFilterFormId), (values) => {
+export const selectAdminArrowConsumptionRecordsFilter = (
+  values?: Partial<AdminArrowConsumptionRecordsFilterFormData>,
+): AdminArrowConsumptionRecordsFilterQuery => {
   const filter: AdminArrowConsumptionRecordsFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
@@ -117,4 +107,4 @@ export const selectAdminArrowConsumptionRecordsFilter = createSelector<
     }
   }
   return filter;
-});
+};

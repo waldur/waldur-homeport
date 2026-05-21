@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { FormGroup } from '@/form';
@@ -28,7 +28,7 @@ export const OrderStartDateField = ({
     return null;
   }
 
-  // 4. Render the Redux Form Field
+  // 4. Render the React Final Form Field
   return (
     <Field
       name="start_date" // This field is at the root of the order payload
@@ -40,6 +40,7 @@ export const OrderStartDateField = ({
           'The date when the resource provisioning will be initiated. If not set, the order is processed immediately after approval.',
         )
       }
+      {...(simple ? dateFieldProps : {})}
     >
       {!simple && <DateField {...dateFieldProps} />}
     </Field>

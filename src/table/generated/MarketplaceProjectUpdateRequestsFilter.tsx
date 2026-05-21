@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   MarketplaceProjectUpdateRequestsListData,
@@ -16,7 +15,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -97,7 +95,6 @@ const PureMarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
               onChange={(value) => fieldProps.input.onChange(value)}
               isClearable={true}
               {...REACT_SELECT_TABLE_FILTER}
-              className="metronic-select-container"
             />
           )}
         />
@@ -108,28 +105,23 @@ const PureMarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
 export const MarketplaceProjectUpdateRequestsFilterFormId =
   'MarketplaceProjectUpdateRequestsFilter';
 
-interface MarketplaceProjectUpdateRequestsFilterFormData {
+export interface MarketplaceProjectUpdateRequestsFilterFormData {
   state: RemoteProjectUpdateRequestStateOption[];
   organization: Customer;
 }
 
-export const MarketplaceProjectUpdateRequestsFilter = reduxForm<
-  MarketplaceProjectUpdateRequestsFilterFormData,
-  {}
->({
-  form: MarketplaceProjectUpdateRequestsFilterFormId,
-  destroyOnUnmount: false,
-  initialValues: { state: [{ value: 'pending', label: translate('Pending') }] },
-})(PureMarketplaceProjectUpdateRequestsFilter);
+export const MarketplaceProjectUpdateRequestsFilter =
+  PureMarketplaceProjectUpdateRequestsFilter;
+export const MarketplaceProjectUpdateRequestsFilterInitialValues = {
+  state: [{ value: 'pending', label: translate('Pending') }],
+};
 
 type MarketplaceProjectUpdateRequestsFilterQuery =
   MarketplaceProjectUpdateRequestsListData['query'];
 
-export const selectMarketplaceProjectUpdateRequestsFilter = createSelector<
-  RootState,
-  Partial<MarketplaceProjectUpdateRequestsFilterFormData>,
-  MarketplaceProjectUpdateRequestsFilterQuery
->(getFormValues(MarketplaceProjectUpdateRequestsFilterFormId), (values) => {
+export const selectMarketplaceProjectUpdateRequestsFilter = (
+  values?: Partial<MarketplaceProjectUpdateRequestsFilterFormData>,
+): MarketplaceProjectUpdateRequestsFilterQuery => {
   const filter: MarketplaceProjectUpdateRequestsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -140,4 +132,4 @@ export const selectMarketplaceProjectUpdateRequestsFilter = createSelector<
     }
   }
   return filter;
-});
+};

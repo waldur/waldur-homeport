@@ -34,7 +34,6 @@ vi.mock('@/core/config', () => ({
 }));
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/modal/actions');
 vi.mock('../change-limits/utils');
 vi.mock('@/marketplace/common/autocompletes');
 vi.mock('@/router', () => ({

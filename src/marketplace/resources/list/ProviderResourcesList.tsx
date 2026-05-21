@@ -1,21 +1,22 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   marketplaceProviderResourcesList,
   MarketplaceProviderResourcesListData,
+  Project,
   Resource,
 } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
 
 import { BooleanBadge } from '@/core/BooleanBadge';
 import { formatDateTime } from '@/core/dateUtils';
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { lazyComponent } from '@/core/lazyComponent';
 import { BackendIdTip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { Option } from '@/marketplace/common/registry';
 import { ResourceFlags } from '@/marketplace/resources/details/ResourceFlags';
 import { ExpandableResourceSummary } from '@/marketplace/resources/list/ExpandableResourceSummary';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
@@ -31,10 +32,10 @@ import { getCustomer } from '@/workspace/selectors';
 import { Customer } from '@/workspace/types';
 
 import {
+  NON_TERMINATED_STATES,
   PROVIDER_RESOURCES_LIST_FILTER_FORM_ID,
   TABLE_PUBLIC_RESOURCE,
 } from './constants';
-import { NON_TERMINATED_STATES } from './constants';
 import { EndDateTooltip } from './EndDateTooltip';
 import { ProviderResourceActions } from './ProviderResourceActions';
 import { ProviderResourcesFilter } from './ProviderResourcesFilter';
@@ -43,7 +44,7 @@ import { ResourceStateField } from './ResourceStateField';
 import { getStates } from './ResourceStateFilter';
 
 interface ResourceFilter {
-  state?: any;
+  state?: Option[];
   organization?: Customer;
   project?: Project;
   category?: Category;
@@ -281,56 +282,6 @@ const TableOptions = {
   queryField: 'query',
 };
 
-const mapStateToFilter = createSelector(
-  getCustomer,
-  (state, formId) => getFormValues(formId)(state),
-  (customer, filters: ResourceFilter) => {
-    const filter: MarketplaceProviderResourcesListData['query'] = {};
-
-    // Public resources should only contain resources from billable offerings.
-    filter.offering_billable = true;
-
-    if (customer) {
-      filter.provider_uuid = customer.uuid;
-    }
-    if (filters?.offering?.uuid) {
-      filter.offering_uuid = [filters.offering.uuid];
-    }
-    if (filters?.parent_offering) {
-      filter.parent_offering_uuid = filters.parent_offering.uuid;
-    }
-    if (filters?.state) {
-      filter.state = filters.state.map((option) => option.value);
-      if (filters?.include_terminated) {
-        filter.state = [...filter.state, 'Terminated'];
-      }
-    } else {
-      if (!filters?.include_terminated) {
-        filter.state = NON_TERMINATED_STATES;
-      }
-    }
-    if (filters?.organization) {
-      filter.customer_uuid = filters.organization.uuid;
-    }
-    if (filters?.project) {
-      filter.project_uuid = filters.project.uuid;
-    }
-    if (filters?.category) {
-      filter.category_uuid = filters.category.uuid;
-    }
-    if (filters?.paused) {
-      filter.paused = true;
-    }
-    if (filters?.downscaled) {
-      filter.downscaled = true;
-    }
-    if (filters?.restrict_member_access) {
-      filter.restrict_member_access = true;
-    }
-    return filter;
-  },
-);
-
 const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
   [
     'uuid', // Almost all actions
@@ -358,16 +309,93 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'restrict_member_access', // ResourceFlags inline badge
   ];
 
-export const ProviderResourcesList: React.ComponentType<any> = () => {
-  const filter = useSelector((state) =>
-    mapStateToFilter(state, PROVIDER_RESOURCES_LIST_FILTER_FORM_ID),
-  );
+const ProviderResourcesListTable: FunctionComponent = () => {
+  const customer = useSelector(getCustomer);
+  const { values } = useFormState();
+  const filterValues: ResourceFilter = values;
+
+  useEffect(() => {
+    if (filterValues) {
+      syncFiltersToURL(filterValues);
+    }
+  }, [filterValues]);
+
+  const filter = useMemo(() => {
+    const filterObj: MarketplaceProviderResourcesListData['query'] = {};
+
+    filterObj.offering_billable = true;
+
+    if (customer) {
+      filterObj.provider_uuid = customer.uuid;
+    }
+    if (filterValues?.offering?.uuid) {
+      filterObj.offering_uuid = [filterValues.offering.uuid];
+    }
+    if (filterValues?.parent_offering) {
+      filterObj.parent_offering_uuid = filterValues.parent_offering.uuid;
+    }
+    if (filterValues?.state) {
+      filterObj.state = filterValues.state.map((option) => option.value as any);
+      if (filterValues?.include_terminated) {
+        filterObj.state = [...filterObj.state, 'Terminated'];
+      }
+    } else {
+      if (!filterValues?.include_terminated) {
+        filterObj.state = NON_TERMINATED_STATES;
+      }
+    }
+    if (filterValues?.organization) {
+      filterObj.customer_uuid = filterValues.organization.uuid;
+    }
+    if (filterValues?.project) {
+      filterObj.project_uuid = filterValues.project.uuid;
+    }
+    if (filterValues?.category) {
+      filterObj.category_uuid = filterValues.category.uuid;
+    }
+    if (filterValues?.paused) {
+      filterObj.paused = true;
+    }
+    if (filterValues?.downscaled) {
+      filterObj.downscaled = true;
+    }
+    if (filterValues?.restrict_member_access) {
+      filterObj.restrict_member_access = true;
+    }
+    return filterObj;
+  }, [customer, filterValues]);
+
   const tableProps = useTable({
     ...TableOptions,
     filter,
     mandatoryFields,
   });
+
   return (
-    <TableComponent {...tableProps} filters={<ProviderResourcesFilter />} />
+    <TableComponent
+      {...tableProps}
+      formId={PROVIDER_RESOURCES_LIST_FILTER_FORM_ID}
+      filters={<ProviderResourcesFilter />}
+    />
+  );
+};
+
+export const ProviderResourcesList: React.ComponentType<any> = () => {
+  const initialValues = useMemo(
+    () =>
+      getInitialValues({
+        state: getStates().filter((state) => state.value !== 'Terminated'),
+      }),
+    [],
+  );
+
+  return (
+    <Form
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+      initialValues={initialValues}
+    >
+      {() => <ProviderResourcesListTable />}
+    </Form>
   );
 };

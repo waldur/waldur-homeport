@@ -23,7 +23,7 @@ export const SlugGroup = ({ customer }: { customer?: Customer }) => {
   return (
     <FormGroup label={translate('Project slug')} description={helpText}>
       <Field
-        component={StringField as any}
+        component={StringField}
         name="slug"
         placeholder={template || translate('Auto-generated')}
       />

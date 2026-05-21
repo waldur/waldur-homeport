@@ -102,7 +102,7 @@ export const CreateSecurityGroupDialog: FC<CreateSecurityGroupDialogProps> = ({
                   </Form.Label>
                   <Field
                     id="create-sg-name"
-                    component={InputField as any}
+                    component={InputField}
                     name="name"
                     validate={composeValidators(...getLatinNameValidators())}
                     maxLength={150}
@@ -115,7 +115,7 @@ export const CreateSecurityGroupDialog: FC<CreateSecurityGroupDialogProps> = ({
                   </Form.Label>
                   <Field
                     id="create-sg-description"
-                    component={InputField as any}
+                    component={InputField}
                     name="description"
                     maxLength={4096}
                   />

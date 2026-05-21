@@ -74,8 +74,6 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
           isLoading={projectsLoading}
           isClearable
           placeholder={translate('Select project...')}
-          className="metronic-select-container"
-          classNamePrefix="metronic-select"
         />
       </div>
 

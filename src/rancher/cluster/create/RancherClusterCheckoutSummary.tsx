@@ -1,14 +1,12 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 import { CheckoutPricingRow } from '@/marketplace/deploy/CheckoutPricingRow';
 import { OrderSummary } from '@/marketplace/details/OrderSummary';
 import { NodeRole } from '@/rancher/types';
-import { type RootState } from '@/store/reducers';
 
-import { formNodesSelector } from './utils';
+import { useFormNodes } from './utils';
 
 const countNodesByRole = (role: NodeRole, nodes) =>
   nodes.filter((node) => (node.roles || []).includes(role)).length;
@@ -33,10 +31,10 @@ const getTotalCores = (nodes) => sum(getFlavorField('cores', nodes));
 
 const getTotalRam = (nodes) => sum(getFlavorField('ram', nodes));
 
-const getStats = (state: RootState) => {
-  const nodes = formNodesSelector(state);
-  if (!nodes) {
-    return {};
+const RancherExtraComponent = () => {
+  const nodes = useFormNodes();
+  if (!nodes || nodes.length === 0) {
+    return null;
   }
   const nodeCount = nodes.length;
   const agentCount = countNodesByRole('agent', nodes);
@@ -44,54 +42,35 @@ const getStats = (state: RootState) => {
   const totalCores = getTotalCores(nodes);
   const totalStorage = formatFilesize(getTotalStorage(nodes) * 1024);
   const totalRam = formatFilesize(getTotalRam(nodes));
-  return {
-    nodeCount,
-    agentCount,
-    serverCount,
-    totalCores,
-    totalStorage,
-    totalRam,
-  };
-};
 
-const connector = connect(getStats);
-
-const PureRancherExtraComponent = (props: ReturnType<typeof getStats>) =>
-  props.nodeCount ? (
+  return (
     <>
       <CheckoutPricingRow
         label={translate('Total number of nodes')}
-        value={props.nodeCount}
+        value={nodeCount}
       />
 
       <CheckoutPricingRow
         label={translate('Number of agent nodes')}
-        value={props.agentCount}
+        value={agentCount}
       />
 
       <CheckoutPricingRow
         label={translate('Number of server nodes')}
-        value={props.serverCount}
+        value={serverCount}
       />
 
-      <CheckoutPricingRow
-        label={translate('Total CPU')}
-        value={props.totalCores}
-      />
+      <CheckoutPricingRow label={translate('Total CPU')} value={totalCores} />
 
       <CheckoutPricingRow
         label={translate('Total storage')}
-        value={props.totalStorage}
+        value={totalStorage}
       />
 
-      <CheckoutPricingRow
-        label={translate('Total memory')}
-        value={props.totalRam}
-      />
+      <CheckoutPricingRow label={translate('Total memory')} value={totalRam} />
     </>
-  ) : null;
-
-const RancherExtraComponent = connector(PureRancherExtraComponent);
+  );
+};
 
 export const RancherClusterCheckoutSummary: FunctionComponent<any> = (
   props,

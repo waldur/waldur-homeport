@@ -1,38 +1,55 @@
+import { useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { EventsListData } from 'waldur-js-client';
 
 import { isEmpty } from '@/core/utils';
 import { BaseEventsList } from '@/events/BaseEventsList';
 import {
   CustomerEventsFilter,
+  CustomerEventsFilterFormId,
   selectCustomerEventsFilter,
 } from '@/table/generated/CustomerEventsFilter';
 import { getCustomer } from '@/workspace/selectors';
 
-const mapStateToFilter = createSelector(
-  getCustomer,
-  selectCustomerEventsFilter,
-  (customer, userFilter) => {
-    const filter: EventsListData['query'] = {
+const CustomerEventsListTable = () => {
+  const customer = useSelector(getCustomer);
+  const { values } = useFormState();
+  const userFilter = useMemo(
+    () => selectCustomerEventsFilter(values),
+    [values],
+  );
+
+  const filter = useMemo(() => {
+    if (!customer) return undefined;
+    const result: EventsListData['query'] = {
       ...userFilter,
       scope: customer.url,
     };
     if (isEmpty(userFilter.feature)) {
-      filter.feature = ['customers', 'projects', 'resources'];
+      result.feature = ['customers', 'projects', 'resources'];
     }
-    return filter;
-  },
-);
+    return result;
+  }, [customer, userFilter]);
 
-export const CustomerEventsList = () => {
-  const customer = useSelector(getCustomer);
-  const filter = useSelector(mapStateToFilter);
+  if (!customer) return null;
+
   return (
     <BaseEventsList
       table={`customer-events-${customer.uuid}`}
+      formId={CustomerEventsFilterFormId}
       filter={filter}
       filters={<CustomerEventsFilter />}
     />
   );
 };
+
+export const CustomerEventsList = () => (
+  <Form
+    id={CustomerEventsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <CustomerEventsListTable />}
+  </Form>
+);

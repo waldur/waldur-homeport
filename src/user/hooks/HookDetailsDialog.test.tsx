@@ -19,11 +19,6 @@ import { loadEventGroupsOptions } from './utils';
 // Mock the required modules
 vi.mock('waldur-js-client');
 vi.mock('./utils');
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-  }),
-}));
 vi.mock('@/store/notify', () => ({
   useNotify: vi.fn().mockReturnValue({
     showSuccess: vi.fn(),

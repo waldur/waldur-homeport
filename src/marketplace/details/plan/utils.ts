@@ -16,7 +16,7 @@ import {
   getFormLimitParser,
 } from '@/marketplace/common/registry';
 import { getBillingPeriods } from '@/marketplace/common/utils';
-import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { Limits } from '@/marketplace/details/types';
 import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
 import { Plan } from '@/marketplace/types';
@@ -350,48 +350,49 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
   };
 };
 
-const getPlan = (state, props) => {
-  if (props.viewMode && props.order) {
-    if (props.order.plan_uuid) {
-      if (props.type && props.type === 'old') {
-        return props.offering.plans.find(
-          (plan) => plan.uuid === props.order.old_plan_uuid,
+export const useOrderPrices = (props: {
+  offering: PublicOfferingDetails;
+  plan?: any;
+  limits?: any;
+  order?: any;
+  viewMode?: boolean;
+  type?: string;
+}): PricesData => {
+  const formData = useOrderFormData();
+
+  const plan: Plan = useMemo(() => {
+    if (props.viewMode && props.order) {
+      if (props.order.plan_uuid) {
+        if (props.type && props.type === 'old') {
+          return props.offering.plans?.find(
+            (plan) => plan.uuid === props.order.old_plan_uuid,
+          );
+        }
+        return props.offering.plans?.find(
+          (plan) => plan.uuid === props.order.plan_uuid,
         );
+      } else {
+        return props.offering.plans?.[0];
       }
-      return props.offering.plans.find(
-        (plan) => plan.uuid === props.order.plan_uuid,
-      );
-    } else {
-      return props.offering.plans[0];
     }
-  } else {
-    return orderFormSelector(state, 'plan');
-  }
-};
+    return formData?.plan || props.plan;
+  }, [props, formData]);
 
-const getLimits = (state, props) => {
-  const limitParser = getFormLimitParser(props.offering.type);
-  if (props.viewMode && props.order) {
-    return limitParser(props.order.limits);
-  } else {
-    return orderFormSelector(state, 'limits');
-  }
-};
+  const limits: Limits = useMemo(() => {
+    const limitParser = getFormLimitParser(props.offering.type);
+    if (props.viewMode && props.order) {
+      return limitParser(props.order.limits);
+    }
+    return formData?.limits || props.limits;
+  }, [props, formData]);
 
-export const getEndDate = (state) => {
-  return orderFormSelector(state, 'attributes.end_date');
-};
+  const endDate = formData?.attributes?.end_date;
+  const startDate = formData?.start_date;
 
-export const getStartDate = (state) => {
-  return orderFormSelector(state, 'start_date');
-};
-
-export const pricesSelector = (state, props): PricesData => {
-  const plan: Plan = getPlan(state, props) || props.plan;
-  const limits: Limits = getLimits(state, props) || props.limits;
-  const endDate = getEndDate(state);
-  const startDate = getStartDate(state);
-  return combinePrices(plan, limits, {}, props.offering, endDate, startDate);
+  return useMemo(
+    () => combinePrices(plan, limits, {}, props.offering, endDate, startDate),
+    [plan, limits, props.offering, endDate, startDate],
+  );
 };
 
 interface CostParts {

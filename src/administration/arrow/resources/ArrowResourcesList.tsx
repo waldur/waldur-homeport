@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form, useFormState } from 'react-final-form';
 import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -24,13 +23,17 @@ interface ArrowResourcesListProps {
   settings?: { uuid: string } | null;
 }
 
-export const ArrowResourcesList: FunctionComponent<
+const ArrowResourcesListTable: FunctionComponent<
   ArrowResourcesListProps
 > = () => {
-  const filterValues = useSelector(selectMarketplaceResourcesFilter);
-  const formValues: any = useSelector(
-    getFormValues(MarketplaceResourcesFilterFormId),
+  const { values } = useFormState();
+
+  const filterValues = useMemo(
+    () => selectMarketplaceResourcesFilter(values),
+    [values],
   );
+
+  const formValues = values;
 
   const filter = useMemo(
     () => ({
@@ -117,6 +120,19 @@ export const ArrowResourcesList: FunctionComponent<
       rowActions={({ row }) => (
         <ArrowResourcesActions row={row} refetch={tableProps.fetch} />
       )}
+      formId={MarketplaceResourcesFilterFormId}
     />
   );
 };
+
+export const ArrowResourcesList = (props) => (
+  <Form
+    id={MarketplaceResourcesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ArrowResourcesListTable {...props} />}
+  </Form>
+);

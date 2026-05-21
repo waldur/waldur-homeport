@@ -1,12 +1,14 @@
-import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { FunctionComponent, useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceProviderResourcesList,
   MarketplaceProviderResourcesListData,
+  Resource,
 } from 'waldur-js-client';
 
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { translate } from '@/i18n';
+import { Option } from '@/marketplace/common/registry';
 import {
   FILTER_OFFERING_RESOURCE,
   TABLE_OFFERING_RESOURCE,
@@ -29,30 +31,38 @@ interface OwnProps {
   offering: Offering;
 }
 
-export const OfferingResourcesList: FunctionComponent<OwnProps> = (
-  ownProps,
-) => {
-  const filterValues: any = useSelector(
-    getFormValues(FILTER_OFFERING_RESOURCE),
-  );
+interface FilterValues {
+  state?: Option[];
+  include_terminated?: boolean;
+}
+
+const OfferingResourcesListTable: FunctionComponent<OwnProps> = (props) => {
+  const { values } = useFormState();
+  const filterValues: FilterValues = values;
+
+  useEffect(() => {
+    if (filterValues) {
+      syncFiltersToURL(filterValues);
+    }
+  }, [filterValues]);
 
   const filter = useMemo(() => {
-    const filter: MarketplaceProviderResourcesListData['query'] = {};
+    const filterObj: MarketplaceProviderResourcesListData['query'] = {};
     if (filterValues?.state) {
-      filter.state = filterValues.state.map((option) => option.value);
+      filterObj.state = filterValues.state.map((option) => option.value as any);
       if (filterValues?.include_terminated) {
-        filter.state = [...filter.state, 'Terminated'];
+        filterObj.state = [...filterObj.state, 'Terminated'];
       }
     } else {
       if (!filterValues?.include_terminated) {
-        filter.state = NON_TERMINATED_STATES;
+        filterObj.state = NON_TERMINATED_STATES;
       }
     }
     return {
-      offering_uuid: ownProps.offering.uuid,
-      ...filter,
+      offering_uuid: props.offering.uuid,
+      ...filterObj,
     };
-  }, [ownProps.offering, filterValues]);
+  }, [props.offering, filterValues]);
 
   const tableProps = useTable({
     table: TABLE_OFFERING_RESOURCE,
@@ -63,8 +73,9 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
   });
 
   return (
-    <Table
+    <Table<Resource>
       {...tableProps}
+      formId={FILTER_OFFERING_RESOURCE}
       title={translate('Resources')}
       columns={getResourceAllListColumns(true, true)}
       hasOptionalColumns
@@ -79,5 +90,19 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
       )}
       filters={<OfferingResourcesFilter />}
     />
+  );
+};
+
+export const OfferingResourcesList: FunctionComponent<OwnProps> = (props) => {
+  const initialValues = useMemo(() => getInitialValues(), []);
+
+  return (
+    <Form
+      onSubmit={() => {}}
+      subscription={{ values: true }}
+      initialValues={initialValues}
+    >
+      {() => <OfferingResourcesListTable {...props} />}
+    </Form>
   );
 };

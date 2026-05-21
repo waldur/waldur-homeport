@@ -179,7 +179,7 @@ export const AttachManagedProjectDialog: React.FC<
             >
               <Field
                 name="project"
-                component={ProjectAutocompleteField as any}
+                component={ProjectAutocompleteField}
                 placeholder={translate('Select project')}
                 validate={required}
                 query={query}

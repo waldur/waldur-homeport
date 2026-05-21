@@ -53,7 +53,7 @@ export const QuestionRichTextFields: FC = () => (
     >
       <Field
         name="rich_text_char_limit"
-        component={NumberField as any}
+        component={NumberField}
         placeholder="5000"
         min={1}
       />

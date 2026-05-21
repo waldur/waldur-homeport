@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { marketplaceSoftwarePackagesList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -10,6 +10,7 @@ import { createFetcher } from '@/table/api';
 import {
   MarketplaceSoftwarePackagesFilter,
   selectMarketplaceSoftwarePackagesFilter,
+  MarketplaceSoftwarePackagesFilterFormId,
 } from '@/table/generated/MarketplaceSoftwarePackagesFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -21,7 +22,7 @@ interface PublicOfferingSoftwareCatalogTableProps {
   offering: Offering;
 }
 
-export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
+const PublicOfferingSoftwareCatalogTableTable: FunctionComponent<
   PublicOfferingSoftwareCatalogTableProps
 > = ({ offering }) => {
   const SoftwarePackageExpandableRowWithOffering = ({ row }) => (
@@ -62,7 +63,13 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
 
     return parts.length > 0 ? parts.join(' | ') : null;
   };
-  const formFilter = useSelector(selectMarketplaceSoftwarePackagesFilter);
+  const { values } = useFormState();
+
+  const formFilter = useMemo(
+    () => selectMarketplaceSoftwarePackagesFilter(values),
+    [values],
+  );
+
   const filter = useMemo(
     () => ({
       offering_uuid: offering.uuid,
@@ -194,6 +201,19 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
       filters={<MarketplaceSoftwarePackagesFilter />}
       filter={filter}
       expandableRow={SoftwarePackageExpandableRowWithOffering}
+      formId={MarketplaceSoftwarePackagesFilterFormId}
     />
   );
 };
+
+export const PublicOfferingSoftwareCatalogTable = (props) => (
+  <Form
+    id={MarketplaceSoftwarePackagesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <PublicOfferingSoftwareCatalogTableTable {...props} />}
+  </Form>
+);

@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { InvoiceStateEnum, InvoicesListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const InvoiceStateOptions: InvoiceStateOption[] = [
@@ -64,22 +62,17 @@ const PureInvoicesFilter: FunctionComponent<{}> = () => (
 
 export const InvoicesFilterFormId = 'InvoicesFilter';
 
-interface InvoicesFilterFormData {
+export interface InvoicesFilterFormData {
   state: InvoiceStateOption[];
 }
 
-export const InvoicesFilter = reduxForm<InvoicesFilterFormData, {}>({
-  form: InvoicesFilterFormId,
-  destroyOnUnmount: false,
-})(PureInvoicesFilter);
+export const InvoicesFilter = PureInvoicesFilter;
 
 type InvoicesFilterQuery = InvoicesListData['query'];
 
-export const selectInvoicesFilter = createSelector<
-  RootState,
-  Partial<InvoicesFilterFormData>,
-  InvoicesFilterQuery
->(getFormValues(InvoicesFilterFormId), (values) => {
+export const selectInvoicesFilter = (
+  values?: Partial<InvoicesFilterFormData>,
+): InvoicesFilterQuery => {
   const filter: InvoicesFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -87,4 +80,4 @@ export const selectInvoicesFilter = createSelector<
     }
   }
   return filter;
-});
+};

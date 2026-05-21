@@ -97,13 +97,16 @@ export const BackupRestoreDialog: FC<{
                 </FormGroup>
                 <FormGroup className="mb-5">
                   <FormLabel>{translate('Networks')}</FormLabel>
-                  <FieldArray
-                    name="networks"
-                    component={NetworksList as any}
-                    subnets={asyncState.value.subnets}
-                    floatingIps={asyncState.value.floatingIps}
-                    values={values}
-                  />
+                  <FieldArray name="networks">
+                    {({ fields }) => (
+                      <NetworksList
+                        fields={fields}
+                        subnets={asyncState.value.subnets}
+                        floatingIps={asyncState.value.floatingIps}
+                        values={values}
+                      />
+                    )}
+                  </FieldArray>
                 </FormGroup>
               </>
             ) : null}

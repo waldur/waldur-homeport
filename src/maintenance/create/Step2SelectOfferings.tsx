@@ -30,7 +30,7 @@ const baseFilter = {
 const ImpactLevelField = ({ row }) => (
   <Field
     name={`impact_level.${row.uuid}`}
-    component={SelectField as any}
+    component={SelectField}
     defaultOptions
     options={impactLevelOptions}
     noOptionsMessage={() => translate('No results found')}
@@ -42,7 +42,7 @@ const ImpactLevelField = ({ row }) => (
 const DescriptionField = ({ row }) => (
   <Field
     name={`impact_description.${row.uuid}`}
-    component={TextField as any}
+    component={TextField}
     placeholder={translate('Describe specific impact on this service...')}
     className="my-1"
     rows="2"

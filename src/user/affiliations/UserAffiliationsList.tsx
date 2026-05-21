@@ -1,7 +1,6 @@
 import { uniqueId } from 'lodash-es';
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form, useFormState } from 'react-final-form';
 import { userPermissionsList, UserPermissionsListData } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
@@ -39,12 +38,11 @@ const rowsParser = (data: any[]) => {
   return data;
 };
 
-export const UserAffiliationsList: FunctionComponent<
+const UserAffiliationsListTable: FunctionComponent<
   UserAffiliationsListProps
 > = ({ user, hasActionBar = true, fullWidth }) => {
-  const formValues = (useSelector((state) =>
-    getFormValues('UserAffiliationsFilter')(state),
-  ) as UserAffiliationsFilterValues) || {
+  const { values } = useFormState();
+  const formValues = (values as UserAffiliationsFilterValues) || {
     scope_type: undefined,
     scope_name: undefined,
     role: undefined,
@@ -55,7 +53,10 @@ export const UserAffiliationsList: FunctionComponent<
     };
 
     if (formValues?.scope_type) {
-      result.scope_type = formValues.scope_type;
+      result.scope_type =
+        typeof formValues.scope_type === 'object'
+          ? (formValues.scope_type as any).value
+          : formValues.scope_type;
     }
     if (formValues?.scope_name) {
       result.scope_name = formValues.scope_name;
@@ -168,6 +169,7 @@ export const UserAffiliationsList: FunctionComponent<
     <Table
       {...props}
       columns={columns}
+      formId="UserAffiliationsFilter"
       verboseName={translate('affiliations')}
       title={translate('Roles and permissions')}
       filters={<UserAffiliationsFilter />}
@@ -183,3 +185,11 @@ export const UserAffiliationsList: FunctionComponent<
     />
   );
 };
+
+export const UserAffiliationsList: FunctionComponent<
+  UserAffiliationsListProps
+> = (props) => (
+  <Form onSubmit={() => {}} subscription={{ values: true }}>
+    {() => <UserAffiliationsListTable {...props} />}
+  </Form>
+);

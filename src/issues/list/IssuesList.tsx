@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { Issue, supportIssuesList } from 'waldur-js-client';
 
 import { formatDate, formatRelative } from '@/core/dateUtils';
@@ -13,6 +13,7 @@ import {
   SupportIssuesFilter as IssuesFilter,
   selectSupportIssuesFilter as selectIssuesFilter,
   StatusOptions,
+  SupportIssuesFilterFormId,
 } from '@/table/generated/SupportIssuesFilter';
 import Table from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
@@ -37,18 +38,19 @@ interface OwnProps {
   standalone?: boolean;
 }
 
-export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
+const IssuesListTable: FC<OwnProps & Partial<TableProps>> = (props) => {
   const { hiddenColumns = [], standalone = true } = props;
   const user = useUser();
   const supportOrStaff = user?.is_staff || user?.is_support || false;
 
-  const filter = useSelector(selectIssuesFilter);
+  const { values } = useFormState();
+  const filterValues = useMemo(() => selectIssuesFilter(values), [values]);
 
   const tableProps = useTable({
     table: `issuesList-${props.scope?.uuid}`,
     fetchData: createFetcher(supportIssuesList),
     queryField: 'query',
-    filter: props.filter || filter,
+    filter: props.filter || filterValues,
   });
 
   const columns = useMemo(() => {
@@ -162,6 +164,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
   return (
     <Table
       {...tableProps}
+      formId={SupportIssuesFilterFormId}
       filters={props.filter ? undefined : <IssuesFilter />}
       columns={columns}
       title={translate('Support requests')}
@@ -187,3 +190,13 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
     />
   );
 };
+
+export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => (
+  <Form
+    id={SupportIssuesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <IssuesListTable {...props} />}
+  </Form>
+);

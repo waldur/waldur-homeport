@@ -1,9 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field as FinalField } from 'react-final-form';
 
-import { syncFiltersToURL, useReinitializeFilterFromUrl } from '@/core/filters';
-import { SelectField } from '@/form';
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
 import { OfferingStateFilter } from '@/marketplace/offerings/list/OfferingStateFilter';
@@ -11,8 +9,6 @@ import { ServiceProviderAutocomplete } from '@/marketplace/offerings/ServiceProv
 import { CategoryFilter } from '@/marketplace/resources/list/CategoryFilter';
 import { TagFilter } from '@/marketplace/tags/TagFilter';
 import { TableFilterItem } from '@/table/TableFilterItem';
-
-import { OFFERINGS_FILTER_FORM_ID } from '../constants';
 
 interface OfferingsListFilterOwnProps {
   showCategory?;
@@ -30,10 +26,9 @@ const sharedOptions = [
   },
 ];
 
-const PureOfferingsListFilter: FunctionComponent<
+export const OfferingsListFilter: FunctionComponent<
   OfferingsListFilterOwnProps
 > = ({ showCategory, showOrganization = true }) => {
-  useReinitializeFilterFromUrl(OFFERINGS_FILTER_FORM_ID);
   return (
     <>
       <TableFilterItem
@@ -82,19 +77,16 @@ const PureOfferingsListFilter: FunctionComponent<
       <TableFilterItem
         name="shared"
         title={translate('Shared')}
-        getValueLabel={(value) =>
-          sharedOptions.find((op) => op.value === value).label
-        }
+        badgeValue={(value) => value?.label}
       >
-        <Field
+        <FinalField
           name="shared"
           component={(fieldProps) => (
-            <SelectField
-              {...fieldProps}
+            <Select
               placeholder={translate('Select status')}
               options={sharedOptions}
-              noUpdateOnBlur={true}
-              simpleValue={true}
+              value={fieldProps.input.value}
+              onChange={(value) => fieldProps.input.onChange(value)}
               isClearable={true}
               {...REACT_SELECT_TABLE_FILTER}
             />
@@ -104,11 +96,3 @@ const PureOfferingsListFilter: FunctionComponent<
     </>
   );
 };
-
-const enhance = reduxForm<{}, OfferingsListFilterOwnProps>({
-  form: OFFERINGS_FILTER_FORM_ID,
-  destroyOnUnmount: false,
-  onChange: syncFiltersToURL,
-});
-
-export const OfferingsListFilter = enhance(PureOfferingsListFilter);

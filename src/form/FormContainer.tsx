@@ -1,13 +1,12 @@
 import React, { PropsWithChildren } from 'react';
 import { Row } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { FormGroup } from './FormGroup';
 
 interface FormContainerProps {
   className?: string;
-  submitting: boolean;
-  clearOnUnmount?: boolean;
+  submitting?: boolean;
   asRow?: boolean;
   space?: number;
 }
@@ -25,13 +24,11 @@ export const FormContainer: React.FC<PropsWithChildren<FormContainerProps>> = (
         {React.Children.map(props.children, (input: any) =>
           input && input.props && input.props.name ? (
             <Field
-              key={input.name}
+              key={input.props.name}
               space={props.space}
               {...input.props}
               component={FormGroup}
               disabled={props.submitting || input.props.disabled}
-              clearOnUnmount={props.clearOnUnmount}
-              validate={input.props.validate}
             >
               {input}
             </Field>

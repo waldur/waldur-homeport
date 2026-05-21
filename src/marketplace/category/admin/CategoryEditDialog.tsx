@@ -133,16 +133,12 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
           >
             <Field
               name="icon"
-              component={ImageField as any}
+              component={ImageField}
               initialValue={categoryData?.icon}
             />
 
             <FormGroup label={translate('Title')} required>
-              <Field
-                name="title"
-                validate={required}
-                component={StringField as any}
-              />
+              <Field name="title" validate={required} component={StringField} />
             </FormGroup>
 
             {errorGroups ? (
@@ -154,7 +150,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
               <FormGroup label={translate('Group')}>
                 <Field
                   name="group"
-                  component={SelectField as any}
+                  component={SelectField}
                   getOptionLabel={(option) => option.title}
                   getOptionValue={(option) => option.url}
                   options={categoryGroups}
@@ -165,11 +161,11 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
               </FormGroup>
             )}
             <FormGroup label={translate('Description')}>
-              <Field name="description" component={TextField as any} />
+              <Field name="description" component={TextField} />
             </FormGroup>
 
             <Field
-              component={AwesomeCheckboxField as any}
+              component={AwesomeCheckboxField}
               name="default_volume_category"
               label={translate('Default volume category')}
               description={translate(
@@ -179,7 +175,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
             />
 
             <Field
-              component={AwesomeCheckboxField as any}
+              component={AwesomeCheckboxField}
               name="default_vm_category"
               label={translate('Default vm category')}
               description={translate(
@@ -189,7 +185,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
             />
 
             <Field
-              component={AwesomeCheckboxField as any}
+              component={AwesomeCheckboxField}
               name="default_tenant_category"
               label={translate('Default tenant category')}
               description={translate(

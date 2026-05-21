@@ -192,7 +192,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
               <div className="size-lg">
                 <FormGroup label={translate('Token name')} required>
                   <Field
-                    component={StringField as any}
+                    component={StringField}
                     name="name"
                     validate={required}
                     placeholder={translate('e.g. CI/CD pipeline token')}
@@ -206,7 +206,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                   )}
                 >
                   <Field
-                    component={SelectField as any}
+                    component={SelectField}
                     name="scopes"
                     validate={required}
                     isMulti
@@ -243,7 +243,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                               <div style={{ flex: '0 0 220px' }}>
                                 <Field
                                   name={`${name}.type`}
-                                  component={SelectField as any}
+                                  component={SelectField}
                                   simpleValue
                                   options={typeOptions}
                                   placeholder={translate('Type')}
@@ -307,7 +307,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                   )}
                 >
                   <Field
-                    component={DateField as any}
+                    component={DateField}
                     name="expires_at"
                     validate={required}
                     minDate={minDate}

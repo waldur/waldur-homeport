@@ -102,7 +102,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               <Field
                 name="name"
                 validate={required}
-                component={StringField as any}
+                component={StringField}
                 placeholder={translate('e.g. GDPR Compliance')}
               />
             </FormGroup>
@@ -110,7 +110,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
             <FormGroup label={translate('Checklist type')} required space={5}>
               <Field
                 name="checklist_type"
-                component={SelectField as any}
+                component={SelectField}
                 options={allowedChecklistTypeOptions}
                 validate={required}
                 simpleValue
@@ -120,7 +120,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
             <FormGroup label={translate('Description')} space={5}>
               <Field
                 name="description"
-                component={TextField as any}
+                component={TextField}
                 placeholder={translate(
                   'Brief description of this checklist...',
                 )}

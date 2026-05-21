@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { REACT_MULTI_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
 import { translate } from '@/i18n';

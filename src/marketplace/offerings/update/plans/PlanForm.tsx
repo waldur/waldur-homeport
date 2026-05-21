@@ -13,13 +13,13 @@ import { PlanBillingPeriodField } from './PlanBillingPeriodField';
 export const PlanForm = () => (
   <>
     <FormGroup label={translate('Name')} required={true}>
-      <Field name="name" component={StringField as any} validate={required} />
+      <Field name="name" component={StringField} validate={required} />
     </FormGroup>
     <FormGroup label={translate('Billing period')} required={true}>
       <PlanBillingPeriodField />
     </FormGroup>
     <FormGroup label={translate('Description')}>
-      <Field name="description" component={MarkdownEditor as any} />
+      <Field name="description" component={MarkdownEditor} />
     </FormGroup>
     <ArticleCodeField />
   </>

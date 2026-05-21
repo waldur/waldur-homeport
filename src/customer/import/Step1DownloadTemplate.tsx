@@ -2,7 +2,8 @@ import Papa from 'papaparse';
 import { FC, useMemo } from 'react';
 
 import { formatFilesize } from '@/core/utils';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { WizardForm } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
 import saveAsCsv from '@/table/exporters/csv';

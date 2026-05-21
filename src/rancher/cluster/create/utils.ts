@@ -11,7 +11,7 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
-import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import {
   loadFlavors,
   loadSecurityGroups,
@@ -24,7 +24,6 @@ import {
 } from '@/openstack/openstack-instance/utils';
 import { NodeField } from '@/rancher/types';
 import { formatFlavor } from '@/resource/utils';
-import { type RootState } from '@/store/reducers';
 
 const CLUSTER_NAME_PATTERN = new RegExp('^[a-z0-9]([-a-z0-9])+[a-z0-9]$');
 
@@ -116,8 +115,12 @@ export const getDataVolumes = (nodeIndex, allValues) => {
   }
 };
 
-export const formTenantSelector = (state: RootState) =>
-  orderFormSelector(state, 'attributes.tenant');
+export const useFormTenant = () => {
+  const { attributes = {} } = useOrderFormData();
+  return attributes.tenant;
+};
 
-export const formNodesSelector = (state: RootState): NodeField[] =>
-  orderFormSelector(state, 'attributes.nodes');
+export const useFormNodes = (): NodeField[] => {
+  const { attributes = {} } = useOrderFormData();
+  return attributes.nodes || [];
+};

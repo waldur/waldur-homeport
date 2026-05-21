@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   MarketplacePlansUsageStatsListData,
   ProviderOfferingDetails,
@@ -13,7 +12,6 @@ import {
 
 import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -44,7 +42,6 @@ const PureMarketplacePlansUsageStatsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -74,7 +71,6 @@ const PureMarketplacePlansUsageStatsFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -85,27 +81,20 @@ const PureMarketplacePlansUsageStatsFilter: FunctionComponent<{}> = () => (
 export const MarketplacePlansUsageStatsFilterFormId =
   'MarketplacePlansUsageStatsFilter';
 
-interface MarketplacePlansUsageStatsFilterFormData {
+export interface MarketplacePlansUsageStatsFilterFormData {
   provider: ServiceProvider;
   offering: ProviderOfferingDetails;
 }
 
-export const MarketplacePlansUsageStatsFilter = reduxForm<
-  MarketplacePlansUsageStatsFilterFormData,
-  {}
->({
-  form: MarketplacePlansUsageStatsFilterFormId,
-  destroyOnUnmount: false,
-})(PureMarketplacePlansUsageStatsFilter);
+export const MarketplacePlansUsageStatsFilter =
+  PureMarketplacePlansUsageStatsFilter;
 
 type MarketplacePlansUsageStatsFilterQuery =
   MarketplacePlansUsageStatsListData['query'];
 
-export const selectMarketplacePlansUsageStatsFilter = createSelector<
-  RootState,
-  Partial<MarketplacePlansUsageStatsFilterFormData>,
-  MarketplacePlansUsageStatsFilterQuery
->(getFormValues(MarketplacePlansUsageStatsFilterFormId), (values) => {
+export const selectMarketplacePlansUsageStatsFilter = (
+  values?: Partial<MarketplacePlansUsageStatsFilterFormData>,
+): MarketplacePlansUsageStatsFilterQuery => {
   const filter: MarketplacePlansUsageStatsFilterQuery = {} as any;
   if (values) {
     if (values.provider) {
@@ -116,4 +105,4 @@ export const selectMarketplacePlansUsageStatsFilter = createSelector<
     }
   }
   return filter;
-});
+};

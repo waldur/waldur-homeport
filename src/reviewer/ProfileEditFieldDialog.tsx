@@ -66,7 +66,7 @@ export const ProfileEditFieldDialog: React.FC<ProfileEditFieldDialogProps> = ({
           >
             {resolve.name === 'biography' ? (
               <FormGroup label={resolve.label}>
-                <Field name="biography" component={TextField as any} rows={4} />
+                <Field name="biography" component={TextField} rows={4} />
               </FormGroup>
             ) : resolve.name === 'orcid_id' ? (
               <FormGroup
@@ -75,13 +75,13 @@ export const ProfileEditFieldDialog: React.FC<ProfileEditFieldDialogProps> = ({
               >
                 <Field
                   name="orcid_id"
-                  component={StringField as any}
+                  component={StringField}
                   placeholder="0000-0000-0000-0000"
                 />
               </FormGroup>
             ) : (
               <FormGroup label={resolve.label}>
-                <Field name={resolve.name} component={StringField as any} />
+                <Field name={resolve.name} component={StringField} />
               </FormGroup>
             )}
           </ModalDialog>

@@ -13,7 +13,6 @@ import { RenewAllocationDialog } from './RenewAllocationDialog';
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/modal/actions');
 vi.mock('@/i18n', () => ({
   translate: (key, context) => {
     if (context) {

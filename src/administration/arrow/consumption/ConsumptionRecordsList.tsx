@@ -1,6 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import {
   adminArrowConsumptionRecordsList,
   ArrowConsumptionRecord,
@@ -16,6 +16,7 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   AdminArrowConsumptionRecordsFilter as ConsumptionRecordsFilter,
   selectAdminArrowConsumptionRecordsFilter as selectConsumptionRecordsFilter,
+  AdminArrowConsumptionRecordsFilterFormId,
 } from '@/table/generated/AdminArrowConsumptionRecordsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -40,10 +41,15 @@ interface ConsumptionRecordsListProps {
   settings?: { uuid: string } | null;
 }
 
-export const ConsumptionRecordsList: FunctionComponent<
+const ConsumptionRecordsListTable: FunctionComponent<
   ConsumptionRecordsListProps
 > = () => {
-  const filter = useSelector(selectConsumptionRecordsFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectConsumptionRecordsFilter(values),
+    [values],
+  );
 
   const tableProps = useTable({
     table: 'ArrowConsumptionRecords',
@@ -152,9 +158,22 @@ export const ConsumptionRecordsList: FunctionComponent<
       tableActions={<ForceImportConsumptionButton refetch={tableProps.fetch} />}
       filters={<ConsumptionRecordsFilter />}
       expandableRow={ConsumptionRecordDetail}
+      formId={AdminArrowConsumptionRecordsFilterFormId}
     />
   );
 };
+
+export const ConsumptionRecordsList = (props) => (
+  <Form
+    id={AdminArrowConsumptionRecordsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ConsumptionRecordsListTable {...props} />}
+  </Form>
+);
 
 // Expandable row component
 const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (

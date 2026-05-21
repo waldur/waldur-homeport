@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   OpenportalManagedProjectsListData,
   RemoteProjectUpdateRequestStateEnum,
@@ -10,7 +9,6 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const RemoteProjectUpdateRequestStateOptions: RemoteProjectUpdateRequestStateOption[] =
@@ -75,26 +73,19 @@ const PureOpenportalManagedProjectsFilter: FunctionComponent<{}> = () => (
 export const OpenportalManagedProjectsFilterFormId =
   'OpenportalManagedProjectsFilter';
 
-interface OpenportalManagedProjectsFilterFormData {
+export interface OpenportalManagedProjectsFilterFormData {
   state: RemoteProjectUpdateRequestStateOption[];
 }
 
-export const OpenportalManagedProjectsFilter = reduxForm<
-  OpenportalManagedProjectsFilterFormData,
-  {}
->({
-  form: OpenportalManagedProjectsFilterFormId,
-  destroyOnUnmount: false,
-})(PureOpenportalManagedProjectsFilter);
+export const OpenportalManagedProjectsFilter =
+  PureOpenportalManagedProjectsFilter;
 
 type OpenportalManagedProjectsFilterQuery =
   OpenportalManagedProjectsListData['query'];
 
-export const selectOpenportalManagedProjectsFilter = createSelector<
-  RootState,
-  Partial<OpenportalManagedProjectsFilterFormData>,
-  OpenportalManagedProjectsFilterQuery
->(getFormValues(OpenportalManagedProjectsFilterFormId), (values) => {
+export const selectOpenportalManagedProjectsFilter = (
+  values?: Partial<OpenportalManagedProjectsFilterFormData>,
+): OpenportalManagedProjectsFilterQuery => {
   const filter: OpenportalManagedProjectsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
@@ -102,4 +93,4 @@ export const selectOpenportalManagedProjectsFilter = createSelector<
     }
   }
   return filter;
-});
+};

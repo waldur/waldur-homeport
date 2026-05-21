@@ -1,7 +1,8 @@
 import { FactoryIcon } from '@phosphor-icons/react';
+import { FieldValidator } from 'final-form';
 import React, { useCallback } from 'react';
+import { Field } from 'react-final-form';
 import { Props as SelectProps } from 'react-select';
-import { BaseFieldProps, Field } from 'redux-form';
 
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
@@ -14,7 +15,7 @@ interface ProjectFilterProps {
   placeholder?: string;
   isDisabled?: boolean;
   reactSelectProps?: Partial<SelectProps>;
-  validator?: BaseFieldProps['validate'];
+  validator?: FieldValidator<any>;
 }
 
 const getOptionLabel = (option) => (
@@ -33,15 +34,6 @@ const getOptionValue = (option) => option.uuid;
 const noOptionsMessage = () => translate('No projects');
 
 export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => {
-  // The Field `component` prop must be a stable reference. An inline
-  // arrow here would be a fresh function on every parent render, causing
-  // redux-form to unmount and re-mount the underlying AsyncPaginate
-  // each time. The Add Resource modal hits this path twice per
-  // org-change (once on customer_uuid prop change, again on isDisabled
-  // flip) and the resulting DOM thrash is what makes Playwright's
-  // SelectComponent click race in CI. useCallback closes over the props
-  // the inner closure depends on so we only re-create the renderer
-  // when those props actually change.
   const { placeholder, customer_uuid, isDisabled, reactSelectProps } = props;
   const renderField = useCallback(
     (fieldProps) => (
@@ -58,14 +50,13 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => {
         noOptionsMessage={noOptionsMessage}
         isClearable={true}
         isDisabled={isDisabled}
-        className="metronic-select-container"
-        classNamePrefix="metronic-select"
         inputId="project-selector-input"
         {...reactSelectProps}
       />
     ),
     [placeholder, customer_uuid, isDisabled, reactSelectProps],
   );
+
   return (
     <Field name="project" validate={props.validator} component={renderField} />
   );

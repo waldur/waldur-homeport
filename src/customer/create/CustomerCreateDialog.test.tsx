@@ -12,11 +12,6 @@ import { CustomerCreateDialog } from './CustomerCreateDialog';
 // Mock API calls
 vi.mock('waldur-js-client');
 vi.mock('@/user/UsersService');
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-  }),
-}));
 
 // Mock i18n
 vi.mock('@/i18n', () => ({

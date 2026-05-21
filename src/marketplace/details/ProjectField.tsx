@@ -1,20 +1,20 @@
 import { FC, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 
 import { required } from '@/core/validators';
 import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { ProjectCreateButton } from '@/project/create/ProjectCreateButton';
 import { setCurrentProject } from '@/workspace/actions';
 
 import { projectAutocomplete } from '../common/autocompletes';
-import { orderCustomerSelector } from '../deploy/selectors';
 import { FormGroup } from '../offerings/FormGroup';
 
 const ProjectSelect = ({ input }) => {
   const dispatch = useDispatch();
-  const customer = useSelector(orderCustomerSelector);
+  const { customer } = useOrderFormData();
 
   const loadOptions = useCallback(
     (query, prevOptions, { page }) =>
@@ -49,8 +49,6 @@ const ProjectSelect = ({ input }) => {
       getOptionLabel={(option) => option.name}
       isClearable={false}
       isDisabled={!customer}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
     />
   );
 };
@@ -61,7 +59,7 @@ interface ProjectFieldProps {
 }
 
 export const ProjectField: FC<ProjectFieldProps> = ({ previewMode }) => {
-  const customer = useSelector(orderCustomerSelector);
+  const { customer } = useOrderFormData();
 
   return (
     <FormGroup

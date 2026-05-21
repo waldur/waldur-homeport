@@ -44,7 +44,7 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
       ) : (
         <FormGroup label={translate('When estimated cost reaches')} required>
           <Field
-            component={NumberField as any}
+            component={NumberField}
             name="limit_cost"
             placeholder={translate('Enter the cost threshold (e.g. 1000 EUR)')}
             unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
@@ -55,7 +55,7 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
 
       <FormGroup label={translate('Then')} required>
         <Field
-          component={SelectField as any}
+          component={SelectField}
           name="actions"
           placeholder={translate(
             'Select action to take when the condition is met...',
@@ -70,7 +70,7 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
 
       <FormGroup label={translate('Period')} required>
         <Field
-          component={SelectField as any}
+          component={SelectField}
           name="period"
           placeholder={translate('Select period')}
           options={Object.values(policyPeriodOptions)}
@@ -91,7 +91,7 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
       ) : (
         <FormGroup label={translate('Organization groups')} required>
           <Field
-            component={SelectField as any}
+            component={SelectField}
             name="organization_groups"
             placeholder={translate('Select organization groups')}
             options={organizationGroups}

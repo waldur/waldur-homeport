@@ -4,16 +4,16 @@ import { Card } from 'react-bootstrap';
 import { OnboardingVerification } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { RadialBg } from '@/navigation/header/search/RadialBg';
 
 import './OrganizationReviewStatus.scss';
 
-interface OrganizationCreateStep3Props extends WizardFormStepProps {
+interface OrganizationCreateStep3Props {
   validationResult?: OnboardingVerification | null;
   validationLoading?: boolean;
   isManual?: boolean;
+  onSubmitDisabledChange?: (disabled: boolean) => void;
 }
 
 export const OrganizationCreateStep3: FunctionComponent<
@@ -23,6 +23,11 @@ export const OrganizationCreateStep3: FunctionComponent<
 
   // Disable next button when automatic validation is escalated
   const submitDisabled = validationResult?.status === 'escalated' && !isManual;
+
+  // Notify parent about submit disabled state
+  if (props.onSubmitDisabledChange) {
+    props.onSubmitDisabledChange(submitDisabled);
+  }
 
   const getStatusIcon = () => {
     if (!validationResult) return null;
@@ -107,42 +112,40 @@ export const OrganizationCreateStep3: FunctionComponent<
   };
 
   return (
-    <WizardForm {...props} submitDisabled={submitDisabled}>
-      <div className="d-flex flex-column gap-5">
-        <Card className="border-0 shadow-sm">
-          <Card.Body className="text-center position-relative overflow-hidden organization-validation-result">
-            <RadialBg className="icon-background" />
-            {validationLoading ? (
-              <>
-                <LoadingSpinner />
-                <h5 className="mt-6 mb-3">
-                  {translate('Verifying your company...')}
-                </h5>
-                <p className="text-muted">
-                  {translate(
-                    'Please wait while we check your company information in the business registry.',
-                  )}
-                </p>
-              </>
-            ) : validationResult ? (
-              <>
-                {getStatusIcon()}
-                <h3 className="mb-3 fw-bold">{getStatusTitle()}</h3>
-                <p
-                  className="text-muted mb-0 fs-5 mb-20"
-                  style={{ maxWidth: '500px', margin: '0 auto' }}
-                >
-                  {getStatusMessage()}
-                </p>
-              </>
-            ) : (
-              <p className="text-muted mb-0">
-                {translate('No validation results available.')}
+    <div className="d-flex flex-column gap-5">
+      <Card className="border-0 shadow-sm">
+        <Card.Body className="text-center position-relative overflow-hidden organization-validation-result">
+          <RadialBg className="icon-background" />
+          {validationLoading ? (
+            <>
+              <LoadingSpinner />
+              <h5 className="mt-6 mb-3">
+                {translate('Verifying your company...')}
+              </h5>
+              <p className="text-muted">
+                {translate(
+                  'Please wait while we check your company information in the business registry.',
+                )}
               </p>
-            )}
-          </Card.Body>
-        </Card>
-      </div>
-    </WizardForm>
+            </>
+          ) : validationResult ? (
+            <>
+              {getStatusIcon()}
+              <h3 className="mb-3 fw-bold">{getStatusTitle()}</h3>
+              <p
+                className="text-muted mb-0 fs-5 mb-20"
+                style={{ maxWidth: '500px', margin: '0 auto' }}
+              >
+                {getStatusMessage()}
+              </p>
+            </>
+          ) : (
+            <p className="text-muted mb-0">
+              {translate('No validation results available.')}
+            </p>
+          )}
+        </Card.Body>
+      </Card>
+    </div>
   );
 };

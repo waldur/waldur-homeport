@@ -1,6 +1,6 @@
 import { DownloadSimpleIcon, EnvelopeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { OrderDetails } from 'waldur-js-client';
+import { Offering, OrderDetails } from 'waldur-js-client';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -28,6 +28,10 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
   order,
   offering,
   refetch,
+}: {
+  order: OrderDetails;
+  offering: Offering;
+  refetch: () => void | Promise<void>;
 }) => {
   const user = useUser();
   const { openDialog } = useModal();
@@ -36,7 +40,7 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
     return (
       order.state === 'pending-provider' &&
       order.provider_message &&
-      offering?.plugin_options?.['enable_provider_consumer_messaging'] &&
+      offering?.plugin_options?.enable_provider_consumer_messaging &&
       hasPermission(user, {
         permission: PermissionEnum.SET_CONSUMER_ORDER_INFO,
         customerId: order.customer_uuid,

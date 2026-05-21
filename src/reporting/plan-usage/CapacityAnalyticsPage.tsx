@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import { marketplacePlansUsageStatsList } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { selectMarketplacePlansUsageStatsFilter } from '@/table/generated/MarketplacePlansUsageStatsFilter';
+import {
+  selectMarketplacePlansUsageStatsFilter,
+  MarketplacePlansUsageStatsFilterFormId,
+} from '@/table/generated/MarketplacePlansUsageStatsFilter';
 
 import { AnalyticsMode, AnalyticsPageContent } from '../analytics';
 import { ReportingTitle } from '../ReportingTitle';
@@ -35,13 +38,17 @@ const modeConfig: Record<
   },
 };
 
-export const CapacityAnalyticsPage: FC = () => {
+const CapacityAnalyticsPageTable: FC = () => {
   const { params } = useCurrentStateAndParams();
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
 
-  // Get filter values from the form if available
-  const filter = useSelector(selectMarketplacePlansUsageStatsFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectMarketplacePlansUsageStatsFilter(values),
+    [values],
+  );
 
   // Fetch plan usage data
   const {
@@ -102,3 +109,15 @@ export const CapacityAnalyticsPage: FC = () => {
     </>
   );
 };
+
+export const CapacityAnalyticsPage: FC<any> = (props) => (
+  <Form
+    id={MarketplacePlansUsageStatsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <CapacityAnalyticsPageTable {...props} />}
+  </Form>
+);

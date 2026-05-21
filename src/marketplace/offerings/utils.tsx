@@ -1,4 +1,3 @@
-import { change } from 'redux-form';
 import { User } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -7,7 +6,6 @@ import { Offering } from '@/marketplace/types';
 import { IBreadcrumbItem } from '@/navigation/types';
 import { checkCustomerUser } from '@/workspace/selectors';
 
-import { OFFERINGS_FILTER_FORM_ID } from './constants';
 import { PublicOfferingBreadcrumbPopover } from './PublicOfferingBreadcrumbPopover';
 
 const ARTICLE_CODE_PATTERN = new RegExp(
@@ -78,7 +76,6 @@ export const scrollToSectionById = (section: string, extraOffset = 180) => {
 
 export const getPublicOfferingBreadcrumbItems = (
   offering,
-  dispatch,
   router,
 ): IBreadcrumbItem[] => {
   return [
@@ -102,12 +99,11 @@ export const getPublicOfferingBreadcrumbItems = (
       onClick: () => {
         if (!offering) return;
         // Set organization filter to offerings
-        const customer = {
-          name: offering.customer_name,
-          uuid: offering.customer_uuid,
-        };
-        dispatch(change(OFFERINGS_FILTER_FORM_ID, 'organization', customer));
-        router.stateService.go('public.offerings');
+        const url = router.stateService.href('public.offerings');
+        const organizationParam = encodeURIComponent(
+          `${offering.customer_uuid}::${offering.customer_name || ''}`,
+        );
+        router.urlService.url(`${url}?organization=${organizationParam}`);
       },
     },
     {

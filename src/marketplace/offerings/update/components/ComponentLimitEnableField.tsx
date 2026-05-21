@@ -8,7 +8,7 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 export const ComponentLimitEnableField: React.FC = () => (
   <FormGroup space={5}>
     <Field
-      component={AwesomeCheckboxField as any}
+      component={AwesomeCheckboxField}
       label={translate('Enable limit')}
       name="limit_amount"
       format={(v) => v !== null && typeof v != 'undefined'}

@@ -1,6 +1,6 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import {
   Invitation,
   Resource,
@@ -18,6 +18,7 @@ import { createFetcher } from '@/table/api';
 import {
   selectUserInvitationsFilter,
   UserInvitationsFilter,
+  UserInvitationsFilterFormId,
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -74,7 +75,7 @@ interface ResourceInvitationsListProps {
   contentType?: 'resource' | 'resource_project';
 }
 
-export const ResourceUserInvitationsList: FC<ResourceInvitationsListProps> = ({
+const ResourceUserInvitationsListTable: FC<ResourceInvitationsListProps> = ({
   resource,
   offering,
   tableTabs,
@@ -84,7 +85,12 @@ export const ResourceUserInvitationsList: FC<ResourceInvitationsListProps> = ({
   scopeLabel,
   contentType,
 }) => {
-  const stateFilter = useSelector(selectUserInvitationsFilter);
+  const { values } = useFormState();
+
+  const stateFilter = useMemo(
+    () => selectUserInvitationsFilter(values),
+    [values],
+  );
 
   const effectiveScopeUuid = scopeUuid ?? resource.uuid;
   const effectiveScopeUrl = scopeUrl ?? resource.url;
@@ -145,6 +151,19 @@ export const ResourceUserInvitationsList: FC<ResourceInvitationsListProps> = ({
       }
       enableExport
       showExportInDropdown
+      formId={UserInvitationsFilterFormId}
     />
   );
 };
+
+export const ResourceUserInvitationsList: FC<any> = (props) => (
+  <Form
+    id={UserInvitationsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ResourceUserInvitationsListTable {...props} />}
+  </Form>
+);

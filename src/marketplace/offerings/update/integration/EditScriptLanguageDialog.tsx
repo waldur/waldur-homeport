@@ -5,7 +5,7 @@ import {
   MergedSecretOptionsRequest,
 } from 'waldur-js-client';
 
-import { SubmitButton, SelectField, FormGroupFinal } from '@/form';
+import { SubmitButton, SelectField, FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -79,7 +79,7 @@ export const EditScriptLanguageDialog: FC<EditScriptLanguageDialogProps> = ({
           >
             <Field
               name="language"
-              component={FormGroupFinal}
+              component={FormGroup}
               label={resolve.label}
               options={PROGRAMMING_LANGUAGE_CHOICES}
               simpleValue={true}

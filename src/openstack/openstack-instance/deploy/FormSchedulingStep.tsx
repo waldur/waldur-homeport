@@ -1,7 +1,7 @@
 import { XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useForm } from 'react-final-form';
 import {
   OpenStackServerGroup,
   openstackServerGroupsList,
@@ -11,7 +11,7 @@ import { AccordionCard } from '@/core/AccordionCard';
 import { UI_STALE_TIME } from '@/core/constants';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
@@ -48,13 +48,13 @@ export const FormSchedulingStep = (props: FormStepProps) => {
     staleTime: UI_STALE_TIME,
   });
 
-  const serverGroup = useSelector((state) =>
-    orderFormSelector(state, 'attributes.server_group'),
-  );
+  const { attributes = {} } = useOrderFormData();
+  const serverGroup = attributes.server_group;
+  const form = useForm();
 
   const clearSelection = useCallback(() => {
-    props.change('attributes.server_group', undefined);
-  }, [props.change]);
+    form.change('attributes.server_group', undefined);
+  }, [form]);
 
   if (!tableProps.loading && tableProps.rows?.length === 0) {
     return null;

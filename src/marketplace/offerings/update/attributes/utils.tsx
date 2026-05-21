@@ -1,9 +1,9 @@
-import { Validator } from 'redux-form';
+import { FieldValidator } from 'final-form';
 
 import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { parseIntField, formatIntField } from '@/marketplace/common/utils';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 
 interface AttrConfig {
   type?: string;
@@ -12,7 +12,7 @@ interface AttrConfig {
   format?: any;
   component?: any;
   normalize?: (v: string) => string;
-  validate?: Validator;
+  validate?: FieldValidator<any>;
   checked?: boolean;
   rows?: number;
   className?: string;

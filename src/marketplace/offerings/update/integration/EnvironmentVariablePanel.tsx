@@ -22,14 +22,14 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
       <td>
         <Field
           name={`${variable}.name`}
-          component={InputField as any}
+          component={InputField}
           placeholder={translate('Key')}
         />
       </td>
       <td>
         <Field
           name={`${variable}.value`}
-          component={InputField as any}
+          component={InputField}
           placeholder={translate('Value')}
         />
       </td>

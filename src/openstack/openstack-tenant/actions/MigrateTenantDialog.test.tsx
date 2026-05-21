@@ -13,16 +13,7 @@ import {
 
 import { MigrateTenantDialog } from './MigrateTenantDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    openstackMigrationsCreate: vi.fn(),
-    openstackNetworksList: vi.fn(),
-    marketplacePublicOfferingsList: vi.fn(),
-    openstackVolumeTypesList: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeResource = {
   uuid: 'resource-uuid',

@@ -18,7 +18,6 @@ vi.mock('@/core/config', () => ({
     },
   },
 }));
-vi.mock('@/modal/actions');
 
 const mockTenant = {
   name: 'Test tenant',

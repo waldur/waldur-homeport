@@ -1,21 +1,14 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import React, { ReactNode, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import {
-  openstackRoutersList,
-  OpenstackRoutersListData,
-} from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
 import { SubmitButton } from '@/form';
-import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
 import { ModalDialog } from './ModalDialog';
+import { RouterSelector } from './RouterSelector';
 import { ConfirmationDialogType } from './types';
 
 interface ConfirmationDialogProps {
@@ -65,41 +58,6 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   const closeDialog = () => closeModal('HIDE_CONFIRM');
   const [inputValue, setInputValue] = useState('');
   const [routerValue, setRouterValue] = useState(null);
-
-  const loadRouters = async (query, prevOptions, { page }) => {
-    if (!tenantUuid) {
-      return {
-        options: [],
-        hasMore: false,
-        additional: { page: 1 },
-      };
-    }
-
-    const response = await openstackRoutersList({
-      query: {
-        tenant_uuid: tenantUuid,
-        state: ['OK'],
-        name: query,
-        page,
-        page_size: ENV.pageSize,
-        field: ['uuid', 'url', 'name'],
-      } as OpenstackRoutersListData['query'],
-    });
-
-    const selectData = parseSelectData(response);
-    return returnReactSelectAsyncPaginateObject(
-      {
-        options: selectData.options.map((router) => ({
-          value: router.url,
-          label: router.name,
-          ...router,
-        })),
-        totalItems: selectData.totalItems,
-      },
-      prevOptions,
-      page,
-    );
-  };
 
   const handleSubmit = () => {
     if (showInput && inputRequired && !inputValue.trim()) {
@@ -170,23 +128,11 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
           </div>
         )}
         {showRouterSelect && (
-          <div className="mt-3">
-            <Form.Label>
-              {translate('Router')}{' '}
-              <span className="text-muted">({translate('Optional')})</span>
-            </Form.Label>
-            <AsyncPaginate
-              value={routerValue}
-              onChange={setRouterValue}
-              loadOptions={loadRouters}
-              defaultOptions
-              placeholder={translate('Select router...')}
-              isClearable
-              classNamePrefix="metronic-select"
-              getOptionLabel={(option) => option.label || option.name}
-              getOptionValue={(option) => option.value || option.url}
-            />
-          </div>
+          <RouterSelector
+            routerValue={routerValue}
+            setRouterValue={setRouterValue}
+            tenantUuid={tenantUuid}
+          />
         )}
       </div>
     </ModalDialog>

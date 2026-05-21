@@ -94,7 +94,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       <FormGroup label={translate('Name')} required>
         <Field
           name="name"
-          component={StringField as any}
+          component={StringField}
           placeholder={translate('Enter a name...')}
         />
       </FormGroup>
@@ -106,7 +106,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       <FormGroup label={translate('Summary')} required>
         <Field
           name="project_summary"
-          component={TextField as any}
+          component={TextField}
           placeholder={translate('Enter a summary...')}
           maxLength={1000}
         />
@@ -119,7 +119,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       <FormGroup label={translate('Description')}>
         <Field
           name="description"
-          component={TextField as any}
+          component={TextField}
           placeholder={translate('Enter a description...')}
           maxLength={1000}
         />
@@ -132,7 +132,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       <FormGroup>
         <Field
           name="project_has_civilian_purpose"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Project for civilian purpose?')}
           size="sm"
         />
@@ -149,7 +149,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         >
           <Field
             name="oecd_fos_2007_code"
-            component={SelectField as any}
+            component={SelectField}
             options={OECD_FOS_2007_CODES}
             getOptionValue={(option) => option.value}
             getOptionLabel={(option) => `${option.value}. ${option.label}`}
@@ -161,7 +161,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       <FormGroup>
         <Field
           name="project_is_confidential"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Is the project confidential?')}
           size="sm"
         />
@@ -174,7 +174,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       <FormGroup label={translate('Project duration in days')} required>
         <Field
           name="duration_in_days"
-          component={StringField as any}
+          component={StringField}
           placeholder={translate('Enter number of days...')}
           disabled={!!call?.fixed_duration_in_days}
         />

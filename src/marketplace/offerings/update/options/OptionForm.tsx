@@ -43,7 +43,7 @@ export const OptionForm = ({ resourceType, offering }) => {
       <DisplayNameField />
 
       <FormGroup label={translate('Description')}>
-        <Field name="help_text" type="text" component={InputField as any} />
+        <Field name="help_text" type="text" component={InputField} />
       </FormGroup>
       <OptionTypeGroup />
       {OptionComponent && <OptionComponent offering={offering} />}
@@ -51,7 +51,7 @@ export const OptionForm = ({ resourceType, offering }) => {
         <FormGroup>
           <Field
             name="required"
-            component={AwesomeCheckboxField as any}
+            component={AwesomeCheckboxField}
             label={translate('Required')}
           />
         </FormGroup>

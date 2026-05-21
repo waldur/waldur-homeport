@@ -179,7 +179,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.reporter_field"
-              component={SelectField as any}
+              component={SelectField}
               options={fieldOptions}
               simpleValue
             />
@@ -193,7 +193,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.impact_field"
-              component={SelectField as any}
+              component={SelectField}
               options={fieldOptions}
               simpleValue
             />
@@ -209,7 +209,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.organisation_field"
-              component={SelectField as any}
+              component={SelectField}
               options={fieldOptions}
               simpleValue
             />
@@ -223,7 +223,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.project_field"
-              component={SelectField as any}
+              component={SelectField}
               options={fieldOptions}
               simpleValue
             />
@@ -239,7 +239,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.affected_resource_field"
-              component={SelectField as any}
+              component={SelectField}
               options={fieldOptions}
               simpleValue
             />
@@ -253,7 +253,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.caller_field"
-              component={SelectField as any}
+              component={SelectField}
               options={fieldOptions}
               simpleValue
             />
@@ -269,7 +269,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.template_field"
-              component={SelectField as any}
+              component={SelectField}
               options={fieldOptions}
               simpleValue
             />
@@ -285,7 +285,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.waldur_backend_id_field"
-              component={SelectField as any}
+              component={SelectField}
               options={fieldOptions}
               simpleValue
             />
@@ -301,7 +301,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.default_priority"
-              component={SelectField as any}
+              component={SelectField}
               options={priorityOptions}
               simpleValue
             />
@@ -317,7 +317,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           >
             <Field
               name="fieldMappings.default_offering_issue_type"
-              component={SelectField as any}
+              component={SelectField}
               options={requestTypeOptions}
               simpleValue
             />

@@ -1,4 +1,5 @@
-import { Field, reduxForm } from 'redux-form';
+import { FC } from 'react';
+import { Field } from 'react-final-form';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
@@ -13,11 +14,11 @@ const INVITATION_STATUS_OPTIONS = [
   { value: 'expired', label: translate('Expired') },
 ];
 
-const PureMyInvitationsFilter = () => (
+export const MyInvitationsFilter: FC = () => (
   <TableFilterItem title={translate('Status')} name="invitation_status">
     <Field
       name="invitation_status"
-      component={(fieldProps) => (
+      render={(fieldProps) => (
         <Select
           placeholder={translate('All statuses')}
           options={INVITATION_STATUS_OPTIONS}
@@ -30,13 +31,3 @@ const PureMyInvitationsFilter = () => (
     />
   </TableFilterItem>
 );
-
-const enhance = reduxForm({
-  form: MY_INVITATIONS_FILTER_FORM_ID,
-  destroyOnUnmount: false,
-  initialValues: {
-    invitation_status: { value: 'pending', label: translate('Pending') },
-  },
-});
-
-export const MyInvitationsFilter = enhance(PureMyInvitationsFilter);

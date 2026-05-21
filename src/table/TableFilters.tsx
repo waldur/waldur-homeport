@@ -1,9 +1,8 @@
 import { XIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { Col, Row, Stack } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useForm, useFormState } from 'react-final-form';
 import { useMediaQuery } from 'react-responsive';
-import { change, getFormValues } from 'redux-form';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -11,11 +10,11 @@ import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { TableProps } from './types';
-import { getFiltersFormId } from './utils';
 
 interface TableFiltersProps extends Pick<
   TableProps,
   | 'filters'
+  | 'formId'
   | 'renderFiltersDrawer'
   | 'filtersStorage'
   | 'hideClearFilters'
@@ -28,13 +27,13 @@ interface TableFiltersProps extends Pick<
 }
 
 export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
-  const dispatch = useDispatch();
-  const formId = getFiltersFormId(props.filters);
-  const formValues = useSelector(getFormValues(formId));
+  const form = useForm();
+  const { values: formValues } = useFormState();
+
   const clearFilters = useCallback(() => {
     if (formValues) {
       Object.keys(formValues).forEach((key) => {
-        dispatch(change(formId, key, null));
+        form.change(key, null);
         if (props.filterPosition === 'menu') {
           props.setFilter({
             label: null,
@@ -46,10 +45,10 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
       });
     }
     if (props.filterPosition === 'sidebar') {
-      props.renderFiltersDrawer(props.filters);
+      props.renderFiltersDrawer(props.filters, props.formId);
     }
     props.applyFiltersFn(true);
-  }, [dispatch, props, formValues]);
+  }, [props, formValues, form]);
 
   const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
   const clearLabel = isMd ? translate('Clear') : translate('Clear filters');
@@ -79,6 +78,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
             <TableFiltersMenu
               table={props.table}
               filters={props.filters}
+              formId={props.formId}
               filterPosition={props.filterPosition}
               filtersStorage={props.filtersStorage}
               setFilter={props.setFilter}

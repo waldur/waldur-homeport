@@ -1,4 +1,5 @@
 import { FC, ReactNode, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { invoicesItemsRetrieve } from 'waldur-js-client';
 
@@ -12,6 +13,7 @@ import { createFetcher } from '@/table/api';
 import {
   InvoicesItemsFilter,
   selectInvoicesItemsFilter,
+  InvoicesItemsFilterFormId,
 } from '@/table/generated/InvoicesItemsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -40,7 +42,7 @@ interface InvoiceItemsTableProps {
   footer?: ReactNode;
 }
 
-export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
+const InvoiceItemsTableTable: FC<InvoiceItemsTableProps> = ({
   invoice,
   invoiceView,
   showPrice,
@@ -49,7 +51,8 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
   refreshInvoiceItems,
   setTotalFiltered,
 }) => {
-  const filter = useSelector(selectInvoicesItemsFilter);
+  const { values } = useFormState();
+  const filter = useMemo(() => selectInvoicesItemsFilter(values), [values]);
   const customer = useSelector(getCustomer);
   const user = useUser();
 
@@ -193,6 +196,19 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
         />
       )}
       footer={footer}
+      formId={InvoicesItemsFilterFormId}
     />
   );
 };
+
+export const InvoiceItemsTable: FC<any> = (props) => (
+  <Form
+    id={InvoicesItemsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <InvoiceItemsTableTable {...props} />}
+  </Form>
+);

@@ -1,5 +1,4 @@
-import { DateTime } from 'luxon';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import {
   proposalProtectedCallsRoundsUpdate,
   ProtectedRound,
@@ -10,6 +9,7 @@ import { parseDate } from '@/core/dateUtils';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import { WizardFormFirstPage } from '@/proposals/update/rounds/WizardFormFirstPage';
 import { getRoundInitialValues } from '@/proposals/utils';
@@ -33,25 +33,38 @@ const validate = (values: ProtectedRoundRequest) => {
 export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
   props,
 ) => {
+  const initialValues = useMemo(
+    () => getRoundInitialValues(props.resolve.round),
+    [props.resolve.round],
+  );
   const { closeDialog } = useModal();
-  const submit = useCallback(
-    (formData: ProtectedRoundRequest, _dispatch, formProps) => {
-      return proposalProtectedCallsRoundsUpdate({
+
+  const updateRoundMutation = useManagedMutation<
+    any,
+    any,
+    ProtectedRoundRequest
+  >({
+    mutationFn: (formData) =>
+      proposalProtectedCallsRoundsUpdate({
         path: {
           uuid: props.resolve.call.uuid,
           obj_uuid: props.resolve.round.uuid,
         },
         body: {
-          ...getRoundInitialValues(props.resolve.round),
+          ...initialValues,
           ...formData,
         },
-      }).then(() => {
-        formProps.destroy();
-        closeDialog();
-        props.resolve.refetch();
-      });
-    },
-    [],
+      }),
+    successMessage: translate('Round has been updated.'),
+    errorMessage: translate('Unable to update round.'),
+    refetch: props.resolve.refetch,
+    onSuccess: closeDialog,
+  });
+
+  const submit = useCallback(
+    (formData: ProtectedRoundRequest) =>
+      updateRoundMutation.mutateAsync(formData),
+    [updateRoundMutation],
   );
 
   return (
@@ -64,11 +77,7 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
         { key: 'submission', label: translate('Submission'), completed: false },
       ]}
       wizardForms={[WizardFormFirstPage]}
-      initialValues={{
-        timezone: DateTime.local().zoneName,
-        start_time: props.resolve.round.start_time,
-        cutoff_time: props.resolve.round.cutoff_time,
-      }}
+      initialValues={initialValues}
       validate={validate}
     />
   );

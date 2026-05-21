@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import {
   BroadcastMessage,
   broadcastMessagesList,
@@ -13,6 +13,7 @@ import { createFetcher } from '@/table/api';
 import {
   BroadcastMessagesFilter,
   selectBroadcastMessagesFilter,
+  BroadcastMessagesFilterFormId,
 } from '@/table/generated/BroadcastMessagesFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -41,10 +42,13 @@ interface BroadcastListProps {
   standalone?: boolean;
 }
 
-export const BroadcastList: FunctionComponent<BroadcastListProps> = ({
+const BroadcastListTable: FunctionComponent<BroadcastListProps> = ({
   standalone = false,
 }) => {
-  const filter = useSelector(selectBroadcastMessagesFilter);
+  const { values } = useFormState();
+
+  const filter = useMemo(() => selectBroadcastMessagesFilter(values), [values]);
+
   const props = useTable({
     table: 'broadcast',
     fetchData: createFetcher(broadcastMessagesList),
@@ -94,6 +98,19 @@ export const BroadcastList: FunctionComponent<BroadcastListProps> = ({
       hasQuery={true}
       title={translate('Broadcasts')}
       standalone={standalone}
+      formId={BroadcastMessagesFilterFormId}
     />
   );
 };
+
+export const BroadcastList = (props) => (
+  <Form
+    id={BroadcastMessagesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <BroadcastListTable {...props} />}
+  </Form>
+);

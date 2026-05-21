@@ -1,21 +1,20 @@
 import { LightbulbFilamentIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
 
 import { Tip } from '@/core/Tooltip';
-import { getNameFieldValidators } from '@/core/validators';
+import { getNameFieldValidators, composeValidators } from '@/core/validators';
 import { FormGroup, StringField } from '@/form';
 import { translate } from '@/i18n';
-import { orderFormAttributesSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 
 const ResourceNameField = (props) => {
   const { showErrorResponse } = useNotify();
   const project = props.project;
-  const attributes = useSelector(orderFormAttributesSelector);
+  const { attributes = {} } = useOrderFormData();
   const { mutate: suggestName, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       const response = await marketplaceResourcesSuggestName({
@@ -82,7 +81,11 @@ export const ResourceNameGroup = ({
     component={FormGroup}
     required={true}
     description={translate('This name will be visible in accounting data.')}
-    validate={nameValidate}
+    validate={
+      Array.isArray(nameValidate)
+        ? composeValidators(...nameValidate)
+        : nameValidate
+    }
   >
     <ResourceNameField
       offering={offering}

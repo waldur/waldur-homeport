@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
-import { orderFormAttributesSelector } from '@/marketplace/deploy/selectors';
+import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { loadVolumeTypes } from '@/openstack/api';
 import { TENANT_TYPE } from '@/openstack/constants';
 import {
@@ -26,20 +25,20 @@ export const getOfferingLimit = (
 };
 
 export const useQuotasData = (offering: PublicOfferingDetails) => {
-  const formData = useSelector(orderFormAttributesSelector);
+  const { attributes = {} } = useOrderFormData();
   const usages = useMemo(
     () => parseQuotasUsage(offering.quotas || []),
     [offering],
   );
   const limits = useMemo(() => parseQuotas(offering.quotas || []), [offering]);
   return useMemo(() => {
-    const quotas = getQuotas({ formData, usages, limits });
+    const quotas = getQuotas({ attributes, usages, limits });
     return {
       quotas,
       vcpuQuota: quotas.find((q) => q.name === 'vcpu'),
       ramQuota: quotas.find((q) => q.name === 'ram'),
     };
-  }, [formData, usages, limits]);
+  }, [attributes, usages, limits]);
 };
 
 export const useVolumeDataLoader = (offering: PublicOfferingDetails) => {

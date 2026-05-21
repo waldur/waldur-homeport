@@ -125,12 +125,15 @@ export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
             invalid={invalid}
           >
             {floatingIps ? (
-              <FieldArray
-                name="floating_ips"
-                component={FloatingIpsList as any}
-                floatingIps={floatingIps}
-                subnets={subnets}
-              />
+              <FieldArray name="floating_ips">
+                {({ fields }) => (
+                  <FloatingIpsList
+                    fields={fields}
+                    floatingIps={floatingIps}
+                    subnets={subnets}
+                  />
+                )}
+              </FieldArray>
             ) : null}
           </AsyncActionDialog>
         </form>

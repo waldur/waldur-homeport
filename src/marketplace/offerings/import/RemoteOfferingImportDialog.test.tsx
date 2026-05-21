@@ -20,7 +20,6 @@ import { RemoteOfferingImportDialog } from './RemoteOfferingImportDialog';
 vi.mock('@uirouter/react');
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/modal/actions');
 vi.mock('@/router', () => ({
   router: {
     urlService: {

@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { proposalProposalsList } from 'waldur-js-client';
 
@@ -10,6 +11,7 @@ import {
   ProposalsFilter,
   selectProposalsFilter,
   ProposalStatesOptions,
+  ProposalsFilterFormId,
 } from '@/table/generated/ProposalsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -22,9 +24,10 @@ import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow'
 import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
 
-export const CustomerProposalsList: FC<{}> = () => {
+const CustomerProposalsListTable: FC<{}> = () => {
   const customer = useSelector(getCustomer);
-  const formFilters = useSelector(selectProposalsFilter);
+  const { values } = useFormState();
+  const formFilters = useMemo(() => selectProposalsFilter(values), [values]);
 
   const filter = useMemo(
     () => ({
@@ -105,6 +108,19 @@ export const CustomerProposalsList: FC<{}> = () => {
         <ProposalRowActions refetch={tableProps.fetch} row={row} />
       )}
       expandableRow={ProposalExpandableRow}
+      formId={ProposalsFilterFormId}
     />
   );
 };
+
+export const CustomerProposalsList: FC<any> = (props) => (
+  <Form
+    id={ProposalsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <CustomerProposalsListTable {...props} />}
+  </Form>
+);

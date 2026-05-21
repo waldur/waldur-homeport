@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   CoiSeverityLevel,
   CoiTypeEnum,
@@ -19,7 +18,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -199,7 +197,6 @@ const PureConflictsOfInterestFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -308,7 +305,7 @@ interface ConflictsOfInterestFilterProps {
   call?: any;
 }
 
-interface ConflictsOfInterestFilterFormData {
+export interface ConflictsOfInterestFilterFormData {
   round: ProtectedRound;
   status: ConflictOfInterestStatusOption[];
   severity: CoiSeverityLevelOption;
@@ -316,21 +313,13 @@ interface ConflictsOfInterestFilterFormData {
   detection_method: DetectionMethodOption[];
 }
 
-export const ConflictsOfInterestFilter = reduxForm<
-  ConflictsOfInterestFilterFormData,
-  ConflictsOfInterestFilterProps
->({
-  form: ConflictsOfInterestFilterFormId,
-  destroyOnUnmount: false,
-})(PureConflictsOfInterestFilter);
+export const ConflictsOfInterestFilter = PureConflictsOfInterestFilter;
 
 type ConflictsOfInterestFilterQuery = ConflictsOfInterestListData['query'];
 
-export const selectConflictsOfInterestFilter = createSelector<
-  RootState,
-  Partial<ConflictsOfInterestFilterFormData>,
-  ConflictsOfInterestFilterQuery
->(getFormValues(ConflictsOfInterestFilterFormId), (values) => {
+export const selectConflictsOfInterestFilter = (
+  values?: Partial<ConflictsOfInterestFilterFormData>,
+): ConflictsOfInterestFilterQuery => {
   const filter: ConflictsOfInterestFilterQuery = {} as any;
   if (values) {
     if (values.round) {
@@ -352,4 +341,4 @@ export const selectConflictsOfInterestFilter = createSelector<
     }
   }
   return filter;
-});
+};

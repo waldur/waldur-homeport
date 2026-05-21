@@ -6,14 +6,11 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   assignmentBatchesList,
+  AssignmentBatchList,
   proposalProtectedCallsGenerateAssignments,
   proposalProtectedCallsSendAllAssignments,
-  AssignmentBatchList,
 } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -36,6 +33,7 @@ import { Call } from '../types';
 
 import { AssignmentBatchExpandableRow } from './AssignmentBatchExpandableRow';
 import { AssignmentBatchRowActions } from './AssignmentBatchRowActions';
+import { AssignmentBatchStatusBadge } from './AssignmentBatchStatusBadge';
 import { ReviewerCapacitySection } from './ReviewerCapacitySection';
 
 const CreateManualAssignmentDialog = lazyComponent(() =>
@@ -48,50 +46,6 @@ interface AssignmentBatchesSectionProps {
   call: Call;
   refetch: () => void;
 }
-
-const FILTER_FORM_ID = 'AssignmentBatchesFilter';
-
-const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
-  status,
-  statusDisplay,
-}) => {
-  const variant = useMemo(() => {
-    switch (status) {
-      case 'draft':
-        return 'secondary';
-      case 'sent':
-        return 'primary';
-      case 'responded':
-        return 'success';
-      case 'expired':
-        return 'warning';
-      case 'cancelled':
-        return 'danger';
-      default:
-        return 'secondary';
-    }
-  }, [status]);
-
-  return (
-    <Badge variant={variant} pill outline>
-      {statusDisplay}
-    </Badge>
-  );
-};
-
-const filtersSelector = createSelector(
-  getFormValues(FILTER_FORM_ID),
-  (filters: any) => {
-    const result: Record<string, any> = {};
-    if (filters?.status) {
-      result.status = filters.status.value;
-    }
-    if (filters?.source) {
-      result.source = filters.source.value;
-    }
-    return result;
-  },
-);
 
 type InnerTab = 'batches' | 'capacity';
 
@@ -124,16 +78,14 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   const { openDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
   const queryClient = useQueryClient();
-  const formFilters = useSelector(filtersSelector);
   const tabs = useReviewerPoolTabs();
   const [activeInnerTab, setActiveInnerTab] = useState<InnerTab>('batches');
 
   const filter = useMemo(
     () => ({
       call_uuid: call.uuid,
-      ...formFilters,
     }),
-    [formFilters],
+    [call.uuid],
   );
 
   const tableProps = useTable({
@@ -213,7 +165,10 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
         id: 'status',
         title: translate('Status'),
         render: ({ row }: { row: AssignmentBatchList }) => (
-          <StatusBadge status={row.status} statusDisplay={row.status_display} />
+          <AssignmentBatchStatusBadge
+            status={row.status}
+            statusDisplay={row.status_display}
+          />
         ),
         keys: ['status', 'status_display'],
       },

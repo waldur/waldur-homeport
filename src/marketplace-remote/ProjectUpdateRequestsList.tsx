@@ -1,4 +1,5 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { marketplaceProjectUpdateRequestsList } from 'waldur-js-client';
 
@@ -10,6 +11,7 @@ import { createFetcher } from '@/table/api';
 import {
   MarketplaceProjectUpdateRequestsFilter as ProjectUpdateRequestListFilter,
   selectMarketplaceProjectUpdateRequestsFilter as selectProjectUpdateRequestListFilter,
+  MarketplaceProjectUpdateRequestsFilterFormId,
 } from '@/table/generated/MarketplaceProjectUpdateRequestsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -25,9 +27,15 @@ const getStates = (): Option[] => [
   { value: 'canceled', label: translate('Canceled') },
 ];
 
-export const ProjectUpdateRequestsList: FunctionComponent = () => {
+const ProjectUpdateRequestsListTable: FunctionComponent = () => {
   useTitle(translate('Project updates'));
-  const filterState = useSelector(selectProjectUpdateRequestListFilter);
+  const { values } = useFormState();
+
+  const filterState = useMemo(
+    () => selectProjectUpdateRequestListFilter(values),
+    [values],
+  );
+
   const project = useSelector(getProject);
   const filter = {
     ...filterState,
@@ -71,6 +79,19 @@ export const ProjectUpdateRequestsList: FunctionComponent = () => {
       expandableRow={ProjectUpdateRequestExpandable}
       verboseName={translate('requests')}
       filters={<ProjectUpdateRequestListFilter />}
+      formId={MarketplaceProjectUpdateRequestsFilterFormId}
     />
   );
 };
+
+export const ProjectUpdateRequestsList = (props) => (
+  <Form
+    id={MarketplaceProjectUpdateRequestsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <ProjectUpdateRequestsListTable {...props} />}
+  </Form>
+);

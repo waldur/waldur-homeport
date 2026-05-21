@@ -1,6 +1,6 @@
 import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { Form, useFormState } from 'react-final-form';
 import {
   chatThreadsList,
   InjectionSeverityEnum,
@@ -17,6 +17,7 @@ import { BooleanField } from '@/table/BooleanField';
 import {
   ChatThreadsFilter as SupportAIAssistantLogsFilter,
   selectChatThreadsFilter as selectSupportAIAssistantLogsFilter,
+  ChatThreadsFilterFormId,
 } from '@/table/generated/ChatThreadsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -48,8 +49,13 @@ export const getSeverityBadgeVariant = (
   }
 };
 
-export const SupportAIAssistantLogsList: FunctionComponent = () => {
-  const filter = useSelector(selectSupportAIAssistantLogsFilter);
+const SupportAIAssistantLogsListTable: FunctionComponent = () => {
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectSupportAIAssistantLogsFilter(values),
+    [values],
+  );
 
   const fetcher = useMemo(() => createFetcher(chatThreadsList), []);
 
@@ -206,6 +212,19 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
       hasOptionalColumns
       enableExport
       expandableRow={SupportAIAssistantLogsExpandableRow}
+      formId={ChatThreadsFilterFormId}
     />
   );
 };
+
+export const SupportAIAssistantLogsList = (props) => (
+  <Form
+    id={ChatThreadsFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <SupportAIAssistantLogsListTable {...props} />}
+  </Form>
+);

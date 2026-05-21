@@ -1,14 +1,12 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { EmailLogsListData } from 'waldur-js-client';
 
 import { StringField } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureEmailLogsFilter: FunctionComponent<{}> = () => (
@@ -39,24 +37,19 @@ const PureEmailLogsFilter: FunctionComponent<{}> = () => (
 
 export const EmailLogsFilterFormId = 'EmailLogsFilter';
 
-interface EmailLogsFilterFormData {
+export interface EmailLogsFilterFormData {
   emails: string;
   subject: string;
   sent_at: string;
 }
 
-export const EmailLogsFilter = reduxForm<EmailLogsFilterFormData, {}>({
-  form: EmailLogsFilterFormId,
-  destroyOnUnmount: false,
-})(PureEmailLogsFilter);
+export const EmailLogsFilter = PureEmailLogsFilter;
 
 type EmailLogsFilterQuery = EmailLogsListData['query'];
 
-export const selectEmailLogsFilter = createSelector<
-  RootState,
-  Partial<EmailLogsFilterFormData>,
-  EmailLogsFilterQuery
->(getFormValues(EmailLogsFilterFormId), (values) => {
+export const selectEmailLogsFilter = (
+  values?: Partial<EmailLogsFilterFormData>,
+): EmailLogsFilterQuery => {
   const filter: EmailLogsFilterQuery = {} as any;
   if (values) {
     if (values.emails) {
@@ -70,4 +63,4 @@ export const selectEmailLogsFilter = createSelector<
     }
   }
   return filter;
-});
+};

@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { Form } from 'react-final-form';
 import { marketplaceServiceProvidersRevenueList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -81,28 +80,30 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderRevenuePage: FC = () => {
-  const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
-    provider?: { uuid: string };
-  };
-  const providerUuid = formValues?.provider?.uuid;
-
   return (
-    <>
-      <ReportingTitle reportKey="provider-revenue">
-        <ProviderFilter />
-      </ReportingTitle>
+    <Form onSubmit={() => {}} subscription={{ values: true }}>
+      {({ values }) => {
+        const providerUuid = values?.provider?.uuid;
+        return (
+          <>
+            <ReportingTitle reportKey="provider-revenue">
+              <ProviderFilter />
+            </ReportingTitle>
 
-      {providerUuid ? (
-        <ProviderRevenueContent providerUuid={providerUuid} />
-      ) : (
-        <NoResult
-          title={translate('Select a provider')}
-          message={translate(
-            'Choose a provider from the dropdown above to view revenue data.',
-          )}
-          noAction
-        />
-      )}
-    </>
+            {providerUuid ? (
+              <ProviderRevenueContent providerUuid={providerUuid} />
+            ) : (
+              <NoResult
+                title={translate('Select a provider')}
+                message={translate(
+                  'Choose a provider from the dropdown above to view revenue data.',
+                )}
+                noAction
+              />
+            )}
+          </>
+        );
+      }}
+    </Form>
   );
 };

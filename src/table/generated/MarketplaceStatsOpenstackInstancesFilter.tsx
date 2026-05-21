@@ -1,8 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import {
   Customer,
   MarketplaceStatsOpenstackInstancesListData,
@@ -18,7 +17,6 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -71,7 +69,6 @@ const PureMarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -96,7 +93,6 @@ const PureMarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -155,7 +151,7 @@ interface MarketplaceStatsOpenstackInstancesFilterProps {
   organizationUuid?: any;
 }
 
-interface MarketplaceStatsOpenstackInstancesFilterFormData {
+export interface MarketplaceStatsOpenstackInstancesFilterFormData {
   organization: Customer;
   project: Project;
   runtime_state: RuntimeStateOption;
@@ -164,22 +160,15 @@ interface MarketplaceStatsOpenstackInstancesFilterFormData {
   image_name: string;
 }
 
-export const MarketplaceStatsOpenstackInstancesFilter = reduxForm<
-  MarketplaceStatsOpenstackInstancesFilterFormData,
-  MarketplaceStatsOpenstackInstancesFilterProps
->({
-  form: MarketplaceStatsOpenstackInstancesFilterFormId,
-  destroyOnUnmount: false,
-})(PureMarketplaceStatsOpenstackInstancesFilter);
+export const MarketplaceStatsOpenstackInstancesFilter =
+  PureMarketplaceStatsOpenstackInstancesFilter;
 
 type MarketplaceStatsOpenstackInstancesFilterQuery =
   MarketplaceStatsOpenstackInstancesListData['query'];
 
-export const selectMarketplaceStatsOpenstackInstancesFilter = createSelector<
-  RootState,
-  Partial<MarketplaceStatsOpenstackInstancesFilterFormData>,
-  MarketplaceStatsOpenstackInstancesFilterQuery
->(getFormValues(MarketplaceStatsOpenstackInstancesFilterFormId), (values) => {
+export const selectMarketplaceStatsOpenstackInstancesFilter = (
+  values?: Partial<MarketplaceStatsOpenstackInstancesFilterFormData>,
+): MarketplaceStatsOpenstackInstancesFilterQuery => {
   const filter: MarketplaceStatsOpenstackInstancesFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
@@ -202,4 +191,4 @@ export const selectMarketplaceStatsOpenstackInstancesFilter = createSelector<
     }
   }
   return filter;
-});
+};

@@ -1,6 +1,5 @@
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { FC, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { OpenStackInstanceReport } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -18,11 +17,15 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { openstackInstancesFetcher } from './api';
 
-export const OpenstackInstancesTable: FC = () => {
-  const filter = useSelector(selectMarketplaceStatsOpenstackInstancesFilter);
-  const formValues: any = useSelector(
-    getFormValues(MarketplaceStatsOpenstackInstancesFilterFormId),
+const OpenstackInstancesTableTable: FC = () => {
+  const { values } = useFormState();
+
+  const filter = useMemo(
+    () => selectMarketplaceStatsOpenstackInstancesFilter(values),
+    [values],
   );
+
+  const formValues = values;
 
   const tableProps = useTable({
     table: 'openstackInstancesReport',
@@ -267,6 +270,19 @@ export const OpenstackInstancesTable: FC = () => {
           organizationUuid={formValues?.organization?.uuid}
         />
       }
+      formId={MarketplaceStatsOpenstackInstancesFilterFormId}
     />
   );
 };
+
+export const OpenstackInstancesTable: FC<any> = (props) => (
+  <Form
+    id={MarketplaceStatsOpenstackInstancesFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <OpenstackInstancesTableTable {...props} />}
+  </Form>
+);

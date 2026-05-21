@@ -98,7 +98,7 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
               <FormGroup label={translate('New deadline')} required>
                 <Field
                   name="expires_at"
-                  component={DateTimeField as any}
+                  component={DateTimeField}
                   validate={validateExpiresAt}
                   minDate="today"
                   placeholder={translate('Select date and time...')}

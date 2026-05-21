@@ -5,12 +5,7 @@ import { projectsAddUser, customersAddUser } from 'waldur-js-client';
 import { AddUserDialog } from './AddUserDialog';
 
 // Mock API calls
-vi.mock('waldur-js-client', () => ({
-  projectsAddUser: vi.fn(),
-  customersAddUser: vi.fn(),
-  customersUsersList: vi.fn(),
-  projectsOtherUsersList: vi.fn(),
-}));
+vi.mock('waldur-js-client');
 
 // Mock store hooks
 vi.mock('@/store/notify', () => ({
@@ -21,11 +16,6 @@ vi.mock('@/store/notify', () => ({
 }));
 
 // Mock modal hooks
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-  }),
-}));
 
 // Mock translation
 vi.mock('@/i18n', () => ({
@@ -147,7 +137,7 @@ vi.mock('./utils', () => ({
 
 // Mock form components using shared implementations
 vi.mock('@/form/AsyncSelectField', () => ({
-  AsyncSelectFieldFinal: ({ name, label, placeholder }) => (
+  AsyncSelectField: ({ name, label, placeholder }) => (
     <div data-testid={`async-select-${name}`}>
       <label>{label}</label>
       <select>

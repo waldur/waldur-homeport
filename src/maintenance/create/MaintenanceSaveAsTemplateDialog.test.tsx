@@ -18,13 +18,12 @@ import { useNotify } from '@/store/notify';
 import { MaintenanceSaveAsTemplateDialog } from './MaintenanceSaveAsTemplateDialog';
 
 vi.mock('waldur-js-client');
-vi.mock('@/modal/actions');
 vi.mock('@/store/notify');
 vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 
-// Mock leaf fields while keeping FormContainerFinal real
+// Mock leaf fields while keeping FormContainer real
 vi.mock('@/form', async (importOriginal) => {
   const actual = await importOriginal<any>();
   return {

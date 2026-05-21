@@ -1,5 +1,6 @@
 import { useRouter } from '@uirouter/react';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useEffect, useMemo } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
   CustomersUsersListData,
@@ -14,6 +15,7 @@ import { createFetcher } from '@/table/api';
 import {
   CustomersUsersFilter,
   selectCustomersUsersFilter,
+  CustomersUsersFilterFormId,
 } from '@/table/generated/CustomersUsersFilter';
 import { useTable } from '@/table/useTable';
 import {
@@ -38,8 +40,9 @@ const mandatoryFields: CustomersUsersListData['query']['field'] = [
   'projects',
 ];
 
-export const CustomerUsersList: FunctionComponent = () => {
-  const filter = useSelector(selectCustomersUsersFilter);
+const CustomerUsersListTable: FunctionComponent = () => {
+  const { values } = useFormState();
+  const filter = useMemo(() => selectCustomersUsersFilter(values), [values]);
   const customer = useSelector(getCustomer);
   const props = useTable({
     table: 'customer-users',
@@ -89,3 +92,15 @@ export const CustomerUsersList: FunctionComponent = () => {
     />
   );
 };
+
+export const CustomerUsersList = (props) => (
+  <Form
+    id={CustomersUsersFilterFormId}
+    onSubmit={() => {}}
+    subscription={{
+      values: true,
+    }}
+  >
+    {() => <CustomerUsersListTable {...props} />}
+  </Form>
+);

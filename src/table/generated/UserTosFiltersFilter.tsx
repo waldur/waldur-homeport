@@ -1,13 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field, getFormValues, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { Field } from 'react-final-form';
 import { MarketplacePublicOfferingsListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { RootState } from '@/store/reducers';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const UserHasConsentOptions: UserHasConsentOption[] = [
@@ -53,24 +51,17 @@ const PureUserTosFiltersFilter: FunctionComponent<{}> = () => (
 
 export const UserTosFiltersFilterFormId = 'UserTosFiltersFilter';
 
-interface UserTosFiltersFilterFormData {
+export interface UserTosFiltersFilterFormData {
   user_has_consent: UserHasConsentOption;
 }
 
-export const UserTosFiltersFilter = reduxForm<UserTosFiltersFilterFormData, {}>(
-  {
-    form: UserTosFiltersFilterFormId,
-    destroyOnUnmount: false,
-  },
-)(PureUserTosFiltersFilter);
+export const UserTosFiltersFilter = PureUserTosFiltersFilter;
 
 type UserTosFiltersFilterQuery = MarketplacePublicOfferingsListData['query'];
 
-export const selectUserTosFiltersFilter = createSelector<
-  RootState,
-  Partial<UserTosFiltersFilterFormData>,
-  UserTosFiltersFilterQuery
->(getFormValues(UserTosFiltersFilterFormId), (values) => {
+export const selectUserTosFiltersFilter = (
+  values?: Partial<UserTosFiltersFilterFormData>,
+): UserTosFiltersFilterQuery => {
   const filter: UserTosFiltersFilterQuery = {} as any;
   if (values) {
     if (values.user_has_consent) {
@@ -78,4 +69,4 @@ export const selectUserTosFiltersFilter = createSelector<
     }
   }
   return filter;
-});
+};

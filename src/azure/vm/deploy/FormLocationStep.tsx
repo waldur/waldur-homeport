@@ -1,5 +1,5 @@
 import { FormLabel } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { loadLocationOptions } from '@/azure/vm/utils';
 import { required } from '@/core/validators';
@@ -20,7 +20,6 @@ export const FormLocationStep = (props: FormStepProps) => (
       <FormLabel className="required">{translate('Location')}</FormLabel>
       <AsyncSelectField
         name="attributes.location"
-        required={true}
         loadOptions={(query, prevOptions, currentPage) =>
           loadLocationOptions(
             props.offering.scope_uuid,
@@ -38,7 +37,6 @@ export const FormLocationStep = (props: FormStepProps) => (
       </FormLabel>
       <Field
         name="attributes.availability_zone"
-        required={true}
         options={[
           { label: translate('First'), value: 1 },
           { label: translate('Second'), value: 2 },
