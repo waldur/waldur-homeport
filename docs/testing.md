@@ -29,7 +29,6 @@ When testing components that fetch data, use `nock` to intercept outgoing HTTP r
 
 ```typescript
 import { render, screen, waitFor } from '@testing-library/react';
-import { got } from 'got';
 import nock from 'nock';
 import { afterEach, beforeEach, describe, it } from 'vitest';
 
