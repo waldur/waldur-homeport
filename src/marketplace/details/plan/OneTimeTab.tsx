@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { ENV } from '@/core/config';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { OrderStartDateField } from '@/marketplace/deploy/steps/OrderStartDateField';
-import { concealPricesSelector } from '@/marketplace/deploy/utils';
 
 import { ComponentRowTotal } from './ComponentRowTotal';
 import { ControlRows } from './ControlRows';
@@ -22,7 +22,7 @@ export const OneTimeTab = ({
   offering,
 }) => {
   const shouldConcealPrices =
-    useSelector(concealPricesSelector) || concealBillingInfo;
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) || concealBillingInfo;
   const { project } = useOrderFormData();
 
   const prepaidConstraints = useMemo(

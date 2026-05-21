@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import { CheckoutPricingRow } from '@/marketplace/deploy/CheckoutPricingRow';
-import { concealPricesSelector } from '@/marketplace/deploy/utils';
 import { Customer } from '@/workspace/types';
 
 import { Component, PricesData } from './types';
@@ -42,7 +42,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
     props.customer &&
     getActiveFixedPricePaymentProfile(props.customer.payment_profiles);
   const shouldConcealPrices =
-    useSelector(concealPricesSelector) || props.concealPrices;
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) || props.concealPrices;
 
   const { periodic, oneTime } = useComponentsDetailPrices(props.priceData);
 

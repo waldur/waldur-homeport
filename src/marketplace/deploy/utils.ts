@@ -1,7 +1,5 @@
 import { createElement } from 'react';
 
-import { isFeatureVisible } from '@/features/connect';
-import { MarketplaceFeatures } from '@/FeaturesEnums';
 import CentOS from '@/images/appstore/centos.svg';
 import Debian from '@/images/appstore/debian.svg';
 import FreeBSD from '@/images/appstore/freebsd-1.svg';
@@ -120,6 +118,3 @@ export const hasStepWithField = (
 ) =>
   steps &&
   steps.some((step) => step.fields && step.fields.some((key) => key === field));
-
-export const concealPricesSelector = () =>
-  isFeatureVisible(MarketplaceFeatures.conceal_prices);

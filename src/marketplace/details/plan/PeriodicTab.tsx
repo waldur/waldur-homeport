@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
-import { concealPricesSelector } from '@/marketplace/deploy/utils';
 
 import { ComponentRowTotal } from './ComponentRowTotal';
 import { ControlRows } from './ControlRows';
@@ -38,7 +38,7 @@ export const PeriodicTab = ({
     customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 
   const shouldConcealPrices =
-    useSelector(concealPricesSelector) ||
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
     concealBillingInfo ||
     customer?.display_billing_info_in_projects === false;
 

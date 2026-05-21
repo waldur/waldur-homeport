@@ -1,6 +1,5 @@
 import { ComponentType, FunctionComponent, ReactNode } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import {
   BasePublicPlan,
   Customer,
@@ -8,8 +7,9 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { concealPricesSelector } from '@/marketplace/deploy/utils';
 import { Limits } from '@/marketplace/details/types';
 
 import { OneTimeTab } from './OneTimeTab';
@@ -38,7 +38,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
 
   const { periodic, oneTime } = useComponentsDetailPrices(props);
 
-  const globalConceal = useSelector(concealPricesSelector);
+  const globalConceal = isFeatureVisible(MarketplaceFeatures.conceal_prices);
   const shouldConcealPrices = globalConceal || props.concealBillingInfo;
 
   if (!periodic.hasPeriodicCost && !oneTime.hasOneTimeCost) {
