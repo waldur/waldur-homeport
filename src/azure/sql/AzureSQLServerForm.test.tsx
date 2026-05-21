@@ -81,6 +81,17 @@ vi.mock('@/navigation/context', () => ({
   useFullPage: vi.fn(),
 }));
 
+vi.mock('@/core/filters', () => ({
+  getInitialValues: vi.fn((val) => val || {}),
+  syncFiltersToURL: vi.fn(),
+}));
+
+vi.mock('@/customer/utils', () => ({
+  getCustomer: vi.fn().mockResolvedValue({
+    display_billing_info_in_projects: true,
+  }),
+}));
+
 vi.mock('@/form/AsyncSelectField', () => {
   const MockSelect = ({ input, onChange }) => (
     <select
