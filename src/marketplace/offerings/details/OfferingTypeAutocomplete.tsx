@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 import { Props as SelectProps } from 'react-select';
 
 import { Select } from '@/form/themed-select';
@@ -21,5 +21,5 @@ export const OfferingTypeAutocomplete: FunctionComponent<{
     />
   );
 
-  return <FinalField name="offering_type" component={renderComponent} />;
+  return <Field name="offering_type" component={renderComponent} />;
 };

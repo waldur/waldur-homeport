@@ -1,6 +1,6 @@
 import { FieldValidator } from 'final-form';
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 import { Props as SelectProps } from 'react-select';
 
 import { AsyncPaginate } from '@/form/themed-select';
@@ -51,7 +51,7 @@ export const ServiceProviderAutocomplete: FunctionComponent<
   );
 
   return (
-    <FinalField
+    <Field
       name={props.name || 'organization'}
       validate={props.validator as any}
       component={renderComponent}

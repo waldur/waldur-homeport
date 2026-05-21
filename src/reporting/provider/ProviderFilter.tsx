@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Field as FinalField, useForm } from 'react-final-form';
+import { Field, useForm } from 'react-final-form';
 
 import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
@@ -37,5 +37,5 @@ const ProviderSelectField: FC<any> = (fieldProps) => {
 };
 
 export const ProviderFilter: FC = () => (
-  <FinalField name="provider" component={ProviderSelectField} />
+  <Field name="provider" component={ProviderSelectField} />
 );

@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Field as FinalField, useFormState } from 'react-final-form';
+import { Field, useFormState } from 'react-final-form';
 import { MarketplacePublicOfferingsListData, Project } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
@@ -112,7 +112,7 @@ export const ProjectResourcesAllFilter: FunctionComponent<
         name="include_terminated"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <FinalField
+        <Field
           name="include_terminated"
           type="checkbox"
           component={AwesomeCheckboxField}
@@ -124,7 +124,7 @@ export const ProjectResourcesAllFilter: FunctionComponent<
         name="paused"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <FinalField
+        <Field
           name="paused"
           type="checkbox"
           component={AwesomeCheckboxField}
@@ -136,7 +136,7 @@ export const ProjectResourcesAllFilter: FunctionComponent<
         name="downscaled"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <FinalField
+        <Field
           name="downscaled"
           type="checkbox"
           component={AwesomeCheckboxField}
@@ -148,7 +148,7 @@ export const ProjectResourcesAllFilter: FunctionComponent<
         name="restrict_member_access"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <FinalField
+        <Field
           name="restrict_member_access"
           type="checkbox"
           component={AwesomeCheckboxField}

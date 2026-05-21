@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
@@ -21,7 +21,7 @@ export const OfferingResourcesFilter: FunctionComponent = () => (
       name="include_terminated"
       badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
     >
-      <FinalField
+      <Field
         name="include_terminated"
         type="checkbox"
         component={AwesomeCheckboxField}

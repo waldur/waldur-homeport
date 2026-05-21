@@ -1,4 +1,4 @@
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
 import { required } from '@/core/validators';
@@ -13,7 +13,7 @@ export const OrganizationProjectSelectField = ({ disabled = false }) => {
   const { loading } = useCustomerProjects();
 
   return (
-    <FinalField
+    <Field
       name="project"
       validate={required}
       component={FormGroup}
@@ -28,6 +28,6 @@ export const OrganizationProjectSelectField = ({ disabled = false }) => {
         isDisabled={disabled}
         isLoading={loading}
       />
-    </FinalField>
+    </Field>
   );
 };

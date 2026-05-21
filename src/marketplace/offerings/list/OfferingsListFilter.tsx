@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 
 import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
@@ -79,7 +79,7 @@ export const OfferingsListFilter: FunctionComponent<
         title={translate('Shared')}
         badgeValue={(value) => value?.label}
       >
-        <FinalField
+        <Field
           name="shared"
           component={(fieldProps) => (
             <Select

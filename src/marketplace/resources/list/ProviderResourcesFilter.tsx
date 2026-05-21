@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -87,7 +87,7 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
         name="include_terminated"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <FinalField
+        <Field
           name="include_terminated"
           type="checkbox"
           component={AwesomeCheckboxField}
@@ -99,7 +99,7 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
         name="paused"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <FinalField
+        <Field
           name="paused"
           type="checkbox"
           component={AwesomeCheckboxField}
@@ -111,7 +111,7 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
         name="downscaled"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <FinalField
+        <Field
           name="downscaled"
           type="checkbox"
           component={AwesomeCheckboxField}
@@ -123,7 +123,7 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
         name="restrict_member_access"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
-        <FinalField
+        <Field
           name="restrict_member_access"
           type="checkbox"
           component={AwesomeCheckboxField}

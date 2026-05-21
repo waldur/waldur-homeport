@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 
 import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
@@ -30,7 +30,7 @@ export const Select = (props) => {
 export const AsyncSelectField: FunctionComponent<any> = (props) => {
   const { name, placeholder, ...rest } = props;
   return (
-    <FinalField
+    <Field
       name={name}
       component={Select}
       defaultOptions

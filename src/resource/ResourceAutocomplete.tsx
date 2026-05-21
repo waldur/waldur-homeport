@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Field as FinalField } from 'react-final-form';
+import { Field } from 'react-final-form';
 import { Props as SelectProps } from 'react-select';
 
 import { AsyncPaginate } from '@/form/themed-select';
@@ -40,5 +40,5 @@ export const ResourceAutocomplete: FC<ResourceAutocompleteProps> = ({
     />
   );
 
-  return <FinalField name="resource" component={renderField} />;
+  return <Field name="resource" component={renderField} />;
 };
