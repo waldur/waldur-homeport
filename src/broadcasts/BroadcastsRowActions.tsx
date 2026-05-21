@@ -6,7 +6,7 @@ import { BroadcastUpdateButton } from './BroadcastUpdateButton';
 
 export const BroadcastsRowActions = ({ row, fetch }) => {
   if (row.state !== 'DRAFT' && row.state !== 'SCHEDULED') {
-    return 'N/A';
+    return <ActionsDropdown disabled tooltip />;
   }
   return (
     <ActionsDropdown

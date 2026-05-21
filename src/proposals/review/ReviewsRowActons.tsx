@@ -22,7 +22,7 @@ export const ReviewsRowActions = ({ row, fetch }) => {
     state.name === 'call-management.review-list' ||
     row.state === 'in_review';
   if (!showActions) {
-    return 'N/A';
+    return <ActionsDropdown disabled tooltip />;
   }
 
   return (
