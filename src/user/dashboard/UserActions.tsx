@@ -15,7 +15,7 @@ export const UserActions = ({ user }: UserActionsProps) => {
   return (
     <div className="d-flex gap-2">
       {showIssues && (
-        <Link state="profile.issues" className="btn btn-secondary">
+        <Link state="profile.issues" className="btn btn-secondary btn-lg">
           <span className="svg-icon svg-icon-2">
             <WarningIcon weight="bold" />
           </span>
