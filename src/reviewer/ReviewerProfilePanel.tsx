@@ -175,7 +175,7 @@ export const ReviewerProfilePanel = ({
             ) : (
               <SubmitButton
                 type="button"
-                variant="success"
+                variant="primary"
                 onClick={handlePublish}
                 submitting={isPublishing}
                 label={translate('Publish profile')}

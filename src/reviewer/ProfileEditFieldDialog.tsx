@@ -54,12 +54,12 @@ export const ProfileEditFieldDialog: React.FC<ProfileEditFieldDialogProps> = ({
             headerLess
             footer={
               <>
-                <CloseDialogButton variant="tertiary" className="flex-equal" />
+                <CloseDialogButton className="min-w-125px" />
                 <SubmitButton
                   disabled={invalid || !dirty}
                   submitting={submitting}
-                  label={translate('Submit')}
-                  className="btn btn-primary flex-equal"
+                  label={translate('Save')}
+                  className="btn btn-primary min-w-125px"
                 />
               </>
             }
