@@ -134,6 +134,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'ENABLE_MARKDOWN_IMAGE_UPLOAD',
+        description: translate('Allow uploading images for embedding in offering markdown descriptions.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
         key: 'ENFORCE_USER_CONSENT_FOR_OFFERINGS',
         description: translate('If True, users must have active consent to access offerings that have active Terms of Service.'),
         default: false,
@@ -190,6 +196,18 @@ export const SettingsDescription = [
         description: translate('Size of the thumbnail to generate when screenshot is uploaded for an offering.'),
         default: '120x120',
         type: 'string',
+      },
+      {
+        key: 'ENABLE_MARKDOWN_IMAGE_UPLOAD',
+        description: translate('Allow uploading images for embedding in offering markdown descriptions.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'MARKDOWN_IMAGE_MAX_SIZE_MB',
+        description: translate('Maximum size in megabytes for a markdown image upload.'),
+        default: 5,
+        type: 'integer',
       },
       {
         key: 'DISABLED_OFFERING_TYPES',
