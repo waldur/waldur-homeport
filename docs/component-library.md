@@ -64,7 +64,6 @@ The application uses a unified button system. **Never import Bootstrap Button di
 | Edit button in key-value component row | `CompactEditButton`                 | `sm` |
 | Edit in card/panel header              | `EditButton`                        | `lg` |
 | Create with dialog                     | `CreateModalButton`                 | `lg` |
-| Delete with confirmation               | `DeleteButton`                      | `lg` |
 
 #### ActionButton Usage
 
@@ -175,7 +174,6 @@ Generic button factories that reduce boilerplate for common CRUD operations:
 | --------------------- | ---------------------------------------- | -------------------------- | ------------------------------------------------------------------- |
 | **CreateModalButton** | `src/core/buttons/CreateModalButton.tsx` | Factory for create buttons | Opens dialog with resolve props, primary variant                    |
 | **EditModalButton**   | `src/core/buttons/EditModalButton.tsx`   | Factory for edit buttons   | Supports buildResolve, getInitialValues, action-item or button mode |
-| **DeleteButton**      | `src/core/buttons/DeleteButton.tsx`      | Factory for delete buttons | Confirmation dialog, API call, success/error notifications          |
 
 #### CreateModalButton Usage
 
@@ -205,31 +203,6 @@ export const MyEditButton = ({ row, refetch }) => (
     getInitialValues={(r) => ({ name: r.name })}
     size="lg"
     title={translate('Update')}
-  />
-);
-```
-
-#### DeleteButton Usage
-
-```tsx
-import { DeleteButton } from '@/core/buttons';
-import { myItemDestroy } from 'waldur-js-client';
-
-export const MyDeleteButton = ({ row, refetch }) => (
-  <DeleteButton
-    row={row}
-    apiFunction={(r) => myItemDestroy({ path: { uuid: r.uuid } })}
-    confirmTitle={translate('Delete item')}
-    confirmMessage={(r) =>
-      translate(
-        'Are you sure you want to delete {name}?',
-        { name: <strong>{r.name}</strong> },
-        formatJsxTemplate,
-      )
-    }
-    successMessage={translate('Item deleted.')}
-    errorMessage={translate('Unable to delete item.')}
-    refetch={refetch}
   />
 );
 ```
