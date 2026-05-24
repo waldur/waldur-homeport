@@ -89,7 +89,6 @@ describe('OpenstackTenantActions', () => {
       'Set termination date',
       'Set as erred',
       'Change quotas',
-      'Refresh quotas',
       'Move',
       'Unlink',
       'Mark as ERRED',

@@ -46,6 +46,9 @@ const makeResource = (overrides: any = {}) => ({
     { name: 'network_count', usage: 1, limit: 10 },
     { name: 'subnet_count', usage: 1, limit: 10 },
     { name: 'port_count', usage: 4, limit: 20 },
+    // Per-volume-type Cinder quotas (GB, discoverable, settable)
+    { name: 'gigabytes_ssd', usage: 20, limit: 100 },
+    { name: 'gigabytes___DEFAULT__', usage: 50, limit: 500 },
     // Read-only derived quotas
     { name: 'volumes_size', usage: 100, limit: 500 },
     { name: 'snapshots_size', usage: 50, limit: 500 },
@@ -223,6 +226,8 @@ describe('SetQuotasDialog', () => {
             network_count: 10,
             subnet_count: 10,
             port_count: 20,
+            gigabytes_ssd: 100, // GB, no conversion
+            gigabytes___DEFAULT__: 500, // GB, no conversion
           }),
         }),
       );
@@ -350,6 +355,136 @@ describe('SetQuotasDialog', () => {
     it('shows tooltip text on snapshots_size read-only row', () => {
       renderDialog();
       expect(screen.getByText('Snapshots size')).toBeInTheDocument();
+    });
+  });
+
+  describe('Per-volume-type gigabytes_<type> quotas', () => {
+    it('renders editable inputs for gigabytes_ssd and gigabytes___DEFAULT__', () => {
+      renderDialog();
+      expect(screen.getByTestId('quota-gigabytes_ssd')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('quota-gigabytes___DEFAULT__'),
+      ).toBeInTheDocument();
+    });
+
+    it('sets min=-1 on gigabytes_* inputs (allows -1 for unlimited)', () => {
+      renderDialog();
+      expect(screen.getByTestId('quota-gigabytes_ssd')).toHaveAttribute(
+        'min',
+        '-1',
+      );
+      expect(screen.getByTestId('quota-gigabytes___DEFAULT__')).toHaveAttribute(
+        'min',
+        '-1',
+      );
+    });
+
+    it('initialises gigabytes_* inputs from quota limit as-is (no MiB conversion)', () => {
+      renderDialog();
+      // gigabytes_ssd has limit: 100 — should appear as 100 in the input, not 100/1024
+      const ssdInput = screen.getByTestId(
+        'quota-gigabytes_ssd',
+      ) as HTMLInputElement;
+      expect(ssdInput).toHaveValue(100);
+    });
+
+    it('sends gigabytes_* values as GB without MiB conversion', async () => {
+      const user = userEvent.setup();
+      vi.mocked(openstackTenantsSetQuotas).mockResolvedValue({} as any);
+
+      renderDialog();
+
+      const ssdInput = screen.getByTestId('quota-gigabytes_ssd');
+      await user.clear(ssdInput);
+      await user.type(ssdInput, '200');
+
+      await user.click(screen.getByRole('button', { name: /Save/i }));
+
+      await waitFor(() => {
+        expect(openstackTenantsSetQuotas).toHaveBeenCalledWith(
+          expect.objectContaining({
+            body: expect.objectContaining({
+              gigabytes_ssd: 200, // sent as GB — no × 1024
+            }),
+          }),
+        );
+      });
+    });
+
+    it('does not render gigabytes_* inputs when none are in resource.quotas', () => {
+      renderDialog(makeResource({ quotas: [] }));
+      expect(
+        screen.queryByTestId('quota-gigabytes_ssd'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('shows GB unit in Difference badge for gigabytes_* quota', async () => {
+      const user = userEvent.setup();
+      renderDialog();
+
+      const ssdInput = screen.getByTestId('quota-gigabytes_ssd');
+      await user.clear(ssdInput);
+      await user.type(ssdInput, '150');
+
+      // Difference: 150 - 100 = +50 GB
+      const badge = await screen.findByText('+50 GB');
+      expect(badge).toBeInTheDocument();
+    });
+  });
+
+  describe('Marketplace-managed info badge', () => {
+    it('shows info badge on vcpu, ram, and storage rows', () => {
+      renderDialog();
+      expect(
+        screen.getByTestId('marketplace-managed-vcpu'),
+      ).toBeInTheDocument();
+      expect(screen.getByTestId('marketplace-managed-ram')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('marketplace-managed-storage'),
+      ).toBeInTheDocument();
+    });
+
+    it('shows info badge on gigabytes_* rows', () => {
+      renderDialog();
+      expect(
+        screen.getByTestId('marketplace-managed-gigabytes_ssd'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId('marketplace-managed-gigabytes___DEFAULT__'),
+      ).toBeInTheDocument();
+    });
+
+    it('does not show info badge on plain count quotas (instances, volumes, floating_ip_count)', () => {
+      renderDialog();
+      expect(
+        screen.queryByTestId('marketplace-managed-instances'),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('marketplace-managed-volumes'),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('marketplace-managed-floating_ip_count'),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  describe('Current limit column unit consistency', () => {
+    it('shows RAM current limit in GB (not TB or MiB)', () => {
+      renderDialog();
+      // ram limit = 4096 MiB = 4 GB
+      expect(screen.getAllByText('4 GB').length).toBeGreaterThanOrEqual(1);
+    });
+
+    it('shows storage current limit in GB', () => {
+      renderDialog();
+      // storage limit = 10240 MiB = 10 GB (at least once as Current limit display)
+      expect(screen.getAllByText('10 GB').length).toBeGreaterThanOrEqual(1);
+    });
+
+    it('shows gigabytes_ssd current limit as GB integer', () => {
+      renderDialog();
+      // gigabytes_ssd limit = 100 GB
+      expect(screen.getAllByText('100 GB').length).toBeGreaterThanOrEqual(1);
     });
   });
 
