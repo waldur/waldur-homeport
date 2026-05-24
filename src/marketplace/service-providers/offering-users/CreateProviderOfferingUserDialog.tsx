@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import {
   marketplaceOfferingUsersCreate,
   ServiceProvider,
@@ -67,6 +67,15 @@ export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
     await mutation.mutateAsync(formData);
   };
 
+  const loadOfferings = useMemo(
+    () =>
+      providerOfferingsAutocomplete({
+        customer: provider.customer,
+        can_create_offering_user: true,
+      }),
+    [provider.customer],
+  );
+
   const fields = [
     {
       name: 'user',
@@ -80,16 +89,7 @@ export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
       name: 'offering',
       label: translate('Offering'),
       type: 'async_select',
-      loadOptions: (query, prevOptions, page) =>
-        providerOfferingsAutocomplete(
-          {
-            name: query,
-            customer: provider.customer,
-            can_create_offering_user: true,
-          },
-          prevOptions,
-          page,
-        ),
+      loadOptions: loadOfferings,
       getOptionLabel: ({ name, customer_name }) => (
         <>
           {name} | {customer_name}

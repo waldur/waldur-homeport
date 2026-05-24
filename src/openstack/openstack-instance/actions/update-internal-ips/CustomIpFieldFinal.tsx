@@ -5,7 +5,7 @@ import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { FieldError, StringField } from '@/form';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import {
   getIPsInRange,

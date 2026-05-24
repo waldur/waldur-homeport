@@ -7,7 +7,7 @@ import {
   PromotionsCampaignsListData,
 } from 'waldur-js-client';
 
-import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -66,7 +66,7 @@ export const PromotionsCampaignsFilter: FunctionComponent<{}> = () => (
             getOptionLabel={(option: CampaignStateOption) => option.label}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -89,7 +89,7 @@ export const PromotionsCampaignsFilter: FunctionComponent<{}> = () => (
             }
             getOptionLabel={(option: DiscountTypeOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

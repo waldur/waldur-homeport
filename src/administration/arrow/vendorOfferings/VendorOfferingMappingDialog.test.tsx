@@ -50,24 +50,28 @@ vi.mock('./SharedMappingFields', () => ({
   ),
 }));
 
-// Mock AsyncSelectField (the offering field)
-vi.mock('@/form/AsyncSelectField', () => ({
-  Select: ({ input, label, onChange }) => (
-    <div>
-      <label>{label}</label>
-      <input
-        value={input.value?.uuid || ''}
-        onChange={(e) => {
-          const val = { uuid: e.target.value, name: 'Test Offering' };
-          input.onChange(val);
-          if (onChange) onChange(val);
-        }}
-        onBlur={input.onBlur}
-        data-testid="offering-input"
-      />
-    </div>
-  ),
-}));
+// Mock AsyncSelect (the offering field)
+vi.mock('@/form/select', async (importOriginal) => {
+  const actual = await importOriginal<any>();
+  return {
+    ...actual,
+    AsyncSelect: ({ input, label, onChange }) => (
+      <div>
+        <label>{label}</label>
+        <input
+          value={input.value?.uuid || ''}
+          onChange={(e) => {
+            const val = { uuid: e.target.value, name: 'Test Offering' };
+            input.onChange(val);
+            if (onChange) onChange(val);
+          }}
+          onBlur={input.onBlur}
+          data-testid="offering-input"
+        />
+      </div>
+    ),
+  };
+});
 
 describe('VendorOfferingMappingDialog', () => {
   const mockRefetch = vi.fn();

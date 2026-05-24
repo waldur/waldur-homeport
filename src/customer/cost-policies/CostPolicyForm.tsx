@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import {
@@ -11,7 +11,7 @@ import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { composeValidators, required } from '@/core/validators';
 import { FormContainer, NumberField, SelectField, StringField } from '@/form';
-import { Select } from '@/form/AsyncSelectField';
+import { AsyncSelect as Select } from '@/form/select';
 import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
@@ -35,6 +35,34 @@ interface CostPolicyFormProps {
 export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
   const currentOrganization = useCustomer();
   const { values } = useFormState({ subscription: { values: true } });
+
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: [
+          'name',
+          'uuid',
+          'url',
+          'customer_credit',
+          'billing_price_estimate',
+        ],
+      }),
+    [],
+  );
+
+  const loadProjects = useMemo(
+    () =>
+      projectAutocomplete(currentOrganization?.uuid, {
+        field: [
+          'name',
+          'uuid',
+          'url',
+          'billing_price_estimate',
+          'project_credit',
+        ],
+      }),
+    [currentOrganization?.uuid],
+  );
 
   const selectedEntities = values.scope || [];
   const selectedPeriod = values.period;
@@ -96,23 +124,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           validate={required}
           required
           placeholder={translate('Search and select project...')}
-          loadOptions={(query, prevOptions, page) =>
-            projectAutocomplete(
-              currentOrganization?.uuid,
-              query,
-              prevOptions,
-              page,
-              {
-                field: [
-                  'name',
-                  'uuid',
-                  'url',
-                  'billing_price_estimate',
-                  'project_credit',
-                ],
-              },
-            )
-          }
+          loadOptions={loadProjects}
           isMulti
           isDisabled={props.isEdit}
           getOptionLabel={(option) => {
@@ -134,17 +146,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           validate={required}
           required
           placeholder={translate('Search and select organization...')}
-          loadOptions={(query, prevOptions, page) =>
-            organizationAutocomplete(query, prevOptions, page, {
-              field: [
-                'name',
-                'uuid',
-                'url',
-                'customer_credit',
-                'billing_price_estimate',
-              ],
-            })
-          }
+          loadOptions={loadOrganizations}
           isMulti
           isDisabled={props.isEdit}
           getOptionValue={(option) => option.url}

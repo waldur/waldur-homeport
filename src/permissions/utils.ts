@@ -1,9 +1,16 @@
+import { rolesList } from 'waldur-js-client';
+
 import { ENV } from '@/core/config';
+import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
 import { ROLE_TYPES } from '@/permissions/constants';
 
 import { RoleEnum } from './enums';
 import { RoleType } from './types';
+
+export const roleAutocomplete = createLoadOptions(rolesList, 'name', {
+  field: ['uuid', 'name', 'description'],
+});
 
 export const getRoles = (types: RoleType[]) =>
   ENV.roles

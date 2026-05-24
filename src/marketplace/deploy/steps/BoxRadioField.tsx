@@ -6,7 +6,7 @@ import { FormCheck } from 'react-bootstrap';
 import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { MenuComponent } from '@/metronic/components';

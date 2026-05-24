@@ -3,7 +3,7 @@ import { Field } from 'react-final-form';
 
 import { CountrySelectField } from '@/form/CountrySelectField';
 import { MultiCountrySelectField } from '@/form/MultiCountrySelectField';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';

@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 
-import { Select } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { AsyncSelectField as Select } from '@/form/select';
 import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
@@ -21,6 +21,18 @@ const RecipientsListQuery = () => {
 };
 
 export const RecipientsStep: FC<WizardStepProps> = (props) => {
+  const loadOptions = useMemo(
+    () => providerOfferingsAutocomplete({ shared: true }),
+    [],
+  );
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'uuid'],
+        o: 'name',
+      }),
+    [],
+  );
   return (
     <WizardModal {...props}>
       <Row>
@@ -45,17 +57,10 @@ export const RecipientsStep: FC<WizardStepProps> = (props) => {
             label={translate('Offerings')}
             description={translate('Select specific offerings to target')}
           >
-            <Field
+            <Select
               name="offerings"
-              component={Select}
               placeholder={translate('Select offerings...')}
-              loadOptions={(query, prevOptions, page) =>
-                providerOfferingsAutocomplete(
-                  { name: query, shared: true },
-                  prevOptions,
-                  page,
-                )
-              }
+              loadOptions={loadOptions}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => option.uuid}
               noOptionsMessage={() => translate('No offerings found')}
@@ -67,16 +72,10 @@ export const RecipientsStep: FC<WizardStepProps> = (props) => {
             label={translate('Organizations')}
             description={translate('Select specific organizations to target')}
           >
-            <Field
+            <Select
               name="customers"
-              component={Select}
               placeholder={translate('Select organizations...')}
-              loadOptions={(query, prevOptions, page) =>
-                organizationAutocomplete(query, prevOptions, page, {
-                  field: ['name', 'uuid'],
-                  o: 'name',
-                })
-              }
+              loadOptions={loadOrganizations}
               getOptionLabel={(option) => option.name}
               getOptionValue={(option) => option.uuid}
               noOptionsMessage={() => translate('No organizations found')}

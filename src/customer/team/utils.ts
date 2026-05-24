@@ -1,41 +1,24 @@
-import { usersList, UsersListData } from 'waldur-js-client';
+import { usersList } from 'waldur-js-client';
 
-import { count, parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { count } from '@/core/api';
+import { createLoadOptions } from '@/form/select';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { RootState } from '@/store/reducers';
 import { getUser } from '@/workspace/selectors';
 
-export const usersAutocomplete = async (
-  query: UsersListData['query'],
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await usersList({
-    query: {
-      field: [
-        'full_name',
-        'url',
-        'email',
-        'uuid',
-        'username',
-        'registration_method',
-        'is_active',
-      ],
-      o: ['full_name'],
-      ...query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};
+export const usersAutocomplete = createLoadOptions(usersList, 'query', {
+  field: [
+    'full_name',
+    'url',
+    'email',
+    'uuid',
+    'username',
+    'registration_method',
+    'is_active',
+  ],
+  o: ['full_name'],
+});
 
 export const getCustomerUsersCount = (customerUuid: string) =>
   count(`/api/customers/${customerUuid}/users/`);

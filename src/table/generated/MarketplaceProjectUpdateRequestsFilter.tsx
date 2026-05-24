@@ -9,13 +9,9 @@ import {
   customersList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const RemoteProjectUpdateRequestStateOptions: RemoteProjectUpdateRequestStateOption[] =
@@ -72,7 +68,7 @@ export const MarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
               }
               isClearable={true}
               isMulti={true}
-              {...REACT_SELECT_TABLE_FILTER}
+              variant="tableFilter"
             />
           )}
         />
@@ -85,16 +81,16 @@ export const MarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
         <Field
           name="organization"
           component={(fieldProps) => (
-            <AsyncPaginate
+            <AsyncSelect
               placeholder={translate('Organization')}
-              loadOptions={createSelectFetcher(customersList, 'query')}
+              loadOptions={createLoadOptions(customersList, 'query')}
               defaultOptions
               getOptionValue={(option: Customer) => String(option.uuid || '')}
               getOptionLabel={(option: Customer) => String(option.name || '')}
               value={fieldProps.input.value}
               onChange={(value) => fieldProps.input.onChange(value)}
               isClearable={true}
-              {...REACT_SELECT_TABLE_FILTER}
+              variant="tableFilter"
             />
           )}
         />

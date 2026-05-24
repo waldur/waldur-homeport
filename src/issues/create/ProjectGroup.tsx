@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Field, useFormState, useForm } from 'react-final-form';
 
 import { FormGroup } from '@/form';
-import { Select as AsyncSelectField } from '@/form/AsyncSelectField';
-import { Select } from '@/form/themed-select';
+import { AsyncSelect as AsyncSelectField } from '@/form/select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { projectAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -45,6 +45,14 @@ export const ProjectGroup = ({ disabled }) => {
     }
   }, [form, customer, project]);
 
+  const loadProjects = useMemo(
+    () =>
+      projectAutocomplete(customer?.uuid, {
+        field: ['name', 'url', 'uuid', 'customer_uuid'],
+      }),
+    [customer?.uuid],
+  );
+
   return (
     <Field
       name="project"
@@ -56,14 +64,10 @@ export const ProjectGroup = ({ disabled }) => {
         <AsyncSelectField
           isClearable={true}
           defaultOptions
-          loadOptions={(query, prevOptions, page) =>
-            projectAutocomplete(customer.uuid, query, prevOptions, page, {
-              field: ['name', 'url', 'uuid', 'customer_uuid'],
-            })
-          }
+          loadOptions={loadProjects}
           getOptionValue={(option) => option.uuid}
           getOptionLabel={(option) => option.name}
-          filterOption={(options) => options}
+          filterOption={null}
           isDisabled={disabled}
           key={customer.uuid}
         />

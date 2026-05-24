@@ -4,7 +4,7 @@ import { AgentIdentity } from 'waldur-js-client';
 import { formatDateTime, formatUptime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CompactActionButton } from '@/table/CompactActionButton';

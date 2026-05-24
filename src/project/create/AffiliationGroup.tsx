@@ -1,8 +1,8 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Field } from 'react-final-form';
 
 import { Badge } from '@/core/Badge';
-import { Select as AsyncPaginateSelect } from '@/form/AsyncSelectField';
+import { AsyncSelect as AsyncSelectSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { affiliationAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -54,12 +54,9 @@ export const AffiliationGroup = ({
 
   // Staff: full registry. Non-staff: server-side filtered to the customer's
   // default_affiliations via ?default_for_customer=<uuid>.
-  const loadOptions = useCallback(
-    (query, prevOptions, page) =>
+  const loadOptions = useMemo(
+    () =>
       affiliationAutocomplete(
-        query,
-        prevOptions,
-        page,
         isStaff ? undefined : { default_for_customer: customer?.uuid },
       ),
     [isStaff, customer],
@@ -71,9 +68,9 @@ export const AffiliationGroup = ({
         name="affiliation"
         validate={validate}
         render={(fieldProps) => (
-          <AsyncPaginateSelect
-            {...fieldProps}
-            // The cacheUniqs key makes AsyncPaginate re-fetch the first page
+          <AsyncSelectSelect
+            {...fieldProps.input}
+            // The cacheUniqs key makes AsyncSelect re-fetch the first page
             // when the customer changes (the underlying default list differs).
             cacheUniqs={[customer?.uuid, isStaff]}
             placeholder={translate('Select an affiliation...')}

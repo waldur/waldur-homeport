@@ -2,7 +2,7 @@ import { ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { getOptions } from '@/form/TimeSelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';

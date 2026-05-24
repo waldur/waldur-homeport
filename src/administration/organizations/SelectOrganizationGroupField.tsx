@@ -3,10 +3,10 @@ import { Field } from 'react-final-form';
 import { OrganizationGroup } from 'waldur-js-client';
 
 import { organizationGroupAutocomplete } from '@/customer/list/autcompletes';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 
 import {
-  commonAsyncPaginateProps,
+  commonAsyncSelectProps,
   OrganizationGroupFieldOption,
   OrganizationGroupFieldSingleValue,
 } from './SelectOrganizationGroupFieldHelpers';
@@ -23,19 +23,22 @@ export const SelectOrganizationGroupField: FC<SelectFieldProps> = ({
   <Field
     name="parent"
     render={({ input }) => (
-      <AsyncPaginate
-        {...commonAsyncPaginateProps}
-        loadOptions={(query, prevOptions, { page }) =>
-          organizationGroupAutocomplete(query, prevOptions, { page }).then(
-            (result) => ({
-              ...result,
-              options: result.options.filter(
-                (option: OrganizationGroup) =>
-                  option.uuid !== currentOrganizationGroup?.uuid,
-              ),
-            }),
-          )
-        }
+      <AsyncSelect
+        {...commonAsyncSelectProps}
+        loadOptions={async (query, prevOptions, { page }) => {
+          const result = await organizationGroupAutocomplete(
+            query,
+            prevOptions,
+            { page },
+          );
+          return {
+            ...result,
+            options: result.options.filter(
+              (option: OrganizationGroup) =>
+                option.uuid !== currentOrganizationGroup?.uuid,
+            ),
+          };
+        }}
         components={{
           Option: OrganizationGroupFieldOption,
           SingleValue: OrganizationGroupFieldSingleValue,

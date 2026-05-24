@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
@@ -31,7 +30,7 @@ export const OrdersListFilter: React.FC<OrdersListFilterProps> = (props) => {
           name="offering"
           badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
         >
-          <OfferingAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+          <OfferingAutocomplete reactSelectProps={{ variant: 'tableFilter' }} />
         </TableFilterItem>
       )}
       {props.hasOrganization && (
@@ -41,7 +40,7 @@ export const OrdersListFilter: React.FC<OrdersListFilterProps> = (props) => {
           badgeValue={(value) => value?.name}
         >
           <OrganizationAutocomplete
-            reactSelectProps={REACT_SELECT_TABLE_FILTER}
+            reactSelectProps={{ variant: 'tableFilter' }}
           />
         </TableFilterItem>
       )}
@@ -50,7 +49,7 @@ export const OrdersListFilter: React.FC<OrdersListFilterProps> = (props) => {
         name="project"
         badgeValue={(value) => value?.name}
       >
-        <ProjectFilter reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+        <ProjectFilter reactSelectProps={{ variant: 'tableFilter' }} />
       </TableFilterItem>
       {props.hasOrganization && !provider_uuid && (
         <TableFilterItem
@@ -58,7 +57,7 @@ export const OrdersListFilter: React.FC<OrdersListFilterProps> = (props) => {
           name="provider"
           getValueLabel={(option) => option.customer_name}
         >
-          <ProviderAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+          <ProviderAutocomplete reactSelectProps={{ variant: 'tableFilter' }} />
         </TableFilterItem>
       )}
       <TableFilterItem

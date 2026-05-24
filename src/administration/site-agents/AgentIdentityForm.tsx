@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
 import {
@@ -12,7 +13,7 @@ import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { StringField, TextField, FieldError, SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -40,6 +41,15 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
     enabled: isEdit && Boolean(resolve.identity?.offering),
     staleTime: STALE_TIME,
   });
+
+  const loadOfferings = useMemo(
+    () =>
+      providerOfferingsAutocomplete({
+        type: ['Marketplace.Slurm'],
+        field: ['uuid', 'name'],
+      }),
+    [],
+  );
 
   const initialValues = isEdit
     ? {
@@ -160,14 +170,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
               <AsyncSelectField
                 name="offering"
                 placeholder={translate('Select offering...')}
-                loadOptions={(query, prevOptions, page) =>
-                  providerOfferingsAutocomplete(
-                    { name: query, type: ['Marketplace.Slurm'] },
-                    prevOptions,
-                    page,
-                    ['uuid', 'name'],
-                  )
-                }
+                loadOptions={loadOfferings}
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={(option) => option.name}
                 validate={required}

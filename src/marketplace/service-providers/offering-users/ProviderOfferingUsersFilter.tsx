@@ -3,12 +3,8 @@ import { Field } from 'react-final-form';
 import { OfferingUserState } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { SelectField } from '@/form/SelectField';
-import {
-  REACT_MULTI_SELECT_TABLE_FILTER,
-  REACT_SELECT_TABLE_FILTER,
-  Select,
-} from '@/form/themed-select';
+import { Select } from '@/form/select';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { ProviderAutocomplete } from '@/marketplace/orders/ProviderAutocomplete';
@@ -58,7 +54,8 @@ const OfferingUserStateFilter = () => (
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
         isClearable={true}
-        {...REACT_MULTI_SELECT_TABLE_FILTER}
+        variant="tableFilter"
+        isMulti
       />
     )}
   />
@@ -87,7 +84,7 @@ export const ProviderOfferingUsersFilter: FunctionComponent<
       >
         <OfferingAutocomplete
           offeringFilter={offeringFilter}
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
         />
       </TableFilterItem>
       <TableFilterItem
@@ -104,7 +101,7 @@ export const ProviderOfferingUsersFilter: FunctionComponent<
           name="provider"
           getValueLabel={(option) => option.customer_name}
         >
-          <ProviderAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+          <ProviderAutocomplete reactSelectProps={{ variant: 'tableFilter' }} />
         </TableFilterItem>
       )}
       {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
@@ -126,7 +123,7 @@ export const ProviderOfferingUsersFilter: FunctionComponent<
                 noUpdateOnBlur={true}
                 simpleValue={true}
                 isClearable={true}
-                {...REACT_SELECT_TABLE_FILTER}
+                variant="tableFilter"
               />
             )}
           />

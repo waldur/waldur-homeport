@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { useCallback, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Alert, Form } from 'react-bootstrap';
 import {
   adminArrowBillingSyncsSyncResourceHistoricalConsumption,
@@ -9,7 +9,7 @@ import {
 import { Badge } from '@/core/Badge';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { SubmitButton } from '@/form';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -61,16 +61,11 @@ export const ForceImportConsumptionDialog = ({
   const [periodTo, setPeriodTo] = useState(defaultRange.end);
   const [previewData, setPreviewData] = useState<PreviewPeriod[]>([]);
 
-  const loadResources = useCallback(
-    (query: string, prevOptions, { page }) =>
-      resourceAutocomplete(
-        {
-          name: query,
-          field: ['name', 'url', 'uuid', 'backend_id', 'offering_name'],
-        } as any,
-        prevOptions,
-        page,
-      ),
+  const loadResources = useMemo(
+    () =>
+      resourceAutocomplete({
+        field: ['name', 'url', 'uuid', 'backend_id', 'offering_name'],
+      }),
     [],
   );
 
@@ -150,7 +145,7 @@ export const ForceImportConsumptionDialog = ({
 
       <Form.Group className="mb-3">
         <Form.Label>{translate('Resource')}</Form.Label>
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('Select resource...')}
           loadOptions={loadResources}
           getOptionValue={(option: Resource) => option.uuid}

@@ -3,7 +3,7 @@ import {
   openstackRoutersRemoveRouterInterface,
 } from 'waldur-js-client';
 
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';

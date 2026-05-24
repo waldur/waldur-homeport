@@ -5,7 +5,7 @@ import { projectsRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { AsyncPaginate, Select } from '@/form/themed-select';
+import { AsyncSelect, Select } from '@/form/select';
 import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
@@ -40,6 +40,8 @@ interface ProjectOption {
 }
 
 export const ProjectDetailPage: FC = () => {
+  const loadOrganizations = useMemo(() => organizationAutocomplete(), []);
+
   const { params } = useCurrentStateAndParams();
   const router = useRouter();
   const projectUuid = params.project_uuid;
@@ -53,6 +55,11 @@ export const ProjectDetailPage: FC = () => {
     null,
   );
   const [projectLoading, setProjectLoading] = useState(false);
+
+  const loadProjects = useMemo(
+    () => projectAutocomplete(selectedOrganization?.uuid),
+    [selectedOrganization?.uuid],
+  );
 
   // State for filters
   const [selectedResource, setSelectedResource] =
@@ -284,11 +291,9 @@ export const ProjectDetailPage: FC = () => {
           label={translate('Organization')}
           className="flex-grow-1 mw-400px"
         >
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Select organization...')}
-            loadOptions={(query, prevOptions, { page }) =>
-              organizationAutocomplete(query, prevOptions, page)
-            }
+            loadOptions={loadOrganizations}
             defaultOptions
             value={selectedOrganization}
             onChange={handleOrganizationChange}
@@ -303,17 +308,10 @@ export const ProjectDetailPage: FC = () => {
           label={translate('Project')}
           className="flex-grow-1 mw-400px"
         >
-          <AsyncPaginate
+          <AsyncSelect
             key={selectedOrganization?.uuid || 'no-org'}
             placeholder={translate('Select project...')}
-            loadOptions={(query, prevOptions, { page }) =>
-              projectAutocomplete(
-                selectedOrganization?.uuid,
-                query,
-                prevOptions,
-                page,
-              )
-            }
+            loadOptions={loadProjects}
             defaultOptions
             value={selectedProject}
             onChange={handleProjectChange}

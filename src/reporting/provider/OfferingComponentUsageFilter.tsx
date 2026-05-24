@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import { Field, useFormState } from 'react-final-form';
 
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { StringField } from '@/form/StringField';
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
@@ -29,7 +28,7 @@ export const OfferingComponentUsageFilter: FC = () => {
           loadOptions={providerAutocomplete}
           getOptionLabel={({ customer_name }) => customer_name}
           getOptionValue={({ customer_uuid }) => customer_uuid}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
         />
       </TableFilterItem>
       <TableFilterItem
@@ -42,7 +41,7 @@ export const OfferingComponentUsageFilter: FC = () => {
           offeringFilter={
             provider ? { customer_uuid: provider.customer_uuid } : {}
           }
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
         />
       </TableFilterItem>
       <TableFilterItem
@@ -51,7 +50,7 @@ export const OfferingComponentUsageFilter: FC = () => {
         badgeValue={(value) => value?.label}
       >
         <OfferingTypeAutocomplete
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
         />
       </TableFilterItem>
       <TableFilterItem

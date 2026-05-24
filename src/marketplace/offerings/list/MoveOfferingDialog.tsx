@@ -1,11 +1,11 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import { marketplaceProviderOfferingsMoveOffering } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { FormFooter } from '@/form';
-import { Select } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { AsyncSelectField as Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -17,6 +17,16 @@ export const MoveOfferingDialog: FunctionComponent<{
   resolve: { offering; refetch };
 }> = ({ resolve: { offering, refetch } }) => {
   const { showSuccess } = useNotify();
+
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'url'],
+        o: 'name',
+        is_service_provider: true,
+      }),
+    [],
+  );
 
   const moveOfferingMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>
@@ -61,18 +71,11 @@ export const MoveOfferingDialog: FunctionComponent<{
             }
           >
             <FormGroup label={translate('Move to service provider')} required>
-              <Field
-                component={Select}
+              <Select
                 name="organization"
                 validate={required}
                 placeholder={translate('Select organization...')}
-                loadOptions={(query, prevOptions, page) =>
-                  organizationAutocomplete(query, prevOptions, page, {
-                    field: ['name', 'url'],
-                    o: 'name',
-                    is_service_provider: true,
-                  })
-                }
+                loadOptions={loadOrganizations}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.url}
                 noOptionsMessage={() => translate('No organizations')}

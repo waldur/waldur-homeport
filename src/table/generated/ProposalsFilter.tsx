@@ -9,13 +9,9 @@ import {
   proposalPublicCallsList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const ProposalStatesOptions: ProposalStatesOption[] = [
@@ -70,7 +66,7 @@ export const ProposalsFilter: FunctionComponent<{}> = () => (
             getOptionLabel={(option: ProposalStatesOption) => option.label}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -83,16 +79,16 @@ export const ProposalsFilter: FunctionComponent<{}> = () => (
       <Field
         name="call"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Call')}
-            loadOptions={createSelectFetcher(proposalPublicCallsList, 'name')}
+            loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
             defaultOptions
             getOptionValue={(option: PublicCall) => String(option.uuid || '')}
             getOptionLabel={(option: PublicCall) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

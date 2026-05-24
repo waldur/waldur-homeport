@@ -2,11 +2,8 @@ import { FunctionComponent, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { marketplaceSoftwareCatalogsList, Offering } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
 import { SelectField } from '@/form';
-import { AsyncPaginate, Select } from '@/form/themed-select';
+import { createLoadOptions, AsyncSelect, Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
@@ -35,25 +32,7 @@ const PLATFORM_OPTIONS = [
 ];
 
 // Function for loading software catalogs
-const loadCatalogs = async (query, prevOptions, page) => {
-  try {
-    const response = await marketplaceSoftwareCatalogsList({
-      query: {
-        name: query || undefined,
-        page: page || 1,
-        page_size: ENV.pageSize,
-      },
-    });
-
-    return returnReactSelectAsyncPaginateObject(
-      parseSelectData(response),
-      prevOptions,
-      page,
-    );
-  } catch {
-    return { options: [], hasMore: false };
-  }
-};
+const loadCatalogs = createLoadOptions(marketplaceSoftwareCatalogsList, 'name');
 
 export const SoftwareCatalogForm: FunctionComponent<{
   isEdit?: boolean;
@@ -73,12 +52,10 @@ export const SoftwareCatalogForm: FunctionComponent<{
       <FormGroup label={translate('Software catalog')} required>
         <Field name="catalog">
           {({ input }) => (
-            <AsyncPaginate
+            <AsyncSelect
               {...input}
               placeholder={translate('Select software catalog...')}
-              loadOptions={(query, prevOptions, { page }) =>
-                loadCatalogs(query, prevOptions, page)
-              }
+              loadOptions={loadCatalogs}
               getOptionValue={(option) => option.uuid}
               getOptionLabel={(option) =>
                 `${option.name} ${option.version} (${option.package_count} packages) - ${option.catalog_type_display || option.catalog_type || 'Unknown type'}`

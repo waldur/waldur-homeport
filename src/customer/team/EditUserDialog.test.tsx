@@ -102,7 +102,7 @@ vi.mock('@/permissions/utils', () => ({
 }));
 
 // Mock form components - customer variant to avoid duplication
-vi.mock('@/form/SelectField', () => ({
+vi.mock('@/form/select/SelectField', () => ({
   SelectField: ({ options, getOptionLabel }) => (
     <select data-testid="customer-select">
       {options?.map((option, idx) => (

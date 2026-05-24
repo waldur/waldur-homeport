@@ -7,7 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { FormGroup } from '@/form';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 import { useManagedMutation } from '@/modal/useManagedMutation';

@@ -10,13 +10,9 @@ import {
 } from 'waldur-js-client';
 
 import { DateField } from '@/form/DateField';
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const AccessorTypeOptions: AccessorTypeOption[] = [
@@ -80,7 +76,7 @@ export const DataAccessLogsFilter: FunctionComponent<{}> = () => (
             }
             getOptionLabel={(option: AccessorTypeOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -95,9 +91,9 @@ export const DataAccessLogsFilter: FunctionComponent<{}> = () => (
       <Field
         name="user"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('User')}
-            loadOptions={createSelectFetcher(usersList, 'full_name', {
+            loadOptions={createLoadOptions(usersList, 'full_name', {
               o: ['full_name'],
             })}
             defaultOptions
@@ -108,7 +104,7 @@ export const DataAccessLogsFilter: FunctionComponent<{}> = () => (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

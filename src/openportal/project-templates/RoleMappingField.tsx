@@ -1,20 +1,11 @@
 import classNames from 'classnames';
-import { debounce } from 'lodash-es';
-import React, {
-  useState,
-  FunctionComponent,
-  useCallback,
-  useMemo,
-} from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { rolesList } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
+import { roleAutocomplete } from '@/permissions/utils';
 
 interface RoleMapping {
   [key: string]: any;
@@ -27,22 +18,6 @@ interface RoleMappingFieldProps extends FormField {
   debounceMs?: number;
 }
 
-const roleAutocomplete = async (query: string, prevOptions, { page }) => {
-  const response = await rolesList({
-    query: {
-      name: query,
-      page: page,
-      page_size: ENV.pageSize,
-      field: ['uuid', 'name', 'description'],
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
-
 export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
   input,
   placeholder,
@@ -52,26 +27,6 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
 }) => {
   const [remoteRoleName, setRemoteRoleName] = useState<string>('');
   const [localRole, setLocalRole] = useState<any>(null);
-
-  const debouncedRoleAutocomplete = useMemo(
-    () =>
-      debounce(
-        (query: string, prevOptions: any, page: { page: number }, resolve) => {
-          roleAutocomplete(query, prevOptions, page).then(resolve);
-        },
-        debounceMs || 1000,
-      ),
-    [debounceMs],
-  );
-
-  const loadRoleOptions = useCallback(
-    (query: string, prevOptions: any, { page }: { page: number }) => {
-      return new Promise((resolve) => {
-        debouncedRoleAutocomplete(query, prevOptions, { page }, resolve);
-      });
-    },
-    [debouncedRoleAutocomplete],
-  );
 
   const addMapping = useCallback(() => {
     if (remoteRoleName.trim() && localRole) {
@@ -187,10 +142,11 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
             <Form.Label className="sr-only">
               {translate('Local Role')}
             </Form.Label>
-            <AsyncPaginate
+            <AsyncSelect
               value={localRole}
               onChange={(option) => setLocalRole(option)}
-              loadOptions={loadRoleOptions}
+              loadOptions={roleAutocomplete}
+              debounceTimeout={debounceMs}
               defaultOptions
               getOptionValue={(option) => option}
               getOptionLabel={(option) => option.description || option.name}

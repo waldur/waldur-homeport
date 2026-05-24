@@ -10,6 +10,7 @@ import { required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { OpenstackFeatures } from '@/FeaturesEnums';
 import { FormGroup, SelectField } from '@/form';
+import { CreatableSelectField } from '@/form/select';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -153,15 +154,8 @@ export const FormAbstractVolumeFields = (
         </Col>
       )}
       <Col xs>
-        <Field
-          name={props.sizeField}
-          component={FormGroup}
-          validate={
-            !fieldsEnabled ? undefined : composeValidators(required, exceeds)
-          }
+        <FormGroup
           label={props.sizeTitle}
-          format={formatVolumeSize}
-          parse={(v) => Number(v) * 1024}
           required
           space={5}
           quickAction={
@@ -186,13 +180,18 @@ export const FormAbstractVolumeFields = (
             </>
           }
         >
-          <SelectField
-            creatable
+          <CreatableSelectField
+            name={props.sizeField}
+            validate={
+              !fieldsEnabled ? undefined : composeValidators(required, exceeds)
+            }
+            format={formatVolumeSize}
+            parse={(v: any) => Number(v) * 1024}
             simpleValue
             options={extendedSizeOptions}
             isDisabled={!fieldsEnabled}
           />
-        </Field>
+        </FormGroup>
       </Col>
     </Row>
   );

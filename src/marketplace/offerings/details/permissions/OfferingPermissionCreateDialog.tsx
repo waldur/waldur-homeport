@@ -1,12 +1,12 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import { marketplaceProviderOfferingsAddUser } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { usersAutocomplete } from '@/customer/team/utils';
 import { SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { DateTimeField } from '@/form/DateTimeField';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -28,6 +28,12 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
   resolve: { refetch, offering },
 }) => {
   const customer = useCustomer();
+
+  const loadOfferings = useMemo(
+    () =>
+      providerOfferingsAutocomplete({ shared: true, customer: customer.url }),
+    [customer.url],
+  );
 
   const saveUserMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
@@ -67,9 +73,7 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
               <AsyncSelectField
                 name="user"
                 placeholder={translate('Select user...')}
-                loadOptions={(query, prevOptions, page) =>
-                  usersAutocomplete({ full_name: query }, prevOptions, page)
-                }
+                loadOptions={usersAutocomplete}
                 getOptionLabel={({ full_name, email }) => full_name || email}
                 validate={required}
               />
@@ -80,13 +84,7 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
                 <AsyncSelectField
                   name="offering"
                   placeholder={translate('Select offering...')}
-                  loadOptions={(query, prevOptions, page) =>
-                    providerOfferingsAutocomplete(
-                      { name: query, shared: true, customer: customer.url },
-                      prevOptions,
-                      page,
-                    )
-                  }
+                  loadOptions={loadOfferings}
                   getOptionLabel={({ name }) => name}
                   validate={required}
                 />

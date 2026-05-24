@@ -9,7 +9,7 @@ import { required } from '@/core/validators';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { NumberField } from '@/form/NumberField';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { StringField } from '@/form/StringField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';

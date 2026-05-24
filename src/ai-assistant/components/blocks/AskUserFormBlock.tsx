@@ -9,7 +9,7 @@ import {
 import { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { BaseButton } from '@/core/buttons/BaseButton';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 
 import { UIBlockProps } from '../../lib/types';

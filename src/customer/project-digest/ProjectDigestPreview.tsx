@@ -5,7 +5,7 @@ import { ProjectDigestPreviewResponse } from 'waldur-js-client';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import { useCustomer } from '@/workspace/hooks';

@@ -3,7 +3,6 @@ import { Field, useFormState } from 'react-final-form';
 import { MarketplacePublicOfferingsListData, Project } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
@@ -48,7 +47,7 @@ export const ProjectResourcesAllFilter: FunctionComponent<
       >
         <OfferingAutocomplete
           providerOfferings={false}
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
           offeringFilter={offeringFilter}
         />
       </TableFilterItem>
@@ -58,7 +57,7 @@ export const ProjectResourcesAllFilter: FunctionComponent<
         badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
       >
         <OfferingAutocomplete
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
           offeringFilter={parentOfferingFilter}
           name="parent_offering"
         />
@@ -80,7 +79,7 @@ export const ProjectResourcesAllFilter: FunctionComponent<
           badgeValue={(value) => value?.name}
         >
           <OrganizationAutocomplete
-            reactSelectProps={REACT_SELECT_TABLE_FILTER}
+            reactSelectProps={{ variant: 'tableFilter' }}
           />
         </TableFilterItem>
       ) : null}
@@ -90,7 +89,7 @@ export const ProjectResourcesAllFilter: FunctionComponent<
           name="project"
           badgeValue={(value) => value?.name}
         >
-          <ProjectFilter reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+          <ProjectFilter reactSelectProps={{ variant: 'tableFilter' }} />
         </TableFilterItem>
       ) : null}
       <TableFilterItem

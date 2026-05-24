@@ -4,10 +4,6 @@ import { Field } from 'react-final-form';
 import { OrganizationRoleSelectField } from '@/customer/team/OrganizationRoleSelectField';
 import { ProjectRoleSelectField } from '@/customer/team/ProjectRoleSelectField';
 import { SelectField } from '@/form';
-import {
-  REACT_MULTI_SELECT_TABLE_FILTER,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@/table/TableFilterItem';
@@ -25,7 +21,7 @@ export const UserFilter: FunctionComponent = () => {
         badgeValue={(value) => value?.name}
       >
         <OrganizationAutocomplete
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
         />
       </TableFilterItem>
       <TableFilterItem
@@ -59,7 +55,8 @@ export const UserFilter: FunctionComponent = () => {
               options={getRoleFilterOptions()}
               noUpdateOnBlur={true}
               isClearable={true}
-              {...REACT_MULTI_SELECT_TABLE_FILTER}
+              variant="tableFilter"
+              isMulti
             />
           )}
         />
@@ -83,7 +80,7 @@ export const UserFilter: FunctionComponent = () => {
               noUpdateOnBlur={true}
               simpleValue={true}
               isClearable={true}
-              {...REACT_SELECT_TABLE_FILTER}
+              variant="tableFilter"
             />
           )}
         />

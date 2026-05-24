@@ -73,16 +73,6 @@ vi.mock('@/core/config', () => ({
   ENV: { pageSize: 10 },
 }));
 
-vi.mock('@/core/utils', () => ({
-  returnReactSelectAsyncPaginateObject: vi.fn(
-    (options, _prevOptions, page) => ({
-      options,
-      hasMore: false,
-      additional: { page },
-    }),
-  ),
-}));
-
 vi.mock('@/core/validators', () => ({
   required: vi.fn(),
 }));
@@ -133,7 +123,7 @@ vi.mock('./utils', () => ({
 }));
 
 // Mock form components using shared implementations
-vi.mock('@/form/AsyncSelectField', () => ({
+vi.mock('@/form/select/AsyncSelectField', () => ({
   AsyncSelectField: ({ name, label, placeholder }) => (
     <div data-testid={`async-select-${name}`}>
       <label>{label}</label>
@@ -153,7 +143,7 @@ vi.mock('@/form/AwesomeCheckboxField', () => ({
   ),
 }));
 
-vi.mock('@/form/SelectField', () => ({
+vi.mock('@/form/select/SelectField', () => ({
   SelectField: ({ options, getOptionLabel }) => (
     <select data-testid="role-select">
       {options?.map((option, index) => (

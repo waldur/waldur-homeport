@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import {
@@ -7,8 +8,8 @@ import {
 
 import { required } from '@/core/validators';
 import { StringField } from '@/form';
-import { Select } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SelectField as Select } from '@/form/select';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -39,6 +40,15 @@ export const CustomerMappingEditDialog = ({
 }: CustomerMappingEditDialogProps) => {
   const { closeDialog } = useModal();
   const { mapping, refetch } = resolve;
+
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'uuid'],
+        o: 'name',
+      }),
+    [],
+  );
 
   const submitMutation = useManagedMutation<any, any, FormValues>({
     mutationFn: (values) =>
@@ -111,17 +121,11 @@ export const CustomerMappingEditDialog = ({
               )}
               required
             >
-              <Field
+              <Select
                 name="waldur_customer"
-                component={Select}
                 validate={required}
                 placeholder={translate('Select organization...')}
-                loadOptions={(query, prevOptions, page) =>
-                  organizationAutocomplete(query, prevOptions, page, {
-                    field: ['name', 'uuid'],
-                    o: 'name',
-                  })
-                }
+                loadOptions={loadOrganizations}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.uuid}
                 noOptionsMessage={() => translate('No organizations')}

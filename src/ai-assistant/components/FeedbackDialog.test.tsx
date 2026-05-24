@@ -7,7 +7,7 @@ import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as sdk from 'waldur-js-client';
 
-vi.mock('@/form/SelectField', () => ({
+vi.mock('@/form/select/SelectField', () => ({
   SelectField: ({ input, options, placeholder }: any) => (
     <select
       data-testid="category-select"

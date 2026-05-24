@@ -11,7 +11,7 @@ import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getChartBrandColor } from '@/dashboard/constants';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { ExportData } from '@/table/exporters/types';
 

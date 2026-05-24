@@ -10,9 +10,9 @@ import {
   rancherProjectsList,
 } from 'waldur-js-client';
 
-import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const RancherClusterFilter: FunctionComponent<
@@ -27,9 +27,9 @@ export const RancherClusterFilter: FunctionComponent<
       <Field
         name="namespace"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Namespace')}
-            loadOptions={createSelectFetcher(rancherNamespacesList, 'name', {
+            loadOptions={createLoadOptions(rancherNamespacesList, 'name', {
               cluster_uuid: props.cluster.uuid,
             })}
             defaultOptions
@@ -42,7 +42,7 @@ export const RancherClusterFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -55,9 +55,9 @@ export const RancherClusterFilter: FunctionComponent<
       <Field
         name="rancher_project"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Rancher project')}
-            loadOptions={createSelectFetcher(rancherProjectsList, 'name', {
+            loadOptions={createLoadOptions(rancherProjectsList, 'name', {
               cluster_uuid: props.cluster.uuid,
             })}
             defaultOptions
@@ -70,7 +70,7 @@ export const RancherClusterFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

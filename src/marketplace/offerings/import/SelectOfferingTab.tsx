@@ -6,7 +6,7 @@ import { remoteWaldurApiSharedOfferings } from 'waldur-js-client';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { FormContainer, SelectField } from '@/form';
-import { MultiSelectOption } from '@/form/themed-select';
+import { MultiSelectOption } from '@/form/select';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
 import { Offering } from '@/marketplace/types';

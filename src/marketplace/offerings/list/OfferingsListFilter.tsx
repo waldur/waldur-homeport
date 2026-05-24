@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
-import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
 import { OfferingStateFilter } from '@/marketplace/offerings/list/OfferingStateFilter';
@@ -44,9 +44,7 @@ export const OfferingsListFilter: FunctionComponent<
           name="organization"
           badgeValue={(value) => value?.name}
         >
-          <ServiceProviderAutocomplete
-            reactSelectProps={REACT_SELECT_TABLE_FILTER}
-          />
+          <ServiceProviderAutocomplete />
         </TableFilterItem>
       ) : null}
       <TableFilterItem
@@ -55,7 +53,7 @@ export const OfferingsListFilter: FunctionComponent<
         badgeValue={(value) => value?.label}
       >
         <OfferingTypeAutocomplete
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
         />
       </TableFilterItem>
       {showCategory ? (
@@ -88,7 +86,7 @@ export const OfferingsListFilter: FunctionComponent<
               value={fieldProps.input.value}
               onChange={(value) => fieldProps.input.onChange(value)}
               isClearable={true}
-              {...REACT_SELECT_TABLE_FILTER}
+              variant="tableFilter"
             />
           )}
         />

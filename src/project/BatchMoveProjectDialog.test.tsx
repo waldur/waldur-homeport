@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Field } from 'react-final-form';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { projectsMoveProject } from 'waldur-js-client';
 
@@ -25,13 +26,18 @@ vi.mock('@/i18n', () => ({
   },
 }));
 
-vi.mock('@/form/AsyncSelectField', () => ({
-  Select: ({ input }) => (
-    <input
-      data-testid="organization-select"
-      onChange={(e) =>
-        input.onChange({ url: e.target.value, name: 'Target Organization' })
-      }
+vi.mock('@/form/select/AsyncSelectField', () => ({
+  AsyncSelectField: (props) => (
+    <Field
+      name={props.name}
+      render={({ input }) => (
+        <input
+          data-testid="organization-select"
+          onChange={(e) =>
+            input.onChange({ url: e.target.value, name: 'Target Organization' })
+          }
+        />
+      )}
     />
   ),
 }));

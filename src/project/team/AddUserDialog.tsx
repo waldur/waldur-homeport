@@ -6,22 +6,18 @@ import {
   callManagingOrganisationsAddUser,
   customersAddUser,
   customersUsersList,
-  CustomersUsersListData,
   marketplaceServiceProvidersAddUser,
   projectsAddUser,
   projectsOtherUsersList,
-  ProjectsOtherUsersListData,
 } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
 import { required } from '@/core/validators';
 import { OrganizationProjectSelectField } from '@/customer/team/OrganizationProjectSelectField';
 import { usersAutocomplete } from '@/customer/team/utils';
 import { SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { createLoadOptions } from '@/form/select';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { RestrictionsInfoCard } from '@/invitations/actions/RestrictionsInfoCard';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -59,48 +55,21 @@ interface AddUserDialogProps {
   customer?;
 }
 
-const customerUsersAutocomplete = async (
-  customerUuid: string,
-  query: CustomersUsersListData['query'],
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await customersUsersList({
-    path: { customer_uuid: customerUuid },
-    query: {
-      o: 'concatenated_name',
-      ...query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
+const customerUsersAutocomplete = (customerUuid: string) =>
+  createLoadOptions(
+    customersUsersList,
+    'user_keyword',
+    { o: 'concatenated_name' },
+    { customer_uuid: customerUuid },
   );
-};
 
-const projectUsersAutocomplete = async (
-  projectUuid: string,
-  query: ProjectsOtherUsersListData['query'],
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await projectsOtherUsersList({
-    path: { project_uuid: projectUuid },
-    query: {
-      ...query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
+const projectUsersAutocomplete = (projectUuid: string) =>
+  createLoadOptions(
+    projectsOtherUsersList,
+    'user_keyword',
+    {},
+    { project_uuid: projectUuid },
   );
-};
 
 export const AddUserDialog: FC<AddUserDialogProps> = ({
   refetch,
@@ -127,21 +96,19 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
     async (query, prevOptions, page, showAllUsers: boolean) => {
       try {
         if (showAllUsers) {
-          return await usersAutocomplete({ query }, prevOptions, page);
+          return await usersAutocomplete(query, prevOptions, page);
         }
 
         if (hasCustomerPermission || !resolvedProject) {
-          return await customerUsersAutocomplete(
-            resolvedCustomerUuid,
-            { user_keyword: query },
+          return await customerUsersAutocomplete(resolvedCustomerUuid)(
+            query,
             prevOptions,
             page,
           );
         }
 
-        return await projectUsersAutocomplete(
-          resolvedProject.uuid,
-          { user_keyword: query },
+        return await projectUsersAutocomplete(resolvedProject.uuid)(
+          query,
           prevOptions,
           page,
         );

@@ -134,7 +134,7 @@ vi.mock('@/marketplace/common/autocompletes', () => {
       'customer_name',
       'customer_uuid',
     ],
-    publicOfferingsAutocomplete: vi.fn().mockImplementation(() =>
+    publicOfferingsAutocomplete: vi.fn().mockReturnValue(() =>
       Promise.resolve({
         options: [
           {

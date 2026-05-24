@@ -13,7 +13,7 @@ import { UI_STALE_TIME } from '@/core/constants';
 import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
 import { FieldError, FormGroup, SelectField, StringField } from '@/form';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { loadFloatingIps, loadSubnets } from '@/openstack/api';

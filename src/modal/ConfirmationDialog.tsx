@@ -68,7 +68,7 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       result.input = inputValue;
     }
     if (showRouterSelect && routerValue) {
-      result.router = routerValue.value;
+      result.router = routerValue.url;
     }
     deferred.resolve(
       showInput || (showRouterSelect && routerValue) ? result : undefined,

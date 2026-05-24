@@ -6,9 +6,7 @@ import {
   azureSizesList,
 } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { createLoadOptions } from '@/form/select';
 import { formatFlavor } from '@/resource/utils';
 
 export const getSizeLabel = (size: AzureSize): string => {
@@ -24,72 +22,28 @@ export const getSizeLabel = (size: AzureSize): string => {
 export const getImageLabel = (image: AzureImage): string =>
   `${image.publisher} ${image.name} ${image.sku}`;
 
-export const loadLocationOptions = async (
-  settings_uuid: string,
-  query: string,
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await azureLocationsList({
-    query: {
-      settings_uuid,
-      name: query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-      has_sizes: true,
-    },
+export const loadLocationOptions = (settings_uuid: string) =>
+  createLoadOptions(azureLocationsList, 'name', {
+    settings_uuid,
+    has_sizes: true,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};
 
-export const loadSizeOptions = async (
+export const loadSizeOptions = (
   settings_uuid: string,
   location_uuid: string,
-  zone: number,
-  query: string,
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await azureSizesList({
-    query: {
-      settings_uuid,
-      location_uuid,
-      zone,
-      name: query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
+  zone: any,
+) =>
+  createLoadOptions(azureSizesList, 'name', {
+    settings_uuid,
+    location_uuid,
+    zone,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};
 
-export const loadImageOptions = async (
+export const loadImageOptions = (
   settings_uuid: string,
   location_uuid: string,
-  query: string,
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await azureImagesList({
-    query: {
-      settings_uuid,
-      location_uuid,
-      name: query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
+) =>
+  createLoadOptions(azureImagesList, 'name', {
+    settings_uuid,
+    location_uuid,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};

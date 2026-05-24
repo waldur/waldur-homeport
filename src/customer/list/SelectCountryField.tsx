@@ -6,7 +6,7 @@ import { components } from 'react-select';
 import { customersCountriesList } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
-import { WindowedSelect } from '@/form/themed-select';
+import { WindowedSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 

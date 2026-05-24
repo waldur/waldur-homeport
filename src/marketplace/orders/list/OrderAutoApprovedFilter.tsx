@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
-import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 
 const getAutoApprovedOptions = () => [
@@ -20,7 +20,7 @@ export const OrderAutoApprovedFilter: FunctionComponent = () => {
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           isClearable={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
         />
       )}
     />

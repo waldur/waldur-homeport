@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
-import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import {
   OfferingStateOption,
@@ -31,7 +31,7 @@ export const OfferingStateFilter: FunctionComponent = () => {
           getOptionLabel={(option: OfferingStateOption) => option.label}
           isClearable={true}
           isMulti={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
         />
       )}
     />

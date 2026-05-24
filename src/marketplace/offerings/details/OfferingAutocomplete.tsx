@@ -1,8 +1,7 @@
 import { FieldValidator } from 'final-form';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { FormText } from 'react-bootstrap';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 import {
   MarketplaceProviderOfferingsListData,
   MarketplacePublicOfferingsListData,
@@ -26,7 +25,7 @@ interface OfferingAutocompleteProps {
   providerOfferings?: boolean;
   className?: string;
   description?: string;
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
   onChange?(value): any;
   showError?: boolean;
   validate?: FieldValidator<any>;
@@ -38,30 +37,30 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
   field,
   ...props
 }) => {
+  const loadPublicOfferings = useMemo(
+    () =>
+      publicOfferingsAutocomplete({
+        ...props.offeringFilter,
+        ...(field ? { field: field as any } : {}),
+      }),
+    [props.offeringFilter, field],
+  );
+
+  const loadProviderOfferings = useMemo(
+    () =>
+      providerOfferingsAutocomplete({
+        ...props.offeringFilter,
+        ...(field ? { field: field as any } : {}),
+      }),
+    [props.offeringFilter, field],
+  );
+
   const renderComponent = (fieldProps) => (
     <>
       <AutocompleteField
         placeholder={translate('Select offering...')}
-        loadOfferings={(query, prevOptions, { page }) =>
-          providerOfferings
-            ? providerOfferingsAutocomplete(
-                {
-                  name: query,
-                  ...props.offeringFilter,
-                },
-                prevOptions,
-                page,
-                field as any,
-              )
-            : publicOfferingsAutocomplete(
-                {
-                  name: query,
-                  ...props.offeringFilter,
-                },
-                prevOptions,
-                page,
-                field as any,
-              )
+        loadOfferings={
+          providerOfferings ? loadProviderOfferings : loadPublicOfferings
         }
         value={fieldProps.input.value}
         onChange={(value) => {

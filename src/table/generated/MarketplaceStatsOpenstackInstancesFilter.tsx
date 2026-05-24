@@ -11,13 +11,9 @@ import {
 } from 'waldur-js-client';
 
 import { StringField } from '@/form';
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const RuntimeStateOptions: RuntimeStateOption[] = [
@@ -59,16 +55,16 @@ export const MarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
       <Field
         name="organization"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Organization')}
-            loadOptions={createSelectFetcher(customersList, 'query')}
+            loadOptions={createLoadOptions(customersList, 'query')}
             defaultOptions
             getOptionValue={(option: Customer) => String(option.uuid || '')}
             getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -81,9 +77,9 @@ export const MarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
       <Field
         name="project"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Project')}
-            loadOptions={createSelectFetcher(projectsList, 'query', {
+            loadOptions={createLoadOptions(projectsList, 'query', {
               customer: props.organizationUuid,
             })}
             defaultOptions
@@ -92,7 +88,7 @@ export const MarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -115,7 +111,7 @@ export const MarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
             }
             getOptionLabel={(option: RuntimeStateOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

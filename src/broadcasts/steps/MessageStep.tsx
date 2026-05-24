@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { Select } from '@/form/AsyncSelectField';
 import { DateField } from '@/form/DateField';
+import { AsyncSelectField as Select } from '@/form/select';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
@@ -24,9 +24,8 @@ export const MessageStep: FC<WizardStepProps> = (props) => {
         label={translate('Template')}
         description={translate('Select a pre-defined template')}
       >
-        <Field
+        <Select
           name="template"
-          component={Select}
           placeholder={translate('Select template...')}
           loadOptions={templateAutocomplete}
           getOptionLabel={(option) => option.name}

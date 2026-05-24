@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 
 export const getOptions = () => [
@@ -12,7 +11,7 @@ export const getOptions = () => [
 ];
 
 interface AccountingRunningFieldProps {
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
 }
 
 export const AccountingRunningField: FunctionComponent<

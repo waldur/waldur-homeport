@@ -5,8 +5,8 @@ import { useForm, useFormState } from 'react-final-form';
 
 import { Badge } from '@/core/Badge';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Select } from '@/form/select';
 import { SubmitButton } from '@/form/SubmitButton';
-import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';

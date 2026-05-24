@@ -10,13 +10,9 @@ import {
   marketplaceResourcesList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
@@ -31,9 +27,9 @@ export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
       <Field
         name="offering"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Offering')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               marketplacePublicOfferingsList,
               'query',
             )}
@@ -47,7 +43,7 @@ export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -60,13 +56,11 @@ export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
       <Field
         name="resource"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Resource')}
-            loadOptions={createSelectFetcher(
-              marketplaceResourcesList,
-              'query',
-              { customer_uuid: props.customerUUID },
-            )}
+            loadOptions={createLoadOptions(marketplaceResourcesList, 'query', {
+              customer_uuid: props.customerUUID,
+            })}
             defaultOptions
             getOptionValue={(option: Resource) =>
               String(option.resource_uuid || '')
@@ -75,7 +69,7 @@ export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -94,7 +88,7 @@ export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -113,7 +107,7 @@ export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

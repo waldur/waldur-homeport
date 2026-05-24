@@ -26,7 +26,7 @@ export const OrganizationGroupFieldSingleValue: FC<any> = (props) => {
   );
 };
 
-export const commonAsyncPaginateProps = {
+export const commonAsyncSelectProps = {
   placeholder: translate('Select organization group...'),
   loadOptions: organizationGroupAutocomplete,
   defaultOptions: true,

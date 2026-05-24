@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'react-final-form';
 
-import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { CallOffering } from '@/proposals/types';
 
@@ -22,7 +22,7 @@ export const CallOfferingFilter: React.FC<{
         isClearable={true}
         getOptionLabel={(option) => option.offering_name}
         getOptionValue={(option) => option.offering_uuid}
-        {...REACT_SELECT_TABLE_FILTER}
+        variant="tableFilter"
       />
     )}
   />

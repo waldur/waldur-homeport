@@ -171,19 +171,34 @@ const response = await projectsCreate({
 
 Dynamic data loading for form fields:
 
-```typescript
-<Field
-  component={Select}
-  name="customer"
-  loadOptions={(query, prevOptions, page) =>
-    organizationAutocomplete(query, prevOptions, page, {
-      field: ['uuid', 'name', 'url'],
-      o: 'name',
-    })
-  }
-  getOptionLabel={(option) => option.name}
-  getOptionValue={(option) => option.url}
-/>
+```tsx
+import { useMemo } from 'react';
+import { Field } from 'react-final-form';
+import { customersList } from 'waldur-js-client';
+
+import { AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
+
+export const MyComponent = () => {
+  const loadOrganizations = useMemo(
+    () =>
+      createLoadOptions(customersList, 'query', {
+        field: ['uuid', 'name', 'url'],
+        o: 'name',
+      }),
+    [],
+  );
+
+  return (
+    <Field
+      component={AsyncSelect}
+      name="customer"
+      loadOptions={loadOrganizations}
+      getOptionLabel={(option) => option.name}
+      getOptionValue={(option) => option.url}
+    />
+  );
+};
 ```
 
 ## Caching Strategies

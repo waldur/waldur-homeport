@@ -6,7 +6,7 @@ import { customersCountriesList } from 'waldur-js-client';
 import { STALE_TIME } from '@/core/constants';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 
-import { WindowedSelect } from './themed-select';
+import { WindowedSelect } from './select';
 import { FormField } from './types';
 
 interface CountryOption {

@@ -1,13 +1,12 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { Option, getOfferingTypes } from '@/marketplace/common/registry';
 
 export const OfferingTypeAutocomplete: FunctionComponent<{
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
   options?: Option[];
 }> = (props) => {
   const renderComponent = (fieldProps) => (

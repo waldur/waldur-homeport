@@ -1,23 +1,20 @@
 import React from 'react';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 
-import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { tagAutocomplete } from '@/marketplace/common/autocompletes';
 
 export const TagFilter: React.FC<{
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
 }> = (props) => {
   return (
     <Field
       name="tag"
       component={(fieldProps) => (
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('Select tag...')}
-          loadOptions={(query: string, prevOptions, { page }) =>
-            tagAutocomplete(query, prevOptions, { page })
-          }
+          loadOptions={tagAutocomplete}
           defaultOptions
           getOptionValue={(option) => option.uuid}
           getOptionLabel={(option) => option.name}
@@ -25,7 +22,7 @@ export const TagFilter: React.FC<{
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No tags')}
           isClearable={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
           {...props.reactSelectProps}
         />
       )}

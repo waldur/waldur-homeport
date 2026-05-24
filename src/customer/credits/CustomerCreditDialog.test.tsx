@@ -46,11 +46,15 @@ vi.mock('@/workspace/selectors', () => ({
 
 vi.mock('@/marketplace/common/autocompletes', () => ({
   organizationAutocomplete: vi.fn(),
-  providerOfferingsAutocomplete: vi.fn(),
+  providerOfferingsAutocomplete: vi
+    .fn()
+    .mockReturnValue(() =>
+      Promise.resolve({ options: [], hasMore: false, additional: { page: 2 } }),
+    ),
 }));
 
-vi.mock('@/form/AsyncSelectField', () => ({
-  Select: (props) => (
+vi.mock('@/form/select/AsyncSelect', () => ({
+  AsyncSelect: (props) => (
     <input
       id={props.id}
       data-testid={props.id || 'async-select'}
@@ -59,18 +63,26 @@ vi.mock('@/form/AsyncSelectField', () => ({
           props.input.onChange({ url: e.target.value, name: 'Org 1' });
         }
       }}
-      onBlur={() => props.input?.onBlur()}
+      onBlur={(e) => {
+        if (props.input) props.input.onBlur(e);
+        if (props.onBlur) props.onBlur(e);
+      }}
       value={props.input?.value?.url || ''}
     />
   ),
 }));
 
-vi.mock('@/form/SelectField', () => ({
+vi.mock('@/form/select/SelectField', () => ({
   SelectField: (props) => (
     <input
-      data-testid={props.name || 'select-field'}
-      onChange={(e) => props.input?.onChange(e.target.value)}
-      onBlur={() => props.input?.onBlur()}
+      data-testid={props.name || props.input?.name || 'select-field'}
+      onChange={(e) => {
+        if (props.input) props.input.onChange(e.target.value);
+        if (props.onChange) props.onChange(e.target.value);
+      }}
+      onBlur={(e) => {
+        if (props.input) props.input.onBlur(e);
+      }}
       value={props.input?.value || ''}
     />
   ),

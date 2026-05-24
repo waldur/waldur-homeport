@@ -10,10 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { FormFooter } from '@/form';
-import {
-  AsyncCreatablePaginate,
-  MultiSelectOption,
-} from '@/form/themed-select';
+import { AsyncCreatableSelect, MultiSelectOption } from '@/form/select';
 import { translate } from '@/i18n';
 import { tagAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -100,11 +97,9 @@ export const EditTagsDialog = ({ resolve }: OwnProps) => {
             <Field
               name="tags"
               component={(fieldProps) => (
-                <AsyncCreatablePaginate
+                <AsyncCreatableSelect
                   placeholder={translate('Select or type to add tags...')}
-                  loadOptions={(query: string, prevOptions, { page }) =>
-                    tagAutocomplete(query, prevOptions, { page })
-                  }
+                  loadOptions={tagAutocomplete}
                   defaultOptions
                   getOptionValue={(option) => option.uuid}
                   getOptionLabel={(option) => option.name}

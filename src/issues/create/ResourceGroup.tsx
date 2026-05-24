@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
-import { Field, useFormState, useForm } from 'react-final-form';
-import { MarketplaceResourcesListData } from 'waldur-js-client';
+import { Field, useForm, useFormState } from 'react-final-form';
 
 import { FormGroup } from '@/form';
-import { Select as AsyncSelectField } from '@/form/AsyncSelectField';
-import { Select } from '@/form/themed-select';
+import { AsyncSelect as AsyncSelectField, Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
@@ -59,22 +57,14 @@ export const ResourceGroup = ({ disabled }) => {
         <AsyncSelectField
           isClearable={true}
           defaultOptions
-          loadOptions={(query, prevOptions, page) =>
-            resourceAutocomplete(
-              {
-                project_uuid: project.uuid,
-                name: query,
-                field: ['name', 'url', 'uuid', 'offering_name', 'project_uuid'],
-                state:
-                  NON_TERMINATED_STATES as MarketplaceResourcesListData['query']['state'],
-              },
-              prevOptions,
-              page,
-            )
-          }
+          loadOptions={resourceAutocomplete({
+            project_uuid: project.uuid,
+            field: ['name', 'url', 'uuid', 'offering_name', 'project_uuid'],
+            state: NON_TERMINATED_STATES,
+          })}
           getOptionValue={(option) => option.uuid}
           getOptionLabel={(option) => formatResourceShort(option)}
-          filterOption={(options) => options}
+          filterOption={null}
           isDisabled={disabled}
           key={project.uuid}
         />

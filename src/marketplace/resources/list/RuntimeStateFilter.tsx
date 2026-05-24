@@ -5,7 +5,7 @@ import { Field } from 'react-final-form';
 import { marketplaceRuntimeStatesList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { useProject } from '@/workspace/hooks';
 
@@ -38,7 +38,7 @@ export const RuntimeStateFilter: React.FC = () => {
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           isClearable={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
         />
       )}
     />

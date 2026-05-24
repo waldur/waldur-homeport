@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { useState, FunctionComponent, useCallback } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 

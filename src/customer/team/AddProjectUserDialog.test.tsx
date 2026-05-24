@@ -41,7 +41,7 @@ vi.mock('@/form/useFlatpickrTheme', () => ({
   useFlatpickrTheme: vi.fn(),
 }));
 
-vi.mock('@/form/SelectField', () => {
+vi.mock('@/form/select/SelectField', () => {
   return {
     SelectField: (props) => (
       <select

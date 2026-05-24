@@ -7,7 +7,7 @@ import { useAsync } from 'react-use';
 import { OpenStackBackup, openstackBackupsRestore } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';

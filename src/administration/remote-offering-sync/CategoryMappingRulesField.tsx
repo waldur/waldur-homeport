@@ -1,5 +1,5 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
@@ -7,7 +7,7 @@ import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { usePagination } from '@/core/usePagination';
 import { required, requiredArray } from '@/core/validators';
 import { SelectField } from '@/form';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { categoryAutocomplete } from '@/marketplace/common/autocompletes';
 import { ActionButton } from '@/table/ActionButton';
@@ -68,6 +68,8 @@ const FieldsListGroup = ({
     }
   };
 
+  const loadCategories = useMemo(() => categoryAutocomplete(), []);
+
   return (
     <div id="category-mapping-rules">
       <Form.Group>
@@ -101,8 +103,8 @@ const FieldsListGroup = ({
                         validate={required}
                       >
                         {(fieldProps) => (
-                          <AsyncPaginate
-                            loadOptions={categoryAutocomplete}
+                          <AsyncSelect
+                            loadOptions={loadCategories}
                             defaultOptions
                             getOptionValue={(option) => option.url}
                             getOptionLabel={(option) => option.title}

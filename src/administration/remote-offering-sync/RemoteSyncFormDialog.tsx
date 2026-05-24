@@ -22,7 +22,7 @@ import {
   SubmitButton,
 } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -277,7 +277,7 @@ const RemoteSyncRenderer = ({
             <FormGroup label={translate('Local service provider')} required>
               <Field name="local_service_provider" validate={required}>
                 {(fieldProps) => (
-                  <AsyncPaginate
+                  <AsyncSelect
                     loadOptions={providerAutocomplete}
                     defaultOptions
                     getOptionValue={(option) => option.url}

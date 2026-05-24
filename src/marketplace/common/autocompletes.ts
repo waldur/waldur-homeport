@@ -1,9 +1,12 @@
 import {
   affiliatedOrganizationsList,
+  AffiliatedOrganizationsListData,
   customersList,
   CustomersListData,
   marketplaceCategoriesList,
+  MarketplaceCategoriesListData,
   marketplaceOfferingGroupsList,
+  MarketplaceOfferingGroupsListData,
   marketplaceProviderOfferingsList,
   MarketplaceProviderOfferingsListData,
   marketplacePublicOfferingsList,
@@ -19,120 +22,51 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 
-export const organizationAutocomplete = async (
-  query: string,
-  prevOptions,
-  page,
+export const organizationAutocomplete = (
   extraQueryParams?: CustomersListData['query'],
-) => {
-  const response = await customersList({
-    query: {
-      query,
-      page: page,
-      page_size: ENV.pageSize,
-      ...extraQueryParams,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
+) => createLoadOptions(customersList, 'query', extraQueryParams);
 
-export const projectAutocomplete = async (
-  customer: string,
-  query: string,
-  prevOptions,
-  currentPage: number,
+export const projectAutocomplete = (
+  customer?: string,
   extraParams: ProjectsListData['query'] = {},
 ) => {
-  const response = await projectsList({
-    query: {
-      name: query,
-      customer: [customer],
-      field: ['name', 'uuid', 'url', 'is_industry', 'customer_uuid'],
-      o: ['name'],
-      page: currentPage,
-      page_size: ENV.pageSize,
-      ...extraParams,
-    },
+  const extra = customer
+    ? { customer: [customer], ...extraParams }
+    : extraParams;
+  return createLoadOptions(projectsList, 'name', {
+    field: ['name', 'uuid', 'url', 'is_industry', 'customer_uuid'],
+    o: ['name'],
+    ...extra,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
 };
 
-export const moveToProjectAutocomplete = async (
-  query: string,
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await projectsList({
-    query: {
-      name: query,
-      field: ['name', 'url', 'customer_name'],
-      o: ['customer_name'],
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};
+export const moveToProjectAutocomplete = createLoadOptions(
+  projectsList,
+  'name',
+  {
+    field: ['name', 'url', 'customer_name'],
+    o: ['customer_name'],
+  },
+);
 
-export const providerAutocomplete = async (
-  query: string,
-  prevOptions,
-  { page },
-) => {
-  const response = await marketplaceServiceProvidersList({
-    query: {
-      customer_keyword: query,
-      field: ['customer_name', 'customer_uuid', 'url', 'uuid'],
-      o: ['customer_name'],
-      page: page,
-      page_size: ENV.pageSize,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
+export const providerAutocomplete = createLoadOptions(
+  marketplaceServiceProvidersList,
+  'customer_keyword',
+  {
+    field: ['customer_name', 'customer_uuid', 'url', 'uuid'],
+    o: ['customer_name'],
+  },
+);
 
-export const categoryAutocomplete = async (
-  query: string,
-  prevOptions,
-  { page },
-  extraParams?,
-) => {
-  const response = await marketplaceCategoriesList({
-    query: {
-      title: query,
-      field: ['title', 'uuid', 'url'],
-      o: 'title',
-      page: page,
-      page_size: ENV.pageSize,
-      ...extraParams,
-    },
+export const categoryAutocomplete = (
+  extraParams?: MarketplaceCategoriesListData['query'],
+) =>
+  createLoadOptions(marketplaceCategoriesList, 'title', {
+    field: ['title', 'uuid', 'url'],
+    ...extraParams,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
 
 export const OfferingsAutocompleteCommonFields = [
   'name',
@@ -144,175 +78,53 @@ export const OfferingsAutocompleteCommonFields = [
   'customer_uuid',
 ] as any[];
 
-export const providerOfferingsAutocomplete = async (
-  query: string | MarketplaceProviderOfferingsListData['query'],
-  prevOptions,
-  currentPage: number,
-  field: MarketplaceProviderOfferingsListData['query']['field'] = OfferingsAutocompleteCommonFields,
-) => {
-  const queryObject = typeof query === 'string' ? { name: query } : query;
-  const response = await marketplaceProviderOfferingsList({
-    query: {
-      field,
-      o: ['name'],
-      state: ['Active'],
-      ...queryObject,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
+export const providerOfferingsAutocomplete = (
+  extraQuery?: MarketplaceProviderOfferingsListData['query'],
+) =>
+  createLoadOptions(marketplaceProviderOfferingsList, 'name', {
+    field: OfferingsAutocompleteCommonFields,
+    o: ['name'],
+    state: ['Active'],
+    ...extraQuery,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};
 
-export const publicOfferingsAutocomplete = async (
-  query: string | MarketplacePublicOfferingsListData['query'],
-  prevOptions,
-  currentPage: number,
-  field: MarketplacePublicOfferingsListData['query']['field'] = OfferingsAutocompleteCommonFields,
-) => {
-  const queryObject = typeof query === 'string' ? { name: query } : query;
-  const response = await marketplacePublicOfferingsList({
-    query: {
-      field,
-      o: ['name'],
-      state: ['Active'],
-      ...queryObject,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
+export const publicOfferingsAutocomplete = (
+  extraQuery?: MarketplacePublicOfferingsListData['query'],
+) =>
+  createLoadOptions(marketplacePublicOfferingsList, 'name', {
+    field: OfferingsAutocompleteCommonFields,
+    o: ['name'],
+    state: ['Active'],
+    ...extraQuery,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};
 
-export const userAutocomplete = async (
-  query: string,
-  prevOptions,
-  { page },
-) => {
-  const response = await usersList({
-    query: {
-      full_name: query,
-      field: ['full_name', 'url', 'username', 'email', 'uuid'],
-      o: ['full_name'],
-      page: page,
-      page_size: ENV.pageSize,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
+export const userAutocomplete = createLoadOptions(usersList, 'full_name', {
+  field: ['full_name', 'url', 'username', 'email', 'uuid'],
+  o: ['full_name'],
+});
 
-export const resourceOfferingsAutocomplete = async (
-  query: MarketplaceResourceOfferingsListData['query'],
-  prevOptions,
-  currentPage: number,
-  category_uuid,
-) => {
-  const response = await marketplaceResourceOfferingsList({
-    path: { category_uuid: category_uuid },
-    query: {
-      ...query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
+export const resourceOfferingsAutocomplete = (
+  category_uuid: string,
+  extraQuery?: MarketplaceResourceOfferingsListData['query'],
+) =>
+  createLoadOptions(marketplaceResourceOfferingsList, 'name', extraQuery, {
+    category_uuid,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};
 
-export const resourceAutocomplete = async (
-  query: MarketplaceResourcesListData['query'],
-  prevOptions,
-  currentPage: number,
-) => {
-  const response = await marketplaceResourcesList({
-    query: {
-      ...query,
-      page: currentPage,
-      page_size: ENV.pageSize,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    currentPage,
-  );
-};
+export const resourceAutocomplete = (
+  extraQuery?: MarketplaceResourcesListData['query'],
+) => createLoadOptions(marketplaceResourcesList, 'name', extraQuery);
 
-export const affiliationAutocomplete = async (
-  query: string,
-  prevOptions,
-  page,
-  extraParams?,
-) => {
-  const response = await affiliatedOrganizationsList({
-    query: {
-      query,
-      o: 'name',
-      page,
-      page_size: ENV.pageSize,
-      ...extraParams,
-    },
+export const affiliationAutocomplete = (
+  extraParams?: AffiliatedOrganizationsListData['query'],
+) =>
+  createLoadOptions(affiliatedOrganizationsList, 'query', {
+    o: 'name',
+    ...extraParams,
   });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
 
-export const tagAutocomplete = async (
-  query: string,
-  prevOptions,
-  { page },
-  extraParams?,
-) => {
-  const response = await marketplaceTagsList({
-    query: {
-      name: query,
-      page: page,
-      page_size: ENV.pageSize,
-      ...extraParams,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
+export const tagAutocomplete = createLoadOptions(marketplaceTagsList, 'name');
 
-export const offeringGroupAutocomplete = async (
-  query: string,
-  prevOptions,
-  page,
-  extraParams?,
-) => {
-  const response = await marketplaceOfferingGroupsList({
-    query: {
-      title: query,
-      page,
-      page_size: ENV.pageSize,
-      ...extraParams,
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
+export const offeringGroupAutocomplete = (
+  extraParams?: MarketplaceOfferingGroupsListData['query'],
+) => createLoadOptions(marketplaceOfferingGroupsList, 'title', extraParams);

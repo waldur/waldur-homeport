@@ -5,7 +5,7 @@ import type { FeedbackCategoryEnum } from 'waldur-js-client';
 import { useMessageFeedbackMutation } from '@/ai-assistant/hooks/useMessageFeedbackMutation';
 import { FEEDBACK_SELECT_OPTIONS } from '@/ai-assistant/lib/feedback/categories';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';

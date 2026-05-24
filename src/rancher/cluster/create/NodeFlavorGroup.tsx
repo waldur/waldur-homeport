@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 

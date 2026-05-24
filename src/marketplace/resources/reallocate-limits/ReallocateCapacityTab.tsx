@@ -3,7 +3,7 @@ import { Form, Nav, Tab } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { getFormLimitParser } from '@/marketplace/common/registry';
@@ -161,27 +161,22 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
         <Form.Label className="mb-2">
           {translate('Find target resource(s)')}
         </Form.Label>
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('Search and select resources...')}
-          loadOptions={async (query, prevOptions, { page }) => {
-            const result = await resourceAutocomplete(
-              {
-                offering_uuid: [offering.uuid],
-                state: ['OK'],
-                name: query,
-                field: [
-                  'uuid',
-                  'name',
-                  'offering_name',
-                  'customer_name',
-                  'project_name',
-                  'limits',
-                  'current_usages',
-                ],
-              },
-              prevOptions,
-              page,
-            );
+          loadOptions={async (query, prevOptions, additional) => {
+            const result = await resourceAutocomplete({
+              offering_uuid: [offering.uuid],
+              state: ['OK'],
+              field: [
+                'uuid',
+                'name',
+                'offering_name',
+                'customer_name',
+                'project_name',
+                'limits',
+                'current_usages',
+              ],
+            })(query, prevOptions, additional);
             return {
               ...result,
               options: result.options.filter(

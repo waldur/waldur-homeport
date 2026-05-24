@@ -37,7 +37,7 @@ export const openResourceInvitationDialog = async (args: ScopeArgs) => {
       const response = await marketplaceOfferingRolesList({
         query: { offering_uuid: args.offeringUuid, page_size: 100 },
       });
-      const all = (response.data as any[]) || [];
+      const all = response.data || [];
       roles = all.filter(
         (r) => !r.content_type || r.content_type === args.contentType,
       ) as unknown as Role[];

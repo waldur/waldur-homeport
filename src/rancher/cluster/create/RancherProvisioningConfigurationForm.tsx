@@ -7,8 +7,6 @@ import {
   openstackVolumeTypesNamesRetrieve,
 } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
 import { required } from '@/core/validators';
 import {
   SecretField,
@@ -17,9 +15,10 @@ import {
   NumberField,
   SelectField,
 } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { BoxNumberField } from '@/form/BoxNumberField';
+import { createLoadOptions } from '@/form/select';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import {
@@ -67,20 +66,9 @@ const VOLUME_SIZE_FIELD: Partial<OfferingEditField> = {
 const FLAVOR_FIELD: Partial<OfferingEditField> = {
   component: AsyncSelectField,
   fieldProps: {
-    loadOptions: (query, prevOptions, currentPage) =>
-      openstackFlavorsList({
-        query: {
-          name: query,
-          page: currentPage,
-          field: ['name', 'uuid'],
-        },
-      }).then((response) =>
-        returnReactSelectAsyncPaginateObject(
-          parseSelectData(response),
-          prevOptions,
-          currentPage,
-        ),
-      ),
+    loadOptions: createLoadOptions(openstackFlavorsList, 'name', {
+      field: ['name', 'uuid'],
+    }),
     getOptionLabel: ({ name }: OpenStackFlavor) => name,
     getOptionKey: ({ uuid }: OpenStackFlavor) => uuid,
   },
@@ -126,21 +114,10 @@ const MANAGED_RANCHER_FIELD: OfferingEditField[] = [
     component: AsyncSelectField,
     description: translate('List of supported OpenStack offerings'),
     fieldProps: {
-      loadOptions: (query, prevOptions, currentPage) =>
-        marketplacePublicOfferingsList({
-          query: {
-            name: query,
-            type: [TENANT_TYPE],
-            page: currentPage,
-            field: ['name', 'uuid'],
-          },
-        }).then((response) =>
-          returnReactSelectAsyncPaginateObject(
-            parseSelectData(response),
-            prevOptions,
-            currentPage,
-          ),
-        ),
+      loadOptions: createLoadOptions(marketplacePublicOfferingsList, 'name', {
+        type: [TENANT_TYPE],
+        field: ['name', 'uuid'],
+      }),
       getOptionLabel: ({ name }) => name,
       getOptionKey: ({ uuid }) => uuid,
       isMulti: true,
@@ -232,20 +209,9 @@ const MANAGED_RANCHER_FIELD: OfferingEditField[] = [
     component: AsyncSelectField,
     description: translate('Organization where project can be created'),
     fieldProps: {
-      loadOptions: (query, prevOptions, currentPage) =>
-        customersList({
-          query: {
-            name: query,
-            page: currentPage,
-            field: ['name', 'uuid'],
-          },
-        }).then((response) =>
-          returnReactSelectAsyncPaginateObject(
-            parseSelectData(response),
-            prevOptions,
-            currentPage,
-          ),
-        ),
+      loadOptions: createLoadOptions(customersList, 'name', {
+        field: ['name', 'uuid'],
+      }),
       getOptionLabel: ({ name }) => name,
       getOptionKey: ({ uuid }) => uuid,
       required: true,

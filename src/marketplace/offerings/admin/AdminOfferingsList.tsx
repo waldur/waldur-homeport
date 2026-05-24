@@ -15,7 +15,7 @@ import { ADMIN_OFFERING_TABLE_NAME } from './constants';
 export const buildOfferingsFilter = (filterValues: any) => {
   const filter: MarketplaceProviderOfferingsListData['query'] = {};
   if (filterValues?.organization) {
-    filter.customer_uuid = filterValues.organization.uuid;
+    filter.customer_uuid = filterValues.organization.customer_uuid;
   }
   if (filterValues) {
     if (filterValues.state && Array.isArray(filterValues.state)) {

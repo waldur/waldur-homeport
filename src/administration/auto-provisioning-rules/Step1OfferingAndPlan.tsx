@@ -8,7 +8,7 @@ import { STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { format } from '@/core/ErrorMessageFormatter';
 import { LoadingErred } from '@/core/LoadingErred';
 import { FormContainer, SelectField } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
@@ -76,6 +76,15 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
     [plans, plan],
   );
 
+  const loadOfferings = useMemo(
+    () =>
+      publicOfferingsAutocomplete({
+        category_uuid: category?.uuid,
+        field: ['uuid', 'name'],
+      }),
+    [category?.uuid],
+  );
+
   return (
     <WizardForm {...props}>
       <FormContainer submitting={submitting} className="size-lg" asRow>
@@ -99,14 +108,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
           name="offering"
           label={translate('Offering')}
           placeholder={translate('Select offering...')}
-          loadOptions={(query, prevOptions, page) =>
-            publicOfferingsAutocomplete(
-              { name: query, category_uuid: category.uuid },
-              prevOptions,
-              page,
-              ['uuid', 'name'],
-            )
-          }
+          loadOptions={loadOfferings}
           getOptionValue={(option) => option.uuid}
           getOptionLabel={(option) => option.name}
           isLoading={offeringQuery.isRefetching}

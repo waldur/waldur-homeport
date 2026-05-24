@@ -49,52 +49,55 @@ vi.mock('@/router', () => ({
 // Mock react-select-async-paginate to work with userEvent
 vi.mock('react-select-async-paginate', async (importOriginal) => {
   const actual = await importOriginal<any>();
+  const MockAsyncPaginate = ({
+    onChange,
+    value,
+    isMulti,
+    placeholder,
+    inputId,
+    loadOptions,
+    ...rest
+  }) => {
+    const [options, setOptions] = React.useState([]);
+    React.useEffect(() => {
+      loadOptions('', [], { page: 1 }).then((res) => {
+        if (res && res.options) {
+          setOptions(res.options);
+        }
+      });
+    }, [loadOptions]);
+
+    return (
+      <select
+        id={inputId}
+        data-testid={rest['data-testid'] || 'react-select'}
+        multiple={isMulti}
+        value={isMulti ? (value || []).map((v) => v.uuid) : value?.uuid || ''}
+        onChange={(e) => {
+          if (isMulti) {
+            const selectedUuids = Array.from(
+              e.target.selectedOptions,
+              (opt) => opt.value,
+            );
+            onChange(options.filter((o) => selectedUuids.includes(o.uuid)));
+          } else {
+            onChange(options.find((o) => o.uuid === e.target.value));
+          }
+        }}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((opt) => (
+          <option key={opt.uuid} value={opt.uuid}>
+            {opt.name}
+          </option>
+        ))}
+      </select>
+    );
+  };
   return {
     ...actual,
-    AsyncPaginate: ({
-      onChange,
-      value,
-      isMulti,
-      placeholder,
-      inputId,
-      loadOptions,
-    }) => {
-      const [options, setOptions] = React.useState([]);
-      React.useEffect(() => {
-        loadOptions('', [], { page: 1 }).then((res) => {
-          if (res && res.options) {
-            setOptions(res.options);
-          }
-        });
-      }, [loadOptions]);
-
-      return (
-        <select
-          id={inputId}
-          data-testid="react-select"
-          multiple={isMulti}
-          value={isMulti ? (value || []).map((v) => v.uuid) : value?.uuid || ''}
-          onChange={(e) => {
-            if (isMulti) {
-              const selectedUuids = Array.from(
-                e.target.selectedOptions,
-                (opt) => opt.value,
-              );
-              onChange(options.filter((o) => selectedUuids.includes(o.uuid)));
-            } else {
-              onChange(options.find((o) => o.uuid === e.target.value));
-            }
-          }}
-        >
-          <option value="">{placeholder}</option>
-          {options.map((opt) => (
-            <option key={opt.uuid} value={opt.uuid}>
-              {opt.name}
-            </option>
-          ))}
-        </select>
-      );
-    },
+    AsyncPaginate: MockAsyncPaginate,
+    withAsyncPaginate: () => MockAsyncPaginate,
   };
 });
 
@@ -229,10 +232,10 @@ describe('ReallocateLimitsDialog', () => {
       name: 'Target Resource',
       limits: { cpu: 5 },
     };
-    vi.mocked(resourceAutocomplete).mockResolvedValue({
+    vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
       options: [targetResource],
       hasMore: false,
-    } as any);
+    }));
 
     fireEvent.click(getNextButtonStep0());
 
@@ -325,10 +328,10 @@ describe('ReallocateLimitsDialog', () => {
       name: 'Target Resource',
       limits: { cpu: 5 },
     };
-    vi.mocked(resourceAutocomplete).mockResolvedValue({
+    vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
       options: [targetResource],
       hasMore: false,
-    } as any);
+    }));
 
     await screen.findByText(/Find target resource/i);
     const select = screen.getByTestId('react-select');
@@ -368,10 +371,10 @@ describe('ReallocateLimitsDialog', () => {
       name: 'Target Resource',
       limits: { cpu: 5 },
     };
-    vi.mocked(resourceAutocomplete).mockResolvedValue({
+    vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
       options: [targetResource],
       hasMore: false,
-    } as any);
+    }));
 
     const select = await screen.findByTestId('react-select');
     fireEvent.change(select, { target: { value: 'target-resource-uuid' } });

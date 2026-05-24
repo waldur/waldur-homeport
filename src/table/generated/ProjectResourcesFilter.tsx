@@ -8,9 +8,9 @@ import {
   marketplacePublicOfferingsList,
 } from 'waldur-js-client';
 
-import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const ProjectResourcesFilter: FunctionComponent<
@@ -24,9 +24,9 @@ export const ProjectResourcesFilter: FunctionComponent<
     <Field
       name="offering"
       component={(fieldProps) => (
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('Offering')}
-          loadOptions={createSelectFetcher(
+          loadOptions={createLoadOptions(
             marketplacePublicOfferingsList,
             'query',
             { project_uuid: props.project.uuid },
@@ -42,7 +42,7 @@ export const ProjectResourcesFilter: FunctionComponent<
           onChange={(value) => fieldProps.input.onChange(value)}
           isClearable={true}
           isMulti={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
         />
       )}
     />

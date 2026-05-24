@@ -17,13 +17,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const ProposalReviewStateOptions: ProposalReviewStateOption[] = [
@@ -68,7 +64,7 @@ export const ProposalReviewsFilter: FunctionComponent<
             getOptionLabel={(option: ProposalReviewStateOption) => option.label}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -81,16 +77,16 @@ export const ProposalReviewsFilter: FunctionComponent<
       <Field
         name="call"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Call')}
-            loadOptions={createSelectFetcher(proposalPublicCallsList, 'name')}
+            loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
             defaultOptions
             getOptionValue={(option: PublicCall) => String(option.uuid || '')}
             getOptionLabel={(option: PublicCall) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -103,9 +99,9 @@ export const ProposalReviewsFilter: FunctionComponent<
       <Field
         name="round"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Round')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               proposalProtectedCallsRoundsList,
               null as any,
               {},
@@ -121,7 +117,7 @@ export const ProposalReviewsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -134,16 +130,16 @@ export const ProposalReviewsFilter: FunctionComponent<
       <Field
         name="organization"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Organization')}
-            loadOptions={createSelectFetcher(customersList, 'query')}
+            loadOptions={createLoadOptions(customersList, 'query')}
             defaultOptions
             getOptionValue={(option: Customer) => String(option.uuid || '')}
             getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -158,9 +154,9 @@ export const ProposalReviewsFilter: FunctionComponent<
       <Field
         name="reviewer"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Reviewer')}
-            loadOptions={createSelectFetcher(usersList, 'query')}
+            loadOptions={createLoadOptions(usersList, 'query')}
             defaultOptions
             getOptionValue={(option: User) => String(option.uuid || '')}
             getOptionLabel={(option: User) =>
@@ -169,7 +165,7 @@ export const ProposalReviewsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -182,9 +178,9 @@ export const ProposalReviewsFilter: FunctionComponent<
       <Field
         name="proposal"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Proposal')}
-            loadOptions={createSelectFetcher(proposalProposalsList, 'name', {
+            loadOptions={createLoadOptions(proposalProposalsList, 'name', {
               call_uuid: props.callUuid,
             })}
             defaultOptions
@@ -193,7 +189,7 @@ export const ProposalReviewsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

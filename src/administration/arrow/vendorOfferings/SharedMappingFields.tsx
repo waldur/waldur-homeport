@@ -4,7 +4,7 @@ import {
   marketplacePublicOfferingsPlansList,
 } from 'waldur-js-client';
 
-import { AsyncCreatablePaginate } from '@/form/themed-select';
+import { AsyncCreatableSelect } from '@/form/select';
 import { translate } from '@/i18n';
 
 interface VendorChoice {
@@ -56,7 +56,7 @@ export const VendorNameSelect = ({
   );
 
   return (
-    <AsyncCreatablePaginate
+    <AsyncCreatableSelect
       value={input.value}
       onChange={input.onChange}
       loadOptions={loadVendorChoices}
@@ -106,7 +106,7 @@ export const PlanSelect = ({
   }, [offeringUuid]);
 
   return (
-    <AsyncCreatablePaginate
+    <AsyncCreatableSelect
       value={input.value}
       onChange={input.onChange}
       loadOptions={() =>

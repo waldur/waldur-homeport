@@ -233,20 +233,6 @@ export const truncate = (fullStr: string, strLen = 30, separator = '...') => {
   );
 };
 
-export function returnReactSelectAsyncPaginateObject<T = any>(
-  response: { options: T; totalItems: number },
-  prevOptions,
-  currentPage: number,
-) {
-  return {
-    options: response.options,
-    hasMore: response.totalItems > prevOptions.length + ENV.pageSize,
-    additional: {
-      page: currentPage + 1,
-    },
-  };
-}
-
 export const cleanObject = (value: any) => JSON.parse(JSON.stringify(value));
 
 export const createDeferred = () => {

@@ -1,7 +1,6 @@
-import { debounce } from 'lodash-es';
-import { FunctionComponent, useCallback, useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -21,49 +20,22 @@ export const OrganizationAutocompleteField: FunctionComponent<
   placeholder,
   noOptionsMessage,
   reactSelectProps,
-  debounceMs,
+  debounceMs = 1000,
 }) => {
-  const debouncedAutocomplete = useMemo(
+  const loadOrganizations = useMemo(
     () =>
-      debounce(
-        (
-          query: string,
-          prevOptions: any,
-          page: number,
-          options: any,
-          resolve,
-        ) => {
-          organizationAutocomplete(query, prevOptions, page, options).then(
-            resolve,
-          );
-        },
-        debounceMs || 1000,
-      ),
-    [debounceMs],
-  );
-
-  const loadOptions = useCallback(
-    (query: string, prevOptions: any, { page }: { page: number }) => {
-      return new Promise((resolve) => {
-        debouncedAutocomplete(
-          query,
-          prevOptions,
-          page,
-          {
-            field: ['name', 'uuid', 'abbreviation'],
-            o: 'name',
-          },
-          resolve,
-        );
-      });
-    },
-    [debouncedAutocomplete],
+      organizationAutocomplete({
+        field: ['name', 'uuid', 'abbreviation'],
+        o: 'name',
+      }),
+    [],
   );
 
   return (
-    <AsyncPaginate
+    <AsyncSelect
       placeholder={placeholder || translate('Select organization...')}
-      loadOptions={loadOptions}
+      loadOptions={loadOrganizations}
+      debounceTimeout={debounceMs}
       defaultOptions
       getOptionValue={(option) => option.uuid}
       getOptionLabel={(option) => option.name}

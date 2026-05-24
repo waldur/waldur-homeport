@@ -41,39 +41,42 @@ vi.mock('@/i18n', () => ({
 }));
 
 // Mock fields to simplify testing
-vi.mock('@/form/AsyncSelectField', () => ({
-  Select: ({ input, isMulti }: any) => (
+vi.mock('@/form/select/AsyncSelect', () => ({
+  AsyncSelect: ({ input, isMulti, name }: any) => (
     <input
-      id={input.name}
-      data-testid={input.name}
+      id={input?.name || name}
+      data-testid={input?.name || name}
       value={
         isMulti
-          ? input.value?.[0]?.url || ''
-          : input.value?.url || input.value || ''
+          ? input?.value?.[0]?.url || ''
+          : input?.value?.url || input?.value || ''
       }
       onChange={(e) => {
-        if (isMulti) {
-          input.onChange(
-            e.target.value
-              ? [
-                  {
-                    name: e.target.value,
-                    uuid: e.target.value,
-                    url: e.target.value,
-                    billing_price_estimate: {},
-                  },
-                ]
-              : [],
-          );
-        } else {
-          input.onChange(e.target.value);
+        const val = e.target.value;
+        if (input) {
+          if (isMulti) {
+            input.onChange(
+              val
+                ? [
+                    {
+                      name: val,
+                      uuid: val,
+                      url: val,
+                      billing_price_estimate: {},
+                    },
+                  ]
+                : [],
+            );
+          } else {
+            input.onChange(val);
+          }
         }
       }}
     />
   ),
 }));
 
-vi.mock('@/form/SelectField', () => ({
+vi.mock('@/form/select/SelectField', () => ({
   SelectField: ({ input, options, simpleValue }: any) => (
     <select
       id={input.name}
