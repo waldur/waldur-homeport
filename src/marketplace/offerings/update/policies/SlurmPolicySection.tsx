@@ -19,7 +19,6 @@ import {
   marketplaceSlurmPeriodicUsagePoliciesPartialUpdate,
   LimitTypeEnum,
   PolicyPeriodEnum,
-  QosStrategyEnum,
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
 
@@ -142,7 +141,6 @@ const PolicyInfoDropdown: FC<{
           grace_ratio: formState.values.grace_ratio,
           carryover_enabled: formState.values.carryover_enabled,
           raw_usage_reset: formState.values.raw_usage_reset,
-          qos_strategy: formState.values.qos_strategy,
           apply_to_all: formState.values.apply_to_all,
           actions: formState.values.actions,
           period: formState.values.period,
@@ -271,7 +269,6 @@ interface SlurmPolicyFormData {
   grace_ratio: number;
   carryover_enabled: boolean;
   raw_usage_reset: boolean;
-  qos_strategy: QosStrategyEnum;
   apply_to_all: boolean;
   organization_groups: string[];
   actions: string[];
@@ -286,17 +283,6 @@ const limitTypeOptions = [
   { value: 'GrpTRESMins', label: translate('Group TRES Minutes') },
   { value: 'MaxTRESMins', label: translate('Max TRES Minutes') },
   { value: 'GrpTRES', label: translate('Group TRES (concurrent)') },
-];
-
-const qosStrategyOptions = [
-  {
-    value: 'threshold',
-    label: translate('Threshold-based (single threshold)'),
-  },
-  {
-    value: 'progressive',
-    label: translate('Progressive (multiple thresholds)'),
-  },
 ];
 
 // Policy presets for quick configuration
@@ -320,7 +306,6 @@ const policyPresets: PolicyPreset[] = [
       carryover_enabled: true,
       carryover_factor: 50,
       raw_usage_reset: false,
-      qos_strategy: 'progressive' as QosStrategyEnum,
       limit_type: 'GrpTRESMins' as LimitTypeEnum,
       tres_billing_enabled: true,
       actions: [
@@ -341,7 +326,6 @@ const policyPresets: PolicyPreset[] = [
       carryover_enabled: false,
       carryover_factor: 0,
       raw_usage_reset: true,
-      qos_strategy: 'threshold' as QosStrategyEnum,
       limit_type: 'GrpTRESMins' as LimitTypeEnum,
       tres_billing_enabled: true,
       actions: [
@@ -363,7 +347,6 @@ const policyPresets: PolicyPreset[] = [
       carryover_enabled: true,
       carryover_factor: 75,
       raw_usage_reset: false,
-      qos_strategy: 'progressive' as QosStrategyEnum,
       limit_type: 'GrpTRESMins' as LimitTypeEnum,
       tres_billing_enabled: true,
       actions: ['notify_organization_owners'],
@@ -381,7 +364,6 @@ const policyPresets: PolicyPreset[] = [
       carryover_enabled: false,
       carryover_factor: 0,
       raw_usage_reset: true,
-      qos_strategy: 'threshold' as QosStrategyEnum,
       limit_type: 'GrpTRESMins' as LimitTypeEnum,
       tres_billing_enabled: false,
       actions: ['notify_organization_owners'],
@@ -420,7 +402,6 @@ const defaultValues: SlurmPolicyFormData = {
   grace_ratio: 0.2,
   carryover_enabled: true,
   raw_usage_reset: true,
-  qos_strategy: 'threshold' as QosStrategyEnum,
   apply_to_all: true,
   organization_groups: [],
   actions: ['notify_organization_owners'],
@@ -444,7 +425,6 @@ const policyToFormValues = (
   carryover_enabled:
     policy.carryover_enabled ?? defaultValues.carryover_enabled,
   raw_usage_reset: policy.raw_usage_reset ?? defaultValues.raw_usage_reset,
-  qos_strategy: policy.qos_strategy || defaultValues.qos_strategy,
   apply_to_all: policy.apply_to_all ?? defaultValues.apply_to_all,
   organization_groups: policy.organization_groups || [],
   // Convert actions string to array
@@ -862,17 +842,6 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
                 component={AwesomeCheckboxField}
                 name="raw_usage_reset"
                 label={translate('Raw Usage Reset')}
-              />
-            </FormGroup>
-
-            <FormGroup label={translate('QoS Strategy')} required>
-              <Field
-                component={SelectField}
-                name="qos_strategy"
-                options={qosStrategyOptions}
-                getOptionValue={(option) => option.value}
-                getOptionLabel={(option) => option.label}
-                simpleValue
               />
             </FormGroup>
 
