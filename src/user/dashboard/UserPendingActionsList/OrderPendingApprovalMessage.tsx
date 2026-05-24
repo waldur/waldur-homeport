@@ -23,7 +23,7 @@ export const OrderPendingApprovalMessage: FC<
           </Badge>
         )}
       </div>
-      <ActionContext row={row as any} />
+      <ActionContext row={row} />
     </div>
   );
 };

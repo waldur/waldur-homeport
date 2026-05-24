@@ -9,9 +9,9 @@ import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { ActionContext } from './ActionContext';
-import { usePendingActionActions, PrimaryActionInfo } from './actions';
+import { PrimaryActionInfo, usePendingActionActions } from './actions';
 import { DueDateBadge } from './DueDateBadge';
-import { ExtendedUserAction, UserPendingActionType } from './types';
+import { UserPendingActionType } from './types';
 import { PENDING_ACTION_COMPONENTS, getActionTypeLabel } from './utils';
 
 // Primary action button component
@@ -51,7 +51,7 @@ export const PendingActionAlertItem: FC<{
     }
   };
 
-  const extendedRow = row as unknown as ExtendedUserAction;
+  const extendedRow = row;
 
   const MessageComponent =
     PENDING_ACTION_COMPONENTS[row.action_type as UserPendingActionType];

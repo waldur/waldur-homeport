@@ -119,11 +119,8 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
       return await marketplaceProviderOfferingsUpdateIntegration({
         path: { uuid: props.offering.uuid },
         body: {
-          service_attributes: serviceAttributes as unknown as Record<
-            string,
-            string
-          >,
-          plugin_options: pluginOptions as unknown as Record<string, string>,
+          service_attributes: serviceAttributes,
+          plugin_options: pluginOptions,
         },
       });
     },

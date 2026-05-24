@@ -136,11 +136,11 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
             },
             {
               label: translate('Healthy (OK)'),
-              value: (data.by_state as any)?.OK || 0,
+              value: data.by_state?.OK || 0,
             },
             {
               label: translate('Erred'),
-              value: (data.by_state as any)?.Erred || 0,
+              value: data.by_state?.Erred || 0,
             },
           ]
         : [],

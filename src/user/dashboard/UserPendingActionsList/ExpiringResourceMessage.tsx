@@ -15,7 +15,7 @@ export const ExpiringResourceMessage: FC<{ row: ExtendedUserAction }> = ({
           'This resource will expire soon. Review and renew to prevent downtime.',
         )}
       </div>
-      <ActionContext row={row as any} />
+      <ActionContext row={row} />
     </div>
   );
 };

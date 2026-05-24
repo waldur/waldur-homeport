@@ -13,7 +13,6 @@ import { SilenceAction } from './SilenceAction';
 import {
   ActionCategory,
   CorrectiveAction,
-  ExtendedUserAction,
   UserPendingActionType,
 } from './types';
 import { UnsilenceAction } from './UnsilenceAction';
@@ -49,7 +48,7 @@ const createActionHandler = (
   return async () => {
     // Special handling for Renew Resource action - open dialog directly
     if (action.label === 'Renew Resource') {
-      const extRow = row as unknown as ExtendedUserAction;
+      const extRow = row;
       openDialog(RenewAllocationDialog, {
         size: 'xl',
         fullscreen: 'lg-down',
@@ -189,7 +188,7 @@ export const usePendingActionActions = (
 
   const correctiveActions = (row.corrective_actions ||
     []) as CorrectiveAction[];
-  const extendedRow = row as unknown as ExtendedUserAction;
+  const extendedRow = row;
 
   // Build primary action info based on action type
   let primaryAction: PrimaryActionInfo | null = null;

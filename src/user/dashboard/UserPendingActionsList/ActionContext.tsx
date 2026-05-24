@@ -1,42 +1,39 @@
 import { FC } from 'react';
-import { UserAction } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 
 import { ExtendedUserAction } from './types';
 
-export const ActionContext: FC<{ row: UserAction }> = ({ row }) => {
-  const extendedRow = row as unknown as ExtendedUserAction;
-
+export const ActionContext: FC<{ row: ExtendedUserAction }> = ({ row }) => {
   return (
     <div className="d-flex align-items-center gap-3 flex-wrap mt-2">
-      {extendedRow.organization_name && extendedRow.organization_uuid && (
+      {row.organization_name && row.organization_uuid && (
         <div className="d-flex align-items-center gap-1">
           <span className="text-muted small">{translate('Organization')}:</span>
           <Link
             state="organization.dashboard"
-            params={{ uuid: extendedRow.organization_uuid }}
-            label={extendedRow.organization_name}
+            params={{ uuid: row.organization_uuid }}
+            label={row.organization_name}
             className="small fw-medium"
           />
         </div>
       )}
-      {extendedRow.project_name && extendedRow.project_uuid && (
+      {row.project_name && row.project_uuid && (
         <div className="d-flex align-items-center gap-1">
           <span className="text-muted small">{translate('Project')}:</span>
           <Link
             state="project.dashboard"
-            params={{ uuid: extendedRow.project_uuid }}
-            label={extendedRow.project_name}
+            params={{ uuid: row.project_uuid }}
+            label={row.project_name}
             className="small fw-medium"
           />
         </div>
       )}
-      {extendedRow.offering_name && (
+      {row.offering_name && (
         <div className="d-flex align-items-center gap-1">
           <span className="text-muted small">{translate('Offering')}:</span>
-          <span className="small">{extendedRow.offering_name}</span>
+          <span className="small">{row.offering_name}</span>
         </div>
       )}
     </div>
