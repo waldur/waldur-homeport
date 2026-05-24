@@ -10,8 +10,6 @@ import { FormGroup } from '../../FormGroup';
 
 import { ValidatorConfiguration } from './ValidatorConfiguration';
 
-const AnyInputField = InputField as any;
-
 interface ComponentMultiplierConfigurationProps {
   offering?: PublicOfferingDetails;
 }
@@ -73,7 +71,7 @@ export const ComponentMultiplierConfiguration = ({
             required
             meta={fieldProps.meta}
           >
-            <AnyInputField
+            <InputField
               input={fieldProps.input}
               type="number"
               min="1"
@@ -91,7 +89,7 @@ export const ComponentMultiplierConfiguration = ({
       >
         <Field
           name={`${name}.min_limit`}
-          component={AnyInputField}
+          component={InputField}
           type="number"
           min="0"
           placeholder={translate('e.g., 1')}
@@ -106,7 +104,7 @@ export const ComponentMultiplierConfiguration = ({
       >
         <Field
           name={`${name}.max_limit`}
-          component={AnyInputField}
+          component={InputField}
           type="number"
           min="0"
           placeholder={translate('e.g., 100')}

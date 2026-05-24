@@ -59,7 +59,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
         />
         <Field
           name="repeats"
-          component={AwesomeCheckboxField as any}
+          component={AwesomeCheckboxField}
           label={translate('Repeats')}
           help_text={translate('Create multiple rounds at a regular cadence.')}
           hideLabel

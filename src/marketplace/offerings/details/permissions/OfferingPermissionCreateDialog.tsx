@@ -94,7 +94,7 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
             <FormGroup label={translate('Expiration time')}>
               <Field
                 name="expiration_time"
-                component={DateTimeField as any}
+                component={DateTimeField}
                 placeholder={translate('Select a date')}
               />
             </FormGroup>

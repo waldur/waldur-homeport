@@ -33,7 +33,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
             name="category_uuid"
             options={queryData.data}
             isClearable={true}
-            component={SelectField as any}
+            component={SelectField}
             getOptionValue={(option) => option.uuid}
             getOptionLabel={(option) => option.title}
             placeholder={translate('Select category...')}

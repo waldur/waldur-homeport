@@ -66,7 +66,7 @@ yarn info eslint prettier stylelint husky version
   - `ComponentUserUsageCreateRequest` - for user usage submission request bodies
   - `ComponentUsage` - for general component usage data
   - All marketplace API request/response types are available in the SDK
-- When using React Final Form, use standard pattern: `<Field component={NumberField as any} />`
+- When using React Final Form, use standard pattern: `<Field component={NumberField} />`
 - Convert between SDK string types and numbers when necessary (e.g., `parseFloat(component.usage)`)
 - Handle nullable SDK types properly with optional chaining (`period.value?.components`)
 
