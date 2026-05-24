@@ -20,7 +20,6 @@ import { ProviderActionsGroup } from '../../marketplace/resources/actions/Provid
 
 import { EditAction } from './actions/EditAction';
 import { MigrateTenantAction } from './actions/MigrateTenantAction';
-import { PullQuotasAction } from './actions/PullQuotasAction';
 import { PullTenantAction } from './actions/PullTenantAction';
 import { SetQuotasAction } from './actions/SetQuotasAction';
 
@@ -42,7 +41,6 @@ export const OpenstackTenantActions = (props) => (
 
     <ProviderActionsGroup {...props}>
       <SetQuotasAction resource={props.resource} refetch={props.refetch} />
-      <PullQuotasAction resource={props.resource} refetch={props.refetch} />
     </ProviderActionsGroup>
 
     <ActionGroup title={translate('Staff actions')}>

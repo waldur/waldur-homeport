@@ -3,6 +3,8 @@ import { OverlayTrigger, Tooltip, Card } from 'react-bootstrap';
 import { Field, Form, useFormState } from 'react-final-form';
 import { openstackTenantsSetQuotas } from 'waldur-js-client';
 
+import { DirtyStateReporter } from '@/core/DirtyFormContext';
+import { WarnTip } from '@/core/WarnTip';
 import { NumberField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
@@ -34,6 +36,7 @@ const SETTABLE_QUOTAS = new Set([
   'network_count',
   'subnet_count',
   'port_count',
+  // gigabytes_<type> are discovered dynamically from resource.quotas (see buildCategoryRows)
 ]);
 
 // These quotas accept -1 (unlimited) as a valid value in addition to non-negative integers
@@ -43,6 +46,18 @@ const UNLIMITED_QUOTAS = new Set([
   'subnet_count',
   'port_count',
 ]);
+
+// Per-volume-type Cinder gigabytes_<type> quotas are stored in GB (no MiB conversion)
+const isGigabytesQuota = (name: string): boolean =>
+  name.startsWith('gigabytes_');
+
+// Quotas that are also governed by marketplace plan limits.
+// Editing them here overrides the plan and may cause billing drift.
+const MARKETPLACE_MANAGED_QUOTAS = new Set(['vcpu', 'ram', 'storage']);
+
+const MARKETPLACE_MANAGED_TOOLTIP = translate(
+  'Also governed by the marketplace plan limits. Changing it here overrides the plan and may cause drift with billing — use "Change limits" to adjust the plan.',
+);
 
 // Read-only quotas that derive from another quota — shown with an explanatory tooltip
 const DERIVED_QUOTA_TOOLTIPS: Record<string, string> = {
@@ -61,24 +76,39 @@ interface QuotaRowData {
   name: string;
   label: string;
   usage: number | undefined;
-  limitMib: number | undefined; // raw value from API (MiB for ram/storage, count otherwise)
-  limitDisplay: string | number; // formatted for display
+  limitRaw: number | undefined; // raw value from API (MiB for ram/storage, GB for gigabytes_*, count otherwise)
+  limitDisplay: string | number; // formatted for display in Current limit column
   settable: boolean;
   // For settable quotas: the form field name
   fieldName?: string;
-  // For settable quotas: initial value (GB for MiB-based, raw otherwise)
+  // For settable quotas: initial value (GB for MiB/GB-based, raw otherwise)
   initialValue?: number;
   // For settable quotas: minimum accepted value (-1 for quotas that allow unlimited)
   minValue?: number;
+  // Unit shown next to the input (e.g. 'GB') and used in Difference badge
+  unit?: string;
   // For read-only quotas: explanatory tooltip text
   tooltip?: string;
+  // True when this quota is also a marketplace plan component — shows info badge
+  marketplaceManaged?: boolean;
 }
 
-const formatLimit = (
+// Format Current limit in the same unit as the editable input to avoid unit mismatches.
+// For MiB-stored quotas (ram, storage): convert to GB and append ' GB'.
+// For GB-stored quotas (gigabytes_*): value is already GB, append ' GB'.
+// For count quotas: use formatQuotaValue (handles ∞ for -1, etc.).
+const formatLimitDisplay = (
   value: number | undefined,
   name: string,
 ): string | number => {
   if (value === undefined || value === null) return '—';
+  if (value === -1) return '∞';
+  if (MIB_QUOTAS.has(name)) {
+    return `${Math.round(value / MIB_PER_GB)} GB`;
+  }
+  if (isGigabytesQuota(name)) {
+    return `${value} GB`;
+  }
   return formatQuotaValue(value, name) ?? value;
 };
 
@@ -90,36 +120,46 @@ const mibToGb = (mib: number | undefined): number | undefined => {
 const makeSettableRow = (
   name: string,
   quota: Quota | undefined,
-): QuotaRowData => ({
-  name,
-  label: formatQuotaName(name),
-  usage: quota?.usage,
-  limitMib: quota?.limit,
-  limitDisplay: quota !== undefined ? formatLimit(quota.limit, name) : '—',
-  settable: true,
-  fieldName: name,
-  initialValue:
-    quota !== undefined
-      ? MIB_QUOTAS.has(name)
-        ? mibToGb(quota.limit)
-        : quota.limit
-      : undefined,
-  minValue: UNLIMITED_QUOTAS.has(name) ? -1 : 0,
-});
+): QuotaRowData => {
+  const isGb = isGigabytesQuota(name);
+  const isMib = MIB_QUOTAS.has(name);
+  return {
+    name,
+    label: formatQuotaName(name),
+    usage: quota?.usage,
+    limitRaw: quota?.limit,
+    limitDisplay:
+      quota !== undefined ? formatLimitDisplay(quota.limit, name) : '—',
+    settable: true,
+    fieldName: name,
+    initialValue:
+      quota !== undefined
+        ? isMib
+          ? mibToGb(quota.limit)
+          : quota.limit
+        : undefined,
+    // gigabytes_* and Neutron quotas accept -1 for unlimited; MiB and plain counts do not
+    minValue: UNLIMITED_QUOTAS.has(name) || isGb ? -1 : 0,
+    unit: isMib || isGb ? 'GB' : undefined,
+    marketplaceManaged: MARKETPLACE_MANAGED_QUOTAS.has(name) || isGb,
+  };
+};
 
 const makeReadOnlyRow = (quota: Quota): QuotaRowData => ({
   name: quota.name,
   label: formatQuotaName(quota.name),
   usage: quota.usage,
-  limitMib: quota.limit,
-  limitDisplay: formatLimit(quota.limit, quota.name),
+  limitRaw: quota.limit,
+  limitDisplay: formatLimitDisplay(quota.limit, quota.name),
   settable: false,
   tooltip: DERIVED_QUOTA_TOOLTIPS[quota.name],
 });
 
 // Derive ordered list of quota rows grouped by category.
-// Settable quotas always appear (even when absent from resource.quotas) so the
-// dialog is usable on freshly-created tenants that have no quota records yet.
+// Static SETTABLE_QUOTAS always appear (even when absent from resource.quotas) so the
+// dialog is usable on freshly-created tenants with no quota records yet.
+// Dynamic gigabytes_<type> quotas are treated as settable whenever they appear in
+// resource.quotas — their set of active types is discovered from the tenant data.
 const buildCategoryRows = (
   quotas: Quota[],
 ): Array<{ categoryLabel: string; rows: QuotaRowData[] }> => {
@@ -129,11 +169,27 @@ const buildCategoryRows = (
   for (const [, category] of Object.entries(QUOTA_CATEGORIES)) {
     const rows: QuotaRowData[] = [];
 
-    // Settable members first — always present, stable order
+    // Static settable members first — always present, stable order
     for (const nameOrPattern of category.names) {
       if (typeof nameOrPattern !== 'string') continue;
       if (!SETTABLE_QUOTAS.has(nameOrPattern)) continue;
       rows.push(makeSettableRow(nameOrPattern, quotaByName.get(nameOrPattern)));
+    }
+
+    // Dynamic gigabytes_<type> quotas — editable, discovered from resource.quotas,
+    // sorted by name for stable order
+    for (const nameOrPattern of category.names) {
+      if (
+        typeof nameOrPattern !== 'string' &&
+        nameOrPattern.source === '^gigabytes'
+      ) {
+        const gigabytesQuotas = quotas
+          .filter((q) => isGigabytesQuota(q.name))
+          .sort((a, b) => a.name.localeCompare(b.name));
+        for (const quota of gigabytesQuotas) {
+          rows.push(makeSettableRow(quota.name, quota));
+        }
+      }
     }
 
     // Non-settable members from resource.quotas (read-only context rows)
@@ -143,7 +199,7 @@ const buildCategoryRows = (
         return nameOrPattern.test(q.name);
       });
       for (const quota of matchingQuotas) {
-        if (!SETTABLE_QUOTAS.has(quota.name)) {
+        if (!SETTABLE_QUOTAS.has(quota.name) && !isGigabytesQuota(quota.name)) {
           rows.push(makeReadOnlyRow(quota));
         }
       }
@@ -158,7 +214,7 @@ const buildCategoryRows = (
     }
   }
 
-  // Append any quotas not covered by QUOTA_CATEGORIES (read-only only)
+  // Append any quotas not covered by QUOTA_CATEGORIES (read-only only, not gigabytes_*)
   const categorizedNames = new Set(
     Object.values(QUOTA_CATEGORIES).flatMap((c) =>
       quotas
@@ -170,9 +226,11 @@ const buildCategoryRows = (
         .map((q) => q.name),
     ),
   );
-  // Also exclude settable quotas already seeded above
   const uncategorized = quotas.filter(
-    (q) => !categorizedNames.has(q.name) && !SETTABLE_QUOTAS.has(q.name),
+    (q) =>
+      !categorizedNames.has(q.name) &&
+      !SETTABLE_QUOTAS.has(q.name) &&
+      !isGigabytesQuota(q.name),
   );
   if (uncategorized.length > 0) {
     result.push({
@@ -184,8 +242,16 @@ const buildCategoryRows = (
   return result;
 };
 
+// Format usage value in the same unit as the editable input.
 const formatUsage = (usage: number | undefined, name: string): ReactNode => {
   if (usage === undefined || usage === null) return '—';
+  if (usage === -1) return '∞';
+  if (MIB_QUOTAS.has(name)) {
+    return `${Math.round(usage / MIB_PER_GB)} GB`;
+  }
+  if (isGigabytesQuota(name)) {
+    return `${usage} GB`;
+  }
   return String(formatQuotaValue(usage, name) ?? usage);
 };
 
@@ -200,7 +266,9 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
     ? values[row.fieldName]
     : undefined;
 
-  // Compute the difference: new limit (in same unit as limit display) minus current limit
+  // Compute the difference: new limit (in same unit as the input) minus current limit.
+  // MiB quotas: both input and currentLimit are in GB (raw is MiB, converted).
+  // gigabytes_* and plain count quotas: input and raw value are in the same unit already.
   let difference: number | undefined;
   if (
     row.settable &&
@@ -209,18 +277,18 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
     newValueRaw !== null
   ) {
     if (MIB_QUOTAS.has(row.name)) {
-      // Both currentLimit and newValue are in GB for display
-      const currentGb = mibToGb(row.limitMib);
+      const currentGb = mibToGb(row.limitRaw);
       if (currentGb !== undefined) {
         difference = Number(newValueRaw) - currentGb;
       }
     } else {
-      const currentLimit = row.limitMib ?? 0;
+      const currentLimit = row.limitRaw ?? 0;
       difference = Number(newValueRaw) - currentLimit;
     }
   }
 
-  const labelCell = row.tooltip ? (
+  // Derived-size tooltip: dotted underline on the label itself
+  const labelContent = row.tooltip ? (
     <OverlayTrigger overlay={<Tooltip>{row.tooltip}</Tooltip>} placement="top">
       <span className="text-nowrap text-decoration-underline-dotted cursor-help">
         {row.label}
@@ -228,6 +296,24 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
     </OverlayTrigger>
   ) : (
     <span className="text-nowrap">{row.label}</span>
+  );
+
+  // Marketplace-managed badge: canonical WarnTip after the label
+  const marketplaceIcon = row.marketplaceManaged ? (
+    <span data-testid={`marketplace-managed-${row.name}`}>
+      <WarnTip
+        id={`marketplace-managed-${row.name}`}
+        label={MARKETPLACE_MANAGED_TOOLTIP}
+        hasSpace
+      />
+    </span>
+  ) : null;
+
+  const labelCell = (
+    <span className="d-inline-flex align-items-center">
+      {labelContent}
+      {marketplaceIcon}
+    </span>
   );
 
   return (
@@ -242,7 +328,7 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
             render={({ input }) => (
               <NumberField
                 input={input}
-                unit={MIB_QUOTAS.has(row.name) ? 'GB' : undefined}
+                unit={row.unit}
                 min={row.minValue ?? 0}
                 data-testid={`quota-${row.name}`}
               />
@@ -256,7 +342,7 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
         {difference !== undefined ? (
           <ChangesAmountBadge
             changes={difference}
-            unit={MIB_QUOTAS.has(row.name) ? ' GB' : ''}
+            unit={row.unit ? ` ${row.unit}` : ''}
             badgePill
             badgeOutline
             keepDecimals
@@ -275,8 +361,15 @@ interface SetQuotasFormValues {
   [key: string]: number | undefined;
 }
 
-export const SetQuotasDialog: FC<ActionDialogProps<OpenStackTenant>> = ({
+// ModalRoot passes `close` (the guarded onHide) to every dialog component.
+// We forward it to Cancel so the dirty-form guard fires on Cancel too.
+type SetQuotasDialogProps = ActionDialogProps<OpenStackTenant> & {
+  close?(): void;
+};
+
+export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
   resolve: { resource, refetch },
+  close,
 }) => {
   const { quotas } = resource;
   const categoryRows = buildCategoryRows(quotas);
@@ -295,6 +388,7 @@ export const SetQuotasDialog: FC<ActionDialogProps<OpenStackTenant>> = ({
     mutationFn: (formValues) => {
       const body: Record<string, number> = {};
 
+      // Static settable quotas
       for (const name of SETTABLE_QUOTAS) {
         const value = formValues[name];
         if (value === undefined || value === null) continue;
@@ -303,6 +397,13 @@ export const SetQuotasDialog: FC<ActionDialogProps<OpenStackTenant>> = ({
         } else {
           body[name] = Number(value);
         }
+      }
+
+      // Dynamic gigabytes_<type> quotas — values are already in GB, send as-is
+      for (const [name, value] of Object.entries(formValues)) {
+        if (!isGigabytesQuota(name)) continue;
+        if (value === undefined || value === null) continue;
+        body[name] = Number(value);
       }
 
       return openstackTenantsSetQuotas({
@@ -321,11 +422,14 @@ export const SetQuotasDialog: FC<ActionDialogProps<OpenStackTenant>> = ({
       initialValues={initialValues}
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>
+          {/* Reports form dirty state to ModalRoot so backdrop/Esc/X trigger a confirm */}
+          <DirtyStateReporter />
           <ModalDialog
             title={translate('Change quotas')}
             footer={
               <>
-                <CloseDialogButton />
+                {/* Wire Cancel to the guarded close so the dirty-form prompt fires */}
+                <CloseDialogButton onClick={close} />
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Save')}
