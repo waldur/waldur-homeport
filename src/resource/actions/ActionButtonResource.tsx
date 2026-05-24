@@ -1,5 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useAsyncFn, useBoolean } from 'react-use';
+import { useBoolean } from 'react-use';
 import { marketplaceResourcesRetrieve } from 'waldur-js-client';
 
 import { get } from '@/core/api';
@@ -49,18 +50,17 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
 ) => {
   const { url } = props;
 
-  const [{ loading, error, value }, getActions] = useAsyncFn(
-    () => loadData(url),
-    [url],
-  );
-
   const [open, onToggle] = useBoolean(false);
 
-  const loadActionsIfOpen = React.useCallback(() => {
-    if (open) getActions();
-  }, [open, getActions]);
-
-  React.useEffect(loadActionsIfOpen, [open, loadActionsIfOpen]);
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['ResourceActions', url],
+    queryFn: () => loadData(url),
+    enabled: open,
+  });
 
   return (
     <ResourceActionComponent

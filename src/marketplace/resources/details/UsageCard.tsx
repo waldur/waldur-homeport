@@ -2,7 +2,6 @@ import { ChartBarIcon, TableIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { Card, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
-import { useAsync } from 'react-use';
 import { marketplaceResourcesTeamList, Resource } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -54,10 +53,14 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
     staleTime: UI_STALE_TIME,
   });
 
-  const { loading, error, value } = useAsync(
-    () => getComponentsAndUsages(resourceRef.resource_uuid, period),
-    [resourceRef, period],
-  );
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['UsageCard', resourceRef, period],
+    queryFn: () => getComponentsAndUsages(resourceRef.resource_uuid, period),
+  });
 
   const usersFilterOptions = useMemo(() => {
     if (!team?.length || !value?.userUsages?.length) return [];

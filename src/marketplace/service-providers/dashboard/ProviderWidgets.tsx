@@ -7,9 +7,9 @@ import {
   UserListIcon,
   WarningIcon,
 } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { FC, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useAsync } from 'react-use';
 import {
   marketplaceServiceProvidersStatRetrieve,
   ServiceProviderStatistics,
@@ -156,8 +156,14 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
 export const ProviderWidgets = ({ provider }) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
-  const { loading, error, value } = useAsync(
-    () =>
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['ProviderWidgets', provider, showExperimentalUiComponents],
+
+    queryFn: () =>
       marketplaceServiceProvidersStatRetrieve({
         path: { uuid: provider.uuid },
       }).then((res) => {
@@ -172,8 +178,7 @@ export const ProviderWidgets = ({ provider }) => {
         }
         return widgets;
       }),
-    [provider, showExperimentalUiComponents],
-  );
+  });
 
   return (
     <Row>

@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { Field } from 'react-final-form';
-import { useAsyncFn, useEffectOnce } from 'react-use';
 import { notificationMessagesTemplatesList } from 'waldur-js-client';
 
 import { FormattedHtml } from '@/core/FormattedHtml';
@@ -12,14 +12,17 @@ import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const CustomMessageWrapper = () => {
-  const [{ loading, error, value }, loadTemplate] = useAsyncFn(() =>
-    notificationMessagesTemplatesList({
-      query: { name: 'invitation_created' },
-    }),
-  );
-
-  useEffectOnce(() => {
-    loadTemplate();
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+    refetch: loadTemplate,
+  } = useQuery({
+    queryKey: ['CustomMessageWrapper', 'invitation_created'],
+    queryFn: () =>
+      notificationMessagesTemplatesList({
+        query: { name: 'invitation_created' },
+      }),
   });
 
   const htmlMessage = useMemo(() => {

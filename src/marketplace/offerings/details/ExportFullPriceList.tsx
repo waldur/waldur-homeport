@@ -1,6 +1,6 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import {
   marketplacePlanComponentsList,
   PlanComponent,
@@ -52,26 +52,30 @@ export const ExportFullPriceList: FunctionComponent<
   ExportFullPriceListProps
 > = ({ offering }) => {
   const {
-    loading,
+    isLoading: loading,
     error,
-    value: components,
-  } = useAsync(async () => {
-    const components = await getAllPages((page) =>
-      marketplacePlanComponentsList({
-        query: {
-          page,
-          page_size: MAX_PAGE_SIZE,
-          offering_uuid: offering.uuid,
-        },
-      }),
-    );
-    components.map((plan) => {
-      if (plan.billing_type !== 'limit') return plan;
-      if (plan.amount === 0) plan.amount = 1;
-      return plan;
-    });
-    return components;
-  }, [offering]);
+    data: components,
+  } = useQuery({
+    queryKey: ['ExportFullPriceList', offering],
+
+    queryFn: async () => {
+      const components = await getAllPages((page) =>
+        marketplacePlanComponentsList({
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            offering_uuid: offering.uuid,
+          },
+        }),
+      );
+      components.map((plan) => {
+        if (plan.billing_type !== 'limit') return plan;
+        if (plan.amount === 0) plan.amount = 1;
+        return plan;
+      });
+      return components;
+    },
+  });
 
   return (
     <div className="exportFullPriceList">

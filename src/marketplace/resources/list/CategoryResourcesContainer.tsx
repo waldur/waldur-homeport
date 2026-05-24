@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
-import { useAsync } from 'react-use';
 import { marketplaceCategoriesRetrieve } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -13,14 +13,19 @@ export const CategoryResourcesContainer: React.FC = () => {
     params: { category_uuid },
   } = useCurrentStateAndParams();
 
-  const { loading, value, error } = useAsync(
-    () =>
+  const {
+    isLoading: loading,
+    data,
+    error,
+  } = useQuery({
+    queryKey: ['CategoryResourcesContainer', category_uuid],
+
+    queryFn: () =>
       marketplaceCategoriesRetrieve({
         path: { uuid: category_uuid },
         query: { field: ['columns', 'title'] },
       }).then((response) => response.data),
-    [category_uuid],
-  );
+  });
 
   if (loading) {
     return <LoadingSpinner />;
@@ -29,9 +34,9 @@ export const CategoryResourcesContainer: React.FC = () => {
   } else {
     return (
       <CategoryResourcesList
-        columns={value.columns}
+        columns={data.columns as any}
         category_uuid={category_uuid}
-        category_title={value.title}
+        category_title={data.title}
         standalone
       />
     );

@@ -1,6 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useAsync } from 'react-use';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -29,7 +29,10 @@ export const isWorking = (data: Record<string, string>): boolean => {
 
 export const BackendHealthStatusIndicator: FC = () => {
   const { openDialog } = useModal();
-  const { value } = useAsync(getBackendHealthStatus, []);
+  const { data: value } = useQuery({
+    queryKey: ['BackendHealthStatusIndicator'],
+    queryFn: getBackendHealthStatus,
+  });
 
   if (!value) return null;
 

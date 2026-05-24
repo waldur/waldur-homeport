@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { connect } from 'react-redux';
-import { useAsync } from 'react-use';
 import { billingTotalCostRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -55,16 +55,21 @@ const loadData = async (filter: CustomerFilterData) => {
 };
 
 const TotalCostComponent: React.FC<CustomerListComponentProps> = (props) => {
-  const { loading, error, value } = useAsync(
-    () =>
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['TotalCostComponent', props.customerListFilter],
+
+    queryFn: () =>
       loadData(
         (props.customerListFilter || []).reduce(
           (acc, filter) => Object.assign(acc, { [filter.name]: filter.value }),
           {},
         ) as CustomerFilterData,
       ),
-    [props.customerListFilter],
-  );
+  });
   if (loading) {
     return (
       <>

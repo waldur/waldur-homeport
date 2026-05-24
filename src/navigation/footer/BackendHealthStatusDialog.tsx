@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useAsyncFn, useEffectOnce } from 'react-use';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StateIndicator } from '@/core/StateIndicator';
@@ -10,10 +10,13 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { getBackendHealthStatus } from '@/navigation/footer/BackendHealthStatusIndicator';
 
 export const BackendHealthStatusDialog: FunctionComponent = () => {
-  const [{ loading, value }, reFetch] = useAsyncFn(getBackendHealthStatus, []);
-
-  useEffectOnce(() => {
-    reFetch();
+  const {
+    isLoading: loading,
+    data: value,
+    refetch: reFetch,
+  } = useQuery({
+    queryKey: ['BackendHealthStatusDialog'],
+    queryFn: getBackendHealthStatus,
   });
 
   return (

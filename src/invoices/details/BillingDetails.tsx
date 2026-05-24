@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
-import { useAsyncFn } from 'react-use';
 import { invoicesRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -26,21 +26,25 @@ export const BillingDetails: FunctionComponent = () => {
     params: { invoice_uuid: invoiceId, status },
   } = useCurrentStateAndParams();
 
-  const [{ loading, error, value: invoice }, callback] = useAsyncFn(
-    () =>
+  const {
+    isLoading: loading,
+    error,
+    data: invoice,
+    refetch: callback,
+  } = useQuery({
+    queryKey: ['invoice', invoiceId],
+    queryFn: () =>
       invoicesRetrieve({ path: { uuid: invoiceId } }).then(
         (response) => response.data,
       ),
-    [invoiceId],
-  );
+    enabled: !!invoiceId,
+  });
 
   useEffect(() => {
     if (!invoiceId) {
       router.stateService.go('errorPage.notFound');
-    } else {
-      callback();
     }
-  }, [invoiceId, callback]);
+  }, [invoiceId]);
 
   useEffect(() => {
     if ((error as any)?.status === 404) {

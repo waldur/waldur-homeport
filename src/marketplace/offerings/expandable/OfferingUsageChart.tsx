@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
-import { useAsync } from 'react-use';
 
 import { generateColors } from '@/core/generateColors';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -19,11 +19,13 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
   offering,
 }) => {
   const {
-    loading,
+    isLoading: loading,
     error,
-    value: usages,
-  } = useAsync(
-    () =>
+    data: usages,
+  } = useQuery({
+    queryKey: ['OfferingUsageChart', offering],
+
+    queryFn: () =>
       getComponentUsageMonthlyList({
         query: {
           offering_uuid: offering.uuid,
@@ -40,8 +42,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
           ],
         },
       }).then((response) => response.data),
-    [offering],
-  );
+  });
 
   return (
     <Card className="card-bordered mb-10">

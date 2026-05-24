@@ -1,6 +1,7 @@
-import { FunctionComponent, useCallback, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAsyncFn, useBoolean } from 'react-use';
+import { useBoolean } from 'react-use';
 import { Invoice, invoicesList, paymentsLinkToInvoice } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
@@ -27,18 +28,17 @@ export const LinkInvoiceAction: FunctionComponent<{ row }> = ({
 
   const user = useUser();
 
-  const [{ loading, error, value }, getInvoices] = useAsyncFn(
-    () => loadInvoices(customer),
-    [customer],
-  );
-
   const [open, onToggle] = useBoolean(false);
 
-  const loadInvoicesIfOpen = useCallback(() => {
-    if (open) getInvoices();
-  }, [open, getInvoices]);
-
-  useEffect(loadInvoicesIfOpen, [open]);
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['invoices', customer.uuid],
+    queryFn: () => loadInvoices(customer),
+    enabled: open,
+  });
 
   const { mutate, isPending } = useManagedMutation<any, any, Invoice>({
     mutationFn: (selectedInvoice) =>

@@ -1,5 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useAsyncFn, useEffectOnce } from 'react-use';
+import { useEffectOnce } from 'react-use';
 import { freeipaProfilesList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -22,14 +23,18 @@ export const FreeIpaAccount = () => {
     router.stateService.go('errorPage.notFound');
   }
 
-  const [{ loading: isLoading, error, value: profile }, refreshProfile] =
-    useAsyncFn(
-      () =>
-        freeipaProfilesList({ query: { user: user.uuid } }).then(
-          (r) => r.data[0],
-        ),
-      [user.uuid],
-    );
+  const {
+    isLoading,
+    error,
+    data: profile,
+    refetch: refreshProfile,
+  } = useQuery({
+    queryKey: ['FreeIPAAccount', user.uuid],
+    queryFn: () =>
+      freeipaProfilesList({ query: { user: user.uuid } }).then(
+        (r) => r.data[0],
+      ),
+  });
 
   useEffectOnce(() => {
     refreshProfile();

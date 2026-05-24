@@ -1,4 +1,4 @@
-import { useAsync } from 'react-use';
+import { useQuery } from '@tanstack/react-query';
 import { openstackTenantsList } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
@@ -9,12 +9,20 @@ import { formatServiceProviders } from './utils';
 import { VmOverviewFilter } from './VmOverviewFilter';
 
 export const VmOverviewFilterContainer = (props) => {
-  const { error, value, loading } = useAsync(async () => {
-    const serviceProviders = await getAllPages((page) =>
-      openstackTenantsList({ query: { page } }),
-    );
-    return formatServiceProviders(serviceProviders);
-  }, []);
+  const {
+    error,
+    data: value,
+    isLoading: loading,
+  } = useQuery({
+    queryKey: ['VmOverviewFilterContainer'],
+
+    queryFn: async () => {
+      const serviceProviders = await getAllPages((page) =>
+        openstackTenantsList({ query: { page } }),
+      );
+      return formatServiceProviders(serviceProviders);
+    },
+  });
   if (loading) {
     return <LoadingSpinner />;
   }

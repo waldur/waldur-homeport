@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { Col, Form, Row } from 'react-bootstrap';
-import { useAsync } from 'react-use';
 import { marketplaceOfferingPermissionsList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -14,18 +14,19 @@ export const ProviderOfferingPermissions = ({
   customer: Customer;
 }) => {
   const {
-    loading,
+    isLoading: loading,
     error,
-    value: offeringPermissions,
-  } = useAsync(
-    () =>
+    data: offeringPermissions,
+  } = useQuery({
+    queryKey: ['ProviderOfferingPermissions', customer],
+
+    queryFn: () =>
       getAllPages((page) =>
         marketplaceOfferingPermissionsList({
           query: { page, page_size: MAX_PAGE_SIZE, customer: customer.uuid },
         }),
       ),
-    [customer],
-  );
+  });
 
   return loading ? (
     <LoadingSpinner />

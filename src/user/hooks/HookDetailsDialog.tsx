@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useAsync } from 'react-use';
 import {
   EventGroupsEnum,
   hooksEmailCreate,
@@ -94,7 +94,10 @@ const useHookForm = (hook, refetch) => {
         hook_type: 'webhook' as HookType,
         event_groups: {},
       };
-  const state = useAsync(loadEventGroupsOptions);
+  const state = useQuery({
+    queryKey: ['HookDetailsDialog'],
+    queryFn: loadEventGroupsOptions,
+  });
   return {
     saveHook: (values) =>
       saveHookMutation.mutateAsync(values).catch(() => {
@@ -111,7 +114,7 @@ export const HookDetailsDialog: FunctionComponent<{
   const {
     saveHook,
     initialValues,
-    state: { loading, error, value: eventGroups },
+    state: { isLoading: loading, error, data: eventGroups },
   } = useHookForm(hook, refetch);
 
   return (

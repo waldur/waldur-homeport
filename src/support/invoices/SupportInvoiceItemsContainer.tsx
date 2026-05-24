@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import { invoicesList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -38,7 +38,14 @@ async function loadData() {
 }
 
 export const SupportInvoiceItemsContainer: FunctionComponent = () => {
-  const { loading, error, value: data } = useAsync(loadData);
+  const {
+    isLoading: loading,
+    error,
+    data,
+  } = useQuery({
+    queryKey: ['SupportInvoiceItemsContainer'],
+    queryFn: loadData,
+  });
   if (loading) {
     return <LoadingSpinner />;
   }

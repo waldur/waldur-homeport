@@ -18,7 +18,11 @@ export const CategoryManageColumnsDialog: FC<
   const formState = useCategoryColumnsEditor(category);
   return (
     <CategoryColumnsForm
-      asyncState={formState.asyncState}
+      asyncState={{
+        loading: formState.asyncState.isLoading as any,
+        error: formState.asyncState.error,
+        value: formState.asyncState.data,
+      }}
       submitRequest={formState.submitRequest}
       category={formState.category}
       initialValues={formState.initialValues}

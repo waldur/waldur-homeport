@@ -1,16 +1,18 @@
+import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useAsync } from 'react-use';
 
 import { countLexisLinks } from '@/marketplace/common/api';
 
 import { BasicLexisLinkList } from './BasicLexisLinkList';
 
 export const LexisLinkCard = ({ resource }) => {
-  const result = useAsync(() =>
-    countLexisLinks({ resource_uuid: resource.uuid }),
-  );
+  const result = useQuery({
+    queryKey: ['LexisLinkCard'],
+
+    queryFn: () => countLexisLinks({ resource_uuid: resource.uuid }),
+  });
   const filter = useMemo(() => ({ resource_uuid: resource.uuid }), [resource]);
-  if (!result.value) {
+  if (!result.data) {
     return null;
   }
   return <BasicLexisLinkList filter={filter} />;

@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 import {
   rancherHpasCreate,
   rancherNamespacesList,
@@ -54,29 +54,33 @@ export const HPACreateDialog: FC<HPACreateDialogProps> = (props) => {
     },
   );
 
-  const { loading, value } = useAsync(async () => {
-    const namespaces = await getAllPages((page) =>
-      rancherNamespacesList({
-        query: {
-          page,
-          page_size: MAX_PAGE_SIZE,
-          cluster_uuid: props.resolve.cluster.uuid,
-          o: ['name'],
-        },
-      }),
-    );
-    const workloads = await getAllPages((page) =>
-      rancherWorkloadsList({
-        query: {
-          page,
-          page_size: MAX_PAGE_SIZE,
-          cluster_uuid: props.resolve.cluster.uuid,
-          o: ['name'],
-        },
-      }),
-    );
-    return { namespaces, workloads };
-  }, [props.resolve.cluster.uuid]);
+  const { isLoading: loading, data: value } = useQuery({
+    queryKey: ['HPACreateDialog', props.resolve.cluster.uuid],
+
+    queryFn: async () => {
+      const namespaces = await getAllPages((page) =>
+        rancherNamespacesList({
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            cluster_uuid: props.resolve.cluster.uuid,
+            o: ['name'],
+          },
+        }),
+      );
+      const workloads = await getAllPages((page) =>
+        rancherWorkloadsList({
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            cluster_uuid: props.resolve.cluster.uuid,
+            o: ['name'],
+          },
+        }),
+      );
+      return { namespaces, workloads };
+    },
+  });
 
   const metricNameOptions = useMemo<MetricOption[]>(getMetricNameOptions, []);
   const targetTypeOptions = useMemo(getTargetTypeOptions, []);

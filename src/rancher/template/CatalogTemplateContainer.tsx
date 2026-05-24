@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import {
   rancherCatalogsRetrieve,
   rancherClustersRetrieve,
@@ -29,12 +29,12 @@ export const CatalogTemplateContainer: FunctionComponent = () => {
     params: { uuid: projectUuid, catalogUuid, clusterUuid },
   } = useCurrentStateAndParams();
 
-  const state = useAsync(
-    () => loadData(clusterUuid, catalogUuid),
-    [clusterUuid, catalogUuid],
-  );
+  const state = useQuery({
+    queryKey: ['CatalogTemplateContainer', clusterUuid, catalogUuid],
+    queryFn: () => loadData(clusterUuid, catalogUuid),
+  });
 
-  if (state.loading) {
+  if (state.isLoading) {
     return <LoadingSpinner />;
   }
 

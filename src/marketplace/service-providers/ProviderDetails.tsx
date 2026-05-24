@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import { marketplaceProviderOfferingsList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -28,10 +28,14 @@ export const ProviderDetails: FunctionComponent = () => {
     params: { customer_uuid },
   } = useCurrentStateAndParams();
 
-  const { loading, value, error } = useAsync(
-    () => loadProviderData(customer_uuid),
-    [customer_uuid],
-  );
+  const {
+    isLoading: loading,
+    data: value,
+    error,
+  } = useQuery({
+    queryKey: ['providerDetails', customer_uuid],
+    queryFn: () => loadProviderData(customer_uuid),
+  });
 
   useTitle(
     value ? value.provider.customer_name : translate('Provider details'),

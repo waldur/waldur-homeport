@@ -1,6 +1,6 @@
 import { BellIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 
 import { count } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -32,24 +32,28 @@ export const ConfirmationDrawerToggle: React.FC = () => {
     MarketplaceFeatures.conceal_pending_provider_orders,
   );
 
-  const { value: counters } = useAsync(async () => {
-    const pendingOrdersCount = showConsumerOrders
-      ? await countOrders(PENDING_CONSUMER_ORDERS_FILTER)
-      : 0;
-    const pendingProvidersCount = showProviderOrders
-      ? await countOrders(PENDING_PROVIDER_ORDERS_FILTER)
-      : 0;
-    const pendingProjectUpdatesCount =
-      showConsumerOrders || showProviderOrders
-        ? await count('/api/marketplace-project-update-requests/', {
-            state: ['pending'],
-          })
+  const { data: counters } = useQuery({
+    queryKey: ['ConfirmationDrawerToggle'],
+
+    queryFn: async () => {
+      const pendingOrdersCount = showConsumerOrders
+        ? await countOrders(PENDING_CONSUMER_ORDERS_FILTER)
         : 0;
-    return {
-      pendingOrdersCount,
-      pendingProvidersCount,
-      pendingProjectUpdatesCount,
-    };
+      const pendingProvidersCount = showProviderOrders
+        ? await countOrders(PENDING_PROVIDER_ORDERS_FILTER)
+        : 0;
+      const pendingProjectUpdatesCount =
+        showConsumerOrders || showProviderOrders
+          ? await count('/api/marketplace-project-update-requests/', {
+              state: ['pending'],
+            })
+          : 0;
+      return {
+        pendingOrdersCount,
+        pendingProvidersCount,
+        pendingProjectUpdatesCount,
+      };
+    },
   });
 
   if (!showConsumerOrders && !showProviderOrders) {

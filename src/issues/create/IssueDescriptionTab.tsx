@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, useFormState, useForm } from 'react-final-form';
-import { useAsync } from 'react-use';
 import { supportTemplatesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -21,21 +21,24 @@ export const IssueDescriptionTab = () => {
   const issueType = values.type;
   const issueTemplate = values.template;
 
-  const templateState = useAsync(() =>
-    getAllPages((page) =>
-      supportTemplatesList({ query: { page, page_size: MAX_PAGE_SIZE } }),
-    ),
-  );
+  const templateState = useQuery({
+    queryKey: ['IssueDescriptionTab'],
+
+    queryFn: () =>
+      getAllPages((page) =>
+        supportTemplatesList({ query: { page, page_size: MAX_PAGE_SIZE } }),
+      ),
+  });
 
   // Filter templates based on issue type
   // Template.issue_type is like 'INFORMATIONAL', issueType.id is like 'Informational'
   const filteredTemplates = useMemo(() => {
-    if (!templateState.value || !issueType) return [];
+    if (!templateState.data || !issueType) return [];
     const typeId = typeof issueType === 'string' ? issueType : issueType.id;
-    return templateState.value.filter(
+    return templateState.data.filter(
       (option) => TEMPLATE_TYPE_TO_NAME[option.issue_type] === typeId,
     );
-  }, [templateState.value, issueType]);
+  }, [templateState.data, issueType]);
 
   useEffect(() => {
     if (issueTemplate) {
@@ -54,7 +57,7 @@ export const IssueDescriptionTab = () => {
 
   const templateFiles = issueTemplate ? issueTemplate.attachments : [];
 
-  return templateState.loading ? (
+  return templateState.isLoading ? (
     <LoadingSpinner />
   ) : templateState.error ? (
     <>{translate('Unable to load data.')}</>

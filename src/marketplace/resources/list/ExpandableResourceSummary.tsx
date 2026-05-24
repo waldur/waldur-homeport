@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import { marketplaceResourcesDetailsRetrieve } from 'waldur-js-client';
 import { Resource } from 'waldur-js-client';
 
@@ -74,13 +74,18 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
 };
 
 const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
-  const { value, error, loading } = useAsync(
-    () =>
+  const {
+    data: value,
+    error,
+    isLoading: loading,
+  } = useQuery({
+    queryKey: ['ExpandableResourceSummary', row],
+
+    queryFn: () =>
       marketplaceResourcesDetailsRetrieve({
         path: { uuid: row.uuid },
       }),
-    [row],
-  );
+  });
 
   if (error) {
     return <>{translate('Unable to load detail.')}</>;

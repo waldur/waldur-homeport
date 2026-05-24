@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 import {
   CategoryColumn,
   CategoryColumnRequest,
@@ -103,8 +103,10 @@ interface FormData {
 }
 
 export const useCategoryColumnsEditor = (category: Category) => {
-  const asyncState = useAsync(
-    () =>
+  const asyncState = useQuery({
+    queryKey: ['utils', category.uuid],
+
+    queryFn: () =>
       getAllPages((page) =>
         marketplaceCategoryColumnsList({
           query: {
@@ -114,8 +116,7 @@ export const useCategoryColumnsEditor = (category: Category) => {
           },
         }),
       ),
-    [category.uuid],
-  );
+  });
   const dispatch = useDispatch();
 
   const submitMutation = useManagedMutation<any, any, FormData>({
@@ -144,7 +145,7 @@ export const useCategoryColumnsEditor = (category: Category) => {
   const submitRequest = (values: FormData) =>
     submitMutation.mutateAsync(values);
 
-  const initialValues = { columns: asyncState.value || [] };
+  const initialValues = { columns: asyncState.data || [] };
 
   return {
     asyncState,

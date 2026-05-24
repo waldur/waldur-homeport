@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useAsync } from 'react-use';
 import { RancherCluster, rancherNodesCreate } from 'waldur-js-client';
 import { OpenStackFlavor } from 'waldur-js-client';
 
@@ -50,7 +50,10 @@ const serializeNode = (cluster: RancherCluster, formData) => ({
 
 export const CreateNodeDialog: FC<OwnProps> = (props) => {
   const cluster = props.resolve.resource;
-  const state = useAsync(() => loadNodeCreateData(cluster), [cluster]);
+  const state = useQuery({
+    queryKey: ['CreateNodeDialog', cluster],
+    queryFn: () => loadNodeCreateData(cluster),
+  });
 
   const createNodeMutation = useManagedMutation<any, any, FormData>({
     mutationFn: (formData) =>
@@ -63,10 +66,10 @@ export const CreateNodeDialog: FC<OwnProps> = (props) => {
     () => ({
       role: 'worker',
       system_volume_size: 1,
-      system_volume_type: state.value?.defaultVolumeType,
+      system_volume_type: state.data?.defaultVolumeType,
       data_volumes: [],
     }),
-    [state.value?.defaultVolumeType],
+    [state.data?.defaultVolumeType],
   );
 
   return (
@@ -82,25 +85,25 @@ export const CreateNodeDialog: FC<OwnProps> = (props) => {
               <>
                 <CloseDialogButton />
                 <SubmitButton
-                  disabled={state.loading || invalid || submitting}
+                  disabled={state.isLoading || invalid || submitting}
                   submitting={submitting}
                   label={translate('Create node')}
                 />
               </>
             }
           >
-            {state.loading ? (
+            {state.isLoading ? (
               <LoadingSpinner />
             ) : state.error ? (
               <p>{translate('Unable to load data.')}</p>
             ) : (
               <>
                 <NodeRoleGroup />
-                <NodeFlavorGroup options={state.value.flavors} />
-                <SubnetGroup options={state.value.subnets} />
+                <NodeFlavorGroup options={state.data.flavors} />
+                <SubnetGroup options={state.data.subnets} />
                 <NodeStorageGroup
-                  volumeTypes={state.value.volumeTypes}
-                  defaultVolumeType={state.value.defaultVolumeType}
+                  volumeTypes={state.data.volumeTypes}
+                  defaultVolumeType={state.data.defaultVolumeType}
                 />
               </>
             )}

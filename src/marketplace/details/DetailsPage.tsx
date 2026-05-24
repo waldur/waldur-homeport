@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { startCase } from 'lodash-es';
 import React from 'react';
-import { useAsync } from 'react-use';
 import {
   marketplacePluginsList,
   marketplacePublicOfferingsRetrieve,
@@ -36,10 +36,14 @@ export const OfferingDetailsPage: React.FC = () => {
 
   const router = useRouter();
 
-  const { loading, value, error } = useAsync(
-    () => loadData(offering_uuid),
-    [offering_uuid],
-  );
+  const {
+    isLoading: loading,
+    data: value,
+    error,
+  } = useQuery({
+    queryKey: ['DetailsPage', offering_uuid],
+    queryFn: () => loadData(offering_uuid),
+  });
 
   useTitle(
     value?.offering?.category_title

@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import { financialReportsRetrieve } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -8,9 +8,11 @@ import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
 import { useCustomer } from '@/workspace/hooks';
 
 const AsyncEstimatedCost = ({ customer }) => {
-  const { value } = useAsync(() =>
-    financialReportsRetrieve({ path: { uuid: customer.uuid } }),
-  );
+  const { data: value } = useQuery({
+    queryKey: ['EstimatedCost'],
+
+    queryFn: () => financialReportsRetrieve({ path: { uuid: customer.uuid } }),
+  });
   if (!value) {
     return null;
   }

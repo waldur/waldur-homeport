@@ -1,9 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
 import { FormGroup, FormLabel } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
-import { useAsync } from 'react-use';
 import { OpenStackBackup, openstackBackupsRestore } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
@@ -23,7 +23,10 @@ import {
 export const BackupRestoreDialog: FC<{
   resolve: { resource: OpenStackBackup; refetch?(): void };
 }> = ({ resolve: { resource, refetch } }) => {
-  const asyncState = useAsync(() => loadData(resource), [resource]);
+  const asyncState = useQuery({
+    queryKey: ['BackupRestoreDialog', resource],
+    queryFn: () => loadData(resource),
+  });
 
   const mutation = useManagedMutation<any, any, BackupRestoreFormData>({
     mutationFn: (formData) =>
@@ -57,12 +60,12 @@ export const BackupRestoreDialog: FC<{
             title={translate('Restore virtual machine from backup {name}', {
               name: resource.name,
             })}
-            loading={asyncState.loading}
+            loading={asyncState.isLoading}
             error={asyncState.error}
             submitting={submitting}
             invalid={invalid}
           >
-            {asyncState.value ? (
+            {asyncState.data ? (
               <>
                 <FormGroup className="mb-5">
                   <FormLabel id="flavor">{translate('Flavor')}</FormLabel>
@@ -72,7 +75,7 @@ export const BackupRestoreDialog: FC<{
                     render={({ input }) => (
                       <Select
                         {...input}
-                        options={asyncState.value.flavors}
+                        options={asyncState.data.flavors}
                         aria-labelledby="flavor"
                       />
                     )}
@@ -89,7 +92,7 @@ export const BackupRestoreDialog: FC<{
                         {...input}
                         placeholder={translate('Select security groups...')}
                         isMulti={true}
-                        options={asyncState.value.securityGroups}
+                        options={asyncState.data.securityGroups}
                         aria-labelledby="security-groups"
                       />
                     )}
@@ -101,8 +104,8 @@ export const BackupRestoreDialog: FC<{
                     {({ fields }) => (
                       <NetworksList
                         fields={fields}
-                        subnets={asyncState.value.subnets}
-                        floatingIps={asyncState.value.floatingIps}
+                        subnets={asyncState.data.subnets}
+                        floatingIps={asyncState.data.floatingIps}
                         values={values}
                       />
                     )}

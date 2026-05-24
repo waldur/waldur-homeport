@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useAsync } from 'react-use';
 import {
   OpenStackLoadBalancer,
   openstackLoadbalancersSetSecurityGroups,
@@ -25,8 +25,10 @@ const useSetSecurityGroupsForm = (
   resource: OpenStackLoadBalancer,
   refetch?: () => void,
 ) => {
-  const asyncState = useAsync(
-    () =>
+  const asyncState = useQuery({
+    queryKey: ['SetSecurityGroupsDialog', resource.tenant_uuid],
+
+    queryFn: () =>
       loadSecurityGroups({
         tenant_uuid: resource.tenant_uuid,
         field: ['name', 'url'],
@@ -36,8 +38,7 @@ const useSetSecurityGroupsForm = (
           value: group.url,
         })),
       ),
-    [resource.tenant_uuid],
-  );
+  });
 
   const updateMutation = useManagedMutation<any, any, FormData>({
     mutationFn: (formData) =>
@@ -97,12 +98,12 @@ export const SetSecurityGroupsDialog: FC<
             title={translate('Set security groups for load balancer {name}', {
               name: lb.name,
             })}
-            loading={asyncState.loading}
+            loading={asyncState.isLoading}
             error={asyncState.error}
             submitting={submitting}
             invalid={invalid}
           >
-            {asyncState.value ? (
+            {asyncState.data ? (
               <Field
                 component={FormGroup}
                 name="security_groups"
@@ -110,7 +111,7 @@ export const SetSecurityGroupsDialog: FC<
               >
                 <SelectField
                   placeholder={translate('Select security groups...')}
-                  options={asyncState.value}
+                  options={asyncState.data}
                   isMulti={true}
                 />
               </Field>

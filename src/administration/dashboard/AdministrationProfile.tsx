@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
 import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
-import { useAsync } from 'react-use';
 import { usersList, versionRetrieve } from 'waldur-js-client';
 
 import { getIconUrl, parseSelectData } from '@/core/api';
@@ -54,18 +53,22 @@ export const AdministrationProfile = ({
     staleTime: Infinity,
   });
 
-  const { value, loading } = useAsync(() => {
-    const promises = [
-      !supportOnly &&
-        usersList({ query: { page: 1, page_size: 6, is_staff: true } }).then(
+  const { data: value, isLoading: loading } = useQuery({
+    queryKey: ['AdministrationProfile'],
+
+    queryFn: () => {
+      const promises = [
+        !supportOnly &&
+          usersList({ query: { page: 1, page_size: 6, is_staff: true } }).then(
+            parseSelectData,
+          ),
+        usersList({ query: { page: 1, page_size: 6, is_support: true } }).then(
           parseSelectData,
         ),
-      usersList({ query: { page: 1, page_size: 6, is_support: true } }).then(
-        parseSelectData,
-      ),
-    ];
+      ];
 
-    return Promise.all(promises);
+      return Promise.all(promises);
+    },
   });
 
   const [staff, supports] = value || [

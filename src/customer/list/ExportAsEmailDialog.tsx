@@ -1,11 +1,11 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { DateTime } from 'luxon';
 import { FC } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Field, Form as FinalForm } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
-import { useAsync } from 'react-use';
 import {
   invoiceSendFinancialReportByMail,
   invoicesList,
@@ -55,7 +55,14 @@ async function loadData() {
 }
 
 export const ExportAsEmailDialog: FC = () => {
-  const { loading, error, value: data } = useAsync(loadData);
+  const {
+    isLoading: loading,
+    error,
+    data,
+  } = useQuery({
+    queryKey: ['ExportAsEmailDialog'],
+    queryFn: loadData,
+  });
   const submitMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>
       invoiceSendFinancialReportByMail({

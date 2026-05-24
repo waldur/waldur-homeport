@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCallback, FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import { userGroupInvitationsRetrieve } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -26,13 +26,16 @@ export const GroupInvitationConfirmDialog: FunctionComponent<{
     deferred.resolve(true);
   }, [closeDialog, deferred]);
 
-  const asyncResult = useAsync(() =>
-    userGroupInvitationsRetrieve({ path: { uuid: token } }).then(
-      (response) => response.data,
-    ),
-  );
+  const asyncResult = useQuery({
+    queryKey: ['GroupInvitationConfirmDialog'],
 
-  const invitation = asyncResult.value;
+    queryFn: () =>
+      userGroupInvitationsRetrieve({ path: { uuid: token } }).then(
+        (response) => response.data,
+      ),
+  });
+
+  const invitation = asyncResult.data;
 
   return (
     <ModalDialog
@@ -42,7 +45,7 @@ export const GroupInvitationConfirmDialog: FunctionComponent<{
           : translate('Request permission')
       }
       footer={
-        !asyncResult.loading &&
+        !asyncResult.isLoading &&
         !asyncResult.error && (
           <GroupInvitationButtons
             dismiss={dismiss}
@@ -51,7 +54,7 @@ export const GroupInvitationConfirmDialog: FunctionComponent<{
         )
       }
     >
-      {asyncResult.loading && (
+      {asyncResult.isLoading && (
         <>
           <LoadingSpinner />
           <p className="text-center">
@@ -59,7 +62,7 @@ export const GroupInvitationConfirmDialog: FunctionComponent<{
           </p>
         </>
       )}
-      {!asyncResult.loading &&
+      {!asyncResult.isLoading &&
         (asyncResult.error ? (
           <GroupInvitationErrorMessage dismiss={dismiss} />
         ) : (

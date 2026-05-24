@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import {
   supportFeedbackAverageReportRetrieve,
   supportFeedbackReportRetrieve,
@@ -33,7 +33,14 @@ const getTotalNumberOfReviews = (feedback): number => {
 };
 
 export const CustomerSupportRating: FunctionComponent = () => {
-  const { loading, error, value } = useAsync(loadData, []);
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['CustomerSupportRating'],
+    queryFn: loadData,
+  });
   return loading ? (
     <LoadingSpinner />
   ) : error ? (

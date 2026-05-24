@@ -1,8 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { Form } from 'react-final-form';
-import { useAsync } from 'react-use';
 import { rancherAppsCreate } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -21,18 +21,18 @@ export const TemplateDetail: FunctionComponent = () => {
     params: { templateUuid, clusterUuid },
   } = useCurrentStateAndParams();
 
-  const state = useAsync(
-    () => loadData(templateUuid, clusterUuid),
-    [templateUuid, clusterUuid],
-  );
+  const state = useQuery({
+    queryKey: ['TemplateDetail', templateUuid, clusterUuid],
+    queryFn: () => loadData(templateUuid, clusterUuid),
+  });
 
   useTitle(
-    state.value ? state.value.template.name : translate('Template details'),
+    state.data ? state.data.template.name : translate('Template details'),
   );
 
   const { mutateAsync: createApplication } = useManagedMutation({
     mutationFn: async (formData: FormData) => {
-      const questions = state.value?.questions || [];
+      const questions = state.data?.questions || [];
       const visibleQuestions = parseVisibleQuestions(
         questions,
         formData.answers,
@@ -40,9 +40,9 @@ export const TemplateDetail: FunctionComponent = () => {
       await rancherAppsCreate({
         body: serializeApplication(
           formData,
-          state.value!.template,
-          state.value!.cluster.service_settings,
-          state.value!.cluster.project,
+          state.data!.template,
+          state.data!.cluster.service_settings,
+          state.data!.cluster.project,
           visibleQuestions,
         ),
       });
@@ -52,7 +52,7 @@ export const TemplateDetail: FunctionComponent = () => {
     closeModal: false,
   });
 
-  if (state.loading) {
+  if (state.isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -60,29 +60,29 @@ export const TemplateDetail: FunctionComponent = () => {
     return <h3>{translate('Unable to load application template details.')}</h3>;
   }
 
-  if (!state.value) {
+  if (!state.data) {
     return null;
   }
 
   return (
     <Form
       onSubmit={createApplication}
-      initialValues={state.value.initialValues}
+      initialValues={state.data.initialValues}
       render={({ handleSubmit, submitting, invalid, values }) => (
         <form onSubmit={handleSubmit}>
-          <TemplateHeader {...state.value!} />
+          <TemplateHeader {...state.data!} />
 
           <Accordion
             id="application-template-form"
             defaultActiveKey="configuration"
           >
-            {state.value!.version.readme && (
+            {state.data!.version.readme && (
               <Accordion.Item eventKey="readme">
                 <Card.Header>
                   <Card.Title>{translate('Summary')}</Card.Title>
                 </Card.Header>
                 <Card.Body>
-                  <SafeMarkdown text={state.value!.version.readme} />
+                  <SafeMarkdown text={state.data!.version.readme} />
                 </Card.Body>
               </Accordion.Item>
             )}
@@ -96,14 +96,14 @@ export const TemplateDetail: FunctionComponent = () => {
                   const answers = values.answers;
                   const namespaces = project?.namespaces || [];
                   const visibleQuestions = parseVisibleQuestions(
-                    state.value!.questions,
+                    state.data!.questions,
                     answers,
                   );
                   return (
                     <TemplateQuestions
                       questions={visibleQuestions}
-                      versions={state.value!.template.versions}
-                      projects={state.value!.projects}
+                      versions={state.data!.template.versions}
+                      projects={state.data!.projects}
                       namespaces={namespaces}
                       submitting={submitting}
                       invalid={invalid}

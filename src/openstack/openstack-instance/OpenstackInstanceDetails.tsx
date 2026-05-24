@@ -1,4 +1,4 @@
-import { useAsync } from 'react-use';
+import { useQuery } from '@tanstack/react-query';
 import {
   keysRetrieve,
   OpenStackFlavor,
@@ -137,10 +137,13 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
     };
   };
   const {
-    loading,
+    isLoading: loading,
     error,
-    value: attributesData,
-  } = useAsync(() => loadData(attributes));
+    data: attributesData,
+  } = useQuery({
+    queryKey: ['OpenstackInstanceDetails'],
+    queryFn: () => loadData(attributes),
+  });
 
   if (loading) return <LoadingSpinner />;
 

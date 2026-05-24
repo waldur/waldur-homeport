@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Field, Form } from 'react-final-form';
-import { useAsync } from 'react-use';
 import { marketplaceResourcesSwitchPlan } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -104,19 +104,19 @@ const ChangePlanComponent = (props: FetchedData & { refetch? }) => {
 export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const asyncState = useAsync(
-    () => loadData(resource.marketplace_resource_uuid),
-    [resource.marketplace_resource_uuid],
-  );
-  return asyncState.value ? (
+  const asyncState = useQuery({
+    queryKey: ['ChangePlanDialog', resource.marketplace_resource_uuid],
+    queryFn: () => loadData(resource.marketplace_resource_uuid),
+  });
+  return asyncState.data ? (
     <ChangePlanComponent
-      resource={asyncState.value.resource}
-      choices={asyncState.value.choices}
-      columns={asyncState.value.columns}
-      initialValues={asyncState.value.initialValues}
+      resource={asyncState.data.resource}
+      choices={asyncState.data.choices}
+      columns={asyncState.data.columns}
+      initialValues={asyncState.data.initialValues}
       refetch={refetch}
     />
-  ) : asyncState.loading ? (
+  ) : asyncState.isLoading ? (
     <ModalDialog title={translate('Change resource plan')}>
       <LoadingSpinner />
     </ModalDialog>

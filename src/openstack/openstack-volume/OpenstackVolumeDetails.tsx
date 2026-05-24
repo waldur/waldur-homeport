@@ -1,4 +1,4 @@
-import { useAsync } from 'react-use';
+import { useQuery } from '@tanstack/react-query';
 import { openstackVolumeTypesRetrieve } from 'waldur-js-client';
 
 import { formatFilesize, getUUID } from '@/core/utils';
@@ -10,13 +10,16 @@ import { formatVolumeTypeLabel } from '../openstack-instance/utils';
 
 export const OpenstackVolumeDetails = (props: OrderDetailsProps) => {
   const { order } = props;
-  const { value: volumeType } = useAsync(() =>
-    order.attributes['type']
-      ? openstackVolumeTypesRetrieve(getUUID(order.attributes['type'])).then(
-          (response) => response.data,
-        )
-      : Promise.resolve(null),
-  );
+  const { data: volumeType } = useQuery({
+    queryKey: ['OpenstackVolumeDetails'],
+
+    queryFn: () =>
+      order.attributes['type']
+        ? openstackVolumeTypesRetrieve(getUUID(order.attributes['type'])).then(
+            (response) => response.data,
+          )
+        : Promise.resolve(null),
+  });
   return (
     <>
       <FormTable.Item label={translate('Size')}>

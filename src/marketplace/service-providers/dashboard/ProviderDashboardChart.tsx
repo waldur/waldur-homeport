@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useAsync } from 'react-use';
 
 import { EChart } from '@/core/EChart';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -16,10 +16,10 @@ interface ProviderDashboardChartProps {
 export const ProviderDashboardChart: FunctionComponent<
   ProviderDashboardChartProps
 > = ({ provider }) => {
-  const { loading, value } = useAsync(
-    () => loadProviderCharts(provider),
-    [provider],
-  );
+  const { isLoading: loading, data: value } = useQuery({
+    queryKey: ['ProviderDashboardChart', provider],
+    queryFn: () => loadProviderCharts(provider),
+  });
   if (loading) {
     return <LoadingSpinner />;
   }

@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import { Resource } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -19,10 +19,14 @@ interface ResourceUsageDialogProps {
 export const ResourceShowUsageDialog: FunctionComponent<
   ResourceUsageDialogProps
 > = ({ resolve }) => {
-  const { loading, error, value } = useAsync(
-    () => getComponentsAndUsages(resolve.resource.uuid, null),
-    [resolve],
-  );
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['ResourceShowUsageDialog', resolve],
+    queryFn: () => getComponentsAndUsages(resolve.resource.uuid, null),
+  });
 
   return (
     <ModalDialog

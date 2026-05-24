@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 import { PaymentProfile, paymentsList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -18,22 +18,26 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
   const activeFixedPricePaymentProfile = getActiveFixedPricePaymentProfile(
     customer ? customer.payment_profiles : props.paymentProfiles,
   );
-  const { value: totalOfSumPaid } = useAsync(async () => {
-    if (activeFixedPricePaymentProfile) {
-      const response = await getAllPages((page) =>
-        paymentsList({
-          query: {
-            page,
-            page_size: MAX_PAGE_SIZE,
-            profile_uuid: activeFixedPricePaymentProfile.uuid,
-          },
-        }),
-      );
-      return response
-        .map((payment) => parseInt(payment.sum))
-        .reduce((a, b) => a + b);
-    }
-  }, [activeFixedPricePaymentProfile]);
+  const { data: totalOfSumPaid } = useQuery({
+    queryKey: ['AgreementInfo', activeFixedPricePaymentProfile],
+
+    queryFn: async () => {
+      if (activeFixedPricePaymentProfile) {
+        const response = await getAllPages((page) =>
+          paymentsList({
+            query: {
+              page,
+              page_size: MAX_PAGE_SIZE,
+              profile_uuid: activeFixedPricePaymentProfile.uuid,
+            },
+          }),
+        );
+        return response
+          .map((payment) => parseInt(payment.sum))
+          .reduce((a, b) => a + b);
+      }
+    },
+  });
   return (
     <>
       {activeFixedPricePaymentProfile ? (

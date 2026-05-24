@@ -1,6 +1,6 @@
 import { CaretRightIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useAsync } from 'react-use';
 import {
   marketplaceCategoriesRetrieve,
   PublicOfferingDetails,
@@ -36,10 +36,15 @@ async function loadData(
 export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
   props,
 ) => {
-  const { loading, error, value } = useAsync(
-    () => loadData(props.resolve.offering, props.resolve.concealBillingInfo),
-    [props.resolve.offering],
-  );
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['OfferingDetailsDialog', props.resolve.offering],
+    queryFn: () =>
+      loadData(props.resolve.offering, props.resolve.concealBillingInfo),
+  });
   return (
     <ModalDialog
       title={translate('Offering details')}

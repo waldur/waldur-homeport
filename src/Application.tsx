@@ -1,9 +1,8 @@
 import { ErrorBoundary } from '@sentry/react';
-import { QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { UIRouter, UIView } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Provider } from 'react-redux';
-import { useAsync } from 'react-use';
 
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { queryClient } from '@/core/queryClient';
@@ -26,7 +25,14 @@ import { ThemeProvider } from './theme/ThemeProvider';
 states.forEach((state) => router.stateRegistry.register(state));
 
 export const Application: FunctionComponent = () => {
-  const { loading, error, value } = useAsync(loadConfig);
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['Application'],
+    queryFn: loadConfig,
+  });
   if (!value) {
     return <LoadingScreen loading={loading} error={error} />;
   }

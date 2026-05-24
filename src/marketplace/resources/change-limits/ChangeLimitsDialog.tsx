@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 import {
   marketplaceResourcesUpdateLimits,
   ResourceUpdateLimitsRequest,
@@ -34,17 +34,20 @@ interface ChangeLimitsDialogProps {
 export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
   props,
 ) => {
-  const asyncState = useAsync(
-    () => loadData(props.resolve.resource.marketplace_resource_uuid),
-    [props.resolve.resource.marketplace_resource_uuid],
-  );
+  const asyncState = useQuery({
+    queryKey: [
+      'ChangeLimitsDialog',
+      props.resolve.resource.marketplace_resource_uuid,
+    ],
+    queryFn: () => loadData(props.resolve.resource.marketplace_resource_uuid),
+  });
 
   const orderCanBeApproved = useSelector(getOrderCanBeApproved);
 
   const changeLimitsMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
       const body: ResourceUpdateLimitsRequest = {
-        limits: asyncState.value.limitSerializer(formData.limits),
+        limits: asyncState.data.limitSerializer(formData.limits),
       };
       if (formData.request_comment) {
         body.request_comment = formData.request_comment;
@@ -54,7 +57,7 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
       }
       const hasFile = formData.attachment instanceof File;
       return marketplaceResourcesUpdateLimits({
-        path: { uuid: asyncState.value.resource.uuid },
+        path: { uuid: asyncState.data.resource.uuid },
         body,
         ...(hasFile ? formDataOptions : {}),
       });
@@ -69,7 +72,7 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
   return (
     <Form
       onSubmit={(values) => changeLimitsMutation.mutateAsync(values)}
-      initialValues={asyncState.value ? asyncState.value.initialValues : {}}
+      initialValues={asyncState.data ? asyncState.data.initialValues : {}}
       render={({
         handleSubmit,
         submitting,
@@ -77,7 +80,7 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
         values,
         form: { change },
       }) => {
-        const resource = asyncState.value?.resource;
+        const resource = asyncState.data?.resource;
         const { showPurchaseOrder } = getPurchaseOrderConfig(resource);
 
         return (
@@ -87,7 +90,7 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
               footer={
                 <>
                   <CloseDialogButton />
-                  {!asyncState.loading && (
+                  {!asyncState.isLoading && (
                     <SubmitButton
                       submitting={submitting}
                       invalid={invalid}
@@ -101,14 +104,14 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
                 </>
               }
             >
-              {asyncState.loading ? (
+              {asyncState.isLoading ? (
                 <LoadingSpinner />
               ) : asyncState.error ? (
                 <h3>{translate('Unable to load data.')}</h3>
               ) : (
                 <>
                   <ChangeLimitsComponent
-                    data={asyncState.value}
+                    data={asyncState.data}
                     orderCanBeApproved={orderCanBeApproved}
                   />
                   {showPurchaseOrder && (

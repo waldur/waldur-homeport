@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useAsync } from 'react-use';
+import { useQuery } from '@tanstack/react-query';
 import { marketplaceResourcesOfferingForSubresourcesList } from 'waldur-js-client';
 
 import { translate } from '@/i18n/translate';
@@ -13,13 +13,14 @@ interface AddResourceButtonProps {
 }
 
 export const AddResourceButton = (props: AddResourceButtonProps) => {
-  const { value, loading } = useAsync(
-    () =>
+  const { data: value, isLoading: loading } = useQuery({
+    queryKey: ['AddResourceButton', props.resource],
+
+    queryFn: () =>
       marketplaceResourcesOfferingForSubresourcesList({
         path: { uuid: props.resource.marketplace_resource_uuid },
       }).then((r) => r.data),
-    [props.resource],
-  );
+  });
 
   const relatedOfferingUuid = value?.length
     ? value.find((offering) => offering.type === props.offeringType).uuid

@@ -1,7 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { memo } from 'react';
 import { useFormState } from 'react-final-form';
-import { useAsync } from 'react-use';
 import { invoicesList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -14,8 +14,14 @@ export const CustomerExpandableRow = memo((props: any) => {
   const { values } = useFormState<FinancialReportsFilterFormData>();
   const accountingPeriod = values?.accounting_period;
   const now = DateTime.now().startOf('month');
-  const { loading, error, value } = useAsync(
-    () =>
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['CustomerExpandableRow', props.row, accountingPeriod],
+
+    queryFn: () =>
       invoicesList({
         query: {
           customer_uuid: props.row.uuid,
@@ -23,8 +29,7 @@ export const CustomerExpandableRow = memo((props: any) => {
           month: accountingPeriod ? accountingPeriod.value.month : now.month,
         },
       }).then((response) => response.data[0]),
-    [props.row, accountingPeriod],
-  );
+  });
   if (loading) {
     return <LoadingSpinner />;
   } else if (error) {

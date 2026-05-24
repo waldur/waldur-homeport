@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -18,10 +18,14 @@ export const ResourceCreateUsageDialog: FunctionComponent<
 > = (props) => {
   const isUserUsage = props.resolve.userUsage;
 
-  const { loading, error, value } = useAsync(
-    () => getProviderUsageComponents(props.resolve),
-    [props.resolve],
-  );
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['ResourceCreateUsageDialog', props.resolve],
+    queryFn: () => getProviderUsageComponents(props.resolve),
+  });
 
   return (
     <ModalDialog
