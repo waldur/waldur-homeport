@@ -8,7 +8,7 @@ import { SubmitReportAction } from '@/marketplace/resources/report/SubmitReportA
 import { SetBackendIdAction } from '@/marketplace/resources/SetBackendIdAction';
 import { SetErredActionItem } from '@/resource/actions/SetErredActionItem';
 
-export const ProviderActionsGroup = (props) => (
+export const ProviderActionsGroup = (props: any) => (
   <ActionGroup title={translate('Provider actions')}>
     <ReportUsageAction {...props} />
     <ReportUserUsageAction {...props} />
@@ -17,5 +17,6 @@ export const ProviderActionsGroup = (props) => (
     <EditResourceEndDateAction {...props} />
     <CreateLexisLinkAction {...props} />
     <SetErredActionItem {...props} />
+    {props.children}
   </ActionGroup>
 );

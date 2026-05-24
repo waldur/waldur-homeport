@@ -26,26 +26,9 @@ vi.mock('@/core/config', () => ({
       },
       WALDUR_OPENSTACK: { TENANT_CREDENTIALS_VISIBLE: true },
     },
+    roles: [],
   },
 }));
-
-const renderComponent = (props = {}) => {
-  const store = mockStore({
-    workspace: {
-      user: {
-        is_staff: true,
-      },
-    },
-  });
-  const queryClient = new QueryClient();
-  return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <OpenstackTenantActions {...props} />
-      </QueryClientProvider>
-    </Provider>,
-  );
-};
 
 const mockMarketplaceResource = {
   uuid: 'test-market-uuid',
@@ -59,16 +42,38 @@ const mockResource = {
   state: 'OK',
   marketplace_resource_uuid: 'test-market-uuid',
   customer_uuid: 'customer-uuid',
+  provider_uuid: 'offering-uuid',
   name: 'Test Resource',
+  quotas: [],
+};
+
+const renderComponent = (userOverrides = {}) => {
+  const store = mockStore({
+    workspace: {
+      user: {
+        is_staff: true,
+        permissions: [],
+        ...userOverrides,
+      },
+    },
+  });
+  const queryClient = new QueryClient();
+  return render(
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <OpenstackTenantActions
+          marketplaceResource={mockMarketplaceResource}
+          resource={mockResource}
+          refetch={vi.fn()}
+        />
+      </QueryClientProvider>
+    </Provider>,
+  );
 };
 
 describe('OpenstackTenantActions', () => {
-  it('renders action groups with correct titles', () => {
-    renderComponent({
-      marketplaceResource: mockMarketplaceResource,
-      resource: mockResource,
-      refetch: vi.fn(),
-    });
+  it('renders action groups with correct titles for staff user', () => {
+    renderComponent();
 
     expect(
       screen.queryAllByRole('button').map((element) => element.textContent),
@@ -83,11 +88,23 @@ describe('OpenstackTenantActions', () => {
       'Submit report',
       'Set termination date',
       'Set as erred',
+      'Change quotas',
+      'Refresh quotas',
       'Move',
       'Unlink',
       'Mark as ERRED',
       'Mark as OK',
       'Terminate',
     ]);
+  });
+
+  it('hides Change quotas action for a non-privileged user', () => {
+    // Non-staff user with no permissions on the provider organization
+    renderComponent({ is_staff: false, permissions: [] });
+
+    const buttonLabels = screen
+      .queryAllByRole('button')
+      .map((el) => el.textContent);
+    expect(buttonLabels).not.toContain('Change quotas');
   });
 });
