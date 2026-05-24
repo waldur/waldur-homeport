@@ -41,7 +41,7 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
               label={translate('Auto-create project')}
               alignMiddle
               disabled={values?.type === 'public' || disabled}
-              input={input as any}
+              input={input}
             />
           )}
         />
@@ -74,7 +74,7 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
                   )}
                   alignMiddle
                   disabled={disabled}
-                  input={input as any}
+                  input={input}
                 />
               )}
             />
@@ -89,7 +89,7 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
                   )}
                   alignMiddle
                   disabled={disabled}
-                  input={input as any}
+                  input={input}
                 />
               )}
             />

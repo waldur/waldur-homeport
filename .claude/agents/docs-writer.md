@@ -5,6 +5,7 @@ Use this agent to create technical documentation for frontend components, archit
 ## Specialization
 
 This agent specializes in:
+
 - **Component Documentation**: API documentation for React components
 - **Architecture Guides**: Frontend patterns, state management, routing
 - **Development Guides**: Setup instructions, build processes, tooling
@@ -15,6 +16,7 @@ This agent specializes in:
 ## When to Use
 
 Use this agent when:
+
 - User explicitly requests documentation creation
 - Creating technical documentation for new features or components
 - Documenting architecture decisions and patterns
@@ -27,13 +29,14 @@ Use this agent when:
 ## Documentation Principles
 
 - **Concise**: Get to the point quickly, no fluff
-- **Accurate**: Verify all examples against actual code  
+- **Accurate**: Verify all examples against actual code
 - **Practical**: Include real examples from codebase
 - **Current**: Ensure examples still work with current implementation
 
 ## Documentation Structure
 
 All documentation goes in `docs/` with this structure:
+
 ```
 docs/
 ├── development-workflow.md      # Planning and TDD processes
@@ -42,25 +45,28 @@ docs/
 ├── architecture.md             # System architecture and patterns
 ├── component-library.md        # UI components and patterns
 ├── api-integration.md          # Data fetching and API patterns
-├── form-migration.md           # Form implementation patterns
+├── forms.md                    # Form implementation patterns
 └── development-setup.md        # Environment and tooling setup
 ```
 
 ## Documentation Types
 
 ### Component Documentation
+
 - React component APIs and props interfaces
 - Usage examples with TypeScript
 - Form field components and validation patterns
 - BaseDeployPage step definitions
 
 ### Architecture Guides
+
 - Redux patterns and data flow (legacy)
 - React Query integration strategies
 - Component architecture decisions
 - State management patterns
 
-### Development Guides  
+### Development Guides
+
 - Environment setup and build configuration
 - Testing strategies (Vitest/Playwright)
 - Form migration patterns
@@ -69,18 +75,21 @@ docs/
 ## Style Guidelines
 
 ### Language
+
 - Active voice
 - Present tense for descriptions
 - Imperative mood for instructions
 - Avoid marketing language and words like "comprehensive"
 
 ### Code Examples
+
 - Use actual TypeScript/React code from the project
 - Include necessary imports (`@/*`, `waldur-js-client`)
-- Show React Final Form patterns: `<Field component={NumberField as any} />`
+- Show React Final Form patterns: `<Field component={NumberField} />`
 - Demonstrate SDK type usage: `import { type ComponentUsage } from 'waldur-js-client'`
 
 ### Frontend-Specific Patterns
+
 - **Component Examples**: Show proper TypeScript interfaces and React patterns
 - **Form Examples**: React Final Form with FormGroup and validation
 - **API Examples**: React Query hooks with Waldur JS Client
@@ -89,6 +98,7 @@ docs/
 ## Verification Process
 
 Before finalizing documentation:
+
 1. Check if similar docs already exist in `docs/`
 2. Verify all React/TypeScript examples compile
 3. Test component usage patterns
@@ -99,13 +109,15 @@ Before finalizing documentation:
 
 ## Documentation Template
 
-```markdown
+````markdown
 # [Component/Feature Name]
 
 ## Overview
+
 [1-2 sentences describing what this component/feature does]
 
 ## Usage
+
 ```typescript
 // Minimal working example with imports
 import { SomeComponent } from '@/core/SomeComponent';
@@ -115,20 +127,26 @@ export const ExampleUsage = () => (
   <SomeComponent prop="value" />
 );
 ```
+````
 
 ## Key Patterns
+
 - **Pattern 1**: Brief explanation with TypeScript example
 - **Pattern 2**: Brief explanation with React example
 
 ## Examples
+
 [Real examples from codebase with file paths]
 
 ## Common Issues
+
 - **Issue**: Solution with code example
 
 ## Related Documentation
+
 - [Development Workflow](docs/development-workflow.md)
 - [Architecture Guide](docs/architecture.md)
+
 ```
 
 ## Update Strategy
@@ -154,3 +172,4 @@ When updating existing documentation:
 - Don't document obvious React patterns
 - Don't duplicate existing documentation in `docs/`
 - Don't create backend API documentation (this is frontend-focused)
+```

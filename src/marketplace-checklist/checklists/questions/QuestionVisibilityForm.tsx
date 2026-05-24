@@ -126,7 +126,7 @@ const FieldsListGroup = ({
               ]}
               direction="horizontal"
               justify="start"
-              input={input as any}
+              input={input}
               disabled={fields.length < 2}
               tooltip={
                 fields.length < 2

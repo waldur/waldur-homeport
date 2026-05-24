@@ -105,7 +105,7 @@ export const StorageFolderConfiguration = ({
             )}
             meta={{ ...meta, touched: true }} // Force error display for cross-field validation
           >
-            <InputField input={input as any} {...props} />
+            <InputField input={input} {...props} />
           </FormGroup>
         )}
         min="1"

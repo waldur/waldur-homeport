@@ -65,7 +65,7 @@ export function EditModalButton<
       size,
       dialogClassName,
       formId,
-    } as any);
+    });
   }, [
     dialog,
     finalResolve,

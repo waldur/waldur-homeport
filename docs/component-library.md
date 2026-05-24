@@ -933,7 +933,7 @@ Use this version inside React Final Form.
 import { SelectField } from '@/form';
 ```
 
-Form field component. Use as `<Field name="..." component={SelectField as any} />`.
+Form field component. Use as `<Field name="..." component={SelectField} />`.
 
 | Prop             | Type                                   | Required | Default | Description                                            |
 | ---------------- | -------------------------------------- | -------- | ------- | ------------------------------------------------------ |
@@ -955,7 +955,7 @@ Form field component. Use as `<Field name="..." component={SelectField as any} /
 import { StringField } from '@/form';
 ```
 
-Form field component. Use as `<Field name="..." component={StringField as any} />`.
+Form field component. Use as `<Field name="..." component={StringField} />`.
 
 | Prop                 | Type                       | Required | Default | Description                         |
 | -------------------- | -------------------------- | -------- | ------- | ----------------------------------- |

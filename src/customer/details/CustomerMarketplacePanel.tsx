@@ -47,10 +47,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
 
   useEffect(() => {
     if (error)
-      showErrorResponse(
-        error as any,
-        translate('Unable to load service provider.'),
-      );
+      showErrorResponse(error, translate('Unable to load service provider.'));
   }, [error]);
 
   const setServiceProvider = (data: ServiceProvider) => {

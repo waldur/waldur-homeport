@@ -5,6 +5,7 @@ Use this agent for code review, testing strategy, linting/formatting issues, and
 ## Specialization
 
 This agent specializes in:
+
 - **Testing Strategy**: Vitest unit tests and Playwright E2E/visual tests
 - **Code Standards**: ESLint, Prettier, and TypeScript configuration
 - **Test Code Sharing**: Proper mocking patterns and test utilities
@@ -15,6 +16,7 @@ This agent specializes in:
 ## When to Use
 
 Use this agent when:
+
 - Reviewing code for quality standards and best practices
 - Setting up or debugging test infrastructure
 - Resolving linting, formatting, or TypeScript errors
@@ -26,18 +28,21 @@ Use this agent when:
 ## Testing Guidelines
 
 ### Unit Tests (Vitest)
+
 - Test behavior, not implementation
 - One assertion per test when possible
 - Clear test names describing scenario
 - Use existing test utilities and helpers
 
 ### Vitest Mocking Constraints
+
 - `vi.mock()` calls must be at the top level
 - Mock exact module paths used in imports
 - Share test data as exported constants
 - Only mock what's actually imported
 
 ### E2E & Visual Tests (Playwright)
+
 - End-to-end workflow testing
 - Visual regression testing across themes
 - User-centric test scenarios
@@ -46,13 +51,16 @@ Use this agent when:
 ## Code Standards
 
 ### TypeScript & SDK Types
+
 - **Always prefer SDK types** from `waldur-js-client` package
 - Import types with `type` keyword
-- Use standard React Final Form pattern: `<Field component={NumberField as any} />`
+- Use standard React Final Form pattern: `<Field component={NumberField} />`
 - Handle nullable SDK types with optional chaining
 
 ### Code Quality Requirements
+
 Every commit must:
+
 - Compile successfully
 - Pass all existing tests
 - Include tests for new functionality
@@ -70,6 +78,6 @@ Every commit must:
 ## Error Handling Best Practices
 
 - Fail fast with descriptive messages
-- Include context for debugging  
+- Include context for debugging
 - Handle errors at appropriate level
 - Never silently swallow exceptions

@@ -5,6 +5,7 @@ Use this agent for all form-related tasks, understanding form implementation pat
 ## Specialization
 
 This agent specializes in:
+
 - **React Final Form**: Modern form implementation standard for Waldur
 - **Form Patterns**: 200+ form components using React Final Form and VStepperForm
 - **Modal Form Architecture**: Context boundaries and component structure
@@ -16,6 +17,7 @@ This agent specializes in:
 ## When to Use
 
 Use this agent when:
+
 - Implementing new form components using React Final Form
 - Understanding form implementation patterns and architecture
 - Debugging form validation and error handling issues
@@ -26,10 +28,10 @@ Use this agent when:
 
 ## Form Implementation Distribution
 
-| Type | Count | Status | Use Case |
-|------|-------|--------|----------|
-| **React Final Form** | ~180 forms (90%) | Modern | Primary implementation standard |
-| **VStepperForm** | ~20 forms (10%) | Specialized | Complex deployments |
+| Type                 | Count            | Status      | Use Case                        |
+| -------------------- | ---------------- | ----------- | ------------------------------- |
+| **React Final Form** | ~180 forms (90%) | Modern      | Primary implementation standard |
+| **VStepperForm**     | ~20 forms (10%)  | Specialized | Complex deployments             |
 
 ## Implementation Patterns
 
@@ -41,7 +43,7 @@ export const Component = ({ onSubmit }) => (
     onSubmit={onSubmit}
     render={({ handleSubmit, submitting, invalid }) => (
       <form onSubmit={handleSubmit}>
-        <Field component={StringField as any} name="name" />
+        <Field component={StringField} name="name" />
       </form>
     )}
   />
@@ -51,9 +53,11 @@ export const Component = ({ onSubmit }) => (
 ## Modal Form Architecture
 
 ### Critical Context Boundaries
+
 React Final Form requires all form-related components within `<Form>` context:
 
 **Problematic Structure**:
+
 ```typescript
 <ModalDialog footer={<SubmitButton />}>
   <Form>
@@ -63,6 +67,7 @@ React Final Form requires all form-related components within `<Form>` context:
 ```
 
 **Correct Structure**:
+
 ```typescript
 <ModalDialog>
   <Form>
@@ -77,23 +82,26 @@ React Final Form requires all form-related components within `<Form>` context:
 ## FormGroup Components
 
 ### Available FormGroup Types
+
 1. **`@/form/FormGroup`** - Common wrapper with state management
 2. **`@/marketplace/offerings/FormGroup`** - Simple wrapper for labels/help
 
 ### FormGroup Benefits
+
 - **Reduced Code Duplication**: Eliminates repetitive label/field structures
 - **Consistent Styling**: Automatic spacing with `mb-7`
 - **Better Accessibility**: Proper label associations
 - **Tooltip Support**: Built-in help text with `help` prop
 
 ### Usage Pattern
+
 ```typescript
-<FormGroup 
-  label={translate('Username')} 
+<FormGroup
+  label={translate('Username')}
   help={translate('Help text')}
   required
 >
-  <Field component={StringField as any} name="username" />
+  <Field component={StringField} name="username" />
 </FormGroup>
 ```
 
@@ -114,6 +122,7 @@ const onSubmit = (values) => mutation.mutateAsync(values);
 ```
 
 For manual handling (e.g., when mapped fields should receive validation errors):
+
 ```typescript
 // React Final Form FORM_ERROR
 if (e.response?.status === 400) {
@@ -137,6 +146,7 @@ catch (e) {
 ## Quality Assurance
 
 ### Essential Validation Commands
+
 1. **Unused Dependencies**: `yarn deps:unused`
 2. **Linting**: `yarn lint:check --max-warnings=0`
 3. **Type Check**: `yarn tsc --noEmit`
@@ -145,11 +155,13 @@ catch (e) {
 ## Best Practices
 
 ### Field Typing
-- **Standard Pattern**: `<Field component={NumberField as any} />`
+
+- **Standard Pattern**: `<Field component={NumberField} />`
 - **SDK Types**: Prefer `waldur-js-client` types over custom interfaces
 - **Type Imports**: `import { type ComponentUsage } from 'waldur-js-client'`
 
 ### Performance Benefits
+
 - **Local State**: React Final Form eliminates Redux store updates for forms
 - **Optimized Re-rendering**: Subscription-based updates
 - **Reduced Boilerplate**: Simpler API and less code

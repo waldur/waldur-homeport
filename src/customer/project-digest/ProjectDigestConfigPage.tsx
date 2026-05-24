@@ -40,7 +40,7 @@ export const ProjectDigestConfigPage: FC = () => {
   useEffect(() => {
     if (error) {
       showErrorResponse(
-        error as any,
+        error,
         translate('Unable to load digest configuration.'),
       );
     }

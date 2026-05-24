@@ -42,10 +42,7 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
     },
     onError: (error) => {
       setPreview(null);
-      showErrorResponse(
-        error as any,
-        translate('Unable to load digest preview.'),
-      );
+      showErrorResponse(error, translate('Unable to load digest preview.'));
     },
   });
 

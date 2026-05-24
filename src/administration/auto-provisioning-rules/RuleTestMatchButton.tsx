@@ -20,7 +20,7 @@ export const RuleTestMatchButton: FC<{ row: Rule }> = ({ row }) => {
       title={translate('Test match')}
       iconNode={<MagnifyingGlassIcon weight="bold" />}
       action={() =>
-        openDialog(RuleTestMatchDialog as any, {
+        openDialog(RuleTestMatchDialog, {
           resolve: { rule: row },
           size: 'lg',
         })

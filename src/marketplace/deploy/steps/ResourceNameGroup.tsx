@@ -30,7 +30,7 @@ const ResourceNameField = (props) => {
       );
     },
     onError: (error) => {
-      showErrorResponse(error as any);
+      showErrorResponse(error);
     },
   });
 

@@ -34,7 +34,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
               )}
               alignMiddle
               disabled={disabled}
-              input={input as any}
+              input={input}
             />
           )}
         />

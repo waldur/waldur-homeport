@@ -129,7 +129,7 @@ export const ChangeEndDateRequestDialog: FC<
                   meta={meta}
                 >
                   <TextField
-                    input={input as any}
+                    input={input}
                     meta={meta as any}
                     placeholder={translate('Provide a short explanation...')}
                     rows={4}

@@ -47,7 +47,7 @@ import { translate } from '@/i18n';
 export const NameGroup = ({ customer }) => (
   <FormGroup label={translate('Project name')} required>
     <Field
-      component={StringField as any}
+      component={StringField}
       name="name"
       validate={validateProjectName}
       customer={customer}
@@ -157,12 +157,12 @@ We have multiple `FormGroup` components, but you should favor the standard wrapp
   <label className="form-label fw-bolder text-dark fs-6 required">
     {translate('Username')}
   </label>
-  <Field component={StringField as any} name="username" />
+  <Field component={StringField} name="username" />
 </div>
 
 // ✅ Use clean FormGroup wrapper
 <FormGroup label={translate('Username')} required>
-  <Field component={StringField as any} name="username" />
+  <Field component={StringField} name="username" />
 </FormGroup>
 ```
 
@@ -182,7 +182,7 @@ We have multiple `FormGroup` components, but you should favor the standard wrapp
   label={translate('Plan')}
   help={translate('Help text')}
 >
-  <Field component={SelectField as any} name="period" />
+  <Field component={SelectField} name="period" />
 </FormGroup>
 ```
 
@@ -201,7 +201,7 @@ import { DirtyStateReporter } from '@/core/DirtyFormContext';
     <form onSubmit={handleSubmit}>
       <DirtyStateReporter />
       <FormGroup label={translate('Name')}>
-        <Field component={StringField as any} name="name" />
+        <Field component={StringField} name="name" />
       </FormGroup>
     </form>
   )}

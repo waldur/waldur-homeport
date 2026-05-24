@@ -51,7 +51,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
   useEffect(() => {
     if (error) {
       showErrorResponse(
-        error as any,
+        error,
         translate('Unable to retrieve service provider API secret code.'),
       );
     }

@@ -52,7 +52,7 @@ export const CustomMessageWrapper = () => {
             )}
             meta={meta}
           >
-            <TextField input={input as any} isInvalid={Boolean(meta.error)} />
+            <TextField input={input} isInvalid={Boolean(meta.error)} />
           </FormGroup>
         )}
       />

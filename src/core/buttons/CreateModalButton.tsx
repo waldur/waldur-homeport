@@ -53,7 +53,7 @@ export function CreateModalButton<TResolve extends Record<string, unknown>>({
       dialogClassName,
       formId,
       initialValues,
-    } as any);
+    });
   }, [
     dialog,
     resolve,

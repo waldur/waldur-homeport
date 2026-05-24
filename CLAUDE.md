@@ -54,7 +54,10 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 - Memoize filter objects in `useTable` hooks to prevent infinite re-renders:
 
   ```typescript
-  const filter = useMemo(() => ({ customer_uuid: customer.uuid }), [customer.uuid]);
+  const filter = useMemo(
+    () => ({ customer_uuid: customer.uuid }),
+    [customer.uuid],
+  );
   ```
 
 - **Table imports** — there is no barrel `@/table` export. Always import from subpaths:
@@ -71,9 +74,9 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 
   ```typescript
   // CORRECT
-  fetchData: createFetcher(marketplaceResourceProjectsList)
+  fetchData: createFetcher(marketplaceResourceProjectsList);
   // WRONG — string endpoints are not supported
-  fetchData: createFetcher('marketplace-resource-projects')
+  fetchData: createFetcher('marketplace-resource-projects');
   ```
 
 - **Row actions** must use the 3-dots dropdown pattern (`ActionsDropdown` + `ActionItem`), not standalone buttons:
@@ -170,7 +173,7 @@ const steps: ProgressStep[] = [
 // Create step components
 const Step1: FC<WizardStepProps> = (props) => (
   <WizardModal {...props}>
-    <Field name="fieldName" component={StringField as any} />
+    <Field name="fieldName" component={StringField} />
   </WizardModal>
 );
 
@@ -181,7 +184,7 @@ const Step1: FC<WizardStepProps> = (props) => (
   wizardForms={[Step1, Step2]}
   onSubmit={handleSubmit}
   initialValues={initialValues}
-/>
+/>;
 ```
 
 ### Async Validation Gates
@@ -220,7 +223,11 @@ const CredentialsStep: FC<WizardStepProps> = (props) => {
     </>
   );
 
-  return <WizardModal {...props} renderFooter={renderFooter}>...</WizardModal>;
+  return (
+    <WizardModal {...props} renderFooter={renderFooter}>
+      ...
+    </WizardModal>
+  );
 };
 ```
 
@@ -259,7 +266,7 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 <FormGroup label={translate('Name')} required>
   <Field
     name="name"
-    component={StringField as any}
+    component={StringField}
     placeholder={translate('Enter name...')}
     validate={required}
   />
@@ -269,12 +276,12 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 <div className="row">
   <div className="col-sm-6">
     <FormGroup label={translate('Start date')} required>
-      <Field name="start_date" component={DateField as any} validate={required} />
+      <Field name="start_date" component={DateField} validate={required} />
     </FormGroup>
   </div>
   <div className="col-sm-6">
     <FormGroup label={translate('End date')} required>
-      <Field name="end_date" component={DateField as any} validate={required} />
+      <Field name="end_date" component={DateField} validate={required} />
     </FormGroup>
   </div>
 </div>

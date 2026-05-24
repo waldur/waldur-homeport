@@ -185,7 +185,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
                         'Choose what should be restored along with the project:',
                       )}
                       choices={roleRecoveryChoices}
-                      input={input as any}
+                      input={input}
                     />
                   )}
                 />

@@ -151,7 +151,7 @@ export const GroupInvitationCreateDialog = ({
                       <AwesomeRadioButton
                         choices={typeOptions}
                         disabled={fieldsDisabled}
-                        input={input as any}
+                        input={input}
                       />
                     )}
                   />
@@ -181,7 +181,7 @@ export const GroupInvitationCreateDialog = ({
                       meta={meta}
                     >
                       <TextField
-                        input={input as any}
+                        input={input}
                         isInvalid={Boolean(meta.error)}
                         disabled={fieldsDisabled}
                       />
