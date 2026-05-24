@@ -25,6 +25,14 @@
 
 .mdxeditor-popup-container {
   z-index: 2000;
+
+  // MDXEditor's dark theme remaps --baseBg/--baseText but leaves --basePageBg
+  // light. Popover/dialog surfaces (image-upload dialog, link popover, arrow)
+  // use --basePageBg, so without this they render white with light text and
+  // become unreadable in dark mode. Align the page surface with the dark base.
+  &.dark-theme {
+    --basePageBg: var(--baseBg);
+  }
 }
 
 .linkDialogAnchor {
