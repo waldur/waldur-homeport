@@ -17,6 +17,7 @@ We follow the testing pyramid model to balance speed, cost, and confidence:
 Unit tests are used for testing React components and utilities. They are written in `.test.ts` or `.test.tsx` files located next to the code they test.
 
 ### Standards
+
 - **Runner**: [Vitest](https://vitest.dev/)
 - **Utilities**:
     - [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)
@@ -25,6 +26,7 @@ Unit tests are used for testing React components and utilities. They are written
 - **Accessibility**: Integrate automated accessibility checks using `axe-core` within RTL tests where appropriate.
 
 ### Mocking HTTP Requests
+
 When testing components that fetch data, use `nock` to intercept outgoing HTTP requests and provide custom responses.
 
 ```typescript
@@ -64,6 +66,7 @@ describe('MyComponent', () => {
 ```
 
 ### Mocking Constraints & Best Practices
+
 - **Manual Mocks**: Use `vi.mock()` for external modules. Calls must be at the top level (hoisted).
 - **Mock Minimal**: Only mock what's actually imported by the component under test.
 - **Test Code Sharing**:
@@ -78,11 +81,13 @@ describe('MyComponent', () => {
 E2E and visual regression tests are implemented using [Playwright](https://playwright.dev/).
 
 ### E2E Workflows
+
 - **Location**: `e2e/`
 - **Focus**: "Happy paths" for critical business logic (Login, Resource Ordering, Organization Management).
 - **API Mocking**: Use `page.route()` to isolate frontend tests from backend availability.
 
 ### Visual Regression
+
 - **Location**: `e2e-visual/`
 - **Focus**: Dashboard charts, complex wizards, and theme consistency across dark/light modes.
 - **Thresholds**: `maxDiffPixelRatio: 0.01` to allow for minor anti-aliasing differences.
@@ -92,17 +97,20 @@ E2E and visual regression tests are implemented using [Playwright](https://playw
 ## 4. Quality Gates & Tools
 
 ### Static Analysis
+
 - **ESLint**: Enforces code style and project-specific patterns (e.g., button variants, table imports).
 - **Stylelint**: Validates SCSS/CSS against design tokens.
 - **Knip**: Identifies unused files, dependencies, and exports.
 - **Madge**: Prevents circular dependencies.
 
 ### Continuous Integration (CI)
+
 - All tests must pass on every PR.
 - Coverage reports are generated for every build (stored in `./coverage`).
 - Playwright traces and reports are archived for failure analysis.
 
 ### Pre-commit Hooks
+
 - Husky and lint-staged enforce linting and formatting before commit.
 
 ---
@@ -120,6 +128,6 @@ E2E and visual regression tests are implemented using [Playwright](https://playw
 
 ## 6. Resources
 
-- [Unit Test Template](docs/test-templates/unit-test.md)
+- [Unit Test Template](test-templates/unit-test.md)
 - [Vitest Documentation](https://vitest.dev/)
 - [Playwright Documentation](https://playwright.dev/)
