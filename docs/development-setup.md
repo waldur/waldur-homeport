@@ -23,7 +23,7 @@ This guide covers development environment setup, build configuration, and essent
 
 ### Testing
 
-For detailed testing standards and strategy, see [Testing Standards & Strategy](docs/testing.md).
+For detailed testing standards and strategy, see [Testing Standards & Strategy](testing.md).
 
 - `yarn test` - Run unit tests with Vitest
 - `yarn test:e2e` - Run Playwright E2E tests
