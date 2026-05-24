@@ -1,7 +1,7 @@
+import { FieldValidator } from 'final-form';
 import React, { ReactNode } from 'react';
 import { FieldInputProps, FieldMetaState } from 'react-final-form';
 
-export type Validator = (value: any, allValues?: any, meta?: any) => any;
 export type Normalizer = (
   value: any,
   previousValue?: any,
@@ -19,7 +19,7 @@ export interface FormField {
   label?: ReactNode;
   description?: ReactNode;
   tooltip?: ReactNode;
-  validate?: Validator | Validator[];
+  validate?: FieldValidator<any>;
   isInvalid?: boolean;
   disabled?: boolean;
   hideLabel?: boolean;
