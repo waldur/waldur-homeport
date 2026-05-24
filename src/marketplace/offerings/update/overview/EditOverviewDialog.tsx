@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Form } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
 import {
@@ -64,7 +64,20 @@ export const EditOverviewDialog: FC<{
               }
             >
               {props.resolve.attribute.type === 'html' ? (
-                <MarkdownEditor name="value" autoFocus hideLabel spaceless />
+                <Field
+                  name="value"
+                  component={MarkdownEditor}
+                  offeringUuid={
+                    ['description', 'full_description'].includes(
+                      props.resolve.attribute.key,
+                    )
+                      ? props.resolve.offering.uuid
+                      : undefined
+                  }
+                  autoFocus
+                  hideLabel
+                  spaceless
+                />
               ) : props.resolve.attribute.type === 'text' ? (
                 <TextField name="value" hideLabel spaceless />
               ) : props.resolve.attribute.type === 'boolean' ? (
