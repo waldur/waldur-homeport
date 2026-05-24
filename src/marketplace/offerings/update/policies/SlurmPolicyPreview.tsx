@@ -301,6 +301,8 @@ const DateProjections: FC<DateProjectionsProps> = ({
         label: translate('Notification Sent'),
         variant: 'warning',
       },
+      downscaled: { label: translate('Slowdown QoS'), variant: 'warning' },
+      paused: { label: translate('Blocked QoS'), variant: 'danger' },
       slowdown: { label: translate('Slowdown QoS'), variant: 'warning' },
       blocked: { label: translate('Blocked QoS'), variant: 'danger' },
     };
@@ -453,7 +455,15 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
       {preview.date_projections && (
         <DateProjections
           projections={preview.date_projections}
-          currentQosStatus={preview.current_qos_status}
+          currentQosStatus={
+            resource
+              ? resource.paused
+                ? 'paused'
+                : resource.downscaled
+                  ? 'downscaled'
+                  : 'normal'
+              : preview.current_qos_status
+          }
           usagePercentage={preview.usage_percentage}
         />
       )}

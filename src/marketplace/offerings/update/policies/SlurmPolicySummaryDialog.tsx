@@ -17,7 +17,6 @@ interface SlurmPolicyConfig {
   grace_ratio?: number;
   carryover_enabled?: boolean;
   raw_usage_reset?: boolean;
-  qos_strategy?: string;
   apply_to_all?: boolean;
   actions?: string[];
   period?: number;
@@ -260,13 +259,6 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
     {
       label: translate('Carryover factor'),
       value: `${carryoverPct}%`,
-    },
-    {
-      label: translate('QoS strategy'),
-      value:
-        config.qos_strategy === 'progressive'
-          ? translate('Progressive')
-          : translate('Threshold'),
     },
     {
       label: translate('TRES billing'),
