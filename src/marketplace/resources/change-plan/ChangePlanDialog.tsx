@@ -109,13 +109,7 @@ export const ChangePlanDialog: React.FC<ChangePlanDialogProps> = ({
     queryFn: () => loadData(resource.marketplace_resource_uuid),
   });
   return asyncState.data ? (
-    <ChangePlanComponent
-      resource={asyncState.data.resource}
-      choices={asyncState.data.choices}
-      columns={asyncState.data.columns}
-      initialValues={asyncState.data.initialValues}
-      refetch={refetch}
-    />
+    <ChangePlanComponent {...asyncState.data} refetch={refetch} />
   ) : asyncState.isLoading ? (
     <ModalDialog title={translate('Change resource plan')}>
       <LoadingSpinner />
