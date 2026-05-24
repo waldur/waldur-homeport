@@ -2,12 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-  REACT_MULTI_SELECT_TABLE_FILTER,
-} from './themed-select';
+import { Select, AsyncSelect } from '.';
 
 const options = [
   { value: 'a', label: 'A' },
@@ -19,7 +14,7 @@ describe('Select component', () => {
   it('renders options with selected value at top when menu opens', async () => {
     render(
       <Select
-        {...REACT_SELECT_TABLE_FILTER}
+        variant="tableFilter"
         options={options}
         value={{ value: 'b', label: 'B' }}
         onBlur={() => {}}
@@ -41,7 +36,8 @@ describe('Select component', () => {
 
     render(
       <Select
-        {...REACT_MULTI_SELECT_TABLE_FILTER}
+        variant="tableFilter"
+        isMulti
         options={options}
         value={selectedValues}
         onBlur={() => {}}
@@ -58,7 +54,7 @@ describe('Select component', () => {
   });
 });
 
-describe('AsyncPaginate component', () => {
+describe('AsyncSelect component', () => {
   it('renders async options with selected value at top on first page', async () => {
     const mockLoadOptions = vi.fn().mockResolvedValue({
       options,
@@ -66,8 +62,8 @@ describe('AsyncPaginate component', () => {
     });
 
     render(
-      <AsyncPaginate
-        {...REACT_SELECT_TABLE_FILTER}
+      <AsyncSelect
+        variant="tableFilter"
         loadOptions={mockLoadOptions}
         value={{ value: 'b', label: 'B' }}
       />,
@@ -92,14 +88,22 @@ describe('AsyncPaginate component', () => {
       { value: 'd', label: 'D' }, // Assume opt D is in page 2
     ];
 
-    const mockLoadOptions = vi.fn().mockResolvedValueOnce({
-      options: options,
-      hasMore: true,
-    });
+    const mockLoadOptions = vi
+      .fn()
+      .mockResolvedValueOnce({
+        options: options,
+        hasMore: true,
+        additional: { page: 2 },
+      })
+      .mockResolvedValue({
+        options: [],
+        hasMore: false,
+      });
 
     render(
-      <AsyncPaginate
-        {...REACT_MULTI_SELECT_TABLE_FILTER}
+      <AsyncSelect
+        variant="tableFilter"
+        isMulti
         loadOptions={mockLoadOptions}
         value={selectedValues}
       />,

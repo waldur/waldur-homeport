@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 
 import { useLanguageSelector } from './useLanguageSelector';
 

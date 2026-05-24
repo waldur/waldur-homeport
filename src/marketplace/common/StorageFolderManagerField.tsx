@@ -4,7 +4,7 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
 import { Tip } from '@/core/Tooltip';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { STORAGE_FOLDER_PERMISSIONS } from '@/marketplace/offerings/update/options/constants';

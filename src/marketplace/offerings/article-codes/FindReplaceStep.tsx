@@ -1,11 +1,11 @@
-import { FC, useState } from 'react';
+import { FC, useState, useMemo } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { marketplaceArticleCodeUpdatePreview } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
 import { StringField } from '@/form';
-import { AsyncPaginate } from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import {
   categoryAutocomplete,
@@ -23,6 +23,9 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
   const { values } = useFormState<ArticleCodeFormValues>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const loadCategories = useMemo(() => categoryAutocomplete(), []);
+  const loadOrganizations = useMemo(() => organizationAutocomplete(), []);
 
   const previewAndContinue = async () => {
     setLoading(true);
@@ -98,10 +101,10 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
       </div>
 
       <FormGroup label={translate('Category')}>
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('All categories')}
           value={values.category}
-          loadOptions={categoryAutocomplete}
+          loadOptions={loadCategories}
           getOptionLabel={(option) => option.title}
           getOptionValue={(option) => option.uuid}
           onChange={(val) => form.change('category', val)}
@@ -110,10 +113,10 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
       </FormGroup>
 
       <FormGroup label={translate('Service provider')}>
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('All providers')}
           value={values.customer}
-          loadOptions={organizationAutocomplete}
+          loadOptions={loadOrganizations}
           getOptionLabel={(option) => option.name}
           getOptionValue={(option) => option.uuid}
           onChange={(val) => form.change('customer', val)}
@@ -124,7 +127,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
       <div className="row">
         <div className="col-sm-6">
           <FormGroup label={translate('Offering state')}>
-            <AsyncPaginate
+            <Select
               placeholder={translate('All states')}
               value={values.offering_state}
               options={OfferingStateOptions}

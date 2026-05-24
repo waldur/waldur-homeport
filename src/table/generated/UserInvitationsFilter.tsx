@@ -11,13 +11,9 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const InvitationStateOptions: InvitationStateOption[] = [
@@ -111,7 +107,7 @@ export const UserInvitationsFilter: FunctionComponent<{}> = () => (
             getOptionLabel={(option: InvitationStateOption) => option.label}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -124,9 +120,9 @@ export const UserInvitationsFilter: FunctionComponent<{}> = () => (
       <Field
         name="role"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Role')}
-            loadOptions={createSelectFetcher(rolesList, 'name')}
+            loadOptions={createLoadOptions(rolesList, 'name')}
             defaultOptions
             getOptionValue={(option: RoleDetails) => String(option.uuid || '')}
             getOptionLabel={(option: RoleDetails) =>
@@ -135,7 +131,7 @@ export const UserInvitationsFilter: FunctionComponent<{}> = () => (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -148,16 +144,16 @@ export const UserInvitationsFilter: FunctionComponent<{}> = () => (
       <Field
         name="customer"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Organization')}
-            loadOptions={createSelectFetcher(customersList, 'query')}
+            loadOptions={createLoadOptions(customersList, 'query')}
             defaultOptions
             getOptionValue={(option: Customer) => String(option.uuid || '')}
             getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -178,7 +174,7 @@ export const UserInvitationsFilter: FunctionComponent<{}> = () => (
             getOptionValue={(option: ScopeTypeOption) => String(option.value)}
             getOptionLabel={(option: ScopeTypeOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

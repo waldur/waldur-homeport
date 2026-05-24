@@ -17,7 +17,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { FormContainer, SubmitButton } from '@/form';
 import MarkdownEditor from '@/form/MarkdownEditor';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';

@@ -12,13 +12,9 @@ import {
   proposalProtectedCallsRoundsList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const CoiSeverityLevelOptions: CoiSeverityLevelOption[] = [
@@ -178,9 +174,9 @@ export const ConflictsOfInterestFilter: FunctionComponent<
       <Field
         name="round"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Round')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               proposalProtectedCallsRoundsList,
               null as any,
               {},
@@ -196,7 +192,7 @@ export const ConflictsOfInterestFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -222,7 +218,7 @@ export const ConflictsOfInterestFilter: FunctionComponent<
             }
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -245,7 +241,7 @@ export const ConflictsOfInterestFilter: FunctionComponent<
             }
             getOptionLabel={(option: CoiSeverityLevelOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -267,7 +263,7 @@ export const ConflictsOfInterestFilter: FunctionComponent<
             getOptionLabel={(option: CoiTypeOption) => option.label}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -291,7 +287,7 @@ export const ConflictsOfInterestFilter: FunctionComponent<
             getOptionLabel={(option: DetectionMethodOption) => option.label}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

@@ -1,7 +1,7 @@
 import { FieldValidator } from 'final-form';
 
 import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 

@@ -13,9 +13,9 @@ import {
 } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const InvoicesItemsFilter: FunctionComponent<
@@ -30,9 +30,9 @@ export const InvoicesItemsFilter: FunctionComponent<
       <Field
         name="provider"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Service provider')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               marketplaceServiceProvidersList,
               'customer_keyword',
             )}
@@ -46,7 +46,7 @@ export const InvoicesItemsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -59,9 +59,9 @@ export const InvoicesItemsFilter: FunctionComponent<
       <Field
         name="project"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Project')}
-            loadOptions={createSelectFetcher(projectsList, 'query', {
+            loadOptions={createLoadOptions(projectsList, 'query', {
               customer: props.customerUuid,
             })}
             defaultOptions
@@ -70,7 +70,7 @@ export const InvoicesItemsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -83,9 +83,9 @@ export const InvoicesItemsFilter: FunctionComponent<
       <Field
         name="offering"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Offering')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               marketplacePublicOfferingsList,
               'query',
               { state: ['Active'] },
@@ -100,7 +100,7 @@ export const InvoicesItemsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

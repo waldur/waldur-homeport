@@ -3,10 +3,6 @@ import { Field } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SelectField } from '@/form';
-import {
-  REACT_MULTI_SELECT_TABLE_FILTER,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@/table/TableFilterItem';
@@ -35,7 +31,7 @@ export const ProjectsListFilter: FC = () => (
       instantApply={false}
     >
       <OrganizationAutocomplete
-        reactSelectProps={{ ...REACT_MULTI_SELECT_TABLE_FILTER }}
+        reactSelectProps={{ variant: 'tableFilter', isMulti: true }}
       />
     </TableFilterItem>
     <TableFilterItem
@@ -91,7 +87,7 @@ export const ProjectsListFilter: FC = () => (
             noUpdateOnBlur={true}
             simpleValue={true}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

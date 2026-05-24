@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   marketplaceOfferingRolesList,
@@ -8,12 +8,10 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
 import { required } from '@/core/validators';
 import { SelectField, SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { createLoadOptions } from '@/form/select';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -70,24 +68,13 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
     refetch: resolve.refetch,
   });
 
-  const loadUsers = useCallback(
-    (query, prevOptions, page) =>
-      usersList({
-        query: {
-          full_name: query,
-          project_uuid: resolve.projectUuid,
-          field: ['full_name', 'email', 'url', 'uuid'],
-          o: ['full_name'],
-          page,
-          page_size: ENV.pageSize,
-        },
-      }).then((response) =>
-        returnReactSelectAsyncPaginateObject(
-          parseSelectData(response),
-          prevOptions,
-          page,
-        ),
-      ),
+  const loadUsers = useMemo(
+    () =>
+      createLoadOptions(usersList, 'full_name', {
+        project_uuid: resolve.projectUuid,
+        field: ['full_name', 'email', 'url', 'uuid'],
+        o: ['full_name'],
+      }),
     [resolve.projectUuid],
   );
 

@@ -6,7 +6,7 @@ import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { CompactIconButton } from '@/core/buttons/IconButton';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 
 import { FormGroup } from '../../FormGroup';

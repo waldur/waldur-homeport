@@ -1,11 +1,11 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import { Project, projectsMoveProject } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
-import { Select } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { AsyncSelectField as Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -16,6 +16,16 @@ import { useBatchMutation } from '@/modal/useBatchMutation';
 export const BatchMoveProjectDialog: FunctionComponent<{
   resolve: { rows: Project[]; refetch() };
 }> = ({ resolve: { rows, refetch } }) => {
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'url', 'abbreviation'],
+        o: 'name',
+        current_user_has_project_create_permission: true,
+      }),
+    [],
+  );
+
   const { mutate, isPending } = useBatchMutation({
     rows,
     refetch,
@@ -74,18 +84,11 @@ export const BatchMoveProjectDialog: FunctionComponent<{
               </ul>
             </FormGroup>
             <FormGroup label={translate('Move to organization')} required>
-              <Field
-                component={Select}
+              <Select
                 name="organization"
                 validate={required}
                 placeholder={translate('Select organization...')}
-                loadOptions={(query, prevOptions, page) =>
-                  organizationAutocomplete(query, prevOptions, page, {
-                    field: ['name', 'url', 'abbreviation'],
-                    o: 'name',
-                    current_user_has_project_create_permission: true,
-                  })
-                }
+                loadOptions={loadOrganizations}
                 getOptionLabel={(option) =>
                   option.name +
                   (option.abbreviation ? ` (${option.abbreviation})` : '')

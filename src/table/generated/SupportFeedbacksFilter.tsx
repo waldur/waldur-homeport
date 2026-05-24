@@ -4,13 +4,9 @@ import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 import { SupportFeedbacksListData, User, usersList } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const SupportFeedbacksFilter: FunctionComponent<
@@ -31,7 +27,7 @@ export const SupportFeedbacksFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -46,9 +42,9 @@ export const SupportFeedbacksFilter: FunctionComponent<
       <Field
         name="user"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('User')}
-            loadOptions={createSelectFetcher(usersList, 'query')}
+            loadOptions={createLoadOptions(usersList, 'query')}
             defaultOptions
             getOptionValue={(option: User) => String(option.uuid || '')}
             getOptionLabel={(option: User) =>
@@ -57,7 +53,7 @@ export const SupportFeedbacksFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -76,7 +72,7 @@ export const SupportFeedbacksFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

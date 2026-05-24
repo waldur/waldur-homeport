@@ -9,9 +9,9 @@ import {
   marketplaceServiceProvidersRobotAccountProjectsList,
 } from 'waldur-js-client';
 
-import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const MarketplaceRobotAccountsFilter: FunctionComponent<
@@ -26,9 +26,9 @@ export const MarketplaceRobotAccountsFilter: FunctionComponent<
       <Field
         name="customer"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Organization')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               marketplaceServiceProvidersRobotAccountCustomersList,
               'customer_name',
               {},
@@ -40,7 +40,7 @@ export const MarketplaceRobotAccountsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -53,9 +53,9 @@ export const MarketplaceRobotAccountsFilter: FunctionComponent<
       <Field
         name="project"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Project')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               marketplaceServiceProvidersRobotAccountProjectsList,
               'project_name',
               {},
@@ -67,7 +67,7 @@ export const MarketplaceRobotAccountsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

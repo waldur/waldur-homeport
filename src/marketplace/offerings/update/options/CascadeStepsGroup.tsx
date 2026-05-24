@@ -6,7 +6,7 @@ import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required } from '@/core/validators';
 import { InputField } from '@/form/InputField';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';

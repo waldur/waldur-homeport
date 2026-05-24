@@ -18,7 +18,7 @@ import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader'
 import { UIBlockProps } from '@/ai-assistant/lib/types';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Link } from '@/core/Link';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 

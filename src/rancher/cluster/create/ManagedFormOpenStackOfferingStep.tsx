@@ -5,7 +5,7 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { VStepperFormStepCard } from '@/wizard';

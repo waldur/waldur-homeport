@@ -1,20 +1,19 @@
 import React from 'react';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 
 interface ProviderAutocompleteProps {
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
 }
 
 export const ProviderAutocomplete: React.FC<ProviderAutocompleteProps> = (
   props,
 ) => {
   const renderComponent = (fieldProps) => (
-    <AsyncPaginate
+    <AsyncSelect
       placeholder={translate('Select provider...')}
       loadOptions={providerAutocomplete}
       defaultOptions

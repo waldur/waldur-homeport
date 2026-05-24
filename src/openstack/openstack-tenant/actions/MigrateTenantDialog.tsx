@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Form as BootstrapForm } from 'react-bootstrap';
 import { Form, Field, useForm, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
@@ -13,9 +13,9 @@ import {
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { FormGroup, SelectField, SubmitButton } from '@/form';
-import { Select as AsyncSelect } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { InputField } from '@/form/InputField';
+import { AsyncSelect as AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -71,6 +71,16 @@ const FormWatcher: FC = () => {
 export const MigrateTenantDialog: FC<MigrateTenantDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
+  const loadOfferings = useMemo(
+    () =>
+      publicOfferingsAutocomplete({
+        type: [TENANT_TYPE],
+        allowed_customer_uuid: resource.customer_uuid,
+        field: ['name', 'uuid', 'customer_name', 'plans', 'scope_uuid'],
+      }),
+    [resource.customer_uuid],
+  );
+
   const migrateMutation = useManagedMutation<any, any, MigrateTenantFormData>({
     mutationFn: (formData) =>
       openstackMigrationsCreate({
@@ -137,23 +147,10 @@ export const MigrateTenantDialog: FC<MigrateTenantDialogProps> = ({
               validate={required}
             >
               <AsyncSelect
-                loadOptions={(query, prevOptions, currentPage) =>
-                  publicOfferingsAutocomplete(
-                    {
-                      name: query,
-                      type: [TENANT_TYPE],
-                      allowed_customer_uuid: resource.customer_uuid,
-                    },
-                    prevOptions,
-                    currentPage,
-                    ['name', 'uuid', 'customer_name', 'plans', 'scope_uuid'],
-                  )
+                loadOptions={loadOfferings}
+                getOptionLabel={({ name, customer_name }) =>
+                  `${name} | ${customer_name}`
                 }
-                getOptionLabel={({ name, customer_name }) => (
-                  <>
-                    {name} | {customer_name}
-                  </>
-                )}
                 getOptionValue={({ uuid }) => uuid}
               />
             </Field>

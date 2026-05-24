@@ -8,7 +8,7 @@ import {
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { Customer } from '@/workspace/types';
 

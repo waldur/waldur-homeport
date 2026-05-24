@@ -4,7 +4,7 @@ import { components } from 'react-select';
 
 import { required } from '@/core/validators';
 import { FormGroup } from '@/form';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 
 import { IssueTypeRenderer } from './IssueTypeRenderer';

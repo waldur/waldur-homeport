@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
@@ -45,7 +44,7 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
       >
         <OfferingAutocomplete
           offeringFilter={offeringFilter}
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
         />
       </TableFilterItem>
       <TableFilterItem
@@ -55,7 +54,7 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
       >
         <OfferingAutocomplete
           offeringFilter={parentOfferingFilter}
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
           name="parent_offering"
         />
       </TableFilterItem>
@@ -65,7 +64,7 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
         badgeValue={(value) => value?.name}
       >
         <OrganizationAutocomplete
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
         />
       </TableFilterItem>
       <TableFilterItem

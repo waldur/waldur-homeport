@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 import { ProjectsListUsersListData } from 'waldur-js-client';
 
-import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -27,7 +27,7 @@ export const ProjectsListUsersFilter: FunctionComponent<
           getOptionValue={(option) => String(option.name)}
           getOptionLabel={(option) => option.description}
           isClearable={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
         />
       )}
     />

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, useFormState } from 'react-final-form';
 
 import {
@@ -11,11 +11,11 @@ import {
   required,
 } from '@/core/validators';
 import { NumberField, SelectField, StringField, TextField } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { FormFieldError } from '@/form/FormFieldError';
 import { FormGroupProps } from '@/form/FormGroup';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { SelectMultiCheckboxGroup } from '@/form/SelectMultiCheckboxGroup';
 import { TimeSelectField } from '@/form/TimeSelectField';
 import { translate } from '@/i18n';
@@ -104,7 +104,7 @@ export const buildOptionValidator = (
   return composeValidators(...validators);
 };
 
-export const getComponentAndParams = (option, key, customer) => {
+export const getComponentAndParams = (option, key, customer, loaders?: any) => {
   let OptionField: FC<Partial<FormGroupProps>> = StringField;
   let params: Record<string, any> = {};
   switch (option.type) {
@@ -157,15 +157,8 @@ export const getComponentAndParams = (option, key, customer) => {
       OptionField = AsyncSelectField;
       params = {
         key: key + '-' + customer?.uuid,
-        loadOptions: (query, prevOptions, currentPage) =>
-          fetchOpenstackOptions(
-            query,
-            TENANT_TYPE,
-            prevOptions,
-            currentPage,
-            customer?.uuid,
-          ),
-
+        loadOptions: loaders?.loadTenants,
+        getOptionLabel: (option) => `${option.project_name} / ${option.name}`,
         getOptionValue: (option) => option.backend_id,
         placeholder: translate('Select tenant...'),
       };
@@ -174,15 +167,8 @@ export const getComponentAndParams = (option, key, customer) => {
       OptionField = AsyncSelectField;
       params = {
         key: key + '-' + customer?.uuid,
-        loadOptions: (query, prevOptions, currentPage) =>
-          fetchOpenstackOptions(
-            query,
-            TENANT_TYPE,
-            prevOptions,
-            currentPage,
-            customer?.uuid,
-          ),
-
+        loadOptions: loaders?.loadTenants,
+        getOptionLabel: (option) => `${option.project_name} / ${option.name}`,
         getOptionValue: (option) => option.backend_id,
         placeholder: translate('Select tenants...'),
         isMulti: true,
@@ -192,15 +178,8 @@ export const getComponentAndParams = (option, key, customer) => {
       OptionField = AsyncSelectField;
       params = {
         key: key + '-' + customer?.uuid,
-        loadOptions: (query, prevOptions, currentPage) =>
-          fetchOpenstackOptions(
-            query,
-            INSTANCE_TYPE,
-            prevOptions,
-            currentPage,
-            customer?.uuid,
-          ),
-
+        loadOptions: loaders?.loadInstances,
+        getOptionLabel: (option) => `${option.project_name} / ${option.name}`,
         getOptionValue: (option) => option.backend_id,
         placeholder: translate('Select instance...'),
       };
@@ -209,15 +188,8 @@ export const getComponentAndParams = (option, key, customer) => {
       OptionField = AsyncSelectField;
       params = {
         key: key + '-' + customer?.uuid,
-        loadOptions: (query, prevOptions, currentPage) =>
-          fetchOpenstackOptions(
-            query,
-            INSTANCE_TYPE,
-            prevOptions,
-            currentPage,
-            customer?.uuid,
-          ),
-
+        loadOptions: loaders?.loadInstances,
+        getOptionLabel: (option) => `${option.project_name} / ${option.name}`,
         getOptionValue: (option) => option.backend_id,
         placeholder: translate('Select instance...'),
         isMulti: true,
@@ -288,6 +260,16 @@ export const OptionsForm = ({
   const selectedCustomer = useCustomer();
   const customer = preferedCustomer || selectedCustomer;
 
+  const loadTenants = useMemo(
+    () => fetchOpenstackOptions(TENANT_TYPE, customer?.uuid),
+    [customer?.uuid],
+  );
+
+  const loadInstances = useMemo(
+    () => fetchOpenstackOptions(INSTANCE_TYPE, customer?.uuid),
+    [customer?.uuid],
+  );
+
   return (
     <>
       {options.order &&
@@ -300,6 +282,7 @@ export const OptionsForm = ({
             option,
             key,
             customer,
+            { loadTenants, loadInstances },
           );
 
           // Build validator with cross-field support

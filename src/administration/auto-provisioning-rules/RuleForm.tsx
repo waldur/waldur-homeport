@@ -1,12 +1,12 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -19,6 +19,14 @@ import { validateEmailPatterns } from './utils';
 export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
   const protectedMethods =
     ENV.plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || [];
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'url'],
+        o: 'name',
+      }),
+    [],
+  );
   return (
     <>
       <FormGroup label={translate('Rule name')} required>
@@ -98,12 +106,7 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
       >
         <AsyncSelectField
           name="customer"
-          loadOptions={(query, prevOptions, page) =>
-            organizationAutocomplete(query, prevOptions, page, {
-              field: ['name', 'url'],
-              o: 'name',
-            })
-          }
+          loadOptions={loadOrganizations}
           getOptionValue={({ url }) => url}
           // validate={/* Handled by Parent <Form> */}
           isDisabled={values.use_user_organization_as_customer_name}

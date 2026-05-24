@@ -7,8 +7,8 @@ import {
 } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { FormContainer } from '@/form/FormContainer';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { offeringGroupAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -39,6 +39,14 @@ export const SetOfferingGroupDialog = ({
         : null,
     }),
     [resolve.initialGroup],
+  );
+
+  const loadOfferingGroups = useMemo(
+    () =>
+      offeringGroupAutocomplete({
+        customer_uuid: resolve.offering.customer_uuid,
+      }),
+    [resolve.offering.customer_uuid],
   );
 
   const mutation = useManagedMutation<any, any, FormValues>({
@@ -81,11 +89,7 @@ export const SetOfferingGroupDialog = ({
                 name="offering_group"
                 label={translate('Offering group')}
                 placeholder={translate('Select a group or leave empty…')}
-                loadOptions={(query, prevOptions, page) =>
-                  offeringGroupAutocomplete(query, prevOptions, page, {
-                    customer_uuid: resolve.offering.customer_uuid,
-                  })
-                }
+                loadOptions={loadOfferingGroups}
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={(option) => option.title}
                 isClearable

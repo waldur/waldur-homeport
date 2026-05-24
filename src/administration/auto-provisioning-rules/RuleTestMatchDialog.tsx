@@ -4,7 +4,8 @@ import {
   XCircleIcon,
 } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 import {
   autoprovisioningRulesTestMatch,
   type FilterCheckResult,
@@ -14,8 +15,9 @@ import {
 
 import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
+import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelectField } from '@/form/select';
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -29,18 +31,6 @@ interface UserOption {
   email?: string;
   url?: string;
 }
-
-const loadUsers = async (query: string, prevOptions, { page }) => {
-  const result = await userAutocomplete(query, prevOptions, { page });
-  return {
-    ...result,
-    options: (result as any).options.map((u: UserOption) => ({
-      ...u,
-      value: u.uuid,
-      label: u.full_name || u.email || u.username,
-    })),
-  };
-};
 
 const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
   const valueOf = (value: unknown): string => {
@@ -212,9 +202,6 @@ interface RuleTestMatchDialogProps {
 export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
   resolve,
 }) => {
-  const [selectedUser, setSelectedUser] = useState<UserOption | null>(null);
-  const [result, setResult] = useState<RuleTestMatchResponse | null>(null);
-
   const protectedMethods =
     ENV.plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || [];
 
@@ -224,78 +211,78 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
         path: { uuid: resolve.rule.uuid },
         body: { user_uuid: userUuid },
       });
-      return response.data as RuleTestMatchResponse;
+      return response.data;
     },
-    onSuccess: (data) => setResult(data),
   });
 
-  const onSubmit = () => {
-    if (!selectedUser?.uuid) return;
-    mutation.mutate(selectedUser.uuid);
-  };
-
   return (
-    <ModalDialog
-      title={translate('Test rule against user — {rule}', {
-        rule: resolve.rule.name,
-      })}
-      footer={
-        <>
-          <CloseDialogButton />
-          <SubmitButton
-            type="button"
-            onClick={onSubmit}
-            disabled={!selectedUser?.uuid || mutation.isPending}
-            submitting={mutation.isPending}
-            label={translate('Run test')}
-            className="btn btn-primary"
-          />
-        </>
-      }
-    >
-      <div>
-        <label className="form-label fw-semibold">
-          {translate('Target user')}
-        </label>
-        <AsyncPaginate
-          value={selectedUser}
-          onChange={(opt) => {
-            setSelectedUser(opt as UserOption);
-            setResult(null);
-          }}
-          loadOptions={loadUsers}
-          defaultOptions
-          placeholder={translate('Search by name, email or username...')}
-          isClearable
-          getOptionLabel={(opt) =>
-            (opt as UserOption).full_name ||
-            (opt as UserOption).email ||
-            (opt as UserOption).username ||
-            ''
-          }
-          getOptionValue={(opt) => (opt as UserOption).uuid}
-        />
-
-        {resolve.rule.use_user_organization_as_customer_name &&
-          protectedMethods.length === 0 && (
-            <div className="alert alert-warning py-2 px-3 mt-3 mb-0">
-              {translate(
-                'This rule resolves the organization from the user IdP claim, but no protected registration methods are configured. No user will currently pass the protection check.',
-              )}
-            </div>
-          )}
-
-        {mutation.error && (
-          <div className="alert alert-danger py-2 px-3 mt-3 mb-0">
-            {translate('Test failed: {error}', {
-              error:
-                (mutation.error as Error).message || translate('Unknown error'),
+    <Form
+      onSubmit={(values: any) => mutation.mutate(values.user.uuid)}
+      render={({ handleSubmit, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Test rule against user — {rule}', {
+              rule: resolve.rule.name,
             })}
-          </div>
-        )}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  disabled={invalid || mutation.isPending}
+                  submitting={mutation.isPending}
+                  label={translate('Run test')}
+                  className="btn btn-primary"
+                />
+              </>
+            }
+          >
+            <div>
+              <label className="form-label fw-semibold">
+                {translate('Target user')}
+              </label>
+              <AsyncSelectField
+                name="user"
+                validate={required}
+                onChange={() => {
+                  mutation.reset();
+                }}
+                loadOptions={userAutocomplete}
+                defaultOptions
+                placeholder={translate('Search by name, email or username...')}
+                isClearable
+                getOptionLabel={(opt) =>
+                  (opt as UserOption).full_name ||
+                  (opt as UserOption).email ||
+                  (opt as UserOption).username ||
+                  ''
+                }
+                getOptionValue={(opt) => (opt as UserOption).uuid}
+              />
 
-        {result && <ResultPanel result={result} />}
-      </div>
-    </ModalDialog>
+              {resolve.rule.use_user_organization_as_customer_name &&
+                protectedMethods.length === 0 && (
+                  <div className="alert alert-warning py-2 px-3 mt-3 mb-0">
+                    {translate(
+                      'This rule resolves the organization from the user IdP claim, but no protected registration methods are configured. No user will currently pass the protection check.',
+                    )}
+                  </div>
+                )}
+
+              {mutation.error && (
+                <div className="alert alert-danger py-2 px-3 mt-3 mb-0">
+                  {translate('Test failed: {error}', {
+                    error:
+                      (mutation.error as Error).message ||
+                      translate('Unknown error'),
+                  })}
+                </div>
+              )}
+
+              {mutation.data && <ResultPanel result={mutation.data} />}
+            </div>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };

@@ -4,7 +4,7 @@ import { BasePublicPlan } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { FieldError } from '@/form';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 
 interface PlanSelectFieldProps {
   plans: BasePublicPlan[];

@@ -8,7 +8,7 @@ import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { usersAutocomplete } from '@/customer/team/utils';
 import { SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -84,9 +84,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
               <AsyncSelectField
                 name="user"
                 placeholder={translate('Search and select user...')}
-                loadOptions={(query, prevOptions, page) =>
-                  usersAutocomplete({ query }, prevOptions, page)
-                }
+                loadOptions={usersAutocomplete}
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={getOptionLabel}
                 components={{ Option: UserListOptionInline }}

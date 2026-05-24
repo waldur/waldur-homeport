@@ -15,13 +15,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const ProposalStatesOptions: ProposalStatesOption[] = [
@@ -78,7 +74,7 @@ export const ProposalProposalsFilter: FunctionComponent<
             getOptionLabel={(option: ProposalStatesOption) => option.label}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -91,16 +87,16 @@ export const ProposalProposalsFilter: FunctionComponent<
       <Field
         name="call"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Call')}
-            loadOptions={createSelectFetcher(proposalPublicCallsList, 'name')}
+            loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
             defaultOptions
             getOptionValue={(option: PublicCall) => String(option.uuid || '')}
             getOptionLabel={(option: PublicCall) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -113,9 +109,9 @@ export const ProposalProposalsFilter: FunctionComponent<
       <Field
         name="round"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Round')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               proposalProtectedCallsRoundsList,
               null as any,
               {},
@@ -131,7 +127,7 @@ export const ProposalProposalsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -144,16 +140,16 @@ export const ProposalProposalsFilter: FunctionComponent<
       <Field
         name="organization"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Organization')}
-            loadOptions={createSelectFetcher(customersList, 'query')}
+            loadOptions={createLoadOptions(customersList, 'query')}
             defaultOptions
             getOptionValue={(option: Customer) => String(option.uuid || '')}
             getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -168,9 +164,9 @@ export const ProposalProposalsFilter: FunctionComponent<
       <Field
         name="applicant"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Applicant')}
-            loadOptions={createSelectFetcher(usersList, 'query')}
+            loadOptions={createLoadOptions(usersList, 'query')}
             defaultOptions
             getOptionValue={(option: User) => String(option.uuid || '')}
             getOptionLabel={(option: User) =>
@@ -179,7 +175,7 @@ export const ProposalProposalsFilter: FunctionComponent<
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

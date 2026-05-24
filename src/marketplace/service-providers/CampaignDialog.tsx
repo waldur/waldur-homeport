@@ -1,5 +1,5 @@
 import { CaretRightIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
   CampaignRequest,
@@ -10,10 +10,10 @@ import {
 
 import { required, requiredArray } from '@/core/validators';
 import { NumberField, SelectField, StringField } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { FormContainer } from '@/form/FormContainer';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import * as api from '@/marketplace/common/api';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
@@ -55,6 +55,12 @@ export const CampaignDialog = ({
       throw e;
     }
   };
+
+  const loadOfferings = useMemo(
+    () =>
+      providerOfferingsAutocomplete({ shared: true, customer: customer.url }),
+    [customer.url],
+  );
 
   const mutation = useManagedMutation<any, any, CampaignFormData>({
     mutationFn: async (formData) => {
@@ -181,13 +187,7 @@ export const CampaignDialog = ({
                   name="offerings"
                   label={translate('Offerings')}
                   placeholder={translate('Select offerings...')}
-                  loadOptions={(query, prevOptions, page) =>
-                    providerOfferingsAutocomplete(
-                      { name: query, shared: true, customer: customer.url },
-                      prevOptions,
-                      page,
-                    )
-                  }
+                  loadOptions={loadOfferings}
                   getOptionValue={(option) => option.uuid}
                   getOptionLabel={(option) => option.name}
                   isMulti

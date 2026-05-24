@@ -1,7 +1,7 @@
 import { Field } from 'react-final-form';
 import { marketplaceCategoryColumnsDestroy } from 'waldur-js-client';
 
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { StringField } from '@/form/StringField';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';

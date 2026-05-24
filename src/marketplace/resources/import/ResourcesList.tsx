@@ -5,7 +5,7 @@ import {
 } from 'waldur-js-client';
 
 import { requiredArray } from '@/core/validators';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
 import { ResourceIconName } from '@/resource/ResourceIconName';

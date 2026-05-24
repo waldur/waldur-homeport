@@ -71,48 +71,96 @@ vi.mock('@/i18n/LanguageUtilsService', () => ({
 }));
 
 vi.mock('@/azure/vm/utils', () => ({
-  loadLocationOptions: vi.fn().mockResolvedValue({
-    options: [{ value: 'location-1', label: 'Location 1' }],
-    hasMore: false,
-  }),
+  loadLocationOptions: vi.fn(() =>
+    vi.fn().mockResolvedValue({
+      options: [{ value: 'location-1', label: 'Location 1' }],
+      hasMore: false,
+    }),
+  ),
 }));
 
 vi.mock('@/navigation/context', () => ({
   useFullPage: vi.fn(),
 }));
 
-vi.mock('@/form/AsyncSelectField', () => {
-  const MockSelect = ({ input, onChange }) => (
-    <select
-      value={input.value?.value || input.value || ''}
-      onChange={(e) => {
-        const val = {
-          value: e.target.value,
-          label:
-            e.target.value === 'location-1' ? 'Location 1' : e.target.value,
-        };
-        input.onChange(val);
-        if (onChange) onChange(val);
-      }}
-      data-testid={`mock-select-${input.name}`}
-    >
-      <option value="">Select...</option>
-      <option value="location-1">Location 1</option>
-    </select>
+vi.mock('@/form/select', async (importOriginal) => {
+  const actual: any = await importOriginal();
+  const MockSelect = (props) => {
+    const { input, onChange, id, name, label } = props;
+    const fieldName = input?.name || id || name || label;
+    return (
+      <select
+        value={
+          input?.value?.value ||
+          input?.value ||
+          props.value?.value ||
+          props.value ||
+          ''
+        }
+        onChange={(e) => {
+          const val = {
+            value: e.target.value,
+            label:
+              e.target.value === 'location-1' ? 'Location 1' : e.target.value,
+          };
+          if (input) {
+            input.onChange(val);
+          }
+          if (onChange) {
+            onChange(val);
+          }
+        }}
+        data-testid={`mock-select-${fieldName}`}
+      >
+        <option value="">Select...</option>
+        <option value="location-1">Location 1</option>
+      </select>
+    );
+  };
+
+  const MockSelectField = (props: any) => (
+    <Field
+      name={props.name}
+      validate={props.validate}
+      render={({ input }) => <MockSelect input={input} {...props} />}
+    />
   );
 
   return {
+    ...actual,
+    AsyncSelect: MockSelect,
     Select: MockSelect,
-    AsyncSelectField: (props: any) => (
-      <Field
-        name={props.name}
-        validate={props.validate}
-        component={MockSelect as any}
-        onChange={props.onChange}
-      />
-    ),
+    AsyncSelectField: MockSelectField,
+    SelectField: MockSelectField,
   };
 });
+
+vi.mock('@/form/select/AsyncSelectField', () => ({
+  AsyncSelectField: (props: any) => (
+    <Field
+      name={props.name}
+      validate={props.validate}
+      render={({ input }) => (
+        <select
+          value={input?.value?.value || input?.value || ''}
+          onChange={(e) => {
+            const val = {
+              value: e.target.value,
+              label:
+                e.target.value === 'location-1' ? 'Location 1' : e.target.value,
+            };
+            input.onChange(val);
+            if (props.onChange) props.onChange(val);
+          }}
+          data-testid={`mock-select-${input.name}`}
+        >
+          <option value="">Select...</option>
+          <option value="location-1">Location 1</option>
+        </select>
+      )}
+    />
+  ),
+}));
 
 window.IntersectionObserver = vi.fn(() => ({
   observe: vi.fn(),
@@ -161,6 +209,7 @@ const mockOffering = {
   shared: true,
   plans: [mockPlan],
   components: [],
+  organization_groups: [],
 } as unknown as Offering;
 
 let mockRouter: UIRouterReact;
@@ -208,14 +257,17 @@ describe('AzureSQLServerForm (via DeployPage)', () => {
     renderComponent();
     const user = userEvent.setup();
 
-    // Wait for form to appear
-    const nameInput = await waitFor(() => {
-      const el = document.querySelector(
-        'input[name="attributes.name"]',
-      ) as HTMLInputElement;
-      expect(el).toBeInTheDocument();
-      return el;
-    });
+    // Wait for spinner to disappear and form to appear
+    const nameInput = await waitFor(
+      () => {
+        const el = document.querySelector(
+          'input[name="attributes.name"]',
+        ) as HTMLInputElement;
+        expect(el).toBeInTheDocument();
+        return el;
+      },
+      { timeout: 5000 },
+    );
 
     // Fill in SQL server name
     await user.type(nameInput, 'my-sql-server');
@@ -275,14 +327,17 @@ describe('AzureSQLServerForm (via DeployPage)', () => {
     renderComponent();
     const user = userEvent.setup();
 
-    // Wait for form to appear and fill in name
-    const nameInput = await waitFor(() => {
-      const el = document.querySelector(
-        'input[name="attributes.name"]',
-      ) as HTMLInputElement;
-      expect(el).toBeInTheDocument();
-      return el;
-    });
+    // Wait for spinner to disappear and form to appear
+    const nameInput = await waitFor(
+      () => {
+        const el = document.querySelector(
+          'input[name="attributes.name"]',
+        ) as HTMLInputElement;
+        expect(el).toBeInTheDocument();
+        return el;
+      },
+      { timeout: 5000 },
+    );
     await user.type(nameInput, 'failing-server');
 
     // Fill in required Location

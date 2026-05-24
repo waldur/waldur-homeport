@@ -11,7 +11,7 @@ import { EmailField } from '@/form/EmailField';
 import { FormGroup } from '@/form/FormGroup';
 import { NumberField } from '@/form/NumberField';
 import { PhoneNumberField } from '@/form/PhoneNumberField';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
 import { YearField } from '@/form/YearField';

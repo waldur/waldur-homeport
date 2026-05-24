@@ -2,7 +2,7 @@ import { FC, useEffect, useMemo } from 'react';
 import { Field, useForm } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { useUser } from '@/workspace/hooks';
@@ -48,11 +48,13 @@ export const OrganizationFilter: FC = () => {
     }
   }, [canSelectAny, ownedOrganizations, form]);
 
+  const loadOrganizations = useMemo(() => organizationAutocomplete(), []);
+
   // For non-staff users, only show their organizations
   const loadOptions = (query: string, prevOptions, page) => {
     if (canSelectAny) {
       // Staff/support can see all organizations
-      return organizationAutocomplete(query, prevOptions, page);
+      return loadOrganizations(query, prevOptions, page);
     }
 
     // Non-staff users: filter to only their organizations
@@ -70,7 +72,7 @@ export const OrganizationFilter: FC = () => {
     <Field
       name="organization"
       component={(fieldProps) => (
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('Select organization...')}
           loadOptions={loadOptions}
           defaultOptions

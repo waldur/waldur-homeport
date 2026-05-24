@@ -7,7 +7,7 @@ import { Project } from 'waldur-js-client';
 import { formatDate, formatISODate } from '@/core/dateUtils';
 import { SubmitButton } from '@/form';
 import { DateField } from '@/form/DateField';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';

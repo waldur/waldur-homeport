@@ -9,7 +9,7 @@ import {
 
 import { required } from '@/core/validators';
 import { FormGroup, SubmitButton } from '@/form';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';

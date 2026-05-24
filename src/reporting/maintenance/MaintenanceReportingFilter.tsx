@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 import Flatpickr from 'react-flatpickr';
 
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { useFlatpickrTheme } from '@/form/useFlatpickrTheme';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';

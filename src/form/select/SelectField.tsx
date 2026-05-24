@@ -1,10 +1,12 @@
 import { FunctionComponent } from 'react';
 
-import { Select } from '@/form/themed-select';
+import { Select } from './Select';
+import { SelectFieldProps } from './types';
 
-export const SelectField: FunctionComponent<any> = (props) => {
+export const SelectField: FunctionComponent<SelectFieldProps> = (props) => {
   const { input, simpleValue, options, ...rest } = props;
   const getOptionValue = props.getOptionValue || ((option) => option.value);
+
   return (
     <Select
       {...rest}
@@ -21,7 +23,7 @@ export const SelectField: FunctionComponent<any> = (props) => {
             : options.filter((option) => getOptionValue(option) === input.value)
           : input.value
       }
-      onChange={(newValue: any) => {
+      onChange={(newValue: any, actionMeta: any) => {
         if (simpleValue) {
           input.onChange(
             newValue
@@ -34,7 +36,7 @@ export const SelectField: FunctionComponent<any> = (props) => {
           input.onChange(newValue);
         }
         if (props.onChange) {
-          props.onChange(newValue);
+          props.onChange(newValue, actionMeta);
         }
       }}
       options={options}

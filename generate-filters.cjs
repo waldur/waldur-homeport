@@ -460,7 +460,7 @@ class Generator {
     const commonSelectProps = [
       `isClearable={${!f.required}}`,
       f.isMulti ? `isMulti={true}` : null,
-      `{...REACT_SELECT_TABLE_FILTER}`,
+      `variant="tableFilter"`,
     ]
       .filter(Boolean)
       .join('\n            ');
@@ -552,9 +552,9 @@ class Generator {
         name="${f.name}"
         ${validation}
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={${tPlace}}
-            loadOptions={createSelectFetcher(${f.loadOptions}${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}
+            loadOptions={createLoadOptions(${f.loadOptions}${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}
             defaultOptions
             getOptionValue={(option${vType}) => String(option.${f.valueField || 'url'} || '')}
             getOptionLabel={(option${vType}) => ${f.itemType === 'User' ? 'String(option.full_name || option.username || option.email || "")' : `String(option.${f.labelField || 'name'} || '')`}}
@@ -844,7 +844,7 @@ ${filters.map(Generator.selector).join('')}  }
           }
         }
         if (f.feature) comps.add('feature');
-        if (f.component === 'Autocomplete') comps.add('AsyncPaginate');
+        if (f.component === 'Autocomplete') comps.add('AsyncSelect');
         if (f.component === 'Select' || f.options) comps.add('Select');
       });
     });
@@ -895,19 +895,18 @@ ${filters.map(Generator.selector).join('')}  }
 
     const themed = [
       comps.has('Select') && 'Select',
-      comps.has('AsyncPaginate') && 'AsyncPaginate',
-      (comps.has('Select') || comps.has('AsyncPaginate')) &&
-      'REACT_SELECT_TABLE_FILTER',
+      comps.has('AsyncSelect') && 'AsyncSelect',
     ].filter(Boolean);
 
     if (themed.length > 0) {
       lines.push(
-        `import { ${themed.join(', ')} } from '@/form/themed-select';`,
+        `import { ${themed.join(', ')} } from '@/form/select';`,
       );
     }
 
-    if (comps.has('AsyncPaginate'))
-      lines.push(`import { createSelectFetcher } from '@/table/api';`);
+    if (comps.has('AsyncSelect'))
+      lines.push(`import { createLoadOptions } from '@/form/select/createLoadOptions';
+`);
     lines.push(
       `import { ${Array.from(sdk).sort().join(', ')} } from 'waldur-js-client';`,
     );

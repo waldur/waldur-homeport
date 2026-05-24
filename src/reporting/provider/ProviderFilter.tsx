@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { Field, useForm } from 'react-final-form';
 
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -13,16 +13,17 @@ const ProviderSelectField: FC<any> = (fieldProps) => {
    */
   useEffect(() => {
     if (!fieldProps.input.value) {
-      providerAutocomplete('', [], { page: 1 }).then((result) => {
+      (async () => {
+        const result = await providerAutocomplete('', [], { page: 1 });
         if (result.options && result.options.length > 0) {
           form.change('provider', result.options[0]);
         }
-      });
+      })();
     }
   }, [fieldProps.input.value, form]);
 
   return (
-    <AsyncPaginate
+    <AsyncSelect
       placeholder={translate('Select provider...')}
       loadOptions={providerAutocomplete}
       defaultOptions

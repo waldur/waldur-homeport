@@ -9,7 +9,7 @@ import {
 
 import { StringField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -64,7 +64,7 @@ export const MarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
             getOptionValue={(option: CatalogTypeOption) => String(option.value)}
             getOptionLabel={(option: CatalogTypeOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

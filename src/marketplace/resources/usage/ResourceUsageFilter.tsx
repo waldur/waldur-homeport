@@ -3,7 +3,6 @@ import { Field } from 'react-final-form';
 
 import { AccountingPeriodFieldComponent } from '@/customer/list/AccountingPeriodField';
 import { StringField } from '@/form';
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
@@ -36,7 +35,7 @@ export const ResourceUsageFilter: FC = () => {
           name="billing_period"
           component={AccountingPeriodFieldComponent}
           options={options}
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          reactSelectProps={{ variant: 'tableFilter' }}
         />
       </TableFilterItem>
     </>

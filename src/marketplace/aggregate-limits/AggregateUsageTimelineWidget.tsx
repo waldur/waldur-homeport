@@ -16,7 +16,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getBrandColor } from '@/core/utils';
 import { WidgetCard } from '@/dashboard/WidgetCard';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { getUserLocale } from '@/i18n/LanguageUtilsService';
 import { useModal } from '@/modal/actions';

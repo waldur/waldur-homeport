@@ -1,12 +1,8 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { marketplaceRobotAccountsCreate, usersList } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import {
-  LATIN_NAME_PATTERN,
-  returnReactSelectAsyncPaginateObject,
-} from '@/core/utils';
+import { LATIN_NAME_PATTERN } from '@/core/utils';
+import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -20,25 +16,14 @@ export interface RobotAccountFormData {
 }
 
 export const useRobotAccountFields = (resource) => {
-  const loadUsers = useCallback(
-    (query, prevOptions, page) =>
-      usersList({
-        query: {
-          full_name: query,
-          project_uuid: resource.project_uuid,
-          field: ['full_name', 'email', 'url', 'uuid'],
-          o: ['full_name'],
-          page,
-          page_size: ENV.pageSize,
-        },
-      }).then((response) =>
-        returnReactSelectAsyncPaginateObject(
-          parseSelectData(response),
-          prevOptions,
-          page,
-        ),
-      ),
-    [resource],
+  const loadUsers = useMemo(
+    () =>
+      createLoadOptions(usersList, 'full_name', {
+        project_uuid: resource.project_uuid,
+        field: ['full_name', 'email', 'url', 'uuid'],
+        o: ['full_name'],
+      }),
+    [resource.project_uuid],
   );
 
   return [

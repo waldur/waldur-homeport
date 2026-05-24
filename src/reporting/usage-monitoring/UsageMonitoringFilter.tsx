@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 

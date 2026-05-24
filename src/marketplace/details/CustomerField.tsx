@@ -1,9 +1,9 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Field, useForm } from 'react-final-form';
 import { projectsList } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { useModal } from '@/modal/actions';
@@ -57,9 +57,9 @@ const CustomerSelect = ({ input, organizationGroups }) => {
     [customer, form, input],
   );
 
-  const loadOptions = useCallback(
-    (query, prevOptions, { page }) =>
-      organizationAutocomplete(query, prevOptions, page, {
+  const loadOptions = useMemo(
+    () =>
+      organizationAutocomplete({
         organization_group_uuid: organizationGroups.map((group) => group.uuid),
         field: [
           'name',
@@ -74,7 +74,7 @@ const CustomerSelect = ({ input, organizationGroups }) => {
   );
 
   return (
-    <AsyncPaginate
+    <AsyncSelect
       label={translate('Organization')}
       value={input.value}
       onChange={onChange}

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { Customer } from 'waldur-js-client';
@@ -28,6 +28,19 @@ export const Step2SelectOffering: FC<Step2Props> = ({
   const importType = values?.import_type;
   const offering = values?.offering;
 
+  const loadOfferings = useMemo(
+    () =>
+      publicOfferingsAutocomplete({
+        ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
+        field: OfferingsAutocompleteCommonFields.concat(
+          'components',
+          'attributes',
+          'plans',
+        ) as any,
+      }),
+    [customer],
+  );
+
   return (
     <div className="size-lg">
       <Form.Group className="mb-7">
@@ -41,23 +54,7 @@ export const Step2SelectOffering: FC<Step2Props> = ({
             <>
               <AutocompleteField
                 placeholder={translate('Select offering...')}
-                loadOfferings={(query, prevOptions, { page }) =>
-                  publicOfferingsAutocomplete(
-                    {
-                      name: query,
-                      ...(customer
-                        ? { allowed_customer_uuid: customer.uuid }
-                        : {}),
-                    },
-                    prevOptions,
-                    page,
-                    OfferingsAutocompleteCommonFields.concat(
-                      'components',
-                      'attributes',
-                      'plans',
-                    ) as any,
-                  )
-                }
+                loadOfferings={loadOfferings}
                 value={input.value}
                 onChange={(value: any) => {
                   input.onChange(value);

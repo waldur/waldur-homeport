@@ -24,7 +24,7 @@ vi.mock('@/form/DateField', () => ({
   ),
 }));
 
-vi.mock('@/form/SelectField', () => ({
+vi.mock('@/form/select/SelectField', () => ({
   SelectField: (props) => (
     <select
       data-testid="select-field"

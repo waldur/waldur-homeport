@@ -45,8 +45,8 @@ vi.mock('@/workspace/selectors', () => ({
   getCustomer: () => ({ uuid: 'customer-uuid', url: 'customer-url' }),
 }));
 
-vi.mock('@/form/AsyncSelectField', () => ({
-  Select: (props) => (
+vi.mock('@/form/select/AsyncSelect', () => ({
+  AsyncSelect: (props) => (
     <input
       id={props.id}
       data-testid={props.id || 'async-select'}
@@ -55,13 +55,16 @@ vi.mock('@/form/AsyncSelectField', () => ({
           props.input.onChange({ url: e.target.value, name: 'Org 1' });
         }
       }}
-      onBlur={() => props.input?.onBlur()}
+      onBlur={(e) => {
+        if (props.input) props.input.onBlur(e);
+        if (props.onBlur) props.onBlur(e);
+      }}
       value={props.input?.value?.url || ''}
     />
   ),
 }));
 
-vi.mock('@/form/SelectField', () => ({
+vi.mock('@/form/select/SelectField', () => ({
   SelectField: (props) => (
     <input
       data-testid={props.input?.name || props.name || 'select-field'}
@@ -72,8 +75,11 @@ vi.mock('@/form/SelectField', () => ({
         } else {
           props.input?.onChange(value);
         }
+        if (props.onChange) props.onChange(value);
       }}
-      onBlur={() => props.input?.onBlur()}
+      onBlur={(e) => {
+        if (props.input) props.input.onBlur(e);
+      }}
       value={
         typeof props.input?.value === 'object'
           ? props.input.value.url

@@ -1,6 +1,6 @@
 import { components, Props as SelectProps } from 'react-select';
 
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 
 const MultiSelectLimitedValueContainer = (props) => {
   if (!props.hasValue) {

@@ -1,7 +1,7 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
   BillingUnit,
@@ -12,7 +12,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -46,6 +46,16 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
 
   const customer = useCustomer();
   const router = useRouter();
+
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'url', 'uuid'],
+        o: 'name',
+        is_service_provider: true,
+      }),
+    [],
+  );
 
   const saveOfferingMutation = useManagedMutation<
     any,
@@ -124,13 +134,7 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
                   validate={required}
                   required
                   placeholder={translate('Select service provider...')}
-                  loadOptions={(query, prevOptions, page) =>
-                    organizationAutocomplete(query, prevOptions, page, {
-                      field: ['name', 'url', 'uuid'],
-                      o: 'name',
-                      is_service_provider: true,
-                    })
-                  }
+                  loadOptions={loadOrganizations}
                   getOptionValue={(option) => option.url}
                   noOptionsMessage={() => translate('No service providers')}
                   isClearable={true}

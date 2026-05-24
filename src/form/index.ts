@@ -1,7 +1,7 @@
 export { NumberField } from './NumberField';
 export { StringField } from './StringField';
 export { TextField } from './TextField';
-export { SelectField } from './SelectField';
+export { SelectField } from './select/SelectField';
 export { SubmitButton } from './SubmitButton';
 export { FormFooter } from './FormFooter';
 export { FieldError } from './FieldError';

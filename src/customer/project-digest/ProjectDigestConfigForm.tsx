@@ -8,7 +8,7 @@ import {
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { NumberField } from '@/form/NumberField';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useManagedMutation } from '@/modal/useManagedMutation';

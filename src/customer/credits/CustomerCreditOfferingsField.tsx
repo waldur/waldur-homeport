@@ -1,12 +1,17 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
-import { Select } from '@/form/AsyncSelectField';
 import { FormGroup } from '@/form/FormGroup';
+import { AsyncSelect as Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 
 export const CustomerCreditOfferingsField: FC = () => {
+  const loadOfferings = useMemo(
+    () => providerOfferingsAutocomplete({ billable: true }),
+    [],
+  );
+
   return (
     <Field
       name="offerings"
@@ -15,13 +20,7 @@ export const CustomerCreditOfferingsField: FC = () => {
     >
       <Select
         placeholder={translate('All')}
-        loadOptions={(query, prevOptions, page) =>
-          providerOfferingsAutocomplete(
-            { name: query, billable: true },
-            prevOptions,
-            page,
-          )
-        }
+        loadOptions={loadOfferings}
         isMulti
         getOptionValue={(option) => option.uuid}
         getOptionLabel={(option) =>

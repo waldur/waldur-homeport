@@ -19,7 +19,7 @@ vi.mock('waldur-js-client', () => ({
   formDataBodySerializer: vi.fn(),
 }));
 
-vi.mock('@/form/themed-select', () => ({
+vi.mock('@/form/select', () => ({
   Select: (props) => (
     <select
       value={props.value?.value}

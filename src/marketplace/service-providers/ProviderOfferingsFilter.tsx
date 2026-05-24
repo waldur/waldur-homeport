@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
@@ -47,7 +46,7 @@ export const ProviderOfferingsFilter: FunctionComponent<
       name="offering_type"
     >
       <OfferingTypeAutocomplete
-        reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        reactSelectProps={{ variant: 'tableFilter' }}
         options={offeringTypes}
       />
     </TableFilterItem>

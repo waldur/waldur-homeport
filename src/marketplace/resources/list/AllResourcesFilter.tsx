@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
@@ -23,14 +22,14 @@ export const AllResourcesFilter: FunctionComponent<{
       name="organization"
       badgeValue={(value) => value?.name}
     >
-      <OrganizationAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+      <OrganizationAutocomplete reactSelectProps={{ variant: 'tableFilter' }} />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Project')}
       name="project"
       badgeValue={(value) => value?.name}
     >
-      <ProjectFilter reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+      <ProjectFilter reactSelectProps={{ variant: 'tableFilter' }} />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Offering')}
@@ -45,7 +44,7 @@ export const AllResourcesFilter: FunctionComponent<{
       badgeValue={(value) => value?.name}
     >
       <OfferingAutocomplete
-        reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        reactSelectProps={{ variant: 'tableFilter' }}
         name="parent_offering"
         offeringFilter={parentOfferingFilter}
       />

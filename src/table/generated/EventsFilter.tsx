@@ -12,13 +12,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const FeatureOptions: FeatureOption[] = [
@@ -46,16 +42,16 @@ export const EventsFilter: FunctionComponent<{}> = () => (
       <Field
         name="organization"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Organization')}
-            loadOptions={createSelectFetcher(customersList, 'query')}
+            loadOptions={createLoadOptions(customersList, 'query')}
             defaultOptions
             getOptionValue={(option: Customer) => String(option.uuid || '')}
             getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -68,16 +64,16 @@ export const EventsFilter: FunctionComponent<{}> = () => (
       <Field
         name="project"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Project')}
-            loadOptions={createSelectFetcher(projectsList, 'query')}
+            loadOptions={createLoadOptions(projectsList, 'query')}
             defaultOptions
             getOptionValue={(option: Project) => String(option.uuid || '')}
             getOptionLabel={(option: Project) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -92,9 +88,9 @@ export const EventsFilter: FunctionComponent<{}> = () => (
       <Field
         name="user"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('User')}
-            loadOptions={createSelectFetcher(usersList, 'full_name', {
+            loadOptions={createLoadOptions(usersList, 'full_name', {
               o: ['full_name'],
             })}
             defaultOptions
@@ -105,7 +101,7 @@ export const EventsFilter: FunctionComponent<{}> = () => (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -127,7 +123,7 @@ export const EventsFilter: FunctionComponent<{}> = () => (
             getOptionLabel={(option: FeatureOption) => option.label}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

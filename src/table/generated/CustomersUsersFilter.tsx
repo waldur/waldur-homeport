@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 import { CustomersUsersListData } from 'waldur-js-client';
 
-import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -29,7 +29,7 @@ export const CustomersUsersFilter: FunctionComponent<
             getOptionLabel={(option) => option.description}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -51,7 +51,7 @@ export const CustomersUsersFilter: FunctionComponent<
             getOptionLabel={(option) => option.description}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

@@ -1,14 +1,14 @@
 import { DateTime } from 'luxon';
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import {
   Resource,
-  adminArrowBillingSyncsTriggerSync,
   adminArrowBillingSyncsTriggerReconciliation,
+  adminArrowBillingSyncsTriggerSync,
 } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
-import { AsyncPaginate, Select } from '@/form/themed-select';
+import { AsyncSelect, Select } from '@/form/select';
 import { PeriodOption } from '@/form/types';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
@@ -53,16 +53,11 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
     null,
   );
 
-  const loadResources = useCallback(
-    (query: string, prevOptions, { page }) =>
-      resourceAutocomplete(
-        {
-          name: query,
-          field: ['name', 'url', 'uuid', 'backend_id'],
-        } as any,
-        prevOptions,
-        page,
-      ),
+  const loadResources = useMemo(
+    () =>
+      resourceAutocomplete({
+        field: ['name', 'url', 'uuid', 'backend_id'],
+      }),
     [],
   );
 
@@ -149,7 +144,7 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
 
       <Form.Group className="mb-3">
         <Form.Label>{translate('Resource (optional)')}</Form.Label>
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('All resources')}
           loadOptions={loadResources}
           getOptionValue={(option: Resource) => option.uuid}

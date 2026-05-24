@@ -5,7 +5,7 @@ import { openstackVolumesRetype } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useManagedMutation } from '@/modal/useManagedMutation';

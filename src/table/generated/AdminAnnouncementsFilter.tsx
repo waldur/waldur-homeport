@@ -7,7 +7,7 @@ import {
   AdminAnnouncementsListData,
 } from 'waldur-js-client';
 
-import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -68,7 +68,7 @@ export const AdminAnnouncementsFilter: FunctionComponent<{}> = () => (
             }
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -89,7 +89,7 @@ export const AdminAnnouncementsFilter: FunctionComponent<{}> = () => (
             getOptionValue={(option: IsActiveOption) => String(option.value)}
             getOptionLabel={(option: IsActiveOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

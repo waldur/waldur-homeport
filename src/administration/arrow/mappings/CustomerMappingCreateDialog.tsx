@@ -6,7 +6,7 @@ import { adminArrowCustomerMappingsCreate } from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { Select } from '@/form/AsyncSelectField';
+import { SelectField as Select } from '@/form/select';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -294,9 +294,8 @@ export const CustomerMappingCreateDialog = ({
               )}
               required
             >
-              <Field
+              <Select
                 name="waldur_customer"
-                component={Select}
                 validate={required}
                 placeholder={translate('Select organization...')}
                 options={waldurCustomerOptions}

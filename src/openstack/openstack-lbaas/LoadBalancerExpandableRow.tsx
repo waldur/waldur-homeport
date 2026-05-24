@@ -193,7 +193,7 @@ const SecurityGroupsTab: FC<{
                 'resource_type',
               ],
             },
-          }).then((res) => res.data as OpenStackSecurityGroup),
+          }).then((res) => res.data),
         ),
       );
       return results;

@@ -6,10 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { components, OptionProps } from 'react-select';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
-import {
-  REACT_SELECT_TABLE_FILTER,
-  WindowedSelect,
-} from '@/form/themed-select';
+import { WindowedSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
@@ -160,11 +157,10 @@ export const SavedFilterSelect = ({
         options={list || []}
         isClearable={true}
         noOptionsMessage={() => translate('No saved filter')}
-        {...(filterPosition === 'menu' ? REACT_SELECT_TABLE_FILTER : {})}
+        {...(filterPosition === 'menu' ? { variant: 'tableFilter' } : {})}
         components={
           filterPosition === 'menu'
             ? {
-                ...REACT_SELECT_TABLE_FILTER.components,
                 Option: (props) => <ListOption {...props} remove={remove} />,
               }
             : {

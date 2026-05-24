@@ -5,7 +5,7 @@ import { Field } from 'react-final-form';
 import { UrgencyEnum, UserActionsListData } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -61,7 +61,7 @@ export const UserPendingActionsFilter: FunctionComponent<{}> = () => (
             getOptionValue={(option: ActionTypeOption) => String(option.value)}
             getOptionLabel={(option: ActionTypeOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -82,7 +82,7 @@ export const UserPendingActionsFilter: FunctionComponent<{}> = () => (
             getOptionValue={(option: UrgencyOption) => String(option.value)}
             getOptionLabel={(option: UrgencyOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

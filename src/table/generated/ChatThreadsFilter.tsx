@@ -12,13 +12,9 @@ import {
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { RangeNumberField } from '@/form/RangeNumberField';
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const InjectionSeverityOptions: InjectionSeverityOption[] = [
@@ -83,9 +79,9 @@ export const ChatThreadsFilter: FunctionComponent<{}> = () => (
       <Field
         name="user"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('User')}
-            loadOptions={createSelectFetcher(usersList, 'full_name')}
+            loadOptions={createLoadOptions(usersList, 'full_name')}
             defaultOptions
             getOptionValue={(option: User) => String(option.uuid || '')}
             getOptionLabel={(option: User) =>
@@ -94,7 +90,7 @@ export const ChatThreadsFilter: FunctionComponent<{}> = () => (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -132,7 +128,7 @@ export const ChatThreadsFilter: FunctionComponent<{}> = () => (
             }
             getOptionLabel={(option: InjectionSeverityOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

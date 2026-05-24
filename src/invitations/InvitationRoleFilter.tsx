@@ -1,28 +1,9 @@
 import { Field } from 'react-final-form';
-import { rolesList } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
-import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
+import { roleAutocomplete } from '@/permissions/utils';
 import { TableFilterItem } from '@/table/TableFilterItem';
-
-const roleAutocomplete = async (query: string, prevOptions, { page }) => {
-  const response = await rolesList({
-    query: {
-      name: query,
-      page: page,
-      page_size: ENV.pageSize,
-      field: ['uuid', 'name', 'description'],
-    },
-  });
-  return returnReactSelectAsyncPaginateObject(
-    parseSelectData(response),
-    prevOptions,
-    page,
-  );
-};
 
 export const InvitationRoleFilter = () => (
   <TableFilterItem
@@ -33,7 +14,7 @@ export const InvitationRoleFilter = () => (
     <Field
       name="role"
       component={(fieldProps) => (
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('Select role...')}
           loadOptions={roleAutocomplete}
           getOptionValue={(option) => option.uuid}
@@ -41,7 +22,7 @@ export const InvitationRoleFilter = () => (
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           isClearable={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
         />
       )}
     />

@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { Select } from '@/form/AsyncSelectField';
 import { FormGroup } from '@/form/FormGroup';
+import { AsyncSelect as Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -14,6 +14,14 @@ interface OrganizationSelectFieldProps {
 export const OrganizationSelectField: FC<OrganizationSelectFieldProps> = ({
   isDisabled,
 }) => {
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'uuid', 'url'],
+      }),
+    [],
+  );
+
   return (
     <Field
       name="customer"
@@ -23,11 +31,7 @@ export const OrganizationSelectField: FC<OrganizationSelectFieldProps> = ({
       component={FormGroup}
     >
       <Select
-        loadOptions={(query, prevOptions, page) =>
-          organizationAutocomplete(query, prevOptions, page, {
-            field: ['name', 'uuid', 'url'],
-          })
-        }
+        loadOptions={loadOrganizations}
         getOptionValue={(option) => option.url}
         getOptionLabel={(option) => option.name}
         noOptionsMessage={() => translate('No organizations')}

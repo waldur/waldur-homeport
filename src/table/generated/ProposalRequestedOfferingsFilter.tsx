@@ -13,13 +13,9 @@ import {
   proposalPublicCallsList,
 } from 'waldur-js-client';
 
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const RequestedOfferingStatesOptions: RequestedOfferingStatesOption[] = [
@@ -51,16 +47,16 @@ export const ProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
       <Field
         name="organization"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Organization')}
-            loadOptions={createSelectFetcher(customersList, 'query')}
+            loadOptions={createLoadOptions(customersList, 'query')}
             defaultOptions
             getOptionValue={(option: Customer) => String(option.uuid || '')}
             getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -73,16 +69,16 @@ export const ProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
       <Field
         name="call"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Call')}
-            loadOptions={createSelectFetcher(proposalPublicCallsList, 'name')}
+            loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
             defaultOptions
             getOptionValue={(option: PublicCall) => String(option.url || '')}
             getOptionLabel={(option: PublicCall) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -108,7 +104,7 @@ export const ProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
             }
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -121,9 +117,9 @@ export const ProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
       <Field
         name="offering"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Offering')}
-            loadOptions={createSelectFetcher(
+            loadOptions={createLoadOptions(
               marketplacePublicOfferingsList,
               'query',
               { shared: true },
@@ -138,7 +134,7 @@ export const ProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

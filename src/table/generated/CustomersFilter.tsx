@@ -11,13 +11,9 @@ import {
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import {
-  Select,
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@/form/themed-select';
+import { Select, AsyncSelect } from '@/form/select';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { createSelectFetcher } from '@/table/api';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const AccountingIsRunningOptions: AccountingIsRunningOption[] = [
@@ -59,7 +55,7 @@ export const CustomersFilter: FunctionComponent<{}> = () => (
             }
             getOptionLabel={(option: AccountingIsRunningOption) => option.label}
             isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />
@@ -106,9 +102,9 @@ export const CustomersFilter: FunctionComponent<{}> = () => (
       <Field
         name="organization_group"
         component={(fieldProps) => (
-          <AsyncPaginate
+          <AsyncSelect
             placeholder={translate('Organization group')}
-            loadOptions={createSelectFetcher(organizationGroupsList, 'name')}
+            loadOptions={createLoadOptions(organizationGroupsList, 'name')}
             defaultOptions
             getOptionValue={(option: OrganizationGroup) =>
               String(option.uuid || '')
@@ -120,7 +116,7 @@ export const CustomersFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             isMulti={true}
-            {...REACT_SELECT_TABLE_FILTER}
+            variant="tableFilter"
           />
         )}
       />

@@ -1,60 +1,25 @@
-import { FieldValidator } from 'final-form';
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 
-import { AsyncPaginate } from '@/form/themed-select';
-import { FormField } from '@/form/types';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 
-interface ServiceProviderAutocompleteProps extends FormField {
-  name?: string;
-  label?: string;
-  placeholder?: string;
-  noOptionsMessage?: string;
-  reactSelectProps?: Partial<SelectProps>;
-  validator?: FieldValidator<any>;
-  onChange?(value: any): void;
-}
-
-export const ServiceProviderAutocomplete: FunctionComponent<
-  ServiceProviderAutocompleteProps
-> = (props) => {
+export const ServiceProviderAutocomplete: FunctionComponent<{}> = () => {
   const renderComponent = (fieldProps) => (
-    <AsyncPaginate
-      placeholder={props.placeholder || translate('Select organization...')}
-      loadOptions={async (query, prevOptions, { page }) => {
-        const result = await providerAutocomplete(query, prevOptions, {
-          page,
-        });
-        return {
-          ...result,
-          options: result.options.map((option) => ({
-            ...option,
-            uuid: option.customer_uuid,
-            name: option.customer_name,
-          })),
-        };
-      }}
+    <AsyncSelect
+      placeholder={translate('Select organization...')}
+      loadOptions={providerAutocomplete}
       defaultOptions
-      getOptionValue={(option) => option.uuid}
-      getOptionLabel={(option) => option.name}
+      getOptionValue={(option) => option.customer_uuid}
+      getOptionLabel={(option) => option.customer_name}
       value={fieldProps.input.value}
       onChange={(value) => fieldProps.input.onChange(value)}
-      noOptionsMessage={() =>
-        props.noOptionsMessage || translate('No organizations')
-      }
+      noOptionsMessage={() => translate('No organizations')}
       isClearable={true}
-      {...props.reactSelectProps}
+      variant="tableFilter"
     />
   );
 
-  return (
-    <Field
-      name={props.name || 'organization'}
-      validate={props.validator as any}
-      component={renderComponent}
-    />
-  );
+  return <Field name="organization" component={renderComponent} />;
 };

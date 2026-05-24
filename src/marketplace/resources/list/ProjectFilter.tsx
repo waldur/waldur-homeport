@@ -1,12 +1,11 @@
 import { FactoryIcon } from '@phosphor-icons/react';
 import { FieldValidator } from 'final-form';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { projectAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -14,7 +13,7 @@ interface ProjectFilterProps {
   customer_uuid?: string;
   placeholder?: string;
   isDisabled?: boolean;
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
   validator?: FieldValidator<any>;
 }
 
@@ -35,13 +34,16 @@ const noOptionsMessage = () => translate('No projects');
 
 export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => {
   const { placeholder, customer_uuid, isDisabled, reactSelectProps } = props;
+  const loadProjects = useMemo(
+    () => projectAutocomplete(customer_uuid),
+    [customer_uuid],
+  );
+
   const renderField = useCallback(
     (fieldProps) => (
-      <AsyncPaginate
+      <AsyncSelect
         placeholder={placeholder || translate('Select project...')}
-        loadOptions={(query, prevOptions, { page }) =>
-          projectAutocomplete(customer_uuid, query, prevOptions, page)
-        }
+        loadOptions={loadProjects}
         defaultOptions
         getOptionValue={getOptionValue}
         getOptionLabel={getOptionLabel as any}

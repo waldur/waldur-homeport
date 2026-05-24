@@ -1,13 +1,11 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import {
   openstackNetworkRbacPoliciesCreate,
   openstackTenantsList,
   PolicyTypeEnum,
 } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -38,6 +36,15 @@ export const ShareNetworkDialog: FC<ActionDialogProps> = ({
     refetch: refetch,
   });
 
+  const tenantLoader = useMemo(
+    () =>
+      createLoadOptions(openstackTenantsList, 'name', {
+        service_settings_uuid: resource.service_settings_uuid,
+        field: ['uuid', 'name', 'url'],
+      }),
+    [resource.service_settings_uuid],
+  );
+
   return (
     <ResourceActionDialog
       dialogTitle={translate('Share {name} network', { name: resource.name })}
@@ -48,22 +55,7 @@ export const ShareNetworkDialog: FC<ActionDialogProps> = ({
           name: 'target_tenant',
           label: translate('Tenant'),
           type: 'async_select',
-          loadOptions: async (query: string, prevOptions, { page }) => {
-            const response = await openstackTenantsList({
-              query: {
-                name: query,
-                service_settings_uuid: resource.service_settings_uuid,
-                field: ['uuid', 'name', 'url'],
-                page: page,
-                page_size: ENV.pageSize,
-              },
-            });
-            return returnReactSelectAsyncPaginateObject(
-              parseSelectData(response),
-              prevOptions,
-              page,
-            );
-          },
+          loadOptions: tenantLoader,
           getOptionLabel: (option) => option.name,
           getOptionValue: (option) => option.url,
         },

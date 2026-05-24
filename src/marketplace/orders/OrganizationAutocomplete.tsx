@@ -1,9 +1,8 @@
 import { FieldValidator } from 'final-form';
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, useCallback, useMemo } from 'react';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -13,16 +12,10 @@ interface OrganizationAutocompleteProps extends FormField {
   label?: string;
   placeholder?: string;
   noOptionsMessage?: string;
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
   validator?: FieldValidator<any>;
   onChange?(value: any): void;
 }
-
-const loadOptions = (query, prevOptions, { page }) =>
-  organizationAutocomplete(query, prevOptions, page, {
-    field: ['name', 'uuid', 'abbreviation'],
-    o: 'name',
-  });
 
 const getOptionValue = (option) => option.uuid;
 const getOptionLabel = (option) => option.name;
@@ -30,9 +23,17 @@ const getOptionLabel = (option) => option.name;
 export const OrganizationAutocomplete: FunctionComponent<
   OrganizationAutocompleteProps
 > = (props) => {
+  const loadOptions = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'uuid', 'abbreviation'],
+        o: 'name',
+      }),
+    [],
+  );
   // The Field `component` prop must be a stable reference. An inline
   // arrow here would be a fresh function on every parent render, causing
-  // to unmount and re-mount the underlying AsyncPaginate
+  // to unmount and re-mount the underlying AsyncSelect
   // each time — destroying focus, ongoing API calls, and the inner
   // `.metronic-select__control` DOM node. useCallback fixes this; props
   // that the inner closure depends on are listed in the deps array.
@@ -43,7 +44,7 @@ export const OrganizationAutocomplete: FunctionComponent<
 
   const renderField = useCallback(
     (fieldProps) => (
-      <AsyncPaginate
+      <AsyncSelect
         placeholder={placeholder}
         loadOptions={loadOptions}
         defaultOptions

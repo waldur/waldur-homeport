@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 import { SupportIssuesListData } from 'waldur-js-client';
 
-import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
@@ -48,7 +48,7 @@ export const SupportIssuesFilter: FunctionComponent<{}> = () => (
           getOptionValue={(option: StatusOption) => String(option.value)}
           getOptionLabel={(option: StatusOption) => option.label}
           isClearable={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
         />
       )}
     />

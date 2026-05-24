@@ -1,9 +1,9 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
 import { required } from '@/core/validators';
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { ProjectCreateButton } from '@/project/create/ProjectCreateButton';
@@ -16,13 +16,13 @@ const ProjectSelect = ({ input }) => {
   const dispatch = useDispatch();
   const { customer } = useOrderFormData();
 
-  const loadOptions = useCallback(
-    (query, prevOptions, { page }) =>
-      projectAutocomplete(customer.uuid, query, prevOptions, page, {
+  const loadOptions = useMemo(
+    () =>
+      projectAutocomplete(customer?.uuid, {
         // UUID is used in suggest name API request
         field: ['name', 'url', 'uuid', 'end_date'],
       }),
-    [customer],
+    [customer?.uuid],
   );
 
   const onChange = useCallback(
@@ -34,7 +34,7 @@ const ProjectSelect = ({ input }) => {
   );
 
   return (
-    <AsyncPaginate
+    <AsyncSelect
       placeholder={
         customer
           ? translate('Select project...')

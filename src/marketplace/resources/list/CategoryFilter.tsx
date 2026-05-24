@@ -1,35 +1,33 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Field } from 'react-final-form';
-import { Props as SelectProps } from 'react-select';
 import { Project } from 'waldur-js-client';
 
-import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { categoryAutocomplete } from '@/marketplace/common/autocompletes';
 import { Customer } from '@/workspace/types';
 
 export const CategoryFilter: React.FC<{
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
   project?: Project;
   customer?: Customer;
 }> = (props) => {
+  const loadCategories = useMemo(
+    () =>
+      categoryAutocomplete({
+        resource_customer_uuid: props.customer?.uuid,
+        resource_project_uuid: props.project?.uuid,
+      }),
+    [props.customer?.uuid, props.project?.uuid],
+  );
+
   return (
     <Field
       name="category"
       component={(fieldProps) => (
-        <AsyncPaginate
+        <AsyncSelect
           placeholder={translate('Select category...')}
-          loadOptions={(query: string, prevOptions, { page }) =>
-            categoryAutocomplete(
-              query,
-              prevOptions,
-              { page },
-              {
-                resource_customer_uuid: props.customer?.uuid,
-                resource_project_uuid: props.project?.uuid,
-              },
-            )
-          }
+          loadOptions={loadCategories}
           defaultOptions
           getOptionValue={(option) => option.uuid}
           getOptionLabel={(option) => option.title}
@@ -37,7 +35,7 @@ export const CategoryFilter: React.FC<{
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No categories')}
           isClearable={true}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
           {...props.reactSelectProps}
         />
       )}

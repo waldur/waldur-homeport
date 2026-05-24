@@ -17,7 +17,7 @@ vi.mock('waldur-js-client', async (importOriginal) => {
 });
 
 // Mock Select to avoid react-select issues in tests
-vi.mock('@/form/themed-select', async (importOriginal) => {
+vi.mock('@/form/select', async (importOriginal) => {
   const actual = await importOriginal<any>();
   const MockSelect = ({ name, value, onChange, instanceId, options }) => (
     <select

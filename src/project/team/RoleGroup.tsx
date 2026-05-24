@@ -3,7 +3,7 @@ import { Field } from 'react-final-form';
 import { OptionProps, components } from 'react-select';
 
 import { required } from '@/core/validators';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { Role, RoleType } from '@/permissions/types';

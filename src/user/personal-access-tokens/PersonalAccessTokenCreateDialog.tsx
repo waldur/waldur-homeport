@@ -14,7 +14,7 @@ import { PermissionOptions } from '@/administration/roles/PermissionOptions';
 import { lazyComponent } from '@/core/lazyComponent';
 import { required } from '@/core/validators';
 import { DateField } from '@/form/DateField';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 import { StringField } from '@/form/StringField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';

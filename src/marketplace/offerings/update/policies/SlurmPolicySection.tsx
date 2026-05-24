@@ -32,7 +32,7 @@ import {
 } from '@/customer/cost-policies/utils';
 import { NumberField, SelectField, StringField, SubmitButton } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { MultiSelectValue } from '@/form/themed-select';
+import { MultiSelectValue } from '@/form/select';
 import { translate } from '@/i18n';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
 import { ComponentLimitsField } from '@/marketplace/offerings/details/policies/ComponentLimitsField';

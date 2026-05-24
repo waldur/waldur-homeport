@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { SelectField } from '@/form/SelectField';
+import { SelectField } from '@/form/select/SelectField';
 
 import { getBillingPeriods } from './constants';
 

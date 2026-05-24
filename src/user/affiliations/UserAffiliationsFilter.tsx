@@ -4,7 +4,6 @@ import { Field } from 'react-final-form';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { StringField } from '@/form';
-import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { InvitationRoleFilter } from '@/invitations/InvitationRoleFilter';
 import { InvitationScopeTypeFilter } from '@/invitations/InvitationScopeTypeFilter';
@@ -35,7 +34,7 @@ export const UserAffiliationsFilter: FC = () => {
         <Field
           name="scope_name"
           component={StringField}
-          {...REACT_SELECT_TABLE_FILTER}
+          variant="tableFilter"
           placeholder={translate('Enter scope name')}
         />
       </TableFilterItem>

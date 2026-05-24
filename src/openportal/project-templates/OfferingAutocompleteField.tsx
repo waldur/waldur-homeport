@@ -1,7 +1,6 @@
-import { debounce } from 'lodash-es';
-import { FunctionComponent, useCallback, useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
@@ -25,36 +24,13 @@ export const OfferingAutocompleteField: FunctionComponent<
   isMulti,
   debounceMs = 1000,
 }) => {
-  const debouncedAutocomplete = useMemo(
-    () =>
-      debounce(
-        (query: string, prevOptions: any, currentPage: number, resolve) => {
-          providerOfferingsAutocomplete(query, prevOptions, currentPage).then(
-            resolve,
-          );
-        },
-        debounceMs,
-      ),
-    [debounceMs],
-  );
-
-  const loadOptions = useCallback(
-    (
-      query: string,
-      prevOptions: any,
-      { currentPage }: { currentPage: number },
-    ) => {
-      return new Promise((resolve) => {
-        debouncedAutocomplete(query, prevOptions, currentPage, resolve);
-      });
-    },
-    [debouncedAutocomplete],
-  );
+  const loadOfferings = useMemo(() => providerOfferingsAutocomplete(), []);
 
   return (
-    <AsyncPaginate
+    <AsyncSelect
       placeholder={placeholder || translate('Select offering...')}
-      loadOptions={loadOptions}
+      loadOptions={loadOfferings}
+      debounceTimeout={debounceMs}
       defaultOptions
       getOptionValue={(option) => option.uuid}
       getOptionLabel={(option) => option.name}

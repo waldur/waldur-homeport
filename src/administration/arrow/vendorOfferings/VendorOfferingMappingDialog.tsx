@@ -8,7 +8,7 @@ import {
 
 import { required } from '@/core/validators';
 import { FormGroup, SubmitButton } from '@/form';
-import { Select } from '@/form/AsyncSelectField';
+import { AsyncSelect as Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -54,6 +54,8 @@ export const VendorOfferingMappingDialog: FC<
         : undefined,
     [isEdit, mapping],
   );
+
+  const loadOfferings = useMemo(() => publicOfferingsAutocomplete(), []);
 
   const submitMutation = useManagedMutation<any, any, MappingFormData>({
     mutationFn: (data) => {
@@ -137,7 +139,7 @@ export const VendorOfferingMappingDialog: FC<
                 validate={required}
               >
                 <Select
-                  loadOptions={publicOfferingsAutocomplete}
+                  loadOptions={loadOfferings}
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.uuid}
                   defaultOptions={

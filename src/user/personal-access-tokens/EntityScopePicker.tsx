@@ -1,6 +1,6 @@
 import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 
-import { AsyncPaginate } from '@/form/themed-select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 
 import { ENTITY_LOADERS } from './entityFetchers';
@@ -42,7 +42,7 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
 
   if (!loadOptions) {
     return (
-      <AsyncPaginate
+      <AsyncSelect
         isDisabled
         placeholder={translate('Pick a type first')}
         loadOptions={() => Promise.resolve({ options: [], hasMore: false })}
@@ -51,7 +51,7 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
   }
 
   return (
-    <AsyncPaginate
+    <AsyncSelect
       // Force remount when `type` changes so the cached options are dropped.
       key={type}
       value={value}

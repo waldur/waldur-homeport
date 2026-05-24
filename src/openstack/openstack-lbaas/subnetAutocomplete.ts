@@ -1,25 +1,10 @@
 import { openstackSubnetsList } from 'waldur-js-client';
 
-import { parseSelectData } from '@/core/api';
-import { ENV } from '@/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { createLoadOptions } from '@/form/select';
 
-export const subnetAutocomplete =
-  (tenantUuid: string) =>
-  async (query: string, prevOptions, { page }) => {
-    const response = await openstackSubnetsList({
-      query: {
-        name: query,
-        tenant_uuid: tenantUuid,
-        state: ['OK'],
-        page: page,
-        page_size: ENV.pageSize,
-        field: ['uuid', 'name', 'backend_id', 'cidr', 'network_name'],
-      },
-    });
-    return returnReactSelectAsyncPaginateObject(
-      parseSelectData(response),
-      prevOptions,
-      page,
-    );
-  };
+export const subnetAutocomplete = (tenantUuid: string) =>
+  createLoadOptions(openstackSubnetsList, 'name', {
+    tenant_uuid: tenantUuid,
+    state: ['OK'],
+    field: ['uuid', 'name', 'backend_id', 'cidr', 'network_name'],
+  });

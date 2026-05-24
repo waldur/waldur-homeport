@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { FormLabel } from 'react-bootstrap';
 
 import {
@@ -7,7 +8,7 @@ import {
   loadSizeOptions,
 } from '@/azure/vm/utils';
 import { required } from '@/core/validators';
-import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -17,6 +18,32 @@ export const FormHardwareStep = (props: FormStepProps) => {
   const { attributes = {} } = useOrderFormData();
   const location = attributes.location;
   const zone = attributes.availability_zone;
+
+  const imageLoader = useMemo(
+    () =>
+      location
+        ? loadImageOptions(props.offering.scope_uuid, location.uuid)
+        : () =>
+            Promise.resolve({
+              options: [],
+              hasMore: false,
+              additional: { page: 1 },
+            }),
+    [location, props.offering.scope_uuid],
+  );
+
+  const sizeLoader = useMemo(
+    () =>
+      location && zone
+        ? loadSizeOptions(props.offering.scope_uuid, location.uuid, zone.value)
+        : () =>
+            Promise.resolve({
+              options: [],
+              hasMore: false,
+              additional: { page: 1 },
+            }),
+    [location, zone, props.offering.scope_uuid],
+  );
 
   return (
     <VStepperFormStepCard
@@ -31,21 +58,7 @@ export const FormHardwareStep = (props: FormStepProps) => {
           key={location?.uuid}
           name="attributes.image"
           validate={required}
-          loadOptions={(query, prevOptions, currentPage) =>
-            location
-              ? loadImageOptions(
-                  props.offering.scope_uuid,
-                  location.uuid,
-                  query,
-                  prevOptions,
-                  currentPage,
-                )
-              : Promise.resolve({
-                  options: [],
-                  hasMore: false,
-                  additional: { page: 1 },
-                })
-          }
+          loadOptions={imageLoader}
           getOptionLabel={getImageLabel}
           isDisabled={!location}
           noOptionsMessage={() =>
@@ -63,22 +76,7 @@ export const FormHardwareStep = (props: FormStepProps) => {
           name="attributes.size"
           validate={required}
           isDisabled={!location || !zone}
-          loadOptions={(query, prevOptions, currentPage) =>
-            location && zone
-              ? loadSizeOptions(
-                  props.offering.scope_uuid,
-                  location.uuid,
-                  zone.value,
-                  query,
-                  prevOptions,
-                  currentPage,
-                )
-              : Promise.resolve({
-                  options: [],
-                  hasMore: false,
-                  additional: { page: 1 },
-                })
-          }
+          loadOptions={sizeLoader}
           getOptionLabel={getSizeLabel}
           noOptionsMessage={() =>
             !location || !zone

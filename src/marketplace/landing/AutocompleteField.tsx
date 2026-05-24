@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
-import { components, Props as SelectProps } from 'react-select';
+import { components } from 'react-select';
 
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import {
-  AsyncPaginate,
+  AsyncSelect,
   FilterSelectClearIndicator,
   FilterSelectControl,
-} from '@/form/themed-select';
+} from '@/form/select';
 
 const renderIcon = (src: string, imgStyle: any) =>
   src ? (
@@ -64,13 +64,13 @@ interface AutocompleteFieldProps {
   onChange: (offeringId: string) => void;
   value?: any;
   noOptionsMessage?: (message) => string;
-  reactSelectProps?: Partial<SelectProps>;
+  reactSelectProps?: any;
 }
 
 export const AutocompleteField: FunctionComponent<AutocompleteFieldProps> = (
   props,
 ) => (
-  <AsyncPaginate
+  <AsyncSelect
     placeholder={props.placeholder}
     loadOptions={props.loadOfferings}
     defaultOptions

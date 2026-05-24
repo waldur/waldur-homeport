@@ -4,7 +4,7 @@ import { OfferingComponent } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { InputField } from '@/form/InputField';
-import { Select } from '@/form/themed-select';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 
 import { FormGroup } from '../../FormGroup';
