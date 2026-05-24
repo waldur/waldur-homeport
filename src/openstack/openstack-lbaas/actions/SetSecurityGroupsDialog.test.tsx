@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
@@ -71,10 +72,17 @@ describe('SetSecurityGroupsDialog', () => {
   });
 
   it('renders correctly and loads options', async () => {
+    const queryClient = new QueryClient({
+      defaultOptions: {
+        queries: { retry: false },
+      },
+    });
     render(
-      <SetSecurityGroupsDialog
-        resolve={{ resource: mockResource, refetch: vi.fn() }}
-      />,
+      <QueryClientProvider client={queryClient}>
+        <SetSecurityGroupsDialog
+          resolve={{ resource: mockResource, refetch: vi.fn() }}
+        />
+      </QueryClientProvider>,
     );
 
     expect(
@@ -90,6 +98,8 @@ describe('SetSecurityGroupsDialog', () => {
 
     // We don't need to check SelectField internal behavior deeply if we trust it,
     // but we can check if it's rendered.
-    expect(screen.getByText('Security groups')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText('Security groups')).toBeInTheDocument(),
+    );
   });
 });

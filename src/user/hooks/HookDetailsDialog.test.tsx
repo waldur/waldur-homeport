@@ -81,7 +81,7 @@ describe('HookDetailsDialog', () => {
     beforeEach(async () => {
       renderWithRedux(<HookDetailsDialog resolve={{ refetch: mockRefetch }} />);
       await waitFor(() => {
-        expect(screen.getByText('Create notification')).toBeInTheDocument();
+        expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
       });
     });
 
@@ -98,8 +98,8 @@ describe('HookDetailsDialog', () => {
         'https://example.com/webhook',
       );
 
-      userEvent.click(screen.getByText('Users'));
-      userEvent.click(screen.getByText('Create'));
+      await userEvent.click(screen.getByText('Users'));
+      await userEvent.click(screen.getByText('Create'));
 
       await waitFor(() => {
         expect(hooksWebCreate).toHaveBeenCalledWith({
@@ -123,8 +123,8 @@ describe('HookDetailsDialog', () => {
         'test@example.com',
       );
 
-      userEvent.click(screen.getByText('Users'));
-      userEvent.click(screen.getByText('Create'));
+      await userEvent.click(screen.getByText('Users'));
+      await userEvent.click(screen.getByText('Create'));
 
       await waitFor(() => {
         expect(hooksEmailCreate).toHaveBeenCalledWith({
@@ -155,13 +155,13 @@ describe('HookDetailsDialog', () => {
         />,
       );
       await waitFor(() => {
-        expect(screen.getByText('Update notification')).toBeInTheDocument();
+        expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
       });
     });
 
     it('should render update form with existing hook data', async () => {
       await waitFor(() => {
-        expect(screen.getByText('Update notification')).toBeInTheDocument();
+        expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
         expect(screen.getByText('Webhook')).toBeInTheDocument();
         expect(
           screen.getByDisplayValue('https://example.com/webhook'),

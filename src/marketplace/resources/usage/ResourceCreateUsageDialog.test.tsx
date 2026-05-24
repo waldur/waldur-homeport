@@ -57,7 +57,12 @@ const mockData = {
 
 const renderDialog = (props) => {
   const store = createActionStore();
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
   render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
@@ -82,12 +87,12 @@ describe('ResourceCreateUsageDialog', () => {
 
   it('renders error message when API call fails', async () => {
     vi.mocked(getProviderUsageComponents).mockRejectedValue('error');
-    await act(async () => {
-      await renderDialog(props);
+    renderDialog(props);
+    await waitFor(() => {
+      expect(
+        screen.getByText('Unable to load offering details.'),
+      ).toBeInTheDocument();
     });
-    expect(
-      screen.getByText('Unable to load offering details.'),
-    ).toBeInTheDocument();
   });
 
   it('renders message when there are no components', async () => {
@@ -95,12 +100,12 @@ describe('ResourceCreateUsageDialog', () => {
       components: [],
       periods: [],
     });
-    await act(async () => {
-      await renderDialog(props);
+    renderDialog(props);
+    await waitFor(() => {
+      expect(
+        screen.getByText('Offering does not have any usage-based components.'),
+      ).toBeInTheDocument();
     });
-    expect(
-      screen.getByText('Offering does not have any usage-based components.'),
-    ).toBeInTheDocument();
   });
 
   it('displays dialog title with resource name', async () => {
@@ -108,18 +113,19 @@ describe('ResourceCreateUsageDialog', () => {
       components: [],
       periods: [],
     });
-    await act(async () => {
-      await renderDialog(props);
+    renderDialog(props);
+    await waitFor(() => {
+      expect(
+        screen.getByText(`${translate('Resource usage')} "Test resource"`),
+      ).toBeInTheDocument();
     });
-    expect(
-      screen.getByText(`${translate('Resource usage')} "Test resource"`),
-    ).toBeInTheDocument();
   });
 
   it('displays client organization name', async () => {
     vi.mocked(getProviderUsageComponents).mockResolvedValue(mockData);
-    await act(async () => {
-      await renderDialog(props);
+    renderDialog(props);
+    await waitFor(() => {
+      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
     });
     expect(screen.getByText('Client organization')).toBeInTheDocument();
     expect(
@@ -132,8 +138,9 @@ describe('ResourceCreateUsageDialog', () => {
     const submitSpy = vi.mocked(marketplaceComponentUsagesSetUsage);
     submitSpy.mockResolvedValue({} as any);
 
-    await act(async () => {
-      await renderDialog(props);
+    renderDialog(props);
+    await waitFor(() => {
+      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
     });
 
     const amountInput = screen.getByPlaceholderText('Amount *');

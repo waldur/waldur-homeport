@@ -77,7 +77,12 @@ const mockFetchedData = {
 
 const renderDialog = () => {
   const store = createActionStore();
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
   return render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
