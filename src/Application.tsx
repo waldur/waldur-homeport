@@ -1,7 +1,7 @@
 import { ErrorBoundary } from '@sentry/react';
-import { QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { QueryClientProvider, useSuspenseQuery } from '@tanstack/react-query';
 import { UIRouter, UIView } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, Suspense } from 'react';
 import { Provider } from 'react-redux';
 
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
@@ -24,41 +24,46 @@ import { ThemeProvider } from './theme/ThemeProvider';
 
 states.forEach((state) => router.stateRegistry.register(state));
 
-export const Application: FunctionComponent = () => {
-  const {
-    isLoading: loading,
-    error,
-    data: value,
-  } = useQuery({
+const ApplicationInner: FunctionComponent = () => {
+  useSuspenseQuery({
     queryKey: ['Application'],
     queryFn: loadConfig,
   });
-  if (!value) {
-    return <LoadingScreen loading={loading} error={error} />;
-  }
 
   return (
     <ErrorBoundary fallback={ErrorMessage}>
       <UIRouter router={router}>
-        <QueryClientProvider client={queryClient}>
-          <Provider store={store}>
-            <LayoutProvider>
-              <ThemeProvider>
-                <ThreadProvider>
-                  <NotificationContainer />
-                  <ModalProvider>
-                    <ModalRoot />
-                    <ConfirmModalRoot />
-                    <DrawerRoot />
-                    <UIView />
-                  </ModalProvider>
-                  <MasterInit />
-                </ThreadProvider>
-              </ThemeProvider>
-            </LayoutProvider>
-          </Provider>
-        </QueryClientProvider>
+        <Provider store={store}>
+          <LayoutProvider>
+            <ThemeProvider>
+              <ThreadProvider>
+                <NotificationContainer />
+                <ModalProvider>
+                  <ModalRoot />
+                  <ConfirmModalRoot />
+                  <DrawerRoot />
+                  <UIView />
+                </ModalProvider>
+                <MasterInit />
+              </ThreadProvider>
+            </ThemeProvider>
+          </LayoutProvider>
+        </Provider>
       </UIRouter>
     </ErrorBoundary>
   );
 };
+
+export const Application: FunctionComponent = () => (
+  <QueryClientProvider client={queryClient}>
+    <ErrorBoundary
+      fallback={({ error }) => (
+        <LoadingScreen loading={false} error={error as Error} />
+      )}
+    >
+      <Suspense fallback={<LoadingScreen loading={true} />}>
+        <ApplicationInner />
+      </Suspense>
+    </ErrorBoundary>
+  </QueryClientProvider>
+);
