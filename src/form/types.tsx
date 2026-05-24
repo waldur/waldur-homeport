@@ -1,20 +1,12 @@
 import { FieldValidator } from 'final-form';
 import React, { ReactNode } from 'react';
-import { FieldInputProps, FieldMetaState } from 'react-final-form';
+import { FieldProps, FieldRenderProps } from 'react-final-form';
 
-export type Normalizer = (
-  value: any,
-  previousValue?: any,
-  allValues?: any,
-  previousAllValues?: any,
-) => any;
-export type Formatter = (value: any, name?: string) => any;
-export type Parser = (value: any, name?: string) => any;
+export type Formatter = NonNullable<FieldProps<any, any>['format']>;
+export type Parser = NonNullable<FieldProps<any, any>['parse']>;
 
-export interface FormField {
+export interface FormField extends Partial<FieldRenderProps<any, any>> {
   name?: string;
-  input?: FieldInputProps<any, any>;
-  meta?: FieldMetaState<any>;
   required?: boolean;
   label?: ReactNode;
   description?: ReactNode;
@@ -23,7 +15,6 @@ export interface FormField {
   isInvalid?: boolean;
   disabled?: boolean;
   hideLabel?: boolean;
-  normalize?: Normalizer;
   format?: Formatter | null;
   parse?: Parser;
 
