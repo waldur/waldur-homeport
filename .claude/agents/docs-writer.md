@@ -153,5 +153,4 @@ When updating existing documentation:
 - Don't create documentation without explicit user request
 - Don't document obvious React patterns
 - Don't duplicate existing documentation in `docs/`
-- Don't use outdated Redux Form examples
 - Don't create backend API documentation (this is frontend-focused)

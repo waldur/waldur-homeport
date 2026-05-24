@@ -36,7 +36,7 @@ The generation process is driven by:
 The script produces `src/table/generated/{OperationId}Filter.tsx` files. Each file exports:
 
 - `Pure{Name}Filter`: The presentation component.
-- `{Name}Filter`: The connected component (wrapped in `reduxForm`).
+- `{Name}Filter`: The filter component using `react-final-form`.
 - `{Name}FilterFormData`: TypeScript interface for form values.
 - `{Name}FilterProps`: TypeScript interface for component props.
 - `select{Name}Filter`: A selector to transform form values into API query parameters.

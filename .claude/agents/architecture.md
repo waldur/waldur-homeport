@@ -108,7 +108,6 @@ const { data, isLoading, error, refetch } = useQuery({
 - Don't add new Redux actions/reducers
 - Don't extend existing Redux patterns
 - Don't create new table store implementations
-- Don't use Redux Form (use React Final Form instead)
 
 ### 🔧 Legacy Maintenance
 - Understand Redux for bug fixes only

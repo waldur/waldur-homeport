@@ -310,7 +310,7 @@ The **BaseDeployPage** component (located at `src/marketplace/deploy/DeployPage.
 BaseDeployPage handles:
 
 - **Step Management**: Progressive form steps with validation and completion tracking
-- **State Management**: Integration with Redux for form state and user selections
+- **State Management**: Integration with React Final Form for form state and user selections
 - **Form Validation**: Real-time validation and error display
 - **Layout Management**: Sidebar layout with progress tracking
 - **API Integration**: Order submission and error handling
@@ -448,7 +448,7 @@ The BaseDeployPage component represents a well-architected, reusable foundation 
 
 ## Type-Specific Fields in React Final Form
 
-The application uses a sophisticated type-based field selection system for creating dynamic Redux forms, exemplified by the `SupportSettingsForm.tsx` component.
+The application uses a sophisticated type-based field selection system for creating dynamic React Final Form forms, exemplified by the `SupportSettingsForm.tsx` component.
 
 ### Core Pattern: Dynamic Field Selection
 

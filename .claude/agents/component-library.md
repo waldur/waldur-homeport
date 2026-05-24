@@ -56,7 +56,7 @@ Central foundation for marketplace offering deployment flows:
 
 ### Key Features
 - **Step Management**: Progressive validation and completion tracking
-- **State Integration**: Redux form state and user selections
+- **State Integration**: React Final Form state and user selections
 - **Layout Management**: Sidebar with progress tracking
 - **API Integration**: Order submission and error handling
 

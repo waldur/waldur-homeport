@@ -1,56 +1,40 @@
-# Form Migration Agent
+# Form Agent
 
-Use this agent for all form-related tasks, including migrating Redux Form components to React Final Form, understanding form implementation patterns, and form architecture best practices.
+Use this agent for all form-related tasks, understanding form implementation patterns, and form architecture best practices using React Final Form.
 
 ## Specialization
 
 This agent specializes in:
-- **Form Migration**: Redux Form to React Final Form transitions
-- **Form Patterns**: 200+ form components across Redux Form, React Final Form, VStepperForm
+- **React Final Form**: Modern form implementation standard for Waldur
+- **Form Patterns**: 200+ form components using React Final Form and VStepperForm
 - **Modal Form Architecture**: Context boundaries and component structure
-- **FormGroup Components**: Usage patterns and refactoring strategies
+- **FormGroup Components**: Usage patterns and field organization
 - **Validation Patterns**: Field validation, error handling, user experience
-- **Array Fields**: FieldArray migration and complex form handling
-- **Form Cleanup**: Post-migration verification and quality assurance
+- **Array Fields**: FieldArray usage and complex form handling
+- **Form Optimization**: Performance and quality assurance
 
 ## When to Use
 
 Use this agent when:
-- Migrating Redux Form components to React Final Form
+- Implementing new form components using React Final Form
 - Understanding form implementation patterns and architecture
 - Debugging form validation and error handling issues
 - Working with complex multi-step forms (VStepperForm)
 - Implementing FormGroup components and field organization
 - Handling modal forms with context boundary issues
 - Creating form field validation and submission patterns
-- Performing post-migration cleanup and verification
 
 ## Form Implementation Distribution
 
 | Type | Count | Status | Use Case |
 |------|-------|--------|----------|
-| **Redux Form** | ~119 forms (59.5%) | Legacy | Being phased out |
-| **React Final Form** | ~61 forms (30.5%) | Modern | Preferred for new development |
+| **React Final Form** | ~180 forms (90%) | Modern | Primary implementation standard |
 | **VStepperForm** | ~20 forms (10%) | Specialized | Complex deployments |
 
-## Migration Patterns
+## Implementation Patterns
 
-### Redux Form → React Final Form
+### React Final Form
 
-**Before (Redux Form)**:
-```typescript
-export const Component = reduxForm({ form: FORM_ID })(
-  ({ handleSubmit, submitting, invalid }) => (
-    <form onSubmit={handleSubmit(callback)}>
-      <FormContainer submitting={submitting}>
-        <Field component={StringField} name="name" />
-      </FormContainer>
-    </form>
-  )
-);
-```
-
-**After (React Final Form)**:
 ```typescript
 export const Component = ({ onSubmit }) => (
   <Form
@@ -63,12 +47,6 @@ export const Component = ({ onSubmit }) => (
   />
 );
 ```
-
-### Key Migration Changes
-1. **Form State**: Redux HOC → `<Form>` component
-2. **Initial Values**: `initialValues` prop instead of `useEffect` + `change`
-3. **Error Handling**: `useManagedMutation` hook (or `useNotify` directly) instead of Redux actions
-4. **Field Pattern**: Standard `<Field component={FieldType as any} />`
 
 ## Modal Form Architecture
 
@@ -99,7 +77,7 @@ React Final Form requires all form-related components within `<Form>` context:
 ## FormGroup Components
 
 ### Available FormGroup Types
-1. **`@/form/FormGroup`** - Redux Form wrapper with state management
+1. **`@/form/FormGroup`** - Common wrapper with state management
 2. **`@/marketplace/offerings/FormGroup`** - Simple wrapper for labels/help
 
 ### FormGroup Benefits
@@ -121,7 +99,7 @@ React Final Form requires all form-related components within `<Form>` context:
 
 ## Validation and Error Handling
 
-### Error Handling Migration
+### Error Handling
 
 **Best Practice:** For form submissions within modals, prefer using the declarative `useManagedMutation` hook to abstract away the try/catch logic, notifications, and modal closures:
 
@@ -137,12 +115,7 @@ const onSubmit = (values) => mutation.mutateAsync(values);
 
 For manual handling (e.g., when mapped fields should receive validation errors):
 ```typescript
-// Before: Redux Form SubmissionError
-if (e.response?.status === 400) {
-  throw new SubmissionError(e.response.data);
-}
-
-// After: React Final Form FORM_ERROR
+// React Final Form FORM_ERROR
 if (e.response?.status === 400) {
   return e.response.data;
 }
@@ -151,18 +124,9 @@ catch (e) {
 }
 ```
 
-## Array Field Migration
+## Array Fields
 
-### Redux Form to React Final Form Arrays
 ```typescript
-// Before: Redux Form FieldArray
-<FieldArray
-  name="items"
-  component={ItemsList}
-  validate={required}
-/>
-
-// After: React Final Form FieldArray
 <Form mutators={{ ...arrayMutators }}>
   <FieldArray name="items" validate={required}>
     {(props) => <ItemsList {...props} />}
@@ -170,21 +134,13 @@ catch (e) {
 </Form>
 ```
 
-## Post-Migration Cleanup
+## Quality Assurance
 
-### Essential Cleanup Commands
+### Essential Validation Commands
 1. **Unused Dependencies**: `yarn deps:unused`
 2. **Linting**: `yarn lint:check --max-warnings=0`
 3. **Type Check**: `yarn tsc --noEmit`
-4. **Tests**: `yarn test path/to/migration`
-
-### Cleanup Checklist
-- [ ] Remove unused Redux Form constants (FORM_ID)
-- [ ] Convert exported interfaces to internal if only used locally
-- [ ] Delete orphaned files from Redux Form implementation
-- [ ] Update import statements to remove unused imports
-- [ ] Verify form context boundaries in modals
-- [ ] Test form functionality and visual consistency
+4. **Tests**: `yarn test path/to/component`
 
 ## Best Practices
 
@@ -194,12 +150,6 @@ catch (e) {
 - **Type Imports**: `import { type ComponentUsage } from 'waldur-js-client'`
 
 ### Performance Benefits
-- **Local State**: React Final Form eliminates Redux store updates
+- **Local State**: React Final Form eliminates Redux store updates for forms
 - **Optimized Re-rendering**: Subscription-based updates
 - **Reduced Boilerplate**: Simpler API and less code
-
-### Migration Strategy
-1. **Legacy Maintenance**: Existing Redux Forms remain functional
-2. **New Development**: All new forms use React Final Form
-3. **Selective Migration**: Critical forms migrated first
-4. **Hybrid Support**: Common field components work with both systems
