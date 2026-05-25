@@ -22,6 +22,7 @@ import { RenewAllocationActionAction } from '../renew-allocation/RenewAllocation
 import { AdjustResourceDatesAction } from './AdjustResourceDatesAction';
 import { EditAction } from './EditAction';
 import { EditResourceEndDateByProviderAction } from './EditResourceEndDateByProviderAction';
+import { PlaygroundAction } from './PlaygroundAction';
 import { PullMarketplaceResourceAction } from './PullMarketplaceResourceAction';
 import { PullOrderAction } from './PullOrderAction';
 import { PullResourceAction } from './PullResourceAction';
@@ -32,6 +33,7 @@ import { VersionHistoryAction } from './VersionHistoryAction';
 
 export const ActionsList = [
   EditAction,
+  PlaygroundAction,
   MoveResourceAction,
   SubmitReportAction,
   ChangePlanAction,
@@ -51,6 +53,7 @@ export const ActionsList = [
 
 export const CustomerResourceActions = [
   EditAction,
+  PlaygroundAction,
   ChangePlanAction,
   ChangeLimitsAction,
   RenewAllocationActionAction,

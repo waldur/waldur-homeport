@@ -36,6 +36,11 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
         component: StringField,
       },
       {
+        label: translate('Expose inference playground'),
+        key: 'plugin_options.expose_inference_playground',
+        component: AwesomeCheckboxField,
+      },
+      {
         label: translate('Disabled resource actions'),
         key: 'plugin_options.disabled_resource_actions',
         component: SelectField,
