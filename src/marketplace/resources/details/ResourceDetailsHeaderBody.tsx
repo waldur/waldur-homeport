@@ -64,7 +64,10 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
       />
       <BackendIdField resource={resource} offering={offering} />
       <EndDateField resource={resource} />
-      <OfferingUserDetailsField offeringUser={offeringUser} />
+      <OfferingUserDetailsField
+        offeringUser={offeringUser}
+        resource={resource}
+      />
     </>
   );
 };
