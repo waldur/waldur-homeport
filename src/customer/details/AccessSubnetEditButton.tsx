@@ -14,7 +14,7 @@ export const AccessSubnetEditButton = ({
   refetch,
 }: AccessSubnetFormData) => (
   <EditModalButton
-    dialog={AccessSubnetForm as any}
+    dialog={AccessSubnetForm}
     row={row}
     buildResolve={(r) => ({ row: r, refetch })}
     size="lg"

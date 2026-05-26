@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { EventGroup } from '@/events/types';
-import { getUserContext } from '@/events/utils';
+import { getUserContext, UserContext } from '@/events/utils';
 import { formatJsxTemplate, translate } from '@/i18n';
 
 import { ResourcesEnum } from '../EventsEnums';
@@ -24,7 +24,7 @@ interface ModifiedRuleEntry {
   changed_fields: string[];
 }
 
-export interface RulesChangedContext {
+export interface RulesChangedContext extends UserContext {
   security_group_name: string;
   security_group_uuid?: string;
   added_count: number;
@@ -34,9 +34,6 @@ export interface RulesChangedContext {
   removed_rules: SecurityGroupRulePayload[];
   modified_rules: ModifiedRuleEntry[];
   trigger: 'user_action' | 'backend_sync';
-  user_uuid?: string;
-  user_full_name?: string;
-  user_username?: string;
 }
 
 /**
@@ -146,7 +143,7 @@ const formatSecurityGroupRulesChangedEvent = (event: RulesChangedContext) => {
     );
   }
 
-  const userContext = getUserContext(event as any);
+  const userContext = getUserContext(event);
   return translate(
     '{user_link} changed security group "{name}" rules: {summary}.',
     { ...userContext, name: event.security_group_name, summary },
@@ -163,7 +160,7 @@ interface AllowedAddressPair {
   mac_address: string | null;
 }
 
-export interface AllowedAddressPairsChangedContext {
+export interface AllowedAddressPairsChangedContext extends UserContext {
   port_name: string;
   added_count: number;
   removed_count: number;
@@ -172,9 +169,6 @@ export interface AllowedAddressPairsChangedContext {
   removed_pairs: AllowedAddressPair[];
   modified_pairs: { old: AllowedAddressPair; new: AllowedAddressPair }[];
   trigger: 'user_action';
-  user_uuid?: string;
-  user_full_name?: string;
-  user_username?: string;
 }
 
 const formatAllowedAddressPair = (pair: AllowedAddressPair) =>
@@ -273,7 +267,7 @@ const formatAllowedAddressPairsChangedEvent = (
       modified: event.modified_count,
     },
   );
-  const userContext = getUserContext(event as any);
+  const userContext = getUserContext(event);
   return translate(
     '{user_link} updated allowed address pairs on port "{port_name}": {summary}.',
     { ...userContext, port_name: event.port_name, summary },
@@ -319,7 +313,7 @@ export const OpenStackEvents: EventGroup = {
     {
       key: ResourcesEnum.openstack_security_group_rules_changed,
       title: translate('Security group "{security_group_name}" rules changed.'),
-      formatter: formatSecurityGroupRulesChangedEvent as any,
+      formatter: formatSecurityGroupRulesChangedEvent,
     },
     {
       key: ResourcesEnum.openstack_port_security_enabled,
@@ -334,7 +328,7 @@ export const OpenStackEvents: EventGroup = {
     {
       key: ResourcesEnum.openstack_port_allowed_address_pairs_changed,
       title: translate('Allowed address pairs on port "{port_name}" changed.'),
-      formatter: formatAllowedAddressPairsChangedEvent as any,
+      formatter: formatAllowedAddressPairsChangedEvent,
     },
     {
       key: ResourcesEnum.openstack_load_balancer_created,
