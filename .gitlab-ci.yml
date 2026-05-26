@@ -116,6 +116,10 @@ Run code duplication detection:
 Run unit tests:
   stage: test
   interruptible: true
+  variables:
+    # vitest --coverage runs close to Node's default ~4 GB old-space ceiling and
+    # OOMs when the build cache misses. Raise the heap for the test workers.
+    NODE_OPTIONS: "--max-old-space-size=8192"
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
