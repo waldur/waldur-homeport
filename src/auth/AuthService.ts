@@ -88,3 +88,8 @@ export function localLogout() {
   clearAuthCache();
   router.stateService.go('login');
 }
+
+export function explicitLogout() {
+  RedirectStorage.remove();
+  localLogout();
+}

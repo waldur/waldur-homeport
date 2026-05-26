@@ -19,7 +19,7 @@ export const AuthLogoutFailed: FunctionComponent = () => {
         <button
           className="text-btn"
           type="button"
-          onClick={AuthService.localLogout}
+          onClick={AuthService.explicitLogout}
         >
           <span className="svg-icon svg-icon-2">
             <SignOutIcon weight="bold" />

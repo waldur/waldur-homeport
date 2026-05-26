@@ -7,7 +7,7 @@ import * as AuthService from '../AuthService';
 
 export const AuthLogoutCompleted: FunctionComponent = () => {
   useEffect(() => {
-    AuthService.localLogout();
+    AuthService.explicitLogout();
   }, []);
   return (
     <div className="middle-box text-center">
