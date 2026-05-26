@@ -73,7 +73,7 @@ describe('SecurityGroupEditorDialog', () => {
 
   it('renders loading spinner while security groups are being loaded', async () => {
     vi.mocked(openstackSecurityGroupsList).mockReturnValue(
-      new Promise(() => {}),
+      new Promise(() => {}) as any,
     );
     renderDialog();
     expect(await screen.findByTestId('spinner')).toBeInTheDocument();

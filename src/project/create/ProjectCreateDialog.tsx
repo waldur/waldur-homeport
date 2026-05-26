@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import {
   AnswerSubmitRequest,
   KindEnum,
+  OecdFos2007CodeEnum,
   Project,
   projectCreditsCreate,
   projectsCreate,
@@ -92,7 +93,8 @@ export const ProjectCreateDialog = ({
               : undefined,
             customer: formData.customer.url,
             type: formData.type?.url,
-            oecd_fos_2007_code: formData.oecd_fos_2007_code?.value,
+            oecd_fos_2007_code: formData.oecd_fos_2007_code
+              ?.value as OecdFos2007CodeEnum,
             science_sub_domain: formData.science_sub_domain?.uuid,
             affiliation_uuid: formData.affiliation?.uuid,
             is_industry: formData.is_industry,
