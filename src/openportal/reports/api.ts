@@ -35,8 +35,6 @@ import { ProjectUsageReport } from './ProjectUsageReport';
 
 /** Extends the SDK Project type with OpenPortal-specific optional fields */
 export interface OpenPortalProject extends Project {
-  start_date?: string | null;
-  end_date?: string | null;
   is_expired?: boolean;
   is_in_grace_period?: boolean;
 }
