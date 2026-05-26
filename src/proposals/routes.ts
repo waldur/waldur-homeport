@@ -230,7 +230,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'calls-for-proposals-all-calls',
-    url: 'all-calls/?:offering_uuid/',
+    url: 'all-calls/?:offering_uuid&{state}',
     parent: 'calls-for-proposals',
     component: lazyComponent(() =>
       import('./PublicCallsPage').then((module) => ({

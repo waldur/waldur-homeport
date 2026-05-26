@@ -1,12 +1,10 @@
 import { FC } from 'react';
-import { Card, Table } from 'react-bootstrap';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
-import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 import { Call } from '@/proposals/types';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -16,110 +14,92 @@ interface CallGeneralSectionProps {
   call: Call;
   refetch(): void;
   loading: boolean;
+  isReadOnly?: boolean;
 }
 
 export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
-          <ValidationIcon value={props.call.description} />
-          <span className="me-2">{translate('General')}</span>
-          <RefreshButton refetch={props.refetch} loading={props.loading} />
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <Table bordered={true} hover={true} responsive={true}>
-          <tbody>
-            <tr>
-              <td className="col-md-3">{translate('Name')}</td>
-              <td className="col-md-9">{renderFieldOrDash(props.call.name)}</td>
-              <td className="row-actions">
-                <div>
-                  <EditGeneralInfoButton
-                    call={props.call}
-                    name="name"
-                    title={translate('Edit name')}
-                    refetch={props.refetch}
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="col-md-3">{translate('Description')}</td>
-              <td className="col-md-9">
-                {props.call.description ? (
-                  <SafeMarkdown text={props.call.description} />
-                ) : (
-                  'N/A'
-                )}
-              </td>
-              <td className="row-actions">
-                <div>
-                  <EditGeneralInfoButton
-                    call={props.call}
-                    name="description"
-                    title={translate('Edit description')}
-                    refetch={props.refetch}
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="col-md-3">{translate('Reference code')}</td>
-              <td className="col-md-9">
-                {renderFieldOrDash(props.call.reference_code)}
-              </td>
-              <td className="row-actions">
-                <div>
-                  <EditGeneralInfoButton
-                    call={props.call}
-                    name="reference_code"
-                    title={translate('Edit reference code')}
-                    refetch={props.refetch}
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="col-md-3">
-                {translate('Proposal slug template')}
-              </td>
-              <td className="col-md-9">
-                {renderFieldOrDash(props.call.proposal_slug_template)}
-              </td>
-              <td className="row-actions">
-                <div>
-                  <EditGeneralInfoButton
-                    call={props.call}
-                    name="proposal_slug_template"
-                    title={translate('Edit proposal slug template')}
-                    refetch={props.refetch}
-                  />
-                </div>
-              </td>
-            </tr>
-            {isFeatureVisible(MarketplaceFeatures.call_only) && (
-              <tr>
-                <td className="col-md-3">{translate('External URL')}</td>
-                <td className="col-md-9">
-                  {renderFieldOrDash(props.call.external_url)}
-                </td>
-                <td className="row-actions">
-                  <div>
-                    <EditGeneralInfoButton
-                      call={props.call}
-                      name="external_url"
-                      title={translate('Edit external URL')}
-                      refetch={props.refetch}
-                    />
-                  </div>
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-      </Card.Body>
-    </Card>
+    <FormTable.Card
+      title={translate('General')}
+      className="card-bordered"
+      refetch={props.refetch}
+      loading={props.loading}
+    >
+      <FormTable>
+        <FormTable.Item
+          label={translate('Name')}
+          value={renderFieldOrDash(props.call.name)}
+          actions={
+            <EditGeneralInfoButton
+              call={props.call}
+              name="name"
+              title={translate('Edit name')}
+              refetch={props.refetch}
+              disabled={props.isReadOnly}
+            />
+          }
+        />
+        <FormTable.Item
+          label={translate('Description')}
+          value={
+            props.call.description ? (
+              <SafeMarkdown text={props.call.description} />
+            ) : (
+              renderFieldOrDash(null)
+            )
+          }
+          actions={
+            <EditGeneralInfoButton
+              call={props.call}
+              name="description"
+              title={translate('Edit description')}
+              refetch={props.refetch}
+              disabled={props.isReadOnly}
+            />
+          }
+        />
+        <FormTable.Item
+          label={translate('Reference code')}
+          value={renderFieldOrDash(props.call.reference_code)}
+          actions={
+            <EditGeneralInfoButton
+              call={props.call}
+              name="reference_code"
+              title={translate('Edit reference code')}
+              refetch={props.refetch}
+              disabled={props.isReadOnly}
+            />
+          }
+        />
+        <FormTable.Item
+          label={translate('Proposal slug template')}
+          value={renderFieldOrDash(props.call.proposal_slug_template)}
+          actions={
+            <EditGeneralInfoButton
+              call={props.call}
+              name="proposal_slug_template"
+              title={translate('Edit proposal slug template')}
+              refetch={props.refetch}
+              disabled={props.isReadOnly}
+            />
+          }
+        />
+        {isFeatureVisible(MarketplaceFeatures.call_only) && (
+          <FormTable.Item
+            label={translate('External URL')}
+            value={renderFieldOrDash(props.call.external_url)}
+            actions={
+              <EditGeneralInfoButton
+                call={props.call}
+                name="external_url"
+                title={translate('Edit external URL')}
+                refetch={props.refetch}
+                disabled={props.isReadOnly}
+              />
+            }
+          />
+        )}
+      </FormTable>
+    </FormTable.Card>
   );
 };

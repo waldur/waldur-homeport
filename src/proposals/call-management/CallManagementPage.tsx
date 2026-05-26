@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
 import {
@@ -5,9 +7,15 @@ import {
   ProposalProtectedCallsListData,
 } from 'waldur-js-client';
 
+import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import {
+  buildCallTabs,
+  CALL_STATE_VARIANT,
+  fetchAllCallCounts,
+} from '@/proposals/call-tabs';
 import { Call } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import {
@@ -26,6 +34,7 @@ import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
 
 const CallManagementPageTable: FunctionComponent = () => {
+  const { params } = useCurrentStateAndParams();
   const customer = useCustomer();
   const { values } = useFormState();
   const filterValues = useMemo(
@@ -38,8 +47,25 @@ const CallManagementPageTable: FunctionComponent = () => {
     if (customer) {
       result.customer_uuid = customer.uuid;
     }
+    if (params.state) {
+      result.state = params.state;
+    }
     return result;
-  }, [customer, filterValues]);
+  }, [customer, filterValues, params.state]);
+
+  const { data: counts } = useQuery({
+    queryKey: ['callManagementTabCounts', customer?.uuid],
+    queryFn: () => {
+      const baseQuery: ProposalProtectedCallsListData['query'] = {};
+      if (customer) {
+        baseQuery.customer_uuid = customer.uuid;
+      }
+      return fetchAllCallCounts(proposalProtectedCallsList, baseQuery);
+    },
+    staleTime: 30_000,
+  });
+
+  const callTabs = useMemo(() => buildCallTabs(counts), [counts]);
 
   const tableProps = useTable({
     table: 'CallManagementList',
@@ -52,6 +78,7 @@ const CallManagementPageTable: FunctionComponent = () => {
     <Table<Call>
       {...tableProps}
       formId={ProposalPublicCallsFilterFormId}
+      tabs={callTabs}
       columns={[
         {
           title: translate('Name'),
@@ -63,7 +90,6 @@ const CallManagementPageTable: FunctionComponent = () => {
               label={row.name}
             />
           ),
-
           copyField: (row) => row.name,
         },
         {
@@ -74,7 +100,15 @@ const CallManagementPageTable: FunctionComponent = () => {
         {
           title: translate('State'),
           orderField: 'state',
-          render: ({ row }) => <>{formatCallState(row.state)}</>,
+          render: ({ row }) => (
+            <Badge
+              variant={CALL_STATE_VARIANT[row.state] || 'secondary'}
+              pill
+              outline
+            >
+              {formatCallState(row.state)}
+            </Badge>
+          ),
           filter: 'state',
           inlineFilter: (row) =>
             getCallStateOptions().filter((s) => s.value === row.state),

@@ -21,6 +21,7 @@ import { EditCOISettingButton } from './EditCOISettingButton';
 interface COISettingsSectionProps {
   call: Call;
   refetch: () => void;
+  isReadOnly?: boolean;
 }
 
 // Labels for proposal disclosure levels
@@ -214,7 +215,10 @@ const tabs = [
 
 const DEFAULT_COI_TAB = 'detection';
 
-export const COISettingsSection: FC<COISettingsSectionProps> = ({ call }) => {
+export const COISettingsSection: FC<COISettingsSectionProps> = ({
+  call,
+  isReadOnly,
+}) => {
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
 
@@ -300,6 +304,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({ call }) => {
                           name={row.key}
                           title={row.title}
                           refetch={refetch}
+                          disabled={isReadOnly}
                         />
                       }
                     />

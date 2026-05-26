@@ -23,6 +23,7 @@ import {
 interface MatchingSectionProps {
   call: Call;
   refetch: () => void;
+  isReadOnly?: boolean;
 }
 
 const DEFAULT_CONFIG: MatchingConfig = {
@@ -145,6 +146,7 @@ const DEFAULT_MATCHING_TAB = 'affinity';
 export const MatchingSection: FC<MatchingSectionProps> = ({
   call,
   refetch,
+  isReadOnly,
 }) => {
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
@@ -246,6 +248,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
                         name={row.key}
                         title={row.title}
                         refetch={handleRefetch}
+                        disabled={isReadOnly}
                       />
                     }
                   />
@@ -282,6 +285,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
                         name={row.key}
                         title={row.title}
                         refetch={handleRefetch}
+                        disabled={isReadOnly}
                       />
                     }
                   />
