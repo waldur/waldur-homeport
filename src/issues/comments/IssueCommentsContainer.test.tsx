@@ -96,7 +96,9 @@ describe('IssueCommentsContainer', () => {
   });
 
   it('renders loading spinner when loading with no data', () => {
-    vi.mocked(supportCommentsList).mockReturnValue(new Promise(() => {}));
+    vi.mocked(supportCommentsList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
 
     renderComponent();
 

@@ -29,7 +29,12 @@ import { SkipErrorsCheck } from './SkipErrorsCheck';
 import { ProjectImportFormData } from './types';
 import { parseProjectsAndResourcesFile } from './utils';
 
-interface ImportedProject extends Project {
+// A row parsed from the imported CSV file — not an API Project. It borrows a
+// few field names from the SDK model but carries free-form, file-derived data.
+interface ImportedProject extends Pick<
+  Project,
+  'name' | 'uuid' | 'description'
+> {
   resources?: Resource[];
   project_type?: string;
   start_date?: string;

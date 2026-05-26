@@ -176,7 +176,7 @@ describe('FeaturesList', () => {
 
   it('disables submit button while submitting', async () => {
     vi.mocked(featureValues).mockImplementation(
-      () => new Promise((resolve) => setTimeout(resolve, 100)),
+      () => new Promise((resolve) => setTimeout(resolve, 100)) as any,
     );
 
     render(<FeaturesList />);

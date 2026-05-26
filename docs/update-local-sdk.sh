@@ -36,11 +36,18 @@ echo "      Schema generated: waldur-openapi-schema.yaml"
 
 # Step 2: Generate TypeScript code
 echo "[2/9] Generating TypeScript from schema..."
-npx --yes @hey-api/openapi-ts@0.77.0
+npx --yes @hey-api/openapi-ts@0.97.3
 
 # Step 3: Post-processing
 echo "[3/9] Post-processing generated code..."
-sed -i.bak '/querySerializer: {/,/},/d' waldur-typescript-sdk/sdk.gen.ts && rm waldur-typescript-sdk/sdk.gen.ts.bak
+# Drop querySerializer because it produces explode: false for multiple choice filters.
+# The generator emits it on a single line, or wrapped across lines when an operation has
+# several array params, so a line-range sed over-deletes; strip the whole property instead.
+awk '
+/querySerializer: \{ parameters:/ { if ($0 ~ /\} \},[[:space:]]*$/) { next } skip=1; next }
+skip==1 { if ($0 ~ /^[[:space:]]*\} \},[[:space:]]*$/) skip=0; next }
+{ print }
+' waldur-typescript-sdk/sdk.gen.ts > waldur-typescript-sdk/sdk.gen.ts.tmp && mv waldur-typescript-sdk/sdk.gen.ts.tmp waldur-typescript-sdk/sdk.gen.ts
 sed -i.bak $'1i\\\nexport { formDataBodySerializer, RequestResult } from "./client";' waldur-typescript-sdk/index.ts && rm waldur-typescript-sdk/index.ts.bak
 
 # Step 4: Generate SDK reference catalog

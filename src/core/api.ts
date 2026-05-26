@@ -241,7 +241,7 @@ export type ProgressCallback = (
  * @returns A flattened array containing items from all pages.
  */
 export async function getAllPages<T>(
-  fetchPage: (page: number) => Promise<{ data?: T[]; response: any }>,
+  fetchPage: (page: number) => Promise<{ data?: T[]; response?: any }>,
   onProgress?: ProgressCallback,
 ): Promise<T[]> {
   const results: T[] = [];
