@@ -119,4 +119,18 @@ export async function fetchAll(fetch: Fetcher, request: TableRequest) {
   return result;
 }
 
-// Helper to extract the Query type from the SDK function signature
+// Helper to create client-side paginated fetcher
+export const createClientPaginatedFetcher =
+  <T>(allData: T[]) =>
+  (request: TableRequest) => {
+    const { currentPage, pageSize } = request;
+    const startIndex = ((currentPage || 1) - 1) * (pageSize || 10);
+    const endIndex = startIndex + (pageSize || 10);
+    const rows = allData.slice(startIndex, endIndex);
+
+    return Promise.resolve({
+      rows,
+      resultCount: allData.length,
+      nextPage: endIndex < allData.length ? (currentPage || 1) + 1 : null,
+    });
+  };

@@ -1,23 +1,12 @@
-import { XIcon, ShieldIcon, UserMinusIcon } from '@phosphor-icons/react';
-import { FC, useCallback, useState } from 'react';
-import {
-  ConflictOfInterest,
-  conflictsOfInterestDismiss,
-  conflictsOfInterestRecuse,
-} from 'waldur-js-client';
+import { FC } from 'react';
+import { ConflictOfInterest } from 'waldur-js-client';
 
-import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/notify';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
-const WaiveCOIDialog = lazyComponent(() =>
-  import('./WaiveCOIDialog').then((module) => ({
-    default: module.WaiveCOIDialog,
-  })),
-);
+import { COIDismissAction } from './COIDismissAction';
+import { COIRecuseAction } from './COIRecuseAction';
+import { COIWaiveAction } from './COIWaiveAction';
 
 interface COIRowActionsProps {
   row: ConflictOfInterest;
@@ -25,181 +14,16 @@ interface COIRowActionsProps {
 }
 
 export const COIRowActions: FC<COIRowActionsProps> = ({ row, fetch }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-
-  const { openDialog, confirm } = useModal();
-
-  const [isDismissing, setIsDismissing] = useState(false);
-  const [isRecusing, setIsRecusing] = useState(false);
-
-  const handleDismiss = useCallback(async () => {
-    try {
-      await confirm(
-        translate('Dismiss conflict of interest'),
-        <div>
-          <p>
-            {translate(
-              'You are about to dismiss this detected conflict of interest.',
-            )}
-          </p>
-          <div className="bg-light-success rounded p-3 mb-3">
-            <strong className="d-block mb-2">
-              {translate('What happens next:')}
-            </strong>
-            <ul className="mb-0 ps-3">
-              <li>
-                {translate(
-                  'The conflict will be marked as a false positive and removed from active review.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'The reviewer can continue reviewing this proposal without restrictions.',
-                )}
-              </li>
-              <li>
-                {translate('This decision will be logged for audit purposes.')}
-              </li>
-            </ul>
-          </div>
-          <div className="text-muted small">
-            <strong>{translate('Reviewer')}:</strong> {row.reviewer_name}
-            <br />
-            <strong>{translate('Proposal')}:</strong> {row.proposal_name}
-            <br />
-            <strong>{translate('Conflict type')}:</strong>{' '}
-            {row.coi_type_display}
-          </div>
-        </div>,
-        {
-          positiveButton: translate('Dismiss conflict'),
-          positiveButtonVariant: 'success',
-          type: 'success',
-        },
-      );
-    } catch {
-      return; // User cancelled
-    }
-
-    setIsDismissing(true);
-    try {
-      await conflictsOfInterestDismiss({
-        path: { uuid: row.uuid },
-        body: { status: 'dismissed' },
-      });
-      showSuccess(translate('Conflict of interest dismissed.'));
-      fetch();
-    } catch (error) {
-      showErrorResponse(error, translate('Failed to dismiss conflict.'));
-    } finally {
-      setIsDismissing(false);
-    }
-  }, [row, fetch]);
-
-  const handleRecuse = useCallback(async () => {
-    try {
-      await confirm(
-        translate('Recuse reviewer'),
-        <div>
-          <p>
-            {translate(
-              'You are about to remove this reviewer from reviewing the proposal.',
-            )}
-          </p>
-          <div className="bg-light-danger rounded p-3 mb-3">
-            <strong className="d-block mb-2">
-              {translate('What happens next:')}
-            </strong>
-            <ul className="mb-0 ps-3">
-              <li>
-                {translate(
-                  'The reviewer will be permanently removed from this proposal.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Any existing review or scores from this reviewer will be discarded.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'You may need to assign a replacement reviewer to maintain review coverage.',
-                )}
-              </li>
-            </ul>
-          </div>
-          <div className="text-muted small">
-            <strong>{translate('Reviewer')}:</strong> {row.reviewer_name}
-            <br />
-            <strong>{translate('Proposal')}:</strong> {row.proposal_name}
-            <br />
-            <strong>{translate('Conflict type')}:</strong>{' '}
-            {row.coi_type_display}
-          </div>
-        </div>,
-        {
-          positiveButton: translate('Recuse reviewer'),
-          positiveButtonVariant: 'danger',
-          type: 'danger',
-        },
-      );
-    } catch {
-      return; // User cancelled
-    }
-
-    setIsRecusing(true);
-    try {
-      await conflictsOfInterestRecuse({
-        path: { uuid: row.uuid },
-        body: { status: 'recused' },
-      });
-      showSuccess(translate('Reviewer recused from proposal.'));
-      fetch();
-    } catch (error) {
-      showErrorResponse(error, translate('Failed to recuse reviewer.'));
-    } finally {
-      setIsRecusing(false);
-    }
-  }, [row, fetch]);
-
-  const handleWaive = useCallback(() => {
-    openDialog(WaiveCOIDialog, {
-      resolve: { coi: row, fetch },
-      size: 'lg',
-    });
-  }, [row, fetch]);
-
   // Don't show actions if already reviewed (not pending)
   if (row.status !== 'pending') {
     return null;
   }
 
-  const isLoading = isDismissing || isRecusing;
-
   return (
     <ActionsDropdownComponent title={translate('Actions')}>
-      <ActionItem
-        title={isDismissing ? translate('Dismissing...') : translate('Dismiss')}
-        action={handleDismiss}
-        iconNode={<XIcon weight="bold" />}
-        disabled={isLoading}
-      />
-      <ActionItem
-        title={translate('Waive')}
-        action={handleWaive}
-        iconNode={<ShieldIcon weight="bold" />}
-        iconColor="warning"
-        className="text-warning"
-        disabled={isLoading}
-      />
-      <ActionItem
-        title={isRecusing ? translate('Recusing...') : translate('Recuse')}
-        action={handleRecuse}
-        iconNode={<UserMinusIcon weight="bold" />}
-        iconColor="danger"
-        className="text-danger"
-        disabled={isLoading}
-      />
+      <COIDismissAction row={row} fetch={fetch} />
+      <COIWaiveAction row={row} fetch={fetch} />
+      <COIRecuseAction row={row} fetch={fetch} />
     </ActionsDropdownComponent>
   );
 };
