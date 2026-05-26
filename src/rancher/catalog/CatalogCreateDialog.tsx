@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { rancherCatalogsCreate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
@@ -16,7 +15,6 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Resource } from '@/resource/types';
-import { createEntity } from '@/table/actions';
 
 interface FormData {
   name: string;
@@ -34,8 +32,6 @@ interface CatalogCreateDialogProps {
 }
 
 export const CatalogCreateDialog: FC<CatalogCreateDialogProps> = (props) => {
-  const dispatch = useDispatch();
-
   const createCatalogMutation = useManagedMutation<any, FormData, any>({
     mutationFn: (formData) =>
       rancherCatalogsCreate({
@@ -46,10 +42,7 @@ export const CatalogCreateDialog: FC<CatalogCreateDialogProps> = (props) => {
       }),
     successMessage: translate('Catalog has been created.'),
     errorMessage: translate('Unable to create catalog.'),
-    onSuccess: (response: any) => {
-      const catalog = response.data;
-      dispatch(createEntity('rancher-catalogs', catalog.uuid, catalog));
-    },
+    invalidateQueries: [{ queryKey: ['table', 'rancher-catalogs'] }],
   });
 
   return (

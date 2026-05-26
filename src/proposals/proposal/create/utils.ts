@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   CallResourceTemplate,
   Proposal,
@@ -17,7 +16,6 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { Call } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
-import { fetchListStart } from '@/table/actions';
 import { useUser } from '@/workspace/hooks';
 
 export const useProposalDecisionActions = (
@@ -91,7 +89,6 @@ export const useSubmitProposalResourcesFromTemplates = (
   showMessages = true,
 ) => {
   const queryClient = useQueryClient();
-  const dispatch = useDispatch();
 
   const { showErrorResponse, showSuccess } = useNotify();
 
@@ -158,7 +155,9 @@ export const useSubmitProposalResourcesFromTemplates = (
           }
         }
         // Refresh table
-        dispatch(fetchListStart('ProposalResourcesList'));
+        queryClient.invalidateQueries({
+          queryKey: ['table', 'ProposalResourcesList'],
+        });
       } catch (error) {
         if (showMessages)
           showErrorResponse(error, translate('Something went wrong'));

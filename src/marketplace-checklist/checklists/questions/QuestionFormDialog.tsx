@@ -5,7 +5,6 @@ import { isEqual } from 'lodash-es';
 import { FC, useMemo, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   Checklist,
   checklistsAdminQuestionDependenciesCreate,
@@ -39,7 +38,6 @@ import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
-import { fetchListStart, updateEntity } from '@/table/actions';
 
 import { QuestionGeneralForm } from './QuestionGeneralForm';
 import { QuestionGuidanceForm } from './QuestionGuidanceForm';
@@ -60,7 +58,6 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
 }) => {
   const { closeDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
-  const dispatch = useDispatch();
   const queryClient = useQueryClient();
 
   // Load question dependencies (For edit mode - visibility tab)
@@ -367,13 +364,10 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
       }
 
       if (!isEdit) {
-        // Update questions_count on the checklists table when creation
-        dispatch(
-          updateEntity(CHECKLIST_TABLE_ID, checklist.uuid, (entity) => ({
-            ...entity,
-            questions_count: entity.questions_count + 1,
-          })),
-        );
+        // Invalidate the checklists table query cache
+        queryClient.invalidateQueries({
+          queryKey: ['table', CHECKLIST_TABLE_ID],
+        });
       }
 
       // Invalidate checklist questions query (after 1 sec to prevent immediate refetch)
@@ -384,7 +378,9 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
       }, 1000);
 
       // Refetch the questions table
-      dispatch(fetchListStart('ChecklistQuestions-' + checklist.uuid));
+      queryClient.invalidateQueries({
+        queryKey: ['table', 'ChecklistQuestions-' + checklist.uuid],
+      });
 
       showSuccess(
         isEdit

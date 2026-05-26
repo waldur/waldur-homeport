@@ -24,6 +24,13 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import {
+  TABLE_MARKETPLACE_ORDERS,
+  TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
+  TABLE_PENDING_PUBLIC_ORDERS,
+  TABLE_PUBLIC_ORDERS,
+} from '../list/constants';
+
 interface ApproveByProviderDialogProps {
   resolve: {
     order: OrderDetails;
@@ -118,6 +125,13 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
     successMessage: translate('Order has been approved.'),
     errorMessage: translate('Unable to approve order.'),
     refetch: resolve.refetch,
+    invalidateQueries: [
+      { queryKey: ['table', TABLE_MARKETPLACE_ORDERS] },
+      { queryKey: ['table', TABLE_PUBLIC_ORDERS] },
+      { queryKey: ['table', TABLE_PENDING_PUBLIC_ORDERS] },
+      { queryKey: ['table', TABLE_PENDING_PROVIDER_PUBLIC_ORDERS] },
+      { queryKey: ['OrderDetails', resolve.order.uuid] },
+    ],
   });
 
   const handleSubmit = (formData: { attributes?: Record<string, any> }) => {

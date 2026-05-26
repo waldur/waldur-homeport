@@ -29,19 +29,6 @@ export const RESET_COLUMNS = 'waldur/table/RESET_COLUMNS';
 export const INIT_COLUMN_POSITIONS = 'waldur/table/INIT_COLUMN_POSITIONS';
 export const SWAP_COLUMNS = 'waldur/table/SWAP_COLUMNS';
 
-export const fetchListStart = (
-  table: string,
-  extraFilter?: Record<string, any>,
-  force?: boolean,
-) => ({
-  type: FETCH_LIST_START,
-  payload: {
-    table,
-    extraFilter,
-    force,
-  },
-});
-
 export const fetchListDone = (
   table: string,
   entities: object,
@@ -101,36 +88,6 @@ export const updatePageSize = (table: string, size: number) => ({
   payload: {
     table,
     size,
-  },
-});
-
-export const createEntity = (table: string, uuid: string, content: object) => ({
-  type: ENTITY_CREATE,
-  payload: {
-    table,
-    uuid,
-    content,
-  },
-});
-
-export const updateEntity = (
-  table: string,
-  uuid: string,
-  content: object | ((entity) => object),
-) => ({
-  type: ENTITY_UPDATE,
-  payload: {
-    table,
-    uuid,
-    content,
-  },
-});
-
-export const deleteEntity = (table: string, uuid: string) => ({
-  type: ENTITY_DELETE,
-  payload: {
-    table,
-    uuid,
   },
 });
 

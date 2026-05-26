@@ -2,7 +2,6 @@ import { InfoIcon } from '@phosphor-icons/react';
 import React, { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { keysCreate, SshKeyRequest } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -15,7 +14,6 @@ import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { createEntity } from '@/table/actions';
 
 import * as constants from './constants';
 
@@ -77,7 +75,6 @@ const SshKeyRestrictionsBanner = () => {
 export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
   refetch,
 }) => {
-  const dispatch = useDispatch();
   const createKeyMutation = useManagedMutation<any, any, SshKeyRequest>({
     mutationFn: async (values) => {
       let data = { ...values };
@@ -91,11 +88,7 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
     successMessage: translate('The key has been created.'),
     errorMessage: translate('Unable to create key.'),
     refetch,
-    onSuccess: (createdKey) => {
-      dispatch(
-        createEntity(constants.keysListTable, createdKey.uuid, createdKey),
-      );
-    },
+    invalidateQueries: [{ queryKey: ['table', constants.keysListTable] }],
   });
 
   return (

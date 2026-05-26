@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   OpenStackPool,
   openstackLoadbalancersRetrieve,
@@ -14,7 +13,6 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { fetchListStart } from '@/table/actions';
 
 import { subnetAutocomplete } from '../subnetAutocomplete';
 
@@ -28,8 +26,6 @@ const getSubnetUrl = (subnet: any): string => {
 export const CreateMemberDialog: FC<ActionDialogProps<OpenStackPool>> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
-
   const { data: loadBalancer, isLoading } = useQuery({
     queryKey: ['lb-for-member-create', resource.load_balancer_uuid],
     queryFn: () =>
@@ -56,11 +52,9 @@ export const CreateMemberDialog: FC<ActionDialogProps<OpenStackPool>> = ({
       }),
     successMessage: translate('Member has been added.'),
     errorMessage: translate('Unable to add member.'),
-    onSuccess: () => {
-      dispatch(
-        fetchListStart(`pool-members-${resource.uuid}`, undefined, true),
-      );
-    },
+    invalidateQueries: [
+      { queryKey: ['table', `pool-members-${resource.uuid}`] },
+    ],
     refetch,
   });
 

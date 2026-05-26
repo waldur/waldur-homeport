@@ -19,6 +19,13 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import {
+  TABLE_MARKETPLACE_ORDERS,
+  TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
+  TABLE_PENDING_PUBLIC_ORDERS,
+  TABLE_PUBLIC_ORDERS,
+} from '../list/constants';
+
 interface SetProviderInfoDialogProps {
   resolve: {
     order: OrderDetails;
@@ -49,6 +56,13 @@ export const SetProviderInfoDialog: FC<SetProviderInfoDialogProps> = ({
     successMessage: translate('Provider info has been saved.'),
     errorMessage: translate('Unable to save provider info.'),
     refetch: resolve.refetch,
+    invalidateQueries: [
+      { queryKey: ['table', TABLE_MARKETPLACE_ORDERS] },
+      { queryKey: ['table', TABLE_PUBLIC_ORDERS] },
+      { queryKey: ['table', TABLE_PENDING_PUBLIC_ORDERS] },
+      { queryKey: ['table', TABLE_PENDING_PROVIDER_PUBLIC_ORDERS] },
+      { queryKey: ['OrderDetails', resolve.order.uuid] },
+    ],
   });
 
   const initialValues = {

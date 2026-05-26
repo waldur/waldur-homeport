@@ -1,18 +1,14 @@
 import { FormApi } from 'final-form';
 import { useCallback, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   ImportableResource,
   marketplaceProviderOfferingsImportResource,
 } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { Offering, Plan } from '@/marketplace/types';
-import { useModal } from '@/modal/actions';
-import { useNotify } from '@/store/notify';
-import { createEntity } from '@/table/actions';
-import { Customer } from '@/workspace/types';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { Project, Customer } from '@/workspace/types';
 
 export interface FormData {
   organization?: Customer;
@@ -27,11 +23,6 @@ export const useImportDialog = (
   const [step, setStep] = useState(1); // 3 steps
   const [offering, setOffering] = useState<Offering>();
   const [plans, setPlans] = useState<Record<string, Plan>>({});
-  const dispatch = useDispatch();
-
-  const { showErrorResponse, showSuccess } = useNotify();
-
-  const { closeDialog } = useModal();
 
   const submitEnabled = useMemo(
     () =>
@@ -61,38 +52,23 @@ export const useImportDialog = (
   const assignPlan = (resource: ImportableResource, plan: Plan) =>
     setPlans({ ...plans, [resource.backend_id]: plan });
 
-  const onSubmit = useCallback(
-    async (_formValues: FormData) => {
-      try {
-        for (const resource of _formValues.resources || []) {
-          const marketplaceResource = (
-            await marketplaceProviderOfferingsImportResource({
-              path: { uuid: offering.uuid },
-              body: {
-                backend_id: resource.backend_id,
-                project: _formValues.project.uuid,
-                plan:
-                  plans[resource.backend_id] && plans[resource.backend_id].uuid,
-              },
-            })
-          ).data;
-          dispatch(
-            createEntity(
-              'ProjectResourcesList',
-              marketplaceResource.uuid,
-              marketplaceResource,
-            ),
-          );
-        }
-        showSuccess(translate('All resources have been imported.'));
-      } catch (e) {
-        showErrorResponse(e, translate('Resources import has failed.'));
-        return;
+  const importMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: async (_formValues) => {
+      for (const resource of _formValues.resources || []) {
+        await marketplaceProviderOfferingsImportResource({
+          path: { uuid: offering.uuid },
+          body: {
+            backend_id: resource.backend_id,
+            project: _formValues.project.uuid,
+            plan: plans[resource.backend_id] && plans[resource.backend_id].uuid,
+          },
+        });
       }
-      closeDialog();
     },
-    [offering, plans, dispatch, showSuccess, showErrorResponse, closeDialog],
-  );
+    successMessage: translate('All resources have been imported.'),
+    errorMessage: translate('Resources import has failed.'),
+    invalidateQueries: [{ queryKey: ['table', 'ProjectResourcesList'] }],
+  });
 
   return {
     step,
@@ -105,6 +81,6 @@ export const useImportDialog = (
     assignPlan,
     nextEnabled,
     submitEnabled,
-    onSubmit,
+    onSubmit: importMutation.mutateAsync,
   };
 };

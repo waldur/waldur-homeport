@@ -16,6 +16,7 @@ import { OfferingUsersWarningBar } from '@/user/OfferingUsersWarningBar';
 import { ProfileCompletenessProvider } from '@/user/ProfileCompletenessContext';
 import { UsersService } from '@/user/UsersService';
 import { useUser } from '@/workspace/hooks';
+import { ReviewCheck } from '@/workspace/ReviewCheck';
 import { getImpersonatorUser } from '@/workspace/selectors';
 
 import { LayoutContext, LayoutContextInterface } from './context';
@@ -111,6 +112,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <LayoutContext.Provider value={context}>
+      <ReviewCheck />
       <PermissionDataProvider>
         <ProfileCompletenessProvider>
           <div className="d-flex flex-column flex-root print-content-only">

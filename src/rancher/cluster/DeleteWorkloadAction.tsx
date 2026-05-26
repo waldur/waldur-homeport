@@ -1,11 +1,9 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { rancherWorkloadsDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { deleteEntity } from '@/table/actions';
 
 interface DeleteWorkloadActionProps {
   workload: any;
@@ -16,16 +14,12 @@ export const DeleteWorkloadAction: FC<DeleteWorkloadActionProps> = ({
   workload,
   disabled,
 }) => {
-  const dispatch = useDispatch();
-
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       rancherWorkloadsDestroy({ path: { uuid: workload.uuid } }),
     successMessage: translate('Workload has been deleted.'),
     errorMessage: translate('Unable to delete workload.'),
-    onSuccess: () => {
-      dispatch(deleteEntity('rancher-workloads', workload.uuid));
-    },
+    invalidateQueries: [{ queryKey: ['table', 'rancher-workloads'] }],
     confirmation: {
       title: translate('Delete workload'),
       body: translate(

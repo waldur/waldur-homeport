@@ -11,7 +11,6 @@ import { makeSelectTableRows, getTableState } from '@/table/selectors';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
-import { tableExtraFilters } from './middleware';
 import { registerTable, unregisterTable } from './registry';
 import { TableFilterActions } from './TableFilterActions';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -69,8 +68,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     applyFilters = false,
   } = tableState || {};
 
-  // Merge filter from options with extraFilter from middleware (for external dispatches)
-  const filter = tableExtraFilters[table] || options.filter;
+  const filter = options.filter;
 
   // Track firstFetch for onApplyFilter callback
   const firstFetchRef = useRef(true);

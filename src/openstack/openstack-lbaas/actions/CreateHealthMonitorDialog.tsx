@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { OpenStackPool, openstackHealthMonitorsCreate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -7,15 +6,12 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { fetchListStart } from '@/table/actions';
 
 import { PROTOCOL_OPTIONS } from '../constants';
 
 export const CreateHealthMonitorDialog: FC<
   ActionDialogProps<OpenStackPool>
 > = ({ resolve: { resource, refetch } }) => {
-  const dispatch = useDispatch();
-
   const createMutation = useManagedMutation({
     mutationFn: (formData: any) =>
       openstackHealthMonitorsCreate({
@@ -32,11 +28,9 @@ export const CreateHealthMonitorDialog: FC<
       }),
     successMessage: translate('Health monitor has been created.'),
     errorMessage: translate('Unable to create health monitor.'),
-    onSuccess: () => {
-      dispatch(
-        fetchListStart(`pool-healthmonitors-${resource.uuid}`, undefined, true),
-      );
-    },
+    invalidateQueries: [
+      { queryKey: ['table', `pool-healthmonitors-${resource.uuid}`] },
+    ],
     refetch,
   });
 
