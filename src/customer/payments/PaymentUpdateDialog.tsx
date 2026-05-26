@@ -7,7 +7,6 @@ import { formDataOptions, fileSerializer } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { PaymentProofRenderer } from '@/customer/payments/PaymentProofRenderer';
-import { getInitialValues } from '@/customer/payments/utils';
 import {
   FileUploadField,
   FormContainer,
@@ -63,7 +62,10 @@ export const PaymentUpdateDialog: FunctionComponent<
 
   return (
     <FinalForm
-      initialValues={getInitialValues(props)}
+      initialValues={{
+        date_of_payment: props.resolve.date_of_payment,
+        sum: props.resolve.sum,
+      }}
       onSubmit={submitRequest}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

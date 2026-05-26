@@ -23,6 +23,7 @@ import { useTable } from '@/table/useTable';
 import { useClusterFilter } from '../ClusterFilterHooks';
 import { ViewYAMLButton } from '../ViewYAMLButton';
 
+import { RANCHER_HPAS_TABLE_ID } from './constants';
 import { HPACreateButton } from './HPACreateButton';
 import { HPADeleteButton } from './HPADeleteButton';
 import { HPAUpdateButton } from './HPAUpdateButton';
@@ -45,7 +46,7 @@ const ClusterHPAListTable: FunctionComponent<
 > = ({ resourceScope, portal }) => {
   const { filter } = useClusterFilter(resourceScope);
   const props = useTable({
-    table: 'rancher-hpas',
+    table: RANCHER_HPAS_TABLE_ID,
     fetchData: createFetcher(rancherHpasList),
     filter,
   });

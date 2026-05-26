@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { openstackListenersCreate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -8,7 +7,6 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { fetchListStart } from '@/table/actions';
 
 import { PROTOCOL_OPTIONS } from '../constants';
 import { poolAutocomplete } from '../poolAutocomplete';
@@ -24,8 +22,6 @@ const getPoolUrl = (pool: any): string | null => {
 export const CreateListenerDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
-
   const createMutation = useManagedMutation({
     mutationFn: (formData: any) =>
       openstackListenersCreate({
@@ -39,15 +35,9 @@ export const CreateListenerDialog: FC<ActionDialogProps> = ({
       }),
     successMessage: translate('Listener has been created.'),
     errorMessage: translate('Unable to create listener.'),
-    onSuccess: () => {
-      dispatch(
-        fetchListStart(
-          `loadbalancer-listeners-${resource.uuid}`,
-          undefined,
-          true,
-        ),
-      );
-    },
+    invalidateQueries: [
+      { queryKey: ['table', `loadbalancer-listeners-${resource.uuid}`] },
+    ],
     refetch,
   });
 

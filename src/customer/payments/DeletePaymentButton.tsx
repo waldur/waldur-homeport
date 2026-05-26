@@ -1,17 +1,14 @@
-import { useDispatch } from 'react-redux';
 import { paymentsDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { useUser, useCustomer } from '@/workspace/hooks';
+import { useUser } from '@/workspace/hooks';
 
-import { updatePaymentsList } from './utils';
+import { PAYMENTS_TABLE } from '../details/constants';
 
 export const DeletePaymentButton = ({ row: payment }) => {
-  const dispatch = useDispatch();
   const user = useUser();
-  const customer = useCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => paymentsDestroy({ path: { uuid: payment.uuid } }),
@@ -22,9 +19,7 @@ export const DeletePaymentButton = ({ row: payment }) => {
     },
     successMessage: translate('Payment has been deleted.'),
     errorMessage: translate('Unable to delete payment.'),
-    onSuccess: () => {
-      dispatch(updatePaymentsList(customer));
-    },
+    invalidateQueries: [{ queryKey: ['table', PAYMENTS_TABLE] }],
   });
 
   return (

@@ -25,6 +25,12 @@ interface BatchMutationOptions<T, TVariables = any, TData = any, TError = any> {
     TError,
     TVariables
   >['confirmation'];
+  /** Optional queries to invalidate on success. */
+  invalidateQueries?: ManagedMutationProps<
+    TData,
+    TError,
+    TVariables
+  >['invalidateQueries'];
 }
 
 /**
@@ -50,6 +56,7 @@ export const useBatchMutation = <
   errorMessage,
   renderErrorMessage,
   confirmation,
+  invalidateQueries,
 }: BatchMutationOptions<T, TVariables>) => {
   const { showSuccess, showErrorResponse } = useNotify();
 
@@ -94,5 +101,6 @@ export const useBatchMutation = <
     errorMessage: renderErrorMessage ? undefined : errorMessage,
     refetch,
     confirmation,
+    invalidateQueries,
   });
 };

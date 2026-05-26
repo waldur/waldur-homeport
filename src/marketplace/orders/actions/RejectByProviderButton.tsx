@@ -1,9 +1,7 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOrdersRejectByProvider,
-  marketplaceOrdersRetrieve,
   OrderDetails,
 } from 'waldur-js-client';
 
@@ -18,7 +16,6 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 import { ActionButton } from '@/table/ActionButton';
-import { updateEntity } from '@/table/actions';
 
 interface RejectByProviderButtonProps {
   row: OrderDetails;
@@ -30,8 +27,6 @@ interface RejectByProviderButtonProps {
 export const RejectByProviderButton: FunctionComponent<
   RejectByProviderButtonProps
 > = (props) => {
-  const dispatch = useDispatch();
-
   const { mutate, isPending: isLoading } = useManagedMutation<any, any, any>({
     mutationFn: (result) =>
       marketplaceOrdersRejectByProvider({
@@ -54,29 +49,14 @@ export const RejectByProviderButton: FunctionComponent<
         positiveButton: translate('Reject'),
       },
     },
-    onSuccess: async () => {
-      const newOrder = await marketplaceOrdersRetrieve({
-        path: { uuid: props.row.uuid },
-      }).then((response) => response.data);
-      dispatch(
-        updateEntity(TABLE_MARKETPLACE_ORDERS, props.row.uuid, newOrder),
-      );
-      // update orders table on the main page
-      dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.row.uuid, newOrder));
-      // update pending orders tables on the drawer
-      dispatch(
-        updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.row.uuid, newOrder),
-      );
-      dispatch(
-        updateEntity(
-          TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
-          props.row.uuid,
-          newOrder,
-        ),
-      );
-
-      if (props.refetch) await props.refetch();
-    },
+    refetch: props.refetch,
+    invalidateQueries: [
+      { queryKey: ['table', TABLE_MARKETPLACE_ORDERS] },
+      { queryKey: ['table', TABLE_PUBLIC_ORDERS] },
+      { queryKey: ['table', TABLE_PENDING_PUBLIC_ORDERS] },
+      { queryKey: ['table', TABLE_PENDING_PROVIDER_PUBLIC_ORDERS] },
+      { queryKey: ['OrderDetails', props.row.uuid] },
+    ],
   });
   return (
     <ActionItem

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   rancherHpasCreate,
   rancherNamespacesList,
@@ -14,8 +13,8 @@ import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Resource } from '@/resource/types';
-import { createEntity } from '@/table/actions';
 
+import { RANCHER_HPAS_TABLE_ID } from './constants';
 import { MetricOption, HPACreateFormData } from './types';
 import {
   getMetricNameOptions,
@@ -30,8 +29,6 @@ interface HPACreateDialogProps {
 }
 
 export const HPACreateDialog: FC<HPACreateDialogProps> = (props) => {
-  const dispatch = useDispatch();
-
   const { mutate, isPending } = useManagedMutation<any, any, HPACreateFormData>(
     {
       mutationFn: (formData) =>
@@ -47,10 +44,7 @@ export const HPACreateDialog: FC<HPACreateDialogProps> = (props) => {
         }),
       successMessage: translate('Horizontal pod autoscaler has been created.'),
       errorMessage: translate('Unable to create horizontal pod autoscaler.'),
-      onSuccess: (response: any) => {
-        const hpa = response.data;
-        dispatch(createEntity('rancher-hpas', hpa.uuid, hpa));
-      },
+      invalidateQueries: [{ queryKey: ['table', RANCHER_HPAS_TABLE_ID] }],
     },
   );
 

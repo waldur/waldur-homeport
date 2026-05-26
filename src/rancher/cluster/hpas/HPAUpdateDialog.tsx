@@ -1,14 +1,13 @@
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { RancherHpa, rancherHpasUpdate } from 'waldur-js-client';
 
 import { StringField, SelectField, NumberField, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { updateEntity } from '@/table/actions';
 
+import { RANCHER_HPAS_TABLE_ID } from './constants';
 import { MetricOption, HPAUpdateFormData } from './types';
 import {
   getMetricNameOptions,
@@ -23,8 +22,6 @@ interface HPAUpdateDialogProps {
 }
 
 const useHPAUpdateDialog = (originalHPA: RancherHpa) => {
-  const dispatch = useDispatch();
-
   const { mutate, isPending } = useManagedMutation<any, any, HPAUpdateFormData>(
     {
       mutationFn: (formData) =>
@@ -40,10 +37,7 @@ const useHPAUpdateDialog = (originalHPA: RancherHpa) => {
         }),
       successMessage: translate('Horizontal pod autoscaler has been updated.'),
       errorMessage: translate('Unable to update horizontal pod autoscaler.'),
-      onSuccess: (response: any) => {
-        const hpa = response.data;
-        dispatch(updateEntity('rancher-hpas', hpa.uuid, hpa));
-      },
+      invalidateQueries: [{ queryKey: ['table', RANCHER_HPAS_TABLE_ID] }],
     },
   );
 
