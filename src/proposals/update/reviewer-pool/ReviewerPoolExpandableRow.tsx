@@ -19,31 +19,15 @@ import { OrcidLogo } from '@/core/OrcidLogo';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { Field } from '@/resource/summary';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
-import { TableRequest } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 interface ReviewerPoolExpandableRowProps {
   row: CallReviewerPool;
 }
-
-// Helper to create client-side paginated fetcher
-const createClientPaginatedFetcher =
-  <T,>(allData: T[]) =>
-  (request: TableRequest) => {
-    const { currentPage, pageSize } = request;
-    const startIndex = ((currentPage || 1) - 1) * (pageSize || 10);
-    const endIndex = startIndex + (pageSize || 10);
-    const rows = allData.slice(startIndex, endIndex);
-
-    return Promise.resolve({
-      rows,
-      resultCount: allData.length,
-      nextPage: endIndex < allData.length ? (currentPage || 1) + 1 : null,
-    });
-  };
 
 const AffiliationsTable: FC<{ affiliations: ReviewerAffiliation[] }> = ({
   affiliations,

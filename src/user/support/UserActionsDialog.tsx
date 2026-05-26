@@ -1,22 +1,17 @@
-import { ArrowsClockwiseIcon, EnvelopeIcon } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import {
-  User,
-  userActionsList,
-  UserAction,
-  usersUpdateActions,
-  usersSendNotification,
-} from 'waldur-js-client';
+import { User, userActionsList, UserAction } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/notify';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
+
+import { RecalculateUserActionsAction } from './RecalculateUserActionsAction';
+import { SendNotificationAction } from './SendNotificationAction';
 
 interface UserActionsDialogProps {
   resolve: {
@@ -28,39 +23,10 @@ const TableActions: FC<{ userUuid: string; refetch: () => void }> = ({
   userUuid,
   refetch,
 }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-
-  const onRecalculate = async () => {
-    try {
-      await usersUpdateActions({ path: { uuid: userUuid } });
-      showSuccess(translate('User actions recalculation has been scheduled.'));
-      refetch();
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to recalculate user actions.'));
-    }
-  };
-
-  const onSendNotification = async () => {
-    try {
-      await usersSendNotification({ path: { uuid: userUuid } });
-      showSuccess(translate('Notification has been scheduled.'));
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to send notification.'));
-    }
-  };
-
   return (
     <>
-      <ActionItem
-        title={translate('Send notification')}
-        action={onSendNotification}
-        iconNode={<EnvelopeIcon weight="bold" />}
-      />
-      <ActionItem
-        title={translate('Recalculate')}
-        action={onRecalculate}
-        iconNode={<ArrowsClockwiseIcon weight="bold" />}
-      />
+      <SendNotificationAction userUuid={userUuid} />
+      <RecalculateUserActionsAction userUuid={userUuid} refetch={refetch} />
     </>
   );
 };

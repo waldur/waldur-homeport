@@ -1,28 +1,13 @@
-import {
-  EnvelopeSimpleIcon,
-  SparkleIcon,
-  UserPlusIcon,
-} from '@phosphor-icons/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import {
-  assignmentBatchesList,
-  AssignmentBatchList,
-  proposalProtectedCallsGenerateAssignments,
-  proposalProtectedCallsSendAllAssignments,
-} from 'waldur-js-client';
+import { assignmentBatchesList, AssignmentBatchList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
-import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
-import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableTabs } from '@/table/TableTabs';
@@ -34,13 +19,10 @@ import { Call } from '../types';
 import { AssignmentBatchExpandableRow } from './AssignmentBatchExpandableRow';
 import { AssignmentBatchRowActions } from './AssignmentBatchRowActions';
 import { AssignmentBatchStatusBadge } from './AssignmentBatchStatusBadge';
+import { GenerateAssignmentsAction } from './GenerateAssignmentsAction';
+import { ManualAssignmentAction } from './ManualAssignmentAction';
 import { ReviewerCapacitySection } from './ReviewerCapacitySection';
-
-const CreateManualAssignmentDialog = lazyComponent(() =>
-  import('./CreateManualAssignmentDialog').then((m) => ({
-    default: m.CreateManualAssignmentDialog,
-  })),
-);
+import { SendAllDraftsAction } from './SendAllDraftsAction';
 
 interface AssignmentBatchesSectionProps {
   call: Call;
@@ -75,9 +57,6 @@ const InnerTabs: FC<{
 export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   call,
 }) => {
-  const { openDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
-  const queryClient = useQueryClient();
   const tabs = useReviewerPoolTabs();
   const [activeInnerTab, setActiveInnerTab] = useState<InnerTab>('batches');
 
@@ -93,58 +72,6 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
     fetchData: createFetcher(assignmentBatchesList),
     filter,
   });
-
-  // Generate assignments mutation
-  const generateMutation = useMutation({
-    mutationFn: () =>
-      proposalProtectedCallsGenerateAssignments({
-        path: { uuid: call.uuid },
-      }),
-    onSuccess: (response) => {
-      const data = response.data;
-      showSuccess(
-        translate(
-          'Generated {batches} batches with {items} assignment items for {proposals} proposals.',
-          {
-            batches: data.batches_created,
-            items: data.items_created,
-            proposals: data.proposals_processed,
-          },
-        ),
-      );
-      tableProps.fetch();
-      queryClient.invalidateQueries({ queryKey: ['AssignmentBatchesTable'] });
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Failed to generate assignments.'));
-    },
-  });
-
-  // Send all assignments mutation
-  const sendAllMutation = useMutation({
-    mutationFn: () =>
-      proposalProtectedCallsSendAllAssignments({
-        path: { uuid: call.uuid },
-      }),
-    onSuccess: (response) => {
-      const data = response.data;
-      showSuccess(
-        translate('Sent {count} assignment batches.', {
-          count: data.batches_sent,
-        }),
-      );
-      tableProps.fetch();
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Failed to send assignments.'));
-    },
-  });
-
-  const handleManualAssignment = useCallback(() => {
-    openDialog(CreateManualAssignmentDialog, {
-      resolve: { call, refetch: tableProps.fetch },
-    });
-  }, [call, tableProps.fetch]);
 
   const columns = useMemo(
     () => [
@@ -258,30 +185,13 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   const batchesTableActions = (
     <>
       <PoolSummaryButton />
-      <ActionButton
-        action={handleManualAssignment}
-        title={translate('Manual assignment')}
-        iconNode={<UserPlusIcon weight="bold" />}
-        variant="secondary"
+      <ManualAssignmentAction call={call} refetch={tableProps.fetch} />
+      <GenerateAssignmentsAction call={call} refetch={tableProps.fetch} />
+      <SendAllDraftsAction
+        call={call}
+        refetch={tableProps.fetch}
+        draftCount={draftCount}
       />
-      <ActionButton
-        action={() => generateMutation.mutate()}
-        title={translate('Generate assignments')}
-        iconNode={<SparkleIcon weight="bold" />}
-        variant="primary"
-        disabled={generateMutation.isPending}
-        pending={generateMutation.isPending}
-      />
-      {draftCount > 0 && (
-        <ActionButton
-          action={() => sendAllMutation.mutate()}
-          title={`${translate('Send all drafts')} (${draftCount})`}
-          iconNode={<EnvelopeSimpleIcon weight="bold" />}
-          variant="success"
-          disabled={sendAllMutation.isPending}
-          pending={sendAllMutation.isPending}
-        />
-      )}
     </>
   );
 

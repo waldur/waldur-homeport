@@ -1,9 +1,7 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { callReviewerPoolsList, CallReviewerPool } from 'waldur-js-client';
 
-import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -13,12 +11,6 @@ import { Call } from '../types';
 
 import { ReviewerCapacityRowActions } from './ReviewerCapacityRowActions';
 
-const EditCapacityDialog = lazyComponent(() =>
-  import('./EditCapacityDialog').then((m) => ({
-    default: m.EditCapacityDialog,
-  })),
-);
-
 interface ReviewerCapacitySectionProps {
   call: Call;
 }
@@ -26,8 +18,6 @@ interface ReviewerCapacitySectionProps {
 export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
   call,
 }) => {
-  const { openDialog } = useModal();
-
   const filter = useMemo(
     () => ({
       call_uuid: call.uuid,
@@ -41,12 +31,6 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
     fetchData: createFetcher(callReviewerPoolsList),
     filter,
   });
-
-  const handleEditCapacity = useCallback((row: CallReviewerPool) => {
-    openDialog(EditCapacityDialog, {
-      resolve: { poolMember: row, refetch: tableProps.fetch },
-    });
-  }, []);
 
   const columns = useMemo(
     () => [
@@ -124,10 +108,7 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
       showPageSizeSelector
       hasQuery
       rowActions={({ row }) => (
-        <ReviewerCapacityRowActions
-          row={row}
-          onEdit={() => handleEditCapacity(row)}
-        />
+        <ReviewerCapacityRowActions row={row} refetch={tableProps.fetch} />
       )}
     />
   );
