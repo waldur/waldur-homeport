@@ -11,62 +11,63 @@ import { useModalDialogCallback } from '@/resource/actions/useModalDialogCallbac
 import { useValidators } from '@/resource/actions/useValidators';
 import { useUser } from '@/workspace/hooks';
 
-import { ResourceAction } from '../actions/constants';
 import { useResourceOffering } from '../actions/useResourceOffering';
 import { getMarketplaceResourceUuid } from '../actions/utils';
+import { hasEditableLimitComponents } from '../change-limits/utils';
 
-import { hasEditableLimitComponents } from './utils';
-
-const ChangeLimitsDialog = lazyComponent(() =>
-  import('./ChangeLimitsDialog').then((module) => ({
-    default: module.ChangeLimitsDialog,
+const RequestLimitsChangeFlowDialog = lazyComponent(() =>
+  import('./RequestLimitsChangeFlowDialog').then((module) => ({
+    default: module.RequestLimitsChangeFlowDialog,
   })),
 );
 
 const validators = [validateState('OK')];
 
-const useChangeLimits = ({ resource, refetch }) => {
+const useRequestLimitsChange = ({ resource, refetch }) => {
   const { tooltip, disabled } = useValidators(validators, resource);
   const action = useModalDialogCallback(
-    ChangeLimitsDialog,
+    RequestLimitsChangeFlowDialog,
     resource,
     { refetch },
     { size: 'xl', fullscreen: 'lg-down', contentClassName: 'overflow-auto' },
   );
-  return {
-    title: translate('Change limits'),
-    action,
-    tooltip,
-    disabled,
-    iconNode: <TimerIcon weight="bold" />,
-    important: true,
-    actionId: ResourceAction.UPDATE_LIMITS,
-    resource,
-  };
+  return { action, tooltip, disabled };
 };
 
-export const ChangeLimitsAction: ActionItemType = ({
+export const RequestLimitsChangeAction: ActionItemType = ({
   resource,
   refetch,
   ...rest
 }) => {
   const user = useUser();
-  const buttonProps = useChangeLimits({ resource, refetch });
+  const { action, tooltip, disabled } = useRequestLimitsChange({
+    resource,
+    refetch,
+  });
 
-  if (
-    !hasPermission(user, {
+  const canUpdateDirectly =
+    hasPermission(user, {
       permission: PermissionEnum.UPDATE_RESOURCE_LIMITS,
       projectId: resource.project_uuid,
       customerId: resource.customer_uuid,
-    })
-  ) {
+    }) ||
+    user?.is_staff ||
+    user?.is_support;
+
+  const hasPlan = Boolean(resource.plan_uuid || resource.marketplace_plan_uuid);
+  const resourceUuid = getMarketplaceResourceUuid(resource);
+  const offering = useResourceOffering(
+    resourceUuid,
+    !canUpdateDirectly && hasPlan,
+  );
+
+  if (canUpdateDirectly) {
     return null;
   }
 
-  const hasPlan = Boolean(resource.plan_uuid || resource.marketplace_plan_uuid);
-
-  const resourceUuid = getMarketplaceResourceUuid(resource);
-  const offering = useResourceOffering(resourceUuid, hasPlan);
+  if (!resourceUuid) {
+    return null;
+  }
 
   // Hide when the offering is intrinsically not configured for editable limits.
   if (offering && !hasEditableLimitComponents(offering)) {
@@ -77,14 +78,17 @@ export const ChangeLimitsAction: ActionItemType = ({
     ? translate('Resource is not associated with a plan.')
     : undefined;
 
-  // State-based tooltip (from validators) takes precedence over offering-level reasons.
-  const finalProps = disabledReason
-    ? {
-        ...buttonProps,
-        disabled: true,
-        tooltip: buttonProps.tooltip || disabledReason,
-      }
-    : buttonProps;
-
-  return <ActionItem {...finalProps} {...rest} />;
+  // State-based tooltip (from validators) takes precedence over the plan reason,
+  // mirroring ChangeLimitsAction.
+  return (
+    <ActionItem
+      title={translate('Request limit change')}
+      action={action}
+      tooltip={disabledReason ? tooltip || disabledReason : tooltip}
+      disabled={disabled || Boolean(disabledReason)}
+      iconNode={<TimerIcon weight="bold" />}
+      resource={resource}
+      {...rest}
+    />
+  );
 };

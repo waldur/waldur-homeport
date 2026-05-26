@@ -59,6 +59,19 @@ export interface FetchedData {
   concealBillingInfo: boolean;
 }
 
+/**
+ * Whether an offering exposes components whose limits a customer can change:
+ * limit-based components or prepaid components.
+ */
+export const hasEditableLimitComponents = (offering?: {
+  components?: ReadonlyArray<{ billing_type?: string; is_prepaid?: boolean }>;
+}): boolean =>
+  Boolean(
+    offering?.components?.some(
+      (c) => c.billing_type === 'limit' || c.is_prepaid,
+    ),
+  );
+
 export const getRemainingMonths = (endDate: string): number => {
   const now = DateTime.now();
   const end = DateTime.fromISO(endDate);

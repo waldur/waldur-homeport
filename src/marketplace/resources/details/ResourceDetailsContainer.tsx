@@ -26,6 +26,8 @@ import { useTitle } from '@/navigation/title';
 import { IBreadcrumbItem } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { ProjectUsersBadge } from '@/project/ProjectUsersBadge';
 import { router } from '@/router';
 import { setCurrentResource } from '@/workspace/actions';
@@ -142,6 +144,16 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   }, [resource, resourceState]);
 
   const isRPOnly = useIsResourceProjectOnlyViewer(resource);
+  const canManageLimitRequests =
+    user?.is_staff ||
+    user?.is_support ||
+    (resource
+      ? hasPermission(user, {
+          permission: PermissionEnum.UPDATE_RESOURCE_LIMITS,
+          projectId: resource.project_uuid,
+          customerId: resource.customer_uuid,
+        })
+      : false);
   const tabs = useMemo(
     () =>
       data
@@ -151,9 +163,17 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
             isStaff: user?.is_staff,
             isSupport: user?.is_support,
             isRPOnly,
+            canManageLimitRequests,
           })
         : [],
-    [resource, data, user?.is_staff, user?.is_support, isRPOnly],
+    [
+      resource,
+      data,
+      user?.is_staff,
+      user?.is_support,
+      isRPOnly,
+      canManageLimitRequests,
+    ],
   );
 
   useTitle(resource?.name);

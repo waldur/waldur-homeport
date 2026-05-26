@@ -12,6 +12,7 @@ import { MarketplaceFeatures, OpenstackFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { countLexisLinks, countRobotAccounts } from '@/marketplace/common/api';
+import { hasEditableLimitComponents } from '@/marketplace/resources/change-limits/utils';
 import { PageBarTab } from '@/navigation/types';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
@@ -34,6 +35,7 @@ export const getResourceTabs = ({
   isStaff,
   isSupport,
   isRPOnly = false,
+  canManageLimitRequests = false,
 }: {
   resource: Resource;
   offering: PublicOfferingDetails;
@@ -43,6 +45,7 @@ export const getResourceTabs = ({
   isStaff: boolean;
   isSupport?: boolean;
   isRPOnly?: boolean;
+  canManageLimitRequests?: boolean;
 }) => {
   // Generate tabs
   const tabs: PageBarTab<{
@@ -313,6 +316,29 @@ export const getResourceTabs = ({
         import('./ResourceIssuesCard').then((module) => ({
           default: module.ResourceIssuesCard,
         })),
+      ),
+    });
+  }
+
+  // Show only when a limit change is actually feasible for this resource,
+  // mirroring the conditions under which ChangeLimitsAction is usable:
+  // editable limit components and an associated plan. This hides the tab on
+  // child resources (e.g. OpenStack instances/volumes) that merely inherit the
+  // parent offering's limit components but have no plan of their own.
+  if (
+    canManageLimitRequests &&
+    hasEditableLimitComponents(offering) &&
+    Boolean(resource.plan_uuid)
+  ) {
+    tabs.push({
+      key: 'limit-change-requests',
+      title: translate('Limit change requests'),
+      component: lazyComponent(() =>
+        import('@/marketplace/resources/request-limits-change/ResourceLimitChangeRequests').then(
+          (module) => ({
+            default: module.ResourceLimitChangeRequests,
+          }),
+        ),
       ),
     });
   }
