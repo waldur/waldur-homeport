@@ -74,6 +74,12 @@ const CategoryResourcesListTable: FunctionComponent<OwnProps> = (ownProps) => {
     if (filterValues?.runtime_state) {
       filterObj.runtime_state = filterValues.runtime_state.value;
     }
+    if (filterValues?.flavor_name) {
+      filterObj.flavor_name = filterValues.flavor_name;
+    }
+    if (filterValues?.image_name) {
+      filterObj.image_name = filterValues.image_name;
+    }
     if (filterValues?.state) {
       filterObj.state = filterValues.state.map((option) => option.value);
       if (filterValues.include_terminated) {
@@ -281,7 +287,12 @@ const CategoryResourcesListTable: FunctionComponent<OwnProps> = (ownProps) => {
       multiSelectActions={ResourceMultiSelectAction}
       standalone={ownProps.standalone}
       minHeight={400}
-      filters={<AllResourcesFilter category_uuid={ownProps.category_uuid} />}
+      filters={
+        <AllResourcesFilter
+          category_uuid={ownProps.category_uuid}
+          columns={ownProps.columns}
+        />
+      }
       hasOptionalColumns
     />
   );
