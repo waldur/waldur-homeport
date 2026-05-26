@@ -24,7 +24,7 @@ interface ModifiedRuleEntry {
   changed_fields: string[];
 }
 
-interface RulesChangedContext {
+export interface RulesChangedContext {
   security_group_name: string;
   security_group_uuid?: string;
   added_count: number;
@@ -163,7 +163,7 @@ interface AllowedAddressPair {
   mac_address: string | null;
 }
 
-interface AllowedAddressPairsChangedContext {
+export interface AllowedAddressPairsChangedContext {
   port_name: string;
   added_count: number;
   removed_count: number;

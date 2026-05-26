@@ -238,17 +238,23 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
     >
   >(
     () =>
-      LIMIT_PERIODS.reduce((acc, per) => {
-        const rows = periodicLimitedRows.filter(
-          (component) => component.limit_period === per,
-        );
-        acc[per] = {
-          rows: rows,
-          totalPeriods: calculateTotalPeriods(rows),
-          total: Number(sumBy(rows, 'subTotal').toFixed(2)),
-        };
-        return acc;
-      }, {} as any),
+      LIMIT_PERIODS.reduce(
+        (acc, per) => {
+          const rows = periodicLimitedRows.filter(
+            (component) => component.limit_period === per,
+          );
+          acc[per] = {
+            rows: rows,
+            totalPeriods: calculateTotalPeriods(rows),
+            total: Number(sumBy(rows, 'subTotal').toFixed(2)),
+          };
+          return acc;
+        },
+        {} as Record<
+          LimitPeriodEnum,
+          { rows: Component[]; totalPeriods: number[]; total: number }
+        >,
+      ),
     [periodicLimitedRows],
   );
 

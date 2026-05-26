@@ -13,7 +13,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export interface AccessSubnetFormData {
-  refetch(): void;
+  refetch?(): void;
   customer_url?: string;
   row?: {
     uuid: string;

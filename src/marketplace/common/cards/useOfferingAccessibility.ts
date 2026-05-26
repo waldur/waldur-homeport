@@ -1,6 +1,7 @@
+import { PublicOfferingDetails } from 'waldur-js-client';
+
 import { translate } from '@/i18n';
 import { isOfferingRestrictedToProject } from '@/marketplace/offerings/utils';
-import { Offering } from '@/marketplace/types';
 import { useUser } from '@/workspace/hooks';
 
 interface OfferingAccessibility {
@@ -13,7 +14,7 @@ interface OfferingAccessibility {
 }
 
 export function useOfferingAccessibility(
-  offering: Offering,
+  offering: PublicOfferingDetails,
 ): OfferingAccessibility {
   const user = useUser();
   const { isRestricted, isAllowed } = isOfferingRestrictedToProject(
@@ -22,7 +23,7 @@ export function useOfferingAccessibility(
   );
 
   const isPaused = offering.state === 'Paused';
-  const isInaccessible = user && (offering as any).is_accessible === false;
+  const isInaccessible = user && offering.is_accessible === false;
 
   const isDisabled = !isAllowed || isPaused || isInaccessible;
 

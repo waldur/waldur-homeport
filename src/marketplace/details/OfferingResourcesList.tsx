@@ -4,11 +4,11 @@ import {
   marketplaceProviderResourcesList,
   MarketplaceProviderResourcesListData,
   Resource,
+  ResourceState,
 } from 'waldur-js-client';
 
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { translate } from '@/i18n';
-import { Option } from '@/marketplace/common/registry';
 import {
   FILTER_OFFERING_RESOURCE,
   TABLE_OFFERING_RESOURCE,
@@ -32,7 +32,7 @@ interface OwnProps {
 }
 
 interface FilterValues {
-  state?: Option[];
+  state?: { value: ResourceState; label: string }[];
   include_terminated?: boolean;
 }
 
@@ -49,7 +49,7 @@ const OfferingResourcesListTable: FunctionComponent<OwnProps> = (props) => {
   const filter = useMemo(() => {
     const filterObj: MarketplaceProviderResourcesListData['query'] = {};
     if (filterValues?.state) {
-      filterObj.state = filterValues.state.map((option) => option.value as any);
+      filterObj.state = filterValues.state.map((option) => option.value);
       if (filterValues?.include_terminated) {
         filterObj.state = [...filterObj.state, 'Terminated'];
       }

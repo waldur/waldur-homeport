@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { NestedTag } from 'waldur-js-client';
+import { NestedTag, Offering } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -10,7 +10,7 @@ import { NoResult } from '@/navigation/header/search/NoResult';
 import { useTable } from '@/table/useTable';
 
 interface CarouselOfferingGridProps {
-  tableProps: ReturnType<typeof useTable>;
+  tableProps: ReturnType<typeof useTable<Offering>>;
   cardStyle: CardStyleType;
   onTagClick?(tag: NestedTag): void;
   centeredSpinner?: boolean;
@@ -50,7 +50,7 @@ export const CarouselOfferingGrid: FC<CarouselOfferingGridProps> = ({
   }
   return (
     <div className="carousel-items offering-items">
-      {(tableProps.rows as any[]).map((offering) => (
+      {tableProps.rows.map((offering) => (
         <div
           key={offering.uuid}
           className={`offering-carousel-item offering-carousel-item--${cardStyle}`}

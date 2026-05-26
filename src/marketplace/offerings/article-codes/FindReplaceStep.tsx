@@ -1,6 +1,9 @@
 import { FC, useState, useMemo } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
-import { marketplaceArticleCodeUpdatePreview } from 'waldur-js-client';
+import {
+  ArticleCodeUpdatePreviewRequest,
+  marketplaceArticleCodeUpdatePreview,
+} from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
@@ -31,7 +34,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
     setLoading(true);
     setError(null);
     try {
-      const body: Record<string, unknown> = {
+      const body: ArticleCodeUpdatePreviewRequest = {
         search: values.search?.trim(),
         replace: values.replace ?? '',
       };
@@ -43,7 +46,7 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
         body.offering_name = values.offering_name.trim();
 
       const response = await marketplaceArticleCodeUpdatePreview({
-        body: body as any,
+        body,
       });
       const results = response.data || [];
       if (results.length === 0) {

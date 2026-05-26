@@ -126,9 +126,9 @@ export const AggregateUsageTimelineWidget = ({
           name: c.offering_name,
           type: c.type,
           component_name: c.name,
-          billing_type: (c as any).billing_type,
-          limit_period: (c as any).limit_period,
-          current_period_label: (c as any).current_period_label,
+          billing_type: c.billing_type,
+          limit_period: c.limit_period,
+          current_period_label: c.current_period_label,
         });
       }
     }

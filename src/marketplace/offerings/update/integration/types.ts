@@ -1,4 +1,5 @@
-import React from 'react';
+import { FC } from 'react';
+import { FieldRenderProps } from 'react-final-form';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { FormTableItemProps } from '@/form/FormTable';
@@ -18,7 +19,7 @@ export interface EditOfferingProps extends Partial<
   scope: any;
   name: string;
   callback(formData): Promise<any>;
-  fieldComponent: React.ComponentType;
+  fieldComponent: FC<FieldRenderProps<any>>;
   hideLabel?: boolean;
   fieldProps?: Record<string, any>;
 }

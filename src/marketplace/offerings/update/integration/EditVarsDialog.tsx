@@ -5,6 +5,7 @@ import { Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
+  OfferingIntegrationUpdateRequest,
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
@@ -31,7 +32,7 @@ export const EditVarsDialog: FC<EditVarsDialogProps> = ({ resolve }) => {
             ...resolve.offering.secret_options,
             environ: formData.environ,
           },
-        } as any,
+        } as OfferingIntegrationUpdateRequest,
       }),
     successMessage: translate(
       'Environment variables have been updated successfully.',

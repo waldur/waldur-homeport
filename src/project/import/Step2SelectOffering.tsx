@@ -36,7 +36,7 @@ export const Step2SelectOffering: FC<Step2Props> = ({
           'components',
           'attributes',
           'plans',
-        ),
+        ) as any,
       }),
     [customer],
   );

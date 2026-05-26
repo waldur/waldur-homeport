@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { ProviderCustomerTopRevenue } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -7,16 +8,14 @@ import { ExportData } from '@/table/exporters/types';
 import { SimpleTable } from '@/table/SimpleTable';
 import { Column } from '@/table/types';
 
-import { TopCustomer } from './types';
-
 interface TopCustomersByRevenueProps {
-  customers: TopCustomer[];
+  customers: ProviderCustomerTopRevenue[];
 }
 
 export const TopCustomersByRevenue: FC<TopCustomersByRevenueProps> = ({
   customers,
 }) => {
-  const columns: Column<TopCustomer>[] = useMemo(
+  const columns: Column<ProviderCustomerTopRevenue>[] = useMemo(
     () => [
       {
         title: translate('Customer'),

@@ -24,25 +24,25 @@ interface UseTableQueryOptions {
   activeColumns: Record<string, string[] | false>;
 }
 
-interface TableQueryData {
-  entities: Record<string, any>;
+interface TableQueryData<RowType = any> {
+  entities: Record<string, RowType>;
   order: string[];
   resultCount: number;
-  rows: any[];
+  rows: RowType[];
   invalidPage?: boolean;
 }
 
-interface UseTableQueryResult {
-  data: TableQueryData | undefined;
+interface UseTableQueryResult<RowType = any> {
+  data: TableQueryData<RowType> | undefined;
   isLoading: boolean;
   isFetching: boolean;
   error: Error | null;
   refetch: () => void;
 }
 
-export function useTableQuery(
+export function useTableQuery<RowType = any>(
   options: UseTableQueryOptions,
-): UseTableQueryResult {
+): UseTableQueryResult<RowType> {
   const {
     table,
     fetchData,
@@ -151,7 +151,7 @@ export function useTableQuery(
     isFetching,
     error,
     refetch: rqRefetch,
-  } = useQuery({
+  } = useQuery<any, any, TableQueryData<RowType>>({
     queryKey,
     queryFn: async ({ signal }) => {
       const request = buildRequest(signal);

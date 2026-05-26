@@ -13,7 +13,6 @@ const DEFAULT_FIELD_META = {
   autofilled: false,
   asyncValidating: false,
   dirty: false,
-  dispatch: (() => {}) as any,
   form: 'k8s-config',
   initial: undefined,
   invalid: false,
@@ -58,7 +57,7 @@ export const K8sSecurityConfigSection: React.FC<
         }}
         input={{
           value: publicAccessRules,
-          onChange: onPublicAccessRulesChange as any,
+          onChange: onPublicAccessRulesChange,
           onBlur: () => {},
           onFocus: () => {},
           onDragStart: () => {},

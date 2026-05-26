@@ -17,7 +17,7 @@ import { pickOverview } from './utils';
 export const EditGettingStartedDialog: FC<{
   resolve: EditOfferingProps;
 }> = (props) => {
-  const updateMutation = useManagedMutation<any, any, any>({
+  const updateMutation = useManagedMutation<any, any, { template: string }>({
     mutationFn: (formData) =>
       marketplaceProviderOfferingsUpdateOverview({
         path: { uuid: props.resolve.offering.uuid },
@@ -32,7 +32,7 @@ export const EditGettingStartedDialog: FC<{
   });
 
   return (
-    <Form
+    <Form<{ template: string }>
       initialValues={{
         template: props.resolve.offering.getting_started,
       }}
@@ -82,7 +82,7 @@ export const EditGettingStartedDialog: FC<{
               <Col className="pb-20">
                 <div className="form-label">{translate('Preview')}</div>
                 <CodePreview
-                  template={(values as any).template}
+                  template={values.template}
                   context={{
                     resource_name: 'RESOURCE_NAME',
                     resource_username: 'RESOURCE_USERNAME',

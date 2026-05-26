@@ -40,7 +40,7 @@ export const OrdersBulkActions = ({
     rows: pendingOrders,
     refetch,
     mutationFn: (order) => {
-      const handler = (orderActionMap as any)[order.state]?.approve;
+      const handler = orderActionMap[order.state]?.approve;
       return handler
         ? handler({ path: { uuid: order.uuid } })
         : Promise.resolve();
@@ -59,7 +59,7 @@ export const OrdersBulkActions = ({
     rows: pendingOrders,
     refetch,
     mutationFn: (order) => {
-      const handler = (orderActionMap as any)[order.state]?.reject;
+      const handler = orderActionMap[order.state]?.reject;
       return handler
         ? handler({ path: { uuid: order.uuid } })
         : Promise.resolve();

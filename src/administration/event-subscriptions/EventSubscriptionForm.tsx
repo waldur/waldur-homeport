@@ -1,5 +1,9 @@
 import { Form, Field } from 'react-final-form';
-import { eventSubscriptionsCreate, EventSubscription } from 'waldur-js-client';
+import {
+  eventSubscriptionsCreate,
+  EventSubscription,
+  EventSubscriptionRequest,
+} from 'waldur-js-client';
 
 import { TextField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -28,10 +32,14 @@ export const EventSubscriptionForm = ({
       }
     : undefined;
 
-  const onSubmitMutation = useManagedMutation<any, any, any>({
+  const onSubmitMutation = useManagedMutation<
+    any,
+    any,
+    EventSubscriptionRequest
+  >({
     mutationFn: (formValues) => {
       if (isEdit) {
-        return Promise.resolve() as any;
+        return Promise.resolve();
       } else {
         return eventSubscriptionsCreate({
           body: {

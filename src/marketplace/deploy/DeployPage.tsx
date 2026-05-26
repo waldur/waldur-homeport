@@ -454,7 +454,7 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
       } catch (error) {
         const errorMessage = translate('Unable to submit order.');
         showErrorResponse(error, errorMessage);
-        const errorData = {} as any;
+        const errorData = {};
         const _errorData = error?.response?.data;
         if (_errorData && typeof _errorData === 'object') {
           for (const key of Object.keys(_errorData)) {

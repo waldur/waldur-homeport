@@ -62,7 +62,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
         ) : (
           <ResourceUsageTabs
             components={offering.components}
-            usages={usages as any}
+            usages={usages}
             months={12}
             colors={generateColors(offering.components.length, {
               colorStart: 0.25,

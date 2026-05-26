@@ -15,7 +15,7 @@ export const TosAcceptedTrendChart: FC<TosAcceptedTrendChartProps> = ({
 }) => {
   // Note: accepted_consents_over_time is a new field not yet in the type definition
   const chartOptions = formatAcceptedTrendChart(
-    (data as any).accepted_consents_over_time || [],
+    data.accepted_consents_over_time || [],
   );
 
   return (

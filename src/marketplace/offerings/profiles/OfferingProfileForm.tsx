@@ -36,7 +36,7 @@ export const OfferingProfileForm: FC<{ resolve: FormResolve }> = ({
           body: {
             name: values.name,
             description: values.description || '',
-          } as any,
+          },
         });
       }
     },

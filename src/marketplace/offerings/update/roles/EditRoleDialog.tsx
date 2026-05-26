@@ -10,6 +10,10 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+interface FormValues {
+  name: string;
+  description?: string;
+}
 interface EditRoleResolve {
   row: { uuid: string; name: string; description?: string };
   refetch(): void;
@@ -18,14 +22,14 @@ interface EditRoleResolve {
 export const EditRoleDialog: FC<{ resolve: EditRoleResolve }> = ({
   resolve,
 }) => {
-  const mutation = useManagedMutation<any, any, any>({
+  const mutation = useManagedMutation<any, any, FormValues>({
     mutationFn: (formData) =>
       marketplaceOfferingRolesPartialUpdate({
         path: { uuid: resolve.row.uuid },
         body: {
           name: formData.name,
           description: formData.description || '',
-        } as any,
+        },
       }),
     successMessage: translate('Role has been updated.'),
     errorMessage: translate('Unable to update role.'),
@@ -33,7 +37,7 @@ export const EditRoleDialog: FC<{ resolve: EditRoleResolve }> = ({
   });
 
   return (
-    <Form
+    <Form<FormValues>
       onSubmit={(values) =>
         mutation.mutateAsync(values).catch(() => {
           /* error handled by useManagedMutation */

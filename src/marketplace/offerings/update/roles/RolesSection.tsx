@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
-import { marketplaceOfferingRolesList } from 'waldur-js-client';
+import { marketplaceOfferingRolesList, OfferingRole } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -51,7 +51,7 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
           )}
         </Alert>
       )}
-      <Table
+      <Table<OfferingRole>
         {...tableProps}
         cardBordered={false}
         title={translate('Roles')}
@@ -63,7 +63,7 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
           {
             title: translate('Scope'),
             render: ({ row }) =>
-              renderFieldOrDash(formatContentType((row as any).content_type)),
+              renderFieldOrDash(formatContentType(row.content_type)),
           },
           {
             title: translate('Applies to'),
@@ -89,7 +89,7 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
           {
             title: translate('Permissions'),
             render: ({ row }) =>
-              renderFieldOrDash(((row as any).permissions || []).join(', ')),
+              renderFieldOrDash((row.permissions || []).join(', ')),
           },
         ]}
         verboseName={translate('Roles')}

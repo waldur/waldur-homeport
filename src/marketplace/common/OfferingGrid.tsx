@@ -40,7 +40,7 @@ export const OfferingGrid: FC<OfferingGridProps> = ({
     <Row>
       {props.items.map((offering) => (
         <Col key={offering.uuid} lg={6} xl={width} className="mb-3">
-          <OfferingCard offering={offering as any} />
+          <OfferingCard offering={offering} />
         </Col>
       ))}
     </Row>

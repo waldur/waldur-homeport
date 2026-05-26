@@ -104,9 +104,7 @@ export const ExperimentalUsageSection: FC<Props> = ({ project, customer }) => {
       const fetcher = isProject
         ? marketplaceProjectUsageComponentsUsageRetrieve
         : marketplaceCustomerUsageComponentsUsageRetrieve;
-      return (fetcher as any)({ path: { uuid: scope.uuid } }).then(
-        (r: any) => r.data,
-      );
+      return fetcher({ path: { uuid: scope.uuid } }).then((r) => r.data);
     },
     enabled: !!scope?.uuid,
     refetchOnWindowFocus: false,

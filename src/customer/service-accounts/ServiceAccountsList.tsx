@@ -3,6 +3,7 @@ import {
   marketplaceCustomerServiceAccountsList,
   marketplaceProjectServiceAccountsList,
   MarketplaceCustomerServiceAccountsRetrieveResponse,
+  CustomerServiceAccount,
 } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -17,7 +18,7 @@ import { useTeamTableTabs as useProjectTeamTableTabs } from '@/project/team/tabs
 import { TeamDropdownActions as ProjectTeamDropdownActions } from '@/project/team/TeamDropdownActions';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
-import { TableProps } from '@/table/types';
+import { Column, TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -33,11 +34,13 @@ const getContextKey = (context: string) =>
 export const ServiceAccountsTableComponent: FC<
   ServiceAccountsProps & TableProps
 > = ({ context, scope, ...tableProps }) => {
-  const columns = useMemo(
+  const columns = useMemo<
+    Array<Column<MarketplaceCustomerServiceAccountsRetrieveResponse>>
+  >(
     () =>
       [
         !scope
-          ? ({
+          ? {
               title:
                 context === 'customer'
                   ? translate('Organization')
@@ -53,14 +56,14 @@ export const ServiceAccountsTableComponent: FC<
                   />
                 ),
 
-              export: getContextKey(context),
+              export: getContextKey(context) as keyof CustomerServiceAccount,
               orderField: getContextKey(context),
-            } as any)
+            }
           : null,
         {
           title: translate('Username'),
           render: ({ row }) => row.username,
-          export: 'username',
+          export: 'username' as keyof CustomerServiceAccount,
         },
         {
           title: translate('Creation date'),
@@ -78,7 +81,7 @@ export const ServiceAccountsTableComponent: FC<
           ),
 
           orderField: 'email',
-          export: 'email',
+          export: 'email' as keyof CustomerServiceAccount,
         },
       ].filter(Boolean),
     [context, scope],

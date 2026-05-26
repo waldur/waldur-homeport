@@ -120,7 +120,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
                       row.limit_period === 'month'
                         ? (row.prices[monthlyPriceIndex] ?? row.subTotal)
                         : row.subTotal,
-                    ) + getPerLimitPeriod(row.limit_period as any)
+                    ) + getPerLimitPeriod(row.limit_period as LimitPeriodEnum)
                   }
                 />
               ))

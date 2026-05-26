@@ -35,7 +35,7 @@ interface WizardFormProps {
   submitting?: boolean;
   invalid?: boolean;
   submitDisabled?: boolean;
-  submitTooltip?: ReactNode;
+  submitTooltip?: string;
   submitLabel?: string;
   onCancel?(): void;
   modalProps?: any;
@@ -81,7 +81,7 @@ export const WizardForm: FC<WizardFormProps> = ({
           <CloseDialogButton className="min-w-125px" />
           <SubmitButton
             disabled={props.invalid || submitDisabled}
-            disabledReason={submitTooltip as any}
+            disabledReason={submitTooltip}
             submitting={props.submitting}
             label={
               isLast

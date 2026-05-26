@@ -80,7 +80,7 @@ const EditManagedIsdsDialog: FC<EditManagedIsdsDialogProps> = ({ resolve }) => {
           : [];
         await usersPartialUpdate({
           path: { uuid: resolve.user.uuid },
-          body: { managed_isds: isds } as any,
+          body: { managed_isds: isds },
         });
         return isds;
       },

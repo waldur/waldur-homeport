@@ -652,7 +652,7 @@ export const OrganisationAllocationTab: FC = () => {
       while (true) {
         const result = await projectsList({
           query: {
-            customer: customer!.uuid,
+            customer: [customer!.uuid],
             page_size: 25,
             o: ['name'],
             page,
@@ -662,8 +662,7 @@ export const OrganisationAllocationTab: FC = () => {
               ? { start_date_after: projectStartAfter }
               : {}),
             ...(projectEndBefore ? { end_date_before: projectEndBefore } : {}),
-            ended: false,
-          } as any,
+          },
         });
         allProjects = allProjects.concat(result.data);
         if (page === 1) {

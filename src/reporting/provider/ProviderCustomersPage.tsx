@@ -16,7 +16,6 @@ import { CustomerAcquisitionTrendChart } from './CustomerAcquisitionTrendChart';
 import { ProviderFilter } from './ProviderFilter';
 import { TopCustomersByResources } from './TopCustomersByResources';
 import { TopCustomersByRevenue } from './TopCustomersByRevenue';
-import { MonthlyData, TopCustomer } from './types';
 
 const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
   providerUuid,
@@ -53,9 +52,8 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
   if (error) return <LoadingErred loadData={refetch} />;
   if (!data) return null;
 
-  const topByRevenue = (data.top_by_revenue as unknown as TopCustomer[]) || [];
-  const topByResources =
-    (data.top_by_resources as unknown as TopCustomer[]) || [];
+  const topByRevenue = data.top_by_revenue || [];
+  const topByResources = data.top_by_resources || [];
 
   return (
     <>
@@ -63,9 +61,7 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
 
       <Row className="g-4 mb-6">
         <Col xs={12}>
-          <CustomerAcquisitionTrendChart
-            monthly={(data.monthly as unknown as MonthlyData[]) || []}
-          />
+          <CustomerAcquisitionTrendChart monthly={data.monthly || []} />
         </Col>
       </Row>
 

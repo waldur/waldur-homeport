@@ -1,27 +1,26 @@
-import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { PlusCircleIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FC, useCallback, useState } from 'react';
+import { FC, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import {
   marketplaceOfferingProfilesAddRole,
-  marketplaceOfferingProfilesRemoveRole,
   marketplaceOfferingProfilesRetrieve,
   marketplaceOfferingRolesList,
   rolesList,
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { formatJsxTemplate, translate } from '@/i18n';
+import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
-const PROFILE_KEY = (uuid: string) => ['offering-profile', uuid];
+import { OfferingProfileRoleRemoveButton } from './OfferingProfileRoleRemoveButton';
+
+export const PROFILE_KEY = (uuid: string) => ['offering-profile', uuid];
 
 export const OfferingProfileDetail: FC = () => {
-  const queryClient = useQueryClient();
   const { params } = useCurrentStateAndParams();
   const uuid = params.uuid as string;
 
@@ -31,32 +30,6 @@ export const OfferingProfileDetail: FC = () => {
       marketplaceOfferingProfilesRetrieve({ path: { uuid } }).then(
         (r: any) => r.data,
       ),
-  });
-
-  const refetch = useCallback(
-    () => queryClient.invalidateQueries({ queryKey: PROFILE_KEY(uuid) }),
-    [queryClient, uuid],
-  );
-
-  const removeMutation = useManagedMutation<any, any, any>({
-    mutationFn: (role) =>
-      marketplaceOfferingProfilesRemoveRole({
-        path: { uuid },
-        body: { role: role.uuid } as any,
-      }),
-    successMessage: translate('Role removed from profile.'),
-    errorMessage: translate('Unable to remove role.'),
-    refetch,
-    confirmation: {
-      title: translate('Confirmation'),
-      body: (role) =>
-        translate(
-          'Remove role {role} from profile? This will revoke all UserRole grants for this role on bound offerings.',
-          { role: <b>{role.name}</b> },
-          formatJsxTemplate,
-        ),
-      options: { forDeletion: true },
-    },
   });
 
   const [showAdd, setShowAdd] = useState(false);
@@ -120,14 +93,10 @@ export const OfferingProfileDetail: FC = () => {
                     </td>
                     <td>{renderFieldOrDash(r.description)}</td>
                     <td className="text-end">
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-light text-danger"
-                        onClick={() => removeMutation.mutate(r)}
-                        disabled={removeMutation.isPending}
-                      >
-                        <TrashIcon weight="bold" /> {translate('Remove')}
-                      </button>
+                      <OfferingProfileRoleRemoveButton
+                        profileUuid={uuid}
+                        role={r}
+                      />
                     </td>
                   </tr>
                 ))}
@@ -141,9 +110,8 @@ export const OfferingProfileDetail: FC = () => {
         <AddRoleToProfileDialog
           profileUuid={uuid}
           onClose={() => setShowAdd(false)}
-          onAdded={async () => {
+          onAdded={() => {
             setShowAdd(false);
-            await refetch();
           }}
         />
       )}
@@ -156,8 +124,6 @@ const AddRoleToProfileDialog: FC<{
   onClose(): void;
   onAdded(): void;
 }> = ({ profileUuid, onClose, onAdded }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-
   // Available roles = system + offering roles whose content_type is
   // resource or resource_project.
   const { data: roles = [] } = useQuery({
@@ -186,25 +152,22 @@ const AddRoleToProfileDialog: FC<{
     },
   });
 
-  const [submitting, setSubmitting] = useState(false);
-  const submit = useCallback(
-    async (roleUuid: string) => {
-      setSubmitting(true);
-      try {
-        await marketplaceOfferingProfilesAddRole({
-          path: { uuid: profileUuid },
-          body: { role: roleUuid } as any,
-        });
-        showSuccess(translate('Role added to profile.'));
-        onAdded();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to add role.'));
-      } finally {
-        setSubmitting(false);
-      }
-    },
-    [showSuccess, showErrorResponse, profileUuid, onAdded],
-  );
+  const { mutate: submit, isPending: submitting } = useManagedMutation<
+    any,
+    any,
+    string
+  >({
+    mutationFn: (roleUuid) =>
+      marketplaceOfferingProfilesAddRole({
+        path: { uuid: profileUuid },
+        body: { role: roleUuid },
+      }),
+    successMessage: translate('Role added to profile.'),
+    errorMessage: translate('Unable to add role.'),
+    onSuccess: onAdded,
+    invalidateQueries: [{ queryKey: PROFILE_KEY(profileUuid) }],
+    closeModal: false,
+  });
 
   return (
     <div
