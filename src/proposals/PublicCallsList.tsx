@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
 import {
@@ -17,9 +19,15 @@ import {
   ProposalPublicCallsFilterFormId,
 } from '@/table/generated/ProposalPublicCallsFilter';
 import Table from '@/table/Table';
+import { TableTab } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import {
+  buildCallTabs,
+  CALL_STATE_VARIANT,
+  fetchAllCallCounts,
+} from './call-tabs';
 import { CallCard } from './CallCard';
 import { PublicCallApplyAction } from './details/PublicCallApplyAction';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
@@ -29,6 +37,28 @@ import {
   getCallStateOptions,
   getRoundsWithStatus,
 } from './utils';
+
+const useCallTabs = (
+  offering_uuid?: string,
+  provider_uuid?: string,
+): TableTab[] => {
+  const { data: counts } = useQuery({
+    queryKey: ['callTabCounts', offering_uuid, provider_uuid],
+    queryFn: () => {
+      const baseQuery: ProposalPublicCallsListData['query'] = {};
+      if (offering_uuid) {
+        baseQuery.offering_uuid = offering_uuid;
+      }
+      if (provider_uuid) {
+        baseQuery.offerings_provider_uuid = provider_uuid;
+      }
+      return fetchAllCallCounts(proposalPublicCallsList, baseQuery);
+    },
+    staleTime: 30_000,
+  });
+
+  return useMemo(() => buildCallTabs(counts), [counts]);
+};
 
 interface PublicCallsListProps {
   offering_uuid: string;
@@ -66,7 +96,15 @@ const CallColumns = [
   },
   {
     title: translate('State'),
-    render: ({ row }) => <>{formatCallState(row.state)}</>,
+    render: ({ row }) => (
+      <Badge
+        variant={CALL_STATE_VARIANT[row.state] || 'secondary'}
+        pill
+        outline
+      >
+        {formatCallState(row.state)}
+      </Badge>
+    ),
     filter: 'state',
     inlineFilter: (row) =>
       getCallStateOptions().filter((s) => s.value === row.state),
@@ -111,7 +149,9 @@ const CallColumns = [
 const PublicCallsListTable: FunctionComponent<PublicCallsListProps> = (
   props,
 ) => {
+  const { params } = useCurrentStateAndParams();
   const { values } = useFormState();
+  const callTabs = useCallTabs(props.offering_uuid, props.provider_uuid);
 
   const filters = useMemo(
     () => selectProposalPublicCallsFilter(values),
@@ -126,8 +166,11 @@ const PublicCallsListTable: FunctionComponent<PublicCallsListProps> = (
     if (props.provider_uuid) {
       result.offerings_provider_uuid = props.provider_uuid;
     }
+    if (params.state) {
+      result.state = params.state;
+    }
     return result;
-  }, [filters, props.offering_uuid, props.provider_uuid]);
+  }, [filters, props.offering_uuid, props.provider_uuid, params.state]);
   const tableProps = useTable({
     table: 'PublicCallsList',
     fetchData: createFetcher(proposalPublicCallsList),
@@ -138,6 +181,7 @@ const PublicCallsListTable: FunctionComponent<PublicCallsListProps> = (
     <Table<Call>
       title={translate('Calls for proposals')}
       {...tableProps}
+      tabs={callTabs}
       columns={CallColumns}
       initialMode={props.initialMode ? props.initialMode : 'table'}
       gridItem={({ row }) => <CallCard call={row} />}

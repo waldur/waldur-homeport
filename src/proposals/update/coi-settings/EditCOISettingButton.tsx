@@ -1,6 +1,7 @@
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
+import { callLockedTooltip } from '@/proposals/utils';
 
 import type { EditCOISettingProps } from './EditCOISettingDialog';
 
@@ -10,7 +11,14 @@ const EditCOISettingDialog = lazyComponent(() =>
   })),
 );
 
-export const EditCOISettingButton = (props: EditCOISettingProps) => {
+interface EditCOISettingButtonProps extends EditCOISettingProps {
+  disabled?: boolean;
+}
+
+export const EditCOISettingButton = ({
+  disabled,
+  ...props
+}: EditCOISettingButtonProps) => {
   const { openDialog } = useModal();
   const callback = () => {
     openDialog(EditCOISettingDialog, {
@@ -18,5 +26,12 @@ export const EditCOISettingButton = (props: EditCOISettingProps) => {
       size: 'sm',
     });
   };
-  return <CompactEditButton onClick={callback} variant="secondary" />;
+  return (
+    <CompactEditButton
+      onClick={callback}
+      variant="secondary"
+      disabled={disabled}
+      tooltip={disabled ? callLockedTooltip() : undefined}
+    />
+  );
 };

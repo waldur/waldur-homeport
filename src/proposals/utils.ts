@@ -168,11 +168,17 @@ export const getCallStatus = (call: Call) => {
   else if (call.state == 'draft')
     return { label: translate('Draft'), color: 'danger' };
   else if (call.state == 'archived')
-    return { label: translate('Archived'), color: 'secondary' };
+    return { label: translate('Archived'), color: 'gray' };
   else {
     return { label: call.state, color: 'secondary' };
   }
 };
+
+// Reused by every call-config section to explain why edit/add/delete actions
+// are disabled. Co-located with the call-state helpers; the upcoming workflow
+// MR may re-home this to its constants module.
+export const callLockedTooltip = () =>
+  translate('To make changes, activate the call first.');
 
 export const getRoundInitialValues = (
   round: ProtectedRound,

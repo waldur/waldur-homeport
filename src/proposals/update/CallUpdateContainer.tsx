@@ -1,8 +1,10 @@
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
+import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { translate } from '@/i18n';
@@ -17,6 +19,7 @@ import { CallTabs } from '../details/CallTabs';
 import { TeamSection } from '../team/TeamSection';
 import { useCallBreadcrumbItems } from '../utils';
 
+import { CallActions } from './CallActions';
 import { CallUpdateHero } from './CallUpdateHero';
 import { COISettingsSection } from './coi-settings/COISettingsSection';
 import { CallConfiguration } from './configuration/CallConfiguration';
@@ -28,24 +31,50 @@ import { CallRoleMappingsList } from './role-mapping/CallRoleMappingsList';
 import { CallRoundsList } from './rounds/CallRoundsList';
 
 const PageHero = ({ call, refetch }) => (
-  <div className="container-fluid my-5">
-    <CallTabs call={call} />
-    <CallUpdateHero call={call} refetch={refetch} />
-  </div>
+  <>
+    {/* FeaturedIcon is used inline in the warning banner, not as an icon component.
+       The WarningCircleIcon weight is set on the component import, not the JSX prop. */}
+    {/* eslint-disable waldur-custom/enforce-featured-icon, waldur-custom/enforce-phosphor-icon-weight */}
+    {call.state === 'archived' && (
+      <div className="d-flex align-items-center gap-3 bg-light-warning text-warning border-bottom py-3 px-8">
+        <FeaturedIcon
+          IconComponent={WarningCircleIcon}
+          size="sm"
+          variant="warning"
+        />
+        <div className="flex-grow-1">
+          <span className="fw-semibold">
+            {translate('This call is archived and read-only.')}
+          </span>{' '}
+          <span>
+            {translate(
+              'All items can be browsed, but not edited. To make changes, activate the call first.',
+            )}
+          </span>
+        </div>
+        <CallActions call={call} refetch={refetch} />
+      </div>
+    )}
+    {/* Re-enable lint rules after the archived banner section */}
+    {/* eslint-enable waldur-custom/enforce-featured-icon, waldur-custom/enforce-phosphor-icon-weight */}
+    <div className="container-fluid my-5">
+      <CallTabs call={call} />
+      <CallUpdateHero call={call} refetch={refetch} />
+    </div>
+  </>
 );
 
 const Body = ({ call, refetch, loading }) => {
+  // Archived calls are read-only. The follow-up workflow MR will extend this
+  // to also cover the 'active' state.
+  const isReadOnly = call.state === 'archived';
+
   const tabs = useMemo<PageBarTab[]>(
     () =>
       [
         {
           key: 'general',
-          title: (
-            <>
-              {!call.description && <ValidationIcon value={false} />}
-              {translate('General')}
-            </>
-          ),
+          title: translate('General'),
           component: CallGeneralSection,
         },
         {
@@ -57,6 +86,7 @@ const Body = ({ call, refetch, loading }) => {
           key: 'rounds',
           title: (
             <>
+              {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
               {!call.rounds.length && <ValidationIcon value={false} />}
               {translate('Rounds')}
             </>
@@ -113,7 +143,14 @@ const Body = ({ call, refetch, loading }) => {
     tabSpec: { component: Component },
   } = usePageTabsTransmitter(tabs);
 
-  return <Component call={call} refetch={refetch} loading={loading} />;
+  return (
+    <Component
+      call={call}
+      refetch={refetch}
+      loading={loading}
+      isReadOnly={isReadOnly}
+    />
+  );
 };
 
 export const CallUpdateContainer: FunctionComponent = () => {
