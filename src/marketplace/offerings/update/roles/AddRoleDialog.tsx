@@ -34,7 +34,7 @@ export const AddRoleDialog: FC<{ resolve: AddRoleResolve }> = ({ resolve }) => {
           name: formData.name,
           content_type_input: formData.scope?.value || 'resource_project',
           description: formData.description || '',
-        } as any,
+        },
       }),
     successMessage: translate('Role has been added successfully.'),
     errorMessage: translate('Unable to add role.'),

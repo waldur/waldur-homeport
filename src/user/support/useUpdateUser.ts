@@ -14,7 +14,7 @@ export const useUpdateUser = (user: User) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const currentUser = useUser() as any;
+  const currentUser = useUser();
 
   const { showErrorResponse, showSuccess } = useNotify();
 

@@ -152,7 +152,7 @@ const flattenToolBlocks = (
  * JSON fields can't be narrowed at schema-gen time, so we cast here.
  */
 export const messageBlocks = (message: Message): UIBlock[] =>
-  flattenToolBlocks(message.blocks as unknown as readonly unknown[]);
+  flattenToolBlocks(message.blocks);
 
 export function extractTextFromBlocks(blocks: UIBlock[]): string {
   if (!blocks || blocks.length === 0) return '';

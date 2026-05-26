@@ -2,8 +2,11 @@ import { ArrowRightIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Field, Form, useFormState } from 'react-final-form';
 import {
+  BillingModeEnum,
+  BillingTypeEnum,
   marketplaceProviderOfferingsSwitchBillingMode,
   PublicOfferingDetails,
+  SwitchBillingModeRequest,
 } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
@@ -12,7 +15,11 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-const BILLING_MODES = [
+const BILLING_MODES: Array<{
+  value: BillingModeEnum;
+  label: string;
+  description: string;
+}> = [
   {
     value: 'monthly',
     label: translate('Monthly (Limit-based)'),
@@ -36,7 +43,7 @@ const BILLING_MODES = [
   },
 ];
 
-const BILLING_TYPE_LABELS: Record<string, string> = {
+const BILLING_TYPE_LABELS: Record<BillingTypeEnum, string> = {
   limit: translate('Monthly'),
   one: translate('Prepaid'),
   usage: translate('Usage'),
@@ -44,17 +51,17 @@ const BILLING_TYPE_LABELS: Record<string, string> = {
   few: translate('On plan switch'),
 };
 
-const MODE_TO_BILLING_TYPE: Record<string, string> = {
+const MODE_TO_BILLING_TYPE: Record<BillingModeEnum, string> = {
   monthly: 'limit',
   prepaid: 'one',
   usage: 'usage',
 };
 
-const ImpactPreview: FC<{ components: any[]; currentMode: string }> = ({
-  components,
-  currentMode,
-}) => {
-  const { values } = useFormState();
+const ImpactPreview: FC<{
+  components: any[];
+  currentMode: BillingModeEnum;
+}> = ({ components, currentMode }) => {
+  const { values } = useFormState<SwitchBillingModeRequest>();
   const targetMode = values.billing_mode;
 
   const affected = useMemo(() => {
@@ -95,7 +102,7 @@ interface SwitchBillingModeDialogProps {
   resolve: {
     offering: Pick<PublicOfferingDetails, 'uuid' | 'type' | 'components'>;
     refetch(): void;
-    currentMode: string;
+    currentMode: BillingModeEnum;
   };
 }
 
@@ -104,11 +111,15 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
 ) => {
   const availableModes = BILLING_MODES;
 
-  const switchBillingModeMutation = useManagedMutation<any, any, any>({
+  const switchBillingModeMutation = useManagedMutation<
+    any,
+    any,
+    SwitchBillingModeRequest
+  >({
     mutationFn: (formData) =>
       marketplaceProviderOfferingsSwitchBillingMode({
         path: { uuid: props.resolve.offering.uuid },
-        body: formData as any,
+        body: formData,
       }),
     successMessage: translate('Billing mode has been updated.'),
     errorMessage: translate('Unable to update billing mode.'),
@@ -116,7 +127,7 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
   });
 
   return (
-    <Form<{ billing_mode: string }>
+    <Form<SwitchBillingModeRequest>
       onSubmit={(values) => switchBillingModeMutation.mutateAsync(values)}
       initialValues={{ billing_mode: props.resolve.currentMode }}
       render={({ handleSubmit, submitting }) => (

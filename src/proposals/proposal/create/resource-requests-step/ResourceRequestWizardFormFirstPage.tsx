@@ -45,7 +45,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
   const { change } = useForm();
 
   return (
-    <WizardForm {...(props as any)}>
+    <WizardForm {...props}>
       <div className="size-lg row">
         {isLoading ? (
           <LoadingSpinner />

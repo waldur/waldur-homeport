@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { marketplaceResourcesList } from 'waldur-js-client';
+import { marketplaceResourcesList, NestedColumn } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
@@ -38,7 +38,7 @@ import { resourcesListRequiredFields } from './utils';
 interface OwnProps {
   category_uuid: string;
   category_title: string;
-  columns: CategoryColumn[];
+  columns: NestedColumn[];
   standalone;
 }
 

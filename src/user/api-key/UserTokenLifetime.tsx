@@ -10,7 +10,7 @@ import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { SecretField } from '@/marketplace/common/SecretField';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { useNotify } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 const TOKEN_OPTIONS = [
   { label: translate('{count} minutes', { count: 10 }), value: 600 },
@@ -31,26 +31,19 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
   const [tokenLifetime, setTokenLifetime] = useState(
     TOKEN_OPTIONS.find((option) => option.value === props.user.token_lifetime),
   );
-  const [submitting, setSubmitting] = useState(false);
 
-  const { showSuccess, showErrorResponse } = useNotify();
-
-  const handleSubmit = async () => {
-    try {
-      setSubmitting(true);
-      await usersPartialUpdate({
+  const { mutate: handleSubmit, isPending: submitting } = useManagedMutation({
+    mutationFn: () =>
+      usersPartialUpdate({
         path: { uuid: props.user.uuid },
         body: {
-          token_lifetime: tokenLifetime.value,
+          token_lifetime: tokenLifetime?.value,
         },
-      });
-      showSuccess(translate('User has been updated'));
-    } catch (error) {
-      showErrorResponse(error, translate('User could not be updated'));
-    } finally {
-      setSubmitting(false);
-    }
-  };
+      }),
+    successMessage: translate('User has been updated'),
+    errorMessage: translate('User could not be updated'),
+    closeModal: false,
+  });
 
   return (
     <Card className="card-bordered mb-6">

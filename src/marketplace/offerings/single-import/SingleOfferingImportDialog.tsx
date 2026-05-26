@@ -90,7 +90,7 @@ export const SingleOfferingImportDialog: FunctionComponent<
       };
 
       const response = await marketplaceProviderOfferingsImportOffering({
-        body: importParams as any,
+        body: importParams,
       });
 
       if (response.data) {

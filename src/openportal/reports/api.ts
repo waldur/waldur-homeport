@@ -21,9 +21,6 @@ import {
   openportalOfferingMappingRetrieve,
   openportalProjectMappingRetrieve,
   openportalUserMappingRetrieve,
-  OfferingMappingResponse,
-  ProjectMappingResponse,
-  UserMappingResponse,
 } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
@@ -155,12 +152,12 @@ export const fetchOfferingMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
 ) =>
-  fetchMappingBatched<OfferingMappingResponse>(
+  fetchMappingBatched<any>(
     'offering_mapping',
     ids,
     (identifier) =>
       openportalOfferingMappingRetrieve({ query: { identifier } }).then(
-        (res) => res.data as unknown as Record<string, OfferingMappingResponse>,
+        (res) => res.data as unknown as Record<string, any>,
       ),
     onProgress,
   );
@@ -169,12 +166,12 @@ export const fetchProjectMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
 ) =>
-  fetchMappingBatched<ProjectMappingResponse>(
+  fetchMappingBatched<any>(
     'project_mapping',
     ids,
     (identifier) =>
       openportalProjectMappingRetrieve({ query: { identifier } }).then(
-        (res) => res.data as unknown as Record<string, ProjectMappingResponse>,
+        (res) => res.data as unknown as Record<string, any>,
       ),
     onProgress,
   );
@@ -183,12 +180,12 @@ export const fetchUserMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
 ) =>
-  fetchMappingBatched<UserMappingResponse>(
+  fetchMappingBatched<any>(
     'user_mapping',
     ids,
     (identifier) =>
       openportalUserMappingRetrieve({ query: { identifier } }).then(
-        (res) => res.data as unknown as Record<string, UserMappingResponse>,
+        (res) => res.data as unknown as Record<string, any>,
       ),
     onProgress,
   );

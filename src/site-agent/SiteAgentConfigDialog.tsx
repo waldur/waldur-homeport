@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
 import { Alert, Form } from 'react-bootstrap';
 import {
@@ -12,7 +12,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { SITE_AGENT_PLUGIN } from './constants';
 import { SiteAgentConfigPreview } from './SiteAgentConfigPreview';
@@ -34,8 +34,6 @@ interface SiteAgentConfigDialogProps {
 export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
   resolve: { provider, fixedOffering },
 }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-
   const { closeDialog } = useModal();
 
   const [selectedOfferings, setSelectedOfferings] = useState<string[]>(
@@ -59,29 +57,28 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
   });
 
   // Generate config mutation
-  const { mutate: generateConfig, isPending: isGenerating } = useMutation({
-    mutationFn: async () => {
-      const response = await marketplaceServiceProvidersGenerateSiteAgentConfig(
-        {
-          path: { uuid: provider.uuid },
-          body: {
-            offering_uuids: selectedOfferings,
-            include_policy_settings: includePolicySettings,
-            ...(apiUrl && { waldur_api_url: apiUrl }),
-            ...(timezone && { timezone }),
-          },
-        },
-      );
-      return response.data;
-    },
-    onSuccess: (data) => {
-      setGeneratedConfig(data as unknown as string);
-      showSuccess(translate('Configuration generated successfully.'));
-    },
-    onError: (error: Response) => {
-      showErrorResponse(error, translate('Failed to generate configuration.'));
-    },
-  });
+  const { mutate: generateConfig, isPending: isGenerating } =
+    useManagedMutation<any, any, void>({
+      mutationFn: async () => {
+        const response =
+          await marketplaceServiceProvidersGenerateSiteAgentConfig({
+            path: { uuid: provider.uuid },
+            body: {
+              offering_uuids: selectedOfferings,
+              include_policy_settings: includePolicySettings,
+              ...(apiUrl && { waldur_api_url: apiUrl }),
+              ...(timezone && { timezone }),
+            },
+          });
+        return response.data;
+      },
+      onSuccess: (data) => {
+        setGeneratedConfig(data);
+      },
+      successMessage: translate('Configuration generated successfully.'),
+      errorMessage: translate('Failed to generate configuration.'),
+      closeModal: false,
+    });
 
   const handleOfferingToggle = (offeringUuid: string) => {
     // Don't allow deselecting the fixed offering

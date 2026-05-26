@@ -18,10 +18,8 @@ import { AutocompleteField } from '@/marketplace/landing/AutocompleteField';
 interface OfferingAutocompleteProps {
   offeringFilter?: object;
   name?: string;
-  field?: (
-    | MarketplacePublicOfferingsListData
-    | MarketplaceProviderOfferingsListData
-  )['query']['field'];
+  field?: MarketplacePublicOfferingsListData['query']['field'] &
+    MarketplaceProviderOfferingsListData['query']['field'];
   providerOfferings?: boolean;
   className?: string;
   description?: string;
@@ -41,7 +39,7 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
     () =>
       publicOfferingsAutocomplete({
         ...props.offeringFilter,
-        ...(field ? { field: field as any } : {}),
+        ...(field ? { field } : {}),
       }),
     [props.offeringFilter, field],
   );
@@ -50,7 +48,7 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
     () =>
       providerOfferingsAutocomplete({
         ...props.offeringFilter,
-        ...(field ? { field: field as any } : {}),
+        ...(field ? { field } : {}),
       }),
     [props.offeringFilter, field],
   );

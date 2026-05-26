@@ -73,8 +73,8 @@ export const CustomerMappingEditDialog = ({
   });
 
   const mutationError = submitMutation.error
-    ? (submitMutation.error as any).response?.data?.detail ||
-      (submitMutation.error as any).message ||
+    ? submitMutation.error.response?.data?.detail ||
+      submitMutation.error.message ||
       translate('Failed to update mapping')
     : null;
 

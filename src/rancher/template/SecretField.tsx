@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm, useFormState } from 'react-final-form';
-import { rancherProjectsSecretsRetrieve } from 'waldur-js-client';
+import { rancherProjectsSecretsList, Secret } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -23,10 +23,10 @@ export const SecretField: React.FC<FieldProps> = (props) => {
 
     queryFn: () =>
       project
-        ? rancherProjectsSecretsRetrieve({ path: { uuid: project.uuid } }).then(
-            (r) => r.data as unknown as any[],
+        ? rancherProjectsSecretsList({ path: { uuid: project.uuid } }).then(
+            (r) => r.data,
           )
-        : Promise.resolve<any[]>([]),
+        : Promise.resolve<Secret[]>([]),
   });
 
   const form = useForm();

@@ -110,11 +110,10 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
                 </tr>
               </thead>
               <tbody>
-                {((data as any).accepted_consents_over_time || []).length >
-                0 ? (
+                {(data.accepted_consents_over_time || []).length > 0 ? (
                   (showAllAcceptedMonths
-                    ? (data as any).accepted_consents_over_time
-                    : (data as any).accepted_consents_over_time.slice(-4)
+                    ? data.accepted_consents_over_time
+                    : data.accepted_consents_over_time.slice(-4)
                   ).map((item) => (
                     <tr key={item.date}>
                       <td>{item.date}</td>
@@ -131,7 +130,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
               </tbody>
             </table>
           </div>
-          {((data as any).accepted_consents_over_time || []).length > 4 && (
+          {(data.accepted_consents_over_time || []).length > 4 && (
             <div className="text-center mt-2">
               <button
                 type="button"

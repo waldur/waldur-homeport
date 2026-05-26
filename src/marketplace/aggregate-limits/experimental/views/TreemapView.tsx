@@ -77,7 +77,7 @@ function buildHierarchy(
             label: r.name,
             detail: `${r.measured_unit} · ${
               r.billing_type === 'limit'
-                ? `${translate('Limit-based')} · ${(r as any).current_period_label ?? ''}`
+                ? `${translate('Limit-based')} · ${r.current_period_label ?? ''}`
                 : translate('Usage-based')
             }`,
           },

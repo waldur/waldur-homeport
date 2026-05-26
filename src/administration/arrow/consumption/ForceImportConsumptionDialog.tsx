@@ -105,7 +105,7 @@ export const ForceImportConsumptionDialog = ({
             period_from: periodFrom,
             period_to: periodTo,
             force: true,
-          } as any,
+          },
         });
       return response.data as any;
     },

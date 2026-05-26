@@ -25,7 +25,7 @@ async function loadData(offering_uuid: string) {
   const pluginLimits = plugins.data.find(
     (plugin) => plugin.offering_type === offering.type,
   ).available_limits;
-  const limits = (offering as any).effective_available_limits || pluginLimits;
+  const limits = offering.effective_available_limits || pluginLimits;
   return { offering, limits };
 }
 

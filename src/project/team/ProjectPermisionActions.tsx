@@ -46,7 +46,7 @@ export const ProjectPermisionActions = ({
         projectId,
       })
     ) {
-      actions.push(EditUserButton as any);
+      actions.push(EditUserButton);
     }
     if (
       hasPermission(user, {
@@ -55,7 +55,7 @@ export const ProjectPermisionActions = ({
         projectId,
       })
     ) {
-      actions.push(UserRemoveButton as any);
+      actions.push(UserRemoveButton);
     }
   }
 

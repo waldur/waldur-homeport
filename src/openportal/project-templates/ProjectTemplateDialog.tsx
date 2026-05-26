@@ -19,11 +19,11 @@ import { getCustomerURL } from '../utils';
 
 import { ProjectTemplateFormFields } from './ProjectTemplateFormFields';
 
-const INITIAL_VALUES_CREATE = {
+const INITIAL_VALUES_CREATE: Partial<ProjectTemplateFormValues> = {
   role_mapping: {},
   allocation_units_mapping: {},
   offerings: [],
-} as any;
+};
 
 interface ProjectTemplateFormValues {
   uuid?: string;
@@ -71,7 +71,7 @@ export const ProjectTemplateDialog: React.FC<ProjectTemplateDialogProps> = ({
   const user = useUser();
 
   const [initialData, setInitialData] =
-    useState<ProjectTemplateFormValues | null>(
+    useState<Partial<ProjectTemplateFormValues> | null>(
       isEdit ? null : INITIAL_VALUES_CREATE,
     );
   const [loading, setLoading] = useState(isEdit);

@@ -33,9 +33,7 @@ export const PlanComponentsTable: FC<OwnProps> = (props) => (
               <InfoIcon weight="bold" />
             </Tip>
           </td>
-          <td>
-            {parseFloat(props.row.prices[component.type] as unknown as string)}
-          </td>
+          <td>{parseFloat(props.row.prices[component.type])}</td>
           <td>
             {props.row.future_prices[component.type] ?? translate('No update')}
           </td>

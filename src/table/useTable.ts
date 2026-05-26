@@ -81,20 +81,21 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   onApplyFilterRef.current = options.onApplyFilter;
 
   // Use React Query for fetching
-  const { data, isLoading, isFetching, error, refetch } = useTableQuery({
-    table,
-    fetchData: options.fetchData,
-    filter,
-    staleTime: options.staleTime,
-    queryField: options.queryField,
-    mandatoryFields: options.mandatoryFields,
-    onFetch: options.onFetch,
-    currentPage: pagination.currentPage,
-    pageSize: pagination.pageSize,
-    query,
-    sorting,
-    activeColumns,
-  });
+  const { data, isLoading, isFetching, error, refetch } =
+    useTableQuery<RowType>({
+      table,
+      fetchData: options.fetchData,
+      filter,
+      staleTime: options.staleTime,
+      queryField: options.queryField,
+      mandatoryFields: options.mandatoryFields,
+      onFetch: options.onFetch,
+      currentPage: pagination.currentPage,
+      pageSize: pagination.pageSize,
+      query,
+      sorting,
+      activeColumns,
+    });
 
   // Sync fetched data to Redux for compatibility
   useEffect(() => {

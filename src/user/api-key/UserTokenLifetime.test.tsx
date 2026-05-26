@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -9,8 +10,26 @@ import { useNotify } from '@/store/notify';
 import { UserTokenLifetime } from './UserTokenLifetime';
 
 vi.mock('@/store/notify');
+vi.mock('@/modal/actions', () => ({
+  useModal: () => ({
+    closeDialog: vi.fn(),
+    confirm: vi.fn().mockResolvedValue(true),
+  }),
+}));
 
 vi.mock('waldur-js-client');
+
+const renderWithQueryClient = (ui: React.ReactElement) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+  return render(
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
+  );
+};
 
 describe('UserTokenLifetime component', () => {
   const mockUser: User = {
@@ -37,7 +56,7 @@ describe('UserTokenLifetime component', () => {
   });
 
   it('renders the component with initial values', () => {
-    render(<UserTokenLifetime user={mockUser} />);
+    renderWithQueryClient(<UserTokenLifetime user={mockUser} />);
 
     // Check if the token is displayed as masked
     expect(screen.getByText('••••••••••••')).toBeInTheDocument();
@@ -47,7 +66,7 @@ describe('UserTokenLifetime component', () => {
   });
 
   it('shows warning when "token will not timeout" option is selected', async () => {
-    render(<UserTokenLifetime user={mockUser} />);
+    renderWithQueryClient(<UserTokenLifetime user={mockUser} />);
 
     // Open the select and choose the "no timeout" option
     await userEvent.click(screen.getByRole('combobox'));
@@ -62,7 +81,7 @@ describe('UserTokenLifetime component', () => {
   it('calls updateUser API on form submit with the correct payload', async () => {
     vi.mocked(usersPartialUpdate).mockResolvedValueOnce(null);
 
-    render(<UserTokenLifetime user={mockUser} />);
+    renderWithQueryClient(<UserTokenLifetime user={mockUser} />);
 
     // Trigger the submit
     await userEvent.click(
@@ -83,7 +102,7 @@ describe('UserTokenLifetime component', () => {
   it('shows error message when API call fails', async () => {
     vi.mocked(usersPartialUpdate).mockRejectedValue(new Error('API error'));
 
-    render(<UserTokenLifetime user={mockUser} />);
+    renderWithQueryClient(<UserTokenLifetime user={mockUser} />);
     await userEvent.click(
       screen.getByRole('button', { name: /Save changes/i }),
     );

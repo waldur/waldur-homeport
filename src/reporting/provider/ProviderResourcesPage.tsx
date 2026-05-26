@@ -27,11 +27,6 @@ import { ProviderFilter } from './ProviderFilter';
 import { ResourceCreationTrendChart } from './ResourceCreationTrendChart';
 import { ResourcesByStateChart } from './ResourcesByStateChart';
 
-interface MonthlyData {
-  month: string;
-  count: number;
-}
-
 // Resource name column with link
 const ResourceNameColumn = ({ row }: { row: Resource }) => (
   <Link
@@ -162,9 +157,7 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
           />
         </Col>
         <Col xs={12} lg={6}>
-          <ResourceCreationTrendChart
-            monthly={(data.monthly as unknown as MonthlyData[]) || []}
-          />
+          <ResourceCreationTrendChart monthly={data.monthly || []} />
         </Col>
       </Row>
     </>

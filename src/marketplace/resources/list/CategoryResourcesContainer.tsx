@@ -34,7 +34,7 @@ export const CategoryResourcesContainer: React.FC = () => {
   } else {
     return (
       <CategoryResourcesList
-        columns={data.columns as any}
+        columns={data.columns}
         category_uuid={category_uuid}
         category_title={data.title}
         standalone

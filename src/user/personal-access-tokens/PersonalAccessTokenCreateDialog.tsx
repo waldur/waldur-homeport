@@ -91,11 +91,11 @@ export const PersonalAccessTokenCreateDialog: React.FC<
 
   useEffect(() => {
     personalAccessTokensAvailableScopesList().then((res) => {
-      setAvailableScopes(new Set((res.data as any[]).map((s) => s.permission)));
+      setAvailableScopes(new Set(res.data.map((s) => s.permission)));
     });
     personalAccessTokensAvailableBindingTargetsList().then((res) => {
       const map: Record<string, Set<string>> = {};
-      for (const row of res.data as any[]) {
+      for (const row of res.data) {
         map[row.permission] = new Set(row.types);
       }
       setBindingTargets(map);

@@ -76,7 +76,8 @@ export const OfferingsAutocompleteCommonFields = [
   'thumbnail',
   'customer_name',
   'customer_uuid',
-] as any[];
+] as MarketplaceProviderOfferingsListData['query']['field'] &
+  MarketplacePublicOfferingsListData['query']['field'];
 
 export const providerOfferingsAutocomplete = (
   extraQuery?: MarketplaceProviderOfferingsListData['query'],
@@ -89,7 +90,8 @@ export const providerOfferingsAutocomplete = (
   });
 
 export const publicOfferingsAutocomplete = (
-  extraQuery?: MarketplacePublicOfferingsListData['query'],
+  extraQuery?: MarketplacePublicOfferingsListData['query'] &
+    MarketplaceProviderOfferingsListData['query'],
 ) =>
   createLoadOptions(marketplacePublicOfferingsList, 'name', {
     field: OfferingsAutocompleteCommonFields,

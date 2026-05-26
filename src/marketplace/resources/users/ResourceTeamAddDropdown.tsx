@@ -1,20 +1,14 @@
-import {
-  CaretDownIcon,
-  EnvelopeSimpleIcon,
-  PlusCircleIcon,
-} from '@phosphor-icons/react';
+import { CaretDownIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
-import { openResourceInvitationDialog } from '../projects/openResourceInvitationDialog';
-
 import { AddUserButton } from './AddUserButton';
+import { InviteUserButton } from './InviteUserButton';
 
 interface ResourceTeamAddDropdownProps {
   scope: 'resource' | 'resource_project';
@@ -82,20 +76,14 @@ export const ResourceTeamAddDropdown: FC<ResourceTeamAddDropdownProps> = ({
         </span>
       </Dropdown.Toggle>
       <Dropdown.Menu flip>
-        <ActionItem
-          title={translate('Invite')}
-          iconNode={<EnvelopeSimpleIcon weight="bold" />}
-          action={() =>
-            openResourceInvitationDialog({
-              scopeUrl,
-              scopeUuid,
-              scopeLabel,
-              contentType: scope,
-              offeringUuid: offering?.uuid,
-              user,
-              refetch,
-            })
-          }
+        <InviteUserButton
+          scopeUrl={scopeUrl}
+          scopeUuid={scopeUuid}
+          scopeLabel={scopeLabel}
+          contentType={scope}
+          offeringUuid={offering?.uuid}
+          user={user}
+          refetch={refetch}
         />
         {showAssign && (
           <AddUserButton

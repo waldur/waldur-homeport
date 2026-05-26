@@ -49,7 +49,7 @@ export const EditFieldDialog = (props: { resolve: EditOfferingProps }) => {
             }
           >
             <Field
-              render={props.resolve.fieldComponent as any}
+              render={props.resolve.fieldComponent}
               name="value"
               label={props.resolve.label}
               hideLabel={props.resolve.hideLabel}

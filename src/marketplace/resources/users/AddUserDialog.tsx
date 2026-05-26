@@ -60,7 +60,7 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
         body: {
           user: formData.user.uuid,
           role: formData.role.uuid,
-        } as any,
+        },
       });
     },
     successMessage: translate('User has been assigned successfully.'),

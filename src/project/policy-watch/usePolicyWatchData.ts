@@ -284,7 +284,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         marketplaceSlurmPeriodicUsagePoliciesEvaluationLogsList({
           path: { uuid: policyUuid },
           query: { page_size: 50 },
-        } as any).then((r) => r.data || []),
+        }).then((r) => r.data || []),
       staleTime: SHORT_STALE_TIME,
       refetchOnWindowFocus: false,
     })),

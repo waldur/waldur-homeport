@@ -15,7 +15,7 @@ export const AccessSubnetCreateButton = ({
   customer_url,
 }: Omit<AccessSubnetFormData, 'row'>) => (
   <CreateModalButton
-    dialog={AccessSubnetForm as any}
+    dialog={AccessSubnetForm}
     resolve={{ refetch, customer_url }}
     size="lg"
     title={translate('Add access subnet')}
