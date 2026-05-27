@@ -1,4 +1,3 @@
-import { reducer as notificationsReducer } from 'reapop';
 import { combineReducers } from 'redux';
 
 import { reducer as drawer } from '@/drawer/reducer';
@@ -9,7 +8,6 @@ import { type TableState } from '@/table/types';
 import { reducer as workspace } from '@/workspace/reducers';
 
 export const staticReducers = {
-  notifications: notificationsReducer(),
   drawer,
   workspace,
   marketplace,
