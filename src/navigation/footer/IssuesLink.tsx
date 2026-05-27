@@ -1,8 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { openDrawerDialog } from '@/drawer/actions';
+import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { useUser } from '@/workspace/hooks';
@@ -14,16 +13,14 @@ const QuickIssueContainer = lazyComponent(() =>
 );
 
 export const IssuesLink: React.FC = () => {
-  const dispatch = useDispatch();
+  const { openDrawer } = useDrawer();
   const user = useUser();
   const showIssues = hasSupport();
 
-  const openDrawer = () => {
-    dispatch(
-      openDrawerDialog(QuickIssueContainer, {
-        title: translate('Issues'),
-      }),
-    );
+  const handleOpenDrawer = () => {
+    openDrawer(QuickIssueContainer, {
+      title: translate('Issues'),
+    });
   };
 
   return showIssues && user ? (
@@ -31,8 +28,8 @@ export const IssuesLink: React.FC = () => {
       <span
         className="menu-link px-3"
         role="button"
-        onKeyDown={openDrawer}
-        onClick={openDrawer}
+        onKeyDown={handleOpenDrawer}
+        onClick={handleOpenDrawer}
         tabIndex={-1}
       >
         <span className="menu-title">{translate('Issues')}</span>

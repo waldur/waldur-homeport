@@ -1,25 +1,23 @@
 import { XIcon } from '@phosphor-icons/react';
 import { ErrorBoundary } from '@sentry/react';
-import React, { FunctionComponent, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FunctionComponent, useEffect, useContext } from 'react';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
 import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
 import { DrawerComponent } from '@/metronic/components';
-import { type RootState } from '@/store/reducers';
 
-import { closeDrawerDialog } from './actions';
-import { DrawerStateProps } from './reducer';
+import { DrawerContext } from './DrawerContext';
 
 export const DrawerRoot: FunctionComponent = () => {
-  const { drawerComponent, drawerProps } = useSelector<
-    { drawer: DrawerStateProps },
-    DrawerStateProps
-  >((state: RootState) => state.drawer);
-  const componentProps = drawerProps?.props || {};
-  const dispatch = useDispatch();
+  const context = useContext(DrawerContext);
+
+  if (!context) {
+    return null;
+  }
+
+  const { drawerComponent, drawerProps, closeDrawer } = context;
   const [isDirtyContext, setIsDirtyContext] = React.useState(false);
   const isDirtyForm = isDirtyContext;
   const onHide = () => {
@@ -33,7 +31,7 @@ export const DrawerRoot: FunctionComponent = () => {
     ) {
       return;
     }
-    dispatch(closeDrawerDialog(drawerProps));
+    closeDrawer();
   };
 
   const drawer = DrawerComponent.getInstance('kt_drawer');
@@ -86,7 +84,7 @@ export const DrawerRoot: FunctionComponent = () => {
               <ErrorBoundary fallback={ErrorMessage}>
                 {drawerComponent
                   ? React.createElement(drawerComponent, {
-                      ...componentProps,
+                      ...drawerProps,
                       close: onHide,
                     })
                   : null}
@@ -96,7 +94,7 @@ export const DrawerRoot: FunctionComponent = () => {
         </div>
         {drawerProps.footer && (
           <div className="card-footer py-5 text-center" id="kt_drawer_footer">
-            <drawerProps.footer {...componentProps} close={onHide} />
+            <drawerProps.footer {...drawerProps} close={onHide} />
           </div>
         )}
       </div>

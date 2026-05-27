@@ -5,7 +5,6 @@ import {
   XIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { AIDisclosureBanner } from '@/ai-assistant/components/AIDisclosureDialog';
 import { ChatHistorySidebar } from '@/ai-assistant/components/ChatHistorySidebar';
@@ -18,7 +17,7 @@ import {
   isDisclosureAcknowledged,
 } from '@/ai-assistant/utils';
 import { IconButton, MediumIconButton } from '@/core/buttons/IconButton';
-import { closeDrawerDialog } from '@/drawer/actions';
+import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { useLayout } from '@/metronic/layout/core';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
@@ -59,7 +58,7 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   const [expanded, setExpanded] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const { hasNewMessages } = useThreadContext();
-  const dispatch = useDispatch();
+  const { closeDrawer } = useDrawer();
   const { config } = useLayout();
   const isFirstAsideChange = useRef(true);
 
@@ -72,8 +71,8 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
       isFirstAsideChange.current = false;
       return;
     }
-    dispatch(closeDrawerDialog());
-  }, [config.aside.minimized, dispatch]);
+    closeDrawer();
+  }, [config.aside.minimized, closeDrawer]);
 
   const toggleExpand = useCallback(() => {
     const drawer = document.getElementById('kt_drawer');

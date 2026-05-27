@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { openDrawerDialog, renderDrawerDialog } from '@/drawer/actions';
+import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { getTitle } from '@/navigation/title';
 import { router } from '@/router';
@@ -56,6 +56,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   }, [table]);
 
   const dispatch = useDispatch();
+  const { openDrawer, renderDrawer } = useDrawer();
 
   // Get Redux state for request building
   const tableState = useSelector(getTableState(table));
@@ -148,47 +149,45 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     (page) => dispatch(actions.fetchListGotoPage(table, page)),
     [dispatch, table],
   );
+
+  const applyFiltersFn = useCallback(
+    (apply: boolean) => dispatch(actions.applyFilters(table, apply)),
+    [dispatch, table],
+  );
+
   const openFiltersDrawer = useCallback(
     (filters: JSX.Element, formId?: string) => {
       applyFiltersFn(false);
-      return dispatch(
-        openDrawerDialog(TableFilterContainer, {
-          title: translate('Filters'),
-          subtitle: translate('Apply filters to table data'),
-          width: '500px',
-          props: {
-            table,
-            filters,
-            formId,
-            filterPosition: 'sidebar' as const,
-            setFilter: (item: FilterItem) =>
-              dispatch(actions.setFilter(table, item)),
-            apply: () => applyFiltersFn(true),
-          },
-          footer: TableFilterActions,
-        }),
-      );
+      openDrawer(TableFilterContainer, {
+        title: translate('Filters'),
+        subtitle: translate('Apply filters to table data'),
+        width: '500px',
+        table,
+        filters,
+        formId,
+        filterPosition: 'sidebar' as const,
+        setFilter: (item: FilterItem) =>
+          dispatch(actions.setFilter(table, item)),
+        apply: () => applyFiltersFn(true),
+        footer: TableFilterActions,
+      });
     },
-    [dispatch, table],
+    [openDrawer, applyFiltersFn, table, dispatch],
   );
   const renderFiltersDrawer = useCallback(
     (filters: JSX.Element, formId?: string) => {
-      dispatch(
-        renderDrawerDialog(TableFilterContainer, {
-          props: {
-            table,
-            filters,
-            formId,
-            filterPosition: 'sidebar' as const,
-            setFilter: (item: FilterItem) =>
-              dispatch(actions.setFilter(table, item)),
-          },
-        }),
-      );
+      renderDrawer(TableFilterContainer, {
+        table,
+        filters,
+        formId,
+        filterPosition: 'sidebar' as const,
+        setFilter: (item: FilterItem) =>
+          dispatch(actions.setFilter(table, item)),
+      });
       applyFiltersFn(true);
       dispatch(actions.selectSavedFilter(table, null));
     },
-    [dispatch, table],
+    [renderDrawer, applyFiltersFn, table, dispatch],
   );
 
   const setDisplayMode = useCallback(
@@ -206,10 +205,6 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   );
   const setFilter = useCallback(
     (item: FilterItem) => dispatch(actions.setFilter(table, item)),
-    [dispatch, table],
-  );
-  const applyFiltersFn = useCallback(
-    (apply: boolean) => dispatch(actions.applyFilters(table, apply)),
     [dispatch, table],
   );
   const updatePageSize = useCallback(

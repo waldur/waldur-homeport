@@ -1,12 +1,11 @@
 import { SparkleIcon } from '@phosphor-icons/react';
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { resetDrawerDOM } from '@/ai-assistant/components/LLMChatDrawer';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { isLLMChatAllowedForUser, getLLMChatMode } from '@/ai-assistant/utils';
 import { lazyComponent } from '@/core/lazyComponent';
-import { openDrawerDialog, closeDrawerDialog } from '@/drawer/actions';
+import { useDrawer } from '@/drawer/actions';
 import { isDrawerOpen } from '@/drawer/utils';
 import { translate } from '@/i18n';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
@@ -25,7 +24,7 @@ const LLMChatDrawerToolbar = lazyComponent(() =>
 );
 
 export const LLMChatDrawerToggle: React.FC = () => {
-  const dispatch = useDispatch();
+  const { openDrawer, closeDrawer } = useDrawer();
   const user = useUser();
   const prevUserUuid = useRef(user?.uuid);
   const { hasNewMessages, currentThreadId, clearNotification } =
@@ -37,10 +36,10 @@ export const LLMChatDrawerToggle: React.FC = () => {
     prevUserUuid.current = user?.uuid;
 
     if (isDrawerOpen()) {
-      dispatch(closeDrawerDialog());
+      closeDrawer();
     }
     resetDrawerDOM();
-  }, [user?.uuid, dispatch]);
+  }, [user?.uuid, closeDrawer]);
 
   if (!isLLMChatAllowedForUser(user, getLLMChatMode())) {
     return null;
@@ -48,7 +47,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
 
   const toggleChatDrawer = () => {
     if (isDrawerOpen()) {
-      dispatch(closeDrawerDialog());
+      closeDrawer();
     } else {
       // Apply AI drawer class before the drawer opens so the slide-in
       // animation already has the correct top offset and z-index
@@ -57,13 +56,11 @@ export const LLMChatDrawerToggle: React.FC = () => {
         ?.classList.add('ai-chat-drawer-active');
 
       clearNotification(currentThreadId);
-      dispatch(
-        openDrawerDialog(LLMChatDrawer, {
-          title: translate('AI Assistant'),
-          toolbar: LLMChatDrawerToolbar,
-          size: 'lg',
-        }),
-      );
+      openDrawer(LLMChatDrawer, {
+        title: translate('AI Assistant'),
+        toolbar: LLMChatDrawerToolbar,
+        width: '800px',
+      });
     }
   };
 

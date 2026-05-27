@@ -1,8 +1,8 @@
 import { ChatsCircleIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { openDrawerDialog } from '@/drawer/actions';
+import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 
 const QuickIssueContainer = lazyComponent(() =>
@@ -12,14 +12,12 @@ const QuickIssueContainer = lazyComponent(() =>
 );
 
 export const QuickIssueDrawerToggle: React.FC = () => {
-  const dispatch = useDispatch();
+  const { openDrawer } = useDrawer();
 
-  const openDrawer = () => {
-    dispatch(
-      openDrawerDialog(QuickIssueContainer, {
-        title: translate('Support requests'),
-      }),
-    );
+  const handleOpenDrawer = () => {
+    openDrawer(QuickIssueContainer, {
+      title: translate('Support requests'),
+    });
   };
 
   return (
@@ -28,7 +26,7 @@ export const QuickIssueDrawerToggle: React.FC = () => {
         id="quick-issue-toggle"
         type="button"
         className="btn-nav-item"
-        onClick={openDrawer}
+        onClick={handleOpenDrawer}
       >
         <span
           className="svg-icon svg-icon-2"

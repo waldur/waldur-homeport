@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
+import { DrawerProvider } from '@/drawer/DrawerContext';
 import { TableState } from '@/table/types';
 
 const fakeInstance = { uuid: 'test-uuid', state: 'OK' };
@@ -48,7 +49,9 @@ export const renderTable = (Component, tableId, rowId, row) => {
   return render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <Component resourceScope={fakeInstance} />
+        <DrawerProvider>
+          <Component resourceScope={fakeInstance} />
+        </DrawerProvider>
       </Provider>
     </QueryClientProvider>,
   );
