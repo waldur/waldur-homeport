@@ -11,8 +11,11 @@ import { useTableQuery } from './useTableQuery';
 
 // Mock the drawer actions
 vi.mock('@/drawer/actions', () => ({
-  openDrawerDialog: vi.fn(() => ({ type: 'OPEN_DRAWER' })),
-  renderDrawerDialog: vi.fn(() => ({ type: 'RENDER_DRAWER' })),
+  useDrawer: vi.fn(() => ({
+    openDrawer: vi.fn(),
+    renderDrawer: vi.fn(),
+    closeDrawer: vi.fn(),
+  })),
 }));
 
 // Mock router

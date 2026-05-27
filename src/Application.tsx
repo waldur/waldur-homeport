@@ -7,6 +7,7 @@ import { NotificationsProvider, setUpNotifications } from 'reapop';
 
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { queryClient } from '@/core/queryClient';
+import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
 import { ModalProvider } from '@/modal/ModalContext';
 import { ModalRoot } from '@/modal/ModalRoot';
@@ -50,10 +51,12 @@ const ApplicationInner: FunctionComponent = () => {
                 <ThreadProvider>
                   <NotificationContainer />
                   <ModalProvider>
-                    <ModalRoot />
-                    <ConfirmModalRoot />
-                    <DrawerRoot />
-                    <UIView />
+                    <DrawerProvider>
+                      <ModalRoot />
+                      <ConfirmModalRoot />
+                      <DrawerRoot />
+                      <UIView />
+                    </DrawerProvider>
                   </ModalProvider>
                   <MasterInit />
                 </ThreadProvider>

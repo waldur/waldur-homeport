@@ -7,7 +7,7 @@ import {
   RedirectStorage,
 } from './core/StorageManager';
 import { cleanObject } from './core/utils';
-import { closeDrawerDialog } from './drawer/actions';
+import { DrawerService } from './drawer/actions';
 import { setPrevParams, setPrevState } from './error/utils';
 import { isFeatureVisible } from './features/connect';
 import { MarketplaceFeatures } from './FeaturesEnums';
@@ -20,7 +20,7 @@ import { UsersService } from './user/UsersService';
 export function attachTransitions() {
   router.transitionService.onSuccess({}, function () {
     ModalService.close();
-    store.dispatch(closeDrawerDialog());
+    DrawerService.close();
   });
 
   router.transitionService.onSuccess({}, function () {

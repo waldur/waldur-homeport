@@ -1,10 +1,10 @@
 import { BellIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 
 import { count } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
-import { openDrawerDialog } from '@/drawer/actions';
+import { useDrawer } from '@/drawer/actions';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -23,7 +23,7 @@ const PendingConfirmationContainer = lazyComponent(() =>
 );
 
 export const ConfirmationDrawerToggle: React.FC = () => {
-  const dispatch = useDispatch();
+  const { openDrawer } = useDrawer();
 
   const showConsumerOrders = !isFeatureVisible(
     MarketplaceFeatures.conceal_pending_consumer_orders,
@@ -66,13 +66,11 @@ export const ConfirmationDrawerToggle: React.FC = () => {
     counters?.pendingProjectUpdatesCount,
   );
 
-  const openDrawer = () => {
-    dispatch(
-      openDrawerDialog(PendingConfirmationContainer, {
-        title: translate('Pending confirmations'),
-        props: counters,
-      }),
-    );
+  const handleOpenDrawer = () => {
+    openDrawer(PendingConfirmationContainer, {
+      title: translate('Pending confirmations'),
+      ...counters,
+    });
   };
 
   return (
@@ -81,7 +79,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
         id="pending-confirmations-toggle"
         type="button"
         className="position-relative btn-nav-item"
-        onClick={openDrawer}
+        onClick={handleOpenDrawer}
       >
         <span
           className="svg-icon svg-icon-2"

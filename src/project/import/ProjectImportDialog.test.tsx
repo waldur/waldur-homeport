@@ -20,6 +20,7 @@ import {
 } from 'vitest';
 import { marketplaceOrdersCreate, projectsCreate } from 'waldur-js-client';
 
+import { DrawerProvider } from '@/drawer/DrawerContext';
 import { useNotify } from '@/store/notify';
 import { resetTableRegistry } from '@/table/registry';
 import * as workspaceHooks from '@/workspace/hooks';
@@ -179,13 +180,15 @@ const renderComponent = (props = {}) => {
 
   return render(
     <QueryClientProvider client={queryClient}>
-      <ProjectImportDialog
-        resolve={{
-          customer: mockCustomer,
-          refetch: vi.fn(),
-          ...props,
-        }}
-      />
+      <DrawerProvider>
+        <ProjectImportDialog
+          resolve={{
+            customer: mockCustomer,
+            refetch: vi.fn(),
+            ...props,
+          }}
+        />
+      </DrawerProvider>
     </QueryClientProvider>,
   );
 };

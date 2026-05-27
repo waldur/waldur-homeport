@@ -1,24 +1,31 @@
-import { DrawerStateProps } from './reducer';
+import { ComponentType, useContext } from 'react';
 
-export const openDrawerDialog = <P = any>(
-  drawerComponent: DrawerStateProps<P>['drawerComponent'],
-  drawerProps?: any,
-) => ({
-  type: 'SHOW_DRAWER',
-  drawerComponent,
-  drawerProps,
-});
+import { DrawerContext, drawerServiceRef, DrawerProps } from './DrawerContext';
 
-export const renderDrawerDialog = <P = any>(
-  drawerComponent: DrawerStateProps<P>['drawerComponent'],
-  drawerProps?: any,
-) => ({
-  type: 'RENDER_DRAWER',
-  drawerComponent,
-  drawerProps,
-});
+export const useDrawer = () => {
+  const context = useContext(DrawerContext);
+  if (!context) {
+    throw new Error('useDrawer must be used within a DrawerProvider');
+  }
+  return context;
+};
 
-export const closeDrawerDialog = (drawerProps = null) => ({
-  type: 'HIDE_DRAWER',
-  drawerProps,
-});
+export const DrawerService = {
+  open: <P = any>(
+    drawerComponent: ComponentType<P>,
+    drawerProps?: P & DrawerProps,
+  ) => {
+    if (drawerServiceRef)
+      drawerServiceRef.openDrawer(drawerComponent, drawerProps);
+  },
+  close: () => {
+    if (drawerServiceRef) drawerServiceRef.closeDrawer();
+  },
+  render: <P = any>(
+    drawerComponent: ComponentType<P>,
+    drawerProps?: P & DrawerProps,
+  ) => {
+    if (drawerServiceRef)
+      drawerServiceRef.renderDrawer(drawerComponent, drawerProps);
+  },
+};

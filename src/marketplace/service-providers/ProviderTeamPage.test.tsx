@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
+import { DrawerProvider } from '@/drawer/DrawerContext';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { ProviderTeamPage } from './ProviderTeamPage';
@@ -99,7 +100,9 @@ const renderComponent = () => {
   return render(
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <ProviderTeamPage />
+        <DrawerProvider>
+          <ProviderTeamPage />
+        </DrawerProvider>
       </Provider>
     </QueryClientProvider>,
   );
