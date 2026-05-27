@@ -8,7 +8,6 @@ import {
 export {
   OfferingComponent,
   ServiceProvider,
-  CategoryColumn,
   ProviderOfferingDetails as Offering,
   ProviderPlanDetails as Plan,
 } from 'waldur-js-client';

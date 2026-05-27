@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Resource } from 'waldur-js-client';
+import { NestedColumn, Resource } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
-import { CategoryColumn } from '@/marketplace/types';
 import { validateIP } from '@/marketplace/utils';
 import { IPList } from '@/resource/IPList';
 import { BooleanField } from '@/table/BooleanField';
@@ -12,7 +11,7 @@ import { renderFieldOrDash } from '@/table/utils';
 
 interface CategoryColumnFieldProps {
   row: Resource;
-  column: CategoryColumn;
+  column: NestedColumn;
   for_export?: boolean;
 }
 
