@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
-import { getUserLocale } from '@/i18n/LanguageUtilsService';
+import { getUserLocale, numberFormatter } from '@/i18n/LanguageUtilsService';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 interface ProjectEntry {
@@ -22,11 +22,6 @@ interface DialogData {
   total_usage: number;
   projects: ProjectEntry[];
 }
-
-const numberFormatter = new Intl.NumberFormat(getUserLocale(), {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 export const ProjectUsageBreakdownDialog = ({
   resolve,

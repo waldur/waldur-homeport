@@ -5,12 +5,7 @@ import { generateBrandColors } from '@/core/generateColors';
 import { getBrandColor } from '@/core/utils';
 import { CHART_BAR_ROUNDING } from '@/dashboard/constants';
 import { translate } from '@/i18n';
-import { getUserLocale } from '@/i18n/LanguageUtilsService';
-
-const numberFormatter = new Intl.NumberFormat(getUserLocale(), {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
+import { numberFormatter } from '@/i18n/LanguageUtilsService';
 
 interface ChartResult {
   options: any;

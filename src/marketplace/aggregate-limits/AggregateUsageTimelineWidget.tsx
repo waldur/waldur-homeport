@@ -18,7 +18,7 @@ import { getBrandColor } from '@/core/utils';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { getUserLocale } from '@/i18n/LanguageUtilsService';
+import { getUserLocale, numberFormatter } from '@/i18n/LanguageUtilsService';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { CompactActionButton } from '@/table/CompactActionButton';
@@ -32,11 +32,6 @@ interface AggregateUsageTimelineWidgetProps {
   customer?: Customer;
   components?: ComponentsUsageStatsPerOffering['components'];
 }
-
-const numberFormatter = new Intl.NumberFormat(getUserLocale(), {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 const pct = (used: number, limit: number) =>
   limit > 0 ? Math.round((used / limit) * 100) : 0;
