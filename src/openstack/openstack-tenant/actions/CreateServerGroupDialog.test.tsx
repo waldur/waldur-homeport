@@ -7,17 +7,6 @@ import { openstackTenantsCreateServerGroup } from 'waldur-js-client';
 import { CreateServerGroupDialog } from './CreateServerGroupDialog';
 
 // Mock dependencies
-vi.mock('@/i18n', () => ({
-  translate: (str: string, params?: any) => {
-    if (params) {
-      return Object.keys(params).reduce(
-        (res, key) => res.replace(`{${key}}`, params[key]),
-        str,
-      );
-    }
-    return str;
-  },
-}));
 
 vi.mock('waldur-js-client');
 

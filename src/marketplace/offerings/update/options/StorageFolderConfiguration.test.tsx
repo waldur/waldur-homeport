@@ -8,9 +8,6 @@ import { Offering } from '@/marketplace/types';
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 
 // Mock translate
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((str) => str),
-}));
 
 const mockOffering = {
   components: [

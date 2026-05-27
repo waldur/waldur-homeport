@@ -7,10 +7,6 @@ import { useModal } from '@/modal/actions';
 
 import { CreateModalButton } from './CreateModalButton';
 
-vi.mock('@/i18n', () => ({
-  translate: (str: string) => str,
-}));
-
 const MockDialog: FC<{ resolve: { refetch: () => void } }> = () => (
   <div>Mock Dialog</div>
 );

@@ -64,10 +64,6 @@ vi.mock('@/user/UsersService', () => ({
   },
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string) => key,
-}));
-
 vi.mock('@/core/ErrorMessageFormatter', () => ({
   format: (error: any) => error?.message || 'Unknown error',
 }));

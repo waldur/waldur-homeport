@@ -7,17 +7,6 @@ import { customerCreditsCreate, customerCreditsUpdate } from 'waldur-js-client';
 import { CustomerCreditDialog } from './CustomerCreditDialog';
 
 vi.mock('waldur-js-client');
-vi.mock('@/i18n', () => ({
-  translate: (key, context) => {
-    if (!context) return key;
-    let result = key;
-    Object.keys(context).forEach((k) => {
-      result = result.replace(`{${k}}`, context[k]);
-    });
-    return result;
-  },
-  formatJsxTemplate: (text) => text,
-}));
 vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {

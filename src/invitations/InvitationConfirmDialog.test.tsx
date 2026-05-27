@@ -48,11 +48,6 @@ vi.mock('@/core/StorageManager', () => ({
   },
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string, context?: any) =>
-    context ? `${key} (${JSON.stringify(context)})` : key,
-}));
-
 vi.mock('./InvitationErrorMessage', () => ({
   InvitationErrorMessage: ({ dismiss }) => (
     <div data-testid="error-message">
@@ -168,9 +163,7 @@ describe('InvitationConfirmDialog', () => {
     renderDialog();
 
     expect(
-      await screen.findByText(
-        'Invitation is in {state} state. ({"state":"CANCELED"})',
-      ),
+      await screen.findByText('Invitation is in CANCELED state.'),
     ).toBeDefined();
 
     await userEvent.click(screen.getByTestId('close-button'));

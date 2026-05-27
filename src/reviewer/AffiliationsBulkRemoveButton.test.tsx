@@ -10,17 +10,6 @@ import { AffiliationsBulkRemoveButton } from './AffiliationsBulkRemoveButton';
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/i18n', () => ({
-  translate: (key, context) => {
-    if (context) {
-      return Object.entries(context).reduce(
-        (acc, [k, v]) => acc.replace(`{${k}}`, String(v)),
-        key,
-      );
-    }
-    return key;
-  },
-}));
 
 describe('AffiliationsBulkRemoveButton', () => {
   const mockRefetch = vi.fn();

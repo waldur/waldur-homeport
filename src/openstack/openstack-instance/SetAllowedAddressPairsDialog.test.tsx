@@ -5,17 +5,6 @@ import { OpenStackInstance } from 'waldur-js-client';
 import { SetAllowedAddressPairsDialog } from './SetAllowedAddressPairsDialog';
 
 // Mock dependencies
-vi.mock('@/i18n', () => ({
-  translate: (str: string, params?: any) => {
-    if (params) {
-      return Object.keys(params).reduce(
-        (res, key) => res.replace(`{${key}}`, params[key]),
-        str,
-      );
-    }
-    return str;
-  },
-}));
 
 vi.mock('@/modal/ModalDialog', () => ({
   ModalDialog: ({ title, children, footer }: any) => (

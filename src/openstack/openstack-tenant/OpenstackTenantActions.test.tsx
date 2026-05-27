@@ -6,12 +6,6 @@ import * as workspaceHooks from '@/workspace/hooks';
 
 import { OpenstackTenantActions } from './OpenstackTenantActions';
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-  formatJsx: (key) => key,
-  formatJsxTemplate: (key) => key,
-}));
-
 vi.mock('@/features/connect', () => ({
   isFeatureVisible: () => true,
 }));

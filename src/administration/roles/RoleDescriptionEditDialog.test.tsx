@@ -14,10 +14,6 @@ vi.mock('./utils');
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 describe('RoleDescriptionEditDialog', () => {
   const mockRow = {
     uuid: 'test-uuid',

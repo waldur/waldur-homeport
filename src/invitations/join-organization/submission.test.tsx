@@ -42,11 +42,6 @@ vi.mock('@/core/StorageManager', () => ({
   },
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string) => key,
-  formatJsxTemplate: (str: string) => str,
-}));
-
 vi.mock('@/core/ErrorMessageFormatter', () => ({
   format: (err: any) => err?.response?.data || 'Error',
 }));
@@ -210,7 +205,7 @@ describe('useRequestToAccessOrganization', () => {
 
       expect(mockRefreshCurrentUser).toHaveBeenCalled();
       expect(mockConfirm).toHaveBeenCalledWith(
-        'You have successfully joined {organization}',
+        'You have successfully joined Test Org',
         expect.any(String),
         expect.objectContaining({ type: 'success' }),
       );
@@ -237,7 +232,7 @@ describe('useRequestToAccessOrganization', () => {
       expect(mockRefreshCurrentUser).not.toHaveBeenCalled();
       expect(mockConfirm).toHaveBeenCalledWith(
         'Request has been sent for approval',
-        expect.any(String),
+        expect.anything(),
         expect.objectContaining({ type: 'success' }),
       );
       expect(mockGroupInvitationTokenRemove).toHaveBeenCalled();

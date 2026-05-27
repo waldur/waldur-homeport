@@ -1,11 +1,8 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { validateOptionForm } from './validation';
 
 // Mock translate
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((str) => str),
-}));
 
 describe('Option form validation', () => {
   describe('inode multiplier validation', () => {

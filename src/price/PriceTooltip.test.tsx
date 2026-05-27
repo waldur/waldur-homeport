@@ -12,10 +12,6 @@ vi.mock('@/core/config', () => ({
   },
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (str) => str,
-}));
-
 describe('PriceTooltip', () => {
   it('does not render anything if billing mode is activated and not estimated', () => {
     vi.mocked(ENV).accountingMode = 'billing';

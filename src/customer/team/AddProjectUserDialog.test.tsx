@@ -7,10 +7,6 @@ import { AddProjectUserDialog } from './AddProjectUserDialog';
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 vi.mock('@/permissions/utils', () => ({
   getRoles: () => [
     { name: 'admin', description: 'Admin', content_type: 'project' },

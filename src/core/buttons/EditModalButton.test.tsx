@@ -7,10 +7,6 @@ import { useModal } from '@/modal/actions';
 
 import { EditModalButton } from './EditModalButton';
 
-vi.mock('@/i18n', () => ({
-  translate: (str: string) => str,
-}));
-
 vi.mock('@/marketplace/resources/actions/ResourceActionMenuContext', () => ({
   ResourceActionMenuContext: {
     Provider: ({ children }: { children: React.ReactNode }) => children,

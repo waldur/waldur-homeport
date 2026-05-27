@@ -65,10 +65,6 @@ vi.mock('@/navigation/title', async (importOriginal) => {
   };
 });
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 vi.mock('@/store/notify', () => ({
   useNotify: vi.fn(() => ({
     showSuccess: vi.fn(),

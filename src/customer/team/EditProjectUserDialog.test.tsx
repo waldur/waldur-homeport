@@ -12,10 +12,6 @@ import { EditProjectUserDialog } from './EditProjectUserDialog';
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 vi.mock('@/i18n/LanguageUtilsService', () => ({
   LanguageUtilsService: {
     getCurrentLanguage: () => ({ code: 'en' }),

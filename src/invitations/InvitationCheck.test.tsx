@@ -80,10 +80,6 @@ vi.mock('@/workspace/actions', () => ({
   setCurrentUser: (user) => ({ type: 'SET_CURRENT_USER', payload: user }),
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string) => key,
-}));
-
 vi.mock('./InvitationConfirmDialog', () => ({
   InvitationConfirmDialog: 'InvitationConfirmDialog',
 }));

@@ -13,17 +13,6 @@ import { RenewAllocationDialog } from './RenewAllocationDialog';
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/i18n', () => ({
-  translate: (key, context) => {
-    if (context) {
-      return Object.entries(context).reduce(
-        (acc, [k, v]) => acc.replace(`{${k}}`, String(v)),
-        key,
-      );
-    }
-    return key;
-  },
-}));
 
 // Mock Wizard because it's complex and we want to test RenewAllocationDialog's onSubmit
 vi.mock('@/wizard', () => ({

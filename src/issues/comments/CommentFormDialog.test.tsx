@@ -9,9 +9,6 @@ import { CommentFormDialog } from './CommentFormDialog';
 vi.mock('waldur-js-client');
 
 // Mock i18n
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 // Mock modal hooks
 

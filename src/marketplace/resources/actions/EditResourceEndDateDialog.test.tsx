@@ -8,17 +8,6 @@ import { useNotify } from '@/store/notify';
 import { EditResourceEndDateDialog } from './EditResourceEndDateDialog';
 
 vi.mock('@/store/notify');
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((str, context) => {
-    if (context) {
-      return Object.entries(context).reduce(
-        (acc, [key, value]) => acc.replace(`{${key}}`, String(value)),
-        str,
-      );
-    }
-    return str;
-  }),
-}));
 
 // Mock DateField to avoid Flatpickr complexity in tests
 vi.mock('@/form/DateField', () => ({

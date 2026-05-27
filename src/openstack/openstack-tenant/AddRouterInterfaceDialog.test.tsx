@@ -43,9 +43,6 @@ vi.mock('@/form/monacoSetup', () => {
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/i18n', () => ({
-  translate: (str: string) => str,
-}));
 
 const mockRouter = {
   uuid: 'router-uuid',

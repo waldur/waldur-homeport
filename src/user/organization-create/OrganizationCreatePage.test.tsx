@@ -54,20 +54,6 @@ vi.mock('@/modal/actions');
 
 vi.mock('@/store/notify');
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string, values?: any) => {
-    if (values) {
-      return Object.entries(values).reduce(
-        (str, [k, v]) => str.replace(`{${k}}`, String(v)),
-        key,
-      );
-    }
-    return key;
-  },
-  formatJsx: (key: string) => key,
-  formatJsxTemplate: (key: string) => key,
-}));
-
 vi.mock('@/core/config', () => ({
   ENV: {
     pageSize: 10,

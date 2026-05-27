@@ -14,9 +14,6 @@ vi.mock('waldur-js-client');
 vi.mock('@/user/UsersService');
 
 // Mock i18n
-vi.mock('@/i18n', () => ({
-  translate: (message: string) => message,
-}));
 
 const mockUser = {
   uuid: 'test-user-uuid',

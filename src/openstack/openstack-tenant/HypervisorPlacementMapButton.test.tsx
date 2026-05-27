@@ -6,10 +6,6 @@ import * as workspaceHooks from '@/workspace/hooks';
 import { HypervisorPlacementMapButton } from './HypervisorPlacementMapButton';
 vi.mock('@/workspace/hooks');
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 const renderButton = (isStaff: boolean) => {
   vi.mocked(workspaceHooks.useUser).mockReturnValue({
     is_staff: isStaff,

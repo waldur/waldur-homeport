@@ -7,10 +7,6 @@ import { SuggestedMatches } from './SuggestedMatches';
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 vi.mock('@/store/notify', () => ({
   useNotify: vi.fn().mockReturnValue({
     showErrorResponse: vi.fn(),

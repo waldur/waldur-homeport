@@ -9,9 +9,6 @@ import { RequestLimitsChangeAction } from './RequestLimitsChangeAction';
 
 vi.mock('waldur-js-client');
 vi.mock('@/workspace/hooks');
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 vi.mock('@/resource/actions/useModalDialogCallback', () => ({
   useModalDialogCallback: () => vi.fn(),
 }));

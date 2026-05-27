@@ -19,17 +19,6 @@ vi.mock('@/workspace/hooks');
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string, values?: any) => {
-    if (key === 'Request {requestId} has been created.' && values) {
-      return `Request ${values.requestId} has been created.`;
-    }
-    return key;
-  },
-  formatJsx: (key: string) => key,
-  formatJsxTemplate: (key: string) => key,
-}));
-
 vi.mock('@/store/notify', () => ({
   useNotify: vi.fn().mockReturnValue({
     showSuccess: vi.fn(),
