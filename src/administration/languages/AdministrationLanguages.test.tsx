@@ -25,10 +25,6 @@ vi.mock('@/core/config', () => ({
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string) => key,
-}));
-
 vi.mock('@/i18n/useLanguageSelector', () => ({
   useLanguageSelector: () => ({
     currentLanguage: { code: 'en' },

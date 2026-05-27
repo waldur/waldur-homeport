@@ -48,10 +48,6 @@ vi.mock('@/openstack/api', () => ({
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 const mockResource = {
   uuid: 'tenant-uuid',
   url: 'tenant-url',

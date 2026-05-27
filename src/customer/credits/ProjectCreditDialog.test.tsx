@@ -13,17 +13,6 @@ import * as workspaceHooks from '@/workspace/hooks';
 import { ProjectCreditDialog } from './ProjectCreditDialog';
 
 vi.mock('waldur-js-client');
-vi.mock('@/i18n', () => ({
-  translate: (key, context) => {
-    if (!context) return key;
-    let result = key;
-    Object.keys(context).forEach((k) => {
-      result = result.replace(`{${k}}`, context[k]);
-    });
-    return result;
-  },
-  formatJsxTemplate: (text) => text,
-}));
 vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {

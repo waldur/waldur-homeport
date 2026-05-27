@@ -7,11 +7,6 @@ import { openstackTenantsSetQuotas } from 'waldur-js-client';
 import { SetQuotasDialog } from './SetQuotasDialog';
 
 vi.mock('waldur-js-client');
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-  formatJsx: (key) => key,
-  formatJsxTemplate: (key) => key,
-}));
 vi.mock('@/modal/actions', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),

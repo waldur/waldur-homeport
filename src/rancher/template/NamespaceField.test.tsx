@@ -4,10 +4,6 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { NamespaceField } from './NamespaceField';
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 describe('NamespaceField', () => {
   it('renders select by default', () => {
     render(

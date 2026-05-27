@@ -8,10 +8,6 @@ import { PaymentProfileCreateDialog } from './PaymentProfileCreateDialog';
 
 vi.mock('waldur-js-client');
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 vi.mock('../utils', () => ({
   getCustomer: vi.fn(),
 }));

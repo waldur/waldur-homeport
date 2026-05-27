@@ -4,10 +4,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { PaymentProfileFormFields } from './PaymentProfileFormFields';
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 vi.mock('@/form/useFlatpickrTheme', () => ({
   useFlatpickrTheme: vi.fn(),
 }));

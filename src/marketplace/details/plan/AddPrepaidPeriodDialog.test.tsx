@@ -56,14 +56,6 @@ vi.mock('@/form', () => ({
 vi.mock('@/modal/CloseDialogButton', () => ({
   CloseDialogButton: () => <button>Close</button>,
 }));
-vi.mock('@/i18n', () => ({
-  translate: (key: string, context?: any) => {
-    if (context) {
-      return key.replace(/\{(\w+)\}/g, (match, prop) => context[prop] || match);
-    }
-    return key;
-  },
-}));
 
 // Helper to create fixtures
 const createFixtures = () => {

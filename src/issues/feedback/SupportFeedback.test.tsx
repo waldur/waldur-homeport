@@ -33,10 +33,6 @@ vi.mock('@/navigation/title', async (importOriginal) => {
   };
 });
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 describe('SupportFeedback', () => {
   const mockRouter = {
     globals: {

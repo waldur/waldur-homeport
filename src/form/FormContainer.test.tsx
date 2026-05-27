@@ -5,9 +5,6 @@ import { describe, it, expect, vi } from 'vitest';
 import { FormContainer } from './FormContainer';
 
 // Mock translation
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 const TextInput = (props) => (
   <input

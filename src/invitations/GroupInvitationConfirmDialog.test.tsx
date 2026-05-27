@@ -21,10 +21,6 @@ vi.mock('@/modal/actions', () => ({
   }),
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string) => key,
-}));
-
 vi.mock('./GroupInvitationErrorMessage', () => ({
   GroupInvitationErrorMessage: ({ dismiss }) => (
     <div data-testid="error-message">

@@ -36,10 +36,6 @@ vi.mock('@/project/ProjectCostField', () => ({
   ProjectCostField: () => '100 EUR',
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 // Mock fields to simplify testing
 vi.mock('@/form/select/AsyncSelect', () => ({
   AsyncSelect: ({ input, isMulti, name }: any) => (

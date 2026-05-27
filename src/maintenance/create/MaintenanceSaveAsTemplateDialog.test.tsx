@@ -19,9 +19,6 @@ import { MaintenanceSaveAsTemplateDialog } from './MaintenanceSaveAsTemplateDial
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 // Mock leaf fields while keeping FormContainer real
 vi.mock('@/form', async (importOriginal) => {

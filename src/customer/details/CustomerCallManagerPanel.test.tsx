@@ -34,10 +34,6 @@ vi.mock('@/store/notify', () => ({
   }),
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string) => key,
-}));
-
 const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: {

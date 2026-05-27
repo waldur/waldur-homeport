@@ -53,16 +53,6 @@ vi.mock('@/core/config', () => ({
   },
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((str, values) => {
-    if (!values) return str;
-    return Object.entries(values).reduce(
-      (acc, [key, value]) => acc.replace(`{${key}}`, String(value)),
-      str,
-    );
-  }),
-}));
-
 const mockOffering = {
   uuid: 'test-offering-uuid',
   url: 'test-offering-url',

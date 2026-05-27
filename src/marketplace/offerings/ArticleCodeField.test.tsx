@@ -6,9 +6,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { ArticleCodeField } from './ArticleCodeField';
 
 // Mock dependencies
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((str) => str),
-}));
 
 vi.mock('./utils', () => ({
   articleCodeValidator: vi.fn((value) => {

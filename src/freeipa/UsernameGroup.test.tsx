@@ -7,10 +7,6 @@ import * as config from '@/core/config';
 
 import { UsernameGroup, validateUsername } from './UsernameGroup';
 
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((str) => str),
-}));
-
 vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {

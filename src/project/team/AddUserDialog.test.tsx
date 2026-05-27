@@ -18,9 +18,6 @@ vi.mock('@/store/notify', () => ({
 // Mock modal hooks
 
 // Mock translation
-vi.mock('@/i18n', () => ({
-  translate: (str: string) => str,
-}));
 
 // Mock workspace hooks and selectors
 vi.mock('@/workspace/hooks', () => ({

@@ -29,9 +29,6 @@ vi.mock('../actions/MoveToProjectAutocomplete', () => ({
 }));
 
 // Mock i18n
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 // Mock notify
 vi.mock('@/store/notify', () => ({

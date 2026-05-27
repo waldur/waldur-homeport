@@ -12,9 +12,6 @@ import { VendorOfferingMappingDialog } from './VendorOfferingMappingDialog';
 
 vi.mock('waldur-js-client');
 vi.mock('@/modal/useManagedMutation');
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 // Mock SharedMappingFields as they contain complex components
 vi.mock('./SharedMappingFields', () => ({

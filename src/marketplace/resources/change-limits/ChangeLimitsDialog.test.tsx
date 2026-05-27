@@ -36,9 +36,6 @@ vi.mock('@/core/config', () => ({
     },
   },
 }));
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 vi.mock('./utils', async (importOriginal) => {
   const actual = await importOriginal<any>();
   return {

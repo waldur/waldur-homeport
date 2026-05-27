@@ -16,10 +16,6 @@ vi.mock('@/store/notify', () => ({
   }),
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 vi.mock('../../permissions/constants', () => ({
   ROLE_TYPES: [
     { value: 'customer', label: 'Organization' },

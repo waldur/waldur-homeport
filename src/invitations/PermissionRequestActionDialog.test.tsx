@@ -12,10 +12,6 @@ vi.mock('./useUserPermissionRequestActions', () => ({
   useRejectPermissionRequest: vi.fn(),
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
-
 vi.mock('@/core/dateUtils', () => ({
   formatDateTime: (date) => date,
 }));

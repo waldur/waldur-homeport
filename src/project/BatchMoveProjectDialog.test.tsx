@@ -14,17 +14,6 @@ vi.mock('@/store/notify');
 vi.mock('@/modal/CloseDialogButton', () => ({
   CloseDialogButton: () => <button>Close</button>,
 }));
-vi.mock('@/i18n', () => ({
-  translate: (key, context) => {
-    if (context) {
-      return Object.entries(context).reduce(
-        (acc, [k, v]) => acc.replace(`{${k}}`, String(v)),
-        key,
-      );
-    }
-    return key;
-  },
-}));
 
 vi.mock('@/form/select/AsyncSelectField', () => ({
   AsyncSelectField: (props) => (

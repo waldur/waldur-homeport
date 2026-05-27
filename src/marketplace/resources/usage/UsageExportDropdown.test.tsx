@@ -10,9 +10,6 @@ import {
 } from './UsageExportDropdown';
 
 // Mock dependencies
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 vi.mock('@/table/exporters');
 
@@ -91,14 +88,18 @@ describe('useUsageExport', () => {
     );
     result.current('csv');
 
-    expect(exportAs).toHaveBeenCalledWith('csv', 'Usage history - {resource}', {
-      fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
-      data: [
-        ['user_1', 'January 2024', 5, 4],
-        ['Total of {label}', 'January 2024', 10, 8],
-        ['Total', '01/2024', 10, 8],
-      ],
-    });
+    expect(exportAs).toHaveBeenCalledWith(
+      'csv',
+      'Usage history - Test Resource',
+      {
+        fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
+        data: [
+          ['user_1', 'January 2024', 5, 4],
+          ['Total of January 2024', 'January 2024', 10, 8],
+          ['Total', '01/2024', 10, 8],
+        ],
+      },
+    );
   });
 
   it('should show error when there is no usage data', () => {
@@ -136,7 +137,7 @@ describe('useUsageExport', () => {
 
     expect(exportAs).toHaveBeenCalledWith(
       'excel',
-      'Usage history - {resource}',
+      'Usage history - Test Resource',
       {
         fields: ['Date', 'CPU/cores', 'RAM/GB'],
         data: [
@@ -176,14 +177,18 @@ describe('useUsageExport', () => {
     );
     result.current('pdf');
 
-    expect(exportAs).toHaveBeenCalledWith('pdf', 'Usage history - {resource}', {
-      fields: ['Username', 'Date', 'CPU', 'RAM'],
-      data: [
-        ['user_1', 'January 2024', 5, 4],
-        ['Total of {label}', 'January 2024', 10, 8],
-        ['Total', '01/2024', 10, 8],
-      ],
-    });
+    expect(exportAs).toHaveBeenCalledWith(
+      'pdf',
+      'Usage history - Test Resource',
+      {
+        fields: ['Username', 'Date', 'CPU', 'RAM'],
+        data: [
+          ['user_1', 'January 2024', 5, 4],
+          ['Total of January 2024', 'January 2024', 10, 8],
+          ['Total', '01/2024', 10, 8],
+        ],
+      },
+    );
   });
 
   it('should handle N/A values for missing usage data', () => {
@@ -200,13 +205,17 @@ describe('useUsageExport', () => {
     );
     result.current('csv');
 
-    expect(exportAs).toHaveBeenCalledWith('csv', 'Usage history - {resource}', {
-      fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
-      data: [
-        ['user_1', 'January 2024', 5, '0'],
-        ['Total of {label}', 'January 2024', 10, 'N/A'],
-        ['Total', '01/2024', 10, 'N/A'],
-      ],
-    });
+    expect(exportAs).toHaveBeenCalledWith(
+      'csv',
+      'Usage history - Test Resource',
+      {
+        fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
+        data: [
+          ['user_1', 'January 2024', 5, '0'],
+          ['Total of January 2024', 'January 2024', 10, 'N/A'],
+          ['Total', '01/2024', 10, 'N/A'],
+        ],
+      },
+    );
   });
 });

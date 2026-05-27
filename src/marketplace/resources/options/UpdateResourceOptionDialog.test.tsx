@@ -11,9 +11,6 @@ import { UpdateResourceOptionDialog } from './UpdateResourceOptionDialog';
 
 vi.mock('waldur-js-client');
 vi.mock('@/store/notify');
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 vi.mock('react-redux', () => ({
   useSelector: vi.fn(),

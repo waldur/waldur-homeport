@@ -16,16 +16,6 @@ vi.mock('@/store/notify', () => ({
     showErrorResponse: mockShowErrorResponse,
   }),
 }));
-vi.mock('@/i18n', () => ({
-  translate: (key, context) => {
-    if (!context) return key;
-    let result = key;
-    Object.keys(context).forEach((k) => {
-      result = result.replace(`{${k}}`, context[k]);
-    });
-    return result;
-  },
-}));
 
 const createWrapper = () => {
   const queryClient = new QueryClient({

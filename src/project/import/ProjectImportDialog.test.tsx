@@ -88,23 +88,6 @@ vi.mock('waldur-js-client', async (importOriginal) => {
   };
 });
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string, values?: any) => {
-    if (key === 'Successfully imported {n} projects' && values) {
-      return `Successfully imported ${values.n} projects`;
-    }
-    if (
-      key === 'Successfully imported {n} projects and {m} resources' &&
-      values
-    ) {
-      return `Successfully imported ${values.n} projects and ${values.m} resources`;
-    }
-    return key;
-  },
-  formatJsx: (key: string) => key,
-  formatJsxTemplate: (key: string) => key,
-}));
-
 vi.mock('@/store/notify', () => ({
   useNotify: vi.fn().mockReturnValue({
     showSuccess: vi.fn(),

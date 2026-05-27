@@ -29,15 +29,6 @@ vi.mock('@/store/notify', () => ({
   }),
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: (key: string, context?: any) => {
-    if (context) {
-      return key.replace(/\{(\w+)\}/g, (match, prop) => context[prop] || match);
-    }
-    return key;
-  },
-}));
-
 describe('useProposalDecisionActions', () => {
   const mockProposal: Proposal = {
     uuid: 'test-proposal-uuid',

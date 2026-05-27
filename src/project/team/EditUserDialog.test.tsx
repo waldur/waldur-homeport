@@ -29,9 +29,6 @@ vi.mock('@/store/notify', () => ({
 }));
 
 // Mock translation
-vi.mock('@/i18n', () => ({
-  translate: (str: string) => str,
-}));
 
 // Mock table constants
 vi.mock('@/table/constants', () => ({

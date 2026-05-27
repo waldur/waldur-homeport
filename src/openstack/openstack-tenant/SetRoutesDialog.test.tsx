@@ -7,9 +7,6 @@ import { translate } from '@/i18n';
 import { SetRoutesDialog } from './SetRoutesDialog';
 
 // Mock dependencies
-vi.mock('@/i18n', () => ({
-  translate: (str: string) => str,
-}));
 
 vi.mock('@/modal/ModalDialog', () => ({
   ModalDialog: ({ title, children, footer }: any) => (

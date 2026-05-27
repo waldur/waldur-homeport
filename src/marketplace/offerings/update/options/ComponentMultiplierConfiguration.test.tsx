@@ -1,13 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { ComponentMultiplierConfiguration } from './ComponentMultiplierConfiguration';
-
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 const mockOffering = {
   components: [

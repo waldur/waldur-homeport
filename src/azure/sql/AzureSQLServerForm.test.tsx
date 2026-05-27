@@ -59,11 +59,6 @@ vi.mock('@/core/config', () => ({
   },
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((str) => str),
-  formatJsx: vi.fn((str) => str),
-}));
-
 vi.mock('@/i18n/LanguageUtilsService', () => ({
   LanguageUtilsService: {
     getCurrentLanguage: vi.fn(() => ({ code: 'en' })),

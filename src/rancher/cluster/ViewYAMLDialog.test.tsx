@@ -19,9 +19,6 @@ const TestWrapper = ({ children }) => (
 );
 
 // Mock heavy/external dependencies
-vi.mock('@/i18n', () => ({
-  translate: (str: string) => str,
-}));
 
 vi.mock('@/form/MonacoField', () => ({
   MonacoField: ({ input, language }: any) => (

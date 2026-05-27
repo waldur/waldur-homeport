@@ -8,10 +8,6 @@ import { translate } from '@/i18n';
 
 import { StaticRoutesTable } from './StaticRoutesTable';
 
-vi.mock('@/i18n', () => ({
-  translate: (str: string) => str,
-}));
-
 const renderTable = (initialRoutes: any[] = [], fixedIps: any[] = []) => {
   let formValues;
   const onSubmit = vi.fn((values) => {

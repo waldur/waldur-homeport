@@ -6,9 +6,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { PlanForm } from './PlanForm';
 
 // Mock dependencies
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((str) => str),
-}));
 
 vi.mock('./constants', () => ({
   getBillingPeriods: () => [

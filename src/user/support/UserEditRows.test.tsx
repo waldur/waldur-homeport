@@ -10,9 +10,6 @@ import { UserEditRows } from './UserEditRows';
 vi.mock('@/workspace/hooks');
 
 // Mock dependencies
-vi.mock('@/i18n', () => ({
-  translate: (key) => key,
-}));
 
 vi.mock('@/features/connect');
 vi.mock('@/core/config', () => ({

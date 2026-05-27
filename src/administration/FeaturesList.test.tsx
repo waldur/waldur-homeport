@@ -15,9 +15,6 @@ vi.mock('@/store/notify', () => ({
     showErrorResponse: vi.fn(),
   } as any),
 }));
-vi.mock('@/i18n', () => ({
-  translate: (message) => message,
-}));
 vi.mock('@uirouter/react', async (importOriginal) => {
   const mod = await importOriginal<typeof import('@uirouter/react')>();
   return {

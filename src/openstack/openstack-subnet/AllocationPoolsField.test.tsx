@@ -11,10 +11,6 @@ import {
 
 import { InternalNetworkAllocationPool } from './AllocationPoolsField';
 
-vi.mock('@/i18n', () => ({
-  translate: (message) => message,
-}));
-
 vi.mock('../openstack-network/utils', () => ({
   getDefaultAllocationPool: vi.fn(),
   validateAllocationPool: vi.fn(),
