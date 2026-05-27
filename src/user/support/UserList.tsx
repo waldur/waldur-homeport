@@ -177,6 +177,7 @@ const mandatoryFields: UsersListData['query']['field'] = [
   'is_identity_manager',
   'has_usable_password',
   // UserEditButton (edit dialog needs these fields)
+  'can_use_personal_access_tokens',
   'description',
   'personal_title',
   'gender',
@@ -432,6 +433,15 @@ const UserListTable: FunctionComponent = () => {
         render: ({ row }) => <BooleanField value={row.is_identity_manager} />,
         keys: ['is_identity_manager'],
         id: 'is_identity_manager',
+        optional: true,
+      },
+      {
+        title: translate('Personal access tokens'),
+        render: ({ row }) => (
+          <BooleanField value={row.can_use_personal_access_tokens} />
+        ),
+        keys: ['can_use_personal_access_tokens'],
+        id: 'can_use_personal_access_tokens',
         optional: true,
       },
     );

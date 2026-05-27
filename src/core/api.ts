@@ -68,13 +68,32 @@ export function getHeaders(impersonate = true) {
 export function initApiClient() {
   const headers = getHeaders();
   client.setConfig({
-    auth: getAuthHeader,
     baseUrl: ENV.apiEndpoint,
     throwOnError: true,
     headers,
     querySerializer,
   });
 }
+
+// Set the Authorization header directly rather than via the client's `auth`
+// option. Operations advertise both an apiKey and an http "bearer" security
+// scheme, and the client formats the `auth` value per scheme — for the bearer
+// scheme it prepends "Bearer ", turning our "Token <key>" value into the
+// malformed "Bearer Token <key>" (rejected by DRF). Sending the header raw
+// preserves the correct "Token <key>" / "Bearer <oidc-token>" value.
+client.interceptors.request.use((request) => {
+  // Skip when there is no token: this covers the pre-login bootstrap request
+  // (`configurationRetrieve`), which runs before ENV is populated — calling
+  // getAuthHeader() there would read ENV.plugins and throw.
+  if (!AuthTokenStorage.get()) {
+    return request;
+  }
+  const authHeader = getAuthHeader();
+  if (authHeader) {
+    request.headers.set('Authorization', authHeader);
+  }
+  return request;
+});
 
 client.interceptors.error.use((error: Error, response) => {
   return {

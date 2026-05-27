@@ -12,11 +12,24 @@ import {
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import {
+  getUser,
   hasNonProjectPermissions,
   isStaffOrSupport,
 } from '@/workspace/selectors';
 
 import { UsersService } from './UsersService';
+
+// PAT is gated globally (PAT_ENABLED) and then per-user: staff are implicitly
+// allowed, other users need the can_use_personal_access_tokens flag.
+const canUsePersonalAccessTokens = (state) => {
+  if (!ENV.plugins.WALDUR_CORE.PAT_ENABLED) {
+    return false;
+  }
+  const user = getUser(state);
+  return Boolean(
+    user && (user.is_staff || user.can_use_personal_access_tokens),
+  );
+};
 
 const canAccessOrganization = (state) => {
   const hideFromProjectMembers = isFeatureVisible(
@@ -61,7 +74,7 @@ export const states: StateDeclaration[] = [
           !isFeatureVisible(UserFeatures.conceal_remote_accounts) ||
           isStaffOrSupport(state) ||
           !isFeatureVisible(UserFeatures.conceal_api_token) ||
-          ENV.plugins.WALDUR_CORE.PAT_ENABLED,
+          canUsePersonalAccessTokens(state),
       ],
     },
   },
@@ -288,7 +301,7 @@ export const states: StateDeclaration[] = [
     parent: 'profile-credentials',
     data: {
       breadcrumb: () => translate('Personal access tokens'),
-      permissions: [() => ENV.plugins.WALDUR_CORE.PAT_ENABLED],
+      permissions: [canUsePersonalAccessTokens],
     },
   },
 
