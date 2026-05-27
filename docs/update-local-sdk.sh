@@ -86,9 +86,20 @@ yarn build
 
 # Step 7: Link in HomePort
 echo "[7/9] Linking in HomePort..."
-yarn link 2>/dev/null || true
+# By default yarn link uses the machine-global registry (~/.config/yarn/link),
+# which is keyed only by package name. Running this script from a second
+# workspace on the same machine would clobber the first workspace's link.
+# Set YARN_LINK_FOLDER to a workspace-local path (e.g. ../.yarn-link) to keep
+# each workspace's SDK link isolated; leave it unset for the global default.
+LINK_ARGS=()
+if [ -n "${YARN_LINK_FOLDER:-}" ]; then
+  LINK_FOLDER_ABS="$(mkdir -p "$YARN_LINK_FOLDER" && cd "$YARN_LINK_FOLDER" && pwd)"
+  LINK_ARGS=(--link-folder "$LINK_FOLDER_ABS")
+  echo "      Using isolated link folder: $LINK_FOLDER_ABS"
+fi
+yarn link "${LINK_ARGS[@]}" 2>/dev/null || true
 cd "$WH2_PATH"
-yarn link waldur-js-client
+yarn link waldur-js-client "${LINK_ARGS[@]}"
 
 # Step 8: Generate enums and descriptions from Mastermind
 echo "[8/9] Generating enums and descriptions..."
