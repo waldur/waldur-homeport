@@ -3,6 +3,7 @@ import { QueryClientProvider, useSuspenseQuery } from '@tanstack/react-query';
 import { UIRouter, UIView } from '@uirouter/react';
 import { FunctionComponent, Suspense } from 'react';
 import { Provider } from 'react-redux';
+import { NotificationsProvider, setUpNotifications } from 'reapop';
 
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { queryClient } from '@/core/queryClient';
@@ -24,6 +25,15 @@ import { ThemeProvider } from './theme/ThemeProvider';
 
 states.forEach((state) => router.stateRegistry.register(state));
 
+setUpNotifications({
+  defaultProps: {
+    position: 'top-right',
+    dismissible: true,
+    dismissAfter: 7000,
+    showDismissButton: true,
+  },
+});
+
 const ApplicationInner: FunctionComponent = () => {
   useSuspenseQuery({
     queryKey: ['Application'],
@@ -32,24 +42,26 @@ const ApplicationInner: FunctionComponent = () => {
 
   return (
     <ErrorBoundary fallback={ErrorMessage}>
-      <UIRouter router={router}>
-        <Provider store={store}>
-          <LayoutProvider>
-            <ThemeProvider>
-              <ThreadProvider>
-                <NotificationContainer />
-                <ModalProvider>
-                  <ModalRoot />
-                  <ConfirmModalRoot />
-                  <DrawerRoot />
-                  <UIView />
-                </ModalProvider>
-                <MasterInit />
-              </ThreadProvider>
-            </ThemeProvider>
-          </LayoutProvider>
-        </Provider>
-      </UIRouter>
+      <NotificationsProvider>
+        <UIRouter router={router}>
+          <Provider store={store}>
+            <LayoutProvider>
+              <ThemeProvider>
+                <ThreadProvider>
+                  <NotificationContainer />
+                  <ModalProvider>
+                    <ModalRoot />
+                    <ConfirmModalRoot />
+                    <DrawerRoot />
+                    <UIView />
+                  </ModalProvider>
+                  <MasterInit />
+                </ThreadProvider>
+              </ThemeProvider>
+            </LayoutProvider>
+          </Provider>
+        </UIRouter>
+      </NotificationsProvider>
     </ErrorBoundary>
   );
 };

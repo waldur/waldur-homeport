@@ -5,24 +5,29 @@ import {
   WarningCircleIcon,
   WarningOctagonIcon,
 } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import NotificationsSystem, { dismissNotification } from 'reapop';
+import { FunctionComponent, useEffect } from 'react';
+import NotificationsSystem, { useNotifications } from 'reapop';
 
+import { setGlobalNotify } from '@/store/notify';
 import { useTheme } from '@/theme/useTheme';
 
 import { FeaturedIcon } from './core/FeaturedIcon';
-import { lightTheme, darkTheme } from './notification/theme';
+import { darkTheme, lightTheme } from './notification/theme';
 
 export const NotificationContainer: FunctionComponent = () => {
-  const dispatch = useDispatch();
-  const notifications = useSelector((state: any) => state.notifications);
+  const { notifications, dismissNotification, notify } = useNotifications();
   const { theme } = useTheme();
+
+  useEffect(() => {
+    setGlobalNotify(notify);
+    return () => setGlobalNotify(null);
+  }, [notify]);
+
   return (
     <NotificationsSystem
       theme={theme === 'dark' ? darkTheme : lightTheme}
       notifications={notifications}
-      dismissNotification={(id) => dispatch(dismissNotification(id))}
+      dismissNotification={(id) => dismissNotification(id)}
       components={{
         NotificationIcon: (props) => (
           <div style={props.theme.notificationIcon(props.notification)}>
