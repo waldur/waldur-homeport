@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { openstackTenantsCreateServerGroup } from 'waldur-js-client';
 
@@ -23,12 +21,6 @@ vi.mock('@/i18n', () => ({
 
 vi.mock('waldur-js-client');
 
-const mockStore = configureStore();
-const store = mockStore({
-  modal: {},
-  notifications: [],
-});
-
 const mockResource = {
   uuid: 'tenant-uuid',
   name: 'test-tenant',
@@ -45,13 +37,11 @@ const queryClient = new QueryClient({
 
 const renderDialog = (refetch = vi.fn()) => {
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <CreateServerGroupDialog
-          resolve={{ resource: mockResource as any, refetch }}
-        />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <CreateServerGroupDialog
+        resolve={{ resource: mockResource as any, refetch }}
+      />
+    </QueryClientProvider>,
   );
 };
 

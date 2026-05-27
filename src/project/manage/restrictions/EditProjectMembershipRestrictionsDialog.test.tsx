@@ -1,14 +1,20 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { projectsPartialUpdate } from 'waldur-js-client';
 
 import { EditProjectMembershipRestrictionsDialog } from './EditProjectMembershipRestrictionsDialog';
 
 vi.mock('waldur-js-client');
+
+vi.mock('@/workspace/hooks', () => ({
+  useUser: () => ({ is_staff: true }),
+  useCustomer: () => ({ url: 'customer-url' }),
+  useProject: () => ({ uuid: 'project-uuid' }),
+  useSetCustomer: () => vi.fn(),
+  useSetProject: () => vi.fn(),
+}));
 
 const fakeProject = {
   uuid: 'project-uuid',
@@ -20,17 +26,12 @@ const renderDialog = (field = 'user_email_patterns') => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = createStore((state) => state, {
-    notifications: [],
-  });
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <EditProjectMembershipRestrictionsDialog
-          resolve={{ project: fakeProject as any, field: field as any }}
-        />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <EditProjectMembershipRestrictionsDialog
+        resolve={{ project: fakeProject as any, field: field as any }}
+      />
+    </QueryClientProvider>,
   );
 };
 

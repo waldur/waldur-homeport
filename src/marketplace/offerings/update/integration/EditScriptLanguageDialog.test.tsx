@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateIntegration } from 'waldur-js-client';
 
@@ -22,24 +20,19 @@ const renderDialog = (type = 'language') => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = createStore((state) => state, {
-    notifications: [],
-  });
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <EditScriptLanguageDialog
-          resolve={
-            {
-              offering: fakeOffering as any,
-              type: type,
-              label: 'Script Language',
-              refetch: vi.fn(),
-            } as any
-          }
-        />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <EditScriptLanguageDialog
+        resolve={
+          {
+            offering: fakeOffering as any,
+            type: type,
+            label: 'Script Language',
+            refetch: vi.fn(),
+          } as any
+        }
+      />
+    </QueryClientProvider>,
   );
 };
 

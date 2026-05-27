@@ -1,14 +1,14 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { freeipaProfilesCreate } from 'waldur-js-client';
 
 import * as config from '@/core/config';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { FreeIPAAccountCreate } from './FreeIPAAccountCreate';
+vi.mock('@/workspace/hooks');
 
 // Mock API calls and dependencies
 vi.mock('waldur-js-client');
@@ -27,20 +27,13 @@ describe('FreeIPAAccountCreate', () => {
 
   const renderComponent = () => {
     // Mock Redux store
-    const mockStore = createStore(() => ({
-      workspace: {
-        user: {
-          username: 'testuser',
-          uuid: 'test-uuid',
-        },
-      },
-    }));
-
+    vi.mocked(workspaceHooks.useUser).mockReturnValue({
+      username: 'testuser',
+      uuid: 'test-uuid',
+    } as any);
     return render(
       <QueryClientProvider client={queryClient}>
-        <Provider store={mockStore}>
-          <FreeIPAAccountCreate onProfileAdded={mockOnProfileAdded} />
-        </Provider>
+        <FreeIPAAccountCreate onProfileAdded={mockOnProfileAdded} />
       </QueryClientProvider>,
     );
   };

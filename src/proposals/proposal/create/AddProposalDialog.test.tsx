@@ -7,8 +7,6 @@ import {
   UIRouter,
   UIRouterReact,
 } from '@uirouter/react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { proposalProposalsCreate } from 'waldur-js-client';
 
@@ -39,7 +37,6 @@ const renderDialog = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = createStore((state) => state);
   const router = new UIRouterReact();
   router.plugin(servicesPlugin);
   router.plugin(pushStateLocationPlugin);
@@ -51,13 +48,11 @@ const renderDialog = () => {
 
   render(
     <UIRouter router={router}>
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <AddProposalDialog
-            resolve={{ round: mockRound as any, call: mockCall as any }}
-          />
-        </QueryClientProvider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <AddProposalDialog
+          resolve={{ round: mockRound as any, call: mockCall as any }}
+        />
+      </QueryClientProvider>
     </UIRouter>,
   );
   return { stateGo };

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   marketplaceResourcesUpdateLimits,
   ResourceUpdateLimitsRequest,
@@ -12,12 +11,13 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { FormContainer, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { orderCanBeApproved as getOrderCanBeApproved } from '@/marketplace/orders/actions/selectors';
+import { checkOrderCanBeApproved } from '@/marketplace/orders/actions/selectors';
 import { AttachmentRow } from '@/marketplace/resources/common/AttachmentRow';
 import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseOrderConfig';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { ChangeLimitsComponent } from './ChangeLimitsComponent';
 import { loadData } from './utils';
@@ -42,7 +42,11 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
     queryFn: () => loadData(props.resolve.resource.marketplace_resource_uuid),
   });
 
-  const orderCanBeApproved = useSelector(getOrderCanBeApproved);
+  const user = useUser();
+  const customer = useCustomer();
+  const project = useProject();
+
+  const orderCanBeApproved = checkOrderCanBeApproved(user, customer, project);
 
   const changeLimitsMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {

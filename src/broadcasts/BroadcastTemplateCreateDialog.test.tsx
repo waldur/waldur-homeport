@@ -1,15 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { broadcastMessageTemplatesCreate } from 'waldur-js-client';
 
 import { BroadcastTemplateCreateDialog } from './BroadcastTemplateCreateDialog';
-
-vi.mock('react-redux', () => ({
-  useDispatch: vi.fn(),
-  useSelector: vi.fn(),
-}));
 
 vi.mock('waldur-js-client');
 
@@ -26,7 +20,6 @@ describe('BroadcastTemplateCreateDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useDispatch).mockReturnValue(vi.fn());
   });
 
   const renderComponent = () => {

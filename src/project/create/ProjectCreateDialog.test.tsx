@@ -7,19 +7,19 @@ import {
   UIRouter,
   UIRouterReact,
 } from '@uirouter/react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  projectTypesList,
   projectsCreate,
   projectsList,
+  projectTypesList,
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
+import * as workspaceHooks from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { ProjectCreateDialog } from './ProjectCreateDialog';
+vi.mock('@/workspace/hooks');
 
 // Mock API calls
 vi.mock('../api');
@@ -50,15 +50,10 @@ describe('ProjectCreateDialog', () => {
 
   const renderComponent = async () => {
     // Mock Redux store
-    const mockStore = createStore(() => ({
-      workspace: {
-        user: {
-          is_staff: true,
-          permissions: [],
-        },
-      },
-    }));
-
+    vi.mocked(workspaceHooks.useUser).mockReturnValue({
+      is_staff: true,
+      permissions: [],
+    } as any);
     vi.mocked(projectsCreate).mockResolvedValue({
       data: { uuid: 'mock-project-uuid' },
     } as any);
@@ -72,23 +67,21 @@ describe('ProjectCreateDialog', () => {
     queryClient.setQueryData(['CustomerProjects', 'mock-customer-uuid'], []);
 
     await render(
-      <Provider store={mockStore}>
-        <UIRouter router={router}>
-          <QueryClientProvider client={queryClient}>
-            <ProjectCreateDialog
-              customer={
-                {
-                  uuid: 'mock-customer-uuid',
-                  url: 'mock-customer-url',
-                  name: 'Mock Customer',
-                  projects: [],
-                } as Customer
-              }
-              refetch={mockedRefetch}
-            />
-          </QueryClientProvider>
-        </UIRouter>
-      </Provider>,
+      <UIRouter router={router}>
+        <QueryClientProvider client={queryClient}>
+          <ProjectCreateDialog
+            customer={
+              {
+                uuid: 'mock-customer-uuid',
+                url: 'mock-customer-url',
+                name: 'Mock Customer',
+                projects: [],
+              } as Customer
+            }
+            refetch={mockedRefetch}
+          />
+        </QueryClientProvider>
+      </UIRouter>,
     );
   };
 

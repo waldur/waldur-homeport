@@ -1,7 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { translate } from '@/i18n';
@@ -16,12 +14,8 @@ const queryClient = new QueryClient({
   },
 });
 
-const mockStore = createStore(() => ({}));
-
 const TestWrapper = ({ children }) => (
-  <Provider store={mockStore}>
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  </Provider>
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 );
 
 // Mock heavy/external dependencies

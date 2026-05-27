@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   OpenStackInstance,
@@ -30,12 +28,6 @@ vi.mock('@/openstack/api', () => ({
 }));
 
 vi.mock('waldur-js-client');
-
-const mockStore = configureStore();
-const store = mockStore({
-  modal: {},
-  notifications: [],
-});
 
 const subnetsResponse = [
   {
@@ -84,11 +76,9 @@ const renderDialog = (resource = mockResource) => {
     defaultOptions: { queries: { retry: false } },
   });
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <UpdateInternalIpsDialog resolve={{ resource, refetch: vi.fn() }} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <UpdateInternalIpsDialog resolve={{ resource, refetch: vi.fn() }} />
+    </QueryClientProvider>,
   );
 };
 

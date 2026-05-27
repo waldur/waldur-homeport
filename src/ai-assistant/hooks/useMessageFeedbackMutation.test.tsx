@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 import { FC, ReactNode } from 'react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as sdk from 'waldur-js-client';
 
@@ -14,11 +12,8 @@ const renderWithProviders = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   });
-  const store = createStore(() => ({}));
   const wrapper: FC<{ children: ReactNode }> = ({ children }) => (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
   return renderHook(() => useMessageFeedbackMutation('msg-uuid-1'), {
     wrapper,

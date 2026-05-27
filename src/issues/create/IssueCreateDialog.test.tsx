@@ -1,7 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   supportIssuesCreate,
@@ -11,11 +9,13 @@ import {
 
 import { router } from '@/router';
 import { useNotify } from '@/store/notify';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { ISSUE_IDS } from '../types/constants';
 
 import { constructIssuePayload, IssueCreateDialog } from './IssueCreateDialog';
 import { IssueFormData } from './types';
+vi.mock('@/workspace/hooks');
 
 vi.mock('waldur-js-client');
 
@@ -56,15 +56,10 @@ vi.mock('@/core/config', () => ({
     },
   },
 }));
-
-const mockStore = configureStore()({
-  workspace: {
-    user: {
-      uuid: 'user-1',
-      is_staff: true,
-    },
-  },
-});
+vi.mocked(workspaceHooks.useUser).mockReturnValue({
+  uuid: 'user-1',
+  is_staff: true,
+} as any);
 
 const createTestQueryClient = () =>
   new QueryClient({
@@ -78,22 +73,20 @@ const createTestQueryClient = () =>
 const renderComponent = (props = {}) => {
   const queryClient = createTestQueryClient();
   return render(
-    <Provider store={mockStore}>
-      <QueryClientProvider client={queryClient}>
-        <IssueCreateDialog
-          resolve={{
-            refetch: vi.fn(),
-            scope: {
-              name: 'Org 1',
-              uuid: '123',
-              url: 'http://example.com/org/',
-            },
-            scopeType: 'customer',
-            ...props,
-          }}
-        />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <IssueCreateDialog
+        resolve={{
+          refetch: vi.fn(),
+          scope: {
+            name: 'Org 1',
+            uuid: '123',
+            url: 'http://example.com/org/',
+          },
+          scopeType: 'customer',
+          ...props,
+        }}
+      />
+    </QueryClientProvider>,
   );
 };
 

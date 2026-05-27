@@ -15,6 +15,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AZURE_SQL_TYPE } from '@/azure/constants';
 import { DeployPage } from '@/marketplace/deploy/DeployPage';
 import { Offering } from '@/marketplace/types';
+import * as workspaceHooks from '@/workspace/hooks';
+vi.mock('@/workspace/hooks');
 
 // --- Mocks ---
 
@@ -174,22 +176,23 @@ window.IntersectionObserver = class {
 // --- Test fixtures ---
 
 const mockStoreCreator = configureMockStore();
+vi.mocked(workspaceHooks.useUser).mockReturnValue({
+  is_staff: true,
+  permissions: [],
+} as any);
+vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
+  uuid: 'customer-uuid',
+  name: 'Test Customer',
+  url: '/api/customers/customer-uuid/',
+  payment_profiles: [],
+} as any);
+vi.mocked(workspaceHooks.useProject).mockReturnValue({
+  uuid: 'project-uuid',
+  name: 'Test Project',
+  url: '/api/projects/project-uuid/',
+  end_date: null,
+} as any);
 const store = mockStoreCreator({
-  workspace: {
-    user: { is_staff: true, permissions: [] },
-    customer: {
-      uuid: 'customer-uuid',
-      name: 'Test Customer',
-      url: '/api/customers/customer-uuid/',
-      payment_profiles: [],
-    },
-    project: {
-      uuid: 'project-uuid',
-      name: 'Test Project',
-      url: '/api/projects/project-uuid/',
-      end_date: null,
-    },
-  },
   marketplace: {
     filters: {
       filtersStorage: [],

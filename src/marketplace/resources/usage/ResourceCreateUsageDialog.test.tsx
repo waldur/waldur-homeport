@@ -1,17 +1,15 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
-  screen,
-  render,
   act,
   fireEvent,
+  render,
+  screen,
   waitFor,
 } from '@testing-library/react';
-import { Provider } from 'react-redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceComponentUsagesSetUsage } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { createActionStore } from '@/resource/actions/testUtils';
 
 import { getProviderUsageComponents } from './api';
 import { ResourceCreateUsageDialog } from './ResourceCreateUsageDialog';
@@ -56,7 +54,6 @@ const mockData = {
 };
 
 const renderDialog = (props) => {
-  const store = createActionStore();
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: { retry: false },
@@ -64,11 +61,9 @@ const renderDialog = (props) => {
     },
   });
   render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <ResourceCreateUsageDialog {...props} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <ResourceCreateUsageDialog {...props} />
+    </QueryClientProvider>,
   );
 };
 
