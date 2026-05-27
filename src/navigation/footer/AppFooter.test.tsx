@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { useDispatch, useSelector } from 'react-redux';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { versionRetrieve } from 'waldur-js-client';
 
+import { useUser } from '@/workspace/hooks';
+
 import { AppFooter } from './AppFooter';
 
-vi.mock('react-redux');
+vi.mock('@/workspace/hooks');
 vi.mock('waldur-js-client');
 vi.mock('@/core/config', () => ({
   ENV: {
@@ -28,11 +29,11 @@ vi.mock('./BackendHealthStatusIndicator', () => ({
 }));
 
 describe('AppFooter', () => {
-  const dispatch = vi.fn();
-
   beforeEach(() => {
-    vi.mocked(useDispatch).mockReturnValue(dispatch);
-    vi.mocked(useSelector).mockReturnValue(false);
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: false,
+      is_support: false,
+    } as any);
     vi.clearAllMocks();
   });
 
@@ -45,7 +46,10 @@ describe('AppFooter', () => {
   });
 
   it('checks version for staff', async () => {
-    vi.mocked(useSelector).mockReturnValue(true); // isStaffOrSupport = true
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: true,
+      is_support: false,
+    } as any);
     vi.mocked(versionRetrieve).mockResolvedValue({
       data: { latest_version: '1.2.4' },
     } as any);

@@ -16,13 +16,7 @@ import { UsersService } from '@/user/UsersService';
 
 import { AddProposalDialog } from './AddProposalDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    proposalProposalsCreate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/user/UsersService', () => ({
   UsersService: {

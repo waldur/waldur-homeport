@@ -41,6 +41,7 @@ vi.mock('@/workspace/hooks', () => ({
     service_provider_uuid: 'sp-uuid',
     call_managing_organization_uuid: 'cmo-uuid',
   }),
+  useSetUser: () => vi.fn(),
 }));
 
 // Mock customer team utils

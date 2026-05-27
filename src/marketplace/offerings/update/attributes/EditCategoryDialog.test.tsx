@@ -13,13 +13,7 @@ vi.mock('react-redux', () => ({
   useSelector: vi.fn(),
 }));
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = (await importOriginal()) as any;
-  return {
-    ...actual,
-    marketplaceProviderOfferingsUpdateDescription: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/marketplace/common/api', () => ({
   getCategories: vi.fn(),

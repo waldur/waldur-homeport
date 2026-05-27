@@ -8,13 +8,7 @@ import { rancherHpasUpdate } from 'waldur-js-client';
 
 import { HPAUpdateDialog } from './HPAUpdateDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    rancherHpasUpdate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const mockHPA = {
   uuid: 'hpa-uuid',

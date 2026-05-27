@@ -1,13 +1,12 @@
 import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const MultiMoveDialog = lazyComponent(() =>
   import('./MultiMoveDialog').then((module) => ({
@@ -17,7 +16,8 @@ const MultiMoveDialog = lazyComponent(() =>
 
 export const MultiMoveAction = ({ rows, refetch }) => {
   const { openDialog } = useModal();
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
 
   const permittedResources = useMemo(
     () =>

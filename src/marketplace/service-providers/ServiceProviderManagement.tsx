@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import {
   marketplaceServiceProvidersPartialUpdate,
   serviceProviderApiSecretCodeRetrieve,
@@ -14,8 +13,7 @@ import { translate } from '@/i18n';
 import { ServiceProvider } from '@/marketplace/types';
 import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
-import { useCustomer } from '@/workspace/hooks';
-import { isStaff } from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
 
 import { SecretValueField } from '../SecretValueField';
 
@@ -33,7 +31,8 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
   const { showErrorResponse } = useNotify();
 
   const customer = useCustomer();
-  const isStaffUser = useSelector(isStaff);
+  const user = useUser();
+  const isStaffUser = user?.is_staff;
 
   const { data: secretCode, error } = useQuery({
     queryKey: ['ServiceProviderSecretCode', serviceProvider?.uuid],

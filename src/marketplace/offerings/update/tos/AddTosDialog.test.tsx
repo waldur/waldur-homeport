@@ -8,13 +8,7 @@ import { marketplaceOfferingTermsOfServiceCreate } from 'waldur-js-client';
 
 import { AddTosDialog } from './AddTosDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    marketplaceOfferingTermsOfServiceCreate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 // Mock MarkdownEditor to avoid heavy MDXEditor dependency in tests
 vi.mock('@/form/MarkdownEditor', () => ({

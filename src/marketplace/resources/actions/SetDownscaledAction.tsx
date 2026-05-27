@@ -1,5 +1,4 @@
 import { ArrowDownIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 import {
   marketplaceProviderResourcesSetDownscaled,
   Resource,
@@ -8,7 +7,7 @@ import {
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 interface SetDownscaledActionProps {
   resource: Resource;
@@ -19,7 +18,8 @@ export const SetDownscaledAction = ({
   resource,
   refetch,
 }: SetDownscaledActionProps) => {
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
   const { mutate, isPending: isLoading } = useManagedMutation<
     any,
     any,

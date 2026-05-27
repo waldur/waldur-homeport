@@ -1,6 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FunctionComponent, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -22,8 +21,9 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
 
   const { showErrorResponse } = useNotify();
 
-  const canRegisterServiceProvider = useSelector(
-    canRegisterServiceProviderForCustomer,
+  const canRegisterServiceProvider = canRegisterServiceProviderForCustomer(
+    user,
+    customer,
   );
 
   const queryClient = useQueryClient();

@@ -22,7 +22,7 @@ export const getProject = (state: RootState): Project =>
 export const isStaff = (state: RootState): boolean =>
   getUser(state) && getUser(state).is_staff;
 
-export const isSupport = (state: RootState): boolean =>
+const isSupport = (state: RootState): boolean =>
   getUser(state) && getUser(state).is_support;
 
 export const isStaffOrSupport = (state: RootState): boolean =>

@@ -1,23 +1,21 @@
-import { useDispatch } from 'react-redux';
-
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
-import { setCurrentCustomer } from '@/workspace/actions';
+import { useSetCustomer } from '@/workspace/hooks';
 
 import { getCustomer } from '../utils';
 
 import { UpdateCustomerOrganizationsGroupsButton } from './UpdateCustomerOrganizationsGroupsButton';
 
 export const CustomerOrganizationGroupsRow = (props) => {
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
 
   const { showErrorResponse } = useNotify();
 
   const updateCustomerData = async () => {
     try {
       const currentCustomer = await getCustomer(props.customer.uuid);
-      dispatch(setCurrentCustomer(currentCustomer));
+      setCurrentCustomer(currentCustomer);
     } catch (error) {
       showErrorResponse(
         error,

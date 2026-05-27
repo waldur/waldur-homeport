@@ -11,14 +11,7 @@ import {
 
 import { ServiceAccountFormDialog } from './ServiceAccountFormDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    marketplaceCustomerServiceAccountsCreate: vi.fn(),
-    marketplaceCustomerServiceAccountsPartialUpdate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeScope = { uuid: 'scope-uuid' };
 

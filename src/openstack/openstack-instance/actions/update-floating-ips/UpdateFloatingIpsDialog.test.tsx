@@ -12,13 +12,7 @@ import { loadFloatingIps } from '@/openstack/api';
 import { UpdateFloatingIpsDialog } from './UpdateFloatingIpsDialog';
 
 vi.mock('@/openstack/api');
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    openstackInstancesUpdateFloatingIps: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeInstance = {
   name: 'backup',

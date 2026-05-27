@@ -1,8 +1,7 @@
 import { FunctionComponent, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { customersPartialUpdate } from 'waldur-js-client';
 
-import { formDataOptions, fileSerializer } from '@/core/api';
+import { fileSerializer, formDataOptions } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -12,8 +11,7 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useUser, useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer, useUser } from '@/workspace/hooks';
 
 import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
 import { CustomerEditPanels } from './CustomerEditPanels';
@@ -33,7 +31,7 @@ interface OwnProps {
 }
 
 export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
   const { showErrorResponse, showSuccess } = useNotify();
   const { openDialog } = useModal();
 
@@ -67,7 +65,7 @@ export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
           });
           showSuccess(translate('Organization updated successfully'));
           if (response.data?.uuid === customer.uuid) {
-            dispatch(setCurrentCustomer(response.data));
+            setCurrentCustomer(response.data);
           }
           return response;
         } catch (error) {
@@ -83,14 +81,7 @@ export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
         });
       }
     },
-    [
-      canEditCustomer,
-      customer,
-      dispatch,
-      openDialog,
-      showSuccess,
-      showErrorResponse,
-    ],
+    [canEditCustomer, customer, openDialog, showSuccess, showErrorResponse],
   );
 
   if (tabSpec) {

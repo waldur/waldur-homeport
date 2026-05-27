@@ -1,6 +1,5 @@
 import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
-import { useDispatch } from 'react-redux';
 import { UserAction, userActionsExecuteAction } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -38,7 +37,6 @@ const createActionHandler = (
   row: UserAction,
   refetch: () => void,
   router: any,
-  dispatch: any,
   { showErrorResponse, showSuccess, openDialog, confirm },
 ) => {
   const needsConfirmation =
@@ -61,7 +59,7 @@ const createActionHandler = (
     }
 
     // Confirmation for destructive or flagged actions
-    if (needsConfirmation && dispatch) {
+    if (needsConfirmation) {
       try {
         await confirm(
           translate('Confirm action'),
@@ -111,7 +109,6 @@ const createDynamicAction = (
   row: UserAction,
   refetch: () => void,
   router: any,
-  dispatch: any,
   notify: any,
 ) => {
   const config =
@@ -123,14 +120,7 @@ const createDynamicAction = (
   return () => (
     <ActionItem
       title={action.label}
-      action={createActionHandler(
-        action,
-        row,
-        refetch,
-        router,
-        dispatch,
-        notify,
-      )}
+      action={createActionHandler(action, row, refetch, router, notify)}
       iconNode={<IconComponent weight="bold" />}
     />
   );
@@ -181,7 +171,6 @@ export const usePendingActionActions = (
   remainingActions: Array<() => JSX.Element>;
 } => {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const { openDialog, confirm } = useModal();
   const { showErrorResponse, showSuccess } = useNotify();
@@ -230,7 +219,6 @@ export const usePendingActionActions = (
           row,
           refetch,
           router,
-          dispatch,
           { showErrorResponse, showSuccess, openDialog, confirm },
         ),
         icon: config.icon,
@@ -248,7 +236,7 @@ export const usePendingActionActions = (
       return;
     }
     remainingActions.push(
-      createDynamicAction(action, row, refetch, router, dispatch, {
+      createDynamicAction(action, row, refetch, router, {
         showErrorResponse,
         showSuccess,
         openDialog,

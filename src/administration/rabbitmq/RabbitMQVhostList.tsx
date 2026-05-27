@@ -1,11 +1,10 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import type { RmqStatsResponse, RmqVhostStats } from './api';
 import { UserLink } from './RabbitMQEntityLinks';
@@ -18,7 +17,8 @@ interface RabbitMQVhostListProps {
 }
 
 export const RabbitMQVhostList: FC<RabbitMQVhostListProps> = ({ data }) => {
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
 
   const tableProps = useTable({
     table: 'RabbitMQVhosts',

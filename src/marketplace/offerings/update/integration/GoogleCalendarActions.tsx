@@ -1,13 +1,12 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { translate } from '@/i18n';
 import { isOfferingTypeSchedulable } from '@/marketplace/common/registry';
 import { ARCHIVED } from '@/marketplace/offerings/store/constants';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
-import { useUser } from '@/workspace/hooks';
-import { isOwner as isOwnerSelector } from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
+import { checkIsOwner } from '@/workspace/selectors';
 
 import { GoogleCalendarPublishAction } from './GoogleCalendarPublishAction';
 import { GoogleCalendarSyncAction } from './GoogleCalendarSyncAction';
@@ -21,7 +20,8 @@ export const GoogleCalendarActions: FC<GoogleCalendarActionsProps> = ({
   offering,
 }) => {
   const user = useUser();
-  const isOwner = useSelector(isOwnerSelector);
+  const customer = useCustomer();
+  const isOwner = checkIsOwner(customer, user);
   const isVisible =
     offering.type === OFFERING_TYPE_BOOKING &&
     ![ARCHIVED].includes(offering.state) &&

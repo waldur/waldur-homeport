@@ -1,20 +1,19 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { usersCancelChangeEmail, usersChangeEmail } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { setCurrentUser } from '@/workspace/actions';
+import { useSetUser } from '@/workspace/hooks';
 
 export const useEmailChange = (user) => {
   const [email, setEmail] = useState('');
-  const dispatch = useDispatch();
+  const setCurrentUser = useSetUser();
 
   const changeEmailMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
       usersChangeEmail({ path: { uuid: user.uuid }, body: { email } }),
     onSuccess: () => {
-      dispatch(setCurrentUser({ ...user, requested_email: email }));
+      setCurrentUser({ ...user, requested_email: email });
     },
     successMessage: translate(
       'Email verification has been sent. Please check your inbox.',
@@ -26,7 +25,7 @@ export const useEmailChange = (user) => {
     mutationFn: () => usersCancelChangeEmail({ path: { uuid: user.uuid } }),
     successMessage: translate('Email change request has been cancelled.'),
     onSuccess: () => {
-      dispatch(setCurrentUser({ ...user, requested_email: null }));
+      setCurrentUser({ ...user, requested_email: null });
     },
     errorMessage: translate('Unable to cancel request.'),
   });

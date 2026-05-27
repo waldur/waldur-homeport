@@ -1,28 +1,44 @@
 import { CheckIcon, XIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Spinner } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { customersPartialUpdate } from 'waldur-js-client';
 
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { SetLocationButton } from '../list/SetLocationButton';
 
 export const CustomerLocationRow: FC<{
   customer: Customer;
-  callback;
   canUpdate?: boolean;
-}> = ({ customer, callback, canUpdate }) => {
-  const dispatch = useDispatch();
+}> = ({ customer, canUpdate }) => {
+  const setCurrentCustomer = useSetCustomer();
+  const currentCustomer = useCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
-    mutationFn: () => callback({ latitude: null, longitude: null }, dispatch),
+    mutationFn: () =>
+      customersPartialUpdate({
+        path: { uuid: customer.uuid },
+        body: {
+          latitude: null,
+          longitude: null,
+        },
+      }),
     successMessage: translate('Location has been removed.'),
     errorMessage: translate('Unable to remove the location.'),
+    onSuccess: (response) => {
+      if (customer.uuid === currentCustomer?.uuid) {
+        setCurrentCustomer(response.data);
+      }
+    },
     confirmation: {
+      options: {
+        forDeletion: true,
+      },
       title: translate('Confirmation'),
       body: translate('Are you sure you want to remove the location?'),
     },

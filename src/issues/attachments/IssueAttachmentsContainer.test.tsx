@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useIssueAttachments, useUploadAttachments } from './api';
 import { IssueAttachmentsContainer } from './IssueAttachmentsContainer';
@@ -79,8 +77,6 @@ const createTestQueryClient = () =>
     },
   });
 
-const mockStore = configureStore();
-
 const mockIssue = {
   uuid: 'issue-123',
   url: 'https://api.example.com/issues/issue-123/',
@@ -102,14 +98,11 @@ const mockUploadHook = {
 
 const renderComponent = (issue = mockIssue) => {
   const queryClient = createTestQueryClient();
-  const store = mockStore({});
 
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <IssueAttachmentsContainer issue={issue as any} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <IssueAttachmentsContainer issue={issue as any} />
+    </QueryClientProvider>,
   );
 };
 

@@ -23,16 +23,7 @@ import { getCustomer } from '@/workspace/selectors';
 
 import { CallFormDialog } from './CallFormDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    callManagingOrganisationsList: vi.fn(),
-    proposalProtectedCallsAvailableComplianceChecklistsList: vi.fn(),
-    proposalProtectedCallsCreate: vi.fn(),
-    proposalProtectedCallsPartialUpdate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/workspace/selectors', () => ({
   getCustomer: vi.fn(),

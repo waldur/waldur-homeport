@@ -1,13 +1,11 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceServiceProvidersCreate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ServiceProvider } from '@/marketplace/types';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 interface RegisterServiceProviderButtonProps {
   setServiceProvider(data: ServiceProvider | null): void;
@@ -17,7 +15,7 @@ export const RegisterServiceProviderButton: FC<
   RegisterServiceProviderButtonProps
 > = ({ setServiceProvider }) => {
   const customer = useCustomer();
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
@@ -31,12 +29,10 @@ export const RegisterServiceProviderButton: FC<
     closeModal: false,
     onSuccess: (data) => {
       setServiceProvider(data);
-      dispatch(
-        setCurrentCustomer({
-          ...customer,
-          is_service_provider: true,
-        }),
-      );
+      setCurrentCustomer({
+        ...customer,
+        is_service_provider: true,
+      });
     },
   });
 

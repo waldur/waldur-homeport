@@ -1,6 +1,4 @@
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { FunctionComponent, useMemo } from 'react';
 import { hooksList } from 'waldur-js-client';
 
 import { HooksRowActions } from '@/administration/hooks/HooksRowActions';
@@ -10,7 +8,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { HOOK_LIST_ID } from './constants';
 import { HookCreateButton } from './HookCreateButton';
@@ -32,12 +30,14 @@ const getDestinationField = (row) =>
 const getEventsField = (row) =>
   row.event_groups.map(formatEventTitle).join(', ');
 
-const mapStateToProps = createSelector(getUser, (user) => ({
-  author_uuid: user.uuid,
-}));
-
 export const HooksList: FunctionComponent = () => {
-  const filter = useSelector(mapStateToProps);
+  const user = useUser();
+  const filter = useMemo(
+    () => ({
+      author_uuid: user?.uuid,
+    }),
+    [user],
+  );
   const props = useTable({
     table: HOOK_LIST_ID,
     fetchData: createFetcher(hooksList),

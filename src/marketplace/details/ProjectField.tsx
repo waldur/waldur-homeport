@@ -1,19 +1,18 @@
 import { FC, useCallback, useMemo } from 'react';
 import { Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 
 import { required } from '@/core/validators';
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { ProjectCreateButton } from '@/project/create/ProjectCreateButton';
-import { setCurrentProject } from '@/workspace/actions';
+import { useSetProject } from '@/workspace/hooks';
 
 import { projectAutocomplete } from '../common/autocompletes';
 import { FormGroup } from '../offerings/FormGroup';
 
 const ProjectSelect = ({ input }) => {
-  const dispatch = useDispatch();
+  const setCurrentProject = useSetProject();
   const { customer } = useOrderFormData();
 
   const loadOptions = useMemo(
@@ -28,9 +27,9 @@ const ProjectSelect = ({ input }) => {
   const onChange = useCallback(
     (value) => {
       input.onChange(value);
-      dispatch(setCurrentProject(value));
+      setCurrentProject(value);
     },
-    [dispatch, input],
+    [input],
   );
 
   return (

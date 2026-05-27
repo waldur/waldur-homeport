@@ -8,13 +8,7 @@ import { projectsPartialUpdate } from 'waldur-js-client';
 
 import { EditProjectMembershipRestrictionsDialog } from './EditProjectMembershipRestrictionsDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    projectsPartialUpdate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeProject = {
   uuid: 'project-uuid',

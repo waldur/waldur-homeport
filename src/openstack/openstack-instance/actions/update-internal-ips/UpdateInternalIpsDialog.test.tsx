@@ -29,13 +29,7 @@ vi.mock('@/openstack/api', () => ({
   loadSubnets: vi.fn(),
 }));
 
-vi.mock('waldur-js-client', async () => {
-  const actual = await vi.importActual('waldur-js-client');
-  return {
-    ...actual,
-    openstackInstancesUpdatePorts: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const mockStore = configureStore();
 const store = mockStore({

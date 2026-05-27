@@ -1,11 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
+  Project,
   projectEndDateChangeRequestsList,
   projectsRetrieve,
-  Project,
 } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -16,7 +15,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { setCurrentProject } from '@/workspace/actions';
+import { useSetProject } from '@/workspace/hooks';
 
 import { ApproveRequestAction } from './ApproveRequestAction';
 import { RejectRequestAction } from './RejectRequestAction';
@@ -45,7 +44,7 @@ const TABLE_TABS = [
 export const ProjectEndDateChangeRequests: FunctionComponent<
   ProjectEndDateChangeRequestsProps
 > = ({ project }) => {
-  const dispatch = useDispatch();
+  const setCurrentProject = useSetProject();
 
   const queryClient = useQueryClient();
   const { params } = useCurrentStateAndParams();
@@ -77,8 +76,8 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
     const response = await projectsRetrieve({
       path: { uuid: project.uuid },
     });
-    dispatch(setCurrentProject(response.data));
-  }, [project?.uuid, dispatch]);
+    setCurrentProject(response.data);
+  }, [project?.uuid]);
 
   return (
     <Table

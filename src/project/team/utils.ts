@@ -1,19 +1,12 @@
 import { useRouter } from '@uirouter/react';
 import { useEffect } from 'react';
-import { createSelector } from 'reselect';
-import { Project } from 'waldur-js-client';
+import { Customer, Project, User } from 'waldur-js-client';
 
-import { getCustomer, getUser } from '@/workspace/selectors';
-
-export const hasCurrentCustomerPermission = createSelector(
-  getUser,
-  getCustomer,
-  (user, customer) =>
-    user?.permissions?.find(
-      ({ scope_uuid, scope_type }) =>
-        scope_uuid === customer?.uuid && scope_type === 'customer',
-    ),
-);
+export const hasCurrentCustomerPermission = (user: User, customer: Customer) =>
+  user?.permissions?.find(
+    ({ scope_uuid, scope_type }) =>
+      scope_uuid === customer?.uuid && scope_type === 'customer',
+  );
 
 export const useRedirectCourseProjects = (project: Project) => {
   // Check if project is course kind, then redirect

@@ -1,16 +1,14 @@
-import { useDispatch } from 'react-redux';
 import { paymentProfilesDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
 export const PaymentProfileDeleteButton = (props) => {
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
   const customer = useCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
@@ -21,7 +19,7 @@ export const PaymentProfileDeleteButton = (props) => {
     refetch: props.refetch,
     onSuccess: async () => {
       const updatedCustomer = await getCustomerApi(customer.uuid);
-      dispatch(setCurrentCustomer(updatedCustomer));
+      setCurrentCustomer(updatedCustomer);
     },
     confirmation: {
       title: translate('Confirmation'),

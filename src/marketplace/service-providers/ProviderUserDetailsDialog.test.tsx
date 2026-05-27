@@ -1,6 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -19,15 +17,8 @@ vi.mock('@/core/config', () => ({
   },
 }));
 
-const mockStore = configureStore();
-const store = mockStore({});
-
 const renderDialog = (user: Record<string, unknown>) =>
-  render(
-    <Provider store={store}>
-      <ProviderUserDetailsDialog resolve={{ user: user as any }} />
-    </Provider>,
-  );
+  render(<ProviderUserDetailsDialog resolve={{ user: user as any }} />);
 
 describe('formatValue', () => {
   it('returns mdash for null', () => {

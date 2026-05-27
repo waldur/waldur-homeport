@@ -48,13 +48,7 @@ vi.mock('@/openstack/api', () => ({
   loadSubnets: vi.fn(),
 }));
 
-vi.mock('waldur-js-client', async () => {
-  const actual = await vi.importActual('waldur-js-client');
-  return {
-    ...actual,
-    openstackPortsCreate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/i18n', () => ({
   translate: (key) => key,

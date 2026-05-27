@@ -1,8 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useForm } from 'react-final-form';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { keysList, KeysListData } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -14,7 +12,7 @@ import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { keysListTable } from '@/user/keys/constants';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const KeyCreateDialog = lazyComponent(() =>
   import('@/user/keys/KeyCreateDialog').then((module) => ({
@@ -22,17 +20,16 @@ const KeyCreateDialog = lazyComponent(() =>
   })),
 );
 
-const filtersSelector = createSelector(getUser, (user) => {
-  const result: KeysListData['query'] = {};
-  if (user) {
-    result.user_uuid = user.uuid;
-  }
-  return result;
-});
-
 export const FormSSHPublicKeysField = (props: Partial<TableProps>) => {
   const form = useForm();
-  const filter = useSelector(filtersSelector);
+  const user = useUser();
+  const filter = useMemo(() => {
+    const result: KeysListData['query'] = {};
+    if (user) {
+      result.user_uuid = user.uuid;
+    }
+    return result;
+  }, [user]);
   const tableProps = useTable({
     table: keysListTable,
     fetchData: createFetcher(keysList),

@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { checklistsAdminRetrieve, customersRetrieve } from 'waldur-js-client';
 
 import { CheckOrX } from '@/core/CheckOrX';
@@ -20,8 +19,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useUser } from '@/workspace/hooks';
+import { useSetCustomer, useUser } from '@/workspace/hooks';
 
 import { CustomerLocationRow } from './CustomerLocationRow';
 import { CustomerMediaPanel } from './CustomerMediaPanel';
@@ -130,13 +128,14 @@ const EditDefaultAffiliationsDialog = lazyComponent(() =>
 
 const AffiliationsEditButton: FC<{ customer }> = ({ customer }) => {
   const { openDialog } = useModal();
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
   const refresh = useCallback(async () => {
     const response = await customersRetrieve({
       path: { uuid: customer.uuid },
     });
-    dispatch(setCurrentCustomer(response.data));
-  }, [customer.uuid, dispatch]);
+    setCurrentCustomer(response.data);
+  }, [customer.uuid]);
+
   const onClick = useCallback(() => {
     openDialog(EditDefaultAffiliationsDialog, {
       resolve: { customer, callback: refresh },
@@ -319,7 +318,6 @@ const AddressTab: FC<CustomerEditPanelProps> = (props) => {
       ))}
       <CustomerLocationRow
         customer={props.customer}
-        callback={props.callback}
         canUpdate={props.canUpdate}
       />
     </FormTable>

@@ -1,7 +1,5 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Field } from 'react-final-form';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
@@ -9,31 +7,25 @@ import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAu
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@/table/TableFilterItem';
-import {
-  getCustomer,
-  getUser,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-  isServiceManagerSelector,
-} from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
+import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
 
-const filterSelector = createSelector(
-  getCustomer,
-  getUser,
-  isServiceManagerSelector,
-  isOwnerOrStaffSelector,
-  (customer, user, isServiceManager, isOwnerOrStaff) =>
-    isServiceManager && !isOwnerOrStaff
+export const ProviderResourcesFilter: FunctionComponent = () => {
+  const customer = useCustomer();
+  const user = useUser();
+
+  const offeringFilter = useMemo(() => {
+    const isServiceManager = checkIsServiceManager(customer, user);
+    const isOwnerOrStaff = user?.is_staff || checkIsOwner(customer, user);
+    return isServiceManager && !isOwnerOrStaff
       ? { customer_uuid: customer?.uuid, service_manager_uuid: user?.uuid }
       : {
           customer_uuid: customer?.uuid,
-        },
-);
-
-export const ProviderResourcesFilter: FunctionComponent = () => {
-  const offeringFilter = useSelector(filterSelector);
+        };
+  }, [customer, user]);
 
   return (
     <>

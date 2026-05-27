@@ -3,7 +3,6 @@ import {
   ClockCounterClockwiseIcon,
 } from '@phosphor-icons/react';
 import { Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -12,7 +11,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 interface ProcessingLogEntry {
   event: string;
@@ -70,7 +69,8 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
 
 export const IssueLogButton = ({ issue }) => {
   const { openDialog } = useModal();
-  const staffOrSupport = useSelector(isStaffOrSupport);
+  const user = useUser();
+  const staffOrSupport = user?.is_staff || user?.is_support;
 
   if (!staffOrSupport) {
     return null;
@@ -102,7 +102,8 @@ export const IssueSyncButton = ({
   issue: Issue;
   refetch: () => void;
 }) => {
-  const staffOrSupport = useSelector(isStaffOrSupport);
+  const user = useUser();
+  const staffOrSupport = user?.is_staff || user?.is_support;
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => supportIssuesSync({ path: { uuid: issue.uuid } }),

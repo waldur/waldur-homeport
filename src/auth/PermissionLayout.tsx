@@ -10,13 +10,11 @@ import {
   ReactNode,
 } from 'react';
 import { Card } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
-import { isStaffOrSupport } from '@/workspace/selectors';
 
 type Permission = 'allowed' | 'limited' | 'restricted' | 'custom';
 interface PermissionMessage {
@@ -116,8 +114,8 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
     clearPermissionView,
   } = useContext(PermissionContext);
 
-  const hasAllAccess = useSelector(isStaffOrSupport);
   const user = useUser();
+  const hasAllAccess = user?.is_staff || user?.is_support;
   const project = useProject();
   const customer = useCustomer();
   const { state, params } = useCurrentStateAndParams();

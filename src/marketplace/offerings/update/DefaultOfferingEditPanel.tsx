@@ -1,6 +1,5 @@
 import { get } from 'lodash-es';
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { CheckOrX } from '@/core/CheckOrX';
 import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
@@ -13,7 +12,7 @@ import { SecretField as PlainSecretField } from '@/marketplace/common/SecretFiel
 import { FieldEditButton } from '@/marketplace/offerings/update/integration/FieldEditButton';
 import { OfferingEditPanelFormProps } from '@/marketplace/offerings/update/integration/types';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 export interface OfferingEditField {
   key: string;
@@ -31,7 +30,8 @@ export interface OfferingEditField {
 export const DefaultOfferingEditPanel: FunctionComponent<
   { fields: OfferingEditField[] } & OfferingEditPanelFormProps
 > = (props) => {
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
   return (
     <>
       {props.fields.map((field) => (

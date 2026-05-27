@@ -1,7 +1,6 @@
 import { UserPlusIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   callManagingOrganisationsAddUser,
   customersAddUser,
@@ -29,8 +28,12 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { Role, RoleType } from '@/permissions/types';
 import { useNotify } from '@/store/notify';
 import { getCurrentUser } from '@/user/UsersService';
-import { setCurrentUser } from '@/workspace/actions';
-import { useUser, useCustomer, useProject } from '@/workspace/hooks';
+import {
+  useCustomer,
+  useProject,
+  useSetUser,
+  useUser,
+} from '@/workspace/hooks';
 import { Project, User } from '@/workspace/types';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
@@ -79,14 +82,17 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   customerUuid,
   customer,
 }) => {
-  const dispatch = useDispatch();
+  const setCurrentUser = useSetUser();
   const { closeDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
 
   const currentUser = useUser() as User;
   const currentProject = useProject();
   const currentCustomer = useCustomer();
-  const hasCustomerPermission = useSelector(hasCurrentCustomerPermission);
+  const hasCustomerPermission = hasCurrentCustomerPermission(
+    currentUser,
+    currentCustomer,
+  );
 
   const resolvedProject = project || currentProject;
   const resolvedCustomer = customer || currentCustomer;
@@ -163,7 +169,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
           });
           if (currentUser.uuid === formData.user.uuid) {
             const newUser = await getCurrentUser();
-            dispatch(setCurrentUser(newUser));
+            setCurrentUser(newUser);
           }
           await refetch();
           showSuccess(translate('User has been added to organization.'));
@@ -183,7 +189,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
           });
           if (currentUser.uuid === formData.user.uuid) {
             const newUser = await getCurrentUser();
-            dispatch(setCurrentUser(newUser));
+            setCurrentUser(newUser);
           }
           await refetch();
           showSuccess(translate('User has been added to organization.'));
@@ -203,7 +209,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
           });
           if (currentUser.uuid === formData.user.uuid) {
             const newUser = await getCurrentUser();
-            dispatch(setCurrentUser(newUser));
+            setCurrentUser(newUser);
           }
           await refetch();
           showSuccess(translate('User has been added to organization.'));

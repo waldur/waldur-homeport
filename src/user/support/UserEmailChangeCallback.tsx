@@ -1,6 +1,5 @@
 import { useRouter } from '@uirouter/react';
 import { useEffect, FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { usersConfirmEmail } from 'waldur-js-client';
 
 import * as AuthService from '@/auth/AuthService';
@@ -8,12 +7,12 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { wait } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
-import { setCurrentUser } from '@/workspace/actions';
+import { useSetUser } from '@/workspace/hooks';
 
 import { getCurrentUser } from '../UsersService';
 
 export const UserEmailChangeCallback: FunctionComponent = () => {
-  const dispatch = useDispatch();
+  const setCurrentUser = useSetUser();
 
   const { showErrorResponse, showSuccess } = useNotify();
 
@@ -45,7 +44,7 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
       }
 
       if (currentUser) {
-        dispatch(setCurrentUser(currentUser));
+        setCurrentUser(currentUser);
         await wait(1000);
       }
       router.stateService.go('profile-manage');

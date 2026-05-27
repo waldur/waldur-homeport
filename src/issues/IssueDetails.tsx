@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { supportIssuesRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -20,7 +19,7 @@ import { RefreshButton } from '@/marketplace/common/RefreshButton';
 import { useBreadcrumbs } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 import { Field } from '@/resource/summary';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
 import { IssueCommentsContainer } from './comments/IssueCommentsContainer';
@@ -41,7 +40,9 @@ export const IssueDetails: FunctionComponent = () => {
   } = useCurrentStateAndParams();
   const router = useRouter();
 
-  const staffOrSupport = useSelector(isStaffOrSupport);
+  const user = useUser();
+
+  const staffOrSupport = user?.is_staff || user?.is_support;
 
   if (!issue_uuid) {
     router.stateService.go('errorPage.notFound');

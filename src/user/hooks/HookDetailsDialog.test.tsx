@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   hooksEmailCreate,
@@ -26,9 +24,6 @@ vi.mock('@/store/notify', () => ({
   } as any),
 }));
 
-const mockStore = configureStore([]);
-const store = mockStore({});
-
 const renderWithRedux = (ui) => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -38,9 +33,7 @@ const renderWithRedux = (ui) => {
   });
 
   return render(
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>{ui}</Provider>
-    </QueryClientProvider>,
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
   );
 };
 
@@ -70,7 +63,6 @@ describe('HookDetailsDialog', () => {
       showError: mockShowError,
       showErrorResponse: mockShowErrorResponse,
     } as any);
-    store.clearActions();
   });
 
   afterEach(() => {

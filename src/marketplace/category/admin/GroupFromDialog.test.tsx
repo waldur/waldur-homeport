@@ -11,14 +11,7 @@ import {
 
 import { GroupFromDialog } from './GroupFromDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    marketplaceCategoryGroupsCreate: vi.fn(),
-    marketplaceCategoryGroupsPartialUpdate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const renderDialog = (categoryGroup?: any) => {
   const queryClient = new QueryClient({

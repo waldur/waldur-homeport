@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { Offering } from '../types';
 
@@ -18,7 +17,8 @@ interface OfferingExtraActionsButtonProps {
 export const OfferingExtraActionsButton: FC<
   OfferingExtraActionsButtonProps
 > = ({ offering }) => {
-  const showVersionHistory = useSelector(isStaffOrSupport);
+  const user = useUser();
+  const showVersionHistory = user?.is_staff || user?.is_support;
   const showPreview = !isFeatureVisible(MarketplaceFeatures.catalogue_only);
 
   if (!showPreview && !showVersionHistory) {

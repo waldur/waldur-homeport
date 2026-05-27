@@ -1,12 +1,11 @@
 import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 import { Offering } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { isStaff } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const MoveOfferingDialog = lazyComponent(() =>
   import('./MoveOfferingDialog').then((module) => ({
@@ -29,7 +28,9 @@ export const MoveOfferingAction = ({
     });
   };
 
-  const isUserStaff = useSelector(isStaff);
+  const user = useUser();
+
+  const isUserStaff = user?.is_staff;
   if (!isUserStaff) return null;
 
   return (

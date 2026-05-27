@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { paymentProfilesList } from 'waldur-js-client';
 
 import { StateIndicator } from '@/core/StateIndicator';
@@ -8,19 +7,16 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { useCustomer } from '@/workspace/hooks';
-import {
-  isStaff as isStaffSelector,
-  isSupport as isSupportSelector,
-} from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
 
 import { PaymentProfileActions } from './PaymentProfileActions';
 import { PaymentProfileCreateButton } from './PaymentProfileCreateButton';
 
 export const PaymentProfileList: FunctionComponent<{}> = () => {
   const customer = useCustomer();
-  const isStaff = useSelector(isStaffSelector);
-  const isSupport = useSelector(isSupportSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
+  const isSupport = user?.is_support;
 
   const filter = useMemo(
     () => ({

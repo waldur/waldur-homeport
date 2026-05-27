@@ -1,6 +1,4 @@
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { FunctionComponent, useMemo } from 'react';
 import { marketplaceOfferingPermissionsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -8,19 +6,21 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { OfferingPermissionActions } from '../offerings/details/permissions/OfferingPermissionActions';
 
 import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
 import { OfferingPermissionCreateButton } from './OfferingPermissionCreateButton';
 
-const getFilter = createSelector(getCustomer, (customer) => ({
-  customer: customer.uuid,
-}));
-
 export const OfferingPermissionsList: FunctionComponent = () => {
-  const filter = useSelector(getFilter);
+  const customer = useCustomer();
+  const filter = useMemo(
+    () => ({
+      customer: customer?.uuid,
+    }),
+    [customer],
+  );
 
   const tableProps = useTable({
     table: OFFERING_PERMISSIONS_LIST_ID,

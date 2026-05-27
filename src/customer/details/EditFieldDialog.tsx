@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { pick } from 'lodash-es';
 import { useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { organizationGroupsList } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
@@ -36,7 +35,6 @@ type FormData = Record<string, any>;
 
 export const EditFieldDialog = (props: { resolve: EditCustomerProps }) => {
   const { closeDialog } = useModal();
-  const dispatch = useDispatch();
 
   const initialValues = useMemo(() => {
     if (props.resolve.name === 'country') {
@@ -58,7 +56,7 @@ export const EditFieldDialog = (props: { resolve: EditCustomerProps }) => {
   const processRequest = useCallback(
     (values: FormData) => {
       return props.resolve
-        .callback(values, dispatch)
+        .callback(values)
         .then(() => {
           closeDialog();
         })
@@ -68,7 +66,7 @@ export const EditFieldDialog = (props: { resolve: EditCustomerProps }) => {
           }
         });
     },
-    [props.resolve, closeDialog, dispatch],
+    [props.resolve, closeDialog],
   );
 
   const {

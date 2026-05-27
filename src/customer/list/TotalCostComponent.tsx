@@ -1,48 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useFormState } from 'react-final-form';
 import { billingTotalCostRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { ServiceProvider } from '@/marketplace/types';
-import { type RootState } from '@/store/reducers';
-import { selectFiltersStorage } from '@/table/selectors';
-import { FilterItem } from '@/table/types';
+import { FinancialReportsFilterFormData } from '@/table/generated/FinancialReportsFilter';
 
 import { TotalCostField } from './TotalCostField';
 
-interface CustomerFilterData {
-  accounting_is_running?: {
-    value: boolean;
-  };
-  month: number;
-  year: number;
-  accounting_period?: {
-    label: string;
-    value: {
-      year: number;
-      month: number;
-    };
-  };
-  provider?: ServiceProvider;
-}
-
-interface CustomerListComponentProps {
-  customerListFilter: FilterItem[];
-}
-
-const loadData = async (filter: CustomerFilterData) => {
+const loadData = async (filter: FinancialReportsFilterFormData) => {
   if (!filter || !filter.accounting_period) {
     return { total: 0 };
   }
   const response = await billingTotalCostRetrieve({
     query: {
-      customer_uuid: filter.provider?.customer_uuid,
-      accounting_is_running: filter.accounting_is_running
-        ? filter.accounting_is_running.value
-        : undefined,
+      customer_uuid: filter.customer?.customer_uuid,
+      accounting_is_running:
+        filter.accounting_is_running &&
+        filter.accounting_is_running.value !== 'undefined'
+          ? filter.accounting_is_running.value
+          : undefined,
       ...filter.accounting_period.value,
     },
   });
@@ -54,21 +33,16 @@ const loadData = async (filter: CustomerFilterData) => {
   }
 };
 
-const TotalCostComponent: React.FC<CustomerListComponentProps> = (props) => {
+export const TotalCostContainer: React.FC = () => {
+  const { values } = useFormState<FinancialReportsFilterFormData>();
+
   const {
     isLoading: loading,
     error,
     data: value,
   } = useQuery({
-    queryKey: ['TotalCostComponent', props.customerListFilter],
-
-    queryFn: () =>
-      loadData(
-        (props.customerListFilter || []).reduce(
-          (acc, filter) => Object.assign(acc, { [filter.name]: filter.value }),
-          {},
-        ) as CustomerFilterData,
-      ),
+    queryKey: ['TotalCostComponent', values],
+    queryFn: () => loadData(values),
   });
   if (loading) {
     return (
@@ -80,11 +54,5 @@ const TotalCostComponent: React.FC<CustomerListComponentProps> = (props) => {
   if (error) {
     return <>{translate('Unable to load data.')}</>;
   }
-  return <TotalCostField total={value.total} />;
+  return <TotalCostField total={value ? value.total : 0} />;
 };
-
-const mapStateToProps = (state: RootState) => ({
-  customerListFilter: selectFiltersStorage(state, 'customerList'),
-});
-
-export const TotalCostContainer = connect(mapStateToProps)(TotalCostComponent);

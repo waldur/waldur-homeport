@@ -8,13 +8,7 @@ import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { EditSchedulesDialog } from './EditSchedulesDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    marketplaceProviderOfferingsUpdateAttributes: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 // Mock Select to avoid react-select issues in tests
 vi.mock('@/form/select', async (importOriginal) => {

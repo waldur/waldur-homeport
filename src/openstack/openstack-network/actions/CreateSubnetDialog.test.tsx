@@ -11,14 +11,7 @@ import {
 
 import { CreateSubnetDialog } from './CreateSubnetDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    openstackNetworksCreateSubnet: vi.fn(),
-    openstackNetworksList: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/form/MonacoField', () => ({
   MonacoField: () => <div data-testid="monaco-field" />,

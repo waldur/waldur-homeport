@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { userInvitationsAccept } from 'waldur-js-client';
 
 import * as AuthService from '@/auth/AuthService';
@@ -10,7 +9,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { getCurrentUser, UsersService } from '@/user/UsersService';
-import { setCurrentUser } from '@/workspace/actions';
+import { useSetUser } from '@/workspace/hooks';
 
 import { InvitationConfirmDialog } from './InvitationConfirmDialog';
 import { useRequestToAccessOrganization } from './join-organization/submission';
@@ -29,7 +28,7 @@ export const useInvitationCheck = () => {
   const router = useRouter();
   const { openDialog } = useModal();
   const { showSuccess, showError } = useNotify();
-  const dispatch = useDispatch();
+  const setCurrentUser = useSetUser();
   const isInitialLoad = useRef(true);
   const { checkAndRequest } = useRequestToAccessOrganization();
 
@@ -40,7 +39,7 @@ export const useInvitationCheck = () => {
       showSuccess(translate('Your invitation was accepted.'));
       InvitationTokenStorage.remove();
       const newUser = await getCurrentUser();
-      dispatch(setCurrentUser(newUser));
+      setCurrentUser(newUser);
     },
     onError: () => {
       InvitationTokenStorage.remove();

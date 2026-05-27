@@ -17,16 +17,7 @@ import { ISSUE_IDS } from '../types/constants';
 import { constructIssuePayload, IssueCreateDialog } from './IssueCreateDialog';
 import { IssueFormData } from './types';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('waldur-js-client')>();
-  return {
-    ...actual,
-    supportIssuesCreate: vi.fn(),
-    supportAttachmentsCreate: vi.fn(),
-    supportRequestTypesList: vi.fn(),
-    supportTemplatesList: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/i18n', () => ({
   translate: (key: string, values?: any) => {

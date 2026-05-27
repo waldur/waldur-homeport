@@ -11,14 +11,7 @@ import {
 
 import { SecurityGroupEditorDialog } from './SecurityGroupEditorDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    openstackSecurityGroupsList: vi.fn(),
-    openstackSecurityGroupsSetRules: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeSecurityGroup = {
   url: '/api/openstack-security-groups/b40968a448034febbf04c195aafbb4e2/',

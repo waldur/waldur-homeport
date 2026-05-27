@@ -1,22 +1,20 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { customersDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
-import { isStaff } from '@/workspace/selectors';
+import { useCustomer, useUser, useSetCustomer } from '@/workspace/hooks';
 
 export const CustomerRemovePanel: FunctionComponent = () => {
   const customer = useCustomer();
-  const canDeleteCustomer = useSelector(isStaff);
+  const user = useUser();
+  const canDeleteCustomer = user?.is_staff;
   const { showError } = useNotify();
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
   const router = useRouter();
 
   const callbackMutation = useManagedMutation<any, any, void>({
@@ -24,7 +22,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
     errorMessage: translate('Unable to delete organization.'),
     onSuccess: async () => {
       await router.stateService.go('organizations');
-      dispatch(setCurrentCustomer(null));
+      setCurrentCustomer(null);
     },
     confirmation: {
       title: translate('Organization removal'),

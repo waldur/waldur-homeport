@@ -2,7 +2,6 @@ import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { projectsPartialUpdate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
@@ -12,7 +11,7 @@ import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
-import { setCurrentProject } from '@/workspace/actions';
+import { useSetProject } from '@/workspace/hooks';
 
 interface FormData {
   image;
@@ -20,7 +19,7 @@ interface FormData {
 
 export const ProjectAvatar = ({ project }: { project: Project }) => {
   const abbreviation = useMemo(() => getItemAbbreviation(project), [project]);
-  const dispatch = useDispatch();
+  const setCurrentProject = useSetProject();
 
   const avatarMutation = useManagedMutation<any, any, FormData>({
     mutationFn: (data) =>
@@ -32,7 +31,7 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
     successMessage: translate('Project has been updated.'),
     errorMessage: translate('Project could not be updated.'),
     onSuccess: (response: any) => {
-      dispatch(setCurrentProject({ ...project, image: response.data.image }));
+      setCurrentProject({ ...project, image: response.data.image });
     },
   });
   return (

@@ -1,7 +1,4 @@
-import { createSelector } from 'reselect';
 import { PaymentProfile } from 'waldur-js-client';
-
-import { getCustomer } from '@/workspace/selectors';
 
 import { InvoiceItem, InvoiceTableItem } from '../types';
 
@@ -95,9 +92,6 @@ export const getActiveFixedPricePaymentProfile = (profiles: PaymentProfile[]) =>
 export const getActivePaymentProfile = (profiles: PaymentProfile[]) =>
   profiles?.find((profile) => profile.is_active);
 
-export const hasMonthlyPaymentProfile = createSelector(
-  getCustomer,
-  (customer) =>
-    getActivePaymentProfile(customer.payment_profiles)?.payment_type ===
-    'payment_gw_monthly',
-);
+export const hasMonthlyPaymentProfile = (customer) =>
+  getActivePaymentProfile(customer?.payment_profiles)?.payment_type ===
+  'payment_gw_monthly';

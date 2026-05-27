@@ -1,21 +1,13 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Field } from 'react-final-form';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesMoveResource } from 'waldur-js-client';
 
 import { MultiMoveDialog } from './MultiMoveDialog';
 
 // Mock waldur-js-client
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('waldur-js-client')>();
-  return {
-    ...actual,
-    marketplaceResourcesMoveResource: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 // Mock MoveToProjectAutocomplete to avoid dealing with AsyncSelect complexity in unit tests
 vi.mock('../actions/MoveToProjectAutocomplete', () => ({
@@ -57,18 +49,13 @@ const createTestQueryClient = () =>
     },
   });
 
-const mockStore = configureStore();
-
 const renderComponent = (props) => {
   const queryClient = createTestQueryClient();
-  const store = mockStore({});
 
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <MultiMoveDialog {...props} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <MultiMoveDialog {...props} />
+    </QueryClientProvider>,
   );
 };
 

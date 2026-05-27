@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { customersPartialUpdate } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -8,8 +7,7 @@ import { translate } from '@/i18n';
 import { GeolocationPoint } from '@/map/types';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 const SetLocationDialog = lazyComponent(() =>
@@ -23,7 +21,7 @@ interface SetLocationButtonProps {
 }
 
 export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
   const { openDialog } = useModal();
   const currentCustomer = useCustomer();
 
@@ -44,7 +42,7 @@ export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
     errorMessage: translate('Unable to save location.'),
     onSuccess: (response) => {
       if (customer.uuid === currentCustomer?.uuid) {
-        dispatch(setCurrentCustomer(response.data));
+        setCurrentCustomer(response.data);
       }
     },
   });

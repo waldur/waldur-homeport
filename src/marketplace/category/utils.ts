@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import {
   CategoryColumn,
   CategoryColumnRequest,
@@ -117,7 +116,6 @@ export const useCategoryColumnsEditor = (category: Category) => {
         }),
       ),
   });
-  const dispatch = useDispatch();
 
   const submitMutation = useManagedMutation<any, any, FormData>({
     mutationFn: async (formData) => {
@@ -152,6 +150,5 @@ export const useCategoryColumnsEditor = (category: Category) => {
     submitRequest,
     category: category,
     initialValues,
-    dispatch,
   };
 };

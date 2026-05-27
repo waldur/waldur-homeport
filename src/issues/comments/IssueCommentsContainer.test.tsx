@@ -1,20 +1,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { supportCommentsList } from 'waldur-js-client';
 
 import { IssueCommentsContainer } from './IssueCommentsContainer';
 
 // Mock the API client
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('waldur-js-client')>();
-  return {
-    ...actual,
-    supportCommentsList: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 // Mock the child components
 vi.mock('./IssueCommentButton', () => ({
@@ -54,8 +46,6 @@ const createTestQueryClient = () =>
     },
   });
 
-const mockStore = configureStore();
-
 const mockIssue = {
   uuid: 'issue-123',
   url: 'https://api.example.com/issues/issue-123/',
@@ -79,14 +69,10 @@ const mockComments = [
 
 const renderComponent = (issue = mockIssue) => {
   const queryClient = createTestQueryClient();
-  const store = mockStore({});
-
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <IssueCommentsContainer issue={issue as any} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <IssueCommentsContainer issue={issue as any} />
+    </QueryClientProvider>,
   );
 };
 

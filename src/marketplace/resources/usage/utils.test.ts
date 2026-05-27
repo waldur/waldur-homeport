@@ -14,14 +14,7 @@ import {
   getUsageHistoryPeriodOptions,
 } from './utils';
 
-vi.mock('waldur-js-client', async () => {
-  const actual = await vi.importActual('waldur-js-client');
-  return {
-    ...actual,
-    marketplaceResourcesOfferingRetrieve: vi.fn(),
-    marketplaceComponentUsagesList: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 describe('ResourceUsageChart', () => {
   beforeEach(() => {

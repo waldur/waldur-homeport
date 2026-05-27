@@ -1,12 +1,11 @@
 import { CalendarPlusIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const AdjustResourceDatesDialog = lazyComponent(() =>
   import('./AdjustResourceDatesDialog').then((module) => ({
@@ -23,7 +22,8 @@ export const AdjustResourceDatesAction = ({
   resource,
   refetch,
 }: AdjustResourceDatesActionProps) => {
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
   const { openDialog } = useModal();
 
   const hasPrepaidComponents = resource.offering_components?.some(

@@ -1,26 +1,22 @@
-import { useEffect, useState, FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { Link } from '@/core/Link';
 import { PaymentsList } from '@/customer/payments/PaymentsList';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { getActivePaymentProfile } from '@/invoices/details/utils';
-import { useCustomer } from '@/workspace/hooks';
-import {
-  isStaff as isStaffSelector,
-  isSupport as isSupportSelector,
-  isOwner as isOwnerSelector,
-} from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
+import { checkIsOwner } from '@/workspace/selectors';
 
 export const PaymentsPanel: FunctionComponent = () => {
   const customer = useCustomer();
   const [activePaymentProfile, setActivePaymentProfile] = useState(
     getActivePaymentProfile(customer.payment_profiles),
   );
-  const isStaff = useSelector(isStaffSelector);
-  const isSupport = useSelector(isSupportSelector);
-  const isOwner = useSelector(isOwnerSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
+  const isSupport = user?.is_support;
+  const isOwner = checkIsOwner(customer, user);
 
   useEffect(() => {
     setActivePaymentProfile(getActivePaymentProfile(customer.payment_profiles));

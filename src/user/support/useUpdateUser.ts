@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
@@ -8,11 +7,10 @@ import { GroupInvitationTokenStorage } from '@/core/StorageManager';
 import { translate } from '@/i18n';
 import { useRequestToAccessOrganization } from '@/invitations/join-organization/submission';
 import { useNotify } from '@/store/notify';
-import { setCurrentUser } from '@/workspace/actions';
-import { useUser } from '@/workspace/hooks';
+import { useUser, useSetUser } from '@/workspace/hooks';
 
 export const useUpdateUser = (user: User) => {
-  const dispatch = useDispatch();
+  const setCurrentUser = useSetUser();
   const [isLoading, setIsLoading] = useState(false);
 
   const currentUser = useUser();
@@ -46,7 +44,7 @@ export const useUpdateUser = (user: User) => {
         const tosJustAccepted =
           !currentUser.agreement_date && newUser.agreement_date;
 
-        dispatch(setCurrentUser(newUser));
+        setCurrentUser(newUser);
 
         // If ToS was just accepted, check for pending group invitation
         if (tosJustAccepted) {

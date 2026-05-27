@@ -9,8 +9,6 @@ import {
 } from '@testing-library/react';
 import { useRouter } from '@uirouter/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesReallocateLimits } from 'waldur-js-client';
 
@@ -44,6 +42,12 @@ vi.mock('@/router', () => ({
     },
     stateService: { go: vi.fn(), target: vi.fn() },
   },
+}));
+
+vi.mock('@/workspace/hooks', () => ({
+  useUser: () => ({ is_staff: true }),
+  useCustomer: () => ({}),
+  useProject: () => ({}),
 }));
 
 // Mock react-select-async-paginate to work with userEvent
@@ -101,9 +105,7 @@ vi.mock('react-select-async-paginate', async (importOriginal) => {
   };
 });
 
-const mockStore = configureStore();
-
-const renderDialog = (store, resolve) => {
+const renderDialog = (resolve) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -112,16 +114,13 @@ const renderDialog = (store, resolve) => {
     },
   });
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <ReallocateLimitsDialog resolve={resolve} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <ReallocateLimitsDialog resolve={resolve} />
+    </QueryClientProvider>,
   );
 };
 
 describe('ReallocateLimitsDialog', () => {
-  let store;
   let mockRouter;
   let mockNotify;
   let mockModal;
@@ -167,8 +166,6 @@ describe('ReallocateLimitsDialog', () => {
   };
 
   beforeEach(() => {
-    store = mockStore({});
-
     mockRouter = {
       stateService: { go: vi.fn() },
     };
@@ -202,7 +199,7 @@ describe('ReallocateLimitsDialog', () => {
     screen.queryByTestId('confirm-button') as HTMLButtonElement;
 
   it('verifies the full wizard flow and validations', async () => {
-    renderDialog(store, {
+    renderDialog({
       resource: { marketplace_resource_uuid: 'source-resource-uuid' },
     });
 
@@ -305,14 +302,14 @@ describe('ReallocateLimitsDialog', () => {
 
   it('shows error message if data loading fails', async () => {
     vi.mocked(loadData).mockRejectedValue(new Error('Loading error'));
-    renderDialog(store, {
+    renderDialog({
       resource: { marketplace_resource_uuid: 'source-resource-uuid' },
     });
     await screen.findByText('Unable to load data.');
   });
 
   it('prevents proceeding if not all capacity is allocated in Step 1', async () => {
-    renderDialog(store, {
+    renderDialog({
       resource: { marketplace_resource_uuid: 'source-resource-uuid' },
     });
 
@@ -356,7 +353,7 @@ describe('ReallocateLimitsDialog', () => {
       new Error('Submission failed'),
     );
 
-    renderDialog(store, {
+    renderDialog({
       resource: { marketplace_resource_uuid: 'source-resource-uuid' },
     });
 

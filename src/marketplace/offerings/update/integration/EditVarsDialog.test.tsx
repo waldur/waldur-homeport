@@ -8,13 +8,7 @@ import { marketplaceProviderOfferingsUpdateIntegration } from 'waldur-js-client'
 
 import { EditVarsDialog } from './EditVarsDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    marketplaceProviderOfferingsUpdateIntegration: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeOffering = {
   uuid: 'offering-uuid',

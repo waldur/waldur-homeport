@@ -7,13 +7,7 @@ import { useNotify } from '@/store/notify';
 
 import { SupportFeedback } from './SupportFeedback';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    supportFeedbacksCreate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@uirouter/react', async (importOriginal) => {
   const actual = await importOriginal<any>();

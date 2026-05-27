@@ -4,7 +4,6 @@ import {
   useRouter,
 } from '@uirouter/react';
 import { useContext, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
 import { ENV } from '@/core/config';
@@ -71,7 +70,7 @@ export const getTabs = (root, allStates) =>
 export const useTabs = (): Tab[] => {
   const router = useRouter();
   const [tabs, setTabs] = useState([]);
-  const pageTitle = useSelector(getTitle);
+  const pageTitle = getTitle();
   const syncTabs = () => {
     const allStates = router.stateRegistry.get();
     const current = router.globals.$current;

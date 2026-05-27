@@ -11,14 +11,7 @@ import {
 
 import { CreateSecurityGroupDialog } from './CreateSecurityGroupDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    openstackSecurityGroupsList: vi.fn(),
-    openstackTenantsCreateSecurityGroup: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeTenant = {
   name: 'VPC',
