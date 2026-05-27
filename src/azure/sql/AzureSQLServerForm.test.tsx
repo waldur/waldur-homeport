@@ -162,11 +162,14 @@ vi.mock('@/form/select/AsyncSelectField', () => ({
   ),
 }));
 
-window.IntersectionObserver = vi.fn(() => ({
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-  disconnect: vi.fn(),
-})) as any;
+// Use a real (constructable) class — vitest 4's vi.fn() mocks are not
+// constructable, so `new vi.fn(() => ({...}))()` throws "is not a constructor".
+window.IntersectionObserver = class {
+  observe = vi.fn();
+  unobserve = vi.fn();
+  disconnect = vi.fn();
+  takeRecords = vi.fn(() => []);
+} as any;
 
 // --- Test fixtures ---
 
