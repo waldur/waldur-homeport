@@ -155,6 +155,12 @@ This script:
 
 **After running:** Verify with `yarn tsc --noEmit`
 
+**Multiple workspaces on one machine:** `yarn link` uses a machine-global registry keyed only by package name, so a second checkout would overwrite the first workspace's `waldur-js-client` link. Set `YARN_LINK_FOLDER` to a workspace-local path to isolate them:
+
+```bash
+YARN_LINK_FOLDER=../.yarn-link ./docs/update-local-sdk.sh ../waldur-mastermind ../js-client
+```
+
 ## Wizard Migration Patterns
 
 When migrating wizard dialogs to use `@/wizard`, follow these patterns:
