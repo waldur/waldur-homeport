@@ -44,7 +44,6 @@ export const RequestLimitsChangePendingDialog: FC<Props> = ({
             }
             action={() => cancelMutation.mutate()}
             variant="danger"
-            disabled={cancelMutation.isPending}
             pending={cancelMutation.isPending}
           />
         </>

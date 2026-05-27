@@ -12,8 +12,6 @@ import { setPrevParams, setPrevState } from './error/utils';
 import { isFeatureVisible } from './features/connect';
 import { MarketplaceFeatures } from './FeaturesEnums';
 import { translate } from './i18n';
-import { tryAcceptInvitation } from './invitations/tryAcceptInvitation';
-import { tryJoinOrganization } from './invitations/tryJoinOrganization';
 import { ModalService } from './modal/actions';
 import { router } from './router';
 import { NotifyService } from './store/notify';
@@ -247,23 +245,6 @@ export function attachTransitions() {
     if (fromName) {
       setPrevState(fromName);
       setPrevParams(transition.params('from'));
-    }
-  });
-
-  router.transitionService.onSuccess({}, (transition) => {
-    if (AuthService.isAuthenticated() && !transition.to().data?.skipAuth) {
-      if (router.urlService.path().split('/')[1] !== 'user-group-invitations') {
-        tryAcceptInvitation();
-      }
-
-      // Fallback: Check for pending group invitation on initial page load
-      // Skip if landing on user-group-invitation route (it handles invitations via confirmation dialog)
-      if (
-        !transition.from().name &&
-        transition.to().name !== 'user-group-invitation'
-      ) {
-        tryJoinOrganization();
-      }
     }
   });
 

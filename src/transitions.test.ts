@@ -52,14 +52,6 @@ vi.mock('./i18n', () => ({
   translate: (s) => s,
 }));
 
-vi.mock('./invitations/tryAcceptInvitation', () => ({
-  tryAcceptInvitation: vi.fn(),
-}));
-
-vi.mock('./invitations/tryJoinOrganization', () => ({
-  tryJoinOrganization: vi.fn(),
-}));
-
 vi.mock('./modal/actions', () => ({
   closeModalDialog: vi.fn(),
 }));

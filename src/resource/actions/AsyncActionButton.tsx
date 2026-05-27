@@ -62,6 +62,9 @@ export const AsyncActionButton: <T extends { uuid?: string }>(
       {...rest}
       {...validationState}
       disabled={isPending || validationState.disabled}
+      tooltip={
+        isPending ? translate('Action is in progress') : validationState.tooltip
+      }
       action={(variables) => mutate(variables)}
     />
   );

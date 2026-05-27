@@ -6,7 +6,7 @@ import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
-import { checkAndAccept } from './utils';
+import { useCheckAndAccept } from './useCheckAndAccept';
 
 export const InvitationAccept: FunctionComponent = () => {
   const router = useRouter();
@@ -14,12 +14,14 @@ export const InvitationAccept: FunctionComponent = () => {
     params: { uuid },
   } = useCurrentStateAndParams();
 
+  const { checkAndAccept } = useCheckAndAccept(uuid);
+
   useEffectOnce(() => {
     if (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED) {
       router.stateService.go('errorPage.notFound');
       return;
     }
-    checkAndAccept(uuid);
+    checkAndAccept();
   });
 
   return (

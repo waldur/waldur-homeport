@@ -3,18 +3,19 @@ import { FunctionComponent, useEffect } from 'react';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { tryJoinOrganization } from '@/invitations/tryJoinOrganization';
+import { useRequestToAccessOrganization } from '@/invitations/join-organization/submission';
 
 import { loginUser, exchangeToken } from '../AuthService';
 
 export const AuthLoginCompleted: FunctionComponent = () => {
   const router = useRouter();
   const { params } = useCurrentStateAndParams();
+  const { checkAndRequest } = useRequestToAccessOrganization();
   useEffect(() => {
     async function handleLogin() {
       const token = await exchangeToken(params.code);
       await loginUser(token, params.method);
-      tryJoinOrganization();
+      await checkAndRequest();
       router.stateService.go('profile.details');
     }
     handleLogin();

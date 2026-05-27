@@ -7,7 +7,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { RedirectStorage } from '@/core/StorageManager';
 import { getQueryString } from '@/core/utils';
 import { translate } from '@/i18n';
-import { tryJoinOrganization } from '@/invitations/tryJoinOrganization';
+import { useRequestToAccessOrganization } from '@/invitations/join-organization/submission';
 
 import * as AuthService from '../AuthService';
 import { loginUser } from '../AuthService';
@@ -18,6 +18,7 @@ export const OauthLoginCompleted: FunctionComponent = () => {
     params: { provider },
   } = useCurrentStateAndParams();
   const [error, setError] = useState();
+  const { checkAndRequest } = useRequestToAccessOrganization();
 
   useEffect(() => {
     async function fetchToken() {
@@ -26,11 +27,11 @@ export const OauthLoginCompleted: FunctionComponent = () => {
         const code = qs.code as string;
         const token = await AuthService.exchangeToken(code);
         await loginUser(token, provider);
-        // Only call tryJoinOrganization if NOT redirecting to user-group-invitation
+        // Only check for pending group invitation if NOT redirecting to user-group-invitation
         // (that route handles invitations via its own confirmation dialog)
         const redirect = RedirectStorage.get();
         if (redirect?.toState !== 'user-group-invitation') {
-          tryJoinOrganization();
+          await checkAndRequest();
         }
         AuthService.redirectOnSuccess();
       } catch (e) {
