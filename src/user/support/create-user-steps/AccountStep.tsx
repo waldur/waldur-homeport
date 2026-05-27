@@ -109,6 +109,18 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           type="checkbox"
         />
       </FormGroup>
+      <FormGroup
+        label={translate('Personal access tokens')}
+        description={translate(
+          'Designates whether the user is allowed to create and use personal access tokens.',
+        )}
+      >
+        <Field
+          name="can_use_personal_access_tokens"
+          component={AwesomeCheckboxField}
+          type="checkbox"
+        />
+      </FormGroup>
 
       <h6 className="fw-bold mb-4 mt-6">
         {translate('Password')}

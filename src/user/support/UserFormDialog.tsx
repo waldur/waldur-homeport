@@ -30,6 +30,7 @@ export interface UserFormData {
   is_active: boolean;
   is_staff: boolean;
   is_support: boolean;
+  can_use_personal_access_tokens: boolean;
   first_name?: string;
   last_name?: string;
   native_name?: string;
@@ -82,6 +83,7 @@ const buildBody = (formData: UserFormData): UserRequest => {
     is_active: formData.is_active,
     is_staff: formData.is_staff,
     is_support: formData.is_support,
+    can_use_personal_access_tokens: formData.can_use_personal_access_tokens,
   };
 
   // Include optional string fields — send empty string to clear
@@ -193,6 +195,7 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
         is_active: user.is_active,
         is_staff: user.is_staff,
         is_support: user.is_support,
+        can_use_personal_access_tokens: user.can_use_personal_access_tokens,
         first_name: user.first_name || '',
         last_name: user.last_name || '',
         native_name: user.native_name || '',
@@ -215,6 +218,7 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
       is_active: true,
       is_staff: false,
       is_support: false,
+      can_use_personal_access_tokens: false,
     };
   }, [user]);
 
