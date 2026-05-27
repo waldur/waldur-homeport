@@ -68,3 +68,8 @@ class LanguageUtilsServiceClass {
 }
 
 export const LanguageUtilsService = new LanguageUtilsServiceClass();
+
+export const numberFormatter = new Intl.NumberFormat(getUserLocale(), {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
