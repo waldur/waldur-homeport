@@ -8,7 +8,6 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
-import { CategoryColumn } from '@/marketplace/types';
 import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { useTitle } from '@/navigation/title';
 import { createFetcher } from '@/table/api';
@@ -194,7 +193,7 @@ const CategoryResourcesListTable: FunctionComponent<OwnProps> = (ownProps) => {
     },
   ].filter((column) => !column.optional || !isSpecified(column.id));
 
-  ownProps.columns.map((column: CategoryColumn) => {
+  ownProps.columns.map((column: NestedColumn) => {
     columns.push({
       title: column.title,
       render: ({ row }) => CategoryColumnField({ row, column }),

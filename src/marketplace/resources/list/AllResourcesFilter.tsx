@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
+import { NestedColumn } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { StringField } from '@/form';
@@ -7,7 +8,6 @@ import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
-import { CategoryColumn } from '@/marketplace/types';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { OfferingFilter } from './OfferingFilter';
@@ -17,7 +17,7 @@ import { RuntimeStateFilter } from './RuntimeStateFilter';
 
 export const AllResourcesFilter: FunctionComponent<{
   category_uuid?: string;
-  columns?: CategoryColumn[];
+  columns?: NestedColumn[];
 }> = ({ category_uuid, columns }) => (
   <>
     <TableFilterItem
