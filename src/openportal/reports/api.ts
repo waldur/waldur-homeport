@@ -150,12 +150,12 @@ export const fetchOfferingMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
 ) =>
-  fetchMappingBatched<any>(
+  fetchMappingBatched(
     'offering_mapping',
     ids,
     (identifier) =>
       openportalOfferingMappingRetrieve({ query: { identifier } }).then(
-        (res) => res.data as unknown as Record<string, any>,
+        (res) => res.data,
       ),
     onProgress,
   );
@@ -164,12 +164,12 @@ export const fetchProjectMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
 ) =>
-  fetchMappingBatched<any>(
+  fetchMappingBatched(
     'project_mapping',
     ids,
     (identifier) =>
       openportalProjectMappingRetrieve({ query: { identifier } }).then(
-        (res) => res.data as unknown as Record<string, any>,
+        (res) => res.data,
       ),
     onProgress,
   );
@@ -178,12 +178,12 @@ export const fetchUserMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
 ) =>
-  fetchMappingBatched<any>(
+  fetchMappingBatched(
     'user_mapping',
     ids,
     (identifier) =>
       openportalUserMappingRetrieve({ query: { identifier } }).then(
-        (res) => res.data as unknown as Record<string, any>,
+        (res) => res.data,
       ),
     onProgress,
   );

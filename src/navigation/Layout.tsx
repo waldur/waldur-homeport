@@ -8,6 +8,7 @@ import * as AuthService from '@/auth/AuthService';
 import { PermissionDataProvider } from '@/auth/PermissionLayout';
 import WarningBar from '@/auth/WarningBar';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { InvitationCheck } from '@/invitations/InvitationCheck';
 import { DefaultLayoutConfig, useLayout } from '@/metronic/layout/core';
 import { MasterLayout } from '@/metronic/layout/MasterLayout';
 import { GracePeriodWarningBar } from '@/project/GracePeriodWarningBar';
@@ -113,6 +114,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <LayoutContext.Provider value={context}>
       <ReviewCheck />
+      <InvitationCheck />
       <PermissionDataProvider>
         <ProfileCompletenessProvider>
           <div className="d-flex flex-column flex-root print-content-only">

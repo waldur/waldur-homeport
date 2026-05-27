@@ -1,4 +1,4 @@
-import { translate } from '@/i18n';
+import { formatJsxTemplate, translate } from '@/i18n';
 import { RoleType } from '@/permissions/types';
 import { formatRoleType } from '@/permissions/utils';
 
@@ -24,18 +24,20 @@ export const formatInvitation = (
       '{sender} has invited you to join {name} {type} in {role} role.',
       {
         sender,
-        name: invitation.scope_name,
+        name: <strong>{invitation.scope_name}</strong>,
         type: formatRoleType(invitation.scope_type as RoleType),
-        role: invitation.role_description,
+        role: <strong>{invitation.role_description}</strong>,
       },
+      formatJsxTemplate,
     );
   }
   return translate(
     'You have been invited to join {name} {type} in {role} role.',
     {
-      name: invitation.scope_name,
+      name: <strong>{invitation.scope_name}</strong>,
       type: formatRoleType(invitation.scope_type as RoleType),
-      role: invitation.role_description,
+      role: <strong>{invitation.role_description}</strong>,
     },
+    formatJsxTemplate,
   );
 };

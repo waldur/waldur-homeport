@@ -18,8 +18,12 @@ import { InvitationErrorMessage } from './InvitationErrorMessage';
 import { InvitationMessage } from './InvitationMessage';
 
 export const InvitationConfirmDialog: FunctionComponent<{
-  resolve: { token; deferred };
-}> = ({ resolve: { token, deferred } }) => {
+  resolve: {
+    token;
+    onConfirm: (data: { invitation }) => void;
+    onCancel: () => void;
+  };
+}> = ({ resolve: { token, onConfirm, onCancel } }) => {
   const router = useRouter();
 
   const user = useUser();
@@ -36,14 +40,14 @@ export const InvitationConfirmDialog: FunctionComponent<{
   const { closeDialog } = useModal();
 
   const dismiss = useCallback(() => {
-    deferred.reject();
     closeDialog();
-  }, [closeDialog, deferred]);
+    onCancel();
+  }, [closeDialog, onCancel]);
 
   const closeAcceptingInvitation = useCallback(() => {
     closeDialog();
-    deferred.resolve({ invitation });
-  }, [closeDialog, deferred, invitation]);
+    onConfirm({ invitation });
+  }, [closeDialog, onConfirm, invitation]);
 
   const closeButton = useCallback(() => {
     closeDialog();
@@ -75,7 +79,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
         )
       }
     >
-      {!user ? null : asyncResult.isLoading ? (
+      {!user || asyncResult.isLoading ? (
         <>
           <LoadingSpinner />
           <p className="text-center">

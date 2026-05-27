@@ -12,19 +12,19 @@ import { GroupInvitationErrorMessage } from './GroupInvitationErrorMessage';
 import { GroupInvitationMessage } from './GroupInvitationMessage';
 
 export const GroupInvitationConfirmDialog: FunctionComponent<{
-  resolve: { token; deferred };
-}> = ({ resolve: { token, deferred } }) => {
+  resolve: { token; onConfirm: () => void; onCancel: () => void };
+}> = ({ resolve: { token, onConfirm, onCancel } }) => {
   const { closeDialog } = useModal();
 
   const dismiss = useCallback(() => {
-    deferred.reject();
     closeDialog();
-  }, [closeDialog, deferred]);
+    onCancel();
+  }, [closeDialog, onCancel]);
 
   const submitRequest = useCallback(() => {
     closeDialog();
-    deferred.resolve(true);
-  }, [closeDialog, deferred]);
+    onConfirm();
+  }, [closeDialog, onConfirm]);
 
   const asyncResult = useQuery({
     queryKey: ['GroupInvitationConfirmDialog'],

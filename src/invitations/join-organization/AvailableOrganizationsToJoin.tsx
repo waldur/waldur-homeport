@@ -2,7 +2,6 @@ import { LockOpenIcon, XIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
@@ -21,7 +20,7 @@ import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
 
 import { GroupInvitationCard } from './GroupInvitationCard';
-import { requestToAccessOrganization } from './submission';
+import { useRequestToAccessOrganization } from './submission';
 
 const filter = {
   is_active: true,
@@ -29,8 +28,6 @@ const filter = {
 };
 
 export const AvailableOrganizationsToJoin: FC = () => {
-  const dispatch = useDispatch();
-
   const user = useUser();
 
   const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
@@ -42,11 +39,13 @@ export const AvailableOrganizationsToJoin: FC = () => {
     queryField: 'name',
   });
 
+  const { request } = useRequestToAccessOrganization();
+
   const onSubmit = useCallback(
     (formData) => {
-      return requestToAccessOrganization(formData.invitation, dispatch);
+      return request(formData.invitation);
     },
-    [dispatch],
+    [request],
   );
 
   const router = useRouter();

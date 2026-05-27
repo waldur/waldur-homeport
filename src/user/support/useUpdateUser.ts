@@ -4,8 +4,9 @@ import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
+import { GroupInvitationTokenStorage } from '@/core/StorageManager';
 import { translate } from '@/i18n';
-import { tryJoinOrganization } from '@/invitations/tryJoinOrganization';
+import { useRequestToAccessOrganization } from '@/invitations/join-organization/submission';
 import { useNotify } from '@/store/notify';
 import { setCurrentUser } from '@/workspace/actions';
 import { useUser } from '@/workspace/hooks';
@@ -17,6 +18,7 @@ export const useUpdateUser = (user: User) => {
   const currentUser = useUser();
 
   const { showErrorResponse, showSuccess } = useNotify();
+  const { request: requestToAccessOrg } = useRequestToAccessOrganization();
 
   const callback = async (data) => {
     setIsLoading(true);
@@ -48,7 +50,10 @@ export const useUpdateUser = (user: User) => {
 
         // If ToS was just accepted, check for pending group invitation
         if (tosJustAccepted) {
-          tryJoinOrganization();
+          const groupToken = GroupInvitationTokenStorage.get();
+          if (groupToken) {
+            requestToAccessOrg(groupToken);
+          }
         }
       }
       showSuccess(translate('User has been updated'));

@@ -6,7 +6,7 @@ import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
-import { submitPermissionRequest } from './utils';
+import { useSubmitPermissionRequest } from './useSubmitPermissionRequest';
 
 export const UserGroupInvitation: FunctionComponent = () => {
   const router = useRouter();
@@ -14,12 +14,14 @@ export const UserGroupInvitation: FunctionComponent = () => {
     params: { token },
   } = useCurrentStateAndParams();
 
+  const { submit } = useSubmitPermissionRequest(token);
+
   useEffectOnce(() => {
     if (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED) {
       router.stateService.go('errorPage.notFound');
       return;
     }
-    submitPermissionRequest(token);
+    submit();
   });
 
   return (
