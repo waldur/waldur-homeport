@@ -2,10 +2,12 @@ import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { StringField } from '@/form';
 import { translate } from '@/i18n';
 import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { CategoryColumn } from '@/marketplace/types';
 import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { OfferingFilter } from './OfferingFilter';
@@ -15,7 +17,8 @@ import { RuntimeStateFilter } from './RuntimeStateFilter';
 
 export const AllResourcesFilter: FunctionComponent<{
   category_uuid?: string;
-}> = ({ category_uuid }) => (
+  columns?: CategoryColumn[];
+}> = ({ category_uuid, columns }) => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -56,6 +59,32 @@ export const AllResourcesFilter: FunctionComponent<{
     >
       <RuntimeStateFilter />
     </TableFilterItem>
+    {columns?.some((column) => column.attribute === 'flavor_name') && (
+      <TableFilterItem
+        title={translate('Flavor name')}
+        name="flavor_name"
+        badgeValue={(value) => value}
+      >
+        <Field
+          name="flavor_name"
+          component={StringField}
+          placeholder={translate('Flavor name...')}
+        />
+      </TableFilterItem>
+    )}
+    {columns?.some((column) => column.attribute === 'image_name') && (
+      <TableFilterItem
+        title={translate('Image name')}
+        name="image_name"
+        badgeValue={(value) => value}
+      >
+        <Field
+          name="image_name"
+          component={StringField}
+          placeholder={translate('Image name...')}
+        />
+      </TableFilterItem>
+    )}
     <TableFilterItem
       title={translate('State')}
       name="state"
