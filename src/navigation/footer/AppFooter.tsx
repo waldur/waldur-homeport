@@ -1,6 +1,5 @@
 import { ArrowCircleUpIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { versionRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -11,7 +10,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { BackendHealthStatusIndicator } from '@/navigation/footer/BackendHealthStatusIndicator';
 import { useNotify } from '@/store/notify';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { DisclaimerArea } from './DisclaimerArea';
 import { FooterLinks } from './FooterLinks';
@@ -34,7 +33,9 @@ export const AppFooter: FunctionComponent = () => {
 
   const { openDialog } = useModal();
 
-  const isUserStaffOrSupport = useSelector(isStaffOrSupport);
+  const user = useUser();
+
+  const isUserStaffOrSupport = user?.is_staff || user?.is_support;
   const [versionInfo, setVersionInfo] = useState<{
     version?: string;
     latest_version?: string;

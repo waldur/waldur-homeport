@@ -24,6 +24,7 @@ import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { useUser, useProject } from '@/workspace/hooks';
 import { Project, User } from '@/workspace/types';
 
 async function getProjectCostData(project: Project) {
@@ -185,12 +186,12 @@ export const canEditProject = (user: User, context: { customer?; project? }) =>
     projectId: context?.project?.uuid,
   });
 
-export const userHasProjectPermission = (permission) => (state) => {
-  const user = state?.workspace?.user;
-  const projectId = state?.workspace?.project?.uuid;
+export const useHasProjectPermission = (permission) => {
+  const user = useUser();
+  const project = useProject();
 
   return hasPermission(user, {
-    projectId,
+    projectId: project?.uuid,
     permission,
   });
 };

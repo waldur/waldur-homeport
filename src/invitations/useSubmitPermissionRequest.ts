@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import {
   userGroupInvitationsRetrieve,
   userGroupInvitationsSubmitRequest,
@@ -13,13 +12,13 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { UsersService } from '@/user/UsersService';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { GroupInvitationConfirmDialog } from './GroupInvitationConfirmDialog';
 import { ProjectDetailsDialog } from './join-organization/ProjectDetailsDialog';
 import {
-  isDuplicateOrConflictError,
   getDuplicateErrorDialogOptions,
+  isDuplicateOrConflictError,
 } from './utils';
 
 // Backend error messages mapped to translated frontend strings
@@ -57,7 +56,7 @@ export function useSubmitPermissionRequest(token: string) {
   const routerInstance = useRouter();
   const { openDialog, confirm } = useModal();
   const { showSuccess } = useNotify();
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const submitMutation = useMutation({
     mutationFn: (body?: {

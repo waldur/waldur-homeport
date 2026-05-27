@@ -16,9 +16,8 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { getTitle } from '@/navigation/title';
+import { getTitle, getSubtitle } from '@/navigation/title';
 import { isDescendantOf } from '@/navigation/useTabs';
-import store from '@/store/store';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 import { getResource } from '@/workspace/selectors';
 import { Customer, Project, User } from '@/workspace/types';
@@ -84,8 +83,8 @@ const getDataForFavoritePage = async (
   params: RawParams,
   context: FavoritePageContext,
 ) => {
-  let title = store.getState().title?.title;
-  let subtitle = store.getState().title?.subtitle;
+  let title = getTitle();
+  let subtitle = getSubtitle();
   let image;
   const newParams = params ? { ...params } : {};
   if (state.name.startsWith('marketplace-offering') && params.offering_uuid) {
@@ -141,10 +140,7 @@ const getDataForFavoritePage = async (
     title = context.customer?.name || context.customer?.display_name;
     image = context.customer?.image;
   } else if (isDescendantOf('project', state)) {
-    const titleFromState = store
-      .getState()
-      .title.title.replace('resources', '')
-      .trim();
+    const titleFromState = getTitle().replace('resources', '').trim();
     title = context.project?.name;
     image = context.project?.image;
     subtitle = titleFromState;
@@ -175,7 +171,7 @@ const getDataForFavoritePage = async (
 export const useFavoritePages = () => {
   const router = useRouter();
   const { state, params } = useCurrentStateAndParams();
-  const pageTitle = useSelector(getTitle);
+  const pageTitle = getTitle();
 
   const user = useUser();
   const customer = useCustomer();

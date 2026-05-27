@@ -1,13 +1,12 @@
 import { MapTrifoldIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { INSTANCE_TYPE } from '@/openstack/constants';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const PlacementMapBatchDialog = lazyComponent(() =>
   import('@/openstack/openstack-tenant/PlacementMapBatchDialog').then((m) => ({
@@ -17,7 +16,8 @@ const PlacementMapBatchDialog = lazyComponent(() =>
 
 export const MultiPlacementMapAction = ({ rows }) => {
   const { openDialog } = useModal();
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
 
   const instances = useMemo(
     () => rows.filter((resource) => resource.resource_type === INSTANCE_TYPE),

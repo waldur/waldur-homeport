@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -9,7 +8,6 @@ import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 import { formatUserStatus } from '@/user/support/utils';
 import { useUser } from '@/workspace/hooks';
-import { isStaffOrSupport, isStaff } from '@/workspace/selectors';
 
 import {
   formatGender,
@@ -81,7 +79,8 @@ const NativeNameRow = ({ user, disabled }) =>
   ) : null;
 
 const NotificationsEnabledRow = ({ user, disabled, isSelf }) => {
-  const isStaffUser = useSelector(isStaff);
+  const currentUser = useUser();
+  const isStaffUser = currentUser?.is_staff;
   return (
     <UserEditRow
       user={user}
@@ -157,7 +156,8 @@ const DateJoinedRow = ({ user, disabled }) => (
 );
 
 const UserTypeRow = ({ user, disabled, isSelf }) => {
-  const visible = useSelector(isStaffOrSupport);
+  const currentUser = useUser();
+  const visible = currentUser?.is_staff || currentUser?.is_support;
   return visible ? (
     <UserEditRow
       user={user}
@@ -473,7 +473,8 @@ const EdupersonAssuranceRow = ({ user, disabled }) =>
   ) : null;
 
 const DescriptionRow = ({ user, disabled }) => {
-  const visible = useSelector(isStaffOrSupport);
+  const currentUser = useUser();
+  const visible = currentUser?.is_staff || currentUser?.is_support;
   return visible ? (
     <UserEditRow
       user={user}

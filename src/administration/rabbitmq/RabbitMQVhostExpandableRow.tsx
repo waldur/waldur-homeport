@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { Link } from '@/core/Link';
 import { StateIndicator } from '@/core/StateIndicator';
@@ -8,7 +7,7 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import type { RmqQueueStats, RmqVhostStats } from './api';
 import { RabbitMQQueueActions } from './RabbitMQQueueActions';
@@ -22,7 +21,8 @@ interface RabbitMQVhostExpandableRowProps {
 export const RabbitMQVhostExpandableRow: FC<
   RabbitMQVhostExpandableRowProps
 > = ({ row }) => {
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
 
   const tableProps = useTable({
     table: `RabbitMQQueues-${row.name}`,

@@ -8,13 +8,7 @@ import { paymentProfilesPartialUpdate } from 'waldur-js-client';
 
 import { PaymentProfileUpdateDialog } from './PaymentProfileUpdateDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    paymentProfilesPartialUpdate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/i18n', () => ({
   translate: (key) => key,

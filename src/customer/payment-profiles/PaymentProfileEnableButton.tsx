@@ -1,17 +1,15 @@
 import { PlayIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { paymentProfilesEnable } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
 export const PaymentProfileEnableButton = (props) => {
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
   const customer = useCustomer();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
@@ -21,7 +19,7 @@ export const PaymentProfileEnableButton = (props) => {
     errorMessage: translate('Unable to enable payment profile.'),
     onSuccess: async () => {
       const updatedCustomer = await getCustomerApi(customer.uuid);
-      dispatch(setCurrentCustomer(updatedCustomer));
+      setCurrentCustomer(updatedCustomer);
     },
   });
 

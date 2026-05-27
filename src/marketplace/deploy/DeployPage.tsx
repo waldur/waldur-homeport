@@ -35,11 +35,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
 import { useNotify } from '@/store/notify';
-import { useUser } from '@/workspace/hooks';
-import {
-  getCustomer as currentCustomerSelector,
-  getProject as currentProjectSelector,
-} from '@/workspace/selectors';
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { getOrderFormComponent } from '../common/registry';
 import { DeployFormData, Limits } from '../common/types';
@@ -376,8 +372,8 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
   const router = useRouter();
 
   const marketplaceFilters = useSelector(getMarketplaceFilters);
-  const currentCustomer = useSelector(currentCustomerSelector);
-  const currentProject = useSelector(currentProjectSelector);
+  const currentCustomer = useCustomer();
+  const currentProject = useProject();
 
   const [initialValues, setInitialValues] = useState<DeployFormData | null>(
     null,

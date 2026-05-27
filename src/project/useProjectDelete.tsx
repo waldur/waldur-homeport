@@ -1,5 +1,4 @@
 import { useRouter } from '@uirouter/react';
-import { useDispatch } from 'react-redux';
 import { projectsDestroy } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
@@ -9,8 +8,12 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
-import { setCurrentCustomer, setCurrentProject } from '@/workspace/actions';
-import { useUser, useProject } from '@/workspace/hooks';
+import {
+  useUser,
+  useProject,
+  useSetProject,
+  useSetCustomer,
+} from '@/workspace/hooks';
 
 export const useProjectDelete = ({
   project,
@@ -22,7 +25,8 @@ export const useProjectDelete = ({
   const { confirm } = useModal();
 
   const router = useRouter();
-  const dispatch = useDispatch();
+  const setCurrentProject = useSetProject();
+  const setCurrentCustomer = useSetCustomer();
 
   const { showErrorResponse, showSuccess } = useNotify();
 
@@ -63,12 +67,12 @@ export const useProjectDelete = ({
         await refetch();
       }
       const newCustomer = await getCustomerApi(project.customer_uuid);
-      dispatch(setCurrentCustomer(newCustomer));
+      setCurrentCustomer(newCustomer);
       if (isCurrentProject) {
         router.stateService.go('organization.projects', {
           uuid: project.customer_uuid,
         });
-        dispatch(setCurrentProject(undefined));
+        setCurrentProject(undefined);
       }
       showSuccess(
         translate(

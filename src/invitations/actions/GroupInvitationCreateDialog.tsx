@@ -1,7 +1,6 @@
 import { LinkIcon, UsersThreeIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import { userGroupInvitationsCreate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
@@ -15,8 +14,7 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Role } from '@/permissions/types';
 import { useNotify } from '@/store/notify';
-import { useCustomer } from '@/workspace/hooks';
-import { isStaff } from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
 
 import { AdvancedSettingsGroup } from './AdvancedSettingsGroup';
 import { AutoCreateProjectGroup } from './AutoCreateProjectGroup';
@@ -51,7 +49,8 @@ export const GroupInvitationCreateDialog = ({
 }: OwnProps) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const customer = useCustomer();
-  const isStaffUser = useSelector(isStaff);
+  const user = useUser();
+  const isStaffUser = user?.is_staff;
   const { loading } = useCustomerProjects();
 
   const typeOptions = useMemo(

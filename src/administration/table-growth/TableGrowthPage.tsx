@@ -2,7 +2,6 @@ import { LightningIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { overrideSettingsRetrieve, statsTableGrowth } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -14,7 +13,7 @@ import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
 import { useNotify } from '@/store/notify';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { getTableGrowth } from './api';
 import { TableGrowthAlerts } from './TableGrowthAlerts';
@@ -23,7 +22,8 @@ import { TableGrowthTable } from './TableGrowthTable';
 import { deriveAlerts } from './utils';
 
 export const TableGrowthPage = () => {
-  const userIsStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const userIsStaff = user?.is_staff;
   const { showSuccess, showErrorResponse } = useNotify();
 
   const { data: settings } = useQuery({

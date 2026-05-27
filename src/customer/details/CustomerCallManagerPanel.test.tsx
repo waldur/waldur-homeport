@@ -19,13 +19,10 @@ vi.mock('waldur-js-client');
 vi.mock('../utils');
 vi.mock('@/workspace/actions');
 
-const mockDispatch = vi.fn();
-vi.mock('react-redux', () => ({
-  useDispatch: () => mockDispatch,
-}));
-
+const mockSetCustomer = vi.fn();
 vi.mock('@/workspace/hooks', () => ({
   useCustomer: vi.fn(),
+  useSetCustomer: () => mockSetCustomer,
 }));
 
 const mockShowSuccess = vi.fn();
@@ -133,7 +130,10 @@ describe('CustomerCallManagerPanel', () => {
       expect(getCustomerApi).toHaveBeenCalledWith('customer-uuid-1');
     });
 
-    expect(mockDispatch).toHaveBeenCalledWith({ type: 'SET_CURRENT_CUSTOMER' });
+    expect(mockSetCustomer).toHaveBeenCalledWith({
+      uuid: 'customer-uuid-1',
+      name: 'Test Customer',
+    });
   });
 
   it('handles disabling call manager successfully', async () => {
@@ -170,6 +170,9 @@ describe('CustomerCallManagerPanel', () => {
       expect(getCustomerApi).toHaveBeenCalledWith('customer-uuid-1');
     });
 
-    expect(mockDispatch).toHaveBeenCalledWith({ type: 'SET_CURRENT_CUSTOMER' });
+    expect(mockSetCustomer).toHaveBeenCalledWith({
+      uuid: 'customer-uuid-1',
+      name: 'Test Customer',
+    });
   });
 });

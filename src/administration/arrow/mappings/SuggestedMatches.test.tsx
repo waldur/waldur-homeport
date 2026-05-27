@@ -1,29 +1,16 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { adminArrowCustomerMappingsLinkResource } from 'waldur-js-client';
 
 import { SuggestedMatches } from './SuggestedMatches';
 
-// Mock waldur-js-client
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('waldur-js-client')>();
-  return {
-    ...actual,
-    adminArrowCustomerMappingsLinkResource: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
-// Mock i18n
 vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 
-// Mock modal hooks
-
-// Mock notify
 vi.mock('@/store/notify', () => ({
   useNotify: vi.fn().mockReturnValue({
     showErrorResponse: vi.fn(),
@@ -39,18 +26,13 @@ const createTestQueryClient = () =>
     },
   });
 
-const mockStore = configureStore();
-
 const renderComponent = (props) => {
   const queryClient = createTestQueryClient();
-  const store = mockStore({});
 
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <SuggestedMatches {...props} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <SuggestedMatches {...props} />
+    </QueryClientProvider>,
   );
 };
 

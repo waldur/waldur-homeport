@@ -8,14 +8,7 @@ import { paymentProfilesCreate, paymentProfilesEnable } from 'waldur-js-client';
 
 import { PaymentProfileCreateDialog } from './PaymentProfileCreateDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    paymentProfilesCreate: vi.fn(),
-    paymentProfilesEnable: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/i18n', () => ({
   translate: (key) => key,

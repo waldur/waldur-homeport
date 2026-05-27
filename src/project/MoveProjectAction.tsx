@@ -1,5 +1,4 @@
 import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -12,7 +11,6 @@ import {
 } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 const MoveProjectDialog = lazyComponent(() =>
   import('./MoveProjectDialog').then((module) => ({
@@ -29,7 +27,7 @@ export const MoveProjectAction = ({
 }) => {
   const { openDialog } = useModal();
   const user = useUser();
-  const isStaff = useSelector(isStaffSelector);
+  const isStaff = user?.is_staff;
   const hasSourcePermission = hasPermission(user, {
     permission: PermissionEnum.CREATE_PROJECT,
     customerId: project.customer_uuid,

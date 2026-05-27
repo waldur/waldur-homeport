@@ -2,8 +2,6 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { Nav, Tab, Table } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 
 import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { ENV } from '@/core/config';
@@ -19,10 +17,8 @@ import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementB
 import { useTitle } from '@/navigation/title';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
-import {
-  isOwnerOrStaff,
-  isServiceManagerSelector,
-} from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
+import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
 
 import { RefreshButton } from '../common/RefreshButton';
 import { getLabel } from '../common/registry';
@@ -43,15 +39,11 @@ interface OfferingViewHeroProps {
   error?: any;
 }
 
-const serviceManagerOrOwnerOrStaffSelector = createSelector(
-  isOwnerOrStaff,
-  isServiceManagerSelector,
-  (ownerOrStaff, serviceManager) => ownerOrStaff || serviceManager,
-);
-
 export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
   const router = useRouter();
   const { state } = useCurrentStateAndParams();
+  const customer = useCustomer();
+  const user = useUser();
 
   const offering = props.offering;
 
@@ -94,9 +86,11 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
     'marketplace-offering-update',
   ].includes(state.name);
 
-  const canManageAndEditOfferings = useSelector(
-    serviceManagerOrOwnerOrStaffSelector,
-  );
+  const canManageAndEditOfferings = useMemo(() => {
+    const ownerOrStaff = user?.is_staff || checkIsOwner(customer, user);
+    const serviceManager = checkIsServiceManager(customer, user);
+    return ownerOrStaff || serviceManager;
+  }, [customer, user]);
 
   if (props.isLoading) {
     return <LoadingSpinner />;

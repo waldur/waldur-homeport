@@ -4,7 +4,7 @@ import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { FormCheck, FormText } from 'react-bootstrap';
 import { Field, Form, FormRenderProps, useField } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   marketplaceResourcesList,
   marketplaceResourcesPartialUpdate,
@@ -32,7 +32,7 @@ import { selectSelectedRows } from '@/table/selectors';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { setCurrentProject } from '@/workspace/actions';
+import { useSetProject } from '@/workspace/hooks';
 
 import { EditProjectProps } from '../types';
 
@@ -303,7 +303,7 @@ export const EditEndDateDialog = ({
   resolve: EditProjectProps;
 }) => {
   const queryClient = useQueryClient();
-  const dispatch = useDispatch();
+  const setCurrentProject = useSetProject();
 
   const { closeDialog } = useModal();
 
@@ -330,7 +330,7 @@ export const EditEndDateDialog = ({
             [resolve.name]: formatISODate(endDate),
           },
         });
-        dispatch(setCurrentProject(project.data));
+        setCurrentProject(project.data);
 
         const title = translate(
           'Project end date was successfully updated to {date}',

@@ -1,71 +1,45 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { ENV } from '@/core/config';
-import { type RootState } from '@/store/reducers';
-
-const SET_TITLE = 'waldur/navigation/SET_TITLE';
 
 type TitleAs = 'both' | 'page' | 'browser';
 
-interface SetTitleAction {
-  type: typeof SET_TITLE;
-  payload: {
-    title: string;
-    subtitle: string;
-    as: TitleAs;
-  };
-}
+let currentTitle = '';
+let currentSubtitle = '';
 
-const setTitle = (
-  title: string,
-  subtitle?: string,
-  as?: TitleAs,
-): SetTitleAction => ({
-  type: SET_TITLE,
-  payload: {
-    title,
-    subtitle,
-    as,
-  },
-});
+export const getTitle = () => currentTitle;
 
-export const reducer = (state = { title: '', subtitle: '' }, action) => {
-  switch (action.type) {
-    case SET_TITLE:
-      // Side effect: update browser tab title
-      if (action.payload.as !== 'page') {
-        document.title =
-          action.payload.title +
-          ' | ' +
-          ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE;
-      }
-      // State update: update page title
-      if (action.payload.as !== 'browser') {
-        return action.payload;
-      }
-      return state;
-
-    default:
-      return state;
-  }
-};
-
-export const getTitle = (state: RootState) => state.title.title;
+export const getSubtitle = () => currentSubtitle;
 
 export const useTitle = (
   title: string,
   subtitle?: string,
   as: TitleAs = 'both',
 ) => {
-  const dispatch = useDispatch();
   useEffect(() => {
     if (!title) {
       return;
     }
-    dispatch(setTitle(title, subtitle, as));
+
+    // State update: update page title
+    if (as !== 'browser') {
+      currentTitle = title;
+      currentSubtitle = subtitle || '';
+    }
+
+    // Side effect: update browser tab title
+    if (as !== 'page') {
+      document.title = title + ' | ' + ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE;
+    }
+
     return () => {
-      dispatch(setTitle('', ''));
+      if (as !== 'browser') {
+        currentTitle = '';
+        currentSubtitle = '';
+      }
+      if (as !== 'page') {
+        document.title = ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE;
+      }
     };
-  }, [dispatch, title, subtitle]);
+  }, [title, subtitle, as]);
 };

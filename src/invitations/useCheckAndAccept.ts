@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { userInvitationsAccept } from 'waldur-js-client';
 
 import * as AuthService from '@/auth/AuthService';
@@ -10,7 +9,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { UsersService, getCurrentUser } from '@/user/UsersService';
-import { setCurrentUser } from '@/workspace/actions';
+import { useSetUser } from '@/workspace/hooks';
 
 import { InvitationConfirmDialog } from './InvitationConfirmDialog';
 
@@ -18,7 +17,7 @@ export function useCheckAndAccept(token: string) {
   const router = useRouter();
   const { openDialog } = useModal();
   const { showSuccess, showError } = useNotify();
-  const dispatch = useDispatch();
+  const setCurrentUser = useSetUser();
 
   const acceptMutation = useMutation({
     mutationFn: () => userInvitationsAccept({ path: { uuid: token } }),
@@ -26,7 +25,7 @@ export function useCheckAndAccept(token: string) {
       showSuccess(translate('Your invitation was accepted.'));
       InvitationTokenStorage.remove();
       const newUser = await getCurrentUser();
-      dispatch(setCurrentUser(newUser));
+      setCurrentUser(newUser);
     },
     onError: (error: any) => {
       if (error.response?.status === 404) {

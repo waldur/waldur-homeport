@@ -1,12 +1,10 @@
 import { FC, useEffect, useMemo } from 'react';
 import { Field, useForm } from 'react-final-form';
-import { useSelector } from 'react-redux';
 
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { useUser } from '@/workspace/hooks';
-import { isStaffOrSupport } from '@/workspace/selectors';
 
 /**
  * Organization filter for the Organization Summary report.
@@ -17,7 +15,7 @@ import { isStaffOrSupport } from '@/workspace/selectors';
  */
 export const OrganizationFilter: FC = () => {
   const user = useUser();
-  const canSelectAny = useSelector(isStaffOrSupport);
+  const canSelectAny = user?.is_staff || user?.is_support;
   const form = useForm();
 
   // Get user's owned organizations

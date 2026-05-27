@@ -7,13 +7,7 @@ import { rancherClusterSecurityGroupsUpdate } from 'waldur-js-client';
 
 import { ClusterSecurityGroupSetRulesDialog } from './ClusterSecurityGroupSetRulesDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    rancherClusterSecurityGroupsUpdate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeResource = {
   uuid: 'cluster-uuid',

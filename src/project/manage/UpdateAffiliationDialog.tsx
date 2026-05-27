@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { FormCheck } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   AffiliatedOrganization,
   affiliatedOrganizationsList,
@@ -25,8 +24,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { setCurrentProject } from '@/workspace/actions';
-import { useUser } from '@/workspace/hooks';
+import { useUser, useSetProject } from '@/workspace/hooks';
 
 interface UpdateAffiliationDialogProps {
   resolve: {
@@ -37,7 +35,7 @@ interface UpdateAffiliationDialogProps {
 export const UpdateAffiliationDialog: FunctionComponent<
   UpdateAffiliationDialogProps
 > = ({ resolve: { project } }) => {
-  const dispatch = useDispatch();
+  const setCurrentProject = useSetProject();
   const user = useUser();
   const isStaff = Boolean(user?.is_staff);
 
@@ -89,7 +87,7 @@ export const UpdateAffiliationDialog: FunctionComponent<
       const response = await projectsRetrieve({
         path: { uuid: project.uuid },
       });
-      dispatch(setCurrentProject(response.data));
+      setCurrentProject(response.data);
     },
   });
 

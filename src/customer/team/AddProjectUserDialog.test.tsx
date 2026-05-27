@@ -1,19 +1,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { projectsAddUser } from 'waldur-js-client';
 
 import { AddProjectUserDialog } from './AddProjectUserDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    projectsAddUser: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 vi.mock('@/i18n', () => ({
   translate: (key) => key,
@@ -25,12 +17,14 @@ vi.mock('@/permissions/utils', () => ({
   ],
 }));
 
-vi.mock('@/workspace/selectors', () => ({
-  getCustomer: () => ({
+vi.mock('@/workspace/hooks', () => ({
+  useCustomer: () => ({
     projects: [
       { uuid: 'project-uuid', name: 'Test Project', url: 'project-url' },
     ],
   }),
+  useUser: () => ({ uuid: 'user-uuid', is_staff: true }),
+  useProject: () => ({ uuid: 'project-uuid' }),
 }));
 
 vi.mock('../workspace/fetchCustomer', () => ({
@@ -82,19 +76,14 @@ vi.mock('@/form/DateField', () => ({
   ),
 }));
 
-const mockStore = configureStore();
-
 const renderComponent = (customer, refetch = vi.fn()) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = mockStore({});
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <AddProjectUserDialog resolve={{ customer, refetch }} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <AddProjectUserDialog resolve={{ customer, refetch }} />
+    </QueryClientProvider>,
   );
 };
 

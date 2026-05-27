@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { paymentProfilesPartialUpdate } from 'waldur-js-client';
 
 import {
@@ -12,15 +11,14 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
 import { PaymentProfileFormFields } from './PaymentProfileFormFields';
 
 export const PaymentProfileUpdateDialog: FC<any> = (props) => {
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
 
   const customer = useCustomer();
 
@@ -58,7 +56,7 @@ export const PaymentProfileUpdateDialog: FC<any> = (props) => {
     refetch: props.resolve.refetch,
     onSuccess: async () => {
       const updatedCustomer = await getCustomerApi(customer.uuid);
-      dispatch(setCurrentCustomer(updatedCustomer));
+      setCurrentCustomer(updatedCustomer);
     },
   });
 

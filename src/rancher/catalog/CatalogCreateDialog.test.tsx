@@ -8,13 +8,7 @@ import { rancherCatalogsCreate } from 'waldur-js-client';
 
 import { CatalogCreateDialog } from './CatalogCreateDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    rancherCatalogsCreate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeCluster = {
   url: 'cluster-url',

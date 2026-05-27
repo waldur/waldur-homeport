@@ -8,13 +8,7 @@ import { customersPartialUpdate } from 'waldur-js-client';
 
 import { EditMembershipRestrictionsDialog } from './EditMembershipRestrictionsDialog';
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const mod = await importOriginal<any>();
-  return {
-    ...mod,
-    customersPartialUpdate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const fakeCustomer = {
   uuid: 'customer-uuid',

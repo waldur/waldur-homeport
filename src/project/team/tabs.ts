@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
@@ -7,11 +6,11 @@ import { InvitationsFeatures, ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 
-import { userHasProjectPermission } from '../utils';
+import { useHasProjectPermission } from '../utils';
 
 export const useTeamTableTabs = (project: Project) => {
-  const hasProjectPermission = useSelector(
-    userHasProjectPermission(PermissionEnum.REVIEW_PROJECT_MEMBERSHIP),
+  const hasProjectPermission = useHasProjectPermission(
+    PermissionEnum.REVIEW_PROJECT_MEMBERSHIP,
   );
   if (!project) {
     return [];

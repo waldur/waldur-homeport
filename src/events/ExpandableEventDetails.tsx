@@ -1,31 +1,24 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 
-import { type RootState } from '@/store/reducers';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ExpandableEventDetailsTable } from './ExpandableEventDetailsTable';
 import { Event } from './types';
 
-type StateProps = ReturnType<typeof mapStateToProps>;
-
-interface ExpandableEventDetailsProps extends StateProps {
+interface ExpandableEventDetailsProps {
   row: Event;
 }
 
-const PureExpandableEventDetails: FunctionComponent<
+export const ExpandableEventDetails: FunctionComponent<
   ExpandableEventDetailsProps
-> = (props) => (
-  <ExpandableEventDetailsTable
-    event={props.row}
-    isStaffOrSupport={props.isStaffOrSupport}
-  />
-);
+> = ({ row }) => {
+  const user = useUser();
+  const isStaffOrSupport = user?.is_staff || user?.is_support;
 
-const mapStateToProps = (state: RootState) => ({
-  isStaffOrSupport: isStaffOrSupport(state),
-});
-
-const enhance = connect<StateProps>(mapStateToProps);
-
-export const ExpandableEventDetails = enhance(PureExpandableEventDetails);
+  return (
+    <ExpandableEventDetailsTable
+      event={row}
+      isStaffOrSupport={isStaffOrSupport}
+    />
+  );
+};

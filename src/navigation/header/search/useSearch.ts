@@ -1,6 +1,5 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import {
   customersList,
   marketplaceResourcesList,
@@ -10,7 +9,7 @@ import {
 
 import { fetchResultCount } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const queryFn =
   (query) =>
@@ -81,7 +80,8 @@ export const useSearch = () => {
   }, [query]);
 
   const [activeTab, setActiveTab] = useState('all');
-  const isStaffOrSupportUser = useSelector(isStaffOrSupport);
+  const user = useUser();
+  const isStaffOrSupportUser = user?.is_staff || user?.is_support;
 
   const handleClickOutside = useCallback(
     (e) => {

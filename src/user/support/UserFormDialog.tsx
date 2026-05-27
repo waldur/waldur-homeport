@@ -1,6 +1,5 @@
 import { PencilSimpleIcon, UserPlusIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   GenderEnum,
   User,
@@ -15,8 +14,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { ProgressStep, Wizard } from '@/wizard';
-import { setCurrentUser } from '@/workspace/actions';
-import { useUser } from '@/workspace/hooks';
+import { useUser, useSetUser } from '@/workspace/hooks';
 
 import { parseGender } from './aai-constants';
 import { AccountStep } from './create-user-steps/AccountStep';
@@ -113,7 +111,7 @@ const buildBody = (formData: UserFormData): UserRequest => {
 export const UserFormDialog: FC<UserFormDialogProps> = ({
   resolve: { user, refetch },
 }) => {
-  const dispatch = useDispatch();
+  const setCurrentUser = useSetUser();
   const currentUser = useUser();
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
@@ -132,7 +130,7 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
           });
           targetUuid = updatedUser.uuid;
           if (updatedUser.uuid === currentUser?.uuid) {
-            dispatch(setCurrentUser(updatedUser));
+            setCurrentUser(updatedUser);
           }
           showSuccess(translate('User has been updated.'));
         } else {

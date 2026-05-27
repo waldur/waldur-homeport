@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { Project, projectsPartialUpdate } from 'waldur-js-client';
 
 import {
@@ -15,7 +14,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { setCurrentProject } from '@/workspace/actions';
+import { useSetProject } from '@/workspace/hooks';
 
 interface FormData {
   value: string[] | string;
@@ -38,7 +37,7 @@ export const getInitialValues = (
 export const EditProjectMembershipRestrictionsDialog: FC<
   EditProjectMembershipRestrictionsDialogProps
 > = ({ resolve }) => {
-  const dispatch = useDispatch();
+  const setCurrentProject = useSetProject();
   const { closeDialog } = useModal();
 
   const { field } = resolve;
@@ -69,7 +68,7 @@ export const EditProjectMembershipRestrictionsDialog: FC<
     successMessage: translate('Membership restrictions updated successfully.'),
     errorMessage: translate('Failed to update membership restrictions.'),
     onSuccess: (project) => {
-      dispatch(setCurrentProject(project));
+      setCurrentProject(project);
     },
   });
 

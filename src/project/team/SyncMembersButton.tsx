@@ -1,11 +1,10 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 import { Project, projectsSyncUserRoles } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 interface SyncMembersButtonProps {
   project: Project;
@@ -16,7 +15,8 @@ export const SyncMembersButton = ({
   project,
   refetch,
 }: SyncMembersButtonProps) => {
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>

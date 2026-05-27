@@ -1,12 +1,11 @@
 import { PlusIcon, UserPlusIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
-import { isStaff } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const AddRemoteUserDialog = lazyComponent(() =>
   import('./AddRemoteUserDialog').then((module) => ({
@@ -22,7 +21,8 @@ const UserFormDialog = lazyComponent(() =>
 
 export const UserTableActions = ({ refetch }) => {
   const { openDialog } = useModal();
-  const isStaffUser = useSelector(isStaff);
+  const user = useUser();
+  const isStaffUser = user?.is_staff;
 
   const showEduTeams = ENV.plugins.WALDUR_AUTH_SOCIAL.REMOTE_EDUTEAMS_ENABLED;
 

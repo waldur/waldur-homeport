@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { pick } from 'lodash-es';
 import { useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { checklistsAdminList, customersPartialUpdate } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
@@ -15,7 +14,7 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { setCurrentCustomer } from '@/workspace/actions';
+import { useSetCustomer } from '@/workspace/hooks';
 
 import { EditCustomerProps } from './types';
 
@@ -26,7 +25,7 @@ export const EditCustomerChecklistDialog = ({
 }: {
   resolve: EditCustomerProps;
 }) => {
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
 
   const initialValues = useMemo(
     () => pick(resolve.customer, resolve.name),
@@ -41,7 +40,7 @@ export const EditCustomerChecklistDialog = ({
       }),
     onSuccess: (response) => {
       if (response.data?.uuid === resolve.customer.uuid) {
-        dispatch(setCurrentCustomer(response.data));
+        setCurrentCustomer(response.data);
       }
     },
     successMessage: translate('Organization updated successfully'),

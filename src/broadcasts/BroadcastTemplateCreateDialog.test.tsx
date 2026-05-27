@@ -11,13 +11,7 @@ vi.mock('react-redux', () => ({
   useSelector: vi.fn(),
 }));
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = (await importOriginal()) as any;
-  return {
-    ...actual,
-    broadcastMessageTemplatesCreate: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const queryClient = new QueryClient({
   defaultOptions: {

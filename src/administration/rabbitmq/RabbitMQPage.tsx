@@ -1,13 +1,12 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Alert } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { getRabbitMQStats } from './api';
 import { RabbitMQClusterOverview } from './RabbitMQClusterOverview';
@@ -17,7 +16,8 @@ import { RabbitMQPurgeAllButton } from './RabbitMQPurgeAllButton';
 import { RabbitMQVhostList } from './RabbitMQVhostList';
 
 export const RabbitMQPage = () => {
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
   const { data, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ['RabbitMQStats'],
     queryFn: getRabbitMQStats,

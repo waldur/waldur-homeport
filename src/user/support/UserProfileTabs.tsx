@@ -1,7 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -15,7 +14,6 @@ import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 import { formatUserStatus } from '@/user/support/utils';
 import { useUser } from '@/workspace/hooks';
-import { isStaffOrSupport, isStaff } from '@/workspace/selectors';
 
 import {
   formatGender,
@@ -466,8 +464,9 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
 
 // System Tab
 const SystemTab = ({ user, disabled }: TabContentProps) => {
-  const isVisibleStaffOrSupport = useSelector(isStaffOrSupport);
   const currentUser = useUser();
+  const isVisibleStaffOrSupport =
+    currentUser?.is_staff || currentUser?.is_support;
   const hasEdupersonAssurance =
     isProfileAttributeEnabled('eduperson_assurance') &&
     Array.isArray(user.eduperson_assurance) &&
@@ -551,7 +550,8 @@ const SystemTab = ({ user, disabled }: TabContentProps) => {
 
 // Internal Tab (visible only to staff and support)
 const StaffTab = ({ user, disabled, isSelf }: TabContentProps) => {
-  const isStaffUser = useSelector(isStaff);
+  const currentUser = useUser();
+  const isStaffUser = currentUser?.is_staff;
 
   return (
     <FormTable>
@@ -785,7 +785,8 @@ export const UserProfileTabs = ({
   const { params } = useCurrentStateAndParams();
   const currentUser = useUser();
   const isSelf = currentUser.uuid === user.uuid;
-  const isVisibleStaffOrSupport = useSelector(isStaffOrSupport);
+  const isVisibleStaffOrSupport =
+    currentUser?.is_staff || currentUser?.is_support;
 
   // Initialize tab from URL param or default to 'basic'
   const initialTab =

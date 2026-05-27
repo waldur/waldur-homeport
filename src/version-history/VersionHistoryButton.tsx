@@ -1,12 +1,11 @@
 import { ClockCounterClockwiseIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionButton } from '@/table/ActionButton';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { VersionHistoryButtonProps } from './types';
 
@@ -22,7 +21,8 @@ export const VersionHistoryButton = ({
   entityName,
   asDropdownItem = false,
 }: VersionHistoryButtonProps) => {
-  const isVisible = useSelector(isStaffOrSupport);
+  const user = useUser();
+  const isVisible = user?.is_staff || user?.is_support;
   const { openDialog } = useModal();
 
   if (!isVisible) {

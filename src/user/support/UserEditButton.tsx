@@ -1,12 +1,11 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { isStaff } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const UserFormDialog = lazyComponent(() =>
   import('./UserFormDialog').then((module) => ({
@@ -19,7 +18,8 @@ export const UserEditButton: FunctionComponent<{ row; refetch? }> = ({
   refetch,
 }) => {
   const { openDialog } = useModal();
-  const isStaffUser = useSelector(isStaff);
+  const user = useUser();
+  const isStaffUser = user?.is_staff;
 
   if (!isStaffUser) {
     return null;

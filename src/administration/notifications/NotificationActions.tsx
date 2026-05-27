@@ -1,13 +1,12 @@
-import { useSelector } from 'react-redux';
-
 import { ActionsDropdown } from '@/table/ActionsDropdown';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { NotificationToggleButton } from './NotificationToggleButton';
 import { NotificationUpdateButton } from './NotificationUpdateButton';
 
 export const NotificationActions = ({ row, refetch }) => {
-  const isStaff = useSelector(isStaffSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
   if (isStaff) {
     return (
       <ActionsDropdown

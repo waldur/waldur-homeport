@@ -23,8 +23,8 @@ import {
 } from './types';
 import { useTableQuery } from './useTableQuery';
 
-const getDefaultTitle = (state: RootState) => {
-  const pageTitle = getTitle(state);
+const getDefaultTitle = () => {
+  const pageTitle = getTitle();
   const breadcrumbs = router.globals.$current.path
     .filter((part) => part.data?.breadcrumb)
     .map((part) => part.data.breadcrumb())
@@ -259,7 +259,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [dispatch, table],
   );
 
-  const alterTitle = useSelector(getDefaultTitle);
+  const alterTitle = getDefaultTitle();
 
   // Get rows from Redux (synced from React Query via useEffect above)
   // This maintains backward compatibility with tests that populate Redux directly

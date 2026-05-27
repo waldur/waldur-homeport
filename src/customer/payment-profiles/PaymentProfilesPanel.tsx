@@ -1,21 +1,17 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
-import { useCustomer } from '@/workspace/hooks';
-import {
-  isStaff as isStaffSelector,
-  isSupport as isSupportSelector,
-  isOwner as isOwnerSelector,
-} from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
+import { checkIsOwner } from '@/workspace/selectors';
 
 import { PaymentProfileDetails } from './PaymentProfileDetails';
 import { PaymentProfileList } from './PaymentProfileList';
 
 export const PaymentProfilesPanel: FunctionComponent = () => {
   const customer = useCustomer();
-  const isStaff = useSelector(isStaffSelector);
-  const isSupport = useSelector(isSupportSelector);
-  const isOwner = useSelector(isOwnerSelector);
+  const user = useUser();
+  const isStaff = user?.is_staff;
+  const isSupport = user?.is_support;
+  const isOwner = checkIsOwner(customer, user);
   if (isStaff || isSupport || (isOwner && customer.payment_profiles?.length)) {
     return (
       <>

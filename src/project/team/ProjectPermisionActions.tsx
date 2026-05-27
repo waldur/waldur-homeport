@@ -1,12 +1,9 @@
-import { useSelector } from 'react-redux';
-
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { UserDetailsButton } from '@/user/UserDetailsButton';
 import { useCustomer, useProject, useUser } from '@/workspace/hooks';
-import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { EditUserButton } from './EditUserButton';
 import { UserRemoveButton } from './UserRemoveButton';
@@ -18,8 +15,8 @@ export const ProjectPermisionActions = ({
   customerUuid,
   project,
 }) => {
-  const userIsStaffOrSupport = useSelector(isStaffOrSupport);
   const user = useUser();
+  const userIsStaffOrSupport = user?.is_staff || user?.is_support;
   const currentProject = useProject();
   const customer = useCustomer();
 

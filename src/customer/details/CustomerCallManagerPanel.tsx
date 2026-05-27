@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   callManagingOrganisationsCreate,
   callManagingOrganisationsDestroy,
@@ -13,15 +12,14 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
 export const CustomerCallManagerPanel: FunctionComponent = () => {
   const customer = useCustomer();
   const [infoUuid, setInfoUuid] = useState('');
-  const dispatch = useDispatch();
+  const setCurrentCustomer = useSetCustomer();
 
   const { error: errorInfo, refetch } = useQuery({
     queryKey: ['callManagingOrganization', customer.uuid],
@@ -72,7 +70,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
       errorMessage: translate('Unable to perform operation.'),
       onSuccess: async () => {
         const newCustomer = await getCustomerApi(customer.uuid);
-        dispatch(setCurrentCustomer(newCustomer));
+        setCurrentCustomer(newCustomer);
       },
     });
 

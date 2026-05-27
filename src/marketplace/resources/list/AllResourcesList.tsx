@@ -17,8 +17,6 @@ import { useTable } from '@/table/useTable';
 import { ResourcesAllListTable } from './ResourcesAllListTable';
 import { buildResourcesAllFilter, resourcesListRequiredFields } from './utils';
 
-export const mapStateToFilter = () => ({});
-
 interface AllResourcesListProps extends Partial<TableProps> {
   project?: Project;
 }

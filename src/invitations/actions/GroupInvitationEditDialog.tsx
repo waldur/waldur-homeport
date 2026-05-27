@@ -1,7 +1,6 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   GroupInvitation,
   userGroupInvitationsPartialUpdate,
@@ -19,8 +18,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Role } from '@/permissions/types';
 import { useNotify } from '@/store/notify';
-import { useCustomer } from '@/workspace/hooks';
-import { isStaff } from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
 
 import { AdvancedSettingsGroup } from './AdvancedSettingsGroup';
 import { AutoCreateProjectGroup } from './AutoCreateProjectGroup';
@@ -42,7 +40,8 @@ export const GroupInvitationEditDialog = ({
 }: OwnProps) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const customer = useCustomer();
-  const isStaffUser = useSelector(isStaff);
+  const user = useUser();
+  const isStaffUser = user?.is_staff;
   const { loading } = useCustomerProjects();
 
   const typeOptions = useMemo(

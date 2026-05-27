@@ -40,8 +40,6 @@ export const buildOfferingsFilter = (filterValues: any) => {
   return filter;
 };
 
-export const mapStateToFilter = () => ({});
-
 const AdminOfferingsListTable = () => {
   const { values } = useFormState();
   const filterValues: any = values;

@@ -21,13 +21,7 @@ vi.mock('@/i18n', () => ({
   },
 }));
 
-vi.mock('waldur-js-client', async () => {
-  const actual = await vi.importActual('waldur-js-client');
-  return {
-    ...actual,
-    openstackTenantsCreateServerGroup: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const mockStore = configureStore();
 const store = mockStore({

@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   projectsAddUser,
@@ -72,19 +70,14 @@ vi.mock('@/form/select/SelectField', () => ({
   ),
 }));
 
-const mockStore = configureStore();
-
 const renderComponent = (project, customer, refetch = vi.fn()) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = mockStore({});
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <EditProjectUserDialog resolve={{ project, customer, refetch }} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <EditProjectUserDialog resolve={{ project, customer, refetch }} />
+    </QueryClientProvider>,
   );
 };
 

@@ -6,14 +6,13 @@ import {
 } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { StateIndicator } from '@/core/StateIndicator';
 import { formatPhoneNumber } from '@/core/utils';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { formatUserIsActive } from '../support/utils';
 
@@ -26,7 +25,8 @@ export const UserProfile = ({
   user: User;
   className?: string;
 }) => {
-  const showStatus = useSelector(isStaffOrSupport);
+  const currentUser = useUser();
+  const showStatus = currentUser?.is_staff || currentUser?.is_support;
   const abbreviation = useMemo(
     () => getItemAbbreviation(user, 'full_name'),
     [user],

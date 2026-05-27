@@ -1,7 +1,5 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { FC, useMemo } from 'react';
 import {
   marketplaceProjectEstimatedCostPoliciesList,
   MarketplaceProjectEstimatedCostPoliciesListData,
@@ -16,19 +14,11 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
-import { getCustomer } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { CostPolicyActions } from './CostPolicyActions';
 import { CostPolicyCreateButton } from './CostPolicyCreateButton';
 import { getCostPolicyActionOptions, policyPeriodOptions } from './utils';
-
-const filtersSelector = createSelector(getCustomer, (customer) => {
-  const result: MarketplaceProjectEstimatedCostPoliciesListData['query'] = {};
-  if (customer) {
-    result.customer_uuid = customer.uuid;
-  }
-  return result;
-});
 
 interface CostPoliciesListTableProps extends Partial<TableProps> {
   table: string;
@@ -160,7 +150,14 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
 };
 
 export const CostPoliciesList = () => {
-  const filter = useSelector(filtersSelector);
+  const customer = useCustomer();
+  const filter = useMemo(() => {
+    const result: MarketplaceProjectEstimatedCostPoliciesListData['query'] = {};
+    if (customer) {
+      result.customer_uuid = customer.uuid;
+    }
+    return result;
+  }, [customer]);
 
   return <CostPoliciesListTable table="CostPoliciesList" filter={filter} />;
 };

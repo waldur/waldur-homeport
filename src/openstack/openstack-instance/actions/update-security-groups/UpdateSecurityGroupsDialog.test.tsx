@@ -29,14 +29,7 @@ vi.mock('@/openstack/api', () => ({
   loadSecurityGroups: vi.fn(),
 }));
 
-vi.mock('waldur-js-client', async () => {
-  const actual = await vi.importActual('waldur-js-client');
-  return {
-    ...actual,
-    openstackInstancesUpdateSecurityGroups: vi.fn(),
-    openstackPortsUpdateSecurityGroups: vi.fn(),
-  };
-});
+vi.mock('waldur-js-client');
 
 const mockStore = configureStore();
 const store = mockStore({

@@ -1,6 +1,5 @@
 import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
@@ -10,10 +9,7 @@ import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-pro
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { useUser, useCustomer } from '@/workspace/hooks';
-import {
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-  isStaff,
-} from '@/workspace/selectors';
+import { checkIsOwner } from '@/workspace/selectors';
 
 const CustomerDetailsPanel = lazyComponent(() =>
   import('./CustomerDetailsPanel').then((module) => ({
@@ -64,11 +60,15 @@ const ProjectDigestConfigPage = lazyComponent(() =>
 export const CustomerManageContainer = () => {
   const user = useUser();
   const customer = useCustomer();
-  const isUserStaff = useSelector(isStaff);
-  const canRegisterServiceProvider = useSelector(
-    canRegisterServiceProviderForCustomer,
+  const isUserStaff = user?.is_staff;
+  const canRegisterServiceProvider = canRegisterServiceProviderForCustomer(
+    user,
+    customer,
   );
-  const userIsOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const userIsOwnerOrStaff = useMemo(
+    () => user?.is_staff || checkIsOwner(customer, user),
+    [customer, user],
+  );
 
   const tabs = useMemo<PageBarTab[]>(
     () =>

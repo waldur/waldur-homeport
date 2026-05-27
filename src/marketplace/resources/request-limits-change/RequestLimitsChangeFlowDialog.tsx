@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { marketplaceResourceLimitChangeRequestsList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { RequestLimitsChangeDialog } from './RequestLimitsChangeDialog';
 import { RequestLimitsChangePendingDialog } from './RequestLimitsChangePendingDialog';
@@ -19,7 +18,7 @@ interface Props {
 export const RequestLimitsChangeFlowDialog: FC<Props> = ({
   resolve: { resource, refetch },
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const { data: response, isLoading } = useQuery({
     queryKey: [
