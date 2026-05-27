@@ -122,7 +122,7 @@
     "@types/react-ultimate-pagination": "^1.2.1",
     "@types/react-window": "^1.8.8",
     "@vitejs/plugin-react": "5",
-    "@vitest/coverage-v8": "3",
+    "@vitest/coverage-v8": "4",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
     "cssnano": "^7.0.6",
@@ -161,7 +161,7 @@
     "vite": "7.3.2",
     "vite-plugin-markdown": "^2.2.0",
     "vite-plugin-svgr": "^4.5.0",
-    "vitest": "3",
+    "vitest": "4",
     "vitest-location-mock": "^1.0.4"
   },
   "prettier": {
