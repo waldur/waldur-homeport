@@ -9,8 +9,6 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { noop } from 'lodash-es';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import {
   afterAll,
   beforeAll,
@@ -24,8 +22,15 @@ import { marketplaceOrdersCreate, projectsCreate } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
 import { resetTableRegistry } from '@/table/registry';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { ProjectImportDialog } from './ProjectImportDialog';
+vi.mock('@/workspace/hooks');
+
+vi.mock('react-redux', () => ({
+  useDispatch: () => vi.fn(),
+  useSelector: vi.fn((fn) => fn({})),
+}));
 
 vi.mock('waldur-js-client', async (importOriginal) => {
   const actual = await importOriginal<typeof import('waldur-js-client')>();
@@ -184,30 +189,21 @@ const mockCustomer = {
 
 const renderComponent = (props = {}) => {
   const queryClient = createTestQueryClient();
-  const store = configureStore()({
-    workspace: {
-      user: {
-        uuid: 'user-1',
-        is_staff: true,
-      },
-    },
-    title: {
-      title: 'Test Title',
-    },
-  });
+  vi.mocked(workspaceHooks.useUser).mockReturnValue({
+    uuid: 'user-1',
+    is_staff: true,
+  } as any);
 
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <ProjectImportDialog
-          resolve={{
-            customer: mockCustomer,
-            refetch: vi.fn(),
-            ...props,
-          }}
-        />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <ProjectImportDialog
+        resolve={{
+          customer: mockCustomer,
+          refetch: vi.fn(),
+          ...props,
+        }}
+      />
+    </QueryClientProvider>,
   );
 };
 

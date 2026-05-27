@@ -1,10 +1,9 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { orderCanBeApproved as orderCanBeApprovedSelector } from '@/marketplace/orders/actions/selectors';
+import { checkOrderCanBeApproved } from '@/marketplace/orders/actions/selectors';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ReactComponent as TenantSubtitle } from '@/openstack/openstack-tenant/actions/DestroyActionSubtitle.md';
 import { PermissionEnum } from '@/permissions/enums';
@@ -13,7 +12,7 @@ import { ReactComponent as ClusterSubtitle } from '@/rancher/cluster/actions/Des
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { useValidators } from '@/resource/actions/useValidators';
-import { useUser } from '@/workspace/hooks';
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { ResourceAction } from '../actions/constants';
 
@@ -30,8 +29,9 @@ export const TerminateAction: FC<TerminateActionProps> = ({
 }) => {
   const user = useUser();
   const { tooltip, disabled } = useValidators(validators, resource);
-
-  const orderCanBeApproved = useSelector(orderCanBeApprovedSelector);
+  const customer = useCustomer();
+  const project = useProject();
+  const orderCanBeApproved = checkOrderCanBeApproved(user, customer, project);
 
   const dialogSubtitle = useMemo(() => {
     if (resource.resource_type === 'OpenStack.Tenant') {

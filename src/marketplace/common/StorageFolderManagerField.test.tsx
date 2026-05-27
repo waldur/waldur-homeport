@@ -1,14 +1,10 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Field, Form } from 'react-final-form';
-import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Offering, OptionField } from 'waldur-js-client';
 
 import { StorageFolderManagerField } from './StorageFolderManagerField';
-
-const mockStore = configureMockStore();
 
 const createMockField = (overrides = {}): OptionField =>
   ({
@@ -42,17 +38,6 @@ const createMockOffering = (): Offering =>
     ],
   }) as Offering;
 
-const createStore = (storageLimit = 10) =>
-  mockStore({
-    form: {
-      OrderForm: {
-        values: {
-          limits: { storage: storageLimit },
-        },
-      },
-    },
-  });
-
 interface RenderOptions {
   field?: OptionField;
   inputValue?: any;
@@ -66,38 +51,35 @@ const renderComponent = ({
   offering = createMockOffering(),
   storageLimit = 10,
 }: RenderOptions = {}) => {
-  const store = createStore(storageLimit);
   const onChange = vi.fn();
 
   const Wrapper = ({ limit = storageLimit, val = inputValue }) => (
-    <Provider store={store}>
-      <Form
-        onSubmit={() => {}}
-        initialValues={{
-          limits: { storage: limit },
-          storage_folder_manager: val,
-        }}
-        enableReinitialize
-      >
-        {() => (
-          <Field name="storage_folder_manager">
-            {({ input }) => (
-              <StorageFolderManagerField
-                field={field}
-                input={{
-                  ...input,
-                  onChange: (value) => {
-                    input.onChange(value);
-                    onChange(value);
-                  },
-                }}
-                offering={offering}
-              />
-            )}
-          </Field>
-        )}
-      </Form>
-    </Provider>
+    <Form
+      onSubmit={() => {}}
+      initialValues={{
+        limits: { storage: limit },
+        storage_folder_manager: val,
+      }}
+      enableReinitialize
+    >
+      {() => (
+        <Field name="storage_folder_manager">
+          {({ input }) => (
+            <StorageFolderManagerField
+              field={field}
+              input={{
+                ...input,
+                onChange: (value) => {
+                  input.onChange(value);
+                  onChange(value);
+                },
+              }}
+              offering={offering}
+            />
+          )}
+        </Field>
+      )}
+    </Form>
   );
 
   const result = render(<Wrapper />);
@@ -105,7 +87,6 @@ const renderComponent = ({
   return {
     ...result,
     onChange,
-    store,
     rerender: (newOptions: RenderOptions = {}) =>
       result.rerender(
         <Wrapper
@@ -486,29 +467,16 @@ describe('StorageFolderManagerField', () => {
           },
         ],
       } as Offering;
-
-      const store = mockStore({
-        form: {
-          OrderForm: {
-            values: {
-              // No limits
-            },
-          },
-        },
-      });
-
       render(
-        <Provider store={store}>
-          <Form onSubmit={() => {}}>
-            {() => (
-              <StorageFolderManagerField
-                field={createMockField()}
-                input={{ value: '', onChange: vi.fn(), name: 'test' } as any}
-                offering={offering}
-              />
-            )}
-          </Form>
-        </Provider>,
+        <Form onSubmit={() => {}}>
+          {() => (
+            <StorageFolderManagerField
+              field={createMockField()}
+              input={{ value: '', onChange: vi.fn(), name: 'test' } as any}
+              offering={offering}
+            />
+          )}
+        </Form>,
       );
 
       // Should use fallback of 1 TB

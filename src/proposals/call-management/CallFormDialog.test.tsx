@@ -7,8 +7,6 @@ import {
   UIRouter,
   UIRouterReact,
 } from '@uirouter/react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   callManagingOrganisationsList,
@@ -24,6 +22,11 @@ import { getCustomer } from '@/workspace/selectors';
 import { CallFormDialog } from './CallFormDialog';
 
 vi.mock('waldur-js-client');
+
+vi.mock('react-redux', () => ({
+  useSelector: vi.fn((fn) => fn()),
+  useDispatch: () => vi.fn(),
+}));
 
 vi.mock('@/workspace/selectors', () => ({
   getCustomer: vi.fn(),
@@ -55,18 +58,15 @@ const renderDialog = (props: any) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = createStore((state) => state);
   const router = new UIRouterReact();
   router.plugin(servicesPlugin);
   router.plugin(pushStateLocationPlugin);
 
   render(
     <UIRouter router={router}>
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <CallFormDialog {...props} />
-        </QueryClientProvider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <CallFormDialog {...props} />
+      </QueryClientProvider>
     </UIRouter>,
   );
 };

@@ -1,8 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceCategoryColumnsCreate,
   marketplaceCategoryColumnsDestroy,
@@ -10,7 +9,6 @@ import {
 } from 'waldur-js-client';
 
 import { Category } from '@/marketplace/types';
-import { createActionStore } from '@/resource/actions/testUtils';
 import { useNotify } from '@/store/notify';
 
 import { CategoryManageColumnsDialog } from './CategoryManageColumnsDialog';
@@ -37,9 +35,7 @@ describe('CategoryManageColumnsDialog', () => {
 
     return render(
       <QueryClientProvider client={queryClient}>
-        <Provider store={createActionStore()}>
-          <CategoryManageColumnsDialog resolve={{ category }} />
-        </Provider>
+        <CategoryManageColumnsDialog resolve={{ category }} />
       </QueryClientProvider>,
     );
   };

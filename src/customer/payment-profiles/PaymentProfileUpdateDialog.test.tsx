@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { paymentProfilesPartialUpdate } from 'waldur-js-client';
 
@@ -22,10 +20,13 @@ vi.mock('@/form/useFlatpickrTheme', () => ({
   useFlatpickrTheme: vi.fn(),
 }));
 
-const mockCustomer = {
-  uuid: 'customer-uuid',
-  url: 'customer-url',
-};
+vi.mock('@/workspace/hooks', () => ({
+  useUser: () => ({ is_staff: true }),
+  useCustomer: () => ({ url: 'customer-url' }),
+  useProject: () => ({ uuid: 'project-uuid' }),
+  useSetCustomer: () => vi.fn(),
+  useSetProject: () => vi.fn(),
+}));
 
 const mockProfile = {
   uuid: 'profile-uuid',
@@ -38,16 +39,10 @@ const renderDialog = (profile = mockProfile) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = createStore((state) => state, {
-    workspace: { customer: mockCustomer },
-    notifications: [],
-  });
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <PaymentProfileUpdateDialog resolve={{ profile, refetch: vi.fn() }} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <PaymentProfileUpdateDialog resolve={{ profile, refetch: vi.fn() }} />
+    </QueryClientProvider>,
   );
 };
 

@@ -1,7 +1,6 @@
 import { Transition } from '@uirouter/react';
 import { cloneDeep } from 'lodash-es';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import {
   customerCreditsList,
   marketplaceProviderOfferingsList,
@@ -14,7 +13,7 @@ import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 import store from '@/store/store';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { getCustomer as getCustomerSelector } from '@/workspace/selectors';
+import { useCustomer } from '@/workspace/hooks';
 
 import { getCustomer } from '../utils';
 
@@ -65,7 +64,7 @@ export function fetchCustomerProjects(customerUuid) {
 /** Get customer's project permissions for the selected customer separately */
 export const useCustomerProjects = () => {
   const { showErrorResponse } = useNotify();
-  const customer = useSelector(getCustomerSelector);
+  const customer = useCustomer();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (!customer || customer.projects) return;

@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { rancherCatalogsCreate } from 'waldur-js-client';
 
@@ -19,13 +17,10 @@ const renderDialog = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = createStore((state) => state);
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <CatalogCreateDialog resolve={{ cluster: fakeCluster as any }} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <CatalogCreateDialog resolve={{ cluster: fakeCluster as any }} />
+    </QueryClientProvider>,
   );
 };
 

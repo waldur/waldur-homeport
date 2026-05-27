@@ -1,8 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
-import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
 import { PlanForm } from './PlanForm';
@@ -23,23 +21,17 @@ vi.mock('../../utils', () => ({
   articleCodeValidator: vi.fn(),
 }));
 
-// PlanForm renders a MarkdownEditor, which uses useNotify (and therefore
-// react-redux's useDispatch), so a store provider is required.
-const store = configureMockStore()({});
-
 const renderComponent = (initialValues = {}) => {
   return render(
-    <Provider store={store}>
-      <Form
-        onSubmit={() => {}}
-        initialValues={initialValues}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <PlanForm />
-          </form>
-        )}
-      />
-    </Provider>,
+    <Form
+      onSubmit={() => {}}
+      initialValues={initialValues}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <PlanForm />
+        </form>
+      )}
+    />,
   );
 };
 

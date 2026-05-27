@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   openstackPortsList,
@@ -49,12 +47,6 @@ vi.mock('@/i18n', () => ({
   translate: (str: string) => str,
 }));
 
-const mockStore = configureStore();
-const store = mockStore({
-  modal: {},
-  notifications: [],
-});
-
 const mockRouter = {
   uuid: 'router-uuid',
   tenant_uuid: 'tenant-uuid',
@@ -69,11 +61,9 @@ const renderDialog = () => {
   });
 
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <AddRouterInterfaceDialog resolve={{ router: mockRouter as any }} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <AddRouterInterfaceDialog resolve={{ router: mockRouter as any }} />
+    </QueryClientProvider>,
   );
 };
 

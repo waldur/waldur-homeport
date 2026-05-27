@@ -4,7 +4,10 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
+import * as workspaceHooks from '@/workspace/hooks';
+
 import { CustomerUsersList } from './CustomerUsersList';
+vi.mock('@/workspace/hooks');
 
 const createTestQueryClient = () =>
   new QueryClient({
@@ -92,17 +95,17 @@ const state = {
     'expiration_time',
   ],
 };
+vi.mocked(workspaceHooks.useUser).mockReturnValue({
+  is_staff: true,
+  uuid: 'user-uuid-2',
+} as any);
+vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
+  uuid: 'customer-uuid-1',
+  name: 'Test Customer',
+} as any);
 const store = mockStore({
   tables: {
     [tableId]: state,
-  },
-  workspace: {
-    customer: { uuid: 'customer-uuid-1', name: 'Test Customer' },
-    user: { is_staff: true, uuid: 'user-uuid-2' },
-  },
-  title: {
-    title: '',
-    subtitle: '',
   },
 });
 
@@ -117,6 +120,9 @@ const renderComponent = () => {
   );
 };
 
+vi.mock('@/workspace/selectors', () => ({
+  isOwnerOrStaff: () => true,
+}));
 describe('CustomerUsersList', () => {
   it('renders table headers and data cells', async () => {
     const node = renderComponent();

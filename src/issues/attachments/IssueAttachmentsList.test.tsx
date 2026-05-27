@@ -1,9 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
-
-import { RootState } from '@/store/reducers';
 
 import { attachmentUploading } from './fixture';
 import { IssueAttachmentsList } from './IssueAttachmentsList';
@@ -19,14 +15,11 @@ const mockAttachments = [
   { uuid: 'test-2', file_name: 'file2.jpg', file_size: 256 },
 ];
 
-const initStore: Partial<RootState> = {};
-
 const mockOnRetry = vi.fn();
 const mockOnCancel = vi.fn();
 
 const renderWithProvider = (component) => {
-  const mockStore = configureStore();
-  return render(<Provider store={mockStore(initStore)}>{component}</Provider>);
+  return render(component);
 };
 
 describe('IssueAttachmentsList', () => {

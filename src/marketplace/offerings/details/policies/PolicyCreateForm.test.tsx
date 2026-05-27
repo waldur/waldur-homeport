@@ -2,17 +2,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import nock from 'nock';
-import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceOfferingEstimatedCostPoliciesCreate } from 'waldur-js-client';
 import { client } from 'waldur-js-client/client.gen';
 
 import { waitForSpinner } from '@/core/test-utils';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { PolicyCreateDialog } from './PolicyCreateDialog';
-
-const mockStore = configureMockStore();
+vi.mock('@/workspace/hooks');
 
 vi.mock('waldur-js-client', async (importOriginal) => {
   const original = await importOriginal<typeof import('waldur-js-client')>();
@@ -98,26 +96,18 @@ const renderComponent = (
     baseUrl: 'http://example.com',
     throwOnError: true,
   });
-
-  const store = mockStore({
-    workspace: {
-      user: {
-        is_staff: true,
-      },
-    },
-  });
-
+  vi.mocked(workspaceHooks.useUser).mockReturnValue({
+    is_staff: true,
+  } as any);
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <PolicyCreateDialog
-          type={type}
-          offering={offering}
-          refetch={refetch}
-          initialValues={initialValues}
-        />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <PolicyCreateDialog
+        type={type}
+        offering={offering}
+        refetch={refetch}
+        initialValues={initialValues}
+      />
+    </QueryClientProvider>,
   );
 };
 

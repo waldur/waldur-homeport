@@ -2,16 +2,16 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { marketplaceProviderOfferingsImportOffering } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { validateOfferingExportFile } from './fileValidation';
 import { SingleOfferingImportDialog } from './SingleOfferingImportDialog';
+vi.mock('@/workspace/hooks');
 
 vi.mock('@uirouter/react');
 vi.mock('waldur-js-client');
@@ -27,9 +27,7 @@ vi.mock('@/router', () => ({
   },
 }));
 
-const mockStore = configureStore();
-
-const renderDialog = (store, resolve = {}) => {
+const renderDialog = (resolve = {}) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -38,26 +36,21 @@ const renderDialog = (store, resolve = {}) => {
     },
   });
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <SingleOfferingImportDialog resolve={resolve} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <SingleOfferingImportDialog resolve={resolve} />
+    </QueryClientProvider>,
   );
 };
 
 describe('SingleOfferingImportDialog', () => {
-  let store;
   let mockRouter;
   let mockNotify;
   let mockModal;
 
   beforeEach(() => {
-    store = mockStore({
-      workspace: {
-        customer: { uuid: 'local-customer-uuid' },
-      },
-    });
+    vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
+      uuid: 'local-customer-uuid',
+    } as any);
 
     mockRouter = {
       stateService: { go: vi.fn() },
@@ -107,7 +100,7 @@ describe('SingleOfferingImportDialog', () => {
       data: { imported_offering_uuid: 'imported-offering-uuid' },
     } as any);
 
-    const { container } = renderDialog(store);
+    const { container } = renderDialog();
 
     // --- Step 1: File Upload ---
     expect(screen.getByText(/Upload offering file/i)).toBeInTheDocument();
@@ -163,7 +156,7 @@ describe('SingleOfferingImportDialog', () => {
       },
     });
 
-    const { container } = renderDialog(store);
+    const { container } = renderDialog();
 
     const file = new File(['offering: test'], 'offering.yaml', {
       type: 'text/yaml',

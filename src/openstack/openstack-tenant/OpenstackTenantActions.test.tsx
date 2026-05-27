@@ -1,12 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
-import { OpenstackTenantActions } from './OpenstackTenantActions';
+import * as workspaceHooks from '@/workspace/hooks';
 
-const mockStore = configureMockStore();
+import { OpenstackTenantActions } from './OpenstackTenantActions';
 
 vi.mock('@/i18n', () => ({
   translate: (key) => key,
@@ -48,29 +46,30 @@ const mockResource = {
 };
 
 const renderComponent = (userOverrides = {}) => {
-  const store = mockStore({
-    workspace: {
-      user: {
-        is_staff: true,
-        permissions: [],
-        ...userOverrides,
-      },
-    },
-  });
+  vi.mocked(workspaceHooks.useUser).mockReturnValue({
+    is_staff: true,
+    permissions: [],
+    ...userOverrides,
+  } as any);
   const queryClient = new QueryClient();
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <OpenstackTenantActions
-          marketplaceResource={mockMarketplaceResource}
-          resource={mockResource}
-          refetch={vi.fn()}
-        />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <OpenstackTenantActions
+        marketplaceResource={mockMarketplaceResource}
+        resource={mockResource}
+        refetch={vi.fn()}
+      />
+    </QueryClientProvider>,
   );
 };
 
+vi.mock('@/workspace/hooks');
+vi.mock('@/workspace/selectors', () => ({
+  getUser: () => ({ is_staff: true, permissions: [] }),
+  getCustomer: () => ({}),
+  getProject: () => ({}),
+  isOwnerOrStaff: () => true,
+}));
 describe('OpenstackTenantActions', () => {
   it('renders action groups with correct titles for staff user', () => {
     renderComponent();

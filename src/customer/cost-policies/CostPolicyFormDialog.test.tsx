@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   invoiceItemsCustomerCostsForPeriodRetrieve,
@@ -12,8 +10,10 @@ import {
 } from 'waldur-js-client';
 
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { CostPolicyFormDialog } from './CostPolicyFormDialog';
+vi.mock('@/workspace/hooks');
 
 vi.mock('waldur-js-client');
 vi.mock('@/modal/useManagedMutation');
@@ -117,15 +117,13 @@ const renderDialog = (props: any) => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  const store = createStore(() => ({
-    workspace: { customer: { uuid: 'customer-uuid' } },
-  }));
+  vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
+    uuid: 'customer-uuid',
+  } as any);
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <CostPolicyFormDialog {...props} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <CostPolicyFormDialog {...props} />
+    </QueryClientProvider>,
   );
 };
 

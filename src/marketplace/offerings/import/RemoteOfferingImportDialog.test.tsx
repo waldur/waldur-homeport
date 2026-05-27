@@ -2,8 +2,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import {
   remoteWaldurApiImportOffering,
@@ -14,8 +12,10 @@ import {
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { RemoteOfferingImportDialog } from './RemoteOfferingImportDialog';
+vi.mock('@/workspace/hooks');
 
 vi.mock('@uirouter/react');
 vi.mock('waldur-js-client');
@@ -76,9 +76,7 @@ vi.mock('react-select', () => ({
   },
 }));
 
-const mockStore = configureStore();
-
-const renderDialog = (store, refetch = vi.fn()) => {
+const renderDialog = (refetch = vi.fn()) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -87,26 +85,21 @@ const renderDialog = (store, refetch = vi.fn()) => {
     },
   });
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <RemoteOfferingImportDialog refetch={refetch} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <RemoteOfferingImportDialog refetch={refetch} />
+    </QueryClientProvider>,
   );
 };
 
 describe('RemoteOfferingImportDialog', () => {
-  let store;
   let mockRouter;
   let mockNotify;
   let mockModal;
 
   beforeEach(() => {
-    store = mockStore({
-      workspace: {
-        customer: { uuid: 'local-customer-uuid' },
-      },
-    });
+    vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
+      uuid: 'local-customer-uuid',
+    } as any);
 
     mockRouter = {
       stateService: { go: vi.fn() },
@@ -206,7 +199,7 @@ describe('RemoteOfferingImportDialog', () => {
       data: { uuid: 'imported-offering-uuid' },
     } as any);
 
-    const { unmount } = renderDialog(store);
+    const { unmount } = renderDialog();
     await walkThroughWizard(user);
     await user.click(getConfirmButton());
     await waitFor(() => {
@@ -228,7 +221,7 @@ describe('RemoteOfferingImportDialog', () => {
     // Now test error handling (in a new render)
     const error = new Error('Submission failed');
     vi.mocked(remoteWaldurApiImportOffering).mockRejectedValue(error);
-    renderDialog(store);
+    renderDialog();
     await walkThroughWizard(user);
     await user.click(getConfirmButton());
     await waitFor(() =>

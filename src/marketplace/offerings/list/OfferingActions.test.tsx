@@ -1,12 +1,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { describe, expect, it, vi } from 'vitest';
 
 import { translate } from '@/i18n';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { OfferingActions } from './OfferingActions';
+vi.mock('@/workspace/hooks');
 
 vi.mock('@/core/config', () => ({
   ENV: {
@@ -39,27 +39,21 @@ vi.mock('@uirouter/react', async (importOriginal) => {
 
 const renderOfferingActions = (props?) => {
   const queryClient = new QueryClient();
-  const store = createStore(() => ({
-    workspace: {
-      user: {
-        uuid: 'user_uuid',
-      },
-    },
-  }));
+  vi.mocked(workspaceHooks.useUser).mockReturnValue({
+    uuid: 'user_uuid',
+  } as any);
   return render(
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <OfferingActions
-          row={{
-            uuid: 'offering_uuid',
-            customer_uuid: 'customer_uuid',
-            state: 'Active',
-            resources_count: 0,
-          }}
-          refetch={() => {}}
-          {...props}
-        />
-      </Provider>
+      <OfferingActions
+        row={{
+          uuid: 'offering_uuid',
+          customer_uuid: 'customer_uuid',
+          state: 'Active',
+          resources_count: 0,
+        }}
+        refetch={() => {}}
+        {...props}
+      />
     </QueryClientProvider>,
   );
 };

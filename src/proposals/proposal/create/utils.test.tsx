@@ -1,7 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   Proposal,
@@ -9,9 +7,10 @@ import {
   proposalProposalsReject,
 } from 'waldur-js-client';
 
-import { useProposalDecisionActions } from './utils';
+import * as workspaceHooks from '@/workspace/hooks';
 
-const mockStore = configureMockStore();
+import { useProposalDecisionActions } from './utils';
+vi.mock('@/workspace/hooks');
 
 const mockConfirm = vi.fn();
 
@@ -54,16 +53,10 @@ describe('useProposalDecisionActions', () => {
   };
 
   const mockRefetch = vi.fn();
-  let store: any;
 
   beforeEach(() => {
     vi.clearAllMocks();
-
-    store = mockStore({
-      workspace: {
-        user: mockUser,
-      },
-    });
+    vi.mocked(workspaceHooks.useUser).mockReturnValue(mockUser as any);
 
     mockConfirm.mockResolvedValue({ input: undefined });
     vi.mocked(proposalProposalsApprove).mockResolvedValue({} as any);
@@ -78,9 +71,7 @@ describe('useProposalDecisionActions', () => {
       },
     });
     const wrapper = ({ children }) => (
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>{children}</Provider>
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     );
 
     return renderHook(() => useProposalDecisionActions(proposal, mockRefetch), {

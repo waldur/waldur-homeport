@@ -1,14 +1,14 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   customerCreditsList,
   projectCreditsCreate,
   projectCreditsUpdate,
 } from 'waldur-js-client';
+
+import * as workspaceHooks from '@/workspace/hooks';
 
 import { ProjectCreditDialog } from './ProjectCreditDialog';
 
@@ -89,26 +89,25 @@ vi.mock('@/form/select/SelectField', () => ({
   ),
 }));
 
-const mockStore = configureStore();
-
 const renderComponent = (resolve) => {
+  vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
+    uuid: 'customer-uuid',
+    url: 'customer-url',
+  } as any);
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: { retry: false },
       mutations: { retry: false },
     },
   });
-  const store = mockStore({
-    workspace: { customer: { uuid: 'customer-uuid', url: 'customer-url' } },
-  });
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <ProjectCreditDialog resolve={resolve} />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <ProjectCreditDialog resolve={resolve} />
+    </QueryClientProvider>,
   );
 };
+
+vi.mock('@/workspace/hooks');
 
 describe('ProjectCreditDialog', () => {
   const mockRefetch = vi.fn();

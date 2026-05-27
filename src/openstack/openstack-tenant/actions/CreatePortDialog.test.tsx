@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -54,12 +52,6 @@ vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 
-const mockStore = configureStore();
-const store = mockStore({
-  modal: {},
-  notifications: [],
-});
-
 const mockResource = {
   uuid: 'tenant-uuid',
   url: 'tenant-url',
@@ -90,13 +82,11 @@ describe('CreatePortDialog', () => {
 
   const renderDialog = () => {
     return render(
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <CreatePortDialog
-            resolve={{ resource: mockResource, refetch: vi.fn() }}
-          />
-        </QueryClientProvider>
-      </Provider>,
+      <QueryClientProvider client={queryClient}>
+        <CreatePortDialog
+          resolve={{ resource: mockResource, refetch: vi.fn() }}
+        />
+      </QueryClientProvider>,
     );
   };
 

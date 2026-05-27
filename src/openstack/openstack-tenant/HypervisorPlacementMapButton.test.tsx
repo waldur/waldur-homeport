@@ -1,27 +1,20 @@
 import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
-import { HypervisorPlacementMapButton } from './HypervisorPlacementMapButton';
+import * as workspaceHooks from '@/workspace/hooks';
 
-const mockStore = configureMockStore();
+import { HypervisorPlacementMapButton } from './HypervisorPlacementMapButton';
+vi.mock('@/workspace/hooks');
 
 vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 
 const renderButton = (isStaff: boolean) => {
-  const store = mockStore({
-    workspace: {
-      user: { is_staff: isStaff },
-    },
-  });
-  return render(
-    <Provider store={store}>
-      <HypervisorPlacementMapButton tenantUuid="test-tenant-uuid" />
-    </Provider>,
-  );
+  vi.mocked(workspaceHooks.useUser).mockReturnValue({
+    is_staff: isStaff,
+  } as any);
+  return render(<HypervisorPlacementMapButton tenantUuid="test-tenant-uuid" />);
 };
 
 describe('HypervisorPlacementMapButton', () => {
@@ -36,14 +29,8 @@ describe('HypervisorPlacementMapButton', () => {
   });
 
   it('does not render when user is null', () => {
-    const store = mockStore({
-      workspace: { user: null },
-    });
-    render(
-      <Provider store={store}>
-        <HypervisorPlacementMapButton tenantUuid="test-tenant-uuid" />
-      </Provider>,
-    );
+    vi.mocked(workspaceHooks.useUser).mockReturnValue(null as any);
+    render(<HypervisorPlacementMapButton tenantUuid="test-tenant-uuid" />);
     expect(screen.queryByText('Placement map')).toBeNull();
   });
 });

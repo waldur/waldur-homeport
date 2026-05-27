@@ -1,22 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useModal } from '@/modal/actions';
 
 import { OpenStackSecurityGroupsLink } from './OpenStackSecurityGroupsLink';
 
-const mockStore = configureStore();
-const store = mockStore();
-
 export const renderLink = (props) => {
-  return render(
-    <Provider store={store}>
-      <OpenStackSecurityGroupsLink {...props} />
-    </Provider>,
-  );
+  return render(<OpenStackSecurityGroupsLink {...props} />);
 };
 
 describe('OpenStackSecurityGroupsLink', () => {

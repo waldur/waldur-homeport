@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ENV } from '@/core/config';
 import * as features from '@/features/connect';
+import * as workspaceHooks from '@/workspace/hooks';
 
 import * as profileAttributes from './profileAttributes';
 import { UserEditRows } from './UserEditRows';
+vi.mock('@/workspace/hooks');
 
 // Mock dependencies
 vi.mock('@/i18n', () => ({
@@ -58,20 +58,13 @@ const renderComponent = (
     is_staff: false,
   },
 ) => {
-  const mockStore = configureStore();
-  const store = mockStore({
-    workspace: {
-      user: currentUser,
-    },
-  });
+  vi.mocked(workspaceHooks.useUser).mockReturnValue(currentUser as any);
   return render(
-    <Provider store={store}>
-      <table>
-        <tbody>
-          <UserEditRows user={user as any} />
-        </tbody>
-      </table>
-    </Provider>,
+    <table>
+      <tbody>
+        <UserEditRows user={user as any} />
+      </tbody>
+    </table>,
   );
 };
 
