@@ -1,11 +1,10 @@
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, useMemo } from 'react';
 
 import { translate } from '@/i18n';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { useCustomer, useUser } from '@/workspace/hooks';
-import { checkIsOwner, isServiceManagerSelector } from '@/workspace/selectors';
+import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
 
 import { PullRemoteOfferingDetailsAction } from './PullRemoteOfferingDetailsAction';
 import { PullRemoteOfferingInvoicesAction } from './PullRemoteOfferingInvoicesAction';
@@ -23,8 +22,11 @@ interface RemoteActionsProps {
 export const RemoteActions: FC<RemoteActionsProps> = ({ offering }) => {
   const user = useUser();
   const customer = useCustomer();
-  const isOwner = checkIsOwner(customer, user);
-  const isServiceManager = useSelector(isServiceManagerSelector);
+  const isOwner = useMemo(() => checkIsOwner(customer, user), [customer, user]);
+  const isServiceManager = useMemo(
+    () => checkIsServiceManager(customer, user),
+    [customer, user],
+  );
 
   const isVisible =
     offering.type === REMOTE_OFFERING_TYPE &&

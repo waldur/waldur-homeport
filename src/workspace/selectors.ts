@@ -22,11 +22,11 @@ export const getProject = (state: RootState): Project =>
 export const isStaff = (state: RootState): boolean =>
   getUser(state) && getUser(state).is_staff;
 
-const isSupport = (state: RootState): boolean =>
-  getUser(state) && getUser(state).is_support;
+export const checkIsStaffOrSupport = (user: User): boolean =>
+  user && (user.is_staff || user.is_support);
 
 export const isStaffOrSupport = (state: RootState): boolean =>
-  isStaff(state) || isSupport(state);
+  checkIsStaffOrSupport(getUser(state));
 
 export const checkIsOwner = (
   customer: AtLeast<Customer, 'uuid'>,
@@ -50,7 +50,7 @@ export const checkIsServiceManager = (
       permission.role_name === RoleEnum.CUSTOMER_MANAGER,
   );
 
-export const checkCustomerUser = (
+export const checkIsOwnerOrStaff = (
   customer: AtLeast<Customer, 'uuid'>,
   user: User,
 ): boolean => {
@@ -60,46 +60,36 @@ export const checkCustomerUser = (
   return customer && checkIsOwner(customer, user);
 };
 
-export const isServiceManagerSelector = createSelector(
-  getCustomer,
-  getUser,
-  checkIsServiceManager,
-);
-
 export const isOwner = createSelector(getCustomer, getUser, checkIsOwner);
 
 export const isOwnerOrStaff = createSelector(
+  getCustomer,
   getUser,
-  isOwner,
-  (user: User, userIsOwner: boolean): boolean => {
-    if (!user) {
-      return false;
-    }
-    if (user.is_staff) {
-      return true;
-    }
-    return userIsOwner;
-  },
+  checkIsOwnerOrStaff,
 );
 
 /**
  * Check if user has access to any organization
  * (either as owner, manager, or staff)
  */
-export const hasAnyOrganizationAccess = (state: RootState): boolean => {
-  const user = getUser(state);
+const checkHasAnyOrganizationAccess = (user: User): boolean => {
   if (!user) return false;
   if (user.is_staff || user.is_support) return true;
   return user.permissions?.some((p) => p.scope_type === 'customer') ?? false;
 };
 
+export const hasAnyOrganizationAccess = (state: RootState): boolean =>
+  checkHasAnyOrganizationAccess(getUser(state));
+
 // Check if user has any non-project permissions
-export const hasNonProjectPermissions = (state: RootState): boolean => {
-  const user = getUser(state);
+export const checkHasNonProjectPermissions = (user: User): boolean => {
   if (!user) return false;
   if (user.is_staff || user.is_support) return true;
   return user.permissions?.some((p) => p.scope_type !== 'project') ?? false;
 };
+
+export const hasNonProjectPermissions = (state: RootState): boolean =>
+  checkHasNonProjectPermissions(getUser(state));
 
 /**
  * Check if user manages any service provider offerings
@@ -116,27 +106,4 @@ export const isServiceProviderManager = (state: RootState): boolean => {
           p.role_name === RoleEnum.CUSTOMER_MANAGER),
     ) ?? false
   );
-};
-
-/**
- * Check if user is a call manager for any organization
- */
-export const isCallManager = (state: RootState): boolean => {
-  const user = getUser(state);
-  if (!user) return false;
-  if (user.is_staff) return true;
-  return (
-    user.permissions?.some((p) => p.role_name === RoleEnum.CALL_MANAGER) ??
-    false
-  );
-};
-
-/**
- * Check if user can access reporting (any role-based access)
- */
-export const canAccessReporting = (state: RootState): boolean => {
-  const user = getUser(state);
-  if (!user) return false;
-  if (user.is_staff || user.is_support) return true;
-  return hasAnyOrganizationAccess(state);
 };

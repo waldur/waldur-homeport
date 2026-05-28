@@ -1,7 +1,6 @@
 import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useMemo } from 'react';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -12,7 +11,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { useProfileCompletenessContext } from '@/user/ProfileCompletenessContext';
 import { useUser } from '@/workspace/hooks';
-import { hasNonProjectPermissions } from '@/workspace/selectors';
+import { checkHasNonProjectPermissions } from '@/workspace/selectors';
 
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
@@ -71,7 +70,10 @@ export const UnifiedSidebar = () => {
     }
   }, [router, state, params.resource_uuid]);
 
-  const hasNonProjectPerms = useSelector(hasNonProjectPermissions);
+  const hasNonProjectPerms = useMemo(
+    () => checkHasNonProjectPermissions(user),
+    [user],
+  );
 
   if (!user) {
     return null;

@@ -124,7 +124,7 @@ const renderComponent = () => {
 };
 
 vi.mock('@/workspace/selectors', () => ({
-  isOwnerOrStaff: () => true,
+  checkIsOwnerOrStaff: () => true,
 }));
 describe('CustomerUsersList', () => {
   it('renders table headers and data cells', async () => {

@@ -6,7 +6,6 @@ import {
 } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -17,7 +16,8 @@ import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
-import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { ProjectActions } from './dashboard/ProjectActions';
 
@@ -26,7 +26,9 @@ interface ProjectProfileProps {
 }
 
 const HeroTitle = ({ project }: ProjectProfileProps) => {
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const user = useUser();
+  const customer = useCustomer();
+  const isOwnerOrStaff = checkIsOwnerOrStaff(customer, user);
   return (
     <div>
       <h3 className="mb-1 d-flex align-items-center flex-wrap">

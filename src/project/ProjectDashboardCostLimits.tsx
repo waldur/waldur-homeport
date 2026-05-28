@@ -6,7 +6,6 @@ import {
 } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { EChart } from '@/core/EChart';
@@ -18,8 +17,8 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser } from '@/workspace/hooks';
-import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { useProjectCostChart } from './utils';
 
@@ -42,7 +41,8 @@ export const ProjectDashboardCostLimits = ({
 }) => {
   const router = useRouter();
   const user = useUser();
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const customer = useCustomer();
+  const isOwnerOrStaff = checkIsOwnerOrStaff(customer, user);
   const canManageAutoApproval =
     !project.is_removed &&
     (user.is_staff ||

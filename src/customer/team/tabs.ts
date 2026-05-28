@@ -1,13 +1,14 @@
-import { useSelector } from 'react-redux';
-
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures, InvitationsFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
+import { useUser, useCustomer } from '@/workspace/hooks';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 export const useTeamTableTabs = () => {
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const user = useUser();
+  const customer = useCustomer();
+  const isOwnerOrStaff = checkIsOwnerOrStaff(customer, user);
 
   return [
     isOwnerOrStaff && {
