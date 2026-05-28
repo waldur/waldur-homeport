@@ -1,6 +1,5 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -12,9 +11,9 @@ import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { type RootState } from '@/store/reducers';
 import { formatUserIsActive, formatUserStatus } from '@/user/support/utils';
-import { isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
 import { isProfileAttributeEnabled } from './profileAttributes';
 
@@ -25,7 +24,8 @@ interface OwnProps {
 }
 
 export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
-  const isVisible = useSelector((state: RootState) => isStaffOrSupport(state));
+  const user = useUser();
+  const isVisible = checkIsStaffOrSupport(user);
 
   return (
     <FormTable hideActions alignTop detailsMode className="gy-5">

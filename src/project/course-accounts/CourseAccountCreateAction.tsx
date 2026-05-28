@@ -1,15 +1,15 @@
 import { GraduationCapIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { hasManageCourseAccountPermission } from '@/customer/team/utils';
+import { checkHasManageCourseAccountPermission } from '@/customer/team/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { InvitationsFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
+import { useUser } from '@/workspace/hooks';
 
 const CourseAccountFormDialog = lazyComponent(() =>
   import('./CourseAccountFormDialog').then((module) => ({
@@ -21,8 +21,10 @@ export const CourseAccountCreateButton: FC<{
   refetch(): void;
   project: Project;
 }> = ({ project, refetch }) => {
-  const canManageCourseAccount = useSelector(
-    hasManageCourseAccountPermission(project),
+  const user = useUser();
+  const canManageCourseAccount = checkHasManageCourseAccountPermission(
+    user,
+    project as { uuid: string },
   );
   const showCourseAccounts =
     isFeatureVisible(InvitationsFeatures.show_course_accounts) &&

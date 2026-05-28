@@ -22,8 +22,16 @@ Previously we have relied on hard-coded roles, such as customer owner and projec
 
 ```js
 export const AcceptAction = (props) => {
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isServiceManager = useSelector(isServiceManagerSelector);
+  const user = useUser();
+  const customer = useCustomer();
+  const isOwnerOrStaff = useMemo(
+    () => checkIsOwnerOrStaff(customer, user),
+    [customer, user],
+  );
+  const isServiceManager = useMemo(
+    () => checkIsServiceManager(customer, user),
+    [customer, user],
+  );
   if (!isOwnerOrStaff && !isServiceManager) {
     return null;
   } else {

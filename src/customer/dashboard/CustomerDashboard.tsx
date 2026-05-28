@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { customersStatsRetrieve } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -11,7 +10,10 @@ import { ExperimentalUsageSection } from '@/marketplace/aggregate-limits/experim
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { ProjectsList } from '@/project/ProjectsList';
 import { useUser, useCustomer } from '@/workspace/hooks';
-import { checkIsServiceManager, isOwnerOrStaff } from '@/workspace/selectors';
+import {
+  checkIsServiceManager,
+  checkIsOwnerOrStaff,
+} from '@/workspace/selectors';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerDashboardCredit } from './CustomerDashboardCredit';
@@ -25,7 +27,10 @@ export const CustomerDashboard: FunctionComponent = () => {
     () => checkIsServiceManager(customer, user),
     [customer, user],
   );
-  const canSeeCharts = useSelector(isOwnerOrStaff);
+  const canSeeCharts = useMemo(
+    () => checkIsOwnerOrStaff(customer, user),
+    [customer, user],
+  );
 
   const {
     data: aggregateLimitData,

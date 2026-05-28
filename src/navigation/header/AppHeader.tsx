@@ -1,7 +1,6 @@
 import { CaretLeftIcon, ListIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
 import { getIconUrl } from '@/core/api';
@@ -44,7 +43,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   const imageUrl = getIconUrl('sidebar_logo_mobile');
   const [errorImg, setErrorImg] = useState(false);
 
-  const hasSupport = useSelector(hasSupportSelector);
+  const hasSupport = hasSupportSelector();
 
   const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.lg });
   const isResourceCreationView = stateName === 'marketplace-offering-public';

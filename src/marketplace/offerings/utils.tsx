@@ -4,7 +4,7 @@ import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { Offering } from '@/marketplace/types';
 import { IBreadcrumbItem } from '@/navigation/types';
-import { checkCustomerUser } from '@/workspace/selectors';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { PublicOfferingBreadcrumbPopover } from './PublicOfferingBreadcrumbPopover';
 
@@ -127,7 +127,7 @@ export const isOfferingRestrictedToProject = (
   offering: Offering,
   user: User,
 ) => {
-  const isStaffOrOwner = checkCustomerUser(
+  const isStaffOrOwner = checkIsOwnerOrStaff(
     { uuid: offering.customer_uuid },
     user,
   );

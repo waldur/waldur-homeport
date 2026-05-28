@@ -1,7 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   CustomersUsersListData,
   CustomerUser,
@@ -18,8 +17,8 @@ import {
   CustomersUsersFilterFormId,
 } from '@/table/generated/CustomersUsersFilter';
 import { useTable } from '@/table/useTable';
-import { useCustomer } from '@/workspace/hooks';
-import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { CustomerPermissionsLogButton } from './CustomerPermissionsLogButton';
 import { CustomerUserRowActions } from './CustomerUserRowActions';
@@ -56,7 +55,11 @@ const CustomerUsersListTable: FunctionComponent = () => {
 
   // The "Team" page contains several other pages. We have to check the access permissions to this page here.
   const router = useRouter();
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const user = useUser();
+  const isOwnerOrStaff = useMemo(
+    () => checkIsOwnerOrStaff(customer, user),
+    [customer, user],
+  );
   useEffect(() => {
     if (!isOwnerOrStaff) {
       router.stateService.go('organization-invitations');

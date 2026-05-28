@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { CourseAccount } from 'waldur-js-client';
 
-import { hasManageCourseAccountPermission } from '@/customer/team/utils';
+import { checkHasManageCourseAccountPermission } from '@/customer/team/utils';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { useUser } from '@/workspace/hooks';
 
 import { CourseAccountDeleteAction } from './CourseAccountDeleteAction';
 
@@ -11,9 +11,10 @@ export const CourseAccountActions: FC<{ row: CourseAccount; refetch }> = ({
   row,
   refetch,
 }) => {
-  const canManageCourseAccount = useSelector(
-    hasManageCourseAccountPermission({ uuid: row.project_uuid }),
-  );
+  const user = useUser();
+  const canManageCourseAccount = checkHasManageCourseAccountPermission(user, {
+    uuid: row.project_uuid,
+  });
 
   return (
     <ActionsDropdown

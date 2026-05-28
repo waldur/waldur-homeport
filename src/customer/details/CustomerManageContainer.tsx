@@ -9,7 +9,7 @@ import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-pro
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { useUser, useCustomer } from '@/workspace/hooks';
-import { checkIsOwner } from '@/workspace/selectors';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 const CustomerDetailsPanel = lazyComponent(() =>
   import('./CustomerDetailsPanel').then((module) => ({
@@ -66,7 +66,7 @@ export const CustomerManageContainer = () => {
     customer,
   );
   const userIsOwnerOrStaff = useMemo(
-    () => user?.is_staff || checkIsOwner(customer, user),
+    () => checkIsOwnerOrStaff(customer, user),
     [customer, user],
   );
 

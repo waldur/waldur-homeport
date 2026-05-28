@@ -6,7 +6,6 @@ import {
 } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { CustomerProfile } from '@/customer/dashboard/CustomerProfile';
 import { isFeatureVisible } from '@/features/connect';
@@ -20,7 +19,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import {
   checkIsServiceManager,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
+  checkIsOwnerOrStaff,
 } from '@/workspace/selectors';
 
 const getDashboardState = (state: StateDeclaration) => {
@@ -42,7 +41,7 @@ const PageHero = ({ customer }) => {
     router.stateService.go(state, { uuid: customer.uuid });
 
   const user = useUser();
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const isOwnerOrStaff = checkIsOwnerOrStaff(customer, user);
 
   const showCallManagement =
     customer?.call_managing_organization_uuid &&

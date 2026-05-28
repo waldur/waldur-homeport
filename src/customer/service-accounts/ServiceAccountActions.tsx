@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { useUser } from '@/workspace/hooks';
 
-import { hasManageServiceAccountPermission } from '../team/utils';
+import { checkHasManageServiceAccountPermission } from '../team/utils';
 
 import { ServiceAccountDeleteAction } from './ServiceAccountDeleteAction';
 import { ServiceAccountEditAction } from './ServiceAccountEditAction';
@@ -13,8 +13,11 @@ import { ServiceAccountsProps } from './type';
 export const ServiceAccountActions: FC<
   ServiceAccountsProps & { row; refetch; admin?: boolean }
 > = ({ context, scope, row, refetch, admin }) => {
-  const canManageServiceAccount = useSelector(
-    hasManageServiceAccountPermission(context, scope),
+  const user = useUser();
+  const canManageServiceAccount = checkHasManageServiceAccountPermission(
+    user,
+    context,
+    scope,
   );
 
   return (

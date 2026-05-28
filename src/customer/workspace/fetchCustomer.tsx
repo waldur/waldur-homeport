@@ -13,7 +13,7 @@ import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 import store from '@/store/store';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 import { getCustomer } from '../utils';
 
@@ -65,6 +65,7 @@ export function fetchCustomerProjects(customerUuid) {
 export const useCustomerProjects = () => {
   const { showErrorResponse } = useNotify();
   const customer = useCustomer();
+  const setCurrentCustomer = useSetCustomer();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (!customer || customer.projects) return;
@@ -73,7 +74,7 @@ export const useCustomerProjects = () => {
       .then((projects) => {
         const updatedCustomer = cloneDeep(customer);
         Object.assign(updatedCustomer, { projects });
-        store.dispatch(setCurrentCustomer(updatedCustomer));
+        setCurrentCustomer(updatedCustomer);
       })
       .catch((err) => {
         showErrorResponse(err, translate('Unable to load projects'));

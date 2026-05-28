@@ -8,7 +8,10 @@ import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@/table/TableFilterItem';
 import { useCustomer, useUser } from '@/workspace/hooks';
-import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
+import {
+  checkIsOwnerOrStaff,
+  checkIsServiceManager,
+} from '@/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
@@ -19,7 +22,7 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
 
   const offeringFilter = useMemo(() => {
     const isServiceManager = checkIsServiceManager(customer, user);
-    const isOwnerOrStaff = user?.is_staff || checkIsOwner(customer, user);
+    const isOwnerOrStaff = checkIsOwnerOrStaff(customer, user);
     return isServiceManager && !isOwnerOrStaff
       ? { customer_uuid: customer?.uuid, service_manager_uuid: user?.uuid }
       : {

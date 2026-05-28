@@ -1,5 +1,4 @@
-import { FC, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, useEffect, useMemo } from 'react';
 import {
   MaintenanceAnnouncement,
   MaintenanceAnnouncementOffering,
@@ -11,14 +10,20 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { isOwnerOrStaff } from '@/workspace/selectors';
+import { useCustomer, useUser } from '@/workspace/hooks';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { IMPACT_LABELS } from './utils';
 
 export const MaintenanceReportingExpandableRow: FC<{
   row: MaintenanceAnnouncement;
 }> = ({ row: maintenance }) => {
-  const showInternalNotes = useSelector(isOwnerOrStaff);
+  const user = useUser();
+  const customer = useCustomer();
+  const showInternalNotes = useMemo(
+    () => checkIsOwnerOrStaff(customer, user),
+    [customer, user],
+  );
 
   const tableProps = useTable({
     table: 'MaintenanceReportingExpandableRow-' + maintenance.uuid,

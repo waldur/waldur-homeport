@@ -1,12 +1,12 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useMemo } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { type RootState } from '@/store/reducers';
-import { checkCustomerUser, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { Call } from '../types';
 import { checkIsCallManager } from '../utils';
@@ -17,13 +17,13 @@ export const CallTabs = ({ call }: { call: Call }) => {
   const goTo = (state) =>
     router.stateService.go(state, { call_uuid: call.uuid });
 
-  const canEdit = useSelector((state: RootState) => {
-    const user = getUser(state);
-    if (checkCustomerUser({ uuid: call.customer_uuid } as any, user))
+  const user = useUser();
+  const canEdit = useMemo(() => {
+    if (checkIsOwnerOrStaff({ uuid: call.customer_uuid } as any, user))
       return true;
     if (checkIsCallManager(call, user)) return true;
     return false;
-  });
+  }, [user]);
 
   if (!canEdit) return null;
 
