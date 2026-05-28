@@ -43,6 +43,12 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
         'fixed_ips',
         'offering_external_ips',
         'project_uuid',
+        'external_network_id',
+        'external_network_name',
+        'external_network_uuid',
+        'has_external_gateway',
+        'enable_snat',
+        'external_fixed_ips',
       ],
     }),
     [resourceScope],
@@ -65,6 +71,15 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Fixed IPs'),
           render: ({ row }) => renderFieldOrDash(row.fixed_ips.join(', ')),
+        },
+        {
+          title: translate('External gateway'),
+          render: ({ row }) =>
+            renderFieldOrDash(
+              row.has_external_gateway
+                ? row.external_network_name || row.external_network_id
+                : undefined,
+            ),
         },
         {
           title: translate('State'),

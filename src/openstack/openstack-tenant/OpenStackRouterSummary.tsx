@@ -34,6 +34,39 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
           }
         />
       ) : null}
+
+      {props.resource.has_external_gateway ? (
+        <>
+          <Component
+            label={translate('External gateway')}
+            value={
+              props.resource.external_network_name ||
+              props.resource.external_network_id
+            }
+          />
+          <Component
+            label={translate('Source NAT (SNAT)')}
+            value={
+              props.resource.enable_snat === false
+                ? translate('Disabled')
+                : translate('Enabled')
+            }
+          />
+          {Array.isArray(props.resource.external_fixed_ips) &&
+          props.resource.external_fixed_ips.length ? (
+            <Component
+              label={translate('Gateway fixed IPs')}
+              value={
+                <IPList
+                  value={props.resource.external_fixed_ips
+                    .map((ip) => ip?.ip_address)
+                    .filter(Boolean)}
+                />
+              }
+            />
+          ) : null}
+        </>
+      ) : null}
     </>
   );
 };
