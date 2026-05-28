@@ -58,7 +58,7 @@ const IDENTITY_TABS = [
   {
     key: 'scim',
     title: translate('SCIM'),
-    groupName: translate('SCIM settings'),
+    groupName: null, // Custom tab, renders multiple SCIM groups
   },
   {
     key: 'providers',
@@ -71,15 +71,17 @@ const SettingsTabContent = ({
   groupName,
   settingsData,
   actions,
+  withCard,
 }: {
   groupName: string;
   settingsData: Record<string, unknown>;
   actions?: ReactNode;
+  withCard?: boolean;
 }) => {
   const group = SettingsDescription.find((g) => g.description === groupName);
   if (!group) return null;
 
-  if (actions) {
+  if (actions || withCard) {
     return (
       <FormTable.Card
         title={groupName}
@@ -305,16 +307,28 @@ export const IdentityProvidersList = () => {
                     />
                     <IdentityBridgeTab />
                   </>
+                ) : tab.key === 'scim' ? (
+                  <>
+                    <SettingsTabContent
+                      groupName={translate('SCIM Entitlements (outbound push)')}
+                      settingsData={settingsData}
+                      withCard
+                      actions={
+                        settingsData?.['SCIM_MEMBERSHIP_SYNC_ENABLED'] ? (
+                          <ScimSyncButton />
+                        ) : undefined
+                      }
+                    />
+                    <SettingsTabContent
+                      groupName={translate('SCIM Identity Provider')}
+                      settingsData={settingsData}
+                      withCard
+                    />
+                  </>
                 ) : tab.groupName ? (
                   <SettingsTabContent
                     groupName={tab.groupName}
                     settingsData={settingsData}
-                    actions={
-                      tab.key === 'scim' &&
-                      settingsData?.['SCIM_MEMBERSHIP_SYNC_ENABLED'] ? (
-                        <ScimSyncButton />
-                      ) : undefined
-                    }
                   />
                 ) : (
                   <ProvidersTabContent
