@@ -1,32 +1,19 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, act } from '@testing-library/react';
-import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  userGroupInvitationsRetrieve,
+  userGroupInvitationsSubmitRequest,
+} from 'waldur-js-client';
+
+import { useModal } from '@/modal/actions';
+import { createTestWrapper } from '@/test/harness';
 
 import { useRequestToAccessOrganization } from './submission';
 
-const mockUserGroupInvitationsRetrieve = vi.fn();
-const mockUserGroupInvitationsSubmitRequest = vi.fn();
-const mockOpenDialog = vi.fn();
-const mockConfirm = vi.fn();
 const mockGetCurrentUser = vi.fn();
 const mockRefreshCurrentUser = vi.fn();
 const mockGroupInvitationTokenGet = vi.fn();
 const mockGroupInvitationTokenRemove = vi.fn();
-
-vi.mock('waldur-js-client', () => ({
-  userGroupInvitationsRetrieve: (...args) =>
-    mockUserGroupInvitationsRetrieve(...args),
-  userGroupInvitationsSubmitRequest: (...args) =>
-    mockUserGroupInvitationsSubmitRequest(...args),
-}));
-
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    openDialog: mockOpenDialog,
-    confirm: mockConfirm,
-  }),
-}));
 
 vi.mock('@/user/UsersService', () => ({
   UsersService: {
@@ -54,20 +41,9 @@ vi.mock('./ProjectDetailsDialog', () => ({
   ProjectDetailsDialog: 'ProjectDetailsDialog',
 }));
 
-function createWrapper() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      mutations: { retry: false },
-      queries: { retry: false },
-    },
-  });
-  return ({ children }: { children: React.ReactNode }) =>
-    React.createElement(QueryClientProvider, { client: queryClient }, children);
-}
-
 function setupHook() {
   return renderHook(() => useRequestToAccessOrganization(), {
-    wrapper: createWrapper(),
+    wrapper: createTestWrapper().wrapper,
   });
 }
 
@@ -79,19 +55,19 @@ describe('useRequestToAccessOrganization', () => {
       is_support: false,
       agreement_date: '2024-01-01',
     });
-    mockUserGroupInvitationsRetrieve.mockResolvedValue({
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
       data: {
         uuid: 'invitation-123',
         allow_custom_project_details: false,
         scope_name: 'Test Org',
       },
-    });
-    mockUserGroupInvitationsSubmitRequest.mockResolvedValue({
+    } as any);
+    vi.mocked(userGroupInvitationsSubmitRequest).mockResolvedValue({
       data: {
         auto_approved: false,
         scope_name: 'Test Org',
       },
-    });
+    } as any);
   });
 
   describe('checkAndRequest', () => {
@@ -105,7 +81,9 @@ describe('useRequestToAccessOrganization', () => {
       });
 
       expect(mockGetCurrentUser).not.toHaveBeenCalled();
-      expect(mockUserGroupInvitationsSubmitRequest).not.toHaveBeenCalled();
+      expect(
+        vi.mocked(userGroupInvitationsSubmitRequest),
+      ).not.toHaveBeenCalled();
     });
 
     it('should not call request if user has not accepted TOS', async () => {
@@ -122,7 +100,9 @@ describe('useRequestToAccessOrganization', () => {
         await result.current.checkAndRequest();
       });
 
-      expect(mockUserGroupInvitationsSubmitRequest).not.toHaveBeenCalled();
+      expect(
+        vi.mocked(userGroupInvitationsSubmitRequest),
+      ).not.toHaveBeenCalled();
     });
 
     it('should call request if token exists and TOS is accepted', async () => {
@@ -134,7 +114,7 @@ describe('useRequestToAccessOrganization', () => {
         await result.current.checkAndRequest();
       });
 
-      expect(mockUserGroupInvitationsSubmitRequest).toHaveBeenCalledWith(
+      expect(vi.mocked(userGroupInvitationsSubmitRequest)).toHaveBeenCalledWith(
         expect.objectContaining({
           path: { uuid: 'invitation-123' },
         }),
@@ -150,25 +130,27 @@ describe('useRequestToAccessOrganization', () => {
         await result.current.request('group-token-123');
       });
 
-      expect(mockUserGroupInvitationsRetrieve).toHaveBeenCalledWith({
+      expect(vi.mocked(userGroupInvitationsRetrieve)).toHaveBeenCalledWith({
         path: { uuid: 'group-token-123' },
       });
-      expect(mockUserGroupInvitationsSubmitRequest).toHaveBeenCalled();
+      expect(vi.mocked(userGroupInvitationsSubmitRequest)).toHaveBeenCalled();
     });
 
     it('should open ProjectDetailsDialog if allow_custom_project_details is true', async () => {
-      mockUserGroupInvitationsRetrieve.mockResolvedValue({
+      vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
         data: {
           uuid: 'invitation-123',
           allow_custom_project_details: true,
           scope_name: 'Test Org',
         },
-      });
+      } as any);
 
-      mockOpenDialog.mockImplementation((_component, options) => {
-        // simulate submit
-        options.resolve.onSubmit({ project_name: 'My Project' });
-      });
+      vi.mocked(useModal().openDialog).mockImplementation(
+        (_component, options) => {
+          // simulate submit
+          options.resolve.onSubmit({ project_name: 'My Project' });
+        },
+      );
 
       const { result } = setupHook();
 
@@ -176,23 +158,25 @@ describe('useRequestToAccessOrganization', () => {
         await result.current.request('group-token-123');
       });
 
-      expect(mockOpenDialog).toHaveBeenCalledWith(
+      expect(vi.mocked(useModal().openDialog)).toHaveBeenCalledWith(
         'ProjectDetailsDialog',
         expect.anything(),
       );
-      expect(mockUserGroupInvitationsSubmitRequest).toHaveBeenCalledWith({
-        path: { uuid: 'invitation-123' },
-        body: { project_name: 'My Project' },
-      });
+      expect(vi.mocked(userGroupInvitationsSubmitRequest)).toHaveBeenCalledWith(
+        {
+          path: { uuid: 'invitation-123' },
+          body: { project_name: 'My Project' },
+        },
+      );
     });
 
     it('should show success dialog and refresh user if auto-approved', async () => {
-      mockUserGroupInvitationsSubmitRequest.mockResolvedValue({
+      vi.mocked(userGroupInvitationsSubmitRequest).mockResolvedValue({
         data: {
           auto_approved: true,
           scope_name: 'Test Org',
         },
-      });
+      } as any);
 
       const { result } = setupHook();
 
@@ -204,7 +188,7 @@ describe('useRequestToAccessOrganization', () => {
       });
 
       expect(mockRefreshCurrentUser).toHaveBeenCalled();
-      expect(mockConfirm).toHaveBeenCalledWith(
+      expect(vi.mocked(useModal().confirm)).toHaveBeenCalledWith(
         'You have successfully joined Test Org',
         expect.any(String),
         expect.objectContaining({ type: 'success' }),
@@ -213,12 +197,12 @@ describe('useRequestToAccessOrganization', () => {
     });
 
     it('should show success dialog (not auto-approved) and not refresh user', async () => {
-      mockUserGroupInvitationsSubmitRequest.mockResolvedValue({
+      vi.mocked(userGroupInvitationsSubmitRequest).mockResolvedValue({
         data: {
           auto_approved: false,
           scope_name: 'Test Org',
         },
-      });
+      } as any);
 
       const { result } = setupHook();
 
@@ -230,7 +214,7 @@ describe('useRequestToAccessOrganization', () => {
       });
 
       expect(mockRefreshCurrentUser).not.toHaveBeenCalled();
-      expect(mockConfirm).toHaveBeenCalledWith(
+      expect(vi.mocked(useModal().confirm)).toHaveBeenCalledWith(
         'Request has been sent for approval',
         expect.anything(),
         expect.objectContaining({ type: 'success' }),
@@ -239,9 +223,9 @@ describe('useRequestToAccessOrganization', () => {
     });
 
     it('should show duplicate error dialog on conflict error', async () => {
-      mockUserGroupInvitationsSubmitRequest.mockRejectedValue({
+      vi.mocked(userGroupInvitationsSubmitRequest).mockRejectedValue({
         response: { data: 'User already exists' },
-      });
+      } as any);
 
       const { result } = setupHook();
 
@@ -252,7 +236,7 @@ describe('useRequestToAccessOrganization', () => {
         } as any);
       });
 
-      expect(mockConfirm).toHaveBeenCalledWith(
+      expect(vi.mocked(useModal().confirm)).toHaveBeenCalledWith(
         'You already have access',
         expect.any(String),
         expect.objectContaining({ type: 'primary' }),
@@ -261,9 +245,9 @@ describe('useRequestToAccessOrganization', () => {
     });
 
     it('should show restricted error dialog on other errors', async () => {
-      mockUserGroupInvitationsSubmitRequest.mockRejectedValue({
+      vi.mocked(userGroupInvitationsSubmitRequest).mockRejectedValue({
         response: { data: 'Some other error' },
-      });
+      } as any);
 
       const { result } = setupHook();
 
@@ -274,7 +258,7 @@ describe('useRequestToAccessOrganization', () => {
         } as any);
       });
 
-      expect(mockConfirm).toHaveBeenCalledWith(
+      expect(vi.mocked(useModal().confirm)).toHaveBeenCalledWith(
         'Access restricted',
         expect.any(Object), // React Node formatted message
         expect.objectContaining({ type: 'danger' }),

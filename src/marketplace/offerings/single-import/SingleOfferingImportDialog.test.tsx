@@ -1,72 +1,27 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, cleanup } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useRouter } from '@uirouter/react';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsImportOffering } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { validateOfferingExportFile } from './fileValidation';
 import { SingleOfferingImportDialog } from './SingleOfferingImportDialog';
-vi.mock('@/workspace/hooks');
 
-vi.mock('@uirouter/react');
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
 vi.mock('./fileValidation');
-vi.mock('@/router', () => ({
-  router: {
-    urlService: {
-      config: { strictMode: vi.fn() },
-      rules: { initial: vi.fn() },
-    },
-    stateService: { go: vi.fn(), target: vi.fn() },
-  },
-}));
 
 const renderDialog = (resolve = {}) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <SingleOfferingImportDialog resolve={resolve} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<SingleOfferingImportDialog resolve={resolve} />);
 };
 
 describe('SingleOfferingImportDialog', () => {
-  let mockRouter;
-  let mockNotify;
-  let mockModal;
-
   beforeEach(() => {
     vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
       uuid: 'local-customer-uuid',
     } as any);
-
-    mockRouter = {
-      stateService: { go: vi.fn() },
-    };
-    vi.mocked(useRouter).mockReturnValue(mockRouter);
-
-    mockNotify = {
-      showSuccess: vi.fn(),
-      showErrorResponse: vi.fn(),
-    };
-    vi.mocked(useNotify).mockReturnValue(mockNotify);
-
-    mockModal = {
-      closeDialog: vi.fn(),
-    };
-    vi.mocked(useModal).mockReturnValue(mockModal);
 
     vi.clearAllMocks();
   });
@@ -137,8 +92,8 @@ describe('SingleOfferingImportDialog', () => {
       });
     });
 
-    expect(mockNotify.showSuccess).toHaveBeenCalled();
-    expect(mockModal.closeDialog).toHaveBeenCalled();
+    expect(useNotify().showSuccess).toHaveBeenCalled();
+    expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
   it('handles submission errors', async () => {
@@ -176,7 +131,7 @@ describe('SingleOfferingImportDialog', () => {
     await user.click(getImportButton());
 
     await waitFor(() => {
-      expect(mockNotify.showErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         error,
         expect.any(String),
       );

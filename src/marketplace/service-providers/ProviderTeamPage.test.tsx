@@ -1,22 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { ProviderTeamPage } from './ProviderTeamPage';
-vi.mock('@/workspace/hooks');
-
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
 
 // Mock useTableQuery to not make actual API calls
 vi.mock('@/table/useTableQuery', () => ({
@@ -27,16 +17,6 @@ vi.mock('@/table/useTableQuery', () => ({
     error: null,
     refetch: vi.fn(),
   }),
-}));
-
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {},
-    },
-    roles: [],
-    FEATURES: {},
-  },
 }));
 
 const mockStore = configureStore();
@@ -96,15 +76,12 @@ const store = mockStore({
 });
 
 const renderComponent = () => {
-  const queryClient = createTestQueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <DrawerProvider>
-          <ProviderTeamPage />
-        </DrawerProvider>
-      </Provider>
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <Provider store={store}>
+      <DrawerProvider>
+        <ProviderTeamPage />
+      </DrawerProvider>
+    </Provider>,
   );
 };
 

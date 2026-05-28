@@ -1,11 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, waitFor, fireEvent } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { rancherClusterSecurityGroupsUpdate } from 'waldur-js-client';
 
-import { ClusterSecurityGroupSetRulesDialog } from './ClusterSecurityGroupSetRulesDialog';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client');
+import { ClusterSecurityGroupSetRulesDialog } from './ClusterSecurityGroupSetRulesDialog';
 
 const fakeResource = {
   uuid: 'cluster-uuid',
@@ -23,15 +22,10 @@ const fakeResource = {
 };
 
 const renderDialog = (resource = fakeResource) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ClusterSecurityGroupSetRulesDialog
-        resolve={{ resource: resource as any, refetch: vi.fn() }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <ClusterSecurityGroupSetRulesDialog
+      resolve={{ resource: resource as any, refetch: vi.fn() }}
+    />,
   );
 };
 

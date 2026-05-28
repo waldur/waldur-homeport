@@ -49,7 +49,7 @@ export interface ApplicationConfigurationOptions {
   /** Language choices and default language are fetched from MasterMind */
   languageChoices?: LanguageOption[];
   defaultLanguage?: string;
-  FEATURES?: Record<string, boolean>;
+  FEATURES?: Record<string, Record<string, boolean>>;
   pageSize: number;
   buildId: string;
   accountingMode: 'billing' | 'accounting';

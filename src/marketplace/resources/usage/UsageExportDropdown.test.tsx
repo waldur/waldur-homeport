@@ -13,16 +13,9 @@ import {
 
 vi.mock('@/table/exporters');
 
-vi.mock('@/store/notify');
-
-const mockShowError = vi.fn();
-
 describe('useUsageExport', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showError: mockShowError,
-    } as any);
     vi.setSystemTime(new Date('2024-01-15'));
   });
 
@@ -117,7 +110,7 @@ describe('useUsageExport', () => {
     );
     result.current('csv');
 
-    expect(mockShowError).toHaveBeenCalledWith('Chart is empty');
+    expect(useNotify().showError).toHaveBeenCalledWith('Chart is empty');
     expect(exportAs).not.toHaveBeenCalled();
   });
 

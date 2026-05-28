@@ -1,19 +1,15 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
+import { ENV } from '@/core/config';
+import { useNotify } from '@/store/notify';
+
 import { SupportMenu } from './SupportMenu';
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        DOCS_URL: 'http://docs.example.com',
-        SITE_EMAIL: 'support@example.com',
-        SITE_PHONE: '+123456789',
-      },
-    },
-  },
-}));
+ENV.plugins.WALDUR_CORE.DOCS_URL = 'http://docs.example.com';
+ENV.plugins.WALDUR_CORE.SITE_EMAIL = 'support@example.com';
+ENV.plugins.WALDUR_CORE.SITE_PHONE = '+123456789';
+
 vi.mock('./FooterDropdown', () => ({
   FooterDropdown: ({ title, children }: any) => (
     <div data-testid="support-dropdown">
@@ -29,15 +25,11 @@ vi.mock('@/navigation/header/DocsLink', () => ({
   DocsLink: () => <div data-testid="docs-link">Docs</div>,
 }));
 
-const mockShowSuccess = vi.fn();
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-  }),
-}));
-
 describe('SupportMenu', () => {
   beforeEach(() => {
+    ENV.plugins.WALDUR_CORE.DOCS_URL = 'http://docs.example.com';
+    ENV.plugins.WALDUR_CORE.SITE_EMAIL = 'support@example.com';
+    ENV.plugins.WALDUR_CORE.SITE_PHONE = '+123456789';
     vi.clearAllMocks();
   });
 
@@ -64,7 +56,7 @@ describe('SupportMenu', () => {
       'support@example.com',
     );
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalled();
+      expect(useNotify().showSuccess).toHaveBeenCalled();
     });
   });
 });

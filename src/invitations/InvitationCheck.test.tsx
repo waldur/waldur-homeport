@@ -1,14 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook } from '@testing-library/react';
-import React from 'react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { useModal } from '@/modal/actions';
+import { createTestWrapper } from '@/test/harness';
 
 import { useInvitationCheck } from './InvitationCheck';
 
-const mockUserInvitationsAccept = vi.fn();
-const mockOpenDialog = vi.fn();
-const mockShowSuccess = vi.fn();
-const mockShowError = vi.fn();
 const mockIsAuthenticated = vi.fn();
 const mockGetCurrentUser = vi.fn();
 const mockMandatoryFieldsMissing = vi.fn();
@@ -16,39 +14,9 @@ const mockInvitationTokenGet = vi.fn();
 const mockInvitationTokenRemove = vi.fn();
 const mockGroupInvitationTokenGet = vi.fn();
 const mockCheckAndRequest = vi.fn();
-const mockDispatch = vi.fn();
 const mockUrlServicePath = vi.fn();
 
 let mockState: any = { name: 'profile.details', data: {} };
-
-vi.mock('@uirouter/react', () => ({
-  useCurrentStateAndParams: () => ({ state: mockState, params: {} }),
-  useRouter: () => ({
-    stateService: { go: vi.fn() },
-    urlService: { path: mockUrlServicePath },
-  }),
-}));
-
-vi.mock('waldur-js-client', () => ({
-  userInvitationsAccept: (...args) => mockUserInvitationsAccept(...args),
-}));
-
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    openDialog: mockOpenDialog,
-  }),
-}));
-
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-    showError: mockShowError,
-  }),
-}));
-
-vi.mock('react-redux', () => ({
-  useDispatch: () => mockDispatch,
-}));
 
 vi.mock('@/auth/AuthService', () => ({
   isAuthenticated: (...args) => mockIsAuthenticated(...args),
@@ -76,10 +44,6 @@ vi.mock('@/user/UsersService', () => ({
   getCurrentUser: vi.fn().mockResolvedValue({ uuid: 'user-1' }),
 }));
 
-vi.mock('@/workspace/actions', () => ({
-  setCurrentUser: (user) => ({ type: 'SET_CURRENT_USER', payload: user }),
-}));
-
 vi.mock('./InvitationConfirmDialog', () => ({
   InvitationConfirmDialog: 'InvitationConfirmDialog',
 }));
@@ -90,25 +54,24 @@ vi.mock('./join-organization/submission', () => ({
   }),
 }));
 
-function createWrapper() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      mutations: { retry: false },
-      queries: { retry: false },
-    },
-  });
-  return ({ children }: { children: React.ReactNode }) =>
-    React.createElement(QueryClientProvider, { client: queryClient }, children);
-}
-
 function setupHook() {
-  return renderHook(() => useInvitationCheck(), { wrapper: createWrapper() });
+  return renderHook(() => useInvitationCheck(), {
+    wrapper: createTestWrapper().wrapper,
+  });
 }
 
 describe('useInvitationCheck', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockState = { name: 'profile.details', data: {} };
+    vi.mocked(useCurrentStateAndParams).mockImplementation(() => ({
+      state: mockState,
+      params: {},
+    }));
+    vi.mocked(useRouter).mockReturnValue({
+      stateService: { go: vi.fn() },
+      urlService: { path: mockUrlServicePath },
+    } as any);
     mockUrlServicePath.mockReturnValue('/profile/details');
     mockIsAuthenticated.mockReturnValue(true);
     mockGetCurrentUser.mockResolvedValue({
@@ -129,7 +92,7 @@ describe('useInvitationCheck', () => {
     await new Promise((resolve) => setTimeout(resolve, 10));
 
     expect(mockGetCurrentUser).not.toHaveBeenCalled();
-    expect(mockOpenDialog).not.toHaveBeenCalled();
+    expect(useModal().openDialog).not.toHaveBeenCalled();
   });
 
   it('should not do anything when state has skipAuth', async () => {
@@ -149,7 +112,7 @@ describe('useInvitationCheck', () => {
 
     await new Promise((resolve) => setTimeout(resolve, 10));
 
-    expect(mockOpenDialog).toHaveBeenCalledWith(
+    expect(useModal().openDialog).toHaveBeenCalledWith(
       'InvitationConfirmDialog',
       expect.objectContaining({
         resolve: expect.objectContaining({
@@ -170,7 +133,7 @@ describe('useInvitationCheck', () => {
 
     await new Promise((resolve) => setTimeout(resolve, 10));
 
-    expect(mockOpenDialog).not.toHaveBeenCalled();
+    expect(useModal().openDialog).not.toHaveBeenCalled();
   });
 
   it('should not open invitation dialog on group invitation route', async () => {
@@ -181,7 +144,7 @@ describe('useInvitationCheck', () => {
 
     await new Promise((resolve) => setTimeout(resolve, 10));
 
-    expect(mockOpenDialog).not.toHaveBeenCalled();
+    expect(useModal().openDialog).not.toHaveBeenCalled();
   });
 
   it('should call checkAndRequest on initial load', async () => {

@@ -1,45 +1,39 @@
-import { useQuery } from '@tanstack/react-query';
-import { renderHook } from '@testing-library/react';
-import { useSelector } from 'react-redux';
+import { renderHook, waitFor } from '@testing-library/react';
 import { useMediaQuery } from 'react-responsive';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
 import * as AuthService from '@/auth/AuthService';
+// eslint-disable-next-line waldur-custom/no-direct-client-usage
+import { count } from '@/core/api';
+import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
+import { createTestWrapper } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { useFooterLinks } from './useFooterLinks';
 
 vi.mock('@/auth/AuthService');
-vi.mock('@/workspace/hooks');
 vi.mock('@/features/connect');
-vi.mock('react-redux');
 vi.mock('react-responsive');
-vi.mock('@tanstack/react-query');
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        ANONYMOUS_USER_CAN_VIEW_OFFERINGS: true,
-      },
-    },
-  },
-}));
+vi.mock('@/core/api');
 
 describe('useFooterLinks', () => {
   beforeEach(() => {
+    ENV.plugins.WALDUR_CORE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS = true;
     vi.clearAllMocks();
-    vi.mocked(useQuery).mockReturnValue({ data: 0 } as any);
-    vi.mocked(useSelector).mockReturnValue(false);
+    vi.mocked(count).mockResolvedValue(0);
   });
 
-  it('returns desktop config when isMd is false', () => {
+  it('returns desktop config when isMd is false', async () => {
     vi.mocked(useMediaQuery).mockReturnValue(false);
     vi.mocked(AuthService.isAuthenticated).mockReturnValue(true);
-    vi.mocked(useUser).mockReturnValue({ is_staff: true });
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
     vi.mocked(isFeatureVisible).mockReturnValue(true);
 
-    const { result } = renderHook(() => useFooterLinks());
+    const { wrapper } = createTestWrapper();
+    const { result } = renderHook(() => useFooterLinks(), { wrapper });
+
+    await waitFor(() => expect(result.current.config).toBeDefined());
 
     expect(result.current.isMd).toBe(false);
     // On desktop, dynamic links (calls, explore) are hidden for authenticated users in the current logic
@@ -52,13 +46,20 @@ describe('useFooterLinks', () => {
     ).toBe(false);
   });
 
-  it('returns mobile (modal) config when isMd is true', () => {
+  it('returns mobile (modal) config when isMd is true', async () => {
     vi.mocked(useMediaQuery).mockReturnValue(true);
     vi.mocked(AuthService.isAuthenticated).mockReturnValue(false);
     vi.mocked(isFeatureVisible).mockReturnValue(true);
-    vi.mocked(useQuery).mockReturnValue({ data: 5 } as any);
+    vi.mocked(count).mockResolvedValue(5);
 
-    const { result } = renderHook(() => useFooterLinks());
+    const { wrapper } = createTestWrapper();
+    const { result } = renderHook(() => useFooterLinks(), { wrapper });
+
+    await waitFor(() =>
+      expect(
+        result.current.config.dynamic.some((item) => item.id === 'join-org'),
+      ).toBe(true),
+    );
 
     expect(result.current.isMd).toBe(true);
     expect(
@@ -68,27 +69,27 @@ describe('useFooterLinks', () => {
       result.current.config.dynamic.some((item) => item.id === 'explore'),
     ).toBe(true);
     expect(
-      result.current.config.dynamic.some((item) => item.id === 'join-org'),
-    ).toBe(true);
-    expect(
       result.current.config.dynamic.find((item) => item.id === 'join-org')
         .label,
     ).toBe('Join public organization');
   });
 
-  it('shows Join Organization on desktop for authenticated user with permissions', () => {
+  it('shows Join Organization on desktop for authenticated user with permissions', async () => {
     vi.mocked(useMediaQuery).mockReturnValue(false);
     vi.mocked(AuthService.isAuthenticated).mockReturnValue(true);
-    vi.mocked(useUser).mockReturnValue({ username: 'user' });
+    vi.mocked(useUser).mockReturnValue({ username: 'user' } as any);
     vi.mocked(isFeatureVisible).mockReturnValue(false); // hide_organization_information... = false
-    vi.mocked(useSelector).mockReturnValue(true); // hasNonProjectPerms = true
-    vi.mocked(useQuery).mockReturnValue({ data: 3 } as any); // public invites exist
+    vi.mocked(count).mockResolvedValue(3); // public invites exist
 
-    const { result } = renderHook(() => useFooterLinks());
+    const { wrapper } = createTestWrapper();
+    const { result } = renderHook(() => useFooterLinks(), { wrapper });
 
-    expect(
-      result.current.config.dynamic.some((item) => item.id === 'join-org'),
-    ).toBe(true);
+    await waitFor(() =>
+      expect(
+        result.current.config.dynamic.some((item) => item.id === 'join-org'),
+      ).toBe(true),
+    );
+
     expect(
       result.current.config.dynamic.find((item) => item.id === 'join-org')
         .label,

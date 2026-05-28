@@ -1,25 +1,14 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { userGroupInvitationsRetrieve } from 'waldur-js-client';
+
+import { useModal } from '@/modal/actions';
+import { renderWithProviders } from '@/test/harness';
 
 import { GroupInvitationConfirmDialog } from './GroupInvitationConfirmDialog';
-
-const mockUserGroupInvitationsRetrieve = vi.fn();
-const mockCloseDialog = vi.fn();
 const mockOnConfirm = vi.fn();
 const mockOnCancel = vi.fn();
-
-vi.mock('waldur-js-client', () => ({
-  userGroupInvitationsRetrieve: (...args) =>
-    mockUserGroupInvitationsRetrieve(...args),
-}));
-
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: mockCloseDialog,
-  }),
-}));
 
 vi.mock('./GroupInvitationErrorMessage', () => ({
   GroupInvitationErrorMessage: ({ dismiss }) => (
@@ -47,31 +36,22 @@ vi.mock('./GroupinvitationButtons', () => ({
   ),
 }));
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { retry: false },
-  },
-});
-
 const renderDialog = (token = 'test-token') => {
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <GroupInvitationConfirmDialog
-        resolve={{ token, onConfirm: mockOnConfirm, onCancel: mockOnCancel }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <GroupInvitationConfirmDialog
+      resolve={{ token, onConfirm: mockOnConfirm, onCancel: mockOnCancel }}
+    />,
   );
 };
 
 describe('GroupInvitationConfirmDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    queryClient.clear();
   });
 
   it('renders loading spinner initially', () => {
-    mockUserGroupInvitationsRetrieve.mockImplementation(
-      () => new Promise(() => {}),
+    vi.mocked(userGroupInvitationsRetrieve).mockImplementation(
+      () => new Promise(() => {}) as any,
     );
     renderDialog();
 
@@ -81,21 +61,23 @@ describe('GroupInvitationConfirmDialog', () => {
   });
 
   it('renders error message when API fails', async () => {
-    mockUserGroupInvitationsRetrieve.mockRejectedValue(new Error('API Error'));
+    vi.mocked(userGroupInvitationsRetrieve).mockRejectedValue(
+      new Error('API Error'),
+    );
 
     renderDialog();
 
     expect(await screen.findByTestId('error-message')).toBeDefined();
 
     await userEvent.click(screen.getByText('Dismiss Error'));
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useModal().closeDialog).toHaveBeenCalled();
     expect(mockOnCancel).toHaveBeenCalled();
   });
 
   it('renders invitation message when API succeeds', async () => {
-    mockUserGroupInvitationsRetrieve.mockResolvedValue({
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
       data: { scope_name: 'Test Org', is_public: false },
-    });
+    } as any);
 
     renderDialog();
 
@@ -106,29 +88,29 @@ describe('GroupInvitationConfirmDialog', () => {
   });
 
   it('calls onConfirm when Submit is clicked', async () => {
-    mockUserGroupInvitationsRetrieve.mockResolvedValue({
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
       data: { scope_name: 'Test Org', is_public: true },
-    });
+    } as any);
 
     renderDialog();
 
     await screen.findByText('Submit');
     await userEvent.click(screen.getByText('Submit'));
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useModal().closeDialog).toHaveBeenCalled();
     expect(mockOnConfirm).toHaveBeenCalled();
     expect(screen.getByText('Join organization')).toBeDefined(); // title
   });
 
   it('calls onCancel when Cancel is clicked', async () => {
-    mockUserGroupInvitationsRetrieve.mockResolvedValue({
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
       data: { scope_name: 'Test Org', is_public: false },
-    });
+    } as any);
 
     renderDialog();
 
     await screen.findByText('Cancel');
     await userEvent.click(screen.getByText('Cancel'));
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useModal().closeDialog).toHaveBeenCalled();
     expect(mockOnCancel).toHaveBeenCalled();
   });
 });

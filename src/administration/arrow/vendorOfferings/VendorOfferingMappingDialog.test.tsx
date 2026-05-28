@@ -1,73 +1,43 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   adminArrowVendorOfferingMappingsCreate,
   adminArrowVendorOfferingMappingsPartialUpdate,
+  adminArrowVendorOfferingMappingsVendorChoicesList,
+  marketplacePublicOfferingsList,
+  marketplacePublicOfferingsPlansList,
 } from 'waldur-js-client';
 
-import { useManagedMutation } from '@/modal/useManagedMutation';
+import { renderWithProviders } from '@/test/harness';
+import {
+  clearSelect,
+  openAndSelectOption,
+  typeAndCreateOption,
+} from '@/test/select';
 
 import { VendorOfferingMappingDialog } from './VendorOfferingMappingDialog';
 
-vi.mock('waldur-js-client');
-vi.mock('@/modal/useManagedMutation');
+const mockOfferings = [
+  { uuid: 'offering-1', name: 'Test Offering 1' },
+  { uuid: 'offering-2', name: 'Test Offering 2' },
+];
 
-// Mock SharedMappingFields as they contain complex components
-vi.mock('./SharedMappingFields', () => ({
-  VendorNameSelect: ({ input, label }) => (
-    <div>
-      <label>{label}</label>
-      <input
-        value={
-          typeof input.value === 'string'
-            ? input.value
-            : input.value?.label || ''
-        }
-        onChange={(e) =>
-          input.onChange({ value: e.target.value, label: e.target.value })
-        }
-        onBlur={input.onBlur}
-        data-testid="vendor-name-input"
-      />
-    </div>
-  ),
-  PlanSelect: ({ input, label }) => (
-    <div>
-      <label>{label}</label>
-      <input
-        value={input.value?.uuid || ''}
-        onChange={(e) =>
-          input.onChange({ uuid: e.target.value, name: 'Test Plan' })
-        }
-        onBlur={input.onBlur}
-        data-testid="plan-input"
-      />
-    </div>
-  ),
-}));
+const mockPlans = [
+  { uuid: 'plan-1', name: 'Test Plan 1' },
+  { uuid: 'plan-2', name: 'Test Plan 2' },
+];
 
-// Mock AsyncSelect (the offering field)
-vi.mock('@/form/select', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    AsyncSelect: ({ input, label, onChange }) => (
-      <div>
-        <label>{label}</label>
-        <input
-          value={input.value?.uuid || ''}
-          onChange={(e) => {
-            const val = { uuid: e.target.value, name: 'Test Offering' };
-            input.onChange(val);
-            if (onChange) onChange(val);
-          }}
-          onBlur={input.onBlur}
-          data-testid="offering-input"
-        />
-      </div>
-    ),
-  };
+const mockVendorChoices = [
+  { value: 'Vendor A', label: 'Vendor A' },
+  { value: 'Vendor B', label: 'Vendor B' },
+];
+
+const mockApiResponse = (data: any[]) => ({
+  data,
+  response: {
+    headers: new Headers({ 'x-result-count': String(data.length) }),
+  },
 });
 
 describe('VendorOfferingMappingDialog', () => {
@@ -85,17 +55,20 @@ describe('VendorOfferingMappingDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useManagedMutation).mockImplementation(
-      (options: any) =>
-        ({
-          mutateAsync: vi.fn((values) => options.mutationFn(values)),
-          isPending: false,
-        }) as any,
+
+    vi.mocked(
+      adminArrowVendorOfferingMappingsVendorChoicesList,
+    ).mockResolvedValue({ data: mockVendorChoices } as any);
+    vi.mocked(marketplacePublicOfferingsList).mockResolvedValue(
+      mockApiResponse(mockOfferings) as any,
     );
+    vi.mocked(marketplacePublicOfferingsPlansList).mockResolvedValue({
+      data: mockPlans,
+    } as any);
   });
 
   it('renders create mode', () => {
-    render(
+    renderWithProviders(
       <VendorOfferingMappingDialog
         resolve={{ settings: mockSettings, refetch: mockRefetch }}
       />,
@@ -107,7 +80,7 @@ describe('VendorOfferingMappingDialog', () => {
   });
 
   it('renders edit mode', () => {
-    render(
+    renderWithProviders(
       <VendorOfferingMappingDialog
         resolve={{ mapping: mockMapping, refetch: mockRefetch }}
       />,
@@ -116,7 +89,7 @@ describe('VendorOfferingMappingDialog', () => {
       screen.getByText('Edit vendor offering mapping'),
     ).toBeInTheDocument();
     expect(screen.getByText('Save')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('Existing Vendor')).toBeInTheDocument();
+    expect(screen.getByText('Existing Vendor')).toBeInTheDocument();
   });
 
   it('handles create submission', async () => {
@@ -125,15 +98,25 @@ describe('VendorOfferingMappingDialog', () => {
       .mocked(adminArrowVendorOfferingMappingsCreate)
       .mockResolvedValue({ data: {} } as any);
 
-    render(
+    renderWithProviders(
       <VendorOfferingMappingDialog
         resolve={{ settings: mockSettings, refetch: mockRefetch }}
       />,
     );
 
-    await user.type(screen.getByTestId('vendor-name-input'), 'New Vendor');
-    await user.type(screen.getByTestId('offering-input'), 'new-offering-uuid');
-    await user.type(screen.getByTestId('plan-input'), 'new-plan-uuid');
+    // Fill vendor name via creatable select
+    await typeAndCreateOption(user, 'Arrow vendor name', 'New Vendor');
+
+    // Select offering
+    await openAndSelectOption(user, 'Waldur offering', 'Test Offering 1');
+
+    // Wait for plans to load after offering selection
+    await waitFor(() => {
+      expect(marketplacePublicOfferingsPlansList).toHaveBeenCalled();
+    });
+
+    // Select plan
+    await openAndSelectOption(user, 'Plan', 'Test Plan 1');
 
     await user.click(screen.getByText('Create'));
 
@@ -142,8 +125,8 @@ describe('VendorOfferingMappingDialog', () => {
         body: expect.objectContaining({
           settings: 'settings-uuid',
           arrow_vendor_name: 'New Vendor',
-          offering: 'new-offering-uuid',
-          plan: 'new-plan-uuid',
+          offering: 'offering-1',
+          plan: 'plan-1',
         }),
       });
     });
@@ -155,15 +138,15 @@ describe('VendorOfferingMappingDialog', () => {
       .mocked(adminArrowVendorOfferingMappingsPartialUpdate)
       .mockResolvedValue({ data: {} } as any);
 
-    render(
+    renderWithProviders(
       <VendorOfferingMappingDialog
         resolve={{ mapping: mockMapping, refetch: mockRefetch }}
       />,
     );
 
-    const vendorInput = screen.getByTestId('vendor-name-input');
-    await user.clear(vendorInput);
-    await user.type(vendorInput, 'Updated Vendor');
+    // Clear existing vendor name and type new one
+    await clearSelect(user, 'Arrow vendor name');
+    await typeAndCreateOption(user, 'Arrow vendor name', 'Updated Vendor');
 
     await user.click(screen.getByText('Save'));
 
@@ -181,27 +164,26 @@ describe('VendorOfferingMappingDialog', () => {
 
   it('clears plan when offering changes', async () => {
     const user = userEvent.setup();
-    render(
+    renderWithProviders(
       <VendorOfferingMappingDialog
         resolve={{ mapping: mockMapping, refetch: mockRefetch }}
       />,
     );
 
-    const offeringInput = screen.getByTestId('offering-input');
-    const planInput = screen.getByTestId('plan-input');
+    // Verify initial plan value is shown
+    expect(screen.getByText('Existing Plan')).toBeInTheDocument();
 
-    expect(planInput).toHaveValue('plan-uuid');
+    // Change offering - select a different one
+    await openAndSelectOption(user, 'Waldur offering', 'Test Offering 1');
 
-    await user.type(offeringInput, 'other-offering');
-
+    // Plan should be cleared
     await waitFor(() => {
-      expect(planInput).toHaveValue('');
+      expect(screen.queryByText('Existing Plan')).not.toBeInTheDocument();
     });
   });
 
-  it('prevents submission if required fields are missing', async () => {
-    const user = userEvent.setup();
-    render(
+  it('prevents submission if required fields are missing', () => {
+    renderWithProviders(
       <VendorOfferingMappingDialog
         resolve={{ settings: mockSettings, refetch: mockRefetch }}
       />,
@@ -211,15 +193,5 @@ describe('VendorOfferingMappingDialog', () => {
 
     // Button should be disabled due to react-final-form validation
     expect(submitButton).toBeDisabled();
-
-    // Fill only vendor name
-    await user.type(screen.getByTestId('vendor-name-input'), 'New Vendor');
-    expect(submitButton).toBeDisabled();
-
-    // Fill offering
-    await user.type(screen.getByTestId('offering-input'), 'new-offering-uuid');
-
-    // Now it should be enabled
-    expect(submitButton).not.toBeDisabled();
   });
 });

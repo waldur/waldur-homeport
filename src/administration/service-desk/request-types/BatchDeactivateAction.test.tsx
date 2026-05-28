@@ -1,37 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportRequestTypesAdminDeactivate } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
 
 import { BatchDeactivateAction } from './BatchDeactivateAction';
 
-vi.mock('waldur-js-client');
-const mockShowSuccess = vi.fn();
-const mockShowErrorResponse = vi.fn();
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-    showErrorResponse: mockShowErrorResponse,
-  }),
-}));
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('BatchDeactivateAction', () => {
   const mockRefetch = vi.fn();
-  const mockConfirm = vi.fn();
 
   const rows = [
     { uuid: '1', name: 'Type 1', is_active: false },
@@ -40,14 +20,10 @@ describe('BatchDeactivateAction', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useModal).mockReturnValue({
-      confirm: mockConfirm,
-      closeDialog: vi.fn(),
-    } as any);
   });
 
   it('performs batch deactivation for active rows', async () => {
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(supportRequestTypesAdminDeactivate).mockResolvedValue({} as any);
 
     render(<BatchDeactivateAction rows={rows} refetch={mockRefetch} />, {
@@ -56,7 +32,7 @@ describe('BatchDeactivateAction', () => {
 
     fireEvent.click(screen.getByText('Deactivate'));
 
-    await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+    await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     await waitFor(() => {
       expect(supportRequestTypesAdminDeactivate).toHaveBeenCalledWith(
         expect.objectContaining({ path: { uuid: '2' } }),
@@ -66,7 +42,7 @@ describe('BatchDeactivateAction', () => {
       expect.objectContaining({ path: { uuid: '1' } }),
     );
     await waitFor(() =>
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Request types have been deactivated successfully.',
       ),
     );
@@ -91,7 +67,7 @@ describe('BatchDeactivateAction', () => {
       { uuid: '1', name: 'Type 1', is_active: true },
       { uuid: '2', name: 'Type 2', is_active: true },
     ] as any;
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(supportRequestTypesAdminDeactivate).mockImplementation(
       ({ path }) => {
         if (path.uuid === '1') return Promise.resolve({} as any);
@@ -105,7 +81,7 @@ describe('BatchDeactivateAction', () => {
 
     fireEvent.click(screen.getByText('Deactivate'));
 
-    await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+    await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     await waitFor(() => expect(mockRefetch).toHaveBeenCalled());
   });
 });

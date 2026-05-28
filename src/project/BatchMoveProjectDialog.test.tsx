@@ -1,54 +1,22 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { Field } from 'react-final-form';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { projectsMoveProject } from 'waldur-js-client';
+import { customersList, projectsMoveProject } from 'waldur-js-client';
 
-import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
+import { typeAndSelectOption } from '@/test/select';
 
 import { BatchMoveProjectDialog } from './BatchMoveProjectDialog';
 
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
 vi.mock('@/modal/CloseDialogButton', () => ({
   CloseDialogButton: () => <button>Close</button>,
 }));
 
-vi.mock('@/form/select/AsyncSelectField', () => ({
-  AsyncSelectField: (props) => (
-    <Field
-      name={props.name}
-      render={({ input }) => (
-        <input
-          data-testid="organization-select"
-          onChange={(e) =>
-            input.onChange({ url: e.target.value, name: 'Target Organization' })
-          }
-        />
-      )}
-    />
-  ),
-}));
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('BatchMoveProjectDialog', () => {
   const mockRefetch = vi.fn();
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-  const mockCloseDialog = vi.fn();
-  const mockConfirm = vi.fn();
 
   const rows = [
     { uuid: 'p1', name: 'Project 1' },
@@ -57,13 +25,13 @@ describe('BatchMoveProjectDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      closeDialog: mockCloseDialog,
-      confirm: mockConfirm,
+    vi.mocked(customersList).mockResolvedValue({
+      data: [{ name: 'Target Organization', url: 'org-url' }],
+      response: {
+        headers: {
+          get: (name) => (name === 'x-result-count' ? '1' : null),
+        },
+      },
     } as any);
   });
 
@@ -81,17 +49,21 @@ describe('BatchMoveProjectDialog', () => {
   });
 
   it('performs batch move successfully', async () => {
+    const user = userEvent.setup();
     vi.mocked(projectsMoveProject).mockResolvedValue({} as any);
 
     renderDialog();
 
     // Select organization
-    fireEvent.change(screen.getByTestId('organization-select'), {
-      target: { value: 'org-url' },
-    });
+    await typeAndSelectOption(
+      user,
+      'Move to organization',
+      'Target',
+      'Target Organization',
+    );
 
     // Submit
-    fireEvent.click(screen.getByText('Move'));
+    await user.click(screen.getByRole('button', { name: 'Move' }));
 
     await waitFor(() => {
       expect(projectsMoveProject).toHaveBeenCalledTimes(2);
@@ -103,7 +75,7 @@ describe('BatchMoveProjectDialog', () => {
     });
 
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         '2 project(s) moved to Target Organization.',
       );
     });
@@ -111,6 +83,7 @@ describe('BatchMoveProjectDialog', () => {
   });
 
   it('handles partial success', async () => {
+    const user = userEvent.setup();
     const error = new Error('Move failed');
     vi.mocked(projectsMoveProject)
       .mockResolvedValueOnce({} as any)
@@ -118,19 +91,22 @@ describe('BatchMoveProjectDialog', () => {
 
     renderDialog();
 
-    fireEvent.change(screen.getByTestId('organization-select'), {
-      target: { value: 'org-url' },
-    });
+    await typeAndSelectOption(
+      user,
+      'Move to organization',
+      'Target',
+      'Target Organization',
+    );
 
-    fireEvent.click(screen.getByText('Move'));
+    await user.click(screen.getByRole('button', { name: 'Move' }));
 
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         '1 project(s) moved to Target Organization.',
       );
     });
     await waitFor(() => {
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         error,
         '1 project(s) could not be moved.',
       );
@@ -139,18 +115,22 @@ describe('BatchMoveProjectDialog', () => {
   });
 
   it('respects preserve_permissions flag', async () => {
+    const user = userEvent.setup();
     vi.mocked(projectsMoveProject).mockResolvedValue({} as any);
 
     renderDialog();
 
-    fireEvent.change(screen.getByTestId('organization-select'), {
-      target: { value: 'org-url' },
-    });
+    await typeAndSelectOption(
+      user,
+      'Move to organization',
+      'Target',
+      'Target Organization',
+    );
 
     // Toggle checkbox
-    fireEvent.click(screen.getByLabelText('Preserve project permissions'));
+    await user.click(screen.getByLabelText('Preserve project permissions'));
 
-    fireEvent.click(screen.getByText('Move'));
+    await user.click(screen.getByRole('button', { name: 'Move' }));
 
     await waitFor(() => {
       expect(projectsMoveProject).toHaveBeenCalledWith({

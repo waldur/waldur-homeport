@@ -1,12 +1,6 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  pushStateLocationPlugin,
-  servicesPlugin,
-  UIRouter,
-  UIRouterReact,
-} from '@uirouter/react';
+import { UIRouter } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   callManagingOrganisationsList,
@@ -17,20 +11,11 @@ import {
 
 import { isFeatureVisible } from '@/features/connect';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
-import { getCustomer } from '@/workspace/selectors';
+import { renderWithProviders } from '@/test/harness';
+import { createTestRouter } from '@/test/router';
+import { useCustomer } from '@/workspace/hooks';
 
 import { CallFormDialog } from './CallFormDialog';
-
-vi.mock('waldur-js-client');
-
-vi.mock('react-redux', () => ({
-  useSelector: vi.fn((fn) => fn()),
-  useDispatch: () => vi.fn(),
-}));
-
-vi.mock('@/workspace/selectors', () => ({
-  getCustomer: vi.fn(),
-}));
 
 vi.mock('@/marketplace/utils', () => ({
   isExperimentalUiComponentsVisible: vi.fn(() => false),
@@ -55,18 +40,11 @@ const fakeCustomer = { uuid: 'customer-uuid' };
 const fakeManager = { url: 'manager-url', uuid: 'manager-uuid' };
 
 const renderDialog = (props: any) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  const router = new UIRouterReact();
-  router.plugin(servicesPlugin);
-  router.plugin(pushStateLocationPlugin);
+  const router = createTestRouter();
 
-  render(
+  renderWithProviders(
     <UIRouter router={router}>
-      <QueryClientProvider client={queryClient}>
-        <CallFormDialog {...props} />
-      </QueryClientProvider>
+      <CallFormDialog {...props} />
     </UIRouter>,
   );
 };
@@ -74,7 +52,7 @@ const renderDialog = (props: any) => {
 describe('CallFormDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(getCustomer).mockReturnValue(fakeCustomer as any);
+    vi.mocked(vi.mocked(useCustomer)).mockReturnValue(fakeCustomer as any);
     vi.mocked(callManagingOrganisationsList).mockResolvedValue({
       data: [fakeManager],
     } as any);

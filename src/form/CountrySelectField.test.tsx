@@ -1,37 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { customersCountriesList } from 'waldur-js-client';
 
-import { CountrySelectField } from './CountrySelectField';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client', () => ({
-  customersCountriesList: vi.fn(),
-  formDataBodySerializer: {},
-}));
+import { CountrySelectField } from './CountrySelectField';
 
 const mockCountries = [
   { label: 'Estonia', value: 'EE' },
   { label: 'Germany', value: 'DE' },
   { label: 'United States', value: 'US' },
 ];
-
-const createQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
-const renderWithQuery = (component: React.ReactNode) => {
-  const queryClient = createQueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>{component}</QueryClientProvider>,
-  );
-};
 
 describe('CountrySelectField', () => {
   const createMockInput = (value = '') => ({
@@ -50,7 +30,7 @@ describe('CountrySelectField', () => {
 
   it('renders the component', async () => {
     const mockInput = createMockInput();
-    renderWithQuery(<CountrySelectField input={mockInput as any} />);
+    renderWithProviders(<CountrySelectField input={mockInput as any} />);
 
     await waitFor(() => {
       expect(customersCountriesList).toHaveBeenCalled();
@@ -63,7 +43,7 @@ describe('CountrySelectField', () => {
 
   it('renders with placeholder', async () => {
     const mockInput = createMockInput();
-    renderWithQuery(
+    renderWithProviders(
       <CountrySelectField
         input={mockInput as any}
         placeholder="Select a country"
@@ -79,7 +59,7 @@ describe('CountrySelectField', () => {
 
   it('displays selected country', async () => {
     const mockInput = createMockInput('EE');
-    renderWithQuery(<CountrySelectField input={mockInput as any} />);
+    renderWithProviders(<CountrySelectField input={mockInput as any} />);
 
     await waitFor(() => {
       expect(screen.getByText('Estonia')).toBeInTheDocument();
@@ -89,7 +69,7 @@ describe('CountrySelectField', () => {
   it('calls onChange when country is selected', async () => {
     const user = userEvent.setup();
     const mockInput = createMockInput();
-    renderWithQuery(<CountrySelectField input={mockInput as any} />);
+    renderWithProviders(<CountrySelectField input={mockInput as any} />);
 
     await waitFor(() => {
       expect(customersCountriesList).toHaveBeenCalled();
@@ -111,7 +91,7 @@ describe('CountrySelectField', () => {
   it('clears selection when clearable', async () => {
     const user = userEvent.setup();
     const mockInput = createMockInput('EE');
-    renderWithQuery(
+    renderWithProviders(
       <CountrySelectField input={mockInput as any} isClearable />,
     );
 
@@ -131,7 +111,9 @@ describe('CountrySelectField', () => {
 
   it('respects isDisabled prop', async () => {
     const mockInput = createMockInput();
-    renderWithQuery(<CountrySelectField input={mockInput as any} isDisabled />);
+    renderWithProviders(
+      <CountrySelectField input={mockInput as any} isDisabled />,
+    );
 
     await waitFor(() => {
       expect(customersCountriesList).toHaveBeenCalled();

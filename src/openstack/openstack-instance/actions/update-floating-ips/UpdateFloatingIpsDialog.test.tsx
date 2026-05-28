@@ -1,16 +1,15 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { OpenStackFloatingIp, OpenStackInstance } from 'waldur-js-client';
 import { openstackInstancesUpdateFloatingIps } from 'waldur-js-client';
 
 import { loadFloatingIps } from '@/openstack/api';
+import { renderWithProviders } from '@/test/harness';
 
 import { UpdateFloatingIpsDialog } from './UpdateFloatingIpsDialog';
 
 vi.mock('@/openstack/api');
-vi.mock('waldur-js-client');
 
 const fakeInstance = {
   name: 'backup',
@@ -49,13 +48,8 @@ const fakeFloatingIPs = [
 ] as unknown as OpenStackFloatingIp[];
 
 const renderDialog = (resource = fakeInstance) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <UpdateFloatingIpsDialog resolve={{ resource, refetch: vi.fn() }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <UpdateFloatingIpsDialog resolve={{ resource, refetch: vi.fn() }} />,
   );
 };
 

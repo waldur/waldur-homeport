@@ -15,11 +15,7 @@ interface AffiliatedOrganizationDeleteButtonProps {
 export const AffiliatedOrganizationDeleteButton = (
   props: AffiliatedOrganizationDeleteButtonProps,
 ) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       affiliatedOrganizationsDestroy({ path: { uuid: props.row.uuid } }),
     refetch: props.refetch,

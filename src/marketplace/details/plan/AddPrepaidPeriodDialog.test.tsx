@@ -1,10 +1,11 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DateTime } from 'luxon';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Project } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
+import { renderWithProviders } from '@/test/harness';
 
 import { AddPrepaidPeriodDialog } from './AddPrepaidPeriodDialog';
 import { PrepaidConstraints } from './prepaidConstraints';
@@ -22,39 +23,6 @@ vi.mock('@/form/DateField', () => ({
       onChange={(e) => props.input.onChange(e.target.value)}
     />
   ),
-}));
-
-vi.mock('@/form/select/SelectField', () => ({
-  SelectField: (props) => (
-    <select
-      data-testid="select-field"
-      value={props.input.value}
-      onChange={(e) => props.input.onChange(e.target.value)}
-    >
-      {props.options.map((opt) => (
-        <option key={opt.value} value={opt.value}>
-          {opt.label}
-        </option>
-      ))}
-    </select>
-  ),
-}));
-
-vi.mock('@/modal/ModalDialog', () => ({
-  ModalDialog: ({ children, footer }) => (
-    <div>
-      {children}
-      {footer}
-    </div>
-  ),
-}));
-
-// Mock other simple components
-vi.mock('@/form', () => ({
-  SubmitButton: ({ label }) => <button>{label}</button>,
-}));
-vi.mock('@/modal/CloseDialogButton', () => ({
-  CloseDialogButton: () => <button>Close</button>,
 }));
 
 // Helper to create fixtures
@@ -76,7 +44,7 @@ const renderComponent = (props) => {
   const onSubmit = vi.fn();
   const resolve = vi.fn();
   const { constraints, project, startDate } = props;
-  render(
+  renderWithProviders(
     <AddPrepaidPeriodDialog
       constraints={constraints}
       project={project}
@@ -155,7 +123,8 @@ describe('AddPrepaidPeriodDialog', () => {
     vi.useRealTimers();
   });
 
-  it('caps month options based on project end date', () => {
+  it('caps month options based on project end date', async () => {
+    const user = userEvent.setup();
     const today = '2024-01-15';
     vi.setSystemTime(new Date(today));
 
@@ -164,12 +133,22 @@ describe('AddPrepaidPeriodDialog', () => {
 
     renderComponent({ constraints, project });
 
-    const select = screen.getByTestId('select-field');
-    const options = Array.from(select.querySelectorAll('option'));
-    const monthValues = options.map((opt) => opt.value);
+    // Open the select to see options
+    const combobox = screen.getByRole('combobox');
+    await user.click(combobox);
 
-    // Should include 1, 2 months only (no custom range)
-    expect(monthValues).toEqual(['1', '2']);
+    // Options should be 1, 2 months only
+    expect(screen.getByRole('option', { name: '1 month' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('option', { name: '2 months' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: '3 months' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: 'Custom range' }),
+    ).not.toBeInTheDocument();
+
     vi.useRealTimers();
   });
 });

@@ -52,11 +52,7 @@ const SubDomainDeleteButton = ({
   row: ScienceSubDomain;
   refetch;
 }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => scienceSubDomainsDestroy({ path: { uuid: row.uuid } }),
     refetch: refetch,
 

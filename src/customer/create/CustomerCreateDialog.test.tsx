@@ -4,16 +4,15 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { customersAddUser, customersCreate } from 'waldur-js-client';
 
 import { RoleEnum } from '@/permissions/enums';
+import { router } from '@/router';
+import { useNotify } from '@/store/notify';
 import { getCurrentUser } from '@/user/UsersService';
+import { useUser, useSetUser } from '@/workspace/hooks';
 
 import * as constants from './constants';
 import { CustomerCreateDialog } from './CustomerCreateDialog';
 
-// Mock API calls
-vi.mock('waldur-js-client');
 vi.mock('@/user/UsersService');
-
-// Mock i18n
 
 const mockUser = {
   uuid: 'test-user-uuid',
@@ -21,34 +20,6 @@ const mockUser = {
 };
 
 const mockSetUser = vi.fn();
-const mockShowSuccess = vi.fn();
-const mockShowErrorResponse = vi.fn();
-const mockRouter = {
-  stateService: {
-    go: vi.fn(),
-  },
-};
-
-// Mock hooks
-vi.mock('@uirouter/react', async (importOriginal) => {
-  const mod: any = await importOriginal();
-  return {
-    ...mod,
-    useRouter: () => mockRouter,
-  };
-});
-
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-    showErrorResponse: mockShowErrorResponse,
-  }),
-}));
-
-vi.mock('@/workspace/hooks', () => ({
-  useUser: () => mockUser,
-  useSetUser: () => mockSetUser,
-}));
 
 describe('CustomerCreateDialog', () => {
   const renderComponent = (role = constants.ROLES.customer) => {
@@ -57,6 +28,8 @@ describe('CustomerCreateDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mocked(useUser).mockReturnValue(mockUser as any);
+    vi.mocked(useSetUser).mockReturnValue(mockSetUser);
   });
 
   afterEach(() => {
@@ -148,12 +121,12 @@ describe('CustomerCreateDialog', () => {
 
     // Check for success side-effects
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Organization has been created.',
       );
       expect(getCurrentUser).toHaveBeenCalled();
       expect(mockSetUser).toHaveBeenCalledWith(refreshedUser);
-      expect(mockRouter.stateService.go).toHaveBeenCalledWith(
+      expect(router.stateService.go).toHaveBeenCalledWith(
         'organization-manage',
         {
           uuid: 'new-customer-uuid',
@@ -216,12 +189,12 @@ describe('CustomerCreateDialog', () => {
 
     // Check for success side-effects
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Organization has been created.',
       );
       expect(getCurrentUser).toHaveBeenCalled();
       expect(mockSetUser).toHaveBeenCalledWith(refreshedUser);
-      expect(mockRouter.stateService.go).toHaveBeenCalledWith(
+      expect(router.stateService.go).toHaveBeenCalledWith(
         'organization-manage',
         {
           uuid: 'new-customer-uuid',
@@ -256,12 +229,12 @@ describe('CustomerCreateDialog', () => {
     // Wait for error handling
     await waitFor(() => {
       expect(customersCreate).toHaveBeenCalled();
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         mockError,
         'Could not create organization',
       );
       // Should not navigate on error
-      expect(mockRouter.stateService.go).not.toHaveBeenCalled();
+      expect(router.stateService.go).not.toHaveBeenCalled();
     });
   });
 
@@ -286,12 +259,12 @@ describe('CustomerCreateDialog', () => {
     // Wait for error handling
     await waitFor(() => {
       expect(customersCreate).toHaveBeenCalled();
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         networkError,
         'Could not create organization',
       );
       // Should not navigate on error
-      expect(mockRouter.stateService.go).not.toHaveBeenCalled();
+      expect(router.stateService.go).not.toHaveBeenCalled();
     });
   });
 
@@ -326,12 +299,12 @@ describe('CustomerCreateDialog', () => {
     await waitFor(() => {
       expect(customersCreate).toHaveBeenCalled();
       expect(customersAddUser).toHaveBeenCalled();
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         addUserError,
         'Could not create organization',
       );
       // Should not navigate if user addition fails
-      expect(mockRouter.stateService.go).not.toHaveBeenCalled();
+      expect(router.stateService.go).not.toHaveBeenCalled();
     });
   });
 

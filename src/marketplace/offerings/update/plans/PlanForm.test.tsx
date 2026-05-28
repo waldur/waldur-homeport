@@ -5,17 +5,11 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { PlanForm } from './PlanForm';
 
-// Mock dependencies
-
 vi.mock('./constants', () => ({
   getBillingPeriods: () => [
     { value: 'month', label: 'Monthly' },
     { value: 'year', label: 'Yearly' },
   ],
-}));
-
-vi.mock('../../utils', () => ({
-  articleCodeValidator: vi.fn(),
 }));
 
 const renderComponent = (initialValues = {}) => {

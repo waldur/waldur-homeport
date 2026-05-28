@@ -1,21 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import * as config from '@/core/config';
+import { ENV } from '@/core/config';
 
 import { UsernameGroup, validateUsername } from './UsernameGroup';
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        FREEIPA_USERNAME_PREFIX: '',
-      },
-    },
-  },
-}));
+ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX = '';
 
 const renderComponent = (props = {}) => {
   return render(
@@ -54,13 +46,7 @@ describe('UsernameGroup', () => {
   });
 
   it('shows username prefix when configured', () => {
-    vi.mocked(config).ENV = {
-      plugins: {
-        WALDUR_CORE: {
-          FREEIPA_USERNAME_PREFIX: 'waldur_',
-        },
-      },
-    } as any;
+    ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX = 'waldur_';
 
     renderComponent();
     expect(screen.getByText('waldur_')).toBeInTheDocument();
@@ -93,13 +79,7 @@ describe('UsernameGroup', () => {
 
 describe('validateUsername', () => {
   beforeEach(() => {
-    vi.mocked(config).ENV = {
-      plugins: {
-        WALDUR_CORE: {
-          FREEIPA_USERNAME_PREFIX: '',
-        },
-      },
-    } as any;
+    ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX = '';
   });
 
   it('requires username', () => {
@@ -122,13 +102,7 @@ describe('validateUsername', () => {
   });
 
   it('validates maximum length with prefix', () => {
-    vi.mocked(config).ENV = {
-      plugins: {
-        WALDUR_CORE: {
-          FREEIPA_USERNAME_PREFIX: 'prefix_',
-        },
-      },
-    } as any;
+    ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX = 'prefix_';
 
     const longUsername = 'a'.repeat(30); // 30 + 7 (prefix_) = 37 > 32
     expect(validateUsername(longUsername)).toBe(

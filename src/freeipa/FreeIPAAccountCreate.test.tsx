@@ -1,52 +1,29 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { freeipaProfilesCreate } from 'waldur-js-client';
 
-import * as config from '@/core/config';
+import { ENV } from '@/core/config';
+import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { FreeIPAAccountCreate } from './FreeIPAAccountCreate';
-vi.mock('@/workspace/hooks');
 
-// Mock API calls and dependencies
-vi.mock('waldur-js-client');
-vi.mock('@/core/config');
+ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX = 'test_';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
+vi.mocked(workspaceHooks.useUser).mockReturnValue({
+  username: 'testuser',
+  uuid: 'test-uuid',
+} as any);
 
 describe('FreeIPAAccountCreate', () => {
   const mockOnProfileAdded = vi.fn();
 
   const renderComponent = () => {
-    // Mock Redux store
-    vi.mocked(workspaceHooks.useUser).mockReturnValue({
-      username: 'testuser',
-      uuid: 'test-uuid',
-    } as any);
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <FreeIPAAccountCreate onProfileAdded={mockOnProfileAdded} />
-      </QueryClientProvider>,
+    return renderWithProviders(
+      <FreeIPAAccountCreate onProfileAdded={mockOnProfileAdded} />,
     );
   };
-
-  beforeEach(() => {
-    vi.mocked(config).ENV = {
-      plugins: {
-        WALDUR_CORE: {
-          FREEIPA_USERNAME_PREFIX: 'test_',
-        },
-      },
-    } as any;
-  });
 
   afterEach(() => {
     vi.clearAllMocks();

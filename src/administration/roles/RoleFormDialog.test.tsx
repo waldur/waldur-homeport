@@ -7,14 +7,7 @@ import { RoleFormDialog } from './RoleFormDialog';
 import { getRoles } from './utils';
 
 // Mock dependencies
-vi.mock('waldur-js-client');
 vi.mock('./utils');
-
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showErrorResponse: vi.fn(),
-  }),
-}));
 
 vi.mock('../../permissions/constants', () => ({
   ROLE_TYPES: [

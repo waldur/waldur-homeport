@@ -1,14 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { RequestLimitsChangeAction } from './RequestLimitsChangeAction';
 
-vi.mock('waldur-js-client');
-vi.mock('@/workspace/hooks');
 vi.mock('@/resource/actions/useModalDialogCallback', () => ({
   useModalDialogCallback: () => vi.fn(),
 }));
@@ -17,13 +15,8 @@ vi.mock('@/permissions/hasPermission', () => ({
 }));
 
 const renderAction = (resource) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <RequestLimitsChangeAction resource={resource as any} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <RequestLimitsChangeAction resource={resource as any} />,
   );
 };
 

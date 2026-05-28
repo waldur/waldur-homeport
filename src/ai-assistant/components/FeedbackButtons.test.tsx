@@ -1,36 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { FC, ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import * as sdk from 'waldur-js-client';
+import { chatMessagesFeedback } from 'waldur-js-client';
+
+import { useModal } from '@/modal/actions';
+import { renderWithProviders } from '@/test/harness';
 
 import { FeedbackButtons } from './FeedbackButtons';
-
-vi.mock('waldur-js-client');
-
-const mockOpenDialog = vi.fn();
-vi.mock('@/modal/actions', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    useModal: () => ({
-      openDialog: mockOpenDialog,
-      closeDialog: vi.fn(),
-    }),
-  };
-});
 
 const renderBtns = (
   props: Partial<Parameters<typeof FeedbackButtons>[0]> = {},
 ) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
-  });
-  const wrapper: FC<{ children: ReactNode }> = ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-  return render(
+  return renderWithProviders(
     <FeedbackButtons
       messageUuid="msg-1"
       feedbackScore={null}
@@ -38,14 +19,13 @@ const renderBtns = (
       feedbackCategory={null}
       {...props}
     />,
-    { wrapper },
   );
 };
 
 describe('FeedbackButtons', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(sdk.chatMessagesFeedback).mockResolvedValue({
+    vi.mocked(chatMessagesFeedback).mockResolvedValue({
       data: { feedback_score: true },
       error: undefined,
     } as any);
@@ -64,23 +44,25 @@ describe('FeedbackButtons', () => {
   it('dispatches the dialog with score=true on thumbs-up click', async () => {
     renderBtns();
     await userEvent.click(screen.getByLabelText('Helpful'));
-    expect(mockOpenDialog).toHaveBeenCalled();
-    const resolveArg = mockOpenDialog.mock.calls[0][1]?.resolve as any;
+    expect(useModal().openDialog).toHaveBeenCalled();
+    const resolveArg =
+      vi.mocked(useModal()).openDialog.mock.calls[0][1]?.resolve;
     expect(resolveArg.score).toBe(true);
     expect(resolveArg.currentCategory).toBeNull();
-    expect(sdk.chatMessagesFeedback).not.toHaveBeenCalled();
+    expect(chatMessagesFeedback).not.toHaveBeenCalled();
   });
 
   it('pre-fills category and comment when re-opening the same vote', async () => {
     renderBtns({
       feedbackScore: false,
       feedbackComment: 'wrong info',
-      feedbackCategory: 'inaccurate' as any,
+      feedbackCategory: 'inaccurate',
     });
     // Down is the currently-selected vote; its aria-label uses the selected form.
     const downBtn = screen.getByRole('button', { pressed: true });
     await userEvent.click(downBtn);
-    const resolveArg = mockOpenDialog.mock.calls[0][1]?.resolve as any;
+    const resolveArg =
+      vi.mocked(useModal()).openDialog.mock.calls[0][1]?.resolve;
     expect(resolveArg.score).toBe(false);
     expect(resolveArg.currentCategory).toBe('inaccurate');
     expect(resolveArg.currentComment).toBe('wrong info');
@@ -90,11 +72,12 @@ describe('FeedbackButtons', () => {
     renderBtns({
       feedbackScore: false,
       feedbackComment: 'wrong info',
-      feedbackCategory: 'inaccurate' as any,
+      feedbackCategory: 'inaccurate',
     });
     // Up is unselected when the user previously voted down — exact label match.
     await userEvent.click(screen.getByRole('button', { name: 'Helpful' }));
-    const resolveArg = mockOpenDialog.mock.calls[0][1]?.resolve as any;
+    const resolveArg = vi.mocked(useModal().openDialog).mock.calls[0][1]
+      ?.resolve;
     expect(resolveArg.score).toBe(true);
     expect(resolveArg.currentComment).toBeNull();
     expect(resolveArg.currentCategory).toBeNull();

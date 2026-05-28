@@ -1,22 +1,14 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
-import { FC, ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import * as sdk from 'waldur-js-client';
+import { chatMessagesFeedback, Message } from 'waldur-js-client';
+
+import { createTestWrapper } from '@/test/harness';
 
 import { useMessageFeedbackMutation } from './useMessageFeedbackMutation';
 
-vi.mock('waldur-js-client');
-
 const renderWithProviders = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
-  });
-  const wrapper: FC<{ children: ReactNode }> = ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
   return renderHook(() => useMessageFeedbackMutation('msg-uuid-1'), {
-    wrapper,
+    wrapper: createTestWrapper().wrapper,
   });
 };
 
@@ -26,27 +18,27 @@ describe('useMessageFeedbackMutation', () => {
   });
 
   it('calls chatMessagesFeedback with the correct body for thumbs-up', async () => {
-    vi.mocked(sdk.chatMessagesFeedback).mockResolvedValue({
-      data: { feedback_score: true },
+    vi.mocked(chatMessagesFeedback).mockResolvedValue({
+      data: { feedback_score: true } as Message,
       error: undefined,
-    } as any);
+    });
 
     const { result } = renderWithProviders();
     result.current.submit({ score: true });
 
     await waitFor(() => expect(result.current.isSubmitting).toBe(false));
 
-    expect(sdk.chatMessagesFeedback).toHaveBeenCalledWith({
+    expect(chatMessagesFeedback).toHaveBeenCalledWith({
       path: { uuid: 'msg-uuid-1' },
       body: { score: true },
     });
   });
 
   it('calls chatMessagesFeedback with comment + categories for thumbs-down', async () => {
-    vi.mocked(sdk.chatMessagesFeedback).mockResolvedValue({
-      data: { feedback_score: false },
+    vi.mocked(chatMessagesFeedback).mockResolvedValue({
+      data: { feedback_score: false } as Message,
       error: undefined,
-    } as any);
+    });
 
     const { result } = renderWithProviders();
     result.current.submit({
@@ -57,7 +49,7 @@ describe('useMessageFeedbackMutation', () => {
 
     await waitFor(() => expect(result.current.isSubmitting).toBe(false));
 
-    expect(sdk.chatMessagesFeedback).toHaveBeenCalledWith({
+    expect(chatMessagesFeedback).toHaveBeenCalledWith({
       path: { uuid: 'msg-uuid-1' },
       body: {
         score: false,

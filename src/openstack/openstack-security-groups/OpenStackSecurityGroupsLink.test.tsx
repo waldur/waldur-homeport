@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useModal } from '@/modal/actions';
 
@@ -11,14 +11,6 @@ export const renderLink = (props) => {
 };
 
 describe('OpenStackSecurityGroupsLink', () => {
-  const mockOpenDialog = vi.fn();
-
-  beforeEach(() => {
-    vi.mocked(useModal).mockReturnValue({
-      openDialog: mockOpenDialog,
-    } as any);
-  });
-
   afterEach(() => {
     vi.clearAllMocks();
   });
@@ -52,8 +44,8 @@ describe('OpenStackSecurityGroupsLink', () => {
     const button = screen.getByRole('button');
     await userEvent.click(button);
 
-    expect(mockOpenDialog).toHaveBeenCalledTimes(1);
-    expect(mockOpenDialog).toHaveBeenCalledWith(
+    expect(useModal().openDialog).toHaveBeenCalledTimes(1);
+    expect(useModal().openDialog).toHaveBeenCalledWith(
       expect.anything(), // We can't directly compare the lazy-loaded component
       {
         resolve: { securityGroups: items },

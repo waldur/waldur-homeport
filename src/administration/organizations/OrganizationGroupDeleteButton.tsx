@@ -12,11 +12,7 @@ interface OrganizationGroupDeleteButtonProps {
 export const OrganizationGroupDeleteButton = (
   props: OrganizationGroupDeleteButtonProps,
 ) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       organizationGroupsDestroy({ path: { uuid: props.row.uuid } }),
     refetch: props.refetch,

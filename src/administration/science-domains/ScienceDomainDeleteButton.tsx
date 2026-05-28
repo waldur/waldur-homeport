@@ -12,11 +12,7 @@ interface ScienceDomainDeleteButtonProps {
 export const ScienceDomainDeleteButton = (
   props: ScienceDomainDeleteButtonProps,
 ) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => scienceDomainsDestroy({ path: { uuid: props.row.uuid } }),
     refetch: props.refetch,
 

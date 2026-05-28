@@ -15,7 +15,7 @@ import { required } from '@/core/validators';
 import { FormGroup, SelectField, SubmitButton } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { InputField } from '@/form/InputField';
-import { AsyncSelect as AsyncSelect } from '@/form/select';
+import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';

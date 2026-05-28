@@ -1,45 +1,16 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
-import { ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
 
-import { useModal } from './actions';
 import { useManagedMutation } from './useManagedMutation';
-
-vi.mock('./actions');
-vi.mock('@/store/notify');
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('useManagedMutation', () => {
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-  const mockCloseDialog = vi.fn();
-  const mockConfirm = vi.fn();
-
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      closeDialog: mockCloseDialog,
-      confirm: mockConfirm,
-      openDialog: vi.fn(),
-    } as any);
   });
 
   it('handles basic mutation success', async () => {
@@ -55,7 +26,7 @@ describe('useManagedMutation', () => {
       'test-variables',
       expect.anything(),
     );
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
   it('shows success message and closes dialog on success', async () => {
@@ -69,8 +40,8 @@ describe('useManagedMutation', () => {
     result.current.mutate(undefined);
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(mockShowSuccess).toHaveBeenCalledWith(successMessage);
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useNotify().showSuccess).toHaveBeenCalledWith(successMessage);
+    expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
   it('does not close dialog when closeModal is false', async () => {
@@ -83,7 +54,7 @@ describe('useManagedMutation', () => {
     result.current.mutate(undefined);
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
-    expect(mockCloseDialog).not.toHaveBeenCalled();
+    expect(useModal().closeDialog).not.toHaveBeenCalled();
   });
 
   it('shows error message on failure', async () => {
@@ -98,8 +69,11 @@ describe('useManagedMutation', () => {
     result.current.mutate(undefined);
 
     await waitFor(() => expect(result.current.isError).toBe(true));
-    expect(mockShowErrorResponse).toHaveBeenCalledWith(error, errorMessage);
-    expect(mockCloseDialog).not.toHaveBeenCalled();
+    expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
+      error,
+      errorMessage,
+    );
+    expect(useModal().closeDialog).not.toHaveBeenCalled();
   });
 
   it('calls refetch on success', async () => {
@@ -156,8 +130,8 @@ describe('useManagedMutation', () => {
       undefined,
       expect.anything(),
     );
-    expect(mockShowSuccess).toHaveBeenCalled();
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useNotify().showSuccess).toHaveBeenCalled();
+    expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
   it('calls onError callback after default actions', async () => {
@@ -178,39 +152,24 @@ describe('useManagedMutation', () => {
       undefined,
       expect.anything(),
     );
-    expect(mockShowErrorResponse).toHaveBeenCalled();
+    expect(useNotify().showErrorResponse).toHaveBeenCalled();
   });
 
   it('invalidates queries on success', async () => {
     const mutationFn = vi.fn().mockResolvedValue('success');
     const invalidateQueries = [{ queryKey: ['test-query'] }];
-    const wrapper = createWrapper();
-    // @ts-ignore
-    const queryClient = (wrapper({ children: null }) as any).props
-      .client as QueryClient;
+
+    const { wrapper, queryClient } = createTestWrapper();
     const invalidateSpy = vi.spyOn(queryClient, 'invalidateQueries');
 
-    renderHook(() => useManagedMutation({ mutationFn, invalidateQueries }), {
-      wrapper: () => (
-        <QueryClientProvider client={queryClient}>{null}</QueryClientProvider>
-      ),
-    });
-
-    // Manual hook rendering because createWrapper returns a component, not the client
-    const { result: hookResult } = renderHook(
+    const { result } = renderHook(
       () => useManagedMutation({ mutationFn, invalidateQueries }),
-      {
-        wrapper: ({ children }) => (
-          <QueryClientProvider client={queryClient}>
-            {children}
-          </QueryClientProvider>
-        ),
-      },
+      { wrapper },
     );
 
-    hookResult.current.mutate(undefined);
+    result.current.mutate(undefined);
 
-    await waitFor(() => expect(hookResult.current.isSuccess).toBe(true));
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(invalidateSpy).toHaveBeenCalledWith(invalidateQueries[0]);
   });
 
@@ -220,21 +179,13 @@ describe('useManagedMutation', () => {
       { queryKey: ['query-1'] },
       { queryKey: ['query-2'], exact: true },
     ];
-    const wrapper = createWrapper();
-    // @ts-ignore
-    const queryClient = (wrapper({ children: null }) as any).props
-      .client as QueryClient;
+
+    const { wrapper, queryClient } = createTestWrapper();
     const invalidateSpy = vi.spyOn(queryClient, 'invalidateQueries');
 
     const { result } = renderHook(
       () => useManagedMutation({ mutationFn, invalidateQueries }),
-      {
-        wrapper: ({ children }) => (
-          <QueryClientProvider client={queryClient}>
-            {children}
-          </QueryClientProvider>
-        ),
-      },
+      { wrapper },
     );
 
     result.current.mutate(undefined);
@@ -253,7 +204,7 @@ describe('useManagedMutation', () => {
 
     it('executes mutation when confirmed', async () => {
       const mutationFn = vi.fn().mockResolvedValue('success');
-      mockConfirm.mockResolvedValue('confirmed-data');
+      vi.mocked(useModal().confirm).mockResolvedValueOnce('confirmed-data');
       const { result } = renderHook(
         () => useManagedMutation({ mutationFn, confirmation }),
         { wrapper: createWrapper() },
@@ -261,7 +212,7 @@ describe('useManagedMutation', () => {
 
       result.current.mutate('original-variables');
 
-      await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+      await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
       await waitFor(() => expect(result.current.isSuccess).toBe(true));
 
       // When confirmation returns data, it's used as variables
@@ -273,7 +224,7 @@ describe('useManagedMutation', () => {
 
     it('does not execute mutation when cancelled', async () => {
       const mutationFn = vi.fn().mockResolvedValue('success');
-      mockConfirm.mockRejectedValue('cancelled');
+      vi.mocked(useModal().confirm).mockRejectedValueOnce('cancelled');
       const { result } = renderHook(
         () => useManagedMutation({ mutationFn, confirmation }),
         { wrapper: createWrapper() },
@@ -281,7 +232,7 @@ describe('useManagedMutation', () => {
 
       result.current.mutate('test');
 
-      await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+      await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
       expect(mutationFn).not.toHaveBeenCalled();
       expect(result.current.isIdle).toBe(true);
     });
@@ -289,7 +240,7 @@ describe('useManagedMutation', () => {
     it('passes confirmation options to confirm function', async () => {
       const mutationFn = vi.fn().mockResolvedValue('success');
       const options = { forDeletion: true, positiveButton: 'Destroy' };
-      mockConfirm.mockResolvedValue(undefined);
+      vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
       const { result } = renderHook(
         () =>
           useManagedMutation({
@@ -302,7 +253,7 @@ describe('useManagedMutation', () => {
       result.current.mutate('vars');
 
       await waitFor(() =>
-        expect(mockConfirm).toHaveBeenCalledWith('T', 'B', options),
+        expect(useModal().confirm).toHaveBeenCalledWith('T', 'B', options),
       );
     });
   });
@@ -318,12 +269,12 @@ describe('useManagedMutation', () => {
 
       expect(data).toBe('async-success');
       expect(mutationFn).toHaveBeenCalledWith('async-test', expect.anything());
-      expect(mockCloseDialog).toHaveBeenCalled();
+      expect(useModal().closeDialog).toHaveBeenCalled();
     });
 
     it('handles confirmation in mutateAsync', async () => {
       const mutationFn = vi.fn().mockResolvedValue('async-confirm-success');
-      mockConfirm.mockResolvedValue(undefined); // Confirmed but no extra data
+      vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined); // Confirmed but no extra data
       const { result } = renderHook(
         () =>
           useManagedMutation({
@@ -335,14 +286,14 @@ describe('useManagedMutation', () => {
 
       const data = await result.current.mutateAsync('async-vars');
 
-      expect(mockConfirm).toHaveBeenCalled();
+      expect(useModal().confirm).toHaveBeenCalled();
       expect(data).toBe('async-confirm-success');
       expect(mutationFn).toHaveBeenCalledWith('async-vars', expect.anything());
     });
 
     it('returns undefined when confirmation is cancelled in mutateAsync', async () => {
       const mutationFn = vi.fn().mockResolvedValue('success');
-      mockConfirm.mockRejectedValue('cancelled');
+      vi.mocked(useModal().confirm).mockRejectedValueOnce('cancelled');
       const { result } = renderHook(
         () =>
           useManagedMutation({

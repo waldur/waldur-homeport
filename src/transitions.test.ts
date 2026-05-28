@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-// Mock dependencies
 const mockIsAuthenticated = vi.fn();
 const mockIsCurrentUserValid = vi.fn();
 const mockGroupInvitationTokenSet = vi.fn();
@@ -48,14 +47,6 @@ vi.mock('./FeaturesEnums', () => ({
   MarketplaceFeatures: {},
 }));
 
-vi.mock('./i18n', () => ({
-  translate: (s) => s,
-}));
-
-vi.mock('./modal/actions', () => ({
-  closeModalDialog: vi.fn(),
-}));
-
 vi.mock('./router', () => ({
   router: {
     transitionService: {
@@ -74,10 +65,6 @@ vi.mock('./router', () => ({
     },
     urlService: { path: vi.fn(() => '/') },
   },
-}));
-
-vi.mock('./store/notify', () => ({
-  showRedirectMessage: vi.fn(),
 }));
 
 vi.mock('./user/UsersService', () => ({

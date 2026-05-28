@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -9,23 +8,18 @@ import {
   marketplaceProjectEstimatedCostPoliciesCreate,
 } from 'waldur-js-client';
 
-import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ENV } from '@/core/config';
+import {
+  organizationAutocomplete,
+  projectAutocomplete,
+} from '@/marketplace/common/autocompletes';
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption, typeAndSelectOption } from '@/test/select';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { CostPolicyFormDialog } from './CostPolicyFormDialog';
-vi.mock('@/workspace/hooks');
 
-vi.mock('waldur-js-client');
-vi.mock('@/modal/useManagedMutation');
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        CURRENCY_NAME: 'EUR',
-      },
-    },
-  },
-}));
+ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
 
 vi.mock('@/marketplace/common/autocompletes', () => ({
   projectAutocomplete: vi.fn(),
@@ -36,91 +30,11 @@ vi.mock('@/project/ProjectCostField', () => ({
   ProjectCostField: () => '100 EUR',
 }));
 
-// Mock fields to simplify testing
-vi.mock('@/form/select/AsyncSelect', () => ({
-  AsyncSelect: ({ input, isMulti, name }: any) => (
-    <input
-      id={input?.name || name}
-      data-testid={input?.name || name}
-      value={
-        isMulti
-          ? input?.value?.[0]?.url || ''
-          : input?.value?.url || input?.value || ''
-      }
-      onChange={(e) => {
-        const val = e.target.value;
-        if (input) {
-          if (isMulti) {
-            input.onChange(
-              val
-                ? [
-                    {
-                      name: val,
-                      uuid: val,
-                      url: val,
-                      billing_price_estimate: {},
-                    },
-                  ]
-                : [],
-            );
-          } else {
-            input.onChange(val);
-          }
-        }
-      }}
-    />
-  ),
-}));
-
-vi.mock('@/form/select/SelectField', () => ({
-  SelectField: ({ input, options, simpleValue }: any) => (
-    <select
-      id={input.name}
-      data-testid={input.name}
-      value={input.value?.value || input.value || ''}
-      onChange={(e) => {
-        const option = options.find((o) => String(o.value) === e.target.value);
-        if (simpleValue) {
-          input.onChange(option ? option.value : e.target.value);
-        } else {
-          input.onChange(option || e.target.value);
-        }
-      }}
-    >
-      <option value="">Select...</option>
-      {options.map((o) => (
-        <option key={o.value} value={o.value}>
-          {o.label}
-        </option>
-      ))}
-    </select>
-  ),
-}));
-
-vi.mock('@/form/NumberField', () => ({
-  NumberField: ({ input }: any) => (
-    <input id={input.name} data-testid={input.name} type="number" {...input} />
-  ),
-}));
-
-vi.mock('@/form/StringField', () => ({
-  StringField: ({ input }: any) => (
-    <input id={input.name} data-testid={input.name} {...input} />
-  ),
-}));
-
 const renderDialog = (props: any) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
   vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
     uuid: 'customer-uuid',
   } as any);
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <CostPolicyFormDialog {...props} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<CostPolicyFormDialog {...props} />);
 };
 
 describe('CostPolicyFormDialog', () => {
@@ -129,20 +43,42 @@ describe('CostPolicyFormDialog', () => {
   });
 
   beforeEach(() => {
+    ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
     vi.clearAllMocks();
-    vi.mocked(useManagedMutation).mockImplementation(
-      (options: any) =>
-        ({
-          mutateAsync: vi.fn((values) => options.mutationFn(values)),
-          isPending: false,
-        }) as any,
-    );
     vi.mocked(invoiceItemsProjectCostsForPeriodRetrieve).mockResolvedValue({
       data: {},
     } as any);
     vi.mocked(invoiceItemsCustomerCostsForPeriodRetrieve).mockResolvedValue({
       data: {},
     } as any);
+    vi.mocked(projectAutocomplete).mockReturnValue(() =>
+      Promise.resolve({
+        options: [
+          {
+            name: 'Project 1',
+            uuid: 'project-uuid',
+            url: 'project-url',
+            billing_price_estimate: {},
+          },
+        ],
+        hasMore: false,
+        additional: { page: 1 },
+      }),
+    );
+    vi.mocked(organizationAutocomplete).mockReturnValue(() =>
+      Promise.resolve({
+        options: [
+          {
+            name: 'Org 1',
+            uuid: 'org-uuid',
+            url: 'org-url',
+            billing_price_estimate: {},
+          },
+        ],
+        hasMore: false,
+        additional: { page: 1 },
+      }),
+    );
   });
 
   it('submits create project policy correctly', async () => {
@@ -159,15 +95,17 @@ describe('CostPolicyFormDialog', () => {
       },
     });
 
-    await user.type(screen.getByTestId('scope'), 'project-url');
-    await user.selectOptions(screen.getByTestId('period'), '2'); // 1 month
+    await typeAndSelectOption(
+      user,
+      /Select project\(s\)/i,
+      'Project 1',
+      'Project 1 / est. 100 EUR this month',
+    );
+    await openAndSelectOption(user, 'Period', '1 month');
     const limitInput = screen.getByLabelText(/When estimated cost reaches/i);
     await user.clear(limitInput);
     await user.type(limitInput, '500');
-    await user.selectOptions(
-      screen.getByTestId('actions'),
-      'notify_organization_owners',
-    );
+    await openAndSelectOption(user, 'Then', 'Notify organization owners');
 
     await user.click(screen.getByRole('button', { name: /Create/i }));
 
@@ -193,7 +131,7 @@ describe('CostPolicyFormDialog', () => {
       },
     });
     expect(screen.getByText('New policy')).toBeInTheDocument();
-    expect(screen.getByLabelText(/Select project\(s\)/i)).toBeInTheDocument();
+    expect(screen.getByText(/Select project\(s\)/i)).toBeInTheDocument();
   });
 
   it('renders edit organization policy dialog correctly', async () => {
@@ -273,10 +211,7 @@ describe('CostPolicyFormDialog', () => {
     });
 
     // Select "Notify external user" to show the email field
-    await user.selectOptions(
-      screen.getByTestId('actions'),
-      'notify_external_user',
-    );
+    await openAndSelectOption(user, 'Then', 'Notify external user');
 
     await waitFor(() => {
       expect(
@@ -288,10 +223,7 @@ describe('CostPolicyFormDialog', () => {
     await user.type(emailField, 'test@example.com');
 
     // Change action to "Notify organization owners"
-    await user.selectOptions(
-      screen.getByTestId('actions'),
-      'notify_organization_owners',
-    );
+    await openAndSelectOption(user, 'Then', 'Notify organization owners');
 
     // The email field should be hidden
     await waitFor(() => {

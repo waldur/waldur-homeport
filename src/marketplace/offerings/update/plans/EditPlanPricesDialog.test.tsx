@@ -1,17 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
+import { vi, describe, it, expect } from 'vitest';
 import { marketplacePlansUpdatePrices } from 'waldur-js-client';
 
-import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { EditPlanPricesDialog } from './EditPlanPricesDialog';
-
-vi.mock('@/store/notify');
-vi.mock('waldur-js-client', () => ({
-  marketplacePlansUpdatePrices: vi.fn(),
-  formDataBodySerializer: vi.fn(),
-}));
 
 const mockPlan = {
   uuid: 'plan-1',
@@ -32,36 +25,20 @@ const mockOffering = {
 };
 
 const renderComponent = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <EditPlanPricesDialog
-        resolve={
-          {
-            plan: mockPlan,
-            offering: mockOffering,
-            refetch: vi.fn(),
-          } as any
-        }
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <EditPlanPricesDialog
+      resolve={
+        {
+          plan: mockPlan,
+          offering: mockOffering,
+          refetch: vi.fn(),
+        } as any
+      }
+    />,
   );
 };
 
 describe('EditPlanPricesDialog', () => {
-  beforeEach(() => {
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: vi.fn(),
-      showErrorResponse: vi.fn(),
-    } as any);
-  });
-
   it('should successfully update prices', async () => {
     const mockPlansUpdatePrices = vi.mocked(marketplacePlansUpdatePrices);
 

@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -10,9 +9,10 @@ import {
   openstackVolumeTypesList,
 } from 'waldur-js-client';
 
-import { MigrateTenantDialog } from './MigrateTenantDialog';
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption, typeAndSelectOption } from '@/test/select';
 
-vi.mock('waldur-js-client');
+import { MigrateTenantDialog } from './MigrateTenantDialog';
 
 const fakeResource = {
   uuid: 'resource-uuid',
@@ -30,15 +30,10 @@ const fakeOffering = {
 };
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <MigrateTenantDialog
-        resolve={{ resource: fakeResource, refetch: vi.fn() }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <MigrateTenantDialog
+      resolve={{ resource: fakeResource, refetch: vi.fn() }}
+    />,
   );
 };
 
@@ -83,14 +78,12 @@ describe('MigrateTenantDialog', () => {
     renderDialog();
 
     // Search and select offering
-    const offeringSelect = screen
-      .getByText('Select...')
-      .closest('.metronic-select-container')
-      .querySelector('input');
-    await user.click(offeringSelect);
-    await user.type(offeringSelect, 'Target');
-    const option = await screen.findByText(/Target Offering | Target Customer/);
-    await user.click(option);
+    await typeAndSelectOption(
+      user,
+      'Offering',
+      'Target',
+      /Target Offering | Target Customer/,
+    );
 
     // Check dependent fields
     expect(await screen.findByText('Plan')).toBeInTheDocument();
@@ -118,13 +111,11 @@ describe('MigrateTenantDialog', () => {
     renderDialog();
 
     // Select offering
-    const offeringSelect = screen
-      .getByText('Select...')
-      .closest('.metronic-select-container')
-      .querySelector('input');
-    await user.click(offeringSelect);
-    const option = await screen.findByText(/Target Offering | Target Customer/);
-    await user.click(option);
+    await openAndSelectOption(
+      user,
+      'Offering',
+      /Target Offering | Target Customer/,
+    );
 
     // Wait for plan to be auto-selected and rendered
     await screen.findByText('Plan');

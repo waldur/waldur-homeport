@@ -3,25 +3,19 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import * as api from '@/core/api';
-import * as store from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { FileDownloader } from './FileDownloader';
 
 vi.mock('@/core/api');
-vi.mock('@/store/notify');
 
 describe('FileDownloader', () => {
   const mockUrl = 'http://example.com/file';
   const mockName = 'test.pdf';
   const mockBlob = new Blob(['test content'], { type: 'application/pdf' });
-  const mockShowError = vi.fn();
 
   beforeEach(() => {
     vi.clearAllMocks();
-    // Mock store hooks
-    vi.mocked(store.useNotify).mockReturnValue({
-      showErrorResponse: mockShowError,
-    } as any);
   });
 
   it('renders download button with icon', () => {
@@ -48,6 +42,9 @@ describe('FileDownloader', () => {
 
     await userEvent.click(screen.getByRole('button'));
 
-    expect(mockShowError).toHaveBeenCalledWith(error, 'File download failed');
+    expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
+      error,
+      'File download failed',
+    );
   });
 });

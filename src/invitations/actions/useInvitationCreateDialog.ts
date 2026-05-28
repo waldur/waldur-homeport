@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { userInvitationsCreate } from 'waldur-js-client';
-import { userInvitationsCheckDuplicates } from 'waldur-js-client/sdk.gen';
+import { userInvitationsCheckDuplicates } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';

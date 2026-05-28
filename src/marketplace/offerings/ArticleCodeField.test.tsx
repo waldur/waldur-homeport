@@ -1,20 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { ArticleCodeField } from './ArticleCodeField';
-
-// Mock dependencies
-
-vi.mock('./utils', () => ({
-  articleCodeValidator: vi.fn((value) => {
-    if (value && value.length > 10) {
-      return 'Article code is too long';
-    }
-    return undefined;
-  }),
-}));
 
 const renderComponent = (initialValues = {}) => {
   return render(
@@ -63,13 +52,13 @@ describe('ArticleCodeField', () => {
     const user = userEvent.setup();
 
     const input = screen.getByRole('textbox');
-    // Type a long article code to trigger validation error
-    await user.type(input, 'VERY_LONG_ARTICLE_CODE');
+    // Type a short article code to trigger validation error
+    await user.type(input, 'A');
 
     // Blur the field to trigger validation
     await user.tab();
 
-    expect(screen.getByText('Article code is too long')).toBeInTheDocument();
+    expect(screen.getByText('Code is too short.')).toBeInTheDocument();
   });
 
   it('does not show error for valid article code', async () => {
@@ -82,9 +71,7 @@ describe('ArticleCodeField', () => {
     // Blur the field to trigger validation
     await user.tab();
 
-    expect(
-      screen.queryByText('Article code is too long'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Code is too short.')).not.toBeInTheDocument();
   });
 
   it('shows question mark icon for description tooltip', () => {
@@ -112,8 +99,6 @@ describe('ArticleCodeField', () => {
     await user.tab();
 
     // Should not show validation error for empty value (field is optional)
-    expect(
-      screen.queryByText('Article code is too long'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Code is too short.')).not.toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -8,14 +8,6 @@ import {
   ProviderUserDetailsDialog,
   SP_USER_FIELDS,
 } from './ProviderUserDetailsDialog';
-
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: { WALDUR_CORE: {} },
-    roles: [],
-    FEATURES: {},
-  },
-}));
 
 const renderDialog = (user: Record<string, unknown>) =>
   render(<ProviderUserDetailsDialog resolve={{ user: user as any }} />);

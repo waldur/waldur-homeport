@@ -1,35 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { usersPartialUpdate } from 'waldur-js-client';
-import { User } from 'waldur-js-client';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { User, usersPartialUpdate } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { UserTokenLifetime } from './UserTokenLifetime';
-
-vi.mock('@/store/notify');
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-    confirm: vi.fn().mockResolvedValue(true),
-  }),
-}));
-
-vi.mock('waldur-js-client');
-
-const renderWithQueryClient = (ui: React.ReactElement) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
-  );
-};
 
 describe('UserTokenLifetime component', () => {
   const mockUser: User = {
@@ -38,25 +15,12 @@ describe('UserTokenLifetime component', () => {
     token: 'test-token',
   } as any;
 
-  let showErrorResponseMock;
-  let showSuccessMock;
-
-  beforeEach(() => {
-    showErrorResponseMock = vi.fn();
-    showSuccessMock = vi.fn();
-
-    vi.mocked(useNotify).mockReturnValue({
-      showErrorResponse: showErrorResponseMock,
-      showSuccess: showSuccessMock,
-    } as any);
-  });
-
   afterEach(() => {
     vi.clearAllMocks();
   });
 
   it('renders the component with initial values', () => {
-    renderWithQueryClient(<UserTokenLifetime user={mockUser} />);
+    renderWithProviders(<UserTokenLifetime user={mockUser} />);
 
     // Check if the token is displayed as masked
     expect(screen.getByText('••••••••••••')).toBeInTheDocument();
@@ -66,7 +30,7 @@ describe('UserTokenLifetime component', () => {
   });
 
   it('shows warning when "token will not timeout" option is selected', async () => {
-    renderWithQueryClient(<UserTokenLifetime user={mockUser} />);
+    renderWithProviders(<UserTokenLifetime user={mockUser} />);
 
     // Open the select and choose the "no timeout" option
     await userEvent.click(screen.getByRole('combobox'));
@@ -81,7 +45,7 @@ describe('UserTokenLifetime component', () => {
   it('calls updateUser API on form submit with the correct payload', async () => {
     vi.mocked(usersPartialUpdate).mockResolvedValueOnce(null);
 
-    renderWithQueryClient(<UserTokenLifetime user={mockUser} />);
+    renderWithProviders(<UserTokenLifetime user={mockUser} />);
 
     // Trigger the submit
     await userEvent.click(
@@ -95,20 +59,22 @@ describe('UserTokenLifetime component', () => {
           token_lifetime: 3600,
         },
       });
-      expect(showSuccessMock).toHaveBeenCalledWith('User has been updated');
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
+        'User has been updated',
+      );
     });
   });
 
   it('shows error message when API call fails', async () => {
     vi.mocked(usersPartialUpdate).mockRejectedValue(new Error('API error'));
 
-    renderWithQueryClient(<UserTokenLifetime user={mockUser} />);
+    renderWithProviders(<UserTokenLifetime user={mockUser} />);
     await userEvent.click(
       screen.getByRole('button', { name: /Save changes/i }),
     );
 
     await waitFor(() => {
-      expect(showErrorResponseMock).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         expect.any(Error),
         'User could not be updated',
       );

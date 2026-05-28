@@ -1,12 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { supportCommentsList } from 'waldur-js-client';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { IssueCommentsContainer } from './IssueCommentsContainer';
 
 // Mock the API client
-vi.mock('waldur-js-client');
 
 // Mock the child components
 vi.mock('./IssueCommentButton', () => ({
@@ -37,15 +37,6 @@ vi.mock('@/core/LoadingSpinner', () => ({
   LoadingSpinner: () => <div data-testid="loading-spinner">Loading...</div>,
 }));
 
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
 const mockIssue = {
   uuid: 'issue-123',
   url: 'https://api.example.com/issues/issue-123/',
@@ -68,12 +59,7 @@ const mockComments = [
 ];
 
 const renderComponent = (issue = mockIssue) => {
-  const queryClient = createTestQueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <IssueCommentsContainer issue={issue as any} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<IssueCommentsContainer issue={issue as any} />);
 };
 
 describe('IssueCommentsContainer', () => {

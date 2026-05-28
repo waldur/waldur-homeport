@@ -1,28 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { OpenStackLoadBalancer } from 'waldur-js-client';
 
 import { loadSecurityGroups } from '@/openstack/api';
+import { renderWithProviders } from '@/test/harness';
 
 import { SetSecurityGroupsDialog } from './SetSecurityGroupsDialog';
-
-vi.mock('@/form/MonacoField', () => ({
-  MonacoField: () => <div>MonacoField</div>,
-}));
 
 // Mock dependencies
 
 vi.mock('@/openstack/api', () => ({
   loadSecurityGroups: vi.fn(),
-}));
-
-const mockMutateAsync = vi.fn();
-vi.mock('@/modal/useManagedMutation', () => ({
-  useManagedMutation: () => ({
-    mutateAsync: mockMutateAsync,
-  }),
 }));
 
 vi.mock('@/form/FormGroup', () => ({
@@ -61,17 +50,10 @@ describe('SetSecurityGroupsDialog', () => {
   });
 
   it('renders correctly and loads options', async () => {
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: { retry: false },
-      },
-    });
-    render(
-      <QueryClientProvider client={queryClient}>
-        <SetSecurityGroupsDialog
-          resolve={{ resource: mockResource, refetch: vi.fn() }}
-        />
-      </QueryClientProvider>,
+    renderWithProviders(
+      <SetSecurityGroupsDialog
+        resolve={{ resource: mockResource, refetch: vi.fn() }}
+      />,
     );
 
     expect(

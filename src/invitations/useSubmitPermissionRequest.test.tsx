@@ -1,54 +1,15 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, act } from '@testing-library/react';
-import React from 'react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+/* eslint-disable import/order */
+import { act, renderHook } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  userGroupInvitationsRetrieve,
+  userGroupInvitationsSubmitRequest,
+} from 'waldur-js-client';
+import { GroupInvitationTokenStorage } from '@/core/StorageManager';
+import { useModal } from '@/modal/actions';
+import { router } from '@/router';
 
-const mockUserGroupInvitationsSubmitRequest = vi.fn();
-const mockUserGroupInvitationsRetrieve = vi.fn();
-const mockOpenDialog = vi.fn();
-const mockConfirm = vi.fn();
-const mockShowSuccess = vi.fn();
-const mockRouterGo = vi.fn();
 const mockRefreshCurrentUser = vi.fn();
-
-vi.mock('waldur-js-client', () => ({
-  userGroupInvitationsSubmitRequest: (...args) =>
-    mockUserGroupInvitationsSubmitRequest(...args),
-  userGroupInvitationsRetrieve: (...args) =>
-    mockUserGroupInvitationsRetrieve(...args),
-}));
-
-vi.mock('@uirouter/react', () => ({
-  useRouter: () => ({
-    stateService: { go: mockRouterGo },
-  }),
-}));
-
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    openDialog: mockOpenDialog,
-    confirm: mockConfirm,
-  }),
-}));
-
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-    showError: vi.fn(),
-  }),
-}));
-
-vi.mock('react-redux', () => ({
-  useSelector: () => ({
-    username: 'testuser',
-    email: 'test@example.com',
-    full_name: 'Test User',
-  }),
-}));
-
-vi.mock('@/workspace/selectors', () => ({
-  getUser: vi.fn(),
-}));
 
 vi.mock('@/core/StorageManager', () => ({
   GroupInvitationTokenStorage: {
@@ -77,24 +38,13 @@ vi.mock('./join-organization/ProjectDetailsDialog', () => ({
 }));
 
 // Must import AFTER vi.mock calls
-import { GroupInvitationTokenStorage } from '@/core/StorageManager';
+import { createTestWrapper } from '@/test/harness';
 
 import { useSubmitPermissionRequest } from './useSubmitPermissionRequest';
 
-function createWrapper() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      mutations: { retry: false },
-      queries: { retry: false },
-    },
-  });
-  return ({ children }: { children: React.ReactNode }) =>
-    React.createElement(QueryClientProvider, { client: queryClient }, children);
-}
-
 function setupHook(token = 'test-token') {
   return renderHook(() => useSubmitPermissionRequest(token), {
-    wrapper: createWrapper(),
+    wrapper: createTestWrapper().wrapper,
   });
 }
 
@@ -118,7 +68,7 @@ describe('useSubmitPermissionRequest', () => {
       result.current.submit();
     });
 
-    expect(mockOpenDialog).toHaveBeenCalledWith(
+    expect(vi.mocked(useModal().openDialog)).toHaveBeenCalledWith(
       'GroupInvitationConfirmDialog',
       expect.objectContaining({
         resolve: expect.objectContaining({
@@ -139,7 +89,7 @@ describe('useSubmitPermissionRequest', () => {
     });
 
     // Extract onCancel from the dialog call
-    const dialogCall = mockOpenDialog.mock.calls[0];
+    const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
     const onCancel = dialogCall[1].resolve.onCancel;
 
     act(() => {
@@ -147,16 +97,16 @@ describe('useSubmitPermissionRequest', () => {
     });
 
     expect(GroupInvitationTokenStorage.remove).toHaveBeenCalled();
-    expect(mockRouterGo).toHaveBeenCalledWith('profile.details');
+    expect(router.stateService.go).toHaveBeenCalledWith('profile.details');
   });
 
   it('should call mutation on confirm and show success for auto-approved', async () => {
-    mockUserGroupInvitationsRetrieve.mockResolvedValue({
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
       data: { allow_custom_project_details: false },
-    });
-    mockUserGroupInvitationsSubmitRequest.mockResolvedValue({
+    } as any);
+    vi.mocked(userGroupInvitationsSubmitRequest).mockResolvedValue({
       data: { auto_approved: true, scope_name: 'Test Org' },
-    });
+    } as any);
     mockRefreshCurrentUser.mockResolvedValue(undefined);
 
     const { result } = setupHook();
@@ -166,7 +116,7 @@ describe('useSubmitPermissionRequest', () => {
     });
 
     // Extract onConfirm
-    const dialogCall = mockOpenDialog.mock.calls[0];
+    const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
     const onConfirm = dialogCall[1].resolve.onConfirm;
 
     await act(async () => {
@@ -176,7 +126,7 @@ describe('useSubmitPermissionRequest', () => {
     // Wait for mutation to complete
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    expect(mockUserGroupInvitationsSubmitRequest).toHaveBeenCalledWith(
+    expect(vi.mocked(userGroupInvitationsSubmitRequest)).toHaveBeenCalledWith(
       expect.objectContaining({
         path: { uuid: 'test-token' },
         body: {},
@@ -185,13 +135,13 @@ describe('useSubmitPermissionRequest', () => {
   });
 
   it('should show duplicate error dialog for conflict errors', async () => {
-    mockUserGroupInvitationsRetrieve.mockResolvedValue({
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
       data: { allow_custom_project_details: false },
-    });
-    mockUserGroupInvitationsSubmitRequest.mockRejectedValue({
+    } as any);
+    vi.mocked(userGroupInvitationsSubmitRequest).mockRejectedValue({
       message: 'User already has this role in the scope.',
-    });
-    mockConfirm.mockResolvedValue(undefined);
+    } as any);
+    vi.mocked(useModal().confirm).mockResolvedValue(undefined);
 
     const { result } = setupHook();
 
@@ -199,7 +149,7 @@ describe('useSubmitPermissionRequest', () => {
       result.current.submit();
     });
 
-    const dialogCall = mockOpenDialog.mock.calls[0];
+    const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
     const onConfirm = dialogCall[1].resolve.onConfirm;
 
     await act(async () => {
@@ -209,7 +159,7 @@ describe('useSubmitPermissionRequest', () => {
     // Wait for mutation error handler
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    expect(mockConfirm).toHaveBeenCalledWith(
+    expect(vi.mocked(useModal().confirm)).toHaveBeenCalledWith(
       'You already have access',
       expect.any(String),
       expect.objectContaining({

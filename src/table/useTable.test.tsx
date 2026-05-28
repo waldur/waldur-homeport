@@ -1,9 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, act } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { combineReducers, legacy_createStore as createStore } from 'redux';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
+import { createTestQueryClient } from '@/test/harness';
 
 import { reducer as tableReducer } from './store';
 import { useTable } from './useTable';
@@ -16,18 +18,6 @@ vi.mock('@/drawer/actions', () => ({
     renderDrawer: vi.fn(),
     closeDrawer: vi.fn(),
   })),
-}));
-
-// Mock router
-vi.mock('@/router', () => ({
-  router: {
-    globals: {
-      $current: {
-        path: [],
-        parent: null,
-      },
-    },
-  },
 }));
 
 // Mock navigation title
@@ -63,9 +53,7 @@ const createTestStore = (initialState = {}) => {
 };
 
 const createWrapper = (store: ReturnType<typeof createTestStore>) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
+  const queryClient = createTestQueryClient();
   return ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>{children}</Provider>

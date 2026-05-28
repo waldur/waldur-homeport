@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -8,20 +7,15 @@ import {
   projectCreditsUpdate,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { ProjectCreditDialog } from './ProjectCreditDialog';
 
-vi.mock('waldur-js-client');
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        CURRENCY_NAME: 'EUR',
-      },
-    },
-  },
-}));
+ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
+
 vi.mock('@/form/useFlatpickrTheme', () => ({
   useFlatpickrTheme: vi.fn(),
 }));
@@ -34,69 +28,14 @@ vi.mock('@/workspace/selectors', () => ({
   getCustomer: () => ({ uuid: 'customer-uuid', url: 'customer-url' }),
 }));
 
-vi.mock('@/form/select/AsyncSelect', () => ({
-  AsyncSelect: (props) => (
-    <input
-      id={props.id}
-      data-testid={props.id || 'async-select'}
-      onChange={(e) => {
-        if (props.input) {
-          props.input.onChange({ url: e.target.value, name: 'Org 1' });
-        }
-      }}
-      onBlur={(e) => {
-        if (props.input) props.input.onBlur(e);
-        if (props.onBlur) props.onBlur(e);
-      }}
-      value={props.input?.value?.url || ''}
-    />
-  ),
-}));
-
-vi.mock('@/form/select/SelectField', () => ({
-  SelectField: (props) => (
-    <input
-      data-testid={props.input?.name || props.name || 'select-field'}
-      onChange={(e) => {
-        const value = e.target.value;
-        if (props.input?.name === 'project') {
-          props.input.onChange({ url: value, name: 'Project 1' });
-        } else {
-          props.input?.onChange(value);
-        }
-        if (props.onChange) props.onChange(value);
-      }}
-      onBlur={(e) => {
-        if (props.input) props.input.onBlur(e);
-      }}
-      value={
-        typeof props.input?.value === 'object'
-          ? props.input.value.url
-          : props.input?.value || ''
-      }
-    />
-  ),
-}));
-
 const renderComponent = (resolve) => {
   vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
     uuid: 'customer-uuid',
     url: 'customer-url',
+    projects: [{ name: 'Project 1', url: 'project-url' }],
   } as any);
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ProjectCreditDialog resolve={resolve} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<ProjectCreditDialog resolve={resolve} />);
 };
-
-vi.mock('@/workspace/hooks');
 
 describe('ProjectCreditDialog', () => {
   const mockRefetch = vi.fn();
@@ -133,9 +72,7 @@ describe('ProjectCreditDialog', () => {
     const valueInput = await screen.findByTestId('value');
 
     // Fill Project
-    const projectInput = screen.getByTestId('project');
-    await user.type(projectInput, 'project-url');
-    await user.tab();
+    await openAndSelectOption(user, 'Project', 'Project 1');
 
     // Fill Value
     await user.clear(valueInput);

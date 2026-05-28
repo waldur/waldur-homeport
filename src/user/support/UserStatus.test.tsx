@@ -1,70 +1,64 @@
-import { useQueryClient } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { usersPartialUpdate } from 'waldur-js-client';
 
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { UserStatus } from './UserStatus';
 
-const mockConfirm = vi.fn();
-
-vi.mock('waldur-js-client');
-vi.mock('@tanstack/react-query');
-vi.mock('@/store/notify');
-
 describe('UserStatus', () => {
   let user;
-  let showErrorResponseMock;
-  let showSuccessMock;
-  let setQueryDataMock;
 
   beforeEach(() => {
+    vi.clearAllMocks();
     user = {
       uuid: 'abc123',
       full_name: 'John Doe',
       is_active: true,
     };
-
-    showErrorResponseMock = vi.fn();
-    showSuccessMock = vi.fn();
-    setQueryDataMock = vi.fn();
-
-    vi.mocked(useQueryClient).mockReturnValue({
-      setQueryData: setQueryDataMock,
-      invalidateQueries: vi.fn(),
-    } as any);
-    vi.mocked(useNotify).mockReturnValue({
-      showErrorResponse: showErrorResponseMock,
-      showSuccess: showSuccessMock,
-    } as any);
-    mockConfirm.mockResolvedValue(true);
   });
 
   it('renders the component with the enabled user', () => {
-    render(<UserStatus user={user} />);
+    renderWithProviders(<UserStatus user={user} />);
     expect(screen.getByText('Account status')).toBeInTheDocument();
     expect(screen.getByLabelText('Active')).toBeChecked();
   });
 
   it('deactivates user successfully', async () => {
-    render(<UserStatus user={user} />);
+    vi.mocked(useModal().confirm).mockResolvedValue(true);
+    const { queryClient } = renderWithProviders(<UserStatus user={user} />);
+    const invalidateQueriesSpy = vi.spyOn(queryClient, 'invalidateQueries');
+    const setQueryDataSpy = vi.spyOn(queryClient, 'setQueryData');
+
     fireEvent.click(screen.getByLabelText('Active'));
     await waitFor(() => {
+      expect(useModal().confirm).toHaveBeenCalled();
       expect(usersPartialUpdate).toHaveBeenCalledWith({
         path: { uuid: 'abc123' },
         body: { is_active: false },
       });
-      expect(showSuccessMock).toHaveBeenCalledWith('User has been disabled.');
+      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
+        queryKey: ['User', 'abc123'],
+      });
+      expect(setQueryDataSpy).toHaveBeenCalledWith(
+        ['User', 'abc123'],
+        expect.any(Function),
+      );
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
+        'User has been disabled.',
+      );
     });
   });
 
   it('handles the error when deactivating user', async () => {
+    vi.mocked(useModal().confirm).mockResolvedValue(true);
     vi.mocked(usersPartialUpdate).mockRejectedValue(new Error('Server error'));
-    render(<UserStatus user={user} />);
+    renderWithProviders(<UserStatus user={user} />);
     fireEvent.click(screen.getByLabelText('Active'));
     await waitFor(() => {
-      expect(showErrorResponseMock).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         new Error('Server error'),
         'Unable to toggle user status.',
       );
@@ -72,13 +66,14 @@ describe('UserStatus', () => {
   });
 
   it('renders the component with the disabled user', () => {
-    render(<UserStatus user={{ ...user, is_active: false }} />);
+    renderWithProviders(<UserStatus user={{ ...user, is_active: false }} />);
     expect(screen.getByText('Account status')).toBeInTheDocument();
     expect(screen.getByLabelText('Disabled')).not.toBeChecked();
   });
 
   it('activates user successfully', async () => {
-    render(<UserStatus user={{ ...user, is_active: false }} />);
+    vi.mocked(useModal().confirm).mockResolvedValue(true);
+    renderWithProviders(<UserStatus user={{ ...user, is_active: false }} />);
     fireEvent.click(screen.getByLabelText('Disabled'));
     await waitFor(() => {
       expect(usersPartialUpdate).toHaveBeenCalledWith({
@@ -88,7 +83,5 @@ describe('UserStatus', () => {
         },
       });
     });
-    // fails in CI, works locally
-    // expect(showSuccessMock).toHaveBeenCalledWith('User has been activated.');
   });
 });

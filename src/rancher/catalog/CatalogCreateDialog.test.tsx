@@ -1,12 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { rancherCatalogsCreate } from 'waldur-js-client';
 
-import { CatalogCreateDialog } from './CatalogCreateDialog';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client');
+import { CatalogCreateDialog } from './CatalogCreateDialog';
 
 const fakeCluster = {
   url: 'cluster-url',
@@ -14,13 +13,8 @@ const fakeCluster = {
 };
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <CatalogCreateDialog resolve={{ cluster: fakeCluster as any }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <CatalogCreateDialog resolve={{ cluster: fakeCluster as any }} />,
   );
 };
 

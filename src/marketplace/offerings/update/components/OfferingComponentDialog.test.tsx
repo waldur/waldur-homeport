@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import {
@@ -8,17 +7,11 @@ import {
 } from 'waldur-js-client';
 
 import { TENANT_TYPE } from '@/openstack/constants';
-import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { OfferingComponentDialog } from './OfferingComponentDialog';
 
-vi.mock('@/store/notify');
-vi.mock('waldur-js-client', () => ({
-  marketplaceProviderOfferingsCreateOfferingComponent: vi.fn(),
-  marketplaceProviderOfferingsUpdateOfferingComponent: vi.fn(),
-  formDataBodySerializer: vi.fn(),
-}));
-
+// Mock Select component because the real Metronic Select is difficult to test in this specific dialog
 vi.mock('@/form/select', () => ({
   Select: (props) => (
     <select
@@ -62,34 +55,21 @@ const mockComponent = {
 };
 
 const renderComponent = (resolveProps) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <OfferingComponentDialog
-        resolve={
-          {
-            ...resolveProps,
-            refetch: vi.fn(),
-          } as any
-        }
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <OfferingComponentDialog
+      resolve={
+        {
+          ...resolveProps,
+          refetch: vi.fn(),
+        } as any
+      }
+    />,
   );
 };
 
 describe('OfferingComponentDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: vi.fn(),
-      showErrorResponse: vi.fn(),
-    } as any);
   });
 
   describe('Add mode', () => {

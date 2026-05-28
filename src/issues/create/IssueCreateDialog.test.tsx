@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   supportIssuesCreate,
@@ -7,75 +6,41 @@ import {
   supportTemplatesList,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { router } from '@/router';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { ISSUE_IDS } from '../types/constants';
 
 import { constructIssuePayload, IssueCreateDialog } from './IssueCreateDialog';
 import { IssueFormData } from './types';
-vi.mock('@/workspace/hooks');
 
-vi.mock('waldur-js-client');
+ENV.plugins.WALDUR_SUPPORT = {
+  ENABLED: true,
+  DISPLAY_REQUEST_TYPE: true,
+} as any;
 
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
-  }),
-}));
-
-vi.mock('@/router', () => ({
-  router: {
-    stateService: {
-      go: vi.fn(),
-    },
-  },
-}));
-
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {},
-      WALDUR_SUPPORT: {
-        ENABLED: true,
-        DISPLAY_REQUEST_TYPE: true,
-      },
-    },
-  },
-}));
 vi.mocked(workspaceHooks.useUser).mockReturnValue({
   uuid: 'user-1',
   is_staff: true,
 } as any);
 
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
 const renderComponent = (props = {}) => {
-  const queryClient = createTestQueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <IssueCreateDialog
-        resolve={{
-          refetch: vi.fn(),
-          scope: {
-            name: 'Org 1',
-            uuid: '123',
-            url: 'http://example.com/org/',
-          },
-          scopeType: 'customer',
-          ...props,
-        }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <IssueCreateDialog
+      resolve={{
+        refetch: vi.fn(),
+        scope: {
+          name: 'Org 1',
+          uuid: '123',
+          url: 'http://example.com/org/',
+        },
+        scopeType: 'customer',
+        ...props,
+      }}
+    />,
   );
 };
 
@@ -205,11 +170,6 @@ describe('IssueCreateDialog Component', () => {
     vi.mocked(supportIssuesCreate).mockResolvedValue({
       data: mockIssue,
     } as any);
-    const mockShowSuccess = vi.fn();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: vi.fn(),
-    } as any);
 
     renderComponent({
       refetch: mockRefetch,
@@ -240,7 +200,7 @@ describe('IssueCreateDialog Component', () => {
       expect(supportIssuesCreate).toHaveBeenCalled();
     });
 
-    expect(mockShowSuccess).toHaveBeenCalledWith(
+    expect(useNotify().showSuccess).toHaveBeenCalledWith(
       'Request SUP-100 has been created.',
     );
     expect(router.stateService.go).toHaveBeenCalledWith('support.detail', {

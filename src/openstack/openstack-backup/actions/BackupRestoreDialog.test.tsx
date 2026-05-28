@@ -1,22 +1,19 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  openstackBackupsRestore,
-  OpenStackSubNet,
-  OpenStackFlavor,
   OpenStackBackup,
-} from 'waldur-js-client';
-import {
+  openstackBackupsRestore,
+  OpenStackFlavor,
   openstackFlavorsList,
   openstackFloatingIpsList,
   openstackSecurityGroupsList,
+  OpenStackSubNet,
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { BackupRestoreDialog } from './BackupRestoreDialog';
 
@@ -81,22 +78,9 @@ const fakeFlavors = [
   },
 ] as unknown as OpenStackFlavor[];
 
-vi.mock('waldur-js-client');
-
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
-  } as any),
-  useTheme: () => 'light',
-}));
-
 const renderDialog = async () => {
-  const queryClient = new QueryClient();
-  const result = render(
-    <QueryClientProvider client={queryClient}>
-      <BackupRestoreDialog resolve={{ resource: fakeBackup }} />
-    </QueryClientProvider>,
+  const result = renderWithProviders(
+    <BackupRestoreDialog resolve={{ resource: fakeBackup }} />,
   );
   await waitFor(() =>
     expect(screen.queryByTestId('spinner')).not.toBeInTheDocument(),
@@ -105,20 +89,7 @@ const renderDialog = async () => {
 };
 
 describe('BackupRestoreDialog', () => {
-  let mockShowSuccess;
-  let mockShowErrorResponse;
-
   beforeEach(() => {
-    mockShowSuccess = vi.fn();
-    mockShowErrorResponse = vi.fn();
-    vi.mocked(useNotify).mockReturnValue({
-      showError: vi.fn(),
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      closeDialog: vi.fn(),
-    } as any);
     vi.mocked(openstackFlavorsList).mockResolvedValue({ data: [] } as any);
     vi.mocked(openstackFloatingIpsList).mockResolvedValue({ data: [] } as any);
     vi.mocked(openstackSecurityGroupsList).mockResolvedValue({
@@ -135,11 +106,8 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('shows loading state while data is being fetched', async () => {
-    const queryClient = new QueryClient();
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BackupRestoreDialog resolve={{ resource: fakeBackup }} />
-      </QueryClientProvider>,
+    renderWithProviders(
+      <BackupRestoreDialog resolve={{ resource: fakeBackup }} />,
     );
     await waitFor(() => {
       expect(screen.getByTestId('spinner')).toBeInTheDocument();
@@ -147,11 +115,8 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('disables submit button while data is loading', async () => {
-    const queryClient = new QueryClient();
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BackupRestoreDialog resolve={{ resource: fakeBackup }} />
-      </QueryClientProvider>,
+    renderWithProviders(
+      <BackupRestoreDialog resolve={{ resource: fakeBackup }} />,
     );
     await waitFor(() => {
       expect(
@@ -280,7 +245,7 @@ describe('BackupRestoreDialog', () => {
     await userEvent.click(screen.getByText(/m1.xsmall/i));
     await userEvent.click(screen.getByRole('button', { name: /Submit/i }));
 
-    expect(mockShowSuccess).toHaveBeenCalledWith(
+    expect(useNotify().showSuccess).toHaveBeenCalledWith(
       'VM snapshot restoration has been scheduled.',
     );
   });
@@ -298,7 +263,7 @@ describe('BackupRestoreDialog', () => {
     await userEvent.click(screen.getByText(/m1.xsmall/i));
     await userEvent.click(screen.getByRole('button', { name: /Submit/i }));
 
-    expect(mockShowErrorResponse).toHaveBeenCalledWith(
+    expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
       error,
       'Unable to restore VM snapshot.',
     );
@@ -410,11 +375,8 @@ describe('BackupRestoreDialog', () => {
     } as any);
     vi.mocked(openstackBackupsRestore).mockResolvedValue({ data: null } as any);
 
-    const queryClient = new QueryClient();
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BackupRestoreDialog resolve={{ resource: fakeBackup, refetch }} />
-      </QueryClientProvider>,
+    renderWithProviders(
+      <BackupRestoreDialog resolve={{ resource: fakeBackup, refetch }} />,
     );
 
     await waitFor(() =>

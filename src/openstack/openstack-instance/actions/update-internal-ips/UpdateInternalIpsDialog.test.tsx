@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -8,14 +7,13 @@ import {
 } from 'waldur-js-client';
 
 import { loadSubnets } from '@/openstack/api';
+import { renderWithProviders } from '@/test/harness';
 
 import { UpdateInternalIpsDialog } from './UpdateInternalIpsDialog';
 
 vi.mock('@/openstack/api', () => ({
   loadSubnets: vi.fn(),
 }));
-
-vi.mock('waldur-js-client');
 
 const subnetsResponse = [
   {
@@ -60,13 +58,8 @@ const mockResource = {
 } as unknown as OpenStackInstance;
 
 const renderDialog = (resource = mockResource) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <UpdateInternalIpsDialog resolve={{ resource, refetch: vi.fn() }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <UpdateInternalIpsDialog resolve={{ resource, refetch: vi.fn() }} />,
   );
 };
 

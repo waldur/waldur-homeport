@@ -22,7 +22,7 @@ interface ProjectCreateButtonProps {
   variant?: ButtonVariant;
   title?: string;
   iconNode?: ReactNode;
-  refetch?;
+  refetch?: () => void;
   className?: string;
 }
 

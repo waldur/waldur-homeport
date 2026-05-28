@@ -1,44 +1,15 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, act } from '@testing-library/react';
-import React from 'react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+/* eslint-disable import/order */
+import { act, renderHook } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { userInvitationsAccept } from 'waldur-js-client';
+import { InvitationTokenStorage } from '@/core/StorageManager';
+import { useModal } from '@/modal/actions';
 
-const mockUserInvitationsAccept = vi.fn();
-const mockOpenDialog = vi.fn();
-const mockShowSuccess = vi.fn();
-const mockShowError = vi.fn();
-const mockRouterGo = vi.fn();
-const mockDispatch = vi.fn();
+import { router } from '@/router';
+
 const mockIsAuthenticated = vi.fn();
 const mockGetCurrentUser = vi.fn();
 const mockRefreshCurrentUser = vi.fn();
-
-vi.mock('waldur-js-client', () => ({
-  userInvitationsAccept: (...args) => mockUserInvitationsAccept(...args),
-}));
-
-vi.mock('@uirouter/react', () => ({
-  useRouter: () => ({
-    stateService: { go: mockRouterGo },
-  }),
-}));
-
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    openDialog: mockOpenDialog,
-  }),
-}));
-
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-    showError: mockShowError,
-  }),
-}));
-
-vi.mock('react-redux', () => ({
-  useDispatch: () => mockDispatch,
-}));
 
 vi.mock('@/auth/AuthService', () => ({
   isAuthenticated: (...args) => mockIsAuthenticated(...args),
@@ -61,28 +32,14 @@ vi.mock('@/user/UsersService', () => ({
   getCurrentUser: (...args) => mockGetCurrentUser(...args),
 }));
 
-vi.mock('@/workspace/actions', () => ({
-  setCurrentUser: (user) => ({ type: 'SET_CURRENT_USER', payload: user }),
-}));
-
 vi.mock('./InvitationConfirmDialog', () => ({
   InvitationConfirmDialog: 'InvitationConfirmDialog',
 }));
 
-import { InvitationTokenStorage } from '@/core/StorageManager';
+import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
 
 import { useCheckAndAccept } from './useCheckAndAccept';
-
-function createWrapper() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      mutations: { retry: false },
-      queries: { retry: false },
-    },
-  });
-  return ({ children }: { children: React.ReactNode }) =>
-    React.createElement(QueryClientProvider, { client: queryClient }, children);
-}
 
 describe('useCheckAndAccept', () => {
   beforeEach(() => {
@@ -92,7 +49,7 @@ describe('useCheckAndAccept', () => {
 
   it('should return checkAndAccept function and isPending state', () => {
     const { result } = renderHook(() => useCheckAndAccept('test-uuid'), {
-      wrapper: createWrapper(),
+      wrapper: createTestWrapper().wrapper,
     });
 
     expect(result.current.checkAndAccept).toBeDefined();
@@ -107,7 +64,7 @@ describe('useCheckAndAccept', () => {
 
     it('should open InvitationConfirmDialog', async () => {
       const { result } = renderHook(() => useCheckAndAccept('test-uuid'), {
-        wrapper: createWrapper(),
+        wrapper: createTestWrapper().wrapper,
       });
 
       act(() => {
@@ -117,7 +74,7 @@ describe('useCheckAndAccept', () => {
       // Wait for promise to resolve
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      expect(mockOpenDialog).toHaveBeenCalledWith(
+      expect(vi.mocked(useModal().openDialog)).toHaveBeenCalledWith(
         'InvitationConfirmDialog',
         expect.objectContaining({
           resolve: expect.objectContaining({
@@ -132,7 +89,7 @@ describe('useCheckAndAccept', () => {
 
     it('should clear token and show error on cancel', async () => {
       const { result } = renderHook(() => useCheckAndAccept('test-uuid'), {
-        wrapper: createWrapper(),
+        wrapper: createTestWrapper().wrapper,
       });
 
       act(() => {
@@ -141,7 +98,7 @@ describe('useCheckAndAccept', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const dialogCall = mockOpenDialog.mock.calls[0];
+      const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
       const onCancel = dialogCall[1].resolve.onCancel;
 
       act(() => {
@@ -149,17 +106,17 @@ describe('useCheckAndAccept', () => {
       });
 
       expect(InvitationTokenStorage.remove).toHaveBeenCalled();
-      expect(mockShowError).toHaveBeenCalled();
-      expect(mockRouterGo).toHaveBeenCalledWith('profile.details');
+      expect(useNotify().showError).toHaveBeenCalled();
+      expect(router.stateService.go).toHaveBeenCalledWith('profile.details');
     });
 
     it('should call accept API on confirm', async () => {
-      mockUserInvitationsAccept.mockResolvedValue({ data: {} });
+      vi.mocked(userInvitationsAccept).mockResolvedValue({ data: {} } as any);
       mockGetCurrentUser.mockResolvedValue({ uuid: 'user-1' });
       mockRefreshCurrentUser.mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useCheckAndAccept('test-uuid'), {
-        wrapper: createWrapper(),
+        wrapper: createTestWrapper().wrapper,
       });
 
       act(() => {
@@ -168,7 +125,7 @@ describe('useCheckAndAccept', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const dialogCall = mockOpenDialog.mock.calls[0];
+      const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
       const onConfirm = dialogCall[1].resolve.onConfirm;
 
       act(() => {
@@ -178,18 +135,18 @@ describe('useCheckAndAccept', () => {
       // Wait for mutation
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(mockUserInvitationsAccept).toHaveBeenCalledWith({
+      expect(userInvitationsAccept).toHaveBeenCalledWith({
         path: { uuid: 'test-uuid' },
       });
     });
 
     it('should show error for 404 response', async () => {
-      mockUserInvitationsAccept.mockRejectedValue({
+      vi.mocked(userInvitationsAccept).mockRejectedValue({
         response: { status: 404 },
       });
 
       const { result } = renderHook(() => useCheckAndAccept('test-uuid'), {
-        wrapper: createWrapper(),
+        wrapper: createTestWrapper().wrapper,
       });
 
       act(() => {
@@ -198,7 +155,7 @@ describe('useCheckAndAccept', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const dialogCall = mockOpenDialog.mock.calls[0];
+      const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
       const onConfirm = dialogCall[1].resolve.onConfirm;
 
       act(() => {
@@ -207,11 +164,13 @@ describe('useCheckAndAccept', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(mockShowError).toHaveBeenCalledWith('Invitation is not found.');
+      expect(useNotify().showError).toHaveBeenCalledWith(
+        'Invitation is not found.',
+      );
     });
 
     it('should show detailed error message when available', async () => {
-      mockUserInvitationsAccept.mockRejectedValue({
+      vi.mocked(userInvitationsAccept).mockRejectedValue({
         response: {
           status: 400,
           data: { detail: 'User has already the same role in this scope.' },
@@ -219,7 +178,7 @@ describe('useCheckAndAccept', () => {
       });
 
       const { result } = renderHook(() => useCheckAndAccept('test-uuid'), {
-        wrapper: createWrapper(),
+        wrapper: createTestWrapper().wrapper,
       });
 
       act(() => {
@@ -228,7 +187,7 @@ describe('useCheckAndAccept', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      const dialogCall = mockOpenDialog.mock.calls[0];
+      const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
       const onConfirm = dialogCall[1].resolve.onConfirm;
 
       act(() => {
@@ -237,10 +196,10 @@ describe('useCheckAndAccept', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 50));
 
-      expect(mockShowError).toHaveBeenCalledWith(
+      expect(useNotify().showError).toHaveBeenCalledWith(
         'User has already the same role in this scope.',
       );
-      expect(mockRouterGo).toHaveBeenCalledWith('profile.details');
+      expect(router.stateService.go).toHaveBeenCalledWith('profile.details');
     });
   });
 
@@ -251,7 +210,7 @@ describe('useCheckAndAccept', () => {
 
     it('should store token and redirect to login', () => {
       const { result } = renderHook(() => useCheckAndAccept('test-uuid'), {
-        wrapper: createWrapper(),
+        wrapper: createTestWrapper().wrapper,
       });
 
       act(() => {
@@ -259,8 +218,8 @@ describe('useCheckAndAccept', () => {
       });
 
       expect(InvitationTokenStorage.set).toHaveBeenCalledWith('test-uuid');
-      expect(mockRouterGo).toHaveBeenCalledWith('login');
-      expect(mockOpenDialog).not.toHaveBeenCalled();
+      expect(router.stateService.go).toHaveBeenCalledWith('login');
+      expect(vi.mocked(useModal().openDialog)).not.toHaveBeenCalled();
     });
   });
 });

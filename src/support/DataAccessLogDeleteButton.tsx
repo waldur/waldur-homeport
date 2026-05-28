@@ -16,11 +16,7 @@ export const DataAccessLogDeleteButton = ({
   row,
   refetch,
 }: DataAccessLogDeleteButtonProps) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => dataAccessLogsDestroy({ path: { uuid: row.uuid } }),
     refetch: refetch,
 

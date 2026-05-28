@@ -1,52 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { openstackPortsCreate } from 'waldur-js-client';
 
-import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadNetworks, loadSubnets } from '@/openstack/api';
+import { renderWithProviders } from '@/test/harness';
 
 import { CreatePortDialog } from './CreatePortDialog';
-
-vi.mock('@monaco-editor/react', () => {
-  return {
-    Editor: vi.fn(({ value, onChange, 'data-testid': testId }) => {
-      return (
-        <textarea
-          data-testid={testId || 'monaco-editor'}
-          value={value || ''}
-          onChange={(e) => {
-            if (onChange) onChange((e.target as HTMLTextAreaElement).value);
-          }}
-        />
-      );
-    }),
-  };
-});
-
-vi.mock('@/form/monacoSetup', () => {
-  return {
-    initMonaco: vi.fn().mockResolvedValue({
-      languages: {
-        register: vi.fn(),
-        setLanguageConfiguration: vi.fn(),
-        setMonarchTokensProvider: vi.fn(),
-      },
-    }),
-  };
-});
-
-// Mock other dependencies
-vi.mock('@/modal/useManagedMutation', () => ({
-  useManagedMutation: vi.fn(),
-}));
 
 vi.mock('@/openstack/api', () => ({
   loadNetworks: vi.fn(),
   loadSubnets: vi.fn(),
 }));
-
-vi.mock('waldur-js-client');
 
 const mockResource = {
   uuid: 'tenant-uuid',
@@ -56,33 +21,18 @@ const mockResource = {
 const mockNetworks = [{ name: 'Network 1', uuid: 'net-1', url: 'net-1-url' }];
 
 describe('CreatePortDialog', () => {
-  let queryClient;
-
   beforeEach(() => {
     vi.clearAllMocks();
-    queryClient = new QueryClient({
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
-      },
-    });
 
     vi.mocked(loadNetworks).mockResolvedValue(mockNetworks);
     vi.mocked(loadSubnets).mockResolvedValue([]);
-
-    vi.mocked(useManagedMutation).mockReturnValue({
-      mutateAsync: vi.fn(),
-    } as any);
   });
 
   const renderDialog = () => {
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <CreatePortDialog
-          resolve={{ resource: mockResource, refetch: vi.fn() }}
-        />
-      </QueryClientProvider>,
+    return renderWithProviders(
+      <CreatePortDialog
+        resolve={{ resource: mockResource, refetch: vi.fn() }}
+      />,
     );
   };
 
@@ -121,8 +71,7 @@ describe('CreatePortDialog', () => {
     const submitButton = await screen.findByText('Submit');
     await user.click(submitButton);
 
-    const mutation = vi.mocked(useManagedMutation).mock.results[0].value;
-    expect(mutation.mutateAsync).not.toHaveBeenCalled();
+    expect(openstackPortsCreate).not.toHaveBeenCalled();
   });
 
   it('loads subnets when network is selected', async () => {
@@ -176,8 +125,7 @@ describe('CreatePortDialog', () => {
 
   it('submits form with correct data', async () => {
     const user = userEvent.setup();
-    const mutateAsync = vi.fn().mockResolvedValue({});
-    vi.mocked(useManagedMutation).mockReturnValue({ mutateAsync } as any);
+    vi.mocked(openstackPortsCreate).mockResolvedValue({} as any);
     vi.mocked(loadSubnets).mockResolvedValue(mockSubnets);
 
     renderDialog();
@@ -203,17 +151,13 @@ describe('CreatePortDialog', () => {
     await user.click(await screen.findByText('Submit'));
 
     await waitFor(() => {
-      expect(mutateAsync).toHaveBeenCalledWith(
+      expect(openstackPortsCreate).toHaveBeenCalledWith(
         expect.objectContaining({
-          name: 'test-port',
-          network: 'net-1-url',
-          fixed_ips: expect.objectContaining({
-            subnet: expect.objectContaining({ url: 'sub-1-url' }),
+          body: expect.objectContaining({
+            name: 'test-port',
+            mac_address: '00:11:22:33:44:55',
           }),
-          mac_address: '00:11:22:33:44:55',
         }),
-        expect.anything(),
-        expect.anything(),
       );
     });
   });

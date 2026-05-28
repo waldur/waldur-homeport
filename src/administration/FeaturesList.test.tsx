@@ -1,35 +1,15 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { vi, describe, expect, beforeEach, it } from 'vitest';
 import { featureValues } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { useNotify } from '@/store/notify';
 
 import { FeaturesList } from './FeaturesList';
 
 // Mock dependencies
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
-  } as any),
-}));
-vi.mock('@uirouter/react', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('@uirouter/react')>();
-  return {
-    ...mod,
-    useCurrentStateAndParams: vi.fn().mockReturnValue({
-      state: { name: 'admin-features' },
-      params: {},
-    }),
-    useRouter: vi.fn().mockReturnValue({
-      stateService: {
-        go: vi.fn(),
-      },
-    }),
-  };
-});
 vi.mock('@/features/FeaturesDescription', () => ({
   FeaturesDescription: [
     {
@@ -54,32 +34,24 @@ vi.mock('@/features/FeaturesDescription', () => ({
     },
   ],
 }));
-vi.mock('@/core/config', () => ({
-  ENV: {
-    FEATURES: {
+
+describe('FeaturesList', () => {
+  // Setup mocks before each test
+  beforeEach(() => {
+    ENV.FEATURES = {
       billing: {
         enabled: true,
       },
       support: {
         enabled: false,
       },
-    },
-  },
-}));
-
-describe('FeaturesList', () => {
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-
-  // Setup mocks before each test
-  beforeEach(() => {
+    } as any;
     vi.clearAllMocks();
+    vi.mocked(useCurrentStateAndParams).mockReturnValue({
+      state: { name: 'admin-features' } as any,
+      params: {},
+    });
     // Mock notifications
-    vi.mocked(useNotify).mockReturnValue({
-      showError: vi.fn(),
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
 
     // Mock post function
     vi.mocked(featureValues).mockReset();
@@ -146,7 +118,7 @@ describe('FeaturesList', () => {
 
     // Verify success notification
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Features have been updated.',
       );
     });
@@ -164,7 +136,7 @@ describe('FeaturesList', () => {
 
     // Verify error handling
     await waitFor(() => {
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         error,
         'Unable to update features.',
       );

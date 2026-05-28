@@ -1,26 +1,18 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { projectsAddUser } from 'waldur-js-client';
 
-import { AddProjectUserDialog } from './AddProjectUserDialog';
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
-vi.mock('waldur-js-client');
+import { AddProjectUserDialog } from './AddProjectUserDialog';
 
 vi.mock('@/permissions/utils', () => ({
   getRoles: () => [
     { name: 'admin', description: 'Admin', content_type: 'project' },
   ],
-}));
-
-vi.mock('@/workspace/hooks', () => ({
-  useCustomer: () => ({
-    projects: [
-      { uuid: 'project-uuid', name: 'Test Project', url: 'project-url' },
-    ],
-  }),
-  useUser: () => ({ uuid: 'user-uuid', is_staff: true }),
-  useProject: () => ({ uuid: 'project-uuid' }),
 }));
 
 vi.mock('../workspace/fetchCustomer', () => ({
@@ -31,41 +23,6 @@ vi.mock('@/form/useFlatpickrTheme', () => ({
   useFlatpickrTheme: vi.fn(),
 }));
 
-vi.mock('@/form/select/SelectField', () => {
-  return {
-    SelectField: (props) => (
-      <select
-        id={props.id || props.input?.name}
-        name={props.input?.name}
-        value={
-          typeof props.input?.value === 'object'
-            ? props.getOptionValue?.(props.input.value) || props.input.value.url
-            : props.input?.value || ''
-        }
-        onBlur={() => props.input?.onBlur?.()}
-        onChange={(e) => {
-          if (!props.input) return;
-          const val = e.target.value;
-          const option = props.options?.find(
-            (o) => (props.getOptionValue?.(o) || o.url || o.name) === val,
-          );
-          props.input.onChange(option || val);
-        }}
-      >
-        <option value="">Select...</option>
-        {props.options?.map((o) => (
-          <option
-            key={props.getOptionValue?.(o) || o.url || o.name}
-            value={props.getOptionValue?.(o) || o.url || o.name}
-          >
-            {props.getOptionLabel?.(o) || o.name || o.label}
-          </option>
-        ))}
-      </select>
-    ),
-  };
-});
-
 vi.mock('@/form/DateField', () => ({
   DateField: (props) => (
     <input type="date" id={props.id || props.input?.name} {...props.input} />
@@ -73,13 +30,8 @@ vi.mock('@/form/DateField', () => ({
 }));
 
 const renderComponent = (customer, refetch = vi.fn()) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <AddProjectUserDialog resolve={{ customer, refetch }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <AddProjectUserDialog resolve={{ customer, refetch }} />,
   );
 };
 
@@ -91,6 +43,16 @@ describe('AddProjectUserDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mocked(useCustomer).mockReturnValue({
+      projects: [
+        { uuid: 'project-uuid', name: 'Test Project', url: 'project-url' },
+      ],
+    } as any);
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'user-uuid',
+      is_staff: true,
+    } as any);
+    vi.mocked(useProject).mockReturnValue({ uuid: 'project-uuid' } as any);
   });
 
   it('renders dialog correctly', () => {
@@ -102,29 +64,24 @@ describe('AddProjectUserDialog', () => {
   });
 
   it('submits form with correct data', async () => {
+    const user = userEvent.setup();
     vi.mocked(projectsAddUser).mockResolvedValue({ data: {} } as any);
     renderComponent(mockCustomer);
 
     // Fill the form
     // Project Select
-    const projectSelect = await screen.findByLabelText('Project');
-    fireEvent.change(projectSelect, { target: { value: 'project-url' } });
-    fireEvent.blur(projectSelect);
+    await openAndSelectOption(user, 'Project', 'Test Project');
 
     // Role Select
-    const roleSelect = await screen.findByLabelText('Role');
-    fireEvent.change(roleSelect, { target: { value: 'admin' } });
-    fireEvent.blur(roleSelect);
+    await openAndSelectOption(user, 'Role', 'Admin');
 
     // Expiration Date
     const dateInput = await screen.findByLabelText('Role expires on');
-    fireEvent.change(dateInput, { target: { value: '2025-01-01' } });
-    fireEvent.blur(dateInput);
+    await user.type(dateInput, '2025-01-01');
 
     // Submit
     const submitButton = await screen.findByTestId('submit-button');
-    await waitFor(() => expect(submitButton).not.toBeDisabled());
-    fireEvent.click(submitButton);
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(projectsAddUser).toHaveBeenCalledWith(

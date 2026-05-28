@@ -1,6 +1,7 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { useIssueAttachments, useUploadAttachments } from './api';
 import { IssueAttachmentsContainer } from './IssueAttachmentsContainer';
@@ -68,15 +69,6 @@ vi.mock('@/form/upload/UploadContainer', () => ({
   ),
 }));
 
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
 const mockIssue = {
   uuid: 'issue-123',
   url: 'https://api.example.com/issues/issue-123/',
@@ -97,12 +89,8 @@ const mockUploadHook = {
 };
 
 const renderComponent = (issue = mockIssue) => {
-  const queryClient = createTestQueryClient();
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <IssueAttachmentsContainer issue={issue as any} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <IssueAttachmentsContainer issue={issue as any} />,
   );
 };
 

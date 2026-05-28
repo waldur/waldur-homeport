@@ -1,20 +1,13 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceComponentUsagesSetUsage } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { renderWithProviders } from '@/test/harness';
 
 import { getProviderUsageComponents } from './api';
 import { ResourceCreateUsageDialog } from './ResourceCreateUsageDialog';
 
-vi.mock('waldur-js-client');
 vi.mock('./api');
 
 const props = {
@@ -54,17 +47,7 @@ const mockData = {
 };
 
 const renderDialog = (props) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  render(
-    <QueryClientProvider client={queryClient}>
-      <ResourceCreateUsageDialog {...props} />
-    </QueryClientProvider>,
-  );
+  renderWithProviders(<ResourceCreateUsageDialog {...props} />);
 };
 
 describe('ResourceCreateUsageDialog', () => {

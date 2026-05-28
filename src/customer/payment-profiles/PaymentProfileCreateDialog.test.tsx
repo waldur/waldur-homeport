@@ -1,12 +1,18 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { paymentProfilesCreate, paymentProfilesEnable } from 'waldur-js-client';
 
-import { PaymentProfileCreateDialog } from './PaymentProfileCreateDialog';
+import { renderWithProviders } from '@/test/harness';
+import {
+  useCustomer,
+  useProject,
+  useSetCustomer,
+  useSetProject,
+  useUser,
+} from '@/workspace/hooks';
 
-vi.mock('waldur-js-client');
+import { PaymentProfileCreateDialog } from './PaymentProfileCreateDialog';
 
 vi.mock('../utils', () => ({
   getCustomer: vi.fn(),
@@ -16,28 +22,20 @@ vi.mock('@/form/useFlatpickrTheme', () => ({
   useFlatpickrTheme: vi.fn(),
 }));
 
-vi.mock('@/workspace/hooks', () => ({
-  useUser: () => ({ is_staff: true }),
-  useCustomer: () => ({ url: 'customer-url' }),
-  useProject: () => ({ uuid: 'project-uuid' }),
-  useSetCustomer: () => vi.fn(),
-  useSetProject: () => vi.fn(),
-}));
-
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <PaymentProfileCreateDialog resolve={{ refetch: vi.fn() }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <PaymentProfileCreateDialog resolve={{ refetch: vi.fn() }} />,
   );
 };
 
 describe('PaymentProfileCreateDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(useCustomer).mockReturnValue({ url: 'customer-url' } as any);
+    vi.mocked(useProject).mockReturnValue({ uuid: 'project-uuid' } as any);
+    vi.mocked(useSetCustomer).mockReturnValue(vi.fn());
+    vi.mocked(useSetProject).mockReturnValue(vi.fn());
   });
 
   it('renders the dialog correctly', () => {

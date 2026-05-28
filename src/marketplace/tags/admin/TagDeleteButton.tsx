@@ -10,11 +10,7 @@ interface TagDeleteButtonProps {
 }
 
 export const TagDeleteButton = (props: TagDeleteButtonProps) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       marketplaceTagsDestroy({ path: { uuid: props.row.uuid } }),
     refetch: props.refetch,

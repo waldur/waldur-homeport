@@ -1,36 +1,24 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { openstackTenantsCreateServerGroup } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+
 import { CreateServerGroupDialog } from './CreateServerGroupDialog';
 
 // Mock dependencies
-
-vi.mock('waldur-js-client');
 
 const mockResource = {
   uuid: 'tenant-uuid',
   name: 'test-tenant',
   url: 'tenant-url',
 };
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
 const renderDialog = (refetch = vi.fn()) => {
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <CreateServerGroupDialog
-        resolve={{ resource: mockResource as any, refetch }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <CreateServerGroupDialog
+      resolve={{ resource: mockResource as any, refetch }}
+    />,
   );
 };
 

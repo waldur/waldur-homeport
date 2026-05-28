@@ -3,10 +3,6 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { QuotasTable } from './QuotasTable';
 
-vi.mock('@/store/notify', () => ({
-  useTheme: () => 'light',
-}));
-
 vi.mock('@/core/EChart', () => ({
   EChart: ({ options }) => (
     <div data-testid="echart">{JSON.stringify(options)}</div>

@@ -7,24 +7,6 @@ import { useNotify } from '@/store/notify';
 
 import { SupportFeedback } from './SupportFeedback';
 
-vi.mock('waldur-js-client');
-
-vi.mock('@uirouter/react', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    useRouter: vi.fn(),
-  };
-});
-
-vi.mock('@/store/notify', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    useNotify: vi.fn(),
-  };
-});
-
 vi.mock('@/navigation/title', async (importOriginal) => {
   const actual = await importOriginal<any>();
   return {
@@ -46,15 +28,9 @@ describe('SupportFeedback', () => {
     },
   };
 
-  const mockNotify = {
-    showErrorResponse: vi.fn(),
-    showSuccess: vi.fn(),
-  };
-
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(useRouter).mockReturnValue(mockRouter as any);
-    vi.mocked(useNotify).mockReturnValue(mockNotify as any);
   });
 
   it('renders with initial values from router', () => {
@@ -83,7 +59,7 @@ describe('SupportFeedback', () => {
           token: 'test-token',
         },
       });
-      expect(mockNotify.showSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Thank you for your response!',
       );
       expect(mockRouter.stateService.go).toHaveBeenCalledWith('login');
@@ -98,7 +74,7 @@ describe('SupportFeedback', () => {
     fireEvent.click(screen.getByRole('button', { name: /Submit/i }));
 
     await waitFor(() => {
-      expect(mockNotify.showErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         error,
         'Unable to send feedback.',
       );

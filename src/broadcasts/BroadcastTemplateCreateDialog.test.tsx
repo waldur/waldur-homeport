@@ -1,17 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { broadcastMessageTemplatesCreate } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+
 import { BroadcastTemplateCreateDialog } from './BroadcastTemplateCreateDialog';
-
-vi.mock('waldur-js-client');
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { retry: false },
-  },
-});
 
 describe('BroadcastTemplateCreateDialog', () => {
   const mockResolve = {
@@ -23,10 +16,8 @@ describe('BroadcastTemplateCreateDialog', () => {
   });
 
   const renderComponent = () => {
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <BroadcastTemplateCreateDialog resolve={mockResolve} />
-      </QueryClientProvider>,
+    return renderWithProviders(
+      <BroadcastTemplateCreateDialog resolve={mockResolve} />,
     );
   };
 

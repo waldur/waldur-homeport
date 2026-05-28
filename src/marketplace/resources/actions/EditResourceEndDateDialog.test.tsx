@@ -1,13 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
 
 import { EditResourceEndDateDialog } from './EditResourceEndDateDialog';
-
-vi.mock('@/store/notify');
 
 // Mock DateField to avoid Flatpickr complexity in tests
 vi.mock('@/form/DateField', () => ({
@@ -22,23 +20,9 @@ vi.mock('@/form/DateField', () => ({
   ),
 }));
 
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('EditResourceEndDateDialog', () => {
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-  const mockCloseDialog = vi.fn();
-
   const resource = {
     uuid: 'res-uuid',
     name: 'Test Resource',
@@ -54,13 +38,6 @@ describe('EditResourceEndDateDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      closeDialog: mockCloseDialog,
-    } as any);
   });
 
   const renderComponent = () =>
@@ -108,9 +85,9 @@ describe('EditResourceEndDateDialog', () => {
     });
 
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalled();
+      expect(useNotify().showSuccess).toHaveBeenCalled();
     });
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
   it('handles clearing the date', async () => {
@@ -164,7 +141,7 @@ describe('EditResourceEndDateDialog', () => {
     fireEvent.click(saveBtn);
 
     await waitFor(() => {
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         error,
         'Unable to edit resource.',
       );

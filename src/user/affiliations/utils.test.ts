@@ -1,35 +1,32 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { Permission, User } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { PermissionEnum } from '@/permissions/enums';
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    roles: [
-      {
-        name: 'CUSTOMER.OWNER',
-        permissions: [
-          PermissionEnum.DELETE_CUSTOMER_PERMISSION,
-          PermissionEnum.DELETE_RESOURCE_PERMISSION,
-          PermissionEnum.DELETE_RESOURCE_PROJECT_PERMISSION,
-          PermissionEnum.DELETE_PROJECT_PERMISSION,
-        ],
-      },
-      {
-        name: 'PROJECT.MANAGER',
-        permissions: [
-          PermissionEnum.DELETE_RESOURCE_PERMISSION,
-          PermissionEnum.DELETE_RESOURCE_PROJECT_PERMISSION,
-          PermissionEnum.DELETE_PROJECT_PERMISSION,
-        ],
-      },
-      {
-        name: 'PROJECT.MEMBER',
-        permissions: [],
-      },
+ENV.roles = [
+  {
+    name: 'CUSTOMER.OWNER',
+    permissions: [
+      PermissionEnum.DELETE_CUSTOMER_PERMISSION,
+      PermissionEnum.DELETE_RESOURCE_PERMISSION,
+      PermissionEnum.DELETE_RESOURCE_PROJECT_PERMISSION,
+      PermissionEnum.DELETE_PROJECT_PERMISSION,
     ],
   },
-}));
+  {
+    name: 'PROJECT.MANAGER',
+    permissions: [
+      PermissionEnum.DELETE_RESOURCE_PERMISSION,
+      PermissionEnum.DELETE_RESOURCE_PROJECT_PERMISSION,
+      PermissionEnum.DELETE_PROJECT_PERMISSION,
+    ],
+  },
+  {
+    name: 'PROJECT.MEMBER',
+    permissions: [],
+  },
+];
 
 import { canDeletePermission } from './utils';
 

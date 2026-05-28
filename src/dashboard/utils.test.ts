@@ -1,14 +1,15 @@
 import { DateTime } from 'luxon';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { ENV } from '@/core/config';
+
 import * as api from './utils';
 
 vi.mock('@/core/formatCurrency', () => ({
   defaultCurrency: (val) => `EUR${val}`,
 }));
-vi.mock('@/core/config', () => ({
-  ENV: { plugins: { WALDUR_CORE: { BRAND_COLOR: '#12B76A' } } },
-}));
+
+ENV.plugins.WALDUR_CORE.BRAND_COLOR = '#12B76A';
 
 describe('Dashboard chart API', () => {
   beforeEach(() => {

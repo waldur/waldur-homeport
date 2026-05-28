@@ -1,4 +1,3 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -6,13 +5,10 @@ import {
   marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
-import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
 
 import { RenewAllocationDialog } from './RenewAllocationDialog';
-
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
 
 // Mock Wizard because it's complex and we want to test RenewAllocationDialog's onSubmit
 vi.mock('@/wizard', () => ({
@@ -24,22 +20,10 @@ vi.mock('@/wizard', () => ({
   ),
 }));
 
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('RenewAllocationDialog', () => {
   const mockRefetch = vi.fn();
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
 
   const resource = {
     uuid: 'res-1',
@@ -49,17 +33,8 @@ describe('RenewAllocationDialog', () => {
     limits: {},
   } as any;
 
-  const mockCloseDialog = vi.fn();
-
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      closeDialog: mockCloseDialog,
-    } as any);
     vi.mocked(marketplaceResourcesRetrieve).mockResolvedValue({
       data: resource,
     } as any);
@@ -93,7 +68,7 @@ describe('RenewAllocationDialog', () => {
     });
 
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Renewal request has been created.',
       );
     });
@@ -120,7 +95,7 @@ describe('RenewAllocationDialog', () => {
     });
 
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Renewal request has been created for 2 resources.',
       );
     });

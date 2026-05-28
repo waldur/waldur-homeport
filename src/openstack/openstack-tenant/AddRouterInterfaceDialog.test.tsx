@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -10,39 +9,9 @@ import {
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { AddRouterInterfaceDialog } from './AddRouterInterfaceDialog';
-
-vi.mock('@monaco-editor/react', () => {
-  return {
-    Editor: vi.fn(({ value, onChange, 'data-testid': testId }) => {
-      return (
-        <textarea
-          data-testid={testId || 'monaco-editor'}
-          value={value || ''}
-          onChange={(e) => {
-            if (onChange) onChange((e.target as HTMLTextAreaElement).value);
-          }}
-        />
-      );
-    }),
-  };
-});
-
-vi.mock('@/form/monacoSetup', () => {
-  return {
-    initMonaco: vi.fn().mockResolvedValue({
-      languages: {
-        register: vi.fn(),
-        setLanguageConfiguration: vi.fn(),
-        setMonarchTokensProvider: vi.fn(),
-      },
-    }),
-  };
-});
-
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
 
 const mockRouter = {
   uuid: 'router-uuid',
@@ -51,33 +20,14 @@ const mockRouter = {
 };
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-    },
-  });
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <AddRouterInterfaceDialog resolve={{ router: mockRouter as any }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <AddRouterInterfaceDialog resolve={{ router: mockRouter as any }} />,
   );
 };
 
 describe('AddRouterInterfaceDialog', () => {
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-  const mockCloseDialog = vi.fn();
-
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      closeDialog: mockCloseDialog,
-    } as any);
 
     vi.mocked(openstackSubnetsList).mockResolvedValue({
       data: [{ url: '/subnet-1/', name: 'subnet-1', cidr: '10.0.0.0/24' }],
@@ -138,8 +88,10 @@ describe('AddRouterInterfaceDialog', () => {
         body: { subnet: '/subnet-1/' },
       });
     });
-    expect(mockShowSuccess).toHaveBeenCalledWith('Router interface was added.');
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useNotify().showSuccess).toHaveBeenCalledWith(
+      'Router interface was added.',
+    );
+    expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
   it('submits correctly when adding port interface', async () => {
@@ -170,8 +122,10 @@ describe('AddRouterInterfaceDialog', () => {
         body: { port: '/port-1/' },
       });
     });
-    expect(mockShowSuccess).toHaveBeenCalledWith('Router interface was added.');
-    expect(mockCloseDialog).toHaveBeenCalled();
+    expect(useNotify().showSuccess).toHaveBeenCalledWith(
+      'Router interface was added.',
+    );
+    expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
   it('handles API submission failure gracefully', async () => {
@@ -192,7 +146,7 @@ describe('AddRouterInterfaceDialog', () => {
     await user.click(submitBtn);
 
     await waitFor(() => {
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         expect.any(Error),
         'Unable to add router interface.',
       );

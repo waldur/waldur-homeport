@@ -12,8 +12,6 @@ import { getRoles } from './utils';
 
 vi.mock('./utils');
 
-vi.mock('waldur-js-client');
-
 describe('RoleDescriptionEditDialog', () => {
   const mockRow = {
     uuid: 'test-uuid',

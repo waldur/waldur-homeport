@@ -1,12 +1,9 @@
 import { vi, describe, it, expect, afterEach, beforeEach } from 'vitest';
 
+import { ENV } from '@/core/config';
 import { formatOrganizationCostChart } from '@/dashboard/utils';
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: { WALDUR_CORE: { CURRENCY_NAME: 'EUR' } },
-  },
-}));
+ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
 
 describe('Customer dashboard chart API', () => {
   beforeEach(() => {

@@ -1,18 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import {
-  pushStateLocationPlugin,
-  servicesPlugin,
-  UIRouter,
-  UIRouterReact,
-} from '@uirouter/react';
+import { UIRouter } from '@uirouter/react';
 import { describe, expect, it } from 'vitest';
 
+import { createTestRouter } from '@/test/router';
 import { TermsOfService } from '@/user/support/TermsOfService';
 
 const renderComponent = (props?) => {
-  const router = new UIRouterReact();
-  router.plugin(servicesPlugin);
-  router.plugin(pushStateLocationPlugin);
+  const router = createTestRouter();
 
   render(
     <UIRouter router={router}>

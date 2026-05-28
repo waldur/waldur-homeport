@@ -5,11 +5,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const OnboardingVerificationDeleteAction = (props) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       onboardingVerificationsDestroy({ path: { uuid: props.row.uuid } }),
     refetch: props.refetch,

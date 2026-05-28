@@ -9,11 +9,7 @@ export const RoleMappingDeleteAction: FunctionComponent<{ row; refetch }> = ({
   row,
   refetch,
 }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       callProposalProjectRoleMappingsDestroy({ path: { uuid: row.uuid } }),
     refetch: refetch,

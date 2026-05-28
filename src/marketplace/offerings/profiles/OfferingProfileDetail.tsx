@@ -138,7 +138,7 @@ const AddRoleToProfileDialog: FC<{
       const seen = new Set<string>();
       const merged: any[] = [];
       for (const r of [...r1, ...r2]) {
-        const ct = r.content_type || (r as any).content_type;
+        const ct = r.content_type;
         if (ct !== 'resource' && ct !== 'resource_project') continue;
         if (seen.has(r.uuid)) continue;
         seen.add(r.uuid);

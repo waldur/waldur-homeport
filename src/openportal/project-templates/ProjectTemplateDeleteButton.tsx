@@ -9,11 +9,7 @@ export const ProjectTemplateDeleteButton: FC<{ row; refetch }> = ({
   row,
   refetch,
 }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       openportalProjectTemplateDestroy({ path: { uuid: row.uuid } }),
     refetch: refetch,
