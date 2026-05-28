@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -9,32 +8,17 @@ import {
 } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { HookDetailsDialog } from './HookDetailsDialog';
 import { HookResponse } from './types';
 import { loadEventGroupsOptions } from './utils';
 
 // Mock the required modules
-vi.mock('waldur-js-client');
 vi.mock('./utils');
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
-  } as any),
-}));
 
 const renderWithRedux = (ui) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
-  );
+  return renderWithProviders(ui);
 };
 
 const mockEventGroups = [
@@ -52,17 +36,9 @@ const mockEventGroups = [
 
 describe('HookDetailsDialog', () => {
   const mockRefetch = vi.fn();
-  const mockShowSuccess = vi.fn();
-  const mockShowError = vi.fn();
-  const mockShowErrorResponse = vi.fn();
 
   beforeEach(() => {
     vi.mocked(loadEventGroupsOptions).mockResolvedValue(mockEventGroups);
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showError: mockShowError,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
   });
 
   afterEach(() => {
@@ -100,7 +76,7 @@ describe('HookDetailsDialog', () => {
             event_groups: ['users'],
           },
         });
-        expect(mockShowSuccess).toHaveBeenCalledWith(
+        expect(useNotify().showSuccess).toHaveBeenCalledWith(
           'Notification has been created.',
         );
       });
@@ -125,7 +101,7 @@ describe('HookDetailsDialog', () => {
             event_groups: ['users'],
           },
         });
-        expect(mockShowSuccess).toHaveBeenCalledWith(
+        expect(useNotify().showSuccess).toHaveBeenCalledWith(
           'Notification has been created.',
         );
       });
@@ -200,7 +176,7 @@ describe('HookDetailsDialog', () => {
       const submitButton = screen.getByText('Update');
       await userEvent.click(submitButton);
       await waitFor(() => {
-        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
           error,
           'Unable to update notification.',
         );

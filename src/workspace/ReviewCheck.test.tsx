@@ -1,21 +1,16 @@
+/* eslint-disable import/order */
 import { renderHook } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const mockProjectPermissionsReviewsList = vi.fn();
-const mockCustomerPermissionsReviewsList = vi.fn();
+import {
+  projectPermissionsReviewsList,
+  customerPermissionsReviewsList,
+} from 'waldur-js-client';
+import { useModal } from '@/modal/actions';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
+
 const mockIsFeatureVisible = vi.fn();
 const mockHasPermission = vi.fn();
-const mockOpenDialog = vi.fn();
-const mockUseUser = vi.fn();
-const mockUseCustomer = vi.fn();
-const mockUseProject = vi.fn();
-
-vi.mock('waldur-js-client', () => ({
-  projectPermissionsReviewsList: (...args) =>
-    mockProjectPermissionsReviewsList(...args),
-  customerPermissionsReviewsList: (...args) =>
-    mockCustomerPermissionsReviewsList(...args),
-}));
 
 vi.mock('@/features/connect', () => ({
   isFeatureVisible: (...args) => mockIsFeatureVisible(...args),
@@ -23,12 +18,6 @@ vi.mock('@/features/connect', () => ({
 
 vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: (...args) => mockHasPermission(...args),
-}));
-
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    openDialog: mockOpenDialog,
-  }),
 }));
 
 vi.mock('@/core/lazyComponent', () => ({
@@ -39,12 +28,6 @@ vi.mock('@/core/PendingMembershipReviewDialog', () => ({
   PendingMembershipReviewDialog: 'PendingMembershipReviewDialog',
 }));
 
-vi.mock('@/workspace/hooks', () => ({
-  useUser: () => mockUseUser(),
-  useCustomer: () => mockUseCustomer(),
-  useProject: () => mockUseProject(),
-}));
-
 import { PermissionEnum } from '@/permissions/enums';
 
 import { useReviewCheck } from './ReviewCheck';
@@ -52,9 +35,12 @@ import { useReviewCheck } from './ReviewCheck';
 describe('useReviewCheck', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockUseUser.mockReturnValue({ is_staff: false, uuid: 'user-123' });
-    mockUseCustomer.mockReturnValue(null);
-    mockUseProject.mockReturnValue(null);
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: false,
+      uuid: 'user-123',
+    } as any);
+    vi.mocked(useCustomer).mockReturnValue(null);
+    vi.mocked(useProject).mockReturnValue(null);
   });
 
   describe('project pending reviews', () => {
@@ -62,43 +48,46 @@ describe('useReviewCheck', () => {
 
     it('should not check reviews when feature is disabled', async () => {
       mockIsFeatureVisible.mockReturnValue(false);
-      mockUseProject.mockReturnValue(mockProject);
+      vi.mocked(useProject).mockReturnValue(mockProject as any);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      expect(mockProjectPermissionsReviewsList).not.toHaveBeenCalled();
+      expect(vi.mocked(projectPermissionsReviewsList)).not.toHaveBeenCalled();
     });
 
     it('should not check reviews when user is staff', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseUser.mockReturnValue({ is_staff: true, uuid: 'user-123' });
-      mockUseProject.mockReturnValue(mockProject);
+      vi.mocked(useUser).mockReturnValue({
+        is_staff: true,
+        uuid: 'user-123',
+      } as any);
+      vi.mocked(useProject).mockReturnValue(mockProject as any);
       mockHasPermission.mockReturnValue(true);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      expect(mockProjectPermissionsReviewsList).not.toHaveBeenCalled();
+      expect(vi.mocked(projectPermissionsReviewsList)).not.toHaveBeenCalled();
     });
 
     it('should not check reviews when user lacks permission', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseProject.mockReturnValue(mockProject);
+      vi.mocked(useProject).mockReturnValue(mockProject as any);
       mockHasPermission.mockReturnValue(false);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      expect(mockProjectPermissionsReviewsList).not.toHaveBeenCalled();
+      expect(vi.mocked(projectPermissionsReviewsList)).not.toHaveBeenCalled();
     });
 
     it('should check permission with correct parameters', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseProject.mockReturnValue(mockProject);
+      vi.mocked(useProject).mockReturnValue(mockProject as any);
       mockHasPermission.mockReturnValue(false);
 
       renderHook(() => useReviewCheck());
@@ -116,15 +105,17 @@ describe('useReviewCheck', () => {
 
     it('should fetch pending reviews when user has permission', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseProject.mockReturnValue(mockProject);
+      vi.mocked(useProject).mockReturnValue(mockProject as any);
       mockHasPermission.mockReturnValue(true);
-      mockProjectPermissionsReviewsList.mockResolvedValue({ data: [] });
+      vi.mocked(projectPermissionsReviewsList).mockResolvedValue({
+        data: [],
+      } as any);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      expect(mockProjectPermissionsReviewsList).toHaveBeenCalledWith(
+      expect(vi.mocked(projectPermissionsReviewsList)).toHaveBeenCalledWith(
         expect.objectContaining({
           query: {
             project_uuid: 'project-123',
@@ -136,17 +127,17 @@ describe('useReviewCheck', () => {
 
     it('should open modal when pending review exists', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseProject.mockReturnValue(mockProject);
+      vi.mocked(useProject).mockReturnValue(mockProject as any);
       mockHasPermission.mockReturnValue(true);
-      mockProjectPermissionsReviewsList.mockResolvedValue({
+      vi.mocked(projectPermissionsReviewsList).mockResolvedValue({
         data: [{ uuid: 'review-123' }],
-      });
+      } as any);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockOpenDialog).toHaveBeenCalledWith(
+      expect(useModal().openDialog).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           resolve: { reviewId: 'review-123', scope: 'project' },
@@ -157,22 +148,24 @@ describe('useReviewCheck', () => {
 
     it('should not open modal when no pending review exists', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseProject.mockReturnValue(mockProject);
+      vi.mocked(useProject).mockReturnValue(mockProject as any);
       mockHasPermission.mockReturnValue(true);
-      mockProjectPermissionsReviewsList.mockResolvedValue({ data: [] });
+      vi.mocked(projectPermissionsReviewsList).mockResolvedValue({
+        data: [],
+      } as any);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockOpenDialog).not.toHaveBeenCalled();
+      expect(useModal().openDialog).not.toHaveBeenCalled();
     });
 
     it('should silently handle API errors', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseProject.mockReturnValue(mockProject);
+      vi.mocked(useProject).mockReturnValue(mockProject as any);
       mockHasPermission.mockReturnValue(true);
-      mockProjectPermissionsReviewsList.mockRejectedValue(
+      vi.mocked(projectPermissionsReviewsList).mockRejectedValue(
         new Error('API Error'),
       );
 
@@ -183,7 +176,7 @@ describe('useReviewCheck', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockOpenDialog).not.toHaveBeenCalled();
+      expect(useModal().openDialog).not.toHaveBeenCalled();
     });
   });
 
@@ -192,34 +185,34 @@ describe('useReviewCheck', () => {
 
     it('should not check reviews when feature is disabled', async () => {
       mockIsFeatureVisible.mockReturnValue(false);
-      mockUseCustomer.mockReturnValue(mockCustomer);
+      vi.mocked(useCustomer).mockReturnValue(mockCustomer as any);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      expect(mockCustomerPermissionsReviewsList).not.toHaveBeenCalled();
+      expect(vi.mocked(customerPermissionsReviewsList)).not.toHaveBeenCalled();
     });
 
     it('should not check reviews when user is not owner', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseCustomer.mockReturnValue(mockCustomer);
-      mockUseUser.mockReturnValue({
+      vi.mocked(useCustomer).mockReturnValue(mockCustomer as any);
+      vi.mocked(useUser).mockReturnValue({
         uuid: 'user-123',
         permissions: [],
-      });
+      } as any);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      expect(mockCustomerPermissionsReviewsList).not.toHaveBeenCalled();
+      expect(vi.mocked(customerPermissionsReviewsList)).not.toHaveBeenCalled();
     });
 
     it('should fetch pending reviews when user is owner', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseCustomer.mockReturnValue(mockCustomer);
-      mockUseUser.mockReturnValue({
+      vi.mocked(useCustomer).mockReturnValue(mockCustomer as any);
+      vi.mocked(useUser).mockReturnValue({
         uuid: 'user-123',
         permissions: [
           {
@@ -228,14 +221,16 @@ describe('useReviewCheck', () => {
             role_name: 'CUSTOMER.OWNER',
           },
         ],
-      });
-      mockCustomerPermissionsReviewsList.mockResolvedValue({ data: [] });
+      } as any);
+      vi.mocked(customerPermissionsReviewsList).mockResolvedValue({
+        data: [],
+      } as any);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 0));
 
-      expect(mockCustomerPermissionsReviewsList).toHaveBeenCalledWith(
+      expect(vi.mocked(customerPermissionsReviewsList)).toHaveBeenCalledWith(
         expect.objectContaining({
           query: {
             customer_uuid: 'customer-123',
@@ -247,8 +242,8 @@ describe('useReviewCheck', () => {
 
     it('should open modal when pending review exists', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseCustomer.mockReturnValue(mockCustomer);
-      mockUseUser.mockReturnValue({
+      vi.mocked(useCustomer).mockReturnValue(mockCustomer as any);
+      vi.mocked(useUser).mockReturnValue({
         uuid: 'user-123',
         permissions: [
           {
@@ -257,16 +252,16 @@ describe('useReviewCheck', () => {
             role_name: 'CUSTOMER.OWNER',
           },
         ],
-      });
-      mockCustomerPermissionsReviewsList.mockResolvedValue({
+      } as any);
+      vi.mocked(customerPermissionsReviewsList).mockResolvedValue({
         data: [{ uuid: 'review-456' }],
-      });
+      } as any);
 
       renderHook(() => useReviewCheck());
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockOpenDialog).toHaveBeenCalledWith(
+      expect(useModal().openDialog).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           resolve: { reviewId: 'review-456', scope: 'customer' },
@@ -277,8 +272,8 @@ describe('useReviewCheck', () => {
 
     it('should silently handle API errors', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseCustomer.mockReturnValue(mockCustomer);
-      mockUseUser.mockReturnValue({
+      vi.mocked(useCustomer).mockReturnValue(mockCustomer as any);
+      vi.mocked(useUser).mockReturnValue({
         uuid: 'user-123',
         permissions: [
           {
@@ -287,8 +282,8 @@ describe('useReviewCheck', () => {
             role_name: 'CUSTOMER.OWNER',
           },
         ],
-      });
-      mockCustomerPermissionsReviewsList.mockRejectedValue(
+      } as any);
+      vi.mocked(customerPermissionsReviewsList).mockRejectedValue(
         new Error('API Error'),
       );
 
@@ -298,7 +293,7 @@ describe('useReviewCheck', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockOpenDialog).not.toHaveBeenCalled();
+      expect(useModal().openDialog).not.toHaveBeenCalled();
     });
   });
 
@@ -311,18 +306,18 @@ describe('useReviewCheck', () => {
       let resolveFirst: (value: any) => void;
       const firstPromise = new Promise((resolve) => {
         resolveFirst = resolve;
-      });
+      }) as any;
       // Second request resolves immediately
-      mockProjectPermissionsReviewsList
+      vi.mocked(projectPermissionsReviewsList)
         .mockReturnValueOnce(firstPromise)
-        .mockResolvedValueOnce({ data: [{ uuid: 'review-B' }] });
+        .mockResolvedValueOnce({ data: [{ uuid: 'review-B' }] } as any);
 
-      mockUseProject.mockReturnValue({ uuid: 'project-A' });
+      vi.mocked(useProject).mockReturnValue({ uuid: 'project-A' } as any);
 
       const { rerender } = renderHook(() => useReviewCheck());
 
       // Quickly change to Project B
-      mockUseProject.mockReturnValue({ uuid: 'project-B' });
+      vi.mocked(useProject).mockReturnValue({ uuid: 'project-B' } as any);
       rerender();
 
       // Wait for Project B's request to complete
@@ -333,8 +328,8 @@ describe('useReviewCheck', () => {
       await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Should only show modal for Project B, not Project A
-      expect(mockOpenDialog).toHaveBeenCalledTimes(1);
-      expect(mockOpenDialog).toHaveBeenCalledWith(
+      expect(useModal().openDialog).toHaveBeenCalledTimes(1);
+      expect(useModal().openDialog).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           resolve: { reviewId: 'review-B', scope: 'project' },
@@ -344,7 +339,7 @@ describe('useReviewCheck', () => {
 
     it('should cancel previous customer review request when navigating to new customer', async () => {
       mockIsFeatureVisible.mockReturnValue(true);
-      mockUseUser.mockReturnValue({
+      vi.mocked(useUser).mockReturnValue({
         uuid: 'user-123',
         permissions: [
           {
@@ -358,24 +353,24 @@ describe('useReviewCheck', () => {
             role_name: 'CUSTOMER.OWNER',
           },
         ],
-      });
+      } as any);
 
       // First request will be slow
       let resolveFirst: (value: any) => void;
       const firstPromise = new Promise((resolve) => {
         resolveFirst = resolve;
-      });
+      }) as any;
       // Second request resolves immediately
-      mockCustomerPermissionsReviewsList
+      vi.mocked(customerPermissionsReviewsList)
         .mockReturnValueOnce(firstPromise)
-        .mockResolvedValueOnce({ data: [{ uuid: 'review-B' }] });
+        .mockResolvedValueOnce({ data: [{ uuid: 'review-B' }] } as any);
 
-      mockUseCustomer.mockReturnValue({ uuid: 'customer-A' });
+      vi.mocked(useCustomer).mockReturnValue({ uuid: 'customer-A' } as any);
 
       const { rerender } = renderHook(() => useReviewCheck());
 
       // Quickly change to Customer B
-      mockUseCustomer.mockReturnValue({ uuid: 'customer-B' });
+      vi.mocked(useCustomer).mockReturnValue({ uuid: 'customer-B' } as any);
       rerender();
 
       // Wait for Customer B's request to complete
@@ -386,8 +381,8 @@ describe('useReviewCheck', () => {
       await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Should only show modal for Customer B, not Customer A
-      expect(mockOpenDialog).toHaveBeenCalledTimes(1);
-      expect(mockOpenDialog).toHaveBeenCalledWith(
+      expect(useModal().openDialog).toHaveBeenCalledTimes(1);
+      expect(useModal().openDialog).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           resolve: { reviewId: 'review-B', scope: 'customer' },

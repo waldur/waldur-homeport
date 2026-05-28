@@ -1,12 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceOfferingTermsOfServiceCreate } from 'waldur-js-client';
 
-import { AddTosDialog } from './AddTosDialog';
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 
-vi.mock('waldur-js-client');
+import { AddTosDialog } from './AddTosDialog';
 
 // Mock MarkdownEditor to avoid heavy MDXEditor dependency in tests
 vi.mock('@/form/MarkdownEditor', () => ({
@@ -22,14 +22,9 @@ vi.mock('@/form/MarkdownEditor', () => ({
 const fakeOffering = { url: 'offering-url', uuid: 'offering-uuid' };
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
   const refetch = vi.fn();
-  const result = render(
-    <QueryClientProvider client={queryClient}>
-      <AddTosDialog resolve={{ offering: fakeOffering, refetch }} />
-    </QueryClientProvider>,
+  const result = renderWithProviders(
+    <AddTosDialog resolve={{ offering: fakeOffering, refetch }} />,
   );
   return { ...result, refetch };
 };
@@ -107,12 +102,7 @@ describe('AddTosDialog', () => {
     await user.type(container.querySelector('input[name="version"]'), '2.0');
 
     // Switch to external link
-    const addAsSelect = container.querySelector(
-      '.metronic-select-container input',
-    );
-    await user.click(addAsSelect);
-    const externalLinkOption = await screen.findByText('External link');
-    await user.click(externalLinkOption);
+    await openAndSelectOption(user, 'Add as', 'External link');
 
     // Markdown editor should be gone, external link field should appear
     expect(screen.queryByTestId('markdown-editor')).not.toBeInTheDocument();

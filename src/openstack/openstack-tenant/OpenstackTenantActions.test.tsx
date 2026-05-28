@@ -1,7 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
+import { ENV } from '@/core/config';
+import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { OpenstackTenantActions } from './OpenstackTenantActions';
@@ -10,17 +11,8 @@ vi.mock('@/features/connect', () => ({
   isFeatureVisible: () => true,
 }));
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        ONLY_STAFF_MANAGES_SERVICES: false,
-      },
-      WALDUR_OPENSTACK: { TENANT_CREDENTIALS_VISIBLE: true },
-    },
-    roles: [],
-  },
-}));
+ENV.plugins.WALDUR_CORE.ONLY_STAFF_MANAGES_SERVICES = false;
+ENV.plugins.WALDUR_OPENSTACK = { TENANT_CREDENTIALS_VISIBLE: true } as any;
 
 const mockMarketplaceResource = {
   uuid: 'test-market-uuid',
@@ -45,19 +37,15 @@ const renderComponent = (userOverrides = {}) => {
     permissions: [],
     ...userOverrides,
   } as any);
-  const queryClient = new QueryClient();
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <OpenstackTenantActions
-        marketplaceResource={mockMarketplaceResource}
-        resource={mockResource}
-        refetch={vi.fn()}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <OpenstackTenantActions
+      marketplaceResource={mockMarketplaceResource}
+      resource={mockResource}
+      refetch={vi.fn()}
+    />,
   );
 };
 
-vi.mock('@/workspace/hooks');
 vi.mock('@/workspace/selectors', () => ({
   getUser: () => ({ is_staff: true, permissions: [] }),
   getCustomer: () => ({}),

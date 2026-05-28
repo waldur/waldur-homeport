@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -8,16 +7,10 @@ import {
   projectsUpdateUser,
 } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
+
 import { EditProjectUserDialog } from './EditProjectUserDialog';
-
-vi.mock('waldur-js-client');
-
-vi.mock('@/i18n/LanguageUtilsService', () => ({
-  LanguageUtilsService: {
-    getCurrentLanguage: () => ({ code: 'en' }),
-    dictionary: {},
-  },
-}));
 
 vi.mock('@/permissions/utils', () => ({
   getProjectRoles: () => [
@@ -47,33 +40,9 @@ vi.mock('@/form/DateField', () => ({
   ),
 }));
 
-vi.mock('@/form/select/SelectField', () => ({
-  SelectField: (props) => (
-    <select
-      id={props.inputId || props.id || props.input?.name}
-      value={props.input.value?.name || props.input.value || ''}
-      onChange={(e) => {
-        const option = props.options.find((o) => o.name === e.target.value);
-        props.input.onChange(option || e.target.value);
-      }}
-    >
-      {props.options.map((option) => (
-        <option key={option.name} value={option.name}>
-          {option.description || option.name}
-        </option>
-      ))}
-    </select>
-  ),
-}));
-
 const renderComponent = (project, customer, refetch = vi.fn()) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <EditProjectUserDialog resolve={{ project, customer, refetch }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <EditProjectUserDialog resolve={{ project, customer, refetch }} />,
   );
 };
 
@@ -98,9 +67,8 @@ describe('EditProjectUserDialog', () => {
     renderComponent(mockProjectPermission, mockCustomer);
     expect(screen.getByText('Edit project member')).toBeInTheDocument();
 
-    // Check hidden input for role value
-    const roleSelect = screen.getByLabelText('Role') as HTMLSelectElement;
-    expect(roleSelect.value).toBe('admin');
+    // Check role value
+    expect(screen.getByText('Admin')).toBeInTheDocument();
 
     // Check DateField
     const dateInput = screen.getByPlaceholderText(
@@ -145,8 +113,7 @@ describe('EditProjectUserDialog', () => {
     renderComponent(mockProjectPermission, mockCustomer, mockRefetch);
 
     // Change role
-    const roleSelect = screen.getByLabelText('Role');
-    await user.selectOptions(roleSelect, 'manager');
+    await openAndSelectOption(user, 'Role', 'Manager');
 
     // Submit
     await user.click(screen.getByText('Save'));

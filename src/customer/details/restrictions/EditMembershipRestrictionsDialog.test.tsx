@@ -1,20 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { customersPartialUpdate } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+import { useUser, useCustomer, useProject } from '@/workspace/hooks';
+
 import { EditMembershipRestrictionsDialog } from './EditMembershipRestrictionsDialog';
-
-vi.mock('waldur-js-client');
-
-vi.mock('@/workspace/hooks', () => ({
-  useUser: () => ({ is_staff: true }),
-  useCustomer: () => ({ url: 'customer-url' }),
-  useProject: () => ({ uuid: 'project-uuid' }),
-  useSetCustomer: () => vi.fn(),
-  useSetProject: () => vi.fn(),
-}));
 
 const fakeCustomer = {
   uuid: 'customer-uuid',
@@ -23,21 +15,19 @@ const fakeCustomer = {
 };
 
 const renderDialog = (field = 'user_email_patterns') => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <EditMembershipRestrictionsDialog
-        resolve={{ customer: fakeCustomer as any, field: field as any }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <EditMembershipRestrictionsDialog
+      resolve={{ customer: fakeCustomer as any, field: field as any }}
+    />,
   );
 };
 
 describe('EditMembershipRestrictionsDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(useCustomer).mockReturnValue({ url: 'customer-url' } as any);
+    vi.mocked(useProject).mockReturnValue({ uuid: 'project-uuid' } as any);
   });
 
   it('renders with initial values from customer', () => {

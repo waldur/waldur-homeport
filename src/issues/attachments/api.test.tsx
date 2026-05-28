@@ -1,6 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { act, renderHook, waitFor } from '@testing-library/react';
-import { ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   supportAttachmentsCreate,
@@ -8,8 +6,9 @@ import {
   supportAttachmentsList,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { useNotify } from '@/store/notify';
-import store from '@/store/store';
+import { createTestWrapper } from '@/test/harness';
 
 import {
   useDeleteAttachment,
@@ -17,57 +16,13 @@ import {
   useUploadAttachments,
 } from './api';
 
-// Mock waldur-js-client
-vi.mock('waldur-js-client', () => ({
-  supportAttachmentsList: vi.fn(),
-  supportAttachmentsCreate: vi.fn(),
-  supportAttachmentsDestroy: vi.fn(),
-}));
-
-// Mock store hooks
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showError: vi.fn(),
-    showErrorResponse: vi.fn(),
-    showSuccess: vi.fn(),
-  }),
-}));
-
-// Mock store
-vi.mock('@/store/store', () => ({
-  default: {
-    dispatch: vi.fn(),
-  },
-}));
-
-// Mock core/api
 vi.mock('@/core/api', () => ({
   formDataOptions: { headers: { 'Content-Type': 'multipart/form-data' } },
 }));
 
-// Mock core/config
-vi.mock('@/core/config', () => ({
-  ENV: {
-    excludedAttachmentTypes: ['.exe', '.bat'],
-  },
-}));
+ENV.excludedAttachmentTypes = ['.exe', '.bat'];
 
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
-const createWrapper = () => {
-  const queryClient = createTestQueryClient();
-
-  return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 const mockAttachments = [
   {
@@ -218,7 +173,6 @@ describe('Issue Attachments API Hooks', () => {
         error,
         'Unable to upload attachment.',
       );
-      expect(store.dispatch).not.toHaveBeenCalled(); // useNotify functions are self-dispatching
     });
 
     it('retries failed uploads', async () => {
@@ -313,7 +267,6 @@ describe('Issue Attachments API Hooks', () => {
       expect(showError).toHaveBeenCalledWith(
         'File: malware.exe. \n Restricted, because of type.',
       );
-      expect(store.dispatch).not.toHaveBeenCalled();
     });
 
     it('uploads multiple files in parallel', async () => {

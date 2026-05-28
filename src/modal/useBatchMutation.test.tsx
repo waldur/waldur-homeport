@@ -1,43 +1,16 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
-import { ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
 
-import { useModal } from './actions';
 import { useBatchMutation } from './useBatchMutation';
-
-vi.mock('./actions');
-vi.mock('@/store/notify');
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('useBatchMutation', () => {
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-  const mockConfirm = vi.fn();
-
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      confirm: mockConfirm,
-      closeDialog: vi.fn(),
-    } as any);
   });
 
   const rows = [{ uuid: '1' }, { uuid: '2' }];
@@ -61,12 +34,12 @@ describe('useBatchMutation', () => {
       { wrapper: createWrapper() },
     );
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
     result.current.mutate(undefined);
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(mutationFn).toHaveBeenCalledTimes(2);
-    expect(mockShowSuccess).toHaveBeenCalledWith(successMessage);
+    expect(useNotify().showSuccess).toHaveBeenCalledWith(successMessage);
   });
 
   it('handles partial success with static error message', async () => {
@@ -88,12 +61,15 @@ describe('useBatchMutation', () => {
       { wrapper: createWrapper() },
     );
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
     result.current.mutate(undefined);
 
     await waitFor(() => expect(result.current.isError).toBe(true));
-    expect(mockShowSuccess).toHaveBeenCalledWith('1 succeeded');
-    expect(mockShowErrorResponse).toHaveBeenCalledWith(error, errorMessage);
+    expect(useNotify().showSuccess).toHaveBeenCalledWith('1 succeeded');
+    expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
+      error,
+      errorMessage,
+    );
   });
 
   it('handles partial success with dynamic error message', async () => {
@@ -116,12 +92,15 @@ describe('useBatchMutation', () => {
       { wrapper: createWrapper() },
     );
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
     result.current.mutate(undefined);
 
     await waitFor(() => expect(result.current.isError).toBe(true));
-    expect(mockShowSuccess).toHaveBeenCalledWith('1 succeeded');
-    expect(mockShowErrorResponse).toHaveBeenCalledWith(error, '1 failed');
+    expect(useNotify().showSuccess).toHaveBeenCalledWith('1 succeeded');
+    expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
+      error,
+      '1 failed',
+    );
   });
 
   it('handles full failure with dynamic error message', async () => {
@@ -141,12 +120,15 @@ describe('useBatchMutation', () => {
       { wrapper: createWrapper() },
     );
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
     result.current.mutate(undefined);
 
     await waitFor(() => expect(result.current.isError).toBe(true));
-    expect(mockShowSuccess).not.toHaveBeenCalled();
-    expect(mockShowErrorResponse).toHaveBeenCalledWith(error, '2 failed');
+    expect(useNotify().showSuccess).not.toHaveBeenCalled();
+    expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
+      error,
+      '2 failed',
+    );
   });
 
   it('calls refetch on partial success', async () => {
@@ -169,7 +151,7 @@ describe('useBatchMutation', () => {
       { wrapper: createWrapper() },
     );
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
     result.current.mutate(undefined);
 
     await waitFor(() => expect(result.current.isError).toBe(true));
@@ -191,10 +173,10 @@ describe('useBatchMutation', () => {
       { wrapper: createWrapper() },
     );
 
-    mockConfirm.mockRejectedValue('cancelled');
+    vi.mocked(useModal().confirm).mockRejectedValueOnce('cancelled');
     result.current.mutate(undefined);
 
-    await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+    await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     expect(mutationFn).not.toHaveBeenCalled();
   });
 
@@ -218,12 +200,12 @@ describe('useBatchMutation', () => {
       { wrapper: createWrapper() },
     );
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
     result.current.mutate({ target: 'Org X' });
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(mutationFn).toHaveBeenCalledWith(rows[0], { target: 'Org X' });
-    expect(mockShowSuccess).toHaveBeenCalledWith('Moved to Org X');
+    expect(useNotify().showSuccess).toHaveBeenCalledWith('Moved to Org X');
   });
 
   it('handles partial success with dynamic messages and variables', async () => {
@@ -246,12 +228,12 @@ describe('useBatchMutation', () => {
       { wrapper: createWrapper() },
     );
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
     result.current.mutate({ target: 'Org Y' });
 
     await waitFor(() => expect(result.current.isError).toBe(true));
-    expect(mockShowSuccess).toHaveBeenCalledWith('1 moved to Org Y');
-    expect(mockShowErrorResponse).toHaveBeenCalledWith(
+    expect(useNotify().showSuccess).toHaveBeenCalledWith('1 moved to Org Y');
+    expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
       error,
       '1 failed to Org Y',
     );

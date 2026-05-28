@@ -1,20 +1,15 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  pushStateLocationPlugin,
-  servicesPlugin,
-  UIRouter,
-  UIRouterReact,
-} from '@uirouter/react';
+import { UIRouter } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { proposalProposalsCreate } from 'waldur-js-client';
 
+import { router as globalRouter } from '@/router';
+import { renderWithProviders } from '@/test/harness';
+import { createTestRouter } from '@/test/router';
 import { UsersService } from '@/user/UsersService';
 
 import { AddProposalDialog } from './AddProposalDialog';
-
-vi.mock('waldur-js-client');
 
 vi.mock('@/user/UsersService', () => ({
   UsersService: {
@@ -34,28 +29,15 @@ const mockCall = {
 };
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  const router = new UIRouterReact();
-  router.plugin(servicesPlugin);
-  router.plugin(pushStateLocationPlugin);
+  const router = createTestRouter();
 
-  // Mock state go
-  const stateGo = vi
-    .spyOn(router.stateService, 'go')
-    .mockImplementation(() => Promise.resolve() as any);
-
-  render(
+  renderWithProviders(
     <UIRouter router={router}>
-      <QueryClientProvider client={queryClient}>
-        <AddProposalDialog
-          resolve={{ round: mockRound as any, call: mockCall as any }}
-        />
-      </QueryClientProvider>
+      <AddProposalDialog
+        resolve={{ round: mockRound as any, call: mockCall as any }}
+      />
     </UIRouter>,
   );
-  return { stateGo };
 };
 
 describe('AddProposalDialog', () => {
@@ -72,7 +54,7 @@ describe('AddProposalDialog', () => {
   });
 
   it('submits correctly', async () => {
-    const { stateGo } = renderDialog();
+    renderDialog();
     const user = userEvent.setup();
 
     vi.mocked(proposalProposalsCreate).mockResolvedValue({
@@ -95,9 +77,12 @@ describe('AddProposalDialog', () => {
         }),
       );
       expect(UsersService.refreshCurrentUser).toHaveBeenCalled();
-      expect(stateGo).toHaveBeenCalledWith('proposals.manage-proposal', {
-        proposal_uuid: 'new-proposal-uuid',
-      });
+      expect(globalRouter.stateService.go).toHaveBeenCalledWith(
+        'proposals.manage-proposal',
+        {
+          proposal_uuid: 'new-proposal-uuid',
+        },
+      );
     });
   });
 

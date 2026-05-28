@@ -9,7 +9,7 @@ import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SelectField, SubmitButton } from '@/form';
-import { FormContainer as FormContainer } from '@/form/FormContainer';
+import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';

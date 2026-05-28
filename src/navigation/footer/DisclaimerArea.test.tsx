@@ -5,17 +5,7 @@ import { ENV } from '@/core/config';
 import * as features from '@/features/connect';
 import { DeploymentFeatures } from '@/FeaturesEnums';
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        DISCLAIMER_AREA_LOGO: '',
-        DISCLAIMER_AREA_TEXT: '',
-      },
-    },
-    apiEndpoint: 'https://api.example.com/',
-  },
-}));
+vi.mock('@/features/connect');
 
 const mockGetIconUrl = vi.fn(
   (name: string) => `https://api.example.com/api/icons/${name}/`,
@@ -24,8 +14,6 @@ vi.mock('@/core/api', () => ({
   getIconUrl: (name: string) => mockGetIconUrl(name),
 }));
 
-vi.mock('@/features/connect');
-
 import { DisclaimerArea } from './DisclaimerArea';
 
 describe('DisclaimerArea', () => {
@@ -33,6 +21,7 @@ describe('DisclaimerArea', () => {
     vi.clearAllMocks();
     ENV.plugins.WALDUR_CORE.DISCLAIMER_AREA_LOGO = '';
     ENV.plugins.WALDUR_CORE.DISCLAIMER_AREA_TEXT = '';
+    ENV.apiEndpoint = 'https://api.example.com/';
   });
 
   it('renders nothing when feature is disabled', () => {

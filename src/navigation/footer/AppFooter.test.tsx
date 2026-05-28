@@ -2,17 +2,13 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { versionRetrieve } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { useUser } from '@/workspace/hooks';
 
 import { AppFooter } from './AppFooter';
 
-vi.mock('@/workspace/hooks');
-vi.mock('waldur-js-client');
-vi.mock('@/core/config', () => ({
-  ENV: {
-    buildId: '1.2.3',
-  },
-}));
+ENV.buildId = '1.2.3';
+
 vi.mock('@/core/Tooltip', () => ({
   Tip: ({ children, label }: any) => <div title={label}>{children}</div>,
 }));
@@ -30,6 +26,7 @@ vi.mock('./BackendHealthStatusIndicator', () => ({
 
 describe('AppFooter', () => {
   beforeEach(() => {
+    ENV.buildId = '1.2.3';
     vi.mocked(useUser).mockReturnValue({
       is_staff: false,
       is_support: false,

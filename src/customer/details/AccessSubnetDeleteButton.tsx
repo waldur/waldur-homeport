@@ -12,11 +12,7 @@ interface AccessSubnetDeleteButtonProps {
 export const AccessSubnetDeleteButton = (
   props: AccessSubnetDeleteButtonProps,
 ) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => accessSubnetsDestroy({ path: { uuid: props.row.uuid } }),
     refetch: props.refetch,
 

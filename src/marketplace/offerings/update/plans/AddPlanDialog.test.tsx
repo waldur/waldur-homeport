@@ -1,56 +1,13 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { marketplacePlansCreate } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
+
 import { AddPlanDialog } from './AddPlanDialog';
 import { mockOffering, mockPlan } from './test-utils';
-
-// Mock API specific to AddPlanDialog
-vi.mock('waldur-js-client', () => ({
-  marketplacePlansCreate: vi.fn(),
-  formDataBodySerializer: {},
-}));
-
-// Mock store hooks
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
-  }),
-}));
-
-// Mock modal hooks
-
-// Mock translation
-vi.mock('@/core/translate', () => ({
-  translate: (str: string) => str,
-}));
-
-// Mock local constants
-vi.mock('./constants', () => ({
-  getBillingPeriods: () => [
-    { value: 'month', label: 'Per month' },
-    { value: 'half_month', label: 'Per half month' },
-    { value: 'day', label: 'Per day' },
-    { value: 'hour', label: 'Per hour' },
-  ],
-}));
-
-// Mock utils
-vi.mock('@/marketplace/offerings/store/utils', () => ({
-  formatPlan: (data: any) => ({
-    name: data.name,
-    unit: data.unit?.value || data.unit,
-    description: data.description,
-    article_code: data.article_code,
-  }),
-}));
-
-vi.mock('@/marketplace/offerings/update/plans/utils', () => ({
-  articleCodeValidator: () => {},
-}));
 
 const mockResolve = {
   offering: mockOffering,
@@ -63,18 +20,7 @@ const mockResolveWithPlan = {
 };
 
 const renderComponent = (resolve = mockResolve) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <AddPlanDialog resolve={resolve} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<AddPlanDialog resolve={resolve} />);
 };
 
 describe('AddPlanDialog', () => {
@@ -97,25 +43,15 @@ describe('AddPlanDialog', () => {
     renderComponent(mockResolveWithPlan);
 
     // Check that the name field contains "Clone of" prefix
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
-    expect(nameInput).toHaveValue('Clone of Test Plan');
+    expect(screen.getByLabelText(/Name/)).toHaveValue('Clone of Test Plan');
   });
 
   it('initializes form with cloned plan data', () => {
     renderComponent(mockResolveWithPlan);
 
     // Check initial values from cloned plan
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
-    const articleCodeInput = document.querySelector(
-      'input[name="article_code"]',
-    ) as HTMLInputElement;
-
-    expect(nameInput).toHaveValue('Clone of Test Plan');
-    expect(articleCodeInput).toHaveValue('TEST001');
+    expect(screen.getByLabelText(/Name/)).toHaveValue('Clone of Test Plan');
+    expect(screen.getByLabelText(/Article code/)).toHaveValue('TEST001');
 
     // For MarkdownEditor, just check that description text appears somewhere
     expect(screen.getByText('Test plan description')).toBeInTheDocument();
@@ -131,18 +67,10 @@ describe('AddPlanDialog', () => {
     const user = userEvent.setup();
 
     // Fill out the form
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
-    await user.type(nameInput, 'New Plan');
+    await user.type(screen.getByLabelText(/Name/), 'New Plan');
 
     // Select billing period (required field)
-    const selectContainer = document.querySelector('.metronic-select__control');
-    if (selectContainer) {
-      await user.click(selectContainer);
-      const monthlyOption = await screen.findByText('Per month');
-      await user.click(monthlyOption);
-    }
+    await openAndSelectOption(user, /Billing period/, 'Per month');
 
     // Submit the form
     const createButton = screen.getByText('Create');
@@ -174,18 +102,10 @@ describe('AddPlanDialog', () => {
     const user = userEvent.setup();
 
     // Fill and submit form
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
-    await user.type(nameInput, 'New Plan');
+    await user.type(screen.getByLabelText(/Name/), 'New Plan');
 
     // Select billing period (required field)
-    const selectContainer = document.querySelector('.metronic-select__control');
-    if (selectContainer) {
-      await user.click(selectContainer);
-      const monthlyOption = await screen.findByText('Per month');
-      await user.click(monthlyOption);
-    }
+    await openAndSelectOption(user, /Billing period/, 'Per month');
 
     const createButton = screen.getByText('Create');
     await user.click(createButton);
@@ -208,18 +128,10 @@ describe('AddPlanDialog', () => {
     const user = userEvent.setup();
 
     // Fill required fields
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
-    await user.type(nameInput, 'Test Plan');
+    await user.type(screen.getByLabelText(/Name/), 'Test Plan');
 
     // Select billing period
-    const selectContainer = document.querySelector('.metronic-select__control');
-    if (selectContainer) {
-      await user.click(selectContainer);
-      const monthlyOption = await screen.findByText('Per month');
-      await user.click(monthlyOption);
-    }
+    await openAndSelectOption(user, /Billing period/, 'Per month');
 
     const createButton = screen.getByText('Create');
     expect(createButton).not.toBeDisabled();
@@ -238,18 +150,10 @@ describe('AddPlanDialog', () => {
     const user = userEvent.setup();
 
     // Fill and submit form
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
-    await user.type(nameInput, 'Test Plan');
+    await user.type(screen.getByLabelText(/Name/), 'Test Plan');
 
     // Select billing period (required field)
-    const selectContainer = document.querySelector('.metronic-select__control');
-    if (selectContainer) {
-      await user.click(selectContainer);
-      const monthlyOption = await screen.findByText('Per month');
-      await user.click(monthlyOption);
-    }
+    await openAndSelectOption(user, /Billing period/, 'Per month');
 
     const createButton = screen.getByText('Create');
     // Use fireEvent for synchronous click to catch the submitting state

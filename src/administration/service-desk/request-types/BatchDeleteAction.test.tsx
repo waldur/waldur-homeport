@@ -1,37 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportRequestTypesAdminDestroy } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
 
 import { BatchDeleteAction } from './BatchDeleteAction';
 
-vi.mock('waldur-js-client');
-const mockShowSuccess = vi.fn();
-const mockShowErrorResponse = vi.fn();
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-    showErrorResponse: mockShowErrorResponse,
-  }),
-}));
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('BatchDeleteAction', () => {
   const mockRefetch = vi.fn();
-  const mockConfirm = vi.fn();
 
   const rows = [
     { uuid: '1', name: 'Type 1', is_synced: false },
@@ -40,14 +20,10 @@ describe('BatchDeleteAction', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useModal).mockReturnValue({
-      confirm: mockConfirm,
-      closeDialog: vi.fn(),
-    } as any);
   });
 
   it('performs batch deletion for all selected rows', async () => {
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(supportRequestTypesAdminDestroy).mockResolvedValue({} as any);
 
     render(<BatchDeleteAction rows={rows} refetch={mockRefetch} />, {
@@ -56,12 +32,12 @@ describe('BatchDeleteAction', () => {
 
     fireEvent.click(screen.getByText('Delete'));
 
-    await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+    await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     await waitFor(() => {
       expect(supportRequestTypesAdminDestroy).toHaveBeenCalledTimes(2);
     });
     await waitFor(() =>
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Request types have been deleted successfully.',
       ),
     );
@@ -82,7 +58,7 @@ describe('BatchDeleteAction', () => {
       { uuid: '1', name: 'Type 1', is_synced: false },
       { uuid: '2', name: 'Type 2', is_synced: false },
     ] as any;
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(supportRequestTypesAdminDestroy).mockImplementation(
       ({ path }) => {
         if (path.uuid === '1') return Promise.resolve({} as any);
@@ -96,7 +72,7 @@ describe('BatchDeleteAction', () => {
 
     fireEvent.click(screen.getByText('Delete'));
 
-    await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+    await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     await waitFor(() => expect(mockRefetch).toHaveBeenCalled());
   });
 });

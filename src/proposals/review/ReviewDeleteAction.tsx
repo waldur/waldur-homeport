@@ -5,11 +5,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const ReviewDeleteAction = (props) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       proposalReviewsDestroy({ path: { uuid: props.row.uuid } }),
     refetch: props.refetch,

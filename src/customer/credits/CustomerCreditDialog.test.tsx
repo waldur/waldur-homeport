@@ -1,36 +1,23 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { customerCreditsCreate, customerCreditsUpdate } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+import { createTestWrapper } from '@/test/harness';
+import { typeAndSelectOption } from '@/test/select';
+
 import { CustomerCreditDialog } from './CustomerCreditDialog';
 
-vi.mock('waldur-js-client');
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        CURRENCY_NAME: 'EUR',
-      },
-    },
-  },
-}));
+ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
+
 vi.mock('@/form/useFlatpickrTheme', () => ({
   useFlatpickrTheme: vi.fn(),
 }));
 
 vi.mock('./OrganizationCostChart', () => ({
   OrganizationCostChart: () => <div data-testid="organization-cost-chart" />,
-}));
-
-vi.mock('react-redux', () => ({
-  useSelector: (fn) => fn(),
-  useDispatch: () => vi.fn(),
-}));
-
-vi.mock('@/workspace/selectors', () => ({
-  getCustomer: () => ({ uuid: 'customer-uuid' }),
 }));
 
 vi.mock('@/marketplace/common/autocompletes', () => ({
@@ -42,78 +29,35 @@ vi.mock('@/marketplace/common/autocompletes', () => ({
     ),
 }));
 
-vi.mock('@/form/select/AsyncSelect', () => ({
-  AsyncSelect: (props) => (
-    <input
-      id={props.id}
-      data-testid={props.id || 'async-select'}
-      onChange={(e) => {
-        if (props.input) {
-          props.input.onChange({ url: e.target.value, name: 'Org 1' });
-        }
-      }}
-      onBlur={(e) => {
-        if (props.input) props.input.onBlur(e);
-        if (props.onBlur) props.onBlur(e);
-      }}
-      value={props.input?.value?.url || ''}
-    />
-  ),
-}));
-
-vi.mock('@/form/select/SelectField', () => ({
-  SelectField: (props) => (
-    <input
-      data-testid={props.name || props.input?.name || 'select-field'}
-      onChange={(e) => {
-        if (props.input) props.input.onChange(e.target.value);
-        if (props.onChange) props.onChange(e.target.value);
-      }}
-      onBlur={(e) => {
-        if (props.input) props.input.onBlur(e);
-      }}
-      value={props.input?.value || ''}
-    />
-  ),
-}));
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('CustomerCreditDialog', () => {
   const mockRefetch = vi.fn();
 
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.mocked(organizationAutocomplete).mockReturnValue(() =>
+      Promise.resolve({
+        options: [{ name: 'Org 1', url: 'customer-url' }],
+        hasMore: false,
+        additional: { page: 1 },
+      }),
+    );
   });
 
   it('submits creation form correctly', async () => {
     const user = userEvent.setup();
     vi.mocked(customerCreditsCreate).mockResolvedValue({} as any);
 
-    const { container } = render(
-      <CustomerCreditDialog resolve={{ refetch: mockRefetch }} />,
-      {
-        wrapper: createWrapper(),
-      },
-    );
+    render(<CustomerCreditDialog resolve={{ refetch: mockRefetch }} />, {
+      wrapper: createWrapper(),
+    });
 
     // Fill Organization
-    const customerInput = screen.getByTestId('customer');
-    fireEvent.change(customerInput, { target: { value: 'customer-url' } });
-    fireEvent.blur(customerInput);
+    await typeAndSelectOption(user, 'Organization', 'Org 1', 'Org 1');
 
     // Fill Value
-    const valueInput = container.querySelector('#value') as HTMLInputElement;
+    const valueInput = screen.getByTestId('value');
     await user.clear(valueInput);
     await user.type(valueInput, '100');
     await user.tab();
@@ -146,7 +90,7 @@ describe('CustomerCreditDialog', () => {
       minimal_consumption_logic: 'fixed',
     };
 
-    const { container } = render(
+    render(
       <CustomerCreditDialog resolve={{ credit, refetch: mockRefetch }} />,
       {
         wrapper: createWrapper(),
@@ -156,7 +100,7 @@ describe('CustomerCreditDialog', () => {
     expect(screen.getByText('Edit credit')).toBeInTheDocument();
     expect(screen.getByTestId('organization-cost-chart')).toBeInTheDocument();
 
-    const valueInput = container.querySelector('#value') as HTMLInputElement;
+    const valueInput = screen.getByTestId('value');
     expect(valueInput).toHaveValue(500);
 
     expect(screen.getByText('Confirm')).toBeInTheDocument();
@@ -176,14 +120,14 @@ describe('CustomerCreditDialog', () => {
 
     vi.mocked(customerCreditsUpdate).mockResolvedValue({} as any);
 
-    const { container } = render(
+    render(
       <CustomerCreditDialog resolve={{ credit, refetch: mockRefetch }} />,
       {
         wrapper: createWrapper(),
       },
     );
 
-    const valueInput = container.querySelector('#value') as HTMLInputElement;
+    const valueInput = screen.getByTestId('value');
     await user.clear(valueInput);
     await user.type(valueInput, '600');
     await user.tab();

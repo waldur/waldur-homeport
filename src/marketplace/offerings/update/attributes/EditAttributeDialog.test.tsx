@@ -1,17 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+
 import { EditAttributeDialog } from './EditAttributeDialog';
-
-vi.mock('react-redux', () => ({
-  useDispatch: vi.fn(),
-  useSelector: vi.fn(),
-}));
-
-vi.mock('waldur-js-client');
 
 vi.mock('../../store/utils', () => ({
   formatAttribute: vi.fn((_attr, value) => value),
@@ -21,13 +14,6 @@ vi.mock('../utils', () => ({
   parseAttribute: vi.fn((_attr, value) => value),
   configAttrField: vi.fn(() => ({ type: 'text' })),
 }));
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { retry: false },
-  },
-});
-
 describe('EditAttributeDialog', () => {
   const mockResolve = {
     offering: { uuid: 'offering-uuid', attributes: {} },
@@ -37,17 +23,8 @@ describe('EditAttributeDialog', () => {
     refetch: vi.fn(),
   };
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-    vi.mocked(useDispatch).mockReturnValue(vi.fn());
-  });
-
   const renderComponent = () => {
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <EditAttributeDialog resolve={mockResolve} />
-      </QueryClientProvider>,
-    );
+    return renderWithProviders(<EditAttributeDialog resolve={mockResolve} />);
   };
 
   it('renders correctly', () => {

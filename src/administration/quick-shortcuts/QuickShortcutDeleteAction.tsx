@@ -7,11 +7,7 @@ import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { SHORTCUTS_QUERY_KEY } from './utils';
 
 export const QuickShortcutDeleteAction = ({ row, refetch }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => externalLinksDestroy({ path: { uuid: row.uuid } }),
     refetch: refetch,
     invalidateQueries: [{ queryKey: SHORTCUTS_QUERY_KEY }],

@@ -1,4 +1,3 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -7,27 +6,12 @@ import {
   proposalProposalsReject,
 } from 'waldur-js-client';
 
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
+import { createTestWrapper } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { useProposalDecisionActions } from './utils';
-vi.mock('@/workspace/hooks');
-
-const mockConfirm = vi.fn();
-
-vi.mock('waldur-js-client');
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({ confirm: mockConfirm, closeDialog: vi.fn() }),
-}));
-
-const mockShowSuccess = vi.fn();
-const mockShowErrorResponse = vi.fn();
-
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-    showErrorResponse: mockShowErrorResponse,
-  }),
-}));
 
 describe('useProposalDecisionActions', () => {
   const mockProposal: Proposal = {
@@ -49,21 +33,13 @@ describe('useProposalDecisionActions', () => {
     vi.clearAllMocks();
     vi.mocked(workspaceHooks.useUser).mockReturnValue(mockUser as any);
 
-    mockConfirm.mockResolvedValue({ input: undefined });
+    vi.mocked(useModal().confirm).mockResolvedValue({ input: undefined });
     vi.mocked(proposalProposalsApprove).mockResolvedValue({} as any);
     vi.mocked(proposalProposalsReject).mockResolvedValue({} as any);
   });
 
   const renderUseProposalDecisionActions = (proposal = mockProposal) => {
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: { retry: false },
-        mutations: { retry: false },
-      },
-    });
-    const wrapper = ({ children }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
+    const wrapper = createTestWrapper().wrapper;
 
     return renderHook(() => useProposalDecisionActions(proposal, mockRefetch), {
       wrapper,
@@ -96,7 +72,7 @@ describe('useProposalDecisionActions', () => {
       result.current.handleApproveProposal();
 
       await waitFor(() => {
-        expect(mockConfirm).toHaveBeenCalledWith(
+        expect(vi.mocked(useModal().confirm)).toHaveBeenCalledWith(
           'Confirmation',
           'Are you sure you want to approve the proposal Test Proposal in state submitted?',
           undefined,
@@ -114,7 +90,7 @@ describe('useProposalDecisionActions', () => {
           path: { uuid: mockProposal.uuid },
         });
       });
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Proposal has been approved.',
       );
       expect(mockRefetch).toHaveBeenCalled();
@@ -129,7 +105,7 @@ describe('useProposalDecisionActions', () => {
       result.current.handleApproveProposal();
 
       await waitFor(() => {
-        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
           error,
           'Unable to approve the proposal.',
         );
@@ -145,7 +121,7 @@ describe('useProposalDecisionActions', () => {
       result.current.handleRejectProposal();
 
       await waitFor(() => {
-        expect(mockConfirm).toHaveBeenCalledWith(
+        expect(vi.mocked(useModal().confirm)).toHaveBeenCalledWith(
           'Confirmation',
           'Are you sure you want to reject the proposal: Test Proposal?',
           {
@@ -160,7 +136,7 @@ describe('useProposalDecisionActions', () => {
 
     it('should call API with rejection reason and show success message', async () => {
       const rejectionReason = 'Insufficient budget';
-      mockConfirm.mockResolvedValue({
+      vi.mocked(useModal().confirm).mockResolvedValue({
         input: rejectionReason,
       });
 
@@ -174,14 +150,14 @@ describe('useProposalDecisionActions', () => {
           body: { allocation_comment: rejectionReason },
         });
       });
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Proposal has been rejected.',
       );
       expect(mockRefetch).toHaveBeenCalled();
     });
 
     it('should call API with empty reason when no input provided', async () => {
-      mockConfirm.mockResolvedValue({ input: '' });
+      vi.mocked(useModal().confirm).mockResolvedValue({ input: '' });
 
       const { result } = renderUseProposalDecisionActions();
 
@@ -204,7 +180,7 @@ describe('useProposalDecisionActions', () => {
       result.current.handleRejectProposal();
 
       await waitFor(() => {
-        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
           error,
           'Unable to reject the proposal.',
         );
@@ -213,7 +189,7 @@ describe('useProposalDecisionActions', () => {
     });
 
     it('should handle undefined rejection reason', async () => {
-      mockConfirm.mockResolvedValue({ input: undefined });
+      vi.mocked(useModal().confirm).mockResolvedValue({ input: undefined });
 
       const { result } = renderUseProposalDecisionActions();
 
@@ -254,7 +230,7 @@ describe('useProposalDecisionActions', () => {
       result.current.handleApproveProposal();
 
       await waitFor(() => {
-        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
           timeoutError,
           'Unable to approve the proposal.',
         );
@@ -275,7 +251,7 @@ describe('useProposalDecisionActions', () => {
       result.current.handleRejectProposal();
 
       await waitFor(() => {
-        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
           detailedError,
           'Unable to reject the proposal.',
         );

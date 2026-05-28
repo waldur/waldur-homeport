@@ -1,130 +1,36 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   cleanup,
   fireEvent,
-  render,
   screen,
   waitFor,
   within,
 } from '@testing-library/react';
-import { useRouter } from '@uirouter/react';
-import React from 'react';
+import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesReallocateLimits } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
+import { typeAndSelectOption } from '@/test/select';
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { loadData } from '../change-limits/utils';
 
 import { ReallocateLimitsDialog } from './ReallocateLimitsDialog';
 
-vi.mock('@uirouter/react');
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        CURRENCY_NAME: 'EUR',
-      },
-    },
-  },
-}));
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
+ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
+
 vi.mock('../change-limits/utils');
 vi.mock('@/marketplace/common/autocompletes');
-vi.mock('@/router', () => ({
-  router: {
-    urlService: {
-      config: { strictMode: vi.fn() },
-      rules: { initial: vi.fn() },
-    },
-    stateService: { go: vi.fn(), target: vi.fn() },
-  },
-}));
-
-vi.mock('@/workspace/hooks', () => ({
-  useUser: () => ({ is_staff: true }),
-  useCustomer: () => ({}),
-  useProject: () => ({}),
-}));
-
-// Mock react-select-async-paginate to work with userEvent
-vi.mock('react-select-async-paginate', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  const MockAsyncPaginate = ({
-    onChange,
-    value,
-    isMulti,
-    placeholder,
-    inputId,
-    loadOptions,
-    ...rest
-  }) => {
-    const [options, setOptions] = React.useState([]);
-    React.useEffect(() => {
-      loadOptions('', [], { page: 1 }).then((res) => {
-        if (res && res.options) {
-          setOptions(res.options);
-        }
-      });
-    }, [loadOptions]);
-
-    return (
-      <select
-        id={inputId}
-        data-testid={rest['data-testid'] || 'react-select'}
-        multiple={isMulti}
-        value={isMulti ? (value || []).map((v) => v.uuid) : value?.uuid || ''}
-        onChange={(e) => {
-          if (isMulti) {
-            const selectedUuids = Array.from(
-              e.target.selectedOptions,
-              (opt) => opt.value,
-            );
-            onChange(options.filter((o) => selectedUuids.includes(o.uuid)));
-          } else {
-            onChange(options.find((o) => o.uuid === e.target.value));
-          }
-        }}
-      >
-        <option value="">{placeholder}</option>
-        {options.map((opt) => (
-          <option key={opt.uuid} value={opt.uuid}>
-            {opt.name}
-          </option>
-        ))}
-      </select>
-    );
-  };
-  return {
-    ...actual,
-    AsyncPaginate: MockAsyncPaginate,
-    withAsyncPaginate: () => MockAsyncPaginate,
-  };
-});
 
 const renderDialog = (resolve) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ReallocateLimitsDialog resolve={resolve} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<ReallocateLimitsDialog resolve={resolve} />);
 };
 
 describe('ReallocateLimitsDialog', () => {
-  let mockRouter;
-  let mockNotify;
-  let mockModal;
-
   const mockResource = {
     uuid: 'source-resource-uuid',
     name: 'Source Resource',
@@ -166,21 +72,9 @@ describe('ReallocateLimitsDialog', () => {
   };
 
   beforeEach(() => {
-    mockRouter = {
-      stateService: { go: vi.fn() },
-    };
-    vi.mocked(useRouter).mockReturnValue(mockRouter);
-
-    mockNotify = {
-      showSuccess: vi.fn(),
-      showErrorResponse: vi.fn(),
-    };
-    vi.mocked(useNotify).mockReturnValue(mockNotify);
-
-    mockModal = {
-      closeDialog: vi.fn(),
-    };
-    vi.mocked(useModal).mockReturnValue(mockModal);
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(useCustomer).mockReturnValue({} as any);
+    vi.mocked(useProject).mockReturnValue({} as any);
 
     vi.mocked(loadData).mockResolvedValue(mockFetchedData as any);
 
@@ -202,6 +96,7 @@ describe('ReallocateLimitsDialog', () => {
     renderDialog({
       resource: { marketplace_resource_uuid: 'source-resource-uuid' },
     });
+    const user = userEvent.setup();
 
     // --- Step 0: Change Limits ---
     await screen.findByText('Current limit');
@@ -227,6 +122,7 @@ describe('ReallocateLimitsDialog', () => {
     const targetResource = {
       uuid: 'target-resource-uuid',
       name: 'Target Resource',
+      offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
     vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
@@ -240,11 +136,12 @@ describe('ReallocateLimitsDialog', () => {
     await screen.findByText(/Find target resource/i);
 
     // Search and select target resource
-    const select = screen.getByTestId('react-select');
-    await waitFor(() =>
-      expect(screen.queryByText('Target Resource')).toBeInTheDocument(),
+    await typeAndSelectOption(
+      user,
+      'Find target resource(s)',
+      'Target',
+      /^Target Resource/,
     );
-    fireEvent.change(select, { target: { value: 'target-resource-uuid' } });
 
     // Wait for the resource to appear in the table
     // Allocate full capacity (total 2)
@@ -296,8 +193,8 @@ describe('ReallocateLimitsDialog', () => {
       });
     });
 
-    expect(mockNotify.showSuccess).toHaveBeenCalled();
-    expect(mockModal.closeDialog).toHaveBeenCalled();
+    expect(useNotify().showSuccess).toHaveBeenCalled();
+    expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
   it('shows error message if data loading fails', async () => {
@@ -312,6 +209,7 @@ describe('ReallocateLimitsDialog', () => {
     renderDialog({
       resource: { marketplace_resource_uuid: 'source-resource-uuid' },
     });
+    const user = userEvent.setup();
 
     // Step 0: Reduce limit to free 2 units
     await screen.findByText('Current limit');
@@ -323,6 +221,7 @@ describe('ReallocateLimitsDialog', () => {
     const targetResource = {
       uuid: 'target-resource-uuid',
       name: 'Target Resource',
+      offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
     vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
@@ -331,11 +230,12 @@ describe('ReallocateLimitsDialog', () => {
     }));
 
     await screen.findByText(/Find target resource/i);
-    const select = screen.getByTestId('react-select');
-    await waitFor(() =>
-      expect(screen.queryByText('Target Resource')).toBeInTheDocument(),
+    await typeAndSelectOption(
+      user,
+      'Find target resource(s)',
+      'Target',
+      /^Target Resource/,
     );
-    fireEvent.change(select, { target: { value: 'target-resource-uuid' } });
 
     // Step 1: Allocate only 1 unit (partial allocation)
     const allocationInput = await screen.findByTestId(
@@ -356,6 +256,7 @@ describe('ReallocateLimitsDialog', () => {
     renderDialog({
       resource: { marketplace_resource_uuid: 'source-resource-uuid' },
     });
+    const user = userEvent.setup();
 
     // Step 0: Reduce limit
     const cpuInput = await screen.findByTestId('row-cpu-input');
@@ -366,6 +267,7 @@ describe('ReallocateLimitsDialog', () => {
     const targetResource = {
       uuid: 'target-resource-uuid',
       name: 'Target Resource',
+      offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
     vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
@@ -373,8 +275,12 @@ describe('ReallocateLimitsDialog', () => {
       hasMore: false,
     }));
 
-    const select = await screen.findByTestId('react-select');
-    fireEvent.change(select, { target: { value: 'target-resource-uuid' } });
+    await typeAndSelectOption(
+      user,
+      'Find target resource(s)',
+      'Target',
+      /^Target Resource/,
+    );
 
     const allocationInput = await screen.findByTestId(
       'allocation-target-resource-uuid',
@@ -389,7 +295,7 @@ describe('ReallocateLimitsDialog', () => {
 
     // Verify: showErrorResponse should be called
     await waitFor(() => {
-      expect(mockNotify.showErrorResponse).toHaveBeenCalled();
+      expect(useNotify().showErrorResponse).toHaveBeenCalled();
     });
   });
 });

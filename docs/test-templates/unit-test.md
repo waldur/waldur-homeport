@@ -7,25 +7,11 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-// 1. Mock external dependencies
-vi.mock('waldur-js-client');
-vi.mock('@/i18n', () => ({
-  translate: (message: string) => message,
-}));
-
 // 2. Define mock data and handlers
 const mockData = { id: 1, name: 'Test Item' };
 const mockHandler = vi.fn();
 
 describe('MyComponent', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('renders correctly', () => {
     render(<MyComponent data={mockData} onAction={mockHandler} />);
 

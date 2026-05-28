@@ -1,35 +1,13 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { adminArrowCustomerMappingsLinkResource } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+
 import { SuggestedMatches } from './SuggestedMatches';
 
-vi.mock('waldur-js-client');
-
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showErrorResponse: vi.fn(),
-    showSuccess: vi.fn(),
-  }),
-}));
-
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
 const renderComponent = (props) => {
-  const queryClient = createTestQueryClient();
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <SuggestedMatches {...props} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<SuggestedMatches {...props} />);
 };
 
 const mockSuggestions = [

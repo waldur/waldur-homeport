@@ -1,8 +1,8 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
-import { OpenStackRouter } from 'waldur-js-client';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { OpenStackRouter, openstackRoutersSetRoutes } from 'waldur-js-client';
 
-import { translate } from '@/i18n';
+import { renderWithProviders } from '@/test/harness';
 
 import { SetRoutesDialog } from './SetRoutesDialog';
 
@@ -28,13 +28,6 @@ vi.mock('@/form', () => ({
   FieldError: ({ error }: any) => (error ? <span>{error}</span> : null),
 }));
 
-const mockMutateAsync = vi.fn();
-vi.mock('@/modal/useManagedMutation', () => ({
-  useManagedMutation: () => ({
-    mutateAsync: mockMutateAsync,
-  }),
-}));
-
 const mockRouter = {
   uuid: 'router-uuid-123',
   fixed_ips: [],
@@ -47,22 +40,20 @@ describe('SetRoutesDialog', () => {
   });
 
   it('renders correctly with initial routes', () => {
-    render(<SetRoutesDialog resolve={{ router: mockRouter }} />);
+    renderWithProviders(<SetRoutesDialog resolve={{ router: mockRouter }} />);
 
-    expect(
-      screen.getByText(translate('Update static routes')),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Update static routes')).toBeInTheDocument();
     expect(screen.getByRole('table')).toBeInTheDocument();
     expect(screen.getByDisplayValue('10.0.0.0/24')).toBeInTheDocument();
     expect(screen.getByDisplayValue('192.168.1.1')).toBeInTheDocument();
   });
 
   it('submits the form with modified routes', async () => {
-    render(<SetRoutesDialog resolve={{ router: mockRouter }} />);
+    renderWithProviders(<SetRoutesDialog resolve={{ router: mockRouter }} />);
 
     // Add a new route
     const addButton = screen.getByRole('button', {
-      name: translate('Add route'),
+      name: 'Add route',
     });
     fireEvent.click(addButton);
 
@@ -73,36 +64,44 @@ describe('SetRoutesDialog', () => {
     fireEvent.change(inputs[3], { target: { value: '10.0.0.1' } });
 
     // Submit
-    const submitButton = screen.getByText(translate('Update'));
+    const submitButton = screen.getByText('Update');
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(mockMutateAsync).toHaveBeenCalledTimes(1);
+      expect(openstackRoutersSetRoutes).toHaveBeenCalledTimes(1);
     });
 
-    expect(mockMutateAsync).toHaveBeenCalledWith({
-      routes: [
-        { destination: '10.0.0.0/24', nexthop: '192.168.1.1' },
-        { destination: '192.168.2.0/24', nexthop: '10.0.0.1' },
-      ],
+    expect(openstackRoutersSetRoutes).toHaveBeenCalledWith({
+      path: { uuid: 'router-uuid-123' },
+      body: {
+        routes: [
+          { destination: '10.0.0.0/24', nexthop: '192.168.1.1' },
+          { destination: '192.168.2.0/24', nexthop: '10.0.0.1' },
+        ],
+      },
     });
   });
 
   it('submits the form after removing a route', async () => {
-    render(<SetRoutesDialog resolve={{ router: mockRouter }} />);
+    renderWithProviders(<SetRoutesDialog resolve={{ router: mockRouter }} />);
 
     const removeButton = screen.getByRole('button', {
-      name: translate('Remove'),
+      name: 'Remove',
     });
     fireEvent.click(removeButton);
 
-    const submitButton = screen.getByText(translate('Update'));
+    const submitButton = screen.getByText('Update');
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(mockMutateAsync).toHaveBeenCalledTimes(1);
+      expect(openstackRoutersSetRoutes).toHaveBeenCalledTimes(1);
     });
 
-    expect(mockMutateAsync).toHaveBeenCalledWith({});
+    expect(openstackRoutersSetRoutes).toHaveBeenCalledWith({
+      path: { uuid: 'router-uuid-123' },
+      body: {
+        routes: [],
+      },
+    });
   });
 });

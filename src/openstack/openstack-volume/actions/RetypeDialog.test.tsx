@@ -1,19 +1,19 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { openstackVolumesRetype, OpenStackVolumeType } from 'waldur-js-client';
-import { OpenStackVolume } from 'waldur-js-client';
+import {
+  OpenStackVolume,
+  openstackVolumesRetype,
+  OpenStackVolumeType,
+} from 'waldur-js-client';
 
-import { useModal } from '@/modal/actions';
 import * as api from '@/openstack/api';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { RetypeDialog } from './RetypeDialog';
 
-vi.mock('waldur-js-client');
 vi.mock('@/openstack/api');
-vi.mock('@/store/notify');
 
 const apiMock = vi.mocked(api);
 
@@ -42,30 +42,14 @@ const fakeVolumeTypes = [
 ] as unknown as OpenStackVolumeType[];
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <RetypeDialog resolve={{ resource, refetch: vi.fn() }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <RetypeDialog resolve={{ resource, refetch: vi.fn() }} />,
   );
 };
 
 describe('RetypeDialog', () => {
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-  const mockCloseDialog = vi.fn();
-
   beforeEach(() => {
     apiMock.loadVolumeTypes.mockResolvedValue([]);
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      closeDialog: mockCloseDialog,
-    } as any);
   });
 
   it('renders current volume type label', async () => {
@@ -154,7 +138,7 @@ describe('RetypeDialog', () => {
     await user.click(submitButton);
 
     await waitFor(() => {
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         error,
         'Unable to retype volume.',
       );

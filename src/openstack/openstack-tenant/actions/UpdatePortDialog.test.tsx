@@ -1,50 +1,16 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { openstackPortsUpdatePortIp } from 'waldur-js-client';
 
-import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadSubnets } from '@/openstack/api';
+import { renderWithProviders } from '@/test/harness';
 
 import { UpdatePortDialog } from './UpdatePortDialog';
-
-vi.mock('@monaco-editor/react', () => {
-  return {
-    Editor: vi.fn(({ value, onChange, 'data-testid': testId }) => {
-      return (
-        <textarea
-          data-testid={testId || 'monaco-editor'}
-          value={value || ''}
-          onChange={(e) => {
-            if (onChange) onChange((e.target as HTMLTextAreaElement).value);
-          }}
-        />
-      );
-    }),
-  };
-});
-
-vi.mock('@/form/monacoSetup', () => {
-  return {
-    initMonaco: vi.fn().mockResolvedValue({
-      languages: {
-        register: vi.fn(),
-        setLanguageConfiguration: vi.fn(),
-        setMonarchTokensProvider: vi.fn(),
-      },
-    }),
-  };
-});
-
-vi.mock('@/modal/useManagedMutation', () => ({
-  useManagedMutation: vi.fn(),
-}));
 
 vi.mock('@/openstack/api', () => ({
   loadSubnets: vi.fn(),
 }));
-
-vi.mock('waldur-js-client');
 
 const mockResource = {
   uuid: 'port-uuid',
@@ -78,32 +44,17 @@ const mockSubnets = [
 ];
 
 describe('UpdatePortDialog', () => {
-  let queryClient;
-
   beforeEach(() => {
     vi.clearAllMocks();
-    queryClient = new QueryClient({
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
-      },
-    });
 
     vi.mocked(loadSubnets).mockResolvedValue(mockSubnets);
-
-    vi.mocked(useManagedMutation).mockReturnValue({
-      mutateAsync: vi.fn(),
-    } as any);
   });
 
   const renderDialog = (resource = mockResource) => {
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <UpdatePortDialog
-          resolve={{ resource: resource as any, refetch: vi.fn() }}
-        />
-      </QueryClientProvider>,
+    return renderWithProviders(
+      <UpdatePortDialog
+        resolve={{ resource: resource as any, refetch: vi.fn() }}
+      />,
     );
   };
 
@@ -142,8 +93,7 @@ describe('UpdatePortDialog', () => {
 
   it('submits form with updated data', async () => {
     const user = userEvent.setup();
-    const mutateAsync = vi.fn().mockResolvedValue({});
-    vi.mocked(useManagedMutation).mockReturnValue({ mutateAsync } as any);
+    vi.mocked(openstackPortsUpdatePortIp).mockResolvedValue({} as any);
 
     renderDialog();
 
@@ -162,15 +112,14 @@ describe('UpdatePortDialog', () => {
     await user.click(submitButton);
 
     await waitFor(() => {
-      expect(mutateAsync).toHaveBeenCalledWith(
+      expect(openstackPortsUpdatePortIp).toHaveBeenCalledWith(
         expect.objectContaining({
-          fixed_ips: {
-            fixed_ip: '10.0.0.20',
-            subnet: mockSubnets[0],
-          },
+          path: { uuid: 'port-uuid' },
+          body: expect.objectContaining({
+            subnet: 'sub-1-url',
+            ip_address: '10.0.0.20',
+          }),
         }),
-        expect.anything(),
-        expect.anything(),
       );
     });
   });

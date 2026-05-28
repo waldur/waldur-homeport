@@ -6,11 +6,7 @@ import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@/navigation/header/announcements
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const AnnouncementDeleteAction = ({ row, refetch }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => adminAnnouncementsDestroy({ path: { uuid: row.uuid } }),
     refetch,
     invalidateQueries: [

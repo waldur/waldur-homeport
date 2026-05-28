@@ -13,8 +13,6 @@ import {
 
 import * as fixtures from './fixtures';
 
-vi.mock('waldur-js-client');
-
 describe('Change resource limits', () => {
   it('returns correct data', () => {
     expect(

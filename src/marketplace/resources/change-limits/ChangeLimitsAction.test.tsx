@@ -1,29 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { ChangeLimitsAction } from './ChangeLimitsAction';
 
-vi.mock('waldur-js-client');
-vi.mock('@/workspace/hooks');
 vi.mock('@/resource/actions/useModalDialogCallback', () => ({
   useModalDialogCallback: () => vi.fn(),
 }));
 vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: () => true,
 }));
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-  },
-});
-
 describe('ChangeLimitsAction', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -38,11 +26,7 @@ describe('ChangeLimitsAction', () => {
       state: 'OK',
     };
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ChangeLimitsAction resource={resource as any} />
-      </QueryClientProvider>,
-    );
+    renderWithProviders(<ChangeLimitsAction resource={resource as any} />);
 
     // We expect that marketplaceResourcesOfferingRetrieve is NOT called
     expect(marketplaceResourcesOfferingRetrieve).not.toHaveBeenCalled();
@@ -60,11 +44,7 @@ describe('ChangeLimitsAction', () => {
       state: 'OK',
     };
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ChangeLimitsAction resource={resource as any} />
-      </QueryClientProvider>,
-    );
+    renderWithProviders(<ChangeLimitsAction resource={resource as any} />);
 
     expect(marketplaceResourcesOfferingRetrieve).toHaveBeenCalledWith(
       expect.objectContaining({

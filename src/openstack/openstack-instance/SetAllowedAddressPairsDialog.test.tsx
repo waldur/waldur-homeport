@@ -1,6 +1,11 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { OpenStackInstance } from 'waldur-js-client';
+import {
+  OpenStackInstance,
+  openstackInstancesUpdateAllowedAddressPairs,
+} from 'waldur-js-client';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { SetAllowedAddressPairsDialog } from './SetAllowedAddressPairsDialog';
 
@@ -30,13 +35,6 @@ vi.mock('@/modal/CloseDialogButton', () => ({
   CloseDialogButton: () => <button>Close</button>,
 }));
 
-const mockMutateAsync = vi.fn();
-vi.mock('@/modal/useManagedMutation', () => ({
-  useManagedMutation: () => ({
-    mutateAsync: mockMutateAsync,
-  }),
-}));
-
 vi.mock('./utils', () => ({
   formatAddressList: () => '192.168.1.100',
 }));
@@ -59,7 +57,7 @@ describe('SetAllowedAddressPairsDialog', () => {
   });
 
   it('renders correctly with initial pairs', () => {
-    render(
+    renderWithProviders(
       <SetAllowedAddressPairsDialog
         resolve={{ instance: mockInstance, port: mockPort as any }}
       />,
@@ -76,7 +74,7 @@ describe('SetAllowedAddressPairsDialog', () => {
   });
 
   it('submits the form with modified pairs', async () => {
-    render(
+    renderWithProviders(
       <SetAllowedAddressPairsDialog
         resolve={{ instance: mockInstance, port: mockPort as any }}
       />,
@@ -99,14 +97,20 @@ describe('SetAllowedAddressPairsDialog', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(mockMutateAsync).toHaveBeenCalledTimes(1);
+      expect(openstackInstancesUpdateAllowedAddressPairs).toHaveBeenCalledTimes(
+        1,
+      );
     });
 
-    expect(mockMutateAsync).toHaveBeenCalledWith({
-      pairs: [
-        { ip_address: '10.0.0.1/32', mac_address: 'fa:16:3e:00:00:01' },
-        { ip_address: '192.168.2.0/24', mac_address: 'fa:16:3e:00:00:02' },
-      ],
+    expect(openstackInstancesUpdateAllowedAddressPairs).toHaveBeenCalledWith({
+      path: { uuid: 'instance-uuid' },
+      body: {
+        subnet: 'subnet-url',
+        allowed_address_pairs: [
+          { ip_address: '10.0.0.1/32', mac_address: 'fa:16:3e:00:00:01' },
+          { ip_address: '192.168.2.0/24', mac_address: 'fa:16:3e:00:00:02' },
+        ],
+      },
     });
   });
 });

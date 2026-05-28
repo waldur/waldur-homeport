@@ -13,11 +13,7 @@ interface UserPermissionRequestDeleteButtonProps {
 export const UserPermissionRequestDeleteButton: FunctionComponent<
   UserPermissionRequestDeleteButtonProps
 > = ({ row, refetch }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       userPermissionRequestsCancelRequest({ path: { uuid: row.uuid } }),
     refetch: refetch,

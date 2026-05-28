@@ -4,8 +4,6 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { FormContainer } from './FormContainer';
 
-// Mock translation
-
 const TextInput = (props) => (
   <input
     {...props.input}

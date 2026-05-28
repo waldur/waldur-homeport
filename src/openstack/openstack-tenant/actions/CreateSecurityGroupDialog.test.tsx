@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -7,9 +6,9 @@ import {
   openstackTenantsCreateSecurityGroup,
 } from 'waldur-js-client';
 
-import { CreateSecurityGroupDialog } from './CreateSecurityGroupDialog';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client');
+import { CreateSecurityGroupDialog } from './CreateSecurityGroupDialog';
 
 const fakeTenant = {
   name: 'VPC',
@@ -24,15 +23,10 @@ const defaultSecurityGroup = {
 };
 
 const renderDialog = (resource = fakeTenant) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <CreateSecurityGroupDialog
-        resolve={{ resource: resource as any, refetch: vi.fn() }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <CreateSecurityGroupDialog
+      resolve={{ resource: resource as any, refetch: vi.fn() }}
+    />,
   );
 };
 

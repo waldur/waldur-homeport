@@ -11,11 +11,7 @@ interface GroupDeleteButtonProps {
 }
 
 export const GroupDeleteButton = (props: GroupDeleteButtonProps) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       marketplaceCategoryGroupsDestroy({ path: { uuid: props.row.uuid } }),
     refetch: props.refetch,

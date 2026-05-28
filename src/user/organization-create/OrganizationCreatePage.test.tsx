@@ -6,6 +6,7 @@ import {
   waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useRouter } from '@uirouter/react';
 import { noop } from 'lodash-es';
 import {
   afterAll,
@@ -17,130 +18,32 @@ import {
   vi,
 } from 'vitest';
 import {
+  onboardingJustificationsAttachDocument,
   onboardingJustificationsCreateJustification,
+  onboardingPersonIdentifierFieldsRetrieve,
+  onboardingVerificationsAvailableChecklistsRetrieve,
   onboardingVerificationsCreateCustomer,
   onboardingVerificationsDestroy,
+  onboardingVerificationsPartialUpdate,
   onboardingVerificationsRunValidation,
   onboardingVerificationsStartVerification,
+  onboardingVerificationsSubmitAnswers,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { OrganizationCreatePage } from './OrganizationCreatePage';
 
 // --- Mocks ---
 
-const mockConfirm = vi.fn();
-const mockShowSuccess = vi.fn();
-const mockShowError = vi.fn();
-const mockShowErrorResponse = vi.fn();
+const mockRouterGo = useRouter().stateService.go;
+const mockOnBefore = useRouter().transitionService.onBefore;
 
-const mockRouterGo = vi.fn();
-const mockOnBefore = vi.fn(() => vi.fn()); // returns deregister function
-
-vi.mock('@uirouter/react', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('@uirouter/react')>();
-  return {
-    ...mod,
-    useRouter: () => ({
-      stateService: { go: mockRouterGo },
-      transitionService: { onBefore: mockOnBefore },
-    }),
-  };
-});
-
-vi.mock('@/modal/actions');
-
-vi.mock('@/store/notify');
-
-vi.mock('@/core/config', () => ({
-  ENV: {
-    pageSize: 10,
-    plugins: {
-      WALDUR_CORE: {
-        ONBOARDING_VALIDATION_METHODS: ['ariregister'],
-      },
-    },
-  },
-}));
-
-vi.mock('@/workspace/hooks', () => ({
-  useUser: () => ({
-    uuid: 'user-1',
-    full_name: 'Test User',
-    civil_number: '',
-  }),
-}));
-
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('waldur-js-client')>();
-  return {
-    ...actual,
-    onboardingVerificationsDestroy: vi.fn().mockResolvedValue({}),
-    onboardingVerificationsStartVerification: vi.fn().mockResolvedValue({
-      data: {
-        uuid: 'verification-uuid-1',
-        status: 'pending',
-      },
-    }),
-    onboardingVerificationsSubmitAnswers: vi.fn().mockResolvedValue({}),
-    onboardingVerificationsRunValidation: vi.fn().mockResolvedValue({
-      data: {
-        uuid: 'verification-uuid-1',
-        status: 'verified',
-      },
-    }),
-    onboardingVerificationsCreateCustomer: vi.fn().mockResolvedValue({
-      data: { uuid: 'customer-uuid-1' },
-    }),
-    onboardingVerificationsPartialUpdate: vi.fn().mockResolvedValue({}),
-    onboardingVerificationsAvailableChecklistsRetrieve: vi
-      .fn()
-      .mockResolvedValue({
-        data: {
-          customer_checklist: {
-            uuid: 'checklist-customer-uuid',
-            questions: [
-              {
-                uuid: 'q-customer-1',
-                description: 'Customer question 1',
-                question_type: 'text_input',
-                required: false,
-              },
-            ],
-          },
-          intent_checklist: {
-            uuid: 'checklist-intent-uuid',
-            questions: [
-              {
-                uuid: 'q-intent-1',
-                description: 'Intent question 1',
-                question_type: 'text_input',
-                required: false,
-              },
-            ],
-          },
-        },
-      }),
-    onboardingPersonIdentifierFieldsRetrieve: vi.fn().mockResolvedValue({
-      data: {
-        validation_method: 'ariregister',
-        person_identifier_fields: {
-          type: 'string',
-          field: 'civil_number',
-          label: 'Estonian ID code',
-          description: 'Enter your Estonian personal identification code',
-          example: '39901010101',
-        },
-      },
-    }),
-    onboardingJustificationsCreateJustification: vi.fn().mockResolvedValue({
-      data: { uuid: 'justification-uuid-1' },
-    }),
-    onboardingJustificationsAttachDocument: vi.fn().mockResolvedValue({}),
-  };
-});
+ENV.pageSize = 10;
+ENV.plugins.WALDUR_CORE.ONBOARDING_VALIDATION_METHODS = ['ariregister'];
 
 // Mock the navigation module
 vi.mock('@/navigation/context', () => ({
@@ -207,18 +110,82 @@ describe('OrganizationCreatePage', () => {
   beforeEach(() => {
     cleanup();
     vi.clearAllMocks();
+    vi.mocked(mockOnBefore).mockReturnValue(vi.fn());
 
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showError: mockShowError,
-      showErrorResponse: mockShowErrorResponse,
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'user-1',
+      full_name: 'Test User',
+      civil_number: '',
     } as any);
 
-    vi.mocked(useModal).mockReturnValue({
-      confirm: mockConfirm,
-      closeDialog: vi.fn(),
-      openDialog: vi.fn(),
+    vi.mocked(onboardingVerificationsDestroy).mockResolvedValue({} as any);
+    vi.mocked(onboardingVerificationsStartVerification).mockResolvedValue({
+      data: {
+        uuid: 'verification-uuid-1',
+        status: 'pending',
+      },
     } as any);
+    vi.mocked(onboardingVerificationsSubmitAnswers).mockResolvedValue(
+      {} as any,
+    );
+    vi.mocked(onboardingVerificationsRunValidation).mockResolvedValue({
+      data: {
+        uuid: 'verification-uuid-1',
+        status: 'verified',
+      },
+    } as any);
+    vi.mocked(onboardingVerificationsCreateCustomer).mockResolvedValue({
+      data: { uuid: 'customer-uuid-1' },
+    } as any);
+    vi.mocked(onboardingVerificationsPartialUpdate).mockResolvedValue(
+      {} as any,
+    );
+    vi.mocked(
+      onboardingVerificationsAvailableChecklistsRetrieve,
+    ).mockResolvedValue({
+      data: {
+        customer_checklist: {
+          uuid: 'checklist-customer-uuid',
+          questions: [
+            {
+              uuid: 'q-customer-1',
+              description: 'Customer question 1',
+              question_type: 'text_input',
+              required: false,
+            },
+          ],
+        },
+        intent_checklist: {
+          uuid: 'checklist-intent-uuid',
+          questions: [
+            {
+              uuid: 'q-intent-1',
+              description: 'Intent question 1',
+              question_type: 'text_input',
+              required: false,
+            },
+          ],
+        },
+      },
+    } as any);
+    vi.mocked(onboardingPersonIdentifierFieldsRetrieve).mockResolvedValue({
+      data: {
+        validation_method: 'ariregister',
+        person_identifier_fields: {
+          type: 'string',
+          field: 'civil_number',
+          label: 'Estonian ID code',
+          description: 'Enter your Estonian personal identification code',
+          example: '39901010101',
+        },
+      },
+    } as any);
+    vi.mocked(onboardingJustificationsCreateJustification).mockResolvedValue({
+      data: { uuid: 'justification-uuid-1' },
+    } as any);
+    vi.mocked(onboardingJustificationsAttachDocument).mockResolvedValue(
+      {} as any,
+    );
   });
 
   // --- Rendering ---
@@ -421,14 +388,16 @@ describe('OrganizationCreatePage', () => {
 
   describe('Cancel flow', () => {
     it('shows confirmation dialog on Cancel click', async () => {
-      mockConfirm.mockRejectedValueOnce(new Error('cancelled'));
+      vi.mocked(useModal().confirm).mockRejectedValueOnce(
+        new Error('cancelled'),
+      );
 
       renderComponent();
 
       fireEvent.click(screen.getByText('Cancel'));
 
       await waitFor(() => {
-        expect(mockConfirm).toHaveBeenCalledWith(
+        expect(useModal().confirm).toHaveBeenCalledWith(
           'Cancel organization creation',
           'Are you sure you want to cancel? All entered data will be lost.',
         );
@@ -436,7 +405,7 @@ describe('OrganizationCreatePage', () => {
     });
 
     it('navigates to profile.details when cancel is confirmed', async () => {
-      mockConfirm.mockResolvedValueOnce(undefined);
+      vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
 
       renderComponent();
 
@@ -448,14 +417,16 @@ describe('OrganizationCreatePage', () => {
     });
 
     it('does not navigate when cancel is rejected', async () => {
-      mockConfirm.mockRejectedValueOnce(new Error('cancelled'));
+      vi.mocked(useModal().confirm).mockRejectedValueOnce(
+        new Error('cancelled'),
+      );
 
       renderComponent();
 
       fireEvent.click(screen.getByText('Cancel'));
 
       await waitFor(() => {
-        expect(mockConfirm).toHaveBeenCalled();
+        expect(useModal().confirm).toHaveBeenCalled();
       });
 
       expect(mockRouterGo).not.toHaveBeenCalled();
@@ -514,7 +485,7 @@ describe('OrganizationCreatePage', () => {
         expect(onboardingVerificationsCreateCustomer).toHaveBeenCalledWith({
           path: { uuid: 'verification-uuid-1' },
         });
-        expect(mockShowSuccess).toHaveBeenCalledWith(
+        expect(useNotify().showSuccess).toHaveBeenCalledWith(
           'Organization created! You can view your submitted applications in your dashboard.',
         );
         expect(mockRouterGo).toHaveBeenCalledWith('profile.details');
@@ -609,7 +580,7 @@ describe('OrganizationCreatePage', () => {
       fireEvent.click(screen.getByText('Create'));
 
       await waitFor(() => {
-        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
           expect.any(Error),
           'Unable to verify company.',
         );
@@ -725,7 +696,7 @@ describe('OrganizationCreatePage', () => {
 
     it('deregisters router transition hook on unmount', () => {
       const mockDeregister = vi.fn();
-      mockOnBefore.mockReturnValue(mockDeregister);
+      vi.mocked(mockOnBefore).mockReturnValue(mockDeregister);
 
       const { unmount } = renderComponent();
       unmount();
@@ -764,11 +735,11 @@ describe('OrganizationCreatePage', () => {
       });
 
       // Now cancel
-      mockConfirm.mockResolvedValueOnce(undefined);
+      vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
       fireEvent.click(screen.getByText('Cancel'));
 
       await waitFor(() => {
-        expect(mockConfirm).toHaveBeenCalled();
+        expect(useModal().confirm).toHaveBeenCalled();
         expect(onboardingVerificationsDestroy).toHaveBeenCalledWith({
           path: { uuid: 'cleanup-test-uuid' },
         });
@@ -973,7 +944,7 @@ describe('OrganizationCreatePage', () => {
       clickSubmit(); // Trigger auto-validation
 
       await waitFor(() => {
-        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
           expect.any(Error),
           'Unable to verify company.',
         );
@@ -1016,7 +987,7 @@ describe('OrganizationCreatePage', () => {
       fireEvent.click(screen.getByText('Create'));
 
       await waitFor(() => {
-        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
           expect.any(Error),
           'Unable to create organization.',
         );

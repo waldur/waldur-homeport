@@ -1,46 +1,23 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { FC, ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import * as sdk from 'waldur-js-client';
+import { chatMessagesFeedback } from 'waldur-js-client';
 
-vi.mock('@/form/select/SelectField', () => ({
-  SelectField: ({ input, options, placeholder }: any) => (
-    <select
-      data-testid="category-select"
-      value={input.value ?? ''}
-      onChange={(e) => input.onChange(e.target.value || null)}
-    >
-      <option value="">{placeholder}</option>
-      {options.map((o: any) => (
-        <option key={o.value} value={o.value}>
-          {o.label}
-        </option>
-      ))}
-    </select>
-  ),
-}));
+import { FEEDBACK_SELECT_OPTIONS } from '@/ai-assistant/lib/feedback/categories';
+import { renderWithProviders } from '@/test/harness';
+import { getSelectByLabel, openAndSelectOption } from '@/test/select';
+
+import { FeedbackDialog } from './FeedbackDialog';
 
 const patchMessageByBackendUuid = vi.fn();
 vi.mock('@/ai-assistant/logic/ThreadProvider', () => ({
   useThreadContext: () => ({ patchMessageByBackendUuid }),
 }));
 
-import { FeedbackDialog } from './FeedbackDialog';
-
-vi.mock('waldur-js-client');
-
 const renderDialog = (
   initial: { score?: boolean; [key: string]: any } = {},
 ) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
-  });
-  const wrapper: FC<{ children: ReactNode }> = ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-  return render(
+  return renderWithProviders(
     <FeedbackDialog
       resolve={{
         messageUuid: 'msg-1',
@@ -50,42 +27,55 @@ const renderDialog = (
         ...initial,
       }}
     />,
-    { wrapper },
   );
 };
 
 describe('FeedbackDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(sdk.chatMessagesFeedback).mockResolvedValue({
+    vi.mocked(chatMessagesFeedback).mockResolvedValue({
       data: { feedback_score: false },
       error: undefined,
     } as any);
   });
 
-  it('renders all 5 category options and a comment field', () => {
+  it('renders all 5 category options and a comment field', async () => {
+    const user = userEvent.setup();
     renderDialog();
-    const select = screen.getByTestId('category-select');
-    // 5 category options + 1 placeholder option
-    expect(select.querySelectorAll('option[value]').length).toBe(6);
-    expect(select.querySelectorAll('option:not([value=""])').length).toBe(5);
+
+    const selectContainer = getSelectByLabel(/What type of issue/);
+    expect(selectContainer).toBeInTheDocument();
+
+    // Open select to verify options are present
+    const combobox = within(selectContainer as HTMLElement).getByRole(
+      'combobox',
+    );
+    await user.click(combobox);
+
+    FEEDBACK_SELECT_OPTIONS.forEach((opt) => {
+      expect(screen.getByText(opt.label)).toBeInTheDocument();
+    });
+
     expect(screen.getByPlaceholderText(/what was wrong/i)).toBeInTheDocument();
   });
 
   it('submits selected categories and comment to the API', async () => {
+    const user = userEvent.setup();
     renderDialog();
-    await userEvent.selectOptions(
-      screen.getByTestId('category-select'),
-      'inaccurate',
+
+    await openAndSelectOption(
+      user,
+      /What type of issue/,
+      'Wrong or inaccurate',
     );
-    await userEvent.type(
+    await user.type(
       screen.getByPlaceholderText(/what was wrong/i),
       'it said 5 but I have 3',
     );
-    await userEvent.click(screen.getByRole('button', { name: /submit/i }));
+    await user.click(screen.getByRole('button', { name: /submit/i }));
 
     await waitFor(() => {
-      expect(sdk.chatMessagesFeedback).toHaveBeenCalledWith({
+      expect(chatMessagesFeedback).toHaveBeenCalledWith({
         path: { uuid: 'msg-1' },
         body: {
           score: false,
@@ -102,26 +92,25 @@ describe('FeedbackDialog', () => {
       currentCategory: 'other',
     });
     expect(screen.getByDisplayValue('previous comment')).toBeInTheDocument();
-    expect(
-      (screen.getByTestId('category-select') as HTMLSelectElement).value,
-    ).toBe('other');
+    expect(screen.getByText('Other')).toBeInTheDocument();
   });
 
   it('hides the categories section when score is true', () => {
     renderDialog({ score: true });
-    expect(screen.queryByTestId('category-select')).toBeNull();
+    expect(screen.queryByText(/What type of issue/)).toBeNull();
   });
 
   it('submits score=true with just a comment when thumbs-up dialog is used', async () => {
+    const user = userEvent.setup();
     renderDialog({ score: true });
-    await userEvent.type(
+    await user.type(
       screen.getByPlaceholderText(/what was helpful/i),
       'nice answer',
     );
-    await userEvent.click(screen.getByRole('button', { name: /submit/i }));
+    await user.click(screen.getByRole('button', { name: /submit/i }));
 
     await waitFor(() => {
-      expect(sdk.chatMessagesFeedback).toHaveBeenCalledWith({
+      expect(chatMessagesFeedback).toHaveBeenCalledWith({
         path: { uuid: 'msg-1' },
         body: {
           score: true,
@@ -132,7 +121,8 @@ describe('FeedbackDialog', () => {
   });
 
   it('patches thread state with the server response after a successful submit', async () => {
-    vi.mocked(sdk.chatMessagesFeedback).mockResolvedValue({
+    const user = userEvent.setup();
+    vi.mocked(chatMessagesFeedback).mockResolvedValue({
       data: {
         feedback_score: false,
         feedback_comment: 'wrong info',
@@ -143,15 +133,16 @@ describe('FeedbackDialog', () => {
     } as any);
 
     renderDialog();
-    await userEvent.selectOptions(
-      screen.getByTestId('category-select'),
-      'inaccurate',
+    await openAndSelectOption(
+      user,
+      /What type of issue/,
+      'Wrong or inaccurate',
     );
-    await userEvent.type(
+    await user.type(
       screen.getByPlaceholderText(/what was wrong/i),
       'wrong info',
     );
-    await userEvent.click(screen.getByRole('button', { name: /submit/i }));
+    await user.click(screen.getByRole('button', { name: /submit/i }));
 
     await waitFor(() => {
       expect(patchMessageByBackendUuid).toHaveBeenCalledWith('msg-1', {

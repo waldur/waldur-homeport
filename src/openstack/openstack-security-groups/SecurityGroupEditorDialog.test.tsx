@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -7,9 +6,9 @@ import {
   openstackSecurityGroupsSetRules,
 } from 'waldur-js-client';
 
-import { SecurityGroupEditorDialog } from './SecurityGroupEditorDialog';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client');
+import { SecurityGroupEditorDialog } from './SecurityGroupEditorDialog';
 
 const fakeSecurityGroup = {
   url: '/api/openstack-security-groups/b40968a448034febbf04c195aafbb4e2/',
@@ -29,15 +28,10 @@ const fakeSecurityGroup = {
 };
 
 const renderDialog = (resource = fakeSecurityGroup) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <SecurityGroupEditorDialog
-        resolve={{ resource: resource as any, refetch: vi.fn() }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <SecurityGroupEditorDialog
+      resolve={{ resource: resource as any, refetch: vi.fn() }}
+    />,
   );
 };
 

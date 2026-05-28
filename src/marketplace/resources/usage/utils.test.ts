@@ -14,8 +14,6 @@ import {
   getUsageHistoryPeriodOptions,
 } from './utils';
 
-vi.mock('waldur-js-client');
-
 describe('ResourceUsageChart', () => {
   beforeEach(() => {
     vi.useFakeTimers();

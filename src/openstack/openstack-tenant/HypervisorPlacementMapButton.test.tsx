@@ -4,7 +4,6 @@ import { describe, expect, it, vi } from 'vitest';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { HypervisorPlacementMapButton } from './HypervisorPlacementMapButton';
-vi.mock('@/workspace/hooks');
 
 const renderButton = (isStaff: boolean) => {
   vi.mocked(workspaceHooks.useUser).mockReturnValue({

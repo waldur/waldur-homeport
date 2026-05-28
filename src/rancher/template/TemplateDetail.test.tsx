@@ -1,34 +1,22 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  rancherTemplatesRetrieve,
-  rancherClustersRetrieve,
-  rancherTemplateVersionsRetrieve,
-  rancherProjectsList,
   rancherAppsCreate,
+  rancherClustersRetrieve,
+  rancherProjectsList,
+  rancherTemplatesRetrieve,
+  rancherTemplateVersionsRetrieve,
 } from 'waldur-js-client';
+
+import { ENV } from '@/core/config';
+import { renderWithProviders } from '@/test/harness';
 
 import { TemplateDetail } from './TemplateDetail';
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_RANCHER: {
-        READ_ONLY_MODE: false,
-      },
-      WALDUR_CORE: {
-        SHORT_PAGE_TITLE: 'Waldur',
-      },
-    },
-  },
-}));
-
-vi.mock('@uirouter/react', () => ({
-  useCurrentStateAndParams: vi.fn(),
-}));
+ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE = false;
+ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE = 'Waldur';
 
 vi.mock('@/core/api', async (importOriginal) => {
   const actual: any = await importOriginal();
@@ -38,25 +26,6 @@ vi.mock('@/core/api', async (importOriginal) => {
   };
 });
 
-vi.mock('waldur-js-client', () => ({
-  rancherTemplatesRetrieve: vi.fn(),
-  rancherClustersRetrieve: vi.fn(),
-  rancherTemplateVersionsRetrieve: vi.fn(),
-  rancherProjectsList: vi.fn(),
-  rancherAppsCreate: vi.fn(),
-  formDataBodySerializer: {
-    serialize: vi.fn(),
-  },
-}));
-
-vi.mock('@/router', () => ({
-  router: {
-    stateService: {
-      go: vi.fn(),
-    },
-  },
-}));
-
 vi.mock('@/navigation/title', async (importOriginal) => {
   const actual: any = await importOriginal();
   return {
@@ -65,28 +34,11 @@ vi.mock('@/navigation/title', async (importOriginal) => {
   };
 });
 
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn(() => ({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
-  })),
-}));
-
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: false } },
-});
-
-const renderComponent = () =>
-  render(
-    <QueryClientProvider client={queryClient}>
-      <TemplateDetail />
-    </QueryClientProvider>,
-  );
+const renderComponent = () => renderWithProviders(<TemplateDetail />);
 
 describe('TemplateDetail', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    queryClient.clear();
     (useCurrentStateAndParams as any).mockReturnValue({
       params: { templateUuid: 't-1', clusterUuid: 'c-1' },
     });

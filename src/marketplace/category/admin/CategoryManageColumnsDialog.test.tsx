@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -9,7 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { Category } from '@/marketplace/types';
-import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { CategoryManageColumnsDialog } from './CategoryManageColumnsDialog';
 
@@ -21,33 +20,15 @@ const category = {
 
 const mockConfirm = vi.fn();
 
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
-
 describe('CategoryManageColumnsDialog', () => {
   const renderDialog = () => {
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: { retry: false },
-        mutations: { retry: false },
-      },
-    });
-
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <CategoryManageColumnsDialog resolve={{ category }} />
-      </QueryClientProvider>,
+    return renderWithProviders(
+      <CategoryManageColumnsDialog resolve={{ category }} />,
     );
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
-
-    vi.mocked(useNotify).mockReturnValue({
-      showError: vi.fn(),
-      showSuccess: vi.fn(),
-      showErrorResponse: vi.fn(),
-    } as any);
   });
 
   it('renders dialog with title and form', async () => {

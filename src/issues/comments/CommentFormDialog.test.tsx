@@ -1,42 +1,15 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportCommentsUpdate, supportIssuesComment } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+
 import { CommentFormDialog } from './CommentFormDialog';
 
-// Mock waldur-js-client
-vi.mock('waldur-js-client');
-
-// Mock i18n
-
-// Mock modal hooks
-
 // Mock notify
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showErrorResponse: vi.fn(),
-    showSuccess: vi.fn(),
-  }),
-}));
-
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
 
 const renderComponent = (props) => {
-  const queryClient = createTestQueryClient();
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <CommentFormDialog {...props} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<CommentFormDialog {...props} />);
 };
 
 const mockIssue = {

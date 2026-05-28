@@ -1,25 +1,30 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import nock from 'nock';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceOfferingEstimatedCostPoliciesCreate } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
+import {
+  marketplaceOfferingEstimatedCostPoliciesCreate,
+  organizationGroupsList,
+} from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { waitForSpinner } from '@/core/test-utils';
+import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { PolicyCreateDialog } from './PolicyCreateDialog';
-vi.mock('@/workspace/hooks');
 
-vi.mock('waldur-js-client', async (importOriginal) => {
-  const original = await importOriginal<typeof import('waldur-js-client')>();
-  return {
-    ...original,
-    marketplaceOfferingEstimatedCostPoliciesCreate: vi.fn(),
-    marketplaceOfferingUsagePoliciesCreate: vi.fn(),
-  };
-});
+const orgGroups = [
+  {
+    name: 'Group 1',
+    url: 'group-1-url',
+    uuid: 'group-1-uuid',
+  },
+  {
+    name: 'Group 2',
+    url: 'group-2-url',
+    uuid: 'group-2-uuid',
+  },
+];
 
 const fillAndSubmitCostForm = async () => {
   const costInput = screen.getByPlaceholderText(
@@ -42,16 +47,7 @@ const fillAndSubmitCostForm = async () => {
   await userEvent.click(screen.getByRole('button', { name: 'Create' }));
 };
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    apiEndpoint: 'http://example.com',
-    plugins: {
-      WALDUR_CORE: {
-        CURRENCY_NAME: 'USD',
-      },
-    },
-  },
-}));
+ENV.apiEndpoint = 'http://example.com';
 
 const mockOffering = {
   uuid: 'test-offering-uuid',
@@ -76,28 +72,16 @@ const renderComponent = (
   initialValues = undefined,
   offering = mockOffering as any,
 ) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  client.setConfig({
-    baseUrl: 'http://example.com',
-    throwOnError: true,
-  });
   vi.mocked(workspaceHooks.useUser).mockReturnValue({
     is_staff: true,
   } as any);
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <PolicyCreateDialog
-        type={type}
-        offering={offering}
-        refetch={refetch}
-        initialValues={initialValues}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <PolicyCreateDialog
+      type={type}
+      offering={offering}
+      refetch={refetch}
+      initialValues={initialValues}
+    />,
   );
 };
 
@@ -106,30 +90,14 @@ describe('PolicyCreateDialog', () => {
 
   beforeEach(() => {
     refetch = vi.fn();
-    const orgGroups = [
-      {
-        name: 'Group 1',
-        url: 'group-1-url',
-        uuid: 'group-1-uuid',
-      },
-      {
-        name: 'Group 2',
-        url: 'group-2-url',
-        uuid: 'group-2-uuid',
-      },
-    ];
-    nock('http://example.com')
-      .get('/api/organization-groups/')
-      .query(true)
-      .times(2)
-      .reply(200, orgGroups, {
-        'X-Result-Count': orgGroups.length.toString(),
-      });
+    vi.mocked(organizationGroupsList).mockResolvedValue({
+      data: orgGroups,
+      headers: { 'x-result-count': orgGroups.length.toString() },
+    } as any);
   });
 
   afterEach(() => {
     vi.clearAllMocks();
-    nock.cleanAll();
   });
 
   describe('Common behavior', () => {
@@ -143,11 +111,7 @@ describe('PolicyCreateDialog', () => {
     });
 
     it('should handle API error when loading organization groups', async () => {
-      nock.cleanAll();
-      nock('http://example.com')
-        .get('/api/organization-groups/')
-        .query(true)
-        .reply(400, { detail: 'Error' });
+      vi.mocked(organizationGroupsList).mockRejectedValue(new Error('Error'));
       renderComponent('cost');
       await waitFor(() => {
         expect(

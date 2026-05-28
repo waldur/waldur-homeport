@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesSwitchPlan } from 'waldur-js-client';
@@ -7,13 +6,12 @@ import { marketplaceResourcesSwitchPlan } from 'waldur-js-client';
 import { useModal } from '@/modal/actions';
 import { usePermission } from '@/permissions/hooks';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { ChangePlanDialog } from './ChangePlanDialog';
 import { loadData } from './utils';
 
 vi.mock('./utils');
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
 vi.mock('@/permissions/hooks');
 
 const mockData = {
@@ -55,41 +53,21 @@ const mockData = {
 };
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ChangePlanDialog
-        resolve={{
-          resource: {
-            marketplace_resource_uuid: 'test-uuid',
-          },
-          refetch: vi.fn(),
-        }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <ChangePlanDialog
+      resolve={{
+        resource: {
+          marketplace_resource_uuid: 'test-uuid',
+        },
+        refetch: vi.fn(),
+      }}
+    />,
   );
 };
 
 describe('ChangePlanDialog', () => {
-  const mockCloseDialog = vi.fn();
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      closeDialog: mockCloseDialog,
-    } as any);
     vi.mocked(usePermission).mockReturnValue(() => true);
   });
 
@@ -137,8 +115,8 @@ describe('ChangePlanDialog', () => {
         path: { uuid: 'test-uuid' },
         body: { plan: 'plan2-url' },
       });
-      expect(mockShowSuccess).toHaveBeenCalled();
-      expect(mockCloseDialog).toHaveBeenCalled();
+      expect(useNotify().showSuccess).toHaveBeenCalled();
+      expect(useModal().closeDialog).toHaveBeenCalled();
     });
   });
 
@@ -161,7 +139,7 @@ describe('ChangePlanDialog', () => {
     await userEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(mockShowErrorResponse).toHaveBeenCalled();
+      expect(useNotify().showErrorResponse).toHaveBeenCalled();
     });
   });
 });

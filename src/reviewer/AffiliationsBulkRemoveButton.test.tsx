@@ -1,22 +1,15 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { vi, describe, beforeEach, it, expect } from 'vitest';
 import { nestedReviewerProfileAffiliationsDestroy } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { AffiliationsBulkRemoveButton } from './AffiliationsBulkRemoveButton';
 
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
-
 describe('AffiliationsBulkRemoveButton', () => {
   const mockRefetch = vi.fn();
-  const mockShowSuccess = vi.fn();
-  const mockShowErrorResponse = vi.fn();
-  const mockConfirm = vi.fn();
-  const mockCloseDialog = vi.fn();
 
   const mockRows = [
     {
@@ -27,33 +20,18 @@ describe('AffiliationsBulkRemoveButton', () => {
     { uuid: '2', organization_name_display: 'Org 2' } as any,
   ];
   const mockProfile = { uuid: 'profile-uuid' };
-
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
-  });
-
   beforeEach(() => {
     vi.clearAllMocks();
-    mockConfirm.mockReturnValue(new Promise(() => {}));
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: mockShowSuccess,
-      showErrorResponse: mockShowErrorResponse,
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      confirm: mockConfirm,
-      closeDialog: mockCloseDialog,
-    } as any);
+    vi.mocked(useModal().confirm).mockReturnValue(new Promise(() => {}));
   });
 
   const renderButton = () =>
-    render(
-      <QueryClientProvider client={queryClient}>
-        <AffiliationsBulkRemoveButton
-          rows={mockRows}
-          refetch={mockRefetch}
-          profile={mockProfile}
-        />
-      </QueryClientProvider>,
+    renderWithProviders(
+      <AffiliationsBulkRemoveButton
+        rows={mockRows}
+        refetch={mockRefetch}
+        profile={mockProfile}
+      />,
     );
 
   it('renders correctly', () => {
@@ -64,8 +42,8 @@ describe('AffiliationsBulkRemoveButton', () => {
   it('shows confirmation dialog on click with correct details', () => {
     renderButton();
     fireEvent.click(screen.getByText('Remove'));
-    expect(mockConfirm).toHaveBeenCalled();
-    const [title, body, options] = mockConfirm.mock.calls[0];
+    expect(useModal().confirm).toHaveBeenCalled();
+    const [title, body, options] = vi.mocked(useModal().confirm).mock.calls[0];
     expect(title).toBe('Remove selected affiliations');
     expect(options.forDeletion).toBe(true);
 
@@ -77,7 +55,7 @@ describe('AffiliationsBulkRemoveButton', () => {
   });
 
   it('performs bulk removal on confirmation success', async () => {
-    mockConfirm.mockResolvedValue(true);
+    vi.mocked(useModal().confirm).mockResolvedValue(true);
     vi.mocked(nestedReviewerProfileAffiliationsDestroy).mockResolvedValue(
       {} as any,
     );
@@ -97,7 +75,7 @@ describe('AffiliationsBulkRemoveButton', () => {
     });
 
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         'Selected affiliations have been successfully removed.',
       );
     });
@@ -105,7 +83,7 @@ describe('AffiliationsBulkRemoveButton', () => {
   });
 
   it('handles partial success correctly', async () => {
-    mockConfirm.mockResolvedValue(true);
+    vi.mocked(useModal().confirm).mockResolvedValue(true);
     const error = new Error('Failed to remove second one');
     vi.mocked(nestedReviewerProfileAffiliationsDestroy)
       .mockResolvedValueOnce({} as any)
@@ -115,12 +93,12 @@ describe('AffiliationsBulkRemoveButton', () => {
     fireEvent.click(screen.getByText('Remove'));
 
     await waitFor(() => {
-      expect(mockShowSuccess).toHaveBeenCalledWith(
+      expect(useNotify().showSuccess).toHaveBeenCalledWith(
         '1 affiliations have been removed.',
       );
     });
     await waitFor(() => {
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         error,
         'Some affiliations could not be removed.',
       );
@@ -129,13 +107,13 @@ describe('AffiliationsBulkRemoveButton', () => {
   });
 
   it('does nothing when confirmation is cancelled', async () => {
-    mockConfirm.mockRejectedValue(undefined);
+    vi.mocked(useModal().confirm).mockRejectedValue(undefined);
 
     renderButton();
     fireEvent.click(screen.getByText('Remove'));
 
     await waitFor(() => {
-      expect(mockConfirm).toHaveBeenCalled();
+      expect(useModal().confirm).toHaveBeenCalled();
     });
 
     expect(nestedReviewerProfileAffiliationsDestroy).not.toHaveBeenCalled();

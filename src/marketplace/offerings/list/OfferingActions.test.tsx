@@ -1,60 +1,45 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { describe, expect, it, vi } from 'vitest';
+import { User } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
+import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { OfferingActions } from './OfferingActions';
-vi.mock('@/workspace/hooks');
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT: true,
-      },
-    },
-  },
-}));
+ENV.plugins.WALDUR_CORE.ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT = true;
 
 vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: vi.fn(() => true),
 }));
 
-vi.mock('@uirouter/react', async (importOriginal) => {
-  const mod = await importOriginal<typeof import('@uirouter/react')>();
-  return {
-    ...mod,
-    useRouter: vi.fn(),
-    useCurrentStateAndParams: () => ({
-      state: {
-        data: {
-          workspace: 'admin',
-        },
-      },
-    }),
-  };
-});
+vi.mocked(useCurrentStateAndParams).mockReturnValue({
+  state: {
+    data: {
+      workspace: 'admin',
+    },
+  },
+} as any);
+
+vi.mocked(workspaceHooks.useUser).mockReturnValue({
+  uuid: 'user_uuid',
+} as User);
 
 const renderOfferingActions = (props?) => {
-  const queryClient = new QueryClient();
-  vi.mocked(workspaceHooks.useUser).mockReturnValue({
-    uuid: 'user_uuid',
-  } as any);
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <OfferingActions
-        row={{
-          uuid: 'offering_uuid',
-          customer_uuid: 'customer_uuid',
-          state: 'Active',
-          resources_count: 0,
-        }}
-        refetch={() => {}}
-        {...props}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <OfferingActions
+      row={{
+        uuid: 'offering_uuid',
+        customer_uuid: 'customer_uuid',
+        state: 'Active',
+        resources_count: 0,
+      }}
+      refetch={() => {}}
+      {...props}
+    />,
   );
 };
 

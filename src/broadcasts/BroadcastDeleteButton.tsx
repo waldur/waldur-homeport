@@ -9,11 +9,7 @@ export const BroadcastDeleteButton: FunctionComponent<{ row; refetch }> = ({
   row,
   refetch,
 }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => broadcastMessagesDestroy({ path: { uuid: row.uuid } }),
     refetch: refetch,
 

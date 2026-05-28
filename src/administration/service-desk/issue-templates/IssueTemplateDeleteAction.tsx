@@ -5,11 +5,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const IssueTemplateDeleteAction = ({ row, refetch }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () => supportTemplatesDestroy({ path: { uuid: row.uuid } }),
     refetch: refetch,
 

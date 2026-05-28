@@ -1,4 +1,3 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -8,53 +7,25 @@ import {
 } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
+import { createTestWrapper } from '@/test/harness';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 import { getCustomer as getCustomerApi } from '../utils';
 
 import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
 
-vi.mock('waldur-js-client');
 vi.mock('../utils');
 vi.mock('@/workspace/actions');
 
 const mockSetCustomer = vi.fn();
-vi.mock('@/workspace/hooks', () => ({
-  useCustomer: vi.fn(),
-  useSetCustomer: () => mockSetCustomer,
-}));
 
-const mockShowSuccess = vi.fn();
-const mockShowErrorResponse = vi.fn();
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: mockShowSuccess,
-    showErrorResponse: mockShowErrorResponse,
-  }),
-}));
-
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
+const createWrapper = () => createTestWrapper().wrapper;
 
 describe('CustomerCallManagerPanel', () => {
-  const mockConfirm = vi.fn();
-
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useModal).mockReturnValue({
-      confirm: mockConfirm,
-      closeDialog: vi.fn(),
-    } as any);
+    vi.mocked(useSetCustomer).mockReturnValue(mockSetCustomer);
 
     vi.mocked(callManagingOrganisationsList).mockResolvedValue({
       data: [{ uuid: 'info-uuid-1' }],
@@ -98,7 +69,7 @@ describe('CustomerCallManagerPanel', () => {
       call_managing_organization_uuid: null,
     } as any);
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(callManagingOrganisationsCreate).mockResolvedValue({
       data: { uuid: 'new-info-uuid' },
     } as any);
@@ -110,7 +81,9 @@ describe('CustomerCallManagerPanel', () => {
 
     fireEvent.click(checkbox);
 
-    await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+    await waitFor(() =>
+      expect(vi.mocked(useModal().confirm)).toHaveBeenCalled(),
+    );
 
     await waitFor(() => {
       expect(callManagingOrganisationsCreate).toHaveBeenCalledWith({
@@ -139,7 +112,7 @@ describe('CustomerCallManagerPanel', () => {
       call_managing_organization_uuid: 'existing-uuid',
     } as any);
 
-    mockConfirm.mockResolvedValue(undefined);
+    vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(callManagingOrganisationsDestroy).mockResolvedValue({} as any);
 
     render(<CustomerCallManagerPanel />, { wrapper: createWrapper() });
@@ -154,7 +127,9 @@ describe('CustomerCallManagerPanel', () => {
 
     fireEvent.click(checkbox);
 
-    await waitFor(() => expect(mockConfirm).toHaveBeenCalled());
+    await waitFor(() =>
+      expect(vi.mocked(useModal().confirm)).toHaveBeenCalled(),
+    );
 
     await waitFor(() => {
       expect(callManagingOrganisationsDestroy).toHaveBeenCalledWith({

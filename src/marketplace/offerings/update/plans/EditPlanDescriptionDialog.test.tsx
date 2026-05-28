@@ -1,53 +1,13 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { marketplacePlansUpdate } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
+import { renderWithProviders } from '@/test/harness';
+
 import { EditPlanDescriptionDialog } from './EditPlanDescriptionDialog';
 import { mockOffering, mockPlan } from './test-utils';
-
-// Mock API specific to EditPlanDescriptionDialog
-vi.mock('waldur-js-client', () => ({
-  marketplacePlansUpdate: vi.fn(),
-  formDataBodySerializer: {},
-}));
-
-// Mock config to prevent errors from ENV access
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        ENABLE_PROJECT_KIND_COURSE: false,
-      },
-    },
-  },
-}));
-
-// Mock store hooks
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
-  }),
-}));
-
-// Mock modal hooks
-
-// Mock translation
-vi.mock('@/core/translate', () => ({
-  translate: (str: string) => str,
-}));
-
-// Mock local constants
-vi.mock('./constants', () => ({
-  getBillingPeriods: () => [
-    { value: 'month', label: 'Per month' },
-    { value: 'half_month', label: 'Per half month' },
-    { value: 'day', label: 'Per day' },
-    { value: 'hour', label: 'Per hour' },
-  ],
-}));
 
 // Mock marketplace utils
 vi.mock('@/marketplace/offerings/store/utils', () => ({
@@ -59,10 +19,7 @@ vi.mock('@/marketplace/offerings/store/utils', () => ({
   }),
 }));
 
-// Mock plan validation utils
-vi.mock('@/marketplace/offerings/update/plans/utils', () => ({
-  articleCodeValidator: () => {},
-}));
+ENV.plugins.WALDUR_CORE.ENABLE_PROJECT_KIND_COURSE = false;
 
 const mockResolve = {
   offering: mockOffering,
@@ -71,18 +28,7 @@ const mockResolve = {
 };
 
 const renderComponent = (resolve = mockResolve) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <EditPlanDescriptionDialog resolve={resolve} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<EditPlanDescriptionDialog resolve={resolve} />);
 };
 
 describe('EditPlanDescriptionDialog', () => {

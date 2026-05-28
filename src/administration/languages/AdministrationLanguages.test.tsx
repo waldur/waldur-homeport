@@ -8,22 +8,12 @@ import { ENV } from '@/core/config';
 import { AdministrationLanguages } from './AdministrationLanguages';
 
 // Mock dependencies
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        LANGUAGE_CHOICES: ['en', 'et'],
-      },
-    },
-    defaultLanguage: 'en',
-    languageChoices: [
-      { code: 'en', label: 'English' },
-      { code: 'et', label: 'Estonian' },
-    ],
-  },
-}));
-
-vi.mock('waldur-js-client');
+ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES = ['en', 'et'];
+ENV.defaultLanguage = 'en';
+ENV.languageChoices = [
+  { code: 'en', label: 'English' },
+  { code: 'et', label: 'Estonian' },
+];
 
 vi.mock('@/i18n/useLanguageSelector', () => ({
   useLanguageSelector: () => ({
@@ -31,15 +21,14 @@ vi.mock('@/i18n/useLanguageSelector', () => ({
   }),
 }));
 
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showError: vi.fn(),
-    showSuccess: vi.fn(),
-  }),
-}));
-
 describe('AdministrationLanguages', () => {
   beforeEach(() => {
+    ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES = ['en', 'et'];
+    ENV.defaultLanguage = 'en';
+    ENV.languageChoices = [
+      { code: 'en', label: 'English' },
+      { code: 'et', label: 'Estonian' },
+    ];
     vi.clearAllMocks();
   });
 

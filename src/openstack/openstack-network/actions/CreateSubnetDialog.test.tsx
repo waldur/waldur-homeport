@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -7,13 +6,9 @@ import {
   openstackNetworksList,
 } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+
 import { CreateSubnetDialog } from './CreateSubnetDialog';
-
-vi.mock('waldur-js-client');
-
-vi.mock('@/form/MonacoField', () => ({
-  MonacoField: () => <div data-testid="monaco-field" />,
-}));
 
 const fakeResource = {
   name: 'Network',
@@ -21,19 +16,14 @@ const fakeResource = {
 };
 
 const renderDialog = (resource = fakeResource, showNetworkField = false) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <CreateSubnetDialog
-        resolve={{
-          resource: resource as any,
-          refetch: vi.fn(),
-          showNetworkField,
-        }}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <CreateSubnetDialog
+      resolve={{
+        resource: resource as any,
+        refetch: vi.fn(),
+        showNetworkField,
+      }}
+    />,
   );
 };
 

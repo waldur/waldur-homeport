@@ -1,36 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
+
 import { EditSchedulesDialog } from './EditSchedulesDialog';
-
-vi.mock('waldur-js-client');
-
-// Mock Select to avoid react-select issues in tests
-vi.mock('@/form/select', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  const MockSelect = ({ name, value, onChange, instanceId, options }) => (
-    <select
-      data-testid={instanceId || name}
-      value={Array.isArray(value) ? value[0]?.value : value?.value}
-      onChange={(e) => onChange({ value: e.target.value })}
-    >
-      {options &&
-        options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-    </select>
-  );
-  return {
-    ...actual,
-    Select: MockSelect,
-    WindowedSelect: MockSelect,
-  };
-});
 
 // Mock CustomRangeDatePicker to avoid Flatpickr issues in tests
 vi.mock('@/booking/deploy/CustomRangeDatePicker', () => ({
@@ -61,13 +37,8 @@ const mockOffering = {
 };
 
 const renderDialog = (offering = mockOffering) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <EditSchedulesDialog resolve={{ offering, refetch: vi.fn() }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <EditSchedulesDialog resolve={{ offering, refetch: vi.fn() }} />,
   );
 };
 
@@ -153,5 +124,34 @@ describe('EditSchedulesDialog', () => {
     fireEvent.click(removeButton);
 
     expect(screen.queryByText(/27 October 2023/i)).not.toBeInTheDocument();
+  });
+
+  it('can change the time slot duration', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+
+    // Change slot duration to 2 hours
+    await openAndSelectOption(user, /Time slot/i, '2 hours');
+
+    // Add a new period to trigger parsing with updated slot duration
+    await user.click(screen.getByText(/Add time period/i));
+    const datePickers = screen.getAllByTestId('date-picker');
+    fireEvent.change(datePickers[1], {
+      target: { value: '2023-10-29T10:00:00Z,2023-10-29T11:00:00Z' },
+    });
+
+    vi.mocked(marketplaceProviderOfferingsUpdateAttributes).mockResolvedValue(
+      {} as any,
+    );
+    await user.click(screen.getByRole('button', { name: /Update/i }));
+
+    await waitFor(() => {
+      const callArgs = vi.mocked(marketplaceProviderOfferingsUpdateAttributes)
+        .mock.calls[0][0];
+      const newSchedule = (callArgs.body.schedules as any).find((s) =>
+        s.start.toString().includes('Oct 29'),
+      );
+      expect(newSchedule.extendedProps.config.slotDuration).toBe('02:00:00');
+    });
   });
 });

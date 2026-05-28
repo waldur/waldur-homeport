@@ -1,100 +1,30 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor, cleanup } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  marketplaceCategoriesList,
   remoteWaldurApiImportOffering,
   remoteWaldurApiRemoteCustomers,
   remoteWaldurApiSharedOfferings,
-  marketplaceCategoriesList,
 } from 'waldur-js-client';
 
-import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
+import {
+  openAndSelectOption,
+  openAndSelectOptionInContainer,
+} from '@/test/select';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { RemoteOfferingImportDialog } from './RemoteOfferingImportDialog';
-vi.mock('@/workspace/hooks');
-
-vi.mock('@uirouter/react');
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
-vi.mock('@/router', () => ({
-  router: {
-    urlService: {
-      config: { strictMode: vi.fn() },
-      rules: { initial: vi.fn() },
-    },
-    stateService: { go: vi.fn(), target: vi.fn() },
-  },
-}));
-
-vi.mock('react-select', () => ({
-  default: ({
-    options,
-    value,
-    onChange,
-    inputId,
-    isMulti,
-    getOptionLabel,
-    getOptionValue,
-  }) => (
-    <select
-      id={inputId}
-      data-testid={inputId}
-      multiple={isMulti}
-      value={
-        isMulti
-          ? (value || []).map(getOptionValue)
-          : value
-            ? getOptionValue(value)
-            : ''
-      }
-      onChange={(e) => {
-        const selectedOptions = Array.from(e.target.selectedOptions).map(
-          (opt) => options.find((o) => String(getOptionValue(o)) === opt.value),
-        );
-        onChange(isMulti ? selectedOptions : selectedOptions[0]);
-      }}
-    >
-      <option value="">Select...</option>
-      {options &&
-        options.map((o) => (
-          <option key={getOptionValue(o)} value={getOptionValue(o)}>
-            {getOptionLabel(o)}
-          </option>
-        ))}
-    </select>
-  ),
-  components: {
-    Option: ({ children }) => <div>{children}</div>,
-    SingleValue: ({ children }) => <div>{children}</div>,
-    MultiValue: ({ children }) => <div>{children}</div>,
-    DropdownIndicator: () => null,
-    ClearIndicator: () => null,
-  },
-}));
 
 const renderDialog = (refetch = vi.fn()) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <RemoteOfferingImportDialog refetch={refetch} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<RemoteOfferingImportDialog refetch={refetch} />);
 };
 
 describe('RemoteOfferingImportDialog', () => {
   let mockRouter;
-  let mockNotify;
-  let mockModal;
 
   beforeEach(() => {
     vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
@@ -105,17 +35,6 @@ describe('RemoteOfferingImportDialog', () => {
       stateService: { go: vi.fn() },
     };
     vi.mocked(useRouter).mockReturnValue(mockRouter);
-
-    mockNotify = {
-      showSuccess: vi.fn(),
-      showErrorResponse: vi.fn(),
-    };
-    vi.mocked(useNotify).mockReturnValue(mockNotify);
-
-    mockModal = {
-      closeDialog: vi.fn(),
-    };
-    vi.mocked(useModal).mockReturnValue(mockModal);
 
     vi.clearAllMocks();
   });
@@ -144,26 +63,18 @@ describe('RemoteOfferingImportDialog', () => {
 
     // --- Step 2: Organization ---
     await screen.findByText(/Select organization/i);
-    await user.selectOptions(
-      screen.getByTestId('customer'),
-      'remote-customer-uuid',
-    );
+    await openAndSelectOption(user, /Organization/i, 'Remote Customer');
     await user.click(getNextButton());
 
     // --- Step 3: Offerings ---
     await screen.findByText(/Choose offerings/i);
-    await user.selectOptions(
-      screen.getByTestId('offerings'),
-      'remote-offering-uuid',
-    );
+    await openAndSelectOption(user, /Offerings/i, 'Remote Offering');
     await user.click(getNextButton());
 
     // --- Step 4: Categories ---
     await screen.findByText(/Map categories/i);
-    const categorySelect = await screen.findByTestId(
-      'categories_set[0].local_category',
-    );
-    await user.selectOptions(categorySelect, 'local-category-uuid');
+    const categoryRow = screen.getByRole('row', { name: /Compute/i });
+    await openAndSelectOptionInContainer(user, categoryRow, 'Local Compute');
 
     await waitFor(() => expect(getNextButton()).not.toBeDisabled());
     await user.click(getNextButton());
@@ -214,7 +125,7 @@ describe('RemoteOfferingImportDialog', () => {
         }),
       });
     });
-    expect(mockNotify.showSuccess).toHaveBeenCalled();
+    expect(useNotify().showSuccess).toHaveBeenCalled();
     unmount();
     cleanup();
 
@@ -225,7 +136,7 @@ describe('RemoteOfferingImportDialog', () => {
     await walkThroughWizard(user);
     await user.click(getConfirmButton());
     await waitFor(() =>
-      expect(mockNotify.showErrorResponse).toHaveBeenCalledWith(
+      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         error,
         expect.any(String),
       ),

@@ -3,8 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { SecretField } from './SecretField';
 
-// Mock translation function
-
 describe('SecretField', () => {
   const defaultProps = {
     input: {

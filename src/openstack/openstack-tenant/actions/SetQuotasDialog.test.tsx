@@ -1,24 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { openstackTenantsSetQuotas } from 'waldur-js-client';
 
-import { SetQuotasDialog } from './SetQuotasDialog';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client');
-vi.mock('@/modal/actions', () => ({
-  useModal: () => ({
-    closeDialog: vi.fn(),
-    confirm: vi.fn(),
-  }),
-}));
-vi.mock('@/store/notify', () => ({
-  useNotify: () => ({
-    showSuccess: vi.fn(),
-    showErrorResponse: vi.fn(),
-  }),
-}));
+import { SetQuotasDialog } from './SetQuotasDialog';
 
 const makeResource = (overrides: any = {}) => ({
   uuid: 'tenant-uuid',
@@ -50,13 +37,8 @@ const makeResource = (overrides: any = {}) => ({
 });
 
 const renderDialog = (resource = makeResource()) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <SetQuotasDialog resolve={{ resource, refetch: vi.fn() }} />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <SetQuotasDialog resolve={{ resource, refetch: vi.fn() }} />,
   );
 };
 

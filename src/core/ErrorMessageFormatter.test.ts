@@ -1,10 +1,10 @@
-import { vi, describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
+import { ENV } from '@/core/config';
 
 import { format } from './ErrorMessageFormatter';
 
-vi.mock('@/core/config', () => ({
-  ENV: { apiEndpoint: 'https://example.com/' },
-}));
+ENV.apiEndpoint = 'https://example.com/';
 
 describe('ErrorMessageFormatter', () => {
   it('renders general network error if status code is -1', () => {

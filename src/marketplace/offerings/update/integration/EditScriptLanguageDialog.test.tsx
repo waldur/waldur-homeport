@@ -1,12 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateIntegration } from 'waldur-js-client';
 
-import { EditScriptLanguageDialog } from './EditScriptLanguageDialog';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client');
+import { EditScriptLanguageDialog } from './EditScriptLanguageDialog';
 
 const fakeOffering = {
   uuid: 'offering-uuid',
@@ -17,22 +16,17 @@ const fakeOffering = {
 };
 
 const renderDialog = (type = 'language') => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <EditScriptLanguageDialog
-        resolve={
-          {
-            offering: fakeOffering as any,
-            type: type,
-            label: 'Script Language',
-            refetch: vi.fn(),
-          } as any
-        }
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <EditScriptLanguageDialog
+      resolve={
+        {
+          offering: fakeOffering as any,
+          type: type,
+          label: 'Script Language',
+          refetch: vi.fn(),
+        } as any
+      }
+    />,
   );
 };
 

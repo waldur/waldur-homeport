@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -7,21 +6,14 @@ import {
   marketplaceCustomerServiceAccountsPartialUpdate,
 } from 'waldur-js-client';
 
-import { ServiceAccountFormDialog } from './ServiceAccountFormDialog';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client');
+import { ServiceAccountFormDialog } from './ServiceAccountFormDialog';
 
 const fakeScope = { uuid: 'scope-uuid' };
 
 const renderDialog = (props: any) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ServiceAccountFormDialog {...props} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<ServiceAccountFormDialog {...props} />);
 };
 
 describe('ServiceAccountFormDialog', () => {

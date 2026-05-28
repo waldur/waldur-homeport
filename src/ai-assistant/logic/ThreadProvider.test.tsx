@@ -3,11 +3,9 @@ import { act, renderHook } from '@testing-library/react';
 import { FC, ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { ThreadProvider, useThreadContext } from './ThreadProvider';
+import { useUser } from '@/workspace/hooks';
 
-vi.mock('@/workspace/hooks', () => ({
-  useUser: () => ({ uuid: 'user-1', first_name: 'Test' }),
-}));
+import { ThreadProvider, useThreadContext } from './ThreadProvider';
 
 const wrapper: FC<{ children: ReactNode }> = ({ children }) => (
   <ThreadProvider>{children}</ThreadProvider>
@@ -31,6 +29,10 @@ const seedThreadsWithMessage = (
 
 describe('ThreadProvider.patchMessageByBackendUuid', () => {
   beforeEach(() => {
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'user-1',
+      first_name: 'Test',
+    } as any);
     vi.clearAllMocks();
   });
 

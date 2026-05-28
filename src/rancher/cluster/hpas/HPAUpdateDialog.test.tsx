@@ -1,12 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { rancherHpasUpdate } from 'waldur-js-client';
 
-import { HPAUpdateDialog } from './HPAUpdateDialog';
+import { renderWithProviders } from '@/test/harness';
 
-vi.mock('waldur-js-client');
+import { HPAUpdateDialog } from './HPAUpdateDialog';
 
 const mockHPA = {
   uuid: 'hpa-uuid',
@@ -26,14 +25,7 @@ const mockHPA = {
 };
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  render(
-    <QueryClientProvider client={queryClient}>
-      <HPAUpdateDialog resolve={{ hpa: mockHPA as any }} />
-    </QueryClientProvider>,
-  );
+  renderWithProviders(<HPAUpdateDialog resolve={{ hpa: mockHPA as any }} />);
 };
 
 describe('HPAUpdateDialog', () => {

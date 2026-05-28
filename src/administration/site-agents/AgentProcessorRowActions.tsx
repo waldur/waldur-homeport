@@ -20,11 +20,7 @@ const AgentProcessorDeleteAction: FC<{
   row: AgentProcessor;
   refetch: () => void;
 }> = ({ row, refetch }) => {
-  const { mutate: mutate, isPending: isPending } = useManagedMutation<
-    any,
-    any,
-    void
-  >({
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       marketplaceSiteAgentProcessorsDestroy({
         path: { uuid: row.uuid },

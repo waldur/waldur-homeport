@@ -1,33 +1,27 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import { ENV } from '@/core/config';
 
 import { PriceTooltip } from './PriceTooltip';
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    accountingMode: 'accounting',
-  },
-}));
-
 describe('PriceTooltip', () => {
   it('does not render anything if billing mode is activated and not estimated', () => {
-    vi.mocked(ENV).accountingMode = 'billing';
+    ENV.accountingMode = 'billing';
     const { container } = render(<PriceTooltip />);
     expect(container.firstChild).toBeNull();
   });
 
   it('renders icon if accounting mode is activated', () => {
-    vi.mocked(ENV).accountingMode = 'accounting';
+    ENV.accountingMode = 'accounting';
     const { container } = render(<PriceTooltip />);
     expect(container.querySelector('svg')).toBeInTheDocument();
   });
 
   it('renders tooltip with correct label if accounting mode is activated', async () => {
     const user = userEvent.setup();
-    vi.mocked(ENV).accountingMode = 'accounting';
+    ENV.accountingMode = 'accounting';
     const { container } = render(<PriceTooltip />);
 
     const icon = container.querySelector('svg');
@@ -40,7 +34,7 @@ describe('PriceTooltip', () => {
 
   it('indicates that price is estimated', async () => {
     const user = userEvent.setup();
-    vi.mocked(ENV).accountingMode = 'accounting';
+    ENV.accountingMode = 'accounting';
     const { container } = render(<PriceTooltip estimated={true} />);
 
     const icon = container.querySelector('svg');
@@ -55,7 +49,7 @@ describe('PriceTooltip', () => {
 
   it('renders only estimated message if billing mode is activated but price is estimated', async () => {
     const user = userEvent.setup();
-    vi.mocked(ENV).accountingMode = 'billing';
+    ENV.accountingMode = 'billing';
     const { container } = render(<PriceTooltip estimated={true} />);
 
     const icon = container.querySelector('svg');

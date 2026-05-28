@@ -7,22 +7,12 @@ import * as workspaceHooks from '@/workspace/hooks';
 
 import * as profileAttributes from './profileAttributes';
 import { UserEditRows } from './UserEditRows';
-vi.mock('@/workspace/hooks');
-
-// Mock dependencies
 
 vi.mock('@/features/connect');
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        USER_MANDATORY_FIELDS: [],
-        PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS: [],
-        ENABLED_USER_PROFILE_ATTRIBUTES: [],
-      },
-    },
-  },
-}));
+ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS = [];
+ENV.plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS = [];
+ENV.plugins.WALDUR_CORE.ENABLED_USER_PROFILE_ATTRIBUTES = [];
+
 vi.mock('./profileAttributes', () => ({
   isProfileAttributeEnabled: vi.fn(),
 }));
@@ -137,9 +127,7 @@ describe('UserEditRows', () => {
     });
 
     it('marks fields as protected based on registration method', () => {
-      vi.mocked(
-        ENV,
-      ).plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS = [
+      ENV.plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS = [
         'eduGAIN',
       ];
 
@@ -156,10 +144,7 @@ describe('UserEditRows', () => {
 
   describe('Mandatory fields', () => {
     it('shows asterisk for required fields', () => {
-      vi.mocked(ENV).plugins.WALDUR_CORE.USER_MANDATORY_FIELDS = [
-        'first_name',
-        'email',
-      ];
+      ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS = ['first_name', 'email'];
 
       renderComponent();
       // Required fields show asterisk in label

@@ -1,22 +1,14 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import {
-  act,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesUpdateLimits } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
+import { renderWithProviders } from '@/test/harness';
 
 import { ChangeLimitsDialog } from './ChangeLimitsDialog';
 import * as fixtures from './fixtures';
 import { loadData } from './utils';
-
-vi.mock('waldur-js-client');
-vi.mock('@/workspace/hooks');
 
 vi.mock('@/marketplace/orders/actions/selectors', async (importOriginal) => {
   const actual = await importOriginal<any>();
@@ -27,15 +19,8 @@ vi.mock('@/marketplace/orders/actions/selectors', async (importOriginal) => {
   };
 });
 
-vi.mock('@/core/config', () => ({
-  ENV: {
-    plugins: {
-      WALDUR_CORE: {
-        CURRENCY_NAME: 'EUR',
-      },
-    },
-  },
-}));
+ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
+
 vi.mock('./utils', async (importOriginal) => {
   const actual = await importOriginal<any>();
   return {
@@ -43,15 +28,6 @@ vi.mock('./utils', async (importOriginal) => {
     loadData: vi.fn(),
   };
 });
-vi.mock('@/modal/useManagedMutation', () => ({
-  useManagedMutation: vi.fn(({ mutationFn, successMessage, refetch }) => ({
-    mutateAsync: vi.fn(async (values) => {
-      await mutationFn(values);
-      if (refetch) refetch();
-      return successMessage;
-    }),
-  })),
-}));
 
 const mockProps = {
   resolve: {
@@ -79,17 +55,7 @@ const mockFetchedData = {
 };
 
 const renderDialog = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <ChangeLimitsDialog {...mockProps} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<ChangeLimitsDialog {...mockProps} />);
 };
 
 describe('ChangeLimitsDialog', () => {
@@ -195,9 +161,8 @@ describe('ChangeLimitsDialog', () => {
   });
 
   it('renders "Request for a change" label if order cannot be approved', async () => {
-    const { orderCanBeApproved, checkOrderCanBeApproved } =
+    const { checkOrderCanBeApproved } =
       await import('@/marketplace/orders/actions/selectors');
-    vi.mocked(orderCanBeApproved).mockReturnValue(false);
     vi.mocked(checkOrderCanBeApproved).mockReturnValue(false);
     vi.mocked(loadData).mockResolvedValue(mockFetchedData as any);
 

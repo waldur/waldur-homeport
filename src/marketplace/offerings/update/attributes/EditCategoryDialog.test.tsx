@@ -1,29 +1,15 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client';
 
 import { getCategories } from '@/marketplace/common/api';
+import { renderWithProviders } from '@/test/harness';
 
 import { EditCategoryDialog } from './EditCategoryDialog';
-
-vi.mock('react-redux', () => ({
-  useDispatch: vi.fn(),
-  useSelector: vi.fn(),
-}));
-
-vi.mock('waldur-js-client');
 
 vi.mock('@/marketplace/common/api', () => ({
   getCategories: vi.fn(),
 }));
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { retry: false },
-  },
-});
 
 describe('EditCategoryDialog', () => {
   const mockResolve = {
@@ -38,17 +24,11 @@ describe('EditCategoryDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    queryClient.clear();
     vi.mocked(getCategories).mockResolvedValue(mockCategories);
-    vi.mocked(useDispatch).mockReturnValue(vi.fn());
   });
 
   const renderComponent = () => {
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <EditCategoryDialog resolve={mockResolve} />
-      </QueryClientProvider>,
-    );
+    return renderWithProviders(<EditCategoryDialog resolve={mockResolve} />);
   };
 
   it('renders loading state then categories', async () => {

@@ -1,59 +1,18 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { Field } from 'react-final-form';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceResourcesMoveResource } from 'waldur-js-client';
+import {
+  marketplaceResourcesMoveResource,
+  projectsList,
+} from 'waldur-js-client';
+
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOptionInContainer } from '@/test/select';
 
 import { MultiMoveDialog } from './MultiMoveDialog';
 
-// Mock waldur-js-client
-vi.mock('waldur-js-client');
-
-// Mock MoveToProjectAutocomplete to avoid dealing with AsyncSelect complexity in unit tests
-vi.mock('../actions/MoveToProjectAutocomplete', () => ({
-  MoveToProjectAutocomplete: ({ isDisabled }) => (
-    <Field name="project">
-      {({ input }) => (
-        <select
-          name={input.name}
-          value={input.value?.url || ''}
-          onChange={(e) => input.onChange({ url: e.target.value })}
-          disabled={isDisabled}
-        >
-          <option value="">Select project...</option>
-          <option value="project-url-1">Project 1</option>
-        </select>
-      )}
-    </Field>
-  ),
-}));
-
-// Mock i18n
-
-// Mock notify
-vi.mock('@/store/notify', () => ({
-  useNotify: vi.fn().mockReturnValue({
-    showErrorResponse: vi.fn(),
-    showSuccess: vi.fn(),
-  }),
-}));
-
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
 const renderComponent = (props) => {
-  const queryClient = createTestQueryClient();
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <MultiMoveDialog {...props} />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<MultiMoveDialog {...props} />);
 };
 
 const mockRows = [
@@ -77,9 +36,18 @@ describe('MultiMoveDialog', () => {
   });
 
   it('calls marketplaceResourcesMoveResource for each resource on submit', async () => {
+    const user = userEvent.setup();
     const refetch = vi.fn();
     vi.mocked(marketplaceResourcesMoveResource).mockResolvedValue({
       data: {},
+    } as any);
+    vi.mocked(projectsList).mockResolvedValue({
+      data: [
+        { name: 'Project 1', url: 'project-url-1', customer_name: 'Org 1' },
+      ],
+      response: {
+        headers: new Headers({ 'x-result-count': '1' }),
+      },
     } as any);
 
     renderComponent({
@@ -87,9 +55,10 @@ describe('MultiMoveDialog', () => {
     });
 
     // Select project
-    fireEvent.change(screen.getByRole('combobox'), {
-      target: { value: 'project-url-1' },
-    });
+    const container = screen
+      .getByRole('combobox')
+      .closest('.metronic-select-container');
+    await openAndSelectOptionInContainer(user, container, 'Project 1');
 
     // Click Save
     fireEvent.click(screen.getByText('Save'));

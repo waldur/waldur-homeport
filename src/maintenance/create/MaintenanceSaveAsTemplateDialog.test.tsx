@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { FC } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -13,54 +12,10 @@ import {
 } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
-import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 
 import { MaintenanceSaveAsTemplateDialog } from './MaintenanceSaveAsTemplateDialog';
-
-vi.mock('waldur-js-client');
-vi.mock('@/store/notify');
-
-// Mock leaf fields while keeping FormContainer real
-vi.mock('@/form', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    SelectField: ({ input, options, label, onChange }: any) => (
-      <div>
-        <label htmlFor={input.name}>{label}</label>
-        <select
-          id={input.name}
-          data-testid={input.name}
-          value={input.value?.uuid || ''}
-          onChange={(e) => {
-            const option = options?.find((o) => o.uuid === e.target.value);
-            input.onChange(option || null);
-            if (onChange) onChange(option || null);
-          }}
-        >
-          <option value="">Select...</option>
-          {options?.map((o) => (
-            <option key={o.uuid} value={o.uuid}>
-              {o.name}
-            </option>
-          ))}
-        </select>
-      </div>
-    ),
-    StringField: ({ input, label }: any) => (
-      <div>
-        <label htmlFor={input.name}>{label}</label>
-        <input id={input.name} data-testid={input.name} {...input} />
-      </div>
-    ),
-    SubmitButton: ({ label, disabled, children }: any) => (
-      <button type="submit" disabled={disabled}>
-        {label}
-        {children}
-      </button>
-    ),
-  };
-});
 
 // Mock Tip to avoid issues with Tooltip
 vi.mock('@/core/Tooltip', () => ({
@@ -109,16 +64,11 @@ const mockResolve = {
 };
 
 const renderDialog = (initialValues = {}) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <MaintenanceSaveAsTemplateDialog
-        resolve={mockResolve as any}
-        initialValues={initialValues}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <MaintenanceSaveAsTemplateDialog
+      resolve={mockResolve as any}
+      initialValues={initialValues}
+    />,
   );
 };
 
@@ -129,13 +79,6 @@ describe('MaintenanceSaveAsTemplateDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useNotify).mockReturnValue({
-      showSuccess: vi.fn(),
-      showErrorResponse: vi.fn(),
-    } as any);
-    vi.mocked(useModal).mockReturnValue({
-      openDialog: vi.fn(),
-    } as any);
 
     vi.mocked(maintenanceAnnouncementsTemplateList).mockResolvedValue({
       data: mockTemplates,
@@ -169,7 +112,7 @@ describe('MaintenanceSaveAsTemplateDialog', () => {
 
     renderDialog();
 
-    await user.type(await screen.findByTestId('name'), 'New Template');
+    await user.type(await screen.findByLabelText('Name'), 'New Template');
     await user.click(screen.getByText('Save'));
 
     await waitFor(() => {
@@ -225,20 +168,15 @@ describe('MaintenanceSaveAsTemplateDialog', () => {
 
     renderDialog();
 
-    // Wait for template options to load
-    await waitFor(() => {
-      expect(screen.getByText('Template 1')).toBeInTheDocument();
-    });
-
     // Select existing template
-    await user.selectOptions(screen.getByTestId('template'), 'template-1');
+    await openAndSelectOption(user, 'Template', 'Template 1');
 
     await waitFor(() => {
-      expect(screen.getByTestId('name')).toHaveValue('Template 1');
+      expect(screen.getByLabelText('Name')).toHaveValue('Template 1');
     });
 
-    await user.clear(screen.getByTestId('name'));
-    await user.type(screen.getByTestId('name'), 'Updated Template');
+    await user.clear(screen.getByLabelText('Name'));
+    await user.type(screen.getByLabelText('Name'), 'Updated Template');
     await user.click(screen.getByText('Save'));
 
     await waitFor(() => {
