@@ -1,15 +1,16 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { OpenStackFloatingIp, OpenStackInstance } from 'waldur-js-client';
-import { openstackInstancesUpdateFloatingIps } from 'waldur-js-client';
+import {
+  OpenStackFloatingIp,
+  OpenStackInstance,
+  openstackInstancesUpdateFloatingIps,
+  openstackFloatingIpsList,
+} from 'waldur-js-client';
 
-import { loadFloatingIps } from '@/openstack/api';
 import { renderWithProviders } from '@/test/harness';
 
 import { UpdateFloatingIpsDialog } from './UpdateFloatingIpsDialog';
-
-vi.mock('@/openstack/api');
 
 const fakeInstance = {
   name: 'backup',
@@ -56,7 +57,9 @@ const renderDialog = (resource = fakeInstance) => {
 describe('UpdateFloatingIpsDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(loadFloatingIps).mockResolvedValue([]);
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue({
+      data: [],
+    } as any);
   });
 
   it('renders current instance name in modal dialog title', async () => {
@@ -67,13 +70,17 @@ describe('UpdateFloatingIpsDialog', () => {
   });
 
   it('renders loading spinner while floating IPs are being loaded', () => {
-    vi.mocked(loadFloatingIps).mockReturnValue(new Promise(() => {}));
+    vi.mocked(openstackFloatingIpsList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
     renderDialog();
     expect(screen.getByRole('status')).toBeInTheDocument();
   });
 
   it('disables submit button while floating IPs are being loaded', () => {
-    vi.mocked(loadFloatingIps).mockReturnValue(new Promise(() => {}));
+    vi.mocked(openstackFloatingIpsList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
     renderDialog();
     expect(screen.getByText('Submit')).toBeDisabled();
   });
@@ -81,16 +88,18 @@ describe('UpdateFloatingIpsDialog', () => {
   it('filters floating IPs by tenant UUID', async () => {
     renderDialog();
     await waitFor(() => {
-      expect(loadFloatingIps).toHaveBeenCalledWith(
-        expect.objectContaining({
+      expect(openstackFloatingIpsList).toHaveBeenCalledWith({
+        query: expect.objectContaining({
           tenant_uuid: fakeInstance.tenant_uuid,
         }),
-      );
+      });
     });
   });
 
   it('renders error message when floating IPs load fails', async () => {
-    vi.mocked(loadFloatingIps).mockRejectedValue(new Error('Failed to load'));
+    vi.mocked(openstackFloatingIpsList).mockRejectedValue(
+      new Error('Failed to load'),
+    );
     renderDialog();
     expect(await screen.findByText('Unable to load data.')).toBeInTheDocument();
   });
@@ -182,7 +191,9 @@ describe('UpdateFloatingIpsDialog', () => {
 
   it('allows to add floating IP', async () => {
     const user = userEvent.setup();
-    vi.mocked(loadFloatingIps).mockResolvedValue(fakeFloatingIPs);
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue({
+      data: fakeFloatingIPs,
+    } as any);
     vi.mocked(openstackInstancesUpdateFloatingIps).mockResolvedValue({} as any);
     renderDialog();
 

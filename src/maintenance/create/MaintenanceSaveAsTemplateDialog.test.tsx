@@ -17,29 +17,6 @@ import { openAndSelectOption } from '@/test/select';
 
 import { MaintenanceSaveAsTemplateDialog } from './MaintenanceSaveAsTemplateDialog';
 
-// Mock Tip to avoid issues with Tooltip
-vi.mock('@/core/Tooltip', () => ({
-  Tip: ({ children }: any) => <span>{children}</span>,
-}));
-
-// Mock ActionButton and ModalDialog
-vi.mock('@/modal/ModalDialog', () => ({
-  ModalDialog: ({ title, children }: any) => (
-    <div>
-      <h1>{title}</h1>
-      {children}
-    </div>
-  ),
-}));
-
-vi.mock('@/table/ActionButton', () => ({
-  ActionButton: ({ title, action }: any) => (
-    <button type="button" onClick={action}>
-      {title}
-    </button>
-  ),
-}));
-
 const mockResolve = {
   formComponent: (() => null) as FC<any>,
   data: {

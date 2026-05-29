@@ -1,5 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`OrderSummary > formats update summary with components 1`] = `"Alice Lebowski has requested changing of limits from "CPU: 10, STORAGE: 100 GB" to "CPU: 30, STORAGE: 300 GB". Estimated monthly fee will change from 100 to 300. VAT is not included."`;
+exports[`OrderSummary > formats update summary with components 1`] = `"Alice Lebowski has requested changing of limits from "CPU: 10, STORAGE: 100 GB" to "CPU: 30, STORAGE: 300 GB". Estimated monthly fee will change from €100.00 to €300.00. VAT is not included."`;
 
-exports[`OrderSummary > formats update summary without components 1`] = `"Alice Lebowski has requested changing of limits from "CPU: 10, STORAGE: 102400" to "CPU: 30, STORAGE: 307200". Estimated monthly fee will change from 100 to 300. VAT is not included."`;
+exports[`OrderSummary > formats update summary without components 1`] = `"Alice Lebowski has requested changing of limits from "CPU: 10, STORAGE: 102400" to "CPU: 30, STORAGE: 307200". Estimated monthly fee will change from €100.00 to €300.00. VAT is not included."`;

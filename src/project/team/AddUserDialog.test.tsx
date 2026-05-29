@@ -8,7 +8,6 @@ import {
   projectsOtherUsersList,
 } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption, typeAndSelectOption } from '@/test/select';
 import { useCustomer, useProject, useUser } from '@/workspace/hooks';
@@ -36,8 +35,6 @@ vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: vi.fn().mockReturnValue(true),
 }));
 
-ENV.pageSize = 10;
-
 vi.mock('@/user/UsersService', () => ({
   getCurrentUser: vi.fn().mockResolvedValue({
     uuid: 'user-uuid',
@@ -52,16 +49,6 @@ vi.mock('@/customer/workspace/fetchCustomer', () => ({
   }),
 }));
 
-// Mock permissions utils
-vi.mock('@/permissions/utils', () => ({
-  getRoles: (types) =>
-    types.map((type) => ({
-      name: `${type}_role`,
-      description: `${type} role`,
-      content_type: type,
-    })),
-}));
-
 vi.mock('./utils', () => ({
   hasCurrentCustomerPermission: () => true,
 }));
@@ -72,12 +59,6 @@ vi.mock('@/form/AwesomeCheckboxField', () => ({
       <input type="checkbox" />
       <label>{label}</label>
     </div>
-  ),
-}));
-
-vi.mock('@/form/DateField', () => ({
-  DateField: ({ placeholder }) => (
-    <input type="date" placeholder={placeholder} data-testid="date-field" />
   ),
 }));
 

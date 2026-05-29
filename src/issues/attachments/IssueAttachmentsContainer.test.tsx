@@ -44,10 +44,6 @@ vi.mock('./IssueAttachmentsList', () => ({
   ),
 }));
 
-vi.mock('@/core/LoadingSpinner', () => ({
-  LoadingSpinner: () => <div data-testid="loading-spinner">Loading...</div>,
-}));
-
 vi.mock('@/form/upload/UploadContainer', () => ({
   UploadContainer: ({
     onDrop,
@@ -109,7 +105,7 @@ describe('IssueAttachmentsContainer', () => {
 
     renderComponent();
 
-    expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('spinner')).toBeInTheDocument();
   });
 
   it('renders attachments list when data is loaded', () => {
@@ -185,7 +181,7 @@ describe('IssueAttachmentsContainer', () => {
     renderComponent();
 
     // Should show attachments, not loading spinner
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
     expect(screen.getByTestId('attachments-list')).toBeInTheDocument();
   });
 

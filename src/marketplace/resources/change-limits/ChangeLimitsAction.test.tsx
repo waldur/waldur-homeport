@@ -6,12 +6,10 @@ import { useUser } from '@/workspace/hooks';
 
 import { ChangeLimitsAction } from './ChangeLimitsAction';
 
-vi.mock('@/resource/actions/useModalDialogCallback', () => ({
-  useModalDialogCallback: () => vi.fn(),
-}));
 vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: () => true,
 }));
+
 describe('ChangeLimitsAction', () => {
   beforeEach(() => {
     vi.clearAllMocks();

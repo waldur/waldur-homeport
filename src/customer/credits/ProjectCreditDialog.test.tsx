@@ -7,25 +7,14 @@ import {
   projectCreditsUpdate,
 } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { ProjectCreditDialog } from './ProjectCreditDialog';
 
-ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
-
-vi.mock('@/form/useFlatpickrTheme', () => ({
-  useFlatpickrTheme: vi.fn(),
-}));
-
 vi.mock('./ProjectCostChart', () => ({
   ProjectCostChart: () => <div data-testid="project-cost-chart" />,
-}));
-
-vi.mock('@/workspace/selectors', () => ({
-  getCustomer: () => ({ uuid: 'customer-uuid', url: 'customer-url' }),
 }));
 
 const renderComponent = (resolve) => {

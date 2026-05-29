@@ -16,14 +16,6 @@ import { createTestRouter } from '@/test/router';
 import { openAndSelectOption } from '@/test/select';
 import * as workspaceHooks from '@/workspace/hooks';
 
-vi.mock('@/i18n/LanguageUtilsService', () => ({
-  LanguageUtilsService: {
-    getCurrentLanguage: vi.fn(() => ({ code: 'en' })),
-    dictionary: {},
-  },
-  getUserLocale: () => 'en',
-}));
-
 vi.mock('@/azure/vm/utils', () => ({
   loadLocationOptions: vi.fn(() =>
     vi.fn().mockResolvedValue({
@@ -31,10 +23,6 @@ vi.mock('@/azure/vm/utils', () => ({
       hasMore: false,
     }),
   ),
-}));
-
-vi.mock('@/navigation/context', () => ({
-  useFullPage: vi.fn(),
 }));
 
 // Use a real (constructable) class — vitest 4's vi.fn() mocks are not

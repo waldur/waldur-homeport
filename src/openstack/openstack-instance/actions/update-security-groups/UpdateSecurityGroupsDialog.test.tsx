@@ -4,16 +4,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   OpenStackInstance,
   openstackInstancesUpdateSecurityGroups,
+  openstackSecurityGroupsList,
 } from 'waldur-js-client';
 
-import { loadSecurityGroups } from '@/openstack/api';
 import { renderWithProviders } from '@/test/harness';
 
 import { UpdateSecurityGroupsDialog } from './UpdateSecurityGroupsDialog';
-
-vi.mock('@/openstack/api', () => ({
-  loadSecurityGroups: vi.fn(),
-}));
 
 const mockResource = {
   uuid: 'instance-uuid',
@@ -42,9 +38,9 @@ const renderDialog = (resource = mockResource) => {
 describe('UpdateSecurityGroupsDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(loadSecurityGroups).mockResolvedValue(
-      securityGroupsResponse as any,
-    );
+    vi.mocked(openstackSecurityGroupsList).mockResolvedValue({
+      data: securityGroupsResponse,
+    } as any);
   });
 
   it('renders title with resource name', () => {
@@ -59,7 +55,9 @@ describe('UpdateSecurityGroupsDialog', () => {
 
   it('shows loading state while fetching security groups', () => {
     // Never resolve to keep loading
-    vi.mocked(loadSecurityGroups).mockReturnValue(new Promise(() => {}));
+    vi.mocked(openstackSecurityGroupsList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
     renderDialog();
 
     // AsyncActionDialog renders LoadingSpinner which has role="status"
@@ -72,9 +70,11 @@ describe('UpdateSecurityGroupsDialog', () => {
     renderDialog();
 
     await waitFor(() => {
-      expect(loadSecurityGroups).toHaveBeenCalledWith({
-        tenant_uuid: 'tenant-uuid',
-        field: ['name', 'url'],
+      expect(openstackSecurityGroupsList).toHaveBeenCalledWith({
+        query: expect.objectContaining({
+          tenant_uuid: 'tenant-uuid',
+          field: ['name', 'url'],
+        }),
       });
     });
   });
@@ -100,7 +100,9 @@ describe('UpdateSecurityGroupsDialog', () => {
   });
 
   it('shows error state when loading fails', async () => {
-    vi.mocked(loadSecurityGroups).mockRejectedValue(new Error('Network error'));
+    vi.mocked(openstackSecurityGroupsList).mockRejectedValue(
+      new Error('Network error'),
+    );
     renderDialog();
 
     await waitFor(() => {

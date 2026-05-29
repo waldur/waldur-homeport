@@ -1,32 +1,11 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { rolesCreate, rolesUpdate } from 'waldur-js-client';
+import { rolesCreate, rolesList, rolesUpdate } from 'waldur-js-client';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { RoleFormDialog } from './RoleFormDialog';
-import { getRoles } from './utils';
-
-// Mock dependencies
-vi.mock('./utils');
-
-vi.mock('../../permissions/constants', () => ({
-  ROLE_TYPES: [
-    { value: 'customer', label: 'Organization' },
-    { value: 'project', label: 'Project' },
-  ],
-}));
-
-vi.mock('./PermissionOptions', () => ({
-  PermissionOptions: [
-    {
-      label: 'Category 1',
-      options: [
-        { label: 'Permission 1', value: 'PERM_1' },
-        { label: 'Permission 2', value: 'PERM_2' },
-      ],
-    },
-  ],
-}));
 
 describe('RoleFormDialog', () => {
   const mockRefetch = vi.fn();
@@ -36,10 +15,10 @@ describe('RoleFormDialog', () => {
   });
 
   it('renders "New role" dialog correctly', () => {
-    render(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
+    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
     expect(screen.getByText('New role')).toBeInTheDocument();
-    expect(screen.getByText(/Name/i)).toBeInTheDocument();
-    expect(screen.getByText(/Type/i)).toBeInTheDocument();
+    expect(screen.getByText('Name')).toBeInTheDocument();
+    expect(screen.getByText('Type')).toBeInTheDocument();
   });
 
   it('renders "Edit role" dialog with initial values', () => {
@@ -47,17 +26,19 @@ describe('RoleFormDialog', () => {
       uuid: 'role-uuid',
       name: 'Test Role',
       content_type: 'customer',
-      permissions: ['PERM_1'],
+      permissions: ['CALL.APPROVE_AND_REJECT_PROPOSALS'],
     };
-    render(<RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />);
+    renderWithProviders(
+      <RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />,
+    );
     expect(screen.getByText('Edit role')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Test Role')).toBeInTheDocument();
     expect(screen.getByText('Organization')).toBeInTheDocument();
-    expect(screen.getByLabelText('Permission 1')).toBeChecked();
+    expect(screen.getByLabelText('Approve and reject proposals')).toBeChecked();
   });
 
   it('validates required fields', () => {
-    render(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
+    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
     const saveButton = screen.getByText('Save');
     expect(saveButton).toBeDisabled();
   });
@@ -65,9 +46,16 @@ describe('RoleFormDialog', () => {
   it('handles successful role creation', async () => {
     const user = userEvent.setup();
     const createSpy = vi.mocked(rolesCreate).mockResolvedValue({} as any);
-    const getRolesSpy = vi.mocked(getRoles).mockResolvedValue([]);
+    vi.mocked(rolesList).mockResolvedValue({
+      data: [],
+      response: {
+        headers: {
+          get: vi.fn().mockReturnValue(null),
+        },
+      },
+    } as any);
 
-    const { container } = render(
+    const { container } = renderWithProviders(
       <RoleFormDialog resolve={{ refetch: mockRefetch }} />,
     );
 
@@ -81,7 +69,7 @@ describe('RoleFormDialog', () => {
     await user.click(screen.getByText('Organization'));
 
     // Select Permission
-    await user.click(screen.getByLabelText('Permission 1'));
+    await user.click(screen.getByLabelText('Approve and reject proposals'));
 
     const saveButton = screen.getByText('Save');
     await waitFor(() => expect(saveButton).toBeEnabled());
@@ -92,10 +80,10 @@ describe('RoleFormDialog', () => {
         body: expect.objectContaining({
           name: 'New Role',
           content_type: 'customer',
-          permissions: ['PERM_1'],
+          permissions: ['CALL.APPROVE_AND_REJECT_PROPOSALS'],
         }),
       });
-      expect(getRolesSpy).toHaveBeenCalled();
+      expect(rolesList).toHaveBeenCalled();
       expect(mockRefetch).toHaveBeenCalled();
     });
   });
@@ -103,14 +91,24 @@ describe('RoleFormDialog', () => {
   it('handles successful role update', async () => {
     const user = userEvent.setup();
     const updateSpy = vi.mocked(rolesUpdate).mockResolvedValue({} as any);
+    vi.mocked(rolesList).mockResolvedValue({
+      data: [],
+      response: {
+        headers: {
+          get: vi.fn().mockReturnValue(null),
+        },
+      },
+    } as any);
     const role = {
       uuid: 'role-uuid',
       name: 'Existing Role',
       content_type: 'project',
-      permissions: ['PERM_2'],
+      permissions: ['CALL.CLOSE_ROUNDS'],
     };
 
-    render(<RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />);
+    renderWithProviders(
+      <RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />,
+    );
 
     const nameInput = screen.getByDisplayValue('Existing Role');
     await user.clear(nameInput);
@@ -124,7 +122,7 @@ describe('RoleFormDialog', () => {
         body: expect.objectContaining({
           name: 'Updated Role',
           content_type: 'project',
-          permissions: ['PERM_2'],
+          permissions: ['CALL.CLOSE_ROUNDS'],
         }),
       });
     });
@@ -138,7 +136,7 @@ describe('RoleFormDialog', () => {
       permissions: [],
       is_system_role: true,
     };
-    const { container } = render(
+    const { container } = renderWithProviders(
       <RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />,
     );
 

@@ -1,9 +1,6 @@
-import { vi, describe, it, expect, afterEach, beforeEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { ENV } from '@/core/config';
 import { formatOrganizationCostChart } from '@/dashboard/utils';
-
-ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
 
 describe('Customer dashboard chart API', () => {
   beforeEach(() => {

@@ -1,7 +1,6 @@
-import { cleanup, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useRouter } from '@uirouter/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceCategoriesList,
   remoteWaldurApiImportOffering,
@@ -24,23 +23,12 @@ const renderDialog = (refetch = vi.fn()) => {
 };
 
 describe('RemoteOfferingImportDialog', () => {
-  let mockRouter;
-
   beforeEach(() => {
     vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
       uuid: 'local-customer-uuid',
     } as any);
 
-    mockRouter = {
-      stateService: { go: vi.fn() },
-    };
-    vi.mocked(useRouter).mockReturnValue(mockRouter);
-
     vi.clearAllMocks();
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   const getNextButton = () =>
@@ -127,7 +115,6 @@ describe('RemoteOfferingImportDialog', () => {
     });
     expect(useNotify().showSuccess).toHaveBeenCalled();
     unmount();
-    cleanup();
 
     // Now test error handling (in a new render)
     const error = new Error('Submission failed');

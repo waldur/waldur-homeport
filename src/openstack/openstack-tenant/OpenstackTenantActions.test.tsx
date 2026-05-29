@@ -46,12 +46,6 @@ const renderComponent = (userOverrides = {}) => {
   );
 };
 
-vi.mock('@/workspace/selectors', () => ({
-  getUser: () => ({ is_staff: true, permissions: [] }),
-  getCustomer: () => ({}),
-  getProject: () => ({}),
-  isOwnerOrStaff: () => true,
-}));
 describe('OpenstackTenantActions', () => {
   it('renders action groups with correct titles for staff user', () => {
     renderComponent();

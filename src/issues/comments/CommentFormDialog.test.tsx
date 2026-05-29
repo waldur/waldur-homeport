@@ -6,8 +6,6 @@ import { renderWithProviders } from '@/test/harness';
 
 import { CommentFormDialog } from './CommentFormDialog';
 
-// Mock notify
-
 const renderComponent = (props) => {
   return renderWithProviders(<CommentFormDialog {...props} />);
 };

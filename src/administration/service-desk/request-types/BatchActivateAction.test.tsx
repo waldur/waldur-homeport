@@ -1,14 +1,12 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportRequestTypesAdminActivate } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { createTestWrapper } from '@/test/harness';
+import { renderWithProviders } from '@/test/harness';
 
 import { BatchActivateAction } from './BatchActivateAction';
-
-const createWrapper = () => createTestWrapper().wrapper;
 
 describe('BatchActivateAction', () => {
   const mockRefetch = vi.fn();
@@ -26,9 +24,9 @@ describe('BatchActivateAction', () => {
     vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(supportRequestTypesAdminActivate).mockResolvedValue({} as any);
 
-    render(<BatchActivateAction rows={rows} refetch={mockRefetch} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(
+      <BatchActivateAction rows={rows} refetch={mockRefetch} />,
+    );
 
     fireEvent.click(screen.getByText('Activate'));
 
@@ -51,9 +49,9 @@ describe('BatchActivateAction', () => {
 
   it('is disabled when no inactive rows are selected', () => {
     const activeRows = [{ uuid: '1', is_active: true }] as any;
-    render(<BatchActivateAction rows={activeRows} refetch={mockRefetch} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(
+      <BatchActivateAction rows={activeRows} refetch={mockRefetch} />,
+    );
 
     const button = screen.getByText('Activate');
     expect(button).toBeDisabled();
@@ -72,9 +70,9 @@ describe('BatchActivateAction', () => {
       },
     );
 
-    render(<BatchActivateAction rows={multiRows} refetch={mockRefetch} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(
+      <BatchActivateAction rows={multiRows} refetch={mockRefetch} />,
+    );
 
     fireEvent.click(screen.getByText('Activate'));
 

@@ -9,24 +9,8 @@ import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { AddProjectUserDialog } from './AddProjectUserDialog';
 
-vi.mock('@/permissions/utils', () => ({
-  getRoles: () => [
-    { name: 'admin', description: 'Admin', content_type: 'project' },
-  ],
-}));
-
 vi.mock('../workspace/fetchCustomer', () => ({
   useCustomerProjects: () => ({ loading: false }),
-}));
-
-vi.mock('@/form/useFlatpickrTheme', () => ({
-  useFlatpickrTheme: vi.fn(),
-}));
-
-vi.mock('@/form/DateField', () => ({
-  DateField: (props) => (
-    <input type="date" id={props.id || props.input?.name} {...props.input} />
-  ),
 }));
 
 const renderComponent = (customer, refetch = vi.fn()) => {
@@ -73,7 +57,7 @@ describe('AddProjectUserDialog', () => {
     await openAndSelectOption(user, 'Project', 'Test Project');
 
     // Role Select
-    await openAndSelectOption(user, 'Role', 'Admin');
+    await openAndSelectOption(user, 'Role', 'Administrator');
 
     // Expiration Date
     const dateInput = await screen.findByLabelText('Role expires on');

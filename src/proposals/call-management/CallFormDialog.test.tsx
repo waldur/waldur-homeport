@@ -25,17 +25,6 @@ vi.mock('@/features/connect', () => ({
   isFeatureVisible: vi.fn(() => false),
 }));
 
-// Mock MarkdownEditor to avoid heavy dependency
-vi.mock('@/form/MarkdownEditor', () => ({
-  default: ({ input }: any) => (
-    <textarea
-      data-testid="markdown-editor"
-      value={input.value}
-      onChange={(e) => input.onChange(e.target.value)}
-    />
-  ),
-}));
-
 const fakeCustomer = { uuid: 'customer-uuid' };
 const fakeManager = { url: 'manager-url', uuid: 'manager-uuid' };
 

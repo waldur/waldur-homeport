@@ -3,18 +3,6 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { PhoneNumberField } from './PhoneNumberField';
 
-vi.mock('@/core/utils', () => ({
-  formatPhoneNumber: (value: string) => {
-    if (!value) return null;
-    // Simple mock: just add spaces for testing
-    const cleaned = value.replace(/[\s\-().]/g, '');
-    if (cleaned.startsWith('+1')) {
-      return `+1 ${cleaned.slice(2, 5)} ${cleaned.slice(5, 8)} ${cleaned.slice(8)}`.trim();
-    }
-    return cleaned;
-  },
-}));
-
 describe('PhoneNumberField', () => {
   const createMockInput = (value = '') => ({
     name: 'phone',

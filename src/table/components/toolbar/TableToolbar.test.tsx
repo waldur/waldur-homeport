@@ -1,8 +1,8 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   createMockTableContext,
@@ -15,11 +15,6 @@ import {
   TableToolbarActions,
   TableToolbarTitle,
 } from './TableToolbar';
-
-// Cleanup after each test to prevent state leakage
-afterEach(() => {
-  cleanup();
-});
 
 const store = createStore(() => ({}));
 
@@ -213,7 +208,6 @@ describe('TableToolbarTitle', () => {
 describe('TableToolbarActions', () => {
   describe('multi-select actions', () => {
     it('renders multi-select actions when rows are selected', () => {
-      cleanup(); // Ensure clean state
       const MultiSelectActions = ({ rows }) => (
         <button data-testid="multi-select-action">
           Delete {rows.length} items
@@ -237,7 +231,6 @@ describe('TableToolbarActions', () => {
     });
 
     it('shows selected count', () => {
-      cleanup(); // Ensure clean state
       const MultiSelectActions = () => <button>Action</button>;
 
       const ctx = createMockTableContext();
@@ -258,7 +251,6 @@ describe('TableToolbarActions', () => {
     });
 
     it('calls resetSelection when clicking clear button', async () => {
-      cleanup(); // Ensure clean state
       const user = userEvent.setup();
       const resetSelection = vi.fn();
       const MultiSelectActions = () => <button>Action</button>;
@@ -283,7 +275,6 @@ describe('TableToolbarActions', () => {
     });
 
     it('does not render multi-select when no rows are selected', () => {
-      cleanup(); // Ensure clean state
       const MultiSelectActions = () => (
         <button data-testid="multi-action">Action</button>
       );

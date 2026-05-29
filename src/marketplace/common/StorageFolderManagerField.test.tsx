@@ -383,9 +383,9 @@ describe('StorageFolderManagerField', () => {
         if (calls.length === 0) return;
         const lastCall = calls[calls.length - 1][0];
         expect(lastCall).toHaveProperty('storage_data_type');
-        expect(lastCall).toHaveProperty('permissions');
-        expect(lastCall).toHaveProperty('soft_quota_inodes');
         expect(lastCall).toHaveProperty('hard_quota_inodes');
+        expect(lastCall).toHaveProperty('soft_quota_inodes');
+        expect(lastCall).toHaveProperty('permissions');
       });
     });
 

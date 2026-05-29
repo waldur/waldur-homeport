@@ -7,14 +7,6 @@ import { useNotify } from '@/store/notify';
 
 import { SupportFeedback } from './SupportFeedback';
 
-vi.mock('@/navigation/title', async (importOriginal) => {
-  const actual = await importOriginal<any>();
-  return {
-    ...actual,
-    useTitle: vi.fn(),
-  };
-});
-
 describe('SupportFeedback', () => {
   const mockRouter = {
     globals: {

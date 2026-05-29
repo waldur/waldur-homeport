@@ -1,3 +1,4 @@
+import { screen } from '@testing-library/dom';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
@@ -85,20 +86,20 @@ const renderComponent = () => {
 
 describe('CustomerUsersList', () => {
   it('renders table headers and data cells', async () => {
-    const node = renderComponent();
-    expect(await node.findByText('Member')).toBeInTheDocument();
-    expect(await node.findByText('Email')).toBeInTheDocument();
-    expect(await node.findByText('Username')).toBeInTheDocument();
-    expect(await node.findByText('Role in organization')).toBeInTheDocument();
-    expect(await node.findByText('Role expiration')).toBeInTheDocument();
+    renderComponent();
+    expect(await screen.findByText('Member')).toBeInTheDocument();
+    expect(await screen.findByText('Email')).toBeInTheDocument();
+    expect(await screen.findByText('Username')).toBeInTheDocument();
+    expect(await screen.findByText('Role in organization')).toBeInTheDocument();
+    expect(await screen.findByText('Role expiration')).toBeInTheDocument();
 
     // Member
-    expect(await node.findByText('John Doe')).toBeInTheDocument();
+    expect(await screen.findByText('John Doe')).toBeInTheDocument();
     // Email
-    expect(await node.findByText('john.doe@example.com')).toBeInTheDocument();
+    expect(await screen.findByText('john.doe@example.com')).toBeInTheDocument();
     // Username
-    expect(await node.findByText('johndoe')).toBeInTheDocument();
+    expect(await screen.findByText('johndoe')).toBeInTheDocument();
     // Role
-    expect(await node.findByText('owner')).toBeInTheDocument();
+    expect(await screen.findByText('Owner')).toBeInTheDocument();
   });
 });

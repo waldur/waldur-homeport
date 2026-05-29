@@ -1,5 +1,5 @@
-import { cleanup, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import {
   createMockTableContext,
@@ -7,10 +7,6 @@ import {
 } from '../../test-utils';
 
 import { TableContent } from './TableContent';
-
-afterEach(() => {
-  cleanup();
-});
 
 describe('TableContent', () => {
   describe('loading state', () => {

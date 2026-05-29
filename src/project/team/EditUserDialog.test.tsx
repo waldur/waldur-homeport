@@ -14,59 +14,9 @@ import { useProject } from '@/workspace/hooks';
 import { EditUserDialog } from './EditUserDialog';
 
 // Mock table constants
-vi.mock('@/table/constants', () => ({
+vi.mock('@/table/constants', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/table/constants')>()),
   DASH_ESCAPE_CODE: '—',
-}));
-
-// Mock permissions utils
-vi.mock('@/permissions/utils', () => ({
-  getProjectRoles: () => [
-    {
-      name: 'admin',
-      description: 'Administrator',
-      content_type: 'project',
-    },
-    {
-      name: 'manager',
-      description: 'Manager',
-      content_type: 'project',
-    },
-  ],
-  getRoles: (types) =>
-    types.flatMap((type) => {
-      if (type === 'project') {
-        return [
-          {
-            name: 'admin',
-            description: 'Administrator',
-            content_type: 'project',
-          },
-          {
-            name: 'manager',
-            description: 'Manager',
-            content_type: 'project',
-          },
-        ];
-      }
-      return [
-        {
-          name: `${type}_role`,
-          description: `${type} role`,
-          content_type: type,
-        },
-      ];
-    }),
-}));
-
-// Mock DateField to avoid flatpickr/language issues
-vi.mock('@/form/DateField', () => ({
-  DateField: ({ input }) => (
-    <input
-      type="date"
-      value={input.value || ''}
-      onChange={(e) => input.onChange(e.target.value)}
-    />
-  ),
 }));
 
 const mockPermission = {

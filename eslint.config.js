@@ -7,6 +7,7 @@ import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import testingLibrary from 'eslint-plugin-testing-library';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -239,6 +240,29 @@ export default tseslint
         'no-prototype-builtins': 'off',
         '@typescript-eslint/no-require-imports': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
+    {
+      files: ['**/*.test.{ts,tsx}'],
+      ...testingLibrary.configs['flat/react'],
+      rules: {
+        'testing-library/render-result-naming-convention': 'warn',
+        'testing-library/no-node-access': 'warn',
+        'testing-library/no-container': 'warn',
+        'testing-library/no-render-in-lifecycle': 'warn',
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [
+              {
+                name: '@/i18n',
+                importNames: ['translate'],
+                message:
+                  'Do not use translate() in unit tests. Use raw strings instead.',
+              },
+            ],
+          },
+        ],
       },
     },
   )

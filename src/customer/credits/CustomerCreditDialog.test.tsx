@@ -1,57 +1,50 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { customerCreditsCreate, customerCreditsUpdate } from 'waldur-js-client';
+import {
+  customerCreditsCreate,
+  customerCreditsUpdate,
+  invoicesList,
+  customersList,
+  marketplaceProviderOfferingsList,
+} from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
-import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
-import { createTestWrapper } from '@/test/harness';
+import { renderWithProviders } from '@/test/harness';
 import { typeAndSelectOption } from '@/test/select';
 
 import { CustomerCreditDialog } from './CustomerCreditDialog';
-
-ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
-
-vi.mock('@/form/useFlatpickrTheme', () => ({
-  useFlatpickrTheme: vi.fn(),
-}));
-
-vi.mock('./OrganizationCostChart', () => ({
-  OrganizationCostChart: () => <div data-testid="organization-cost-chart" />,
-}));
-
-vi.mock('@/marketplace/common/autocompletes', () => ({
-  organizationAutocomplete: vi.fn(),
-  providerOfferingsAutocomplete: vi
-    .fn()
-    .mockReturnValue(() =>
-      Promise.resolve({ options: [], hasMore: false, additional: { page: 2 } }),
-    ),
-}));
-
-const createWrapper = () => createTestWrapper().wrapper;
 
 describe('CustomerCreditDialog', () => {
   const mockRefetch = vi.fn();
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(organizationAutocomplete).mockReturnValue(() =>
-      Promise.resolve({
-        options: [{ name: 'Org 1', url: 'customer-url' }],
-        hasMore: false,
-        additional: { page: 1 },
-      }),
-    );
+    vi.mocked(invoicesList).mockResolvedValue({ data: [] } as any);
+    vi.mocked(customersList).mockResolvedValue({
+      data: [{ name: 'Org 1', url: 'customer-url' }],
+      response: {
+        headers: new Headers({
+          'x-result-count': '1',
+        }),
+      },
+    } as any);
+    vi.mocked(marketplaceProviderOfferingsList).mockResolvedValue({
+      data: [],
+      response: {
+        headers: new Headers({
+          'x-result-count': '0',
+        }),
+      },
+    } as any);
   });
 
   it('submits creation form correctly', async () => {
     const user = userEvent.setup();
     vi.mocked(customerCreditsCreate).mockResolvedValue({} as any);
 
-    render(<CustomerCreditDialog resolve={{ refetch: mockRefetch }} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(
+      <CustomerCreditDialog resolve={{ refetch: mockRefetch }} />,
+    );
 
     // Fill Organization
     await typeAndSelectOption(user, 'Organization', 'Org 1', 'Org 1');
@@ -79,7 +72,7 @@ describe('CustomerCreditDialog', () => {
     expect(mockRefetch).toHaveBeenCalled();
   });
 
-  it('renders edit form correctly', () => {
+  it('renders edit form correctly', async () => {
     const credit = {
       uuid: 'credit-uuid',
       customer_uuid: 'customer-uuid',
@@ -90,15 +83,12 @@ describe('CustomerCreditDialog', () => {
       minimal_consumption_logic: 'fixed',
     };
 
-    render(
+    renderWithProviders(
       <CustomerCreditDialog resolve={{ credit, refetch: mockRefetch }} />,
-      {
-        wrapper: createWrapper(),
-      },
     );
 
     expect(screen.getByText('Edit credit')).toBeInTheDocument();
-    expect(screen.getByTestId('organization-cost-chart')).toBeInTheDocument();
+    expect(await screen.findByTestId('echart')).toBeInTheDocument();
 
     const valueInput = screen.getByTestId('value');
     expect(valueInput).toHaveValue(500);
@@ -120,11 +110,8 @@ describe('CustomerCreditDialog', () => {
 
     vi.mocked(customerCreditsUpdate).mockResolvedValue({} as any);
 
-    render(
+    renderWithProviders(
       <CustomerCreditDialog resolve={{ credit, refetch: mockRefetch }} />,
-      {
-        wrapper: createWrapper(),
-      },
     );
 
     const valueInput = screen.getByTestId('value');

@@ -1,23 +1,14 @@
-import { screen, waitFor, fireEvent } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplacePlansUpdate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 
 import { EditPlanDescriptionDialog } from './EditPlanDescriptionDialog';
 import { mockOffering, mockPlan } from './test-utils';
-
-// Mock marketplace utils
-vi.mock('@/marketplace/offerings/store/utils', () => ({
-  formatPlan: (data: any) => ({
-    name: data.name,
-    unit: data.unit?.value || data.unit,
-    description: data.description,
-    article_code: data.article_code,
-  }),
-}));
 
 ENV.plugins.WALDUR_CORE.ENABLE_PROJECT_KIND_COURSE = false;
 
@@ -51,12 +42,8 @@ describe('EditPlanDescriptionDialog', () => {
     renderComponent();
 
     // Check that form is populated with existing plan data
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
-    const articleCodeInput = document.querySelector(
-      'input[name="article_code"]',
-    ) as HTMLInputElement;
+    const nameInput = screen.getByLabelText(/Name/i);
+    const articleCodeInput = screen.getByLabelText(/Article code/i);
 
     expect(nameInput).toHaveValue('Test Plan');
     expect(articleCodeInput).toHaveValue('TEST001');
@@ -72,9 +59,7 @@ describe('EditPlanDescriptionDialog', () => {
     const user = userEvent.setup();
 
     // Modify the plan name
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
+    const nameInput = screen.getByLabelText(/Name/i);
     await user.clear(nameInput);
     await user.type(nameInput, 'Updated Plan Name');
 
@@ -119,33 +104,20 @@ describe('EditPlanDescriptionDialog', () => {
     const user = userEvent.setup();
 
     // Edit name
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
+    const nameInput = screen.getByLabelText(/Name/i);
     expect(nameInput).toHaveValue('Test Plan');
     await user.clear(nameInput);
     await user.type(nameInput, 'New Plan Name');
     expect(nameInput).toHaveValue('New Plan Name');
 
     // Edit article code
-    const articleCodeInput = document.querySelector(
-      'input[name="article_code"]',
-    ) as HTMLInputElement;
+    const articleCodeInput = screen.getByLabelText(/Article code/i);
     expect(articleCodeInput).toHaveValue('TEST001');
     await user.clear(articleCodeInput);
     await user.type(articleCodeInput, 'NEW001');
     expect(articleCodeInput).toHaveValue('NEW001');
 
-    // For description, just check that the MarkdownEditor exists
-    const editorContent = document.querySelector('.mdxeditor [role="textbox"]');
-    expect(editorContent).toBeInTheDocument();
-
-    // Change billing period
-    const selectContainer = document.querySelector('.metronic-select__control');
-    await user.click(selectContainer!);
-    const hourlyOption = screen.getByText('Per hour');
-    await user.click(hourlyOption);
-    expect(screen.getByText('Per hour')).toBeInTheDocument();
+    await openAndSelectOption(user, 'Billing period', 'Per hour');
   });
 
   it('handles different billing period formats', () => {
@@ -170,9 +142,7 @@ describe('EditPlanDescriptionDialog', () => {
     const user = userEvent.setup();
 
     // Clear required field
-    const nameInput = document.querySelector(
-      'input[name="name"]',
-    ) as HTMLInputElement;
+    const nameInput = screen.getByLabelText(/Name/i);
     await user.clear(nameInput);
 
     const saveButton = screen.getByText('Save');

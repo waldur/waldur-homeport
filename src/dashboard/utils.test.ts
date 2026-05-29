@@ -5,10 +5,6 @@ import { ENV } from '@/core/config';
 
 import * as api from './utils';
 
-vi.mock('@/core/formatCurrency', () => ({
-  defaultCurrency: (val) => `EUR${val}`,
-}));
-
 ENV.plugins.WALDUR_CORE.BRAND_COLOR = '#12B76A';
 
 describe('Dashboard chart API', () => {

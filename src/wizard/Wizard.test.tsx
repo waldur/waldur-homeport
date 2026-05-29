@@ -6,39 +6,6 @@ import { WizardStepProps } from './types';
 import { Wizard } from './Wizard';
 import { WizardModal } from './WizardModal';
 
-// Mock CloseDialogButton since it uses modal context
-vi.mock('@/modal/CloseDialogButton', () => ({
-  CloseDialogButton: ({ className }: { className?: string }) => (
-    <button type="button" className={className} data-testid="close-button">
-      Close
-    </button>
-  ),
-}));
-
-// Mock ModalDialog to simplify testing - render footer directly without wrapper
-vi.mock('@/modal/ModalDialog', () => ({
-  ModalDialog: ({
-    title,
-    subtitle,
-    footer,
-    children,
-  }: {
-    title: string;
-    subtitle?: string;
-    footer: React.ReactNode;
-    children: React.ReactNode;
-  }) => (
-    <>
-      <div data-testid="modal-header">
-        <h3>{title}</h3>
-        {subtitle && <h6>{subtitle}</h6>}
-      </div>
-      <div data-testid="modal-body">{children}</div>
-      {footer}
-    </>
-  ),
-}));
-
 // Test step components
 const Step1: FC<WizardStepProps> = (props) => (
   <WizardModal {...props}>
@@ -150,7 +117,7 @@ describe('Wizard', () => {
     it('renders Close button', () => {
       renderWizard();
 
-      expect(screen.getByTestId('close-button')).toBeInTheDocument();
+      expect(screen.getByText('Cancel')).toBeInTheDocument();
     });
   });
 

@@ -25,40 +25,16 @@ vi.mock('@/core/StorageManager', () => ({
   },
 }));
 
-vi.mock('./InvitationErrorMessage', () => ({
-  InvitationErrorMessage: ({ dismiss }) => (
-    <div data-testid="error-message">
-      <button onClick={dismiss}>Dismiss Error</button>
-    </div>
-  ),
-}));
-
-vi.mock('./InvitationMessage', () => ({
-  InvitationMessage: ({ invitation }) => (
-    <div data-testid="invitation-message">Message for {invitation?.uuid}</div>
-  ),
-}));
-
-vi.mock('./InvitationButtons', () => ({
-  InvitationButtons: ({ dismiss, closeAcceptingInvitation }) => (
-    <div data-testid="invitation-buttons">
-      <button onClick={dismiss}>Cancel</button>
-      <button onClick={closeAcceptingInvitation}>Accept</button>
-    </div>
-  ),
-}));
-
-vi.mock('@/modal/CloseDialogButton', () => ({
-  CloseDialogButton: ({ onClick }) => (
-    <button onClick={onClick} data-testid="close-button">
-      Close Dialog
-    </button>
-  ),
-}));
-
-vi.mock('./choices', () => ({
-  formatInvitationState: (state: string) => state.toUpperCase(),
-}));
+const mockInvitation = {
+  uuid: 'inv-123',
+  state: 'pending',
+  email: 'user@example.com',
+  scope_name: 'Test Project',
+  scope_type: 'project',
+  role_description: 'Admin',
+  created_by_full_name: 'Alice',
+  created_by_username: 'alice',
+};
 
 const renderDialog = (token = 'test-token') => {
   return renderWithProviders(
@@ -75,7 +51,10 @@ const renderDialog = (token = 'test-token') => {
 describe('InvitationConfirmDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useUser).mockReturnValue({ uuid: 'user-1' } as any);
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'user-1',
+      email: 'user@example.com',
+    } as any);
   });
 
   it('renders loading spinner if user is not loaded yet', () => {
@@ -108,53 +87,57 @@ describe('InvitationConfirmDialog', () => {
 
     renderDialog();
 
-    expect(await screen.findByTestId('error-message')).toBeDefined();
+    expect(
+      await screen.findByText('Invitation is not valid'),
+    ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Dismiss Error'));
+    await userEvent.click(screen.getByText('Go to profile'));
     expect(useModal().closeDialog).toHaveBeenCalled();
     expect(mockOnCancel).toHaveBeenCalled();
   });
 
   it('renders invitation message when API succeeds (pending)', async () => {
     vi.mocked(userInvitationsDetailsRetrieve).mockResolvedValue({
-      data: { uuid: 'inv-123', state: 'pending' },
-    } as any);
-
-    renderDialog();
-
-    expect(await screen.findByTestId('invitation-message')).toBeDefined();
-    expect(screen.getByText('Message for inv-123')).toBeDefined();
-    expect(screen.getByTestId('invitation-buttons')).toBeDefined();
-  });
-
-  it('renders state message when API succeeds (canceled/expired)', async () => {
-    vi.mocked(userInvitationsDetailsRetrieve).mockResolvedValue({
-      data: { uuid: 'inv-123', state: 'canceled' },
+      data: mockInvitation,
     } as any);
 
     renderDialog();
 
     expect(
-      await screen.findByText('Invitation is in CANCELED state.'),
+      await screen.findByText(/Alice.*has invited you/),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Accept invitation')).toBeInTheDocument();
+    expect(screen.getByText('Cancel invitation')).toBeInTheDocument();
+  });
+
+  it('renders state message when API succeeds (canceled/expired)', async () => {
+    vi.mocked(userInvitationsDetailsRetrieve).mockResolvedValue({
+      data: { ...mockInvitation, state: 'canceled' },
+    } as any);
+
+    renderDialog();
+
+    expect(
+      await screen.findByText('Invitation is in Canceled state.'),
     ).toBeDefined();
 
-    await userEvent.click(screen.getByTestId('close-button'));
+    await userEvent.click(screen.getByText('Close'));
     expect(useModal().closeDialog).toHaveBeenCalled();
     expect(router.stateService.go).toHaveBeenCalledWith('profile.details');
   });
 
   it('calls onConfirm when Accept is clicked', async () => {
     vi.mocked(userInvitationsDetailsRetrieve).mockResolvedValue({
-      data: { uuid: 'inv-123', state: 'pending' },
+      data: mockInvitation,
     } as any);
 
     renderDialog();
 
-    await screen.findByText('Accept');
-    await userEvent.click(screen.getByText('Accept'));
+    await screen.findByText('Accept invitation');
+    await userEvent.click(screen.getByText('Accept invitation'));
     expect(useModal().closeDialog).toHaveBeenCalled();
     expect(mockOnConfirm).toHaveBeenCalledWith({
-      invitation: { uuid: 'inv-123', state: 'pending' },
+      invitation: mockInvitation,
     });
   });
 
@@ -164,8 +147,9 @@ describe('InvitationConfirmDialog', () => {
       params: { id: 1 },
     });
 
+    const acceptedInvitation = { ...mockInvitation, state: 'accepted' };
     vi.mocked(userInvitationsDetailsRetrieve).mockResolvedValue({
-      data: { uuid: 'inv-123', state: 'accepted' },
+      data: acceptedInvitation,
     } as any);
 
     renderDialog();
@@ -177,10 +161,7 @@ describe('InvitationConfirmDialog', () => {
       });
     });
 
-    expect(getInvitationLinkProps).toHaveBeenCalledWith({
-      uuid: 'inv-123',
-      state: 'accepted',
-    });
+    expect(getInvitationLinkProps).toHaveBeenCalledWith(acceptedInvitation);
     expect(InvitationTokenStorage.remove).toHaveBeenCalled();
     expect(useModal().closeDialog).toHaveBeenCalled();
   });

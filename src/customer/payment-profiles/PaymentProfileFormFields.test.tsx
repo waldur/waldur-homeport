@@ -4,10 +4,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { PaymentProfileFormFields } from './PaymentProfileFormFields';
 
-vi.mock('@/form/useFlatpickrTheme', () => ({
-  useFlatpickrTheme: vi.fn(),
-}));
-
 describe('PaymentProfileFormFields', () => {
   const options = [
     { label: 'Fixed-price', value: 'fixed_price' },

@@ -1,34 +1,20 @@
-import { cleanup, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   invoiceItemsCustomerCostsForPeriodRetrieve,
   invoiceItemsProjectCostsForPeriodRetrieve,
   marketplaceCustomerEstimatedCostPoliciesUpdate,
   marketplaceProjectEstimatedCostPoliciesCreate,
+  projectsList,
+  customersList,
 } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
-import {
-  organizationAutocomplete,
-  projectAutocomplete,
-} from '@/marketplace/common/autocompletes';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption, typeAndSelectOption } from '@/test/select';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { CostPolicyFormDialog } from './CostPolicyFormDialog';
-
-ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
-
-vi.mock('@/marketplace/common/autocompletes', () => ({
-  projectAutocomplete: vi.fn(),
-  organizationAutocomplete: vi.fn(),
-}));
-
-vi.mock('@/project/ProjectCostField', () => ({
-  ProjectCostField: () => '100 EUR',
-}));
 
 const renderDialog = (props: any) => {
   vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
@@ -38,12 +24,7 @@ const renderDialog = (props: any) => {
 };
 
 describe('CostPolicyFormDialog', () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   beforeEach(() => {
-    ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
     vi.clearAllMocks();
     vi.mocked(invoiceItemsProjectCostsForPeriodRetrieve).mockResolvedValue({
       data: {},
@@ -51,34 +32,36 @@ describe('CostPolicyFormDialog', () => {
     vi.mocked(invoiceItemsCustomerCostsForPeriodRetrieve).mockResolvedValue({
       data: {},
     } as any);
-    vi.mocked(projectAutocomplete).mockReturnValue(() =>
-      Promise.resolve({
-        options: [
-          {
-            name: 'Project 1',
-            uuid: 'project-uuid',
-            url: 'project-url',
-            billing_price_estimate: {},
-          },
-        ],
-        hasMore: false,
-        additional: { page: 1 },
-      }),
-    );
-    vi.mocked(organizationAutocomplete).mockReturnValue(() =>
-      Promise.resolve({
-        options: [
-          {
-            name: 'Org 1',
-            uuid: 'org-uuid',
-            url: 'org-url',
-            billing_price_estimate: {},
-          },
-        ],
-        hasMore: false,
-        additional: { page: 1 },
-      }),
-    );
+    vi.mocked(projectsList).mockResolvedValue({
+      data: [
+        {
+          name: 'Project 1',
+          uuid: 'project-uuid',
+          url: 'project-url',
+          billing_price_estimate: { total: 100 },
+        },
+      ],
+      response: {
+        headers: new Headers({
+          'x-result-count': '1',
+        }),
+      },
+    } as any);
+    vi.mocked(customersList).mockResolvedValue({
+      data: [
+        {
+          name: 'Org 1',
+          uuid: 'org-uuid',
+          url: 'org-url',
+          billing_price_estimate: {},
+        },
+      ],
+      response: {
+        headers: new Headers({
+          'x-result-count': '1',
+        }),
+      },
+    } as any);
   });
 
   it('submits create project policy correctly', async () => {
@@ -99,7 +82,7 @@ describe('CostPolicyFormDialog', () => {
       user,
       /Select project\(s\)/i,
       'Project 1',
-      'Project 1 / est. 100 EUR this month',
+      'Project 1 / est. €100.00 this month',
     );
     await openAndSelectOption(user, 'Period', '1 month');
     const limitInput = screen.getByLabelText(/When estimated cost reaches/i);

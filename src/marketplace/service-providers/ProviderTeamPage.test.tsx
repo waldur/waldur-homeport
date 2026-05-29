@@ -1,3 +1,4 @@
+import { screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
@@ -87,27 +88,27 @@ const renderComponent = () => {
 
 describe('ProviderTeamPage', () => {
   it('renders team members table and actions', async () => {
-    const node = renderComponent();
+    renderComponent();
 
-    expect(await node.findByText('Team members')).toBeInTheDocument();
+    expect(await screen.findByText('Team members')).toBeInTheDocument();
 
-    expect(await node.findByText('Member')).toBeInTheDocument();
-    expect(await node.findByText('Email')).toBeInTheDocument();
-    expect(await node.findByText('Username')).toBeInTheDocument();
-    expect(await node.findByText('Role in organization')).toBeInTheDocument();
-    expect(await node.findByText('Role expiration')).toBeInTheDocument();
+    expect(await screen.findByText('Member')).toBeInTheDocument();
+    expect(await screen.findByText('Email')).toBeInTheDocument();
+    expect(await screen.findByText('Username')).toBeInTheDocument();
+    expect(await screen.findByText('Role in organization')).toBeInTheDocument();
+    expect(await screen.findByText('Role expiration')).toBeInTheDocument();
 
     // Member
-    expect(await node.findByText('John Doe')).toBeInTheDocument();
+    expect(await screen.findByText('John Doe')).toBeInTheDocument();
     // Email
-    expect(await node.findByText('john.doe@example.com')).toBeInTheDocument();
+    expect(await screen.findByText('john.doe@example.com')).toBeInTheDocument();
     // Username
-    expect(await node.findByText('johndoe')).toBeInTheDocument();
+    expect(await screen.findByText('johndoe')).toBeInTheDocument();
     // Role
-    expect(await node.findByText('CUSTOMER.MANAGER')).toBeInTheDocument();
+    expect(await screen.findByText('CUSTOMER.MANAGER')).toBeInTheDocument();
 
     // Table actions
-    expect(await node.findByText('Add')).toBeInTheDocument();
-    expect(await node.findByText('Export')).toBeInTheDocument();
+    expect(await screen.findByText('Add')).toBeInTheDocument();
+    expect(await screen.findByText('Export')).toBeInTheDocument();
   });
 });

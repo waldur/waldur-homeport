@@ -1,17 +1,15 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { openstackPortsCreate } from 'waldur-js-client';
+import {
+  openstackPortsCreate,
+  openstackNetworksList,
+  openstackSubnetsList,
+} from 'waldur-js-client';
 
-import { loadNetworks, loadSubnets } from '@/openstack/api';
 import { renderWithProviders } from '@/test/harness';
 
 import { CreatePortDialog } from './CreatePortDialog';
-
-vi.mock('@/openstack/api', () => ({
-  loadNetworks: vi.fn(),
-  loadSubnets: vi.fn(),
-}));
 
 const mockResource = {
   uuid: 'tenant-uuid',
@@ -24,8 +22,12 @@ describe('CreatePortDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    vi.mocked(loadNetworks).mockResolvedValue(mockNetworks);
-    vi.mocked(loadSubnets).mockResolvedValue([]);
+    vi.mocked(openstackNetworksList).mockResolvedValue({
+      data: mockNetworks,
+    } as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: [],
+    } as any);
   });
 
   const renderDialog = () => {
@@ -57,9 +59,11 @@ describe('CreatePortDialog', () => {
   it('loads networks on mount', async () => {
     renderDialog();
     await waitFor(() => {
-      expect(loadNetworks).toHaveBeenCalledWith({
-        tenant_uuid: 'tenant-uuid',
-        field: ['name', 'uuid', 'url'],
+      expect(openstackNetworksList).toHaveBeenCalledWith({
+        query: expect.objectContaining({
+          tenant_uuid: 'tenant-uuid',
+          field: ['name', 'uuid', 'url'],
+        }),
       });
     });
   });
@@ -76,7 +80,9 @@ describe('CreatePortDialog', () => {
 
   it('loads subnets when network is selected', async () => {
     const user = userEvent.setup();
-    vi.mocked(loadSubnets).mockResolvedValue(mockSubnets);
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: mockSubnets,
+    } as any);
     renderDialog();
 
     const networkSelect = await screen.findByLabelText('Network');
@@ -86,16 +92,20 @@ describe('CreatePortDialog', () => {
     await user.click(option);
 
     await waitFor(() => {
-      expect(loadSubnets).toHaveBeenCalledWith({
-        tenant_uuid: 'tenant-uuid',
-        network_uuid: 'net-1',
+      expect(openstackSubnetsList).toHaveBeenCalledWith({
+        query: expect.objectContaining({
+          tenant_uuid: 'tenant-uuid',
+          network_uuid: 'net-1',
+        }),
       });
     });
   });
 
   it('toggles custom IP configuration and shows manual input', async () => {
     const user = userEvent.setup();
-    vi.mocked(loadSubnets).mockResolvedValue(mockSubnets);
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: mockSubnets,
+    } as any);
     renderDialog();
 
     // Select Network and Subnet first, otherwise fixed_ips is not initialized in form state
@@ -126,7 +136,9 @@ describe('CreatePortDialog', () => {
   it('submits form with correct data', async () => {
     const user = userEvent.setup();
     vi.mocked(openstackPortsCreate).mockResolvedValue({} as any);
-    vi.mocked(loadSubnets).mockResolvedValue(mockSubnets);
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: mockSubnets,
+    } as any);
 
     renderDialog();
 

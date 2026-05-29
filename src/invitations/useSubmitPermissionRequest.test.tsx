@@ -25,10 +25,6 @@ vi.mock('@/user/UsersService', () => ({
   },
 }));
 
-vi.mock('@/core/ErrorMessageFormatter', () => ({
-  format: (error: any) => error?.message || 'Unknown error',
-}));
-
 vi.mock('./GroupInvitationConfirmDialog', () => ({
   GroupInvitationConfirmDialog: 'GroupInvitationConfirmDialog',
 }));

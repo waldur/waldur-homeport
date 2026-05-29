@@ -1,8 +1,7 @@
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceComponentUsagesSetUsage } from 'waldur-js-client';
 
-import { translate } from '@/i18n';
 import { renderWithProviders } from '@/test/harness';
 
 import { getProviderUsageComponents } from './api';
@@ -94,7 +93,7 @@ describe('ResourceCreateUsageDialog', () => {
     renderDialog(props);
     await waitFor(() => {
       expect(
-        screen.getByText(`${translate('Resource usage')} "Test resource"`),
+        screen.getByText(`${'Resource usage'} "Test resource"`),
       ).toBeInTheDocument();
     });
   });
@@ -128,9 +127,7 @@ describe('ResourceCreateUsageDialog', () => {
     fireEvent.change(amountInput, { target: { value: '10' } });
     fireEvent.change(descInput, { target: { value: 'Test usage' } });
 
-    await act(async () => {
-      await fireEvent.click(submitBtn);
-    });
+    fireEvent.click(submitBtn);
 
     await waitFor(() => {
       expect(submitSpy).toHaveBeenCalledWith({

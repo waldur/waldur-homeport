@@ -1,10 +1,4 @@
-import {
-  act,
-  cleanup,
-  fireEvent,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { noop } from 'lodash-es';
 import { Provider } from 'react-redux';
@@ -25,9 +19,7 @@ import {
   projectsCreate,
 } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
 import { DrawerProvider } from '@/drawer/DrawerContext';
-import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import { resetTableRegistry } from '@/table/registry';
 import { renderWithProviders } from '@/test/harness';
@@ -35,54 +27,11 @@ import * as workspaceHooks from '@/workspace/hooks';
 
 import { ProjectImportDialog } from './ProjectImportDialog';
 
-ENV.pageSize = 10;
-
 vi.mock('@/marketplace/common/registry', () => ({
   getFormSerializer: () => (x) => x,
   getFormLimitSerializer: () => (x) => x,
   getFormLimitParser: () => (x) => x,
 }));
-
-vi.mock('@/marketplace/common/autocompletes', () => {
-  return {
-    OfferingsAutocompleteCommonFields: [
-      'name',
-      'uuid',
-      'url',
-      'category_title',
-      'thumbnail',
-      'customer_name',
-      'customer_uuid',
-    ],
-    publicOfferingsAutocomplete: vi.fn().mockReturnValue(() =>
-      Promise.resolve({
-        options: [
-          {
-            uuid: 'offering-1',
-            name: 'Test Offering',
-            category_title: 'Cloud',
-            url: 'http://example.com/offerings/offering-1/',
-            type: 'Marketplace.Basic',
-            components: [
-              { type: 'cpu', billing_type: 'limit' },
-              { type: 'ram', billing_type: 'limit' },
-            ],
-            plans: [
-              {
-                name: 'Standard Plan',
-                url: 'http://example.com/plans/plan-1/',
-                quotas: {},
-              },
-            ],
-            attributes: { region: 'us-east' },
-          },
-        ],
-        hasMore: false,
-        additional: { page: 2 },
-      }),
-    ),
-  };
-});
 
 const mockCustomer = {
   uuid: 'customer-123',
@@ -116,7 +65,6 @@ describe('ProjectImportDialog Component', () => {
   afterAll(() => process.off('unhandledRejection', noop));
 
   beforeEach(() => {
-    cleanup();
     resetTableRegistry();
     vi.clearAllMocks();
 
@@ -130,58 +78,50 @@ describe('ProjectImportDialog Component', () => {
       },
     });
 
-    vi.mocked(projectsCreate).mockImplementation(() =>
-      Promise.resolve({
-        data: {
-          uuid: 'proj-1',
-          name: 'Test Project 1',
-          url: 'http://example.com/projects/proj-1/',
-        },
-      } as any),
-    );
+    vi.mocked(projectsCreate).mockResolvedValue({
+      data: {
+        uuid: 'proj-1',
+        name: 'Test Project 1',
+        url: 'http://example.com/projects/proj-1/',
+      },
+    } as any);
     vi.mocked(marketplaceOrdersCreate).mockResolvedValue({ data: {} } as any);
     vi.mocked(customersList).mockResolvedValue(mockResponse([], 0) as any);
-    vi.mocked(marketplacePublicOfferingsList).mockImplementation(() =>
-      Promise.resolve(
-        mockResponse(
-          [
-            {
-              uuid: 'offering-1',
-              name: 'Test Offering',
-              category_title: 'Cloud',
-              url: 'http://example.com/offerings/offering-1/',
-              type: 'Marketplace.Basic',
-              components: [
-                { type: 'cpu', billing_type: 'limit' },
-                { type: 'ram', billing_type: 'limit' },
-              ],
-              plans: [
-                {
-                  name: 'Standard Plan',
-                  url: 'http://example.com/plans/plan-1/',
-                  quotas: {},
-                },
-              ],
-              attributes: { region: 'us-east' },
-              options: { order: [], options: {} },
-            },
-          ],
-          1,
-        ) as any,
-      ),
+    vi.mocked(marketplacePublicOfferingsList).mockResolvedValue(
+      mockResponse(
+        [
+          {
+            uuid: 'offering-1',
+            name: 'Test Offering',
+            category_title: 'Cloud',
+            url: 'http://example.com/offerings/offering-1/',
+            type: 'Marketplace.Basic',
+            components: [
+              { type: 'cpu', billing_type: 'limit' },
+              { type: 'ram', billing_type: 'limit' },
+            ],
+            plans: [
+              {
+                name: 'Standard Plan',
+                url: 'http://example.com/plans/plan-1/',
+                quotas: {},
+              },
+            ],
+            attributes: { region: 'us-east' },
+            options: { order: [], options: {} },
+          },
+        ],
+        1,
+      ) as any,
     );
   });
 
   it('renders initial step with Projects only selected by default', () => {
     renderComponent();
 
-    expect(
-      screen.getByText(translate('Bulk import of projects')),
-    ).toBeInTheDocument();
-    expect(screen.getByText(translate('Projects only'))).toBeInTheDocument();
-    expect(
-      screen.getByText(translate('Projects with resources')),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Bulk import of projects')).toBeInTheDocument();
+    expect(screen.getByText('Projects only')).toBeInTheDocument();
+    expect(screen.getByText('Projects with resources')).toBeInTheDocument();
 
     const nextBtn = screen.getByTestId('next-button-step-0');
     expect(nextBtn).toBeInTheDocument();
@@ -195,7 +135,7 @@ describe('ProjectImportDialog Component', () => {
 
     await waitFor(() => {
       const templateStep = screen
-        .getByText(translate('Download template'))
+        .getByText('Download template')
         .closest('.stepper-item');
       expect(templateStep).toHaveClass('current');
     });
@@ -205,7 +145,7 @@ describe('ProjectImportDialog Component', () => {
 
     await waitFor(() => {
       const uploadStep = screen
-        .getByText(translate('Upload file'))
+        .getByText('Upload file')
         .closest('.stepper-item');
       expect(uploadStep).toHaveClass('current');
     });
@@ -223,7 +163,7 @@ describe('ProjectImportDialog Component', () => {
 
     await waitFor(() => {
       const templateStep = screen
-        .getByText(translate('Download template'))
+        .getByText('Download template')
         .closest('.stepper-item');
       expect(templateStep).toHaveClass('current');
     });
@@ -232,7 +172,7 @@ describe('ProjectImportDialog Component', () => {
 
     await waitFor(() => {
       const uploadStep = screen
-        .getByText(translate('Upload file'))
+        .getByText('Upload file')
         .closest('.stepper-item');
       expect(uploadStep).toHaveClass('current');
     });
@@ -257,13 +197,13 @@ describe('ProjectImportDialog Component', () => {
 
     await waitFor(() => {
       const previewStep = screen
-        .getByText(translate('Preview & import'))
+        .getByText('Preview & import')
         .closest('.stepper-item');
       expect(previewStep).toHaveClass('current');
     });
 
     expect(
-      screen.getByText(translate('Verify your data before importing')),
+      screen.getByText('Verify your data before importing'),
     ).toBeInTheDocument();
 
     await waitFor(() => {
@@ -282,7 +222,7 @@ describe('ProjectImportDialog Component', () => {
         }),
       });
       expect(useNotify().showSuccess).toHaveBeenCalledWith(
-        translate('Successfully imported {n} projects', { n: 1 }),
+        'Successfully imported 1 projects',
       );
       expect(mockRefetch).toHaveBeenCalled();
     });
@@ -292,14 +232,12 @@ describe('ProjectImportDialog Component', () => {
     renderComponent({ customer: mockCustomer });
 
     const radioBtn = screen
-      .getByText(translate('Projects with resources'))
+      .getByText('Projects with resources')
       .closest('.form-check-box');
     fireEvent.click(radioBtn!);
 
     await waitFor(() => {
-      const offeringElements = screen.getAllByText(
-        translate('Select offering'),
-      );
+      const offeringElements = screen.getAllByText('Select offering');
       expect(offeringElements.length).toBeGreaterThan(0);
     });
 
@@ -323,20 +261,18 @@ describe('ProjectImportDialog Component', () => {
     const { container } = renderComponent({ customer: mockCustomer });
 
     const radioResources = screen
-      .getByText(translate('Projects with resources'))
+      .getByText('Projects with resources')
       .closest('.form-check-box');
     fireEvent.click(radioResources!);
 
     await waitFor(() => {
-      expect(
-        screen.getAllByText(translate('Select offering'))[0],
-      ).toBeInTheDocument();
+      expect(screen.getAllByText('Select offering')[0]).toBeInTheDocument();
     });
 
     fireEvent.click(screen.getByTestId('next-button-step-0'));
     await waitFor(() => {
       const offeringStep = screen
-        .getAllByText(translate('Select offering'))[0]
+        .getAllByText('Select offering')[0]
         .closest('.stepper-item');
       expect(offeringStep).toHaveClass('current');
     });
@@ -361,7 +297,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const templateStep = screen
-        .getAllByText(translate('Download template'))[0]
+        .getAllByText('Download template')[0]
         .closest('.stepper-item');
       expect(templateStep).toHaveClass('current');
     });
@@ -369,7 +305,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const uploadStep = screen
-        .getAllByText(translate('Upload file'))[0]
+        .getAllByText('Upload file')[0]
         .closest('.stepper-item');
       expect(uploadStep).toHaveClass('current');
     });
@@ -396,16 +332,14 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const previewStep = screen
-        .getAllByText(translate('Preview & import'))[0]
+        .getAllByText('Preview & import')[0]
         .closest('.stepper-item');
       expect(previewStep).toHaveClass('current');
     });
 
     await waitFor(() => {
       expect(
-        screen.getByText(
-          translate('{n} Projects, {m} Resources identified', { n: 1, m: 1 }),
-        ),
+        screen.getByText('1 Projects, 1 Resources identified'),
       ).toBeInTheDocument();
     });
 
@@ -417,10 +351,7 @@ describe('ProjectImportDialog Component', () => {
       expect(projectsCreate).toHaveBeenCalled();
       expect(marketplaceOrdersCreate).toHaveBeenCalled();
       expect(useNotify().showSuccess).toHaveBeenCalledWith(
-        translate('Successfully imported {n} projects and {m} resources', {
-          n: 1,
-          m: 1,
-        }),
+        'Successfully imported 1 projects and 1 resources',
       );
     });
   });
@@ -431,7 +362,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-0'));
     await waitFor(() => {
       const templateStep = screen
-        .getAllByText(translate('Download template'))[0]
+        .getAllByText('Download template')[0]
         .closest('.stepper-item');
       expect(templateStep).toHaveClass('current');
     });
@@ -439,7 +370,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const uploadStep = screen
-        .getAllByText(translate('Upload file'))[0]
+        .getAllByText('Upload file')[0]
         .closest('.stepper-item');
       expect(uploadStep).toHaveClass('current');
     });
@@ -457,9 +388,7 @@ describe('ProjectImportDialog Component', () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          translate(
-            'The imported data format does not match the template format.',
-          ),
+          'The imported data format does not match the template format.',
         ),
       ).toBeInTheDocument();
       expect(screen.getByTestId('next-button-step-1')).toBeDisabled();
@@ -483,7 +412,7 @@ describe('ProjectImportDialog Component', () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(translate('The imported file is empty.')),
+        screen.getByText('The imported file is empty.'),
       ).toBeInTheDocument();
       expect(screen.getByTestId('next-button-step-1')).toBeDisabled();
     });
@@ -497,9 +426,7 @@ describe('ProjectImportDialog Component', () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          translate(
-            'The organization UUID is not specified in one or more records.',
-          ),
+          'The organization UUID is not specified in one or more records.',
         ),
       ).toBeInTheDocument();
       expect(screen.getByTestId('next-button-step-1')).toBeDisabled();
@@ -514,7 +441,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-0'));
     await waitFor(() => {
       const templateStep = screen
-        .getAllByText(translate('Download template'))[0]
+        .getAllByText('Download template')[0]
         .closest('.stepper-item');
       expect(templateStep).toHaveClass('current');
     });
@@ -522,7 +449,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const uploadStep = screen
-        .getAllByText(translate('Upload file'))[0]
+        .getAllByText('Upload file')[0]
         .closest('.stepper-item');
       expect(uploadStep).toHaveClass('current');
     });
@@ -552,7 +479,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const previewStep = screen
-        .getAllByText(translate('Preview & import'))[0]
+        .getAllByText('Preview & import')[0]
         .closest('.stepper-item');
       expect(previewStep).toHaveClass('current');
     });
@@ -568,7 +495,7 @@ describe('ProjectImportDialog Component', () => {
     await waitFor(() => {
       expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         expect.any(Error),
-        translate('Unable to import projects'),
+        'Unable to import projects',
       );
     });
     await act(async () => {});
@@ -578,20 +505,18 @@ describe('ProjectImportDialog Component', () => {
     const { container } = renderComponent({ customer: mockCustomer });
 
     const radioResources = screen
-      .getByText(translate('Projects with resources'))
+      .getByText('Projects with resources')
       .closest('.form-check-box');
     fireEvent.click(radioResources!);
 
     await waitFor(() => {
-      expect(
-        screen.getAllByText(translate('Select offering'))[0],
-      ).toBeInTheDocument();
+      expect(screen.getAllByText('Select offering')[0]).toBeInTheDocument();
     });
 
     fireEvent.click(screen.getByTestId('next-button-step-0'));
     await waitFor(() => {
       const offeringStep = screen
-        .getAllByText(translate('Select offering'))[0]
+        .getAllByText('Select offering')[0]
         .closest('.stepper-item');
       expect(offeringStep).toHaveClass('current');
     });
@@ -616,7 +541,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const templateStep = screen
-        .getAllByText(translate('Download template'))[0]
+        .getAllByText('Download template')[0]
         .closest('.stepper-item');
       expect(templateStep).toHaveClass('current');
     });
@@ -624,7 +549,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const uploadStep = screen
-        .getAllByText(translate('Upload file'))[0]
+        .getAllByText('Upload file')[0]
         .closest('.stepper-item');
       expect(uploadStep).toHaveClass('current');
     });
@@ -646,40 +571,40 @@ describe('ProjectImportDialog Component', () => {
       expect(screen.getByText('test_resources.csv')).toBeInTheDocument();
     });
 
-    const backBtn = screen.getByText(translate('Back'));
+    const backBtn = screen.getByText('Back');
     fireEvent.click(backBtn);
     await waitFor(() => {
       const templateStep = screen
-        .getAllByText(translate('Download template'))[0]
+        .getAllByText('Download template')[0]
         .closest('.stepper-item');
       expect(templateStep).toHaveClass('current');
     });
 
-    fireEvent.click(screen.getByText(translate('Back')));
+    fireEvent.click(screen.getByText('Back'));
     await waitFor(() => {
       const offeringStep = screen
-        .getAllByText(translate('Select offering'))[0]
+        .getAllByText('Select offering')[0]
         .closest('.stepper-item');
       expect(offeringStep).toHaveClass('current');
     });
 
-    fireEvent.click(screen.getByText(translate('Back')));
+    fireEvent.click(screen.getByText('Back'));
     await waitFor(() => {
       const importTypeStep = screen
-        .getAllByText(translate('Import type'))[0]
+        .getAllByText('Import type')[0]
         .closest('.stepper-item');
       expect(importTypeStep).toHaveClass('current');
     });
 
     const radioProjects = screen
-      .getByText(translate('Projects only'))
+      .getByText('Projects only')
       .closest('.form-check-box');
     fireEvent.click(radioProjects!);
 
     fireEvent.click(screen.getByTestId('next-button-step-0'));
     await waitFor(() => {
       const templateStep = screen
-        .getAllByText(translate('Download template'))[0]
+        .getAllByText('Download template')[0]
         .closest('.stepper-item');
       expect(templateStep).toHaveClass('current');
     });
@@ -687,7 +612,7 @@ describe('ProjectImportDialog Component', () => {
     fireEvent.click(screen.getByTestId('next-button-step-1'));
     await waitFor(() => {
       const uploadStep = screen
-        .getAllByText(translate('Upload file'))[0]
+        .getAllByText('Upload file')[0]
         .closest('.stepper-item');
       expect(uploadStep).toHaveClass('current');
     });

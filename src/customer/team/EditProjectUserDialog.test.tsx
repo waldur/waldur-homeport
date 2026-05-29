@@ -12,34 +12,6 @@ import { openAndSelectOption } from '@/test/select';
 
 import { EditProjectUserDialog } from './EditProjectUserDialog';
 
-vi.mock('@/permissions/utils', () => ({
-  getProjectRoles: () => [
-    { name: 'admin', description: 'Admin', content_type: 'project' },
-    { name: 'manager', description: 'Manager', content_type: 'project' },
-  ],
-  getRoles: () => [
-    { name: 'admin', description: 'Admin', content_type: 'project' },
-    { name: 'manager', description: 'Manager', content_type: 'project' },
-  ],
-}));
-
-vi.mock('@/theme/useTheme', () => ({
-  useTheme: () => ({ theme: 'light' }),
-}));
-
-vi.mock('@/form/DateField', () => ({
-  DateField: (props) => (
-    <input
-      id={props.inputId || props.id || props.input?.name}
-      type="date"
-      placeholder={props.placeholder}
-      value={props.input.value || ''}
-      onChange={props.input.onChange}
-      className="form-control"
-    />
-  ),
-}));
-
 const renderComponent = (project, customer, refetch = vi.fn()) => {
   return renderWithProviders(
     <EditProjectUserDialog resolve={{ project, customer, refetch }} />,
@@ -68,7 +40,7 @@ describe('EditProjectUserDialog', () => {
     expect(screen.getByText('Edit project member')).toBeInTheDocument();
 
     // Check role value
-    expect(screen.getByText('Admin')).toBeInTheDocument();
+    expect(screen.getByText('Administrator')).toBeInTheDocument();
 
     // Check DateField
     const dateInput = screen.getByPlaceholderText(
