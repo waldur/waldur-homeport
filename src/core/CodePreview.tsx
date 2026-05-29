@@ -16,7 +16,7 @@ const CodeBlock: FunctionComponent<PropsWithChildren> = ({ children }) => (
   </div>
 );
 
-export const CodePreview = ({ template, context }) => {
+export const CodePreview = ({ template = '', context }) => {
   const formattedTemplate = formatTemplate(template, context);
 
   const normalizedTemplate = formattedTemplate.replace(
