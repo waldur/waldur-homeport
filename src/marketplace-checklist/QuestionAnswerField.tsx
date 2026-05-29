@@ -19,8 +19,10 @@ import MarkdownEditor from '@/form/MarkdownEditor';
 import { PhoneNumberField } from '@/form/PhoneNumberField';
 import { YearField } from '@/form/YearField';
 import { translate } from '@/i18n';
+import { ChecklistFileUpload } from '@/marketplace-checklist/ChecklistFileUpload';
 import { LikertField } from '@/marketplace-checklist/LikertField';
 import {
+  isQuestionFileType,
   isQuestionLikertType,
   isQuestionSelectType,
   useQuestionNumberValidator,
@@ -63,6 +65,25 @@ export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
   const validate =
     validators.length > 0 ? composeValidators(...validators) : undefined;
 
+  // File uploads need base64 conversion and multiple-file handling, so they use
+  // a dedicated component rather than the generic field map.
+  if (isQuestionFileType(type)) {
+    return (
+      <Field
+        name={name}
+        validate={question.required ? required : undefined}
+        render={({ input, meta }) => (
+          <ChecklistFileUpload
+            input={input}
+            meta={meta}
+            question={question}
+            onRejectionChange={props.onRejectionChange}
+          />
+        )}
+      />
+    );
+  }
+
   return (
     <Field
       name={name}
@@ -81,12 +102,6 @@ export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
             simpleValue: true,
             isMulti: type === 'multi_select',
             isClearable: !question.required,
-          }
-        : {})}
-      {...(type === 'file'
-        ? {
-            showFileName: true,
-            buttonLabel: translate('Browse'),
           }
         : {})}
       {...(isQuestionLikertType(type) ? { question } : {})}

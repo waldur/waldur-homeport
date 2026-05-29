@@ -29,6 +29,7 @@ export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [
   { label: translate('Multi select'), value: 'multi_select' },
   { label: translate('Date'), value: 'date' },
   { label: translate('File'), value: 'file' },
+  { label: translate('Multiple files'), value: 'multiple_files' },
   { label: translate('Email'), value: 'email' },
   { label: translate('Phone number'), value: 'phone_number' },
   { label: translate('URL'), value: 'url' },
@@ -42,6 +43,9 @@ export const isQuestionSelectType = (questionType) =>
   ['single_select', 'multi_select'].includes(questionType);
 
 export const isQuestionLikertType = (questionType) => questionType === 'likert';
+
+export const isQuestionFileType = (questionType) =>
+  ['file', 'multiple_files'].includes(questionType);
 
 export const questionConditionOperatorOptions: Array<{
   label;

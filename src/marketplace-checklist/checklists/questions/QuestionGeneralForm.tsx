@@ -15,6 +15,7 @@ import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
 import { questionTypeOptions } from '@/marketplace-checklist/utils';
 
 import { QuestionAnswerOptions } from './QuestionAnswerOptions';
+import { QuestionFileFields } from './QuestionFileFields';
 import { QuestionLikertFields } from './QuestionLikertFields';
 import { QuestionRichTextFields } from './QuestionRichTextFields';
 
@@ -147,6 +148,10 @@ export const QuestionGeneralForm = ({
         </>
       ) : values.question_type === 'rich_text' ? (
         <QuestionRichTextFields />
+      ) : ['file', 'multiple_files'].includes(values.question_type) ? (
+        <QuestionFileFields
+          multiple={values.question_type === 'multiple_files'}
+        />
       ) : null}
 
       {isOnboardingCustomer && (

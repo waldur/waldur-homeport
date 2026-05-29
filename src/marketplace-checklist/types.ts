@@ -36,6 +36,11 @@ export interface ChecklistQuestionForm {
   // Rich text question type
   rich_text_char_limit?: string;
   rich_text_toolbar_level?: RichTextToolbarLevel;
+  // File / Multiple files question type
+  allowed_file_types?: string[];
+  allowed_mime_types?: string[];
+  max_file_size_mb?: string;
+  max_files_count?: string;
 }
 
 export type RichTextToolbarLevel = 'minimal' | 'standard' | 'extended';
