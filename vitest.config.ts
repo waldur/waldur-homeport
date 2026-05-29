@@ -1,3 +1,5 @@
+import path from 'path';
+
 import { defineConfig, mergeConfig } from 'vitest/config';
 
 import viteConfig from './vite.config';
@@ -10,6 +12,13 @@ export default mergeConfig(
       globals: true,
       environment: 'jsdom',
       setupFiles: ['./test/setupTests.js'],
+      alias: [
+        {
+          find: /^.*\.svg$/,
+          replacement: path.resolve(__dirname, './test/mocks/svg.tsx'),
+        },
+      ],
+
       testTimeout: 10000,
       hookTimeout: 10000,
       teardownTimeout: 10000,

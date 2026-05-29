@@ -1,14 +1,12 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportRequestTypesAdminDestroy } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { createTestWrapper } from '@/test/harness';
+import { renderWithProviders } from '@/test/harness';
 
 import { BatchDeleteAction } from './BatchDeleteAction';
-
-const createWrapper = () => createTestWrapper().wrapper;
 
 describe('BatchDeleteAction', () => {
   const mockRefetch = vi.fn();
@@ -26,9 +24,9 @@ describe('BatchDeleteAction', () => {
     vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(supportRequestTypesAdminDestroy).mockResolvedValue({} as any);
 
-    render(<BatchDeleteAction rows={rows} refetch={mockRefetch} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(
+      <BatchDeleteAction rows={rows} refetch={mockRefetch} />,
+    );
 
     fireEvent.click(screen.getByText('Delete'));
 
@@ -45,9 +43,7 @@ describe('BatchDeleteAction', () => {
   });
 
   it('is disabled when no rows are selected', () => {
-    render(<BatchDeleteAction rows={[]} refetch={mockRefetch} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(<BatchDeleteAction rows={[]} refetch={mockRefetch} />);
 
     const button = screen.getByText('Delete');
     expect(button).toBeDisabled();
@@ -66,9 +62,9 @@ describe('BatchDeleteAction', () => {
       },
     );
 
-    render(<BatchDeleteAction rows={multiRows} refetch={mockRefetch} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(
+      <BatchDeleteAction rows={multiRows} refetch={mockRefetch} />,
+    );
 
     fireEvent.click(screen.getByText('Delete'));
 

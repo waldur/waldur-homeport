@@ -1,26 +1,11 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { createTestWrapper } from '@/test/harness';
+import { renderWithProviders } from '@/test/harness';
 
 import { EditResourceEndDateDialog } from './EditResourceEndDateDialog';
-
-// Mock DateField to avoid Flatpickr complexity in tests
-vi.mock('@/form/DateField', () => ({
-  DateField: ({ input, label }) => (
-    <input
-      aria-label={label}
-      name={input.name}
-      value={input.value || ''}
-      onChange={(e) => input.onChange(e.target.value)}
-      onBlur={input.onBlur}
-    />
-  ),
-}));
-
-const createWrapper = () => createTestWrapper().wrapper;
 
 describe('EditResourceEndDateDialog', () => {
   const resource = {
@@ -41,9 +26,7 @@ describe('EditResourceEndDateDialog', () => {
   });
 
   const renderComponent = () =>
-    render(<EditResourceEndDateDialog resolve={resolve} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(<EditResourceEndDateDialog resolve={resolve} />);
 
   it('renders correctly with initial values', () => {
     renderComponent();
@@ -58,7 +41,7 @@ describe('EditResourceEndDateDialog', () => {
     // 1. Trigger conflict
     fireEvent.change(input, { target: { value: '2027-01-01' } });
     await waitFor(() => {
-      expect(screen.queryByText('Date conflict')).toBeInTheDocument();
+      expect(screen.getByText('Date conflict')).toBeInTheDocument();
     });
 
     // 2. Resolve conflict
@@ -106,13 +89,10 @@ describe('EditResourceEndDateDialog', () => {
 
   it('does not show conflict warning if project has no end date', () => {
     const resourceNoProjectEnd = { ...resource, project_end_date: null };
-    render(
+    renderWithProviders(
       <EditResourceEndDateDialog
         resolve={{ ...resolve, resource: resourceNoProjectEnd as any }}
       />,
-      {
-        wrapper: createWrapper(),
-      },
     );
 
     const input = screen.getByLabelText('Termination date');

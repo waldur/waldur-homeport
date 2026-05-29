@@ -64,19 +64,16 @@ describe('MultiMoveDialog', () => {
     fireEvent.click(screen.getByText('Save'));
 
     await waitFor(() => {
-      expect(marketplaceResourcesMoveResource).toHaveBeenCalledTimes(2);
-      expect(marketplaceResourcesMoveResource).toHaveBeenCalledWith({
-        path: { uuid: 'resource-1' },
-        body: { project: { url: 'project-url-1' } },
-      });
-      expect(marketplaceResourcesMoveResource).toHaveBeenCalledWith({
-        path: { uuid: 'resource-2' },
-        body: { project: { url: 'project-url-1' } },
-      });
-    });
-
-    await waitFor(() => {
       expect(refetch).toHaveBeenCalled();
+    });
+    expect(marketplaceResourcesMoveResource).toHaveBeenCalledTimes(2);
+    expect(marketplaceResourcesMoveResource).toHaveBeenCalledWith({
+      path: { uuid: 'resource-1' },
+      body: { project: { url: 'project-url-1' } },
+    });
+    expect(marketplaceResourcesMoveResource).toHaveBeenCalledWith({
+      path: { uuid: 'resource-2' },
+      body: { project: { url: 'project-url-1' } },
     });
   });
 });

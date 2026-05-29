@@ -1,11 +1,7 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { BillingTypeEnum } from 'waldur-js-client';
 
 import { getUpdateSummary } from './OrderSummaryMessage';
-
-vi.mock('@/core/formatCurrency', () => ({
-  defaultCurrency: (val) => val,
-}));
 
 const COMPONENTS = [
   {

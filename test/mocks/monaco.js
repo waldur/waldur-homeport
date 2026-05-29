@@ -1,9 +1,7 @@
-/* eslint-disable no-undef */
+import React from 'react';
 import { vi } from 'vitest';
 
 vi.mock('@monaco-editor/react', () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const React = require('react');
   return {
     Editor: vi.fn(({ value, onChange, 'data-testid': testId }) => {
       return React.createElement('textarea', {

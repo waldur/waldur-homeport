@@ -2,8 +2,6 @@ import { describe, expect, it } from 'vitest';
 
 import { validateOptionForm } from './validation';
 
-// Mock translate
-
 describe('Option form validation', () => {
   describe('inode multiplier validation', () => {
     const allValuesOK = {

@@ -1,16 +1,11 @@
-import {
-  cleanup,
-  fireEvent,
-  screen,
-  waitFor,
-  within,
-} from '@testing-library/react';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceResourcesReallocateLimits } from 'waldur-js-client';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  marketplaceResourcesReallocateLimits,
+  marketplaceResourcesList,
+} from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
-import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
@@ -21,10 +16,7 @@ import { loadData } from '../change-limits/utils';
 
 import { ReallocateLimitsDialog } from './ReallocateLimitsDialog';
 
-ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
-
 vi.mock('../change-limits/utils');
-vi.mock('@/marketplace/common/autocompletes');
 
 const renderDialog = (resolve) => {
   return renderWithProviders(<ReallocateLimitsDialog resolve={resolve} />);
@@ -81,10 +73,6 @@ describe('ReallocateLimitsDialog', () => {
     vi.clearAllMocks();
   });
 
-  afterEach(() => {
-    cleanup();
-  });
-
   const getNextButtonStep0 = () =>
     screen.queryByTestId('next-button-step-0') as HTMLButtonElement;
   const getNextButtonStep1 = () =>
@@ -125,10 +113,14 @@ describe('ReallocateLimitsDialog', () => {
       offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
-    vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
-      options: [targetResource],
-      hasMore: false,
-    }));
+    vi.mocked(marketplaceResourcesList).mockResolvedValue({
+      data: [targetResource],
+      response: {
+        headers: new Headers({
+          'x-result-count': '1',
+        }),
+      },
+    } as any);
 
     fireEvent.click(getNextButtonStep0());
 
@@ -224,10 +216,14 @@ describe('ReallocateLimitsDialog', () => {
       offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
-    vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
-      options: [targetResource],
-      hasMore: false,
-    }));
+    vi.mocked(marketplaceResourcesList).mockResolvedValue({
+      data: [targetResource],
+      response: {
+        headers: new Headers({
+          'x-result-count': '1',
+        }),
+      },
+    } as any);
 
     await screen.findByText(/Find target resource/i);
     await typeAndSelectOption(
@@ -270,10 +266,14 @@ describe('ReallocateLimitsDialog', () => {
       offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
-    vi.mocked(resourceAutocomplete).mockReturnValue(() => ({
-      options: [targetResource],
-      hasMore: false,
-    }));
+    vi.mocked(marketplaceResourcesList).mockResolvedValue({
+      data: [targetResource],
+      response: {
+        headers: new Headers({
+          'x-result-count': '1',
+        }),
+      },
+    } as any);
 
     await typeAndSelectOption(
       user,

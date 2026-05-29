@@ -17,10 +17,6 @@ import { loadEventGroupsOptions } from './utils';
 // Mock the required modules
 vi.mock('./utils');
 
-const renderWithRedux = (ui) => {
-  return renderWithProviders(ui);
-};
-
 const mockEventGroups = [
   {
     key: 'users',
@@ -47,7 +43,9 @@ describe('HookDetailsDialog', () => {
 
   describe('Create mode', () => {
     beforeEach(async () => {
-      renderWithRedux(<HookDetailsDialog resolve={{ refetch: mockRefetch }} />);
+      renderWithProviders(
+        <HookDetailsDialog resolve={{ refetch: mockRefetch }} />,
+      );
       await waitFor(() => {
         expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
       });
@@ -117,7 +115,7 @@ describe('HookDetailsDialog', () => {
       event_groups: ['users'],
     };
     beforeEach(async () => {
-      renderWithRedux(
+      renderWithProviders(
         <HookDetailsDialog
           resolve={{ hook: mockHook, refetch: mockRefetch }}
         />,
@@ -142,8 +140,8 @@ describe('HookDetailsDialog', () => {
       // Update URL
       const urlInput = screen.getByTestId('destination-url');
       await userEvent.clear(urlInput);
-      await waitFor(async () => {
-        await userEvent.clear(urlInput);
+      await userEvent.clear(urlInput);
+      await waitFor(() => {
         expect(urlInput).toHaveValue('');
       });
       await userEvent.type(urlInput, 'https://new-example.com/webhook');

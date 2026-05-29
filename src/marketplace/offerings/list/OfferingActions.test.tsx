@@ -4,7 +4,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { translate } from '@/i18n';
 import { renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
@@ -56,11 +55,9 @@ describe('OfferingActions', () => {
       await fireEvent.click(dropdownButton);
     });
 
-    expect(screen.getByText(translate('Edit'))).toBeInTheDocument();
-    expect(
-      screen.getByText(translate('Preview order form')),
-    ).toBeInTheDocument();
-    expect(screen.getByText(translate('Open public page'))).toBeInTheDocument();
+    expect(screen.getByText('Edit')).toBeInTheDocument();
+    expect(screen.getByText('Preview order form')).toBeInTheDocument();
+    expect(screen.getByText('Open public page')).toBeInTheDocument();
   });
 
   it('shows disabled delete action when offering is not in Draft state', async () => {
@@ -70,9 +67,9 @@ describe('OfferingActions', () => {
       await fireEvent.click(dropdownButton);
     });
 
-    expect(screen.getByText(translate('Delete'))).toBeInTheDocument();
+    expect(screen.getByText('Delete')).toBeInTheDocument();
     expect(
-      screen.getByText(translate('Delete')).closest('.opacity-50'),
+      screen.getByText('Delete').closest('.opacity-50'),
     ).toBeInTheDocument();
   });
 
@@ -91,6 +88,6 @@ describe('OfferingActions', () => {
       await fireEvent.click(dropdownButton);
     });
 
-    expect(screen.getByText(translate('Delete'))).toBeInTheDocument();
+    expect(screen.getByText('Delete')).toBeInTheDocument();
   });
 });

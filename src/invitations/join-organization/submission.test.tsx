@@ -33,10 +33,6 @@ vi.mock('@/core/ErrorMessageFormatter', () => ({
   format: (err: any) => err?.response?.data || 'Error',
 }));
 
-vi.mock('@/table/utils', () => ({
-  renderFieldOrDash: (val: string) => val,
-}));
-
 vi.mock('./ProjectDetailsDialog', () => ({
   ProjectDetailsDialog: 'ProjectDetailsDialog',
 }));

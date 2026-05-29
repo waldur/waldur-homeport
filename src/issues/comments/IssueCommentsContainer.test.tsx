@@ -1,12 +1,10 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { supportCommentsList } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 
 import { IssueCommentsContainer } from './IssueCommentsContainer';
-
-// Mock the API client
 
 // Mock the child components
 vi.mock('./IssueCommentButton', () => ({
@@ -31,10 +29,6 @@ vi.mock('./IssueCommentsList', () => ({
       ))}
     </div>
   ),
-}));
-
-vi.mock('@/core/LoadingSpinner', () => ({
-  LoadingSpinner: () => <div data-testid="loading-spinner">Loading...</div>,
 }));
 
 const mockIssue = {
@@ -74,7 +68,7 @@ describe('IssueCommentsContainer', () => {
 
     renderComponent();
 
-    expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('spinner')).toBeInTheDocument();
   });
 
   it('renders comments list when data is loaded and sorts them', async () => {
@@ -84,9 +78,7 @@ describe('IssueCommentsContainer', () => {
 
     renderComponent();
 
-    await waitFor(() =>
-      expect(screen.getByTestId('comments-list')).toBeInTheDocument(),
-    );
+    expect(await screen.findByTestId('comments-list')).toBeInTheDocument();
     const items = screen.getAllByTestId('comment-item');
     expect(items).toHaveLength(2);
     // Should be sorted by date descending (newest first: c2)
@@ -99,9 +91,7 @@ describe('IssueCommentsContainer', () => {
 
     renderComponent();
 
-    await waitFor(() =>
-      expect(screen.getByText('Comments')).toBeInTheDocument(),
-    );
+    expect(await screen.findByText('Comments')).toBeInTheDocument();
   });
 
   it('renders add comment button', async () => {
@@ -109,9 +99,7 @@ describe('IssueCommentsContainer', () => {
 
     renderComponent();
 
-    await waitFor(() =>
-      expect(screen.getByTestId('add-comment-btn')).toBeInTheDocument(),
-    );
+    expect(await screen.findByTestId('add-comment-btn')).toBeInTheDocument();
   });
 
   it('renders reload button', async () => {
@@ -119,8 +107,6 @@ describe('IssueCommentsContainer', () => {
 
     renderComponent();
 
-    await waitFor(() =>
-      expect(screen.getByTestId('reload-btn')).toBeInTheDocument(),
-    );
+    expect(await screen.findByTestId('reload-btn')).toBeInTheDocument();
   });
 });

@@ -4,16 +4,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   OpenStackInstance,
   openstackInstancesUpdatePorts,
+  openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { loadSubnets } from '@/openstack/api';
 import { renderWithProviders } from '@/test/harness';
 
 import { UpdateInternalIpsDialog } from './UpdateInternalIpsDialog';
-
-vi.mock('@/openstack/api', () => ({
-  loadSubnets: vi.fn(),
-}));
 
 const subnetsResponse = [
   {
@@ -66,7 +62,9 @@ const renderDialog = (resource = mockResource) => {
 describe('UpdateInternalIpsDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(loadSubnets).mockResolvedValue(subnetsResponse as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: subnetsResponse,
+    } as any);
   });
 
   it('renders title with resource name', () => {
@@ -80,7 +78,7 @@ describe('UpdateInternalIpsDialog', () => {
   });
 
   it('shows loading state while fetching subnets', () => {
-    vi.mocked(loadSubnets).mockReturnValue(new Promise(() => {}));
+    vi.mocked(openstackSubnetsList).mockResolvedValue({ data: [] } as any);
     renderDialog();
 
     expect(screen.getByRole('status')).toBeInTheDocument();
@@ -91,14 +89,18 @@ describe('UpdateInternalIpsDialog', () => {
     renderDialog();
 
     await waitFor(() => {
-      expect(loadSubnets).toHaveBeenCalledWith({
-        tenant_uuid: 'tenant-uuid',
+      expect(openstackSubnetsList).toHaveBeenCalledWith({
+        query: expect.objectContaining({
+          tenant_uuid: 'tenant-uuid',
+        }),
       });
     });
   });
 
   it('shows error state when loading fails', async () => {
-    vi.mocked(loadSubnets).mockRejectedValue(new Error('Network error'));
+    vi.mocked(openstackSubnetsList).mockRejectedValue(
+      new Error('Network error'),
+    );
     renderDialog();
 
     await waitFor(() => {
@@ -317,7 +319,9 @@ describe('UpdateInternalIpsDialog', () => {
 
   it('disables add subnet button when all subnets are used', async () => {
     // Only 1 subnet available, already used by the resource
-    vi.mocked(loadSubnets).mockResolvedValue([subnetsResponse[0]] as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: [subnetsResponse[0]],
+    } as any);
 
     renderDialog();
 
@@ -332,7 +336,9 @@ describe('UpdateInternalIpsDialog', () => {
 
   it('uses fallback subnet data when full subnet is not found in loaded list', async () => {
     // Return subnets that do NOT include the resource's subnet_uuid
-    vi.mocked(loadSubnets).mockResolvedValue([subnetsResponse[1]] as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: [subnetsResponse[1]],
+    } as any);
 
     const resourceWithUnknownSubnet = {
       ...mockResource,
@@ -358,7 +364,7 @@ describe('UpdateInternalIpsDialog', () => {
   });
 
   it('keeps submit button disabled while loading', () => {
-    vi.mocked(loadSubnets).mockReturnValue(new Promise(() => {}));
+    vi.mocked(openstackSubnetsList).mockResolvedValue({ data: [] } as any);
     renderDialog();
 
     const submitButton = screen.getByText('Submit');

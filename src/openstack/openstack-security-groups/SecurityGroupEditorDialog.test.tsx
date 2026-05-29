@@ -170,11 +170,11 @@ describe('SecurityGroupEditorDialog', () => {
 
     await waitFor(() => {
       expect(cidrInput).toHaveClass('is-invalid');
-      expect(cidrInput).toHaveAttribute(
-        'title',
-        'The value is not valid IP v4 CIDR',
-      );
     });
+    expect(cidrInput).toHaveAttribute(
+      'title',
+      'The value is not valid IP v4 CIDR',
+    );
   });
 
   it('validates CIDR according to the ethertype (IPv6)', async () => {
@@ -192,11 +192,11 @@ describe('SecurityGroupEditorDialog', () => {
 
     await waitFor(() => {
       expect(cidrInput).toHaveClass('is-invalid');
-      expect(cidrInput).toHaveAttribute(
-        'title',
-        'The value is not valid IP v6 CIDR',
-      );
     });
+    expect(cidrInput).toHaveAttribute(
+      'title',
+      'The value is not valid IP v6 CIDR',
+    );
 
     await user.clear(cidrInput);
     await user.type(cidrInput, '2002::1234:abcd:ffff:c0a8:101/64');
@@ -220,11 +220,11 @@ describe('SecurityGroupEditorDialog', () => {
 
     await waitFor(() => {
       expect(portInput).toHaveClass('is-invalid');
-      expect(portInput).toHaveAttribute(
-        'title',
-        'Port number in the range should be at most 255.',
-      );
     });
+    expect(portInput).toHaveAttribute(
+      'title',
+      'Port number in the range should be at most 255.',
+    );
   });
 
   it('checks that minimum port number should not exceed the maximum port number', async () => {
@@ -239,11 +239,11 @@ describe('SecurityGroupEditorDialog', () => {
 
     await waitFor(() => {
       expect(portInput).toHaveClass('is-invalid');
-      expect(portInput).toHaveAttribute(
-        'title',
-        'The minimum port number should not exceed the maximum port number.',
-      );
     });
+    expect(portInput).toHaveAttribute(
+      'title',
+      'The minimum port number should not exceed the maximum port number.',
+    );
   });
 
   it('allows to select remote security group', async () => {

@@ -10,31 +10,6 @@ import { renderWithProviders } from '@/test/harness';
 import { SetAllowedAddressPairsDialog } from './SetAllowedAddressPairsDialog';
 
 // Mock dependencies
-
-vi.mock('@/modal/ModalDialog', () => ({
-  ModalDialog: ({ title, children, footer }: any) => (
-    <div data-testid="modal-dialog">
-      <h1>{title}</h1>
-      <div data-testid="modal-body">{children}</div>
-      <div data-testid="modal-footer">{footer}</div>
-    </div>
-  ),
-}));
-
-vi.mock('@/form', () => ({
-  SubmitButton: ({ label, submitting, disabled }: any) => (
-    <button type="submit" disabled={submitting || disabled}>
-      {label}
-    </button>
-  ),
-  StringField: ({ input }: any) => <input {...input} />,
-  FieldError: ({ error }: any) => (error ? <span>{error}</span> : null),
-}));
-
-vi.mock('@/modal/CloseDialogButton', () => ({
-  CloseDialogButton: () => <button>Close</button>,
-}));
-
 vi.mock('./utils', () => ({
   formatAddressList: () => '192.168.1.100',
 }));

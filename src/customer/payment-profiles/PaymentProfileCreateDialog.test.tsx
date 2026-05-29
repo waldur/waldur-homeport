@@ -4,22 +4,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { paymentProfilesCreate, paymentProfilesEnable } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
-import {
-  useCustomer,
-  useProject,
-  useSetCustomer,
-  useSetProject,
-  useUser,
-} from '@/workspace/hooks';
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { PaymentProfileCreateDialog } from './PaymentProfileCreateDialog';
 
 vi.mock('../utils', () => ({
   getCustomer: vi.fn(),
-}));
-
-vi.mock('@/form/useFlatpickrTheme', () => ({
-  useFlatpickrTheme: vi.fn(),
 }));
 
 const renderDialog = () => {
@@ -34,8 +24,6 @@ describe('PaymentProfileCreateDialog', () => {
     vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
     vi.mocked(useCustomer).mockReturnValue({ url: 'customer-url' } as any);
     vi.mocked(useProject).mockReturnValue({ uuid: 'project-uuid' } as any);
-    vi.mocked(useSetCustomer).mockReturnValue(vi.fn());
-    vi.mocked(useSetProject).mockReturnValue(vi.fn());
   });
 
   it('renders the dialog correctly', () => {

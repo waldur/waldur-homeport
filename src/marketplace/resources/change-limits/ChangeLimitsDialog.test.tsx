@@ -2,8 +2,6 @@ import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesUpdateLimits } from 'waldur-js-client';
 
-import { ENV } from '@/core/config';
-import { translate } from '@/i18n';
 import { renderWithProviders } from '@/test/harness';
 
 import { ChangeLimitsDialog } from './ChangeLimitsDialog';
@@ -18,8 +16,6 @@ vi.mock('@/marketplace/orders/actions/selectors', async (importOriginal) => {
     checkOrderCanBeApproved: vi.fn().mockReturnValue(true),
   };
 });
-
-ENV.plugins.WALDUR_CORE.CURRENCY_NAME = 'EUR';
 
 vi.mock('./utils', async (importOriginal) => {
   const actual = await importOriginal<any>();
@@ -73,9 +69,7 @@ describe('ChangeLimitsDialog', () => {
     vi.mocked(loadData).mockRejectedValue(new Error('Loading failed'));
     renderDialog();
     await waitFor(() => {
-      expect(
-        screen.getByText(translate('Unable to load data.')),
-      ).toBeInTheDocument();
+      expect(screen.getByText('Unable to load data.')).toBeInTheDocument();
     });
   });
 
@@ -87,9 +81,7 @@ describe('ChangeLimitsDialog', () => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
 
-    expect(
-      screen.getByText(translate('Change resource limits')),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Change resource limits')).toBeInTheDocument();
     expect(screen.getByText(/Test Plan/)).toBeInTheDocument();
     expect(screen.getByText('Cores')).toBeInTheDocument();
     expect(screen.getByText('RAM')).toBeInTheDocument();

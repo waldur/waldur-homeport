@@ -5,17 +5,13 @@ import {
   OpenStackVolume,
   openstackVolumesRetype,
   OpenStackVolumeType,
+  openstackVolumeTypesList,
 } from 'waldur-js-client';
 
-import * as api from '@/openstack/api';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 
 import { RetypeDialog } from './RetypeDialog';
-
-vi.mock('@/openstack/api');
-
-const apiMock = vi.mocked(api);
 
 const resource = {
   uuid: 'volume_uuid',
@@ -49,7 +45,7 @@ const renderDialog = () => {
 
 describe('RetypeDialog', () => {
   beforeEach(() => {
-    apiMock.loadVolumeTypes.mockResolvedValue([]);
+    vi.mocked(openstackVolumeTypesList).mockResolvedValue({ data: [] } as any);
   });
 
   it('renders current volume type label', async () => {
@@ -70,7 +66,9 @@ describe('RetypeDialog', () => {
   });
 
   it('renders list of volume types excluding current volume type', async () => {
-    apiMock.loadVolumeTypes.mockResolvedValue(fakeVolumeTypes);
+    vi.mocked(openstackVolumeTypesList).mockResolvedValue({
+      data: fakeVolumeTypes,
+    } as any);
 
     renderDialog();
 
@@ -91,7 +89,9 @@ describe('RetypeDialog', () => {
   });
 
   it('makes API request when form is submitted', async () => {
-    apiMock.loadVolumeTypes.mockResolvedValue(fakeVolumeTypes);
+    vi.mocked(openstackVolumeTypesList).mockResolvedValue({
+      data: fakeVolumeTypes,
+    } as any);
     vi.mocked(openstackVolumesRetype).mockResolvedValue(null);
 
     renderDialog();
@@ -120,7 +120,9 @@ describe('RetypeDialog', () => {
 
   it('displays error message when API call fails', async () => {
     const error = new Error('Network error');
-    apiMock.loadVolumeTypes.mockResolvedValue(fakeVolumeTypes);
+    vi.mocked(openstackVolumeTypesList).mockResolvedValue({
+      data: fakeVolumeTypes,
+    } as any);
     vi.mocked(openstackVolumesRetype).mockRejectedValue(error);
 
     renderDialog();
@@ -146,7 +148,9 @@ describe('RetypeDialog', () => {
   });
 
   it('submit button is disabled when volume type is not selected', async () => {
-    apiMock.loadVolumeTypes.mockResolvedValue(fakeVolumeTypes);
+    vi.mocked(openstackVolumeTypesList).mockResolvedValue({
+      data: fakeVolumeTypes,
+    } as any);
     renderDialog();
 
     await waitFor(() => {

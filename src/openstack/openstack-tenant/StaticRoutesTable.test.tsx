@@ -4,8 +4,6 @@ import { Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { vi, describe, it, expect } from 'vitest';
 
-import { translate } from '@/i18n';
-
 import { StaticRoutesTable } from './StaticRoutesTable';
 
 const renderTable = (initialRoutes: any[] = [], fixedIps: any[] = []) => {
@@ -42,7 +40,7 @@ describe('StaticRoutesTable', () => {
   it('renders correctly with empty routes', () => {
     renderTable();
     expect(
-      screen.getByRole('button', { name: translate('Add route') }),
+      screen.getByRole('button', { name: 'Add route' }),
     ).toBeInTheDocument();
     expect(screen.queryByRole('table')).not.toBeInTheDocument();
   });
@@ -61,7 +59,7 @@ describe('StaticRoutesTable', () => {
   it('adds a new route', () => {
     renderTable();
     const addButton = screen.getByRole('button', {
-      name: translate('Add route'),
+      name: 'Add route',
     });
     fireEvent.click(addButton);
 
@@ -77,7 +75,7 @@ describe('StaticRoutesTable', () => {
     renderTable(initialRoutes);
 
     const removeButton = screen.getByRole('button', {
-      name: translate('Remove'),
+      name: 'Remove',
     });
     fireEvent.click(removeButton);
 
@@ -89,9 +87,7 @@ describe('StaticRoutesTable', () => {
     renderTable([], fixedIps);
 
     // Add a route
-    fireEvent.click(
-      screen.getByRole('button', { name: translate('Add route') }),
-    );
+    fireEvent.click(screen.getByRole('button', { name: 'Add route' }));
 
     // Get inputs
     const inputs = screen.getAllByRole('textbox');

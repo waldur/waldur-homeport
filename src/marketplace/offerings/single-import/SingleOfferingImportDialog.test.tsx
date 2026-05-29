@@ -1,6 +1,6 @@
-import { cleanup, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsImportOffering } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
@@ -24,10 +24,6 @@ describe('SingleOfferingImportDialog', () => {
     } as any);
 
     vi.clearAllMocks();
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   const getNextButton = () =>

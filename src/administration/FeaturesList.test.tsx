@@ -36,7 +36,6 @@ vi.mock('@/features/FeaturesDescription', () => ({
 }));
 
 describe('FeaturesList', () => {
-  // Setup mocks before each test
   beforeEach(() => {
     ENV.FEATURES = {
       billing: {
@@ -51,9 +50,6 @@ describe('FeaturesList', () => {
       state: { name: 'admin-features' } as any,
       params: {},
     });
-    // Mock notifications
-
-    // Mock post function
     vi.mocked(featureValues).mockReset();
   });
 
@@ -152,7 +148,6 @@ describe('FeaturesList', () => {
 
     const submitButton = screen.getByRole('button', { name: /Save/i });
 
-    // Click submit button
     await userEvent.click(submitButton);
 
     // Verify button is disabled during submission

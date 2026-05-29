@@ -1,16 +1,14 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { openstackPortsUpdatePortIp } from 'waldur-js-client';
+import {
+  openstackPortsUpdatePortIp,
+  openstackSubnetsList,
+} from 'waldur-js-client';
 
-import { loadSubnets } from '@/openstack/api';
 import { renderWithProviders } from '@/test/harness';
 
 import { UpdatePortDialog } from './UpdatePortDialog';
-
-vi.mock('@/openstack/api', () => ({
-  loadSubnets: vi.fn(),
-}));
 
 const mockResource = {
   uuid: 'port-uuid',
@@ -47,7 +45,9 @@ describe('UpdatePortDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    vi.mocked(loadSubnets).mockResolvedValue(mockSubnets);
+    vi.mocked(openstackSubnetsList).mockResolvedValue({
+      data: mockSubnets,
+    } as any);
   });
 
   const renderDialog = (resource = mockResource) => {
@@ -61,9 +61,11 @@ describe('UpdatePortDialog', () => {
   it('renders correctly and loads subnets', async () => {
     renderDialog();
     expect(await screen.findByText('Update port IP')).toBeDefined();
-    expect(loadSubnets).toHaveBeenCalledWith({
-      tenant_uuid: 'tenant-uuid',
-      network_uuid: 'network-uuid',
+    expect(openstackSubnetsList).toHaveBeenCalledWith({
+      query: expect.objectContaining({
+        tenant_uuid: 'tenant-uuid',
+        network_uuid: 'network-uuid',
+      }),
     });
   });
 
@@ -82,7 +84,7 @@ describe('UpdatePortDialog', () => {
     const checkbox = await screen.findByLabelText('Custom IP configuration');
     // Initially checked because port has an IP
     expect(checkbox).toBeChecked();
-    expect(screen.queryByLabelText('Custom IP')).not.toBeNull();
+    expect(screen.getByLabelText('Custom IP')).not.toBeNull();
 
     // Uncheck it
     await user.click(checkbox);

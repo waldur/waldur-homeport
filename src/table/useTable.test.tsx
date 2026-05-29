@@ -1,38 +1,16 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, act } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { combineReducers, legacy_createStore as createStore } from 'redux';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { DrawerProvider } from '@/drawer/DrawerContext';
 import { createTestQueryClient } from '@/test/harness';
 
 import { reducer as tableReducer } from './store';
 import { useTable } from './useTable';
 import { useTableQuery } from './useTableQuery';
-
-// Mock the drawer actions
-vi.mock('@/drawer/actions', () => ({
-  useDrawer: vi.fn(() => ({
-    openDrawer: vi.fn(),
-    renderDrawer: vi.fn(),
-    closeDrawer: vi.fn(),
-  })),
-}));
-
-// Mock navigation title
-vi.mock('@/navigation/title', () => ({
-  getTitle: () => 'Test Page',
-  reducer: (state = { title: '', subtitle: '' }) => state,
-  effects: function* () {},
-}));
-
-// Mock queryClient
-vi.mock('@/core/queryClient', () => ({
-  queryClient: {
-    invalidateQueries: vi.fn(),
-  },
-}));
 
 // Mock useTableQuery
 vi.mock('./useTableQuery', () => ({
@@ -56,7 +34,9 @@ const createWrapper = (store: ReturnType<typeof createTestStore>) => {
   const queryClient = createTestQueryClient();
   return ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>{children}</Provider>
+      <DrawerProvider>
+        <Provider store={store}>{children}</Provider>
+      </DrawerProvider>
     </QueryClientProvider>
   );
 };

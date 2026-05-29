@@ -18,22 +18,6 @@ import { TemplateDetail } from './TemplateDetail';
 ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE = false;
 ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE = 'Waldur';
 
-vi.mock('@/core/api', async (importOriginal) => {
-  const actual: any = await importOriginal();
-  return {
-    ...actual,
-    getAllPages: vi.fn((fn) => fn(1).then((r) => r.data)),
-  };
-});
-
-vi.mock('@/navigation/title', async (importOriginal) => {
-  const actual: any = await importOriginal();
-  return {
-    ...actual,
-    useTitle: vi.fn(),
-  };
-});
-
 const renderComponent = () => renderWithProviders(<TemplateDetail />);
 
 describe('TemplateDetail', () => {

@@ -1,10 +1,8 @@
-/* eslint-disable no-undef */
+import React from 'react';
 import { vi } from 'vitest';
 
 vi.mock('@phosphor-icons/react', async (importOriginal) => {
   const actual = await importOriginal();
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const React = require('react');
   return new Proxy(actual, {
     get: (target, prop) => {
       if (prop in target && prop !== 'default') {

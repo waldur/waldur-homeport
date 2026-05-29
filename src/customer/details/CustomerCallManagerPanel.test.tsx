@@ -1,43 +1,32 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   callManagingOrganisationsCreate,
   callManagingOrganisationsDestroy,
   callManagingOrganisationsList,
+  Customer,
+  customersRetrieve,
 } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
-import { createTestWrapper } from '@/test/harness';
-import { setCurrentCustomer } from '@/workspace/actions';
+import { renderWithProviders } from '@/test/harness';
 import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
-import { getCustomer as getCustomerApi } from '../utils';
-
 import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
-
-vi.mock('../utils');
-vi.mock('@/workspace/actions');
-
-const mockSetCustomer = vi.fn();
-
-const createWrapper = () => createTestWrapper().wrapper;
 
 describe('CustomerCallManagerPanel', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useSetCustomer).mockReturnValue(mockSetCustomer);
 
     vi.mocked(callManagingOrganisationsList).mockResolvedValue({
       data: [{ uuid: 'info-uuid-1' }],
     } as any);
 
-    vi.mocked(getCustomerApi).mockResolvedValue({
-      uuid: 'customer-uuid-1',
-      name: 'Test Customer',
-    } as any);
-
-    vi.mocked(setCurrentCustomer).mockReturnValue({
-      type: 'SET_CURRENT_CUSTOMER',
+    vi.mocked(customersRetrieve).mockResolvedValue({
+      data: {
+        uuid: 'customer-uuid-1',
+        name: 'Test Customer',
+      },
     } as any);
   });
 
@@ -48,7 +37,7 @@ describe('CustomerCallManagerPanel', () => {
       call_managing_organization_uuid: 'some-uuid',
     } as any);
 
-    render(<CustomerCallManagerPanel />, { wrapper: createWrapper() });
+    renderWithProviders(<CustomerCallManagerPanel />);
 
     expect(screen.getByText('Call manager')).toBeInTheDocument();
 
@@ -67,14 +56,14 @@ describe('CustomerCallManagerPanel', () => {
       uuid: 'customer-uuid-1',
       url: '/api/customers/customer-uuid-1/',
       call_managing_organization_uuid: null,
-    } as any);
+    } satisfies Customer);
 
     vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(callManagingOrganisationsCreate).mockResolvedValue({
       data: { uuid: 'new-info-uuid' },
     } as any);
 
-    render(<CustomerCallManagerPanel />, { wrapper: createWrapper() });
+    renderWithProviders(<CustomerCallManagerPanel />);
 
     const checkbox = screen.getByLabelText('Enable call manager');
     expect(checkbox).not.toBeChecked();
@@ -96,10 +85,12 @@ describe('CustomerCallManagerPanel', () => {
     });
 
     await waitFor(() => {
-      expect(getCustomerApi).toHaveBeenCalledWith('customer-uuid-1');
+      expect(customersRetrieve).toHaveBeenCalledWith({
+        path: { uuid: 'customer-uuid-1' },
+      });
     });
 
-    expect(mockSetCustomer).toHaveBeenCalledWith({
+    expect(useSetCustomer()).toHaveBeenCalledWith({
       uuid: 'customer-uuid-1',
       name: 'Test Customer',
     });
@@ -115,7 +106,7 @@ describe('CustomerCallManagerPanel', () => {
     vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(callManagingOrganisationsDestroy).mockResolvedValue({} as any);
 
-    render(<CustomerCallManagerPanel />, { wrapper: createWrapper() });
+    renderWithProviders(<CustomerCallManagerPanel />);
 
     // Wait for the query to resolve so infoUuid is set in the component
     await waitFor(() => {
@@ -138,10 +129,12 @@ describe('CustomerCallManagerPanel', () => {
     });
 
     await waitFor(() => {
-      expect(getCustomerApi).toHaveBeenCalledWith('customer-uuid-1');
+      expect(customersRetrieve).toHaveBeenCalledWith({
+        path: { uuid: 'customer-uuid-1' },
+      });
     });
 
-    expect(mockSetCustomer).toHaveBeenCalledWith({
+    expect(useSetCustomer()).toHaveBeenCalledWith({
       uuid: 'customer-uuid-1',
       name: 'Test Customer',
     });

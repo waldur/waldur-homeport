@@ -1,19 +1,13 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { customersList, projectsMoveProject } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
-import { createTestWrapper } from '@/test/harness';
+import { renderWithProviders } from '@/test/harness';
 import { typeAndSelectOption } from '@/test/select';
 
 import { BatchMoveProjectDialog } from './BatchMoveProjectDialog';
-
-vi.mock('@/modal/CloseDialogButton', () => ({
-  CloseDialogButton: () => <button>Close</button>,
-}));
-
-const createWrapper = () => createTestWrapper().wrapper;
 
 describe('BatchMoveProjectDialog', () => {
   const mockRefetch = vi.fn();
@@ -36,9 +30,8 @@ describe('BatchMoveProjectDialog', () => {
   });
 
   const renderDialog = () =>
-    render(
+    renderWithProviders(
       <BatchMoveProjectDialog resolve={{ rows, refetch: mockRefetch }} />,
-      { wrapper: createWrapper() },
     );
 
   it('renders selected projects', () => {

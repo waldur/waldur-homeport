@@ -8,17 +8,6 @@ import { openAndSelectOption } from '@/test/select';
 
 import { AddTosDialog } from './AddTosDialog';
 
-// Mock MarkdownEditor to avoid heavy MDXEditor dependency in tests
-vi.mock('@/form/MarkdownEditor', () => ({
-  default: ({ input }: any) => (
-    <textarea
-      data-testid="markdown-editor"
-      value={input?.value || ''}
-      onChange={(e) => input?.onChange(e.target.value)}
-    />
-  ),
-}));
-
 const fakeOffering = { url: 'offering-url', uuid: 'offering-uuid' };
 
 const renderDialog = () => {
@@ -42,22 +31,18 @@ describe('AddTosDialog', () => {
   });
 
   it('disables submit when version is empty', () => {
-    const { container } = renderDialog();
-    const submitBtn = container.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement;
+    renderDialog();
+    const submitBtn = screen.getByRole('button', { name: 'Confirm' });
     expect(submitBtn).toBeDisabled();
   });
 
   it('enables submit when version is filled', async () => {
     const user = userEvent.setup();
-    const { container } = renderDialog();
+    renderDialog();
 
-    await user.type(container.querySelector('input[name="version"]'), '1.0');
+    await user.type(screen.getByLabelText(/Version/i), '1.0');
 
-    const submitBtn = container.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement;
+    const submitBtn = screen.getByRole('button', { name: 'Confirm' });
     expect(submitBtn).not.toBeDisabled();
   });
 
@@ -66,14 +51,12 @@ describe('AddTosDialog', () => {
     vi.mocked(marketplaceOfferingTermsOfServiceCreate).mockResolvedValue(
       {} as any,
     );
-    const { container } = renderDialog();
+    renderDialog();
 
-    await user.type(container.querySelector('input[name="version"]'), '1.0');
+    await user.type(screen.getByLabelText(/Version/i), '1.0');
     await user.type(screen.getByTestId('markdown-editor'), '# Terms');
 
-    const submitBtn = container.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement;
+    const submitBtn = screen.getByRole('button', { name: 'Confirm' });
     await user.click(submitBtn);
 
     await waitFor(() => {
@@ -96,10 +79,10 @@ describe('AddTosDialog', () => {
     vi.mocked(marketplaceOfferingTermsOfServiceCreate).mockResolvedValue(
       {} as any,
     );
-    const { container } = renderDialog();
+    renderDialog();
 
     // Fill version
-    await user.type(container.querySelector('input[name="version"]'), '2.0');
+    await user.type(screen.getByLabelText(/Version/i), '2.0');
 
     // Switch to external link
     await openAndSelectOption(user, 'Add as', 'External link');
@@ -109,13 +92,11 @@ describe('AddTosDialog', () => {
 
     // Fill external link
     await user.type(
-      container.querySelector('input[name="terms_of_service_link"]'),
+      screen.getByLabelText(/External link/i),
       'https://example.com/tos',
     );
 
-    const submitBtn = container.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement;
+    const submitBtn = screen.getByRole('button', { name: 'Confirm' });
     await user.click(submitBtn);
 
     await waitFor(() => {
@@ -135,7 +116,7 @@ describe('AddTosDialog', () => {
 
   it('shows grace period field when requires_reconsent is checked', async () => {
     const user = userEvent.setup();
-    const { container } = renderDialog();
+    renderDialog();
 
     // Grace period should not be visible initially
     expect(screen.queryByText('Grace period (days)')).not.toBeInTheDocument();
@@ -147,9 +128,7 @@ describe('AddTosDialog', () => {
 
     // Grace period should now be visible with default value 60
     expect(screen.getByText('Grace period (days)')).toBeInTheDocument();
-    expect(
-      container.querySelector('input[name="grace_period_days"]'),
-    ).toHaveValue(60);
+    expect(screen.getByLabelText(/Grace period/i)).toHaveValue(60);
   });
 
   it('submits with checkboxes and grace period', async () => {
@@ -157,9 +136,9 @@ describe('AddTosDialog', () => {
     vi.mocked(marketplaceOfferingTermsOfServiceCreate).mockResolvedValue(
       {} as any,
     );
-    const { container } = renderDialog();
+    renderDialog();
 
-    await user.type(container.querySelector('input[name="version"]'), '3.0');
+    await user.type(screen.getByLabelText(/Version/i), '3.0');
 
     // Toggle checkboxes
     await user.click(screen.getByRole('checkbox', { name: /Is active/i }));
@@ -168,15 +147,11 @@ describe('AddTosDialog', () => {
     );
 
     // Change grace period
-    const gracePeriodInput = container.querySelector(
-      'input[name="grace_period_days"]',
-    ) as HTMLInputElement;
+    const gracePeriodInput = screen.getByLabelText(/Grace period/i);
     await user.clear(gracePeriodInput);
     await user.type(gracePeriodInput, '30');
 
-    const submitBtn = container.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement;
+    const submitBtn = screen.getByRole('button', { name: 'Confirm' });
     await user.click(submitBtn);
 
     await waitFor(() => {

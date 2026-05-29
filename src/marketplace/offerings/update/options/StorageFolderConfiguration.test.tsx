@@ -7,8 +7,6 @@ import { Offering } from '@/marketplace/types';
 
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 
-// Mock translate
-
 const mockOffering = {
   components: [
     {

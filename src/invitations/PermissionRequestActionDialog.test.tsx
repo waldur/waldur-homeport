@@ -12,14 +12,6 @@ vi.mock('./useUserPermissionRequestActions', () => ({
   useRejectPermissionRequest: vi.fn(),
 }));
 
-vi.mock('@/core/dateUtils', () => ({
-  formatDateTime: (date) => date,
-}));
-
-vi.mock('@/core/Tooltip', () => ({
-  Tip: ({ children }) => <span>{children}</span>,
-}));
-
 describe('PermissionRequestActionDialog', () => {
   const permissionRequest = {
     uuid: 'test-uuid',

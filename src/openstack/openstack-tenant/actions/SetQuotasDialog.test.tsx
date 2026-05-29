@@ -266,9 +266,9 @@ describe('SetQuotasDialog', () => {
     await waitFor(() => {
       const callArgs = vi.mocked(openstackTenantsSetQuotas).mock.calls[0][0];
       expect(callArgs.body).toHaveProperty('instances', 5);
-      expect(callArgs.body).toHaveProperty('vcpu', 4);
       expect(callArgs.body).not.toHaveProperty('ram');
       expect(callArgs.body).not.toHaveProperty('storage');
+      expect(callArgs.body).toHaveProperty('vcpu', 4);
     });
   });
 

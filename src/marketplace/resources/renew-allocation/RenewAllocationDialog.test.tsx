@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceResourcesRenew,
@@ -6,7 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
-import { createTestWrapper } from '@/test/harness';
+import { renderWithProviders } from '@/test/harness';
 
 import { RenewAllocationDialog } from './RenewAllocationDialog';
 
@@ -19,8 +19,6 @@ vi.mock('@/wizard', () => ({
     </div>
   ),
 }));
-
-const createWrapper = () => createTestWrapper().wrapper;
 
 describe('RenewAllocationDialog', () => {
   const mockRefetch = vi.fn();
@@ -41,18 +39,16 @@ describe('RenewAllocationDialog', () => {
   });
 
   const renderDialog = (props) =>
-    render(<RenewAllocationDialog resolve={props} />, {
-      wrapper: createWrapper(),
-    });
+    renderWithProviders(<RenewAllocationDialog resolve={props} />);
 
   it('renders and submits single resource renewal', async () => {
     vi.mocked(marketplaceResourcesRenew).mockResolvedValue({} as any);
 
     renderDialog({ resource, refetch: mockRefetch });
 
-    await waitFor(() =>
-      expect(screen.getByText('Renew allocation for Resource 1')).toBeDefined(),
-    );
+    expect(
+      await screen.findByText('Renew allocation for Resource 1'),
+    ).toBeDefined();
 
     fireEvent.click(screen.getByText('Submit'));
 
@@ -84,10 +80,9 @@ describe('RenewAllocationDialog', () => {
 
     renderDialog({ resources, refetch: mockRefetch });
 
-    await waitFor(() =>
-      expect(screen.getByText('Renew selected allocations (2)')).toBeDefined(),
-    );
-
+    expect(
+      await screen.findByText('Renew selected allocations (2)'),
+    ).toBeDefined();
     fireEvent.click(screen.getByText('Submit'));
 
     await waitFor(() => {

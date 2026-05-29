@@ -13,62 +13,6 @@ import { useCustomer } from '@/workspace/hooks';
 
 import { EditUserDialog } from './EditUserDialog';
 
-// Mock table constants
-vi.mock('@/table/constants', () => ({
-  DASH_ESCAPE_CODE: '—',
-}));
-
-// Mock permissions utils
-vi.mock('@/permissions/utils', () => ({
-  getCustomerRoles: () => [
-    {
-      name: 'owner',
-      description: 'Owner',
-      content_type: 'customer',
-    },
-    {
-      name: 'manager',
-      description: 'Manager',
-      content_type: 'customer',
-    },
-  ],
-  getRoles: (types) =>
-    types.flatMap((type) => {
-      if (type === 'customer') {
-        return [
-          {
-            name: 'owner',
-            description: 'Owner',
-            content_type: 'customer',
-          },
-          {
-            name: 'manager',
-            description: 'Manager',
-            content_type: 'customer',
-          },
-        ];
-      }
-      return [
-        {
-          name: `${type}_role`,
-          description: `${type} role`,
-          content_type: type,
-        },
-      ];
-    }),
-}));
-
-// Mock DateField to avoid flatpickr/language issues
-vi.mock('@/form/DateField', () => ({
-  DateField: ({ input }) => (
-    <input
-      type="date"
-      value={input.value || ''}
-      onChange={(e) => input.onChange(e.target.value)}
-    />
-  ),
-}));
-
 const mockCustomerUser = {
   uuid: 'user-uuid',
   full_name: 'Jane Smith',

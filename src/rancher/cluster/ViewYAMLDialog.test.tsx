@@ -1,7 +1,6 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { translate } from '@/i18n';
 import { renderWithProviders } from '@/test/harness';
 
 import { ViewYAMLDialog } from './ViewYAMLDialog';
@@ -48,9 +47,7 @@ describe('ViewYAMLDialog', () => {
     await waitFor(() => {
       expect(screen.getByTestId('monaco-editor')).toHaveValue('key: value');
     });
-    expect(
-      screen.getByText(translate('Copy to clipboard')),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Copy to clipboard')).toBeInTheDocument();
   });
 
   it('renders error state on fetch failure', async () => {
@@ -66,11 +63,9 @@ describe('ViewYAMLDialog', () => {
     );
 
     await waitFor(() => {
-      expect(
-        screen.getByText(translate('Unable to load data.')),
-      ).toBeInTheDocument();
+      expect(screen.getByText('Unable to load data.')).toBeInTheDocument();
     });
-    expect(screen.getByText(translate('Reload'))).toBeInTheDocument();
+    expect(screen.getByText('Reload')).toBeInTheDocument();
   });
 
   it('submits updated YAML', async () => {
@@ -92,7 +87,7 @@ describe('ViewYAMLDialog', () => {
     const editor = screen.getByTestId('monaco-editor');
     fireEvent.change(editor, { target: { value: 'key: updated' } });
 
-    const submitButton = screen.getByText(translate('Submit'));
+    const submitButton = screen.getByText('Submit');
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -116,12 +111,12 @@ describe('ViewYAMLDialog', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(translate('Show diff'))).toBeInTheDocument();
+      expect(screen.getByText('Show diff')).toBeInTheDocument();
     });
 
-    const toggleButton = screen.getByText(translate('Show diff'));
+    const toggleButton = screen.getByText('Show diff');
     fireEvent.click(toggleButton);
 
-    expect(screen.getByText(translate('Hide diff'))).toBeInTheDocument();
+    expect(screen.getByText('Hide diff')).toBeInTheDocument();
   });
 });

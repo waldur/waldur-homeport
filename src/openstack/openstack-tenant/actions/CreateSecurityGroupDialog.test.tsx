@@ -44,9 +44,7 @@ describe('CreateSecurityGroupDialog', () => {
     vi.mocked(openstackTenantsCreateSecurityGroup).mockResolvedValue({} as any);
     renderDialog();
 
-    await waitFor(() =>
-      expect(screen.getByLabelText('Name')).toBeInTheDocument(),
-    );
+    expect(await screen.findByLabelText('Name')).toBeInTheDocument();
 
     await user.type(screen.getByLabelText('Name'), 'TCP');
     await user.type(
@@ -86,9 +84,7 @@ describe('CreateSecurityGroupDialog', () => {
     vi.mocked(openstackTenantsCreateSecurityGroup).mockResolvedValue({} as any);
     renderDialog();
 
-    await waitFor(() =>
-      expect(screen.getByLabelText('Name')).toBeInTheDocument(),
-    );
+    expect(await screen.findByLabelText('Name')).toBeInTheDocument();
 
     await user.type(screen.getByLabelText('Name'), 'Empty');
     await user.type(

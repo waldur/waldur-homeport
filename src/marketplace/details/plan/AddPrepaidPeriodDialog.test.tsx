@@ -10,21 +10,6 @@ import { renderWithProviders } from '@/test/harness';
 import { AddPrepaidPeriodDialog } from './AddPrepaidPeriodDialog';
 import { PrepaidConstraints } from './prepaidConstraints';
 
-// Mock child components to isolate our component's logic
-vi.mock('@/form/DateField', () => ({
-  // Render props as data-attributes so we can assert them
-  DateField: (props) => (
-    <input
-      type="date"
-      data-testid="date-field"
-      data-mindate={props.minDate}
-      data-maxdate={props.maxDate}
-      value={props.input.value}
-      onChange={(e) => props.input.onChange(e.target.value)}
-    />
-  ),
-}));
-
 // Helper to create fixtures
 const createFixtures = () => {
   const constraints: PrepaidConstraints = {

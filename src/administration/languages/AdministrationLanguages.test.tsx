@@ -7,20 +7,6 @@ import { ENV } from '@/core/config';
 
 import { AdministrationLanguages } from './AdministrationLanguages';
 
-// Mock dependencies
-ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES = ['en', 'et'];
-ENV.defaultLanguage = 'en';
-ENV.languageChoices = [
-  { code: 'en', label: 'English' },
-  { code: 'et', label: 'Estonian' },
-];
-
-vi.mock('@/i18n/useLanguageSelector', () => ({
-  useLanguageSelector: () => ({
-    currentLanguage: { code: 'en' },
-  }),
-}));
-
 describe('AdministrationLanguages', () => {
   beforeEach(() => {
     ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES = ['en', 'et'];

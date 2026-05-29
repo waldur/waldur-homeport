@@ -1,5 +1,5 @@
-import { cleanup, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   createMockTableContext,
@@ -7,10 +7,6 @@ import {
 } from '../../test-utils';
 
 import { TableView } from './TableView';
-
-afterEach(() => {
-  cleanup();
-});
 
 describe('TableView', () => {
   describe('table structure', () => {

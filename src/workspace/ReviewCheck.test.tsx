@@ -1,13 +1,13 @@
-/* eslint-disable import/order */
 import { renderHook } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  projectPermissionsReviewsList,
   customerPermissionsReviewsList,
+  projectPermissionsReviewsList,
 } from 'waldur-js-client';
+
 import { useModal } from '@/modal/actions';
-import { useUser, useCustomer, useProject } from '@/workspace/hooks';
+import { PermissionEnum } from '@/permissions/enums';
+import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 const mockIsFeatureVisible = vi.fn();
 const mockHasPermission = vi.fn();
@@ -19,16 +19,6 @@ vi.mock('@/features/connect', () => ({
 vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: (...args) => mockHasPermission(...args),
 }));
-
-vi.mock('@/core/lazyComponent', () => ({
-  lazyComponent: (fn) => fn,
-}));
-
-vi.mock('@/core/PendingMembershipReviewDialog', () => ({
-  PendingMembershipReviewDialog: 'PendingMembershipReviewDialog',
-}));
-
-import { PermissionEnum } from '@/permissions/enums';
 
 import { useReviewCheck } from './ReviewCheck';
 

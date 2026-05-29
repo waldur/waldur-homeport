@@ -1,10 +1,4 @@
-import {
-  cleanup,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
 import { noop } from 'lodash-es';
@@ -69,9 +63,12 @@ const getSubmitButton = () =>
 const selectMethod = async (methodLabel: string) => {
   const placeholder = screen.getByText('Select a verification method');
   fireEvent.mouseDown(placeholder);
+  const option = await screen.findByText(methodLabel);
+  fireEvent.click(option);
   await waitFor(() => {
-    const option = screen.getByText(methodLabel);
-    fireEvent.click(option);
+    expect(
+      screen.queryByText('Loading required fields...'),
+    ).not.toBeInTheDocument();
   });
 };
 
@@ -108,7 +105,6 @@ describe('OrganizationCreatePage', () => {
   afterAll(() => process.off('unhandledRejection', noop));
 
   beforeEach(() => {
-    cleanup();
     vi.clearAllMocks();
     vi.mocked(mockOnBefore).mockReturnValue(vi.fn());
 

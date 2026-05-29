@@ -6,28 +6,6 @@ import { renderWithProviders } from '@/test/harness';
 
 import { SetRoutesDialog } from './SetRoutesDialog';
 
-// Mock dependencies
-
-vi.mock('@/modal/ModalDialog', () => ({
-  ModalDialog: ({ title, children, footer }: any) => (
-    <div data-testid="modal-dialog">
-      <h1>{title}</h1>
-      <div data-testid="modal-body">{children}</div>
-      <div data-testid="modal-footer">{footer}</div>
-    </div>
-  ),
-}));
-
-vi.mock('@/form', () => ({
-  FormFooter: ({ submitLabel, submitting, invalid }: any) => (
-    <button type="submit" disabled={submitting || invalid}>
-      {submitLabel}
-    </button>
-  ),
-  StringField: ({ input }: any) => <input {...input} />,
-  FieldError: ({ error }: any) => (error ? <span>{error}</span> : null),
-}));
-
 const mockRouter = {
   uuid: 'router-uuid-123',
   fixed_ips: [],
