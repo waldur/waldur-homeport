@@ -128,13 +128,9 @@ export const ProjectCreateDialog = ({
       // Project metadata
       if (!response.error && Object.keys(formData.metadata || {}).length) {
         const metadataBody: AnswerSubmitRequest[] = [];
-        let hasFileAnswer;
         Object.keys(formData.metadata).forEach((key) => {
           const answer = formData.metadata[key];
           const question = formData.questions.find((q) => q.uuid === key);
-          if (answer && question.question_type === 'file') {
-            hasFileAnswer = true;
-          }
           metadataBody.push({
             question_uuid: question.uuid,
             answer_data: answer ?? null,
@@ -144,7 +140,6 @@ export const ProjectCreateDialog = ({
           await projectsSubmitAnswers({
             path: { uuid: response.data.uuid },
             body: metadataBody,
-            ...(hasFileAnswer ? formDataOptions : {}),
           });
           showSuccess(translate('Project metadata submitted.'));
         } catch (err) {

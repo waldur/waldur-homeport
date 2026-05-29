@@ -40,6 +40,10 @@ export const QuestionEditAction: FC<QuestionEditActionProps> = ({ row }) => (
       options: r.question_options.map((opt) => opt.label),
       min_value: r.min_value,
       max_value: r.max_value,
+      allowed_file_types: r.allowed_file_types ?? [],
+      allowed_mime_types: r.allowed_mime_types ?? [],
+      max_file_size_mb: r.max_file_size_mb ?? undefined,
+      max_files_count: r.max_files_count ?? undefined,
       dependency_logic_operator: r.dependency_logic_operator,
     })}
     size="lg"

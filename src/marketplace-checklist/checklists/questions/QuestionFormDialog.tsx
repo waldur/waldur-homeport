@@ -171,6 +171,20 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
           formData.rich_text_toolbar_level ?? 'standard';
       }
 
+      if (['file', 'multiple_files'].includes(formData.question_type)) {
+        body.allowed_file_types = formData.allowed_file_types ?? [];
+        body.allowed_mime_types = formData.allowed_mime_types ?? [];
+        body.max_file_size_mb = formData.max_file_size_mb
+          ? Number(formData.max_file_size_mb)
+          : null;
+        // max_files_count is only valid for multiple_files (backend rejects it for file).
+        body.max_files_count =
+          formData.question_type === 'multiple_files' &&
+          formData.max_files_count
+            ? Number(formData.max_files_count)
+            : null;
+      }
+
       if (formData.conditions?.length) {
         body.dependency_logic_operator = formData.dependency_logic_operator;
       }

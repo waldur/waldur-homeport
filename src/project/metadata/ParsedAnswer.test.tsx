@@ -1,6 +1,10 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+
+vi.mock('@/core/config', () => ({
+  ENV: { apiEndpoint: 'http://localhost:8000/' },
+}));
 
 import { ParsedAnswer } from './ParsedAnswer';
 
@@ -49,6 +53,45 @@ describe('ParsedAnswer', () => {
 
       expect(screen.getByText(/document\.pdf/)).toBeInTheDocument();
       expect(screen.getByText(/1 MB/)).toBeInTheDocument();
+    });
+
+    it('renders attachment count button for multiple files answer', () => {
+      const question = {
+        uuid: 'q1',
+        question_type: 'multiple_files',
+        description: 'Upload documents',
+        question_options: [],
+      };
+      const answer = {
+        answer_data: [
+          { name: 'first.pdf', stored_file_id: 'file-1' },
+          { name: 'second.png', stored_file_id: 'file-2' },
+        ],
+      };
+
+      render(
+        <ParsedAnswer question={question as any} answer={answer as any} />,
+      );
+
+      expect(screen.getByText('2 attachments')).toBeInTheDocument();
+    });
+
+    it('renders single file link for multiple files answer with one file', () => {
+      const question = {
+        uuid: 'q1',
+        question_type: 'multiple_files',
+        description: 'Upload documents',
+        question_options: [],
+      };
+      const answer = {
+        answer_data: [{ name: 'only.pdf', stored_file_id: 'file-1' }],
+      };
+
+      render(
+        <ParsedAnswer question={question as any} answer={answer as any} />,
+      );
+
+      expect(screen.getByText(/only\.pdf/)).toBeInTheDocument();
     });
   });
 

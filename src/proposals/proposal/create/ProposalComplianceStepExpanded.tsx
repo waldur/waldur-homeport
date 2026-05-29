@@ -11,6 +11,7 @@ import { StringField, TextField, NumberField, SelectField } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { ChecklistFileUpload } from '@/marketplace-checklist/ChecklistFileUpload';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import {
   DependencyInfo,
@@ -19,7 +20,6 @@ import {
 import { useNotify } from '@/store/notify';
 import { VStepperFormStepProps } from '@/wizard';
 
-import { ComplianceFileUpload } from './ComplianceFileUpload';
 import { QuestionDependencyHint } from './QuestionDependencyHint';
 import { StepHeaderContent } from './StepHeaderContent';
 
@@ -264,7 +264,7 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
               <Field
                 name={fieldName}
                 render={({ input, meta }) => (
-                  <ComplianceFileUpload
+                  <ChecklistFileUpload
                     input={input}
                     meta={meta}
                     question={question}

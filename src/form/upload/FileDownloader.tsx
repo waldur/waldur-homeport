@@ -6,6 +6,18 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
+export const downloadFile = async (url: string, name: string) => {
+  const blob = await get<Blob>(url);
+  const href = window.URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.setAttribute('download', name);
+  link.href = href;
+  document.body.appendChild(link);
+  link.click();
+  link.parentNode?.removeChild(link);
+  window.URL.revokeObjectURL(href);
+};
+
 export const FileDownloader = ({ url, name, size = 20 }) => {
   const { showErrorResponse } = useNotify();
   const [loading, setLoading] = useState(false);

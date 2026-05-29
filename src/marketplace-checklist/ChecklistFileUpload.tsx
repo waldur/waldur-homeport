@@ -1,5 +1,6 @@
 import { FileIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo, useState } from 'react';
+import { FileRejection } from 'react-dropzone';
 import { FieldInputProps, FieldMetaState } from 'react-final-form';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -26,17 +27,20 @@ interface ProcessedFileData {
 // Combined type for form value
 type FileAnswerData = FileUploadData | ProcessedFileData;
 
-interface ComplianceFileUploadProps {
+interface ChecklistFileUploadProps {
   input: FieldInputProps<FileAnswerData | FileAnswerData[] | null>;
-  meta: FieldMetaState<any>;
+  meta?: FieldMetaState<any>;
+  // Field types are typed as `unknown` on the generated SDK models, so accept
+  // them loosely here and cast to concrete types where used.
   question: {
-    uuid: string;
-    question_type: string;
-    allowed_file_types?: string[];
-    allowed_mime_types?: string[];
-    max_file_size_mb?: number;
-    max_files_count?: number;
+    question_type?: string;
+    allowed_file_types?: unknown;
+    allowed_mime_types?: unknown;
+    max_file_size_mb?: number | null;
+    max_files_count?: number | null;
   };
+  /** Called with true when a file is rejected, false when accepted or error cleared. */
+  onRejectionChange?: (hasError: boolean) => void;
 }
 
 /**
@@ -115,8 +119,8 @@ const buildAcceptConfig = (
  */
 const buildUploadMessage = (
   fileTypes?: string[],
-  maxSizeMb?: number,
-  maxCount?: number,
+  maxSizeMb?: number | null,
+  maxCount?: number | null,
   isMultiple?: boolean,
 ): string => {
   const parts: string[] = [];
@@ -169,12 +173,16 @@ const getCurrentFiles = (
   return [];
 };
 
-export const ComplianceFileUpload: FC<ComplianceFileUploadProps> = ({
+export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
   input,
   question,
+  onRejectionChange,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
+  const [rejectionError, setRejectionError] = useState<string | null>(null);
   const isMultiple = question.question_type === 'multiple_files';
+  const allowedFileTypes = question.allowed_file_types as string[] | undefined;
+  const allowedMimeTypes = question.allowed_mime_types as string[] | undefined;
 
   const currentFiles = useMemo(
     () => getCurrentFiles(input.value),
@@ -182,24 +190,20 @@ export const ComplianceFileUpload: FC<ComplianceFileUploadProps> = ({
   );
 
   const acceptConfig = useMemo(
-    () =>
-      buildAcceptConfig(
-        question.allowed_file_types,
-        question.allowed_mime_types,
-      ),
-    [question.allowed_file_types, question.allowed_mime_types],
+    () => buildAcceptConfig(allowedFileTypes, allowedMimeTypes),
+    [allowedFileTypes, allowedMimeTypes],
   );
 
   const uploadMessage = useMemo(
     () =>
       buildUploadMessage(
-        question.allowed_file_types,
+        allowedFileTypes,
         question.max_file_size_mb,
         question.max_files_count,
         isMultiple,
       ),
     [
-      question.allowed_file_types,
+      allowedFileTypes,
       question.max_file_size_mb,
       question.max_files_count,
       isMultiple,
@@ -210,9 +214,36 @@ export const ComplianceFileUpload: FC<ComplianceFileUploadProps> = ({
     ? question.max_file_size_mb * 1024 * 1024
     : undefined;
 
+  const handleDropRejected = useCallback(
+    (rejections: FileRejection[]) => {
+      const hasFileTooLarge = rejections.some((r) =>
+        r.errors.some((e) => e.code === 'file-too-large'),
+      );
+      const hasInvalidType = rejections.some((r) =>
+        r.errors.some((e) => e.code === 'file-invalid-type'),
+      );
+      let errorMsg: string;
+      if (hasFileTooLarge && question.max_file_size_mb) {
+        errorMsg = translate(
+          'File is too large. Maximum allowed size is {size} MB.',
+          { size: question.max_file_size_mb },
+        );
+      } else if (hasInvalidType) {
+        errorMsg = translate('File type is not allowed.');
+      } else {
+        errorMsg = translate('File could not be uploaded.');
+      }
+      setRejectionError(errorMsg);
+      onRejectionChange?.(true);
+    },
+    [question.max_file_size_mb, onRejectionChange],
+  );
+
   const handleDrop = useCallback(
     async (newFiles: File[]) => {
       if (newFiles.length === 0) return;
+      setRejectionError(null);
+      onRejectionChange?.(false);
 
       setIsProcessing(true);
       try {
@@ -228,10 +259,19 @@ export const ComplianceFileUpload: FC<ComplianceFileUploadProps> = ({
           // For multiple files, append to existing
           const combined = [...currentFiles, ...convertedFiles];
           // Respect max files count if set
-          const limited = question.max_files_count
-            ? combined.slice(0, question.max_files_count)
-            : combined;
-          input.onChange(limited);
+          if (
+            question.max_files_count &&
+            combined.length > question.max_files_count
+          ) {
+            setRejectionError(
+              translate('Maximum number of files is {count}.', {
+                count: question.max_files_count,
+              }),
+            );
+            onRejectionChange?.(true);
+            return;
+          }
+          input.onChange(combined);
         } else {
           // For single file, store as single object (not array)
           input.onChange(convertedFiles[0]);
@@ -259,12 +299,16 @@ export const ComplianceFileUpload: FC<ComplianceFileUploadProps> = ({
     <>
       <UploadContainer
         onDrop={handleDrop}
+        onDropRejected={handleDropRejected}
         message={uploadMessage}
         multiple={isMultiple}
         maxSize={maxSizeBytes}
         accept={acceptConfig}
         disabled={isProcessing}
       />
+      {rejectionError && (
+        <div className="text-danger fs-7 mt-1">{rejectionError}</div>
+      )}
 
       {isProcessing && (
         <div className="d-flex align-items-center gap-2 mt-2 text-muted">

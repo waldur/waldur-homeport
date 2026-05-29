@@ -1,9 +1,8 @@
 import { FORM_ERROR } from 'final-form';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Form } from 'react-final-form';
 import { Answer, projectsSubmitAnswers, QuestionAdmin } from 'waldur-js-client';
 
-import { formDataOptions } from '@/core/api';
 import { FieldError, SubmitButton } from '@/form';
 import { FormFieldError } from '@/form/FormFieldError';
 import { translate } from '@/i18n';
@@ -30,6 +29,7 @@ interface AnswerFormDialogProps {
 export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
+  const [hasFileError, setHasFileError] = useState(false);
 
   const question = resolve.question;
 
@@ -37,6 +37,8 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
     const answer = formData.answer_data;
 
     try {
+      // File answers are sent as base64-encoded JSON ({ name, content }), so the
+      // request stays a regular JSON payload for every question type.
       await projectsSubmitAnswers({
         path: { uuid: resolve.projectUuid },
         body: [
@@ -45,7 +47,6 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
             answer_data: answer ?? null,
           },
         ],
-        ...(question.question_type === 'file' ? formDataOptions : {}),
       });
       if (resolve.answer?.uuid) {
         showSuccess(translate('Answer submitted.'));
@@ -84,7 +85,9 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
               <>
                 <CloseDialogButton className="min-w-125px" />
                 <SubmitButton
-                  disabled={invalid && !modifiedSinceLastSubmit}
+                  disabled={
+                    (invalid && !modifiedSinceLastSubmit) || hasFileError
+                  }
                   submitting={submitting}
                   label={translate('Save')}
                   className="btn btn-primary min-w-125px"
@@ -97,7 +100,11 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
               required={question.required}
               spaceless
             >
-              <QuestionAnswerField name="answer_data" question={question} />
+              <QuestionAnswerField
+                name="answer_data"
+                question={question}
+                onRejectionChange={setHasFileError}
+              />
               <FormFieldError name="answer_data" />
             </FormGroup>
 
