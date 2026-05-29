@@ -23,7 +23,7 @@ export const EditGettingStartedDialog: FC<{
         path: { uuid: props.resolve.offering.uuid },
         body: {
           ...pickOverview(props.resolve.offering),
-          getting_started: formData.template,
+          getting_started: formData.template ?? '',
         },
       }),
     successMessage: translate('Offering has been updated successfully.'),

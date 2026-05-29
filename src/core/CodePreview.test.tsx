@@ -22,4 +22,12 @@ describe('CodePreview', () => {
 
     expect(screen.getByText('ssh test_user@example.com')).toBeInTheDocument();
   });
+
+  it('renders nothing without throwing when template is undefined', () => {
+    const context = { name: 'World' };
+
+    expect(() =>
+      render(<CodePreview template={undefined} context={context} />),
+    ).not.toThrow();
+  });
 });
