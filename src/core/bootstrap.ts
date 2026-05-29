@@ -42,21 +42,21 @@ export async function loadConfig() {
       FEATURES,
     });
   } catch (error) {
+    let message: string;
     if (error instanceof TypeError) {
-      throw new Error(
-        `Unable to fetch server configuration. Please check if you can connect to ${ENV.apiEndpoint} from your browser and contact support if the error continues.`,
-      );
+      message = `Unable to fetch server configuration. Please check if you can connect to ${ENV.apiEndpoint} from your browser and contact support if the error continues.`;
     } else if (error instanceof SyntaxError) {
-      throw new Error(
-        `Unable to fetch server configuration. Server does not return valid JSON.`,
-      );
-    } else if (error.response?.status >= 400) {
-      throw new Error(
-        `Unable to fetch server configuration. Error message: ${error.statusText}`,
-      );
+      message = `Unable to fetch server configuration. Server does not return valid JSON.`;
+    } else if (error?.response?.status >= 400) {
+      message = `Unable to fetch server configuration. Error message: ${error.statusText}`;
     } else {
-      throw new Error(error);
+      message = `Unable to fetch server configuration.`;
     }
+    // Preserve the underlying error via `cause` so it remains visible in
+    // devtools and Sentry alongside the user-facing message.
+    const wrapped = new Error(message);
+    (wrapped as Error & { cause?: unknown }).cause = error;
+    throw wrapped;
   }
   afterBootstrap();
   return true;
