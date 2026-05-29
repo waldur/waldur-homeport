@@ -25,13 +25,19 @@ const getAuthPrefix = (): 'Token' | 'Bearer' => {
   if (method === 'local') {
     return 'Token';
   }
-  if (!ENV.plugins.WALDUR_CORE.OIDC_ACCESS_TOKEN_ENABLED) {
+  // ENV.plugins is undefined until the bootstrap `configurationRetrieve`
+  // request resolves. That request itself passes through the auth interceptor,
+  // so for an OIDC session whose token is already in storage (e.g. right after
+  // the myAccessID redirect, on page reload) this runs before config is loaded.
+  // Default to the non-Bearer prefix until the flag is known to avoid crashing
+  // the whole app bootstrap.
+  if (!ENV.plugins?.WALDUR_CORE?.OIDC_ACCESS_TOKEN_ENABLED) {
     return 'Token';
   }
   return 'Bearer';
 };
 
-const getAuthHeader = () => {
+export const getAuthHeader = () => {
   const token = AuthTokenStorage.get();
   const prefix = getAuthPrefix();
   if (token) {
@@ -81,11 +87,12 @@ export function initApiClient() {
 // scheme it prepends "Bearer ", turning our "Token <key>" value into the
 // malformed "Bearer Token <key>" (rejected by DRF). Sending the header raw
 // preserves the correct "Token <key>" / "Bearer <oidc-token>" value.
-client.interceptors.request.use((request) => {
-  // Skip when there is no token: this covers the pre-login bootstrap request
-  // (`configurationRetrieve`), which runs before ENV is populated — calling
-  // getAuthHeader() there would read ENV.plugins and throw.
-  if (!AuthTokenStorage.get()) {
+// ENV.plugins is populated by configurationRetrieve; until that resolves,
+// an OIDC token may already be in storage (e.g. on page reload after sign-in)
+// but the prefix flag is not yet known. Skip header attachment in that
+// window so the bootstrap request goes out unauthenticated.
+export const attachAuthHeader = (request: Request) => {
+  if (!ENV.plugins || !AuthTokenStorage.get()) {
     return request;
   }
   const authHeader = getAuthHeader();
@@ -93,7 +100,9 @@ client.interceptors.request.use((request) => {
     request.headers.set('Authorization', authHeader);
   }
   return request;
-});
+};
+
+client.interceptors.request.use(attachAuthHeader);
 
 client.interceptors.error.use((error: Error, response) => {
   return {
