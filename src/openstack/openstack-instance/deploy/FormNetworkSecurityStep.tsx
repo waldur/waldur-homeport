@@ -1,4 +1,9 @@
-import { PlusCircleIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
+import {
+  PlusCircleIcon,
+  QuestionIcon,
+  TrashIcon,
+  WarningCircleIcon,
+} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Form, FormLabel, Row } from 'react-bootstrap';
@@ -30,6 +35,7 @@ import { getDefaultFloatingIps, formatSubnet } from '../utils';
 
 import { FormSecurityGroupsField } from './FormSecurityGroupsField';
 import { FormSSHPublicKeysField } from './FormSSHPublicKeysField';
+import { useQuotasData } from './utils';
 
 const CustomIpField = ({
   parentName,
@@ -174,6 +180,7 @@ const renderNetworkRows = ({
   subnets,
   floatingIps,
   hasCustomIp,
+  fipQuotaExhausted,
 }: any) => {
   const availableNetworkItemsFilter = useCallback(
     (itemType) => (item) => {
@@ -201,11 +208,11 @@ const renderNetworkRows = ({
 
   const freeFloatingIps = useMemo(
     () => [
-      ...getDefaultFloatingIps(),
+      ...getDefaultFloatingIps({ fipQuotaExhausted }),
       ...floatingIps.filter(availableNetworkItemsFilter('floatingIp')),
     ],
 
-    [floatingIps, availableNetworkItemsFilter],
+    [floatingIps, availableNetworkItemsFilter, fipQuotaExhausted],
   );
 
   const getDefaultValue = useCallback(
@@ -267,12 +274,33 @@ const renderNetworkRows = ({
               <Col sm>
                 <Field
                   name={`${network}.floatingIp`}
-                  label={translate('Floating IP')}
+                  label={
+                    fipQuotaExhausted ? (
+                      <>
+                        {translate('Floating IP')}{' '}
+                        <Tip
+                          id={`fip-quota-tip-${index}`}
+                          label={translate(
+                            'Floating IP quota is exhausted; auto-assign is unavailable. Ask the administrator to raise the limit.',
+                          )}
+                        >
+                          <WarningCircleIcon
+                            weight="bold"
+                            size={14}
+                            className="text-warning align-text-bottom ms-1"
+                          />
+                        </Tip>
+                      </>
+                    ) : (
+                      translate('Floating IP')
+                    )
+                  }
                   component={FormGroup}
                   options={freeFloatingIps}
                   validate={required}
                   required={true}
                   isDisabled={!fields.value[index]?.subnet?.uuid}
+                  isOptionDisabled={(option) => Boolean(option.isDisabled)}
                   getOptionValue={(option) => option.url}
                   getOptionLabel={(option) => option.address}
                   noUpdateOnBlur
@@ -319,6 +347,14 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
   const [customIpEnabled, setCustomIpEnabled] = useToggle(false);
   const [portSecurityEnabled, setPortSecurityEnabled] = useToggle(true);
   const form = useForm();
+
+  const { fipQuota } = useQuotasData(props.offering);
+  const fipQuotaExhausted = Boolean(
+    fipQuota &&
+    typeof fipQuota.limit === 'number' &&
+    fipQuota.limit !== -1 &&
+    (fipQuota.usage || 0) >= fipQuota.limit,
+  );
 
   useEffect(() => {
     form.change('attributes.port_security_enabled', portSecurityEnabled);
@@ -378,6 +414,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           name="attributes.networks"
           component={renderNetworkRows}
           hasCustomIp={customIpEnabled}
+          fipQuotaExhausted={fipQuotaExhausted}
           {...data}
         />
       </Form.Group>

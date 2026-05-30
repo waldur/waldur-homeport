@@ -14,10 +14,11 @@ import React, {
   useMemo,
 } from 'react';
 import { FormCheck } from 'react-bootstrap';
-import { Field } from 'react-final-form';
+import { Field, useFormState } from 'react-final-form';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Tip } from '@/core/Tooltip';
+import { FieldErrorMessage } from '@/form/FieldError';
 import { translate } from '@/i18n';
 import { MenuComponent } from '@/metronic/components';
 
@@ -44,6 +45,7 @@ interface TableBodyProps extends Pick<
   | 'fieldType'
   | 'fieldName'
   | 'validate'
+  | 'rowValidate'
   | 'columnPositions'
   | 'hasOptionalColumns'
   | 'isRowExpandable'
@@ -333,6 +335,7 @@ interface TableRowProps {
   onRowClick: (row, index: number) => void;
   onChangeField: (row, input) => void;
   fieldProps?: { input; meta };
+  rowError?: string | string[];
   isRowExpandable?: (row: any) => boolean;
 }
 
@@ -358,6 +361,7 @@ const TableRow = memo<TableRowProps>(
     onRowClick,
     onChangeField,
     fieldProps,
+    rowError,
     isRowExpandable,
   }) => {
     const isRowSelected = useMemo(() => {
@@ -428,7 +432,16 @@ const TableRow = memo<TableRowProps>(
             <div>
               {fieldType && fieldProps ? (
                 <>
-                  {isChecked &&
+                  {rowError ? (
+                    <Tip
+                      label={<FieldErrorMessage error={rowError} />}
+                      id={`tableErrorTip-${rowIndex}`}
+                      className="error-mark"
+                    >
+                      <WarningCircleIcon weight="bold" size={16} />
+                    </Tip>
+                  ) : (
+                    isChecked &&
                     fieldProps.meta.touched &&
                     fieldProps.meta.error && (
                       <Tip
@@ -436,9 +449,10 @@ const TableRow = memo<TableRowProps>(
                         id={`tableErrorTip-${rowIndex}`}
                         className="error-mark"
                       >
-                        <WarningCircleIcon weight="bold" />
+                        <WarningCircleIcon weight="bold" size={16} />
                       </Tip>
-                    )}
+                    )
+                  )}
                   <FormCheck
                     name={fieldProps.input.name}
                     type={fieldType}
@@ -508,6 +522,37 @@ const TableRow = memo<TableRowProps>(
 
 TableRow.displayName = 'TableRow';
 
+// Renders a single TableRow inside a react-final-form Field's render prop.
+// useFormState is only legal here because this component is mounted inside
+// <Field>, which itself lives inside <Form>.
+interface FieldRowBodyProps {
+  row: any;
+  rowIndex: number;
+  input: any;
+  meta: any;
+  rowValidate?: TableProps['rowValidate'];
+  renderRow: (
+    row: any,
+    rowIndex: number,
+    fieldProps?: { input; meta } | null,
+    rowError?: string | string[],
+  ) => JSX.Element;
+}
+const FieldRowBody: FunctionComponent<FieldRowBodyProps> = ({
+  row,
+  rowIndex,
+  input,
+  meta,
+  rowValidate,
+  renderRow,
+}) => {
+  const { values } = useFormState({ subscription: { values: true } });
+  const rawError = rowValidate ? rowValidate(row, values) : undefined;
+  const rowError =
+    Array.isArray(rawError) && rawError.length === 0 ? undefined : rawError;
+  return renderRow(row, rowIndex, { input, meta }, rowError || undefined);
+};
+
 export const TableBody: FunctionComponent<TableBodyProps> = memo(
   ({
     rows,
@@ -526,6 +571,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     fieldType,
     fieldName,
     validate,
+    rowValidate,
     columnPositions,
     hasOptionalColumns,
     pinnedColumns = {},
@@ -574,7 +620,12 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     }, [rows?.length]);
 
     const renderRow = useCallback(
-      (row, rowIndex: number, fieldProps = null) => (
+      (
+        row,
+        rowIndex: number,
+        fieldProps = null,
+        rowError: string | string[] | undefined = undefined,
+      ) => (
         <TableRow
           row={row}
           rowIndex={rowIndex}
@@ -596,6 +647,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           onRowClick={onRowClick}
           onChangeField={onChangeField}
           fieldProps={fieldProps}
+          rowError={rowError}
           isRowExpandable={isRowExpandable}
         />
       ),
@@ -629,13 +681,18 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           return (
             <React.Fragment key={rowIndex}>
               {fieldType ? (
-                <Field
-                  name={fieldName}
-                  render={({ input, meta }) =>
-                    renderRow(row, rowIndex, { input, meta })
-                  }
-                  validate={validate as any}
-                />
+                <Field name={fieldName} validate={validate as any}>
+                  {({ input, meta }) => (
+                    <FieldRowBody
+                      row={row}
+                      rowIndex={rowIndex}
+                      input={input}
+                      meta={meta}
+                      rowValidate={rowValidate}
+                      renderRow={renderRow}
+                    />
+                  )}
+                </Field>
               ) : (
                 renderRow(row, rowIndex)
               )}

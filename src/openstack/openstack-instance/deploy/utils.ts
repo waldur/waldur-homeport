@@ -37,6 +37,9 @@ export const useQuotasData = (offering: PublicOfferingDetails) => {
       quotas,
       vcpuQuota: quotas.find((q) => q.name === 'vcpu'),
       ramQuota: quotas.find((q) => q.name === 'ram'),
+      storageQuota: quotas.find((q) => q.name === 'storage'),
+      instancesQuota: quotas.find((q) => q.name === 'instances'),
+      fipQuota: quotas.find((q) => q.name === 'floating_ip_count'),
     };
   }, [attributes, usages, limits]);
 };

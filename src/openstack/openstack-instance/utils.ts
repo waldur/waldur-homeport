@@ -142,6 +142,12 @@ export const formatAddressList = (row: OpenStackNestedPort) =>
     row.fixed_ips?.map((fip) => fip.ip_address).join(', ') || null,
   );
 
+const countAutoAssignFips = (attributes) => {
+  if (!attributes.networks || !Array.isArray(attributes.networks)) return 0;
+  return attributes.networks.filter((row) => row?.floatingIp?.url === 'true')
+    .length;
+};
+
 export const getQuotas = ({ attributes, usages, limits }) => {
   const quotas: Quota[] = [
     {
@@ -162,12 +168,24 @@ export const getQuotas = ({ attributes, usages, limits }) => {
       limit: limits.disk,
       required: getTotalStorage(attributes) || 0,
     },
+    {
+      name: 'instances',
+      usage: usages.instances,
+      limit: limits.instances,
+      required: 1,
+    },
+    {
+      name: 'floating_ip_count',
+      usage: usages.floating_ip_count,
+      limit: limits.floating_ip_count,
+      required: countAutoAssignFips(attributes),
+    },
     ...extendVolumeTypeQuotas(attributes, usages, limits),
   ];
   return quotas;
 };
 
-export const getDefaultFloatingIps = () =>
+export const getDefaultFloatingIps = (opts?: { fipQuotaExhausted?: boolean }) =>
   [
     {
       address: translate('Skip floating IP assignment'),
@@ -176,5 +194,13 @@ export const getDefaultFloatingIps = () =>
     {
       address: translate('Auto-assign floating IP'),
       url: 'true',
+      ...(opts?.fipQuotaExhausted
+        ? {
+            isDisabled: true,
+            disabledReason: translate(
+              'Floating IP quota is exhausted; ask the administrator to raise the limit',
+            ),
+          }
+        : {}),
     },
   ] as OpenStackFloatingIp[];
