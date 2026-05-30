@@ -1,9 +1,10 @@
 import { useCallback, useMemo } from 'react';
+import { useFormState } from 'react-final-form';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatFilesize } from '@/core/utils';
-import { composeValidators, required } from '@/core/validators';
+import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { DeployFormData } from '@/marketplace/common/types';
 import { Offering } from '@/marketplace/types';
@@ -61,7 +62,7 @@ export const FlavorTable = ({
       const errors = [];
 
       if (
-        formData.attributes?.image &&
+        formData?.attributes?.image &&
         flavorValidator({ image: formData.attributes?.image }, value)
       ) {
         errors.push(
@@ -78,6 +79,16 @@ export const FlavorTable = ({
       return errors.length > 0 ? errors : undefined;
     },
     [limit, vcpuQuota.usage, ramQuota.usage],
+  );
+
+  const { values: formValues } = useFormState<DeployFormData>({
+    subscription: { values: true },
+  });
+
+  const rowClass = useCallback(
+    ({ row }: { row: OpenStackFlavor }) =>
+      exceeds(row, formValues) ? 'text-muted' : '',
+    [exceeds, formValues],
   );
 
   return (
@@ -126,7 +137,9 @@ export const FlavorTable = ({
       hoverable
       fieldType="radio"
       fieldName={fieldName}
-      validate={composeValidators(required, exceeds)}
+      validate={required}
+      rowValidate={exceeds}
+      rowClass={rowClass}
       initialPageSize={PAGE_SIZE_FULL * 5}
     />
   );

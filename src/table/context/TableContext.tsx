@@ -106,6 +106,7 @@ interface TableDisplay {
   expandableRowClassName?: string;
   id?: string;
   rowClass?: (({ row }: { row: any }) => string) | string;
+  rowValidate?: TableProps['rowValidate'];
   gridSize?: TableProps['gridSize'];
   gridSpace?: number;
   gridFixedWidth?: boolean;

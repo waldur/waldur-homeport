@@ -7,7 +7,16 @@ import { CreatableSelectFieldProps } from './types';
 export const CreatableSelectField: FunctionComponent<
   CreatableSelectFieldProps
 > = (props) => {
-  const { name, simpleValue, options, ...rest } = props;
+  const {
+    name,
+    simpleValue,
+    options,
+    // FormGroup forwards its render-prop `input`/`meta` to children via
+    // cloneElement; strip them so they don't override Field's own values.
+    input: _droppedInput,
+    meta: _droppedMeta,
+    ...rest
+  } = props as any;
   const getOptionValue =
     props.getOptionValue || ((option: any) => option.value);
 
