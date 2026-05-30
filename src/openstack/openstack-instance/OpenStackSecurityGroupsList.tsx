@@ -42,14 +42,14 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
   const ports = useMemo(() => {
     if (!props.resourceScope?.ports) return [];
     return props.resourceScope.ports.map((port) =>
-      port.fixed_ips.map((fip) => fip.ip_address).join(', '),
+      (port.fixed_ips ?? []).map((fip) => fip.ip_address).join(', '),
     );
   }, [props.resourceScope]);
 
   const activePort = useMemo(() => {
     if (activeKey === 'resource') return null;
     const port = props.resourceScope.ports.find((p) =>
-      p.fixed_ips.some((fip) => activeKey.includes(fip.ip_address)),
+      (p.fixed_ips ?? []).some((fip) => activeKey.includes(fip.ip_address)),
     );
     return port;
   }, [activeKey, props.resourceScope]);

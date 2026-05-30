@@ -4,10 +4,14 @@ import { Field } from 'react-final-form';
 import { translate } from '@/i18n';
 
 import { FormField } from './FormField';
+import { isNumericProtocol } from './ProtocolField';
 import { Rule } from './types';
 
+const isPortRangeDisabled = (protocol: string) =>
+  !protocol || protocol === 'any' || isNumericProtocol(protocol);
+
 const getPortMax = (rule: Rule) => {
-  if (rule.protocol === 'any' || !rule.protocol) {
+  if (isPortRangeDisabled(rule.protocol)) {
     return -1;
   } else if (rule.protocol === 'icmp') {
     return 255;
@@ -61,7 +65,7 @@ export const PortRangeField: FC<PortRangeFieldProps> = ({
     component={component}
     parse={parsePortRange}
     format={formatPortRange}
-    disabled={protocol === 'any'}
+    disabled={isPortRangeDisabled(protocol)}
     placeholder={translate('All ports')}
     validate={(value) => {
       if (!value || (value.min === -1 && value.max === -1)) {
