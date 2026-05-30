@@ -71,7 +71,7 @@ export const SecurityGroupEditorDialog: FC<SecurityGroupEditorDialogProps> = ({
           ...rest,
           ethertype: ethertype,
           direction: direction,
-          protocol: protocol,
+          protocol: protocol || 'any',
           port_range: {
             min: from_port,
             max: to_port,
