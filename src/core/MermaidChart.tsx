@@ -100,6 +100,8 @@ const initMermaid = () => {
     startOnLoad: false,
     theme: 'base',
     securityLevel: 'strict',
+    maxTextSize: 250000,
+    maxEdges: 2000,
     themeVariables: {
       // Dark mode flag
       darkMode: isDarkMode,

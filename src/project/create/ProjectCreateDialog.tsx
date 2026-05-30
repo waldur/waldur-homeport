@@ -3,7 +3,7 @@ import { useRouter } from '@uirouter/react';
 import { useMemo, useState } from 'react';
 import {
   AnswerSubmitRequest,
-  KindEnum,
+  ProjectKindEnum,
   OecdFos2007CodeEnum,
   Project,
   projectCreditsCreate,
@@ -42,7 +42,7 @@ interface ProjectFormData {
   is_industry: boolean;
   image?: File | Blob;
   project_credit?: string;
-  kind?: KindEnum;
+  kind?: ProjectKindEnum;
   // Metadata section
   metadata?: Record<string, any>;
   questions?: QuestionAdmin[];

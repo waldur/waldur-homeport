@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import {
   InvoiceCostItem,
   invoiceItemsCostsList,
-  KindEnum,
+  ProjectKindEnum,
   marketplaceProjectEstimatedCostPoliciesList,
   marketplaceProjectOrderAutoApprovalsList,
   projectCreditsList,
@@ -197,17 +197,17 @@ export const useHasProjectPermission = (permission) => {
 };
 
 export const projectKindOptions = (): Partial<
-  Record<KindEnum, { value: KindEnum; label; color; icon }>
+  Record<ProjectKindEnum, { value: ProjectKindEnum; label; color; icon }>
 > => {
   const baseOptions = {
     default: {
-      value: 'default' as KindEnum,
+      value: 'default' as ProjectKindEnum,
       label: translate('Regular'),
       color: 'default',
       icon: null,
     },
     course: {
-      value: 'course' as KindEnum,
+      value: 'course' as ProjectKindEnum,
       label: translate('Course'),
       color: 'pink',
       icon: GraduationCapIcon,
@@ -218,7 +218,7 @@ export const projectKindOptions = (): Partial<
     return {
       ...baseOptions,
       public: {
-        value: 'public' as KindEnum,
+        value: 'public' as ProjectKindEnum,
         label: translate('Public'),
         color: 'blue',
         icon: GlobeSimpleIcon,
