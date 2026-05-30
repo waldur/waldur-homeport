@@ -105,24 +105,34 @@ const AllocationPoolsList: FunctionComponent<
       {fields.map((name, index) => (
         <div key={index} className="mb-3">
           <InputGroup>
-            <Field
-              name={`${name}.start`}
-              component="input"
-              type="text"
-              placeholder={translate('Start IP')}
-              className="form-control"
-              onChange={(e) => validateField(e.target.value, index, 'start')}
-            />
+            <Field name={`${name}.start`} type="text">
+              {({ input }) => (
+                <input
+                  {...input}
+                  placeholder={translate('Start IP')}
+                  className="form-control"
+                  onChange={(e) => {
+                    input.onChange(e);
+                    validateField(e.target.value, index, 'start');
+                  }}
+                />
+              )}
+            </Field>
 
             <InputGroup.Text>-</InputGroup.Text>
-            <Field
-              name={`${name}.end`}
-              component="input"
-              type="text"
-              placeholder={translate('End IP')}
-              className="form-control"
-              onChange={(e) => validateField(e.target.value, index, 'end')}
-            />
+            <Field name={`${name}.end`} type="text">
+              {({ input }) => (
+                <input
+                  {...input}
+                  placeholder={translate('End IP')}
+                  className="form-control"
+                  onChange={(e) => {
+                    input.onChange(e);
+                    validateField(e.target.value, index, 'end');
+                  }}
+                />
+              )}
+            </Field>
 
             <RemovalActionButton
               action={() => {
