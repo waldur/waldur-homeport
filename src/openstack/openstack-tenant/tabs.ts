@@ -124,6 +124,15 @@ export const OpenStackTenantTabConfiguration: ResourceTabsConfiguration = {
             ),
           ),
         },
+        {
+          key: 'topology',
+          title: translate('Topology'),
+          component: lazyComponent(() =>
+            import('./TenantTopology/TenantTopologyTab').then((module) => ({
+              default: module.TenantTopologyTab,
+            })),
+          ),
+        },
       ],
     },
     {
