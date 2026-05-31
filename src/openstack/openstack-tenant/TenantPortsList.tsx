@@ -12,7 +12,7 @@ import {
 
 import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
-import { ResourceRowActions } from '@/resource/actions/ResourceRowActions';
+import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
 import { ResourceSummary } from '@/resource/summary/ResourceSummary';
 import { setToggled } from '@/table/actions';
 import { createFetcher } from '@/table/api';
@@ -180,7 +180,11 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
         </>
       }
       rowActions={({ row }) => (
-        <ResourceRowActions resource={row} refetch={props.fetch} />
+        <ActionButtonResource
+          url={row.url}
+          refetch={props.fetch}
+          nestedResource
+        />
       )}
       hasQuery={true}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}

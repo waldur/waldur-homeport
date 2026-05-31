@@ -6,7 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { ResourceRowActions } from '@/resource/actions/ResourceRowActions';
+import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
 import { ResourceState } from '@/resource/state/ResourceState';
 import { ResourceSummary } from '@/resource/summary/ResourceSummary';
 import { createFetcher } from '@/table/api';
@@ -92,7 +92,11 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
         <CreateRouterAction resource={resourceScope} refetch={props.fetch} />
       }
       rowActions={({ row }) => (
-        <ResourceRowActions resource={row} refetch={props.fetch} />
+        <ActionButtonResource
+          url={row.url}
+          refetch={props.fetch}
+          nestedResource
+        />
       )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hasQuery={true}

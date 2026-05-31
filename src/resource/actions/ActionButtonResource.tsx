@@ -18,9 +18,18 @@ interface ActionButtonResourceProps {
   disabled?: boolean;
   refetch?(): void;
   extraActions?: ActionItemType[];
+  /**
+   * When true, only the resource-type-specific actions are shown — the
+   * marketplace-resource staff/customer actions (Change plan, Set slug,
+   * Unlink, Terminate, …) are suppressed even if the resource has a
+   * `marketplace_resource_uuid`. Use this for nested resources whose row
+   * actions should never include marketplace-wide operations: routers,
+   * networks, subnets, ports.
+   */
+  nestedResource?: boolean;
 }
 
-async function loadData(url: string) {
+async function loadData(url: string, nestedResource: boolean) {
   const resource = await get<{
     resource_type;
     marketplace_resource_uuid;
@@ -29,7 +38,7 @@ async function loadData(url: string) {
   let staffActions = [];
   let customerResourceActions = [];
   let marketplaceResource;
-  if (resource.marketplace_resource_uuid) {
+  if (!nestedResource && resource.marketplace_resource_uuid) {
     staffActions = StaffActions;
     customerResourceActions = CustomerResourceActions;
     marketplaceResource = await marketplaceResourcesRetrieve({
@@ -48,7 +57,7 @@ async function loadData(url: string) {
 export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
   props,
 ) => {
-  const { url } = props;
+  const { url, nestedResource = false } = props;
 
   const [open, onToggle] = useBoolean(false);
 
@@ -57,8 +66,8 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
     error,
     data: value,
   } = useQuery({
-    queryKey: ['ResourceActions', url],
-    queryFn: () => loadData(url),
+    queryKey: ['ResourceActions', url, nestedResource],
+    queryFn: () => loadData(url, nestedResource),
     enabled: open,
   });
 

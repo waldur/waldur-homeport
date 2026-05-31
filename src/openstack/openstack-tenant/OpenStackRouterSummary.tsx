@@ -5,29 +5,36 @@ import { translate } from '@/i18n';
 import { IPList } from '@/resource/IPList';
 import { Field, ResourceSummaryProps } from '@/resource/summary';
 
+import { EffectiveRoutesCard } from './EffectiveRoutesCard';
+
 export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
   props,
 ) => {
   const Component = props.formTableItem ? FormTable.Item : Field;
+
+  const fixedIps: string[] = props.resource.fixed_ips ?? [];
+  const externalFixedIps: string[] = (props.resource.external_fixed_ips ?? [])
+    .map((ip: { ip_address?: string }) => ip?.ip_address)
+    .filter(Boolean);
+  const externalIpSet = new Set(externalFixedIps);
+  const internalIps = fixedIps.filter((ip) => !externalIpSet.has(ip));
+  const mappedExternalIps: string[] = (
+    props.resource.offering_external_ips ?? []
+  ).filter((ip: string) => !externalIpSet.has(ip));
+
   return (
     <>
       <Component
-        label={translate('Fixed IPs')}
-        value={
-          props.resource.fixed_ips?.length ? (
-            <IPList value={props.resource.fixed_ips} />
-          ) : (
-            'N/A'
-          )
-        }
+        label={translate('Internal IPs')}
+        value={internalIps.length ? <IPList value={internalIps} /> : 'N/A'}
       />
 
-      {props.resource.offering_external_ips.length ? (
+      {props.resource.has_external_gateway ? (
         <Component
           label={translate('External IPs')}
           value={
-            props.resource.offering_external_ips?.length ? (
-              <IPList value={props.resource.offering_external_ips} />
+            externalFixedIps.length ? (
+              <IPList value={externalFixedIps} />
             ) : (
               'N/A'
             )
@@ -35,38 +42,16 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
         />
       ) : null}
 
-      {props.resource.has_external_gateway ? (
-        <>
-          <Component
-            label={translate('External gateway')}
-            value={
-              props.resource.external_network_name ||
-              props.resource.external_network_id
-            }
-          />
-          <Component
-            label={translate('Source NAT (SNAT)')}
-            value={
-              props.resource.enable_snat === false
-                ? translate('Disabled')
-                : translate('Enabled')
-            }
-          />
-          {Array.isArray(props.resource.external_fixed_ips) &&
-          props.resource.external_fixed_ips.length ? (
-            <Component
-              label={translate('Gateway fixed IPs')}
-              value={
-                <IPList
-                  value={props.resource.external_fixed_ips
-                    .map((ip) => ip?.ip_address)
-                    .filter(Boolean)}
-                />
-              }
-            />
-          ) : null}
-        </>
+      {mappedExternalIps.length ? (
+        <Component
+          label={translate('Mapped public IPs')}
+          value={<IPList value={mappedExternalIps} />}
+        />
       ) : null}
+
+      {props.formTableItem ? null : (
+        <EffectiveRoutesCard routerUuid={props.resource.uuid} />
+      )}
     </>
   );
 };
