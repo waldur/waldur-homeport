@@ -65,9 +65,10 @@ const PageHero = ({ call, refetch }) => (
 );
 
 const Body = ({ call, refetch, loading }) => {
-  // Archived calls are read-only. The follow-up workflow MR will extend this
-  // to also cover the 'active' state.
-  const isReadOnly = call.state === 'archived';
+  // Once the call is activated (or post-activation archived state), every
+  // configuration tab except Team becomes read-only. Rounds share a single
+  // call configuration, so further edits would silently drift across rounds.
+  const isReadOnly = call.state === 'active' || call.state === 'archived';
 
   const tabs = useMemo<PageBarTab[]>(
     () =>

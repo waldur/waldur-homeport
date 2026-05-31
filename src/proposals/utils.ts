@@ -174,12 +174,6 @@ export const getCallStatus = (call: Call) => {
   }
 };
 
-// Reused by every call-config section to explain why edit/add/delete actions
-// are disabled. Co-located with the call-state helpers; the upcoming workflow
-// MR may re-home this to its constants module.
-export const callLockedTooltip = () =>
-  translate('To make changes, activate the call first.');
-
 export const getRoundInitialValues = (
   round: ProtectedRound,
 ): ProtectedRoundRequest => ({

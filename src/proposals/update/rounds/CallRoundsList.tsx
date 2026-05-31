@@ -10,6 +10,8 @@ import { translate } from '@/i18n';
 import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
 import { Call } from '@/proposals/types';
 import { getRoundStatus } from '@/proposals/utils';
+import { callLockedTooltip } from '@/proposals/workflow/constants';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -21,11 +23,13 @@ import { RoundRowActions } from './RoundRowActions';
 interface CallRoundsListProps {
   call: Call;
   refetch?: () => void;
+  isReadOnly?: boolean;
 }
 
 export const CallRoundsList: FC<CallRoundsListProps> = ({
   call,
   refetch: parentRefetch,
+  isReadOnly,
 }) => {
   const tableProps = useTable({
     table: 'PrivateCallRoundsList',
@@ -53,10 +57,13 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
   };
 
   const RowActions = useCallback(
-    (props: { row: ProtectedRound }) => (
-      <RoundRowActions row={props.row} refetch={refetch} call={call} />
-    ),
-    [refetch, call],
+    (props: { row: ProtectedRound }) =>
+      isReadOnly ? (
+        <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+      ) : (
+        <RoundRowActions row={props.row} refetch={refetch} call={call} />
+      ),
+    [refetch, call, isReadOnly],
   );
 
   const ExpandableRow = useCallback(
@@ -108,7 +115,14 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
         </>
       }
       verboseName={translate('Rounds')}
-      tableActions={<RoundCreateButton call={call} refetch={refetch} />}
+      tableActions={
+        <RoundCreateButton
+          call={call}
+          refetch={refetch}
+          disabled={isReadOnly}
+          tooltip={isReadOnly ? callLockedTooltip() : undefined}
+        />
+      }
       expandableRow={ExpandableRow}
       rowActions={RowActions}
       showPageSizeSelector

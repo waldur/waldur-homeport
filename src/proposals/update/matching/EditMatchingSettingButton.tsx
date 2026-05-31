@@ -1,7 +1,7 @@
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
-import { callLockedTooltip } from '@/proposals/utils';
+import { callLockedTooltip } from '@/proposals/workflow/constants';
 
 import type { EditMatchingSettingProps } from './types';
 

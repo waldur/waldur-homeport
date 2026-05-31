@@ -81,7 +81,7 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                             variant !== DEFAULT_VARIANT &&
                             `bg-${variant}`,
                         )}
-                        style={{ width: 100 / steps.length + 'vw' }}
+                        style={{ width: 100 / steps.length + 'cqi' }}
                       />
                     </div>
 

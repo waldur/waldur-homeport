@@ -24,6 +24,10 @@ interface CreateManualAssignmentDialogProps {
   resolve: {
     call: Call;
     refetch: () => void;
+    // When set, the proposals field is pre-populated and locked so the
+    // dialog assigns a reviewer to just this proposal. Surfaced from the
+    // proposal row / details "Create review" action.
+    initialProposal?: Proposal;
   };
 }
 
@@ -51,7 +55,7 @@ export const CreateManualAssignmentDialog: FC<
 > = ({ resolve }) => {
   const { showSuccess } = useNotify();
 
-  const { call, refetch } = resolve;
+  const { call, refetch, initialProposal } = resolve;
 
   // Fetch accepted reviewers from pool
   const { data: reviewers, isLoading: reviewersLoading } = useQuery({
@@ -104,6 +108,21 @@ export const CreateManualAssignmentDialog: FC<
     [proposals],
   );
 
+  const initialValues = useMemo(
+    () =>
+      initialProposal
+        ? {
+            proposals: [
+              {
+                value: initialProposal.uuid,
+                label: `${initialProposal.slug || initialProposal.uuid.slice(0, 8)}: ${initialProposal.name}`,
+              },
+            ],
+          }
+        : undefined,
+    [initialProposal],
+  );
+
   const createAssignmentMutation = useManagedMutation<any, any, FormValues>({
     mutationFn: (values) =>
       proposalProtectedCallsCreateManualAssignment({
@@ -153,6 +172,7 @@ export const CreateManualAssignmentDialog: FC<
   return (
     <Form<FormValues>
       onSubmit={(values) => createAssignmentMutation.mutateAsync(values)}
+      initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -202,14 +222,17 @@ export const CreateManualAssignmentDialog: FC<
                   isLoading={proposalsLoading}
                   placeholder={translate('Select proposals...')}
                   validate={required}
+                  isDisabled={Boolean(initialProposal)}
                 />
-                {!proposalsLoading && proposalOptions.length === 0 && (
-                  <div className="form-text text-warning">
-                    {translate(
-                      'No assignable proposals found. Proposals must be in submitted or in_review state.',
-                    )}
-                  </div>
-                )}
+                {!proposalsLoading &&
+                  !initialProposal &&
+                  proposalOptions.length === 0 && (
+                    <div className="form-text text-warning">
+                      {translate(
+                        'No assignable proposals found. Proposals must be in submitted or in_review state.',
+                      )}
+                    </div>
+                  )}
               </FormGroup>
 
               <FormGroup

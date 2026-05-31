@@ -9,12 +9,16 @@ export interface TipProps {
   id: string;
   placement?: OverlayTriggerProps['placement'];
   trigger?: OverlayTriggerProps['trigger'];
+  container?: OverlayTriggerProps['container'];
   rootClose?: OverlayTriggerProps['rootClose'];
   delay?: OverlayTriggerProps['delay'];
   autoWidth?: boolean;
   className?: string;
   tipClassName?: string;
   theme?: 'light' | 'dark';
+  // Overrides the default tooltip z-index (1180). Needed when the tooltip must
+  // sit above a portaled react-select menu (z-index 9999).
+  zIndex?: number;
   onClick?(): void;
 }
 
@@ -30,6 +34,7 @@ export const Tip: React.FC<PropsWithChildren<TipProps>> = ({
   tipClassName,
   onClick,
   theme = 'dark',
+  zIndex = 1180,
   ...rest
 }) =>
   label ? (
@@ -45,7 +50,7 @@ export const Tip: React.FC<PropsWithChildren<TipProps>> = ({
             tipClassName,
             body && 'has-body',
           )}
-          style={{ zIndex: 1180 }}
+          style={{ zIndex }}
         >
           <div className="tooltip-label">{label}</div>
           {!!body && <div className="tooltip-body">{body}</div>}

@@ -2,6 +2,8 @@ export interface Choice {
   value: string;
   label: string;
   description?: string;
+  // Optional help text shown via a "?" icon next to the choice label.
+  tooltip?: string;
 }
 
 export interface OfferingComponentUsage {

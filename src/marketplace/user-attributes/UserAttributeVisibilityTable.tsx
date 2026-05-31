@@ -27,6 +27,7 @@ interface UserAttributeVisibilityTableProps {
   // 'staff'  – show edit pencil to staff only (default; for offerings)
   // 'always' – show edit pencil to anyone (call configuration is gated upstream)
   editGate?: 'staff' | 'always';
+  disabled?: boolean;
 }
 
 export const UserAttributeVisibilityTable: FC<
@@ -41,9 +42,11 @@ export const UserAttributeVisibilityTable: FC<
   emptyHint,
   className = 'card-bordered mb-7',
   editGate = 'staff',
+  disabled = false,
 }) => {
   const user = useUser();
-  const canEdit = editGate === 'always' || Boolean(user?.is_staff);
+  const canEdit =
+    !disabled && (editGate === 'always' || Boolean(user?.is_staff));
 
   const visibleFields = useMemo(
     () =>

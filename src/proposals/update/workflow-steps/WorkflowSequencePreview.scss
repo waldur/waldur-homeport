@@ -1,0 +1,40 @@
+.workflow-sequence {
+  display: grid;
+  align-items: start;
+  position: relative;
+  gap: 0.5rem;
+  padding: 0 1rem;
+
+  &__node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 0 0.5rem;
+    z-index: 1;
+  }
+
+  &__connector {
+    position: absolute;
+    top: 11px;
+    left: calc(50% + 12px);
+    right: calc(-50% + 12px);
+    height: 2px;
+    background: var(--bs-gray-200);
+    z-index: 0;
+  }
+
+  &__bullet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--bs-gray-200);
+    background: var(--bs-body-bg);
+    z-index: 1;
+    line-height: 0;
+  }
+}

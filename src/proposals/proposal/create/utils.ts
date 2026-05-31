@@ -10,6 +10,7 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
@@ -171,4 +172,24 @@ export const useSubmitProposalResourcesFromTemplates = (
     removedCount: removedSelections?.length ?? 0,
     isPending,
   };
+};
+
+export const CreateManualAssignmentDialog = lazyComponent(() =>
+  import('@/proposals/assignments/CreateManualAssignmentDialog').then(
+    (module) => ({ default: module.CreateManualAssignmentDialog }),
+  ),
+);
+
+// Shared so the row-action and detail-view "Create review" affordances stay
+// in lockstep on eligibility (state window + reviewer-management permission).
+export const useCanCreateReview = (proposal: Proposal): boolean => {
+  const user = useUser();
+  return (
+    ['submitted', 'in_review'].includes(proposal.state) &&
+    hasPermission(user, {
+      permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
+      scopeId: proposal.call_uuid,
+      callOrganizerId: proposal.call_managing_organisation_uuid,
+    })
+  );
 };

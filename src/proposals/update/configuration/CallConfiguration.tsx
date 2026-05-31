@@ -7,12 +7,14 @@ import { Call } from '@/proposals/types';
 import { ApplicantVisibilitySection } from '@/proposals/update/applicant-visibility/ApplicantVisibilitySection';
 
 import { EditGeneralInfoButton } from '../general/EditGeneralInfoButton';
+import { WorkflowStepsSection } from '../workflow-steps/WorkflowStepsSection';
 
 import { CallResourceTemplates } from './CallResourceTemplates';
 
 interface CallConfigurationProps {
   call: Call;
   refetch;
+  isReadOnly?: boolean;
 }
 
 const configRows = [
@@ -76,6 +78,7 @@ export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
                   name={row.key}
                   title={row.title}
                   refetch={props.refetch}
+                  disabled={props.isReadOnly}
                 />
               }
             />
@@ -83,9 +86,17 @@ export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
         </FormTable>
       </FormTable.Card>
 
-      <ApplicantVisibilitySection call={props.call} refetch={props.refetch} />
+      <ApplicantVisibilitySection
+        call={props.call}
+        refetch={props.refetch}
+        isReadOnly={props.isReadOnly}
+      />
 
-      <CallResourceTemplates call={props.call} />
+      <CallResourceTemplates call={props.call} isReadOnly={props.isReadOnly} />
+
+      <div className="mt-5">
+        <WorkflowStepsSection call={props.call} isReadOnly={props.isReadOnly} />
+      </div>
     </>
   );
 };

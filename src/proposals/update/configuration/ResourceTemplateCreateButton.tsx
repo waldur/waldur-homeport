@@ -11,13 +11,22 @@ const ResourceTemplateFormDialog = lazyComponent(() =>
 interface OwnProps {
   call: Call;
   refetch(): void;
+  disabled?: boolean;
+  tooltip?: string;
 }
 
-export const ResourceTemplateCreateButton = ({ call, refetch }: OwnProps) => (
+export const ResourceTemplateCreateButton = ({
+  call,
+  refetch,
+  disabled,
+  tooltip,
+}: OwnProps) => (
   <CreateModalButton
     dialog={ResourceTemplateFormDialog}
     resolve={{ call, refetch }}
     size="lg"
     formId="CallResourceTemplateForm"
+    disabled={disabled}
+    tooltip={tooltip}
   />
 );

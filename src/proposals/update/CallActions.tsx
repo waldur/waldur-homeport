@@ -1,4 +1,5 @@
 import { ArchiveIcon, CopyIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import {
@@ -14,6 +15,10 @@ import { useNotify } from '@/store/notify';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { Call } from '../types';
+import {
+  callWorkflowStepsKey,
+  fetchCallWorkflowSteps,
+} from '../workflow/queries';
 
 const DuplicateCallDialog = lazyComponent(() =>
   import('@/proposals/details/DuplicateCallDialog').then((m) => ({
@@ -38,19 +43,44 @@ export const CallActions: FC<CallActionsProps> = ({
 
   const hasRounds = call.rounds.length > 0;
 
+  // Activating a call requires at least one enabled workflow step (and all
+  // mandatory steps configured). The backend rejects with 400 otherwise; we
+  // gate the button locally too so the affordance is clear before the click.
+  // Only fetch when the action could actually fire (draft / archived calls).
+  const canBeActivated = call.state === 'draft' || call.state === 'archived';
+  const { data: workflowSteps } = useQuery({
+    queryKey: callWorkflowStepsKey(call.uuid),
+    queryFn: () => fetchCallWorkflowSteps(call.uuid),
+    enabled: canBeActivated,
+  });
+  const hasEnabledStep =
+    !canBeActivated || (workflowSteps?.some((s) => s.is_enabled) ?? false);
+
   const editCallState = useCallback(
     async (state, label: string) => {
       try {
-        await confirm(
-          translate('Confirmation'),
-          translate('Are you sure you want to {action} this call?', {
-            action: label.toLowerCase(),
-          }),
-        );
         if (state === 'activate') {
-          proposalProtectedCallsActivate({ path: { uuid: call.uuid } });
+          await confirm(
+            translate('Activate call'),
+            translate(
+              'Please make sure the call configuration is complete before activating the call. Once activated, the configuration can no longer be changed.',
+            ),
+            {
+              positiveButton: translate('Activate'),
+              negativeButton: translate('Cancel'),
+              positiveButtonVariant: 'primary',
+              type: 'warning',
+            },
+          );
+          await proposalProtectedCallsActivate({ path: { uuid: call.uuid } });
         } else if (state === 'archive') {
-          proposalProtectedCallsArchive({ path: { uuid: call.uuid } });
+          await confirm(
+            translate('Confirmation'),
+            translate('Are you sure you want to {action} this call?', {
+              action: label.toLowerCase(),
+            }),
+          );
+          await proposalProtectedCallsArchive({ path: { uuid: call.uuid } });
         }
         showSuccess(translate('Call state updated.'));
         refetch();
@@ -71,7 +101,11 @@ export const CallActions: FC<CallActionsProps> = ({
 
   const tooltipMessage = !hasRounds
     ? translate('Call must have a round to be activated')
-    : null;
+    : !hasEnabledStep
+      ? translate(
+          'Call must have at least one enabled workflow step to be activated',
+        )
+      : null;
 
   if (call.state === 'draft') {
     return (
@@ -84,7 +118,7 @@ export const CallActions: FC<CallActionsProps> = ({
         <ActionItem
           title={translate('Activate')}
           action={() => editCallState('activate', translate('Activate'))}
-          disabled={!hasRounds}
+          disabled={Boolean(tooltipMessage)}
           tooltip={tooltipMessage}
         />
         <ActionItem
@@ -114,7 +148,7 @@ export const CallActions: FC<CallActionsProps> = ({
         <ActionItem
           title={translate('Activate')}
           action={() => editCallState('activate', translate('Activate'))}
-          disabled={!hasRounds}
+          disabled={Boolean(tooltipMessage)}
           tooltip={tooltipMessage}
         />
         <ActionItem

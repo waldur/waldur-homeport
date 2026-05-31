@@ -14,6 +14,8 @@ import { translate } from '@/i18n';
 
 import { Call } from '../types';
 
+import { WorkflowConfigurationWidget } from './WorkflowConfigurationWidget';
+
 interface CallDashboardProps {
   call: Call;
 }
@@ -66,31 +68,37 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
   const reviewsCount = reviewsData ? fetchResultCount(reviewsData) : 0;
 
   return (
-    <Row className="mb-6">
-      <Col md={6} lg={3}>
-        <StatisticsCard
-          title={translate('Rounds')}
-          value={call.rounds?.length || 0}
-        />
-      </Col>
-      <Col md={6} lg={3}>
-        <StatisticsCard
-          title={translate('Offerings')}
-          value={call.offerings?.length || 0}
-        />
-      </Col>
-      <Col md={6} lg={3}>
-        <StatisticsCard
-          title={translate('Reviewer pool')}
-          value={reviewerPoolCount}
-        />
-      </Col>
-      <Col md={6} lg={3}>
-        <StatisticsCard title={translate('Proposals')} value={proposalsCount} />
-      </Col>
-      <Col md={6} lg={3}>
-        <StatisticsCard title={translate('Reviews')} value={reviewsCount} />
-      </Col>
-    </Row>
+    <>
+      <Row className="mb-6">
+        <Col md={6} lg={3}>
+          <StatisticsCard
+            title={translate('Rounds')}
+            value={call.rounds?.length || 0}
+          />
+        </Col>
+        <Col md={6} lg={3}>
+          <StatisticsCard
+            title={translate('Offerings')}
+            value={call.offerings?.length || 0}
+          />
+        </Col>
+        <Col md={6} lg={3}>
+          <StatisticsCard
+            title={translate('Reviewer pool')}
+            value={reviewerPoolCount}
+          />
+        </Col>
+        <Col md={6} lg={3}>
+          <StatisticsCard
+            title={translate('Proposals')}
+            value={proposalsCount}
+          />
+        </Col>
+        <Col md={6} lg={3}>
+          <StatisticsCard title={translate('Reviews')} value={reviewsCount} />
+        </Col>
+      </Row>
+      <WorkflowConfigurationWidget call={call} />
+    </>
   );
 };

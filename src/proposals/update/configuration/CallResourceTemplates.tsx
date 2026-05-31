@@ -6,6 +6,7 @@ import {
 
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
+import { callLockedTooltip } from '@/proposals/workflow/constants';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -19,6 +20,7 @@ import { ResourceTemplateExpandableRow } from './ResourceTemplateExpandableRow';
 
 interface CallResourceTemplatesProps {
   call: Call;
+  isReadOnly?: boolean;
 }
 
 const RowActions = ({ row, fetch, call }) => (
@@ -67,11 +69,17 @@ export const CallResourceTemplates: FC<CallResourceTemplatesProps> = (
         <ResourceTemplateCreateButton
           call={props.call}
           refetch={tableProps.fetch}
+          disabled={props.isReadOnly}
+          tooltip={props.isReadOnly ? callLockedTooltip() : undefined}
         />
       }
-      rowActions={({ row, fetch }) => (
-        <RowActions row={row} fetch={fetch} call={props.call} />
-      )}
+      rowActions={({ row, fetch }) =>
+        props.isReadOnly ? (
+          <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+        ) : (
+          <RowActions row={row} fetch={fetch} call={props.call} />
+        )
+      }
       expandableRow={ResourceTemplateExpandableRow}
       showPageSizeSelector
     />
