@@ -143,8 +143,8 @@ export const states: StateDeclaration[] = [
     url: 'maintenance/',
     parent: 'support-communication',
     component: lazyComponent(() =>
-      import('../maintenance/MaintenanceList').then((module) => ({
-        default: module.MaintenanceList,
+      import('../maintenance/StaffMaintenanceList').then((module) => ({
+        default: module.StaffMaintenanceList,
       })),
     ),
     data: {

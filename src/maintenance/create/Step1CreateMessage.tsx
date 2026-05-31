@@ -13,8 +13,10 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { required, url } from '@/core/validators';
 import { SelectField, StringField, TextField } from '@/form';
 import { DateField } from '@/form/DateField';
+import { AsyncSelect } from '@/form/select';
 import { TimeField } from '@/form/TimeField';
 import { translate } from '@/i18n';
+import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -34,25 +36,30 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
   const { values } = useFormState<MaintenanceForm>();
   const [offeringsError, setOfferingsError] = useState<Error | null>(null);
 
+  const showProviderPicker = !props.data?.provider;
+  const providerUuid =
+    values.service_provider?.uuid ?? props.data?.provider?.uuid;
+
   const {
     data: templates,
     isLoading,
     error,
     refetch,
   } = useQuery({
-    queryKey: ['MaintenanceTemplates', props.data?.provider?.uuid],
+    queryKey: ['MaintenanceTemplates', providerUuid],
     queryFn: () =>
       getAllPages((page) =>
         maintenanceAnnouncementsTemplateList({
           query: {
             page,
             page_size: MAX_PAGE_SIZE,
-            service_provider_uuid: props.data?.provider?.uuid,
+            service_provider_uuid: providerUuid,
           },
         }),
       ),
     staleTime: UI_STALE_TIME,
     refetchOnWindowFocus: false,
+    enabled: Boolean(providerUuid),
   });
 
   const fillFields = useCallback(
@@ -76,7 +83,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
               page_size: MAX_PAGE_SIZE,
               page,
               maintenance_template_uuid: template?.uuid,
-              service_provider_uuid: props.data?.provider?.uuid,
+              service_provider_uuid: providerUuid,
             },
           }),
         );
@@ -93,7 +100,17 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
         props.setLoading();
       }
     },
-    [form, props],
+    [form, props, providerUuid],
+  );
+
+  const handleProviderChange = useCallback(
+    (provider) => {
+      form.change('service_provider', provider ?? undefined);
+      form.change('template', undefined);
+      form.change('offerings', []);
+      form.change('template_affected_offerings', []);
+    },
+    [form],
   );
 
   return (
@@ -103,6 +120,35 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
           loadData={refetch}
           message={translate('Unable to load templates')}
         />
+      ) : null}
+
+      {showProviderPicker ? (
+        <FormGroup
+          label={translate('Service provider')}
+          description={translate(
+            'Choose the service provider this maintenance announcement applies to',
+          )}
+          required
+        >
+          <Field name="service_provider" validate={required}>
+            {(fieldProps) => (
+              <AsyncSelect
+                placeholder={translate('Select service provider...')}
+                loadOptions={providerAutocomplete}
+                defaultOptions
+                getOptionValue={(option) => option.customer_uuid}
+                getOptionLabel={(option) => option.customer_name}
+                value={fieldProps.input.value || null}
+                onChange={(value) => {
+                  fieldProps.input.onChange(value);
+                  handleProviderChange(value);
+                }}
+                noOptionsMessage={() => translate('No service providers')}
+                isClearable={true}
+              />
+            )}
+          </Field>
+        </FormGroup>
       ) : null}
 
       <FormGroup
@@ -120,6 +166,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
           getOptionValue={(option) => option.uuid}
           onChange={fillFields}
           isLoading={isLoading}
+          isDisabled={!providerUuid}
         />
       </FormGroup>
 

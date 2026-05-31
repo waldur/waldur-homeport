@@ -21,6 +21,7 @@ import { getMaintenanceState } from './utils';
 
 interface MaintenanceListProps {
   provider?: ServiceProvider;
+  allowAddWithoutProvider?: boolean;
 }
 
 export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
@@ -85,6 +86,17 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
     [props.provider],
   );
 
+  const canShowAddButton = Boolean(
+    props.provider || props.allowAddWithoutProvider,
+  );
+
+  const addButton = canShowAddButton ? (
+    <MaintenanceAddButton
+      provider={props.provider}
+      refetch={tableProps.fetch}
+    />
+  ) : undefined;
+
   return (
     <Table<MaintenanceAnnouncement>
       {...tableProps}
@@ -92,13 +104,14 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
       showPageSizeSelector={true}
       verboseName={translate('Maintenance records')}
       hasQuery
-      tableActions={
-        props.provider ? (
-          <MaintenanceAddButton
-            provider={props.provider}
-            refetch={tableProps.fetch}
-          />
-        ) : undefined
+      tableActions={addButton}
+      placeholderActions={addButton}
+      emptyMessage={
+        canShowAddButton
+          ? translate(
+              'Schedule your first maintenance announcement to notify affected customers.',
+            )
+          : undefined
       }
       rowActions={({ row, fetch }) => (
         <MaintenanceRowActions

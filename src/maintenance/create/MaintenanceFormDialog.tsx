@@ -69,7 +69,8 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
         message: formData.message,
         scheduled_start: startDate.toISO(),
         scheduled_end: endDate.toISO(),
-        service_provider: props.resolve.provider.url,
+        service_provider:
+          formData.service_provider?.url ?? props.resolve.provider?.url,
         maintenance_type: formData.maintenance_type,
         external_reference_url: formData.external_reference_url || '',
         internal_notes: formData.internal_notes || '',
@@ -152,7 +153,7 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
         <MaintenanceSaveAsDropdown
           formComponent={MaintenanceFormDialog}
           formValues={values}
-          provider={props.resolve.provider}
+          provider={props.resolve.provider ?? values.service_provider}
           maintenanceUuid={props.resolve.maintenanceUuid}
           refetch={props.resolve.refetch}
         />
