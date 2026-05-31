@@ -5,9 +5,9 @@ import { Table } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
-  OpenStackAllowedAddressPairRequest,
+  AllowedAddressPairEntryRequest,
   OpenStackInstance,
-  openstackInstancesUpdateAllowedAddressPairs,
+  openstackPortsSetAllowedAddressPairs,
 } from 'waldur-js-client';
 
 import { StringField, FieldError, SubmitButton } from '@/form';
@@ -25,8 +25,8 @@ import { formatAddressList } from './utils';
 interface OwnProps {
   resolve: {
     port: {
-      subnet: string;
-      allowed_address_pairs: OpenStackAllowedAddressPairRequest[];
+      uuid: string;
+      allowed_address_pairs: AllowedAddressPairEntryRequest[];
     };
     instance: OpenStackInstance;
     refetch?: () => void;
@@ -34,7 +34,7 @@ interface OwnProps {
 }
 
 interface FormData {
-  pairs: OpenStackAllowedAddressPairRequest[];
+  pairs: AllowedAddressPairEntryRequest[];
 }
 
 const PairRow = ({ pair, onRemove }) => (
@@ -110,10 +110,9 @@ const PairsTable: React.FC<any> = ({ fields }) =>
 export const SetAllowedAddressPairsDialog: FC<OwnProps> = ({ resolve }) => {
   const mutation = useManagedMutation<any, any, FormData>({
     mutationFn: (formData) =>
-      openstackInstancesUpdateAllowedAddressPairs({
-        path: { uuid: resolve.instance.uuid },
+      openstackPortsSetAllowedAddressPairs({
+        path: { uuid: resolve.port.uuid },
         body: {
-          subnet: resolve.port.subnet,
           allowed_address_pairs: formData.pairs || [],
         },
       }),
