@@ -2,7 +2,7 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   OpenStackInstance,
-  openstackInstancesUpdateAllowedAddressPairs,
+  openstackPortsSetAllowedAddressPairs,
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
@@ -20,7 +20,7 @@ const mockInstance = {
 } as OpenStackInstance;
 
 const mockPort = {
-  subnet: 'subnet-url',
+  uuid: 'port-uuid',
   allowed_address_pairs: [
     { ip_address: '10.0.0.1/32', mac_address: 'fa:16:3e:00:00:01' },
   ],
@@ -72,15 +72,12 @@ describe('SetAllowedAddressPairsDialog', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(openstackInstancesUpdateAllowedAddressPairs).toHaveBeenCalledTimes(
-        1,
-      );
+      expect(openstackPortsSetAllowedAddressPairs).toHaveBeenCalledTimes(1);
     });
 
-    expect(openstackInstancesUpdateAllowedAddressPairs).toHaveBeenCalledWith({
-      path: { uuid: 'instance-uuid' },
+    expect(openstackPortsSetAllowedAddressPairs).toHaveBeenCalledWith({
+      path: { uuid: 'port-uuid' },
       body: {
-        subnet: 'subnet-url',
         allowed_address_pairs: [
           { ip_address: '10.0.0.1/32', mac_address: 'fa:16:3e:00:00:01' },
           { ip_address: '192.168.2.0/24', mac_address: 'fa:16:3e:00:00:02' },
