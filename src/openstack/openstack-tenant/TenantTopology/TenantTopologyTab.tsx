@@ -14,8 +14,19 @@ import { TopologyLegend } from './TopologyLegend';
 import type { TopologyGraph } from './types';
 
 interface Props {
+  resource?: { slug?: string };
   resourceScope: { uuid: string };
 }
+
+// `YYYY-MM-DD_HH-MM-SS` in local time — sorts chronologically and is safe
+// on every filesystem (no colons, no spaces).
+const fileTimestamp = (d = new Date()): string => {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return (
+    `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` +
+    `_${pad(d.getHours())}-${pad(d.getMinutes())}-${pad(d.getSeconds())}`
+  );
+};
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -42,7 +53,7 @@ const applyTooltips = (
   });
 };
 
-export const TenantTopologyTab: FC<Props> = ({ resourceScope }) => {
+export const TenantTopologyTab: FC<Props> = ({ resource, resourceScope }) => {
   const { data, isLoading, isError, refetch } = useQuery<TopologyGraph>({
     queryKey: ['openstack-tenant-topology', resourceScope.uuid],
     queryFn: async () => {
@@ -95,7 +106,7 @@ export const TenantTopologyTab: FC<Props> = ({ resourceScope }) => {
         <TopologyExport
           getSvg={getSvg}
           mermaidCode={built.code}
-          filenameBase={`topology-${resourceScope.uuid.slice(0, 8)}`}
+          filenameBase={`topology-${resource?.slug || resourceScope.uuid.slice(0, 8)}-${fileTimestamp()}`}
         />
       </Card.Header>
       <Card.Body>
