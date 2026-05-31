@@ -15,6 +15,10 @@ export const AsyncSelectField: FunctionComponent<AsyncSelectFieldProps> = (
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render={({ input, meta, ...custom }) => (
         <AsyncSelect
+          defaultOptions
+          noOptionsMessage={() => 'No results found'}
+          getOptionLabel={(option: any) => option.name}
+          getOptionValue={(option: any) => option.value || option.uuid}
           {...custom}
           {...input}
           onChange={(value, actionMeta) => {
@@ -23,12 +27,8 @@ export const AsyncSelectField: FunctionComponent<AsyncSelectFieldProps> = (
               custom.onChange(value, actionMeta);
             }
           }}
-          defaultOptions
           placeholder={placeholder || 'Select...'}
           loadOptions={loadOptions}
-          noOptionsMessage={() => 'No results found'}
-          getOptionLabel={(option: any) => option.name}
-          getOptionValue={(option: any) => option.value || option.uuid}
         />
       )}
     />
