@@ -6,6 +6,7 @@ import {
   getReviewStateBadgeVariant,
   isReviewInFinalState,
 } from '@/proposals/utils';
+import { WorkflowStepBadge } from '@/proposals/workflow/WorkflowStepBadge';
 
 import { EntityHeader } from '../EntityHeader';
 
@@ -34,9 +35,12 @@ export const ReviewHeader = ({
       title={proposal.name}
       slug={proposal.slug}
       badge={
-        <Badge variant={variant} pill outline>
-          {formatReviewState(review.state)}
-        </Badge>
+        <div className="d-flex align-items-center gap-2 flex-wrap">
+          <Badge variant={variant} pill outline>
+            {formatReviewState(review.state)}
+          </Badge>
+          <WorkflowStepBadge proposalUuid={proposal.uuid} />
+        </div>
       }
       helpText={helpText}
       className={className}

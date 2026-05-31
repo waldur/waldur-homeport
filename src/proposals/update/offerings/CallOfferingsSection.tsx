@@ -7,6 +7,8 @@ import {
 import { translate } from '@/i18n';
 import { CallOfferingStateField } from '@/proposals/details/CallOfferingStateField';
 import { Call } from '@/proposals/types';
+import { callLockedTooltip } from '@/proposals/workflow/constants';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -18,6 +20,7 @@ import { CallOfferingRowActions } from './CallOfferingRowActions';
 
 interface CallOfferingsSectionProps {
   call: Call;
+  isReadOnly?: boolean;
 }
 
 export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
@@ -57,12 +60,21 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
       title={translate('Offerings')}
       verboseName={translate('Offerings')}
       tableActions={
-        <AddOfferingButton call={props.call} refetch={tableProps.fetch} />
+        <AddOfferingButton
+          call={props.call}
+          refetch={tableProps.fetch}
+          disabled={props.isReadOnly}
+          tooltip={props.isReadOnly ? callLockedTooltip() : undefined}
+        />
       }
       expandableRow={CallOfferingExpandableRow}
-      rowActions={({ row }) => (
-        <CallOfferingRowActions row={row} refetch={tableProps.fetch} />
-      )}
+      rowActions={({ row }) =>
+        props.isReadOnly ? (
+          <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+        ) : (
+          <CallOfferingRowActions row={row} refetch={tableProps.fetch} />
+        )
+      }
       showPageSizeSelector
     />
   );

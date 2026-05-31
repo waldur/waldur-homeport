@@ -1,4 +1,8 @@
-import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
+import {
+  ChatTextIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+} from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
@@ -8,19 +12,24 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 import { FormSteps } from '@/wizard';
 
+import { ProposalWorkflowActions } from '../manage/ProposalWorkflowActions';
 import { ProposalUsersListSummary } from '../team/ProposalUsersListSummary';
-import { Proposal, ProposalReview } from '../types';
+import { Call, Proposal, ProposalReview } from '../types';
 
 import { ComplianceSummary } from './create/ComplianceSummary';
 import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
-import { ProposalDecisionResult } from './create/ProposalDecisionResult';
 import { ProposalDetailsOverviewStep } from './create/ProposalDetailsOverviewStep';
 import { ResourceRequestsSummary } from './create/ResourceRequestsSummary';
 import { createProposalSteps } from './create/steps';
-import { useProposalDecisionActions } from './create/utils';
+import {
+  CreateManualAssignmentDialog,
+  useCanCreateReview,
+  useProposalDecisionActions,
+} from './create/utils';
 
 interface ProposalDetails {
   proposal: Proposal;
@@ -56,6 +65,9 @@ export const ProposalDetails = ({
     handleRejectProposal,
   } = useProposalDecisionActions(proposal, refetch);
 
+  const { openDialog } = useModal();
+  const canCreateReview = useCanCreateReview(proposal);
+
   const isCallManagerView = state.name?.startsWith('call-management');
 
   if (isLoading) {
@@ -64,16 +76,24 @@ export const ProposalDetails = ({
     return <LoadingErred loadData={refetch} />;
   }
 
-  const hasSubmittedReviews = useMemo(() => {
-    return reviews && Array.isArray(reviews) && reviews.length > 0;
-  }, [reviews]);
-
   return (
     <SidebarLayout.Container>
       <SidebarLayout.Body className="mb-10">
-        {(['rejected', 'accepted'].includes(proposal.state) ||
-          (isCallManagerView && hasSubmittedReviews)) && (
-          <ProposalDecisionResult proposal={proposal} reviews={reviews} />
+        {/* WorkflowTimeline lives in the page header (ProposalManagePage).
+            The "Current step" card drives workflow transitions (complete /
+            reject / advance). Applicants don't drive transitions, so hide it
+            on the applicant tab — only the call-manager view shows it.
+            Reviewers see a step badge on their own review page instead.
+            TODO: Remove cast once the regenerated SDK ships
+            `awaiting_manual_advance` on Proposal. */}
+        {isCallManagerView && (
+          <ProposalWorkflowActions
+            proposalUuid={proposal.uuid}
+            callUuid={proposal.call_uuid}
+            awaitingManualAdvance={
+              (proposal as any).awaiting_manual_advance ?? false
+            }
+          />
         )}
         <ProposalDetailsOverviewStep id="step-general" params={{ proposal }} />
         <ProjectDetailsSummary proposal={proposal} reviews={reviews} />
@@ -94,8 +114,26 @@ export const ProposalDetails = ({
       </SidebarLayout.Body>
       <SidebarLayout.Sidebar transparent>
         <Panel title={translate('Progress')} cardBordered className="mb-5">
-          <FormSteps steps={formSteps} />
+          <FormSteps steps={formSteps} hideStatusIcons />
         </Panel>
+        {isCallManagerView && canCreateReview && (
+          <ActionButton
+            variant="secondary"
+            action={() =>
+              openDialog(CreateManualAssignmentDialog, {
+                resolve: {
+                  call: { uuid: proposal.call_uuid } as Call,
+                  refetch,
+                  initialProposal: proposal,
+                },
+                size: 'md',
+              })
+            }
+            className="w-100 mt-2"
+            iconNode={<ChatTextIcon weight="bold" />}
+            title={translate('Create review')}
+          />
+        )}
         {canPerformDecisionActions && isCallManagerView && (
           <>
             <ActionButton

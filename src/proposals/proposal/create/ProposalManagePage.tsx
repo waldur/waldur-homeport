@@ -19,6 +19,7 @@ import { useUser } from '@/workspace/hooks';
 
 import { ProposalDetails } from '../ProposalDetails';
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
+import { WorkflowTimeline } from '../WorkflowTimeline';
 
 import { ProgressSteps } from './ProgressSteps';
 import { ProposalHeader } from './ProposalHeader';
@@ -55,6 +56,7 @@ export const ProposalManagePage = () => {
   const user = useUser();
 
   const isEditPage = state.name === 'proposals.manage-proposal';
+  const isCallManagerView = state.name?.startsWith('call-management');
   const hasPermissionToSubmit =
     user.is_staff || (proposal && user.uuid === proposal.created_by_uuid);
 
@@ -146,7 +148,19 @@ export const ProposalManagePage = () => {
             call={call}
           />
           <ProposalHeader proposal={proposal} className="mb-7" />
-          <ProgressSteps proposal={proposal} bgClass="bg-body" />
+          {proposal.state === 'draft' ? (
+            <ProgressSteps proposal={proposal} bgClass="bg-body" />
+          ) : (
+            // TODO: Remove cast once the regenerated SDK ships
+            // `awaiting_manual_advance` on Proposal.
+            <WorkflowTimeline
+              proposalUuid={proposal.uuid}
+              awaitingManualAdvance={
+                (proposal as any).awaiting_manual_advance ?? false
+              }
+              showDetails={isCallManagerView}
+            />
+          )}
         </div>
       </SidebarLayout.Header>
       {proposal.state === 'draft' && isEditPage && hasPermissionToSubmit ? (

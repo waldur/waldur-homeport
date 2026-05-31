@@ -3,6 +3,7 @@
 
   .stepper {
     position: relative;
+    container-type: inline-size;
 
     &.stepper-pills {
       .stepper-item {
@@ -103,10 +104,10 @@
           }
         }
 
-        // Hide the first line
+        // Hide the first line — there is no preceding dot to connect to,
+        // and the connector would overflow the stepper to the left.
         &:first-child .stepper-line-area .stepper-line {
-          background-color: inherit !important;
-          height: 6px;
+          display: none;
         }
 
         /*

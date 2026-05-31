@@ -15,6 +15,7 @@ import { Call } from '@/proposals/types';
 interface ApplicantVisibilitySectionProps {
   call: Call;
   refetch: () => void;
+  isReadOnly?: boolean;
 }
 
 const TITLE = (
@@ -34,7 +35,7 @@ const TITLE = (
 
 export const ApplicantVisibilitySection: FC<
   ApplicantVisibilitySectionProps
-> = ({ call, refetch }) => {
+> = ({ call, refetch, isReadOnly }) => {
   const config = call.applicant_visibility_config;
   const isDefault = Boolean(config?.is_default);
 
@@ -59,6 +60,7 @@ export const ApplicantVisibilitySection: FC<
       config={config as Record<string, boolean | undefined> | undefined}
       update={update}
       editGate="always"
+      disabled={isReadOnly}
       className="card-bordered mb-5"
       emptyHint={
         isDefault ? (

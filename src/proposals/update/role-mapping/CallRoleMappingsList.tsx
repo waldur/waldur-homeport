@@ -7,6 +7,7 @@ import {
 
 import { translate } from '@/i18n';
 import { formatRole } from '@/permissions/utils';
+import { callLockedTooltip } from '@/proposals/workflow/constants';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -58,12 +59,21 @@ export const CallRoleMappingsList = (props) => {
       {...tableProps}
       columns={columns}
       tableActions={
-        <RoleMappingCreateButton refetch={tableProps.fetch} call={props.call} />
+        <RoleMappingCreateButton
+          refetch={tableProps.fetch}
+          call={props.call}
+          disabled={props.isReadOnly}
+          tooltip={props.isReadOnly ? callLockedTooltip() : undefined}
+        />
       }
       title={translate('Proposal project role mappings')}
-      rowActions={({ row }) => (
-        <CallRoleMappingsRowActions row={row} refetch={tableProps.fetch} />
-      )}
+      rowActions={({ row }) =>
+        props.isReadOnly ? (
+          <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+        ) : (
+          <CallRoleMappingsRowActions row={row} refetch={tableProps.fetch} />
+        )
+      }
       showPageSizeSelector
     />
   );

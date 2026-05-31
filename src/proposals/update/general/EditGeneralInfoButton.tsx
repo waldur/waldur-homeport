@@ -2,7 +2,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
 import { EditCallProps } from '@/proposals/types';
-import { callLockedTooltip } from '@/proposals/utils';
+import { callLockedTooltip } from '@/proposals/workflow/constants';
 
 const EditGeneralInfoDialog = lazyComponent(() =>
   import('./EditGeneralInfoDialog').then((module) => ({

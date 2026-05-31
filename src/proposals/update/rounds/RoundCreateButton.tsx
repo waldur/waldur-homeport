@@ -11,11 +11,15 @@ const CallRoundCreateDialog = lazyComponent(() =>
 interface RoundCreateButtonProps {
   call: Call;
   refetch(): void;
+  disabled?: boolean;
+  tooltip?: string;
 }
 
 export const RoundCreateButton = ({
   call,
   refetch,
+  disabled,
+  tooltip,
 }: RoundCreateButtonProps) => (
   <CreateModalButton
     dialog={CallRoundCreateDialog}
@@ -23,5 +27,7 @@ export const RoundCreateButton = ({
     size="md"
     dialogClassName="modal-md modal-dialog-centered"
     formId="CallRoundForm"
+    disabled={disabled}
+    tooltip={tooltip}
   />
 );

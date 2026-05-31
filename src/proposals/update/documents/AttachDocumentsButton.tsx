@@ -11,7 +11,17 @@ const AttachDocumentsDialog = lazyComponent(() =>
   })),
 );
 
-export const AttachDocumentsButton = ({ call, refetch }) => {
+export const AttachDocumentsButton = ({
+  call,
+  refetch,
+  disabled,
+  tooltip,
+}: {
+  call: any;
+  refetch(): void;
+  disabled?: boolean;
+  tooltip?: string;
+}) => {
   const { openDialog } = useModal();
   const callback = () => {
     openDialog(AttachDocumentsDialog, {
@@ -24,6 +34,8 @@ export const AttachDocumentsButton = ({ call, refetch }) => {
       action={callback}
       title={translate('Add document')}
       iconNode={<PlusCircleIcon weight="bold" />}
+      disabled={disabled}
+      tooltip={tooltip}
     />
   );
 };

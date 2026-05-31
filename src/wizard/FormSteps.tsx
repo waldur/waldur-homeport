@@ -22,6 +22,10 @@ export const FormSteps: FC<{
   errors?;
   criticalErrors?;
   showRequiredErrors?: boolean;
+  /** Suppress the trailing status icon column. Use for read-only navigation
+   *  where completion / error state isn't meaningful (e.g. viewing a
+   *  submitted proposal). */
+  hideStatusIcons?: boolean;
 }> = ({
   steps,
   completedSteps = [],
@@ -29,6 +33,7 @@ export const FormSteps: FC<{
   errors = [],
   criticalErrors,
   showRequiredErrors,
+  hideStatusIcons,
 }) => {
   const nonRequiredErrors = useMemo(() => {
     const errorsFlatten = flattenObject(errors);
@@ -108,7 +113,7 @@ export const FormSteps: FC<{
           )}
         >
           {step.label}
-          {isDisabled ? (
+          {hideStatusIcons ? null : isDisabled ? (
             <LockIcon weight="bold" className="text-muted" size={20} />
           ) : step.fields && hasCriticalErrors ? (
             <Tip

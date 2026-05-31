@@ -14,11 +14,15 @@ const CallOfferingCreateDialog = lazyComponent(() =>
 interface AddOfferingButtonProps {
   call: Call;
   refetch(): void;
+  disabled?: boolean;
+  tooltip?: string;
 }
 
 export const AddOfferingButton = ({
   call,
   refetch,
+  disabled,
+  tooltip,
 }: AddOfferingButtonProps) => {
   const { openDialog } = useModal();
   const openOfferingCreateDialog = useCallback(
@@ -30,5 +34,11 @@ export const AddOfferingButton = ({
     [],
   );
 
-  return <AddButton action={openOfferingCreateDialog} />;
+  return (
+    <AddButton
+      action={openOfferingCreateDialog}
+      disabled={disabled}
+      tooltip={tooltip}
+    />
+  );
 };

@@ -9,13 +9,17 @@ const RoleMappingFormDialog = lazyComponent(() =>
   })),
 );
 
-export const RoleMappingCreateButton: FunctionComponent<{ refetch; call }> = ({
-  refetch,
-  call,
-}) => (
+export const RoleMappingCreateButton: FunctionComponent<{
+  refetch;
+  call;
+  disabled?: boolean;
+  tooltip?: string;
+}> = ({ refetch, call, disabled, tooltip }) => (
   <CreateModalButton
     dialog={RoleMappingFormDialog}
     resolve={{ call, refetch }}
     size="sm"
+    disabled={disabled}
+    tooltip={tooltip}
   />
 );

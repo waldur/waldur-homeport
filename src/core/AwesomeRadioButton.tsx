@@ -13,6 +13,9 @@ interface AwesomeRadioButtonProps extends FormField {
   direction?: 'vertical' | 'horizontal';
   justify?: 'start' | 'center' | 'end' | 'between' | 'around';
   size?: 'sm' | 'lg';
+  // Bootstrap gap scale (0-5) between rows in vertical layout. Opt-in so the
+  // default stacking of existing consumers is unchanged.
+  gap?: number;
 }
 
 export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
@@ -20,6 +23,7 @@ export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
   direction = 'vertical',
   justify = 'start',
   size,
+  gap,
   ...props
 }) => {
   // Use the input name for generating unique IDs for each radio button
@@ -47,6 +51,8 @@ export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
         className={classNames({
           'd-flex flex-wrap gap-3': direction === 'horizontal',
           [`justify-content-${justify}`]: direction === 'horizontal',
+          'd-flex flex-column': direction === 'vertical' && gap != null,
+          [`gap-${gap}`]: direction === 'vertical' && gap != null,
         })}
       >
         {choices.map((choice, index) => {
@@ -76,7 +82,18 @@ export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
                 disabled={props.disabled}
               />
               <Form.Check.Label htmlFor={choiceId}>
-                <span className="d-block">{choice.label}</span>
+                <span className="d-flex align-items-center gap-2">
+                  <span>{choice.label}</span>
+                  {Boolean(choice.tooltip) && (
+                    <Tip
+                      id={`${choiceId}-tip`}
+                      label={choice.tooltip}
+                      className="text-muted"
+                    >
+                      <QuestionIcon weight="regular" size={16} />
+                    </Tip>
+                  )}
+                </span>
                 {Boolean(choice.description) && (
                   <Form.Text>{choice.description}</Form.Text>
                 )}
