@@ -54,12 +54,14 @@ export const Step2SelectOfferings: FC<WizardStepProps> = (props) => {
   const { values } = useFormState<MaintenanceForm>();
   const dispatch = useDispatch();
 
+  const provider = props.data?.provider ?? values.service_provider;
+
   const filter = useMemo(
     () =>
-      props.data?.provider
-        ? { ...baseFilter, customer_uuid: props.data?.provider?.customer_uuid }
+      provider
+        ? { ...baseFilter, customer_uuid: provider.customer_uuid }
         : baseFilter,
-    [props.data?.provider],
+    [provider],
   );
 
   const tableProps = useTable({

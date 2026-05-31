@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
+import { ServiceProvider } from 'waldur-js-client';
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -12,7 +13,15 @@ const MaintenanceFormDialog = lazyComponent(() =>
   })),
 );
 
-export const MaintenanceAddButton = ({ provider, refetch }) => {
+interface MaintenanceAddButtonProps {
+  provider?: ServiceProvider;
+  refetch?(): void;
+}
+
+export const MaintenanceAddButton: FC<MaintenanceAddButtonProps> = ({
+  provider,
+  refetch,
+}) => {
   const { openDialog } = useModal();
   const callback = useCallback(
     () =>
@@ -21,7 +30,7 @@ export const MaintenanceAddButton = ({ provider, refetch }) => {
         size: 'lg',
         formId: MAINTENANCE_ANNOUNCEMENT_FORM_ID,
       }),
-    [refetch],
+    [openDialog, provider, refetch],
   );
 
   return <AddButton action={callback} />;
