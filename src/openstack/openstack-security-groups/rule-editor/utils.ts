@@ -1,4 +1,7 @@
-import { DirectionEnum, EthertypeEnum } from 'waldur-js-client';
+import {
+  SecurityGroupRuleDirectionEnum,
+  EthertypeEnum,
+} from 'waldur-js-client';
 
 import { isNumericProtocol } from './ProtocolField';
 import { SecurityGroupRulesFormData } from './types';
@@ -24,7 +27,7 @@ export const serializeRulesPayload = (formData: SecurityGroupRulesFormData) =>
     ({ protocol, port_range, ethertype, direction, ...rest }) => ({
       ...rest,
       ethertype: ethertype as EthertypeEnum,
-      direction: direction as DirectionEnum,
+      direction: direction as SecurityGroupRuleDirectionEnum,
       protocol: serializeProtocol(protocol),
       ...serializePortRange(protocol, port_range),
     }),

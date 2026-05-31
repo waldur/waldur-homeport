@@ -103,7 +103,11 @@ export const TenantNetworksList: FunctionComponent<{ resourceScope }> = ({
         <CreateNetworkAction resource={resourceScope} refetch={props.fetch} />
       }
       rowActions={({ row }) => (
-        <ActionButtonResource url={row.url} refetch={props.fetch} />
+        <ActionButtonResource
+          url={row.url}
+          refetch={props.fetch}
+          nestedResource
+        />
       )}
       expandableRow={ExpandableRowMemo}
     />
