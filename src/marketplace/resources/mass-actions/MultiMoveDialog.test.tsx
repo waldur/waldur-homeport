@@ -58,7 +58,7 @@ describe('MultiMoveDialog', () => {
     const container = screen
       .getByRole('combobox')
       .closest('.metronic-select-container');
-    await openAndSelectOptionInContainer(user, container, 'Project 1');
+    await openAndSelectOptionInContainer(user, container, 'Org 1 / Project 1');
 
     // Click Save
     fireEvent.click(screen.getByText('Save'));
