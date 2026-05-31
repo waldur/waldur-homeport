@@ -120,6 +120,70 @@ export const OnboardingEnum = {
   onboarding_verification_deleted_by_task: 'onboarding_verification_deleted_by_task',
 };
 
+export const Openstack_floating_ipEnum = {
+  openstack_floating_ip_attached: 'openstack_floating_ip_attached',
+  openstack_floating_ip_connected: 'openstack_floating_ip_connected',
+  openstack_floating_ip_description_updated: 'openstack_floating_ip_description_updated',
+  openstack_floating_ip_detached: 'openstack_floating_ip_detached',
+  openstack_floating_ip_disconnected: 'openstack_floating_ip_disconnected',
+};
+
+export const Openstack_networkEnum = {
+  openstack_network_cleaned: 'openstack_network_cleaned',
+  openstack_network_created: 'openstack_network_created',
+  openstack_network_deleted: 'openstack_network_deleted',
+  openstack_network_imported: 'openstack_network_imported',
+  openstack_network_pulled: 'openstack_network_pulled',
+  openstack_network_updated: 'openstack_network_updated',
+};
+
+export const Openstack_portEnum = {
+  openstack_port_allowed_address_pairs_changed: 'openstack_port_allowed_address_pairs_changed',
+  openstack_port_cleaned: 'openstack_port_cleaned',
+  openstack_port_created: 'openstack_port_created',
+  openstack_port_deleted: 'openstack_port_deleted',
+  openstack_port_imported: 'openstack_port_imported',
+  openstack_port_pulled: 'openstack_port_pulled',
+  openstack_port_security_disabled: 'openstack_port_security_disabled',
+  openstack_port_security_enabled: 'openstack_port_security_enabled',
+  openstack_port_security_groups_changed: 'openstack_port_security_groups_changed',
+  openstack_port_updated: 'openstack_port_updated',
+};
+
+export const Openstack_rbacEnum = {
+  openstack_rbac_policy_created: 'openstack_rbac_policy_created',
+  openstack_rbac_policy_deleted: 'openstack_rbac_policy_deleted',
+};
+
+export const Openstack_routerEnum = {
+  openstack_router_interface_added: 'openstack_router_interface_added',
+  openstack_router_interface_removed: 'openstack_router_interface_removed',
+  openstack_router_updated: 'openstack_router_updated',
+};
+
+export const Openstack_security_groupEnum = {
+  openstack_security_group_cleaned: 'openstack_security_group_cleaned',
+  openstack_security_group_created: 'openstack_security_group_created',
+  openstack_security_group_deleted: 'openstack_security_group_deleted',
+  openstack_security_group_imported: 'openstack_security_group_imported',
+  openstack_security_group_pulled: 'openstack_security_group_pulled',
+  openstack_security_group_rule_created: 'openstack_security_group_rule_created',
+  openstack_security_group_rule_deleted: 'openstack_security_group_rule_deleted',
+  openstack_security_group_rule_updated: 'openstack_security_group_rule_updated',
+  openstack_security_group_rules_changed: 'openstack_security_group_rules_changed',
+  openstack_security_group_updated: 'openstack_security_group_updated',
+};
+
+export const Openstack_subnetEnum = {
+  openstack_subnet_cleaned: 'openstack_subnet_cleaned',
+  openstack_subnet_created: 'openstack_subnet_created',
+  openstack_subnet_deleted: 'openstack_subnet_deleted',
+  openstack_subnet_host_routes_changed: 'openstack_subnet_host_routes_changed',
+  openstack_subnet_imported: 'openstack_subnet_imported',
+  openstack_subnet_pulled: 'openstack_subnet_pulled',
+  openstack_subnet_updated: 'openstack_subnet_updated',
+};
+
 export const PermissionsEnum = {
   role_granted: 'role_granted',
   role_revoked: 'role_revoked',
@@ -231,6 +295,10 @@ export const ResourcesEnum = {
   openstack_port_security_enabled: 'openstack_port_security_enabled',
   openstack_port_security_groups_changed: 'openstack_port_security_groups_changed',
   openstack_port_updated: 'openstack_port_updated',
+  openstack_rbac_policy_created: 'openstack_rbac_policy_created',
+  openstack_rbac_policy_deleted: 'openstack_rbac_policy_deleted',
+  openstack_router_interface_added: 'openstack_router_interface_added',
+  openstack_router_interface_removed: 'openstack_router_interface_removed',
   openstack_router_updated: 'openstack_router_updated',
   openstack_security_group_cleaned: 'openstack_security_group_cleaned',
   openstack_security_group_created: 'openstack_security_group_created',
@@ -252,6 +320,7 @@ export const ResourcesEnum = {
   openstack_subnet_cleaned: 'openstack_subnet_cleaned',
   openstack_subnet_created: 'openstack_subnet_created',
   openstack_subnet_deleted: 'openstack_subnet_deleted',
+  openstack_subnet_host_routes_changed: 'openstack_subnet_host_routes_changed',
   openstack_subnet_imported: 'openstack_subnet_imported',
   openstack_subnet_pulled: 'openstack_subnet_pulled',
   openstack_subnet_updated: 'openstack_subnet_updated',
