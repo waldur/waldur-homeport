@@ -15,7 +15,7 @@ import { getGroupedCategories } from '@/marketplace/category/utils';
 import { getCategoryGroups } from '@/marketplace/common/api';
 import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
 import { selectFiltersStorage } from '@/table/selectors';
-import { getResource } from '@/workspace/selectors';
+import { getCustomer, getProject, getResource } from '@/workspace/selectors';
 
 import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
@@ -64,7 +64,17 @@ const CustomToggle = ({
   </div>
 );
 
-const RenderMenuItems = ({ items }) => {
+interface RenderMenuItemsProps {
+  items: Array<{
+    uuid?: string;
+    title?: string;
+    resource_count?: number;
+    categories?: Array<any>;
+  }>;
+  filterParams?: Record<string, string | undefined>;
+}
+
+const RenderMenuItems = ({ items, filterParams }: RenderMenuItemsProps) => {
   const { state } = useCurrentStateAndParams();
   const resource = useSelector(getResource);
   return (
@@ -78,6 +88,7 @@ const RenderMenuItems = ({ items }) => {
             state="category-resources"
             params={{
               category_uuid: item.uuid,
+              ...filterParams,
             }}
             activeState={
               state.name === 'marketplace-resource-details' &&
@@ -96,7 +107,10 @@ const RenderMenuItems = ({ items }) => {
               <span className="badge badge-pill">{item.resource_count}</span>
             }
           >
-            <RenderMenuItems items={item.categories} />
+            <RenderMenuItems
+              items={item.categories}
+              filterParams={filterParams}
+            />
           </MenuAccordion>
         ),
       )}
@@ -126,17 +140,49 @@ export const ResourcesMenu = ({
   const resourcesFilters = useSelector((state: any) =>
     selectFiltersStorage(state, ALL_RESOURCES_TABLE_ID),
   );
-  const query = useMemo(() => {
-    if (!resourcesFilters) return undefined;
-    const project = resourcesFilters.find((item) => item.name === 'project');
-    const organization = resourcesFilters.find(
+  const workspaceProject = useSelector(getProject);
+  const workspaceCustomer = useSelector(getCustomer);
+
+  // Resolve project/customer to scope sidebar links by, preferring the active
+  // workspace (project detail / organization detail page) over whatever is
+  // persisted in the resources-filter storage. Without this, clicking
+  // "Virtual machines" while inside a project drops the project filter.
+  const scope = useMemo(() => {
+    const storedProject = resourcesFilters?.find(
+      (item) => item.name === 'project',
+    )?.value;
+    const storedCustomer = resourcesFilters?.find(
       (item) => item.name === 'organization',
-    );
+    )?.value;
     return {
-      project_uuid: project?.value?.uuid,
-      customer_uuid: organization?.value?.uuid,
-    } satisfies MarketplaceGlobalCategoriesRetrieveData['query'];
-  }, [resourcesFilters]);
+      project: workspaceProject ?? storedProject,
+      customer:
+        workspaceCustomer ??
+        (workspaceProject as any)?.customer ??
+        storedCustomer,
+    };
+  }, [resourcesFilters, workspaceProject, workspaceCustomer]);
+
+  // Encoded as "uuid::name" to match the compact format produced by
+  // src/core/filters.ts (compactFilterValue); AllResourcesList /
+  // CategoryResourcesList expand these back to {uuid, name} on mount.
+  const filterParams = useMemo(() => {
+    const encode = (entity?: { uuid?: string; name?: string }) =>
+      entity?.uuid ? `${entity.uuid}::${entity.name ?? ''}` : undefined;
+    return {
+      project: encode(scope.project as any),
+      customer: encode(scope.customer as any),
+    };
+  }, [scope]);
+
+  const query = useMemo(
+    () =>
+      ({
+        project_uuid: (scope.project as any)?.uuid,
+        customer_uuid: (scope.customer as any)?.uuid,
+      }) satisfies MarketplaceGlobalCategoriesRetrieveData['query'],
+    [scope],
+  );
 
   // We will clean counters on impersonation (on change user)
   const { data: counters = {} } = useQuery({
@@ -201,10 +247,12 @@ export const ResourcesMenu = ({
         title={translate('All resources')}
         badge={allResourcesCount}
         state="all-resources"
+        params={filterParams}
       />
 
       <RenderMenuItems
         items={sortedCategoryGroups.slice(0, MAX_COLLAPSE_MENU_COUNT)}
+        filterParams={filterParams}
       />
 
       {sortedCategoryGroups.length > MAX_COLLAPSE_MENU_COUNT ? (
@@ -212,6 +260,7 @@ export const ResourcesMenu = ({
           {expanded && (
             <RenderMenuItems
               items={sortedCategoryGroups.slice(MAX_COLLAPSE_MENU_COUNT)}
+              filterParams={filterParams}
             />
           )}
           <CustomToggle
