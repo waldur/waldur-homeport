@@ -355,7 +355,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'category-resources',
-    url: '/resources/:category_uuid/',
+    url: '/resources/:category_uuid/?customer&project',
     component: lazyComponent(() =>
       import('@/marketplace/resources/list/CategoryResourcesContainer').then(
         (module) => ({ default: module.CategoryResourcesContainer }),
@@ -365,7 +365,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'all-resources',
-    url: '/all-resources/',
+    url: '/all-resources/?customer&project',
     component: lazyComponent(() =>
       import('@/marketplace/resources/list/AllResourcesList').then(
         (module) => ({ default: module.AllResourcesList }),
