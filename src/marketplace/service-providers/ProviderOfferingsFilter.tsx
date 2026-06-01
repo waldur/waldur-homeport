@@ -17,9 +17,18 @@ export const getFiltersFromParams = (params) => {
       state: getStates().filter((state) => state.value !== 'Archived'),
     };
   }
+  // params.state may be an array of plain strings (legacy / hand-crafted URL)
+  // or an array of {value, label} option objects (syncFiltersToURL writes the
+  // form's option objects into the URL as JSON). Normalize to a set of values
+  // before matching against the canonical state choices.
+  const stateValues = new Set(
+    params.state.map((s) =>
+      s !== null && typeof s === 'object' && 'value' in s ? s.value : s,
+    ),
+  );
   return {
     ...params,
-    state: getStates().filter((state) => params.state.includes(state.value)),
+    state: getStates().filter((state) => stateValues.has(state.value)),
   };
 };
 
