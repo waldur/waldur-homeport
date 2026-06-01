@@ -211,25 +211,31 @@ export const useOrganizationAndProjectFiltersForResources = (
   );
 
   useEffect(() => {
-    // Normalize filter values - handle arrays from old data or different code paths
+    // Pull only organization/project out of whatever shape the input is in
+    // (URL query bag or stored object). Spreading the entire bag here would
+    // sweep unrelated filters (`state`, `type`, `tag`, ...) of whatever page
+    // happens to host the sidebar into ResourcesFilterStorage and, worse,
+    // re-emit them onto the next page's URL — silently dropping its real
+    // defaults.
     const normalizeFilter = (filter: any): ResourceFilterValues => {
       if (!filter) return { organization: null, project: null };
       return {
-        ...filter,
         organization: Array.isArray(filter.organization)
           ? filter.organization[0]
-          : filter.organization,
+          : (filter.organization ?? null),
         project: Array.isArray(filter.project)
           ? filter.project[0]
-          : filter.project,
+          : (filter.project ?? null),
       };
     };
 
     // URL params take precedence over localStorage
     const urlParams = getQueryParams();
-    const hasUrlFilters = Object.keys(urlParams).length > 0;
+    const hasOrgOrProjectInUrl = Boolean(
+      urlParams.organization || urlParams.project,
+    );
 
-    if (hasUrlFilters) {
+    if (hasOrgOrProjectInUrl) {
       // Use URL params - they were set intentionally (e.g., shared link)
       const normalized = normalizeFilter(urlParams);
       syncResourceFilters(normalized);
@@ -240,8 +246,9 @@ export const useOrganizationAndProjectFiltersForResources = (
       const filter = ResourcesFilterStorage.get();
       const normalized = normalizeFilter(filter);
       syncResourceFilters(normalized);
-      // Sync restored filters to URL so they are visible and shareable
-      if (normalized) {
+      // Sync restored filters to URL so they are visible and shareable.
+      // Only emit organization/project — never republish unrelated keys here.
+      if (normalized.organization || normalized.project) {
         syncFiltersToURL(normalized);
       }
     }
