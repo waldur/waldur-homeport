@@ -23,10 +23,19 @@
             .stepper-title {
               color: $text-secondary;
               font-weight: 500;
+
+              // Allow variant text classes (e.g. text-danger) to override
+              &[class*='text-'] {
+                color: unset;
+              }
             }
 
             .stepper-desc {
               color: $text-quaternary;
+
+              &[class*='text-'] {
+                color: unset;
+              }
             }
           }
 
@@ -76,10 +85,19 @@
           .stepper-wrapper {
             .stepper-icon {
               background: $fg-brand-primary;
+
+              // Allow variant bg classes (e.g. bg-danger) to override
+              &[class*='bg-'] {
+                background: unset;
+              }
             }
 
             .stepper-line-area .stepper-line {
               background: $fg-brand-primary;
+
+              &[class*='bg-'] {
+                background: unset;
+              }
             }
           }
         }
