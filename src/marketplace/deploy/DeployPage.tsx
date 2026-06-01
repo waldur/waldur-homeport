@@ -306,63 +306,61 @@ export const BaseDeployPage = ({
   }
 
   return (
-    <form onSubmit={form.submit}>
-      <PageBarProvider scrollOffset={100}>
-        <SidebarLayout.Header>
-          <div className="d-flex justify-content-between align-items-center w-100">
-            <h1 className="mb-0 flex-grow-1">
-              {isEdit ? translate('Edit') : translate('Add')}{' '}
-              {selectedOffering.name}
-            </h1>
-            {showExperimentalUiComponents && <DeployPageActions />}
-          </div>
-        </SidebarLayout.Header>
-        <SidebarLayout.Container>
-          <SidebarLayout.Body>
-            {formSteps.map((step, i) => (
-              <div ref={stepRefs.current[i]} key={step.id}>
-                <step.component
-                  id={step.id}
-                  title={step.label}
-                  offering={selectedOffering}
-                  params={step.params}
-                  disabled={
-                    step.id !== 'step-general' &&
-                    (isProjectInactive ||
-                      noOrganizationOrProject ||
-                      !canCreateOrder)
-                  }
-                  disabledTooltip={
-                    noOrganizationOrProject
-                      ? translate(
-                          'Select an organization and project to proceed.',
-                        )
-                      : isProjectInactive
-                        ? translate('Project has reached its end date.')
-                        : !canCreateOrder
-                          ? translate(
-                              'You are not allowed to create orders in this project.',
-                            )
-                          : null
-                  }
-                />
-              </div>
-            ))}
-          </SidebarLayout.Body>
+    <PageBarProvider scrollOffset={100}>
+      <SidebarLayout.Header>
+        <div className="d-flex justify-content-between align-items-center w-100">
+          <h1 className="mb-0 flex-grow-1">
+            {isEdit ? translate('Edit') : translate('Add')}{' '}
+            {selectedOffering.name}
+          </h1>
+          {showExperimentalUiComponents && <DeployPageActions />}
+        </div>
+      </SidebarLayout.Header>
+      <SidebarLayout.Container>
+        <SidebarLayout.Body>
+          {formSteps.map((step, i) => (
+            <div ref={stepRefs.current[i]} key={step.id}>
+              <step.component
+                id={step.id}
+                title={step.label}
+                offering={selectedOffering}
+                params={step.params}
+                disabled={
+                  step.id !== 'step-general' &&
+                  (isProjectInactive ||
+                    noOrganizationOrProject ||
+                    !canCreateOrder)
+                }
+                disabledTooltip={
+                  noOrganizationOrProject
+                    ? translate(
+                        'Select an organization and project to proceed.',
+                      )
+                    : isProjectInactive
+                      ? translate('Project has reached its end date.')
+                      : !canCreateOrder
+                        ? translate(
+                            'You are not allowed to create orders in this project.',
+                          )
+                        : null
+                }
+              />
+            </div>
+          ))}
+        </SidebarLayout.Body>
 
-          <SidebarLayout.Sidebar transparent>
-            <DeployPageSidebar
-              steps={formSteps}
-              offering={selectedOffering}
-              completedSteps={completedSteps}
-              disabledSteps={disabledSteps}
-              updateMode={props.updateMode}
-              order={props.order}
-            />
-          </SidebarLayout.Sidebar>
-        </SidebarLayout.Container>
-      </PageBarProvider>
-    </form>
+        <SidebarLayout.Sidebar transparent>
+          <DeployPageSidebar
+            steps={formSteps}
+            offering={selectedOffering}
+            completedSteps={completedSteps}
+            disabledSteps={disabledSteps}
+            updateMode={props.updateMode}
+            order={props.order}
+          />
+        </SidebarLayout.Sidebar>
+      </SidebarLayout.Container>
+    </PageBarProvider>
   );
 };
 
@@ -483,7 +481,7 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
       onSubmit={handleMutate}
       initialValues={initialValues}
       subscription={{ values: true }}
-      render={({ values }) => {
+      render={({ values, handleSubmit }) => {
         const selectedOffering = values.offering || props.offering;
         const OrderFormComponent = getOrderFormComponent(selectedOffering.type);
 
@@ -494,10 +492,12 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
         return (
           <>
             <NavigationBlocker />
-            <OrderFormComponent
-              selectedOffering={selectedOffering}
-              {...props}
-            />
+            <form onSubmit={handleSubmit}>
+              <OrderFormComponent
+                selectedOffering={selectedOffering}
+                {...props}
+              />
+            </form>
           </>
         );
       }}
