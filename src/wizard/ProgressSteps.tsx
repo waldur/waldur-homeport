@@ -13,6 +13,8 @@ export interface ProgressStep {
   icon?: ReactNode;
   labelClass?: string;
   variant?: Variant;
+  /** Prevents this step from being auto-detected as "current" */
+  disabled?: boolean;
 }
 
 interface ProgressStepsProps {
@@ -37,8 +39,9 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
           <div className="stepper-nav flex-wrap align-items-start justify-content-around w-100">
             {steps.map((step, i) => {
               const current =
-                (i === 0 && !step.completed) ||
-                (steps[i - 1] && steps[i - 1].completed && !step.completed);
+                !step.disabled &&
+                ((i === 0 && !step.completed) ||
+                  (steps[i - 1] && steps[i - 1].completed && !step.completed));
               const variant = step.variant || DEFAULT_VARIANT;
               return (
                 <div
@@ -55,7 +58,9 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                         'stepper-icon',
                         current && variant !== DEFAULT_VARIANT
                           ? `bg-${variant} ring-${variant} ring-4`
-                          : '',
+                          : step.completed && variant !== DEFAULT_VARIANT
+                            ? `bg-${variant}`
+                            : '',
                         Boolean(onClick) && 'cursor-pointer',
                       )}
                       onClick={() => onClick && onClick(step, i)}
