@@ -1,6 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
+import { Field, Form, useFormState } from 'react-final-form';
 import {
   marketplaceCategoriesList,
   MarketplaceCategoriesListData,
@@ -10,6 +11,7 @@ import Avatar from '@/core/Avatar';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { truncate } from '@/core/utils';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { getCategoryGroups } from '@/marketplace/common/api';
 import { CategoryLink } from '@/marketplace/links/CategoryLink';
@@ -17,10 +19,22 @@ import { Category } from '@/marketplace/types';
 import { createFetcher } from '@/table/api';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import Table from '@/table/Table';
+import { TableFilterItem } from '@/table/TableFilterItem';
 import { useTable } from '@/table/useTable';
 
 import { CategoryCreateButton } from './CategoryCreateButton';
 import { CategoryRowActions } from './CategoryRowActions';
+
+const ADMIN_CATEGORIES_FILTER_FORM_ID = 'AdminCategoriesListFilter';
+
+interface GroupOption {
+  label: string;
+  value: string;
+}
+
+interface CategoriesFilterValues {
+  group?: GroupOption | null;
+}
 
 const categoryFields: MarketplaceCategoriesListData['query'] = {
   field: [
@@ -34,7 +48,31 @@ const categoryFields: MarketplaceCategoriesListData['query'] = {
   ],
 };
 
-export const AdminCategoriesPage: FunctionComponent = () => {
+const CategoriesListFilter: FunctionComponent<{ options: GroupOption[] }> = ({
+  options,
+}) => (
+  <TableFilterItem
+    title={translate('Group')}
+    name="group"
+    badgeValue={(value: GroupOption) => value?.label}
+  >
+    <Field
+      name="group"
+      component={(fieldProps) => (
+        <Select
+          placeholder={translate('Select group...')}
+          options={options}
+          value={fieldProps.input.value}
+          onChange={(value) => fieldProps.input.onChange(value)}
+          isClearable={true}
+          variant="tableFilter"
+        />
+      )}
+    />
+  </TableFilterItem>
+);
+
+const AdminCategoriesPageInner: FunctionComponent = () => {
   const {
     data: categoryGroups,
     isLoading: loadingGroups,
@@ -46,11 +84,27 @@ export const AdminCategoriesPage: FunctionComponent = () => {
     staleTime: FAST_STALE_TIME,
   });
 
+  const { values } = useFormState<CategoriesFilterValues>();
+
+  const filter = useMemo<MarketplaceCategoriesListData['query']>(() => {
+    const obj: MarketplaceCategoriesListData['query'] = { ...categoryFields };
+    if (values?.group) {
+      obj.group_uuid = values.group.value;
+    }
+    return obj;
+  }, [values]);
+
+  const groupOptions = useMemo<GroupOption[]>(
+    () =>
+      (categoryGroups || []).map((g) => ({ label: g.title, value: g.uuid })),
+    [categoryGroups],
+  );
+
   const tableProps = useTable({
     table: 'CategoriesList',
     fetchData: createFetcher(marketplaceCategoriesList),
     queryField: 'title',
-    filter: categoryFields,
+    filter,
   });
 
   return (
@@ -59,6 +113,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
       columns={[
         {
           title: translate('Title'),
+          orderField: 'title',
           render: ({ row }) => (
             <>
               <div className="d-inline-block align-middle me-2">
@@ -70,6 +125,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
         },
         {
           title: translate('Group'),
+          orderField: 'group__title',
           render: ({ row }) => {
             if (row.group) {
               if (loadingGroups) {
@@ -121,12 +177,24 @@ export const AdminCategoriesPage: FunctionComponent = () => {
         },
       ]}
       verboseName={translate('Categories')}
-      initialSorting={{ field: 'title', mode: 'desc' }}
+      initialSorting={{ field: 'group__title', mode: 'asc' }}
       rowActions={({ row }) => (
         <CategoryRowActions row={row} refetch={tableProps.fetch} />
       )}
       hasQuery={true}
       tableActions={<CategoryCreateButton refetch={tableProps.fetch} />}
+      filters={<CategoriesListFilter options={groupOptions} />}
+      formId={ADMIN_CATEGORIES_FILTER_FORM_ID}
     />
   );
 };
+
+export const AdminCategoriesPage: FunctionComponent = () => (
+  <Form
+    id={ADMIN_CATEGORIES_FILTER_FORM_ID}
+    onSubmit={() => {}}
+    subscription={{ values: true }}
+  >
+    {() => <AdminCategoriesPageInner />}
+  </Form>
+);
