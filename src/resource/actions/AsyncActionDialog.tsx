@@ -9,23 +9,12 @@ interface AsyncActionDialogProps {
   title: string;
   loading: boolean;
   error: any;
-  submitting: boolean;
-  invalid: boolean;
 }
 
 export const AsyncActionDialog: FC<
   PropsWithChildren<AsyncActionDialogProps>
 > = (props) => (
-  <ModalDialog
-    title={props.title}
-    footer={
-      <FormFooter
-        submitting={props.submitting}
-        disabled={props.loading}
-        invalid={props.invalid}
-      />
-    }
-  >
+  <ModalDialog title={props.title} footer={<FormFooter />}>
     {props.loading ? (
       <LoadingSpinner />
     ) : props.error ? (

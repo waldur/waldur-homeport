@@ -27,7 +27,7 @@ const FormLabel = (props) => (
   <Form.Label className="me-auto">
     {props.help && !props.helpEnd && (
       <Tip id="form-field-tooltip" label={props.help}>
-        <QuestionIcon weight="bold" />{' '}
+        <QuestionIcon weight="bold" data-testid="question-icon" />{' '}
       </Tip>
     )}
     {props.label}
@@ -62,7 +62,12 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
               className="align-self-center ms-2 mb-2"
               label={props.help}
             >
-              <QuestionIcon weight="bold" size={16} className="text-muted" />
+              <QuestionIcon
+                weight="bold"
+                size={16}
+                className="text-muted"
+                data-testid="question-icon"
+              />
             </Tip>
           )}
         </div>

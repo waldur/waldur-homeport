@@ -1,15 +1,13 @@
 import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { AsyncSelectField as Select } from '@/form/select';
+import { AsyncSelectGroup, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
   providerOfferingsAutocomplete,
 } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { RecipientsList } from '../RecipientsList';
@@ -44,44 +42,35 @@ export const RecipientsStep: FC<WizardStepProps> = (props) => {
             marginRight: 20,
           }}
         >
-          <FormGroup>
-            <Field
-              name="all_users"
-              component={AwesomeCheckboxField}
-              label={translate('Send message to all users')}
-              hideLabel={true}
-            />
-          </FormGroup>
+          <BooleanGroup
+            name="all_users"
+            label={translate('Send message to all users')}
+            hideLabel={true}
+          />
 
-          <FormGroup
+          <AsyncSelectGroup
             label={translate('Offerings')}
             description={translate('Select specific offerings to target')}
-          >
-            <Select
-              name="offerings"
-              placeholder={translate('Select offerings...')}
-              loadOptions={loadOptions}
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.uuid}
-              noOptionsMessage={() => translate('No offerings found')}
-              isMulti={true}
-            />
-          </FormGroup>
+            name="offerings"
+            placeholder={translate('Select offerings...')}
+            loadOptions={loadOptions}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.uuid}
+            noOptionsMessage={() => translate('No offerings found')}
+            isMulti={true}
+          />
 
-          <FormGroup
+          <AsyncSelectGroup
             label={translate('Organizations')}
             description={translate('Select specific organizations to target')}
-          >
-            <Select
-              name="customers"
-              placeholder={translate('Select organizations...')}
-              loadOptions={loadOrganizations}
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.uuid}
-              noOptionsMessage={() => translate('No organizations found')}
-              isMulti={true}
-            />
-          </FormGroup>
+            name="customers"
+            placeholder={translate('Select organizations...')}
+            loadOptions={loadOrganizations}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.uuid}
+            noOptionsMessage={() => translate('No organizations found')}
+            isMulti={true}
+          />
         </Col>
         <Col sm={7}>
           <RecipientsListQuery />

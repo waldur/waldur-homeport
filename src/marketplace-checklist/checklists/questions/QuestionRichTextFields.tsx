@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Form } from 'react-bootstrap';
-import { Field, useField } from 'react-final-form';
+import { useField } from 'react-final-form';
 
-import { NumberField } from '@/form';
+import { NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { RichTextToolbarLevel } from '@/marketplace-checklist/types';
@@ -46,18 +46,14 @@ const ToolbarLevelRadioField: FC = () => {
 
 export const QuestionRichTextFields: FC = () => (
   <>
-    <FormGroup
+    <NumberGroup
+      name="rich_text_char_limit"
+      placeholder="5000"
+      min={1}
       label={translate('Character limit')}
       space={5}
       help={translate('Leave empty for no limit.')}
-    >
-      <Field
-        name="rich_text_char_limit"
-        component={NumberField}
-        placeholder="5000"
-        min={1}
-      />
-    </FormGroup>
+    />
     <FormGroup label={translate('Toolbar level')} space={5}>
       <ToolbarLevelRadioField />
     </FormGroup>

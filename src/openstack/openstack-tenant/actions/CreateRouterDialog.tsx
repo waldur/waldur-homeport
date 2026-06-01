@@ -1,10 +1,11 @@
 import { FC } from 'react';
+import { Form } from 'react-final-form';
 import { openstackRoutersCreate, OpenStackTenant } from 'waldur-js-client';
 
+import { NameGroup } from '@/form/NameGroup';
 import { translate } from '@/i18n';
+import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { createLatinNameField } from '@/resource/actions/base';
-import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 
 export const CreateRouterDialog: FC<ActionDialogProps<OpenStackTenant>> = ({
@@ -24,10 +25,18 @@ export const CreateRouterDialog: FC<ActionDialogProps<OpenStackTenant>> = ({
   });
 
   return (
-    <ResourceActionDialog
-      dialogTitle={translate('Create new router')}
-      submitForm={mutation.mutateAsync}
-      formFields={[createLatinNameField()]}
+    <Form<{ name: string }>
+      onSubmit={(values) => mutation.mutateAsync(values)}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <ActionDialogFinal
+          title={translate('Create new router')}
+          onSubmit={handleSubmit}
+          submitting={submitting}
+          invalid={invalid}
+        >
+          <NameGroup />
+        </ActionDialogFinal>
+      )}
     />
   );
 };

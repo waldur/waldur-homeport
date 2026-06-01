@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
-import { Select } from '@/form/select';
+import { SelectGroup, FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { renderFieldOrDash } from '@/table/utils';
 
 export interface LimitPeriodOption {
   value: string;
@@ -52,27 +52,33 @@ interface ComponentLimitPeriodFieldProps {
 
 export const ComponentLimitPeriodField: FunctionComponent<
   ComponentLimitPeriodFieldProps
-> = (props) => (
-  <FormGroup
-    label={translate('Limit period')}
-    spaceless
-    help={props.limitPeriod?.description}
-    helpEnd
-  >
-    <Field
+> = (props) => {
+  if (props.readOnly) {
+    return (
+      <FormGroup
+        label={translate('Limit period')}
+        spaceless={props.spaceless}
+        help={props.limitPeriod?.description}
+        helpEnd
+      >
+        <Field
+          name="limit_period"
+          subscription={{ value: true }}
+          render={({ input }) => renderFieldOrDash(input.value?.label)}
+        />
+      </FormGroup>
+    );
+  }
+
+  return (
+    <SelectGroup
       name="limit_period"
-      component={(fieldProps) =>
-        props.readOnly ? (
-          fieldProps.input.value.label
-        ) : (
-          <Select
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            options={getLimitPeriods()}
-            isClearable={false}
-          />
-        )
-      }
+      label={translate('Limit period')}
+      spaceless={props.spaceless}
+      tooltip={props.limitPeriod?.description}
+      tooltipEnd
+      options={getLimitPeriods()}
+      isClearable={false}
     />
-  </FormGroup>
-);
+  );
+};

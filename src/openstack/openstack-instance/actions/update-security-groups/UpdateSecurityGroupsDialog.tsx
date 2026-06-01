@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Form as BootstrapForm } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   OpenStackInstance,
   openstackInstancesUpdateSecurityGroups,
   openstackPortsUpdateSecurityGroups,
 } from 'waldur-js-client';
 
-import { SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -94,7 +93,7 @@ export const UpdateSecurityGroupsDialog: FC<
     <Form<FormData>
       onSubmit={mutateAsync}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate('Update security groups for {resource} {name}', {
@@ -103,22 +102,15 @@ export const UpdateSecurityGroupsDialog: FC<
             })}
             loading={isLoading}
             error={error}
-            submitting={submitting}
-            invalid={invalid}
           >
             {securityGroupOptions ? (
-              <BootstrapForm.Group>
-                <BootstrapForm.Label>
-                  {translate('Security groups')}
-                </BootstrapForm.Label>
-                <Field
-                  component={SelectField}
-                  name="security_groups"
-                  placeholder={translate('Select security groups...')}
-                  options={securityGroupOptions}
-                  isMulti={true}
-                />
-              </BootstrapForm.Group>
+              <SelectGroup
+                name="security_groups"
+                label={translate('Security groups')}
+                placeholder={translate('Select security groups...')}
+                options={securityGroupOptions}
+                isMulti={true}
+              />
             ) : null}
           </AsyncActionDialog>
         </form>

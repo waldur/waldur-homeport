@@ -47,6 +47,7 @@ export const ColumnRow = ({ column, fields, index, name }) => {
           name={`${name}.title`}
           component={StringField}
           placeholder={translate('Title is rendered as column header')}
+          aria-label={translate('Title')}
         />
       </td>
       <td>
@@ -56,6 +57,7 @@ export const ColumnRow = ({ column, fields, index, name }) => {
           placeholder={translate(
             'Resource attribute is rendered as table cell',
           )}
+          aria-label={translate('Attribute')}
         />
       </td>
       <td>
@@ -82,10 +84,11 @@ export const ColumnRow = ({ column, fields, index, name }) => {
           name={`${name}.index`}
           component={StringField}
           placeholder={translate('Index allows to reorder columns')}
+          aria-label={translate('Index')}
         />
       </td>
       <td>
-        <RemovalActionButton action={onRemove} />
+        <RemovalActionButton action={onRemove} tooltip={translate('Remove')} />
       </td>
     </tr>
   );

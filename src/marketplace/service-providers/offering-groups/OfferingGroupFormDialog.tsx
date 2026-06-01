@@ -7,10 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
-import { StringField } from '@/form/StringField';
-import { TextField } from '@/form/TextField';
+import { SubmitButton, StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -102,21 +99,23 @@ export const OfferingGroupFormDialog: FC<OfferingGroupFormDialogProps> = (
               />
             }
           >
-            <FormContainer submitting={submitting}>
-              <StringField
+            <div className="size-sm">
+              <StringGroup
                 label={translate('Title')}
                 name="title"
                 required
                 validate={required}
                 maxLength={255}
+                disabled={submitting}
               />
 
-              <TextField
+              <TextGroup
                 label={translate('Description')}
                 name="description"
                 required={false}
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

@@ -8,9 +8,7 @@ import {
 
 import { formatISODate, parseDate } from '@/core/dateUtils';
 import { WarnCard } from '@/core/WarnCard';
-import { SubmitButton, TextField } from '@/form';
-import { DateField } from '@/form/DateField';
-import { FormContainer } from '@/form/FormContainer';
+import { SubmitButton, DateGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -102,35 +100,36 @@ export const AdjustResourceDatesDialog: FunctionComponent<
             />
             <div className="row">
               <div className="col-sm-6">
-                <FormContainer submitting={submitting}>
-                  <DateField
+                <div className="size-sm">
+                  <DateGroup
                     name="start_date"
                     label={translate('Start date')}
                     disabled={submitting}
                   />
-                </FormContainer>
+                </div>
               </div>
               <div className="col-sm-6">
-                <FormContainer submitting={submitting}>
-                  <DateField
+                <div className="size-sm">
+                  <DateGroup
                     name="end_date"
                     label={translate('End date')}
                     disabled={submitting}
                     minDate={today}
                   />
-                </FormContainer>
+                </div>
               </div>
             </div>
-            <FormContainer submitting={submitting}>
-              <TextField
+            <div className="size-sm">
+              <TextGroup
                 name="comment"
                 label={translate('Comment')}
                 rows={3}
                 description={translate(
                   'Optional reason captured in the audit trail.',
                 )}
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

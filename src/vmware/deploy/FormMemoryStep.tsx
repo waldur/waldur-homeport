@@ -1,9 +1,7 @@
 import { useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { composeValidators } from '@/core/validators';
-import { FormGroup } from '@/form';
-import { SliderNumberField } from '@/form/SliderNumberField';
+import { SliderNumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import {
   formatIntField,
@@ -36,22 +34,17 @@ export const FormMemoryStep = (props: FormStepProps) => {
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
-      <Field
+      <SliderNumberGroup
         name="limits.ram"
-        component={FormGroup}
         min={1}
         validate={ramValidator}
         parse={parseIntField}
         format={formatIntField}
         tooltip={translate('Memory size in GiB')}
-      >
-        <SliderNumberField
-          unit={translate('GB')}
-          required={true}
-          min={1}
-          max={limits.max_ram}
-        />
-      </Field>
+        unit={translate('GB')}
+        required={true}
+        max={limits.max_ram}
+      />
     </VStepperFormStepCard>
   );
 };

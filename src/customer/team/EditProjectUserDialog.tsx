@@ -8,7 +8,7 @@ import {
   projectsUpdateUser,
 } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton } from '@/form';
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -111,12 +111,12 @@ export const EditProjectUserDialog: FC<EditProjectUserDialogProps> = ({
               </>
             }
           >
-            <FormContainer submitting={saveMutation.isPending}>
+            <div className="size-sm">
               <UserGroup permission={resolve.customer} />
               <ProjectGroup project={resolve.project} />
               <RoleGroup types={['project']} />
               <ExpirationTimeGroup disabled={submitting} />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

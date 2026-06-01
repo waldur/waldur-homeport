@@ -14,6 +14,7 @@ import {
   openAndSelectOption,
   openAndSelectOptionInContainer,
 } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { RemoteOfferingImportDialog } from './RemoteOfferingImportDialog';
@@ -88,12 +89,11 @@ describe('RemoteOfferingImportDialog', () => {
         },
       ],
     } as any);
-    vi.mocked(marketplaceCategoriesList).mockResolvedValue({
-      data: [{ uuid: 'local-category-uuid', title: 'Local Compute' }],
-      response: {
-        headers: { get: (name) => (name === 'x-result-count' ? '1' : null) },
-      },
-    } as any);
+    vi.mocked(marketplaceCategoriesList).mockResolvedValue(
+      mockListResponse([
+        { uuid: 'local-category-uuid', title: 'Local Compute' },
+      ]),
+    );
     vi.mocked(remoteWaldurApiImportOffering).mockResolvedValue({
       data: { uuid: 'imported-offering-uuid' },
     } as any);

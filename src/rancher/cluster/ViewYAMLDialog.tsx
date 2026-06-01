@@ -7,7 +7,6 @@ import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { FormFooter, SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -60,22 +59,13 @@ export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
       onSubmit={(values) => updateYamlMutation.mutateAsync(values)}
       initialValues={initialValues}
       enableReinitialize={true}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={translate('Edit YAML')}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid}
-                submitLabel={translate('Submit')}
-              />
-            }
-          >
+          <ModalDialog title={translate('Edit YAML')} footer={<FormFooter />}>
             {loading ? (
               <LoadingSpinner />
             ) : (
-              <FormContainer submitting={submitting}>
+              <div className="size-sm">
                 <Field
                   name="yaml"
                   language="yaml"
@@ -85,7 +75,7 @@ export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
                   height={400}
                   options={{ scrollBeyondLastLine: false }}
                 />
-              </FormContainer>
+              </div>
             )}
 
             {value && !loading && (

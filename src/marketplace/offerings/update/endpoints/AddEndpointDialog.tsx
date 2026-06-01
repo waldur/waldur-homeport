@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsAddEndpoint,
   NestedEndpointRequest,
@@ -11,7 +11,7 @@ import {
   url,
   validateMaxLength,
 } from '@/core/validators';
-import { FormGroup, StringField, SubmitButton } from '@/form';
+import { StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -50,24 +50,18 @@ export const AddEndpointDialog: FC<AddEndpointDialogProps> = (props) => {
               />
             }
           >
-            <Field
+            <StringGroup
               name="name"
               validate={composeValidators(required, validateMaxLength(150))}
-              component={FormGroup}
               label={translate('Name')}
               required={true}
-            >
-              <StringField />
-            </Field>
-            <Field
+            />
+            <StringGroup
               name="url"
               validate={composeValidators(required, url)}
-              component={FormGroup}
               label={translate('URL')}
               required={true}
-            >
-              <StringField />
-            </Field>
+            />
           </ModalDialog>
         </form>
       )}

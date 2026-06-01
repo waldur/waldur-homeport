@@ -27,7 +27,6 @@ export const UserDropdownMenu: FunctionComponent = () => {
         data-kt-menu-attach="parent"
         data-kt-menu-placement="bottom"
         data-kt-menu-flip="bottom"
-        data-cy="user-dropdown-trigger"
       >
         <div className="cursor-pointer symbol symbol-30px symbol-md-40px justify-content-center">
           {!user ? (
@@ -62,7 +61,6 @@ export const UserDropdownMenu: FunctionComponent = () => {
         className="menu-dropdown-default menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold py-4 fs-6 w-275px"
         data-kt-menu="true"
         data-popper-placement="bottom-end"
-        data-cy="user-dropdown-menu"
       >
         <div className="menu-item px-3">
           <div className="menu-content d-flex align-items-center px-2">

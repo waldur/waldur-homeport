@@ -15,10 +15,8 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { FormContainer, SubmitButton } from '@/form';
+import { SubmitButton, StringGroup, SelectGroup } from '@/form';
 import MarkdownEditor from '@/form/MarkdownEditor';
-import { SelectField } from '@/form/select/SelectField';
-import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
@@ -191,12 +189,13 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
               />
             }
           >
-            <FormContainer submitting={submitting} className="size-lg">
-              <StringField
+            <div className="size-lg">
+              <StringGroup
                 label={translate('Name')}
                 name="name"
                 required
                 validate={required}
+                disabled={submitting}
               />
 
               {isEdit && (
@@ -207,16 +206,17 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
                 />
               )}
               {isEdit && isFeatureVisible(MarketplaceFeatures.call_only) && (
-                <StringField
+                <StringGroup
                   label={translate('External URL')}
                   name="external_url"
                   required
                   validate={required}
+                  disabled={submitting}
                 />
               )}
 
               {isExperimentalUiComponentsVisible() && (
-                <SelectField
+                <SelectGroup
                   label={translate('Compliance checklist')}
                   name="compliance_checklist"
                   options={checklistOptions}
@@ -227,9 +227,10 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
                   help_text={translate(
                     'Optional checklist that proposal applicants must complete for compliance evaluation. Can be changed only before any proposals are submitted.',
                   )}
+                  disabled={submitting}
                 />
               )}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

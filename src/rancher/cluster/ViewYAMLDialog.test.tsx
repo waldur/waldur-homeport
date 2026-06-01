@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 import { renderWithProviders } from '@/test/harness';
@@ -21,6 +22,8 @@ const renderDialog = () =>
   );
 
 describe('ViewYAMLDialog', () => {
+  const user = userEvent.setup();
+
   it('renders loading state initially', () => {
     mockYamlRetrieve.mockReturnValue(new Promise(() => {})); // Never resolves
     renderDialog();
@@ -85,10 +88,11 @@ describe('ViewYAMLDialog', () => {
     });
 
     const editor = screen.getByTestId('monaco-editor');
-    fireEvent.change(editor, { target: { value: 'key: updated' } });
+    await user.clear(editor);
+    await user.type(editor, 'key: updated');
 
     const submitButton = screen.getByText('Submit');
-    fireEvent.click(submitButton);
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(mockYamlUpdate).toHaveBeenCalledWith({
@@ -115,7 +119,7 @@ describe('ViewYAMLDialog', () => {
     });
 
     const toggleButton = screen.getByText('Show diff');
-    fireEvent.click(toggleButton);
+    await user.click(toggleButton);
 
     expect(screen.getByText('Hide diff')).toBeInTheDocument();
   });

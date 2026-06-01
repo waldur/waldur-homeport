@@ -1,15 +1,12 @@
 import { FC, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { marketplaceProviderOfferingsAddUser } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { usersAutocomplete } from '@/customer/team/utils';
-import { SubmitButton } from '@/form';
-import { DateTimeField } from '@/form/DateTimeField';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import { AsyncSelectGroup, DateTimeGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -69,35 +66,33 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
               </>
             }
           >
-            <FormGroup label={translate('User')} required>
-              <AsyncSelectField
-                name="user"
-                placeholder={translate('Select user...')}
-                loadOptions={usersAutocomplete}
-                getOptionLabel={({ full_name, email }) => full_name || email}
-                validate={required}
-              />
-            </FormGroup>
+            <AsyncSelectGroup
+              label={translate('User')}
+              required
+              name="user"
+              placeholder={translate('Select user...')}
+              loadOptions={usersAutocomplete}
+              getOptionLabel={({ full_name, email }) => full_name || email}
+              validate={required}
+            />
 
             {!offering && (
-              <FormGroup label={translate('Offering')} required>
-                <AsyncSelectField
-                  name="offering"
-                  placeholder={translate('Select offering...')}
-                  loadOptions={loadOfferings}
-                  getOptionLabel={({ name }) => name}
-                  validate={required}
-                />
-              </FormGroup>
+              <AsyncSelectGroup
+                label={translate('Offering')}
+                required
+                name="offering"
+                placeholder={translate('Select offering...')}
+                loadOptions={loadOfferings}
+                getOptionLabel={({ name }) => name}
+                validate={required}
+              />
             )}
 
-            <FormGroup label={translate('Expiration time')}>
-              <Field
-                name="expiration_time"
-                component={DateTimeField}
-                placeholder={translate('Select a date')}
-              />
-            </FormGroup>
+            <DateTimeGroup
+              label={translate('Expiration time')}
+              name="expiration_time"
+              placeholder={translate('Select a date')}
+            />
           </ModalDialog>
         </form>
       )}

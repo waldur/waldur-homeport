@@ -8,8 +8,7 @@ import { ENV } from '@/core/config';
 import { isEmpty } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { SelectField, StringField, TextField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { StringGroup, TextGroup, BooleanGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { OECD_FOS_2007_CODES } from '@/project/OECD_FOS_2007_CODES';
@@ -91,99 +90,78 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         />
       }
     >
-      <FormGroup label={translate('Name')} required>
-        <Field
-          name="name"
-          component={StringField}
-          placeholder={translate('Enter a name...')}
-        />
-      </FormGroup>
+      <StringGroup
+        name="name"
+        placeholder={translate('Enter a name...')}
+        label={translate('Name')}
+        required
+      />
       <FieldReviewComments
         reviews={reviews}
         fieldName="comment_project_title"
       />
-
-      <FormGroup label={translate('Summary')} required>
-        <Field
-          name="project_summary"
-          component={TextField}
-          placeholder={translate('Enter a summary...')}
-          maxLength={1000}
-        />
-      </FormGroup>
+      <TextGroup
+        name="project_summary"
+        placeholder={translate('Enter a summary...')}
+        maxLength={1000}
+        label={translate('Summary')}
+        required
+      />
       <FieldReviewComments
         reviews={reviews}
         fieldName="comment_project_summary"
       />
-
-      <FormGroup label={translate('Description')}>
-        <Field
-          name="description"
-          component={TextField}
-          placeholder={translate('Enter a description...')}
-          maxLength={1000}
-        />
-      </FormGroup>
+      <TextGroup
+        name="description"
+        placeholder={translate('Enter a description...')}
+        maxLength={1000}
+        label={translate('Description')}
+      />
       <FieldReviewComments
         reviews={reviews}
         fieldName="comment_project_description"
       />
-
-      <FormGroup>
-        <Field
-          name="project_has_civilian_purpose"
-          component={AwesomeCheckboxField}
-          label={translate('Project for civilian purpose?')}
-          size="sm"
-        />
-      </FormGroup>
+      <BooleanGroup
+        name="project_has_civilian_purpose"
+        label={translate('Project for civilian purpose?')}
+        size="sm"
+      />
       <FieldReviewComments
         reviews={reviews}
         fieldName="comment_project_has_civilian_purpose"
       />
-
       {isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
-        <FormGroup
+        <SelectGroup
+          name="oecd_fos_2007_code"
+          options={OECD_FOS_2007_CODES}
+          getOptionValue={(option) => option.value}
+          getOptionLabel={(option) => `${option.value}. ${option.label}`}
+          isClearable={true}
+          simpleValue
           label={translate('Research field (OECD code)')}
           required={isCodeRequired}
-        >
-          <Field
-            name="oecd_fos_2007_code"
-            component={SelectField}
-            options={OECD_FOS_2007_CODES}
-            getOptionValue={(option) => option.value}
-            getOptionLabel={(option) => `${option.value}. ${option.label}`}
-            isClearable={true}
-            simpleValue
-          />
-        </FormGroup>
-      ) : null}
-      <FormGroup>
-        <Field
-          name="project_is_confidential"
-          component={AwesomeCheckboxField}
-          label={translate('Is the project confidential?')}
-          size="sm"
         />
-      </FormGroup>
+      ) : null}
+      <BooleanGroup
+        name="project_is_confidential"
+        label={translate('Is the project confidential?')}
+        size="sm"
+      />
       <FieldReviewComments
         reviews={reviews}
         fieldName="comment_project_is_confidential"
       />
-
-      <FormGroup label={translate('Project duration in days')} required>
-        <Field
-          name="duration_in_days"
-          component={StringField}
-          placeholder={translate('Enter number of days...')}
-          disabled={!!call?.fixed_duration_in_days}
-        />
-      </FormGroup>
+      <StringGroup
+        name="duration_in_days"
+        placeholder={translate('Enter number of days...')}
+        disabled={!!call?.fixed_duration_in_days}
+        label={translate('Project duration in days')}
+        required
+      />
       <FieldReviewComments
         reviews={reviews}
         fieldName="comment_project_duration"
       />
-
       <FormGroup label={translate('Upload supporting documentation')}>
         <Field
           name="supporting_documentation"

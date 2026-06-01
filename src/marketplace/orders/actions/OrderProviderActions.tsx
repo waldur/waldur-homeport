@@ -92,7 +92,6 @@ export const OrderProviderActions = ({
         showRequestInfoButton ? SetProviderInfoButton : null,
         user?.is_staff ? OrderUnlinkButton : null,
       ].filter(Boolean)}
-      data-cy="order-provider-actions-dropdown-btn"
       labeled={labeledDropdown}
       drop="down"
       size={size || 'lg'}

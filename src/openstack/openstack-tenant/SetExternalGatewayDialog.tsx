@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
   AvailableExternalNetwork,
@@ -12,9 +12,9 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormFooter, FormGroup, SelectField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BooleanGroup, FormFooter, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -120,7 +120,7 @@ export const SetExternalGatewayDialog = ({ resolve }: OwnProps) => {
       }}
       initialValues={initialValues}
       mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, invalid, values }) => {
+      render={({ handleSubmit, values }) => {
         const networks = query.data || [];
         const selected = networks.find(
           (n) => n.backend_id === values.external_network_id,
@@ -130,17 +130,10 @@ export const SetExternalGatewayDialog = ({ resolve }: OwnProps) => {
           <form onSubmit={handleSubmit}>
             <ModalDialog
               title={translate('Set external gateway')}
-              footer={
-                <FormFooter
-                  submitting={submitting}
-                  invalid={invalid || query.isLoading || !!query.error}
-                  submitLabel={translate('Set gateway')}
-                />
-              }
+              footer={<FormFooter submitLabel={translate('Set gateway')} />}
             >
-              <Field
+              <SelectGroup
                 name="external_network_id"
-                component={FormGroup}
                 label={translate('External network')}
                 description={translate(
                   'The external network to use as the gateway for this router.',
@@ -156,23 +149,18 @@ export const SetExternalGatewayDialog = ({ resolve }: OwnProps) => {
                   translate('No external networks are available.')
                 }
                 validate={required}
-              >
-                <SelectField />
-              </Field>
+              />
 
               {isRbac && (
                 <>
-                  <Field
+                  <BooleanGroup
                     name="disable_snat"
                     type="checkbox"
-                    component={FormGroup}
                     label={translate('Disable source NAT (SNAT)')}
                     description={translate(
                       'Disable SNAT to use this gateway for direct routing between networks.',
                     )}
-                  >
-                    <AwesomeCheckboxField />
-                  </Field>
+                  />
 
                   <FormGroup
                     label={translate('Fixed IPs')}

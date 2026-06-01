@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Alert, Col, Row } from 'react-bootstrap';
-import { Field, Form, FormRenderProps } from 'react-final-form';
+import { Form, FormRenderProps } from 'react-final-form';
 import {
   marketplaceRemoteSynchronisationsCreate,
   marketplaceRemoteSynchronisationsUpdate,
@@ -15,14 +15,14 @@ import {
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import {
+  AsyncSelectGroup,
+  BooleanGroup,
   FieldError,
-  SecretField,
-  SelectField,
-  StringField,
+  SecretGroup,
+  SelectGroup,
+  StringGroup,
   SubmitButton,
 } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -106,8 +106,8 @@ export const RemoteSyncFormDialog: FC<RemoteSyncFormDialogProps> = ({
                 name: remoteSync.remote_organization_name,
                 uuid: remoteSync.remote_organization_uuid,
               },
-              remotelocalcategory_set: remoteSync.remotelocalcategory_set.map(
-                (item) => ({
+              remotelocalcategory_set:
+                remoteSync.remotelocalcategory_set?.map((item) => ({
                   local_category: {
                     url: item.local_category,
                     title: item.local_category_name,
@@ -116,8 +116,7 @@ export const RemoteSyncFormDialog: FC<RemoteSyncFormDialogProps> = ({
                     uuid: item.remote_category,
                     title: item.remote_category_name,
                   } as Category,
-                }),
-              ),
+                })) || [],
             }
           : { remotelocalcategory_set: [{} as any] }
       }
@@ -139,18 +138,17 @@ const RemoteSyncRenderer = ({
 }: FormRenderProps<FormData, Partial<FormData>> & {
   remoteSync: RemoteSynchronisation;
 }) => {
-  const [checkedCredentials, setCheckedCredentials] = useState({
-    api_url: '',
-    token: '',
-  });
-
   const {
     data: remoteCustomers,
-    refetch: remoteCustomersRefetch,
     isFetching: remoteCustomersFetching,
     error: remoteCustomersError,
   } = useQuery({
-    queryKey: ['remoteCustomers', remoteSync?.uuid],
+    queryKey: [
+      'remoteCustomers',
+      remoteSync?.uuid,
+      values.api_url,
+      values.token,
+    ],
 
     queryFn: async () =>
       values.api_url && values.token
@@ -162,16 +160,20 @@ const RemoteSyncRenderer = ({
     staleTime: SHORT_STALE_TIME,
     refetchOnWindowFocus: false,
     retry: false,
-    enabled: false,
+    enabled: Boolean(values.api_url && values.token),
   });
 
   const {
     data: remoteCategories,
-    refetch: remoteCategoriesRefetch,
     isFetching: remoteCategoriesFetching,
     error: remoteCategoriesError,
   } = useQuery({
-    queryKey: ['remoteCategories', remoteSync?.uuid],
+    queryKey: [
+      'remoteCategories',
+      remoteSync?.uuid,
+      values.api_url,
+      values.token,
+    ],
 
     queryFn: async () =>
       values.api_url && values.token
@@ -183,23 +185,8 @@ const RemoteSyncRenderer = ({
     staleTime: SHORT_STALE_TIME,
     refetchOnWindowFocus: false,
     retry: false,
-    enabled: false,
+    enabled: Boolean(values.api_url && values.token),
   });
-
-  const loadData = () => {
-    if (
-      checkedCredentials.api_url === values?.api_url &&
-      checkedCredentials.token === values?.token
-    )
-      return;
-    remoteCustomersRefetch();
-    remoteCategoriesRefetch();
-    setCheckedCredentials({ api_url: values?.api_url, token: values?.token });
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   const isEdit = Boolean(remoteSync?.uuid);
 
@@ -232,24 +219,20 @@ const RemoteSyncRenderer = ({
           </>
         }
       >
-        <FormGroup label={translate('Remote API URL')} required>
-          <Field
-            component={StringField}
-            name="api_url"
-            placeholder={translate('e.g. waldur.example.com')}
-            validate={required}
-            onBlur={loadData}
-          />
-        </FormGroup>
-        <FormGroup label={translate('Authentication token')} required>
-          <Field
-            component={SecretField}
-            name="token"
-            placeholder={translate('e.g. SECRET_TOKEN')}
-            validate={required}
-            onBlur={loadData}
-          />
-        </FormGroup>
+        <StringGroup
+          name="api_url"
+          placeholder={translate('e.g. waldur.example.com')}
+          validate={required}
+          label={translate('Remote API URL')}
+          required
+        />
+        <SecretGroup
+          name="token"
+          placeholder={translate('e.g. SECRET_TOKEN')}
+          validate={required}
+          label={translate('Authentication token')}
+          required
+        />
         {connecting ? (
           <Alert variant="warning" className="overflow-auto mh-200px">
             {translate('Connecting')}...
@@ -261,41 +244,35 @@ const RemoteSyncRenderer = ({
         ) : null}
         <Row>
           <Col xs={6}>
-            <FormGroup label={translate('Remote organization')} required>
-              <Field
-                component={SelectField}
-                name="remote_organization"
-                options={remoteCustomers}
-                isLoading={remoteCustomersFetching}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.name}
-                validate={required}
-              />
-            </FormGroup>
+            <SelectGroup
+              name="remote_organization"
+              options={remoteCustomers}
+              isLoading={remoteCustomersFetching}
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              validate={required}
+              label={translate('Remote organization')}
+              required
+            />
           </Col>
           <Col xs={6}>
-            <FormGroup label={translate('Local service provider')} required>
-              <Field name="local_service_provider" validate={required}>
-                {(fieldProps) => (
-                  <AsyncSelect
-                    loadOptions={providerAutocomplete}
-                    defaultOptions
-                    getOptionValue={(option) => option.url}
-                    getOptionLabel={(option) => option.customer_name}
-                    value={fieldProps.input.value}
-                    onChange={(value) => fieldProps.input.onChange(value)}
-                    noOptionsMessage={() => translate('No providers')}
-                  />
-                )}
-              </Field>
-            </FormGroup>
+            <AsyncSelectGroup
+              name="local_service_provider"
+              label={translate('Local service provider')}
+              required
+              validate={required}
+              loadOptions={providerAutocomplete}
+              defaultOptions
+              getOptionValue={(option) => option.url}
+              getOptionLabel={(option) => option.customer_name}
+              noOptionsMessage={() => translate('No providers')}
+            />
           </Col>
         </Row>
         <FormGroup label={translate('Category mapping rules')} required>
           <CategoryMappingRulesField remoteCategories={remoteCategories} />
         </FormGroup>
-        <Field
-          component={AwesomeCheckboxField}
+        <BooleanGroup
           name="is_active"
           label={translate('Enable synchronization')}
           className="text-gray-700"

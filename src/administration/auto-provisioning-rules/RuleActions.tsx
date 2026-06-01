@@ -19,6 +19,5 @@ export const RuleActions = ({ row, refetch }) => (
       !!row.plan && RuleDeleteTemplateButton,
       RuleDeleteButton,
     ].filter(Boolean)}
-    data-cy="rules-list-actions-dropdown-btn"
   />
 );

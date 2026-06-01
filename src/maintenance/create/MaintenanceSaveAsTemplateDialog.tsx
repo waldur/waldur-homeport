@@ -21,7 +21,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
+import { SubmitButton, SelectGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -278,14 +278,14 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                 }
               }}
             />
-            <FormContainer submitting={submitting}>
+            <div className="size-sm">
               {!isLoading && error ? (
                 <LoadingErred
                   loadData={refetch}
                   message={translate('Unable to load templates')}
                 />
               ) : null}
-              <SelectField
+              <SelectGroup
                 name="template"
                 label={translate('Template')}
                 description={translate(
@@ -297,6 +297,7 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.uuid}
                 isLoading={isLoading}
+                disabled={submitting}
               />
 
               {!isLoadingOfferings && errorOfferings ? (
@@ -306,7 +307,7 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                 />
               ) : null}
 
-              <StringField
+              <StringGroup
                 name="name"
                 label={translate('Name')}
                 placeholder={
@@ -322,6 +323,7 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                 maxLength={150}
                 required
                 validate={required}
+                disabled={submitting}
               />
 
               <div className="d-flex justify-content-between">
@@ -349,7 +351,7 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                   }
                 />
               </div>
-            </FormContainer>
+            </div>
           </form>
         </ModalDialog>
       )}

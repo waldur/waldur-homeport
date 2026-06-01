@@ -1,11 +1,10 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { marketplaceOfferingRolesPartialUpdate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { StringField, SubmitButton } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -64,16 +63,17 @@ export const EditRoleDialog: FC<{ resolve: EditRoleResolve }> = ({
               </>
             }
           >
-            <FormGroup label={translate('Name')} required>
-              <Field name="name" validate={required} component={StringField} />
-            </FormGroup>
-            <FormGroup label={translate('Description')}>
-              <Field
-                name="description"
-                component={StringField}
-                placeholder={translate('Role description')}
-              />
-            </FormGroup>
+            <StringGroup
+              name="name"
+              validate={required}
+              label={translate('Name')}
+              required
+            />
+            <StringGroup
+              name="description"
+              placeholder={translate('Role description')}
+              label={translate('Description')}
+            />
           </ModalDialog>
         </form>
       )}

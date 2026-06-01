@@ -8,7 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { StringField, SelectField, NumberField, TextField } from '@/form';
+import { StringGroup, TextGroup, SelectGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -109,23 +109,21 @@ export const HPACreateDialog: FC<HPACreateDialogProps> = (props) => {
         return (
           <ActionDialogFinal
             title={translate('Create horizontal pod autoscaler')}
-            submitLabel={translate('Submit')}
             onSubmit={handleSubmit}
             submitting={submitting || isPending}
             invalid={invalid}
           >
-            <StringField
+            <StringGroup
               name="name"
               label={translate('Name')}
               required={true}
             />
-            <TextField
+            <TextGroup
               name="description"
               label={translate('Description')}
               required={false}
             />
-
-            <SelectField
+            <SelectGroup
               name="namespace"
               label={translate('Namespace')}
               required={true}
@@ -135,8 +133,7 @@ export const HPACreateDialog: FC<HPACreateDialogProps> = (props) => {
               isLoading={loading}
               isClearable={true}
             />
-
-            <SelectField
+            <SelectGroup
               name="workload"
               label={translate('Workload')}
               required={true}
@@ -147,40 +144,35 @@ export const HPACreateDialog: FC<HPACreateDialogProps> = (props) => {
               isDisabled={!namespace}
               isClearable={true}
             />
-
-            <NumberField
+            <NumberGroup
               name="min_replicas"
               label={translate('Min replicas')}
               required={true}
               min={1}
               max={10}
             />
-
-            <NumberField
+            <NumberGroup
               name="max_replicas"
               label={translate('Max replicas')}
               required={true}
               min={1}
               max={10}
             />
-
-            <SelectField
+            <SelectGroup
               name="metric_name"
               label={translate('Metric name')}
               required={true}
               options={metricNameOptions}
               isClearable={true}
             />
-
-            <SelectField
+            <SelectGroup
               name="target_type"
               label={translate('Target type')}
               required={true}
               options={targetTypeOptions}
               isClearable={true}
             />
-
-            <NumberField
+            <NumberGroup
               name="quantity"
               label={translate('Quantity')}
               required={true}

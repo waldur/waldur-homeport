@@ -1,11 +1,13 @@
-.login-input {
+.login-input,
+.local-login-form .form-control {
   margin-bottom: 8px;
   padding: 8px 14px;
   width: 100%;
   font-size: 1.077rem;
 }
 
-.login-input:focus {
+.login-input:focus,
+.local-login-form .form-control:focus {
   outline: 0;
 }
 

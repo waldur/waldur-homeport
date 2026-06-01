@@ -10,7 +10,7 @@ import {
   getLatinNameValidators,
   required,
 } from '@/core/validators';
-import { SelectField, StringField } from '@/form';
+import { StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -72,14 +72,13 @@ export const CreateServerGroupDialog: FC<CreateServerGroupDialogProps> = ({
       render={({ handleSubmit, submitting, invalid }) => (
         <ActionDialogFinal
           onSubmit={handleSubmit}
-          submitLabel={translate('Submit')}
           title={translate('Create server group for OpenStack tenant {name}', {
             name: resource.name,
           })}
           submitting={submitting}
           invalid={invalid}
         >
-          <StringField
+          <StringGroup
             label={translate('Name')}
             name="name"
             validate={composeValidators(...getLatinNameValidators())}
@@ -87,7 +86,7 @@ export const CreateServerGroupDialog: FC<CreateServerGroupDialogProps> = ({
             required={true}
           />
 
-          <SelectField
+          <SelectGroup
             label={translate('Policy')}
             name="policy"
             placeholder={translate('Select policy...')}

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC, useEffect, useMemo } from 'react';
 import { Form as BootstrapForm } from 'react-bootstrap';
-import { Form, Field, useForm, useFormState } from 'react-final-form';
+import { Form, useForm, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
   Offering,
@@ -12,10 +12,13 @@ import {
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormGroup, SelectField, SubmitButton } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { InputField } from '@/form/InputField';
-import { AsyncSelect } from '@/form/select';
+import {
+  AsyncSelectGroup,
+  BooleanGroup,
+  SelectGroup,
+  StringGroup,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -132,28 +135,21 @@ export const MigrateTenantDialog: FC<MigrateTenantDialogProps> = ({
               </div>
             }
           >
-            <Field
+            <StringGroup
               name="name"
               label={translate('Name')}
-              component={FormGroup}
               validate={required}
-            >
-              <InputField />
-            </Field>
-            <Field
+            />
+            <AsyncSelectGroup
               name="offering"
               label={translate('Offering')}
-              component={FormGroup}
               validate={required}
-            >
-              <AsyncSelect
-                loadOptions={loadOfferings}
-                getOptionLabel={({ name, customer_name }) =>
-                  `${name} | ${customer_name}`
-                }
-                getOptionValue={({ uuid }) => uuid}
-              />
-            </Field>
+              loadOptions={loadOfferings}
+              getOptionLabel={({ name, customer_name }) =>
+                `${name} | ${customer_name}`
+              }
+              getOptionValue={({ uuid }) => uuid}
+            />
 
             {values.offering && (
               <MigrateTenantFields
@@ -203,18 +199,14 @@ const MigrateTenantFields = ({ offering, resource }) => {
 
   return (
     <>
-      <Field
+      <SelectGroup
         name="plan"
         label={translate('Plan')}
-        component={FormGroup}
         validate={required}
-      >
-        <SelectField
-          options={offering.plans}
-          getOptionLabel={({ name }) => name}
-          getOptionValue={({ uuid }) => uuid}
-        />
-      </Field>
+        options={offering.plans}
+        getOptionLabel={({ name }) => name}
+        getOptionValue={({ uuid }) => uuid}
+      />
       {queryResult.isLoading ? (
         <LoadingSpinner />
       ) : queryResult.data ? (
@@ -229,13 +221,12 @@ const MigrateTenantFields = ({ offering, resource }) => {
               )}
             </FieldArray>
           </BootstrapForm.Group>
-          <Field
+          <SelectGroup
             name="networks"
             label={translate('Networks')}
-            component={FormGroup}
-          >
-            <SelectField options={queryResult.data.networks} isMulti />
-          </Field>
+            options={queryResult.data.networks}
+            isMulti
+          />
           <BootstrapForm.Group className="mb-7">
             <BootstrapForm.Label className="form-label">
               {translate('Subnets')}
@@ -251,21 +242,14 @@ const MigrateTenantFields = ({ offering, resource }) => {
           </BootstrapForm.Group>
         </>
       ) : null}
-
-      <Field
+      <BooleanGroup
         name="skip_connection_extnet"
         label={translate('Skip connection to external network')}
-        component={FormGroup}
-      >
-        <AwesomeCheckboxField />
-      </Field>
-      <Field
+      />
+      <BooleanGroup
         name="sync_instance_ports"
         label={translate('Copy ports connected to instances')}
-        component={FormGroup}
-      >
-        <AwesomeCheckboxField />
-      </Field>
+      />
     </>
   );
 };

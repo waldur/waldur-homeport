@@ -7,14 +7,13 @@ import {
   useState,
 } from 'react';
 import { Card } from 'react-bootstrap';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { BlankEnum, ValidationMethodEnum } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormGroup } from '@/form/FormGroup';
-import { SelectField } from '@/form/select/SelectField';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
@@ -133,23 +132,19 @@ export const OrganizationCreateStep1: FunctionComponent<
             )}
           </p>
 
-          <Field
+          <SelectGroup
             name="validationMethod"
             label={translate('Verification method')}
-            component={FormGroup}
             required
             validate={required}
             description={translate(
               'How would you like to verify your company?',
             )}
             simpleValue
-          >
-            <SelectField
-              options={validationMethodOptions}
-              placeholder={translate('Select a verification method')}
-              isClearable={false}
-            />
-          </Field>
+            options={validationMethodOptions}
+            placeholder={translate('Select a verification method')}
+            isClearable={false}
+          />
 
           {loading && (
             <div className="mt-4">

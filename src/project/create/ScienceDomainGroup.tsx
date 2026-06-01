@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Field, useForm } from 'react-final-form';
+import { useForm } from 'react-final-form';
 import { scienceDomainsList, scienceSubDomainsList } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { SelectField } from '@/form';
+import { SelectField, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
@@ -78,23 +78,21 @@ export const ScienceDomainGroup = () => {
           placeholder={translate('Select science domain...')}
         />
       </FormGroup>
-      <FormGroup label={translate('Science sub-domain')}>
-        <Field
-          name="science_sub_domain"
-          component={SelectField}
-          options={subDomains}
-          getOptionValue={(option) => option.uuid}
-          getOptionLabel={(option) => option.name}
-          isClearable={true}
-          isLoading={loadingSubDomains}
-          isDisabled={!selectedDomain}
-          placeholder={
-            selectedDomain
-              ? translate('Select sub-domain...')
-              : translate('Select a domain first')
-          }
-        />
-      </FormGroup>
+      <SelectGroup
+        name="science_sub_domain"
+        options={subDomains}
+        getOptionValue={(option) => option.uuid}
+        getOptionLabel={(option) => option.name}
+        isClearable={true}
+        isLoading={loadingSubDomains}
+        isDisabled={!selectedDomain}
+        placeholder={
+          selectedDomain
+            ? translate('Select sub-domain...')
+            : translate('Select a domain first')
+        }
+        label={translate('Science sub-domain')}
+      />
     </>
   );
 };

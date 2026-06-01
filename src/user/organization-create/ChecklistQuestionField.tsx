@@ -2,18 +2,20 @@ import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
 import { composeValidators, email, required } from '@/core/validators';
-import { FileUploadField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { CountrySelectField } from '@/form/CountrySelectField';
-import { DateField } from '@/form/DateField';
-import { DateTimeField } from '@/form/DateTimeField';
-import { EmailField } from '@/form/EmailField';
+import {
+  BooleanGroup,
+  CountrySelectGroup,
+  DateGroup,
+  DateTimeGroup,
+  EmailGroup,
+  FileUploadGroup,
+  NumberGroup,
+  SelectGroup,
+  StringGroup,
+  TextGroup,
+} from '@/form';
 import { FormGroup } from '@/form/FormGroup';
-import { NumberField } from '@/form/NumberField';
 import { PhoneNumberField } from '@/form/PhoneNumberField';
-import { SelectField } from '@/form/select/SelectField';
-import { StringField } from '@/form/StringField';
-import { TextField } from '@/form/TextField';
 import { YearField } from '@/form/YearField';
 import { translate } from '@/i18n';
 import {
@@ -75,7 +77,6 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
   if (type === 'number' && numberValidator) validators.push(numberValidator);
 
   const commonProps = {
-    key: question.uuid,
     name: fieldName,
     label: question.description,
     required: isRequired,
@@ -89,28 +90,28 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
   switch (type) {
     case 'text_input':
       return (
-        <Field {...commonProps} placeholder={placeholder} component={FormGroup}>
-          <StringField />
-        </Field>
+        <StringGroup
+          {...commonProps}
+          key={question.uuid}
+          placeholder={placeholder}
+        />
       );
 
     case 'text_area':
       return (
-        <Field
+        <TextGroup
           {...commonProps}
+          key={question.uuid}
           placeholder={placeholder}
           rows={3}
-          component={FormGroup}
-        >
-          <TextField />
-        </Field>
+        />
       );
 
     case 'single_select':
       return (
-        <Field
+        <SelectGroup
           {...commonProps}
-          component={FormGroup}
+          key={question.uuid}
           simpleValue
           isClearable={!isRequired}
           options={(
@@ -121,16 +122,14 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
             label: opt.label,
             value: opt.uuid,
           }))}
-        >
-          <SelectField />
-        </Field>
+        />
       );
 
     case 'multi_select':
       return (
-        <Field
+        <SelectGroup
           {...commonProps}
-          component={FormGroup}
+          key={question.uuid}
           simpleValue
           isMulti
           isClearable={!isRequired}
@@ -142,71 +141,63 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
             label: opt.label,
             value: opt.uuid,
           }))}
-        >
-          <SelectField />
-        </Field>
+        />
       );
 
     case 'number':
       return (
-        <Field
+        <NumberGroup
           {...commonProps}
+          key={question.uuid}
           placeholder="0"
-          component={FormGroup}
           min={question.min_value}
           max={question.max_value}
-        >
-          <NumberField />
-        </Field>
+        />
       );
 
     case 'date':
-      return (
-        <Field {...commonProps} component={FormGroup}>
-          <DateField />
-        </Field>
-      );
+      return <DateGroup {...commonProps} key={question.uuid} />;
 
     case 'datetime':
-      return (
-        <Field {...commonProps} component={FormGroup}>
-          <DateTimeField />
-        </Field>
-      );
+      return <DateTimeGroup {...commonProps} key={question.uuid} />;
 
     case 'year':
       return (
-        <Field {...commonProps} component={FormGroup}>
+        <Field
+          {...commonProps}
+          key={question.uuid}
+          component={FormGroup}
+          placeholder={question.user_guidance}
+        >
           <YearField />
         </Field>
       );
 
     case 'boolean':
       return (
-        <Field
+        <BooleanGroup
           {...commonProps}
-          component={AwesomeCheckboxField}
+          key={question.uuid}
           description={question.user_guidance}
         />
       );
 
     case 'email':
       return (
-        <Field
+        <EmailGroup
           {...commonProps}
+          key={question.uuid}
           placeholder={question.user_guidance}
-          component={FormGroup}
-        >
-          <EmailField />
-        </Field>
+        />
       );
 
     case 'phone_number':
       return (
         <Field
           {...commonProps}
-          placeholder={question.user_guidance}
+          key={question.uuid}
           component={FormGroup}
+          placeholder={question.user_guidance}
         >
           <PhoneNumberField />
         </Field>
@@ -214,58 +205,53 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
 
     case 'url':
       return (
-        <Field
+        <StringGroup
           {...commonProps}
+          key={question.uuid}
           placeholder={question.user_guidance}
-          component={FormGroup}
-        >
-          <StringField type="url" />
-        </Field>
+          type="url"
+        />
       );
 
     case 'file':
     case 'multiple_files':
       return (
-        <Field
+        <FileUploadGroup
           {...commonProps}
-          component={FormGroup}
+          key={question.uuid}
           showFileName={true}
           buttonLabel={translate('Browse')}
-        >
-          <FileUploadField buttonLabel="" />
-        </Field>
+        />
       );
 
     case 'rating':
       return (
-        <Field
+        <NumberGroup
           {...commonProps}
+          key={question.uuid}
           placeholder="0"
-          component={FormGroup}
           min={question.min_value || 0}
           max={question.max_value || 10}
-        >
-          <NumberField />
-        </Field>
+        />
       );
 
     case 'country':
       return (
-        <Field
+        <CountrySelectGroup
           {...commonProps}
+          key={question.uuid}
           placeholder={placeholder}
-          component={FormGroup}
           isClearable={!isRequired}
-        >
-          <CountrySelectField />
-        </Field>
+        />
       );
 
     default:
       return (
-        <Field {...commonProps} placeholder={placeholder} component={FormGroup}>
-          <StringField />
-        </Field>
+        <StringGroup
+          {...commonProps}
+          key={question.uuid}
+          placeholder={placeholder}
+        />
       );
   }
 };

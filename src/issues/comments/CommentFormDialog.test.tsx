@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportCommentsUpdate, supportIssuesComment } from 'waldur-js-client';
 
@@ -22,6 +23,8 @@ const mockComment = {
 };
 
 describe('CommentFormDialog', () => {
+  const user = userEvent.setup();
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -38,14 +41,15 @@ describe('CommentFormDialog', () => {
     expect(screen.getByDisplayValue('Existing comment')).toBeInTheDocument();
   });
 
-  it('validates required description', () => {
+  it('validates required description', async () => {
     renderComponent({ resolve: { issue: mockIssue } });
 
     const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: '' } });
-    fireEvent.blur(input);
+    await user.clear(input);
 
-    const submitBtn = screen.getByText('Confirm').closest('button');
+    await user.tab();
+
+    const submitBtn = screen.getByRole('button', { name: 'Confirm' });
     expect(submitBtn).toBeDisabled();
   });
 
@@ -54,10 +58,11 @@ describe('CommentFormDialog', () => {
     renderComponent({ resolve: { issue: mockIssue } });
 
     const input = screen.getByRole('textbox');
-    fireEvent.change(input, { target: { value: 'New comment' } });
+    await user.clear(input);
+    await user.type(input, 'New comment');
 
     const submitBtn = screen.getByText('Confirm');
-    fireEvent.click(submitBtn);
+    await user.click(submitBtn);
 
     await waitFor(() => {
       expect(supportIssuesComment).toHaveBeenCalledWith({
@@ -72,10 +77,11 @@ describe('CommentFormDialog', () => {
     renderComponent({ resolve: { comment: mockComment, issue: mockIssue } });
 
     const input = screen.getByDisplayValue('Existing comment');
-    fireEvent.change(input, { target: { value: 'Updated comment' } });
+    await user.clear(input);
+    await user.type(input, 'Updated comment');
 
     const submitBtn = screen.getByText('Confirm');
-    fireEvent.click(submitBtn);
+    await user.click(submitBtn);
 
     await waitFor(() => {
       expect(supportCommentsUpdate).toHaveBeenCalledWith({
@@ -87,7 +93,7 @@ describe('CommentFormDialog', () => {
 
   it('submit button is disabled when pristine', () => {
     renderComponent({ resolve: { comment: mockComment, issue: mockIssue } });
-    const submitBtn = screen.getByText('Confirm').closest('button');
+    const submitBtn = screen.getByRole('button', { name: 'Confirm' });
     expect(submitBtn).toBeDisabled();
   });
 });

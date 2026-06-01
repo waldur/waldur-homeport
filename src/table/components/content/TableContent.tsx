@@ -56,7 +56,7 @@ export function TableContent() {
   // Render loading state
   if (loading && !hasRows) {
     return (
-      <h1 className="text-center">
+      <h1 className="text-center" data-testid="table-content-loading">
         <TableLoadingSpinnerContainer loading={loading} />
       </h1>
     );
@@ -106,6 +106,7 @@ export function TableContent() {
             gridHover && 'grid-hover-shadow',
             isRefetching && 'table-content-refetching',
           )}
+          data-testid="table-container"
         >
           <GridBody
             rows={rows}
@@ -129,6 +130,7 @@ export function TableContent() {
           tableHover && 'table-hover-shadow',
           isRefetching && 'table-content-refetching',
         )}
+        data-testid="table-container"
       >
         <TableView />
       </div>

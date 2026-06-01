@@ -71,7 +71,10 @@ export const ThreadListItem: FC<ThreadListItemProps> = ({
   onAction,
   isArchived,
 }) => (
-  <div className={`aui-history-item ${isActive ? 'active' : ''}`}>
+  <div
+    className={`aui-history-item ${isActive ? 'active' : ''}`}
+    data-testid="thread-list-item"
+  >
     <button
       type="button"
       className="aui-history-item-main"

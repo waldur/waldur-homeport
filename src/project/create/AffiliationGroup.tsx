@@ -1,11 +1,9 @@
 import { useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { Badge } from '@/core/Badge';
-import { AsyncSelect as AsyncSelectSelect } from '@/form/select';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { affiliationAutocomplete } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { Customer } from '@/workspace/types';
 
 import { isAffiliationRequiredAtCreate } from './affiliationConfig';
@@ -63,33 +61,26 @@ export const AffiliationGroup = ({
   );
 
   return (
-    <FormGroup label={translate('Affiliation')} required={required}>
-      <Field
-        name="affiliation"
-        validate={validate}
-        render={(fieldProps) => (
-          <AsyncSelectSelect
-            {...fieldProps.input}
-            // The cacheUniqs key makes AsyncSelect re-fetch the first page
-            // when the customer changes (the underlying default list differs).
-            cacheUniqs={[customer?.uuid, isStaff]}
-            placeholder={translate('Select an affiliation...')}
-            loadOptions={loadOptions}
-            defaultOptions
-            getOptionValue={(option) => option.uuid}
-            getOptionLabel={(option) => option.name}
-            formatOptionLabel={formatOptionLabel}
-            isClearable={!required}
-            noOptionsMessage={() =>
-              isStaff
-                ? translate('No affiliations found.')
-                : translate(
-                    'No affiliations are configured for this organization.',
-                  )
-            }
-          />
-        )}
-      />
-    </FormGroup>
+    <AsyncSelectGroup
+      name="affiliation"
+      label={translate('Affiliation')}
+      required={required}
+      validate={validate}
+      // The cacheUniqs key makes AsyncSelect re-fetch the first page
+      // when the customer changes (the underlying default list differs).
+      cacheUniqs={[customer?.uuid, isStaff]}
+      placeholder={translate('Select an affiliation...')}
+      loadOptions={loadOptions}
+      defaultOptions
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={(option) => option.name}
+      formatOptionLabel={formatOptionLabel}
+      isClearable={!required}
+      noOptionsMessage={() =>
+        isStaff
+          ? translate('No affiliations found.')
+          : translate('No affiliations are configured for this organization.')
+      }
+    />
   );
 };

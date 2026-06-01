@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   OutcomeEnum,
   proposalProposalsAdvanceWorkflowStep,
@@ -12,9 +12,8 @@ import { Badge } from '@/core/Badge';
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { formatRelative } from '@/core/dateUtils';
 import { required } from '@/core/validators';
-import { SelectField, SubmitButton, TextField } from '@/form';
+import { SelectGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { userHasRole } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
@@ -67,24 +66,21 @@ const CompleteStepForm: FC<CompleteStepFormProps> = ({
     initialValues={{ outcome: '', outcome_reason: '' }}
     render={({ handleSubmit, submitting, invalid }) => (
       <form onSubmit={handleSubmit}>
-        <FormGroup label={translate('Outcome')} required>
-          <Field
-            name="outcome"
-            component={SelectField as any}
-            options={outcomeOptions}
-            simpleValue
-            placeholder={translate('Select outcome…')}
-            validate={required}
-          />
-        </FormGroup>
-        <FormGroup label={translate('Notes')}>
-          <Field
-            name="outcome_reason"
-            component={TextField as any}
-            rows={2}
-            placeholder={translate('Additional notes...')}
-          />
-        </FormGroup>
+        <SelectGroup
+          label={translate('Outcome')}
+          required
+          name="outcome"
+          options={outcomeOptions}
+          simpleValue
+          placeholder={translate('Select outcome…')}
+          validate={required}
+        />
+        <TextGroup
+          label={translate('Notes')}
+          name="outcome_reason"
+          rows={2}
+          placeholder={translate('Additional notes...')}
+        />
         <div className="d-flex gap-2">
           <SubmitButton
             submitting={submitting}
@@ -120,17 +116,16 @@ const RejectStepForm: FC<RejectStepFormProps> = ({ onSubmit, onCancel }) => (
     initialValues={{ reason: '' }}
     render={({ handleSubmit, submitting, invalid }) => (
       <form onSubmit={handleSubmit}>
-        <FormGroup label={translate('Rejection reason')} required>
-          <Field
-            name="reason"
-            component={TextField as any}
-            rows={3}
-            placeholder={translate(
-              'Explain why this proposal is being rejected...',
-            )}
-            validate={required}
-          />
-        </FormGroup>
+        <TextGroup
+          label={translate('Rejection reason')}
+          required
+          name="reason"
+          rows={3}
+          placeholder={translate(
+            'Explain why this proposal is being rejected...',
+          )}
+          validate={required}
+        />
         <div className="d-flex gap-2">
           <SubmitButton
             submitting={submitting}

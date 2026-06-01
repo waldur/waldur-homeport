@@ -8,7 +8,7 @@ import {
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { FormContainer, StringField, SubmitButton } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { checkOrderCanBeApproved } from '@/marketplace/orders/actions/selectors';
@@ -119,14 +119,15 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
                     orderCanBeApproved={orderCanBeApproved}
                   />
                   {showPurchaseOrder && (
-                    <FormContainer submitting={submitting} className="mt-4">
-                      <StringField
+                    <div className="mt-4">
+                      <StringGroup
                         name="request_comment"
                         label={translate('Comment')}
                         description={translate(
                           'Optional note for the service provider, e.g. a PO number.',
                         )}
                         placeholder={translate('Optional')}
+                        disabled={submitting}
                       />
                       <FormGroup
                         label={translate('Purchase order document')}
@@ -139,7 +140,7 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
                           onChange={(value) => change('attachment', value)}
                         />
                       </FormGroup>
-                    </FormContainer>
+                    </div>
                   )}
                 </>
               )}

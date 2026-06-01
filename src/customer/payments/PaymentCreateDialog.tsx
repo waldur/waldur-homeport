@@ -4,13 +4,7 @@ import { paymentsCreate } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
-import {
-  FileUploadField,
-  FormContainer,
-  NumberField,
-  SubmitButton,
-} from '@/form';
-import { DateField } from '@/form/DateField';
+import { FileUploadGroup, SubmitButton, DateGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -23,18 +17,16 @@ interface PaymentCreateDialogProps {
   };
 }
 
+interface FormValues {
+  date_of_payment: string;
+  sum: number | string;
+  proof: File;
+}
+
 export const PaymentCreateDialog: FunctionComponent<
   PaymentCreateDialogProps
 > = (props) => {
-  const mutation = useManagedMutation<
-    any,
-    any,
-    {
-      date_of_payment: string;
-      sum: number | string;
-      proof: File;
-    }
-  >({
+  const mutation = useManagedMutation<any, any, FormValues>({
     mutationFn: (formData) =>
       paymentsCreate({
         body: {
@@ -50,13 +42,9 @@ export const PaymentCreateDialog: FunctionComponent<
     refetch: props.resolve.refetch,
   });
 
-  const submitRequest = async (formData) => {
-    await mutation.mutateAsync(formData);
-  };
-
   return (
-    <Form
-      onSubmit={submitRequest}
+    <Form<FormValues>
+      onSubmit={mutation.mutateAsync}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -72,23 +60,27 @@ export const PaymentCreateDialog: FunctionComponent<
               </>
             }
           >
-            <div style={{ paddingBottom: '50px' }}>
-              <FormContainer submitting={submitting}>
-                <DateField
-                  name="date_of_payment"
-                  label={translate('Date')}
-                  required
-                />
+            <div style={{ paddingBottom: '50px' }} className="size-sm">
+              <DateGroup
+                name="date_of_payment"
+                label={translate('Date')}
+                required
+                disabled={submitting}
+              />
 
-                <NumberField name="sum" label={translate('Sum')} required />
+              <NumberGroup
+                name="sum"
+                label={translate('Sum')}
+                required
+                disabled={submitting}
+              />
 
-                <FileUploadField
-                  name="proof"
-                  label={translate('Proof')}
-                  showFileName={true}
-                  buttonLabel={translate('Browse')}
-                />
-              </FormContainer>
+              <FileUploadGroup
+                name="proof"
+                label={translate('Proof')}
+                showFileName={true}
+                buttonLabel={translate('Browse')}
+              />
             </div>
           </ModalDialog>
         </form>

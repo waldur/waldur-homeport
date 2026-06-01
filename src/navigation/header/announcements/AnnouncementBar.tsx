@@ -70,6 +70,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
           <span
             className={variant && colored ? undefined : 'text-muted'}
             dangerouslySetInnerHTML={{ __html: safeDescription }}
+            data-testid="announcement-description"
           />
           {onAction && actionLabel ? (
             <button

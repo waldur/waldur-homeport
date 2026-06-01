@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { Alert, Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
-import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 
 import { SingleOfferingImportFormData } from './types';
@@ -28,7 +27,7 @@ export const ReviewImportTab: FunctionComponent = () => {
   ].filter((option) => formData?.[option.key]);
 
   return (
-    <FormContainer submitting={false}>
+    <div className="size-sm">
       <Row>
         <Col md={12}>
           <h5>{translate('Import summary')}</h5>
@@ -79,6 +78,6 @@ export const ReviewImportTab: FunctionComponent = () => {
           )}
         </Col>
       </Row>
-    </FormContainer>
+    </div>
   );
 };

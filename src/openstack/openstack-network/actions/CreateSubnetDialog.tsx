@@ -1,12 +1,25 @@
+import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
+import { Form } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { openstackNetworksCreateSubnet } from 'waldur-js-client';
 
+import {
+  AsyncSelectGroup,
+  BooleanGroup,
+  FormFooter,
+  StringGroup,
+  TextGroup,
+} from '@/form';
+import { NameGroup } from '@/form/NameGroup';
 import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { InternalNetworkAllocationPool } from '@/openstack/openstack-subnet/AllocationPoolsField';
-import { getFields } from '@/openstack/openstack-subnet/fields';
 import { networkAutocomplete } from '@/openstack/openstack-subnet/networkAutocomplete';
-import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { IpAddressList } from '@/openstack/openstack-tenant/IpAddressList';
+import { StaticRoutesTable } from '@/openstack/openstack-tenant/StaticRoutesTable';
 import { ActionDialogProps } from '@/resource/actions/types';
 
 type CreateSubnetDialogResolve = {
@@ -21,6 +34,10 @@ type CreateSubnetFormData = {
   description?: string;
   cidr?: string;
   allocation_pools?: Array<{ start: string; end: string }>;
+  gateway_ip?: string;
+  disable_gateway?: boolean;
+  host_routes?: any[];
+  dns_nameservers?: any[];
 };
 
 export const CreateSubnetDialog: FC<
@@ -49,45 +66,68 @@ export const CreateSubnetDialog: FC<
     end: '192.168.42.200',
   };
 
-  const networkField = showNetworkField
-    ? [
-        {
-          name: 'network',
-          label: translate('Network'),
-          type: 'async_select',
-          placeholder: translate('Select network...'),
-          loadOptions: networkAutocomplete(resource.uuid),
-          defaultOptions: true,
-          getOptionValue: (option) => option.uuid,
-          getOptionLabel: (option) => option.name,
-          noOptionsMessage: () => translate('No networks'),
-          isClearable: true,
-          required: true,
-        },
-      ]
-    : [];
-
   return (
-    <ResourceActionDialog
-      dialogTitle={translate('Create subnet')}
-      formFields={[
-        ...networkField,
-        ...getFields(),
-        {
-          name: 'cidr',
-          label: translate('Internal network mask (CIDR)'),
-          type: 'string',
-        },
-        {
-          name: 'allocation_pools',
-          component: InternalNetworkAllocationPool,
-        },
-      ]}
+    <Form
       initialValues={{
         cidr: initialCidr,
         allocation_pools: [defaultPool],
       }}
-      submitForm={mutation.mutateAsync}
+      mutators={{ ...arrayMutators }}
+      onSubmit={async (values) => {
+        try {
+          await mutation.mutateAsync(values);
+        } catch {
+          // Handled by useManagedMutation
+        }
+      }}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Create subnet')}
+            footer={<FormFooter />}
+          >
+            {showNetworkField && (
+              <AsyncSelectGroup
+                name="network"
+                label={translate('Network')}
+                placeholder={translate('Select network...')}
+                loadOptions={networkAutocomplete(resource.uuid)}
+                defaultOptions={true}
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.name}
+                noOptionsMessage={() => translate('No networks')}
+                isClearable={true}
+                required={true}
+              />
+            )}
+            <NameGroup />
+            <TextGroup
+              name="description"
+              label={translate('Description')}
+              maxLength={4096}
+            />
+            <StringGroup
+              name="gateway_ip"
+              label={translate('Gateway IP of this subnet')}
+            />
+            <BooleanGroup
+              name="disable_gateway"
+              label={translate('Disable gateway IP advertising via DHCP')}
+            />
+            <FormGroup label={translate('Host routes')}>
+              <FieldArray name="host_routes" component={StaticRoutesTable} />
+            </FormGroup>
+            <FormGroup label={translate('DNS name servers')}>
+              <FieldArray name="dns_nameservers" component={IpAddressList} />
+            </FormGroup>
+            <StringGroup
+              name="cidr"
+              label={translate('Internal network mask (CIDR)')}
+            />
+            <InternalNetworkAllocationPool />
+          </ModalDialog>
+        </form>
+      )}
     />
   );
 };

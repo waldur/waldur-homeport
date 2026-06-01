@@ -22,7 +22,6 @@ export const ManagedProjectActions = ({ project, refetch }) => {
         project.project ? DetachManagedProjectButton : null,
         DeleteManagedProjectButton,
       ].filter(Boolean)}
-      data-cy="public-resources-list-actions-dropdown-btn"
     />
   );
 };

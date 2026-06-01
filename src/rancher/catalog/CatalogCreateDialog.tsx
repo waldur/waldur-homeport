@@ -3,13 +3,7 @@ import { Form } from 'react-final-form';
 import { rancherCatalogsCreate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import {
-  StringField,
-  TextField,
-  SecretField,
-  FormContainer,
-  SubmitButton,
-} from '@/form';
+import { SubmitButton, StringGroup, TextGroup, SecretGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -63,30 +57,45 @@ export const CatalogCreateDialog: FC<CatalogCreateDialogProps> = (props) => {
               </>
             }
           >
-            <FormContainer submitting={createCatalogMutation.isPending}>
-              <StringField
+            <div className="size-sm">
+              <StringGroup
                 name="name"
                 label={translate('Name')}
                 required={true}
                 validate={required}
+                disabled={createCatalogMutation.isPending}
               />
-              <TextField name="description" label={translate('Description')} />
-              <StringField
+              <TextGroup
+                name="description"
+                label={translate('Description')}
+                disabled={createCatalogMutation.isPending}
+              />
+              <StringGroup
                 name="catalog_url"
                 label={translate('Catalog URL')}
                 required={true}
                 validate={required}
+                disabled={createCatalogMutation.isPending}
               />
 
-              <StringField
+              <StringGroup
                 name="branch"
                 label={translate('Branch')}
                 required={true}
                 validate={required}
+                disabled={createCatalogMutation.isPending}
               />
-              <StringField name="username" label={translate('Username')} />
-              <SecretField name="password" label={translate('Password')} />
-            </FormContainer>
+              <StringGroup
+                name="username"
+                label={translate('Username')}
+                disabled={createCatalogMutation.isPending}
+              />
+              <SecretGroup
+                name="password"
+                label={translate('Password')}
+                disabled={createCatalogMutation.isPending}
+              />
+            </div>
           </ModalDialog>
         </form>
       )}

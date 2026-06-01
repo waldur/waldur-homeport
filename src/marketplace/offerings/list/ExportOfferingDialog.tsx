@@ -34,7 +34,7 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Modal.Header>
             <Modal.Title>{translate('Export offering')}</Modal.Title>
@@ -153,7 +153,6 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
           </Modal.Body>
           <Modal.Footer>
             <FormFooter
-              submitting={submitting}
               submitLabel={translate('Export')}
               submitVariant="success"
             />

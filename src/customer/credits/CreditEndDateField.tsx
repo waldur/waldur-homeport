@@ -1,9 +1,8 @@
 import { FC, useMemo } from 'react';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { FormGroup } from '@/form';
-import { DateField } from '@/form/DateField';
+import { DateGroup } from '@/form';
 import { translate } from '@/i18n';
 
 import { getStartOfNextMonth } from './constants';
@@ -23,23 +22,19 @@ export const CreditEndDateField: FC = () => {
   );
 
   return (
-    <Field
+    <DateGroup
       name="end_date"
       label={translate('End date')}
       description={translate('On that date all credit will be set to 0')}
       required={formValues.minimal_consumption_logic === 'linear'}
       validate={validate}
-      component={FormGroup}
-    >
-      <DateField
-        placeholder={translate('Select date...')}
-        minDate={
-          formValues.minimal_consumption_logic === 'linear'
-            ? getStartOfNextMonth().toISO()
-            : undefined
-        }
-        enable={[onlyFirstDayOfMonth]}
-      />
-    </Field>
+      placeholder={translate('Select date...')}
+      minDate={
+        formValues.minimal_consumption_logic === 'linear'
+          ? getStartOfNextMonth().toISO()
+          : undefined
+      }
+      enable={[onlyFirstDayOfMonth]}
+    />
   );
 };

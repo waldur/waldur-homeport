@@ -1,13 +1,11 @@
 import { useMemo } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { AgreementTypeEnum, userAgreementsCreate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
-import { SelectField, SubmitButton } from '@/form';
-import MarkdownEditor from '@/form/MarkdownEditor';
+import { SubmitButton, SelectGroup, MarkdownGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -49,7 +47,11 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
 
   return (
     <Form<UserAgreementCreateDialogFormValues>
-      onSubmit={(values) => mutateAsync(values)}
+      onSubmit={(values) =>
+        mutateAsync(values).catch(() => {
+          // Error is handled by useManagedMutation
+        })
+      }
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -62,28 +64,28 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
               />
             }
           >
-            <FormGroup label={translate('Agreement type')} required>
-              <Field
-                name="agreement_type"
-                component={SelectField}
-                options={[
-                  { label: translate('Privacy policy'), value: 'PP' },
-                  { label: translate('Terms of service'), value: 'TOS' },
-                ]}
-                validate={required}
-              />
-            </FormGroup>
-            <FormGroup label={translate('Language')} required>
-              <Field
-                name="language"
-                component={SelectField}
-                options={languageOptions}
-                validate={required}
-              />
-            </FormGroup>
-            <FormGroup controlId="content" label={translate('Content')}>
-              <Field name="content" component={MarkdownEditor} />
-            </FormGroup>
+            <SelectGroup
+              name="agreement_type"
+              options={[
+                { label: translate('Privacy policy'), value: 'PP' },
+                { label: translate('Terms of service'), value: 'TOS' },
+              ]}
+              validate={required}
+              label={translate('Agreement type')}
+              required
+            />
+            <SelectGroup
+              name="language"
+              options={languageOptions}
+              validate={required}
+              label={translate('Language')}
+              required
+            />
+            <MarkdownGroup
+              name="content"
+              controlId="content"
+              label={translate('Content')}
+            />
           </ModalDialog>
         </form>
       )}

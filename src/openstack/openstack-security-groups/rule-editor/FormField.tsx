@@ -14,6 +14,7 @@ export const FormField: FC<FormFieldProps> = ({
   meta: { error, touched },
   as: Component = BootstrapForm.Control,
   children,
+  'aria-label': ariaLabel,
   ...rest
 }) => (
   <BootstrapForm.Group as="td">
@@ -23,6 +24,7 @@ export const FormField: FC<FormFieldProps> = ({
       isInvalid={touched && !!error}
       title={touched && error ? error : undefined}
       className="form-control"
+      aria-label={ariaLabel}
     >
       {children}
     </Component>

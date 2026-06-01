@@ -1,5 +1,6 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
@@ -12,8 +13,9 @@ vi.mock('../../store/utils', () => ({
 
 vi.mock('../utils', () => ({
   parseAttribute: vi.fn((_attr, value) => value),
-  configAttrField: vi.fn(() => ({ type: 'text' })),
+  configAttrField: vi.fn(() => ({ type: 'text', label: 'Attribute Value' })),
 }));
+
 describe('EditAttributeDialog', () => {
   const mockResolve = {
     offering: { uuid: 'offering-uuid', attributes: {} },
@@ -22,6 +24,10 @@ describe('EditAttributeDialog', () => {
     value: 'old-value',
     refetch: vi.fn(),
   };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   const renderComponent = () => {
     return renderWithProviders(<EditAttributeDialog resolve={mockResolve} />);
@@ -37,15 +43,18 @@ describe('EditAttributeDialog', () => {
   });
 
   it('submits form successfully', async () => {
+    const user = userEvent.setup();
     vi.mocked(marketplaceProviderOfferingsUpdateAttributes).mockResolvedValue(
       {} as any,
     );
-    const { container } = renderComponent();
+    renderComponent();
 
-    const input = container.querySelector('input[name="value"]')!;
-    fireEvent.change(input, { target: { value: 'new-value' } });
+    // The label is now provided by attribute.title via AttributeCell
+    const input = screen.getByLabelText(/Attribute 1/i);
+    await user.clear(input);
+    await user.type(input, 'new-value');
 
-    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await user.click(screen.getByRole('button', { name: /Save/i }));
 
     await waitFor(() => {
       expect(marketplaceProviderOfferingsUpdateAttributes).toHaveBeenCalledWith(
@@ -56,9 +65,6 @@ describe('EditAttributeDialog', () => {
           }),
         }),
       );
-    });
-
-    await waitFor(() => {
       expect(mockResolve.refetch).toHaveBeenCalled();
     });
   });

@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import arrayMutators from 'final-form-arrays';
 import { Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
@@ -56,19 +57,21 @@ describe('StaticRoutesTable', () => {
     expect(screen.getByDisplayValue('192.168.1.1')).toBeInTheDocument();
   });
 
-  it('adds a new route', () => {
+  it('adds a new route', async () => {
+    const user = userEvent.setup();
     renderTable();
     const addButton = screen.getByRole('button', {
       name: 'Add route',
     });
-    fireEvent.click(addButton);
+    await user.click(addButton);
 
     expect(screen.getByRole('table')).toBeInTheDocument();
     const inputs = screen.getAllByRole('textbox');
     expect(inputs.length).toBe(2); // destination and nexthop
   });
 
-  it('removes a route', () => {
+  it('removes a route', async () => {
+    const user = userEvent.setup();
     const initialRoutes = [
       { destination: '10.0.0.0/24', nexthop: '192.168.1.1' },
     ];
@@ -77,17 +80,18 @@ describe('StaticRoutesTable', () => {
     const removeButton = screen.getByRole('button', {
       name: 'Remove',
     });
-    fireEvent.click(removeButton);
+    await user.click(removeButton);
 
     expect(screen.queryByRole('table')).not.toBeInTheDocument();
   });
 
-  it('validates duplicate IP address against fixedIps', () => {
+  it('validates duplicate IP address against fixedIps', async () => {
+    const user = userEvent.setup();
     const fixedIps: any[] = [{ ip_address: '192.168.1.1' }];
     renderTable([], fixedIps);
 
     // Add a route
-    fireEvent.click(screen.getByRole('button', { name: 'Add route' }));
+    await user.click(screen.getByRole('button', { name: 'Add route' }));
 
     // Get inputs
     const inputs = screen.getAllByRole('textbox');
@@ -95,11 +99,11 @@ describe('StaticRoutesTable', () => {
     const nexthopInput = inputs[1];
 
     // Fill destination (required)
-    fireEvent.change(destinationInput, { target: { value: '10.0.0.0/24' } });
+    await user.type(destinationInput, '10.0.0.0/24');
 
     // Enter a duplicate IP
-    fireEvent.change(nexthopInput, { target: { value: '192.168.1.1' } });
-    fireEvent.blur(nexthopInput);
+    await user.type(nexthopInput, '192.168.1.1');
+    await user.tab();
 
     // Submit button should be disabled
     const submitButton = screen.getByRole('button', { name: 'Submit' });
@@ -111,7 +115,8 @@ describe('StaticRoutesTable', () => {
     ).toBeInTheDocument();
 
     // Enter a unique IP
-    fireEvent.change(nexthopInput, { target: { value: '192.168.1.2' } });
+    await user.clear(nexthopInput);
+    await user.type(nexthopInput, '192.168.1.2');
 
     // Submit button should be enabled
     expect(submitButton).not.toBeDisabled();

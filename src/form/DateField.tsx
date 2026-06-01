@@ -1,32 +1,45 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
+import { DateTimePickerProps } from 'react-flatpickr';
 
 import { FlatpickrField } from './FlatpickrField';
 import { useFlatpickrTheme } from './useFlatpickrTheme';
 
-export const DateField: FunctionComponent<any> = (props) => {
+export const DateField: FunctionComponent<any> = ({
+  minDate,
+  maxDate,
+  defaultDate,
+  inline,
+  disabled,
+  enable,
+  solid,
+  placeholder,
+  input,
+  ...rest
+}) => {
   useFlatpickrTheme();
-  const options: Record<string, any> = {
+  const options: DateTimePickerProps['options'] = {
     dateFormat: 'Y-m-d',
-    minDate: props.minDate,
-    maxDate: props.maxDate,
-    defaultDate: props.defaultDate,
+    minDate: minDate,
+    maxDate: maxDate,
+    defaultDate: defaultDate,
     monthSelectorType: 'static',
-    inline: props.inline,
+    inline: inline,
     allowInvalidPreload: true,
-    clickOpens: !props.disabled,
+    clickOpens: !disabled,
   };
-  if (props.enable) {
-    options.enable = props.enable;
+  if (enable) {
+    options.enable = enable;
   }
   return (
     <FlatpickrField
       options={options}
-      solid={props.solid}
-      placeholder={props.placeholder}
+      solid={solid}
+      placeholder={placeholder}
       iconNode={<CalendarBlankIcon weight="bold" />}
-      input={props.input}
-      disabled={props.disabled}
+      input={input}
+      disabled={disabled}
+      {...rest}
     />
   );
 };

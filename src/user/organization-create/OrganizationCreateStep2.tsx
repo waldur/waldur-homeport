@@ -1,7 +1,7 @@
 import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { Form as BootstrapForm, Card, Col, Row } from 'react-bootstrap';
+import { useForm, useFormState } from 'react-final-form';
 
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -10,8 +10,7 @@ import {
   getNameFieldValidators,
   required,
 } from '@/core/validators';
-import { StringField } from '@/form';
-import { FormGroup } from '@/form/FormGroup';
+import { StringGroup } from '@/form';
 import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { AttachmentUploading } from '@/form/upload/types';
@@ -182,7 +181,6 @@ export const OrganizationCreateStep2: FunctionComponent<
               return (
                 <>
                   <p className="mb-3">{methodInfo.title}</p>
-
                   {hasRequiredFields() ? (
                     <Card className="card-bordered mb-6">
                       <Card.Body className="d-flex gap-3">
@@ -232,24 +230,19 @@ export const OrganizationCreateStep2: FunctionComponent<
                       )}
                     </>
                   )}
-
                   {/* Registration code field for automatic validation */}
                   <div className="mt-6">
-                    <Field
+                    <StringGroup
                       name="registration_code"
                       label={translate('Company registration code')}
                       placeholder={translate('12345678')}
-                      component={FormGroup}
                       required
                       validate={required}
                       description={translate(
                         'The official registration number of your company',
                       )}
-                    >
-                      <StringField />
-                    </Field>
+                    />
                   </div>
-
                   {renderChecklistQuestions()}
                 </>
               );
@@ -265,27 +258,21 @@ export const OrganizationCreateStep2: FunctionComponent<
 
               <Row className="g-6">
                 <Col md={6}>
-                  <Field
+                  <StringGroup
                     name="name"
                     label={translate('Organization name')}
                     placeholder={translate('e.g., Acme Corporation')}
                     maxLength={150}
                     validate={composeValidators(...getNameFieldValidators())}
                     required={true}
-                    component={FormGroup}
-                  >
-                    <StringField />
-                  </Field>
+                  />
                 </Col>
                 <Col md={6}>
-                  <Field
+                  <StringGroup
                     name="registration_code"
                     label={translate('Registration code')}
                     placeholder={translate('12345678')}
-                    component={FormGroup}
-                  >
-                    <StringField />
-                  </Field>
+                  />
                 </Col>
               </Row>
 

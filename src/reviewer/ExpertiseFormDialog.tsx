@@ -1,18 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   ProficiencyLevelEnum,
   nestedReviewerProfileExpertiseCreate,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import {
-  FormGroup,
-  NumberField,
-  SelectField,
-  StringField,
-  SubmitButton,
-} from '@/form';
+import { NumberGroup, SelectGroup, StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -77,37 +71,30 @@ export const ExpertiseFormDialog = ({ resolve }: ExpertiseFormDialogProps) => {
               </>
             }
           >
-            <Field
+            <StringGroup
               name="expertise_keyword"
               label={translate('Keyword')}
               description={translate(
                 'Enter a keyword or phrase describing your expertise',
               )}
-              component={FormGroup}
               validate={required}
-            >
-              <StringField />
-            </Field>
+            />
 
-            <Field
+            <SelectGroup
               name="proficiency_level"
               label={translate('Proficiency level')}
-              component={FormGroup}
               options={PROFICIENCY_LEVEL_OPTIONS}
               getOptionLabel={(option) => option.label}
               getOptionValue={(option) => option.value}
               isClearable={false}
-            >
-              <SelectField />
-            </Field>
+            />
 
-            <Field
+            <NumberGroup
               name="years_experience"
               label={translate('Years of experience')}
-              component={FormGroup}
-            >
-              <NumberField min={0} max={50} />
-            </Field>
+              min={0}
+              max={50}
+            />
           </ModalDialog>
         </form>
       )}

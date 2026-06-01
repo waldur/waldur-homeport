@@ -5,7 +5,7 @@ import { remoteWaldurApiSharedOfferings } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { MultiSelectOption } from '@/form/select';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
@@ -68,7 +68,7 @@ export const SelectOfferingTab = () => {
   };
 
   return (
-    <FormContainer submitting={false} className="size-lg">
+    <div className="size-lg">
       <Field
         label={translate('API URL')}
         value={formData?.api_url}
@@ -76,8 +76,7 @@ export const SelectOfferingTab = () => {
         className="border-bottom border-top py-5 mb-5"
         labelClass="fw-bolder me-3"
       />
-
-      <SelectField
+      <SelectGroup
         name="offerings"
         label={translate('Offerings')}
         isLoading={isLoading}
@@ -105,8 +104,8 @@ export const SelectOfferingTab = () => {
             />
           ),
         }}
+        disabled={false}
       />
-
       {isLoading ? null : error ? (
         <ErredRemoteConnection
           error={error}
@@ -117,6 +116,6 @@ export const SelectOfferingTab = () => {
           {translate('There are no offerings yet.')}
         </p>
       ) : null}
-    </FormContainer>
+    </div>
   );
 };

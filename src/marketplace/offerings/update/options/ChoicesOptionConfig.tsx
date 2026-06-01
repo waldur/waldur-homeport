@@ -1,21 +1,12 @@
-import { Field } from 'react-final-form';
-
 import { required } from '@/core/validators';
-import { InputField } from '@/form/InputField';
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
 
-import { FormGroup } from '../../FormGroup';
-
 export const ChoicesOptionConfig = () => (
-  <FormGroup
+  <StringGroup
     label={translate('Choices as comma-separated list')}
     required={true}
-  >
-    <Field
-      name="choices"
-      type="text"
-      component={InputField}
-      validate={required}
-    />
-  </FormGroup>
+    name="choices"
+    validate={required}
+  />
 );

@@ -1,12 +1,8 @@
-import { Field } from 'react-final-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { InputField } from '@/form/InputField';
-import { Select } from '@/form/select';
+import { NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../../FormGroup';
 
 import { ValidatorConfiguration } from './ValidatorConfiguration';
 
@@ -31,85 +27,53 @@ export const ComponentMultiplierConfiguration = ({
 
   return (
     <>
-      <Field
+      <SelectGroup
         name={`${name}.component_type`}
-        validate={required}
-        render={(fieldProps) => (
-          <FormGroup
-            label={translate('Component Type')}
-            description={translate(
-              'Select the limit-based component this multiplier applies to',
-            )}
-            required
-            meta={fieldProps.meta}
-          >
-            <Select
-              value={componentOptions.find(
-                (opt) => opt.value === fieldProps.input.value,
-              )}
-              onChange={(option) => fieldProps.input.onChange(option?.value)}
-              onBlur={fieldProps.input.onBlur}
-              options={componentOptions}
-              isClearable={false}
-              placeholder={translate('Select component')}
-              getOptionValue={(option) => option.value}
-              getOptionLabel={(option) => option.label}
-            />
-          </FormGroup>
+        label={translate('Component Type')}
+        description={translate(
+          'Select the limit-based component this multiplier applies to',
         )}
+        required
+        validate={required}
+        options={componentOptions}
+        isClearable={false}
+        placeholder={translate('Select component')}
+        getOptionValue={(option) => option.value}
+        getOptionLabel={(option) => option.label}
+        simpleValue
       />
-
-      <Field
+      <NumberGroup
         name={`${name}.factor`}
         validate={required}
-        render={(fieldProps) => (
-          <FormGroup
-            label={translate('Multiplication Factor')}
-            description={translate(
-              'User input will be multiplied by this factor to calculate the component limit',
-            )}
-            required
-            meta={fieldProps.meta}
-          >
-            <InputField
-              input={fieldProps.input}
-              type="number"
-              min="1"
-              placeholder={translate('e.g., 50000 for TB to inodes conversion')}
-            />
-          </FormGroup>
+        label={translate('Multiplication Factor')}
+        description={translate(
+          'User input will be multiplied by this factor to calculate the component limit',
         )}
+        required
+        type="number"
+        min="1"
+        placeholder={translate('e.g., 50000 for TB to inodes conversion')}
       />
-
-      <FormGroup
+      <NumberGroup
         label={translate('Minimum Limit')}
         description={translate(
           'Minimum allowed value for user input (optional)',
         )}
-      >
-        <Field
-          name={`${name}.min_limit`}
-          component={InputField}
-          type="number"
-          min="0"
-          placeholder={translate('e.g., 1')}
-        />
-      </FormGroup>
-
-      <FormGroup
+        name={`${name}.min_limit`}
+        type="number"
+        min="0"
+        placeholder={translate('e.g., 1')}
+      />
+      <NumberGroup
         label={translate('Maximum Limit')}
         description={translate(
           'Maximum allowed value for user input (optional)',
         )}
-      >
-        <Field
-          name={`${name}.max_limit`}
-          component={InputField}
-          type="number"
-          min="0"
-          placeholder={translate('e.g., 100')}
-        />
-      </FormGroup>
+        name={`${name}.max_limit`}
+        type="number"
+        min="0"
+        placeholder={translate('e.g., 100')}
+      />
       <ValidatorConfiguration offering={offering} />
     </>
   );

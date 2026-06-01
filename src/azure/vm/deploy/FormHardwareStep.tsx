@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { FormLabel } from 'react-bootstrap';
 
 import {
   getImageLabel,
@@ -8,7 +7,7 @@ import {
   loadSizeOptions,
 } from '@/azure/vm/utils';
 import { required } from '@/core/validators';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -53,8 +52,9 @@ export const FormHardwareStep = (props: FormStepProps) => {
       disabledTooltip={props.disabledTooltip}
     >
       <div className="mb-7">
-        <FormLabel className="required">{translate('Image')}</FormLabel>
-        <AsyncSelectField
+        <AsyncSelectGroup
+          required
+          label={translate('Image')}
           key={location?.uuid}
           name="attributes.image"
           validate={required}
@@ -68,13 +68,12 @@ export const FormHardwareStep = (props: FormStepProps) => {
           }
         />
       </div>
-
       <div className="mb-7">
-        <FormLabel className="required">{translate('Size')}</FormLabel>
-        <AsyncSelectField
+        <AsyncSelectGroup
+          required
+          label={translate('Size')}
           key={`${location?.uuid}-${zone?.value}`}
           name="attributes.size"
-          validate={required}
           isDisabled={!location || !zone}
           loadOptions={sizeLoader}
           getOptionLabel={getSizeLabel}

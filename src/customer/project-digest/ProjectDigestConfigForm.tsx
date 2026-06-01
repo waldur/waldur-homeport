@@ -6,9 +6,7 @@ import {
   ProjectDigestConfigRequest,
 } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { NumberField } from '@/form/NumberField';
-import { SelectField } from '@/form/select/SelectField';
+import { BooleanGroup, SelectGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -123,56 +121,48 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
           {onFormStateChange && (
             <FormStateNotifier onChange={onFormStateChange} />
           )}
-          <FormGroup label={translate('Enable digest emails')}>
-            <Field
-              name="is_enabled"
-              component={AwesomeCheckboxField}
-              label={translate(
-                'Send periodic summary emails to project members',
-              )}
-            />
-          </FormGroup>
+          <BooleanGroup
+            name="is_enabled"
+            checkboxLabel={translate(
+              'Send periodic summary emails to project members',
+            )}
+            label={translate('Enable digest emails')}
+          />
 
           {values.is_enabled && (
             <>
-              <FormGroup label={translate('Frequency')} required>
-                <Field
-                  name="frequency"
-                  component={SelectField}
-                  options={frequencyOptions}
-                  simpleValue
-                  isClearable={false}
-                />
-              </FormGroup>
+              <SelectGroup
+                name="frequency"
+                options={frequencyOptions}
+                simpleValue
+                isClearable={false}
+                label={translate('Frequency')}
+                required
+              />
 
               {(values.frequency === 'weekly' ||
                 values.frequency === 'biweekly') && (
-                <FormGroup label={translate('Day of week')} required>
-                  <Field
-                    name="day_of_week"
-                    component={SelectField}
-                    options={dayOfWeekOptions}
-                    simpleValue
-                    isClearable={false}
-                  />
-                </FormGroup>
+                <SelectGroup
+                  name="day_of_week"
+                  options={dayOfWeekOptions}
+                  simpleValue
+                  isClearable={false}
+                  label={translate('Day of week')}
+                  required
+                />
               )}
 
               {values.frequency === 'monthly' && (
-                <FormGroup
+                <NumberGroup
+                  name="day_of_month"
+                  min={1}
+                  max={28}
                   label={translate('Day of month')}
                   description={translate(
                     'Day of the month to send the digest (1-28).',
                   )}
                   required
-                >
-                  <Field
-                    name="day_of_month"
-                    component={NumberField}
-                    min={1}
-                    max={28}
-                  />
-                </FormGroup>
+                />
               )}
 
               {availableSections.length > 0 && (

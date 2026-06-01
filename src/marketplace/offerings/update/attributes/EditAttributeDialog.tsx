@@ -48,17 +48,11 @@ export const EditAttributeDialog: FC<EditAttributeDialogWrapperProps> = ({
     <Form
       onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Edit attribute')}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid}
-                submitLabel={translate('Save')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Save')} />}
           >
             <p>
               <strong>{translate('Section')}:</strong> {resolve.section.title}

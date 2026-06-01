@@ -28,8 +28,7 @@ describe('UsernameGroup', () => {
     expect(screen.getByText('Username')).toBeInTheDocument();
     expect(screen.getByText('*')).toBeInTheDocument(); // Required indicator
     // Description is provided, which renders question mark icon in the FormGroup
-    const svg = document.querySelector('svg');
-    expect(svg).toBeInTheDocument();
+    expect(screen.getByTestId('question-icon')).toBeInTheDocument();
   });
 
   it('renders with custom props', () => {
@@ -41,8 +40,7 @@ describe('UsernameGroup', () => {
     expect(screen.getByText('Custom Username')).toBeInTheDocument();
     expect(screen.queryByText('*')).not.toBeInTheDocument();
     // Description is provided, which renders question mark icon in the FormGroup
-    const svg = document.querySelector('svg');
-    expect(svg).toBeInTheDocument();
+    expect(screen.getByTestId('question-icon')).toBeInTheDocument();
   });
 
   it('shows username prefix when configured', () => {

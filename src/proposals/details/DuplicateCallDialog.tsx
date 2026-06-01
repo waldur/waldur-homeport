@@ -5,10 +5,9 @@ import { Field, Form } from 'react-final-form';
 import { proposalProtectedCallsDuplicate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { StringField, SubmitButton } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -84,7 +83,6 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
             subtitle={translate(
               'Create a copy of this call. Team, proposals and reviews are never copied.',
             )}
-            closeButton
             footer={
               <>
                 <div className="min-w-150px">
@@ -104,15 +102,15 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
               </>
             }
           >
-            <FormGroup
+            <StringGroup
+              name="name"
+              validate={required}
               label={translate('New call name')}
               required
               description={translate(
                 'Pre-filled from the source call. The copy always starts in Draft state.',
               )}
-            >
-              <Field name="name" component={StringField} validate={required} />
-            </FormGroup>
+            />
 
             <h5 className="mb-4">{translate('Copy options')}</h5>
             <Row>

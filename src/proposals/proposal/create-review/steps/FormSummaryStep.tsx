@@ -3,7 +3,7 @@ import { Field } from 'react-final-form';
 import { ProposalReview } from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
-import { FormGroup, TextField } from '@/form';
+import { TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { isReviewInFinalState } from '@/proposals/utils';
 import { VStepperFormStepProps } from '@/wizard';
@@ -53,27 +53,20 @@ const FormSummaryStep: React.FC<VStepperFormStepProps> = (props) => {
           );
         }}
       />
-
-      <Field
+      <TextGroup
         name="summary_public_comment"
-        component={FormGroup}
         maxLength={1000}
         label={translate('Comments')}
         placeholder={translate('Add your comment here')}
         disabled={disabled}
-      >
-        <TextField />
-      </Field>
-      <Field
+      />
+      <TextGroup
         name="summary_private_comment"
-        component={FormGroup}
         maxLength={1000}
         label={translate('Notes (not visible to user)')}
         placeholder={translate('Add your notes here')}
         disabled={disabled}
-      >
-        <TextField />
-      </Field>
+      />
     </Panel>
   );
 };

@@ -7,13 +7,7 @@ import { formDataOptions, fileSerializer } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { PaymentProofRenderer } from '@/customer/payments/PaymentProofRenderer';
-import {
-  FileUploadField,
-  FormContainer,
-  NumberField,
-  SubmitButton,
-} from '@/form';
-import { DateField } from '@/form/DateField';
+import { FileUploadGroup, SubmitButton, DateGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -82,16 +76,22 @@ export const PaymentUpdateDialog: FunctionComponent<
               </>
             }
           >
-            <FormContainer submitting={submitting}>
-              <DateField
+            <div className="size-sm">
+              <DateGroup
                 name="date_of_payment"
                 label={translate('Date')}
                 required
+                disabled={submitting}
               />
 
-              <NumberField name="sum" label={translate('Sum')} required />
+              <NumberGroup
+                name="sum"
+                label={translate('Sum')}
+                required
+                disabled={submitting}
+              />
 
-              <FileUploadField
+              <FileUploadGroup
                 name="proof"
                 label={translate('Proof')}
                 showFileName={true}
@@ -123,7 +123,7 @@ export const PaymentUpdateDialog: FunctionComponent<
                   </div>
                 </Form.Group>
               ) : null}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

@@ -1,15 +1,12 @@
 import { pick } from 'lodash-es';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { projectsPartialUpdate } from 'waldur-js-client';
 
 import { formatISODate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { useCustomerProjects } from '@/customer/workspace/fetchCustomer';
-import { SubmitButton } from '@/form';
-import MarkdownEditor from '@/form/MarkdownEditor';
-import { StringField } from '@/form/StringField';
+import { SubmitButton, StringGroup, MarkdownGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -127,9 +124,11 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
             }
           >
             {resolve.name === 'customer_name' ? (
-              <FormGroup label={translate('Project owner')}>
-                <Field component={StringField} name="customer_name" disabled />
-              </FormGroup>
+              <StringGroup
+                name="customer_name"
+                disabled
+                label={translate('Project owner')}
+              />
             ) : resolve.name === 'name' ? (
               loadingProjects ? (
                 <LoadingSpinner />
@@ -137,9 +136,10 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
                 <NameGroup customer={customer} />
               )
             ) : resolve.name === 'description' ? (
-              <FormGroup label={translate('Description')}>
-                <Field component={MarkdownEditor} name="description" />
-              </FormGroup>
+              <MarkdownGroup
+                name="description"
+                label={translate('Description')}
+              />
             ) : resolve.name === 'is_industry' ? (
               <IndustryGroup />
             ) : resolve.name === 'start_date' ? (
@@ -151,44 +151,33 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
             ) : resolve.name === 'science_sub_domain' ? (
               <ScienceDomainGroup />
             ) : resolve.name === 'backend_id' ? (
-              <FormGroup label={translate('Backend ID')}>
-                <Field component={StringField} name="backend_id" />
-              </FormGroup>
+              <StringGroup name="backend_id" label={translate('Backend ID')} />
             ) : resolve.name === 'slug' ? (
-              <FormGroup label={translate('Slug')}>
-                <Field component={StringField} name="slug" />
-              </FormGroup>
+              <StringGroup name="slug" label={translate('Slug')} />
             ) : resolve.name === 'staff_notes' ? (
-              <FormGroup label={translate('Staff notes')}>
-                <Field component={MarkdownEditor} name="staff_notes" />
-              </FormGroup>
+              <MarkdownGroup
+                name="staff_notes"
+                label={translate('Staff notes')}
+              />
             ) : resolve.name === 'kind' ? (
               <KindGroup />
             ) : resolve.name === 'max_service_accounts' ? (
-              <FormGroup
+              <StringGroup
+                name="max_service_accounts"
+                type="number"
+                min={0}
                 label={translate('Maximum number of service accounts')}
-              >
-                <Field
-                  component={StringField}
-                  name="max_service_accounts"
-                  type="number"
-                  min={0}
-                />
-              </FormGroup>
+              />
             ) : resolve.name === 'grace_period_days' ? (
-              <FormGroup
+              <StringGroup
+                name="grace_period_days"
+                type="number"
+                min={0}
                 label={translate('Grace period (days)')}
                 description={translate(
                   'Number of extra days after project end date before resources are terminated. Overrides customer-level setting.',
                 )}
-              >
-                <Field
-                  component={StringField}
-                  name="grace_period_days"
-                  type="number"
-                  min={0}
-                />
-              </FormGroup>
+              />
             ) : null}
           </ModalDialog>
         </form>

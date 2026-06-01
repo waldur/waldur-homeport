@@ -1,5 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   AffiliatedOrganizationRequest,
   affiliatedOrganizationsCreate,
@@ -7,10 +7,12 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
-import { CountrySelectField } from '@/form/CountrySelectField';
-import { StringField } from '@/form/StringField';
-import { TextField } from '@/form/TextField';
+import {
+  CountrySelectGroup,
+  StringGroup,
+  SubmitButton,
+  TextGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -40,7 +42,11 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
 
   return (
     <Form<AffiliatedOrganizationRequest>
-      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        onSubmitMutation.mutateAsync(values).catch(() => {
+          // Error is handled by useManagedMutation
+        })
+      }
       initialValues={
         resolve.affiliatedOrganization
           ? {
@@ -75,69 +81,30 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
               />
             }
           >
-            <Field
+            <StringGroup
               name="name"
-              component={FormGroup}
               label={translate('Name')}
               required
               validate={required}
-            >
-              <StringField />
-            </Field>
-            <Field
+            />
+            <StringGroup
               name="code"
-              component={FormGroup}
               label={translate('Code')}
               required
               validate={required}
               description={translate(
                 'Unique short identifier, e.g. CERN, EMBL',
               )}
-            >
-              <StringField />
-            </Field>
-            <Field
+            />
+            <StringGroup
               name="abbreviation"
-              component={FormGroup}
               label={translate('Abbreviation')}
-            >
-              <StringField />
-            </Field>
-            <Field
-              name="description"
-              component={FormGroup}
-              label={translate('Description')}
-            >
-              <TextField />
-            </Field>
-            <Field
-              name="email"
-              component={FormGroup}
-              label={translate('Email')}
-            >
-              <StringField />
-            </Field>
-            <Field
-              name="homepage"
-              component={FormGroup}
-              label={translate('Homepage')}
-            >
-              <StringField />
-            </Field>
-            <Field
-              name="country"
-              component={FormGroup}
-              label={translate('Country')}
-            >
-              <CountrySelectField />
-            </Field>
-            <Field
-              name="address"
-              component={FormGroup}
-              label={translate('Address')}
-            >
-              <TextField />
-            </Field>
+            />
+            <TextGroup name="description" label={translate('Description')} />
+            <StringGroup name="email" label={translate('Email')} />
+            <StringGroup name="homepage" label={translate('Homepage')} />
+            <CountrySelectGroup name="country" label={translate('Country')} />
+            <TextGroup name="address" label={translate('Address')} />
           </ModalDialog>
         </form>
       )}

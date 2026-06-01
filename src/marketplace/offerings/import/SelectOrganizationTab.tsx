@@ -4,7 +4,7 @@ import { remoteWaldurApiRemoteCustomers } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 
 import { ErredRemoteConnection } from './ErredRemoteConnection';
@@ -35,8 +35,8 @@ export const SelectOrganizationTab = () => {
   });
 
   return (
-    <FormContainer submitting={false} className="size-lg">
-      <SelectField
+    <div className="size-lg">
+      <SelectGroup
         name="customer"
         label={translate('Organization')}
         description={translate(
@@ -47,8 +47,8 @@ export const SelectOrganizationTab = () => {
         getOptionValue={(option) => option.uuid}
         getOptionLabel={(option) => option.name}
         validate={required}
+        disabled={false}
       />
-
       {isLoading ? null : error ? (
         <ErredRemoteConnection
           error={error}
@@ -59,6 +59,6 @@ export const SelectOrganizationTab = () => {
           {translate('There are no organizations yet.')}
         </p>
       ) : null}
-    </FormContainer>
+    </div>
   );
 };

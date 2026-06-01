@@ -4,11 +4,12 @@ import { Form as BootstrapForm } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { supportFeedbacksCreate } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
+import { withFormGroup } from '@/form/withFormGroup';
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useTitle } from '@/navigation/title';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
-import { useNotify } from '@/store/notify';
 import './SupportFeedback.scss';
 
 const EvaluationField = (props) => (
@@ -22,9 +23,10 @@ const EvaluationField = (props) => (
   />
 );
 
+const EvaluationGroup = withFormGroup(EvaluationField);
+
 export const SupportFeedback = () => {
   useTitle(translate('Feedback'));
-  const { showErrorResponse, showSuccess } = useNotify();
   const router = useRouter();
 
   const initialValues = useMemo(
@@ -34,50 +36,52 @@ export const SupportFeedback = () => {
     [router.globals.params?.evaluation],
   );
 
-  const submitRequest = async (formData) => {
-    try {
-      await supportFeedbacksCreate({
+  const { mutate, isPending } = useManagedMutation({
+    mutationFn: (formData: any) =>
+      supportFeedbacksCreate({
         body: {
           ...formData,
           token: router.globals.params.token,
         },
-      });
-      showSuccess(translate('Thank you for your response!'));
+      }),
+    successMessage: translate('Thank you for your response!'),
+    errorMessage: translate('Unable to send feedback.'),
+    closeModal: false,
+    onSuccess: () => {
       router.stateService.go('login');
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to send feedback.'));
-    }
-  };
+    },
+  });
 
   return (
     <Form
-      onSubmit={submitRequest}
+      onSubmit={mutate}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit, invalid }) => (
         <form onSubmit={handleSubmit} className="center-vertically">
-          <FormContainer submitting={submitting}>
-            <EvaluationField
+          <div className="size-sm">
+            <EvaluationGroup
               name="evaluation"
               label={translate('Evaluation')}
             />
 
-            <TextField
+            <TextGroup
               name="comment"
               label={translate('Comment')}
               maxLength={150}
               rows={2}
+              disabled={isPending}
             />
 
             <BootstrapForm.Group>
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <SubmitButton
                   disabled={invalid}
-                  submitting={submitting}
+                  submitting={isPending}
                   label={translate('Submit')}
                 />
               </div>
             </BootstrapForm.Group>
-          </FormContainer>
+          </div>
         </form>
       )}
     />

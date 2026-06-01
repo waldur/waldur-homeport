@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { FormSteps } from './FormSteps';
@@ -60,13 +60,16 @@ describe('FormSteps', () => {
 
       // First step should not have lock icon
       const generalTab = screen.getByTestId('tab-step-general');
-      expect(generalTab.querySelector('svg.text-muted')).not.toHaveClass(
-        'ph-lock',
-      );
+      expect(
+        within(generalTab).queryByTestId('step-locked-icon'),
+      ).not.toBeInTheDocument();
 
       // Other steps should have lock icon and muted text
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(planTab.querySelector('div')).toHaveClass('text-muted');
+      expect(
+        within(planTab).getByTestId('step-locked-icon'),
+      ).toBeInTheDocument();
+      expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
     });
 
     it('applies text-muted class to disabled step labels', () => {
@@ -79,8 +82,7 @@ describe('FormSteps', () => {
       );
 
       const planTab = screen.getByTestId('tab-step-plan');
-      const titleDiv = planTab.querySelector('div');
-      expect(titleDiv).toHaveClass('text-muted');
+      expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
     });
   });
 
@@ -97,7 +99,9 @@ describe('FormSteps', () => {
       // Plan step is required but not completed - should have circle icon
       const planTab = screen.getByTestId('tab-step-plan');
       // CircleIcon should be present (not CheckCircleIcon)
-      expect(planTab.querySelector('svg')).toBeInTheDocument();
+      expect(
+        within(planTab).getByTestId('step-incomplete-icon'),
+      ).toBeInTheDocument();
     });
 
     it('does not show circle for optional steps that are not completed', () => {
@@ -112,7 +116,9 @@ describe('FormSteps', () => {
       // Additional configuration is optional and not completed
       const additionalTab = screen.getByTestId('tab-step-additional');
       // Should not have any icon
-      expect(additionalTab.querySelector('svg')).toBeNull();
+      expect(
+        within(additionalTab).queryByTestId('step-incomplete-icon'),
+      ).toBeNull();
     });
   });
 
@@ -130,8 +136,12 @@ describe('FormSteps', () => {
       const generalTab = screen.getByTestId('tab-step-general');
       const planTab = screen.getByTestId('tab-step-plan');
 
-      expect(generalTab.querySelector('svg.text-success')).toBeInTheDocument();
-      expect(planTab.querySelector('svg.text-success')).toBeInTheDocument();
+      expect(
+        within(generalTab).getByTestId('step-completed-icon'),
+      ).toBeInTheDocument();
+      expect(
+        within(planTab).getByTestId('step-completed-icon'),
+      ).toBeInTheDocument();
     });
   });
 
@@ -147,7 +157,9 @@ describe('FormSteps', () => {
       );
 
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(planTab.querySelector('svg.text-warning')).toBeInTheDocument();
+      expect(
+        within(planTab).getByTestId('step-error-icon'),
+      ).toBeInTheDocument();
     });
 
     it('shows X icon for steps with critical errors', () => {
@@ -161,7 +173,9 @@ describe('FormSteps', () => {
       );
 
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(planTab.querySelector('svg.text-danger')).toBeInTheDocument();
+      expect(
+        within(planTab).getByTestId('step-critical-error-icon'),
+      ).toBeInTheDocument();
     });
 
     it('filters out required errors by default', () => {
@@ -176,7 +190,9 @@ describe('FormSteps', () => {
 
       // Required errors are filtered out, so no warning icon
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(planTab.querySelector('svg.text-warning')).not.toBeInTheDocument();
+      expect(
+        within(planTab).queryByTestId('step-error-icon'),
+      ).not.toBeInTheDocument();
     });
 
     it('shows required errors when showRequiredErrors is true', () => {
@@ -191,7 +207,9 @@ describe('FormSteps', () => {
       );
 
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(planTab.querySelector('svg.text-warning')).toBeInTheDocument();
+      expect(
+        within(planTab).getByTestId('step-error-icon'),
+      ).toBeInTheDocument();
     });
   });
 
@@ -207,9 +225,11 @@ describe('FormSteps', () => {
 
       // Plan is both disabled and completed - disabled should win
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(planTab.querySelector('div')).toHaveClass('text-muted');
+      expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
       // Should not have success check icon
-      expect(planTab.querySelector('svg.text-success')).not.toBeInTheDocument();
+      expect(
+        within(planTab).queryByTestId('step-completed-icon'),
+      ).not.toBeInTheDocument();
     });
 
     it('disabled state takes priority over error state', () => {
@@ -224,8 +244,10 @@ describe('FormSteps', () => {
 
       // Plan is disabled with error - disabled should win
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(planTab.querySelector('div')).toHaveClass('text-muted');
-      expect(planTab.querySelector('svg.text-warning')).not.toBeInTheDocument();
+      expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
+      expect(
+        within(planTab).queryByTestId('step-error-icon'),
+      ).not.toBeInTheDocument();
     });
 
     it('critical errors take priority over normal errors', () => {
@@ -240,8 +262,12 @@ describe('FormSteps', () => {
       );
 
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(planTab.querySelector('svg.text-danger')).toBeInTheDocument();
-      expect(planTab.querySelector('svg.text-warning')).not.toBeInTheDocument();
+      expect(
+        within(planTab).getByTestId('step-critical-error-icon'),
+      ).toBeInTheDocument();
+      expect(
+        within(planTab).queryByTestId('step-error-icon'),
+      ).not.toBeInTheDocument();
     });
   });
 

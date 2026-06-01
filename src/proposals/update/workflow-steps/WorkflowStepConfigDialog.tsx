@@ -1,7 +1,7 @@
 import { FORM_ERROR } from 'final-form';
 import arrayMutators from 'final-form-arrays';
 import { FC, useCallback, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   CallWorkflowStep,
   PatchedCallWorkflowStepRequest,
@@ -9,12 +9,16 @@ import {
   WorkflowCriterionRequest,
 } from 'waldur-js-client';
 
-import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { required } from '@/core/validators';
-import { NumberField, SelectField, SubmitButton } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import {
+  BooleanGroup,
+  FormGroup,
+  NumberGroup,
+  RadioGroup,
+  SelectGroup,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -180,7 +184,6 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                     name: stepLabel(step.step),
                   })
             }
-            closeButton
             footer={
               <>
                 <CloseDialogButton className="min-w-125px" />
@@ -202,71 +205,57 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
               <p className="text-muted mb-4">{definition.description}</p>
             )}
 
-            <FormGroup
+            <NumberGroup
+              name="duration_in_days"
               label={translate('Estimated duration (days)')}
               description={translate(
                 'Days allowed for this step. Used to compute the deadline.',
               )}
-            >
-              <Field
-                name="duration_in_days"
-                component={NumberField as any}
-                min={0}
-              />
-            </FormGroup>
+              min={0}
+            />
 
-            <FormGroup label={translate('Responsible role')} required>
-              <Field
-                name="responsible_role"
-                component={SelectField as any}
-                options={responsibleRoleOptions}
-                simpleValue
-                placeholder={translate('Select...')}
-                validate={required}
-              />
-            </FormGroup>
+            <SelectGroup
+              name="responsible_role"
+              label={translate('Responsible role')}
+              required={true}
+              options={responsibleRoleOptions}
+              simpleValue={true}
+              placeholder={translate('Select...')}
+              validate={required}
+            />
 
-            <FormGroup label={translate('Transition mode options')} required>
-              <Field
-                name="transition_mode"
-                component={AwesomeRadioButton as any}
-                choices={transitionModeChoices}
-                gap={3}
-                validate={required}
-              />
-            </FormGroup>
+            <RadioGroup
+              name="transition_mode"
+              label={translate('Transition mode options')}
+              required={true}
+              choices={transitionModeChoices}
+              gap={3}
+              validate={required}
+            />
 
             {showReviewExtras && (
               <>
                 <div className="row">
                   <div className="col-sm-6">
-                    <FormGroup
+                    <NumberGroup
+                      name="min_reviewers"
                       label={translate('Minimum reviewers')}
                       description={translate(
                         'Minimum reviews required before this step can complete.',
                       )}
-                    >
-                      <Field
-                        name="min_reviewers"
-                        component={NumberField as any}
-                        min={1}
-                      />
-                    </FormGroup>
+                      min={1}
+                    />
                   </div>
                   <div className="col-sm-6">
-                    <FormGroup
+                    <NumberGroup
+                      name="min_score_threshold"
                       label={translate('Minimum score threshold')}
                       description={translate(
                         'Minimum average score to pass this step.',
                       )}
-                    >
-                      <Field
-                        name="min_score_threshold"
-                        component={NumberField as any}
-                        min={0}
-                        step={0.1}
-                      />
-                    </FormGroup>
+                      min={0}
+                      step={0.1}
+                    />
                   </div>
                 </div>
 
@@ -274,57 +263,45 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                   <CriteriaListField name="criteria" />
                 </FormGroup>
 
-                <FormGroup spaceless>
-                  <Field
-                    name="blind_review"
-                    type="checkbox"
-                    component={AwesomeCheckboxField as any}
-                    label={translate('Blind review')}
-                    help_text={translate(
-                      "Evaluators cannot see each other's assessments.",
-                    )}
-                  />
-                </FormGroup>
+                <BooleanGroup
+                  name="blind_review"
+                  spaceless={true}
+                  label={translate('Blind review')}
+                  help_text={translate(
+                    "Evaluators cannot see each other's assessments.",
+                  )}
+                />
 
-                <FormGroup spaceless>
-                  <Field
-                    name="requires_coi_confirmation"
-                    type="checkbox"
-                    component={AwesomeCheckboxField as any}
-                    label={translate('Conflict of interest confirmation')}
-                    help_text={translate(
-                      'Evaluator must confirm absence of conflict of interest.',
-                    )}
-                  />
-                </FormGroup>
+                <BooleanGroup
+                  name="requires_coi_confirmation"
+                  spaceless={true}
+                  label={translate('Conflict of interest confirmation')}
+                  help_text={translate(
+                    'Evaluator must confirm absence of conflict of interest.',
+                  )}
+                />
               </>
             )}
 
             {showAllocationExtras && (
-              <FormGroup spaceless>
-                <Field
-                  name="include_award_response"
-                  type="checkbox"
-                  component={AwesomeCheckboxField as any}
-                  label={translate('Include award response')}
-                  help_text={translate(
-                    'Require the applicant to explicitly accept or decline the award before provisioning.',
-                  )}
-                />
-              </FormGroup>
-            )}
-
-            <FormGroup spaceless>
-              <Field
-                name="applicant_visible"
-                type="checkbox"
-                component={AwesomeCheckboxField as any}
-                label={translate('Applicant visible')}
+              <BooleanGroup
+                name="include_award_response"
+                spaceless={true}
+                label={translate('Include award response')}
                 help_text={translate(
-                  'Applicants can see step details, not just status.',
+                  'Require the applicant to explicitly accept or decline the award before provisioning.',
                 )}
               />
-            </FormGroup>
+            )}
+
+            <BooleanGroup
+              name="applicant_visible"
+              spaceless={true}
+              label={translate('Applicant visible')}
+              help_text={translate(
+                'Applicants can see step details, not just status.',
+              )}
+            />
           </ModalDialog>
         </form>
       )}

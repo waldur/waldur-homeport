@@ -1,15 +1,14 @@
 import { FC } from 'react';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import {
-  FormGroup,
-  NumberField,
-  SelectField,
-  StringField,
-  TextField,
+  DateGroup,
+  NumberGroup,
+  SelectGroup,
+  StringGroup,
+  TextGroup,
 } from '@/form';
-import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 
 interface PaymentProfileFormFieldsProps {
@@ -24,51 +23,32 @@ export const PaymentProfileFormFields: FC<PaymentProfileFormFieldsProps> = ({
 
   return (
     <>
-      <Field
+      <StringGroup
         name="name"
         label={translate('Name')}
-        component={FormGroup}
         required={true}
         validate={required}
-      >
-        <StringField maxLength={150} />
-      </Field>
-
-      <Field
+        maxLength={150}
+      />
+      <SelectGroup
         name="payment_type"
         label={translate('Type')}
-        component={FormGroup}
         required={true}
         validate={required}
-      >
-        <SelectField options={paymentProfileTypeOptions} isClearable={false} />
-      </Field>
-
+        options={paymentProfileTypeOptions}
+        isClearable={false}
+      />
       {isFixedPrice && (
         <>
-          <Field
-            name="end_date"
-            label={translate('End date')}
-            component={FormGroup}
-          >
-            <DateField />
-          </Field>
+          <DateGroup name="end_date" label={translate('End date')} />
 
-          <Field
+          <TextGroup
             name="agreement_number"
             label={translate('Agreement number')}
-            component={FormGroup}
-          >
-            <TextField maxLength={150} />
-          </Field>
+            maxLength={150}
+          />
 
-          <Field
-            name="contract_sum"
-            label={translate('Contract sum')}
-            component={FormGroup}
-          >
-            <NumberField />
-          </Field>
+          <NumberGroup name="contract_sum" label={translate('Contract sum')} />
         </>
       )}
     </>

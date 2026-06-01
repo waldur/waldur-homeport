@@ -2,11 +2,11 @@ import { FunctionComponent, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { ENV } from '@/core/config';
 import { CountryFlagIcon } from '@/core/CountryFlagIcon';
 import { Panel } from '@/core/Panel';
 import { SaveButton } from '@/core/SaveButton';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { useLanguageSelector } from '@/i18n/useLanguageSelector';
 import { LanguageCountry } from '@/navigation/header/LanguageSelectorDropdown';
@@ -119,18 +119,12 @@ export const AdministrationLanguages: FunctionComponent = () => {
         {filteredLanguages.map((language: { code: string; label: string }) => (
           <Col key={language.code} sm={6} md={4}>
             <div className="border-bottom py-5">
-              <AwesomeCheckboxField
+              <AwesomeCheckbox
                 data-testid={`language_${language.code}`}
-                name={`language_${language.code}`}
-                alignMiddle
-                className="d-flex justify-content-between flex-row-reverse"
+                className="d-flex justify-content-between flex-row-reverse align-items-center"
                 size="sm"
-                input={
-                  {
-                    value: selectedLanguages.includes(language.code),
-                    onChange: () => handleLanguageChange(language.code),
-                  } as any
-                }
+                value={selectedLanguages.includes(language.code)}
+                onChange={() => handleLanguageChange(language.code)}
                 label={
                   <div className="d-flex align-items-center">
                     <CountryFlagIcon

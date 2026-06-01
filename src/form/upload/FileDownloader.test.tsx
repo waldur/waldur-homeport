@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -24,23 +24,30 @@ describe('FileDownloader', () => {
   });
 
   it('shows loading spinner while downloading', async () => {
-    vi.spyOn(api, 'get').mockResolvedValue({ data: mockBlob } as any);
+    const user = userEvent.setup();
+    vi.spyOn(api, 'get').mockImplementation(
+      () =>
+        new Promise((resolve) =>
+          setTimeout(() => resolve({ data: mockBlob } as any), 100),
+        ),
+    );
 
     render(<FileDownloader url={mockUrl} name={mockName} />);
 
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
     await waitFor(() => {
       expect(screen.getByTestId('spinner')).toBeInTheDocument();
     });
   });
 
   it('shows error notification when download fails', async () => {
+    const user = userEvent.setup();
     const error = new Error('Download failed');
     vi.spyOn(api, 'get').mockRejectedValue(error);
 
     render(<FileDownloader url={mockUrl} name={mockName} />);
 
-    await userEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
 
     expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
       error,

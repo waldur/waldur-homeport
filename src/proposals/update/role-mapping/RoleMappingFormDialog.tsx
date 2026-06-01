@@ -1,12 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   callProposalProjectRoleMappingsCreate,
   callProposalProjectRoleMappingsPartialUpdate,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SelectField, SubmitButton } from '@/form';
+import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -101,30 +101,24 @@ export const RoleMappingFormDialog = ({ resolve }) => {
             }
           >
             {!isEdit ? (
-              <Field
+              <SelectGroup
                 name="proposal_role"
                 label={translate('Proposal role')}
-                component={FormGroup}
                 options={proposalRoleOptions}
                 getOptionLabel={(option) => option.label || option.name}
                 getOptionValue={(option) => option.name}
                 validate={required}
                 isClearable={false}
-              >
-                <SelectField />
-              </Field>
+              />
             ) : null}
-            <Field
+            <SelectGroup
               name="project_role"
               label={translate('Project role')}
-              component={FormGroup}
               options={projectRoleOptions}
               getOptionLabel={(option) => option.label || option.name}
               getOptionValue={(option) => option.name || null}
               isClearable={true}
-            >
-              <SelectField />
-            </Field>
+            />
           </ModalDialog>
         </form>
       )}

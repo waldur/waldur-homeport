@@ -1,11 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { Project, projectsMoveProject } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { AsyncSelectField as Select } from '@/form/select';
+import { AsyncSelectGroup, BooleanGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -83,31 +81,28 @@ export const BatchMoveProjectDialog: FunctionComponent<{
                 ))}
               </ul>
             </FormGroup>
-            <FormGroup label={translate('Move to organization')} required>
-              <Select
-                name="organization"
-                validate={required}
-                placeholder={translate('Select organization...')}
-                loadOptions={loadOrganizations}
-                getOptionLabel={(option) =>
-                  option.name +
-                  (option.abbreviation ? ` (${option.abbreviation})` : '')
-                }
-                getOptionValue={(option) => option.url}
-                noOptionsMessage={() => translate('No organizations')}
-                isDisabled={submitting}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Field
-                component={AwesomeCheckboxField}
-                name="preserve_permissions"
-                label={translate('Preserve project permissions')}
-                description={translate(
-                  'Keep existing project permissions when moving to a new organization',
-                )}
-              />
-            </FormGroup>
+            <AsyncSelectGroup
+              name="organization"
+              label={translate('Move to organization')}
+              required
+              validate={required}
+              placeholder={translate('Select organization...')}
+              loadOptions={loadOrganizations}
+              getOptionLabel={(option) =>
+                option.name +
+                (option.abbreviation ? ` (${option.abbreviation})` : '')
+              }
+              getOptionValue={(option) => option.url}
+              noOptionsMessage={() => translate('No organizations')}
+              isDisabled={submitting}
+            />
+            <BooleanGroup
+              name="preserve_permissions"
+              label={translate('Preserve project permissions')}
+              description={translate(
+                'Keep existing project permissions when moving to a new organization',
+              )}
+            />
           </ModalDialog>
         </form>
       )}

@@ -10,32 +10,6 @@ import { GroupInvitationConfirmDialog } from './GroupInvitationConfirmDialog';
 const mockOnConfirm = vi.fn();
 const mockOnCancel = vi.fn();
 
-vi.mock('./GroupInvitationErrorMessage', () => ({
-  GroupInvitationErrorMessage: ({ dismiss }) => (
-    <div data-testid="error-message">
-      Error message
-      <button onClick={dismiss}>Dismiss Error</button>
-    </div>
-  ),
-}));
-
-vi.mock('./GroupInvitationMessage', () => ({
-  GroupInvitationMessage: ({ invitation }) => (
-    <div data-testid="invitation-message">
-      Message for {invitation?.scope_name}
-    </div>
-  ),
-}));
-
-vi.mock('./GroupinvitationButtons', () => ({
-  GroupInvitationButtons: ({ dismiss, submitRequest }) => (
-    <div data-testid="invitation-buttons">
-      <button onClick={dismiss}>Cancel</button>
-      <button onClick={submitRequest}>Submit</button>
-    </div>
-  ),
-}));
-
 const renderDialog = (token = 'test-token') => {
   return renderWithProviders(
     <GroupInvitationConfirmDialog
@@ -67,29 +41,44 @@ describe('GroupInvitationConfirmDialog', () => {
 
     renderDialog();
 
-    expect(await screen.findByTestId('error-message')).toBeDefined();
+    expect(await screen.findByText('Request is not valid.')).toBeDefined();
 
-    await userEvent.click(screen.getByText('Dismiss Error'));
+    await userEvent.click(screen.getByText('Go to profile'));
     expect(useModal().closeDialog).toHaveBeenCalled();
     expect(mockOnCancel).toHaveBeenCalled();
   });
 
   it('renders invitation message when API succeeds', async () => {
     vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
-      data: { scope_name: 'Test Org', is_public: false },
+      data: {
+        scope_name: 'Test Org',
+        scope_type: 'customer',
+        role_description: 'Member',
+        is_public: false,
+      },
     } as any);
 
     renderDialog();
 
-    expect(await screen.findByTestId('invitation-message')).toBeDefined();
-    expect(screen.getByText('Message for Test Org')).toBeDefined();
-    expect(screen.getByTestId('invitation-buttons')).toBeDefined();
+    expect(
+      await screen.findByText(/You have been invited to join/),
+    ).toBeDefined();
+    expect(
+      screen.getByText('Do you want to submit permission request?'),
+    ).toBeDefined();
+    expect(screen.getByRole('button', { name: /Submit/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /Cancel/i })).toBeDefined();
     expect(screen.getByText('Request permission')).toBeDefined(); // title
   });
 
   it('calls onConfirm when Submit is clicked', async () => {
     vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
-      data: { scope_name: 'Test Org', is_public: true },
+      data: {
+        scope_name: 'Test Org',
+        scope_type: 'customer',
+        role_description: 'Member',
+        is_public: true,
+      },
     } as any);
 
     renderDialog();
@@ -103,7 +92,12 @@ describe('GroupInvitationConfirmDialog', () => {
 
   it('calls onCancel when Cancel is clicked', async () => {
     vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
-      data: { scope_name: 'Test Org', is_public: false },
+      data: {
+        scope_name: 'Test Org',
+        scope_type: 'customer',
+        role_description: 'Member',
+        is_public: false,
+      },
     } as any);
 
     renderDialog();

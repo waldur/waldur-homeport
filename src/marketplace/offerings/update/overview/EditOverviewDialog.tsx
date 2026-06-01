@@ -3,13 +3,12 @@ import { Field, Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
 import {
-  StringField,
-  SelectField,
-  FormContainer,
   FormFooter,
-  TextField,
+  TextGroup,
+  BooleanGroup,
+  SelectGroup,
+  StringGroup,
 } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -46,19 +45,13 @@ export const EditOverviewDialog: FC<{
     <Form
       initialValues={initialValues}
       onSubmit={(values) => updateOfferingMutation.mutateAsync(values)}
-      render={({ handleSubmit, submitting }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={props.resolve.attribute.title}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                submitLabel={translate('Update')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Update')} />}
           >
-            <FormContainer
-              submitting={submitting}
+            <div
               className={
                 props.resolve.attribute.type === 'html' ? 'size-lg' : undefined
               }
@@ -79,15 +72,15 @@ export const EditOverviewDialog: FC<{
                   spaceless
                 />
               ) : props.resolve.attribute.type === 'text' ? (
-                <TextField name="value" hideLabel spaceless />
+                <TextGroup name="value" hideLabel spaceless />
               ) : props.resolve.attribute.type === 'boolean' ? (
-                <AwesomeCheckboxField
+                <BooleanGroup
                   name="value"
                   label={props.resolve.attribute.title}
                   hideLabel
                 />
               ) : props.resolve.attribute.type === 'list' ? (
-                <SelectField
+                <SelectGroup
                   name="value"
                   options={props.resolve.attribute.options}
                   multi={true}
@@ -95,14 +88,14 @@ export const EditOverviewDialog: FC<{
                   hideLabel
                 />
               ) : (
-                <StringField
+                <StringGroup
                   name="value"
                   maxLength={props.resolve.attribute.maxLength}
                   hideLabel
                   spaceless
                 />
               )}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

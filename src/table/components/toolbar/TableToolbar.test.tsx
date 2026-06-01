@@ -25,8 +25,7 @@ describe('TableToolbar', () => {
         config: createMockTableContext().config,
       });
 
-      // Card.Header renders as div.card-header
-      expect(document.querySelector('.card-header')).toBeInTheDocument();
+      expect(screen.getByTestId('table-toolbar')).toBeInTheDocument();
     });
 
     it('does not render when hasActionBar is false', () => {
@@ -34,7 +33,7 @@ describe('TableToolbar', () => {
         config: { ...createMockTableContext().config, hasActionBar: false },
       });
 
-      expect(document.querySelector('.card-header')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('table-toolbar')).not.toBeInTheDocument();
     });
   });
 
@@ -44,7 +43,7 @@ describe('TableToolbar', () => {
         display: { headerClassName: 'custom-header-class' },
       });
 
-      const header = document.querySelector('.card-header');
+      const header = screen.getByTestId('table-toolbar');
       expect(header).toHaveClass('custom-header-class');
     });
   });
@@ -57,8 +56,9 @@ describe('TableToolbarTitle', () => {
         showTitle: true,
       });
 
-      // Should render the column container
-      expect(document.querySelector('.order-0')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('table-toolbar-title-container'),
+      ).toBeInTheDocument();
     });
 
     it('does not render when showTitle is false', () => {
@@ -66,7 +66,9 @@ describe('TableToolbarTitle', () => {
         showTitle: false,
       });
 
-      expect(document.querySelector('.order-0')).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId('table-toolbar-title-container'),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -165,10 +167,7 @@ describe('TableToolbarTitle', () => {
         config: { ...createMockTableContext().config, hideRefresh: false },
       });
 
-      // The refresh button is rendered with a loading-spinner data-cy attribute
-      expect(
-        document.querySelector('[data-cy="loading-spinner"]'),
-      ).toBeInTheDocument();
+      expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
     });
 
     it('hides refresh button when hideRefresh is true', () => {

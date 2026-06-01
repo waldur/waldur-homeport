@@ -82,17 +82,11 @@ export const EditTagsDialog = ({ resolve }: OwnProps) => {
     <Form<FormData>
       initialValues={{ tags: resolve.offering.tags }}
       onSubmit={(values) => updateMutation.mutateAsync(values)}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Edit tags')}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid}
-                submitLabel={translate('Save')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Save')} />}
           >
             <Field
               name="tags"

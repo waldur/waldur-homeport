@@ -6,7 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
-import { FormContainer, SubmitButton } from '@/form';
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ImageUploadField } from '@/marketplace/offerings/update/ImageUploadField';
 import { Offering } from '@/marketplace/types';
@@ -95,7 +95,7 @@ export const UpdateOfferingMediaDialog: FunctionComponent<
                 className="img-fluid mb-3"
               />
             )}
-            <FormContainer submitting={submitting}>
+            <div className="size-sm">
               <ImageUploadField
                 name="images"
                 label={translate('Image: ')}
@@ -104,7 +104,7 @@ export const UpdateOfferingMediaDialog: FunctionComponent<
                 className="btn btn-secondary"
                 required={true}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

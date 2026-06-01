@@ -1,9 +1,7 @@
 import { useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { FormGroup } from '@/form';
-import { AsyncSelect as Select } from '@/form/select';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -18,20 +16,16 @@ export const OrganizationGroup = ({ disabled }) => {
   );
 
   return (
-    <Field
+    <AsyncSelectGroup
       name="customer"
-      component={FormGroup}
       label={translate('Organization')}
       validate={!disabled ? required : undefined}
       containerClassName="flex-equal"
-    >
-      <Select
-        defaultOptions
-        loadOptions={loadOrganizations}
-        getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.uuid}
-        isDisabled={disabled}
-      />
-    </Field>
+      defaultOptions
+      loadOptions={loadOrganizations}
+      getOptionLabel={(option) => option.name}
+      getOptionValue={(option) => option.uuid}
+      isDisabled={disabled}
+    />
   );
 };

@@ -5,6 +5,7 @@ import { User, usersPartialUpdate } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 
 import { UserTokenLifetime } from './UserTokenLifetime';
 
@@ -30,11 +31,15 @@ describe('UserTokenLifetime component', () => {
   });
 
   it('shows warning when "token will not timeout" option is selected', async () => {
+    const user = userEvent.setup();
     renderWithProviders(<UserTokenLifetime user={mockUser} />);
 
     // Open the select and choose the "no timeout" option
-    await userEvent.click(screen.getByRole('combobox'));
-    await userEvent.click(screen.getByText(/token will not timeout/i));
+    await openAndSelectOption(
+      user,
+      /Token lifetime/i,
+      /token will not timeout/i,
+    );
 
     // Check if the warning message appears
     expect(

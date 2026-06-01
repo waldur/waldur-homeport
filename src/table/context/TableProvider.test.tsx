@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 import { TableProvider } from './TableProvider';
@@ -245,7 +246,8 @@ describe('TableProvider', () => {
   });
 
   describe('actions passthrough', () => {
-    it('provides fetch action from props', () => {
+    it('provides fetch action from props', async () => {
+      const user = userEvent.setup();
       const fetch = vi.fn();
 
       function ActionsConsumer() {
@@ -263,11 +265,12 @@ describe('TableProvider', () => {
         </TableProvider>,
       );
 
-      screen.getByTestId('fetch-btn').click();
+      await user.click(screen.getByTestId('fetch-btn'));
       expect(fetch).toHaveBeenCalledWith(true);
     });
 
-    it('provides setQuery action from props', () => {
+    it('provides setQuery action from props', async () => {
+      const user = userEvent.setup();
       const setQuery = vi.fn();
 
       function ActionsConsumer() {
@@ -288,7 +291,7 @@ describe('TableProvider', () => {
         </TableProvider>,
       );
 
-      screen.getByTestId('query-btn').click();
+      await user.click(screen.getByTestId('query-btn'));
       expect(setQuery).toHaveBeenCalledWith('test');
     });
   });
@@ -382,7 +385,8 @@ describe('TableProvider', () => {
   });
 
   describe('mobile filter regression - openFiltersDrawer in context', () => {
-    it('exposes openFiltersDrawer as a distinct action from renderFiltersDrawer', () => {
+    it('exposes openFiltersDrawer as a distinct action from renderFiltersDrawer', async () => {
+      const user = userEvent.setup();
       const openFiltersDrawer = vi.fn();
       const renderFiltersDrawer = vi.fn();
 
@@ -416,11 +420,11 @@ describe('TableProvider', () => {
         </TableProvider>,
       );
 
-      screen.getByTestId('open-btn').click();
+      await user.click(screen.getByTestId('open-btn'));
       expect(openFiltersDrawer).toHaveBeenCalledTimes(1);
       expect(renderFiltersDrawer).not.toHaveBeenCalled();
 
-      screen.getByTestId('render-btn').click();
+      await user.click(screen.getByTestId('render-btn'));
       expect(renderFiltersDrawer).toHaveBeenCalledTimes(1);
     });
 

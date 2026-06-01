@@ -1,16 +1,12 @@
 import { FC } from 'react';
-import { Field } from 'react-final-form';
 
-import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 
 export const ApplyAsMinimalConsumptionField: FC = () => (
-  <Field
+  <BooleanGroup
     name="apply_as_minimal_consumption"
-    component={FormGroup}
     type="checkbox"
-  >
-    <AwesomeCheckboxField label={translate('Apply as minimal consumption')} />
-  </Field>
+    label={translate('Apply as minimal consumption')}
+  />
 );

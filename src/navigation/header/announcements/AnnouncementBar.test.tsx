@@ -1,5 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { AnnouncementBar } from './AnnouncementBar';
@@ -81,13 +81,17 @@ describe('AnnouncementBar rendering', () => {
     expect(screen.getByText(/italic/)).toBeTruthy();
     expect(screen.getByText(/code/)).toBeTruthy();
 
-    // The main container span should show the text
-    const descriptionContainer = screen.getByText(/Bold/).closest('span');
-    expect(descriptionContainer?.querySelector('strong')).toBeNull();
-    expect(descriptionContainer?.querySelector('em')).toBeNull();
-    expect(descriptionContainer?.querySelector('code')).toBeNull();
+    const descriptionContainer = screen.getByTestId('announcement-description');
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(descriptionContainer.querySelector('strong')).toBeNull();
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(descriptionContainer.querySelector('em')).toBeNull();
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(descriptionContainer.querySelector('code')).toBeNull();
 
-    const link = screen.getByRole('link', { name: 'link' });
+    const link = within(descriptionContainer).getByRole('link', {
+      name: 'link',
+    });
     expect(link.getAttribute('href')).toBe('https://example.com');
   });
 });

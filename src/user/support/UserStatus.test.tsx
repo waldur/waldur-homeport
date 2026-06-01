@@ -1,4 +1,5 @@
-import { screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { usersPartialUpdate } from 'waldur-js-client';
 
@@ -9,11 +10,13 @@ import { renderWithProviders } from '@/test/harness';
 import { UserStatus } from './UserStatus';
 
 describe('UserStatus', () => {
-  let user;
+  const user = userEvent.setup();
+
+  let mockUser;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    user = {
+    mockUser = {
       uuid: 'abc123',
       full_name: 'John Doe',
       is_active: true,
@@ -21,18 +24,18 @@ describe('UserStatus', () => {
   });
 
   it('renders the component with the enabled user', () => {
-    renderWithProviders(<UserStatus user={user} />);
+    renderWithProviders(<UserStatus user={mockUser} />);
     expect(screen.getByText('Account status')).toBeInTheDocument();
     expect(screen.getByLabelText('Active')).toBeChecked();
   });
 
   it('deactivates user successfully', async () => {
     vi.mocked(useModal().confirm).mockResolvedValue(true);
-    const { queryClient } = renderWithProviders(<UserStatus user={user} />);
+    const { queryClient } = renderWithProviders(<UserStatus user={mockUser} />);
     const invalidateQueriesSpy = vi.spyOn(queryClient, 'invalidateQueries');
     const setQueryDataSpy = vi.spyOn(queryClient, 'setQueryData');
 
-    fireEvent.click(screen.getByLabelText('Active'));
+    await user.click(screen.getByLabelText('Active'));
     await waitFor(() => {
       expect(useModal().confirm).toHaveBeenCalled();
       expect(usersPartialUpdate).toHaveBeenCalledWith({
@@ -55,8 +58,8 @@ describe('UserStatus', () => {
   it('handles the error when deactivating user', async () => {
     vi.mocked(useModal().confirm).mockResolvedValue(true);
     vi.mocked(usersPartialUpdate).mockRejectedValue(new Error('Server error'));
-    renderWithProviders(<UserStatus user={user} />);
-    fireEvent.click(screen.getByLabelText('Active'));
+    renderWithProviders(<UserStatus user={mockUser} />);
+    await user.click(screen.getByLabelText('Active'));
     await waitFor(() => {
       expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
         new Error('Server error'),
@@ -66,15 +69,19 @@ describe('UserStatus', () => {
   });
 
   it('renders the component with the disabled user', () => {
-    renderWithProviders(<UserStatus user={{ ...user, is_active: false }} />);
+    renderWithProviders(
+      <UserStatus user={{ ...mockUser, is_active: false }} />,
+    );
     expect(screen.getByText('Account status')).toBeInTheDocument();
     expect(screen.getByLabelText('Disabled')).not.toBeChecked();
   });
 
   it('activates user successfully', async () => {
     vi.mocked(useModal().confirm).mockResolvedValue(true);
-    renderWithProviders(<UserStatus user={{ ...user, is_active: false }} />);
-    fireEvent.click(screen.getByLabelText('Disabled'));
+    renderWithProviders(
+      <UserStatus user={{ ...mockUser, is_active: false }} />,
+    );
+    await user.click(screen.getByLabelText('Disabled'));
     await waitFor(() => {
       expect(usersPartialUpdate).toHaveBeenCalledWith({
         path: { uuid: 'abc123' },

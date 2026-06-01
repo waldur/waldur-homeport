@@ -424,12 +424,15 @@ const AskUserFormBody: FC<
       </div>
 
       {showSubmitted ? (
-        <div className="aui-ask-user-footer aui-ask-user-footer--submitted">
+        <div
+          className="aui-ask-user-footer aui-ask-user-footer--submitted"
+          data-testid="ask-user-footer"
+        >
           <CheckCircleIcon size={14} weight="fill" />
           <span>{translate('Sent to assistant')}</span>
         </div>
       ) : (
-        <div className="aui-ask-user-footer">
+        <div className="aui-ask-user-footer" data-testid="ask-user-footer">
           {!readOnly && (
             <span className="aui-ask-user-progress">
               {translate('{answered} of {total} answered', {

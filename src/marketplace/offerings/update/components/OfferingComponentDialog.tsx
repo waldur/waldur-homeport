@@ -59,7 +59,11 @@ export const OfferingComponentDialog: FC<{
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={(values) => submitMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        submitMutation.mutateAsync(values).catch(() => {
+          // Error is handled by useManagedMutation
+        })
+      }
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

@@ -51,10 +51,11 @@ const parseCIDR = (
 
 const ipToLong = (ip: IPv4Address): number => {
   return (
-    (ip.octets[0] << 24) |
-    (ip.octets[1] << 16) |
-    (ip.octets[2] << 8) |
-    ip.octets[3]
+    ((ip.octets[0] << 24) |
+      (ip.octets[1] << 16) |
+      (ip.octets[2] << 8) |
+      ip.octets[3]) >>>
+    0
   );
 };
 

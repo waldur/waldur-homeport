@@ -5,9 +5,7 @@ import { Resource } from 'waldur-js-client';
 
 import { formatISODate, parseDate } from '@/core/dateUtils';
 import { WarnCard } from '@/core/WarnCard';
-import { SubmitButton } from '@/form';
-import { DateField } from '@/form/DateField';
-import { FormContainer } from '@/form/FormContainer';
+import { SubmitButton, DateGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -80,8 +78,8 @@ export const EditResourceEndDateDialog: FunctionComponent<
                 </>
               }
             >
-              <FormContainer submitting={submitting}>
-                <DateField
+              <div className="size-sm">
+                <DateGroup
                   name="end_date"
                   label={translate('Termination date')}
                   hideLabel
@@ -139,7 +137,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                     className="mt-5"
                   />
                 )}
-              </FormContainer>
+              </div>
             </ModalDialog>
           </form>
         );

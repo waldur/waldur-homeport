@@ -14,7 +14,7 @@ describe('TableSidebarFilterValues', () => {
         remove={mockRemove}
       />,
     );
-    expect(container.firstChild).toBeNull();
+    expect(container).toBeEmptyDOMElement();
   });
 
   it('should render nothing for undefined value', () => {
@@ -25,7 +25,7 @@ describe('TableSidebarFilterValues', () => {
         remove={mockRemove}
       />,
     );
-    expect(container.firstChild).toBeNull();
+    expect(container).toBeEmptyDOMElement();
   });
 
   it('should render string value directly', () => {

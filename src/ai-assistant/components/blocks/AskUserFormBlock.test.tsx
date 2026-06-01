@@ -1,4 +1,5 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
 import { UIBlock } from '@/ai-assistant/lib/types';
@@ -185,19 +186,19 @@ describe('AskUserFormBlock rendering', () => {
       ]),
     );
     expect(screen.queryByRole('radio')).not.toBeInTheDocument();
-    expect(
-      screen.getByText((_, el) => el?.tagName.toLowerCase() === 'input'),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByText('Search…')).toBeInTheDocument();
   });
 
-  it('marks the picked pill and dims the others on single-select', () => {
+  it('marks the picked pill and dims the others on single-select', async () => {
+    const user = userEvent.setup();
     renderOffline(
       buildBlock([
         { id: 'q1', question: 'Pick one', options: buildOptions(3) },
       ]),
     );
     const pill1 = screen.getByRole('radio', { name: 'Option 1' });
-    fireEvent.click(pill1);
+    await user.click(pill1);
     expect(pill1.getAttribute('data-picked')).toBe('1');
     expect(pill1.getAttribute('data-dimmed')).toBe('0');
 
@@ -206,7 +207,8 @@ describe('AskUserFormBlock rendering', () => {
     expect(pill2.getAttribute('data-dimmed')).toBe('1');
   });
 
-  it('keeps every multi-select pill un-dimmed', () => {
+  it('keeps every multi-select pill un-dimmed', async () => {
+    const user = userEvent.setup();
     renderOffline(
       buildBlock([
         {
@@ -218,13 +220,14 @@ describe('AskUserFormBlock rendering', () => {
       ]),
     );
     const pill1 = screen.getByRole('checkbox', { name: 'Option 1' });
-    fireEvent.click(pill1);
+    await user.click(pill1);
     expect(pill1.getAttribute('data-picked')).toBe('1');
     const pill2 = screen.getByRole('checkbox', { name: 'Option 2' });
     expect(pill2.getAttribute('data-dimmed')).toBe('0');
   });
 
-  it('toggles a multi-select pill off on second click', () => {
+  it('toggles a multi-select pill off on second click', async () => {
+    const user = userEvent.setup();
     renderOffline(
       buildBlock([
         {
@@ -236,35 +239,36 @@ describe('AskUserFormBlock rendering', () => {
       ]),
     );
     const pill1 = screen.getByRole('checkbox', { name: 'Option 1' });
-    fireEvent.click(pill1);
+    await user.click(pill1);
     expect(pill1.getAttribute('data-picked')).toBe('1');
-    fireEvent.click(pill1);
+    await user.click(pill1);
     expect(pill1.getAttribute('data-picked')).toBe('0');
   });
 
-  it('clears picks when the custom "other" input is opened', () => {
+  it('clears picks when the custom "other" input is opened', async () => {
+    const user = userEvent.setup();
     renderOffline(
       buildBlock([
         { id: 'q1', question: 'Pick one', options: buildOptions(3) },
       ]),
     );
     const pill1 = screen.getByRole('radio', { name: 'Option 1' });
-    fireEvent.click(pill1);
+    await user.click(pill1);
     expect(pill1.getAttribute('data-picked')).toBe('1');
 
-    fireEvent.click(screen.getByText(/Type your own/));
+    await user.click(screen.getByText(/Type your own/));
     expect(pill1.getAttribute('data-picked')).toBe('0');
   });
 
   it('disables the submit button in offline (audit-log) mode', () => {
-    const { container } = renderOffline(
+    renderOffline(
       buildBlock([
         { id: 'q1', question: 'Pick one', options: buildOptions(2) },
       ]),
     );
-    const footer = container.querySelector('.aui-ask-user-footer');
+    const footer = screen.getByTestId('ask-user-footer');
     expect(footer).not.toBeNull();
-    const submit = within(footer as HTMLElement).getByRole('button', {
+    const submit = within(footer).getByRole('button', {
       name: /Send answers/,
     });
     expect(submit).toBeDisabled();

@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
+import { Form } from 'react-final-form';
 import {
   openstackRoutersAddRouterInterface,
   openstackPortsList,
   openstackSubnetsList,
 } from 'waldur-js-client';
 
+import { LoadingErred } from '@/core/LoadingErred';
+import { RadioGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
+import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { renderFieldOrDash } from '@/table/utils';
 
 const typeChoices = [
@@ -36,7 +39,7 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
     errorMessage: translate('Unable to add router interface.'),
   });
 
-  const query = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['AddRouterInterface', router.tenant_uuid],
 
     queryFn: async () => {
@@ -61,34 +64,50 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
   });
 
   return (
-    <ResourceActionDialog
-      dialogTitle={translate('Add router interface')}
-      formFields={(values) =>
-        query.data
-          ? [
-              {
-                name: 'type',
-                label: translate('Type'),
-                type: 'radio',
-                required: true,
-                choices: typeChoices,
-                direction: 'horizontal',
-              },
-              {
-                name: 'resource',
-                label:
+    <Form
+      onSubmit={async (values) => {
+        try {
+          await mutation.mutateAsync(values as any);
+        } catch {
+          // Handled by useManagedMutation
+        }
+      }}
+      initialValues={{ type: typeChoices[0].value, resource: '' }}
+      render={({ handleSubmit, submitting, invalid, values }) => (
+        <ActionDialogFinal
+          title={translate('Add router interface')}
+          onSubmit={handleSubmit}
+          submitting={submitting}
+          invalid={invalid}
+          loading={isLoading}
+        >
+          {error ? (
+            <LoadingErred loadData={refetch} />
+          ) : data ? (
+            <>
+              <RadioGroup
+                name="type"
+                label={translate('Type')}
+                required
+                choices={typeChoices}
+                direction="horizontal"
+              />
+              <SelectGroup
+                name="resource"
+                label={
                   values.type === 'subnet'
                     ? translate('Select subnet')
-                    : translate('Select existing port'),
-                type: 'select',
-                required: true,
-                options:
+                    : translate('Select existing port')
+                }
+                required
+                simpleValue
+                options={
                   values.type === 'subnet'
-                    ? query.data.subnets.map((subnet) => ({
+                    ? data.subnets.map((subnet) => ({
                         value: subnet.url,
                         label: `${subnet.name} (${subnet.cidr})`,
                       }))
-                    : query.data.ports.map((port) => {
+                    : data.ports.map((port) => {
                         const ips = port.fixed_ips?.length
                           ? port.fixed_ips
                               .map((fip) => fip.ip_address)
@@ -100,21 +119,13 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
                           value: port.url,
                           label: `${ips} (${mac}) / ${nameOrUuid}`.trim(),
                         };
-                      }),
-              },
-            ]
-          : []
-      }
-      loading={query.isLoading}
-      error={query.error}
-      initialValues={{ type: typeChoices[0].value, resource: '' }}
-      submitForm={async (values) => {
-        try {
-          await mutation.mutateAsync(values);
-        } catch {
-          // Handled by useManagedMutation
-        }
-      }}
+                      })
+                }
+              />
+            </>
+          ) : null}
+        </ActionDialogFinal>
+      )}
     />
   );
 };

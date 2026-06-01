@@ -10,6 +10,7 @@ export const TimeField: FunctionComponent<any> = (props) => {
     enableTime: true,
     noCalendar: true,
     dateFormat: 'H:i',
+    allowInput: true,
   };
 
   return (
@@ -19,6 +20,7 @@ export const TimeField: FunctionComponent<any> = (props) => {
       placeholder={props.placeholder}
       iconNode={<ClockIcon weight="bold" />}
       input={props.input}
+      id={props.id}
     />
   );
 };

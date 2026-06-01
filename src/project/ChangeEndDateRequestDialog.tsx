@@ -1,14 +1,12 @@
 import { DateTime } from 'luxon';
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
-import { projectEndDateChangeRequestsCreate, Project } from 'waldur-js-client';
+import { Form } from 'react-final-form';
+import { Project, projectEndDateChangeRequestsCreate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { formatDate, formatISODate } from '@/core/dateUtils';
-import { SubmitButton, TextField } from '@/form';
-import { DateField } from '@/form/DateField';
+import { DateGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -38,22 +36,14 @@ export const ChangeEndDateRequestDialog: FC<
           ...(data.comment?.trim() && { comment: data.comment.trim() }),
         },
       }),
-
     successMessage: translate(
       'Project end date change request has been submitted.',
     ),
-
     errorMessage: translate(
       'Unable to submit project end date change request.',
     ),
-
     refetch,
-
-    invalidateQueries: [
-      {
-        queryKey: ['project-end-date-change-requests'],
-      },
-    ],
+    invalidateQueries: [{ queryKey: ['project-end-date-change-requests'] }],
   });
 
   const validate = (values: FormData) => {
@@ -101,42 +91,23 @@ export const ChangeEndDateRequestDialog: FC<
               </>
             }
           >
-            <Field name="requested_end_date">
-              {({ input, meta }) => (
-                <FormGroup
-                  controlId="requested_end_date"
-                  label={translate('New end date')}
-                  meta={meta}
-                >
-                  <DateField
-                    input={input}
-                    minDate={minDate}
-                    placeholder="dd.mm.yyyy"
-                  />
-                </FormGroup>
-              )}
-            </Field>
+            <DateGroup
+              name="requested_end_date"
+              label={translate('New end date')}
+              minDate={minDate}
+              placeholder="dd.mm.yyyy"
+            />
             {project.end_date && (
               <p className="text-gray-700 mt-2">
                 {translate('Old end date')}: {formatDate(project.end_date)}
               </p>
             )}
-            <Field name="comment">
-              {({ input, meta }) => (
-                <FormGroup
-                  label={translate('Reason for modifying')}
-                  controlId="comment"
-                  meta={meta}
-                >
-                  <TextField
-                    input={input}
-                    meta={meta as any}
-                    placeholder={translate('Provide a short explanation...')}
-                    rows={4}
-                  />
-                </FormGroup>
-              )}
-            </Field>
+            <TextGroup
+              label={translate('Reason for modifying')}
+              name="comment"
+              placeholder={translate('Provide a short explanation...')}
+              rows={4}
+            />
           </ModalDialog>
         </form>
       )}

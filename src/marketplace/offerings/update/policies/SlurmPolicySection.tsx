@@ -30,7 +30,13 @@ import {
   policyPeriodOptions,
   validateEmails,
 } from '@/customer/cost-policies/utils';
-import { NumberField, SelectField, StringField, SubmitButton } from '@/form';
+import {
+  SubmitButton,
+  SelectGroup,
+  StringGroup,
+  BooleanGroup,
+  NumberGroup,
+} from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { MultiSelectValue } from '@/form/select';
 import { translate } from '@/i18n';
@@ -695,46 +701,38 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
           <form id="slurm-policy-form" onSubmit={handleSubmit}>
             <PresetSelector />
 
-            <FormGroup
+            <SelectGroup
+              name="actions"
+              options={slurmActionOptions}
+              getOptionValue={(option) => option.value}
+              getOptionLabel={(option) => option.label}
+              isMulti
+              simpleValue
+              placeholder={translate('Select actions...')}
+              components={{
+                MultiValue: MultiSelectValue,
+                ValueContainer: components.ValueContainer,
+              }}
               label={translate('Policy Actions')}
               help={translate(
                 'Select actions to trigger when usage thresholds are reached.',
               )}
               required
-            >
-              <Field
-                component={SelectField}
-                name="actions"
-                options={slurmActionOptions}
-                getOptionValue={(option) => option.value}
-                getOptionLabel={(option) => option.label}
-                isMulti
-                simpleValue
-                placeholder={translate('Select actions...')}
-                components={{
-                  MultiValue: MultiSelectValue,
-                  ValueContainer: components.ValueContainer,
-                }}
-              />
-            </FormGroup>
+            />
 
             <Field name="actions">
               {({ input: actionsInput }) =>
                 actionsInput.value?.includes('notify_external_user') && (
-                  <FormGroup
+                  <StringGroup
+                    name="options.notify_external_user"
+                    validate={validateEmails}
+                    placeholder="admin@example.com, ops@example.com"
                     label={translate('External Email')}
                     help={translate(
                       'Comma-separated list of email addresses to notify.',
                     )}
                     required
-                  >
-                    <Field
-                      component={StringField}
-                      name="options.notify_external_user"
-                      validate={validateEmails}
-                      placeholder="admin@example.com, ops@example.com"
-                    />
-                  </FormGroup>
+                  />
                 )
               }
             </Field>
@@ -743,45 +741,36 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               <ComponentLimitsField components={availableComponents} />
             )}
 
-            <FormGroup
+            <SelectGroup
+              name="period"
+              options={Object.values(policyPeriodOptions)}
+              getOptionValue={(option) => option.value}
+              getOptionLabel={(option) => option.label}
+              simpleValue
               label={translate('Period')}
               help={translate(
                 'The time period over which usage is accumulated and limits are applied.',
               )}
               required
-            >
-              <Field
-                component={SelectField}
-                name="period"
-                options={Object.values(policyPeriodOptions)}
-                getOptionValue={(option) => option.value}
-                getOptionLabel={(option) => option.label}
-                simpleValue
-              />
-            </FormGroup>
+            />
 
-            <FormGroup label={translate('Limit Type')} required>
-              <Field
-                component={SelectField}
-                name="limit_type"
-                options={limitTypeOptions}
-                getOptionValue={(option) => option.value}
-                getOptionLabel={(option) => option.label}
-                simpleValue
-              />
-            </FormGroup>
+            <SelectGroup
+              name="limit_type"
+              options={limitTypeOptions}
+              getOptionValue={(option) => option.value}
+              getOptionLabel={(option) => option.label}
+              simpleValue
+              label={translate('Limit Type')}
+              required
+            />
 
-            <FormGroup
+            <BooleanGroup
+              name="tres_billing_enabled"
+              label={translate('TRES Billing Enabled')}
               help={translate(
                 'Use TRES billing units instead of raw TRES values',
               )}
-            >
-              <Field
-                component={AwesomeCheckboxField}
-                name="tres_billing_enabled"
-                label={translate('TRES Billing Enabled')}
-              />
-            </FormGroup>
+            />
 
             <Field name="tres_billing_enabled">
               {({ input: tresBillingInput }) =>
@@ -789,61 +778,45 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               }
             </Field>
 
-            <FormGroup
+            <NumberGroup
+              name="carryover_factor"
+              min={0}
+              max={100}
+              unit="%"
               label={translate('Carryover factor')}
               help={translate(
                 'Maximum percentage of the base allocation that can carry over from unused previous period (0 = no carryover, 100 = full carryover).',
               )}
               required
-            >
-              <Field
-                component={NumberField}
-                name="carryover_factor"
-                min={0}
-                max={100}
-                unit="%"
-              />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <NumberGroup
+              name="grace_ratio"
+              min={0}
+              max={1}
+              step={0.1}
               label={translate('Grace Ratio')}
               help={translate(
                 'Grace period ratio (0.2 = 20% overconsumption allowed)',
               )}
               required
-            >
-              <Field
-                component={NumberField}
-                name="grace_ratio"
-                min={0}
-                max={1}
-                step={0.1}
-              />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <BooleanGroup
+              name="carryover_enabled"
+              label={translate('Carryover Enabled')}
               help={translate(
                 'Enable unused allocation carryover to next period',
               )}
-            >
-              <Field
-                component={AwesomeCheckboxField}
-                name="carryover_enabled"
-                label={translate('Carryover Enabled')}
-              />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <BooleanGroup
+              name="raw_usage_reset"
+              label={translate('Raw Usage Reset')}
               help={translate(
                 'Reset raw usage at period transitions (PriorityUsageResetPeriod=None)',
               )}
-            >
-              <Field
-                component={AwesomeCheckboxField}
-                name="raw_usage_reset"
-                label={translate('Raw Usage Reset')}
-              />
-            </FormGroup>
+            />
 
             <FormGroup
               description={
@@ -878,26 +851,22 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               {({ input: applyToAllInput }) => (
                 <>
                   {!applyToAllInput.value && organizationGroups?.length > 0 && (
-                    <FormGroup
+                    <SelectGroup
+                      name="organization_groups"
+                      options={organizationGroups.map((group) => ({
+                        value: group.url,
+                        label: group.name,
+                      }))}
+                      getOptionValue={(option) => option.value}
+                      getOptionLabel={(option) => option.label}
+                      isMulti
+                      placeholder={translate('Select organization groups...')}
                       label={translate('Organization Groups')}
                       help={translate(
                         'Select which organization groups this policy should apply to.',
                       )}
                       required
-                    >
-                      <Field
-                        component={SelectField}
-                        name="organization_groups"
-                        options={organizationGroups.map((group) => ({
-                          value: group.url,
-                          label: group.name,
-                        }))}
-                        getOptionValue={(option) => option.value}
-                        getOptionLabel={(option) => option.label}
-                        isMulti
-                        placeholder={translate('Select organization groups...')}
-                      />
-                    </FormGroup>
+                    />
                   )}
                 </>
               )}

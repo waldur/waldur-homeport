@@ -1,4 +1,4 @@
-import { CaretDownIcon, CaretRightIcon, XIcon } from '@phosphor-icons/react';
+import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import React, {
@@ -14,6 +14,7 @@ import { useFormState } from 'react-final-form';
 import { useDebounce } from 'react-use';
 
 import { Badge } from '@/core/Badge';
+import { RemoveFilterBadgeButton } from '@/core/RemoveFilterBadgeButton';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { MenuComponent } from '@/metronic/components';
@@ -93,22 +94,7 @@ const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
   );
 };
 
-export const RemoveFilterBadgeButton = ({
-  onClick,
-  size = 12,
-  className = '',
-}) => (
-  <button
-    type="button"
-    className={classNames(
-      'text-btn text-gray-400 text-hover-gray-500 lh-0',
-      className,
-    )}
-    onClick={onClick}
-  >
-    <XIcon weight="bold" size={size} />
-  </button>
-);
+export { RemoveFilterBadgeButton };
 
 export const TableSidebarFilterValues = ({
   value,

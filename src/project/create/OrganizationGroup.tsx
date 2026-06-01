@@ -1,12 +1,10 @@
 import { useMemo } from 'react';
-import { Field } from 'react-final-form';
 import { Customer } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { AsyncSelect as Select } from '@/form/select';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 interface OrganizationGroupProps {
   onChange?(customer: Customer): void;
@@ -34,26 +32,18 @@ export const OrganizationGroup = ({
   );
 
   return (
-    <FormGroup label={translate('Organization')} required>
-      <Field
-        name="customer"
-        validate={required}
-        render={(fieldProps) => (
-          <Select
-            {...fieldProps.input}
-            placeholder={translate('Select...')}
-            loadOptions={loadOrganizations}
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.url}
-            noOptionsMessage={() => translate('No organizations')}
-            isDisabled={isDisabled}
-            onChange={(value) => {
-              fieldProps.input.onChange(value);
-              onChange(value);
-            }}
-          />
-        )}
-      />
-    </FormGroup>
+    <AsyncSelectGroup
+      name="customer"
+      label={translate('Organization')}
+      required
+      validate={required}
+      placeholder={translate('Select...')}
+      loadOptions={loadOrganizations}
+      getOptionLabel={(option) => option.name}
+      getOptionValue={(option) => option.url}
+      noOptionsMessage={() => translate('No organizations')}
+      isDisabled={isDisabled}
+      onChange={onChange}
+    />
   );
 };

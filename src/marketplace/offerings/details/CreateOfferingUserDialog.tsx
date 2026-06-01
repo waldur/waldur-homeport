@@ -1,9 +1,12 @@
+import { Form } from 'react-final-form';
 import { marketplaceOfferingUsersCreate } from 'waldur-js-client';
 
+import { required } from '@/core/validators';
+import { AsyncSelectGroup, FormFooter, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 export const CreateOfferingUserDialog = ({
   resolve: { offering, onSuccess },
@@ -27,27 +30,31 @@ export const CreateOfferingUserDialog = ({
     refetch: onSuccess,
   });
 
-  const fields = [
-    {
-      name: 'user',
-      label: translate('User'),
-      type: 'async_select',
-      loadOptions: userAutocomplete,
-      getOptionLabel: ({ full_name, email, username }) =>
-        full_name || email || username,
-    },
-    {
-      name: 'username',
-      label: translate('Username'),
-      type: 'string',
-    },
-  ];
-
   return (
-    <ResourceActionDialog
-      dialogTitle={translate('Create offering user')}
-      formFields={fields}
-      submitForm={mutation.mutateAsync}
+    <Form
+      onSubmit={mutation.mutateAsync}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Create offering user')}
+            footer={<FormFooter />}
+          >
+            <AsyncSelectGroup
+              name="user"
+              label={translate('User')}
+              required={true}
+              defaultOptions={true}
+              loadOptions={userAutocomplete}
+              getOptionValue={(option) => option.url}
+              getOptionLabel={({ full_name, email, username }) =>
+                full_name || email || username
+              }
+              validate={required}
+            />
+            <StringGroup name="username" label={translate('Username')} />
+          </ModalDialog>
+        </form>
+      )}
     />
   );
 };

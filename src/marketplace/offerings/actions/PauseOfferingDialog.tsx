@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { marketplaceProviderOfferingsPause } from 'waldur-js-client';
 
-import { SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -41,17 +40,14 @@ export const PauseOfferingDialog: FunctionComponent<{
               </>
             }
           >
-            <FormGroup>
-              <Field
-                name="reason"
-                component={TextField}
-                as="textarea"
-                placeholder={translate(
-                  'Please enter reason why offering has been paused.',
-                )}
-                rows={7}
-              />
-            </FormGroup>
+            <TextGroup
+              name="reason"
+              as="textarea"
+              placeholder={translate(
+                'Please enter reason why offering has been paused.',
+              )}
+              rows={7}
+            />
           </ModalDialog>
         </form>
       )}

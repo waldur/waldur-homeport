@@ -1,9 +1,11 @@
-import { Field } from 'react-final-form';
-
-import { NumberField, SecretField, StringField, TextField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { EmailField } from '@/form/EmailField';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import {
+  BooleanGroup,
+  EmailGroup,
+  NumberGroup,
+  SecretGroup,
+  StringGroup,
+  TextGroup,
+} from '@/form';
 import { SettingsDescription } from '@/SettingsDescription';
 
 import { getKeyTitle } from '../settings/utils';
@@ -11,21 +13,21 @@ import { getKeyTitle } from '../settings/utils';
 const getFieldComponent = (fieldType: string) => {
   switch (fieldType) {
     case 'string':
-      return StringField;
+      return StringGroup;
     case 'boolean':
-      return AwesomeCheckboxField;
+      return BooleanGroup;
     case 'email_field':
-      return EmailField;
+      return EmailGroup;
     case 'text_field':
-      return TextField;
+      return TextGroup;
     case 'integer':
-      return NumberField;
+      return NumberGroup;
     case 'secret_field':
-      return SecretField;
+      return SecretGroup;
     case 'dict_field':
-      return TextField;
+      return TextGroup;
     default:
-      return StringField;
+      return StringGroup;
   }
 };
 
@@ -64,30 +66,21 @@ export const SupportSettingsForm = ({ name }) => {
         const isDictField = field.type === 'dict_field';
 
         return (
-          <FormGroup
+          <FieldComponent
             key={field.key}
+            name={field.key}
             label={
-              !isBoolean &&
-              (field.description.length < 75
-                ? field.description
-                : getKeyTitle(field.key))
+              isBoolean
+                ? getKeyTitle(field.key)
+                : field.description.length < 75
+                  ? field.description
+                  : getKeyTitle(field.key)
             }
-          >
-            <Field
-              name={field.key}
-              component={FieldComponent}
-              format={isDictField ? formatDictField : undefined}
-              parse={isDictField ? parseDictField : undefined}
-              {...(isBoolean
-                ? {
-                    label: getKeyTitle(field.key),
-                    hideLabel: true,
-                    className: 'mt-3',
-                  }
-                : {})}
-              {...(isDictField ? { rows: 5 } : {})}
-            />
-          </FormGroup>
+            format={isDictField ? formatDictField : undefined}
+            parse={isDictField ? parseDictField : undefined}
+            {...(isBoolean ? { className: 'mt-3' } : {})}
+            {...(isDictField ? { rows: 5 } : {})}
+          />
         );
       })}
     </>

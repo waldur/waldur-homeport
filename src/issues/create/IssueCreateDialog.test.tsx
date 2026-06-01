@@ -1,6 +1,8 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  supportAttachmentsCreate,
   supportIssuesCreate,
   supportRequestTypesList,
   supportTemplatesList,
@@ -10,6 +12,11 @@ import { ENV } from '@/core/config';
 import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
+import {
+  clearSelect,
+  getSelectByLabel,
+  openAndSelectOption,
+} from '@/test/select';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { ISSUE_IDS } from '../types/constants';
@@ -111,6 +118,8 @@ describe('constructIssuePayload', () => {
 });
 
 describe('IssueCreateDialog Component', () => {
+  const user = userEvent.setup();
+
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(supportRequestTypesList).mockResolvedValue({
@@ -150,7 +159,7 @@ describe('IssueCreateDialog Component', () => {
     });
 
     const nextBtn = screen.getByTestId('next-button-step-0');
-    fireEvent.click(nextBtn);
+    await user.click(nextBtn);
 
     await waitFor(() => {
       expect(
@@ -188,13 +197,13 @@ describe('IssueCreateDialog Component', () => {
     await waitFor(() => {
       expect(screen.getByTestId('next-button-step-0')).not.toBeDisabled();
     });
-    fireEvent.click(screen.getByTestId('next-button-step-0'));
+    await user.click(screen.getByTestId('next-button-step-0'));
 
     await waitFor(() => {
       expect(screen.getByTestId('confirm-button')).toBeInTheDocument();
     });
 
-    fireEvent.click(screen.getByTestId('confirm-button'));
+    await user.click(screen.getByTestId('confirm-button'));
 
     await waitFor(() => {
       expect(supportIssuesCreate).toHaveBeenCalled();
@@ -206,6 +215,180 @@ describe('IssueCreateDialog Component', () => {
     expect(router.stateService.go).toHaveBeenCalledWith('support.detail', {
       issue_uuid: mockIssue.uuid,
     });
+    expect(mockRefetch).toHaveBeenCalled();
+  });
+
+  it('renders warning when no request types are configured', async () => {
+    vi.mocked(supportRequestTypesList).mockResolvedValue({
+      data: [],
+    } as any);
+
+    renderComponent();
+
+    await waitFor(() => {
+      expect(
+        screen.getByText('Service desk configuration incomplete'),
+      ).toBeInTheDocument();
+    });
+
+    expect(screen.getByTestId('next-button-step-0')).toBeDisabled();
+  });
+
+  it('pre-fills and disables fields based on project scope', async () => {
+    renderComponent({
+      scopeType: 'project',
+      scope: {
+        name: 'Project Alpha',
+        uuid: 'project-123',
+        url: 'http://example.com/project-123/',
+        customer_name: 'Org 1',
+        customer_uuid: '123',
+        customer: 'http://example.com/org/',
+      },
+    });
+
+    await waitFor(() => {
+      expect(
+        screen.getByLabelText(
+          'Issue is general and not tied to any specific organization, project, or resource',
+        ),
+      ).toBeDisabled();
+    });
+  });
+
+  it('handles standalone issue checkbox toggle correctly', async () => {
+    renderComponent({ scopeType: null, scope: null });
+
+    await waitFor(() => {
+      expect(
+        screen.getByLabelText(
+          'Issue is general and not tied to any specific organization, project, or resource',
+        ),
+      ).not.toBeDisabled();
+    });
+
+    const checkbox = screen.getByLabelText(
+      'Issue is general and not tied to any specific organization, project, or resource',
+    );
+    await user.click(checkbox);
+
+    // Organization field should get disabled
+    const orgSelectContainer = getSelectByLabel('Organization');
+    const orgCombobox = within(orgSelectContainer).getByRole('combobox', {
+      hidden: true,
+    });
+    expect(orgCombobox).toBeDisabled();
+  });
+
+  it('auto-fills and resets form on template selection and clear', async () => {
+    vi.mocked(supportTemplatesList).mockResolvedValue({
+      data: [
+        {
+          uuid: 'template-1',
+          name: 'Template One',
+          description: 'Description One',
+          issue_type: 'INFORMATIONAL',
+          attachments: [],
+        },
+      ],
+    } as any);
+
+    renderComponent({
+      issue: {
+        customer: {
+          name: 'Org 1',
+          uuid: '123',
+          url: 'http://example.com/org/',
+        },
+        summary: '',
+        description: '',
+      },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId('next-button-step-0')).not.toBeDisabled();
+    });
+    await user.click(screen.getByTestId('next-button-step-0'));
+
+    // Wait for step 2 (Description) and the template dropdown
+    await waitFor(() => {
+      expect(screen.getByText('Template')).toBeInTheDocument();
+    });
+
+    // Select the template
+    await openAndSelectOption(user, 'Template', 'Template One');
+
+    // Title and Request description should be auto-filled
+    await waitFor(() => {
+      expect(screen.getByLabelText('Title')).toHaveValue('Template One');
+      expect(screen.getByLabelText('Request description')).toHaveValue(
+        'Description One',
+      );
+    });
+
+    // Clear the template select
+    await clearSelect(user, 'Template');
+
+    // Dropdown should show placeholder indicating it is cleared
+    await waitFor(() => {
+      expect(screen.getByText('Select issue template...')).toBeInTheDocument();
+    });
+  });
+
+  it('submits form with attachments successfully', async () => {
+    const mockRefetch = vi.fn();
+    const mockIssue = {
+      uuid: 'issue-100',
+      key: 'SUP-100',
+      url: 'http://example.com/issues/100/',
+    };
+    vi.mocked(supportIssuesCreate).mockResolvedValue({
+      data: mockIssue,
+    } as any);
+    vi.mocked(supportAttachmentsCreate).mockResolvedValue({} as any);
+
+    const mockFile = new File(['foo'], 'foo.txt', { type: 'text/plain' });
+
+    renderComponent({
+      refetch: mockRefetch,
+      issue: {
+        customer: {
+          name: 'Org 1',
+          uuid: '123',
+          url: 'http://example.com/org/',
+        },
+        summary: 'Test summary',
+        description: 'Test description',
+        files: [mockFile] as any,
+      },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId('next-button-step-0')).not.toBeDisabled();
+    });
+    await user.click(screen.getByTestId('next-button-step-0'));
+
+    await waitFor(() => {
+      expect(screen.getByTestId('confirm-button')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByTestId('confirm-button'));
+
+    await waitFor(() => {
+      expect(supportIssuesCreate).toHaveBeenCalled();
+    });
+
+    await waitFor(() => {
+      expect(supportAttachmentsCreate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: expect.objectContaining({
+            issue: mockIssue.url,
+            file: mockFile,
+          }),
+        }),
+      );
+    });
+
     expect(mockRefetch).toHaveBeenCalled();
   });
 });

@@ -13,6 +13,7 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
     className="menu-item"
     data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
     data-kt-menu-placement="top-end"
+    data-testid="footer-dropdown"
   >
     <div className="menu-link px-3">
       <span className="menu-title">{title}</span>

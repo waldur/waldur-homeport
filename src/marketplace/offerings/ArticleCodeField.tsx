@@ -1,19 +1,19 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
 
-import { FormGroupWithError } from './FormGroupWithError';
 import { articleCodeValidator } from './utils';
 
 export const ArticleCodeField: FunctionComponent = () => {
   return (
-    <Field
+    <StringGroup
       name="article_code"
       validate={articleCodeValidator}
       label={translate('Article code')}
-      description={translate('Technical code used by accounting software.')}
-      component={FormGroupWithError}
+      tooltip={translate('Technical code used by accounting software.')}
+      tooltipEnd={true}
+      space={5}
     />
   );
 };

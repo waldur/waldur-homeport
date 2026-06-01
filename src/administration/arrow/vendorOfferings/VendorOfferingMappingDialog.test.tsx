@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -12,9 +12,11 @@ import {
 import { renderWithProviders } from '@/test/harness';
 import {
   clearSelect,
+  getSelectByLabel,
   openAndSelectOption,
   typeAndCreateOption,
 } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 
 import { VendorOfferingMappingDialog } from './VendorOfferingMappingDialog';
 
@@ -32,13 +34,6 @@ const mockVendorChoices = [
   { value: 'Vendor A', label: 'Vendor A' },
   { value: 'Vendor B', label: 'Vendor B' },
 ];
-
-const mockApiResponse = (data: any[]) => ({
-  data,
-  response: {
-    headers: new Headers({ 'x-result-count': String(data.length) }),
-  },
-});
 
 describe('VendorOfferingMappingDialog', () => {
   const mockRefetch = vi.fn();
@@ -58,13 +53,13 @@ describe('VendorOfferingMappingDialog', () => {
 
     vi.mocked(
       adminArrowVendorOfferingMappingsVendorChoicesList,
-    ).mockResolvedValue({ data: mockVendorChoices } as any);
+    ).mockResolvedValue(mockListResponse(mockVendorChoices));
     vi.mocked(marketplacePublicOfferingsList).mockResolvedValue(
-      mockApiResponse(mockOfferings) as any,
+      mockListResponse(mockOfferings),
     );
-    vi.mocked(marketplacePublicOfferingsPlansList).mockResolvedValue({
-      data: mockPlans,
-    } as any);
+    vi.mocked(marketplacePublicOfferingsPlansList).mockResolvedValue(
+      mockListResponse(mockPlans),
+    );
   });
 
   it('renders create mode', () => {
@@ -193,5 +188,53 @@ describe('VendorOfferingMappingDialog', () => {
 
     // Button should be disabled due to react-final-form validation
     expect(submitButton).toBeDisabled();
+  });
+
+  it('disables plan field when no offering is selected', () => {
+    renderWithProviders(
+      <VendorOfferingMappingDialog
+        resolve={{ settings: mockSettings, refetch: mockRefetch }}
+      />,
+    );
+
+    const planSelectContainer = getSelectByLabel('Plan');
+    const combobox = within(planSelectContainer).getByRole('combobox', {
+      hidden: true,
+    });
+    expect(combobox).toBeDisabled();
+  });
+
+  it('displays "No plans available" when selected offering has no plans', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplacePublicOfferingsPlansList).mockResolvedValue({
+      data: [],
+    } as any);
+
+    renderWithProviders(
+      <VendorOfferingMappingDialog
+        resolve={{ settings: mockSettings, refetch: mockRefetch }}
+      />,
+    );
+
+    // Select offering
+    await openAndSelectOption(user, 'Waldur offering', 'Test Offering 1');
+
+    // Wait for plans query
+    await waitFor(() => {
+      expect(marketplacePublicOfferingsPlansList).toHaveBeenCalled();
+    });
+
+    // Wait for the plan select to become enabled
+    const planSelectContainer = getSelectByLabel('Plan');
+    const combobox = within(planSelectContainer).getByRole('combobox');
+    await waitFor(() => {
+      expect(combobox).not.toBeDisabled();
+    });
+
+    // Try to open plan select
+    await user.click(combobox);
+
+    // Check if "No plans available" is displayed in the dropdown list
+    expect(await screen.findByText('No plans available')).toBeInTheDocument();
   });
 });

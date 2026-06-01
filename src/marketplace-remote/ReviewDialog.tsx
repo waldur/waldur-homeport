@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Form } from 'react-final-form';
 
-import { FormContainer, FormFooter, TextField } from '@/form';
+import { FormFooter, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -22,15 +22,15 @@ export const ReviewDialog: FC<ReviewDialogProps> = ({ resolve }) => {
   return (
     <Form
       onSubmit={(values) => mutation.mutateAsync(values)}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Review request')}
-            footer={<FormFooter submitting={submitting} invalid={invalid} />}
+            footer={<FormFooter />}
           >
-            <FormContainer submitting={submitting}>
-              <TextField label={translate('Comment')} name="review_comment" />
-            </FormContainer>
+            <div className="size-sm">
+              <TextGroup label={translate('Comment')} name="review_comment" />
+            </div>
           </ModalDialog>
         </form>
       )}

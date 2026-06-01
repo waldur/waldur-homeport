@@ -9,7 +9,7 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField, StringField } from '@/form';
+import { StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
@@ -59,15 +59,16 @@ export const Step1General: FC<WizardFormStepProps> = (props) => {
   }, [offeringsQuery?.data, offering]);
   return (
     <WizardForm {...props}>
-      <FormContainer submitting={submitting} className="size-lg">
-        <StringField
+      <div className="size-lg">
+        <StringGroup
           name="name"
           label={translate('Template name')}
           placeholder={translate('e.g., Standard Compute Package')}
           required
           validate={required}
+          disabled={submitting}
         />
-        <SelectField
+        <SelectGroup
           name="offering"
           label={translate('Offering')}
           options={offeringOptions}
@@ -82,8 +83,9 @@ export const Step1General: FC<WizardFormStepProps> = (props) => {
               form.change('limits', null);
             }
           }}
+          disabled={submitting}
         />
-      </FormContainer>
+      </div>
     </WizardForm>
   );
 };

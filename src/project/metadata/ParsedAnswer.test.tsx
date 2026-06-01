@@ -1,10 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
-
-vi.mock('@/core/config', () => ({
-  ENV: { apiEndpoint: 'http://localhost:8000/' },
-}));
+import { describe, expect, it } from 'vitest';
 
 import { ParsedAnswer } from './ParsedAnswer';
 

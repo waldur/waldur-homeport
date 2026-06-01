@@ -11,6 +11,7 @@ import {
 
 import { renderWithProviders } from '@/test/harness';
 import { typeAndSelectOption } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 
 import { CustomerCreditDialog } from './CustomerCreditDialog';
 
@@ -20,22 +21,12 @@ describe('CustomerCreditDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(invoicesList).mockResolvedValue({ data: [] } as any);
-    vi.mocked(customersList).mockResolvedValue({
-      data: [{ name: 'Org 1', url: 'customer-url' }],
-      response: {
-        headers: new Headers({
-          'x-result-count': '1',
-        }),
-      },
-    } as any);
-    vi.mocked(marketplaceProviderOfferingsList).mockResolvedValue({
-      data: [],
-      response: {
-        headers: new Headers({
-          'x-result-count': '0',
-        }),
-      },
-    } as any);
+    vi.mocked(customersList).mockResolvedValue(
+      mockListResponse([{ name: 'Org 1', url: 'customer-url' }]),
+    );
+    vi.mocked(marketplaceProviderOfferingsList).mockResolvedValue(
+      mockListResponse([]),
+    );
   });
 
   it('submits creation form correctly', async () => {

@@ -105,7 +105,10 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         }}
         disabled={props.disabled}
       >
-        <div className={props.disabled ? 'opacity-50' : undefined}>
+        <div
+          className={props.disabled ? 'opacity-50' : undefined}
+          data-testid="action-item-content"
+        >
           {props.iconNode && (
             <span
               className={classNames(

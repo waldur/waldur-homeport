@@ -1,17 +1,13 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Card } from 'react-bootstrap';
-import { Field } from 'react-final-form';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required } from '@/core/validators';
-import { InputField } from '@/form/InputField';
-import { Select } from '@/form/select';
+import { StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
-
-import { FormGroup } from '../../FormGroup';
 
 interface CascadeStep {
   name: string;
@@ -85,117 +81,85 @@ export const CascadeStepsGroup = ({
               </div>
             </Card.Header>
             <Card.Body className="px-4">
-              <FormGroup label={translate('Name')} required={true}>
-                <Field
-                  name={`${name}.name`}
-                  component={InputField}
-                  validate={required}
-                  placeholder={translate('Internal field name (e.g., country)')}
-                />
-              </FormGroup>
+              <StringGroup
+                label={translate('Name')}
+                required={true}
+                name={`${name}.name`}
+                validate={required}
+                placeholder={translate('Internal field name (e.g., country)')}
+              />
 
-              <FormGroup label={translate('Label')} required={true}>
-                <Field
-                  name={`${name}.label`}
-                  component={InputField}
-                  validate={required}
-                  placeholder={translate('Display label (e.g., Country)')}
-                />
-              </FormGroup>
+              <StringGroup
+                label={translate('Label')}
+                required={true}
+                name={`${name}.label`}
+                validate={required}
+                placeholder={translate('Display label (e.g., Country)')}
+              />
 
-              <FormGroup label={translate('Type')} required={true}>
-                <Field
-                  name={`${name}.type`}
-                  validate={required}
-                  render={(fieldProps) => (
-                    <Select
-                      value={STEP_TYPES.find(
-                        (opt) => opt.value === fieldProps.input.value,
-                      )}
-                      onChange={(option) =>
-                        fieldProps.input.onChange(option?.value)
-                      }
-                      options={STEP_TYPES}
-                      isClearable={false}
-                      getOptionValue={(option) => option.value}
-                      getOptionLabel={(option) => option.label}
-                    />
-                  )}
-                />
-              </FormGroup>
+              <SelectGroup
+                name={`${name}.type`}
+                label={translate('Type')}
+                required={true}
+                validate={required}
+                options={STEP_TYPES}
+                isClearable={false}
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                simpleValue
+              />
 
               {availableDependencies.length > 0 && (
-                <FormGroup
+                <SelectGroup
+                  name={`${name}.depends_on`}
                   label={translate('Depends on')}
                   description={translate(
                     'Make this step dependent on previous selection',
                   )}
-                >
-                  <Field
-                    name={`${name}.depends_on`}
-                    render={(fieldProps) => (
-                      <Select
-                        value={availableDependencies.find(
-                          (opt) => opt.value === fieldProps.input.value,
-                        )}
-                        onChange={(option) =>
-                          fieldProps.input.onChange(option?.value)
-                        }
-                        options={availableDependencies}
-                        isClearable={true}
-                        placeholder={translate('Select dependency')}
-                        getOptionValue={(option) => option.value}
-                        getOptionLabel={(option) => option.label}
-                      />
-                    )}
-                  />
-                </FormGroup>
+                  options={availableDependencies}
+                  isClearable={true}
+                  placeholder={translate('Select dependency')}
+                  getOptionValue={(option) => option.value}
+                  getOptionLabel={(option) => option.label}
+                  simpleValue
+                />
               )}
 
               {!hasChoicesMap ? (
-                <FormGroup
+                <StringGroup
                   label={translate('Choices')}
                   description={translate(
                     'JSON array of choice objects with value and label properties',
                   )}
                   required={true}
-                >
-                  <Field
-                    name={`${name}.choices`}
-                    component={InputField}
-                    as="textarea"
-                    rows={4}
-                    validate={required}
-                    placeholder={translate(
-                      '[{"value": "us", "label": "United States"}, {"value": "eu", "label": "European Union"}]',
-                    )}
-                  />
-                </FormGroup>
+                  name={`${name}.choices`}
+                  as="textarea"
+                  rows={4}
+                  validate={required}
+                  placeholder={translate(
+                    '[{"value": "us", "label": "United States"}, {"value": "eu", "label": "European Union"}]',
+                  )}
+                />
               ) : (
-                <FormGroup
+                <StringGroup
                   label={translate('Choices Map')}
                   description={translate(
                     'JSON object mapping parent values to choice arrays',
                   )}
                   required={true}
-                >
-                  <Field
-                    name={`${name}.choices_map`}
-                    component={InputField}
-                    as="textarea"
-                    rows={6}
-                    validate={required}
-                    placeholder={translate(
-                      'Example:\n{"parent_value_1": [{"value": "child_1", "label": "Child 1"}], "parent_value_2": [{"value": "child_2", "label": "Child 2"}]}',
-                    )}
-                  />
-                </FormGroup>
+                  name={`${name}.choices_map`}
+                  as="textarea"
+                  rows={6}
+                  validate={required}
+                  placeholder={translate(
+                    'Example:\n{"parent_value_1": [{"value": "child_1", "label": "Child 1"}], "parent_value_2": [{"value": "child_2", "label": "Child 2"}]}',
+                  )}
+                />
               )}
             </Card.Body>
           </Card>
         );
       })}
-
       <div>
         <ActionButton
           variant="text-primary"

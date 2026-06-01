@@ -8,8 +8,7 @@ import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SelectField, SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
+import { SubmitButton, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -89,7 +88,7 @@ export const EditCustomerChecklistDialog = ({
               </>
             }
           >
-            <FormContainer submitting={submitting}>
+            <div className="size-sm">
               {isLoading ? (
                 <LoadingSpinner />
               ) : error ? (
@@ -98,7 +97,7 @@ export const EditCustomerChecklistDialog = ({
                   message={translate('Unable to load organization groups.')}
                 />
               ) : (
-                <SelectField
+                <SelectGroup
                   name="project_metadata_checklist"
                   label={translate('Assigned checklist')}
                   options={data}
@@ -109,9 +108,10 @@ export const EditCustomerChecklistDialog = ({
                   getOptionValue={(option) => option.uuid}
                   simpleValue
                   spaceless
+                  disabled={submitting}
                 />
               )}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

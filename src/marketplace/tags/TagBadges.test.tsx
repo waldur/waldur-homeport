@@ -15,12 +15,12 @@ const tags = [
 describe('TagBadges', () => {
   it('renders nothing when tags are empty', () => {
     const { container } = render(<TagBadges tags={[]} />);
-    expect(container.firstChild).toBeNull();
+    expect(container).toBeEmptyDOMElement();
   });
 
   it('renders nothing when tags are undefined', () => {
     const { container } = render(<TagBadges />);
-    expect(container.firstChild).toBeNull();
+    expect(container).toBeEmptyDOMElement();
   });
 
   it('renders all tags when no maxTags is set', () => {
@@ -58,12 +58,12 @@ describe('TagBadges', () => {
   it('adds cursor-pointer class when onTagClick is provided', () => {
     render(<TagBadges tags={tags.slice(0, 1)} onTagClick={() => undefined} />);
     const tagEl = screen.getByText('Tag A');
-    expect(tagEl.closest('.tag')).toHaveClass('cursor-pointer');
+    expect(tagEl).toHaveClass('cursor-pointer');
   });
 
   it('does not add cursor-pointer class when onTagClick is not provided', () => {
     render(<TagBadges tags={tags.slice(0, 1)} />);
     const tagEl = screen.getByText('Tag A');
-    expect(tagEl.closest('.tag')).not.toHaveClass('cursor-pointer');
+    expect(tagEl).not.toHaveClass('cursor-pointer');
   });
 });

@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceCategoriesCreate,
   marketplaceCategoriesRetrieve,
@@ -13,12 +13,16 @@ import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { SelectField, StringField, SubmitButton, TextField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { ImageField } from '@/form/ImageField';
+import {
+  SubmitButton,
+  StringGroup,
+  SelectGroup,
+  TextGroup,
+  ImageGroup,
+  BooleanGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import { getCategoryGroups } from '@/marketplace/common/api';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -112,7 +116,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
   return (
     <Form
       onSubmit={(values: MarketplaceCategoryRequest) =>
-        saveCategoryMutation.mutateAsync(values)
+        saveCategoryMutation.mutateAsync(values).catch(() => {})
       }
       initialValues={categoryData}
       render={({ handleSubmit, submitting, pristine, invalid }) => (
@@ -131,15 +135,14 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
               />
             }
           >
-            <Field
-              name="icon"
-              component={ImageField}
-              initialValue={categoryData?.icon}
-            />
+            <ImageGroup name="icon" initialValue={categoryData?.icon} />
 
-            <FormGroup label={translate('Title')} required>
-              <Field name="title" validate={required} component={StringField} />
-            </FormGroup>
+            <StringGroup
+              name="title"
+              validate={required}
+              label={translate('Title')}
+              required
+            />
 
             {errorGroups ? (
               <LoadingErred
@@ -147,25 +150,20 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
                 loadData={refetchGroups}
               />
             ) : (
-              <FormGroup label={translate('Group')}>
-                <Field
-                  name="group"
-                  component={SelectField}
-                  getOptionLabel={(option) => option.title}
-                  getOptionValue={(option) => option.url}
-                  options={categoryGroups}
-                  isLoading={loadingGroups}
-                  isClearable
-                  simpleValue
-                />
-              </FormGroup>
+              <SelectGroup
+                name="group"
+                getOptionLabel={(option) => option.title}
+                getOptionValue={(option) => option.url}
+                options={categoryGroups}
+                isLoading={loadingGroups}
+                isClearable
+                simpleValue
+                label={translate('Group')}
+              />
             )}
-            <FormGroup label={translate('Description')}>
-              <Field name="description" component={TextField} />
-            </FormGroup>
+            <TextGroup name="description" label={translate('Description')} />
 
-            <Field
-              component={AwesomeCheckboxField}
+            <BooleanGroup
               name="default_volume_category"
               label={translate('Default volume category')}
               description={translate(
@@ -174,8 +172,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
               className="mb-5"
             />
 
-            <Field
-              component={AwesomeCheckboxField}
+            <BooleanGroup
               name="default_vm_category"
               label={translate('Default vm category')}
               description={translate(
@@ -184,8 +181,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
               className="mb-5"
             />
 
-            <Field
-              component={AwesomeCheckboxField}
+            <BooleanGroup
               name="default_tenant_category"
               label={translate('Default tenant category')}
               description={translate(

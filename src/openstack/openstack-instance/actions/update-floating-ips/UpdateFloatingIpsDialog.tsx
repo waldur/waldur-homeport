@@ -113,7 +113,7 @@ export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
       onSubmit={mutateAsync}
       initialValues={initialValues}
       mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate('Update floating IPs in {name} virtual machine', {
@@ -121,8 +121,6 @@ export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
             })}
             loading={isLoading}
             error={error}
-            submitting={submitting}
-            invalid={invalid}
           >
             {floatingIps ? (
               <FieldArray name="floating_ips">

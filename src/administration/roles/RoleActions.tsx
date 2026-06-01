@@ -15,6 +15,5 @@ export const RoleActions = ({ row, refetch }) => (
       RoleToggleButton,
       !row.is_system_role ? RoleDeleteButton : null,
     ].filter(Boolean)}
-    data-cy="public-resources-list-actions-dropdown-btn"
   />
 );

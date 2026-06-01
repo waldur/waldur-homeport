@@ -9,6 +9,7 @@ import {
 import { ENV } from '@/core/config';
 import { waitForSpinner } from '@/core/test-utils';
 import { renderWithProviders } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { PolicyCreateDialog } from './PolicyCreateDialog';
@@ -90,10 +91,9 @@ describe('PolicyCreateDialog', () => {
 
   beforeEach(() => {
     refetch = vi.fn();
-    vi.mocked(organizationGroupsList).mockResolvedValue({
-      data: orgGroups,
-      headers: { 'x-result-count': orgGroups.length.toString() },
-    } as any);
+    vi.mocked(organizationGroupsList).mockResolvedValue(
+      mockListResponse(orgGroups),
+    );
   });
 
   afterEach(() => {

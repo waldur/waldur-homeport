@@ -30,13 +30,12 @@ import { required } from '@/core/validators';
 import {
   FieldError,
   NumberField,
-  SelectField,
-  StringField,
   TextField,
+  SelectGroup,
+  StringGroup,
 } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { OfferingComponent } from '@/marketplace/types';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 
@@ -229,35 +228,31 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
           </>
         )}
         {props.periods.length > 1 ? (
-          <FormGroup
+          <SelectGroup
+            name="period"
+            options={props.periods}
+            onChange={(value) => {
+              const period = value;
+              if (period?.value?.components) {
+                for (const component of period.value.components) {
+                  form.change(
+                    `components.${component.type}.amount`,
+                    component.usage,
+                  );
+                  form.change(
+                    `components.${component.type}.description`,
+                    component.description,
+                  );
+                }
+              }
+              return value;
+            }}
+            isClearable={false}
             label={translate('Plan')}
             help={translate(
               'Each usage report must be connected with a billing plan to assure correct calculation of accounting data.',
             )}
-          >
-            <Field
-              component={SelectField}
-              name="period"
-              options={props.periods}
-              onChange={(value) => {
-                const period = value;
-                if (period?.value?.components) {
-                  for (const component of period.value.components) {
-                    form.change(
-                      `components.${component.type}.amount`,
-                      component.usage,
-                    );
-                    form.change(
-                      `components.${component.type}.description`,
-                      component.description,
-                    );
-                  }
-                }
-                return value;
-              }}
-              isClearable={false}
-            />
-          </FormGroup>
+          />
         ) : (
           <StaticPlanField />
         )}
@@ -269,29 +264,26 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
             {teamError ? (
               <LoadingErred loadData={refetchTeam} />
             ) : (
-              <FormGroup label={translate('User')}>
-                <Field
-                  component={SelectField}
-                  name="user"
-                  options={team}
-                  getOptionValue={(option) => option.uuid}
-                  getOptionLabel={(option) => option.user_full_name}
-                  onChange={onChangeUser}
-                  isLoading={teamIsLoading}
-                  isClearable
-                  placeholder={translate('Select team member')}
-                />
-              </FormGroup>
-            )}
-            <FormGroup label={translate('Username')} required>
-              <Field
-                component={StringField}
-                name="username"
-                placeholder={translate('Enter username(s)')}
-                validate={required}
-                readOnly={Boolean(user)}
+              <SelectGroup
+                name="user"
+                options={team}
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.user_full_name}
+                onChange={onChangeUser}
+                isLoading={teamIsLoading}
+                isClearable
+                placeholder={translate('Select team member')}
+                label={translate('User')}
               />
-            </FormGroup>
+            )}
+            <StringGroup
+              name="username"
+              placeholder={translate('Enter username(s)')}
+              validate={required}
+              readOnly={Boolean(user)}
+              label={translate('Username')}
+              required
+            />
           </>
         )}
       </div>

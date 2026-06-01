@@ -25,6 +25,7 @@ export const DateTimeField: FunctionComponent<DateTimeFieldProps> = (props) => {
       placeholder={props.placeholder}
       iconNode={<CalendarBlankIcon weight="bold" />}
       input={props.input}
+      id={props.id}
     />
   );
 };

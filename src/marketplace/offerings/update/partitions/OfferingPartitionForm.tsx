@@ -1,48 +1,42 @@
 import { FC } from 'react';
-import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { NumberField, StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { NumberGroup, StringGroup, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { validateNonNegative } from '@/marketplace/common/utils';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 const GroupHeader = ({ children }) => (
   <h4 className="text-gray-700 mb-4">{children}</h4>
 );
 
 const NonNegativeField = ({ label, name }) => (
-  <FormGroup label={label}>
-    <Field
-      name={name}
-      component={NumberField}
-      min={0}
-      validate={validateNonNegative}
-    />
-  </FormGroup>
+  <NumberGroup
+    name={name}
+    min={0}
+    validate={validateNonNegative}
+    label={label}
+  />
 );
 
 export const OfferingPartitionForm: FC = () => {
   return (
     <>
-      <FormGroup label={translate('Partition name')} required>
-        <Field
-          name="partition_name"
-          component={StringField}
-          validate={required}
-        />
-      </FormGroup>
-
+      <StringGroup
+        name="partition_name"
+        validate={required}
+        label={translate('Partition name')}
+        required
+      />
       {/* Architecture */}
       <GroupHeader>{translate('Architecture')}</GroupHeader>
-      <FormGroup label={translate('CPU architecture (e.g., x86_64/amd/zen3)')}>
-        <Field name="cpu_arch" component={StringField} />
-      </FormGroup>
-      <FormGroup label={translate('GPU architecture (e.g., nvidia/cc90)')}>
-        <Field name="gpu_arch" component={StringField} />
-      </FormGroup>
-
+      <StringGroup
+        name="cpu_arch"
+        label={translate('CPU architecture (e.g., x86_64/amd/zen3)')}
+      />
+      <StringGroup
+        name="gpu_arch"
+        label={translate('GPU architecture (e.g., nvidia/cc90)')}
+      />
       {/* CPU Configuration */}
       <GroupHeader>{translate('CPU configuration')}</GroupHeader>
       <NonNegativeField
@@ -61,7 +55,6 @@ export const OfferingPartitionForm: FC = () => {
         label={translate('Maximum allocated CPUs per socket')}
         name="max_cpus_per_socket"
       />
-
       {/* Memory configuration */}
       <GroupHeader>{translate('Memory configuration (in MB)')}</GroupHeader>
       <NonNegativeField
@@ -84,7 +77,6 @@ export const OfferingPartitionForm: FC = () => {
         label={translate('Maximum memory per node')}
         name="max_mem_per_node"
       />
-
       {/* Time limits */}
       <GroupHeader>{translate('Time limits')}</GroupHeader>
       <NonNegativeField
@@ -99,7 +91,6 @@ export const OfferingPartitionForm: FC = () => {
         label={translate('Preemption grace time in seconds')}
         name="grace_time"
       />
-
       {/* Node Configuration */}
       <GroupHeader>{translate('Node configuration')}</GroupHeader>
       <NonNegativeField
@@ -110,40 +101,31 @@ export const OfferingPartitionForm: FC = () => {
         label={translate('Minimum nodes per job')}
         name="min_nodes"
       />
-      <FormGroup>
-        <Field
-          label={translate('Exclusive topology access required')}
-          name="exclusive_topo"
-          component={AwesomeCheckboxField}
-          alignMiddle
-        />
-      </FormGroup>
-      <FormGroup>
-        <Field
-          label={translate('Exclusive user access required')}
-          name="exclusive_user"
-          component={AwesomeCheckboxField}
-          alignMiddle
-        />
-      </FormGroup>
-
+      <BooleanGroup
+        label={translate('Exclusive topology access required')}
+        name="exclusive_topo"
+        alignMiddle
+      />
+      <BooleanGroup
+        label={translate('Exclusive user access required')}
+        name="exclusive_user"
+        alignMiddle
+      />
       {/* Scheduling Configuration */}
       <GroupHeader>{translate('Scheduling configuration')}</GroupHeader>
       <NonNegativeField
         label={translate('Priority tier for scheduling and preemption')}
         name="priority_tier"
       />
-      <FormGroup label={translate('Quality of service (QOS) name')}>
-        <Field name="qos" component={StringField} />
-      </FormGroup>
-      <FormGroup>
-        <Field
-          label={translate('Require reservation for job allocation')}
-          name="req_resv"
-          component={AwesomeCheckboxField}
-          alignMiddle
-        />
-      </FormGroup>
+      <StringGroup
+        name="qos"
+        label={translate('Quality of service (QOS) name')}
+      />
+      <BooleanGroup
+        label={translate('Require reservation for job allocation')}
+        name="req_resv"
+        alignMiddle
+      />
     </>
   );
 };

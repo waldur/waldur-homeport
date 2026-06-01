@@ -1,7 +1,6 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { FormFieldsContext } from '@/form/context';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -16,7 +15,6 @@ import { EditOptionButton } from './EditOptionButton';
 export const OfferingOptionsSectionPure: FC<
   OfferingSectionProps & { title; type }
 > = (props) => {
-  const { readOnlyFields } = useContext(FormFieldsContext);
   const data = props.offering[props.type];
   return (
     <Card id={props.type} className="card-bordered">
@@ -25,11 +23,9 @@ export const OfferingOptionsSectionPure: FC<
           {props.title}
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </Card.Title>
-        {!readOnlyFields.includes(props.type) ? (
-          <div className="card-toolbar">
-            <AddOptionButton {...props} />
-          </div>
-        ) : null}
+        <div className="card-toolbar">
+          <AddOptionButton {...props} />
+        </div>
       </Card.Header>
       <Card.Body>
         {!data?.order?.length ? (

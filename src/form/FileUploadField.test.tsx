@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 
 import { FileUploadField, FileUploadFieldProps } from './FileUploadField';
 
@@ -7,6 +8,10 @@ describe('FileUploadField', () => {
   const mockInput = {
     onChange: vi.fn(),
   };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
 
   const renderComponent = (props?: Partial<FileUploadFieldProps>) => {
     render(
@@ -28,14 +33,15 @@ describe('FileUploadField', () => {
     expect(screen.getByText('None')).toBeInTheDocument();
   });
 
-  it('accepts files that match the specified MIME type', () => {
+  it('accepts files that match the specified MIME type', async () => {
+    const user = userEvent.setup();
     renderComponent({ accept: 'image/png', showFileName: true });
     const validFile = new File(['dummy content'], 'image.png', {
       type: 'image/png',
     });
 
     const inputElement = screen.getByTestId('upload');
-    fireEvent.change(inputElement, { target: { files: [validFile] } });
+    await user.upload(inputElement, validFile);
 
     expect(screen.getByText('image.png')).toBeInTheDocument();
     expect(mockInput.onChange).toHaveBeenCalledWith(validFile);
@@ -48,20 +54,24 @@ describe('FileUploadField', () => {
     });
 
     const inputElement = screen.getByTestId('upload');
+    // Using fireEvent here to bypass userEvent's strict accept check
+    // to test the component's internal fallback validation.
+    // eslint-disable-next-line testing-library/prefer-user-event
     fireEvent.change(inputElement, { target: { files: [invalidFile] } });
 
     expect(screen.queryByText('image.png')).not.toBeInTheDocument();
     expect(mockInput.onChange).toHaveBeenCalledWith(null);
   });
 
-  it('handles onChange correctly when a valid file is selected', () => {
+  it('handles onChange correctly when a valid file is selected', async () => {
+    const user = userEvent.setup();
     renderComponent();
     const file = new File(['dummy content'], 'example.txt', {
       type: 'text/plain',
     });
 
     const inputElement = screen.getByTestId('upload');
-    fireEvent.change(inputElement, { target: { files: [file] } });
+    await user.upload(inputElement, file);
 
     expect(mockInput.onChange).toHaveBeenCalledWith(file);
   });
@@ -69,6 +79,8 @@ describe('FileUploadField', () => {
   it('handles onChange correctly when no file is selected', () => {
     renderComponent();
     const inputElement = screen.getByTestId('upload');
+
+    // eslint-disable-next-line testing-library/prefer-user-event
     fireEvent.change(inputElement, { target: { files: [] } });
 
     expect(mockInput.onChange).toHaveBeenCalledWith(null);

@@ -1,19 +1,16 @@
 import { useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   type ArrowCustomerMapping,
   adminArrowCustomerMappingsPartialUpdate,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { SelectField as Select } from '@/form/select';
+import { AsyncSelectGroup, BooleanGroup, StringGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -81,7 +78,11 @@ export const CustomerMappingEditDialog = ({
   return (
     <ModalDialog title={translate('Edit Customer Mapping')}>
       <Form<FormValues>
-        onSubmit={(values) => submitMutation.mutateAsync(values)}
+        onSubmit={(values) =>
+          submitMutation.mutateAsync(values).catch(() => {
+            // Error is handled by useManagedMutation and displayed in the dialog
+          })
+        }
         initialValues={{
           arrow_reference: mapping.arrow_reference,
           arrow_company_name: mapping.arrow_company_name,
@@ -93,52 +94,38 @@ export const CustomerMappingEditDialog = ({
         }}
         render={({ handleSubmit, invalid }) => (
           <form onSubmit={handleSubmit}>
-            <FormGroup
+            <StringGroup
+              name="arrow_reference"
+              validate={required}
               label={translate('Arrow Reference')}
               description={translate(
                 'The Arrow customer reference (e.g., XSP123456)',
               )}
               required
-            >
-              <Field
-                name="arrow_reference"
-                component={StringField}
-                validate={required}
-              />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <StringGroup
+              name="arrow_company_name"
               label={translate('Arrow Company Name')}
               description={translate('Optional company name for display')}
-            >
-              <Field name="arrow_company_name" component={StringField} />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <AsyncSelectGroup
+              name="waldur_customer"
               label={translate('Waldur Organization')}
               description={translate(
                 'The Waldur organization to map this Arrow customer to',
               )}
               required
-            >
-              <Select
-                name="waldur_customer"
-                validate={required}
-                placeholder={translate('Select organization...')}
-                loadOptions={loadOrganizations}
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.uuid}
-                noOptionsMessage={() => translate('No organizations')}
-              />
-            </FormGroup>
+              validate={required}
+              placeholder={translate('Select organization...')}
+              loadOptions={loadOrganizations}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.uuid}
+              noOptionsMessage={() => translate('No organizations')}
+            />
 
-            <FormGroup>
-              <Field
-                name="is_active"
-                component={AwesomeCheckboxField}
-                label={translate('Active')}
-              />
-            </FormGroup>
+            <BooleanGroup name="is_active" label={translate('Active')} />
 
             {mutationError && (
               <Alert variant="danger" className="mb-4">

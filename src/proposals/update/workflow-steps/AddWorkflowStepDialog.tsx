@@ -2,7 +2,7 @@ import { PlusCircleIcon, QuestionIcon } from '@phosphor-icons/react';
 import { FORM_ERROR } from 'final-form';
 import arrayMutators from 'final-form-arrays';
 import { FC, useCallback, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   CallWorkflowStep,
   CallWorkflowStepRequest,
@@ -11,13 +11,17 @@ import {
   WorkflowCriterionRequest,
 } from 'waldur-js-client';
 
-import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
-import { NumberField, SelectField, SubmitButton } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import {
+  BooleanGroup,
+  FormGroup,
+  NumberGroup,
+  RadioGroup,
+  SelectGroup,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -238,7 +242,6 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
               title={translate('Add step')}
               iconNode={<PlusCircleIcon weight="bold" />}
               iconColor="success"
-              closeButton
               footer={
                 <>
                   <CloseDialogButton className="min-w-125px" />
@@ -256,70 +259,59 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
                 </>
               }
             >
-              <FormGroup label={translate('Step')} required>
-                <Field
-                  name="step"
-                  component={SelectField as any}
-                  options={stepOptions}
-                  simpleValue
-                  isOptionDisabled={(o: any) => o.isDisabled}
-                  formatOptionLabel={formatStepOption}
-                  placeholder={translate('Select...')}
-                />
-              </FormGroup>
+              <SelectGroup
+                name="step"
+                label={translate('Step')}
+                required={true}
+                options={stepOptions}
+                simpleValue={true}
+                isOptionDisabled={(o: any) => o.isDisabled}
+                formatOptionLabel={formatStepOption}
+                placeholder={translate('Select...')}
+              />
 
-              <FormGroup
-                label={translate('Estimated duration (days)')}
-                required
-              >
-                <div style={{ maxWidth: '18rem' }}>
-                  <Field
-                    name="duration_in_days"
-                    component={NumberField as any}
-                    min={1}
-                    placeholder="0"
-                    validate={required}
-                  />
-                </div>
-              </FormGroup>
-
-              <FormGroup label={translate('Responsible role')} required>
-                <Field
-                  name="responsible_role"
-                  component={SelectField as any}
-                  options={responsibleRoleOptions}
-                  simpleValue
-                  placeholder={translate('Select...')}
+              <div style={{ maxWidth: '18rem' }}>
+                <NumberGroup
+                  name="duration_in_days"
+                  label={translate('Estimated duration (days)')}
+                  required={true}
+                  min={1}
+                  placeholder="0"
                   validate={required}
                 />
-              </FormGroup>
+              </div>
 
-              <FormGroup label={translate('Transition mode options')} required>
-                <Field
-                  name="transition_mode"
-                  component={AwesomeRadioButton as any}
-                  choices={transitionModeChoices}
-                  gap={3}
-                  validate={required}
-                />
-              </FormGroup>
+              <SelectGroup
+                name="responsible_role"
+                label={translate('Responsible role')}
+                required={true}
+                options={responsibleRoleOptions}
+                simpleValue={true}
+                placeholder={translate('Select...')}
+                validate={required}
+              />
+
+              <RadioGroup
+                name="transition_mode"
+                label={translate('Transition mode options')}
+                required={true}
+                choices={transitionModeChoices}
+                gap={3}
+                validate={required}
+              />
 
               {showExpertReviewExtras && (
                 <>
-                  <FormGroup
-                    label={translate('Minimal amount of reviews')}
-                    required
-                  >
-                    <div style={{ maxWidth: '18rem' }}>
-                      <Field
-                        name="min_reviewers"
-                        component={NumberField as any}
-                        min={1}
-                        placeholder={translate('Select...')}
-                        validate={required}
-                      />
-                    </div>
-                  </FormGroup>
+                  <div style={{ maxWidth: '18rem' }}>
+                    <NumberGroup
+                      name="min_reviewers"
+                      label={translate('Minimal amount of reviews')}
+                      required={true}
+                      min={1}
+                      placeholder={translate('Select...')}
+                      validate={required}
+                    />
+                  </div>
                   <FormGroup label={translate('Criteria')}>
                     <CriteriaListField name="criteria" />
                   </FormGroup>
@@ -329,30 +321,27 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
               {showAllocationExtras && (
                 <>
                   <div className="separator my-5" />
-                  <FormGroup spaceless>
-                    <Field
-                      name="include_award_response"
-                      type="checkbox"
-                      component={AwesomeCheckboxField as any}
-                      label={
-                        <span className="d-inline-flex align-items-center gap-2">
-                          {translate('Include Award response')}
-                          <Tip
-                            id="include-award-response-tip"
-                            label={translate(
-                              'Activate this step if applicants must explicitly accept or reject the awarded resources after the allocation decision.',
-                            )}
-                          >
-                            <QuestionIcon
-                              weight="regular"
-                              size={16}
-                              className="text-muted"
-                            />
-                          </Tip>
-                        </span>
-                      }
-                    />
-                  </FormGroup>
+                  <BooleanGroup
+                    name="include_award_response"
+                    spaceless={true}
+                    label={
+                      <span className="d-inline-flex align-items-center gap-2">
+                        {translate('Include Award response')}
+                        <Tip
+                          id="include-award-response-tip"
+                          label={translate(
+                            'Activate this step if applicants must explicitly accept or reject the awarded resources after the allocation decision.',
+                          )}
+                        >
+                          <QuestionIcon
+                            weight="regular"
+                            size={16}
+                            className="text-muted"
+                          />
+                        </Tip>
+                      </span>
+                    }
+                  />
                 </>
               )}
             </ModalDialog>

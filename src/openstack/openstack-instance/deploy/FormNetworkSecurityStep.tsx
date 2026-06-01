@@ -17,7 +17,7 @@ import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { UI_STALE_TIME } from '@/core/constants';
 import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
-import { FieldError, FormGroup, SelectField, StringField } from '@/form';
+import { FieldError, SelectGroup, StringField } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -31,7 +31,7 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepCard } from '@/wizard';
 
-import { getDefaultFloatingIps, formatSubnet } from '../utils';
+import { formatSubnet, getDefaultFloatingIps } from '../utils';
 
 import { FormSecurityGroupsField } from './FormSecurityGroupsField';
 import { FormSSHPublicKeysField } from './FormSSHPublicKeysField';
@@ -254,10 +254,9 @@ const renderNetworkRows = ({
           <Fragment key={index}>
             <Row className="g-4">
               <Col sm={6}>
-                <Field
+                <SelectGroup
                   name={`${network}.subnet`}
                   label={translate('Subnet')}
-                  component={FormGroup}
                   options={freeSubnets}
                   validate={required}
                   required={true}
@@ -267,12 +266,10 @@ const renderNetworkRows = ({
                   noUpdateOnBlur
                   spaceless
                   components={{ ValueContainer: SubnetValueContainer }}
-                >
-                  <SelectField />
-                </Field>
+                />
               </Col>
               <Col sm>
-                <Field
+                <SelectGroup
                   name={`${network}.floatingIp`}
                   label={
                     fipQuotaExhausted ? (
@@ -295,7 +292,6 @@ const renderNetworkRows = ({
                       translate('Floating IP')
                     )
                   }
-                  component={FormGroup}
                   options={freeFloatingIps}
                   validate={required}
                   required={true}
@@ -305,9 +301,7 @@ const renderNetworkRows = ({
                   getOptionLabel={(option) => option.address}
                   noUpdateOnBlur
                   spaceless
-                >
-                  <SelectField />
-                </Field>
+                />
               </Col>
               <Col xs="auto" className="align-self-end">
                 <ActionButton

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useRef } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   User,
   chatQuotaUsageRetrieve,
@@ -11,10 +11,9 @@ import {
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { NumberField } from '@/form';
+import { NumberGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -292,13 +291,11 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
         {`${translate('AI assistant token usage for')} ${row.full_name || row.username}`}
       </h4>
       {quota && <QuotaUsageDisplay quota={quota} />}
-
       <small className="text-muted">
         {translate(
           'Leave empty for system default. Use -1 for unlimited. Non-negative number for specific limit.',
         )}
       </small>
-
       <Form<FormValues>
         onSubmit={(values) => handleSubmit(values)}
         initialValues={initialValues}
@@ -308,55 +305,43 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
 
             <div className="row">
               <div className="col-md-4">
-                <FormGroup
+                <NumberGroup
+                  name="daily_limit"
+                  placeholder={systemDefaultPlaceholder.daily}
+                  min={-1}
+                  max={Number.MAX_SAFE_INTEGER}
+                  parse={parseNullableNumber}
                   label={translate('Daily limit')}
                   description={translate(
                     'Empty = system default, -1 = unlimited',
                   )}
-                >
-                  <Field
-                    name="daily_limit"
-                    component={NumberField}
-                    placeholder={systemDefaultPlaceholder.daily}
-                    min={-1}
-                    max={Number.MAX_SAFE_INTEGER}
-                    parse={parseNullableNumber}
-                  />
-                </FormGroup>
+                />
               </div>
               <div className="col-md-4">
-                <FormGroup
+                <NumberGroup
+                  name="weekly_limit"
+                  placeholder={systemDefaultPlaceholder.weekly}
+                  min={-1}
+                  max={Number.MAX_SAFE_INTEGER}
+                  parse={parseNullableNumber}
                   label={translate('Weekly limit')}
                   description={translate(
                     'Empty = system default, -1 = unlimited',
                   )}
-                >
-                  <Field
-                    name="weekly_limit"
-                    component={NumberField}
-                    placeholder={systemDefaultPlaceholder.weekly}
-                    min={-1}
-                    max={Number.MAX_SAFE_INTEGER}
-                    parse={parseNullableNumber}
-                  />
-                </FormGroup>
+                />
               </div>
               <div className="col-md-4">
-                <FormGroup
+                <NumberGroup
+                  name="monthly_limit"
+                  placeholder={systemDefaultPlaceholder.monthly}
+                  min={-1}
+                  max={Number.MAX_SAFE_INTEGER}
+                  parse={parseNullableNumber}
                   label={translate('Monthly limit')}
                   description={translate(
                     'Empty = system default, -1 = unlimited',
                   )}
-                >
-                  <Field
-                    name="monthly_limit"
-                    component={NumberField}
-                    placeholder={systemDefaultPlaceholder.monthly}
-                    min={-1}
-                    max={Number.MAX_SAFE_INTEGER}
-                    parse={parseNullableNumber}
-                  />
-                </FormGroup>
+                />
               </div>
             </div>
 

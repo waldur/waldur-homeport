@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { pick } from 'lodash-es';
 import { useCallback } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   proposalProtectedCallsAvailableComplianceChecklistsList,
   proposalProtectedCallsPartialUpdate,
@@ -11,17 +11,16 @@ import {
 import { STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import {
-  NumberField,
-  SelectField,
-  SubmitButton,
+  BooleanGroup,
+  MarkdownGroup,
+  NumberGroup,
+  SelectGroup,
   StringField,
-  FieldError,
+  StringGroup,
+  SubmitButton,
 } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import MarkdownEditor from '@/form/MarkdownEditor';
 import { SlugTemplateHelpText } from '@/form/SlugTemplateHelpText';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -153,135 +152,78 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
           >
             <div className="size-lg">
               {resolve.name === 'name' && (
-                <FormGroup label={translate('Name')} required>
-                  <Field
-                    name="name"
-                    component={StringField}
-                    validate={required}
-                  />
-                  <Field
-                    name="name"
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                <StringGroup
+                  label={translate('Name')}
+                  required
+                  name="name"
+                  validate={required}
+                />
               )}
               {resolve.name === 'description' && (
-                <FormGroup>
-                  <Field
-                    name="description"
-                    component={MarkdownEditor}
-                    required
-                    autoFocus
-                    hideLabel
-                    spaceless
-                  />
-                </FormGroup>
+                <MarkdownGroup
+                  name="description"
+                  required
+                  autoFocus
+                  hideLabel
+                  spaceless
+                />
               )}
               {resolve.name === 'reference_code' && (
-                <FormGroup label={translate('Reference code')}>
-                  <Field name="reference_code" component={StringField} />
-                  <Field
-                    name="reference_code"
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                <StringGroup
+                  label={translate('Reference code')}
+                  name="reference_code"
+                />
               )}
               {resolve.name === 'external_url' && (
-                <FormGroup label={translate('External URL')} required>
-                  <Field
-                    name="external_url"
-                    component={StringField}
-                    validate={required}
-                  />
-                  <Field
-                    name="external_url"
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                <StringGroup
+                  label={translate('External URL')}
+                  required
+                  name="external_url"
+                  component={StringField}
+                  validate={required}
+                />
               )}
               {(resolve.name === 'reviews_visible_to_submitters' ||
                 resolve.name === 'reviewer_identity_visible_to_submitters') && (
-                <FormGroup>
-                  <Field
-                    name={resolve.name}
-                    component={AwesomeCheckboxField}
-                    label={resolve.title}
-                  />
-                </FormGroup>
+                <BooleanGroup name={resolve.name} label={resolve.title} />
               )}
               {resolve.name === 'fixed_duration_in_days' && (
-                <FormGroup
+                <NumberGroup
                   label={translate(
                     'Fixed duration for granted projects (in days)',
                   )}
-                >
-                  <Field
-                    name="fixed_duration_in_days"
-                    component={NumberField}
-                  />
-                  <Field
-                    name="fixed_duration_in_days"
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                  name="fixed_duration_in_days"
+                />
               )}
               {resolve.name === 'compliance_checklist' && (
-                <FormGroup label={translate('Compliance checklist')}>
-                  <Field
-                    name="compliance_checklist"
-                    component={SelectField}
-                    options={
-                      complianceChecklists?.map((checklist) => ({
-                        value: checklist.uuid,
-                        label: checklist.name,
-                      })) || []
-                    }
-                    isClearable={true}
-                    placeholder={translate(
-                      'Select compliance checklist (optional)',
-                    )}
-                  />
-                  <div className="form-text text-muted">
-                    {translate(
-                      'Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.',
-                    )}
-                  </div>
-                </FormGroup>
+                <SelectGroup
+                  label={translate('Compliance checklist')}
+                  name="compliance_checklist"
+                  options={
+                    complianceChecklists?.map((checklist) => ({
+                      value: checklist.uuid,
+                      label: checklist.name,
+                    })) || []
+                  }
+                  isClearable={true}
+                  placeholder={translate(
+                    'Select compliance checklist (optional)',
+                  )}
+                  description={translate(
+                    'Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.',
+                  )}
+                />
               )}
               {resolve.name === 'proposal_slug_template' && (
-                <FormGroup label={translate('Proposal slug template')}>
-                  <Field
-                    name="proposal_slug_template"
-                    component={StringField}
-                  />
-                  <Field
-                    name="proposal_slug_template"
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                  <SlugTemplateHelpText
-                    placeholders={PROPOSAL_SLUG_PLACEHOLDERS}
-                  />
-                </FormGroup>
+                <StringGroup
+                  label={translate('Proposal slug template')}
+                  name="proposal_slug_template"
+                  description={
+                    <SlugTemplateHelpText
+                      placeholders={PROPOSAL_SLUG_PLACEHOLDERS}
+                    />
+                  }
+                />
               )}
             </div>
           </ModalDialog>

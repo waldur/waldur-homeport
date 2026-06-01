@@ -6,11 +6,9 @@ import { marketplaceOfferingTermsOfServiceUpdate } from 'waldur-js-client';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { required } from '@/core/validators';
+import { StringGroup, SelectGroup, NumberGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import MarkdownEditor from '@/form/MarkdownEditor';
-import { NumberField } from '@/form/NumberField';
-import { SelectField } from '@/form/select/SelectField';
-import { StringField } from '@/form/StringField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -90,22 +88,20 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
             }
           >
             <div className="size-lg">
-              <FormGroup label={translate('Version')} required>
-                <Field
-                  name="version"
-                  validate={required}
-                  component={StringField}
-                />
-              </FormGroup>
+              <StringGroup
+                name="version"
+                validate={required}
+                label={translate('Version')}
+                required
+              />
 
-              <FormGroup label={translate('Add as')} required>
-                <Field
-                  name="add_as"
-                  component={SelectField}
-                  options={addAsOptions}
-                  simpleValue
-                />
-              </FormGroup>
+              <SelectGroup
+                name="add_as"
+                options={addAsOptions}
+                simpleValue
+                label={translate('Add as')}
+                required
+              />
 
               {values.add_as === 'markdown' && (
                 <FormGroup label={translate('Terms of Service')} required>
@@ -145,13 +141,12 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
               )}
 
               {values.add_as === 'external_link' && (
-                <FormGroup label={translate('Terms of Service Link')} required>
-                  <Field
-                    name="terms_of_service_link"
-                    validate={required}
-                    component={StringField}
-                  />
-                </FormGroup>
+                <StringGroup
+                  name="terms_of_service_link"
+                  validate={required}
+                  label={translate('Terms of Service Link')}
+                  required
+                />
               )}
 
               <div className="mb-3">
@@ -171,7 +166,10 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
               </div>
 
               {values.requires_reconsent && (
-                <FormGroup
+                <NumberGroup
+                  name="grace_period_days"
+                  min={0}
+                  parse={(value) => (value === '' ? undefined : Number(value))}
                   label={translate('Grace period (days)')}
                   help={translate(
                     'Number of days before outdated consents are automatically revoked. Only applies when requires re-consent is enabled.',
@@ -180,16 +178,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                   description={translate(
                     'After this period expires, user consents for outdated terms will be automatically revoked.',
                   )}
-                >
-                  <Field
-                    name="grace_period_days"
-                    component={NumberField}
-                    min={0}
-                    parse={(value) =>
-                      value === '' ? undefined : Number(value)
-                    }
-                  />
-                </FormGroup>
+                />
               )}
             </div>
           </ModalDialog>

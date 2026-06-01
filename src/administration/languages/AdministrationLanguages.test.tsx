@@ -36,9 +36,9 @@ describe('AdministrationLanguages', () => {
 
   it('successfully saves language choices', async () => {
     const saveConfigMock = vi.mocked(overrideSettings).mockResolvedValue(null);
-    const { getByText } = render(<AdministrationLanguages />);
+    render(<AdministrationLanguages />);
 
-    await userEvent.click(getByText('Save'));
+    await userEvent.click(screen.getByText('Save'));
 
     expect(saveConfigMock).toHaveBeenCalledWith({
       body: {

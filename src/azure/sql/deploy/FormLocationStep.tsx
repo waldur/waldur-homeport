@@ -3,7 +3,7 @@ import { FormLabel } from 'react-bootstrap';
 
 import { loadLocationOptions } from '@/azure/vm/utils';
 import { required } from '@/core/validators';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { VStepperFormStepCard } from '@/wizard';
@@ -22,7 +22,7 @@ export const FormLocationStep = (props: FormStepProps) => {
       disabledTooltip={props.disabledTooltip}
     >
       <FormLabel className="required">{translate('Location')}</FormLabel>
-      <AsyncSelectField
+      <AsyncSelectGroup
         name="attributes.location"
         loadOptions={locationLoader}
         validate={required}

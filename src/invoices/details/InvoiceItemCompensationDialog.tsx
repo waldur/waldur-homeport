@@ -1,8 +1,11 @@
+import { Form } from 'react-final-form';
 import { invoiceItemsCreateCompensation } from 'waldur-js-client';
 
+import { required } from '@/core/validators';
+import { FormFooter, StringGroup } from '@/form';
 import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 export const InvoiceItemCompensationDialog = ({
   resolve: { resource, refreshInvoiceItems },
@@ -22,27 +25,31 @@ export const InvoiceItemCompensationDialog = ({
     refetch: refreshInvoiceItems,
   });
 
-  const fields = [
-    {
-      name: 'offering_component_name',
-      label: translate('Name'),
-      required: true,
-      type: 'string',
-    },
-  ];
-
   return (
-    <ResourceActionDialog
-      dialogTitle={translate('Create compensation for invoice item {name}', {
-        name: resource.name,
-      })}
-      formFields={fields}
-      submitForm={mutation.mutateAsync}
+    <Form
       initialValues={{
         offering_component_name: translate('Compensation for {name}', {
           name: resource.details.offering_component_name,
         }),
       }}
+      onSubmit={mutation.mutateAsync}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Create compensation for invoice item {name}', {
+              name: resource.name,
+            })}
+            footer={<FormFooter />}
+          >
+            <StringGroup
+              name="offering_component_name"
+              label={translate('Name')}
+              required={true}
+              validate={required}
+            />
+          </ModalDialog>
+        </form>
+      )}
     />
   );
 };

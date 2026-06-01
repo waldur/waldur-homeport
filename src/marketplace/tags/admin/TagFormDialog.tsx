@@ -8,10 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
-import { StringField } from '@/form/StringField';
-import { TextField } from '@/form/TextField';
+import { SubmitButton, StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -85,21 +82,23 @@ export const TagFormDialog: FC<TagFormDialogProps> = (props) => {
               />
             }
           >
-            <FormContainer submitting={submitting}>
-              <StringField
+            <div className="size-sm">
+              <StringGroup
                 label={translate('Name')}
                 name="name"
                 required
                 validate={required}
                 maxLength={150}
+                disabled={submitting}
               />
 
-              <TextField
+              <TextGroup
                 label={translate('Description')}
                 name="description"
                 required={false}
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

@@ -71,7 +71,7 @@ describe('TableBody', () => {
       expandableRow,
       toggled: { [ROW_UUID]: true },
     });
-    const expandedCell = screen.getByText('Detailed info').closest('td');
+    const expandedCell = screen.getByTestId('expanded-row-cell');
     expect(expandedCell).toHaveAttribute('colspan', String(COLUMNS.length));
   });
 

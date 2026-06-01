@@ -148,7 +148,7 @@ describe('UserEditRows', () => {
 
       renderComponent();
       // Required fields show asterisk in label
-      const requiredIndicators = document.querySelectorAll('.text-danger.ms-1');
+      const requiredIndicators = screen.getAllByText('*');
       expect(requiredIndicators.length).toBeGreaterThanOrEqual(2);
     });
   });

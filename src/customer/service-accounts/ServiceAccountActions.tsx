@@ -35,7 +35,6 @@ export const ServiceAccountActions: FC<
               ServiceAccountDeleteAction,
             ]
       }
-      data-cy="service-account-actions-dropdown-btn"
     />
   );
 };

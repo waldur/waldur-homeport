@@ -156,7 +156,6 @@ export const ForceImportConsumptionDialog = ({
           onChange={(value) => setSelectedResource(value as Resource)}
           noOptionsMessage={() => translate('No resources with backend ID')}
           isClearable
-          additional={{ page: 1 }}
         />
         <Form.Text className="text-muted">
           {translate(

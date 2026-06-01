@@ -4,9 +4,7 @@ import { Form } from 'react-final-form';
 
 import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
-import { SelectField, SubmitButton } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { FormContainer } from '@/form/FormContainer';
+import { SubmitButton, SelectGroup, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -53,8 +51,8 @@ export const ExportDialog = (props: ExportDialogProps) => {
               />
             }
           >
-            <FormContainer submitting={submitting}>
-              <SelectField
+            <div className="size-sm">
+              <SelectGroup
                 name="format"
                 label={translate('Format')}
                 simpleValue={true}
@@ -62,15 +60,17 @@ export const ExportDialog = (props: ExportDialogProps) => {
                 required={true}
                 isClearable={false}
                 validate={required}
+                disabled={submitting}
               />
 
-              <AwesomeCheckboxField
+              <BooleanGroup
                 name="withFilters"
                 label={translate('Apply table filters')}
                 hideLabel
+                disabled={submitting}
               />
 
-              <AwesomeCheckboxField
+              <BooleanGroup
                 name="allPages"
                 label={
                   <>
@@ -87,8 +87,9 @@ export const ExportDialog = (props: ExportDialogProps) => {
                   </>
                 }
                 hideLabel
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

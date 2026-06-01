@@ -1,4 +1,5 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FC } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -38,10 +39,6 @@ const steps = [
 
 const wizardForms = [Step1, Step2, Step3];
 
-// Helper to get the form element
-const getForm = (container: HTMLElement) =>
-  container.querySelector('form.wizard')!;
-
 const renderWizard = (props: Record<string, any> = {}) => {
   const defaultProps = {
     title: 'Test Wizard',
@@ -58,11 +55,12 @@ const renderWizard = (props: Record<string, any> = {}) => {
   return {
     ...result,
     onSubmit: props.onSubmit || defaultProps.onSubmit,
-    getForm: () => getForm(result.container),
   };
 };
 
 describe('Wizard', () => {
+  const user = userEvent.setup();
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -101,17 +99,20 @@ describe('Wizard', () => {
 
   describe('navigation buttons', () => {
     it('renders submit button on first step', () => {
-      const { container } = renderWizard();
+      renderWizard();
 
       // Submit button exists with type="submit"
-      const submitButton = container.querySelector('button[type="submit"]');
-      expect(submitButton).toBeInTheDocument();
+      expect(screen.getByTestId('wizard-submit-btn')).toBeInTheDocument();
+      expect(screen.getByTestId('wizard-submit-btn')).toHaveAttribute(
+        'type',
+        'submit',
+      );
     });
 
     it('does not render Back button on first step', () => {
       renderWizard();
 
-      expect(screen.queryByText('Back')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('wizard-back-btn')).not.toBeInTheDocument();
     });
 
     it('renders Close button', () => {
@@ -132,23 +133,26 @@ describe('Wizard', () => {
     it('does not show Back button on first step', () => {
       renderWizard();
 
-      expect(screen.queryByText('Back')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('wizard-back-btn')).not.toBeInTheDocument();
     });
   });
 
   describe('form submission', () => {
     it('renders submit button in form', () => {
-      const { container } = renderWizard();
+      renderWizard();
 
-      const submitButton = container.querySelector('button[type="submit"]');
-      expect(submitButton).toBeInTheDocument();
+      expect(screen.getByTestId('wizard-submit-btn')).toBeInTheDocument();
+      expect(screen.getByTestId('wizard-submit-btn')).toHaveAttribute(
+        'type',
+        'submit',
+      );
     });
 
     it('has form element with wizard class', () => {
-      const { container } = renderWizard();
+      renderWizard();
 
-      const form = container.querySelector('form.wizard');
-      expect(form).toBeInTheDocument();
+      const form = screen.getByTestId('wizard-dialog');
+      expect(form).toHaveClass('wizard');
     });
   });
 
@@ -242,7 +246,7 @@ describe('Wizard', () => {
         ),
       });
 
-      fireEvent.click(screen.getByTestId('custom-next'));
+      await user.click(screen.getByTestId('custom-next'));
 
       await waitFor(() => {
         expect(screen.getByTestId('step2-content')).toBeInTheDocument();

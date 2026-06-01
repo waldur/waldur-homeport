@@ -85,7 +85,10 @@ export const ModalDialog: FC<ModalDialogProps> = ({
       {children}
     </Modal.Body>
     {footer && (
-      <Modal.Footer className={classNames(footerClassName, 'border-0')}>
+      <Modal.Footer
+        className={classNames(footerClassName, 'border-0')}
+        data-testid="modal-footer"
+      >
         {footer}
       </Modal.Footer>
     )}

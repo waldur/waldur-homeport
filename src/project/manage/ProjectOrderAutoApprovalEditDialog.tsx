@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Alert } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   Project,
   ProjectOrderAutoApproval as Rule,
@@ -11,10 +11,8 @@ import {
 } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { NumberField, SubmitButton } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SubmitButton, BooleanGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -142,32 +140,27 @@ export const ProjectOrderAutoApprovalEditDialog: FC<EditDialogProps> = ({
               </Alert>
             )}
 
-            <FormGroup
+            <BooleanGroup
+              name="enabled"
+              hideLabel
+              type="checkbox"
+              checkboxLabel={translate('Enabled')}
               label={translate('Enable auto-approval')}
               description={translate(
                 'When enabled, qualifying orders below the monthly cost limit are auto-approved on the consumer side. Only plans without usage-based components qualify.',
               )}
-            >
-              <Field
-                name="enabled"
-                component={AwesomeCheckboxField}
-                hideLabel
-                type="checkbox"
-                label={translate('Enabled')}
-              />
-            </FormGroup>
+            />
 
-            <FormGroup label={translate('Monthly cost limit')} required>
-              <Field
-                name="monthly_cost_limit"
-                component={NumberField}
-                unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
-                min={0}
-                step="0.01"
-                validate={validateLimit}
-                disabled={!values.enabled}
-              />
-            </FormGroup>
+            <NumberGroup
+              name="monthly_cost_limit"
+              unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
+              min={0}
+              step="0.01"
+              validate={validateLimit}
+              disabled={!values.enabled}
+              label={translate('Monthly cost limit')}
+              required
+            />
           </ModalDialog>
         </form>
       )}

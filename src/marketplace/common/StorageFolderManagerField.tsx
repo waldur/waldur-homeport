@@ -253,9 +253,10 @@ const StorageTypeAndPermissions = ({
 }: StorageTypeAndPermissionsProps) => (
   <Row>
     <Col md={6}>
-      <Form.Group>
+      <Form.Group controlId="storage_data_type">
         <Form.Label>{translate('Storage Data Type')}</Form.Label>
         <Select
+          inputId="storage_data_type"
           value={
             config.storage_data_types?.find(
               (type) => type.key === currentValue.storage_data_type,
@@ -274,9 +275,10 @@ const StorageTypeAndPermissions = ({
       </Form.Group>
     </Col>
     <Col md={6}>
-      <Form.Group>
+      <Form.Group controlId="storage_permissions">
         <Form.Label>{translate('Permissions')}</Form.Label>
         <Select
+          inputId="storage_permissions"
           value={
             STORAGE_FOLDER_PERMISSIONS.find(
               (perm) => perm.value === currentValue.permissions,
@@ -312,7 +314,7 @@ const HardQuotaOverride = ({
 }: HardQuotaOverrideProps) => (
   <Row className="mt-3">
     <Col md={6}>
-      <Form.Group>
+      <Form.Group controlId="hard_quota_space">
         <Form.Label>{translate('Hard Quota Override (TB)')}</Form.Label>
         <Form.Control
           type="number"

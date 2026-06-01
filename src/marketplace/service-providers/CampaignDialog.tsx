@@ -9,11 +9,14 @@ import {
 } from 'waldur-js-client';
 
 import { required, requiredArray } from '@/core/validators';
-import { NumberField, SelectField, StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { DateField } from '@/form/DateField';
-import { FormContainer } from '@/form/FormContainer';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import {
+  StringGroup,
+  SelectGroup,
+  DateGroup,
+  AsyncSelectGroup,
+  NumberGroup,
+  BooleanGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import * as api from '@/marketplace/common/api';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
@@ -146,15 +149,16 @@ export const CampaignDialog = ({
             </div>
 
             {step === 0 ? (
-              <FormContainer submitting={submitting} className="size-lg">
-                <StringField
+              <div className="size-lg">
+                <StringGroup
                   name="name"
                   label={translate('Campaign name')}
                   required
                   validate={required}
+                  disabled={submitting}
                 />
 
-                <SelectField
+                <SelectGroup
                   name="discount_type"
                   label={translate('Discount type')}
                   required
@@ -167,23 +171,26 @@ export const CampaignDialog = ({
                     },
                   ]}
                   validate={required}
+                  disabled={submitting}
                 />
 
-                <DateField
+                <DateGroup
                   name="start_date"
                   label={translate('Campaign start date')}
                   required
                   validate={required}
+                  disabled={submitting}
                 />
 
-                <DateField
+                <DateGroup
                   name="end_date"
                   label={translate('Campaign end date')}
                   required
                   validate={required}
+                  disabled={submitting}
                 />
 
-                <AsyncSelectField
+                <AsyncSelectGroup
                   name="offerings"
                   label={translate('Offerings')}
                   placeholder={translate('Select offerings...')}
@@ -193,25 +200,33 @@ export const CampaignDialog = ({
                   isMulti
                   required
                   validate={requiredArray}
+                  disabled={submitting}
                 />
-              </FormContainer>
+              </div>
             ) : (
-              <FormContainer submitting={submitting} className="size-lg">
-                <NumberField
+              <div className="size-lg">
+                <NumberGroup
                   name="discount"
                   label={translate('Discount')}
                   required
                   validate={required}
                   min={0}
+                  disabled={submitting}
                 />
 
-                <NumberField name="stock" label={translate('Stock')} min={0} />
-                <AwesomeCheckboxField
+                <NumberGroup
+                  name="stock"
+                  label={translate('Stock')}
+                  min={0}
+                  disabled={submitting}
+                />
+                <BooleanGroup
                   name="auto_apply"
                   label={translate('Auto apply')}
                   hideLabel
+                  disabled={submitting}
                 />
-              </FormContainer>
+              </div>
             )}
           </ModalDialog>
         </form>

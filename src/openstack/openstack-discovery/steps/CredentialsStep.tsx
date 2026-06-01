@@ -1,14 +1,17 @@
 import { FC, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { openstackDiscoveryValidateCredentials } from 'waldur-js-client';
 
-import { SelectField, StringField, TextField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { SecretField } from '@/form/SecretField';
+import {
+  StringGroup,
+  SelectGroup,
+  SecretGroup,
+  BooleanGroup,
+  TextGroup,
+} from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -79,110 +82,88 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
       <div className="mb-6">
         <h4 className="mb-4">{translate('Connection Settings')}</h4>
 
-        <FormGroup
+        <StringGroup
+          name="auth_url"
           label={translate('Auth URL')}
           description={translate(
             'Keystone URL, e.g. https://cloud.example.com:5000/v3',
           )}
           required
-        >
-          <Field name="auth_url" component={StringField} />
-        </FormGroup>
+        />
 
-        <FormGroup label={translate('Authentication type')}>
-          <Field
-            name="auth_type"
-            component={SelectField}
-            options={AUTH_TYPE_OPTIONS}
-            simpleValue
-            isClearable={false}
-          />
-        </FormGroup>
+        <SelectGroup
+          name="auth_type"
+          options={AUTH_TYPE_OPTIONS}
+          simpleValue
+          isClearable={false}
+          label={translate('Authentication type')}
+        />
 
-        <FormGroup
+        <StringGroup
+          name="username"
           label={
             values.auth_type === 'v3applicationcredential'
               ? translate('Application Credential ID')
               : translate('Username')
           }
           required
-        >
-          <Field name="username" component={StringField} />
-        </FormGroup>
+        />
 
-        <FormGroup
+        <SecretGroup
+          name="password"
           label={
             values.auth_type === 'v3applicationcredential'
               ? translate('Application Credential Secret')
               : translate('Password')
           }
           required
-        >
-          <Field name="password" component={SecretField} />
-        </FormGroup>
+        />
 
         <div className="row">
           <div className="col-sm-6">
-            <FormGroup
+            <StringGroup
+              name="user_domain_name"
+              placeholder="Default"
               label={translate('User domain name')}
               description={translate('Default: "Default"')}
-            >
-              <Field
-                name="user_domain_name"
-                component={StringField}
-                placeholder="Default"
-              />
-            </FormGroup>
+            />
           </div>
           <div className="col-sm-6">
-            <FormGroup
+            <StringGroup
+              name="project_domain_name"
+              placeholder="Default"
               label={translate('Project domain name')}
               description={translate('Default: "Default"')}
-            >
-              <Field
-                name="project_domain_name"
-                component={StringField}
-                placeholder="Default"
-              />
-            </FormGroup>
+            />
           </div>
         </div>
 
-        <FormGroup
+        <StringGroup
+          name="project_name"
+          placeholder="admin"
           label={translate('Project name')}
           description={translate('Default: "admin"')}
-        >
-          <Field
-            name="project_name"
-            component={StringField}
-            placeholder="admin"
-          />
-        </FormGroup>
+        />
 
-        <FormGroup>
-          <Field
-            name="verify_ssl"
-            component={AwesomeCheckboxField}
-            label={translate('Verify SSL certificate')}
-          />
-        </FormGroup>
+        <BooleanGroup
+          name="verify_ssl"
+          label={translate('Verify SSL certificate')}
+        />
 
-        <FormGroup
+        <TextGroup
+          name="certificate"
+          rows={4}
           label={translate('CA Certificate')}
           description={translate(
             'Optional PEM-encoded CA certificate for SSL verification',
           )}
-        >
-          <Field name="certificate" component={TextField} rows={4} />
-        </FormGroup>
+        />
       </div>
-
       {error && (
         <Alert variant="danger" className="mb-4">
           {error}
         </Alert>
       )}
-
       {values.serverInfo && (
         <Alert variant="success" className="mb-4">
           {translate('Connected to OpenStack (project: {project})', {

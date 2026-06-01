@@ -3,7 +3,7 @@ import { Field, Form } from 'react-final-form';
 import { proposalProtectedCallsInviteByEmail } from 'waldur-js-client';
 
 import { composeValidators, email, required } from '@/core/validators';
-import { StringField, SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextField, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -76,14 +76,13 @@ export const DirectEmailInviteDialog = ({
             }
           >
             <div className="size-lg">
-              <FormGroup label={translate('Email address')} required>
-                <Field
-                  name="email"
-                  component={StringField}
-                  validate={composeValidators(required, email)}
-                  placeholder={translate('reviewer@example.com')}
-                />
-              </FormGroup>
+              <StringGroup
+                name="email"
+                validate={composeValidators(required, email)}
+                placeholder={translate('reviewer@example.com')}
+                label={translate('Email address')}
+                required
+              />
 
               <FormGroup label={translate('Invitation message')}>
                 <Field

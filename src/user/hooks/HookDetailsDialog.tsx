@@ -12,7 +12,7 @@ import {
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { titleCase } from '@/core/utils';
 import { required } from '@/core/validators';
-import { StringField, SubmitButton } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -169,25 +169,23 @@ export const HookDetailsDialog: FunctionComponent<{
                   </>
                 )}
                 {values.hook_type === 'email' ? (
-                  <FormGroup label={translate('Email address')} required>
-                    <Field
-                      name="email"
-                      component={StringField}
-                      type="email"
-                      validate={required}
-                      data-testid="email-address"
-                    />
-                  </FormGroup>
+                  <StringGroup
+                    name="email"
+                    type="email"
+                    validate={required}
+                    data-testid="email-address"
+                    label={translate('Email address')}
+                    required
+                  />
                 ) : values.hook_type === 'webhook' ? (
-                  <FormGroup label={translate('Destination URL')} required>
-                    <Field
-                      name="destination_url"
-                      component={StringField}
-                      type="url"
-                      validate={required}
-                      data-testid="destination-url"
-                    />
-                  </FormGroup>
+                  <StringGroup
+                    name="destination_url"
+                    type="url"
+                    validate={required}
+                    data-testid="destination-url"
+                    label={translate('Destination URL')}
+                    required
+                  />
                 ) : null}
                 <Field
                   name="event_groups"

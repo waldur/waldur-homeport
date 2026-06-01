@@ -1,12 +1,9 @@
 import { useCallback } from 'react';
-import { Field } from 'react-final-form';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { StringField } from '@/form';
-import { FormFieldError } from '@/form/FormFieldError';
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { validateProjectName } from '../validators';
 
@@ -36,7 +33,7 @@ export const NameGroup = ({
     [customer],
   );
   return (
-    <FormGroup
+    <StringGroup
       label={translate('Project name')}
       required
       controlId="name"
@@ -55,16 +52,11 @@ export const NameGroup = ({
           </div>
         ) : null
       }
-    >
-      <Field
-        component={StringField}
-        name="name"
-        placeholder={translate('e.g. Community Health Outreach')}
-        description={translate('This name will be visible in accounting data.')}
-        validate={validate}
-        customer={customer}
-      />
-      <FormFieldError name="name" />
-    </FormGroup>
+      name="name"
+      placeholder={translate('e.g. Community Health Outreach')}
+      description={translate('This name will be visible in accounting data.')}
+      validate={validate}
+      customer={customer}
+    />
   );
 };

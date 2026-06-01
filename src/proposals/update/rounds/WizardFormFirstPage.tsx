@@ -3,7 +3,7 @@ import { Field, useFormState } from 'react-final-form';
 
 import { formatISOWithoutZone, parseDate } from '@/core/dateUtils';
 import { required } from '@/core/validators';
-import { FormContainer, NumberField, SelectField } from '@/form';
+import { NumberGroup, SelectGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { TimezoneField } from '@/form/TimezoneField';
@@ -39,7 +39,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   }, [cutoff_time, start_time]);
   return (
     <WizardForm {...props}>
-      <FormContainer submitting={submitting}>
+      <div className="size-sm">
         <TimezoneField
           name="timezone"
           label={translate('Time zone')}
@@ -81,7 +81,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
           />
         )}
         {repeats && (
-          <NumberField
+          <NumberGroup
             label={translate('Submission window (days)')}
             name="submission_window_days"
             required
@@ -94,10 +94,11 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
                   })
                 : undefined
             }
+            disabled={submitting}
           />
         )}
         {repeats && (
-          <SelectField
+          <SelectGroup
             name="cadence"
             label={translate('Cadence')}
             simpleValue={true}
@@ -108,19 +109,21 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
             description={translate(
               'How often a new round starts after the previous one.',
             )}
+            disabled={submitting}
           />
         )}
         {repeats && cadence === 'custom' && (
-          <NumberField
+          <NumberGroup
             label={translate('Custom interval (months)')}
             name="custom_interval_months"
             required
             validate={required}
             min={1}
+            disabled={submitting}
           />
         )}
         {repeats && (
-          <NumberField
+          <NumberGroup
             label={translate('Number of rounds')}
             name="number_of_rounds"
             required
@@ -129,9 +132,10 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
             description={translate(
               'Each round gets a slug based on the call and its start month. You can rename rounds individually after creation.',
             )}
+            disabled={submitting}
           />
         )}
-      </FormContainer>
+      </div>
     </WizardForm>
   );
 };

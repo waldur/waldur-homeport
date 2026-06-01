@@ -2,8 +2,7 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { SubmitButton, TextField } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
+import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -56,8 +55,8 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
               </>
             }
           >
-            <FormContainer submitting={submitting}>
-              <TextField
+            <div className="size-sm">
+              <TextGroup
                 label={translate('Comment')}
                 placeholder={translate('Enter a comment...')}
                 name="comment"
@@ -65,8 +64,9 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
                 validate={required}
                 hideLabel
                 spaceless
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

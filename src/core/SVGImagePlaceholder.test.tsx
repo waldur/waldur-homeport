@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -32,12 +32,10 @@ describe('generateSvgPlaceholder', () => {
 
 describe('SVGImagePlaceholder', () => {
   it('renders an img tag with a data URI src', () => {
-    const { container } = render(
-      <SVGImagePlaceholder width={100} height={100} />,
-    );
-    const img = container.querySelector('img');
+    render(<SVGImagePlaceholder width={100} height={100} />);
+    const img = screen.getByRole('img');
     expect(img).toBeTruthy();
-    expect(img?.getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
-    expect(img?.getAttribute('alt')).toBe('Placeholder');
+    expect(img.getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
+    expect(img.getAttribute('alt')).toBe('Placeholder');
   });
 });

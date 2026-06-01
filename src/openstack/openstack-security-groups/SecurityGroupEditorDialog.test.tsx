@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 
 import { SecurityGroupEditorDialog } from './SecurityGroupEditorDialog';
 
@@ -38,16 +39,17 @@ const renderDialog = (resource = fakeSecurityGroup) => {
 describe('SecurityGroupEditorDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(openstackSecurityGroupsList).mockResolvedValue({
-      data: [fakeSecurityGroup],
-      headers: { 'x-result-count': '1' },
-    } as any);
+    vi.mocked(openstackSecurityGroupsList).mockResolvedValue(
+      mockListResponse([fakeSecurityGroup]),
+    );
   });
 
   it('renders current security group rule name in modal dialog title', async () => {
     renderDialog();
     expect(
-      await screen.findByText('Set rules in http security group'),
+      await screen.findByRole('heading', {
+        name: /Set rules in http security group/i,
+      }),
     ).toBeInTheDocument();
   });
 
@@ -61,42 +63,33 @@ describe('SecurityGroupEditorDialog', () => {
 
   it('fills inputs with existing rule values', async () => {
     renderDialog();
-    expect(
-      await screen.findByText('Set rules in http security group'),
-    ).toBeInTheDocument();
     await screen.findAllByRole('row');
 
     expect(screen.getByDisplayValue('IPv4')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Egress')).toBeInTheDocument();
     expect(screen.getByDisplayValue('TCP')).toBeInTheDocument();
-    expect(screen.getAllByDisplayValue('80').length).toBe(1);
+    expect(screen.getAllByDisplayValue('80')).toHaveLength(1);
     expect(screen.getByDisplayValue('192.168.42.0/24')).toBeInTheDocument();
   });
 
   it('adds new row in table when Add rule button is clicked', async () => {
     const user = userEvent.setup();
     renderDialog();
-    expect(
-      await screen.findByText('Set rules in http security group'),
-    ).toBeInTheDocument();
     const initialRows = (await screen.findAllByRole('row')).length;
 
-    await user.click(screen.getByText('Add rule'));
+    await user.click(screen.getByRole('button', { name: /Add rule/i }));
     await waitFor(() =>
-      expect(screen.getAllByRole('row').length).toBe(initialRows + 1),
+      expect(screen.getAllByRole('row')).toHaveLength(initialRows + 1),
     );
   });
 
   it('deletes existing row when Delete rule button is clicked', async () => {
     const user = userEvent.setup();
     renderDialog();
-    expect(
-      await screen.findByText('Set rules in http security group'),
-    ).toBeInTheDocument();
     await screen.findAllByRole('row');
 
     await user.click(screen.getByRole('button', { name: /Remove/i }));
-    expect(screen.queryAllByDisplayValue('80').length).toBe(0);
+    expect(screen.queryAllByDisplayValue('80')).toHaveLength(0);
     expect(
       await screen.findByText('Security group does not contain any rule yet.'),
     ).toBeInTheDocument();
@@ -106,12 +99,9 @@ describe('SecurityGroupEditorDialog', () => {
     const user = userEvent.setup();
     vi.mocked(openstackSecurityGroupsSetRules).mockResolvedValue({} as any);
     renderDialog();
-    expect(
-      await screen.findByText('Set rules in http security group'),
-    ).toBeInTheDocument();
     await screen.findAllByRole('row');
 
-    await user.click(screen.getByText('Submit'));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     await waitFor(() => {
       expect(openstackSecurityGroupsSetRules).toHaveBeenCalledWith({
@@ -140,7 +130,7 @@ describe('SecurityGroupEditorDialog', () => {
     await user.clear(portInput);
     await user.type(portInput, '8000-9000');
 
-    await user.click(screen.getByText('Submit'));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     await waitFor(() => {
       expect(openstackSecurityGroupsSetRules).toHaveBeenCalledWith(
@@ -255,7 +245,7 @@ describe('SecurityGroupEditorDialog', () => {
     const remoteGroupSelect = screen.getByDisplayValue('None');
     await user.selectOptions(remoteGroupSelect, fakeSecurityGroup.url);
 
-    await user.click(screen.getByText('Submit'));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     await waitFor(() => {
       expect(openstackSecurityGroupsSetRules).toHaveBeenCalledWith(
@@ -273,15 +263,13 @@ describe('SecurityGroupEditorDialog', () => {
   it('allows to provide security group description', async () => {
     const user = userEvent.setup();
     vi.mocked(openstackSecurityGroupsSetRules).mockResolvedValue({} as any);
-    const { container } = renderDialog();
+    renderDialog();
     await screen.findAllByRole('row');
 
-    const descriptionInput = container.querySelector(
-      'input[name="rules[0].description"]',
-    ) as HTMLInputElement;
+    const descriptionInput = screen.getByLabelText(/Description/i);
     await user.type(descriptionInput, 'test description');
 
-    await user.click(screen.getByText('Submit'));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     await waitFor(() => {
       expect(openstackSecurityGroupsSetRules).toHaveBeenCalledWith(

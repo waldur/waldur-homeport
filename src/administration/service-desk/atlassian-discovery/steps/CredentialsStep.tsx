@@ -1,15 +1,12 @@
 import { FC, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianValidateCredentials } from 'waldur-js-client';
 
 import { url } from '@/core/validators';
-import { SelectField, StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { SecretField } from '@/form/SecretField';
+import { StringGroup, SelectGroup, BooleanGroup, SecretGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -121,34 +118,29 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
       <div className="mb-6">
         <h4 className="mb-4">{translate('Connection Settings')}</h4>
 
-        <FormGroup
+        <StringGroup
+          name="api_url"
+          validate={url}
           label={translate('API URL')}
           description={translate(
             'e.g., https://your-domain.atlassian.net or https://jira.example.com',
           )}
           required
-        >
-          <Field name="api_url" component={StringField} validate={url} />
-        </FormGroup>
+        />
 
-        <FormGroup label={translate('Authentication Method')} required>
-          <Field
-            name="auth_method"
-            component={SelectField}
-            options={AUTH_METHODS}
-            simpleValue
-          />
-        </FormGroup>
+        <SelectGroup
+          name="auth_method"
+          options={AUTH_METHODS}
+          simpleValue
+          label={translate('Authentication Method')}
+          required
+        />
 
-        <FormGroup>
-          <Field
-            name="verify_ssl"
-            component={AwesomeCheckboxField}
-            label={translate('Verify SSL Certificate')}
-          />
-        </FormGroup>
+        <BooleanGroup
+          name="verify_ssl"
+          label={translate('Verify SSL Certificate')}
+        />
       </div>
-
       {values.auth_method === 'api_token' && (
         <div className="mb-6">
           <h4 className="mb-4">{translate('API Token Authentication')}</h4>
@@ -158,20 +150,16 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
             )}
           </p>
 
-          <FormGroup
+          <StringGroup
+            name="email"
             label={translate('Email')}
             description={translate('Your Atlassian account email')}
             required
-          >
-            <Field name="email" component={StringField} />
-          </FormGroup>
+          />
 
-          <FormGroup label={translate('API Token')} required>
-            <Field name="token" component={SecretField} />
-          </FormGroup>
+          <SecretGroup name="token" label={translate('API Token')} required />
         </div>
       )}
-
       {values.auth_method === 'personal_access_token' && (
         <div className="mb-6">
           <h4 className="mb-4">
@@ -183,32 +171,27 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
             )}
           </p>
 
-          <FormGroup label={translate('Personal Access Token')} required>
-            <Field name="personal_access_token" component={SecretField} />
-          </FormGroup>
+          <SecretGroup
+            name="personal_access_token"
+            label={translate('Personal Access Token')}
+            required
+          />
         </div>
       )}
-
       {values.auth_method === 'basic' && (
         <div className="mb-6">
           <h4 className="mb-4">{translate('Basic Authentication')}</h4>
 
-          <FormGroup label={translate('Username')} required>
-            <Field name="username" component={StringField} />
-          </FormGroup>
+          <StringGroup name="username" label={translate('Username')} required />
 
-          <FormGroup label={translate('Password')} required>
-            <Field name="password" component={SecretField} />
-          </FormGroup>
+          <SecretGroup name="password" label={translate('Password')} required />
         </div>
       )}
-
       {error && (
         <Alert variant="danger" className="mb-4">
           {error}
         </Alert>
       )}
-
       {serverInfo && (
         <Alert variant="success" className="mb-4">
           {translate('Connected to Jira {version} ({type})', {

@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   // CreateChecklistRequest,
   checklistsAdminCreate,
@@ -10,9 +10,8 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SelectField, StringField, SubmitButton, TextField } from '@/form';
+import { SubmitButton, StringGroup, SelectGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -98,34 +97,31 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               </>
             }
           >
-            <FormGroup label={translate('Checklist name')} required space={5}>
-              <Field
-                name="name"
-                validate={required}
-                component={StringField}
-                placeholder={translate('e.g. GDPR Compliance')}
-              />
-            </FormGroup>
+            <StringGroup
+              name="name"
+              validate={required}
+              placeholder={translate('e.g. GDPR Compliance')}
+              label={translate('Checklist name')}
+              required
+              space={5}
+            />
 
-            <FormGroup label={translate('Checklist type')} required space={5}>
-              <Field
-                name="checklist_type"
-                component={SelectField}
-                options={allowedChecklistTypeOptions}
-                validate={required}
-                simpleValue
-              />
-            </FormGroup>
+            <SelectGroup
+              name="checklist_type"
+              options={allowedChecklistTypeOptions}
+              validate={required}
+              simpleValue
+              label={translate('Checklist type')}
+              required
+              space={5}
+            />
 
-            <FormGroup label={translate('Description')} space={5}>
-              <Field
-                name="description"
-                component={TextField}
-                placeholder={translate(
-                  'Brief description of this checklist...',
-                )}
-              />
-            </FormGroup>
+            <TextGroup
+              name="description"
+              placeholder={translate('Brief description of this checklist...')}
+              label={translate('Description')}
+              space={5}
+            />
           </ModalDialog>
         </form>
       )}

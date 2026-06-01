@@ -1,9 +1,7 @@
 import { useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { composeValidators } from '@/core/validators';
-import { FormGroup } from '@/form';
-import { SliderNumberField } from '@/form/SliderNumberField';
+import { SliderNumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import {
   formatIntField,
@@ -54,38 +52,28 @@ export const FormProcessorStep = (props: FormStepProps) => {
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
-      <Field
+      <SliderNumberGroup
         name="limits.cpu"
-        component={FormGroup}
         min={1}
         validate={cpuValidator}
         label={translate('Number of cores in a VM')}
         parse={parseIntField}
         format={formatIntField}
-      >
-        <SliderNumberField
-          unit={translate('Cores')}
-          required={true}
-          min={1}
-          max={limits.max_cpu}
-        />
-      </Field>
-      <Field
+        unit={translate('Cores')}
+        required={true}
+        max={limits.max_cpu}
+      />
+      <SliderNumberGroup
         name="attributes.cores_per_socket"
-        component={FormGroup}
         min={1}
         validate={coresPerSocketLimitValidator}
         label={translate('Number of CPU cores per socket')}
         parse={parseIntField}
         format={formatIntField}
-      >
-        <SliderNumberField
-          unit={translate('Cores')}
-          required={true}
-          min={1}
-          max={limits.max_cores_per_socket || limits.max_cpu}
-        />
-      </Field>
+        unit={translate('Cores')}
+        required={true}
+        max={limits.max_cores_per_socket || limits.max_cpu}
+      />
     </VStepperFormStepCard>
   );
 };

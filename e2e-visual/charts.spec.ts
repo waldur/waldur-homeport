@@ -124,7 +124,7 @@ test.describe('EChart Visual Regression Tests', () => {
 
       // Click on workspace selector to find an organization
       const workspaceSelector = page.locator(
-        '[data-cy=select-workspace-toggle]',
+        '[data-testid=select-workspace-toggle]',
       );
       if ((await workspaceSelector.count()) > 0) {
         await workspaceSelector.click();
@@ -167,7 +167,7 @@ test.describe('EChart Visual Regression Tests', () => {
       await waitForPageLoad(page);
 
       const workspaceSelector = page.locator(
-        '[data-cy=select-workspace-toggle]',
+        '[data-testid=select-workspace-toggle]',
       );
       if ((await workspaceSelector.count()) > 0) {
         await workspaceSelector.click();
@@ -200,7 +200,7 @@ test.describe('EChart Visual Regression Tests', () => {
 
       // Open workspace selector
       const workspaceSelector = page.locator(
-        '[data-cy=select-workspace-toggle]',
+        '[data-testid=select-workspace-toggle]',
       );
       if ((await workspaceSelector.count()) > 0) {
         await workspaceSelector.click();

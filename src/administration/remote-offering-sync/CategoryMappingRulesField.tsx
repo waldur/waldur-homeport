@@ -87,7 +87,7 @@ const FieldsListGroup = ({
               return component ? (
                 <Fragment key={`${page}-${i}-${fields.length}`}>
                   <tr>
-                    <td>
+                    <td data-testid="remote-category-col">
                       <Field
                         component={SelectField}
                         name={`${fields.name}[${actualIndex}].remote_category`}
@@ -97,13 +97,14 @@ const FieldsListGroup = ({
                         validate={required}
                       />
                     </td>
-                    <td>
+                    <td data-testid="local-category-col">
                       <Field
                         name={`${fields.name}[${actualIndex}].local_category`}
                         validate={required}
                       >
                         {(fieldProps) => (
                           <AsyncSelect
+                            inputId={fieldProps.input.name}
                             loadOptions={loadCategories}
                             defaultOptions
                             getOptionValue={(option) => option.url}

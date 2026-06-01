@@ -51,7 +51,7 @@ export const MoveResourceDialog = (props: MoveResourceDialogOwnProps) => {
   return (
     <Form
       onSubmit={(values: FormData) => submitRequestMutation.mutateAsync(values)}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate(
@@ -62,15 +62,9 @@ export const MoveResourceDialog = (props: MoveResourceDialogOwnProps) => {
                 customerName: props.resolve.resource.customer_name,
               },
             )}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid}
-                submitLabel={translate('Save')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Save')} />}
           >
-            <MoveToProjectAutocomplete isDisabled={submitting} />
+            <MoveToProjectAutocomplete />
           </ModalDialog>
         </form>
       )}

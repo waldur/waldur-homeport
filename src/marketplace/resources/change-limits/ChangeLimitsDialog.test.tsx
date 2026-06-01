@@ -1,4 +1,5 @@
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesUpdateLimits } from 'waldur-js-client';
 
@@ -88,6 +89,7 @@ describe('ChangeLimitsDialog', () => {
   });
 
   it('submits the form with correct data', async () => {
+    const user = userEvent.setup();
     vi.mocked(loadData).mockResolvedValue(mockFetchedData as any);
     const updateLimitsMock = vi
       .mocked(marketplaceResourcesUpdateLimits)
@@ -102,14 +104,15 @@ describe('ChangeLimitsDialog', () => {
     // Find the input for Cores (first component in fixtures)
     // In ComponentRow, it's a NumberField
     const coresInput = screen.getAllByRole('spinbutton')[0];
-    fireEvent.change(coresInput, { target: { value: '10' } });
+    await user.clear(coresInput);
+    await user.type(coresInput, '10');
     await waitFor(() => {
       expect(coresInput).toHaveValue(10);
     });
 
     const submitBtn = screen.getByText('Submit');
-    await act(() => {
-      fireEvent.click(submitBtn);
+    await act(async () => {
+      await user.click(submitBtn);
     });
 
     await waitFor(() => {
@@ -129,6 +132,7 @@ describe('ChangeLimitsDialog', () => {
   });
 
   it('validates limits and shows error', async () => {
+    const user = userEvent.setup();
     vi.mocked(loadData).mockResolvedValue(mockFetchedData as any);
     renderDialog();
 
@@ -138,7 +142,8 @@ describe('ChangeLimitsDialog', () => {
 
     const coresInput = screen.getAllByRole('spinbutton')[0];
     // Set value above max (max is 100 in mockFetchedData)
-    fireEvent.change(coresInput, { target: { value: '150' } });
+    await user.clear(coresInput);
+    await user.type(coresInput, '150');
     await waitFor(() => {
       expect(coresInput).toHaveValue(150);
     });

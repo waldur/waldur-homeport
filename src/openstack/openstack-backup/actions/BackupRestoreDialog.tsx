@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
 import { FormGroup, FormLabel } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { OpenStackBackup, openstackBackupsRestore } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { Select } from '@/form/select';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
@@ -54,7 +54,7 @@ export const BackupRestoreDialog: FC<{
       }}
       onSubmit={submitRequest}
       initialValues={getInitialValues(resource)}
-      render={({ handleSubmit, submitting, invalid, values }) => (
+      render={({ handleSubmit, values }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate('Restore virtual machine from backup {name}', {
@@ -62,42 +62,23 @@ export const BackupRestoreDialog: FC<{
             })}
             loading={asyncState.isLoading}
             error={asyncState.error}
-            submitting={submitting}
-            invalid={invalid}
           >
             {asyncState.data ? (
               <>
-                <FormGroup className="mb-5">
-                  <FormLabel id="flavor">{translate('Flavor')}</FormLabel>
-                  <Field
-                    name="flavor"
-                    validate={required}
-                    render={({ input }) => (
-                      <Select
-                        {...input}
-                        options={asyncState.data.flavors}
-                        aria-labelledby="flavor"
-                      />
-                    )}
-                  />
-                </FormGroup>
-                <FormGroup className="mb-5">
-                  <FormLabel id="security-groups">
-                    {translate('Security groups')}
-                  </FormLabel>
-                  <Field
-                    name="security_groups"
-                    render={({ input }) => (
-                      <Select
-                        {...input}
-                        placeholder={translate('Select security groups...')}
-                        isMulti={true}
-                        options={asyncState.data.securityGroups}
-                        aria-labelledby="security-groups"
-                      />
-                    )}
-                  />
-                </FormGroup>
+                <SelectGroup
+                  label={translate('Flavor')}
+                  name="flavor"
+                  validate={required}
+                  options={asyncState.data.flavors}
+                  placeholder={translate('Select flavor...')}
+                />
+                <SelectGroup
+                  label={translate('Security groups')}
+                  name="security_groups"
+                  placeholder={translate('Select security groups...')}
+                  isMulti={true}
+                  options={asyncState.data.securityGroups}
+                />
                 <FormGroup className="mb-5">
                   <FormLabel>{translate('Networks')}</FormLabel>
                   <FieldArray name="networks">

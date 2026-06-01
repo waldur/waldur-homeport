@@ -18,6 +18,7 @@ export const SafeMarkdown: React.FC<{ text: string; smallTitles?: boolean }> = (
     <div
       className={'md-content' + (props.smallTitles ? ' md-small-titles' : '')}
       dangerouslySetInnerHTML={{ __html: html }}
+      data-testid="safe-markdown"
     />
   );
 };

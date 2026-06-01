@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportRequestTypesAdminDestroy } from 'waldur-js-client';
 
@@ -24,11 +25,12 @@ describe('BatchDeleteAction', () => {
     vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(supportRequestTypesAdminDestroy).mockResolvedValue({} as any);
 
+    const user = userEvent.setup();
     renderWithProviders(
       <BatchDeleteAction rows={rows} refetch={mockRefetch} />,
     );
 
-    fireEvent.click(screen.getByText('Delete'));
+    await user.click(screen.getByText('Delete'));
 
     await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     await waitFor(() => {
@@ -62,11 +64,12 @@ describe('BatchDeleteAction', () => {
       },
     );
 
+    const user = userEvent.setup();
     renderWithProviders(
       <BatchDeleteAction rows={multiRows} refetch={mockRefetch} />,
     );
 
-    fireEvent.click(screen.getByText('Delete'));
+    await user.click(screen.getByText('Delete'));
 
     await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     await waitFor(() => expect(mockRefetch).toHaveBeenCalled());

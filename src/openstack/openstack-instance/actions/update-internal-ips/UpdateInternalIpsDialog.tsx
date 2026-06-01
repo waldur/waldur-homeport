@@ -101,7 +101,7 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
       onSubmit={mutateAsync}
       initialValues={initialValues}
       mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate(
@@ -110,8 +110,6 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
             )}
             loading={isLoading}
             error={error}
-            submitting={submitting}
-            invalid={invalid}
           >
             {subnets ? (
               <BootstrapForm.Group>

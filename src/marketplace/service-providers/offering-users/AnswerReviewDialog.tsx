@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { Answer, QuestionWithAnswer } from 'waldur-js-client';
 
-import { SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -65,13 +64,12 @@ export const AnswerReviewDialog: FC<AnswerReviewDialogProps> = ({
               />
             </p>
             <hr />
-            <FormGroup label={translate('Comment')} spaceless>
-              <Field
-                name="comment"
-                placeholder={translate('Enter a description...')}
-                component={TextField}
-              />
-            </FormGroup>
+            <TextGroup
+              name="comment"
+              placeholder={translate('Enter a description...')}
+              label={translate('Comment')}
+              spaceless
+            />
           </ModalDialog>
         </form>
       )}

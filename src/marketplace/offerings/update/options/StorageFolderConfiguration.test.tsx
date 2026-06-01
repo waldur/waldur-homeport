@@ -103,9 +103,7 @@ describe('StorageFolderConfiguration', () => {
     it('only shows limit-based components in the component type select', () => {
       renderComponent();
 
-      // The component type select should be present
-      const selects = screen.getAllByRole('combobox');
-      expect(selects.length).toBeGreaterThanOrEqual(1);
+      expect(screen.getByLabelText(/Component Type/i)).toBeInTheDocument();
     });
 
     it('handles empty components array gracefully', () => {
@@ -170,9 +168,7 @@ describe('StorageFolderConfiguration', () => {
     it('renders permission select with placeholder', () => {
       renderComponent();
 
-      // Verify the select components are rendered
-      const selects = screen.getAllByRole('combobox');
-      expect(selects.length).toBeGreaterThanOrEqual(2); // Component type + Default permission
+      expect(screen.getByLabelText(/Default Permission/i)).toBeInTheDocument();
     });
   });
 

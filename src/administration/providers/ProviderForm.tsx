@@ -1,10 +1,8 @@
-import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { required, redirectURI, validateRedirectURLs } from '@/core/validators';
 import { WarnCard } from '@/core/WarnCard';
-import { SecretField, StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BooleanGroup, SecretGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
@@ -134,153 +132,122 @@ const AllowedRedirectsField = () => {
 
 export const ProviderForm = () => (
   <>
-    <FormGroup label={translate('Label')} required={true}>
-      <Field name="label" validate={required} component={StringField} />
-    </FormGroup>
-    <FormGroup
+    <StringGroup
+      name="label"
+      validate={required}
+      label={translate('Label')}
+      required={true}
+    />
+    <StringGroup
+      name="client_id"
+      validate={required}
       label={translate('Client ID')}
       required={true}
       help={translate('ID of application used for OAuth authentication.')}
-    >
-      <Field name="client_id" validate={required} component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <SecretGroup
+      name="client_secret"
+      validate={required}
       label={translate('Client secret')}
       required={true}
       help={translate('Application secret key.')}
-    >
-      <Field name="client_secret" validate={required} component={SecretField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="discovery_url"
+      validate={required}
       label={translate('Discovery URL')}
       required={true}
       help={translate('The endpoint for endpoint discovery.')}
-    >
-      <Field name="discovery_url" validate={required} component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="management_url"
       label={translate('Profile management URL')}
       help={translate('The endpoint for user details management.')}
-    >
-      <Field name="management_url" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="protected_fields"
       label={translate('Protected fields')}
       help={translate(
         'Enter a comma separated list of fields of the user profile that would be protected from editing in Waldur.',
       )}
-    >
-      <Field name="protected_fields" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="extra_scope"
       label={translate('Extra scope')}
       help={translate(
         'Space-separated list of scopes to request during authentication.',
       )}
-    >
-      <Field name="extra_scope" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="user_field"
+      placeholder="username"
       label={translate('User field')}
       help={translate('The field to be used for looking up the user.')}
-    >
-      <Field name="user_field" component={StringField} placeholder="username" />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="user_claim"
+      placeholder="sub"
       label={translate('User claim')}
       help={translate(
         'Space seprated list of OIDC claims to be used as the value for the lookup field.',
       )}
-    >
-      <Field name="user_claim" component={StringField} placeholder="sub" />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="attribute_mapping.first_name"
       label={translate('First name field')}
       help={translate(
         'The OIDC claim to be used as the value for the first name field.',
       )}
-    >
-      <Field name="attribute_mapping.first_name" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="attribute_mapping.last_name"
       label={translate('Last name field')}
       help={translate(
         'The OIDC claim to be used as the value for the last name field.',
       )}
-    >
-      <Field name="attribute_mapping.last_name" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="attribute_mapping.email"
       label={translate('Email field')}
       help={translate(
         'The OIDC claim to be used as the value for the email field.',
       )}
-    >
-      <Field name="attribute_mapping.email" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="attribute_mapping.affiliations"
       label={translate('Affiliations field')}
       help={translate(
         'The OIDC claim to be used as the value for the affiliations field.',
       )}
-    >
-      <Field name="attribute_mapping.affiliations" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="attribute_mapping.civil_number"
       label={translate('Civil number field')}
       help={translate(
         'The OIDC claim to be used as the value for the civil_number field.',
       )}
-    >
-      <Field name="attribute_mapping.civil_number" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="attribute_mapping.organization"
       label={translate('Organization field')}
       help={translate(
         'The OIDC claim to be used as the value for the organization field.',
       )}
-    >
-      <Field name="attribute_mapping.organization" component={StringField} />
-    </FormGroup>
-    <FormGroup
+    />
+    <StringGroup
+      name="attribute_mapping.organization_registry_code"
       label={translate('Organization registry code field')}
       help={translate(
         'The OIDC claim to be used as the value for the organization_registry_code field.',
       )}
-    >
-      <Field
-        name="attribute_mapping.organization_registry_code"
-        component={StringField}
-      />
-    </FormGroup>
+    />
     <AllowedRedirectsField />
-    <Form.Group className="mb-7">
-      <Field
-        name="is_active"
-        component={AwesomeCheckboxField}
-        label={translate('Enabled')}
-      />
-    </Form.Group>
-    <Form.Group className="mb-7">
-      <Field
-        name="verify_ssl"
-        component={AwesomeCheckboxField}
-        label={translate('Verify SSL')}
-      />
-    </Form.Group>
-    <Form.Group className="mb-7">
-      <Field
-        name="enable_post_logout_redirect"
-        component={AwesomeCheckboxField}
-        label={translate('Enable post logout redirect')}
-      />
-    </Form.Group>
-    <Form.Group className="mb-7">
-      <Field
-        name="enable_pkce"
-        component={AwesomeCheckboxField}
-        label={translate('Enable PKCE')}
-      />
-    </Form.Group>
+    <BooleanGroup name="is_active" label={translate('Enabled')} />
+    <BooleanGroup name="verify_ssl" label={translate('Verify SSL')} />
+    <BooleanGroup
+      name="enable_post_logout_redirect"
+      label={translate('Enable post logout redirect')}
+    />
+    <BooleanGroup name="enable_pkce" label={translate('Enable PKCE')} />
   </>
 );

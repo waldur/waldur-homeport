@@ -1,10 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 
 import { composeValidators, required } from '@/core/validators';
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroupWithError } from './FormGroupWithError';
 
 interface InternalNameFieldProps {
   name: string;
@@ -27,16 +25,17 @@ export const InternalNameField: FunctionComponent<InternalNameFieldProps> = (
   props,
 ) => {
   return (
-    <Field
+    <StringGroup
       name={props.name}
       validate={validators}
       parse={(v) => v?.replace('.', '')}
       label={translate('Internal name')}
       required={true}
-      description={translate(
+      tooltip={translate(
         'Technical name intended for integration and automated reporting. Please use Latin letters without spaces only.',
       )}
-      component={FormGroupWithError}
+      tooltipEnd={true}
+      space={5}
       disabled={props.disabled}
       readOnly={props.readOnly}
     />

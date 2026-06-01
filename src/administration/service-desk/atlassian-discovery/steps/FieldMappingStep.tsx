@@ -1,16 +1,15 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
 import { Alert, Spinner } from 'react-bootstrap';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import {
   supportSettingsAtlassianDiscoverCustomFields,
   supportSettingsAtlassianDiscoverPriorities,
 } from 'waldur-js-client';
 
-import { SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -168,163 +167,121 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
           'Map Waldur fields to Atlassian custom fields. These mappings allow Waldur to automatically populate issue fields.',
         )}
       </p>
-
       <div className="row">
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.reporter_field"
+            options={fieldOptions}
+            simpleValue
             label={translate('Reporter Field')}
             description={translate(
               'Custom field for storing the reporter email',
             )}
-          >
-            <Field
-              name="fieldMappings.reporter_field"
-              component={SelectField}
-              options={fieldOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.impact_field"
+            options={fieldOptions}
+            simpleValue
             label={translate('Impact Field')}
             description={translate('Custom field for storing the impact level')}
-          >
-            <Field
-              name="fieldMappings.impact_field"
-              component={SelectField}
-              options={fieldOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.organisation_field"
+            options={fieldOptions}
+            simpleValue
             label={translate('Organisation Field')}
             description={translate(
               'Custom field for storing the organisation name',
             )}
-          >
-            <Field
-              name="fieldMappings.organisation_field"
-              component={SelectField}
-              options={fieldOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.project_field"
+            options={fieldOptions}
+            simpleValue
             label={translate('Project Field')}
             description={translate('Custom field for storing the project name')}
-          >
-            <Field
-              name="fieldMappings.project_field"
-              component={SelectField}
-              options={fieldOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.affected_resource_field"
+            options={fieldOptions}
+            simpleValue
             label={translate('Affected Resource Field')}
             description={translate(
               'Custom field for storing the affected resource',
             )}
-          >
-            <Field
-              name="fieldMappings.affected_resource_field"
-              component={SelectField}
-              options={fieldOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.caller_field"
+            options={fieldOptions}
+            simpleValue
             label={translate('Caller Field')}
             description={translate('Custom field for storing the caller')}
-          >
-            <Field
-              name="fieldMappings.caller_field"
-              component={SelectField}
-              options={fieldOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.template_field"
+            options={fieldOptions}
+            simpleValue
             label={translate('Template Field')}
             description={translate(
               'Custom field for storing the template name',
             )}
-          >
-            <Field
-              name="fieldMappings.template_field"
-              component={SelectField}
-              options={fieldOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.waldur_backend_id_field"
+            options={fieldOptions}
+            simpleValue
             label={translate('Waldur Backend ID Field')}
             description={translate(
               'Custom field for storing the Waldur backend ID',
             )}
-          >
-            <Field
-              name="fieldMappings.waldur_backend_id_field"
-              component={SelectField}
-              options={fieldOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.default_priority"
+            options={priorityOptions}
+            simpleValue
             label={translate('Default Priority')}
             description={translate(
               'Default priority for new issues when not specified',
             )}
-          >
-            <Field
-              name="fieldMappings.default_priority"
-              component={SelectField}
-              options={priorityOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
 
         <div className="col-md-6">
-          <FormGroup
+          <SelectGroup
+            name="fieldMappings.default_offering_issue_type"
+            options={requestTypeOptions}
+            simpleValue
             label={translate('Default Offering Issue Type')}
             description={translate(
               'Issue type used when creating tickets for marketplace request-based orders',
             )}
-          >
-            <Field
-              name="fieldMappings.default_offering_issue_type"
-              component={SelectField}
-              options={requestTypeOptions}
-              simpleValue
-            />
-          </FormGroup>
+          />
         </div>
       </div>
-
       {(values.customFields || []).length === 0 && (
         <Alert variant="info" className="mt-4">
           {translate(

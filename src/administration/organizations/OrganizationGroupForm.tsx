@@ -1,31 +1,41 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   organizationGroupsCreate,
   organizationGroupsUpdate,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
-import { StringField } from '@/form/StringField';
+import { StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { SelectOrganizationGroupField } from './SelectOrganizationGroupField';
+import { SelectParentOrganizationGroup } from './SelectParentOrganizationGroup';
 
+interface FormValues {
+  name: string;
+  parent?: { url: string; name: string };
+}
 export const OrganizationGroupForm = ({ resolve }) => {
   const isEdit = Boolean(resolve.organizationGroup?.uuid);
-  const onSubmitMutation = useManagedMutation<any, any, any>({
+  const onSubmitMutation = useManagedMutation<any, any, FormValues>({
     mutationFn: (values) => {
-      values['parent'] = values['parent']?.url;
       if (isEdit) {
         return organizationGroupsUpdate({
           path: { uuid: resolve.organizationGroup.uuid },
-          body: values,
+          body: {
+            name: values.name,
+            parent: values.parent?.url,
+          },
         });
       } else {
-        return organizationGroupsCreate({ body: values });
+        return organizationGroupsCreate({
+          body: {
+            name: values.name,
+            parent: values.parent?.url,
+          },
+        });
       }
     },
     successMessage: isEdit
@@ -38,13 +48,18 @@ export const OrganizationGroupForm = ({ resolve }) => {
   });
 
   return (
-    <Form
+    <Form<FormValues>
       onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       initialValues={
         resolve.organizationGroup
           ? {
               name: resolve.organizationGroup.name,
-              parent: resolve.organizationGroup.parent,
+              parent: resolve.organizationGroup.parent
+                ? {
+                    url: resolve.organizationGroup.parent,
+                    name: resolve.organizationGroup.parent_name,
+                  }
+                : undefined,
             }
           : undefined
       }
@@ -68,24 +83,15 @@ export const OrganizationGroupForm = ({ resolve }) => {
               />
             }
           >
-            <Field
+            <StringGroup
               name="name"
-              component={FormGroup}
               label={translate('Name')}
               required
               validate={required}
-            >
-              <StringField />
-            </Field>
-            <Field
-              name="parent"
-              component={FormGroup}
-              label={translate('Parent group')}
-            >
-              <SelectOrganizationGroupField
-                currentOrganizationGroup={resolve.organizationGroup}
-              />
-            </Field>
+            />
+            <SelectParentOrganizationGroup
+              currentOrganizationGroup={resolve.organizationGroup}
+            />
           </ModalDialog>
         </form>
       )}

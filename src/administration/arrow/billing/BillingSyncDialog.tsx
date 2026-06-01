@@ -156,7 +156,6 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
           noOptionsMessage={() => translate('No resources found')}
           isClearable
           isDisabled={isPending}
-          additional={{ page: 1 }}
         />
         <Form.Text className="text-muted">
           {translate(

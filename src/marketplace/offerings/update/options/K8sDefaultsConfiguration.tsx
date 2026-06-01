@@ -1,11 +1,8 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
-import { Field } from 'react-final-form';
 
-import { InputField } from '@/form/InputField';
+import { StringGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../../FormGroup';
 
 export const K8sDefaultsConfiguration: React.FC<{}> = () => {
   const name = 'default_configs';
@@ -57,75 +54,59 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         </h6>
         <Row>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('vCPUs per Controller')}
               help={translate(
                 'Number of vCPUs allocated to each controller node',
               )}
-            >
-              <Field
-                name={`${name}.default_controller_vcpus`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="16"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_controller_vcpus`}
+              type="number"
+              min="1"
+              max="16"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('RAM per Controller (GB)')}
               help={translate(
                 'Amount of RAM in GB allocated to each controller node',
               )}
-            >
-              <Field
-                name={`${name}.default_controller_ram_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="64"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_controller_ram_gb`}
+              type="number"
+              min="1"
+              max="64"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
         </Row>
 
         <Row>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('System Disk per Controller (GB)')}
               help={translate(
                 'Size of system disk in GB for each controller node',
               )}
-            >
-              <Field
-                name={`${name}.default_controller_system_disk_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="500"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_controller_system_disk_gb`}
+              type="number"
+              min="1"
+              max="500"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('Data Disk per Controller (GB)')}
               help={translate(
                 'Size of data disk in GB for each controller node',
               )}
-            >
-              <Field
-                name={`${name}.default_controller_etcd_disk_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="1000"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_controller_etcd_disk_gb`}
+              type="number"
+              min="1"
+              max="1000"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
         </Row>
 
@@ -136,75 +117,59 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         </h6>
         <Row>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('vCPUs per Load Balancer')}
               help={translate(
                 'Number of vCPUs allocated to each load balancer node',
               )}
-            >
-              <Field
-                name={`${name}.default_lb_vcpus`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="16"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_lb_vcpus`}
+              type="number"
+              min="1"
+              max="16"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('RAM per Load Balancer (GB)')}
               help={translate(
                 'Amount of RAM in GB allocated to each load balancer node',
               )}
-            >
-              <Field
-                name={`${name}.default_lb_ram_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="64"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_lb_ram_gb`}
+              type="number"
+              min="1"
+              max="64"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
         </Row>
 
         <Row>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('System Disk per Load Balancer (GB)')}
               help={translate(
                 'Size of system disk in GB for each load balancer node',
               )}
-            >
-              <Field
-                name={`${name}.default_lb_system_disk_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="500"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_lb_system_disk_gb`}
+              type="number"
+              min="1"
+              max="500"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('Data Disk per Load Balancer (GB)')}
               help={translate(
                 'Size of data disk in GB for each load balancer node',
               )}
-            >
-              <Field
-                name={`${name}.default_lb_logs_disk_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="1000"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_lb_logs_disk_gb`}
+              type="number"
+              min="1"
+              max="1000"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
         </Row>
 
@@ -215,38 +180,30 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         </h6>
         <Row>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('Minimal vCPUs per Worker')}
               help={translate(
                 'Minimum number of vCPUs required for worker nodes when selecting flavors',
               )}
-            >
-              <Field
-                name={`${name}.minimal_worker_vcpus`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="16"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.minimal_worker_vcpus`}
+              type="number"
+              min="1"
+              max="16"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
           <Col md={6}>
-            <FormGroup
+            <NumberGroup
               label={translate('Minimal RAM per Worker (GB)')}
               help={translate(
                 'Minimum amount of RAM in GB required for worker nodes when selecting flavors',
               )}
-            >
-              <Field
-                name={`${name}.minimal_worker_ram_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="64"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.minimal_worker_ram_gb`}
+              type="number"
+              min="1"
+              max="64"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
         </Row>
 
@@ -257,51 +214,39 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         </h6>
         <Row>
           <Col md={4}>
-            <FormGroup
+            <NumberGroup
               label={translate('Worker Data Disk (GB)')}
               help={translate('Default size of data disk for worker nodes')}
-            >
-              <Field
-                name={`${name}.default_worker_data_disk_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="10000"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_worker_data_disk_gb`}
+              type="number"
+              min="1"
+              max="10000"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
           <Col md={4}>
-            <FormGroup
+            <NumberGroup
               label={translate('Storage Data Disk (GB)')}
               help={translate('Default size of data disk for storage nodes')}
-            >
-              <Field
-                name={`${name}.default_storage_data_disk_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="10000"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_storage_data_disk_gb`}
+              type="number"
+              min="1"
+              max="10000"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
           <Col md={4}>
-            <FormGroup
+            <NumberGroup
               label={translate('Storage SAN Disk (GB)')}
               help={translate(
                 'Default size of virtual SAN disk for storage nodes',
               )}
-            >
-              <Field
-                name={`${name}.default_storage_san_disk_gb`}
-                component={InputField}
-                type="number"
-                min="1"
-                max="50000"
-                parse={(value) => (value ? parseInt(value, 10) : undefined)}
-              />
-            </FormGroup>
+              name={`${name}.default_storage_san_disk_gb`}
+              type="number"
+              min="1"
+              max="50000"
+              parse={(value) => (value ? parseInt(value, 10) : undefined)}
+            />
           </Col>
         </Row>
 
@@ -317,19 +262,14 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         </p>
         <Row>
           <Col md={12}>
-            <FormGroup
+            <StringGroup
               label={translate('Available Kubernetes Versions')}
               help={translate(
                 'Enter comma-separated list of Kubernetes versions (e.g., 1.32.0,1.33.0,1.34.0). This controls which versions users can select when creating clusters.',
               )}
-            >
-              <Field
-                name={`${name}.available_kubernetes_versions`}
-                component={InputField}
-                type="text"
-                placeholder="1.32.0,1.33.0,1.34.0"
-              />
-            </FormGroup>
+              name={`${name}.available_kubernetes_versions`}
+              placeholder="1.32.0,1.33.0,1.34.0"
+            />
           </Col>
         </Row>
       </Card.Body>

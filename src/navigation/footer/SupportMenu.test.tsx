@@ -1,4 +1,5 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
 import { ENV } from '@/core/config';
@@ -43,18 +44,15 @@ describe('SupportMenu', () => {
   });
 
   it('handles copying email/phone', async () => {
-    Object.assign(navigator, {
-      clipboard: {
-        writeText: vi.fn().mockImplementation(() => Promise.resolve()),
-      },
-    });
+    const user = userEvent.setup();
+    const writeTextSpy = vi
+      .spyOn(navigator.clipboard, 'writeText')
+      .mockResolvedValue(undefined);
 
     render(<SupportMenu />);
     const emailBtn = screen.getByText('support@example.com');
-    fireEvent.click(emailBtn);
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      'support@example.com',
-    );
+    await user.click(emailBtn);
+    expect(writeTextSpy).toHaveBeenCalledWith('support@example.com');
     await waitFor(() => {
       expect(useNotify().showSuccess).toHaveBeenCalled();
     });

@@ -193,7 +193,7 @@ export function TableToolbarTitle() {
   }
 
   return (
-    <Col xs className="order-0">
+    <Col xs className="order-0" data-testid="table-toolbar-title-container">
       <Card.Title>
         {!config.hideTitle && (
           <div className="me-2">
@@ -233,6 +233,7 @@ export function TableToolbar() {
   return (
     <Card.Header
       className={classNames('border-bottom', display.headerClassName)}
+      data-testid="table-toolbar"
     >
       <Row className="card-toolbar g-0 gap-4 w-100">
         <TableToolbarTitle />

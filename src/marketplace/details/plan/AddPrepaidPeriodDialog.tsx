@@ -1,13 +1,11 @@
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { Form } from 'react-bootstrap';
-import { Form as ReactFinalForm, Field, useFormState } from 'react-final-form';
+import { Form as BootstrapForm } from 'react-bootstrap';
+import { Form as ReactFinalForm, useFormState } from 'react-final-form';
 import { Project } from 'waldur-js-client';
 
 import { formatDate, formatISODate } from '@/core/dateUtils';
-import { SubmitButton } from '@/form';
-import { DateField } from '@/form/DateField';
-import { SelectField } from '@/form/select/SelectField';
+import { SelectGroup, SubmitButton, DateGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -71,34 +69,31 @@ const PrepaidFormContent = ({
 
   return (
     <>
-      <div className="mb-4">
-        <Form.Label>{translate('Subscription period')}</Form.Label>
-        <Field
-          name="months"
-          component={SelectField}
-          options={monthOptions}
-          simpleValue
-          isClearable={false}
-        />
-      </div>
+      <SelectGroup
+        name="months"
+        label={translate('Subscription period')}
+        options={monthOptions}
+        simpleValue
+        isClearable={false}
+      />
 
       {isCustomRange ? (
         <div className="mb-4">
           <div className="row">
             <div className="col-md-6">
-              <Form.Label>{translate('From')}</Form.Label>
-              <input
-                type="text"
-                className="form-control"
-                value={formatDate(effectiveStartDate)}
-                disabled
-              />
+              <BootstrapForm.Group controlId="from_date">
+                <BootstrapForm.Label>{translate('From')}</BootstrapForm.Label>
+                <BootstrapForm.Control
+                  type="text"
+                  value={formatDate(effectiveStartDate)}
+                  disabled
+                />
+              </BootstrapForm.Group>
             </div>
             <div className="col-md-6">
-              <Form.Label>{translate('To')}</Form.Label>
-              <Field
+              <DateGroup
                 name="end_date"
-                component={DateField}
+                label={translate('To')}
                 {...datePickerConstraints}
               />
               {durationInMonths !== null && (

@@ -6,7 +6,7 @@ import { adminArrowCustomerMappingsCreate } from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { SelectField as Select } from '@/form/select';
+import { SelectGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -287,24 +287,21 @@ export const CustomerMappingCreateDialog = ({
               }
             />
 
-            <FormGroup
+            <SelectGroup
+              name="waldur_customer"
               label={translate('Waldur Organization')}
               description={translate(
                 'The Waldur organization to map this Arrow customer to',
               )}
               required
-            >
-              <Select
-                name="waldur_customer"
-                validate={required}
-                placeholder={translate('Select organization...')}
-                options={waldurCustomerOptions}
-                getOptionLabel={(option: WaldurCustomer) => option.name}
-                getOptionValue={(option: WaldurCustomer) => option.uuid}
-                noOptionsMessage={() => translate('No organizations')}
-                isClearable
-              />
-            </FormGroup>
+              validate={required}
+              placeholder={translate('Select organization...')}
+              options={waldurCustomerOptions}
+              getOptionLabel={(option: WaldurCustomer) => option.name}
+              getOptionValue={(option: WaldurCustomer) => option.uuid}
+              noOptionsMessage={() => translate('No organizations')}
+              isClearable
+            />
 
             <Field
               name="waldur_customer"

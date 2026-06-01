@@ -17,8 +17,7 @@ describe('TableContent', () => {
         rows: [],
       });
 
-      // Should show loading state (spinner is rendered in h1.text-center)
-      expect(document.querySelector('h1.text-center')).toBeInTheDocument();
+      expect(screen.getByTestId('table-content-loading')).toBeInTheDocument();
     });
 
     it('does not show loading spinner when loading but has rows', () => {
@@ -29,9 +28,10 @@ describe('TableContent', () => {
         visibleColumns: [{ title: 'Name', render: () => 'Test' }],
       });
 
-      // Should render table, not loading spinner
-      expect(document.querySelector('h1.text-center')).not.toBeInTheDocument();
-      expect(document.querySelector('table')).toBeInTheDocument();
+      expect(
+        screen.queryByTestId('table-content-loading'),
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole('table')).toBeInTheDocument();
     });
   });
 
@@ -123,7 +123,7 @@ describe('TableContent', () => {
         ],
       });
 
-      expect(document.querySelector('table')).toBeInTheDocument();
+      expect(screen.getByRole('table')).toBeInTheDocument();
     });
 
     it('applies table-hover-shadow class when hoverShadow is true', () => {
@@ -135,7 +135,9 @@ describe('TableContent', () => {
         config: { ...createMockTableContext().config, hoverShadow: true },
       });
 
-      expect(document.querySelector('.table-hover-shadow')).toBeInTheDocument();
+      expect(screen.getByTestId('table-container')).toHaveClass(
+        'table-hover-shadow',
+      );
     });
 
     it('does not apply table-hover-shadow when hoverShadow is false', () => {
@@ -147,9 +149,9 @@ describe('TableContent', () => {
         config: { ...createMockTableContext().config, hoverShadow: false },
       });
 
-      expect(
-        document.querySelector('.table-hover-shadow'),
-      ).not.toBeInTheDocument();
+      expect(screen.getByTestId('table-container')).not.toHaveClass(
+        'table-hover-shadow',
+      );
     });
   });
 
@@ -181,7 +183,9 @@ describe('TableContent', () => {
         config: { ...createMockTableContext().config, hoverShadow: true },
       });
 
-      expect(document.querySelector('.grid-hover-shadow')).toBeInTheDocument();
+      expect(screen.getByTestId('table-container')).toHaveClass(
+        'grid-hover-shadow',
+      );
     });
 
     it('renders multiple grid items', () => {
@@ -219,7 +223,9 @@ describe('TableContent', () => {
         },
       });
 
-      expect(document.querySelector('.table-hover-shadow')).toBeInTheDocument();
+      expect(screen.getByTestId('table-container')).toHaveClass(
+        'table-hover-shadow',
+      );
     });
 
     it('handles hoverShadow as object with table: false', () => {
@@ -234,9 +240,9 @@ describe('TableContent', () => {
         },
       });
 
-      expect(
-        document.querySelector('.table-hover-shadow'),
-      ).not.toBeInTheDocument();
+      expect(screen.getByTestId('table-container')).not.toHaveClass(
+        'table-hover-shadow',
+      );
     });
   });
 });

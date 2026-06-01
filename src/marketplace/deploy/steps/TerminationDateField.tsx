@@ -1,8 +1,6 @@
 import { DateTime } from 'luxon';
-import { Field } from 'react-final-form';
 
-import { FormGroup } from '@/form';
-import { DateField } from '@/form/DateField';
+import { DateGroup } from '@/form';
 import { translate } from '@/i18n';
 
 interface PluginOptions {
@@ -51,15 +49,13 @@ export const TerminationDateField = ({ offering }) => {
   const dateFieldProps = getTerminationDateProps(offering.plugin_options);
 
   return (
-    <Field
+    <DateGroup
       name="attributes.end_date"
       label={translate('Termination date')}
-      component={FormGroup}
       description={translate(
         'The date is inclusive. Once reached, resource will be scheduled for termination.',
       )}
-    >
-      <DateField {...dateFieldProps} />
-    </Field>
+      {...dateFieldProps}
+    />
   );
 };

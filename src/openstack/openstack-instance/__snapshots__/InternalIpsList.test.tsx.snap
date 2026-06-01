@@ -7,12 +7,14 @@ exports[`InternalIpsList > renders list 1`] = `
   >
     <div
       class="border-bottom card-header"
+      data-testid="table-toolbar"
     >
       <div
         class="card-toolbar g-0 gap-4 w-100 row"
       >
         <div
           class="order-0 col"
+          data-testid="table-toolbar-title-container"
         >
           <div
             class="card-title h5"
@@ -40,7 +42,7 @@ exports[`InternalIpsList > renders list 1`] = `
                     class="animation-spin"
                   >
                     <svg
-                      data-cy="loading-spinner"
+                      data-testid="loading-spinner"
                       fill="currentColor"
                       height="1em"
                       viewBox="0 0 256 256"
@@ -119,6 +121,7 @@ exports[`InternalIpsList > renders list 1`] = `
         </div>
         <div
           class="table-container table-hover-shadow table-content-refetching"
+          data-testid="table-container"
         >
           <table
             class="table align-middle table-row-bordered fs-6 gy-0 gx-8px no-footer"

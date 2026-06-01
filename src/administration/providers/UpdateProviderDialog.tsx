@@ -47,7 +47,9 @@ export const UpdateProviderDialog = ({
 
   return (
     <Form
-      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        onSubmitMutation.mutateAsync(values).catch(() => {})
+      }
       initialValues={resolve.provider}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { adminArrowCustomerMappingsLinkResource } from 'waldur-js-client';
 
@@ -40,8 +41,8 @@ describe('SuggestedMatches', () => {
   });
 
   it('renders nothing if no suggestions', () => {
-    const { container } = renderComponent({ mappingUuid, suggestions: [] });
-    expect(container.firstChild).toBeNull();
+    renderComponent({ mappingUuid, suggestions: [] });
+    expect(screen.queryByText('Suggested Matches')).not.toBeInTheDocument();
   });
 
   it('renders suggestions table', () => {
@@ -59,14 +60,15 @@ describe('SuggestedMatches', () => {
   });
 
   it('calls adminArrowCustomerMappingsLinkResource when Link button is clicked', async () => {
+    const user = userEvent.setup();
     vi.mocked(adminArrowCustomerMappingsLinkResource).mockResolvedValue({
       data: {},
     } as any);
 
     renderComponent({ mappingUuid, suggestions: mockSuggestions });
 
-    const linkButtons = screen.getAllByText('Link');
-    fireEvent.click(linkButtons[0]); // Click first one (High confidence)
+    const linkButtons = screen.getAllByRole('button', { name: /Link/i });
+    await user.click(linkButtons[0]); // Click first one (High confidence)
 
     await waitFor(() => {
       expect(adminArrowCustomerMappingsLinkResource).toHaveBeenCalledWith({

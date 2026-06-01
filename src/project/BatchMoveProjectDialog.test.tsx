@@ -6,6 +6,7 @@ import { customersList, projectsMoveProject } from 'waldur-js-client';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 import { typeAndSelectOption } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 
 import { BatchMoveProjectDialog } from './BatchMoveProjectDialog';
 
@@ -19,14 +20,9 @@ describe('BatchMoveProjectDialog', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(customersList).mockResolvedValue({
-      data: [{ name: 'Target Organization', url: 'org-url' }],
-      response: {
-        headers: {
-          get: (name) => (name === 'x-result-count' ? '1' : null),
-        },
-      },
-    } as any);
+    vi.mocked(customersList).mockResolvedValue(
+      mockListResponse([{ name: 'Target Organization', url: 'org-url' }]),
+    );
   });
 
   const renderDialog = () =>

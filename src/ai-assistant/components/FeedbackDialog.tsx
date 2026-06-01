@@ -5,7 +5,7 @@ import type { FeedbackCategoryEnum } from 'waldur-js-client';
 import { useMessageFeedbackMutation } from '@/ai-assistant/hooks/useMessageFeedbackMutation';
 import { FEEDBACK_SELECT_OPTIONS } from '@/ai-assistant/lib/feedback/categories';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
-import { SelectField } from '@/form/select/SelectField';
+import { SelectGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
@@ -84,18 +84,14 @@ export const FeedbackDialog: FC<{ resolve: Resolve }> = ({ resolve }) => {
             }
           >
             {resolve.score === false && (
-              <FormGroup
+              <SelectGroup
+                name="category"
+                simpleValue
+                isClearable
+                placeholder={translate('Select a category')}
+                options={FEEDBACK_SELECT_OPTIONS}
                 label={translate('What type of issue was this? (optional)')}
-              >
-                <Field
-                  name="category"
-                  component={SelectField}
-                  simpleValue
-                  isClearable
-                  placeholder={translate('Select a category')}
-                  options={FEEDBACK_SELECT_OPTIONS}
-                />
-              </FormGroup>
+              />
             )}
 
             <FormGroup label={translate('Comment (optional)')} spaceless>

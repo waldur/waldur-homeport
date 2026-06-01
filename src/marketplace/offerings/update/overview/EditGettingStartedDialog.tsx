@@ -6,7 +6,7 @@ import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
 import { CodePreview } from '@/core/CodePreview';
 import { Tip } from '@/core/Tooltip';
-import { FormContainer, FormFooter, TextField } from '@/form';
+import { FormFooter, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -41,18 +41,13 @@ export const EditGettingStartedDialog: FC<{
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Getting started instructions')}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                submitLabel={translate('Update')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Update')} />}
           >
             <Row>
               <Col md={12} lg={8} className="d-flex flex-column">
                 <div className="flex-grow-1 min-h-225px">
-                  <FormContainer submitting={submitting}>
-                    <TextField
+                  <div className="size-sm">
+                    <TextGroup
                       name="template"
                       rows={15}
                       label={
@@ -70,8 +65,9 @@ export const EditGettingStartedDialog: FC<{
                           />
                         </Tip>
                       }
+                      disabled={submitting}
                     />
-                  </FormContainer>
+                  </div>
                 </div>
               </Col>
               <Col

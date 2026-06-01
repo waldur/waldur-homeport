@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
 import { required, validateRedirectURLs, redirectURI } from '@/core/validators';
-import { StringField } from '@/form';
+import { StringGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -154,68 +154,53 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
       <p className="text-muted mb-4">
         {translate('Configure additional settings for the identity provider.')}
       </p>
-
-      <FormGroup
+      <StringGroup
+        name="label"
+        validate={required}
         label={translate('Label')}
         description={translate(
           'A human-readable name for this identity provider.',
         )}
         required
-      >
-        <Field name="label" component={StringField} validate={required} />
-      </FormGroup>
-
-      <FormGroup
+      />
+      <StringGroup
+        name="extra_scope"
         label={translate('Extra Scopes')}
         description={translate(
           'Space-separated list of scopes to request during authentication. Suggested scopes have been pre-filled.',
         )}
-      >
-        <Field name="extra_scope" component={StringField} />
-      </FormGroup>
-
-      <FormGroup
+      />
+      <StringGroup
+        name="user_field"
+        placeholder="username"
         label={translate('User Field')}
         description={translate(
           'The Waldur user field to use for looking up existing users.',
         )}
-      >
-        <Field
-          name="user_field"
-          component={StringField}
-          placeholder="username"
-        />
-      </FormGroup>
-
-      <FormGroup
+      />
+      <StringGroup
+        name="user_claim"
+        placeholder="sub"
         label={translate('User Claim')}
         description={translate(
           'The OIDC claim to use as the value for user lookup.',
         )}
-      >
-        <Field name="user_claim" component={StringField} placeholder="sub" />
-      </FormGroup>
-
-      <FormGroup
+      />
+      <StringGroup
+        name="protected_fields"
         label={translate('Protected Fields')}
         description={translate(
           'Comma-separated list of user profile fields that should not be editable in Waldur.',
         )}
-      >
-        <Field name="protected_fields" component={StringField} />
-      </FormGroup>
-
-      <FormGroup
+      />
+      <StringGroup
+        name="management_url"
         label={translate('Management URL')}
         description={translate(
           'URL where users can manage their identity provider account.',
         )}
-      >
-        <Field name="management_url" component={StringField} />
-      </FormGroup>
-
+      />
       <AllowedRedirectsField />
-
       <Form.Group className="mb-4">
         <Field
           name="enable_pkce"
@@ -228,7 +213,6 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
           )}
         </small>
       </Form.Group>
-
       <Form.Group className="mb-4">
         <Field
           name="enable_post_logout_redirect"
@@ -241,7 +225,6 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
           )}
         </small>
       </Form.Group>
-
       <Form.Group className="mb-4">
         <Field
           name="is_active"

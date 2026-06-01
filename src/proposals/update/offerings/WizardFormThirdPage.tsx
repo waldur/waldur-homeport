@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { FormContainer, TextField } from '@/form';
+import { TextGroup } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
@@ -15,7 +15,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
 
   return (
     <WizardForm {...props}>
-      <FormContainer submitting={submitting} className="size-lg">
+      <div className="size-lg">
         <p>
           {translate(
             'Are you sure you want to request {provider} to add {offering} to the {call}?',
@@ -30,12 +30,13 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
             formatJsxTemplate,
           )}
         </p>
-        <TextField
+        <TextGroup
           name="description"
           placeholder={translate('Add a note to the provider')}
           maxLength={1000}
+          disabled={submitting}
         />
-      </FormContainer>
+      </div>
     </WizardForm>
   );
 };

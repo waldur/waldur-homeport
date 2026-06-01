@@ -1,10 +1,10 @@
-import { useCallback, useEffect } from 'react';
-import { Alert, Form, Stack } from 'react-bootstrap';
-import { Field, useFormState, useForm } from 'react-final-form';
+import { useEffect } from 'react';
+import { Alert, Stack } from 'react-bootstrap';
+import { useForm, useFormState } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ProjectGroup } from '@/issues/create/ProjectGroup';
 import { useUser } from '@/workspace/hooks';
@@ -28,7 +28,7 @@ export const IssueDetailsTab = ({
 }: {
   context: IssueDetailsTabContext;
 }) => {
-  const form = useForm();
+  const { change } = useForm();
   const { values, submitting } = useFormState();
   const standaloneIssue = values.standaloneIssue;
   const type = values.type;
@@ -39,49 +39,44 @@ export const IssueDetailsTab = ({
   // Get request types data from context (fetched in IssueCreateForm)
   const { issueTypes, isLoading, error } = context;
 
-  const setValue = useCallback(
-    (field, value) => form.change(field, value),
-    [form],
-  );
-
   // Set default type to first available type when types are loaded
   useEffect(() => {
     if (!type && issueTypes.length > 0) {
-      setValue('type', issueTypes[0]);
+      change('type', issueTypes[0]);
     }
-  }, [setValue, type, issueTypes]);
+  }, [change, type, issueTypes]);
 
   // Set context values on mount
   useEffect(() => {
     const scope = context.scope;
 
     if (context.scopeType === 'customer') {
-      setValue('customer', scope);
+      change('customer', scope);
     } else if (context.scopeType === 'project') {
-      setValue('customer', {
+      change('customer', {
         name: scope.customer_name,
         uuid: scope.customer_uuid,
         url: scope.customer,
       });
-      setValue('project', {
+      change('project', {
         name: scope.name,
         uuid: scope.uuid,
         url: scope.url,
         customer_uuid: scope.customer_uuid,
       });
     } else if (context.scopeType === 'resource') {
-      setValue('customer', {
+      change('customer', {
         name: scope.customer_name,
         uuid: scope.customer_uuid,
         url: scope.customer,
       });
-      setValue('project', {
+      change('project', {
         name: scope.project_name,
         uuid: scope.project_uuid,
         url: scope.project,
         customer_uuid: scope.customer_uuid,
       });
-      setValue('resource', {
+      change('resource', {
         name: scope.name,
         uuid: scope.uuid,
         url: scope.url,
@@ -89,16 +84,16 @@ export const IssueDetailsTab = ({
         offering_name: scope.offering_name,
       });
     }
-  }, [context, setValue]);
+  }, [context, change]);
 
   // Clear context when standalone issue is checked
   useEffect(() => {
     if (standaloneIssue) {
-      setValue('customer', undefined);
-      setValue('project', undefined);
-      setValue('resource', undefined);
+      change('customer', undefined);
+      change('project', undefined);
+      change('resource', undefined);
     }
-  }, [standaloneIssue, setValue]);
+  }, [standaloneIssue, change]);
 
   // Show loading state
   if (isLoading) {
@@ -137,19 +132,16 @@ export const IssueDetailsTab = ({
       {showTypeSelector && (
         <TypeField issueTypes={issueTypes} isDisabled={submitting} />
       )}
-      <Form.Group className="mb-5">
-        <Field
-          name="standaloneIssue"
-          type="checkbox"
-          component={AwesomeCheckboxField}
-          label={translate(
-            'Issue is general and not tied to any specific organization, project, or resource',
-          )}
-          disabled={['customer', 'project', 'resource'].includes(
-            context.scopeType,
-          )}
-        />
-      </Form.Group>
+      <BooleanGroup
+        name="standaloneIssue"
+        label={translate(
+          'Issue is general and not tied to any specific organization, project, or resource',
+        )}
+        disabled={['customer', 'project', 'resource'].includes(
+          context.scopeType,
+        )}
+        space={5}
+      />
       <Stack direction="horizontal" gap={3}>
         <OrganizationGroup
           disabled={

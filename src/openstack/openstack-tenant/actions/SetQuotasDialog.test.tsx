@@ -42,18 +42,6 @@ const renderDialog = (resource = makeResource()) => {
   );
 };
 
-// Find the number input in the table row that contains the given label text.
-const getInputByQuotaName = (name: string): HTMLInputElement => {
-  const rows = screen.getAllByRole('row');
-  for (const row of rows) {
-    if (row.textContent?.includes(name)) {
-      const input = row.querySelector('input[type="number"]');
-      if (input) return input as HTMLInputElement;
-    }
-  }
-  throw new Error(`No number input found in row containing "${name}"`);
-};
-
 describe('SetQuotasDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -79,7 +67,6 @@ describe('SetQuotasDialog', () => {
 
   it('renders editable inputs for all 12 settable quotas and not for derived ones', () => {
     renderDialog();
-    const rows = screen.getAllByRole('row');
 
     // All 12 settable quotas have number inputs
     const settableNames = [
@@ -104,23 +91,19 @@ describe('SetQuotasDialog', () => {
     }
 
     // volumes_size is derived/read-only — its row should have no number input
-    const volumesSizeRow = rows.find((r) =>
-      r.textContent?.includes('Volumes size'),
-    );
-    expect(volumesSizeRow).toBeDefined();
-    expect(volumesSizeRow?.querySelector('input[type="number"]')).toBeNull();
+    expect(screen.queryByTestId('quota-volumes_size')).not.toBeInTheDocument();
   });
 
   describe('MiB to GB conversion on initialValues', () => {
     it('converts RAM from MiB to GB (4096 MiB → 4 GB)', () => {
       renderDialog();
-      const ramInput = getInputByQuotaName('RAM');
+      const ramInput = screen.getByTestId('quota-ram');
       expect(ramInput).toHaveValue(4);
     });
 
     it('converts storage from MiB to GB (10240 MiB → 10 GB)', () => {
       renderDialog();
-      const storageInput = getInputByQuotaName('Storage');
+      const storageInput = screen.getByTestId('quota-storage');
       expect(storageInput).toHaveValue(10);
     });
   });
@@ -132,7 +115,7 @@ describe('SetQuotasDialog', () => {
 
       renderDialog();
 
-      const ramInput = getInputByQuotaName('RAM');
+      const ramInput = screen.getByTestId('quota-ram');
       await user.clear(ramInput);
       await user.type(ramInput, '8');
 
@@ -155,7 +138,7 @@ describe('SetQuotasDialog', () => {
 
       renderDialog();
 
-      const storageInput = getInputByQuotaName('Storage');
+      const storageInput = screen.getByTestId('quota-storage');
       await user.clear(storageInput);
       await user.type(storageInput, '20');
 
@@ -465,7 +448,7 @@ describe('SetQuotasDialog', () => {
       const user = userEvent.setup();
       renderDialog();
 
-      const vcpuInput = getInputByQuotaName('vCPU count');
+      const vcpuInput = screen.getByTestId('quota-vcpu');
       await user.clear(vcpuInput);
       await user.type(vcpuInput, '20');
 
@@ -479,7 +462,7 @@ describe('SetQuotasDialog', () => {
       const user = userEvent.setup();
       renderDialog();
 
-      const storageInput = getInputByQuotaName('Storage');
+      const storageInput = screen.getByTestId('quota-storage');
       await user.clear(storageInput);
       await user.type(storageInput, '15');
 

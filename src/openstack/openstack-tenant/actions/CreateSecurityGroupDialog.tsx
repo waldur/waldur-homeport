@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
-import { Form } from 'react-bootstrap';
-import { Field, Form as FinalForm } from 'react-final-form';
+import { Form as FinalForm } from 'react-final-form';
 import {
   openstackSecurityGroupsList,
   openstackTenantsCreateSecurityGroup,
@@ -10,7 +9,7 @@ import {
 
 import { getAllPages } from '@/core/api';
 import { composeValidators, getLatinNameValidators } from '@/core/validators';
-import { InputField } from '@/form/InputField';
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { RulesList } from '@/openstack/openstack-security-groups/rule-editor/RulesList';
@@ -80,7 +79,7 @@ export const CreateSecurityGroupDialog: FC<CreateSecurityGroupDialogProps> = ({
     <FinalForm<CreateSecurityGroupFormData>
       onSubmit={mutateAsync}
       mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate(
@@ -91,35 +90,24 @@ export const CreateSecurityGroupDialog: FC<CreateSecurityGroupDialogProps> = ({
             )}
             loading={isLoading}
             error={error}
-            submitting={submitting}
-            invalid={invalid}
           >
             {securityGroups ? (
               <>
-                <Form.Group>
-                  <Form.Label htmlFor="create-sg-name">
-                    {translate('Name')}
-                  </Form.Label>
-                  <Field
-                    id="create-sg-name"
-                    component={InputField}
-                    name="name"
-                    validate={composeValidators(...getLatinNameValidators())}
-                    maxLength={150}
-                  />
-                </Form.Group>
+                <StringGroup
+                  controlId="create-sg-name"
+                  label={translate('Name')}
+                  name="name"
+                  validate={composeValidators(...getLatinNameValidators())}
+                  maxLength={150}
+                  required
+                />
 
-                <Form.Group>
-                  <Form.Label htmlFor="create-sg-description">
-                    {translate('Description')}
-                  </Form.Label>
-                  <Field
-                    id="create-sg-description"
-                    component={InputField}
-                    name="description"
-                    maxLength={4096}
-                  />
-                </Form.Group>
+                <StringGroup
+                  controlId="create-sg-description"
+                  label={translate('Description')}
+                  name="description"
+                  maxLength={4096}
+                />
 
                 <RulesList remoteSecurityGroups={securityGroups} />
               </>

@@ -4,7 +4,6 @@ import { autoprovisioningRulesPartialUpdate, Rule } from 'waldur-js-client';
 import { AtLeast } from '@/core/types';
 import { translate } from '@/i18n';
 import { Category, Offering, Plan } from '@/marketplace/types';
-import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormThirdPage as Step2AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
 import { ProgressStep, WizardFormContainer } from '@/wizard';
@@ -50,7 +49,6 @@ const steps: ProgressStep[] = [
 export const RuleAddTemplateDialog: FC<RuleAddTemplateDialogProps> = (
   props,
 ) => {
-  const { closeDialog } = useModal();
   const [wizardSteps, setWizardSteps] = useState(() => {
     const mainOffering = props.initialValues?.offering;
     return mainOffering?.options?.order?.length
@@ -78,14 +76,6 @@ export const RuleAddTemplateDialog: FC<RuleAddTemplateDialogProps> = (
     refetch: props.resolve.refetch,
   });
 
-  const submitForm = useCallback(
-    async (formData) => {
-      await submitMutation.mutateAsync(formData);
-      closeDialog();
-    },
-    [submitMutation, closeDialog],
-  );
-
   const handleFormChange = useCallback((values) => {
     const mainOffering = values?.offering;
     if (mainOffering?.options?.order?.length) {
@@ -100,7 +90,7 @@ export const RuleAddTemplateDialog: FC<RuleAddTemplateDialogProps> = (
 
   return (
     <WizardFormContainer
-      onSubmit={submitForm}
+      onSubmit={submitMutation.mutateAsync}
       submitLabel={translate('Confirm')}
       steps={wizardSteps.steps}
       wizardForms={wizardSteps.wizardForms}

@@ -16,7 +16,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
 import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -295,14 +295,12 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                       validate={activeTab === 'single' ? required : undefined}
                     />
                   </FormGroup>
-                  <FormGroup label={translate('Description')}>
-                    <Field
-                      component={TextField}
-                      name="description"
-                      placeholder={translate('e.g. Used for automated backups')}
-                      spaceless
-                    />
-                  </FormGroup>
+                  <TextGroup
+                    name="description"
+                    placeholder={translate('e.g. Used for automated backups')}
+                    spaceless
+                    label={translate('Description')}
+                  />
                 </Tab>
                 <Tab eventKey="batch" title={translate('Batch import')}>
                   <WizardStepIndicator

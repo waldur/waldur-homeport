@@ -1,19 +1,17 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useMemo } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   GroupInvitation,
   userGroupInvitationsPartialUpdate,
 } from 'waldur-js-client';
 
-import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { ENV } from '@/core/config';
 import { required, validateMaxLength } from '@/core/validators';
 import { useCustomerProjects } from '@/customer/workspace/fetchCustomer';
-import { SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextGroup, RadioGroup } from '@/form';
 import { translate } from '@/i18n';
 import { invitationTypeOptions } from '@/invitations/actions/constants';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Role } from '@/permissions/types';
@@ -179,19 +177,14 @@ export const GroupInvitationEditDialog = ({
                 </>
               }
             >
-              <FormGroup label={translate('Invitation type')} required>
-                <Field
-                  name="type"
-                  validate={required}
-                  render={({ input }) => (
-                    <AwesomeRadioButton
-                      choices={typeOptions}
-                      disabled={submitting}
-                      input={input}
-                    />
-                  )}
-                />
-              </FormGroup>
+              <RadioGroup
+                name="type"
+                label={translate('Invitation type')}
+                required
+                validate={required}
+                choices={typeOptions}
+                disabled={submitting}
+              />
               <RoleGroup roles={filteredRoles} disabled={submitting} />
               <ProjectGroup
                 key={String(values.auto_create_project)}
@@ -205,24 +198,14 @@ export const GroupInvitationEditDialog = ({
                 customer={customer}
                 project={values?.project}
               />
-              <Field
+              <TextGroup
                 name="custom_text"
                 validate={validateMaxLength(500)}
-                render={({ input, meta }) => (
-                  <FormGroup
-                    label={translate('Custom text')}
-                    description={translate(
-                      'Optional message displayed to users viewing this invitation.',
-                    )}
-                    meta={meta}
-                  >
-                    <TextField
-                      input={input}
-                      isInvalid={Boolean(meta.error)}
-                      disabled={submitting}
-                    />
-                  </FormGroup>
+                label={translate('Custom text')}
+                description={translate(
+                  'Optional message displayed to users viewing this invitation.',
                 )}
+                disabled={submitting}
               />
               <AdvancedSettingsGroup disabled={submitting} />
             </ModalDialog>

@@ -16,7 +16,7 @@ describe('TableView', () => {
         visibleColumns: [{ title: 'Name', render: ({ row }) => row.name }],
       });
 
-      expect(document.querySelector('table')).toBeInTheDocument();
+      expect(screen.getByRole('table')).toBeInTheDocument();
     });
 
     it('applies correct CSS classes to table', () => {
@@ -25,7 +25,7 @@ describe('TableView', () => {
         visibleColumns: [{ title: 'Col', render: () => 'x' }],
       });
 
-      const table = document.querySelector('table');
+      const table = screen.getByRole('table');
       expect(table).toHaveClass('table');
       expect(table).toHaveClass('align-middle');
       expect(table).toHaveClass('table-row-bordered');
@@ -40,7 +40,7 @@ describe('TableView', () => {
         slots: { expandableRow: ExpandableRow },
       });
 
-      const table = document.querySelector('table');
+      const table = screen.getByRole('table');
       expect(table).toHaveClass('table-expandable');
     });
 
@@ -51,7 +51,7 @@ describe('TableView', () => {
         config: { ...createMockTableContext().config, hoverable: true },
       });
 
-      const table = document.querySelector('table');
+      const table = screen.getByRole('table');
       expect(table).toHaveClass('table-hover');
     });
 
@@ -62,7 +62,7 @@ describe('TableView', () => {
         config: { ...createMockTableContext().config, hoverable: false },
       });
 
-      const table = document.querySelector('table');
+      const table = screen.getByRole('table');
       expect(table).not.toHaveClass('table-hover');
     });
   });
@@ -76,7 +76,7 @@ describe('TableView', () => {
       });
 
       expect(screen.getByText('Name')).toBeInTheDocument();
-      expect(document.querySelector('thead')).toBeInTheDocument();
+      expect(screen.getAllByRole('rowgroup')).toHaveLength(2);
     });
 
     it('does not render table header when hasHeaders is false', () => {
@@ -86,7 +86,7 @@ describe('TableView', () => {
         config: { ...createMockTableContext().config, hasHeaders: false },
       });
 
-      expect(document.querySelector('thead')).not.toBeInTheDocument();
+      expect(screen.getAllByRole('rowgroup')).toHaveLength(1);
     });
 
     it('renders multiple column headers', () => {
@@ -112,7 +112,7 @@ describe('TableView', () => {
       });
 
       expect(screen.getByText('Test Item')).toBeInTheDocument();
-      expect(document.querySelector('tbody')).toBeInTheDocument();
+      expect(screen.getAllByRole('rowgroup').length).toBeGreaterThan(0);
     });
 
     it('renders multiple rows', () => {
@@ -193,7 +193,7 @@ describe('TableView', () => {
       });
 
       // Checkbox column should be present
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const checkboxes = screen.getAllByRole('checkbox');
       expect(checkboxes.length).toBeGreaterThan(0);
     });
 
@@ -207,8 +207,9 @@ describe('TableView', () => {
         selectedRows: [row],
       });
 
-      const checkbox = document.querySelector('input[type="checkbox"]:checked');
-      expect(checkbox).toBeInTheDocument();
+      const checkboxes = screen.getAllByRole('checkbox') as HTMLInputElement[];
+      const checked = checkboxes.filter((c) => c.checked);
+      expect(checked.length).toBeGreaterThan(0);
     });
   });
 
@@ -224,9 +225,7 @@ describe('TableView', () => {
       });
 
       // Expand button/icon should be present
-      const expandButtons = document.querySelectorAll(
-        'button, [role="button"]',
-      );
+      const expandButtons = screen.getAllByRole('button');
       expect(expandButtons.length).toBeGreaterThan(0);
     });
 

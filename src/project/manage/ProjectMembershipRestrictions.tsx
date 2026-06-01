@@ -18,8 +18,9 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { usePermission } from '@/permissions/hooks';
+import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
+import { useUser } from '@/workspace/hooks';
 
 import { getInitialValues } from './restrictions/EditProjectMembershipRestrictionsDialog';
 
@@ -50,7 +51,7 @@ export const ProjectMembershipRestrictions: FC<
   ProjectMembershipRestrictionsProps
 > = ({ project }) => {
   const { openDialog } = useModal();
-  const hasPermission = usePermission();
+  const user = useUser();
 
   // Fetch customer data for inherited restrictions
   const {
@@ -69,7 +70,7 @@ export const ProjectMembershipRestrictions: FC<
     staleTime: STALE_TIME,
   });
 
-  const canEdit = hasPermission({
+  const canEdit = hasPermission(user, {
     permission: PermissionEnum.CREATE_PROJECT,
     customerId: project.customer_uuid,
   });

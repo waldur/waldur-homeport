@@ -1,9 +1,11 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client';
 
 import { getCategories } from '@/marketplace/common/api';
 import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 
 import { EditCategoryDialog } from './EditCategoryDialog';
 
@@ -44,6 +46,7 @@ describe('EditCategoryDialog', () => {
   });
 
   it('submits form successfully', async () => {
+    const user = userEvent.setup();
     vi.mocked(marketplaceProviderOfferingsUpdateDescription).mockResolvedValue(
       {} as any,
     );
@@ -54,13 +57,9 @@ describe('EditCategoryDialog', () => {
     });
 
     // Select Category 2
-    const select = screen.getByRole('combobox');
-    fireEvent.focus(select);
-    fireEvent.keyDown(select, { key: 'ArrowDown', code: 'ArrowDown' });
-    const option2 = await screen.findByText('Category 2');
-    fireEvent.click(option2);
+    await openAndSelectOption(user, /Category/i, 'Category 2');
 
-    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await user.click(screen.getByRole('button', { name: 'Save' }));
 
     await waitFor(() => {
       expect(

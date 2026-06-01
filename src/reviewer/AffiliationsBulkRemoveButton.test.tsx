@@ -1,4 +1,5 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { vi, describe, beforeEach, it, expect } from 'vitest';
 import { nestedReviewerProfileAffiliationsDestroy } from 'waldur-js-client';
 
@@ -39,9 +40,10 @@ describe('AffiliationsBulkRemoveButton', () => {
     expect(screen.getByText('Remove')).toBeDefined();
   });
 
-  it('shows confirmation dialog on click with correct details', () => {
+  it('shows confirmation dialog on click with correct details', async () => {
+    const user = userEvent.setup();
     renderButton();
-    fireEvent.click(screen.getByText('Remove'));
+    await user.click(screen.getByText('Remove'));
     expect(useModal().confirm).toHaveBeenCalled();
     const [title, body, options] = vi.mocked(useModal().confirm).mock.calls[0];
     expect(title).toBe('Remove selected affiliations');
@@ -55,13 +57,14 @@ describe('AffiliationsBulkRemoveButton', () => {
   });
 
   it('performs bulk removal on confirmation success', async () => {
+    const user = userEvent.setup();
     vi.mocked(useModal().confirm).mockResolvedValue(true);
     vi.mocked(nestedReviewerProfileAffiliationsDestroy).mockResolvedValue(
       {} as any,
     );
 
     renderButton();
-    fireEvent.click(screen.getByText('Remove'));
+    await user.click(screen.getByText('Remove'));
 
     await waitFor(() => {
       expect(nestedReviewerProfileAffiliationsDestroy).toHaveBeenCalledTimes(2);
@@ -83,6 +86,7 @@ describe('AffiliationsBulkRemoveButton', () => {
   });
 
   it('handles partial success correctly', async () => {
+    const user = userEvent.setup();
     vi.mocked(useModal().confirm).mockResolvedValue(true);
     const error = new Error('Failed to remove second one');
     vi.mocked(nestedReviewerProfileAffiliationsDestroy)
@@ -90,7 +94,7 @@ describe('AffiliationsBulkRemoveButton', () => {
       .mockRejectedValueOnce(error);
 
     renderButton();
-    fireEvent.click(screen.getByText('Remove'));
+    await user.click(screen.getByText('Remove'));
 
     await waitFor(() => {
       expect(useNotify().showSuccess).toHaveBeenCalledWith(
@@ -107,10 +111,11 @@ describe('AffiliationsBulkRemoveButton', () => {
   });
 
   it('does nothing when confirmation is cancelled', async () => {
+    const user = userEvent.setup();
     vi.mocked(useModal().confirm).mockRejectedValue(undefined);
 
     renderButton();
-    fireEvent.click(screen.getByText('Remove'));
+    await user.click(screen.getByText('Remove'));
 
     await waitFor(() => {
       expect(useModal().confirm).toHaveBeenCalled();

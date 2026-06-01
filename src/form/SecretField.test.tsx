@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 import { SecretField } from './SecretField';
@@ -25,7 +26,8 @@ describe('SecretField', () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
-  it('toggles password visibility when button is clicked', () => {
+  it('toggles password visibility when button is clicked', async () => {
+    const user = userEvent.setup();
     render(<SecretField {...defaultProps} />);
 
     const inputElement = screen.getByPlaceholderText(
@@ -37,13 +39,13 @@ describe('SecretField', () => {
     expect(inputElement.type).toBe('password');
 
     // Click the button to toggle visibility
-    fireEvent.click(buttonElement);
+    await user.click(buttonElement);
 
     // Input type should change to "text"
     expect(inputElement.type).toBe('text');
 
     // Click again to toggle back
-    fireEvent.click(buttonElement);
+    await user.click(buttonElement);
 
     // Input type should revert to "password"
     expect(inputElement.type).toBe('password');

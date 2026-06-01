@@ -36,7 +36,10 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
       <div className="d-flex flex-column align-items-center">
         {children}
         <div className="stepper stepper-pills d-flex flex-column w-100">
-          <div className="stepper-nav flex-wrap align-items-start justify-content-around w-100">
+          <div
+            className="stepper-nav flex-wrap align-items-start justify-content-around w-100"
+            role="list"
+          >
             {steps.map((step, i) => {
               const current =
                 !step.disabled &&
@@ -51,6 +54,9 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                     (step.completed ? ' completed' : current ? ' current' : '')
                   }
                   style={{ width: 100 / steps.length + '%' }}
+                  role="listitem"
+                  aria-current={current ? 'step' : undefined}
+                  aria-label={step.label}
                 >
                   <div className="stepper-wrapper d-flex flex-column align-items-center">
                     <div

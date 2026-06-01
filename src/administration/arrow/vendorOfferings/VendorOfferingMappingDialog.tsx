@@ -7,8 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
-import { AsyncSelect as Select } from '@/form/select';
+import { FormGroup, AsyncSelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -16,7 +15,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import {
   MappingFormData,
-  PlanSelect,
+  PlanSelectGroup,
   VendorNameSelect,
 } from './SharedMappingFields';
 
@@ -98,47 +97,45 @@ export const VendorOfferingMappingDialog: FC<
     <Form<MappingFormData>
       onSubmit={(values) => submitMutation.mutateAsync(values)}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid, values }) => (
-        <form onSubmit={handleSubmit}>
-          <FormWatcher />
-          <ModalDialog
-            title={
-              isEdit
-                ? translate('Edit vendor offering mapping')
-                : translate('Create vendor offering mapping')
-            }
-            footer={
-              <SubmitButton
-                disabled={invalid}
-                submitting={submitting}
-                label={isEdit ? translate('Save') : translate('Create')}
-              />
-            }
-          >
-            <div className="size-sm">
-              <Field
-                name="arrow_vendor_name"
-                label={translate('Arrow vendor name')}
-                description={translate(
-                  'Select from existing Arrow vendors or type a new name',
-                )}
-                component={FormGroup}
-                required
-                validate={required}
-              >
-                <VendorNameSelect
-                  settingsUuid={mapping?.settings_uuid || settings?.uuid}
-                  defaultOption={initialValues?.arrow_vendor_name}
+      render={({ handleSubmit, submitting, invalid, values }) => {
+        return (
+          <form onSubmit={handleSubmit}>
+            <FormWatcher />
+            <ModalDialog
+              title={
+                isEdit
+                  ? translate('Edit vendor offering mapping')
+                  : translate('Create vendor offering mapping')
+              }
+              footer={
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={isEdit ? translate('Save') : translate('Create')}
                 />
-              </Field>
-              <Field
-                name="offering"
-                label={translate('Waldur offering')}
-                component={FormGroup}
-                required
-                validate={required}
-              >
-                <Select
+              }
+            >
+              <div className="size-sm">
+                <Field
+                  name="arrow_vendor_name"
+                  label={translate('Arrow vendor name')}
+                  description={translate(
+                    'Select from existing Arrow vendors or type a new name',
+                  )}
+                  component={FormGroup}
+                  required
+                  validate={required}
+                >
+                  <VendorNameSelect
+                    settingsUuid={mapping?.settings_uuid || settings?.uuid}
+                    defaultOption={initialValues?.arrow_vendor_name}
+                  />
+                </Field>
+                <AsyncSelectGroup
+                  name="offering"
+                  label={translate('Waldur offering')}
+                  required
+                  validate={required}
                   loadOptions={loadOfferings}
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.uuid}
@@ -146,21 +143,12 @@ export const VendorOfferingMappingDialog: FC<
                     initialValues?.offering ? [initialValues.offering] : []
                   }
                 />
-              </Field>
-              <Field
-                name="plan"
-                label={translate('Plan')}
-                description={translate(
-                  'Billing plan to use for resources created from this vendor offering',
-                )}
-                component={FormGroup}
-              >
-                <PlanSelect offeringUuid={values.offering?.uuid} />
-              </Field>
-            </div>
-          </ModalDialog>
-        </form>
-      )}
+                <PlanSelectGroup offeringUuid={values.offering?.uuid} />
+              </div>
+            </ModalDialog>
+          </form>
+        );
+      }}
     />
   );
 };

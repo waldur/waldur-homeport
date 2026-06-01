@@ -16,7 +16,7 @@ const IPAddressRow = ({ address, onRemove }) => (
       <Field name={address} validate={validateIPv4}>
         {({ input, meta }) => (
           <>
-            <InputField {...input} />
+            <InputField {...input} aria-label={translate('IP address')} />
             <FieldError error={meta.touched && meta.error} />
           </>
         )}

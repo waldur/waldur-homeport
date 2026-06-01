@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
+import { useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -7,8 +8,6 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { SubmitButton } from './SubmitButton';
 
 interface FormFooterProps {
-  /** Whether form is currently submitting */
-  submitting: boolean;
   /** Submit button label - defaults to 'Submit' */
   submitLabel?: string;
   /** Cancel button label - defaults to 'Cancel' */
@@ -27,8 +26,6 @@ interface FormFooterProps {
   extraButtons?: ReactNode;
   /** Position of extra buttons - 'start' renders before cancel, 'end' renders after submit */
   extraButtonsPosition?: 'start' | 'end';
-  /** Pass invalid state to disable submit */
-  invalid?: boolean;
   /** Custom children for submit button (e.g., with icon) */
   submitChildren?: ReactNode;
 }
@@ -40,30 +37,27 @@ interface FormFooterProps {
  * @example
  * ```tsx
  * // Simple usage
- * <FormFooter submitting={submitting} />
+ * <FormFooter />
  *
  * // With custom labels
  * <FormFooter
- *   submitting={submitting}
  *   submitLabel={translate('Save')}
  *   cancelLabel={translate('Discard')}
  * />
  *
  * // Without cancel button
- * <FormFooter submitting={submitting} showCancel={false} />
+ * <FormFooter showCancel={false} />
  *
  * // Full-width buttons
- * <FormFooter submitting={submitting} fullWidth />
+ * <FormFooter fullWidth />
  *
  * // With extra buttons
  * <FormFooter
- *   submitting={submitting}
  *   extraButtons={<AcceptButton />}
  * />
  * ```
  */
 export const FormFooter: FC<FormFooterProps> = ({
-  submitting,
   submitLabel,
   cancelLabel,
   onCancel,
@@ -73,9 +67,9 @@ export const FormFooter: FC<FormFooterProps> = ({
   submitVariant = 'primary',
   extraButtons,
   extraButtonsPosition = 'start',
-  invalid,
   submitChildren,
 }) => {
+  const { submitting, invalid } = useFormState();
   const buttonClassName = fullWidth ? 'flex-equal' : undefined;
 
   return (

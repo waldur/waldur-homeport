@@ -14,6 +14,7 @@ import {
 import { useModal } from '@/modal/actions';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 
 import { MaintenanceSaveAsTemplateDialog } from './MaintenanceSaveAsTemplateDialog';
 
@@ -57,14 +58,12 @@ describe('MaintenanceSaveAsTemplateDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    vi.mocked(maintenanceAnnouncementsTemplateList).mockResolvedValue({
-      data: mockTemplates,
-      headers: { 'x-result-count': '1' },
-    } as any);
-    vi.mocked(maintenanceAnnouncementTemplateOfferingsList).mockResolvedValue({
-      data: [],
-      headers: { 'x-result-count': '0' },
-    } as any);
+    vi.mocked(maintenanceAnnouncementsTemplateList).mockResolvedValue(
+      mockListResponse(mockTemplates),
+    );
+    vi.mocked(maintenanceAnnouncementTemplateOfferingsList).mockResolvedValue(
+      mockListResponse([]),
+    );
   });
 
   it('renders correctly in create mode', async () => {
@@ -129,10 +128,9 @@ describe('MaintenanceSaveAsTemplateDialog', () => {
         impact_level: 'Low',
       },
     ];
-    vi.mocked(maintenanceAnnouncementTemplateOfferingsList).mockResolvedValue({
-      data: existingOfferings,
-      headers: { 'x-result-count': '1' },
-    } as any);
+    vi.mocked(maintenanceAnnouncementTemplateOfferingsList).mockResolvedValue(
+      mockListResponse(existingOfferings),
+    );
 
     const updateSpy = vi
       .mocked(maintenanceAnnouncementsTemplateUpdate)

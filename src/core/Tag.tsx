@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { forwardRef, PropsWithChildren } from 'react';
 
-import { RemoveFilterBadgeButton } from '@/table/TableFilterItem';
+import { RemoveFilterBadgeButton } from './RemoveFilterBadgeButton';
 
 interface TagProps {
   onClear?(e): void;

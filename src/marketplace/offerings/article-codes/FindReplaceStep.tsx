@@ -1,13 +1,12 @@
 import { FC, useState, useMemo } from 'react';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import {
   ArticleCodeUpdatePreviewRequest,
   marketplaceArticleCodeUpdatePreview,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton } from '@/form';
-import { StringField } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 import { Select, AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import {
@@ -83,26 +82,22 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
     <WizardModal {...props} renderFooter={renderFooter}>
       <div className="row">
         <div className="col-sm-6">
-          <FormGroup label={translate('Find')} required>
-            <Field
-              name="search"
-              component={StringField}
-              placeholder={translate('Substring to find...')}
-              validate={required}
-            />
-          </FormGroup>
+          <StringGroup
+            name="search"
+            placeholder={translate('Substring to find...')}
+            validate={required}
+            label={translate('Find')}
+            required
+          />
         </div>
         <div className="col-sm-6">
-          <FormGroup label={translate('Replace with')}>
-            <Field
-              name="replace"
-              component={StringField}
-              placeholder={translate('Replacement...')}
-            />
-          </FormGroup>
+          <StringGroup
+            name="replace"
+            placeholder={translate('Replacement...')}
+            label={translate('Replace with')}
+          />
         </div>
       </div>
-
       <FormGroup label={translate('Category')}>
         <AsyncSelect
           placeholder={translate('All categories')}
@@ -114,7 +109,6 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           isClearable
         />
       </FormGroup>
-
       <FormGroup label={translate('Service provider')}>
         <AsyncSelect
           placeholder={translate('All providers')}
@@ -126,7 +120,6 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           isClearable
         />
       </FormGroup>
-
       <div className="row">
         <div className="col-sm-6">
           <FormGroup label={translate('Offering state')}>
@@ -142,16 +135,13 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           </FormGroup>
         </div>
         <div className="col-sm-6">
-          <FormGroup label={translate('Offering name')}>
-            <Field
-              name="offering_name"
-              component={StringField}
-              placeholder={translate('Filter by name...')}
-            />
-          </FormGroup>
+          <StringGroup
+            name="offering_name"
+            placeholder={translate('Filter by name...')}
+            label={translate('Offering name')}
+          />
         </div>
       </div>
-
       {error && <div className="alert alert-warning mb-0 mt-4">{error}</div>}
     </WizardModal>
   );

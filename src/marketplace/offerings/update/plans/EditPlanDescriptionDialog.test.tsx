@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplacePlansUpdate } from 'waldur-js-client';
@@ -160,11 +160,11 @@ describe('EditPlanDescriptionDialog', () => {
     });
     mockPlansUpdate.mockImplementation(() => delayedPromise as any);
 
+    const user = userEvent.setup();
     renderComponent();
 
     const saveButton = screen.getByText('Save');
-    // Use fireEvent for synchronous click to catch the submitting state
-    fireEvent.click(saveButton);
+    const clickPromise = user.click(saveButton);
 
     // Button should be disabled during submission
     await waitFor(
@@ -176,6 +176,7 @@ describe('EditPlanDescriptionDialog', () => {
 
     // Resolve the promise to clean up
     resolvePromise!();
+    await clickPromise;
   });
 
   it('handles API errors gracefully', async () => {
