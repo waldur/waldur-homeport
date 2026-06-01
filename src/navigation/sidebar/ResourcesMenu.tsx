@@ -171,7 +171,7 @@ export const ResourcesMenu = ({
       entity?.uuid ? `${entity.uuid}::${entity.name ?? ''}` : undefined;
     return {
       project: encode(scope.project as any),
-      customer: encode(scope.customer as any),
+      organization: encode(scope.customer as any),
     };
   }, [scope]);
 
