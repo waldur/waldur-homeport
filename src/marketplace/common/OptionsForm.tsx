@@ -73,8 +73,9 @@ export const buildOptionValidator = (
     validators.push(customValidator);
   }
 
-  // Add required validator
-  if (option.required) {
+  // Boolean fields skip `required`: an unchecked switch is undefined, which
+  // `required` rejects, silently blocking submission.
+  if (option.required && option.type !== 'boolean') {
     validators.push(required);
   }
 
