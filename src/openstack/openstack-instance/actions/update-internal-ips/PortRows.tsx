@@ -1,11 +1,9 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { SelectField } from '@/form';
-import { FormGroup } from '@/form/FormGroup';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
 import { formatSubnet } from '@/openstack/openstack-instance/utils';
@@ -47,12 +45,11 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
           <Fragment key={index}>
             <Row className="g-4">
               <Col sm>
-                <Field
+                <SelectGroup
                   name={`${port}.subnet`}
                   label={translate('Subnet')}
                   validate={required}
                   required={true}
-                  component={FormGroup}
                   options={freeSubnets}
                   placeholder={translate('Select subnet')}
                   getOptionValue={(option) => option.url}
@@ -61,15 +58,14 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
                   components={{
                     ValueContainer: SubnetValueContainer,
                   }}
-                >
-                  <SelectField />
-                </Field>
+                />
               </Col>
               <Col xs="auto" className="align-self-end">
                 <ActionButton
                   action={() => fields.remove(index)}
                   iconNode={<TrashIcon weight="bold" />}
                   variant="text-danger"
+                  tooltip={translate('Remove')}
                 />
               </Col>
               {hasCustomIp && (

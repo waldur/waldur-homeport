@@ -1,6 +1,6 @@
 import { UserPlusIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   callManagingOrganisationsAddUser,
   customersAddUser,
@@ -13,10 +13,8 @@ import {
 import { required } from '@/core/validators';
 import { OrganizationProjectSelectField } from '@/customer/team/OrganizationProjectSelectField';
 import { usersAutocomplete } from '@/customer/team/utils';
-import { SubmitButton } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SubmitButton, BooleanGroup, AsyncSelectGroup } from '@/form';
 import { createLoadOptions } from '@/form/select';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { RestrictionsInfoCard } from '@/invitations/actions/RestrictionsInfoCard';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -254,7 +252,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
               }
             />
             <FormGroup label={translate('User')} required>
-              <AsyncSelectField
+              <AsyncSelectGroup
                 name="user"
                 key={values.showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
                 placeholder={translate('Select user...')}
@@ -280,13 +278,10 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             </FormGroup>
 
             {currentUser.is_staff && (
-              <FormGroup>
-                <Field
-                  name="showAllUsers"
-                  component={AwesomeCheckboxField}
-                  label={translate('Show users outside organization')}
-                />
-              </FormGroup>
+              <BooleanGroup
+                name="showAllUsers"
+                label={translate('Show users outside organization')}
+              />
             )}
             <RoleGroup
               types={

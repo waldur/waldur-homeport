@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import {
@@ -7,7 +6,7 @@ import {
   lessThanOrEqual,
   required,
 } from '@/core/validators';
-import { FormGroup, NumberField } from '@/form';
+import { NumberGroup } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
 
 export const ProjectAllocateCreditField: FC<{
@@ -28,7 +27,7 @@ export const ProjectAllocateCreditField: FC<{
     credits: organizationCredit ?? 0,
   };
   return (
-    <Field
+    <NumberGroup
       name="value"
       label={translate('Allocate credit ({currency})', {
         currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
@@ -48,13 +47,9 @@ export const ProjectAllocateCreditField: FC<{
       }
       validate={validate}
       required
-      component={FormGroup}
-    >
-      <NumberField
-        placeholder="0"
-        unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
-        data-testid="value"
-      />
-    </Field>
+      placeholder="0"
+      unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
+      data-testid="value"
+    />
   );
 };

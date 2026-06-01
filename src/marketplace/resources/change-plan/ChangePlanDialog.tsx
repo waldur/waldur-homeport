@@ -10,7 +10,8 @@ import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
-import { usePermission } from '@/permissions/hooks';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 import { FetchedData, loadData } from './utils';
 
@@ -24,8 +25,9 @@ interface ChangePlanDialogProps {
 }
 
 const ChangePlanComponent = (props: FetchedData & { refetch? }) => {
-  const hasPemission = usePermission();
-  const orderCanBeApproved = hasPemission({
+  const user = useUser();
+
+  const orderCanBeApproved = hasPermission(user, {
     permission: PermissionEnum.APPROVE_ORDER,
     customerId: props.resource.customer_uuid,
     projectId: props.resource.project_uuid,
@@ -52,13 +54,12 @@ const ChangePlanComponent = (props: FetchedData & { refetch? }) => {
         })
       }
       initialValues={props.initialValues}
-      render={({ handleSubmit, submitting }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Change resource plan')}
             footer={
               <FormFooter
-                submitting={submitting}
                 submitLabel={
                   orderCanBeApproved
                     ? translate('Submit')

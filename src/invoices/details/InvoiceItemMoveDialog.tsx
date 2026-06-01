@@ -1,11 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
-import { invoiceItemsMigrateTo, invoicesList } from 'waldur-js-client';
+import { useMemo } from 'react';
+import { Form } from 'react-final-form';
+import { Invoice, invoiceItemsMigrateTo, invoicesList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { UI_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { AsyncSelectGroup, FormFooter } from '@/form';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { useNotify } from '@/store/notify';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -16,7 +18,7 @@ export const InvoiceItemMoveDialog = ({
 }) => {
   const { showSuccess, showErrorResponse } = useNotify();
 
-  const mutation = useManagedMutation<any, any, { invoice: { url: string } }>({
+  const mutation = useManagedMutation<any, any, { invoice: Invoice }>({
     mutationFn: (formData) =>
       invoiceItemsMigrateTo({
         path: { uuid: resource.uuid },
@@ -54,52 +56,50 @@ export const InvoiceItemMoveDialog = ({
 
   const customer = useCustomer();
 
-  const asyncState = useQuery({
-    queryKey: ['invoicesForMove', customer?.url, invoice.url],
-    queryFn: async () => {
-      const invoices = await getAllPages((page) =>
-        invoicesList({
-          query: {
-            page,
-            page_size: MAX_PAGE_SIZE,
-            customer: customer.url,
-            field: ['url', 'number', 'year', 'month'],
-          },
-        }),
-      );
-      return {
-        invoices: invoices
-          .filter((currentInvoice) => currentInvoice.url !== invoice.url)
-          .map((invoice) => ({
-            label: formatDate(invoice),
-            value: invoice,
-          })),
-      };
-    },
-    staleTime: UI_STALE_TIME,
-  });
-
-  const fields = asyncState.data
-    ? [
-        {
-          name: 'invoice',
-          label: translate('Target invoice'),
-          type: 'select',
-          options: asyncState.data.invoices,
-        },
-      ]
-    : [];
+  const loadOptions = useMemo(
+    () =>
+      createLoadOptions(invoicesList, 'year', {
+        customer: customer?.url,
+        field: ['url', 'number', 'year', 'month'],
+      }),
+    [customer?.url],
+  );
 
   return (
-    <ResourceActionDialog
-      dialogTitle={translate('Move item {name} from invoice {origin}', {
-        name: resource.name,
-        origin: formatDate(invoice),
-      })}
-      formFields={fields}
-      loading={asyncState.isLoading}
-      error={asyncState.error}
-      submitForm={mutation.mutateAsync}
+    <Form<{ invoice: Invoice }>
+      onSubmit={async (values) => {
+        try {
+          await mutation.mutateAsync(values);
+        } catch {
+          // Handled by useManagedMutation
+        }
+      }}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Move item {name} from invoice {origin}', {
+              name: resource.name,
+              origin: formatDate(invoice),
+            })}
+            footer={<FormFooter />}
+          >
+            <AsyncSelectGroup
+              name="invoice"
+              label={translate('Target invoice')}
+              placeholder={translate('Select invoice...')}
+              loadOptions={loadOptions}
+              defaultOptions={true}
+              getOptionValue={(option) => option.url}
+              getOptionLabel={(option) => formatDate(option)}
+              isOptionDisabled={(option) => option.url === invoice.url}
+              noOptionsMessage={() => translate('No invoices')}
+              isClearable={false}
+              required={true}
+              validate={required}
+            />
+          </ModalDialog>
+        </form>
+      )}
     />
   );
 };

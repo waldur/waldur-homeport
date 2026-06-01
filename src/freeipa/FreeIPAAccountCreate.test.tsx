@@ -33,7 +33,7 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     expect(screen.getByText('Username')).toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
@@ -54,14 +54,13 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     // After refactoring, help text is shown as a tooltip with question mark icon
-    const svg = document.querySelector('svg[viewBox="0 0 256 256"]');
-    expect(svg).toBeInTheDocument();
+    expect(screen.getByTestId('question-icon')).toBeInTheDocument();
   });
 
   it('should validate required username field', async () => {
     renderComponent();
 
-    const usernameInput = screen.getByRole('textbox');
+    const usernameInput = screen.getByLabelText(/Username/i);
     const submitButton = screen.getByRole('button');
 
     // Clear the input to test validation
@@ -76,7 +75,7 @@ describe('FreeIPAAccountCreate', () => {
   it('should validate username pattern', async () => {
     renderComponent();
 
-    const usernameInput = screen.getByRole('textbox');
+    const usernameInput = screen.getByLabelText(/Username/i);
     const submitButton = screen.getByRole('button');
 
     // Test invalid username pattern
@@ -94,7 +93,7 @@ describe('FreeIPAAccountCreate', () => {
   it('should validate minimum username length', async () => {
     renderComponent();
 
-    const usernameInput = screen.getByRole('textbox');
+    const usernameInput = screen.getByLabelText(/Username/i);
     const submitButton = screen.getByRole('button');
 
     // Test username too short
@@ -112,7 +111,7 @@ describe('FreeIPAAccountCreate', () => {
   it('should validate maximum username length with prefix', async () => {
     renderComponent();
 
-    const usernameInput = screen.getByRole('textbox');
+    const usernameInput = screen.getByLabelText(/Username/i);
     const submitButton = screen.getByRole('button');
 
     // Test username too long (32 - 5 prefix = 27 max, so 28 should fail)
@@ -137,7 +136,7 @@ describe('FreeIPAAccountCreate', () => {
 
     renderComponent();
 
-    const usernameInput = screen.getByRole('textbox');
+    const usernameInput = screen.getByLabelText(/Username/i);
     const submitButton = screen.getByRole('button');
 
     // Enter valid username
@@ -161,7 +160,7 @@ describe('FreeIPAAccountCreate', () => {
 
     renderComponent();
 
-    const usernameInput = screen.getByRole('textbox');
+    const usernameInput = screen.getByLabelText(/Username/i);
     const submitButton = screen.getByRole('button');
 
     // Enter valid username

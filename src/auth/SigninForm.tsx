@@ -3,12 +3,11 @@ import { Field, Form } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { format } from '@/core/ErrorMessageFormatter';
-import { SubmitButton } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import * as AuthService from './AuthService';
-import { InputGroup } from './InputGroup';
+import { PasswordGroup } from './PasswordGroup';
 
 interface FormData {
   signin_by: 'username' | 'token';
@@ -103,47 +102,35 @@ export const SigninForm = () => (
 
           {values.signin_by === 'username' ? (
             <>
-              <FormGroup
+              <StringGroup
+                name="username"
                 label={translate('Username')}
+                placeholder={translate('Enter your username')}
                 className="text-start"
                 spaceless
-              >
-                <InputGroup
-                  fieldName="username"
-                  placeholder={translate('Enter your username')}
-                  type="text"
-                  autoFocus
-                />
-              </FormGroup>
-              <FormGroup
+                autoFocus
+              />
+              <PasswordGroup
+                name="password"
                 label={translate('Password')}
+                placeholder={translate('Enter your password')}
                 className="text-start"
                 space={8}
-              >
-                <InputGroup
-                  fieldName="password"
-                  placeholder={translate('Enter your password')}
-                  type="password"
-                />
-              </FormGroup>
+              />
             </>
           ) : (
-            <FormGroup
+            <PasswordGroup
+              name="token"
               label={translate('Access token')}
               description={translate(
                 'Use a personal access token issued by {siteName}',
                 { siteName: ENV.plugins.WALDUR_CORE.SITE_NAME },
               )}
+              placeholder={translate('Paste here your token')}
               className="text-start"
               space={8}
-            >
-              <InputGroup
-                fieldName="token"
-                placeholder={translate('Paste here your token')}
-                type="password"
-                autoFocus
-              />
-            </FormGroup>
+              autoFocus
+            />
           )}
 
           <SubmitButton

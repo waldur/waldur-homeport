@@ -32,7 +32,6 @@ export const ImportYAMLDialog: FC<ImportYAMLDialogProps> = ({
       render={({ handleSubmit, submitting, invalid }) => (
         <ActionDialogFinal
           title={translate('Import YAML')}
-          submitLabel={translate('Submit')}
           onSubmit={handleSubmit}
           submitting={submitting}
           invalid={invalid}

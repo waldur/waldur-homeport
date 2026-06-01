@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FC } from 'react';
 import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
@@ -59,7 +60,8 @@ describe('EditModalButton', () => {
     expect(screen.getByText('Update')).toBeInTheDocument();
   });
 
-  it('calls buildResolve with row to create resolve props', () => {
+  it('calls buildResolve with row to create resolve props', async () => {
+    const user = userEvent.setup();
     const buildResolve = vi.fn((row: MockRow) => ({
       uuid: row.uuid,
       refetch: vi.fn(),
@@ -73,7 +75,7 @@ describe('EditModalButton', () => {
       />,
     );
 
-    fireEvent.click(screen.getByText('Edit'));
+    await user.click(screen.getByText('Edit'));
 
     expect(buildResolve).toHaveBeenCalledWith(mockRow);
     expect(mockOpenDialog).toHaveBeenCalledWith(
@@ -84,7 +86,8 @@ describe('EditModalButton', () => {
     );
   });
 
-  it('calls getInitialValues with row', () => {
+  it('calls getInitialValues with row', async () => {
+    const user = userEvent.setup();
     const getInitialValues = vi.fn((row: MockRow) => ({
       name: row.name,
       description: '',
@@ -99,7 +102,7 @@ describe('EditModalButton', () => {
       />,
     );
 
-    fireEvent.click(screen.getByText('Edit'));
+    await user.click(screen.getByText('Edit'));
 
     expect(getInitialValues).toHaveBeenCalledWith(mockRow);
     expect(mockOpenDialog).toHaveBeenCalledWith(
@@ -110,7 +113,8 @@ describe('EditModalButton', () => {
     );
   });
 
-  it('opens dialog with correct size', () => {
+  it('opens dialog with correct size', async () => {
+    const user = userEvent.setup();
     render(
       <EditModalButton
         dialog={MockDialog}
@@ -120,7 +124,7 @@ describe('EditModalButton', () => {
       />,
     );
 
-    fireEvent.click(screen.getByText('Edit'));
+    await user.click(screen.getByText('Edit'));
 
     expect(mockOpenDialog).toHaveBeenCalledWith(
       MockDialog,
@@ -157,7 +161,8 @@ describe('EditModalButton', () => {
     expect(screen.getByRole('button')).toBeDisabled();
   });
 
-  it('uses default size lg when not specified', () => {
+  it('uses default size lg when not specified', async () => {
+    const user = userEvent.setup();
     render(
       <EditModalButton
         dialog={MockDialog}
@@ -166,7 +171,7 @@ describe('EditModalButton', () => {
       />,
     );
 
-    fireEvent.click(screen.getByText('Edit'));
+    await user.click(screen.getByText('Edit'));
 
     expect(mockOpenDialog).toHaveBeenCalledWith(
       MockDialog,

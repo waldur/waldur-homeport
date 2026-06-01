@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceOfferingRolesList,
   marketplaceResourceProjectsAddUser,
@@ -9,9 +9,8 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SelectField, SubmitButton } from '@/form';
+import { SubmitButton, SelectGroup, AsyncSelectGroup } from '@/form';
 import { createLoadOptions } from '@/form/select';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -104,29 +103,28 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
               </>
             }
           >
-            <FormGroup label={translate('User')} required>
-              <AsyncSelectField
-                name="user"
-                placeholder={translate('Select user...')}
-                loadOptions={loadUsers}
-                getOptionLabel={({ full_name, email }) =>
-                  `${full_name} (${email})`
-                }
-                getOptionValue={({ uuid }) => uuid}
-                validate={required}
-              />
-            </FormGroup>
+            <AsyncSelectGroup
+              label={translate('User')}
+              required
+              name="user"
+              placeholder={translate('Select user...')}
+              loadOptions={loadUsers}
+              getOptionLabel={({ full_name, email }) =>
+                `${full_name} (${email})`
+              }
+              getOptionValue={({ uuid }) => uuid}
+              validate={required}
+            />
             {filteredRoles.length > 0 ? (
-              <FormGroup label={translate('Role')} required>
-                <Field
-                  name="role"
-                  validate={required}
-                  component={SelectField}
-                  options={filteredRoles}
-                  getOptionValue={(option) => option.uuid}
-                  getOptionLabel={(option) => option.name}
-                />
-              </FormGroup>
+              <SelectGroup
+                name="role"
+                validate={required}
+                options={filteredRoles}
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.name}
+                label={translate('Role')}
+                required
+              />
             ) : (
               <FormGroup label={translate('Role')} required>
                 <p className="text-muted mb-0">

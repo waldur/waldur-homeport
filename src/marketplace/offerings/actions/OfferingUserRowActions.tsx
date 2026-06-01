@@ -86,7 +86,6 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
 
         canUpdateRestrictedStatus ? RestrictOfferingUserButton : null,
       ].filter(Boolean)}
-      data-cy="offering-users-list-actions-dropdown-btn"
     />
   );
 };

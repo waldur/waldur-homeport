@@ -1,13 +1,12 @@
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   reviewerProfilesMePartialUpdate,
   reviewerProfilesPartialUpdate,
   ReviewerProfile,
 } from 'waldur-js-client';
 
-import { SubmitButton, TextField, StringField } from '@/form';
+import { SubmitButton, TextGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -65,24 +64,16 @@ export const ProfileEditFieldDialog: React.FC<ProfileEditFieldDialogProps> = ({
             }
           >
             {resolve.name === 'biography' ? (
-              <FormGroup label={resolve.label}>
-                <Field name="biography" component={TextField} rows={4} />
-              </FormGroup>
+              <TextGroup name="biography" rows={4} label={resolve.label} />
             ) : resolve.name === 'orcid_id' ? (
-              <FormGroup
+              <StringGroup
+                name="orcid_id"
+                placeholder="0000-0000-0000-0000"
                 label={resolve.label}
                 description={translate('Format: 0000-0000-0000-0000')}
-              >
-                <Field
-                  name="orcid_id"
-                  component={StringField}
-                  placeholder="0000-0000-0000-0000"
-                />
-              </FormGroup>
+              />
             ) : (
-              <FormGroup label={resolve.label}>
-                <Field name={resolve.name} component={StringField} />
-              </FormGroup>
+              <StringGroup name={resolve.name} label={resolve.label} />
             )}
           </ModalDialog>
         </form>

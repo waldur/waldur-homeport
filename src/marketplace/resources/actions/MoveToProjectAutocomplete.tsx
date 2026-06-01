@@ -1,18 +1,12 @@
 import { FunctionComponent } from 'react';
 
 import { required } from '@/core/validators';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { moveToProjectAutocomplete } from '@/marketplace/common/autocompletes';
 
-interface MoveToProjectAutocompleteProps {
-  isDisabled: boolean;
-}
-
-export const MoveToProjectAutocomplete: FunctionComponent<
-  MoveToProjectAutocompleteProps
-> = ({ isDisabled }) => (
-  <AsyncSelectField
+export const MoveToProjectAutocomplete: FunctionComponent = () => (
+  <AsyncSelectGroup
     name="project"
     label={translate('Move to project')}
     validate={required}
@@ -22,6 +16,5 @@ export const MoveToProjectAutocomplete: FunctionComponent<
     getOptionValue={(option) => option.url}
     getOptionLabel={(option) => `${option.customer_name} / ${option.name}`}
     noOptionsMessage={() => translate('No projects')}
-    isDisabled={isDisabled}
   />
 );

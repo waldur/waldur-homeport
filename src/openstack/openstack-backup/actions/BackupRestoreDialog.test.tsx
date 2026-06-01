@@ -14,6 +14,7 @@ import {
 
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 
 import { BackupRestoreDialog } from './BackupRestoreDialog';
 
@@ -79,23 +80,22 @@ const fakeFlavors = [
 ] as unknown as OpenStackFlavor[];
 
 const renderDialog = async () => {
-  const result = renderWithProviders(
+  renderWithProviders(
     <BackupRestoreDialog resolve={{ resource: fakeBackup }} />,
   );
   await waitFor(() =>
     expect(screen.queryByTestId('spinner')).not.toBeInTheDocument(),
   );
-  return result;
 };
 
 describe('BackupRestoreDialog', () => {
   beforeEach(() => {
-    vi.mocked(openstackFlavorsList).mockResolvedValue({ data: [] } as any);
-    vi.mocked(openstackFloatingIpsList).mockResolvedValue({ data: [] } as any);
-    vi.mocked(openstackSecurityGroupsList).mockResolvedValue({
-      data: [],
-    } as any);
-    vi.mocked(openstackSubnetsList).mockResolvedValue({ data: [] } as any);
+    vi.mocked(openstackFlavorsList).mockResolvedValue(mockListResponse([]));
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue(mockListResponse([]));
+    vi.mocked(openstackSecurityGroupsList).mockResolvedValue(
+      mockListResponse([]),
+    );
+    vi.mocked(openstackSubnetsList).mockResolvedValue(mockListResponse([]));
   });
 
   it('renders current instance name in modal dialog title', async () => {
@@ -161,9 +161,9 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('renders security groups correctly', async () => {
-    vi.mocked(openstackSecurityGroupsList).mockResolvedValue({
-      data: fakeBackup.instance_security_groups,
-    } as any);
+    vi.mocked(openstackSecurityGroupsList).mockResolvedValue(
+      mockListResponse(fakeBackup.instance_security_groups),
+    );
     await renderDialog();
 
     const securityGroupsSelect = screen.getByLabelText('Security groups');
@@ -181,20 +181,20 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('renders networks section correctly', async () => {
-    vi.mocked(openstackSubnetsList).mockResolvedValue({
-      data: [fakeSubnet],
-    } as any);
-    const { container } = await renderDialog();
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([fakeSubnet]),
+    );
+    await renderDialog();
 
     expect(screen.getByText(/Networks/i)).toBeInTheDocument();
-    const networkRows = container.querySelectorAll('tbody tr');
-    expect(networkRows).toHaveLength(fakeBackup.instance_ports.length);
+    const subnets = screen.getAllByLabelText('Subnet');
+    expect(subnets).toHaveLength(fakeBackup.instance_ports.length);
   });
 
   it('disabled add network button when subnets are not available', async () => {
-    vi.mocked(openstackSubnetsList).mockResolvedValue({
-      data: [fakeSubnet],
-    } as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([fakeSubnet]),
+    );
     await renderDialog();
 
     const addButton = screen.getByRole('button', { name: /Add/i });
@@ -202,9 +202,9 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('enables add network button when subnets are available', async () => {
-    vi.mocked(openstackSubnetsList).mockResolvedValue({
-      data: [fakeSubnet, freeSubnet],
-    } as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([fakeSubnet, freeSubnet]),
+    );
     await renderDialog();
 
     const addButton = screen.getByRole('button', { name: /Add/i });
@@ -212,38 +212,39 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('allows adding and removing network rows', async () => {
-    vi.mocked(openstackSubnetsList).mockResolvedValue({
-      data: [fakeSubnet, freeSubnet],
-    } as any);
-    const { container } = await renderDialog();
+    const user = userEvent.setup();
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([fakeSubnet, freeSubnet]),
+    );
+    await renderDialog();
 
     const addButton = screen.getByRole('button', { name: /Add/i });
-    await userEvent.click(addButton);
+    await user.click(addButton);
 
-    let networkRows = container.querySelectorAll('tbody tr');
-    expect(networkRows).toHaveLength(fakeBackup.instance_ports.length + 1);
-
-    // Delete buttons are icon-only buttons in the table rows
-    const deleteButtons = container.querySelectorAll(
-      'tbody button.btn-text-secondary',
+    expect(screen.getAllByLabelText('Subnet')).toHaveLength(
+      fakeBackup.instance_ports.length + 1,
     );
-    await userEvent.click(deleteButtons[0]);
 
-    networkRows = container.querySelectorAll('tbody tr');
-    expect(networkRows).toHaveLength(fakeBackup.instance_ports.length);
+    const deleteButtons = screen.getAllByRole('button', { name: /Delete/i });
+    await user.click(deleteButtons[0]);
+
+    expect(screen.getAllByLabelText('Subnet')).toHaveLength(
+      fakeBackup.instance_ports.length,
+    );
   });
 
   it('shows success notification with correct message on successful submit', async () => {
-    vi.mocked(openstackFlavorsList).mockResolvedValue({
-      data: fakeFlavors,
-    } as any);
+    const user = userEvent.setup();
+    vi.mocked(openstackFlavorsList).mockResolvedValue(
+      mockListResponse(fakeFlavors),
+    );
     vi.mocked(openstackBackupsRestore).mockResolvedValue({ data: null } as any);
     await renderDialog();
 
     // Select flavor and submit
-    await userEvent.click(screen.getByLabelText('Flavor'));
-    await userEvent.click(screen.getByText(/m1.xsmall/i));
-    await userEvent.click(screen.getByRole('button', { name: /Submit/i }));
+    await user.click(screen.getByLabelText('Flavor'));
+    await user.click(screen.getByText(/m1.xsmall/i));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     expect(useNotify().showSuccess).toHaveBeenCalledWith(
       'VM snapshot restoration has been scheduled.',
@@ -251,17 +252,18 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('shows error notification with correct message on failed submit', async () => {
+    const user = userEvent.setup();
     const error = new Error('API Error');
-    vi.mocked(openstackFlavorsList).mockResolvedValue({
-      data: fakeFlavors,
-    } as any);
+    vi.mocked(openstackFlavorsList).mockResolvedValue(
+      mockListResponse(fakeFlavors),
+    );
     vi.mocked(openstackBackupsRestore).mockRejectedValue(error);
     await renderDialog();
 
     // Select flavor and submit
-    await userEvent.click(screen.getByLabelText('Flavor'));
-    await userEvent.click(screen.getByText(/m1.xsmall/i));
-    await userEvent.click(screen.getByRole('button', { name: /Submit/i }));
+    await user.click(screen.getByLabelText('Flavor'));
+    await user.click(screen.getByText(/m1.xsmall/i));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
       error,
@@ -270,20 +272,21 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('submits form with correct data', async () => {
-    vi.mocked(openstackFlavorsList).mockResolvedValue({
-      data: fakeFlavors,
-    } as any);
+    const user = userEvent.setup();
+    vi.mocked(openstackFlavorsList).mockResolvedValue(
+      mockListResponse(fakeFlavors),
+    );
     vi.mocked(openstackBackupsRestore).mockResolvedValue({ data: null } as any);
     await renderDialog();
 
     // Select flavor
     const flavorSelect = screen.getByLabelText('Flavor');
-    await userEvent.click(flavorSelect);
-    await userEvent.click(screen.getByText(/m1.xsmall/i));
+    await user.click(flavorSelect);
+    await user.click(screen.getByText(/m1.xsmall/i));
 
     // Submit form
     const submitButton = screen.getByRole('button', { name: /Submit/i });
-    await userEvent.click(submitButton);
+    await user.click(submitButton);
 
     expect(vi.mocked(openstackBackupsRestore)).toHaveBeenCalledWith({
       path: { uuid: fakeBackup.uuid },
@@ -309,18 +312,16 @@ describe('BackupRestoreDialog', () => {
       { address: '2.2.2.2', url: 'url2' },
     ];
 
-    vi.mocked(openstackFloatingIpsList).mockResolvedValue({
-      data: floatingIps,
-    } as any);
-    vi.mocked(openstackSubnetsList).mockResolvedValue({
-      data: [fakeSubnet],
-    } as any);
-
-    const { container } = await renderDialog();
-
-    const floatingIpSelect = container.querySelector(
-      '[name="networks[0].floating_ip"]',
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue(
+      mockListResponse(floatingIps),
     );
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([fakeSubnet]),
+    );
+
+    await renderDialog();
+
+    const floatingIpSelect = screen.getByLabelText('Floating IP');
     expect(floatingIpSelect).toBeInTheDocument();
 
     const options = within(floatingIpSelect as HTMLElement).getAllByRole(
@@ -332,28 +333,27 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('submits form with floating IP when selected', async () => {
-    vi.mocked(openstackFlavorsList).mockResolvedValue({
-      data: fakeFlavors,
-    } as any);
-    vi.mocked(openstackFloatingIpsList).mockResolvedValue({
-      data: [{ address: '1.1.1.1', url: 'floating_ip_url' }],
-    } as any);
+    const user = userEvent.setup();
+    vi.mocked(openstackFlavorsList).mockResolvedValue(
+      mockListResponse(fakeFlavors),
+    );
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue(
+      mockListResponse([{ address: '1.1.1.1', url: 'floating_ip_url' }]),
+    );
     vi.mocked(openstackBackupsRestore).mockResolvedValue({ data: null } as any);
 
-    const { container } = await renderDialog();
+    await renderDialog();
 
     // Select flavor
-    await userEvent.click(screen.getByLabelText('Flavor'));
-    await userEvent.click(screen.getByText(/m1.xsmall/i));
+    await user.click(screen.getByLabelText('Flavor'));
+    await user.click(screen.getByText(/m1.xsmall/i));
 
     // Select floating IP
-    const floatingIpSelect = container.querySelector(
-      '[name="networks[0].floating_ip"]',
-    );
-    await userEvent.selectOptions(floatingIpSelect, 'floating_ip_url');
+    const floatingIpSelect = screen.getByLabelText('Floating IP');
+    await user.selectOptions(floatingIpSelect, 'floating_ip_url');
 
     // Submit form
-    await userEvent.click(screen.getByRole('button', { name: /Submit/i }));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     expect(vi.mocked(openstackBackupsRestore)).toHaveBeenCalledWith({
       path: { uuid: fakeBackup.uuid },
@@ -369,10 +369,11 @@ describe('BackupRestoreDialog', () => {
   });
 
   it('handles refetch callback after successful submit', async () => {
+    const user = userEvent.setup();
     const refetch = vi.fn();
-    vi.mocked(openstackFlavorsList).mockResolvedValue({
-      data: fakeFlavors,
-    } as any);
+    vi.mocked(openstackFlavorsList).mockResolvedValue(
+      mockListResponse(fakeFlavors),
+    );
     vi.mocked(openstackBackupsRestore).mockResolvedValue({ data: null } as any);
 
     renderWithProviders(
@@ -384,9 +385,9 @@ describe('BackupRestoreDialog', () => {
     );
 
     // Select flavor and submit
-    await userEvent.click(screen.getByLabelText('Flavor'));
-    await userEvent.click(screen.getByText(/m1.xsmall/i));
-    await userEvent.click(screen.getByRole('button', { name: /Submit/i }));
+    await user.click(screen.getByLabelText('Flavor'));
+    await user.click(screen.getByText(/m1.xsmall/i));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     expect(refetch).toHaveBeenCalled();
   });

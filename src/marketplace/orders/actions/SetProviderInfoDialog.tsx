@@ -9,8 +9,7 @@ import {
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { decodeFileName } from '@/core/utils';
-import { SubmitButton, TextField } from '@/form';
-import { StringField } from '@/form/StringField';
+import { SubmitButton, TextGroup, StringGroup } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
@@ -91,20 +90,16 @@ export const SetProviderInfoDialog: FC<SetProviderInfoDialogProps> = ({
               </>
             }
           >
-            <FormGroup label={translate('Message')}>
-              <Field
-                name="provider_message"
-                component={TextField}
-                placeholder={translate('Enter a message for the customer...')}
-              />
-            </FormGroup>
-            <FormGroup label={translate('URL')}>
-              <Field
-                name="provider_message_url"
-                component={StringField}
-                placeholder="https://"
-              />
-            </FormGroup>
+            <TextGroup
+              name="provider_message"
+              placeholder={translate('Enter a message for the customer...')}
+              label={translate('Message')}
+            />
+            <StringGroup
+              name="provider_message_url"
+              placeholder="https://"
+              label={translate('URL')}
+            />
             <FormGroup label={translate('Attachment (PDF)')}>
               <Field name="provider_message_attachment">
                 {({ input }) => (

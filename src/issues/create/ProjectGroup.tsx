@@ -1,37 +1,9 @@
 import { useEffect, useMemo } from 'react';
-import { Field, useFormState, useForm } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 
-import { FormGroup } from '@/form';
-import { AsyncSelect as AsyncSelectField } from '@/form/select';
-import { Select } from '@/form/select';
+import { AsyncSelectGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { projectAutocomplete } from '@/marketplace/common/autocompletes';
-
-const StaticProjectSelect = ({
-  input,
-  project,
-}: {
-  input?: any;
-  project: any;
-}) => (
-  <Select
-    getOptionValue={(option) => option.uuid}
-    getOptionLabel={(option) => option.name}
-    options={
-      project
-        ? [
-            {
-              name: project.name,
-              uuid: project.uuid,
-              url: project.url,
-            },
-          ]
-        : []
-    }
-    value={input?.value}
-    isDisabled
-  />
-);
 
 export const ProjectGroup = ({ disabled }) => {
   const form = useForm();
@@ -53,27 +25,43 @@ export const ProjectGroup = ({ disabled }) => {
     [customer?.uuid],
   );
 
+  if (!disabled && customer) {
+    return (
+      <AsyncSelectGroup
+        key={customer.uuid}
+        name="project"
+        label={translate('Project')}
+        containerClassName="flex-equal"
+        isClearable={true}
+        defaultOptions
+        loadOptions={loadProjects}
+        getOptionValue={(option) => option.uuid}
+        getOptionLabel={(option) => option.name}
+        filterOption={null}
+        isDisabled={disabled}
+      />
+    );
+  }
+
   return (
-    <Field
+    <SelectGroup
       name="project"
-      component={FormGroup}
       label={translate('Project')}
       containerClassName="flex-equal"
-    >
-      {!disabled && customer ? (
-        <AsyncSelectField
-          isClearable={true}
-          defaultOptions
-          loadOptions={loadProjects}
-          getOptionValue={(option) => option.uuid}
-          getOptionLabel={(option) => option.name}
-          filterOption={null}
-          isDisabled={disabled}
-          key={customer.uuid}
-        />
-      ) : (
-        <StaticProjectSelect project={project} />
-      )}
-    </Field>
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={(option) => option.name}
+      options={
+        project
+          ? [
+              {
+                name: project.name,
+                uuid: project.uuid,
+                url: project.url,
+              },
+            ]
+          : []
+      }
+      isDisabled
+    />
   );
 };

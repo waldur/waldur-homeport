@@ -1,10 +1,7 @@
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { InputField } from '@/form/InputField';
+import { BooleanGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../../FormGroup';
 
 import { ChoicesOptionConfig } from './ChoicesOptionConfig';
 import { ComponentMultiplierConfiguration } from './ComponentMultiplierConfiguration';
@@ -41,20 +38,11 @@ export const OptionForm = ({ resourceType, offering }) => {
     <>
       <InternalNameField />
       <DisplayNameField />
-
-      <FormGroup label={translate('Description')}>
-        <Field name="help_text" type="text" component={InputField} />
-      </FormGroup>
+      <StringGroup label={translate('Description')} name="help_text" />
       <OptionTypeGroup />
       {OptionComponent && <OptionComponent offering={offering} />}
       {resourceType === 'options' ? (
-        <FormGroup>
-          <Field
-            name="required"
-            component={AwesomeCheckboxField}
-            label={translate('Required')}
-          />
-        </FormGroup>
+        <BooleanGroup name="required" label={translate('Required')} />
       ) : null}
     </>
   );

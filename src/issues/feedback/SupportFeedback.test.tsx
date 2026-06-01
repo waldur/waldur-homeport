@@ -1,13 +1,16 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportFeedbacksCreate } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
+import { renderWithProviders } from '@/test/harness';
 
 import { SupportFeedback } from './SupportFeedback';
 
 describe('SupportFeedback', () => {
+  const user = userEvent.setup();
   const mockRouter = {
     globals: {
       params: {
@@ -26,7 +29,7 @@ describe('SupportFeedback', () => {
   });
 
   it('renders with initial values from router', () => {
-    render(<SupportFeedback />);
+    renderWithProviders(<SupportFeedback />);
 
     expect(screen.getByText('Evaluation')).toBeInTheDocument();
     expect(screen.getByText('Comment')).toBeInTheDocument();
@@ -35,13 +38,13 @@ describe('SupportFeedback', () => {
 
   it('submits correctly', async () => {
     vi.mocked(supportFeedbacksCreate).mockResolvedValue({ data: {} } as any);
-    render(<SupportFeedback />);
+    renderWithProviders(<SupportFeedback />);
 
     const commentInput = screen.getByLabelText('Comment');
-    fireEvent.change(commentInput, { target: { value: 'Great service' } });
+    await user.type(commentInput, 'Great service');
 
     const submitBtn = screen.getByRole('button', { name: /Submit/i });
-    fireEvent.click(submitBtn);
+    await user.click(submitBtn);
 
     await waitFor(() => {
       expect(supportFeedbacksCreate).toHaveBeenCalledWith({
@@ -61,9 +64,9 @@ describe('SupportFeedback', () => {
   it('handles submission error', async () => {
     const error = new Error('API Error');
     vi.mocked(supportFeedbacksCreate).mockRejectedValue(error);
-    render(<SupportFeedback />);
+    renderWithProviders(<SupportFeedback />);
 
-    fireEvent.click(screen.getByRole('button', { name: /Submit/i }));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
 
     await waitFor(() => {
       expect(useNotify().showErrorResponse).toHaveBeenCalledWith(

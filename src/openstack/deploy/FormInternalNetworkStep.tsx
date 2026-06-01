@@ -1,15 +1,13 @@
-import { Field } from 'react-final-form';
 import { useToggle } from 'react-use';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
-import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BooleanGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { OpenStackAllocationPool } from '../OpenStackAllocationPool';
-import { OpenStackSubnetField } from '../OpenStackSubnetField';
 import { validatePrivateCIDR } from '../utils';
 
 export const FormInternalNetworkStep = (props: FormStepProps) => {
@@ -33,44 +31,31 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
         </div>
       }
     >
-      <Field
+      <StringGroup
         name="attributes.subnet_cidr"
-        component={FormGroup}
         label={translate('Internal network mask (CIDR)')}
         validate={validatePrivateCIDR}
-      >
-        <OpenStackSubnetField />
-      </Field>
-      <Field
-        name="attributes.subnet_allocation_pool"
-        component={FormGroup}
+      />
+      <FormGroup
+        id="attributes.subnet_allocation_pool"
         label={translate('Internal network allocation pool')}
       >
         <OpenStackAllocationPool />
-      </Field>
+      </FormGroup>
       {advancedEnabled && (
         <>
-          <Field
+          <BooleanGroup
             name="attributes.skip_creation_of_default_router"
-            component={FormGroup}
-          >
-            <AwesomeCheckboxField
-              label={translate('Skip creation of default router')}
-            />
-          </Field>
-          <Field name="attributes.skip_connection_extnet" component={FormGroup}>
-            <AwesomeCheckboxField
-              label={translate('Skip connection to external network')}
-            />
-          </Field>
-          <Field
+            label={translate('Skip creation of default router')}
+          />
+          <BooleanGroup
+            name="attributes.skip_connection_extnet"
+            label={translate('Skip connection to external network')}
+          />
+          <BooleanGroup
             name="attributes.skip_creation_of_default_subnet"
-            component={FormGroup}
-          >
-            <AwesomeCheckboxField
-              label={translate('Skip creation of default subnet')}
-            />
-          </Field>
+            label={translate('Skip creation of default subnet')}
+          />
         </>
       )}
     </VStepperFormStepCard>

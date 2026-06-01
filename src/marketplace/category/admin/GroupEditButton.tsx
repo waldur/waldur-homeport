@@ -2,8 +2,8 @@ import { EditModalButton } from '@/core/buttons';
 import { lazyComponent } from '@/core/lazyComponent';
 
 const GroupEditDialog = lazyComponent(() =>
-  import('./GroupFromDialog').then((module) => ({
-    default: module.GroupFromDialog,
+  import('./CategoryGroupDialog').then((module) => ({
+    default: module.CategoryGroupDialog,
   })),
 );
 

@@ -1,7 +1,10 @@
 import React, { FC, ReactNode } from 'react';
 import { OverlayTrigger, Tooltip, Card } from 'react-bootstrap';
 import { Field, Form, useFormState } from 'react-final-form';
-import { openstackTenantsSetQuotas } from 'waldur-js-client';
+import {
+  openstackTenantsSetQuotas,
+  OpenstackTenantsSetQuotasData,
+} from 'waldur-js-client';
 
 import { DirtyStateReporter } from '@/core/DirtyFormContext';
 import { WarnTip } from '@/core/WarnTip';
@@ -386,7 +389,7 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
 
   const setQuotasMutation = useManagedMutation<any, any, SetQuotasFormValues>({
     mutationFn: (formValues) => {
-      const body: Record<string, number> = {};
+      const body: OpenstackTenantsSetQuotasData['body'] = {};
 
       // Static settable quotas
       for (const name of SETTABLE_QUOTAS) {
@@ -413,7 +416,7 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
     },
     successMessage: translate('Quota update has been scheduled.'),
     errorMessage: translate('Unable to update quotas.'),
-    refetch: refetch ? () => refetch() : undefined,
+    refetch,
   });
 
   return (

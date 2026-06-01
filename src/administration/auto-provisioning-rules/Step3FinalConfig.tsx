@@ -2,7 +2,7 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { FormContainer, TextField } from '@/form';
+import { TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
@@ -10,7 +10,7 @@ export const Step3FinalConfig: FC<WizardFormStepProps> = (props) => {
   const { submitting } = useFormState({ subscription: { submitting: true } });
   return (
     <WizardForm {...props}>
-      <FormContainer submitting={submitting} className="size-lg">
+      <div className="size-lg">
         <div
           className="alert alert-warning d-flex align-items-center"
           role="alert"
@@ -25,12 +25,13 @@ export const Step3FinalConfig: FC<WizardFormStepProps> = (props) => {
           </span>
         </div>
 
-        <TextField
+        <TextGroup
           name="attributes.description"
           maxLength={1000}
           label={translate('Description')}
+          disabled={submitting}
         />
-      </FormContainer>
+      </div>
     </WizardForm>
   );
 };

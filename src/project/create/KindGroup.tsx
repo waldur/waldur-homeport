@@ -1,12 +1,9 @@
-import { Field } from 'react-final-form';
-
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { projectKindOptions } from '../utils';
 
@@ -21,14 +18,13 @@ export const KindGroup = ({ create }: { create?: boolean }) => {
   }
 
   return (
-    <FormGroup label={translate('Project kind')} required>
-      <Field
-        component={SelectField}
-        name="kind"
-        options={kindOptions}
-        validate={required}
-        simpleValue
-      />
-    </FormGroup>
+    <SelectGroup
+      name="kind"
+      options={kindOptions}
+      validate={required}
+      simpleValue
+      label={translate('Project kind')}
+      required
+    />
   );
 };

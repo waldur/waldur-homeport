@@ -16,8 +16,7 @@ import {
 import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
-import { SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/select';
+import { SubmitButton, AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -240,7 +239,7 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
               <label className="form-label fw-semibold">
                 {translate('Target user')}
               </label>
-              <AsyncSelectField
+              <AsyncSelectGroup
                 name="user"
                 validate={required}
                 onChange={() => {

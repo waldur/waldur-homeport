@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 
 import { CreateSubnetDialog } from './CreateSubnetDialog';
 
@@ -73,10 +74,11 @@ describe('CreateSubnetDialog', () => {
 
   it('renders and selects network when showNetworkField is true', async () => {
     const user = userEvent.setup();
-    vi.mocked(openstackNetworksList).mockResolvedValue({
-      data: [{ name: 'Selected Network', uuid: 'selected-network-uuid' }],
-      headers: { 'x-result-count': '1' },
-    } as any);
+    vi.mocked(openstackNetworksList).mockResolvedValue(
+      mockListResponse([
+        { name: 'Selected Network', uuid: 'selected-network-uuid' },
+      ]),
+    );
     vi.mocked(openstackNetworksCreateSubnet).mockResolvedValue({} as any);
 
     renderDialog(fakeResource, true);
@@ -114,6 +116,50 @@ describe('CreateSubnetDialog', () => {
           description: 'Full description',
           gateway_ip: '192.168.42.1',
           disable_gateway: true,
+        }),
+      });
+    });
+  });
+
+  it('submits complex array fields (host_routes, dns_nameservers, allocation_pools)', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackNetworksCreateSubnet).mockResolvedValue({} as any);
+    renderDialog();
+
+    await user.type(screen.getByLabelText(/Name/), 'array-subnet');
+
+    // Add Host Route
+    await user.click(screen.getByRole('button', { name: /Add route/i }));
+    const destInput = screen.getByRole('textbox', {
+      name: 'Destination (CIDR)',
+    });
+    const nexthopInput = screen.getByRole('textbox', { name: 'Next hop (IP)' });
+    await user.type(destInput, '10.10.10.0/24');
+    await user.type(nexthopInput, '192.168.42.254');
+
+    // Add DNS Nameserver
+    await user.click(screen.getByRole('button', { name: /Add address/i }));
+    const dnsInput = screen.getByRole('textbox', { name: 'IP address' });
+    await user.type(dnsInput, '8.8.8.8');
+
+    // Modify Allocation Pool (Default pool is already added)
+    await user.clear(screen.getByPlaceholderText('Start IP'));
+    await user.type(screen.getByPlaceholderText('Start IP'), '192.168.42.50');
+    await user.clear(screen.getByPlaceholderText('End IP'));
+    await user.type(screen.getByPlaceholderText('End IP'), '192.168.42.100');
+
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    await waitFor(() => {
+      expect(openstackNetworksCreateSubnet).toHaveBeenCalledWith({
+        path: { uuid: 'network-uuid' },
+        body: expect.objectContaining({
+          name: 'array-subnet',
+          host_routes: [
+            { destination: '10.10.10.0/24', nexthop: '192.168.42.254' },
+          ],
+          dns_nameservers: ['8.8.8.8'],
+          allocation_pools: [{ start: '192.168.42.50', end: '192.168.42.100' }],
         }),
       });
     });

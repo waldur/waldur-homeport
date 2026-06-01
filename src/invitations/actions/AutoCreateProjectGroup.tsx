@@ -1,10 +1,8 @@
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BooleanGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 const NameTemplateTooltip = () => (
   <div className="text-start py-1">
@@ -33,67 +31,42 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
 
   return (
     <>
-      <FormGroup>
-        <Field
-          name="auto_create_project"
-          render={({ input }) => (
-            <AwesomeCheckboxField
-              label={translate('Auto-create project')}
-              alignMiddle
-              disabled={values?.type === 'public' || disabled}
-              input={input}
-            />
-          )}
-        />
-      </FormGroup>
+      <BooleanGroup
+        name="auto_create_project"
+        label={translate('Auto-create project')}
+        alignMiddle
+        disabled={values?.type === 'public' || disabled}
+      />
       {values?.auto_create_project && (
         <>
-          <FormGroup
+          <StringGroup
+            name="project_name_template"
+            placeholder={translate('e.g. {full_name} Research project')}
+            disabled={disabled}
+            validate={required}
             label={translate('Project name template')}
             required
             description={translate(
               'Use variables like {full_name}, {email} to create dynamic project names',
             )}
             help={<NameTemplateTooltip />}
-          >
-            <Field
-              name="project_name_template"
-              component={StringField}
-              placeholder={translate('e.g. {full_name} Research project')}
-              disabled={disabled}
-              validate={required}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Field
-              name="allow_custom_project_details"
-              render={({ input }) => (
-                <AwesomeCheckboxField
-                  label={translate(
-                    'Allow users to provide custom project name and description',
-                  )}
-                  alignMiddle
-                  disabled={disabled}
-                  input={input}
-                />
-              )}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Field
-              name="allow_multiple_requests"
-              render={({ input }) => (
-                <AwesomeCheckboxField
-                  label={translate(
-                    'Allow users to create multiple projects from this invitation',
-                  )}
-                  alignMiddle
-                  disabled={disabled}
-                  input={input}
-                />
-              )}
-            />
-          </FormGroup>
+          />
+          <BooleanGroup
+            name="allow_custom_project_details"
+            label={translate(
+              'Allow users to provide custom project name and description',
+            )}
+            alignMiddle
+            disabled={disabled}
+          />
+          <BooleanGroup
+            name="allow_multiple_requests"
+            label={translate(
+              'Allow users to create multiple projects from this invitation',
+            )}
+            alignMiddle
+            disabled={disabled}
+          />
         </>
       )}
     </>

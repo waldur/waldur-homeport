@@ -3,7 +3,7 @@ import { useFormState } from 'react-final-form';
 
 import { formatISOWithoutZone } from '@/core/dateUtils';
 import { required } from '@/core/validators';
-import { FormContainer, NumberField, SelectField } from '@/form';
+import { SelectGroup, NumberGroup } from '@/form';
 import { DateTimeField } from '@/form/DateTimeField';
 import { translate } from '@/i18n';
 import {
@@ -23,8 +23,8 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
   const showMinAverageScoring = values?.deciding_entity != 'by_call_manager';
   return (
     <WizardForm {...props}>
-      <FormContainer submitting={submitting}>
-        <SelectField
+      <div className="size-sm">
+        <SelectGroup
           name="deciding_entity"
           label={translate('Deciding entity')}
           simpleValue={true}
@@ -32,17 +32,19 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
           required={true}
           isClearable={false}
           validate={required}
+          disabled={submitting}
         />
 
         {showMinAverageScoring && (
-          <NumberField
+          <NumberGroup
             label={translate('Minimum average scoring for allocation')}
             name="minimal_average_scoring"
             required
             validate={required}
+            disabled={submitting}
           />
         )}
-        <SelectField
+        <SelectGroup
           name="allocation_time"
           label={translate('Allocation time')}
           simpleValue={true}
@@ -50,6 +52,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
           required={true}
           isClearable={false}
           validate={required}
+          disabled={submitting}
         />
 
         {showAllocationDate && (
@@ -63,7 +66,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
             format={(value) => (value ? new Date(value) : value)}
           />
         )}
-      </FormContainer>
+      </div>
     </WizardForm>
   );
 };

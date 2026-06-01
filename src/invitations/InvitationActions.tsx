@@ -16,7 +16,6 @@ export const InvitationActions = ({ invitation, refetch }) => {
         InvitationCancelButton,
         user.is_staff ? InvitationDeleteButton : null,
       ].filter(Boolean)}
-      data-cy="invitations-list-actions-dropdown-btn"
     />
   );
 };

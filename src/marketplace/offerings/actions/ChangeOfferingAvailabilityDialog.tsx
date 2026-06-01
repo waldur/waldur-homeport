@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsMakeAvailable,
   marketplaceProviderOfferingsMakeUnavailable,
@@ -9,9 +9,8 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -160,19 +159,16 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
               </p>
             )}
             <OfferingResourcesTable offering={offering} />
-            <FormGroup>
-              <Field
-                name="reason"
-                component={TextField}
-                as="textarea"
-                placeholder={
-                  offering.state === 'Unavailable'
-                    ? translate('Optional reason (displayed in logs)')
-                    : translate('Optional reason (displayed to users)')
-                }
-                rows={3}
-              />
-            </FormGroup>
+            <TextGroup
+              name="reason"
+              as="textarea"
+              placeholder={
+                offering.state === 'Unavailable'
+                  ? translate('Optional reason (displayed in logs)')
+                  : translate('Optional reason (displayed to users)')
+              }
+              rows={3}
+            />
           </ModalDialog>
         </form>
       )}

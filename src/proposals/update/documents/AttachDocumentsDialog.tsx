@@ -5,8 +5,7 @@ import { proposalProtectedCallsAttachDocuments } from 'waldur-js-client';
 import { formDataOptions } from '@/core/api';
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { format } from '@/core/ErrorMessageFormatter';
-import { FormContainer, SubmitButton } from '@/form';
-import { StringField } from '@/form/StringField';
+import { SubmitButton, StringGroup } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
@@ -152,7 +151,7 @@ export const AttachDocumentsDialog: FC<AttachDocumentsProps> = ({
               </>
             }
           >
-            <FormContainer submitting={submitting}>
+            <div className="size-sm">
               <UploadContainer
                 onDrop={onDrop}
                 disabled={submitting}
@@ -178,16 +177,17 @@ export const AttachDocumentsDialog: FC<AttachDocumentsProps> = ({
               />
 
               {pendingFiles.map((file, index) => (
-                <StringField
+                <StringGroup
                   key={index}
                   name={`description-${index}`}
                   label={translate('Description for {file}', {
                     file: file.file.name,
                   })}
                   required={false}
+                  disabled={submitting}
                 />
               ))}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

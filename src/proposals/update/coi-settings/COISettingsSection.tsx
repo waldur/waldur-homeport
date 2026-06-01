@@ -75,6 +75,7 @@ const detectionRows = [
     description: translate(
       'Number of years to search for shared publications between reviewers and proposal team members',
     ),
+    type: 'number' as const,
   },
   {
     label: translate('Co-authorship threshold'),
@@ -87,6 +88,7 @@ const detectionRows = [
     description: translate(
       'Minimum number of shared publications required to trigger a co-authorship conflict',
     ),
+    type: 'number' as const,
   },
   {
     label: translate('Institutional lookback'),
@@ -97,6 +99,7 @@ const detectionRows = [
     description: translate(
       'Number of years to consider past institutional affiliations when detecting conflicts',
     ),
+    type: 'number' as const,
   },
   {
     label: translate('Detect same department'),
@@ -107,6 +110,7 @@ const detectionRows = [
     description: translate(
       'Flag a conflict when reviewer and proposal team member are in the same department',
     ),
+    type: 'boolean' as const,
   },
   {
     label: translate('Detect same institution'),
@@ -117,6 +121,7 @@ const detectionRows = [
     description: translate(
       'Flag a conflict when reviewer and proposal team member are at the same institution',
     ),
+    type: 'boolean' as const,
   },
 ];
 
@@ -132,6 +137,7 @@ const automationRows = [
     description: translate(
       'Automatically scan publication records to identify co-authorship relationships',
     ),
+    type: 'boolean' as const,
   },
   {
     label: translate('Auto-detect institutional'),
@@ -144,6 +150,7 @@ const automationRows = [
     description: translate(
       'Automatically compare institutional affiliations between reviewers and proposal teams',
     ),
+    type: 'boolean' as const,
   },
   {
     label: translate('Auto-detect named personnel'),
@@ -156,6 +163,7 @@ const automationRows = [
     description: translate(
       'Automatically check if a reviewer is named as personnel on any proposal',
     ),
+    type: 'boolean' as const,
   },
 ];
 
@@ -169,6 +177,7 @@ const typeRows = [
     description: translate(
       'Conflict types that require the reviewer to withdraw from reviewing the proposal entirely',
     ),
+    type: 'array' as const,
   },
   {
     label: translate('Types allowing management plan'),
@@ -179,6 +188,7 @@ const typeRows = [
     description: translate(
       'Conflict types where the reviewer may continue with an approved management plan',
     ),
+    type: 'array' as const,
   },
   {
     label: translate('Types requiring disclosure only'),
@@ -189,6 +199,7 @@ const typeRows = [
     description: translate(
       'Conflict types that only need to be disclosed but do not require further action',
     ),
+    type: 'array' as const,
   },
 ];
 
@@ -203,6 +214,7 @@ const invitationRows = [
     description: translate(
       'Controls how much proposal information is disclosed to reviewers in invitations. This helps reviewers assess potential conflicts of interest before accepting.',
     ),
+    type: 'select' as const,
   },
 ];
 
@@ -303,6 +315,9 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
                           call={call}
                           name={row.key}
                           title={row.title}
+                          label={row.label}
+                          description={row.description}
+                          type={row.type}
                           refetch={refetch}
                           disabled={isReadOnly}
                         />

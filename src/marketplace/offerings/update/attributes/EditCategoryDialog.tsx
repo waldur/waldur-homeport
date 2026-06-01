@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormFooter, FormGroup, SelectField } from '@/form';
+import { FormFooter, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -52,37 +52,27 @@ export const EditCategoryDialog: FC<EditCategoryDialogProps> = ({
     <Form
       onSubmit={(values) => submitRequestMutation.mutateAsync(values)}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Edit category')}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid}
-                submitLabel={translate('Save')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Save')} />}
           >
             {queryData.isLoading ? (
               <LoadingSpinner />
             ) : queryData.isError ? (
               <LoadingErred loadData={queryData.refetch} />
             ) : (
-              <Field
+              <SelectGroup
                 name="category"
                 label={translate('Category')}
-                component={FormGroup}
                 required={true}
                 validate={required}
-              >
-                <SelectField
-                  options={queryData.data}
-                  isClearable={false}
-                  getOptionValue={(option) => option.url}
-                  getOptionLabel={(option) => option.title}
-                />
-              </Field>
+                options={queryData.data}
+                isClearable={false}
+                getOptionValue={(option) => option.url}
+                getOptionLabel={(option) => option.title}
+              />
             )}
           </ModalDialog>
         </form>

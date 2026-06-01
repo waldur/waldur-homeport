@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceResourcesRenew,
@@ -42,6 +43,7 @@ describe('RenewAllocationDialog', () => {
     renderWithProviders(<RenewAllocationDialog resolve={props} />);
 
   it('renders and submits single resource renewal', async () => {
+    const user = userEvent.setup();
     vi.mocked(marketplaceResourcesRenew).mockResolvedValue({} as any);
 
     renderDialog({ resource, refetch: mockRefetch });
@@ -50,7 +52,7 @@ describe('RenewAllocationDialog', () => {
       await screen.findByText('Renew allocation for Resource 1'),
     ).toBeDefined();
 
-    fireEvent.click(screen.getByText('Submit'));
+    await user.click(screen.getByText('Submit'));
 
     await waitFor(() => {
       expect(marketplaceResourcesRenew).toHaveBeenCalledWith(
@@ -72,6 +74,7 @@ describe('RenewAllocationDialog', () => {
   });
 
   it('handles multi-resource renewal', async () => {
+    const user = userEvent.setup();
     vi.mocked(marketplaceResourcesRenew).mockResolvedValue({} as any);
     const resources = [
       { ...resource, uuid: 'res-1', marketplace_resource_uuid: 'm-res-1' },
@@ -83,7 +86,7 @@ describe('RenewAllocationDialog', () => {
     expect(
       await screen.findByText('Renew selected allocations (2)'),
     ).toBeDefined();
-    fireEvent.click(screen.getByText('Submit'));
+    await user.click(screen.getByText('Submit'));
 
     await waitFor(() => {
       expect(marketplaceResourcesRenew).toHaveBeenCalledTimes(2);

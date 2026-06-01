@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -7,7 +7,8 @@ import {
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
-import { openAndSelectOptionInContainer } from '@/test/select';
+import { openAndSelectOption } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 
 import { MultiMoveDialog } from './MultiMoveDialog';
 
@@ -31,7 +32,7 @@ describe('MultiMoveDialog', () => {
     });
 
     expect(screen.getByText('Mass move resources')).toBeInTheDocument();
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByLabelText('Move to project')).toBeInTheDocument();
     expect(screen.getByText('Save')).toBeInTheDocument();
   });
 
@@ -41,27 +42,21 @@ describe('MultiMoveDialog', () => {
     vi.mocked(marketplaceResourcesMoveResource).mockResolvedValue({
       data: {},
     } as any);
-    vi.mocked(projectsList).mockResolvedValue({
-      data: [
+    vi.mocked(projectsList).mockResolvedValue(
+      mockListResponse([
         { name: 'Project 1', url: 'project-url-1', customer_name: 'Org 1' },
-      ],
-      response: {
-        headers: new Headers({ 'x-result-count': '1' }),
-      },
-    } as any);
+      ]),
+    );
 
     renderComponent({
       resolve: { rows: mockRows, refetch },
     });
 
     // Select project
-    const container = screen
-      .getByRole('combobox')
-      .closest('.metronic-select-container');
-    await openAndSelectOptionInContainer(user, container, 'Org 1 / Project 1');
+    await openAndSelectOption(user, 'Move to project', 'Org 1 / Project 1');
 
     // Click Save
-    fireEvent.click(screen.getByText('Save'));
+    await user.click(screen.getByRole('button', { name: 'Save' }));
 
     await waitFor(() => {
       expect(refetch).toHaveBeenCalled();

@@ -42,7 +42,12 @@ const SubnetField = ({ name, subnets, networks, network }) => {
   );
 
   return (
-    <Field name={`${name}.subnet`} component="select" className="form-control">
+    <Field
+      name={`${name}.subnet`}
+      component="select"
+      className="form-control"
+      aria-label={translate('Subnet')}
+    >
       {freeSubnets.map((option, index) => (
         <option value={option.value} key={index}>
           {option.label}
@@ -63,6 +68,7 @@ const FloatingIpField = ({ name, floatingIps, networks, network }) => {
       name={`${name}.floating_ip`}
       component="select"
       className="form-control"
+      aria-label={translate('Floating IP')}
     >
       {freeFloatingIps.map((option, index) => (
         <option value={option.value} key={index}>

@@ -22,7 +22,6 @@ export const CourseAccountActions: FC<{ row: CourseAccount; refetch }> = ({
       refetch={refetch}
       disabled={!canManageCourseAccount}
       actions={[CourseAccountDeleteAction]}
-      data-cy="course-account-actions-dropdown-btn"
     />
   );
 };

@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { RancherHpa, rancherHpasUpdate } from 'waldur-js-client';
 
-import { StringField, SelectField, NumberField, TextField } from '@/form';
+import { StringGroup, TextGroup, NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -84,55 +84,49 @@ export const HPAUpdateDialog: FC<HPAUpdateDialogProps> = (props) => {
         return (
           <ActionDialogFinal
             title={translate('Update horizontal pod autoscaler')}
-            submitLabel={translate('Submit')}
             onSubmit={handleSubmit}
             submitting={submitting || isPending}
             invalid={invalid}
           >
-            <StringField
+            <StringGroup
               name="name"
               label={translate('Name')}
               required={true}
             />
-            <TextField
+            <TextGroup
               name="description"
               label={translate('Description')}
               required={false}
             />
-
-            <NumberField
+            <NumberGroup
               name="min_replicas"
               label={translate('Min replicas')}
               required={true}
               min={1}
               max={10}
             />
-
-            <NumberField
+            <NumberGroup
               name="max_replicas"
               label={translate('Max replicas')}
               required={true}
               min={1}
               max={10}
             />
-
-            <SelectField
+            <SelectGroup
               name="metric_name"
               label={translate('Metric name')}
               required={true}
               options={metricNameOptions}
               isClearable={true}
             />
-
-            <SelectField
+            <SelectGroup
               name="target_type"
               label={translate('Target type')}
               required={true}
               options={targetTypeOptions}
               isClearable={true}
             />
-
-            <NumberField
+            <NumberGroup
               name="quantity"
               label={translate('Quantity')}
               required={true}

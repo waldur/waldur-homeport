@@ -1,4 +1,5 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { PermissionRequestActionDialog } from './PermissionRequestActionDialog';
@@ -13,6 +14,8 @@ vi.mock('./useUserPermissionRequestActions', () => ({
 }));
 
 describe('PermissionRequestActionDialog', () => {
+  const user = userEvent.setup();
+
   const permissionRequest = {
     uuid: 'test-uuid',
     created_by_full_name: 'John Doe',
@@ -92,10 +95,10 @@ describe('PermissionRequestActionDialog', () => {
       />,
     );
 
-    fireEvent.change(screen.getByLabelText('Reason'), {
-      target: { value: 'Looks good' },
-    });
-    fireEvent.click(screen.getByText('Approve'));
+    const input = screen.getByLabelText('Reason');
+    await user.clear(input);
+    await user.type(input, 'Looks good');
+    await user.click(screen.getByText('Approve'));
 
     await waitFor(() => {
       expect(mockApprove).toHaveBeenCalledWith('Looks good');
@@ -109,10 +112,10 @@ describe('PermissionRequestActionDialog', () => {
       />,
     );
 
-    fireEvent.change(screen.getByLabelText('Reason'), {
-      target: { value: 'Not eligible' },
-    });
-    fireEvent.click(screen.getByText('Decline'));
+    const input = screen.getByLabelText('Reason');
+    await user.clear(input);
+    await user.type(input, 'Not eligible');
+    await user.click(screen.getByText('Decline'));
 
     await waitFor(() => {
       expect(mockReject).toHaveBeenCalledWith('Not eligible');
@@ -131,8 +134,8 @@ describe('PermissionRequestActionDialog', () => {
       />,
     );
 
-    expect(screen.getByText('Approve').closest('button')).toBeDisabled();
-    expect(screen.getByText('Decline').closest('button')).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Approve' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Decline' })).toBeDisabled();
   });
 
   it('renders in readOnly mode', () => {

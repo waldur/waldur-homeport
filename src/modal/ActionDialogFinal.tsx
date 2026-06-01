@@ -1,13 +1,13 @@
 import React, { PropsWithChildren } from 'react';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { FormContainer, FieldError, FormFooter } from '@/form';
+import { FieldError, FormFooter } from '@/form';
 
 import { ModalDialog } from './ModalDialog';
 
 interface ActionDialogProps {
   title?: string;
-  submitLabel: string;
+  submitLabel?: string;
   submitting?: boolean;
   loading?: boolean;
   invalid?: boolean;
@@ -24,9 +24,7 @@ export const ActionDialogFinal: React.FC<
       title={props.title}
       footer={
         <FormFooter
-          submitting={props.submitting}
           submitLabel={props.submitLabel}
-          invalid={props.invalid}
           fullWidth={props.fullButtons}
         />
       }
@@ -34,9 +32,7 @@ export const ActionDialogFinal: React.FC<
       {props.loading ? (
         <LoadingSpinner />
       ) : (
-        <FormContainer submitting={props.submitting} className="col-l">
-          {props.children}
-        </FormContainer>
+        <div className="col-l">{props.children}</div>
       )}
 
       <FieldError error={props.error} />

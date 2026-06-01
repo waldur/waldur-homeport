@@ -1,4 +1,4 @@
-import { screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { marketplacePlansCreate } from 'waldur-js-client';
@@ -156,8 +156,7 @@ describe('AddPlanDialog', () => {
     await openAndSelectOption(user, /Billing period/, 'Per month');
 
     const createButton = screen.getByText('Create');
-    // Use fireEvent for synchronous click to catch the submitting state
-    fireEvent.click(createButton);
+    const clickPromise = user.click(createButton);
 
     // Button should be disabled during submission
     await waitFor(
@@ -169,5 +168,6 @@ describe('AddPlanDialog', () => {
 
     // Resolve the promise to clean up
     resolvePromise!();
+    await clickPromise;
   });
 });

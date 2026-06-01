@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
+import { Form } from 'react-final-form';
 import {
   OpenStackPool,
   openstackLoadbalancersRetrieve,
@@ -8,10 +9,12 @@ import {
 
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { AsyncSelectGroup, FormFooter, NumberGroup, StringGroup } from '@/form';
+import { NameGroup } from '@/form/NameGroup';
 import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { createLatinNameField } from '@/resource/actions/base';
-import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 
 import { subnetAutocomplete } from '../subnetAutocomplete';
@@ -61,53 +64,56 @@ export const CreateMemberDialog: FC<ActionDialogProps<OpenStackPool>> = ({
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <ResourceActionDialog
-      dialogTitle={translate('Add member')}
-      submitForm={async (values) => {
+    <Form
+      onSubmit={async (values) => {
         try {
           await createMutation.mutateAsync(values);
         } catch {
           // Handled by useManagedMutation
         }
       }}
-      formFields={[
-        { ...createLatinNameField(), required: false },
-        {
-          name: 'address',
-          label: translate('IP address'),
-          type: 'string',
-          required: true,
-        },
-        {
-          name: 'protocol_port',
-          label: translate('Port'),
-          type: 'integer',
-          minValue: 1,
-          maxValue: 65535,
-          required: true,
-        },
-        {
-          name: 'weight',
-          label: translate('Weight'),
-          type: 'integer',
-          minValue: 0,
-          maxValue: 256,
-          required: false,
-        },
-        {
-          name: 'subnet',
-          label: translate('Subnet'),
-          type: 'async_select',
-          placeholder: translate('Select subnet...'),
-          loadOptions: subnetAutocomplete(loadBalancer?.tenant_uuid || ''),
-          defaultOptions: true,
-          getOptionValue: (option) => option.uuid,
-          getOptionLabel: (option) =>
-            option.cidr ? `${option.name} (${option.cidr})` : option.name,
-          noOptionsMessage: () => translate('No subnets'),
-          required: true,
-        },
-      ]}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog title={translate('Add member')} footer={<FormFooter />}>
+            <NameGroup required={false} />
+            <StringGroup
+              name="address"
+              label={translate('IP address')}
+              required={true}
+              validate={required}
+            />
+            <NumberGroup
+              name="protocol_port"
+              label={translate('Port')}
+              required={true}
+              min={1}
+              max={65535}
+              validate={required}
+            />
+            <NumberGroup
+              name="weight"
+              label={translate('Weight')}
+              required={false}
+              min={0}
+              max={256}
+            />
+            <AsyncSelectGroup
+              name="subnet"
+              label={translate('Subnet')}
+              required={true}
+              placeholder={translate('Select subnet...')}
+              loadOptions={subnetAutocomplete(loadBalancer?.tenant_uuid || '')}
+              defaultOptions={true}
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) =>
+                option.cidr ? `${option.name} (${option.cidr})` : option.name
+              }
+              noOptionsMessage={() => translate('No subnets')}
+              validate={required}
+            />
+          </ModalDialog>
+        </form>
+      )}
     />
   );
 };

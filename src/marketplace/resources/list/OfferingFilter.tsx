@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { resourceOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -9,7 +9,7 @@ export const OfferingFilter: React.FC<{
   name?;
 }> = ({ category_uuid, name = 'offering' }) => {
   return (
-    <AsyncSelectField
+    <AsyncSelectGroup
       name={name}
       label={translate('Offering')}
       placeholder={translate('Select offering...')}

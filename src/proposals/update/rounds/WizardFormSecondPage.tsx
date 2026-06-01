@@ -3,7 +3,7 @@ import { useFormState } from 'react-final-form';
 
 import { formatDateTime, parseDate } from '@/core/dateUtils';
 import { required } from '@/core/validators';
-import { FormContainer, NumberField, SelectField } from '@/form';
+import { SelectGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getRoundReviewStrategyOptions } from '@/proposals/utils';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
@@ -23,8 +23,8 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
   }, [cutoff_time, review_duration_in_days]);
   return (
     <WizardForm {...props}>
-      <FormContainer submitting={submitting}>
-        <SelectField
+      <div className="size-sm">
+        <SelectGroup
           name="review_strategy"
           label={translate('Review strategy')}
           simpleValue={true}
@@ -32,21 +32,24 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
           required={true}
           isClearable={false}
           validate={required}
+          disabled={submitting}
         />
-        <NumberField
+        <NumberGroup
           label={translate('Review duration (days)')}
           name="review_duration_in_days"
           required
           validate={required}
+          disabled={submitting}
         />
-        <NumberField
+        <NumberGroup
           label={translate('Minimum number of reviewers')}
           name="minimum_number_of_reviewers"
           required
           validate={required}
+          disabled={submitting}
         />
         {translate('Latest review completion date')}: {latestReviewDate}
-      </FormContainer>
+      </div>
     </WizardForm>
   );
 };

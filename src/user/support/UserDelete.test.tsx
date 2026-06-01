@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { usersDestroy } from 'waldur-js-client';
@@ -14,11 +15,13 @@ vi.mock('@/navigation/useTabs', () => ({
 }));
 
 describe('UserDelete', () => {
-  let user;
+  const user = userEvent.setup();
+
+  let mockUser;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    user = {
+    mockUser = {
       uuid: 'test-uuid',
       full_name: 'Test User',
     };
@@ -27,7 +30,7 @@ describe('UserDelete', () => {
   });
 
   const renderComponent = () => {
-    return renderWithProviders(<UserDelete user={user} />);
+    return renderWithProviders(<UserDelete user={mockUser} />);
   };
 
   it('handles user deletion successfully', async () => {
@@ -35,7 +38,7 @@ describe('UserDelete', () => {
     vi.mocked(usersDestroy).mockResolvedValueOnce(null);
 
     renderComponent();
-    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    await user.click(screen.getByRole('button', { name: 'Delete' }));
 
     await waitFor(() => {
       expect(useModal().confirm).toHaveBeenCalled();
@@ -55,7 +58,7 @@ describe('UserDelete', () => {
     vi.mocked(useModal().confirm).mockRejectedValueOnce(null);
 
     renderComponent();
-    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    await user.click(screen.getByRole('button', { name: 'Delete' }));
 
     await waitFor(() => {
       expect(useModal().confirm).toHaveBeenCalled();
@@ -69,7 +72,7 @@ describe('UserDelete', () => {
     vi.mocked(usersDestroy).mockRejectedValueOnce(new Error('Test error'));
 
     renderComponent();
-    fireEvent.click(screen.getByRole('button', { name: 'Delete' }));
+    await user.click(screen.getByRole('button', { name: 'Delete' }));
 
     await waitFor(() => {
       expect(useModal().confirm).toHaveBeenCalled();

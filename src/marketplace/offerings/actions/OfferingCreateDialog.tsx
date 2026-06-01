@@ -11,8 +11,12 @@ import {
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import {
+  SubmitButton,
+  AsyncSelectGroup,
+  StringGroup,
+  SelectGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -126,9 +130,9 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
             iconNode={<PlusCircleIcon weight="bold" />}
             iconColor="success"
           >
-            <FormContainer submitting={submitting}>
+            <div className="size-sm">
               {showProvider && (
-                <AsyncSelectField
+                <AsyncSelectGroup
                   name="organisation"
                   label={translate('Service provider')}
                   validate={required}
@@ -138,17 +142,19 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
                   getOptionValue={(option) => option.url}
                   noOptionsMessage={() => translate('No service providers')}
                   isClearable={true}
+                  disabled={submitting}
                 />
               )}
-              <StringField
+              <StringGroup
                 name="name"
                 label={translate('Name')}
                 required={true}
                 validate={required}
                 maxLength={150}
+                disabled={submitting}
               />
 
-              <SelectField
+              <SelectGroup
                 name="category"
                 label={translate('Category')}
                 options={data.categories}
@@ -158,9 +164,10 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
                 isClearable={false}
                 validate={required}
                 data-testid="offering-category"
+                disabled={submitting}
               />
 
-              <SelectField
+              <SelectGroup
                 name="type"
                 label={translate('Type')}
                 required={true}
@@ -169,8 +176,9 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
                 validate={required}
                 spaceless
                 data-testid="offering-type"
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

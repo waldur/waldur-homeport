@@ -10,10 +10,8 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
+import { StringGroup, SubmitButton, TextGroup } from '@/form';
 import { NumberField } from '@/form/NumberField';
-import { StringField } from '@/form/StringField';
-import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -206,22 +204,13 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
               />
             }
           >
-            <Field
+            <StringGroup
               name="name"
-              component={FormGroup}
               label={translate('Name')}
               required
               validate={required}
-            >
-              <StringField />
-            </Field>
-            <Field
-              name="description"
-              component={FormGroup}
-              label={translate('Description')}
-            >
-              <TextField />
-            </Field>
+            />
+            <TextGroup name="description" label={translate('Description')} />
             {limitComponents.length > 0 && (
               <div className="mb-7">
                 <label className="form-label fw-bold">

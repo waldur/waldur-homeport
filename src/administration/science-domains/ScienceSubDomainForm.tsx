@@ -1,13 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   scienceSubDomainsCreate,
   scienceSubDomainsPartialUpdate,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
-import { StringField } from '@/form/StringField';
+import { StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -78,23 +77,17 @@ export const ScienceSubDomainForm = ({ resolve }) => {
               />
             }
           >
-            <Field
+            <StringGroup
               name="code"
-              component={FormGroup}
               label={translate('Code')}
               description={translate('Auto-generated if left blank.')}
-            >
-              <StringField />
-            </Field>
-            <Field
+            />
+            <StringGroup
               name="name"
-              component={FormGroup}
               label={translate('Name')}
               required
               validate={required}
-            >
-              <StringField />
-            </Field>
+            />
           </ModalDialog>
         </form>
       )}

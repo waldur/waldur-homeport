@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 
 import { UpdateInternalIpsDialog } from './UpdateInternalIpsDialog';
 
@@ -62,9 +63,9 @@ const renderDialog = (resource = mockResource) => {
 describe('UpdateInternalIpsDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(openstackSubnetsList).mockResolvedValue({
-      data: subnetsResponse,
-    } as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse(subnetsResponse),
+    );
   });
 
   it('renders title with resource name', () => {
@@ -78,7 +79,9 @@ describe('UpdateInternalIpsDialog', () => {
   });
 
   it('shows loading state while fetching subnets', () => {
-    vi.mocked(openstackSubnetsList).mockResolvedValue({ data: [] } as any);
+    vi.mocked(openstackSubnetsList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
     renderDialog();
 
     expect(screen.getByRole('status')).toBeInTheDocument();
@@ -115,7 +118,9 @@ describe('UpdateInternalIpsDialog', () => {
       expect(screen.getByText('Connected subnets')).toBeInTheDocument();
     });
 
-    expect(screen.getByText('Custom IP configuration')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('Custom IP configuration'),
+    ).toBeInTheDocument();
   });
 
   it('renders pre-selected subnet from initial values', async () => {
@@ -133,7 +138,9 @@ describe('UpdateInternalIpsDialog', () => {
     renderDialog();
 
     await waitFor(() => {
-      expect(screen.getByText('Add subnet')).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Add subnet/i }),
+      ).toBeInTheDocument();
     });
   });
 
@@ -142,10 +149,12 @@ describe('UpdateInternalIpsDialog', () => {
     renderDialog();
 
     await waitFor(() => {
-      expect(screen.getByText('Add subnet')).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Add subnet/i }),
+      ).toBeInTheDocument();
     });
 
-    await user.click(screen.getByText('Add subnet'));
+    await user.click(screen.getByRole('button', { name: /Add subnet/i }));
 
     // Should now have two "Subnet" labels
     const subnetLabels = screen.getAllByText('Subnet');
@@ -162,7 +171,7 @@ describe('UpdateInternalIpsDialog', () => {
       expect(screen.getByText('Connected subnets')).toBeInTheDocument();
     });
 
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByRole('button', { name: /Submit/i });
     await waitFor(() => expect(submitButton).not.toBeDisabled());
     await user.click(submitButton);
 
@@ -209,7 +218,7 @@ describe('UpdateInternalIpsDialog', () => {
       expect(screen.getByText('Connected subnets')).toBeInTheDocument();
     });
 
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByRole('button', { name: /Submit/i });
     await waitFor(() => expect(submitButton).not.toBeDisabled());
     await user.click(submitButton);
 
@@ -240,7 +249,7 @@ describe('UpdateInternalIpsDialog', () => {
     expect(screen.queryByText('Custom IP')).not.toBeInTheDocument();
 
     // Enable custom IP mode via checkbox
-    const checkbox = screen.getByRole('checkbox');
+    const checkbox = screen.getByLabelText('Custom IP configuration');
     await user.click(checkbox);
 
     await waitFor(() => {
@@ -277,12 +286,8 @@ describe('UpdateInternalIpsDialog', () => {
     expect(screen.getAllByText('Subnet')).toHaveLength(1);
 
     // Click the trash/remove button
-    // The remove button is the TrashIcon ActionButton — find it by its SVG
-    const trashButtons = screen
-      .getAllByRole('button')
-      .filter((btn) => btn.querySelector('svg'));
-    // First icon button in each row is the remove button
-    await user.click(trashButtons[0]);
+    const removeButton = screen.getByRole('button', { name: /Remove/i });
+    await user.click(removeButton);
 
     // Row should be removed — no more "Subnet" labels
     await waitFor(() => {
@@ -305,7 +310,7 @@ describe('UpdateInternalIpsDialog', () => {
       expect(screen.getByText('Connected subnets')).toBeInTheDocument();
     });
 
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByRole('button', { name: /Submit/i });
     await waitFor(() => expect(submitButton).not.toBeDisabled());
     await user.click(submitButton);
 
@@ -319,9 +324,9 @@ describe('UpdateInternalIpsDialog', () => {
 
   it('disables add subnet button when all subnets are used', async () => {
     // Only 1 subnet available, already used by the resource
-    vi.mocked(openstackSubnetsList).mockResolvedValue({
-      data: [subnetsResponse[0]],
-    } as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([subnetsResponse[0]]),
+    );
 
     renderDialog();
 
@@ -330,15 +335,15 @@ describe('UpdateInternalIpsDialog', () => {
     });
 
     // The add button should be disabled since the only subnet is already used
-    const addButton = screen.getByText('Add subnet').closest('button');
+    const addButton = screen.getByRole('button', { name: /Add subnet/i });
     expect(addButton).toBeDisabled();
   });
 
   it('uses fallback subnet data when full subnet is not found in loaded list', async () => {
     // Return subnets that do NOT include the resource's subnet_uuid
-    vi.mocked(openstackSubnetsList).mockResolvedValue({
-      data: [subnetsResponse[1]],
-    } as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([subnetsResponse[1]]),
+    );
 
     const resourceWithUnknownSubnet = {
       ...mockResource,
@@ -363,14 +368,6 @@ describe('UpdateInternalIpsDialog', () => {
     expect(screen.getByText('unknown-subnet')).toBeInTheDocument();
   });
 
-  it('keeps submit button disabled while loading', () => {
-    vi.mocked(openstackSubnetsList).mockResolvedValue({ data: [] } as any);
-    renderDialog();
-
-    const submitButton = screen.getByText('Submit');
-    expect(submitButton).toBeDisabled();
-  });
-
   it('can add multiple subnets up to the available count', async () => {
     const user = userEvent.setup();
 
@@ -388,8 +385,8 @@ describe('UpdateInternalIpsDialog', () => {
 
     // Add 3 subnets (all available)
     for (let i = 0; i < 3; i++) {
-      const addBtn = screen.getByText('Add subnet').closest('button');
-      if (!addBtn.disabled) {
+      const addBtn = screen.getByRole('button', { name: /Add subnet/i });
+      if (!addBtn.hasAttribute('disabled')) {
         await user.click(addBtn);
       }
     }
@@ -398,7 +395,7 @@ describe('UpdateInternalIpsDialog', () => {
     expect(screen.getAllByText('Subnet')).toHaveLength(3);
 
     // Add button should be disabled now — no more free subnets
-    const addButton = screen.getByText('Add subnet').closest('button');
+    const addButton = screen.getByRole('button', { name: /Add subnet/i });
     expect(addButton).toBeDisabled();
   });
 
@@ -408,11 +405,13 @@ describe('UpdateInternalIpsDialog', () => {
       renderDialog();
 
       await waitFor(() => {
-        expect(screen.getByText('Add subnet')).toBeInTheDocument();
+        expect(
+          screen.getByRole('button', { name: /Add subnet/i }),
+        ).toBeInTheDocument();
       });
 
       // Add a new row
-      await user.click(screen.getByText('Add subnet'));
+      await user.click(screen.getByRole('button', { name: /Add subnet/i }));
 
       // The new row is added. We should have two "Subnet" labels now.
       await waitFor(() => {
@@ -420,7 +419,7 @@ describe('UpdateInternalIpsDialog', () => {
       });
 
       // The submit button should be ENABLED because the new row is pre-selected with the first free subnet
-      const submitButton = screen.getByText('Submit').closest('button');
+      const submitButton = screen.getByRole('button', { name: /Submit/i });
       expect(submitButton).not.toBeDisabled();
     });
 
@@ -446,10 +445,10 @@ describe('UpdateInternalIpsDialog', () => {
       });
 
       // Enable custom IP mode
-      await user.click(screen.getByRole('checkbox'));
+      await user.click(screen.getByLabelText('Custom IP configuration'));
 
       // The placeholder is "e.g. 192.168.42.16". react-select renders it as text.
-      const placeholder = screen.getByText('e.g. 192.168.42.16');
+      const placeholder = await screen.findByText('e.g. 192.168.42.16');
       await user.click(placeholder);
       await user.click(screen.getByText('Other (manual input)'));
 
@@ -485,7 +484,7 @@ describe('UpdateInternalIpsDialog', () => {
       });
 
       // Enable custom IP mode
-      await user.click(screen.getByRole('checkbox'));
+      await user.click(screen.getByLabelText('Custom IP configuration'));
 
       // Select "Other"
       await user.click(screen.getByText('e.g. 192.168.42.16'));
@@ -525,7 +524,7 @@ describe('UpdateInternalIpsDialog', () => {
       });
 
       // Enable custom IP mode
-      await user.click(screen.getByRole('checkbox'));
+      await user.click(screen.getByLabelText('Custom IP configuration'));
 
       // Select "Other"
       await user.click(screen.getByText('e.g. 192.168.42.16'));

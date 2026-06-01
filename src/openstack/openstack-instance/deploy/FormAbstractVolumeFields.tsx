@@ -2,15 +2,13 @@ import classNames from 'classnames';
 import { get } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field, useForm } from 'react-final-form';
+import { useForm } from 'react-final-form';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
-import { composeValidators } from '@/core/validators';
-import { required } from '@/core/validators';
+import { composeValidators, required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { OpenstackFeatures } from '@/FeaturesEnums';
-import { FormGroup, SelectField } from '@/form';
-import { CreatableSelectField } from '@/form/select';
+import { CreatableSelectGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -125,9 +123,8 @@ export const FormAbstractVolumeFields = (
     <Row>
       {showTypeField && (
         <Col sm={6}>
-          <Field
+          <SelectGroup
             name={props.typeField}
-            component={FormGroup}
             validate={props.optional ? undefined : required}
             label={props.typeTitle}
             required={!props.optional}
@@ -144,17 +141,15 @@ export const FormAbstractVolumeFields = (
                 />
               )
             }
-          >
-            <SelectField
-              options={data.volumeTypeChoices}
-              isDisabled={!fieldsEnabled}
-              isLoading={isLoading}
-            />
-          </Field>
+            options={data.volumeTypeChoices}
+            isDisabled={!fieldsEnabled}
+            isLoading={isLoading}
+          />
         </Col>
       )}
       <Col xs>
-        <FormGroup
+        <CreatableSelectGroup
+          name={props.sizeField}
           label={props.sizeTitle}
           required
           space={5}
@@ -179,19 +174,15 @@ export const FormAbstractVolumeFields = (
               )}
             </>
           }
-        >
-          <CreatableSelectField
-            name={props.sizeField}
-            validate={
-              !fieldsEnabled ? undefined : composeValidators(required, exceeds)
-            }
-            format={formatVolumeSize}
-            parse={(v: any) => Number(v) * 1024}
-            simpleValue
-            options={extendedSizeOptions}
-            isDisabled={!fieldsEnabled}
-          />
-        </FormGroup>
+          validate={
+            !fieldsEnabled ? undefined : composeValidators(required, exceeds)
+          }
+          format={formatVolumeSize}
+          parse={(v: any) => Number(v) * 1024}
+          simpleValue
+          options={extendedSizeOptions}
+          isDisabled={!fieldsEnabled}
+        />
       </Col>
     </Row>
   );

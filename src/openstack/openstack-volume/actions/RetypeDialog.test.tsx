@@ -10,6 +10,7 @@ import {
 
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 
 import { RetypeDialog } from './RetypeDialog';
 
@@ -45,6 +46,7 @@ const renderDialog = () => {
 
 describe('RetypeDialog', () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     vi.mocked(openstackVolumeTypesList).mockResolvedValue({ data: [] } as any);
   });
 
@@ -76,16 +78,19 @@ describe('RetypeDialog', () => {
       expect(screen.getByText('Current type:')).toBeInTheDocument();
     });
 
-    const select = screen.getByRole('combobox');
-    await userEvent.click(select);
+    const user = userEvent.setup();
+    await user.click(screen.getByLabelText(/Volume type/i));
 
     await waitFor(() => {
       expect(screen.getByText('prod (HPC production HDD)')).toBeInTheDocument();
       expect(
         screen.getByText('scratch (IOPS intensive SSD)'),
       ).toBeInTheDocument();
-      expect(within(select).queryByText('Fast SSD')).not.toBeInTheDocument();
     });
+
+    // Check that 'Fast SSD' is NOT in the list of options
+    const listbox = screen.getByRole('listbox');
+    expect(within(listbox).queryByText('Fast SSD')).not.toBeInTheDocument();
   });
 
   it('makes API request when form is submitted', async () => {
@@ -101,9 +106,8 @@ describe('RetypeDialog', () => {
     });
 
     const user = userEvent.setup();
-    const select = screen.getByRole('combobox');
-    await user.click(select);
-    await user.click(screen.getByText('prod (HPC production HDD)'));
+    // Using simple regex for option text to avoid issues with special characters if any
+    await openAndSelectOption(user, /Volume type/i, /prod/);
 
     const submitButton = screen.getByRole('button', { name: /submit/i });
     await user.click(submitButton);
@@ -132,9 +136,7 @@ describe('RetypeDialog', () => {
     });
 
     const user = userEvent.setup();
-    const select = screen.getByRole('combobox');
-    await user.click(select);
-    await user.click(screen.getByText('prod (HPC production HDD)'));
+    await openAndSelectOption(user, /Volume type/i, /prod/);
 
     const submitButton = screen.getByRole('button', { name: /submit/i });
     await user.click(submitButton);

@@ -1,11 +1,10 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
-import { NumberField } from '@/form';
+import { NumberGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -48,57 +47,40 @@ export const LimitsStep: FC<WizardStepProps> = (props) => {
           'Configure resource limits and plugin options. All fields are optional.',
         )}
       </p>
-
-      <FormGroup
+      <NumberGroup
+        name="default_internal_network_mtu"
         label={translate('Default internal network MTU')}
         description={translate(
           'MTU value for internal networks. Valid range: 68–9000. Leave empty to use the cloud default.',
         )}
-      >
-        <Field name="default_internal_network_mtu" component={NumberField} />
-      </FormGroup>
-
+      />
       {showSnapshotLimit && (
-        <FormGroup
+        <NumberGroup
+          name="snapshot_size_limit_gb"
+          min={0}
+          unit="GB"
+          placeholder={translate('No limit')}
           label={translate('Snapshot size limit')}
           description={translate(
             'Additional space in GB to apply to storage quota to be used by snapshots. Leave empty for no limit.',
           )}
-        >
-          <Field
-            name="snapshot_size_limit_gb"
-            component={NumberField}
-            min={0}
-            unit="GB"
-            placeholder={translate('No limit')}
-          />
-        </FormGroup>
+        />
       )}
-
-      <FormGroup
+      <NumberGroup
+        name="max_instances"
+        min={0}
+        placeholder={translate('No limit')}
         label={translate('Maximum number of instances in a single tenant')}
         description={translate('Leave empty for no limit.')}
-      >
-        <Field
-          name="max_instances"
-          component={NumberField}
-          min={0}
-          placeholder={translate('No limit')}
-        />
-      </FormGroup>
-
-      <FormGroup
+      />
+      <NumberGroup
+        name="max_volumes"
+        min={0}
+        placeholder={translate('No limit')}
         label={translate('Maximum number of volumes in a single tenant')}
         description={translate('Leave empty for no limit.')}
         spaceless
-      >
-        <Field
-          name="max_volumes"
-          component={NumberField}
-          min={0}
-          placeholder={translate('No limit')}
-        />
-      </FormGroup>
+      />
     </WizardModal>
   );
 };

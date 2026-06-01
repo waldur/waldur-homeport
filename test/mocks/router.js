@@ -28,10 +28,10 @@ const { mockRouter, mockUIRouterReact } = vi.hoisted(() => {
       params: {},
     },
     transitionService: {
-      onBefore: vi.fn(),
-      onStart: vi.fn(),
-      onSuccess: vi.fn(),
-      onError: vi.fn(),
+      onBefore: vi.fn(() => vi.fn()),
+      onStart: vi.fn(() => vi.fn()),
+      onSuccess: vi.fn(() => vi.fn()),
+      onError: vi.fn(() => vi.fn()),
     },
   };
   return {

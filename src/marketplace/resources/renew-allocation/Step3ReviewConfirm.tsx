@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
-import { StringField } from '@/form';
+import { StringField, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { OrderAttachmentField } from '@/marketplace/deploy/steps/OrderAttachmentField';
@@ -148,20 +148,17 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
 
       {showPurchaseOrder && (
         <>
-          <FormGroup
-            label={translate('Comment')}
-            description={translate(
-              'Optional note for the service provider, e.g. a PO number.',
-            )}
-          >
-            <div style={{ maxWidth: 300 }}>
-              <Field
-                name="request_comment"
-                component={StringField}
-                placeholder={translate('Optional')}
-              />
-            </div>
-          </FormGroup>
+          <div style={{ maxWidth: 300 }}>
+            <StringGroup
+              label={translate('Comment')}
+              description={translate(
+                'Optional note for the service provider, e.g. a PO number.',
+              )}
+              name="request_comment"
+              component={StringField}
+              placeholder={translate('Optional')}
+            />
+          </div>
           <FormGroup
             label={translate('Purchase order document')}
             description={translate('Attach a PDF purchase order document.')}

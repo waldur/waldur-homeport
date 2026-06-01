@@ -9,7 +9,7 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
-import { FormContainer, SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { VStepperFormStepCard } from '@/wizard';
@@ -72,9 +72,9 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
       disabledTooltip={props.disabledTooltip}
     >
       {data && (
-        <FormContainer submitting={false} className="size-xl">
+        <div className="size-xl">
           {advancedMode && data.clusters.length > 0 && (
-            <SelectField
+            <SelectGroup
               label={translate('Cluster')}
               name="attributes.cluster"
               options={data.clusters}
@@ -82,10 +82,11 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionLabel={(option: VmwareCluster) => option.name}
               isClearable={true}
               noUpdateOnBlur
+              disabled={false}
             />
           )}
           {advancedMode && data.datastores.length > 0 && (
-            <SelectField
+            <SelectGroup
               label={translate('Datastore')}
               name="attributes.datastore"
               options={data.datastores}
@@ -93,10 +94,11 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionLabel={(option) => option.name}
               isClearable={true}
               noUpdateOnBlur
+              disabled={false}
             />
           )}
           {advancedMode && data.folders.length > 0 && (
-            <SelectField
+            <SelectGroup
               label={translate('Folder')}
               name="attributes.folder"
               options={data.folders}
@@ -104,9 +106,10 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionLabel={(option) => option.name}
               isClearable={true}
               noUpdateOnBlur
+              disabled={false}
             />
           )}
-        </FormContainer>
+        </div>
       )}
     </VStepperFormStepCard>
   );

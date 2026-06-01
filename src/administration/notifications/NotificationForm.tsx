@@ -1,11 +1,9 @@
 import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required } from '@/core/validators';
-import { TextField } from '@/form';
-import { MonacoField } from '@/form/MonacoField';
+import { MonacoGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
@@ -51,19 +49,16 @@ const NotificationTabs = ({
         >
           {template.path.endsWith('message.html') ||
           template.path.endsWith('message.txt') ? (
-            <Field
+            <MonacoGroup
               name={`${name}.content`}
-              component={MonacoField}
               validate={required}
               language="django-html"
               height={400}
             />
           ) : (
-            <Field
+            <TextGroup
               name={`${name}.content`}
-              component={TextField}
               rows={template.path.endsWith('subject.txt') ? 4 : 10}
-              type="text"
               placeholder={template.original_content}
               validate={required}
             />

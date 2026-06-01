@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   OpenStackLoadBalancer,
   openstackLoadbalancersSetSecurityGroups,
 } from 'waldur-js-client';
 
-import { FormGroup } from '@/form';
-import { SelectField } from '@/form/select/SelectField';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -92,7 +91,7 @@ export const SetSecurityGroupsDialog: FC<
     <Form<FormData>
       onSubmit={submitRequest}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate('Set security groups for load balancer {name}', {
@@ -100,21 +99,15 @@ export const SetSecurityGroupsDialog: FC<
             })}
             loading={asyncState.isLoading}
             error={asyncState.error}
-            submitting={submitting}
-            invalid={invalid}
           >
             {asyncState.data ? (
-              <Field
-                component={FormGroup}
+              <SelectGroup
                 name="security_groups"
                 label={translate('Security groups')}
-              >
-                <SelectField
-                  placeholder={translate('Select security groups...')}
-                  options={asyncState.data}
-                  isMulti={true}
-                />
-              </Field>
+                placeholder={translate('Select security groups...')}
+                options={asyncState.data}
+                isMulti={true}
+              />
             ) : null}
           </AsyncActionDialog>
         </form>

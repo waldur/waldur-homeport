@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateIntegration } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 
 import { EditScriptLanguageDialog } from './EditScriptLanguageDialog';
 
@@ -48,9 +49,7 @@ describe('EditScriptLanguageDialog', () => {
     renderDialog();
 
     // Open select and change value
-    const select = screen.getByRole('combobox');
-    await user.click(select);
-    await user.click(screen.getByText('Bash'));
+    await openAndSelectOption(user, /Script Language/i, 'Bash');
 
     await user.click(screen.getByText('Confirm'));
 

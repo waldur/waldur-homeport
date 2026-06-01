@@ -1,10 +1,7 @@
-import { Field } from 'react-final-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { InputField } from '@/form/InputField';
+import { NumberGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../../FormGroup';
 
 import { ValidatorConfiguration } from './ValidatorConfiguration';
 
@@ -14,12 +11,8 @@ interface NumericOptionConfigProps {
 
 export const NumericOptionConfig = ({ offering }: NumericOptionConfigProps) => (
   <>
-    <FormGroup label={translate('Minimal value')}>
-      <Field name="min" type="number" component={InputField} />
-    </FormGroup>
-    <FormGroup label={translate('Maximal value')}>
-      <Field name="max" type="number" component={InputField} />
-    </FormGroup>
+    <NumberGroup label={translate('Minimal value')} name="min" type="number" />
+    <NumberGroup label={translate('Maximal value')} name="max" type="number" />
     <ValidatorConfiguration offering={offering} />
   </>
 );

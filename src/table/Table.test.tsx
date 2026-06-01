@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import Table from './Table';
 
@@ -56,7 +56,7 @@ describe('Table', () => {
   });
 
   describe('data rendering', () => {
-    beforeEach(() => {
+    const renderComponent = () =>
       render(
         TableWrapper(
           <Table
@@ -92,14 +92,15 @@ describe('Table', () => {
           />,
         ),
       );
-    });
 
     it('renders column headers', () => {
+      renderComponent();
       expect(screen.getByText('Resource type')).toBeInTheDocument();
       expect(screen.getByText('Resource name')).toBeInTheDocument();
     });
 
     it('renders row values', () => {
+      renderComponent();
       expect(screen.getByText('OpenStack Instance')).toBeInTheDocument();
       expect(screen.getByText('Web server')).toBeInTheDocument();
     });

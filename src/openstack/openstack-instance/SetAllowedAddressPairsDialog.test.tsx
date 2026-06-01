@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   OpenStackInstance,
@@ -49,6 +50,7 @@ describe('SetAllowedAddressPairsDialog', () => {
   });
 
   it('submits the form with modified pairs', async () => {
+    const user = userEvent.setup();
     renderWithProviders(
       <SetAllowedAddressPairsDialog
         resolve={{ instance: mockInstance, port: mockPort as any }}
@@ -59,17 +61,17 @@ describe('SetAllowedAddressPairsDialog', () => {
     const addButton = screen.getByRole('button', {
       name: 'Add pair',
     });
-    fireEvent.click(addButton);
+    await user.click(addButton);
 
     // Fill the new pair fields
     const inputs = screen.getAllByRole('textbox');
     // inputs[0], inputs[1] are existing pair. inputs[2], inputs[3] are new pair.
-    fireEvent.change(inputs[2], { target: { value: '192.168.2.0/24' } });
-    fireEvent.change(inputs[3], { target: { value: 'fa:16:3e:00:00:02' } });
+    await user.type(inputs[2], '192.168.2.0/24');
+    await user.type(inputs[3], 'fa:16:3e:00:00:02');
 
     // Submit
     const submitButton = screen.getByText('Update');
-    fireEvent.click(submitButton);
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(openstackPortsSetAllowedAddressPairs).toHaveBeenCalledTimes(1);

@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -10,6 +10,7 @@ import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 import { typeAndSelectOption } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { loadData } from '../change-limits/utils';
@@ -97,12 +98,14 @@ describe('ReallocateLimitsDialog', () => {
     expect(getNextButtonStep0().disabled).toBe(true);
 
     // Try to increase limit (restricted to current limit 10)
-    fireEvent.change(cpuInput, { target: { value: '12' } });
+    await user.clear(cpuInput);
+    await user.type(cpuInput, '12');
     expect(cpuInput.value).toBe('10');
     expect(getNextButtonStep0().disabled).toBe(true);
 
     // Reduce limit to 8 (freeing 2)
-    fireEvent.change(cpuInput, { target: { value: '8' } });
+    await user.clear(cpuInput);
+    await user.type(cpuInput, '8');
     expect(cpuInput.value).toBe('8');
 
     await waitFor(() => expect(getNextButtonStep0().disabled).toBe(false));
@@ -113,16 +116,11 @@ describe('ReallocateLimitsDialog', () => {
       offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
-    vi.mocked(marketplaceResourcesList).mockResolvedValue({
-      data: [targetResource],
-      response: {
-        headers: new Headers({
-          'x-result-count': '1',
-        }),
-      },
-    } as any);
+    vi.mocked(marketplaceResourcesList).mockResolvedValue(
+      mockListResponse([targetResource]),
+    );
 
-    fireEvent.click(getNextButtonStep0());
+    await user.click(getNextButtonStep0());
 
     // --- Step 1: Reallocate ---
     await screen.findByText(/Find target resource/i);
@@ -140,15 +138,15 @@ describe('ReallocateLimitsDialog', () => {
     const allocationInput = (await screen.findByTestId(
       'allocation-target-resource-uuid',
     )) as HTMLInputElement;
-    fireEvent.input(allocationInput, { target: { value: '2' } });
-    fireEvent.change(allocationInput, { target: { value: '2' } });
-    fireEvent.blur(allocationInput);
+    await user.clear(allocationInput);
+    await user.type(allocationInput, '2');
+    await user.tab();
     expect(allocationInput.value).toBe('2');
 
     await waitFor(() => expect(getNextButtonStep1().disabled).toBe(false), {
       timeout: 2000,
     });
-    fireEvent.click(getNextButtonStep1());
+    await user.click(getNextButtonStep1());
 
     // --- Step 2: Review ---
     await waitFor(
@@ -167,7 +165,7 @@ describe('ReallocateLimitsDialog', () => {
       { timeout: 3000 },
     );
 
-    fireEvent.click(getConfirmButton());
+    await user.click(getConfirmButton());
 
     // Final Verification
     await waitFor(() => {
@@ -206,8 +204,9 @@ describe('ReallocateLimitsDialog', () => {
     // Step 0: Reduce limit to free 2 units
     await screen.findByText('Current limit');
     const cpuInput = await screen.findByTestId('row-cpu-input');
-    fireEvent.change(cpuInput, { target: { value: '8' } });
-    fireEvent.click(getNextButtonStep0());
+    await user.clear(cpuInput);
+    await user.type(cpuInput, '8');
+    await user.click(getNextButtonStep0());
 
     // Step 1: Add target resource
     const targetResource = {
@@ -216,14 +215,9 @@ describe('ReallocateLimitsDialog', () => {
       offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
-    vi.mocked(marketplaceResourcesList).mockResolvedValue({
-      data: [targetResource],
-      response: {
-        headers: new Headers({
-          'x-result-count': '1',
-        }),
-      },
-    } as any);
+    vi.mocked(marketplaceResourcesList).mockResolvedValue(
+      mockListResponse([targetResource]),
+    );
 
     await screen.findByText(/Find target resource/i);
     await typeAndSelectOption(
@@ -237,8 +231,9 @@ describe('ReallocateLimitsDialog', () => {
     const allocationInput = await screen.findByTestId(
       'allocation-target-resource-uuid',
     );
-    fireEvent.change(allocationInput, { target: { value: '1' } });
-    fireEvent.blur(allocationInput);
+    await user.clear(allocationInput);
+    await user.type(allocationInput, '1');
+    await user.tab();
 
     // Verify: Next button should be disabled
     expect(getNextButtonStep1().disabled).toBe(true);
@@ -256,8 +251,9 @@ describe('ReallocateLimitsDialog', () => {
 
     // Step 0: Reduce limit
     const cpuInput = await screen.findByTestId('row-cpu-input');
-    fireEvent.change(cpuInput, { target: { value: '8' } });
-    fireEvent.click(getNextButtonStep0());
+    await user.clear(cpuInput);
+    await user.type(cpuInput, '8');
+    await user.click(getNextButtonStep0());
 
     // Step 1: Add target and allocate
     const targetResource = {
@@ -266,14 +262,9 @@ describe('ReallocateLimitsDialog', () => {
       offering_name: 'Offering A',
       limits: { cpu: 5 },
     };
-    vi.mocked(marketplaceResourcesList).mockResolvedValue({
-      data: [targetResource],
-      response: {
-        headers: new Headers({
-          'x-result-count': '1',
-        }),
-      },
-    } as any);
+    vi.mocked(marketplaceResourcesList).mockResolvedValue(
+      mockListResponse([targetResource]),
+    );
 
     await typeAndSelectOption(
       user,
@@ -285,13 +276,14 @@ describe('ReallocateLimitsDialog', () => {
     const allocationInput = await screen.findByTestId(
       'allocation-target-resource-uuid',
     );
-    fireEvent.change(allocationInput, { target: { value: '2' } });
-    fireEvent.blur(allocationInput);
-    fireEvent.click(getNextButtonStep1());
+    await user.clear(allocationInput);
+    await user.type(allocationInput, '2');
+    await user.tab();
+    await user.click(getNextButtonStep1());
 
     // Step 2: Confirm
     const confirmButton = await screen.findByTestId('confirm-button');
-    fireEvent.click(confirmButton);
+    await user.click(confirmButton);
 
     // Verify: showErrorResponse should be called
     await waitFor(() => {

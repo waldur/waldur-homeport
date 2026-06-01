@@ -80,16 +80,15 @@ export const ReallocateLimitsDialog: FunctionComponent<
   const { step, setStep, goBack, goNext, isFirstStep, isLastStep } =
     useWizard(steps);
 
-  const { mutate: submitReallocation, isPending: submittingMutation } =
-    useManagedMutation({
-      mutationFn: (values: ReallocateFormData) =>
-        reallocateLimits(values, dataQuery.data),
-      successMessage: translate(
-        'Resource limits reallocation request has been submitted.',
-      ),
-      errorMessage: translate('Unable to submit reallocation request.'),
-      refetch: resolve.refetch,
-    });
+  const { mutate: submitReallocation } = useManagedMutation({
+    mutationFn: (values: ReallocateFormData) =>
+      reallocateLimits(values, dataQuery.data),
+    successMessage: translate(
+      'Resource limits reallocation request has been submitted.',
+    ),
+    errorMessage: translate('Unable to submit reallocation request.'),
+    refetch: resolve.refetch,
+  });
 
   const initialValues = React.useMemo(
     () => ({
@@ -157,7 +156,7 @@ export const ReallocateLimitsDialog: FunctionComponent<
                   isFirstStep={isFirstStep}
                   goBack={goBack}
                   goNext={goNext}
-                  submitting={submitting || submittingMutation}
+                  submitting={submitting}
                   invalid={!canProceed}
                   submitLabel={translate('Confirm')}
                   tooltip={nextButtonTooltip}
@@ -171,7 +170,7 @@ export const ReallocateLimitsDialog: FunctionComponent<
                   steps={steps}
                   value={step}
                   onClick={setStep}
-                  disabled={submitting || submittingMutation}
+                  disabled={submitting}
                 />
               </div>
 

@@ -1,4 +1,4 @@
-import { screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { UIRouter } from '@uirouter/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -12,6 +12,7 @@ import { formDataOptions } from '@/core/api';
 import { ENV } from '@/core/config';
 import { createTestQueryClient, renderWithProviders } from '@/test/harness';
 import { createTestRouter } from '@/test/router';
+import { openAndSelectOption } from '@/test/select';
 import * as workspaceHooks from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
@@ -147,13 +148,9 @@ describe('ProjectCreateDialog', () => {
       screen.getByText('Project description'),
       'This is a test project',
     );
-    // Step 1 has multiple comboboxes (Affiliation, Project type, ...);
-    // scope to the Project type form group.
-    const typeGroup = screen
-      .getByText('Project type')
-      .closest('div') as HTMLElement;
-    await userEvent.click(within(typeGroup).getByRole('combobox'));
-    await userEvent.click(screen.getByText('Basic project type'));
+
+    const user = userEvent.setup();
+    await openAndSelectOption(user, 'Project type', 'Basic project type');
 
     // Submit the form
     await userEvent.click(screen.getByText('Create'));

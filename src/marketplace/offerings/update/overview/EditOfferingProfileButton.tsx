@@ -1,13 +1,13 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceOfferingProfilesList,
   marketplaceProviderOfferingsSetProfile,
 } from 'waldur-js-client';
 
-import { SelectField, SubmitButton } from '@/form';
+import { SubmitButton, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -15,8 +15,6 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
-
-import { FormGroup } from '../../FormGroup';
 
 interface DialogResolve {
   offering: { uuid: string; profile_uuid?: string | null };
@@ -74,20 +72,16 @@ const Dialog: FC<{ resolve: DialogResolve }> = ({ resolve }) => {
               </>
             }
           >
-            <FormGroup
+            <SelectGroup
+              name="profile"
+              options={options}
+              getOptionValue={(o) => o.value}
+              getOptionLabel={(o) => o.label}
               label={translate('Service profile')}
               description={translate(
                 'Bind this offering to a profile to use its centrally-managed role catalog. Setting to "None" lets you manage roles per-offering.',
               )}
-            >
-              <Field
-                name="profile"
-                component={SelectField}
-                options={options}
-                getOptionValue={(o) => o.value}
-                getOptionLabel={(o) => o.label}
-              />
-            </FormGroup>
+            />
           </ModalDialog>
         </form>
       )}

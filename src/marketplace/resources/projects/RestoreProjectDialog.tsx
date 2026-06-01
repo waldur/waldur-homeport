@@ -5,8 +5,7 @@ import {
   ResourceProject,
 } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { FormContainer } from '@/form/FormContainer';
+import { BooleanGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -148,24 +147,24 @@ export const RestoreProjectDialog: FunctionComponent<
                   },
                 ]}
               />
-              <FormContainer submitting={submitting}>
-                <AwesomeCheckboxField
+              <div className="size-sm">
+                <BooleanGroup
                   name="restore_team_members"
                   label={translate(
                     'Restore previous members (recreate their roles)',
                   )}
                   onChange={onRestoreChange}
-                  disabled={previousMembers.length === 0}
+                  disabled={submitting || previousMembers.length === 0}
                 />
-                <AwesomeCheckboxField
+                <BooleanGroup
                   name="send_invitations_to_previous_members"
                   label={translate(
                     'Send invitations to previous members instead',
                   )}
                   onChange={onInviteChange}
-                  disabled={previousMembers.length === 0}
+                  disabled={submitting || previousMembers.length === 0}
                 />
-              </FormContainer>
+              </div>
             </ModalDialog>
           </form>
         );

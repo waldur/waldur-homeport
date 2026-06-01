@@ -5,7 +5,7 @@ import { FieldArray } from 'react-final-form-arrays';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { pick } from '@/core/utils';
-import { FormContainer, FormFooter } from '@/form';
+import { FormFooter } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -54,25 +54,19 @@ export const EditSchedulesDialog = (props: {
       onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={initialValues}
       mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Update schedule')}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                submitLabel={translate('Update')}
-                invalid={invalid}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Update')} />}
           >
-            <FormContainer submitting={submitting} className="size-xl">
+            <div className="size-xl">
               <FieldArray
                 name="schedules"
                 rerenderOnEveryChange
                 component={OfferingScheduler}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

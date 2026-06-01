@@ -16,7 +16,7 @@ import { DateField } from '@/form/DateField';
 import { FormFieldError } from '@/form/FormFieldError';
 import { FormGroupProps } from '@/form/FormGroup';
 import { AsyncSelectField } from '@/form/select/AsyncSelectField';
-import { SelectMultiCheckboxGroup } from '@/form/SelectMultiCheckboxGroup';
+import { SelectMultiBooleanGroup } from '@/form/SelectMultiBooleanGroup';
 import { TimeSelectField } from '@/form/TimeSelectField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
@@ -126,7 +126,7 @@ export const getComponentAndParams = (option, key, customer, loaders?: any) => {
       break;
 
     case 'select_string_multi':
-      OptionField = SelectMultiCheckboxGroup;
+      OptionField = SelectMultiBooleanGroup;
       params = {
         options: option.choices,
       };

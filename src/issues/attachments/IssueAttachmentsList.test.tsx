@@ -32,7 +32,7 @@ describe('IssueAttachmentsList', () => {
         onCancel={mockOnCancel}
       />,
     );
-    expect(container.firstChild).toBeNull();
+    expect(container).toBeEmptyDOMElement();
   });
 
   it('renders list of attachments', () => {

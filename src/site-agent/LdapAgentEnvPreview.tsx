@@ -16,13 +16,11 @@ import { ModalDialog } from '@/modal/ModalDialog';
 interface LdapAgentEnvPreviewProps {
   config: string;
   onBack: () => void;
-  onClose: () => void;
 }
 
 export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
   config,
   onBack,
-  onClose,
 }) => {
   const [copied, setCopied] = useState(false);
 
@@ -85,7 +83,7 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
               label={translate('Download .env')}
               size="lg"
             />
-            <CloseDialogButton label={translate('Close')} onClick={onClose} />
+            <CloseDialogButton label={translate('Close')} />
           </div>
         </div>
       }

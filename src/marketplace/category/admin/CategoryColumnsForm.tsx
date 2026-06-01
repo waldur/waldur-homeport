@@ -41,7 +41,7 @@ export const CategoryColumnsForm: FC<CategoryColumnsFormProps> = ({
       mutators={{ ...arrayMutators }}
       onSubmit={submitRequest}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate('Set columns in {name} category', {
@@ -49,8 +49,6 @@ export const CategoryColumnsForm: FC<CategoryColumnsFormProps> = ({
             })}
             loading={asyncState.isLoading}
             error={asyncState.error}
-            submitting={submitting}
-            invalid={invalid}
           >
             {asyncState.data ? (
               <FieldArray name="columns">

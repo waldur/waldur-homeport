@@ -4,8 +4,7 @@ import { invoicesPaid } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@/core/api';
 import { formatISODate } from '@/core/dateUtils';
-import { FileUploadField, FormContainer, FormFooter } from '@/form';
-import { DateField } from '@/form/DateField';
+import { FileUploadGroup, FormFooter, DateGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -45,19 +44,23 @@ export const MarkAsPaidDialog: FunctionComponent<any> = (props) => {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Mark invoice as paid')}
-            footer={<FormFooter submitting={submitting} />}
+            footer={<FormFooter />}
           >
             <div style={{ paddingBottom: '95px' }}>
-              <FormContainer submitting={submitting}>
-                <DateField name="date" label={translate('Date')} />
+              <div className="size-sm">
+                <DateGroup
+                  name="date"
+                  label={translate('Date')}
+                  disabled={submitting}
+                />
 
-                <FileUploadField
+                <FileUploadGroup
                   name="proof"
                   label={translate('Proof')}
                   showFileName={true}
                   buttonLabel={translate('Browse')}
                 />
-              </FormContainer>
+              </div>
             </div>
           </ModalDialog>
         </form>

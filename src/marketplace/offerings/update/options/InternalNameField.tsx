@@ -1,11 +1,8 @@
 import { useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { InputField } from '@/form/InputField';
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../../FormGroup';
 
 const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_\\-/:]+$');
 
@@ -33,19 +30,15 @@ export const InternalNameField = () => {
   );
 
   return (
-    <FormGroup
+    <StringGroup
       label={translate('Internal name')}
       required={true}
       description={translate(
         'Technical name intended for integration and automated reporting. Please use Latin letters without spaces only.',
       )}
-    >
-      <Field
-        name="name"
-        validate={validators}
-        parse={(v) => v.replace('.', '')}
-        component={InputField}
-      />
-    </FormGroup>
+      name="name"
+      validate={validators}
+      parse={(v) => v.replace('.', '')}
+    />
   );
 };

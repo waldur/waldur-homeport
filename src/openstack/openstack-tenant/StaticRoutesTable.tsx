@@ -23,7 +23,10 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
       <Field name={`${route}.destination`} validate={required}>
         {({ input, meta }) => (
           <>
-            <StringField input={input} />
+            <StringField
+              input={input}
+              aria-label={translate('Destination (CIDR)')}
+            />
             <FieldError error={meta.touched && meta.error} />
           </>
         )}
@@ -33,7 +36,10 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
       <Field name={`${route}.nexthop`} validate={nexthopValidator}>
         {({ input, meta }) => (
           <>
-            <StringField input={input} />
+            <StringField
+              input={input}
+              aria-label={translate('Next hop (IP)')}
+            />
             <FieldError error={meta.touched && meta.error} />
           </>
         )}

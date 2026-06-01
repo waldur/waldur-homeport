@@ -10,8 +10,12 @@ import {
 import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { composeValidators, required } from '@/core/validators';
-import { FormContainer, NumberField, SelectField, StringField } from '@/form';
-import { AsyncSelect as Select } from '@/form/select';
+import {
+  SelectGroup,
+  NumberGroup,
+  StringGroup,
+  AsyncSelectGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
@@ -115,10 +119,10 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
   });
 
   return (
-    <FormContainer className="size-lg">
+    <div className="size-lg">
       <FormWatcher />
       {props.type === 'project' ? (
-        <Select
+        <AsyncSelectGroup
           name="scope"
           label={translate('Select project(s)')}
           validate={required}
@@ -140,7 +144,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           noOptionsMessage={() => translate('No projects')}
         />
       ) : (
-        <Select
+        <AsyncSelectGroup
           name="scope"
           label={translate('Select organization(s)')}
           validate={required}
@@ -161,7 +165,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           noOptionsMessage={() => translate('No organizations')}
         />
       )}
-      <SelectField
+      <SelectGroup
         name="period"
         label={translate('Period')}
         validate={required}
@@ -171,7 +175,6 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         getOptionLabel={(option) => option.label}
         simpleValue
       />
-
       {costsData && costsData.length !== 0 && (
         <Table bordered>
           <thead>
@@ -198,7 +201,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           </tbody>
         </Table>
       )}
-      <NumberField
+      <NumberGroup
         label={translate('When estimated cost reaches')}
         name="limit_cost"
         placeholder={translate('Enter the cost threshold (e.g. 1000 EUR)')}
@@ -206,8 +209,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         required={true}
         unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
       />
-
-      <SelectField
+      <SelectGroup
         name="actions"
         label={translate('Then')}
         placeholder={translate(
@@ -219,9 +221,8 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         getOptionValue={(option) => option.value}
         getOptionLabel={(option) => option.label}
       />
-
       {selectedAction?.value === 'notify_external_user' && (
-        <StringField
+        <StringGroup
           name="options.notify_external_user"
           label={translate('External user emails')}
           placeholder={translate(
@@ -230,7 +231,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           validate={composeValidators(required, validateEmails)}
         />
       )}
-    </FormContainer>
+    </div>
   );
 };
 

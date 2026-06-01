@@ -1,15 +1,13 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { marketplaceOfferingRolesCreate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SelectField, StringField, SubmitButton } from '@/form';
+import { SubmitButton, StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-
-import { FormGroup } from '../../FormGroup';
 
 const SCOPE_OPTIONS = [
   { value: 'resource', label: translate('Resource') },
@@ -66,37 +64,30 @@ export const AddRoleDialog: FC<{ resolve: AddRoleResolve }> = ({ resolve }) => {
               </>
             }
           >
-            <FormGroup label={translate('Role name')} required>
-              <Field
-                name="name"
-                validate={required}
-                component={StringField}
-                placeholder={translate('e.g. Cluster Admin, Project Member')}
-              />
-            </FormGroup>
-            <FormGroup
+            <StringGroup
+              name="name"
+              validate={required}
+              placeholder={translate('e.g. Cluster Admin, Project Member')}
+              label={translate('Role name')}
+              required
+            />
+            <SelectGroup
+              name="scope"
+              validate={required}
+              options={SCOPE_OPTIONS}
+              getOptionValue={(o) => o.value}
+              getOptionLabel={(o) => o.label}
               label={translate('Scope')}
               description={translate(
                 'Whether the role is granted on the whole resource or on individual resource sub-projects.',
               )}
               required
-            >
-              <Field
-                name="scope"
-                validate={required}
-                component={SelectField}
-                options={SCOPE_OPTIONS}
-                getOptionValue={(o) => o.value}
-                getOptionLabel={(o) => o.label}
-              />
-            </FormGroup>
-            <FormGroup label={translate('Description')}>
-              <Field
-                name="description"
-                component={StringField}
-                placeholder={translate('Role description (optional)')}
-              />
-            </FormGroup>
+            />
+            <StringGroup
+              name="description"
+              placeholder={translate('Role description (optional)')}
+              label={translate('Description')}
+            />
           </ModalDialog>
         </form>
       )}

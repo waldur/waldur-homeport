@@ -1,10 +1,8 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { CountrySelectField } from '@/form/CountrySelectField';
+import { SelectGroup, StringGroup, CountrySelectGroup } from '@/form';
 import { MultiCountrySelectField } from '@/form/MultiCountrySelectField';
-import { SelectField } from '@/form/select/SelectField';
-import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import {
@@ -36,77 +34,68 @@ export const IdentityStep: FC<WizardStepProps> = (props) => {
           )}
         </p>
       )}
-
       {isProfileAttributeEnabled('personal_title') && (
-        <FormGroup label={translate('Personal title')}>
-          <Field
-            name="personal_title"
-            component={SelectField}
-            options={getPersonalTitleOptions()}
-            simpleValue
-            isClearable
-          />
-        </FormGroup>
+        <SelectGroup
+          name="personal_title"
+          options={getPersonalTitleOptions()}
+          simpleValue
+          isClearable
+          label={translate('Personal title')}
+        />
       )}
-
       {isProfileAttributeEnabled('gender') && (
-        <FormGroup label={translate('Gender')}>
-          <Field
-            name="gender"
-            component={SelectField}
-            options={getGenderChoices()}
-            simpleValue
-            isClearable
-          />
-        </FormGroup>
+        <SelectGroup
+          name="gender"
+          options={getGenderChoices()}
+          simpleValue
+          isClearable
+          label={translate('Gender')}
+        />
       )}
-
       {isProfileAttributeEnabled('place_of_birth') && (
-        <FormGroup label={translate('Place of birth')}>
-          <Field name="place_of_birth" component={StringField} />
-        </FormGroup>
+        <StringGroup
+          name="place_of_birth"
+          label={translate('Place of birth')}
+        />
       )}
-
       {isProfileAttributeEnabled('country_of_residence') && (
-        <FormGroup label={translate('Country of residence')}>
-          <Field name="country_of_residence" component={CountrySelectField} />
-        </FormGroup>
+        <CountrySelectGroup
+          name="country_of_residence"
+          label={translate('Country of residence')}
+        />
       )}
-
       {isProfileAttributeEnabled('nationality') && (
-        <FormGroup label={translate('Nationality')}>
-          <Field name="nationality" component={CountrySelectField} />
-        </FormGroup>
+        <CountrySelectGroup
+          name="nationality"
+          label={translate('Nationality')}
+        />
       )}
-
       {isProfileAttributeEnabled('nationalities') && (
         <FormGroup label={translate('Nationalities')}>
           <Field name="nationalities" component={MultiCountrySelectField} />
         </FormGroup>
       )}
-
       {isProfileAttributeEnabled('organization_country') && (
-        <FormGroup label={translate('Organization country')}>
-          <Field name="organization_country" component={CountrySelectField} />
-        </FormGroup>
+        <CountrySelectGroup
+          name="organization_country"
+          label={translate('Organization country')}
+        />
       )}
-
       {isProfileAttributeEnabled('organization_type') && (
-        <FormGroup label={translate('Organization type')}>
-          <Field
-            name="organization_type"
-            component={SelectField}
-            options={getOrganizationTypeOptions()}
-            simpleValue
-            isClearable
-          />
-        </FormGroup>
+        <SelectGroup
+          name="organization_type"
+          options={getOrganizationTypeOptions()}
+          simpleValue
+          isClearable
+          label={translate('Organization type')}
+        />
       )}
-
       {isProfileAttributeEnabled('organization_registry_code') && (
-        <FormGroup label={translate('Organization registry code')} spaceless>
-          <Field name="organization_registry_code" component={StringField} />
-        </FormGroup>
+        <StringGroup
+          name="organization_registry_code"
+          label={translate('Organization registry code')}
+          spaceless
+        />
       )}
     </WizardModal>
   );

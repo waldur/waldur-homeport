@@ -27,6 +27,7 @@ export const AttributeCell: FC<{ attribute }> = ({ attribute }) => {
   return (
     <Field
       name="value"
+      label={attribute.title}
       {...attr}
       component={FormGroup}
       hideLabel={true}

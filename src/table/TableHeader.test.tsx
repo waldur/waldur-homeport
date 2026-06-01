@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 
 import { TableHeader } from './TableHeader';
@@ -34,13 +35,15 @@ const renderTableHeader = (props = {}) => {
 };
 
 describe('TableHeader', () => {
+  const user = userEvent.setup();
+
   it('renders column headers', () => {
     renderTableHeader();
     expect(screen.getByText('Name')).toBeInTheDocument();
     expect(screen.getByText('Email')).toBeInTheDocument();
   });
 
-  it('handles sort click', () => {
+  it('handles sort click', async () => {
     const onSortClick = vi.fn();
     renderTableHeader({
       onSortClick,
@@ -48,11 +51,11 @@ describe('TableHeader', () => {
     });
 
     const sortDescButton = screen.getAllByTestId('sort-desc')[0];
-    fireEvent.click(sortDescButton);
+    await user.click(sortDescButton);
     expect(onSortClick).toHaveBeenCalledWith({ field: 'name', mode: 'desc' });
   });
 
-  it('shows select all checkbox when multiSelect is enabled', () => {
+  it('shows select all checkbox when multiSelect is enabled', async () => {
     const onSelectAllRows = vi.fn();
     renderTableHeader({
       enableMultiSelect: true,
@@ -62,7 +65,7 @@ describe('TableHeader', () => {
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).toBeInTheDocument();
 
-    fireEvent.click(checkbox);
+    await user.click(checkbox);
     expect(onSelectAllRows).toHaveBeenCalledWith(mockRows);
   });
 
@@ -139,7 +142,7 @@ describe('TableHeader', () => {
     expect(screen.getByLabelText('Expand all rows')).toBeInTheDocument();
   });
 
-  it('should select all rows when clicking on select-all checkbox', () => {
+  it('should select all rows when clicking on select-all checkbox', async () => {
     const onSelectAllRows = vi.fn();
     renderTableHeader({
       enableMultiSelect: true,
@@ -148,7 +151,7 @@ describe('TableHeader', () => {
     });
 
     const checkbox = screen.getByTestId('select-all');
-    fireEvent.click(checkbox);
+    await user.click(checkbox);
 
     expect(onSelectAllRows).toHaveBeenCalledWith(mockRows);
   });

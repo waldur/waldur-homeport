@@ -12,6 +12,7 @@ import {
 
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption, typeAndSelectOption } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { CostPolicyFormDialog } from './CostPolicyFormDialog';
@@ -32,36 +33,26 @@ describe('CostPolicyFormDialog', () => {
     vi.mocked(invoiceItemsCustomerCostsForPeriodRetrieve).mockResolvedValue({
       data: {},
     } as any);
-    vi.mocked(projectsList).mockResolvedValue({
-      data: [
+    vi.mocked(projectsList).mockResolvedValue(
+      mockListResponse([
         {
           name: 'Project 1',
           uuid: 'project-uuid',
           url: 'project-url',
           billing_price_estimate: { total: 100 },
         },
-      ],
-      response: {
-        headers: new Headers({
-          'x-result-count': '1',
-        }),
-      },
-    } as any);
-    vi.mocked(customersList).mockResolvedValue({
-      data: [
+      ]),
+    );
+    vi.mocked(customersList).mockResolvedValue(
+      mockListResponse([
         {
           name: 'Org 1',
           uuid: 'org-uuid',
           url: 'org-url',
           billing_price_estimate: {},
         },
-      ],
-      response: {
-        headers: new Headers({
-          'x-result-count': '1',
-        }),
-      },
-    } as any);
+      ]),
+    );
   });
 
   it('submits create project policy correctly', async () => {
@@ -114,7 +105,7 @@ describe('CostPolicyFormDialog', () => {
       },
     });
     expect(screen.getByText('New policy')).toBeInTheDocument();
-    expect(screen.getByText(/Select project\(s\)/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Select project\(s\)/i)).toBeInTheDocument();
   });
 
   it('renders edit organization policy dialog correctly', async () => {

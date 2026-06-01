@@ -40,19 +40,13 @@ export const MultiMoveDialog: FC<MultiMoveDialogProps> = (props) => {
   return (
     <Form<FormData>
       onSubmit={(formData) => moveMutation.mutate(formData)}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Mass move resources')}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid}
-                submitLabel={translate('Save')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Save')} />}
           >
-            <MoveToProjectAutocomplete isDisabled={submitting} />
+            <MoveToProjectAutocomplete />
           </ModalDialog>
         </form>
       )}

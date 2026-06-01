@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { openstackVolumesRetype } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { Select } from '@/form/select';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadVolumeTypes } from '@/openstack/api';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
@@ -54,28 +53,24 @@ export const RetypeDialog: FC<ActionDialogProps> = ({
           /* error handled by useManagedMutation */
         })
       }
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate('Retype OpenStack Volume')}
             loading={asyncState.isLoading}
             error={asyncState.error}
-            submitting={submitting}
-            invalid={invalid}
           >
             <p>
               <strong>{translate('Current type')}:</strong> {resource.type_name}
             </p>
             {asyncState.data?.types.length > 0 ? (
-              <FormGroup label={translate('Volume type')} required>
-                <Field
-                  name="type"
-                  validate={required}
-                  render={({ input }) => (
-                    <Select {...input} options={asyncState.data.types} />
-                  )}
-                />
-              </FormGroup>
+              <SelectGroup
+                name="type"
+                label={translate('Volume type')}
+                options={asyncState.data.types}
+                validate={required}
+                required
+              />
             ) : (
               <p>{translate('There are no other volume types available.')}</p>
             )}

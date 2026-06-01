@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 
 import { YearField } from './YearField';
@@ -60,7 +61,8 @@ describe('YearField', () => {
     expect(inputElement).toBeInTheDocument();
   });
 
-  it('has onKeyDown handler that prevents invalid characters', () => {
+  it('has onKeyDown handler that prevents invalid characters', async () => {
+    const user = userEvent.setup();
     const mockInput = createMockInput();
     render(<YearField input={mockInput as any} />);
 
@@ -72,14 +74,11 @@ describe('YearField', () => {
     expect(inputElement).toHaveAttribute('step', '1');
 
     // The actual keydown prevention is tested by verifying the handler exists
-    // (fireEvent doesn't properly simulate preventDefault behavior)
-    fireEvent.keyDown(inputElement, { key: '.' });
-    fireEvent.keyDown(inputElement, { key: 'e' });
-    fireEvent.keyDown(inputElement, { key: 'E' });
-    fireEvent.keyDown(inputElement, { key: '2' });
+    await user.type(inputElement, '.eE2');
 
     // Input should still be functional
-    fireEvent.change(inputElement, { target: { value: '2024' } });
+    await user.clear(inputElement);
+    await user.type(inputElement, '2024');
     expect(mockInput.onChange).toHaveBeenCalled();
   });
 

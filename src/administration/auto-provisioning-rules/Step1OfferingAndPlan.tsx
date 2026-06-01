@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Col, FormLabel } from 'react-bootstrap';
+import { Col, FormLabel, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
 import { STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { format } from '@/core/ErrorMessageFormatter';
 import { LoadingErred } from '@/core/LoadingErred';
-import { FormContainer, SelectField } from '@/form';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import { SelectGroup, AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
@@ -87,8 +86,8 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
 
   return (
     <WizardForm {...props}>
-      <FormContainer submitting={submitting} className="size-lg" asRow>
-        <SelectField
+      <Row className="size-lg">
+        <SelectGroup
           name="category"
           label={translate('Category')}
           options={categoriesQuery.data}
@@ -102,8 +101,9 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
               form.change('offering', null);
             }
           }}
+          disabled={submitting}
         />
-        <AsyncSelectField
+        <AsyncSelectGroup
           key={category?.uuid}
           name="offering"
           label={translate('Offering')}
@@ -127,6 +127,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
               }
             }
           }}
+          disabled={submitting}
         />
         {offeringError && !offeringQuery.isRefetching ? (
           <LoadingErred
@@ -159,7 +160,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
             />
           )}
         </Col>
-      </FormContainer>
+      </Row>
     </WizardForm>
   );
 };

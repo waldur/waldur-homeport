@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import { Form } from 'react-bootstrap';
-import { Field, useField } from 'react-final-form';
+import { useField } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { StringGroup, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { LikertScaleLength } from '@/marketplace-checklist/types';
@@ -44,32 +43,30 @@ export const QuestionLikertFields: FC = () => (
     </FormGroup>
     <div className="row">
       <div className="col-sm-6">
-        <FormGroup label={translate('Low end label')} required space={5}>
-          <Field
-            name="likert_low_label"
-            component={StringField}
-            placeholder={translate('Strongly disagree')}
-            validate={required}
-          />
-        </FormGroup>
+        <StringGroup
+          name="likert_low_label"
+          placeholder={translate('Strongly disagree')}
+          validate={required}
+          label={translate('Low end label')}
+          required
+          space={5}
+        />
       </div>
       <div className="col-sm-6">
-        <FormGroup label={translate('High end label')} required space={5}>
-          <Field
-            name="likert_high_label"
-            component={StringField}
-            placeholder={translate('Strongly agree')}
-            validate={required}
-          />
-        </FormGroup>
+        <StringGroup
+          name="likert_high_label"
+          placeholder={translate('Strongly agree')}
+          validate={required}
+          label={translate('High end label')}
+          required
+          space={5}
+        />
       </div>
     </div>
-    <FormGroup space={5}>
-      <Field
-        name="likert_allow_na"
-        component={AwesomeCheckboxField}
-        label={translate('Allow "N/A" answer')}
-      />
-    </FormGroup>
+    <BooleanGroup
+      name="likert_allow_na"
+      label={translate('Allow "N/A" answer')}
+      space={5}
+    />
   </>
 );

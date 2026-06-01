@@ -14,8 +14,7 @@ import {
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { required, email } from '@/core/validators';
-import { FormContainer, StringField, SubmitButton, TextField } from '@/form';
-import { EmailField } from '@/form/EmailField';
+import { SubmitButton, StringGroup, EmailGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -147,8 +146,8 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
               </>
             }
           >
-            <FormContainer submitting={submitting}>
-              <StringField
+            <div className="size-sm">
+              <StringGroup
                 name={isEdit ? 'username' : 'preferred_identifier'}
                 label={
                   isEdit
@@ -157,7 +156,7 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
                 }
                 placeholder={translate('e.g. backup')}
                 autoFocus
-                disabled={isEdit}
+                disabled={submitting || isEdit}
                 validate={isEdit ? undefined : required}
                 required={!isEdit}
                 description={
@@ -169,7 +168,7 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
                 }
               />
 
-              <EmailField
+              <EmailGroup
                 name="email"
                 label={translate('Notification email')}
                 placeholder={translate('e.g. serviceaccount@example.com')}
@@ -177,14 +176,16 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
                 description={translate(
                   'Email for receiving notifications about events connected with the service account.',
                 )}
+                disabled={submitting}
               />
 
-              <TextField
+              <TextGroup
                 name="description"
                 label={translate('Description')}
                 placeholder={translate('e.g. Used for automated backups')}
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

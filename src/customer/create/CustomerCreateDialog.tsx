@@ -4,7 +4,13 @@ import { FC, useCallback } from 'react';
 import { Form } from 'react-final-form';
 import { customersAddUser, customersCreate } from 'waldur-js-client';
 
-import { SubmitButton } from '@/form';
+import {
+  composeValidators,
+  email,
+  getNameFieldValidators,
+  required,
+} from '@/core/validators';
+import { StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -14,7 +20,6 @@ import { getCurrentUser } from '@/user/UsersService';
 import { useSetUser, useUser } from '@/workspace/hooks';
 
 import * as constants from './constants';
-import { CustomerCreateForm } from './CustomerCreateForm';
 
 interface CustomerCreateFormData {
   name: string;
@@ -82,7 +87,22 @@ export const CustomerCreateDialog: FC<OwnProps> = ({ resolve }) => {
               </>
             }
           >
-            <CustomerCreateForm />
+            <StringGroup
+              name="name"
+              label={translate('Name')}
+              required
+              placeholder={translate('e.g. My Organization')}
+              maxLength={150}
+              validate={composeValidators(...getNameFieldValidators())}
+            />
+            <StringGroup
+              name="email"
+              label={translate('Contact email')}
+              required
+              placeholder={translate('e.g. someone@example.com')}
+              type="email"
+              validate={composeValidators(required, email)}
+            />
           </ModalDialog>
         </form>
       )}

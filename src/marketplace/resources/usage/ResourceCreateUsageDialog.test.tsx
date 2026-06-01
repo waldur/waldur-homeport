@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceComponentUsagesSetUsage } from 'waldur-js-client';
 
@@ -111,6 +112,7 @@ describe('ResourceCreateUsageDialog', () => {
   });
 
   it('submits form with usage values', async () => {
+    const user = userEvent.setup();
     vi.mocked(getProviderUsageComponents).mockResolvedValue(mockData);
     const submitSpy = vi.mocked(marketplaceComponentUsagesSetUsage);
     submitSpy.mockResolvedValue({} as any);
@@ -124,10 +126,12 @@ describe('ResourceCreateUsageDialog', () => {
     const descInput = screen.getByPlaceholderText('Enter a description...');
     const submitBtn = screen.getByText('Submit usage report');
 
-    fireEvent.change(amountInput, { target: { value: '10' } });
-    fireEvent.change(descInput, { target: { value: 'Test usage' } });
+    await user.clear(amountInput);
+    await user.type(amountInput, '10');
+    await user.clear(descInput);
+    await user.type(descInput, 'Test usage');
 
-    fireEvent.click(submitBtn);
+    await user.click(submitBtn);
 
     await waitFor(() => {
       expect(submitSpy).toHaveBeenCalledWith({

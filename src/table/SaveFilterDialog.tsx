@@ -2,8 +2,7 @@ import { useCallback } from 'react';
 import { Form } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { StringField, SubmitButton } from '@/form';
-import { FormContainer } from '@/form/FormContainer';
+import { SubmitButton, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -59,16 +58,17 @@ export const SaveFilterDialog = (props: SaveFilterDialogProps) => {
               </>
             }
           >
-            <FormContainer submitting={submitting}>
-              <StringField
+            <div className="size-sm">
+              <StringGroup
                 name="name"
                 label={translate('Filter name')}
                 placeholder={translate('e.g. New filter')}
                 required={true}
                 validate={required}
                 spaceless
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

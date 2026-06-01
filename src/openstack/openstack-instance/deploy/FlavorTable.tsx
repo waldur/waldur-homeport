@@ -58,7 +58,7 @@ export const FlavorTable = ({
       if (limit.ram === -1 && limit.vcpu === -1) {
         return undefined;
       }
-      if (!value || !limit) return undefined;
+      if (!value || !limit || !formData) return undefined;
       const errors = [];
 
       if (

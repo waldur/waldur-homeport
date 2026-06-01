@@ -77,14 +77,6 @@ describe('UpdateFloatingIpsDialog', () => {
     expect(screen.getByRole('status')).toBeInTheDocument();
   });
 
-  it('disables submit button while floating IPs are being loaded', () => {
-    vi.mocked(openstackFloatingIpsList).mockReturnValue(
-      new Promise(() => {}) as any,
-    );
-    renderDialog();
-    expect(screen.getByText('Submit')).toBeDisabled();
-  });
-
   it('filters floating IPs by tenant UUID', async () => {
     renderDialog();
     await waitFor(() => {

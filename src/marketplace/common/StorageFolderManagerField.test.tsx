@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Field, Form } from 'react-final-form';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -215,10 +215,11 @@ describe('StorageFolderManagerField', () => {
     });
 
     it('recalculates inode quotas based on hard quota override', async () => {
+      const user = userEvent.setup();
       renderComponent({ storageLimit: 10 });
 
       const hardQuotaInput = screen.getByPlaceholderText('Optional override');
-      fireEvent.change(hardQuotaInput, { target: { value: '20' } });
+      await user.type(hardQuotaInput, '20');
 
       await waitFor(() => {
         expect(screen.getByText('Hard: 200,000 files')).toBeInTheDocument();
@@ -230,8 +231,7 @@ describe('StorageFolderManagerField', () => {
     it('renders storage data type select', () => {
       renderComponent();
 
-      const selects = screen.getAllByRole('combobox');
-      expect(selects.length).toBeGreaterThanOrEqual(2);
+      expect(screen.getByLabelText(/Storage Data Type/i)).toBeInTheDocument();
     });
 
     it('clears hard quota override and reverts to default', async () => {

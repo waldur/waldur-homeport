@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
@@ -92,9 +92,10 @@ describe('EditSchedulesDialog', () => {
 
     // Fill Period 2 dates via mock input
     const datePickers = screen.getAllByTestId('date-picker');
-    fireEvent.change(datePickers[1], {
-      target: { value: '2023-10-28T10:00:00Z,2023-10-28T12:00:00Z' },
-    });
+    await user.type(
+      datePickers[1],
+      '2023-10-28T10:00:00Z,2023-10-28T12:00:00Z',
+    );
 
     await user.click(screen.getByRole('button', { name: /Update/i }));
 
@@ -113,7 +114,8 @@ describe('EditSchedulesDialog', () => {
     expect(startStr).toContain('2023-10-28');
   });
 
-  it('can remove a schedule period', () => {
+  it('can remove a schedule period', async () => {
+    const user = userEvent.setup();
     renderDialog();
 
     expect(screen.getByText(/27 October 2023/i)).toBeInTheDocument();
@@ -121,7 +123,7 @@ describe('EditSchedulesDialog', () => {
     const removeButton = screen
       .getAllByRole('button')
       .find((btn) => btn.classList.contains('btn-text-danger'));
-    fireEvent.click(removeButton);
+    await user.click(removeButton);
 
     expect(screen.queryByText(/27 October 2023/i)).not.toBeInTheDocument();
   });
@@ -136,9 +138,10 @@ describe('EditSchedulesDialog', () => {
     // Add a new period to trigger parsing with updated slot duration
     await user.click(screen.getByText(/Add time period/i));
     const datePickers = screen.getAllByTestId('date-picker');
-    fireEvent.change(datePickers[1], {
-      target: { value: '2023-10-29T10:00:00Z,2023-10-29T11:00:00Z' },
-    });
+    await user.type(
+      datePickers[1],
+      '2023-10-29T10:00:00Z,2023-10-29T11:00:00Z',
+    );
 
     vi.mocked(marketplaceProviderOfferingsUpdateAttributes).mockResolvedValue(
       {} as any,

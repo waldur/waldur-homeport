@@ -5,18 +5,23 @@ import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import {
-  checklistsAdminQuestionsList,
   ChecklistOperators,
+  checklistsAdminQuestionsList,
   QuestionAdmin,
   QuestionTypeEnum,
 } from 'waldur-js-client';
 
-import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FileUploadField, NumberField, SelectField } from '@/form';
+import {
+  RadioGroup,
+  FileUploadField,
+  NumberField,
+  SelectField,
+  SelectGroup,
+} from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
 import { DateField } from '@/form/DateField';
@@ -106,37 +111,30 @@ const FieldsListGroup = ({
   return (
     <>
       <div className="mb-5">
-        <Field
+        <RadioGroup
           name="dependency_logic_operator"
           defaultValue="and"
-          render={({ input }) => (
-            <AwesomeRadioButton
-              label={translate(
-                'When multiple conditions exist, show this question if:',
-              )}
-              choices={[
-                {
-                  label: translate('All conditions match (AND)'),
-                  value: 'and',
-                },
-                {
-                  label: translate('Any condition matches (OR)'),
-                  value: 'or',
-                },
-              ]}
-              direction="horizontal"
-              justify="start"
-              input={input}
-              disabled={fields.length < 2}
-              tooltip={
-                fields.length < 2
-                  ? translate(
-                      'Add more conditions to configure logic combination',
-                    )
-                  : undefined
-              }
-            />
+          label={translate(
+            'When multiple conditions exist, show this question if:',
           )}
+          choices={[
+            {
+              label: translate('All conditions match (AND)'),
+              value: 'and',
+            },
+            {
+              label: translate('Any condition matches (OR)'),
+              value: 'or',
+            },
+          ]}
+          direction="horizontal"
+          justify="start"
+          disabled={fields.length < 2}
+          tooltip={
+            fields.length < 2
+              ? translate('Add more conditions to configure logic combination')
+              : undefined
+          }
         />
       </div>
       {fields.map((name, i) => {
@@ -205,16 +203,14 @@ const FieldsListGroup = ({
                   )}
                 />
               </FormGroup>
-              <FormGroup label={translate('Condition')}>
-                <Field
-                  component={SelectField}
-                  name={`${name}.operator`}
-                  options={getConditionOptions(selectedQuestion?.question_type)}
-                  simpleValue
-                  validate={required}
-                  isDisabled={!fields.value[i]?.depends_on_question}
-                />
-              </FormGroup>
+              <SelectGroup
+                name={`${name}.operator`}
+                options={getConditionOptions(selectedQuestion?.question_type)}
+                simpleValue
+                validate={required}
+                isDisabled={!fields.value[i]?.depends_on_question}
+                label={translate('Condition')}
+              />
               <FormGroup
                 label={translate('Value')}
                 description={

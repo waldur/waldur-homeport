@@ -16,7 +16,7 @@ describe('NamespaceField', () => {
       />,
     );
     // SelectControl renders a select with FormControl (as="select")
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByLabelText(/Namespace/)).toBeInTheDocument();
     expect(screen.getByText('ns-1')).toBeInTheDocument();
   });
 

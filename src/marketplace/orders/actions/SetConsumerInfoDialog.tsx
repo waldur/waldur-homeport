@@ -9,7 +9,7 @@ import {
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { decodeFileName } from '@/core/utils';
-import { SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
@@ -75,13 +75,11 @@ export const SetConsumerInfoDialog: FC<SetConsumerInfoDialogProps> = ({
               </>
             }
           >
-            <FormGroup label={translate('Message')}>
-              <Field
-                name="consumer_message"
-                component={TextField}
-                placeholder={translate('Enter a message for the provider...')}
-              />
-            </FormGroup>
+            <TextGroup
+              name="consumer_message"
+              placeholder={translate('Enter a message for the provider...')}
+              label={translate('Message')}
+            />
             <FormGroup label={translate('Attachment (PDF)')}>
               <Field name="consumer_message_attachment">
                 {({ input }) => (

@@ -1,3 +1,4 @@
+import { omit } from 'lodash-es';
 import { FC } from 'react';
 import { Form, FormControlProps } from 'react-bootstrap';
 
@@ -22,30 +23,55 @@ export const CommaSeparatedListField: FC<CommaSeparatedListFieldProps> = ({
   separator: sep = 'comma',
   ...rest
 }) => {
-  const value = Array.isArray(input.value)
-    ? input.value.join(sep === 'comma' ? ', ' : ' ')
-    : input.value;
+  const valueProp = input ? input.value : (rest as any).value;
+  const onChangeProp = input ? input.onChange : (rest as any).onChange;
+  const onBlurProp = input ? input.onBlur : (rest as any).onBlur;
+
+  const value = Array.isArray(valueProp)
+    ? valueProp.join(sep === 'comma' ? ', ' : ' ')
+    : valueProp;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     const parsedValue = newValue
       .split(sep === 'comma' ? ',' : ' ')
       .map((item) => item.trim());
-    input.onChange(parsedValue);
+    if (onChangeProp) {
+      onChangeProp(parsedValue);
+    }
   };
-  const handleBlur = () => {
-    const parsedValue = (input.value || []).filter(
+
+  const handleBlur = (e) => {
+    const parsedValue = (valueProp || []).filter(
       (item) => !['', undefined, null].includes(item),
     );
-    input.onChange(parsedValue);
+    if (onChangeProp) {
+      onChangeProp(parsedValue);
+    }
+    if (onBlurProp) {
+      onBlurProp(e);
+    }
   };
+
+  const domProps = omit(rest, [
+    'value',
+    'onChange',
+    'onBlur',
+    'name',
+    'meta',
+    'label',
+    'description',
+    'validate',
+    'spaceless',
+    'space',
+  ]);
 
   return (
     <Form.Control
       className={solid && 'form-control-solid'}
       type="text"
       placeholder={placeholder}
-      {...rest}
+      {...domProps}
       value={value || ''}
       onChange={handleChange}
       onBlur={handleBlur}

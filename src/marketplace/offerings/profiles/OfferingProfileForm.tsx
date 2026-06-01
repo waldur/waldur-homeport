@@ -1,18 +1,16 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceOfferingProfilesCreate,
   marketplaceOfferingProfilesPartialUpdate,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { StringField, SubmitButton } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-
-import { FormGroup } from '../FormGroup';
 
 interface FormResolve {
   profile?: { uuid: string; name: string; description?: string };
@@ -85,23 +83,18 @@ export const OfferingProfileForm: FC<{ resolve: FormResolve }> = ({
               </>
             }
           >
-            <FormGroup label={translate('Name')} required>
-              <Field
-                name="name"
-                validate={required}
-                component={StringField}
-                placeholder={translate(
-                  'e.g. Rancher cluster, SLURM allocation',
-                )}
-              />
-            </FormGroup>
-            <FormGroup label={translate('Description')}>
-              <Field
-                name="description"
-                component={StringField}
-                placeholder={translate('Describe what this profile covers')}
-              />
-            </FormGroup>
+            <StringGroup
+              name="name"
+              validate={required}
+              placeholder={translate('e.g. Rancher cluster, SLURM allocation')}
+              label={translate('Name')}
+              required
+            />
+            <StringGroup
+              name="description"
+              placeholder={translate('Describe what this profile covers')}
+              label={translate('Description')}
+            />
           </ModalDialog>
         </form>
       )}

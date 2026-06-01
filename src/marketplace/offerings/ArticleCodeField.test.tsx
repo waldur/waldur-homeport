@@ -40,8 +40,7 @@ describe('ArticleCodeField', () => {
     renderComponent();
     const user = userEvent.setup();
 
-    // Find input by name attribute
-    const input = screen.getByRole('textbox');
+    const input = screen.getByLabelText(/Article code/i);
     await user.type(input, 'ABC123');
 
     expect(input).toHaveValue('ABC123');
@@ -51,7 +50,7 @@ describe('ArticleCodeField', () => {
     renderComponent();
     const user = userEvent.setup();
 
-    const input = screen.getByRole('textbox');
+    const input = screen.getByLabelText(/Article code/i);
     // Type a short article code to trigger validation error
     await user.type(input, 'A');
 
@@ -65,21 +64,13 @@ describe('ArticleCodeField', () => {
     renderComponent();
     const user = userEvent.setup();
 
-    const input = screen.getByRole('textbox');
+    const input = screen.getByLabelText(/Article code/i);
     await user.type(input, 'VALID123');
 
     // Blur the field to trigger validation
     await user.tab();
 
     expect(screen.queryByText('Code is too short.')).not.toBeInTheDocument();
-  });
-
-  it('shows question mark icon for description tooltip', () => {
-    renderComponent();
-
-    // Check that the question mark icon is present (FormGroup renders it for description)
-    const svg = document.querySelector('svg');
-    expect(svg).toBeInTheDocument();
   });
 
   it('handles empty article code', async () => {

@@ -705,6 +705,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
                       (enableMultiSelect || fieldType ? 1 : 0)
                     }
                     className={expandableRowClassName}
+                    data-testid="expanded-row-cell"
                   >
                     {React.createElement(expandableRow, { row, fetch })}
                   </td>

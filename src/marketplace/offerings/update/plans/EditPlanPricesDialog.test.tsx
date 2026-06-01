@@ -1,5 +1,6 @@
-import { screen, fireEvent, waitFor } from '@testing-library/react';
-import { vi, describe, it, expect } from 'vitest';
+import { screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { marketplacePlansUpdatePrices } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
@@ -39,13 +40,21 @@ const renderComponent = () => {
 };
 
 describe('EditPlanPricesDialog', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockPlan.prices = { cpu: 10, ram: 5 };
+  });
+
   it('should successfully update prices', async () => {
-    const mockPlansUpdatePrices = vi.mocked(marketplacePlansUpdatePrices);
+    const user = userEvent.setup();
+    const mockPlansUpdatePrices = vi
+      .mocked(marketplacePlansUpdatePrices)
+      .mockResolvedValue({} as any);
 
     renderComponent();
 
     const submitButton = screen.getByText('Save');
-    fireEvent.click(submitButton);
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(mockPlansUpdatePrices).toHaveBeenCalledWith({
@@ -63,7 +72,8 @@ describe('EditPlanPricesDialog', () => {
   });
 
   it('should filter out prices for non-existent components', async () => {
-    const originalPlan = mockPlan;
+    const user = userEvent.setup();
+    vi.mocked(marketplacePlansUpdatePrices).mockResolvedValue({} as any);
     mockPlan.prices = {
       cpu: 10,
       ram: 5,
@@ -73,7 +83,7 @@ describe('EditPlanPricesDialog', () => {
     renderComponent();
 
     const submitButton = screen.getByText('Save');
-    fireEvent.click(submitButton);
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(marketplacePlansUpdatePrices).toHaveBeenCalledWith({
@@ -88,12 +98,11 @@ describe('EditPlanPricesDialog', () => {
         },
       });
     });
-
-    // Restore original plan for other tests
-    mockPlan.prices = originalPlan.prices;
   });
 
   it('should convert scientific notation prices to plain numbers', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplacePlansUpdatePrices).mockResolvedValue({} as any);
     mockPlan.prices = {
       cpu: '0E-10',
       ram: '0E-10',
@@ -101,12 +110,17 @@ describe('EditPlanPricesDialog', () => {
 
     renderComponent();
 
-    // Current price column should show "0" not "0E-10"
-    const currentPriceCells = screen
-      .getAllByRole('row')
-      .slice(1) // skip header row
-      .map((row) => row.querySelectorAll('td')[1].textContent);
-    expect(currentPriceCells).toEqual(['0', '0']);
+    // Verify row content using within and semantic role
+    const rows = screen.getAllByRole('row').slice(1); // skip header row
+
+    expect(within(rows[0]).getByText('CPU')).toBeInTheDocument();
+    // The current price is in the second cell
+    const cpuCells = within(rows[0]).getAllByRole('cell');
+    expect(cpuCells[1]).toHaveTextContent('0');
+
+    expect(within(rows[1]).getByText('RAM')).toBeInTheDocument();
+    const ramCells = within(rows[1]).getAllByRole('cell');
+    expect(ramCells[1]).toHaveTextContent('0');
 
     // Form inputs should have 0, not "0E-10"
     const inputs = screen.getAllByRole('spinbutton');
@@ -114,7 +128,7 @@ describe('EditPlanPricesDialog', () => {
     expect(inputs[1]).toHaveValue(0);
 
     // Submit should send parsed numbers
-    fireEvent.click(screen.getByText('Save'));
+    await user.click(screen.getByText('Save'));
 
     await waitFor(() => {
       expect(marketplacePlansUpdatePrices).toHaveBeenCalledWith({
@@ -124,9 +138,6 @@ describe('EditPlanPricesDialog', () => {
         },
       });
     });
-
-    // Restore
-    mockPlan.prices = { cpu: 10, ram: 5 };
   });
 
   it('should convert non-zero scientific notation prices correctly', () => {
@@ -137,17 +148,16 @@ describe('EditPlanPricesDialog', () => {
 
     renderComponent();
 
-    const currentPriceCells = screen
-      .getAllByRole('row')
-      .slice(1)
-      .map((row) => row.querySelectorAll('td')[1].textContent);
-    expect(currentPriceCells).toEqual(['0.0015', '250']);
+    const rows = screen.getAllByRole('row').slice(1);
+
+    const cpuCells = within(rows[0]).getAllByRole('cell');
+    expect(cpuCells[1]).toHaveTextContent('0.0015');
+
+    const ramCells = within(rows[1]).getAllByRole('cell');
+    expect(ramCells[1]).toHaveTextContent('250');
 
     const inputs = screen.getAllByRole('spinbutton');
     expect(inputs[0]).toHaveValue(0.0015);
     expect(inputs[1]).toHaveValue(250);
-
-    // Restore
-    mockPlan.prices = { cpu: 10, ram: 5 };
   });
 });

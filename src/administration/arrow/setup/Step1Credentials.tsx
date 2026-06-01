@@ -1,13 +1,11 @@
 import { FC, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 
 import { url, required } from '@/core/validators';
-import { StringField } from '@/form';
-import { SecretField } from '@/form/SecretField';
+import { StringGroup, SecretGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -77,25 +75,24 @@ export const Step1Credentials: FC<WizardStepProps> = (props) => {
           )}
         </p>
 
-        <FormGroup
+        <StringGroup
+          name="api_url"
+          validate={url}
           label={translate('API URL')}
           description={translate(
             'Arrow API base URL (e.g., https://xsp.arrow.com/index.php/api/)',
           )}
           required
-        >
-          <Field name="api_url" component={StringField} validate={url} />
-        </FormGroup>
+        />
 
-        <FormGroup
+        <SecretGroup
+          name="api_key"
+          validate={required}
           label={translate('API Key')}
           description={translate('Your Arrow API key')}
           required
-        >
-          <Field name="api_key" component={SecretField} validate={required} />
-        </FormGroup>
+        />
       </div>
-
       {error && (
         <Alert variant="danger" className="mb-4">
           {error}

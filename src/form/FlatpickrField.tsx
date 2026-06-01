@@ -20,6 +20,7 @@ export const FlatpickrField: FC<FlatpickrFieldProps> = ({
   placeholder,
   iconNode,
   solid,
+  id,
   ...props
 }) => {
   const onlyTime = props.options?.enableTime && props.options?.noCalendar;
@@ -28,6 +29,7 @@ export const FlatpickrField: FC<FlatpickrFieldProps> = ({
   return (
     <div style={{ position: 'relative' }}>
       <Flatpickr
+        id={id}
         value={
           props.input.value
             ? typeof props.input.value === 'string'

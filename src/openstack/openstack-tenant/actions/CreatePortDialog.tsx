@@ -1,22 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 import { openstackPortsCreate } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { isMatchPattern, required } from '@/core/validators';
-import { SelectField, FormGroup } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadNetworks, loadSubnets } from '@/openstack/api';
 import { CustomIpFieldFinal as CustomIpField } from '@/openstack/openstack-instance/actions/update-internal-ips/CustomIpFieldFinal';
 import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
 import {
-  createLatinNameField,
   createDescriptionField,
+  createLatinNameField,
 } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -90,10 +90,9 @@ export const FixedIPsField: FC<{
       <div className="border-rows mb-4">
         <Row className="g-4">
           <Col xs={12}>
-            <Field
+            <SelectGroup
               name="fixed_ips.subnet"
               label={translate('Subnet')}
-              component={FormGroup}
               options={subnets || []}
               placeholder={translate('Select subnet')}
               getOptionValue={(option) => option.url}
@@ -101,9 +100,7 @@ export const FixedIPsField: FC<{
               noUpdateOnBlur
               spaceless
               components={{ ValueContainer: SubnetValueContainer }}
-            >
-              <SelectField />
-            </Field>
+            />
           </Col>
           {customIpEnabled && fixedIps && (
             <Col xs={12}>

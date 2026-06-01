@@ -1,8 +1,7 @@
 import { FC, useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { composeValidators } from '@/core/validators';
-import { FormGroup, NumberField } from '@/form';
+import { NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 
 import { validatePercent } from './constants';
@@ -11,13 +10,12 @@ export const GraceCoefficientField: FC = () => {
   const validate = useMemo(() => composeValidators(validatePercent), []);
 
   return (
-    <Field
+    <NumberGroup
       name="grace_coefficient"
       label={translate('Grace coefficient')}
       validate={validate}
-      component={FormGroup}
-    >
-      <NumberField placeholder="0" unit="%" />
-    </Field>
+      placeholder="0"
+      unit="%"
+    />
   );
 };

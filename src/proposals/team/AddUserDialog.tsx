@@ -7,8 +7,7 @@ import { post } from '@/core/api';
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { usersAutocomplete } from '@/customer/team/utils';
-import { SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import { SubmitButton, AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -81,7 +80,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             }
           >
             <FormGroup label={translate('User')} required>
-              <AsyncSelectField
+              <AsyncSelectGroup
                 name="user"
                 placeholder={translate('Search and select user...')}
                 loadOptions={usersAutocomplete}

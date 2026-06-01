@@ -1,9 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useCallback } from 'react';
 import {
   adminArrowVendorOfferingMappingsVendorChoicesList,
   marketplacePublicOfferingsPlansList,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@/core/constants';
+import { SelectGroup } from '@/form';
 import { AsyncCreatableSelect } from '@/form/select';
 import { translate } from '@/i18n';
 
@@ -71,57 +74,38 @@ export const VendorNameSelect = ({
       }
       placeholder={translate('Select or type vendor name...')}
       defaultOptions={defaultOption ? [defaultOption] : true}
-      additional={{ page: 1 }}
     />
   );
 };
 
-export const PlanSelect = ({
-  input,
+export const PlanSelectGroup = ({
   offeringUuid,
 }: {
-  input?;
   offeringUuid: string | null;
 }) => {
-  const [plans, setPlans] = useState<PlanOption[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (!offeringUuid) {
-      setPlans([]);
-      return;
-    }
-    setLoading(true);
-    marketplacePublicOfferingsPlansList({ path: { uuid: offeringUuid } })
-      .then((response) => {
-        setPlans(
-          (response.data || []).map((p) => ({
-            uuid: p.uuid,
-            name: p.name,
-          })),
-        );
-      })
-      .catch(() => setPlans([]))
-      .finally(() => setLoading(false));
-  }, [offeringUuid]);
+  const { data: plans, isLoading } = useQuery({
+    queryKey: ['offeringPlans', offeringUuid],
+    queryFn: () =>
+      marketplacePublicOfferingsPlansList({
+        path: { uuid: offeringUuid },
+      }).then((response) => response.data),
+    enabled: Boolean(offeringUuid),
+    staleTime: STALE_TIME,
+  });
 
   return (
-    <AsyncCreatableSelect
-      value={input.value}
-      onChange={input.onChange}
-      loadOptions={() =>
-        Promise.resolve({
-          options: plans,
-          hasMore: false,
-          additional: { page: 1 },
-        })
-      }
-      defaultOptions={plans}
-      isLoading={loading}
+    <SelectGroup
+      name="plan"
+      label={translate('Plan')}
+      description={translate(
+        'Billing plan to use for resources created from this vendor offering',
+      )}
+      placeholder={translate('Select plan...')}
+      options={plans || []}
+      isLoading={isLoading}
       getOptionLabel={(option: PlanOption) => option.name}
       getOptionValue={(option: PlanOption) => option.uuid}
-      isValidNewOption={() => false}
-      placeholder={translate('Select plan...')}
+      isDisabled={!offeringUuid}
       isClearable
       noOptionsMessage={() =>
         offeringUuid

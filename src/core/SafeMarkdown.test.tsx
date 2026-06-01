@@ -22,8 +22,8 @@ describe('SafeMarkdown', () => {
 
     it('renders bold and italic text', () => {
       render(<SafeMarkdown text="**bold** and _italic_" />);
-      expect(document.querySelector('strong')?.textContent).toBe('bold');
-      expect(document.querySelector('em')?.textContent).toBe('italic');
+      expect(screen.getByText('bold').tagName).toBe('STRONG');
+      expect(screen.getByText('italic').tagName).toBe('EM');
     });
 
     it('renders unordered lists', () => {
@@ -66,13 +66,16 @@ describe('SafeMarkdown', () => {
   describe('XSS prevention — inline HTML', () => {
     it('strips <script> tags', () => {
       render(<SafeMarkdown text='<script>alert("xss")</script>safe text' />);
-      expect(document.querySelector('script')).toBeNull();
+      const container = screen.getByTestId('safe-markdown');
+
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(container.querySelector('script')).toBeNull();
       expect(screen.getByText('safe text')).toBeTruthy();
     });
 
     it('strips onerror event attributes', () => {
       render(<SafeMarkdown text='<img src=x onerror="alert(1)" />' />);
-      const img = document.querySelector('img');
+      const img = screen.queryByRole('img');
       // img may or may not appear depending on DOMPurify config, but
       // the onerror attribute must never survive.
       if (img) {
@@ -84,7 +87,7 @@ describe('SafeMarkdown', () => {
       render(
         <SafeMarkdown text='<img src="data:text/html,<script>alert(1)</script>" />' />,
       );
-      const img = document.querySelector('img');
+      const img = screen.queryByRole('img');
       if (img) {
         const src = img.getAttribute('src') ?? '';
         expect(src.toLowerCase()).not.toContain('data:');
@@ -94,23 +97,20 @@ describe('SafeMarkdown', () => {
 
   describe('className prop', () => {
     it('has md-content class by default', () => {
-      const { container } = render(<SafeMarkdown text="hi" />);
-      expect(container.firstElementChild?.className).toContain('md-content');
-      expect(container.firstElementChild?.className).not.toContain('undefined');
+      render(<SafeMarkdown text="hi" />);
+      expect(screen.getByTestId('safe-markdown')).toHaveClass('md-content');
     });
 
     it('adds md-small-titles when smallTitles is true', () => {
-      const { container } = render(<SafeMarkdown text="hi" smallTitles />);
-      expect(container.firstElementChild?.className).toContain(
+      render(<SafeMarkdown text="hi" smallTitles />);
+      expect(screen.getByTestId('safe-markdown')).toHaveClass(
         'md-small-titles',
       );
     });
 
     it('does not add md-small-titles when smallTitles is false', () => {
-      const { container } = render(
-        <SafeMarkdown text="hi" smallTitles={false} />,
-      );
-      expect(container.firstElementChild?.className).not.toContain(
+      render(<SafeMarkdown text="hi" smallTitles={false} />);
+      expect(screen.getByTestId('safe-markdown')).not.toHaveClass(
         'md-small-titles',
       );
     });

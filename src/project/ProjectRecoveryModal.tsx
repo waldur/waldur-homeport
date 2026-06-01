@@ -5,18 +5,15 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   Project,
-  projectsRecover,
   ProjectRecoveryRequest,
+  projectsRecover,
 } from 'waldur-js-client';
 
-import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
-import { SubmitButton } from '@/form';
-import { DateField } from '@/form/DateField';
+import { RadioGroup, DateGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -176,18 +173,13 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
 
             {hasPreviousMembers && (
               <div className="mb-4">
-                <Field
+                <RadioGroup
                   name="roleRecoveryOption"
                   defaultValue=""
-                  render={({ input }) => (
-                    <AwesomeRadioButton
-                      label={translate(
-                        'Choose what should be restored along with the project:',
-                      )}
-                      choices={roleRecoveryChoices}
-                      input={input}
-                    />
+                  label={translate(
+                    'Choose what should be restored along with the project:',
                   )}
+                  choices={roleRecoveryChoices}
                 />
 
                 {(values.roleRecoveryOption ===
@@ -232,18 +224,14 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
             )}
 
             <div className="mb-4">
-              <FormGroup
+              <DateGroup
+                name="end_date"
+                placeholder="YYYY-MM-DD"
                 label={translate('End date (optional)')}
                 description={translate(
                   'Set an expiration date for the recovered project',
                 )}
-              >
-                <Field
-                  name="end_date"
-                  component={DateField}
-                  placeholder="YYYY-MM-DD"
-                />
-              </FormGroup>
+              />
             </div>
 
             {!hasTerminationMetadata && (

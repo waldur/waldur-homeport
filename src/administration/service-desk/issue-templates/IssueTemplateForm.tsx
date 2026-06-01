@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { Form as FinalForm, Field } from 'react-final-form';
+import { Form as FinalForm } from 'react-final-form';
 import {
   supportTemplatesCreate,
   supportTemplatesCreateAttachments,
@@ -12,14 +12,13 @@ import { IssueTemplateTypeOptions } from '@/administration/utils';
 import { formDataOptions } from '@/core/api';
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { required } from '@/core/validators';
-import { SelectField, StringField, SubmitButton, TextField } from '@/form';
+import { SubmitButton, StringGroup, SelectGroup, TextGroup } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { Attachment, AttachmentUploading } from '@/form/upload/types';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
@@ -220,29 +219,30 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
               />
             }
           >
-            <FormGroup label={translate('Name')} required>
-              <Field component={StringField} name="name" validate={required} />
-            </FormGroup>
+            <StringGroup
+              name="name"
+              validate={required}
+              label={translate('Name')}
+              required
+            />
 
-            <FormGroup label={translate('Type')} required>
-              <Field
-                component={SelectField}
-                name="issue_type"
-                options={IssueTemplateTypeOptions}
-                validate={required}
-                getOptionValue={(option) => option.value}
-                getOptionLabel={(option) => option.label}
-                simpleValue
-              />
-            </FormGroup>
+            <SelectGroup
+              name="issue_type"
+              options={IssueTemplateTypeOptions}
+              validate={required}
+              getOptionValue={(option) => option.value}
+              getOptionLabel={(option) => option.label}
+              simpleValue
+              label={translate('Type')}
+              required
+            />
 
-            <FormGroup label={translate('Description')} required>
-              <Field
-                component={TextField}
-                name="description"
-                validate={required}
-              />
-            </FormGroup>
+            <TextGroup
+              name="description"
+              validate={required}
+              label={translate('Description')}
+              required
+            />
 
             <Form.Label>{translate('Attachments')}</Form.Label>
             <UploadContainer

@@ -10,7 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SelectField, StringField, SubmitButton } from '@/form';
+import { SelectField, SubmitButton, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -235,20 +235,14 @@ export const CreateManualAssignmentDialog: FC<
                   )}
               </FormGroup>
 
-              <FormGroup
+              <StringGroup
+                name="manager_notes"
+                placeholder={translate('e.g., Assigned due to expertise in...')}
                 label={translate('Notes')}
                 description={translate(
                   'Optional notes about this assignment (visible to managers only).',
                 )}
-              >
-                <Field
-                  name="manager_notes"
-                  component={StringField}
-                  placeholder={translate(
-                    'e.g., Assigned due to expertise in...',
-                  )}
-                />
-              </FormGroup>
+              />
             </div>
           </ModalDialog>
         </form>

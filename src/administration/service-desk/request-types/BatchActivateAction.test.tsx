@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { supportRequestTypesAdminActivate } from 'waldur-js-client';
 
@@ -24,11 +25,12 @@ describe('BatchActivateAction', () => {
     vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(supportRequestTypesAdminActivate).mockResolvedValue({} as any);
 
+    const user = userEvent.setup();
     renderWithProviders(
       <BatchActivateAction rows={rows} refetch={mockRefetch} />,
     );
 
-    fireEvent.click(screen.getByText('Activate'));
+    await user.click(screen.getByText('Activate'));
 
     await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     await waitFor(() => {
@@ -70,11 +72,12 @@ describe('BatchActivateAction', () => {
       },
     );
 
+    const user = userEvent.setup();
     renderWithProviders(
       <BatchActivateAction rows={multiRows} refetch={mockRefetch} />,
     );
 
-    fireEvent.click(screen.getByText('Activate'));
+    await user.click(screen.getByText('Activate'));
 
     await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
     await waitFor(() => expect(mockRefetch).toHaveBeenCalled());

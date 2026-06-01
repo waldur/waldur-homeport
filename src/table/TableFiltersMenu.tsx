@@ -298,7 +298,6 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom"
             data-kt-menu-flip="bottom"
-            data-cy={`${props.openName}-add-filter-button`}
           >
             <FunnelSimpleIcon size={16} weight="bold" />
           </button>
@@ -306,7 +305,6 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
             ref={menuEl}
             className="table-filters-menu column-filter menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold fs-6"
             data-kt-menu="true"
-            data-cy={`${props.openName}-add-filter-menu`}
           >
             {props.filters}
           </div>
@@ -320,7 +318,6 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom-start"
-            data-cy="table-add-filter-button"
           >
             <span className="svg-icon svg-icon-4">
               <PlusIcon weight="bold" />
@@ -330,7 +327,6 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
             ref={menuEl}
             className="table-filters-menu menu menu-sub menu-sub-dropdown menu-column menu-gray-700 menu-state-bg-gray fw-bold py-1 fs-6 w-250px"
             data-kt-menu="true"
-            data-cy="table-add-filter-menu"
           >
             <SaveFilterItems
               table={props.table}

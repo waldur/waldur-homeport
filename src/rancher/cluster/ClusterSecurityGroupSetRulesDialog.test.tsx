@@ -1,4 +1,5 @@
-import { screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { rancherClusterSecurityGroupsUpdate } from 'waldur-js-client';
 
@@ -30,6 +31,8 @@ const renderDialog = (resource = fakeResource) => {
 };
 
 describe('ClusterSecurityGroupSetRulesDialog', () => {
+  const user = userEvent.setup();
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -51,7 +54,7 @@ describe('ClusterSecurityGroupSetRulesDialog', () => {
     const submitButton = screen.getByRole('button', {
       name: /^Set rules$/,
     });
-    fireEvent.click(submitButton);
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(rancherClusterSecurityGroupsUpdate).toHaveBeenCalled();

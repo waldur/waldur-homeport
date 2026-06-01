@@ -3,13 +3,17 @@ import { useCallback } from 'react';
 import { Field, Form } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { SubmitButton, TextField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { CountrySelectField } from '@/form/CountrySelectField';
-import { DateField } from '@/form/DateField';
+import {
+  SubmitButton,
+  BooleanGroup,
+  TextGroup,
+  DateGroup,
+  CountrySelectGroup,
+  StringGroup,
+  SelectGroup,
+} from '@/form';
 import { MultiCountrySelectField } from '@/form/MultiCountrySelectField';
 import { PhoneNumberField } from '@/form/PhoneNumberField';
-import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
@@ -19,10 +23,10 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { EditUserProps } from '../types';
 
 import {
-  GenderSelectField,
-  OrganizationTypeSelectField,
-  PersonalTitleSelectField,
-} from './fields';
+  getGenderChoices,
+  getOrganizationTypeOptions,
+  getPersonalTitleOptions,
+} from './aai-constants';
 import { useProfileFieldWarnings } from './useProfileFieldWarnings';
 import { useUpdateUser } from './useUpdateUser';
 
@@ -119,84 +123,65 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
             }
           >
             {resolve.name === 'notifications_enabled' ? (
-              <FormGroup
+              <BooleanGroup
+                name="notifications_enabled"
+                validate={resolve.requiredMsg ? required : undefined}
                 label={resolve.label}
                 required={Boolean(resolve.requiredMsg)}
-              >
-                <Field
-                  name="notifications_enabled"
-                  component={AwesomeCheckboxField}
-                  validate={resolve.requiredMsg ? required : undefined}
-                />
-              </FormGroup>
+              />
             ) : resolve.name === 'description' ? (
-              <FormGroup
+              <TextGroup
+                name="description"
+                validate={resolve.requiredMsg ? required : undefined}
+                maxLength={500}
+                spaceless
                 label={translate('Description')}
                 required={Boolean(resolve.requiredMsg)}
-              >
-                <Field
-                  name="description"
-                  component={TextField}
-                  validate={resolve.requiredMsg ? required : undefined}
-                  maxLength={500}
-                  spaceless
-                />
-              </FormGroup>
+              />
             ) : resolve.name === 'gender' ? (
-              <FormGroup
+              <SelectGroup
+                name="gender"
+                validate={resolve.requiredMsg ? required : undefined}
                 label={resolve.label}
                 required={Boolean(resolve.requiredMsg)}
-              >
-                <Field
-                  name="gender"
-                  component={GenderSelectField}
-                  validate={resolve.requiredMsg ? required : undefined}
-                />
-              </FormGroup>
+                options={getGenderChoices()}
+                isClearable={true}
+                simpleValue={true}
+              />
             ) : resolve.name === 'personal_title' ? (
-              <FormGroup
+              <SelectGroup
+                name="personal_title"
+                validate={resolve.requiredMsg ? required : undefined}
                 label={resolve.label}
                 required={Boolean(resolve.requiredMsg)}
-              >
-                <Field
-                  name="personal_title"
-                  component={PersonalTitleSelectField}
-                  validate={resolve.requiredMsg ? required : undefined}
-                />
-              </FormGroup>
+                options={getPersonalTitleOptions()}
+                isClearable={true}
+                simpleValue={true}
+              />
             ) : resolve.name === 'organization_type' ? (
-              <FormGroup
+              <SelectGroup
+                name="organization_type"
+                validate={resolve.requiredMsg ? required : undefined}
                 label={resolve.label}
                 required={Boolean(resolve.requiredMsg)}
-              >
-                <Field
-                  name="organization_type"
-                  component={OrganizationTypeSelectField}
-                  validate={resolve.requiredMsg ? required : undefined}
-                />
-              </FormGroup>
+                options={getOrganizationTypeOptions()}
+                isClearable={true}
+                simpleValue={true}
+              />
             ) : resolve.name === 'birth_date' ? (
-              <FormGroup
+              <DateGroup
+                name="birth_date"
+                validate={resolve.requiredMsg ? required : undefined}
                 label={resolve.label}
                 required={Boolean(resolve.requiredMsg)}
-              >
-                <Field
-                  name="birth_date"
-                  component={DateField}
-                  validate={resolve.requiredMsg ? required : undefined}
-                />
-              </FormGroup>
+              />
             ) : COUNTRY_FIELDS.includes(resolve.name) ? (
-              <FormGroup
+              <CountrySelectGroup
+                name={resolve.name}
+                validate={resolve.requiredMsg ? required : undefined}
                 label={resolve.label}
                 required={Boolean(resolve.requiredMsg)}
-              >
-                <Field
-                  name={resolve.name}
-                  component={CountrySelectField}
-                  validate={resolve.requiredMsg ? required : undefined}
-                />
-              </FormGroup>
+              />
             ) : MULTI_COUNTRY_FIELDS.includes(resolve.name) ? (
               <FormGroup
                 label={resolve.label}
@@ -223,17 +208,13 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
                 />
               </FormGroup>
             ) : resolve.name ? (
-              <FormGroup
+              <StringGroup
+                name={resolve.name}
+                validate={resolve.requiredMsg ? required : undefined}
+                spaceless
                 label={resolve.label}
                 required={Boolean(resolve.requiredMsg)}
-              >
-                <Field
-                  name={resolve.name}
-                  component={StringField}
-                  validate={resolve.requiredMsg ? required : undefined}
-                  spaceless
-                />
-              </FormGroup>
+              />
             ) : null}
           </ModalDialog>
         </form>

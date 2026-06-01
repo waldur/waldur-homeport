@@ -1,10 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { components } from 'react-select';
 
 import { required } from '@/core/validators';
-import { FormGroup } from '@/form';
-import { SelectField } from '@/form/select/SelectField';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 
 import { IssueTypeRenderer } from './IssueTypeRenderer';
@@ -25,22 +23,17 @@ export const TypeField: FunctionComponent<{ issueTypes; isDisabled }> = ({
   issueTypes,
   isDisabled,
 }) => (
-  <Field
+  <SelectGroup
     name="type"
-    component={FormGroup}
     label={translate('Request type')}
     required={true}
     validate={required}
-  >
-    <SelectField
-      placeholder={translate('Select request type...')}
-      options={issueTypes}
-      isDisabled={isDisabled}
-      getOptionValue={(option) => option.id}
-      components={{ Option, SingleValue }}
-      isClearable={false}
-      required={true}
-      noOptionsMessage={() => translate('No request types available')}
-    />
-  </Field>
+    placeholder={translate('Select request type...')}
+    options={issueTypes}
+    isDisabled={isDisabled}
+    getOptionValue={(option) => option.id}
+    components={{ Option, SingleValue }}
+    isClearable={false}
+    noOptionsMessage={() => translate('No request types available')}
+  />
 );

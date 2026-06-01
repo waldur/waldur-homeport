@@ -2,17 +2,21 @@ import arrayMutators from 'final-form-arrays';
 import { FC, useCallback, useMemo } from 'react';
 import { Form, useForm, useFormState } from 'react-final-form';
 
-import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { LoadingErred } from '@/core/LoadingErred';
 import { Tip } from '@/core/Tooltip';
 import { composeValidators } from '@/core/validators';
-import { SelectField, StringField, TextField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { DateTimeField } from '@/form/DateTimeField';
-import { MonacoField } from '@/form/MonacoField';
-import { NumberField } from '@/form/NumberField';
-import { AsyncSelect as AsyncSelectField } from '@/form/select';
-import { TimezoneField } from '@/form/TimezoneField';
+import {
+  AsyncSelectGroup,
+  BooleanGroup,
+  RadioGroup,
+  DateTimeGroup,
+  MonacoGroup,
+  NumberGroup,
+  SelectGroup,
+  StringGroup,
+  TextGroup,
+  TimezoneGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 
@@ -50,9 +54,8 @@ const ResourceActionDialogInner: FC<any> = ({
   refetch,
   formFields,
 }) => {
-  const form = useForm();
+  const { change } = useForm();
   const { values } = useFormState();
-  const change = useCallback((name, value) => form.change(name, value), [form]);
 
   const fields = useMemo(
     () => (typeof formFields === 'function' ? formFields(values) : formFields),
@@ -72,8 +75,9 @@ const ResourceActionDialogInner: FC<any> = ({
         );
       } else if (field.type === 'string') {
         return (
-          <StringField
+          <StringGroup
             key={key}
+            name={props.name}
             {...props}
             maxLength={field.maxlength}
             pattern={field.pattern?.source}
@@ -81,11 +85,19 @@ const ResourceActionDialogInner: FC<any> = ({
           />
         );
       } else if (field.type === 'text') {
-        return <TextField key={key} {...props} maxLength={field.maxlength} />;
+        return (
+          <TextGroup
+            key={key}
+            name={props.name}
+            {...props}
+            maxLength={field.maxlength}
+          />
+        );
       } else if (field.type === 'json') {
         return (
-          <MonacoField
+          <MonacoGroup
             key={key}
+            name={props.name}
             {...props}
             language="json"
             validate={validateJSON}
@@ -93,24 +105,33 @@ const ResourceActionDialogInner: FC<any> = ({
           />
         );
       } else if (field.type === 'datetime') {
-        return <DateTimeField key={key} {...props} />;
+        return <DateTimeGroup key={key} name={props.name} {...props} />;
       } else if (field.type === 'timezone') {
-        return <TimezoneField key={key} {...props} />;
+        return <TimezoneGroup key={key} name={props.name} {...props} />;
       } else if (field.type === 'integer') {
         return (
-          <NumberField
+          <NumberGroup
             key={key}
+            name={props.name}
             {...props}
             min={field.minValue}
             max={field.maxValue}
           />
         );
       } else if (field.type === 'boolean') {
-        return <AwesomeCheckboxField hideLabel={true} key={key} {...props} />;
+        return (
+          <BooleanGroup
+            key={key}
+            name={props.name}
+            hideLabel={true}
+            {...props}
+          />
+        );
       } else if (field.type === 'select') {
         return (
-          <SelectField
+          <SelectGroup
             key={key}
+            name={props.name}
             {...props}
             options={field.options}
             simpleValue={true}
@@ -118,8 +139,9 @@ const ResourceActionDialogInner: FC<any> = ({
         );
       } else if (field.type === 'async_select') {
         return (
-          <AsyncSelectField
+          <AsyncSelectGroup
             key={key}
+            name={props.name}
             {...props}
             {...field.extraProps}
             loadOptions={field.loadOptions}
@@ -131,8 +153,9 @@ const ResourceActionDialogInner: FC<any> = ({
         );
       } else if (field.type === 'radio') {
         return (
-          <AwesomeRadioButton
+          <RadioGroup
             key={key}
+            name={props.name}
             {...props}
             choices={field.choices}
             direction={field.direction}

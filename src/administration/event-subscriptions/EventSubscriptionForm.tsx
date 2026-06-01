@@ -1,13 +1,12 @@
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   eventSubscriptionsCreate,
   EventSubscription,
   EventSubscriptionRequest,
 } from 'waldur-js-client';
 
-import { TextField, SubmitButton } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -86,16 +85,14 @@ export const EventSubscriptionForm = ({
               </>
             }
           >
-            <FormGroup label={translate('Description')}>
-              <Field
-                name="description"
-                component={TextField}
-                placeholder={translate(
-                  'Enter a description for this subscription',
-                )}
-                rows={3}
-              />
-            </FormGroup>
+            <TextGroup
+              name="description"
+              placeholder={translate(
+                'Enter a description for this subscription',
+              )}
+              rows={3}
+              label={translate('Description')}
+            />
 
             <div className="alert alert-info">
               {translate(

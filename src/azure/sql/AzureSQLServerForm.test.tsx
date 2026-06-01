@@ -127,14 +127,9 @@ describe.skip('AzureSQLServerForm (via DeployPage)', () => {
     const user = userEvent.setup();
 
     // Wait for spinner to disappear and form to appear
-    const nameInput = await waitFor(
-      () => {
-        const el = document.querySelector(
-          'input[name="attributes.name"]',
-        ) as HTMLInputElement;
-        expect(el).toBeInTheDocument();
-        return el;
-      },
+    const nameInput = await screen.findByLabelText(
+      /Name/i,
+      {},
       { timeout: 5000 },
     );
 
@@ -195,14 +190,9 @@ describe.skip('AzureSQLServerForm (via DeployPage)', () => {
     const user = userEvent.setup();
 
     // Wait for spinner to disappear and form to appear
-    const nameInput = await waitFor(
-      () => {
-        const el = document.querySelector(
-          'input[name="attributes.name"]',
-        ) as HTMLInputElement;
-        expect(el).toBeInTheDocument();
-        return el;
-      },
+    const nameInput = await screen.findByLabelText(
+      /Name/i,
+      {},
       { timeout: 5000 },
     );
     await user.type(nameInput, 'failing-server');

@@ -9,7 +9,7 @@ import { rancherClusterTemplatesList } from 'waldur-js-client';
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormGroup, SelectField, StringField } from '@/form';
+import { SelectField, SelectGroup, StringField } from '@/form';
 import { BoxNumberField } from '@/form/BoxNumberField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
@@ -39,7 +39,7 @@ const filterFlavor = (node, flavor) => {
   return true;
 };
 
-const CheckboxGroup = ({ groupName, options, input, groupClassName }) => (
+const BooleanGroup = ({ groupName, options, input, groupClassName }) => (
   <Form.Group controlId={groupName} className={groupClassName}>
     {options.map((option, index) => (
       <FormCheck inline key={index}>
@@ -132,7 +132,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                         <td colSpan={3}>
                           <Field name={`${node}.roles`} validate={required}>
                             {(fieldProps) => (
-                              <CheckboxGroup
+                              <BooleanGroup
                                 groupName={`${node}.roles`}
                                 options={RANCHER_NODE_ROLES}
                                 groupClassName="d-flex justify-content-around node-roles"
@@ -251,19 +251,15 @@ export const FormNodesStep = (props: FormStepProps) => {
       {flavors && flavors.length > 0 ? (
         <>
           {templates && templates.length > 0 ? (
-            <Field
+            <SelectGroup
               name="attributes.template"
-              component={FormGroup}
               label={translate('Template')}
-            >
-              <SelectField
-                options={templates}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.name}
-                isClearable={true}
-                onChange={onSelectTemplate}
-              />
-            </Field>
+              options={templates}
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              isClearable={true}
+              onChange={onSelectTemplate}
+            />
           ) : null}
           <FieldArray
             name={NODES_FIELD_ARRAY}

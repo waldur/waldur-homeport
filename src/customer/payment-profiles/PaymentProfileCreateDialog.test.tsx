@@ -70,10 +70,6 @@ describe('PaymentProfileCreateDialog', () => {
     await user.click(typeSelect);
     await user.click(await screen.findByText('Monthly invoices'));
 
-    // Ensure enabled is unchecked (it is by default in component [false])
-    // Wait, in CreateDialog it is: const [isFixedPrice, setIsFixedPrice] = useState(false);
-    // And enabled field: <AwesomeCheckbox ... label={translate('Enable profile after creation')} />
-
     await user.click(screen.getByText('Submit'));
 
     await waitFor(() => {

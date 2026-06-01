@@ -9,7 +9,7 @@ import {
   proposalProtectedCallsGenerateSuggestions,
 } from 'waldur-js-client';
 
-import { SelectField, StringField, SubmitButton } from '@/form';
+import { SelectField, StringField, SubmitButton, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
@@ -279,16 +279,15 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
               {/* Selected proposals */}
               {values.source?.value === 'selected_proposals' && (
-                <FormGroup label={translate('Select proposals')} required>
-                  <Field
-                    name="selected_proposals"
-                    component={SelectField}
-                    options={proposalOptions}
-                    isMulti
-                    isLoading={proposalsLoading}
-                    placeholder={translate('Select proposals...')}
-                  />
-                </FormGroup>
+                <SelectGroup
+                  name="selected_proposals"
+                  options={proposalOptions}
+                  isMulti
+                  isLoading={proposalsLoading}
+                  placeholder={translate('Select proposals...')}
+                  label={translate('Select proposals')}
+                  required
+                />
               )}
 
               {/* Custom keywords */}

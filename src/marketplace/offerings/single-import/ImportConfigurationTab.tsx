@@ -4,12 +4,10 @@ import { Col, Row } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
 import { STALE_TIME } from '@/core/constants';
-import { SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
-
-import { FormGroup } from '../FormGroup';
 
 import { SingleOfferingImportFormData } from './types';
 
@@ -48,33 +46,27 @@ export const ImportConfigurationTab: FunctionComponent = () => {
     <>
       <Row className="mb-7">
         <Col md={12}>
-          <FormGroup
+          <SelectGroup
+            name="category"
+            placeholder={translate('Select category...')}
+            options={categoriesQuery.data}
+            isClearable
+            getOptionValue={(option) => option.uuid}
+            getOptionLabel={(option) => option.title}
+            isLoading={categoriesQuery.isLoading}
             label={translate('Target category')}
             description={translate(
               'Optional: specify a different category for the imported offering. If not set, uses the category from the export data.',
             )}
             spaceless
-          >
-            <Field
-              name="category"
-              component={SelectField}
-              placeholder={translate('Select category...')}
-              options={categoriesQuery.data}
-              isClearable
-              getOptionValue={(option) => option.uuid}
-              getOptionLabel={(option) => option.title}
-              isLoading={categoriesQuery.isLoading}
-            />
-          </FormGroup>
+          />
         </Col>
       </Row>
-
       <Row>
         <Col md={12}>
           <h5>{translate('Import options')}</h5>
         </Col>
       </Row>
-
       <Row>
         <Col md={6}>
           <Field

@@ -1,11 +1,11 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { Field, useForm } from 'react-final-form';
+import { useForm } from 'react-final-form';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormGroup, SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -54,19 +54,15 @@ export const FormNetworkStep = (props: FormStepProps) => {
       }
     >
       {tenant ? (
-        <Field
+        <SelectGroup
           name="attributes.subnet"
-          component={FormGroup}
           label={translate('Subnet')}
           validate={required}
           parse={(subnet: any) => subnet?.value}
           required={true}
-        >
-          <SelectField
-            options={data}
-            placeholder={translate('Select subnet...')}
-          />
-        </Field>
+          options={data}
+          placeholder={translate('Select subnet...')}
+        />
       ) : (
         <StepCardPlaceholder>
           {translate('Please select a tenant first')}

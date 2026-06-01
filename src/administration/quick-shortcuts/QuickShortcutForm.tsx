@@ -1,5 +1,5 @@
-import { Row, Col } from 'react-bootstrap';
-import { Form, Field } from 'react-final-form';
+import { Col, Row } from 'react-bootstrap';
+import { Form } from 'react-final-form';
 import {
   externalLinksCreate,
   externalLinksPartialUpdate,
@@ -7,10 +7,8 @@ import {
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { composeValidators, url, required } from '@/core/validators';
-import { StringField, TextField, FieldError, SubmitButton } from '@/form';
-import { ImageField } from '@/form/ImageField';
+import { ImageGroup, StringGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -64,7 +62,9 @@ export const QuickShortcutForm = ({ resolve }) => {
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        onSubmitMutation.mutateAsync(values).catch(() => {})
+      }
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -87,59 +87,36 @@ export const QuickShortcutForm = ({ resolve }) => {
               </>
             }
           >
-            <FormGroup>
-              <Field
-                name="image"
-                component={ImageField}
-                description={translate('Minimum image size of 250x250 pixels')}
-              />
-            </FormGroup>
+            <ImageGroup
+              name="image"
+              description={translate('Minimum image size of 250x250 pixels')}
+            />
 
             <Row>
               <Col md={6}>
-                <FormGroup label={translate('Name')} required>
-                  <Field
-                    name="name"
-                    component={StringField}
-                    placeholder={translate('Type a name')}
-                    validate={required}
-                  />
-                  <Field
-                    name="name"
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                <StringGroup
+                  name="name"
+                  label={translate('Name')}
+                  required
+                  validate={required}
+                  placeholder={translate('Type a name')}
+                />
               </Col>
               <Col md={6}>
-                <FormGroup label={translate('Link')} required>
-                  <Field
-                    name="link"
-                    component={StringField}
-                    placeholder={translate('Add a link')}
-                    validate={composeValidators(required, url)}
-                  />
-                  <Field
-                    name="link"
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                <StringGroup
+                  name="link"
+                  label={translate('Link')}
+                  required
+                  validate={composeValidators(required, url)}
+                  placeholder={translate('Add a link')}
+                />
               </Col>
             </Row>
-            <FormGroup label={translate('Description')}>
-              <Field
-                name="description"
-                component={TextField}
-                placeholder={translate('Enter a description')}
-              />
-            </FormGroup>
+            <TextGroup
+              name="description"
+              placeholder={translate('Enter a description')}
+              label={translate('Description')}
+            />
           </ModalDialog>
         </form>
       )}

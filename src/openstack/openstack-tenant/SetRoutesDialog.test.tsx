@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { OpenStackRouter, openstackRoutersSetRoutes } from 'waldur-js-client';
 
@@ -27,23 +28,24 @@ describe('SetRoutesDialog', () => {
   });
 
   it('submits the form with modified routes', async () => {
+    const user = userEvent.setup();
     renderWithProviders(<SetRoutesDialog resolve={{ router: mockRouter }} />);
 
     // Add a new route
     const addButton = screen.getByRole('button', {
       name: 'Add route',
     });
-    fireEvent.click(addButton);
+    await user.click(addButton);
 
     // Fill the new route fields
     const inputs = screen.getAllByRole('textbox');
     // inputs[0], inputs[1] are existing route. inputs[2], inputs[3] are new route.
-    fireEvent.change(inputs[2], { target: { value: '192.168.2.0/24' } });
-    fireEvent.change(inputs[3], { target: { value: '10.0.0.1' } });
+    await user.type(inputs[2], '192.168.2.0/24');
+    await user.type(inputs[3], '10.0.0.1');
 
     // Submit
     const submitButton = screen.getByText('Update');
-    fireEvent.click(submitButton);
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(openstackRoutersSetRoutes).toHaveBeenCalledTimes(1);
@@ -61,15 +63,16 @@ describe('SetRoutesDialog', () => {
   });
 
   it('submits the form after removing a route', async () => {
+    const user = userEvent.setup();
     renderWithProviders(<SetRoutesDialog resolve={{ router: mockRouter }} />);
 
     const removeButton = screen.getByRole('button', {
       name: 'Remove',
     });
-    fireEvent.click(removeButton);
+    await user.click(removeButton);
 
     const submitButton = screen.getByText('Update');
-    fireEvent.click(submitButton);
+    await user.click(submitButton);
 
     await waitFor(() => {
       expect(openstackRoutersSetRoutes).toHaveBeenCalledTimes(1);

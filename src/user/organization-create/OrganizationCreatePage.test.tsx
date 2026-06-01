@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
 import { noop } from 'lodash-es';
@@ -48,6 +48,8 @@ const renderComponent = () => {
   return render(<OrganizationCreatePage />);
 };
 
+const user = userEvent.setup();
+
 /** Returns the primary submit button (type="submit") - the Next/Create button */
 const getSubmitButton = () =>
   screen
@@ -62,9 +64,9 @@ const getSubmitButton = () =>
 /** Selects a verification method from the dropdown */
 const selectMethod = async (methodLabel: string) => {
   const placeholder = screen.getByText('Select a verification method');
-  fireEvent.mouseDown(placeholder);
+  await user.click(placeholder);
   const option = await screen.findByText(methodLabel);
-  fireEvent.click(option);
+  await user.click(option);
   await waitFor(() => {
     expect(
       screen.queryByText('Loading required fields...'),
@@ -73,10 +75,10 @@ const selectMethod = async (methodLabel: string) => {
 };
 
 /** Click the primary submit button */
-const clickSubmit = () => {
+const clickSubmit = async () => {
   const btn = getSubmitButton();
   expect(btn).toBeTruthy();
-  fireEvent.click(btn!);
+  await user.click(btn!);
 };
 
 /** Fill required fields for automatic (ariregister) method on step 2 */
@@ -218,8 +220,7 @@ describe('OrganizationCreatePage', () => {
     it('renders Back button as disabled on first step', () => {
       renderComponent();
 
-      const backButton = screen.getByText('Back');
-      expect(backButton.closest('button')).toBeDisabled();
+      expect(screen.getByRole('button', { name: /Back/i })).toBeDisabled();
     });
 
     it('renders a submit button', () => {
@@ -259,8 +260,9 @@ describe('OrganizationCreatePage', () => {
       clickSubmit();
 
       await waitFor(() => {
-        const backButton = screen.getByText('Back');
-        expect(backButton.closest('button')).not.toBeDisabled();
+        expect(
+          screen.getByRole('button', { name: /Back/i }),
+        ).not.toBeDisabled();
       });
     });
 
@@ -276,7 +278,7 @@ describe('OrganizationCreatePage', () => {
         ).toBeInTheDocument();
       });
 
-      fireEvent.click(screen.getByText('Back'));
+      await user.click(screen.getByText('Back'));
 
       await waitFor(() => {
         // Step 1 heading should reappear
@@ -373,7 +375,7 @@ describe('OrganizationCreatePage', () => {
       });
 
       // Go back should skip step 3 and land on step 2
-      fireEvent.click(screen.getByText('Back'));
+      await user.click(screen.getByText('Back'));
       await waitFor(() => {
         expect(screen.getByText('Organization name')).toBeInTheDocument();
       });
@@ -390,7 +392,7 @@ describe('OrganizationCreatePage', () => {
 
       renderComponent();
 
-      fireEvent.click(screen.getByText('Cancel'));
+      await user.click(screen.getByText('Cancel'));
 
       await waitFor(() => {
         expect(useModal().confirm).toHaveBeenCalledWith(
@@ -405,7 +407,7 @@ describe('OrganizationCreatePage', () => {
 
       renderComponent();
 
-      fireEvent.click(screen.getByText('Cancel'));
+      await user.click(screen.getByText('Cancel'));
 
       await waitFor(() => {
         expect(mockRouterGo).toHaveBeenCalledWith('profile.details');
@@ -419,7 +421,7 @@ describe('OrganizationCreatePage', () => {
 
       renderComponent();
 
-      fireEvent.click(screen.getByText('Cancel'));
+      await user.click(screen.getByText('Cancel'));
 
       await waitFor(() => {
         expect(useModal().confirm).toHaveBeenCalled();
@@ -475,7 +477,7 @@ describe('OrganizationCreatePage', () => {
       });
 
       // Click Create on last step
-      fireEvent.click(screen.getByText('Create'));
+      await user.click(screen.getByText('Create'));
 
       await waitFor(() => {
         expect(onboardingVerificationsCreateCustomer).toHaveBeenCalledWith({
@@ -553,7 +555,7 @@ describe('OrganizationCreatePage', () => {
 
       await navigateToLastStepManual();
 
-      fireEvent.click(screen.getByText('Create'));
+      await user.click(screen.getByText('Create'));
 
       await waitFor(() => {
         expect(onboardingVerificationsStartVerification).toHaveBeenCalled();
@@ -573,7 +575,7 @@ describe('OrganizationCreatePage', () => {
 
       await navigateToLastStepManual();
 
-      fireEvent.click(screen.getByText('Create'));
+      await user.click(screen.getByText('Create'));
 
       await waitFor(() => {
         expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
@@ -610,7 +612,7 @@ describe('OrganizationCreatePage', () => {
         expect(screen.getByText('Create')).toBeInTheDocument();
       });
 
-      fireEvent.click(screen.getByText('Create'));
+      await user.click(screen.getByText('Create'));
 
       await waitFor(() => {
         expect(screen.getByText('Review in progress')).toBeInTheDocument();
@@ -641,13 +643,13 @@ describe('OrganizationCreatePage', () => {
         expect(screen.getByText('Create')).toBeInTheDocument();
       });
 
-      fireEvent.click(screen.getByText('Create'));
+      await user.click(screen.getByText('Create'));
 
       await waitFor(() => {
         expect(screen.getByText('Go to dashboard')).toBeInTheDocument();
       });
 
-      fireEvent.click(screen.getByText('Go to dashboard'));
+      await user.click(screen.getByText('Go to dashboard'));
 
       await waitFor(() => {
         expect(mockRouterGo).toHaveBeenCalledWith('profile.details');
@@ -732,7 +734,7 @@ describe('OrganizationCreatePage', () => {
 
       // Now cancel
       vi.mocked(useModal().confirm).mockResolvedValueOnce(undefined);
-      fireEvent.click(screen.getByText('Cancel'));
+      await user.click(screen.getByText('Cancel'));
 
       await waitFor(() => {
         expect(useModal().confirm).toHaveBeenCalled();
@@ -980,7 +982,7 @@ describe('OrganizationCreatePage', () => {
       });
 
       // Submit
-      fireEvent.click(screen.getByText('Create'));
+      await user.click(screen.getByText('Create'));
 
       await waitFor(() => {
         expect(useNotify().showErrorResponse).toHaveBeenCalledWith(

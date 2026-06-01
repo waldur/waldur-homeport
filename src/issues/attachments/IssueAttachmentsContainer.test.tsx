@@ -1,48 +1,14 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  supportAttachmentsList,
+  supportAttachmentsCreate,
+} from 'waldur-js-client';
 
-import { renderWithProviders } from '@/test/harness';
+import { createTestQueryClient, renderWithProviders } from '@/test/harness';
 
-import { useIssueAttachments, useUploadAttachments } from './api';
 import { IssueAttachmentsContainer } from './IssueAttachmentsContainer';
-
-// Mock the API hooks
-vi.mock('./api', () => ({
-  useIssueAttachments: vi.fn(),
-  useUploadAttachments: vi.fn(),
-}));
-
-// Mock the child components
-vi.mock('@/marketplace/offerings/update/components/RefreshButton', () => ({
-  RefreshButton: ({ loading }: { loading: boolean }) => (
-    <button data-testid="reload-btn" disabled={loading}>
-      Reload
-    </button>
-  ),
-}));
-
-vi.mock('./IssueAttachmentsList', () => ({
-  IssueAttachmentsList: ({
-    attachments,
-    uploading,
-  }: {
-    attachments: any[];
-    uploading: any[];
-  }) => (
-    <div data-testid="attachments-list">
-      {attachments.map((a: any) => (
-        <div key={a.uuid} data-testid="attachment-item">
-          {a.file_name}
-        </div>
-      ))}
-      {uploading.map((u: any) => (
-        <div key={u.key} data-testid="uploading-item">
-          {u.file.name}
-        </div>
-      ))}
-    </div>
-  ),
-}));
 
 vi.mock('@/form/upload/UploadContainer', () => ({
   UploadContainer: ({
@@ -73,16 +39,21 @@ const mockIssue = {
 };
 
 const mockAttachments = [
-  { uuid: 'a1', file_name: 'file1.pdf', file_size: 1024 },
-  { uuid: 'a2', file_name: 'file2.jpg', file_size: 2048 },
+  {
+    uuid: 'a1',
+    file_name: 'file1.pdf',
+    file_size: 1024,
+    file: 'https://example.com/file1.pdf',
+    created: '2024-01-15T10:00:00Z',
+  },
+  {
+    uuid: 'a2',
+    file_name: 'file2.jpg',
+    file_size: 2048,
+    file: 'https://example.com/file2.jpg',
+    created: '2024-01-16T12:00:00Z',
+  },
 ];
-
-const mockUploadHook = {
-  uploading: [],
-  upload: vi.fn(),
-  retry: vi.fn(),
-  cancel: vi.fn(),
-};
 
 const renderComponent = (issue = mockIssue) => {
   return renderWithProviders(
@@ -93,158 +64,166 @@ const renderComponent = (issue = mockIssue) => {
 describe('IssueAttachmentsContainer', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useUploadAttachments).mockReturnValue(mockUploadHook);
   });
 
   it('renders loading spinner when loading with no data', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
-      data: undefined,
-      isLoading: true,
-      refetch: vi.fn(),
-    } as any);
+    vi.mocked(supportAttachmentsList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
 
     renderComponent();
 
     expect(screen.getByTestId('spinner')).toBeInTheDocument();
   });
 
-  it('renders attachments list when data is loaded', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
+  it('renders attachments list when data is loaded', async () => {
+    vi.mocked(supportAttachmentsList).mockResolvedValue({
       data: mockAttachments,
-      isLoading: false,
-      refetch: vi.fn(),
     } as any);
 
     renderComponent();
 
-    expect(screen.getByTestId('attachments-list')).toBeInTheDocument();
-    expect(screen.getAllByTestId('attachment-item')).toHaveLength(2);
-    expect(screen.getByText('file1.pdf')).toBeInTheDocument();
+    expect(await screen.findByText('file1.pdf')).toBeInTheDocument();
     expect(screen.getByText('file2.jpg')).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(2);
   });
 
-  it('renders card with correct title', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
+  it('renders card with correct title', async () => {
+    vi.mocked(supportAttachmentsList).mockResolvedValue({
       data: [],
-      isLoading: false,
-      refetch: vi.fn(),
     } as any);
 
     renderComponent();
 
-    expect(screen.getByText('Attachments')).toBeInTheDocument();
+    expect(await screen.findByText('Attachments')).toBeInTheDocument();
   });
 
-  it('renders upload container when add_attachment_is_available is true', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
+  it('renders upload container when add_attachment_is_available is true', async () => {
+    vi.mocked(supportAttachmentsList).mockResolvedValue({
       data: [],
-      isLoading: false,
-      refetch: vi.fn(),
     } as any);
 
     renderComponent();
 
-    expect(screen.getByTestId('upload-container')).toBeInTheDocument();
+    expect(await screen.findByTestId('upload-container')).toBeInTheDocument();
   });
 
-  it('does not render upload container when add_attachment_is_available is false', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
+  it('does not render upload container when add_attachment_is_available is false', async () => {
+    vi.mocked(supportAttachmentsList).mockResolvedValue({
       data: [],
-      isLoading: false,
-      refetch: vi.fn(),
     } as any);
 
     renderComponent({ ...mockIssue, add_attachment_is_available: false });
 
+    await waitFor(() => {
+      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+    });
     expect(screen.queryByTestId('upload-container')).not.toBeInTheDocument();
   });
 
-  it('renders reload button', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
+  it('renders reload button', async () => {
+    vi.mocked(supportAttachmentsList).mockResolvedValue({
       data: [],
-      isLoading: false,
-      refetch: vi.fn(),
     } as any);
 
     renderComponent();
 
-    expect(screen.getByTestId('reload-btn')).toBeInTheDocument();
+    await screen.findByText('Attachments');
+    const buttons = screen.getAllByRole('button');
+    const reloadBtn = buttons.find(
+      (btn) => btn.getAttribute('data-testid') !== 'upload-container',
+    );
+    expect(reloadBtn).toBeInTheDocument();
   });
 
   it('shows cached data while refetching', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
-      data: mockAttachments,
-      isLoading: true,
-      refetch: vi.fn(),
-    } as any);
+    vi.mocked(supportAttachmentsList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
 
-    renderComponent();
+    const queryClient = createTestQueryClient();
+    queryClient.setQueryData(
+      ['issueAttachments', mockIssue.url],
+      mockAttachments,
+    );
 
-    // Should show attachments, not loading spinner
+    renderWithProviders(
+      <IssueAttachmentsContainer issue={mockIssue as any} />,
+      { queryClient },
+    );
+
     expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
-    expect(screen.getByTestId('attachments-list')).toBeInTheDocument();
+    expect(screen.getByRole('list')).toBeInTheDocument();
+    expect(screen.getByText('file1.pdf')).toBeInTheDocument();
   });
 
-  it('calls upload when files are dropped', () => {
-    const uploadFn = vi.fn();
-    vi.mocked(useUploadAttachments).mockReturnValue({
-      ...mockUploadHook,
-      upload: uploadFn,
+  it('calls upload when files are dropped', async () => {
+    const user = userEvent.setup();
+    vi.mocked(supportAttachmentsList).mockResolvedValue({ data: [] } as any);
+    vi.mocked(supportAttachmentsCreate).mockResolvedValue({
+      data: { uuid: 'new-1', file_name: 'test.pdf' },
+    } as any);
+
+    renderComponent();
+
+    await user.click(screen.getByTestId('upload-container'));
+
+    expect(supportAttachmentsCreate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        body: { issue: mockIssue.url, file: expect.any(File) },
+        headers: { 'Content-Type': null },
+      }),
+    );
+  });
+
+  it('passes issueUrl to supportAttachmentsList call', () => {
+    vi.mocked(supportAttachmentsList).mockResolvedValue({ data: [] } as any);
+
+    renderComponent();
+
+    expect(supportAttachmentsList).toHaveBeenCalledWith({
+      query: { issue: mockIssue.url },
     });
-    vi.mocked(useIssueAttachments).mockReturnValue({
-      data: [],
-      isLoading: false,
-      refetch: vi.fn(),
-    } as any);
-
-    renderComponent();
-
-    fireEvent.click(screen.getByTestId('upload-container'));
-
-    expect(uploadFn).toHaveBeenCalledWith([expect.any(File)]);
   });
 
-  it('passes issueUrl to useIssueAttachments hook', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
-      data: [],
-      isLoading: false,
-      refetch: vi.fn(),
-    } as any);
+  it('displays uploading items', async () => {
+    const user = userEvent.setup();
+    vi.mocked(supportAttachmentsList).mockResolvedValue({ data: [] } as any);
 
-    renderComponent();
-
-    expect(useIssueAttachments).toHaveBeenCalledWith(mockIssue.url);
-    expect(useUploadAttachments).toHaveBeenCalledWith(mockIssue.url);
-  });
-
-  it('displays uploading items', () => {
-    const mockFile = new File(['content'], 'uploading.pdf');
-    vi.mocked(useUploadAttachments).mockReturnValue({
-      ...mockUploadHook,
-      uploading: [{ key: 'key1', file: mockFile, progress: 50 }],
+    let resolveUpload;
+    const uploadPromise = new Promise((resolve) => {
+      resolveUpload = resolve;
     });
-    vi.mocked(useIssueAttachments).mockReturnValue({
-      data: mockAttachments,
-      isLoading: false,
-      refetch: vi.fn(),
-    } as any);
+    vi.mocked(supportAttachmentsCreate).mockReturnValue(uploadPromise as any);
 
     renderComponent();
 
-    expect(screen.getByTestId('uploading-item')).toBeInTheDocument();
-    expect(screen.getByText('uploading.pdf')).toBeInTheDocument();
+    await user.click(screen.getByTestId('upload-container'));
+
+    expect(
+      await screen.findByTestId('pending-attachment-item'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('test.pdf')).toBeInTheDocument();
+
+    act(() => {
+      resolveUpload({ data: { uuid: 'new-1', file_name: 'test.pdf' } });
+    });
+
+    await waitFor(() => {
+      expect(
+        screen.queryByTestId('pending-attachment-item'),
+      ).not.toBeInTheDocument();
+    });
   });
 
-  it('disables upload container while loading', () => {
-    vi.mocked(useIssueAttachments).mockReturnValue({
-      data: mockAttachments,
-      isLoading: true,
-      refetch: vi.fn(),
-    } as any);
+  it('disables upload container while loading', async () => {
+    vi.mocked(supportAttachmentsList).mockReturnValue(
+      new Promise(() => {}) as any,
+    );
 
     renderComponent();
 
-    expect(screen.getByTestId('upload-container')).toHaveAttribute(
+    expect(await screen.findByTestId('upload-container')).toHaveAttribute(
       'data-disabled',
       'true',
     );

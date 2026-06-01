@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -61,7 +61,7 @@ describe('EditProjectUserDialog', () => {
     await user.type(dateInput, '2025-12-31');
 
     // Submit
-    fireEvent.click(screen.getByText('Save'));
+    await user.click(screen.getByText('Save'));
 
     await waitFor(() => {
       expect(projectsUpdateUser).toHaveBeenCalledWith(

@@ -1,5 +1,6 @@
 import { screen, within, MatcherFunction } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { escapeRegExp } from 'lodash-es';
 
 /**
  * Helpers for interacting with react-select / react-select-async-paginate
@@ -14,11 +15,26 @@ import userEvent from '@testing-library/user-event';
  * `.metronic-select-container` is found.
  */
 export const getSelectByLabel = (labelText: string | RegExp): HTMLElement => {
-  const labels = screen.getAllByText(labelText);
-  for (const label of labels) {
-    let node: HTMLElement | null = label.parentElement;
+  const labels = screen.queryAllByText(labelText);
+  const elements =
+    labels.length > 0 ? labels : screen.queryAllByLabelText(labelText);
+
+  if (elements.length === 0) {
+    throw new Error(
+      `Could not find a label or element with aria-label "${labelText}"`,
+    );
+  }
+
+  for (const element of elements) {
+    let node: HTMLElement | null =
+      element instanceof HTMLLabelElement
+        ? element.parentElement
+        : (element as HTMLElement);
     while (node) {
-      if (node.querySelector('.metronic-select-container')) {
+      if (
+        node.classList.contains('metronic-select-container') ||
+        node.querySelector('.metronic-select-container')
+      ) {
         return node;
       }
       node = node.parentElement;
@@ -39,7 +55,11 @@ export const openAndSelectOptionInContainer = async (
 ) => {
   const combobox = within(container as HTMLElement).getByRole('combobox');
   await user.click(combobox);
-  const option = await screen.findByText(optionText);
+  const nameQuery =
+    typeof optionText === 'string'
+      ? new RegExp(escapeRegExp(optionText))
+      : optionText;
+  const option = await screen.findByRole('option', { name: nameQuery });
   await user.click(option);
 };
 
@@ -69,7 +89,11 @@ export const typeAndSelectOption = async (
   const combobox = within(container).getByRole('combobox');
   await user.click(combobox);
   await user.type(combobox, searchText);
-  const option = await screen.findByText(optionText);
+  const nameQuery =
+    typeof optionText === 'string'
+      ? new RegExp(escapeRegExp(optionText))
+      : optionText;
+  const option = await screen.findByRole('option', { name: nameQuery });
   await user.click(option);
 };
 

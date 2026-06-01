@@ -1,17 +1,15 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import React, { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { keysCreate, SshKeyRequest } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { required } from '@/core/validators';
-import { StringField } from '@/form/StringField';
+import { StringGroup, TextGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
-import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -109,22 +107,19 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
           >
             <div className="size-lg">
               <SshKeyRestrictionsBanner />
-              <FormGroup label={translate('Key name')}>
-                <Field
-                  component={StringField}
-                  name="name"
-                  placeholder={translate('e.g. my-ssh-key')}
-                />
-              </FormGroup>
-              <FormGroup label={translate('Public key')} required>
-                <Field
-                  component={TextField}
-                  name="public_key"
-                  validate={required}
-                  style={{ height: 100 }}
-                  placeholder={translate('Paste your SSH public key here...')}
-                />
-              </FormGroup>
+              <StringGroup
+                name="name"
+                placeholder={translate('e.g. my-ssh-key')}
+                label={translate('Key name')}
+              />
+              <TextGroup
+                name="public_key"
+                validate={required}
+                style={{ height: 100 }}
+                placeholder={translate('Paste your SSH public key here...')}
+                label={translate('Public key')}
+                required
+              />
             </div>
           </ModalDialog>
         </form>

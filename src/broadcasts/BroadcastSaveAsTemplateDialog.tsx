@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   broadcastMessageTemplatesCreate,
   MessageTemplateRequest,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, StringField, SubmitButton } from '@/form';
+import { StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -55,15 +55,13 @@ export const BroadcastSaveAsTemplateDialog: FC<
               </div>
             }
           >
-            <Field
+            <StringGroup
               name="name"
               label={translate('Name')}
-              component={FormGroup}
               required={true}
               validate={required}
-            >
-              <StringField maxLength={150} />
-            </Field>
+              maxLength={150}
+            />
           </ModalDialog>
         </form>
       )}

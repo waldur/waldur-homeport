@@ -30,22 +30,17 @@ describe('CatalogCreateDialog', () => {
 
   it('validates required fields', async () => {
     const user = userEvent.setup();
-    const { container } = renderDialog();
+    renderDialog();
 
-    const submitBtn = container.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement;
+    const submitBtn = screen.getByRole('button', { name: /Submit/ });
     expect(submitBtn).toBeDisabled();
 
+    await user.type(screen.getByLabelText(/Name/), 'Test Catalog');
     await user.type(
-      container.querySelector('input[name="name"]'),
-      'Test Catalog',
-    );
-    await user.type(
-      container.querySelector('input[name="catalog_url"]'),
+      screen.getByLabelText(/Catalog URL/),
       'https://example.com',
     );
-    await user.type(container.querySelector('input[name="branch"]'), 'master');
+    await user.type(screen.getByLabelText(/Branch/), 'master');
 
     expect(submitBtn).not.toBeDisabled();
   });
@@ -55,23 +50,18 @@ describe('CatalogCreateDialog', () => {
     vi.mocked(rancherCatalogsCreate).mockResolvedValue({
       data: { uuid: 'catalog-uuid' },
     } as any);
-    const { container } = renderDialog();
+    renderDialog();
 
+    await user.type(screen.getByLabelText(/Name/), 'Test Catalog');
     await user.type(
-      container.querySelector('input[name="name"]'),
-      'Test Catalog',
-    );
-    await user.type(
-      container.querySelector('input[name="catalog_url"]'),
+      screen.getByLabelText(/Catalog URL/),
       'https://example.com',
     );
-    await user.type(container.querySelector('input[name="branch"]'), 'master');
-    await user.type(container.querySelector('input[name="username"]'), 'user');
-    await user.type(container.querySelector('input[name="password"]'), 'pass');
+    await user.type(screen.getByLabelText(/Branch/), 'master');
+    await user.type(screen.getByLabelText(/Username/), 'user');
+    await user.type(screen.getByLabelText(/Password/), 'pass');
 
-    const submitBtn = container.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement;
+    const submitBtn = screen.getByRole('button', { name: /Submit/ });
     await user.click(submitBtn);
 
     await waitFor(() => {

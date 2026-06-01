@@ -1,5 +1,5 @@
 import { Alert } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   type ArrowSettings,
   type InvoicePriceSourceEnum,
@@ -7,11 +7,9 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SecretField, SelectField, StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { StringGroup, SecretGroup, SelectGroup, BooleanGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -88,64 +86,50 @@ export const ArrowSettingsEditDialog = ({
         }}
         render={({ handleSubmit, invalid }) => (
           <form onSubmit={handleSubmit}>
-            <FormGroup
+            <StringGroup
+              name="api_url"
+              validate={required}
               label={translate('API URL')}
               description={translate('The Arrow API endpoint URL')}
               required
-            >
-              <Field
-                name="api_url"
-                component={StringField}
-                validate={required}
-              />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <SecretGroup
+              name="api_key"
               label={translate('API Key')}
               description={translate('Arrow API key for authentication')}
-            >
-              <Field name="api_key" component={SecretField} />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <StringGroup
+              name="export_type_reference"
               label={translate('Export Type Reference')}
               description={translate(
                 'Billing export template reference (optional)',
               )}
-            >
-              <Field name="export_type_reference" component={StringField} />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <StringGroup
+              name="classification_filter"
               label={translate('Classification Filter')}
               description={translate(
                 'Filter for IaaS/SaaS classification (optional)',
               )}
-            >
-              <Field name="classification_filter" component={StringField} />
-            </FormGroup>
+            />
 
-            <FormGroup
+            <SelectGroup
+              name="invoice_price_source"
+              options={INVOICE_PRICE_SOURCE_OPTIONS}
+              isClearable={false}
               label={translate('Invoice price source')}
               description={translate(
                 'Which price to use for invoice items: sell or buy',
               )}
-            >
-              <Field
-                name="invoice_price_source"
-                component={SelectField}
-                options={INVOICE_PRICE_SOURCE_OPTIONS}
-                isClearable={false}
-              />
-            </FormGroup>
+            />
 
-            <FormGroup>
-              <Field
-                name="sync_enabled"
-                component={AwesomeCheckboxField}
-                label={translate('Sync enabled')}
-              />
-            </FormGroup>
+            <BooleanGroup
+              name="sync_enabled"
+              label={translate('Sync enabled')}
+            />
 
             {mutationError && (
               <Alert variant="danger" className="mb-4">

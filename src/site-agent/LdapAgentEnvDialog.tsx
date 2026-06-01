@@ -1,10 +1,17 @@
-import { FC, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { FC, useMemo, useState } from 'react';
+import { Form } from 'react-final-form';
 
 import { Tip } from '@/core/Tooltip';
-import { SubmitButton } from '@/form';
+import { composeValidators, email, required, url } from '@/core/validators';
+import {
+  BooleanGroup,
+  EmailGroup,
+  NumberGroup,
+  SecretGroup,
+  StringGroup,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -55,186 +62,159 @@ const buildEnvContent = (values: {
 export const LdapAgentEnvDialog: FC<LdapAgentEnvDialogProps> = ({
   resolve: { offering },
 }) => {
-  const { closeDialog } = useModal();
-  const [waldurUrl, setWaldurUrl] = useState('');
-  const [waldurToken, setWaldurToken] = useState('CHANGEME');
-  const [verifyTls, setVerifyTls] = useState(true);
-  const [uidNumber, setUidNumber] = useState('1000');
-  const [pgroup, setPgroup] = useState('10000');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
   const [generatedEnv, setGeneratedEnv] = useState<string | null>(null);
 
-  const handleGenerate = () => {
+  const initialValues = useMemo(
+    () => ({
+      waldurUrl: '',
+      waldurToken: 'CHANGEME',
+      offeringUuid: offering.uuid,
+      verifyTls: true,
+      uidNumber: 1000,
+      pgroup: 10000,
+      username: '',
+      password: '',
+      email: '',
+    }),
+    [offering.uuid],
+  );
+
+  const handleGenerate = (values) => {
     setGeneratedEnv(
       buildEnvContent({
-        waldurUrl,
-        waldurToken,
+        waldurUrl: values.waldurUrl,
+        waldurToken: values.waldurToken,
         offeringUuid: offering.uuid,
-        verifyTls,
-        uidNumber,
-        pgroup,
-        username,
-        password,
-        email,
+        verifyTls: values.verifyTls,
+        uidNumber: String(values.uidNumber),
+        pgroup: String(values.pgroup),
+        username: values.username,
+        password: values.password,
+        email: values.email,
       }),
     );
   };
-
-  if (generatedEnv) {
-    return (
-      <LdapAgentEnvPreview
-        config={generatedEnv}
-        onBack={() => setGeneratedEnv(null)}
-        onClose={() => closeDialog()}
-      />
-    );
-  }
-
   return (
-    <ModalDialog
-      title={translate('Generate LDAP Agent Environment')}
-      subtitle={translate(
-        'Generate a .env configuration file for the refresh-glauth-config service.',
-      )}
-      footer={
-        <>
-          <CloseDialogButton />
-          <Tip
-            id="ldap-generate-btn"
-            label={
-              !username || !password || !email
-                ? translate(
-                    'Fill in all required LDAP admin fields to generate.',
-                  )
-                : null
-            }
-          >
-            <SubmitButton
-              submitting={false}
-              label={translate('Generate')}
-              type="button"
-              onClick={handleGenerate}
-              disabled={!username || !password || !email}
+    <Form
+      onSubmit={handleGenerate}
+      initialValues={initialValues}
+      render={({ handleSubmit, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          {generatedEnv ? (
+            <LdapAgentEnvPreview
+              config={generatedEnv}
+              onBack={() => setGeneratedEnv(null)}
             />
-          </Tip>
-        </>
-      }
-    >
-      {/* Fixed offering info */}
-      <div className="bg-light-primary rounded p-3 mb-4">
-        <div className="text-gray-700 small mb-1">
-          {translate('Generating configuration for:')}
-        </div>
-        <div className="fw-bold">{offering.name}</div>
-      </div>
+          ) : (
+            <ModalDialog
+              title={translate('Generate LDAP Agent Environment')}
+              subtitle={translate(
+                'Generate a .env configuration file for the refresh-glauth-config service.',
+              )}
+              footer={
+                <>
+                  <CloseDialogButton />
+                  <Tip
+                    id="ldap-generate-btn"
+                    label={
+                      invalid
+                        ? translate(
+                            'Fill in all required LDAP admin fields to generate.',
+                          )
+                        : null
+                    }
+                  >
+                    <SubmitButton
+                      submitting={false}
+                      label={translate('Generate')}
+                      type="submit"
+                      disabled={invalid}
+                    />
+                  </Tip>
+                </>
+              }
+            >
+              {/* Fixed offering info */}
+              <div className="bg-light-primary rounded p-3 mb-4">
+                <div className="text-gray-700 small mb-1">
+                  {translate('Generating configuration for:')}
+                </div>
+                <div className="fw-bold">{offering.name}</div>
+              </div>
 
-      {/* Waldur connection settings */}
-      <div className="mb-4">
-        <h6 className="fw-bold mb-3">{translate('Waldur Connection')}</h6>
+              {/* Waldur connection settings */}
+              <div className="mb-4">
+                <h6 className="fw-bold mb-3">
+                  {translate('Waldur Connection')}
+                </h6>
 
-        <Form.Group className="mb-3">
-          <Form.Label>{translate('API URL (optional)')}</Form.Label>
-          <Form.Control
-            type="url"
-            placeholder="https://waldur.example.com/api/"
-            value={waldurUrl}
-            onChange={(e) => setWaldurUrl(e.target.value)}
-          />
-          <Form.Text className="text-muted">
-            {translate('Leave empty to use the current server URL.')}
-          </Form.Text>
-        </Form.Group>
+                <StringGroup
+                  name="waldurUrl"
+                  label={translate('API URL (optional)')}
+                  placeholder="https://waldur.example.com/api/"
+                  description={translate(
+                    'Leave empty to use the current server URL.',
+                  )}
+                  validate={url}
+                  type="url"
+                />
 
-        <Form.Group className="mb-3">
-          <Form.Label>{translate('API Token')}</Form.Label>
-          <Form.Control
-            type="text"
-            value={waldurToken}
-            onChange={(e) => setWaldurToken(e.target.value)}
-          />
-          <Form.Text className="text-muted">
-            {translate(
-              'Use a long-lived or non-expiring token. You can create one in your user profile under API tokens.',
-            )}
-          </Form.Text>
-        </Form.Group>
+                <StringGroup
+                  name="waldurToken"
+                  label={translate('API Token')}
+                  description={translate(
+                    'Use a long-lived or non-expiring token. You can create one in your user profile under API tokens.',
+                  )}
+                />
 
-        <Form.Group className="mb-3">
-          <Form.Label>{translate('Offering UUID')}</Form.Label>
-          <Form.Control type="text" value={offering.uuid} readOnly plaintext />
-        </Form.Group>
+                <StringGroup
+                  name="offeringUuid"
+                  label={translate('Offering UUID')}
+                  readOnly
+                  plaintext
+                />
 
-        <Form.Group className="mb-3">
-          <Form.Check
-            type="checkbox"
-            id="ldap-verify-tls"
-            label={translate('Verify TLS')}
-            checked={verifyTls}
-            onChange={(e) => setVerifyTls(e.target.checked)}
-          />
-        </Form.Group>
-      </div>
+                <BooleanGroup
+                  name="verifyTls"
+                  label={translate('Verify TLS')}
+                />
+              </div>
 
-      {/* LDAP admin credentials */}
-      <div>
-        <h6 className="fw-bold mb-3">{translate('LDAP Admin Credentials')}</h6>
+              {/* LDAP admin credentials */}
+              <div>
+                <h6 className="fw-bold mb-3">
+                  {translate('LDAP Admin Credentials')}
+                </h6>
 
-        <Form.Group className="mb-3">
-          <Form.Label>{translate('UID Number')}</Form.Label>
-          <Form.Control
-            type="number"
-            value={uidNumber}
-            onChange={(e) => setUidNumber(e.target.value)}
-          />
-        </Form.Group>
+                <NumberGroup name="uidNumber" label={translate('UID Number')} />
 
-        <Form.Group className="mb-3">
-          <Form.Label>{translate('Primary Group')}</Form.Label>
-          <Form.Control
-            type="number"
-            value={pgroup}
-            onChange={(e) => setPgroup(e.target.value)}
-          />
-        </Form.Group>
+                <NumberGroup name="pgroup" label={translate('Primary Group')} />
 
-        <Form.Group className="mb-3">
-          <Form.Label>
-            {translate('Username')} <span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </Form.Group>
+                <StringGroup
+                  name="username"
+                  label={translate('Username')}
+                  required
+                  validate={required}
+                />
 
-        <Form.Group className="mb-3">
-          <Form.Label>
-            {translate('Password')} <span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </Form.Group>
+                <SecretGroup
+                  name="password"
+                  label={translate('Password')}
+                  required
+                  validate={required}
+                />
 
-        <Form.Group className="mb-3">
-          <Form.Label>
-            {translate('Email')} <span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </Form.Group>
-      </div>
-    </ModalDialog>
+                <EmailGroup
+                  name="email"
+                  label={translate('Email')}
+                  required
+                  validate={composeValidators(required, email)}
+                />
+              </div>
+            </ModalDialog>
+          )}
+        </form>
+      )}
+    />
   );
 };

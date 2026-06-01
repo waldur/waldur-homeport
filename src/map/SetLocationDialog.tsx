@@ -28,7 +28,7 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = ({
     <Form
       initialValues={{ location: resolve.location || {} }}
       onSubmit={updateLocationHandler}
-      render={({ submitting, handleSubmit, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -36,13 +36,7 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> = ({
                 ? translate('Update location')
                 : translate('Set location')
             }
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid}
-                submitLabel={translate('Save')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Save')} />}
           >
             <Field
               name="location"

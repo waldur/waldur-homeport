@@ -1,11 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field } from 'react-final-form';
 
 import { composeValidators, required } from '@/core/validators';
-import { DateField } from '@/form/DateField';
-import { FormGroup } from '@/form/FormGroup';
-import { StringField } from '@/form/StringField';
+import { StringGroup, DateGroup } from '@/form';
 import { translate } from '@/i18n';
 
 export interface PersonIdentifierFieldConfig {
@@ -90,17 +87,14 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
         )}
         <Row className="g-4">
           <Col md={6}>
-            <Field
+            <StringGroup
               name={fieldName}
               label={person_identifier_fields.label}
-              component={FormGroup}
               required={true}
               validate={validate}
               description={person_identifier_fields.help_text}
               placeholder={person_identifier_fields.example}
-            >
-              <StringField />
-            </Field>
+            />
           </Col>
         </Row>
       </div>
@@ -132,18 +126,26 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
 
             return (
               <Col md={isLastOdd ? 12 : 6} key={fieldKey}>
-                <Field
-                  name={fieldName}
-                  label={fieldSpec.label}
-                  component={FormGroup}
-                  required={fieldSpec.required}
-                  validate={validate}
-                  description={fieldSpec.description}
-                  placeholder={fieldSpec.example}
-                  maxLength={fieldSpec.max_length}
-                >
-                  {fieldSpec.type === 'date' ? <DateField /> : <StringField />}
-                </Field>
+                {fieldSpec.type === 'date' ? (
+                  <DateGroup
+                    name={fieldName}
+                    label={fieldSpec.label}
+                    required={fieldSpec.required}
+                    validate={validate}
+                    description={fieldSpec.description}
+                    placeholder={fieldSpec.example}
+                  />
+                ) : (
+                  <StringGroup
+                    name={fieldName}
+                    label={fieldSpec.label}
+                    required={fieldSpec.required}
+                    validate={validate}
+                    description={fieldSpec.description}
+                    placeholder={fieldSpec.example}
+                    maxLength={fieldSpec.max_length}
+                  />
+                )}
               </Col>
             );
           })}

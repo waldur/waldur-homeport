@@ -1,15 +1,12 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateUser } from 'waldur-js-client';
 
-import { SubmitButton } from '@/form';
-import { DateTimeField } from '@/form/DateTimeField';
+import { DateTimeGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-
-import { FormGroup } from '../../FormGroup';
 
 export const UpdateOfferingPermissionExpirationTimeDialog: FC<{
   resolve: { permission; refetch };
@@ -52,13 +49,11 @@ export const UpdateOfferingPermissionExpirationTimeDialog: FC<{
               </>
             }
           >
-            <FormGroup label={translate('Expiration time')}>
-              <Field
-                name="expiration_time"
-                component={DateTimeField}
-                placeholder={translate('Select a date')}
-              />
-            </FormGroup>
+            <DateTimeGroup
+              label={translate('Expiration time')}
+              name="expiration_time"
+              placeholder={translate('Select a date')}
+            />
           </ModalDialog>
         </form>
       )}

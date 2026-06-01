@@ -1,4 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
 import { renderWithProviders } from '@/test/harness';
@@ -40,7 +41,7 @@ const invoice = {
 } as any;
 
 describe('InvoiceItemsTable', () => {
-  it('refreshes the items table (not just the invoice header) when a per-row action fires', () => {
+  it('refreshes the items table (not just the invoice header) when a per-row action fires', async () => {
     const refreshInvoiceItems = vi.fn();
     fetchSpy.mockClear();
 
@@ -51,7 +52,7 @@ describe('InvoiceItemsTable', () => {
       />,
     );
 
-    fireEvent.click(screen.getByText('trigger-refresh'));
+    await userEvent.click(screen.getByText('trigger-refresh'));
 
     // Regression guard: the deleted row stays on screen unless the table's own
     // React Query cache is invalidated. Refetching the invoice header is not enough.

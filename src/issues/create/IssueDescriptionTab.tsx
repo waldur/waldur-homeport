@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
-import { Field, useFormState, useForm } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { supportTemplatesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { FormGroup, SelectField, StringField, TextField } from '@/form';
+import { SelectGroup, StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 
 import { TEMPLATE_TYPE_TO_NAME } from '../types/constants';
@@ -64,39 +64,32 @@ export const IssueDescriptionTab = () => {
   ) : (
     <>
       {filteredTemplates.length > 0 && (
-        <Field
+        <SelectGroup
           name="template"
-          component={FormGroup}
           label={translate('Template')}
-        >
-          <SelectField
-            placeholder={translate('Select issue template...')}
-            options={filteredTemplates}
-            isDisabled={submitting}
-            getOptionValue={(option) => option.uuid}
-            getOptionLabel={(option) => option.name}
-            isClearable={true}
-          />
-        </Field>
+          placeholder={translate('Select issue template...')}
+          options={filteredTemplates}
+          isDisabled={submitting}
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={(option) => option.name}
+          isClearable={true}
+        />
       )}
-      <Field
+      <StringGroup
         name="summary"
-        component={FormGroup}
         required={true}
         validate={required}
         label={translate('Title')}
-      >
-        <StringField disabled={submitting} />
-      </Field>
-      <Field
+        disabled={submitting}
+      />
+      <TextGroup
         name="description"
-        component={FormGroup}
         required={true}
         validate={required}
         label={translate('Request description')}
-      >
-        <TextField rows={3} disabled={submitting} />
-      </Field>
+        rows={3}
+        disabled={submitting}
+      />
       {templateFiles.length > 0 && (
         <Form.Group className="mb-5">
           <Form.Label>{translate('Template files')}</Form.Label>

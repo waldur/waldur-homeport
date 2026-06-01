@@ -7,9 +7,7 @@ import {
   getRestrictionsArray,
   RestrictionField,
 } from '@/core/restrictions';
-import { SubmitButton } from '@/form';
-import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
-import { FormContainer } from '@/form/FormContainer';
+import { SubmitButton, CommaSeparatedListGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -99,14 +97,14 @@ export const EditMembershipRestrictionsDialog: FC<
               </>
             }
           >
-            <FormContainer submitting={isPending}>
-              <CommaSeparatedListField
+            <div className="size-sm">
+              <CommaSeparatedListGroup
                 name="value"
                 label={config.label}
                 placeholder={config.placeholder}
                 description={config.description}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

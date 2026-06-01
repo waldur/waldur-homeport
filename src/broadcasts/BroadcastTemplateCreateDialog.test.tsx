@@ -1,4 +1,5 @@
-import { screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { broadcastMessageTemplatesCreate } from 'waldur-js-client';
 
@@ -22,22 +23,17 @@ describe('BroadcastTemplateCreateDialog', () => {
   };
 
   it('renders fields and handles submission', async () => {
+    const user = userEvent.setup();
     vi.mocked(broadcastMessageTemplatesCreate).mockResolvedValue({} as any);
-    const { container } = renderComponent();
+    renderComponent();
 
     expect(screen.getByText('Create a broadcast template')).toBeInTheDocument();
 
-    fireEvent.change(container.querySelector('input[name="name"]')!, {
-      target: { value: 'Test Template' },
-    });
-    fireEvent.change(container.querySelector('input[name="subject"]')!, {
-      target: { value: 'Test Subject' },
-    });
-    fireEvent.change(container.querySelector('textarea[name="body"]')!, {
-      target: { value: 'Test Body' },
-    });
+    await user.type(screen.getByLabelText(/Name/i), 'Test Template');
+    await user.type(screen.getByLabelText(/Subject/i), 'Test Subject');
+    await user.type(screen.getByLabelText(/Message/i), 'Test Body');
 
-    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await user.click(screen.getByRole('button', { name: 'Save' }));
 
     await waitFor(() => {
       expect(broadcastMessageTemplatesCreate).toHaveBeenCalledWith(
@@ -49,17 +45,15 @@ describe('BroadcastTemplateCreateDialog', () => {
           },
         }),
       );
-    });
-
-    await waitFor(() => {
       expect(mockResolve.refetch).toHaveBeenCalled();
     });
   });
 
   it('shows validation errors', async () => {
+    const user = userEvent.setup();
     renderComponent();
 
-    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await user.click(screen.getByRole('button', { name: 'Save' }));
 
     await waitFor(() => {
       expect(screen.getAllByText('This field is required.')).toHaveLength(3);

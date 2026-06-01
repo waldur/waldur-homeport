@@ -1,6 +1,5 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
-import { FormCheck } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   AffiliationTypeEnum,
   nestedReviewerProfileAffiliationsCreate,
@@ -9,8 +8,13 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SelectField, StringField, SubmitButton } from '@/form';
-import { DateField } from '@/form/DateField';
+import {
+  BooleanGroup,
+  DateGroup,
+  SelectGroup,
+  StringGroup,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -126,89 +130,54 @@ export const AffiliationFormDialog = ({
               </>
             }
           >
-            <Field
+            <StringGroup
               name="organization_name"
               label={translate('Organization name')}
-              component={FormGroup}
               validate={required}
-            >
-              <StringField />
-            </Field>
+            />
 
-            <Field
+            <StringGroup
               name="organization_identifier"
               label={translate('Organization identifier')}
               description={translate(
                 'ROR, GRID, or other external identifier (optional)',
               )}
-              component={FormGroup}
-            >
-              <StringField />
-            </Field>
+            />
 
-            <Field
-              name="department"
-              label={translate('Department')}
-              component={FormGroup}
-            >
-              <StringField />
-            </Field>
+            <StringGroup name="department" label={translate('Department')} />
 
-            <Field
+            <StringGroup
               name="position_title"
               label={translate('Position title')}
-              component={FormGroup}
               validate={required}
-            >
-              <StringField />
-            </Field>
+            />
 
-            <Field
+            <SelectGroup
               name="affiliation_type"
               label={translate('Affiliation type')}
-              component={FormGroup}
               options={AFFILIATION_TYPE_OPTIONS}
               getOptionLabel={(option) => option.label}
               getOptionValue={(option) => option.value}
               isClearable={false}
               validate={required}
-            >
-              <SelectField />
-            </Field>
+            />
 
-            <Field
+            <DateGroup
               name="start_date"
               label={translate('Start date')}
-              component={FormGroup}
               validate={required}
-            >
-              <DateField />
-            </Field>
+            />
 
-            <Field
+            <DateGroup
               name="end_date"
               label={translate('End date')}
               description={translate('Leave empty for current affiliation')}
-              component={FormGroup}
-            >
-              <DateField />
-            </Field>
+            />
 
-            <Field
+            <BooleanGroup
               name="is_primary"
-              label={translate('Primary affiliation')}
-              component={FormGroup}
-              type="checkbox"
-            >
-              {({ input }) => (
-                <div className="form-check">
-                  <FormCheck {...input} type="checkbox" id="is_primary" />
-                  <FormCheck.Label htmlFor="is_primary">
-                    {translate('This is my primary affiliation')}
-                  </FormCheck.Label>
-                </div>
-              )}
-            </Field>
+              label={translate('This is my primary affiliation')}
+            />
           </ModalDialog>
         </form>
       )}

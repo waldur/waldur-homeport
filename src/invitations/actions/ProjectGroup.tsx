@@ -1,10 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const ProjectGroup: FunctionComponent<{
   customer;
@@ -21,18 +20,17 @@ export const ProjectGroup: FunctionComponent<{
   }
 
   return (
-    <FormGroup label={translate('Project')} required={isRequired}>
-      <Field
-        name="project"
-        component={SelectField}
-        options={customer.projects}
-        isDisabled={disabled}
-        isLoading={loading}
-        getOptionValue={(option) => option.uuid}
-        getOptionLabel={(option) => option.name}
-        isClearable
-        validate={isRequired ? required : undefined}
-      />
-    </FormGroup>
+    <SelectGroup
+      name="project"
+      options={customer.projects}
+      isDisabled={disabled}
+      isLoading={loading}
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={(option) => option.name}
+      isClearable
+      validate={isRequired ? required : undefined}
+      label={translate('Project')}
+      required={isRequired}
+    />
   );
 };

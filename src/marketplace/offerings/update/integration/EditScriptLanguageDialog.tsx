@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
   MergedSecretOptionsRequest,
 } from 'waldur-js-client';
 
-import { SubmitButton, SelectField, FormGroup } from '@/form';
+import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -77,18 +77,15 @@ export const EditScriptLanguageDialog: FC<EditScriptLanguageDialogProps> = ({
               </>
             }
           >
-            <Field
+            <SelectGroup
               name="language"
-              component={FormGroup}
               label={resolve.label}
               options={PROGRAMMING_LANGUAGE_CHOICES}
               simpleValue={true}
               required={true}
               isClearable={false}
               spaceless
-            >
-              <SelectField />
-            </Field>
+            />
           </ModalDialog>
         </form>
       )}

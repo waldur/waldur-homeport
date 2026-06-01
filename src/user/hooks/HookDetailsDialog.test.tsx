@@ -42,21 +42,23 @@ describe('HookDetailsDialog', () => {
   });
 
   describe('Create mode', () => {
-    beforeEach(async () => {
+    const renderCreate = async () => {
       renderWithProviders(
         <HookDetailsDialog resolve={{ refetch: mockRefetch }} />,
       );
       await waitFor(() => {
         expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
       });
-    });
+    };
 
-    it('should render create form with webhook type selected by default', () => {
+    it('should render create form with webhook type selected by default', async () => {
+      await renderCreate();
       expect(screen.getByText('Webhook')).toBeInTheDocument();
       expect(screen.getByText('Email')).toBeInTheDocument();
     });
 
     it('should handle webhook creation', async () => {
+      await renderCreate();
       vi.mocked(hooksWebCreate).mockResolvedValue(null);
 
       await userEvent.type(
@@ -81,6 +83,7 @@ describe('HookDetailsDialog', () => {
     });
 
     it('should handle email hook creation', async () => {
+      await renderCreate();
       vi.mocked(hooksEmailCreate).mockResolvedValue(null);
 
       await userEvent.click(screen.getByText('Email'));
@@ -114,7 +117,7 @@ describe('HookDetailsDialog', () => {
       is_active: true,
       event_groups: ['users'],
     };
-    beforeEach(async () => {
+    const renderUpdate = async () => {
       renderWithProviders(
         <HookDetailsDialog
           resolve={{ hook: mockHook, refetch: mockRefetch }}
@@ -123,9 +126,10 @@ describe('HookDetailsDialog', () => {
       await waitFor(() => {
         expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
       });
-    });
+    };
 
     it('should render update form with existing hook data', async () => {
+      await renderUpdate();
       await waitFor(() => {
         expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
         expect(screen.getByText('Webhook')).toBeInTheDocument();
@@ -136,6 +140,7 @@ describe('HookDetailsDialog', () => {
     });
 
     it('should handle hook update', async () => {
+      await renderUpdate();
       vi.mocked(hooksWebPartialUpdate).mockResolvedValue(null);
       // Update URL
       const urlInput = screen.getByTestId('destination-url');
@@ -167,6 +172,7 @@ describe('HookDetailsDialog', () => {
     });
 
     it('should handle update error', async () => {
+      await renderUpdate();
       const error = new Error('Update failed');
       vi.mocked(hooksWebPartialUpdate).mockRejectedValue(error);
 

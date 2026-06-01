@@ -1,17 +1,20 @@
 import { FC, useCallback, useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { AsyncSelect } from '@/form/select';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { ProjectCreateButton } from '@/project/create/ProjectCreateButton';
 import { useSetProject } from '@/workspace/hooks';
 
 import { projectAutocomplete } from '../common/autocompletes';
-import { FormGroup } from '../offerings/FormGroup';
 
-const ProjectSelect = ({ input }) => {
+interface ProjectFieldProps {
+  previewMode?: boolean;
+  hideLabel?: boolean;
+}
+
+export const ProjectField: FC<ProjectFieldProps> = ({ previewMode }) => {
   const setCurrentProject = useSetProject();
   const { customer } = useOrderFormData();
 
@@ -26,14 +29,18 @@ const ProjectSelect = ({ input }) => {
 
   const onChange = useCallback(
     (value) => {
-      input.onChange(value);
       setCurrentProject(value);
     },
-    [input],
+    [setCurrentProject],
   );
 
   return (
-    <AsyncSelect
+    <AsyncSelectGroup
+      name="project"
+      label={translate('Project')}
+      validate={required}
+      required={true}
+      spaceless
       placeholder={
         customer
           ? translate('Select project...')
@@ -41,30 +48,11 @@ const ProjectSelect = ({ input }) => {
       }
       noOptionsMessage={() => translate('No projects found')}
       loadOptions={loadOptions}
-      label={translate('Project')}
-      value={input.value}
       onChange={onChange}
       getOptionValue={(option) => option.url}
       getOptionLabel={(option) => option.name}
       isClearable={false}
       isDisabled={!customer}
-    />
-  );
-};
-
-interface ProjectFieldProps {
-  previewMode?: boolean;
-  hideLabel?: boolean;
-}
-
-export const ProjectField: FC<ProjectFieldProps> = ({ previewMode }) => {
-  const { customer } = useOrderFormData();
-
-  return (
-    <FormGroup
-      label={translate('Project')}
-      required={true}
-      spaceless
       quickAction={
         !previewMode && (
           <ProjectCreateButton
@@ -75,8 +63,6 @@ export const ProjectField: FC<ProjectFieldProps> = ({ previewMode }) => {
           />
         )
       }
-    >
-      <Field name="project" validate={required} component={ProjectSelect} />
-    </FormGroup>
+    />
   );
 };

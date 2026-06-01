@@ -1,42 +1,31 @@
 import { FC } from 'react';
-import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { FormGroup, StringField, TextField } from '@/form';
+import { StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 
 export const BroadcastTemplateForm: FC = () => {
   return (
     <div className="scroll-y">
-      <Field
+      <StringGroup
         name="name"
         label={translate('Name')}
-        component={FormGroup}
         required={true}
         validate={required}
-      >
-        <StringField maxLength={150} />
-      </Field>
-
-      <Field
+        maxLength={150}
+      />
+      <StringGroup
         name="subject"
         label={translate('Subject')}
-        component={FormGroup}
         required={true}
         validate={required}
-      >
-        <StringField />
-      </Field>
-
-      <Field
+      />
+      <TextGroup
         name="body"
         label={translate('Message')}
-        component={FormGroup}
         required={true}
         validate={required}
-      >
-        <TextField />
-      </Field>
+      />
     </div>
   );
 };

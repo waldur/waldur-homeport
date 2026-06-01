@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   AttributeSourceDetail,
   User,
@@ -14,12 +14,10 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import FormTable from '@/form/FormTable';
-import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -114,19 +112,15 @@ const EditManagedIsdsDialog: FC<EditManagedIsdsDialogProps> = ({ resolve }) => {
               </>
             }
           >
-            <FormGroup
+            <StringGroup
+              name="managed_isds"
+              placeholder="e.g. isd:puhuri, isd:fenix"
+              spaceless
               label={translate('Managed ISDs')}
               description={translate(
                 'Comma-separated list of ISDs, e.g. isd:puhuri, isd:fenix',
               )}
-            >
-              <Field
-                name="managed_isds"
-                component={StringField}
-                placeholder="e.g. isd:puhuri, isd:fenix"
-                spaceless
-              />
-            </FormGroup>
+            />
           </ModalDialog>
         </form>
       )}

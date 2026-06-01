@@ -1,21 +1,24 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   marketplaceOfferingTermsOfServiceCreate,
   OfferingTermsOfServiceCreateRequest,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { StringField, SubmitButton, SelectField, NumberField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import MarkdownEditor from '@/form/MarkdownEditor';
+import {
+  BooleanGroup,
+  MarkdownGroup,
+  NumberGroup,
+  SelectGroup,
+  StringGroup,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-
-import { FormGroup } from '../../FormGroup';
 
 interface AddTosFormData {
   version: string;
@@ -87,59 +90,47 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
               </div>
             }
           >
-            <FormGroup label={translate('Version')} required={true}>
-              <Field
-                name="version"
-                validate={required}
-                component={StringField}
-              />
-            </FormGroup>
+            <StringGroup
+              name="version"
+              validate={required}
+              label={translate('Version')}
+              required={true}
+            />
 
-            <FormGroup label={translate('Add as')} required={true}>
-              <Field
-                name="add_as"
-                component={SelectField}
-                options={addAsOptions}
-                simpleValue
-              />
-            </FormGroup>
+            <SelectGroup
+              name="add_as"
+              options={addAsOptions}
+              simpleValue
+              label={translate('Add as')}
+              required={true}
+            />
 
             {(values?.add_as || 'markdown') === 'markdown' ? (
-              <FormGroup label={translate('Terms of Service')}>
-                <div className="markdown-editor-wrapper">
-                  <Field name="terms_of_service" component={MarkdownEditor} />
-                </div>
-              </FormGroup>
+              <MarkdownGroup
+                name="terms_of_service"
+                label={translate('Terms of Service')}
+              />
             ) : (
-              <FormGroup label={translate('External link')} required={true}>
-                <Field
-                  name="terms_of_service_link"
-                  component={StringField}
-                  validate={required}
-                />
-              </FormGroup>
+              <StringGroup
+                name="terms_of_service_link"
+                validate={required}
+                label={translate('External link')}
+                required={true}
+              />
             )}
 
-            <div className="mb-3">
-              <Field
-                name="is_active"
-                component={AwesomeCheckboxField}
-                type="checkbox"
-                label={translate('Is active')}
-              />
-            </div>
+            <BooleanGroup name="is_active" label={translate('Is active')} />
 
-            <div className="mb-3">
-              <Field
-                name="requires_reconsent"
-                component={AwesomeCheckboxField}
-                type="checkbox"
-                label={translate('Requires re-consent')}
-              />
-            </div>
+            <BooleanGroup
+              name="requires_reconsent"
+              label={translate('Requires re-consent')}
+            />
 
             {values?.requires_reconsent && (
-              <FormGroup
+              <NumberGroup
+                name="grace_period_days"
+                min={0}
+                parse={(value) => (value === '' ? undefined : Number(value))}
                 label={translate('Grace period (days)')}
                 help={translate(
                   'Number of days before outdated consents are automatically revoked. Only applies when requires re-consent is enabled.',
@@ -148,14 +139,7 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
                 description={translate(
                   'After this period expires, user consents for outdated terms will be automatically revoked.',
                 )}
-              >
-                <Field
-                  name="grace_period_days"
-                  component={NumberField}
-                  min={0}
-                  parse={(value) => (value === '' ? undefined : Number(value))}
-                />
-              </FormGroup>
+              />
             )}
           </ModalDialog>
         </form>

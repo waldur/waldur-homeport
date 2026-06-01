@@ -1,22 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { Form, Field } from 'react-final-form';
+import { Col, Row } from 'react-bootstrap';
+import { Form } from 'react-final-form';
 import {
+  AgentIdentity,
+  marketplaceProviderOfferingsRetrieve,
   marketplaceSiteAgentIdentitiesCreate,
   marketplaceSiteAgentIdentitiesUpdate,
-  marketplaceProviderOfferingsRetrieve,
-  AgentIdentity,
 } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
-import { StringField, TextField, FieldError, SubmitButton } from '@/form';
-import { AsyncSelectField } from '@/form/select/AsyncSelectField';
+import { AsyncSelectGroup, StringGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -113,7 +111,9 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        onSubmitMutation.mutateAsync(values).catch(() => {})
+      }
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -138,69 +138,46 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
           >
             <Row>
               <Col md={6}>
-                <FormGroup label={translate('Name')} required>
-                  <Field
-                    name="name"
-                    component={StringField}
-                    placeholder={translate('Enter agent name')}
-                    validate={required}
-                  />
-                  <Field
-                    name="name"
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                <StringGroup
+                  name="name"
+                  label={translate('Name')}
+                  required
+                  validate={required}
+                  placeholder={translate('Enter agent name')}
+                />
               </Col>
               <Col md={6}>
-                <FormGroup label={translate('Version')}>
-                  <Field
-                    name="version"
-                    component={StringField}
-                    placeholder={translate('e.g., 1.0.0')}
-                  />
-                </FormGroup>
+                <StringGroup
+                  name="version"
+                  placeholder={translate('e.g., 1.0.0')}
+                  label={translate('Version')}
+                />
               </Col>
             </Row>
 
-            <FormGroup label={translate('Offering')} required>
-              <AsyncSelectField
-                name="offering"
-                placeholder={translate('Select offering...')}
-                loadOptions={loadOfferings}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.name}
-                validate={required}
-              />
-              <Field
-                name="offering"
-                component={({ meta }) =>
-                  meta.touched && meta.error ? (
-                    <FieldError error={meta.error} />
-                  ) : null
-                }
-              />
-            </FormGroup>
+            <AsyncSelectGroup
+              name="offering"
+              label={translate('Offering')}
+              required
+              placeholder={translate('Select offering...')}
+              loadOptions={loadOfferings}
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              validate={required}
+            />
 
-            <FormGroup label={translate('Config file path')}>
-              <Field
-                name="config_file_path"
-                component={StringField}
-                placeholder={translate('e.g., /etc/waldur/agent.yaml')}
-              />
-            </FormGroup>
+            <StringGroup
+              name="config_file_path"
+              placeholder={translate('e.g., /etc/waldur/agent.yaml')}
+              label={translate('Config file path')}
+            />
 
-            <FormGroup label={translate('Config file content')}>
-              <Field
-                name="config_file_content"
-                component={TextField}
-                placeholder={translate('Paste configuration content here')}
-                rows={6}
-              />
-            </FormGroup>
+            <TextGroup
+              name="config_file_content"
+              placeholder={translate('Paste configuration content here')}
+              rows={6}
+              label={translate('Config file content')}
+            />
           </ModalDialog>
         </form>
       )}

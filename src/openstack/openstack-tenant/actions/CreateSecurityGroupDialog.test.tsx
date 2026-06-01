@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 
 import { CreateSecurityGroupDialog } from './CreateSecurityGroupDialog';
 
@@ -33,10 +34,9 @@ const renderDialog = (resource = fakeTenant) => {
 describe('CreateSecurityGroupDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(openstackSecurityGroupsList).mockResolvedValue({
-      data: [defaultSecurityGroup],
-      headers: { 'x-result-count': '1' },
-    } as any);
+    vi.mocked(openstackSecurityGroupsList).mockResolvedValue(
+      mockListResponse([defaultSecurityGroup]),
+    );
   });
 
   it('sends REST API request when form is being submitted', async () => {

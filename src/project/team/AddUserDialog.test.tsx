@@ -1,4 +1,4 @@
-import { screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -6,61 +6,16 @@ import {
   customersUsersList,
   projectsAddUser,
   projectsOtherUsersList,
+  usersList,
+  usersMeRetrieve,
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption, typeAndSelectOption } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { AddUserDialog } from './AddUserDialog';
-
-// Mock customer team utils
-vi.mock('@/customer/team/utils', () => ({
-  usersAutocomplete: vi.fn().mockResolvedValue({
-    options: [
-      {
-        uuid: 'user1-uuid',
-        full_name: 'John Doe',
-        username: 'john',
-        email: 'john@example.com',
-      },
-    ],
-    hasMore: false,
-    additional: { page: 1 },
-  }),
-}));
-
-// Mock permissions
-vi.mock('@/permissions/hasPermission', () => ({
-  hasPermission: vi.fn().mockReturnValue(true),
-}));
-
-vi.mock('@/user/UsersService', () => ({
-  getCurrentUser: vi.fn().mockResolvedValue({
-    uuid: 'user-uuid',
-    full_name: 'Test User',
-  }),
-}));
-
-// Mock the customer workspace hook
-vi.mock('@/customer/workspace/fetchCustomer', () => ({
-  useCustomerProjects: () => ({
-    loading: false,
-  }),
-}));
-
-vi.mock('./utils', () => ({
-  hasCurrentCustomerPermission: () => true,
-}));
-
-vi.mock('@/form/AwesomeCheckboxField', () => ({
-  AwesomeCheckboxField: ({ name, label, className }) => (
-    <div data-testid={`checkbox-${name}`} className={className}>
-      <input type="checkbox" />
-      <label>{label}</label>
-    </div>
-  ),
-}));
 
 const mockProps = {
   refetch: vi.fn(),
@@ -78,34 +33,35 @@ const renderComponent = (props: any = mockProps) => {
   return renderWithProviders(<AddUserDialog {...props} />);
 };
 
+const mockUserData = [
+  {
+    uuid: 'user1-uuid',
+    full_name: 'John Doe',
+    username: 'john',
+    email: 'john@example.com',
+  },
+];
+
 describe('AddUserDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useUser).mockReturnValue({ is_staff: false } as any);
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'current-user',
+      is_staff: false,
+    } as any);
     vi.mocked(useCustomer).mockReturnValue({ uuid: 'customer-uuid' } as any);
     vi.mocked(useProject).mockReturnValue({ uuid: 'project-uuid' } as any);
-    const mockUserResponse = {
-      data: [
-        {
-          uuid: 'user1-uuid',
-          full_name: 'John Doe',
-          username: 'john',
-          email: 'john@example.com',
-        },
-      ],
-      response: {
-        headers: {
-          get: vi.fn().mockImplementation((name) => {
-            if (name === 'x-result-count') return '1';
-            return null;
-          }),
-        },
-      },
-    };
-    vi.mocked(customersUsersList).mockResolvedValue(mockUserResponse as any);
-    vi.mocked(projectsOtherUsersList).mockResolvedValue(
-      mockUserResponse as any,
+
+    vi.mocked(customersUsersList).mockResolvedValue(
+      mockListResponse(mockUserData),
     );
+    vi.mocked(projectsOtherUsersList).mockResolvedValue(
+      mockListResponse(mockUserData),
+    );
+    vi.mocked(usersList).mockResolvedValue(mockListResponse(mockUserData));
+    vi.mocked(usersMeRetrieve).mockResolvedValue({
+      data: { uuid: 'user-uuid', full_name: 'Test User' },
+    } as any);
   });
 
   it('renders dialog with correct title and form fields', () => {
@@ -119,25 +75,31 @@ describe('AddUserDialog', () => {
   });
 
   it('shows staff-only checkbox when user is staff', () => {
-    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'staff-user',
+      is_staff: true,
+    } as any);
     renderComponent();
 
     expect(
-      screen.getByText('Show users outside organization'),
+      screen.getByLabelText('Show users outside organization'),
     ).toBeInTheDocument();
   });
 
   it('renders role group with appropriate types for customer level', async () => {
     const user = userEvent.setup();
+    vi.mocked(useUser).mockReturnValue({
+      uuid: 'staff-user',
+      is_staff: true,
+    } as any);
     renderComponent(mockCustomerProps);
 
-    expect(screen.getByText('Role')).toBeInTheDocument();
+    await openAndSelectOption(user, 'Role', 'customer role');
+    expect(screen.getByText('customer role')).toBeInTheDocument();
 
-    const container = screen.getByText('Role').closest('.mb-7') as HTMLElement;
-    const combobox = within(container).getByRole('combobox');
+    const combobox = screen.getByRole('combobox', { name: 'Role' });
     await user.click(combobox);
 
-    expect(await screen.findByText('customer role')).toBeInTheDocument();
     expect(await screen.findByText('project role')).toBeInTheDocument();
   });
 
@@ -145,10 +107,7 @@ describe('AddUserDialog', () => {
     const user = userEvent.setup();
     renderComponent({ ...mockProps, level: 'project' });
 
-    expect(screen.getByText('Role')).toBeInTheDocument();
-
-    const container = screen.getByText('Role').closest('.mb-7') as HTMLElement;
-    const combobox = within(container).getByRole('combobox');
+    const combobox = screen.getByRole('combobox', { name: 'Role' });
     await user.click(combobox);
 
     expect(await screen.findByText('project role')).toBeInTheDocument();
@@ -169,8 +128,9 @@ describe('AddUserDialog', () => {
 
   it('calls correct API endpoint for project role', async () => {
     const user = userEvent.setup();
-    const mockProjectsAddUser = vi.mocked(projectsAddUser);
-    mockProjectsAddUser.mockResolvedValue({} as any);
+    const mockProjectsAddUser = vi
+      .mocked(projectsAddUser)
+      .mockResolvedValue({} as any);
 
     renderComponent();
 
@@ -194,25 +154,32 @@ describe('AddUserDialog', () => {
     });
   });
 
-  it('calls correct API endpoint for customer role', () => {
-    const mockCustomersAddUser = vi.mocked(customersAddUser);
-    mockCustomersAddUser.mockResolvedValue({} as any);
+  it('calls correct API endpoint for customer role', async () => {
+    const user = userEvent.setup();
+    const mockCustomersAddUser = vi
+      .mocked(customersAddUser)
+      .mockResolvedValue({} as any);
 
-    renderComponent();
+    renderComponent(mockCustomerProps);
 
-    // This would require form interaction to actually submit
-    expect(mockCustomersAddUser).toHaveBeenCalledTimes(0);
-  });
+    await typeAndSelectOption(user, 'User', 'John', /John Doe/);
+    await openAndSelectOption(user, 'Role', 'customer role');
 
-  it('handles API errors gracefully', () => {
-    const mockProjectsAddUser = vi.mocked(projectsAddUser);
-    const mockError = new Error('API Error');
-    mockProjectsAddUser.mockRejectedValue(mockError);
+    const submitButton = screen.getByRole('button', { name: 'Add role' });
+    await waitFor(() => expect(submitButton).not.toBeDisabled());
+    await user.click(submitButton);
 
-    renderComponent();
-
-    // Error handling would be tested through form submission
-    expect(screen.getByText('Add team member')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(mockCustomersAddUser).toHaveBeenCalledWith(
+        expect.objectContaining({
+          path: { uuid: 'customer-uuid' },
+          body: expect.objectContaining({
+            user: 'user1-uuid',
+            role: 'customer_role',
+          }),
+        }),
+      );
+    });
   });
 
   it('uses default title when none provided', () => {

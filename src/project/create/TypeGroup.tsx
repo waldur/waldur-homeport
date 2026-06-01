@@ -1,14 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { Field } from 'react-final-form';
 import { projectTypesList } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const TypeGroup = ({ create }: { create?: boolean }) => {
   if (create && !isFeatureVisible(ProjectFeatures.show_type_in_create_dialog)) {
@@ -30,15 +28,13 @@ export const TypeGroup = ({ create }: { create?: boolean }) => {
       {translate('Unable to load project types.')}
     </h3>
   ) : projectTypes.length >= 1 ? (
-    <FormGroup label={translate('Project type')}>
-      <Field
-        component={SelectField}
-        name="type"
-        options={projectTypes}
-        getOptionValue={(option) => option.url}
-        getOptionLabel={(option) => option.name}
-        isClearable={true}
-      />
-    </FormGroup>
+    <SelectGroup
+      name="type"
+      options={projectTypes}
+      getOptionValue={(option) => option.url}
+      getOptionLabel={(option) => option.name}
+      isClearable={true}
+      label={translate('Project type')}
+    />
   ) : null;
 };

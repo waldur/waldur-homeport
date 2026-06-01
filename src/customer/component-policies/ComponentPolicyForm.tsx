@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { lowerCase, upperFirst } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
-import { Field } from 'react-final-form';
 import {
   Customer,
   marketplaceCustomerComponentUsagePoliciesActionsRetrieve,
@@ -15,9 +14,8 @@ import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { composeValidators, required } from '@/core/validators';
-import { FieldError, SelectField, StringField } from '@/form';
+import { FieldError, SelectGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { validateEmails } from '../cost-policies/utils';
 
@@ -98,38 +96,31 @@ export const ComponentPolicyForm: FC<ComponentPolicyFormProps> = ({
       ) : (
         <ComponentLimitsField components={components} />
       )}
-
       {error && !isLoading && <LoadingErred loadData={refetch} />}
-
-      <FormGroup label={translate('Then')} required>
-        <Field
-          name="actions"
-          component={SelectField}
-          placeholder={translate(
-            'Select action to take when the condition is met...',
-          )}
-          validate={required}
-          required
-          options={actionOptions}
-          getOptionValue={(option) => option.value}
-          getOptionLabel={(option) => option.label}
-          isLoading={isLoading}
-        />
-      </FormGroup>
-
+      <SelectGroup
+        name="actions"
+        placeholder={translate(
+          'Select action to take when the condition is met...',
+        )}
+        validate={required}
+        required
+        options={actionOptions}
+        getOptionValue={(option) => option.value}
+        getOptionLabel={(option) => option.label}
+        isLoading={isLoading}
+        label={translate('Then')}
+      />
       {actions?.value === 'notify_external_user' && (
-        <FormGroup label={translate('External user emails')} required>
-          <Field
-            name="options.notify_external_user"
-            component={StringField}
-            placeholder={translate(
-              'Enter email addresses separated by commas (e.g., user1@example.com, user2@example.com)',
-            )}
-            validate={composeValidators(required, validateEmails)}
-          />
-        </FormGroup>
+        <StringGroup
+          name="options.notify_external_user"
+          placeholder={translate(
+            'Enter email addresses separated by commas (e.g., user1@example.com, user2@example.com)',
+          )}
+          validate={composeValidators(required, validateEmails)}
+          label={translate('External user emails')}
+          required
+        />
       )}
-
       {!!errors && (
         <Form.Group>
           <FieldError error={errors} />

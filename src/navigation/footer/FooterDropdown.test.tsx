@@ -13,8 +13,6 @@ describe('FooterDropdown', () => {
 
     expect(screen.getByText('Test Dropdown')).toBeInTheDocument();
     expect(screen.getByTestId('child')).toBeInTheDocument();
-    expect(screen.getByText('Test Dropdown').closest('li')).toHaveClass(
-      'menu-item',
-    );
+    expect(screen.getByTestId('footer-dropdown')).toHaveClass('menu-item');
   });
 });

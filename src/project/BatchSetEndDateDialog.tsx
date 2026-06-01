@@ -1,13 +1,10 @@
 import { DateTime } from 'luxon';
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { Project, projectsPartialUpdate } from 'waldur-js-client';
 
 import { formatISODate } from '@/core/dateUtils';
-import { FormFooter } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { DateField } from '@/form/DateField';
-import { FormContainer } from '@/form/FormContainer';
+import { FormFooter, DateGroup, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -68,30 +65,23 @@ export const BatchSetEndDateDialog: FC<BatchSetEndDateDialogProps> = (
         updateMutation.mutateAsync(formData).catch(() => {})
       }
       initialValues={{ clear: false }}
-      render={({ handleSubmit, submitting, invalid, values }) => (
+      render={({ handleSubmit, submitting, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Set end date')}
             subtitle={translate('{count} projects selected', { count })}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid || (!values.clear && !values.end_date)}
-                submitLabel={translate('Save')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Save')} />}
           >
-            <FormContainer submitting={submitting}>
-              <Field
+            <div className="size-sm">
+              <BooleanGroup
                 name="clear"
-                component={AwesomeCheckboxField}
                 label={translate('Clear end date')}
                 help_text={translate(
                   'Remove the end date so projects are not scheduled for expiration.',
                 )}
               />
               {!values.clear && (
-                <DateField
+                <DateGroup
                   name="end_date"
                   label={translate('End date')}
                   disabled={submitting}
@@ -101,7 +91,7 @@ export const BatchSetEndDateDialog: FC<BatchSetEndDateDialogProps> = (
                   minDate={DateTime.now().plus({ days: 1 }).toISO()}
                 />
               )}
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

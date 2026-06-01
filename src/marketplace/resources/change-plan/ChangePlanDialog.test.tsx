@@ -4,7 +4,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesSwitchPlan } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
-import { usePermission } from '@/permissions/hooks';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 
@@ -12,8 +11,6 @@ import { ChangePlanDialog } from './ChangePlanDialog';
 import { loadData } from './utils';
 
 vi.mock('./utils');
-vi.mock('@/permissions/hooks');
-
 const mockData = {
   resource: {
     uuid: 'test-uuid',
@@ -68,7 +65,6 @@ const renderDialog = () => {
 describe('ChangePlanDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(usePermission).mockReturnValue(() => true);
   });
 
   it('should show loading spinner initially', () => {
@@ -101,13 +97,13 @@ describe('ChangePlanDialog', () => {
     renderDialog();
 
     await waitFor(() => {
-      expect(screen.getByText('Submit')).toBeInTheDocument();
+      expect(screen.getByText('Request for a change')).toBeInTheDocument();
     });
 
     const plan2Row = await screen.findByText('Plan 2');
     await userEvent.click(plan2Row);
 
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByText('Request for a change');
     await userEvent.click(submitButton);
 
     await waitFor(() => {
@@ -129,13 +125,13 @@ describe('ChangePlanDialog', () => {
     renderDialog();
 
     await waitFor(() => {
-      expect(screen.getByText('Submit')).toBeInTheDocument();
+      expect(screen.getByText('Request for a change')).toBeInTheDocument();
     });
 
     const plan2Row = await screen.findByText('Plan 2');
     await userEvent.click(plan2Row);
 
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByText('Request for a change');
     await userEvent.click(submitButton);
 
     await waitFor(() => {

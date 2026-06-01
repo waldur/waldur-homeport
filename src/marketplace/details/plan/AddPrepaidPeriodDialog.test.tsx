@@ -1,4 +1,4 @@
-import { cleanup, screen } from '@testing-library/react';
+import { cleanup, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DateTime } from 'luxon';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -119,19 +119,23 @@ describe('AddPrepaidPeriodDialog', () => {
     renderComponent({ constraints, project });
 
     // Open the select to see options
-    const combobox = screen.getByRole('combobox');
+    const combobox = screen.getByLabelText(/Subscription period/i);
     await user.click(combobox);
 
+    const listbox = screen.getByRole('listbox');
+
     // Options should be 1, 2 months only
-    expect(screen.getByRole('option', { name: '1 month' })).toBeInTheDocument();
     expect(
-      screen.getByRole('option', { name: '2 months' }),
+      within(listbox).getByRole('option', { name: '1 month' }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole('option', { name: '3 months' }),
+      within(listbox).getByRole('option', { name: '2 months' }),
+    ).toBeInTheDocument();
+    expect(
+      within(listbox).queryByRole('option', { name: '3 months' }),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByRole('option', { name: 'Custom range' }),
+      within(listbox).queryByRole('option', { name: 'Custom range' }),
     ).not.toBeInTheDocument();
 
     vi.useRealTimers();

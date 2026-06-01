@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { ENV } from '@/core/config';
-import { FormGroup, TextField } from '@/form';
+import { TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { VStepperFormStepCard } from '@/wizard';
 
@@ -40,15 +39,11 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         project={project}
         formatSuggestedName={props.params?.formatSuggestedName}
       />
-
-      <Field
+      <TextGroup
         name="attributes.description"
-        component={FormGroup}
         maxLength={1000}
         label={translate('Description')}
-      >
-        <TextField />
-      </Field>
+      />
       <div className="mb-7 border-bottom" />
       {!startDateEmbeddedInPrepaid && <OrderStartDateField project={project} />}
       {!hasPrepaidComponents && (

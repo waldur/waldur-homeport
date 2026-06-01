@@ -1,10 +1,8 @@
-import { Form, InputGroup } from 'react-bootstrap';
-import { Form as FinalForm, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { OpenStackVolume, openstackVolumesExtend } from 'waldur-js-client';
 
 import { formatFilesize } from '@/core/utils';
-import { FormFooter } from '@/form';
-import { InputField } from '@/form/InputField';
+import { FormFooter, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { parseIntField, formatIntField } from '@/marketplace/common/utils';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -41,14 +39,14 @@ export const VolumeExtendDialog = ({
   });
 
   return (
-    <FinalForm<VolumeExtendDialogFormData>
+    <Form<VolumeExtendDialogFormData>
       initialValues={{ size: minSize }}
       onSubmit={(formData) => extendMutation.mutateAsync(formData)}
-      render={({ handleSubmit, submitting }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Extend OpenStack volume')}
-            footer={<FormFooter submitting={submitting} />}
+            footer={<FormFooter />}
           >
             <p>
               <strong>{translate('Volume name')}:</strong> {resource.name}
@@ -59,23 +57,15 @@ export const VolumeExtendDialog = ({
               {formatFilesize(resource.size)}
             </p>
 
-            <Form.Group>
-              <Form.Label>{translate('New size')}:</Form.Label>
-              <InputGroup>
-                <Field
-                  name="size"
-                  component={InputField}
-                  type="number"
-                  required={true}
-                  min={minSize}
-                  disabled={submitting}
-                  parse={parseIntField}
-                  format={formatIntField}
-                />
-
-                <InputGroup.Text>{translate('GB')}</InputGroup.Text>
-              </InputGroup>
-            </Form.Group>
+            <NumberGroup
+              name="size"
+              label={translate('New size')}
+              required={true}
+              min={minSize}
+              parse={parseIntField}
+              format={formatIntField}
+              unit={translate('GB')}
+            />
           </ModalDialog>
         </form>
       )}

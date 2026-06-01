@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { ThreadSession } from 'waldur-js-client';
 
@@ -21,15 +21,17 @@ const baseProps = {
 
 describe('ThreadListItem', () => {
   it('does not render a <button> nested inside another <button>', () => {
-    const { container } = render(<ThreadListItem {...baseProps} />);
-    const nestedButtons = container.querySelectorAll('button button');
-    expect(nestedButtons).toHaveLength(0);
+    render(<ThreadListItem {...baseProps} />);
+    const buttons = screen.getAllByRole('button');
+    buttons.forEach((button) => {
+      expect(within(button).queryByRole('button')).toBeNull();
+    });
   });
 
   it('wraps the row in a non-interactive element, not a <button>', () => {
-    const { container } = render(<ThreadListItem {...baseProps} />);
-    const wrapper = container.querySelector('.aui-history-item');
+    render(<ThreadListItem {...baseProps} />);
+    const wrapper = screen.getByTestId('thread-list-item');
     expect(wrapper).not.toBeNull();
-    expect(wrapper!.tagName.toLowerCase()).not.toBe('button');
+    expect(wrapper.tagName.toLowerCase()).not.toBe('button');
   });
 });

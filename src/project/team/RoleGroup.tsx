@@ -1,11 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { OptionProps, components } from 'react-select';
 
 import { required } from '@/core/validators';
-import { SelectField } from '@/form/select/SelectField';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { Role, RoleType } from '@/permissions/types';
 import { getRoles } from '@/permissions/utils';
 
@@ -37,16 +35,15 @@ export const RoleGroup: FunctionComponent<{
   types: RoleType[];
 }> = ({ types }) => {
   return (
-    <FormGroup label={translate('Role')} controlId="role">
-      <Field
-        name="role"
-        component={SelectField}
-        options={getRoles(types)}
-        getOptionLabel={(role: Role) => role.description || role.name}
-        getOptionValue={({ name }) => name}
-        validate={required}
-        components={{ Option: RoleOption }}
-      />
-    </FormGroup>
+    <SelectGroup
+      name="role"
+      options={getRoles(types)}
+      getOptionLabel={(role: Role) => role.description || role.name}
+      getOptionValue={({ name }) => name}
+      validate={required}
+      components={{ Option: RoleOption }}
+      label={translate('Role')}
+      controlId="role"
+    />
   );
 };

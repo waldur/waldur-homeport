@@ -3,8 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
-import { SubmitButton } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SubmitButton, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 import { useModal } from '@/modal/actions';
@@ -119,7 +118,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
           {filteredCountries.map((countryCode) => (
             <Col key={countryCode} sm={6} md={4}>
               <div className="border-bottom py-5">
-                <AwesomeCheckboxField
+                <BooleanGroup
                   data-testid={`country_${countryCode}`}
                   name={`country_${countryCode}`}
                   alignMiddle

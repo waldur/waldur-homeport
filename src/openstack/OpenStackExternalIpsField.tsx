@@ -3,11 +3,10 @@ import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
-
-import { StringField } from './StringField';
 
 const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
   const addRow = () => {
@@ -33,10 +32,10 @@ const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
                 {fields.map((member, i) => (
                   <tr key={member}>
                     <td>
-                      <StringField name={`${member}.floating_ip`} />
+                      <StringGroup name={`${member}.floating_ip`} />
                     </td>
                     <td>
-                      <StringField name={`${member}.external_ip`} />
+                      <StringGroup name={`${member}.external_ip`} />
                     </td>
                     <td>
                       <RemovalActionButton action={() => removeRow(i)} />

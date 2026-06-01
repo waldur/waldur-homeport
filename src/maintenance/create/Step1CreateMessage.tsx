@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useState } from 'react';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import {
   MaintenanceAnnouncementTemplate,
   maintenanceAnnouncementsTemplateList,
@@ -11,13 +11,16 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { required, url } from '@/core/validators';
-import { SelectField, StringField, TextField } from '@/form';
-import { DateField } from '@/form/DateField';
-import { AsyncSelect } from '@/form/select';
-import { TimeField } from '@/form/TimeField';
+import {
+  SelectGroup,
+  StringGroup,
+  TextGroup,
+  DateGroup,
+  AsyncSelectGroup,
+  TimeGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { MaintenanceForm } from '../types';
@@ -123,170 +126,133 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
       ) : null}
 
       {showProviderPicker ? (
-        <FormGroup
+        <AsyncSelectGroup
+          name="service_provider"
           label={translate('Service provider')}
           description={translate(
             'Choose the service provider this maintenance announcement applies to',
           )}
           required
-        >
-          <Field name="service_provider" validate={required}>
-            {(fieldProps) => (
-              <AsyncSelect
-                placeholder={translate('Select service provider...')}
-                loadOptions={providerAutocomplete}
-                defaultOptions
-                getOptionValue={(option) => option.customer_uuid}
-                getOptionLabel={(option) => option.customer_name}
-                value={fieldProps.input.value || null}
-                onChange={(value) => {
-                  fieldProps.input.onChange(value);
-                  handleProviderChange(value);
-                }}
-                noOptionsMessage={() => translate('No service providers')}
-                isClearable={true}
-              />
-            )}
-          </Field>
-        </FormGroup>
+          validate={required}
+          placeholder={translate('Select service provider...')}
+          loadOptions={providerAutocomplete}
+          defaultOptions
+          getOptionValue={(option) => option.customer_uuid}
+          getOptionLabel={(option) => option.customer_name}
+          onChange={handleProviderChange}
+          noOptionsMessage={() => translate('No service providers')}
+          isClearable={true}
+        />
       ) : null}
 
-      <FormGroup
+      <SelectGroup
+        name="template"
+        options={templates}
+        isClearable
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.uuid}
+        onChange={fillFields}
+        isLoading={isLoading}
         label={translate('Template')}
         description={translate(
           'Select a previously saved template to auto-fill form fields',
         )}
-      >
-        <Field
-          name="template"
-          component={SelectField}
-          options={templates}
-          isClearable
-          getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.uuid}
-          onChange={fillFields}
-          isLoading={isLoading}
-          isDisabled={!providerUuid}
-        />
-      </FormGroup>
-
+        isDisabled={!providerUuid}
+      />
       {values?.template && offeringsError ? (
         <LoadingErred
           loadData={() => fillFields(values.template)}
           message={translate('Unable to load template offerings')}
         />
       ) : null}
-
-      <FormGroup label={translate('Name')} required>
-        <Field
-          name="name"
-          component={StringField}
-          placeholder={translate('e.g. Database maintance')}
-          validate={required}
-        />
-      </FormGroup>
-
-      <FormGroup label={translate('Maintenance type')} required>
-        <Field
-          name="maintenance_type"
-          component={SelectField}
-          options={maintenanceTypeOptions}
-          isClearable={false}
-          getOptionValue={(option) => option.value}
-          getOptionLabel={(option) => option.label}
-          validate={required}
-          simpleValue
-        />
-      </FormGroup>
-
-      <FormGroup label={translate('Message')} required>
-        <Field
-          name="message"
-          component={TextField}
-          placeholder={translate(
-            'Describe the public details of the maintenance...',
-          )}
-          validate={required}
-        />
-      </FormGroup>
-
+      <StringGroup
+        name="name"
+        placeholder={translate('e.g. Database maintance')}
+        validate={required}
+        label={translate('Name')}
+        required
+      />
+      <SelectGroup
+        name="maintenance_type"
+        options={maintenanceTypeOptions}
+        isClearable={false}
+        getOptionValue={(option) => option.value}
+        getOptionLabel={(option) => option.label}
+        validate={required}
+        simpleValue
+        label={translate('Maintenance type')}
+        required
+      />
+      <TextGroup
+        name="message"
+        placeholder={translate(
+          'Describe the public details of the maintenance...',
+        )}
+        validate={required}
+        label={translate('Message')}
+        required
+      />
       {/* Dates - side by side */}
       <div className="row">
         <div className="col-sm-6">
-          <FormGroup label={translate('Start date')} required>
-            <Field
-              name="scheduled_start_date"
-              component={DateField}
-              placeholder={translate('DD/MM/YYYY')}
-              dateFormat="Y-m-d"
-              validate={required}
-            />
-          </FormGroup>
+          <DateGroup
+            name="scheduled_start_date"
+            placeholder={translate('DD/MM/YYYY')}
+            dateFormat="Y-m-d"
+            validate={required}
+            label={translate('Start date')}
+            required
+          />
         </div>
         <div className="col-sm-6">
-          <FormGroup label={translate('Start time')} required>
-            <Field
-              name="scheduled_start_time"
-              component={TimeField}
-              placeholder={translate('HH:MM')}
-              validate={required}
-            />
-          </FormGroup>
+          <TimeGroup
+            name="scheduled_start_time"
+            label={translate('Start time')}
+            placeholder={translate('HH:MM')}
+            validate={required}
+            required
+          />
         </div>
       </div>
-
       <div className="row">
         <div className="col-sm-6">
-          <FormGroup label={translate('End date')} required>
-            <Field
-              name="scheduled_end_date"
-              component={DateField}
-              placeholder={translate('DD/MM/YYYY')}
-              dateFormat="Y-m-d"
-              validate={required}
-            />
-          </FormGroup>
+          <DateGroup
+            name="scheduled_end_date"
+            placeholder={translate('DD/MM/YYYY')}
+            dateFormat="Y-m-d"
+            validate={required}
+            label={translate('End date')}
+            required
+          />
         </div>
         <div className="col-sm-6">
-          <FormGroup label={translate('End time')} required>
-            <Field
-              name="scheduled_end_time"
-              component={TimeField}
-              placeholder={translate('HH:mm')}
-              validate={required}
-            />
-          </FormGroup>
+          <TimeGroup
+            name="scheduled_end_time"
+            label={translate('End time')}
+            placeholder={translate('HH:mm')}
+            validate={required}
+            required
+          />
         </div>
       </div>
-
-      <FormGroup
+      <StringGroup
+        name="external_reference_url"
+        placeholder={translate(
+          'e.g. https://status.example.com/maintenance/123',
+        )}
+        validate={url}
         label={translate('External reference (Optional)')}
         description={translate('Link to external maintenance page or ticket')}
-      >
-        <Field
-          name="external_reference_url"
-          component={StringField}
-          placeholder={translate(
-            'e.g. https://status.example.com/maintenance/123',
-          )}
-          validate={url}
-        />
-      </FormGroup>
-
+      />
       <hr className="mb-7 mt-0" />
-
-      <FormGroup
+      <TextGroup
+        name="internal_notes"
+        placeholder={translate(
+          'Add staff/provider-only information (not visible to customers)...',
+        )}
         label={translate('Internal notes (providers/staff visible only)')}
         spaceless
-      >
-        <Field
-          name="internal_notes"
-          component={TextField}
-          placeholder={translate(
-            'Add staff/provider-only information (not visible to customers)...',
-          )}
-        />
-      </FormGroup>
+      />
     </WizardModal>
   );
 };

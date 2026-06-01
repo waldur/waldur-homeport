@@ -87,7 +87,7 @@ export const SecurityGroupEditorDialog: FC<SecurityGroupEditorDialogProps> = ({
       onSubmit={mutateAsync}
       mutators={{ ...arrayMutators }}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate('Set rules in {name} security group', {
@@ -95,8 +95,6 @@ export const SecurityGroupEditorDialog: FC<SecurityGroupEditorDialogProps> = ({
             })}
             loading={isLoading}
             error={error}
-            submitting={submitting}
-            invalid={invalid}
           >
             {securityGroups ? (
               <RulesList remoteSecurityGroups={securityGroups} />

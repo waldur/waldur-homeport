@@ -27,10 +27,17 @@ const AllocationPoolsList: FunctionComponent<
   useEffect(() => {
     if (!cidr) return;
 
-    if (fields.length === 0) {
-      const defaultPool = getDefaultAllocationPool(cidr);
-      fields.push(defaultPool);
-    }
+    let isMounted = true;
+    setTimeout(() => {
+      if (isMounted && fields.length === 0) {
+        const defaultPool = getDefaultAllocationPool(cidr);
+        fields.push(defaultPool);
+      }
+    }, 0);
+
+    return () => {
+      isMounted = false;
+    };
   }, [fields, cidr]);
 
   useEffect(() => {
@@ -73,10 +80,14 @@ const AllocationPoolsList: FunctionComponent<
       const validationResult = validateAllocationPool(pool, cidr);
 
       if (validationResult) {
-        setValidationErrors((prev) => ({
-          ...prev,
-          [`${index}-${validationResult.field}`]: validationResult.error,
-        }));
+        setValidationErrors((prev) => {
+          const newErrors = { ...prev };
+          delete newErrors[`${index}-start`];
+          delete newErrors[`${index}-end`];
+          newErrors[`${index}-${validationResult.field}`] =
+            validationResult.error;
+          return newErrors;
+        });
       } else {
         setValidationErrors((prev) => {
           const newErrors = { ...prev };

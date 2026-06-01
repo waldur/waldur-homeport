@@ -51,7 +51,7 @@ describe('SingleOfferingImportDialog', () => {
       data: { imported_offering_uuid: 'imported-offering-uuid' },
     } as any);
 
-    const { container } = renderDialog();
+    renderDialog();
 
     // --- Step 1: File Upload ---
     expect(screen.getByText(/Upload offering file/i)).toBeInTheDocument();
@@ -59,9 +59,7 @@ describe('SingleOfferingImportDialog', () => {
     const file = new File(['offering: test'], 'offering.yaml', {
       type: 'text/yaml',
     });
-    const input = container.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement;
+    const input = screen.getByTestId('file-uploader');
     await user.upload(input, file);
 
     await screen.findByText('Test Offering');
@@ -107,14 +105,12 @@ describe('SingleOfferingImportDialog', () => {
       },
     });
 
-    const { container } = renderDialog();
+    renderDialog();
 
     const file = new File(['offering: test'], 'offering.yaml', {
       type: 'text/yaml',
     });
-    const input = container.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement;
+    const input = screen.getByTestId('file-uploader');
     await user.upload(input, file);
 
     await screen.findByText('Test Offering');

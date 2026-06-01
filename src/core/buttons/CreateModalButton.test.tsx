@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FC } from 'react';
 import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
@@ -44,7 +45,8 @@ describe('CreateModalButton', () => {
     expect(screen.getByRole('button')).toHaveTextContent('Create New Item');
   });
 
-  it('opens dialog with correct props when clicked', () => {
+  it('opens dialog with correct props when clicked', async () => {
+    const user = userEvent.setup();
     const refetch = vi.fn();
     render(
       <CreateModalButton
@@ -55,7 +57,7 @@ describe('CreateModalButton', () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
 
     expect(mockOpenDialog).toHaveBeenCalledTimes(1);
     expect(mockOpenDialog).toHaveBeenCalledWith(MockDialog, {
@@ -92,12 +94,13 @@ describe('CreateModalButton', () => {
     expect(button).toHaveClass('btn-secondary');
   });
 
-  it('uses default size lg when not specified', () => {
+  it('uses default size lg when not specified', async () => {
+    const user = userEvent.setup();
     render(
       <CreateModalButton dialog={MockDialog} resolve={{ refetch: vi.fn() }} />,
     );
 
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
 
     expect(mockOpenDialog).toHaveBeenCalledWith(
       MockDialog,
@@ -105,7 +108,8 @@ describe('CreateModalButton', () => {
     );
   });
 
-  it('passes initialValues to dialog', () => {
+  it('passes initialValues to dialog', async () => {
+    const user = userEvent.setup();
     const initialValues = { name: 'Test' };
     render(
       <CreateModalButton
@@ -115,7 +119,7 @@ describe('CreateModalButton', () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
 
     expect(mockOpenDialog).toHaveBeenCalledWith(
       MockDialog,

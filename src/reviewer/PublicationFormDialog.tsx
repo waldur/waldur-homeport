@@ -1,18 +1,12 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   nestedReviewerProfilePublicationsCreate,
   nestedReviewerProfilePublicationsPartialUpdate,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import {
-  FormGroup,
-  NumberField,
-  StringField,
-  SubmitButton,
-  TextField,
-} from '@/form';
+import { NumberGroup, StringGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -112,55 +106,43 @@ export const PublicationFormDialog = ({
               </>
             }
           >
-            <Field
+            <StringGroup
               name="title"
               label={translate('Title')}
-              component={FormGroup}
               validate={required}
-            >
-              <StringField />
-            </Field>
+            />
 
-            <Field
+            <StringGroup
               name="doi"
               label={translate('DOI')}
               description={translate(
                 'Digital Object Identifier (e.g., 10.1000/xyz123)',
               )}
-              component={FormGroup}
-            >
-              <StringField />
-            </Field>
+            />
 
-            <Field
+            <StringGroup
               name="venue"
               label={translate('Venue')}
               description={translate('Journal or conference name')}
-              component={FormGroup}
               validate={required}
-            >
-              <StringField />
-            </Field>
+            />
 
-            <Field
+            <NumberGroup
               name="publication_year"
               label={translate('Publication year')}
-              component={FormGroup}
               validate={required}
-            >
-              <NumberField min={1900} max={currentYear + 1} />
-            </Field>
+              min={1900}
+              max={currentYear + 1}
+            />
 
-            <Field
+            <TextGroup
               name="abstract"
               label={translate('Abstract')}
               description={translate(
                 'Optional abstract for text-based expertise matching',
               )}
-              component={FormGroup}
-            >
-              <TextField rows={4} />
-            </Field>
+              rows={4}
+            />
           </ModalDialog>
         </form>
       )}

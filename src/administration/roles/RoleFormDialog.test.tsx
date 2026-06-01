@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { rolesCreate, rolesList, rolesUpdate } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 
 import { RoleFormDialog } from './RoleFormDialog';
 
@@ -46,25 +47,16 @@ describe('RoleFormDialog', () => {
   it('handles successful role creation', async () => {
     const user = userEvent.setup();
     const createSpy = vi.mocked(rolesCreate).mockResolvedValue({} as any);
-    vi.mocked(rolesList).mockResolvedValue({
-      data: [],
-      response: {
-        headers: {
-          get: vi.fn().mockReturnValue(null),
-        },
-      },
-    } as any);
+    vi.mocked(rolesList).mockResolvedValue(mockListResponse([]));
 
-    const { container } = renderWithProviders(
-      <RoleFormDialog resolve={{ refetch: mockRefetch }} />,
-    );
+    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
 
     // Name field
-    const nameInput = container.querySelector('input[name="name"]');
+    const nameInput = screen.getByLabelText(/Name/);
     await user.type(nameInput, 'New Role');
 
     // Type field
-    const typeInput = container.querySelector('#content_type');
+    const typeInput = screen.getByLabelText(/Type/);
     await user.click(typeInput);
     await user.click(screen.getByText('Organization'));
 
@@ -91,14 +83,7 @@ describe('RoleFormDialog', () => {
   it('handles successful role update', async () => {
     const user = userEvent.setup();
     const updateSpy = vi.mocked(rolesUpdate).mockResolvedValue({} as any);
-    vi.mocked(rolesList).mockResolvedValue({
-      data: [],
-      response: {
-        headers: {
-          get: vi.fn().mockReturnValue(null),
-        },
-      },
-    } as any);
+    vi.mocked(rolesList).mockResolvedValue(mockListResponse([]));
     const role = {
       uuid: 'role-uuid',
       name: 'Existing Role',
@@ -136,11 +121,11 @@ describe('RoleFormDialog', () => {
       permissions: [],
       is_system_role: true,
     };
-    const { container } = renderWithProviders(
+    renderWithProviders(
       <RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />,
     );
 
-    expect(container.querySelector('input[name="name"]')).toBeDisabled();
-    expect(container.querySelector('#content_type')).toBeDisabled();
+    expect(screen.getByLabelText(/Name/)).toBeDisabled();
+    expect(screen.getByLabelText(/Type/)).toBeDisabled();
   });
 });

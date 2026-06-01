@@ -9,7 +9,7 @@ export const LoadingSpinner: FunctionComponent = () => (
   <IconButton
     iconNode={
       <span className="animation-spin">
-        <ArrowsClockwiseIcon data-cy="loading-spinner" weight="bold" />
+        <ArrowsClockwiseIcon data-testid="loading-spinner" weight="bold" />
       </span>
     }
     tooltip={translate('Loading')}
@@ -39,7 +39,9 @@ export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = (
 
   return (
     <IconButton
-      iconNode={<ArrowsClockwiseIcon data-cy="loading-spinner" weight="bold" />}
+      iconNode={
+        <ArrowsClockwiseIcon data-testid="loading-spinner" weight="bold" />
+      }
       tooltip={translate('Refresh')}
       onClick={() => props.fetch(true)}
       variant="text-secondary"

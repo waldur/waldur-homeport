@@ -1,4 +1,5 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { describe, expect, it, vi } from 'vitest';
 import { User } from 'waldur-js-client';
@@ -49,11 +50,10 @@ describe('OfferingActions', () => {
   });
 
   it('shows all available actions when dropdown is clicked', async () => {
+    const user = userEvent.setup();
     renderOfferingActions();
     const dropdownButton = screen.getByRole('button');
-    await act(async () => {
-      await fireEvent.click(dropdownButton);
-    });
+    await user.click(dropdownButton);
 
     expect(screen.getByText('Edit')).toBeInTheDocument();
     expect(screen.getByText('Preview order form')).toBeInTheDocument();
@@ -61,19 +61,20 @@ describe('OfferingActions', () => {
   });
 
   it('shows disabled delete action when offering is not in Draft state', async () => {
+    const user = userEvent.setup();
     renderOfferingActions();
     const dropdownButton = screen.getByRole('button');
-    await act(async () => {
-      await fireEvent.click(dropdownButton);
-    });
+    await user.click(dropdownButton);
 
     expect(screen.getByText('Delete')).toBeInTheDocument();
-    expect(
-      screen.getByText('Delete').closest('.opacity-50'),
-    ).toBeInTheDocument();
+    const deleteAction = screen
+      .getAllByTestId('action-item-content')
+      .find((el) => el.textContent?.includes('Delete'));
+    expect(deleteAction).toHaveClass('opacity-50');
   });
 
   it('shows delete action for Draft offerings', async () => {
+    const user = userEvent.setup();
     renderOfferingActions({
       row: {
         uuid: 'offering_uuid',
@@ -84,9 +85,7 @@ describe('OfferingActions', () => {
     });
 
     const dropdownButton = screen.getByRole('button');
-    await act(async () => {
-      await fireEvent.click(dropdownButton);
-    });
+    await user.click(dropdownButton);
 
     expect(screen.getByText('Delete')).toBeInTheDocument();
   });

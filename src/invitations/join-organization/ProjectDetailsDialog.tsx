@@ -1,10 +1,9 @@
 import { FC, useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 
-import { StringField, TextField } from '@/form';
+import { StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -72,20 +71,17 @@ export const ProjectDetailsDialog: FC<ProjectDetailsDialogProps> = ({
             }
           >
             <Modal.Body>
-              <FormGroup label={translate('Project name')}>
-                <Field
-                  name="project_name"
-                  component={StringField}
-                  placeholder={translate('Leave empty for auto-generated name')}
-                />
-              </FormGroup>
-              <FormGroup label={translate('Project description')} spaceless>
-                <Field
-                  name="project_description"
-                  component={TextField}
-                  placeholder={translate('Optional description')}
-                />
-              </FormGroup>
+              <StringGroup
+                name="project_name"
+                placeholder={translate('Leave empty for auto-generated name')}
+                label={translate('Project name')}
+              />
+              <TextGroup
+                name="project_description"
+                placeholder={translate('Optional description')}
+                label={translate('Project description')}
+                spaceless
+              />
             </Modal.Body>
           </ModalDialog>
         </form>

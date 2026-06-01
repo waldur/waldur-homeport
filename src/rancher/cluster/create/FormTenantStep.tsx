@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { Field, useForm } from 'react-final-form';
+import { useForm } from 'react-final-form';
 import { openstackTenantsList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
-import { FormGroup, SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -49,14 +49,14 @@ export const FormTenantStep = (props: FormStepProps) => {
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
-      <Field name="attributes.tenant" component={FormGroup} validate={required}>
-        <SelectField
-          options={data}
-          getOptionValue={(option) => option.url}
-          getOptionLabel={(option) => option.name}
-          isClearable={true}
-        />
-      </Field>
+      <SelectGroup
+        name="attributes.tenant"
+        validate={required}
+        options={data}
+        getOptionValue={(option) => option.url}
+        getOptionLabel={(option) => option.name}
+        isClearable={true}
+      />
     </VStepperFormStepCard>
   );
 };

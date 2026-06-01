@@ -1,15 +1,17 @@
 import { CaretDownIcon, CaretUpIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { Field } from 'react-final-form';
 import { Checklist } from 'waldur-js-client';
 
 import { AtLeast } from '@/core/types';
 import { greaterThan, required } from '@/core/validators';
-import { NumberField, SelectField, StringField, TextField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { FormFieldError } from '@/form/FormFieldError';
+import {
+  StringGroup,
+  TextGroup,
+  SelectGroup,
+  BooleanGroup,
+  NumberGroup,
+} from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { LikertPreview } from '@/marketplace-checklist/LikertField';
 import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
 import { questionTypeOptions } from '@/marketplace-checklist/utils';
@@ -36,69 +38,61 @@ export const QuestionGeneralForm = ({
 
   return (
     <>
-      <FormGroup label={translate('Question')} required space={5}>
-        <Field
-          name="description"
-          component={StringField}
-          placeholder={translate('Type your question here...')}
-          maxLength={150}
-          validate={required}
-        />
-      </FormGroup>
-
-      <FormGroup label={translate('User guidance')} space={5}>
-        <Field
-          name="user_guidance"
-          component={TextField}
-          placeholder={translate('Input placeholder help text for user...')}
-          maxLength={300}
-        />
-      </FormGroup>
-
-      <FormGroup label={translate('Question type')} required space={5}>
-        <Field
-          name="question_type"
-          component={SelectField}
-          options={questionTypeOptions}
-          validate={required}
-          simpleValue
-        />
-      </FormGroup>
-
-      <FormGroup space={5}>
-        <Field
-          name="required"
-          component={AwesomeCheckboxField}
-          label={translate('Is required?')}
-        />
-      </FormGroup>
-
-      <FormGroup label={translate('Question order')} space={5}>
-        <Field
-          name="order"
-          component={NumberField}
-          label={translate('Question order')}
-          placeholder="0"
-          min={0}
-        />
-      </FormGroup>
-
+      <StringGroup
+        name="description"
+        placeholder={translate('Type your question here...')}
+        maxLength={150}
+        validate={required}
+        label={translate('Question')}
+        required
+        space={5}
+      />
+      <TextGroup
+        name="user_guidance"
+        placeholder={translate('Input placeholder help text for user...')}
+        maxLength={300}
+        label={translate('User guidance')}
+        space={5}
+      />
+      <SelectGroup
+        name="question_type"
+        options={questionTypeOptions}
+        validate={required}
+        simpleValue
+        label={translate('Question type')}
+        required
+        space={5}
+      />
+      <BooleanGroup
+        name="required"
+        label={translate('Is required?')}
+        space={5}
+      />
+      <NumberGroup
+        name="order"
+        checkboxLabel={translate('Question order')}
+        placeholder="0"
+        min={0}
+        label={translate('Question order')}
+        space={5}
+      />
       {['single_select', 'multi_select'].includes(values.question_type) ? (
         <QuestionAnswerOptions />
       ) : values.question_type === 'number' ? (
         <>
-          <FormGroup label={translate('Min value')} space={5}>
-            <Field name="min_value" component={NumberField} placeholder="0" />
-          </FormGroup>
-          <FormGroup label={translate('Max value')} space={5}>
-            <Field
-              name="max_value"
-              component={NumberField}
-              placeholder="0"
-              validate={gt}
-            />
-            <FormFieldError name="max_value" />
-          </FormGroup>
+          <NumberGroup
+            name="min_value"
+            placeholder="0"
+            label={translate('Min value')}
+            space={5}
+          />
+          <NumberGroup
+            name="max_value"
+            label={translate('Max value')}
+            placeholder="0"
+            validate={gt}
+            space={5}
+          />
         </>
       ) : values.question_type === 'likert' ? (
         <>
@@ -153,41 +147,29 @@ export const QuestionGeneralForm = ({
           multiple={values.question_type === 'multiple_files'}
         />
       ) : null}
-
       {isOnboardingCustomer && (
-        <FormGroup
+        <StringGroup
+          name="maps_to_customer_field"
+          placeholder="e.g., vat_code"
+          required
           label={translate('Customer field mapping for onboarding')}
           space={5}
           help={translate(
             "Customer model field name to map this answer to the Customer object (e.g., 'registration_code', 'email', 'vat_code').",
           )}
-          required
-        >
-          <Field
-            name="maps_to_customer_field"
-            component={StringField}
-            placeholder="e.g., vat_code"
-            required
-          />
-        </FormGroup>
+        />
       )}
-
       {isOnboardingIntent && (
-        <FormGroup
+        <StringGroup
+          name="intent_field"
+          placeholder="e.g., intent"
+          required
           label={translate('Intent field mapping for onboarding')}
           space={5}
           help={translate(
             "Intent/purpose field to map the answer to the verification metadata (e.g., 'intent', 'registration_purpose').",
           )}
-          required
-        >
-          <Field
-            name="intent_field"
-            component={StringField}
-            placeholder="e.g., intent"
-            required
-          />
-        </FormGroup>
+        />
       )}
     </>
   );

@@ -4,8 +4,7 @@ import { marketplaceScreenshotsCreate } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { required } from '@/core/validators';
-import { FormContainer, StringField, SubmitButton, TextField } from '@/form';
-import { ImageField } from '@/form/ImageField';
+import { ImageGroup, StringGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -31,7 +30,9 @@ export const CreateImageDialog = (props: {
   });
   return (
     <Form
-      onSubmit={(values) => submitRequestMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        submitRequestMutation.mutateAsync(values).catch(() => {})
+      }
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -50,32 +51,34 @@ export const CreateImageDialog = (props: {
               </>
             }
           >
-            <FormContainer submitting={submitting}>
-              <ImageField
+            <div className="size-sm">
+              <ImageGroup
                 label={translate('Image')}
                 name="image"
                 required
                 validate={required}
               />
 
-              <StringField
+              <StringGroup
                 name="name"
                 label={translate('Name')}
                 required={true}
                 validate={required}
                 maxLength={150}
                 placeholder={translate('e.g. Image name...')}
+                disabled={submitting}
               />
 
-              <TextField
+              <TextGroup
                 name="description"
                 label={translate('Description')}
                 required={true}
                 validate={required}
                 maxLength={4096}
                 placeholder={translate('Enter a description...')}
+                disabled={submitting}
               />
-            </FormContainer>
+            </div>
           </ModalDialog>
         </form>
       )}

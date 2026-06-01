@@ -1,14 +1,10 @@
 import { DateTime } from 'luxon';
 import { FC } from 'react';
-import { Field, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { DateField } from '@/form/DateField';
-import { AsyncSelectField as Select } from '@/form/select';
-import { StringField } from '@/form/StringField';
-import { TextField } from '@/form/TextField';
+import { AsyncSelectGroup, DateGroup, StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { templateAutocomplete } from '../autocomplete';
@@ -20,60 +16,55 @@ export const MessageStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <FormGroup
+      <AsyncSelectGroup
         label={translate('Template')}
         description={translate('Select a pre-defined template')}
-      >
-        <Select
-          name="template"
-          placeholder={translate('Select template...')}
-          loadOptions={templateAutocomplete}
-          getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.uuid}
-          noOptionsMessage={() => translate('No templates found')}
-          onChange={(newValue: MessageTemplate) => {
-            if (newValue) {
-              if (
-                formValues &&
-                ((formValues.subject &&
-                  formValues.subject != newValue.subject) ||
-                  (formValues.body && formValues.body != newValue.body))
-              ) {
-                const response = confirm(
-                  'Form is not empty. Selecting template would replace existing message. Are you sure?',
-                );
-                if (!response) {
-                  return;
-                }
+        name="template"
+        placeholder={translate('Select template...')}
+        loadOptions={templateAutocomplete}
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.uuid}
+        noOptionsMessage={() => translate('No templates found')}
+        onChange={(newValue: MessageTemplate) => {
+          if (newValue) {
+            if (
+              formValues &&
+              ((formValues.subject && formValues.subject != newValue.subject) ||
+                (formValues.body && formValues.body != newValue.body))
+            ) {
+              const response = confirm(
+                'Form is not empty. Selecting template would replace existing message. Are you sure?',
+              );
+              if (!response) {
+                return;
               }
-              form.change('subject', newValue.subject);
-              form.change('body', newValue.body);
             }
-          }}
-          isClearable={true}
-        />
-      </FormGroup>
-
-      <FormGroup label={translate('Subject')} required>
-        <Field name="subject" component={StringField} validate={required} />
-      </FormGroup>
-
-      <FormGroup label={translate('Message')} required>
-        <Field name="body" component={TextField} validate={required} />
-      </FormGroup>
-
-      <FormGroup
+            form.change('subject', newValue.subject);
+            form.change('body', newValue.body);
+          }
+        }}
+        isClearable={true}
+      />
+      <StringGroup
+        name="subject"
+        validate={required}
+        label={translate('Subject')}
+        required
+      />
+      <TextGroup
+        name="body"
+        validate={required}
+        label={translate('Message')}
+        required
+      />
+      <DateGroup
+        name="send_at"
+        minDate={DateTime.now().plus({ days: 1 }).toISO()}
         label={translate('Send at')}
         description={translate(
           'Schedule the message to be sent at a specific time',
         )}
-      >
-        <Field
-          name="send_at"
-          component={DateField}
-          minDate={DateTime.now().plus({ days: 1 }).toISO()}
-        />
-      </FormGroup>
+      />
     </WizardModal>
   );
 };

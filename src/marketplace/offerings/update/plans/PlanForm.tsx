@@ -1,26 +1,28 @@
-import { Field } from 'react-final-form';
-
 import { required } from '@/core/validators';
-import MarkdownEditor from '@/form/MarkdownEditor';
-import { StringField } from '@/form/StringField';
+import { StringGroup, MarkdownGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 
 import { ArticleCodeField } from '../../ArticleCodeField';
-import { FormGroup } from '../../FormGroup';
 
-import { PlanBillingPeriodField } from './PlanBillingPeriodField';
+import { getBillingPeriods } from './constants';
 
 export const PlanForm = () => (
   <>
-    <FormGroup label={translate('Name')} required={true}>
-      <Field name="name" component={StringField} validate={required} />
-    </FormGroup>
-    <FormGroup label={translate('Billing period')} required={true}>
-      <PlanBillingPeriodField />
-    </FormGroup>
-    <FormGroup label={translate('Description')}>
-      <Field name="description" component={MarkdownEditor} />
-    </FormGroup>
+    <StringGroup
+      name="name"
+      validate={required}
+      label={translate('Name')}
+      required={true}
+    />
+    <SelectGroup
+      name="unit"
+      validate={required}
+      label={translate('Billing period')}
+      options={getBillingPeriods()}
+      isClearable={false}
+      required={true}
+    />
+    <MarkdownGroup name="description" label={translate('Description')} />
     <ArticleCodeField />
   </>
 );

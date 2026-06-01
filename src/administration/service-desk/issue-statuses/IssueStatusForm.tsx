@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Field, Form as FinalForm } from 'react-final-form';
+import { Form as FinalForm } from 'react-final-form';
 import {
   IssueStatusCreateRequest,
   IssueStatusType,
@@ -9,9 +9,8 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SelectField, StringField, SubmitButton } from '@/form';
+import { SelectGroup, StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -100,35 +99,29 @@ export const IssueStatusForm: FC<IssueStatusFormProps> = ({ resolve }) => {
               />
             }
           >
-            <FormGroup label={translate('Status name')} required>
-              <Field
-                component={StringField}
-                name="name"
-                validate={required}
-                placeholder={translate('e.g., Done, Completed, Cancelled')}
-              />
-              <small className="text-muted">
-                {translate(
-                  'The exact status name as it appears in your service desk (Jira, SMAX, Zammad).',
-                )}
-              </small>
-            </FormGroup>
+            <StringGroup
+              label={translate('Status name')}
+              required
+              name="name"
+              validate={required}
+              placeholder={translate('e.g., Done, Completed, Cancelled')}
+              description={translate(
+                'The exact status name as it appears in your service desk (Jira, SMAX, Zammad).',
+              )}
+            />
 
-            <FormGroup label={translate('Outcome type')} required>
-              <Field
-                component={SelectField}
-                name="type"
-                options={IssueStatusTypeChoices}
-                validate={required}
-                isClearable={false}
-                getOptionLabel={(option) => option.label}
-              />
-              <small className="text-muted">
-                {translate(
-                  'Resolved: Issue was successfully completed. Canceled: Issue was rejected or canceled.',
-                )}
-              </small>
-            </FormGroup>
+            <SelectGroup
+              label={translate('Outcome type')}
+              required
+              name="type"
+              options={IssueStatusTypeChoices}
+              validate={required}
+              isClearable={false}
+              getOptionLabel={(option) => option.label}
+              description={translate(
+                'Resolved: Issue was successfully completed. Canceled: Issue was rejected or canceled.',
+              )}
+            />
           </ModalDialog>
         </form>
       )}

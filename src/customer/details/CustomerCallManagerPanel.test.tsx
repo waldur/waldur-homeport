@@ -1,4 +1,5 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   callManagingOrganisationsCreate,
@@ -52,6 +53,7 @@ describe('CustomerCallManagerPanel', () => {
   });
 
   it('handles enabling call manager successfully', async () => {
+    const user = userEvent.setup();
     vi.mocked(useCustomer).mockReturnValue({
       uuid: 'customer-uuid-1',
       url: '/api/customers/customer-uuid-1/',
@@ -68,7 +70,7 @@ describe('CustomerCallManagerPanel', () => {
     const checkbox = screen.getByLabelText('Enable call manager');
     expect(checkbox).not.toBeChecked();
 
-    fireEvent.click(checkbox);
+    await user.click(checkbox);
 
     await waitFor(() =>
       expect(vi.mocked(useModal().confirm)).toHaveBeenCalled(),
@@ -97,6 +99,7 @@ describe('CustomerCallManagerPanel', () => {
   });
 
   it('handles disabling call manager successfully', async () => {
+    const user = userEvent.setup();
     vi.mocked(useCustomer).mockReturnValue({
       uuid: 'customer-uuid-1',
       url: '/api/customers/customer-uuid-1/',
@@ -116,7 +119,7 @@ describe('CustomerCallManagerPanel', () => {
     const checkbox = screen.getByLabelText('Enable call manager');
     expect(checkbox).toBeChecked();
 
-    fireEvent.click(checkbox);
+    await user.click(checkbox);
 
     await waitFor(() =>
       expect(vi.mocked(useModal().confirm)).toHaveBeenCalled(),

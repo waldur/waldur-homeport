@@ -8,9 +8,8 @@ import { Field, useForm, useFormState } from 'react-final-form';
 import { Badge } from '@/core/Badge';
 import { generatePassword } from '@/core/generatePassword';
 import { composeValidators, email, required } from '@/core/validators';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { StringGroup, BooleanGroup } from '@/form';
 import { SecretField } from '@/form/SecretField';
-import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -51,77 +50,53 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <FormGroup label={translate('Username')} required>
-        <Field
-          name="username"
-          component={StringField}
-          validate={composeValidators(
-            required,
-            usernameValidator,
-            maxLength128,
-          )}
-          placeholder={translate('e.g. john.doe')}
-        />
-      </FormGroup>
-      <FormGroup label={translate('Email')} required>
-        <Field
-          name="email"
-          component={StringField}
-          validate={composeValidators(required, email)}
-          placeholder={translate('e.g. john@example.com')}
-        />
-      </FormGroup>
-
+      <StringGroup
+        name="username"
+        validate={composeValidators(required, usernameValidator, maxLength128)}
+        placeholder={translate('e.g. john.doe')}
+        label={translate('Username')}
+        required
+      />
+      <StringGroup
+        name="email"
+        validate={composeValidators(required, email)}
+        placeholder={translate('e.g. john@example.com')}
+        label={translate('Email')}
+        required
+      />
       <h6 className="fw-bold mb-4 mt-6">{translate('Roles & Status')}</h6>
-      <FormGroup
+      <BooleanGroup
+        name="is_active"
+        type="checkbox"
         label={translate('Active')}
         description={translate(
           'Designates whether this user should be treated as active.',
         )}
-      >
-        <Field
-          name="is_active"
-          component={AwesomeCheckboxField}
-          type="checkbox"
-        />
-      </FormGroup>
-      <FormGroup
+      />
+      <BooleanGroup
+        name="is_staff"
+        type="checkbox"
         label={translate('Staff')}
         description={translate(
           'Designates whether the user can access admin site.',
         )}
-      >
-        <Field
-          name="is_staff"
-          component={AwesomeCheckboxField}
-          type="checkbox"
-        />
-      </FormGroup>
-      <FormGroup
+      />
+      <BooleanGroup
+        name="is_support"
+        type="checkbox"
         label={translate('Support')}
         description={translate(
           'Designates whether the user is a global support user.',
         )}
-      >
-        <Field
-          name="is_support"
-          component={AwesomeCheckboxField}
-          type="checkbox"
-        />
-      </FormGroup>
-      <FormGroup
+      />
+      <BooleanGroup
+        name="can_use_personal_access_tokens"
+        type="checkbox"
         label={translate('Personal access tokens')}
         description={translate(
           'Designates whether the user is allowed to create and use personal access tokens.',
         )}
-      >
-        <Field
-          name="can_use_personal_access_tokens"
-          component={AwesomeCheckboxField}
-          type="checkbox"
-        />
-      </FormGroup>
-
+      />
       <h6 className="fw-bold mb-4 mt-6">
         {translate('Password')}
         {editMode && (
@@ -143,7 +118,6 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           </span>
         )}
       </h6>
-
       {values.remove_password ? (
         <div className="alert alert-warning d-flex align-items-center justify-content-between py-3">
           <span>{translate('Password will be removed when you save.')}</span>
@@ -165,7 +139,11 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           >
             <div className="d-flex gap-2">
               <div className="flex-grow-1">
-                <Field name="password" component={SecretField} />
+                <Field
+                  name="password"
+                  component={SecretField}
+                  placeholder={translate('Password')}
+                />
               </div>
               <button
                 type="button"

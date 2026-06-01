@@ -5,8 +5,7 @@ import { rolesCreate, rolesUpdate, RoleModifyRequest } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
-import { SelectField, SubmitButton } from '@/form';
-import { StringField } from '@/form/StringField';
+import { SubmitButton, StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
@@ -29,26 +28,22 @@ interface RoleFormDialogProps {
 const RoleForm: FC<{ role? }> = (props) => {
   return (
     <>
-      <FormGroup label={translate('Name')} required>
-        <Field
-          component={StringField}
-          name="name"
-          validate={required}
-          disabled={props.role?.is_system_role}
-        />
-      </FormGroup>
-
-      <FormGroup label={translate('Type')} required>
-        <Field
-          component={SelectField}
-          name="content_type"
-          validate={required}
-          isDisabled={props.role?.is_system_role}
-          options={ROLE_TYPES}
-          simpleValue
-        />
-      </FormGroup>
-
+      <StringGroup
+        name="name"
+        validate={required}
+        disabled={props.role?.is_system_role}
+        label={translate('Name')}
+        required
+      />
+      <SelectGroup
+        name="content_type"
+        validate={required}
+        isDisabled={props.role?.is_system_role}
+        options={ROLE_TYPES}
+        simpleValue
+        label={translate('Type')}
+        required
+      />
       <FormGroup label={translate('Permissions')} required>
         <Field
           component={PermissionField}

@@ -1,6 +1,6 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   ScienceDomainPreset,
   scienceDomainsLoadPreset,
@@ -8,8 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormGroup, SubmitButton } from '@/form';
-import { SelectField } from '@/form/select/SelectField';
+import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -72,22 +71,18 @@ const LoadPresetDialog = ({ resolve }) => {
               />
             }
           >
-            <Field
+            <SelectGroup
               name="preset"
-              component={FormGroup}
               label={translate('Preset')}
               required
               validate={required}
-            >
-              <SelectField
-                options={presets}
-                getOptionValue={(option) => option.name}
-                getOptionLabel={(option) => option.label}
-                isLoading={loading}
-                isClearable
-                placeholder={translate('Select a preset...')}
-              />
-            </Field>
+              options={presets}
+              getOptionValue={(option) => option.name}
+              getOptionLabel={(option) => option.label}
+              isLoading={loading}
+              isClearable
+              placeholder={translate('Select a preset...')}
+            />
             {values.preset && (
               <p className="text-muted mb-0">{values.preset.description}</p>
             )}

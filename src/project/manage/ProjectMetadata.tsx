@@ -13,7 +13,7 @@ import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { usePermission } from '@/permissions/hooks';
+import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
@@ -57,8 +57,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
     retry: false,
   });
 
-  const hasPermission = usePermission();
-  const canUpdateMetadata = hasPermission({
+  const canUpdateMetadata = hasPermission(user, {
     permission: PermissionEnum.UPDATE_PROJECT_METADATA,
     customerId: project.customer_uuid,
     projectId: project.uuid,
@@ -66,7 +65,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
 
   const canUpdateProject =
     user.is_staff ||
-    hasPermission({
+    hasPermission(user, {
       permission: PermissionEnum.UPDATE_PROJECT,
       customerId: project.customer_uuid,
       projectId: project.uuid,

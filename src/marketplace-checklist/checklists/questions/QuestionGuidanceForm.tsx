@@ -1,13 +1,11 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Alert, Form, Stack } from 'react-bootstrap';
-import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required } from '@/core/validators';
-import { SelectField, TextField } from '@/form';
+import { SelectGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
 import { ActionButton } from '@/table/ActionButton';
 
@@ -67,15 +65,14 @@ const FieldsListGroup = ({
             className={i + 1 < fields.length ? 'border-bottom mb-3' : undefined}
           >
             <Stack direction="horizontal" gap={3}>
-              <FormGroup label={translate('Answer')} className="flex-grow-1">
-                <Field
-                  component={SelectField}
-                  name={`${name}.answer`}
-                  options={getOptions(i)}
-                  simpleValue
-                  validate={required}
-                />
-              </FormGroup>
+              <SelectGroup
+                name={`${name}.answer`}
+                options={getOptions(i)}
+                simpleValue
+                validate={required}
+                label={translate('Answer')}
+                className="flex-grow-1"
+              />
 
               <ActionButton
                 action={() => removeRow(i)}
@@ -84,19 +81,15 @@ const FieldsListGroup = ({
                 className="mt-1"
               />
             </Stack>
-            <FormGroup
+            <TextGroup
+              name={`${name}.solution`}
+              placeholder={translate(
+                'Add helpful guidance when users select specific answers that need correction or clarification...',
+              )}
+              validate={required}
               label={translate('Solution / Guidance')}
               spaceless={i === fields.length - 1}
-            >
-              <Field
-                component={TextField}
-                name={`${name}.solution`}
-                placeholder={translate(
-                  'Add helpful guidance when users select specific answers that need correction or clarification...',
-                )}
-                validate={required}
-              />
-            </FormGroup>
+            />
           </div>
         ))}
       </Form.Group>

@@ -31,6 +31,7 @@ import noDirectBootstrapDropdownButton from './eslint-rules/no-direct-bootstrap-
 import noDirectClientUsage from './eslint-rules/no-direct-client-usage.js';
 import noEditButtonSizeOverride from './eslint-rules/no-edit-button-size-override.js';
 import noManualIconColorsInBadges from './eslint-rules/no-manual-icon-colors-in-badges.js';
+import noRedundantViMock from './eslint-rules/no-redundant-vi-mock.js';
 import noTemplateInTranslate from './eslint-rules/no-template-in-translate.js';
 import preferClassnamesUtility from './eslint-rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './eslint-rules/prefer-mutate-over-mutateAsync.js';
@@ -87,6 +88,7 @@ export default tseslint
             'enforce-border-radius-tokens': enforceBorderRadiusTokens,
             'enforce-breadcrumb-colors': enforceBreadcrumbColors,
             'enforce-noresult-with-cta': enforceNoResultWithCta,
+            'no-redundant-vi-mock': noRedundantViMock,
           },
         },
       },
@@ -139,6 +141,7 @@ export default tseslint
         'waldur-custom/enforce-nav-tabs-pattern': 'error',
         'waldur-custom/enforce-border-radius-tokens': 'error',
         'waldur-custom/enforce-breadcrumb-colors': 'error',
+        'waldur-custom/no-redundant-vi-mock': 'error',
 
         // React Hooks rules
         'react-hooks/rules-of-hooks': 'off',
@@ -245,11 +248,24 @@ export default tseslint
     {
       files: ['**/*.test.{ts,tsx}'],
       ...testingLibrary.configs['flat/react'],
+      settings: {
+        'testing-library/custom-renders': ['renderWithProviders'],
+      },
       rules: {
-        'testing-library/render-result-naming-convention': 'warn',
-        'testing-library/no-node-access': 'warn',
-        'testing-library/no-container': 'warn',
-        'testing-library/no-render-in-lifecycle': 'warn',
+        'testing-library/no-node-access': 'error',
+        'testing-library/no-container': 'error',
+        'testing-library/no-render-in-lifecycle': 'error',
+        'testing-library/prefer-user-event': 'error',
+        'testing-library/prefer-screen-queries': 'error',
+        'no-restricted-syntax': [
+          'error',
+          {
+            selector:
+              'MemberExpression[object.name="document"][property.name=/^(querySelector|querySelectorAll|getElementById|getElementsByClassName|getElementsByTagName)$/]',
+            message:
+              'Use screen.getBy... or other Testing Library queries instead of direct document access.',
+          },
+        ],
         'no-restricted-imports': [
           'error',
           {

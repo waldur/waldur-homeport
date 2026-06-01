@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   CallReviewerPool,
   callReviewerPoolsPartialUpdate,
 } from 'waldur-js-client';
 
-import { NumberField, SubmitButton } from '@/form';
+import { SubmitButton, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -69,19 +69,15 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
                 </div>
               </FormGroup>
 
-              <FormGroup
+              <NumberGroup
+                name="max_assignments"
+                min={1}
+                max={50}
                 label={translate('Maximum assignments')}
                 description={translate(
                   'The maximum number of proposals that can be assigned to this reviewer.',
                 )}
-              >
-                <Field
-                  name="max_assignments"
-                  component={NumberField}
-                  min={1}
-                  max={50}
-                />
-              </FormGroup>
+              />
             </div>
           </ModalDialog>
         </form>

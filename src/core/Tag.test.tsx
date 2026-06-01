@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -41,19 +42,19 @@ describe('Tag', () => {
   });
 
   it('renders clear button when onClear is provided', () => {
-    const onClear = vi.fn();
-    render(<Tag onClear={onClear}>Clearable Tag</Tag>);
+    render(<Tag onClear={vi.fn()}>Clearable Tag</Tag>);
 
     const clearButton = screen.getByRole('button');
     expect(clearButton).toBeInTheDocument();
   });
 
-  it('calls onClear when clear button is clicked', () => {
+  it('calls onClear when clear button is clicked', async () => {
+    const user = userEvent.setup();
     const onClear = vi.fn();
     render(<Tag onClear={onClear}>Clearable Tag</Tag>);
 
     const clearButton = screen.getByRole('button');
-    fireEvent.click(clearButton);
+    await user.click(clearButton);
 
     expect(onClear).toHaveBeenCalled();
   });

@@ -59,7 +59,7 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
             </div>
           )}
           <div className="dropzone-message text-quaternary">
-            <input {...getInputProps()} />
+            <input {...getInputProps()} data-testid="file-uploader" />
             <button
               type="button"
               className="icon-square"

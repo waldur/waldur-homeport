@@ -1,8 +1,5 @@
-import { Field } from 'react-final-form';
-
-import { StringField } from '@/form';
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
@@ -21,12 +18,11 @@ export const SlugGroup = ({ customer }: { customer?: Customer }) => {
         'If left empty, the slug will be generated from the project name.',
       );
   return (
-    <FormGroup label={translate('Project slug')} description={helpText}>
-      <Field
-        component={StringField}
-        name="slug"
-        placeholder={template || translate('Auto-generated')}
-      />
-    </FormGroup>
+    <StringGroup
+      name="slug"
+      placeholder={template || translate('Auto-generated')}
+      label={translate('Project slug')}
+      description={helpText}
+    />
   );
 };

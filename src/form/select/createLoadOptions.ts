@@ -90,14 +90,24 @@ export const createLoadOptions = <
         query: params,
       });
 
+      if (!response) {
+        return {
+          options: [],
+          hasMore: false,
+          additional: { page },
+        };
+      }
+
       if (response.error) {
         throw response.error;
       }
 
-      const options = response.data.map(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        ({ options: _, ...rest }: any) => rest,
-      );
+      const options = response.data
+        ? response.data.map(
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            ({ options: _, ...rest }: any) => rest,
+          )
+        : [];
 
       const totalItems = fetchResultCount(response);
       if (typeof totalItems !== 'number' || !Number.isFinite(totalItems)) {

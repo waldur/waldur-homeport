@@ -7,9 +7,8 @@ import {
   adminAnnouncementsUpdate,
 } from 'waldur-js-client';
 
-import { SelectField, SubmitButton } from '@/form';
+import { SubmitButton, SelectGroup, MarkdownGroup } from '@/form';
 import { DateTimeField } from '@/form/DateTimeField';
-import MarkdownEditor from '@/form/MarkdownEditor';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -80,20 +79,16 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
             }
           >
             <Row>
-              <FormGroup
+              <SelectGroup
+                name="type"
+                options={AnnouncementTypeOptions}
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                simpleValue
                 label={translate('Type')}
                 required
                 className="col-md-6"
-              >
-                <Field
-                  component={SelectField}
-                  name="type"
-                  options={AnnouncementTypeOptions}
-                  getOptionValue={(option) => option.value}
-                  getOptionLabel={(option) => option.label}
-                  simpleValue
-                />
-              </FormGroup>
+              />
             </Row>
 
             <Row>
@@ -113,9 +108,11 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
               </FormGroup>
             </Row>
 
-            <FormGroup label={translate('Announcement')} required>
-              <Field component={MarkdownEditor} name="description" />
-            </FormGroup>
+            <MarkdownGroup
+              name="description"
+              label={translate('Announcement')}
+              required
+            />
           </ModalDialog>
         </form>
       )}

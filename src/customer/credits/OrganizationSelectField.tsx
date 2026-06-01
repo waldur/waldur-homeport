@@ -1,9 +1,7 @@
 import { FC, useMemo } from 'react';
-import { Field } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { FormGroup } from '@/form/FormGroup';
-import { AsyncSelect as Select } from '@/form/select';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -23,20 +21,16 @@ export const OrganizationSelectField: FC<OrganizationSelectFieldProps> = ({
   );
 
   return (
-    <Field
+    <AsyncSelectGroup
       name="customer"
       label={translate('Organization')}
       validate={required}
       required
-      component={FormGroup}
-    >
-      <Select
-        loadOptions={loadOrganizations}
-        getOptionValue={(option) => option.url}
-        getOptionLabel={(option) => option.name}
-        noOptionsMessage={() => translate('No organizations')}
-        isDisabled={isDisabled}
-      />
-    </Field>
+      loadOptions={loadOrganizations}
+      getOptionValue={(option) => option.url}
+      getOptionLabel={(option) => option.name}
+      noOptionsMessage={() => translate('No organizations')}
+      isDisabled={isDisabled}
+    />
   );
 };

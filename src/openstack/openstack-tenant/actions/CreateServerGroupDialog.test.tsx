@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { openstackTenantsCreateServerGroup } from 'waldur-js-client';
@@ -38,10 +38,12 @@ describe('CreateServerGroupDialog', () => {
   });
 
   it('validates required fields', async () => {
+    const user = userEvent.setup();
     renderDialog();
 
     const nameInput = screen.getByLabelText('Name');
-    fireEvent.blur(nameInput);
+    await user.click(nameInput);
+    await user.tab();
 
     await waitFor(() => {
       expect(screen.getByText('This field is required.')).toBeInTheDocument();
@@ -54,7 +56,7 @@ describe('CreateServerGroupDialog', () => {
 
     const nameInput = screen.getByLabelText('Name');
     await user.type(nameInput, 'имя'); // Cyrillic characters
-    fireEvent.blur(nameInput);
+    await user.tab();
 
     await waitFor(() => {
       expect(

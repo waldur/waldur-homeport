@@ -6,7 +6,7 @@ import {
   required,
   validateMaxLength,
 } from '@/core/validators';
-import { NumberField, StringField } from '@/form';
+import { StringGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
@@ -19,67 +19,50 @@ import { RoleMappingField } from './RoleMappingField';
 
 export const ProjectTemplateFormFields = () => (
   <>
-    <FormGroup
+    <StringGroup
+      name="name"
+      placeholder={translate('e.g., my-project-template')}
+      maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECTCLASS_LENGTH}
+      validate={composeValidators(
+        required,
+        validateMaxLength(
+          PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECTCLASS_LENGTH,
+        ),
+      )}
+      required
       controlId="name"
       label={translate('Name of project template')}
-      required
-    >
-      <Field
-        name="name"
-        component={StringField}
-        placeholder={translate('e.g., my-project-template')}
-        maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECTCLASS_LENGTH}
-        validate={composeValidators(
-          required,
-          validateMaxLength(
-            PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECTCLASS_LENGTH,
-          ),
-        )}
-        required
-      />
-    </FormGroup>
+    />
 
-    <FormGroup
+    <StringGroup
+      name="offering"
+      placeholder={translate('e.g. my-remote-offering')}
+      maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_OFFERING_LENGTH}
+      validate={composeValidators(
+        required,
+        validateMaxLength(
+          PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_OFFERING_LENGTH,
+        ),
+      )}
+      required
       controlId="offering"
       label={translate('Name of the remote offering, e.g. "isambard-ai"')}
-      required
-    >
-      <Field
-        name="offering"
-        component={StringField}
-        placeholder={translate('e.g. my-remote-offering')}
-        maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_OFFERING_LENGTH}
-        validate={composeValidators(
-          required,
-          validateMaxLength(
-            PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_OFFERING_LENGTH,
-          ),
-        )}
-        required
-      />
-    </FormGroup>
+    />
 
-    <FormGroup
+    <StringGroup
+      name="portal"
+      placeholder={translate('Portal identifier')}
+      maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PORTALIDENTIFIER_LENGTH}
+      validate={composeValidators(
+        required,
+        validateMaxLength(
+          PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PORTALIDENTIFIER_LENGTH,
+        ),
+      )}
+      required
       controlId="portal"
       label={translate('Portal from which requests are allowed')}
-      required
-    >
-      <Field
-        name="portal"
-        component={StringField}
-        placeholder={translate('Portal identifier')}
-        maxLength={
-          PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PORTALIDENTIFIER_LENGTH
-        }
-        validate={composeValidators(
-          required,
-          validateMaxLength(
-            PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PORTALIDENTIFIER_LENGTH,
-          ),
-        )}
-        required
-      />
-    </FormGroup>
+    />
 
     <FormGroup
       controlId="customer"
@@ -100,45 +83,36 @@ export const ProjectTemplateFormFields = () => (
       />
     </FormGroup>
 
-    <FormGroup
+    <StringGroup
+      name="key"
+      placeholder={translate('e.g., a1b2c3d4e5f6g7h8i9j0')}
+      maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_KEY_LENGTH}
+      validate={validateMaxLength(
+        PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_KEY_LENGTH,
+      )}
       controlId="key"
       label={translate('Key used to verify requests from the remote portal')}
-    >
-      <Field
-        name="key"
-        component={StringField}
-        placeholder={translate('e.g., a1b2c3d4e5f6g7h8i9j0')}
-        maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_KEY_LENGTH}
-        validate={validateMaxLength(
-          PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_KEY_LENGTH,
-        )}
-      />
-    </FormGroup>
+    />
 
-    <FormGroup
+    <StringGroup
+      name="shortname"
+      placeholder={translate('e.g., a{year}{count}')}
+      maxLength={
+        PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECT_SHORTNAME_LENGTH
+      }
+      validate={composeValidators(
+        required,
+        validateMaxLength(
+          PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECT_SHORTNAME_LENGTH,
+        ),
+      )}
+      help={translate(
+        'Use {year} for last digit of year and {count} for sequential letter (a, b, c, etc.)',
+      )}
+      required
       controlId="shortname"
       label={translate('Pattern used to generate project shortnames')}
-      required
-    >
-      <Field
-        name="shortname"
-        component={StringField}
-        placeholder={translate('e.g., a{year}{count}')}
-        maxLength={
-          PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECT_SHORTNAME_LENGTH
-        }
-        validate={composeValidators(
-          required,
-          validateMaxLength(
-            PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECT_SHORTNAME_LENGTH,
-          ),
-        )}
-        help={translate(
-          'Use {year} for last digit of year and {count} for sequential letter (a, b, c, etc.)',
-        )}
-        required
-      />
-    </FormGroup>
+    />
 
     <FormGroup
       controlId="offerings"
@@ -182,40 +156,32 @@ export const ProjectTemplateFormFields = () => (
       />
     </FormGroup>
 
-    <FormGroup
+    <NumberGroup
+      name="approval_limit"
+      placeholder={translate('e.g., 1000.00')}
+      step="0.01"
+      min="0"
+      validate={positive}
+      help={translate(
+        'Credit limit beyond which requests need local admin approval. Leave empty for no approval required, set to 0 for all requests to require approval.',
+      )}
       controlId="approval_limit"
       label={translate('Credit limit beyond which approval is required')}
-    >
-      <Field
-        name="approval_limit"
-        component={NumberField}
-        placeholder={translate('e.g., 1000.00')}
-        step="0.01"
-        min="0"
-        validate={positive}
-        help={translate(
-          'Credit limit beyond which requests need local admin approval. Leave empty for no approval required, set to 0 for all requests to require approval.',
-        )}
-      />
-    </FormGroup>
+    />
 
-    <FormGroup
+    <NumberGroup
+      name="max_credit_limit"
+      placeholder={translate('e.g., 10000.00')}
+      step="0.01"
+      min="0"
+      validate={positive}
+      help={translate(
+        'Maximum credit limit for projects using this template. Requests beyond this are automatically rejected. Leave empty for no maximum limit, set to 0 to prevent project creation.',
+      )}
       controlId="max_credit_limit"
       label={translate(
         'Maximum credit request limit for projects using this template',
       )}
-    >
-      <Field
-        name="max_credit_limit"
-        component={NumberField}
-        placeholder={translate('e.g., 10000.00')}
-        step="0.01"
-        min="0"
-        validate={positive}
-        help={translate(
-          'Maximum credit limit for projects using this template. Requests beyond this are automatically rejected. Leave empty for no maximum limit, set to 0 to prevent project creation.',
-        )}
-      />
-    </FormGroup>
+    />
   </>
 );

@@ -42,17 +42,11 @@ export const SetRoutesDialog = ({ resolve }: OwnProps) => {
       onSubmit={(values) => setRoutesMutation.mutateAsync(values)}
       initialValues={{ routes: resolve.router.routes } as any}
       mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, invalid }) => (
+      render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Update static routes')}
-            footer={
-              <FormFooter
-                submitting={submitting}
-                invalid={invalid}
-                submitLabel={translate('Update')}
-              />
-            }
+            footer={<FormFooter submitLabel={translate('Update')} />}
           >
             <FieldArray
               name="routes"

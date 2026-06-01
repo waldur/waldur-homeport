@@ -13,9 +13,8 @@ import {
 import { PermissionOptions } from '@/administration/roles/PermissionOptions';
 import { lazyComponent } from '@/core/lazyComponent';
 import { required } from '@/core/validators';
-import { DateField } from '@/form/DateField';
+import { StringGroup, SelectGroup, DateGroup } from '@/form';
 import { SelectField } from '@/form/select/SelectField';
-import { StringField } from '@/form/StringField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
@@ -190,31 +189,26 @@ export const PersonalAccessTokenCreateDialog: React.FC<
               }
             >
               <div className="size-lg">
-                <FormGroup label={translate('Token name')} required>
-                  <Field
-                    component={StringField}
-                    name="name"
-                    validate={required}
-                    placeholder={translate('e.g. CI/CD pipeline token')}
-                  />
-                </FormGroup>
-                <FormGroup
+                <StringGroup
+                  name="name"
+                  validate={required}
+                  placeholder={translate('e.g. CI/CD pipeline token')}
+                  label={translate('Token name')}
+                  required
+                />
+                <SelectGroup
+                  name="scopes"
+                  validate={required}
+                  isMulti
+                  simpleValue
+                  options={scopeOptions}
+                  placeholder={translate('Select permissions...')}
                   label={translate('Permissions')}
                   required
                   description={translate(
                     'Select the permissions this token should have. The token can only use permissions you currently hold.',
                   )}
-                >
-                  <Field
-                    component={SelectField}
-                    name="scopes"
-                    validate={required}
-                    isMulti
-                    simpleValue
-                    options={scopeOptions}
-                    placeholder={translate('Select permissions...')}
-                  />
-                </FormGroup>
+                />
 
                 <FormGroup
                   label={translate('Restrict to specific entities')}
@@ -299,21 +293,17 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                   </FieldArray>
                 </FormGroup>
 
-                <FormGroup
+                <DateGroup
+                  name="expires_at"
+                  validate={required}
+                  minDate={minDate}
+                  placeholder={translate('Select expiration date')}
                   label={translate('Expiration date')}
                   required
                   description={translate(
                     'The token will stop working after this date.',
                   )}
-                >
-                  <Field
-                    component={DateField}
-                    name="expires_at"
-                    validate={required}
-                    minDate={minDate}
-                    placeholder={translate('Select expiration date')}
-                  />
-                </FormGroup>
+                />
               </div>
             </ModalDialog>
           </form>

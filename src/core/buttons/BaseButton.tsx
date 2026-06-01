@@ -93,6 +93,11 @@ export const BaseButton: FC<BaseButtonProps> = ({
       variant={variant}
       disabled={isDisabled}
       form={form}
+      aria-label={
+        !label && typeof effectiveTooltip === 'string'
+          ? effectiveTooltip
+          : undefined
+      }
       {...dataProps}
     >
       {pending && (
