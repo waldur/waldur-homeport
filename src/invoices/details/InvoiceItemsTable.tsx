@@ -1,4 +1,4 @@
-import { FC, ReactNode, useMemo } from 'react';
+import { FC, ReactNode, useCallback, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
 import { invoicesItemsRetrieve } from 'waldur-js-client';
 
@@ -88,6 +88,13 @@ const InvoiceItemsTableTable: FC<InvoiceItemsTableProps> = ({
     queryField: 'query',
     filter,
   });
+
+  // Per-row actions must refresh the items table's own React Query cache
+  // (refreshInvoiceItems only refetches the invoice header) and the header.
+  const refresh = useCallback(() => {
+    tableProps.fetch(true);
+    refreshInvoiceItems();
+  }, [tableProps.fetch, refreshInvoiceItems]);
 
   return (
     <Table<InvoiceTableItem>
@@ -190,7 +197,7 @@ const InvoiceItemsTableTable: FC<InvoiceItemsTableProps> = ({
           items={row.items}
           showPrice={showPrice}
           showVat={showVat}
-          refresh={refreshInvoiceItems}
+          refresh={refresh}
         />
       )}
       footer={footer}
