@@ -1783,7 +1783,7 @@
   "Instance should be OK, or erred. Please contact support.": "Instants peaks olema OK või väljastanud veateate. Palun võtke ühendust teenuse toega.",
   "Instance should be shutoff and OK or erred. Please contact support.": "Üksus peaks olema välja lülitatud ja OK või väljastanud veateate. Võtke ühendust tugiteenusega.",
   "Instances": "Instantsid",
-  "Instances count": "Üksuste hulk",
+  "Instances count": "Instantside arv",
   "Integration": "Integratsioon",
   "Integration type": "Integratsiooni tüüp",
   "Internal": "Sisemine ",
