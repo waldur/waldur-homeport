@@ -18,45 +18,148 @@ Waldur HomePort exclusively uses **React Final Form** for standard forms and dia
 
 The standard form implementation uses a `<Form>` component that provides the `handleSubmit` method to its render prop.
 
-```typescript
+```tsx
 import { Form } from 'react-final-form';
-import { SubmitButton } from '@/form';
+import { SubmitButton, StringGroup } from '@/form';
 
 <Form
   onSubmit={onSubmit}
   render={({ handleSubmit, submitting, invalid }) => (
     <form onSubmit={handleSubmit}>
-      <OrganizationGroup />
-      <NameGroup />
+      <StringGroup name="organization" label={translate('Organization')} required />
+      <StringGroup name="name" label={translate('Name')} required />
       <SubmitButton submitting={submitting} disabled={invalid} />
     </form>
   )}
 />
 ```
 
-## Field Group Pattern
+## Autonomous Field Group Architecture (*Group Pattern)
 
-We use reusable field groups for better organization, separating the structure from the actual logic:
+To reduce boilerplate, improve type safety, and enforce UI consistency, Waldur uses the **Autonomous Field Group** pattern.
 
-```typescript
+We provide a set of components suffixed with `*Group` (e.g., `StringGroup`, `SelectGroup`, `SecretGroup`) created using the `withFormGroup` Higher-Order Component (HOC). These components autonomously bundle:
+
+1. The underlying input component (e.g., `StringField`)
+2. React Final Form's `<Field>` wrapper
+3. The layout, label, and validation structure via `<FormGroup>`
+
+### ❌ Bad Example: Manual Wrapping (Legacy)
+
+```tsx
 import { Field } from 'react-final-form';
-import { StringField } from '@/form';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { StringField, FormGroup } from '@/form';
 import { translate } from '@/i18n';
 
-export const NameGroup = ({ customer }) => (
-  <FormGroup label={translate('Project name')} required>
-    <Field
-      component={StringField}
-      name="name"
-      validate={validateProjectName}
-      customer={customer}
-    />
-  </FormGroup>
+// Too much boilerplate, props split between two layers.
+<FormGroup 
+  label={translate('Project name')} 
+  description={translate('Provide a unique name.')}
+  required
+>
+  <Field
+    component={StringField}
+    name="name"
+    validate={validateProjectName}
+    maxLength={150}
+  />
+</FormGroup>
+```
+
+### ✅ Good Example: Autonomous Group (Modern)
+
+```tsx
+import { StringGroup } from '@/form';
+import { translate } from '@/i18n';
+
+// Clean, single component with unified props!
+<StringGroup
+  name="name"
+  label={translate('Project name')}
+  description={translate('Provide a unique name.')}
+  required
+  validate={validateProjectName}
+  maxLength={150}
+/>
+```
+
+### Rationale & Benefits
+
+1. **Reduced Boilerplate**: You don't need to import `Field`, the base component (`StringField`), and `FormGroup` separately.
+2. **Unified Props**: Form layout properties (`label`, `description`, `help`, `required`) and field logic properties (`name`, `validate`, `maxLength`) are cleanly passed to a single component.
+3. **Strict Type Checking**: The `withFormGroup` HOC intelligently strips out internal React Final Form props (`component`, `render`) and provides strong IntelliSense for the specific properties required by the underlying input component.
+4. **Consistency**: It enforces a single, standardized way to render labeled fields and their associated error messages or tooltips.
+
+### Available Autonomous Groups
+
+Most standard fields have a corresponding `*Group` component exported from `@/form`. A selection includes:
+
+- **Text & Input**: `StringGroup`, `TextGroup`, `SecretGroup`, `NumberGroup`, `EmailGroup`
+- **Selection**: `SelectGroup`, `AsyncSelectGroup`, `CreatableSelectGroup`, `BooleanGroup`, `RadioGroup`
+- **Advanced**: `DateGroup`, `DateTimeGroup`, `TimeGroup`, `MarkdownGroup`, `MonacoGroup` (Code Editor)
+- **Specialized**: `ImageGroup`, `FileUploadGroup`, `CountrySelectGroup`, `CommaSeparatedListGroup`
+
+### When to Use Manual `FormGroup` + `Field`
+
+While autonomous groups are the standard, there are specific architectural exceptions where manually separating `<Form.Group>` (or `FormGroup`) and `<Field>` (or `<FieldArray>`) remains the correct approach:
+
+1. **Complex Arrays (`FieldArray`)**: When mapping over an array of data (e.g., configuring multiple network allocation pools or IP rules), you typically want a single label for the entire collection rather than repeating the label for every row.
+2. **Multi-field Inline Layouts**: When several logical fields compose a single input concept (e.g., Start IP and End IP, Min/Max range, X/Y coordinates) that need to be grouped horizontally using `InputGroup` or a table layout.
+
+Example: Array of Inline Inputs
+
+```tsx
+import { Form, InputGroup } from 'react-bootstrap';
+import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
+import { translate } from '@/i18n';
+
+// The Array Renderer
+const AllocationPoolsList = ({ fields }) => (
+  <>
+    {fields.map((name, index) => (
+      <InputGroup key={index} className="mb-3">
+        {/* Manual Field used here to strip out FormGroup wrappers inside the row */}
+        <Field name={`${name}.start`} component="input" className="form-control" />
+        <InputGroup.Text>-</InputGroup.Text>
+        <Field name={`${name}.end`} component="input" className="form-control" />
+      </InputGroup>
+    ))}
+  </>
+);
+
+// The Parent Container
+export const NetworkPoolField = () => (
+  {/* Manual FormGroup used here as the singular label wrapper for the whole list */}
+  <Form.Group>
+    <Form.Label>{translate('Allocation pools')}</Form.Label>
+    <FieldArray name="allocation_pools" component={AllocationPoolsList} />
+    <Form.Text>{translate('Define IP ranges for automatic assignment.')}</Form.Text>
+  </Form.Group>
 );
 ```
 
-**Benefits**: Separation of concerns, reusability, maintainability, testability.
+## Tooltips & Help Text
+
+Avoid creating manual tooltips or extra label wrappers. Use the built-in `help` or `tooltip` properties provided by the autonomous groups.
+
+```tsx
+// ❌ Manual tooltip implementation
+<label>
+  {translate('Plan')}
+  <Tip label={translate('Help text')}>
+    <QuestionIcon />
+  </Tip>
+</label>
+<Field component={SelectField} name="period" />
+
+// ✅ Built-in help prop with *Group component
+<SelectGroup
+  name="period"
+  label={translate('Plan')}
+  help={translate('Help text')}
+/>
+```
 
 ## Key Patterns & Best Practices
 
@@ -122,7 +225,7 @@ catch (e) {
 
 **Solution**: Move submit buttons inside the form context and provide a custom footer structure.
 
-```typescript
+```tsx
 // ✅ Correct structure
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -143,56 +246,13 @@ import { ModalDialog } from '@/modal/ModalDialog';
 />
 ```
 
-## FormGroup Components
-
-We have multiple `FormGroup` components, but you should favor the standard wrapper:
-
-1. **`@/marketplace/offerings/FormGroup`** - Clean wrapper for labels/help text.
-
-### Replace Manual Label/Field Combinations
-
-```typescript
-// ❌ Avoid repetitive manual structure
-<div className="mb-7">
-  <label className="form-label fw-bolder text-dark fs-6 required">
-    {translate('Username')}
-  </label>
-  <Field component={StringField} name="username" />
-</div>
-
-// ✅ Use clean FormGroup wrapper
-<FormGroup label={translate('Username')} required>
-  <Field component={StringField} name="username" />
-</FormGroup>
-```
-
-### Convert Manual Tooltips to Help Props
-
-```typescript
-// ❌ Manual tooltip implementation
-<label>
-  {translate('Plan')}
-  <Tip label={translate('Help text')}>
-    <QuestionIcon />
-  </Tip>
-</label>
-
-// ✅ Built-in help prop
-<FormGroup
-  label={translate('Plan')}
-  help={translate('Help text')}
->
-  <Field component={SelectField} name="period" />
-</FormGroup>
-```
-
 ## Advanced Tooling
 
 ### Dirty Form Protection
 
 If you want to prevent users from accidentally closing a modal dialog when a form has unsaved changes, use the `DirtyStateReporter` drop-in component anywhere inside your `<Form>` element:
 
-```typescript
+```tsx
 import { DirtyStateReporter } from '@/core/DirtyFormContext';
 
 <Form
@@ -200,9 +260,7 @@ import { DirtyStateReporter } from '@/core/DirtyFormContext';
   render={({ handleSubmit }) => (
     <form onSubmit={handleSubmit}>
       <DirtyStateReporter />
-      <FormGroup label={translate('Name')}>
-        <Field component={StringField} name="name" />
-      </FormGroup>
+      <StringGroup name="name" label={translate('Name')} />
     </form>
   )}
 />
