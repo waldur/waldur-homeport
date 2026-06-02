@@ -192,6 +192,7 @@ const ResourceActionDialogInner: FC<any> = ({
             disabled: field.disabled,
             disabled_tooltip: field.disabled_tooltip,
             spaceless: field.spaceless,
+            parse: field.parse,
             validate: Array.isArray(field.validate)
               ? composeValidators(...field.validate)
               : field.validate,

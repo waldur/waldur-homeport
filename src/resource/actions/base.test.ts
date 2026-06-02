@@ -2,7 +2,11 @@ import { describe, it, expect } from 'vitest';
 
 import { BaseResource } from '@/resource/types';
 
-import { validateState, validateRuntimeState } from './base';
+import {
+  createDescriptionField,
+  validateState,
+  validateRuntimeState,
+} from './base';
 
 const resource: BaseResource = {
   name: 'VM',
@@ -51,5 +55,24 @@ describe('Resource runtime state validation', () => {
 
   it('skips validation if resource is in target state', () => {
     expect(validateRuntimeState('ACTIVE')(ctx)).toBeUndefined();
+  });
+});
+
+describe('createDescriptionField', () => {
+  // react-final-form's default parse turns "" into undefined, which would
+  // drop the description key from the request body and cause the backend to
+  // leave the existing value in place when the user clears the field.
+  it('coerces empty/undefined to "" so the cleared value reaches the backend', () => {
+    const field = createDescriptionField();
+    expect(field.parse).toBeDefined();
+    expect(field.parse(undefined, 'description')).toBe('');
+    expect(field.parse(null, 'description')).toBe('');
+    expect(field.parse('', 'description')).toBe('');
+  });
+
+  it('passes non-empty values through unchanged', () => {
+    const field = createDescriptionField();
+    expect(field.parse('hello', 'description')).toBe('hello');
+    expect(field.parse('  spaces  ', 'description')).toBe('  spaces  ');
   });
 });
