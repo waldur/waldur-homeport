@@ -3,8 +3,8 @@ import { Form } from 'react-bootstrap';
 import { useField } from 'react-final-form';
 
 import { NumberGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { RichTextToolbarLevel } from '@/marketplace-checklist/types';
 
 const TOOLBAR_OPTIONS: Array<{ value: RichTextToolbarLevel; label: string }> = [

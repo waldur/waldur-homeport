@@ -7,8 +7,8 @@ import {
 } from 'waldur-js-client';
 
 import { SubmitButton, TextField } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';

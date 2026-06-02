@@ -6,10 +6,10 @@ import { useMessageFeedbackMutation } from '@/ai-assistant/hooks/useMessageFeedb
 import { FEEDBACK_SELECT_OPTIONS } from '@/ai-assistant/lib/feedback/categories';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { SelectGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';

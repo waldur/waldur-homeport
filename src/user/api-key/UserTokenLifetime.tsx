@@ -6,10 +6,10 @@ import { User } from 'waldur-js-client';
 
 import { Tip } from '@/core/Tooltip';
 import { SubmitButton } from '@/form';
+import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { SecretField } from '@/marketplace/common/SecretField';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 const TOKEN_OPTIONS = [

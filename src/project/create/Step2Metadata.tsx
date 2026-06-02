@@ -8,9 +8,9 @@ import {
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { FormGroup } from '@/form';
 import { FormFieldError } from '@/form/FormFieldError';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { QuestionAnswerField } from '@/marketplace-checklist/QuestionAnswerField';
 import { WizardModal, WizardStepProps } from '@/wizard';
 

@@ -4,9 +4,9 @@ import { Form } from 'react-final-form';
 import { Answer, projectsSubmitAnswers, QuestionAdmin } from 'waldur-js-client';
 
 import { FieldError, SubmitButton } from '@/form';
+import { FormGroup } from '@/form';
 import { FormFieldError } from '@/form/FormFieldError';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';

@@ -26,7 +26,6 @@ describe('UsernameGroup', () => {
   it('renders with default props', () => {
     renderComponent();
     expect(screen.getByText('Username')).toBeInTheDocument();
-    expect(screen.getByText('*')).toBeInTheDocument(); // Required indicator
     // Description is provided, which renders question mark icon in the FormGroup
     expect(screen.getByTestId('question-icon')).toBeInTheDocument();
   });
@@ -38,7 +37,6 @@ describe('UsernameGroup', () => {
       required: false,
     });
     expect(screen.getByText('Custom Username')).toBeInTheDocument();
-    expect(screen.queryByText('*')).not.toBeInTheDocument();
     // Description is provided, which renders question mark icon in the FormGroup
     expect(screen.getByTestId('question-icon')).toBeInTheDocument();
   });

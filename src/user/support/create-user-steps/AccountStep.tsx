@@ -9,9 +9,9 @@ import { Badge } from '@/core/Badge';
 import { generatePassword } from '@/core/generatePassword';
 import { composeValidators, email, required } from '@/core/validators';
 import { StringGroup, BooleanGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { SecretField } from '@/form/SecretField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { UserFormData, UserFormDialogData } from '../UserFormDialog';

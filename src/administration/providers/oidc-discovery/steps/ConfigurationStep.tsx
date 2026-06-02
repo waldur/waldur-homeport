@@ -4,9 +4,9 @@ import { Field, useForm, useFormState } from 'react-final-form';
 
 import { required, validateRedirectURLs, redirectURI } from '@/core/validators';
 import { StringGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { OidcFormValues } from '../types';

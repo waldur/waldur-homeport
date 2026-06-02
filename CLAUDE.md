@@ -266,7 +266,7 @@ For wizards with non-standard buttons (e.g., "Save as Draft", "Save as Template"
 ```tsx
 import { Field } from 'react-final-form';
 import { StringField, SelectField, TextField } from '@/form';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { FormGroup } from '@/form';
 
 // Each field wrapped in FormGroup for labels, descriptions, spacing
 <FormGroup label={translate('Name')} required>

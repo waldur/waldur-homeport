@@ -4,8 +4,8 @@ import { useField } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { StringGroup, BooleanGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { LikertScaleLength } from '@/marketplace-checklist/types';
 
 const SCALE_OPTIONS: Array<{ value: LikertScaleLength; label: string }> = [

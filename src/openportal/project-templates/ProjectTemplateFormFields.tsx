@@ -7,8 +7,8 @@ import {
   validateMaxLength,
 } from '@/core/validators';
 import { StringGroup, NumberGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { PROJECT_TEMPLATE_FIELD_CONSTRAINTS } from '../constants';
 

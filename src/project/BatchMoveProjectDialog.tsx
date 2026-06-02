@@ -4,9 +4,9 @@ import { Project, projectsMoveProject } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { AsyncSelectGroup, BooleanGroup, SubmitButton } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useBatchMutation } from '@/modal/useBatchMutation';

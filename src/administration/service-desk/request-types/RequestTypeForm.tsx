@@ -10,9 +10,9 @@ import {
 
 import { required } from '@/core/validators';
 import { NumberField, StringField, SubmitButton } from '@/form';
+import { FormGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 

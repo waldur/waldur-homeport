@@ -52,8 +52,8 @@ import { StringField, FormGroup } from '@/form';
 import { translate } from '@/i18n';
 
 // Too much boilerplate, props split between two layers.
-<FormGroup 
-  label={translate('Project name')} 
+<FormGroup
+  label={translate('Project name')}
   description={translate('Provide a unique name.')}
   required
 >

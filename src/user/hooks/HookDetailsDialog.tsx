@@ -13,9 +13,9 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { titleCase } from '@/core/utils';
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 

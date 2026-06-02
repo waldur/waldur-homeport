@@ -4,8 +4,8 @@ import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { Field } from '@/resource/summary';
 import { WizardModal, WizardStepProps } from '@/wizard';
 

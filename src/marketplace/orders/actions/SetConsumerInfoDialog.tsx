@@ -10,10 +10,10 @@ import {
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { decodeFileName } from '@/core/utils';
 import { SubmitButton, TextGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';

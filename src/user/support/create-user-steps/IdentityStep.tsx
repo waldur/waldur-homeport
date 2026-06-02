@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 
 import { SelectGroup, StringGroup, CountrySelectGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { MultiCountrySelectField } from '@/form/MultiCountrySelectField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import {
   getGenderChoices,
   getOrganizationTypeOptions,
