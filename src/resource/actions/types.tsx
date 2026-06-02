@@ -14,6 +14,7 @@ interface BaseField<Resource> {
   resource_default_value?: boolean;
   help_text?: string;
   formGroupClass?: string;
+  parse?: (value: any, name: string) => any;
 }
 
 interface TextField<Resource> extends BaseField<Resource> {

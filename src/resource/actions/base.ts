@@ -35,6 +35,10 @@ export function createDescriptionField(): ActionField {
     maxlength: 4096,
     required: false,
     type: 'text',
+    // Preserve "" so clearing the field sends an explicit empty string to the
+    // backend; react-final-form's default parse would otherwise drop the key
+    // from the PUT body and the backend would leave the old value in place.
+    parse: (value) => value ?? '',
   };
 }
 
