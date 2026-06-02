@@ -11,9 +11,9 @@ import {
   StringGroup,
   TextGroup,
 } from '@/form';
+import { FormGroup } from '@/form';
 import { NameGroup } from '@/form/NameGroup';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { InternalNetworkAllocationPool } from '@/openstack/openstack-subnet/AllocationPoolsField';

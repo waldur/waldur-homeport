@@ -8,9 +8,9 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isEmpty } from '@/core/utils';
 import { StringField, TextField, NumberField, SelectField } from '@/form';
+import { FormGroup } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ChecklistFileUpload } from '@/marketplace-checklist/ChecklistFileUpload';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import {

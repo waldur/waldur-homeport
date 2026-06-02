@@ -905,7 +905,7 @@ Key configuration props. Full interface is large — these are the most commonly
 #### FormGroup (React Final Form)
 
 ```ts
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { FormGroup } from '@/form';
 ```
 
 Use this version inside React Final Form.
@@ -927,13 +927,50 @@ Use this version inside React Final Form.
 
 ---
 
+#### Select
+
+```ts
+import { Select } from '@/form/select';
+```
+
+Standard select component based on `react-select`.
+
+| Prop             | Type                                   | Required | Default | Description                                            |
+| ---------------- | -------------------------------------- | -------- | ------- | ------------------------------------------------------ |
+| `options`        | `Array<{ value: any; label: string }>` | yes      | —       | Selectable options                                     |
+| `isMulti`        | `boolean`                              | no       | `false` | Enable multi-value selection                           |
+| `placeholder`    | `string`                               | no       | —       | Placeholder text                                       |
+| `isDisabled`     | `boolean`                              | no       | `false` | Disable the select                                     |
+| `isClearable`    | `boolean`                              | no       | `false` | Show clear button                                      |
+| `size`           | `'sm'`                                 | no       | —       | Small sizing                                           |
+| `variant`        | `'tableFilter'`                        | no       | —       | Style variant for table filters                        |
+
+---
+
+#### AsyncSelect
+
+```ts
+import { AsyncSelect } from '@/form/select';
+```
+
+Async select component based on `react-select-async-paginate`.
+
+| Prop             | Type                     | Required | Default | Description                                            |
+| ---------------- | ------------------------ | -------- | ------- | ------------------------------------------------------ |
+| `loadOptions`    | `AsyncSelectLoader`      | yes      | —       | Function to load options                               |
+| `isMulti`        | `boolean`                | no       | `false` | Enable multi-value selection                           |
+| `placeholder`    | `string`                 | no       | —       | Placeholder text                                       |
+| `isDisabled`     | `boolean`                | no       | `false` | Disable the select                                     |
+
+---
+
 #### SelectField
 
 ```ts
 import { SelectField } from '@/form';
 ```
 
-Form field component. Use as `<Field name="..." component={SelectField} />`.
+React Final Form field component. Use as `<Field name="..." component={SelectField} />`.
 
 | Prop             | Type                                   | Required | Default | Description                                            |
 | ---------------- | -------------------------------------- | -------- | ------- | ------------------------------------------------------ |
@@ -946,6 +983,23 @@ Form field component. Use as `<Field name="..." component={SelectField} />`.
 | `isClearable`    | `boolean`                              | no       | `false` | Show clear button                                      |
 | `className`      | `string`                               | no       | —       | Additional CSS classes                                 |
 | `noUpdateOnBlur` | `boolean`                              | no       | `false` | Skip form blur update                                  |
+
+---
+
+#### AsyncSelectField
+
+```ts
+import { AsyncSelectField } from '@/form';
+```
+
+React Final Form async select component.
+
+| Prop             | Type                     | Required | Default | Description                                            |
+| ---------------- | ------------------------ | -------- | ------- | ------------------------------------------------------ |
+| `loadOptions`    | `AsyncSelectLoader`      | yes      | —       | Function to load options                               |
+| `isMulti`        | `boolean`                | no       | `false` | Enable multi-value selection                           |
+| `placeholder`    | `string`                 | no       | —       | Placeholder text                                       |
+| `isDisabled`     | `boolean`                | no       | `false` | Disable the select                                     |
 
 ---
 

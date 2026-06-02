@@ -23,9 +23,9 @@ import {
   StringGroup,
   SubmitButton,
 } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { Category, ServiceProvider } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';

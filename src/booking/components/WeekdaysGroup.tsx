@@ -3,8 +3,8 @@ import { FunctionComponent } from 'react';
 
 import { Tip } from '@/core/Tooltip';
 import { range } from '@/core/utils';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { handleWeekDays } from '../utils';
 

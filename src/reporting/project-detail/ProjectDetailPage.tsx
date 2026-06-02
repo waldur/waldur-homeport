@@ -5,13 +5,13 @@ import { projectsRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { FormGroup } from '@/form';
 import { AsyncSelect, Select } from '@/form/select';
 import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
   projectAutocomplete,
 } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { ReportingTitle } from '../ReportingTitle';

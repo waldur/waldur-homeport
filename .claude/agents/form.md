@@ -83,19 +83,42 @@ React Final Form requires all form-related components within `<Form>` context:
 
 ### Available FormGroup Types
 
-1. **`@/form/FormGroup`** - Common wrapper with state management
-2. **`@/marketplace/offerings/FormGroup`** - Simple wrapper for labels/help
+1. **`@/form/FormGroup`** - Unified common wrapper for labels, descriptions, and validation state.
+2. **Autonomous Groups** - Unified components like `StringGroup`, `SelectGroup`, `SecretGroup` that bundle `FormGroup`, `Field`, and the input component.
 
 ### FormGroup Benefits
 
-- **Reduced Code Duplication**: Eliminates repetitive label/field structures
-- **Consistent Styling**: Automatic spacing with `mb-7`
-- **Better Accessibility**: Proper label associations
-- **Tooltip Support**: Built-in help text with `help` prop
+- **Reduced Code Duplication**: Eliminates repetitive label/field structures.
+- **Consistent Styling**: Automatic spacing with standard Metronic classes.
+- **Better Accessibility**: Automatic `controlId` generation for proper label/input association.
+- **Unified Props**: Layout props (`label`, `help`, `required`) and field props (`name`, `validate`) are passed to a single component.
 
-### Usage Pattern
+### Implementation Patterns
 
-```typescript
+#### ✅ Modern: Autonomous Field Group (Preferred)
+
+Reduces boilerplate by combining the layout and field logic into one component.
+
+```tsx
+import { StringGroup } from '@/form';
+
+<StringGroup
+  name="username"
+  label={translate('Username')}
+  help={translate('Help text')}
+  required
+  validate={required}
+/>
+```
+
+#### ⚠️ Legacy: Manual FormGroup Wrapping
+
+Used only for complex layouts or `FieldArray` where a single label covers multiple inputs.
+
+```tsx
+import { FormGroup, StringField } from '@/form';
+import { Field } from 'react-final-form';
+
 <FormGroup
   label={translate('Username')}
   help={translate('Help text')}

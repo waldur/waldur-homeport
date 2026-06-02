@@ -3,13 +3,13 @@ import { useCallback, useState } from 'react';
 import { Field, useForm } from 'react-final-form';
 
 import { required } from '@/core/validators';
+import { FormGroup } from '@/form';
 import { BoxNumberField } from '@/form/BoxNumberField';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { Offering } from '@/marketplace/types';
 import { FlavorTable } from '@/openstack/openstack-instance/deploy/FlavorTable';
 import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/FormAbstractVolumeFields';

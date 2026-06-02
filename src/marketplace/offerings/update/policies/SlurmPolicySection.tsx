@@ -37,12 +37,12 @@ import {
   BooleanGroup,
   NumberGroup,
 } from '@/form';
+import { FormGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { MultiSelectValue } from '@/form/select';
 import { translate } from '@/i18n';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
 import { ComponentLimitsField } from '@/marketplace/offerings/details/policies/ComponentLimitsField';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';

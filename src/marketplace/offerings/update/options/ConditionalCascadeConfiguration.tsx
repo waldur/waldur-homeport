@@ -1,8 +1,7 @@
 import { FieldArray } from 'react-final-form-arrays';
 
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../../FormGroup';
 
 import { CascadeStepsGroup } from './CascadeStepsGroup';
 

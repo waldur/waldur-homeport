@@ -7,13 +7,13 @@ import {
 
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { Select, AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import {
   categoryAutocomplete,
   organizationAutocomplete,
 } from '@/marketplace/common/autocompletes';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { OfferingStateOptions } from '@/table/generated/MarketplaceProviderOfferingsFilter';
 import { WizardModal, WizardStepProps } from '@/wizard';

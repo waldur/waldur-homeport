@@ -5,10 +5,10 @@ import { Resource } from 'waldur-js-client';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { StringField, StringGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { OrderAttachmentField } from '@/marketplace/deploy/steps/OrderAttachmentField';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseOrderConfig';
 import { Field as SummaryField } from '@/resource/summary';
 import { WizardModal, WizardStepProps } from '@/wizard';

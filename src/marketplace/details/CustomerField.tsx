@@ -3,13 +3,13 @@ import { Field, useForm } from 'react-final-form';
 import { projectsList } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
+import { FormGroup } from '@/form';
 import { AsyncSelect } from '@/form/select';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { useModal } from '@/modal/actions';
 
 import { organizationAutocomplete } from '../common/autocompletes';
-import { FormGroup } from '../offerings/FormGroup';
 
 const CustomerSelect = ({ input, organizationGroups }) => {
   const { confirm } = useModal();

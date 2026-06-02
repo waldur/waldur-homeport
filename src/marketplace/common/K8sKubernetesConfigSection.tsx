@@ -4,9 +4,8 @@ import { Alert } from 'react-bootstrap';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SelectField } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../offerings/FormGroup';
 
 import { K8sFormSection } from './K8sFormSection';
 import {

@@ -22,13 +22,13 @@ import {
   SelectField,
   SelectGroup,
 } from '@/form';
+import { FormGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
 import { DateField } from '@/form/DateField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { YearField } from '@/form/YearField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { questionConditionOperatorOptions } from '@/marketplace-checklist/utils';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { ActionButton } from '@/table/ActionButton';

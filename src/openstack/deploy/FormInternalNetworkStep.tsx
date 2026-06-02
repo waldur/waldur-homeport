@@ -2,9 +2,9 @@ import { useToggle } from 'react-use';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { BooleanGroup, StringGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { OpenStackAllocationPool } from '../OpenStackAllocationPool';

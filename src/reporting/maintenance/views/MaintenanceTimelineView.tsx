@@ -3,9 +3,9 @@ import { FC, useMemo, useState, useCallback } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
+import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ExportData } from '@/table/exporters/types';
 
 import { MaintenanceTimelineChart } from '../charts/MaintenanceTimelineChart';

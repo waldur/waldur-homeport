@@ -17,9 +17,9 @@ import {
 
 import { required } from '@/core/validators';
 import { SubmitButton, TextGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';

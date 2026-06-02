@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
+import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../offerings/FormGroup';
 
 interface CascadeStep {
   name: string;

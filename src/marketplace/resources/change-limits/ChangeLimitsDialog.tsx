@@ -9,8 +9,8 @@ import {
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton, StringGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { checkOrderCanBeApproved } from '@/marketplace/orders/actions/selectors';
 import { AttachmentRow } from '@/marketplace/resources/common/AttachmentRow';
 import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseOrderConfig';

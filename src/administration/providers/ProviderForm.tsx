@@ -3,8 +3,8 @@ import { Field } from 'react-final-form';
 import { required, redirectURI, validateRedirectURLs } from '@/core/validators';
 import { WarnCard } from '@/core/WarnCard';
 import { BooleanGroup, SecretGroup, StringGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 // Component for allowed redirects field with individual URL entries
 const AllowedRedirectsField = () => {

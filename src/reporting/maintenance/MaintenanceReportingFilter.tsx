@@ -3,10 +3,10 @@ import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 import Flatpickr from 'react-flatpickr';
 
+import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { useFlatpickrTheme } from '@/form/useFlatpickrTheme';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { MaintenanceFilterState } from './types';
 import { MAINTENANCE_TYPE_LABELS, STATE_LABELS } from './utils';

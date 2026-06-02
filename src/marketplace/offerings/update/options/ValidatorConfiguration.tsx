@@ -6,10 +6,9 @@ import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { CompactIconButton } from '@/core/buttons/IconButton';
+import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../../FormGroup';
 
 const VALIDATOR_TYPES = [
   { value: 'gt', label: translate('Greater than') },

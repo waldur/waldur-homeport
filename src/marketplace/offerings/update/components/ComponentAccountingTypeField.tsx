@@ -3,10 +3,9 @@ import { Field, useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
-
-import { FormGroup } from '../../FormGroup';
 
 interface ComponentAccountingTypeFieldProps {
   removeOfferingQuotas?(): void;

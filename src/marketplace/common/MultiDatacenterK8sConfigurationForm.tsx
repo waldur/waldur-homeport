@@ -6,13 +6,12 @@ import { marketplacePublicOfferingsList } from 'waldur-js-client';
 import { AccordionCard } from '@/core/AccordionCard';
 import { Badge } from '@/core/Badge';
 import { SelectField } from '@/form';
+import { FormGroup } from '@/form';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import { useCustomer } from '@/workspace/hooks';
-
-import { FormGroup } from '../offerings/FormGroup';
 
 import { K8sFormSection } from './K8sFormSection';
 import { K8sKubernetesConfigSection } from './K8sKubernetesConfigSection';

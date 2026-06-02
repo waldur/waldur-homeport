@@ -3,9 +3,8 @@ import { OfferingComponent } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { NumberGroup, SelectGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { FormGroup } from '../../FormGroup';
 
 import { STORAGE_FOLDER_PERMISSIONS } from './constants';
 import { StorageDataTypeArrayField } from './StorageDataTypeArrayField';

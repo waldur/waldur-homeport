@@ -1,8 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 
+import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { getDurationOptions } from '../utils';
 

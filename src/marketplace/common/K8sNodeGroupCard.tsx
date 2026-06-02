@@ -3,10 +3,9 @@ import { Col, Form, Row, Stack } from 'react-bootstrap';
 
 import { Badge } from '@/core/Badge';
 import { NumberField, SelectField } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
-
-import { FormGroup } from '../offerings/FormGroup';
 
 import { K8sFlavorSelectionTable } from './K8sFlavorSelectionTable';
 import {

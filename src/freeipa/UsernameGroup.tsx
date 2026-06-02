@@ -4,8 +4,8 @@ import { Field, FieldRenderProps } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { FieldError } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 // These limitations are imposed by underlying operating system
 const MAXIMUM_USERNAME_LENGTH = 32;

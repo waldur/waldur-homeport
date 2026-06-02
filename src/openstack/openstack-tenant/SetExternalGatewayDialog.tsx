@@ -13,8 +13,8 @@ import {
 
 import { required } from '@/core/validators';
 import { BooleanGroup, FormFooter, SelectGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 

@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
+import { FormGroup } from '@/form';
 import { TimezoneField } from '@/form/TimezoneField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 interface TimeZoneGroupProps {
   timeZone: string;

@@ -7,8 +7,8 @@ import {
 } from 'waldur-js-client';
 
 import { BooleanGroup, SelectGroup, NumberGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { ProjectDigestConfig } from './api';

@@ -11,6 +11,7 @@ import {
   required,
 } from '@/core/validators';
 import { NumberField, SelectField, StringField, TextField } from '@/form';
+import { FormGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { FormFieldError } from '@/form/FormFieldError';
@@ -23,7 +24,6 @@ import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { useCustomer } from '@/workspace/hooks';
 
-import { FormGroup } from '../offerings/FormGroup';
 import { Offering } from '../types';
 import { isExperimentalUiComponentsVisible } from '../utils';
 

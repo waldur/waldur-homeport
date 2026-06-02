@@ -1,11 +1,13 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
+import { uniqueId } from 'lodash-es';
 import {
   cloneElement,
   FC,
   isValidElement,
   PropsWithChildren,
   ReactNode,
+  useMemo,
 } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
@@ -53,8 +55,10 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     required,
     label,
     description,
-    tooltip = props.help,
-    tooltipEnd = props.helpEnd,
+    tooltip: propsTooltip,
+    help,
+    tooltipEnd: propsTooltipEnd,
+    helpEnd,
     tooltipProps,
     hideLabel,
     hideError,
@@ -67,9 +71,17 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     className,
     space = 7,
     id,
-    controlId,
+    controlId: propsControlId,
     ...rest
   } = props;
+
+  const tooltip = propsTooltip || help;
+  const tooltipEnd = propsTooltipEnd || helpEnd;
+
+  const controlId = useMemo(
+    () => propsControlId || id || input?.name || uniqueId('form-group-'),
+    [propsControlId, id, input?.name],
+  );
 
   const isLegacyCloneElement = Boolean(input && isValidElement(children));
 
@@ -83,7 +95,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           }
         },
         isInvalid: meta && meta.touched && (!!meta.error || !!meta.submitError),
-        id: input?.name || id,
+        id: controlId,
         'aria-label':
           props['aria-label'] ||
           (hideLabel && typeof label === 'string' ? label : undefined),
@@ -93,15 +105,19 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   const labelNode = !hideLabel && (label || tooltip) && (
     <Form.Label
       className={classNames({ required, 'me-auto': !isLegacyCloneElement })}
-      htmlFor={input?.name || id}
     >
       {tooltip && !tooltipEnd && (
         <Tip
-          id={'form-field-tooltip-' + (input ? input.name : id || 'field')}
+          id={'form-field-tooltip-' + controlId}
           label={tooltip}
           {...tooltipProps}
         >
-          <QuestionIcon weight="bold" size={20} className="text-muted" />{' '}
+          <QuestionIcon
+            weight="bold"
+            size={20}
+            className="text-muted"
+            data-testid="question-icon"
+          />{' '}
         </Tip>
       )}
       {label}
@@ -126,7 +142,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           {quickAction}
           {tooltip && tooltipEnd && (
             <Tip
-              id={'form-field-tooltip-' + (input ? input.name : id || 'field')}
+              id={'form-field-tooltip-' + controlId}
               className={classNames('align-self-center ms-2', {
                 'mb-2': !isLegacyCloneElement,
               })}
@@ -137,6 +153,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
                 weight="bold"
                 size={isLegacyCloneElement ? 20 : 16}
                 className="text-muted"
+                data-testid="question-icon"
               />
             </Tip>
           )}

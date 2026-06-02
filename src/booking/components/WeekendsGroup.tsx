@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 interface WeekendsGroupProps {
   weekends: boolean;

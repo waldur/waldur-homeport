@@ -8,9 +8,9 @@ import {
 } from 'waldur-js-client';
 
 import { SubmitButton, SelectGroup, MarkdownGroup } from '@/form';
+import { FormGroup } from '@/form';
 import { DateTimeField } from '@/form/DateTimeField';
 import { translate } from '@/i18n';
-import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@/navigation/header/announcements/queryKeys';
