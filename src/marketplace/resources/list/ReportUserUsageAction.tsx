@@ -49,7 +49,7 @@ export const ReportUserUsageAction = ({ resource }: { resource: Resource }) => {
   if (!spCanCreateOfferingUser) {
     return null;
   }
-  if (!canSetUsage && !user.is_staff && !spCanCreateOfferingUser) {
+  if (!user.is_staff && !canSetUsage) {
     return null;
   }
 
