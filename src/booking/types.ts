@@ -39,8 +39,8 @@ export interface BookingResource {
   uuid: string;
   name: string;
   state: string;
-  attributes: {
-    schedules: EventInput[];
+  attributes?: {
+    schedules?: EventInput[];
   };
   customer_name: string;
   customer_uuid: string;

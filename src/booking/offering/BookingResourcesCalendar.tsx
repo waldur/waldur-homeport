@@ -28,7 +28,7 @@ export const BookingResourcesCalendar: FunctionComponent<
     if (!bookingResources) return [];
     return bookingResources.reduce<Array<{ from; to }>>((acc, event) => {
       return acc.concat(
-        event.attributes.schedules.map((sch) => ({
+        (event.attributes?.schedules ?? []).map((sch) => ({
           from: sch.start.toString().split('T')[0],
           to: sch.end.toString().split('T')[0],
         })),
@@ -41,7 +41,7 @@ export const BookingResourcesCalendar: FunctionComponent<
     const date = parseDate(dates[0]);
 
     return bookingResources.filter((event) => {
-      return event.attributes.schedules.some((sch) => {
+      return (event.attributes?.schedules ?? []).some((sch) => {
         const start = parseDate(sch.start);
         const end = parseDate(sch.end);
         return (
