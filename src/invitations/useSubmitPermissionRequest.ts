@@ -68,24 +68,51 @@ export function useSubmitPermissionRequest(token: string) {
         body: body || {},
       }),
     onSuccess: async (res) => {
-      if (res.data.auto_approved) {
-        await UsersService.refreshCurrentUser();
-        showSuccess(
-          translate('You have successfully joined {organization}', {
-            organization: res.data.scope_name,
-          }),
-        );
-      } else {
+      const {
+        auto_approved,
+        scope_name,
+        scope_uuid,
+        project_uuid,
+        project_created,
+      } = res.data;
+      if (!auto_approved) {
         showSuccess(
           translate(
-            "Request has been sent. You'll be notified once it's approved.",
+            "Your request to join {organization} is pending review. You'll be notified once it's approved.",
+            { organization: scope_name },
           ),
-          translate('You are requested to join {organization}', {
-            organization: res.data.scope_name,
-          }),
+          translate('Request submitted'),
         );
+        routerInstance.stateService.go('profile.permission-requests');
+        return;
       }
-      routerInstance.stateService.go('profile.details');
+      await UsersService.refreshCurrentUser();
+      if (project_uuid) {
+        showSuccess(
+          project_created
+            ? translate('Project created in {organization}.', {
+                organization: scope_name,
+              })
+            : translate(
+                'You have joined an existing project in {organization}.',
+                {
+                  organization: scope_name,
+                },
+              ),
+        );
+        routerInstance.stateService.go('project.dashboard', {
+          uuid: project_uuid,
+        });
+        return;
+      }
+      showSuccess(
+        translate('You have successfully joined {organization}', {
+          organization: scope_name,
+        }),
+      );
+      routerInstance.stateService.go('organization.dashboard', {
+        uuid: scope_uuid,
+      });
     },
     onError: async (error) => {
       const errorMessage = format(error);
@@ -107,13 +134,15 @@ export function useSubmitPermissionRequest(token: string) {
             {
               type: 'danger',
               size: 'sm',
-              positiveButton: translate('My requests'),
+              positiveButton: translate('Back to profile'),
               positiveButtonVariant: 'primary w-175px',
               onlyPositiveButton: true,
             },
           );
         } finally {
-          routerInstance.stateService.go('profile.permission-requests');
+          // Access-restricted errors do not create a permission request,
+          // so /profile/permission-requests/ would be misleading.
+          routerInstance.stateService.go('profile.details');
         }
       }
     },
