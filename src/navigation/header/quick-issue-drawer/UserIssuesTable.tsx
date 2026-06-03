@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 
-import { translate } from '@/i18n';
 import { IssuesList } from '@/issues/list/IssuesList';
 import { PAGE_SIZE_FULL } from '@/table/constants';
 import { useUser } from '@/workspace/hooks';
@@ -13,9 +12,11 @@ export const UserIssuesTable: FC = () => {
       scope={user}
       filter={filter}
       hiddenColumns={['caller', 'time_in_progress', 'customer', 'project']}
-      title={translate('Support requests')}
+      hideTitle
       initialPageSize={PAGE_SIZE_FULL}
       standalone={false}
+      cardBordered={false}
+      className="drawer-bare-table"
     />
   );
 };

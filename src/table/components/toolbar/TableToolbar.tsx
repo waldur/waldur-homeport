@@ -31,6 +31,8 @@ export function TableToolbarActions() {
     showTitle,
     showActionsColumn,
     showFilterMenuToggle,
+    loading,
+    portal,
     // Pass through all props needed by TableButtons
     rows,
     columns,
@@ -123,6 +125,9 @@ export function TableToolbarActions() {
               <div className="table-toolbar-search">
                 <TableQuery query={query} setQuery={actions.setQuery} />
               </div>
+              {config.hideTitle && !config.hideRefresh && !portal?.refresh && (
+                <TableRefreshButton fetch={actions.fetch} loading={loading} />
+              )}
               {/* Filter button next to search (only on larger screens) */}
               {showFilterButtonNextToSearch && (
                 <TableFilterButton

@@ -2,10 +2,8 @@ import React from 'react';
 
 import { UserIssuesTable } from './UserIssuesTable';
 
+import './QuickIssueContainer.scss';
+
 export const QuickIssueContainer: React.FC = () => {
-  return (
-    <div className="mb-5">
-      <UserIssuesTable />
-    </div>
-  );
+  return <UserIssuesTable />;
 };

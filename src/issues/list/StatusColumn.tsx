@@ -1,13 +1,12 @@
 import { FunctionComponent } from 'react';
 
 import { Tip } from '@/core/Tooltip';
-import { IssueTypeIcon } from '@/issues/types/IssueTypeIcon';
+import { IssueStatus } from '@/issues/IssueStatus';
 import { RateStars } from '@/proposals/proposal/create-review/RateStars';
-import { renderFieldOrDash } from '@/table/utils';
 
 export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
-  <>
-    <IssueTypeIcon type={row.type} /> {renderFieldOrDash(row.status)}
+  <span className="d-inline-flex align-items-center gap-2">
+    <IssueStatus status={row.status} />
     {row.feedback ? (
       <Tip
         id="feedback-tooltip"
@@ -20,5 +19,5 @@ export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
         />
       </Tip>
     ) : null}
-  </>
+  </span>
 );

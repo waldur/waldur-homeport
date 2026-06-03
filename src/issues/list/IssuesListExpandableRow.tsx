@@ -1,5 +1,4 @@
-import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { FunctionComponent, ReactNode } from 'react';
 
 import { ENV } from '@/core/config';
 import { formatDate } from '@/core/dateUtils';
@@ -11,45 +10,96 @@ import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { renderFieldOrDash } from '@/table/utils';
 
+const FieldGrid: FunctionComponent<{ children: ReactNode }> = ({
+  children,
+}) => (
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'auto auto',
+      columnGap: 12,
+      rowGap: 4,
+      alignContent: 'start',
+    }}
+  >
+    {children}
+  </div>
+);
+
+const GridField: FunctionComponent<{ label: string; children: ReactNode }> = ({
+  label,
+  children,
+}) => (
+  <>
+    <div className="text-gray-700 fw-bold">{label}:</div>
+    <div className="text-gray-500">{children}</div>
+  </>
+);
+
 export const IssuesListExpandableRow: FunctionComponent<{
   row;
   supportOrStaff;
 }> = ({ row, supportOrStaff }) => (
-  <ExpandableContainer>
-    <Row>
-      <Col xs={6}>
-        <Field label={translate('Reporter')}>
+  <ExpandableContainer
+    style={{
+      width: 'auto',
+      maxWidth: '100%',
+      marginLeft: 48,
+      position: 'static',
+      left: 'auto',
+    }}
+  >
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        columnGap: 64,
+        rowGap: 12,
+      }}
+    >
+      <FieldGrid>
+        <GridField label={translate('Reporter')}>
           {renderFieldOrDash(row.reporter_name)}
-        </Field>
-        <Field label={translate('Organization')}>
+        </GridField>
+        <GridField label={translate('Organization')}>
           {renderFieldOrDash(row.customer_name)}
-        </Field>
-        <Field label={translate('Project')}>
+        </GridField>
+        <GridField label={translate('Project')}>
           {renderFieldOrDash(row.project_name)}
-        </Field>
-      </Col>
-      <Col xs={6}>
-        <Field label={translate('Service type')}>
+        </GridField>
+      </FieldGrid>
+      <FieldGrid>
+        <GridField label={translate('Service type')}>
           {renderFieldOrDash(row.project_name)}
-        </Field>
-        <Field label={translate('Created')}>
+        </GridField>
+        <GridField label={translate('Created')}>
           {renderFieldOrDash(row.resource_type)}
-        </Field>
+        </GridField>
         {supportOrStaff && (
-          <Field label={translate('Assigned to')}>
+          <GridField label={translate('Assigned to')}>
             {formatDate(row.created)}
-          </Field>
+          </GridField>
         )}
-      </Col>
-    </Row>
-    <Field label={translate('Description')} labelCol={12} valueCol={12}>
-      <span className="d-inline-block">
-        {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
-          <FormattedJira text={linkify(row.description)} />
-        ) : (
-          <FormattedHtml html={linkify(row.description)} />
-        )}
-      </span>
-    </Field>
+        <GridField label={translate('Type')}>
+          {renderFieldOrDash(row.type)}
+        </GridField>
+      </FieldGrid>
+    </div>
+    <div style={{ marginTop: 4 }}>
+      <Field
+        label={translate('Description')}
+        labelCol={12}
+        valueCol={12}
+        space={0}
+      >
+        <div style={{ overflowWrap: 'anywhere' }}>
+          {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
+            <FormattedJira text={linkify(row.description)} />
+          ) : (
+            <FormattedHtml html={linkify(row.description)} />
+          )}
+        </div>
+      </Field>
+    </div>
   </ExpandableContainer>
 );

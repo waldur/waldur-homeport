@@ -5,6 +5,8 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 
+import './quick-issue-drawer/QuickIssueContainer.scss';
+
 const QuickIssueContainer = lazyComponent(() =>
   import('./quick-issue-drawer/QuickIssueContainer').then((module) => ({
     default: module.QuickIssueContainer,
@@ -17,6 +19,7 @@ export const QuickIssueDrawerToggle: React.FC = () => {
   const handleOpenDrawer = () => {
     openDrawer(QuickIssueContainer, {
       title: translate('Support requests'),
+      bodyClassName: 'quick-issue-drawer-body',
     });
   };
 
