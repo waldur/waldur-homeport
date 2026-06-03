@@ -10,6 +10,23 @@
     }
   }
 
+  // Slim-header variant: a title row already sits above the tabs inside
+  // a bordered ExpandableContainer, so the tabs themselves must not draw
+  // their own outer/top borders or rounded corners.
+  &.with-header {
+    .nav-tabs {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    .tab-pane > .card-table {
+      border: none;
+    }
+  }
+
   .tab-pane > .card-table {
     border-top: none;
     border-top-left-radius: 0;

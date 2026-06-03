@@ -22,6 +22,12 @@ interface ResourceTeamAddDropdownProps {
   offering;
   /** Whether to show the Assign-existing item (gated by Invite as well) */
   showAssign?: boolean;
+  /**
+   * Button size. Use `'lg'` (default) in main/top-level table toolbars,
+   * `'sm'` inside nested/expandable rows so the button fits the slim
+   * nested header pattern.
+   */
+  size?: 'sm' | 'lg';
   refetch(): void;
 }
 
@@ -45,6 +51,7 @@ export const ResourceTeamAddDropdown: FC<ResourceTeamAddDropdownProps> = ({
   customerUuid,
   offering,
   showAssign = true,
+  size = 'lg',
   refetch,
 }) => {
   const user = useUser();
@@ -64,14 +71,16 @@ export const ResourceTeamAddDropdown: FC<ResourceTeamAddDropdownProps> = ({
     <Dropdown placement="bottom-end">
       <Dropdown.Toggle
         variant="primary"
-        size="lg"
+        size={size}
         className="no-arrow btn-icon-right"
       >
-        <span className="svg-icon svg-icon-2">
+        <span className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'}`}>
           <PlusCircleIcon weight="bold" />
         </span>
         {translate('Add')}
-        <span className="svg-icon svg-icon-2 rotate-180">
+        <span
+          className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-180`}
+        >
           <CaretDownIcon weight="bold" />
         </span>
       </Dropdown.Toggle>

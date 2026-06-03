@@ -27,7 +27,7 @@ export const ResourceProjectActions: FC<ResourceProjectActionsProps> = ({
   const user = useUser();
 
   return (
-    <ActionsDropdown row={row} refetch={refetch}>
+    <ActionsDropdown row={row} refetch={refetch} size="sm">
       {row.is_removed ? (
         <RestoreProjectAction row={row} refetch={refetch} />
       ) : (

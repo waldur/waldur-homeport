@@ -1,35 +1,31 @@
 import { FC } from 'react';
-import { Badge as BsBadge, Spinner } from 'react-bootstrap';
+import { Variant } from 'react-bootstrap/types';
 
-import { translate } from '@/i18n';
+import { StateIndicator } from '@/core/StateIndicator';
 
-// In-flight states that warrant an inline spinner alongside the badge,
-// so users can see at-a-glance which RPs are still being reconciled by
-// the site-agent + downstream operator.
 const PROGRESSING_STATES = new Set(['Creating', 'Updating', 'Terminating']);
 
+const STATE_VARIANTS: Record<string, Variant> = {
+  Creating: 'success',
+  OK: 'success',
+  Updating: 'success',
+  Terminating: 'success',
+  Erred: 'danger',
+  Terminated: 'warning',
+};
+
 export const StateLabel: FC<{ state: string }> = ({ state }) => {
-  const variant =
-    {
-      Creating: 'info',
-      OK: 'success',
-      Erred: 'danger',
-      Updating: 'warning',
-      Terminating: 'warning',
-      Terminated: 'secondary',
-    }[state] || 'secondary';
+  // Unrecognized/new backend states fall back to grey rather than a
+  // misleading healthy-green.
+  const variant = STATE_VARIANTS[state] || 'secondary';
 
   return (
-    <span className="d-inline-flex align-items-center gap-1">
-      <BsBadge bg={variant}>{state}</BsBadge>
-      {PROGRESSING_STATES.has(state) && (
-        <Spinner
-          animation="border"
-          size="sm"
-          role="status"
-          aria-label={translate('In progress')}
-        />
-      )}
-    </span>
+    <StateIndicator
+      label={state}
+      variant={variant}
+      active={PROGRESSING_STATES.has(state)}
+      outline
+      pill
+    />
   );
 };

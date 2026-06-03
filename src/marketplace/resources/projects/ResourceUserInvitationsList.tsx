@@ -73,6 +73,7 @@ interface ResourceInvitationsListProps {
   scopeUrl?: string;
   scopeLabel?: string;
   contentType?: 'resource' | 'resource_project';
+  hasActionBar?: boolean;
 }
 
 const ResourceUserInvitationsListTable: FC<ResourceInvitationsListProps> = ({
@@ -84,6 +85,7 @@ const ResourceUserInvitationsListTable: FC<ResourceInvitationsListProps> = ({
   scopeUrl,
   scopeLabel,
   contentType,
+  hasActionBar,
 }) => {
   const { values } = useFormState();
 
@@ -123,6 +125,7 @@ const ResourceUserInvitationsListTable: FC<ResourceInvitationsListProps> = ({
       {...tableProps}
       title={title ?? translate('Invitations')}
       tabs={tableTabs}
+      hasActionBar={hasActionBar}
       verboseName={translate('resource invitations')}
       hasQuery={true}
       filters={<UserInvitationsFilter />}
