@@ -8,14 +8,19 @@ const STATUS_COLORS = {
   Resolved: 'default',
 };
 
-export const IssueStatus = ({ status }) => (
-  <Badge
-    variant={STATUS_COLORS[status] || 'default'}
-    size="sm"
-    pill
-    outline
-    className="flex-shrink-0"
-  >
-    {renderFieldOrDash(status)}
-  </Badge>
-);
+export const IssueStatus = ({ status }) => {
+  if (!status) {
+    return <>{renderFieldOrDash(status)}</>;
+  }
+  return (
+    <Badge
+      variant={STATUS_COLORS[status] || 'default'}
+      size="sm"
+      pill
+      outline
+      className="flex-shrink-0"
+    >
+      {status}
+    </Badge>
+  );
+};

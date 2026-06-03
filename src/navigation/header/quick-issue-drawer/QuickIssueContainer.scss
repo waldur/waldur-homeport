@@ -1,0 +1,42 @@
+// Drawer body padding for the Support requests drawer.
+// Top is 0 — drawer header already provides the spacing below it.
+.quick-issue-drawer-body {
+  padding: 0 24px 16px;
+}
+
+// Bare table chrome for the Support requests drawer.
+// Cancels the theme's default card-header margin and card-body padding
+// so the search bar, rows, and footer sit flush with the drawer body
+// (which provides its own padding).
+.drawer-bare-table.card-table {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+
+  > .card-header {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  > .card-body {
+    padding: 0;
+  }
+
+  > .card-footer {
+    padding: 0;
+    background: transparent;
+    border: 0;
+  }
+
+  // Prevent the expanded row's content from feeding into the table's
+  // auto-layout column width calculation — so opening a row doesn't widen
+  // the Key column. Scoped here so the rest of the app's expandable
+  // rows keep their default behavior.
+  td[colspan] {
+    width: 1px;
+    min-width: 100%;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+  }
+}

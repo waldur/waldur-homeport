@@ -50,7 +50,7 @@ const KNOWN_TYPE_DESCRIPTIONS: Record<string, string> = {
   ),
 };
 
-export const getIconForType = (typeName: string): JSX.Element => {
+const getIconForType = (typeName: string): JSX.Element => {
   return KNOWN_TYPE_ICONS[typeName] || <QuestionIcon weight="bold" />;
 };
 

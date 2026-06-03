@@ -80,7 +80,7 @@ export const DrawerRoot: FunctionComponent = () => {
         </div>
         <div className="card-body scroll-y p-0" id="kt_drawer_body">
           <DirtyFormContext.Provider value={{ setIsDirty: setIsDirtyContext }}>
-            <div className="p-8">
+            <div className={drawerProps.bodyClassName ?? 'p-8'}>
               <ErrorBoundary fallback={ErrorMessage}>
                 {drawerComponent
                   ? React.createElement(drawerComponent, {

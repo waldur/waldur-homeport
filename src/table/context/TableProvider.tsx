@@ -53,8 +53,8 @@ export function TableProvider<TData = any>({
   );
 
   const showTitle = useMemo(
-    () => !props.standalone && (!props.hideTitle || !props.hideRefresh),
-    [props.standalone, props.hideTitle, props.hideRefresh],
+    () => !props.standalone && !props.hideTitle,
+    [props.standalone, props.hideTitle],
   );
 
   const showActionsColumn = useMemo(
