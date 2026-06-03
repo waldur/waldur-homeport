@@ -40,6 +40,7 @@ export const DeleteProjectAction: FC<{
       title={translate('Delete')}
       action={() => deleteMutation.mutate()}
       iconNode={<TrashIcon weight="bold" />}
+      iconColor="danger"
       className="text-danger"
       disabled={deleteMutation.isPending}
     />

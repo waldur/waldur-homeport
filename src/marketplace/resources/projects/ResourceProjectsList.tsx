@@ -113,6 +113,7 @@ const ResourceProjectsListTable: FC<ResourceProjectsListProps> = ({
           offering={offering}
         />
       )}
+      isRowExpandable={(row) => !row.is_removed}
       rowActions={({ row }) =>
         canManageProjects ? (
           <ResourceProjectActions

@@ -5248,6 +5248,7 @@
   "Unable to revoke Terms of service consent.": "Teenustingimuste nõusoleku tühistamine ebaõnnestus.",
   "No connected offerings with Terms of Service found.": "Teenustingimustega seotud pakkumisi ei leitud.",
   "Are you sure you want to revoke your consent for Terms of service version {version} for {offeringName}? This action can be reversed by accepting the ToS again.": "Kas oled kindel, et soovid tühistada oma nõusoleku teenustingimuste versioonile {version} pakkumise {offeringName} jaoks? Selle toimingu saab tagasi võtta teenustingimustega uuesti nõustudes.",
+  "Permanently delete": "Kustuta jäädavalt",
   "Topology": "Topoloogia",
   "Legend": "Tähistused",
   "Edges": "Servad",

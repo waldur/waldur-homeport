@@ -1,4 +1,4 @@
-import { FireIcon } from '@phosphor-icons/react';
+import { WarningOctagonIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import {
   marketplaceResourceProjectsDestroy,
@@ -39,7 +39,8 @@ export const ForceDeleteProjectAction: FC<{
     <ActionItem
       title={translate('Permanently delete')}
       action={() => forceDeleteMutation.mutate()}
-      iconNode={<FireIcon weight="bold" />}
+      iconNode={<WarningOctagonIcon weight="bold" />}
+      iconColor="danger"
       className="text-danger"
       staff
       disabled={forceDeleteMutation.isPending}
