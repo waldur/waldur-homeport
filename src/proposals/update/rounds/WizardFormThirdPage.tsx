@@ -3,8 +3,7 @@ import { useFormState } from 'react-final-form';
 
 import { formatISOWithoutZone } from '@/core/dateUtils';
 import { required } from '@/core/validators';
-import { SelectGroup, NumberGroup } from '@/form';
-import { DateTimeField } from '@/form/DateTimeField';
+import { DateTimeGroup, SelectGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import {
   getRoundAllocationStrategyOptions,
@@ -56,7 +55,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
         />
 
         {showAllocationDate && (
-          <DateTimeField
+          <DateTimeGroup
             label={translate('Allocation date')}
             name="allocation_date"
             required

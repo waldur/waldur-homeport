@@ -3,10 +3,8 @@ import { Field, useFormState } from 'react-final-form';
 
 import { formatISOWithoutZone, parseDate } from '@/core/dateUtils';
 import { required } from '@/core/validators';
-import { NumberGroup, SelectGroup } from '@/form';
+import { DateTimeGroup, NumberGroup, SelectGroup, TimezoneGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { DateTimeField } from '@/form/DateTimeField';
-import { TimezoneField } from '@/form/TimezoneField';
 import { translate } from '@/i18n';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
@@ -40,7 +38,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   return (
     <WizardForm {...props}>
       <div className="size-sm">
-        <TimezoneField
+        <TimezoneGroup
           name="timezone"
           label={translate('Time zone')}
           required={true}
@@ -48,7 +46,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
           isClearable={false}
           validate={required}
         />
-        <DateTimeField
+        <DateTimeGroup
           label={translate('Start date')}
           name="start_time"
           required
@@ -65,7 +63,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
           hideLabel
         />
         {!repeats && (
-          <DateTimeField
+          <DateTimeGroup
             label={translate('Cutoff date')}
             name="cutoff_time"
             required
