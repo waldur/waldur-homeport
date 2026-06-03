@@ -2,17 +2,27 @@ export default {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Disallow redundant vi.mock calls for modules that are globally mocked.',
+      description:
+        'Disallow redundant vi.mock calls for modules that are globally mocked.',
       category: 'Best Practices',
       recommended: true,
     },
     fixable: 'code',
     schema: [],
     messages: {
-      redundantMock: 'The module "{{moduleName}}" is already mocked globally in test/setupTests.js. Local vi.mock() is redundant.',
+      redundantMock:
+        'The module "{{moduleName}}" is already mocked globally in test/setupTests.js. Local vi.mock() is redundant.',
     },
   },
   create(context) {
+    // The canonical global mocks live in test/mocks/ and are registered via
+    // test/setupTests.js. Those files are the source of the global mocks, not
+    // redundant local copies, so they must be exempt from this rule.
+    const filename = context.getFilename().replace(/\\/g, '/');
+    if (filename.includes('/test/mocks/')) {
+      return {};
+    }
+
     const globallyMockedModules = [
       'waldur-js-client',
       '@uirouter/react',
@@ -43,7 +53,7 @@ export default {
           // If it only has one argument, it's definitely redundant
           // If it has a factory (2nd argument), it might be intentional, but usually it's better to avoid it if possible.
           // The request specifically mentions vi.mock('waldur-js-client') which usually has one arg.
-          
+
           context.report({
             node,
             messageId: 'redundantMock',
