@@ -1676,6 +1676,18 @@ export const SettingsDescription = [
         default: 5000,
         type: 'integer',
       },
+      {
+        key: 'OPENSTACK_LOG_CALLS_ENABLED',
+        description: translate('Emit one log line per OpenStack HTTP call on logger `waldur_openstack.calls` (method, host+path, status, elapsed ms, originating backend action). Useful for diagnosing slow tenant operations; off by default because chatty under steady-state load.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'OPENSTACK_LOG_CALLS_THRESHOLD_MS',
+        description: translate('When OPENSTACK_LOG_CALLS_ENABLED is on, only emit lines for calls slower than this many milliseconds. 0 logs every call. Errors are always logged regardless of this threshold.'),
+        default: 0,
+        type: 'integer',
+      },
     ],
   },
   {
