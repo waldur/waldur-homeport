@@ -1,15 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
-import { Field } from 'react-final-form';
 import { marketplaceRuntimeStatesList } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { SelectFilter } from '@/table';
 import { useProject } from '@/workspace/hooks';
 
-export const RuntimeStateFilter: React.FC = () => {
+export const RuntimeStateFilter: React.FC<any> = (props) => {
   const { params } = useCurrentStateAndParams();
   const project = useProject();
 
@@ -24,23 +22,17 @@ export const RuntimeStateFilter: React.FC = () => {
       }).then((r) => r.data),
   });
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
   return (
-    <Field
+    <SelectFilter
+      title={translate('Runtime state')}
       name="runtime_state"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Select state...')}
-          options={data}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
+      badgeValue={(value) => value?.label}
+      placeholder={translate('Select state...')}
+      options={data}
+      isLoading={isLoading}
+      isDisabled={isLoading}
+      isClearable={true}
+      {...props}
     />
   );
 };

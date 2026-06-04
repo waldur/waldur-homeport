@@ -1,21 +1,21 @@
 import { useMemo } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   ManagedProject,
   openportalManagedProjectsAttach,
+  openportalUnmanagedProjectsList,
+  OpenportalUnmanagedProjectsListData,
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton } from '@/form';
-import { FormGroup } from '@/form';
+import { AsyncSelectGroup, SubmitButton } from '@/form';
+import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser, useCustomer } from '@/workspace/hooks';
-
-import { ProjectAutocompleteField } from './ProjectAutocompleteField';
 
 const INITIAL_VALUES = {
   project: null,
@@ -139,13 +139,18 @@ export const AttachManagedProjectDialog: React.FC<
     );
   }
 
-  const query = useMemo(
+  const query = useMemo<OpenportalUnmanagedProjectsListData['query']>(
     () => ({
-      customer: targetCustomer?.uuid,
+      customer: [targetCustomer?.uuid],
       field: ['name', 'uuid'],
-      o: 'name',
+      o: ['name'],
     }),
     [targetCustomer?.uuid],
+  );
+
+  const loadOptions = useMemo(
+    () => createLoadOptions(openportalUnmanagedProjectsList, 'query', query),
+    [query],
   );
 
   return (
@@ -167,28 +172,22 @@ export const AttachManagedProjectDialog: React.FC<
               </div>
             }
           >
-            <FormGroup
-              controlId="project"
+            <AsyncSelectGroup
               label={translate(
                 'Choose a project to attach. Note that only unmanaged projects in {customer} can be attached.',
                 { customer: targetCustomer?.name },
               )}
+              name="project"
+              placeholder={translate('Select project')}
+              validate={required}
+              loadOptions={loadOptions}
+              defaultOptions
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              isClearable={true}
               required
-            >
-              <Field
-                name="project"
-                component={ProjectAutocompleteField}
-                placeholder={translate('Select project')}
-                validate={required}
-                query={query}
-                required
-                reactSelectProps={{
-                  isClearable: true,
-                  closeMenuOnSelect: true,
-                }}
-                noOptionsMessage={() => translate('No projects found')}
-              />
-            </FormGroup>
+              noOptionsMessage={() => translate('No projects found')}
+            />
           </ModalDialog>
         </form>
       )}

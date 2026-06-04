@@ -1,52 +1,37 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   MarketplaceResourcesListData,
   PublicOfferingDetails,
   marketplacePublicOfferingsList,
 } from 'waldur-js-client';
 
-import { AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter } from '@/table';
 
 export const ProjectResourcesFilter: FunctionComponent<
   ProjectResourcesFilterProps
 > = (props) => (
-  <TableFilterItem
+  <AsyncSelectFilter
     title={translate('Offering')}
     name="offering"
     getValueLabel={(value: PublicOfferingDetails) => value?.name}
-  >
-    <Field
-      name="offering"
-      component={(fieldProps) => (
-        <AsyncSelect
-          placeholder={translate('Offering')}
-          loadOptions={createLoadOptions(
-            marketplacePublicOfferingsList,
-            'query',
-            { project_uuid: props.project.uuid },
-          )}
-          defaultOptions
-          getOptionValue={(option: PublicOfferingDetails) =>
-            String(option.uuid || '')
-          }
-          getOptionLabel={(option: PublicOfferingDetails) =>
-            String(option.name || '')
-          }
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          isMulti={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Offering')}
+    loadOptions={createLoadOptions(marketplacePublicOfferingsList, 'query', {
+      project_uuid: props.project.uuid,
+    })}
+    defaultOptions
+    getOptionValue={(option: PublicOfferingDetails) =>
+      String(option.uuid || '')
+    }
+    getOptionLabel={(option: PublicOfferingDetails) =>
+      String(option.name || '')
+    }
+    isClearable={true}
+    isMulti={true}
+  />
 );
 
 export const ProjectResourcesFilterFormId = 'ProjectResourcesFilter';

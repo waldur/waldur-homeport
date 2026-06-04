@@ -1,61 +1,37 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { CustomersUsersListData } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const CustomersUsersFilter: FunctionComponent<
   CustomersUsersFilterProps
 > = (props) => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('Project role')}
       name="project_role"
       getValueLabel={(value: any) => value?.description}
-    >
-      <Field
-        name="project_role"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Project role')}
-            options={props.projectRoles}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option) => String(option.name)}
-            getOptionLabel={(option) => option.description}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Project role')}
+      options={props.projectRoles}
+      getOptionValue={(option) => String(option.name)}
+      getOptionLabel={(option) => option.description}
+      isClearable={true}
+      isMulti={true}
+    />
+    <SelectFilter
       title={translate('Organization role')}
       name="organization_role"
       getValueLabel={(value: any) => value?.description}
-    >
-      <Field
-        name="organization_role"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Organization role')}
-            options={props.organizationRoles}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option) => String(option.name)}
-            getOptionLabel={(option) => option.description}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Organization role')}
+      options={props.organizationRoles}
+      getOptionValue={(option) => String(option.name)}
+      getOptionLabel={(option) => option.description}
+      isClearable={true}
+      isMulti={true}
+    />
   </>
 );
 

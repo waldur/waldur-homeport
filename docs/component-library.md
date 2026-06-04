@@ -900,6 +900,223 @@ Key configuration props. Full interface is large — these are the most commonly
 
 ---
 
+### Table Filters
+
+Autonomous filter components combine `TableFilterItem`, React Final Form `Field`, and an input component into a single, boilerplate-free component.
+
+#### SelectFilter
+
+```ts
+import { SelectFilter } from '@/table';
+```
+
+Combines `TableFilterItem` and `Select`.
+
+| Prop             | Type                                   | Required | Default | Description                                            |
+| ---------------- | -------------------------------------- | -------- | ------- | ------------------------------------------------------ |
+| `title`          | `string`                               | yes      | —       | Filter label/title                                     |
+| `name`           | `string`                               | yes      | —       | Field name in form state                               |
+| `options`        | `Array<{ value: any; label: string }>` | yes      | —       | Selectable options                                     |
+| `badgeValue`     | `(value) => string \| number`          | no       | —       | Custom badge value renderer                            |
+| `getValueLabel`  | `(value) => string \| number`          | no       | —       | Custom label for selected value                        |
+| `isMulti`        | `boolean`                              | no       | `false` | Enable multi-value selection                           |
+| `isClearable`    | `boolean`                              | no       | `true`  | Show clear button                                      |
+
+---
+
+#### AsyncSelectFilter
+
+```ts
+import { AsyncSelectFilter } from '@/table';
+```
+
+Combines `TableFilterItem` and `AsyncSelect`.
+
+| Prop             | Type                | Required | Default | Description                               |
+| ---------------- | ------------------- | -------- | ------- | ----------------------------------------- |
+| `title`          | `string`            | yes      | —       | Filter label/title                        |
+| `name`           | `string`            | yes      | —       | Field name in form state                  |
+| `loadOptions`    | `AsyncSelectLoader` | yes      | —       | Function to load options                  |
+| `badgeValue`     | `(value) => any`    | no       | —       | Custom badge value renderer               |
+| `getValueLabel`  | `(value) => any`    | no       | —       | Custom label for selected value           |
+| `isMulti`        | `boolean`           | no       | `false` | Enable multi-value selection              |
+| `defaultOptions` | `boolean \| any[]`  | no       | `false` | Load options on mount or provide defaults |
+
+---
+
+#### Value shape normalization
+
+Both `SelectFilter` and `AsyncSelectFilter` normalize their form value on mount and on every value change so callers (custom `badgeValue` resolvers, downstream filter→query mappers) can rely on a single shape:
+
+| Filter mode  | Incoming value                                | Becomes                                                  |
+| ------------ | --------------------------------------------- | -------------------------------------------------------- |
+| `isMulti`    | a single option object                        | `[option]`                                               |
+| `isMulti`    | a raw scalar matching one of `options`        | `[matchedOption]`                                        |
+| `isMulti`    | a raw scalar with no match (or no `options`)  | `null`                                                   |
+| not `isMulti`| an array                                      | first element (or `null` if empty)                       |
+| not `isMulti`| a raw scalar matching one of `options`        | `matchedOption`                                          |
+| not `isMulti`| a raw scalar with no match (or no `options`)  | `null`                                                   |
+| any          | shape already matches                         | unchanged                                                |
+
+This guards against three real failure modes that otherwise produce a "ghost" active filter — an incrementing active-filter counter with an empty chip and no API parameter:
+
+- a URL crafted in the opposite shape (e.g. `?state=[…]` opened on a single-select page),
+- a saved filter created when the filter was multi-select and restored after it was reconfigured to single-select (or vice versa),
+- a hand-edited URL with a value that does not match any known option (e.g. `?state=garbage`).
+
+`AsyncSelectFilter` has no static `options`, so raw scalar values that arrive without a resolvable shape are dropped rather than rendered literally.
+
+---
+
+#### BooleanFilter
+
+```ts
+import { BooleanFilter } from '@/table';
+```
+
+Combines `TableFilterItem` and `AwesomeCheckboxField`. Usually used with `parse={(v) => v || undefined}` to remove filter when unchecked.
+
+---
+
+#### StringFilter
+
+```ts
+import { StringFilter } from '@/table';
+```
+
+Combines `TableFilterItem` and `StringField`. Use for custom text search filters.
+
+---
+
+#### OfferingFilter
+
+```ts
+import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
+```
+
+A specialized autonomous filter for Marketplace Offerings.
+
+| Prop                | Type      | Required | Default | Description                             |
+| ------------------- | --------- | -------- | ------- | --------------------------------------- |
+| `offeringFilter`    | `object`  | no       | —       | Static filter for the autocomplete API  |
+| `providerOfferings` | `boolean` | no       | `true`  | Fetch from provider or public API endpoint |
+
+---
+
+#### ProjectFilter
+
+```ts
+import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+```
+
+A specialized autonomous filter for Marketplace Projects.
+
+| Prop            | Type     | Required | Default | Description                      |
+| --------------- | -------- | -------- | ------- | -------------------------------- |
+| `customer_uuid` | `string` | no       | —       | Filter projects by customer UUID |
+
+---
+
+#### OrganizationFilter
+
+```ts
+import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
+```
+
+A specialized autonomous filter for Organizations.
+
+---
+
+#### ProviderFilter
+
+```ts
+import { ProviderFilter } from '@/marketplace/orders/ProviderFilter';
+```
+
+A specialized autonomous filter for Service Providers. Supports custom `name` (default: `"provider"`).
+
+---
+
+#### CategoryFilter
+
+```ts
+import { CategoryFilter } from '@/marketplace/resources/list/CategoryFilter';
+```
+
+A specialized autonomous filter for Categories. Supports `project` and `customer` scoping.
+
+---
+
+#### TagFilter
+
+```ts
+import { TagFilter } from '@/marketplace/tags/TagFilter';
+```
+
+A specialized autonomous filter for Tags.
+
+---
+
+#### OfferingTypeFilter
+
+```ts
+import { OfferingTypeFilter } from '@/marketplace/offerings/details/OfferingTypeFilter';
+```
+
+A specialized autonomous filter for Offering Integration Types.
+
+---
+
+#### ResourceStateFilter
+
+```ts
+import { ResourceStateFilter } from '@/marketplace/resources/list/ResourceStateFilter';
+```
+
+A specialized autonomous filter for Resource States.
+
+---
+
+#### DateFilter
+
+```ts
+import { DateFilter } from '@/table';
+```
+
+Combines `TableFilterItem` and `DateField`.
+
+---
+
+#### DateTimeFilter
+
+```ts
+import { DateTimeFilter } from '@/table';
+```
+
+Combines `TableFilterItem` and `DateTimeField`.
+
+---
+
+#### NumberFilter
+
+```ts
+import { NumberFilter } from '@/table';
+```
+
+Combines `TableFilterItem` and `NumberField`.
+
+---
+
+#### NumberRangeFilter
+
+```ts
+import { NumberRangeFilter } from '@/table';
+```
+
+Combines `TableFilterItem` and `RangeNumberField`. Provide `min={0}` if negative values are not allowed.
+
+---
+
 ### Forms
 
 #### FormGroup (React Final Form)

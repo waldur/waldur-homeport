@@ -1,37 +1,28 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { EmailLogsListData } from 'waldur-js-client';
 
-import { StringField } from '@/form';
-import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { StringFilter, DateFilter } from '@/table';
 
 export const EmailLogsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem title={translate('Emails')} name="emails">
-      <Field
-        name="emails"
-        component={StringField}
-        placeholder={translate('Emails contains')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Subject')} name="subject">
-      <Field
-        name="subject"
-        component={StringField}
-        placeholder={translate('Subject contains')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Sent at')} name="sent_at">
-      <Field
-        name="sent_at"
-        component={DateField}
-        placeholder={translate('YYYY-MM-DD')}
-      />
-    </TableFilterItem>
+    <StringFilter
+      title={translate('Emails')}
+      name="emails"
+      placeholder={translate('Emails contains')}
+    />
+    <StringFilter
+      title={translate('Subject')}
+      name="subject"
+      placeholder={translate('Subject contains')}
+    />
+    <DateFilter
+      title={translate('Sent at')}
+      name="sent_at"
+      placeholder={translate('YYYY-MM-DD')}
+    />
   </>
 );
 

@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   Customer,
   InvitationState,
@@ -11,10 +10,9 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const InvitationStateOptions: InvitationStateOption[] = [
   {
@@ -88,97 +86,49 @@ export interface ScopeTypeOption {
 
 export const UserInvitationsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('State')}
       name="state"
       getValueLabel={(value: InvitationStateOption) => value?.label}
-    >
-      <Field
-        name="state"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('State')}
-            options={InvitationStateOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: InvitationStateOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: InvitationStateOption) => option.label}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('State')}
+      options={InvitationStateOptions}
+      getOptionValue={(option: InvitationStateOption) => String(option.value)}
+      getOptionLabel={(option: InvitationStateOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <AsyncSelectFilter
       title={translate('Role')}
       name="role"
       getValueLabel={(value: RoleDetails) => value?.description}
-    >
-      <Field
-        name="role"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Role')}
-            loadOptions={createLoadOptions(rolesList, 'name')}
-            defaultOptions
-            getOptionValue={(option: RoleDetails) => String(option.uuid || '')}
-            getOptionLabel={(option: RoleDetails) =>
-              String(option.description || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Role')}
+      loadOptions={createLoadOptions(rolesList, 'name')}
+      defaultOptions
+      getOptionValue={(option: RoleDetails) => String(option.uuid || '')}
+      getOptionLabel={(option: RoleDetails) => String(option.description || '')}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Organization')}
       name="customer"
       getValueLabel={(value: Customer) => value?.name}
-    >
-      <Field
-        name="customer"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Organization')}
-            loadOptions={createLoadOptions(customersList, 'query')}
-            defaultOptions
-            getOptionValue={(option: Customer) => String(option.uuid || '')}
-            getOptionLabel={(option: Customer) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Organization')}
+      loadOptions={createLoadOptions(customersList, 'query')}
+      defaultOptions
+      getOptionValue={(option: Customer) => String(option.uuid || '')}
+      getOptionLabel={(option: Customer) => String(option.name || '')}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Scope type')}
       name="scope_type"
       getValueLabel={(value: ScopeTypeOption) => value?.label}
-    >
-      <Field
-        name="scope_type"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Scope type')}
-            options={ScopeTypeOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: ScopeTypeOption) => String(option.value)}
-            getOptionLabel={(option: ScopeTypeOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Scope type')}
+      options={ScopeTypeOptions}
+      getOptionValue={(option: ScopeTypeOption) => String(option.value)}
+      getOptionLabel={(option: ScopeTypeOption) => option.label}
+      isClearable={true}
+    />
   </>
 );
 

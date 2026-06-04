@@ -1,11 +1,15 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceProviderOfferingsImportOffering } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsImportOffering,
+  marketplaceCategoriesList,
+} from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { validateOfferingExportFile } from './fileValidation';
@@ -22,6 +26,10 @@ describe('SingleOfferingImportDialog', () => {
     vi.mocked(workspaceHooks.useCustomer).mockReturnValue({
       uuid: 'local-customer-uuid',
     } as any);
+
+    vi.mocked(marketplaceCategoriesList).mockResolvedValue(
+      mockListResponse([{ uuid: 'compute-uuid', title: 'Compute' }]),
+    );
 
     vi.clearAllMocks();
   });

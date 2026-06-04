@@ -30,7 +30,7 @@ const renderIcon = (src: string, imgStyle: any) =>
     />
   );
 
-const Option = (props) => {
+export const Option = (props) => {
   const img = renderIcon(props.data.thumbnail, { width: 19 });
   return (
     <components.Option {...props}>
@@ -44,7 +44,7 @@ const Option = (props) => {
   );
 };
 
-const SingleValue = (props) => {
+export const SingleValue = (props) => {
   const img = renderIcon(props.data.thumbnail, { width: 19 });
   return (
     <components.SingleValue {...props}>

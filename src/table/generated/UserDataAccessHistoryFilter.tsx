@@ -1,13 +1,10 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { UsersDataAccessHistoryListData } from 'waldur-js-client';
 
-import { DateField } from '@/form/DateField';
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter, DateFilter } from '@/table';
 
 export const UserDataAccessHistoryAccessorTypeOptions: UserDataAccessHistoryAccessorTypeOption[] =
   [
@@ -39,49 +36,34 @@ export interface UserDataAccessHistoryAccessorTypeOption {
 
 export const UserDataAccessHistoryFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem title={translate('Start date')} name="start_date">
-      <Field
-        name="start_date"
-        component={DateField}
-        placeholder={translate('Start date')}
-        inline={true}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('End date')} name="end_date">
-      <Field
-        name="end_date"
-        component={DateField}
-        placeholder={translate('End date')}
-        inline={true}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+    <DateFilter
+      title={translate('Start date')}
+      name="start_date"
+      placeholder={translate('Start date')}
+      inline={true}
+    />
+    <DateFilter
+      title={translate('End date')}
+      name="end_date"
+      placeholder={translate('End date')}
+      inline={true}
+    />
+    <SelectFilter
       title={translate('Accessor type')}
       name="accessor_type"
       getValueLabel={(value: UserDataAccessHistoryAccessorTypeOption) =>
         value?.label
       }
-    >
-      <Field
-        name="accessor_type"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Accessor type')}
-            options={UserDataAccessHistoryAccessorTypeOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: UserDataAccessHistoryAccessorTypeOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: UserDataAccessHistoryAccessorTypeOption) =>
-              option.label
-            }
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Accessor type')}
+      options={UserDataAccessHistoryAccessorTypeOptions}
+      getOptionValue={(option: UserDataAccessHistoryAccessorTypeOption) =>
+        String(option.value)
+      }
+      getOptionLabel={(option: UserDataAccessHistoryAccessorTypeOption) =>
+        option.label
+      }
+      isClearable={true}
+    />
   </>
 );
 

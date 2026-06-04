@@ -11,7 +11,7 @@ import { OrganizationLink } from '@/customer/list/OrganizationLink';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures, ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { useTitle } from '@/navigation/title';
 import { BatchProjectActions } from '@/project/BatchProjectActions';
 import { PROJECTS_LIST } from '@/project/constants';
@@ -99,7 +99,7 @@ const ProjectsListTable = () => {
   });
 
   const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources();
+    useOrganizationAndProjectAutocompletesForResources();
 
   const onClickDetails = (row) =>
     syncResourceFilters({

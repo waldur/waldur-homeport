@@ -37,6 +37,6 @@ const ProviderSelectField: FC<any> = (fieldProps) => {
   );
 };
 
-export const ProviderFilter: FC = () => (
+export const ProviderSelector: FC = () => (
   <Field name="provider" component={ProviderSelectField} />
 );

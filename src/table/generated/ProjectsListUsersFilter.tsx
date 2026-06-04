@@ -1,37 +1,24 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { ProjectsListUsersListData } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const ProjectsListUsersFilter: FunctionComponent<
   ProjectsListUsersFilterProps
 > = (props) => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Role')}
     name="project_role"
     getValueLabel={(value: any) => value?.description}
-  >
-    <Field
-      name="project_role"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Role')}
-          options={props.projectRoles}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option) => String(option.name)}
-          getOptionLabel={(option) => option.description}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Role')}
+    options={props.projectRoles}
+    getOptionValue={(option) => String(option.name)}
+    getOptionLabel={(option) => option.description}
+    isClearable={true}
+  />
 );
 
 export const ProjectsListUsersFilterFormId = 'ProjectsListUsersFilter';

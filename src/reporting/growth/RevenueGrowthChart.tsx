@@ -157,7 +157,7 @@ export const RevenueGrowthChart: FC = () => {
       onChange={(value: AccountingOption) => setAccountingFilter(value)}
       options={accountingOptions}
       isClearable={false}
-      className="metronic-select-container flex-grow-0 mw-200px"
+      className="flex-grow-0 mw-200px"
     />
   );
 

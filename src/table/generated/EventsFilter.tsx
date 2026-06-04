@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   Customer,
   EventsListData,
@@ -12,10 +11,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const FeatureOptions: FeatureOption[] = [
   {
@@ -34,100 +32,56 @@ export interface FeatureOption {
 
 export const EventsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Organization')}
       name="organization"
       getValueLabel={(value: Customer) => value?.name}
-    >
-      <Field
-        name="organization"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Organization')}
-            loadOptions={createLoadOptions(customersList, 'query')}
-            defaultOptions
-            getOptionValue={(option: Customer) => String(option.uuid || '')}
-            getOptionLabel={(option: Customer) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Organization')}
+      loadOptions={createLoadOptions(customersList, 'query')}
+      defaultOptions
+      getOptionValue={(option: Customer) => String(option.uuid || '')}
+      getOptionLabel={(option: Customer) => String(option.name || '')}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Project')}
       name="project"
       getValueLabel={(value: Project) => value?.name}
-    >
-      <Field
-        name="project"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Project')}
-            loadOptions={createLoadOptions(projectsList, 'query')}
-            defaultOptions
-            getOptionValue={(option: Project) => String(option.uuid || '')}
-            getOptionLabel={(option: Project) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Project')}
+      loadOptions={createLoadOptions(projectsList, 'query')}
+      defaultOptions
+      getOptionValue={(option: Project) => String(option.uuid || '')}
+      getOptionLabel={(option: Project) => String(option.name || '')}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('User')}
       name="user"
       getValueLabel={(value: User) =>
         value?.full_name || value?.username || value?.email
       }
-    >
-      <Field
-        name="user"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('User')}
-            loadOptions={createLoadOptions(usersList, 'full_name', {
-              o: ['full_name'],
-            })}
-            defaultOptions
-            getOptionValue={(option: User) => String(option.uuid || '')}
-            getOptionLabel={(option: User) =>
-              String(option.full_name || option.username || option.email || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('User')}
+      loadOptions={createLoadOptions(usersList, 'full_name', {
+        o: ['full_name'],
+      })}
+      defaultOptions
+      getOptionValue={(option: User) => String(option.uuid || '')}
+      getOptionLabel={(option: User) =>
+        String(option.full_name || option.username || option.email || '')
+      }
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Type')}
       name="feature"
       getValueLabel={(value: FeatureOption) => value?.label}
-    >
-      <Field
-        name="feature"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Type')}
-            options={FeatureOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: FeatureOption) => String(option.value)}
-            getOptionLabel={(option: FeatureOption) => option.label}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Type')}
+      options={FeatureOptions}
+      getOptionValue={(option: FeatureOption) => String(option.value)}
+      getOptionLabel={(option: FeatureOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
   </>
 );
 

@@ -1,15 +1,13 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   BroadcastMessageStateEnum,
   BroadcastMessagesListData,
 } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const BroadcastMessageStateOptions: BroadcastMessageStateOption[] = [
   {
@@ -31,29 +29,18 @@ export interface BroadcastMessageStateOption {
 }
 
 export const BroadcastMessagesFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('State')}
     name="state"
     getValueLabel={(value: BroadcastMessageStateOption) => value?.label}
-  >
-    <Field
-      name="state"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('State')}
-          options={BroadcastMessageStateOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: BroadcastMessageStateOption) =>
-            String(option.value)
-          }
-          getOptionLabel={(option: BroadcastMessageStateOption) => option.label}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('State')}
+    options={BroadcastMessageStateOptions}
+    getOptionValue={(option: BroadcastMessageStateOption) =>
+      String(option.value)
+    }
+    getOptionLabel={(option: BroadcastMessageStateOption) => option.label}
+    isClearable={true}
+  />
 );
 
 export const BroadcastMessagesFilterFormId = 'BroadcastMessagesFilter';

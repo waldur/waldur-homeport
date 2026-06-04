@@ -1,13 +1,10 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { UrgencyEnum, UserActionsListData } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter, BooleanFilter } from '@/table';
 
 export const ActionTypeOptions: ActionTypeOption[] = [
   {
@@ -45,76 +42,42 @@ export interface UrgencyOption {
 
 export const UserPendingActionsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('Action type')}
       name="action_type"
       getValueLabel={(value: ActionTypeOption) => value?.label}
-    >
-      <Field
-        name="action_type"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Action type')}
-            options={ActionTypeOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: ActionTypeOption) => String(option.value)}
-            getOptionLabel={(option: ActionTypeOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Action type')}
+      options={ActionTypeOptions}
+      getOptionValue={(option: ActionTypeOption) => String(option.value)}
+      getOptionLabel={(option: ActionTypeOption) => option.label}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Urgency')}
       name="urgency"
       getValueLabel={(value: UrgencyOption) => value?.label}
-    >
-      <Field
-        name="urgency"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Urgency')}
-            options={UrgencyOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: UrgencyOption) => String(option.value)}
-            getOptionLabel={(option: UrgencyOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Urgency')}
+      options={UrgencyOptions}
+      getOptionValue={(option: UrgencyOption) => String(option.value)}
+      getOptionLabel={(option: UrgencyOption) => option.label}
+      isClearable={true}
+    />
+    <BooleanFilter
       title={translate('Overdue')}
       name="overdue"
       badgeValue={(value) => (value ? translate('Overdue') : translate('All'))}
       ellipsis={false}
-    >
-      <Field
-        name="overdue"
-        component={AwesomeCheckboxField}
-        label={translate('Overdue')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      parse={(v) => v || undefined}
+    />
+    <BooleanFilter
       title={translate('Include silenced')}
       name="include_silenced"
       badgeValue={(value) =>
         value ? translate('Include silenced') : translate('All')
       }
       ellipsis={false}
-    >
-      <Field
-        name="include_silenced"
-        component={AwesomeCheckboxField}
-        label={translate('Include silenced')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
+      parse={(v) => v || undefined}
+    />
   </>
 );
 

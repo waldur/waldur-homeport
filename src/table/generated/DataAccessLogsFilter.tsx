@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   AccessorTypeEnum,
   DataAccessLogsListData,
@@ -9,11 +8,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { DateField } from '@/form/DateField';
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter, DateFilter } from '@/table';
 
 export const AccessorTypeOptions: AccessorTypeOption[] = [
   {
@@ -44,71 +41,43 @@ export interface AccessorTypeOption {
 
 export const DataAccessLogsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem title={translate('Start date')} name="start_date">
-      <Field
-        name="start_date"
-        component={DateField}
-        placeholder={translate('Start date')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('End date')} name="end_date">
-      <Field
-        name="end_date"
-        component={DateField}
-        placeholder={translate('End date')}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+    <DateFilter
+      title={translate('Start date')}
+      name="start_date"
+      placeholder={translate('Start date')}
+    />
+    <DateFilter
+      title={translate('End date')}
+      name="end_date"
+      placeholder={translate('End date')}
+    />
+    <SelectFilter
       title={translate('Accessor type')}
       name="accessor_type"
       getValueLabel={(value: AccessorTypeOption) => value?.label}
-    >
-      <Field
-        name="accessor_type"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Accessor type')}
-            options={AccessorTypeOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: AccessorTypeOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: AccessorTypeOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Accessor type')}
+      options={AccessorTypeOptions}
+      getOptionValue={(option: AccessorTypeOption) => String(option.value)}
+      getOptionLabel={(option: AccessorTypeOption) => option.label}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('User')}
       name="user"
       getValueLabel={(value: User) =>
         value?.full_name || value?.username || value?.email
       }
-    >
-      <Field
-        name="user"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('User')}
-            loadOptions={createLoadOptions(usersList, 'full_name', {
-              o: ['full_name'],
-            })}
-            defaultOptions
-            getOptionValue={(option: User) => String(option.uuid || '')}
-            getOptionLabel={(option: User) =>
-              String(option.full_name || option.username || option.email || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('User')}
+      loadOptions={createLoadOptions(usersList, 'full_name', {
+        o: ['full_name'],
+      })}
+      defaultOptions
+      getOptionValue={(option: User) => String(option.uuid || '')}
+      getOptionLabel={(option: User) =>
+        String(option.full_name || option.username || option.email || '')
+      }
+      isClearable={true}
+    />
   </>
 );
 

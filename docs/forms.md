@@ -139,6 +139,44 @@ export const NetworkPoolField = () => (
 );
 ```
 
+## Autonomous Table Filters (*Filter Pattern)
+
+Similar to the `*Group` pattern, Waldur provides autonomous components for table filters. These components combine `TableFilterItem`, React Final Form's `Field`, and an input component.
+
+They are created using the `withTableFilter` HOC and handle the toggle button, menu/sidebar layout, and form state binding autonomously.
+
+### Example: Table Filter
+
+```tsx
+import { SelectFilter, BooleanFilter } from '@/table';
+
+// Standard select filter
+<SelectFilter
+  name="state"
+  title={translate('State')}
+  options={stateOptions}
+/>
+
+// Boolean (checkbox) filter
+<BooleanFilter
+  name="is_active"
+  title={translate('Active only')}
+  parse={(v) => v || undefined} // Common pattern to remove filter when unchecked
+/>
+```
+
+### Available Autonomous Filters
+
+- `SelectFilter`: Standard selection
+- `AsyncSelectFilter`: Dynamic selection from API
+- `BooleanFilter`: Checkbox toggle
+- `StringFilter`: Custom text search
+- `DateFilter` / `DateTimeFilter`: Date/Time selection
+- `NumberFilter` / `NumberRangeFilter`: Numeric selection
+- `OfferingFilter`: Specialized offering selector
+- `ProjectFilter`: Specialized project selector
+- `ProviderFilter`: Specialized service provider selector
+
 ## Tooltips & Help Text
 
 Avoid creating manual tooltips or extra label wrappers. Use the built-in `help` or `tooltip` properties provided by the autonomous groups.

@@ -24,7 +24,7 @@ export const AccountingRunningField: FunctionComponent<
       onChange={(value) => prop.input.onChange(value)}
       options={getOptions()}
       isClearable={false}
-      className="accounting-period-selector metronic-select-container"
+      className="accounting-period-selector"
       {...props.reactSelectProps}
     />
   );

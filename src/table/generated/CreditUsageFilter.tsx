@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   InvoiceItemsListData,
   PublicOfferingDetails,
@@ -10,108 +9,58 @@ import {
   marketplaceResourcesList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
   props,
 ) => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Offering')}
       name="offering"
       getValueLabel={(value: PublicOfferingDetails) => value?.name}
-    >
-      <Field
-        name="offering"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Offering')}
-            loadOptions={createLoadOptions(
-              marketplacePublicOfferingsList,
-              'query',
-            )}
-            defaultOptions
-            getOptionValue={(option: PublicOfferingDetails) =>
-              String(option.uuid || '')
-            }
-            getOptionLabel={(option: PublicOfferingDetails) =>
-              String(option.name || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Offering')}
+      loadOptions={createLoadOptions(marketplacePublicOfferingsList, 'query')}
+      defaultOptions
+      getOptionValue={(option: PublicOfferingDetails) =>
+        String(option.uuid || '')
+      }
+      getOptionLabel={(option: PublicOfferingDetails) =>
+        String(option.name || '')
+      }
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Resource')}
       name="resource"
       getValueLabel={(value: Resource) => value?.name}
-    >
-      <Field
-        name="resource"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Resource')}
-            loadOptions={createLoadOptions(marketplaceResourcesList, 'query', {
-              customer_uuid: props.customerUUID,
-            })}
-            defaultOptions
-            getOptionValue={(option: Resource) =>
-              String(option.resource_uuid || '')
-            }
-            getOptionLabel={(option: Resource) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Resource')}
+      loadOptions={createLoadOptions(marketplaceResourcesList, 'query', {
+        customer_uuid: props.customerUUID,
+      })}
+      defaultOptions
+      getOptionValue={(option: Resource) => String(option.resource_uuid || '')}
+      getOptionLabel={(option: Resource) => String(option.name || '')}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Year')}
       name="year"
       getValueLabel={(value: any) => value?.label}
-    >
-      <Field
-        name="year"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Year')}
-            options={props.yearOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Year')}
+      options={props.yearOptions}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Month')}
       name="month"
       getValueLabel={(value: any) => value?.label}
-    >
-      <Field
-        name="month"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Month')}
-            options={props.monthOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Month')}
+      options={props.monthOptions}
+      isClearable={true}
+    />
   </>
 );
 

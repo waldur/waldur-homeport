@@ -1,12 +1,10 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { SupportIssuesListData } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const StatusOptions: StatusOption[] = [
   {
@@ -32,27 +30,16 @@ export interface StatusOption {
 }
 
 export const SupportIssuesFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Status')}
     name="status"
     getValueLabel={(value: StatusOption) => value?.label}
-  >
-    <Field
-      name="status"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Status')}
-          options={StatusOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: StatusOption) => String(option.value)}
-          getOptionLabel={(option: StatusOption) => option.label}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Status')}
+    options={StatusOptions}
+    getOptionValue={(option: StatusOption) => String(option.value)}
+    getOptionLabel={(option: StatusOption) => option.label}
+    isClearable={true}
+  />
 );
 
 export const SupportIssuesFilterFormId = 'SupportIssuesFilter';

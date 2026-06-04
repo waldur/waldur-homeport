@@ -1,11 +1,9 @@
 import { FC } from 'react';
-import { Field } from 'react-final-form';
 
-import { AccountingPeriodFieldComponent } from '@/customer/list/AccountingPeriodField';
-import { StringField } from '@/form';
+import { AccountingPeriodFilter } from '@/customer/list/AccountingPeriodFilter';
 import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { StringFilter } from '@/table';
 
 export const RESOURCE_USAGE_FILTER_FORM_ID = 'ResourceUsageFilterForm';
 
@@ -14,30 +12,17 @@ const options = makeLastTwelveMonthsFilterPeriods();
 export const ResourceUsageFilter: FC = () => {
   return (
     <>
-      <TableFilterItem
+      <StringFilter
         name="username"
         title={translate('Username')}
         instantApply={false}
-      >
-        <Field
-          name="username"
-          placeholder={translate('Search by username')}
-          component={StringField}
-        />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Date')}
+        placeholder={translate('Search by username')}
+      />
+      <AccountingPeriodFilter
         name="billing_period"
-        badgeValue={(value) => value?.label}
-        ellipsis={false}
-      >
-        <Field
-          name="billing_period"
-          component={AccountingPeriodFieldComponent}
-          options={options}
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
+        title={translate('Date')}
+        options={options}
+      />
     </>
   );
 };

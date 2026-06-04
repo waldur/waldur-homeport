@@ -13,7 +13,7 @@ import { NoResult } from '@/navigation/header/search/NoResult';
 import { ReportingTitle } from '../ReportingTitle';
 
 import { CustomerAcquisitionTrendChart } from './CustomerAcquisitionTrendChart';
-import { ProviderFilter } from './ProviderFilter';
+import { ProviderSelector } from './ProviderSelector';
 import { TopCustomersByResources } from './TopCustomersByResources';
 import { TopCustomersByRevenue } from './TopCustomersByRevenue';
 
@@ -90,7 +90,7 @@ export const ProviderCustomersPage: FC = () => {
                   {translate('Provider')}:
                 </label>
                 <div style={{ minWidth: 200 }}>
-                  <ProviderFilter />
+                  <ProviderSelector />
                 </div>
               </div>
             </ReportingTitle>

@@ -60,14 +60,14 @@ import { UsageReportVis } from './UsageReportVis';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-interface ProjectFilterDialogProps {
+interface ProjectAutocompleteDialogProps {
   projects: OpenPortalProject[];
   selected: Set<string>;
   onConfirm: (next: Set<string>) => void;
   onClose: () => void;
 }
 
-const ProjectFilterDialog: FC<ProjectFilterDialogProps> = ({
+const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
   projects,
   selected,
   onConfirm,
@@ -1105,7 +1105,7 @@ export const OrganisationReportsTab: FC = () => {
 
       {/* ── Project filter dialog ─────────────────────────────────────── */}
       {dialogOpen && projects && (
-        <ProjectFilterDialog
+        <ProjectAutocompleteDialog
           projects={projects}
           selected={effectiveSelected}
           onConfirm={(next) => {

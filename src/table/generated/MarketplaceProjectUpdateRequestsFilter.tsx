@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   Customer,
   MarketplaceProjectUpdateRequestsListData,
@@ -9,10 +8,9 @@ import {
   customersList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const RemoteProjectUpdateRequestStateOptions: RemoteProjectUpdateRequestStateOption[] =
   [
@@ -45,56 +43,34 @@ export interface RemoteProjectUpdateRequestStateOption {
 export const MarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
   () => (
     <>
-      <TableFilterItem
+      <SelectFilter
         title={translate('State')}
         name="state"
         getValueLabel={(value: RemoteProjectUpdateRequestStateOption) =>
           value?.label
         }
-      >
-        <Field
-          name="state"
-          component={(fieldProps) => (
-            <Select
-              placeholder={translate('State')}
-              options={RemoteProjectUpdateRequestStateOptions}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              getOptionValue={(option: RemoteProjectUpdateRequestStateOption) =>
-                String(option.value)
-              }
-              getOptionLabel={(option: RemoteProjectUpdateRequestStateOption) =>
-                option.label
-              }
-              isClearable={true}
-              isMulti={true}
-              variant="tableFilter"
-            />
-          )}
-        />
-      </TableFilterItem>
-      <TableFilterItem
+        placeholder={translate('State')}
+        options={RemoteProjectUpdateRequestStateOptions}
+        getOptionValue={(option: RemoteProjectUpdateRequestStateOption) =>
+          String(option.value)
+        }
+        getOptionLabel={(option: RemoteProjectUpdateRequestStateOption) =>
+          option.label
+        }
+        isClearable={true}
+        isMulti={true}
+      />
+      <AsyncSelectFilter
         title={translate('Organization')}
         name="organization"
         getValueLabel={(value: Customer) => value?.name}
-      >
-        <Field
-          name="organization"
-          component={(fieldProps) => (
-            <AsyncSelect
-              placeholder={translate('Organization')}
-              loadOptions={createLoadOptions(customersList, 'query')}
-              defaultOptions
-              getOptionValue={(option: Customer) => String(option.uuid || '')}
-              getOptionLabel={(option: Customer) => String(option.name || '')}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              isClearable={true}
-              variant="tableFilter"
-            />
-          )}
-        />
-      </TableFilterItem>
+        placeholder={translate('Organization')}
+        loadOptions={createLoadOptions(customersList, 'query')}
+        defaultOptions
+        getOptionValue={(option: Customer) => String(option.uuid || '')}
+        getOptionLabel={(option: Customer) => String(option.name || '')}
+        isClearable={true}
+      />
     </>
   );
 

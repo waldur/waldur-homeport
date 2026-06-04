@@ -12,7 +12,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures, MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
-import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { useTitle } from '@/navigation/title';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -68,7 +68,7 @@ const OrganizationsListTable: FunctionComponent = () => {
   });
 
   const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources();
+    useOrganizationAndProjectAutocompletesForResources();
 
   const onClickDetails = (row) =>
     syncResourceFilters({ organization: row, project: null });

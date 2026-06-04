@@ -1,20 +1,15 @@
 import { FactoryIcon } from '@phosphor-icons/react';
-import { FieldValidator } from 'final-form';
-import React, { useCallback, useMemo } from 'react';
-import { Field } from 'react-final-form';
+import { FC, useMemo } from 'react';
 
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { projectAutocomplete } from '@/marketplace/common/autocompletes';
+import { AsyncSelectFilter } from '@/table';
 
 interface ProjectFilterProps {
   customer_uuid?: string;
-  placeholder?: string;
-  isDisabled?: boolean;
-  reactSelectProps?: any;
-  validator?: FieldValidator<any>;
+  [key: string]: any;
 }
 
 const getOptionLabel = (option) => (
@@ -29,37 +24,25 @@ const getOptionLabel = (option) => (
   </div>
 );
 
-const getOptionValue = (option) => option.uuid;
-const noOptionsMessage = () => translate('No projects');
-
-export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => {
-  const { placeholder, customer_uuid, isDisabled, reactSelectProps } = props;
-  const loadProjects = useMemo(
+export const ProjectFilter: FC<ProjectFilterProps> = ({
+  customer_uuid,
+  ...props
+}) => {
+  const loadOptions = useMemo(
     () => projectAutocomplete(customer_uuid),
     [customer_uuid],
   );
 
-  const renderField = useCallback(
-    (fieldProps) => (
-      <AsyncSelect
-        placeholder={placeholder || translate('Select project...')}
-        loadOptions={loadProjects}
-        defaultOptions
-        getOptionValue={getOptionValue}
-        getOptionLabel={getOptionLabel as any}
-        value={fieldProps.input.value}
-        onChange={(value) => fieldProps.input.onChange(value)}
-        noOptionsMessage={noOptionsMessage}
-        isClearable={true}
-        isDisabled={isDisabled}
-        inputId="project-selector-input"
-        {...reactSelectProps}
-      />
-    ),
-    [placeholder, customer_uuid, isDisabled, reactSelectProps],
-  );
-
   return (
-    <Field name="project" validate={props.validator} component={renderField} />
+    <AsyncSelectFilter
+      title={translate('Project')}
+      name="project"
+      badgeValue={(value) => value?.name}
+      placeholder={translate('Select project...')}
+      loadOptions={loadOptions}
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={getOptionLabel}
+      {...props}
+    />
   );
 };

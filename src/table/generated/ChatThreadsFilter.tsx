@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   ChatThreadsListData,
   InjectionSeverityEnum,
@@ -9,13 +8,15 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { DateField } from '@/form/DateField';
-import { RangeNumberField } from '@/form/RangeNumberField';
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import {
+  AsyncSelectFilter,
+  SelectFilter,
+  BooleanFilter,
+  DateFilter,
+  NumberRangeFilter,
+} from '@/table';
 
 export const InjectionSeverityOptions: InjectionSeverityOption[] = [
   {
@@ -55,135 +56,86 @@ const formatRangeBadge = (value?: { min?: number; max?: number }) => {
 
 export const ChatThreadsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem title={translate('Created')} name="created">
-      <Field
-        name="created"
-        component={DateField}
-        placeholder={translate('Created')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Modified')} name="modified">
-      <Field
-        name="modified"
-        component={DateField}
-        placeholder={translate('Modified')}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+    <DateFilter
+      title={translate('Created')}
+      name="created"
+      placeholder={translate('Created')}
+    />
+    <DateFilter
+      title={translate('Modified')}
+      name="modified"
+      placeholder={translate('Modified')}
+    />
+    <AsyncSelectFilter
       title={translate('User')}
       name="user"
       getValueLabel={(value: User) =>
         value?.full_name || value?.username || value?.email
       }
-    >
-      <Field
-        name="user"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('User')}
-            loadOptions={createLoadOptions(usersList, 'full_name')}
-            defaultOptions
-            getOptionValue={(option: User) => String(option.uuid || '')}
-            getOptionLabel={(option: User) =>
-              String(option.full_name || option.username || option.email || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('User')}
+      loadOptions={createLoadOptions(usersList, 'full_name')}
+      defaultOptions
+      getOptionValue={(option: User) => String(option.uuid || '')}
+      getOptionLabel={(option: User) =>
+        String(option.full_name || option.username || option.email || '')
+      }
+      isClearable={true}
+    />
+    <BooleanFilter
       title={translate('Is flagged')}
       name="is_flagged"
       badgeValue={(value) =>
         value ? translate('Is flagged') : translate('All')
       }
       ellipsis={false}
-    >
-      <Field
-        name="is_flagged"
-        component={AwesomeCheckboxField}
-        label={translate('Is flagged')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      parse={(v) => v || undefined}
+    />
+    <SelectFilter
       title={translate('Max severity')}
       name="max_severity"
       getValueLabel={(value: InjectionSeverityOption) => value?.label}
-    >
-      <Field
-        name="max_severity"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Max severity')}
-            options={InjectionSeverityOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: InjectionSeverityOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: InjectionSeverityOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Max severity')}
+      options={InjectionSeverityOptions}
+      getOptionValue={(option: InjectionSeverityOption) => String(option.value)}
+      getOptionLabel={(option: InjectionSeverityOption) => option.label}
+      isClearable={true}
+    />
+    <BooleanFilter
       title={translate('Is archived')}
       name="is_archived"
       badgeValue={(value) =>
         value ? translate('Is archived') : translate('All')
       }
       ellipsis={false}
-    >
-      <Field
-        name="is_archived"
-        component={AwesomeCheckboxField}
-        label={translate('Is archived')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      parse={(v) => v || undefined}
+    />
+    <BooleanFilter
       title={translate('Has feedback')}
       name="has_feedback"
       badgeValue={(value) =>
         value ? translate('Has feedback') : translate('All')
       }
       ellipsis={false}
-    >
-      <Field
-        name="has_feedback"
-        component={AwesomeCheckboxField}
-        label={translate('Has feedback')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      parse={(v) => v || undefined}
+    />
+    <NumberRangeFilter
       title={translate('Input tokens')}
       name="input_tokens_range"
       badgeValue={formatRangeBadge}
-    >
-      <Field name="input_tokens_range" component={RangeNumberField} min={0} />
-    </TableFilterItem>
-    <TableFilterItem
+      min={0}
+    />
+    <NumberRangeFilter
       title={translate('Output tokens')}
       name="output_tokens_range"
       badgeValue={formatRangeBadge}
-    >
-      <Field name="output_tokens_range" component={RangeNumberField} min={0} />
-    </TableFilterItem>
-    <TableFilterItem
+      min={0}
+    />
+    <NumberRangeFilter
       title={translate('Total tokens')}
       name="total_tokens_range"
       badgeValue={formatRangeBadge}
-    >
-      <Field name="total_tokens_range" component={RangeNumberField} min={0} />
-    </TableFilterItem>
+      min={0}
+    />
   </>
 );
 

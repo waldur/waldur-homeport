@@ -1,12 +1,10 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { MarketplacePublicOfferingsListData } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const UserHasConsentOptions: UserHasConsentOption[] = [
   {
@@ -24,29 +22,16 @@ export interface UserHasConsentOption {
 }
 
 export const UserTosFiltersFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Consent status')}
     name="user_has_consent"
     getValueLabel={(value: UserHasConsentOption) => value?.label}
-  >
-    <Field
-      name="user_has_consent"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Consent status')}
-          options={UserHasConsentOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: UserHasConsentOption) =>
-            String(option.value)
-          }
-          getOptionLabel={(option: UserHasConsentOption) => option.label}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Consent status')}
+    options={UserHasConsentOptions}
+    getOptionValue={(option: UserHasConsentOption) => String(option.value)}
+    getOptionLabel={(option: UserHasConsentOption) => option.label}
+    isClearable={true}
+  />
 );
 
 export const UserTosFiltersFilterFormId = 'UserTosFiltersFilter';

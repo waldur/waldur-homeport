@@ -1,8 +1,7 @@
-import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
+import { FC } from 'react';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { SelectFilter } from '@/table';
 
 export const getOrderTypeOptions = () => [
   { value: 'Create', label: translate('Create') },
@@ -10,20 +9,16 @@ export const getOrderTypeOptions = () => [
   { value: 'Terminate', label: translate('Terminate') },
 ];
 
-export const OrderTypeFilter: FunctionComponent = () => {
+export const OrderTypeFilter: FC<any> = (props) => {
   return (
-    <Field
+    <SelectFilter
+      title={translate('Type')}
       name="type"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Select type...')}
-          options={getOrderTypeOptions()}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
+      badgeValue={(value) => value?.label}
+      placeholder={translate('Select type...')}
+      options={getOrderTypeOptions()}
+      isClearable={true}
+      {...props}
     />
   );
 };

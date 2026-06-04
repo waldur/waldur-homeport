@@ -11,7 +11,7 @@ import { useOrdersStats } from '@/reporting/orders/useOrdersStats';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import { ProviderFilter } from './ProviderFilter';
+import { ProviderSelector } from './ProviderSelector';
 
 const ProviderOrdersPageContent: FC<{
   days: number;
@@ -29,7 +29,7 @@ const ProviderOrdersPageContent: FC<{
         {translate('Provider')}:
       </label>
       <div style={{ minWidth: 200 }}>
-        <ProviderFilter />
+        <ProviderSelector />
       </div>
     </div>
   );

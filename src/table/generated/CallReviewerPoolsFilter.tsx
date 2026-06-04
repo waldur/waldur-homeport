@@ -1,15 +1,13 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   CallReviewerPoolsListData,
   InvitationStatusEnum,
 } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const InvitationStatusOptions: InvitationStatusOption[] = [
   {
@@ -35,30 +33,17 @@ export interface InvitationStatusOption {
 }
 
 export const CallReviewerPoolsFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Status')}
     name="invitation_status"
     getValueLabel={(value: InvitationStatusOption) => value?.label}
-  >
-    <Field
-      name="invitation_status"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Status')}
-          options={InvitationStatusOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: InvitationStatusOption) =>
-            String(option.value)
-          }
-          getOptionLabel={(option: InvitationStatusOption) => option.label}
-          isClearable={true}
-          isMulti={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Status')}
+    options={InvitationStatusOptions}
+    getOptionValue={(option: InvitationStatusOption) => String(option.value)}
+    getOptionLabel={(option: InvitationStatusOption) => option.label}
+    isClearable={true}
+    isMulti={true}
+  />
 );
 
 export const CallReviewerPoolsFilterFormId = 'CallReviewerPoolsFilter';

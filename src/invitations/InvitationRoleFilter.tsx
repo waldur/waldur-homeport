@@ -1,30 +1,16 @@
-import { Field } from 'react-final-form';
-
-import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { roleAutocomplete } from '@/permissions/utils';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter } from '@/table';
 
 export const InvitationRoleFilter = () => (
-  <TableFilterItem
+  <AsyncSelectFilter
     title={translate('Role')}
     name="role"
     badgeValue={(value) => value?.description || value?.name}
-  >
-    <Field
-      name="role"
-      component={(fieldProps) => (
-        <AsyncSelect
-          placeholder={translate('Select role...')}
-          loadOptions={roleAutocomplete}
-          getOptionValue={(option) => option.uuid}
-          getOptionLabel={(option) => option.description || option.name}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Select role...')}
+    loadOptions={roleAutocomplete}
+    getOptionValue={(option) => option.uuid}
+    getOptionLabel={(option) => option.description || option.name}
+    isClearable={true}
+  />
 );

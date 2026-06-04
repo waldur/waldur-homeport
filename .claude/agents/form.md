@@ -166,6 +166,37 @@ catch (e) {
 </Form>
 ```
 
+## Table Filters
+
+### Autonomous Filters (*Filter Pattern)
+
+Similar to `*Group` components, autonomous filters combine `TableFilterItem`, `Field`, and an input component. They handle the toggle button and layout autonomously.
+
+- **`SelectFilter`**: `@/table` - Standard selection
+- **`AsyncSelectFilter`**: `@/table` - API selection
+- **`BooleanFilter`**: `@/table` - Checkbox toggle
+- **`StringFilter`**: `@/table` - Text search
+- **`OfferingFilter`**: `@/marketplace/offerings/details/OfferingFilter` - Offering selector
+- **`ProjectFilter`**: `@/marketplace/resources/list/ProjectFilter` - Project selector
+- **`ProviderFilter`**: `@/marketplace/orders/ProviderFilter` - Service provider selector
+
+### Usage Pattern
+
+```tsx
+import { SelectFilter, BooleanFilter } from '@/table';
+
+<SelectFilter
+  name="state"
+  title={translate('State')}
+  options={options}
+/>
+<BooleanFilter
+  name="is_active"
+  title={translate('Active only')}
+  parse={(v) => v || undefined}
+/>
+```
+
 ## Quality Assurance
 
 ### Essential Validation Commands

@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   Customer,
   MarketplaceStatsOpenstackInstancesListData,
@@ -10,11 +9,9 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
-import { StringField } from '@/form';
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter, StringFilter } from '@/table';
 
 export const RuntimeStateOptions: RuntimeStateOption[] = [
   {
@@ -47,96 +44,55 @@ export const MarketplaceStatsOpenstackInstancesFilter: FunctionComponent<
   MarketplaceStatsOpenstackInstancesFilterProps
 > = (props) => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Organization')}
       name="organization"
       getValueLabel={(value: Customer) => value?.name}
-    >
-      <Field
-        name="organization"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Organization')}
-            loadOptions={createLoadOptions(customersList, 'query')}
-            defaultOptions
-            getOptionValue={(option: Customer) => String(option.uuid || '')}
-            getOptionLabel={(option: Customer) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Organization')}
+      loadOptions={createLoadOptions(customersList, 'query')}
+      defaultOptions
+      getOptionValue={(option: Customer) => String(option.uuid || '')}
+      getOptionLabel={(option: Customer) => String(option.name || '')}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Project')}
       name="project"
       getValueLabel={(value: Project) => value?.name}
-    >
-      <Field
-        name="project"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Project')}
-            loadOptions={createLoadOptions(projectsList, 'query', {
-              customer: props.organizationUuid,
-            })}
-            defaultOptions
-            getOptionValue={(option: Project) => String(option.uuid || '')}
-            getOptionLabel={(option: Project) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Project')}
+      loadOptions={createLoadOptions(projectsList, 'query', {
+        customer: props.organizationUuid,
+      })}
+      defaultOptions
+      getOptionValue={(option: Project) => String(option.uuid || '')}
+      getOptionLabel={(option: Project) => String(option.name || '')}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Runtime state')}
       name="runtime_state"
       getValueLabel={(value: RuntimeStateOption) => value?.label}
-    >
-      <Field
-        name="runtime_state"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Runtime state')}
-            options={RuntimeStateOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: RuntimeStateOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: RuntimeStateOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Hypervisor')} name="hypervisor_hostname">
-      <Field
-        name="hypervisor_hostname"
-        component={StringField}
-        placeholder={translate('Hypervisor hostname...')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Flavor')} name="flavor_name">
-      <Field
-        name="flavor_name"
-        component={StringField}
-        placeholder={translate('Flavor name...')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Image')} name="image_name">
-      <Field
-        name="image_name"
-        component={StringField}
-        placeholder={translate('Image name...')}
-      />
-    </TableFilterItem>
+      placeholder={translate('Runtime state')}
+      options={RuntimeStateOptions}
+      getOptionValue={(option: RuntimeStateOption) => String(option.value)}
+      getOptionLabel={(option: RuntimeStateOption) => option.label}
+      isClearable={true}
+    />
+    <StringFilter
+      title={translate('Hypervisor')}
+      name="hypervisor_hostname"
+      placeholder={translate('Hypervisor hostname...')}
+    />
+    <StringFilter
+      title={translate('Flavor')}
+      name="flavor_name"
+      placeholder={translate('Flavor name...')}
+    />
+    <StringFilter
+      title={translate('Image')}
+      name="image_name"
+      placeholder={translate('Image name...')}
+    />
   </>
 );
 

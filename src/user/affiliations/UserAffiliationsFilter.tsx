@@ -1,14 +1,12 @@
 import { FC } from 'react';
-import { Field } from 'react-final-form';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { StringField } from '@/form';
 import { translate } from '@/i18n';
 import { InvitationRoleFilter } from '@/invitations/InvitationRoleFilter';
 import { InvitationScopeTypeFilter } from '@/invitations/InvitationScopeTypeFilter';
 import { ROLE_TYPES } from '@/permissions/constants';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { StringFilter } from '@/table';
 
 export const UserAffiliationsFilter: FC = () => {
   const hideCallScope = !isFeatureVisible(
@@ -26,18 +24,13 @@ export const UserAffiliationsFilter: FC = () => {
   return (
     <>
       <InvitationScopeTypeFilter options={SCOPE_TYPE_OPTIONS} />
-      <TableFilterItem
+      <StringFilter
         title={translate('Scope name')}
         name="scope_name"
         getValueLabel={(value) => value}
-      >
-        <Field
-          name="scope_name"
-          component={StringField}
-          variant="tableFilter"
-          placeholder={translate('Enter scope name')}
-        />
-      </TableFilterItem>
+        variant="tableFilter"
+        placeholder={translate('Enter scope name')}
+      />
       <InvitationRoleFilter />
     </>
   );

@@ -8,14 +8,14 @@ import {
 
 import { Link } from '@/core/Link';
 import { useModal } from '@/modal/actions';
-import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 
 import { getResourceFilterFromSearchItem } from './utils';
 
 export const RecentSearchItem = ({ item }) => {
   const { closeDialog } = useModal();
   const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources();
+    useOrganizationAndProjectAutocompletesForResources();
 
   if (!item.to) return null;
 

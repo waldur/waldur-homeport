@@ -1,17 +1,15 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   FinancialReportsListData,
   ServiceProvider,
   marketplaceServiceProvidersList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const AccountingIsRunningOptions: AccountingIsRunningOption[] = [
   {
@@ -36,77 +34,44 @@ export const FinancialReportsFilter: FunctionComponent<
   FinancialReportsFilterProps
 > = (props) => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Service provider')}
       name="customer"
       getValueLabel={(value: ServiceProvider) => value?.customer_name}
-    >
-      <Field
-        name="customer"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Service provider')}
-            loadOptions={createLoadOptions(
-              marketplaceServiceProvidersList,
-              'customer_keyword',
-            )}
-            defaultOptions
-            getOptionValue={(option: ServiceProvider) =>
-              String(option.customer_uuid || '')
-            }
-            getOptionLabel={(option: ServiceProvider) =>
-              String(option.customer_name || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Service provider')}
+      loadOptions={createLoadOptions(
+        marketplaceServiceProvidersList,
+        'customer_keyword',
+      )}
+      defaultOptions
+      getOptionValue={(option: ServiceProvider) =>
+        String(option.customer_uuid || '')
+      }
+      getOptionLabel={(option: ServiceProvider) =>
+        String(option.customer_name || '')
+      }
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Accounting period')}
       name="accounting_period"
       getValueLabel={(value: any) => value?.label}
-    >
-      <Field
-        name="accounting_period"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Accounting period')}
-            options={props.accountingPeriods}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Accounting period')}
+      options={props.accountingPeriods}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Accounting is running')}
       name="accounting_is_running"
       getValueLabel={(value: AccountingIsRunningOption) => value?.label}
-    >
-      <Field
-        name="accounting_is_running"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Show with running accounting')}
-            options={AccountingIsRunningOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: AccountingIsRunningOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: AccountingIsRunningOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Show with running accounting')}
+      options={AccountingIsRunningOptions}
+      getOptionValue={(option: AccountingIsRunningOption) =>
+        String(option.value)
+      }
+      getOptionLabel={(option: AccountingIsRunningOption) => option.label}
+      isClearable={true}
+    />
   </>
 );
 

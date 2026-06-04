@@ -1,12 +1,10 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { AdminArrowBillingSyncsListData } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const StateOptions: StateOption[] = [
   {
@@ -35,65 +33,32 @@ export const AdminArrowBillingSyncsFilter: FunctionComponent<
   AdminArrowBillingSyncsFilterProps
 > = (props) => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('State')}
       name="state"
       getValueLabel={(value: StateOption) => value?.label}
-    >
-      <Field
-        name="state"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('State')}
-            options={StateOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: StateOption) => String(option.value)}
-            getOptionLabel={(option: StateOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('State')}
+      options={StateOptions}
+      getOptionValue={(option: StateOption) => String(option.value)}
+      getOptionLabel={(option: StateOption) => option.label}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Period from')}
       name="report_period_from"
       getValueLabel={(value: any) => value?.label}
-    >
-      <Field
-        name="report_period_from"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Period from')}
-            options={props.billingPeriods}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Period from')}
+      options={props.billingPeriods}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Period to')}
       name="report_period_to"
       getValueLabel={(value: any) => value?.label}
-    >
-      <Field
-        name="report_period_to"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Period to')}
-            options={props.billingPeriods}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Period to')}
+      options={props.billingPeriods}
+      isClearable={true}
+    />
   </>
 );
 

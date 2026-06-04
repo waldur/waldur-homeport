@@ -1,18 +1,14 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   SystemLogLevelEnum,
   SystemLogSourceEnum,
   SystemLogsListData,
 } from 'waldur-js-client';
 
-import { StringField } from '@/form';
-import { DateField } from '@/form/DateField';
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter, StringFilter, DateFilter } from '@/table';
 
 export const SystemLogLevelOptions: SystemLogLevelOption[] = [
   {
@@ -58,80 +54,46 @@ export interface SystemLogSourceOption {
 
 export const SystemLogsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('Source')}
       name="source"
       getValueLabel={(value: SystemLogSourceOption) => value?.label}
-    >
-      <Field
-        name="source"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Source')}
-            options={SystemLogSourceOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: SystemLogSourceOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: SystemLogSourceOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Source')}
+      options={SystemLogSourceOptions}
+      getOptionValue={(option: SystemLogSourceOption) => String(option.value)}
+      getOptionLabel={(option: SystemLogSourceOption) => option.label}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Level')}
       name="level"
       getValueLabel={(value: SystemLogLevelOption) => value?.label}
-    >
-      <Field
-        name="level"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Level')}
-            options={SystemLogLevelOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: SystemLogLevelOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: SystemLogLevelOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Instance')} name="instance">
-      <Field
-        name="instance"
-        component={StringField}
-        placeholder={translate('Instance')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Logger name')} name="logger_name">
-      <Field
-        name="logger_name"
-        component={StringField}
-        placeholder={translate('Logger name')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Start date')} name="start_date">
-      <Field
-        name="start_date"
-        component={DateField}
-        placeholder={translate('Start date')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('End date')} name="end_date">
-      <Field
-        name="end_date"
-        component={DateField}
-        placeholder={translate('End date')}
-      />
-    </TableFilterItem>
+      placeholder={translate('Level')}
+      options={SystemLogLevelOptions}
+      getOptionValue={(option: SystemLogLevelOption) => String(option.value)}
+      getOptionLabel={(option: SystemLogLevelOption) => option.label}
+      isClearable={true}
+    />
+    <StringFilter
+      title={translate('Instance')}
+      name="instance"
+      placeholder={translate('Instance')}
+    />
+    <StringFilter
+      title={translate('Logger name')}
+      name="logger_name"
+      placeholder={translate('Logger name')}
+    />
+    <DateFilter
+      title={translate('Start date')}
+      name="start_date"
+      placeholder={translate('Start date')}
+    />
+    <DateFilter
+      title={translate('End date')}
+      name="end_date"
+      placeholder={translate('End date')}
+    />
   </>
 );
 

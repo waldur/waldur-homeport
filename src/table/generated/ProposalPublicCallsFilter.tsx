@@ -1,13 +1,10 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { CallStates, ProposalPublicCallsListData } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter, BooleanFilter } from '@/table';
 
 export const CallStatesOptions: CallStatesOption[] = [
   {
@@ -30,41 +27,24 @@ export interface CallStatesOption {
 
 export const ProposalPublicCallsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('State')}
       name="state"
       getValueLabel={(value: CallStatesOption) => value?.label}
-    >
-      <Field
-        name="state"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('State')}
-            options={CallStatesOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: CallStatesOption) => String(option.value)}
-            getOptionLabel={(option: CallStatesOption) => option.label}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('State')}
+      options={CallStatesOptions}
+      getOptionValue={(option: CallStatesOption) => String(option.value)}
+      getOptionLabel={(option: CallStatesOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <BooleanFilter
       title={translate('Active round')}
       name="has_active_round"
       badgeValue={(value) => (value ? translate('Yes') : translate('All'))}
       ellipsis={false}
-    >
-      <Field
-        name="has_active_round"
-        component={AwesomeCheckboxField}
-        label={translate('Active round')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
+      parse={(v) => v || undefined}
+    />
   </>
 );
 

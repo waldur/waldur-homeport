@@ -1,9 +1,7 @@
 import { FC } from 'react';
-import { Field } from 'react-final-form';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const MY_INVITATIONS_FILTER_FORM_ID = 'MyInvitationsFilter';
 
@@ -15,19 +13,11 @@ const INVITATION_STATUS_OPTIONS = [
 ];
 
 export const MyInvitationsFilter: FC = () => (
-  <TableFilterItem title={translate('Status')} name="invitation_status">
-    <Field
-      name="invitation_status"
-      render={(fieldProps) => (
-        <Select
-          placeholder={translate('All statuses')}
-          options={INVITATION_STATUS_OPTIONS}
-          value={fieldProps.input.value}
-          onChange={fieldProps.input.onChange}
-          isClearable
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+  <SelectFilter
+    title={translate('Status')}
+    name="invitation_status"
+    placeholder={translate('All statuses')}
+    options={INVITATION_STATUS_OPTIONS}
+    isClearable
+  />
 );

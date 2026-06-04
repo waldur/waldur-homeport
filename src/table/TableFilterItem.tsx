@@ -23,7 +23,7 @@ import { TableFilterContext } from './FilterContextProvider';
 
 const DELAY_WAITING_FOR_FILTER = 50; // ms
 
-interface TableFilterItem {
+export interface TableFilterItemProps {
   title: string;
   name?: string;
   badgeValue?(value: any): string | number;
@@ -36,7 +36,7 @@ interface TableFilterItem {
   instantApply?: boolean;
 }
 
-const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
+const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   badgeValue = (value) => {
     if (value) {
       if (value instanceof Array) {
@@ -165,7 +165,7 @@ export const TableSidebarFilterValues = ({
   ) : null;
 };
 
-const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
+const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   getValueLabel = (value) => {
     if (value) {
       if (Array.isArray(value)) {
@@ -250,7 +250,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
   );
 };
 
-const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
+const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   getValueLabel = (value) => {
     if (value) {
       if (Array.isArray(value)) {
@@ -444,7 +444,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
 };
 
 /** Please put only one child in each table filter item. */
-export const TableFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
+export const TableFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   ellipsis = true,
   ...props
 }) => {

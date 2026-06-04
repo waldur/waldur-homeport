@@ -1,15 +1,13 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   AdminAnnouncementTypeEnum,
   AdminAnnouncementsListData,
 } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const AdminAnnouncementTypeOptions: AdminAnnouncementTypeOption[] = [
   {
@@ -47,53 +45,29 @@ export interface IsActiveOption {
 
 export const AdminAnnouncementsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('Type')}
       name="type"
       getValueLabel={(value: AdminAnnouncementTypeOption) => value?.label}
-    >
-      <Field
-        name="type"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Type')}
-            options={AdminAnnouncementTypeOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: AdminAnnouncementTypeOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: AdminAnnouncementTypeOption) =>
-              option.label
-            }
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Type')}
+      options={AdminAnnouncementTypeOptions}
+      getOptionValue={(option: AdminAnnouncementTypeOption) =>
+        String(option.value)
+      }
+      getOptionLabel={(option: AdminAnnouncementTypeOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <SelectFilter
       title={translate('Status')}
       name="is_active"
       getValueLabel={(value: IsActiveOption) => value?.label}
-    >
-      <Field
-        name="is_active"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Status')}
-            options={IsActiveOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: IsActiveOption) => String(option.value)}
-            getOptionLabel={(option: IsActiveOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Status')}
+      options={IsActiveOptions}
+      getOptionValue={(option: IsActiveOption) => String(option.value)}
+      getOptionLabel={(option: IsActiveOption) => option.label}
+      isClearable={true}
+    />
   </>
 );
 

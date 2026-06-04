@@ -23,7 +23,7 @@ import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import { ProviderFilter } from './ProviderFilter';
+import { ProviderSelector } from './ProviderSelector';
 import { ResourceCreationTrendChart } from './ResourceCreationTrendChart';
 import { ResourcesByStateChart } from './ResourcesByStateChart';
 
@@ -177,7 +177,7 @@ export const ProviderResourcesPage: FC = () => {
                   {translate('Provider')}:
                 </label>
                 <div style={{ minWidth: 200 }}>
-                  <ProviderFilter />
+                  <ProviderSelector />
                 </div>
               </div>
             </ReportingTitle>

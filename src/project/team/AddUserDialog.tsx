@@ -13,8 +13,7 @@ import {
 import { required } from '@/core/validators';
 import { OrganizationProjectSelectField } from '@/customer/team/OrganizationProjectSelectField';
 import { usersAutocomplete } from '@/customer/team/utils';
-import { SubmitButton, BooleanGroup, AsyncSelectGroup } from '@/form';
-import { FormGroup } from '@/form';
+import { AsyncSelectGroup, BooleanGroup, SubmitButton } from '@/form';
 import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
 import { RestrictionsInfoCard } from '@/invitations/actions/RestrictionsInfoCard';
@@ -251,31 +250,30 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
                 level === 'project' ? resolvedProject : values.project || null
               }
             />
-            <FormGroup label={translate('User')} required>
-              <AsyncSelectGroup
-                name="user"
-                key={values.showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
-                placeholder={translate('Select user...')}
-                loadOptions={(query, prevOptions, page) =>
-                  loadUsers(
-                    query,
-                    prevOptions,
-                    page,
-                    values.showAllUsers || false,
-                  )
-                }
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={getOptionLabel}
-                components={{ Option: UserListOptionInline }}
-                noOptionsMessage={() =>
-                  translate(
-                    'No users found. You can only see users from projects you belong to. Use "Invite by mail" to add new users.',
-                  )
-                }
-                required={true}
-                validate={required}
-              />
-            </FormGroup>
+            <AsyncSelectGroup
+              name="user"
+              required
+              label={translate('User')}
+              key={values.showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
+              placeholder={translate('Select user...')}
+              loadOptions={(query, prevOptions, page) =>
+                loadUsers(
+                  query,
+                  prevOptions,
+                  page,
+                  values.showAllUsers || false,
+                )
+              }
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={getOptionLabel}
+              components={{ Option: UserListOptionInline }}
+              noOptionsMessage={() =>
+                translate(
+                  'No users found. You can only see users from projects you belong to. Use "Invite by mail" to add new users.',
+                )
+              }
+              validate={required}
+            />
 
             {currentUser.is_staff && (
               <BooleanGroup

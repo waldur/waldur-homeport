@@ -64,7 +64,7 @@ const _setFilter = ({
   );
 };
 
-export const useOrganizationAndProjectFiltersForResources = (
+export const useOrganizationAndProjectAutocompletesForResources = (
   from: 'all-resources' | 'category-resources' = null,
 ): {
   syncResourceFilters: (formData: ResourceFilterValues) => void;
