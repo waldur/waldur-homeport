@@ -769,6 +769,12 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'JIRA_WEBHOOK_SHARED_SECRET',
+        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound JIRA webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour). Configure your JIRA automation/webhook to send the same value to enable authentication.'),
+        default: '',
+        type: 'secret_field',
+      },
     ],
   },
   {
@@ -816,6 +822,12 @@ export const SettingsDescription = [
         description: translate('Time in minutes. Time in minutes while comment deletion is available <https://github.com/zammad/zammad/issues/2687/>, <https://github.com/zammad/zammad/issues/3086/>'),
         default: 5,
         type: 'integer',
+      },
+      {
+        key: 'ZAMMAD_WEBHOOK_SHARED_SECRET',
+        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound Zammad webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).'),
+        default: '',
+        type: 'secret_field',
       },
     ],
   },
@@ -893,6 +905,12 @@ export const SettingsDescription = [
         description: translate('Toggler for SSL verification'),
         default: true,
         type: 'boolean',
+      },
+      {
+        key: 'SMAX_WEBHOOK_SHARED_SECRET',
+        description: translate('Shared secret expected in the X-Webhook-Secret header of inbound SMAX webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).'),
+        default: '',
+        type: 'secret_field',
       },
     ],
   },
