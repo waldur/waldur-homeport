@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { ResourceState } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { SelectFilter } from '@/table';
 
 export const getStates = (): Array<{ value: ResourceState; label: string }> => [
   { value: 'Creating', label: translate('Creating') },
@@ -13,24 +12,14 @@ export const getStates = (): Array<{ value: ResourceState; label: string }> => [
   { value: 'Terminating', label: translate('Terminating') },
 ];
 
-export const ResourceStateFilter: FunctionComponent<{
-  reactSelectProps?: any;
-}> = (props) => {
+export const ResourceStateFilter: FunctionComponent<any> = (props) => {
   return (
-    <Field
+    <SelectFilter
+      title={translate('State')}
       name="state"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Select state...')}
-          options={getStates()}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          variant="tableFilter"
-          isMulti
-          {...props.reactSelectProps}
-        />
-      )}
+      options={getStates()}
+      isMulti
+      {...props}
     />
   );
 };

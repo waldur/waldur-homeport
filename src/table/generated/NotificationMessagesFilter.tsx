@@ -1,12 +1,10 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { NotificationMessagesListData } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const IsOverriddenOptions: IsOverriddenOption[] = [
   {
@@ -24,27 +22,16 @@ export interface IsOverriddenOption {
 }
 
 export const NotificationMessagesFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Status')}
     name="is_overridden"
     getValueLabel={(value: IsOverriddenOption) => value?.label}
-  >
-    <Field
-      name="is_overridden"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Status')}
-          options={IsOverriddenOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: IsOverriddenOption) => String(option.value)}
-          getOptionLabel={(option: IsOverriddenOption) => option.label}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Status')}
+    options={IsOverriddenOptions}
+    getOptionValue={(option: IsOverriddenOption) => String(option.value)}
+    getOptionLabel={(option: IsOverriddenOption) => option.label}
+    isClearable={true}
+  />
 );
 
 export const NotificationMessagesFilterFormId = 'NotificationMessagesFilter';

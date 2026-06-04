@@ -1,12 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Field } from 'react-final-form';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
+import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
-import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
+import { BooleanFilter } from '@/table';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import {
   checkIsOwnerOrStaff,
@@ -32,98 +30,43 @@ export const ProviderResourcesFilter: FunctionComponent = () => {
 
   return (
     <>
-      <TableFilterItem
-        title={translate('Offering')}
-        name="offering"
-        badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
-      >
-        <OfferingAutocomplete
-          offeringFilter={offeringFilter}
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
-      <TableFilterItem
+      <OfferingFilter offeringFilter={offeringFilter} />
+      <OfferingFilter
         title={translate('Parent offering')}
         name="parent_offering"
-        badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
-      >
-        <OfferingAutocomplete
-          offeringFilter={parentOfferingFilter}
-          reactSelectProps={{ variant: 'tableFilter' }}
-          name="parent_offering"
-        />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Client organization')}
-        name="organization"
-        badgeValue={(value) => value?.name}
-      >
-        <OrganizationAutocomplete
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Category')}
-        name="category"
-        badgeValue={(value) => value?.title}
-      >
-        <CategoryFilter />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('State')}
-        name="state"
-        instantApply={false}
-      >
-        <ResourceStateFilter />
-      </TableFilterItem>
-      <TableFilterItem
+        offeringFilter={parentOfferingFilter}
+      />
+      <OrganizationFilter title={translate('Client organization')} />
+      <CategoryFilter />
+      <ResourceStateFilter instantApply={false} />
+      <BooleanFilter
         title={translate('Include terminated')}
         name="include_terminated"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-      >
-        <Field
-          name="include_terminated"
-          type="checkbox"
-          component={AwesomeCheckboxField}
-          label={translate('Include terminated')}
-        />
-      </TableFilterItem>
-      <TableFilterItem
+        type="checkbox"
+        label={translate('Include terminated')}
+      />
+      <BooleanFilter
         title={translate('Paused')}
         name="paused"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-      >
-        <Field
-          name="paused"
-          type="checkbox"
-          component={AwesomeCheckboxField}
-          label={translate('Paused')}
-        />
-      </TableFilterItem>
-      <TableFilterItem
+        type="checkbox"
+        label={translate('Paused')}
+      />
+      <BooleanFilter
         title={translate('Downscaled')}
         name="downscaled"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-      >
-        <Field
-          name="downscaled"
-          type="checkbox"
-          component={AwesomeCheckboxField}
-          label={translate('Downscaled')}
-        />
-      </TableFilterItem>
-      <TableFilterItem
+        type="checkbox"
+        label={translate('Downscaled')}
+      />
+      <BooleanFilter
         title={translate('Restrict member access')}
         name="restrict_member_access"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-      >
-        <Field
-          name="restrict_member_access"
-          type="checkbox"
-          component={AwesomeCheckboxField}
-          label={translate('Restrict member access')}
-        />
-      </TableFilterItem>
+        type="checkbox"
+        label={translate('Restrict member access')}
+      />
     </>
   );
 };

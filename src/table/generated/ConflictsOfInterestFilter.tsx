@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   CoiSeverityLevel,
   CoiTypeEnum,
@@ -12,10 +11,9 @@ import {
   proposalProtectedCallsRoundsList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const CoiSeverityLevelOptions: CoiSeverityLevelOption[] = [
   {
@@ -166,132 +164,67 @@ export const ConflictsOfInterestFilter: FunctionComponent<
   ConflictsOfInterestFilterProps
 > = (props) => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Round')}
       name="round"
       getValueLabel={(value: ProtectedRound) => value?.name}
-    >
-      <Field
-        name="round"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Round')}
-            loadOptions={createLoadOptions(
-              proposalProtectedCallsRoundsList,
-              null as any,
-              {},
-              { uuid: props.call.uuid },
-            )}
-            defaultOptions
-            getOptionValue={(option: ProtectedRound) =>
-              String(option.uuid || '')
-            }
-            getOptionLabel={(option: ProtectedRound) =>
-              String(option.name || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Round')}
+      loadOptions={createLoadOptions(
+        proposalProtectedCallsRoundsList,
+        null as any,
+        {},
+        { uuid: props.call.uuid },
+      )}
+      defaultOptions
+      getOptionValue={(option: ProtectedRound) => String(option.uuid || '')}
+      getOptionLabel={(option: ProtectedRound) => String(option.name || '')}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Status')}
       name="status"
       getValueLabel={(value: ConflictOfInterestStatusOption) => value?.label}
-    >
-      <Field
-        name="status"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Status')}
-            options={ConflictOfInterestStatusOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: ConflictOfInterestStatusOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: ConflictOfInterestStatusOption) =>
-              option.label
-            }
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Status')}
+      options={ConflictOfInterestStatusOptions}
+      getOptionValue={(option: ConflictOfInterestStatusOption) =>
+        String(option.value)
+      }
+      getOptionLabel={(option: ConflictOfInterestStatusOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <SelectFilter
       title={translate('Severity')}
       name="severity"
       getValueLabel={(value: CoiSeverityLevelOption) => value?.label}
-    >
-      <Field
-        name="severity"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Severity')}
-            options={CoiSeverityLevelOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: CoiSeverityLevelOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: CoiSeverityLevelOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Severity')}
+      options={CoiSeverityLevelOptions}
+      getOptionValue={(option: CoiSeverityLevelOption) => String(option.value)}
+      getOptionLabel={(option: CoiSeverityLevelOption) => option.label}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Type')}
       name="coi_type"
       getValueLabel={(value: CoiTypeOption) => value?.label}
-    >
-      <Field
-        name="coi_type"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Type')}
-            options={CoiTypeOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: CoiTypeOption) => String(option.value)}
-            getOptionLabel={(option: CoiTypeOption) => option.label}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Type')}
+      options={CoiTypeOptions}
+      getOptionValue={(option: CoiTypeOption) => String(option.value)}
+      getOptionLabel={(option: CoiTypeOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <SelectFilter
       title={translate('Detection')}
       name="detection_method"
       getValueLabel={(value: DetectionMethodOption) => value?.label}
-    >
-      <Field
-        name="detection_method"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Detection')}
-            options={DetectionMethodOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: DetectionMethodOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: DetectionMethodOption) => option.label}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Detection')}
+      options={DetectionMethodOptions}
+      getOptionValue={(option: DetectionMethodOption) => String(option.value)}
+      getOptionLabel={(option: DetectionMethodOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
   </>
 );
 

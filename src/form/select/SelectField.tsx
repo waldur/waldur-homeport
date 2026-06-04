@@ -45,10 +45,7 @@ export const SelectField: FunctionComponent<SelectFieldProps> = (props) => {
           props.input.onBlur(props.input.value);
         }
       }}
-      className={
-        'metronic-select-container' +
-        (props.className ? ` ${props.className}` : '')
-      }
+      className={props.className}
     />
   );
 };

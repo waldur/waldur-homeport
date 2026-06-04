@@ -1,14 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
-import { AccountingPeriodFieldComponent } from '@/customer/list/AccountingPeriodField';
+import { AccountingPeriodFilter } from '@/customer/list/AccountingPeriodFilter';
 import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
-import { translate } from '@/i18n';
-import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
-import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
+import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
 import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
-import { ResourceAutocomplete } from '@/resource/ResourceAutocomplete';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { ResourceFilter } from '@/resource/ResourceFilter';
 
 export const FORM_ID = 'ResourceUsageFilter';
 
@@ -20,60 +18,18 @@ export const ResourceUsageFilter: FunctionComponent = () => {
 
   return (
     <>
-      <TableFilterItem
-        title={translate('Accounting period')}
-        name="accounting_period"
-        badgeValue={(value) => value?.label}
-        ellipsis={false}
-      >
-        <Field
-          name="accounting_period"
-          component={AccountingPeriodFieldComponent}
-          options={options}
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Organization')}
-        name="organization"
-        badgeValue={(value) => value?.name}
-      >
-        <OrganizationAutocomplete
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Project')}
-        name="project"
-        badgeValue={(value) => value?.name}
-      >
-        <ProjectFilter
-          customer_uuid={customer ? customer.uuid : null}
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Offering')}
-        name="offering"
+      <AccountingPeriodFilter options={options} />
+      <OrganizationFilter />
+      <ProjectFilter customer_uuid={customer ? customer.uuid : null} />
+      <OfferingFilter
         badgeValue={(value) =>
           value?.category_title
             ? `${value.category_title} / ${value.name}`
             : value?.name
         }
-      >
-        <OfferingAutocomplete
-          offeringFilter={{ shared: true }}
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
-
-      <TableFilterItem
-        title={translate('Resource')}
-        name="resource"
-        badgeValue={(value) => value?.name}
-      >
-        <ResourceAutocomplete />
-      </TableFilterItem>
+        offeringFilter={{ shared: true }}
+      />
+      <ResourceFilter />
     </>
   );
 };

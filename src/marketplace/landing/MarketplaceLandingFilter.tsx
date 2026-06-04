@@ -9,13 +9,13 @@ import { Project } from 'waldur-js-client';
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { OrganizationAutocomplete } from '../orders/OrganizationAutocomplete';
-import { ProjectFilter } from '../resources/list/ProjectFilter';
+import { ProjectAutocomplete } from '../resources/list/ProjectAutocomplete';
 
 import { setMarketplaceFilter } from './filter/store/actions';
 
@@ -52,7 +52,7 @@ const LandingFilterFields = ({ values }) => {
   return (
     <>
       <OrganizationAutocomplete />
-      <ProjectFilter
+      <ProjectAutocomplete
         customer_uuid={organizationUuid}
         isDisabled={!organizationUuid}
       />
@@ -66,7 +66,7 @@ export const MarketplaceLandingFilter = () => {
   const [show, setShow] = useState(false);
 
   const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources();
+    useOrganizationAndProjectAutocompletesForResources();
 
   const apply = useCallback(
     (formData) => {

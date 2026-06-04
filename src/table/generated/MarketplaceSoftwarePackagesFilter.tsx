@@ -1,17 +1,13 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   CatalogTypeEnum,
   MarketplaceSoftwarePackagesListData,
 } from 'waldur-js-client';
 
-import { StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter, BooleanFilter, StringFilter } from '@/table';
 
 export const CatalogTypeOptions: CatalogTypeOption[] = [
   {
@@ -34,82 +30,53 @@ export interface CatalogTypeOption {
 
 export const MarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem title={translate('Catalog')} name="catalog_name">
-      <Field
-        name="catalog_name"
-        component={StringField}
-        placeholder={translate('Catalog')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Version')} name="catalog_version">
-      <Field
-        name="catalog_version"
-        component={StringField}
-        placeholder={translate('Version')}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+    <StringFilter
+      title={translate('Catalog')}
+      name="catalog_name"
+      placeholder={translate('Catalog')}
+    />
+    <StringFilter
+      title={translate('Version')}
+      name="catalog_version"
+      placeholder={translate('Version')}
+    />
+    <SelectFilter
       title={translate('Type')}
       name="catalog_type"
       getValueLabel={(value: CatalogTypeOption) => value?.label}
-    >
-      <Field
-        name="catalog_type"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Type')}
-            options={CatalogTypeOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: CatalogTypeOption) => String(option.value)}
-            getOptionLabel={(option: CatalogTypeOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Category')} name="category">
-      <Field
-        name="category"
-        component={StringField}
-        placeholder={translate('Category')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('License')} name="license">
-      <Field
-        name="license"
-        component={StringField}
-        placeholder={translate('License')}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('Toolchain')} name="toolchain_name">
-      <Field
-        name="toolchain_name"
-        component={StringField}
-        placeholder={translate('Toolchain')}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Type')}
+      options={CatalogTypeOptions}
+      getOptionValue={(option: CatalogTypeOption) => String(option.value)}
+      getOptionLabel={(option: CatalogTypeOption) => option.label}
+      isClearable={true}
+    />
+    <StringFilter
+      title={translate('Category')}
+      name="category"
+      placeholder={translate('Category')}
+    />
+    <StringFilter
+      title={translate('License')}
+      name="license"
+      placeholder={translate('License')}
+    />
+    <StringFilter
+      title={translate('Toolchain')}
+      name="toolchain_name"
+      placeholder={translate('Toolchain')}
+    />
+    <BooleanFilter
       title={translate('Has GPU')}
       name="has_gpu"
       badgeValue={(value) => (value ? translate('Has GPU') : translate('All'))}
       ellipsis={false}
-    >
-      <Field
-        name="has_gpu"
-        component={AwesomeCheckboxField}
-        label={translate('Has GPU')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
-    <TableFilterItem title={translate('GPU architecture')} name="gpu_arch">
-      <Field
-        name="gpu_arch"
-        component={StringField}
-        placeholder={translate('GPU architecture')}
-      />
-    </TableFilterItem>
+      parse={(v) => v || undefined}
+    />
+    <StringFilter
+      title={translate('GPU architecture')}
+      name="gpu_arch"
+      placeholder={translate('GPU architecture')}
+    />
   </>
 );
 

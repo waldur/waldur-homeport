@@ -1,67 +1,41 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   AdminArrowCustomerMappingsListData,
   Customer,
   customersList,
 } from 'waldur-js-client';
 
-import { StringField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, BooleanFilter, StringFilter } from '@/table';
 
 export const AdminArrowCustomerMappingsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Waldur Organization')}
       name="organization"
       getValueLabel={(value: Customer) => value?.name}
-    >
-      <Field
-        name="organization"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Waldur Organization')}
-            loadOptions={createLoadOptions(customersList, 'query')}
-            defaultOptions
-            getOptionValue={(option: Customer) => String(option.uuid || '')}
-            getOptionLabel={(option: Customer) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Waldur Organization')}
+      loadOptions={createLoadOptions(customersList, 'query')}
+      defaultOptions
+      getOptionValue={(option: Customer) => String(option.uuid || '')}
+      getOptionLabel={(option: Customer) => String(option.name || '')}
+      isClearable={true}
+    />
+    <StringFilter
       title={translate('Arrow Reference')}
       name="arrow_reference"
-    >
-      <Field
-        name="arrow_reference"
-        component={StringField}
-        placeholder={translate('Arrow Reference')}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Arrow Reference')}
+    />
+    <BooleanFilter
       title={translate('Active')}
       name="is_active"
       badgeValue={(value) => (value ? translate('Active') : translate('All'))}
       ellipsis={false}
-    >
-      <Field
-        name="is_active"
-        component={AwesomeCheckboxField}
-        label={translate('Active')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
+      parse={(v) => v || undefined}
+    />
   </>
 );
 

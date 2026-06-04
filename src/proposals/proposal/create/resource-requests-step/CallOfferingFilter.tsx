@@ -1,29 +1,22 @@
 import React from 'react';
-import { Field } from 'react-final-form';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { CallOffering } from '@/proposals/types';
+import { SelectFilter } from '@/table';
 
 export const CallOfferingFilter: React.FC<{
   options?: Partial<Pick<CallOffering, 'offering_name' | 'offering_uuid'>>[];
-}> = ({ options = [] }) => (
-  <Field
+  [key: string]: any;
+}> = ({ options = [], ...props }) => (
+  <SelectFilter
+    title={translate('Offering')}
     name="offering"
-    render={(fieldProps) => (
-      <Select
-        placeholder={translate('Select offering...')}
-        options={options.map((op) => ({
-          offering_name: op.offering_name,
-          offering_uuid: op.offering_uuid,
-        }))}
-        value={fieldProps.input.value}
-        onChange={(value) => fieldProps.input.onChange(value)}
-        isClearable={true}
-        getOptionLabel={(option) => option.offering_name}
-        getOptionValue={(option) => option.offering_uuid}
-        variant="tableFilter"
-      />
-    )}
+    badgeValue={(value) => value?.offering_name}
+    placeholder={translate('Select offering...')}
+    options={options}
+    isClearable={true}
+    getOptionLabel={(option) => option.offering_name}
+    getOptionValue={(option) => option.offering_uuid}
+    {...props}
   />
 );

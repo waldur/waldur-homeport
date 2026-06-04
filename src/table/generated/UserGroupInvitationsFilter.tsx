@@ -1,29 +1,21 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { UserGroupInvitationsListData } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { BooleanFilter } from '@/table';
 
 export const UserGroupInvitationsFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <BooleanFilter
     title={translate('Group invitations')}
     name="is_active"
     badgeValue={(value) =>
       value ? translate('Only active') : translate('All')
     }
     ellipsis={false}
-  >
-    <Field
-      name="is_active"
-      component={AwesomeCheckboxField}
-      label={translate('Group invitations')}
-      parse={(v) => v || undefined}
-    />
-  </TableFilterItem>
+    parse={(v) => v || undefined}
+  />
 );
 
 export const UserGroupInvitationsFilterFormId = 'UserGroupInvitationsFilter';

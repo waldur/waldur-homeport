@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { ReactNode } from 'react';
 
 import { Link } from '@/core/Link';
-import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { ItemImage } from '@/navigation/workspace/context-selector/ItemImage';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
@@ -31,7 +31,7 @@ export const SearchItem = (props: SearchItemProps) => {
     : false;
 
   const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources();
+    useOrganizationAndProjectAutocompletesForResources();
 
   return (
     <Link

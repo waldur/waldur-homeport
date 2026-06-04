@@ -1,32 +1,29 @@
-import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
+import { FC } from 'react';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
+import { SelectFilter } from '@/table';
 
 import { createOrderStateOptions } from '../OrderStates';
 
 interface OrderStateFilterProps {
   options?: () => Option[];
+  [key: string]: any;
 }
 
-export const OrderStateFilter: FunctionComponent<OrderStateFilterProps> = ({
+export const OrderStateFilter: FC<OrderStateFilterProps> = ({
   options,
+  ...props
 }) => {
   return (
-    <Field
+    <SelectFilter
+      title={translate('State')}
       name="state"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Select state...')}
-          options={options ? options() : createOrderStateOptions()}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
+      badgeValue={(value) => value?.label}
+      placeholder={translate('Select state...')}
+      options={options ? options() : createOrderStateOptions()}
+      isClearable={true}
+      {...props}
     />
   );
 };

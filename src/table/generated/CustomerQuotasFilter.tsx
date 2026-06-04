@@ -1,15 +1,13 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   CustomerQuotasListData,
   CustomerQuotasQuotaNameEnum,
 } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const CustomerQuotasQuotaNameOptions: CustomerQuotasQuotaNameOption[] = [
   {
@@ -59,31 +57,18 @@ export interface CustomerQuotasQuotaNameOption {
 }
 
 export const CustomerQuotasFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Quota')}
     name="quota_name"
     getValueLabel={(value: CustomerQuotasQuotaNameOption) => value?.label}
-  >
-    <Field
-      name="quota_name"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Quota')}
-          options={CustomerQuotasQuotaNameOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: CustomerQuotasQuotaNameOption) =>
-            String(option.value)
-          }
-          getOptionLabel={(option: CustomerQuotasQuotaNameOption) =>
-            option.label
-          }
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Quota')}
+    options={CustomerQuotasQuotaNameOptions}
+    getOptionValue={(option: CustomerQuotasQuotaNameOption) =>
+      String(option.value)
+    }
+    getOptionLabel={(option: CustomerQuotasQuotaNameOption) => option.label}
+    isClearable={true}
+  />
 );
 
 export const CustomerQuotasFilterFormId = 'CustomerQuotasFilter';

@@ -1,14 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Field } from 'react-final-form';
 import { OfferingUserState } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { Select } from '@/form/select';
-import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
-import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
-import { ProviderAutocomplete } from '@/marketplace/orders/ProviderAutocomplete';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
+import { ProviderFilter } from '@/marketplace/orders/ProviderFilter';
+import { SelectFilter } from '@/table';
 import { useCustomer } from '@/workspace/hooks';
 
 export const PROVIDER_OFFERING_USERS_FORM_ID = 'ProviderOfferingUsersFilter';
@@ -44,23 +41,6 @@ const profileCompletenessOptions = [
   { value: false, label: translate('Incomplete') },
 ];
 
-const OfferingUserStateFilter = () => (
-  <Field
-    name="state"
-    render={(fieldProps) => (
-      <Select
-        placeholder={translate('Select state...')}
-        options={getOfferingUserStateFilterOptions()}
-        value={fieldProps.input.value}
-        onChange={(value) => fieldProps.input.onChange(value)}
-        isClearable={true}
-        variant="tableFilter"
-        isMulti
-      />
-    )}
-  />
-);
-
 export const ProviderOfferingUsersFilter: FunctionComponent<
   ProviderOfferingUsersFilterProps
 > = ({ hasOrganizationColumn }) => {
@@ -77,57 +57,36 @@ export const ProviderOfferingUsersFilter: FunctionComponent<
 
   return (
     <>
-      <TableFilterItem
-        title={translate('Offering')}
-        name="offering"
+      <OfferingFilter
         badgeValue={(value) => value?.name}
-      >
-        <OfferingAutocomplete
-          offeringFilter={offeringFilter}
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
-      <TableFilterItem
+        offeringFilter={offeringFilter}
+      />
+      <SelectFilter
         title={translate('State')}
         name="state"
         instantApply={false}
-      >
-        <OfferingUserStateFilter />
-      </TableFilterItem>
-
+        placeholder={translate('Select state...')}
+        options={getOfferingUserStateFilterOptions()}
+        isClearable={true}
+        isMulti
+      />
       {hasOrganizationColumn && (
-        <TableFilterItem
-          title={translate('Service provider')}
-          name="provider"
-          getValueLabel={(option) => option.customer_name}
-        >
-          <ProviderAutocomplete reactSelectProps={{ variant: 'tableFilter' }} />
-        </TableFilterItem>
+        <ProviderFilter getValueLabel={(option) => option.customer_name} />
       )}
       {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
-        <TableFilterItem
+        <SelectFilter
           title={translate('Profile status')}
           name="has_complete_profile"
           getValueLabel={(value) =>
             profileCompletenessOptions.find((op) => op.value === value)?.label
           }
           instantApply={false}
-        >
-          <Field
-            name="has_complete_profile"
-            render={(fieldProps) => (
-              <SelectField
-                {...fieldProps}
-                placeholder={translate('Select status')}
-                options={profileCompletenessOptions}
-                noUpdateOnBlur={true}
-                simpleValue={true}
-                isClearable={true}
-                variant="tableFilter"
-              />
-            )}
-          />
-        </TableFilterItem>
+          placeholder={translate('Select status')}
+          options={profileCompletenessOptions}
+          noUpdateOnBlur={true}
+          simpleValue={true}
+          isClearable={true}
+        />
       )}
     </>
   );

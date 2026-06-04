@@ -1,9 +1,7 @@
 import { FC } from 'react';
-import { Field } from 'react-final-form';
 
-import { SelectField } from '@/form/select/SelectField';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 import { formatBillingPeriod, getPreviousBillingPeriods } from './utils';
 
@@ -21,18 +19,13 @@ export const billingPeriodOptions: BillingPeriodOption[] =
 export const FORM_ID = 'UsageMonitoringFilter';
 
 export const UsageMonitoringFilter: FC = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Billing period')}
     name="billing_period"
     badgeValue={(value) => value?.label}
     ellipsis={false}
-  >
-    <Field
-      name="billing_period"
-      component={SelectField}
-      options={billingPeriodOptions}
-      isClearable={false}
-      placeholder={translate('Billing period')}
-    />
-  </TableFilterItem>
+    options={billingPeriodOptions}
+    isClearable={false}
+    placeholder={translate('Billing period')}
+  />
 );

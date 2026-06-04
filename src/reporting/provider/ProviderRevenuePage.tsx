@@ -13,8 +13,8 @@ import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import { ProviderFilter } from './ProviderFilter';
 import { ProviderRevenueChart } from './ProviderRevenueChart';
+import { ProviderSelector } from './ProviderSelector';
 
 const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
   providerUuid,
@@ -87,7 +87,7 @@ export const ProviderRevenuePage: FC = () => {
         return (
           <>
             <ReportingTitle reportKey="provider-revenue">
-              <ProviderFilter />
+              <ProviderSelector />
             </ReportingTitle>
 
             {providerUuid ? (

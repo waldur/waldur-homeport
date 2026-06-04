@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   Customer,
   ProposalRequestedOfferingsListData,
@@ -13,10 +12,9 @@ import {
   proposalPublicCallsList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const RequestedOfferingStatesOptions: RequestedOfferingStatesOption[] = [
   {
@@ -39,106 +37,58 @@ export interface RequestedOfferingStatesOption {
 
 export const ProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Organization')}
       name="organization"
       getValueLabel={(value: Customer) => value?.name}
-    >
-      <Field
-        name="organization"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Organization')}
-            loadOptions={createLoadOptions(customersList, 'query')}
-            defaultOptions
-            getOptionValue={(option: Customer) => String(option.uuid || '')}
-            getOptionLabel={(option: Customer) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Organization')}
+      loadOptions={createLoadOptions(customersList, 'query')}
+      defaultOptions
+      getOptionValue={(option: Customer) => String(option.uuid || '')}
+      getOptionLabel={(option: Customer) => String(option.name || '')}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Call')}
       name="call"
       getValueLabel={(value: PublicCall) => value?.name}
-    >
-      <Field
-        name="call"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Call')}
-            loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
-            defaultOptions
-            getOptionValue={(option: PublicCall) => String(option.url || '')}
-            getOptionLabel={(option: PublicCall) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Call')}
+      loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
+      defaultOptions
+      getOptionValue={(option: PublicCall) => String(option.url || '')}
+      getOptionLabel={(option: PublicCall) => String(option.name || '')}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Status')}
       name="state"
       getValueLabel={(value: RequestedOfferingStatesOption) => value?.label}
-    >
-      <Field
-        name="state"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Status')}
-            options={RequestedOfferingStatesOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: RequestedOfferingStatesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: RequestedOfferingStatesOption) =>
-              option.label
-            }
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Status')}
+      options={RequestedOfferingStatesOptions}
+      getOptionValue={(option: RequestedOfferingStatesOption) =>
+        String(option.value)
+      }
+      getOptionLabel={(option: RequestedOfferingStatesOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <AsyncSelectFilter
       title={translate('Offering')}
       name="offering"
       getValueLabel={(value: PublicOfferingDetails) => value?.name}
-    >
-      <Field
-        name="offering"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Offering')}
-            loadOptions={createLoadOptions(
-              marketplacePublicOfferingsList,
-              'query',
-              { shared: true },
-            )}
-            defaultOptions
-            getOptionValue={(option: PublicOfferingDetails) =>
-              String(option.url || '')
-            }
-            getOptionLabel={(option: PublicOfferingDetails) =>
-              String(option.name || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Offering')}
+      loadOptions={createLoadOptions(marketplacePublicOfferingsList, 'query', {
+        shared: true,
+      })}
+      defaultOptions
+      getOptionValue={(option: PublicOfferingDetails) =>
+        String(option.url || '')
+      }
+      getOptionLabel={(option: PublicOfferingDetails) =>
+        String(option.name || '')
+      }
+      isClearable={true}
+    />
   </>
 );
 

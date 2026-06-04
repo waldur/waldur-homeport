@@ -1,15 +1,18 @@
 import { FC } from 'react';
 import { Row } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   AdminAnnouncementRequest,
   adminAnnouncementsCreate,
   adminAnnouncementsUpdate,
 } from 'waldur-js-client';
 
-import { SubmitButton, SelectGroup, MarkdownGroup } from '@/form';
-import { FormGroup } from '@/form';
-import { DateTimeField } from '@/form/DateTimeField';
+import {
+  DateTimeGroup,
+  MarkdownGroup,
+  SelectGroup,
+  SubmitButton,
+} from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -92,20 +95,18 @@ export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
             </Row>
 
             <Row>
-              <FormGroup
+              <DateTimeGroup
                 label={translate('Active from')}
                 required
                 className="col-md-6"
-              >
-                <Field component={DateTimeField} name="active_from" />
-              </FormGroup>
-              <FormGroup
+                name="active_from"
+              />
+              <DateTimeGroup
                 label={translate('Active to')}
                 required
                 className="col-md-6"
-              >
-                <Field component={DateTimeField} name="active_to" />
-              </FormGroup>
+                name="active_to"
+              />
             </Row>
 
             <MarkdownGroup

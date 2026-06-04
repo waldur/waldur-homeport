@@ -8,7 +8,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
-import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { useTitle } from '@/navigation/title';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
@@ -108,7 +108,7 @@ const CategoryResourcesListTable: FunctionComponent<OwnProps> = (ownProps) => {
   }, [filterValues, ownProps.category_uuid]);
 
   const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources('category-resources');
+    useOrganizationAndProjectAutocompletesForResources('category-resources');
 
   const props = useTable({
     table: `${CATEGORY_RESOURCES_TABLE_ID}-${ownProps.category_uuid}`,

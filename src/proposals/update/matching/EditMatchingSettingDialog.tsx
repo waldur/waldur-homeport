@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { FC, useCallback, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   PatchedMatchingConfigurationRequest,
   proposalProtectedCallsMatchingConfigurationPartialUpdate,
@@ -9,8 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { FieldError, NumberField, SelectField, SubmitButton } from '@/form';
-import { FormGroup } from '@/form';
+import { NumberGroup, SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -173,67 +172,33 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
           >
             <div className="size-lg">
               {isNumberField && (
-                <FormGroup label={FIELD_LABELS[resolve.name]}>
-                  <Field
-                    name={resolve.name}
-                    component={NumberField}
-                    min={0}
-                    max={1}
-                    step={0.1}
-                  />
-                  {FIELD_DESCRIPTIONS[resolve.name] && (
-                    <div className="form-text text-muted">
-                      {FIELD_DESCRIPTIONS[resolve.name]}
-                    </div>
-                  )}
-                  <Field
-                    name={resolve.name}
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                <NumberGroup
+                  label={FIELD_LABELS[resolve.name]}
+                  name={resolve.name}
+                  min={0}
+                  max={1}
+                  step={0.1}
+                  description={FIELD_DESCRIPTIONS[resolve.name]}
+                />
               )}
               {isIntegerField && (
-                <FormGroup label={FIELD_LABELS[resolve.name]}>
-                  <Field
-                    name={resolve.name}
-                    component={NumberField}
-                    min={1}
-                    max={20}
-                  />
-                  {FIELD_DESCRIPTIONS[resolve.name] && (
-                    <div className="form-text text-muted">
-                      {FIELD_DESCRIPTIONS[resolve.name]}
-                    </div>
-                  )}
-                  <Field
-                    name={resolve.name}
-                    component={({ meta }) =>
-                      meta.touched && meta.error ? (
-                        <FieldError error={meta.error} />
-                      ) : null
-                    }
-                  />
-                </FormGroup>
+                <NumberGroup
+                  label={FIELD_LABELS[resolve.name]}
+                  name={resolve.name}
+                  min={1}
+                  max={20}
+                  description={FIELD_DESCRIPTIONS[resolve.name]}
+                />
               )}
               {isSelectField && (
-                <FormGroup label={FIELD_LABELS[resolve.name]}>
-                  <Field
-                    name={resolve.name}
-                    component={SelectField}
-                    options={SELECT_FIELD_OPTIONS[resolve.name] || []}
-                    simpleValue
-                    placeholder={translate('Select an option...')}
-                  />
-                  {FIELD_DESCRIPTIONS[resolve.name] && (
-                    <div className="form-text text-muted">
-                      {FIELD_DESCRIPTIONS[resolve.name]}
-                    </div>
-                  )}
-                </FormGroup>
+                <SelectGroup
+                  label={FIELD_LABELS[resolve.name]}
+                  name={resolve.name}
+                  options={SELECT_FIELD_OPTIONS[resolve.name] || []}
+                  simpleValue
+                  placeholder={translate('Select an option...')}
+                  description={FIELD_DESCRIPTIONS[resolve.name]}
+                />
               )}
             </div>
           </ModalDialog>

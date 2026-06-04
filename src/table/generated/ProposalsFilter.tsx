@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   ProposalProposalsListData,
   ProposalStates,
@@ -9,10 +8,9 @@ import {
   proposalPublicCallsList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const ProposalStatesOptions: ProposalStatesOption[] = [
   {
@@ -47,52 +45,28 @@ export interface ProposalStatesOption {
 
 export const ProposalsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('State')}
       name="state"
       getValueLabel={(value: ProposalStatesOption) => value?.label}
-    >
-      <Field
-        name="state"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('State')}
-            options={ProposalStatesOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: ProposalStatesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: ProposalStatesOption) => option.label}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('State')}
+      options={ProposalStatesOptions}
+      getOptionValue={(option: ProposalStatesOption) => String(option.value)}
+      getOptionLabel={(option: ProposalStatesOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <AsyncSelectFilter
       title={translate('Call')}
       name="call"
       getValueLabel={(value: PublicCall) => value?.name}
-    >
-      <Field
-        name="call"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Call')}
-            loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
-            defaultOptions
-            getOptionValue={(option: PublicCall) => String(option.uuid || '')}
-            getOptionLabel={(option: PublicCall) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Call')}
+      loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
+      defaultOptions
+      getOptionValue={(option: PublicCall) => String(option.uuid || '')}
+      getOptionLabel={(option: PublicCall) => String(option.name || '')}
+      isClearable={true}
+    />
   </>
 );
 

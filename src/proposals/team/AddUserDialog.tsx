@@ -7,8 +7,7 @@ import { post } from '@/core/api';
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { usersAutocomplete } from '@/customer/team/utils';
-import { SubmitButton, AsyncSelectGroup } from '@/form';
-import { FormGroup } from '@/form';
+import { AsyncSelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -79,17 +78,17 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
               </>
             }
           >
-            <FormGroup label={translate('User')} required>
-              <AsyncSelectGroup
-                name="user"
-                placeholder={translate('Search and select user...')}
-                loadOptions={usersAutocomplete}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={getOptionLabel}
-                components={{ Option: UserListOptionInline }}
-                validate={required}
-              />
-            </FormGroup>
+            <AsyncSelectGroup
+              label={translate('User')}
+              required
+              name="user"
+              placeholder={translate('Search and select user...')}
+              loadOptions={usersAutocomplete}
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={getOptionLabel}
+              components={{ Option: UserListOptionInline }}
+              validate={required}
+            />
 
             {roles && roles.length === 1 ? null : (
               <RoleGroup types={roleTypes} />

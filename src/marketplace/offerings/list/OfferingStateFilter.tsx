@@ -1,8 +1,7 @@
-import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
+import { FC } from 'react';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { SelectFilter } from '@/table';
 import {
   OfferingStateOption,
   OfferingStateOptions,
@@ -17,23 +16,21 @@ export const getStates = () => [
   { value: 'Unavailable', label: translate('Unavailable') },
 ];
 
-export const OfferingStateFilter: FunctionComponent = () => {
+interface OfferingStateFilterProps {
+  [key: string]: any;
+}
+
+export const OfferingStateFilter: FC<OfferingStateFilterProps> = (props) => {
   return (
-    <Field
+    <SelectFilter
+      title={translate('State')}
       name="state"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('State')}
-          options={OfferingStateOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: OfferingStateOption) => String(option.value)}
-          getOptionLabel={(option: OfferingStateOption) => option.label}
-          isClearable={true}
-          isMulti={true}
-          variant="tableFilter"
-        />
-      )}
+      placeholder={translate('State')}
+      options={OfferingStateOptions}
+      getOptionValue={(option: OfferingStateOption) => String(option.value)}
+      getOptionLabel={(option: OfferingStateOption) => option.label}
+      isMulti={true}
+      {...props}
     />
   );
 };

@@ -8,7 +8,7 @@ import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
 import { selectFiltersStorage } from '@/table/selectors';
 import { RemoveFilterBadgeButton } from '@/table/TableFilterItem';
 
-import { useOrganizationAndProjectFiltersForResources } from './utils';
+import { useOrganizationAndProjectAutocompletesForResources } from './utils';
 
 export const ResourcesMenuFilters = () => {
   const filters = useSelector((state: any) =>
@@ -24,7 +24,7 @@ export const ResourcesMenuFilters = () => {
     return project;
   }, [filters]);
 
-  const { removeFilter } = useOrganizationAndProjectFiltersForResources();
+  const { removeFilter } = useOrganizationAndProjectAutocompletesForResources();
 
   return (
     <>

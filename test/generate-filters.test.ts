@@ -239,9 +239,9 @@ describe('generate-filters.cjs', () => {
         component: 'StringField',
       };
       const code = Generator.field(field);
-      expect(code).toContain('<Field');
+      expect(code).toContain('<StringFilter');
       expect(code).toContain('name="desc"');
-      expect(code).toContain('component={StringField}');
+      expect(code).toContain('title={translate("Description")}');
       expect(code).toContain('placeholder={translate("Description")}');
     });
 
@@ -253,7 +253,7 @@ describe('generate-filters.cjs', () => {
         optionsPlaceholder: 'TypeEnum',
       };
       const code = Generator.field(field);
-      expect(code).toContain('<Select');
+      expect(code).toContain('<SelectFilter');
       expect(code).toContain('options={TypeEnum}');
     });
 

@@ -1,15 +1,13 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   MarketplaceProviderOfferingsListData,
   OfferingState,
 } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const OfferingStateOptions: OfferingStateOption[] = [
   {
@@ -39,28 +37,17 @@ export interface OfferingStateOption {
 }
 
 export const MarketplaceProviderOfferingsFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('State')}
     name="state"
     getValueLabel={(value: OfferingStateOption) => value?.label}
-  >
-    <Field
-      name="state"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('State')}
-          options={OfferingStateOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: OfferingStateOption) => String(option.value)}
-          getOptionLabel={(option: OfferingStateOption) => option.label}
-          isClearable={true}
-          isMulti={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('State')}
+    options={OfferingStateOptions}
+    getOptionValue={(option: OfferingStateOption) => String(option.value)}
+    getOptionLabel={(option: OfferingStateOption) => option.label}
+    isClearable={true}
+    isMulti={true}
+  />
 );
 
 export const MarketplaceProviderOfferingsFilterFormId =

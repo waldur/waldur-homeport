@@ -215,10 +215,7 @@ class FilterMapper {
       });
     }
 
-    return this._collapseRangePairs(
-      this._deduplicateAndFinalize(filters),
-      key,
-    );
+    return this._collapseRangePairs(this._deduplicateAndFinalize(filters), key);
   }
 
   mapParameter(param, opId, manualOverrides = {}) {
@@ -314,8 +311,8 @@ class FilterMapper {
       schema['x-enum-descriptions'] ||
       (schema.items?.$ref
         ? utils.resolveRef(schema.items.$ref, this.proc.schema)?.[
-        'x-enum-descriptions'
-        ]
+            'x-enum-descriptions'
+          ]
         : schema.items?.['x-enum-descriptions']);
 
     if (overrides.options || overrides.enumOverrides || enumOptions) {
@@ -378,8 +375,10 @@ class FilterMapper {
       filter.options = options;
     } else if (schema.type === 'boolean') {
       filter.component = 'AwesomeCheckboxField';
-    } else if (schema.format === 'date' || schema.format === 'date-time') {
+    } else if (schema.format === 'date') {
       filter.component = 'DateField';
+    } else if (schema.format === 'date-time') {
+      filter.component = 'DateTimeField';
     } else if (schema.type === 'number' || schema.type === 'integer') {
       filter.component = 'NumberField';
     } else {
@@ -430,8 +429,7 @@ class FilterMapper {
       const overrides =
         this.config.overrides[opKey]?.[pair.min.mapTo || pair.min.name] || {};
       const rangeName = overrides.rangeName || `${base}_range`;
-      const rangeLabel =
-        overrides.rangeLabel || utils.humanize(base);
+      const rangeLabel = overrides.rangeLabel || utils.humanize(base);
       const merged = {
         name: rangeName,
         label: rangeLabel,
@@ -457,35 +455,32 @@ class Generator {
   static field(f, enumRegistry) {
     const tLabel = `translate("${f.label}")`;
     const tPlace = `translate("${f.placeholder || f.label}")`;
-    const commonSelectProps = [
-      `isClearable={${!f.required}}`,
-      f.isMulti ? `isMulti={true}` : null,
-      `variant="tableFilter"`,
-    ]
-      .filter(Boolean)
-      .join('\n            ');
 
-    let input = '';
-    const customProps = f.props
-      ? Object.entries(f.props)
-        .map(([k, v]) => `${k}={${v}}`)
-        .join('\n        ')
-      : '';
+    const props = [];
+    props.push(`title={${tLabel}}`);
+    props.push(`name="${f.name}"`);
+
+    if (f.required) {
+      props.push(`hideRemoveButton={true}`);
+      props.push(`validate={[required]}`);
+    }
 
     // Determine Badge/Label logic
-    let valLabel = '';
     if (f.component === 'AwesomeCheckboxField') {
       const trueLabel = f.badgeLabels?.true || f.label;
       const falseLabel = f.badgeLabels?.false || 'All';
-      valLabel = `badgeValue={(value) =>
-      value ? translate("${trueLabel}") : translate("${falseLabel}")
-    }\n      ellipsis={false}`;
+      props.push(
+        `badgeValue={(value) => value ? translate("${trueLabel}") : translate("${falseLabel}")}`,
+      );
+      props.push(`ellipsis={false}`);
     } else if (f.component === 'RangeNumberField') {
-      valLabel = 'badgeValue={formatRangeBadge}';
+      props.push('badgeValue={formatRangeBadge}');
     } else if (
-      ['StringField', 'NumberField', 'DateField'].includes(f.component)
+      ['StringField', 'NumberField', 'DateField', 'DateTimeField'].includes(
+        f.component,
+      )
     ) {
-      valLabel = '';
+      // no default badgeValue/getValueLabel needed for these simple types
     } else {
       let access = f.labelField ? `?.${f.labelField}` : '?.label';
       if (f.itemType === 'User') {
@@ -495,113 +490,100 @@ class Generator {
         f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)
           ? f.optionsPlaceholder.replace(/Options$/, 'Option')
           : f.valueType || 'any';
-      valLabel = `getValueLabel={(value: ${argType}) => value${access}}`;
+      props.push(`getValueLabel={(value: ${argType}) => value${access}}`);
     }
 
-    const validation = f.required ? 'validate={[required]}' : '';
+    if (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)) {
+      if (!props.some((p) => p.startsWith('getValueLabel'))) {
+        props.push(
+          `getValueLabel={(value: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => value?.label}`,
+        );
+      }
+    }
 
-    // Generate Field Inputs
-    if (f.component === 'RangeNumberField') {
-      input = `      <Field
-        name="${f.name}"
-        component={RangeNumberField}
-        min={0}
-      />\n`;
-    } else if (
-      [
-        'StringField',
-        'NumberField',
-        'DateField',
-        'AwesomeCheckboxField',
-      ].includes(f.component)
-    ) {
-      const extraProps =
-        f.component === 'AwesomeCheckboxField'
-          ? `label={${tLabel}} parse={(v) => v || undefined}`
-          : `placeholder={${tPlace}}`;
-      input = `      <Field
-        name="${f.name}"
-        component={${f.component}}
-        ${extraProps}
-        ${validation}
-        ${customProps}
-      />\n`;
-    } else if (f.component === 'Autocomplete') {
+    let tagName = 'TableFilterItem'; // Fallback
+    const MAPPING = {
+      AwesomeCheckboxField: 'BooleanFilter',
+      StringField: 'StringFilter',
+      DateField: 'DateFilter',
+      DateTimeField: 'DateTimeFilter',
+      NumberField: 'NumberFilter',
+      RangeNumberField: 'NumberRangeFilter',
+      Autocomplete: 'AsyncSelectFilter',
+      Select: 'SelectFilter',
+    };
+    if (MAPPING[f.component]) {
+      tagName = MAPPING[f.component];
+    }
+
+    // Add extra props
+    if (tagName === 'BooleanFilter') {
+      props.push(`parse={(v) => v || undefined}`);
+    } else if (tagName === 'NumberRangeFilter') {
+      props.push(`min={0}`);
+    } else if (tagName === 'AsyncSelectFilter') {
+      const searchParam =
+        f.searchParam === false
+          ? 'null as any'
+          : `'${f.searchParam || 'name'}'`;
       const extraQuery = f.extraQuery
         ? `, ${JSON.stringify(f.extraQuery).replace(/"(props\.[a-zA-Z0-9_.]+)"/g, '$1')}`
         : '';
       const extraPath = f.extraPath
         ? `, ${JSON.stringify(f.extraPath).replace(/"(props\.[a-zA-Z0-9_.]+)"/g, '$1')}`
         : '';
+      props.push(
+        `loadOptions={createLoadOptions(${f.loadOptions}${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}`,
+      );
+      props.push(`defaultOptions`);
       const vType = f.valueType ? `: ${f.valueType}` : '';
-      const spreads = (f.propSpreads || [])
-        .map((s) => `{...${s}}`)
-        .join('\n            ');
-      const autocompleteProps = f.props
-        ? Object.entries(f.props)
-          .map(([k, v]) => `${k}={${v}}`)
-          .join('\n            ')
-        : '';
-
-      const searchParam =
-        f.searchParam === false
-          ? ', null as any'
-          : `, '${f.searchParam || 'name'}'`;
-
-      input = `      <Field
-        name="${f.name}"
-        ${validation}
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={${tPlace}}
-            loadOptions={createLoadOptions(${f.loadOptions}${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}
-            defaultOptions
-            getOptionValue={(option${vType}) => String(option.${f.valueField || 'url'} || '')}
-            getOptionLabel={(option${vType}) => ${f.itemType === 'User' ? 'String(option.full_name || option.username || option.email || "")' : `String(option.${f.labelField || 'name'} || '')`}}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            ${commonSelectProps}
-            ${spreads}
-            ${autocompleteProps}
-          />
-        )}
-      />\n`;
-    } else if (f.component === 'Select') {
-      const optionsVar = f.optionsPlaceholder?.replace(/^props\./, 'props.');
+      props.push(
+        `getOptionValue={(option${vType}) => String(option.${f.valueField || 'url'} || '')}`,
+      );
+      props.push(
+        `getOptionLabel={(option${vType}) => ${f.itemType === 'User' ? 'String(option.full_name || option.username || option.email || "")' : `String(option.${f.labelField || 'name'} || '')`} }`,
+      );
+    } else if (tagName === 'SelectFilter') {
+      const optionsVar = f.optionsPlaceholder;
+      props.push(`options={${optionsVar}}`);
       const vType = f.valueType ? `: ${f.valueType}` : '';
-      const selectProps = f.props
-        ? Object.entries(f.props)
-          .map(([k, v]) => `${k}={${v}}`)
-          .join('\n            ')
-        : '';
-
-      input = `      <Field
-        name="${f.name}"
-        ${validation}
-        component={(fieldProps) => (
-          <Select
-            placeholder={${tPlace}}
-            options={${optionsVar}}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            ${f.valueField ? `getOptionValue={(option${vType}) => String(option.${f.valueField})}` : optionsVar.startsWith('props.') ? '' : `getOptionValue={(option: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => String(option.value)}`}
-            ${f.labelField ? `getOptionLabel={(option${vType}) => option.${f.labelField}}` : optionsVar.startsWith('props.') ? '' : `getOptionLabel={(option: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => option.label}`}
-            ${commonSelectProps}
-            ${selectProps}
-          />
-        )}
-      />\n`;
-    } else {
-      input = `      <${f.component} ${customProps} />\n`;
+      if (f.valueField) {
+        props.push(
+          `getOptionValue={(option${vType}) => String(option.${f.valueField})}`,
+        );
+      } else if (!optionsVar.startsWith('props.')) {
+        props.push(
+          `getOptionValue={(option: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => String(option.value)}`,
+        );
+      }
+      if (f.labelField) {
+        props.push(
+          `getOptionLabel={(option${vType}) => option.${f.labelField}}`,
+        );
+      } else if (!optionsVar.startsWith('props.')) {
+        props.push(
+          `getOptionLabel={(option: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => option.label}`,
+        );
+      }
     }
 
-    let jsx = `    <TableFilterItem
-      title={${tLabel}}
-      name="${f.name}"
-      ${f.required ? 'hideRemoveButton={true}' : ''}
-      ${valLabel || (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder) ? `getValueLabel={(value: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => value?.label}` : '')}
-    >
-${input}    </TableFilterItem>\n`;
+    if (['SelectFilter', 'AsyncSelectFilter'].includes(tagName)) {
+      props.push(`isClearable={${!f.required}}`);
+      if (f.isMulti) props.push(`isMulti={true}`);
+    }
+
+    if (f.placeholder || (f.label && tagName !== 'BooleanFilter')) {
+      props.push(`placeholder={${tPlace}}`);
+    }
+
+    if (f.props) {
+      Object.entries(f.props).forEach(([k, v]) => props.push(`${k}={${v}}`));
+    }
+    if (f.propSpreads) {
+      f.propSpreads.forEach((s) => props.push(`{...${s}}`));
+    }
+
+    let jsx = `    <${tagName}\n      ${props.join('\n      ')} />\n`;
 
     if (f.isHidden) {
       const hiddenCond =
@@ -828,6 +810,18 @@ ${filters.map(Generator.selector).join('')}  }
     const sdk = new Set();
     const comps = new Set();
     const extras = new Set();
+    const tableComps = new Set();
+
+    const MAPPING = {
+      AwesomeCheckboxField: 'BooleanFilter',
+      StringField: 'StringFilter',
+      DateField: 'DateFilter',
+      DateTimeField: 'DateTimeFilter',
+      NumberField: 'NumberFilter',
+      RangeNumberField: 'NumberRangeFilter',
+      Autocomplete: 'AsyncSelectFilter',
+      Select: 'SelectFilter',
+    };
 
     opIds.forEach((id) => {
       const opId = config.overrides[id]?.operationId || `${id}_list`;
@@ -844,69 +838,36 @@ ${filters.map(Generator.selector).join('')}  }
           }
         }
         if (f.feature) comps.add('feature');
-        if (f.component === 'Autocomplete') comps.add('AsyncSelect');
-        if (f.component === 'Select' || f.options) comps.add('Select');
+        const tagName = MAPPING[f.component] || 'TableFilterItem';
+        tableComps.add(tagName);
       });
     });
+
+    const lines = [
+      `import { FunctionComponent } from 'react';`,
+      `import { translate } from '@/i18n';`,
+      `import { ${Array.from(tableComps).sort().join(', ')} } from '@/table';`,
+    ];
 
     const hasRequired = Array.from(opIds).some((id) =>
       opFilters[id].some((f) => f.required),
     );
-
-    const lines = [
-      `import { FunctionComponent } from 'react';`,
-      `import { Field } from 'react-final-form';`,
-      `import { translate } from '@/i18n';`,
-      `import { TableFilterItem } from '@/table/TableFilterItem';`,
-    ];
 
     if (hasRequired) {
       lines.push(`import { required } from '@/core/validators';`);
     }
 
     if (comps.has('feature')) {
+      lines.push(`import { isFeatureVisible } from '@/features/connect';`);
+      lines.push(`import { MarketplaceFeatures } from '@/FeaturesEnums';`);
+    }
+
+    if (tableComps.has('AsyncSelectFilter')) {
       lines.push(
-        `import { isFeatureVisible } from '@/features/connect';`,
-      );
-      lines.push(
-        `import { MarketplaceFeatures } from '@/FeaturesEnums';`,
+        `import { createLoadOptions } from '@/form/select/createLoadOptions';\n`,
       );
     }
 
-    const hasComp = (c) =>
-      Array.from(opIds).some((id) =>
-        opFilters[id].some((f) => f.component === c),
-      );
-    if (hasComp('AwesomeCheckboxField'))
-      lines.push(
-        `import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';`,
-      );
-    if (hasComp('DateField'))
-      lines.push(`import { DateField } from '@/form/DateField';`);
-    if (hasComp('RangeNumberField'))
-      lines.push(
-        `import { RangeNumberField } from '@/form/RangeNumberField';`,
-      );
-    const formFields = [];
-    if (hasComp('StringField')) formFields.push('StringField');
-    if (hasComp('NumberField')) formFields.push('NumberField');
-    if (formFields.length)
-      lines.push(`import { ${formFields.join(', ')} } from '@/form';`);
-
-    const themed = [
-      comps.has('Select') && 'Select',
-      comps.has('AsyncSelect') && 'AsyncSelect',
-    ].filter(Boolean);
-
-    if (themed.length > 0) {
-      lines.push(
-        `import { ${themed.join(', ')} } from '@/form/select';`,
-      );
-    }
-
-    if (comps.has('AsyncSelect'))
-      lines.push(`import { createLoadOptions } from '@/form/select/createLoadOptions';
-`);
     lines.push(
       `import { ${Array.from(sdk).sort().join(', ')} } from 'waldur-js-client';`,
     );

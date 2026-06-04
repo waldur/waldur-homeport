@@ -9,7 +9,7 @@ import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { setMarketplaceFilter } from '@/marketplace/landing/filter/store/actions';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
-import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { ProjectAutocomplete } from '@/marketplace/resources/list/ProjectAutocomplete';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Customer } from '@/workspace/types';
 
@@ -86,7 +86,7 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
               />
             </Col>
             <Col lg={6}>
-              <ProjectFilter
+              <ProjectAutocomplete
                 customer_uuid={values?.organization?.uuid}
                 isDisabled={!values?.organization?.uuid}
                 placeholder={translate('Select a project')}

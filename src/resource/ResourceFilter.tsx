@@ -1,12 +1,11 @@
 import { FC, useMemo } from 'react';
-import { Field } from 'react-final-form';
 
-import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { formatResourceShort } from '@/marketplace/utils';
+import { AsyncSelectFilter } from '@/table';
 
-export const ResourceAutocomplete: FC<{}> = () => {
+export const ResourceFilter: FC<any> = (props) => {
   const loadOptions = useMemo(
     () =>
       resourceAutocomplete({
@@ -15,19 +14,16 @@ export const ResourceAutocomplete: FC<{}> = () => {
     [],
   );
 
-  const renderField = (fieldProps) => (
-    <AsyncSelect
+  return (
+    <AsyncSelectFilter
+      title={translate('Resource')}
+      name="resource"
+      badgeValue={(value) => value?.name}
       placeholder={translate('Select resource...')}
       loadOptions={loadOptions}
       getOptionValue={(option) => option.uuid}
       getOptionLabel={(option) => formatResourceShort(option)}
-      value={fieldProps.input.value}
-      onChange={(value) => fieldProps.input.onChange(value)}
-      noOptionsMessage={() => translate('No resources')}
-      isClearable={true}
-      variant="tableFilter"
+      {...props}
     />
   );
-
-  return <Field name="resource" component={renderField} />;
 };

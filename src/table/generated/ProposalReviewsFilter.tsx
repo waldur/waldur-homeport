@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   Customer,
   Proposal,
@@ -17,10 +16,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const ProposalReviewStateOptions: ProposalReviewStateOption[] = [
   {
@@ -45,155 +43,85 @@ export const ProposalReviewsFilter: FunctionComponent<
   ProposalReviewsFilterProps
 > = (props) => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('State')}
       name="state"
       getValueLabel={(value: ProposalReviewStateOption) => value?.label}
-    >
-      <Field
-        name="state"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('State')}
-            options={ProposalReviewStateOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: ProposalReviewStateOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: ProposalReviewStateOption) => option.label}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('State')}
+      options={ProposalReviewStateOptions}
+      getOptionValue={(option: ProposalReviewStateOption) =>
+        String(option.value)
+      }
+      getOptionLabel={(option: ProposalReviewStateOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <AsyncSelectFilter
       title={translate('Call')}
       name="call"
       getValueLabel={(value: PublicCall) => value?.name}
-    >
-      <Field
-        name="call"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Call')}
-            loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
-            defaultOptions
-            getOptionValue={(option: PublicCall) => String(option.uuid || '')}
-            getOptionLabel={(option: PublicCall) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Call')}
+      loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
+      defaultOptions
+      getOptionValue={(option: PublicCall) => String(option.uuid || '')}
+      getOptionLabel={(option: PublicCall) => String(option.name || '')}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Round')}
       name="round"
       getValueLabel={(value: ProtectedRound) => value?.name}
-    >
-      <Field
-        name="round"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Round')}
-            loadOptions={createLoadOptions(
-              proposalProtectedCallsRoundsList,
-              null as any,
-              {},
-              { uuid: props.callUuid },
-            )}
-            defaultOptions
-            getOptionValue={(option: ProtectedRound) =>
-              String(option.uuid || '')
-            }
-            getOptionLabel={(option: ProtectedRound) =>
-              String(option.name || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Round')}
+      loadOptions={createLoadOptions(
+        proposalProtectedCallsRoundsList,
+        null as any,
+        {},
+        { uuid: props.callUuid },
+      )}
+      defaultOptions
+      getOptionValue={(option: ProtectedRound) => String(option.uuid || '')}
+      getOptionLabel={(option: ProtectedRound) => String(option.name || '')}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Organization')}
       name="organization"
       getValueLabel={(value: Customer) => value?.name}
-    >
-      <Field
-        name="organization"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Organization')}
-            loadOptions={createLoadOptions(customersList, 'query')}
-            defaultOptions
-            getOptionValue={(option: Customer) => String(option.uuid || '')}
-            getOptionLabel={(option: Customer) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Organization')}
+      loadOptions={createLoadOptions(customersList, 'query')}
+      defaultOptions
+      getOptionValue={(option: Customer) => String(option.uuid || '')}
+      getOptionLabel={(option: Customer) => String(option.name || '')}
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Reviewer')}
       name="reviewer"
       getValueLabel={(value: User) =>
         value?.full_name || value?.username || value?.email
       }
-    >
-      <Field
-        name="reviewer"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Reviewer')}
-            loadOptions={createLoadOptions(usersList, 'query')}
-            defaultOptions
-            getOptionValue={(option: User) => String(option.uuid || '')}
-            getOptionLabel={(option: User) =>
-              String(option.full_name || option.username || option.email || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Reviewer')}
+      loadOptions={createLoadOptions(usersList, 'query')}
+      defaultOptions
+      getOptionValue={(option: User) => String(option.uuid || '')}
+      getOptionLabel={(option: User) =>
+        String(option.full_name || option.username || option.email || '')
+      }
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Proposal')}
       name="proposal"
       getValueLabel={(value: Proposal) => value?.name}
-    >
-      <Field
-        name="proposal"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Proposal')}
-            loadOptions={createLoadOptions(proposalProposalsList, 'name', {
-              call_uuid: props.callUuid,
-            })}
-            defaultOptions
-            getOptionValue={(option: Proposal) => String(option.uuid || '')}
-            getOptionLabel={(option: Proposal) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Proposal')}
+      loadOptions={createLoadOptions(proposalProposalsList, 'name', {
+        call_uuid: props.callUuid,
+      })}
+      defaultOptions
+      getOptionValue={(option: Proposal) => String(option.uuid || '')}
+      getOptionLabel={(option: Proposal) => String(option.name || '')}
+      isClearable={true}
+    />
   </>
 );
 

@@ -8,7 +8,7 @@ import {
   ALL_RESOURCES_TABLE_ID,
   PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
 } from '@/marketplace/resources/list/constants';
-import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { useTitle } from '@/navigation/title';
 import { createFetcher } from '@/table/api';
 import { TableProps } from '@/table/types';
@@ -24,7 +24,7 @@ interface AllResourcesListProps extends Partial<TableProps> {
 const AllResourcesListTable: FC<AllResourcesListProps> = (props) => {
   useTitle(translate('All resources'), '', 'browser');
   const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources('all-resources');
+    useOrganizationAndProjectAutocompletesForResources('all-resources');
 
   const { values } = useFormState();
   const filterValues: any = values;

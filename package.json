@@ -194,7 +194,6 @@
       "locales/tools/*.cjs",
       "generate-filters.cjs",
       "src/table/generated/*.tsx",
-      "src/core/DirtyFormContext.tsx",
       "test/mocks/svg.tsx"
     ]
   },

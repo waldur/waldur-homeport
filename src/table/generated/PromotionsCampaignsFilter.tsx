@@ -1,15 +1,13 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   CampaignStateEnum,
   PromotionsCampaignsListData,
 } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const CampaignStateOptions: CampaignStateOption[] = [
   {
@@ -47,53 +45,27 @@ export interface DiscountTypeOption {
 
 export const PromotionsCampaignsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <SelectFilter
       title={translate('State')}
       name="state"
       getValueLabel={(value: CampaignStateOption) => value?.label}
-    >
-      <Field
-        name="state"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('State')}
-            options={CampaignStateOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: CampaignStateOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: CampaignStateOption) => option.label}
-            isClearable={true}
-            isMulti={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('State')}
+      options={CampaignStateOptions}
+      getOptionValue={(option: CampaignStateOption) => String(option.value)}
+      getOptionLabel={(option: CampaignStateOption) => option.label}
+      isClearable={true}
+      isMulti={true}
+    />
+    <SelectFilter
       title={translate('Discount type')}
       name="discount_type"
       getValueLabel={(value: DiscountTypeOption) => value?.label}
-    >
-      <Field
-        name="discount_type"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Discount type')}
-            options={DiscountTypeOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: DiscountTypeOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: DiscountTypeOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Discount type')}
+      options={DiscountTypeOptions}
+      getOptionValue={(option: DiscountTypeOption) => String(option.value)}
+      getOptionLabel={(option: DiscountTypeOption) => option.label}
+      isClearable={true}
+    />
   </>
 );
 

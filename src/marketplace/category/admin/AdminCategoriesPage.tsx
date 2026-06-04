@@ -1,7 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
-import { Field, Form, useFormState } from 'react-final-form';
+import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceCategoriesList,
   MarketplaceCategoriesListData,
@@ -11,15 +11,14 @@ import Avatar from '@/core/Avatar';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { truncate } from '@/core/utils';
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { getCategoryGroups } from '@/marketplace/common/api';
 import { CategoryLink } from '@/marketplace/links/CategoryLink';
 import { Category } from '@/marketplace/types';
+import { SelectFilter } from '@/table';
 import { createFetcher } from '@/table/api';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import Table from '@/table/Table';
-import { TableFilterItem } from '@/table/TableFilterItem';
 import { useTable } from '@/table/useTable';
 
 import { CategoryCreateButton } from './CategoryCreateButton';
@@ -51,25 +50,14 @@ const categoryFields: MarketplaceCategoriesListData['query'] = {
 const CategoriesListFilter: FunctionComponent<{ options: GroupOption[] }> = ({
   options,
 }) => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Group')}
     name="group"
     badgeValue={(value: GroupOption) => value?.label}
-  >
-    <Field
-      name="group"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Select group...')}
-          options={options}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Select group...')}
+    options={options}
+    isClearable={true}
+  />
 );
 
 const AdminCategoriesPageInner: FunctionComponent = () => {

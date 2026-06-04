@@ -1,12 +1,10 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import { EventsListData } from 'waldur-js-client';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 export const CustomerEventsFeatureOptions: CustomerEventsFeatureOption[] = [
   {
@@ -28,30 +26,19 @@ export interface CustomerEventsFeatureOption {
 }
 
 export const CustomerEventsFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <SelectFilter
     title={translate('Type')}
     name="feature"
     getValueLabel={(value: CustomerEventsFeatureOption) => value?.label}
-  >
-    <Field
-      name="feature"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Type')}
-          options={CustomerEventsFeatureOptions}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: CustomerEventsFeatureOption) =>
-            String(option.value)
-          }
-          getOptionLabel={(option: CustomerEventsFeatureOption) => option.label}
-          isClearable={true}
-          isMulti={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Type')}
+    options={CustomerEventsFeatureOptions}
+    getOptionValue={(option: CustomerEventsFeatureOption) =>
+      String(option.value)
+    }
+    getOptionLabel={(option: CustomerEventsFeatureOption) => option.label}
+    isClearable={true}
+    isMulti={true}
+  />
 );
 
 export const CustomerEventsFilterFormId = 'CustomerEventsFilter';

@@ -1,48 +1,32 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   MarketplacePlanComponentsListData,
   ProviderOfferingDetails,
   marketplaceProviderOfferingsList,
 } from 'waldur-js-client';
 
-import { AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter } from '@/table';
 
 export const MarketplacePlanComponentsFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
+  <AsyncSelectFilter
     title={translate('Offering')}
     name="offering"
     getValueLabel={(value: ProviderOfferingDetails) => value?.name}
-  >
-    <Field
-      name="offering"
-      component={(fieldProps) => (
-        <AsyncSelect
-          placeholder={translate('Offering')}
-          loadOptions={createLoadOptions(
-            marketplaceProviderOfferingsList,
-            'name',
-          )}
-          defaultOptions
-          getOptionValue={(option: ProviderOfferingDetails) =>
-            String(option.uuid || '')
-          }
-          getOptionLabel={(option: ProviderOfferingDetails) =>
-            String(option.name || '')
-          }
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
-    />
-  </TableFilterItem>
+    placeholder={translate('Offering')}
+    loadOptions={createLoadOptions(marketplaceProviderOfferingsList, 'name')}
+    defaultOptions
+    getOptionValue={(option: ProviderOfferingDetails) =>
+      String(option.uuid || '')
+    }
+    getOptionLabel={(option: ProviderOfferingDetails) =>
+      String(option.name || '')
+    }
+    isClearable={true}
+  />
 );
 
 export const MarketplacePlanComponentsFilterFormId =

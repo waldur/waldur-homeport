@@ -1,90 +1,52 @@
-import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
+import { FC } from 'react';
 
-import { OrganizationRoleSelectField } from '@/customer/team/OrganizationRoleSelectField';
-import { ProjectRoleSelectField } from '@/customer/team/ProjectRoleSelectField';
-import { SelectField } from '@/form';
+import { OrganizationRoleFilter } from '@/customer/team/OrganizationRoleFilter';
+import { ProjectRoleFilter } from '@/customer/team/ProjectRoleFilter';
 import { translate } from '@/i18n';
-import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
+import { SelectFilter } from '@/table';
 
 import { getRoleFilterOptions, getUserStatusFilterOptions } from './utils';
 
 import './UserFilter.scss';
 
-export const UserFilter: FunctionComponent = () => {
+export const UserFilter: FC = () => {
   return (
     <>
-      <TableFilterItem
-        title={translate('Organization')}
-        name="organization"
-        badgeValue={(value) => value?.name}
-      >
-        <OrganizationAutocomplete
-          reactSelectProps={{ variant: 'tableFilter' }}
-        />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Project role')}
-        name="project_role"
+      <OrganizationFilter />
+      <ProjectRoleFilter
         getValueLabel={(value) => value.description || value.name}
         instantApply={false}
-      >
-        <ProjectRoleSelectField />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Organization role')}
-        name="organization_role"
+      />
+      <OrganizationRoleFilter
         getValueLabel={(value) => value.description || value.name}
         instantApply={false}
-      >
-        <OrganizationRoleSelectField />
-      </TableFilterItem>
-      <TableFilterItem
+      />
+      <SelectFilter
         name="role"
         title={translate('Role')}
         instantApply={false}
-      >
-        <Field
-          name="role"
-          component={(fieldProps) => (
-            <SelectField
-              {...fieldProps}
-              className="Select"
-              placeholder={translate('Select role')}
-              options={getRoleFilterOptions()}
-              noUpdateOnBlur={true}
-              isClearable={true}
-              variant="tableFilter"
-              isMulti
-            />
-          )}
-        />
-      </TableFilterItem>
-      <TableFilterItem
+        className="Select"
+        placeholder={translate('Select role')}
+        options={getRoleFilterOptions()}
+        noUpdateOnBlur={true}
+        isClearable={true}
+        isMulti
+      />
+      <SelectFilter
         name="is_active"
         title={translate('Status')}
         badgeValue={(value) =>
           getUserStatusFilterOptions().find((op) => op.value === value)?.label
         }
         ellipsis={false}
-      >
-        <Field
-          name="is_active"
-          component={(fieldProps) => (
-            <SelectField
-              {...fieldProps}
-              className="Select"
-              placeholder={translate('Select status')}
-              options={getUserStatusFilterOptions()}
-              noUpdateOnBlur={true}
-              simpleValue={true}
-              isClearable={true}
-              variant="tableFilter"
-            />
-          )}
-        />
-      </TableFilterItem>
+        className="Select"
+        placeholder={translate('Select status')}
+        options={getUserStatusFilterOptions()}
+        noUpdateOnBlur={true}
+        simpleValue={true}
+        isClearable={true}
+      />
     </>
   );
 };

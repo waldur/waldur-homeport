@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Field, Form as FinalForm } from 'react-final-form';
+import { Form as FinalForm } from 'react-final-form';
 import {
   PatchedRequestTypeAdminRequest,
   RequestTypeAdmin,
@@ -9,9 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { NumberField, StringField, SubmitButton } from '@/form';
-import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BooleanGroup, NumberGroup, StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -90,59 +88,51 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
               />
             }
           >
-            <FormGroup label={translate('Name')} required>
-              <Field
-                component={StringField}
-                name="name"
-                validate={required}
-                disabled={isEdit && resolve.requestType?.is_synced}
-              />
-              {isEdit && resolve.requestType?.is_synced && (
-                <small className="text-muted">
-                  {translate(
-                    'Name cannot be changed for synced request types.',
-                  )}
-                </small>
+            <StringGroup
+              label={translate('Name')}
+              name="name"
+              validate={required}
+              disabled={isEdit && resolve.requestType?.is_synced}
+              required
+              description={
+                isEdit &&
+                resolve.requestType?.is_synced &&
+                translate('Name cannot be changed for synced request types.')
+              }
+            />
+
+            <StringGroup
+              label={translate('Issue type name')}
+              name="issue_type_name"
+              validate={required}
+              disabled={isEdit && resolve.requestType?.is_synced}
+              required
+              description={
+                isEdit &&
+                resolve.requestType?.is_synced &&
+                translate(
+                  'Issue type name cannot be changed for synced request types.',
+                )
+              }
+            />
+
+            <NumberGroup
+              label={translate('Order')}
+              name="order"
+              min={0}
+              parse={Number}
+              description={translate(
+                'Display order. First type (lowest order) is the default.',
               )}
-            </FormGroup>
+            />
 
-            <FormGroup label={translate('Issue type name')} required>
-              <Field
-                component={StringField}
-                name="issue_type_name"
-                validate={required}
-                disabled={isEdit && resolve.requestType?.is_synced}
-              />
-              {isEdit && resolve.requestType?.is_synced && (
-                <small className="text-muted">
-                  {translate(
-                    'Issue type name cannot be changed for synced request types.',
-                  )}
-                </small>
+            <BooleanGroup
+              label={translate('Active')}
+              name="is_active"
+              description={translate(
+                'Active request types are available for issue creation.',
               )}
-            </FormGroup>
-
-            <FormGroup label={translate('Order')}>
-              <Field component={NumberField} name="order" min={0} />
-              <small className="text-muted">
-                {translate(
-                  'Display order. First type (lowest order) is the default.',
-                )}
-              </small>
-            </FormGroup>
-
-            <FormGroup>
-              <Field
-                component={AwesomeCheckboxField}
-                name="is_active"
-                label={translate('Active')}
-              />
-              <small className="text-muted">
-                {translate(
-                  'Active request types are available for issue creation.',
-                )}
-              </small>
-            </FormGroup>
+            />
           </ModalDialog>
         </form>
       )}

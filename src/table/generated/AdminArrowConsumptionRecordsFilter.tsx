@@ -1,17 +1,15 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   AdminArrowConsumptionRecordsListData,
   Customer,
   customersList,
 } from 'waldur-js-client';
 
-import { Select, AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const IsFinalizedOptions: IsFinalizedOption[] = [
   {
@@ -30,49 +28,27 @@ export interface IsFinalizedOption {
 
 export const AdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Organization')}
       name="organization"
       getValueLabel={(value: Customer) => value?.name}
-    >
-      <Field
-        name="organization"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Organization')}
-            loadOptions={createLoadOptions(customersList, 'query')}
-            defaultOptions
-            getOptionValue={(option: Customer) => String(option.uuid || '')}
-            getOptionLabel={(option: Customer) => String(option.name || '')}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Organization')}
+      loadOptions={createLoadOptions(customersList, 'query')}
+      defaultOptions
+      getOptionValue={(option: Customer) => String(option.uuid || '')}
+      getOptionLabel={(option: Customer) => String(option.name || '')}
+      isClearable={true}
+    />
+    <SelectFilter
       title={translate('Status')}
       name="is_finalized"
       getValueLabel={(value: IsFinalizedOption) => value?.label}
-    >
-      <Field
-        name="is_finalized"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Status')}
-            options={IsFinalizedOptions}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: IsFinalizedOption) => String(option.value)}
-            getOptionLabel={(option: IsFinalizedOption) => option.label}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Status')}
+      options={IsFinalizedOptions}
+      getOptionValue={(option: IsFinalizedOption) => String(option.value)}
+      getOptionLabel={(option: IsFinalizedOption) => option.label}
+      isClearable={true}
+    />
   </>
 );
 

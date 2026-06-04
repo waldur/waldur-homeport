@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
-import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import { RemoveFilterBadgeButton } from '@/table/TableFilterItem';
 
@@ -14,7 +14,7 @@ export const PageBarFilters = () => {
   const filters = useSelector(getMarketplaceFilters);
 
   const { clearAllFilters, removeFilter } =
-    useOrganizationAndProjectFiltersForResources();
+    useOrganizationAndProjectAutocompletesForResources();
 
   if (!filters?.length) return null;
 

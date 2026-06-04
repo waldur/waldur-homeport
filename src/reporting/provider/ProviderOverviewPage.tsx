@@ -11,7 +11,7 @@ import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import { ProviderFilter } from './ProviderFilter';
+import { ProviderSelector } from './ProviderSelector';
 
 const ProviderOverviewContent: FC<{ providerUuid: string }> = ({
   providerUuid,
@@ -95,7 +95,7 @@ export const ProviderOverviewPage: FC = () => {
         return (
           <>
             <ReportingTitle reportKey="provider-overview">
-              <ProviderFilter />
+              <ProviderSelector />
             </ReportingTitle>
 
             {providerUuid ? (

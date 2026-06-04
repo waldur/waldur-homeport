@@ -1,7 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 import {
   MarketplacePlansUsageStatsListData,
   ProviderOfferingDetails,
@@ -10,71 +9,45 @@ import {
   marketplaceServiceProvidersList,
 } from 'waldur-js-client';
 
-import { AsyncSelect } from '@/form/select';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { AsyncSelectFilter } from '@/table';
 
 export const MarketplacePlansUsageStatsFilter: FunctionComponent<{}> = () => (
   <>
-    <TableFilterItem
+    <AsyncSelectFilter
       title={translate('Service provider')}
       name="provider"
       getValueLabel={(value: ServiceProvider) => value?.customer_name}
-    >
-      <Field
-        name="provider"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Service provider')}
-            loadOptions={createLoadOptions(
-              marketplaceServiceProvidersList,
-              'customer_keyword',
-            )}
-            defaultOptions
-            getOptionValue={(option: ServiceProvider) =>
-              String(option.customer_uuid || '')
-            }
-            getOptionLabel={(option: ServiceProvider) =>
-              String(option.customer_name || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
-    <TableFilterItem
+      placeholder={translate('Service provider')}
+      loadOptions={createLoadOptions(
+        marketplaceServiceProvidersList,
+        'customer_keyword',
+      )}
+      defaultOptions
+      getOptionValue={(option: ServiceProvider) =>
+        String(option.customer_uuid || '')
+      }
+      getOptionLabel={(option: ServiceProvider) =>
+        String(option.customer_name || '')
+      }
+      isClearable={true}
+    />
+    <AsyncSelectFilter
       title={translate('Offering')}
       name="offering"
       getValueLabel={(value: ProviderOfferingDetails) => value?.name}
-    >
-      <Field
-        name="offering"
-        component={(fieldProps) => (
-          <AsyncSelect
-            placeholder={translate('Offering')}
-            loadOptions={createLoadOptions(
-              marketplaceProviderOfferingsList,
-              'name',
-            )}
-            defaultOptions
-            getOptionValue={(option: ProviderOfferingDetails) =>
-              String(option.uuid || '')
-            }
-            getOptionLabel={(option: ProviderOfferingDetails) =>
-              String(option.name || '')
-            }
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            variant="tableFilter"
-          />
-        )}
-      />
-    </TableFilterItem>
+      placeholder={translate('Offering')}
+      loadOptions={createLoadOptions(marketplaceProviderOfferingsList, 'name')}
+      defaultOptions
+      getOptionValue={(option: ProviderOfferingDetails) =>
+        String(option.uuid || '')
+      }
+      getOptionLabel={(option: ProviderOfferingDetails) =>
+        String(option.name || '')
+      }
+      isClearable={true}
+    />
   </>
 );
 

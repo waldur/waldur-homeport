@@ -16,7 +16,7 @@ export const AccountingPeriodFieldComponent: FunctionComponent<{
     onBlur={(e) => e.preventDefault()}
     options={props.options}
     isClearable={false}
-    className="accounting-period-selector metronic-select-container"
+    className="accounting-period-selector"
     {...props.reactSelectProps}
   />
 );

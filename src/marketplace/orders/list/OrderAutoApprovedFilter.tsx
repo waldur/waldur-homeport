@@ -1,28 +1,23 @@
-import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
+import { FC } from 'react';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { SelectFilter } from '@/table';
 
 const getAutoApprovedOptions = () => [
   { value: 'true', label: translate('Yes') },
   { value: 'false', label: translate('No') },
 ];
 
-export const OrderAutoApprovedFilter: FunctionComponent = () => {
+export const OrderAutoApprovedFilter: FC<any> = (props) => {
   return (
-    <Field
+    <SelectFilter
+      title={translate('Auto-approved')}
       name="was_auto_approved"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('Auto-approved?')}
-          options={getAutoApprovedOptions()}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          isClearable={true}
-          variant="tableFilter"
-        />
-      )}
+      badgeValue={(value) => value?.label}
+      placeholder={translate('Auto-approved?')}
+      options={getAutoApprovedOptions()}
+      isClearable={true}
+      {...props}
     />
   );
 };

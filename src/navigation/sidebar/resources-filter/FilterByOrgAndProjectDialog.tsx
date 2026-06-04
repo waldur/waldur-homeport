@@ -5,13 +5,13 @@ import { Project } from 'waldur-js-client';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
-import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { ProjectAutocomplete } from '@/marketplace/resources/list/ProjectAutocomplete';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Customer } from '@/workspace/types';
 
-import { useOrganizationAndProjectFiltersForResources } from './utils';
+import { useOrganizationAndProjectAutocompletesForResources } from './utils';
 
 interface FormData {
   organization?: Customer;
@@ -45,7 +45,7 @@ const DialogFields: FC = () => {
   return (
     <div className="d-flex flex-column gap-7">
       <OrganizationAutocomplete />
-      <ProjectFilter
+      <ProjectAutocomplete
         customer_uuid={organizationUuid}
         isDisabled={!organizationUuid}
       />
@@ -58,7 +58,7 @@ export const FilterByOrgAndProjectDialog: FC<
 > = (props) => {
   const { closeDialog } = useModal();
   const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources();
+    useOrganizationAndProjectAutocompletesForResources();
 
   const initialValues = props.resolve?.initialValues || props.initialValues;
 

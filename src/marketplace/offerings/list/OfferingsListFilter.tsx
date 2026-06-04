@@ -1,14 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
 
-import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
+import { OfferingTypeFilter } from '@/marketplace/offerings/details/OfferingTypeFilter';
 import { OfferingStateFilter } from '@/marketplace/offerings/list/OfferingStateFilter';
-import { ServiceProviderAutocomplete } from '@/marketplace/offerings/ServiceProviderAutocomplete';
+import { ProviderFilter } from '@/marketplace/orders/ProviderFilter';
 import { CategoryFilter } from '@/marketplace/resources/list/CategoryFilter';
 import { TagFilter } from '@/marketplace/tags/TagFilter';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { SelectFilter } from '@/table';
 
 interface OfferingsListFilterOwnProps {
   showCategory?;
@@ -31,66 +29,23 @@ export const OfferingsListFilter: FunctionComponent<
 > = ({ showCategory, showOrganization = true }) => {
   return (
     <>
-      <TableFilterItem
-        title={translate('State')}
-        name="state"
-        instantApply={false}
-      >
-        <OfferingStateFilter />
-      </TableFilterItem>
+      <OfferingStateFilter instantApply={false} />
       {showOrganization ? (
-        <TableFilterItem
-          title={translate('Organization')}
-          name="organization"
+        <ProviderFilter
           badgeValue={(value) => value?.name}
-        >
-          <ServiceProviderAutocomplete />
-        </TableFilterItem>
-      ) : null}
-      <TableFilterItem
-        title={translate('Integration type')}
-        name="offering_type"
-        badgeValue={(value) => value?.label}
-      >
-        <OfferingTypeAutocomplete
-          reactSelectProps={{ variant: 'tableFilter' }}
+          name="organization"
         />
-      </TableFilterItem>
-      {showCategory ? (
-        <TableFilterItem
-          title={translate('Category')}
-          name="category"
-          badgeValue={(value) => value?.title}
-        >
-          <CategoryFilter />
-        </TableFilterItem>
       ) : null}
-      <TableFilterItem
-        title={translate('Tag')}
-        name="tag"
-        badgeValue={(value) => value?.name}
-      >
-        <TagFilter />
-      </TableFilterItem>
-      <TableFilterItem
+      <OfferingTypeFilter />
+      {showCategory ? <CategoryFilter /> : null}
+      <TagFilter />
+      <SelectFilter
         name="shared"
         title={translate('Shared')}
         badgeValue={(value) => value?.label}
-      >
-        <Field
-          name="shared"
-          component={(fieldProps) => (
-            <Select
-              placeholder={translate('Select status')}
-              options={sharedOptions}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              isClearable={true}
-              variant="tableFilter"
-            />
-          )}
-        />
-      </TableFilterItem>
+        placeholder={translate('Select status')}
+        options={sharedOptions}
+      />
     </>
   );
 };

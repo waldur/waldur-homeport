@@ -1,31 +1,20 @@
 import React from 'react';
-import { Field } from 'react-final-form';
 
-import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { tagAutocomplete } from '@/marketplace/common/autocompletes';
+import { AsyncSelectFilter } from '@/table';
 
-export const TagFilter: React.FC<{
-  reactSelectProps?: any;
-}> = (props) => {
+export const TagFilter: React.FC<any> = (props) => {
   return (
-    <Field
+    <AsyncSelectFilter
+      title={translate('Tag')}
       name="tag"
-      component={(fieldProps) => (
-        <AsyncSelect
-          placeholder={translate('Select tag...')}
-          loadOptions={tagAutocomplete}
-          defaultOptions
-          getOptionValue={(option) => option.uuid}
-          getOptionLabel={(option) => option.name}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          noOptionsMessage={() => translate('No tags')}
-          isClearable={true}
-          variant="tableFilter"
-          {...props.reactSelectProps}
-        />
-      )}
+      badgeValue={(value) => value?.name}
+      placeholder={translate('Select tag...')}
+      loadOptions={tagAutocomplete}
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={(option) => option.name}
+      {...props}
     />
   );
 };

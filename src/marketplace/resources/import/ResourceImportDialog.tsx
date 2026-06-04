@@ -15,7 +15,7 @@ import { DataLoader } from '@/navigation/sidebar/marketplace-popup/DataLoader';
 import { sidebarResourcesFilterSelector } from '@/navigation/sidebar/resources-filter/utils';
 import { ActionButton } from '@/table/ActionButton';
 
-import { ProjectFilter } from '../list/ProjectFilter';
+import { ProjectAutocomplete } from '../list/ProjectAutocomplete';
 
 import { ImportButton } from './ImportButton';
 import { ResourcesList } from './ResourcesList';
@@ -135,7 +135,7 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
                   />
                 </Col>
                 <Col lg={6}>
-                  <ProjectFilter
+                  <ProjectAutocomplete
                     customer_uuid={organization?.uuid}
                     isDisabled={!organization?.uuid}
                     placeholder={translate('Select a project')}

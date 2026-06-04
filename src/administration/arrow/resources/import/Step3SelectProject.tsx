@@ -3,7 +3,7 @@ import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { ProjectAutocomplete } from '@/marketplace/resources/list/ProjectAutocomplete';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const Step3SelectProject: FC<WizardFormStepProps> = (props) => {
@@ -22,7 +22,7 @@ export const Step3SelectProject: FC<WizardFormStepProps> = (props) => {
             formatJsxTemplate,
           )}
         </p>
-        <ProjectFilter
+        <ProjectAutocomplete
           customer_uuid={customerUuid}
           placeholder={translate('Select a project...')}
           validator={required}
