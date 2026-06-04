@@ -181,21 +181,30 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
               cardBordered={false}
               initialPageSize={5}
               minHeight="auto"
-              rowActions={({ row }) =>
-                canManage ? (
+              rowActions={({ row }) => {
+                if (!canManage) return null;
+                const actionRow = {
+                  ...row,
+                  scope_type: 'resource_project' as const,
+                  scope_uuid: project.uuid,
+                };
+                return (
                   <ActionsDropdown
-                    row={row}
+                    row={actionRow}
                     refetch={tableProps.fetch}
                     size="sm"
                   >
                     <UpdateUserExpirationAction
-                      row={row}
+                      row={actionRow}
                       refetch={tableProps.fetch}
                     />
-                    <DeleteUserAction row={row} refetch={tableProps.fetch} />
+                    <DeleteUserAction
+                      row={actionRow}
+                      refetch={tableProps.fetch}
+                    />
                   </ActionsDropdown>
-                ) : null
-              }
+                );
+              }}
             />
           </Tab.Pane>
           <Tab.Pane eventKey="invitations" unmountOnExit={true}>

@@ -45,7 +45,14 @@ const CancelInvitationAction: FC<{
     },
   });
 
-  if (row.state !== 'pending') return null;
+  const tooltip =
+    row.state === 'canceled'
+      ? translate('This invitation has already been canceled.')
+      : row.state === 'expired'
+        ? translate('This invitation has expired.')
+        : row.state !== 'pending'
+          ? translate('Only pending invitations can be canceled.')
+          : undefined;
 
   return (
     <ActionItem
@@ -53,7 +60,8 @@ const CancelInvitationAction: FC<{
       action={() => cancelMutation.mutate()}
       iconNode={<XCircleIcon weight="bold" />}
       className="text-danger"
-      disabled={cancelMutation.isPending}
+      disabled={row.state !== 'pending' || cancelMutation.isPending}
+      tooltip={tooltip}
     />
   );
 };
