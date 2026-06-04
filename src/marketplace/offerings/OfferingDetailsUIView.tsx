@@ -1,28 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useMemo } from 'react';
-import {
-  marketplaceCategoriesRetrieve,
-  marketplacePlansUsageStatsList,
-  marketplaceProviderOfferingsRetrieve,
-} from 'waldur-js-client';
+import { marketplacePlansUsageStatsList } from 'waldur-js-client';
 
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
-import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { MAX_PAGE_SIZE, getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { Offering, ServiceProvider } from '@/marketplace/types';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { Offering } from '@/marketplace/types';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { TENANT_TYPE } from '@/openstack/constants';
-
-import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
-import { getOfferingBreadcrumbItems } from './hooks';
-import { OfferingViewHero } from './OfferingViewHero';
 
 const OfferingDashboard = lazyComponent(() =>
   import('./details/dashboard/OfferingDashboard').then((module) => ({
@@ -121,17 +112,6 @@ const TenantHypervisorsTab = lazyComponent(() =>
     default: module.TenantHypervisorsTab,
   })),
 );
-
-async function loadOfferingData(offering_uuid: string) {
-  const offering = (await marketplaceProviderOfferingsRetrieve({
-    path: { uuid: offering_uuid },
-  }).then((response) => response.data)) as Offering;
-  const category = await marketplaceCategoriesRetrieve({
-    path: { uuid: offering.category_uuid },
-  }).then((response) => response.data);
-
-  return { offering, category };
-}
 
 const getTabs = (offering: Offering): PageBarTab[] => {
   return [
@@ -288,32 +268,25 @@ const getTabs = (offering: Offering): PageBarTab[] => {
 };
 
 export const OfferingDetailsUIView = ({
-  provider,
+  offeringData,
+  refetchOffering,
+  isLoadingOffering,
+  errorOffering,
 }: {
-  provider: ServiceProvider;
+  offeringData: any;
+  refetchOffering: any;
+  isLoadingOffering: boolean;
+  errorOffering: any;
 }) => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
 
   const {
-    isLoading: isLoadingOffering,
-    error: errorOffering,
-    data: offeringData,
-    refetch: refetchOffering,
-    isRefetching: isRefetchingOffering,
-  } = useQuery({
-    queryKey: [PROVIDER_OFFERING_DATA_QUERY_KEY, offering_uuid],
-    queryFn: () => loadOfferingData(offering_uuid),
-    refetchOnWindowFocus: false,
-    staleTime: UI_STALE_TIME,
-  });
-  const {
     isLoading: isLoadingPlansUsage,
     error: errorPlansUsage,
     data: plansUsage,
     refetch: refetchPlansUsage,
-    isRefetching: isRefetchingPlansUsage,
   } = useQuery({
     queryKey: ['offeringPlansUsage', offering_uuid],
 
@@ -338,32 +311,6 @@ export const OfferingDetailsUIView = ({
     [offeringData?.offering],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
-
-  usePageHero(
-    <OfferingViewHero
-      offering={offeringData?.offering}
-      refetch={refetch}
-      isRefetching={isRefetchingOffering || isRefetchingPlansUsage}
-      isLoading={isLoadingOffering}
-      error={errorOffering}
-    />,
-
-    [
-      offeringData?.offering,
-      refetch,
-      isRefetchingOffering,
-      isRefetchingPlansUsage,
-      isLoadingOffering,
-      errorOffering,
-    ],
-  );
-
-  const breadcrumbItems = useMemo(
-    () =>
-      getOfferingBreadcrumbItems(offeringData?.offering, provider, 'details'),
-    [offeringData?.offering],
-  );
-  useBreadcrumbs(breadcrumbItems);
 
   return (
     <UIView
