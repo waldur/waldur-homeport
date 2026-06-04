@@ -51,10 +51,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'provider-offering-details',
+    name: 'provider-offering',
     url: '',
     abstract: true,
     parent: 'marketplace-provider',
+    component: lazyComponent(() =>
+      import('./offerings/OfferingUIView').then((module) => ({
+        default: module.OfferingUIView,
+      })),
+    ),
+  },
+  {
+    name: 'provider-offering-details',
+    url: '',
+    abstract: true,
+    parent: 'provider-offering',
     component: lazyComponent(() =>
       import('./offerings/OfferingDetailsUIView').then((module) => ({
         default: module.OfferingDetailsUIView,
@@ -522,7 +533,7 @@ export const states: StateDeclaration[] = [
     name: 'provider-offering-update',
     url: '',
     abstract: true,
-    parent: 'marketplace-provider',
+    parent: 'provider-offering',
     component: lazyComponent(() =>
       import('./offerings/OfferingEditUIView').then((module) => ({
         default: module.OfferingEditUIView,
@@ -710,10 +721,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-offering-details',
+    name: 'admin-offering',
     url: '',
     abstract: true,
     parent: 'admin',
+    component: lazyComponent(() =>
+      import('./offerings/OfferingUIView').then((module) => ({
+        default: module.OfferingUIView,
+      })),
+    ),
+  },
+  {
+    name: 'admin-offering-details',
+    url: '',
+    abstract: true,
+    parent: 'admin-offering',
     component: lazyComponent(() =>
       import('./offerings/OfferingDetailsUIView').then((module) => ({
         default: module.OfferingDetailsUIView,
@@ -735,7 +757,7 @@ export const states: StateDeclaration[] = [
     name: 'admin-offering-update',
     url: '',
     abstract: true,
-    parent: 'admin',
+    parent: 'admin-offering',
     component: lazyComponent(() =>
       import('./offerings/OfferingEditUIView').then((module) => ({
         default: module.OfferingEditUIView,

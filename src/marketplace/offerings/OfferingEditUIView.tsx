@@ -1,11 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { UIView, useCurrentStateAndParams } from '@uirouter/react';
+import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
-import {
-  marketplaceCategoriesRetrieve,
-  marketplacePluginsList,
-  marketplaceProviderOfferingsRetrieve,
-} from 'waldur-js-client';
+import { marketplacePluginsList } from 'waldur-js-client';
 
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -13,9 +9,8 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { Offering, ServiceProvider } from '@/marketplace/types';
+import { Offering } from '@/marketplace/types';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
-import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 
@@ -26,10 +21,6 @@ import {
   getSecretOptionsForm,
   showComponentsList,
 } from '../common/registry';
-
-import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
-import { getOfferingBreadcrumbItems } from './hooks';
-import { OfferingViewHero } from './OfferingViewHero';
 
 const OverviewSection = lazyComponent(() =>
   import('./update/overview/OverviewSection').then((module) => ({
@@ -125,16 +116,6 @@ const RolesSection = lazyComponent(() =>
     default: module.RolesSection,
   })),
 );
-
-const getOfferingData = async (offering_uuid: string) => {
-  const offering = (await marketplaceProviderOfferingsRetrieve({
-    path: { uuid: offering_uuid },
-  }).then((response) => response.data)) as Offering;
-  const category = await marketplaceCategoriesRetrieve({
-    path: { uuid: offering.category_uuid },
-  }).then((response) => response.data);
-  return { offering, category };
-};
 
 const buildIntegrationTab = (offering: Offering): PageBarTab => {
   const CredentialsForm = getCredentialsForm(offering.type);
@@ -265,21 +246,18 @@ const getTabs = (offering: Offering): PageBarTab[] =>
   ].filter(Boolean) as PageBarTab[];
 
 export const OfferingEditUIView = ({
-  provider,
+  offeringData,
+  refetchOffering,
+  isLoadingOffering,
+  isRefetchingOffering,
+  errorOffering,
 }: {
-  provider: ServiceProvider;
+  offeringData: any;
+  refetchOffering: any;
+  isLoadingOffering: boolean;
+  isRefetchingOffering: boolean;
+  errorOffering: any;
 }) => {
-  const {
-    params: { offering_uuid },
-  } = useCurrentStateAndParams();
-
-  const { isLoading, error, data, refetch, isRefetching } = useQuery({
-    queryKey: [PROVIDER_OFFERING_DATA_QUERY_KEY, offering_uuid],
-    queryFn: () => getOfferingData(offering_uuid),
-    refetchOnWindowFocus: false,
-    staleTime: UI_STALE_TIME,
-  });
-
   const { data: plugins } = useQuery({
     queryKey: ['marketplacePlugins'],
     queryFn: () => marketplacePluginsList(),
@@ -289,37 +267,19 @@ export const OfferingEditUIView = ({
 
   const components = useMemo(
     () =>
-      data?.offering && plugins
+      offeringData?.offering && plugins
         ? plugins.data.find(
-            (plugin) => plugin.offering_type === data.offering.type,
+            (plugin) => plugin.offering_type === offeringData.offering.type,
           ).components
         : [],
-    [plugins, data?.offering],
+    [plugins, offeringData?.offering],
   );
 
   const tabs = useMemo(
-    () => (data?.offering ? getTabs(data.offering) : []),
-    [data?.offering],
+    () => (offeringData?.offering ? getTabs(offeringData.offering) : []),
+    [offeringData?.offering],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
-
-  usePageHero(
-    <OfferingViewHero
-      offering={data?.offering}
-      refetch={refetch}
-      isRefetching={isRefetching}
-      isLoading={isLoading}
-      error={error}
-    />,
-
-    [data?.offering, refetch, isRefetching, isLoading, error],
-  );
-
-  const breadcrumbItems = useMemo(
-    () => getOfferingBreadcrumbItems(data?.offering, provider, 'edit'),
-    [data?.offering],
-  );
-  useBreadcrumbs(breadcrumbItems);
 
   return (
     <UIView
@@ -327,14 +287,14 @@ export const OfferingEditUIView = ({
         <Component
           key={key}
           {...props}
-          refetch={refetch}
+          refetch={refetchOffering}
           data={{
-            ...data,
+            ...offeringData,
             components,
           }}
-          isLoading={isLoading}
-          isRefetching={isRefetching}
-          error={error}
+          isLoading={isLoadingOffering}
+          isRefetching={isRefetchingOffering}
+          error={errorOffering}
           tabSpec={tabSpec}
         />
       )}
