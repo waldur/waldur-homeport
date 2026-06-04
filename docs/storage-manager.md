@@ -314,8 +314,8 @@ When testing code that uses Storage Managers:
 import { AuthTokenStorage } from '@/core/StorageManager';
 
 // Mock the storage
-jest.spyOn(AuthTokenStorage, 'get').mockReturnValue('mock-token');
-jest.spyOn(AuthTokenStorage, 'set').mockImplementation(() => {});
+vi.spyOn(AuthTokenStorage, 'get').mockReturnValue('mock-token');
+vi.spyOn(AuthTokenStorage, 'set').mockImplementation(() => {});
 
 // Test your code
 expect(AuthTokenStorage.get()).toBe('mock-token');
@@ -326,7 +326,7 @@ For JSON storage:
 ```typescript
 import { RedirectStorage } from '@/core/StorageManager';
 
-jest.spyOn(RedirectStorage, 'get').mockReturnValue({
+vi.spyOn(RedirectStorage, 'get').mockReturnValue({
   toState: 'home',
   toParams: {},
 });
