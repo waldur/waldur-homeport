@@ -24,6 +24,18 @@ export const OrdersBulkActions = ({
   );
   const isPendingOrderSelected = pendingOrders.length > 0;
 
+  // Pending-consumer orders requiring a purchase order upload cannot be bulk-approved —
+  // each needs an individual upload via the approval dialog.
+  const approvablePendingOrders = pendingOrders.filter((order) => {
+    if (order.state !== 'pending-consumer') return true;
+    const opts = order.offering_plugin_options as
+      | Record<string, unknown>
+      | undefined;
+    return !opts?.require_purchase_order_upload;
+  });
+  const hasPurchaseOrderOrders =
+    approvablePendingOrders.length < pendingOrders.length;
+
   // Order actions
   const orderActionMap = {
     'pending-consumer': {
@@ -37,7 +49,7 @@ export const OrdersBulkActions = ({
   } as const;
 
   const approveMutation = useBatchMutation<OrderDetails, void>({
-    rows: pendingOrders,
+    rows: approvablePendingOrders,
     refetch,
     mutationFn: (order) => {
       const handler = orderActionMap[order.state]?.approve;
@@ -46,7 +58,7 @@ export const OrdersBulkActions = ({
         : Promise.resolve();
     },
     successMessage: translate('{count} order(s) have been approved.', {
-      count: pendingOrders.length,
+      count: approvablePendingOrders.length,
     }),
     renderPartialSuccessMessage: (n) =>
       translate('{n} order(s) have been approved.', { n }),
@@ -83,12 +95,24 @@ export const OrdersBulkActions = ({
         disabled={
           approveMutation.isPending ||
           rejectMutation.isPending ||
-          !isPendingOrderSelected
+          !isPendingOrderSelected ||
+          approvablePendingOrders.length === 0
         }
         disabledReason={
           !isPendingOrderSelected
             ? translate('No pending orders selected')
-            : translate('Operation in progress')
+            : approvablePendingOrders.length === 0
+              ? translate(
+                  'All selected orders require a purchase order upload and must be approved individually.',
+                )
+              : translate('Operation in progress')
+        }
+        tooltip={
+          hasPurchaseOrderOrders && approvablePendingOrders.length > 0
+            ? translate(
+                'Some orders require a purchase order upload and will be skipped. Approve them individually.',
+              )
+            : undefined
         }
         pending={approveMutation.isPending}
       />

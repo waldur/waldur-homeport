@@ -261,7 +261,7 @@ const purchaseOrderFields: OfferingEditField[] = [
     key: 'plugin_options.require_purchase_order_upload',
     component: AwesomeCheckboxField,
     description: translate(
-      'Makes purchase order upload mandatory when "Enable purchase order upload" is active',
+      'Makes purchase order upload mandatory during order approval. Also enables the upload dialog if not already enabled.',
     ),
   },
 ];
