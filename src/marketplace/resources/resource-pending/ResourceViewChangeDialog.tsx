@@ -49,6 +49,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
             <div className="d-flex flex-row-reverse gap-4">
               <OrderConsumerActions
                 order={order}
+                offering={offering}
                 refetch={refetch}
                 as={ActionButton}
               />

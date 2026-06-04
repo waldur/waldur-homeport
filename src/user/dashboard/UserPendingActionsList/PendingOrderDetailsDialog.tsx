@@ -1,6 +1,6 @@
 import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import {
   marketplaceOrdersApproveByConsumer,
@@ -15,18 +15,26 @@ import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { defaultCurrency } from '@/core/formatCurrency';
+import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getOrderType } from '@/marketplace/orders/utils';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceLink } from '@/resource/ResourceLink';
 import { Field } from '@/resource/summary';
 import { renderFieldOrDash } from '@/table/utils';
+
+const UploadPurchaseOrderDialog = lazyComponent(() =>
+  import('@/marketplace/orders/actions/UploadPurchaseOrderDialog').then(
+    (module) => ({ default: module.UploadPurchaseOrderDialog }),
+  ),
+);
 
 import { ExtendedUserAction } from './types';
 
@@ -294,6 +302,8 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
     enabled: Boolean(order?.offering_uuid),
   });
 
+  const { openDialog } = useModal();
+
   const approveOrderMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
       marketplaceOrdersApproveByConsumer({
@@ -303,6 +313,23 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
     errorMessage: translate('Unable to approve order.'),
     refetch,
   });
+
+  const handleApprove = useCallback(() => {
+    if (
+      offering?.plugin_options?.enable_purchase_order_upload ||
+      offering?.plugin_options?.require_purchase_order_upload
+    ) {
+      openDialog(UploadPurchaseOrderDialog, {
+        order,
+        refetch,
+        required: Boolean(
+          offering?.plugin_options?.require_purchase_order_upload,
+        ),
+      });
+    } else {
+      approveOrderMutation.mutate();
+    }
+  }, [offering, openDialog, order, refetch, approveOrderMutation]);
 
   const rejectOrderMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
@@ -344,7 +371,7 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
             disabled={isSubmitting || !order}
             variant="success"
             className="min-w-100px"
-            onClick={() => approveOrderMutation.mutate()}
+            onClick={handleApprove}
             type="button"
             label={translate('Approve')}
           />
