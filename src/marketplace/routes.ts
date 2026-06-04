@@ -566,6 +566,11 @@ export const states: StateDeclaration[] = [
     data: {
       permissions: [canAccessMarketplace],
     },
+    params: {
+      tab: {
+        dynamic: true,
+      },
+    },
   },
 
   {
