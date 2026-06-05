@@ -76,7 +76,7 @@ export enum ResellerFeatures {
   arrow = 'reseller.arrow',
 }
 
-export enum SlurmFeatures {
+enum SlurmFeatures {
   jobs = 'slurm.jobs',
 }
 

@@ -11,6 +11,7 @@ import {
   useThreadList,
 } from '@/ai-assistant/lib/thread/useThreadList';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { useChatDrawerPreference } from '@/chat/chatDrawerPreferences';
 import { MediumIconButton } from '@/core/buttons/IconButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarToggleGraphic } from '@/core/SidebarToggleGraphic';
@@ -20,7 +21,7 @@ import { translate } from '@/i18n';
 import { ThreadListItem } from './ThreadListItem';
 
 export const ChatHistorySidebar: FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useChatDrawerPreference('sidebarCollapsed');
   const [searchQuery, setSearchQuery] = useState('');
   const [showArchived, setShowArchived] = useState(false);
   const { currentThreadId, threadNotifications, getIsRunning } =
@@ -95,7 +96,7 @@ export const ChatHistorySidebar: FC = () => {
           </span>
           {!collapsed && (
             <span className="aui-history-header-title">
-              {translate('Chat history')}
+              {translate('History')}
             </span>
           )}
         </div>
@@ -112,6 +113,12 @@ export const ChatHistorySidebar: FC = () => {
       </div>
       {!collapsed && (
         <div className="d-flex flex-column gap-2">
+          <FilterBox
+            type="search"
+            placeholder={translate('Search chats...')}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
           <button
             className="btn btn-tertiary aui-history-new-chat"
             onClick={handleNewChat}
@@ -119,12 +126,6 @@ export const ChatHistorySidebar: FC = () => {
             <PlusIcon weight="bold" size={20} />
             {translate('New chat')}
           </button>
-          <FilterBox
-            type="search"
-            placeholder={translate('Search chats...')}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
         </div>
       )}
       {!collapsed && (

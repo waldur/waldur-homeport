@@ -24,7 +24,7 @@ export type ResourceStatusBucket =
   | 'paused'
   | 'downscaled';
 
-export interface PolicyAttributionPayload {
+interface PolicyAttributionPayload {
   policy_class?: string;
   policy_uuid?: string;
   action?: string;

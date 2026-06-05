@@ -25,7 +25,12 @@ import { createThreadListAdapter } from '@/ai-assistant/lib/thread/threadListAda
 import { useAbortControllers } from '@/ai-assistant/lib/thread/threadStateHooks';
 import { useThreadList } from '@/ai-assistant/lib/thread/useThreadList';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { getLLMChatMode, isLLMChatAllowedForUser } from '@/ai-assistant/utils';
+import { getChatDrawerPreference } from '@/chat/chatDrawerPreferences';
 import { isDrawerOpen } from '@/drawer/utils';
+import { useUser } from '@/workspace/hooks';
+
+import { shouldNotifyOnReplyComplete } from './shouldNotifyOnReplyComplete';
 
 const EMPTY_MESSAGES: ThreadMessageLike[] = [];
 
@@ -50,8 +55,15 @@ export function ThreadRuntimeProvider({
     ExternalStoreThreadData<'regular' | 'archived'>[]
   >([]);
 
-  // Fetch real thread list from backend
-  const { data: backendThreads, refetch: refetchThreadList } = useThreadList();
+  // Fetch real thread list from backend. This provider is mounted at the app
+  // root (for notifications that outlive the drawer), so the fetch must be
+  // gated on the assistant being enabled — otherwise every page load hits
+  // /chat-threads/, which returns 424 when AI_ASSISTANT_ENABLED is off.
+  const user = useUser();
+  const showAI = isLLMChatAllowedForUser(user, getLLMChatMode());
+  const { data: backendThreads, refetch: refetchThreadList } = useThreadList({
+    enabled: showAI,
+  });
 
   // Sync backend threads into threadList state
   useEffect(() => {
@@ -184,8 +196,17 @@ export function ThreadRuntimeProvider({
       cleanupController,
       abortThread,
       onStreamComplete: () => {
-        // Notify if drawer is closed or user switched to a different thread
-        if (!isDrawerOpen() || currentThreadIdRef.current !== currentThreadId) {
+        // Badge the thread unless the user actually watched it finish — i.e.
+        // drawer open, on the AI tab, still on this thread. Viewing Team chat
+        // (drawer open, matrix tab) counts as "not seeing the ending".
+        if (
+          shouldNotifyOnReplyComplete({
+            drawerOpen: isDrawerOpen(),
+            activeTab: getChatDrawerPreference('activeTab'),
+            currentThreadId: currentThreadIdRef.current,
+            replyThreadId: currentThreadId,
+          })
+        ) {
           addNotification(currentThreadId);
         }
         // Refetch thread list to pick up auto-generated title and updated modified date

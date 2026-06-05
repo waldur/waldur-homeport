@@ -1,14 +1,22 @@
 import { ErrorBoundary } from '@sentry/react';
 import { QueryClientProvider, useSuspenseQuery } from '@tanstack/react-query';
 import { UIRouter, UIView } from '@uirouter/react';
-import { FunctionComponent, Suspense } from 'react';
+import { FunctionComponent, PropsWithChildren, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { NotificationsProvider, setUpNotifications } from 'reapop';
 
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
+import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
 import { queryClient } from '@/core/queryClient';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { MatrixCallHost } from '@/matrix/chat/call/MatrixCallHost';
+import { MatrixCallPortalProvider } from '@/matrix/chat/call/MatrixCallPortalProvider';
+import { MatrixCallProvider } from '@/matrix/chat/call/MatrixCallProvider';
+import { MatrixAutoConnect } from '@/matrix/chat/MatrixAutoConnect';
+import { MatrixChatProvider } from '@/matrix/chat/MatrixChatProvider';
 import { ModalProvider } from '@/modal/ModalContext';
 import { ModalRoot } from '@/modal/ModalRoot';
 import store from '@/store/store';
@@ -25,6 +33,29 @@ import { states } from './states';
 import { ThemeProvider } from './theme/ThemeProvider';
 
 states.forEach((state) => router.stateRegistry.register(state));
+
+// Gate the Matrix provider chain on the feature flag so tenants without
+// `show_matrix_chat` don't pay for the chat client, the auto-connect query,
+// the call provider, or MatrixCallHost's room subscription. All three Matrix
+// contexts expose safe no-op defaults, so consumers (e.g. the header chat
+// toggle's `useMatrixTotalUnread`) degrade to `0` when the providers aren't
+// mounted.
+const MatrixRoot: FunctionComponent<PropsWithChildren> = ({ children }) => {
+  if (!isFeatureVisible(ProjectFeatures.show_matrix_chat)) {
+    return <>{children}</>;
+  }
+  return (
+    <MatrixChatProvider>
+      <MatrixAutoConnect />
+      <MatrixCallProvider>
+        <MatrixCallPortalProvider>
+          <MatrixCallHost />
+          {children}
+        </MatrixCallPortalProvider>
+      </MatrixCallProvider>
+    </MatrixChatProvider>
+  );
+};
 
 setUpNotifications({
   defaultProps: {
@@ -48,18 +79,22 @@ const ApplicationInner: FunctionComponent = () => {
           <Provider store={store}>
             <LayoutProvider>
               <ThemeProvider>
-                <ThreadProvider>
-                  <NotificationContainer />
-                  <ModalProvider>
-                    <DrawerProvider>
-                      <ModalRoot />
-                      <ConfirmModalRoot />
-                      <DrawerRoot />
-                      <UIView />
-                    </DrawerProvider>
-                  </ModalProvider>
-                  <MasterInit />
-                </ThreadProvider>
+                <MatrixRoot>
+                  <ThreadProvider>
+                    <ThreadRuntimeProvider>
+                      <NotificationContainer />
+                      <ModalProvider>
+                        <DrawerProvider>
+                          <ModalRoot />
+                          <ConfirmModalRoot />
+                          <DrawerRoot />
+                          <UIView />
+                        </DrawerProvider>
+                      </ModalProvider>
+                      <MasterInit />
+                    </ThreadRuntimeProvider>
+                  </ThreadProvider>
+                </MatrixRoot>
               </ThemeProvider>
             </LayoutProvider>
           </Provider>

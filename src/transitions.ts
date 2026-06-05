@@ -155,7 +155,7 @@ export function attachTransitions() {
   );
 
   // Check resolvers before entering to a state
-  router.transitionService.onBefore({}, (transition) => {
+  router.transitionService.onBefore({}, async (transition) => {
     const toState = transition.to();
 
     const getAllStates = (state) => {
@@ -172,16 +172,23 @@ export function attachTransitions() {
     // Get all parent states
     const states = getAllStates(toState);
 
-    // check need for fetchCustomer
-    const needsCustomer = states.some((state) =>
-      Array.isArray(state.resolve)
-        ? state.resolve?.some((resolver) => resolver.token === 'fetchCustomer')
-        : false,
+    // Permission predicates run synchronously in the onStart hook below but
+    // may depend on data produced by async resolvers. Awaiting those tokens
+    // here ensures a fresh deep-link doesn't evaluate permissions against
+    // undefined state.
+    const awaitedTokens = ['fetchCustomer', 'project'].filter((token) =>
+      states.some((state) =>
+        Array.isArray(state.resolve)
+          ? state.resolve?.some((resolver) => resolver.token === token)
+          : false,
+      ),
     );
 
-    if (!needsCustomer) return;
+    if (awaitedTokens.length === 0) return;
 
-    return transition.injector().getAsync('fetchCustomer');
+    await Promise.all(
+      awaitedTokens.map((token) => transition.injector().getAsync(token)),
+    );
   });
 
   router.transitionService.onStart(

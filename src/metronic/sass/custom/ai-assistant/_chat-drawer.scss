@@ -1,0 +1,15 @@
+// Unified chat drawer (AI Assistant + Team chat tabs)
+
+.unified-chat-drawer {
+  .nav-pills .nav-link {
+    font-size: $h5-font-size;
+    font-weight: 500;
+  }
+
+  // Bootstrap's nav-pills active background compiles from $primary (hardcoded
+  // green). Use the themeable brand color so the active tab matches the
+  // deployment theme, consistent with primary buttons.
+  .nav-pills .nav-link.active {
+    background-color: $bg-brand-solid;
+  }
+}
