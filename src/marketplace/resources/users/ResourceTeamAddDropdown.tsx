@@ -36,8 +36,8 @@ interface ResourceTeamAddDropdownProps {
  * `TeamDropdownActions` shape — primary "+ Add" button with caret,
  * dropdown menu containing Invite and (when permitted) Assign — but
  * parameterized by scope so it works for both Resource and
- * ResourceProject. The Assign item is rendered disabled with an
- * explanatory tooltip for non-staff so the action stays discoverable.
+ * ResourceProject. Both Invite and Assign are gated by the same
+ * CREATE_RESOURCE_PERMISSION check (held by project managers and above).
  *
  * Hidden entirely if the user has no permission to invite (the only
  * always-applicable action of the two).
@@ -64,8 +64,6 @@ export const ResourceTeamAddDropdown: FC<ResourceTeamAddDropdownProps> = ({
     customerId: customerUuid,
   });
   if (!canInvite) return null;
-
-  const isStaff = Boolean(user?.is_staff);
 
   return (
     <Dropdown placement="bottom-end">
@@ -101,9 +99,11 @@ export const ResourceTeamAddDropdown: FC<ResourceTeamAddDropdownProps> = ({
             projectUuid={projectUuid}
             offering={offering}
             refetch={refetch}
-            disabled={!isStaff}
+            disabled={!canInvite}
             tooltip={
-              !isStaff ? translate('Available for staff only') : undefined
+              !canInvite
+                ? translate('Available for project managers and above')
+                : undefined
             }
           />
         )}
