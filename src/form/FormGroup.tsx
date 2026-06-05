@@ -104,6 +104,10 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
 
   const labelNode = !hideLabel && (label || tooltip) && (
     <Form.Label
+      // Only set `htmlFor` in the legacy clone path; in the modern path
+      // Form.Group's `controlId` context wires it automatically and
+      // react-bootstrap warns if both are present.
+      htmlFor={isLegacyCloneElement ? controlId : undefined}
       className={classNames({ required, 'me-auto': !isLegacyCloneElement })}
     >
       {tooltip && !tooltipEnd && (
@@ -124,6 +128,11 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     </Form.Label>
   );
 
+  // In the legacy clone path we inject `id={controlId}` onto the child
+  // explicitly, so passing `controlId` to Form.Group as well would trigger
+  // react-bootstrap's "controlId is ignored on <FormControl> when id is
+  // specified" warning. In the modern path Form.Group's `controlId` is the
+  // only way the child Form.Control gets an id, so keep it.
   const mainContent = (
     <Form.Group
       className={classNames(
@@ -134,7 +143,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
         !actions && (containerClassName || className),
         !spaceless && `mb-${space}`,
       )}
-      controlId={controlId}
+      controlId={isLegacyCloneElement ? undefined : controlId}
     >
       {quickAction || (tooltip && tooltipEnd) ? (
         <div className="d-flex align-items-end">
