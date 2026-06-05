@@ -76,10 +76,6 @@ export enum ResellerFeatures {
   arrow = 'reseller.arrow',
 }
 
-enum SlurmFeatures {
-  jobs = 'slurm.jobs',
-}
-
 export enum SupportFeatures {
   conceal_change_request = 'support.conceal_change_request',
   enable_llm_assistant = 'support.enable_llm_assistant',
@@ -111,7 +107,6 @@ export type FeaturesEnum =
   | ProjectFeatures
   | RancherFeatures
   | ResellerFeatures
-  | SlurmFeatures
   | SupportFeatures
   | UserFeatures
 ;
