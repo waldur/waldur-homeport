@@ -2,8 +2,8 @@ import { FieldValidator } from 'final-form';
 import React, { ReactNode } from 'react';
 import { FieldProps, FieldRenderProps } from 'react-final-form';
 
-export type Formatter = NonNullable<FieldProps<any, any>['format']>;
-export type Parser = NonNullable<FieldProps<any, any>['parse']>;
+type Formatter = NonNullable<FieldProps<any, any>['format']>;
+type Parser = NonNullable<FieldProps<any, any>['parse']>;
 
 export interface FormField extends Partial<FieldRenderProps<any, any>> {
   name?: string;

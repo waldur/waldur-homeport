@@ -2,7 +2,13 @@ import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import {
+  hasActiveMatrixRoom,
+  useProjectMatrixRooms,
+} from '@/matrix/chat/useProjectMatrixRooms';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { PermissionEnum } from '@/permissions/enums';
@@ -39,6 +45,11 @@ const ProjectDelete = lazyComponent(() =>
     default: module.ProjectDelete,
   })),
 );
+const ProjectMatrixChat = lazyComponent(() =>
+  import('./manage/ProjectMatrixChat').then((module) => ({
+    default: module.ProjectMatrixChat,
+  })),
+);
 const ProjectEndDateChangeRequests = lazyComponent(() =>
   import('./manage/ProjectEndDateChangeRequests').then((module) => ({
     default: module.ProjectEndDateChangeRequests,
@@ -48,6 +59,8 @@ const ProjectEndDateChangeRequests = lazyComponent(() =>
 export const ProjectManageContainer = () => {
   const project = useProject();
   const user = useUser();
+  const { data: rooms } = useProjectMatrixRooms(project?.uuid);
+  const hasActiveRoom = hasActiveMatrixRoom(rooms);
 
   const canSeeOrderApproval = useMemo(() => {
     if (!project) return false;
@@ -95,13 +108,19 @@ export const ProjectManageContainer = () => {
           component: ProjectEndDateChangeRequests,
           title: translate('End date change requests'),
         },
+        isFeatureVisible(ProjectFeatures.show_matrix_chat) &&
+          (user.is_staff || hasActiveRoom) && {
+            key: 'chat',
+            component: ProjectMatrixChat,
+            title: translate('Chat'),
+          },
         !project?.is_removed && {
           key: 'remove',
           component: ProjectDelete,
           title: translate('Remove'),
         },
       ].filter(Boolean),
-    [project, canSeeOrderApproval],
+    [project, canSeeOrderApproval, user.is_staff, hasActiveRoom],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
 

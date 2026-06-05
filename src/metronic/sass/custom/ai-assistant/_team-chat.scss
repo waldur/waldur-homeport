@@ -1,0 +1,885 @@
+.team-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: $bg-primary;
+  color: $text-primary;
+  font-family: $font-family-sans-serif;
+
+  .tc-sidebar-top {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 0 16px 10px;
+  }
+
+  .tc-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tc-group-label {
+    padding: 14px 14px 4px;
+  }
+
+  .tc-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-bottom: 8px;
+  }
+
+  .tc-row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    padding: 9px 14px;
+    border: 0;
+    background: transparent;
+    text-align: start;
+    position: relative;
+
+    &:hover {
+      background: $bg-secondary;
+    }
+
+    &.active {
+      background: $bg-secondary;
+      font-weight: 500;
+    }
+
+    &.unread::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 50%;
+      width: 3px;
+      height: 22px;
+      border-radius: 2px;
+      background: $bg-brand-solid;
+      transform: translateY(-50%);
+    }
+
+    > .symbol {
+      place-self: center;
+    }
+  }
+
+  .tc-row-meta {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tc-row-name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: $font-size-lg;
+    font-weight: 400;
+    line-height: 1.2;
+    color: $text-primary;
+
+    .tc-row-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .tc-row.unread .tc-row-name {
+    font-weight: 600;
+  }
+
+  .tc-row-preview {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tc-row.unread .tc-row-preview {
+    color: $text-primary;
+  }
+
+  .tc-row-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .tc-row-time {
+    font-size: 10.5px;
+    color: $fg-disabled;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tc-row.unread .tc-row-time {
+    color: $text-brand-secondary;
+    font-weight: 600;
+  }
+
+  .tc-row-muted {
+    color: $fg-disabled;
+    flex-shrink: 0;
+  }
+
+  .tc-badge {
+    min-width: 18px;
+    height: 16px;
+    padding: 0 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 99px;
+    background: $bg-brand-solid;
+    color: $white;
+    font-size: 10px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+
+    &.mention {
+      background: var(--bs-danger);
+    }
+  }
+
+  .tc-header-members {
+    flex-shrink: 0;
+    padding: 2px 6px;
+    border: 0;
+    border-radius: 99px;
+    background: transparent;
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    white-space: nowrap;
+
+    &:hover,
+    &[aria-describedby] {
+      background: $bg-secondary;
+      color: $text-primary;
+    }
+  }
+
+  .tc-rail {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px 8px;
+  }
+
+  .tc-rail-item {
+    position: relative;
+    display: flex;
+    padding: 4px;
+    border: 0;
+    border-radius: $border-radius-lg;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+      background: $bg-secondary;
+    }
+
+    &.active {
+      background: $bg-brand-secondary;
+    }
+  }
+
+  .tc-rail-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .tc-rail-call {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $body-bg;
+  }
+
+  .tc-stream {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden auto;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    > *:first-child {
+      margin-top: auto;
+    }
+  }
+
+  .tc-day {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: $border-primary;
+    }
+
+    span {
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $fg-disabled;
+    }
+  }
+
+  .tc-msg {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 10px;
+
+    &.mine {
+      grid-template-columns: 1fr 32px;
+    }
+
+    &.continuation {
+      margin-top: -16px;
+
+      .tc-msg-who {
+        display: none;
+      }
+    }
+  }
+
+  .tc-msg > .symbol {
+    align-self: flex-start;
+  }
+
+  .tc-msg-body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tc-msg.mine .tc-msg-body {
+    align-items: flex-end;
+  }
+
+  .tc-msg-who {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 2px;
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $text-primary;
+
+    .tc-msg-when {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: $fg-disabled;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  .tc-bubble {
+    width: fit-content;
+    max-width: 90%;
+    padding: 7px 10px;
+    border-radius: $border-radius-lg;
+    background: $bg-secondary;
+    color: $text-primary;
+    font-size: $font-size-lg;
+    line-height: 1.5;
+    word-break: break-word;
+    white-space: pre-wrap;
+
+    a {
+      color: $text-brand-secondary;
+      font-weight: 500;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      border-radius: $border-radius;
+    }
+  }
+
+  .tc-msg.mine .tc-bubble {
+    background: $bg-brand-secondary;
+    color: $text-brand-primary;
+  }
+
+  .tc-msg.mentions-me .tc-bubble {
+    background: rgba($warning-500, 0.12);
+  }
+
+  .tc-msg-reactions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 5px;
+    align-items: center;
+  }
+
+  .tc-msg.mine .tc-msg-reactions {
+    justify-content: flex-end;
+  }
+
+  .tc-msg-reactions__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: $bg-primary;
+    color: $text-primary;
+    border: 1px solid $border-primary;
+    font-size: 12px;
+    line-height: 1.6;
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: $border-brand-solid;
+    }
+
+    &.is-mine {
+      background: $bg-brand-secondary;
+      color: $text-brand-primary;
+      border-color: $border-brand-solid;
+    }
+  }
+
+  .tc-msg-reactions__count {
+    font-weight: 600;
+    color: $text-secondary;
+
+    .is-mine & {
+      color: $text-brand-primary;
+    }
+  }
+
+  .tc-bubble {
+    position: relative;
+  }
+
+  .tc-msg-reactions-toolbar {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    background: $bg-primary;
+    border: 1px solid $border-primary;
+    border-radius: 99px;
+    box-shadow:
+      0 4px 14px rgba(0, 0, 0, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.04);
+    width: fit-content;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.12s ease,
+      visibility 0s linear 0.12s;
+    pointer-events: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 18px;
+      width: 10px;
+      height: 10px;
+      background: $bg-primary;
+      border-right: 1px solid $border-primary;
+      border-bottom: 1px solid $border-primary;
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+    }
+  }
+
+  .tc-msg.mine .tc-msg-reactions-toolbar {
+    left: auto;
+    right: 0;
+
+    &::after {
+      left: auto;
+      right: 18px;
+    }
+  }
+
+  .tc-msg-reactions-toolbar.is-below {
+    bottom: auto;
+    top: calc(100% + 8px);
+
+    &::after {
+      bottom: auto;
+      top: -5px;
+      border-right: none;
+      border-bottom: none;
+      border-left: 1px solid $border-primary;
+      border-top: 1px solid $border-primary;
+    }
+
+    &::before {
+      bottom: auto;
+      top: -10px;
+    }
+  }
+
+  .tc-msg:hover .tc-msg-reactions-toolbar,
+  .tc-msg:focus-within .tc-msg-reactions-toolbar {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity 0.12s ease 0.4s,
+      visibility 0s linear 0.4s;
+  }
+
+  .tc-msg-reactions-toolbar__btn {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: $text-primary;
+    cursor: pointer;
+    border-radius: 99px;
+    font-size: 15px;
+    line-height: 1;
+    transition:
+      background 0.12s ease,
+      transform 0.12s ease;
+
+    &:hover {
+      background: $bg-secondary;
+      transform: scale(1.08);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
+
+    &.is-active {
+      background: $bg-brand-secondary;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: $text-secondary;
+      pointer-events: none;
+    }
+  }
+
+  .tc-msg-reactions-toolbar__divider {
+    width: 1px;
+    height: 16px;
+    background: $border-primary;
+    margin: 0 2px;
+    pointer-events: none;
+  }
+
+  .tc-msg-reactions-toolbar__more {
+    color: $text-secondary;
+
+    &:hover {
+      background: $bg-secondary;
+      transform: none;
+      color: $text-primary;
+    }
+  }
+
+  .tc-msg-emoji-popover {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 10;
+    width: 240px;
+    max-width: 240px;
+    max-height: 220px;
+    overflow: hidden;
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.04);
+    border-radius: $border-radius-lg;
+
+    //noinspection CssInvalidHtmlTagReference
+    em-emoji-picker {
+      width: 240px;
+      max-width: 240px;
+      max-height: 220px;
+    }
+  }
+
+  .tc-msg-reactions-toolbar .tc-msg-emoji-popover {
+    top: auto;
+    bottom: calc(100% + 6px);
+  }
+
+  .tc-msg-reactions-toolbar.is-below .tc-msg-emoji-popover,
+  .tc-msg-reactions-toolbar.is-picker-down .tc-msg-emoji-popover {
+    top: calc(100% + 6px);
+    bottom: auto;
+  }
+
+  .tc-composer {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid $border-primary;
+    background: $bg-primary;
+  }
+
+  .tc-mention-popup {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 100%;
+    max-height: 260px;
+    overflow-y: auto;
+    z-index: 10;
+    padding: 4px 0;
+    background: $bg-primary;
+    border: 1px solid $border-primary;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+  }
+
+  .tc-mention-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    border: 0;
+    text-align: start;
+    background: transparent;
+    color: $text-primary;
+    font-size: $font-size-base;
+    line-height: 1.4;
+    cursor: pointer;
+
+    .tc-mention-item__avatar {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $bg-tertiary;
+      color: $text-secondary;
+      font-size: $font-size-sm;
+      font-weight: 600;
+    }
+
+    .tc-mention-item__name {
+      font-weight: 600;
+    }
+
+    .tc-mention-item__id {
+      font-size: $font-size-sm;
+      color: $text-tertiary;
+    }
+
+    &.is-active {
+      background: $bg-brand-solid;
+      color: $text-primary_on-brand;
+
+      .tc-mention-item__avatar {
+        background: rgba(0, 0, 0, 0.15);
+        color: $text-primary_on-brand;
+      }
+
+      .tc-mention-item__id {
+        color: $text-primary_on-brand;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .tc-mention-tag {
+    display: inline-block;
+    padding: 0 4px;
+    border-radius: 3px;
+    background: $bg-brand-secondary;
+    color: $text-brand-primary;
+    font-weight: 600;
+
+    &.is-self {
+      background: if(isDarkMode(), transparent, $bg-warning-secondary);
+      color: $text-warning-primary;
+    }
+  }
+
+  .tc-composer-input {
+    flex: 1;
+    min-width: 0;
+    min-height: 36px;
+    max-height: 120px;
+    padding: 8px 10px;
+    border: 1px solid $border-primary;
+    border-radius: $border-radius;
+    background: $bg-secondary;
+    color: $text-primary;
+    font-size: $font-size-lg;
+    line-height: 1.5;
+    resize: none;
+    overflow-x: hidden;
+
+    &::placeholder {
+      color: $text-placeholder;
+    }
+
+    &:focus {
+      outline: 0;
+      border-color: $border-brand;
+    }
+
+    &:disabled {
+      background: $bg-secondary;
+      color: $text-placeholder;
+    }
+  }
+
+  .tc-placeholder {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    color: $text-secondary;
+  }
+}
+
+.team-chat-dock {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  padding-top: 16px;
+
+  &--collapsed {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  &--solo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  &--compact {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 0;
+  }
+}
+
+.team-chat-dock-list,
+.team-chat-dock-detail {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.team-chat-dock-list {
+  border-right: 1px solid $border-color;
+}
+
+// Single-chat (AI-off) mode: MatrixChatHeader portals its kebab into the
+// drawer's floating control row (it is appended last). Slot it between the
+// expand and close controls → expand · kebab · close. The kebab keeps the
+// default-order expand ahead of it and pushes the close button(s) after.
+#kt_drawer_header .card-toolbar:has(.tc-toolbar-kebab) {
+  .tc-toolbar-kebab {
+    order: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  > span:not(:first-child):not(.tc-toolbar-kebab) {
+    order: 2;
+  }
+}
+
+.matrix-call-view {
+  position: relative;
+  background-color: var(--lk-bg);
+
+  .lk-media-device-select {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lk-focus-layout > .lk-participant-tile .lk-focus-toggle-button {
+    display: none;
+  }
+
+  // LiveKit defaults the carousel column to 1fr of 1fr:5fr, which on a
+  // narrow drawer crushes the thumbnail so names get clipped. Give it more
+  // breathing room with a sensible minimum.
+  .lk-focus-layout {
+    grid-template-columns: minmax(150px, 1.6fr) 5fr;
+  }
+
+  .lk-participant-tile {
+    border: 1px solid var(--lk-border-color);
+  }
+
+  .lk-participant-placeholder svg,
+  .lk-participant-placeholder svg path {
+    fill: $gray-400;
+  }
+
+  // The name chip sits over the video feed, so it carries its own blurred
+  // theme-surface scrim to stay legible on any frame rather than inheriting
+  // LiveKit's fixed dark scrim (which breaks once --lk-fg flips for light).
+  .lk-participant-metadata-item {
+    background-color: rgba($bg-primary, 0.85);
+    color: $text-primary;
+    border: 1px solid $border-primary;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+  }
+
+  .lk-control-bar {
+    // LiveKit's own .lk-button rules size these unevenly (the disconnect
+    // button renders larger); pin every control to one box and one icon size.
+    .lk-button,
+    .lk-disconnect-button {
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      justify-content: center;
+      gap: 0;
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid var(--lk-border-color);
+      border-radius: 8px;
+    }
+
+    .lk-disconnect-button {
+      background-color: $danger-500;
+      color: $white;
+      border-color: transparent;
+
+      &:hover {
+        background-color: $danger-600;
+      }
+    }
+  }
+}
+
+// LiveKit ships only a dark theme. Re-point its variables at our design tokens
+// so the call view follows the app theme. Tokens resolve per compiled
+// stylesheet (style.scss vs style.dark.scss), so this one block themes both
+// light and dark; the attribute selector outranks LiveKit's own definitions.
+.matrix-call-view[data-lk-theme='default'] {
+  color-scheme: if(isDarkMode(), dark, light);
+  --lk-bg: #{$bg-tertiary};
+  --lk-bg2: #{$bg-primary};
+  --lk-bg3: #{$bg-secondary};
+  --lk-bg4: #{$bg-secondary};
+  --lk-bg5: #{$gray-200};
+  --lk-fg: #{$text-primary};
+  --lk-fg2: #{$text-secondary};
+  --lk-fg3: #{$text-tertiary};
+  --lk-border-color: #{$border-primary};
+  --lk-accent-bg: #{$success-500};
+  --lk-danger: #{$danger-500};
+}
+
+.matrix-call-view__connecting {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: $bg-tertiary;
+  color: $text-secondary;
+}
+
+.matrix-call-view__error {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  text-align: center;
+  background: $bg-tertiary;
+  color: $text-secondary;
+}
+
+.matrix-call-view--compact {
+  // Single-tile compact mode has nothing to pin (there's only one tile) —
+  // hide any focus toggle the tile might render on hover.
+  .lk-participant-tile .lk-focus-toggle-button {
+    display: none;
+  }
+
+  // FocusLayout's default 2-column grid is meaningless when we only render
+  // one tile; stretch it to fill the available area instead.
+  .lk-focus-layout {
+    grid-template-columns: 1fr;
+    height: 100%;
+  }
+}
+
+.tc-members-popover {
+  width: 260px;
+
+  .popover-body {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+}

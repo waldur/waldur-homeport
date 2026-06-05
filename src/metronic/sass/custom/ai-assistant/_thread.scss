@@ -295,6 +295,9 @@
   padding: 2px 8px;
   color: $text-primary;
   outline: none;
+  // Composer must only ever grow vertically; never expose a horizontal
+  // scrollbar from sub-pixel width rounding of the flex layout.
+  overflow-x: hidden;
 
   &::placeholder {
     color: $text-placeholder;
@@ -768,7 +771,7 @@ body:has(#kt_drawer.ai-chat-drawer-active) > .drawer-overlay {
   height: 100%;
 }
 
-#kt_drawer_body:has(.aui-chat-drawer) {
+#kt_drawer_body:has(.unified-chat-drawer) {
   overflow-y: hidden !important;
   display: flex;
   flex-direction: column;

@@ -7,6 +7,7 @@ import {
   CustomerFeatures,
   InvitationsFeatures,
   MarketplaceFeatures,
+  ProjectFeatures,
   ResellerFeatures,
   SupportFeatures,
   UserFeatures,
@@ -780,6 +781,22 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Call management'),
       feature: MarketplaceFeatures.show_call_management_functionality,
+    },
+  },
+
+  {
+    name: 'admin-matrix-chat',
+    url: 'matrix-chat/?tab',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('@/matrix/MatrixAdminDashboard').then((module) => ({
+        default: module.MatrixAdminDashboard,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Matrix chat'),
+      permissions: [isStaffOrSupport],
+      feature: ProjectFeatures.show_matrix_chat,
     },
   },
 

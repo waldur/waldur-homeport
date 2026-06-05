@@ -5,7 +5,7 @@ export type ComponentRow =
 
 // Five offering-mix scenarios — see prp_score_improvement_plan / chat analysis.
 // Code A..E so per-view code can branch concisely; description is for UI text.
-export type MixCode = 'A' | 'B' | 'C' | 'D' | 'E';
+type MixCode = 'A' | 'B' | 'C' | 'D' | 'E';
 
 export interface MixSummary {
   code: MixCode;

@@ -1,6 +1,6 @@
 import { Offering } from 'waldur-js-client';
 
-export type ImportType = 'projects_only' | 'projects_with_resources';
+type ImportType = 'projects_only' | 'projects_with_resources';
 
 export interface ProjectImportFormData {
   import_type: ImportType;

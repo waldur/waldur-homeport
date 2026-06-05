@@ -16,6 +16,7 @@ import {
   acknowledgeDisclosure,
   isDisclosureAcknowledged,
 } from '@/ai-assistant/utils';
+import { useChatDrawerPreference } from '@/chat/chatDrawerPreferences';
 import { IconButton, MediumIconButton } from '@/core/buttons/IconButton';
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
@@ -61,6 +62,11 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   const { closeDrawer } = useDrawer();
   const { config } = useLayout();
   const isFirstAsideChange = useRef(true);
+  // History sidebar only makes sense on the AI tab; matrix has its own room
+  // list. Subscribe to the shared pref so the toolbar updates as the user
+  // toggles tabs inside UnifiedChatDrawer.
+  const [activeTab] = useChatDrawerPreference('activeTab');
+  const showHistoryToggle = activeTab === 'ai';
 
   // Close the drawer when the main aside minimize state flips. The drawer's
   // layout is anchored to the main content area's width; when that changes,
@@ -167,26 +173,30 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
           <HeaderButtonBullet className="pe-none" />
         )}
       </span>
-      {/* Tablet: compact history toggle */}
-      <span className="d-none d-md-inline-flex d-lg-none">
-        <MediumIconButton
-          iconNode={<ListIcon weight="bold" />}
-          tooltip={translate('Chat history')}
-          onClick={toggleHistory}
-          variant="tertiary-ghost"
-          tooltipPlacement="bottom"
-        />
-      </span>
-      {/* Mobile: large history toggle */}
-      <span className="d-inline-flex d-md-none">
-        <IconButton
-          iconNode={<ListIcon weight="bold" />}
-          tooltip={translate('Chat history')}
-          onClick={toggleHistory}
-          variant="tertiary-ghost"
-          tooltipPlacement="bottom"
-        />
-      </span>
+      {showHistoryToggle && (
+        <>
+          {/* Tablet: compact history toggle */}
+          <span className="d-none d-md-inline-flex d-lg-none">
+            <MediumIconButton
+              iconNode={<ListIcon weight="bold" />}
+              tooltip={translate('History')}
+              onClick={toggleHistory}
+              variant="tertiary-ghost"
+              tooltipPlacement="bottom"
+            />
+          </span>
+          {/* Mobile: large history toggle */}
+          <span className="d-inline-flex d-md-none">
+            <IconButton
+              iconNode={<ListIcon weight="bold" />}
+              tooltip={translate('History')}
+              onClick={toggleHistory}
+              variant="tertiary-ghost"
+              tooltipPlacement="bottom"
+            />
+          </span>
+        </>
+      )}
       {/* Tablet+Desktop: close */}
       <span className="d-none d-md-inline-flex">
         <MediumIconButton

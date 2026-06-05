@@ -11,7 +11,7 @@ import { useNotify } from '@/store/notify';
 
 import { ConfirmationOptions } from './actions';
 
-export interface MutationConfirmationConfig<TVariables> {
+interface MutationConfirmationConfig<TVariables> {
   title: ReactNode | ((variables: TVariables) => ReactNode);
   body: ReactNode | ((variables: TVariables) => ReactNode);
   options?: ConfirmationOptions;

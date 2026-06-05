@@ -4,24 +4,15 @@ import React, { useEffect, useRef } from 'react';
 import { resetDrawerDOM } from '@/ai-assistant/components/LLMChatDrawer';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { isLLMChatAllowedForUser, getLLMChatMode } from '@/ai-assistant/utils';
-import { lazyComponent } from '@/core/lazyComponent';
+import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { useDrawer } from '@/drawer/actions';
 import { isDrawerOpen } from '@/drawer/utils';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { useMatrixTotalUnread } from '@/matrix/chat/useMatrixTotalUnread';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useUser } from '@/workspace/hooks';
-
-const LLMChatDrawer = lazyComponent(() =>
-  import('@/ai-assistant/components/LLMChatDrawer').then((module) => ({
-    default: module.LLMChatDrawer,
-  })),
-);
-
-const LLMChatDrawerToolbar = lazyComponent(() =>
-  import('@/ai-assistant/components/LLMChatDrawer').then((module) => ({
-    default: module.LLMChatDrawerToolbar,
-  })),
-);
 
 export const LLMChatDrawerToggle: React.FC = () => {
   const { openDrawer, closeDrawer } = useDrawer();
@@ -29,6 +20,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
   const prevUserUuid = useRef(user?.uuid);
   const { hasNewMessages, currentThreadId, clearNotification } =
     useThreadContext();
+  const matrixUnread = useMatrixTotalUnread();
 
   // Force-close drawer and clean up DOM when user changes (impersonation end/start)
   useEffect(() => {
@@ -41,7 +33,10 @@ export const LLMChatDrawerToggle: React.FC = () => {
     resetDrawerDOM();
   }, [user?.uuid, closeDrawer]);
 
-  if (!isLLMChatAllowedForUser(user, getLLMChatMode())) {
+  const showAI = isLLMChatAllowedForUser(user, getLLMChatMode());
+  const showMatrix = isFeatureVisible(ProjectFeatures.show_matrix_chat);
+
+  if (!showAI && !showMatrix) {
     return null;
   }
 
@@ -49,18 +44,8 @@ export const LLMChatDrawerToggle: React.FC = () => {
     if (isDrawerOpen()) {
       closeDrawer();
     } else {
-      // Apply AI drawer class before the drawer opens so the slide-in
-      // animation already has the correct top offset and z-index
-      document
-        .getElementById('kt_drawer')
-        ?.classList.add('ai-chat-drawer-active');
-
       clearNotification(currentThreadId);
-      openDrawer(LLMChatDrawer, {
-        title: translate('AI Assistant'),
-        toolbar: LLMChatDrawerToolbar,
-        width: '800px',
-      });
+      openUnifiedChatDrawer(openDrawer);
     }
   };
 
@@ -71,12 +56,14 @@ export const LLMChatDrawerToggle: React.FC = () => {
         type="button"
         className="position-relative btn-nav-item"
         onClick={toggleChatDrawer}
-        title={translate('Open AI Assistant')}
+        title={translate('Open chat')}
       >
         <span className="svg-icon svg-icon-2">
           <SparkleIcon weight="bold" />
         </span>
-        {hasNewMessages && <HeaderButtonBullet />}
+        {((showAI && hasNewMessages) || (showMatrix && matrixUnread > 0)) && (
+          <HeaderButtonBullet />
+        )}
       </button>
     </div>
   );

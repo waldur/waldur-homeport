@@ -44,6 +44,7 @@ export const DrawerRoot: FunctionComponent = () => {
       id="kt_drawer"
       className="bg-body"
       data-kt-drawer="true"
+      data-kt-drawer-managed="react"
       data-kt-drawer-name="drawer"
       data-kt-drawer-activate="true"
       data-kt-drawer-overlay="true"

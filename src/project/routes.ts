@@ -10,6 +10,7 @@ import {
 } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
+import { hasActiveProjectMatrixRoomInCache } from '@/matrix/chat/useProjectMatrixRooms';
 import { getProject, isStaffOrSupport } from '@/workspace/selectors';
 
 import { loadProject } from './resolve';
@@ -141,6 +142,25 @@ export const states: StateDeclaration[] = [
           !isFeatureVisible(
             MarketplaceFeatures.conceal_audit_log_from_end_users,
           ) || isStaffOrSupport(state),
+      ],
+    },
+  },
+
+  {
+    name: 'project.communication',
+    url: 'communication/',
+    component: lazyComponent(() =>
+      import('@/matrix/ProjectCommunication').then((module) => ({
+        default: module.ProjectCommunication,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Communication'),
+      priority: 125,
+      permissions: [
+        (state) =>
+          isFeatureVisible(ProjectFeatures.show_matrix_chat) &&
+          hasActiveProjectMatrixRoomInCache(getProject(state)?.uuid),
       ],
     },
   },

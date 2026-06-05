@@ -153,7 +153,7 @@ export const ProjectProfile = ({ project }: ProjectProfileProps) => {
 
   return (
     <PublicDashboardHero
-      hideQuickSection={project.kind === 'default'}
+      hideQuickSection={!['public', 'course'].includes(project.kind)}
       logo={project.image}
       logoAlt={abbreviation}
       logoCircle
