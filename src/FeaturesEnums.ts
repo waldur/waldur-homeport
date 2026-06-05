@@ -61,6 +61,7 @@ export enum ProjectFeatures {
   show_image_in_create_dialog = 'project.show_image_in_create_dialog',
   show_industry_flag = 'project.show_industry_flag',
   show_kind_in_create_dialog = 'project.show_kind_in_create_dialog',
+  show_matrix_chat = 'project.show_matrix_chat',
   show_permission_reviews = 'project.show_permission_reviews',
   show_start_date_in_create_dialog = 'project.show_start_date_in_create_dialog',
   show_type_in_create_dialog = 'project.show_type_in_create_dialog',

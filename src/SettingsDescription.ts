@@ -1914,6 +1914,83 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('Matrix chat'),
+    items: [
+      {
+        key: 'MATRIX_ENABLED',
+        description: translate('Enable Matrix chat integration.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'MATRIX_HOMESERVER_URL',
+        description: translate('Matrix homeserver base URL, e.g. https://matrix.example.com'),
+        default: '',
+        type: 'url_field',
+      },
+      {
+        key: 'MATRIX_HOMESERVER_DOMAIN',
+        description: translate('Matrix homeserver domain name, e.g. matrix.example.com'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'MATRIX_APPSERVICE_AS_TOKEN',
+        description: translate('Application service token for authenticating to the homeserver.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'MATRIX_APPSERVICE_HS_TOKEN',
+        description: translate('Homeserver token for authenticating webhook requests.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'MATRIX_APPSERVICE_SENDER_LOCALPART',
+        description: translate('Localpart for the appservice bot user.'),
+        default: 'waldur-bot',
+        type: 'string',
+      },
+      {
+        key: 'MATRIX_HISTORY_EXPORT_ENABLED',
+        description: translate('Enable periodic history export of Matrix rooms.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'MATRIX_EXPORT_MEDIA',
+        description: translate('Include media files when exporting Matrix room history.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'MATRIX_USER_REGISTRATION_SECRET',
+        description: translate('Shared secret for Matrix user registration.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'MATRIX_USER_ID_FORMAT',
+        description: translate('Format for generating Matrix user IDs: username, uuid, or email_local.'),
+        default: 'username',
+        type: 'string',
+      },
+      {
+        key: 'MATRIX_LOGIN_METHOD',
+        description: translate('Login method for Matrix credentials: password, token, or oidc.'),
+        default: 'token',
+        type: 'string',
+      },
+      {
+        key: 'MATRIX_OIDC_PROVIDER_URL',
+        description: translate('OIDC provider URL for Matrix SSO login.'),
+        default: '',
+        type: 'url_field',
+      },
+    ],
+  },
+  {
     description: translate('Personal Access Tokens'),
     items: [
       {

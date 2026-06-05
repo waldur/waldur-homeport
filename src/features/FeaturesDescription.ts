@@ -215,6 +215,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Show kind field in project create dialog.'),
       },
       {
+        key: 'show_matrix_chat',
+        description: translate('Render the project Matrix chat UI. Backend access is gated separately on the MATRIX_ENABLED Constance setting.'),
+      },
+      {
         key: 'show_permission_reviews',
         description: translate('Allows to show permission reviews tab and popups for projects.'),
       },
