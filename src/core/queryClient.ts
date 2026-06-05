@@ -4,7 +4,14 @@ import { router } from '@/router';
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
-    onError: (error: any) => {
+    onError: (error: any, query) => {
+      // Queries that render their own error state (e.g. a non-essential preview
+      // fetch inside a modal) opt out of the global redirect via
+      // `meta: { skipGlobalErrorRedirect: true }`, so a 404/500 there doesn't
+      // navigate the whole app to an error page.
+      if (query?.meta?.skipGlobalErrorRedirect) {
+        return;
+      }
       // Don't redirect for "Invalid page" errors - tables handle this by resetting pagination
       // SDK throws error body directly: { detail: "Invalid page." }
       // Axios-style errors have: error.response.data.detail

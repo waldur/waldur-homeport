@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from '@uirouter/react';
 import { get } from 'lodash-es';
 import { createRef, FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Form } from 'react-final-form';
@@ -116,6 +117,7 @@ export const ProposalSubmissionStep: FC<{
   refetch;
 }> = ({ proposal, reviews, refetch }) => {
   const { confirm } = useModal();
+  const router = useRouter();
 
   const { showErrorResponse, showSuccess } = useNotify();
 
@@ -298,13 +300,17 @@ export const ProposalSubmissionStep: FC<{
           formValues.supporting_documentation,
         );
         await proposalProposalsSubmit({ path: { uuid: proposal_uuid } });
-        if (refetch) refetch();
         showSuccess(translate('Proposal submitted successfully'));
+        // Leave the edit page rather than mutating it in place: on submit the
+        // proposal flips out of 'draft', which would swap the form for the
+        // read-only view and pop the stepper in above — a jarring live update.
+        // Send the applicant to their proposals list instead.
+        router.stateService.go('proposals-all-proposals');
       } catch (error) {
         showErrorResponse(error, translate('Something went wrong'));
       }
     },
-    [proposal, proposal_uuid, checklistData, refetch],
+    [proposal, proposal_uuid, checklistData, router],
   );
 
   return (

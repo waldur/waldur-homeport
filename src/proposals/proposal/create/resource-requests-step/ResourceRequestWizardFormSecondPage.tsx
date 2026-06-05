@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
@@ -31,17 +31,38 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
 
     staleTime: UI_STALE_TIME,
     enabled: !!(offering?.offering_uuid || offering?.uuid),
+    // Don't retry for 10s or hijack the whole app when the public endpoint can't
+    // serve the offering (e.g. an Unavailable offering — still a valid choice in
+    // a call): fail fast and fall back to the call data below.
+    retry: false,
+    meta: { skipGlobalErrorRedirect: true },
   });
+
+  // Prefer the freshly retrieved offering, but fall back to the data already
+  // carried by the call's requested offering (values.offering) when the public
+  // endpoint 404s it. NestedRequestedOfferingSerializer ships plan_details and
+  // components, which is enough to render the preview without the retrieve.
+  const offeringDetails = useMemo(() => {
+    if (queryData.data) return queryData.data;
+    if (!offering) return undefined;
+    return {
+      uuid: offering.offering_uuid || offering.uuid,
+      name: offering.offering_name,
+      category_title: offering.category_name,
+      components: offering.components ?? [],
+      plans: offering.plan_details ? [offering.plan_details] : [],
+    } as unknown as typeof queryData.data;
+  }, [queryData.data, offering]);
 
   // Store the main offering, so that we can access to it in other steps
   useEffect(() => {
-    if (queryData.data && mainOffering?.uuid !== queryData.data.uuid) {
-      form.change('mainOffering', queryData.data);
+    if (offeringDetails && mainOffering?.uuid !== offeringDetails.uuid) {
+      form.change('mainOffering', offeringDetails);
       // On edit mode, the plan field is an url, so we need to get the plan object from the main offering
-      if (queryData.data.plans) {
+      if (offeringDetails.plans) {
         if (typeof plan === 'string') {
           const planUuid = getUUID(plan);
-          const planObject = queryData.data.plans.find(
+          const planObject = offeringDetails.plans.find(
             (p) => p.uuid === planUuid,
           );
           if (planObject) {
@@ -52,18 +73,16 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
         }
       }
     }
-  }, [queryData.data, mainOffering, plan, form]);
+  }, [offeringDetails, mainOffering, plan, form]);
   return (
     <WizardForm {...props}>
       {queryData.isLoading ? (
         <LoadingSpinner />
-      ) : queryData.isError ? (
-        <LoadingErred loadData={queryData.refetch} />
-      ) : queryData.data ? (
+      ) : offeringDetails ? (
         <div className="size-lg">
           <p>
             <strong>{translate('Offering')}: </strong>
-            {queryData.data.category_title} / {queryData.data.name}
+            {offeringDetails.category_title} / {offeringDetails.name}
           </p>
           {typeof plan === 'object' && (
             <>
@@ -77,7 +96,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
                 <PlanDescriptionButton />
               </div>
               <TabbedPlanComponents
-                offering={queryData.data}
+                offering={offeringDetails}
                 plan={plan}
                 limits={limits}
                 customer={{ url: mainOffering?.customer_uuid }}
@@ -85,6 +104,8 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
             </>
           )}
         </div>
+      ) : queryData.isError ? (
+        <LoadingErred loadData={queryData.refetch} />
       ) : null}
     </WizardForm>
   );

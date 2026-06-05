@@ -1,9 +1,10 @@
+import { XIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { Proposal } from '@/proposals/types';
-import { ProgressSteps as MainProgressSteps } from '@/wizard';
+import { ProgressStep, ProgressSteps as MainProgressSteps } from '@/wizard';
 
 interface ProgressStepsProps {
   proposal: Proposal;
@@ -32,19 +33,30 @@ const getSortedSteps = (proposal: Proposal) => [
   },
 ];
 
-const getSteps = (proposal: Proposal) => {
-  const steps: Array<{ label; description?; completed; variant? }> = [];
+const getSteps = (proposal: Proposal): ProgressStep[] => {
   const sortedSteps = getSortedSteps(proposal);
   const currentStateIndex =
     sortedSteps.findIndex((step) => step.state.includes(proposal.state)) - 1;
-  sortedSteps.forEach((step, i) => {
-    steps.push({
+  return sortedSteps.map((step, i) => {
+    // A rejected proposal has reached the Decision step but failed there.
+    // Render that step as a solid red marker with an ✕ — mirroring the
+    // detailed WorkflowTimeline — so the tracker agrees with the red
+    // "Rejected" badge instead of showing an all-green, success-looking step.
+    if (proposal.state === 'rejected' && step.state.includes('rejected')) {
+      return {
+        label: step.label,
+        completed: true,
+        variant: 'danger',
+        labelClass: 'text-danger',
+        icon: <XIcon size={16} weight="bold" />,
+      };
+    }
+    return {
       label: step.label,
       completed: i <= currentStateIndex,
-      variant: step.variant,
-    });
+      variant: step.variant as ProgressStep['variant'],
+    };
   });
-  return steps;
 };
 
 export const ProgressSteps: FC<ProgressStepsProps> = ({

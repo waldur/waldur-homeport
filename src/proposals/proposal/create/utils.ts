@@ -159,6 +159,11 @@ export const useSubmitProposalResourcesFromTemplates = (
         queryClient.invalidateQueries({
           queryKey: ['table', 'ProposalResourcesList'],
         });
+        // Refresh the proposal's resource list so the Resource requests step's
+        // completion (resources_init) updates without a page reload.
+        queryClient.invalidateQueries({
+          queryKey: ['proposalResources', proposal.uuid],
+        });
       } catch (error) {
         if (showMessages)
           showErrorResponse(error, translate('Something went wrong'));

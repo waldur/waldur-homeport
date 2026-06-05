@@ -21,7 +21,6 @@ import { ProposalDetails } from '../ProposalDetails';
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
 import { WorkflowTimeline } from '../WorkflowTimeline';
 
-import { ProgressSteps } from './ProgressSteps';
 import { ProposalHeader } from './ProposalHeader';
 import { ProposalSubmissionStep } from './ProposalSubmissionStep';
 
@@ -148,16 +147,13 @@ export const ProposalManagePage = () => {
             call={call}
           />
           <ProposalHeader proposal={proposal} className="mb-7" />
-          {proposal.state === 'draft' ? (
-            <ProgressSteps proposal={proposal} bgClass="bg-body" />
-          ) : (
-            // TODO: Remove cast once the regenerated SDK ships
-            // `awaiting_manual_advance` on Proposal.
+          {/* No stepper while the proposal is a draft: the applicant hasn't
+              submitted yet, so no workflow has started — the page shows the
+              editable submission form instead. The stepper only appears from
+              the submitted state onwards. */}
+          {proposal.state !== 'draft' && (
             <WorkflowTimeline
-              proposalUuid={proposal.uuid}
-              awaitingManualAdvance={
-                (proposal as any).awaiting_manual_advance ?? false
-              }
+              proposal={proposal}
               showDetails={isCallManagerView}
             />
           )}
@@ -174,6 +170,7 @@ export const ProposalManagePage = () => {
         <ProposalDetails
           proposal={proposal}
           reviews={submittedReviews}
+          review={userReview}
           refetch={refetch}
         />
       )}
