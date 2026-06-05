@@ -1,6 +1,7 @@
 import {
   ChatTextIcon,
   CheckCircleIcon,
+  PaperPlaneTiltIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
@@ -13,10 +14,10 @@ import { Panel } from '@/core/Panel';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { isReviewInFinalState } from '@/proposals/utils';
 import { ActionButton } from '@/table/ActionButton';
 import { FormSteps } from '@/wizard';
 
-import { ProposalWorkflowActions } from '../manage/ProposalWorkflowActions';
 import { ProposalUsersListSummary } from '../team/ProposalUsersListSummary';
 import { Call, Proposal, ProposalReview } from '../types';
 
@@ -30,10 +31,13 @@ import {
   useCanCreateReview,
   useProposalDecisionActions,
 } from './create/utils';
+import { SubmitReviewDialog } from './create-review/SubmitReviewDialog';
 
 interface ProposalDetails {
   proposal: Proposal;
   reviews?: ProposalReview[];
+  /** The viewer's own review, if any — drives the "Submit review" action. */
+  review?: ProposalReview;
   isLoading?;
   error?;
   refetch;
@@ -42,6 +46,7 @@ interface ProposalDetails {
 export const ProposalDetails = ({
   proposal,
   reviews = [],
+  review,
   isLoading,
   error,
   refetch,
@@ -79,22 +84,6 @@ export const ProposalDetails = ({
   return (
     <SidebarLayout.Container>
       <SidebarLayout.Body className="mb-10">
-        {/* WorkflowTimeline lives in the page header (ProposalManagePage).
-            The "Current step" card drives workflow transitions (complete /
-            reject / advance). Applicants don't drive transitions, so hide it
-            on the applicant tab — only the call-manager view shows it.
-            Reviewers see a step badge on their own review page instead.
-            TODO: Remove cast once the regenerated SDK ships
-            `awaiting_manual_advance` on Proposal. */}
-        {isCallManagerView && (
-          <ProposalWorkflowActions
-            proposalUuid={proposal.uuid}
-            callUuid={proposal.call_uuid}
-            awaitingManualAdvance={
-              (proposal as any).awaiting_manual_advance ?? false
-            }
-          />
-        )}
         <ProposalDetailsOverviewStep id="step-general" params={{ proposal }} />
         <ProjectDetailsSummary proposal={proposal} reviews={reviews} />
         {proposalHasCompliance && (
@@ -116,6 +105,17 @@ export const ProposalDetails = ({
         <Panel title={translate('Progress')} cardBordered className="mb-5">
           <FormSteps steps={formSteps} hideStatusIcons />
         </Panel>
+        {isCallManagerView && review && !isReviewInFinalState(review.state) && (
+          <ActionButton
+            variant="primary"
+            action={() =>
+              openDialog(SubmitReviewDialog, { resolve: { review, refetch } })
+            }
+            className="w-100 mt-2"
+            iconNode={<PaperPlaneTiltIcon weight="bold" />}
+            title={translate('Submit review')}
+          />
+        )}
         {isCallManagerView && canCreateReview && (
           <ActionButton
             variant="secondary"

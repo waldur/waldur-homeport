@@ -231,6 +231,8 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           call={call}
           proposal={proposal}
           title={props.title}
+          change={change}
+          reviews={reviews}
         />
       ) : (
         <ProposalResourcesTable

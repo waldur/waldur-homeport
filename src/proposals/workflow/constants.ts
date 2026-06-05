@@ -221,18 +221,3 @@ export const TRANSITION_MODE_OPTIONS: TransitionModeEnum[] = [
 // are disabled once the call is no longer in draft.
 export const callLockedTooltip = () =>
   translate('Call configuration cannot be changed once the call is activated.');
-
-export const statusVariant = (status: string) => {
-  switch (status) {
-    case 'completed':
-      return 'success';
-    case 'active':
-      return 'primary';
-    case 'expired':
-      return 'danger';
-    case 'skipped':
-      return 'secondary';
-    default:
-      return undefined;
-  }
-};

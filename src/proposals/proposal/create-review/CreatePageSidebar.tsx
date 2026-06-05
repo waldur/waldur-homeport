@@ -2,16 +2,16 @@ import { FC } from 'react';
 import { proposalReviewsReject } from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
-import { FloatingSubmitButton } from '@/form/FloatingSubmitButton';
-import { TosNotification } from '@/form/TosNotification';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
+import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ProposalReview } from '@/proposals/types';
 import { isReviewInFinalState } from '@/proposals/utils';
 import { ActionButton } from '@/table/ActionButton';
 
 import { createReviewSteps } from './steps/steps';
+import { SubmitReviewDialog } from './SubmitReviewDialog';
 
 const tabs = createReviewSteps.map((step) => ({
   key: step.id,
@@ -20,19 +20,15 @@ const tabs = createReviewSteps.map((step) => ({
 
 interface CreatePageSidebarProps {
   review: ProposalReview;
-  submitting?: boolean;
-  saveAsDraft(): void;
-  isSaving?: boolean;
   refetch?(): void;
 }
 
 export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
   review,
-  submitting,
-  saveAsDraft,
-  isSaving,
   refetch,
 }) => {
+  const { openDialog } = useModal();
+
   const rejectMutation = useManagedMutation<any, any, void>({
     mutationFn: () => proposalReviewsReject({ path: { uuid: review.uuid } }),
     successMessage: translate('Review has been rejected.'),
@@ -59,29 +55,20 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
       {review && !isReviewInFinalState(review.state) && (
         <>
           <ActionButton
-            action={saveAsDraft}
-            title={translate('Save as draft')}
-            variant="secondary"
-            className="w-100 mt-2"
-            pending={isSaving}
-          />
-          <hr />
-          <FloatingSubmitButton
-            submitting={submitting}
-            label={translate('Submit review')}
+            action={() =>
+              openDialog(SubmitReviewDialog, { resolve: { review, refetch } })
+            }
+            title={translate('Submit review')}
             variant="primary"
+            className="w-100 mt-2"
           />
-
           <ActionButton
             action={() => rejectMutation.mutate()}
             title={translate('Send back')}
             variant="danger"
             className="w-100 mt-2"
-            disabled={submitting}
-            disabledReason={translate('Please wait...')}
             pending={rejectMutation.isPending}
           />
-          <TosNotification className="text-center text-gray-500 mt-2" />
         </>
       )}
     </>

@@ -32,6 +32,9 @@ interface ResourceRequestTemplatesProps {
   proposal: Proposal;
   title: string;
   reviews?: ProposalReview[];
+  // Parent form's `form.change`, used to keep `resources_init` (the step's
+  // completion gate) in sync with the saved resource requests.
+  change?: (field: string, value: any) => void;
 }
 
 const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
@@ -104,11 +107,12 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
   proposal,
   title,
   reviews,
+  change,
 }) => {
   const dispatch = useDispatch();
 
   // Fetch existing resources for this proposal
-  const { data: initialResources = [] } = useQuery({
+  const { data } = useQuery({
     queryKey: ['proposalResources', proposal.uuid],
     queryFn: () =>
       proposalProposalsResourcesList({ path: { uuid: proposal.uuid } }).then(
@@ -117,6 +121,19 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
     refetchOnWindowFocus: false,
     staleTime: SHORT_STALE_TIME,
   });
+  const initialResources = data ?? [];
+
+  // Keep the parent form's `resources_init` — which gates this step's completion
+  // — aligned with the saved resource requests. Templates mode never wrote this
+  // field, so the step relied on a transient mount of the table component and
+  // went stale after saving (the checkbox only ticked after a full page reload).
+  // Syncing here updates it as soon as the query resolves or refetches, e.g.
+  // after Save invalidates ['proposalResources', proposal.uuid].
+  useEffect(() => {
+    if (change && data) {
+      change('resources_init', data);
+    }
+  }, [data, change]);
 
   const tableProps = useTable({
     table: TABLE_ID,

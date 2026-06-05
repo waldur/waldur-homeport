@@ -5,7 +5,6 @@ import { ProposalDetailsOverviewStep } from '../../create/ProposalDetailsOvervie
 import { FormResourceRequestsStep } from '../../create/resource-requests-step/FormResourceRequestsStep';
 
 import { FormProjectDetailsStep } from './FormProjectDetailsStep';
-import FormSummaryStep from './FormSummaryStep';
 import { ReviewTeamStep } from './ReviewTeamStep';
 
 export const createReviewSteps: VStepperFormStep[] = [
@@ -28,10 +27,5 @@ export const createReviewSteps: VStepperFormStep[] = [
     label: translate('Project team'),
     id: 'step-team',
     component: ReviewTeamStep,
-  },
-  {
-    label: translate('Summary'),
-    id: 'step-summary',
-    component: FormSummaryStep,
   },
 ];
