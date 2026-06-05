@@ -1,4 +1,5 @@
 import { XIcon } from '@phosphor-icons/react';
+import { omit } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { FC, ReactNode } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
@@ -8,6 +9,37 @@ import { translate } from '@/i18n';
 
 import { FormField } from './types';
 import { useFlatpickrTheme } from './useFlatpickrTheme';
+
+// react-flatpickr forwards every prop to the underlying <input>, so we strip
+// the form-plumbing props (react-final-form + FormGroup wiring) that would
+// otherwise produce React "unknown DOM attribute" warnings.
+const NON_DOM_PROPS = [
+  'input',
+  'meta',
+  'isInvalid',
+  'isClearable',
+  'validate',
+  'normalize',
+  'format',
+  'parse',
+  'noUpdateOnBlur',
+  'containerClassName',
+  'spaceless',
+  'space',
+  'hideLabel',
+  'hideError',
+  'forceTouched',
+  'tooltip',
+  'tooltipEnd',
+  'tooltipProps',
+  'helpEnd',
+  'quickAction',
+  'actions',
+  'required',
+  'description',
+  'label',
+  'controlId',
+] as const;
 
 type FlatpickrFieldProps = FormField &
   DateTimePickerProps & {
@@ -26,19 +58,21 @@ export const FlatpickrField: FC<FlatpickrFieldProps> = ({
   const onlyTime = props.options?.enableTime && props.options?.noCalendar;
 
   useFlatpickrTheme();
+  const input = (props as any).input;
+  const flatpickrProps = omit(props as any, NON_DOM_PROPS);
   return (
     <div style={{ position: 'relative' }}>
       <Flatpickr
         id={id}
         value={
-          props.input.value
-            ? typeof props.input.value === 'string'
-              ? DateTime.fromISO(props.input.value).toJSDate()
-              : props.input.value
+          input.value
+            ? typeof input.value === 'string'
+              ? DateTime.fromISO(input.value).toJSDate()
+              : input.value
             : props.options.defaultDate
         }
         onChange={(value) =>
-          props.input.onChange(
+          input.onChange(
             value[0] instanceof Date
               ? onlyTime
                 ? DateTime.fromJSDate(value[0]).toISOTime()
@@ -48,16 +82,14 @@ export const FlatpickrField: FC<FlatpickrFieldProps> = ({
         }
         className={solid ? 'form-control form-control-solid' : 'form-control'}
         placeholder={placeholder}
-        {...props}
+        {...flatpickrProps}
       />
 
-      {props.input.value &&
-      typeof props.input.value === 'string' &&
-      !props.disabled ? (
+      {input.value && typeof input.value === 'string' && !props.disabled ? (
         <button
           type="button"
           className="btn btn-icon btn-circle btn-color-muted w-25px h-25px bg-body shadow end-button"
-          onClick={() => props.input.onChange(null)}
+          onClick={() => input.onChange(null)}
           style={{ position: 'absolute', right: 10, top: 10 }}
         >
           <Tip
