@@ -182,6 +182,7 @@ const renderNetworkRows = ({
   hasCustomIp,
   fipQuotaExhausted,
 }: any) => {
+  const form = useForm();
   const availableNetworkItemsFilter = useCallback(
     (itemType) => (item) => {
       let res = true;
@@ -224,18 +225,21 @@ const renderNetworkRows = ({
     [freeSubnets],
   );
 
+  // The "Add subnet" button uses addRow. Dedupe via `form.getState()` so any
+  // accidental double-fire (stale `fields.value` snapshot, click replay)
+  // can't push the same subnet twice.
   const addRow = useCallback(() => {
-    // if has free subnets
-    if (freeSubnets.length > 0) {
-      fields.push(getDefaultValue());
+    if (freeSubnets.length === 0) return;
+    const value = getDefaultValue();
+    const current: any[] = form.getState().values?.attributes?.networks ?? [];
+    if (
+      value.subnet?.uuid &&
+      current.some((n) => n?.subnet?.uuid === value.subnet.uuid)
+    ) {
+      return;
     }
-  }, [fields, freeSubnets, getDefaultValue]);
-
-  useEffect(() => {
-    if (fields?.length === 0) {
-      addRow();
-    }
-  }, [fields, addRow]);
+    fields.push(value);
+  }, [form, fields, freeSubnets, getDefaultValue]);
 
   useEffect(() => {
     if (!hasCustomIp && fields.value) {
@@ -373,6 +377,27 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
 
     staleTime: UI_STALE_TIME,
   });
+
+  // Seed the first network row once subnet data is available.
+  // Must run in the PARENT effect (not inside the FieldArray's component),
+  // because react-final-form's `useField` registers its subscription in its
+  // own `useEffect`; child effects fire before that, so a push from inside
+  // FieldArray's render component would update form state but never reach
+  // the field subscriber (it sees only the post-registration "initial"
+  // notification, which `useField` deliberately skips on first render). The
+  // parent's effect runs after the child's, so the subscription is in place
+  // by the time we push and the row renders.
+  useEffect(() => {
+    if (!data?.subnets?.length) return;
+    const existing = form.getState().values?.attributes?.networks;
+    if (existing && existing.length > 0) return;
+    form.change('attributes.networks', [
+      {
+        subnet: data.subnets[0],
+        floatingIp: getDefaultFloatingIps({ fipQuotaExhausted })[0],
+      },
+    ]);
+  }, [data, form, fipQuotaExhausted]);
 
   return (
     <VStepperFormStepCard
