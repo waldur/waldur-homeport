@@ -1,9 +1,9 @@
 ARG DOCKER_REGISTRY=docker.io/
 
 # build environment
-FROM ${DOCKER_REGISTRY}node:lts-alpine as build
+FROM ${DOCKER_REGISTRY}node:lts-alpine AS build
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH=/app/node_modules/.bin:$PATH
 COPY package.json yarn.lock /app/
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
@@ -22,7 +22,7 @@ ARG VERSION=latest
 ARG ASSET_PATH="/"
 ENV VITE_API_URL="__API_URL__"
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/core/config.ts
-ENV NODE_OPTIONS --max-old-space-size=32768
+ENV NODE_OPTIONS=--max-old-space-size=32768
 RUN yarn vite build --base=$ASSET_PATH
 
 # production environment
