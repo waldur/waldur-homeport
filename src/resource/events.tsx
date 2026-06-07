@@ -8,7 +8,7 @@ const getResourceContext = (event) => ({
   ...getUserContext(event),
   resource_link: (
     <Link
-      state="resource-details"
+      state="marketplace-resource-details"
       params={{
         resource_type: event.resource_type,
         resource_uuid: event.resource_uuid,

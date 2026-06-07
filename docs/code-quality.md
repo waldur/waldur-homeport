@@ -112,3 +112,15 @@ yarn info eslint prettier stylelint husky version
 - **Flat ESLint config** format
 - **Husky** git hooks for automated quality checks
 - **Yarn** package management with lockfile integrity
+
+## UI-Router state name guard
+
+`src/state-names.test.ts` is a Vitest smoke test that asserts every literal UI-Router state name referenced from source (`<Link state="...">`, `<UISref state="...">`, `router.stateService.go('...')`, and breadcrumb `to:` fields) resolves to a state registered in `src/states.ts`. It catches the regression class where a route is renamed in a `routes.ts` module but call sites elsewhere keep the old name and silently 404.
+
+Dynamic references (`state={variable}`, `router.stateService.go(name)`, computed names) are skipped — the literal-string regexes do not match expression syntax.
+
+### Opt-outs
+
+- **Per-line**: append `// state-check: ignore` to the line containing the literal. Use this for fixture data or constants where the literal value is intentionally not a real state name.
+- **Global allowlist** (in the test file): for values that are intentionally not in the registry but legitimately appear in the codebase (e.g., the `'404'` fallback used inside `useSref(state || '404', ...)` in `src/core/Link.tsx`). Keep this set small and add a comment explaining each entry.
+- **Known-broken set** (in the test file): for pre-existing broken references that require product knowledge to fix. Do not add new entries — fix the reference instead. When the last call site for an entry is gone, remove the entry.

@@ -113,7 +113,7 @@ export const ReviewerInvitationAccept: FC = () => {
     mutationFn: () => acceptInvitation(token),
     onSuccess: () => {
       showSuccess(translate('Invitation accepted successfully.'));
-      router.stateService.go('profile.reviewer');
+      router.stateService.go('profile-manage', { tab: 'reviewer-profile' });
     },
     onError: (error) => {
       showErrorResponse(error, translate('Unable to accept invitation.'));

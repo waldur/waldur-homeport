@@ -15,7 +15,7 @@ export const UserLink: FC<UserLinkProps> = ({ user }) => {
   }
 
   return (
-    <Link state="users.details" params={{ uuid: user.uuid }}>
+    <Link state="support-user-manage" params={{ user_uuid: user.uuid }}>
       {user.full_name || user.username}
     </Link>
   );

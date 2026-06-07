@@ -40,7 +40,7 @@ interface OfferingStatsData {
 // Column components for the offerings table
 const OfferingNameColumn = ({ row }: { row: ProviderOffering }) => (
   <Link
-    state="marketplace-provider-offering-details"
+    state="admin-marketplace-offering-details"
     params={{ offering_uuid: row.uuid }}
   >
     {row.name}

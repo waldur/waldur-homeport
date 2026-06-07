@@ -64,7 +64,7 @@ export const ClusterNodesList: FunctionComponent<
             }
             return (
               <Link
-                state="resource-details"
+                state="marketplace-resource-details"
                 params={{
                   uuid: row.project_uuid,
                   resource_uuid: row.instance_uuid,

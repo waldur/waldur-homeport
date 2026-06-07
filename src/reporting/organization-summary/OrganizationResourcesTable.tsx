@@ -223,7 +223,7 @@ export const OrganizationResourcesTable: FC<
         render: ({ row }) => (
           <div>
             <Link
-              state="marketplace-public-resource-details"
+              state="marketplace-resource-details"
               params={{ resource_uuid: row.uuid }}
             >
               {renderFieldOrDash(row.name || row.offering_name)}
