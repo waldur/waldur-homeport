@@ -50,7 +50,7 @@ export const AdministrativeAccessSection: FC<
             <tr key={user.user_uuid}>
               <td>
                 <Link
-                  state="admin-user-users.details"
+                  state="support-user-manage"
                   params={{ user_uuid: user.user_uuid }}
                 >
                   {user.full_name || user.username}

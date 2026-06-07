@@ -49,7 +49,7 @@ describe('UserDelete', () => {
         'User has been deleted.',
       );
       expect(globalRouter.stateService.go).toHaveBeenCalledWith(
-        'admin-user-users',
+        'support-users',
       );
     });
   });

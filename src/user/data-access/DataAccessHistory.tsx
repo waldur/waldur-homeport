@@ -66,7 +66,7 @@ const DataAccessHistoryTable: FC<DataAccessHistoryProps> = ({
           if (isViewerStaffOrSupport && row.accessor) {
             return (
               <Link
-                state="admin-user-users.details"
+                state="support-user-manage"
                 params={{ user_uuid: row.accessor.uuid }}
               >
                 {row.accessor.full_name || row.accessor.username}

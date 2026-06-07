@@ -60,7 +60,7 @@ const SupportDataAccessLogsListTable = () => {
         title: translate('User'),
         render: ({ row }: { row: GlobalUserDataAccessLog }) => (
           <Link
-            state="admin-user-users.details"
+            state="support-user-manage"
             params={{ user_uuid: row.user.uuid }}
           >
             {row.user.full_name || row.user.username}
@@ -73,7 +73,7 @@ const SupportDataAccessLogsListTable = () => {
         title: translate('Accessor'),
         render: ({ row }: { row: GlobalUserDataAccessLog }) => (
           <Link
-            state="admin-user-users.details"
+            state="support-user-manage"
             params={{ user_uuid: row.accessor.uuid }}
           >
             {row.accessor.full_name || row.accessor.username}
