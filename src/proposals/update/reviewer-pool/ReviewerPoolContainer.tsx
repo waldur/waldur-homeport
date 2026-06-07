@@ -2,6 +2,7 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
 import { AssignmentBatchesSection } from '@/proposals/assignments/AssignmentBatchesSection';
+import { ReviewerCapacitySection } from '@/proposals/assignments/ReviewerCapacitySection';
 import { Call } from '@/proposals/types';
 
 import { ReviewerDiscoverySection } from '../../manage/reviewer-discovery';
@@ -17,7 +18,8 @@ interface ReviewerPoolContainerProps {
 const tabs = {
   pool: ReviewerPoolSection,
   discovery: ReviewerDiscoverySection,
-  assignments: AssignmentBatchesSection,
+  assignment_batches: AssignmentBatchesSection,
+  reviewer_capacity: ReviewerCapacitySection,
   coi: COIReviewSection,
 };
 

@@ -6,6 +6,7 @@ import { Badge } from '@/core/Badge';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -70,10 +71,7 @@ export const AssignmentBatchExpandableRow: FC<
   return (
     <ExpandableContainer>
       {batch.manager_notes && (
-        <div className="mb-3 p-3 bg-light rounded">
-          <strong>{translate('Manager notes')}:</strong>
-          <p className="mb-0 mt-1">{batch.manager_notes}</p>
-        </div>
+        <Field label={translate('Manager notes')} value={batch.manager_notes} />
       )}
 
       <Table

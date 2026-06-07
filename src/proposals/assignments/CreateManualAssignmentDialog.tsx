@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
+import { uniqueId } from 'lodash-es';
 import { FC, useCallback, useMemo } from 'react';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
+import { components } from 'react-select';
 import {
   CallReviewerPool,
   callReviewerPoolsList,
@@ -9,6 +12,7 @@ import {
   proposalProtectedCallsCreateManualAssignment,
 } from 'waldur-js-client';
 
+import { Tag } from '@/core/Tag';
 import { required } from '@/core/validators';
 import { SelectField, SubmitButton, StringGroup } from '@/form';
 import { FormGroup } from '@/form';
@@ -19,6 +23,65 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 
 import { Call } from '../types';
+
+const TruncatedMultiValue = (props: any) => (
+  <Tag onClear={props.removeProps.onClick}>
+    <span
+      className="text-truncate d-inline-block align-bottom"
+      style={{ maxWidth: 260 }}
+    >
+      {props.children}
+    </span>
+  </Tag>
+);
+
+const FirstChipValueContainer = (props: any) => {
+  if (!props.hasValue) {
+    return (
+      <components.ValueContainer {...props}>
+        {props.children}
+      </components.ValueContainer>
+    );
+  }
+
+  const [values, ...otherChildren] = props.children;
+  const visibleValues = values.slice(0, 1);
+  const hiddenValues = values.slice(1);
+
+  return (
+    <components.ValueContainer
+      {...props}
+      className="flex-nowrap overflow-hidden"
+    >
+      {visibleValues}
+      {hiddenValues.length > 0 && (
+        <OverlayTrigger
+          placement="bottom"
+          overlay={
+            <Popover
+              className="metronic-select-tooltip"
+              id={uniqueId('tip-proposals')}
+            >
+              <Popover.Body>
+                {hiddenValues.map((child) => child.props?.children).join(', ')}
+              </Popover.Body>
+            </Popover>
+          }
+        >
+          <Tag>
+            +{hiddenValues.length} {translate('more')}
+          </Tag>
+        </OverlayTrigger>
+      )}
+      {otherChildren}
+    </components.ValueContainer>
+  );
+};
+
+const proposalsSelectComponents = {
+  MultiValue: TruncatedMultiValue,
+  ValueContainer: FirstChipValueContainer,
+};
 
 interface CreateManualAssignmentDialogProps {
   resolve: {
@@ -157,17 +220,23 @@ export const CreateManualAssignmentDialog: FC<
     },
   });
 
-  const formatReviewerLabel = useCallback((option: ReviewerOption) => {
-    return (
-      <div>
-        <div className="fw-bold">{option.label}</div>
-        <small className="text-muted">
-          {option.email} ({option.currentAssignments}/{option.maxAssignments}{' '}
-          {translate('assigned')})
-        </small>
-      </div>
-    );
-  }, []);
+  const formatReviewerLabel = useCallback(
+    (option: ReviewerOption, meta: { context: 'menu' | 'value' }) => {
+      if (meta.context === 'value') {
+        return <span className="text-truncate">{option.label}</span>;
+      }
+      return (
+        <div>
+          <div className="fw-bold">{option.label}</div>
+          <small className="text-muted">
+            {option.email} ({option.currentAssignments}/{option.maxAssignments}{' '}
+            {translate('assigned')})
+          </small>
+        </div>
+      );
+    },
+    [],
+  );
 
   return (
     <Form<FormValues>
@@ -223,6 +292,7 @@ export const CreateManualAssignmentDialog: FC<
                   placeholder={translate('Select proposals...')}
                   validate={required}
                   isDisabled={Boolean(initialProposal)}
+                  components={proposalsSelectComponents}
                 />
                 {!proposalsLoading &&
                   !initialProposal &&

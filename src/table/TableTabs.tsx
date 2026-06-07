@@ -38,7 +38,7 @@ export const TableTabs = ({ tabs }: { tabs: TableTab[] }) => {
   return (
     <Tab.Container unmountOnExit={true} activeKey={activeKey} onSelect={goTo}>
       <div className="overflow-autoo flex-grow-1 pb-2 pt-4">
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mx-0 border-0">
+        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mx-0">
           {tabs.map((tab) => (
             <Nav.Item key={tab.key} className="text-nowrap">
               <Nav.Link as="button" eventKey={tab.key}>
