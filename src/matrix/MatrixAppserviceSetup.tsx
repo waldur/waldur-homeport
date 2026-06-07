@@ -110,6 +110,12 @@ export const MatrixAppserviceSetupDialog: FC = () => {
     if (missingPrereqs.homeserver_url && formData.homeserver_url) {
       body.homeserver_url = formData.homeserver_url;
     }
+    // Optional public URL — not part of missingPrereqs (never blocks setup).
+    // The backend only writes it when Constance is empty, mirroring the
+    // other "only-write-when-missing" prereqs.
+    if (formData.homeserver_public_url) {
+      body.homeserver_public_url = formData.homeserver_public_url;
+    }
     if (missingPrereqs.homeserver_domain && formData.homeserver_domain) {
       body.homeserver_domain = formData.homeserver_domain;
     }
@@ -218,6 +224,24 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                     />
                   </FormGroup>
                 )}
+                {/*
+                  Public URL is optional and never gates setup completion.
+                  Show it on the prereqs step so operators can configure it
+                  in one place; leave blank when the homeserver URL above
+                  works from both servers and browsers.
+                */}
+                <FormGroup
+                  label={translate('Public homeserver URL')}
+                  description={translate(
+                    'Optional. Used by browser clients when the homeserver URL above is Docker-internal or otherwise unreachable from the browser.',
+                  )}
+                >
+                  <Field
+                    name="homeserver_public_url"
+                    component={StringField as any}
+                    placeholder="https://waldur.example.com"
+                  />
+                </FormGroup>
                 {missingPrereqs.homeserver_domain && (
                   <FormGroup
                     label={translate('Homeserver domain')}
@@ -279,12 +303,30 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   description={translate(
                     'Localpart for the appservice bot user (default: waldur-bot).',
                   )}
-                  spaceless
                 >
                   <Field
                     name="sender_localpart"
                     component={StringField as any}
                     placeholder="waldur-bot"
+                  />
+                </FormGroup>
+                {/*
+                  Surface the public URL here too so it can be set even when
+                  the prereqs panel was skipped (homeserver_url already
+                  configured). The backend only persists when Constance is
+                  empty — re-running setup won't overwrite an existing value.
+                */}
+                <FormGroup
+                  label={translate('Public homeserver URL')}
+                  description={translate(
+                    'Optional. Browser-facing homeserver URL. Set when the Homeserver URL above is Docker-internal or otherwise unreachable from the browser.',
+                  )}
+                  spaceless
+                >
+                  <Field
+                    name="homeserver_public_url"
+                    component={StringField as any}
+                    placeholder="https://waldur.example.com"
                   />
                 </FormGroup>
               </>
