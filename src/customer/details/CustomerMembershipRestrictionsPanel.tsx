@@ -13,7 +13,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
-import { getInitialValues } from './restrictions/EditMembershipRestrictionsDialog';
+import { getInitialValues } from './restrictions/EditMembershipRestrictionsDialog.helpers';
 
 interface CustomerMembershipRestrictionsPanelProps {
   customer: Customer;
