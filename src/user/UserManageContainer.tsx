@@ -103,7 +103,7 @@ export const UserManageContainer = ({ isPersonal }) => {
         : {
             key: 'users',
             text: translate('Users'),
-            to: 'admin-user-users',
+            to: 'support-users',
           },
       {
         key: 'user',

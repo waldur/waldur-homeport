@@ -23,7 +23,7 @@ export const UserDelete = ({ user }: { user: User }) => {
       if (isDescendantOf('marketplace-provider', router.globals.current)) {
         router.stateService.go('marketplace-provider-users');
       } else {
-        router.stateService.go('admin-user-users');
+        router.stateService.go('support-users');
       }
     },
     confirmation: {

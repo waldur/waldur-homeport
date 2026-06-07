@@ -112,7 +112,7 @@ export const OrganizationalAccessSection: FC<
             render: ({ row }) =>
               isViewerStaffOrSupport ? (
                 <Link
-                  state="admin-user-users.details"
+                  state="support-user-manage"
                   params={{ user_uuid: row.user_uuid }}
                 >
                   {row.full_name || row.username}
