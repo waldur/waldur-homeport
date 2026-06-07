@@ -1929,6 +1929,12 @@ export const SettingsDescription = [
         type: 'url_field',
       },
       {
+        key: 'MATRIX_HOMESERVER_PUBLIC_URL',
+        description: translate('Matrix homeserver URL used by browser clients. Falls back to MATRIX_HOMESERVER_URL when blank. Set this when the homeserver is reachable from servers and browsers at different addresses (e.g. a Docker-internal name vs. a public Caddy-proxied URL).'),
+        default: '',
+        type: 'url_field',
+      },
+      {
         key: 'MATRIX_HOMESERVER_DOMAIN',
         description: translate('Matrix homeserver domain name, e.g. matrix.example.com'),
         default: '',
