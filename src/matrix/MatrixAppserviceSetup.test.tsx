@@ -72,7 +72,9 @@ describe('MatrixAppserviceSetupDialog', () => {
     expect(await screen.findByLabelText(/Waldur URL/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Bot localpart/i)).toBeInTheDocument();
     // Prereq fields aren't rendered at all when not needed.
-    expect(screen.queryByLabelText(/Homeserver URL/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(/^Homeserver URL$/i),
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByLabelText(/Homeserver domain/i),
     ).not.toBeInTheDocument();
@@ -96,7 +98,9 @@ describe('MatrixAppserviceSetupDialog', () => {
 
     renderDialog();
 
-    expect(await screen.findByLabelText(/Homeserver URL/i)).toBeInTheDocument();
+    expect(
+      await screen.findByLabelText(/^Homeserver URL$/i),
+    ).toBeInTheDocument();
     expect(screen.getByLabelText(/Homeserver domain/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Registration secret/i)).toBeInTheDocument();
     // The appservice fields are NOT on the same screen — they're on step 2.
@@ -120,7 +124,9 @@ describe('MatrixAppserviceSetupDialog', () => {
       await screen.findByLabelText(/Homeserver domain/i),
     ).toBeInTheDocument();
     expect(screen.getByLabelText(/Registration secret/i)).toBeInTheDocument();
-    expect(screen.queryByLabelText(/Homeserver URL/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(/^Homeserver URL$/i),
+    ).not.toBeInTheDocument();
   });
 
   it('advances from prereqs to the appservice step without an API call', async () => {
@@ -134,7 +140,7 @@ describe('MatrixAppserviceSetupDialog', () => {
     renderDialog();
 
     await user.type(
-      await screen.findByLabelText(/Homeserver URL/i),
+      await screen.findByLabelText(/^Homeserver URL$/i),
       'https://matrix.example.com',
     );
     await user.type(
@@ -147,7 +153,9 @@ describe('MatrixAppserviceSetupDialog', () => {
 
     // Should now be on step 2 — appservice fields visible, prereqs gone.
     expect(await screen.findByLabelText(/Waldur URL/i)).toBeInTheDocument();
-    expect(screen.queryByLabelText(/Homeserver URL/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(/^Homeserver URL$/i),
+    ).not.toBeInTheDocument();
     // Back button shows because we came from prereqs.
     expect(screen.getByRole('button', { name: /^Back$/i })).toBeInTheDocument();
     // No API call was made.
@@ -164,7 +172,7 @@ describe('MatrixAppserviceSetupDialog', () => {
     const user = userEvent.setup();
     renderDialog();
 
-    const urlField = await screen.findByLabelText(/Homeserver URL/i);
+    const urlField = await screen.findByLabelText(/^Homeserver URL$/i);
     await user.type(urlField, 'https://matrix.example.com');
     await user.type(
       screen.getByLabelText(/Homeserver domain/i),
@@ -176,7 +184,7 @@ describe('MatrixAppserviceSetupDialog', () => {
     // Now on step 2; click Back
     await user.click(await screen.findByRole('button', { name: /^Back$/i }));
 
-    const restoredUrl = await screen.findByLabelText(/Homeserver URL/i);
+    const restoredUrl = await screen.findByLabelText(/^Homeserver URL$/i);
     expect((restoredUrl as HTMLInputElement).value).toBe(
       'https://matrix.example.com',
     );
@@ -197,7 +205,7 @@ describe('MatrixAppserviceSetupDialog', () => {
 
     // Step 1
     await user.type(
-      await screen.findByLabelText(/Homeserver URL/i),
+      await screen.findByLabelText(/^Homeserver URL$/i),
       'https://matrix.example.com',
     );
     await user.type(
