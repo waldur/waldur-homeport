@@ -36,6 +36,14 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
         component: StringField,
       },
       {
+        label: translate('Require effective ID for highlighted display'),
+        key: 'plugin_options.require_effective_id_for_highlighted_display',
+        component: AwesomeCheckboxField,
+        description: translate(
+          'When enabled, highlighted backend ID display is only shown when the resource has an effective_id.',
+        ),
+      },
+      {
         label: translate('Expose inference playground'),
         key: 'plugin_options.expose_inference_playground',
         component: AwesomeCheckboxField,
