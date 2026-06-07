@@ -19,10 +19,9 @@ import {
   isStaff,
   isStaffOrSupport,
   isOwner,
-  hasNonProjectPermissions,
 } from '@/workspace/selectors';
 
-import { userHasCustomerPermission } from './utils';
+import { canAccessOrganization, userHasCustomerPermission } from './utils';
 import { fetchCustomer } from './workspace/fetchCustomer';
 
 function canAccessPaymentProfiles(state) {
@@ -31,16 +30,6 @@ function canAccessPaymentProfiles(state) {
   if (isOwner(state) && customer.payment_profiles?.length > 0) return true;
   return false;
 }
-
-const canAccessOrganization = (state) => {
-  const hideFromProjectMembers = isFeatureVisible(
-    MarketplaceFeatures.hide_organization_information_from_project_members,
-  );
-  if (!hideFromProjectMembers) {
-    return true;
-  }
-  return hasNonProjectPermissions(state);
-};
 
 export const states: StateDeclaration[] = [
   {

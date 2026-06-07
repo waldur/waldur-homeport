@@ -204,29 +204,24 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
     props.refetch,
   ]);
 
-  const { getOrganizationBreadcrumbItem } = usePresetBreadcrumbItems();
+  const {
+    getOrganizationsBreadcrumbItem,
+    getOrganizationBreadcrumbItem,
+    getOrganizationProjectsBreadcrumbItem,
+  } = usePresetBreadcrumbItems();
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
     const order = props.order;
     if (!order) return [];
     return [
-      {
-        key: 'organizations',
-        text: translate('Organizations'),
-        to: 'organizations',
-        ellipsis: 'xxl',
-      },
+      getOrganizationsBreadcrumbItem({ ellipsis: 'xxl' }),
       getOrganizationBreadcrumbItem({
         uuid: order.customer_uuid,
         name: order.customer_name,
       }),
-      {
-        key: 'organization.projects',
-        text: translate('Projects'),
-        to: 'organization.projects',
-        params: { uuid: order.customer_uuid },
+      getOrganizationProjectsBreadcrumbItem(order.customer_uuid, {
         ellipsis: 'xxl',
-      },
+      }),
       {
         key: 'project.dashboard',
         text: order.project_name,

@@ -194,15 +194,12 @@ export const checkIsCallManager = (call: Call, user: User): boolean =>
 export const useCallBreadcrumbItems = (
   call: Pick<Call, 'customer_uuid' | 'customer_name' | 'name'>,
 ): IBreadcrumbItem[] => {
-  const { getOrganizationBreadcrumbItem } = usePresetBreadcrumbItems();
+  const { getOrganizationsBreadcrumbItem, getOrganizationBreadcrumbItem } =
+    usePresetBreadcrumbItems();
 
   return useMemo(
     () => [
-      {
-        key: 'organizations',
-        text: translate('Organizations'),
-        to: 'organizations',
-      },
+      getOrganizationsBreadcrumbItem(),
       call?.customer_uuid
         ? getOrganizationBreadcrumbItem({
             uuid: call.customer_uuid,
