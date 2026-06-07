@@ -19,8 +19,10 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { KeyValueButton } from '../KeyValueButton';
 
 const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
-  // Use effective_id if available, otherwise backend_id
-  const backendId = row.effective_id || row.backend_id;
+  const highlightedId = row.offering_plugin_options
+    ?.require_effective_id_for_highlighted_display
+    ? row.effective_id
+    : row.effective_id || row.backend_id;
 
   // Use custom label if provided, otherwise default to "Backend ID"
   const backendIdLabel =
@@ -29,14 +31,14 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
 
   return (
     <ExpandableContainer hasMultiSelect asTable>
-      {backendId &&
+      {highlightedId &&
         row.offering_plugin_options?.highlight_backend_id_display && (
           <Field
             label={backendIdLabel}
             value={
               <span className="d-flex align-items-center gap-2">
-                <span>{backendId}</span>
-                <CopyToClipboardButton value={backendId} onlyButton />
+                <span>{highlightedId}</span>
+                <CopyToClipboardButton value={highlightedId} onlyButton />
               </span>
             }
           />
