@@ -58,6 +58,10 @@ describe('FlatpickrField — DOM prop leak regression', () => {
     'tooltip',
     'tooltipEnd',
     'controlId',
+    // react-flatpickr v4 spreads every prop onto its <input>. If `children`
+    // makes it through (including the falsy `false` from `{cond && <X/>}`
+    // patterns), React #137 fires. FlatpickrField has to strip it.
+    'children',
   ];
 
   it('does not forward form-plumbing props onto the Flatpickr component', () => {
@@ -93,6 +97,27 @@ describe('FlatpickrField — DOM prop leak regression', () => {
         `expected Flatpickr NOT to receive "${prop}"; saw props: ${Object.keys(seen).join(', ')}`,
       ).toBe(false);
     }
+  });
+
+  it('strips children (including the falsy `false` from `{cond && <X/>}`) before reaching Flatpickr — blocks React #137 under react-flatpickr v4', () => {
+    render(
+      <FlatpickrField
+        input={
+          {
+            name: 'start_date',
+            value: '',
+            onChange: () => undefined,
+            onBlur: () => undefined,
+            onFocus: () => undefined,
+          } as any
+        }
+        options={{ dateFormat: 'Y-m-d' }}
+      >
+        {false}
+      </FlatpickrField>,
+    );
+    expect(flatpickrPropsLog).toHaveLength(1);
+    expect('children' in flatpickrPropsLog[0]).toBe(false);
   });
 
   it('still forwards legitimate Flatpickr props (placeholder, disabled, options)', () => {

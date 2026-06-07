@@ -28,21 +28,31 @@ export const OrderStartDateField = ({
     return null;
   }
 
-  // 4. Render the React Final Form Field
+  // 4. Render the React Final Form Field. We split the simple/non-simple
+  // branches because the original combined form passed `children={false}` to
+  // `<Field>` in the simple case — that `false` rode through `FormGroup` →
+  // `DateField` → `FlatpickrField` and tripped React #137 once
+  // `react-flatpickr` v4 started spreading every prop onto its <input>.
+  if (simple) {
+    return (
+      <Field
+        name="start_date"
+        label={translate('Start date')}
+        component={DateField}
+        {...dateFieldProps}
+      />
+    );
+  }
   return (
     <Field
-      name="start_date" // This field is at the root of the order payload
+      name="start_date"
       label={translate('Start date')}
-      component={simple ? DateField : FormGroup}
-      description={
-        !simple &&
-        translate(
-          'The date when the resource provisioning will be initiated. If not set, the order is processed immediately after approval.',
-        )
-      }
-      {...(simple ? dateFieldProps : {})}
+      component={FormGroup}
+      description={translate(
+        'The date when the resource provisioning will be initiated. If not set, the order is processed immediately after approval.',
+      )}
     >
-      {!simple && <DateField {...dateFieldProps} />}
+      <DateField {...dateFieldProps} />
     </Field>
   );
 };
