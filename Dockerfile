@@ -22,7 +22,7 @@ ARG VERSION=latest
 ARG ASSET_PATH="/"
 ENV VITE_API_URL="__API_URL__"
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/core/config.ts
-ENV NODE_OPTIONS=--max-old-space-size=32768
+ENV NODE_OPTIONS=--max-old-space-size=8192
 RUN yarn vite build --base=$ASSET_PATH
 
 # production environment

@@ -1,5 +1,4 @@
 import { Plugin } from 'vite';
-import { SourceMapGenerator } from 'source-map';
 
 export default function reactDisplayNamePlugin(): Plugin {
   return {
@@ -9,12 +8,6 @@ export default function reactDisplayNamePlugin(): Plugin {
       if (!id.endsWith('.tsx') || id.includes('node_modules')) {
         return null;
       }
-
-      const map = new SourceMapGenerator({
-        file: id,
-        sourceRoot: '',
-        skipValidation: true,
-      });
 
       // Only process the file if it doesn't already contain displayName assignments
       if (code.includes('.displayName =')) {
@@ -55,17 +48,28 @@ export default function reactDisplayNamePlugin(): Plugin {
         commentRanges.some(([start, end]) => pos >= start && pos < end);
 
       let match;
+      let appended = false;
       while ((match = componentRegex.exec(code)) !== null) {
         if (isInsideComment(match.index)) continue;
         const componentName = match[1];
         // Add displayName at the end of the file
         transformedCode = `${transformedCode}\n${componentName}.displayName = '${componentName}';`;
+        appended = true;
       }
 
-      return {
-        code: transformedCode,
-        map: map.toString(),
-      };
+      if (!appended) return null;
+
+      // Returning `map: null` (instead of an empty SourceMapGenerator
+      // serialization) tells Vite to PRESERVE the upstream map from
+      // @vitejs/plugin-react instead of clobbering the chain with a
+      // mappings-empty sentinel. That sentinel collapsed Sentry stack
+      // traces to the post-JSX-transform code with no original-TSX
+      // context — verified by reading vite's combineSourcemaps short-
+      // circuit at chunks/node.js:~21263 (the `mappings === ""` break).
+      // Since we only append lines at end-of-file and don't touch
+      // existing offsets, the upstream map remains valid for every
+      // original line.
+      return { code: transformedCode, map: null };
     },
   };
 }
