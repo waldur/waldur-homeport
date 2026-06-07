@@ -12,6 +12,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { IBreadcrumbItem } from '@/navigation/types';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { PermissionEnum } from '@/permissions/enums';
@@ -144,13 +145,11 @@ const WithHero = (props) => {
 
   usePageHero(<PageHero customer={customer} />);
 
+  const { getOrganizationsBreadcrumbItem } = usePresetBreadcrumbItems();
+
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
     () => [
-      {
-        key: 'organizations',
-        text: translate('Organizations'),
-        to: 'organizations',
-      },
+      getOrganizationsBreadcrumbItem(),
       {
         key: 'organization',
         text: customer?.name || '',

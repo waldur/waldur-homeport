@@ -178,28 +178,24 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
 
   useTitle(resource?.name);
 
-  const { getOrganizationBreadcrumbItem, getProjectBreadcrumbItem } =
-    usePresetBreadcrumbItems();
+  const {
+    getOrganizationsBreadcrumbItem,
+    getOrganizationBreadcrumbItem,
+    getOrganizationProjectsBreadcrumbItem,
+    getProjectBreadcrumbItem,
+  } = usePresetBreadcrumbItems();
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
     if (!resource) return [];
     return [
-      {
-        key: 'organizations',
-        text: translate('Organizations'),
-        to: 'organizations',
-      },
+      getOrganizationsBreadcrumbItem(),
       getOrganizationBreadcrumbItem({
         uuid: resource.customer_uuid,
         name: resource.customer_name,
       }),
-      {
-        key: 'organization.projects',
-        text: translate('Projects'),
-        to: 'organization.projects',
-        params: { uuid: resource.customer_uuid },
+      getOrganizationProjectsBreadcrumbItem(resource.customer_uuid, {
         ellipsis: 'md',
-      },
+      }),
       getProjectBreadcrumbItem({
         uuid: resource.project_uuid,
         name: resource.project_name,

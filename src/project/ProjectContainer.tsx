@@ -57,26 +57,20 @@ const ProjectContainerWithHero = (props) => {
 
   usePageHero(<PageHero project={project} />, [project]);
 
-  const { getOrganizationBreadcrumbItem } = usePresetBreadcrumbItems();
+  const {
+    getOrganizationsBreadcrumbItem,
+    getOrganizationBreadcrumbItem,
+    getOrganizationProjectsBreadcrumbItem,
+  } = usePresetBreadcrumbItems();
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
     () => [
-      {
-        key: 'organizations',
-        text: translate('Organizations'),
-        to: 'organizations',
-      },
+      getOrganizationsBreadcrumbItem(),
       getOrganizationBreadcrumbItem(
         { uuid: project.customer_uuid, name: project.customer_name },
         { ellipsis: 'md' },
       ),
-      {
-        key: 'organization.projects',
-        text: translate('Projects'),
-        to: 'organization.projects',
-        params: { uuid: project.customer_uuid },
-        ellipsis: 'xl',
-      },
+      getOrganizationProjectsBreadcrumbItem(project.customer_uuid),
       {
         key: 'project',
         text: project.name,
