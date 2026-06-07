@@ -2,17 +2,15 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { Project, projectsPartialUpdate } from 'waldur-js-client';
 
-import {
-  fieldConfig,
-  getRestrictionsArray,
-  RestrictionField,
-} from '@/core/restrictions';
+import { fieldConfig, RestrictionField } from '@/core/restrictions';
 import { SubmitButton, CommaSeparatedListGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useSetProject } from '@/workspace/hooks';
+
+import { getInitialValues } from './EditProjectMembershipRestrictionsDialog.helpers';
 
 interface FormData {
   value: string[] | string;
@@ -24,13 +22,6 @@ interface EditProjectMembershipRestrictionsDialogProps {
     field: RestrictionField;
   };
 }
-
-export const getInitialValues = (
-  project: Project,
-  field: RestrictionField,
-): FormData => ({
-  value: getRestrictionsArray(project[field]),
-});
 
 export const EditProjectMembershipRestrictionsDialog: FC<
   EditProjectMembershipRestrictionsDialogProps

@@ -22,7 +22,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
-import { getInitialValues } from './restrictions/EditProjectMembershipRestrictionsDialog';
+import { getInitialValues } from './restrictions/EditProjectMembershipRestrictionsDialog.helpers';
 
 interface ProjectMembershipRestrictionsProps {
   project: Project;

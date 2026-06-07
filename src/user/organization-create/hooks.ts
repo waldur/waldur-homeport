@@ -13,8 +13,15 @@ import { useNotify } from '@/store/notify';
 import {
   createAnswersFromFormData,
   createVerificationRequestBody,
+  fetchChecklistWithMetadata,
 } from './utils';
 
+// `./utils` is already a hard static dep of OrganizationCreatePage,
+// OrganizationCreateStep1, etc. — the previous `await import('./utils')`
+// did not split anything into a separate chunk (Rolldown's
+// INEFFECTIVE_DYNAMIC_IMPORT warning called this out). Importing
+// `fetchChecklistWithMetadata` statically is cheaper at runtime than
+// the async import resolve.
 export const useChecklistCache = () => {
   const checklistCache = useRef<{
     allQuestions: any[];
@@ -28,7 +35,6 @@ export const useChecklistCache = () => {
     if (checklistCache.current) {
       return checklistCache.current;
     }
-    const { fetchChecklistWithMetadata } = await import('./utils');
     const data = await fetchChecklistWithMetadata();
     checklistCache.current = data;
     return data;

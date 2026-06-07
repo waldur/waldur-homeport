@@ -2,11 +2,7 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { customersPartialUpdate } from 'waldur-js-client';
 
-import {
-  fieldConfig,
-  getRestrictionsArray,
-  RestrictionField,
-} from '@/core/restrictions';
+import { fieldConfig, RestrictionField } from '@/core/restrictions';
 import { SubmitButton, CommaSeparatedListGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -14,6 +10,8 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useSetCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
+
+import { getInitialValues } from './EditMembershipRestrictionsDialog.helpers';
 
 interface FormData {
   value: string[] | string;
@@ -25,13 +23,6 @@ interface EditMembershipRestrictionsDialogProps {
     field: RestrictionField;
   };
 }
-
-export const getInitialValues = (
-  customer: Customer,
-  field: RestrictionField,
-): FormData => ({
-  value: getRestrictionsArray(customer[field]),
-});
 
 export const EditMembershipRestrictionsDialog: FC<
   EditMembershipRestrictionsDialogProps
