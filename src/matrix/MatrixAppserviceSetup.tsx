@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   adminMatrixAppserviceSetup,
   adminMatrixAppserviceStatusRetrieve,
@@ -11,7 +11,7 @@ import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
-import { FormGroup, SecretField, StringField, SubmitButton } from '@/form';
+import { SecretGroup, StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -209,20 +209,16 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   )}
                 </p>
                 {missingPrereqs.homeserver_url && (
-                  <FormGroup
+                  <StringGroup
+                    name="homeserver_url"
                     label={translate('Homeserver URL')}
                     description={translate(
                       'Matrix homeserver base URL, e.g. https://matrix.example.com',
                     )}
                     required
-                  >
-                    <Field
-                      name="homeserver_url"
-                      component={StringField as any}
-                      validate={required}
-                      placeholder="https://matrix.example.com"
-                    />
-                  </FormGroup>
+                    validate={required}
+                    placeholder="https://matrix.example.com"
+                  />
                 )}
                 {/*
                   Public URL is optional and never gates setup completion.
@@ -230,49 +226,37 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   in one place; leave blank when the homeserver URL above
                   works from both servers and browsers.
                 */}
-                <FormGroup
+                <StringGroup
+                  name="homeserver_public_url"
                   label={translate('Public homeserver URL')}
                   description={translate(
                     'Optional. Used by browser clients when the homeserver URL above is Docker-internal or otherwise unreachable from the browser.',
                   )}
-                >
-                  <Field
-                    name="homeserver_public_url"
-                    component={StringField as any}
-                    placeholder="https://waldur.example.com"
-                  />
-                </FormGroup>
+                  placeholder="https://waldur.example.com"
+                />
                 {missingPrereqs.homeserver_domain && (
-                  <FormGroup
+                  <StringGroup
+                    name="homeserver_domain"
                     label={translate('Homeserver domain')}
                     description={translate(
                       'Matrix server_name, e.g. matrix.example.com. Used in user IDs and room aliases.',
                     )}
                     required
-                  >
-                    <Field
-                      name="homeserver_domain"
-                      component={StringField as any}
-                      validate={required}
-                      placeholder="matrix.example.com"
-                    />
-                  </FormGroup>
+                    validate={required}
+                    placeholder="matrix.example.com"
+                  />
                 )}
                 {missingPrereqs.user_registration_secret && (
-                  <FormGroup
+                  <SecretGroup
+                    name="user_registration_secret"
                     label={translate('Registration secret')}
                     description={translate(
                       'Shared secret configured in your homeserver for user registration.',
                     )}
                     required
                     spaceless
-                  >
-                    <Field
-                      name="user_registration_secret"
-                      component={SecretField as any}
-                      validate={required}
-                    />
-                  </FormGroup>
+                    validate={required}
+                  />
                 )}
               </>
             )}
@@ -286,49 +270,37 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                     )}
                   </div>
                 )}
-                <FormGroup
+                <StringGroup
+                  name="url"
                   label={translate('Waldur URL')}
                   description={translate(
                     'Base URL reachable by the Matrix homeserver for webhook callbacks. The default below is taken from your browser address bar — change it if the homeserver process reaches Waldur via a different hostname (e.g. inside a Kubernetes cluster).',
                   )}
-                >
-                  <Field
-                    name="url"
-                    component={StringField as any}
-                    placeholder={window.location.origin}
-                  />
-                </FormGroup>
-                <FormGroup
+                  placeholder={window.location.origin}
+                />
+                <StringGroup
+                  name="sender_localpart"
                   label={translate('Bot localpart')}
                   description={translate(
                     'Localpart for the appservice bot user (default: waldur-bot).',
                   )}
-                >
-                  <Field
-                    name="sender_localpart"
-                    component={StringField as any}
-                    placeholder="waldur-bot"
-                  />
-                </FormGroup>
+                  placeholder="waldur-bot"
+                />
                 {/*
                   Surface the public URL here too so it can be set even when
                   the prereqs panel was skipped (homeserver_url already
                   configured). The backend only persists when Constance is
                   empty — re-running setup won't overwrite an existing value.
                 */}
-                <FormGroup
+                <StringGroup
+                  name="homeserver_public_url"
                   label={translate('Public homeserver URL')}
                   description={translate(
                     'Optional. Browser-facing homeserver URL. Set when the Homeserver URL above is Docker-internal or otherwise unreachable from the browser.',
                   )}
                   spaceless
-                >
-                  <Field
-                    name="homeserver_public_url"
-                    component={StringField as any}
-                    placeholder="https://waldur.example.com"
-                  />
-                </FormGroup>
+                  placeholder="https://waldur.example.com"
+                />
               </>
             )}
 
