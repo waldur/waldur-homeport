@@ -97,7 +97,6 @@
     "react-use": "^17.6.0",
     "react-window": "^1.8.11",
     "react-window-paginated": "^1.0.0",
-    "react-windowed-select": "^5.2.0",
     "reapop": "^4.2.2",
     "redux": "^4.2.1",
     "reselect": "^3.0.1",
