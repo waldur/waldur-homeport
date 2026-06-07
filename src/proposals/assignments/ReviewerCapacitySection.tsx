@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { callReviewerPoolsList, CallReviewerPool } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -13,11 +14,13 @@ import { ReviewerCapacityRowActions } from './ReviewerCapacityRowActions';
 
 interface ReviewerCapacitySectionProps {
   call: Call;
+  refetch?: () => void;
 }
 
 export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
   call,
 }) => {
+  const tabs = useReviewerPoolTabs();
   const filter = useMemo(
     () => ({
       call_uuid: call.uuid,
@@ -104,6 +107,8 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
     <Table<CallReviewerPool>
       {...tableProps}
       columns={columns}
+      title={translate('Reviewer pool')}
+      tabs={tabs}
       verboseName={translate('reviewers')}
       showPageSizeSelector
       hasQuery

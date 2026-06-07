@@ -6,11 +6,11 @@ import {
 } from 'waldur-js-client';
 
 import { SubmitButton, NumberGroup } from '@/form';
-import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { Field } from '@/resource/summary';
 
 interface EditCapacityDialogProps {
   resolve: {
@@ -58,16 +58,18 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
             }
           >
             <div className="size-lg">
-              <div className="mb-4">
-                <strong>{poolMember.reviewer_name}</strong>
-                <div className="text-muted">{poolMember.reviewer_email}</div>
-              </div>
-
-              <FormGroup label={translate('Current assignments')}>
-                <div className="form-control-plaintext">
-                  {poolMember.current_assignments}
-                </div>
-              </FormGroup>
+              <Field
+                label={translate('Name')}
+                value={poolMember.reviewer_name}
+              />
+              <Field
+                label={translate('Email')}
+                value={poolMember.reviewer_email}
+              />
+              <Field
+                label={translate('Current assignments')}
+                value={String(poolMember.current_assignments)}
+              />
 
               <NumberGroup
                 name="max_assignments"

@@ -1,5 +1,4 @@
-import { FC, useMemo, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { FC, useMemo } from 'react';
 import { assignmentBatchesList, AssignmentBatchList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -10,7 +9,6 @@ import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryB
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
-import { TableTabs } from '@/table/TableTabs';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -19,46 +17,18 @@ import { Call } from '../types';
 import { AssignmentBatchExpandableRow } from './AssignmentBatchExpandableRow';
 import { AssignmentBatchRowActions } from './AssignmentBatchRowActions';
 import { AssignmentBatchStatusBadge } from './AssignmentBatchStatusBadge';
-import { GenerateAssignmentsAction } from './GenerateAssignmentsAction';
-import { ManualAssignmentAction } from './ManualAssignmentAction';
-import { ReviewerCapacitySection } from './ReviewerCapacitySection';
-import { SendAllDraftsAction } from './SendAllDraftsAction';
+import { CreateAssignmentDropdown } from './CreateAssignmentDropdown';
+import { SendDraftsBulkAction } from './SendDraftsBulkAction';
 
 interface AssignmentBatchesSectionProps {
   call: Call;
   refetch: () => void;
 }
 
-type InnerTab = 'batches' | 'capacity';
-
-const InnerTabs: FC<{
-  activeTab: InnerTab;
-  onSelect: (tab: InnerTab) => void;
-}> = ({ activeTab, onSelect }) => (
-  <Tab.Container
-    activeKey={activeTab}
-    onSelect={(k) => onSelect(k as InnerTab)}
-  >
-    <Nav variant="tabs" className="nav-line-tabs mb-5">
-      <Nav.Item>
-        <Nav.Link eventKey="batches">
-          {translate('Assignment batches')}
-        </Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="capacity">
-          {translate('Reviewer capacity')}
-        </Nav.Link>
-      </Nav.Item>
-    </Nav>
-  </Tab.Container>
-);
-
 export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   call,
 }) => {
   const tabs = useReviewerPoolTabs();
-  const [activeInnerTab, setActiveInnerTab] = useState<InnerTab>('batches');
 
   const filter = useMemo(
     () => ({
@@ -178,60 +148,29 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
     [],
   );
 
-  const draftCount = tableProps.rows?.filter(
-    (r) => r.status === 'draft',
-  ).length;
-
   const batchesTableActions = (
     <>
       <PoolSummaryButton />
-      <ManualAssignmentAction call={call} refetch={tableProps.fetch} />
-      <GenerateAssignmentsAction call={call} refetch={tableProps.fetch} />
-      <SendAllDraftsAction
-        call={call}
-        refetch={tableProps.fetch}
-        draftCount={draftCount}
-      />
+      <CreateAssignmentDropdown call={call} refetch={tableProps.fetch} />
     </>
   );
 
-  // When on "capacity" inner tab, show capacity section with outer tabs
-  if (activeInnerTab === 'capacity') {
-    return (
-      <div className="card card-bordered">
-        <div className="card-header border-bottom-0 pt-5">
-          <div className="card-title">
-            <TableTabs tabs={tabs} />
-          </div>
-        </div>
-        <div className="card-body pt-0">
-          <InnerTabs activeTab={activeInnerTab} onSelect={setActiveInnerTab} />
-          <ReviewerCapacitySection call={call} />
-        </div>
-      </div>
-    );
-  }
-
-  // When on "batches" inner tab, use standard Table with tabs
   return (
-    <>
-      <Table
-        {...tableProps}
-        columns={columns}
-        title={translate('Reviewer pool')}
-        tabs={tabs}
-        verboseName={translate('assignment batches')}
-        showPageSizeSelector
-        hasQuery
-        expandableRow={AssignmentBatchExpandableRow}
-        rowActions={({ row }) => (
-          <AssignmentBatchRowActions row={row} refetch={tableProps.fetch} />
-        )}
-        tableActions={batchesTableActions}
-      />
-      <div className="mt-n10 pt-5 px-7">
-        <InnerTabs activeTab={activeInnerTab} onSelect={setActiveInnerTab} />
-      </div>
-    </>
+    <Table
+      {...tableProps}
+      columns={columns}
+      title={translate('Reviewer pool')}
+      tabs={tabs}
+      verboseName={translate('assignment batches')}
+      showPageSizeSelector
+      hasQuery
+      expandableRow={AssignmentBatchExpandableRow}
+      rowActions={({ row }) => (
+        <AssignmentBatchRowActions row={row} refetch={tableProps.fetch} />
+      )}
+      tableActions={batchesTableActions}
+      enableMultiSelect
+      multiSelectActions={SendDraftsBulkAction}
+    />
   );
 };

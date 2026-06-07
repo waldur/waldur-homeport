@@ -18,9 +18,14 @@ export const useReviewerPoolTabs = (): TableTab[] => {
         params: { tab: 'reviewer-pool', pool_tab: 'discovery' },
       },
       {
-        key: 'assignments',
-        title: translate('Assignments'),
-        params: { tab: 'reviewer-pool', pool_tab: 'assignments' },
+        key: 'assignment_batches',
+        title: translate('Assignment batches'),
+        params: { tab: 'reviewer-pool', pool_tab: 'assignment_batches' },
+      },
+      {
+        key: 'reviewer_capacity',
+        title: translate('Reviewer capacity'),
+        params: { tab: 'reviewer-pool', pool_tab: 'reviewer_capacity' },
       },
       {
         key: 'coi',
