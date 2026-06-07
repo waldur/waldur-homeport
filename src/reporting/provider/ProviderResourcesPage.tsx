@@ -30,7 +30,7 @@ import { ResourcesByStateChart } from './ResourcesByStateChart';
 // Resource name column with link
 const ResourceNameColumn = ({ row }: { row: Resource }) => (
   <Link
-    state="marketplace-public-resource-details"
+    state="marketplace-resource-details"
     params={{ resource_uuid: row.uuid }}
   >
     {row.name || row.offering_name}

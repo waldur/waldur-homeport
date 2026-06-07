@@ -59,7 +59,11 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
         </div>
         <div className="mt-8">
           {!hasProfile ? (
-            <Link state="profile.reviewer" className="btn btn-primary">
+            <Link
+              state="profile-manage"
+              params={{ tab: 'reviewer-profile' }}
+              className="btn btn-primary"
+            >
               {translate('Create reviewer profile')}
             </Link>
           ) : !isPublished ? (

@@ -28,8 +28,8 @@ export const ExpandableEventDetailsTable: FunctionComponent<
     {isStaffOrSupport ? (
       <ExpandableEventField
         label={translate('User')}
-        state="users.details"
-        params={{ uuid: event.context.user_uuid }}
+        state="support-user-manage"
+        params={{ user_uuid: event.context.user_uuid }}
         value={event.context.user_full_name || event.context.user_username}
       />
     ) : (
@@ -91,7 +91,7 @@ export const ExpandableEventDetailsTable: FunctionComponent<
     <ExpandableEventField
       label={translate('Resource')}
       value={event.context.resource_full_name}
-      state="resource-details"
+      state="marketplace-resource-details"
       params={{
         uuid: event.context.project_uuid,
         resource_uuid: event.context.resource_uuid,
