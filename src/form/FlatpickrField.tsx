@@ -13,6 +13,14 @@ import { useFlatpickrTheme } from './useFlatpickrTheme';
 // react-flatpickr forwards every prop to the underlying <input>, so we strip
 // the form-plumbing props (react-final-form + FormGroup wiring) that would
 // otherwise produce React "unknown DOM attribute" warnings.
+//
+// `children` is in here for a sharper reason: under react-flatpickr v4 the
+// component spreads ALL its props onto the <input> element (it destructures
+// `children` but does not strip it from the spread source). Any consumer
+// that passes a non-null/non-undefined `children` — even the falsy `false`
+// you get from `{cond && <X />}` — trips React #137 ("input is a void
+// element tag and must neither have `children` ..."). Blocking it here
+// gives us a stable boundary regardless of who calls us upstream.
 const NON_DOM_PROPS = [
   'input',
   'meta',
@@ -39,6 +47,7 @@ const NON_DOM_PROPS = [
   'description',
   'label',
   'controlId',
+  'children',
 ] as const;
 
 type FlatpickrFieldProps = FormField &
