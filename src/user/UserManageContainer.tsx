@@ -132,10 +132,12 @@ export const UserManageContainer = ({ isPersonal }) => {
   const tabs = useMemo<PageBarTab[]>(
     () =>
       [
-        (currentUser.is_staff || currentUser.is_support || isPersonal) && {
+        (currentUser?.is_staff || currentUser?.is_support || isPersonal) && {
           key: 'user-details',
           component:
-            currentUser.is_staff || isPersonal ? UserEditTab : UserDetailsTable,
+            currentUser?.is_staff || isPersonal
+              ? UserEditTab
+              : UserDetailsTable,
           title: translate('User profile'),
         },
         // Reviewer profile - only for personal profile when call management is enabled
@@ -148,7 +150,7 @@ export const UserManageContainer = ({ isPersonal }) => {
             title: translate('Reviewer profile'),
           },
         // Audit log - staff/support viewing other users (personal has /profile/events/)
-        (currentUser.is_staff || currentUser.is_support) &&
+        (currentUser?.is_staff || currentUser?.is_support) &&
           !isPersonal && {
             key: 'audit-log',
             component: UserEvents,
@@ -156,21 +158,21 @@ export const UserManageContainer = ({ isPersonal }) => {
           },
         // SSH Keys - staff/support viewing other users (personal has /profile/keys/)
         isFeatureVisible(UserFeatures.ssh_keys) &&
-          (currentUser.is_staff || currentUser.is_support) &&
+          (currentUser?.is_staff || currentUser?.is_support) &&
           !isPersonal && {
             key: 'keys',
             component: KeysList,
             title: translate('Keys'),
           },
         // Remote accounts - staff/support viewing other users (personal has /profile/remote-accounts/)
-        (currentUser.is_staff || currentUser.is_support) &&
+        (currentUser?.is_staff || currentUser?.is_support) &&
           !isPersonal && {
             key: 'remote-accounts',
             component: UserOfferingList,
             title: translate('Remote accounts'),
           },
         // Roles and permissions - staff/support viewing other users (personal has affiliations in dashboard)
-        (currentUser.is_staff || currentUser.is_support) &&
+        (currentUser?.is_staff || currentUser?.is_support) &&
           !isPersonal && {
             key: 'roles',
             component: UserAffiliationsList,
@@ -178,17 +180,17 @@ export const UserManageContainer = ({ isPersonal }) => {
           },
         // Data access - staff/support viewing any user, or user viewing own profile
         isFeatureVisible(UserFeatures.show_data_access) &&
-          (currentUser.is_staff || currentUser.is_support || isPersonal) && {
+          (currentUser?.is_staff || currentUser?.is_support || isPersonal) && {
             key: 'data-access',
             component: DataAccessTab,
             title: translate('Data access'),
           },
         (!isFeatureVisible(UserFeatures.disable_user_termination) ||
-          currentUser.is_staff) && {
+          currentUser?.is_staff) && {
           key: 'termination',
           component:
             // Staff can always terminate other users
-            currentUser.is_staff && !isPersonal
+            currentUser?.is_staff && !isPersonal
               ? UserTermination
               : isValidUser
                 ? isPersonal
@@ -197,7 +199,7 @@ export const UserManageContainer = ({ isPersonal }) => {
                 : NotAllowedTab,
           title: translate('Termination actions'),
           // Staff viewing others: always enabled; otherwise: requires valid user
-          disabled: currentUser.is_staff && !isPersonal ? false : !isValidUser,
+          disabled: currentUser?.is_staff && !isPersonal ? false : !isValidUser,
         },
       ].filter(Boolean),
     [user, currentUser, isValidUser, isPersonal],
