@@ -1,7 +1,9 @@
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MatrixRoom } from 'waldur-js-client';
 
+import { IconButton } from '@/core/buttons/IconButton';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StateIndicator } from '@/core/StateIndicator';
@@ -76,9 +78,16 @@ const HistoryExportsCard: FC<{
   refetch(): void;
 }> = ({ room, isOwnerOrStaff, refetch }) => {
   const [refreshSlot, setRefreshSlot] = useState<HTMLDivElement | null>(null);
+  // No exports are ever produced on a non-active room, so refetching is a
+  // no-op. The room can transition back to active, so disable with an
+  // explanatory tooltip rather than hiding the control entirely.
+  const isActive = room.state === 'active';
+  // The portal-mounted TableRefreshButton has no `disabled` prop. Only
+  // expose the portal slot when the action is meaningful; otherwise the
+  // disabled-with-tooltip placeholder below takes its place.
   const portal = useMemo(
-    () => (refreshSlot ? { refresh: refreshSlot } : undefined),
-    [refreshSlot],
+    () => (refreshSlot && isActive ? { refresh: refreshSlot } : undefined),
+    [refreshSlot, isActive],
   );
   return (
     <FormTable.Card
@@ -86,8 +95,20 @@ const HistoryExportsCard: FC<{
       className="card-bordered"
       actions={
         <div className="d-flex align-items-center gap-2">
-          <div ref={setRefreshSlot} className="d-flex align-items-center" />
-          {isOwnerOrStaff && room.state === 'active' && (
+          {isActive ? (
+            <div ref={setRefreshSlot} className="d-flex align-items-center" />
+          ) : (
+            <IconButton
+              iconNode={<ArrowsClockwiseIcon weight="bold" />}
+              tooltip={translate(
+                'Refresh is available when the room is active — no history exports can be produced in the current state.',
+              )}
+              onClick={() => undefined}
+              variant="text-secondary"
+              disabled
+            />
+          )}
+          {isOwnerOrStaff && isActive && (
             <ExportHistoryButton row={room} refetch={refetch} />
           )}
         </div>
