@@ -27,6 +27,15 @@ export const CreateResourceButton: FC<CreateResourceButtonProps> = (props) => {
   const user = useUser();
   const { openDialog } = useModal();
 
+  const openFormDialog = useCallback(
+    () =>
+      openDialog(MarketplacePopup, {
+        size: 'lg',
+        resolve: props,
+      }),
+    [openDialog, props],
+  );
+
   if (
     isFeatureVisible(MarketplaceFeatures.hide_marketplace_from_end_users) &&
     !user?.is_staff
@@ -38,13 +47,5 @@ export const CreateResourceButton: FC<CreateResourceButtonProps> = (props) => {
     return null;
   }
 
-  const openFormDialog = useCallback(
-    () =>
-      openDialog(MarketplacePopup, {
-        size: 'lg',
-        resolve: props,
-      }),
-    [],
-  );
   return <AddButton action={openFormDialog} />;
 };
