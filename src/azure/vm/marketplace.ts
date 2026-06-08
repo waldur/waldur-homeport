@@ -4,9 +4,9 @@ import { OfferingConfiguration } from '@/marketplace/common/types';
 
 import { AZURE_VM_TYPE } from '../constants';
 
-const AzureCredentialsForm = lazyComponent(() =>
-  import('../common/AzureCredentialsForm').then((module) => ({
-    default: module.AzureCredentialsForm,
+const AzureCredentialsSection = lazyComponent(() =>
+  import('../common/AzureCredentialsSection').then((module) => ({
+    default: module.AzureCredentialsSection,
   })),
 );
 
@@ -37,5 +37,5 @@ export const AzureVirtualMachineOffering: OfferingConfiguration = {
   orderFormComponent: AzureVirtualMachineForm,
   detailsComponent: AzureDetailsComponent,
   serializer,
-  credentialsForm: AzureCredentialsForm,
+  credentialsSection: AzureCredentialsSection,
 };

@@ -1,68 +1,44 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 
 import { formatPhoneNumber } from '@/core/utils';
+import {
+  CommaSeparatedListEditField,
+  EditFieldProvider,
+  EmailEditField,
+  StringEditField,
+  TextEditField,
+} from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { renderFieldOrDash } from '@/table/utils';
 
-import { FieldEditButton } from './FieldEditButton';
 import { CustomerEditPanelProps } from './types';
 
 export const CustomerContactPanel: FC<CustomerEditPanelProps> = (props) => {
-  const rows = useMemo(
-    () => [
-      {
-        label: translate('Email'),
-        key: 'email',
-        value: props.customer.email,
-      },
-      {
-        label: translate('Phone number'),
-        key: 'phone_number',
-        value: formatPhoneNumber(props.customer.phone_number),
-      },
-      {
-        label: translate('Contact details'),
-        key: 'contact_details',
-        value: props.customer.contact_details,
-      },
-      {
-        label: translate('Homepage'),
-        key: 'homepage',
-        value: props.customer.homepage,
-      },
-      {
-        label: translate('Notification emails'),
-        key: 'notification_emails',
-        value: Array.isArray(props.customer.notification_emails)
-          ? props.customer.notification_emails.join(', ')
-          : props.customer.notification_emails,
-      },
-    ],
-
-    [props.customer],
-  );
-
   return (
     <FormTable.Card className="card-bordered">
-      <FormTable>
-        {rows.map((row) => (
-          <FormTable.Item
-            key={row.key}
-            label={row.label}
-            value={renderFieldOrDash(row.value)}
-            actions={
-              props.canUpdate ? (
-                <FieldEditButton
-                  customer={props.customer}
-                  name={row.key}
-                  callback={props.callback}
-                />
-              ) : null
-            }
+      <EditFieldProvider scope={props.customer} callback={props.callback}>
+        <FormTable hideActions={!props.canUpdate}>
+          <EmailEditField name="email" label={translate('Email')} />
+          <StringEditField
+            name="phone_number"
+            label={translate('Phone number')}
+            renderValue={(v) => formatPhoneNumber(v)}
           />
-        ))}
-      </FormTable>
+          <TextEditField
+            name="contact_details"
+            label={translate('Contact details')}
+          />
+          <StringEditField name="homepage" label={translate('Homepage')} />
+          <CommaSeparatedListEditField
+            name="notification_emails"
+            label={translate('Notification emails')}
+            placeholder={translate('Enter email addresses separated by commas')}
+            description={translate(
+              'Email addresses for receiving notifications, separated by commas',
+            )}
+          />
+        </FormTable>
+      </EditFieldProvider>
     </FormTable.Card>
   );
 };

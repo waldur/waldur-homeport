@@ -1,4 +1,4 @@
-import { RequestedOffering, type ProtectedCall } from 'waldur-js-client';
+import { RequestedOffering } from 'waldur-js-client';
 
 import { Limits } from '@/marketplace/details/types';
 import { AttributesType, Offering, Plan } from '@/marketplace/types';
@@ -8,8 +8,6 @@ export {
   ProposalReview,
   type ProtectedCall as Call,
 } from 'waldur-js-client';
-
-type Call = ProtectedCall;
 
 export type RoundReviewStrategy = 'after_round' | 'after_proposal';
 
@@ -28,14 +26,6 @@ export type ProposalState =
   | 'canceled';
 
 export type CallOfferingState = 'requested' | 'accepted' | 'canceled';
-
-export interface EditCallProps {
-  call: Call;
-  name: string;
-  title: string;
-
-  refetch(): void;
-}
 
 export interface CallOffering {
   url: string;

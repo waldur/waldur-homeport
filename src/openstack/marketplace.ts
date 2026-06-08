@@ -4,9 +4,9 @@ import { OfferingConfiguration } from '@/marketplace/common/types';
 
 import { TENANT_TYPE } from './constants';
 
-const OpenStackCredentialsForm = lazyComponent(() =>
-  import('./OpenStackCredentialsForm').then((module) => ({
-    default: module.OpenStackCredentialsForm,
+const OpenStackCredentialsSection = lazyComponent(() =>
+  import('./OpenStackCredentialsSection').then((module) => ({
+    default: module.OpenStackCredentialsSection,
   })),
 );
 const OpenStackTenantDetails = lazyComponent(() =>
@@ -14,11 +14,7 @@ const OpenStackTenantDetails = lazyComponent(() =>
     default: module.OpenStackTenantDetails,
   })),
 );
-const OpenStackProvisioningConfigForm = lazyComponent(() =>
-  import('./OpenStackProvisioningConfigForm').then((module) => ({
-    default: module.OpenStackProvisioningConfigForm,
-  })),
-);
+
 const OpenStackProvisioningConfigSection = lazyComponent(() =>
   import('./OpenStackProvisioningConfigSection').then((module) => ({
     default: module.OpenStackProvisioningConfigSection,
@@ -83,10 +79,9 @@ export const OpenStackTenantOffering: OfferingConfiguration = {
   get label() {
     return translate('OpenStack tenant');
   },
-  credentialsForm: OpenStackCredentialsForm,
+  credentialsSection: OpenStackCredentialsSection,
   orderFormComponent: OpenstackTenantOrderForm,
   detailsComponent: OpenStackTenantDetails,
-  provisioningConfigForm: OpenStackProvisioningConfigForm,
   provisioningConfigSection: OpenStackProvisioningConfigSection,
   limitSerializer,
   limitParser,

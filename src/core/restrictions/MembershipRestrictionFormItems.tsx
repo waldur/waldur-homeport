@@ -1,120 +1,72 @@
 import { FC } from 'react';
 
-import { CompactEditButton } from '@/form/CompactEditButton';
-import FormTable from '@/form/FormTable';
+import { CommaSeparatedListEditField } from '@/form/editFields';
 import { translate } from '@/i18n';
 
 import { RestrictionsValue } from './RestrictionsValue';
-import { RestrictionField } from './types';
+import { getRestrictionsArray } from './types';
 
-interface RestrictionData {
-  emailPatterns: string[];
-  affiliations: string[];
-  identitySources: string[];
-  nationalities: string[];
-  organizationTypes: string[];
-  assuranceLevels: string[];
-}
-
-interface MembershipRestrictionFormItemsProps {
-  data: RestrictionData;
-  canEdit: boolean;
-  onEditField: (field: RestrictionField) => void;
-}
-
-export const MembershipRestrictionFormItems: FC<
-  MembershipRestrictionFormItemsProps
-> = ({ data, canEdit, onEditField }) => (
+export const MembershipRestrictionFormItems: FC = () => (
   <>
-    <FormTable.Item
+    <CommaSeparatedListEditField
+      name="user_email_patterns"
       label={translate('Email patterns')}
       description={translate(
         'Users whose email matches any of these regex patterns will be allowed.',
       )}
-      value={<RestrictionsValue values={data.emailPatterns} />}
-      actions={
-        canEdit && (
-          <CompactEditButton
-            onClick={() => onEditField('user_email_patterns')}
-            variant="secondary"
-          />
-        )
-      }
+      renderValue={(value) => (
+        <RestrictionsValue values={getRestrictionsArray(value)} />
+      )}
     />
-    <FormTable.Item
+    <CommaSeparatedListEditField
+      name="user_affiliations"
       label={translate('User affiliations')}
       description={translate(
         'Users with any of these affiliations will be allowed.',
       )}
-      value={<RestrictionsValue values={data.affiliations} />}
-      actions={
-        canEdit && (
-          <CompactEditButton
-            onClick={() => onEditField('user_affiliations')}
-            variant="secondary"
-          />
-        )
-      }
+      renderValue={(value) => (
+        <RestrictionsValue values={getRestrictionsArray(value)} />
+      )}
     />
-    <FormTable.Item
+    <CommaSeparatedListEditField
+      name="user_identity_sources"
       label={translate('Identity sources')}
       description={translate(
         'Users authenticated via any of these identity providers will be allowed.',
       )}
-      value={<RestrictionsValue values={data.identitySources} />}
-      actions={
-        canEdit && (
-          <CompactEditButton
-            onClick={() => onEditField('user_identity_sources')}
-            variant="secondary"
-          />
-        )
-      }
+      renderValue={(value) => (
+        <RestrictionsValue values={getRestrictionsArray(value)} />
+      )}
     />
-    <FormTable.Item
+    <CommaSeparatedListEditField
+      name="user_nationalities"
       label={translate('Nationalities')}
       description={translate(
         'Users with any of these nationalities will be allowed.',
       )}
-      value={<RestrictionsValue values={data.nationalities} />}
-      actions={
-        canEdit && (
-          <CompactEditButton
-            onClick={() => onEditField('user_nationalities')}
-            variant="secondary"
-          />
-        )
-      }
+      renderValue={(value) => (
+        <RestrictionsValue values={getRestrictionsArray(value)} />
+      )}
     />
-    <FormTable.Item
+    <CommaSeparatedListEditField
+      name="user_organization_types"
       label={translate('Organization types')}
       description={translate(
         'Users from organizations of these types will be allowed.',
       )}
-      value={<RestrictionsValue values={data.organizationTypes} />}
-      actions={
-        canEdit && (
-          <CompactEditButton
-            onClick={() => onEditField('user_organization_types')}
-            variant="secondary"
-          />
-        )
-      }
+      renderValue={(value) => (
+        <RestrictionsValue values={getRestrictionsArray(value)} />
+      )}
     />
-    <FormTable.Item
+    <CommaSeparatedListEditField
+      name="user_assurance_levels"
       label={translate('Assurance levels')}
       description={translate(
         'Users must have ALL of these assurance levels to be allowed.',
       )}
-      value={<RestrictionsValue values={data.assuranceLevels} />}
-      actions={
-        canEdit && (
-          <CompactEditButton
-            onClick={() => onEditField('user_assurance_levels')}
-            variant="secondary"
-          />
-        )
-      }
+      renderValue={(value) => (
+        <RestrictionsValue values={getRestrictionsArray(value)} />
+      )}
     />
   </>
 );

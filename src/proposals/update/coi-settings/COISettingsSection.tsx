@@ -1,22 +1,26 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FC, useCallback } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { FC } from 'react';
 import {
-  CallCoiConfiguration,
+  proposalProtectedCallsCoiConfigurationPartialUpdate,
   proposalProtectedCallsCoiConfigurationRetrieve,
 } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
-import FormTable from '@/form/FormTable';
+import {
+  BooleanEditField,
+  EditFieldProvider,
+  NumberEditField,
+  SelectEditField,
+} from '@/form/editFields';
+import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 
 import { COISummaryButton } from './COISummaryButton';
-import { EditCOISettingButton } from './EditCOISettingButton';
 
 interface COISettingsSectionProps {
   call: Call;
@@ -38,214 +42,54 @@ const fetchCallCoiConfiguration = async (callUuid: string) => {
   return response.data;
 };
 
-// COI type labels for display
-const COI_TYPE_LABELS: Record<string, string> = {
-  INST_SAME: translate('Same institution'),
-  FIN_DIRECT: translate('Direct financial interest'),
-  REL_FAMILY: translate('Family relationship'),
-  ROLE_NAMED: translate('Named on proposal'),
-  COLLAB_ACTIVE: translate('Active collaboration'),
-  REL_MENTOR: translate('Mentor/mentee relationship'),
-  REL_SUPERVISOR: translate('Supervisor relationship'),
-  COAUTH_RECENT: translate('Recent co-authorship'),
-  INST_DEPT: translate('Same department'),
-  INST_FORMER: translate('Former institution'),
-  ROLE_CONF: translate('Conference organizer'),
-  COLLAB_GRANT: translate('Grant collaboration'),
-  REL_EDITORIAL: translate('Editorial relationship'),
-  COMPET: translate('Competitor'),
-  COAUTH_OLD: translate('Distant co-authorship'),
-  INST_CONSORT: translate('Consortium membership'),
-  CONF_ATTEND: translate('Conference participation'),
-  SOC_MEMBER: translate('Professional society'),
-};
+// Proposal disclosure level options for invitations
+const DISCLOSURE_LEVEL_OPTIONS = [
+  { value: 'titles_only', label: translate('Titles only') },
+  { value: 'titles_and_summaries', label: translate('Titles and summaries') },
+  { value: 'full_details', label: translate('Full proposal details') },
+];
+
+const COI_TYPE_OPTIONS = [
+  // Real conflicts (must recuse)
+  { value: 'INST_SAME', label: translate('Same institution') },
+  { value: 'FIN_DIRECT', label: translate('Direct financial interest') },
+  { value: 'REL_FAMILY', label: translate('Family relationship') },
+  { value: 'ROLE_NAMED', label: translate('Named on proposal') },
+  { value: 'COLLAB_ACTIVE', label: translate('Active collaboration') },
+  { value: 'REL_MENTOR', label: translate('Mentor/mentee relationship') },
+  { value: 'REL_SUPERVISOR', label: translate('Supervisor relationship') },
+  // Apparent conflicts (requires management)
+  { value: 'COAUTH_RECENT', label: translate('Recent co-authorship') },
+  { value: 'INST_DEPT', label: translate('Same department') },
+  { value: 'INST_FORMER', label: translate('Former institution') },
+  { value: 'ROLE_CONF', label: translate('Conference organizer') },
+  { value: 'COLLAB_GRANT', label: translate('Grant collaboration') },
+  { value: 'REL_EDITORIAL', label: translate('Editorial relationship') },
+  { value: 'COMPET', label: translate('Competitor') },
+  // Potential conflicts (disclosure only)
+  { value: 'COAUTH_OLD', label: translate('Distant co-authorship') },
+  { value: 'INST_CONSORT', label: translate('Consortium membership') },
+  { value: 'CONF_ATTEND', label: translate('Conference participation') },
+  { value: 'SOC_MEMBER', label: translate('Professional society') },
+];
+
+const COI_TYPE_LABELS = COI_TYPE_OPTIONS.reduce(
+  (acc, opt) => {
+    acc[opt.value] = opt.label;
+    return acc;
+  },
+  {} as Record<string, string>,
+);
 
 const formatTypeList = (types: string[] | undefined) => {
   if (!types?.length) return translate('Not configured');
   return types.map((t) => COI_TYPE_LABELS[t] || t).join(', ');
 };
 
-const detectionRows = [
-  {
-    label: translate('Co-authorship lookback'),
-    key: 'coauthorship_lookback_years',
-    getValue: (config: CallCoiConfiguration) =>
-      translate('{n} years', { n: config?.coauthorship_lookback_years ?? 3 }),
-    title: translate('Edit co-authorship lookback period'),
-    description: translate(
-      'Number of years to search for shared publications between reviewers and proposal team members',
-    ),
-    type: 'number' as const,
-  },
-  {
-    label: translate('Co-authorship threshold'),
-    key: 'coauthorship_threshold_papers',
-    getValue: (config: CallCoiConfiguration) =>
-      translate('{n} shared papers', {
-        n: config?.coauthorship_threshold_papers ?? 1,
-      }),
-    title: translate('Edit co-authorship threshold'),
-    description: translate(
-      'Minimum number of shared publications required to trigger a co-authorship conflict',
-    ),
-    type: 'number' as const,
-  },
-  {
-    label: translate('Institutional lookback'),
-    key: 'institutional_lookback_years',
-    getValue: (config: CallCoiConfiguration) =>
-      translate('{n} years', { n: config?.institutional_lookback_years ?? 2 }),
-    title: translate('Edit institutional lookback period'),
-    description: translate(
-      'Number of years to consider past institutional affiliations when detecting conflicts',
-    ),
-    type: 'number' as const,
-  },
-  {
-    label: translate('Detect same department'),
-    key: 'include_same_department',
-    getValue: (config: CallCoiConfiguration) =>
-      config?.include_same_department ? translate('Yes') : translate('No'),
-    title: translate('Edit same department detection'),
-    description: translate(
-      'Flag a conflict when reviewer and proposal team member are in the same department',
-    ),
-    type: 'boolean' as const,
-  },
-  {
-    label: translate('Detect same institution'),
-    key: 'include_same_institution',
-    getValue: (config: CallCoiConfiguration) =>
-      config?.include_same_institution ? translate('Yes') : translate('No'),
-    title: translate('Edit same institution detection'),
-    description: translate(
-      'Flag a conflict when reviewer and proposal team member are at the same institution',
-    ),
-    type: 'boolean' as const,
-  },
-];
-
-const automationRows = [
-  {
-    label: translate('Auto-detect co-authorship'),
-    key: 'auto_detect_coauthorship',
-    getValue: (config: CallCoiConfiguration) =>
-      config?.auto_detect_coauthorship
-        ? translate('Enabled')
-        : translate('Disabled'),
-    title: translate('Edit auto-detect co-authorship'),
-    description: translate(
-      'Automatically scan publication records to identify co-authorship relationships',
-    ),
-    type: 'boolean' as const,
-  },
-  {
-    label: translate('Auto-detect institutional'),
-    key: 'auto_detect_institutional',
-    getValue: (config: CallCoiConfiguration) =>
-      config?.auto_detect_institutional
-        ? translate('Enabled')
-        : translate('Disabled'),
-    title: translate('Edit auto-detect institutional affiliation'),
-    description: translate(
-      'Automatically compare institutional affiliations between reviewers and proposal teams',
-    ),
-    type: 'boolean' as const,
-  },
-  {
-    label: translate('Auto-detect named personnel'),
-    key: 'auto_detect_named_personnel',
-    getValue: (config: CallCoiConfiguration) =>
-      config?.auto_detect_named_personnel
-        ? translate('Enabled')
-        : translate('Disabled'),
-    title: translate('Edit auto-detect named personnel'),
-    description: translate(
-      'Automatically check if a reviewer is named as personnel on any proposal',
-    ),
-    type: 'boolean' as const,
-  },
-];
-
-const typeRows = [
-  {
-    label: translate('Types requiring recusal'),
-    key: 'recusal_required_types',
-    getValue: (config: CallCoiConfiguration) =>
-      formatTypeList(config?.recusal_required_types),
-    title: translate('Edit types requiring recusal'),
-    description: translate(
-      'Conflict types that require the reviewer to withdraw from reviewing the proposal entirely',
-    ),
-    type: 'array' as const,
-  },
-  {
-    label: translate('Types allowing management plan'),
-    key: 'management_allowed_types',
-    getValue: (config: CallCoiConfiguration) =>
-      formatTypeList(config?.management_allowed_types),
-    title: translate('Edit types allowing management plan'),
-    description: translate(
-      'Conflict types where the reviewer may continue with an approved management plan',
-    ),
-    type: 'array' as const,
-  },
-  {
-    label: translate('Types requiring disclosure only'),
-    key: 'disclosure_only_types',
-    getValue: (config: CallCoiConfiguration) =>
-      formatTypeList(config?.disclosure_only_types),
-    title: translate('Edit types requiring disclosure only'),
-    description: translate(
-      'Conflict types that only need to be disclosed but do not require further action',
-    ),
-    type: 'array' as const,
-  },
-];
-
-const invitationRows = [
-  {
-    label: translate('Proposal disclosure level'),
-    key: 'invitation_proposal_disclosure',
-    getValue: (config: CallCoiConfiguration) =>
-      DISCLOSURE_LEVEL_LABELS[config?.invitation_proposal_disclosure ?? ''] ||
-      translate('Titles only'),
-    title: translate('Edit proposal disclosure level'),
-    description: translate(
-      'Controls how much proposal information is disclosed to reviewers in invitations. This helps reviewers assess potential conflicts of interest before accepting.',
-    ),
-    type: 'select' as const,
-  },
-];
-
-const tabs = [
-  { key: 'detection', title: translate('Detection'), rows: detectionRows },
-  { key: 'automation', title: translate('Automation'), rows: automationRows },
-  { key: 'types', title: translate('Type handling'), rows: typeRows },
-  { key: 'invitations', title: translate('Invitations'), rows: invitationRows },
-];
-
-const DEFAULT_COI_TAB = 'detection';
-
 export const COISettingsSection: FC<COISettingsSectionProps> = ({
   call,
   isReadOnly,
 }) => {
-  const { state, params } = useCurrentStateAndParams();
-  const router = useRouter();
-
-  // Get active tab from URL or default to 'detection'
-  const activeTab = params.coi_tab || DEFAULT_COI_TAB;
-
-  const handleTabSelect = useCallback(
-    (key: string | null) => {
-      if (key) {
-        router.stateService.go(state.name, { ...params, coi_tab: key });
-      }
-    },
-    [router, state, params],
-  );
-
   const {
     data: config,
     isLoading,
@@ -254,6 +98,20 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
   } = useQuery({
     queryKey: ['coiConfiguration', call.uuid],
     queryFn: () => fetchCallCoiConfiguration(call.uuid),
+  });
+
+  const { mutateAsync: updateConfig } = useManagedMutation({
+    mutationFn: (formData: Record<string, any>) =>
+      proposalProtectedCallsCoiConfigurationPartialUpdate({
+        path: { uuid: call.uuid },
+        body: formData as any,
+      }),
+    successMessage: translate('COI setting has been updated.'),
+    errorMessage: translate('Unable to update COI setting.'),
+    onSuccess: () => {
+      refetch();
+    },
+    closeModal: false,
   });
 
   if (isLoading) {
@@ -270,66 +128,187 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
   }
 
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
-          <h3>
-            {translate('COI configuration')}{' '}
-            <Tip
-              id="coi-tooltip"
-              label={translate('Conflict of Interest')}
-              body={translate(
-                'COI settings control how conflicts of interest between reviewers and proposals are detected and handled. This includes co-authorship, institutional affiliations, and other relationships that may affect impartial review.',
-              )}
-              autoWidth
-            >
-              <InfoIcon className="text-muted" weight="bold" />
-            </Tip>
-          </h3>
-        </Card.Title>
-        <div className="card-toolbar">
-          <COISummaryButton config={config} />
-        </div>
-      </Card.Header>
-      <Card.Body>
-        <Tab.Container activeKey={activeTab} onSelect={handleTabSelect}>
-          <Nav variant="tabs" className="nav-line-tabs mb-5">
-            {tabs.map((tab) => (
-              <Nav.Item key={tab.key}>
-                <Nav.Link eventKey={tab.key}>{tab.title}</Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-          <Tab.Content>
-            {tabs.map((tab) => (
-              <Tab.Pane key={tab.key} eventKey={tab.key} unmountOnExit>
-                <FormTable>
-                  {tab.rows.map((row) => (
-                    <FormTable.Item
-                      key={row.key}
-                      label={row.label}
-                      description={row.description}
-                      value={row.getValue(config)}
-                      actions={
-                        <EditCOISettingButton
-                          call={call}
-                          name={row.key}
-                          title={row.title}
-                          label={row.label}
-                          description={row.description}
-                          type={row.type}
-                          refetch={refetch}
-                          disabled={isReadOnly}
-                        />
-                      }
-                    />
-                  ))}
-                </FormTable>
-              </Tab.Pane>
-            ))}
-          </Tab.Content>
-        </Tab.Container>
-      </Card.Body>
-    </Card>
+    <TabbedSection
+      title={
+        <span className="d-flex align-items-center gap-2">
+          {translate('COI configuration')}
+          <Tip
+            id="coi-tooltip"
+            label={translate('Conflict of Interest')}
+            body={translate(
+              'COI settings control how conflicts of interest between reviewers and proposals are detected and handled. This includes co-authorship, institutional affiliations, and other relationships that may affect impartial review.',
+            )}
+            autoWidth
+          >
+            <InfoIcon className="text-muted" weight="bold" />
+          </Tip>
+        </span>
+      }
+      actions={<COISummaryButton config={config} />}
+      enableSearch
+    >
+      <TabbedSection.Tab id="detection" title={translate('Detection')}>
+        <EditFieldProvider scope={config} callback={updateConfig}>
+          <NumberEditField
+            name="coauthorship_lookback_years"
+            label={translate('Co-authorship lookback')}
+            description={translate(
+              'Number of years to search for shared publications between reviewers and proposal team members',
+            )}
+            min={1}
+            max={10}
+            disabled={isReadOnly}
+            renderValue={(value) => translate('{n} years', { n: value ?? 3 })}
+          />
+          <NumberEditField
+            name="coauthorship_threshold_papers"
+            label={translate('Co-authorship threshold')}
+            description={translate(
+              'Minimum number of shared publications required to trigger a co-authorship conflict',
+            )}
+            min={1}
+            max={10}
+            disabled={isReadOnly}
+            renderValue={(value) =>
+              translate('{n} shared papers', { n: value ?? 1 })
+            }
+          />
+          <NumberEditField
+            name="institutional_lookback_years"
+            label={translate('Institutional lookback')}
+            description={translate(
+              'Number of years to consider past institutional affiliations when detecting conflicts',
+            )}
+            min={1}
+            max={10}
+            disabled={isReadOnly}
+            renderValue={(value) => translate('{n} years', { n: value ?? 2 })}
+          />
+          <BooleanEditField
+            name="include_same_department"
+            label={translate('Detect same department')}
+            description={translate(
+              'Flag a conflict when reviewer and proposal team member are in the same department',
+            )}
+            disabled={isReadOnly}
+            renderValue={(value) =>
+              value ? translate('Yes') : translate('No')
+            }
+          />
+          <BooleanEditField
+            name="include_same_institution"
+            label={translate('Detect same institution')}
+            description={translate(
+              'Flag a conflict when reviewer and proposal team member are at the same institution',
+            )}
+            disabled={isReadOnly}
+            renderValue={(value) =>
+              value ? translate('Yes') : translate('No')
+            }
+          />
+        </EditFieldProvider>
+      </TabbedSection.Tab>
+
+      <TabbedSection.Tab id="automation" title={translate('Automation')}>
+        <EditFieldProvider scope={config} callback={updateConfig}>
+          <BooleanEditField
+            name="auto_detect_coauthorship"
+            label={translate('Auto-detect co-authorship')}
+            description={translate(
+              'Automatically scan publication records to identify co-authorship relationships',
+            )}
+            disabled={isReadOnly}
+            renderValue={(value) =>
+              value ? translate('Enabled') : translate('Disabled')
+            }
+          />
+          <BooleanEditField
+            name="auto_detect_institutional"
+            label={translate('Auto-detect institutional')}
+            description={translate(
+              'Automatically compare institutional affiliations between reviewers and proposal teams',
+            )}
+            disabled={isReadOnly}
+            renderValue={(value) =>
+              value ? translate('Enabled') : translate('Disabled')
+            }
+          />
+          <BooleanEditField
+            name="auto_detect_named_personnel"
+            label={translate('Auto-detect named personnel')}
+            description={translate(
+              'Automatically check if a reviewer is named as personnel on any proposal',
+            )}
+            disabled={isReadOnly}
+            renderValue={(value) =>
+              value ? translate('Enabled') : translate('Disabled')
+            }
+          />
+        </EditFieldProvider>
+      </TabbedSection.Tab>
+
+      <TabbedSection.Tab id="types" title={translate('Type handling')}>
+        <EditFieldProvider scope={config} callback={updateConfig}>
+          <SelectEditField
+            name="recusal_required_types"
+            label={translate('Types requiring recusal')}
+            description={translate(
+              'Conflict types that require the reviewer to withdraw from reviewing the proposal entirely',
+            )}
+            options={COI_TYPE_OPTIONS}
+            isMulti
+            simpleValue
+            placeholder={translate('Select COI types...')}
+            disabled={isReadOnly}
+            renderValue={(value) => formatTypeList(value)}
+          />
+          <SelectEditField
+            name="management_allowed_types"
+            label={translate('Types allowing management plan')}
+            description={translate(
+              'Conflict types where the reviewer may continue with an approved management plan',
+            )}
+            options={COI_TYPE_OPTIONS}
+            isMulti
+            simpleValue
+            placeholder={translate('Select COI types...')}
+            disabled={isReadOnly}
+            renderValue={(value) => formatTypeList(value)}
+          />
+          <SelectEditField
+            name="disclosure_only_types"
+            label={translate('Types requiring disclosure only')}
+            description={translate(
+              'Conflict types that only need to be disclosed but do not require further action',
+            )}
+            options={COI_TYPE_OPTIONS}
+            isMulti
+            simpleValue
+            placeholder={translate('Select COI types...')}
+            disabled={isReadOnly}
+            renderValue={(value) => formatTypeList(value)}
+          />
+        </EditFieldProvider>
+      </TabbedSection.Tab>
+
+      <TabbedSection.Tab id="invitations" title={translate('Invitations')}>
+        <EditFieldProvider scope={config} callback={updateConfig}>
+          <SelectEditField
+            name="invitation_proposal_disclosure"
+            label={translate('Proposal disclosure level')}
+            description={translate(
+              'Controls how much proposal information is disclosed to reviewers in invitations. This helps reviewers assess potential conflicts of interest before accepting.',
+            )}
+            options={DISCLOSURE_LEVEL_OPTIONS}
+            simpleValue
+            placeholder={translate('Select an option...')}
+            disabled={isReadOnly}
+            renderValue={(value) =>
+              DISCLOSURE_LEVEL_LABELS[value] || translate('Titles only')
+            }
+          />
+        </EditFieldProvider>
+      </TabbedSection.Tab>
+    </TabbedSection>
   );
 };

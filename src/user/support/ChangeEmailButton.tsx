@@ -37,6 +37,7 @@ export const ChangeEmailButton: FunctionComponent<ChangeEmailButtonProps> = (
       className="btn-icon"
       disabled={props.disabled}
       disabledReason={translate('Profile editing is currently disabled')}
+      data-testid="change-email-btn"
     />
   );
 };

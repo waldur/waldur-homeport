@@ -5,9 +5,9 @@ import { OfferingConfiguration } from '@/marketplace/common/types';
 import { MARKETPLACE_RANCHER } from './constants';
 import { rancherOrderSerializer } from './serializers';
 
-const RancherCredentialsForm = lazyComponent(() =>
-  import('@/rancher/RancherCredentialsForm').then((module) => ({
-    default: module.RancherCredentialsForm,
+const RancherCredentialsSection = lazyComponent(() =>
+  import('./RancherCredentialsSection').then((module) => ({
+    default: module.RancherCredentialsSection,
   })),
 );
 
@@ -35,8 +35,8 @@ export const RancherOffering: OfferingConfiguration = {
   },
   orderFormComponent: RancherOrderForm,
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
-  credentialsForm: RancherCredentialsForm,
-  provisioningConfigForm: RancherProvisioningConfigurationForm,
+  credentialsSection: RancherCredentialsSection,
+  provisioningConfigSection: RancherProvisioningConfigurationForm,
   serializer: rancherOrderSerializer,
   secretOptionsSerializer: ({ customer_uuid, ...formData }) => ({
     ...formData,

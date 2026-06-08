@@ -1,117 +1,58 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 
 import { formatDate } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
+import {
+  DateEditField,
+  EditFieldProvider,
+  NumberEditField,
+  StringEditField,
+} from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { renderFieldOrDash } from '@/table/utils';
 
-import { FieldEditButton } from './FieldEditButton';
-import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
 
 export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
-  const detailsRows = useMemo(
-    () =>
-      [
-        {
-          label: translate('Accounting start date'),
-          key: 'accounting_start_date',
-          value: formatDate(props.customer.accounting_start_date),
-        },
-        isFeatureVisible(CustomerFeatures.show_banking_data)
-          ? {
-              label: translate('Bank name'),
-              key: 'bank_name',
-              value: props.customer.bank_name,
-            }
-          : null,
-        isFeatureVisible(CustomerFeatures.show_banking_data)
-          ? {
-              label: translate('Bank account'),
-              key: 'bank_account',
-              value: props.customer.bank_account,
-            }
-          : null,
-      ].filter(Boolean),
-
-    [props.customer],
-  );
-
-  const taxRows = useMemo(
-    () => [
-      {
-        label: translate('VAT code'),
-        key: 'vat_code',
-        value: props.customer.vat_code,
-      },
-      {
-        label: translate('Tax percentage'),
-        key: 'default_tax_percent',
-        value: props.customer.default_tax_percent,
-      },
-    ],
-
-    [props.customer],
-  );
-
   return (
-    <>
+    <EditFieldProvider scope={props.customer} callback={props.callback}>
       <FormTable.Card
         title={translate('Details')}
         className="card-bordered mb-5"
       >
-        <FormTable>
-          {detailsRows.map((row) => (
-            <FormTable.Item
-              key={row.key}
-              label={row.label}
-              value={renderFieldOrDash(row.value)}
-              actions={
-                props.canUpdate ? (
-                  <>
-                    {['accounting_start_date', 'default_tax_percent'].includes(
-                      row.key,
-                    ) && <StaffOnlyIndicator />}
-                    <FieldEditButton
-                      customer={props.customer}
-                      name={row.key}
-                      callback={props.callback}
-                    />
-                  </>
-                ) : null
-              }
+        <FormTable hideActions={!props.canUpdate}>
+          <DateEditField
+            name="accounting_start_date"
+            label={translate('Accounting start date')}
+            renderValue={(v) => formatDate(v)}
+            isStaffOnly
+          />
+          {isFeatureVisible(CustomerFeatures.show_banking_data) && (
+            <StringEditField name="bank_name" label={translate('Bank name')} />
+          )}
+          {isFeatureVisible(CustomerFeatures.show_banking_data) && (
+            <StringEditField
+              name="bank_account"
+              label={translate('Bank account')}
             />
-          ))}
+          )}
         </FormTable>
       </FormTable.Card>
 
       <FormTable.Card title={translate('Tax')} className="card-bordered">
-        <FormTable>
-          {taxRows.map((row) => (
-            <FormTable.Item
-              key={row.key}
-              label={row.label}
-              value={renderFieldOrDash(row.value)}
-              actions={
-                props.canUpdate ? (
-                  <>
-                    {['accounting_start_date', 'default_tax_percent'].includes(
-                      row.key,
-                    ) && <StaffOnlyIndicator />}
-                    <FieldEditButton
-                      customer={props.customer}
-                      name={row.key}
-                      callback={props.callback}
-                    />
-                  </>
-                ) : null
-              }
-            />
-          ))}
+        <FormTable hideActions={!props.canUpdate}>
+          <StringEditField name="vat_code" label={translate('VAT code')} />
+          <NumberEditField
+            name="default_tax_percent"
+            label={translate('Tax percentage')}
+            unit="%"
+            min={0}
+            max={200}
+            isStaffOnly
+          />
         </FormTable>
       </FormTable.Card>
-    </>
+    </EditFieldProvider>
   );
 };
