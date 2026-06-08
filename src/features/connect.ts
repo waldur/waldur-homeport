@@ -9,5 +9,8 @@ export const isFeatureVisible = (feature: FeaturesEnum) => {
     return false;
   }
   const [section, key] = feature.split('.');
-  return (ENV.FEATURES[section] || {})[key];
+  // Coerce to a real boolean: a missing key yields `undefined`, and React
+  // Query's `enabled` only treats an explicit `false` as disabled — an
+  // `undefined` would let feature-gated queries fire against absent endpoints.
+  return Boolean((ENV.FEATURES[section] || {})[key]);
 };
