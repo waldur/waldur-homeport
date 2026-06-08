@@ -18,6 +18,19 @@
       text-decoration: underline !important;
     }
 
+    &.breadcrumb-item-static {
+      color: $breadcrumb-active-color;
+      cursor: default;
+
+      .breadcrumb-item-static-label,
+      .breadcrumb-item-static-label:hover,
+      .breadcrumb-item-static-label:focus {
+        color: inherit;
+        cursor: default;
+        text-decoration: none !important;
+      }
+    }
+
     + .breadcrumb-item {
       padding-left: 6px;
 
