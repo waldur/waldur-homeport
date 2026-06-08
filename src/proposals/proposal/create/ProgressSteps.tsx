@@ -33,7 +33,7 @@ const getSortedSteps = (proposal: Proposal) => [
   },
 ];
 
-const getSteps = (proposal: Proposal): ProgressStep[] => {
+export const getSteps = (proposal: Proposal): ProgressStep[] => {
   const sortedSteps = getSortedSteps(proposal);
   const currentStateIndex =
     sortedSteps.findIndex((step) => step.state.includes(proposal.state)) - 1;
