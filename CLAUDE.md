@@ -125,6 +125,26 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   - Hide buttons when user permanently lacks permission; disable when temporary/fixable
   - Use `useManagedMutation` for all API mutation requests inside modals to cleanly encapsulate success/error notifications, table data reload (`refetch`), and automatic dialog closures. You can also pass `invalidateQueries: [{ queryKey: ['my-key'] }]` to automatically invalidate React Query cache upon success.
 
+- **Edit Field Architecture** — for any read-only-with-edit row in a details/settings panel, use the pre-bound `*EditField` exports from `@/form/editFields` inside an `EditFieldProvider` (see `docs/forms.md`). Never write a monolithic switch-style `EditFieldDialog` — those have been removed.
+
+  ```tsx
+  import { EditFieldProvider, StringEditField, BooleanEditField } from '@/form/editFields';
+
+  <EditFieldProvider scope={offering} callback={update}>
+    <StringEditField name="service_attributes.backend_url" label={translate('API URL')} required />
+    <BooleanEditField name="service_attributes.verify_ssl" label={translate('Verify SSL')} hideLabel />
+  </EditFieldProvider>
+  ```
+
+  - `callback` receives a partial PATCH body like `{ service_attributes: { backend_url: 'x' } }` (built via `lodash.set` from the field's `name` path). The backend endpoint must accept partial updates.
+  - For marketplace plugin credentials, compose `BaseCredentialsSection` (`@/marketplace/offerings/update/integration/BaseCredentialsSection`) instead of redoing the layout — it provides the scope state badge and sync button.
+  - For multi-section panels with URL-synced tabs, use `TabbedSection` from `@/form/TabbedSection`. Note: `enableSearch` filters by walking direct children only; if a tab's content is a composite subcomponent (e.g. `<BasicInfoTab/>`), the search will treat it as one opaque child. Flatten the fields directly under `<TabbedSection.Tab>` when search is needed.
+  - `*EditField`'s `renderValue` may return `null`/`undefined` — the HOC substitutes `DASH_ESCAPE_CODE`, so no explicit dash fallback is needed.
+  - `isStaffOnly` on an `*EditField` swaps the edit button for a `StaffOnlyIndicator` for non-staff. For more complex gates, still use `hasPermission()` and wire `hideActions` on the enclosing `FormTable`/`TabbedSection`.
+  - Canonical examples: `src/customer/details/CustomerDetailsPanel.tsx`, `src/openstack/OpenStackCredentialsSection.tsx`, `src/marketplace/offerings/update/integration/LifecyclePolicySection.tsx`.
+
+- **`use*` prefix discipline** — do not prefix a utility with `use*` unless it actually calls React hooks. `eslint-plugin-react-hooks` enforces conditional-call ordering by name, so a non-hook helper named `useX` will silently break the lint rule the moment a real hook is added to it, or when callers invoke it after an early return. Use `getXxx`/`computeXxx` for plain functions.
+
 ## Sentry Issue Workflow
 
 When given a Sentry URL:

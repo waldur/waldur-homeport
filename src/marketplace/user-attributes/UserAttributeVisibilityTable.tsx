@@ -7,9 +7,9 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
 import { isFeatureVisible } from '@/features/connect';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { FieldEditButton } from '@/form/FieldEditButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { FieldEditButton } from '@/marketplace/offerings/update/integration/FieldEditButton';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 import { useUser } from '@/workspace/hooks';
 

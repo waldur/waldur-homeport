@@ -6,14 +6,16 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
-import { FieldEditButton } from '@/customer/details/FieldEditButton';
+import {
+  CommaSeparatedListEditField,
+  EditFieldProvider,
+  TextEditField,
+} from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { ServiceProvider } from '@/marketplace/types';
 import { useNotify } from '@/store/notify';
-import { renderFieldOrDash } from '@/table/utils';
-import { useCustomer, useUser } from '@/workspace/hooks';
+import { useCustomer } from '@/workspace/hooks';
 
 import { SecretValueField } from '../SecretValueField';
 
@@ -31,8 +33,6 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
   const { showErrorResponse } = useNotify();
 
   const customer = useCustomer();
-  const user = useUser();
-  const isStaffUser = user?.is_staff;
 
   const { data: secretCode, error } = useQuery({
     queryKey: ['ServiceProviderSecretCode', serviceProvider?.uuid],
@@ -72,54 +72,37 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
 
   if (customer && serviceProvider) {
     return (
-      <FormTable>
-        <FormTable.Item
-          label={translate('API secret code')}
-          description={`${translate('Registered at:')} ${formatDateTime(
-            serviceProvider.created,
-          )}`}
-          value={
-            <SecretValueField
-              value={secretCode?.api_secret_code}
-              className="mw-300px"
-            />
-          }
-          actions={
-            <RegenerateSecretCodeButton serviceProvider={serviceProvider} />
-          }
-        />
+      <EditFieldProvider scope={serviceProvider} callback={update}>
+        <FormTable>
+          <FormTable.Item
+            label={translate('API secret code')}
+            description={`${translate('Registered at:')} ${formatDateTime(
+              serviceProvider.created,
+            )}`}
+            value={
+              <SecretValueField
+                value={secretCode?.api_secret_code}
+                className="mw-300px"
+              />
+            }
+            actions={
+              <RegenerateSecretCodeButton serviceProvider={serviceProvider} />
+            }
+          />
 
-        <FormTable.Item
-          label={translate('Description')}
-          value={renderFieldOrDash(serviceProvider?.description)}
-          actions={
-            <FieldEditButton
-              customer={serviceProvider}
-              name="description"
-              callback={update}
-            />
-          }
-        />
+          <TextEditField name="description" label={translate('Description')} />
 
-        <FormTable.Item
-          label={translate('Allowed domains')}
-          value={renderFieldOrDash(
-            (serviceProvider?.allowed_domains as string[])?.join(', '),
-          )}
-          actions={
-            <>
-              <StaffOnlyIndicator />
-              {isStaffUser && (
-                <FieldEditButton
-                  customer={serviceProvider}
-                  name="allowed_domains"
-                  callback={update}
-                />
-              )}
-            </>
-          }
-        />
-      </FormTable>
+          <CommaSeparatedListEditField
+            name="allowed_domains"
+            label={translate('Allowed domains')}
+            placeholder={translate('Enter domains separated by commas')}
+            description={translate(
+              'List of allowed domains for offering endpoints.',
+            )}
+            isStaffOnly
+          />
+        </FormTable>
+      </EditFieldProvider>
     );
   }
   return null;

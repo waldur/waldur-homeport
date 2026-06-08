@@ -1,6 +1,4 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { useCallback, useMemo } from 'react';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -9,25 +7,41 @@ import { Tip } from '@/core/Tooltip';
 import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
+import {
+  BooleanEditField,
+  CountryEditField,
+  DateEditField,
+  EditFieldProvider,
+  MultiCountrySelectEditField,
+  PhoneNumberEditField,
+  SelectEditField,
+  StringEditField,
+  TextEditField,
+} from '@/form/editFields';
 import FormTable from '@/form/FormTable';
+import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
+import { useModal } from '@/modal/actions';
 import { formatUserStatus } from '@/user/support/utils';
 import { useUser } from '@/workspace/hooks';
 
 import {
-  formatGender,
-  formatOrganizationType,
   formatAssuranceUri,
+  getGenderChoices,
+  getOrganizationTypeOptions,
+  getPersonalTitleOptions,
 } from './aai-constants';
 import { ChangeEmailButton } from './ChangeEmailButton';
+import { getProtectedFieldProps } from './getProtectedFieldProps';
 import { isProfileAttributeEnabled } from './profileAttributes';
+import { useProfileFieldWarnings } from './useProfileFieldWarnings';
 import { UserEditAvatarFormItem } from './UserEditAvatarFormItem';
-import { UserEditRow } from './UserEditRow';
+import { useUpdateUser } from './useUpdateUser';
 
 const isRequired = (field: string) => {
   return (
-    ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS.includes(field) ||
+    (ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS || []).includes(field) ||
     (ENV.plugins.WALDUR_CORE.MANDATORY_USER_ATTRIBUTES || []).includes(field)
   );
 };
@@ -53,24 +67,24 @@ const TabBadge = ({ stats, tabKey }: { stats: TabStats; tabKey: string }) => {
         })}
         id={`tab-badge-${tabKey}`}
       >
-        <span className="badge badge-sm badge-circle badge-danger ms-2">
+        <span
+          className="badge badge-sm badge-circle badge-danger ms-2"
+          data-testid="tab-badge-danger"
+        >
           {stats.missingMandatory}
         </span>
       </Tip>
     );
   }
   return (
-    <span className="badge badge-sm badge-circle badge-light ms-2">
+    <span
+      className="badge badge-sm badge-circle badge-light ms-2"
+      data-testid="tab-badge-total"
+    >
       {stats.total}
     </span>
   );
 };
-
-const fieldIsProtected = (user: User, field: string) =>
-  user.identity_provider_fields.includes(field) ||
-  (
-    ENV.plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || []
-  ).includes(user.registration_method);
 
 interface TabContentProps {
   user: User;
@@ -78,59 +92,83 @@ interface TabContentProps {
   isSelf: boolean;
 }
 
-// Basic Information Tab
 const BasicInfoTab = ({ user, disabled, isSelf }: TabContentProps) => {
   const hasNativeName = isProfileAttributeEnabled('native_name');
 
+  const firstNameProps = getProtectedFieldProps(
+    user,
+    'first_name',
+    isRequired('first_name'),
+    user.first_name,
+  );
+  const lastNameProps = getProtectedFieldProps(
+    user,
+    'last_name',
+    isRequired('last_name'),
+    user.last_name,
+  );
+  const nativeNameProps = getProtectedFieldProps(
+    user,
+    'native_name',
+    isRequired('native_name'),
+    user.native_name,
+  );
+  const emailProps = getProtectedFieldProps(
+    user,
+    'email',
+    isRequired('email'),
+    user.email,
+  );
+  const phoneProps = getProtectedFieldProps(
+    user,
+    'phone_number',
+    isRequired('phone_number'),
+    user.phone_number,
+  );
+
   return (
-    <FormTable>
+    <>
       <UserEditAvatarFormItem user={user} disabled={disabled} />
-      <UserEditRow
-        user={user}
-        label={translate('First name')}
+      <StringEditField
         name="first_name"
-        value={user.first_name}
-        disabled={disabled}
+        label={translate('First name')}
+        required={isRequired('first_name')}
+        disabled={disabled || firstNameProps.isProtected}
         description={
           isSelf
             ? translate('Display your first name on your profile')
             : translate("Display the user's first name on their profile")
         }
-        required={isRequired('first_name')}
-        protected={fieldIsProtected(user, 'first_name')}
+        {...firstNameProps}
       />
-      <UserEditRow
-        user={user}
-        label={translate('Last name')}
+      <StringEditField
         name="last_name"
-        value={user.last_name}
-        disabled={disabled}
+        label={translate('Last name')}
+        required={isRequired('last_name')}
+        disabled={disabled || lastNameProps.isProtected}
         description={
           isSelf
             ? translate('Display your last name on your profile')
             : translate("Display the user's last name on their profile")
         }
-        required={isRequired('last_name')}
-        protected={fieldIsProtected(user, 'last_name')}
+        {...lastNameProps}
       />
       {hasNativeName && (
-        <UserEditRow
-          user={user}
-          label={translate('Native name')}
+        <StringEditField
           name="native_name"
-          value={user.native_name}
-          disabled={disabled}
+          label={translate('Native name')}
           required={isRequired('native_name')}
-          protected={fieldIsProtected(user, 'native_name')}
+          disabled={disabled || nativeNameProps.isProtected}
+          {...nativeNameProps}
         />
       )}
-      <UserEditRow
-        user={user}
+      <FormTable.Item
         label={translate('Email')}
-        name="email"
-        value={user.email}
-        disabled={disabled}
-        protected={fieldIsProtected(user, 'email')}
+        value={
+          emailProps.renderValue
+            ? emailProps.renderValue(user.email)
+            : user.email
+        }
         required={isRequired('email')}
         description={
           isSelf
@@ -138,28 +176,25 @@ const BasicInfoTab = ({ user, disabled, isSelf }: TabContentProps) => {
             : translate("Provide an email address for the user's notifications")
         }
         actions={
-          !fieldIsProtected(user, 'email') ? (
+          !emailProps.isProtected ? (
             <ChangeEmailButton user={user} disabled={disabled} />
           ) : null
         }
       />
-      <UserEditRow
-        user={user}
-        label={translate('Phone number')}
+      <PhoneNumberEditField
         name="phone_number"
-        value={user.phone_number}
-        disabled={disabled}
-        protected={fieldIsProtected(user, 'phone_number')}
+        label={translate('Phone number')}
         required={isRequired('phone_number')}
+        disabled={disabled || phoneProps.isProtected}
         description={translate(
           'International format with country code, e.g. +1 202 555 1234',
         )}
+        {...phoneProps}
       />
-    </FormTable>
+    </>
   );
 };
 
-// Personal Identity Tab
 const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
   const hasPersonalTitle = isProfileAttributeEnabled('personal_title');
   const hasGender = isProfileAttributeEnabled('gender');
@@ -174,75 +209,94 @@ const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
     );
   }
 
+  const titleProps = getProtectedFieldProps(
+    user,
+    'personal_title',
+    isRequired('personal_title'),
+    user.personal_title,
+  );
+  const genderProps = getProtectedFieldProps(
+    user,
+    'gender',
+    isRequired('gender'),
+    user.gender,
+  );
+  const birthDateProps = getProtectedFieldProps(
+    user,
+    'birth_date',
+    isRequired('birth_date'),
+    user.birth_date,
+  );
+  const placeOfBirthProps = getProtectedFieldProps(
+    user,
+    'place_of_birth',
+    isRequired('place_of_birth'),
+    user.place_of_birth,
+  );
+
   return (
-    <FormTable>
+    <>
       {hasPersonalTitle && (
-        <UserEditRow
-          user={user}
-          label={translate('Personal title')}
+        <SelectEditField
           name="personal_title"
-          value={user.personal_title}
-          disabled={disabled}
+          label={translate('Personal title')}
+          options={getPersonalTitleOptions()}
           required={isRequired('personal_title')}
-          protected={fieldIsProtected(user, 'personal_title')}
+          disabled={disabled || titleProps.isProtected}
           description={
             isSelf
               ? translate('Your honorific title (Mr, Ms, Dr, Prof, etc.)')
               : translate("The user's honorific title")
           }
+          {...titleProps}
         />
       )}
       {hasGender && (
-        <UserEditRow
-          user={user}
-          label={translate('Gender')}
+        <SelectEditField
           name="gender"
-          value={formatGender(user.gender)}
-          disabled={disabled}
+          label={translate('Gender')}
+          options={getGenderChoices()}
           required={isRequired('gender')}
-          protected={fieldIsProtected(user, 'gender')}
+          disabled={disabled || genderProps.isProtected}
           description={
             isSelf ? translate('Your gender') : translate("The user's gender")
           }
+          {...genderProps}
         />
       )}
       {hasBirthDate && (
-        <UserEditRow
-          user={user}
-          label={translate('Birth date')}
+        <DateEditField
           name="birth_date"
-          value={user.birth_date ? formatDate(user.birth_date) : null}
-          disabled={disabled}
+          label={translate('Birth date')}
           required={isRequired('birth_date')}
-          protected={fieldIsProtected(user, 'birth_date')}
+          disabled={disabled || birthDateProps.isProtected}
           description={
             isSelf
               ? translate('Your date of birth')
               : translate("The user's date of birth")
           }
+          renderValue={(val) => (val ? formatDate(val) : '')}
+          {...birthDateProps}
         />
       )}
       {hasPlaceOfBirth && (
-        <UserEditRow
-          user={user}
-          label={translate('Place of birth')}
+        <StringEditField
           name="place_of_birth"
-          value={user.place_of_birth}
-          disabled={disabled}
+          label={translate('Place of birth')}
           required={isRequired('place_of_birth')}
-          protected={fieldIsProtected(user, 'place_of_birth')}
+          disabled={disabled || placeOfBirthProps.isProtected}
           description={
             isSelf
               ? translate('Your place of birth')
               : translate("The user's place of birth")
           }
+          {...placeOfBirthProps}
         />
       )}
-    </FormTable>
+    </>
   );
 };
 
-// Geographic Tab
 const GeographicTab = ({ user, disabled, isSelf }: TabContentProps) => {
   const hasCountryOfResidence = isProfileAttributeEnabled(
     'country_of_residence',
@@ -258,89 +312,104 @@ const GeographicTab = ({ user, disabled, isSelf }: TabContentProps) => {
     );
   }
 
+  const countryProps = getProtectedFieldProps(
+    user,
+    'country_of_residence',
+    isRequired('country_of_residence'),
+    user.country_of_residence,
+  );
+  const nationalityProps = getProtectedFieldProps(
+    user,
+    'nationality',
+    isRequired('nationality'),
+    user.nationality,
+  );
+  const nationalitiesProps = getProtectedFieldProps(
+    user,
+    'nationalities',
+    isRequired('nationalities'),
+    user.nationalities,
+  );
+
   return (
-    <FormTable>
+    <>
       {hasCountryOfResidence && (
-        <UserEditRow
-          user={user}
-          label={translate('Country of residence')}
+        <CountryEditField
           name="country_of_residence"
-          value={
-            user.country_of_residence ? (
-              <span>
-                <CountryFlag
-                  countryCode={user.country_of_residence}
-                  fontSize={16}
-                />{' '}
-                {user.country_of_residence}
-              </span>
-            ) : null
-          }
-          disabled={disabled}
+          label={translate('Country of residence')}
           required={isRequired('country_of_residence')}
-          protected={fieldIsProtected(user, 'country_of_residence')}
+          disabled={disabled || countryProps.isProtected}
           description={
             isSelf
               ? translate('Your current country of residence')
               : translate("The user's current country of residence")
           }
+          {...countryProps}
+          renderValue={
+            countryProps.renderValue ||
+            ((value) =>
+              value ? (
+                <>
+                  <CountryFlag countryCode={value} fontSize={14} /> {value}
+                </>
+              ) : null)
+          }
         />
       )}
       {hasNationality && (
-        <UserEditRow
-          user={user}
-          label={translate('Nationality')}
+        <CountryEditField
           name="nationality"
-          value={
-            user.nationality ? (
-              <span>
-                <CountryFlag countryCode={user.nationality} fontSize={16} />{' '}
-                {user.nationality}
-              </span>
-            ) : null
-          }
-          disabled={disabled}
+          label={translate('Nationality')}
           required={isRequired('nationality')}
-          protected={fieldIsProtected(user, 'nationality')}
+          disabled={disabled || nationalityProps.isProtected}
           description={
             isSelf
               ? translate('Your primary nationality')
               : translate("The user's primary nationality")
           }
+          {...nationalityProps}
+          renderValue={
+            nationalityProps.renderValue ||
+            ((value) =>
+              value ? (
+                <>
+                  <CountryFlag countryCode={value} fontSize={14} /> {value}
+                </>
+              ) : null)
+          }
         />
       )}
       {hasNationalities && (
-        <UserEditRow
-          user={user}
-          label={translate('Nationalities')}
+        <MultiCountrySelectEditField
           name="nationalities"
-          value={
-            Array.isArray(user.nationalities) &&
-            user.nationalities.length > 0 ? (
-              <span className="d-flex flex-wrap gap-2">
-                {(user.nationalities as string[]).map((code) => (
-                  <span key={code} className="badge badge-light">
-                    <CountryFlag countryCode={code} fontSize={14} /> {code}
-                  </span>
-                ))}
-              </span>
-            ) : null
-          }
-          disabled={disabled}
+          label={translate('Nationalities')}
           required={isRequired('nationalities')}
-          protected={fieldIsProtected(user, 'nationalities')}
+          disabled={disabled || nationalitiesProps.isProtected}
           description={
             isSelf
               ? translate('All your citizenships')
               : translate("All the user's citizenships")
           }
+          {...nationalitiesProps}
+          renderValue={
+            nationalitiesProps.renderValue ||
+            ((value) =>
+              Array.isArray(value) && value.length > 0 ? (
+                <span className="d-flex flex-wrap gap-2">
+                  {(value as string[]).map((code) => (
+                    <span key={code} className="badge badge-light">
+                      <CountryFlag countryCode={code} fontSize={14} /> {code}
+                    </span>
+                  ))}
+                </span>
+              ) : null)
+          }
         />
       )}
-    </FormTable>
+    </>
   );
 };
 
-// Organization Tab
 const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
   const hasOrganizationCountry = isProfileAttributeEnabled(
     'organization_country',
@@ -352,16 +421,44 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
   const hasAffiliations =
     Array.isArray(user.affiliations) && user.affiliations.length > 0;
 
+  const orgProps = getProtectedFieldProps(
+    user,
+    'organization',
+    isRequired('organization'),
+    user.organization,
+  );
+  const orgCountryProps = getProtectedFieldProps(
+    user,
+    'organization_country',
+    isRequired('organization_country'),
+    user.organization_country,
+  );
+  const orgTypeProps = getProtectedFieldProps(
+    user,
+    'organization_type',
+    isRequired('organization_type'),
+    user.organization_type,
+  );
+  const orgRegistryProps = getProtectedFieldProps(
+    user,
+    'organization_registry_code',
+    isRequired('organization_registry_code'),
+    user.organization_registry_code,
+  );
+  const jobProps = getProtectedFieldProps(
+    user,
+    'job_title',
+    isRequired('job_title'),
+    user.job_title,
+  );
+
   return (
-    <FormTable>
-      <UserEditRow
-        user={user}
-        label={translate('Organization name')}
+    <>
+      <StringEditField
         name="organization"
-        value={user.organization}
-        disabled={disabled}
+        label={translate('Organization name')}
         required={isRequired('organization')}
-        protected={fieldIsProtected(user, 'organization')}
+        disabled={disabled || orgProps.isProtected}
         description={
           isSelf
             ? translate(
@@ -371,73 +468,65 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
                 'Specify the name of the organization the user is affiliated with',
               )
         }
+        {...orgProps}
       />
       {hasOrganizationCountry && (
-        <UserEditRow
-          user={user}
-          label={translate('Organization country')}
+        <CountryEditField
           name="organization_country"
-          value={
-            user.organization_country ? (
-              <span>
-                <CountryFlag
-                  countryCode={user.organization_country}
-                  fontSize={16}
-                />{' '}
-                {user.organization_country}
-              </span>
-            ) : null
-          }
-          disabled={disabled}
+          label={translate('Organization country')}
           required={isRequired('organization_country')}
-          protected={fieldIsProtected(user, 'organization_country')}
+          disabled={disabled || orgCountryProps.isProtected}
           description={
             isSelf
               ? translate("Your organization's country")
               : translate("The user's organization country")
           }
+          {...orgCountryProps}
+          renderValue={
+            orgCountryProps.renderValue ||
+            ((value) =>
+              value ? (
+                <>
+                  <CountryFlag countryCode={value} fontSize={14} /> {value}
+                </>
+              ) : null)
+          }
         />
       )}
       {hasOrganizationType && (
-        <UserEditRow
-          user={user}
-          label={translate('Organization type')}
+        <SelectEditField
           name="organization_type"
-          value={formatOrganizationType(user.organization_type)}
-          disabled={disabled}
+          label={translate('Organization type')}
+          options={getOrganizationTypeOptions()}
           required={isRequired('organization_type')}
-          protected={fieldIsProtected(user, 'organization_type')}
+          disabled={disabled || orgTypeProps.isProtected}
           description={
             isSelf
               ? translate('The type of organization you belong to')
               : translate('The type of organization the user belongs to')
           }
+          {...orgTypeProps}
         />
       )}
       {hasOrganizationRegistryCode && (
-        <UserEditRow
-          user={user}
-          label={translate('Organization registry code')}
+        <StringEditField
           name="organization_registry_code"
-          value={user.organization_registry_code}
-          disabled={disabled}
+          label={translate('Organization registry code')}
           required={isRequired('organization_registry_code')}
-          protected={fieldIsProtected(user, 'organization_registry_code')}
+          disabled={disabled || orgRegistryProps.isProtected}
           description={
             isSelf
               ? translate("Your organization's registry code")
               : translate("The user's organization registry code")
           }
+          {...orgRegistryProps}
         />
       )}
-      <UserEditRow
-        user={user}
-        label={translate('Job position')}
+      <StringEditField
         name="job_title"
-        value={user.job_title}
-        disabled={disabled}
+        label={translate('Job position')}
         required={isRequired('job_title')}
-        protected={fieldIsProtected(user, 'job_title')}
+        disabled={disabled || jobProps.isProtected}
         description={
           isSelf
             ? translate(
@@ -447,22 +536,19 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
                 "Describe the user's role or position within the organization",
               )
         }
+        {...jobProps}
       />
       {hasAffiliations && (
-        <UserEditRow
-          user={user}
+        <FormTable.Item
           label={translate('Affiliations')}
-          name="affiliations"
           value={user.affiliations.join(', ')}
           disabled={disabled}
-          protected={true}
         />
       )}
-    </FormTable>
+    </>
   );
 };
 
-// System Tab
 const SystemTab = ({ user, disabled }: TabContentProps) => {
   const currentUser = useUser();
   const isVisibleStaffOrSupport =
@@ -474,21 +560,15 @@ const SystemTab = ({ user, disabled }: TabContentProps) => {
   const hasSlug = isFeatureVisible(UserFeatures.show_slug);
 
   return (
-    <FormTable>
-      <UserEditRow
-        user={user}
+    <>
+      <FormTable.Item
         label={translate('Username')}
-        name="username"
         value={user.username}
         disabled={disabled}
-        protected={true}
-        protectedMsg={translate('Read-only field')}
       />
       {hasEdupersonAssurance && (
-        <UserEditRow
-          user={user}
+        <FormTable.Item
           label={translate('Assurance levels')}
-          name="eduperson_assurance"
           value={
             <span className="d-flex flex-wrap gap-2">
               {(user.eduperson_assurance as string[]).map((uri) => (
@@ -499,88 +579,67 @@ const SystemTab = ({ user, disabled }: TabContentProps) => {
             </span>
           }
           disabled={disabled}
-          protected={true}
-          protectedMsg={translate('Read-only field from identity provider')}
         />
       )}
-      <UserEditRow
-        user={user}
+      <FormTable.Item
         label={translate('Date joined')}
-        name="date_joined"
         value={formatDateTime(user.date_joined)}
         disabled={disabled}
-        protected={true}
-        protectedMsg={translate('Read-only field')}
         description={translate('The date the user has joined')}
       />
       {isVisibleStaffOrSupport && (
-        <UserEditRow
-          user={user}
+        <FormTable.Item
           label={translate('User type')}
-          name="type"
           value={formatUserStatus(user)}
           disabled={disabled}
-          protected={true}
-          protectedMsg={translate('Read-only field')}
         />
       )}
       {user.civil_number && (
-        <UserEditRow
-          user={user}
+        <FormTable.Item
           label={translate('ID code')}
-          name="civil_number"
           value={user.civil_number}
           disabled={disabled}
-          protected={true}
         />
       )}
       {hasSlug && (
-        <UserEditRow
-          user={user}
-          label={translate('Shortname')}
+        <StringEditField
           name="slug"
-          value={user.slug}
-          disabled={disabled}
-          protected={!currentUser.is_staff}
+          label={translate('Shortname')}
+          disabled={disabled || !currentUser.is_staff}
+          isStaffOnly
         />
       )}
-    </FormTable>
+    </>
   );
 };
 
-// Internal Tab (visible only to staff and support)
-const StaffTab = ({ user, disabled, isSelf }: TabContentProps) => {
+const StaffTab = ({ disabled, isSelf }: TabContentProps) => {
   const currentUser = useUser();
   const isStaffUser = currentUser?.is_staff;
 
   return (
-    <FormTable>
-      <UserEditRow
-        user={user}
-        label={translate('Notes')}
+    <>
+      <TextEditField
         name="description"
-        value={user.description}
+        label={translate('Notes')}
+        required={isRequired('description')}
         disabled={disabled}
         description={translate('Internal notes about this user account')}
-        required={isRequired('description')}
+        maxLength={500}
+        isStaffOnly
       />
-      <UserEditRow
-        user={user}
-        label={translate('Notifications')}
+      <BooleanEditField
         name="notifications_enabled"
-        value={
-          user.notifications_enabled
-            ? translate('Enabled')
-            : translate('Disabled')
-        }
+        label={translate('Notifications')}
         disabled={disabled || !isStaffUser}
         description={
           isSelf
             ? translate('Enable or disable notifications for your account')
             : translate('Enable or disable notifications for this user')
         }
+        isStaffOnly
       />
-    </FormTable>
+    </>
   );
 };
 
@@ -769,47 +828,15 @@ const useTabStats = (user: User): Record<TabKey, TabStats> => {
   }, [user]);
 };
 
-const TAB_KEYS: TabKey[] = [
-  'basic',
-  'personal',
-  'geographic',
-  'organization',
-  'system',
-  'staff',
-];
-
 export const UserProfileTabs = ({
   user,
   disabled = false,
 }: UserProfileTabsProps) => {
-  const { params } = useCurrentStateAndParams();
   const currentUser = useUser();
+  const { confirm } = useModal();
   const isSelf = currentUser.uuid === user.uuid;
   const isVisibleStaffOrSupport =
     currentUser?.is_staff || currentUser?.is_support;
-
-  // Initialize tab from URL param or default to 'basic'
-  const initialTab =
-    params.section && TAB_KEYS.includes(params.section as TabKey)
-      ? (params.section as TabKey)
-      : 'basic';
-  const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
-
-  // Update URL when tab changes (using History API to avoid full reload)
-  const handleTabChange = useCallback((key: TabKey) => {
-    setActiveTab(key);
-    // Update URL without triggering UI-Router state transition
-    const url = new URL(window.location.href);
-    url.searchParams.set('section', key);
-    window.history.replaceState(null, '', url.toString());
-  }, []);
-
-  // Sync with URL changes (e.g., browser back/forward)
-  useEffect(() => {
-    if (params.section && TAB_KEYS.includes(params.section as TabKey)) {
-      setActiveTab(params.section as TabKey);
-    }
-  }, [params.section]);
 
   const tabStats = useTabStats(user);
 
@@ -825,106 +852,132 @@ export const UserProfileTabs = ({
     isProfileAttributeEnabled('nationality') ||
     isProfileAttributeEnabled('nationalities');
 
-  const tabs: { key: TabKey; title: React.ReactNode; show: boolean }[] = [
-    {
-      key: 'basic',
-      title: (
-        <>
-          {translate('Basic info')}
-          <TabBadge stats={tabStats.basic} tabKey="basic" />
-        </>
-      ),
-      show: true,
-    },
-    {
-      key: 'personal',
-      title: (
-        <>
-          {translate('Personal')}
-          <TabBadge stats={tabStats.personal} tabKey="personal" />
-        </>
-      ),
-      show: hasPersonalFields,
-    },
-    {
-      key: 'geographic',
-      title: (
-        <>
-          {translate('Geographic')}
-          <TabBadge stats={tabStats.geographic} tabKey="geographic" />
-        </>
-      ),
-      show: hasGeographicFields,
-    },
-    {
-      key: 'organization',
-      title: (
-        <>
-          {translate('Affiliation')}
-          <TabBadge stats={tabStats.organization} tabKey="organization" />
-        </>
-      ),
-      show: true,
-    },
-    {
-      key: 'system',
-      title: (
-        <>
-          {translate('System')}
-          <TabBadge stats={tabStats.system} tabKey="system" />
-        </>
-      ),
-      show: true,
-    },
-    {
-      key: 'staff',
-      title: (
-        <>
-          <StaffOnlyIndicator className="me-1" />
-          {translate('Internal')}
-          <TabBadge stats={tabStats.staff} tabKey="staff" />
-        </>
-      ),
-      show: isVisibleStaffOrSupport,
-    },
-  ];
+  const { callback: baseCallback } = useUpdateUser(user);
+  const { data: fieldWarnings } = useProfileFieldWarnings();
 
-  const visibleTabs = tabs.filter((tab) => tab.show);
+  const handleUpdate = useCallback(
+    async (values) => {
+      // Find which field was updated by checking keys
+      const updatedKeys = Object.keys(values);
+      if (updatedKeys.length > 0) {
+        const resolveName = updatedKeys[0];
+        const newValue = values[resolveName];
+        const isEmpty =
+          newValue === '' ||
+          newValue === null ||
+          newValue === undefined ||
+          (Array.isArray(newValue) && newValue.length === 0);
 
-  const tabContent: Record<TabKey, React.ReactNode> = {
-    basic: <BasicInfoTab user={user} disabled={disabled} isSelf={isSelf} />,
-    personal: <PersonalTab user={user} disabled={disabled} isSelf={isSelf} />,
-    geographic: (
-      <GeographicTab user={user} disabled={disabled} isSelf={isSelf} />
-    ),
-    organization: (
-      <OrganizationTab user={user} disabled={disabled} isSelf={isSelf} />
-    ),
-    system: <SystemTab user={user} disabled={disabled} isSelf={isSelf} />,
-    staff: <StaffTab user={user} disabled={disabled} isSelf={isSelf} />,
-  };
+        if (isEmpty && fieldWarnings) {
+          const offerings = fieldWarnings[resolveName];
+          if (offerings?.length) {
+            const offeringNames = offerings
+              .map((o) => o.offering_name)
+              .join(', ');
+            try {
+              await confirm(
+                translate('Field required by offerings'),
+                translate(
+                  'This field is required by: {offerings}. Without it, service providers will not be able to see your user account.',
+                  {
+                    offerings: offeringNames,
+                  },
+                ),
+                {
+                  positiveButton: translate('Clear anyway'),
+                  positiveButtonVariant: 'warning',
+                  negativeButton: translate('Cancel'),
+                },
+              );
+            } catch {
+              return;
+            }
+          }
+        }
+      }
+
+      await baseCallback(values);
+    },
+    [baseCallback, fieldWarnings, confirm],
+  );
 
   return (
-    <Tab.Container
-      activeKey={activeTab}
-      onSelect={(k) => handleTabChange(k as TabKey)}
-    >
-      <Nav variant="tabs" className="nav-line-tabs mb-4">
-        {visibleTabs.map((tab) => (
-          <Nav.Item key={tab.key}>
-            <Nav.Link eventKey={tab.key} className="cursor-pointer">
-              {tab.title}
-            </Nav.Link>
-          </Nav.Item>
-        ))}
-      </Nav>
-      <Tab.Content>
-        {visibleTabs.map((tab) => (
-          <Tab.Pane key={tab.key} eventKey={tab.key}>
-            {tabContent[tab.key]}
-          </Tab.Pane>
-        ))}
-      </Tab.Content>
-    </Tab.Container>
+    <EditFieldProvider scope={user} callback={handleUpdate}>
+      <TabbedSection title={translate('Details')} hideActions={disabled}>
+        <TabbedSection.Tab
+          id="basic"
+          title={
+            <>
+              {translate('Basic info')}
+              <TabBadge stats={tabStats.basic} tabKey="basic" />
+            </>
+          }
+        >
+          <BasicInfoTab user={user} disabled={disabled} isSelf={isSelf} />
+        </TabbedSection.Tab>
+        {hasPersonalFields && (
+          <TabbedSection.Tab
+            id="personal"
+            title={
+              <>
+                {translate('Personal')}
+                <TabBadge stats={tabStats.personal} tabKey="personal" />
+              </>
+            }
+          >
+            <PersonalTab user={user} disabled={disabled} isSelf={isSelf} />
+          </TabbedSection.Tab>
+        )}
+        {hasGeographicFields && (
+          <TabbedSection.Tab
+            id="geographic"
+            title={
+              <>
+                {translate('Geographic')}
+                <TabBadge stats={tabStats.geographic} tabKey="geographic" />
+              </>
+            }
+          >
+            <GeographicTab user={user} disabled={disabled} isSelf={isSelf} />
+          </TabbedSection.Tab>
+        )}
+        <TabbedSection.Tab
+          id="organization"
+          title={
+            <>
+              {translate('Affiliation')}
+              <TabBadge stats={tabStats.organization} tabKey="organization" />
+            </>
+          }
+        >
+          <OrganizationTab user={user} disabled={disabled} isSelf={isSelf} />
+        </TabbedSection.Tab>
+        <TabbedSection.Tab
+          id="system"
+          title={
+            <>
+              {translate('System')}
+              <TabBadge stats={tabStats.system} tabKey="system" />
+            </>
+          }
+        >
+          <SystemTab user={user} disabled={disabled} isSelf={isSelf} />
+        </TabbedSection.Tab>
+        {isVisibleStaffOrSupport && (
+          <TabbedSection.Tab
+            id="staff"
+            title={
+              <>
+                <StaffOnlyIndicator className="me-1" />
+                {translate('Internal')}
+                <TabBadge stats={tabStats.staff} tabKey="staff" />
+              </>
+            }
+          >
+            <StaffTab user={user} disabled={disabled} isSelf={isSelf} />
+          </TabbedSection.Tab>
+        )}
+      </TabbedSection>
+    </EditFieldProvider>
   );
 };

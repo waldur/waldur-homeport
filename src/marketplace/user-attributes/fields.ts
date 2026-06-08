@@ -1,10 +1,14 @@
 import { FeaturesEnum, UserFeatures } from '@/FeaturesEnums';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { OfferingEditField } from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
 import { ProfileAttribute } from '@/user/support/profileAttributes';
 
-interface AttributeFieldDef extends OfferingEditField {
+interface AttributeFieldDef {
+  key: string;
+  label: string;
+  description?: string;
+  component: any;
+  hideLabel?: boolean;
   attribute?: ProfileAttribute;
   featureFlag?: FeaturesEnum;
 }

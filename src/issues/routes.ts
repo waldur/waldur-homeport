@@ -260,6 +260,11 @@ export const states: StateDeclaration[] = [
         default: module.UserManage,
       })),
     ),
+    params: {
+      section: {
+        dynamic: true,
+      },
+    },
   },
 
   {

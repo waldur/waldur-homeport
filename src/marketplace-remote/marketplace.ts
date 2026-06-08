@@ -5,6 +5,12 @@ import { COMMON_OPTIONS } from '@/support/marketplace';
 
 import { REMOTE_OFFERING_TYPE } from './constants';
 
+const RemoteCredentialsSection = lazyComponent(() =>
+  import('./RemoteCredentialsSection').then((module) => ({
+    default: module.RemoteCredentialsSection,
+  })),
+);
+
 const RemoteOfferingSecretOptions = lazyComponent(() =>
   import('./RemoteOfferingSecretOptions').then((module) => ({
     default: module.RemoteOfferingSecretOptions,
@@ -17,6 +23,6 @@ export const RemoteOffering: OfferingConfiguration = {
     return translate('Remote offering');
   },
   ...COMMON_OPTIONS,
-  showBackendId: true,
-  provisioningConfigForm: RemoteOfferingSecretOptions,
+  credentialsSection: RemoteCredentialsSection,
+  provisioningConfigSection: RemoteOfferingSecretOptions,
 };

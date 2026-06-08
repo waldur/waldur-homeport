@@ -10,15 +10,12 @@ const OfferingConfigurationDetails = lazyComponent(() =>
     default: module.OfferingConfigurationDetails,
   })),
 );
-const UserPluginOptionsForm = lazyComponent(() =>
-  import('@/marketplace/UserPluginOptionsForm').then((module) => ({
-    default: module.UserPluginOptionsForm,
-  })),
-);
-const UserSecretOptionsForm = lazyComponent(() =>
-  import('@/marketplace/UserSecretOptionsForm').then((module) => ({
-    default: module.UserSecretOptionsForm,
-  })),
+const DefaultUserManagementSection = lazyComponent(() =>
+  import('@/marketplace/offerings/update/integration/UserManagementSection').then(
+    (module) => ({
+      default: module.DefaultUserManagementSection,
+    }),
+  ),
 );
 const ServiceDeskProvisioningConfigForm = lazyComponent(() =>
   import('@/support/ServiceDeskProvisioningConfigForm').then((module) => ({
@@ -34,7 +31,7 @@ const RequestOrderForm = lazyComponent(() =>
 export const COMMON_OPTIONS = {
   orderFormComponent: RequestOrderForm,
   detailsComponent: OfferingConfigurationDetails,
-  pluginOptionsForm: UserPluginOptionsForm,
+  userManagementSection: DefaultUserManagementSection,
   serializer,
   showComponents: true,
 };
@@ -45,8 +42,7 @@ export const SupportOffering: OfferingConfiguration = {
     return translate('Service Desk');
   },
   ...COMMON_OPTIONS,
-  secretOptionsForm: UserSecretOptionsForm,
-  provisioningConfigForm: ServiceDeskProvisioningConfigForm,
+  provisioningConfigSection: ServiceDeskProvisioningConfigForm,
 };
 
 export const BasicOffering: OfferingConfiguration = {
@@ -55,5 +51,4 @@ export const BasicOffering: OfferingConfiguration = {
     return translate('Basic');
   },
   ...COMMON_OPTIONS,
-  secretOptionsForm: UserSecretOptionsForm,
 };

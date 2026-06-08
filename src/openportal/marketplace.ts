@@ -3,9 +3,9 @@ import { translate } from '@/i18n';
 import { OfferingConfiguration } from '@/marketplace/common/types';
 import { OPENPORTAL_PLUGIN } from '@/openportal/constants';
 
-const OpenPortalCredentialsForm = lazyComponent(() =>
-  import('./OpenPortalCredentialsForm').then((module) => ({
-    default: module.OpenPortalCredentialsForm,
+const OpenPortalCredentialsSection = lazyComponent(() =>
+  import('./OpenPortalCredentialsSection').then((module) => ({
+    default: module.OpenPortalCredentialsSection,
   })),
 );
 
@@ -21,5 +21,5 @@ export const OpenPortalOffering: OfferingConfiguration = {
     return translate('OpenPortal allocation');
   },
   orderFormComponent: OpenPortalOrderForm,
-  credentialsForm: OpenPortalCredentialsForm,
+  credentialsSection: OpenPortalCredentialsSection,
 };

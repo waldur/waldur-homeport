@@ -4,10 +4,11 @@ import { OfferingConfiguration } from '@/marketplace/common/types';
 
 import { VMWARE_VM } from './constants';
 
-const VMwareCredentialsForm = lazyComponent(() =>
-  import('./VMwareForm').then((module) => ({ default: module.VMwareForm })),
+const VMwareCredentialsSection = lazyComponent(() =>
+  import('./VMwareCredentialsSection').then((module) => ({
+    default: module.VMwareCredentialsSection,
+  })),
 );
-
 const VmwareOrderForm = lazyComponent(() =>
   import('./deploy/VmwareOrderForm').then((module) => ({
     default: module.VmwareOrderForm,
@@ -50,7 +51,7 @@ export const vmWareOffering: OfferingConfiguration = {
     return translate('vSphere Virtual Machine');
   },
   orderFormComponent: VmwareOrderForm,
-  credentialsForm: VMwareCredentialsForm,
+  credentialsSection: VMwareCredentialsSection,
   serializer,
   limitSerializer,
   limitParser,

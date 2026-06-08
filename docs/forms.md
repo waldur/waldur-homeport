@@ -36,7 +36,7 @@ import { SubmitButton, StringGroup } from '@/form';
 
 ## Autonomous Field Group Architecture (*Group Pattern)
 
-To reduce boilerplate, improve type safety, and enforce UI consistency, Waldur uses the **Autonomous Field Group** pattern.
+To reduce boilerplate, improve type safety, and enforce UI consistency, Waldur uses the **Autonomous Field Group** pattern. A single base input (e.g. `StringField`) is wrapped by three sibling HOCs depending on context — see the [Edit Field Architecture](#edit-field-architecture-editfield-pattern) section below for the full cross-reference table.
 
 We provide a set of components suffixed with `*Group` (e.g., `StringGroup`, `SelectGroup`, `SecretGroup`) created using the `withFormGroup` Higher-Order Component (HOC). These components autonomously bundle:
 
@@ -138,6 +138,140 @@ export const NetworkPoolField = () => (
   </Form.Group>
 );
 ```
+
+## Edit Field Architecture (*EditField Pattern)
+
+For details / settings panels that show a value with an inline edit affordance, Waldur uses the **Edit Field Architecture**. It mirrors the `*Group` pattern but renders a read-only `FormTable.Item` plus a button that opens a generic edit modal.
+
+Each base field control has three siblings:
+
+| Base Control           | Form Group (`withFormGroup`) | Edit Field (`withEditField`) | Table Filter (`withTableFilter`) |
+| ---------------------- | ---------------------------- | ---------------------------- | --------------------------------- |
+| `StringField`          | `StringGroup`                | `StringEditField`            | `StringFilter`                    |
+| `SelectField`          | `SelectGroup`                | `SelectEditField`            | `SelectFilter`                    |
+| `NumberField`          | `NumberGroup`                | `NumberEditField`            | `NumberFilter`                    |
+| `SecretField`          | `SecretGroup`                | `SecretEditField`            | —                                 |
+| `EmailField`           | `EmailGroup`                 | `EmailEditField`             | —                                 |
+| `AwesomeCheckboxField` | `BooleanGroup`               | `BooleanEditField`           | `BooleanFilter`                   |
+| `DateField`            | `DateGroup`                  | `DateEditField`              | —                                 |
+| `MarkdownEditor`       | `MarkdownGroup`              | `MarkdownEditField`          | —                                 |
+
+Exports live in `@/form/editFields`. To make a custom field editable, run the base component through the HOC:
+
+```tsx
+import { withEditField } from '@/form/editFields';
+
+const ExternalIpsEditField = withEditField(OpenStackExternalIpsField);
+```
+
+### Provider + field usage
+
+`EditFieldProvider` supplies the `scope` (the object being edited) and the `callback` (the persist function) so individual edit fields don't need to be threaded with props.
+
+```tsx
+import {
+  EditFieldProvider,
+  StringEditField,
+  BooleanEditField,
+  SelectEditField,
+} from '@/form/editFields';
+import FormTable from '@/form/FormTable';
+
+<EditFieldProvider scope={offering} callback={update}>
+  <FormTable>
+    <StringEditField
+      name="service_attributes.backend_url"
+      label={translate('API URL')}
+      required
+      validate={required}
+    />
+    <SelectEditField
+      name="service_attributes.auth_type"
+      label={translate('Authentication type')}
+      options={AUTH_TYPE_OPTIONS}
+      simpleValue
+      isClearable={false}
+    />
+    <BooleanEditField
+      name="service_attributes.verify_ssl"
+      label={translate('Verify SSL')}
+      hideLabel
+    />
+  </FormTable>
+</EditFieldProvider>
+```
+
+### Callback contract
+
+When the user submits the modal, the dialog builds a body via `lodash.set({}, field.name, value)` and passes it to the provider's `callback`. The callback receives a **partial** PATCH-shaped object:
+
+```ts
+// User edited service_attributes.backend_url
+callback({ service_attributes: { backend_url: 'https://keystone…' } });
+
+// User edited backend_id
+callback({ backend_id: 'abc-123' });
+```
+
+The backend endpoint behind `callback` must therefore accept partial updates (PATCH semantics). The marketplace `marketplaceProviderOfferingsUpdateIntegration` endpoint and `projectsPartialUpdate` / `customersPartialUpdate` already do. Wrap the persist call in `useManagedMutation` so success/error notifications and `closeDialog` are handled uniformly.
+
+### Common props
+
+- `name` — dotted path into `scope` (e.g. `service_attributes.backend_url`). Reads via `lodash.get`, writes via `lodash.set`.
+- `label`, `description`, `required`, `validate`, `format`, `parse`, `normalize` — passed through to the modal's `<Field>`.
+- `isStaffOnly` — non-staff users see a `<StaffOnlyIndicator/>` instead of the edit button; the read-only value is still visible.
+- `renderValue(value)` — override the read-only display. May return `null`/`undefined`; the HOC substitutes `DASH_ESCAPE_CODE`, so no manual dash fallback is needed.
+- `tooltip`, `iconNode` — propagate to the compact edit button (e.g. to flag IDP-managed fields with a lock icon).
+- `warnTooltip` — displays a warning marker next to the row's value, e.g. for fields with non-obvious side effects.
+
+### Marketplace plugin credentials
+
+For plugin credentials, compose `BaseCredentialsSection` (`@/marketplace/offerings/update/integration/BaseCredentialsSection`) instead of redoing the layout — it provides the scope state badge, the sync button, and the surrounding `EditFieldProvider` wired to the offering's `update` mutation:
+
+```tsx
+import { BaseCredentialsSection } from '@/marketplace/offerings/update/integration/BaseCredentialsSection';
+import { StringEditField, SecretEditField } from '@/form/editFields';
+
+export const MyPluginCredentialsSection = (props) => (
+  <BaseCredentialsSection {...props}>
+    <StringEditField name="service_attributes.api_url" label={translate('API URL')} required />
+    <SecretEditField name="secret_options.api_token" label={translate('API token')} required />
+  </BaseCredentialsSection>
+);
+```
+
+### Tabbed panels
+
+For multi-section panels with URL-synced tabs, use `TabbedSection` from `@/form/TabbedSection`:
+
+```tsx
+import { TabbedSection } from '@/form/TabbedSection';
+
+<EditFieldProvider scope={offering} callback={update}>
+  <TabbedSection enableSearch>
+    <TabbedSection.Tab id="filtering" title={translate('Filtering')}>
+      <StringEditField name="service_attributes.flavor_exclude_regex" label={…} />
+    </TabbedSection.Tab>
+    <TabbedSection.Tab id="network" title={translate('Network')}>
+      <BooleanEditField name="plugin_options.lbaas_enabled" label={…} />
+    </TabbedSection.Tab>
+  </TabbedSection>
+</EditFieldProvider>
+```
+
+**Search caveat**: `enableSearch` filters by walking direct children only. If a tab's content is a composite subcomponent (e.g. `<BasicInfoTab/>`), search treats it as a single opaque child. Place `*EditField`s directly under `<TabbedSection.Tab>` when search is needed.
+
+### Don't do this
+
+- ❌ Don't add fields to a monolithic switch-based `EditFieldDialog`. The legacy `src/customer/details/EditFieldDialog.tsx`, `src/user/support/EditFieldDialog.tsx`, etc. have all been removed.
+- ❌ Don't write your own edit button + `openDialog(SomeEditDialog, …)` lazy loader when an `*EditField` would do — the standardized dialog handles validation, dirty-state, and submit wiring for you.
+- ❌ Don't render `*EditField` outside an `EditFieldProvider`. The HOC throws — you'll see `<withEditField(X)>: "scope" and "callback" must be provided…`.
+
+Canonical examples:
+
+- `src/customer/details/CustomerDetailsPanel.tsx` — `TabbedSection` + multiple tabs of `*EditField`s.
+- `src/openstack/OpenStackCredentialsSection.tsx` — `BaseCredentialsSection` with `Select`/`Boolean`/`Secret` edit fields.
+- `src/marketplace/offerings/update/integration/LifecyclePolicySection.tsx` — search-enabled tabs with flat field lists.
 
 ## Autonomous Table Filters (*Filter Pattern)
 
@@ -303,3 +437,182 @@ import { DirtyStateReporter } from '@/core/DirtyFormContext';
   )}
 />
 ```
+
+## Edit Field Architecture
+
+Waldur's Edit Field Architecture provides a declarative, strictly-typed, and highly reusable way to render read-only configuration panels that can be seamlessly edited.
+
+**The field brings its own edit component.** By leveraging `withEditField` and the `<EditFieldProvider>`, we bind the display logic and edit dialog automatically.
+
+**Benefits:**
+
+- **Zero Boilerplate:** No more manual row arrays.
+- **Decoupled Modals:** The generic `EditFieldDialog` doesn't know about specific fields. The field component passes itself to the modal automatically.
+- **Declarative Access Control:** Pass `isStaffOnly` to automatically handle rendering logic and indicators.
+
+### Core Concepts
+
+#### `withEditField` HOC
+
+Located in `@/form/withEditField.tsx`, this Higher-Order Component wraps any basic form field (like `StringField`, `EmailField`, `AwesomeCheckboxField`). It transforms the basic field into an autonomous component that knows how to:
+
+1. Read its value from a context scope.
+2. Render a read-only display via `<FormTable.Item>`.
+3. Render the `<FieldEditButton>` linking to a generic modal.
+4. Pass itself (the inner field) into the modal when clicked.
+
+#### Pre-bound Edit Fields
+
+Located in `@/form/editFields.tsx`, we export pre-bound instances of commonly used fields:
+
+```tsx
+export const StringEditField = withEditField(StringField);
+export const EmailEditField = withEditField(EmailField);
+export const SecretEditField = withEditField(SecretField);
+export const DateEditField = withEditField(DateField);
+export const CommaSeparatedListEditField = withEditField(CommaSeparatedListField);
+// ...and many more
+```
+
+#### `<EditFieldProvider>`
+
+A context provider that supplies the `scope` (the object being edited, like `customer` or `offering`) and the `callback` (the API function to trigger updates) to all child Edit Fields.
+
+### Examples
+
+#### Basic Usage
+
+```tsx
+import { EditFieldProvider, StringEditField, EmailEditField } from '@/form/editFields';
+
+export const CustomerPanel = ({ customer, update, canUpdate }) => (
+  <EditFieldProvider scope={customer} callback={update}>
+    <FormTable hideActions={!canUpdate}>
+      <StringEditField name="name" label="Name" />
+      <EmailEditField name="email" label="Email" />
+    </FormTable>
+  </EditFieldProvider>
+);
+```
+
+> **Note:**
+> Notice the `hideActions={!canUpdate}` on `<FormTable>`. This CSS-based toggle gracefully hides the action column completely if the user lacks update permissions, without requiring complex conditional JSX.
+
+#### Staff-Only Fields
+
+The architecture handles `StaffOnlyIndicator` automatically.
+
+```tsx
+<EditFieldProvider scope={customer} callback={update}>
+  <FormTable hideActions={!canUpdate}>
+    {/* Editable by anyone with update permissions */}
+    <StringEditField name="address" label="Address" />
+
+    {/* Only editable by Staff. Shows StaffOnlyIndicator automatically */}
+    <NumberEditField
+      name="max_service_accounts"
+      label="Max Service Accounts"
+      isStaffOnly
+    />
+  </FormTable>
+</EditFieldProvider>
+```
+
+If a non-staff user views this panel, they will see the value and the `StaffOnlyIndicator` badge, but the edit button will not be rendered.
+
+#### Formatting Read-Only Values
+
+Sometimes the read-only display needs specific formatting (e.g., date formats, phone formats) that differs from the raw context value. Use the `renderValue` prop:
+
+```tsx
+<StringEditField
+  name="phone_number"
+  label="Phone number"
+  renderValue={(val) => formatPhoneNumber(val)}
+/>
+
+<DateEditField
+  name="accounting_start_date"
+  label="Accounting Start Date"
+  renderValue={(val) => formatDate(val)}
+/>
+```
+
+#### Passing Props to the Inner Field
+
+Any property that isn't native to the `EditFieldProps` is automatically forwarded to the inner field when the modal opens.
+
+For instance, if you use `CommaSeparatedListEditField`, you can pass `placeholder` and it will be forwarded to `CommaSeparatedListField` when the user clicks edit:
+
+```tsx
+<CommaSeparatedListEditField
+  name="notification_emails"
+  label="Notification Emails"
+  description="Emails to receive billing alerts." // Renders as subtitle in the edit modal and under the FormTable label
+  placeholder="Enter comma-separated emails..."   // Forwarded to the inner form input component
+/>
+```
+
+#### Creating a Custom Edit Field
+
+If you have a highly specific form field that isn't exported from `editFields.tsx`, you can wrap it on the fly:
+
+```tsx
+import { withEditField } from '@/form/editFields';
+import { MultiCountrySelectField } from '@/form/MultiCountrySelectField';
+
+const MultiCountryEditField = withEditField(MultiCountrySelectField);
+
+export const RegionPanel = ({ scope, update }) => (
+  <EditFieldProvider scope={scope} callback={update}>
+    <FormTable>
+      <MultiCountryEditField name="allowed_countries" label="Allowed Countries" />
+    </FormTable>
+  </EditFieldProvider>
+);
+```
+
+### Best Practices
+
+> **Warning:**
+> **Do not write `props.resolve.name === 'my_field'` in generic modals.**
+> If you find yourself editing a `EditFieldDialog.tsx` file to add a new `switch` case for your field name, you are using the old architecture. Use `withEditField` instead.
+
+1. **Avoid Duplicate Wrappers:** Don't wrap a component that is already wrapped with `withFormGroup`. The `<EditFieldDialog>` automatically injects labels; using a `Group` component will result in double labels.
+2. **Rely on Native Fallbacks:** `withEditField` automatically handles missing values by rendering dashes (`—`). Do not manually check for empty values with ternary operators.
+3. **Use `hideActions`:** Always pass `hideActions={!canUpdate}` to the parent `<FormTable>` if you need conditional access control for the entire panel.
+
+## Tabbed Sections (`TabbedSection`)
+
+When building complex forms with many fields, use the `TabbedSection` component to organize fields into logical, URL-synced tabs. It includes built-in support for searching across tabs and automatically jumping to tabs with matching results.
+
+### Example Usage
+
+```tsx
+import { EditFieldProvider, StringEditField, BooleanEditField } from '@/form/editFields';
+import { TabbedSection } from '@/form/TabbedSection';
+import { translate } from '@/i18n';
+
+export const MySettingsPanel = ({ settings, update, canUpdate }) => (
+  <EditFieldProvider scope={settings} callback={update}>
+    <TabbedSection title={translate('Settings')} enableSearch hideActions={!canUpdate}>
+      <TabbedSection.Tab id="general" title={translate('General')}>
+        <StringEditField name="name" label={translate('Name')} />
+        <BooleanEditField name="is_active" label={translate('Active')} />
+      </TabbedSection.Tab>
+
+      <TabbedSection.Tab id="advanced" title={translate('Advanced')}>
+        <StringEditField name="api_key" label={translate('API Key')} />
+      </TabbedSection.Tab>
+    </TabbedSection>
+  </EditFieldProvider>
+);
+```
+
+### Key Features
+
+1. **URL Synchronization**: Automatically syncs the active tab to the URL query string using `useSettingsUrlSync`, allowing users to share links to specific tabs.
+2. **Built-in Search (`enableSearch`)**: When enabled, provides a search input that filters fields across all tabs by matching against their `label` and `description` props.
+3. **Auto-jump**: When searching, if the current tab yields no results, it automatically jumps to the first tab containing matching fields.
+4. **Field Counters**: Displays a badge on each tab showing the number of matching fields during a search.
+5. **FormTable Integration**: Automatically wraps the tab's fields in a `FormTable` for consistent alignment and styling.

@@ -17,10 +17,12 @@ const BookingCheckoutSummary = lazyComponent(() =>
     default: module.BookingCheckoutSummary,
   })),
 );
-const UserPluginOptionsForm = lazyComponent(() =>
-  import('@/marketplace/UserPluginOptionsForm').then((module) => ({
-    default: module.UserPluginOptionsForm,
-  })),
+const DefaultUserManagementSection = lazyComponent(() =>
+  import('@/marketplace/offerings/update/integration/UserManagementSection').then(
+    (module) => ({
+      default: module.DefaultUserManagementSection,
+    }),
+  ),
 );
 const BookingOrderForm = lazyComponent(() =>
   import('./deploy/BookingOrderForm').then((module) => ({
@@ -74,7 +76,7 @@ export const BookingOffering: OfferingConfiguration = {
   },
   orderFormComponent: BookingOrderForm,
   checkoutSummaryComponent: BookingCheckoutSummary,
-  pluginOptionsForm: UserPluginOptionsForm,
+  userManagementSection: DefaultUserManagementSection,
   detailsComponent: BookingDetails,
   showComponents: true,
   schedulable: true,

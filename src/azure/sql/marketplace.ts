@@ -4,14 +4,14 @@ import { OfferingConfiguration } from '@/marketplace/common/types';
 
 import { AZURE_SQL_TYPE } from '../constants';
 
-const AzureCredentialsForm = lazyComponent(() =>
-  import('../common/AzureCredentialsForm').then((module) => ({
-    default: module.AzureCredentialsForm,
-  })),
-);
 const AzureCredentials = lazyComponent(() =>
   import('../common/AzureDetailsComponent').then((module) => ({
     default: module.AzureDetailsComponent,
+  })),
+);
+const AzureCredentialsSection = lazyComponent(() =>
+  import('../common/AzureCredentialsSection').then((module) => ({
+    default: module.AzureCredentialsSection,
   })),
 );
 const AzureSQLServerForm = lazyComponent(() =>
@@ -27,5 +27,5 @@ export const AzureSQLServerOffering: OfferingConfiguration = {
   },
   orderFormComponent: AzureSQLServerForm,
   detailsComponent: AzureCredentials,
-  credentialsForm: AzureCredentialsForm,
+  credentialsSection: AzureCredentialsSection,
 };

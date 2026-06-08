@@ -20,6 +20,7 @@ export interface EditButtonProps extends ButtonProps {
   size?: 'sm' | 'lg';
   width?: number | 'auto';
   btnIcon?: boolean;
+  iconNode?: React.ReactNode;
 }
 
 export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
@@ -36,6 +37,7 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
     className,
     disabled,
     tooltip,
+    iconNode = <PencilSimpleIcon weight="bold" />,
     ...rest
   } = props;
 
@@ -61,14 +63,14 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
       <span
         className={`svg-icon svg-icon-${size === 'sm' && !btnIcon ? '4' : '2'}`}
       >
-        <PencilSimpleIcon weight="bold" />
+        {iconNode}
       </span>
       {!btnIcon && !iconRight && label}
     </Link>
   ) : size === 'sm' ? (
     <CompactActionButton
       action={onClick}
-      iconNode={<PencilSimpleIcon weight="bold" />}
+      iconNode={iconNode}
       title={!btnIcon && label}
       variant={variant}
       iconRight={iconRight}
@@ -80,7 +82,7 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
   ) : (
     <ActionButton
       action={onClick}
-      iconNode={<PencilSimpleIcon weight="bold" />}
+      iconNode={iconNode}
       title={!btnIcon && label}
       variant={variant}
       iconRight={iconRight}

@@ -96,13 +96,6 @@ export function getCreatableOfferings(): Option[] {
     .sort((a, b) => a.label.localeCompare(b.label));
 }
 
-export function showBackendId(offeringType: string) {
-  return (
-    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].showBackendId
-  );
-}
-
 export function hidePlanAddButton(offeringType: string, fields: Array<any>) {
   return (
     Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
@@ -118,10 +111,10 @@ export function isOfferingTypeSchedulable(offeringType: string) {
   );
 }
 
-export function getPluginOptionsForm(offeringType: string) {
+export function getUserManagementSection(offeringType: string) {
   return (
     Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].pluginOptionsForm
+    REGISTRY[offeringType].userManagementSection
   );
 }
 
@@ -139,20 +132,6 @@ export function getSecretOptionsSerializer(offeringType: string) {
   );
 }
 
-export function getSecretOptionsForm(offeringType: string) {
-  return (
-    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].secretOptionsForm
-  );
-}
-
-export function getProvisioningConfigForm(offeringType: string) {
-  return (
-    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].provisioningConfigForm
-  );
-}
-
 export function getProvisioningConfigSection(offeringType: string) {
   return (
     Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
@@ -160,10 +139,10 @@ export function getProvisioningConfigSection(offeringType: string) {
   );
 }
 
-export function getCredentialsForm(offeringType: string) {
+export function getCredentialsSection(offeringType: string) {
   return (
     Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].credentialsForm
+    REGISTRY[offeringType].credentialsSection
   );
 }
 

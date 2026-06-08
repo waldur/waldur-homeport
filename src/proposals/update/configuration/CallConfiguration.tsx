@@ -1,12 +1,25 @@
-import { FC } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
+import {
+  proposalProtectedCallsAvailableComplianceChecklistsList,
+  proposalProtectedCallsPartialUpdate,
+} from 'waldur-js-client';
 
+import {
+  AsyncSelectEditField,
+  BooleanEditField,
+  EditFieldProvider,
+  NumberEditField,
+} from '@/form/editFields';
 import FormTable from '@/form/FormTable';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import { ApplicantVisibilitySection } from '@/proposals/update/applicant-visibility/ApplicantVisibilitySection';
 
-import { EditGeneralInfoButton } from '../general/EditGeneralInfoButton';
 import { WorkflowStepsSection } from '../workflow-steps/WorkflowStepsSection';
 
 import { CallResourceTemplates } from './CallResourceTemplates';
@@ -17,48 +30,63 @@ interface CallConfigurationProps {
   isReadOnly?: boolean;
 }
 
-const configRows = [
-  {
-    label: translate('Fixed duration'),
-    key: 'fixed_duration_in_days',
-    getValue: (call) =>
-      call.fixed_duration_in_days
-        ? translate('{n} days', {
-            n: call.fixed_duration_in_days,
-          })
-        : 'N/A',
-    title: translate('Edit fixed duration for granted projects (in days)'),
-  },
-  {
-    label: translate('Compliance checklist'),
-    key: 'compliance_checklist',
-    getValue: (call) =>
-      call.compliance_checklist_name || translate('Not configured'),
-    title: translate('Edit compliance checklist for proposal evaluation'),
-  },
-  {
-    label: translate('Reviewer identity visible to applicants'),
-    key: 'reviewer_identity_visible_to_submitters',
-    getValue: (call) =>
-      call.reviewer_identity_visible_to_submitters
-        ? translate('Yes')
-        : translate('No'),
-    title: translate('Edit reviewer identity visibility for applicants'),
-  },
-  {
-    label: translate('Reviews visible to applicants'),
-    key: 'reviews_visible_to_submitters',
-    getValue: (call) =>
-      call.reviews_visible_to_submitters ? translate('Yes') : translate('No'),
-    title: translate('Edit reviews visibility for applicants'),
-  },
-];
-
 export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
-  // Filter compliance checklist configuration based on experimental UI toggle
-  const filteredConfigRows = configRows.filter(
-    (row) =>
-      row.key !== 'compliance_checklist' || isExperimentalUiComponentsVisible(),
+  const queryClient = useQueryClient();
+  const { confirm } = useModal();
+
+  const { mutateAsync: updateCall } = useManagedMutation({
+    mutationFn: (body: any) =>
+      proposalProtectedCallsPartialUpdate({
+        path: { uuid: props.call.uuid },
+        body,
+      }),
+    successMessage: translate('The call has been updated.'),
+    errorMessage: translate('Unable to update call.'),
+    onSuccess: async () => {
+      props.refetch();
+      await queryClient.invalidateQueries({
+        queryKey: ['Call', props.call.uuid],
+      });
+    },
+    closeModal: false,
+  });
+
+  const handleSubmit = async (formData: Record<string, any>) => {
+    if (formData.fixed_duration_in_days) {
+      try {
+        await confirm(
+          translate('Confirmation'),
+          translate(
+            'This will also update durations of connected proposals in Draft or In Review states. Continue?',
+          ),
+        );
+      } catch {
+        return Promise.reject();
+      }
+    }
+
+    const body = { ...formData };
+    if ('compliance_checklist' in body) {
+      body.compliance_checklist =
+        (body.compliance_checklist as any)?.value ||
+        body.compliance_checklist ||
+        null;
+    }
+
+    return updateCall(body);
+  };
+
+  const loadComplianceChecklists = useMemo(
+    () =>
+      createLoadOptions(
+        proposalProtectedCallsAvailableComplianceChecklistsList,
+        'name',
+        {
+          checklist_type: 'proposal_compliance',
+          customer_uuid: props.call.customer_uuid,
+        },
+      ),
+    [props.call.customer_uuid],
   );
 
   return (
@@ -67,23 +95,55 @@ export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
         title={translate('General configuration')}
         className="card-bordered mb-5"
       >
-        <FormTable>
-          {filteredConfigRows.map((row) => (
-            <FormTable.Item
-              label={row.label}
-              value={row.getValue(props.call)}
-              actions={
-                <EditGeneralInfoButton
-                  call={props.call}
-                  name={row.key}
-                  title={row.title}
-                  refetch={props.refetch}
-                  disabled={props.isReadOnly}
-                />
+        <EditFieldProvider scope={props.call} callback={handleSubmit}>
+          <FormTable>
+            <NumberEditField
+              name="fixed_duration_in_days"
+              label={translate('Fixed duration for granted projects (in days)')}
+              disabled={props.isReadOnly}
+              renderValue={(value) =>
+                value ? translate('{n} days', { n: value }) : 'N/A'
               }
             />
-          ))}
-        </FormTable>
+            {isExperimentalUiComponentsVisible() && (
+              <AsyncSelectEditField
+                name="compliance_checklist"
+                label={translate('Compliance checklist')}
+                description={translate(
+                  'Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.',
+                )}
+                loadOptions={loadComplianceChecklists}
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.name}
+                isClearable={true}
+                placeholder={translate(
+                  'Select compliance checklist (optional)',
+                )}
+                disabled={props.isReadOnly}
+                renderValue={() =>
+                  props.call.compliance_checklist_name ||
+                  translate('Not configured')
+                }
+              />
+            )}
+            <BooleanEditField
+              name="reviewer_identity_visible_to_submitters"
+              label={translate('Reviewer identity visible to applicants')}
+              disabled={props.isReadOnly}
+              renderValue={(value) =>
+                value ? translate('Yes') : translate('No')
+              }
+            />
+            <BooleanEditField
+              name="reviews_visible_to_submitters"
+              label={translate('Reviews visible to applicants')}
+              disabled={props.isReadOnly}
+              renderValue={(value) =>
+                value ? translate('Yes') : translate('No')
+              }
+            />
+          </FormTable>
+        </EditFieldProvider>
       </FormTable.Card>
 
       <ApplicantVisibilitySection

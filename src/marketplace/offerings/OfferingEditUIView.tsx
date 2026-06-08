@@ -3,22 +3,19 @@ import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
 import { marketplacePluginsList } from 'waldur-js-client';
 
-import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
-import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 
 import {
-  getCredentialsForm,
-  getPluginOptionsForm,
-  getProvisioningConfigForm,
-  getSecretOptionsForm,
+  getCredentialsSection,
+  getProvisioningConfigSection,
+  getUserManagementSection,
   showComponentsList,
 } from '../common/registry';
 
@@ -27,11 +24,7 @@ const OverviewSection = lazyComponent(() =>
     default: module.OverviewSection,
   })),
 );
-const CredentialsSection = lazyComponent(() =>
-  import('./update/integration/CredentialsSection').then((module) => ({
-    default: module.CredentialsSection,
-  })),
-);
+
 const LifecyclePolicySection = lazyComponent(() =>
   import('./update/integration/LifecyclePolicySection').then((module) => ({
     default: module.LifecyclePolicySection,
@@ -44,11 +37,7 @@ const ResourceDisplayOptionsSection = lazyComponent(() =>
     }),
   ),
 );
-const UserManagementSection = lazyComponent(() =>
-  import('./update/integration/UserManagementSection').then((module) => ({
-    default: module.UserManagementSection,
-  })),
-);
+
 const AdvancedIntegrationSection = lazyComponent(() =>
   import('./update/integration/AdvancedIntegrationSection').then((module) => ({
     default: module.AdvancedIntegrationSection,
@@ -57,11 +46,6 @@ const AdvancedIntegrationSection = lazyComponent(() =>
 const TosManagementSection = lazyComponent(() =>
   import('./update/tos/TosManagementSection').then((module) => ({
     default: module.TosManagementSection,
-  })),
-);
-const ProvisioningConfigSection = lazyComponent(() =>
-  import('./update/integration/ProvisioningConfigSection').then((module) => ({
-    default: module.ProvisioningConfigSection,
   })),
 );
 const OfferingEndpointsSection = lazyComponent(() =>
@@ -118,16 +102,15 @@ const RolesSection = lazyComponent(() =>
 );
 
 const buildIntegrationTab = (offering: Offering): PageBarTab => {
-  const CredentialsForm = getCredentialsForm(offering.type);
-  const SecretOptionsForm = getSecretOptionsForm(offering.type);
-  const PluginOptionsForm = getPluginOptionsForm(offering.type);
-  const provisioningConfigForm = getProvisioningConfigForm(offering.type);
+  const CredentialsSection = getCredentialsSection(offering.type);
+  const UserManagementSection = getUserManagementSection(offering.type);
+  const provisioningConfigSection = getProvisioningConfigSection(offering.type);
 
   return {
     key: 'integration',
     title: translate('Integration'),
     children: [
-      CredentialsForm && {
+      CredentialsSection && {
         key: 'credentials',
         component: CredentialsSection,
         title: translate('Credentials'),
@@ -142,7 +125,7 @@ const buildIntegrationTab = (offering: Offering): PageBarTab => {
         component: ResourceDisplayOptionsSection,
         title: translate('Resource display options'),
       },
-      (SecretOptionsForm || PluginOptionsForm) && {
+      UserManagementSection && {
         key: 'user-management',
         component: UserManagementSection,
         title: translate('User management'),
@@ -153,12 +136,9 @@ const buildIntegrationTab = (offering: Offering): PageBarTab => {
         component: AdvancedIntegrationSection,
         title: translate('Advanced'),
       },
-      (provisioningConfigForm ||
-        [OFFERING_TYPE_CUSTOM_SCRIPTS, OFFERING_TYPE_BOOKING].includes(
-          offering.type,
-        )) && {
+      provisioningConfigSection && {
         key: 'provisioning-configuration',
-        component: ProvisioningConfigSection,
+        component: provisioningConfigSection,
         title: translate('Provisioning configuration'),
       },
     ].filter(Boolean),

@@ -1,40 +1,32 @@
 import { BuildingsIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
-import { customersRetrieve, Project } from 'waldur-js-client';
+import { FC, useCallback } from 'react';
+import {
+  customersRetrieve,
+  Project,
+  projectsPartialUpdate,
+} from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
-import {
-  getRestrictionsArray,
-  MembershipRestrictionFormItems,
-  RestrictionField,
-} from '@/core/restrictions';
+import { MembershipRestrictionFormItems } from '@/core/restrictions';
 import { Tip } from '@/core/Tooltip';
+import { EditFieldProvider } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { useUser } from '@/workspace/hooks';
-
-import { getInitialValues } from './restrictions/EditProjectMembershipRestrictionsDialog.helpers';
+import { useSetProject, useUser } from '@/workspace/hooks';
 
 interface ProjectMembershipRestrictionsProps {
   project: Project;
 }
-
-const EditProjectMembershipRestrictionsDialog = lazyComponent(() =>
-  import('./restrictions/EditProjectMembershipRestrictionsDialog').then(
-    (module) => ({
-      default: module.EditProjectMembershipRestrictionsDialog,
-    }),
-  ),
-);
 
 const OrganizationRestrictionsDialog = lazyComponent(() =>
   import('./restrictions/OrganizationRestrictionsDialog').then((module) => ({
@@ -52,6 +44,7 @@ export const ProjectMembershipRestrictions: FC<
 > = ({ project }) => {
   const { openDialog } = useModal();
   const user = useUser();
+  const setProject = useSetProject();
 
   // Fetch customer data for inherited restrictions
   const {
@@ -75,29 +68,19 @@ export const ProjectMembershipRestrictions: FC<
     customerId: project.customer_uuid,
   });
 
-  const restrictionData = useMemo(
-    () => ({
-      emailPatterns: getRestrictionsArray(project.user_email_patterns),
-      affiliations: getRestrictionsArray(project.user_affiliations),
-      identitySources: getRestrictionsArray(project.user_identity_sources),
-      nationalities: getRestrictionsArray(project['user_nationalities']),
-      organizationTypes: getRestrictionsArray(
-        project['user_organization_types'],
-      ),
-      assuranceLevels: getRestrictionsArray(project['user_assurance_levels']),
-    }),
-    [project],
-  );
-
-  const openEditDialog = useCallback(
-    (field: RestrictionField) => {
-      openDialog(EditProjectMembershipRestrictionsDialog, {
-        resolve: { project, field },
-        initialValues: getInitialValues(project, field),
-      });
+  const { mutateAsync: updateProject } = useManagedMutation({
+    mutationFn: (formData: Record<string, any>) =>
+      projectsPartialUpdate({
+        path: { uuid: project.uuid },
+        body: formData,
+      }),
+    successMessage: translate('Membership restrictions updated successfully.'),
+    errorMessage: translate('Failed to update membership restrictions.'),
+    onSuccess: (response) => {
+      setProject(response.data);
     },
-    [project],
-  );
+    closeModal: false,
+  });
 
   const openOrganizationRestrictionsDialog = useCallback(() => {
     if (customer) {
@@ -147,13 +130,11 @@ export const ProjectMembershipRestrictions: FC<
         />
       }
     >
-      <FormTable>
-        <MembershipRestrictionFormItems
-          data={restrictionData}
-          canEdit={canEdit}
-          onEditField={openEditDialog}
-        />
-      </FormTable>
+      <EditFieldProvider scope={project} callback={updateProject}>
+        <FormTable hideActions={!canEdit}>
+          <MembershipRestrictionFormItems />
+        </FormTable>
+      </EditFieldProvider>
     </Panel>
   );
 };

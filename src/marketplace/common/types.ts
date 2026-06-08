@@ -6,10 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { CheckoutSummaryProps } from '../deploy/types';
-import {
-  OfferingEditPanelFormProps,
-  OfferingEditPanelProps,
-} from '../offerings/update/integration/types';
+import { OfferingEditPanelProps } from '../offerings/update/integration/types';
 import {
   AttributesType,
   Offering,
@@ -29,20 +26,14 @@ export interface OfferingConfiguration<
   orderFormComponent?: LazyExoticComponent<
     ComponentType<OrderFormComponentProps>
   >;
-  pluginOptionsForm?: LazyExoticComponent<
-    ComponentType<OfferingEditPanelFormProps>
-  >;
-  secretOptionsForm?: LazyExoticComponent<
-    ComponentType<OfferingEditPanelFormProps>
-  >;
-  provisioningConfigForm?: LazyExoticComponent<
-    ComponentType<OfferingEditPanelFormProps>
+  userManagementSection?: LazyExoticComponent<
+    ComponentType<OfferingEditPanelProps>
   >;
   provisioningConfigSection?: LazyExoticComponent<
     ComponentType<OfferingEditPanelProps>
   >;
-  credentialsForm?: LazyExoticComponent<
-    ComponentType<OfferingEditPanelFormProps>
+  credentialsSection?: LazyExoticComponent<
+    ComponentType<OfferingEditPanelProps>
   >;
   detailsComponent?: LazyExoticComponent<ComponentType<OrderDetailsProps>>;
   checkoutSummaryComponent?: LazyExoticComponent<
@@ -61,7 +52,7 @@ export interface OfferingConfiguration<
   onlyOnePlan?: boolean;
   disableOfferingCreation?: boolean;
   schedulable?: boolean;
-  showBackendId?: boolean;
+
   offeringComponentsFilter?: (
     formData: any,
     components: OfferingComponent[],
