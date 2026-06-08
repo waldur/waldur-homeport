@@ -39,18 +39,35 @@ export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
     ref,
   ) => {
     const ellipsisClass = ellipsis ? 'ellipsis-' + ellipsis : '';
-    const sref = useSref(to || '404', params);
+    const isLink = Boolean(to);
+    const sref = useSref(to ?? 'profile.details', params);
+    const isStatic = !isLink && !onClick;
+
+    const handleClick =
+      isLink || onClick
+        ? (event) => {
+            if (isLink) {
+              sref?.onClick?.(event);
+            }
+            onClick?.(event);
+          }
+        : undefined;
 
     return (
       <Breadcrumb.Item
         {...rest}
-        {...(to ? sref : {})}
-        onClick={(event) => {
-          if (sref?.onClick) sref.onClick(event);
-          if (onClick) onClick(event);
-        }}
+        {...(isLink ? sref : {})}
+        linkAs={isStatic ? 'span' : undefined}
+        linkProps={
+          isStatic
+            ? { className: 'breadcrumb-item-static-label', tabIndex: undefined }
+            : undefined
+        }
+        onClick={handleClick}
         ref={ref}
-        className={classNames(className, ellipsisClass)}
+        className={classNames(className, ellipsisClass, {
+          'breadcrumb-item-static': isStatic,
+        })}
       >
         {isBack && (
           <>
