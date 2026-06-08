@@ -76,7 +76,7 @@ export const ChangeEndDateRequestDialog: FC<
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Change end date')}
+            title={translate('Request end date change.')}
             subtitle={translate(
               "Submit a request to modify the project's end date.",
             )}
