@@ -26,7 +26,7 @@ export const ChangeEndDateCardButton: FC<ChangeEndDateCardButtonProps> = ({
     return null;
   }
 
-  const label = translate('Change end date');
+  const label = translate('Request end date change.');
 
   return (
     <CompactActionButton
