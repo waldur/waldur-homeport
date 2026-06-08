@@ -58,7 +58,7 @@ describe('SecurityGroupEditorDialog', () => {
       new Promise(() => {}) as any,
     );
     renderDialog();
-    expect(await screen.findByTestId('spinner')).toBeInTheDocument();
+    expect(await screen.findByTestId('SpinnerIcon')).toBeInTheDocument();
   });
 
   it('fills inputs with existing rule values', async () => {

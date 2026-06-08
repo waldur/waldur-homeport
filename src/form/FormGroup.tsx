@@ -116,12 +116,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           label={tooltip}
           {...tooltipProps}
         >
-          <QuestionIcon
-            weight="bold"
-            size={20}
-            className="text-muted"
-            data-testid="question-icon"
-          />{' '}
+          <QuestionIcon weight="bold" size={20} className="text-muted" />{' '}
         </Tip>
       )}
       {label}
@@ -162,7 +157,6 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
                 weight="bold"
                 size={isLegacyCloneElement ? 20 : 16}
                 className="text-muted"
-                data-testid="question-icon"
               />
             </Tip>
           )}

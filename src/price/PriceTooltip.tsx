@@ -33,11 +33,7 @@ export const PriceTooltip: FC<PriceTooltipProps> = ({
   return (
     <span className="ms-1 hidden-print">
       <Tip label={message} id="price-tooltip">
-        <WarningCircleIcon
-          weight="bold"
-          size={size}
-          data-testid="price-tooltip-icon"
-        />
+        <WarningCircleIcon weight="bold" size={size} />
       </Tip>
     </span>
   );

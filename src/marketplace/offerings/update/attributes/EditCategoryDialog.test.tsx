@@ -35,10 +35,10 @@ describe('EditCategoryDialog', () => {
 
   it('renders loading state then categories', async () => {
     renderComponent();
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     expect(screen.getByText('Edit category')).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('EditCategoryDialog', () => {
     renderComponent();
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     // Select Category 2

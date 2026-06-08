@@ -74,11 +74,11 @@ describe('QuotaUsageBarChartDescription', () => {
 
   it("should render danger message if quota's usage exceeds limit", () => {
     renderWrapper({ quota: quotas[1] });
-    expect(screen.getByTestId('warning')).toBeInTheDocument();
+    expect(screen.getByTestId('WarningIcon')).toBeInTheDocument();
   });
 
   it("should not render danger message if quota's usage does not exceed limit", () => {
     renderWrapper({ quota: quotas[0] });
-    expect(screen.queryByTestId('warning')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('WarningIcon')).not.toBeInTheDocument();
   });
 });

@@ -2,18 +2,11 @@
 
 exports[`AttributeCell > renders boolean value 1`] = `
 <div>
-  <svg
+  <span
     class="text-info"
-    fill="currentColor"
-    height="1em"
-    viewBox="0 0 256 256"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"
-    />
-  </svg>
+    data-testid="CheckIcon"
+    weight="bold"
+  />
 </div>
 `;
 
@@ -32,32 +25,18 @@ exports[`AttributeCell > renders invalid choice attribute 1`] = `
 exports[`AttributeCell > renders list attribute 1`] = `
 <div>
   <span>
-    <svg
-      fill="currentColor"
-      height="1em"
-      viewBox="0 0 256 256"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"
-      />
-    </svg>
+    <span
+      data-testid="CheckIcon"
+      weight="bold"
+    />
      Intel Xeon E5-2650v3
     <br />
   </span>
   <span>
-    <svg
-      fill="currentColor"
-      height="1em"
-      viewBox="0 0 256 256"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"
-      />
-    </svg>
+    <span
+      data-testid="CheckIcon"
+      weight="bold"
+    />
      Intel Xeon E5-2680v3
     <br />
   </span>
@@ -66,18 +45,11 @@ exports[`AttributeCell > renders list attribute 1`] = `
 
 exports[`AttributeCell > renders negative boolean value 1`] = `
 <div>
-  <svg
+  <span
     class="text-danger"
-    fill="currentColor"
-    height="1em"
-    viewBox="0 0 256 256"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"
-    />
-  </svg>
+    data-testid="XIcon"
+    weight="bold"
+  />
 </div>
 `;
 

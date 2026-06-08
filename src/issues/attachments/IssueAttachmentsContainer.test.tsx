@@ -73,7 +73,7 @@ describe('IssueAttachmentsContainer', () => {
 
     renderComponent();
 
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
   });
 
   it('renders attachments list when data is loaded', async () => {
@@ -116,7 +116,7 @@ describe('IssueAttachmentsContainer', () => {
     renderComponent({ ...mockIssue, add_attachment_is_available: false });
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
     expect(screen.queryByTestId('upload-container')).not.toBeInTheDocument();
   });
@@ -152,7 +152,7 @@ describe('IssueAttachmentsContainer', () => {
       { queryClient },
     );
 
-    expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     expect(screen.getByRole('list')).toBeInTheDocument();
     expect(screen.getByText('file1.pdf')).toBeInTheDocument();
   });

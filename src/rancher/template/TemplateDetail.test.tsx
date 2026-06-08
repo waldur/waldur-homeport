@@ -34,7 +34,7 @@ describe('TemplateDetail', () => {
       new Promise(() => {}) as any,
     );
     renderComponent();
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
   });
 
   it('renders form after data is loaded', async () => {

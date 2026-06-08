@@ -3,5 +3,5 @@ import { expect } from 'vitest';
 
 export const waitForSpinner = () =>
   waitFor(() =>
-    expect(screen.queryByTestId('spinner')).not.toBeInTheDocument(),
+    expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument(),
   );

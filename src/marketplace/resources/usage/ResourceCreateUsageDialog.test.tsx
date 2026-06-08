@@ -103,7 +103,7 @@ describe('ResourceCreateUsageDialog', () => {
     vi.mocked(getProviderUsageComponents).mockResolvedValue(mockData);
     renderDialog(props);
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
     expect(screen.getByText('Client organization')).toBeInTheDocument();
     expect(
@@ -119,7 +119,7 @@ describe('ResourceCreateUsageDialog', () => {
 
     renderDialog(props);
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     const amountInput = screen.getByPlaceholderText('Amount *');

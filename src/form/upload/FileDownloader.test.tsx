@@ -36,7 +36,7 @@ describe('FileDownloader', () => {
 
     await user.click(screen.getByRole('button'));
     await waitFor(() => {
-      expect(screen.getByTestId('spinner')).toBeInTheDocument();
+      expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
     });
   });
 

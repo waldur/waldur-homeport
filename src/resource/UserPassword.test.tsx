@@ -10,13 +10,13 @@ describe('UserPassword', () => {
   it('renders placeholder and open eye icon by default', () => {
     render(<UserPassword password="secret" />);
     expect(screen.getByText('***************')).toBeInTheDocument();
-    expect(screen.getByTestId('eye')).toBeInTheDocument();
+    expect(screen.getByTestId('EyeIcon')).toBeInTheDocument();
   });
 
   it('renders password and closed eye icon when user click on toggle icon', async () => {
     render(<UserPassword password="secret" />);
     await user.click(screen.getByRole('button'));
     expect(screen.getByText('secret')).toBeInTheDocument();
-    expect(screen.getByTestId('eye-slash')).toBeInTheDocument();
+    expect(screen.getByTestId('EyeSlashIcon')).toBeInTheDocument();
   });
 });

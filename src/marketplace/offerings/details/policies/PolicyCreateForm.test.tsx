@@ -103,7 +103,7 @@ describe('PolicyCreateDialog', () => {
   describe('Common behavior', () => {
     it('should render loading spinner and then the form', async () => {
       renderComponent('cost');
-      expect(screen.getByTestId('spinner')).toBeInTheDocument();
+      expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
       await waitForSpinner();
       expect(
         screen.getByText('When estimated cost reaches'),

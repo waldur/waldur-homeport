@@ -68,7 +68,7 @@ describe('IssueCommentsContainer', () => {
 
     renderComponent();
 
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
   });
 
   it('renders comments list when data is loaded and sorts them', async () => {

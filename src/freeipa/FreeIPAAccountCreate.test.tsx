@@ -54,7 +54,7 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     // After refactoring, help text is shown as a tooltip with question mark icon
-    expect(screen.getByTestId('question-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('QuestionIcon')).toBeInTheDocument();
   });
 
   it('should validate required username field', async () => {

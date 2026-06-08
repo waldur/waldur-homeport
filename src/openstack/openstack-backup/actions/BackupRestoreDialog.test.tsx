@@ -84,7 +84,7 @@ const renderDialog = async () => {
     <BackupRestoreDialog resolve={{ resource: fakeBackup }} />,
   );
   await waitFor(() =>
-    expect(screen.queryByTestId('spinner')).not.toBeInTheDocument(),
+    expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument(),
   );
 };
 
@@ -110,7 +110,7 @@ describe('BackupRestoreDialog', () => {
       <BackupRestoreDialog resolve={{ resource: fakeBackup }} />,
     );
     await waitFor(() => {
-      expect(screen.getByTestId('spinner')).toBeInTheDocument();
+      expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
     });
   });
 
@@ -381,7 +381,7 @@ describe('BackupRestoreDialog', () => {
     );
 
     await waitFor(() =>
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument(),
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument(),
     );
 
     // Select flavor and submit

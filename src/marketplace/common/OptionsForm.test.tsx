@@ -98,7 +98,7 @@ describe('OptionsForm Integration', () => {
       };
 
       renderForm(options);
-      expect(screen.getByTestId('question-icon')).toBeInTheDocument();
+      expect(screen.getByTestId('QuestionIcon')).toBeInTheDocument();
     });
   });
 

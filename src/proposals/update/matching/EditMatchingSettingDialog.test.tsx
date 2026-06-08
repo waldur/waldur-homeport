@@ -54,7 +54,7 @@ describe('EditMatchingSettingDialog', () => {
       <EditMatchingSettingDialog {...makeProps('keyword_weight')} />,
     );
 
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
   });
 
   it('renders a SELECT field for affinity_method with the loaded value', async () => {

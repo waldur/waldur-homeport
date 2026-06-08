@@ -70,7 +70,7 @@ describe('ChangePlanDialog', () => {
   it('should show loading spinner initially', () => {
     vi.mocked(loadData).mockImplementation(() => new Promise(() => {}));
     renderDialog();
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
   });
 
   it('should show error message when data loading fails', async () => {

@@ -39,7 +39,7 @@ describe('CategoryEditDialog', () => {
     renderComponent();
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     expect(screen.getByText('Create category')).toBeInTheDocument();
@@ -66,7 +66,7 @@ describe('CategoryEditDialog', () => {
     renderComponent({ uuid: 'cat-uuid' });
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     expect(screen.getByText('Edit Test Category')).toBeInTheDocument();
@@ -83,7 +83,7 @@ describe('CategoryEditDialog', () => {
     renderComponent();
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     const submitButton = screen.getByRole('button', { name: 'Create' });
@@ -105,7 +105,7 @@ describe('CategoryEditDialog', () => {
     renderComponent(null, mockRefetch);
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     await user.type(screen.getByLabelText(/Title/i), 'New Category');
@@ -153,7 +153,7 @@ describe('CategoryEditDialog', () => {
     renderComponent({ uuid: 'cat-uuid' }, mockRefetch);
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     expect(screen.getByLabelText(/Title/i)).toHaveValue('Old Category');
@@ -181,7 +181,7 @@ describe('CategoryEditDialog', () => {
     renderComponent();
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     const file = new File(['hello'], 'hello.png', { type: 'image/png' });

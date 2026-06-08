@@ -28,7 +28,7 @@ describe('ViewYAMLDialog', () => {
     mockYamlRetrieve.mockReturnValue(new Promise(() => {})); // Never resolves
     renderDialog();
 
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
   });
 
   it('renders YAML content after successful fetch', async () => {
@@ -44,7 +44,7 @@ describe('ViewYAMLDialog', () => {
     );
 
     await waitFor(() => {
-      expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
     });
 
     await waitFor(() => {

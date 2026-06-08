@@ -27,7 +27,6 @@ export const WarningTooltip = () => {
             size={18}
             weight="bold"
             className="ms-2 text-warning mb-1"
-            data-testid="warning"
           />
         </Tip>
       )}

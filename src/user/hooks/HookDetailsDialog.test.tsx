@@ -47,7 +47,7 @@ describe('HookDetailsDialog', () => {
         <HookDetailsDialog resolve={{ refetch: mockRefetch }} />,
       );
       await waitFor(() => {
-        expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+        expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
       });
     };
 
@@ -124,14 +124,14 @@ describe('HookDetailsDialog', () => {
         />,
       );
       await waitFor(() => {
-        expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+        expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
       });
     };
 
     it('should render update form with existing hook data', async () => {
       await renderUpdate();
       await waitFor(() => {
-        expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+        expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
         expect(screen.getByText('Webhook')).toBeInTheDocument();
         expect(
           screen.getByDisplayValue('https://example.com/webhook'),

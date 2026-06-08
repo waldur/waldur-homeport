@@ -55,7 +55,6 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
                   size={20}
                   weight="bold"
                   className="ms-2 text-muted mb-1"
-                  data-testid="tooltip"
                 />,
               )}
             {Boolean(props.warnTooltip) &&
@@ -65,7 +64,6 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
                   size={20}
                   weight="bold"
                   className="ms-2 text-warning mb-1"
-                  data-testid="warning"
                 />,
               )}
             {props.colon && ':'}
@@ -94,7 +92,6 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
                   size={20}
                   weight="bold"
                   className="ms-2 text-muted mb-1"
-                  data-testid="tooltip"
                 />,
               )}
             {Boolean(props.warnTooltip) &&

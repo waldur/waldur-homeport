@@ -33,6 +33,6 @@ describe('SubmitButton', () => {
     renderButton({ submitting: true });
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    expect(screen.getByTestId('SpinnerIcon')).toBeInTheDocument();
   });
 });

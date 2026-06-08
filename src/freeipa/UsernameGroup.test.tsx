@@ -27,7 +27,7 @@ describe('UsernameGroup', () => {
     renderComponent();
     expect(screen.getByText('Username')).toBeInTheDocument();
     // Description is provided, which renders question mark icon in the FormGroup
-    expect(screen.getByTestId('question-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('QuestionIcon')).toBeInTheDocument();
   });
 
   it('renders with custom props', () => {
@@ -38,7 +38,7 @@ describe('UsernameGroup', () => {
     });
     expect(screen.getByText('Custom Username')).toBeInTheDocument();
     // Description is provided, which renders question mark icon in the FormGroup
-    expect(screen.getByTestId('question-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('QuestionIcon')).toBeInTheDocument();
   });
 
   it('shows username prefix when configured', () => {

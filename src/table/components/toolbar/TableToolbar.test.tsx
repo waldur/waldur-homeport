@@ -167,7 +167,7 @@ describe('TableToolbarTitle', () => {
         config: { ...createMockTableContext().config, hideRefresh: false },
       });
 
-      expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
+      expect(screen.getByTestId('ArrowsClockwiseIcon')).toBeInTheDocument();
     });
 
     it('hides refresh button when hideRefresh is true', () => {

@@ -61,14 +61,12 @@ describe('FormSteps', () => {
       // First step should not have lock icon
       const generalTab = screen.getByTestId('tab-step-general');
       expect(
-        within(generalTab).queryByTestId('step-locked-icon'),
+        within(generalTab).queryByTestId('LockIcon'),
       ).not.toBeInTheDocument();
 
       // Other steps should have lock icon and muted text
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(
-        within(planTab).getByTestId('step-locked-icon'),
-      ).toBeInTheDocument();
+      expect(within(planTab).getByTestId('LockIcon')).toBeInTheDocument();
       expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
     });
 
@@ -99,9 +97,7 @@ describe('FormSteps', () => {
       // Plan step is required but not completed - should have circle icon
       const planTab = screen.getByTestId('tab-step-plan');
       // CircleIcon should be present (not CheckCircleIcon)
-      expect(
-        within(planTab).getByTestId('step-incomplete-icon'),
-      ).toBeInTheDocument();
+      expect(within(planTab).getByTestId('CircleIcon')).toBeInTheDocument();
     });
 
     it('does not show circle for optional steps that are not completed', () => {
@@ -116,9 +112,7 @@ describe('FormSteps', () => {
       // Additional configuration is optional and not completed
       const additionalTab = screen.getByTestId('tab-step-additional');
       // Should not have any icon
-      expect(
-        within(additionalTab).queryByTestId('step-incomplete-icon'),
-      ).toBeNull();
+      expect(within(additionalTab).queryByTestId('CircleIcon')).toBeNull();
     });
   });
 
@@ -137,10 +131,10 @@ describe('FormSteps', () => {
       const planTab = screen.getByTestId('tab-step-plan');
 
       expect(
-        within(generalTab).getByTestId('step-completed-icon'),
+        within(generalTab).getByTestId('CheckCircleIcon'),
       ).toBeInTheDocument();
       expect(
-        within(planTab).getByTestId('step-completed-icon'),
+        within(planTab).getByTestId('CheckCircleIcon'),
       ).toBeInTheDocument();
     });
   });
@@ -158,7 +152,7 @@ describe('FormSteps', () => {
 
       const planTab = screen.getByTestId('tab-step-plan');
       expect(
-        within(planTab).getByTestId('step-error-icon'),
+        within(planTab).getByTestId('WarningCircleIcon'),
       ).toBeInTheDocument();
     });
 
@@ -173,9 +167,7 @@ describe('FormSteps', () => {
       );
 
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(
-        within(planTab).getByTestId('step-critical-error-icon'),
-      ).toBeInTheDocument();
+      expect(within(planTab).getByTestId('XCircleIcon')).toBeInTheDocument();
     });
 
     it('filters out required errors by default', () => {
@@ -191,7 +183,7 @@ describe('FormSteps', () => {
       // Required errors are filtered out, so no warning icon
       const planTab = screen.getByTestId('tab-step-plan');
       expect(
-        within(planTab).queryByTestId('step-error-icon'),
+        within(planTab).queryByTestId('WarningCircleIcon'),
       ).not.toBeInTheDocument();
     });
 
@@ -208,7 +200,7 @@ describe('FormSteps', () => {
 
       const planTab = screen.getByTestId('tab-step-plan');
       expect(
-        within(planTab).getByTestId('step-error-icon'),
+        within(planTab).getByTestId('WarningCircleIcon'),
       ).toBeInTheDocument();
     });
   });
@@ -228,7 +220,7 @@ describe('FormSteps', () => {
       expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
       // Should not have success check icon
       expect(
-        within(planTab).queryByTestId('step-completed-icon'),
+        within(planTab).queryByTestId('CheckCircleIcon'),
       ).not.toBeInTheDocument();
     });
 
@@ -246,7 +238,7 @@ describe('FormSteps', () => {
       const planTab = screen.getByTestId('tab-step-plan');
       expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
       expect(
-        within(planTab).queryByTestId('step-error-icon'),
+        within(planTab).queryByTestId('WarningCircleIcon'),
       ).not.toBeInTheDocument();
     });
 
@@ -262,11 +254,9 @@ describe('FormSteps', () => {
       );
 
       const planTab = screen.getByTestId('tab-step-plan');
+      expect(within(planTab).getByTestId('XCircleIcon')).toBeInTheDocument();
       expect(
-        within(planTab).getByTestId('step-critical-error-icon'),
-      ).toBeInTheDocument();
-      expect(
-        within(planTab).queryByTestId('step-error-icon'),
+        within(planTab).queryByTestId('WarningCircleIcon'),
       ).not.toBeInTheDocument();
     });
   });

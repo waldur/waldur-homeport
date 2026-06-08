@@ -148,7 +148,7 @@ Most common service dependencies are mocked globally in `test/setupTests.js`. Th
 - **`@/modal/actions`**: Provides `useModal` with a default `confirm` that resolves successfully.
 - **`@/workspace/hooks`**: Mocks hooks like `useUser`, `useCustomer`, and `useProject`.
 - **`@/router` & `@uirouter/react`**: Globally mocked. Provides common hooks (`useRouter`, `useCurrentStateAndParams`).
-- **`@phosphor-icons/react`**: Globally mocked using a Proxy. Icons are replaced with `<span>` elements containing `data-testid="icon-IconName"`.
+- **`@phosphor-icons/react`**: Globally mocked using a Proxy. Icons are replaced with `<span>` elements containing `data-testid="IconName"`.
 - **`@/i18n`**: Mocks `translate` and JSX formatters to return literal strings or simple fragments.
 
 ### Recommended Patterns
@@ -350,7 +350,7 @@ Icons are mocked globally using a Proxy. This keeps `screen.debug()` clean and a
 it('renders a plus icon', () => {
   renderComponent();
   // If component uses <PlusCircle weight="bold" />
-  const icon = screen.getByTestId('icon-PlusCircle');
+  const icon = screen.getByTestId('PlusCircle');
   expect(icon).toBeInTheDocument();
   expect(icon).toHaveAttribute('weight', 'bold');
 });

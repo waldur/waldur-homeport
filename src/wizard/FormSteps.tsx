@@ -114,12 +114,7 @@ export const FormSteps: FC<{
         >
           {step.label}
           {hideStatusIcons ? null : isDisabled ? (
-            <LockIcon
-              weight="bold"
-              className="text-muted"
-              size={20}
-              data-testid="step-locked-icon"
-            />
+            <LockIcon weight="bold" className="text-muted" size={20} />
           ) : step.fields && hasCriticalErrors ? (
             <Tip
               label={<FieldErrorMessage error={criticalErrors} />}
@@ -128,12 +123,7 @@ export const FormSteps: FC<{
               placement="left"
               autoWidth
             >
-              <XCircleIcon
-                weight="bold"
-                className="text-danger"
-                size={20}
-                data-testid="step-critical-error-icon"
-              />
+              <XCircleIcon weight="bold" className="text-danger" size={20} />
             </Tip>
           ) : step.fields && hasNormalErrors ? (
             <Tip
@@ -147,23 +137,12 @@ export const FormSteps: FC<{
                 weight="bold"
                 className="text-warning"
                 size={20}
-                data-testid="step-error-icon"
               />
             </Tip>
           ) : completedSteps[i] ? (
-            <CheckCircleIcon
-              weight="bold"
-              className="text-success"
-              size={20}
-              data-testid="step-completed-icon"
-            />
+            <CheckCircleIcon weight="bold" className="text-success" size={20} />
           ) : step.required ? (
-            <CircleIcon
-              weight="bold"
-              className="text-muted"
-              size={20}
-              data-testid="step-incomplete-icon"
-            />
+            <CircleIcon weight="bold" className="text-muted" size={20} />
           ) : null}
         </div>
       ),

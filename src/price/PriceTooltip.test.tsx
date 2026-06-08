@@ -22,7 +22,7 @@ describe('PriceTooltip', () => {
   it('renders icon if accounting mode is activated', () => {
     ENV.accountingMode = 'accounting';
     render(<PriceTooltip />);
-    expect(screen.getByTestId('price-tooltip-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('WarningCircleIcon')).toBeInTheDocument();
   });
 
   it('renders tooltip with correct label if accounting mode is activated', async () => {
@@ -30,7 +30,7 @@ describe('PriceTooltip', () => {
     ENV.accountingMode = 'accounting';
     render(<PriceTooltip />);
 
-    const icon = screen.getByTestId('price-tooltip-icon');
+    const icon = screen.getByTestId('WarningCircleIcon');
     await user.hover(icon);
 
     await waitFor(() => {
@@ -43,7 +43,7 @@ describe('PriceTooltip', () => {
     ENV.accountingMode = 'accounting';
     render(<PriceTooltip estimated={true} />);
 
-    const icon = screen.getByTestId('price-tooltip-icon');
+    const icon = screen.getByTestId('WarningCircleIcon');
     await user.hover(icon);
 
     await waitFor(() => {
@@ -58,7 +58,7 @@ describe('PriceTooltip', () => {
     ENV.accountingMode = 'billing';
     render(<PriceTooltip estimated={true} />);
 
-    const icon = screen.getByTestId('price-tooltip-icon');
+    const icon = screen.getByTestId('WarningCircleIcon');
     await user.hover(icon);
 
     await waitFor(() => {
