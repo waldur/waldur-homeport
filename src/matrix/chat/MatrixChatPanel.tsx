@@ -223,8 +223,13 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
 
   // Detail pane has three mutually exclusive states, in priority order:
   // no room picked → picked but not a member → the live conversation.
+  // When `hideRoomList` is true the parent intended a single specific
+  // conversation; falling through to the room-picker placeholder would be
+  // a dead end (no sidebar to pick from). Substitute the access-denied
+  // placeholder so the viewer at least sees what's happening.
   const renderDetailContent = () => {
-    if (!detailRoomUuid) return noRoomSelectedContent;
+    if (!detailRoomUuid)
+      return hideRoomList ? accessDeniedContent : noRoomSelectedContent;
     if (roomAccessDenied) return accessDeniedContent;
     return (
       <MatrixChatDrawer
