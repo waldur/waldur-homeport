@@ -109,7 +109,14 @@ Run code duplication detection:
         - src/**/*.tsx
         - .gitlab-ci.yml
   script:
-    - npm install -g jscpd
+    # Pin to the last pure-Node release. jscpd 5.x replaced the Node
+    # implementation with a Rust binary (`cpd`) shipped per-platform via
+    # optional npm packages (cpd-{os}-{arch}-{libc}). On cold-cache
+    # runners the musl variant the Alpine image needs isn't always
+    # pulled in, and the binary also uses kebab-case flags incompatible
+    # with the legacy CLI used below. Pinning sidesteps both issues
+    # until the project is ready to migrate the script.
+    - npm install -g jscpd@4.2.5
     - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.scss"
     - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.tsx" -k 250
 

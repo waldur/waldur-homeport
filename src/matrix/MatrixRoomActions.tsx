@@ -196,6 +196,12 @@ export const ExportHistoryButton: FC<MatrixRoomActionsProps> = ({
   );
 };
 
+// Minutes after `row.modified` before a retry on an in-progress state
+// (creating/disabling) is offered. The room may still be progressing
+// inside that window; retrying would only re-dispatch an already-running
+// task. After this point we assume the worker is stalled.
+const IN_PROGRESS_STALL_THRESHOLD_MINUTES = 3;
+
 export const RetryRoomButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
@@ -208,10 +214,31 @@ export const RetryRoomButton: FC<MatrixRoomActionsProps> = ({
     closeModal: false,
   });
 
-  const canRetry =
-    row.state === 'error' ||
-    row.state === 'creating' ||
-    row.state === 'disabling';
+  const isErrorState = row.state === 'error';
+  const isInProgressState =
+    row.state === 'creating' || row.state === 'disabling';
+
+  const modifiedAt = row.modified ? new Date(row.modified).getTime() : 0;
+  const minutesSinceModified =
+    modifiedAt > 0 ? (Date.now() - modifiedAt) / 60000 : Infinity;
+  const isStalled =
+    isInProgressState &&
+    minutesSinceModified >= IN_PROGRESS_STALL_THRESHOLD_MINUTES;
+
+  // Always actionable on error; on in-progress states, only after the
+  // stall threshold so we don't double-fire a still-running task.
+  const canRetry = isErrorState || isStalled;
+
+  let disabledReason: string | undefined;
+  if (!canRetry) {
+    disabledReason = isInProgressState
+      ? translate(
+          'The room is still being processed. Retry becomes available once the operation appears stalled.',
+        )
+      : translate(
+          'Retry is only available when the room is in error or appears stalled in an in-progress state.',
+        );
+  }
 
   return (
     <ActionItem
@@ -219,13 +246,7 @@ export const RetryRoomButton: FC<MatrixRoomActionsProps> = ({
       action={() => retry()}
       iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
       disabled={!canRetry}
-      tooltip={
-        !canRetry
-          ? translate(
-              'Room must be in error, creating or disabling state to retry.',
-            )
-          : undefined
-      }
+      tooltip={disabledReason}
     />
   );
 };
