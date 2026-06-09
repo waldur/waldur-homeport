@@ -5,9 +5,16 @@ import {
   WarningCircleIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Col, Form, FormLabel, Row } from 'react-bootstrap';
-import { Field, useForm } from 'react-final-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { components } from 'react-select';
 import { useToggle } from 'react-use';
@@ -345,6 +352,18 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
   const [customIpEnabled, setCustomIpEnabled] = useToggle(false);
   const [portSecurityEnabled, setPortSecurityEnabled] = useToggle(true);
   const form = useForm();
+  const { values } = useFormState({ subscription: { values: true } });
+
+  // Track whether the user has explicitly flipped the toggle. Once true,
+  // we stop auto-defaulting on subnet changes so a deliberate choice is not
+  // clobbered when the user switches subnets.
+  const userTouchedRef = useRef(false);
+  const lastAppliedSubnetUuidRef = useRef<string | undefined>(undefined);
+
+  const firstSubnet = values?.attributes?.networks?.[0]?.subnet;
+  const firstSubnetUuid: string | undefined = firstSubnet?.uuid;
+  const firstSubnetPortSecurity: boolean | undefined =
+    firstSubnet?.port_security_enabled;
 
   const { fipQuota } = useQuotasData(props.offering);
   const fipQuotaExhausted = Boolean(
@@ -357,6 +376,22 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
   useEffect(() => {
     form.change('attributes.port_security_enabled', portSecurityEnabled);
   }, [portSecurityEnabled, form]);
+
+  // When the selected subnet changes, default the "Disable port security"
+  // toggle to match the parent network's port_security_enabled flag.
+  // Skip if the user has already made an explicit choice this session, and
+  // skip when the backend payload omits the field (older Neutron clouds).
+  useEffect(() => {
+    if (!firstSubnetUuid) return;
+    if (firstSubnetUuid === lastAppliedSubnetUuidRef.current) return;
+    lastAppliedSubnetUuidRef.current = firstSubnetUuid;
+    if (userTouchedRef.current) return;
+    if (firstSubnetPortSecurity === false) {
+      setPortSecurityEnabled(false);
+    } else if (firstSubnetPortSecurity === true) {
+      setPortSecurityEnabled(true);
+    }
+  }, [firstSubnetUuid, firstSubnetPortSecurity, setPortSecurityEnabled]);
 
   const { data, isLoading } = useQuery({
     queryKey: ['network-step', props.offering.scope_uuid],
@@ -454,7 +489,10 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
             >
               <AwesomeCheckbox
                 value={!portSecurityEnabled}
-                onChange={() => setPortSecurityEnabled(!portSecurityEnabled)}
+                onChange={() => {
+                  userTouchedRef.current = true;
+                  setPortSecurityEnabled(!portSecurityEnabled);
+                }}
                 size="sm"
                 className="align-self-center fw-normal"
                 label={translate('Disable port security')}
