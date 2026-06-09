@@ -290,21 +290,6 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   )}
                   placeholder="waldur-bot"
                 />
-                {/*
-                  Surface the public URL here too so it can be set even when
-                  the prereqs panel was skipped (homeserver_url already
-                  configured). The backend only persists when Constance is
-                  empty — re-running setup won't overwrite an existing value.
-                */}
-                <StringGroup
-                  name="homeserver_public_url"
-                  label={translate('Public homeserver URL')}
-                  description={translate(
-                    'Optional. Browser-facing homeserver URL. Set when the Homeserver URL above is Docker-internal or otherwise unreachable from the browser.',
-                  )}
-                  spaceless
-                  placeholder="https://waldur.example.com"
-                />
               </>
             )}
 

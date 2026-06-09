@@ -13,6 +13,7 @@ import { matrixCredentialsRetrieve } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
+import { getMatrixErrorMessage } from './matrixErrorMessage';
 import { MatrixChatContextValue, MatrixConnectionState } from './types';
 
 // Logger passed to createClient so the SDK's per-client paths
@@ -217,9 +218,12 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
               // the caller can see/manage the room but is not a member.
               setRoomAccessDenied(true);
             }
-          } catch {
+          } catch (e) {
             setError(
-              translate('Could not open the conversation. Please try again.'),
+              getMatrixErrorMessage(
+                e,
+                translate('Could not open the conversation. Please try again.'),
+              ),
             );
           }
         }
@@ -356,13 +360,21 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
         client.on(sdk.ClientEvent.Sync, onSync);
 
         client.startClient({ initialSyncLimit: 30 });
-      } catch {
+      } catch (e) {
         // Failed before clientRef was assigned — release the latch so a
         // later connect() (e.g. user retry) can try again.
         connectingRef.current = false;
         setConnectionState('error');
+        // Surface a friendly message for the 429 rate-limit (so the user knows
+        // to wait rather than retrying into the throttle); fall back to the
+        // generic message for native/network errors that carry no detail.
         setError(
-          translate('Could not connect to the chat server. Please try again.'),
+          getMatrixErrorMessage(
+            e,
+            translate(
+              'Could not connect to the chat server. Please try again.',
+            ),
+          ),
         );
       }
     },

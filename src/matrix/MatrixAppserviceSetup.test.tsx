@@ -272,6 +272,88 @@ describe('MatrixAppserviceSetupDialog', () => {
     expect(body.sender_localpart).toBeUndefined();
   });
 
+  it('shows the public homeserver URL on the homeserver step, never on the appservice step', async () => {
+    h.settingsData = {
+      MATRIX_HOMESERVER_URL: '',
+      MATRIX_HOMESERVER_DOMAIN: '',
+      MATRIX_USER_REGISTRATION_SECRET: '',
+    };
+
+    const user = userEvent.setup();
+    renderDialog();
+
+    // Grouped with the other homeserver settings on the prereqs step.
+    expect(
+      await screen.findByLabelText(/Public homeserver URL/i),
+    ).toBeInTheDocument();
+
+    await user.type(
+      screen.getByLabelText(/^Homeserver URL$/i),
+      'http://matrix-homeserver:6167',
+    );
+    await user.type(
+      screen.getByLabelText(/Homeserver domain/i),
+      'matrix.waldur.local',
+    );
+    await user.type(screen.getByLabelText(/Registration secret/i), 'secret');
+    await user.click(screen.getByRole('button', { name: /^Next$/i }));
+
+    // The appservice/YAML step doesn't use it, so it isn't shown here.
+    expect(await screen.findByLabelText(/Waldur URL/i)).toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(/Public homeserver URL/i),
+    ).not.toBeInTheDocument();
+  });
+
+  it('omits the public homeserver URL when the homeserver step is skipped', async () => {
+    h.settingsData = {
+      MATRIX_HOMESERVER_URL: 'https://matrix.example.com',
+      MATRIX_HOMESERVER_DOMAIN: 'matrix.example.com',
+      MATRIX_USER_REGISTRATION_SECRET: 'pre-set',
+    };
+
+    renderDialog();
+
+    // Lands straight on the appservice step — the public URL is a homeserver
+    // setting, managed via Matrix admin settings, not part of the YAML flow.
+    expect(await screen.findByLabelText(/Waldur URL/i)).toBeInTheDocument();
+    expect(
+      screen.queryByLabelText(/Public homeserver URL/i),
+    ).not.toBeInTheDocument();
+  });
+
+  it('carries the public homeserver URL entered on the prereqs step into the payload', async () => {
+    h.settingsData = {
+      MATRIX_HOMESERVER_URL: '',
+      MATRIX_HOMESERVER_DOMAIN: '',
+      MATRIX_USER_REGISTRATION_SECRET: '',
+    };
+
+    const user = userEvent.setup();
+    renderDialog();
+
+    await user.type(
+      await screen.findByLabelText(/^Homeserver URL$/i),
+      'http://matrix-homeserver:6167',
+    );
+    await user.type(
+      screen.getByLabelText(/Public homeserver URL/i),
+      'https://matrix.waldur.local',
+    );
+    await user.type(
+      screen.getByLabelText(/Homeserver domain/i),
+      'matrix.waldur.local',
+    );
+    await user.type(screen.getByLabelText(/Registration secret/i), 'secret');
+    await user.click(screen.getByRole('button', { name: /^Next$/i }));
+
+    await user.click(await screen.findByRole('button', { name: /^Setup$/i }));
+
+    await vi.waitFor(() => expect(h.setupMutation).toHaveBeenCalled());
+    const body = h.setupMutation.mock.calls[0][0].body;
+    expect(body.homeserver_public_url).toBe('https://matrix.waldur.local');
+  });
+
   it('invalidates matrixAppserviceStatus and MatrixAdminSettings caches on success', async () => {
     h.settingsData = {
       MATRIX_HOMESERVER_URL: 'https://matrix.example.com',
