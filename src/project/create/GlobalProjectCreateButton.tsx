@@ -17,6 +17,8 @@ const ProjectCreateDialog = lazyComponent(() =>
 
 export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
   const user = useUser();
+  const { openDialog } = useModal();
+  if (!user) return null;
   const disabled =
     !user.is_staff &&
     user.permissions
@@ -28,7 +30,6 @@ export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
             customerId: perm.scope_uuid,
           }),
       );
-  const { openDialog } = useModal();
   if (disabled) {
     return null;
   }
