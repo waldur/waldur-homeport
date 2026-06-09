@@ -82,6 +82,7 @@
     "pdfmake": "^0.2.18",
     "qs": "^6.14.2",
     "react": "^18.3.0",
+    "react-arborist": "^3.10.1",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^18.3.0",
     "react-dropzone": "^14.3.5",
@@ -100,7 +101,7 @@
     "redux": "^4.2.1",
     "reselect": "^3.0.1",
     "text-security": "^3.2.1",
-    "waldur-js-client": "^8.0.9-dev.46",
+    "waldur-js-client": "^8.0.9-dev.50",
     "yjs": "^13.5.22"
   },
   "devDependencies": {
