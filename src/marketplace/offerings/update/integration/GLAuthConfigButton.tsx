@@ -1,7 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { marketplaceProviderOfferingsGlauthUsersConfigRetrieve } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsGlauthTreeRetrieve,
+  marketplaceProviderOfferingsGlauthUsersConfigRetrieve,
+} from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -21,9 +24,8 @@ export const GLAuthConfigButton: FC<{
 }> = ({ offering }) => {
   const enabled =
     offering.plugin_options?.service_provider_can_create_offering_user;
-  const { data, error, isLoading, refetch } = useQuery({
+  const configQuery = useQuery({
     queryKey: ['OfferingGLAuthConfig', offering.uuid, enabled],
-
     queryFn: () =>
       enabled
         ? marketplaceProviderOfferingsGlauthUsersConfigRetrieve({
@@ -34,7 +36,17 @@ export const GLAuthConfigButton: FC<{
             },
           }).then((response) => response.data)
         : null,
-
+    refetchOnWindowFocus: false,
+    staleTime: STALE_TIME,
+  });
+  const treeQuery = useQuery({
+    queryKey: ['OfferingGLAuthTree', offering.uuid, enabled],
+    queryFn: () =>
+      enabled
+        ? marketplaceProviderOfferingsGlauthTreeRetrieve({
+            path: { uuid: offering.uuid },
+          }).then((response) => response.data ?? null)
+        : null,
     refetchOnWindowFocus: false,
     staleTime: STALE_TIME,
   });
@@ -42,17 +54,28 @@ export const GLAuthConfigButton: FC<{
   const { openDialog } = useModal();
   const callback = () => {
     openDialog(GLAuthConfigDialog, {
-      resolve: { offering, config: data },
+      resolve: {
+        offering,
+        config: configQuery.data,
+        tree: treeQuery.data,
+      },
       size: 'lg',
     });
   };
+  const isLoading = configQuery.isLoading || treeQuery.isLoading;
+  const error = configQuery.error || treeQuery.error;
+  const refetch = () => {
+    configQuery.refetch();
+    treeQuery.refetch();
+  };
+  const ready = configQuery.data && treeQuery.data;
   return error ? (
     <LoadingErred loadData={refetch} />
   ) : (
     <ActionButton
       action={callback}
       title={translate('View GLAuth configuration')}
-      iconNode={enabled && data && <EyeIcon weight="bold" />}
+      iconNode={enabled && ready && <EyeIcon weight="bold" />}
       pending={isLoading}
       disabled={!enabled}
       tooltip={
