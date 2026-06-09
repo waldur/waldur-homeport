@@ -40,9 +40,21 @@ const PhoneNumberField = ({ row }: { row: User }) => (
   <>{renderFieldOrDash(formatPhoneNumber(row.phone_number))}</>
 );
 
-const EmailField = ({ row }: { row: User }) => (
-  <>{renderFieldOrDash(row.email)}</>
-);
+const EMAIL_MAX_LENGTH = 25;
+
+const EmailField = ({ row }: { row: User }) => {
+  if (!row.email) {
+    return <>{DASH_ESCAPE_CODE}</>;
+  }
+  if (row.email.length <= EMAIL_MAX_LENGTH) {
+    return <>{row.email}</>;
+  }
+  return (
+    <Tip label={row.email} id={`user-email-${row.uuid}`} placement="top">
+      <span>{row.email.slice(0, EMAIL_MAX_LENGTH)}…</span>
+    </Tip>
+  );
+};
 
 const FullNameField = ({ row }: { row: User }) => (
   <Link
