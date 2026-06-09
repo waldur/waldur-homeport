@@ -214,6 +214,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             description={translate(
               'Specific team role required for users to provision resources from this offering',
             )}
+            parse={(value) => value ?? null}
           />
           <NumberEditField
             name="plugin_options.maximal_resource_count_per_project"
@@ -228,6 +229,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             description={translate(
               'Python format string for auto-generated resource names. Available variables: {customer_name}, {customer_slug}, {project_name}, {project_slug}, {offering_name}, {offering_slug}, {plan_name}, {counter}, {attributes[KEY]}.',
             )}
+            parse={(value) => value ?? null}
           />
         </TabbedSection.Tab>
 
