@@ -82,6 +82,10 @@ export const MatrixAppserviceSetupDialog: FC = () => {
     mutationFn: (formData) =>
       adminMatrixAppserviceSetup({ body: formData as any }),
     errorMessage: translate('Unable to setup appservice.'),
+    // Keep the dialog open on success: this flow advances to the 'result' step
+    // to show the registration YAML. The default (closeModal: true) closes the
+    // dialog before that step can render, so the YAML is never shown.
+    closeModal: false,
     invalidateQueries: [
       { queryKey: ['matrixAppserviceStatus'] },
       { queryKey: ['MatrixAdminSettings'] },

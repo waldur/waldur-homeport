@@ -79,22 +79,26 @@ const ApplicationInner: FunctionComponent = () => {
           <Provider store={store}>
             <LayoutProvider>
               <ThemeProvider>
-                <MatrixRoot>
-                  <ThreadProvider>
-                    <ThreadRuntimeProvider>
-                      <NotificationContainer />
-                      <ModalProvider>
-                        <DrawerProvider>
+                {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
+                    (rendered inside MatrixRoot) opens the chat drawer from the
+                    call widget via useDrawer, so it needs the same shared
+                    DrawerProvider instance as the rest of the app. */}
+                <ModalProvider>
+                  <DrawerProvider>
+                    <MatrixRoot>
+                      <ThreadProvider>
+                        <ThreadRuntimeProvider>
+                          <NotificationContainer />
                           <ModalRoot />
                           <ConfirmModalRoot />
                           <DrawerRoot />
                           <UIView />
-                        </DrawerProvider>
-                      </ModalProvider>
-                      <MasterInit />
-                    </ThreadRuntimeProvider>
-                  </ThreadProvider>
-                </MatrixRoot>
+                          <MasterInit />
+                        </ThreadRuntimeProvider>
+                      </ThreadProvider>
+                    </MatrixRoot>
+                  </DrawerProvider>
+                </ModalProvider>
               </ThemeProvider>
             </LayoutProvider>
           </Provider>
