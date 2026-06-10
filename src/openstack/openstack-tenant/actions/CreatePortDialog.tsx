@@ -150,7 +150,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
     {
       name: string;
       description?: string;
-      network: { url: string };
+      network: string;
       fixed_ips?: { subnet: { backend_id: string }; fixed_ip?: string };
       mac_address?: string;
       port_security_enabled?: boolean;
@@ -170,7 +170,6 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
       return openstackPortsCreate({
         body: {
           ...formData,
-          network: formData.network?.url,
           fixed_ips,
           port_security_enabled: formData.port_security_enabled || false,
           target_tenant: resource.url,
