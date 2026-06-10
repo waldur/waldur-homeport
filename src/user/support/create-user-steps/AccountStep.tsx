@@ -8,7 +8,7 @@ import { Field, useForm, useFormState } from 'react-final-form';
 import { Badge } from '@/core/Badge';
 import { generatePassword } from '@/core/generatePassword';
 import { composeValidators, email, required } from '@/core/validators';
-import { StringGroup, BooleanGroup } from '@/form';
+import { StringGroup, BooleanGroup, TextGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { SecretField } from '@/form/SecretField';
 import { translate } from '@/i18n';
@@ -73,6 +73,18 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           'Designates whether this user should be treated as active.',
         )}
       />
+      {editMode && user?.is_active && !values.is_active && (
+        <TextGroup
+          name="deactivation_reason"
+          label={translate('Deactivation reason')}
+          rows={3}
+          validate={required}
+          required
+          description={translate(
+            'Required. This is an administrative override: the account will not be reactivated automatically by the system, even if the user regains roles.',
+          )}
+        />
+      )}
       <BooleanGroup
         name="is_staff"
         type="checkbox"

@@ -5559,5 +5559,19 @@
   "Purchase order document": "Užsakymo dokumentas",
   "Prepaid period expired": "Iš anksto apmokėtas laikotarpis baigėsi",
   "Price for remaining {count} months": "Kaina už likusius {count} mėn.",
-  "Resource is not associated with a plan.": "Išteklius nesusietas su planu."
+  "Resource is not associated with a plan.": "Išteklius nesusietas su planu.",
+  "A reason is required to deactivate a user.": "Norint deaktyvuoti vartotoją, būtina nurodyti priežastį.",
+  "Administrative status": "Administracinė būsena",
+  "Administratively disabled": "Išjungta administratoriaus",
+  "Deactivate": "Deaktyvuoti",
+  "Deactivate user": "Deaktyvuoti vartotoją",
+  "Deactivate {name}": "Deaktyvuoti {name}",
+  "Deactivation reason": "Deaktyvavimo priežastis",
+  "Disabling here is an administrative override: when automatic role-based deactivation is enabled, the system will not re-enable the account automatically, even if the user regains roles. It can only be reactivated manually here.": "Išjungimas čia yra administracinis pakeitimas: kai įjungtas automatinis deaktyvavimas pagal roles, sistema automatiškai iš naujo neaktyvuos paskyros, net jei vartotojas vėl gaus roles. Ją galima iš naujo suaktyvinti tik čia rankiniu būdu.",
+  "Required. This is an administrative override: the account will not be reactivated automatically by the system, even if the user regains roles.": "Privaloma. Tai administracinis pakeitimas: sistema automatiškai iš naujo neaktyvuos paskyros, net jei vartotojas vėl gaus roles.",
+  "The account will be deactivated and will not be reactivated automatically by the system, even if the user regains roles. A staff member can reactivate it manually.": "Paskyra bus deaktyvuota ir sistema automatiškai jos iš naujo neaktyvuos, net jei vartotojas vėl gaus roles. Darbuotojas gali ją suaktyvinti rankiniu būdu.",
+  "This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.": "Šią paskyrą išjungė administratorius. Kai įjungtas automatinis deaktyvavimas pagal roles, sistema automatiškai jos iš naujo neaktyvuos, net jei vartotojas vėl gaus roles. Darbuotojas turi ją suaktyvinti rankiniu būdu.",
+  "Unable to deactivate user.": "Nepavyko deaktyvuoti vartotojo.",
+  "User has been deactivated.": "Vartotojas deaktyvuotas.",
+  "Why is this user being deactivated?": "Kodėl šis vartotojas deaktyvuojamas?"
 }

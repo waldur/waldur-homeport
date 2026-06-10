@@ -2771,5 +2771,18 @@
   "Prepaid (per month)": "Im Voraus bezahlt (pro Monat)",
   "Prepaid period expired": "Vorausbezahlter Zeitraum abgelaufen",
   "Price for remaining {count} months": "Preis für die verbleibenden {count} Monate",
-  "Resource is not associated with a plan.": "Ressource ist keinem Plan zugeordnet."
+  "Resource is not associated with a plan.": "Ressource ist keinem Plan zugeordnet.",
+  "A reason is required to deactivate a user.": "Zum Deaktivieren eines Benutzers ist ein Grund erforderlich.",
+  "Administrative status": "Administrativer Status",
+  "Administratively disabled": "Administrativ deaktiviert",
+  "Deactivate user": "Benutzer deaktivieren",
+  "Deactivate {name}": "{name} deaktivieren",
+  "Deactivation reason": "Grund für die Deaktivierung",
+  "Disabling here is an administrative override: when automatic role-based deactivation is enabled, the system will not re-enable the account automatically, even if the user regains roles. It can only be reactivated manually here.": "Das Deaktivieren an dieser Stelle ist eine administrative Übersteuerung: Wenn die automatische rollenbasierte Deaktivierung aktiviert ist, aktiviert das System das Konto nicht automatisch erneut, selbst wenn der Benutzer wieder Rollen erhält. Es kann nur hier manuell wieder aktiviert werden.",
+  "Required. This is an administrative override: the account will not be reactivated automatically by the system, even if the user regains roles.": "Erforderlich. Dies ist eine administrative Übersteuerung: Das Konto wird vom System nicht automatisch erneut aktiviert, selbst wenn der Benutzer wieder Rollen erhält.",
+  "The account will be deactivated and will not be reactivated automatically by the system, even if the user regains roles. A staff member can reactivate it manually.": "Das Konto wird deaktiviert und vom System nicht automatisch erneut aktiviert, selbst wenn der Benutzer wieder Rollen erhält. Ein Mitarbeiter kann es manuell wieder aktivieren.",
+  "This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.": "Dieses Konto wurde von einem Administrator deaktiviert. Wenn die automatische rollenbasierte Deaktivierung aktiviert ist, aktiviert das System es nicht automatisch erneut, selbst wenn der Benutzer wieder Rollen erhält. Ein Mitarbeiter muss es manuell wieder aktivieren.",
+  "Unable to deactivate user.": "Der Benutzer konnte nicht deaktiviert werden.",
+  "User has been deactivated.": "Der Benutzer wurde deaktiviert.",
+  "Why is this user being deactivated?": "Warum wird dieser Benutzer deaktiviert?"
 }
