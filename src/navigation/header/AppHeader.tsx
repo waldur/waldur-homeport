@@ -76,8 +76,20 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             </div>
           )}
         </div>
-        <div className="d-flex align-items-stretch justify-content-between flex-grow-1">
-          <div className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1">
+        <div
+          className="d-flex align-items-stretch justify-content-between flex-grow-1"
+          style={{ minWidth: 0 }}
+        >
+          <div
+            className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1"
+            // flex-basis: 0 makes this breadcrumb area's width the grown share
+            // of free space — independent of its (long) content width — and
+            // overflow: hidden clips the trail. Together these guarantee it can
+            // never push the header actions (search / confirmation / user menu)
+            // off screen, and they give the breadcrumb <ol> a real width so its
+            // overflow measurement (Breadcrumbs.tsx) can collapse the middle.
+            style={{ minWidth: 0, flexBasis: 0, overflow: 'hidden' }}
+          >
             {Boolean(user) && isResourceCreationView && (
               <button
                 className="btn me-3 py-0 d-inline-flex align-items-center justify-content-center align-self-center gap-1 text-primary fw-semibold fs-5 border-0 bg-transparent"
@@ -92,7 +104,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             )}
             {hasBreadcrumbs && <BreadcrumbMain />}
           </div>
-          <div className="d-flex align-items-stretch flex-shrink-0">
+          <div className="d-flex align-items-stretch flex-shrink-0 ms-3">
             {Boolean(user) && (
               <SearchToggle compact={Boolean(hasBreadcrumbs || isSmallScr)} />
             )}

@@ -1,14 +1,84 @@
+// Allow the breadcrumb flex chain to shrink below its content's intrinsic
+// width. Without min-width: 0 the nowrap breadcrumb keeps its full text width
+// and overflows the header, pushing the search/confirmation/user-menu section
+// off screen.
+.breadcrumb-container {
+  min-width: 0;
+
+  // Hard backstop: clip overflow so breadcrumb content can never push the
+  // header actions (search / confirmation / user menu) off screen. Safe because
+  // the breadcrumb dropdown popovers are portaled to <body> (not rendered in
+  // this subtree), so they are not clipped, and the trail is a single line that
+  // fits the header height.
+  overflow: hidden;
+
+  // React-Bootstrap renders <nav class="flex-grow-1"><ol class="breadcrumb">.
+  // The intermediate <nav> defaults to min-width: auto and won't shrink below
+  // its content, so it must be constrained too — otherwise the ol/min-width: 0
+  // below has no effect and the breadcrumb still overflows.
+  > nav {
+    min-width: 0;
+    overflow: hidden;
+  }
+}
+
 .breadcrumb-container .breadcrumb {
+  // Single line: leading items keep their natural width; when they don't fit,
+  // Breadcrumbs.tsx folds the middle into a "…" popover (it measures the
+  // overflow below). The final item middle-truncates to fit (see &:last-child).
+  // overflow: hidden makes scrollWidth report the true content width for that
+  // measurement and is the backstop that keeps the header actions on screen.
   flex-wrap: nowrap;
   flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  align-items: center;
 
   .breadcrumb-item {
-    text-wrap: nowrap;
-    min-width: 20px;
+    // Leading items keep their natural width; only the last item shrinks.
+    flex-shrink: 0;
+    min-width: 0;
     font-size: $font-size-lg;
 
+    // Middle items: cap individual width and ellipsis-truncate. Short labels
+    // show in full; only an unusually long one gets clipped.
+    .breadcrumb-text {
+      display: inline-block;
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
     &:last-child {
-      flex-grow: 1;
+      // Final item (e.g. a resource name) stays on one line and shrinks to fit
+      // the remaining space; the MiddleTruncate inside it collapses its middle
+      // ("start…end") only when there isn't room for the whole name.
+      display: flex;
+      align-items: center;
+      flex: 0 1 auto;
+      min-width: 0;
+
+      // BreadcrumbItem wraps the text + caret together in a plain <span> when
+      // the item has a dropdown. Lay that wrapper out as a row so the caret
+      // sits inline to the right of the (shrinking) text.
+      > span {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+      }
+
+      // The middle-truncating name takes the available width and shrinks.
+      .middle-truncate {
+        flex: 0 1 auto;
+        min-width: 0;
+      }
+
+      // Keep the dropdown caret beside the text, never shrinking away.
+      .svg-icon {
+        flex-shrink: 0;
+      }
     }
 
     a {
@@ -45,24 +115,36 @@
     .breadcrumb-back {
       margin-right: 8px;
     }
+  }
+}
 
-    // Note: Breadcrumb item hiding is now handled by JavaScript in Breadcrumbs.tsx
-    // which accounts for sidebar state. These CSS rules are kept as fallback.
-    &.ellipsis-md {
-      @include media-breakpoint-down(lg) {
-        display: none;
-      }
-    }
-    &.ellipsis-xl {
-      @include media-breakpoint-down(xl) {
-        display: none;
-      }
-    }
-    &.ellipsis-xxl {
-      @include media-breakpoint-down(xxl) {
-        display: none;
-      }
-    }
+// Middle truncation ("start…end") used by the final breadcrumb item. The head
+// shrinks with an ellipsis while the tail stays pinned, so the full name shows
+// when it fits and only the middle collapses when space is tight. Needs a
+// width-constrained flex parent (min-width: 0) for the head to clip.
+.middle-truncate {
+  display: inline-flex;
+  align-items: baseline;
+  min-width: 0;
+  max-width: 100%;
+  vertical-align: bottom;
+
+  .middle-truncate-head {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .middle-truncate-tail {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  &.middle-truncate--simple {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

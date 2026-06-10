@@ -2,7 +2,7 @@ import { CaretDownIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
-import { TruncatedText } from '@/core/TruncatedText';
+import { MiddleTruncate } from '@/core/MiddleTruncate';
 import { IBreadcrumbItem } from '@/navigation/types';
 
 import { BreadcrumbItem } from './BreadcrumbItem';
@@ -31,7 +31,7 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
   return (
     <OverlayTrigger
       trigger="click"
-      placement="bottom"
+      placement="bottom-start"
       show={show}
       overlay={
         <Popover
@@ -56,11 +56,15 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
         onClick={() => setShow((v) => !v)}
         className="cursor-pointer"
       >
-        {item.truncate && item.text.length > 4 ? (
-          <TruncatedText
-            text={item.text}
-            padding={item.hideDropdownArrow ? 25 : 50}
-          />
+        {item.active ? (
+          // The last/active breadcrumb (e.g. resource name) stays on one line
+          // and middle-truncates ("start…end") only when it doesn't fit, so the
+          // header actions stay on screen and the suffix stays readable.
+          <MiddleTruncate text={item.text} />
+        ) : item.truncate && item.text.length > 4 ? (
+          <span className="breadcrumb-text" title={item.text}>
+            {item.text}
+          </span>
         ) : (
           item.text
         )}
