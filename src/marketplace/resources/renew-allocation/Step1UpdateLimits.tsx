@@ -165,10 +165,8 @@ const UpdateLimitsTable: FC<{
       MarketplaceFeatures.conceal_prices,
     );
     return {
-      periods: [],
       components: [],
-      totalPeriods: [],
-      changedTotalPeriods: [],
+      periodTotals: [],
       orderCanBeApproved: true,
       offering: null,
       shouldConcealPrices,

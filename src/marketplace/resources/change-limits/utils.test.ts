@@ -15,16 +15,32 @@ import * as fixtures from './fixtures';
 
 describe('Change resource limits', () => {
   it('returns correct data', () => {
-    expect(
-      getLimitChangeData(
-        fixtures.plan,
-        fixtures.offering,
-        fixtures.newLimits,
-        fixtures.currentLimits,
-        fixtures.usages,
-        fixtures.orderCanBeApproved,
-      ),
-    ).toEqual(fixtures.resultData);
+    const actual = getLimitChangeData(
+      fixtures.plan,
+      fixtures.offering,
+      fixtures.newLimits,
+      fixtures.currentLimits,
+      fixtures.usages,
+      fixtures.orderCanBeApproved,
+    );
+
+    // Float-tolerant deep compare against the fixture — toEqual is too strict
+    // for accumulated multiplications (we round to 6 sig figs).
+    const round6 = (v: unknown): unknown => {
+      if (typeof v === 'number') return Number(v.toPrecision(6));
+      if (Array.isArray(v)) return v.map(round6);
+      if (v && typeof v === 'object') {
+        return Object.fromEntries(
+          Object.entries(v as Record<string, unknown>).map(([k, vv]) => [
+            k,
+            round6(vv),
+          ]),
+        );
+      }
+      return v;
+    };
+
+    expect(round6(actual)).toEqual(round6(fixtures.resultData));
   });
 
   it('loadData fetches all required data', async () => {
@@ -160,6 +176,224 @@ describe('Change resource limits', () => {
       endDate,
     );
 
-    expect(data.periods[1]).toContain('Price for remaining');
+    expect(data.components[0].chargeMode).toBe('prepaid');
+    expect(data.components[0].priceSuffix).toContain('remaining');
+    expect(data.periodTotals[0].chargeMode).toBe('prepaid');
+  });
+
+  it('getLimitChangeData renders one-time price for total limit_period', () => {
+    const totalLimitOffering = {
+      ...fixtures.offering,
+      components: [
+        {
+          type: 'gpu_hours',
+          billing_type: 'limit',
+          name: 'GPU hours',
+          measured_unit: 'h',
+          is_boolean: false,
+          limit_period: 'total',
+        },
+      ],
+    };
+    const plan = { prices: { gpu_hours: 0.5 }, unit: 'month' };
+
+    const data = getLimitChangeData(
+      plan,
+      totalLimitOffering,
+      { gpu_hours: 100 },
+      { gpu_hours: 40 },
+      { gpu_hours: 0 },
+      true,
+    );
+
+    expect(data.components).toHaveLength(1);
+    const row = data.components[0];
+    expect(row.chargeMode).toBe('total');
+    expect(row.priceSuffix).toContain('one-time');
+    // 100 × 0.5 — one-time, NOT multiplied by 30 or 365
+    expect(row.price).toBeCloseTo(50);
+    // Only the delta is charged on a TOTAL-period limit change: (100-40) × 0.5
+    expect(row.changedPrice).toBeCloseTo(30);
+    expect(data.periodTotals).toHaveLength(1);
+    expect(data.periodTotals[0].label).toBe('One-time total');
+  });
+
+  it('getLimitChangeData groups totals by limit_period for mixed offerings', () => {
+    const mixedOffering = {
+      ...fixtures.offering,
+      components: [
+        {
+          type: 'gpu_hours',
+          billing_type: 'limit',
+          name: 'GPU hours',
+          measured_unit: 'h',
+          is_boolean: false,
+          limit_period: 'total',
+        },
+        {
+          type: 'storage',
+          billing_type: 'limit',
+          name: 'Storage',
+          measured_unit: 'GB',
+          is_boolean: false,
+          limit_period: 'month',
+        },
+      ],
+    };
+    const plan = {
+      prices: { gpu_hours: 0.5, storage: 1 },
+      unit: 'month',
+    };
+
+    const data = getLimitChangeData(
+      plan,
+      mixedOffering,
+      { gpu_hours: 100, storage: 10 },
+      { gpu_hours: 40, storage: 5 },
+      { gpu_hours: 0, storage: 0 },
+      true,
+    );
+
+    expect(data.periodTotals).toHaveLength(2);
+    const modes = data.periodTotals.map((r) => r.chargeMode).sort();
+    expect(modes).toEqual(['month', 'total']);
+  });
+
+  it('getLimitChangeData annualizes monthly and quarterly prices', () => {
+    const offering = {
+      ...fixtures.offering,
+      components: [
+        {
+          type: 'cpu',
+          billing_type: 'limit',
+          name: 'CPU',
+          measured_unit: 'cores',
+          is_boolean: false,
+          limit_period: 'month',
+        },
+        {
+          type: 'gpu',
+          billing_type: 'limit',
+          name: 'GPU',
+          measured_unit: 'h',
+          is_boolean: false,
+          limit_period: 'quarterly',
+        },
+        {
+          type: 'storage',
+          billing_type: 'limit',
+          name: 'Storage',
+          measured_unit: 'GB',
+          is_boolean: false,
+          limit_period: 'annual',
+        },
+        {
+          type: 'extras',
+          billing_type: 'limit',
+          name: 'Extras',
+          measured_unit: 'u',
+          is_boolean: false,
+          limit_period: 'total',
+        },
+      ],
+    };
+    const plan = {
+      prices: { cpu: 1, gpu: 2, storage: 3, extras: 4 },
+      unit: 'month',
+    };
+
+    const data = getLimitChangeData(
+      plan,
+      offering,
+      { cpu: 10, gpu: 5, storage: 7, extras: 9 },
+      { cpu: 0, gpu: 0, storage: 0, extras: 0 },
+      { cpu: 0, gpu: 0, storage: 0, extras: 0 },
+      true,
+    );
+
+    const byType = Object.fromEntries(data.components.map((r) => [r.type, r]));
+
+    // Each component shows a single period-aware price with a matching suffix —
+    // no /day · /30 days · /365 days breakdown (the change view bills the limit
+    // for the relevant period, not per usage).
+    expect(byType.cpu.price).toBeCloseTo(10); // 10 /mo
+    expect(byType.cpu.priceSuffix).toBe(' /mo');
+    expect(byType.gpu.price).toBeCloseTo(30); // 5 × 2 × 3 /quarter
+    expect(byType.gpu.priceSuffix).toBe(' /quarter');
+    expect(byType.storage.price).toBeCloseTo(252); // 7 × 3 × 12 /year
+    expect(byType.storage.priceSuffix).toBe(' /year');
+    expect(byType.extras.price).toBeCloseTo(36); // 9 × 4 one-time
+    expect(byType.extras.priceSuffix).toBe(' one-time');
+  });
+
+  it('getLimitChangeData scales the monthly price regardless of plan.unit', () => {
+    // OpenStack offerings ship with plan.unit='month'; resources priced per-day
+    // store the rate differently but the change view must show the same monthly
+    // total either way.
+    const buildOffering = () => ({
+      ...fixtures.offering,
+      components: [
+        {
+          type: 'cores',
+          billing_type: 'limit',
+          name: 'Cores',
+          measured_unit: 'cores',
+          is_boolean: false,
+          limit_period: 'month',
+        },
+      ],
+    });
+
+    const monthData = getLimitChangeData(
+      { prices: { cores: 30 }, unit: 'month' },
+      buildOffering(),
+      { cores: 2 },
+      { cores: 0 },
+      { cores: 0 },
+      true,
+    );
+    expect(monthData.components[0].price).toBeCloseTo(60); // 2 × 30 /mo
+    expect(monthData.components[0].priceSuffix).toBe(' /mo');
+
+    const dayData = getLimitChangeData(
+      { prices: { cores: 1 }, unit: 'day' },
+      buildOffering(),
+      { cores: 2 },
+      { cores: 0 },
+      { cores: 0 },
+      true,
+    );
+    expect(dayData.components[0].price).toBeCloseTo(60); // 2 × 1 × 30
+    expect(dayData.components[0].priceSuffix).toBe(' /mo');
+  });
+
+  it('getLimitChangeData scales monthly price by plan_unit', () => {
+    const dayPlanOffering = {
+      ...fixtures.offering,
+      components: [
+        {
+          type: 'cores',
+          billing_type: 'limit',
+          name: 'Cores',
+          measured_unit: 'cores',
+          is_boolean: false,
+          limit_period: 'month',
+        },
+      ],
+    };
+    const plan = { prices: { cores: 1 }, unit: 'day' };
+
+    const data = getLimitChangeData(
+      plan,
+      dayPlanOffering,
+      { cores: 10 },
+      { cores: 0 },
+      { cores: 0 },
+      true,
+    );
+
+    // 10 cores × $1/day × 30 days = $300/mo
+    expect(data.components[0].price).toBeCloseTo(300);
+    expect(data.components[0].priceSuffix).toBe(' /mo');
   });
 });

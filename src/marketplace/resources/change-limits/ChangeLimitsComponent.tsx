@@ -1,9 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
-import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { translate } from '@/i18n';
 import { PriceTooltip } from '@/price/PriceTooltip';
 
@@ -23,10 +21,6 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
   orderCanBeApproved,
   parentName,
 }) => {
-  const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
-
-  const periodsCountToShow = isMd ? 1 : 3;
-
   const { values } = useFormState();
   const limitChangeData = React.useMemo(
     () =>
@@ -56,7 +50,7 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
         <Card.Body className="p-0">
           <div className="table-responsive">
             <div className="table-container">
-              <table className="table table-row-bordered table-expandable align-middle">
+              <table className="table table-row-bordered align-middle">
                 <thead>
                   <tr className="align-middle">
                     <th>{translate('Component')}</th>
@@ -64,16 +58,12 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
                     <th>{translate('Current limit')}</th>
                     <th>{translate('New limit')}</th>
                     <th>{translate('Difference')}</th>
-                    {limitChangeData.shouldConcealPrices
-                      ? null
-                      : limitChangeData.periods
-                          .slice(0, periodsCountToShow)
-                          .map((period, index) => (
-                            <th className="col-sm-1" key={index}>
-                              {period}
-                              <PriceTooltip />
-                            </th>
-                          ))}
+                    {limitChangeData.shouldConcealPrices ? null : (
+                      <th className="col-sm-2">
+                        {translate('Price')}
+                        <PriceTooltip />
+                      </th>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
@@ -83,22 +73,18 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
                       component={component}
                       limits={data.offeringLimits[component.type]}
                       shouldConcealPrices={limitChangeData.shouldConcealPrices}
-                      periodsCountToShow={periodsCountToShow}
-                      periods={limitChangeData.periods}
                       parentName={parentName}
                     />
                   ))}
                 </tbody>
-                <tfoot>
-                  {limitChangeData.shouldConcealPrices ? null : (
-                    <ComponentTotalRow
-                      totalPeriods={limitChangeData.totalPeriods}
-                      changedTotalPeriods={limitChangeData.changedTotalPeriods}
-                      periodsCountToShow={periodsCountToShow}
-                      periods={limitChangeData.periods}
-                    />
-                  )}
-                </tfoot>
+                {limitChangeData.shouldConcealPrices ||
+                limitChangeData.periodTotals.length === 0 ? null : (
+                  <tfoot>
+                    {limitChangeData.periodTotals.map((row) => (
+                      <ComponentTotalRow key={row.chargeMode} row={row} />
+                    ))}
+                  </tfoot>
+                )}
               </table>
             </div>
           </div>

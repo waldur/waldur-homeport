@@ -12,8 +12,6 @@ import {
 } from '@/marketplace/resources/change-limits/utils';
 import { PriceTooltip } from '@/price/PriceTooltip';
 
-import { getPlanUnitAbbr } from '../../utils';
-
 import { DetailsTable, ValueIndicator } from './DetailsTable';
 import {
   OrderTypeBasedProps,
@@ -38,11 +36,9 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
       const plan = offering.plans.find((p) => p.uuid === order.plan_uuid);
       if (!plan) {
         return {
-          periods: [],
           components: [],
+          periodTotals: [],
           orderCanBeApproved: true,
-          totalPeriods: [],
-          changedTotalPeriods: [],
           offering,
           newLimits: resourceLimits,
         };
@@ -58,11 +54,9 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
       );
     }
     return {
-      periods: [],
       components: [],
+      periodTotals: [],
       orderCanBeApproved: true,
-      totalPeriods: [],
-      changedTotalPeriods: [],
       offering,
       newLimits: resourceLimits,
     };
@@ -129,7 +123,8 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
                     </>
                   ),
                   render: ({ row }) =>
-                    defaultCurrency(row.prices[0] - row.changedPrices[0]),
+                    defaultCurrency(row.price - row.changedPrice) +
+                    row.priceSuffix,
                 },
                 {
                   title: (
@@ -138,18 +133,20 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
                       <PriceTooltip />
                     </>
                   ),
-                  render: ({ row }) => defaultCurrency(row.prices[0]),
+                  render: ({ row }) =>
+                    defaultCurrency(row.price) + row.priceSuffix,
                 },
                 {
                   title: translate('Impact'),
                   render: ({ row }) => {
-                    const oldPrice = row.prices[0] - row.changedPrices[0];
-                    const newPrice = row.prices[0];
-                    const priceChange = newPrice - oldPrice;
+                    const priceChange = row.changedPrice;
                     const isPositive = priceChange > 0;
                     return (
                       <ValueIndicator
-                        value={defaultCurrency(Math.abs(priceChange))}
+                        value={
+                          defaultCurrency(Math.abs(priceChange)) +
+                          row.priceSuffix
+                        }
                         isPositive={isPositive}
                         isZero={priceChange === 0}
                       />
@@ -159,16 +156,20 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
               ]),
         ]}
         totalRow={(columnCount) =>
-          shouldConcealPrices ? null : (
-            <tr className="fw-bolder">
-              <td colSpan={columnCount - 1} className="text-dark text-end">
-                {translate('Total cost')}
-              </td>
-              <td className="text-dark">
-                {defaultCurrency(data.changedTotalPeriods[0], false, true)}
-                {getPlanUnitAbbr(order.plan_unit)}
-              </td>
-            </tr>
+          shouldConcealPrices || data.periodTotals.length === 0 ? null : (
+            <>
+              {data.periodTotals.map((row) => (
+                <tr className="fw-bolder" key={row.chargeMode}>
+                  <td colSpan={columnCount - 1} className="text-dark text-end">
+                    {translate('{label} change', { label: row.label })}
+                  </td>
+                  <td className="text-dark">
+                    {defaultCurrency(row.changedTotal, false, true)}
+                    {row.priceSuffix}
+                  </td>
+                </tr>
+              ))}
+            </>
           )
         }
       />
