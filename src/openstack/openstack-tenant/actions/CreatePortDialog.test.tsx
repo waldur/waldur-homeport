@@ -168,6 +168,7 @@ describe('CreatePortDialog', () => {
           body: expect.objectContaining({
             name: 'test-port',
             mac_address: '00:11:22:33:44:55',
+            network: 'net-1-url',
           }),
         }),
       );
