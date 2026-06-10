@@ -1,9 +1,6 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Breadcrumb } from 'react-bootstrap';
-import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
-import { useLayout } from '@/metronic/layout/core';
 import { LayoutContext } from '@/navigation/context';
 import { IBreadcrumbItem } from '@/navigation/types';
 
@@ -11,99 +8,72 @@ import { BreadcrumbItem } from './BreadcrumbItem';
 import { DropdownBreadcrumbItem } from './DropdownBreadcrumbItem';
 import { HiddenItemsPopover } from './HiddenItemsPopover';
 
-/**
- * @example
- * input: [1, 2, 3, 5, 8, 9]
- * output: [[1, 2, 3], [5], [8, 9]]
- */
-const groupConsecutiveNumbers = (arr: number[] = []): number[][] => {
-  if (arr.length === 0) return [];
-
-  const result = [];
-  let tempGroup = [arr[0]];
-
-  for (let i = 1; i < arr.length; i++) {
-    if (arr[i] === arr[i - 1] + 1) {
-      tempGroup.push(arr[i]);
-    } else {
-      result.push(tempGroup);
-      tempGroup = [arr[i]];
-    }
-  }
-  // To add last group
-  result.push(tempGroup);
-  return result;
-};
-
 export const Breadcrumbs = () => {
   const { breadcrumbs } = useContext(LayoutContext);
-  const layout = useLayout();
-  const isSidebarExpanded = !layout.config.aside.minimized;
+  const navRef = useRef<HTMLElement>(null);
+  const [collapsed, setCollapsed] = useState(false);
+  // Width of the full (uncollapsed) list, recorded while expanded. Used as the
+  // threshold for expanding back so the collapse doesn't flip-flop at the edge.
+  const fullWidthRef = useRef(0);
 
-  // When sidebar is expanded, use higher breakpoints to account for reduced content width
-  // Sidebar expanded is ~250px, collapsed is ~70px, difference ~180px
-  const sidebarOffset = isSidebarExpanded ? 150 : 0;
-  const isMd = useMediaQuery({
-    maxWidth: GRID_BREAKPOINTS.md + sidebarOffset,
-  });
-  const isXl = useMediaQuery({
-    maxWidth: GRID_BREAKPOINTS.xl + sidebarOffset,
-  });
-  const isXxl = useMediaQuery({
-    maxWidth: GRID_BREAKPOINTS.xxl + sidebarOffset,
-  });
+  // When the trail itself changes (navigation), start expanded and re-measure
+  // from scratch — otherwise a now-short breadcrumb could stay collapsed,
+  // judged against the previous (longer) trail's stale width.
+  const [measuredTrail, setMeasuredTrail] = useState(breadcrumbs);
+  if (measuredTrail !== breadcrumbs) {
+    setMeasuredTrail(breadcrumbs);
+    setCollapsed(false);
+  }
+
+  // Content-based collapse. The final item always shrinks / middle-truncates to
+  // fit (see _breadcrumb.scss), so the list only genuinely overflows when the
+  // *leading* items don't fit. When that happens we fold everything between the
+  // first and last item into a single "…" popover, giving the "first / … / last"
+  // layout. When there is room, the full trail is shown unchanged.
+  useLayoutEffect(() => {
+    const list = navRef.current?.querySelector<HTMLElement>('.breadcrumb');
+    if (!list || typeof ResizeObserver === 'undefined') return;
+
+    const measure = () => {
+      if (!collapsed) {
+        fullWidthRef.current = list.scrollWidth;
+        if (list.scrollWidth > list.clientWidth + 1) {
+          setCollapsed(true);
+        }
+      } else if (list.clientWidth >= fullWidthRef.current) {
+        setCollapsed(false);
+      }
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, [collapsed, breadcrumbs]);
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
-    const hiddenIndexes = [];
-    breadcrumbs.forEach((item, i) => {
-      if (!item.ellipsis || !isXxl) return item;
-      if (isMd && ['md', 'xl', 'xxl'].includes(item.ellipsis)) {
-        hiddenIndexes.push(i);
-      } else if (isXl && ['xl', 'xxl'].includes(item.ellipsis)) {
-        hiddenIndexes.push(i);
-      } else if (isXxl && item.ellipsis === 'xxl') {
-        hiddenIndexes.push(i);
-      }
-    });
-
-    if (!hiddenIndexes.length) return breadcrumbs;
-
-    const hiddenIndexesGroups = groupConsecutiveNumbers(hiddenIndexes);
-    const hiddenPopovers = hiddenIndexesGroups.map((group, i) => {
-      const items = group.map((index) => breadcrumbs[index]);
-      return <HiddenItemsPopover key={i} items={items} />;
-    });
-
-    let groupPointer = 0;
-    const shortenedBreadcrumbs = breadcrumbs.reduce<IBreadcrumbItem[]>(
-      (acc, item, i) => {
-        if (!hiddenIndexes.includes(i)) {
-          acc.push(item);
-        } else if (groupPointer < hiddenIndexesGroups.length) {
-          const indexInGroup = hiddenIndexesGroups[groupPointer].indexOf(i);
-          if (indexInGroup === 0) {
-            acc.push({
-              key: 'group-' + groupPointer,
-              text: '...',
-              dropdown: hiddenPopovers[groupPointer],
-              hideDropdownArrow: true,
-            });
-            groupPointer++;
-          }
-        }
-        return acc;
+    // Need at least first + one middle + last to have anything to collapse.
+    if (!collapsed || breadcrumbs.length <= 2) {
+      return breadcrumbs;
+    }
+    const middle = breadcrumbs.slice(1, -1);
+    return [
+      breadcrumbs[0],
+      {
+        key: 'collapsed-middle',
+        text: '...',
+        dropdown: <HiddenItemsPopover items={middle} />,
+        hideDropdownArrow: true,
       },
-      [],
-    );
-
-    return shortenedBreadcrumbs;
-  }, [breadcrumbs, isMd, isXl, isXxl, isSidebarExpanded]);
+      breadcrumbs[breadcrumbs.length - 1],
+    ];
+  }, [breadcrumbs, collapsed]);
 
   if (!breadcrumbs.length) {
     return null;
   }
   return (
-    <Breadcrumb className="flex-grow-1">
+    <Breadcrumb className="flex-grow-1" ref={navRef}>
       {breadcrumbItems.map((item) =>
         item.dropdown ? (
           <DropdownBreadcrumbItem key={item.key} item={item} />

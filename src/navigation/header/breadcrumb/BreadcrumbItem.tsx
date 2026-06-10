@@ -5,8 +5,8 @@ import { uniqueId } from 'lodash-es';
 import { PropsWithChildren, forwardRef } from 'react';
 import { Breadcrumb, BreadcrumbItemProps } from 'react-bootstrap';
 
+import { MiddleTruncate } from '@/core/MiddleTruncate';
 import { Tip } from '@/core/Tooltip';
-import { TruncatedText } from '@/core/TruncatedText';
 import { truncate as truncateText } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -80,7 +80,12 @@ export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
           </>
         )}
         {typeof children === 'string' ? (
-          maxLength ? (
+          rest.active ? (
+            // The last/active breadcrumb (e.g. resource name) stays on one line
+            // and middle-truncates ("start…end") only when it doesn't fit, so
+            // the header actions stay on screen and the suffix stays readable.
+            <MiddleTruncate text={children} />
+          ) : maxLength ? (
             <span>
               {children.length > maxLength + 5 ? (
                 <Tip
@@ -95,11 +100,9 @@ export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
               )}
             </span>
           ) : truncate ? (
-            <TruncatedText
-              text={children}
-              tooltipText={tooltipText}
-              padding={10}
-            />
+            <span className="breadcrumb-text" title={tooltipText || children}>
+              {children}
+            </span>
           ) : (
             <span>{children}</span>
           )
