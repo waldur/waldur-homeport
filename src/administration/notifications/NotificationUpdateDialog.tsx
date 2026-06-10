@@ -9,6 +9,7 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -80,12 +81,17 @@ export const NotificationUpdateDialog = ({
           <ModalDialog
             title={translate('Update notification template')}
             subtitle={resolve.notification.description}
+            bodyClassName="h-500px overflow-auto"
             footer={
-              <SubmitButton
-                submitting={submitting}
-                disabled={pristine}
-                label={translate('Save')}
-              />
+              <>
+                <CloseDialogButton className="min-w-150px" />
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={pristine}
+                  label={translate('Confirm')}
+                  className="min-w-150px"
+                />
+              </>
             }
           >
             <NotificationForm schema={contextSchema} />
