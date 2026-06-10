@@ -56,6 +56,7 @@ export const CloseDialogButton: React.FC<CloseDialogButtonProps> = ({
       className={className}
       onClick={handleClick}
       variant={variant}
+      size="lg"
       disabled={disabled}
     >
       {label || translate('Cancel')}
