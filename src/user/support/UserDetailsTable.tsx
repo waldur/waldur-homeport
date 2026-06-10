@@ -158,6 +158,34 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
           value={formatUserIsActive(props.user)}
         />
       )}
+      {isVisible &&
+        !props.user.is_active &&
+        Boolean(props.user.deactivation_reason) && (
+          <FormTable.Item
+            label={translate('Deactivation reason')}
+            value={<FieldWithCopy value={props.user.deactivation_reason} />}
+          />
+        )}
+      {isVisible && props.user.is_admin_deactivated && (
+        <FormTable.Item
+          label={translate('Administrative status')}
+          value={
+            <div className="d-inline-flex align-items-center gap-2">
+              <Badge variant="danger" outline>
+                {translate('Administratively disabled')}
+              </Badge>
+              <Tip
+                id="user-admin-deactivated-tooltip"
+                label={translate(
+                  'This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.',
+                )}
+              >
+                <QuestionIcon size={16} weight="bold" className="text-muted" />
+              </Tip>
+            </div>
+          }
+        />
+      )}
       {props.profile?.is_active && (
         <FormTable.Item
           label={translate('FreeIPA')}

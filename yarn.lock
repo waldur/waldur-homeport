@@ -11497,10 +11497,10 @@ w3c-xmlserializer@^5.0.0:
   dependencies:
     xml-name-validator "^5.0.0"
 
-waldur-js-client@^8.0.9-dev.50:
-  version "8.0.9-dev.50"
-  resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-8.0.9-dev.50.tgz#a37c501f08fd895734c0427b88a0b16ce54bc890"
-  integrity sha512-PByNzfMECWTl8nJbaTvGkQLx6MirUfgqtjTTZ1TBNupY+XMWbKAwlQusIb8Q67LJSbALOsEo4psL0ihf8+Ex3w==
+waldur-js-client@^8.0.9-dev.51:
+  version "8.0.9-dev.51"
+  resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-8.0.9-dev.51.tgz#4533b65c2bfd753e2e7dbf43157a2223cd0e7bee"
+  integrity sha512-I06MZJt7A7lQMeSf03DorqyNJS+SAAGyPZlj2ECNWTBMEQCPFSzCw/FipbABexrTEC1j1AegD032nJduoQNqEg==
 
 walk-up-path@^4.0.0:
   version "4.0.0"
