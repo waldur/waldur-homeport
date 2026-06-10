@@ -4,9 +4,9 @@ import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { usersPartialUpdate } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
-import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 
+import { UserDeactivateDialog } from './UserDeactivateDialog';
 import { UserStatus } from './UserStatus';
 
 describe('UserStatus', () => {
@@ -29,43 +29,20 @@ describe('UserStatus', () => {
     expect(screen.getByLabelText('Active')).toBeChecked();
   });
 
-  it('deactivates user successfully', async () => {
-    vi.mocked(useModal().confirm).mockResolvedValue(true);
-    const { queryClient } = renderWithProviders(<UserStatus user={mockUser} />);
-    const invalidateQueriesSpy = vi.spyOn(queryClient, 'invalidateQueries');
-    const setQueryDataSpy = vi.spyOn(queryClient, 'setQueryData');
-
-    await user.click(screen.getByLabelText('Active'));
-    await waitFor(() => {
-      expect(useModal().confirm).toHaveBeenCalled();
-      expect(usersPartialUpdate).toHaveBeenCalledWith({
-        path: { uuid: 'abc123' },
-        body: { is_active: false },
-      });
-      expect(invalidateQueriesSpy).toHaveBeenCalledWith({
-        queryKey: ['User', 'abc123'],
-      });
-      expect(setQueryDataSpy).toHaveBeenCalledWith(
-        ['User', 'abc123'],
-        expect.any(Function),
-      );
-      expect(useNotify().showSuccess).toHaveBeenCalledWith(
-        'User has been disabled.',
-      );
-    });
-  });
-
-  it('handles the error when deactivating user', async () => {
-    vi.mocked(useModal().confirm).mockResolvedValue(true);
-    vi.mocked(usersPartialUpdate).mockRejectedValue(new Error('Server error'));
+  it('opens the deactivation dialog (with mandatory reason) when disabling a user', async () => {
     renderWithProviders(<UserStatus user={mockUser} />);
+
     await user.click(screen.getByLabelText('Active'));
     await waitFor(() => {
-      expect(useNotify().showErrorResponse).toHaveBeenCalledWith(
-        new Error('Server error'),
-        'Unable to toggle user status.',
+      expect(useModal().openDialog).toHaveBeenCalledWith(
+        UserDeactivateDialog,
+        expect.objectContaining({
+          resolve: expect.objectContaining({ user: mockUser }),
+        }),
       );
     });
+    // Deactivation goes through the dialog, not a direct toggle.
+    expect(usersPartialUpdate).not.toHaveBeenCalled();
   });
 
   it('renders the component with the disabled user', () => {
