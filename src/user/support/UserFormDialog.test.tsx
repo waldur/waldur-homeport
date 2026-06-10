@@ -370,6 +370,69 @@ describe('UserFormDialog', () => {
     });
   });
 
+  it('requires a deactivation reason when deactivating an active user via the edit form', async () => {
+    const existingUser = {
+      uuid: 'target-user-uuid',
+      username: 'jane.doe',
+      email: 'jane@example.com',
+      is_active: true,
+      is_staff: false,
+      is_support: false,
+      can_use_personal_access_tokens: false,
+      has_usable_password: false,
+    } as any;
+
+    vi.mocked(usersPartialUpdate).mockResolvedValueOnce({
+      data: { ...existingUser, is_active: false },
+    } as any);
+
+    renderWithProviders(
+      <UserFormDialog resolve={{ user: existingUser, refetch: mockRefetch }} />,
+    );
+
+    // Reason field is hidden while the user is still active.
+    expect(
+      screen.queryByLabelText(/Deactivation reason/i),
+    ).not.toBeInTheDocument();
+
+    // Uncheck "Active" -> the reason field appears.
+    await user.click(screen.getByLabelText('Active'));
+    const reasonField = await screen.findByLabelText(/Deactivation reason/i);
+    expect(reasonField).toBeInTheDocument();
+
+    // The reason is required: with it empty, the wizard cannot advance.
+    await waitFor(() => {
+      expect(screen.getByTestId('wizard-submit-btn')).toBeDisabled();
+    });
+
+    // Provide the reason -> advancing is unblocked.
+    await user.type(reasonField, 'Left the organization');
+    await waitFor(() => {
+      expect(screen.getByTestId('wizard-submit-btn')).not.toBeDisabled();
+    });
+    await user.click(screen.getByTestId('wizard-submit-btn')); // to step 2
+    await waitFor(() =>
+      expect(screen.getByText('Personal information')).toBeInTheDocument(),
+    );
+    await user.click(screen.getByTestId('wizard-submit-btn')); // to step 3
+    await waitFor(() =>
+      expect(screen.getByText('Identity & Profile')).toBeInTheDocument(),
+    );
+    await user.click(screen.getByTestId('wizard-submit-btn')); // to step 4
+    await waitFor(() => expect(screen.getByText('Review')).toBeInTheDocument());
+    await user.click(screen.getByTestId('wizard-submit-btn')); // Save
+
+    await waitFor(() => {
+      expect(usersPartialUpdate).toHaveBeenCalledWith({
+        path: { uuid: 'target-user-uuid' },
+        body: expect.objectContaining({
+          is_active: false,
+          deactivation_reason: 'Left the organization',
+        }),
+      });
+    });
+  });
+
   it('shows error notification when save fails on create user API', async () => {
     vi.mocked(usersCreate).mockRejectedValueOnce(new Error('Creation failure'));
 

@@ -5347,5 +5347,18 @@
   "Prepaid (per month)": "Ettemakstud (kuu kohta)",
   "Prepaid period expired": "Ettemakstud periood on lõppenud",
   "Price for remaining {count} months": "Hind järelejäänud {count} kuu eest",
-  "Resource is not associated with a plan.": "Ressurss pole plaaniga seotud."
+  "Resource is not associated with a plan.": "Ressurss pole plaaniga seotud.",
+  "A reason is required to deactivate a user.": "Kasutaja deaktiveerimiseks on vaja põhjust.",
+  "Administrative status": "Administratiivne staatus",
+  "Administratively disabled": "Administraatori poolt keelatud",
+  "Deactivate user": "Deaktiveeri kasutaja",
+  "Deactivate {name}": "Deaktiveeri {name}",
+  "Deactivation reason": "Deaktiveerimise põhjus",
+  "Disabling here is an administrative override: when automatic role-based deactivation is enabled, the system will not re-enable the account automatically, even if the user regains roles. It can only be reactivated manually here.": "Siin keelamine on administraatori tühistus: kui automaatne rollipõhine deaktiveerimine on lubatud, ei aktiveeri süsteem kontot automaatselt uuesti, isegi kui kasutaja saab rollid tagasi. Selle saab uuesti aktiveerida ainult siin käsitsi.",
+  "Required. This is an administrative override: the account will not be reactivated automatically by the system, even if the user regains roles.": "Kohustuslik. See on administraatori tühistus: süsteem ei aktiveeri kontot automaatselt uuesti, isegi kui kasutaja saab rollid tagasi.",
+  "The account will be deactivated and will not be reactivated automatically by the system, even if the user regains roles. A staff member can reactivate it manually.": "Konto deaktiveeritakse ja süsteem ei aktiveeri seda automaatselt uuesti, isegi kui kasutaja saab rollid tagasi. Personali liige saab selle käsitsi uuesti aktiveerida.",
+  "This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.": "Selle konto keelas administraator. Kui automaatne rollipõhine deaktiveerimine on lubatud, ei aktiveeri süsteem seda automaatselt uuesti, isegi kui kasutaja saab rollid tagasi. Personali liige peab selle käsitsi uuesti aktiveerima.",
+  "Unable to deactivate user.": "Kasutajat ei õnnestu deaktiveerida.",
+  "User has been deactivated.": "Kasutaja on deaktiveeritud.",
+  "Why is this user being deactivated?": "Miks see kasutaja deaktiveeritakse?"
 }

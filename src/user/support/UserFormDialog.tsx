@@ -47,6 +47,7 @@ export interface UserFormData {
   organization_registry_code?: string;
   password?: string;
   remove_password?: boolean;
+  deactivation_reason?: string;
 }
 
 export interface UserFormDialogData {
@@ -103,6 +104,13 @@ const buildBody = (formData: UserFormData): UserRequest => {
 
   if (formData.gender !== undefined && formData.gender !== null) {
     body.gender = formData.gender;
+  }
+
+  // When deactivating via the edit form, pass the mandatory reason so the
+  // backend records it and flags the account as administratively deactivated
+  // (the role-sync task will not reactivate it automatically).
+  if (!formData.is_active && formData.deactivation_reason) {
+    body.deactivation_reason = formData.deactivation_reason;
   }
 
   return body;
