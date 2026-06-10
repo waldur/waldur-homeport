@@ -1117,6 +1117,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'ONLY_ONE_PROJECT_MANAGER',
+        description: translate('If true, a project may have at most one active project manager (PROJECT.MANAGER).'),
+        default: false,
+        type: 'boolean',
+      },
+      {
         key: 'INVITATION_ALLOWED_FIELDS',
         description: translate('Fields that can be provided in invitations for email personalization. These are NOT copied to user profile.'),
         default: ['full_name', 'organization', 'job_title'],
