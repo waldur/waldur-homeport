@@ -1,10 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
-import { useMediaQuery } from 'react-responsive';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { Tip } from '@/core/Tooltip';
@@ -71,17 +69,12 @@ export const ResourceLimitChangeInfo = ({
       );
     }
     return {
-      periods: [],
       components: [],
+      periodTotals: [],
       orderCanBeApproved: true,
-      totalPeriods: [],
-      changedTotalPeriods: [],
       offering,
     };
   }, [requirements, resource, offering]);
-
-  const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
-  const periodsCountToShow = isMd ? 1 : 3;
 
   return (
     <>
@@ -130,18 +123,10 @@ export const ResourceLimitChangeInfo = ({
                     <th>{translate('Current limit')}</th>
                     <th>{translate('Requested limit')}</th>
                     <th>{translate('Change')}</th>
-                    {data.periods
-                      .slice(0, periodsCountToShow)
-                      .map((period, index) => (
-                        <th className="col-sm-1 icon-align" key={index}>
-                          {translate('Impact')} (
-                          {period
-                            ? period.substring(period.indexOf(' ') + 1)
-                            : null}
-                          )
-                          <PriceTooltip />
-                        </th>
-                      ))}
+                    <th className="col-sm-2 icon-align">
+                      {translate('Impact')}
+                      <PriceTooltip />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -178,13 +163,13 @@ export const ResourceLimitChangeInfo = ({
                           DASH_ESCAPE_CODE
                         )}
                       </td>
-                      {component.prices
-                        .slice(0, periodsCountToShow)
-                        .map((_, i) => (
-                          <td key={i}>
-                            {!component.changedLimit && DASH_ESCAPE_CODE}
+                      <td>
+                        {!component.changedLimit ? (
+                          DASH_ESCAPE_CODE
+                        ) : (
+                          <>
                             <ChangesAmountBadge
-                              changes={component.changedPrices[i]}
+                              changes={component.changedPrice}
                               asPrice
                               badgePill
                               badgeOutline
@@ -193,41 +178,29 @@ export const ResourceLimitChangeInfo = ({
                               showSign
                               reverseColor
                             />
-                          </td>
-                        ))}
+                            {component.priceSuffix && (
+                              <span className="text-muted ms-1">
+                                {component.priceSuffix}
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </td>
                     </tr>
                   ))}
-                  {/* Total row */}
-                  <tr className="fw-bolder">
-                    <td colSpan={4}>
-                      <span className="text-dark">
-                        {order.plan_unit === 'hour'
-                          ? translate('Estimated hourly fee impact')
-                          : order.plan_unit === 'day'
-                            ? translate('Estimated daily fee impact')
-                            : order.plan_unit === 'half_month'
-                              ? translate('Estimated half month fee impact')
-                              : order.plan_unit === 'month'
-                                ? translate('Estimated monthly fee impact')
-                                : order.plan_unit === 'quarter'
-                                  ? translate('Estimated quarterly fee impact')
-                                  : translate('Estimated {period} fee impact', {
-                                      period: order.plan_unit,
-                                    })}
-                      </span>
-                    </td>
-                    {data.totalPeriods
-                      .slice(0, periodsCountToShow)
-                      .map((_, index) => (
-                        <td key={index} className="text-dark">
-                          {defaultCurrency(
-                            data.changedTotalPeriods[index],
-                            false,
-                            true,
-                          )}
-                        </td>
-                      ))}
-                  </tr>
+                  {data.periodTotals.map((row) => (
+                    <tr className="fw-bolder" key={row.chargeMode}>
+                      <td colSpan={4}>
+                        <span className="text-dark">
+                          {translate('Estimated impact')} ({row.label})
+                        </span>
+                      </td>
+                      <td className="text-dark">
+                        {defaultCurrency(row.changedTotal, false, true)}
+                        {row.priceSuffix}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

@@ -198,7 +198,7 @@ describe('ChangeLimitsDialog', () => {
     renderDialog();
 
     await waitFor(() => {
-      expect(screen.queryByText('Price per day')).not.toBeInTheDocument();
+      expect(screen.queryByText('Price')).not.toBeInTheDocument();
       expect(screen.queryByText(/€/)).not.toBeInTheDocument();
     });
   });

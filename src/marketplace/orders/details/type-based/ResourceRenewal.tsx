@@ -55,14 +55,20 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
       );
     }
     return {
-      periods: [],
       components: [],
+      periodTotals: [],
       orderCanBeApproved: true,
-      totalPeriods: [],
-      changedTotalPeriods: [],
       offering,
     };
   }, [order, offering, newLimits, attributes.old_limits]);
+
+  // Renewal extends the resource lifetime by N months — the per-component price
+  // we read from `row.price` is the monthly-equivalent value, so the cost for
+  // the extension period is just price × months.
+  const monthlyTotal = useMemo(
+    () => data.periodTotals.find((r) => r.chargeMode === 'month')?.total ?? 0,
+    [data.periodTotals],
+  );
 
   return (
     <>
@@ -134,7 +140,8 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
                       {translate('Price per month')} <PriceTooltip />
                     </>
                   ),
-                  render: ({ row }) => defaultCurrency(row.prices[0]),
+                  render: ({ row }) =>
+                    defaultCurrency(row.chargeMode === 'month' ? row.price : 0),
                 },
                 {
                   title: (
@@ -147,7 +154,8 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
                   ),
                   render: ({ row }) =>
                     defaultCurrency(
-                      row.prices[0] * attributes.extension_months,
+                      (row.chargeMode === 'month' ? row.price : 0) *
+                        attributes.extension_months,
                     ),
                 },
               ]),
@@ -158,13 +166,9 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
               <td colSpan={columnCount - 2} className="text-dark text-end">
                 {translate('Total renewal cost')}
               </td>
+              <td className="text-dark">{defaultCurrency(monthlyTotal)}</td>
               <td className="text-dark">
-                {defaultCurrency(data.totalPeriods[0])}
-              </td>
-              <td className="text-dark">
-                {defaultCurrency(
-                  data.totalPeriods[0] * attributes.extension_months,
-                )}
+                {defaultCurrency(monthlyTotal * attributes.extension_months)}
               </td>
             </tr>
           )
