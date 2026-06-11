@@ -36,9 +36,9 @@ interface ResourceTeamMember {
  * instead of per-Project grants.
  *
  * Each grant gets Edit (update expiration) and Delete (revoke) actions.
- * Both actions consume `row.scope_*` / `row.user_*` fields from
- * `TeamUserActions.tsx`, so we pass synthetic UserRole-shaped rows
- * built from `(member, grant)` pairs — no changes to the actions
+ * Both actions (`UpdateUserExpirationAction`, `DeleteUserAction`) consume
+ * `row.scope_*` / `row.user_*` fields, so we pass synthetic UserRole-shaped
+ * rows built from `(member, grant)` pairs — no changes to the actions
  * themselves are required.
  */
 const RowActions: FunctionComponent<{

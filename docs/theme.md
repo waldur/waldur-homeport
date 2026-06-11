@@ -173,7 +173,7 @@ Avoid hardcoding colors that won't adapt:
 
 Components like react-select, Monaco Editor, and ECharts need explicit theme configuration via the `useTheme()` hook. Check existing implementations for examples:
 
-- `src/form/themed-select.tsx` - react-select theming
+- `src/form/select/theme.ts` - react-select theming
 - `src/form/MonacoField.tsx` - Monaco Editor theming
 - `src/core/EChart.tsx` - ECharts theming
 

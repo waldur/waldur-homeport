@@ -230,7 +230,7 @@ http://localhost:8001/projects/{uuid}/manage/?include_terminated=true&tab=genera
 - `yarn i18n:analyze <lang>` - Analyze translation quality (e.g., `yarn i18n:analyze et`)
 - `yarn i18n:check` - Check translation completeness
 - `yarn i18n:validate` - Validate translation file syntax
-- `yarn gettext:extract` - Extract translatable strings from source
+- `yarn i18n:extract` - Extract translatable strings from source
 
 ### Supported Languages
 

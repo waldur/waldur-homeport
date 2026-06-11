@@ -26,7 +26,7 @@ yarn lint:fix       # Auto-fix linting
 
 ## Guides & Subagents
 
-For detailed guidance, see `docs/`:
+For detailed guidance, see `docs/` — full index with one-line descriptions in `docs/README.md`. Most-used guides:
 
 - `development-workflow.md` - Planning, TDD, problem-solving
 - `code-quality.md` - Linting, formatting, TypeScript
@@ -108,7 +108,7 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   )}
   ```
 
-  Reference: `src/marketplace/resources/users/ResourceUsersList.tsx` and `TeamUserActions.tsx`
+  Reference: `src/marketplace/resources/projects/ResourceUserInvitationsList.tsx`
 
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
 
