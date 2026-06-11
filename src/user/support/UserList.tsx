@@ -23,7 +23,9 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
+import { EXTRA_PROFILE_FIELDS } from './extraProfileFields';
 import { IsdBadges } from './IsdBadges';
+import { isProfileAttributeEnabled } from './profileAttributes';
 import { RecalculateUserActionsButton } from './RecalculateUserActionsButton';
 import { UserBulkActions } from './UserBulkActions';
 import { UserDetailsButton } from './UserDetailsButton';
@@ -458,6 +460,21 @@ const UserListTable: FunctionComponent = () => {
       },
     );
   }
+
+  // Profile attributes enabled in the deployment
+  // (ENABLED_USER_PROFILE_ATTRIBUTES) become optional columns, hidden by
+  // default and toggleable. Shares EXTRA_PROFILE_FIELDS with UserDetailsTable.
+  EXTRA_PROFILE_FIELDS.forEach((field) => {
+    if (isProfileAttributeEnabled(field.attr)) {
+      columns.push({
+        title: field.label(),
+        render: ({ row }) => <>{renderFieldOrDash(field.getValue(row))}</>,
+        keys: [field.attr],
+        id: field.attr,
+        optional: true,
+      });
+    }
+  });
 
   const validColumns = columns.map((column) => column.id);
   const enabledColumns = ENV.plugins.WALDUR_CORE.USER_TABLE_COLUMNS

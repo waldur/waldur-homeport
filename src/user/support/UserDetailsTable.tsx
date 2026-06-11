@@ -15,6 +15,7 @@ import { formatUserIsActive, formatUserStatus } from '@/user/support/utils';
 import { useUser } from '@/workspace/hooks';
 import { checkIsStaffOrSupport } from '@/workspace/selectors';
 
+import { EXTRA_PROFILE_FIELDS } from './extraProfileFields';
 import { isProfileAttributeEnabled } from './profileAttributes';
 
 interface OwnProps {
@@ -146,6 +147,24 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
           value={<FieldWithCopy value={props.user.affiliations.join(', ')} />}
         />
       ) : null}
+
+      {EXTRA_PROFILE_FIELDS.map((field) => {
+        if (!isProfileAttributeEnabled(field.attr)) {
+          return null;
+        }
+        const value = field.getValue(props.user);
+        if (field.skipWhenEmpty && !value) {
+          return null;
+        }
+        return (
+          <FormTable.Item
+            key={field.attr}
+            label={field.label()}
+            value={<FieldWithCopy value={value} />}
+          />
+        );
+      })}
+
       {isVisible && (
         <FormTable.Item
           label={translate('User type')}
