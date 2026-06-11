@@ -216,7 +216,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
       render={({ handleSubmit, submitting, invalid, values }) => {
         const hasErrors = useMemo(
           () => hasCourseAccountsErrors(values.data),
-          [],
+          [values.data],
         );
 
         return (
