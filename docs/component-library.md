@@ -856,8 +856,10 @@ Use for **all empty states**. Always provide an actionable CTA via `callback`+`b
 #### Table
 
 ```ts
-import { Table } from '@/table';
+import Table from '@/table/Table';
 ```
+
+`Table` is not re-exported from the `@/table` barrel — always import it from the subpath.
 
 Key configuration props. Full interface is large — these are the most commonly used.
 

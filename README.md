@@ -3,6 +3,8 @@
 Waldur HomePort is a web-based client for the [Waldur MasterMind][1].
 It uses yarn for dependency management and Vite as module bundler.
 
+Developer guides (architecture, UI patterns, forms, tables, testing, i18n and more) live in [docs/](docs/README.md).
+
 ## Minimal requirements
 
 - Linux, OS X or Windows Subsystem for Linux 2 with Ubuntu
