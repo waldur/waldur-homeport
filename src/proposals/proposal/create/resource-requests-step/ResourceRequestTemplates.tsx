@@ -19,6 +19,7 @@ import { FieldReviewComments } from '@/proposals/proposal/create-review/FieldRev
 import { ProposalReview } from '@/proposals/types';
 import { ActionButton } from '@/table/ActionButton';
 import { selectAllRows } from '@/table/actions';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { getTableState } from '@/table/selectors';
 import Table from '@/table/Table';
@@ -137,10 +138,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
 
   const tableProps = useTable({
     table: TABLE_ID,
-    fetchData: () =>
-      Promise.resolve({
-        rows: call.resource_templates,
-      }),
+    fetchData: createClientPaginatedFetcher(call.resource_templates),
   });
 
   // Get selected rows from table state

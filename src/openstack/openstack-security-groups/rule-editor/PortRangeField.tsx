@@ -37,6 +37,9 @@ const parsePortRange = (value: any) => {
 const formatPortRange = (value: any) => {
   if (!value || typeof value !== 'object') return '';
   const { min, max } = value;
+  if (min == null && max == null) {
+    return '';
+  }
   if (min === -1 && max === -1) {
     return '';
   }

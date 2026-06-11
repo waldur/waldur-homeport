@@ -4,6 +4,7 @@ import { ServiceProviderComplianceOverview } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -20,10 +21,7 @@ export const ComplianceExpandableRow: FC<{
 }> = ({ row: compliance }) => {
   const tableProps = useTable({
     table: 'ProviderComplianceOverview-' + compliance.checklist_name, // FIX THIS: does not have uuid?
-    fetchData: () =>
-      Promise.resolve({
-        rows: dummyData,
-      }),
+    fetchData: createClientPaginatedFetcher(dummyData),
   });
 
   useEffect(() => {

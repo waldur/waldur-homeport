@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
@@ -22,11 +23,7 @@ export const RabbitMQVhostList: FC<RabbitMQVhostListProps> = ({ data }) => {
 
   const tableProps = useTable({
     table: 'RabbitMQVhosts',
-    fetchData: () =>
-      Promise.resolve({
-        rows: data.vhosts,
-        resultCount: data.vhosts.length,
-      }),
+    fetchData: createClientPaginatedFetcher(data.vhosts),
   });
 
   const columns = useMemo(

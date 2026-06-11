@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -20,10 +21,7 @@ export const SecurityGroupRulesList = ({
 }) => {
   const tableProps = useTable({
     table: 'SecurityGroupRulesList-' + row.uuid,
-    fetchData: () =>
-      Promise.resolve({
-        rows: row.rules,
-      }),
+    fetchData: createClientPaginatedFetcher(row.rules),
   });
 
   useEffect(() => {

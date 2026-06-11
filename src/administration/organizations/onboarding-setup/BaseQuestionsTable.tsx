@@ -25,6 +25,7 @@ import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -431,7 +432,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
 
   const tableProps = useTable({
     table: `${checklistType}QuestionsList`,
-    fetchData: () => Promise.resolve({ rows: questions || [] }),
+    fetchData: createClientPaginatedFetcher(questions || []),
   });
 
   // Sync table state when questions change

@@ -8,6 +8,7 @@ import { translate } from '@/i18n';
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@/marketplace/offerings/constants';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -109,15 +110,6 @@ export const PreviewApplyStep: FC<WizardStepProps> = (props) => {
   const { values } = useFormState<ArticleCodeFormValues>();
   const previewResults = values.previewResults || [];
 
-  const fetchData = useCallback(
-    () =>
-      Promise.resolve({
-        rows: previewResults,
-        resultCount: previewResults.length,
-      }),
-    [previewResults],
-  );
-
   const filter = useMemo(
     () => ({ _key: previewResults.length }),
     [previewResults],
@@ -125,7 +117,7 @@ export const PreviewApplyStep: FC<WizardStepProps> = (props) => {
 
   const tableProps = useTable({
     table: 'articleCodePreview',
-    fetchData,
+    fetchData: createClientPaginatedFetcher(previewResults),
     filter,
   });
 

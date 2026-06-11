@@ -3,6 +3,7 @@ import { FC, useState, useMemo } from 'react';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -19,7 +20,7 @@ export const OfferingSoftwareCatalogsSection: FC<OfferingSectionProps> = (
 
   const tableProps = useTable({
     table: 'OfferingSoftwareCatalogs',
-    fetchData: async () => {
+    fetchData: async (request) => {
       let freshSoftwareCatalogs;
       if (!firstFetch) {
         const res = await props.refetch();
@@ -28,9 +29,9 @@ export const OfferingSoftwareCatalogsSection: FC<OfferingSectionProps> = (
         setFirstFetch(false);
       }
 
-      return Promise.resolve({
-        rows: freshSoftwareCatalogs || props.offering.software_catalogs || [],
-      });
+      return createClientPaginatedFetcher(
+        freshSoftwareCatalogs || props.offering.software_catalogs || [],
+      )(request);
     },
   });
 

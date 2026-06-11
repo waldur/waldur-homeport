@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -14,11 +15,7 @@ interface OwnProps {
 export const ProjectPreviewExpandableRow: FC<OwnProps> = (props) => {
   const tableProps = useTable({
     table: 'ProjectPreviewResources-' + props.row.uuid,
-    fetchData: () =>
-      Promise.resolve({
-        rows: props.row.resources,
-        resultCount: props.row.resources.length,
-      }),
+    fetchData: createClientPaginatedFetcher(props.row.resources),
   });
 
   return (

@@ -3,6 +3,7 @@ import { NestedPartition, Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -30,7 +31,7 @@ export const OfferingPartitionsSection: FC<OfferingSectionProps> = (props) => {
 
   const tableProps = useTable({
     table: 'OfferingPartitions',
-    fetchData: async () => {
+    fetchData: async (request) => {
       let freshData;
       if (!firstFetch) {
         const res = await props.refetch();
@@ -39,9 +40,9 @@ export const OfferingPartitionsSection: FC<OfferingSectionProps> = (props) => {
         setFirstFetch(false);
       }
 
-      return Promise.resolve({
-        rows: freshData || props.offering.partitions || [],
-      });
+      return createClientPaginatedFetcher(
+        freshData || props.offering.partitions || [],
+      )(request);
     },
   });
 

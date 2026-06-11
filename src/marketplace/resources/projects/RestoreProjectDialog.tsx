@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
 import {
   marketplaceResourceProjectsRecover,
@@ -11,6 +11,7 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -53,17 +54,9 @@ export const RestoreProjectDialog: FunctionComponent<
     {}) as TerminationMetadata;
   const previousMembers = metadata.user_roles ?? [];
 
-  const fetchData = useCallback(
-    () =>
-      Promise.resolve({
-        rows: previousMembers,
-        resultCount: previousMembers.length,
-      }),
-    [previousMembers],
-  );
   const tableProps = useTable({
     table: `restore-rp-${resource_project.uuid}-members`,
-    fetchData,
+    fetchData: createClientPaginatedFetcher(previousMembers),
   });
 
   const mutation = useManagedMutation<any, any, FormData>({

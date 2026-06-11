@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
 import {
   OpenStackNestedInstance,
   OpenStackServerGroup,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -17,18 +17,9 @@ interface ServerGroupExpandableRowProps {
 export const ServerGroupExpandableRow = ({
   row,
 }: ServerGroupExpandableRowProps) => {
-  const fetchData = useCallback(
-    () =>
-      Promise.resolve({
-        rows: row.instances || [],
-        resultCount: row.instances?.length || 0,
-      }),
-    [row.instances],
-  );
-
   const tableProps = useTable({
     table: `server-group-instances-${row.uuid}`,
-    fetchData,
+    fetchData: createClientPaginatedFetcher(row.instances || []),
   });
 
   return (

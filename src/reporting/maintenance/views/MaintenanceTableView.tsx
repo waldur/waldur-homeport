@@ -5,6 +5,7 @@ import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { getMaintenanceState } from '@/maintenance/utils';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -27,10 +28,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
 }) => {
   const tableProps = useTable({
     table: 'MaintenanceReportingTable',
-    fetchData: () =>
-      Promise.resolve({
-        rows: announcements,
-      }),
+    fetchData: createClientPaginatedFetcher(announcements),
   });
 
   // Refetch when data changes

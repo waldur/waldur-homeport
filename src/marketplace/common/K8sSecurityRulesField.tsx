@@ -307,6 +307,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
           <Table<K8sSecurityRule>
             {...tableProps}
             rows={rules}
+            hasPagination={false}
             columns={[
               {
                 title: translate('Rule name'),

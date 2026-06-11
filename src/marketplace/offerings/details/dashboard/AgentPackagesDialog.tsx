@@ -3,6 +3,7 @@ import { AgentIdentity } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -16,10 +17,9 @@ export const AgentPackagesDialog: FC<{
 }> = ({ resolve: { agentIdentity } }) => {
   const tableProps = useTable({
     table: 'AgentServiceProcesses',
-    fetchData: () =>
-      Promise.resolve({
-        rows: (agentIdentity.dependencies || []) as AgentPackage[],
-      }),
+    fetchData: createClientPaginatedFetcher(
+      (agentIdentity.dependencies || []) as AgentPackage[],
+    ),
   });
 
   return (

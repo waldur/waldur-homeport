@@ -22,7 +22,7 @@ import { translate } from '@/i18n';
 import { SecurityGroupRulesList } from '@/openstack/openstack-security-groups/SecurityGroupRulesList';
 import { ResourceState } from '@/resource/state/ResourceState';
 import { ResourceSummaryBase } from '@/resource/summary/ResourceSummaryBase';
-import { createFetcher } from '@/table/api';
+import { createClientPaginatedFetcher, createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -205,7 +205,7 @@ const SecurityGroupsTab: FC<{
 
   const tableProps = useTable({
     table: `lb-vip-sgs-${loadBalancerUuid}`,
-    fetchData: () => Promise.resolve({ rows: securityGroups || [] }),
+    fetchData: createClientPaginatedFetcher(securityGroups || []),
   });
 
   useEffect(() => {

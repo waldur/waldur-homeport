@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { translate } from '@/i18n';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -15,11 +16,7 @@ interface CallOfferingsCardProps {
 export const CallOfferingsCard: FC<CallOfferingsCardProps> = (props) => {
   const tableProps = useTable({
     table: 'CallOfferingsList',
-    fetchData: () =>
-      Promise.resolve({
-        rows: props.call.offerings,
-        resultCount: props.call.offerings.length,
-      }),
+    fetchData: createClientPaginatedFetcher(props.call.offerings),
   });
 
   return (

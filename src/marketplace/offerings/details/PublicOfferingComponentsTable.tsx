@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -17,7 +18,7 @@ export const PublicOfferingComponentsTable: FunctionComponent<
 > = ({ offering, hideActionBar, fullWidth }) => {
   const tableProps = useTable({
     table: 'OfferingComponents-' + offering.uuid,
-    fetchData: () => Promise.resolve({ rows: offering.components }),
+    fetchData: createClientPaginatedFetcher(offering.components),
   });
 
   return (

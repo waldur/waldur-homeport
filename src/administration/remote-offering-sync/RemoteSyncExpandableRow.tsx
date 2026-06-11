@@ -6,6 +6,7 @@ import {
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -24,10 +25,7 @@ export const RemoteSyncExpandableRow: FC<{
 }> = ({ row: remoteSync }) => {
   const tableProps = useTable({
     table: 'RemoteSyncCategoryRules-' + remoteSync.uuid,
-    fetchData: () =>
-      Promise.resolve({
-        rows: remoteSync.remotelocalcategory_set,
-      }),
+    fetchData: createClientPaginatedFetcher(remoteSync.remotelocalcategory_set),
   });
 
   useEffect(() => {

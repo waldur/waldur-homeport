@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { Answer, QuestionAdmin } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -49,7 +50,7 @@ export const MetadataByAnswerExpandableRow: FC<{
 }> = ({ row: data, fetch }) => {
   const tableProps = useTable({
     table: 'ProjectsMetadata-' + data.question_uuid,
-    fetchData: () => Promise.resolve({ rows: data.project_answers }),
+    fetchData: createClientPaginatedFetcher(data.project_answers),
   });
 
   useEffect(() => {

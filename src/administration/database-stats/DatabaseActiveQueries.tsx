@@ -5,6 +5,7 @@ import { Badge } from '@/core/Badge';
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -22,11 +23,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
 
   const tableProps = useTable({
     table: 'DatabaseActiveQueries',
-    fetchData: () =>
-      Promise.resolve({
-        rows: data.queries,
-        resultCount: data.queries.length,
-      }),
+    fetchData: createClientPaginatedFetcher(data.queries),
   });
 
   const columns = useMemo(
