@@ -6,9 +6,10 @@ import {
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
+import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { ImageUploadField } from '@/marketplace/offerings/update/ImageUploadField';
+import { ImageUploadGroup } from '@/marketplace/offerings/update/ImageUploadField';
 import { Offering } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -96,13 +97,12 @@ export const UpdateOfferingMediaDialog: FunctionComponent<
               />
             )}
             <div className="size-sm">
-              <ImageUploadField
+              <ImageUploadGroup
                 name="images"
-                label={translate('Image: ')}
-                accept={'image/*'}
+                validate={required}
+                accept="image/*"
                 buttonLabel={translate('Browse')}
                 className="btn btn-secondary"
-                required={true}
               />
             </div>
           </ModalDialog>

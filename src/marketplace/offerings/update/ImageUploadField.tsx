@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import { FileUploadField } from '@/form';
 import { FileUploadFieldProps } from '@/form/FileUploadField';
+import { withFormGroup } from '@/form/withFormGroup';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
 
@@ -17,9 +18,7 @@ const getImageUrl = (image) => {
   return '';
 };
 
-export const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (
-  props,
-) => {
+const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (props) => {
   if (!props.input.value) {
     return <FileUploadField {...props} />;
   }
@@ -59,3 +58,5 @@ export const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (
     </div>
   );
 };
+
+export const ImageUploadGroup = withFormGroup(ImageUploadField);
