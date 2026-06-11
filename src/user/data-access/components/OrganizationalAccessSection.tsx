@@ -5,6 +5,7 @@ import { AccordionCard } from '@/core/AccordionCard';
 import { Badge } from '@/core/Badge';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -46,7 +47,7 @@ export const OrganizationalAccessSection: FC<
 
   const tableProps = useTable({
     table: 'OrganizationalAccessUsers',
-    fetchData: () => Promise.resolve({ rows: flattenedUsers }),
+    fetchData: createClientPaginatedFetcher(flattenedUsers),
   });
 
   if (scopes.length === 0) {

@@ -4,6 +4,7 @@ import { Answer, QuestionAdmin } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { BooleanIconBadge } from '@/project/metadata/BooleanIconBadge';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -76,7 +77,7 @@ export const MetadataByAnswerExpandableRow: FC<{
 }> = ({ row: data, fetch }) => {
   const tableProps = useTable({
     table: 'OfferingsMetadata-' + data.question_uuid,
-    fetchData: () => Promise.resolve({ rows: dummyData }),
+    fetchData: createClientPaginatedFetcher(dummyData),
   });
 
   useEffect(() => {

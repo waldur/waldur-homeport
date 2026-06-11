@@ -6,6 +6,7 @@ import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -99,11 +100,7 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
 
   const tableProps = useTable({
     table: 'ImportCoursesPreview',
-    fetchData: () =>
-      Promise.resolve({
-        rows: data,
-        resultCount: data.length,
-      }),
+    fetchData: createClientPaginatedFetcher(data),
     filter: useMemo(() => ({ _rev: data }), [data]),
   });
 

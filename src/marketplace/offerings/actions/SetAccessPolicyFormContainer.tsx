@@ -3,6 +3,7 @@ import { Field } from 'react-final-form';
 import { OrganizationGroup } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -17,11 +18,7 @@ export const SetAccessPolicyFormContainer: FunctionComponent<
 > = ({ organizationGroups, submitting }) => {
   const tableProps = useTable({
     table: 'OrganizationGroups',
-    fetchData: () =>
-      Promise.resolve({
-        rows: organizationGroups,
-        totalCount: organizationGroups.length,
-      }),
+    fetchData: createClientPaginatedFetcher(organizationGroups),
   });
 
   const columns = useMemo(

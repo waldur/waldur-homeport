@@ -3,6 +3,7 @@ import { FC, useMemo } from 'react';
 import { Link } from '@/core/Link';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -26,11 +27,7 @@ export const RabbitMQVhostExpandableRow: FC<
 
   const tableProps = useTable({
     table: `RabbitMQQueues-${row.name}`,
-    fetchData: () =>
-      Promise.resolve({
-        rows: row.queues,
-        resultCount: row.queues.length,
-      }),
+    fetchData: createClientPaginatedFetcher(row.queues),
   });
 
   const columns = useMemo(

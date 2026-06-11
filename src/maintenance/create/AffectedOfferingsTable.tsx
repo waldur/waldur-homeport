@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { AtLeast } from '@/core/types';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -22,7 +23,7 @@ export const AffectedOfferingsTable: FC<AffectedOfferingsTableProps> = ({
 
   const tableProps = useTable({
     table: 'MaintenanceProviderOfferingsPreview',
-    fetchData: () => Promise.resolve({ rows: selectedOfferings }),
+    fetchData: createClientPaginatedFetcher(selectedOfferings),
   });
 
   if (!selectedOfferings?.length) {

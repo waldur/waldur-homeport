@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { NestedPartition } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -19,11 +20,7 @@ export const PublicOfferingPartitions: FunctionComponent<
 > = ({ offering }) => {
   const tableProps = useTable({
     table: 'PublicOfferingPartitions',
-    fetchData: () => {
-      return Promise.resolve({
-        rows: offering?.partitions || [],
-      });
-    },
+    fetchData: createClientPaginatedFetcher(offering?.partitions || []),
   });
 
   return (

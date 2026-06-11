@@ -28,6 +28,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { selectSelectedRows } from '@/table/selectors';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
@@ -161,20 +162,12 @@ const FormModalComponent: FC<
 
   const tableProps = useTable({
     table: TABLE_ID,
-    fetchData: () =>
-      Promise.resolve({
-        rows: resources || [],
-        resultCount: resources?.length,
-      }),
+    fetchData: createClientPaginatedFetcher(resources || []),
   });
 
   const tablePropsUnselected = useTable({
     table: TABLE_ID + '-unselected',
-    fetchData: () =>
-      Promise.resolve({
-        rows: ignoredResources,
-        resultCount: ignoredResources?.length,
-      }),
+    fetchData: createClientPaginatedFetcher(ignoredResources),
   });
 
   const hasResources = resources?.length && value.meta.dirty;

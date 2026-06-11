@@ -12,6 +12,7 @@ import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -90,12 +91,12 @@ export const AggregateLimitDetailsDialog = ({
 
   const tableProps = useTable({
     table: 'aggregateLimitDetailsDialog',
-    fetchData: () =>
-      Promise.resolve({
-        rows: allRows,
-        resultCount: allRows.length,
-      }),
+    fetchData: createClientPaginatedFetcher(allRows),
   });
+
+  useEffect(() => {
+    tableProps.fetch();
+  }, [allRows]);
 
   const columns = [
     {
@@ -160,7 +161,6 @@ export const AggregateLimitDetailsDialog = ({
 
       <Table
         {...tableProps}
-        rows={allRows}
         columns={columns}
         verboseName={translate('Resources')}
         expandableRow={renderExpandableRow}

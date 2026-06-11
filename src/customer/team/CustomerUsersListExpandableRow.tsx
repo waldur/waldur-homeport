@@ -5,6 +5,7 @@ import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -49,14 +50,13 @@ export const CustomerUsersListExpandableRow: FunctionComponent<{
     CustomerProjectGrant & { uuid: string; project_uuid: string }
   >({
     table: 'CustomerUsersListExpandableRow-' + row.uuid,
-    fetchData: () =>
-      Promise.resolve({
-        rows: (row.projects ?? []).map((p) => ({
-          ...p,
-          project_uuid: p.uuid ?? '',
-          uuid: `${p.uuid ?? ''}-${p.role_name ?? ''}`,
-        })),
-      }),
+    fetchData: createClientPaginatedFetcher(
+      (row.projects ?? []).map((p) => ({
+        ...p,
+        project_uuid: p.uuid ?? '',
+        uuid: `${p.uuid ?? ''}-${p.role_name ?? ''}`,
+      })),
+    ),
   });
 
   useEffect(() => {

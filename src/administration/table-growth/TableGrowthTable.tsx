@@ -3,6 +3,7 @@ import { Tooltip } from 'react-bootstrap';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -28,11 +29,7 @@ export const TableGrowthTable: FC<TableGrowthTableProps> = ({
 
   const tableProps = useTable({
     table: 'TableGrowthStats',
-    fetchData: () =>
-      Promise.resolve({
-        rows: data.tables,
-        resultCount: data.tables.length,
-      }),
+    fetchData: createClientPaginatedFetcher(data.tables),
     queryField: 'table_name',
   });
 

@@ -5,6 +5,7 @@ import { translate } from '@/i18n';
 import { AnswerRowActions } from '@/project/metadata/AnswerRowActions';
 import { BooleanIconBadge } from '@/project/metadata/BooleanIconBadge';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -50,7 +51,7 @@ export const MetadataByOfferingExpandableRow: FC<{
 }> = ({ row: projectDetails, fetch }) => {
   const tableProps = useTable({
     table: 'ProjectsMetadataByProject-' + projectDetails.project_uuid,
-    fetchData: () => Promise.resolve({ rows: projectDetails.answers }),
+    fetchData: createClientPaginatedFetcher(projectDetails.answers),
   });
 
   useEffect(() => {

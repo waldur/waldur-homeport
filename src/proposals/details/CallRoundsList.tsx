@@ -4,6 +4,7 @@ import { formatDateTime } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -17,11 +18,9 @@ interface CallRoundsListProps {
 export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
   const tableProps = useTable({
     table: 'PublicCallRoundsList',
-    fetchData: () =>
-      Promise.resolve({
-        rows: getRoundsWithStatus(props.call.rounds),
-        resultCount: props.call.rounds.length,
-      }),
+    fetchData: createClientPaginatedFetcher(
+      getRoundsWithStatus(props.call.rounds),
+    ),
   });
 
   return (

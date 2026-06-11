@@ -1,4 +1,5 @@
 import { translate } from '@/i18n';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableWithTabs } from '@/table/TableWithTabs';
 import { TableTab } from '@/table/types';
@@ -38,7 +39,7 @@ const PureTable = (props) => {
 const LeastUsedChecklistsTable = () => {
   const tableProps = useTable({
     table: 'LeastUsedChecklists',
-    fetchData: () => Promise.resolve({ rows: checklistUsageLeast }),
+    fetchData: createClientPaginatedFetcher(checklistUsageLeast),
   });
 
   return <PureTable {...tableProps} />;
@@ -47,7 +48,7 @@ const LeastUsedChecklistsTable = () => {
 const MostUsedChecklistsTable = () => {
   const tableProps = useTable({
     table: 'MostUsedChecklists',
-    fetchData: () => Promise.resolve({ rows: checklistUsageMost }),
+    fetchData: createClientPaginatedFetcher(checklistUsageMost),
   });
 
   return <PureTable {...tableProps} />;

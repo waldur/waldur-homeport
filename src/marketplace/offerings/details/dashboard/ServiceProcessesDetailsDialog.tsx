@@ -13,6 +13,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -23,7 +24,7 @@ const TableComponent = ({
 }) => {
   const tableProps = useTable({
     table: 'AgentServiceProcesses',
-    fetchData: () => Promise.resolve({ rows: processors }),
+    fetchData: createClientPaginatedFetcher(processors),
   });
 
   return (
