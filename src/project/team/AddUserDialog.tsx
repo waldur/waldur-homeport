@@ -34,7 +34,14 @@ import {
 import { Project, User } from '@/workspace/types';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
+import {
+  getOnlyOneProjectManagerTooltip,
+  isOnlyOneProjectManagerEnabled,
+  isProjectManagerRole,
+  isProjectManagerSelectionBlocked,
+} from './onlyOneProjectManager';
 import { RoleGroup } from './RoleGroup';
+import { useProjectHasActiveManager } from './useProjectHasActiveManager';
 import { UserListOptionInline } from './UserListOptionInline';
 import { hasCurrentCustomerPermission } from './utils';
 
@@ -230,77 +237,144 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   return (
     <Form onSubmit={saveUser}>
       {({ handleSubmit, submitting, invalid, values }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={title || translate('Add user')}
-            footer={
-              <>
-                <CloseDialogButton />
-                <SubmitButton submitting={submitting} disabled={invalid}>
-                  {translate('Add role')}
-                </SubmitButton>
-              </>
-            }
-            iconNode={<UserPlusIcon weight="bold" />}
-            iconColor="success"
-          >
-            <RestrictionsInfoCard
-              customer={resolvedCustomer}
-              project={
-                level === 'project' ? resolvedProject : values.project || null
-              }
-            />
-            <AsyncSelectGroup
-              name="user"
-              required
-              label={translate('User')}
-              key={values.showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
-              placeholder={translate('Select user...')}
-              loadOptions={(query, prevOptions, page) =>
-                loadUsers(
-                  query,
-                  prevOptions,
-                  page,
-                  values.showAllUsers || false,
-                )
-              }
-              getOptionValue={(option) => option.uuid}
-              getOptionLabel={getOptionLabel}
-              components={{ Option: UserListOptionInline }}
-              noOptionsMessage={() =>
-                translate(
-                  'No users found. You can only see users from projects you belong to. Use "Invite by mail" to add new users.',
-                )
-              }
-              validate={required}
-            />
-
-            {currentUser.is_staff && (
-              <BooleanGroup
-                name="showAllUsers"
-                label={translate('Show users outside organization')}
-              />
-            )}
-            <RoleGroup
-              types={
-                level === 'customer' &&
-                hasPermission(currentUser, {
-                  permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-                  customerId: resolvedCustomerUuid,
-                })
-                  ? ['customer', 'project']
-                  : [level]
-              }
-            />
-
-            {level === 'customer' &&
-              values.role?.content_type === 'project' && (
-                <OrganizationProjectSelectField />
-              )}
-            <ExpirationTimeGroup />
-          </ModalDialog>
-        </form>
+        <AddUserDialogForm
+          handleSubmit={handleSubmit}
+          submitting={submitting}
+          invalid={invalid}
+          values={values}
+          level={level}
+          title={title}
+          resolvedProject={resolvedProject}
+          resolvedCustomer={resolvedCustomer}
+          resolvedCustomerUuid={resolvedCustomerUuid}
+          currentUser={currentUser}
+          loadUsers={loadUsers}
+          getOptionLabel={getOptionLabel}
+        />
       )}
     </Form>
+  );
+};
+
+interface AddUserDialogFormProps {
+  handleSubmit: () => void;
+  submitting: boolean;
+  invalid: boolean;
+  values: AddUserDialogFormData;
+  level?: RoleType;
+  title?: string;
+  resolvedProject?: Project;
+  resolvedCustomer;
+  resolvedCustomerUuid: string;
+  currentUser: User;
+  loadUsers: (
+    query: string,
+    prevOptions: unknown,
+    page: number,
+    showAllUsers: boolean,
+  ) => Promise<any>;
+  getOptionLabel: (option: any) => string;
+}
+
+const AddUserDialogForm: FC<AddUserDialogFormProps> = ({
+  handleSubmit,
+  submitting,
+  invalid,
+  values,
+  level,
+  title,
+  resolvedProject,
+  resolvedCustomer,
+  resolvedCustomerUuid,
+  currentUser,
+  loadUsers,
+  getOptionLabel,
+}) => {
+  const targetProjectUuid = values.project?.uuid || resolvedProject?.uuid;
+  const { data: targetProjectHasManager, isPending: isCheckingManager } =
+    useProjectHasActiveManager(targetProjectUuid);
+
+  const needsManagerCheck =
+    isOnlyOneProjectManagerEnabled() &&
+    isProjectManagerRole(values.role) &&
+    Boolean(targetProjectUuid);
+
+  const isProjectManagerBlocked =
+    isProjectManagerSelectionBlocked(targetProjectHasManager, values.role) ||
+    (needsManagerCheck && isCheckingManager);
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <ModalDialog
+        title={title || translate('Add user')}
+        footer={
+          <>
+            <CloseDialogButton />
+            <SubmitButton
+              submitting={submitting}
+              disabled={invalid || isProjectManagerBlocked}
+              disabledReason={
+                isProjectManagerBlocked
+                  ? getOnlyOneProjectManagerTooltip()
+                  : undefined
+              }
+            >
+              {translate('Add role')}
+            </SubmitButton>
+          </>
+        }
+        iconNode={<UserPlusIcon weight="bold" />}
+        iconColor="success"
+      >
+        <RestrictionsInfoCard
+          customer={resolvedCustomer}
+          project={
+            level === 'project' ? resolvedProject : values.project || null
+          }
+        />
+        <AsyncSelectGroup
+          name="user"
+          required
+          label={translate('User')}
+          key={values.showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
+          placeholder={translate('Select user...')}
+          loadOptions={(query, prevOptions, page) =>
+            loadUsers(query, prevOptions, page, values.showAllUsers || false)
+          }
+          getOptionValue={(option) => option.uuid}
+          getOptionLabel={getOptionLabel}
+          components={{ Option: UserListOptionInline }}
+          noOptionsMessage={() =>
+            translate(
+              'No users found. You can only see users from projects you belong to. Use "Invite by mail" to add new users.',
+            )
+          }
+          validate={required}
+        />
+
+        {currentUser.is_staff && (
+          <BooleanGroup
+            name="showAllUsers"
+            label={translate('Show users outside organization')}
+          />
+        )}
+        <RoleGroup
+          types={
+            level === 'customer' &&
+            hasPermission(currentUser, {
+              permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+              customerId: resolvedCustomerUuid,
+            })
+              ? ['customer', 'project']
+              : [level]
+          }
+        />
+
+        {level === 'customer' && values.role?.content_type === 'project' && (
+          <OrganizationProjectSelectField />
+        )}
+        <ExpirationTimeGroup />
+      </ModalDialog>
+    </form>
   );
 };

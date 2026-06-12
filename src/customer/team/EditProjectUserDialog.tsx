@@ -16,7 +16,12 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { type Role } from '@/permissions/types';
 import { getProjectRoles } from '@/permissions/utils';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
+import {
+  getOnlyOneProjectManagerTooltip,
+  isProjectManagerSelectionBlocked,
+} from '@/project/team/onlyOneProjectManager';
 import { RoleGroup } from '@/project/team/RoleGroup';
+import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
 
 import { ProjectGroup } from './ProjectGroup';
 import { UserGroup } from './UserGroup';
@@ -69,6 +74,57 @@ const savePermissions = async (
   await resolve.refetch();
 };
 
+const EditProjectUserDialogFormBody: FC<{
+  handleSubmit: () => void;
+  invalid: boolean;
+  submitting: boolean;
+  values: EditProjectUserDialogFormData;
+  resolve: EditProjectUserDialogResolve;
+  saveMutation: ReturnType<
+    typeof useManagedMutation<any, any, EditProjectUserDialogFormData>
+  >;
+}> = ({ handleSubmit, invalid, submitting, values, resolve, saveMutation }) => {
+  const { data: hasActiveManager } = useProjectHasActiveManager(
+    resolve.project['project_uuid'],
+  );
+  const isProjectManagerBlocked = isProjectManagerSelectionBlocked(
+    hasActiveManager,
+    values.role,
+    resolve.project.role_name,
+  );
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <ModalDialog
+        title={translate('Edit project member')}
+        footer={
+          <>
+            <CloseDialogButton />
+            <SubmitButton
+              submitting={saveMutation.isPending}
+              disabled={invalid || isProjectManagerBlocked}
+              disabledReason={
+                isProjectManagerBlocked
+                  ? getOnlyOneProjectManagerTooltip()
+                  : undefined
+              }
+            >
+              {translate('Save')}
+            </SubmitButton>
+          </>
+        }
+      >
+        <div className="size-sm">
+          <UserGroup permission={resolve.customer} />
+          <ProjectGroup project={resolve.project} />
+          <RoleGroup types={['project']} />
+          <ExpirationTimeGroup disabled={submitting} />
+        </div>
+      </ModalDialog>
+    </form>
+  );
+};
+
 export const EditProjectUserDialog: FC<EditProjectUserDialogProps> = ({
   resolve,
 }) => {
@@ -95,30 +151,15 @@ export const EditProjectUserDialog: FC<EditProjectUserDialogProps> = ({
     <Form<EditProjectUserDialogFormData>
       onSubmit={(values) => saveMutation.mutateAsync(values)}
       initialValues={initialValues}
-      render={({ handleSubmit, invalid, submitting }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={translate('Edit project member')}
-            footer={
-              <>
-                <CloseDialogButton />
-                <SubmitButton
-                  submitting={saveMutation.isPending}
-                  disabled={invalid}
-                >
-                  {translate('Save')}
-                </SubmitButton>
-              </>
-            }
-          >
-            <div className="size-sm">
-              <UserGroup permission={resolve.customer} />
-              <ProjectGroup project={resolve.project} />
-              <RoleGroup types={['project']} />
-              <ExpirationTimeGroup disabled={submitting} />
-            </div>
-          </ModalDialog>
-        </form>
+      render={({ handleSubmit, invalid, submitting, values }) => (
+        <EditProjectUserDialogFormBody
+          handleSubmit={handleSubmit}
+          invalid={invalid}
+          submitting={submitting}
+          values={values}
+          resolve={resolve}
+          saveMutation={saveMutation}
+        />
       )}
     />
   );

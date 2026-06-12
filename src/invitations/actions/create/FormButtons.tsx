@@ -14,6 +14,7 @@ interface FormButtonsProps {
   isCheckingDuplicates?: boolean;
   onContinueClick?: (form: any) => Promise<boolean>;
   form?: any;
+  actionDisabledReason?: string;
 }
 
 export const FormButtons: FC<FormButtonsProps> = ({
@@ -24,7 +25,9 @@ export const FormButtons: FC<FormButtonsProps> = ({
   isCheckingDuplicates = false,
   onContinueClick,
   form,
+  actionDisabledReason,
 }) => {
+  const actionDisabled = Boolean(actionDisabledReason);
   const handleContinue = useCallback(async () => {
     if (!valid) return;
     if (onContinueClick && form) {
@@ -43,7 +46,8 @@ export const FormButtons: FC<FormButtonsProps> = ({
         submitting={isCheckingDuplicates}
         className="w-150px"
         onClick={handleContinue}
-        disabled={!valid || isCheckingDuplicates}
+        disabled={!valid || isCheckingDuplicates || actionDisabled}
+        disabledReason={actionDisabled ? actionDisabledReason : undefined}
         label={translate('Continue')}
       />
     </>
@@ -61,7 +65,8 @@ export const FormButtons: FC<FormButtonsProps> = ({
         label={translate('Send invitation')}
         submitting={submitting}
         className="btn btn-primary min-w-150px"
-        disabled={!valid}
+        disabled={!valid || actionDisabled}
+        disabledReason={actionDisabled ? actionDisabledReason : undefined}
       />
     </>
   ) : null;
