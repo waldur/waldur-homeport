@@ -179,6 +179,12 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
   return (
     <Table<CallResourceTemplate>
       {...tableProps}
+      // Render all templates: the header select-all checkbox replaces the
+      // selection with the visible rows, so paginating would silently drop
+      // pre-selected templates on other pages and delete their resource
+      // requests on save.
+      rows={call.resource_templates || []}
+      hasPagination={false}
       enableMultiSelect
       columns={[
         {

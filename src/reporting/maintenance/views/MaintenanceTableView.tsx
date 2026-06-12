@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -32,7 +32,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
   });
 
   // Refetch when data changes
-  useMemo(() => {
+  useEffect(() => {
     tableProps.fetch();
   }, [announcements]);
 

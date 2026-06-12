@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { Badge } from '@/core/Badge';
@@ -25,6 +25,11 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
     table: 'DatabaseActiveQueries',
     fetchData: createClientPaginatedFetcher(data.queries),
   });
+
+  // Refetch when the polled stats change
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data.queries]);
 
   const columns = useMemo(
     () => [

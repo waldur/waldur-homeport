@@ -15,7 +15,12 @@ vi.mock('@/core/api', () => ({
 import { fetchResultCount, parseNextPage } from '@/core/api';
 import { queryClient } from '@/core/queryClient';
 
-import { processApiResponse, createFetcher, fetchAll } from './api';
+import {
+  processApiResponse,
+  createFetcher,
+  createClientPaginatedFetcher,
+  fetchAll,
+} from './api';
 
 describe('api', () => {
   beforeEach(() => {
@@ -412,6 +417,157 @@ describe('api', () => {
 
       expect(result).toHaveLength(5);
       expect(result.map((r) => r.uuid)).toEqual(['1', '2', '3', '4', '5']);
+    });
+  });
+
+  describe('createClientPaginatedFetcher', () => {
+    const items = Array.from({ length: 25 }, (_, i) => ({
+      uuid: `${i + 1}`,
+      name: `item-${String(i + 1).padStart(2, '0')}`,
+      size: i + 1,
+    }));
+
+    const makeRequest = (overrides = {}) => ({
+      tableKey: 'TestTable',
+      currentPage: 1,
+      pageSize: 10,
+      filter: {},
+      ...overrides,
+    });
+
+    it('returns the requested page slice with full result count', async () => {
+      const fetcher = createClientPaginatedFetcher(items);
+
+      const page1 = await fetcher(makeRequest());
+      expect(page1.rows).toHaveLength(10);
+      expect(page1.rows[0].uuid).toBe('1');
+      expect(page1.resultCount).toBe(25);
+      expect(page1.nextPage).toBe(2);
+
+      const page3 = await fetcher(makeRequest({ currentPage: 3 }));
+      expect(page3.rows).toHaveLength(5);
+      expect(page3.rows[0].uuid).toBe('21');
+      expect(page3.nextPage).toBeNull();
+    });
+
+    it('defaults to page 1 and page size 10', async () => {
+      const fetcher = createClientPaginatedFetcher(items);
+
+      const result = await fetcher(
+        makeRequest({ currentPage: undefined, pageSize: undefined }),
+      );
+
+      expect(result.rows).toHaveLength(10);
+      expect(result.rows[0].uuid).toBe('1');
+    });
+
+    it('resolves an empty first page for empty data', async () => {
+      const fetcher = createClientPaginatedFetcher([]);
+
+      const result = await fetcher(makeRequest());
+
+      expect(result.rows).toEqual([]);
+      expect(result.resultCount).toBe(0);
+      expect(result.nextPage).toBeNull();
+    });
+
+    it('rejects with "Invalid page." when the page is out of range', async () => {
+      // Pagination state persists in Redux per table key, so a shrunken
+      // dataset can request a page past the end. The rejection shape must
+      // match the DRF error so useTableQuery resets pagination.
+      const fetcher = createClientPaginatedFetcher(items.slice(0, 4));
+
+      await expect(fetcher(makeRequest({ currentPage: 3 }))).rejects.toThrow(
+        'Invalid page.',
+      );
+      await expect(
+        fetcher(makeRequest({ currentPage: 3 })),
+      ).rejects.toMatchObject({ detail: 'Invalid page.' });
+    });
+
+    it('rejects when the page is out of range for empty data', async () => {
+      const fetcher = createClientPaginatedFetcher([]);
+
+      await expect(
+        fetcher(makeRequest({ currentPage: 2 })),
+      ).rejects.toMatchObject({ detail: 'Invalid page.' });
+    });
+
+    it('sorts by the ordering filter before slicing', async () => {
+      const fetcher = createClientPaginatedFetcher(items);
+
+      const desc = await fetcher(makeRequest({ filter: { o: '-size' } }));
+      expect(desc.rows[0].uuid).toBe('25');
+      expect(desc.rows).toHaveLength(10);
+
+      const asc = await fetcher(
+        makeRequest({ currentPage: 3, filter: { o: 'size' } }),
+      );
+      expect(asc.rows.map((r) => r.uuid)).toEqual([
+        '21',
+        '22',
+        '23',
+        '24',
+        '25',
+      ]);
+    });
+
+    it('sorts null and undefined values last', async () => {
+      const fetcher = createClientPaginatedFetcher([
+        { name: 'b' },
+        { name: null },
+        { name: 'a' },
+      ]);
+
+      const result = await fetcher(makeRequest({ filter: { o: 'name' } }));
+
+      expect(result.rows.map((r) => r.name)).toEqual(['a', 'b', null]);
+    });
+
+    it('does not mutate the source array when sorting', async () => {
+      const data = [{ size: 2 }, { size: 1 }];
+      const fetcher = createClientPaginatedFetcher(data);
+
+      await fetcher(makeRequest({ filter: { o: 'size' } }));
+
+      expect(data.map((r) => r.size)).toEqual([2, 1]);
+    });
+
+    it('filters by the configured query field', async () => {
+      const fetcher = createClientPaginatedFetcher(items, {
+        queryField: 'name',
+      });
+
+      const result = await fetcher(makeRequest({ filter: { name: 'ITEM-2' } }));
+
+      // item-20 through item-25 (case-insensitive substring match)
+      expect(result.rows).toHaveLength(6);
+      expect(result.resultCount).toBe(6);
+      expect(result.rows[0].name).toBe('item-20');
+    });
+
+    it('ignores the query when no queryField option is set', async () => {
+      const fetcher = createClientPaginatedFetcher(items);
+
+      const result = await fetcher(makeRequest({ filter: { name: 'item-2' } }));
+
+      expect(result.resultCount).toBe(25);
+    });
+
+    it('combines search, sorting and pagination', async () => {
+      const fetcher = createClientPaginatedFetcher(items, {
+        queryField: 'name',
+      });
+
+      const result = await fetcher(
+        makeRequest({ filter: { name: 'item-1', o: '-size' } }),
+      );
+
+      // item-10..item-19 = 10 matches, sorted desc by size
+      expect(result.resultCount).toBe(10);
+      expect(result.rows).toHaveLength(10);
+      expect(result.rows[0].name).toBe('item-19');
+      expect(result.nextPage).toBeNull();
     });
   });
 });

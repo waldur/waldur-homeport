@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Tooltip } from 'react-bootstrap';
 
 import { formatFilesize } from '@/core/utils';
@@ -29,9 +29,16 @@ export const TableGrowthTable: FC<TableGrowthTableProps> = ({
 
   const tableProps = useTable({
     table: 'TableGrowthStats',
-    fetchData: createClientPaginatedFetcher(data.tables),
+    fetchData: createClientPaginatedFetcher(data.tables, {
+      queryField: 'table_name',
+    }),
     queryField: 'table_name',
   });
+
+  // Refetch when the polled stats change
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data.tables]);
 
   const columns = useMemo(
     () => [

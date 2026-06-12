@@ -56,6 +56,10 @@ export const SetAccessPolicyFormContainer: FunctionComponent<
   return (
     <Table
       {...tableProps}
+      // Render every group: each row hosts a form checkbox, so paginating
+      // would hide groups beyond the first page from the policy form.
+      rows={organizationGroups}
+      hasPagination={false}
       columns={columns}
       hasHeaders={false}
       hasActionBar={false}

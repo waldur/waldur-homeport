@@ -63,7 +63,7 @@ export const CustomerUsersListExpandableRow: FunctionComponent<{
     tableProps.fetch();
   }, [row.projects]);
 
-  return row.projects.length === 0 ? (
+  return !row.projects || row.projects.length === 0 ? (
     <div className="text-center py-4">
       <p>{translate('No projects are assigned to this user.')}</p>
       <AddProjectUserButton customer={row} refetch={refetch} />

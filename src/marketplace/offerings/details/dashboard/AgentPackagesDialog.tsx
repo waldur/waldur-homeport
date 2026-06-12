@@ -16,7 +16,7 @@ export const AgentPackagesDialog: FC<{
   resolve: { agentIdentity: AgentIdentity };
 }> = ({ resolve: { agentIdentity } }) => {
   const tableProps = useTable({
-    table: 'AgentServiceProcesses',
+    table: 'AgentPackages',
     fetchData: createClientPaginatedFetcher(
       (agentIdentity.dependencies || []) as AgentPackage[],
     ),
