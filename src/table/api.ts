@@ -3,6 +3,7 @@ import { RequestResult } from 'waldur-js-client';
 import { fetchResultCount, parseNextPage } from '@/core/api';
 import { queryClient } from '@/core/queryClient';
 
+import { PAGE_SIZE_FULL } from './constants';
 import { Fetcher, FetcherOptions, TableRequest } from './types';
 
 export const processApiResponse = <TData = any>(
@@ -119,18 +120,70 @@ export async function fetchAll(fetch: Fetcher, request: TableRequest) {
   return result;
 }
 
+interface ClientPaginationOptions {
+  /**
+   * Name of the field used both as the table's `queryField` and as the row
+   * attribute to search, enabling client-side search for static-data tables.
+   */
+  queryField?: string;
+}
+
+const compareRowValues = (a: unknown, b: unknown) => {
+  if (a == null && b == null) return 0;
+  if (a == null) return 1;
+  if (b == null) return -1;
+  if (typeof a === 'number' && typeof b === 'number') return a - b;
+  return String(a).localeCompare(String(b), undefined, {
+    numeric: true,
+    sensitivity: 'base',
+  });
+};
+
 // Helper to create client-side paginated fetcher
 export const createClientPaginatedFetcher =
-  <T>(allData: T[]) =>
+  <T>(allData: T[], options?: ClientPaginationOptions) =>
   (request: TableRequest) => {
-    const { currentPage, pageSize } = request;
-    const startIndex = ((currentPage || 1) - 1) * (pageSize || 10);
-    const endIndex = startIndex + (pageSize || 10);
-    const rows = allData.slice(startIndex, endIndex);
+    const { currentPage, pageSize, filter } = request;
+    let data = allData;
+
+    const queryField = options?.queryField;
+    const query = queryField ? filter?.[queryField] : undefined;
+    if (query) {
+      const term = String(query).toLowerCase();
+      data = data.filter((row) =>
+        String((row as any)[queryField] ?? '')
+          .toLowerCase()
+          .includes(term),
+      );
+    }
+
+    const ordering = filter?.o;
+    if (typeof ordering === 'string' && ordering) {
+      const desc = ordering.startsWith('-');
+      const field = desc ? ordering.slice(1) : ordering;
+      data = [...data].sort((a, b) => {
+        const result = compareRowValues((a as any)[field], (b as any)[field]);
+        return desc ? -result : result;
+      });
+    }
+
+    const size = pageSize || PAGE_SIZE_FULL;
+    const page = currentPage || 1;
+    const startIndex = (page - 1) * size;
+    if (page > 1 && startIndex >= data.length) {
+      // Pagination state persists in Redux per table key, so a shrunken
+      // dataset can leave the table on a page past the end. Mirror the DRF
+      // "Invalid page." error so useTableQuery resets pagination instead of
+      // rendering a permanently empty page.
+      return Promise.reject(
+        Object.assign(new Error('Invalid page.'), { detail: 'Invalid page.' }),
+      );
+    }
+    const endIndex = startIndex + size;
 
     return Promise.resolve({
-      rows,
-      resultCount: allData.length,
-      nextPage: endIndex < allData.length ? (currentPage || 1) + 1 : null,
+      rows: data.slice(startIndex, endIndex),
+      resultCount: data.length,
+      nextPage: endIndex < data.length ? page + 1 : null,
     });
   };

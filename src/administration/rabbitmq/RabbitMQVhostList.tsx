@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
@@ -25,6 +25,11 @@ export const RabbitMQVhostList: FC<RabbitMQVhostListProps> = ({ data }) => {
     table: 'RabbitMQVhosts',
     fetchData: createClientPaginatedFetcher(data.vhosts),
   });
+
+  // Refetch when the polled stats change
+  useEffect(() => {
+    tableProps.fetch();
+  }, [data.vhosts]);
 
   const columns = useMemo(
     () => [

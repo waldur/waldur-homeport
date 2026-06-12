@@ -90,8 +90,7 @@ const ResourcesTable: FC<TableProps & { projectDate }> = ({
     cardBordered={false}
     hasActionBar={false}
     minHeight="auto"
-    hasPagination
-    initialPageSize={5}
+    hasPagination={false}
     enableMultiSelect={props.enableMultiSelect}
   />
 );
@@ -248,6 +247,7 @@ const FormModalComponent: FC<
               >
                 <ResourcesTable
                   {...tableProps}
+                  rows={resources || []}
                   enableMultiSelect
                   projectDate={valueDate}
                 />
@@ -280,6 +280,7 @@ const FormModalComponent: FC<
             <div className="flex-grow-1 overflow-auto" style={{ minHeight: 0 }}>
               <ResourcesTable
                 {...tablePropsUnselected}
+                rows={ignoredResources}
                 projectDate={valueDate}
               />
             </div>
