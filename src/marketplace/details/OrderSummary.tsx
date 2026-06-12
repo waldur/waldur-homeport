@@ -1,5 +1,4 @@
 import { createElement, FC } from 'react';
-import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { isFeatureVisible } from '@/features/connect';
@@ -8,6 +7,7 @@ import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { DeployPageTotalCard } from '../deploy/DeployPageTotalCard';
+import { FormStepProps } from '../deploy/types';
 
 import { OrderSubmitButton } from './OrderSubmitButton';
 import { OrderSummaryPlanRows } from './plan/OrderSummaryPlanRows';
@@ -58,7 +58,7 @@ const OrderCheckout: FC<OrderSummaryProps> = (props) => {
 };
 
 export const OrderSummary: FC<{
-  offering: PublicOfferingDetails;
+  offering: FormStepProps['offering'];
   onlyDetails?: boolean;
   [key: string]: any;
 }> = (props) => {

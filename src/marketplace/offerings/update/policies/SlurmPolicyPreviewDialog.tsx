@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { Resource, marketplaceResourcesList } from 'waldur-js-client';
+import {
+  Resource,
+  marketplaceResourcesList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 

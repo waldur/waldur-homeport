@@ -37,7 +37,7 @@ export const RancherOffering: OfferingConfiguration = {
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
   credentialsSection: RancherCredentialsSection,
   provisioningConfigSection: RancherProvisioningConfigurationForm,
-  serializer: rancherOrderSerializer,
+  serializer: rancherOrderSerializer as any,
   secretOptionsSerializer: ({ customer_uuid, ...formData }) => ({
     ...formData,
     customer_uuid: customer_uuid ? customer_uuid.uuid : undefined,

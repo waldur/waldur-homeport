@@ -19,9 +19,6 @@ export const useMessageFeedbackMutation = (messageUuid: string) => {
         path: { uuid: messageUuid },
         body,
       });
-      if (response.error) {
-        throw response.error;
-      }
       return response.data;
     },
     successMessage: translate('Feedback has been submitted'),

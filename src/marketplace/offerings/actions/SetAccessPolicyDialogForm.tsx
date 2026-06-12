@@ -5,12 +5,13 @@ import {
   marketplacePlansUpdateOrganizationGroups,
   OrganizationGroup,
   customersUpdateOrganizationGroups,
+  ProviderOfferingDetails as Offering,
+  ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { formatRequestBodyForSetAccessPolicyForm } from '@/marketplace/offerings/actions/utils';
-import { Offering, Plan } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -18,7 +19,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { SetAccessPolicyFormContainer } from './SetAccessPolicyFormContainer';
 
 interface SetAccessPolicyDialogFormProps {
-  offering?: Offering;
+  offering?: Pick<Offering, 'uuid' | 'name' | 'organization_groups'>;
   plan?: Plan;
   customer?: any;
   organizationGroups: OrganizationGroup[];

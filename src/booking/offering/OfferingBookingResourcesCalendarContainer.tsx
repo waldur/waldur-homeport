@@ -5,6 +5,7 @@ import { Card } from 'react-bootstrap';
 import {
   bookingResourcesList,
   BookingResourcesListData,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
@@ -12,7 +13,6 @@ import { getBookingFilterOptionStates } from '@/booking/utils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 
 import { BookingResource } from '../types';
 

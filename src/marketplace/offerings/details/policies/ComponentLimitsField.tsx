@@ -3,11 +3,11 @@ import { Fragment } from 'react';
 import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
+import { OfferingComponent } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { NumberField, SelectField } from '@/form';
 import { translate } from '@/i18n';
-import { OfferingComponent } from '@/marketplace/types';
 import { ActionButton } from '@/table/ActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 

@@ -20,7 +20,7 @@ const mockCustomerUser = {
   username: 'jane',
   role_name: 'owner',
   expiration_time: '2024-12-31',
-};
+} as any;
 
 const mockResolve = {
   customer: mockCustomerUser,

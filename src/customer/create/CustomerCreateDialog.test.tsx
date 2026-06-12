@@ -83,14 +83,14 @@ describe('CustomerCreateDialog', () => {
         name: 'Test Organization',
         email: 'test@example.com',
       },
-    };
+    } as any;
 
     const refreshedUser = {
       uuid: 'refreshed-user-uuid',
       name: 'Test User',
-    };
+    } as any;
 
-    vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse as any);
+    vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse);
     vi.mocked(getCurrentUser).mockResolvedValue(refreshedUser);
 
     renderComponent(constants.ROLES.customer);
@@ -142,12 +142,12 @@ describe('CustomerCreateDialog', () => {
         name: 'Test Organization',
         email: 'test@example.com',
       },
-    };
+    } as any;
 
     const refreshedUser = {
       uuid: 'refreshed-user-uuid',
       name: 'Test User',
-    };
+    } as any;
 
     vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse as any);
     vi.mocked(customersAddUser).mockResolvedValue({} as any);

@@ -1,20 +1,23 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
+import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { Tip } from '@/core/Tooltip';
 import { ResourceUsageChart } from '@/marketplace/resources/usage/ResourceUsageChart';
-import { OfferingComponent } from '@/marketplace/types';
 
 import { ResourceUsageTable } from './ResourceUsageTable';
-import { ComponentUsage, ComponentUserUsage } from './types';
+import { ComponentUserUsage } from './types';
 import { getBillingTypeLabel } from './utils';
 
 interface ResourceUsageTabsProps {
-  resource?: { name?: string };
+  resource?: Pick<Resource, 'name' | 'uuid'>;
   components: OfferingComponent[];
-  usages: ComponentUsage[];
-  userUsages?: ComponentUserUsage[];
+  usages: any[];
+  userUsages?: Pick<
+    ComponentUserUsage,
+    'username' | 'component_type' | 'billing_period'
+  >[];
   months?: number;
   colors: string[];
   displayMode?: 'chart' | 'table';

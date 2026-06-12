@@ -4,13 +4,14 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import {
+  openstackFloatingIpsList,
   OpenStackInstance,
   openstackInstancesUpdateFloatingIps,
 } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadFloatingIps } from '@/openstack/api';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { FloatingIpsList } from './FloatingIpsList';
@@ -43,11 +44,16 @@ export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
   } = useQuery({
     queryKey: ['floatingIps', resource.tenant_uuid],
     queryFn: () =>
-      loadFloatingIps({
-        tenant_uuid: resource.tenant_uuid,
-        free: true,
-        field: ['url', 'address'],
-      }).then((data) => [
+      getAllPages((page) =>
+        openstackFloatingIpsList({
+          query: {
+            page,
+            tenant_uuid: resource.tenant_uuid,
+            free: true,
+            field: ['url', 'address'],
+          },
+        }),
+      ).then((data) => [
         {
           value: true,
           label: translate('Auto-assign floating IP'),

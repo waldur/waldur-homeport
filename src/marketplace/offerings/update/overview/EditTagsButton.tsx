@@ -11,7 +11,7 @@ const EditTagsDialog = lazyComponent(() =>
 );
 
 interface EditTagsButtonProps {
-  offering: ProviderOfferingDetails;
+  offering: Pick<ProviderOfferingDetails, 'uuid' | 'tags'>;
   refetch: () => void;
 }
 

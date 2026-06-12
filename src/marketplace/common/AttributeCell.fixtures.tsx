@@ -1,6 +1,4 @@
-import { NestedAttribute } from 'waldur-js-client';
-
-export const ListAttribute: NestedAttribute = {
+export const ListAttribute: any = {
   key: 'node_information_cpu',
   title: 'CPU model',
   type: 'list',
@@ -24,14 +22,14 @@ export const ListAttribute: NestedAttribute = {
   ],
 };
 
-export const BooleanAttribute: NestedAttribute = {
+export const BooleanAttribute: any = {
   key: 'iske_certified',
   title: 'ISKE certified',
   type: 'boolean',
   options: [],
 };
 
-export const ChoiceAttribute: NestedAttribute = {
+export const ChoiceAttribute: any = {
   key: 'node_information_gpu',
   title: 'GPU model',
   type: 'choice',
@@ -51,7 +49,7 @@ export const ChoiceAttribute: NestedAttribute = {
   ],
 };
 
-export const StringAttribute: NestedAttribute = {
+export const StringAttribute: any = {
   key: 'home_path',
   title: 'ISKE certified',
   type: 'string',

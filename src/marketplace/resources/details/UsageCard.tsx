@@ -21,8 +21,10 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
   const resourceRef = useMemo(
     () => ({
       name: resource.name,
-      offering_uuid: resource.offering_uuid,
-      resource_uuid: resource.uuid,
+      uuid: resource.uuid,
+      customer_name: resource.customer_name,
+      project_name: resource.project_name,
+      backend_id: resource.backend_id,
     }),
     [resource],
   );
@@ -59,7 +61,7 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
     data: value,
   } = useQuery({
     queryKey: ['UsageCard', resourceRef, period],
-    queryFn: () => getComponentsAndUsages(resourceRef.resource_uuid, period),
+    queryFn: () => getComponentsAndUsages(resourceRef.uuid, period),
   });
 
   const usersFilterOptions = useMemo(() => {

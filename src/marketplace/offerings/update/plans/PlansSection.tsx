@@ -1,11 +1,13 @@
 import { FC, useCallback, useMemo } from 'react';
-import { marketplacePlansList } from 'waldur-js-client';
+import {
+  marketplacePlansList,
+  ProviderPlanDetails as Plan,
+} from 'waldur-js-client';
 
 import { StateIndicator } from '@/core/StateIndicator';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
 import { hidePlanAddButton } from '@/marketplace/common/registry';
-import { Plan } from '@/marketplace/types';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { createFetcher } from '@/table/api';

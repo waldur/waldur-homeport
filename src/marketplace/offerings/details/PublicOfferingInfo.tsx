@@ -1,9 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { translate } from '@/i18n';
-import { Category, Offering } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 
 import { PublicOfferingAttributesCard } from './PublicOfferingAttributesCard';
 import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';

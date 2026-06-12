@@ -74,7 +74,7 @@ const COMPONENTS = [
     factor: 1024,
     uuid: '36d50a8a3b6611eebe560242ac120002',
   },
-];
+] as any;
 
 describe('OrderSummary', () => {
   const order = {

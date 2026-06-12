@@ -5,6 +5,7 @@ import {
   MarketplaceProviderResourcesListData,
   Resource,
   ResourceState,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
@@ -13,7 +14,6 @@ import {
   FILTER_OFFERING_RESOURCE,
   TABLE_OFFERING_RESOURCE,
 } from '@/marketplace/details/constants';
-import { Offering } from '@/marketplace/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';

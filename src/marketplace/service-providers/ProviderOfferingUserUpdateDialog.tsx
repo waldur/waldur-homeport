@@ -13,6 +13,7 @@ import {
   marketplaceOfferingUsersUpdateCommentsPartialUpdate,
   OfferingUser,
   OfferingUserState,
+  ServiceProvider,
 } from 'waldur-js-client';
 
 import { url } from '@/core/validators';
@@ -21,8 +22,6 @@ import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
-
-import { ServiceProvider } from '../types';
 
 const STATE_TRANSITIONS: Record<OfferingUserState, OfferingUserState[]> = {
   Requested: ['Creating', 'OK', 'Error creating'],

@@ -7,7 +7,7 @@ import { EditOrderFieldDialog } from './EditOrderFieldDialog';
 
 interface OrderFieldEditButtonProps {
   order: OrderDetails;
-  offering: PublicOfferingDetails;
+  offering: Pick<PublicOfferingDetails, 'components'>;
   name: 'start_date' | 'limits';
   component?: string;
   title?: string;

@@ -22,17 +22,20 @@ export const useThreadList = ({
   return useQuery<ThreadSession[]>({
     queryKey: [THREAD_LIST_QUERY_KEY, user?.uuid, isArchived, searchQuery],
     queryFn: async () => {
-      const response = await chatThreadsList({
-        query: {
-          scope: 'own',
-          is_archived: isArchived,
-          o: ['-created'],
-          page_size: 100,
-          ...(searchQuery ? { query: searchQuery } : {}),
-        },
-      });
-      if (response.error) return [];
-      return response.data ?? [];
+      try {
+        const response = await chatThreadsList({
+          query: {
+            scope: 'own',
+            is_archived: isArchived,
+            o: ['-created'],
+            page_size: 100,
+            ...(searchQuery ? { query: searchQuery } : {}),
+          },
+        });
+        return response.data ?? [];
+      } catch {
+        return [];
+      }
     },
     enabled,
     staleTime: FAST_STALE_TIME,

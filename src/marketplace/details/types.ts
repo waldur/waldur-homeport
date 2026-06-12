@@ -1,4 +1,4 @@
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { PublicOfferingDetails, Offering } from 'waldur-js-client';
 
 import { PricesData } from './plan/types';
 
@@ -7,7 +7,7 @@ export interface Limits {
 }
 
 export interface OrderSummaryProps {
-  offering: PublicOfferingDetails;
+  offering: PublicOfferingDetails | Offering;
   prices?: PricesData;
   updateMode?: boolean;
   extraComponent?: React.ComponentType<any>;

@@ -1,7 +1,7 @@
+import { Offering, ServiceProvider } from 'waldur-js-client';
+
 import { translate } from '@/i18n';
 import { IBreadcrumbItem } from '@/navigation/types';
-
-import { Offering, ServiceProvider } from '../types';
 
 import { OfferingBreadcrumbPopover } from './OfferingBreadcrumbPopover';
 

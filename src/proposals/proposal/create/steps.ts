@@ -12,7 +12,9 @@ import { FormResourceRequestsStep } from './resource-requests-step/FormResourceR
 
 const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
-export const createProposalSteps = (call?: Call): VStepperFormStep[] => {
+export const createProposalSteps = (
+  call?: Pick<Call, 'compliance_checklist'>,
+): VStepperFormStep[] => {
   const baseSteps: VStepperFormStep[] = [
     {
       label: translate('Details overview'),

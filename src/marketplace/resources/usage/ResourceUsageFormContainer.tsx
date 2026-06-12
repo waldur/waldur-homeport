@@ -4,14 +4,14 @@ import { Form } from 'react-final-form';
 import {
   marketplaceComponentUsagesSetUsage,
   marketplaceComponentUsagesSetUserUsage,
-  type ComponentUsageCreateRequest,
-  type ComponentUserUsageCreateRequest,
-  type ResourcePlanPeriod,
-  type BaseComponentUsage,
+  ComponentUsageCreateRequest,
+  ComponentUserUsageCreateRequest,
+  ResourcePlanPeriod,
+  BaseComponentUsage,
+  OfferingComponent,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { OfferingComponent } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 

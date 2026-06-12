@@ -16,7 +16,18 @@ import { formatPeriod } from '../utils';
 import { EstimatedCost } from './EstimatedCost';
 
 interface MonthOverviewProps {
-  invoice: Invoice;
+  invoice: Pick<
+    Invoice,
+    | 'uuid'
+    | 'state'
+    | 'month'
+    | 'year'
+    | 'invoice_date'
+    | 'items'
+    | 'price'
+    | 'tax'
+    | 'total'
+  >;
   customer: Customer;
   costTrend?: -1 | 0 | 1;
 }

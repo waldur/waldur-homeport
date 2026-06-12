@@ -17,7 +17,7 @@ import { RemoteGroupField } from './RemoteGroupField';
 interface RuleRowProps {
   name: string;
   onRemove: () => void;
-  remoteSecurityGroups: OpenStackSecurityGroup[];
+  remoteSecurityGroups: Pick<OpenStackSecurityGroup, 'name' | 'url'>[];
 }
 
 export const RuleRow: FC<RuleRowProps> = ({

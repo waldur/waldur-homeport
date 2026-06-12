@@ -1,4 +1,4 @@
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { isOfferingRestrictedToProject } from '@/marketplace/offerings/utils';
@@ -14,7 +14,7 @@ interface OfferingAccessibility {
 }
 
 export function useOfferingAccessibility(
-  offering: PublicOfferingDetails,
+  offering: Offering,
 ): OfferingAccessibility {
   const user = useUser();
   const { isRestricted, isAllowed } = isOfferingRestrictedToProject(

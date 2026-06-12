@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { marketplacePublicOfferingsList } from 'waldur-js-client';
+import {
+  marketplacePublicOfferingsList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
@@ -8,7 +11,6 @@ import { translate } from '@/i18n';
 import { OfferingCard } from '@/marketplace/common/OfferingCard';
 import { getLabel } from '@/marketplace/common/registry';
 import { OfferingStateField } from '@/marketplace/offerings/OfferingStateField';
-import { Offering } from '@/marketplace/types';
 import { PublicCallsList } from '@/proposals/PublicCallsList';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';

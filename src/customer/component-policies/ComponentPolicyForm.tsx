@@ -6,7 +6,6 @@ import {
   Customer,
   marketplaceCustomerComponentUsagePoliciesActionsRetrieve,
   marketplaceProviderOfferingsList,
-  Offering,
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -40,7 +39,7 @@ export const ComponentPolicyForm: FC<ComponentPolicyFormProps> = ({
   } = useQuery({
     queryKey: ['provider-offering-components', customer.uuid],
     queryFn: () =>
-      getAllPages<Offering>((page) =>
+      getAllPages((page) =>
         marketplaceProviderOfferingsList({
           query: {
             page,

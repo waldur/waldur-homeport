@@ -2,13 +2,16 @@ import { XIcon } from '@phosphor-icons/react';
 import { isEmpty } from 'lodash-es';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Card, FormCheck, Stack } from 'react-bootstrap';
-import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
+import {
+  OrderDetails,
+  PublicOfferingDetails,
+  OfferingComponent,
+} from 'waldur-js-client';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
-import { OfferingComponent } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';

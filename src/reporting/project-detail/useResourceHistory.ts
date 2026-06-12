@@ -6,8 +6,6 @@ import {
   marketplaceResourcesOfferingRetrieve,
   marketplaceOrdersList,
   marketplaceComponentUsagesList,
-  Resource,
-  OrderDetails,
   OfferingComponent,
 } from 'waldur-js-client';
 
@@ -40,7 +38,7 @@ export const useProjectResources = (projectUuid?: string) => {
     queryFn: async ({ signal }) => {
       if (!projectUuid) return [];
 
-      const resources = await getAllPages<Resource>((page) =>
+      const resources = await getAllPages((page) =>
         marketplaceResourcesList({
           query: {
             page,
@@ -164,7 +162,7 @@ export const useResourceLimitsHistory = ({
       if (!resourceUuid) return [];
 
       // Fetch all orders for this resource
-      const orders = await getAllPages<OrderDetails>((page) =>
+      const orders = await getAllPages((page) =>
         marketplaceOrdersList({
           query: {
             page,

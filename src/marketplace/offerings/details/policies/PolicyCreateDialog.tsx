@@ -6,12 +6,12 @@ import {
   marketplaceOfferingEstimatedCostPoliciesCreate,
   marketplaceOfferingUsagePoliciesCreate,
   PolicyPeriodEnum,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { policyPeriodOptions } from '@/customer/cost-policies/utils';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';

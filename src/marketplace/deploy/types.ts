@@ -1,15 +1,15 @@
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { Offering } from 'waldur-js-client';
 
 import { VStepperFormStep, VStepperFormStepProps } from '@/wizard';
 
 export interface FormStepProps extends VStepperFormStepProps {
-  offering: PublicOfferingDetails;
+  offering: Offering;
   previewMode?: boolean;
 }
 
 export type OfferingConfigurationFormStep = VStepperFormStep<FormStepProps>;
 
 export interface CheckoutSummaryProps {
-  offering: PublicOfferingDetails;
+  offering: Offering;
   updateMode?: boolean;
 }

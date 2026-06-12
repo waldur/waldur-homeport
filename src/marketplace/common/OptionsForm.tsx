@@ -1,5 +1,6 @@
 import { FC, useMemo } from 'react';
 import { Field, useFormState } from 'react-final-form';
+import { OfferingOptions } from 'waldur-js-client';
 
 import {
   AttributeValidator,
@@ -10,8 +11,13 @@ import {
   lessThanOrEqualField,
   required,
 } from '@/core/validators';
-import { NumberField, SelectField, StringField, TextField } from '@/form';
-import { FormGroup } from '@/form';
+import {
+  FormGroup,
+  NumberField,
+  SelectField,
+  StringField,
+  TextField,
+} from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { FormFieldError } from '@/form/FormFieldError';
@@ -24,7 +30,6 @@ import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { useCustomer } from '@/workspace/hooks';
 
-import { Offering } from '../types';
 import { isExperimentalUiComponentsVisible } from '../utils';
 
 import { ComponentMultiplierField } from './ComponentMultiplierField';
@@ -254,7 +259,7 @@ export const OptionsForm = ({
   options,
   customer: preferedCustomer,
 }: {
-  options: Offering['options'];
+  options: OfferingOptions;
   customer?: DeployFormData['customer'];
 }) => {
   const { values } = useFormState({ subscription: { values: true } });

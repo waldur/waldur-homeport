@@ -94,7 +94,7 @@ export const publicOfferingsAutocomplete = (
     MarketplaceProviderOfferingsListData['query'],
 ) =>
   createLoadOptions(marketplacePublicOfferingsList, 'name', {
-    field: OfferingsAutocompleteCommonFields,
+    field: OfferingsAutocompleteCommonFields as any,
     o: ['name'],
     state: ['Active'],
     ...extraQuery,

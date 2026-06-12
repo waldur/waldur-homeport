@@ -4,6 +4,7 @@ import {
   marketplaceProjectServiceAccountsList,
   MarketplaceCustomerServiceAccountsRetrieveResponse,
   CustomerServiceAccount,
+  Project,
 } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -133,7 +134,7 @@ export const ServiceAccountsList: FC<ServiceAccountsProps> = ({
   const tableTabs =
     context === 'customer'
       ? useTeamTableTabs()
-      : useProjectTeamTableTabs(scope);
+      : useProjectTeamTableTabs(scope as Project);
 
   return (
     <ServiceAccountsTableComponent
@@ -147,7 +148,7 @@ export const ServiceAccountsList: FC<ServiceAccountsProps> = ({
         ) : (
           <ProjectTeamDropdownActions
             refetch={tableProps.fetch}
-            project={scope}
+            project={scope as Project}
           />
         )
       }

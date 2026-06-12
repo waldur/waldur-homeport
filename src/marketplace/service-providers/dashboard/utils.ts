@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import {
   marketplaceServiceProvidersRevenueList,
   ServiceProviderRevenues,
+  ServiceProvider,
 } from 'waldur-js-client';
 
 import { parseDate } from '@/core/dateUtils';
@@ -14,7 +15,6 @@ import {
   formatCostChartLabel,
 } from '@/dashboard/utils';
 import { translate } from '@/i18n';
-import { ServiceProvider } from '@/marketplace/types';
 
 const formatCostChart = (records: ServiceProviderRevenues[]): Chart => {
   let items: DateValuePair[] = records.map((record) => ({

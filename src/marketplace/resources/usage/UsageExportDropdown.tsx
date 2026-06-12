@@ -7,11 +7,10 @@ import {
 import { init } from 'echarts';
 import { sum } from 'lodash-es';
 import { useCallback } from 'react';
-import { ProjectUser } from 'waldur-js-client';
+import { ProjectUser, OfferingComponent } from 'waldur-js-client';
 
 import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';
-import { OfferingComponent } from '@/marketplace/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
@@ -31,9 +30,20 @@ export interface UsageExportDropdownProps {
     name: string;
   };
   data: {
-    components: OfferingComponent[];
-    usages: ComponentUsage[];
-    userUsages: ComponentUserUsage[];
+    components: Pick<
+      OfferingComponent,
+      'name' | 'type' | 'measured_unit' | 'billing_type'
+    >[];
+    usages: Pick<
+      ComponentUsage,
+      | 'component_type'
+      | 'type'
+      | 'billing_period'
+      | 'usage'
+      | 'total_consumed'
+      | 'total_allocated'
+    >[];
+    userUsages: Pick<ComponentUserUsage, 'component_type' | 'billing_period'>[];
   };
   users: ProjectUser[];
   months: number;

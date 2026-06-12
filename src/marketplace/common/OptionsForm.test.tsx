@@ -52,7 +52,7 @@ describe('OptionsForm Integration', () => {
             <form onSubmit={handleSubmit}>
               <OptionsForm
                 options={options}
-                customer={{ uuid: 'test-customer-uuid' }}
+                customer={{ uuid: 'test-customer-uuid' } as any}
                 {...formProps}
               />
               <button type="submit">Submit</button>

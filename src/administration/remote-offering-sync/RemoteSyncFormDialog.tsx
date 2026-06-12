@@ -10,6 +10,7 @@ import {
   RemoteSynchronisationRequest,
   remoteWaldurApiRemoteCategories,
   remoteWaldurApiRemoteCustomers,
+  ServiceProvider,
 } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -26,7 +27,7 @@ import {
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
-import { Category, ServiceProvider } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';

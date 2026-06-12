@@ -9,8 +9,6 @@ import {
   useUsageExport,
 } from './UsageExportDropdown';
 
-// Mock dependencies
-
 vi.mock('@/table/exporters');
 
 describe('useUsageExport', () => {
@@ -76,9 +74,7 @@ describe('useUsageExport', () => {
   };
 
   it('should export data in the specified format', () => {
-    const { result } = renderHook(() =>
-      useUsageExport(defaultProps as UsageExportDropdownProps),
-    );
+    const { result } = renderHook(() => useUsageExport(defaultProps as any));
     result.current('csv');
 
     expect(exportAs).toHaveBeenCalledWith(
@@ -124,7 +120,7 @@ describe('useUsageExport', () => {
     };
 
     const { result } = renderHook(() =>
-      useUsageExport(propsWithoutUserUsages as UsageExportDropdownProps),
+      useUsageExport(propsWithoutUserUsages as any),
     );
     result.current('excel');
 
@@ -166,7 +162,7 @@ describe('useUsageExport', () => {
     };
 
     const { result } = renderHook(() =>
-      useUsageExport(propsWithoutUnits as UsageExportDropdownProps),
+      useUsageExport(propsWithoutUnits as any),
     );
     result.current('pdf');
 
@@ -194,7 +190,7 @@ describe('useUsageExport', () => {
     };
 
     const { result } = renderHook(() =>
-      useUsageExport(propsWithMissingUsage as UsageExportDropdownProps),
+      useUsageExport(propsWithMissingUsage as any),
     );
     result.current('csv');
 

@@ -1,15 +1,15 @@
 import React from 'react';
-import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 import { getCheckoutSummaryComponent } from '../common/registry';
+import { FormStepProps } from '../deploy/types';
 
 import { OrderSummary } from './OrderSummary';
 
 interface OrderSummaryDialogProps {
-  offering: PublicOfferingDetails;
+  offering: FormStepProps['offering'];
 }
 
 export const OrderSummaryDialog: React.FC<OrderSummaryDialogProps> = (

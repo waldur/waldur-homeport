@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { PublicOfferingDetails, Offering } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { composeValidators } from '@/core/validators';
@@ -17,7 +17,7 @@ interface ComponentEditRowProps {
   hidePrices?: boolean;
   period?: PlanPeriod;
   activePriceIndex?: number;
-  offering?: PublicOfferingDetails;
+  offering?: PublicOfferingDetails | Offering;
 }
 
 const RowWrapper = (
@@ -73,7 +73,7 @@ const RowWrapper2 = (
     hidePrices?: boolean;
     period?: PlanPeriod;
     activePriceIndex?: number;
-    offering: PublicOfferingDetails;
+    offering: PublicOfferingDetails | Offering;
   },
 ) => (
   <ComponentRow2

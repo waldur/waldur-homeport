@@ -5,6 +5,7 @@ import React from 'react';
 import {
   marketplacePluginsList,
   marketplacePublicOfferingsRetrieve,
+  Offering,
 } from 'waldur-js-client';
 
 import { usePermissionView } from '@/auth/PermissionLayout';
@@ -15,7 +16,6 @@ import { useTitle } from '@/navigation/title';
 import { useProject } from '@/workspace/hooks';
 
 import { DeployPage } from '../deploy/DeployPage';
-import { Offering } from '../types';
 
 async function loadData(offering_uuid: string) {
   const offering = (await marketplacePublicOfferingsRetrieve({

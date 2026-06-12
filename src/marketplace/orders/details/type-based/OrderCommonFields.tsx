@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
+import { OrderDetails, Offering } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
@@ -13,7 +13,7 @@ import { OrderSummaryMessage } from '../OrderSummaryMessage';
 
 export interface OrderTypeBasedProps {
   order: OrderDetails;
-  offering?: PublicOfferingDetails;
+  offering?: Offering;
   editable?: boolean;
   formTableItem?: boolean;
   shouldConcealPrices?: boolean;

@@ -44,7 +44,9 @@ interface CategoryItem {
   params?: { category_uuid?: string; initialMode?: string };
 }
 
-export const getCategoryItems = (categories: Category[]) => {
+export const getCategoryItems = (
+  categories: Pick<Category, 'uuid' | 'group' | 'title'>[],
+) => {
   if (!categories.length) return [];
   const children: CategoryItem[] = categories
     .sort((a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0))
@@ -69,7 +71,10 @@ export const getCategoryItems = (categories: Category[]) => {
 };
 
 export const getGroupedCategories = (
-  categories: Category[],
+  categories: Pick<
+    Category,
+    'uuid' | 'offering_count' | 'group' | 'icon' | 'title' | 'resource_count'
+  >[],
   categoryGroups: CategoryGroup[],
 ): CategoryGroup[] => {
   return categories.reduce((acc, category) => {

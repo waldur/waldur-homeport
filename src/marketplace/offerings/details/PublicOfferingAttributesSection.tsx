@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { translate } from '@/i18n';
 import { CopyToClipboard } from '@/marketplace/common/CopyToClipboard';
 import { GoogleCalendarLink } from '@/marketplace/offerings/details/GoogleCalendarLink';
 import { ReferralDetailsButton } from '@/marketplace/referral/ReferralDetailsButton';
-import { Offering } from '@/marketplace/types';
 import './PublicOfferingAttributesSection.scss';
 
 interface PublicOfferingAttributesSectionProps {
@@ -30,7 +30,7 @@ export const PublicOfferingAttributesSection: FunctionComponent<
           <span className="ms-2">{offering.citation_count}</span>
         </div>
         {offering.citation_count > 0 && (
-          <ReferralDetailsButton offering={offering} />
+          <ReferralDetailsButton offering={offering as any} />
         )}
       </div>
     )}

@@ -36,7 +36,6 @@ import { OfferingsListFilter } from '../offerings/list/OfferingsListFilter';
 import { getStates } from '../offerings/list/OfferingStateFilter';
 import { OfferingStateField } from '../offerings/OfferingStateField';
 import { isOfferingRestrictedToProject } from '../offerings/utils';
-import { Offering } from '../types';
 
 const RowActions = ({ row }) => {
   const user = useUser();
@@ -144,7 +143,7 @@ const PublicOfferingsListTable: FunctionComponent<{
   const columns: Column<PublicOfferingDetails>[] = [
     {
       title: translate('Name'),
-      render: ({ row }: { row: Offering }) => (
+      render: ({ row }: { row: PublicOfferingDetails }) => (
         <Link
           state="public-offering.marketplace-public-offering"
           params={{ uuid: row.uuid }}

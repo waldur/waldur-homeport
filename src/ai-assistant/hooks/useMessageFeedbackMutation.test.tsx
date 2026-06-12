@@ -20,8 +20,7 @@ describe('useMessageFeedbackMutation', () => {
   it('calls chatMessagesFeedback with the correct body for thumbs-up', async () => {
     vi.mocked(chatMessagesFeedback).mockResolvedValue({
       data: { feedback_score: true } as Message,
-      error: undefined,
-    });
+    } as any);
 
     const { result } = renderWithProviders();
     result.current.submit({ score: true });
@@ -37,8 +36,7 @@ describe('useMessageFeedbackMutation', () => {
   it('calls chatMessagesFeedback with comment + categories for thumbs-down', async () => {
     vi.mocked(chatMessagesFeedback).mockResolvedValue({
       data: { feedback_score: false } as Message,
-      error: undefined,
-    });
+    } as any);
 
     const { result } = renderWithProviders();
     result.current.submit({

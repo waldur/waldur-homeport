@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
 import { ENV } from '@/core/config';
-import { TextGroup } from '@/form';
+import { DateGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { useOrderFormData } from '../selectors';
 import { FormStepProps } from '../types';
 
-import { OrderStartDateField } from './OrderStartDateField';
 import { ResourceNameGroup } from './ResourceNameGroup';
 import { TerminationDateField } from './TerminationDateField';
+import { useOrderStartDateBounds } from './useOrderStartDateBounds';
 
 export const FormFinalConfigurationStep = (props: FormStepProps) => {
   const { project } = useOrderFormData();
@@ -24,6 +24,8 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
   // is embedded in the PrepaidDurationSelector instead.
   const startDateEmbeddedInPrepaid =
     hasPrepaidComponents && ENV.plugins.WALDUR_CORE.ENABLE_ORDER_START_DATE;
+
+  const dateFieldProps = useOrderStartDateBounds(project);
 
   return (
     <VStepperFormStepCard
@@ -45,7 +47,16 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         label={translate('Description')}
       />
       <div className="mb-7 border-bottom" />
-      {!startDateEmbeddedInPrepaid && <OrderStartDateField project={project} />}
+      {!startDateEmbeddedInPrepaid && (
+        <DateGroup
+          name="start_date"
+          label={translate('Start date')}
+          description={translate(
+            'The date when the resource provisioning will be initiated. If not set, the order is processed immediately after approval.',
+          )}
+          {...dateFieldProps}
+        />
+      )}
       {!hasPrepaidComponents && (
         <TerminationDateField offering={props.offering} />
       )}

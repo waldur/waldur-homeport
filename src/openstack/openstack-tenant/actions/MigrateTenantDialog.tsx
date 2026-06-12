@@ -8,8 +8,11 @@ import {
   Offering,
   openstackMigrationsCreate,
   openstackNetworksList,
+  openstackSubnetsList,
+  openstackVolumeTypesList,
 } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import {
@@ -24,7 +27,6 @@ import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes'
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadSubnets, loadVolumeTypes } from '@/openstack/api';
 import { TENANT_TYPE } from '@/openstack/constants';
 
 import { SubnetsTable } from './SubnetsTable';
@@ -168,16 +170,25 @@ const MigrateTenantFields = ({ offering, resource }) => {
   const queryResult = useQuery({
     queryKey: ['MigrateTenantDialog', offering?.uuid],
     queryFn: async () => {
-      const sourceVolumeTypes = await loadVolumeTypes({
-        tenant_uuid: resource.uuid,
-      });
-      const destinationVolumeTypes = await loadVolumeTypes({
-        settings_uuid: offering.scope_uuid,
-      });
-      const sourceSubnets = await loadSubnets({
-        tenant_uuid: resource.uuid,
-        field: ['name', 'cidr'],
-      });
+      const sourceVolumeTypes = await getAllPages((page) =>
+        openstackVolumeTypesList({
+          query: { page, tenant_uuid: resource.uuid },
+        }),
+      );
+      const destinationVolumeTypes = await getAllPages((page) =>
+        openstackVolumeTypesList({
+          query: { page, settings_uuid: offering.scope_uuid },
+        }),
+      );
+      const sourceSubnets = await getAllPages((page) =>
+        openstackSubnetsList({
+          query: {
+            page,
+            tenant_uuid: resource.uuid,
+            field: ['name', 'cidr'],
+          },
+        }),
+      );
       const networks = (
         await openstackNetworksList({
           query: {

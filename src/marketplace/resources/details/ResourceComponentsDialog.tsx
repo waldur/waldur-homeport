@@ -1,9 +1,8 @@
 import { Col, Row } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
-import { Resource } from 'waldur-js-client';
+import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { OfferingComponent } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 

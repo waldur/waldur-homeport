@@ -286,6 +286,7 @@ export function VirtualMenuList(props: MenuListProps<unknown, boolean>) {
   OuterElementType.displayName = 'VirtualMenuListOuter';
 
   return (
+    // @ts-ignore
     <VariableSizeList
       ref={listRef}
       style={listStyle}

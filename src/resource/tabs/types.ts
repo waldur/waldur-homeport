@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { FeaturesEnum } from '@/FeaturesEnums';
-import { Offering } from '@/marketplace/types';
 import { TableProps } from '@/table/types';
 
 interface ResourceTabProps extends Partial<TableProps> {

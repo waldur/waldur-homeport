@@ -3,6 +3,7 @@ import { FC, useEffect } from 'react';
 import {
   marketplaceServiceProvidersPartialUpdate,
   serviceProviderApiSecretCodeRetrieve,
+  ServiceProvider,
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -13,7 +14,6 @@ import {
 } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { ServiceProvider } from '@/marketplace/types';
 import { useNotify } from '@/store/notify';
 import { useCustomer } from '@/workspace/hooks';
 

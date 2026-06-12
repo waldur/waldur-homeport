@@ -43,7 +43,9 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
   const { closeDialog } = useModal();
 
   // Save created users (to avoid recreation) when we make modifications on the file after a failed submission
-  const [createdUsers, setCreatedUsers] = useState<OfferingUser[]>([]);
+  const [createdUsers, setCreatedUsers] = useState<
+    Pick<OfferingUser, 'user_username' | 'offering_uuid'>[]
+  >([]);
   // When the submission is failed, we keep the returned status of records here - including errors
   const [status, setStatus] = useState<RecordStatus[]>([]);
 

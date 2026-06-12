@@ -5,6 +5,7 @@ import {
   Customer,
   LimitPeriodEnum,
   PublicOfferingDetails,
+  Offering,
 } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
@@ -165,12 +166,12 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
 };
 
 interface TabbedPlanComponents {
-  offering: PublicOfferingDetails;
+  offering: PublicOfferingDetails | Offering;
   plan?: BasePublicPlan;
   limits?: Limits;
   viewMode?: boolean;
   concealBillingInfo?: boolean;
-  customer?: Customer;
+  customer?: Pick<Customer, 'url'>;
   extraTabs?: Array<{
     title: ReactNode;
     eventKey: string | number;

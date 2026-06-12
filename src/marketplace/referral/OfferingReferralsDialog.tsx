@@ -1,11 +1,10 @@
 import { FunctionComponent } from 'react';
+import { Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ReferralsList } from '@/marketplace/referral/ReferralsList';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-
-import { Offering } from '../types';
 
 interface OfferingReferralsDialogProps {
   resolve: Offering;

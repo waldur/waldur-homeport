@@ -1,10 +1,11 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
+
+import { FormStepProps } from '../deploy/types';
 
 const OrderSummaryDialog = lazyComponent(() =>
   import('./OrderSummaryDialog').then((module) => ({
@@ -19,7 +20,7 @@ export const OrderSummaryButton = ({
   disabled = false,
   disabledReason = undefined,
 }: {
-  offering: PublicOfferingDetails;
+  offering: FormStepProps['offering'];
   label?: string;
   className?: string;
   disabled?: boolean;

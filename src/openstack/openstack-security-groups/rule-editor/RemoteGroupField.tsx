@@ -8,7 +8,7 @@ import { FormField } from './FormField';
 
 export const RemoteGroupField: FC<{
   name: string;
-  choices: OpenStackSecurityGroup[];
+  choices: Pick<OpenStackSecurityGroup, 'name' | 'url'>[];
   component?: any;
 }> = ({ name, choices, component = FormField }) => (
   <Field name={name} component={component} as="select">

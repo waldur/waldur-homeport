@@ -34,7 +34,7 @@ describe('Customer dashboard chart API', () => {
         incurred_costs: 120,
         compensations: -20,
       },
-    ];
+    ] as any;
     vi.setSystemTime(new Date(2018, 9, 16));
     const chart = formatOrganizationCostChart(invoices);
 

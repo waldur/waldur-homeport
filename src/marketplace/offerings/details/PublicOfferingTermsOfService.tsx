@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
-import { marketplaceOfferingTermsOfServiceList } from 'waldur-js-client';
+import {
+  marketplaceOfferingTermsOfServiceList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { ExternalLink } from '@/core/ExternalLink';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 
 import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';
 

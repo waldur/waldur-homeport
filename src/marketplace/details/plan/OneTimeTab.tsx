@@ -1,12 +1,14 @@
 import { useMemo } from 'react';
+import { Field } from 'react-final-form';
 
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { DateField } from '@/form/DateField';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
-import { OrderStartDateField } from '@/marketplace/deploy/steps/OrderStartDateField';
+import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/useOrderStartDateBounds';
 
 import { ComponentRowTotal } from './ComponentRowTotal';
 import { ControlRows } from './ControlRows';
@@ -24,6 +26,8 @@ export const OneTimeTab = ({
   const shouldConcealPrices =
     isFeatureVisible(MarketplaceFeatures.conceal_prices) || concealBillingInfo;
   const { project } = useOrderFormData();
+
+  const dateFieldProps = useOrderStartDateBounds(project);
 
   const prepaidConstraints = useMemo(
     () => mergePrepaidConstraints(oneTime.prepaidRows),
@@ -80,7 +84,13 @@ export const OneTimeTab = ({
             tooltip={translate(
               'If not set, the order is processed immediately after approval.',
             )}
-            value={<OrderStartDateField project={project} simple />}
+            value={
+              <Field
+                name="start_date"
+                component={DateField}
+                {...dateFieldProps}
+              />
+            }
           />
         )}
 

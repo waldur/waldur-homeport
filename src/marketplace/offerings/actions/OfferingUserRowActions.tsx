@@ -1,10 +1,9 @@
-import { OfferingUser } from 'waldur-js-client';
+import { OfferingUser, ServiceProvider } from 'waldur-js-client';
 
 import { OfferingUserDetailsButton } from '@/marketplace/offerings/details/OfferingUserDetailsButton';
 import { ProviderOfferingUserDeleteButton } from '@/marketplace/service-providers/ProviderOfferingUserDeleteButton';
 import { ProviderOfferingUserUpdateButton } from '@/marketplace/service-providers/ProviderOfferingUserUpdateButton';
 import { RestrictOfferingUserButton } from '@/marketplace/service-providers/RestrictOfferingUser';
-import { ServiceProvider } from '@/marketplace/types';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown } from '@/table/ActionsDropdown';

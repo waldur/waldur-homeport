@@ -5,7 +5,6 @@ import {
   callManagingOrganisationsCreate,
   callManagingOrganisationsDestroy,
   callManagingOrganisationsList,
-  Customer,
   customersRetrieve,
 } from 'waldur-js-client';
 
@@ -58,7 +57,7 @@ describe('CustomerCallManagerPanel', () => {
       uuid: 'customer-uuid-1',
       url: '/api/customers/customer-uuid-1/',
       call_managing_organization_uuid: null,
-    } satisfies Customer);
+    } as any);
 
     vi.mocked(useModal().confirm).mockResolvedValue(undefined);
     vi.mocked(callManagingOrganisationsCreate).mockResolvedValue({

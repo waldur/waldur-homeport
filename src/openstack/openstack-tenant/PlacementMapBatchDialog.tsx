@@ -9,39 +9,13 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
-import {
-  HypervisorPlacementMapContent,
-  PlacementInstance,
-} from './HypervisorPlacementMapContent';
+import { HypervisorPlacementMapContent } from './HypervisorPlacementMapContent';
 
 interface Props {
   resolve: {
     rows: Resource[];
   };
 }
-
-const SPARSE_FIELDS: Array<
-  | 'uuid'
-  | 'name'
-  | 'cores'
-  | 'ram'
-  | 'hypervisor_hostname'
-  | 'server_group'
-  | 'runtime_state'
-  | 'project_name'
-  | 'customer_name'
-> = [
-  'uuid',
-  'name',
-  'cores',
-  'ram',
-  'hypervisor_hostname',
-  'server_group',
-  'runtime_state',
-  'project_name',
-  'customer_name',
-];
-
 export const PlacementMapBatchDialog: FC<Props> = ({ resolve }) => {
   // Build lookup from resource_uuid → offering_name
   const offeringByUuid = useMemo(() => {
@@ -64,7 +38,19 @@ export const PlacementMapBatchDialog: FC<Props> = ({ resolve }) => {
         resolve.rows.map((row) =>
           openstackInstancesRetrieve({
             path: { uuid: row.resource_uuid },
-            query: { field: SPARSE_FIELDS },
+            query: {
+              field: [
+                'uuid',
+                'name',
+                'cores',
+                'ram',
+                'hypervisor_hostname',
+                'server_group',
+                'runtime_state',
+                'project_name',
+                'customer_name',
+              ],
+            },
           }).then((res) => res.data),
         ),
       ),
@@ -72,7 +58,7 @@ export const PlacementMapBatchDialog: FC<Props> = ({ resolve }) => {
   });
 
   // Enrich instances with offering_name from Resource rows
-  const enriched: PlacementInstance[] | undefined = useMemo(
+  const enriched = useMemo(
     () =>
       data?.map((inst) => ({
         ...inst,

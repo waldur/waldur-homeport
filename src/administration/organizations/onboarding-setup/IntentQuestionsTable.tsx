@@ -1,7 +1,6 @@
 import { FC, useMemo } from 'react';
 
 import { translate } from '@/i18n';
-import { Category } from '@/marketplace/types';
 import { useOfferingCategories } from '@/navigation/sidebar/utils';
 import { TableWithPortal } from '@/table/types';
 
@@ -12,7 +11,7 @@ import {
 } from './predefinedQuestions';
 
 export const IntentQuestionsTable: FC<TableWithPortal> = ({ portal }) => {
-  const categories: Category[] = useOfferingCategories();
+  const categories = useOfferingCategories();
 
   // Get predefined questions with categories populated
   const predefinedQuestions = useMemo(() => {
@@ -21,7 +20,7 @@ export const IntentQuestionsTable: FC<TableWithPortal> = ({ portal }) => {
         return {
           ...q,
           options: categories
-            .filter((category) => (category.resource_count || 0) > 0)
+            .filter((category) => (category['resource_count'] || 0) > 0)
             .map((category) => category.title),
         };
       }

@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-
-import { Offering } from '@/marketplace/types';
+import { Offering } from 'waldur-js-client';
 
 import { PublicOfferingComponentsTable } from './PublicOfferingComponentsTable';
 

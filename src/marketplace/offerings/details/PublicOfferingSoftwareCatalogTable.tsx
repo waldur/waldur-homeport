@@ -1,11 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { marketplaceSoftwarePackagesList } from 'waldur-js-client';
+import { marketplaceSoftwarePackagesList, Offering } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { createFetcher } from '@/table/api';
 import {
   MarketplaceSoftwarePackagesFilter,

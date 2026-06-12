@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { groupBy } from 'lodash-es';
 import { useForm, useFormState } from 'react-final-form';
-import { remoteWaldurApiSharedOfferings } from 'waldur-js-client';
+import {
+  remoteWaldurApiSharedOfferings,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
@@ -9,7 +12,6 @@ import { SelectGroup } from '@/form';
 import { MultiSelectOption } from '@/form/select';
 import { translate } from '@/i18n';
 import { getLabel } from '@/marketplace/common/registry';
-import { Offering } from '@/marketplace/types';
 import { Field } from '@/resource/summary';
 
 import { ErredRemoteConnection } from './ErredRemoteConnection';

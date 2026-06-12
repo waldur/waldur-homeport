@@ -1,9 +1,8 @@
 import { useRouter } from '@uirouter/react';
+import { Offering } from 'waldur-js-client';
 
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
-
-import { Offering } from '../types';
 
 export const ViewOfferingButton = ({
   offering,

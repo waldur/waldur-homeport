@@ -173,7 +173,7 @@ This script:
 
 **Prerequisites:** Both `waldur-mastermind` and `js-client` repos must be checked out as siblings.
 
-**After running:** Verify with `yarn tsc --noEmit`
+**After running:** Verify with `yarn tsgo --noEmit`
 
 **Multiple workspaces on one machine:** `yarn link` uses a machine-global registry keyed only by package name, so a second checkout would overwrite the first workspace's `waldur-js-client` link. Set `YARN_LINK_FOLDER` to a workspace-local path to isolate them:
 

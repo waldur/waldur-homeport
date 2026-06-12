@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { FormRenderProps } from 'react-final-form';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -10,7 +11,6 @@ import { policyPeriodOptions } from '@/customer/cost-policies/utils';
 import { NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
-import { Offering } from '@/marketplace/types';
 
 import { getOfferingPolicyActionOptions } from '../utils';
 

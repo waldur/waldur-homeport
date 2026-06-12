@@ -2,7 +2,7 @@ import { EyeIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-final-form';
 import {
-  OpenStackSecurityGroup,
+  OpenStackNestedSecurityGroup,
   openstackSecurityGroupsList,
 } from 'waldur-js-client';
 
@@ -28,7 +28,7 @@ const OpenStackSecurityGroupsDialog = lazyComponent(() =>
 );
 
 interface ShowSecurityGroupsButtonProps {
-  row: OpenStackSecurityGroup;
+  row: OpenStackNestedSecurityGroup;
 }
 
 const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
@@ -129,7 +129,7 @@ export const FormSecurityGroupsField = ({ offering, ...props }: OwnProps) => {
   });
 
   return (
-    <Table<OpenStackSecurityGroup>
+    <Table<OpenStackNestedSecurityGroup>
       {...tableProps}
       columns={[
         {

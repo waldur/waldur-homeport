@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { NestedPartition } from 'waldur-js-client';
+import { NestedPartition, Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
@@ -8,7 +8,6 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { Offering } from '../../types';
 import { OfferingPartitionExpandableRow } from '../update/partitions/OfferingPartitionExpandableRow';
 
 interface PublicOfferingPartitionsProps {

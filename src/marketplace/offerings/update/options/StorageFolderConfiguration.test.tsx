@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react';
 import arrayMutators from 'final-form-arrays';
 import { Form } from 'react-final-form';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-
-import { Offering } from '@/marketplace/types';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 

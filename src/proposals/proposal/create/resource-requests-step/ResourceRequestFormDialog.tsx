@@ -2,10 +2,10 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import {
   proposalProposalsResourcesPartialUpdate,
   proposalProposalsResourcesSet,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import {
   Proposal,

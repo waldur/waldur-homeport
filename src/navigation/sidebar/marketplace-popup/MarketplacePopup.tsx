@@ -26,8 +26,11 @@ interface MarketplacePopupProps {
 }
 
 interface FormData {
-  organization?: Customer;
-  project?: Project;
+  organization?: Pick<Customer, 'name' | 'uuid' | 'abbreviation'>;
+  project?: Pick<
+    Project,
+    'name' | 'uuid' | 'url' | 'customer_uuid' | 'is_industry'
+  >;
 }
 
 const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({

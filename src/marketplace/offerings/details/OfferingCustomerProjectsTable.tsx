@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
-import { marketplaceProviderOfferingsListCustomerProjectsList } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsListCustomerProjectsList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
-import { Offering } from '@/marketplace/types';
 import { ProjectsListTable } from '@/project/ProjectsList';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';

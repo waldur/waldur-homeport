@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import { ServiceProvider } from 'waldur-js-client';
 
 import { EChart } from '@/core/EChart';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { ServiceProvider } from '@/marketplace/types';
 
 import { ChangesAmountBadge } from './ChangesAmountBadge';
 import { loadProviderCharts } from './utils';

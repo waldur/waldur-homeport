@@ -3,16 +3,13 @@ import {
   Project,
   Customer,
   ProviderPlanDetails as Plan,
+  Offering,
+  OfferingComponent,
 } from 'waldur-js-client';
 
 import { CheckoutSummaryProps } from '../deploy/types';
 import { OfferingEditPanelProps } from '../offerings/update/integration/types';
-import {
-  AttributesType,
-  Offering,
-  OfferingComponent,
-  OrderDetailsProps,
-} from '../types';
+import { AttributesType, OrderDetailsProps } from '../types';
 
 export type Limits = Record<string, number>;
 

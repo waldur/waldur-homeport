@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
+import { OfferingComponent } from 'waldur-js-client';
 
-import { OfferingComponent } from '@/marketplace/types';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 import { ComponentUserUsage } from './types';

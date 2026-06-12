@@ -1,6 +1,6 @@
 import { Fragment, FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
-import { OpenStackNestedSecurityGroup } from 'waldur-js-client';
+import { OpenStackSecurityGroup } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -10,12 +10,18 @@ import { SecurityGroupRuleHeader } from './SecurityGroupRuleHeader';
 
 interface OpenStackSecurityGroupsDialogProps {
   resolve: {
-    securityGroups: OpenStackNestedSecurityGroup[];
+    securityGroups: Pick<
+      OpenStackSecurityGroup,
+      'name' | 'description' | 'rules'
+    >[];
   };
 }
 
 export const OpenStackSecurityGroupsTable: FunctionComponent<{
-  securityGroups: OpenStackNestedSecurityGroup[];
+  securityGroups: Pick<
+    OpenStackSecurityGroup,
+    'name' | 'description' | 'rules'
+  >[];
 }> = ({ securityGroups }) => {
   return (
     <Table responsive className="table-row-bordered">

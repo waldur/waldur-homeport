@@ -56,7 +56,7 @@ export const ProjectField: FC<ProjectFieldProps> = ({ previewMode }) => {
       quickAction={
         !previewMode && (
           <ProjectCreateButton
-            customer={customer}
+            customer={customer as any}
             title={translate('Add project')}
             variant="link"
             className="mb-1"

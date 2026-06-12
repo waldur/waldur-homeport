@@ -1,9 +1,11 @@
 import { FC } from 'react';
-import { Resource } from 'waldur-js-client';
+import {
+  Resource,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 
 interface OwnProps {
   data: {

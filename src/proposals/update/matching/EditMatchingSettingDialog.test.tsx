@@ -24,14 +24,15 @@ const CONFIG = {
   max_proposals_per_reviewer: 10,
 };
 
-const makeProps = (name: string, title = 'Edit setting') => ({
-  resolve: {
-    call: { uuid: CALL_UUID },
-    name,
-    title,
-    refetch: vi.fn(),
-  },
-});
+const makeProps = (name: string, title = 'Edit setting') =>
+  ({
+    resolve: {
+      call: { uuid: CALL_UUID },
+      name,
+      title,
+      refetch: vi.fn(),
+    },
+  }) as any;
 
 const resolveRetrieve = () =>
   vi

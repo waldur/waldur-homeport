@@ -3,7 +3,10 @@ import { DateTime } from 'luxon';
 import { FunctionComponent, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { Form, useFormState } from 'react-final-form';
-import { marketplaceProviderOfferingsCostsList } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsCostsList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -14,7 +17,6 @@ import {
   getOptions,
 } from '@/customer/list/AccountingRunningField';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 
 import { formatOfferingCostsChart } from './utils';
 

@@ -19,7 +19,8 @@ import {
   ComponentUserUsage,
   marketplaceComponentUserUsagesList,
   marketplaceOfferingUsersList,
-  type ResourcePlanPeriod,
+  ResourcePlanPeriod,
+  OfferingComponent,
 } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -36,7 +37,6 @@ import {
 } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
-import { OfferingComponent } from '@/marketplace/types';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 
 import { getPeriodRange } from './api';
@@ -170,7 +170,10 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
     const usagesByComponentType: Record<string, number> = {};
 
     props.components.forEach((component) => {
-      let recentUserRecord: ComponentUserUsage;
+      let recentUserRecord: Pick<
+        ComponentUserUsage,
+        'usage' | 'component_type' | 'uuid' | 'modified' | 'user'
+      >;
       userUsages.forEach((record) => {
         if (
           record.user === user.url &&

@@ -1,6 +1,7 @@
 import { debounce } from 'lodash-es';
 import { useCallback, useState } from 'react';
 import { Field, useForm } from 'react-final-form';
+import { Offering } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { FormGroup } from '@/form';
@@ -10,7 +11,6 @@ import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { Offering } from '@/marketplace/types';
 import { FlavorTable } from '@/openstack/openstack-instance/deploy/FlavorTable';
 import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
 import { VStepperFormStepCard } from '@/wizard';

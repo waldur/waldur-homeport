@@ -82,7 +82,7 @@ yarn info eslint prettier stylelint husky version
 - `yarn format:fix` - Auto-format code with Prettier
 - `yarn style:check` - Check SCSS/CSS styles with Stylelint
 - `yarn deps:unused` - Check for unused dependencies with Knip
-- `yarn tsc` - Typescript type check
+- `yarn tsgo` - Typescript type check
 
 #### Dependency Management
 

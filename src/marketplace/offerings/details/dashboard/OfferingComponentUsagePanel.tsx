@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Offering } from 'waldur-js-client';
+import {
+  marketplaceComponentUsageMonthlyList,
+  Offering,
+} from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatUsageValue } from '@/core/formatNumber';
@@ -8,8 +11,6 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-
-import { getComponentUsageMonthlyList } from '../../api';
 
 interface OfferingComponentUsagePanelProps {
   offering: Offering;
@@ -21,7 +22,7 @@ export const OfferingComponentUsagePanel: FC<
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['offeringUsageStats', offering.uuid],
     queryFn: () =>
-      getComponentUsageMonthlyList({
+      marketplaceComponentUsageMonthlyList({
         query: {
           offering_uuid: offering.uuid,
           field: [
@@ -57,11 +58,15 @@ export const OfferingComponentUsagePanel: FC<
           <>
             {data?.length > 0 ? (
               data
-                .sort((a, b) => (b.usage_percent || 0) - (a.usage_percent || 0))
+                .sort(
+                  (a, b) =>
+                    (b.usage_percent ? parseFloat(b.usage_percent) : 0) -
+                    (a.usage_percent ? parseFloat(a.usage_percent) : 0),
+                )
                 .map((row) => {
                   const usage =
                     row.usage_percent !== undefined
-                      ? Number(row.usage_percent)
+                      ? parseFloat(row.usage_percent)
                       : 0;
                   return (
                     <FormTable.Item

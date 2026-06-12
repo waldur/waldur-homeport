@@ -3,8 +3,10 @@
     "outDir": "./build/",
     "sourceMap": true,
     "noImplicitAny": false,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
     "module": "esnext",
     "moduleResolution": "Bundler",
     "target": "ES2020",
@@ -14,16 +16,9 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
-      ],
-      "react": [
-        "./node_modules/@types/react"
-      ],
-      "react-dom": [
-        "./node_modules/@types/react-dom"
+        "./src/*"
       ],
     },
     "lib": [

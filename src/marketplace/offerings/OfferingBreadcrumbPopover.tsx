@@ -1,10 +1,9 @@
 import { marketplaceServiceProvidersOfferingsList } from 'waldur-js-client';
+import { Offering, ServiceProvider } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { BreadcrumbDropdown } from '@/navigation/header/breadcrumb/BreadcrumbDropdown';
 import { BreadcrumbSearchItem } from '@/navigation/header/breadcrumb/BreadcrumbSearchItem';
-
-import { Offering, ServiceProvider } from '../types';
 
 import { getStates } from './list/OfferingStateFilter';
 

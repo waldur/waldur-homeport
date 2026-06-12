@@ -1,9 +1,8 @@
 import { DateTime } from 'luxon';
-import { Project } from 'waldur-js-client';
+import { Project, OfferingComponent } from 'waldur-js-client';
 
 import { formatISODate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { OfferingComponent } from '@/marketplace/types';
 
 export interface PrepaidConstraints {
   min_prepaid_duration: number;
@@ -58,7 +57,7 @@ export const mergePrepaidConstraints = (
 
 export const getMonthOptions = (
   constraints: PrepaidConstraints,
-  project?: Project,
+  project?: Pick<Project, 'end_date'>,
   startDate?: string,
 ) => {
   const effectiveStartDate = DateTime.fromISO(
@@ -116,7 +115,7 @@ export const calculateMonthsDifference = (
 
 export const getDatePickerConstraints = (
   constraints: PrepaidConstraints,
-  project?: Project,
+  project?: Pick<Project, 'end_date'>,
   effectiveStartDate?: string,
 ) => {
   const start = DateTime.fromISO(

@@ -19,9 +19,8 @@ import { useCustomer, useProject } from '@/workspace/hooks';
 
 import { OfferingDetailsLink } from '../links/OfferingDetailsLink';
 import { OfferingLink } from '../links/OfferingLink';
-import { Offering } from '../types';
 
-const OfferingListItem: FC<{ row: Offering }> = ({ row }) => {
+const OfferingListItem: FC<{ row: any }> = ({ row }) => {
   const abbreviation = useMemo(() => getItemAbbreviation(row), [row]);
 
   return (

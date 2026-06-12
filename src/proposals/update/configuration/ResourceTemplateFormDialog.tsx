@@ -4,10 +4,11 @@ import {
   proposalProtectedCallsResourceTemplatesSet,
   proposalProtectedCallsResourceTemplatesUpdate,
   ProviderRequestedOffering,
+  ProviderOfferingDetails as Offering,
+  ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { Offering, Plan } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormSecondPage as Step2Plan } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage';

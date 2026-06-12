@@ -1,8 +1,7 @@
 import { useQueries } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { projectsRetrieve } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
+import { projectsRetrieve, Offering, Project } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -19,7 +18,6 @@ import { Customer } from '@/workspace/types';
 
 import { getServiceProviderByCustomer } from '../common/api';
 import { getLabel } from '../common/registry';
-import { Offering } from '../types';
 
 import './DetailsOverviewDialog.scss';
 

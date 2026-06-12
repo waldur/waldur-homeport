@@ -2,6 +2,7 @@ import { FC } from 'react';
 import {
   marketplaceOfferingUsersDestroy,
   OfferingUser,
+  ServiceProvider,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -10,8 +11,6 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useUser } from '@/workspace/hooks';
-
-import { ServiceProvider } from '../types';
 
 export const ProviderOfferingUserDeleteButton: FC<{
   row: OfferingUser;

@@ -9,12 +9,13 @@ import {
   OpenStackCreatePortRequest,
   OpenStackInstance,
   openstackInstancesUpdatePorts,
+  openstackSubnetsList,
 } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadSubnets } from '@/openstack/api';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { PortRows } from './PortRows';
@@ -44,7 +45,12 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
     error,
   } = useQuery({
     queryKey: ['UpdateInternalIpsDialog', resource.tenant_uuid],
-    queryFn: () => loadSubnets({ tenant_uuid: resource.tenant_uuid }),
+    queryFn: () =>
+      getAllPages((page) =>
+        openstackSubnetsList({
+          query: { page, tenant_uuid: resource.tenant_uuid },
+        }),
+      ),
   });
 
   const { mutateAsync } = useManagedMutation<any, any, FormData>({

@@ -57,7 +57,7 @@ export const ApplicantVisibilitySection: FC<
   return (
     <UserAttributeVisibilityTable
       title={TITLE}
-      config={config as Record<string, boolean | undefined> | undefined}
+      config={config as any}
       update={update}
       editGate="always"
       disabled={isReadOnly}

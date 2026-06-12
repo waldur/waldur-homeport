@@ -1,13 +1,16 @@
 import { useCallback, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
-import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
+import {
+  OpenStackFlavor,
+  openstackFlavorsList,
+  Offering,
+} from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatFilesize } from '@/core/utils';
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { DeployFormData } from '@/marketplace/common/types';
-import { Offering } from '@/marketplace/types';
 import { TENANT_TYPE } from '@/openstack/constants';
 import { QuotaUsageBarChart } from '@/quotas/QuotaUsageBarChart';
 import { createFetcher } from '@/table/api';

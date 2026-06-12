@@ -1,12 +1,7 @@
-import { PublicOfferingDetails } from 'waldur-js-client';
-
 import { formatJsxTemplate, translate } from '@/i18n';
 import { DeployPageTotalCard } from '@/marketplace/deploy/DeployPageTotalCard';
+import { CheckoutSummaryProps } from '@/marketplace/deploy/types';
 import { OrderSubmitButton } from '@/marketplace/details/OrderSubmitButton';
-
-interface CheckoutSummaryProps {
-  offering: PublicOfferingDetails;
-}
 
 export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => (
   <DeployPageTotalCard

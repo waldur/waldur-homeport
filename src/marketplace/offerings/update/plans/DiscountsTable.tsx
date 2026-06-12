@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
+import { OfferingComponent } from 'waldur-js-client';
 
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { parseIntField } from '@/marketplace/common/utils';
-import { OfferingComponent } from '@/marketplace/types';
 
 interface DiscountsTableProps {
   components: OfferingComponent[];

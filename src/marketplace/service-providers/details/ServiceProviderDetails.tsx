@@ -1,12 +1,12 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
+import { ServiceProvider } from 'waldur-js-client';
 
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
-import { ServiceProvider } from '@/marketplace/types';
 import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';

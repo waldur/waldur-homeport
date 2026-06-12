@@ -30,7 +30,10 @@ interface FormData {
 }
 
 type OwnProps = {
-  resolve: { offering: ProviderOfferingDetails; refetch: () => void };
+  resolve: {
+    offering: Pick<ProviderOfferingDetails, 'uuid' | 'tags'>;
+    refetch: () => void;
+  };
 };
 
 export const EditTagsDialog = ({ resolve }: OwnProps) => {

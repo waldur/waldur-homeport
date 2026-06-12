@@ -78,7 +78,7 @@ Scan JS dependencies:
 Run type checking:
   <<: *linter-rules
   script:
-    - yarn tsc -b
+    - yarn tsgo -b
 
 Run JS linters:
   <<: *linter-rules

@@ -1,10 +1,9 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent, useMemo } from 'react';
-import { OrderDetails } from 'waldur-js-client';
+import { Offering, OrderDetails, OfferingComponent } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
-import { Offering, OfferingComponent } from '@/marketplace/types';
 
 interface OrderSummaryProps {
   order: OrderDetails;

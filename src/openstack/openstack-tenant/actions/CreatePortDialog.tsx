@@ -3,15 +3,19 @@ import { FC, useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
-import { openstackPortsCreate } from 'waldur-js-client';
+import {
+  openstackNetworksList,
+  openstackPortsCreate,
+  openstackSubnetsList,
+} from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { isMatchPattern, required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadNetworks, loadSubnets } from '@/openstack/api';
 import { CustomIpFieldFinal as CustomIpField } from '@/openstack/openstack-instance/actions/update-internal-ips/CustomIpFieldFinal';
 import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
 import {
@@ -57,10 +61,15 @@ export const FixedIPsField: FC<{
       if (!network || !resource) return Promise.resolve([]);
       const networkObj = networks?.find((net) => net.url === network);
       if (!networkObj) return Promise.resolve([]);
-      return loadSubnets({
-        tenant_uuid: resource.uuid,
-        network_uuid: networkObj.uuid,
-      });
+      return getAllPages((page) =>
+        openstackSubnetsList({
+          query: {
+            page,
+            tenant_uuid: resource.uuid,
+            network_uuid: networkObj.uuid,
+          },
+        }),
+      );
     },
     enabled: !subnetsProp && Boolean(networks && network && resource),
     staleTime: SHORT_STALE_TIME,
@@ -125,10 +134,15 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
     queryKey: ['port-form-networks', resource.uuid],
 
     queryFn: () =>
-      loadNetworks({
-        tenant_uuid: resource.uuid,
-        field: ['name', 'uuid', 'url'],
-      }),
+      getAllPages((page) =>
+        openstackNetworksList({
+          query: {
+            page,
+            tenant_uuid: resource.uuid,
+            field: ['name', 'uuid', 'url'],
+          },
+        }),
+      ),
 
     staleTime: SHORT_STALE_TIME,
   });

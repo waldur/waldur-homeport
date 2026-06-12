@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useMemo } from 'react';
-import { marketplacePlansUsageStatsList } from 'waldur-js-client';
+import {
+  marketplacePlansUsageStatsList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { MAX_PAGE_SIZE, getAllPages } from '@/core/api';
@@ -10,7 +13,6 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { TENANT_TYPE } from '@/openstack/constants';

@@ -3,13 +3,11 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
   CustomerServiceAccount,
-  CustomerServiceAccountRequest,
   marketplaceCustomerServiceAccountsCreate,
   marketplaceCustomerServiceAccountsPartialUpdate,
   marketplaceProjectServiceAccountsCreate,
   marketplaceProjectServiceAccountsPartialUpdate,
   ProjectServiceAccount,
-  ProjectServiceAccountRequest,
 } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -58,35 +56,42 @@ export const ServiceAccountFormDialog: FC<OwnProps> = ({
 
   const save = async (formData: ServiceAccountFormData) => {
     try {
-      const { preferred_identifier: _, username: __, ...updateData } = formData;
-      const body =
-        context === 'customer'
-          ? ({
-              ...(isEdit ? updateData : formData),
-              customer: scope.uuid,
-            } as CustomerServiceAccountRequest)
-          : ({
-              ...(isEdit ? updateData : formData),
-              project: scope.uuid,
-            } as ProjectServiceAccountRequest);
-
       let response;
       if (isEdit) {
-        const api =
-          context === 'customer'
-            ? marketplaceCustomerServiceAccountsPartialUpdate
-            : marketplaceProjectServiceAccountsPartialUpdate;
-        response = await api({
-          path: { uuid: row.uuid },
-          body,
-        });
+        if (context === 'customer') {
+          response = await marketplaceCustomerServiceAccountsPartialUpdate({
+            path: { uuid: row.uuid },
+            body: {
+              email: formData.email,
+              description: formData.description,
+            },
+          });
+        } else {
+          response = await marketplaceProjectServiceAccountsPartialUpdate({
+            path: { uuid: row.uuid },
+            body: {
+              email: formData.email,
+              description: formData.description,
+            },
+          });
+        }
         closeDialog();
       } else {
-        const api =
-          context === 'customer'
-            ? marketplaceCustomerServiceAccountsCreate
-            : marketplaceProjectServiceAccountsCreate;
-        response = await api({ body } as any);
+        if (context === 'customer') {
+          response = await marketplaceCustomerServiceAccountsCreate({
+            body: {
+              ...formData,
+              customer: scope.uuid,
+            },
+          });
+        } else {
+          response = await marketplaceProjectServiceAccountsCreate({
+            body: {
+              ...formData,
+              project: scope.uuid,
+            },
+          });
+        }
         closeDialog();
         // Open a dialog to show the API key
         openDialog(ServiceAccountShowInfoDialog, {

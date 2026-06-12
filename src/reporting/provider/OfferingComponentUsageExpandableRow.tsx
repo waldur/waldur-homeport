@@ -9,6 +9,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from 'react-bootstrap';
+import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
@@ -18,7 +19,6 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { getOfferingTypes } from '@/marketplace/common/registry';
-import { getComponentUsageMonthlyList } from '@/marketplace/offerings/api';
 import { OfferingComponentUsage } from '@/marketplace/offerings/types';
 import { getLimitPeriods } from '@/marketplace/offerings/update/components/ComponentLimitPeriodField';
 import { Field } from '@/resource/summary';
@@ -40,7 +40,7 @@ export const OfferingComponentUsageExpandableRow: FC<
       DateTime.now()
         .startOf('month')
         .minus({ months: period })
-        .toFormat('yyyy-MM-dd'),
+        .toFormat('yyyy-MM'),
     [period],
   );
 
@@ -52,11 +52,11 @@ export const OfferingComponentUsageExpandableRow: FC<
       period,
     ],
     queryFn: () =>
-      getComponentUsageMonthlyList({
+      marketplaceComponentUsageMonthlyList({
         query: {
           offering_uuid: row.offering_uuid,
           component_type: row.component_type,
-          date_after,
+          start: date_after,
           field: ['total_consumed', 'total_allocated', 'billing_period'],
         },
       }).then((response) => response.data),

@@ -1,8 +1,10 @@
 import { FC } from 'react';
-import { marketplaceServiceProvidersCreate } from 'waldur-js-client';
+import {
+  marketplaceServiceProvidersCreate,
+  ServiceProvider,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { ServiceProvider } from '@/marketplace/types';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 import { useCustomer, useSetCustomer } from '@/workspace/hooks';

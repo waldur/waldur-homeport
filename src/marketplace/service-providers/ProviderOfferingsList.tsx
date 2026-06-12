@@ -4,6 +4,7 @@ import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceServiceProvidersOfferingsList,
   marketplaceServiceProvidersOfferingsTypesList,
+  ServiceProvider,
 } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
@@ -23,7 +24,6 @@ import { OfferingDropdownActions } from '../offerings/list/OfferingDropdownActio
 import { getStates } from '../offerings/list/OfferingStateFilter';
 import { OfferingStateField } from '../offerings/OfferingStateField';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
-import { ServiceProvider } from '../types';
 
 import { PROVIDER_OFFERINGS_FORM_ID } from './constants';
 import { OfferingNameColumn } from './OfferingNameColumn';

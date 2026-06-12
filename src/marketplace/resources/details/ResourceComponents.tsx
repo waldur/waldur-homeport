@@ -1,8 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
-import { Resource } from 'waldur-js-client';
-
-import { OfferingComponent } from '@/marketplace/types';
+import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { ResourceComponentItem } from './ResourceComponentItem';
 import { ResourceShowMoreComponents } from './ResourceShowMoreComponents';

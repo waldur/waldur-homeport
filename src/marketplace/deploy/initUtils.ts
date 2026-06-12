@@ -1,8 +1,4 @@
-import {
-  Project,
-  projectsRetrieve,
-  PublicOfferingDetails,
-} from 'waldur-js-client';
+import { Project, projectsRetrieve, Offering } from 'waldur-js-client';
 
 import { getCustomer } from '@/customer/utils';
 import { Customer } from '@/workspace/types';
@@ -14,7 +10,7 @@ interface InitContext {
   marketplaceFilters: MarketplaceFilterItem[];
   currentProject: Project;
   currentCustomer: Customer;
-  selectedOffering?: PublicOfferingDetails;
+  selectedOffering?: Offering;
 }
 
 /**

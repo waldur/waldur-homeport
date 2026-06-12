@@ -2,12 +2,12 @@ import { FunctionComponent, useMemo } from 'react';
 import {
   ImportableResource,
   marketplaceProviderOfferingsImportableResourcesList,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { requiredArray } from '@/core/validators';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { ResourceIconName } from '@/resource/ResourceIconName';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';

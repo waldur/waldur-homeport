@@ -45,7 +45,7 @@ export const OfferingUIView = (props) => {
 
   usePageHero(
     <OfferingViewHero
-      offering={offeringData?.offering}
+      offering={offeringData?.offering as any}
       refetch={refetch}
       isRefetching={isRefetching}
       isLoading={isLoading}
@@ -57,7 +57,11 @@ export const OfferingUIView = (props) => {
   const page = state.name.includes('update') ? 'edit' : 'details';
   const breadcrumbItems = useMemo(
     () =>
-      getOfferingBreadcrumbItems(offeringData?.offering, props.provider, page),
+      getOfferingBreadcrumbItems(
+        offeringData?.offering as any,
+        props.provider,
+        page,
+      ),
     [offeringData?.offering, props.provider, page],
   );
   useBreadcrumbs(breadcrumbItems);

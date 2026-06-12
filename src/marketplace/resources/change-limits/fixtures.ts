@@ -1,4 +1,3 @@
-import { Offering } from '@/marketplace/types';
 import { TENANT_TYPE } from '@/openstack/constants';
 
 import { StateProps } from './utils';
@@ -38,7 +37,7 @@ export const offering = {
   ],
   type: TENANT_TYPE,
   plugin_options: { enable_purchase_order_upload: true },
-} as Offering;
+} as any;
 
 export const newLimits = {
   cores: 10,

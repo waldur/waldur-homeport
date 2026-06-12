@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Offering } from '@/marketplace/types';
 
 import { PublicOfferingSoftwareCatalogTable } from './PublicOfferingSoftwareCatalogTable';
 

@@ -1,7 +1,11 @@
-import { RequestedOffering } from 'waldur-js-client';
+import {
+  RequestedOffering,
+  ProviderOfferingDetails as Offering,
+  ProviderPlanDetails as Plan,
+} from 'waldur-js-client';
 
 import { Limits } from '@/marketplace/details/types';
-import { AttributesType, Offering, Plan } from '@/marketplace/types';
+import { AttributesType } from '@/marketplace/types';
 
 export {
   type Proposal,

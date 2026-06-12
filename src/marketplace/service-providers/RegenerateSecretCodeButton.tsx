@@ -1,9 +1,11 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { serviceProviderApiSecretCodeGenerate } from 'waldur-js-client';
+import {
+  serviceProviderApiSecretCodeGenerate,
+  ServiceProvider,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { ServiceProvider } from '@/marketplace/types';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 

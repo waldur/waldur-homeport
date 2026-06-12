@@ -13,13 +13,13 @@ import {
 import { ListGroupItem, Stack } from 'react-bootstrap';
 import { FixedSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
 import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
 
 import { RECENTLY_ADDED_OFFERINGS_UUID } from './constants';
@@ -28,6 +28,10 @@ import { fetchOfferingsByPage } from './utils';
 const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 const LIST_HEIGHT = 500;
 const ITEM_SIZE = 68;
+
+type ProviderOfferingResponse = Awaited<
+  ReturnType<typeof fetchOfferingsByPage>
+>['pageElements'];
 
 const EmptyOfferingListPlaceholder: FunctionComponent = () => (
   <div className="message-wrapper ellipsis">
@@ -43,9 +47,9 @@ const LoadingRow: FunctionComponent<{ style: CSSProperties }> = ({ style }) => (
 
 const OfferingListItem: FunctionComponent<{
   style: CSSProperties;
-  item: Offering;
-  onClick: (item: Offering) => void;
-  selectedItem?: Offering;
+  item: ProviderOfferingResponse[0];
+  onClick: (item: ProviderOfferingResponse[0]) => void;
+  selectedItem?: ProviderOfferingResponse[0];
 }> = ({ item, onClick, selectedItem, style }) => {
   const abbreviation = useMemo(() => getItemAbbreviation(item), [item]);
 
@@ -95,7 +99,7 @@ const OfferingListItem: FunctionComponent<{
 };
 
 interface OfferingsPanelProps {
-  lastOfferings: Offering[];
+  lastOfferings: ProviderOfferingResponse;
   customer;
   project;
   category;
@@ -136,7 +140,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
   // Pagination state. `items` is sparse — entries land as their parent page
   // resolves. `itemCount === null` until the first page request returns
   // (lets us delay the "no offerings" empty-state decision until we know).
-  const [items, setItems] = useState<(Offering | undefined)[]>([]);
+  const [items, setItems] = useState<ProviderOfferingResponse>([]);
   const [itemCount, setItemCount] = useState<number | null>(null);
   // Pages that are currently fetching OR already settled. Tracked outside
   // React state because we read it inside `loadMoreItems` synchronously to
@@ -145,13 +149,11 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
   const inFlightPages = useRef<Set<number>>(new Set());
 
   const fetchPage = useCallback(
-    async (
-      pageIndex: number,
-    ): Promise<{ pageElements: Offering[]; itemCount: number }> => {
+    async (pageIndex: number) => {
       if (category && category.uuid === RECENTLY_ADDED_OFFERINGS_UUID) {
         return {
-          pageElements: lastOfferings || [],
-          itemCount: lastOfferings?.length || 0,
+          pageElements: lastOfferings,
+          itemCount: lastOfferings.length,
         };
       }
       if (!category) {
@@ -167,7 +169,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
         importable,
       );
       return {
-        pageElements: page.pageElements as unknown as Offering[],
+        pageElements: page.pageElements,
         itemCount: page.itemCount,
       };
     },
@@ -264,6 +266,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
       {itemCount === 0 ? (
         <EmptyOfferingListPlaceholder />
       ) : (
+        // @ts-ignore
         <InfiniteLoader
           isItemLoaded={isItemLoaded}
           itemCount={itemCount ?? VIRTUALIZED_SELECTOR_PAGE_SIZE}
@@ -271,6 +274,7 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
           minimumBatchSize={VIRTUALIZED_SELECTOR_PAGE_SIZE}
         >
           {({ onItemsRendered, ref }) => (
+            // @ts-ignore
             <List
               ref={ref}
               onItemsRendered={onItemsRendered}

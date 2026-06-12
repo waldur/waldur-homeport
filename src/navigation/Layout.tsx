@@ -95,7 +95,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (AuthService.isAuthenticated() && !currentUser) {
-      UsersService.refreshCurrentUser({ throwOnError: false });
+      UsersService.refreshCurrentUser().catch(() => {});
     }
     UsersService.refreshImpersonatorUser();
   }, []);

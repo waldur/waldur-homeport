@@ -1,4 +1,7 @@
-import { OrderDetails as OrderResponse } from 'waldur-js-client';
+import {
+  OrderDetails,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
@@ -8,14 +11,13 @@ import {
   ComponentsSection,
   useGroupedComponents,
 } from '@/marketplace/orders/details/type-based/ComponentsSection';
-import { Offering } from '@/marketplace/types';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { Field } from '@/resource/summary';
 
 import { useOrderPrices } from './utils';
 
 interface PlanDetailsProps {
-  order: OrderResponse;
+  order: OrderDetails;
   offering: Offering;
 }
 
@@ -31,7 +33,7 @@ const PlanCard = ({
   planDescription?: string;
   concealBillingInfo?: boolean;
   offering: Offering;
-  order?: OrderResponse;
+  order?: OrderDetails;
   viewMode?: boolean;
   type?: string;
 }) => {

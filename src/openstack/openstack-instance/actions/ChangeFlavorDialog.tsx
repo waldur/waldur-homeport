@@ -2,13 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import {
   InstanceFlavorChangeRequest,
+  openstackFlavorsList,
   openstackInstancesChangeFlavor,
 } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadFlavors } from '@/openstack/api';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 import { formatFlavor } from '@/resource/utils';
@@ -33,10 +34,15 @@ export const ChangeFlavorDialog: FC<ActionDialogProps> = ({
   const asyncState = useQuery({
     queryKey: ['flavors', resource.tenant_uuid, resource.flavor_name],
     queryFn: async () => {
-      const flavors = await loadFlavors({
-        tenant_uuid: resource.tenant_uuid,
-        field: ['url', 'name', 'cores', 'ram'],
-      });
+      const flavors = await getAllPages((page) =>
+        openstackFlavorsList({
+          query: {
+            page,
+            tenant_uuid: resource.tenant_uuid,
+            field: ['url', 'name', 'cores', 'ram'],
+          },
+        }),
+      );
       return {
         flavors: flavors
           .filter((flavor) => flavor.name !== resource.flavor_name)
