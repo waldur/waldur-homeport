@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { PublicOfferingDetails, OfferingComponent } from 'waldur-js-client';
 
 import {
   filterOfferingComponents,
@@ -7,7 +7,6 @@ import {
 } from '@/marketplace/common/registry';
 import { Limits } from '@/marketplace/common/types';
 import { maxAmount, minAmount } from '@/marketplace/common/utils';
-import { OfferingComponent } from '@/marketplace/types';
 
 import { OfferingLimits } from './types';
 
@@ -47,7 +46,7 @@ const parseComponentLimits = (
   );
 
 export const parseOfferingLimits = (
-  offering: PublicOfferingDetails,
+  offering: Pick<PublicOfferingDetails, 'type' | 'components'>,
 ): OfferingLimits => {
   const components = filterOfferingComponents(offering);
   const rawLimits = parseComponentLimits(components);

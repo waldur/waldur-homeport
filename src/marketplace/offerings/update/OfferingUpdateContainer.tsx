@@ -1,10 +1,13 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { PluginComponent } from 'waldur-js-client';
+import {
+  PluginComponent,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { Category, Offering } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 
 interface OwnProps {
   data: {

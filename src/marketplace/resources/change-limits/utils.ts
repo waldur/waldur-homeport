@@ -65,7 +65,7 @@ export interface StateProps {
   periodTotals: PeriodTotalRow[];
   orderCanBeApproved: boolean;
   shouldConcealPrices?: boolean;
-  offering?: Offering;
+  offering?: PublicOfferingDetails | Offering;
   newLimits?: Limits;
 }
 
@@ -101,8 +101,8 @@ export const getRemainingMonths = (endDate: string): number => {
 };
 
 export const getLimitChangeRequirements = (
-  resource: Resource,
-  offering: Offering,
+  resource: Pick<Resource, 'limits' | 'current_usages'>,
+  offering: PublicOfferingDetails | Offering,
 ) => {
   const limitParser = getFormLimitParser(offering.type);
   const limitSerializer = getFormLimitSerializer(offering.type);

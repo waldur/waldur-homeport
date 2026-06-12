@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useForm } from 'react-final-form';
+import { openstackSecurityGroupsList } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { loadSecurityGroups } from '@/openstack/api';
 import { FormSecurityGroupsField } from '@/openstack/openstack-instance/deploy/FormSecurityGroupsField';
 import { VStepperFormStepCard } from '@/wizard';
 
@@ -21,7 +22,13 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
     queryKey: ['security-groups-step-default', tenant],
 
     queryFn: () =>
-      tenant ? loadSecurityGroups({ tenant: tenant.url, name: 'default' }) : [],
+      tenant
+        ? getAllPages((page) =>
+            openstackSecurityGroupsList({
+              query: { page, tenant: tenant.url, name: 'default' },
+            }),
+          )
+        : [],
 
     staleTime: UI_STALE_TIME,
   });

@@ -104,14 +104,18 @@ const convertToThreadMessage = (
 export const fetchAndConvertMessages = async (
   threadUuid: string,
 ): Promise<ThreadMessageLike[]> => {
-  const response = await chatMessagesList({
-    query: { thread: threadUuid, include_history: true },
-  });
+  try {
+    const response = await chatMessagesList({
+      query: { thread: threadUuid, include_history: true },
+    });
 
-  if (response.error || !response.data?.length) {
+    if (!response.data?.length) {
+      return [];
+    }
+
+    const grouped = groupBySequenceIndex(response.data);
+    return grouped.map(convertToThreadMessage);
+  } catch {
     return [];
   }
-
-  const grouped = groupBySequenceIndex(response.data);
-  return grouped.map(convertToThreadMessage);
 };

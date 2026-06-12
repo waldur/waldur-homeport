@@ -3,7 +3,9 @@ import { Customer, PolicyPeriodEnum, Project } from 'waldur-js-client';
 export interface CostPolicyFormData {
   limit_cost: number;
   project_credit?: number;
-  scope: Array<Project | Customer>;
+  scope: Array<
+    Pick<Project | Customer, 'name' | 'url' | 'billing_price_estimate'>
+  >;
   actions: { value; label };
   period: PolicyPeriodEnum;
   options?: {

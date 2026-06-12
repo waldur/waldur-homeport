@@ -25,7 +25,7 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
   const shouldConcealPrices = useShouldConcealPrices(order.project_uuid);
   const data = useMemo(() => {
     const requirements = getLimitChangeRequirements(
-      { limits: (order.attributes as any).old_limits },
+      { limits: (order.attributes as any).old_limits, current_usages: {} },
       offering,
     );
     const limitParser = getFormLimitParser(order.offering_type);

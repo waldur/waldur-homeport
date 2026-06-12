@@ -101,7 +101,7 @@
     "redux": "^4.2.1",
     "reselect": "^3.0.1",
     "text-security": "^3.2.1",
-    "waldur-js-client": "^8.0.9-dev.51",
+    "waldur-js-client": "^8.0.9-dev.53",
     "yjs": "^13.5.22"
   },
   "devDependencies": {
@@ -127,6 +127,7 @@
     "@types/react-ultimate-pagination": "^1.2.1",
     "@types/react-window": "^1.8.8",
     "@types/react-window-infinite-loader": "^1.0.9",
+    "@typescript/native-preview": "^7.0.0-dev.20260421.2",
     "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "4",
     "autoprefixer": "^10.4.20",

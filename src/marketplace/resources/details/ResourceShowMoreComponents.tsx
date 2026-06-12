@@ -1,8 +1,7 @@
-import { Resource } from 'waldur-js-client';
+import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { OfferingComponent } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 
 const ResourceComponentsDialog = lazyComponent(() =>

@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
-import { Offering } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 
 const PolicyCreateDialog = lazyComponent(() =>

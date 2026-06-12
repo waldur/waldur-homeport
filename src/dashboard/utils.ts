@@ -109,7 +109,12 @@ export const formatCostChartLabel = (
       });
 };
 
-export const formatOrganizationCostChart = (invoices: Invoice[]): CostChart => {
+export const formatOrganizationCostChart = (
+  invoices: Pick<
+    Invoice,
+    'compensations' | 'incurred_costs' | 'month' | 'price' | 'year'
+  >[],
+): CostChart => {
   const items: DateCostPair[] = invoices.map((invoice) => ({
     value: Number(invoice.price),
     incurred: Number(invoice.incurred_costs),

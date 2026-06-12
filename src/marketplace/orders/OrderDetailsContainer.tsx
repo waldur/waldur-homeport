@@ -14,8 +14,6 @@ import { translate } from '@/i18n';
 import { useExtraAnnouncementBar } from '@/navigation/context';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 
-import { Offering } from '../types';
-
 import { OrderDetails } from './details/OrderDetails';
 
 async function loadOrder(order_uuid: string) {
@@ -27,9 +25,9 @@ async function loadOrder(order_uuid: string) {
     path: { uuid: order_uuid },
   }).then((response) => response.data);
 
-  const offering = (await marketplaceOrdersOfferingRetrieve({
+  const offering = await marketplaceOrdersOfferingRetrieve({
     path: { uuid: order.uuid },
-  }).then((response) => response.data)) as Offering;
+  }).then((response) => response.data);
 
   const plugins = await marketplacePluginsList().then(
     (response) => response.data,

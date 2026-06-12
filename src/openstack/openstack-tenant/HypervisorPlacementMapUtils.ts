@@ -1,4 +1,4 @@
-import { OpenStackInstance } from 'waldur-js-client';
+import { PlacementInstance } from './HypervisorPlacementMapContent';
 
 interface ServerGroupInfo {
   name: string;
@@ -30,10 +30,10 @@ export const formatRam = (ramMiB: number): string => {
   return `${ramMiB} MB`;
 };
 
-const getHypervisorKey = (instance: OpenStackInstance): string =>
+const getHypervisorKey = (instance: PlacementInstance): string =>
   instance.hypervisor_hostname?.trim() || 'Unassigned';
 
-const getServerGroupKey = (instance: OpenStackInstance): string | null =>
+const getServerGroupKey = (instance: PlacementInstance): string | null =>
   instance.server_group?.name || null;
 
 /**
@@ -41,10 +41,10 @@ const getServerGroupKey = (instance: OpenStackInstance): string | null =>
  * hypervisor and optionally nested by server group.
  */
 export const generatePlacementDiagram = (
-  instances: OpenStackInstance[],
+  instances: PlacementInstance[],
 ): string => {
   // Group instances by hypervisor
-  const byHypervisor = new Map<string, OpenStackInstance[]>();
+  const byHypervisor = new Map<string, PlacementInstance[]>();
   for (const inst of instances) {
     const key = getHypervisorKey(inst);
     if (!byHypervisor.has(key)) byHypervisor.set(key, []);
@@ -68,8 +68,8 @@ export const generatePlacementDiagram = (
     const hvInstances = byHypervisor.get(hvName);
 
     // Sub-group by server group within this hypervisor
-    const byServerGroup = new Map<string, OpenStackInstance[]>();
-    const ungrouped: OpenStackInstance[] = [];
+    const byServerGroup = new Map<string, PlacementInstance[]>();
+    const ungrouped: PlacementInstance[] = [];
 
     for (const inst of hvInstances) {
       const sgName = getServerGroupKey(inst);
@@ -110,7 +110,7 @@ export const generatePlacementDiagram = (
   return lines.join('\n');
 };
 
-const buildVmLabel = (inst: OpenStackInstance): string => {
+const buildVmLabel = (inst: PlacementInstance): string => {
   const name = escapeLabel(inst.name || 'unnamed');
   const cores = inst.cores != null ? `${inst.cores} vCPU` : '? vCPU';
   const ram = inst.ram != null ? formatRam(inst.ram) : '? RAM';
@@ -119,9 +119,9 @@ const buildVmLabel = (inst: OpenStackInstance): string => {
 
 /** Group instances by hypervisor hostname, sorted alphabetically (Unassigned last) */
 export const groupByHypervisor = (
-  instances: OpenStackInstance[],
-): { hostname: string; instances: OpenStackInstance[] }[] => {
-  const byHypervisor = new Map<string, OpenStackInstance[]>();
+  instances: PlacementInstance[],
+): { hostname: string; instances: PlacementInstance[] }[] => {
+  const byHypervisor = new Map<string, PlacementInstance[]>();
   for (const inst of instances) {
     const key = getHypervisorKey(inst);
     if (!byHypervisor.has(key)) byHypervisor.set(key, []);
@@ -139,7 +139,7 @@ export const groupByHypervisor = (
 
 /** Extract server group legend data from instances */
 export const buildServerGroupLegend = (
-  instances: OpenStackInstance[],
+  instances: PlacementInstance[],
 ): ServerGroupInfo[] => {
   const groups = new Map<string, ServerGroupInfo>();
   for (const inst of instances) {

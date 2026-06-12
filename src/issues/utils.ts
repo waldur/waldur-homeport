@@ -55,6 +55,7 @@ export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {
         issue?.project_uuid &&
           getProjectBreadcrumbItem(
             {
+              url: issue.project,
               uuid: issue.project_uuid,
               name: issue.project_name,
               customer_uuid: issue.customer_uuid,

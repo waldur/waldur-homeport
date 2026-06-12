@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceResourcesOfferingRetrieve, User } from 'waldur-js-client';
+import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
@@ -68,7 +68,7 @@ describe('RequestLimitsChangeAction', () => {
   });
 
   it('does not render or fetch the offering for users who can update limits directly', () => {
-    vi.mocked(useUser).mockReturnValue({ is_staff: true } satisfies User);
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
 
     renderAction(baseResource);
 

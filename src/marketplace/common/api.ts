@@ -7,10 +7,10 @@ import {
   MarketplaceRobotAccountsListData,
   marketplaceServiceProvidersList,
   MarketplaceServiceProvidersListData,
+  ServiceProvider,
 } from 'waldur-js-client';
 
 import { getAllPages, count } from '@/core/api';
-import { ServiceProvider } from '@/marketplace/types';
 
 export const getCategoryGroups = (
   query?: MarketplaceCategoryGroupsListData['query'],

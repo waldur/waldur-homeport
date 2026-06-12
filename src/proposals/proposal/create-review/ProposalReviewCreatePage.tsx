@@ -3,12 +3,10 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { Form } from 'react-final-form';
 import {
-  Proposal,
   proposalProposalsRetrieve,
   proposalPublicCallsRetrieve,
   proposalReviewsPartialUpdate,
   proposalReviewsRetrieve,
-  PublicCall,
 } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -38,16 +36,13 @@ const loadData = async (reviewUuid: string) => {
   const review = await proposalReviewsRetrieve({
     path: { uuid: reviewUuid },
   }).then((response) => response.data);
-  const promises: [Promise<Proposal>, Promise<PublicCall>] = [
-    proposalProposalsRetrieve({
-      path: { uuid: review.proposal_uuid },
-    }).then((response) => response.data),
-    proposalPublicCallsRetrieve({
-      path: { uuid: review.call_uuid },
-      query: { field: ['uuid', 'customer_uuid', 'manager_uuid'] },
-    }).then((res) => res.data),
-  ];
-  const [proposal, call] = await Promise.all(promises);
+  const proposal = await proposalProposalsRetrieve({
+    path: { uuid: review.proposal_uuid },
+  }).then((response) => response.data);
+  const call = await proposalPublicCallsRetrieve({
+    path: { uuid: review.call_uuid },
+    query: { field: ['uuid', 'customer_uuid', 'manager_uuid'] },
+  }).then((res) => res.data);
   return { review, proposal, call };
 };
 

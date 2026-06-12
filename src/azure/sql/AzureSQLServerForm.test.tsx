@@ -8,7 +8,6 @@ import { marketplaceOrdersCreate } from 'waldur-js-client';
 
 import { AZURE_SQL_TYPE } from '@/azure/constants';
 import { DeployPage } from '@/marketplace/deploy/DeployPage';
-import { Offering } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { createTestQueryClient, renderWithProviders } from '@/test/harness';
@@ -77,7 +76,7 @@ const mockOffering = {
   plans: [mockPlan],
   components: [],
   organization_groups: [],
-} as unknown as Offering;
+} as any;
 
 let mockRouter: UIRouterReact;
 

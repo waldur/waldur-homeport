@@ -38,7 +38,7 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
 
   const data = useMemo(() => {
     const requirements = getLimitChangeRequirements(
-      { limits: attributes.old_limits },
+      { limits: attributes.old_limits, current_usages: {} },
       offering,
     );
 

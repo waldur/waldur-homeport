@@ -3,6 +3,7 @@ import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateImage,
   marketplaceProviderOfferingsUpdateThumbnail,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
@@ -10,7 +11,6 @@ import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ImageUploadGroup } from '@/marketplace/offerings/update/ImageUploadField';
-import { Offering } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -23,7 +23,7 @@ interface FormData {
 
 interface UpdateOfferingMediaProps {
   resolve: {
-    offering: Offering;
+    offering: Pick<Offering, 'uuid' | 'thumbnail' | 'image'>;
     refetch: () => void;
     mediaType: MediaType;
   };

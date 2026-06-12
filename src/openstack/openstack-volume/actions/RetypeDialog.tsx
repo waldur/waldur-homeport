@@ -1,14 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
-import { openstackVolumesRetype } from 'waldur-js-client';
+import {
+  openstackVolumesRetype,
+  openstackVolumeTypesList,
+} from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadVolumeTypes } from '@/openstack/api';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 
@@ -18,9 +21,11 @@ export const RetypeDialog: FC<ActionDialogProps> = ({
   const asyncState = useQuery({
     queryKey: ['volumeTypes', resource.tenant_uuid, resource.type],
     queryFn: async () => {
-      const types = await loadVolumeTypes({
-        tenant_uuid: resource.tenant_uuid,
-      });
+      const types = await getAllPages((page) =>
+        openstackVolumeTypesList({
+          query: { page, tenant_uuid: resource.tenant_uuid },
+        }),
+      );
       return {
         types: types
           .map((volumeType) => ({

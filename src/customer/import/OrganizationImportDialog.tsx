@@ -54,7 +54,9 @@ export const OrganizationImportDialog: FC<OrganizationImportDialogProps> = (
   const { closeDialog } = useModal();
 
   // Save created organization (to avoid recreation) when we make modifications on the file after a failed submission
-  const [createdOrgs, setCreatedOrgs] = useState<Customer[]>([]);
+  const [createdOrgs, setCreatedOrgs] = useState<
+    Pick<Customer, 'name' | 'email'>[]
+  >([]);
 
   const submitForm = useCallback(
     async (formData) => {

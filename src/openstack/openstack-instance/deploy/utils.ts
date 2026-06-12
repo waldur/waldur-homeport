@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { PublicOfferingDetails } from 'waldur-js-client';
+import {
+  openstackVolumeTypesList,
+  PublicOfferingDetails,
+} from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
-import { loadVolumeTypes } from '@/openstack/api';
 import { TENANT_TYPE } from '@/openstack/constants';
 import {
   formatVolumeTypeChoices,
@@ -14,7 +17,7 @@ import {
 import { parseQuotas, parseQuotasUsage } from '@/openstack/utils';
 
 export const getOfferingLimit = (
-  offering: PublicOfferingDetails,
+  offering: Pick<PublicOfferingDetails, 'quotas'>,
   quotaName: string,
   defaultLimit = Infinity,
 ) => {
@@ -24,7 +27,9 @@ export const getOfferingLimit = (
   return quota.limit;
 };
 
-export const useQuotasData = (offering: PublicOfferingDetails) => {
+export const useQuotasData = (
+  offering: Pick<PublicOfferingDetails, 'quotas'>,
+) => {
   const { attributes = {} } = useOrderFormData();
   const usages = useMemo(
     () => parseQuotasUsage(offering.quotas || []),
@@ -44,16 +49,23 @@ export const useQuotasData = (offering: PublicOfferingDetails) => {
   }, [attributes, usages, limits]);
 };
 
-export const useVolumeDataLoader = (offering: PublicOfferingDetails) => {
+export const useVolumeDataLoader = (
+  offering: Pick<PublicOfferingDetails, 'scope_uuid' | 'type' | 'uuid'>,
+) => {
   return useQuery({
     queryKey: ['volumeTypes', offering.uuid],
 
     queryFn: async () => {
       const volumeTypes = offering.scope_uuid
-        ? await loadVolumeTypes(
-            offering.type === TENANT_TYPE
-              ? { settings_uuid: offering.scope_uuid }
-              : { tenant_uuid: offering.scope_uuid },
+        ? await getAllPages((page) =>
+            openstackVolumeTypesList({
+              query: {
+                page,
+                ...(offering.type === TENANT_TYPE
+                  ? { settings_uuid: offering.scope_uuid }
+                  : { tenant_uuid: offering.scope_uuid }),
+              },
+            }),
           )
         : [];
       const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);

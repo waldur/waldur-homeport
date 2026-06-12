@@ -20,7 +20,7 @@ const DEFAULT_RULE: Rule = {
 };
 
 export const RulesList: FC<{
-  remoteSecurityGroups: OpenStackSecurityGroup[];
+  remoteSecurityGroups: Pick<OpenStackSecurityGroup, 'name' | 'url'>[];
 }> = ({ remoteSecurityGroups }) => (
   <FieldArray name="rules">
     {({ fields }: FieldArrayRenderProps<Rule, any>) => (

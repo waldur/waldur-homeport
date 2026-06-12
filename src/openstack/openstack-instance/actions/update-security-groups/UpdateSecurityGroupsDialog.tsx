@@ -5,13 +5,14 @@ import {
   OpenStackInstance,
   openstackInstancesUpdateSecurityGroups,
   openstackPortsUpdateSecurityGroups,
+  openstackSecurityGroupsList,
 } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadSecurityGroups } from '@/openstack/api';
 import { OPENSTACK_PORT_TYPE } from '@/openstack/constants';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
@@ -36,10 +37,15 @@ export const UpdateSecurityGroupsDialog: FC<
   } = useQuery({
     queryKey: ['UpdateSecurityGroupsDialog', resource.service_settings_uuid],
     queryFn: () =>
-      loadSecurityGroups({
-        tenant_uuid: resource.tenant_uuid,
-        field: ['name', 'url'],
-      }).then((groups) =>
+      getAllPages((page) =>
+        openstackSecurityGroupsList({
+          query: {
+            page,
+            tenant_uuid: resource.tenant_uuid,
+            field: ['name', 'url'],
+          },
+        }),
+      ).then((groups) =>
         groups.map((group) => ({
           label: group.name,
           value: group.url,

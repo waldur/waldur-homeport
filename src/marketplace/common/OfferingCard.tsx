@@ -1,9 +1,7 @@
 import { FunctionComponent, Suspense } from 'react';
-import { NestedTag } from 'waldur-js-client';
+import { NestedTag, Offering } from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-
-import { Offering } from '../types';
 
 import { CARD_STYLES, DEFAULT_CARD_STYLE } from './cards/index';
 import { CardStyleType } from './cards/types';

@@ -1,8 +1,11 @@
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
-import { PlanUsageResponse } from 'waldur-js-client';
+import {
+  PlanUsageResponse,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
-import { Category, Offering } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 import { useToolbarActions } from '@/navigation/context';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';

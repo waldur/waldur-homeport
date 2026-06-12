@@ -5,13 +5,6 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-export {
-  OfferingComponent,
-  ServiceProvider,
-  ProviderOfferingDetails as Offering,
-  ProviderPlanDetails as Plan,
-} from 'waldur-js-client';
-
 export interface CategoryGroup extends WaldurCategoryGroup {
   /** generated on frontend side */
   categories?: Category[];

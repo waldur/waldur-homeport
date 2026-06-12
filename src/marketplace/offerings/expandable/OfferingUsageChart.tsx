@@ -2,14 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
+import {
+  marketplaceComponentUsageMonthlyList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { generateColors } from '@/core/generateColors';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { ResourceUsageTabs } from '@/marketplace/resources/usage/ResourceUsageTabs';
-import { Offering } from '@/marketplace/types';
-
-import { getComponentUsageMonthlyList } from '../api';
 
 interface OfferingUsageChartProps {
   offering: Offering;
@@ -26,7 +27,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
     queryKey: ['OfferingUsageChart', offering],
 
     queryFn: () =>
-      getComponentUsageMonthlyList({
+      marketplaceComponentUsageMonthlyList({
         query: {
           offering_uuid: offering.uuid,
           start: DateTime.now()

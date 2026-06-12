@@ -150,7 +150,7 @@ describe('Issue Comments Utils', () => {
       const input = '!image.png|thumbnail!';
       const attachments = [
         { file_name: 'image.png', file: '/path/to/image.png' },
-      ];
+      ] as any;
       const output = formatJiraMarkup(input, attachments);
       expect(output).toContain(
         '<img src="/path/to/image.png" title="image.png" />',
@@ -168,7 +168,7 @@ describe('Issue Comments Utils', () => {
       const input = '[Download|document.pdf]';
       const attachments = [
         { file_name: 'document.pdf', file: '/path/to/document.pdf' },
-      ];
+      ] as any;
       const output = formatJiraMarkup(input, attachments);
       expect(output).toContain(
         '<a href="/path/to/document.pdf" download>Download</a>',

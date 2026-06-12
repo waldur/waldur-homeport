@@ -55,7 +55,7 @@ describe('onlyOneProjectManager', () => {
         uuid: 'pm-uuid',
         content_type: 'project',
         is_active: true,
-      },
+      } as any,
     ];
     expect(getOnlyOneProjectManagerTooltip()).toContain('PI');
   });

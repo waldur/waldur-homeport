@@ -1,6 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { marketplaceProviderOfferingsCustomersList } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsCustomersList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import {
   AccountingRunningField,
@@ -8,7 +11,6 @@ import {
 } from '@/customer/list/AccountingRunningField';
 import { EstimatedCostField } from '@/customer/list/EstimatedCostField';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';

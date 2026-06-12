@@ -1,8 +1,8 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';

@@ -7,8 +7,8 @@ import { TableWithTabs } from '@/table/TableWithTabs';
 import { useResourceUsageTabs } from './utils';
 
 interface ResourceUsageTableProps {
-  offeringComponent: OfferingComponent;
-  resource: Resource;
+  offeringComponent: Pick<OfferingComponent, 'billing_type' | 'name'>;
+  resource: Pick<Resource, 'name'>;
 }
 
 export const ResourceUsageTable: FunctionComponent<ResourceUsageTableProps> = ({

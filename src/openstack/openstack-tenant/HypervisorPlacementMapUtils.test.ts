@@ -71,16 +71,15 @@ describe('formatRam', () => {
   });
 });
 
-const makeInstance = (
-  overrides: Partial<OpenStackInstance> = {},
-): OpenStackInstance => ({
-  uuid: 'aaaa-bbbb-cccc',
-  name: 'test-vm',
-  cores: 4,
-  ram: 8192,
-  hypervisor_hostname: 'hv-node-01',
-  ...overrides,
-});
+const makeInstance = (overrides: Partial<OpenStackInstance> = {}) =>
+  ({
+    uuid: 'aaaa-bbbb-cccc',
+    name: 'test-vm',
+    cores: 4,
+    ram: 8192,
+    hypervisor_hostname: 'hv-node-01',
+    ...overrides,
+  }) as any;
 
 describe('generatePlacementDiagram', () => {
   it('starts with architecture-beta header', () => {
@@ -168,7 +167,7 @@ describe('generatePlacementDiagram', () => {
       makeInstance({
         uuid: 'a1',
         hypervisor_hostname: 'hv01',
-        server_group: { name: 'mysg', policy: 'affinity' as any },
+        server_group: { name: 'mysg', policy: 'affinity' } as any,
       }),
     ];
     const result = generatePlacementDiagram(instances);
@@ -196,12 +195,12 @@ describe('generatePlacementDiagram', () => {
       makeInstance({
         uuid: 'a1',
         hypervisor_hostname: 'hv01',
-        server_group: { name: 'sharedsg', policy: 'anti-affinity' as any },
+        server_group: { name: 'sharedsg', policy: 'anti-affinity' } as any,
       }),
       makeInstance({
         uuid: 'a2',
         hypervisor_hostname: 'hv02',
-        server_group: { name: 'sharedsg', policy: 'anti-affinity' as any },
+        server_group: { name: 'sharedsg', policy: 'anti-affinity' } as any,
       }),
     ];
     const result = generatePlacementDiagram(instances);
@@ -240,15 +239,15 @@ describe('buildServerGroupLegend', () => {
     const instances = [
       makeInstance({
         uuid: 'a1',
-        server_group: { name: 'sg-1', policy: 'affinity' as any },
+        server_group: { name: 'sg-1', policy: 'affinity' } as any,
       }),
       makeInstance({
         uuid: 'a2',
-        server_group: { name: 'sg-1', policy: 'affinity' as any },
+        server_group: { name: 'sg-1', policy: 'affinity' } as any,
       }),
       makeInstance({
         uuid: 'a3',
-        server_group: { name: 'sg-2', policy: 'anti-affinity' as any },
+        server_group: { name: 'sg-2', policy: 'anti-affinity' } as any,
       }),
     ];
     const legend = buildServerGroupLegend(instances);
@@ -263,11 +262,11 @@ describe('buildServerGroupLegend', () => {
     const instances = [
       makeInstance({
         uuid: 'a1',
-        server_group: { name: 'zulu', policy: 'affinity' as any },
+        server_group: { name: 'zulu', policy: 'affinity' } as any,
       }),
       makeInstance({
         uuid: 'a2',
-        server_group: { name: 'alpha', policy: 'affinity' as any },
+        server_group: { name: 'alpha', policy: 'affinity' } as any,
       }),
     ];
     const legend = buildServerGroupLegend(instances);
@@ -292,7 +291,7 @@ describe('buildServerGroupLegend', () => {
       makeInstance({ uuid: 'a2', server_group: { name: '' } as any }),
       makeInstance({
         uuid: 'a3',
-        server_group: { name: 'real-sg', policy: 'affinity' as any },
+        server_group: { name: 'real-sg', policy: 'affinity' } as any,
       }),
     ];
     const legend = buildServerGroupLegend(instances);

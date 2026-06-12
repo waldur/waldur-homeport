@@ -1,4 +1,7 @@
-import { Offering, ServiceProvider } from '@/marketplace/types';
+import {
+  ProviderOfferingDetails as Offering,
+  ServiceProvider,
+} from 'waldur-js-client';
 
 interface Campaign {
   uuid?: string;

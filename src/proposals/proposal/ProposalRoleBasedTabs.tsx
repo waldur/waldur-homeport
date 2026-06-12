@@ -16,7 +16,7 @@ export const ProposalRoleBasedTabs = ({
   proposal: Proposal;
   /** user review */
   review: ProposalReview;
-  call: PublicCall;
+  call: Pick<PublicCall, 'uuid' | 'customer_uuid' | 'manager_uuid'>;
 }) => {
   const router = useRouter();
   const user = useUser();

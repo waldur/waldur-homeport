@@ -22,7 +22,7 @@ export const usePresetBreadcrumbItems = () => {
   });
 
   const getOrganizationBreadcrumbItem = (
-    customer: Partial<Customer>,
+    customer: Pick<Customer, 'uuid' | 'name' | 'abbreviation'>,
     options: Partial<IBreadcrumbItem> = {},
   ): IBreadcrumbItem => ({
     key: 'organization.dashboard',
@@ -57,7 +57,10 @@ export const usePresetBreadcrumbItems = () => {
   });
 
   const getProjectBreadcrumbItem = (
-    project: Partial<Project>,
+    project: Pick<
+      Project,
+      'uuid' | 'url' | 'name' | 'customer_uuid' | 'customer_name'
+    >,
     options: Partial<IBreadcrumbItem> = {},
   ): IBreadcrumbItem => ({
     key: 'project.dashboard',

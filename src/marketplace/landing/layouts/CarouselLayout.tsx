@@ -14,6 +14,7 @@ import {
   useOfferingListFilter,
 } from '@/marketplace/landing/utils';
 import { CategoryLink } from '@/marketplace/links/CategoryLink';
+import { Category } from '@/marketplace/types';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
 
@@ -42,7 +43,7 @@ export const CarouselLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
 
   // Flatten categories for the category chips carousel
   const flatCategories =
-    categories.data?.flatMap((item) => {
+    categories.data?.flatMap<Category>((item: any) => {
       if ('categories' in item && item.categories) {
         return item.categories;
       }

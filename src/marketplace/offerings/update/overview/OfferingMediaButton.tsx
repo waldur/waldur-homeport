@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { ProviderOfferingDetails } from 'waldur-js-client';
+import { Offering } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useUser, useCustomer } from '@/workspace/hooks';
+import { useCustomer, useUser } from '@/workspace/hooks';
 
 import { ACTIVE, DRAFT, PAUSED } from '../../store/constants';
 
@@ -19,7 +19,7 @@ const UpdateOfferingMediaDialog = lazyComponent(() =>
 );
 
 export const OfferingMediaButton: FC<{
-  offering: ProviderOfferingDetails;
+  offering: Pick<Offering, 'uuid' | 'thumbnail' | 'image' | 'state'>;
   refetch: () => void;
   mediaType: MediaType;
 }> = (props) => {

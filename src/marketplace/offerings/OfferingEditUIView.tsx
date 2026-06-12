@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
-import { marketplacePluginsList } from 'waldur-js-client';
+import {
+  marketplacePluginsList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 

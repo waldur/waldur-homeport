@@ -4,6 +4,7 @@ import {
   marketplaceResourcesOfferingRetrieve,
   marketplaceComponentUserUsagesList,
   marketplaceComponentUsagesList,
+  OfferingComponent,
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -12,7 +13,6 @@ import { formatUsageValue } from '@/core/formatNumber';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { getAccountingTypeOptions } from '@/marketplace/offerings/update/components/ComponentAccountingTypeField';
-import { OfferingComponent } from '@/marketplace/types';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -171,10 +171,24 @@ const getMonthsPeriods = (months): DateTime[] => {
 
 export const getFormattedUsages = (
   periods: DateTime[],
-  usages: ComponentUsage[],
-  userUsages: ComponentUserUsage[] = [],
-  valueSelector: (usage: ComponentUsage) => number = (u) =>
-    u.total_consumed || u.usage,
+  usages: Pick<
+    ComponentUsage,
+    'billing_period' | 'description' | 'total_consumed' | 'usage'
+  >[],
+  userUsages: Pick<
+    ComponentUserUsage,
+    'component_type' | 'billing_period'
+  >[] = [],
+  valueSelector: (
+    usage: Pick<
+      ComponentUsage,
+      | 'billing_period'
+      | 'description'
+      | 'total_consumed'
+      | 'total_allocated'
+      | 'usage'
+    >,
+  ) => number = (u) => u.total_consumed || u.usage,
 ): RowData[] => {
   return periods.map((period) => {
     const matchingUsage = usages.find(
@@ -206,7 +220,7 @@ export const getFormattedUsages = (
 };
 
 export const getUsagePeriods = (
-  usages: ComponentUsage[],
+  usages: Pick<ComponentUsage, 'billing_period'>[],
   months: number = null,
 ) => {
   let numberOfMonths = months;
@@ -227,9 +241,9 @@ export const getUsagePeriods = (
 };
 
 export const getEChartOptions = (
-  component: OfferingComponent,
-  usages: ComponentUsage[],
-  userUsages: ComponentUserUsage[],
+  component: Pick<OfferingComponent, 'type' | 'measured_unit' | 'billing_type'>,
+  usages: any[],
+  userUsages: Pick<ComponentUserUsage, 'component_type' | 'billing_period'>[],
   months: number,
   color: string,
   openDialog?: (userUsage: ComponentUserUsage[]) => void,
@@ -307,8 +321,8 @@ export const getBillingTypeLabel = (value) =>
   );
 
 export const getTotalUsagePeriod = (
-  usages: ComponentUsage[],
-  component?: OfferingComponent,
+  usages: Pick<ComponentUsage, 'type' | 'billing_period'>[],
+  component?: Pick<OfferingComponent, 'type'>,
 ) => {
   const dateObjects = usages
     .filter((record) => (component ? record.type === component.type : true))
@@ -361,10 +375,8 @@ export const getComponentsAndUsages = async (
     ? DateTime.now().startOf('month').minus({ months }).toFormat('yyyy-MM-dd')
     : undefined;
 
-  let usages: ComponentUsage[];
-  let userUsages: ComponentUserUsage[];
   try {
-    usages = await getAllPages((page) =>
+    const usages = await getAllPages((page) =>
       marketplaceComponentUsagesList({
         query: {
           page,
@@ -375,7 +387,7 @@ export const getComponentsAndUsages = async (
         },
       }),
     );
-    userUsages = await getAllPages((page) =>
+    const userUsages = await getAllPages((page) =>
       marketplaceComponentUserUsagesList({
         query: {
           page,
@@ -392,6 +404,7 @@ export const getComponentsAndUsages = async (
         },
       }),
     );
+    return { components, usages, userUsages };
   } catch (error) {
     if (error?.response?.status === 404) {
       return { components, usages: [], userUsages: [] };
@@ -400,8 +413,6 @@ export const getComponentsAndUsages = async (
       `Error while getting usages for resource: ${resource_uuid}, ${error.message}`,
     );
   }
-
-  return { components, usages, userUsages };
 };
 
 export const useResourceUsageTabs = () => {

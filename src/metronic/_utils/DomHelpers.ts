@@ -106,7 +106,7 @@ function getElementOffset(el: HTMLElement): OffsetModel {
 function getElementParents(element: Element, selector: string) {
   // Element.matches() polyfill
   if (!Element.prototype.matches) {
-    Element.prototype.matches = function (s) {
+    (Element.prototype as any).matches = function (s: any) {
       const matches = (document || this.ownerDocument).querySelectorAll(s);
       let i = matches.length;
 

@@ -1,10 +1,11 @@
 import { FC } from 'react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { translate } from '@/i18n';
 import { PublicOfferingDetails } from '@/marketplace/offerings/details/PublicOfferingDetails';
-import { Category, Offering } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 
 interface OwnProps {
   data: {

@@ -1,7 +1,7 @@
 import {
   marketplaceResourcesDetailsRetrieve,
   marketplaceResourcesOfferingRetrieve,
-  PublicOfferingDetails,
+  Offering,
   Resource,
 } from 'waldur-js-client';
 
@@ -19,7 +19,7 @@ import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
 import { getTabs } from '@/resource/tabs/registry';
 import { getResourceAccessEndpoints } from '@/resource/utils';
 
-function isOfferingLbaasEnabled(offering: PublicOfferingDetails): boolean {
+function isOfferingLbaasEnabled(offering: Offering): boolean {
   return Boolean(
     (offering.plugin_options as { lbaas_enabled?: boolean } | undefined)
       ?.lbaas_enabled,
@@ -38,7 +38,7 @@ export const getResourceTabs = ({
   canManageLimitRequests = false,
 }: {
   resource: Resource;
-  offering: PublicOfferingDetails;
+  offering: Offering;
   scope;
   lexisLinksCount;
   robotAccountsCount;
@@ -53,7 +53,7 @@ export const getResourceTabs = ({
     resourceScope;
     nestedScope?;
     scope;
-    offering: PublicOfferingDetails;
+    offering: Offering;
     refetch: () => void;
   }>[] = [];
 

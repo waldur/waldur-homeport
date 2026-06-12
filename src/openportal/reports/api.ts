@@ -31,7 +31,7 @@ import { ProjectStorageReport } from './ProjectStorageReport';
 import { ProjectUsageReport } from './ProjectUsageReport';
 
 /** Extends the SDK Project type with OpenPortal-specific optional fields */
-export interface OpenPortalProject extends Project {
+export interface OpenPortalProject extends Omit<Project, 'is_in_grace_period'> {
   is_expired?: boolean;
   is_in_grace_period?: boolean;
 }

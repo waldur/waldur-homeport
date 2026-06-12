@@ -1,9 +1,11 @@
 import { FC, useMemo } from 'react';
-import { marketplaceOfferingEstimatedCostPoliciesList } from 'waldur-js-client';
+import {
+  marketplaceOfferingEstimatedCostPoliciesList,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';

@@ -3,16 +3,20 @@ import { useCallback, useMemo, useState } from 'react';
 import {
   ImportableResource,
   marketplaceProviderOfferingsImportResource,
+  ProviderOfferingDetails as Offering,
+  ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { Offering, Plan } from '@/marketplace/types';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Project, Customer } from '@/workspace/types';
 
 export interface FormData {
-  organization?: Customer;
-  project?: Project;
+  organization?: Pick<Customer, 'name' | 'uuid' | 'abbreviation'>;
+  project?: Pick<
+    Project,
+    'name' | 'uuid' | 'url' | 'customer_uuid' | 'is_industry'
+  >;
   resources?: ImportableResource[];
 }
 

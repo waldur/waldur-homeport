@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { marketplaceProviderOfferingsRetrieve } from 'waldur-js-client';
+import { marketplacePublicOfferingsRetrieve, Offering } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -33,7 +32,7 @@ export const PreviewOfferingDialog = (props: PreviewOfferingOwnProps) => {
       shouldLoadFullOffering,
     ],
     queryFn: () =>
-      marketplaceProviderOfferingsRetrieve({
+      marketplacePublicOfferingsRetrieve({
         path: { uuid: initialOffering.uuid },
       }).then((response) => response.data),
     enabled: shouldLoadFullOffering,

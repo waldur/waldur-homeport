@@ -1,7 +1,7 @@
-import { ProviderOfferingDetails } from 'waldur-js-client';
+import { Offering } from 'waldur-js-client';
 
 export interface OfferingSectionProps {
-  offering: ProviderOfferingDetails;
+  offering: Offering;
   refetch;
   loading;
 }

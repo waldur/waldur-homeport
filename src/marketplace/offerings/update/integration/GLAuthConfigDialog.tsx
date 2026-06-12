@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 

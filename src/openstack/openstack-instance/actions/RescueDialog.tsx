@@ -2,13 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import {
   InstanceRescueRequest,
+  openstackImagesList,
   openstackInstancesRescue,
 } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadImages } from '@/openstack/api';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 
@@ -30,10 +31,15 @@ export const RescueDialog: FC<ActionDialogProps> = ({
   const asyncState = useQuery({
     queryKey: ['rescue-images', resource.tenant_uuid],
     queryFn: async () => {
-      const images = await loadImages({
-        tenant_uuid: resource.tenant_uuid,
-        is_rescue_image: true,
-      });
+      const images = await getAllPages((page) =>
+        openstackImagesList({
+          query: {
+            page,
+            tenant_uuid: resource.tenant_uuid,
+            is_rescue_image: true,
+          },
+        }),
+      );
       return {
         images: images.map((image) => ({
           label: image.name,

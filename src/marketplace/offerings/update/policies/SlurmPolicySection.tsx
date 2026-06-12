@@ -165,7 +165,7 @@ const PolicyInfoDropdown: FC<{
           carryover_factor: formState.values.carryover_factor,
           carryover_enabled: formState.values.carryover_enabled,
         },
-        offering,
+        offering: offering as any,
       },
       size: 'lg',
     });

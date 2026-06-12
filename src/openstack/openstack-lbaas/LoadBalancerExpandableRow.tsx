@@ -166,7 +166,7 @@ const SecurityGroupsTab: FC<{
     isLoading,
     error,
     refetch,
-  } = useQuery<OpenStackSecurityGroup[]>({
+  } = useQuery({
     queryKey: [LB_VIP_SECURITY_GROUPS_QUERY_KEY, loadBalancerUuid],
     queryFn: async () => {
       if (!portUuid) return [];

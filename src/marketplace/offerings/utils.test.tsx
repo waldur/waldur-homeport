@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
 
-import { Offering } from '@/marketplace/types';
-
 import { getDefaultLimits } from './utils';
 
 describe('getDefaultLimits', () => {
@@ -43,7 +41,7 @@ describe('getDefaultLimits', () => {
           offering_uuid: offeringUuid,
         },
       ],
-    } as unknown as Offering;
+    } as any;
 
     const result = getDefaultLimits(offering);
 
@@ -67,7 +65,7 @@ describe('getDefaultLimits', () => {
           offering_uuid: offeringUuid,
         },
       ],
-    } as unknown as Offering;
+    } as any;
 
     const result = getDefaultLimits(offering);
 
@@ -84,7 +82,7 @@ describe('getDefaultLimits', () => {
           default_limit: 10,
         },
       ],
-    } as unknown as Offering;
+    } as any;
 
     const result = getDefaultLimits(offering);
 

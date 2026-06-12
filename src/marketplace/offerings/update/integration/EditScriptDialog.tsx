@@ -6,6 +6,7 @@ import {
   marketplaceScriptAsyncDryRunRetrieve,
   marketplaceScriptDryRunAsyncRun,
   MergedSecretOptionsRequest,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { AccordionCard } from '@/core/AccordionCard';
@@ -14,7 +15,6 @@ import { wait } from '@/core/utils';
 import { SubmitButton } from '@/form';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';

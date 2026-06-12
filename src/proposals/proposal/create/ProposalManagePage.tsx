@@ -62,20 +62,19 @@ export const ProposalManagePage = () => {
   const { data: call } = useQuery({
     queryKey: ['ProposalCall', proposal?.call_uuid],
     queryFn: () =>
-      proposal?.call_uuid
-        ? proposalPublicCallsRetrieve({
-            path: { uuid: proposal.call_uuid },
-            query: {
-              field: [
-                'uuid',
-                'customer_uuid',
-                'manager_uuid',
-                'compliance_checklist',
-                'compliance_checklist_name',
-              ] as any,
-            },
-          }).then((res) => res.data)
-        : null,
+      proposalPublicCallsRetrieve({
+        path: { uuid: proposal.call_uuid },
+        query: {
+          field: [
+            'uuid',
+            'customer_uuid',
+            'manager_uuid',
+            'compliance_checklist',
+            'compliance_checklist_name',
+          ] as any,
+        },
+      }).then((res) => res.data),
+    enabled: !!proposal?.call_uuid,
     refetchOnWindowFocus: false,
     staleTime: Infinity,
   });

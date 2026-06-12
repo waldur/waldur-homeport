@@ -1,6 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
-import { MarketplaceOrdersListData } from 'waldur-js-client';
+import {
+  MarketplaceOrdersListData,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { getInitialValues } from '@/core/filters';
 import {
@@ -10,7 +13,6 @@ import {
 import { OrdersListFilter } from '@/marketplace/orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '@/marketplace/orders/list/OrdersTableComponent';
 import { createOrderStateOptions } from '@/marketplace/orders/OrderStates';
-import { Offering } from '@/marketplace/types';
 
 interface OwnProps {
   offering: Offering;

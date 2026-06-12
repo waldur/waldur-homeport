@@ -4,15 +4,14 @@ import userEvent from '@testing-library/user-event';
 import arrayMutators from 'final-form-arrays';
 import { Form } from 'react-final-form';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  openstackFloatingIpsList,
+  openstackSubnetsList,
+} from 'waldur-js-client';
 
-import { loadFloatingIps, loadSubnets } from '@/openstack/api';
+import { mockListResponse } from '@/test/utils';
 
 import { FormNetworkSecurityStep } from './FormNetworkSecurityStep';
-
-vi.mock('@/openstack/api', () => ({
-  loadSubnets: vi.fn(),
-  loadFloatingIps: vi.fn(),
-}));
 
 vi.mock('./utils', () => ({
   useQuotasData: () => ({ fipQuota: undefined }),
@@ -77,13 +76,15 @@ const renderStep = (initialValues: any = {}) => {
 describe('FormNetworkSecurityStep — auto-seed first network row', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(loadFloatingIps).mockResolvedValue([] as any);
+    vi.mocked(openstackFloatingIpsList).mockResolvedValue(mockListResponse([]));
   });
 
   afterEach(() => cleanup());
 
   it('seeds exactly one network row with the first available subnet', async () => {
-    vi.mocked(loadSubnets).mockResolvedValue([SUBNET, SUBNET_B] as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET, SUBNET_B]),
+    );
 
     const { getValues } = renderStep();
 
@@ -97,19 +98,21 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
   });
 
   it('does not seed when the tenant has no subnets', async () => {
-    vi.mocked(loadSubnets).mockResolvedValue([] as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(mockListResponse([]));
 
     const { getValues } = renderStep();
 
     await waitFor(() => {
-      expect(loadSubnets).toHaveBeenCalled();
+      expect(openstackSubnetsList).toHaveBeenCalled();
     });
 
     expect(getValues()?.attributes?.networks).toBeUndefined();
   });
 
   it('does not overwrite networks that are already populated', async () => {
-    vi.mocked(loadSubnets).mockResolvedValue([SUBNET, SUBNET_B] as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET, SUBNET_B]),
+    );
 
     const existing = [{ subnet: SUBNET_B, floatingIp: { url: 'false' } }];
     const { getValues } = renderStep({ attributes: { networks: existing } });
@@ -117,7 +120,7 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
     // Once subnet data has loaded, the seed effect runs and must early-return
     // because existing networks are present. The form value stays as-is.
     await waitFor(() => {
-      expect(loadSubnets).toHaveBeenCalled();
+      expect(openstackSubnetsList).toHaveBeenCalled();
     });
 
     const networks = getValues()?.attributes?.networks;
@@ -126,7 +129,9 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
   });
 
   it('does not add a duplicate row when "Add subnet" is clicked while every subnet is in use', async () => {
-    vi.mocked(loadSubnets).mockResolvedValue([SUBNET] as any);
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET]),
+    );
 
     const { getValues } = renderStep();
 

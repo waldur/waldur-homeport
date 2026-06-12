@@ -18,8 +18,13 @@ import { Field, useForm, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { components } from 'react-select';
 import { useToggle } from 'react-use';
-import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
+import {
+  openstackFloatingIpsList,
+  OpenStackSubNetAllocationPool,
+  openstackSubnetsList,
+} from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { UI_STALE_TIME } from '@/core/constants';
 import { Tip } from '@/core/Tooltip';
@@ -28,7 +33,6 @@ import { FieldError, SelectGroup, StringField } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { loadFloatingIps, loadSubnets } from '@/openstack/api';
 import {
   getIPsInRange,
   isIPInRange,
@@ -398,12 +402,21 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
 
     queryFn: () => {
       return Promise.all([
-        loadSubnets({ tenant_uuid: props.offering.scope_uuid }),
-        loadFloatingIps({
-          tenant_uuid: props.offering.scope_uuid,
-          free: true,
-          field: ['url', 'address'],
-        }),
+        getAllPages((page) =>
+          openstackSubnetsList({
+            query: { page, tenant_uuid: props.offering.scope_uuid },
+          }),
+        ),
+        getAllPages((page) =>
+          openstackFloatingIpsList({
+            query: {
+              page,
+              tenant_uuid: props.offering.scope_uuid,
+              free: true,
+              field: ['url', 'address'],
+            },
+          }),
+        ),
       ]).then(([subnets, floatingIps]) => ({
         subnets,
         floatingIps,

@@ -1,9 +1,4 @@
-import {
-  Options,
-  User,
-  usersMeRetrieve,
-  UsersMeRetrieveData,
-} from 'waldur-js-client';
+import { User, usersMeRetrieve } from 'waldur-js-client';
 
 import { getRoles } from '@/administration/roles/utils';
 import { getHeaders, initApiClient } from '@/core/api';
@@ -15,7 +10,7 @@ import { setCurrentUser, setImpersonatorUser } from '@/workspace/actions';
 import { getUser } from '@/workspace/selectors';
 
 export const getCurrentUser = async (
-  options?: Options<UsersMeRetrieveData>,
+  options?: Parameters<typeof usersMeRetrieve>[0],
 ) => {
   const user = await usersMeRetrieve(options).then((response) => response.data);
   if (ENV.roles.length === 0) {
@@ -40,7 +35,9 @@ class UsersServiceClass {
     return this.getCachedUser() || (await this.refreshCurrentUser());
   }
 
-  async refreshImpersonatorUser(options?: Options<UsersMeRetrieveData>) {
+  async refreshImpersonatorUser(
+    options?: Parameters<typeof usersMeRetrieve>[0],
+  ) {
     if (ImpersonationStorage.get()) {
       const user = await getCurrentUser({
         ...options,
@@ -50,7 +47,7 @@ class UsersServiceClass {
     }
   }
 
-  async refreshCurrentUser(options?: Options<UsersMeRetrieveData>) {
+  async refreshCurrentUser(options?: Parameters<typeof usersMeRetrieve>[0]) {
     const user = await getCurrentUser(options);
     store.dispatch(setCurrentUser(user));
     return user;

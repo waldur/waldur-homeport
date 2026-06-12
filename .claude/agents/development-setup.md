@@ -41,7 +41,7 @@ Use this agent when:
 - `yarn lint:check` / `yarn lint:fix` - ESLint
 - `yarn format:check` / `yarn format:fix` - Prettier
 - `yarn style:check` - Stylelint for SCSS/CSS
-- `yarn tsc` - TypeScript type checking
+- `yarn tsgo` - TypeScript type checking
 
 ### Dependency Management
 

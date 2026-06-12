@@ -21,7 +21,7 @@ const user = {
   is_staff: true,
   url: 'Valid URL',
   uuid: 'Valid UUID',
-};
+} as any;
 const ctx = { resource, user };
 
 describe('Resource state validation', () => {

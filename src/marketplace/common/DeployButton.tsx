@@ -1,4 +1,5 @@
 import { useRouter } from '@uirouter/react';
+import { Offering } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -8,8 +9,6 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
-
-import { Offering } from '../types';
 
 export const DeployButton = ({
   offering,

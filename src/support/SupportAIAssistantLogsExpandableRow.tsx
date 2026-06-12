@@ -400,12 +400,10 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
     ({ row }) => {
       const { data: allMessages, isLoading } = useQuery({
         queryKey: ['chatMessages', row.uuid, row.modified],
-        queryFn: async () => {
-          const response = await chatMessagesList({
+        queryFn: () =>
+          chatMessagesList({
             query: { thread: row.uuid, include_history: true },
-          });
-          return response.error ? [] : response.data;
-        },
+          }).then((r) => r.data),
         staleTime: FAST_STALE_TIME,
       });
 

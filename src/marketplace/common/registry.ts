@@ -1,9 +1,8 @@
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { PublicOfferingDetails, OfferingComponent } from 'waldur-js-client';
 
 import { AzureSQLServerOffering } from '@/azure/sql/marketplace';
 import { AzureVirtualMachineOffering } from '@/azure/vm/marketplace';
 import { BookingOffering } from '@/booking/marketplace';
-import { OfferingComponent } from '@/marketplace/types';
 import { RemoteOffering } from '@/marketplace-remote/marketplace';
 import { ScriptOffering } from '@/marketplace-script/marketplace';
 import { OpenPortalOffering } from '@/openportal/marketplace';
@@ -169,7 +168,7 @@ function getOfferingComponentsFilter(offeringType: string) {
 }
 
 export const filterOfferingComponents = (
-  offering: PublicOfferingDetails,
+  offering: Pick<PublicOfferingDetails, 'type' | 'components'>,
 ): OfferingComponent[] => {
   let offeringComponents: OfferingComponent[] = offering.components;
   const offeringComponentsFilter = getOfferingComponentsFilter(offering.type);

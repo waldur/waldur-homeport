@@ -1,11 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { OpenStackPort, openstackPortsUpdatePortIp } from 'waldur-js-client';
+import {
+  OpenStackPort,
+  openstackPortsUpdatePortIp,
+  openstackSubnetsList,
+} from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { loadSubnets } from '@/openstack/api';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 
@@ -24,10 +28,15 @@ export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
 
     queryFn: () => {
       if (!resource.network_uuid) return Promise.resolve([]);
-      return loadSubnets({
-        tenant_uuid: resource.tenant_uuid,
-        network_uuid: resource.network_uuid,
-      });
+      return getAllPages((page) =>
+        openstackSubnetsList({
+          query: {
+            page,
+            tenant_uuid: resource.tenant_uuid,
+            network_uuid: resource.network_uuid,
+          },
+        }),
+      );
     },
 
     staleTime: SHORT_STALE_TIME,

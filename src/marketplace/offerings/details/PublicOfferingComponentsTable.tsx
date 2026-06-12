@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
+import { Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';

@@ -5,6 +5,7 @@ import {
   MarketplaceProviderResourcesListData,
   Project,
   Resource,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { BooleanBadge } from '@/core/BooleanBadge';
@@ -19,7 +20,7 @@ import { Option } from '@/marketplace/common/registry';
 import { ResourceFlags } from '@/marketplace/resources/details/ResourceFlags';
 import { ExpandableResourceSummary } from '@/marketplace/resources/list/ExpandableResourceSummary';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
-import { Category, Offering } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';

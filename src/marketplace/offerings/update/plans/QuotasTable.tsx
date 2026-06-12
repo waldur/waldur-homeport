@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
+import { OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import {
@@ -7,7 +8,6 @@ import {
   parseIntField,
   formatIntField,
 } from '@/marketplace/common/utils';
-import { OfferingComponent } from '@/marketplace/types';
 
 interface QuotasTableProps {
   components: OfferingComponent[];

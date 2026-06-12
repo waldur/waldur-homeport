@@ -1,4 +1,4 @@
-import { OrderDetails as OrderResponse } from 'waldur-js-client';
+import { OrderDetails } from 'waldur-js-client';
 
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
@@ -10,7 +10,7 @@ export const ResourceOrderRowActions = ({
   row,
   refetch,
 }: {
-  row: OrderResponse;
+  row: OrderDetails;
   refetch?(): void;
 }) => {
   const user = useUser();

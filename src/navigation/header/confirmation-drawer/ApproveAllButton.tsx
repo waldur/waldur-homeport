@@ -1,7 +1,7 @@
 import { CheckIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { marketplaceOrdersApproveByProvider } from 'waldur-js-client';
-import { OrderDetails as OrderResponse } from 'waldur-js-client';
+import { OrderDetails } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import {
@@ -13,7 +13,7 @@ import { useBatchMutation } from '@/modal/useBatchMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 interface ApproveAllButtonProps {
-  orders: OrderResponse[];
+  orders: OrderDetails[];
 }
 
 export const ApproveAllButton: React.FC<ApproveAllButtonProps> = (props) => {

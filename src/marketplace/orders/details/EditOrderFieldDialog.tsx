@@ -12,7 +12,7 @@ import { composeValidators } from '@/core/validators';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
-import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/OrderStartDateField';
+import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/useOrderStartDateBounds';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -22,7 +22,7 @@ import { ActionButton } from '@/table/ActionButton';
 interface EditOrderFieldDialogProps {
   resolve: {
     order: OrderDetails;
-    offering: PublicOfferingDetails;
+    offering: Pick<PublicOfferingDetails, 'components'>;
     name: 'start_date' | 'limits';
     component?: string;
     selectedComponents?: string[];

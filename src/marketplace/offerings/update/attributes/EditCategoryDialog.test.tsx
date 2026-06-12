@@ -19,7 +19,7 @@ describe('EditCategoryDialog', () => {
     refetch: vi.fn(),
   };
 
-  const mockCategories = [
+  const mockCategories: any = [
     { url: 'cat-url-1', title: 'Category 1' },
     { url: 'cat-url-2', title: 'Category 2' },
   ];

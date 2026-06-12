@@ -1,9 +1,6 @@
 import { Card } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
-import {
-  OrderDetails as OrderResponse,
-  PublicOfferingDetails,
-} from 'waldur-js-client';
+import { OrderDetails, Offering } from 'waldur-js-client';
 
 import { SidebarProps } from '@/form/SidebarProps';
 import { translate } from '@/i18n';
@@ -13,9 +10,9 @@ import { FormSteps } from '@/wizard';
 import { getCheckoutSummaryComponent } from '../common/registry';
 
 interface DeployPageSidebarProps extends SidebarProps {
-  offering: PublicOfferingDetails;
+  offering: Offering;
   updateMode?: boolean;
-  order?: OrderResponse;
+  order?: OrderDetails;
 }
 
 export const DeployPageSidebar = (props: DeployPageSidebarProps) => {

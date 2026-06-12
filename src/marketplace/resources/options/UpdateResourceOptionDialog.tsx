@@ -5,10 +5,10 @@ import {
   OptionField,
   Resource,
 } from 'waldur-js-client';
+import { Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
-import { Offering } from '@/marketplace/types';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 

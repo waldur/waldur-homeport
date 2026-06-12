@@ -221,7 +221,7 @@ export const K8sFlavorSelectionTable: React.FC<
               cores: selectedFlavor.vcpus,
               ram: selectedFlavor.ram,
               disk: selectedFlavor.disk,
-            } satisfies OpenStackFlavor,
+            } as OpenStackFlavor,
           }
         : undefined,
       size: 'lg',

@@ -57,7 +57,7 @@ export const EditDefaultAffiliationsDialog: FunctionComponent<
   }, []);
 
   const fetchAllUuids = useCallback(async (): Promise<string[]> => {
-    const rows = await getAllPages<AffiliatedOrganization>((page) =>
+    const rows = await getAllPages((page) =>
       affiliatedOrganizationsList({
         query: { page, field: ['uuid'] },
       }),

@@ -203,7 +203,7 @@ import { SelectFilter, BooleanFilter } from '@/table';
 
 1. **Unused Dependencies**: `yarn deps:unused`
 2. **Linting**: `yarn lint:check --max-warnings=0`
-3. **Type Check**: `yarn tsc --noEmit`
+3. **Type Check**: `yarn tsgo --noEmit`
 4. **Tests**: `yarn test path/to/component`
 
 ## Best Practices

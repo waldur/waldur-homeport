@@ -1,6 +1,5 @@
-import { CustomerCredit } from 'waldur-js-client';
+import { CustomerCredit, ServiceProvider } from 'waldur-js-client';
 
-import { ServiceProvider } from '@/marketplace/types';
 import { Customer } from '@/workspace/types';
 
 export interface CustomerEditPanelProps {

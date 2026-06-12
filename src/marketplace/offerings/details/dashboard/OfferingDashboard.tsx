@@ -2,11 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
-import {
-  AgentIdentity,
-  marketplaceSiteAgentIdentitiesList,
-  Offering,
-} from 'waldur-js-client';
+import { marketplaceSiteAgentIdentitiesList, Offering } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@/core/constants';
@@ -37,7 +33,7 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
   } = useQuery({
     queryKey: ['offeringAgentIdentities', offering.uuid],
     queryFn: () =>
-      getAllPages<AgentIdentity>((page) =>
+      getAllPages((page) =>
         marketplaceSiteAgentIdentitiesList({
           query: {
             offering_uuid: offering.uuid,

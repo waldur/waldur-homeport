@@ -26,7 +26,7 @@ ENV.roles = [
     name: 'PROJECT.MEMBER',
     permissions: [],
   },
-];
+] as any;
 
 import { canDeletePermission } from './utils';
 

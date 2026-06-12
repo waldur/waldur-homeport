@@ -1,8 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import {
   marketplacePublicOfferingsRetrieve,
+  Offering,
   OpenStackFlavor,
   OpenStackSubNet,
+  openstackFlavorsList,
+  openstackSecurityGroupsList,
+  openstackSubnetsList,
+  openstackVolumeTypesList,
   PublicOfferingDetails,
   RancherCluster,
   rancherClusterTemplatesList,
@@ -12,12 +17,6 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
-import {
-  loadFlavors,
-  loadSecurityGroups,
-  loadSubnets,
-  loadVolumeTypes,
-} from '@/openstack/api';
 import {
   formatVolumeTypeChoices,
   getDefaultVolumeType,
@@ -45,16 +44,23 @@ const formatFlavorOption = (flavor: OpenStackFlavor) => ({
 
 export const filterFlavors = (
   tenant_uuid: string,
-  offering: PublicOfferingDetails,
+  offering: PublicOfferingDetails | Offering,
 ) => {
-  return loadFlavors({
-    tenant_uuid,
-    name_iregex: offering.plugin_options.flavors_regex,
-  }).then((data) => data.map(formatFlavorOption));
+  return getAllPages((page) =>
+    openstackFlavorsList({
+      query: {
+        page,
+        tenant_uuid,
+        name_iregex: offering.plugin_options?.flavors_regex,
+      },
+    }),
+  ).then((data) => data.map(formatFlavorOption));
 };
 
 export const formatSubnets = (tenant_uuid: string) =>
-  loadSubnets({ tenant_uuid }).then((data) => data.map(formatSubnetOption));
+  getAllPages((page) =>
+    openstackSubnetsList({ query: { page, tenant_uuid } }),
+  ).then((data) => data.map(formatSubnetOption));
 
 export const loadNodeCreateData = async (cluster: RancherCluster) => {
   const offering = await marketplacePublicOfferingsRetrieve({
@@ -62,17 +68,21 @@ export const loadNodeCreateData = async (cluster: RancherCluster) => {
   }).then((response) => response.data);
   const flavors = await filterFlavors(cluster.tenant_uuid, offering);
   const subnets = await formatSubnets(cluster.tenant_uuid);
-  const volumeTypes = await loadVolumeTypes({
-    tenant_uuid: cluster.tenant_uuid,
-  });
+  const volumeTypes = await getAllPages((page) =>
+    openstackVolumeTypesList({
+      query: { page, tenant_uuid: cluster.tenant_uuid },
+    }),
+  );
   const templates = await getAllPages((page) =>
     rancherClusterTemplatesList({ query: { page, page_size: MAX_PAGE_SIZE } }),
   );
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
   const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
-  const securityGroups = await loadSecurityGroups({
-    tenant_uuid: cluster.tenant_uuid,
-  });
+  const securityGroups = await getAllPages((page) =>
+    openstackSecurityGroupsList({
+      query: { page, tenant_uuid: cluster.tenant_uuid },
+    }),
+  );
   return {
     subnets,
     flavors,
@@ -89,7 +99,11 @@ export const useVolumeDataLoader = (tenant) => {
 
     queryFn: async () => {
       const volumeTypes = tenant
-        ? await loadVolumeTypes({ tenant: tenant.url })
+        ? await getAllPages((page) =>
+            openstackVolumeTypesList({
+              query: { page, tenant: tenant.url },
+            }),
+          )
         : [];
       const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
       const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);

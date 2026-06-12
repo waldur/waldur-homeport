@@ -1,8 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 
 import { OfferingCustomerOrganizationsTable } from './OfferingCustomerOrganizationsTable';
 import { OfferingCustomerProjectsTable } from './OfferingCustomerProjectsTable';

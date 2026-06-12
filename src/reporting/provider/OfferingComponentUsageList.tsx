@@ -1,10 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 import { Form, useFormState } from 'react-final-form';
+import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
 
 import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
-import { getComponentUsageMonthlyList } from '@/marketplace/offerings/api';
 import { OfferingComponentUsage } from '@/marketplace/offerings/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -54,7 +54,7 @@ const OfferingComponentUsageListTable = () => {
 
   const props = useTable({
     table: 'OfferingComponentUsage',
-    fetchData: createFetcher(getComponentUsageMonthlyList),
+    fetchData: createFetcher(marketplaceComponentUsageMonthlyList),
     filter,
   });
 

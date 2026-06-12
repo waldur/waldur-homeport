@@ -1,9 +1,9 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 

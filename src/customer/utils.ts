@@ -1,8 +1,4 @@
-import {
-  customersRetrieve,
-  CustomersRetrieveData,
-  Options,
-} from 'waldur-js-client';
+import { customersRetrieve, CustomersRetrieveData } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -54,7 +50,7 @@ export const canAccessOrganization = (state) => {
 
 export const getCustomer = (
   customerId: string,
-  field: Options<CustomersRetrieveData, false>['query']['field'] = null,
+  field: CustomersRetrieveData['query']['field'] = null,
 ) =>
   customersRetrieve({
     path: { uuid: customerId },

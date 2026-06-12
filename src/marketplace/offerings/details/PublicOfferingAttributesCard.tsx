@@ -1,5 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { isEmpty } from '@/core/utils';
@@ -7,7 +8,7 @@ import { translate } from '@/i18n';
 import { AttributesList } from '@/marketplace/offerings/details/AttributesList';
 import { PublicOfferingAttributesSection } from '@/marketplace/offerings/details/PublicOfferingAttributesSection';
 import { isValidAttribute } from '@/marketplace/offerings/details/utils';
-import { Category, Offering } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 
 import './PublicOfferingAttributes.scss';
 

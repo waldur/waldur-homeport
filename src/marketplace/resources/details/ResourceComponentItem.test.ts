@@ -15,12 +15,13 @@ const makeComponent = (
     ...overrides,
   }) as OfferingComponent;
 
-const makeResource = (overrides = {}) => ({
-  limits: { node: 1 },
-  current_usages: { node: 0.33 },
-  limit_usage: { node: 0.33 },
-  ...overrides,
-});
+const makeResource = (overrides = {}) =>
+  ({
+    limits: { node: 1 },
+    current_usages: { node: 0.33 },
+    limit_usage: { node: 0.33 },
+    ...overrides,
+  }) as any;
 
 describe('getDisplayUnit', () => {
   it('should convert MB to GB when factor is 1024', () => {

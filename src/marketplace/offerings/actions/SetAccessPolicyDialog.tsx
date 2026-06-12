@@ -1,18 +1,24 @@
 import { FunctionComponent } from 'react';
-import { Customer } from 'waldur-js-client';
+import {
+  Customer,
+  ProviderOfferingDetails as Offering,
+  ProviderPlanDetails as Plan,
+} from 'waldur-js-client';
 
 import { OrganizationGroupCreateButton } from '@/administration/organizations/OrganizationGroupCreateButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
 import { SetAccessPolicyDialogForm } from '@/marketplace/offerings/actions/SetAccessPolicyDialogForm';
-import { Offering, Plan } from '@/marketplace/types';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 export interface SetAccessPolicyDialogProps {
   resolve: {
     plan?: Plan;
-    offering?: Offering;
+    offering?: Pick<
+      Offering,
+      'state' | 'uuid' | 'name' | 'organization_groups'
+    >;
     customer?: Customer;
     refetch: any;
     organizationGroups?;

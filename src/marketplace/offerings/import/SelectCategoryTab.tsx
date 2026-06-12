@@ -3,7 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { Form } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
-import { marketplaceCategoriesList } from 'waldur-js-client';
+import {
+  marketplaceCategoriesList,
+  MarketplaceCategory,
+  ProviderOfferingDetails as Offering,
+} from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -13,7 +17,6 @@ import { Tip } from '@/core/Tooltip';
 import { required, requiredArray } from '@/core/validators';
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
-import { Category, Offering } from '@/marketplace/types';
 
 import { OfferingImportFormData } from './types';
 
@@ -24,7 +27,7 @@ const FieldsListMapping = ({
 }: {
   fields: any;
   offerings: Offering[];
-  categories: Category[];
+  categories: Pick<MarketplaceCategory, 'group' | 'title' | 'uuid'>[];
 }) => {
   return (
     <Form.Group>

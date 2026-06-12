@@ -197,6 +197,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         ellipsis: 'md',
       }),
       getProjectBreadcrumbItem({
+        url: resource.project,
         uuid: resource.project_uuid,
         name: resource.project_name,
         customer_uuid: resource.customer_uuid,

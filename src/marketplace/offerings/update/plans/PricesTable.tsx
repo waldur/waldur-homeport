@@ -1,9 +1,12 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
+import {
+  OfferingComponent,
+  ProviderPlanDetails as Plan,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { validateNonNegative } from '@/marketplace/common/utils';
-import { OfferingComponent, Plan } from '@/marketplace/types';
 
 interface PricesTableProps {
   components: OfferingComponent[];

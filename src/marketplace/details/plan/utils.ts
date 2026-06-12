@@ -5,6 +5,7 @@ import {
   BasePublicPlan,
   LimitPeriodEnum,
   PublicOfferingDetails,
+  ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -19,7 +20,6 @@ import { getBillingPeriods } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { Limits } from '@/marketplace/details/types';
 import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
-import { Plan } from '@/marketplace/types';
 
 import { Component, PricesData } from './types';
 
@@ -27,7 +27,7 @@ export const combinePrices = (
   plan: BasePublicPlan,
   limits: Limits,
   usages: Limits,
-  offering: PublicOfferingDetails,
+  offering: Pick<PublicOfferingDetails, 'type' | 'components'>,
   end_date?: string,
   start_date?: string,
 ): PricesData => {
@@ -357,7 +357,7 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
 };
 
 export const useOrderPrices = (props: {
-  offering: PublicOfferingDetails;
+  offering: Pick<PublicOfferingDetails, 'type' | 'components' | 'plans'>;
   plan?: any;
   limits?: any;
   order?: any;

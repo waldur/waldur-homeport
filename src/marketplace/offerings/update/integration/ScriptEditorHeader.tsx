@@ -12,6 +12,7 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 import { DropdownItem } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -20,7 +21,6 @@ import { FilterBox } from '@/form/FilterBox';
 import { Select } from '@/form/select';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { Offering } from '@/marketplace/types';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 

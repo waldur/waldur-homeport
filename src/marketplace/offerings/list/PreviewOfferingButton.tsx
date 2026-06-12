@@ -33,7 +33,7 @@ export const PreviewOfferingButton = ({
       as="button"
       onClick={() => {
         openDialog(PreviewOfferingDialog, {
-          resolve: { offering: row },
+          resolve: { offering: row as any },
           size: 'lg',
         });
       }}

@@ -24,8 +24,11 @@ import { Customer, Project } from '@/workspace/types';
 import { useOfferingCategories } from '../utils';
 
 interface ResourceFilterValues {
-  organization?: Customer;
-  project?: Project;
+  organization?: Pick<Customer, 'name' | 'uuid' | 'abbreviation'>;
+  project?: Pick<
+    Project,
+    'name' | 'uuid' | 'url' | 'customer_uuid' | 'is_industry'
+  >;
 }
 
 const _setFilter = ({

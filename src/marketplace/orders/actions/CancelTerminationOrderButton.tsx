@@ -1,6 +1,6 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import { remoteWaldurApiCancelTermination } from 'waldur-js-client';
-import { OrderDetails as OrderResponse } from 'waldur-js-client';
+import { OrderDetails } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
@@ -12,7 +12,7 @@ export const CancelTerminationOrderButton = ({
   row,
   fetch,
 }: {
-  row: OrderResponse;
+  row: OrderDetails;
   fetch;
 }) => {
   const user = useUser();

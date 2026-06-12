@@ -2,7 +2,6 @@ import { cleanup, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DateTime } from 'luxon';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { Project } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
 import { renderWithProviders } from '@/test/harness';
@@ -17,7 +16,7 @@ const createFixtures = () => {
     max_prepaid_duration: null,
     prepaid_duration_step: 1,
   };
-  const project: Project = {
+  const project: any = {
     url: '/api/projects/1/',
     uuid: 'uuid-project-1',
     name: 'Test Project',

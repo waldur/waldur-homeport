@@ -2,7 +2,7 @@ import { ProhibitIcon } from '@phosphor-icons/react';
 import React from 'react';
 import {
   marketplaceOrdersRejectByProvider,
-  OrderDetails as OrderResponse,
+  OrderDetails,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -15,7 +15,7 @@ import { useBatchMutation } from '@/modal/useBatchMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 interface RejectAllButtonProps {
-  orders: OrderResponse[];
+  orders: OrderDetails[];
 }
 
 export const RejectAllButton: React.FC<RejectAllButtonProps> = (props) => {

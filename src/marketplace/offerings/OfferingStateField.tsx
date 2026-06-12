@@ -1,6 +1,6 @@
-import { StateIndicator } from '@/core/StateIndicator';
+import { Offering } from 'waldur-js-client';
 
-import { Offering } from '../types';
+import { StateIndicator } from '@/core/StateIndicator';
 
 import {
   ACTIVE,
@@ -11,7 +11,7 @@ import {
 } from './store/constants';
 
 interface OfferingStateFieldProps {
-  offering: Offering;
+  offering: Pick<Offering, 'state'>;
   hasBullet?: boolean;
 }
 

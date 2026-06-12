@@ -4,9 +4,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceProviderOfferingsUpdateImage,
   marketplaceProviderOfferingsUpdateThumbnail,
+  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { Offering } from '@/marketplace/types';
 import { renderWithProviders } from '@/test/harness';
 
 import { UpdateOfferingMediaDialog } from './UpdateOfferingMediaDialog';

@@ -5,7 +5,7 @@ import {
   Project,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE, parseSelectData } from '@/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { Category } from '@/marketplace/types';
 import { Customer } from '@/workspace/types';
 
@@ -27,7 +27,7 @@ export const fetchCategories = (
     }),
   );
 
-export const fetchOfferingsByPage = (
+export const fetchOfferingsByPage = async (
   customer: Customer,
   project: Project,
   category: Category,
@@ -39,7 +39,7 @@ export const fetchOfferingsByPage = (
   const api = importable
     ? marketplaceProviderOfferingsList
     : marketplacePublicOfferingsList;
-  return api({
+  const response = await api({
     query: {
       ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
       ...(project ? { project_uuid: project.uuid } : {}),
@@ -63,12 +63,18 @@ export const fetchOfferingsByPage = (
       page,
       page_size: pageSize,
     },
-  })
-    .then(parseSelectData)
-    .then((res) => ({
-      pageElements: res.options,
-      itemCount: res.totalItems,
-    }));
+  });
+  if (Array.isArray(response.data)) {
+    return {
+      pageElements: response.data,
+      itemCount: response.data.length,
+    };
+  } else {
+    return {
+      pageElements: [],
+      itemCount: 0,
+    };
+  }
 };
 
 export const fetchLastNOfferings = async (
@@ -86,13 +92,15 @@ export const fetchLastNOfferings = async (
         field: [
           'uuid',
           'category_uuid',
-          'customer_uuid',
           'category_title',
+          'customer_uuid',
+          'customer_name',
           'name',
           'description',
           'image',
           'state',
           'paused_reason',
+          'plans',
         ],
         state: ['Active', 'Paused'],
         o: ['-created'],

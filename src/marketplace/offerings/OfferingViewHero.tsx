@@ -2,6 +2,7 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { Nav, Tab, Table } from 'react-bootstrap';
+import { Offering } from 'waldur-js-client';
 
 import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { ENV } from '@/core/config';
@@ -22,7 +23,6 @@ import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
 
 import { RefreshButton } from '../common/RefreshButton';
 import { getLabel } from '../common/registry';
-import { Offering } from '../types';
 
 import { OfferingStateActions } from './actions/OfferingStateActions';
 import { DeployButton } from './DeployButton';

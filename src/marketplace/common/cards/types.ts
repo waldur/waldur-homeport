@@ -1,6 +1,4 @@
-import { NestedTag } from 'waldur-js-client';
-
-import { Offering } from '@/marketplace/types';
+import { NestedTag, Offering } from 'waldur-js-client';
 
 export type CardStyleType = 'compact' | 'detailed' | 'list' | 'minimal';
 

@@ -18,7 +18,7 @@ import {
   marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
 import { formatUsageValue } from '@/core/formatNumber';
@@ -88,9 +88,7 @@ export const UsageExpandableRow = ({
         .toFormat('yyyy-MM-dd')
     : undefined;
 
-  const { data, refetch, isLoading, error } = useQuery<
-    (ComponentUsage | ComponentUserUsage)[]
-  >({
+  const { data, refetch, isLoading, error } = useQuery({
     queryKey: ['usage-data', type, row.resource_uuid, componentType, period],
     queryFn: () =>
       period
@@ -99,7 +97,7 @@ export const UsageExpandableRow = ({
               marketplaceComponentUsagesList({
                 query: {
                   page,
-                  page_size: 300,
+                  page_size: MAX_PAGE_SIZE,
                   resource_uuid: row.resource_uuid,
                   date_after,
                   type: componentType,
@@ -111,7 +109,7 @@ export const UsageExpandableRow = ({
               marketplaceComponentUserUsagesList({
                 query: {
                   page,
-                  page_size: 300,
+                  page_size: MAX_PAGE_SIZE,
                   resource_uuid: row.resource_uuid,
                   date_after,
                   type: componentType,

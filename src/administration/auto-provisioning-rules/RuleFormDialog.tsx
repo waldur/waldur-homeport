@@ -22,7 +22,7 @@ interface RuleFormDialogProps {
 
 interface AutoProvisioningRuleForm {
   name: string;
-  customer?: Customer;
+  customer?: Pick<Customer, 'name' | 'url'>;
   project_role: string;
   user_affiliations: string;
   user_email_patterns: string;

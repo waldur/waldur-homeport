@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FunctionComponent, useEffect } from 'react';
+import { ServiceProvider } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -8,7 +9,6 @@ import { translate } from '@/i18n';
 import * as api from '@/marketplace/common/api';
 import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-providers/selectors';
 import { ServiceProviderManagement } from '@/marketplace/service-providers/ServiceProviderManagement';
-import { ServiceProvider } from '@/marketplace/types';
 import { useNotify } from '@/store/notify';
 import { useUser, useCustomer } from '@/workspace/hooks';
 

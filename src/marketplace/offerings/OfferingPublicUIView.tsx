@@ -6,6 +6,7 @@ import {
   marketplaceCategoriesRetrieve,
   marketplaceOfferingTermsOfServiceList,
   marketplacePublicOfferingsRetrieve,
+  Offering,
 } from 'waldur-js-client';
 
 import { isAuthenticated } from '@/auth/AuthService';
@@ -21,7 +22,7 @@ import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { useUser } from '@/workspace/hooks';
 
-import { Category, Offering } from '../types';
+import { Category } from '../types';
 
 import { PUBLIC_OFFERING_DATA_QUERY_KEY } from './constants';
 import { OfferingViewHero } from './OfferingViewHero';

@@ -5,7 +5,7 @@ import { ENV } from '@/core/config';
 import { PermissionRequest, RoleType } from './types';
 
 export function checkScope(
-  user: User,
+  user: Pick<User, 'is_staff' | 'permissions'>,
   targetScopeType: RoleType,
   targetScopeId,
   targetPerm,
@@ -28,7 +28,10 @@ export function checkScope(
   }
 }
 
-export const hasPermission = (user: User, request: PermissionRequest) => {
+export const hasPermission = (
+  user: Pick<User, 'is_staff' | 'permissions'>,
+  request: PermissionRequest,
+) => {
   if (user?.is_staff) {
     return true;
   }

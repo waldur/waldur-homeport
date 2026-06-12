@@ -1,4 +1,4 @@
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { PublicOfferingDetails, Offering } from 'waldur-js-client';
 
 import { ComponentEditRow2 } from './ComponentEditRow';
 import { FixedRows } from './FixedRows';
@@ -10,7 +10,7 @@ export const ControlRows = (props: {
   viewMode: boolean;
   period?: PlanPeriod;
   activePriceIndex?: number;
-  offering: PublicOfferingDetails;
+  offering: PublicOfferingDetails | Offering;
 }) =>
   props.viewMode ? (
     <FixedRows

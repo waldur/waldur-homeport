@@ -1,9 +1,14 @@
 import { FC, useCallback, useState } from 'react';
-import { autoprovisioningRulesPartialUpdate, Rule } from 'waldur-js-client';
+import {
+  autoprovisioningRulesPartialUpdate,
+  Rule,
+  ProviderOfferingDetails as Offering,
+  ProviderPlanDetails as Plan,
+} from 'waldur-js-client';
 
 import { AtLeast } from '@/core/types';
 import { translate } from '@/i18n';
-import { Category, Offering, Plan } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceRequestWizardFormThirdPage as Step2AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
 import { ProgressStep, WizardFormContainer } from '@/wizard';

@@ -1,10 +1,13 @@
 import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { marketplacePlansUpdateDiscounts } from 'waldur-js-client';
+import {
+  marketplacePlansUpdateDiscounts,
+  ProviderOfferingDetails as Offering,
+  ProviderPlanDetails as Plan,
+} from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { Offering, Plan } from '@/marketplace/types';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 

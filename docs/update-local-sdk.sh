@@ -128,4 +128,4 @@ mv /tmp/PermissionOptions.tsx "$WH2_PATH/src/administration/roles/PermissionOpti
 echo ""
 echo "=== Done! ==="
 echo "SDK and enums have been regenerated and linked to HomePort."
-echo "Run 'yarn tsc --noEmit' to verify TypeScript compilation."
+echo "Run 'yarn tsgo --noEmit' to verify TypeScript compilation."

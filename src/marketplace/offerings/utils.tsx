@@ -1,8 +1,7 @@
-import { User } from 'waldur-js-client';
+import { User, Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
-import { Offering } from '@/marketplace/types';
 import { IBreadcrumbItem } from '@/navigation/types';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 

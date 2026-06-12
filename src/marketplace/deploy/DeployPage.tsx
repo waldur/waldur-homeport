@@ -18,6 +18,8 @@ import {
   PublicOfferingDetails,
   marketplaceOrdersCreate,
   marketplaceOrdersUpdateAttachment,
+  Offering,
+  ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
@@ -27,7 +29,6 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getCustomer } from '@/customer/utils';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
-import { Offering, Plan } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
 import { INSTANCE_TYPE } from '@/openstack/constants';
 import { calculateSystemVolumeSize } from '@/openstack/openstack-instance/utils';

@@ -1,10 +1,10 @@
-import { OrderDetails as OrderResponse } from 'waldur-js-client';
+import { OrderDetails } from 'waldur-js-client';
 
 import { ApproveAllButton } from './ApproveAllButton';
 import { RejectAllButton } from './RejectAllButton';
 
 interface OwnProps {
-  orders: OrderResponse[];
+  orders: OrderDetails[];
 }
 
 export const BulkProviderActions = ({ orders }: OwnProps) => {

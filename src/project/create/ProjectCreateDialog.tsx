@@ -76,11 +76,9 @@ export const ProjectCreateDialog = ({
 
   const onSubmit = async (formData: ProjectFormData) => {
     try {
-      let response: { data: Project; error: any } = savedProject
-        ? { data: savedProject, error: undefined }
-        : null;
-      if (!savedProject) {
-        response = await projectsCreate({
+      let project = savedProject;
+      if (!project) {
+        const response = await projectsCreate({
           body: {
             name: formData.name,
             slug: formData.slug,
@@ -104,16 +102,16 @@ export const ProjectCreateDialog = ({
           ...formDataOptions,
         });
         showSuccess(translate('Project has been created.'));
-
-        setSavedProject(response.data);
+        project = response.data;
+        setSavedProject(project);
       }
       let error;
       // Project credit
-      if (!response.error && formData.project_credit) {
+      if (formData.project_credit) {
         try {
           await projectCreditsCreate({
             body: {
-              project: response.data.url,
+              project: project.url,
               value: formData.project_credit,
             },
           });
@@ -126,7 +124,7 @@ export const ProjectCreateDialog = ({
         }
       }
       // Project metadata
-      if (!response.error && Object.keys(formData.metadata || {}).length) {
+      if (Object.keys(formData.metadata || {}).length) {
         const metadataBody: AnswerSubmitRequest[] = [];
         Object.keys(formData.metadata).forEach((key) => {
           const answer = formData.metadata[key];
@@ -138,7 +136,7 @@ export const ProjectCreateDialog = ({
         });
         try {
           await projectsSubmitAnswers({
-            path: { uuid: response.data.uuid },
+            path: { uuid: project.uuid },
             body: metadataBody,
           });
           showSuccess(translate('Project metadata submitted.'));
@@ -156,7 +154,7 @@ export const ProjectCreateDialog = ({
         }
         closeDialog();
         router.stateService.go('project.dashboard', {
-          uuid: response.data.uuid,
+          uuid: project.uuid,
         });
       }
     } catch (e) {

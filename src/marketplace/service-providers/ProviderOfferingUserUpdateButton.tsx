@@ -1,6 +1,6 @@
 import { ChatTeardropTextIcon, PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { PublicOfferingDetails, ServiceProvider } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -9,8 +9,6 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
-
-import { ServiceProvider } from '../types';
 
 import { ProviderOfferingUserUpdateDialogProps } from './ProviderOfferingUserUpdateDialog';
 

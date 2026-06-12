@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
+import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { usePermissionView } from '@/auth/PermissionLayout';
 import { translate } from '@/i18n';
-import { Category, Offering } from '@/marketplace/types';
+import { Category } from '@/marketplace/types';
 
 interface PublicOfferingDetailsProps {
   offering: Offering;

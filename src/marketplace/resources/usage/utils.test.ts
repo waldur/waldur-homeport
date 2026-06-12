@@ -2,9 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceResourcesOfferingRetrieve,
   marketplaceComponentUsagesList,
+  OfferingComponent,
 } from 'waldur-js-client';
-
-import { OfferingComponent } from '@/marketplace/types';
 
 import { ComponentUsage, ComponentUserUsage } from './types';
 import {

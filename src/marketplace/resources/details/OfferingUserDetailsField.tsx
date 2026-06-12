@@ -13,7 +13,10 @@ export const OfferingUserDetailsField = ({
   offeringUser,
   resource,
 }: {
-  offeringUser: OfferingUser;
+  offeringUser: Pick<
+    OfferingUser,
+    'state' | 'uuid' | 'service_provider_comment' | 'username'
+  >;
   resource: Resource;
 }) => {
   const user = useUser();
