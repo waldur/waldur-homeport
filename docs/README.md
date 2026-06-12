@@ -1,6 +1,6 @@
 # Developer Documentation Index
 
-Guides for working on Waldur HomePort. Start with [development-setup.md](development-setup.md) if you are new to the codebase. The root [CLAUDE.md](../CLAUDE.md) curates the most critical rules for day-to-day work.
+Guides for working on Waldur HomePort. Start with [development-setup.md](development-setup.md) if you are new to the codebase. The root `CLAUDE.md` file curates the most critical rules for day-to-day work.
 
 ## Getting started
 
