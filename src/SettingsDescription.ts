@@ -907,6 +907,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'SMAX_CERTIFICATE',
+        description: translate('Custom CA certificate (PEM format) used to verify the TLS connection to the SMAX server. When set, it overrides the default CA bundle. Ignored if SSL verification is disabled.'),
+        default: '',
+        type: 'text_field',
+      },
+      {
         key: 'SMAX_WEBHOOK_SHARED_SECRET',
         description: translate('Shared secret expected in the X-Webhook-Secret header of inbound SMAX webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).'),
         default: '',
