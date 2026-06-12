@@ -13,7 +13,7 @@ import { useInvitationCreateDialog } from '../useInvitationCreateDialog';
 import { BulkUpload, EmailRolePairs } from './BulkUpload';
 import { CustomMessageWrapper } from './CustomMessageWrapper';
 import { EmailsListGroupWrapper } from './EmailsListGroupWrapper';
-import { FormButtons } from './FormButtons';
+import { InvitationCreateDialogFooter } from './InvitationCreateDialogFooter';
 
 import './InvitationCreateDialog.scss';
 
@@ -172,7 +172,9 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
               "We'll email them instructions and a link to accept the invitation.",
             )}
             footer={
-              <FormButtons
+              <InvitationCreateDialogFooter
+                resolve={resolve}
+                defaultProject={defaultProject}
                 setStep={setStep}
                 step={step}
                 submitting={submitting}
