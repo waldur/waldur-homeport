@@ -5,6 +5,8 @@ import {
   marketplaceProviderOfferingsRetrieve,
   marketplaceResourcesOfferingRetrieve,
   Resource,
+  ProviderOfferingDetails,
+  PublicOfferingDetails,
 } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -28,7 +30,9 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
     isLoading,
     error,
     refetch,
-  } = useQuery({
+  } = useQuery<
+    Pick<ProviderOfferingDetails | PublicOfferingDetails, 'components'>
+  >({
     queryKey: [
       'resource-offering-components',
       resource.uuid,
@@ -44,7 +48,6 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
 
       return marketplaceResourcesOfferingRetrieve({
         path: { uuid: resource.uuid },
-        // @ts-ignore
         query: { field: ['components'] },
       }).then((response) => response.data);
     },

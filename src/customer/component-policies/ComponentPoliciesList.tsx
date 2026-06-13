@@ -68,7 +68,7 @@ export const ComponentPoliciesList: FC = () => {
           title: translate('Options'),
           render: ({ row }) =>
             Object.keys(row.options || {}).length
-              ? Object.values(row.options || {})
+              ? JSON.stringify(Object.values(row.options || {}))
               : 'N/A',
         },
       ]}

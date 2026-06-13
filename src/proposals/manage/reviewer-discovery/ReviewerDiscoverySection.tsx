@@ -321,13 +321,8 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
         id: 'match_reason',
         title: translate('Match reason'),
         render: ({ row }: { row: ReviewerSuggestion }) => {
-          const matchedKeywords = (row.matched_keywords as string[]) || [];
-          const topProposals =
-            (row.top_matching_proposals as {
-              uuid: string;
-              name: string;
-              affinity: number;
-            }[]) || [];
+          const matchedKeywords = row.matched_keywords || [];
+          const topProposals = row.top_matching_proposals || [];
 
           if (matchedKeywords.length === 0 && topProposals.length === 0) {
             return <span className="text-muted">-</span>;

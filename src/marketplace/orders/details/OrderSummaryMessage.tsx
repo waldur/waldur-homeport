@@ -83,7 +83,7 @@ export const getUpdateSummary = (ctx: Context) => {
       {
         user: ctx.user,
         old_limits: formatLimits(
-          ctx.order.attributes['old_limits'],
+          (ctx.order.attributes as any)['old_limits'],
           componentMap,
         ),
         new_limits: formatLimits(ctx.order.limits, componentMap),
