@@ -530,7 +530,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     }
 
     for (const log of slurmLogs.slice(0, 30)) {
-      const actions = (log.actions_taken as string[] | undefined) || [];
+      const actions = log.actions_taken || [];
       if (actions.length === 0) continue;
       events.push({
         id: `slurm-eval-${log.uuid}`,

@@ -29,7 +29,7 @@ interface RenewalAttributes {
 
 export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
   const shouldConcealPrices = useShouldConcealPrices(order.project_uuid);
-  const attributes = order.attributes as RenewalAttributes;
+  const attributes = order.attributes as unknown as RenewalAttributes;
 
   const newLimits = useMemo(
     () => getFormLimitParser(offering.type)(order.limits),

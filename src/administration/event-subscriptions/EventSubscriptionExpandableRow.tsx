@@ -12,9 +12,7 @@ interface EventSubscriptionExpandableRowProps {
 export const EventSubscriptionExpandableRow: FC<
   EventSubscriptionExpandableRowProps
 > = ({ row }) => {
-  const observableObjects = row.observable_objects as
-    | Array<{ offering_uuid: string; object_type: string }>
-    | undefined;
+  const observableObjects = row.observable_objects;
 
   return (
     <ExpandableContainer>

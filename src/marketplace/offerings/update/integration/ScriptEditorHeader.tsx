@@ -78,7 +78,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
 
   const envItems = useMemo<EnvItem[]>(() => {
     const items = [];
-    ((offering.secret_options?.environ as any[]) || []).forEach((variable) => {
+    (offering.secret_options?.environ || []).forEach((variable) => {
       items.push({
         label: variable.name,
         type: 'environ',

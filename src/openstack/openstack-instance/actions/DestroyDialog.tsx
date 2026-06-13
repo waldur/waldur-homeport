@@ -16,7 +16,7 @@ export const DestroyDialog: FC<ActionDialogProps> = ({
     mutationFn: (formData) =>
       marketplaceResourcesTerminate({
         path: { uuid: resource.marketplace_resource_uuid },
-        body: { attributes: formData },
+        body: { attributes: formData as any },
       }),
 
     successMessage: translate('Instance deletion has been scheduled.'),

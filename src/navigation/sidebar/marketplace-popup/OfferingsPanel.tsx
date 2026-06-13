@@ -140,7 +140,9 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
   // Pagination state. `items` is sparse — entries land as their parent page
   // resolves. `itemCount === null` until the first page request returns
   // (lets us delay the "no offerings" empty-state decision until we know).
-  const [items, setItems] = useState<ProviderOfferingResponse>([]);
+  const [items, setItems] = useState<Array<ProviderOfferingResponse[number]>>(
+    [],
+  );
   const [itemCount, setItemCount] = useState<number | null>(null);
   // Pages that are currently fetching OR already settled. Tracked outside
   // React state because we read it inside `loadMoreItems` synchronously to
