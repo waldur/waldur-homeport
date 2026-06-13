@@ -19,6 +19,8 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
       <span className="menu-title">{title}</span>
       <span className="menu-arrow rotate-active-90" />
     </div>
-    <div className="menu-sub menu-sub-dropdown p-2 min-w-200px">{children}</div>
+    {/* A <ul> (not <div>) so the nested MenuItem <li>s are valid list
+        children; Metronic styles the submenu by class, not tag. */}
+    <ul className="menu-sub menu-sub-dropdown p-2 min-w-200px">{children}</ul>
   </li>
 );
