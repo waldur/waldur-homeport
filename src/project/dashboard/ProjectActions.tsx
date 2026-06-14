@@ -6,11 +6,10 @@ import { Project } from 'waldur-js-client';
 import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { Link } from '@/core/Link';
 import { useDrawer } from '@/drawer/actions';
-import { isFeatureVisible } from '@/features/connect';
-import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { useProjectMatrixRooms } from '@/matrix/chat/useProjectMatrixRooms';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 
 interface ProjectActionsProps {
   project: Project;
@@ -19,7 +18,7 @@ interface ProjectActionsProps {
 export const ProjectActions = ({ project }: ProjectActionsProps) => {
   const { openDrawer } = useDrawer();
   const showIssues = hasSupport();
-  const showMatrixChat = isFeatureVisible(ProjectFeatures.show_matrix_chat);
+  const showMatrixChat = isMatrixChatEnabled();
   const isCourseProject = project.kind === 'course';
 
   const { data: rooms } = useProjectMatrixRooms(project.uuid);

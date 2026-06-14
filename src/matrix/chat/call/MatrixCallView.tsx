@@ -17,9 +17,22 @@ import {
   useTracks,
 } from '@livekit/components-react';
 import '@livekit/components-styles';
-import { PhoneSlashIcon } from '@phosphor-icons/react';
+import {
+  CornersInIcon,
+  CornersOutIcon,
+  PhoneSlashIcon,
+  PictureInPictureIcon,
+} from '@phosphor-icons/react';
 import { DisconnectReason, setLogLevel, Track } from 'livekit-client';
-import { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  FC,
+  RefObject,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
@@ -30,8 +43,10 @@ import { useUser } from '@/workspace/hooks';
 import { useMatrixClient } from '../useMatrixClient';
 import { formatDisplayName } from '../utils';
 
+import { CallSettingsMenu } from './CallSettingsMenu';
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
 import { CallMemberInfo } from './types';
+import { useFullscreen } from './useFullscreen';
 import { useMatrixCall } from './useMatrixCall';
 
 const DEVICE_ID_KEY = 'waldur_matrix_device_id';
@@ -165,7 +180,26 @@ function useStableSpeaker(
 
 const COMPACT_SPEAKER_DEBOUNCE_MS = 2000;
 
-const CallStage: FC<{ compact?: boolean }> = ({ compact = false }) => {
+const CallStage: FC<{
+  compact?: boolean;
+  containerRef: RefObject<HTMLElement>;
+  fullscreenTarget?: HTMLElement | null;
+}> = ({ compact = false, containerRef, fullscreenTarget }) => {
+  // Fullscreen the host's relocation container (the unit that travels between
+  // dock / floating widget / PiP), not the inner view — otherwise the host
+  // moves the element out from under fullscreen. Falls back to the view itself
+  // if no host container was provided.
+  const fsRef = useRef<HTMLElement | null>(null);
+  fsRef.current = fullscreenTarget ?? containerRef.current;
+  const {
+    isFullscreen,
+    supported: fullscreenSupported,
+    toggle: toggleFullscreen,
+  } = useFullscreen(fsRef);
+  // Leave overlay positioning to react-bootstrap's default everywhere except
+  // fullscreen: there, body-portaled overlays are invisible (the Fullscreen API
+  // only paints the fullscreened subtree), so target the call element instead.
+  const overlayContainer = isFullscreen ? containerRef.current : undefined;
   const tracks = useTracks(
     [
       { source: Track.Source.Camera, withPlaceholder: true },
@@ -216,7 +250,12 @@ const CallStage: FC<{ compact?: boolean }> = ({ compact = false }) => {
   // wins; otherwise any live camera. Document PiP doesn't need this signal
   // (it shows the whole UI) but the widget uses it for the fallback path on
   // browsers without document PiP support.
-  const { setPopOutCandidate } = useContext(MatrixCallPortalContext);
+  const { setPopOutCandidate, requestTogglePopOut, isInDocumentPiP } =
+    useContext(MatrixCallPortalContext);
+  // Document PiP only — the whole call view goes into an OS window. Hidden
+  // entirely on browsers that don't support it (a permanent capability gap).
+  const pipSupported =
+    typeof window !== 'undefined' && 'documentPictureInPicture' in window;
   useEffect(() => {
     if (screenShare) {
       setPopOutCandidate('screen_share');
@@ -296,6 +335,7 @@ const CallStage: FC<{ compact?: boolean }> = ({ compact = false }) => {
           id="call-mic"
           label={translate('Toggle microphone')}
           placement="top"
+          container={overlayContainer}
         >
           <TrackToggle source={Track.Source.Microphone} />
         </Tip>
@@ -303,6 +343,7 @@ const CallStage: FC<{ compact?: boolean }> = ({ compact = false }) => {
           id="call-camera"
           label={translate('Toggle camera')}
           placement="top"
+          container={overlayContainer}
         >
           <TrackToggle source={Track.Source.Camera} />
         </Tip>
@@ -310,10 +351,72 @@ const CallStage: FC<{ compact?: boolean }> = ({ compact = false }) => {
           id="call-screenshare"
           label={translate('Share your screen')}
           placement="top"
+          container={overlayContainer}
         >
           <TrackToggle source={Track.Source.ScreenShare} />
         </Tip>
-        <Tip id="call-leave" label={translate('Leave call')} placement="top">
+        {/* The device picker is meaningless in the cramped floating widget. */}
+        {!compact && <CallSettingsMenu container={overlayContainer} />}
+        {fullscreenSupported && (
+          <Tip
+            id="call-fullscreen"
+            label={
+              isFullscreen
+                ? translate('Exit fullscreen')
+                : translate('Enter fullscreen')
+            }
+            placement="top"
+            container={overlayContainer}
+          >
+            <button
+              type="button"
+              className="lk-button"
+              onClick={toggleFullscreen}
+              aria-label={
+                isFullscreen
+                  ? translate('Exit fullscreen')
+                  : translate('Enter fullscreen')
+              }
+            >
+              {isFullscreen ? (
+                <CornersInIcon size={20} weight="bold" />
+              ) : (
+                <CornersOutIcon size={20} weight="bold" />
+              )}
+            </button>
+          </Tip>
+        )}
+        {pipSupported && (
+          <Tip
+            id="call-pip"
+            label={
+              isInDocumentPiP
+                ? translate('Close Picture-in-Picture')
+                : translate('Open in Picture-in-Picture')
+            }
+            placement="top"
+            container={overlayContainer}
+          >
+            <button
+              type="button"
+              className="lk-button"
+              onClick={requestTogglePopOut}
+              aria-label={
+                isInDocumentPiP
+                  ? translate('Close Picture-in-Picture')
+                  : translate('Open in Picture-in-Picture')
+              }
+            >
+              <PictureInPictureIcon size={20} weight="bold" />
+            </button>
+          </Tip>
+        )}
+        <Tip
+          id="call-leave"
+          label={translate('Leave call')}
+          placement="top"
+          container={overlayContainer}
+        >
           <DisconnectButton>
             <PhoneSlashIcon size={20} weight="bold" />
           </DisconnectButton>
@@ -346,7 +449,10 @@ const CallErrorPanel: FC<{
   </div>
 );
 
-const MatrixCallView: FC<{ compact?: boolean }> = ({ compact = false }) => {
+const MatrixCallView: FC<{
+  compact?: boolean;
+  fullscreenTarget?: HTMLElement | null;
+}> = ({ compact = false, fullscreenTarget }) => {
   const {
     credentials,
     callState,
@@ -419,7 +525,11 @@ const MatrixCallView: FC<{ compact?: boolean }> = ({ compact = false }) => {
           style={{ height: '100%' }}
         >
           <LayoutContextProvider>
-            <CallStage compact={compact} />
+            <CallStage
+              compact={compact}
+              containerRef={containerRef}
+              fullscreenTarget={fullscreenTarget}
+            />
           </LayoutContextProvider>
           <RoomAudioRenderer />
           <NameOverrider

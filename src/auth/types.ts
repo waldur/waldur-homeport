@@ -131,6 +131,7 @@ interface CoreConfiguration {
     | 'staff'
     | 'staff_and_support'
     | 'all';
+  MATRIX_ENABLED: boolean;
 }
 
 interface OpenStackConfiguration {

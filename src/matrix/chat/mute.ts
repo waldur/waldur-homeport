@@ -6,6 +6,10 @@ export function isRoomMuted(
   roomId: string | null,
 ): boolean {
   if (!client || !roomId) return false;
+  // Push rules are only populated once the initial sync completes; reading them
+  // earlier (e.g. during the impersonation teardown/reconnect window) makes the
+  // SDK throw "SyncApi.sync() must be done before accessing to push rules".
+  if (!client.isInitialSyncComplete()) return false;
   const rule = client.getRoomPushRule('global', roomId);
   return Boolean(rule?.actions?.includes(PushRuleActionName.DontNotify));
 }

@@ -1,6 +1,7 @@
 import {
   FC,
   Fragment,
+  memo,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -47,7 +48,10 @@ function isContinuation(messages: MatrixChatMessage[], index: number): boolean {
   );
 }
 
-export const MatrixMessageList: FC<MatrixMessageListProps> = ({
+// Memoized: the composer's draft context (text + pending files) lives above
+// this list in MatrixChatDrawer, so every keystroke re-renders the drawer.
+// Without memo that cascade re-renders every message row on each keypress.
+const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
   messages,
   userId,
   memberNames,
@@ -60,9 +64,14 @@ export const MatrixMessageList: FC<MatrixMessageListProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const wasAtBottomRef = useRef(true);
-  // scrollHeight captured before a scroll-triggered history load, so the
-  // viewport can be restored after older messages prepend (no visible jump).
-  const pendingScrollAnchorRef = useRef<number | null>(null);
+  // The message we keep stationary while content above the viewport changes
+  // height — history prepend AND the images inside those older messages, which
+  // decode asynchronously well after the prepend. Stored as the topmost visible
+  // message plus its offset from the viewport top; a one-shot scrollHeight delta
+  // can't cover the late image growth, which is what catapults the reader off
+  // the pictures they were looking at.
+  const anchorRef = useRef<{ eventId: string; top: number } | null>(null);
+  const anchorRafRef = useRef<number | null>(null);
   const didInitialScrollRef = useRef(false);
 
   // Track if user is at the bottom before new messages arrive
@@ -71,6 +80,43 @@ export const MatrixMessageList: FC<MatrixMessageListProps> = ({
     if (!el) return;
     wasAtBottomRef.current =
       el.scrollHeight - el.scrollTop - el.clientHeight < 50;
+  }, []);
+
+  // Record the topmost visible message and its offset from the viewport top, so
+  // a later height change above it can be undone. Skipped at the bottom — the
+  // bottom-pin path owns that case.
+  const captureAnchor = useCallback(() => {
+    const el = containerRef.current;
+    if (!el || wasAtBottomRef.current) {
+      anchorRef.current = null;
+      return;
+    }
+    const viewportTop = el.getBoundingClientRect().top;
+    const nodes = el.querySelectorAll<HTMLElement>('[data-event-id]');
+    for (let i = 0; i < nodes.length; i++) {
+      const offset = nodes[i].getBoundingClientRect().top - viewportTop;
+      if (offset >= 0) {
+        anchorRef.current = { eventId: nodes[i].dataset.eventId!, top: offset };
+        return;
+      }
+    }
+    anchorRef.current = null;
+  }, []);
+
+  // Re-pin the anchored message to the offset it had when captured, absorbing
+  // whatever height a prepend or a freshly decoded image added above it.
+  const restoreAnchor = useCallback(() => {
+    const el = containerRef.current;
+    const anchor = anchorRef.current;
+    if (!el || !anchor || wasAtBottomRef.current) return;
+    const node = el.querySelector<HTMLElement>(
+      `[data-event-id="${CSS.escape(anchor.eventId)}"]`,
+    );
+    if (!node) return;
+    const offset =
+      node.getBoundingClientRect().top - el.getBoundingClientRect().top;
+    const delta = offset - anchor.top;
+    if (Math.abs(delta) >= 1) el.scrollTop += delta;
   }, []);
 
   // Report the newest message as read whenever it sits at the bottom of the
@@ -84,9 +130,14 @@ export const MatrixMessageList: FC<MatrixMessageListProps> = ({
   // Keep the viewport pinned to the bottom for: initial load, tail updates
   // while the user is parked at the bottom, and the rapid fill-too-short
   // backfill cycles that pad out a too-short stream. The history-prepend
-  // and reaction-while-scrolled-up cases skip the scroll — useLayoutEffect's
-  // anchor restore handles those.
-  useEffect(() => {
+  // and reaction-while-scrolled-up cases skip the scroll — the anchor-restore
+  // effect below handles those.
+  //
+  // useLayoutEffect, not useEffect: the scroll must run before the browser
+  // paints the freshly-mounted stream. With a post-paint effect the first
+  // frame shows the timeline at scrollTop 0, then snaps to the bottom — a
+  // visible flash of the oldest messages on every room open.
+  useLayoutEffect(() => {
     if (loading) {
       didInitialScrollRef.current = false;
       return;
@@ -101,6 +152,14 @@ export const MatrixMessageList: FC<MatrixMessageListProps> = ({
   const handleScroll = useCallback(() => {
     checkIfAtBottom();
     if (wasAtBottomRef.current) reportLatestRead();
+    // Keep the anchor tracking the topmost visible message as the user scrolls,
+    // throttled to a frame: scroll fires far more often than content reflows.
+    if (anchorRafRef.current == null) {
+      anchorRafRef.current = requestAnimationFrame(() => {
+        anchorRafRef.current = null;
+        captureAnchor();
+      });
+    }
     const el = containerRef.current;
     if (!el) return;
     // Only treat low scrollTop as "user scrolled to top" when content
@@ -114,10 +173,18 @@ export const MatrixMessageList: FC<MatrixMessageListProps> = ({
       hasOlderMessages &&
       !loadingOlder
     ) {
-      pendingScrollAnchorRef.current = el.scrollHeight;
+      // Capture now, synchronously, before the prepend — the throttled rAF
+      // capture could otherwise land after older messages mount and re-anchor
+      // to the wrong (new) top.
+      if (anchorRafRef.current != null) {
+        cancelAnimationFrame(anchorRafRef.current);
+        anchorRafRef.current = null;
+      }
+      captureAnchor();
       onLoadOlder();
     }
   }, [
+    captureAnchor,
     checkIfAtBottom,
     hasOlderMessages,
     loadingOlder,
@@ -125,18 +192,44 @@ export const MatrixMessageList: FC<MatrixMessageListProps> = ({
     reportLatestRead,
   ]);
 
-  // After older messages prepend, shift the viewport down by the added
-  // height so it stays on the same message instead of jumping.
-  useLayoutEffect(() => {
+  // Media (images, video, stickers) resolve asynchronously and grow the
+  // stream height after the one-shot initial scroll has already run. When
+  // that growth lands while the viewport is parked at the bottom, re-pin so
+  // a just-opened room with a trailing image still settles on the newest
+  // message instead of stranding a half-screen above it. `load` doesn't
+  // bubble, so the listener catches it in the capture phase.
+  //
+  // Depend on `loading`: the stream container only mounts once loading flips
+  // false, so attaching on mount alone (a [] effect) would read a null ref
+  // and never bind — exactly the case where media-driven growth happens.
+  useEffect(() => {
     const el = containerRef.current;
-    if (el && pendingScrollAnchorRef.current != null) {
-      const delta = el.scrollHeight - pendingScrollAnchorRef.current;
-      pendingScrollAnchorRef.current = null;
-      if (delta > 0) {
-        el.scrollTop += delta;
-      }
-    }
-  }, [messages]);
+    if (!el) return;
+    const onMediaLoad = () => {
+      // Parked at the bottom: keep the newest message in view. Scrolled up into
+      // history: hold the reader's place as the image grows above them, instead
+      // of letting that growth shove the timeline down.
+      if (wasAtBottomRef.current) bottomRef.current?.scrollIntoView();
+      else restoreAnchor();
+    };
+    el.addEventListener('load', onMediaLoad, true);
+    return () => el.removeEventListener('load', onMediaLoad, true);
+  }, [loading, restoreAnchor]);
+
+  // After older messages prepend, re-pin the anchored message so the viewport
+  // stays put instead of jumping. The media-load listener above keeps it pinned
+  // as the prepended images decode afterwards.
+  useLayoutEffect(() => {
+    restoreAnchor();
+  }, [messages, restoreAnchor]);
+
+  useEffect(
+    () => () => {
+      if (anchorRafRef.current != null)
+        cancelAnimationFrame(anchorRafRef.current);
+    },
+    [],
+  );
 
   // Keep the stream tall enough to scroll: while it doesn't overflow, pull
   // older messages until it does (or history runs out). The ResizeObserver
@@ -212,3 +305,5 @@ export const MatrixMessageList: FC<MatrixMessageListProps> = ({
     </div>
   );
 };
+
+export const MatrixMessageList = memo(MatrixMessageListInner);

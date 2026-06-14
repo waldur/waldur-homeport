@@ -12,6 +12,7 @@ import { isStaff as isStaffSelector } from '@/workspace/selectors';
 import { MatrixAppserviceSetupDialog } from './MatrixAppserviceSetup';
 import { MatrixDiagnosticsDialog } from './MatrixDiagnostics';
 import { MatrixHowItWorksButton } from './MatrixHowItWorksButton';
+import { isMatrixEnabled } from './utils';
 
 const ROOMS_TAB = {
   key: 'rooms',
@@ -39,6 +40,10 @@ export const MatrixAdminDashboard = () => {
   const { openDialog } = useModal();
   const staff = useSelector(isStaffSelector);
   const tabs = staff ? [ROOMS_TAB, SETTINGS_TAB] : [ROOMS_TAB];
+  // The dashboard stays reachable while Matrix is off so staff can toggle
+  // MATRIX_ENABLED in the Settings tab; the appservice setup only makes sense
+  // once the integration is on, so disable it with an explanatory tooltip.
+  const matrixEnabled = isMatrixEnabled();
 
   const openSetupDialog = useCallback(() => {
     openDialog(MatrixAppserviceSetupDialog, { size: 'lg' });
@@ -72,6 +77,10 @@ export const MatrixAdminDashboard = () => {
                 action={openSetupDialog}
                 iconNode={<GearSixIcon weight="bold" />}
                 variant="tertiary"
+                disabled={!matrixEnabled}
+                disabledReason={translate(
+                  'Enable Matrix chat in the Settings tab before configuring the appservice.',
+                )}
               />
             </>
           )}

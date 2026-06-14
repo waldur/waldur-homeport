@@ -1,8 +1,4 @@
-import {
-  ArrowSquareInIcon,
-  PhoneSlashIcon,
-  PictureInPictureIcon,
-} from '@phosphor-icons/react';
+import { ArrowSquareInIcon } from '@phosphor-icons/react';
 import {
   forwardRef,
   useCallback,
@@ -38,15 +34,11 @@ export const MatrixCallFloatingWidget = forwardRef<
   HTMLDivElement,
   MatrixCallFloatingWidgetProps
 >(({ roomName }, portalTargetRef) => {
-  const { endCall, callRoomUuid } = useMatrixCall();
+  const { callRoomUuid } = useMatrixCall();
   const { openDrawer } = useDrawer();
-  const {
-    widgetPosition,
-    setWidgetPosition,
-    isInDocumentPiP,
-    requestReturnToCall,
-    requestTogglePopOut,
-  } = useContext(MatrixCallPortalContext);
+  const { widgetPosition, setWidgetPosition, requestReturnToCall } = useContext(
+    MatrixCallPortalContext,
+  );
 
   // If the drawer is closed, requestReturnToCall has no subscriber to act on.
   // Opening the drawer with the call's room as the default makes the matrix
@@ -69,12 +61,6 @@ export const MatrixCallFloatingWidget = forwardRef<
     null,
   );
   const draftPosRef = useRef<{ x: number; y: number } | null>(null);
-
-  // Document PiP only — hosts the full call UI (grid, controls, everyone's
-  // tiles) in an OS window. Single-video PiP would only show one stream,
-  // which isn't what we want for a multi-party call.
-  const pipAvailable =
-    typeof window !== 'undefined' && 'documentPictureInPicture' in window;
 
   const effectivePos = draftPos ?? widgetPosition;
 
@@ -126,11 +112,6 @@ export const MatrixCallFloatingWidget = forwardRef<
     };
   }, [setWidgetPosition]);
 
-  const isPoppedOut = isInDocumentPiP;
-  const handlePopOut = useCallback(() => {
-    requestTogglePopOut();
-  }, [requestTogglePopOut]);
-
   return (
     <div
       ref={widgetRef}
@@ -165,31 +146,6 @@ export const MatrixCallFloatingWidget = forwardRef<
           title={translate('Return to call in chat')}
         >
           <ArrowSquareInIcon size={14} weight="bold" />
-        </button>
-        {pipAvailable && (
-          <button
-            type="button"
-            className="btn btn-sm btn-light"
-            onClick={handlePopOut}
-            aria-label={
-              isPoppedOut ? translate('Dock back') : translate('Pop out')
-            }
-            title={
-              isPoppedOut
-                ? translate('Close Picture-in-Picture')
-                : translate('Open in Picture-in-Picture')
-            }
-          >
-            <PictureInPictureIcon size={14} weight="bold" />
-          </button>
-        )}
-        <button
-          type="button"
-          className="btn btn-sm btn-danger"
-          onClick={() => endCall()}
-          aria-label={translate('End call')}
-        >
-          <PhoneSlashIcon size={14} weight="bold" />
         </button>
       </div>
       <div

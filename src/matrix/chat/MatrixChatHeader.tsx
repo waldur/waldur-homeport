@@ -50,7 +50,8 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   const members = useRoomMembers();
   const { rtcAvailable, callState, callRoomUuid, startCall, endCall } =
     useMatrixCall();
-  const { client, activeRoomId, activeRoomUuid } = useMatrixClient();
+  const { client, activeRoomId, activeRoomUuid, connectionState } =
+    useMatrixClient();
   const { showSuccess, showError } = useNotify();
 
   // Compact view hides the room list behind the back button, so flag when any
@@ -90,10 +91,15 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   const matrixUri = roomAlias
     ? `matrix:r/${roomAlias.replace(/^#/, '')}`
     : null;
-  // Mute targets the synced client's room — during a room switch the
-  // activeRoomUuid briefly lags behind the rendered props, so gate on a match.
+  // Mute reads push rules, which only exist once the initial sync completes;
+  // gate on 'connected' so a pre-sync client (e.g. mid-impersonation reconnect)
+  // can't trigger the SDK's "SyncApi.sync() must be done" throw. The
+  // activeRoomUuid match guards the room-switch lag where it trails the props.
   const muteReady = Boolean(
-    client && activeRoomId && activeRoomUuid === roomUuid,
+    client &&
+    connectionState === 'connected' &&
+    activeRoomId &&
+    activeRoomUuid === roomUuid,
   );
 
   const [muted, setMuted] = useState(false);

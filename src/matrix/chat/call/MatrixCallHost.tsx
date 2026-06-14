@@ -16,6 +16,7 @@ import { useAllMatrixRooms } from '../useAllMatrixRooms';
 import { MatrixCallFloatingWidget } from './MatrixCallFloatingWidget';
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
 import MatrixCallView from './MatrixCallView';
+import { isCallFullscreenActive } from './useFullscreen';
 import { useMatrixCall } from './useMatrixCall';
 
 // Copy every same-origin stylesheet from the main document into the PiP
@@ -50,6 +51,9 @@ export const MatrixCallHost: FC = () => {
   );
   const [widgetTarget, setWidgetTarget] = useState<HTMLDivElement | null>(null);
   const [pipWindow, setPipWindow] = useState<Window | null>(null);
+  // Bumped on fullscreenchange so the relocation effect re-evaluates once the
+  // call's fullscreen ends and the element can be re-homed.
+  const [relocateTick, setRelocateTick] = useState(0);
   const requestingPipRef = useRef(false);
   const { rooms } = useAllMatrixRooms();
 
@@ -88,8 +92,27 @@ export const MatrixCallHost: FC = () => {
       ? registeredSlot!.el
       : widgetTarget;
 
+  // Re-run the relocation once a fullscreen session ends, so the call re-homes
+  // into its current destination.
+  useEffect(() => {
+    const onFs = () => setRelocateTick((t) => t + 1);
+    document.addEventListener('fullscreenchange', onFs);
+    document.addEventListener('webkitfullscreenchange', onFs);
+    return () => {
+      document.removeEventListener('fullscreenchange', onFs);
+      document.removeEventListener('webkitfullscreenchange', onFs);
+    };
+  }, []);
+
   useEffect(() => {
     if (!containerNode || !destination) return;
+    // Never move the call element while it (or a descendant) is fullscreened —
+    // re-parenting a fullscreened node drops it out of fullscreen and strands
+    // it in the new destination. The element re-homes when fullscreen ends
+    // (relocateTick bumps on fullscreenchange). Use the intent flag (not just
+    // document.fullscreenElement) to also cover the async requestFullscreen
+    // window where the element isn't fullscreen yet.
+    if (isCallFullscreenActive()) return;
     if (containerNode.parentElement === destination) return;
     destination.appendChild(containerNode);
     containerNode.querySelectorAll('video, audio').forEach((node) => {
@@ -103,7 +126,7 @@ export const MatrixCallHost: FC = () => {
         // Autoplay may reject; that's fine.
       });
     });
-  }, [destination, containerNode]);
+  }, [destination, containerNode, relocateTick]);
 
   useEffect(() => {
     return () => {
@@ -174,7 +197,10 @@ export const MatrixCallHost: FC = () => {
         />
       )}
       {createPortal(
-        <MatrixCallView compact={showWidget} />,
+        <MatrixCallView
+          compact={showWidget}
+          fullscreenTarget={containerNode}
+        />,
         containerNode,
         'call-view',
       )}
