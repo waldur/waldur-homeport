@@ -1,5 +1,5 @@
 import { FileXIcon } from '@phosphor-icons/react';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -13,7 +13,7 @@ import { useValidators } from './useValidators';
 interface DestroyActionItemProps<T> {
   apiMethod(id: string): Promise<any>;
   resource: T;
-  dialogSubtitle?: string;
+  dialogSubtitle?: ReactNode;
   validators?: ActionValidator<T>[];
   refetch?(): void;
 }
@@ -54,7 +54,12 @@ export const DestroyActionItem: <T extends { uuid?: string }>(
     refetch,
     confirmation: {
       title: translate('Destroy resource'),
-      body: getConfirmationText(resource) + (dialogSubtitle || ''),
+      body: (
+        <>
+          {getConfirmationText(resource)}
+          {dialogSubtitle}
+        </>
+      ),
       options: { forDeletion: true },
     },
   });

@@ -22,6 +22,7 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { CreatePortAction } from './actions/CreatePortAction';
+import { getPortCategory } from './portCategories';
 
 const TABLE_ID = 'openstack-ports';
 
@@ -128,6 +129,26 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
           title: translate('Network name'),
           render: ({ row }) => <>{renderFieldOrDash(row.network_name)}</>,
           copyField: (row) => row.network_name || '',
+        },
+        {
+          title: translate('Type'),
+          render: ({ row }) => {
+            const category = getPortCategory(row.device_owner);
+            if (!category) {
+              return <>{renderFieldOrDash(row.device_owner)}</>;
+            }
+            return (
+              <Badge
+                variant={category.variant}
+                pill
+                outline
+                tooltip={row.device_owner}
+              >
+                {category.label}
+              </Badge>
+            );
+          },
+          copyField: (row) => row.device_owner || '',
         },
         {
           title: translate('Status'),
