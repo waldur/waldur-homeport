@@ -3,20 +3,19 @@ import { projectsRetrieve } from 'waldur-js-client';
 
 import { queryClient } from '@/core/queryClient';
 import { getCustomer } from '@/customer/utils';
-import { isFeatureVisible } from '@/features/connect';
-import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import {
   fetchProjectMatrixRooms,
   projectMatrixRoomsKey,
 } from '@/matrix/chat/useProjectMatrixRooms';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { router } from '@/router';
 import { NotifyService } from '@/store/notify';
 import store from '@/store/store';
 import { setCurrentCustomer, setCurrentProject } from '@/workspace/actions';
 
 async function primeProjectMatrixRooms(projectUuid: string) {
-  if (!isFeatureVisible(ProjectFeatures.show_matrix_chat)) return;
+  if (!isMatrixChatEnabled()) return;
   try {
     await queryClient.fetchQuery({
       queryKey: projectMatrixRoomsKey(projectUuid),

@@ -1,5 +1,10 @@
-import { PaperPlaneRightIcon, PaperclipIcon } from '@phosphor-icons/react';
 import {
+  FileIcon,
+  PaperPlaneRightIcon,
+  PaperclipIcon,
+} from '@phosphor-icons/react';
+import {
+  ClipboardEvent,
   FC,
   FormEvent,
   KeyboardEvent,
@@ -10,22 +15,23 @@ import {
   useState,
 } from 'react';
 
+import { Image } from '@/core/Image';
+import { Tag } from '@/core/Tag';
 import { translate } from '@/i18n';
-import { NotifyService } from '@/store/notify';
 
+import { useMatrixComposerDraft } from './MatrixComposerDraftContext';
 import { useMatrixClient } from './useMatrixClient';
 import { useRoomMemberNames } from './useRoomMemberNames';
 import { resolveMemberName } from './utils';
 
-const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-const VIDEO_TYPES = ['video/mp4', 'video/webm', 'video/ogg'];
-const AUDIO_TYPES = ['audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/webm'];
-
-function getMsgType(mimeType: string) {
-  if (IMAGE_TYPES.includes(mimeType)) return 'm.image';
-  if (VIDEO_TYPES.includes(mimeType)) return 'm.video';
-  if (AUDIO_TYPES.includes(mimeType)) return 'm.audio';
-  return 'm.file';
+interface MatrixMessageInputProps {
+  uploadFile: (file: File) => Promise<boolean>;
+  uploading: boolean;
+  pendingFiles: File[];
+  addFiles: (files: File[]) => void;
+  removePending: (index: number) => void;
+  setPending: (files: File[]) => void;
+  clearPending: () => void;
 }
 
 interface MentionCandidate {
@@ -52,13 +58,76 @@ function getMentionQuery(
   return { query, start };
 }
 
-export const MatrixMessageInput: FC = () => {
+/** Staged-but-unsent file previews shown above the composer. */
+const PendingAttachments: FC<{
+  files: File[];
+  onRemove: (index: number) => void;
+}> = ({ files, onRemove }) => {
+  // One object URL per image file, created once and reused across re-renders;
+  // recreating them on every append needlessly churns blob URLs.
+  const urlCache = useRef(new Map<File, string>());
+  const previews = files.map((f) => {
+    if (!f.type.startsWith('image/')) return null;
+    let url = urlCache.current.get(f);
+    if (!url) {
+      url = URL.createObjectURL(f);
+      urlCache.current.set(f, url);
+    }
+    return url;
+  });
+  // Revoke URLs for files that left the pending set.
+  useEffect(() => {
+    const active = new Set(files);
+    for (const [file, url] of urlCache.current) {
+      if (!active.has(file)) {
+        URL.revokeObjectURL(url);
+        urlCache.current.delete(file);
+      }
+    }
+  }, [files]);
+  // Revoke everything on unmount.
+  useEffect(() => {
+    const cache = urlCache.current;
+    return () => {
+      for (const url of cache.values()) URL.revokeObjectURL(url);
+      cache.clear();
+    };
+  }, []);
+
+  if (files.length === 0) return null;
+
+  return (
+    <div className="tc-pending-attachments">
+      {files.map((file, i) => (
+        <Tag key={`${file.name}-${i}`} size="sm" onClear={() => onRemove(i)}>
+          {previews[i] ? (
+            <Image src={previews[i] as string} size={20} classes="me-1" />
+          ) : (
+            <FileIcon size={16} weight="bold" className="me-1" />
+          )}
+          {file.name}
+        </Tag>
+      ))}
+    </div>
+  );
+};
+
+export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
+  uploadFile,
+  uploading,
+  pendingFiles,
+  addFiles,
+  removePending,
+  setPending,
+  clearPending,
+}) => {
   const { client, activeRoomId, activeRoomUuid, connectionState, userId } =
     useMatrixClient();
   const memberNames = useRoomMemberNames(activeRoomUuid);
-  const [message, setMessage] = useState('');
+  // Draft text is kept per-room above the drawer so it survives a close/reopen.
+  const { draft, setText: setMessage } = useMatrixComposerDraft(activeRoomId);
+  const message = draft.text;
   const [sending, setSending] = useState(false);
-  const [uploading, setUploading] = useState(false);
   const [mentionQuery, setMentionQuery] = useState<{
     query: string;
     start: number;
@@ -154,7 +223,7 @@ export const MatrixMessageInput: FC = () => {
         }
       }
     },
-    [sendTypingIndicator, updateMentionState],
+    [sendTypingIndicator, updateMentionState, setMessage],
   );
 
   const acceptMention = useCallback(
@@ -178,20 +247,45 @@ export const MatrixMessageInput: FC = () => {
         }
       });
     },
-    [message, mentionQuery],
+    [message, mentionQuery, setMessage],
   );
 
   const sendMessage = useCallback(
     async (e?: FormEvent) => {
       e?.preventDefault();
       const text = message.trim();
-      if (!text || !client || !activeRoomId || sending) return;
+      const files = pendingFiles;
+      if (
+        (!text && files.length === 0) ||
+        !client ||
+        !activeRoomId ||
+        sending ||
+        uploading
+      )
+        return;
 
       setSending(true);
       isTypingRef.current = false;
       sendTypingIndicator(false);
 
       try {
+        // Post staged attachments first. Keep any that fail staged (and keep
+        // the text) so a partial failure is retryable instead of silently
+        // dropping files; uploadFile already surfaced the error toast.
+        if (files.length > 0) {
+          const failed: File[] = [];
+          for (const file of files) {
+            const ok = await uploadFile(file);
+            if (!ok) failed.push(file);
+          }
+          if (failed.length > 0) {
+            setPending(failed);
+            return;
+          }
+          clearPending();
+        }
+        if (!text) return;
+
         // Build mention pills for Matrix spec (org.matrix.msc3952).
         // Escape first so message text can't inject HTML, then sort members
         // longest-name-first so "@Alice Smith" is matched before "@Alice" and
@@ -247,57 +341,42 @@ export const MatrixMessageInput: FC = () => {
         setSending(false);
       }
     },
-    [message, client, activeRoomId, sending, sendTypingIndicator, members],
+    [
+      message,
+      pendingFiles,
+      client,
+      activeRoomId,
+      sending,
+      uploading,
+      sendTypingIndicator,
+      members,
+      uploadFile,
+      setPending,
+      clearPending,
+      setMessage,
+    ],
   );
 
-  const handleFileSelect = useCallback(async () => {
-    const file = fileInputRef.current?.files?.[0];
-    if (!file || !client || !activeRoomId) return;
-
-    setUploading(true);
-    try {
-      const uploadResponse = await (client as any).uploadContent(file, {
-        name: file.name,
-        type: file.type,
-      });
-      const mxcUrl =
-        typeof uploadResponse === 'string'
-          ? uploadResponse
-          : uploadResponse?.content_uri;
-
-      if (!mxcUrl) throw new Error('No content_uri in upload response');
-
-      const msgtype = getMsgType(file.type);
-      const content: Record<string, any> = {
-        msgtype,
-        body: file.name,
-        url: mxcUrl,
-        info: {
-          mimetype: file.type,
-          size: file.size,
-        },
-      };
-
-      if (msgtype === 'm.image') {
-        const dimensions = await getImageDimensions(file);
-        if (dimensions) {
-          content.info.w = dimensions.width;
-          content.info.h = dimensions.height;
-        }
-      }
-
-      await client.sendMessage(activeRoomId, content as any);
-    } catch {
-      // Surface the failure to the user — silently re-enabling the input
-      // makes it look like the upload succeeded. Retry remains a TODO.
-      NotifyService.error(translate('Upload failed.'));
-    } finally {
-      setUploading(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
+  const handleFileSelect = useCallback(() => {
+    const files = fileInputRef.current?.files;
+    if (files?.length) addFiles(Array.from(files));
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
-  }, [client, activeRoomId]);
+  }, [addFiles]);
+
+  // Stage pasted files/images (e.g. a screenshot from the clipboard) instead of
+  // letting them paste as nothing; text paste falls through untouched.
+  const handlePaste = useCallback(
+    (e: ClipboardEvent<HTMLTextAreaElement>) => {
+      const files = Array.from(e.clipboardData?.files ?? []);
+      if (files.length > 0) {
+        e.preventDefault();
+        addFiles(files);
+      }
+    },
+    [addFiles],
+  );
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -345,6 +424,7 @@ export const MatrixMessageInput: FC = () => {
 
   const disabled = connectionState !== 'connected';
   const busy = sending || uploading;
+  const canSend = Boolean(message.trim()) || pendingFiles.length > 0;
 
   return (
     <div className="position-relative">
@@ -374,10 +454,13 @@ export const MatrixMessageInput: FC = () => {
         </div>
       )}
 
+      <PendingAttachments files={pendingFiles} onRemove={removePending} />
+
       <form onSubmit={sendMessage} className="tc-composer">
         <input
           ref={fileInputRef}
           type="file"
+          multiple
           className="d-none"
           accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.zip,.tar.gz"
           onChange={handleFileSelect}
@@ -398,6 +481,7 @@ export const MatrixMessageInput: FC = () => {
           value={message}
           onChange={(e) => handleInput(e.target.value)}
           onKeyDown={handleKeyDown}
+          onPaste={handlePaste}
           onSelect={handleSelect}
           placeholder={
             disabled
@@ -411,12 +495,12 @@ export const MatrixMessageInput: FC = () => {
         <button
           type="submit"
           className="btn btn-primary btn-icon"
-          disabled={disabled || !message.trim() || busy}
+          disabled={disabled || !canSend || busy}
           title={
             disabled
               ? translate('Not connected')
-              : !message.trim()
-                ? translate('Enter a message to send')
+              : !canSend
+                ? translate('Enter a message or attach a file')
                 : translate('Send message')
           }
         >
@@ -426,20 +510,3 @@ export const MatrixMessageInput: FC = () => {
     </div>
   );
 };
-
-function getImageDimensions(
-  file: File,
-): Promise<{ width: number; height: number } | null> {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => {
-      resolve({ width: img.naturalWidth, height: img.naturalHeight });
-      URL.revokeObjectURL(img.src);
-    };
-    img.onerror = () => {
-      resolve(null);
-      URL.revokeObjectURL(img.src);
-    };
-    img.src = URL.createObjectURL(file);
-  });
-}

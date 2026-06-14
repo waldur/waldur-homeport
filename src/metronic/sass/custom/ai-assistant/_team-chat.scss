@@ -329,6 +329,14 @@
     color: $text-brand-primary;
   }
 
+  // Media renders flush: no tinted padding framing the picture.
+  .tc-bubble--media,
+  .tc-msg.mine .tc-bubble--media {
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
   .tc-msg.mentions-me .tc-bubble {
     background: rgba($warning-500, 0.12);
   }
@@ -784,6 +792,22 @@
     backdrop-filter: blur(4px);
   }
 
+  // LiveKit's mic/camera icons are fixed 16-18px SVGs with no viewBox, so CSS
+  // width/height crops them (svg defaults to overflow:hidden) instead of
+  // scaling. Our 13px root shrinks LiveKit's 1rem indicator below the icon's
+  // fixed size, spilling it out of the name chip. A transform scales the actual
+  // drawing; the flex indicator then re-centers the smaller icon.
+  .lk-track-muted-indicator-microphone,
+  .lk-track-muted-indicator-camera {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      transform: scale(0.72);
+    }
+  }
+
   .lk-control-bar {
     // LiveKit's own .lk-button rules size these unevenly (the disconnect
     // button renders larger); pin every control to one box and one icon size.
@@ -882,4 +906,57 @@
     max-height: 320px;
     overflow-y: auto;
   }
+}
+
+.call-device-settings-popover {
+  width: 280px;
+}
+
+.call-device-settings {
+  .call-device-settings__group:not(:last-child) {
+    margin-bottom: 12px;
+  }
+
+  .call-device-settings__label {
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: $text-secondary;
+  }
+}
+
+// Faint full-panel tint keeps the messages readable underneath; the hint
+// itself is a floating card rather than a solid colored block.
+.tc-dropzone-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: rgba($text-brand-primary, 0.06);
+}
+
+.tc-dropzone-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 32px;
+  background: $bg-primary;
+  border: 2px dashed $text-brand-primary;
+  border-radius: $border-radius-lg;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  color: $text-brand-primary;
+  font-weight: 600;
+}
+
+// Staged-attachment chips use the system Tag, so only the row needs styling.
+.tc-pending-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
 }

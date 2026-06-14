@@ -9,6 +9,7 @@ import {
 } from 'react';
 
 import { translate } from '@/i18n';
+import { useUser } from '@/workspace/hooks';
 
 import { useMatrixClient } from '../useMatrixClient';
 
@@ -37,6 +38,7 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
   const { client, activeRoomId, activeRoomUuid, connectionState } =
     useMatrixClient();
   const { rtcAvailable, discover, acquireToken } = useLiveKitToken();
+  const user = useUser();
 
   const [callState, setCallState] = useState<CallState>('idle');
   const [credentials, setCredentials] = useState<LiveKitCredentials | null>(
@@ -191,6 +193,23 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
       }
     };
   }, []);
+
+  // Leave the call on Waldur logout / user switch. MatrixRoot keeps this
+  // provider mounted across auth changes (so `children` never remounts), so the
+  // unmount cleanup above won't fire on logout — mirror MatrixChatProvider's
+  // user-watching teardown. This provider is nested inside MatrixChatProvider,
+  // so its effect runs first (child before parent): endCall still has a live
+  // client to announce the leave through before the chat provider disconnects.
+  const userUuidRef = useRef(user?.uuid);
+  useEffect(() => {
+    const newUuid = user?.uuid ?? null;
+    if (userUuidRef.current !== newUuid) {
+      userUuidRef.current = newUuid;
+      if (inCallRef.current) {
+        endCall();
+      }
+    }
+  }, [user?.uuid, endCall]);
 
   const contextValue = useMemo(
     () => ({

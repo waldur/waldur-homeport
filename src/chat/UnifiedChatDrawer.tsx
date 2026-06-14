@@ -10,10 +10,9 @@ import {
   setChatDrawerPreference,
 } from '@/chat/chatDrawerPreferences';
 import { resolveInitialTab } from '@/chat/resolveInitialTab';
-import { isFeatureVisible } from '@/features/connect';
-import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { MatrixChatPanel } from '@/matrix/chat/MatrixChatPanel';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
 interface UnifiedChatDrawerProps {
@@ -29,7 +28,7 @@ export const UnifiedChatDrawer: FC<UnifiedChatDrawerProps> = ({
 }) => {
   const user = useUser();
   const showAI = isLLMChatAllowedForUser(user, getLLMChatMode());
-  const showMatrix = isFeatureVisible(ProjectFeatures.show_matrix_chat);
+  const showMatrix = isMatrixChatEnabled();
   const showTabs = showAI && showMatrix;
 
   const [activeTab, setActiveTab] = useState<ChatDrawerTab>(() =>

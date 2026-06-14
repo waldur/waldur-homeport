@@ -179,11 +179,17 @@ describe('MatrixChatHeader', () => {
   });
 
   const mutedClient = () => {
-    const client = { id: 'c', on: vi.fn(), removeListener: vi.fn() };
+    const client = {
+      id: 'c',
+      on: vi.fn(),
+      removeListener: vi.fn(),
+      getRooms: () => [],
+    };
     h.matrixClient = {
       client,
       activeRoomId: '!room:server',
       activeRoomUuid: 'room-1',
+      connectionState: 'connected',
     };
     return client;
   };

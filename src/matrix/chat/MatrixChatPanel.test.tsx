@@ -75,6 +75,40 @@ afterEach(() => {
   document.getElementById('kt_drawer')?.remove();
 });
 
+describe('MatrixChatPanel — deep-link does not fight manual navigation', () => {
+  it('does not re-connect to the deep-linked room after the user opens another room', () => {
+    // Drawer opened deep-linked to room-A (e.g. a call's room). The user then
+    // picks room-B from the list, so the live client's active room becomes
+    // room-B. The panel must NOT yank the client back to room-A — that
+    // catapults the user back into the call's room.
+    h.matrixClient = {
+      connect: vi.fn(),
+      connectionState: 'connected',
+      userId: '@me:s',
+      activeRoomUuid: 'room-A',
+      roomAccessDenied: false,
+      error: null,
+    };
+    h.rooms = {
+      rooms: [
+        { uuid: 'room-A', state: 'active', room_name: 'A', room_alias: '#a:s' },
+        { uuid: 'room-B', state: 'active', room_name: 'B', room_alias: '#b:s' },
+      ],
+      totalUnread: 0,
+      isLoading: false,
+    };
+
+    const { rerender } = render(<MatrixChatPanel defaultRoomUuid="room-A" />);
+    h.matrixClient.connect.mockClear();
+
+    // User selected room-B → provider's active room is now room-B.
+    h.matrixClient.activeRoomUuid = 'room-B';
+    rerender(<MatrixChatPanel defaultRoomUuid="room-A" />);
+
+    expect(h.matrixClient.connect).not.toHaveBeenCalledWith('room-A');
+  });
+});
+
 describe('MatrixChatPanel — call stability across expand', () => {
   it('does not remount MatrixChatDrawer when the drawer toggles data-expanded', async () => {
     render(<MatrixChatPanel defaultRoomUuid="room-1" />);

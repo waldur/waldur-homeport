@@ -1,6 +1,7 @@
 import {
   ArrowsInSimpleIcon,
   ArrowsOutSimpleIcon,
+  CloudArrowUpIcon,
   PhoneIcon,
 } from '@phosphor-icons/react';
 import {
@@ -11,6 +12,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+import Dropzone from 'react-dropzone';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { Tip } from '@/core/Tooltip';
@@ -29,6 +31,7 @@ import { MatrixSyncStatus } from './MatrixSyncStatus';
 import { MatrixTypingIndicator } from './MatrixTypingIndicator';
 import { useAllMatrixRooms } from './useAllMatrixRooms';
 import { useMatrixClient } from './useMatrixClient';
+import { useMatrixFileUpload } from './useMatrixFileUpload';
 import { useMatrixRoom } from './useMatrixRoom';
 import { useMatrixRooms } from './useMatrixRooms';
 import { useRoomMemberNames } from './useRoomMemberNames';
@@ -58,6 +61,15 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
   const { rooms: allRooms } = useAllMatrixRooms();
   const memberNames = useRoomMemberNames(activeRoomUuid);
   const currentUser = useUser();
+  const {
+    uploadFile,
+    uploading,
+    pendingFiles,
+    addFiles,
+    removePending,
+    setPending,
+    clearPending,
+  } = useMatrixFileUpload();
 
   // The room member list may omit the current user; their Waldur full name is
   // authoritative, so add it so own messages never fall back to the (emoji-
@@ -127,126 +139,159 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     connectionState === 'error' && messages.length === 0 && !showCallView;
 
   return (
-    <div className="team-chat h-100 d-flex flex-column">
-      <MatrixChatHeader
-        roomUuid={activeRoomUuid}
-        roomName={
-          roomName ||
-          activeRooms.find((r) => r.uuid === activeRoomUuid)?.room_name ||
-          translate('Chat')
-        }
-        roomAlias={roomAlias}
-        projectUuid={projectUuid}
-        onBack={onBack}
-      />
+    <Dropzone
+      noClick
+      noKeyboard
+      disabled={connectionState !== 'connected'}
+      onDrop={(files) => addFiles(files)}
+    >
+      {({ getRootProps, getInputProps, isDragActive }) => (
+        <div
+          {...getRootProps({
+            className: 'team-chat h-100 d-flex flex-column position-relative',
+          })}
+        >
+          <input {...getInputProps()} />
+          {isDragActive && (
+            <div className="tc-dropzone-overlay">
+              <div className="tc-dropzone-card">
+                <CloudArrowUpIcon size={36} weight="bold" />
+                <span>{translate('Drop files to attach')}</span>
+              </div>
+            </div>
+          )}
+          <MatrixChatHeader
+            roomUuid={activeRoomUuid}
+            roomName={
+              roomName ||
+              activeRooms.find((r) => r.uuid === activeRoomUuid)?.room_name ||
+              translate('Chat')
+            }
+            roomAlias={roomAlias}
+            projectUuid={projectUuid}
+            onBack={onBack}
+          />
 
-      {messages.length > 0 && (
-        <MatrixSyncStatus state={connectionState} error={error} />
-      )}
+          {messages.length > 0 && (
+            <MatrixSyncStatus state={connectionState} error={error} />
+          )}
 
-      <CallInProgressBanner />
+          <CallInProgressBanner />
 
-      {showCrossRoomBanner && (
-        <div className="d-flex align-items-center gap-2 px-4 py-2 bg-light-success border-bottom">
-          <PhoneIcon size={16} className="text-success" weight="fill" />
-          <span className="text-sm flex-grow-1">
-            {translate('Call in progress in {room}', {
-              room: (callRoom as any)?.room_name ?? translate('another room'),
-            })}
-          </span>
-          <button
-            type="button"
-            className="btn btn-sm btn-success"
-            onClick={requestReturnToCall}
-          >
-            {translate('Return to call')}
-          </button>
-        </div>
-      )}
-
-      {activeRooms.length > 1 && !onBack && (
-        <MatrixRoomSelector
-          rooms={activeRooms}
-          activeRoomUuid={activeRoomUuid}
-          onSelect={handleRoomSelect}
-        />
-      )}
-
-      <div className="flex-grow-1 overflow-hidden d-flex flex-column">
-        {showConnectionError && (
-          <div className="flex-grow-1 d-flex align-items-center justify-content-center p-4">
-            <LoadingErred
-              loadData={() => connect(activeRoomUuid)}
-              message={
-                error || translate('Could not connect to the chat server.')
-              }
-            />
-          </div>
-        )}
-        {showCallView && (
-          <div
-            className="position-relative overflow-hidden"
-            style={{
-              display: 'flex',
-              flex: showChat ? '0 0 60%' : '1 1 auto',
-            }}
-          >
-            <MatrixCallDockSlot roomId={activeRoomId} />
-            {callLive && (
-              <div
-                className="position-absolute"
-                style={{ top: 8, right: 8, zIndex: 2 }}
+          {showCrossRoomBanner && (
+            <div className="d-flex align-items-center gap-2 px-4 py-2 bg-light-success border-bottom">
+              <PhoneIcon size={16} className="text-success" weight="fill" />
+              <span className="text-sm flex-grow-1">
+                {translate('Call in progress in {room}', {
+                  room:
+                    (callRoom as any)?.room_name ?? translate('another room'),
+                })}
+              </span>
+              <button
+                type="button"
+                className="btn btn-sm btn-success"
+                onClick={requestReturnToCall}
               >
-                <Tip
-                  id="matrix-call-chat-toggle"
-                  label={
-                    chatVisible
-                      ? translate('Hide chat')
-                      : translate('Show chat')
+                {translate('Return to call')}
+              </button>
+            </div>
+          )}
+
+          {activeRooms.length > 1 && !onBack && (
+            <MatrixRoomSelector
+              rooms={activeRooms}
+              activeRoomUuid={activeRoomUuid}
+              onSelect={handleRoomSelect}
+            />
+          )}
+
+          <div className="flex-grow-1 overflow-hidden d-flex flex-column">
+            {showConnectionError && (
+              <div className="flex-grow-1 d-flex align-items-center justify-content-center p-4">
+                <LoadingErred
+                  loadData={() => connect(activeRoomUuid)}
+                  message={
+                    error || translate('Could not connect to the chat server.')
                   }
-                  placement="left"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-icon btn-sm btn-light"
-                    onClick={() => setChatVisible((v) => !v)}
-                    aria-label={
-                      chatVisible
-                        ? translate('Hide chat')
-                        : translate('Show chat')
-                    }
+                />
+              </div>
+            )}
+            {showCallView && (
+              <div
+                className="position-relative overflow-hidden"
+                style={{
+                  display: 'flex',
+                  flex: showChat ? '0 0 60%' : '1 1 auto',
+                }}
+              >
+                <MatrixCallDockSlot roomId={activeRoomId} />
+                {callLive && (
+                  <div
+                    className="position-absolute"
+                    style={{ top: 8, right: 8, zIndex: 2 }}
                   >
-                    {chatVisible ? (
-                      <ArrowsOutSimpleIcon weight="bold" />
-                    ) : (
-                      <ArrowsInSimpleIcon weight="bold" />
-                    )}
-                  </button>
-                </Tip>
+                    <Tip
+                      id="matrix-call-chat-toggle"
+                      label={
+                        chatVisible
+                          ? translate('Hide chat')
+                          : translate('Show chat')
+                      }
+                      placement="left"
+                    >
+                      <button
+                        type="button"
+                        className="btn btn-icon btn-sm btn-light"
+                        onClick={() => setChatVisible((v) => !v)}
+                        aria-label={
+                          chatVisible
+                            ? translate('Hide chat')
+                            : translate('Show chat')
+                        }
+                      >
+                        {chatVisible ? (
+                          <ArrowsOutSimpleIcon weight="bold" />
+                        ) : (
+                          <ArrowsInSimpleIcon weight="bold" />
+                        )}
+                      </button>
+                    </Tip>
+                  </div>
+                )}
+              </div>
+            )}
+            {showChat && !showConnectionError && (
+              <div className="flex-grow-1 overflow-hidden d-flex flex-column">
+                <MatrixMessageList
+                  messages={messages}
+                  userId={userId}
+                  memberNames={resolvedMemberNames}
+                  loading={loading || connectionState === 'connecting'}
+                  loadingOlder={loadingOlder}
+                  hasOlderMessages={hasOlderMessages}
+                  onLoadOlder={loadOlderMessages}
+                  onReadLatest={markRoomRead}
+                />
               </div>
             )}
           </div>
-        )}
-        {showChat && !showConnectionError && (
-          <div className="flex-grow-1 overflow-hidden d-flex flex-column">
-            <MatrixMessageList
-              messages={messages}
-              userId={userId}
-              memberNames={resolvedMemberNames}
-              loading={loading || connectionState === 'connecting'}
-              loadingOlder={loadingOlder}
-              hasOlderMessages={hasOlderMessages}
-              onLoadOlder={loadOlderMessages}
-              onReadLatest={markRoomRead}
-            />
-          </div>
-        )}
-      </div>
 
-      {showChat && !showConnectionError && (
-        <MatrixTypingIndicator typingUsers={typingUsers} />
+          {showChat && !showConnectionError && (
+            <MatrixTypingIndicator typingUsers={typingUsers} />
+          )}
+          {showChat && !showConnectionError && (
+            <MatrixMessageInput
+              uploadFile={uploadFile}
+              uploading={uploading}
+              pendingFiles={pendingFiles}
+              addFiles={addFiles}
+              removePending={removePending}
+              setPending={setPending}
+              clearPending={clearPending}
+            />
+          )}
+        </div>
       )}
-      {showChat && !showConnectionError && <MatrixMessageInput />}
-    </div>
+    </Dropzone>
   );
 };

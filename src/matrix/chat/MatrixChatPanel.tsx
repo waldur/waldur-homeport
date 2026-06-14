@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { useMediaQuery } from 'react-responsive';
@@ -73,8 +74,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   forceDock,
   hideRoomList,
 }) => {
-  const { connect, connectionState, activeRoomUuid, roomAccessDenied } =
-    useMatrixClient();
+  const { connect, connectionState, roomAccessDenied } = useMatrixClient();
   const { rooms, totalUnread, isLoading } = useAllMatrixRooms();
 
   // The conversation-list sidebar shows only in the expanded ("full screen")
@@ -113,10 +113,19 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     [rooms],
   );
 
+  // Apply a deep-linked room only once per value, not whenever the client's
+  // active room drifts. Comparing against the live active room (instead of the
+  // last-applied deep-link) re-fired this on every manual room switch, yanking
+  // the user back to the deep-linked room — e.g. catapulting them into an
+  // active call's room the moment they picked another conversation.
+  const appliedDefaultRoomRef = useRef<string | null>(null);
   useEffect(() => {
     if (connectionState === 'idle') {
       const roomUuid = defaultRoomUuid || activeRooms[0]?.uuid;
-      if (roomUuid) connect(roomUuid);
+      if (roomUuid) {
+        if (defaultRoomUuid) appliedDefaultRoomRef.current = defaultRoomUuid;
+        connect(roomUuid);
+      }
       return;
     }
     // Only switch rooms on a live client. Firing on any non-idle state means a
@@ -126,11 +135,12 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
     if (
       connectionState === 'connected' &&
       defaultRoomUuid &&
-      defaultRoomUuid !== activeRoomUuid
+      defaultRoomUuid !== appliedDefaultRoomRef.current
     ) {
+      appliedDefaultRoomRef.current = defaultRoomUuid;
       connect(defaultRoomUuid);
     }
-  }, [connectionState, defaultRoomUuid, activeRoomUuid, activeRooms, connect]);
+  }, [connectionState, defaultRoomUuid, activeRooms, connect]);
 
   // Propagate total unread to parent
   useEffect(() => {

@@ -2,8 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { MatrixRoom, matrixRoomsList } from 'waldur-js-client';
 
 import { queryClient } from '@/core/queryClient';
-import { isFeatureVisible } from '@/features/connect';
-import { ProjectFeatures } from '@/FeaturesEnums';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 
 export const projectMatrixRoomsKey = (projectUuid?: string) =>
   ['projectMatrixRooms', projectUuid] as const;
@@ -19,8 +18,7 @@ export function useProjectMatrixRooms(projectUuid?: string) {
   return useQuery({
     queryKey: projectMatrixRoomsKey(projectUuid),
     queryFn: () => fetchProjectMatrixRooms(projectUuid!),
-    enabled:
-      !!projectUuid && isFeatureVisible(ProjectFeatures.show_matrix_chat),
+    enabled: !!projectUuid && isMatrixChatEnabled(),
   });
 }
 

@@ -7,10 +7,9 @@ import { isLLMChatAllowedForUser, getLLMChatMode } from '@/ai-assistant/utils';
 import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { useDrawer } from '@/drawer/actions';
 import { isDrawerOpen } from '@/drawer/utils';
-import { isFeatureVisible } from '@/features/connect';
-import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useMatrixTotalUnread } from '@/matrix/chat/useMatrixTotalUnread';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useUser } from '@/workspace/hooks';
 
@@ -34,7 +33,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
   }, [user?.uuid, closeDrawer]);
 
   const showAI = isLLMChatAllowedForUser(user, getLLMChatMode());
-  const showMatrix = isFeatureVisible(ProjectFeatures.show_matrix_chat);
+  const showMatrix = isMatrixChatEnabled();
 
   if (!showAI && !showMatrix) {
     return null;

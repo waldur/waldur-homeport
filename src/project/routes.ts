@@ -11,6 +11,7 @@ import {
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { hasActiveProjectMatrixRoomInCache } from '@/matrix/chat/useProjectMatrixRooms';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { getProject, isStaffOrSupport } from '@/workspace/selectors';
 
 import { loadProject } from './resolve';
@@ -159,7 +160,7 @@ export const states: StateDeclaration[] = [
       priority: 125,
       permissions: [
         (state) =>
-          isFeatureVisible(ProjectFeatures.show_matrix_chat) &&
+          isMatrixChatEnabled() &&
           hasActiveProjectMatrixRoomInCache(getProject(state)?.uuid),
       ],
     },

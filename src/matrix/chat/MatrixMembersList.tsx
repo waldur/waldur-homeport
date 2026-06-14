@@ -1,7 +1,9 @@
 import { FC } from 'react';
 
+import Avatar from '@/core/Avatar';
 import { translate } from '@/i18n';
 
+import { getChatAvatarColor } from './chatColors';
 import { useRoomMembers } from './useRoomMembers';
 
 function getRoleBadge(powerLevel: number) {
@@ -30,18 +32,19 @@ export const MatrixMembersList: FC = () => {
         {members.map((m) => {
           const roleBadge = getRoleBadge(m.powerLevel);
           const membershipBadge = getMembershipBadge(m.membership);
+          const color = getChatAvatarColor(m.userId);
           return (
             <div
               key={m.userId}
               className={`d-flex align-items-center gap-2 py-1 ${m.membership === 'invite' ? 'opacity-50' : ''}`}
               style={{ fontSize: '0.85rem' }}
             >
-              <div
-                className="rounded-circle bg-gray-300 d-flex align-items-center justify-content-center flex-shrink-0"
-                style={{ width: 28, height: 28, fontSize: '0.75rem' }}
-              >
-                {m.name.charAt(0).toUpperCase()}
-              </div>
+              <Avatar
+                name={m.name}
+                size={24}
+                className="flex-shrink-0"
+                labelClassName={`bg-light-${color} text-${color}`}
+              />
               <span className="text-truncate flex-grow-1">{m.name}</span>
               {roleBadge && (
                 <span

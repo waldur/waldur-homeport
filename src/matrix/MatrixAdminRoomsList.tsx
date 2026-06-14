@@ -33,6 +33,7 @@ import {
 } from './MatrixRoomActions';
 import { MatrixRoomExpandableRow } from './MatrixRoomExpandableRow';
 import { MatrixRoomStateBadge } from './MatrixRoomStateBadge';
+import { isMatrixEnabled } from './utils';
 
 const STAFF_ACTIONS = [
   OpenInTeamChatButton,
@@ -57,11 +58,18 @@ const RowActions: FC<{ row: MatrixRoom; fetch(): void }> = ({ row, fetch }) => {
   const staff = useSelector(isStaffSelector);
   const staffOrSupport = useSelector(isStaffOrSupportSelector);
   if (!staffOrSupport) return null;
+  // Every row action drives a live Matrix backend (open chat, sync, export,
+  // retry, (re)activate, disable), so they all fail while Matrix is off.
+  const matrixEnabled = isMatrixEnabled();
   return (
     <ActionsDropdown
       row={row}
       refetch={fetch}
       actions={staff ? STAFF_ACTIONS : SUPPORT_ACTIONS}
+      disabled={!matrixEnabled}
+      tooltip={translate(
+        'Enable Matrix chat in the Settings tab to manage rooms.',
+      )}
     />
   );
 };
@@ -81,6 +89,10 @@ const CreateRoomAction: FC<{ refetch(): void }> = ({ refetch }) => {
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
       action={handleClick}
+      disabled={!isMatrixEnabled()}
+      disabledReason={translate(
+        'Enable Matrix chat in the Settings tab before creating rooms.',
+      )}
     />
   );
 };

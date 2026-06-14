@@ -18,6 +18,7 @@ import {
 } from '@/ai-assistant/utils';
 import { useChatDrawerPreference } from '@/chat/chatDrawerPreferences';
 import { IconButton, MediumIconButton } from '@/core/buttons/IconButton';
+import { getFullscreenElement } from '@/core/fullscreen';
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { useLayout } from '@/metronic/layout/core';
@@ -107,17 +108,63 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   useEffect(() => {
     if (!expanded) return;
 
+    // Entering/exiting the in-call browser fullscreen fires a window resize.
+    // That's a transient viewport change, not a layout resize, so it must not
+    // collapse the expanded drawer — otherwise leaving a call's fullscreen
+    // strands the user in the narrow panel instead of the expanded view.
+    let fsTransition: ReturnType<typeof setTimeout> | null = null;
+    const markFsTransition = () => {
+      if (fsTransition) clearTimeout(fsTransition);
+      fsTransition = setTimeout(() => {
+        fsTransition = null;
+      }, 600);
+    };
+
     const collapse = () => {
+      if (fsTransition || getFullscreenElement()) return;
       setExpanded(false);
       setDrawerWidth(DRAWER_WIDTH_DEFAULT);
       const drawer = document.getElementById('kt_drawer');
       if (drawer) drawer.dataset.expanded = 'false';
     };
 
+    document.addEventListener('fullscreenchange', markFsTransition);
+    document.addEventListener('webkitfullscreenchange', markFsTransition);
     window.addEventListener('resize', collapse);
     return () => {
+      if (fsTransition) clearTimeout(fsTransition);
+      document.removeEventListener('fullscreenchange', markFsTransition);
+      document.removeEventListener('webkitfullscreenchange', markFsTransition);
       window.removeEventListener('resize', collapse);
     };
+  }, [expanded]);
+
+  // Metronic's DrawerComponent re-applies its default breakpoint width to
+  // #kt_drawer on every update — window resize, drawerProps change, drawer
+  // re-init — clobbering the imperative expanded width. While expanded that
+  // silently shrinks the drawer back to the panel width even though
+  // `data-expanded` stays true, so the expanded two-pane layout renders
+  // cramped into the narrow drawer. Re-assert the expanded width whenever
+  // Metronic resets it to a fixed (non-calc) value; the calc() guard makes the
+  // observer's own write a no-op so it can't loop, and the data-expanded gate
+  // yields to a deliberate collapse.
+  useEffect(() => {
+    if (!expanded) return;
+    const drawer = document.getElementById('kt_drawer');
+    if (!drawer || typeof MutationObserver === 'undefined') return;
+    const enforce = () => {
+      if (drawer.dataset.expanded !== 'true') return;
+      if (!drawer.style.width.startsWith('calc')) {
+        setDrawerWidth(getExpandedWidth());
+      }
+    };
+    enforce();
+    const observer = new MutationObserver(enforce);
+    observer.observe(drawer, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
+    return () => observer.disconnect();
   }, [expanded]);
 
   // Close history sidebar when resizing from tablet to desktop

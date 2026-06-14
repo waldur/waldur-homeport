@@ -2,13 +2,12 @@ import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { isFeatureVisible } from '@/features/connect';
-import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import {
   hasActiveMatrixRoom,
   useProjectMatrixRooms,
 } from '@/matrix/chat/useProjectMatrixRooms';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { PermissionEnum } from '@/permissions/enums';
@@ -108,7 +107,7 @@ export const ProjectManageContainer = () => {
           component: ProjectEndDateChangeRequests,
           title: translate('End date change requests'),
         },
-        isFeatureVisible(ProjectFeatures.show_matrix_chat) &&
+        isMatrixChatEnabled() &&
           (user.is_staff || hasActiveRoom) && {
             key: 'chat',
             component: ProjectMatrixChat,

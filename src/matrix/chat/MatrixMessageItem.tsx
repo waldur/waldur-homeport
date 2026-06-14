@@ -341,6 +341,7 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
 
   return (
     <div
+      data-event-id={message.eventId}
       className={classNames('tc-msg', {
         mine: isOwn,
         continuation,
@@ -355,7 +356,15 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
             <span className="tc-msg-when">{formatTime(message.timestamp)}</span>
           </div>
         )}
-        <div className="tc-bubble">
+        <div
+          className={classNames('tc-bubble', {
+            // Image/video render flush — the padded, tinted bubble around a
+            // picture reads as a thick frame.
+            'tc-bubble--media':
+              !!message.url &&
+              ['m.image', 'm.sticker', 'm.video'].includes(message.type),
+          })}
+        >
           <MediaContent
             message={message}
             memberNames={memberNames}

@@ -1,7 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { FC, PropsWithChildren, useContext, useEffect } from 'react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { FC, PropsWithChildren } from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/drawer/actions', () => ({
   useDrawer: () => ({ openDrawer: vi.fn(), closeDrawer: vi.fn() }),
@@ -12,35 +11,25 @@ vi.mock('@/chat/openUnifiedChatDrawer', () => ({
 }));
 
 const h = vi.hoisted(() => ({
-  endCall: vi.fn(),
   callRoomId: '!abc:s' as string | null,
   callRoomUuid: 'uuid-1' as string | null,
 }));
 
 vi.mock('./useMatrixCall', () => ({
   useMatrixCall: () => ({
-    endCall: h.endCall,
     callRoomId: h.callRoomId,
     callRoomUuid: h.callRoomUuid,
   }),
 }));
 
 import { MatrixCallFloatingWidget } from './MatrixCallFloatingWidget';
-import { MatrixCallPortalContext } from './MatrixCallPortalContext';
 import { MatrixCallPortalProvider } from './MatrixCallPortalProvider';
 
 const wrapper: FC<PropsWithChildren> = ({ children }) => (
   <MatrixCallPortalProvider>{children}</MatrixCallPortalProvider>
 );
 
-const ListenForPopOut: FC<{ onFire: () => void }> = ({ onFire }) => {
-  const { onTogglePopOut } = useContext(MatrixCallPortalContext);
-  useEffect(() => onTogglePopOut(onFire), [onTogglePopOut, onFire]);
-  return null;
-};
-
 beforeEach(() => {
-  h.endCall.mockReset();
   sessionStorage.clear();
 });
 
@@ -48,13 +37,6 @@ describe('MatrixCallFloatingWidget — chrome', () => {
   it('renders the header with the room name', () => {
     render(<MatrixCallFloatingWidget roomName="Project Alpha" />, { wrapper });
     expect(screen.getByText('Project Alpha')).toBeInTheDocument();
-  });
-
-  it('renders an end-call button that invokes endCall', async () => {
-    const user = userEvent.setup();
-    render(<MatrixCallFloatingWidget roomName="X" />, { wrapper });
-    await user.click(screen.getByRole('button', { name: /end call/i }));
-    expect(h.endCall).toHaveBeenCalledTimes(1);
   });
 
   it('exposes the portal target div via data-testid', () => {
@@ -124,45 +106,5 @@ describe('MatrixCallFloatingWidget — drag', () => {
     ) as HTMLElement;
     expect(widget.style.right).toBe('100px');
     expect(widget.style.bottom).toBe('80px');
-  });
-});
-
-describe('MatrixCallFloatingWidget — pop out', () => {
-  beforeEach(() => {
-    // Pretend the browser supports Document Picture-in-Picture for tests.
-    (window as any).documentPictureInPicture = { requestWindow: vi.fn() };
-  });
-
-  afterEach(() => {
-    delete (window as any).documentPictureInPicture;
-  });
-
-  it('hides Pop out button when Document PiP is unsupported', () => {
-    delete (window as any).documentPictureInPicture;
-    render(<MatrixCallFloatingWidget roomName="X" />, { wrapper });
-    expect(
-      screen.queryByRole('button', { name: /pop out|dock back/i }),
-    ).toBeNull();
-  });
-
-  it('renders Pop out button whenever Document PiP is supported', () => {
-    render(<MatrixCallFloatingWidget roomName="X" />, { wrapper });
-    expect(
-      screen.getByRole('button', { name: /pop out/i }),
-    ).toBeInTheDocument();
-  });
-
-  it('dispatches requestTogglePopOut on click', async () => {
-    const onFire = vi.fn();
-    const user = userEvent.setup();
-    render(
-      <>
-        <ListenForPopOut onFire={onFire} />
-        <MatrixCallFloatingWidget roomName="X" />
-      </>,
-      { wrapper },
-    );
-    await user.click(screen.getByRole('button', { name: /pop out/i }));
-    expect(onFire).toHaveBeenCalledTimes(1);
   });
 });

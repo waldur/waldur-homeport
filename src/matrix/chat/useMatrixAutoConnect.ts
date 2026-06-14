@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 import { matrixRoomsList } from 'waldur-js-client';
 
 import { getChatDrawerPreference } from '@/chat/chatDrawerPreferences';
-import { isFeatureVisible } from '@/features/connect';
-import { ProjectFeatures } from '@/FeaturesEnums';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
 import { useMatrixClient } from './useMatrixClient';
@@ -22,7 +21,7 @@ import { useMatrixClient } from './useMatrixClient';
 export function useMatrixAutoConnect(): void {
   const { connect, connectionState } = useMatrixClient();
   const user = useUser();
-  const enabled = isFeatureVisible(ProjectFeatures.show_matrix_chat);
+  const enabled = isMatrixChatEnabled();
 
   const { data: rooms } = useQuery({
     // Same key as useAllMatrixRooms — the fetch is shared, not duplicated.
