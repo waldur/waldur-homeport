@@ -155,6 +155,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Service profile'),
+      skipBreadcrumb: true,
     },
   },
 
