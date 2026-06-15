@@ -61,6 +61,8 @@ export interface TableOptionsType<RowType = any> {
   exportRow?: (row: RowType, props: any) => string[];
   filter?;
   mandatoryFields?: string[];
+  initialFilters?: Record<string, any>;
+  syncFiltersToURL?: boolean;
 }
 
 export interface Column<RowType = any> {
@@ -102,10 +104,10 @@ export interface Pagination {
 }
 
 export interface FilterItem {
-  label: string;
+  label: string | null;
   name: string;
   value: any;
-  component: () => JSX.Element;
+  component?: () => JSX.Element;
 }
 
 export interface TableState {

@@ -5,7 +5,6 @@ import {
   XIcon,
 } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -22,6 +21,7 @@ import {
   selectUserGroupInvitationsFilter,
 } from '@/table/generated/UserGroupInvitationsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { RoleField } from '@/user/affiliations/RoleField';
 import { exportRoleField } from '@/user/affiliations/RolePopover';
@@ -29,24 +29,22 @@ import { useCustomer } from '@/workspace/hooks';
 
 import { useTeamTableTabs } from '../customer/team/tabs';
 
-const GroupInvitationsListTable: FunctionComponent<{}> = () => {
+export const GroupInvitationsList: FunctionComponent = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues('group-invitations');
   const filterValues = useMemo(
     () => selectUserGroupInvitationsFilter(values),
     [values],
   );
 
   const filter = useMemo(
-    () => ({
-      ...filterValues,
-      customer_uuid: customer?.uuid,
-    }),
+    () => ({ ...filterValues, customer_uuid: customer?.uuid }),
     [filterValues, customer],
   );
 
   const props = useTable({
     table: 'group-invitations',
+    syncFiltersToURL: true,
     fetchData: createFetcher(userGroupInvitationsList),
     filter,
   });
@@ -144,13 +142,3 @@ const GroupInvitationsListTable: FunctionComponent<{}> = () => {
     />
   );
 };
-
-export const GroupInvitationsList: FunctionComponent<{}> = () => (
-  <Form
-    id={UserGroupInvitationsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <GroupInvitationsListTable />}
-  </Form>
-);

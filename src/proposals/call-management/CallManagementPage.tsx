@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   proposalProtectedCallsList,
   ProposalProtectedCallsListData,
@@ -24,6 +23,7 @@ import {
   selectProposalPublicCallsFilter,
 } from '@/table/generated/ProposalPublicCallsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -33,10 +33,10 @@ import { CallCreateButton } from './CallCreateButton';
 import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
 
-const CallManagementPageTable: FunctionComponent = () => {
+export const CallManagementPage: FunctionComponent = () => {
   const { params } = useCurrentStateAndParams();
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues('CallManagementList');
   const filterValues = useMemo(
     () => selectProposalPublicCallsFilter(values),
     [values],
@@ -69,6 +69,7 @@ const CallManagementPageTable: FunctionComponent = () => {
 
   const tableProps = useTable({
     table: 'CallManagementList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalProtectedCallsList),
     queryField: 'name',
     filter,
@@ -124,13 +125,3 @@ const CallManagementPageTable: FunctionComponent = () => {
     />
   );
 };
-
-export const CallManagementPage: FunctionComponent = () => (
-  <Form
-    id={ProposalPublicCallsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <CallManagementPageTable />}
-  </Form>
-);

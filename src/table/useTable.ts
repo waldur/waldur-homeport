@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { getTitle } from '@/navigation/title';
@@ -68,6 +69,52 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     filtersStorage = [],
     applyFilters = false,
   } = tableState || {};
+
+  // Seed filtersStorage from initialFilters on first mount
+  useEffect(() => {
+    const initialFilters = options.syncFiltersToURL
+      ? getInitialValues(options.initialFilters)
+      : options.initialFilters;
+
+    if (initialFilters) {
+      Object.entries(initialFilters).forEach(([name, value]) => {
+        if (value != null) {
+          dispatch(
+            actions.setFilter(table, {
+              name,
+              value,
+              label: null,
+              component: null,
+            }),
+          );
+        }
+      });
+    }
+  }, [table, dispatch]);
+
+  const filterKeysRef = useRef<Set<string>>(
+    new Set(options.initialFilters ? Object.keys(options.initialFilters) : []),
+  );
+
+  useEffect(() => {
+    if (filtersStorage) {
+      filtersStorage.forEach((f) => filterKeysRef.current.add(f.name));
+    }
+  }, [filtersStorage]);
+
+  // Automatic URL sync (opt-in)
+  useEffect(() => {
+    if (options.syncFiltersToURL && filtersStorage) {
+      const values = {} as Record<string, any>;
+      filterKeysRef.current.forEach((key) => {
+        values[key] = null;
+      });
+      filtersStorage.forEach((f) => {
+        values[f.name] = f.value;
+      });
+      syncFiltersToURL(values);
+    }
+  }, [filtersStorage, options.syncFiltersToURL]);
 
   const filter = options.filter;
 

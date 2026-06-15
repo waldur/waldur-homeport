@@ -1,13 +1,12 @@
-import { FunctionComponent, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { FunctionComponent, useMemo } from 'react';
 import { MarketplaceOrdersListData } from 'waldur-js-client';
 
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import {
   MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID,
   TABLE_MARKETPLACE_ORDERS,
 } from '@/marketplace/orders/list/constants';
 import { useMarketplacePublicTabs } from '@/marketplace/utils';
+import { useFilterValues } from '@/table/useFilterValues';
 
 import { OrdersBulkActions } from '../actions/OrdersBulkActions';
 
@@ -18,17 +17,10 @@ interface MarketplaceOrdersListProps {
   provider_uuid?: string;
 }
 
-const MarketplaceOrdersListTable: FunctionComponent<
+export const MarketplaceOrdersList: FunctionComponent<
   MarketplaceOrdersListProps
 > = () => {
-  const { values } = useFormState();
-  const filterValues: any = values;
-
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
+  const filterValues = useFilterValues(TABLE_MARKETPLACE_ORDERS);
 
   const filter = useMemo(() => {
     const filterObj: MarketplaceOrdersListData['query'] = {};
@@ -71,20 +63,5 @@ const MarketplaceOrdersListTable: FunctionComponent<
       enableMultiSelect
       multiSelectActions={OrdersBulkActions}
     />
-  );
-};
-
-export const MarketplaceOrdersList: FunctionComponent<
-  MarketplaceOrdersListProps
-> = (props) => {
-  const initialValues = useMemo(() => getInitialValues(), []);
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <MarketplaceOrdersListTable {...props} />}
-    </Form>
   );
 };

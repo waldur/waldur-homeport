@@ -1,9 +1,7 @@
-import { FunctionComponent, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { FunctionComponent, useMemo } from 'react';
 import { marketplaceResourcesList, NestedColumn } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -14,6 +12,7 @@ import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
 import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -41,20 +40,18 @@ interface OwnProps {
   standalone;
 }
 
-const CategoryResourcesListTable: FunctionComponent<OwnProps> = (ownProps) => {
+export const CategoryResourcesList: FunctionComponent<OwnProps> = ({
+  ...ownProps
+}) => {
   useTitle(
     translate('{category} resources', { category: ownProps.category_title }),
     '',
     'browser',
   );
-  const { values } = useFormState();
+  const values = useFilterValues(
+    `${CATEGORY_RESOURCES_TABLE_ID}-${ownProps.category_uuid}`,
+  );
   const filterValues: any = values;
-
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
 
   const filter = useMemo(() => {
     const filterObj: Record<string, any> = {};
@@ -112,6 +109,7 @@ const CategoryResourcesListTable: FunctionComponent<OwnProps> = (ownProps) => {
 
   const props = useTable({
     table: `${CATEGORY_RESOURCES_TABLE_ID}-${ownProps.category_uuid}`,
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourcesList),
     filter,
     queryField: 'query',
@@ -294,20 +292,5 @@ const CategoryResourcesListTable: FunctionComponent<OwnProps> = (ownProps) => {
       }
       hasOptionalColumns
     />
-  );
-};
-
-export const CategoryResourcesList: FunctionComponent<OwnProps> = (
-  ownProps,
-) => {
-  const initialValues = useMemo(() => getInitialValues(), []);
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <CategoryResourcesListTable {...ownProps} />}
-    </Form>
   );
 };

@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-final-form';
 import {
   RancherCluster,
   RancherHpa,
@@ -41,10 +40,10 @@ const RowActions = ({ row, yamlRetrieve, yamlUpdate }) => (
   </ActionsDropdownComponent>
 );
 
-const ClusterHPAListTable: FunctionComponent<
+export const ClusterHPAList: FunctionComponent<
   TableWithPortal<{ resourceScope: RancherCluster }>
 > = ({ resourceScope, portal }) => {
-  const { filter } = useClusterFilter(resourceScope);
+  const { filter } = useClusterFilter(resourceScope, RANCHER_HPAS_TABLE_ID);
   const props = useTable({
     table: RANCHER_HPAS_TABLE_ID,
     fetchData: createFetcher(rancherHpasList),
@@ -118,15 +117,3 @@ const ClusterHPAListTable: FunctionComponent<
     />
   );
 };
-
-export const ClusterHPAList: FunctionComponent<
-  TableWithPortal<{ resourceScope: RancherCluster }>
-> = (props) => (
-  <Form
-    id={RancherClusterFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <ClusterHPAListTable {...props} />}
-  </Form>
-);

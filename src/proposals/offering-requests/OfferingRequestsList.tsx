@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   proposalRequestedOfferingsList,
   ProtectedRound,
@@ -16,6 +15,7 @@ import {
   ProposalRequestedOfferingsFilterFormId,
 } from '@/table/generated/ProposalRequestedOfferingsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -28,9 +28,9 @@ interface OfferingRequestsListProps {
   round: ProtectedRound;
 }
 
-const OfferingRequestsListTable: FC<OfferingRequestsListProps> = () => {
+export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues('ProposalRequestedOfferingsList');
 
   const formFilters = useMemo(
     () => selectProposalRequestedOfferingsFilter(values),
@@ -38,16 +38,13 @@ const OfferingRequestsListTable: FC<OfferingRequestsListProps> = () => {
   );
 
   const filter = useMemo(
-    () => ({
-      provider_uuid: customer?.uuid,
-      o: ['-created'],
-      ...formFilters,
-    }),
+    () => ({ provider_uuid: customer?.uuid, o: ['-created'], ...formFilters }),
     [customer?.uuid, formFilters],
   );
 
   const tableProps = useTable({
     table: 'ProposalRequestedOfferingsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalRequestedOfferingsList),
     queryField: 'call_name',
     filter,
@@ -106,15 +103,3 @@ const OfferingRequestsListTable: FC<OfferingRequestsListProps> = () => {
     />
   );
 };
-
-export const OfferingRequestsList: FC<any> = (props) => (
-  <Form
-    id={ProposalRequestedOfferingsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <OfferingRequestsListTable {...props} />}
-  </Form>
-);

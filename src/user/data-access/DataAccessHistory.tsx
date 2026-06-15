@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { usersDataAccessHistoryList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -13,6 +12,7 @@ import {
   UserDataAccessHistoryFilterFormId,
 } from '@/table/generated/UserDataAccessHistoryFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -28,11 +28,11 @@ interface DataAccessHistoryProps {
   isViewerStaffOrSupport: boolean;
 }
 
-const DataAccessHistoryTable: FC<DataAccessHistoryProps> = ({
+export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
   userUuid,
   isViewerStaffOrSupport,
 }) => {
-  const { values } = useFormState();
+  const values = useFilterValues(`dataAccessHistory-${userUuid}`);
 
   const filter = useMemo(
     () => selectUserDataAccessHistoryFilter(values),
@@ -47,6 +47,7 @@ const DataAccessHistoryTable: FC<DataAccessHistoryProps> = ({
 
   const tableProps = useTable({
     table: `dataAccessHistory-${userUuid}`,
+    syncFiltersToURL: true,
     fetchData,
     filter,
   });
@@ -144,15 +145,3 @@ const DataAccessHistoryTable: FC<DataAccessHistoryProps> = ({
     />
   );
 };
-
-export const DataAccessHistory: FC<any> = (props) => (
-  <Form
-    id={UserDataAccessHistoryFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <DataAccessHistoryTable {...props} />}
-  </Form>
-);

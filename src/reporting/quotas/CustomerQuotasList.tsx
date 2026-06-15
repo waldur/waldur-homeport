@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { customerQuotasList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -10,6 +9,7 @@ import {
   CustomerQuotasFilterFormId,
 } from '@/table/generated/CustomerQuotasFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
@@ -18,11 +18,12 @@ import { getQuotas } from './constants';
 import { QuotasAnalytics } from './QuotasAnalytics';
 import { CustomerQuota } from './types';
 
-const CustomerQuotasListTable = () => {
-  const { values } = useFormState();
+export const CustomerQuotasList = () => {
+  const values = useFilterValues('CustomerQuotasList');
   const filter = useMemo(() => selectCustomerQuotasFilter(values), [values]);
   const tableProps = useTable({
     table: 'CustomerQuotasList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(customerQuotasList),
     filter,
   });
@@ -72,15 +73,3 @@ const CustomerQuotasListTable = () => {
     </>
   );
 };
-
-export const CustomerQuotasList = (props) => (
-  <Form
-    id={CustomerQuotasFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <CustomerQuotasListTable {...props} />}
-  </Form>
-);

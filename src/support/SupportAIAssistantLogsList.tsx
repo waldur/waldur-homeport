@@ -1,6 +1,5 @@
 import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   chatThreadsList,
   InjectionSeverityEnum,
@@ -21,6 +20,7 @@ import {
 } from '@/table/generated/ChatThreadsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -49,8 +49,8 @@ export const getSeverityBadgeVariant = (
   }
 };
 
-const SupportAIAssistantLogsListTable: FunctionComponent = () => {
-  const { values } = useFormState();
+export const SupportAIAssistantLogsList: FunctionComponent = () => {
+  const values = useFilterValues('SupportAIAssistantLogsList');
 
   const filter = useMemo(
     () => selectSupportAIAssistantLogsFilter(values),
@@ -61,6 +61,7 @@ const SupportAIAssistantLogsListTable: FunctionComponent = () => {
 
   const tableProps = useTable({
     table: 'SupportAIAssistantLogsList',
+    syncFiltersToURL: true,
     fetchData: fetcher,
     filter,
     queryField: 'query',
@@ -216,15 +217,3 @@ const SupportAIAssistantLogsListTable: FunctionComponent = () => {
     />
   );
 };
-
-export const SupportAIAssistantLogsList = (props) => (
-  <Form
-    id={ChatThreadsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <SupportAIAssistantLogsListTable {...props} />}
-  </Form>
-);

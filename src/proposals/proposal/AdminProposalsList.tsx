@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   proposalProposalsList,
   ProposalProposalsListData,
@@ -18,6 +17,7 @@ import {
   ProposalProposalsFilterFormId,
 } from '@/table/generated/ProposalProposalsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -27,8 +27,8 @@ import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow'
 import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
 
-const AdminProposalsListTable: FC<any> = (props) => {
-  const { values } = useFormState();
+export const AdminProposalsList: FC<any> = ({ ...props }) => {
+  const values = useFilterValues('AdminProposalsList');
   const filterValues = useMemo(
     () => selectProposalProposalsFilter(values),
     [values],
@@ -48,6 +48,7 @@ const AdminProposalsListTable: FC<any> = (props) => {
 
   const tableProps = useTable({
     table: 'AdminProposalsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalProposalsList),
     queryField: 'name',
     filter,
@@ -99,10 +100,7 @@ const AdminProposalsListTable: FC<any> = (props) => {
             />
           ),
           filter: 'call',
-          inlineFilter: (row) => ({
-            name: row.call_name,
-            uuid: row.call_uuid,
-          }),
+          inlineFilter: (row) => ({ name: row.call_name, uuid: row.call_uuid }),
           keys: ['call_name'],
           id: 'call',
         },
@@ -155,13 +153,3 @@ const AdminProposalsListTable: FC<any> = (props) => {
     />
   );
 };
-
-export const AdminProposalsList: FC<any> = (props) => (
-  <Form
-    id={ProposalProposalsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <AdminProposalsListTable {...props} />}
-  </Form>
-);

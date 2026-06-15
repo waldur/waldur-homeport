@@ -1,11 +1,11 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { AcceptInvitationAction } from './AcceptInvitationAction';
@@ -41,9 +41,9 @@ const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
 
 const mandatoryFields = ['uuid', 'invitation_expires_at'];
 
-const MyInvitationsTable: FC = () => {
+export const MyInvitationsPage: FC = () => {
   const tabs = useMyReviewsTabs();
-  const { values } = useFormState();
+  const values = useFilterValues('MyInvitationsTable');
 
   const formFilters = useMemo(() => {
     const filters = values;
@@ -64,8 +64,12 @@ const MyInvitationsTable: FC = () => {
 
   const tableProps = useTable({
     table: 'MyInvitationsTable',
+    syncFiltersToURL: true,
     fetchData: createFetcher(callReviewerPoolsList),
     filter,
+    initialFilters: {
+      invitation_status: { value: 'pending', label: translate('Pending') },
+    },
     queryField: 'call_name',
     mandatoryFields,
   });
@@ -125,16 +129,3 @@ const MyInvitationsTable: FC = () => {
     </div>
   );
 };
-
-export const MyInvitationsPage: FC = () => (
-  <Form
-    id={MY_INVITATIONS_FILTER_FORM_ID}
-    onSubmit={() => {}}
-    initialValues={{
-      invitation_status: { value: 'pending', label: translate('Pending') },
-    }}
-    subscription={{ values: true }}
-  >
-    {() => <MyInvitationsTable />}
-  </Form>
-);

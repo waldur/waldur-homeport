@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -14,6 +13,7 @@ import {
   MarketplaceResourcesFilterFormId,
 } from '@/table/generated/MarketplaceResourcesFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { ArrowResourceImportButton } from './ArrowResourceImportButton';
@@ -23,10 +23,10 @@ interface ArrowResourcesListProps {
   settings?: { uuid: string } | null;
 }
 
-const ArrowResourcesListTable: FunctionComponent<
+export const ArrowResourcesList: FunctionComponent<
   ArrowResourcesListProps
 > = () => {
-  const { values } = useFormState();
+  const values = useFilterValues('ArrowResources');
 
   const filterValues = useMemo(
     () => selectMarketplaceResourcesFilter(values),
@@ -36,15 +36,13 @@ const ArrowResourcesListTable: FunctionComponent<
   const formValues = values;
 
   const filter = useMemo(
-    () => ({
-      state: NON_TERMINATED_STATES,
-      ...filterValues,
-    }),
+    () => ({ state: NON_TERMINATED_STATES, ...filterValues }),
     [filterValues],
   );
 
   const tableProps = useTable({
     table: 'ArrowResources',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourcesList),
     filter,
     queryField: 'query',
@@ -124,15 +122,3 @@ const ArrowResourcesListTable: FunctionComponent<
     />
   );
 };
-
-export const ArrowResourcesList = (props) => (
-  <Form
-    id={MarketplaceResourcesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <ArrowResourcesListTable {...props} />}
-  </Form>
-);

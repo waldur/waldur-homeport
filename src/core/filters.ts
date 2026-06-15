@@ -121,13 +121,10 @@ export const getInitialValues = (initialValues?) => {
   if (isEmpty(queryParams)) {
     return initialValues;
   }
-  let queryParamValues = {};
+  const queryParamValues = initialValues ? { ...initialValues } : {};
   for (const [key, value] of Object.entries(queryParams)) {
     if (key && (Array.isArray(value) ? value.length : value)) {
-      queryParamValues = {
-        ...queryParamValues,
-        [key]: value,
-      };
+      queryParamValues[key] = value;
     }
   }
   return queryParamValues;

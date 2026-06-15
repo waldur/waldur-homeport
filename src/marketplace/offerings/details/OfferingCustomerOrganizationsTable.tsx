@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceProviderOfferingsCustomersList,
   ProviderOfferingDetails as Offering,
@@ -13,6 +12,7 @@ import { EstimatedCostField } from '@/customer/list/EstimatedCostField';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -39,9 +39,9 @@ interface OfferingCustomerOrganizationsTableProps {
 }
 
 const OrganizationsTableBody: FunctionComponent<
-  OfferingCustomerOrganizationsTableProps
-> = ({ offering, tabs }) => {
-  const { values } = useFormState();
+  OfferingCustomerOrganizationsTableProps & { initialFilters?: any }
+> = ({ initialFilters, offering, tabs }) => {
+  const values = useFilterValues(`offering-organizations-${offering.uuid}`);
   const accounting_is_running = values?.accounting_is_running?.value;
 
   const organizationsFilter = useMemo(
@@ -53,6 +53,8 @@ const OrganizationsTableBody: FunctionComponent<
 
   const organizationsTableProps = useTable({
     table: `offering-organizations-${offering.uuid}`,
+    initialFilters,
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceProviderOfferingsCustomersList, {
       path: { uuid: offering.uuid },
     }),
@@ -109,15 +111,5 @@ export const OfferingCustomerOrganizationsTable: FunctionComponent<
     [],
   );
 
-  return (
-    <Form
-      onSubmit={() => {}}
-      initialValues={initialValues}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <OrganizationsTableBody {...props} />
-        </form>
-      )}
-    />
-  );
+  return <OrganizationsTableBody {...props} initialFilters={initialValues} />;
 };

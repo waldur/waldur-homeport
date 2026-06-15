@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { FC, useMemo } from 'react';
 import {
   marketplaceServiceProvidersOfferingsList,
   marketplaceServiceProvidersOfferingsTypesList,
@@ -8,13 +7,14 @@ import {
 } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
+import { getInitialValues } from '@/core/filters';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
 import { createFetcher } from '@/table/api';
 import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -33,7 +33,7 @@ import {
 } from './ProviderOfferingsFilter';
 import { ResourcesCountColumn } from './ResourcesCountColumn';
 
-interface ProviderOfferingsComponentProps {
+interface ProviderOfferingsListProps {
   provider: ServiceProvider;
 }
 
@@ -48,17 +48,15 @@ const mandatoryFields = [
   'offering_group_title', // SetOfferingGroupAction
 ];
 
-const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
+export const ProviderOfferingsList: FC<ProviderOfferingsListProps> = ({
   provider,
 }) => {
-  const { values } = useFormState();
-  const filterValues: any = values;
+  const initialFilters = useMemo(
+    () => getFiltersFromParams(getInitialValues()),
+    [],
+  );
 
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
+  const filterValues = useFilterValues('ProviderOfferingsList');
 
   const filter = useMemo(() => {
     const result: Record<string, any> = {};
@@ -77,19 +75,22 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
   const tableProps = useTable({
     table: 'ProviderOfferingsList',
     fetchData: createFetcher(marketplaceServiceProvidersOfferingsList, {
-      path: { service_provider_uuid: provider.uuid },
+      path: { service_provider_uuid: provider?.uuid },
     }),
     filter,
     queryField: 'name',
     mandatoryFields,
+    initialFilters,
+    syncFiltersToURL: true,
   });
 
   const { data: offeringTypeStrings } = useQuery({
-    queryKey: ['providerOfferingTypes', provider.uuid],
+    queryKey: ['providerOfferingTypes', provider?.uuid],
     queryFn: () =>
       marketplaceServiceProvidersOfferingsTypesList({
         path: { service_provider_uuid: provider.uuid },
       }).then((r) => r.data),
+    enabled: Boolean(provider?.uuid),
     staleTime: UI_STALE_TIME,
   });
 
@@ -98,6 +99,10 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
     const presentTypes = new Set(offeringTypeStrings);
     return getOfferingTypes().filter((t) => presentTypes.has(t.value));
   }, [offeringTypeStrings]);
+
+  if (!provider) {
+    return <CustomerResourcesListPlaceholder />;
+  }
 
   return (
     <Table
@@ -159,25 +164,5 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
       hasQuery={true}
       hasOptionalColumns
     />
-  );
-};
-
-export const ProviderOfferingsList = ({ provider }) => {
-  const initialValues = useMemo(
-    () => getFiltersFromParams(getInitialValues()),
-    [],
-  );
-
-  if (!provider) {
-    return <CustomerResourcesListPlaceholder />;
-  }
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <ProviderOfferingsComponent provider={provider} />}
-    </Form>
   );
 };

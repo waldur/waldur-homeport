@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   proposalPublicCallsList,
   ProposalPublicCallsListData,
@@ -20,6 +19,7 @@ import {
 } from '@/table/generated/ProposalPublicCallsFilter';
 import Table from '@/table/Table';
 import { TableTab } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -146,11 +146,11 @@ const CallColumns = [
   },
 ];
 
-const PublicCallsListTable: FunctionComponent<PublicCallsListProps> = (
-  props,
-) => {
+export const PublicCallsList: FunctionComponent<PublicCallsListProps> = ({
+  ...props
+}) => {
   const { params } = useCurrentStateAndParams();
-  const { values } = useFormState();
+  const values = useFilterValues('PublicCallsList');
   const callTabs = useCallTabs(props.offering_uuid, props.provider_uuid);
 
   const filters = useMemo(
@@ -173,6 +173,7 @@ const PublicCallsListTable: FunctionComponent<PublicCallsListProps> = (
   }, [filters, props.offering_uuid, props.provider_uuid, params.state]);
   const tableProps = useTable({
     table: 'PublicCallsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalPublicCallsList),
     filter,
     queryField: 'name',
@@ -201,15 +202,3 @@ const PublicCallsListTable: FunctionComponent<PublicCallsListProps> = (
     />
   );
 };
-
-export const PublicCallsList = (props) => (
-  <Form
-    id={ProposalPublicCallsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <PublicCallsListTable {...props} />}
-  </Form>
-);

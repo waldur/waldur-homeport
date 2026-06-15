@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 
 import {
@@ -7,13 +6,14 @@ import {
   MarketplaceProviderOfferingsFilterFormId,
   selectMarketplaceProviderOfferingsFilter,
 } from '@/table/generated/MarketplaceProviderOfferingsFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useCustomer } from '@/workspace/hooks';
 
 import { BaseOfferingsList } from './OfferingsList';
 
-const MyOfferingsListTable = () => {
+export const MyOfferingsList = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues('marketplace-my-offerings');
   const filterValues = useMemo(
     () => selectMarketplaceProviderOfferingsFilter(values),
     [values],
@@ -40,13 +40,3 @@ const MyOfferingsListTable = () => {
     />
   );
 };
-
-export const MyOfferingsList = () => (
-  <Form
-    id={MarketplaceProviderOfferingsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <MyOfferingsListTable />}
-  </Form>
-);

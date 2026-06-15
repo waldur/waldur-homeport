@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { dataAccessLogsList, GlobalUserDataAccessLog } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -13,6 +12,7 @@ import {
   DataAccessLogsFilterFormId,
 } from '@/table/generated/DataAccessLogsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import {
@@ -24,23 +24,19 @@ import { DataAccessLogsBulkDeleteAction } from './DataAccessLogsBulkDeleteAction
 import { DataAccessLogsRowActions } from './DataAccessLogsRowActions';
 import { SupportDataAccessLogsExpandableRow } from './SupportDataAccessLogsExpandableRow';
 
-const SupportDataAccessLogsListTable = () => {
-  const { values } = useFormState();
+export const SupportDataAccessLogsList = () => {
+  const values = useFilterValues('SupportDataAccessLogsList');
 
   const filterValues = useMemo(
     () => selectSupportDataAccessLogsFilter(values),
     [values],
   );
 
-  const filter = useMemo(
-    () => ({
-      ...filterValues,
-    }),
-    [filterValues],
-  );
+  const filter = useMemo(() => ({ ...filterValues }), [filterValues]);
 
   const tableProps = useTable({
     table: 'SupportDataAccessLogsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(dataAccessLogsList),
     filter,
     queryField: 'query',
@@ -130,15 +126,3 @@ const SupportDataAccessLogsListTable = () => {
     />
   );
 };
-
-export const SupportDataAccessLogsList = (props) => (
-  <Form
-    id={DataAccessLogsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <SupportDataAccessLogsListTable {...props} />}
-  </Form>
-);

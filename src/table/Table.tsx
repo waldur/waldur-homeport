@@ -241,7 +241,11 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
   }
 
   return (
-    <FilterContextProvider {...props} toggleFilterMenu={toggleFilterMenu}>
+    <FilterContextProvider
+      {...props}
+      table={props.table}
+      toggleFilterMenu={toggleFilterMenu}
+    >
       <TableProvider
         {...props}
         toggleFilterMenu={toggleFilterMenu}

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useFormState } from 'react-final-form';
 import { billingTotalCostRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { FinancialReportsFilterFormData } from '@/table/generated/FinancialReportsFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 
 import { TotalCostField } from './TotalCostField';
 
@@ -34,7 +34,9 @@ const loadData = async (filter: FinancialReportsFilterFormData) => {
 };
 
 export const TotalCostContainer: React.FC = () => {
-  const { values } = useFormState<FinancialReportsFilterFormData>();
+  const values = useFilterValues(
+    'customerList',
+  ) as FinancialReportsFilterFormData;
 
   const {
     isLoading: loading,

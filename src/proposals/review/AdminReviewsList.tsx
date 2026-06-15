@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { proposalReviewsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -14,6 +13,7 @@ import {
   ProposalReviewsFilterFormId,
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -22,13 +22,14 @@ import { ReviewStateRenderer } from './ReviewStateRenderer';
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
-const AdminReviewsListTable: FC = () => {
-  const { values } = useFormState();
+export const AdminReviewsList: FC = () => {
+  const values = useFilterValues('AdminReviewsList');
 
   const filter = useMemo(() => selectProposalReviewsFilter(values), [values]);
 
   const tableProps = useTable({
     table: 'AdminReviewsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalReviewsList),
     queryField: 'proposal_name',
     filter,
@@ -83,10 +84,7 @@ const AdminReviewsListTable: FC = () => {
             />
           ),
           filter: 'call',
-          inlineFilter: (row) => ({
-            name: row.call_name,
-            uuid: row.call_uuid,
-          }),
+          inlineFilter: (row) => ({ name: row.call_name, uuid: row.call_uuid }),
           keys: ['call_name'],
           id: 'call',
         },
@@ -129,15 +127,3 @@ const AdminReviewsListTable: FC = () => {
     />
   );
 };
-
-export const AdminReviewsList: FC<any> = (props) => (
-  <Form
-    id={ProposalReviewsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <AdminReviewsListTable {...props} />}
-  </Form>
-);

@@ -1,16 +1,14 @@
-import React, { FunctionComponent, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import React, { FunctionComponent, useMemo } from 'react';
 import {
   marketplaceProviderResourcesList,
   MarketplaceProviderResourcesListData,
+  ProviderOfferingDetails as Offering,
   Project,
   Resource,
-  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
 import { BooleanBadge } from '@/core/BooleanBadge';
 import { formatDateTime } from '@/core/dateUtils';
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { lazyComponent } from '@/core/lazyComponent';
 import { BackendIdTip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
@@ -26,6 +24,7 @@ import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
@@ -280,6 +279,9 @@ const TableOptions = {
   table: TABLE_PUBLIC_RESOURCE,
   fetchData: createFetcher(marketplaceProviderResourcesList),
   queryField: 'query',
+  initialFilters: {
+    state: getStates().filter((state) => state.value !== 'Terminated'),
+  },
 };
 
 const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
@@ -309,16 +311,10 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'restrict_member_access', // ResourceFlags inline badge
   ];
 
-const ProviderResourcesListTable: FunctionComponent = () => {
+export const ProviderResourcesList: FunctionComponent = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues(TABLE_PUBLIC_RESOURCE);
   const filterValues: ResourceFilter = values;
-
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
 
   const filter = useMemo(() => {
     const filterObj: MarketplaceProviderResourcesListData['query'] = {};
@@ -365,11 +361,7 @@ const ProviderResourcesListTable: FunctionComponent = () => {
     return filterObj;
   }, [customer, filterValues]);
 
-  const tableProps = useTable({
-    ...TableOptions,
-    filter,
-    mandatoryFields,
-  });
+  const tableProps = useTable({ ...TableOptions, filter, mandatoryFields });
 
   return (
     <TableComponent
@@ -377,25 +369,5 @@ const ProviderResourcesListTable: FunctionComponent = () => {
       formId={PROVIDER_RESOURCES_LIST_FILTER_FORM_ID}
       filters={<ProviderResourcesFilter />}
     />
-  );
-};
-
-export const ProviderResourcesList: React.ComponentType<any> = () => {
-  const initialValues = useMemo(
-    () =>
-      getInitialValues({
-        state: getStates().filter((state) => state.value !== 'Terminated'),
-      }),
-    [],
-  );
-
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <ProviderResourcesListTable />}
-    </Form>
   );
 };

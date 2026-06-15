@@ -292,20 +292,24 @@ export const UsersTable = () => {
 
 Filters are defined using the `filters` prop of the Table component. This prop accepts a React component that renders the filter UI.
 
+The recommended way to implement filters is using autonomous filter components from `@/table`. These components automatically connect to the table's Redux state.
+
 Example:
 
 ```ts
-import { Form, Field, useFormState } from 'react-final-form';
-import { TableFilterItem } from '@/table/TableFilterItem';
+import { StringFilter } from '@/table';
+import { useFilterValues } from '@/table/useFilterValues';
 
 export const FilterSet = () => (
-  <TableFilterItem title="Filter field" name="custom">
-    <Field name="custom" component="input" />
-  </TableFilterItem>
+  <StringFilter
+    title={translate('Filter field')}
+    name="custom"
+    placeholder={translate('Search...')}
+  />
 );
 
-const FilteredListTable = () => {
-  const { values } = useFormState();
+export const FilteredList = () => {
+  const values = useFilterValues('FilteredList');
   const tableProps = useTable({
     table: 'FilteredList',
     fetchData: createFetcher(hooksList),
@@ -319,13 +323,20 @@ const FilteredListTable = () => {
     />
   );
 };
-
-export const FilteredList = () => (
-  <Form onSubmit={() => {}}>
-    {() => <FilteredListTable />}
-  </Form>
-);
 ```
+
+### Filter components
+
+The following autonomous filter components are available in `@/table`:
+
+- `StringFilter`: Simple text input
+- `SelectFilter`: Dropdown for static options
+- `AsyncSelectFilter`: Dropdown for API-based options
+- `BooleanFilter`: Checkbox for boolean values
+- `DateFilter`: Date picker
+- `DateTimeFilter`: Date and time picker
+- `NumberFilter`: Number input
+- `NumberRangeFilter`: Range input for numbers
 
 ### Filter positions
 
@@ -348,55 +359,37 @@ When filters are applied, they are stored in `filtersStorage` (Redux state) whic
 The flow:
 
 ```text
-User changes filter field
+User changes autonomous filter (e.g. StringFilter)
     ↓
-React Final Form stores value
+Component dispatches SET_FILTER to Redux
     ↓
-TableFilterItem calls onChange() → updates form state
+Table state updated in Redux (filtersStorage)
+    ↓
+useTable hook receives new state
     ↓
 Table re-fetches with new filter
     ↓
-Filter badges rendered from form state
+Filter badges rendered from filtersStorage
 ```
 
 ### URL query parameter sync
 
-Filters can be synced to URL query parameters for shareable links. Use utilities from `@/core/filters`:
+Filters can be synced to URL query parameters for shareable links. `useTable` provides built-in support for this via `syncFiltersToURL` option.
 
 ```ts
-import { useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
-import { syncFiltersToURL, getInitialValues } from '@/core/filters';
-
-const MyListTable = () => {
-  const { values } = useFormState();
-
-  // Sync filter changes to URL
-  useEffect(() => {
-    if (values) {
-      syncFiltersToURL(values);
-    }
-  }, [values]);
-
-  // ... rest of component
-  return null;
-};
-
-export const MyList = () => {
-  // Load filters from URL on mount
-  const initialValues = useMemo(() => getInitialValues(), []);
-
-  return (
-    <Form
-      onSubmit={() => {}}
-      initialValues={initialValues}
-      subscription={{ values: true }}
-    >
-      {() => <MyListTable />}
-    </Form>
-  );
-};
+const tableProps = useTable({
+  table: 'MyList',
+  fetchData: createFetcher(myList),
+  syncFiltersToURL: true,
+  initialFilters: { status: 'active' }, // Default values
+});
 ```
+
+When `syncFiltersToURL` is enabled:
+
+1. **Initial load**: `useTable` reads URL parameters on mount and populates `filtersStorage`.
+2. **Automatic updates**: Any changes to filters are automatically reflected in the URL.
+3. **Default values**: `initialFilters` are used if corresponding URL parameters are missing.
 
 #### URL format
 
@@ -406,35 +399,37 @@ Filters are stored in URL query parameters with compact encoding:
 |------------|------------|---------|
 | String | Direct value | `?name=test` |
 | Object with uuid | `uuid::name` | `?org=abc123::My+Org` |
-| Array | JSON encoded | `?tags=["a","b"]` |
+| Array of objects | `[uuid1::name1, uuid2::name2]` | `?tags=["a1::T1","a2::T2"]` |
 | Boolean | `true`/`false` | `?active=true` |
 
-The compact `uuid::name` format keeps URLs shorter while preserving display names for filter badges.
+The compact `uuid::name` format keeps URLs shorter while preserving display names for filter badges without needing additional API calls.
 
 #### Navigation behavior
 
 When navigating between pages in the SPA:
 
-1. **URL params persist** - query string is preserved during navigation
-2. **Form initialization** - `getInitialValues` reads the URL to populate the form on mount
-3. **Auto-show filter bar** - when the form state has items, the filter bar auto-expands
+1. **URL params persist** - query string is preserved during navigation.
+2. **Table initialization** - `useTable` reads the URL to populate the Redux state on mount.
+3. **Auto-show filter bar** - when filters are present in Redux, the filter bar auto-expands.
 
 ```text
 Page A with filter → Navigate to Page B → Navigate back to Page A
      ↓                      ↓                      ↓
-URL updated            URL preserved         URL read, form populated
+URL updated            URL preserved         URL read, state populated
 with filters           (SPA routing)         Table re-fetches
 ```
 
 ### Default/initial filters
 
-To set default filter values that can be overridden by URL params, pass them as arguments to `getInitialValues`:
+To set default filter values that can be overridden by URL params, use the `initialFilters` option in `useTable`:
 
 ```ts
-const defaultValues = { status: 'active' };
-
-// URL params take precedence over defaults
-const initialValues = useMemo(() => getInitialValues(defaultValues), []);
+const tableProps = useTable({
+  table: 'MyList',
+  fetchData: createFetcher(myList),
+  syncFiltersToURL: true,
+  initialFilters: { status: 'active' }, // URL params take precedence over defaults
+});
 ```
 
 ### Cross-page filters (Resources sidebar)
@@ -835,23 +830,26 @@ Table actions appear in the table header toolbar. Use for actions that affect th
 
 ## Complex table example
 
-Here's an example of a complex table combining multiple features (based on the Reviewer Pool implementation):
+Here's an example of a complex table combining multiple features:
 
 ```ts
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { SelectFilter } from '@/table';
+import { useFilterValues } from '@/table/useFilterValues';
 
-// Filter selector - transforms form values to API filter params
-const selectReviewerPoolFilters = (filters: any) => {
-  const result: Record<string, any> = {};
-  if (filters?.status) {
-    result.invitation_status = filters.status.value;
-  }
-  return result;
-};
+// Filter component
+const ReviewerPoolFilter = () => (
+  <SelectFilter
+    title={translate('Status')}
+    name="status"
+    options={[
+      { label: translate('Accepted'), value: 'accepted' },
+      { label: translate('Pending'), value: 'pending' },
+    ]}
+  />
+);
 
 // Tabs hook - defines sub-navigation within the table
-// Note: Include parent tab param (tab: 'reviewer-pool') to preserve context
 const usePoolTabs = (): TableTab[] => {
   return useMemo(
     () => [
@@ -881,27 +879,24 @@ const ExpandableRow = ({ row }) => (
 );
 
 // Main table component
-const ReviewerPoolSectionTable = ({ call }) => {
-  const { values } = useFormState();
+export const ReviewerPoolSection = ({ call }) => {
+  const values = useFilterValues('ReviewerPool');
   const tabs = usePoolTabs();
-  const formFilters = useMemo(
-    () => selectReviewerPoolFilters(values),
-    [values]
-  );
 
-  // Memoize filter to prevent infinite re-renders
+  // Memoize filter to prevent unnecessary re-renders
   const filter = useMemo(
     () => ({
       call_uuid: call.uuid,
-      ...formFilters,
+      invitation_status: values.status?.value,
     }),
-    [call.uuid, formFilters],
+    [call.uuid, values.status],
   );
 
   const tableProps = useTable({
     table: 'ReviewerPool',
     fetchData: createFetcher(reviewerPoolList),
     filter,
+    syncFiltersToURL: true,
   });
 
   const columns = useMemo(
@@ -958,20 +953,16 @@ const ReviewerPoolSectionTable = ({ call }) => {
     />
   );
 };
-
-export const ReviewerPoolSection = ({ call }) => (
-  <Form onSubmit={() => {}}>
-    {() => <ReviewerPoolSectionTable call={call} />}
-  </Form>
-);
 ```
 
 ### Key patterns in complex tables
 
-1. **Memoize filters** - Always wrap filter objects in `useMemo` to prevent infinite re-renders when using selectors
-2. **Memoize columns** - Define columns in `useMemo` for performance
-3. **Use tabs for sub-navigation** - Tabs update URL params, allowing deep linking
-4. **Mark default tab** - Use `default: true` to highlight the correct tab on initial load
-5. **Preserve parent tab context** - When using nested subtabs, include parent tab params (e.g., `{ tab: 'reviewer-pool', pool_tab: 'pool' }`) to prevent navigation from losing context
-6. **Expandable rows for details** - Show additional information without navigating away
-7. **Optional columns** - Let users customize their view with `optional: true` and `hasOptionalColumns`
+1. **Memoize filters** - Always wrap filter objects in `useMemo` to prevent infinite re-renders when using values from `useFilterValues`.
+2. **Memoize columns** - Define columns in `useMemo` for performance.
+3. **Use tabs for sub-navigation** - Tabs update URL params, allowing deep linking.
+4. **Mark default tab** - Use `default: true` to highlight the correct tab on initial load.
+5. **Preserve parent tab context** - When using nested subtabs, include parent tab params (e.g., `{ tab: 'reviewer-pool', pool_tab: 'pool' }`) to prevent navigation from losing context.
+6. **Expandable rows for details** - Show additional information without navigating away.
+7. **Optional columns** - Let users customize their view with `optional: true` and `hasOptionalColumns`.
+8. **Autonomous filters** - Use components like `SelectFilter` and `StringFilter` for automatic Redux integration.
+9. **URL synchronization** - Enable `syncFiltersToURL: true` in `useTable` for shared links and session persistence.

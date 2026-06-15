@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { InvoiceItemDetail, invoiceItemsList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -14,6 +13,7 @@ import {
   InvoiceItemsFilterFormId,
 } from '@/table/generated/InvoiceItemsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -22,10 +22,10 @@ interface SupportInvoiceItemsListProps {
   accountingPeriods: { label: string; value: PeriodOption }[];
 }
 
-const SupportInvoiceItemsListTable: FunctionComponent<
+export const SupportInvoiceItemsList: FunctionComponent<
   SupportInvoiceItemsListProps
 > = ({ accountingPeriods }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('supportInvoiceItems');
   const filterValues = useMemo(
     () => selectInvoiceItemsFilter(values),
     [values],
@@ -33,6 +33,7 @@ const SupportInvoiceItemsListTable: FunctionComponent<
 
   const tableProps = useTable({
     table: 'supportInvoiceItems',
+    syncFiltersToURL: true,
     fetchData: createFetcher(invoiceItemsList),
     queryField: 'name',
     filter: filterValues,
@@ -127,16 +128,3 @@ const SupportInvoiceItemsListTable: FunctionComponent<
     />
   );
 };
-
-export const SupportInvoiceItemsList: FunctionComponent<
-  SupportInvoiceItemsListProps
-> = (props) => (
-  <Form
-    id={InvoiceItemsFilterFormId}
-    initialValues={props.initialValues}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <SupportInvoiceItemsListTable {...props} />}
-  </Form>
-);

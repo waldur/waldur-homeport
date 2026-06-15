@@ -1,5 +1,4 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { financialReportsList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -11,12 +10,12 @@ import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import {
   FinancialReportsFilter,
-  FinancialReportsFilterFormData,
   FinancialReportsFilterFormId,
   selectFinancialReportsFilter,
 } from '@/table/generated/FinancialReportsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { Customer } from '@/workspace/types';
@@ -56,10 +55,11 @@ const renderTitleWithPriceTooltip = (title) => (
   </>
 );
 
-const CustomerListTable: FunctionComponent<{
+export const CustomerList: FunctionComponent<{
   accountingPeriods;
-}> = ({ accountingPeriods }) => {
-  const { values } = useFormState<FinancialReportsFilterFormData>();
+  initialFilters;
+}> = ({ accountingPeriods, initialFilters }) => {
+  const values = useFilterValues('customerList');
   const accountingPeriodIsCurrent = values?.accounting_period?.value?.current;
   const vatMessage =
     ENV.accountingMode === 'accounting'
@@ -129,9 +129,11 @@ const CustomerListTable: FunctionComponent<{
 
   const props = useTable({
     table: 'customerList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(financialReportsList),
     queryField: 'query',
     filter,
+    initialFilters,
   });
 
   const expandableRow = useCallback(
@@ -160,17 +162,3 @@ const CustomerListTable: FunctionComponent<{
     />
   );
 };
-
-export const CustomerList: FunctionComponent<{
-  initialValues;
-  accountingPeriods;
-}> = (props) => (
-  <Form
-    id={FinancialReportsFilterFormId}
-    initialValues={props.initialValues}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <CustomerListTable {...props} />}
-  </Form>
-);

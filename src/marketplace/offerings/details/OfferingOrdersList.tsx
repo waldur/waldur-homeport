@@ -1,11 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   MarketplaceOrdersListData,
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { getInitialValues } from '@/core/filters';
 import {
   OFFERING_ORDERS_LIST_FILTER_FORM_ID,
   TABLE_OFFERING_ORDERS,
@@ -13,14 +11,14 @@ import {
 import { OrdersListFilter } from '@/marketplace/orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '@/marketplace/orders/list/OrdersTableComponent';
 import { createOrderStateOptions } from '@/marketplace/orders/OrderStates';
+import { useFilterValues } from '@/table/useFilterValues';
 
 interface OwnProps {
   offering: Offering;
 }
 
-const OfferingOrdersListTable: FunctionComponent<OwnProps> = (props) => {
-  const { values } = useFormState();
-  const filterValues: any = values;
+export const OfferingOrdersList: FunctionComponent<OwnProps> = (props) => {
+  const filterValues = useFilterValues(TABLE_OFFERING_ORDERS);
 
   const formFilter = useMemo(() => {
     const filterObj: MarketplaceOrdersListData['query'] = {};
@@ -58,25 +56,9 @@ const OfferingOrdersListTable: FunctionComponent<OwnProps> = (props) => {
       formId={OFFERING_ORDERS_LIST_FILTER_FORM_ID}
       filters={<OrdersListFilter hasOrganization />}
       filter={filter}
+      initialFilters={{
+        state: createOrderStateOptions()[0],
+      }}
     />
-  );
-};
-
-export const OfferingOrdersList: FunctionComponent<OwnProps> = (props) => {
-  const initialValues = useMemo(() => {
-    const stateOptions = createOrderStateOptions();
-    return getInitialValues({
-      state: stateOptions[0],
-    });
-  }, []);
-
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <OfferingOrdersListTable {...props} />}
-    </Form>
   );
 };

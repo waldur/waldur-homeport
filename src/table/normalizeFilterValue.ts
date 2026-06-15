@@ -1,5 +1,9 @@
-import { useEffect } from 'react';
-import { useForm, useFormState } from 'react-final-form';
+import { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setFilter } from './actions';
+import { TableFilterContext } from './FilterContextProvider';
+import { selectFilterValue } from './selectors';
 
 interface OptionLike {
   value: any;
@@ -36,9 +40,9 @@ export const useNormalizeSelectFilterValue = (
   isMulti: boolean,
   options?: OptionsArg,
 ): void => {
-  const form = useForm();
-  const { values } = useFormState({ subscription: { values: true } });
-  const raw = (values as Record<string, any> | undefined)?.[name];
+  const { table } = useContext(TableFilterContext);
+  const dispatch = useDispatch();
+  const raw = useSelector(selectFilterValue(table, name));
 
   useEffect(() => {
     if (raw == null) return;
@@ -64,6 +68,13 @@ export const useNormalizeSelectFilterValue = (
       }
     }
 
-    form.change(name, normalized);
-  }, [raw, isMulti, name, form, options]);
+    dispatch(
+      setFilter(table, {
+        name,
+        value: normalized,
+        label: null,
+        component: null,
+      }),
+    );
+  }, [raw, isMulti, name, dispatch, table, options]);
 };

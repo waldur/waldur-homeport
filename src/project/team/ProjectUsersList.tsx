@@ -1,10 +1,5 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
-import {
-  Project,
-  projectsListUsersList,
-  UserRoleDetails,
-} from 'waldur-js-client';
+import { projectsListUsersList, UserRoleDetails } from 'waldur-js-client';
 
 import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
 import { getProjectRoles } from '@/permissions/utils';
@@ -12,8 +7,8 @@ import { createFetcher } from '@/table/api';
 import {
   ProjectsListUsersFilter,
   selectProjectsListUsersFilter,
-  ProjectsListUsersFilterFormId,
 } from '@/table/generated/ProjectsListUsersFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useProject } from '@/workspace/hooks';
 
@@ -51,14 +46,14 @@ const TeamSecondaryDropdownActions = ({ project, refetch }) => {
   );
 };
 
-const ProjectUsersListTable = ({
+export const ProjectUsersList = ({
   hideTabs = false,
   project,
 }: {
   hideTabs?: boolean;
-  project: Project;
+  project?: any;
 }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('project-users');
 
   const filter = useMemo(() => selectProjectsListUsersFilter(values), [values]);
 
@@ -68,6 +63,7 @@ const ProjectUsersListTable = ({
 
   const tableProps = useTable({
     table: 'project-users',
+    syncFiltersToURL: true,
     fetchData: createFetcher(projectsListUsersList, {
       path: { uuid: _project?.uuid },
     }),
@@ -117,15 +113,3 @@ const ProjectUsersListTable = ({
     />
   );
 };
-
-export const ProjectUsersList = (props) => (
-  <Form
-    id={ProjectsListUsersFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <ProjectUsersListTable {...props} />}
-  </Form>
-);

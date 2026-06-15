@@ -1,6 +1,5 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   adminArrowConsumptionRecordsList,
   ArrowConsumptionRecord,
@@ -19,6 +18,7 @@ import {
   AdminArrowConsumptionRecordsFilterFormId,
 } from '@/table/generated/AdminArrowConsumptionRecordsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { ForceImportConsumptionButton } from './ForceImportConsumptionButton';
@@ -41,10 +41,10 @@ interface ConsumptionRecordsListProps {
   settings?: { uuid: string } | null;
 }
 
-const ConsumptionRecordsListTable: FunctionComponent<
+export const ConsumptionRecordsList: FunctionComponent<
   ConsumptionRecordsListProps
 > = () => {
-  const { values } = useFormState();
+  const values = useFilterValues('ArrowConsumptionRecords');
 
   const filter = useMemo(
     () => selectConsumptionRecordsFilter(values),
@@ -53,6 +53,7 @@ const ConsumptionRecordsListTable: FunctionComponent<
 
   const tableProps = useTable({
     table: 'ArrowConsumptionRecords',
+    syncFiltersToURL: true,
     fetchData: createFetcher(adminArrowConsumptionRecordsList),
     filter,
     queryField: 'license_reference',
@@ -162,18 +163,6 @@ const ConsumptionRecordsListTable: FunctionComponent<
     />
   );
 };
-
-export const ConsumptionRecordsList = (props) => (
-  <Form
-    id={AdminArrowConsumptionRecordsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <ConsumptionRecordsListTable {...props} />}
-  </Form>
-);
 
 // Expandable row component
 const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (

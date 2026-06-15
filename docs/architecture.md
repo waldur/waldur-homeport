@@ -40,14 +40,15 @@ The codebase follows a feature-based folder structure under `src/`:
 #### Modern Patterns (Use for New Development)
 
 - **TanStack React Query**: Server state management and caching for API calls
-- **React Final Form**: Local form state management
+- **Autonomous Table Filters**: Redux-based state management for table filters using `@/table` components (StringFilter, SelectFilter, etc.)
+- **React Final Form**: Local form state management (use for data entry forms, not table filters)
 - **Local Component State**: useState and useReducer for UI state
 - **Custom Hooks**: Reusable state logic and business operations
 
 #### Legacy Patterns (Maintenance Only - Do Not Extend)
 
-- **Redux Store**: Global state with dynamic reducer injection (legacy - avoid for new features)
-- **Table Store**: Specialized table data management in `src/table/` (legacy pattern)
+- **Redux Store**: Global state with dynamic reducer injection (legacy - avoid for new features, except for the Table Store)
+- **React Final Form for Filters**: Old pattern of wrapping tables in `<Form>` (legacy - migrate to autonomous filters)
 
 ### Navigation & Routing
 

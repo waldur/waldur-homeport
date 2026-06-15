@@ -1,5 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
-import { useFormState } from 'react-final-form';
+import { FunctionComponent, useContext, useMemo } from 'react';
 import { MarketplacePublicOfferingsListData, Project } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -7,6 +6,8 @@ import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { parentOfferingFilter } from '@/marketplace/offerings/utils';
 import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
 import { BooleanFilter } from '@/table';
+import { TableFilterContext } from '@/table/FilterContextProvider';
+import { useFilterValues } from '@/table/useFilterValues';
 import { Customer } from '@/workspace/types';
 
 import { CategoryFilter } from './CategoryFilter';
@@ -24,7 +25,8 @@ interface ProjectResourcesAllFilterProps {
 export const ProjectResourcesAllFilter: FunctionComponent<
   ProjectResourcesAllFilterProps
 > = (props) => {
-  const { values: formValues } = useFormState();
+  const { table } = useContext(TableFilterContext);
+  const formValues = useFilterValues(table);
 
   const offeringFilter = useMemo(
     (): MarketplacePublicOfferingsListData['query'] => ({

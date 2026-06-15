@@ -1,6 +1,5 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   Invitation,
   Resource,
@@ -21,6 +20,7 @@ import {
   UserInvitationsFilterFormId,
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { ResourcePermissionsLogButton } from '../users/ResourcePermissionsLogButton';
@@ -84,7 +84,7 @@ interface ResourceInvitationsListProps {
   hasActionBar?: boolean;
 }
 
-const ResourceUserInvitationsListTable: FC<ResourceInvitationsListProps> = ({
+export const ResourceUserInvitationsList: FC<ResourceInvitationsListProps> = ({
   resource,
   offering,
   tableTabs,
@@ -95,22 +95,21 @@ const ResourceUserInvitationsListTable: FC<ResourceInvitationsListProps> = ({
   contentType,
   hasActionBar,
 }) => {
-  const { values } = useFormState();
+  const effectiveScopeUuid = scopeUuid ?? resource.uuid;
+  const effectiveScopeUrl = scopeUrl ?? resource.url;
+  const effectiveScopeLabel = scopeLabel ?? resource.name;
+  const effectiveContentType = contentType ?? 'resource';
+
+  const values = useFilterValues(`resource-invitations-${effectiveScopeUuid}`);
 
   const stateFilter = useMemo(
     () => selectUserInvitationsFilter(values),
     [values],
   );
 
-  const effectiveScopeUuid = scopeUuid ?? resource.uuid;
-  const effectiveScopeUrl = scopeUrl ?? resource.url;
-  const effectiveScopeLabel = scopeLabel ?? resource.name;
-  const effectiveContentType = contentType ?? 'resource';
-
   const filter = useMemo(
     () => ({
-      ...stateFilter,
-      // Backend filter is `?scope=<scope-url>` (handled by
+      ...stateFilter, // Backend filter is `?scope=<scope-url>` (handled by
       // InvitationScopeFilterBackend → GenericKeyFilterBackend), NOT
       // `?scope_uuid=` which the API silently ignores.
       scope: effectiveScopeUrl,
@@ -123,6 +122,7 @@ const ResourceUserInvitationsListTable: FC<ResourceInvitationsListProps> = ({
     // several expanded ResourceProject rows) keep independent
     // pagination, sort and filter state.
     table: `resource-invitations-${effectiveScopeUuid}`,
+    syncFiltersToURL: true,
     fetchData: createFetcher(userInvitationsList),
     filter,
     queryField: 'email',
@@ -166,15 +166,3 @@ const ResourceUserInvitationsListTable: FC<ResourceInvitationsListProps> = ({
     />
   );
 };
-
-export const ResourceUserInvitationsList: FC<any> = (props) => (
-  <Form
-    id={UserInvitationsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <ResourceUserInvitationsListTable {...props} />}
-  </Form>
-);

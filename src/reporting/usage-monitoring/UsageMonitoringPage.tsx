@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceStatsResourcesMissingUsageList,
   ResourceMissingUsage,
@@ -11,6 +10,7 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
@@ -79,7 +79,7 @@ const StateColumn = ({ row }: { row: ResourceMissingUsage }) => {
 };
 
 const UsageMonitoringTable: FC = () => {
-  const { values } = useFormState();
+  const values = useFilterValues('MissingUsageTable');
   const filterValues = values;
 
   const filter = useMemo(() => {
@@ -92,8 +92,15 @@ const UsageMonitoringTable: FC = () => {
 
   const tableProps = useTable({
     table: 'MissingUsageTable',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceStatsResourcesMissingUsageList),
     filter,
+    initialFilters: {
+      billing_period:
+        billingPeriodOptions.find(
+          (o) => o.value === getCurrentBillingPeriod(),
+        ) || billingPeriodOptions[0],
+    },
   });
 
   const columns = useMemo<Column<ResourceMissingUsage>[]>(
@@ -155,18 +162,4 @@ const UsageMonitoringTable: FC = () => {
   );
 };
 
-export const UsageMonitoringPage: FC = () => (
-  <Form
-    id={FORM_ID}
-    onSubmit={() => {}}
-    initialValues={{
-      billing_period:
-        billingPeriodOptions.find(
-          (o) => o.value === getCurrentBillingPeriod(),
-        ) || billingPeriodOptions[0],
-    }}
-    subscription={{ values: true }}
-  >
-    {() => <UsageMonitoringTable />}
-  </Form>
-);
+export const UsageMonitoringPage: FC = () => <UsageMonitoringTable />;

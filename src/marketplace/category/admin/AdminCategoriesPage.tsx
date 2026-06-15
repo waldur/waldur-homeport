@@ -1,7 +1,6 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceCategoriesList,
   MarketplaceCategoriesListData,
@@ -19,6 +18,7 @@ import { SelectFilter } from '@/table';
 import { createFetcher } from '@/table/api';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { CategoryCreateButton } from './CategoryCreateButton';
@@ -29,10 +29,6 @@ const ADMIN_CATEGORIES_FILTER_FORM_ID = 'AdminCategoriesListFilter';
 interface GroupOption {
   label: string;
   value: string;
-}
-
-interface CategoriesFilterValues {
-  group?: GroupOption | null;
 }
 
 const categoryFields: MarketplaceCategoriesListData['query'] = {
@@ -60,7 +56,7 @@ const CategoriesListFilter: FunctionComponent<{ options: GroupOption[] }> = ({
   />
 );
 
-const AdminCategoriesPageInner: FunctionComponent = () => {
+export const AdminCategoriesPage: FunctionComponent = () => {
   const {
     data: categoryGroups,
     isLoading: loadingGroups,
@@ -72,7 +68,7 @@ const AdminCategoriesPageInner: FunctionComponent = () => {
     staleTime: FAST_STALE_TIME,
   });
 
-  const { values } = useFormState<CategoriesFilterValues>();
+  const values = useFilterValues('CategoriesList');
 
   const filter = useMemo<MarketplaceCategoriesListData['query']>(() => {
     const obj: MarketplaceCategoriesListData['query'] = { ...categoryFields };
@@ -90,6 +86,7 @@ const AdminCategoriesPageInner: FunctionComponent = () => {
 
   const tableProps = useTable({
     table: 'CategoriesList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceCategoriesList),
     queryField: 'title',
     filter,
@@ -176,13 +173,3 @@ const AdminCategoriesPageInner: FunctionComponent = () => {
     />
   );
 };
-
-export const AdminCategoriesPage: FunctionComponent = () => (
-  <Form
-    id={ADMIN_CATEGORIES_FILTER_FORM_ID}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <AdminCategoriesPageInner />}
-  </Form>
-);

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { uniq } from 'lodash-es';
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   marketplacePublicOfferingsList,
   marketplaceResourcesList,
@@ -27,6 +26,7 @@ import {
 } from '@/table/generated/ProjectResourcesFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useProject } from '@/workspace/hooks';
 
@@ -53,12 +53,12 @@ const mandatoryFields = resourcesListRequiredFields(false).concat([
   'plan_unit',
 ]);
 
-const ProjectLimitUsageBasedResourcesTable: FC<{ showCost?: boolean }> = ({
+export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
   showCost,
 }) => {
   const project = useProject();
 
-  const { values } = useFormState();
+  const values = useFilterValues('ProjectLimitBasedResources');
 
   const stateFilter = useMemo(
     () => selectProjectResourcesFilter(values),
@@ -78,6 +78,7 @@ const ProjectLimitUsageBasedResourcesTable: FC<{ showCost?: boolean }> = ({
 
   const tableProps = useTable({
     table: 'ProjectLimitBasedResources',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourcesList),
     queryField: 'query',
     filter,
@@ -201,15 +202,3 @@ const ProjectLimitUsageBasedResourcesTable: FC<{ showCost?: boolean }> = ({
     </div>
   );
 };
-
-export const ProjectLimitUsageBasedResources: FC<any> = (props) => (
-  <Form
-    id={ProjectResourcesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <ProjectLimitUsageBasedResourcesTable {...props} />}
-  </Form>
-);

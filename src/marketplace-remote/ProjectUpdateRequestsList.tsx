@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { marketplaceProjectUpdateRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -13,6 +12,7 @@ import {
   MarketplaceProjectUpdateRequestsFilterFormId,
 } from '@/table/generated/MarketplaceProjectUpdateRequestsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useProject } from '@/workspace/hooks';
@@ -26,9 +26,9 @@ const getStates = (): Option[] => [
   { value: 'canceled', label: translate('Canceled') },
 ];
 
-const ProjectUpdateRequestsListTable: FunctionComponent = () => {
+export const ProjectUpdateRequestsList: FunctionComponent = () => {
   useTitle(translate('Project updates'));
-  const { values } = useFormState();
+  const values = useFilterValues('marketplace-project-update-requests');
 
   const filterState = useMemo(
     () => selectProjectUpdateRequestListFilter(values),
@@ -42,6 +42,7 @@ const ProjectUpdateRequestsListTable: FunctionComponent = () => {
   };
   const props = useTable({
     table: 'marketplace-project-update-requests',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceProjectUpdateRequestsList),
     filter,
   });
@@ -82,15 +83,3 @@ const ProjectUpdateRequestsListTable: FunctionComponent = () => {
     />
   );
 };
-
-export const ProjectUpdateRequestsList = (props) => (
-  <Form
-    id={MarketplaceProjectUpdateRequestsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <ProjectUpdateRequestsListTable {...props} />}
-  </Form>
-);

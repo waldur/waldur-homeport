@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { OpenStackInstanceReport } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -12,13 +11,14 @@ import {
 } from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { openstackInstancesFetcher } from './api';
 
-const OpenstackInstancesTableTable: FC = () => {
-  const { values } = useFormState();
+export const OpenstackInstancesTable: FC = () => {
+  const values = useFilterValues('openstackInstancesReport');
 
   const filter = useMemo(
     () => selectMarketplaceStatsOpenstackInstancesFilter(values),
@@ -29,6 +29,7 @@ const OpenstackInstancesTableTable: FC = () => {
 
   const tableProps = useTable({
     table: 'openstackInstancesReport',
+    syncFiltersToURL: true,
     fetchData: openstackInstancesFetcher,
     queryField: 'name',
     filter,
@@ -274,15 +275,3 @@ const OpenstackInstancesTableTable: FC = () => {
     />
   );
 };
-
-export const OpenstackInstancesTable: FC<any> = (props) => (
-  <Form
-    id={MarketplaceStatsOpenstackInstancesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <OpenstackInstancesTableTable {...props} />}
-  </Form>
-);

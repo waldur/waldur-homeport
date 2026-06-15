@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -13,6 +12,7 @@ import {
   selectProposalReviewsFilter,
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
@@ -28,9 +28,9 @@ import { useMyReviewsTabs } from './tabs';
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
-const MyReviewsPageTable: FC = () => {
+export const MyReviewsPage: FC = () => {
   const user = useUser();
-  const { values } = useFormState();
+  const values = useFilterValues('MyReviewsList');
   const filterValues = useMemo(
     () => selectProposalReviewsFilter(values),
     [values],
@@ -53,6 +53,7 @@ const MyReviewsPageTable: FC = () => {
 
   const tableProps = useTable({
     table: 'MyReviewsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalReviewsList),
     queryField: 'proposal_name',
     filter,
@@ -161,13 +162,3 @@ const MyReviewsPageTable: FC = () => {
     </div>
   );
 };
-
-export const MyReviewsPage: FC = () => (
-  <Form
-    id={ProposalReviewsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <MyReviewsPageTable />}
-  </Form>
-);

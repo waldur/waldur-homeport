@@ -34,6 +34,7 @@ export const BaseOfferingsList: FunctionComponent<{
   showProvider?: boolean;
   filters?;
   formId?: string;
+  initialFilters?;
 }> = ({
   table,
   filter,
@@ -42,6 +43,7 @@ export const BaseOfferingsList: FunctionComponent<{
   showProvider,
   filters,
   formId,
+  initialFilters,
 }) => {
   const props = useTable({
     table,
@@ -49,6 +51,7 @@ export const BaseOfferingsList: FunctionComponent<{
     fetchData: createFetcher(marketplaceProviderOfferingsList),
     queryField: 'keyword',
     mandatoryFields,
+    initialFilters,
   });
 
   const organizationColumn: Column<ProviderOfferingDetails>[] =

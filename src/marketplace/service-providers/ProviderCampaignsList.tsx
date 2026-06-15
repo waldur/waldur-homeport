@@ -1,5 +1,4 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { Campaign, promotionsCampaignsList } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
@@ -15,6 +14,7 @@ import {
   PromotionsCampaignsFilterFormId,
 } from '@/table/generated/PromotionsCampaignsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -29,7 +29,7 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
     ({ row }) => <ProviderCampaignResourceExpandable campaign={row} />,
     [],
   );
-  const { values } = useFormState();
+  const values = useFilterValues('marketplace-provider-campaigns');
 
   const formFilter = useMemo(
     () => selectPromotionsCampaignsFilter(values),
@@ -37,14 +37,12 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
   );
 
   const filter = useMemo(
-    () => ({
-      service_provider_uuid: provider?.uuid,
-      ...formFilter,
-    }),
+    () => ({ service_provider_uuid: provider?.uuid, ...formFilter }),
     [formFilter, provider?.uuid],
   );
   const props = useTable({
     table: 'marketplace-provider-campaigns',
+    syncFiltersToURL: true,
     fetchData: createFetcher(promotionsCampaignsList),
     filter,
     queryField: 'query',
@@ -94,21 +92,9 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
   );
 };
 
-const ProviderCampaignsListTable = ({ provider }) => {
+export const ProviderCampaignsList = ({ provider }: any) => {
   if (!provider) {
     return <CustomerResourcesListPlaceholder />;
   }
   return <ProviderCampaignsListComponent provider={provider} />;
 };
-
-export const ProviderCampaignsList = (props) => (
-  <Form
-    id={PromotionsCampaignsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <ProviderCampaignsListTable {...props} />}
-  </Form>
-);

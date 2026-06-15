@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
+import { Offering } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 

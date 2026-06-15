@@ -215,14 +215,14 @@ describe('filters', () => {
   });
 
   describe('getInitialValues', () => {
-    it('returns URL params when present', () => {
+    it('merges URL params with initialValues', () => {
       vi.mocked(router.urlService.search).mockReturnValue({
         name: 'from-url',
       });
 
-      const values = getInitialValues({ name: 'default' });
+      const values = getInitialValues({ name: 'default', status: 'active' });
 
-      expect(values).toEqual({ name: 'from-url' });
+      expect(values).toEqual({ name: 'from-url', status: 'active' });
     });
 
     it('returns initialValues when no URL params', () => {

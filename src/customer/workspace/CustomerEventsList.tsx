@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { EventsListData } from 'waldur-js-client';
 
 import { isEmpty } from '@/core/utils';
@@ -9,11 +8,13 @@ import {
   CustomerEventsFilterFormId,
   selectCustomerEventsFilter,
 } from '@/table/generated/CustomerEventsFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useCustomer } from '@/workspace/hooks';
 
-const CustomerEventsListTable = () => {
+export const CustomerEventsList = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const tableId = `customer-events-${customer.uuid}`;
+  const values = useFilterValues(tableId);
   const userFilter = useMemo(
     () => selectCustomerEventsFilter(values),
     [values],
@@ -35,20 +36,10 @@ const CustomerEventsListTable = () => {
 
   return (
     <BaseEventsList
-      table={`customer-events-${customer.uuid}`}
+      table={tableId}
       formId={CustomerEventsFilterFormId}
       filter={filter}
       filters={<CustomerEventsFilter />}
     />
   );
 };
-
-export const CustomerEventsList = () => (
-  <Form
-    id={CustomerEventsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <CustomerEventsListTable />}
-  </Form>
-);

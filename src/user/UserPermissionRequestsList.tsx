@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { userPermissionRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -13,6 +12,7 @@ import {
   UserPermissionRequestsFilterFormId,
 } from '@/table/generated/UserPermissionRequestsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { USER_PERMISSION_REQUESTS_TABLE_ID } from '@/user/constants';
 import { useUser } from '@/workspace/hooks';
@@ -20,9 +20,9 @@ import { useUser } from '@/workspace/hooks';
 import { UserPermissionRequestActions } from './UserPermissionRequestActions';
 import { UserPermissionRequestExpandableRow } from './UserPermissionRequestExpandableRow';
 
-const UserPermissionRequestsListTable = () => {
+export const UserPermissionRequestsList = () => {
   const user = useUser();
-  const { values } = useFormState();
+  const values = useFilterValues(USER_PERMISSION_REQUESTS_TABLE_ID);
 
   const formFilter = useMemo(
     () => selectUserPermissionRequestsFilter(values),
@@ -30,14 +30,12 @@ const UserPermissionRequestsListTable = () => {
   );
 
   const filter = useMemo(
-    () => ({
-      created_by: user?.uuid,
-      ...formFilter,
-    }),
+    () => ({ created_by: user?.uuid, ...formFilter }),
     [user?.uuid, formFilter],
   );
   const props = useTable({
     table: USER_PERMISSION_REQUESTS_TABLE_ID,
+    syncFiltersToURL: true,
     fetchData: createFetcher(userPermissionRequestsList),
     filter,
   });
@@ -83,15 +81,3 @@ const UserPermissionRequestsListTable = () => {
     />
   );
 };
-
-export const UserPermissionRequestsList = (props) => (
-  <Form
-    id={UserPermissionRequestsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <UserPermissionRequestsListTable {...props} />}
-  </Form>
-);

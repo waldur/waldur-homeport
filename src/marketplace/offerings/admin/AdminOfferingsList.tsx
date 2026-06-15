@@ -1,9 +1,8 @@
-import { useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { useMemo } from 'react';
 import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { translate } from '@/i18n';
+import { useFilterValues } from '@/table/useFilterValues';
 
 import { OFFERINGS_FILTER_FORM_ID } from '../constants';
 import { BaseOfferingsList } from '../list/OfferingsList';
@@ -40,15 +39,8 @@ export const buildOfferingsFilter = (filterValues: any) => {
   return filter;
 };
 
-const AdminOfferingsListTable = () => {
-  const { values } = useFormState();
-  const filterValues: any = values;
-
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
+export const AdminOfferingsList = () => {
+  const filterValues = useFilterValues(ADMIN_OFFERING_TABLE_NAME);
 
   const filter = useMemo(
     () => buildOfferingsFilter(filterValues),
@@ -64,26 +56,10 @@ const AdminOfferingsListTable = () => {
       showActions
       showProvider
       filters={<OfferingsListFilter />}
-    />
-  );
-};
-
-export const AdminOfferingsList = () => {
-  const initialValues = useMemo(
-    () =>
-      getInitialValues({
+      initialFilters={{
         state: [getStates()[1], getStates()[2]],
         shared: { label: translate('Yes'), value: true },
-      }),
-    [],
-  );
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <AdminOfferingsListTable />}
-    </Form>
+      }}
+    />
   );
 };

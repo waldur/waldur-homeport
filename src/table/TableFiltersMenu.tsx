@@ -6,7 +6,7 @@ import {
   StarIcon,
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { debounce, isEqual, throttle } from 'lodash-es';
+import { throttle } from 'lodash-es';
 import {
   FC,
   useCallback,
@@ -17,7 +17,6 @@ import {
   useState,
 } from 'react';
 import { Button } from 'react-bootstrap';
-import { useForm, useFormState } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -32,6 +31,7 @@ import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';
 import { TableFilterContext } from './FilterContextProvider';
 import { SavedFilterSelect } from './SavedFilterSelect';
 import {
+  selectFilterValues,
   selectSelectedSavedFilter,
   selectTableSavedFilters,
 } from './selectors';
@@ -48,7 +48,7 @@ const SaveFilterDialog = lazyComponent(() =>
 const SaveFilterItems = ({ table, formId, apply }) => {
   const dispatch = useDispatch();
   const { openDialog } = useModal();
-  const { values: formValues = {} } = useFormState();
+  const formValues = useSelector(selectFilterValues(table)) || {};
 
   const selectedSavedFilter = useSelector((state: any) =>
     selectSelectedSavedFilter(state, table),
@@ -207,8 +207,6 @@ interface TableFiltersMenuProps extends Pick<
 
 export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
   const context = useContext(TableFilterContext);
-  const form = useForm();
-  const { values: formValues } = useFormState();
 
   const menuEl = useRef<HTMLDivElement>(null);
   const menuInstance = useRef(null);
@@ -234,32 +232,6 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
       }
     }
   }, [menuEl?.current]);
-
-  // Add hide event listener on menu (cancel/reset the filter changes if they are not applied yet)
-  useEffect(() => {
-    if (menuEl?.current) {
-      menuInstance.current = MenuComponent.getInstance(menuEl.current);
-      if (menuInstance.current) {
-        const resetFilters = debounce(() => {
-          const keys = props.filtersStorage.map((f) => f.name);
-          if (formValues) {
-            keys.push(...Object.keys(formValues));
-          }
-          keys.forEach((name) => {
-            const filter = props.filtersStorage.find((fs) => fs.name === name);
-            if (!isEqual(formValues?.[name], filter?.value)) {
-              form.change(name, filter?.value ?? null);
-            }
-          });
-        }, 100);
-        menuInstance.current.on('kt.menu.dropdown.hidden', () => {
-          // Reset all filters
-          // We are using `debounce`, because there may be multiple menu instances, no need to fire the listener for each one.
-          resetFilters();
-        });
-      }
-    }
-  }, [menuEl?.current, props.filtersStorage, formValues, form]);
 
   const apply = useCallback(
     (hideMenu = true) => {

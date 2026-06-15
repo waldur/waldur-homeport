@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { proposalReviewsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -14,6 +13,7 @@ import {
   ProposalReviewsFilterFormId,
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -29,8 +29,8 @@ interface CallReviewsListProps {
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
-const CallReviewsListTable: FC<CallReviewsListProps> = ({ call }) => {
-  const { values } = useFormState();
+export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
+  const values = useFilterValues(`CallReviewsList-${call.uuid}`);
 
   const formFilters = useMemo(
     () => selectProposalReviewsFilter(values),
@@ -38,15 +38,13 @@ const CallReviewsListTable: FC<CallReviewsListProps> = ({ call }) => {
   );
 
   const filter = useMemo(
-    () => ({
-      call_uuid: call.uuid,
-      ...formFilters,
-    }),
+    () => ({ call_uuid: call.uuid, ...formFilters }),
     [call.uuid, formFilters],
   );
 
   const tableProps = useTable({
     table: `CallReviewsList-${call.uuid}`,
+    syncFiltersToURL: true,
     filter,
     fetchData: createFetcher(proposalReviewsList),
     queryField: 'proposal_name',
@@ -128,15 +126,3 @@ const CallReviewsListTable: FC<CallReviewsListProps> = ({ call }) => {
     />
   );
 };
-
-export const CallReviewsList: FC<any> = (props) => (
-  <Form
-    id={ProposalReviewsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <CallReviewsListTable {...props} />}
-  </Form>
-);

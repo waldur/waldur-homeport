@@ -1,5 +1,4 @@
 import { useMemo, FC } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   Resource,
   marketplaceResourceProjectsList,
@@ -12,6 +11,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
@@ -43,11 +43,11 @@ interface ResourceProjectsListProps {
   offering?;
 }
 
-const ResourceProjectsListTable: FC<ResourceProjectsListProps> = ({
+export const ResourceProjectsList: FC<ResourceProjectsListProps> = ({
   resource,
   offering,
 }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('resource-projects');
   const filterValues = values;
 
   const filter = useMemo(
@@ -60,8 +60,10 @@ const ResourceProjectsListTable: FC<ResourceProjectsListProps> = ({
 
   const tableProps = useTable({
     table: 'resource-projects',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourceProjectsList),
     filter,
+    initialFilters: { include_removed: false },
     queryField: 'name',
   });
 
@@ -139,14 +141,3 @@ const ResourceProjectsListTable: FC<ResourceProjectsListProps> = ({
     />
   );
 };
-
-export const ResourceProjectsList: FC<ResourceProjectsListProps> = (props) => (
-  <Form
-    id={RESOURCE_PROJECTS_FILTER_FORM_ID}
-    onSubmit={() => {}}
-    initialValues={{ include_removed: false }}
-    subscription={{ values: true }}
-  >
-    {() => <ResourceProjectsListTable {...props} />}
-  </Form>
-);

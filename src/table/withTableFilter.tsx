@@ -1,29 +1,20 @@
-import { ComponentType, FC } from 'react';
-import { Field, FieldProps } from 'react-final-form';
+import { ComponentType, FC, useContext, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { setFilter } from './actions';
+import { TableFilterContext } from './FilterContextProvider';
+import { selectFilterValue } from './selectors';
 import { TableFilterItem, TableFilterItemProps } from './TableFilterItem';
 
-// Remove index signatures
-type RemoveIndex<T> = {
-  [K in keyof T as string extends K
-    ? never
-    : number extends K
-      ? never
-      : symbol extends K
-        ? never
-        : K]: T[K];
-};
-
 type AutonomousFilterProps<P> = Omit<P, 'input' | 'meta'> &
-  TableFilterItemProps &
-  RemoveIndex<
-    Omit<FieldProps<any, any>, 'component' | 'render' | 'children'>
-  > & {
+  TableFilterItemProps & {
     name: string;
+    initialValue?: any;
+    validate?: any;
   };
 
 /**
- * A Higher-Order Component that wraps a basic input component with a TableFilterItem AND a react-final-form Field.
+ * A Higher-Order Component that wraps a basic input component with a TableFilterItem AND a Redux connection.
  * This creates a fully autonomous Filter component.
  */
 export function withTableFilter<P extends object>(
@@ -45,21 +36,35 @@ export function withTableFilter<P extends object>(
       ...rest
     } = props;
 
-    const filterItemProps: TableFilterItemProps = {
-      title,
-      name: input.name,
-      badgeValue,
-      getValueLabel,
-      ellipsis,
-      showValueBadge,
-      hideRemoveButton,
-      onApply,
-      instantApply,
-    };
+    const filterItemProps: TableFilterItemProps = useMemo(
+      () => ({
+        title,
+        name: input.name,
+        badgeValue,
+        getValueLabel,
+        ellipsis,
+        showValueBadge,
+        hideRemoveButton,
+        onApply,
+        instantApply,
+      }),
+      [
+        title,
+        input.name,
+        badgeValue,
+        getValueLabel,
+        ellipsis,
+        showValueBadge,
+        hideRemoveButton,
+        onApply,
+        instantApply,
+      ],
+    );
 
-    const componentProps = options?.passLabelToControl
-      ? { ...rest, label: title }
-      : rest;
+    const componentProps = useMemo(
+      () => (options?.passLabelToControl ? { ...rest, label: title } : rest),
+      [options?.passLabelToControl, rest, title],
+    );
 
     return (
       <TableFilterItem {...filterItemProps}>
@@ -77,7 +82,33 @@ export function withTableFilter<P extends object>(
   })`;
 
   const OuterField: FC<AutonomousFilterProps<P>> = (props) => {
-    return <Field {...props} component={InnerComponent} />;
+    const { table } = useContext(TableFilterContext);
+    const dispatch = useDispatch();
+    const value = useSelector(selectFilterValue(table, props.name));
+
+    const input = useMemo(
+      () => ({
+        name: props.name,
+        value: value ?? props.initialValue ?? null,
+        onChange: (newValue: any) => {
+          dispatch(
+            setFilter(table, {
+              name: props.name,
+              value: newValue,
+              label: props.title,
+              component: null, // set by TableFilterItem
+            }),
+          );
+        },
+        onBlur: () => {},
+        onFocus: () => {},
+      }),
+      [value, props.name, table, dispatch, props.title, props.initialValue],
+    );
+
+    const meta = useMemo(() => ({ touched: false, error: undefined }), []);
+
+    return <InnerComponent {...props} input={input} meta={meta} />;
   };
 
   OuterField.displayName = `withTableFilter(${

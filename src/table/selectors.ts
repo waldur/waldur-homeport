@@ -76,3 +76,26 @@ export const getTableState: TableSelector = (table) => (state: RootState) => {
     return INITIAL_STATE;
   }
 };
+
+/** Converts filtersStorage array into a flat {name: value} map.
+ *  This replaces `useFormState().values` in filter consumers. */
+export const selectFilterValues = (table: string) =>
+  createSelector(
+    [(state: RootState) => getTableState(table)(state)?.filtersStorage],
+    (filtersStorage) => {
+      if (!filtersStorage?.length) return EMPTY_OBJECT;
+      return filtersStorage.reduce(
+        (acc, f) => {
+          acc[f.name] = f.value;
+          return acc;
+        },
+        {} as Record<string, any>,
+      );
+    },
+  );
+
+/** Returns a single filter value by name */
+export const selectFilterValue =
+  (table: string, name: string) => (state: RootState) =>
+    getTableState(table)(state)?.filtersStorage?.find((f) => f.name === name)
+      ?.value ?? null;

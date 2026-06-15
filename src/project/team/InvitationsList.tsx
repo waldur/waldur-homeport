@@ -1,6 +1,5 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
 import Avatar from '@/core/Avatar';
@@ -20,6 +19,7 @@ import {
   UserInvitationsFilterFormId,
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { RoleField } from '@/user/affiliations/RoleField';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
@@ -31,22 +31,20 @@ import { useRedirectCourseProjects } from './utils';
 
 const InvitationsListComponent: FunctionComponent = () => {
   const project = useProject();
-  const { values } = useFormState();
+  const values = useFilterValues('user-invitations');
   const stateFilter = useMemo(
     () => selectUserInvitationsFilter(values),
     [values],
   );
 
   const filter = useMemo(
-    () => ({
-      ...stateFilter,
-      scope: project?.url,
-    }),
+    () => ({ ...stateFilter, scope: project?.url }),
     [stateFilter, project],
   );
 
   const props = useTable({
     table: 'user-invitations',
+    syncFiltersToURL: true,
     fetchData: createFetcher(userInvitationsList),
     filter,
     queryField: 'email',
@@ -127,11 +125,7 @@ export const InvitationsList: FunctionComponent = () => {
   const router = useRouter();
   useEffect(() => {
     if (
-      !InvitationPolicyService.canAccessInvitations({
-        user,
-        customer,
-        project,
-      })
+      !InvitationPolicyService.canAccessInvitations({ user, customer, project })
     ) {
       router.stateService.target('errorPage.noPermission');
     }
@@ -139,13 +133,5 @@ export const InvitationsList: FunctionComponent = () => {
 
   useRedirectCourseProjects(project);
 
-  return (
-    <Form
-      id={UserInvitationsFilterFormId}
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-    >
-      {() => <InvitationsListComponent />}
-    </Form>
-  );
+  return <InvitationsListComponent />;
 };

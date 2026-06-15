@@ -1,18 +1,17 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 
 import {
   MarketplaceProjectUpdateRequestsFilter,
   selectMarketplaceProjectUpdateRequestsFilter,
-  MarketplaceProjectUpdateRequestsFilterFormId,
 } from '@/table/generated/MarketplaceProjectUpdateRequestsFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useCustomer } from '@/workspace/hooks';
 
 import { BaseProjectUpdateRequestsList } from './BaseProjectUpdateRequestsList';
 
-const OrganizationProjectUpdateRequestsListTable = () => {
+export const OrganizationProjectUpdateRequestsList = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues('marketplace-project-update-requests');
 
   const formFilter = useMemo(
     () => selectMarketplaceProjectUpdateRequestsFilter(values),
@@ -34,15 +33,3 @@ const OrganizationProjectUpdateRequestsListTable = () => {
     />
   );
 };
-
-export const OrganizationProjectUpdateRequestsList = (props) => (
-  <Form
-    id={MarketplaceProjectUpdateRequestsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <OrganizationProjectUpdateRequestsListTable {...props} />}
-  </Form>
-);

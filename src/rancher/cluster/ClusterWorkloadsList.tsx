@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-final-form';
 import { RancherWorkload, rancherWorkloadsList } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
@@ -16,10 +15,10 @@ import { useTable } from '@/table/useTable';
 import { useClusterFilter } from './ClusterFilterHooks';
 import { WorkloadActions } from './WorkloadActions';
 
-const ClusterWorkloadsListTable: FunctionComponent<
+export const ClusterWorkloadsList: FunctionComponent<
   TableWithPortal<{ resourceScope }>
 > = ({ resourceScope, portal }) => {
-  const { filter } = useClusterFilter(resourceScope);
+  const { filter } = useClusterFilter(resourceScope, 'rancher-workloads');
   const props = useTable({
     table: 'rancher-workloads',
     fetchData: createFetcher(rancherWorkloadsList),
@@ -70,15 +69,3 @@ const ClusterWorkloadsListTable: FunctionComponent<
     />
   );
 };
-
-export const ClusterWorkloadsList: FunctionComponent<
-  TableWithPortal<{ resourceScope }>
-> = (props) => (
-  <Form
-    id={RancherClusterFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <ClusterWorkloadsListTable {...props} />}
-  </Form>
-);

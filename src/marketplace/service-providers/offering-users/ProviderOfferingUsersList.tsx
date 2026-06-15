@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { marketplaceOfferingUsersList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -20,6 +19,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableExportButton } from '@/table/TableExportButton';
 import { TableWithPortal } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -30,7 +30,7 @@ import {
   PROVIDER_OFFERING_USERS_FORM_ID,
 } from './ProviderOfferingUsersFilter';
 
-const ProviderOfferingUsersListComponent: FunctionComponent<
+export const ProviderOfferingUsersList: FunctionComponent<
   Partial<TableWithPortal> & {
     provider?;
     hasOrganizationColumn?: boolean;
@@ -43,7 +43,7 @@ const ProviderOfferingUsersListComponent: FunctionComponent<
     tableActions?: React.ReactNode | ((tableProps: any) => React.ReactNode);
   }
 > = ({ provider, hasOrganizationColumn, portal, offering, tableActions }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('marketplace-offering-users');
   const filterValues = values;
 
   const filter = useMemo(
@@ -59,6 +59,7 @@ const ProviderOfferingUsersListComponent: FunctionComponent<
   );
   const tableProps = useTable({
     table: 'marketplace-offering-users',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceOfferingUsersList),
     filter,
     queryField: 'query',
@@ -296,13 +297,3 @@ const ProviderOfferingUsersListComponent: FunctionComponent<
     />
   );
 };
-
-export const ProviderOfferingUsersList: FunctionComponent<any> = (props) => (
-  <Form
-    id={PROVIDER_OFFERING_USERS_FORM_ID}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <ProviderOfferingUsersListComponent {...props} />}
-  </Form>
-);

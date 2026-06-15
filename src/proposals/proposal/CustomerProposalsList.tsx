@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { proposalProposalsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -13,6 +12,7 @@ import {
   ProposalsFilterFormId,
 } from '@/table/generated/ProposalsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
@@ -23,9 +23,9 @@ import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow'
 import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
 
-const CustomerProposalsListTable: FC<{}> = () => {
+export const CustomerProposalsList: FC = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues('ProposalsList');
   const formFilters = useMemo(() => selectProposalsFilter(values), [values]);
 
   const filter = useMemo(
@@ -40,6 +40,7 @@ const CustomerProposalsListTable: FC<{}> = () => {
 
   const tableProps = useTable({
     table: 'ProposalsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalProposalsList),
     queryField: 'name',
     filter,
@@ -111,15 +112,3 @@ const CustomerProposalsListTable: FC<{}> = () => {
     />
   );
 };
-
-export const CustomerProposalsList: FC<any> = (props) => (
-  <Form
-    id={ProposalsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <CustomerProposalsListTable {...props} />}
-  </Form>
-);

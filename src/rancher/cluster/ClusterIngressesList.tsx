@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-final-form';
 import { RancherIngress, rancherIngressesList } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
@@ -17,10 +16,10 @@ import { useClusterResourceFilter } from './ClusterFilterHooks';
 import { ImportYAMLButton } from './ImportYAMLButton';
 import { IngressActions } from './IngressActions';
 
-const ClusterIngressesListTable: FunctionComponent<
+export const ClusterIngressesList: FunctionComponent<
   TableWithPortal<{ resourceScope }>
 > = ({ resourceScope, portal }) => {
-  const { filter } = useClusterResourceFilter(resourceScope);
+  const filter = useClusterResourceFilter(resourceScope, 'rancher-ingresses');
 
   const props = useTable({
     table: 'rancher-ingresses',
@@ -80,15 +79,3 @@ const ClusterIngressesListTable: FunctionComponent<
     />
   );
 };
-
-export const ClusterIngressesList: FunctionComponent<
-  TableWithPortal<{ resourceScope }>
-> = (props) => (
-  <Form
-    id={RancherClusterFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <ClusterIngressesListTable {...props} />}
-  </Form>
-);

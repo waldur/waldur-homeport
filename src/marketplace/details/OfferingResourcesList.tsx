@@ -1,14 +1,12 @@
-import { FunctionComponent, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { FunctionComponent, useMemo } from 'react';
 import {
   marketplaceProviderResourcesList,
   MarketplaceProviderResourcesListData,
+  ProviderOfferingDetails as Offering,
   Resource,
   ResourceState,
-  ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { translate } from '@/i18n';
 import {
   FILTER_OFFERING_RESOURCE,
@@ -16,6 +14,7 @@ import {
 } from '@/marketplace/details/constants';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { NON_TERMINATED_STATES } from '../resources/list/constants';
@@ -36,15 +35,11 @@ interface FilterValues {
   include_terminated?: boolean;
 }
 
-const OfferingResourcesListTable: FunctionComponent<OwnProps> = (props) => {
-  const { values } = useFormState();
+export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
+  ...props
+}) => {
+  const values = useFilterValues(TABLE_OFFERING_RESOURCE);
   const filterValues: FilterValues = values;
-
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
 
   const filter = useMemo(() => {
     const filterObj: MarketplaceProviderResourcesListData['query'] = {};
@@ -66,6 +61,7 @@ const OfferingResourcesListTable: FunctionComponent<OwnProps> = (props) => {
 
   const tableProps = useTable({
     table: TABLE_OFFERING_RESOURCE,
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceProviderResourcesList),
     filter,
     queryField: 'query',
@@ -90,19 +86,5 @@ const OfferingResourcesListTable: FunctionComponent<OwnProps> = (props) => {
       )}
       filters={<OfferingResourcesFilter />}
     />
-  );
-};
-
-export const OfferingResourcesList: FunctionComponent<OwnProps> = (props) => {
-  const initialValues = useMemo(() => getInitialValues(), []);
-
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <OfferingResourcesListTable {...props} />}
-    </Form>
   );
 };
