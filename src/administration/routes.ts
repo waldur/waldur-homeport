@@ -331,6 +331,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Issue templates'),
+      permissions: [hasSupport],
     },
   },
 
@@ -347,7 +348,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Request types'),
-      permissions: [isStaff],
+      permissions: [isStaff, hasSupport],
     },
   },
 

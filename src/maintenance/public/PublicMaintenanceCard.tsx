@@ -11,7 +11,6 @@ import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementB
 import {
   getMaintenancesForOffering,
   getMaintenanceVariant,
-  toAdminAnnouncementShape,
   usePublicMaintenances,
 } from './usePublicMaintenances';
 
@@ -48,7 +47,7 @@ export const PublicMaintenanceCard: FC<Props> = ({ offeringUuid }) => {
   const openDetails = useCallback(
     (maintenance: PublicMaintenanceAnnouncement) => {
       openDialog(AnnouncementDetailsDialog, {
-        resolve: { announcement: toAdminAnnouncementShape(maintenance) },
+        resolve: { announcement: maintenance },
         size: 'lg',
       });
     },

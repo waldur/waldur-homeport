@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
-import { adminAnnouncementsList } from 'waldur-js-client';
+import { AdminAnnouncement, adminAnnouncementsList } from 'waldur-js-client';
 
 import {
   ANNOUNCEMENT_ICON,
@@ -45,7 +45,7 @@ export const AdminAnnouncements = () => {
   });
 
   const { openDialog } = useModal();
-  const callback = useCallback((announcement) => {
+  const callback = useCallback((announcement: AdminAnnouncement) => {
     openDialog(AnnouncementDetailsDialog, {
       resolve: { announcement },
       size: 'lg',

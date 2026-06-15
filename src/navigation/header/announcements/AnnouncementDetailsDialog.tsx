@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
-import { AdminAnnouncement } from 'waldur-js-client';
+import {
+  AdminAnnouncement,
+  PublicMaintenanceAnnouncement,
+} from 'waldur-js-client';
 
 import {
   ANNOUNCEMENT_ICON,
@@ -13,36 +16,96 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { Field } from '@/resource/summary';
 import { renderFieldOrDash } from '@/table/utils';
 
+// MAINTENANCE_TYPE: Emergency = 2, Security = 3 map to the "danger" variant.
+const isCriticalMaintenance = (type: number | undefined) =>
+  type === 2 || type === 3;
+
+/**
+ * Reconciles the two SDK shapes the dialog can be opened with — an admin
+ * announcement ({@link AdminAnnouncement}, maintenance fields prefixed) and a
+ * public maintenance announcement ({@link PublicMaintenanceAnnouncement}, flat
+ * native fields) — onto a common set of values for rendering.
+ */
+const normalize = (
+  announcement: AdminAnnouncement | PublicMaintenanceAnnouncement,
+) =>
+  'message' in announcement
+    ? {
+        type: isCriticalMaintenance(announcement.maintenance_type)
+          ? 'danger'
+          : 'warning',
+        description: announcement.message,
+        isMaintenance: true,
+        name: announcement.name,
+        serviceProvider: announcement.service_provider_name,
+        scheduledStart: announcement.scheduled_start,
+        scheduledEnd: announcement.scheduled_end,
+        activeFrom: undefined,
+        activeTo: undefined,
+        affectedOfferings: announcement.affected_offerings?.map((offering) => ({
+          uuid: offering.uuid || undefined,
+          name: offering.offering_name || undefined,
+          impactLevel:
+            typeof offering.impact_level === 'number'
+              ? String(offering.impact_level)
+              : undefined,
+          impactLevelDisplay:
+            (offering.impact_level_display as string) || undefined,
+          impactDescription: offering.impact_description,
+        })),
+      }
+    : {
+        type: announcement.type ?? 'information',
+        description: announcement.description,
+        isMaintenance: Boolean(announcement.maintenance_uuid),
+        name: announcement.maintenance_name,
+        serviceProvider: announcement.maintenance_service_provider,
+        scheduledStart: announcement.maintenance_scheduled_start,
+        scheduledEnd: announcement.maintenance_scheduled_end,
+        activeFrom: announcement.active_from,
+        activeTo: announcement.active_to,
+        affectedOfferings: announcement.maintenance_affected_offerings?.map(
+          (offering) => ({
+            uuid: offering.uuid || undefined,
+            name: offering.name || undefined,
+            impactLevel: offering.impact_level || undefined,
+            impactLevelDisplay: offering.impact_level_display || undefined,
+            impactDescription: offering.impact_description,
+          }),
+        ),
+      };
+
 export const AnnouncementDetailsDialog: FC<{
   resolve: {
-    announcement: AdminAnnouncement;
+    announcement: AdminAnnouncement | PublicMaintenanceAnnouncement;
   };
 }> = ({ resolve: { announcement } }) => {
-  const icon = ANNOUNCEMENT_ICON[announcement.type];
-  const isMaintenance = !!announcement.maintenance_uuid;
+  const view = normalize(announcement);
+  const icon = ANNOUNCEMENT_ICON[view.type];
+  const isMaintenance = view.isMaintenance;
 
   // Determine if this is a long-form description (contains structured content)
   const hasStructuredContent =
-    announcement.description &&
-    (announcement.description.includes('##') ||
-      announcement.description.includes('###') ||
-      announcement.description.length > 200);
+    view.description &&
+    (view.description.includes('##') ||
+      view.description.includes('###') ||
+      view.description.length > 200);
 
   const renderMaintenanceHeader = () => {
     if (!isMaintenance) return null;
 
     const headerParts = [];
-    if (announcement.maintenance_service_provider) {
-      headerParts.push(announcement.maintenance_service_provider);
+    if (view.serviceProvider) {
+      headerParts.push(view.serviceProvider);
     }
-    if (announcement.maintenance_scheduled_start) {
+    if (view.scheduledStart) {
       headerParts.push(
-        `${translate('Ongoing Since')}: ${formatDateTime(announcement.maintenance_scheduled_start)}`,
+        `${translate('Ongoing Since')}: ${formatDateTime(view.scheduledStart)}`,
       );
     }
-    if (announcement.maintenance_scheduled_end) {
+    if (view.scheduledEnd) {
       headerParts.push(
-        `${translate('Expected Completion')}: ${formatDateTime(announcement.maintenance_scheduled_end)}`,
+        `${translate('Expected Completion')}: ${formatDateTime(view.scheduledEnd)}`,
       );
     }
 
@@ -56,22 +119,22 @@ export const AnnouncementDetailsDialog: FC<{
 
     return (
       <>
-        {announcement.maintenance_service_provider && (
+        {view.serviceProvider && (
           <Field
             label={translate('Service Provider')}
-            value={announcement.maintenance_service_provider}
+            value={view.serviceProvider}
           />
         )}
-        {announcement.maintenance_scheduled_start && (
+        {view.scheduledStart && (
           <Field
             label={translate('Ongoing Since')}
-            value={formatDateTime(announcement.maintenance_scheduled_start)}
+            value={formatDateTime(view.scheduledStart)}
           />
         )}
-        {announcement.maintenance_scheduled_end && (
+        {view.scheduledEnd && (
           <Field
             label={translate('Expected Completion')}
-            value={formatDateTime(announcement.maintenance_scheduled_end)}
+            value={formatDateTime(view.scheduledEnd)}
           />
         )}
       </>
@@ -83,7 +146,7 @@ export const AnnouncementDetailsDialog: FC<{
 
     return (
       <div className="mb-4">
-        <SafeMarkdown text={announcement.description} />
+        <SafeMarkdown text={view.description} />
       </div>
     );
   };
@@ -95,16 +158,13 @@ export const AnnouncementDetailsDialog: FC<{
     return (
       <Field
         label={translate('Message')}
-        value={<SafeMarkdown text={announcement.description} />}
+        value={<SafeMarkdown text={view.description} />}
       />
     );
   };
 
   const renderAffectedOfferings = () => {
-    if (
-      !announcement.maintenance_affected_offerings ||
-      announcement.maintenance_affected_offerings.length === 0
-    ) {
+    if (!view.affectedOfferings || view.affectedOfferings.length === 0) {
       return null;
     }
 
@@ -120,19 +180,17 @@ export const AnnouncementDetailsDialog: FC<{
             </tr>
           </thead>
           <tbody>
-            {announcement.maintenance_affected_offerings.map(
-              (offering, index) => (
-                <tr key={offering.uuid || index}>
-                  <td>{renderFieldOrDash(offering.name)}</td>
-                  <td>
-                    {renderFieldOrDash(
-                      offering.impact_level_display || offering.impact_level,
-                    )}
-                  </td>
-                  <td>{renderFieldOrDash(offering.impact_description)}</td>
-                </tr>
-              ),
-            )}
+            {view.affectedOfferings.map((offering, index) => (
+              <tr key={offering.uuid || index}>
+                <td>{renderFieldOrDash(offering.name)}</td>
+                <td>
+                  {renderFieldOrDash(
+                    offering.impactLevelDisplay || offering.impactLevel,
+                  )}
+                </td>
+                <td>{renderFieldOrDash(offering.impactDescription)}</td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </div>
@@ -140,10 +198,10 @@ export const AnnouncementDetailsDialog: FC<{
   };
 
   const getTitle = () => {
-    if (isMaintenance && announcement.maintenance_name) {
-      return `${translate('Maintenance')}: ${announcement.maintenance_name}`;
+    if (isMaintenance && view.name) {
+      return `${translate('Maintenance')}: ${view.name}`;
     }
-    return getAnnouncementTypeLabel(announcement.type);
+    return getAnnouncementTypeLabel(view.type);
   };
 
   return (
@@ -162,11 +220,11 @@ export const AnnouncementDetailsDialog: FC<{
         <>
           <Field
             label={translate('Active from')}
-            value={formatDateTime(announcement.active_from)}
+            value={formatDateTime(view.activeFrom)}
           />
           <Field
             label={translate('Active to')}
-            value={formatDateTime(announcement.active_to)}
+            value={formatDateTime(view.activeTo)}
           />
         </>
       )}

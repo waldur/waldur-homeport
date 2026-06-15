@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import {
-  AdminAnnouncement,
   PublicMaintenanceAnnouncement,
   publicMaintenanceAnnouncementsList,
 } from 'waldur-js-client';
@@ -62,40 +61,4 @@ export const getMaintenanceVariant = (
     maintenance.maintenance_type === 3
     ? 'danger'
     : 'warning';
-};
-
-/**
- * Adapts a `PublicMaintenanceAnnouncement` onto the shape the existing
- * `AnnouncementDetailsDialog` expects (modelled after `AdminAnnouncement`
- * + maintenance fields). This avoids touching the dialog implementation.
- */
-export const toAdminAnnouncementShape = (
-  maintenance: PublicMaintenanceAnnouncement,
-): AdminAnnouncement => {
-  const variant = getMaintenanceVariant(maintenance);
-  return {
-    uuid: maintenance.uuid,
-    description: maintenance.message,
-    type: variant,
-    maintenance_uuid: maintenance.uuid,
-    maintenance_name: maintenance.name,
-    maintenance_type: maintenance.maintenance_type_display,
-    maintenance_state: maintenance.state,
-    maintenance_scheduled_start: maintenance.scheduled_start,
-    maintenance_scheduled_end: maintenance.scheduled_end,
-    maintenance_service_provider: maintenance.service_provider_name,
-    maintenance_external_reference_url: maintenance.external_reference_url,
-    maintenance_affected_offerings: (maintenance.affected_offerings || []).map(
-      (entry) => ({
-        uuid: entry.uuid,
-        name: entry.offering_name,
-        impact_level:
-          typeof entry.impact_level === 'number'
-            ? String(entry.impact_level)
-            : undefined,
-        impact_level_display: entry.impact_level_display,
-        impact_description: entry.impact_description,
-      }),
-    ),
-  };
 };
