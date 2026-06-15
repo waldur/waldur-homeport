@@ -19,23 +19,23 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
     customer ? customer.payment_profiles : props.paymentProfiles,
   );
   const { data: totalOfSumPaid } = useQuery({
-    queryKey: ['AgreementInfo', activeFixedPricePaymentProfile],
-
+    queryKey: ['AgreementInfo', activeFixedPricePaymentProfile?.uuid],
+    // React Query forbids queryFn returning undefined; without a profile
+    // there is nothing to fetch at all.
+    enabled: Boolean(activeFixedPricePaymentProfile),
     queryFn: async () => {
-      if (activeFixedPricePaymentProfile) {
-        const response = await getAllPages((page) =>
-          paymentsList({
-            query: {
-              page,
-              page_size: MAX_PAGE_SIZE,
-              profile_uuid: activeFixedPricePaymentProfile.uuid,
-            },
-          }),
-        );
-        return response
-          .map((payment) => parseInt(payment.sum))
-          .reduce((a, b) => a + b);
-      }
+      const response = await getAllPages((page) =>
+        paymentsList({
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            profile_uuid: activeFixedPricePaymentProfile.uuid,
+          },
+        }),
+      );
+      return response
+        .map((payment) => parseInt(payment.sum))
+        .reduce((a, b) => a + b, 0);
     },
   });
   return (
