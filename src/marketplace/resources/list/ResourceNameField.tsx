@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Resource } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { PublicMaintenanceBadge } from '@/maintenance/public/PublicMaintenanceBadge';
 
 import { ResourceFlags } from '../details/ResourceFlags';
 
@@ -22,6 +23,7 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
         className="text-hover-primary cursor-pointer d-inline-block"
       />
       <ResourceFlags resource={row} />
+      <PublicMaintenanceBadge offeringUuid={row.offering_uuid} />
     </div>
   );
 };
