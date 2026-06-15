@@ -44,7 +44,11 @@ export const ErrorPageView: FC<PropsWithChildren<ErrorPageViewProps>> = (
     translate('Something went wrong.');
 
   return (
-    <div className="error-view text-center">
+    <div
+      className="error-view text-center"
+      data-testid="error-page"
+      data-error-code={props.code}
+    >
       <h1>{props.code}</h1>
       {title ? <h2>{title}</h2> : null}
       <p>{description}</p>

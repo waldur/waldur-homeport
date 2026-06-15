@@ -7,7 +7,7 @@ import Illustration from '@/images/table-placeholders/undraw_fixing_bugs_w7gi.sv
 import { ImageTablePlaceholder } from '@/table/ImageTablePlaceholder';
 
 export const ErrorMessage: FallbackRender = (props) => (
-  <>
+  <div data-testid="error-boundary-message">
     <ImageTablePlaceholder
       illustration={<Illustration />}
       title={translate('An error has occurred.')}
@@ -28,5 +28,5 @@ export const ErrorMessage: FallbackRender = (props) => (
     <pre className="mt-3">
       {props.componentStack || (props.error as Error).stack}
     </pre>
-  </>
+  </div>
 );

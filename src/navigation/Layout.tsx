@@ -148,7 +148,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
                     <div className="extra-toolbar">{ExtraToolbar}</div>
                   )}
                   <div className="post w-100 d-flex flex-column-fluid">
-                    {state.data.auth && !currentUser ? (
+                    {state?.data?.auth && !currentUser ? (
                       <LoadingSpinner />
                     ) : (
                       children
