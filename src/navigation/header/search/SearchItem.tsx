@@ -19,10 +19,11 @@ export interface SearchItemProps {
   to: string;
   params?: { [key: string]: string };
   badge?: ReactNode;
+  actions?: ReactNode;
   onClick?(item: SearchItemProps);
   isFavorite?: ReturnType<typeof useFavoritePages>['isFavorite'];
   addFavoritePage?: ReturnType<typeof useFavoritePages>['addFavoritePage'];
-  removeFavorite: ReturnType<typeof useFavoritePages>['removeFavorite'];
+  removeFavorite?: ReturnType<typeof useFavoritePages>['removeFavorite'];
 }
 
 export const SearchItem = (props: SearchItemProps) => {
@@ -59,29 +60,32 @@ export const SearchItem = (props: SearchItemProps) => {
       </div>
       <div className="ms-auto d-flex">
         {props.badge && <div>{props.badge}</div>}
-        <button
-          className={classNames('btn-fav', isFav && 'show')}
-          onClick={(e) =>
-            isFav
-              ? props.removeFavorite(props.to, props.params, e)
-              : props.addFavoritePage(
-                  {
-                    state: props.to,
-                    params: props.params,
-                    title: props.title,
-                    subtitle: props.subtitle,
-                    image: props.image,
-                  },
-                  e,
-                )
-          }
-        >
-          {isFav ? (
-            <StarIcon size={20} weight="fill" className="text-warning" />
-          ) : (
-            <StarIcon size={20} className="text-dark" weight="bold" />
-          )}
-        </button>
+        {props.actions}
+        {props.addFavoritePage && (
+          <button
+            className={classNames('btn-fav', isFav && 'show')}
+            onClick={(e) =>
+              isFav
+                ? props.removeFavorite(props.to, props.params, e)
+                : props.addFavoritePage(
+                    {
+                      state: props.to,
+                      params: props.params,
+                      title: props.title,
+                      subtitle: props.subtitle,
+                      image: props.image,
+                    },
+                    e,
+                  )
+            }
+          >
+            {isFav ? (
+              <StarIcon size={20} weight="fill" className="text-warning" />
+            ) : (
+              <StarIcon size={20} className="text-dark" weight="bold" />
+            )}
+          </button>
+        )}
       </div>
     </Link>
   );

@@ -127,6 +127,7 @@ export const useSearch = () => {
             'organization',
             'permissions',
             'is_active',
+            'has_active_session',
           ],
           page_size: 50,
         },
