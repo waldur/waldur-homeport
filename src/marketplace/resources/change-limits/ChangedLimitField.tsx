@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
 interface ChangedLimitFieldProps {
@@ -12,7 +14,11 @@ export const ChangedLimitField: FunctionComponent<ChangedLimitFieldProps> = ({
   unit,
 }) => {
   if (changedLimit === 0) {
-    return <span className="text-muted">{changedLimit}</span>;
+    return (
+      <Badge variant="default" size="sm" pill outline>
+        {translate('No change')}
+      </Badge>
+    );
   }
 
   return (
