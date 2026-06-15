@@ -469,6 +469,20 @@ export const states: StateDeclaration[] = [
     },
   },
   {
+    name: 'marketplace-provider-user-manage-container',
+    url: '',
+    parent: 'marketplace-provider-customers',
+    component: lazyComponent(() =>
+      import('@/user/UserManageContainer').then((module) => ({
+        default: module.UserManageContainer,
+      })),
+    ),
+    abstract: true,
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+  {
     name: 'marketplace-provider-user-manage',
     parent: 'marketplace-provider-user-manage-container',
     url: 'users/:user_uuid/?tab',
