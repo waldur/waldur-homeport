@@ -17,6 +17,7 @@ import { RecentSearchItem } from './RecentSearchItem';
 import { useRecentSearch } from './RecentSearchService';
 import { SearchInput } from './SearchInput';
 import { SearchItem } from './SearchItem';
+import { UserSearchImpersonateAction } from './UserSearchImpersonateAction';
 import { SearchResult, UsersSearchResult } from './useSearch';
 
 interface SearchPopoverProps {
@@ -397,17 +398,11 @@ const UsersTabContent = ({
   usersResult,
   clearSearch,
   addRecentSearch,
-  isFavorite,
-  addFavoritePage,
-  removeFavorite,
   close,
 }: {
   usersResult: UsersSearchResult;
   clearSearch(): void;
   addRecentSearch(item, type): void;
-  isFavorite: TabContentProps['isFavorite'];
-  addFavoritePage: TabContentProps['addFavoritePage'];
-  removeFavorite: TabContentProps['removeFavorite'];
   close(): void;
 }) => {
   return (
@@ -421,9 +416,7 @@ const UsersTabContent = ({
               params={{ user_uuid: user.uuid }}
               title={user.full_name || user.email}
               subtitle={formatUserSubtitle(user)}
-              isFavorite={isFavorite}
-              addFavoritePage={addFavoritePage}
-              removeFavorite={removeFavorite}
+              actions={<UserSearchImpersonateAction row={user} close={close} />}
               onClick={(item) => {
                 addRecentSearch(item, 'user');
                 close();
@@ -601,9 +594,6 @@ export const SearchPopover = ({
                 usersResult={usersResult}
                 clearSearch={clearSearch}
                 addRecentSearch={addRecentSearch}
-                isFavorite={isFavorite}
-                addFavoritePage={addFavoritePage}
-                removeFavorite={removeFavorite}
                 close={close}
               />
             </Tab.Pane>

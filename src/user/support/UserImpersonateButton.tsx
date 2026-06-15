@@ -1,33 +1,15 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/notify';
-import { setImpersonatorUser } from '@/workspace/actions';
 import { useUser } from '@/workspace/hooks';
 
-import { UsersService, setImpersonationData } from '../UsersService';
+import { useImpersonate } from './useImpersonate';
 
 export const UserImpersonateButton: FunctionComponent<{ row }> = ({ row }) => {
   const user = useUser();
-  const dispatch = useDispatch();
-
-  const { showErrorResponse } = useNotify();
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: async () => {
-      try {
-        setImpersonationData(row.uuid);
-        dispatch(setImpersonatorUser(user));
-        await UsersService.refreshCurrentUser();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to impersonate the user.'));
-      }
-    },
-  });
+  const { impersonate, isPending } = useImpersonate(row.uuid);
 
   if (!(user?.uuid !== row.uuid && user?.is_staff)) {
     return null;
@@ -36,7 +18,7 @@ export const UserImpersonateButton: FunctionComponent<{ row }> = ({ row }) => {
   return (
     <ActionItem
       title={translate('Impersonate')}
-      action={mutate}
+      action={impersonate}
       iconNode={<EyeIcon weight="bold" />}
       disabled={isPending || !row.has_active_session}
       tooltip={
