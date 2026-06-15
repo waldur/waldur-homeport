@@ -5,6 +5,7 @@ import { translate } from '@/i18n';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import { useUser } from '@/workspace/hooks';
 
+import { MultiChangeLimitsAction } from './MultiChangeLimitsAction';
 import { MultiDestroyAction } from './MultiDestroyAction';
 import { MultiEditOptionsAction } from './MultiEditOptionsAction';
 import { MultiMoveAction } from './MultiMoveAction';
@@ -31,6 +32,7 @@ export const ResourceMultiSelectAction = ({
   return (
     <ActionDropdownButton variant="primary" title={translate('All actions')}>
       <MultiRenewAllocationsAction rows={rows} refetch={refetch} />
+      <MultiChangeLimitsAction rows={rows} refetch={refetch} />
       <MultiSetEndDateAction rows={rows} refetch={refetch} />
       <MultiEditOptionsAction rows={rows} refetch={refetch} />
       <MultiStopAction rows={rows} refetch={refetch} />
