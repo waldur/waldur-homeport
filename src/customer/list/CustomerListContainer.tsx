@@ -32,11 +32,11 @@ async function oldestInvoice() {
 async function loadData() {
   const start = await oldestInvoice();
   const accountingPeriods = makeAccountingPeriods(start);
-  const initialValues = {
+  const initialFilters = {
     accounting_period: accountingPeriods[0],
     accounting_is_running: getOptions()[0],
   };
-  return { initialValues, accountingPeriods };
+  return { initialFilters, accountingPeriods };
 }
 
 export const CustomerListContainer: FunctionComponent = () => {

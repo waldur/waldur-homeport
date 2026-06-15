@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { marketplaceSoftwarePackagesList, Offering } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -8,10 +7,11 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
   MarketplaceSoftwarePackagesFilter,
-  selectMarketplaceSoftwarePackagesFilter,
   MarketplaceSoftwarePackagesFilterFormId,
+  selectMarketplaceSoftwarePackagesFilter,
 } from '@/table/generated/MarketplaceSoftwarePackagesFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -21,7 +21,7 @@ interface PublicOfferingSoftwareCatalogTableProps {
   offering: Offering;
 }
 
-const PublicOfferingSoftwareCatalogTableTable: FunctionComponent<
+export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
   PublicOfferingSoftwareCatalogTableProps
 > = ({ offering }) => {
   const SoftwarePackageExpandableRowWithOffering = ({ row }) => (
@@ -62,7 +62,7 @@ const PublicOfferingSoftwareCatalogTableTable: FunctionComponent<
 
     return parts.length > 0 ? parts.join(' | ') : null;
   };
-  const { values } = useFormState();
+  const values = useFilterValues('OfferingSoftwarePackages-' + offering.uuid);
 
   const formFilter = useMemo(
     () => selectMarketplaceSoftwarePackagesFilter(values),
@@ -87,6 +87,7 @@ const PublicOfferingSoftwareCatalogTableTable: FunctionComponent<
 
   const tableProps = useTable({
     table: 'OfferingSoftwarePackages-' + offering.uuid,
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceSoftwarePackagesList),
     queryField: 'query',
     filter,
@@ -204,15 +205,3 @@ const PublicOfferingSoftwareCatalogTableTable: FunctionComponent<
     />
   );
 };
-
-export const PublicOfferingSoftwareCatalogTable = (props) => (
-  <Form
-    id={MarketplaceSoftwarePackagesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <PublicOfferingSoftwareCatalogTableTable {...props} />}
-  </Form>
-);

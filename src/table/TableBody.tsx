@@ -67,7 +67,7 @@ interface TableCellsProps {
 }
 
 const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
-  const { filterComponents, apply, changeFormField } =
+  const { filterComponents, apply, changeFilterValue } =
     React.useContext(TableFilterContext);
 
   const callback = useCallback(() => {
@@ -76,9 +76,9 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
     );
     const value = column.inlineFilter(row);
     filterConfig.setFilter(value);
-    changeFormField(column.filter, value);
+    changeFilterValue(column.filter, value);
     apply();
-  }, [filterComponents, column, row, changeFormField, apply]);
+  }, [filterComponents, column, row, changeFilterValue, apply]);
 
   return (
     <>

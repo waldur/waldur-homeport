@@ -1,8 +1,7 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
-import { FunctionComponent, useEffect, useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { Form, useFormState } from 'react-final-form';
 import {
   marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
@@ -11,7 +10,6 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -22,6 +20,7 @@ import { BooleanField } from '@/table/BooleanField';
 import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
@@ -95,7 +94,7 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   'project_uuid',
 ];
 
-const PublicOfferingsListTable: FunctionComponent<{
+export const PublicOfferingsList: FunctionComponent<{
   filter?;
   showCategory?;
   showOrganization?;
@@ -113,14 +112,8 @@ const PublicOfferingsListTable: FunctionComponent<{
   const contextCardStyle = useCardStyle();
   const resolvedVariant = variant ?? contextCardStyle;
 
-  const { values } = useFormState();
+  const values = useFilterValues('PublicOfferingsList');
   const filterValues: any = values;
-
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
 
   const baseFilter = useMemo(
     () => buildOfferingsFilter(filterValues),
@@ -134,6 +127,7 @@ const PublicOfferingsListTable: FunctionComponent<{
 
   const props = useTable({
     table: 'PublicOfferingsList',
+    syncFiltersToURL: true,
     filter: mergedFilter,
     fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'keyword',
@@ -246,25 +240,5 @@ const PublicOfferingsListTable: FunctionComponent<{
       rowActions={RowActions}
       hasOptionalColumns
     />
-  );
-};
-
-export const PublicOfferingsList: FunctionComponent<{
-  filter?;
-  showCategory?;
-  showOrganization?;
-  initialMode?;
-  variant?: CardStyleType;
-  onTagClick?(tag: NestedTag): void;
-}> = (props) => {
-  const initialValues = useMemo(() => getInitialValues(), []);
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <PublicOfferingsListTable {...props} />}
-    </Form>
   );
 };

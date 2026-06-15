@@ -1,5 +1,4 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   adminArrowCustomerMappingsList,
   ArrowCustomerMapping,
@@ -15,6 +14,7 @@ import {
   AdminArrowCustomerMappingsFilterFormId,
 } from '@/table/generated/AdminArrowCustomerMappingsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { CustomerMappingActions } from './CustomerMappingActions';
@@ -36,10 +36,10 @@ interface CustomerMappingsListProps {
   settings?: { uuid: string } | null;
 }
 
-const CustomerMappingsListTable: FunctionComponent<
+export const CustomerMappingsList: FunctionComponent<
   CustomerMappingsListProps
 > = ({ settings }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('ArrowCustomerMappings');
 
   const formFilter = useMemo(
     () => selectCustomerMappingsFilter(values),
@@ -56,6 +56,7 @@ const CustomerMappingsListTable: FunctionComponent<
 
   const tableProps = useTable({
     table: 'ArrowCustomerMappings',
+    syncFiltersToURL: true,
     fetchData: createFetcher(adminArrowCustomerMappingsList),
     filter,
     queryField: 'arrow_company_name',
@@ -121,15 +122,3 @@ const CustomerMappingsListTable: FunctionComponent<
     />
   );
 };
-
-export const CustomerMappingsList = (props) => (
-  <Form
-    id={AdminArrowCustomerMappingsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <CustomerMappingsListTable {...props} />}
-  </Form>
-);

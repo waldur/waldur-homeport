@@ -1,7 +1,6 @@
 import { PencilSimpleIcon, QuestionIcon } from '@phosphor-icons/react';
 import { uniqueId } from 'lodash-es';
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { Notification, notificationMessagesList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -15,13 +14,14 @@ import {
   NotificationMessagesFilterFormId,
 } from '@/table/generated/NotificationMessagesFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { NotificationActions } from './NotificationActions';
 import { NotificationExpandableRow } from './NotificationExpandableRow';
 
-const NotificationListTable = () => {
-  const { values } = useFormState();
+export const NotificationList = () => {
+  const values = useFilterValues('notification');
 
   const filter = useMemo(
     () => selectNotificationMessagesFilter(values),
@@ -30,6 +30,7 @@ const NotificationListTable = () => {
 
   const tableProps = useTable({
     table: 'notification',
+    syncFiltersToURL: true,
     fetchData: createFetcher(notificationMessagesList),
     filter,
     queryField: 'query',
@@ -103,15 +104,3 @@ const NotificationListTable = () => {
     />
   );
 };
-
-export const NotificationList = (props) => (
-  <Form
-    id={NotificationMessagesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <NotificationListTable {...props} />}
-  </Form>
-);

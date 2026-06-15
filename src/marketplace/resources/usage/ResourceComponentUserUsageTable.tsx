@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceComponentUserUsagesList,
   MarketplaceComponentUserUsagesListData,
@@ -11,6 +10,7 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import {
@@ -18,11 +18,11 @@ import {
   RESOURCE_USAGE_FILTER_FORM_ID,
 } from './ResourceUsageFilter';
 
-const ResourceComponentUserUsageTableTable: FC<TableWithPortal<any>> = ({
+export const ResourceComponentUserUsageTable: FC<TableWithPortal<any>> = ({
   portal,
   ...props
 }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('ResourceUsageTable');
   const filterForm = values;
 
   const filter = useMemo(() => {
@@ -45,6 +45,7 @@ const ResourceComponentUserUsageTableTable: FC<TableWithPortal<any>> = ({
 
   const tableProps = useTable({
     table: 'ResourceUsageTable',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceComponentUserUsagesList),
     filter,
   });
@@ -81,15 +82,3 @@ const ResourceComponentUserUsageTableTable: FC<TableWithPortal<any>> = ({
     />
   );
 };
-
-export const ResourceComponentUserUsageTable: FC<TableWithPortal<any>> = (
-  props,
-) => (
-  <Form
-    id={RESOURCE_USAGE_FILTER_FORM_ID}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <ResourceComponentUserUsageTableTable {...props} />}
-  </Form>
-);

@@ -1,5 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { describe, expect, it, vi } from 'vitest';
 
 import { renderWithProviders } from '@/test/harness';
@@ -40,16 +42,20 @@ const invoice = {
   month: 6,
 } as any;
 
+const store = createStore(() => ({}));
+
 describe('InvoiceItemsTable', () => {
   it('refreshes the items table (not just the invoice header) when a per-row action fires', async () => {
     const refreshInvoiceItems = vi.fn();
     fetchSpy.mockClear();
 
     renderWithProviders(
-      <InvoiceItemsTable
-        invoice={invoice}
-        refreshInvoiceItems={refreshInvoiceItems}
-      />,
+      <Provider store={store}>
+        <InvoiceItemsTable
+          invoice={invoice}
+          refreshInvoiceItems={refreshInvoiceItems}
+        />
+      </Provider>,
     );
 
     await userEvent.click(screen.getByText('trigger-refresh'));

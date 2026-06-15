@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { Feedback, supportFeedbacksList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -16,6 +15,7 @@ import {
 } from '@/table/generated/SupportFeedbacksFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { feedbackOptions } from './utils';
@@ -24,15 +24,16 @@ interface SupportFeedbackListProps {
   standalone?: boolean;
 }
 
-const SupportFeedbackListTable: FC<SupportFeedbackListProps> = ({
+export const SupportFeedbackList: FC<SupportFeedbackListProps> = ({
   standalone = false,
 }) => {
-  const { values } = useFormState();
+  const values = useFilterValues(SUPPORT_FEEDBACK_LIST);
 
   const filter = useMemo(() => selectSupportFeedbacksFilter(values), [values]);
 
   const props = useTable({
     table: SUPPORT_FEEDBACK_LIST,
+    syncFiltersToURL: true,
     fetchData: createFetcher(supportFeedbacksList),
     filter,
     queryField: 'query',
@@ -88,15 +89,3 @@ const SupportFeedbackListTable: FC<SupportFeedbackListProps> = ({
     />
   );
 };
-
-export const SupportFeedbackList: FC<any> = (props) => (
-  <Form
-    id={SupportFeedbacksFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <SupportFeedbackListTable {...props} />}
-  </Form>
-);

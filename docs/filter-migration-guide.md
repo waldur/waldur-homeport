@@ -35,11 +35,11 @@ The generation process is driven by:
 
 The script produces `src/table/generated/{OperationId}Filter.tsx` files. Each file exports:
 
-- `Pure{Name}Filter`: The presentation component.
-- `{Name}Filter`: The filter component using `react-final-form`.
-- `{Name}FilterFormData`: TypeScript interface for form values.
+- `{Name}Filter`: The filter component containing autonomous filter components (StringFilter, SelectFilter, etc.) that connect directly to Redux.
+- `{Name}FilterFormData`: TypeScript interface for filter values.
 - `{Name}FilterProps`: TypeScript interface for component props.
-- `select{Name}Filter`: A selector to transform form values into API query parameters.
+- `select{Name}Filter`: A selector to transform Redux filter values into API query parameters.
+- `{Name}FilterFormId`: A constant string used as the table ID (Redux key).
 
 ---
 
@@ -80,18 +80,45 @@ This will create/update `src/table/generated/CustomersFilter.tsx`.
 
 ### 4. Replace the Manual Component
 
-In your table definition (e.g., `CustomersList.tsx`), replace the manual filter component with the generated one.
+In your table definition (e.g., `CustomersList.tsx`), replace the manual filter component with the generated one. Use `useFilterValues` to get the Redux state and the generated selector to prepare the `filter` object for `useTable`.
 
 **Before:**
 
 ```typescript
+import { Form, useFormState } from 'react-final-form';
 import { CustomersFilter } from './CustomersFilter'; // Manual file
+
+const CustomersListTable = () => {
+  const { values } = useFormState();
+  const filter = useMemo(() => selectManualFilter(values), [values]);
+  const tableProps = useTable({ table: 'customers', fetchData, filter });
+  return <Table {...tableProps} filters={<CustomersFilter />} />;
+}
+
+export const CustomersList = () => (
+  <Form onSubmit={() => {}} subscription={{ values: true }}>
+    {() => <CustomersListTable />}
+  </Form>
+);
 ```
 
 **After:**
 
 ```typescript
-import { CustomersFilter } from './generated/CustomersFilter'; // Generated file
+import { useFilterValues } from '@/table/useFilterValues';
+import { CustomersFilter, selectCustomersFilter } from './generated/CustomersFilter';
+
+export const CustomersList = () => {
+  const values = useFilterValues('customers');
+  const filter = useMemo(() => selectCustomersFilter(values), [values]);
+  const tableProps = useTable({
+    table: 'customers',
+    fetchData,
+    filter,
+    syncFiltersToURL: true, // Enable automatic URL synchronization
+  });
+  return <Table {...tableProps} filters={<CustomersFilter />} />;
+}
 ```
 
 ### 5. Verify & Clean Up

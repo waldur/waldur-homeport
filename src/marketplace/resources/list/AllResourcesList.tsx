@@ -1,8 +1,6 @@
-import { FC, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { FC, useMemo } from 'react';
 import { marketplaceResourcesList, Project } from 'waldur-js-client';
 
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { translate } from '@/i18n';
 import {
   ALL_RESOURCES_TABLE_ID,
@@ -12,6 +10,7 @@ import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation
 import { useTitle } from '@/navigation/title';
 import { createFetcher } from '@/table/api';
 import { TableProps } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { ResourcesAllListTable } from './ResourcesAllListTable';
@@ -21,19 +20,13 @@ interface AllResourcesListProps extends Partial<TableProps> {
   project?: Project;
 }
 
-const AllResourcesListTable: FC<AllResourcesListProps> = (props) => {
+export const AllResourcesList: FC<AllResourcesListProps> = ({ ...props }) => {
   useTitle(translate('All resources'), '', 'browser');
   const { syncResourceFilters } =
     useOrganizationAndProjectAutocompletesForResources('all-resources');
 
-  const { values } = useFormState();
+  const values = useFilterValues(ALL_RESOURCES_TABLE_ID);
   const filterValues: any = values;
-
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
 
   const filter = useMemo(
     () => buildResourcesAllFilter(filterValues),
@@ -42,6 +35,7 @@ const AllResourcesListTable: FC<AllResourcesListProps> = (props) => {
 
   const tableProps = useTable({
     table: ALL_RESOURCES_TABLE_ID,
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourcesList),
     queryField: 'query',
     filter,
@@ -66,18 +60,5 @@ const AllResourcesListTable: FC<AllResourcesListProps> = (props) => {
       hasCustomerColumn
       standalone={props.standalone ?? true}
     />
-  );
-};
-
-export const AllResourcesList: FC<AllResourcesListProps> = (props) => {
-  const initialValues = useMemo(() => getInitialValues(), []);
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <AllResourcesListTable {...props} />}
-    </Form>
   );
 };

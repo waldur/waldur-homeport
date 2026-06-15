@@ -1,5 +1,4 @@
-import { FunctionComponent } from 'react';
-import { useFormState } from 'react-final-form';
+import { FunctionComponent, useContext } from 'react';
 
 import { AccountingPeriodFilter } from '@/customer/list/AccountingPeriodFilter';
 import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
@@ -7,13 +6,16 @@ import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
 import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
 import { ResourceFilter } from '@/resource/ResourceFilter';
+import { TableFilterContext } from '@/table/FilterContextProvider';
+import { useFilterValues } from '@/table/useFilterValues';
 
 export const FORM_ID = 'ResourceUsageFilter';
 
 const options = makeLastTwelveMonthsFilterPeriods();
 
 export const ResourceUsageFilter: FunctionComponent = () => {
-  const { values } = useFormState();
+  const { table } = useContext(TableFilterContext);
+  const values = useFilterValues(table);
   const customer = values?.organization;
 
   return (

@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   marketplaceRobotAccountsList,
   RobotAccountDetails,
@@ -15,6 +14,7 @@ import {
 } from '@/table/generated/MarketplaceRobotAccountsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
@@ -22,8 +22,8 @@ import { useCustomer } from '@/workspace/hooks';
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
-const ProviderRobotAccountListTable: FC<{ provider }> = ({ provider }) => {
-  const { values } = useFormState();
+export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
+  const values = useFilterValues('provider-robot-accounts');
 
   const formFilter = useMemo(
     () => selectMarketplaceRobotAccountsFilter(values),
@@ -45,6 +45,7 @@ const ProviderRobotAccountListTable: FC<{ provider }> = ({ provider }) => {
 
   const tableProps = useTable({
     table: 'provider-robot-accounts',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceRobotAccountsList),
     filter,
   });
@@ -108,15 +109,3 @@ const ProviderRobotAccountListTable: FC<{ provider }> = ({ provider }) => {
     />
   );
 };
-
-export const ProviderRobotAccountList: FC<any> = (props) => (
-  <Form
-    id={MarketplaceRobotAccountsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <ProviderRobotAccountListTable {...props} />}
-  </Form>
-);

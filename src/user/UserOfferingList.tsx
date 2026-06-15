@@ -1,6 +1,4 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { marketplaceOfferingUsersList, User } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -13,6 +11,7 @@ import { OfferingUsersExpandableRow } from '@/marketplace/service-providers/offe
 import { ProviderOfferingUsersFilter } from '@/marketplace/service-providers/offering-users/ProviderOfferingUsersFilter';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
@@ -22,14 +21,13 @@ interface OwnProps {
   hasActionBar?: boolean;
 }
 
-const UserOfferingListTable: FunctionComponent<OwnProps> = ({
+export const UserOfferingList: FunctionComponent<OwnProps> = ({
   hasActionBar = true,
   ...props
 }) => {
   const currentUser = useUser();
   const user = props.user || currentUser;
-  const { values } = useFormState();
-  const filterValues = values;
+  const filterValues = useFilterValues('UserOfferingList');
 
   const filter = useMemo(
     () => ({
@@ -42,6 +40,7 @@ const UserOfferingListTable: FunctionComponent<OwnProps> = ({
   );
   const tableProps = useTable({
     table: 'UserOfferingList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceOfferingUsersList),
     filter,
     queryField: 'query',
@@ -85,19 +84,5 @@ const UserOfferingListTable: FunctionComponent<OwnProps> = ({
       expandableRow={OfferingUsersExpandableRow}
       formId={PROVIDER_OFFERING_USERS_FORM_ID}
     />
-  );
-};
-
-export const UserOfferingList: FunctionComponent<OwnProps> = (props) => {
-  const { params } = useCurrentStateAndParams();
-  return (
-    <Form
-      id={PROVIDER_OFFERING_USERS_FORM_ID}
-      onSubmit={() => {}}
-      initialValues={{ state: params?.filterState }}
-      subscription={{ values: true }}
-    >
-      {() => <UserOfferingListTable {...props} />}
-    </Form>
   );
 };

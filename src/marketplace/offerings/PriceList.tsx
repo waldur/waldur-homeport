@@ -1,24 +1,24 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { marketplacePlanComponentsList, PlanComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
   MarketplacePlanComponentsFilter,
-  selectMarketplacePlanComponentsFilter,
   MarketplacePlanComponentsFilterFormId,
+  selectMarketplacePlanComponentsFilter,
 } from '@/table/generated/MarketplacePlanComponentsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { BillingPeriod } from '../common/BillingPeriod';
 import { getBillingTypeLabel } from '../resources/usage/utils';
 
-const PriceListTable = () => {
-  const { values } = useFormState();
+export const PriceList = () => {
+  const values = useFilterValues('MarketplacePriceList');
 
   const formFilter = useMemo(
     () => selectMarketplacePlanComponentsFilter(values),
@@ -28,6 +28,7 @@ const PriceListTable = () => {
   const filter = useMemo(() => formFilter, [formFilter?.offering_uuid]);
   const props = useTable({
     table: 'MarketplacePriceList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplacePlanComponentsList),
     filter,
   });
@@ -93,15 +94,3 @@ const PriceListTable = () => {
     />
   );
 };
-
-export const PriceList = (props) => (
-  <Form
-    id={MarketplacePlanComponentsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <PriceListTable {...props} />}
-  </Form>
-);

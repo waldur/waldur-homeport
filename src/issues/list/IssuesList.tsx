@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { Issue, supportIssuesList } from 'waldur-js-client';
 
 import { formatDate, formatRelative } from '@/core/dateUtils';
@@ -17,6 +16,7 @@ import {
 } from '@/table/generated/SupportIssuesFilter';
 import Table from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
@@ -38,16 +38,19 @@ interface OwnProps {
   standalone?: boolean;
 }
 
-const IssuesListTable: FC<OwnProps & Partial<TableProps>> = (props) => {
+export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
+  ...props
+}) => {
   const { hiddenColumns = [], standalone = true } = props;
   const user = useUser();
   const supportOrStaff = user?.is_staff || user?.is_support || false;
 
-  const { values } = useFormState();
+  const values = useFilterValues(`issuesList-${props.scope?.uuid}`);
   const filterValues = useMemo(() => selectIssuesFilter(values), [values]);
 
   const tableProps = useTable({
     table: `issuesList-${props.scope?.uuid}`,
+    syncFiltersToURL: true,
     fetchData: createFetcher(supportIssuesList),
     queryField: 'query',
     filter: props.filter || filterValues,
@@ -190,13 +193,3 @@ const IssuesListTable: FC<OwnProps & Partial<TableProps>> = (props) => {
     />
   );
 };
-
-export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => (
-  <Form
-    id={SupportIssuesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <IssuesListTable {...props} />}
-  </Form>
-);

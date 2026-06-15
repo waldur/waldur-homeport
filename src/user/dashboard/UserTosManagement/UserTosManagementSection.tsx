@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   MarketplacePublicOfferingsListData,
   marketplacePublicOfferingsList,
@@ -15,6 +14,7 @@ import {
   UserTosFiltersFilterFormId,
 } from '@/table/generated/UserTosFiltersFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { USER_TOS_MANAGEMENT_TABLE_ID } from '@/user/constants';
 
@@ -32,8 +32,8 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   'user_has_consent',
 ];
 
-const UserTosManagementSectionTable: FC = () => {
-  const { values } = useFormState();
+export const UserTosManagementSection: FC = () => {
+  const values = useFilterValues(USER_TOS_MANAGEMENT_TABLE_ID);
   const formFilters = useMemo(
     () => selectUserTosFiltersFilter(values),
     [values],
@@ -50,6 +50,7 @@ const UserTosManagementSectionTable: FC = () => {
 
   const tableProps = useTable({
     table: USER_TOS_MANAGEMENT_TABLE_ID,
+    syncFiltersToURL: true,
     filter,
     fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'keyword',
@@ -147,15 +148,3 @@ const UserTosManagementSectionTable: FC = () => {
     />
   );
 };
-
-export const UserTosManagementSection: FC<any> = (props) => (
-  <Form
-    id={UserTosFiltersFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <UserTosManagementSectionTable {...props} />}
-  </Form>
-);

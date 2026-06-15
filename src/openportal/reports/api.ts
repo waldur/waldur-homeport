@@ -15,8 +15,6 @@ import {
   openportalProjectStorageReportsList,
   OpenportalProjectUsageReportsListData,
   OpenportalProjectStorageReportsListData,
-  CachedProjectUsageReport,
-  CachedProjectStorageReport,
   Project,
   openportalOfferingMappingRetrieve,
   openportalProjectMappingRetrieve,
@@ -49,13 +47,12 @@ type StorageReportFilters = OpenportalProjectStorageReportsListData['query'];
 export const fetchUsageReports = async (
   filters: UsageReportFilters = {},
   onProgress?: ProgressCallback,
-): Promise<ProjectUsageReport[]> => {
-  const fetchPage = (page: number) =>
-    openportalProjectUsageReportsList({
-      query: { ...filters, page, page_size: 100 },
-    });
-  const items = await getAllPages<CachedProjectUsageReport>(
-    fetchPage,
+) => {
+  const items = await getAllPages(
+    (page: number) =>
+      openportalProjectUsageReportsList({
+        query: { ...filters, page, page_size: 100 },
+      }),
     onProgress,
   );
   return items.map(ProjectUsageReport.fromApiResponse);
@@ -69,13 +66,12 @@ export const fetchUsageReports = async (
 export const fetchStorageReports = async (
   filters: StorageReportFilters = {},
   onProgress?: ProgressCallback,
-): Promise<ProjectStorageReport[]> => {
-  const fetchPage = (page: number) =>
-    openportalProjectStorageReportsList({
-      query: { ...filters, page, page_size: 100 },
-    });
-  const items = await getAllPages<CachedProjectStorageReport>(
-    fetchPage,
+) => {
+  const items = await getAllPages(
+    (page: number) =>
+      openportalProjectStorageReportsList({
+        query: { ...filters, page, page_size: 100 },
+      }),
     onProgress,
   );
   return items.map(ProjectStorageReport.fromApiResponse);

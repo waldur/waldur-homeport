@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   overrideSettingsRetrieve,
   systemLogsList,
@@ -21,6 +20,7 @@ import {
   SystemLogsFilterFormId as SupportSystemLogsFilterFormId,
 } from '@/table/generated/SystemLogsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { SupportSystemLogsExpandableRow } from './SupportSystemLogsExpandableRow';
@@ -41,7 +41,7 @@ const getLevelBadgeVariant = (level: string): BadgeVariant => {
   }
 };
 
-const SupportSystemLogsListTable = () => {
+export const SupportSystemLogsList = () => {
   const { data: settings } = useQuery({
     queryKey: ['SystemLogSettings'],
     queryFn: () => overrideSettingsRetrieve().then((res) => res.data),
@@ -50,7 +50,7 @@ const SupportSystemLogsListTable = () => {
 
   const isEnabled = settings?.SYSTEM_LOG_ENABLED ?? true;
 
-  const { values } = useFormState();
+  const values = useFilterValues('SupportSystemLogsList');
   const formValues: any = values;
   const filterValues = useMemo(
     () => selectSupportSystemLogsFilter(values),
@@ -74,6 +74,7 @@ const SupportSystemLogsListTable = () => {
 
   const tableProps = useTable({
     table: 'SupportSystemLogsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(systemLogsList),
     filter,
     queryField: 'message',
@@ -158,13 +159,3 @@ const SupportSystemLogsListTable = () => {
     />
   );
 };
-
-export const SupportSystemLogsList = () => (
-  <Form
-    id={SupportSystemLogsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <SupportSystemLogsListTable />}
-  </Form>
-);

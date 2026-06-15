@@ -1,6 +1,5 @@
 import { uniqueId } from 'lodash-es';
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { userPermissionsList, UserPermissionsListData } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
@@ -10,6 +9,7 @@ import { formatRoleType } from '@/permissions/utils';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { RolePopover } from './RolePopover';
@@ -38,10 +38,10 @@ const rowsParser = (data: any[]) => {
   return data;
 };
 
-const UserAffiliationsListTable: FunctionComponent<
+export const UserAffiliationsList: FunctionComponent<
   UserAffiliationsListProps
 > = ({ user, hasActionBar = true, fullWidth }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('UserAffiliationsList');
   const formValues = (values as UserAffiliationsFilterValues) || {
     scope_type: undefined,
     scope_name: undefined,
@@ -74,6 +74,7 @@ const UserAffiliationsListTable: FunctionComponent<
   ]);
   const props = useTable({
     table: 'UserAffiliationsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(userPermissionsList, {
       parser: rowsParser,
     }),
@@ -185,11 +186,3 @@ const UserAffiliationsListTable: FunctionComponent<
     />
   );
 };
-
-export const UserAffiliationsList: FunctionComponent<
-  UserAffiliationsListProps
-> = (props) => (
-  <Form onSubmit={() => {}} subscription={{ values: true }}>
-    {() => <UserAffiliationsListTable {...props} />}
-  </Form>
-);

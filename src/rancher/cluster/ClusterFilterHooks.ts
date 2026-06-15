@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import { useFormState } from 'react-final-form';
 
 import { selectRancherClusterFilter } from '@/table/generated/RancherClusterFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 
-export const useClusterFilter = (cluster) => {
-  const { values } = useFormState();
+export const useClusterFilter = (cluster, tableId) => {
+  const values = useFilterValues(tableId);
   const filterValues = useMemo(
     () => selectRancherClusterFilter(values),
     [values],
@@ -20,8 +20,8 @@ export const useClusterFilter = (cluster) => {
   return { filter };
 };
 
-export const useClusterResourceFilter = (cluster) => {
-  const { values } = useFormState();
+export const useClusterResourceFilter = (cluster, tableId) => {
+  const values = useFilterValues(tableId);
   const filterValues = useMemo(
     () => selectRancherClusterFilter(values),
     [values],

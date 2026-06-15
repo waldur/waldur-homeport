@@ -1,15 +1,14 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 
 import { BaseEventsList } from '@/events/BaseEventsList';
 import {
   EventsFilter as SupportEventsFilter,
   selectEventsFilter as selectSupportEventsFilter,
-  EventsFilterFormId,
 } from '@/table/generated/EventsFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 
-const SupportEventsListTable = () => {
-  const { values } = useFormState();
+export const SupportEventsList = () => {
+  const values = useFilterValues('support-events');
   const filter = useMemo(() => selectSupportEventsFilter(values), [values]);
 
   return (
@@ -20,15 +19,3 @@ const SupportEventsListTable = () => {
     />
   );
 };
-
-export const SupportEventsList = (props) => (
-  <Form
-    id={EventsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <SupportEventsListTable {...props} />}
-  </Form>
-);

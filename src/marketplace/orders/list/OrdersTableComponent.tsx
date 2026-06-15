@@ -29,6 +29,7 @@ interface OrdersTableComponentProps extends Partial<TableProps<OrderDetails>> {
   table: string;
   hideColumns?: 'organization'[];
   filter: MarketplaceOrdersListData['query'];
+  initialFilters?;
 }
 
 const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
@@ -63,6 +64,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
   table,
   filter,
   hideColumns = [],
+  initialFilters,
   ...rest
 }) => {
   const props = useTable({
@@ -71,6 +73,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
     filter,
     queryField: 'query',
     mandatoryFields,
+    initialFilters,
   });
 
   const columns: Array<Column<OrderDetails>> = [

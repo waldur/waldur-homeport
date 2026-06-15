@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { emailLogsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -13,16 +12,18 @@ import {
   EmailLogsFilterFormId,
 } from '@/table/generated/EmailLogsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-const SupportEmailLogsListTable = () => {
-  const { values } = useFormState();
+export const SupportEmailLogsList = () => {
+  const values = useFilterValues(`supportEmailLogs`);
 
   const filter = useMemo(() => selectSupportEmailLogsFilter(values), [values]);
 
   const tableProps = useTable({
     table: `supportEmailLogs`,
+    syncFiltersToURL: true,
     fetchData: createFetcher(emailLogsList),
     queryField: 'body',
     filter,
@@ -63,15 +64,3 @@ const SupportEmailLogsListTable = () => {
     />
   );
 };
-
-export const SupportEmailLogsList = (props) => (
-  <Form
-    id={EmailLogsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <SupportEmailLogsListTable {...props} />}
-  </Form>
-);

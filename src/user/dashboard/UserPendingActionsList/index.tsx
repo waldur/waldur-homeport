@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { userActionsList, UserAction } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -10,6 +9,7 @@ import {
   UserPendingActionsFilterFormId,
 } from '@/table/generated/UserPendingActionsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { PendingActionAlertItem } from './PendingActionAlertItem';
@@ -52,8 +52,8 @@ const createSortedFetcher = (baseFetcher: ReturnType<typeof createFetcher>) => {
   };
 };
 
-const UserPendingActionsListTable: FC<OwnProps> = () => {
-  const { values } = useFormState();
+export const UserPendingActionsList: FC<OwnProps> = () => {
+  const values = useFilterValues('UserPendingActions');
 
   const filter = useMemo(
     () => selectUserPendingActionsFilter(values),
@@ -67,6 +67,7 @@ const UserPendingActionsListTable: FC<OwnProps> = () => {
 
   const tableProps = useTable({
     table: 'UserPendingActions',
+    syncFiltersToURL: true,
     fetchData,
     filter,
   });
@@ -100,15 +101,3 @@ const UserPendingActionsListTable: FC<OwnProps> = () => {
     />
   );
 };
-
-export const UserPendingActionsList: FC<any> = (props) => (
-  <Form
-    id={UserPendingActionsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <UserPendingActionsListTable {...props} />}
-  </Form>
-);

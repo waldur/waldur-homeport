@@ -1,5 +1,4 @@
 import { FC, ReactNode, useCallback, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { invoicesItemsRetrieve } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -15,6 +14,7 @@ import {
   InvoicesItemsFilterFormId,
 } from '@/table/generated/InvoicesItemsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useUser, useCustomer } from '@/workspace/hooks';
 
@@ -40,7 +40,7 @@ interface InvoiceItemsTableProps {
   footer?: ReactNode;
 }
 
-const InvoiceItemsTableTable: FC<InvoiceItemsTableProps> = ({
+export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
   invoice,
   invoiceView,
   showPrice,
@@ -49,7 +49,7 @@ const InvoiceItemsTableTable: FC<InvoiceItemsTableProps> = ({
   refreshInvoiceItems,
   setTotalFiltered,
 }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('invoiceItems-' + invoice.uuid);
   const filter = useMemo(() => selectInvoicesItemsFilter(values), [values]);
   const customer = useCustomer();
   const user = useUser();
@@ -62,6 +62,7 @@ const InvoiceItemsTableTable: FC<InvoiceItemsTableProps> = ({
 
   const tableProps = useTable({
     table: 'invoiceItems-' + invoice.uuid,
+    syncFiltersToURL: true,
     fetchData: async (request) => {
       const response = await fetchItems(request);
       const rows = groupInvoiceItems(response.rows, request.filter?.o);
@@ -205,15 +206,3 @@ const InvoiceItemsTableTable: FC<InvoiceItemsTableProps> = ({
     />
   );
 };
-
-export const InvoiceItemsTable: FC<any> = (props) => (
-  <Form
-    id={InvoicesItemsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <InvoiceItemsTableTable {...props} />}
-  </Form>
-);

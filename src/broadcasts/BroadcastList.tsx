@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   BroadcastMessage,
   broadcastMessagesList,
@@ -16,6 +15,7 @@ import {
   BroadcastMessagesFilterFormId,
 } from '@/table/generated/BroadcastMessagesFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { BroadcastCreateButton } from './BroadcastCreateButton';
@@ -42,15 +42,16 @@ interface BroadcastListProps {
   standalone?: boolean;
 }
 
-const BroadcastListTable: FunctionComponent<BroadcastListProps> = ({
+export const BroadcastList: FunctionComponent<BroadcastListProps> = ({
   standalone = false,
 }) => {
-  const { values } = useFormState();
+  const values = useFilterValues('broadcast');
 
   const filter = useMemo(() => selectBroadcastMessagesFilter(values), [values]);
 
   const props = useTable({
     table: 'broadcast',
+    syncFiltersToURL: true,
     fetchData: createFetcher(broadcastMessagesList),
     queryField: 'subject',
     mandatoryFields,
@@ -102,15 +103,3 @@ const BroadcastListTable: FunctionComponent<BroadcastListProps> = ({
     />
   );
 };
-
-export const BroadcastList = (props) => (
-  <Form
-    id={BroadcastMessagesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <BroadcastListTable {...props} />}
-  </Form>
-);

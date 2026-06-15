@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { userInvitationsList } from 'waldur-js-client';
 
 import { CustomerPermissionsLogButton } from '@/customer/team/CustomerPermissionsLogButton';
@@ -15,6 +14,7 @@ import {
   UserInvitationsFilterFormId,
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -22,10 +22,10 @@ import { getInvitationColumns } from './columns';
 import { InvitationActions } from './InvitationActions';
 import { InvitationsMultiSelectActions } from './InvitationsMultiSelectActions';
 
-const InvitationsListTable: FunctionComponent = () => {
+export const InvitationsList: FunctionComponent = () => {
   useTitle(translate('Invitations'));
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues('user-invitations');
 
   const stateFilter = useMemo(
     () => selectUserInvitationsFilter(values),
@@ -33,14 +33,12 @@ const InvitationsListTable: FunctionComponent = () => {
   );
 
   const filter = useMemo(
-    () => ({
-      ...stateFilter,
-      customer_uuid: customer.uuid,
-    }),
+    () => ({ ...stateFilter, customer_uuid: customer.uuid }),
     [stateFilter, customer],
   );
   const props = useTable({
     table: 'user-invitations',
+    syncFiltersToURL: true,
     fetchData: createFetcher(userInvitationsList),
     filter,
     queryField: 'email',
@@ -72,15 +70,3 @@ const InvitationsListTable: FunctionComponent = () => {
     />
   );
 };
-
-export const InvitationsList = (props) => (
-  <Form
-    id={UserInvitationsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <InvitationsListTable {...props} />}
-  </Form>
-);

@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { invoicesList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -14,6 +13,7 @@ import {
   selectInvoicesFilter,
 } from '@/table/generated/InvoicesFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -35,9 +35,10 @@ const RowActions = ({ row, fetch }) => (
   />
 );
 
-const BillingRecordsListTable: FunctionComponent = () => {
+export const BillingRecordsList: FunctionComponent = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const table = useMemo(() => `invoices-${customer.uuid}`, [customer]);
+  const values = useFilterValues(table);
 
   const stateFilter = useMemo(() => selectInvoicesFilter(values), [values]);
 
@@ -58,10 +59,9 @@ const BillingRecordsListTable: FunctionComponent = () => {
     [stateFilter, customer],
   );
 
-  const table = useMemo(() => `invoices-${customer.uuid}`, [customer]);
-
   const props = useTable({
     table: table,
+    syncFiltersToURL: true,
     fetchData: createFetcher(invoicesList),
     filter,
     queryField: 'number',
@@ -124,15 +124,3 @@ const BillingRecordsListTable: FunctionComponent = () => {
     />
   );
 };
-
-export const BillingRecordsList = (props) => (
-  <Form
-    id={InvoicesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <BillingRecordsListTable {...props} />}
-  </Form>
-);

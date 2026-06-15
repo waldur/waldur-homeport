@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-final-form';
 import {
   RancherApplication,
   rancherAppsList,
@@ -30,10 +29,10 @@ const ApplicationActions = ({ row }) => (
   </ActionsDropdownComponent>
 );
 
-const ClusterApplicationsListTable: FunctionComponent<
+export const ClusterApplicationsList: FunctionComponent<
   TableWithPortal<{ resourceScope: RancherCluster }>
 > = ({ resourceScope, portal }) => {
-  const { filter } = useClusterResourceFilter(resourceScope);
+  const { filter } = useClusterResourceFilter(resourceScope, 'rancher-apps');
 
   const props = useTable({
     table: 'rancher-apps',
@@ -84,15 +83,3 @@ const ClusterApplicationsListTable: FunctionComponent<
     />
   );
 };
-
-export const ClusterApplicationsList: FunctionComponent<
-  TableWithPortal<{ resourceScope: RancherCluster }>
-> = (props) => (
-  <Form
-    id={RancherClusterFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <ClusterApplicationsListTable {...props} />}
-  </Form>
-);

@@ -16,7 +16,7 @@ export const usePublicMaintenances = () =>
   useQuery({
     queryKey: PUBLIC_MAINTENANCES_QUERY_KEY,
     queryFn: () =>
-      getAllPages<PublicMaintenanceAnnouncement>((page) =>
+      getAllPages((page) =>
         publicMaintenanceAnnouncementsList({
           query: {
             state: ['Scheduled', 'In progress'],

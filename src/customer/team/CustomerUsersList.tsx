@@ -1,10 +1,9 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
+  customersUsersList,
   CustomersUsersListData,
   CustomerUser,
-  customersUsersList,
 } from 'waldur-js-client';
 
 import { CustomerUsersListExpandableRow } from '@/customer/team/CustomerUsersListExpandableRow';
@@ -14,8 +13,8 @@ import { createFetcher } from '@/table/api';
 import {
   CustomersUsersFilter,
   selectCustomersUsersFilter,
-  CustomersUsersFilterFormId,
 } from '@/table/generated/CustomersUsersFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
@@ -37,12 +36,13 @@ const mandatoryFields: CustomersUsersListData['query']['field'] = [
   'projects',
 ];
 
-const CustomerUsersListTable: FunctionComponent = () => {
-  const { values } = useFormState();
+export const CustomerUsersList: FunctionComponent = () => {
+  const values = useFilterValues('customer-users');
   const filter = useMemo(() => selectCustomersUsersFilter(values), [values]);
   const customer = useCustomer();
   const props = useTable({
     table: 'customer-users',
+    syncFiltersToURL: true,
     fetchData: createFetcher(customersUsersList, {
       path: {
         customer_uuid: customer.uuid,
@@ -93,15 +93,3 @@ const CustomerUsersListTable: FunctionComponent = () => {
     />
   );
 };
-
-export const CustomerUsersList = (props) => (
-  <Form
-    id={CustomersUsersFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <CustomerUsersListTable {...props} />}
-  </Form>
-);

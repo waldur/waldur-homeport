@@ -1,6 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
 
 import { formatUsageValue } from '@/core/formatNumber';
@@ -9,6 +8,7 @@ import { OfferingComponentUsage } from '@/marketplace/offerings/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
@@ -19,9 +19,9 @@ import {
   OfferingComponentUsageFilter,
 } from './OfferingComponentUsageFilter';
 
-const OfferingComponentUsageListTable = () => {
+export const OfferingComponentUsageList = () => {
   const { params } = useCurrentStateAndParams();
-  const { values } = useFormState();
+  const values = useFilterValues('OfferingComponentUsage');
   const filterValues = values;
 
   const activeTab = params.tab || 'usage';
@@ -54,6 +54,7 @@ const OfferingComponentUsageListTable = () => {
 
   const props = useTable({
     table: 'OfferingComponentUsage',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceComponentUsageMonthlyList),
     filter,
   });
@@ -133,13 +134,3 @@ const OfferingComponentUsageListTable = () => {
     </>
   );
 };
-
-export const OfferingComponentUsageList = () => (
-  <Form
-    id={COMPONENT_USAGE_FILTER_FORM_ID}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <OfferingComponentUsageListTable />}
-  </Form>
-);

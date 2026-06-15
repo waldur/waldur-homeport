@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   ComponentUsage,
   marketplaceComponentUsagesList,
@@ -15,6 +14,7 @@ import { ResourceLink } from '@/resource/ResourceLink';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
@@ -50,14 +50,18 @@ export const selectResourceUsageFilter = (usageFilter: any) => {
   return filter;
 };
 
-const ResourceUsageListTable: FC = () => {
-  const { values } = useFormState();
+export const ResourceUsageList: FC = () => {
+  const values = useFilterValues('ResourceUsageReports');
   const filter = useMemo(() => selectResourceUsageFilter(values), [values]);
 
   const tableProps = useTable({
     table: 'ResourceUsageReports',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceComponentUsagesList),
     filter,
+    initialFilters: {
+      accounting_period: makeLastTwelveMonthsFilterPeriods()[0],
+    },
   });
   const columns: Array<Column<ComponentUsage>> = [
     {
@@ -149,16 +153,3 @@ const ResourceUsageListTable: FC = () => {
     </>
   );
 };
-
-export const ResourceUsageList: FC = () => (
-  <Form
-    id={FORM_ID}
-    onSubmit={() => {}}
-    initialValues={{
-      accounting_period: makeLastTwelveMonthsFilterPeriods()[0],
-    }}
-    subscription={{ values: true }}
-  >
-    {() => <ResourceUsageListTable />}
-  </Form>
-);

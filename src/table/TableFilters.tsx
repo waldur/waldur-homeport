@@ -1,13 +1,14 @@
 import { XIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { Col, Row, Stack } from 'react-bootstrap';
-import { useForm, useFormState } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
+import { clearAllFilters } from './actions';
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { TableProps } from './types';
 
@@ -27,28 +28,15 @@ interface TableFiltersProps extends Pick<
 }
 
 export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
-  const form = useForm();
-  const { values: formValues } = useFormState();
+  const dispatch = useDispatch();
 
   const clearFilters = useCallback(() => {
-    if (formValues) {
-      Object.keys(formValues).forEach((key) => {
-        form.change(key, null);
-        if (props.filterPosition === 'menu') {
-          props.setFilter({
-            label: null,
-            name: key,
-            value: null,
-            component: null,
-          });
-        }
-      });
-    }
+    dispatch(clearAllFilters(props.table));
     if (props.filterPosition === 'sidebar') {
       props.renderFiltersDrawer(props.filters, props.formId);
     }
     props.applyFiltersFn(true);
-  }, [props, formValues, form]);
+  }, [props, dispatch]);
 
   const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
   const clearLabel = isMd ? translate('Clear') : translate('Clear filters');
@@ -71,7 +59,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
               className="flex-nowrap fw-bolder text-dark fs-7"
             >
               {item.label}
-              <item.component />
+              {item.component && <item.component />}
             </Stack>
           ))}
           {props.filterPosition === 'menu' && (

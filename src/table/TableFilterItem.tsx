@@ -10,7 +10,7 @@ import React, {
   useState,
 } from 'react';
 import { Accordion } from 'react-bootstrap';
-import { useFormState } from 'react-final-form';
+import { useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 
 import { Badge } from '@/core/Badge';
@@ -20,6 +20,7 @@ import { translate } from '@/i18n';
 import { MenuComponent } from '@/metronic/components';
 
 import { TableFilterContext } from './FilterContextProvider';
+import { selectFilterValues } from './selectors';
 
 const DELAY_WAITING_FOR_FILTER = 50; // ms
 
@@ -48,7 +49,8 @@ const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   },
   ...props
 }) => {
-  const { values } = useFormState({ subscription: { values: true } });
+  const { table } = React.useContext(TableFilterContext);
+  const values = useSelector(selectFilterValues(table));
   const [open, setOpen] = React.useState(false);
   const toggleClick = React.useCallback(
     (value, e) => {
@@ -177,8 +179,29 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   },
   ...props
 }) => {
-  const { setFilter, changeFormField } = React.useContext(TableFilterContext);
-  const { values } = useFormState({ subscription: { values: true } });
+  const { table, setFilter, changeFilterValue } =
+    React.useContext(TableFilterContext);
+  const values = useSelector(selectFilterValues(table));
+
+  const _setFilterRef = useRef<any>();
+
+  const removeValue = useCallback(
+    (prevValue, value) => {
+      let newValue;
+      if (Array.isArray(prevValue) && prevValue.length > 1) {
+        newValue = prevValue.filter((v) => !isEqual(v, value));
+      } else {
+        newValue = null;
+      }
+      if (changeFilterValue) {
+        changeFilterValue(props.name, newValue);
+      }
+      if (_setFilterRef.current) {
+        _setFilterRef.current(newValue);
+      }
+    },
+    [changeFilterValue, props.name],
+  );
 
   const _setFilter = useCallback(
     (value) => {
@@ -198,31 +221,33 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         ),
       });
     },
-    [props, setFilter],
+    [
+      props.title,
+      props.name,
+      getValueLabel,
+      props.badgeValue,
+      props.ellipsis,
+      removeValue,
+      props.hideRemoveButton,
+      setFilter,
+    ],
   );
-
-  const removeValue = useCallback(
-    (prevValue, value) => {
-      let newValue;
-      if (Array.isArray(prevValue) && prevValue.length > 1) {
-        newValue = prevValue.filter((v) => !isEqual(v, value));
-      } else {
-        newValue = null;
-      }
-      if (changeFormField) {
-        changeFormField(props.name, newValue);
-      }
-      _setFilter(newValue);
-    },
-    [changeFormField, props.name, _setFilter],
-  );
+  _setFilterRef.current = _setFilter;
 
   const itemValue = values?.[props.name];
-  useEffect(() => {
-    _setFilter(itemValue);
-    if (props.onApply)
-      props.onApply({ title: props.title, name: props.name, value: itemValue });
-  }, [itemValue, _setFilter]);
+  useDebounce(
+    () => {
+      _setFilter(itemValue);
+      if (props.onApply)
+        props.onApply({
+          title: props.title,
+          name: props.name,
+          value: itemValue,
+        });
+    },
+    DELAY_WAITING_FOR_FILTER,
+    [itemValue],
+  );
 
   return (
     <Accordion.Item eventKey={props.name}>
@@ -264,14 +289,37 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   ...props
 }) => {
   const {
+    table,
     setFilter,
-    changeFormField,
+    changeFilterValue,
     apply,
     columnFilter,
     selectedSavedFilter,
     registerFilterComponent,
   } = React.useContext(TableFilterContext);
-  const { values } = useFormState({ subscription: { values: true } });
+  const values = useSelector(selectFilterValues(table));
+
+  const _setFilterRef = useRef<any>();
+
+  const removeValue = useCallback(
+    (prevValue, value) => {
+      let newValue;
+      if (Array.isArray(prevValue) && prevValue.length > 1) {
+        newValue = prevValue.filter((v) => !isEqual(v, value));
+      } else {
+        newValue = null;
+      }
+      apply(false);
+      if (changeFilterValue) {
+        changeFilterValue(props.name, newValue);
+      }
+      if (_setFilterRef.current) {
+        _setFilterRef.current(newValue);
+      }
+      apply(true);
+    },
+    [changeFilterValue, props.name, apply],
+  );
 
   const _setFilter = useCallback(
     (value) => {
@@ -291,8 +339,18 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         ),
       });
     },
-    [props, setFilter],
+    [
+      props.title,
+      props.name,
+      getValueLabel,
+      props.badgeValue,
+      props.ellipsis,
+      removeValue,
+      props.hideRemoveButton,
+      setFilter,
+    ],
   );
+  _setFilterRef.current = _setFilter;
 
   // Register the filter renderer to access it from outside (from table cells)
   useEffect(() => {
@@ -302,24 +360,6 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
     });
   }, [props.name, _setFilter]);
 
-  const removeValue = useCallback(
-    (prevValue, value) => {
-      let newValue;
-      if (Array.isArray(prevValue) && prevValue.length > 1) {
-        newValue = prevValue.filter((v) => !isEqual(v, value));
-      } else {
-        newValue = null;
-      }
-      apply(false);
-      if (changeFormField) {
-        changeFormField(props.name, newValue);
-      }
-      _setFilter(newValue);
-      apply(true);
-    },
-    [changeFormField, props.name, _setFilter, apply],
-  );
-
   const itemValue = values?.[props.name];
 
   // The filter field must have an initial value (at least null) so that the filter menu popup does not close when setting this filter for the first time.
@@ -328,8 +368,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   useDebounce(
     () => {
       _setFilter(itemValue);
-      if (itemValue === null && changeFormField) {
-        changeFormField(props.name, null);
+      if (itemValue === null && changeFilterValue) {
+        changeFilterValue(props.name, null);
       }
     },
     DELAY_WAITING_FOR_FILTER,

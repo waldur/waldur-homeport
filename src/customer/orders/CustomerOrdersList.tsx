@@ -1,11 +1,10 @@
-import { FunctionComponent, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { FunctionComponent, useMemo } from 'react';
 import { MarketplaceOrdersListData } from 'waldur-js-client';
 
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { OrdersBulkActions } from '@/marketplace/orders/actions/OrdersBulkActions';
 import { OrdersListFilter } from '@/marketplace/orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '@/marketplace/orders/list/OrdersTableComponent';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useCustomer } from '@/workspace/hooks';
 
 import {
@@ -13,16 +12,9 @@ import {
   TABLE_CUSTOMER_ORDERS,
 } from '../constants';
 
-const CustomerOrdersListTable: FunctionComponent = () => {
+export const CustomerOrdersList: FunctionComponent = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
-  const filterValues: any = values;
-
-  useEffect(() => {
-    if (filterValues) {
-      syncFiltersToURL(filterValues);
-    }
-  }, [filterValues]);
+  const filterValues = useFilterValues(TABLE_CUSTOMER_ORDERS);
 
   const filter = useMemo(() => {
     const filterObj: MarketplaceOrdersListData['query'] = {};
@@ -56,18 +48,5 @@ const CustomerOrdersListTable: FunctionComponent = () => {
       enableMultiSelect
       multiSelectActions={OrdersBulkActions}
     />
-  );
-};
-
-export const CustomerOrdersList: FunctionComponent = () => {
-  const initialValues = useMemo(() => getInitialValues(), []);
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <CustomerOrdersListTable />}
-    </Form>
   );
 };

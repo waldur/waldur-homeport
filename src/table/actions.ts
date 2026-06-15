@@ -28,6 +28,7 @@ export const TOGGLE_COLUMN = 'waldur/table/TOGGLE_COLUMN';
 export const RESET_COLUMNS = 'waldur/table/RESET_COLUMNS';
 export const INIT_COLUMN_POSITIONS = 'waldur/table/INIT_COLUMN_POSITIONS';
 export const SWAP_COLUMNS = 'waldur/table/SWAP_COLUMNS';
+export const CLEAR_ALL_FILTERS = 'waldur/table/CLEAR_ALL_FILTERS';
 
 export const fetchListDone = (
   table: string,
@@ -227,4 +228,9 @@ export const swapColumns = (
     column1,
     column2,
   },
+});
+
+export const clearAllFilters = (table: string) => ({
+  type: CLEAR_ALL_FILTERS,
+  payload: { table },
 });

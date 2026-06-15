@@ -1,6 +1,5 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import {
   CustomerEstimatedCostPolicy,
   marketplaceCustomerEstimatedCostPoliciesList,
@@ -21,10 +20,11 @@ import {
   MarketplaceCustomerEstimatedCostPoliciesFilterFormId,
 } from '@/table/generated/MarketplaceCustomerEstimatedCostPoliciesFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
-const OrganizationCostPoliciesListTable: FC = () => {
-  const { values } = useFormState();
+export const OrganizationCostPoliciesList: FC = () => {
+  const values = useFilterValues('OrgCostPoliciesList');
 
   const filter = useMemo(
     () => selectMarketplaceCustomerEstimatedCostPoliciesFilter(values),
@@ -33,6 +33,7 @@ const OrganizationCostPoliciesListTable: FC = () => {
 
   const tableProps = useTable({
     table: 'OrgCostPoliciesList',
+    syncFiltersToURL: true,
     filter: filter,
     fetchData: createFetcher(marketplaceCustomerEstimatedCostPoliciesList),
     queryField: 'query',
@@ -128,15 +129,3 @@ const OrganizationCostPoliciesListTable: FC = () => {
     />
   );
 };
-
-export const OrganizationCostPoliciesList: FC<any> = (props) => (
-  <Form
-    id={MarketplaceCustomerEstimatedCostPoliciesFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <OrganizationCostPoliciesListTable {...props} />}
-  </Form>
-);

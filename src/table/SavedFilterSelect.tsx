@@ -1,7 +1,6 @@
 import { FunnelIcon, TrashIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo } from 'react';
-import { useForm, useFormState } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { components, OptionProps } from 'react-select';
 
@@ -11,7 +10,12 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 
-import { selectSavedFilter, setSavedFilters } from './actions';
+import {
+  clearAllFilters,
+  selectSavedFilter,
+  setFilter,
+  setSavedFilters,
+} from './actions';
 import {
   selectSelectedSavedFilter,
   selectTableSavedFilters,
@@ -77,9 +81,6 @@ export const SavedFilterSelect = ({
   const dispatch = useDispatch();
   const { showErrorResponse } = useNotify();
 
-  const form = useForm();
-  const { values: formValues = {} } = useFormState();
-
   const key = useMemo(() => getSavedFiltersKey(table, formId), [table, formId]);
 
   useEffect(() => {
@@ -96,25 +97,28 @@ export const SavedFilterSelect = ({
   const setSelected = useCallback(
     (value: TableFiltersGroup) => {
       const deselect = selected && value?.id === selected.id;
-      if (value) {
-        if (formValues) {
-          Object.keys(formValues).forEach((key) => form.change(key, null));
-        }
-        Object.entries(value.values).forEach(([k, v]) => {
-          form.change(k, v);
+      dispatch(clearAllFilters(table));
+      if (value && !deselect) {
+        Object.entries(value.values).forEach(([name, val]) => {
+          dispatch(
+            setFilter(table, {
+              name,
+              value: val,
+              label: null,
+              component: null,
+            }),
+          );
         });
-      } else {
-        form.reset();
       }
       dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
-      if (!deselect || !value) {
+      if (!deselect && value) {
         dispatch(selectSavedFilter(table, value));
         if (onSelect) onSelect();
       } else {
         dispatch(selectSavedFilter(table, null));
       }
     },
-    [table, form, formValues, key, onSelect, selected, dispatch],
+    [table, key, onSelect, selected, dispatch],
   );
 
   const remove = useCallback(

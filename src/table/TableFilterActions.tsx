@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Stack } from 'react-bootstrap';
-import { useFormState } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -9,7 +8,7 @@ import { translate } from '@/i18n';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import { TableFilterContext } from './FilterContextProvider';
-import { selectSelectedSavedFilter } from './selectors';
+import { selectFilterValues, selectSelectedSavedFilter } from './selectors';
 import { TableFilterService } from './TableFilterService';
 import { getSavedFiltersKey } from './utils';
 
@@ -28,9 +27,7 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
 
   const dispatch = useDispatch();
 
-  const { values: formValues = {} } = useFormState({
-    subscription: { values: true },
-  });
+  const formValues = useSelector(selectFilterValues(props.table)) || {};
 
   const selectedSavedFilter = useSelector((state: any) =>
     selectSelectedSavedFilter(state, props.table),

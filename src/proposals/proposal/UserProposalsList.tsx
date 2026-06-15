@@ -1,6 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { useMemo } from 'react';
 import { Proposal, proposalProposalsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -18,6 +17,7 @@ import {
 } from '@/table/generated/ProposalsFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -27,8 +27,23 @@ import { ProposalBadge } from './ProposalBadge';
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
-const UserProposalsListTable: FC = () => {
-  const { values } = useFormState();
+export const UserProposalsList = () => {
+  const {
+    params: { call },
+  } = useCurrentStateAndParams();
+  const callObj = call ? JSON.parse(decodeURIComponent(call)) : undefined;
+
+  const initialFilters = useMemo(
+    () => ({
+      state: getProposalStateOptions().filter(
+        (option) => option.value !== 'canceled' && option.value !== 'rejected',
+      ),
+      call: callObj,
+    }),
+    [callObj],
+  );
+
+  const values = useFilterValues('MyProposalsList');
   const formFilters = useMemo(() => selectProposalsFilter(values), [values]);
 
   const filter = useMemo(
@@ -42,6 +57,8 @@ const UserProposalsListTable: FC = () => {
 
   const tableProps = useTable({
     table: 'MyProposalsList',
+    initialFilters,
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalProposalsList),
     queryField: 'name',
     filter,
@@ -146,33 +163,5 @@ const UserProposalsListTable: FC = () => {
       showPageSizeSelector={true}
       filters={<ProposalsFilter />}
     />
-  );
-};
-
-export const UserProposalsList: FC = () => {
-  const {
-    params: { call },
-  } = useCurrentStateAndParams();
-  const callObj = call ? JSON.parse(decodeURIComponent(call)) : undefined;
-
-  const initialValues = useMemo(
-    () => ({
-      state: getProposalStateOptions().filter(
-        (option) => option.value !== 'canceled' && option.value !== 'rejected',
-      ),
-      call: callObj,
-    }),
-    [callObj],
-  );
-
-  return (
-    <Form
-      id={ProposalsFilterFormId}
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-    >
-      {() => <UserProposalsListTable />}
-    </Form>
   );
 };

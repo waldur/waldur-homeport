@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -17,19 +16,21 @@ import {
   UserInvitationsFilterFormId,
 } from '@/table/generated/UserInvitationsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { RoleField } from '@/user/affiliations/RoleField';
 
 import { InvitationScopeLink } from './InvitationScopeLink';
 
-const InvitationListTable: FunctionComponent = () => {
+export const InvitationList: FunctionComponent = () => {
   useTitle(translate('Invitations'));
-  const { values } = useFormState();
+  const values = useFilterValues('admin-invitations');
 
   const filter = useMemo(() => selectUserInvitationsFilter(values), [values]);
 
   const props = useTable({
     table: 'admin-invitations',
+    syncFiltersToURL: true,
     fetchData: createFetcher(userInvitationsList),
     queryField: 'email',
     filter,
@@ -97,15 +98,3 @@ const InvitationListTable: FunctionComponent = () => {
     />
   );
 };
-
-export const InvitationList = (props) => (
-  <Form
-    id={UserInvitationsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <InvitationListTable {...props} />}
-  </Form>
-);

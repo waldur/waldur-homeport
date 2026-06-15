@@ -1,16 +1,16 @@
 import { FC } from 'react';
-import { useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { OfferingTypeFilter } from '@/marketplace/offerings/details/OfferingTypeFilter';
 import { AsyncSelectFilter, StringFilter } from '@/table';
+import { useFilterValues } from '@/table/useFilterValues';
 
 export const COMPONENT_USAGE_FILTER_FORM_ID = 'OfferingComponentUsageFilter';
 
 export const OfferingComponentUsageFilter: FC = () => {
-  const { values } = useFormState();
+  const values = useFilterValues('OfferingComponentUsage');
   const provider = values?.provider;
 
   return (

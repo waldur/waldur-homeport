@@ -147,7 +147,10 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         (Array.isArray(item.value) && !item.value.length);
 
       if (index > -1) {
-        if (isEqual(state.filtersStorage[index].value, item.value)) {
+        if (
+          isEqual(state.filtersStorage[index].value, item.value) &&
+          state.filtersStorage[index].component === item.component
+        ) {
           return state;
         }
         const newItems = [...state.filtersStorage];
@@ -175,6 +178,12 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
       return {
         ...state,
         applyFilters: action.payload.apply,
+      };
+
+    case actions.CLEAR_ALL_FILTERS:
+      return {
+        ...state,
+        filtersStorage: [],
       };
 
     case actions.SET_SAVED_FILTERS:

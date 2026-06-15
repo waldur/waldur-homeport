@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -14,15 +13,16 @@ import {
   selectProposalReviewsFilter,
 } from '@/table/generated/ProposalReviewsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
 import { ReviewsRowActions } from './ReviewsRowActons';
 import { ReviewStateRenderer } from './ReviewStateRenderer';
 
-const CustomerReviewsListTable: FC<{}> = () => {
+export const CustomerReviewsList: FC = () => {
   const customer = useCustomer();
-  const { values } = useFormState();
+  const values = useFilterValues('ReviewsList');
   const filterValues = useMemo(
     () => selectProposalReviewsFilter(values),
     [values],
@@ -38,6 +38,7 @@ const CustomerReviewsListTable: FC<{}> = () => {
 
   const tableProps = useTable({
     table: 'ReviewsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(proposalReviewsList),
     queryField: 'proposal_name',
     filter,
@@ -115,13 +116,3 @@ const CustomerReviewsListTable: FC<{}> = () => {
     />
   );
 };
-
-export const CustomerReviewsList: FC<{}> = () => (
-  <Form
-    id={ProposalReviewsFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <CustomerReviewsListTable />}
-  </Form>
-);

@@ -5,14 +5,16 @@ import {
   useCallback,
   useState,
 } from 'react';
-import { useForm } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 
+import { setFilter } from './actions';
 import { FilterItem, TableProps, TableState } from './types';
 
 interface ITableFilterContext {
+  table: string;
   filterPosition: TableState['filterPosition'];
   form: string;
-  changeFormField?: (field: string, value: any) => void;
+  changeFilterValue?: (name: string, value: any) => void;
   setFilter: (item: FilterItem) => void;
   apply?: (hideMenu?: boolean) => void;
   columnFilter?: boolean;
@@ -54,29 +56,30 @@ export const FilterContextProvider: FC<
     props.toggleFilterMenu(true);
   };
 
-  let form;
-  try {
-    form = useForm();
-  } catch {
-    form = null;
-  }
+  const dispatch = useDispatch();
 
-  const changeFormField = useCallback(
-    (field: string, value) => {
-      if (form) {
-        form.change(field, value);
-      }
+  const changeFilterValue = useCallback(
+    (name: string, value) => {
+      dispatch(
+        setFilter(props.table, {
+          name,
+          value,
+          label: null,
+          component: null,
+        }),
+      );
     },
-    [form],
+    [dispatch, props.table],
   );
 
   return (
     <TableFilterContext.Provider
       value={{
+        table: props.table,
         selectedSavedFilter: props.selectedSavedFilter,
         filterPosition: props.filterPosition,
         form: filtersFormId,
-        changeFormField,
+        changeFilterValue,
         setFilter: props.setFilter,
         apply,
         filterComponents,

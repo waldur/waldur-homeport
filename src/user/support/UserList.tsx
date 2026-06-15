@@ -1,12 +1,10 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
+import { FunctionComponent, useCallback, useMemo } from 'react';
 import { User, usersList, UsersListData } from 'waldur-js-client';
 
 import { AITokenExpandableRow } from '@/administration/ai-assistant/AITokenExpandableRow';
 import { ENV } from '@/core/config';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
-import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { Link } from '@/core/Link';
 import { Tip } from '@/core/Tooltip';
 import { formatPhoneNumber } from '@/core/utils';
@@ -21,6 +19,7 @@ import { BooleanField } from '@/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { EXTRA_PROFILE_FIELDS } from './extraProfileFields';
@@ -204,15 +203,9 @@ const mandatoryFields: UsersListData['query']['field'] = [
   'organization_registry_code',
 ];
 
-const UserListTable: FunctionComponent = () => {
-  const { values } = useFormState();
+export const UserList: FunctionComponent = () => {
+  const values = useFilterValues(`userList`);
   const filters = values;
-
-  useEffect(() => {
-    if (filters) {
-      syncFiltersToURL(filters);
-    }
-  }, [filters]);
 
   const filter = useMemo(() => {
     const roleFilter = formatRoleFilter(filters?.role) || {};
@@ -238,6 +231,7 @@ const UserListTable: FunctionComponent = () => {
 
   const props = useTable({
     table: `userList`,
+    syncFiltersToURL: true,
     fetchData: createFetcher(usersList),
     queryField: 'query',
     filter,
@@ -525,19 +519,6 @@ const UserListTable: FunctionComponent = () => {
         aiAssistantEnabled ? (row) => !!row.is_active : undefined
       }
     />
-  );
-};
-
-export const UserList: FunctionComponent = () => {
-  const initialValues = useMemo(() => getInitialValues(), []);
-  return (
-    <Form
-      onSubmit={() => {}}
-      subscription={{ values: true }}
-      initialValues={initialValues}
-    >
-      {() => <UserListTable />}
-    </Form>
   );
 };
 

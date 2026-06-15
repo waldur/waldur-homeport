@@ -26,6 +26,7 @@ export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
   return (
     <TableFilterContext.Provider
       value={{
+        table: props.table,
         filterPosition,
         form: filtersFormId,
         setFilter: props.setFilter,

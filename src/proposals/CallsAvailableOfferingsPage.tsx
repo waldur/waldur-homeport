@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -18,11 +17,12 @@ import {
   selectMarketplaceProviderOfferingsFilter,
 } from '@/table/generated/MarketplaceProviderOfferingsFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 const CallsAvailableOfferingsTable: FunctionComponent = () => {
-  const { values } = useFormState();
+  const values = useFilterValues('PublicAvailableOfferingsList');
 
   const stateFilter = useMemo(
     () => selectMarketplaceProviderOfferingsFilter(values),
@@ -30,18 +30,17 @@ const CallsAvailableOfferingsTable: FunctionComponent = () => {
   );
 
   const filter = useMemo(
-    () => ({
-      ...stateFilter,
-      accessible_via_calls: true,
-    }),
+    () => ({ ...stateFilter, accessible_via_calls: true }),
     [stateFilter],
   );
 
   const tableProps = useTable({
     table: 'PublicAvailableOfferingsList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'name',
     filter,
+    initialFilters: MarketplaceProviderOfferingsFilterInitialValues,
   });
 
   return (
@@ -102,16 +101,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
       />
 
       <div className="container-fluid mt-20 mb-10">
-        <Form
-          id={MarketplaceProviderOfferingsFilterFormId}
-          onSubmit={() => {}}
-          initialValues={MarketplaceProviderOfferingsFilterInitialValues}
-          subscription={{
-            values: true,
-          }}
-        >
-          {() => <CallsAvailableOfferingsTable />}
-        </Form>
+        <CallsAvailableOfferingsTable />
       </div>
     </>
   );

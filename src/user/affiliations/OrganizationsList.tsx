@@ -1,5 +1,4 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
 import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -24,6 +23,7 @@ import {
 import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
 import { Column, DisplayMode } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
@@ -44,23 +44,21 @@ const mandatoryFields: CustomersListData['query']['field'] = [
   'url', // Expand view - to create project
 ];
 
-const OrganizationsListTable: FunctionComponent = () => {
+export const OrganizationsList: FunctionComponent = () => {
   useTitle(translate('Organizations'), '', 'browser');
 
   const user = useUser();
-  const { values } = useFormState();
+  const values = useFilterValues('customerList');
   const filterValues = useMemo(() => selectCustomersFilter(values), [values]);
 
   const filter = useMemo(
-    () => ({
-      ...filterValues,
-      user_uuid: user?.uuid,
-    }),
+    () => ({ ...filterValues, user_uuid: user?.uuid }),
     [filterValues, user],
   );
 
   const props = useTable({
     table: 'customerList',
+    syncFiltersToURL: true,
     fetchData: createFetcher(customersList),
     queryField: 'query',
     filter,
@@ -332,13 +330,3 @@ const OrganizationsListTable: FunctionComponent = () => {
     />
   );
 };
-
-export const OrganizationsList: FunctionComponent = () => (
-  <Form
-    id={CustomersFilterFormId}
-    onSubmit={() => {}}
-    subscription={{ values: true }}
-  >
-    {() => <OrganizationsListTable />}
-  </Form>
-);
