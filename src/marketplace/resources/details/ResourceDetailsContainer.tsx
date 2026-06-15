@@ -13,6 +13,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { ErrorView } from '@/ErrorView';
 import { translate } from '@/i18n';
+import { PublicMaintenanceCard } from '@/maintenance/public/PublicMaintenanceCard';
 import { useModal } from '@/modal/actions';
 import {
   useBreadcrumbs,
@@ -325,6 +326,9 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         )}
         {messagingBar}
         {resource && <PolicyAttributionBanner resource={resource} />}
+        {resource?.offering_uuid && (
+          <PublicMaintenanceCard offeringUuid={resource.offering_uuid} />
+        )}
       </>
     ),
     [data, isLoading, messagingBar, resource],

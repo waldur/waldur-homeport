@@ -57,5 +57,18 @@
       background-color: $bg-success-primary;
       color: if(isDarkMode(), $success-700, $success-800) !important;
     }
+
+    &.bar-warning,
+    &.bar-danger,
+    &.bar-success {
+      .featured-icon svg {
+        color: inherit !important;
+
+        [fill]:not(.permanent):not(g),
+        &[fill] :not(.permanent):not(g) {
+          fill: currentColor !important;
+        }
+      }
+    }
   }
 }
