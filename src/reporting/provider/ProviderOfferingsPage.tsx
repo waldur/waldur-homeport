@@ -140,7 +140,7 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
 
   const offerings = (data.offerings as unknown as OfferingStatsData[]) || [];
   const totalResources = offerings.reduce(
-    (sum, o) => sum + o.resource_count,
+    (sum, o) => sum + (o.resource_count || 0),
     0,
   );
   const totalRevenue = offerings.reduce((sum, o) => sum + (o.revenue || 0), 0);

@@ -90,7 +90,14 @@ const ProviderRobotAccountListTable: FC<{ provider }> = ({ provider }) => {
   return (
     <Table<RobotAccountDetails>
       {...tableProps}
-      filters={<MarketplaceRobotAccountsFilter provider={provider} />}
+      filters={
+        // The generated filter queries provider-scoped endpoints, so it
+        // only makes sense (and only works) when a provider is in scope —
+        // the support view renders this list without one.
+        provider ? (
+          <MarketplaceRobotAccountsFilter provider={provider} />
+        ) : undefined
+      }
       columns={columns}
       verboseName={translate('robot accounts')}
       expandableRow={RobotAccountExpandable}
