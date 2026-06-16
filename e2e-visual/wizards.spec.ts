@@ -23,7 +23,9 @@ async function login(page: Page) {
 
   // Dismiss any modal that might be blocking
   const dismissModal = async () => {
-    const cookieAccept = page.locator('.cookiealert button:has-text("Accept")');
+    const cookieAccept = page.locator(
+      '.consent-dialog button:has-text("Accept")',
+    );
     if ((await cookieAccept.count()) > 0) {
       await cookieAccept.click({ force: true }).catch(() => {});
       await page.waitForTimeout(500);

@@ -1,7 +1,7 @@
-.cookiealert .modal-title {
+.consent-dialog .modal-title {
   font-size: 1.385rem;
 }
 
-.cookiealert .text-anchor {
+.consent-dialog .text-anchor {
   position: relative;
 }
