@@ -17,7 +17,7 @@ import {
 } from 'waldur-js-client';
 
 import { url } from '@/core/validators';
-import MarkdownEditor from '@/form/MarkdownEditor';
+import { MarkdownGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -104,7 +104,7 @@ const UPDATE_FIELDS = (currentState?: OfferingUserState) => ({
     fields: [
       {
         name: 'service_provider_comment',
-        component: MarkdownEditor,
+        component: MarkdownGroup,
         label: translate('Comment'),
         placeholder: translate('Your comment...'),
       },
