@@ -14,7 +14,10 @@ import { CreateOfferingUserButton } from '@/marketplace/offerings/details/Create
 import { FIELD_MAPPING } from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
 import { UserImportButton } from '@/marketplace/offerings/import-users/UserImportButton';
 import { TosReportingButton } from '@/marketplace/offerings/update/tos/TosReportingButton';
-import { OfferingUserStateField } from '@/marketplace/OfferingUserStateField';
+import {
+  OfferingUserRuntimeStateField,
+  OfferingUserStateField,
+} from '@/marketplace/OfferingUserStateField';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableExportButton } from '@/table/TableExportButton';
@@ -29,6 +32,19 @@ import {
   ProviderOfferingUsersFilter,
   PROVIDER_OFFERING_USERS_FORM_ID,
 } from './ProviderOfferingUsersFilter';
+
+const mandatoryFields = [
+  'uuid',
+  'customer_uuid',
+  'is_restricted',
+  'state',
+  'user_uuid',
+  'offering_uuid',
+  'service_provider_comment',
+  'service_provider_comment_url',
+  'is_profile_complete',
+  'missing_profile_attributes',
+];
 
 export const ProviderOfferingUsersList: FunctionComponent<
   Partial<TableWithPortal> & {
@@ -63,6 +79,7 @@ export const ProviderOfferingUsersList: FunctionComponent<
     fetchData: createFetcher(marketplaceOfferingUsersList),
     filter,
     queryField: 'query',
+    mandatoryFields,
   });
   const offeringColumn = !offering
     ? [
@@ -81,6 +98,8 @@ export const ProviderOfferingUsersList: FunctionComponent<
             name: row.offering_name,
             uuid: row.offering_uuid,
           }),
+          id: 'offering',
+          keys: ['offering_uuid', 'offering_name'],
         },
       ]
     : [];
@@ -96,6 +115,8 @@ export const ProviderOfferingUsersList: FunctionComponent<
               customer_name: row.customer_name,
               customer_uuid: row.customer_uuid,
             }),
+            id: 'organization',
+            keys: ['customer_name', 'customer_uuid'],
           },
         ]
       : [];
@@ -106,6 +127,8 @@ export const ProviderOfferingUsersList: FunctionComponent<
             title: translate('Account state'),
             render: OfferingUserStateField,
             export: 'state',
+            id: 'state',
+            keys: ['state'],
           },
         ]
       : [];
@@ -131,6 +154,8 @@ export const ProviderOfferingUsersList: FunctionComponent<
           },
           export: (row) =>
             row.has_consent ? translate('Accepted') : translate('Not accepted'),
+          id: 'has_consent',
+          keys: ['has_consent'],
         },
       ]
     : [];
@@ -179,6 +204,8 @@ export const ProviderOfferingUsersList: FunctionComponent<
             row.is_profile_complete
               ? translate('Complete')
               : translate('Incomplete'),
+          id: 'is_profile_complete',
+          keys: ['is_profile_complete', 'missing_profile_attributes'],
         },
       ]
     : [];
@@ -190,12 +217,16 @@ export const ProviderOfferingUsersList: FunctionComponent<
       render: ({ row }) => renderFieldOrDash(row.user_first_name),
       export: 'user_first_name',
       orderField: 'user_first_name',
+      id: 'user_first_name',
+      keys: ['user_first_name'],
     },
     {
       title: translate('Last name'),
       render: ({ row }) => renderFieldOrDash(row.user_last_name),
       export: 'user_last_name',
       orderField: 'user_last_name',
+      id: 'user_last_name',
+      keys: ['user_last_name'],
     },
     {
       title: translate('Username'),
@@ -203,26 +234,42 @@ export const ProviderOfferingUsersList: FunctionComponent<
       export: 'user_username',
       copyField: (row) => row.user_username,
       ellipsis: false,
+      id: 'user_username',
+      keys: ['user_username'],
     },
     {
       title: translate('External username'),
       render: ({ row }) => renderFieldOrDash(row.username),
       export: 'username',
       orderField: 'username',
+      id: 'username',
+      keys: ['username'],
     },
     {
       title: translate('Created'),
       render: ({ row }) => formatDateTime(row.created),
       export: (row) => formatDateTime(row.created),
       orderField: 'created',
+      id: 'created',
+      keys: ['created'],
     },
     {
       title: translate('Modified'),
       render: ({ row }) => formatDateTime(row.modified),
       export: (row) => formatDateTime(row.modified),
       orderField: 'modified',
+      id: 'modified',
+      keys: ['modified'],
     },
     ...stateColumn,
+    {
+      title: translate('Runtime state'),
+      render: OfferingUserRuntimeStateField,
+      export: 'runtime_state',
+      id: 'runtime_state',
+      keys: ['runtime_state'],
+      optional: true,
+    },
     ...tosConsentColumn,
     ...profileCompleteColumn,
   ];
@@ -292,6 +339,7 @@ export const ProviderOfferingUsersList: FunctionComponent<
         />
       )}
       hasQuery={true}
+      hasOptionalColumns
       expandableRow={showExpandableRow ? OfferingUsersExpandableRow : undefined}
       formId={PROVIDER_OFFERING_USERS_FORM_ID}
     />

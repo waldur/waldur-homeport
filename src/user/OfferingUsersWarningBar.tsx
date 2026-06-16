@@ -27,18 +27,8 @@ export const OfferingUsersWarningBar: FC = () => {
   const count = pendingUsers.length;
 
   const handleViewAccounts = () => {
-    const pendingStates = [
-      {
-        value: 'Pending account linking',
-        label: translate('Pending account linking'),
-      },
-      {
-        value: 'Pending additional validation',
-        label: translate('Pending additional validation'),
-      },
-    ];
     router.stateService.go('profile-remote-accounts', {
-      filterState: pendingStates,
+      filterAttention: true,
     });
   };
 

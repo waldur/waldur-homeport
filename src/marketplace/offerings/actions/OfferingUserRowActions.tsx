@@ -72,6 +72,12 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
                   offering={offering}
                   updateScope="state"
                 />
+                <ProviderOfferingUserUpdateButton
+                  {...props}
+                  provider={provider}
+                  offering={offering}
+                  updateScope="runtime_state"
+                />
               </>
             )}
 

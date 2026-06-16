@@ -11,8 +11,10 @@ import {
   marketplaceOfferingUsersSetPendingAccountLinking,
   marketplaceOfferingUsersSetPendingAdditionalValidation,
   marketplaceOfferingUsersUpdateCommentsPartialUpdate,
+  marketplaceOfferingUsersUpdateRuntimeState,
   OfferingUser,
   OfferingUserState,
+  RuntimeStateEnum,
   ServiceProvider,
 } from 'waldur-js-client';
 
@@ -78,12 +80,24 @@ const getAvailableStateOptions = (currentState: OfferingUserState) => {
   return allOptions.filter((option) => availableStates.includes(option.value));
 };
 
+const RUNTIME_STATE_OPTIONS: { label: string; value: RuntimeStateEnum }[] = [
+  { label: translate('Active'), value: 'Active' },
+  {
+    label: translate('Pending account linking'),
+    value: 'Pending account linking',
+  },
+  {
+    label: translate('Pending additional validation'),
+    value: 'Pending additional validation',
+  },
+];
+
 export interface ProviderOfferingUserUpdateDialogProps {
   resolve: {
     row: OfferingUser;
     refetch(): void;
     provider: ServiceProvider;
-    updateScope: 'username' | 'comment' | 'state';
+    updateScope: 'username' | 'comment' | 'state' | 'runtime_state';
   };
 }
 
@@ -164,6 +178,18 @@ const UPDATE_FIELDS = (currentState?: OfferingUserState) => ({
       },
     ],
   },
+  runtime_state: {
+    title: translate('Set runtime state'),
+    fields: [
+      {
+        name: 'runtime_state',
+        type: 'select',
+        label: translate('Runtime state'),
+        options: RUNTIME_STATE_OPTIONS,
+        required: true,
+      },
+    ],
+  },
 });
 
 export const ProviderOfferingUserUpdateDialog: FC<
@@ -181,6 +207,7 @@ export const ProviderOfferingUserUpdateDialog: FC<
       service_provider_comment?: string;
       service_provider_comment_url?: string;
       state?: string;
+      runtime_state?: RuntimeStateEnum;
     }
   >({
     mutationFn: (formData) => {
@@ -232,6 +259,13 @@ export const ProviderOfferingUserUpdateDialog: FC<
             break;
         }
         return api({ path: { uuid: row.uuid } });
+      } else if (updateScope === 'runtime_state') {
+        return marketplaceOfferingUsersUpdateRuntimeState({
+          path: { uuid: row.uuid },
+          body: {
+            runtime_state: formData.runtime_state,
+          },
+        });
       }
     },
     successMessage:
@@ -239,7 +273,9 @@ export const ProviderOfferingUserUpdateDialog: FC<
         ? translate('Username has been updated.')
         : updateScope === 'comment'
           ? translate('Comment has been updated.')
-          : translate('Account state has been updated.'),
+          : updateScope === 'runtime_state'
+            ? translate('Runtime state has been updated.')
+            : translate('Account state has been updated.'),
     errorMessage: translate('Unable to update offering user.'),
     refetch,
   });
@@ -249,7 +285,10 @@ export const ProviderOfferingUserUpdateDialog: FC<
       dialogTitle={updateFields[updateScope]?.title || DASH_ESCAPE_CODE}
       formFields={fields}
       initialValues={fields.reduce((acc, field) => {
-        acc[field.name] = row[field.name];
+        acc[field.name] =
+          field.name === 'runtime_state'
+            ? row.runtime_state || 'Active'
+            : row[field.name];
         return acc;
       }, {})}
       submitForm={mutation.mutateAsync}
