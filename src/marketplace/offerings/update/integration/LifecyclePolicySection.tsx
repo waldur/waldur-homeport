@@ -231,6 +231,21 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             )}
             parse={(value) => value ?? null}
           />
+          <StringEditField
+            name="plugin_options.resource_slug_template"
+            label={translate('Resource slug template')}
+            description={translate(
+              'Template for auto-generated resource slugs, overriding the default 10-character slugified name. Available variables: {customer_slug}, {project_slug}, {project_name}, {offering_slug}, {year}, {month}, {counter}, {counter_padded}.',
+            )}
+            parse={(value) => value ?? null}
+          />
+          <NumberEditField
+            name="plugin_options.resource_slug_max_length"
+            label={translate('Resource slug maximum length')}
+            description={translate(
+              'Maximum length of auto-generated resource slugs derived from the resource name, overriding the default of 10 characters (up to 40). Ignored when a resource slug template is set.',
+            )}
+          />
         </TabbedSection.Tab>
 
         <TabbedSection.Tab id="billing" title={translate('Billing')}>
