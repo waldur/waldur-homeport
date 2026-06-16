@@ -377,22 +377,46 @@ export const FeaturesList = () => {
                     buttonTitle={translate('Clear search')}
                   />
                 )}
-                <Tab.Content>
-                  {FEATURES_TABS.map((tab) => {
-                    if (tab.isPluginsTab) {
-                      const hasAnyItems = pluginSections.some(
-                        (s) => s.items.length > 0,
+                {!(query && tabsWithMatches.length === 0) && (
+                  <Tab.Content>
+                    {FEATURES_TABS.map((tab) => {
+                      if (tab.isPluginsTab) {
+                        const hasAnyItems = pluginSections.some(
+                          (s) => s.items.length > 0,
+                        );
+                        return (
+                          <Tab.Pane key={tab.key} eventKey={tab.key}>
+                            {hasAnyItems || !query ? (
+                              pluginSections.map((section) => (
+                                <FeatureSectionPanel
+                                  key={section.key}
+                                  section={section}
+                                  hasItems={section.items.length > 0}
+                                />
+                              ))
+                            ) : (
+                              <NoResult
+                                title={translate('No results found')}
+                                message={translate(
+                                  'No matching features in this section. Try a different search term.',
+                                )}
+                                callback={() => setQuery('')}
+                                buttonTitle={translate('Clear search')}
+                              />
+                            )}
+                          </Tab.Pane>
+                        );
+                      }
+
+                      const section = filteredSections.find(
+                        (s) => s.key === tab.key,
                       );
+                      if (!section) return null;
+
                       return (
                         <Tab.Pane key={tab.key} eventKey={tab.key}>
-                          {hasAnyItems || !query ? (
-                            pluginSections.map((section) => (
-                              <FeatureSectionPanel
-                                key={section.key}
-                                section={section}
-                                hasItems={section.items.length > 0}
-                              />
-                            ))
+                          {section.items.length > 0 ? (
+                            <FeatureSectionContent section={section} />
                           ) : (
                             <NoResult
                               title={translate('No results found')}
@@ -405,31 +429,9 @@ export const FeaturesList = () => {
                           )}
                         </Tab.Pane>
                       );
-                    }
-
-                    const section = filteredSections.find(
-                      (s) => s.key === tab.key,
-                    );
-                    if (!section) return null;
-
-                    return (
-                      <Tab.Pane key={tab.key} eventKey={tab.key}>
-                        {section.items.length > 0 ? (
-                          <FeatureSectionContent section={section} />
-                        ) : (
-                          <NoResult
-                            title={translate('No results found')}
-                            message={translate(
-                              'No matching features in this section. Try a different search term.',
-                            )}
-                            callback={() => setQuery('')}
-                            buttonTitle={translate('Clear search')}
-                          />
-                        )}
-                      </Tab.Pane>
-                    );
-                  })}
-                </Tab.Content>
+                    })}
+                  </Tab.Content>
+                )}
               </Tab.Container>
             </Card.Body>
           </Card>
