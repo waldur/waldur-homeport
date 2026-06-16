@@ -355,7 +355,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-marketplace-settings',
-    url: 'marketplace/',
+    url: 'marketplace/?tab&q',
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
       import('./marketplace/AdministrationMarketplace').then((module) => ({
