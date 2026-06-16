@@ -35,6 +35,11 @@ export const ProviderOfferingUserUpdateButton: FC<
         : props.row.customer_uuid, // Use row's customer_uuid for admin context
   });
 
+  if (props.updateScope === 'runtime_state' && props.row.state === 'Deleted') {
+    // We cannot update the runtime state of a deleted offering user
+    return null;
+  }
+
   const icon =
     props.updateScope === 'comment' ? (
       <ChatTeardropTextIcon weight="bold" />
@@ -50,7 +55,9 @@ export const ProviderOfferingUserUpdateButton: FC<
             ? translate('Edit comment')
             : props.updateScope === 'state'
               ? translate('Update account state')
-              : translate('Edit external username')
+              : props.updateScope === 'runtime_state'
+                ? translate('Update runtime state')
+                : translate('Edit external username')
         }
         action={() =>
           openDialog(ProviderOfferingUserUpdateDialog, {

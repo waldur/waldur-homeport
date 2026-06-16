@@ -236,7 +236,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'profile-remote-accounts',
     url: 'remote-accounts/',
-    params: { filterState: null },
+    params: { filterState: null, filterAttention: false },
     component: lazyComponent(() =>
       import('./UserOfferingList').then((module) => ({
         default: module.UserOfferingList,

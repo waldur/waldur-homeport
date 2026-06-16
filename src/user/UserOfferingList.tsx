@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { marketplaceOfferingUsersList, User } from 'waldur-js-client';
 
@@ -14,6 +15,7 @@ import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { createAttentionOfferingUsersFetcher } from '@/user/createAttentionOfferingUsersFetcher';
 import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
@@ -25,9 +27,20 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
   hasActionBar = true,
   ...props
 }) => {
+  const { params } = useCurrentStateAndParams();
+  const filterAttention =
+    params?.filterAttention === true || params?.filterAttention === 'true';
+
   const currentUser = useUser();
   const user = props.user || currentUser;
   const filterValues = useFilterValues('UserOfferingList');
+
+  const initialFilters = useMemo(() => {
+    if (filterAttention || !params?.filterState) {
+      return undefined;
+    }
+    return { state: params.filterState };
+  }, [filterAttention, params?.filterState]);
 
   const filter = useMemo(
     () => ({
@@ -38,13 +51,23 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
     }),
     [filterValues, user],
   );
+
+  const fetchData = useMemo(() => {
+    if (filterAttention && user?.uuid) {
+      return createAttentionOfferingUsersFetcher(user.uuid);
+    }
+    return createFetcher(marketplaceOfferingUsersList);
+  }, [filterAttention, user?.uuid]);
+
   const tableProps = useTable({
-    table: 'UserOfferingList',
-    syncFiltersToURL: true,
-    fetchData: createFetcher(marketplaceOfferingUsersList),
-    filter,
-    queryField: 'query',
+    table: filterAttention ? 'UserOfferingList-attention' : 'UserOfferingList',
+    syncFiltersToURL: !filterAttention,
+    initialFilters,
+    fetchData,
+    filter: filterAttention ? { user_uuid: user?.uuid } : filter,
+    queryField: filterAttention ? undefined : 'query',
   });
+
   const columns = [
     {
       title: translate('Offering'),
@@ -78,9 +101,13 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       columns={columns}
       verboseName={translate('remote accounts')}
       showPageSizeSelector={true}
-      hasQuery={true}
+      hasQuery={!filterAttention}
       hasActionBar={hasActionBar}
-      filters={<ProviderOfferingUsersFilter hasOrganizationColumn={true} />}
+      filters={
+        filterAttention ? undefined : (
+          <ProviderOfferingUsersFilter hasOrganizationColumn={true} />
+        )
+      }
       expandableRow={OfferingUsersExpandableRow}
       formId={PROVIDER_OFFERING_USERS_FORM_ID}
     />
