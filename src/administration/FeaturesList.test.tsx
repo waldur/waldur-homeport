@@ -139,6 +139,47 @@ describe('FeaturesList', () => {
     });
   });
 
+  it('shows a single empty state when the search matches nothing', () => {
+    vi.mocked(useCurrentStateAndParams).mockReturnValue({
+      state: { name: 'admin-features' } as any,
+      params: { q: 'zzz-no-match' },
+    });
+
+    render(<FeaturesList />);
+
+    // Only the top-level "no results" empty state should render, exactly once.
+    // Previously the active tab pane rendered a second one (duplication bug).
+    expect(screen.getAllByText('No results found')).toHaveLength(1);
+    expect(
+      screen.getByText(
+        'No matching features found. Try a different search term.',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(
+        'No matching features in this section. Try a different search term.',
+      ),
+    ).not.toBeInTheDocument();
+  });
+
+  it('filters features and hides the empty state when the search matches', () => {
+    vi.mocked(useCurrentStateAndParams).mockReturnValue({
+      state: { name: 'admin-features' } as any,
+      params: { q: 'billing' },
+    });
+
+    render(<FeaturesList />);
+
+    expect(
+      screen.getByText('Enable billing functionality'),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(
+        'No matching features found. Try a different search term.',
+      ),
+    ).not.toBeInTheDocument();
+  });
+
   it('disables submit button while submitting', async () => {
     vi.mocked(featureValues).mockImplementation(
       () => new Promise((resolve) => setTimeout(resolve, 100)) as any,
