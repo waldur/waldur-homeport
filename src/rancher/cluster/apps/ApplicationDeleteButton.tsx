@@ -4,11 +4,17 @@ import { rancherAppsDestroy } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { ResourceDeleteButton } from '@/resource/actions/ResourceDeleteButton';
 
-export const ApplicationDeleteButton: FunctionComponent<any> = (props) => (
+interface ApplicationDeleteButtonProps {
+  application: {
+    uuid: string;
+  };
+}
+
+export const ApplicationDeleteButton: FunctionComponent<
+  ApplicationDeleteButtonProps
+> = ({ application }) => (
   <ResourceDeleteButton
-    apiFunction={() =>
-      rancherAppsDestroy({ path: { uuid: props.application.uuid } })
-    }
+    apiFunction={() => rancherAppsDestroy({ path: { uuid: application.uuid } })}
     resourceType={translate('application')}
   />
 );

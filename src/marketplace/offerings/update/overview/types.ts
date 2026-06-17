@@ -1,6 +1,6 @@
 import { Checklist, Offering } from 'waldur-js-client';
 
-export interface Attribute {
+interface Attribute {
   key: string;
   title: string;
   type: string;

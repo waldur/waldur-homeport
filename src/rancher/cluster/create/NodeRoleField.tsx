@@ -1,12 +1,15 @@
 import { FunctionComponent } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { FieldRenderProps } from 'react-final-form';
 
 import { translate } from '@/i18n';
 
-export const NodeRoleField: FunctionComponent<any> = (props) => (
+export const NodeRoleField: FunctionComponent<FieldRenderProps<string>> = ({
+  input,
+}) => (
   <ToggleButtonGroup
-    value={props.input.value}
-    onChange={props.input.onChange}
+    value={input.value}
+    onChange={input.onChange}
     name="role"
     type="radio"
   >
