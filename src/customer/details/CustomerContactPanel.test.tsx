@@ -7,7 +7,6 @@ import { EditFieldDialog } from '@/form/EditFieldDialog';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 import { useSetCustomer, useUser } from '@/workspace/hooks';
 
@@ -83,59 +82,6 @@ describe('CustomerContactPanel', () => {
   });
 
   describe('edit flow', () => {
-    const openNotificationEmailsDialog = async (
-      user: ReturnType<typeof userEvent.setup>,
-    ) => {
-      const { openDialog } = useModal();
-      vi.mocked(openDialog).mockClear();
-      const labelElement = screen.getByText('Notification emails');
-      // eslint-disable-next-line testing-library/no-node-access
-      const rowElement = labelElement.closest('tr');
-      const editButton = within(rowElement as HTMLElement).getByTestId(
-        'compact-edit-button',
-      );
-      await user.click(editButton);
-      const resolveProps = vi.mocked(openDialog).mock.calls[0][1].resolve;
-      expect(resolveProps.name).toBe('notification_emails');
-      renderWithProviders(<EditFieldDialog resolve={resolveProps} />);
-    };
-
-    it('notifies the user with the offending address and skips the request for an invalid email', async () => {
-      const user = userEvent.setup();
-      renderPanel();
-      await openNotificationEmailsDialog(user);
-
-      await user.type(screen.getByRole('textbox'), 'notanemail');
-      await user.click(screen.getByRole('button', { name: 'Confirm' }));
-
-      await waitFor(() =>
-        expect(useNotify().showError).toHaveBeenCalledWith(
-          'Invalid email: notanemail',
-        ),
-      );
-      expect(customersContact).not.toHaveBeenCalled();
-    });
-
-    it('submits valid notification emails without raising a notification', async () => {
-      const user = userEvent.setup();
-      vi.mocked(customersContact).mockResolvedValue({ data: {} } as any);
-      renderPanel();
-      await openNotificationEmailsDialog(user);
-
-      await user.type(screen.getByRole('textbox'), 'ops@example.com');
-      await user.click(screen.getByRole('button', { name: 'Confirm' }));
-
-      await waitFor(() =>
-        expect(customersContact).toHaveBeenCalledWith({
-          path: { uuid: 'customer-uuid' },
-          body: expect.objectContaining({
-            notification_emails: 'ops@example.com',
-          }),
-        }),
-      );
-      expect(useNotify().showError).not.toHaveBeenCalled();
-    });
-
     it('saves through the dedicated contact endpoint and merges the result', async () => {
       const user = userEvent.setup();
       const { openDialog } = useModal();

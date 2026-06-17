@@ -26,8 +26,10 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
 import { SaveButton } from '@/core/SaveButton';
-import { composeValidators, required, validateEmails } from '@/core/validators';
-import { policyPeriodOptions } from '@/customer/cost-policies/utils';
+import {
+  policyPeriodOptions,
+  validateEmails,
+} from '@/customer/cost-policies/utils';
 import {
   SubmitButton,
   SelectGroup,
@@ -723,7 +725,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
                 actionsInput.value?.includes('notify_external_user') && (
                   <StringGroup
                     name="options.notify_external_user"
-                    validate={composeValidators(required, validateEmails)}
+                    validate={validateEmails}
                     placeholder="admin@example.com, ops@example.com"
                     label={translate('External Email')}
                     help={translate(

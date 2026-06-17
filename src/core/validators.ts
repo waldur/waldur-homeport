@@ -150,22 +150,6 @@ export const email = (value) =>
     ? translate('Invalid email address')
     : undefined;
 
-export const validateEmails = (value: string | string[] | null | undefined) => {
-  const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-  const entries = Array.isArray(value)
-    ? value
-    : typeof value === 'string'
-      ? value.split(',')
-      : [];
-  for (const entry of entries) {
-    const trimmed = entry.trim();
-    if (trimmed && !emailRegex.test(trimmed)) {
-      return translate('Invalid email: {email}', { email: trimmed });
-    }
-  }
-  return undefined;
-};
-
 export const url = (value) => {
   if (!value) return undefined;
 

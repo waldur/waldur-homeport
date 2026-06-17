@@ -29,10 +29,6 @@ export const EditFieldDialog = (props: { resolve: FieldEditButtonProps }) => {
           .then(() => {
             closeDialog();
           })
-          // The callback (a mutation) surfaces its own error notification and
-          // rejects on failure; keep the dialog open and swallow the rejection
-          // so it doesn't bubble up as an unhandled promise rejection.
-          .catch(() => {})
       }
       render={({ handleSubmit, submitting, invalid, dirty }) => (
         <form onSubmit={handleSubmit}>
