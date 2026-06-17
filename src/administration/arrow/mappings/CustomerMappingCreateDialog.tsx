@@ -1,13 +1,18 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
+import createDecorator from 'final-form-calculate';
 import { useMemo, useState } from 'react';
-import { Alert, Form as BSForm } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { adminArrowCustomerMappingsCreate } from 'waldur-js-client';
+import {
+  adminArrowCustomerMappingsCreate,
+  ArrowCustomerDiscovery,
+  CustomerMappingSuggestion,
+  WaldurCustomerBrief,
+} from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
-import { FormGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -27,30 +32,9 @@ interface CustomerMappingCreateDialogProps {
   };
 }
 
-interface ArrowCustomer {
-  reference: string;
-  companyName: string;
-  email?: string;
-  city?: string;
-  countryCode?: string;
-}
-
-interface WaldurCustomer {
-  uuid: string;
-  name: string;
-  abbreviation?: string;
-}
-
-interface Suggestion {
-  arrow_customer: ArrowCustomer;
-  suggested_waldur_customer?: WaldurCustomer | null;
-  confidence?: number;
-  existing_mapping?: boolean;
-}
-
 interface FormValues {
-  arrow_customer: ArrowCustomer;
-  waldur_customer: WaldurCustomer;
+  arrow_customer: ArrowCustomerDiscovery;
+  waldur_customer: WaldurCustomerBrief;
 }
 
 export const CustomerMappingCreateDialog = ({
@@ -59,7 +43,7 @@ export const CustomerMappingCreateDialog = ({
   const { closeDialog } = useModal();
 
   const [error, setError] = useState<string | null>(null);
-  const { data: settings } = useArrowSettings();
+  const { data: settings, isLoading: isLoadingSettings } = useArrowSettings();
   const {
     data: availableData,
     isLoading: isLoadingAvailable,
@@ -68,7 +52,7 @@ export const CustomerMappingCreateDialog = ({
 
   // Build a map from Arrow reference to suggested Waldur customer
   const suggestionMap = useMemo(() => {
-    const map = new Map<string, Suggestion>();
+    const map = new Map<string, CustomerMappingSuggestion>();
     if (availableData?.suggestions) {
       for (const suggestion of availableData.suggestions) {
         map.set(suggestion.arrow_customer.reference, suggestion);
@@ -77,14 +61,29 @@ export const CustomerMappingCreateDialog = ({
     return map;
   }, [availableData?.suggestions]);
 
-  // Convert Waldur customers to options format
-  const waldurCustomerOptions = useMemo(() => {
-    return (availableData?.waldur_customers || []).map((c) => ({
-      uuid: c.uuid,
-      name: c.name,
-      abbreviation: c.abbreviation,
-    }));
-  }, [availableData?.waldur_customers]);
+  const arrowCustomers = availableData?.arrow_customers || [];
+
+  const decorator = useMemo(
+    () =>
+      createDecorator({
+        field: 'arrow_customer',
+        updates: {
+          waldur_customer: (arrow_customer: ArrowCustomerDiscovery) => {
+            if (arrow_customer) {
+              const suggestion = suggestionMap.get(arrow_customer.reference);
+              if (
+                suggestion?.suggested_waldur_customer &&
+                suggestion.confidence > 0.6
+              ) {
+                return suggestion.suggested_waldur_customer;
+              }
+            }
+            return null;
+          },
+        },
+      }) as any,
+    [suggestionMap],
+  );
 
   const createMappingMutation = useManagedMutation<any, any, FormValues>({
     mutationFn: (values) =>
@@ -109,12 +108,19 @@ export const CustomerMappingCreateDialog = ({
       );
     },
 
-    invalidateQueries: [
-      {
-        queryKey: arrowQueryKeys.customerMappings(),
-      },
-    ],
+    invalidateQueries: [{ queryKey: arrowQueryKeys.customerMappings() }],
   });
+
+  if (isLoadingSettings || isLoadingAvailable) {
+    return (
+      <ModalDialog title={translate('Create Customer Mapping')}>
+        <div className="d-flex align-items-center justify-content-center py-10">
+          <LoadingSpinnerSimple className="me-2" />
+          {translate('Loading Arrow customers...')}
+        </div>
+      </ModalDialog>
+    );
+  }
 
   if (!settings) {
     return (
@@ -122,17 +128,6 @@ export const CustomerMappingCreateDialog = ({
         <Alert variant="warning">
           {translate('Arrow settings not configured')}
         </Alert>
-      </ModalDialog>
-    );
-  }
-
-  if (isLoadingAvailable) {
-    return (
-      <ModalDialog title={translate('Create Customer Mapping')}>
-        <div className="d-flex align-items-center justify-content-center py-10">
-          <LoadingSpinnerSimple className="me-2" />
-          {translate('Loading Arrow customers...')}
-        </div>
       </ModalDialog>
     );
   }
@@ -153,8 +148,6 @@ export const CustomerMappingCreateDialog = ({
       </ModalDialog>
     );
   }
-
-  const arrowCustomers = availableData?.arrow_customers || [];
 
   if (arrowCustomers.length === 0) {
     return (
@@ -179,81 +172,31 @@ export const CustomerMappingCreateDialog = ({
     <ModalDialog title={translate('Create Customer Mapping')}>
       <Form<FormValues>
         onSubmit={(values) => createMappingMutation.mutateAsync(values)}
+        decorators={[decorator]}
         render={({ handleSubmit, invalid, form }) => (
           <form onSubmit={handleSubmit}>
-            <FormGroup
+            <SelectGroup
+              name="arrow_customer"
               label={translate('Arrow Customer')}
               description={translate(
                 'Select an Arrow customer from your configured account',
               )}
               required
-            >
-              <Field
-                name="arrow_customer"
-                validate={required}
-                render={({ input, meta }) => (
-                  <>
-                    <BSForm.Select
-                      {...input}
-                      value={input.value?.reference || ''}
-                      onChange={(e) => {
-                        const selectedRef = e.target.value;
-                        const selectedCustomer = arrowCustomers.find(
-                          (c) => c.reference === selectedRef,
-                        );
-                        input.onChange(selectedCustomer || null);
-
-                        // Auto-fill Waldur organization from suggestion if confidence > 0.6
-                        if (selectedCustomer) {
-                          const suggestion = suggestionMap.get(selectedRef);
-                          if (
-                            suggestion?.suggested_waldur_customer &&
-                            suggestion.confidence > 0.6
-                          ) {
-                            form.change(
-                              'waldur_customer',
-                              suggestion.suggested_waldur_customer,
-                            );
-                          } else {
-                            // Clear previous suggestion if no good match
-                            form.change('waldur_customer', null);
-                          }
-                        }
-                      }}
-                      isInvalid={meta.touched && meta.error}
-                    >
-                      <option value="">
-                        {translate('Select Arrow customer...')}
-                      </option>
-                      {arrowCustomers.map((customer) => {
-                        const suggestion = suggestionMap.get(
-                          customer.reference,
-                        );
-                        const confidenceLabel =
-                          suggestion?.suggested_waldur_customer &&
-                          suggestion.confidence > 0.6
-                            ? ` (${Math.round(suggestion.confidence * 100)}% match)`
-                            : '';
-                        return (
-                          <option
-                            key={customer.reference}
-                            value={customer.reference}
-                          >
-                            {customer.companyName} ({customer.reference})
-                            {confidenceLabel}
-                          </option>
-                        );
-                      })}
-                    </BSForm.Select>
-                    {meta.touched && meta.error && (
-                      <BSForm.Control.Feedback type="invalid">
-                        {meta.error}
-                      </BSForm.Control.Feedback>
-                    )}
-                  </>
-                )}
-              />
-            </FormGroup>
+              validate={required}
+              placeholder={translate('Select Arrow customer...')}
+              options={arrowCustomers}
+              getOptionLabel={(option) => {
+                const suggestion = suggestionMap.get(option.reference);
+                const confidenceLabel =
+                  suggestion?.suggested_waldur_customer &&
+                  suggestion.confidence > 0.6
+                    ? ` (${Math.round(suggestion.confidence * 100)}% match)`
+                    : '';
+                return `${option.companyName} (${option.reference})${confidenceLabel}`;
+              }}
+              getOptionValue={(option) => option.reference}
+              isClearable
+            />
 
             <Field
               name="arrow_customer"
@@ -296,9 +239,9 @@ export const CustomerMappingCreateDialog = ({
               required
               validate={required}
               placeholder={translate('Select organization...')}
-              options={waldurCustomerOptions}
-              getOptionLabel={(option: WaldurCustomer) => option.name}
-              getOptionValue={(option: WaldurCustomer) => option.uuid}
+              options={availableData?.waldur_customers || []}
+              getOptionLabel={(option: WaldurCustomerBrief) => option.name}
+              getOptionValue={(option: WaldurCustomerBrief) => option.uuid}
               noOptionsMessage={() => translate('No organizations')}
               isClearable
             />
