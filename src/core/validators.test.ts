@@ -8,6 +8,7 @@ import {
   lessThanField,
   lessThanOrEqualField,
   url,
+  validateEmails,
   validateRedirectURLs,
 } from './validators';
 
@@ -575,5 +576,30 @@ describe('lessThanOrEqualField validator', () => {
 
   it('returns error when value is greater than target', () => {
     expect(validator(11)).toBe('Must be less than or equal to Target.');
+  });
+});
+
+describe('validateEmails', () => {
+  it('returns undefined for an array of valid emails', () => {
+    expect(validateEmails(['a@example.com', 'b@example.org'])).toBeUndefined();
+  });
+  it('returns undefined for a comma-separated string of valid emails', () => {
+    expect(validateEmails('a@example.com, b@example.org')).toBeUndefined();
+  });
+  it('treats empty values as valid (optional field)', () => {
+    expect(validateEmails('')).toBeUndefined();
+    expect(validateEmails([])).toBeUndefined();
+    expect(validateEmails(null)).toBeUndefined();
+    expect(validateEmails(undefined)).toBeUndefined();
+  });
+  it('names the invalid entry in an array', () => {
+    expect(validateEmails(['a@example.com', 'notanemail'])).toBe(
+      'Invalid email: notanemail',
+    );
+  });
+  it('names the invalid entry in a comma-separated string', () => {
+    expect(validateEmails('a@example.com, notanemail')).toBe(
+      'Invalid email: notanemail',
+    );
   });
 });

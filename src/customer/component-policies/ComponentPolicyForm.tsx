@@ -12,11 +12,9 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { composeValidators, required } from '@/core/validators';
+import { composeValidators, required, validateEmails } from '@/core/validators';
 import { FieldError, SelectGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
-
-import { validateEmails } from '../cost-policies/utils';
 
 import { ComponentLimitsField } from './ComponentLimitsField';
 
