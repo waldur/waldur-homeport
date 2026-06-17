@@ -74,23 +74,6 @@ export const formatOption = (option: OptionFormData) => {
   return item;
 };
 
-export const formatAttribute = (attribute, value) => {
-  if (attribute.type === 'list' && Array.isArray(value)) {
-    if (value.length === 0) {
-      return undefined;
-    } else {
-      return value.map((item) => item.key);
-    }
-  } else if (attribute.type === 'choice' && typeof value !== 'undefined') {
-    if (value === '') {
-      return undefined;
-    } else {
-      return value.key;
-    }
-  }
-  return value;
-};
-
 const getBillingTypeValue = (option) =>
   typeof option === 'object' ? option.value : option;
 
