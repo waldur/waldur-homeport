@@ -69,7 +69,7 @@ describe('CustomerContactPanel', () => {
       vi.mocked(hasPermission).mockReturnValue(true);
       renderPanel();
 
-      const editButtons = screen.getAllByTestId('compact-edit-button');
+      const editButtons = screen.getAllByTestId(/^edit-/);
       expect(editButtons.length).toBeGreaterThan(0);
     });
 
@@ -92,7 +92,7 @@ describe('CustomerContactPanel', () => {
       // eslint-disable-next-line testing-library/no-node-access
       const rowElement = labelElement.closest('tr');
       const editButton = within(rowElement as HTMLElement).getByTestId(
-        'compact-edit-button',
+        'edit-notification_emails',
       );
       await user.click(editButton);
       const resolveProps = vi.mocked(openDialog).mock.calls[0][1].resolve;
@@ -154,7 +154,7 @@ describe('CustomerContactPanel', () => {
       // eslint-disable-next-line testing-library/no-node-access
       const rowElement = labelElement.closest('tr');
       const editButton = within(rowElement as HTMLElement).getByTestId(
-        'compact-edit-button',
+        'edit-email',
       );
 
       await user.click(editButton);

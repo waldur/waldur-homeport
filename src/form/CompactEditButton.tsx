@@ -10,8 +10,7 @@ type CompactEditButtonProps = Omit<EditButtonProps, 'size'>;
  *
  * For panel/card header actions or toolbars, use EditButton instead (which defaults to large size).
  */
-export const CompactEditButton: FunctionComponent<CompactEditButtonProps> = (
-  props,
-) => (
-  <EditButton {...props} size="sm" btnIcon data-testid="compact-edit-button" />
-);
+export const CompactEditButton: FunctionComponent<CompactEditButtonProps> = ({
+  'data-testid': dataTestId = 'compact-edit-button',
+  ...props
+}) => <EditButton {...props} size="sm" btnIcon data-testid={dataTestId} />;

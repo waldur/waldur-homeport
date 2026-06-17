@@ -24,6 +24,7 @@ export const FieldEditButton = (props: FieldEditButtonProps) => {
       variant="secondary"
       tooltip={props.tooltip}
       iconNode={props.iconNode}
+      data-testid={`edit-${props.name}`}
     />
   );
 };

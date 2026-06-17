@@ -94,7 +94,7 @@ describe('CustomerMembershipRestrictionsPanel', () => {
       vi.mocked(hasPermission).mockReturnValue(true);
       renderPanel();
 
-      const editButtons = screen.getAllByTestId('compact-edit-button');
+      const editButtons = screen.getAllByTestId(/^edit-/);
       expect(editButtons.length).toBeGreaterThan(0);
     });
 
@@ -145,7 +145,7 @@ describe('CustomerMembershipRestrictionsPanel', () => {
         // eslint-disable-next-line testing-library/no-node-access
         const rowElement = labelElement.closest('tr');
         const editButton = within(rowElement as HTMLElement).getByTestId(
-          'compact-edit-button',
+          `edit-${fieldKey}`,
         );
 
         await user.click(editButton);
@@ -195,7 +195,7 @@ describe('CustomerMembershipRestrictionsPanel', () => {
       // eslint-disable-next-line testing-library/no-node-access
       const rowElement = labelElement.closest('tr');
       const editButton = within(rowElement as HTMLElement).getByTestId(
-        'compact-edit-button',
+        'edit-user_affiliations',
       );
 
       await user.click(editButton);

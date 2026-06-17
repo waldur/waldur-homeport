@@ -508,7 +508,7 @@ describe('UserProfileTabs', () => {
       renderTabs();
 
       // Trigger edit dialog
-      await user.click(screen.getAllByTestId('compact-edit-button')[0]);
+      await user.click(screen.getAllByTestId(/^edit-/)[0]);
       // The callback is in resolve.callback of the second argument of the first call to openDialog
       const callback = mockOpenDialog.mock.calls[0][1].resolve.callback;
 
@@ -531,7 +531,7 @@ describe('UserProfileTabs', () => {
       renderTabs();
 
       // Trigger edit dialog
-      await user.click(screen.getAllByTestId('compact-edit-button')[0]);
+      await user.click(screen.getAllByTestId(/^edit-/)[0]);
       const callback = mockOpenDialog.mock.calls[0][1].resolve.callback;
 
       await act(async () => {
@@ -552,7 +552,7 @@ describe('UserProfileTabs', () => {
       renderTabs();
 
       // Trigger edit dialog
-      await user.click(screen.getAllByTestId('compact-edit-button')[0]);
+      await user.click(screen.getAllByTestId(/^edit-/)[0]);
       const callback = mockOpenDialog.mock.calls[0][1].resolve.callback;
 
       await act(async () => {

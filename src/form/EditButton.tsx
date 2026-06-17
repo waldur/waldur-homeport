@@ -21,6 +21,7 @@ export interface EditButtonProps extends ButtonProps {
   width?: number | 'auto';
   btnIcon?: boolean;
   iconNode?: React.ReactNode;
+  'data-testid'?: string;
 }
 
 export const EditButton: FunctionComponent<EditButtonProps> = (props) => {

@@ -80,7 +80,7 @@ describe('AzureCredentialsSection', () => {
       // eslint-disable-next-line testing-library/no-node-access
       const rowElement = labelElement.closest('tr');
       const editButton = within(rowElement as HTMLElement).getByTestId(
-        'compact-edit-button',
+        `edit-service_attributes.${fieldKey}`,
       );
 
       await user.click(editButton);
