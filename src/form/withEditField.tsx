@@ -191,7 +191,15 @@ function getDefaultDisplayValue(
     return <CheckOrX value={value} />;
   }
   if (Component === CommaSeparatedListField) {
-    return (value || []).join(', ');
+    const items = Array.isArray(value)
+      ? value
+      : typeof value === 'string'
+        ? value
+            .split(',')
+            .map((item) => item.trim())
+            .filter(Boolean)
+        : [];
+    return items.join(', ');
   }
   // SelectField-like: check for options prop
   if (props?.options) {

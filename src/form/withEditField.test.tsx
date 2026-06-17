@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderWithProviders } from '@/test/harness';
 
+import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { EditFieldProvider } from './EditFieldContext';
 import { withEditField } from './withEditField';
 
@@ -126,5 +127,60 @@ describe('withEditField', () => {
     );
 
     expect(screen.getByTestId('fti-value')).toHaveTextContent('Alpha, Gamma');
+  });
+
+  it('renders a comma-separated string value without crashing', () => {
+    const CommaSeparatedEditField = withEditField(CommaSeparatedListField);
+    const scope = { notification_emails: 'info@agri.ee,alt@agri.ee' };
+    const callback = vi.fn();
+
+    renderWithProviders(
+      <EditFieldProvider scope={scope} callback={callback}>
+        <CommaSeparatedEditField
+          name="notification_emails"
+          label="Notification emails"
+        />
+      </EditFieldProvider>,
+    );
+
+    expect(screen.getByTestId('fti-value')).toHaveTextContent(
+      'info@agri.ee, alt@agri.ee',
+    );
+  });
+
+  it('joins an array value for comma-separated fields', () => {
+    const CommaSeparatedEditField = withEditField(CommaSeparatedListField);
+    const scope = { notification_emails: ['info@agri.ee', 'alt@agri.ee'] };
+    const callback = vi.fn();
+
+    renderWithProviders(
+      <EditFieldProvider scope={scope} callback={callback}>
+        <CommaSeparatedEditField
+          name="notification_emails"
+          label="Notification emails"
+        />
+      </EditFieldProvider>,
+    );
+
+    expect(screen.getByTestId('fti-value')).toHaveTextContent(
+      'info@agri.ee, alt@agri.ee',
+    );
+  });
+
+  it('renders an empty string for a null comma-separated value', () => {
+    const CommaSeparatedEditField = withEditField(CommaSeparatedListField);
+    const scope = { notification_emails: null };
+    const callback = vi.fn();
+
+    renderWithProviders(
+      <EditFieldProvider scope={scope} callback={callback}>
+        <CommaSeparatedEditField
+          name="notification_emails"
+          label="Notification emails"
+        />
+      </EditFieldProvider>,
+    );
+
+    expect(screen.getByTestId('fti-value').textContent).toBe('');
   });
 });
