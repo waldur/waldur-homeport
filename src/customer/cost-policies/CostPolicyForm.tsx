@@ -9,7 +9,7 @@ import {
 
 import { ENV } from '@/core/config';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { composeValidators, required } from '@/core/validators';
+import { composeValidators, required, validateEmails } from '@/core/validators';
 import {
   SelectGroup,
   NumberGroup,
@@ -25,11 +25,7 @@ import { ProjectCostField } from '@/project/ProjectCostField';
 import { useCustomer } from '@/workspace/hooks';
 
 import { CostPolicyType } from './types';
-import {
-  getCostPolicyActionOptions,
-  policyPeriodOptions,
-  validateEmails,
-} from './utils';
+import { getCostPolicyActionOptions, policyPeriodOptions } from './utils';
 
 interface CostPolicyFormProps {
   type: CostPolicyType;

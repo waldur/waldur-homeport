@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { customersContact } from 'waldur-js-client';
 
 import { formatPhoneNumber } from '@/core/utils';
+import { validateEmails } from '@/core/validators';
 import {
   CommaSeparatedListEditField,
   EditFieldProvider,
@@ -14,6 +15,7 @@ import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { useNotify } from '@/store/notify';
 import { useSetCustomer, useUser } from '@/workspace/hooks';
 
 import { CustomerEditPanelProps } from './types';
@@ -24,6 +26,7 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = ({
 }) => {
   const user = useUser();
   const setCustomer = useSetCustomer();
+  const { showError } = useNotify();
 
   const canUpdate =
     hasPermission(user, {
@@ -36,8 +39,17 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = ({
     });
 
   const { mutateAsync: updateContact } = useManagedMutation({
-    mutationFn: (formData: Record<string, any>) =>
-      customersContact({
+    mutationFn: (formData: Record<string, any>) => {
+      if ('notification_emails' in formData) {
+        // Surface a bad email through the notification system before hitting
+        // the API, so the user gets the exact offending address back.
+        const emailError = validateEmails(formData.notification_emails);
+        if (emailError) {
+          showError(emailError);
+          return Promise.reject(new Error(emailError));
+        }
+      }
+      return customersContact({
         path: { uuid: customer.uuid },
         body: {
           ...formData,
@@ -47,7 +59,8 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = ({
             ),
           }),
         },
-      }),
+      });
+    },
     successMessage: translate('Organization updated successfully'),
     // The contact endpoint returns only the contact fields, so merge them onto
     // the current customer instead of replacing the whole workspace customer.
