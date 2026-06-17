@@ -6,9 +6,12 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton, StringGroup } from '@/form';
-import { FormGroup } from '@/form';
-import { Select, AsyncSelect } from '@/form/select';
+import {
+  SubmitButton,
+  StringGroup,
+  AsyncSelectGroup,
+  SelectGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import {
   categoryAutocomplete,
@@ -98,41 +101,35 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           />
         </div>
       </div>
-      <FormGroup label={translate('Category')}>
-        <AsyncSelect
-          placeholder={translate('All categories')}
-          value={values.category}
-          loadOptions={loadCategories}
-          getOptionLabel={(option) => option.title}
-          getOptionValue={(option) => option.uuid}
-          onChange={(val) => form.change('category', val)}
-          isClearable
-        />
-      </FormGroup>
-      <FormGroup label={translate('Service provider')}>
-        <AsyncSelect
-          placeholder={translate('All providers')}
-          value={values.customer}
-          loadOptions={loadOrganizations}
-          getOptionLabel={(option) => option.name}
-          getOptionValue={(option) => option.uuid}
-          onChange={(val) => form.change('customer', val)}
-          isClearable
-        />
-      </FormGroup>
+      <AsyncSelectGroup
+        label={translate('Category')}
+        placeholder={translate('All categories')}
+        name="category"
+        loadOptions={loadCategories}
+        getOptionLabel={(option) => option.title}
+        getOptionValue={(option) => option.uuid}
+        isClearable
+      />
+      <AsyncSelectGroup
+        label={translate('Service provider')}
+        placeholder={translate('All providers')}
+        name="customer"
+        loadOptions={loadOrganizations}
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.uuid}
+        isClearable
+      />
       <div className="row">
         <div className="col-sm-6">
-          <FormGroup label={translate('Offering state')}>
-            <Select
-              placeholder={translate('All states')}
-              value={values.offering_state}
-              options={OfferingStateOptions}
-              getOptionLabel={(option) => option.label}
-              getOptionValue={(option) => String(option.value)}
-              onChange={(val) => form.change('offering_state', val)}
-              isClearable
-            />
-          </FormGroup>
+          <SelectGroup
+            label={translate('Offering state')}
+            placeholder={translate('All states')}
+            name="offering_state"
+            options={OfferingStateOptions}
+            getOptionLabel={(option) => option.label}
+            getOptionValue={(option) => String(option.value)}
+            isClearable
+          />
         </div>
         <div className="col-sm-6">
           <StringGroup
