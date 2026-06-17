@@ -70,7 +70,7 @@ export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
       openstackInstancesUpdateFloatingIps({
         path: { uuid: resource.uuid },
         body: {
-          floating_ips: formData.floating_ips
+          floating_ips: (formData.floating_ips ?? [])
             .filter((item) => item.subnet)
             .map((item) => {
               if (item.floating_ip === true) {
