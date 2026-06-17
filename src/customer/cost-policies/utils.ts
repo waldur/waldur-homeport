@@ -50,15 +50,3 @@ export const policyPeriodOptions = {
   threeMonth: { value: 3, label: translate('{count} month', { count: 3 }) },
   twelveMonth: { value: 4, label: translate('{count} month', { count: 12 }) },
 };
-
-export const validateEmails = (value: string) => {
-  if (!value) return translate('This field is required.');
-  const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-  const emails = value.split(',').map((email) => email.trim());
-  for (const email of emails) {
-    if (email && !emailRegex.test(email)) {
-      return translate('Invalid email: {email}', { email });
-    }
-  }
-  return undefined;
-};
