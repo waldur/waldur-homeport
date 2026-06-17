@@ -6,8 +6,6 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
-import { ATTRIBUTE_FORM_ID } from './constants';
-
 const EditCategoryDialog = lazyComponent(() =>
   import('./EditCategoryDialog').then((module) => ({
     default: module.EditCategoryDialog,
@@ -23,7 +21,6 @@ export const EditCategoryButton: FunctionComponent<{
   const callback = () => {
     openDialog(EditCategoryDialog, {
       resolve: props,
-      formId: ATTRIBUTE_FORM_ID,
     });
   };
   return (
