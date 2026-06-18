@@ -15,17 +15,23 @@ const getSubnetLabel = (subnet: OpenStackSubNet) =>
 const SubNetRow = ({ SubNet: subnet, onRemove, sourceSubnets }) => (
   <tr>
     <td>
-      <Field
-        name={`${subnet}.source`}
-        component={SelectField}
-        options={sourceSubnets}
-        getOptionLabel={getSubnetLabel}
-        getOptionValue={({ cidr }) => cidr}
-        simpleValue
-      />
+      <Field name={`${subnet}.source`}>
+        {({ input, meta }) => (
+          <SelectField
+            input={input}
+            meta={meta}
+            options={sourceSubnets}
+            getOptionLabel={getSubnetLabel}
+            getOptionValue={({ cidr }) => cidr}
+            simpleValue
+          />
+        )}
+      </Field>
     </td>
     <td>
-      <Field name={`${subnet}.destination`} component={InputField} />
+      <Field name={`${subnet}.destination`}>
+        {({ input, meta }) => <InputField input={input} meta={meta} />}
+      </Field>
     </td>
     <td>
       <CompactActionButton

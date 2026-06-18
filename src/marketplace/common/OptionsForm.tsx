@@ -307,29 +307,21 @@ export const OptionsForm = ({
               helpEnd
               required={option.required}
             >
-              {OptionField === AsyncSelectField ? (
-                (() => {
-                  const { key: remountKey, ...asyncParams } = params;
-                  return (
-                    <AsyncSelectField
-                      key={remountKey}
-                      {...(asyncParams as any)}
-                      name={`attributes.${key}`}
-                      validate={validateFn}
-                    />
-                  );
-                })()
-              ) : (
-                <Field
-                  name={`attributes.${key}`}
-                  component={OptionField}
-                  validate={validateFn}
-                  {...params}
-                  {...(OptionField === AwesomeCheckboxField
-                    ? { label: option.label, help_text: option.help_text }
-                    : {})}
-                />
-              )}
+              {(() => {
+                const { key: remountKey, ...fieldParams } = params;
+                return (
+                  <Field
+                    key={remountKey}
+                    name={`attributes.${key}`}
+                    component={OptionField}
+                    validate={validateFn}
+                    {...fieldParams}
+                    {...(OptionField === AwesomeCheckboxField
+                      ? { label: option.label, help_text: option.help_text }
+                      : {})}
+                  />
+                );
+              })()}
               {!params.hideError && (
                 <FormFieldError name={`attributes.${key}`} />
               )}

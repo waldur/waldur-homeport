@@ -20,18 +20,26 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
   return (
     <tr className="border-bottom">
       <td>
-        <Field
-          name={`${variable}.name`}
-          component={InputField}
-          placeholder={translate('Key')}
-        />
+        <Field name={`${variable}.name`}>
+          {({ input, meta }) => (
+            <InputField
+              input={input}
+              meta={meta}
+              placeholder={translate('Key')}
+            />
+          )}
+        </Field>
       </td>
       <td>
-        <Field
-          name={`${variable}.value`}
-          component={InputField}
-          placeholder={translate('Value')}
-        />
+        <Field name={`${variable}.value`}>
+          {({ input, meta }) => (
+            <InputField
+              input={input}
+              meta={meta}
+              placeholder={translate('Value')}
+            />
+          )}
+        </Field>
       </td>
       <td>
         <CompactActionButton

@@ -110,13 +110,17 @@ export const AuthValimoDialog = () => {
                 <InputGroup.Text>
                   {ENV.plugins.WALDUR_AUTH_VALIMO.MOBILE_PREFIX}
                 </InputGroup.Text>
-                <Field
-                  type="tel"
-                  name="phoneNumber"
-                  required={true}
-                  component={InputField}
-                  disabled={submitting}
-                />
+                <Field name="phoneNumber" required={true}>
+                  {({ input, meta }) => (
+                    <InputField
+                      input={input}
+                      meta={meta}
+                      type="tel"
+                      required={true}
+                      disabled={submitting}
+                    />
+                  )}
+                </Field>
               </InputGroup>
             </Form.Group>
             {challengeCode && (

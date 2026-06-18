@@ -1,104 +1,80 @@
 import { XIcon } from '@phosphor-icons/react';
-import { omit } from 'lodash-es';
+import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import { FC, ReactNode } from 'react';
+import { FieldRenderProps } from 'react-final-form';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
-import { FormField } from './types';
 import { useFlatpickrTheme } from './useFlatpickrTheme';
 
-// react-flatpickr forwards every prop to the underlying <input>, so we strip
-// the form-plumbing props (react-final-form + FormGroup wiring) that would
-// otherwise produce React "unknown DOM attribute" warnings.
-//
-// `children` is in here for a sharper reason: under react-flatpickr v4 the
-// component spreads ALL its props onto the <input> element (it destructures
-// `children` but does not strip it from the spread source). Any consumer
-// that passes a non-null/non-undefined `children` — even the falsy `false`
-// you get from `{cond && <X />}` — trips React #137 ("input is a void
-// element tag and must neither have `children` ..."). Blocking it here
-// gives us a stable boundary regardless of who calls us upstream.
-const NON_DOM_PROPS = [
-  'input',
-  'meta',
-  'isInvalid',
-  'isClearable',
-  'validate',
-  'normalize',
-  'format',
-  'parse',
-  'noUpdateOnBlur',
-  'containerClassName',
-  'spaceless',
-  'space',
-  'hideLabel',
-  'hideError',
-  'forceTouched',
-  'tooltip',
-  'tooltipEnd',
-  'tooltipProps',
-  'helpEnd',
-  'quickAction',
-  'actions',
-  'required',
-  'description',
-  'label',
-  'controlId',
-  'children',
-] as const;
+// ── Base (Pure UI) ──────────────────────────────────────
 
-type FlatpickrFieldProps = FormField &
-  DateTimePickerProps & {
-    placeholder?: string;
-    iconNode?: ReactNode;
-    solid?: boolean;
-  };
+interface BaseFlatpickrFieldProps extends Omit<
+  DateTimePickerProps,
+  'value' | 'onChange'
+> {
+  /** Current date value — ISO string, Date, or undefined */
+  value?: string | Date | null;
+  /** Called with the selected value (ISO string or null) */
+  onChange?: (value: string | null) => void;
+  placeholder?: string;
+  iconNode?: ReactNode;
+  solid?: boolean;
+  disabled?: boolean;
+}
 
-export const FlatpickrField: FC<FlatpickrFieldProps> = ({
+const BaseFlatpickrField: FC<BaseFlatpickrFieldProps> = ({
+  value,
+  onChange,
   placeholder,
   iconNode,
   solid,
+  disabled,
+  options,
   id,
-  ...props
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  children: _children, // Strip children because react-flatpickr passes it to <input>
+  ...rest
 }) => {
-  const onlyTime = props.options?.enableTime && props.options?.noCalendar;
+  const onlyTime = options?.enableTime && options?.noCalendar;
 
   useFlatpickrTheme();
-  const input = (props as any).input;
-  const flatpickrProps = omit(props as any, NON_DOM_PROPS);
+
   return (
     <div style={{ position: 'relative' }}>
       <Flatpickr
         id={id}
         value={
-          input.value
-            ? typeof input.value === 'string'
-              ? DateTime.fromISO(input.value).toJSDate()
-              : input.value
-            : props.options.defaultDate
+          value
+            ? typeof value === 'string'
+              ? DateTime.fromISO(value).toJSDate()
+              : value
+            : options?.defaultDate
         }
-        onChange={(value) =>
-          input.onChange(
-            value[0] instanceof Date
+        onChange={(dates) =>
+          onChange?.(
+            dates[0] instanceof Date
               ? onlyTime
-                ? DateTime.fromJSDate(value[0]).toISOTime()
-                : DateTime.fromJSDate(value[0]).toISODate()
-              : value[0],
+                ? DateTime.fromJSDate(dates[0]).toISOTime()
+                : DateTime.fromJSDate(dates[0]).toISODate()
+              : dates[0],
           )
         }
-        className={solid ? 'form-control form-control-solid' : 'form-control'}
+        className={classNames('form-control', solid && 'form-control-solid')}
         placeholder={placeholder}
-        {...flatpickrProps}
+        options={options}
+        disabled={disabled}
+        {...rest}
       />
 
-      {input.value && typeof input.value === 'string' && !props.disabled ? (
+      {value && typeof value === 'string' && !disabled ? (
         <button
           type="button"
           className="btn btn-icon btn-circle btn-color-muted w-25px h-25px bg-body shadow end-button"
-          onClick={() => input.onChange(null)}
+          onClick={() => onChange?.(null)}
           style={{ position: 'absolute', right: 10, top: 10 }}
         >
           <Tip
@@ -128,3 +104,25 @@ export const FlatpickrField: FC<FlatpickrFieldProps> = ({
     </div>
   );
 };
+
+// ── Field Adapter ───────────────────────────────────────
+
+export interface FlatpickrFieldProps extends Omit<
+  BaseFlatpickrFieldProps,
+  'value' | 'onChange'
+> {
+  input: FieldRenderProps<any>['input'];
+  // Optional because the Date/Time/DateTime wrappers strip `meta` upstream and
+  // never forward it; declared here so it can be destructured away (below)
+  // instead of leaking onto the underlying <input> via ...rest.
+  meta?: FieldRenderProps<any>['meta'];
+}
+
+export const FlatpickrField: FC<FlatpickrFieldProps> = ({
+  input,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  meta: _meta,
+  ...rest
+}) => (
+  <BaseFlatpickrField {...rest} value={input.value} onChange={input.onChange} />
+);

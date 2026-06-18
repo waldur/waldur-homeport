@@ -5,8 +5,6 @@ import { NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 
-import { IntegerUnitField } from './IntegerUnitField';
-
 export const VolumeSizeGroup: FunctionComponent<{ name?: string }> = ({
   name = 'size',
 }) => (
@@ -14,8 +12,7 @@ export const VolumeSizeGroup: FunctionComponent<{ name?: string }> = ({
     label={translate('Volume size')}
     required={true}
     name={name}
-    units={translate('GB')}
-    component={IntegerUnitField}
+    unit={translate('GB')}
     parse={parseIntField}
     format={formatIntField}
     validate={required}

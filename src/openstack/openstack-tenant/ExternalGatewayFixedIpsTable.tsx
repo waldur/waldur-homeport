@@ -20,21 +20,25 @@ const FixedIpRow = ({ prefix, subnetOptions, onRemove }) => (
       >
         {({ input, meta }) => (
           <>
-            <StringField input={input} />
+            <StringField input={input} meta={meta} />
             <FieldError error={meta.touched && meta.error} />
           </>
         )}
       </Field>
     </td>
     <td>
-      <Field
-        name={`${prefix}.subnet_id`}
-        component={SelectField}
-        options={subnetOptions}
-        simpleValue
-        isClearable
-        placeholder={translate('Auto')}
-      />
+      <Field name={`${prefix}.subnet_id`}>
+        {({ input, meta }) => (
+          <SelectField
+            input={input}
+            meta={meta}
+            options={subnetOptions}
+            simpleValue
+            isClearable
+            placeholder={translate('Auto')}
+          />
+        )}
+      </Field>
     </td>
     <td>
       <CompactActionButton

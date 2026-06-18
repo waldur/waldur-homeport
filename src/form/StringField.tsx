@@ -1,50 +1,54 @@
-import { omit } from 'lodash-es';
+import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Form, FormControlProps, InputGroup } from 'react-bootstrap';
+import { FieldRenderProps } from 'react-final-form';
 
-import { FormField } from './types';
+// ── Base (Pure UI) ──────────────────────────────────────
 
-interface StringFieldProps extends FormField, Omit<FormControlProps, 'onBlur'> {
-  placeholder?: string;
-  style?: any;
-  maxLength?: number;
-  pattern?: string;
-  autoFocus?: boolean;
+export interface BaseStringFieldProps extends FormControlProps {
   solid?: boolean;
   icon?: ReactNode;
 }
 
-// Props that should not be passed to DOM elements
-const FORM_FIELD_PROPS = [
-  'validate',
-  'normalize',
-  'format',
-  'parse',
-  'meta',
-  'noUpdateOnBlur',
-  'containerClassName',
-  'spaceless',
-  'space',
-  'hideLabel',
-] as const;
-
-const FormControlPure = ({ solid = false, placeholder = ' ', ...props }) => (
-  <Form.Control
-    className={solid && 'form-control-solid'}
-    type="text"
-    placeholder={placeholder}
-    {...props}
-  />
-);
-
-export const StringField: FC<StringFieldProps> = ({ input, icon, ...rest }) => {
-  const props = omit(rest, FORM_FIELD_PROPS);
+export const BaseStringField: FC<BaseStringFieldProps> = ({
+  solid = false,
+  placeholder = ' ',
+  icon,
+  className,
+  ...rest
+}) => {
+  const control = (
+    <Form.Control
+      className={classNames(solid && 'form-control-solid', className)}
+      type="text"
+      placeholder={placeholder}
+      {...rest}
+    />
+  );
   return !icon ? (
-    <FormControlPure {...input} {...props} />
+    control
   ) : (
     <InputGroup className="has-icon">
       <div className="input-group-icon">{icon}</div>
-      <FormControlPure {...input} {...props} />
+      {control}
     </InputGroup>
   );
 };
+
+// ── Field Adapter ───────────────────────────────────────
+
+export interface StringFieldProps extends Omit<
+  BaseStringFieldProps,
+  'value' | 'onChange' | 'onBlur' | 'onFocus' | 'name'
+> {
+  input: FieldRenderProps<any>['input'];
+  meta: FieldRenderProps<any>['meta'];
+}
+
+export const StringField: FC<StringFieldProps> = ({ input, meta, ...rest }) => (
+  <BaseStringField
+    isInvalid={meta.touched && meta.error}
+    {...rest}
+    {...input}
+  />
+);

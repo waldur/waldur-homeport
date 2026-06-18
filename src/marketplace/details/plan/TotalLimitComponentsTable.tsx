@@ -64,13 +64,19 @@ export const TotalLimitComponentsTable: FunctionComponent<
                 ) : (
                   <Field
                     name={`limits.${component.type}`}
-                    component={InputField}
-                    type="number"
                     parse={parseIntField}
                     format={formatIntField}
                     validate={validateValue}
-                    className="px-2"
-                  />
+                  >
+                    {({ input, meta }) => (
+                      <InputField
+                        input={input}
+                        meta={meta}
+                        type="number"
+                        className="px-2"
+                      />
+                    )}
+                  </Field>
                 )}
               </td>
               {!shouldConcealPrices && !props.hidePrices && (

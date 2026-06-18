@@ -1,10 +1,15 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Field, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 
 import { formatISOWithoutZone, parseDate } from '@/core/dateUtils';
 import { required } from '@/core/validators';
-import { DateTimeGroup, NumberGroup, SelectGroup, TimezoneGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import {
+  DateTimeGroup,
+  NumberGroup,
+  SelectGroup,
+  TimezoneGroup,
+  BooleanGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
@@ -55,12 +60,10 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
           parse={(value) => (value ? formatISOWithoutZone(value) : value)}
           format={(value) => (value ? new Date(value) : value)}
         />
-        <Field
+        <BooleanGroup
           name="repeats"
-          component={AwesomeCheckboxField}
           label={translate('Repeats')}
-          help_text={translate('Create multiple rounds at a regular cadence.')}
-          hideLabel
+          help={translate('Create multiple rounds at a regular cadence.')}
         />
         {!repeats && (
           <DateTimeGroup

@@ -1,32 +1,48 @@
-import { FieldProps } from 'react-final-form';
+import { FieldMetaState } from 'react-final-form';
 import { GroupBase, Props as SelectProps } from 'react-select';
 import { CreatableProps } from 'react-select/creatable';
 import { AsyncPaginateProps, LoadOptions } from 'react-select-async-paginate';
 
+interface SelectFieldInputProps {
+  name?: string;
+  value?: any;
+  onChange?: (...args: any[]) => void;
+  onBlur?: (...args: any[]) => void;
+  onFocus?: (...args: any[]) => void;
+}
+
 export type CustomSelectProps = {
   size?: 'sm';
   variant?: 'tableFilter';
-} & SelectProps<any, any, any> &
-  Partial<Omit<FieldProps<any, any>, 'onChange'>>;
+  input?: SelectFieldInputProps;
+  meta?: Partial<FieldMetaState<any>>;
+  disabled?: boolean;
+} & SelectProps<any, any, any>;
 
 export type CustomCreatableSelectProps = {
   size?: 'sm';
   variant?: 'tableFilter';
-} & CreatableProps<any, any, any> &
-  Partial<Omit<FieldProps<any, any>, 'onChange'>>;
+  input?: SelectFieldInputProps;
+  meta?: Partial<FieldMetaState<any>>;
+  disabled?: boolean;
+} & CreatableProps<any, any, any>;
 
 export type CustomAsyncSelectProps = {
   size?: 'sm';
   variant?: 'tableFilter';
-} & AsyncPaginateProps<any, GroupBase<any>, any, any> &
-  Partial<Omit<FieldProps<any, any>, 'onChange'>>;
+  input?: SelectFieldInputProps;
+  meta?: Partial<FieldMetaState<any>>;
+  disabled?: boolean;
+} & AsyncPaginateProps<any, GroupBase<any>, any, any>;
 
 export type CustomAsyncCreatableSelectProps = {
   size?: 'sm';
   variant?: 'tableFilter';
+  input?: SelectFieldInputProps;
+  meta?: Partial<FieldMetaState<any>>;
+  disabled?: boolean;
 } & AsyncPaginateProps<any, GroupBase<any>, any, any> &
-  CreatableProps<any, any, any> &
-  Partial<Omit<FieldProps<any, any>, 'onChange'>>;
+  CreatableProps<any, any, any>;
 
 export type AsyncSelectLoader<
   Option = any,
@@ -44,5 +60,5 @@ export interface CreatableSelectFieldProps extends CustomCreatableSelectProps {
 }
 
 export interface AsyncSelectFieldProps extends CustomAsyncSelectProps {
-  name: string;
+  simpleValue?: boolean;
 }

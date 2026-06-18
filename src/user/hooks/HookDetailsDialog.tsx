@@ -12,9 +12,8 @@ import {
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { titleCase } from '@/core/utils';
 import { required } from '@/core/validators';
-import { SubmitButton, StringGroup } from '@/form';
+import { SubmitButton, StringGroup, BooleanGroup } from '@/form';
 import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -161,9 +160,8 @@ export const HookDetailsDialog: FunctionComponent<{
                     <FormGroup label={translate('Notification method')}>
                       {titleCase(values.hook_type)}
                     </FormGroup>
-                    <Field
+                    <BooleanGroup
                       name="is_active"
-                      component={AwesomeCheckboxField}
                       label={translate('Enabled')}
                     />
                   </>

@@ -35,8 +35,6 @@ import {
   BooleanGroup,
   NumberGroup,
 } from '@/form';
-import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { MultiSelectValue } from '@/form/select';
 import { translate } from '@/i18n';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
@@ -816,8 +814,11 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               )}
             />
 
-            <FormGroup
-              description={
+            <BooleanGroup
+              name="apply_to_all"
+              label={translate('Apply to All Organization Groups')}
+              disabled={organizationGroups?.length === 0}
+              help={
                 organizationGroups?.length > 0
                   ? translate(
                       'When enabled, this policy applies to all organization groups. When disabled, you can select specific groups.',
@@ -826,24 +827,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
                       'No organization groups are configured in the system. The policy will automatically apply to all organizations.',
                     )
               }
-            >
-              <Field
-                component={AwesomeCheckboxField}
-                name="apply_to_all"
-                label={translate('Apply to All Organization Groups')}
-                disabled={organizationGroups?.length === 0}
-              />
-              {organizationGroups?.length === 0 && (
-                <Field name="apply_to_all">
-                  {({ input }) => {
-                    if (!input.value && organizationGroups?.length === 0) {
-                      input.onChange(true);
-                    }
-                    return null;
-                  }}
-                </Field>
-              )}
-            </FormGroup>
+            />
 
             <Field name="apply_to_all">
               {({ input: applyToAllInput }) => (

@@ -142,9 +142,6 @@ export const ProjectOrderAutoApprovalEditDialog: FC<EditDialogProps> = ({
 
             <BooleanGroup
               name="enabled"
-              hideLabel
-              type="checkbox"
-              checkboxLabel={translate('Enabled')}
               label={translate('Enable auto-approval')}
               description={translate(
                 'When enabled, qualifying orders below the monthly cost limit are auto-approved on the consumer side. Only plans without usage-based components qualify.',

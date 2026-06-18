@@ -1,14 +1,11 @@
 import { FC } from 'react';
-import { Form as FinalForm, Field, FormSpy } from 'react-final-form';
+import { Form as FinalForm, FormSpy } from 'react-final-form';
 import type { FeedbackCategoryEnum } from 'waldur-js-client';
 
 import { useMessageFeedbackMutation } from '@/ai-assistant/hooks/useMessageFeedbackMutation';
 import { FEEDBACK_SELECT_OPTIONS } from '@/ai-assistant/lib/feedback/categories';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
-import { SelectGroup } from '@/form';
-import { FormGroup } from '@/form';
-import { SubmitButton } from '@/form/SubmitButton';
-import { TextField } from '@/form/TextField';
+import { SelectGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -94,32 +91,30 @@ export const FeedbackDialog: FC<{ resolve: Resolve }> = ({ resolve }) => {
               />
             )}
 
-            <FormGroup label={translate('Comment (optional)')} spaceless>
-              <Field
-                name="comment"
-                component={TextField}
-                placeholder={
-                  resolve.score
-                    ? translate('What was helpful about this response?')
-                    : translate('What was wrong with this response?')
-                }
-                rows={4}
-                maxLength={COMMENT_MAX}
-                aria-describedby={COUNTER_ID}
-              />
-              <FormSpy subscription={{ values: true }}>
-                {({ values: v }) => (
-                  <div
-                    id={COUNTER_ID}
-                    className="text-muted small text-end mt-1"
-                    aria-live="polite"
-                    aria-atomic="true"
-                  >
-                    {(v.comment ?? '').length} / {COMMENT_MAX}
-                  </div>
-                )}
-              </FormSpy>
-            </FormGroup>
+            <TextGroup
+              label={translate('Comment (optional)')}
+              name="comment"
+              placeholder={
+                resolve.score
+                  ? translate('What was helpful about this response?')
+                  : translate('What was wrong with this response?')
+              }
+              rows={4}
+              maxLength={COMMENT_MAX}
+              aria-describedby={COUNTER_ID}
+            />
+            <FormSpy subscription={{ values: true }}>
+              {({ values: v }) => (
+                <div
+                  id={COUNTER_ID}
+                  className="text-muted small text-end mt-1"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  {(v.comment ?? '').length} / {COMMENT_MAX}
+                </div>
+              )}
+            </FormSpy>
           </ModalDialog>
         </form>
       )}

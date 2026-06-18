@@ -70,7 +70,6 @@ export const QuestionGeneralForm = ({
       />
       <NumberGroup
         name="order"
-        checkboxLabel={translate('Question order')}
         placeholder="0"
         min={0}
         label={translate('Question order')}

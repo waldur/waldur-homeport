@@ -287,16 +287,22 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                               <td>
                                 <Field
                                   name={`limits.${c.type}`}
-                                  component={NumberField}
                                   parse={(v) =>
                                     v === '' || v === undefined || v === null
                                       ? undefined
                                       : Number(v)
                                   }
-                                  min={0}
-                                  max={cap ?? undefined}
                                   validate={validateLimit}
-                                />
+                                >
+                                  {({ input, meta }) => (
+                                    <NumberField
+                                      input={input}
+                                      meta={meta}
+                                      min={0}
+                                      max={cap ?? undefined}
+                                    />
+                                  )}
+                                </Field>
                               </td>
                               <td className="text-muted">
                                 {renderFieldOrDash(hint)}

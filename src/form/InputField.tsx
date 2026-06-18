@@ -1,24 +1,36 @@
 import classNames from 'classnames';
-import { FunctionComponent } from 'react';
-import { FormControl } from 'react-bootstrap';
+import { FC } from 'react';
+import { FormControl, FormControlProps } from 'react-bootstrap';
+import { FieldRenderProps } from 'react-final-form';
 
-import { FormField } from './types';
+// ── Base (Pure UI) ──────────────────────────────────────
 
-interface InputFieldProps extends FormField {
-  className?: string;
+export interface BaseInputFieldProps extends FormControlProps {
   solid?: boolean;
 }
 
-export const InputField: FunctionComponent<InputFieldProps> = ({
-  input,
-  className,
+export const BaseInputField: FC<BaseInputFieldProps> = ({
   solid,
+  className,
   ...props
 }) => (
   <FormControl
     className={classNames(solid && 'form-control-solid', className)}
     placeholder="  "
-    {...input}
     {...props}
   />
+);
+
+// ── Field Adapter ───────────────────────────────────────
+
+export interface InputFieldProps extends Omit<
+  BaseInputFieldProps,
+  'value' | 'onChange' | 'onBlur' | 'onFocus' | 'name'
+> {
+  input: FieldRenderProps<any>['input'];
+  meta: FieldRenderProps<any>['meta'];
+}
+
+export const InputField: FC<InputFieldProps> = ({ input, meta, ...rest }) => (
+  <BaseInputField isInvalid={meta.touched && meta.error} {...rest} {...input} />
 );

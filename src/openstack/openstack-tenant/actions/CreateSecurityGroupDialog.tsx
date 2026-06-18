@@ -94,7 +94,6 @@ export const CreateSecurityGroupDialog: FC<CreateSecurityGroupDialogProps> = ({
             {securityGroups ? (
               <>
                 <StringGroup
-                  controlId="create-sg-name"
                   label={translate('Name')}
                   name="name"
                   validate={composeValidators(...getLatinNameValidators())}
@@ -103,7 +102,6 @@ export const CreateSecurityGroupDialog: FC<CreateSecurityGroupDialogProps> = ({
                 />
 
                 <StringGroup
-                  controlId="create-sg-description"
                   label={translate('Description')}
                   name="description"
                   maxLength={4096}

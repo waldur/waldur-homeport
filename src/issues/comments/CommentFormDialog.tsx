@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   Issue,
   supportCommentsUpdate,
@@ -7,7 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -89,13 +89,12 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
               </>
             }
           >
-            <Field
+            <TextGroup
               name="description"
               spaceless
               hideLabel
               placeholder={translate('Enter a comment...')}
               validate={required}
-              component={TextField}
               autoFocus
             />
           </ModalDialog>

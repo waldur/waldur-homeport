@@ -89,13 +89,19 @@ const FieldsListGroup = ({
                   <tr>
                     <td data-testid="remote-category-col">
                       <Field
-                        component={SelectField}
                         name={`${fields.name}[${actualIndex}].remote_category`}
-                        options={remoteCategories}
-                        getOptionValue={(option) => option.uuid}
-                        getOptionLabel={(option) => option.title}
                         validate={required}
-                      />
+                      >
+                        {({ input, meta }) => (
+                          <SelectField
+                            input={input}
+                            meta={meta}
+                            options={remoteCategories}
+                            getOptionValue={(option) => option.uuid}
+                            getOptionLabel={(option) => option.title}
+                          />
+                        )}
+                      </Field>
                     </td>
                     <td data-testid="local-category-col">
                       <Field

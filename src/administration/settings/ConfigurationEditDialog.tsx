@@ -147,17 +147,14 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
               {item.key === 'LOGIN_PAGE_LAYOUT' ? (
                 <Field component={VisualLayoutSelectorField} name="value" />
               ) : item.type === 'html_field' ? (
-                <Field
-                  component={MonacoField}
-                  name="value"
-                  language="html"
-                  height={100}
-                />
+                <Field name="value">
+                  {({ input }) => (
+                    <MonacoField input={input} language="html" height={100} />
+                  )}
+                </Field>
               ) : item.type === 'dict_field' ? (
                 <Field
-                  component={MonacoField}
                   name="value"
-                  language="json"
                   format={(value) => {
                     if (!value) return '';
                     if (typeof value === 'object') {
@@ -169,21 +166,30 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                     }
                     return value;
                   }}
-                  height={100}
-                />
+                >
+                  {({ input }) => (
+                    <MonacoField input={input} language="json" height={100} />
+                  )}
+                </Field>
               ) : item.type === 'text_field' ? (
-                <Field component={TextField} name="value" />
+                <Field name="value">
+                  {({ input, meta }) => <TextField input={input} meta={meta} />}
+                </Field>
               ) : (item.type === 'choice_field' ||
                   item.type === 'select' ||
                   item.options) &&
                 item.type !== 'multiple_choice_field' ? (
                 <>
-                  <Field
-                    component={SelectField}
-                    name="value"
-                    options={item.options}
-                    simpleValue
-                  />
+                  <Field name="value">
+                    {({ input, meta }) => (
+                      <SelectField
+                        input={input}
+                        meta={meta}
+                        options={item.options}
+                        simpleValue
+                      />
+                    )}
+                  </Field>
                   {item.key === 'SIDEBAR_STYLE' &&
                     values.value === SIDEBAR_STYLE_PRIMARY && (
                       <div className="mt-3">
@@ -197,22 +203,28 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                     )}
                 </>
               ) : item.type === 'multiple_choice_field' && item.options ? (
-                <Field
-                  component={SelectField}
-                  name="value"
-                  options={item.options}
-                  isMulti
-                  simpleValue
-                />
+                <Field name="value">
+                  {({ input, meta }) => (
+                    <SelectField
+                      input={input}
+                      meta={meta}
+                      options={item.options}
+                      isMulti
+                      simpleValue
+                    />
+                  )}
+                </Field>
               ) : item.type === 'color_field' ? (
                 <Field component={ColorField} name="value" />
               ) : item.type === 'boolean' ? (
-                <Field
-                  component={AwesomeCheckboxField}
-                  name="value"
-                  label={item.description}
-                  hideLabel
-                />
+                <Field name="value" type="checkbox">
+                  {({ input }) => (
+                    <AwesomeCheckboxField
+                      input={input}
+                      label={item.description}
+                    />
+                  )}
+                </Field>
               ) : item.type === 'image_field' ? (
                 <Field
                   component={WideImageField}
@@ -220,14 +232,22 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                   initialValue={initialValues.value}
                 />
               ) : item.type === 'list_field' ? (
-                <Field
-                  component={CommaSeparatedListField}
-                  name="value"
-                  placeholder={translate('Enter comma-separated values')}
-                  height={100}
-                />
+                <Field name="value">
+                  {({ input, meta }) => (
+                    <CommaSeparatedListField
+                      input={input}
+                      meta={meta}
+                      placeholder={translate('Enter comma-separated values')}
+                      height={100}
+                    />
+                  )}
+                </Field>
               ) : (
-                <Field component={StringField} name="value" />
+                <Field name="value">
+                  {({ input, meta }) => (
+                    <StringField input={input} meta={meta} />
+                  )}
+                </Field>
               )}
             </FormGroup>
           </ModalDialog>

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { rancherClustersImportYaml } from 'waldur-js-client';
 
-import { MonacoField } from '@/form/MonacoField';
+import { MonacoGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -36,7 +36,7 @@ export const ImportYAMLDialog: FC<ImportYAMLDialogProps> = ({
           submitting={submitting}
           invalid={invalid}
         >
-          <MonacoField name="yaml" language="yaml" height={200} />
+          <MonacoGroup name="yaml" language="yaml" height={200} />
         </ActionDialogFinal>
       )}
     />

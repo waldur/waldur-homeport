@@ -28,7 +28,6 @@ export const UserAffiliationsFilter: FC = () => {
         title={translate('Scope name')}
         name="scope_name"
         getValueLabel={(value) => value}
-        variant="tableFilter"
         placeholder={translate('Enter scope name')}
       />
       <InvitationRoleFilter />

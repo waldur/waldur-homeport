@@ -81,11 +81,7 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
               label={translate('Language')}
               required
             />
-            <MarkdownGroup
-              name="content"
-              controlId="content"
-              label={translate('Content')}
-            />
+            <MarkdownGroup name="content" label={translate('Content')} />
           </ModalDialog>
         </form>
       )}

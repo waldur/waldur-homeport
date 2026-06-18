@@ -1,52 +1,75 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Form } from 'react-bootstrap';
+import { FieldRenderProps } from 'react-final-form';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
 import { translate } from '@/i18n';
 
-import { FormField } from './types';
-
 import './SliderNumberField.scss';
 
-interface SliderNumberFieldProps extends FormField {
+// ── Base (Pure UI) ──────────────────────────────────────
+
+interface BaseSliderNumberFieldProps {
+  value?: number | string;
+  onChange?: (value: number) => void;
+  name?: string;
   step?: number | string;
   min?: number | string;
   max?: number | string;
   unit?: string;
+  disabled?: boolean;
+  isInvalid?: boolean;
+  id?: string;
 }
 
-export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
-  props,
-) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { input, label, validate, parse, format, ...rest } = props;
-  const min = Number(props.min ?? 0);
-  const max = Number(props.max ?? 100);
+const BaseSliderNumberField: FC<BaseSliderNumberFieldProps> = ({
+  value,
+  onChange,
+  name,
+  min: minProp,
+  max: maxProp,
+  step,
+  unit,
+  disabled,
+  isInvalid,
+  id,
+}) => {
+  const min = Number(minProp ?? 0);
+  const max = Number(maxProp ?? 100);
 
-  const change = (value) => {
-    if (value < min) {
-      input.onChange(min);
-    } else if (value > max) {
-      input.onChange(max);
+  const change = (v) => {
+    if (v < min) {
+      onChange?.(min);
+    } else if (v > max) {
+      onChange?.(max);
     } else {
-      input.onChange(value);
+      onChange?.(v);
     }
   };
 
   const sliderLineValue =
-    input.value > max
+    Number(value) > max
       ? max
-      : input.value < min
+      : Number(value) < min
         ? min
-        : Boolean(input.value) && input.value !== 0
-          ? input.value
+        : Boolean(value) && value !== 0
+          ? Number(value)
           : min;
 
   return (
     <div className="slider-number-input">
       <div className="slider-number-input-range">
-        <input {...props.input} type="range" min={0} max={100} {...rest} />
+        <input
+          name={name}
+          value={value as any}
+          onChange={(e) => onChange?.(Number(e.target.value))}
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          disabled={disabled}
+        />
         <div className="slider-line-wrapper">
           <div className="slider-line-bg" />
           <div
@@ -59,38 +82,61 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
       </div>
       <div className="slider-number-input-control">
         <Form.Control
-          {...props.input}
+          name={name}
+          value={value as any}
+          onChange={(e) => onChange?.(Number(e.target.value))}
           type="number"
-          min={0}
-          max={100}
-          {...rest}
-          onBlur={() => change(input.value)}
+          min={min}
+          max={max}
+          step={step}
+          disabled={disabled}
+          onBlur={() => change(value)}
+          isInvalid={isInvalid}
+          id={id}
         />
 
         <div>
           <CompactIconButton
             iconNode={<PlusIcon weight="bold" />}
             tooltip={translate('Increase')}
-            onClick={() =>
-              change(Number(input.value) + 1 * Number(props.step || 1))
-            }
-            disabled={props.disabled}
+            onClick={() => change(Number(value) + 1 * Number(step || 1))}
+            disabled={disabled}
             variant="active-icon-primary"
             className="plus-btn btn-no-focus"
           />
           <CompactIconButton
             iconNode={<MinusIcon weight="bold" />}
             tooltip={translate('Decrease')}
-            onClick={() =>
-              change(Number(input.value) - 1 * Number(props.step || 1))
-            }
-            disabled={props.disabled}
+            onClick={() => change(Number(value) - 1 * Number(step || 1))}
+            disabled={disabled}
             variant="active-icon-primary"
             className="minus-btn btn-no-focus icon-align"
           />
         </div>
       </div>
-      {props.unit && <span className="fw-bold fs-5 ms-3">{props.unit}</span>}
+      {unit && <span className="fw-bold fs-5 ms-3">{unit}</span>}
     </div>
   );
 };
+
+// ── Field Adapter ───────────────────────────────────────
+
+export interface SliderNumberFieldProps extends Omit<
+  BaseSliderNumberFieldProps,
+  'value' | 'onChange' | 'name'
+> {
+  input: FieldRenderProps<any>['input'];
+  meta: FieldRenderProps<any>['meta'];
+}
+
+export const SliderNumberField: FC<SliderNumberFieldProps> = ({
+  input,
+  meta,
+  ...rest
+}) => (
+  <BaseSliderNumberField
+    {...rest}
+    {...input}
+    isInvalid={meta.touched && meta.error}
+  />
+);

@@ -2,25 +2,23 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { pick } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { FormCheck, FormText } from 'react-bootstrap';
-import { Field, Form, FormRenderProps, useField } from 'react-final-form';
+import { FormCheck } from 'react-bootstrap';
+import { Form, FormRenderProps, useField } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
   marketplaceResourcesList,
   marketplaceResourcesPartialUpdate,
+  Project,
   projectsPartialUpdate,
   Resource,
 } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
 
 import { getAllPages } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { formatDate, formatISODate, parseDate } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
-import { FormGroup } from '@/form';
-import { DateField } from '@/form/DateField';
+import { DateGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { useModal } from '@/modal/actions';
@@ -216,19 +214,18 @@ const FormModalComponent: FC<
         }
       >
         <div className={step === 2 ? 'd-none' : 'd-flex flex-column h-100'}>
-          <FormGroup controlId="project_end_date" spaceless>
-            <Field
-              name="end_date"
-              component={DateField}
-              minDate={DateTime.now().plus({ days: 1 }).toISO()}
-            />
-
-            <FormText className="text-gray-700">
-              {translate(
-                'Project end date supersedes resource termination date if resource termination date is after the project end date.',
-              )}
-            </FormText>
-          </FormGroup>
+          <DateGroup
+            name="end_date"
+            spaceless
+            minDate={DateTime.now().plus({ days: 1 }).toISO()}
+            description={
+              <span className="text-gray-700">
+                {translate(
+                  'Project end date supersedes resource termination date if resource termination date is after the project end date.',
+                )}
+              </span>
+            }
+          />
 
           {isFetching ? (
             <LoadingSpinner />

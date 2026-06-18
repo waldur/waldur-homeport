@@ -1,9 +1,8 @@
 import { Card, Col, Row } from 'react-bootstrap';
-import { Field } from 'react-final-form';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required } from '@/core/validators';
-import { InputField } from '@/form/InputField';
+import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
@@ -27,11 +26,10 @@ export const StorageDataTypeArrayField = ({
         <Card.Body>
           <Row>
             <Col md={6}>
-              <Field
+              <StringGroup
                 name={`${member}.key`}
-                component={InputField}
                 label={translate('Key')}
-                help_text={translate(
+                description={translate(
                   'Internal identifier (lowercase, no spaces)',
                 )}
                 placeholder={translate('Key')}
@@ -39,11 +37,10 @@ export const StorageDataTypeArrayField = ({
               />
             </Col>
             <Col md={6}>
-              <Field
+              <StringGroup
                 name={`${member}.label`}
-                component={InputField}
                 label={translate('Display Label')}
-                help_text={translate('User-friendly name shown in dropdown')}
+                description={translate('User-friendly name shown in dropdown')}
                 placeholder={translate('Display Label')}
                 validate={required}
               />

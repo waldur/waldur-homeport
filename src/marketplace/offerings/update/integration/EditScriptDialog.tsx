@@ -12,6 +12,7 @@ import {
 import { AccordionCard } from '@/core/AccordionCard';
 import { Tip } from '@/core/Tooltip';
 import { wait } from '@/core/utils';
+import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
@@ -317,11 +318,16 @@ export const EditScriptDialog = ({
                   <Field
                     key={scriptOption.type}
                     name="script"
-                    required={true}
-                    language={resolve.offering.secret_options.language}
-                    component={MonacoField}
-                    height={450}
-                  />
+                    validate={required}
+                  >
+                    {({ input }) => (
+                      <MonacoField
+                        input={input}
+                        language={resolve.offering.secret_options.language}
+                        height={450}
+                      />
+                    )}
+                  </Field>
                 </Card.Body>
               </Card>
             </ModalDialog>

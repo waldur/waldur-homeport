@@ -137,11 +137,17 @@ const renderEmails = ({ fields }: any) => (
           <Field
             name={emailName}
             type="email"
-            component={EmailField}
-            label={translate('Email')}
             validate={composeValidators(required, email)}
-            required={true}
-          />
+          >
+            {({ input, meta }) => (
+              <EmailField
+                input={input}
+                meta={meta}
+                aria-label={translate('Email')}
+                required={true}
+              />
+            )}
+          </Field>
         </Col>
         <Col sm={2}>
           <button

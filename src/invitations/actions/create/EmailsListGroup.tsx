@@ -167,9 +167,6 @@ export const EmailsListGroup = ({
                         <td>
                           <Field
                             name={`${user}.email`}
-                            placeholder={translate('Enter email address')}
-                            required
-                            component={EmailField}
                             validate={(value, allValues, meta) => {
                               const err = composeValidators(
                                 required,
@@ -191,7 +188,16 @@ export const EmailsListGroup = ({
                                 fieldName,
                               );
                             }}
-                          />
+                          >
+                            {({ input, meta }) => (
+                              <EmailField
+                                input={input}
+                                meta={meta}
+                                placeholder={translate('Enter email address')}
+                                required
+                              />
+                            )}
+                          </Field>
                         </td>
                         {isFeatureVisible(
                           InvitationsFeatures.conceal_civil_number,
@@ -199,9 +205,6 @@ export const EmailsListGroup = ({
                           <td>
                             <Field
                               name={`${user}.civil_number`}
-                              placeholder={translate('e.g. EE123456789')}
-                              component={InputField}
-                              disabled={disabled}
                               validate={
                                 isFeatureVisible(
                                   InvitationsFeatures.civil_number_required,
@@ -209,7 +212,16 @@ export const EmailsListGroup = ({
                                   ? required
                                   : undefined
                               }
-                            />
+                            >
+                              {({ input, meta }) => (
+                                <InputField
+                                  input={input}
+                                  meta={meta}
+                                  placeholder={translate('e.g. EE123456789')}
+                                  disabled={disabled}
+                                />
+                              )}
+                            </Field>
                           </td>
                         )}
                         <td className="role-column">

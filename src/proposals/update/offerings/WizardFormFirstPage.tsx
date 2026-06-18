@@ -29,18 +29,22 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
     <WizardForm {...props}>
       <div className="size-lg row">
         <Col lg={4} className="mb-7">
-          <Field
-            name="category_uuid"
-            options={queryData.data}
-            isClearable={true}
-            component={SelectField}
-            getOptionValue={(option) => option.uuid}
-            getOptionLabel={(option) => option.title}
-            placeholder={translate('Select category...')}
-            isLoading={queryData.isLoading}
-            simpleValue
-            noUpdateOnBlur
-          />
+          <Field name="category_uuid">
+            {({ input, meta }) => (
+              <SelectField
+                input={input}
+                meta={meta}
+                options={queryData.data}
+                isClearable={true}
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.title}
+                placeholder={translate('Select category...')}
+                isLoading={queryData.isLoading}
+                simpleValue
+                noUpdateOnBlur
+              />
+            )}
+          </Field>
         </Col>
         <Col lg={8}>
           <OfferingAutocomplete

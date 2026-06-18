@@ -14,7 +14,7 @@ describe('PhoneNumberField', () => {
 
   it('renders the component with phone icon', () => {
     const mockInput = createMockInput();
-    render(<PhoneNumberField input={mockInput as any} />);
+    render(<PhoneNumberField input={mockInput as any} meta={{} as any} />);
 
     const inputElement = screen.getByRole('textbox');
     expect(inputElement).toBeInTheDocument();
@@ -24,7 +24,11 @@ describe('PhoneNumberField', () => {
   it('renders with placeholder', () => {
     const mockInput = createMockInput();
     render(
-      <PhoneNumberField input={mockInput as any} placeholder="Enter phone" />,
+      <PhoneNumberField
+        input={mockInput as any}
+        meta={{} as any}
+        placeholder="Enter phone"
+      />,
     );
 
     const inputElement = screen.getByPlaceholderText('Enter phone');
@@ -34,7 +38,7 @@ describe('PhoneNumberField', () => {
   it('formats phone number on blur', async () => {
     const user = userEvent.setup();
     const mockInput = createMockInput('+12025551234');
-    render(<PhoneNumberField input={mockInput as any} />);
+    render(<PhoneNumberField input={mockInput as any} meta={{} as any} />);
 
     const inputElement = screen.getByRole('textbox');
     inputElement.focus();
@@ -47,7 +51,7 @@ describe('PhoneNumberField', () => {
   it('does not call onChange if formatted value is same as input', async () => {
     const user = userEvent.setup();
     const mockInput = createMockInput('+1 202 555 1234');
-    render(<PhoneNumberField input={mockInput as any} />);
+    render(<PhoneNumberField input={mockInput as any} meta={{} as any} />);
 
     const inputElement = screen.getByRole('textbox');
     inputElement.focus();
@@ -61,7 +65,7 @@ describe('PhoneNumberField', () => {
   it('handles empty value on blur', async () => {
     const user = userEvent.setup();
     const mockInput = createMockInput('');
-    render(<PhoneNumberField input={mockInput as any} />);
+    render(<PhoneNumberField input={mockInput as any} meta={{} as any} />);
 
     const inputElement = screen.getByRole('textbox');
     inputElement.focus();
@@ -74,7 +78,9 @@ describe('PhoneNumberField', () => {
 
   it('applies solid class when solid prop is true', () => {
     const mockInput = createMockInput();
-    render(<PhoneNumberField input={mockInput as any} solid />);
+    render(
+      <PhoneNumberField input={mockInput as any} meta={{} as any} solid />,
+    );
 
     const inputElement = screen.getByRole('textbox');
     expect(inputElement).toHaveClass('form-control-solid');

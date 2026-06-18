@@ -28,25 +28,32 @@ const baseFilter = {
 };
 
 const ImpactLevelField = ({ row }) => (
-  <Field
-    name={`impact_level.${row.uuid}`}
-    component={SelectField}
-    defaultOptions
-    options={impactLevelOptions}
-    noOptionsMessage={() => translate('No results found')}
-    simpleValue
-    className="my-1"
-  />
+  <Field name={`impact_level.${row.uuid}`}>
+    {({ input, meta }) => (
+      <SelectField
+        input={input}
+        meta={meta}
+        options={impactLevelOptions}
+        noOptionsMessage={() => translate('No results found')}
+        simpleValue
+        className="my-1"
+      />
+    )}
+  </Field>
 );
 
 const DescriptionField = ({ row }) => (
-  <Field
-    name={`impact_description.${row.uuid}`}
-    component={TextField}
-    placeholder={translate('Describe specific impact on this service...')}
-    className="my-1"
-    rows="2"
-  />
+  <Field name={`impact_description.${row.uuid}`}>
+    {({ input, meta }) => (
+      <TextField
+        input={input}
+        meta={meta}
+        placeholder={translate('Describe specific impact on this service...')}
+        className="my-1"
+        rows={2}
+      />
+    )}
+  </Field>
 );
 
 export const Step2SelectOfferings: FC<WizardStepProps> = (props) => {

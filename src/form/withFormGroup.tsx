@@ -1,25 +1,16 @@
-import { ComponentType, FC } from 'react';
-import { Field, FieldProps } from 'react-final-form';
+import { uniqueId } from 'lodash-es';
+import { ComponentType, FC, useMemo } from 'react';
+import { Field, UseFieldConfig } from 'react-final-form';
 
 import { FormGroup, FormGroupProps } from './FormGroup';
 
-// Remove index signatures so we get strict prop checking for the Autonomous Field
-type RemoveIndex<T> = {
-  [K in keyof T as string extends K
-    ? never
-    : number extends K
-      ? never
-      : symbol extends K
-        ? never
-        : K]: T[K];
-};
-
 // We omit 'component' and 'render' from FieldProps because the HOC provides the component.
-type AutonomousFieldProps<P> = P &
+// We use UseFieldConfig directly instead of FieldProps because FieldProps has
+// an index signature ([otherProp: string]: any) that prevents mapped types
+// from preserving named keys like 'validate', 'format', 'parse', etc.
+type AutonomousFieldProps<P> = Omit<P, 'input' | 'meta' | 'id'> &
   FormGroupProps &
-  RemoveIndex<
-    Omit<FieldProps<any, any>, 'component' | 'render' | 'children'>
-  > & {
+  UseFieldConfig<any> & {
     name: string;
   };
 
@@ -54,10 +45,15 @@ export function withFormGroup<P extends object>(
       spaceless,
       space,
       id,
-      controlId,
+      controlId: propsControlId,
       forceTouched,
       ...rest
     } = props;
+
+    const controlId = useMemo(
+      () => propsControlId || id || input?.name || uniqueId('form-group-'),
+      [propsControlId, id, input?.name],
+    );
 
     // Group FormGroup-specific props
     const formGroupProps: FormGroupProps = {
@@ -93,6 +89,7 @@ export function withFormGroup<P extends object>(
         <WrappedComponent
           input={input}
           meta={meta}
+          id={controlId}
           {...(componentProps as any)}
         />
       </FormGroup>

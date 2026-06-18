@@ -17,17 +17,17 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import {
   RadioGroup,
-  FileUploadField,
-  NumberField,
-  SelectField,
   SelectGroup,
+  SelectField,
+  CommaSeparatedListGroup,
+  BooleanGroup,
+  NumberGroup,
+  DateGroup,
+  DateTimeGroup,
+  FileUploadGroup,
+  YearGroup,
 } from '@/form';
 import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
-import { DateField } from '@/form/DateField';
-import { DateTimeField } from '@/form/DateTimeField';
-import { YearField } from '@/form/YearField';
 import { translate } from '@/i18n';
 import { questionConditionOperatorOptions } from '@/marketplace-checklist/utils';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -47,32 +47,32 @@ const getConditionOptions = (questionType: QuestionTypeEnum) =>
       )
     : questionConditionOperatorOptions;
 
-const questionComponent: Record<
+const questionGroupComponent: Record<
   Exclude<QuestionTypeEnum, 'file'>,
-  ComponentType
+  ComponentType<any>
 > = {
-  text_input: CommaSeparatedListField,
-  text_area: CommaSeparatedListField,
-  boolean: AwesomeCheckboxField,
-  number: NumberField,
-  date: DateField,
-  datetime: DateTimeField,
-  single_select: SelectField,
-  multi_select: SelectField,
-  multiple_files: FileUploadField,
-  url: CommaSeparatedListField,
-  email: CommaSeparatedListField,
-  country: CommaSeparatedListField,
-  phone_number: CommaSeparatedListField,
-  year: YearField,
-  rating: NumberField,
-  likert: NumberField,
+  text_input: CommaSeparatedListGroup,
+  text_area: CommaSeparatedListGroup,
+  boolean: BooleanGroup,
+  number: NumberGroup,
+  date: DateGroup,
+  datetime: DateTimeGroup,
+  single_select: SelectGroup,
+  multi_select: SelectGroup,
+  multiple_files: FileUploadGroup,
+  url: CommaSeparatedListGroup,
+  email: CommaSeparatedListGroup,
+  country: CommaSeparatedListGroup,
+  phone_number: CommaSeparatedListGroup,
+  year: YearGroup,
+  rating: NumberGroup,
+  likert: NumberGroup,
   // No condition operators are compatible with RICH_TEXT, but the type
-  // requires an entry; CommaSeparatedListField is unreachable in practice.
-  rich_text: CommaSeparatedListField,
+  // requires an entry; CommaSeparatedListGroup is unreachable in practice.
+  rich_text: CommaSeparatedListGroup,
 };
 
-const FieldsListGroup = ({
+export const FieldsListGroup = ({
   fields,
   questions,
 }: FieldArrayRenderProps<FieldValue, HTMLElement> & {
@@ -166,12 +166,14 @@ const FieldsListGroup = ({
                 description={translate(
                   'Only show this question based on previous answers',
                 )}
+                id={`${name}.depends_on_question`}
               >
                 <Field
                   name={`${name}.depends_on_question`}
                   validate={required}
-                  render={({ input, meta }) => (
+                  render={({ input }) => (
                     <SelectField
+                      id={`${name}.depends_on_question`}
                       input={{
                         ...input,
                         onChange: (value) => {
@@ -198,7 +200,6 @@ const FieldsListGroup = ({
                       getOptionValue={(option) => option.url}
                       getOptionLabel={(option) => option.description}
                       simpleValue
-                      isInvalid={meta.touched && meta.error}
                     />
                   )}
                 />
@@ -211,51 +212,53 @@ const FieldsListGroup = ({
                 isDisabled={!fields.value[i]?.depends_on_question}
                 label={translate('Condition')}
               />
-              <FormGroup
-                label={translate('Value')}
-                description={
-                  ['text_area', 'text_input'].includes(
-                    selectedQuestion?.question_type,
-                  )
-                    ? translate(
-                        'Comma separated values that trigger this question',
+              {(() => {
+                const DynamicGroupComponent =
+                  questionGroupComponent[selectedQuestion?.question_type] ||
+                  CommaSeparatedListGroup;
+
+                return (
+                  <DynamicGroupComponent
+                    label={translate('Value')}
+                    description={
+                      ['text_area', 'text_input'].includes(
+                        selectedQuestion?.question_type,
                       )
-                    : translate('Values that trigger this question')
-                }
-                spaceless
-              >
-                <Field
-                  component={
-                    (questionComponent[selectedQuestion?.question_type] ||
-                      CommaSeparatedListField) as any
-                  }
-                  name={`${name}.required_answer_value`}
-                  validate={required}
-                  disabled={!fields.value[i]?.operator}
-                  format={(value) =>
-                    value && selectedQuestion?.question_type === 'single_select'
-                      ? value[0]
-                      : value
-                  }
-                  parse={(value) =>
-                    selectedQuestion?.question_type === 'number'
-                      ? Number(value)
-                      : selectedQuestion?.question_type === 'single_select'
-                        ? [value]
+                        ? translate(
+                            'Comma separated values that trigger this question',
+                          )
+                        : translate('Values that trigger this question')
+                    }
+                    spaceless
+                    name={`${name}.required_answer_value`}
+                    validate={required}
+                    disabled={!fields.value[i]?.operator}
+                    format={(value) =>
+                      value &&
+                      selectedQuestion?.question_type === 'single_select'
+                        ? value[0]
                         : value
-                  }
-                  {...(isSelectType
-                    ? {
-                        isDisabled: !fields.value[i]?.operator,
-                        options: selectedQuestion?.question_options,
-                        getOptionValue: (opt) => opt.uuid,
-                        simpleValue: true,
-                        isMulti:
-                          selectedQuestion?.question_type === 'multi_select',
-                      }
-                    : {})}
-                />
-              </FormGroup>
+                    }
+                    parse={(value) =>
+                      selectedQuestion?.question_type === 'number'
+                        ? Number(value)
+                        : selectedQuestion?.question_type === 'single_select'
+                          ? [value]
+                          : value
+                    }
+                    {...(isSelectType
+                      ? {
+                          isDisabled: !fields.value[i]?.operator,
+                          options: selectedQuestion?.question_options,
+                          getOptionValue: (opt) => opt.uuid,
+                          simpleValue: true,
+                          isMulti:
+                            selectedQuestion?.question_type === 'multi_select',
+                        }
+                      : {})}
+                  />
+                );
+              })()}
             </Card.Body>
           </Card>
         );

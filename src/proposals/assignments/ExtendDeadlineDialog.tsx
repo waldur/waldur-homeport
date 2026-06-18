@@ -1,5 +1,5 @@
 import { FC, useCallback } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   assignmentBatchesExtendDeadline,
   AssignmentBatchList,
@@ -7,9 +7,8 @@ import {
 
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
-import { SubmitButton } from '@/form';
+import { SubmitButton, DateTimeGroup } from '@/form';
 import { FormGroup } from '@/form';
-import { DateTimeField } from '@/form/DateTimeField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -95,15 +94,14 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
                 </FormGroup>
               )}
 
-              <FormGroup label={translate('New deadline')} required>
-                <Field
-                  name="expires_at"
-                  component={DateTimeField}
-                  validate={validateExpiresAt}
-                  minDate="today"
-                  placeholder={translate('Select date and time...')}
-                />
-              </FormGroup>
+              <DateTimeGroup
+                label={translate('New deadline')}
+                required
+                name="expires_at"
+                validate={validateExpiresAt}
+                minDate="today"
+                placeholder={translate('Select date and time...')}
+              />
 
               {batch.is_expired && (
                 <div className="alert alert-info">

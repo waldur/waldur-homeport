@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
-import { Col, Form, Row, Table as BsTable } from 'react-bootstrap';
-import { Field, useFormState } from 'react-final-form';
+import { Col, Row, Table as BsTable } from 'react-bootstrap';
+import { useFormState } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { SelectField } from '@/form';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
@@ -51,88 +51,69 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
 
         <Row className="mb-4">
           <Col md={6} className="mb-3">
-            <Form.Label>
-              {translate('Customer name')}{' '}
-              <span className="text-danger">*</span>
-            </Form.Label>
-            <Field
+            <SelectGroup
               name="customerColumn"
-              component={SelectField}
-              options={columnOptions}
+              label={translate('Customer name')}
               validate={required}
+              required
+              options={columnOptions}
               placeholder={translate('Select column')}
               isClearable={false}
             />
           </Col>
           <Col md={6} className="mb-3">
-            <Form.Label>
-              {translate('Item name')} <span className="text-danger">*</span>
-            </Form.Label>
-            <Field
+            <SelectGroup
               name="itemNameColumn"
-              component={SelectField}
-              options={columnOptions}
+              label={translate('Item name')}
               validate={required}
+              required
+              options={columnOptions}
               placeholder={translate('Select column')}
               isClearable={false}
             />
           </Col>
           <Col md={6} className="mb-3">
-            <Form.Label>
-              {translate('Amount')} <span className="text-danger">*</span>
-            </Form.Label>
-            <Field
+            <SelectGroup
               name="amountColumn"
-              component={SelectField}
-              options={columnOptions}
+              label={translate('Amount')}
               validate={required}
+              required
+              options={columnOptions}
               placeholder={translate('Select column')}
               isClearable={false}
             />
           </Col>
           <Col md={6} className="mb-3">
-            <Form.Label>
-              {translate('Article code')} ({translate('optional')})
-            </Form.Label>
-            <Field
+            <SelectGroup
               name="articleCodeColumn"
-              component={SelectField}
+              label={translate('Article code')}
               options={columnOptions}
               placeholder={translate('Select column')}
               isClearable
             />
           </Col>
           <Col md={6} className="mb-3">
-            <Form.Label>
-              {translate('Service provider')} ({translate('optional')})
-            </Form.Label>
-            <Field
+            <SelectGroup
               name="serviceProviderColumn"
-              component={SelectField}
+              label={translate('Service provider')}
               options={columnOptions}
               placeholder={translate('Select column')}
               isClearable
             />
           </Col>
           <Col md={6} className="mb-3">
-            <Form.Label>
-              {translate('Offering')} ({translate('optional')})
-            </Form.Label>
-            <Field
+            <SelectGroup
               name="offeringColumn"
-              component={SelectField}
+              label={translate('Offering')}
               options={columnOptions}
               placeholder={translate('Select column')}
               isClearable
             />
           </Col>
           <Col md={6} className="mb-3">
-            <Form.Label>
-              {translate('Plan')} ({translate('optional')})
-            </Form.Label>
-            <Field
+            <SelectGroup
               name="planColumn"
-              component={SelectField}
+              label={translate('Plan')}
               options={columnOptions}
               placeholder={translate('Select column')}
               isClearable

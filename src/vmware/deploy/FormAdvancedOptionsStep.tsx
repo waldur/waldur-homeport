@@ -82,7 +82,6 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionLabel={(option: VmwareCluster) => option.name}
               isClearable={true}
               noUpdateOnBlur
-              disabled={false}
             />
           )}
           {advancedMode && data.datastores.length > 0 && (
@@ -94,7 +93,6 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionLabel={(option) => option.name}
               isClearable={true}
               noUpdateOnBlur
-              disabled={false}
             />
           )}
           {advancedMode && data.folders.length > 0 && (
@@ -106,7 +104,6 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
               getOptionLabel={(option) => option.name}
               isClearable={true}
               noUpdateOnBlur
-              disabled={false}
             />
           )}
         </div>

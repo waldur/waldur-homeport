@@ -75,7 +75,6 @@ const CustomerSelect = ({ input, organizationGroups }) => {
 
   return (
     <AsyncSelect
-      label={translate('Organization')}
       value={input.value}
       onChange={onChange}
       placeholder={translate('Select organization...')}

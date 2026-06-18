@@ -1,10 +1,9 @@
 import { Form } from 'react-bootstrap';
-import { Field, Form as ReactFinalForm } from 'react-final-form';
+import { Form as ReactFinalForm } from 'react-final-form';
 import { userAgreementsPartialUpdate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
-import { SubmitButton } from '@/form';
-import MarkdownEditor from '@/form/MarkdownEditor';
+import { MarkdownGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -58,16 +57,14 @@ export const UserAgreementsEditDialog = ({
                 {getLanguageLabel(resolve.initialValues.language)}
               </p>
             </div>
-            <div className="mb-7">
-              <Form.Label>
-                {
-                  agreementTypeLabelMap[
-                    resolve.initialValues.agreement_type.toLowerCase()
-                  ]
-                }
-              </Form.Label>
-              <Field name="content" component={MarkdownEditor} />
-            </div>
+            <MarkdownGroup
+              name="content"
+              label={
+                agreementTypeLabelMap[
+                  resolve.initialValues.agreement_type.toLowerCase()
+                ]
+              }
+            />
           </ModalDialog>
         </form>
       )}

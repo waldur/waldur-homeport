@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { uniqueId } from 'lodash-es';
 import { FC, useCallback, useMemo } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { components } from 'react-select';
 import {
   CallReviewerPool,
@@ -14,8 +14,7 @@ import {
 
 import { Tag } from '@/core/Tag';
 import { required } from '@/core/validators';
-import { SelectField, SubmitButton, StringGroup } from '@/form';
-import { FormGroup } from '@/form';
+import { SubmitButton, StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -261,49 +260,47 @@ export const CreateManualAssignmentDialog: FC<
             }
           >
             <div className="size-lg">
-              <FormGroup label={translate('Reviewer')} required>
-                <Field
-                  name="reviewer"
-                  component={SelectField}
-                  options={reviewerOptions}
-                  isLoading={reviewersLoading}
-                  formatOptionLabel={formatReviewerLabel}
-                  getOptionValue={(option: ReviewerOption) => option.value}
-                  getOptionLabel={(option: ReviewerOption) => option.label}
-                  placeholder={translate('Select reviewer...')}
-                  validate={required}
-                />
-                {!reviewersLoading && reviewerOptions.length === 0 && (
-                  <div className="form-text text-warning">
-                    {translate(
-                      'No accepted reviewers found. Invite reviewers to the pool first.',
-                    )}
-                  </div>
-                )}
-              </FormGroup>
+              <SelectGroup
+                label={translate('Reviewer')}
+                required
+                name="reviewer"
+                options={reviewerOptions}
+                isLoading={reviewersLoading}
+                formatOptionLabel={formatReviewerLabel}
+                getOptionValue={(option: ReviewerOption) => option.value}
+                getOptionLabel={(option: ReviewerOption) => option.label}
+                placeholder={translate('Select reviewer...')}
+                validate={required}
+                description={
+                  !reviewersLoading && reviewerOptions.length === 0
+                    ? translate(
+                        'No accepted reviewers found. Invite reviewers to the pool first.',
+                      )
+                    : undefined
+                }
+              />
 
-              <FormGroup label={translate('Proposals')} required>
-                <Field
-                  name="proposals"
-                  component={SelectField}
-                  options={proposalOptions}
-                  isMulti
-                  isLoading={proposalsLoading}
-                  placeholder={translate('Select proposals...')}
-                  validate={required}
-                  isDisabled={Boolean(initialProposal)}
-                  components={proposalsSelectComponents}
-                />
-                {!proposalsLoading &&
+              <SelectGroup
+                label={translate('Proposals')}
+                required
+                name="proposals"
+                options={proposalOptions}
+                isMulti
+                isLoading={proposalsLoading}
+                placeholder={translate('Select proposals...')}
+                validate={required}
+                isDisabled={Boolean(initialProposal)}
+                components={proposalsSelectComponents}
+                description={
+                  !proposalsLoading &&
                   !initialProposal &&
-                  proposalOptions.length === 0 && (
-                    <div className="form-text text-warning">
-                      {translate(
+                  proposalOptions.length === 0
+                    ? translate(
                         'No assignable proposals found. Proposals must be in submitted or in_review state.',
-                      )}
-                    </div>
-                  )}
-              </FormGroup>
+                      )
+                    : undefined
+                }
+              />
 
               <StringGroup
                 name="manager_notes"

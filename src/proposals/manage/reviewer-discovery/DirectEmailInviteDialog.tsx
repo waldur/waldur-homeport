@@ -1,10 +1,9 @@
 import { FORM_ERROR } from 'final-form';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { proposalProtectedCallsInviteByEmail } from 'waldur-js-client';
 
 import { composeValidators, email, required } from '@/core/validators';
-import { SubmitButton, TextField, StringGroup } from '@/form';
-import { FormGroup } from '@/form';
+import { SubmitButton, TextGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -84,21 +83,17 @@ export const DirectEmailInviteDialog = ({
                 required
               />
 
-              <FormGroup label={translate('Invitation message')}>
-                <Field
-                  name="invitation_message"
-                  component={TextField}
-                  rows={4}
-                  placeholder={translate(
-                    'Optional custom message for the invitation email...',
-                  )}
-                />
-                <div className="form-text text-muted">
-                  {translate(
-                    'This message will be included in the invitation email.',
-                  )}
-                </div>
-              </FormGroup>
+              <TextGroup
+                label={translate('Invitation message')}
+                name="invitation_message"
+                rows={4}
+                placeholder={translate(
+                  'Optional custom message for the invitation email...',
+                )}
+                description={translate(
+                  'This message will be included in the invitation email.',
+                )}
+              />
             </div>
           </ModalDialog>
         </form>

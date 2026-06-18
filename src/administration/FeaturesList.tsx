@@ -47,11 +47,14 @@ const FeatureSectionContent = ({ section }: { section: FeatureSection }) => (
           </>
         }
         actions={
-          <Field
-            name={`${section.key}.${item.key}`}
-            component={AwesomeCheckboxField}
-            data-testid={`${section.key}.${item.key}`}
-          />
+          <Field name={`${section.key}.${item.key}`} type="checkbox">
+            {({ input }) => (
+              <AwesomeCheckboxField
+                input={input}
+                data-testid={`${section.key}.${item.key}`}
+              />
+            )}
+          </Field>
         }
       />
     ))}

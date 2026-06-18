@@ -7,8 +7,8 @@ export const ComponentBooleanDefaultLimitField: FunctionComponent = () => (
   <BooleanGroup
     name="default_limit"
     label={translate('Enable by default')}
-    parse={Boolean}
-    normalize={(v) => (v ? 1 : 0)}
+    parse={(v) => (v ? 1 : 0)}
+    format={Boolean}
     size="sm"
     alignMiddle
     space={5}

@@ -1,11 +1,8 @@
 import { FC, useEffect } from 'react';
-import { Form } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
 import { required, validateRedirectURLs, redirectURI } from '@/core/validators';
-import { StringGroup } from '@/form';
-import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BooleanGroup, FormGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -201,42 +198,27 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
         )}
       />
       <AllowedRedirectsField />
-      <Form.Group className="mb-4">
-        <Field
-          name="enable_pkce"
-          component={AwesomeCheckboxField}
-          label={translate('Enable PKCE')}
-        />
-        <small className="text-muted d-block mt-1">
-          {translate(
-            'Proof Key for Code Exchange - recommended for public clients.',
-          )}
-        </small>
-      </Form.Group>
-      <Form.Group className="mb-4">
-        <Field
-          name="enable_post_logout_redirect"
-          component={AwesomeCheckboxField}
-          label={translate('Enable Post-Logout Redirect')}
-        />
-        <small className="text-muted d-block mt-1">
-          {translate(
-            'Redirect users back to Waldur after logging out from the IdP.',
-          )}
-        </small>
-      </Form.Group>
-      <Form.Group className="mb-4">
-        <Field
-          name="is_active"
-          component={AwesomeCheckboxField}
-          label={translate('Enable Provider')}
-        />
-        <small className="text-muted d-block mt-1">
-          {translate(
-            'When enabled, users will be able to authenticate using this provider.',
-          )}
-        </small>
-      </Form.Group>
+      <BooleanGroup
+        name="enable_pkce"
+        label={translate('Enable PKCE')}
+        description={translate(
+          'Proof Key for Code Exchange - recommended for public clients.',
+        )}
+      />
+      <BooleanGroup
+        name="enable_post_logout_redirect"
+        label={translate('Enable Post-Logout Redirect')}
+        description={translate(
+          'Redirect users back to Waldur after logging out from the IdP.',
+        )}
+      />
+      <BooleanGroup
+        name="is_active"
+        label={translate('Enable Provider')}
+        description={translate(
+          'When enabled, users will be able to authenticate using this provider.',
+        )}
+      />
     </WizardModal>
   );
 };

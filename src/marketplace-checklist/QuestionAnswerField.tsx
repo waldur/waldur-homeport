@@ -72,10 +72,9 @@ export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
       <Field
         name={name}
         validate={question.required ? required : undefined}
-        render={({ input, meta }) => (
+        render={({ input }) => (
           <ChecklistFileUpload
             input={input}
-            meta={meta}
             question={question}
             onRejectionChange={props.onRejectionChange}
           />

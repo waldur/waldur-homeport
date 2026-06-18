@@ -4,7 +4,7 @@ import { Field } from 'react-final-form';
 import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FieldError, StringField } from '@/form';
+import { BaseStringField, FieldError } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import {
@@ -90,7 +90,7 @@ export const CustomIpFieldFinal = ({
             onBlur={input.onBlur}
           />
 
-          <StringField
+          <BaseStringField
             placeholder={translate('Enter custom IP')}
             value={input?.value}
             onChange={input.onChange}

@@ -13,9 +13,7 @@ export const ExpirationTimeGroup: FunctionComponent<{
       disabled={disabled}
       minDate={DateTime.now().plus({ days: 1 }).toISO()}
       placeholder="YYYY-MM-DD"
-      id="expiration-time-group"
       label={translate('Role expires on')}
-      controlId="expiration_time"
       spaceless
     />
   );

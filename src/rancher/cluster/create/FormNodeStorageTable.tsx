@@ -89,36 +89,52 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
             readOnly
           />
         ) : (
-          <Field
-            name={`${props.parentName}.name`}
-            component={StringField}
-            placeholder={translate('Node name')}
-            readOnly
-          />
+          <Field name={`${props.parentName}.name`}>
+            {({ input, meta }) => (
+              <StringField
+                input={input}
+                meta={meta}
+                placeholder={translate('Node name')}
+                readOnly
+              />
+            )}
+          </Field>
         )}
       </td>
       <td>
         <Field
           name={`${props.parentName}.${props.sizeName}`}
-          component={BoxNumberField}
           validate={finalSizeValidate}
-          min={1}
-          max={props.sizeLimit}
           parse={parseIntField}
           format={formatIntField}
-        />
+        >
+          {({ input, meta }) => (
+            <BoxNumberField
+              input={input}
+              meta={meta}
+              min={1}
+              max={props.sizeLimit}
+            />
+          )}
+        </Field>
       </td>
       {props?.volumeTypeChoices?.length > 0 && (
         <td>
           <Field
             name={`${props.parentName}.${props.typeName}`}
-            component={SelectField}
             validate={finalTypeValidate}
-            placeholder={translate('Select volume type...')}
-            options={props.volumeTypeChoices}
-            getOptionValue={(option) => option.value}
-            simpleValue
-          />
+          >
+            {({ input, meta }) => (
+              <SelectField
+                input={input}
+                meta={meta}
+                placeholder={translate('Select volume type...')}
+                options={props.volumeTypeChoices}
+                getOptionValue={(option) => option.value}
+                simpleValue
+              />
+            )}
+          </Field>
         </td>
       )}
       {props.onDeleteRow && (

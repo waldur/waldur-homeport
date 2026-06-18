@@ -2,7 +2,7 @@ import { Form, Stack } from 'react-bootstrap';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatMediumDateTime } from '@/core/dateUtils';
-import { SecretField } from '@/form';
+import { BaseSecretField } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Field } from '@/resource/summary';
@@ -24,8 +24,8 @@ export const ServiceAccountShowInfoDialog = ({ resolve }: OwnProps) => {
       <Form.Group className="mb-7">
         <Form.Label>{translate('API token')}</Form.Label>
         <Stack gap={2} direction="horizontal">
-          <SecretField
-            input={{ value: resolve.token } as any}
+          <BaseSecretField
+            value={resolve.token}
             disabled
             className="flex-grow-1"
           />

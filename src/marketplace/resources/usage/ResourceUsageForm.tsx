@@ -427,44 +427,60 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                       </div>
                     )}
                     <Field
-                      component={NumberField}
                       name={`components.${component.type}.amount`}
-                      unit={component.measured_unit}
-                      max={
-                        component.limit_period
-                          ? component.limit_amount
-                          : undefined
-                      }
                       validate={required}
-                      placeholder={translate('Amount *')}
-                      aria-label={translate('{amount} for {name}', {
-                        amount: translate('Amount'),
-                        name: component.name,
-                      })}
-                      aria-describedby={`${component.type}-description`}
-                    />
+                    >
+                      {({ input, meta }) => (
+                        <NumberField
+                          input={input}
+                          meta={meta}
+                          unit={component.measured_unit}
+                          max={
+                            component.limit_period
+                              ? component.limit_amount
+                              : undefined
+                          }
+                          placeholder={translate('Amount *')}
+                          aria-label={translate('{amount} for {name}', {
+                            amount: translate('Amount'),
+                            name: component.name,
+                          })}
+                          aria-describedby={`${component.type}-description`}
+                        />
+                      )}
+                    </Field>
                   </div>
 
                   <div className="mb-7">
-                    <Field
-                      component={TextField}
-                      name={`components.${component.type}.description`}
-                      placeholder={translate('Enter a description...')}
-                      rows={3}
-                      aria-label={translate('{description} for {name}', {
-                        description: translate('Description'),
-                        name: component.name,
-                      })}
-                    />
+                    <Field name={`components.${component.type}.description`}>
+                      {({ input, meta }) => (
+                        <TextField
+                          input={input}
+                          meta={meta}
+                          placeholder={translate('Enter a description...')}
+                          rows={3}
+                          aria-label={translate('{description} for {name}', {
+                            description: translate('Description'),
+                            name: component.name,
+                          })}
+                        />
+                      )}
+                    </Field>
                   </div>
 
                   <Field
-                    component={AwesomeCheckboxField}
                     name={`components.${component.type}.recurring`}
-                    label={translate(
-                      'Reported value is reused every month until changed.',
+                    type="checkbox"
+                  >
+                    {({ input }) => (
+                      <AwesomeCheckboxField
+                        input={input}
+                        label={translate(
+                          'Reported value is reused every month until changed.',
+                        )}
+                      />
                     )}
-                  />
+                  </Field>
                 </div>
               </Tab.Pane>
             ))}

@@ -3,7 +3,7 @@ import { Nav, Tab } from 'react-bootstrap';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
-import { MonacoField } from '@/form/MonacoField';
+import { MonacoEditor } from '@/form/MonacoEditor';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -59,10 +59,7 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
         <Tab.Content>
           <Tab.Pane eventKey="toml" mountOnEnter={false}>
             {hasConfig ? (
-              <MonacoField
-                input={{ onChange: null, value: props.resolve.config }}
-                readOnly
-              />
+              <MonacoEditor value={props.resolve.config} readOnly />
             ) : (
               <p className="text-quaternary">
                 {translate('No configuration has been set.')}

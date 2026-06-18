@@ -328,9 +328,10 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
         {row.settable && row.fieldName ? (
           <Field
             name={row.fieldName}
-            render={({ input }) => (
+            render={({ input, meta }) => (
               <NumberField
                 input={input}
+                meta={meta}
                 unit={row.unit}
                 min={row.minValue ?? 0}
                 data-testid={`quota-${row.name}`}

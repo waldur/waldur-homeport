@@ -55,7 +55,9 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
         </span>
       </td>
       <td>
-        <Field component={StringField} name={name} validate={required} />
+        <Field name={name} validate={required}>
+          {({ input, meta }) => <StringField input={input} meta={meta} />}
+        </Field>
       </td>
       <td width={60}>
         <ActionButton

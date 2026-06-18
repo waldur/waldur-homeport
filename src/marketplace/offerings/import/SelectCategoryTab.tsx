@@ -74,13 +74,19 @@ const FieldsListMapping = ({
                 </td>
                 <td>
                   <Field
-                    component={SelectField}
                     name={`${component}.local_category`}
-                    options={categories || []}
-                    getOptionValue={(option) => option.uuid}
-                    getOptionLabel={(option) => option.title}
                     validate={required}
-                  />
+                  >
+                    {({ input, meta }) => (
+                      <SelectField
+                        input={input}
+                        meta={meta}
+                        options={categories || []}
+                        getOptionValue={(option) => option.uuid}
+                        getOptionLabel={(option) => option.title}
+                      />
+                    )}
+                  </Field>
                 </td>
               </tr>
             ) : null,

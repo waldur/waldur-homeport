@@ -542,6 +542,15 @@ const configureDjangoHTML = (monaco) => {
   });
 };
 
+export interface MonacoEditorProps {
+  value: string;
+  onChange?(value: string);
+  language?: string;
+  theme?: string;
+  height?: number;
+  readOnly?: boolean;
+}
+
 export const MonacoEditor = ({
   value,
   onChange,
@@ -549,7 +558,7 @@ export const MonacoEditor = ({
   theme = 'vs-dark',
   height,
   readOnly = false,
-}) => {
+}: MonacoEditorProps) => {
   const [isMonacoReady, setIsMonacoReady] = useState(false);
 
   useEffect(() => {

@@ -2,8 +2,9 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { Col, Form, Row, Stack } from 'react-bootstrap';
 
 import { Badge } from '@/core/Badge';
-import { NumberField, SelectField } from '@/form';
+import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
+import { BaseNumberField } from '@/form/NumberField';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
@@ -158,13 +159,9 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
             helpEnd
             space={5}
           >
-            <NumberField
-              input={
-                {
-                  value: nodeGroup.node_count,
-                  onChange: handleNodeCountChange,
-                } as any
-              }
+            <BaseNumberField
+              value={nodeGroup.node_count}
+              onChange={handleNodeCountChange as any}
               min={1}
               max={20}
             />
@@ -201,20 +198,13 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
             helpEnd
             space={5}
           >
-            <NumberField
-              input={
-                {
-                  value: nodeGroup.disk_config.data_disk_size_gb,
-                  onChange: (value) => {
-                    const v =
-                      typeof value === 'object' ? value.target.value : value;
-                    handleDiskConfigChange(
-                      'data_disk_size_gb',
-                      parseInt(v) || 10,
-                    );
-                  },
-                } as any
-              }
+            <BaseNumberField
+              value={nodeGroup.disk_config.data_disk_size_gb}
+              onChange={(value: any) => {
+                const v =
+                  typeof value === 'object' ? value.target.value : value;
+                handleDiskConfigChange('data_disk_size_gb', parseInt(v) || 10);
+              }}
               min={10}
               max={10000}
             />
@@ -232,21 +222,16 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
               helpEnd
               space={5}
             >
-              <NumberField
-                input={
-                  {
-                    value:
-                      nodeGroup.disk_config.virtual_san_disk_size_gb || 500,
-                    onChange: (value) => {
-                      const v =
-                        typeof value === 'object' ? value.target.value : value;
-                      handleDiskConfigChange(
-                        'virtual_san_disk_size_gb',
-                        parseInt(v) || 500,
-                      );
-                    },
-                  } as any
-                }
+              <BaseNumberField
+                value={nodeGroup.disk_config.virtual_san_disk_size_gb || 500}
+                onChange={(value: any) => {
+                  const v =
+                    typeof value === 'object' ? value.target.value : value;
+                  handleDiskConfigChange(
+                    'virtual_san_disk_size_gb',
+                    parseInt(v) || 500,
+                  );
+                }}
                 min={100}
                 max={50000}
               />

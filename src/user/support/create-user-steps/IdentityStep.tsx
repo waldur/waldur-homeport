@@ -72,7 +72,11 @@ export const IdentityStep: FC<WizardStepProps> = (props) => {
       )}
       {isProfileAttributeEnabled('nationalities') && (
         <FormGroup label={translate('Nationalities')}>
-          <Field name="nationalities" component={MultiCountrySelectField} />
+          <Field name="nationalities">
+            {({ input, meta }) => (
+              <MultiCountrySelectField input={input} meta={meta} />
+            )}
+          </Field>
         </FormGroup>
       )}
       {isProfileAttributeEnabled('organization_country') && (

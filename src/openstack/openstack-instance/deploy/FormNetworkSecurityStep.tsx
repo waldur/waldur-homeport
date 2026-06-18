@@ -29,7 +29,7 @@ import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { UI_STALE_TIME } from '@/core/constants';
 import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
-import { FieldError, SelectGroup, StringField } from '@/form';
+import { BaseStringField, FieldError, SelectGroup } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -116,7 +116,7 @@ const CustomIpField = ({
             onBlur={input.onBlur}
           />
 
-          <StringField
+          <BaseStringField
             placeholder={translate('Enter custom IP')}
             value={input?.value}
             onChange={input.onChange}
