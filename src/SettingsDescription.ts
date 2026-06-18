@@ -2006,6 +2006,24 @@ export const SettingsDescription = [
         default: '',
         type: 'url_field',
       },
+      {
+        key: 'MATRIX_LIVEKIT_KEY',
+        description: translate('LiveKit API key for the Element Call SFU (Calls observability tab).'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'MATRIX_LIVEKIT_SECRET',
+        description: translate('LiveKit API secret used to mint the admin token.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'MATRIX_LIVEKIT_URL',
+        description: translate('Internal LiveKit base URL. Falls back to http://livekit:7880 when blank.'),
+        default: '',
+        type: 'url_field',
+      },
     ],
   },
   {
