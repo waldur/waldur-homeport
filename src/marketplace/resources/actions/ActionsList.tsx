@@ -30,6 +30,7 @@ import { PullResourceAction } from './PullResourceAction';
 import { PullRobotAccounts } from './PullRobotAccounts';
 import { SetDownscaledAction } from './SetDownscaledAction';
 import { SetPausedAction } from './SetPausedAction';
+import { SyncResourceTeamAction } from './SyncResourceTeamAction';
 import { VersionHistoryAction } from './VersionHistoryAction';
 
 export const ActionsList = [
@@ -92,6 +93,7 @@ export const StaffActions = [
   PullResourceAction,
   PullOrderAction,
   PullRobotAccounts,
+  SyncResourceTeamAction,
   // Version history
   VersionHistoryAction,
 ];
