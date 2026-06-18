@@ -9,8 +9,7 @@ import {
   proposalProtectedCallsGenerateSuggestions,
 } from 'waldur-js-client';
 
-import { SelectField, StringField, SubmitButton, SelectGroup } from '@/form';
-import { FormGroup } from '@/form';
+import { FormGroup, StringGroup, SubmitButton, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -213,21 +212,16 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
             }
           >
             <div className="size-lg">
-              <FormGroup label={translate('Match reviewers against')} required>
-                <Field
-                  name="source"
-                  component={SelectField}
-                  options={sourceOptions}
-                  getOptionLabel={(option: SourceOption) => option.label}
-                  getOptionValue={(option: SourceOption) => option.value}
-                  isClearable={false}
-                />
-                {values.source && (
-                  <div className="form-text text-muted">
-                    {values.source.description}
-                  </div>
-                )}
-              </FormGroup>
+              <SelectGroup
+                label={translate('Match reviewers against')}
+                required
+                name="source"
+                options={sourceOptions}
+                getOptionLabel={(option: SourceOption) => option.label}
+                getOptionValue={(option: SourceOption) => option.value}
+                isClearable={false}
+                description={values.source?.description}
+              />
 
               {/* Call description preview */}
               {values.source?.value === 'call_description' && (
@@ -293,38 +287,35 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
               {/* Custom keywords */}
               {values.source?.value === 'custom_keywords' && (
                 <>
-                  <FormGroup label={translate('Keywords')} required>
-                    <Field
-                      name="keywords"
-                      component={StringField}
-                      placeholder={translate(
-                        'machine learning, climate science, AI',
-                      )}
-                    />
-                    <div className="form-text text-muted">
-                      {translate('Enter keywords separated by commas.')}
-                    </div>
-                  </FormGroup>
+                  <StringGroup
+                    label={translate('Keywords')}
+                    required
+                    name="keywords"
+                    placeholder={translate(
+                      'machine learning, climate science, AI',
+                    )}
+                    description={translate(
+                      'Enter keywords separated by commas.',
+                    )}
+                  />
 
-                  <FormGroup label={translate('Search mode')}>
-                    <Field
-                      name="keyword_search_mode"
-                      component={SelectField}
-                      options={searchModeOptions}
-                      getOptionLabel={(option) => option.label}
-                      getOptionValue={(option) => option.value}
-                      isClearable={false}
-                    />
-                    <div className="form-text text-muted">
-                      {values.keyword_search_mode?.value === 'expertise_only'
+                  <SelectGroup
+                    label={translate('Search mode')}
+                    name="keyword_search_mode"
+                    options={searchModeOptions}
+                    getOptionLabel={(option) => option.label}
+                    getOptionValue={(option) => option.value}
+                    isClearable={false}
+                    description={
+                      values.keyword_search_mode?.value === 'expertise_only'
                         ? translate(
                             "Match only against reviewer's declared expertise keywords.",
                           )
                         : translate(
                             'Search across all reviewer content including publications and bio.',
-                          )}
-                    </div>
-                  </FormGroup>
+                          )
+                    }
+                  />
                 </>
               )}
 

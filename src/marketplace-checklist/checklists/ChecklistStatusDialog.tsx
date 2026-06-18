@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 
 import { required } from '@/core/validators';
-import { SelectField, SubmitButton } from '@/form';
+import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -52,14 +52,13 @@ export const ChecklistStatusDialog: FC<ChecklistStatusDialogProps> = ({
               </>
             }
           >
-            <Field
+            <SelectGroup
               name="status"
-              component={SelectField}
+              validate={required}
               options={[
                 { label: 'Test', value: 'test' },
                 { label: 'Test 2', value: 'test2' },
               ]}
-              validate={required}
               simpleValue
             />
           </ModalDialog>

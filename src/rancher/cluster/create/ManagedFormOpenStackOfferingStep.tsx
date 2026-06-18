@@ -36,13 +36,17 @@ export const ManagedFormOpenStackOfferingStep = (props: FormStepProps) => {
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
-      <Field
-        name="attributes.openstack_offering"
-        component={SelectField}
-        options={offerings}
-        getOptionValue={(option) => option.uuid}
-        getOptionLabel={(option) => option.name}
-      />
+      <Field name="attributes.openstack_offering">
+        {({ input, meta }) => (
+          <SelectField
+            input={input}
+            meta={meta}
+            options={offerings}
+            getOptionValue={(option) => option.uuid}
+            getOptionLabel={(option) => option.name}
+          />
+        )}
+      </Field>
     </VStepperFormStepCard>
   );
 };

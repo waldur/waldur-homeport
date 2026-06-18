@@ -146,7 +146,7 @@ const ManagedFields: FunctionComponent = () => (
           field: ['name', 'uuid'],
         })}
         getOptionLabel={({ name }) => name}
-        getOptionKey={({ uuid }) => uuid}
+        getOptionValue={({ uuid }) => uuid}
         required
         validate={required}
       />
@@ -159,7 +159,7 @@ const ManagedFields: FunctionComponent = () => (
           field: ['name', 'uuid'],
         })}
         getOptionLabel={({ name }) => name}
-        getOptionKey={({ uuid }) => uuid}
+        getOptionValue={({ uuid }) => uuid}
         isMulti
       />
       <DeploymentModeField />
@@ -173,14 +173,14 @@ const ManagedFields: FunctionComponent = () => (
         label={translate('OpenStack flavor name for server node')}
         loadOptions={flavorLoadOptions}
         getOptionLabel={({ name }: OpenStackFlavor) => name}
-        getOptionKey={({ uuid }: OpenStackFlavor) => uuid}
+        getOptionValue={({ uuid }: OpenStackFlavor) => uuid}
       />
       <AsyncSelectEditField
         name="plugin_options.managed_rancher_server_system_volume_type_name"
         label={translate('OpenStack system volume type for server node')}
         loadOptions={volumeTypeLoadOptions}
         getOptionLabel={({ name }) => name}
-        getOptionKey={({ value }) => value}
+        getOptionValue={({ value }) => value}
       />
       <BoxNumberEditField
         name="plugin_options.managed_rancher_server_system_volume_size_gb"
@@ -197,7 +197,7 @@ const ManagedFields: FunctionComponent = () => (
         label={translate('OpenStack data volume type for server node')}
         loadOptions={volumeTypeLoadOptions}
         getOptionLabel={({ name }) => name}
-        getOptionKey={({ value }) => value}
+        getOptionValue={({ value }) => value}
       />
       <BoxNumberEditField
         name="plugin_options.managed_rancher_server_data_volume_size_gb"
@@ -223,14 +223,14 @@ const ManagedFields: FunctionComponent = () => (
         label={translate('OpenStack system flavor for load balancer node')}
         loadOptions={flavorLoadOptions}
         getOptionLabel={({ name }: OpenStackFlavor) => name}
-        getOptionKey={({ uuid }: OpenStackFlavor) => uuid}
+        getOptionValue={({ uuid }: OpenStackFlavor) => uuid}
       />
       <AsyncSelectEditField
         name="plugin_options.managed_rancher_load_balancer_system_volume_type_name"
         label={translate('OpenStack system volume type for load balancer node')}
         loadOptions={volumeTypeLoadOptions}
         getOptionLabel={({ name }) => name}
-        getOptionKey={({ value }) => value}
+        getOptionValue={({ value }) => value}
       />
       <BoxNumberEditField
         name="plugin_options.managed_rancher_load_balancer_system_volume_size_gb"
@@ -247,7 +247,7 @@ const ManagedFields: FunctionComponent = () => (
         label={translate('OpenStack data volume type for load balancer node')}
         loadOptions={volumeTypeLoadOptions}
         getOptionLabel={({ name }) => name}
-        getOptionKey={({ value }) => value}
+        getOptionValue={({ value }) => value}
       />
       <BoxNumberEditField
         name="plugin_options.managed_rancher_load_balancer_data_volume_size_gb"
@@ -269,7 +269,7 @@ const ManagedFields: FunctionComponent = () => (
         label={translate('OpenStack system volume type for worker node')}
         loadOptions={volumeTypeLoadOptions}
         getOptionLabel={({ name }) => name}
-        getOptionKey={({ value }) => value}
+        getOptionValue={({ value }) => value}
       />
       <BoxNumberEditField
         name="plugin_options.managed_rancher_worker_system_volume_size_gb"

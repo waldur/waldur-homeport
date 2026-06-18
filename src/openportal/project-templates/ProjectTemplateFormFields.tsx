@@ -6,16 +6,24 @@ import {
   required,
   validateMaxLength,
 } from '@/core/validators';
-import { StringGroup, NumberGroup } from '@/form';
-import { FormGroup } from '@/form';
+import { AsyncSelectGroup, FormGroup, NumberGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
+import {
+  organizationAutocomplete,
+  providerOfferingsAutocomplete,
+} from '@/marketplace/common/autocompletes';
 
 import { PROJECT_TEMPLATE_FIELD_CONSTRAINTS } from '../constants';
 
 import { AllocationUnitsMappingField } from './AllocationUnitsMappingField';
-import { OfferingAutocompleteField } from './OfferingAutocompleteField';
-import { OrganizationAutocompleteField } from './OrganizationAutocompleteField';
 import { RoleMappingField } from './RoleMappingField';
+
+const loadOrganizations = organizationAutocomplete({
+  field: ['name', 'uuid', 'abbreviation'],
+  o: 'name',
+});
+
+const loadOfferings = providerOfferingsAutocomplete();
 
 export const ProjectTemplateFormFields = () => (
   <>
@@ -30,7 +38,6 @@ export const ProjectTemplateFormFields = () => (
         ),
       )}
       required
-      controlId="name"
       label={translate('Name of project template')}
     />
 
@@ -45,7 +52,6 @@ export const ProjectTemplateFormFields = () => (
         ),
       )}
       required
-      controlId="offering"
       label={translate('Name of the remote offering, e.g. "isambard-ai"')}
     />
 
@@ -60,28 +66,23 @@ export const ProjectTemplateFormFields = () => (
         ),
       )}
       required
-      controlId="portal"
       label={translate('Portal from which requests are allowed')}
     />
 
-    <FormGroup
-      controlId="customer"
+    <AsyncSelectGroup
+      name="customer"
       label={translate('Organisation into which to deploy projects')}
       required
-    >
-      <Field
-        name="customer"
-        component={OrganizationAutocompleteField}
-        placeholder={translate('Select organisation')}
-        validate={required}
-        required
-        reactSelectProps={{
-          isClearable: true,
-          closeMenuOnSelect: true,
-        }}
-        noOptionsMessage={() => translate('No organisations found')}
-      />
-    </FormGroup>
+      placeholder={translate('Select organisation')}
+      validate={required}
+      loadOptions={loadOrganizations}
+      debounceTimeout={1000}
+      defaultOptions
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={(option) => option.name}
+      noOptionsMessage={() => translate('No organisations found')}
+      isClearable={true}
+    />
 
     <StringGroup
       name="key"
@@ -90,7 +91,6 @@ export const ProjectTemplateFormFields = () => (
       validate={validateMaxLength(
         PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_KEY_LENGTH,
       )}
-      controlId="key"
       label={translate('Key used to verify requests from the remote portal')}
     />
 
@@ -110,26 +110,22 @@ export const ProjectTemplateFormFields = () => (
         'Use {year} for last digit of year and {count} for sequential letter (a, b, c, etc.)',
       )}
       required
-      controlId="shortname"
       label={translate('Pattern used to generate project shortnames')}
     />
 
-    <FormGroup
-      controlId="offerings"
+    <AsyncSelectGroup
+      name="offerings"
       label={translate('Default offerings for new projects')}
-    >
-      <Field
-        name="offerings"
-        component={OfferingAutocompleteField}
-        placeholder={translate('Select offerings')}
-        isMulti={true}
-        reactSelectProps={{
-          isClearable: true,
-          closeMenuOnSelect: false,
-        }}
-        noOptionsMessage={() => translate('No offerings found')}
-      />
-    </FormGroup>
+      placeholder={translate('Select offering...')}
+      loadOptions={loadOfferings}
+      debounceTimeout={1000}
+      defaultOptions
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={(option) => option.name}
+      noOptionsMessage={() => translate('No public offerings')}
+      isClearable={true}
+      isMulti={true}
+    />
 
     <FormGroup controlId="role_mapping" label={translate('Role Mapping')}>
       <Field
@@ -165,7 +161,6 @@ export const ProjectTemplateFormFields = () => (
       help={translate(
         'Credit limit beyond which requests need local admin approval. Leave empty for no approval required, set to 0 for all requests to require approval.',
       )}
-      controlId="approval_limit"
       label={translate('Credit limit beyond which approval is required')}
     />
 
@@ -178,7 +173,6 @@ export const ProjectTemplateFormFields = () => (
       help={translate(
         'Maximum credit limit for projects using this template. Requests beyond this are automatically rejected. Leave empty for no maximum limit, set to 0 to prevent project creation.',
       )}
-      controlId="max_credit_limit"
       label={translate(
         'Maximum credit request limit for projects using this template',
       )}

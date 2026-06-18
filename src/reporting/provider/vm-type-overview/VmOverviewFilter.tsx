@@ -18,31 +18,33 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
   <div className="card">
     <div className="card-body mb-2 border-bottom">
       <form className="form-inline" id="vm-overview-filter">
-        <Field
-          name="shared"
-          component={AwesomeCheckboxField}
-          label={translate('Show shared')}
-        />
+        <Field name="shared" type="checkbox">
+          {({ input }) => (
+            <AwesomeCheckboxField
+              input={input}
+              label={translate('Show shared')}
+            />
+          )}
+        </Field>
 
         <Form.Group>
-          <Field
-            name="service_provider"
-            component={(prop) => (
+          <Field name="service_provider">
+            {({ input }) => (
               <Select
                 className="service-provider-selector"
                 placeholder={translate('Select service provider')}
                 getOptionValue={(option) => option.value}
                 getOptionLabel={(option) => option.name}
-                value={prop.input.value}
-                onChange={prop.input.onChange}
-                onBlur={() => prop.input.onBlur(prop.input.value)}
+                value={input.value}
+                onChange={input.onChange}
+                onBlur={() => input.onBlur(input.value)}
                 options={props.serviceProviders}
                 isMulti={true}
                 isDisabled={props.serviceProviders.length === 0}
                 isClearable={true}
               />
             )}
-          />
+          </Field>
         </Form.Group>
       </form>
     </div>

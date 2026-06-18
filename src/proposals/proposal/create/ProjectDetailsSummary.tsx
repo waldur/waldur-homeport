@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
 import { AccordionCard } from '@/core/AccordionCard';
-import { TextField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
+import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';
 import { Proposal, ProposalReview } from '@/proposals/types';
 import { renderFieldOrDash } from '@/table/utils';
@@ -62,7 +62,9 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         reviews={reviews}
         proposal={proposal}
       >
-        <TextField solid />
+        {(props) => (
+          <BaseTextField solid value={props.value} readOnly disabled />
+        )}
       </CommentSection>
 
       <CommentSection
@@ -73,13 +75,16 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         proposal={proposal}
         inline
       >
-        <AwesomeCheckboxField
-          label={translate('Project for civilian purpose?')}
-          tooltip={translate('Mark if the project has a civilian purpose.')}
-          tooltipEnd
-          alignMiddle
-          className="flex-grow-1"
-        />
+        {(props) => (
+          <AwesomeCheckboxField
+            label={translate('Project for civilian purpose?')}
+            tooltip={translate('Mark if the project has a civilian purpose.')}
+            tooltipEnd
+            alignMiddle
+            className="flex-grow-1"
+            {...props}
+          />
+        )}
       </CommentSection>
 
       <ReadOnlyFormControl
@@ -101,15 +106,18 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         proposal={proposal}
         inline
       >
-        <AwesomeCheckboxField
-          label={translate('Is the project confidential?')}
-          tooltip={translate(
-            'Select if the project proposal contains confidential information.',
-          )}
-          tooltipEnd
-          alignMiddle
-          className="flex-grow-1"
-        />
+        {(props) => (
+          <AwesomeCheckboxField
+            label={translate('Is the project confidential?')}
+            tooltip={translate(
+              'Select if the project proposal contains confidential information.',
+            )}
+            tooltipEnd
+            alignMiddle
+            className="flex-grow-1"
+            {...props}
+          />
+        )}
       </CommentSection>
 
       <CommentSection

@@ -50,14 +50,18 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
           }}
         >
           <FormLabel>URL</FormLabel>
-          <Field
-            component={StringField}
-            name="url"
-            id="url"
-            placeholder="https://..."
-            autoFocus
-            className="mb-5"
-          />
+          <Field name="url">
+            {({ input, meta }) => (
+              <StringField
+                input={input}
+                meta={meta}
+                id="url"
+                placeholder="https://..."
+                autoFocus
+                className="mb-5"
+              />
+            )}
+          </Field>
 
           <div>
             <CompactSubmitButton

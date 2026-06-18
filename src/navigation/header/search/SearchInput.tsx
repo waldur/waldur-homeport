@@ -2,7 +2,7 @@ import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useMemo } from 'react';
 
-import { StringField } from '@/form';
+import { BaseStringField } from '@/form';
 import { translate } from '@/i18n';
 
 import { SearchResult } from './useSearch';
@@ -39,7 +39,7 @@ export const SearchInput = ({
   return (
     <div className={className}>
       <form className="w-100 position-relative" autoComplete="off">
-        <StringField
+        <BaseStringField
           className="search-input w-lg-325px"
           value={query}
           onChange={(event) => setQuery(event.target.value)}

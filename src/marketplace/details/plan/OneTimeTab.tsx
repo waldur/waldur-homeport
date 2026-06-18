@@ -85,11 +85,11 @@ export const OneTimeTab = ({
               'If not set, the order is processed immediately after approval.',
             )}
             value={
-              <Field
-                name="start_date"
-                component={DateField}
-                {...dateFieldProps}
-              />
+              <Field name="start_date">
+                {({ input, meta }) => (
+                  <DateField input={input} meta={meta} {...dateFieldProps} />
+                )}
+              </Field>
             }
           />
         )}

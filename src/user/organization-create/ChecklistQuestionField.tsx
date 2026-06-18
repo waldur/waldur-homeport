@@ -13,10 +13,10 @@ import {
   SelectGroup,
   StringGroup,
   TextGroup,
+  YearGroup,
 } from '@/form';
 import { FormGroup } from '@/form/FormGroup';
 import { PhoneNumberField } from '@/form/PhoneNumberField';
-import { YearField } from '@/form/YearField';
 import { translate } from '@/i18n';
 import {
   DependencyInfo,
@@ -163,14 +163,11 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
 
     case 'year':
       return (
-        <Field
+        <YearGroup
           {...commonProps}
           key={question.uuid}
-          component={FormGroup}
           placeholder={question.user_guidance}
-        >
-          <YearField />
-        </Field>
+        />
       );
 
     case 'boolean':
@@ -193,13 +190,16 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
 
     case 'phone_number':
       return (
-        <Field
-          {...commonProps}
-          key={question.uuid}
-          component={FormGroup}
-          placeholder={question.user_guidance}
-        >
-          <PhoneNumberField />
+        <Field {...commonProps} key={question.uuid}>
+          {({ input, meta }) => (
+            <FormGroup {...commonProps} meta={meta} controlId={input.name}>
+              <PhoneNumberField
+                input={input}
+                meta={meta}
+                placeholder={question.user_guidance}
+              />
+            </FormGroup>
+          )}
         </Field>
       );
 

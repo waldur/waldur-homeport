@@ -5,15 +5,12 @@ import { NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 
-import { IntegerUnitField } from './IntegerUnitField';
-
 export const SystemVolumeSizeGroup: FC = () => (
   <NumberGroup
     label={translate('System volume size')}
     required={true}
     name="system_volume_size"
-    units={translate('GB')}
-    component={IntegerUnitField}
+    unit={translate('GB')}
     parse={parseIntField}
     format={formatIntField}
     validate={required}

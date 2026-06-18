@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { SelectGroup } from '@/form';
+import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 
@@ -11,7 +11,7 @@ export const CustomerCreditOfferingsField: FC = () => {
   );
 
   return (
-    <SelectGroup
+    <AsyncSelectGroup
       name="offerings"
       label={translate('Offering(s)')}
       placeholder={translate('All')}

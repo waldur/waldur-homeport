@@ -1,12 +1,11 @@
 import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { proposalProtectedCallsDuplicate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton, StringGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SubmitButton, StringGroup, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -115,97 +114,77 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
             <h5 className="mb-4">{translate('Copy options')}</h5>
             <Row>
               <Col md={6}>
-                <Field
+                <BooleanGroup
                   name="copy_documents"
-                  component={AwesomeCheckboxField}
                   label={translate('Documents')}
-                  help_text={translate(
+                  description={translate(
                     'Reuse the same document library entries.',
                   )}
-                  type="checkbox"
                 />
-                <Field
+                <BooleanGroup
                   name="copy_offerings"
-                  component={AwesomeCheckboxField}
                   label={translate('Offerings')}
-                  help_text={translate(
+                  description={translate(
                     'Copy requested offerings (reset to "Requested" state).',
                   )}
-                  type="checkbox"
                 />
-                <Field
+                <BooleanGroup
                   name="copy_rounds"
-                  component={AwesomeCheckboxField}
                   label={translate('Rounds')}
-                  help_text={translate(
+                  description={translate(
                     'Copy round schedule and configuration only; no proposals follow.',
                   )}
-                  type="checkbox"
                 />
-                <Field
+                <BooleanGroup
                   name="copy_workflow_steps"
-                  component={AwesomeCheckboxField}
                   label={translate('Workflow steps')}
-                  help_text={translate(
+                  description={translate(
                     'Copy the proposal evaluation step definitions.',
                   )}
-                  type="checkbox"
                 />
-                <Field
+                <BooleanGroup
                   name="copy_resource_templates"
-                  component={AwesomeCheckboxField}
                   label={translate('Resource templates')}
-                  help_text={translate(
+                  description={translate(
                     'Copy resource-request templates. Skipped automatically if "Offerings" is unchecked.',
                   )}
-                  type="checkbox"
                 />
               </Col>
               <Col md={6}>
-                <Field
+                <BooleanGroup
                   name="copy_role_mappings"
-                  component={AwesomeCheckboxField}
                   label={translate('Role mappings')}
-                  help_text={translate(
+                  description={translate(
                     'Copy proposal-to-project role mappings.',
                   )}
-                  type="checkbox"
                 />
-                <Field
+                <BooleanGroup
                   name="copy_applicant_visibility_config"
-                  component={AwesomeCheckboxField}
                   label={translate('Applicant visibility')}
-                  help_text={translate(
+                  description={translate(
                     'Copy applicant-data visibility settings.',
                   )}
-                  type="checkbox"
                 />
-                <Field
+                <BooleanGroup
                   name="copy_coi_configuration"
-                  component={AwesomeCheckboxField}
                   label={translate('COI configuration')}
-                  help_text={translate(
+                  description={translate(
                     'Copy conflict-of-interest detection settings.',
                   )}
-                  type="checkbox"
                 />
-                <Field
+                <BooleanGroup
                   name="copy_matching_configuration"
-                  component={AwesomeCheckboxField}
                   label={translate('Matching configuration')}
-                  help_text={translate(
+                  description={translate(
                     'Copy reviewer-proposal affinity calculation settings.',
                   )}
-                  type="checkbox"
                 />
-                <Field
+                <BooleanGroup
                   name="copy_assignment_configuration"
-                  component={AwesomeCheckboxField}
                   label={translate('Assignment configuration')}
-                  help_text={translate(
+                  description={translate(
                     'Copy reviewer assignment automation settings.',
                   )}
-                  type="checkbox"
                 />
               </Col>
             </Row>

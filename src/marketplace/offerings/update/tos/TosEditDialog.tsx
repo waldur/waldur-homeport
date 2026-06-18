@@ -6,9 +6,8 @@ import { marketplaceOfferingTermsOfServiceUpdate } from 'waldur-js-client';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { required } from '@/core/validators';
-import { StringGroup, SelectGroup, NumberGroup } from '@/form';
+import { StringGroup, SelectGroup, NumberGroup, BooleanGroup } from '@/form';
 import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
@@ -113,14 +112,15 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                   >
                     <Tab eventKey="write" title={translate('Write')}>
                       <div className="markdown-editor-wrapper">
-                        <Field
-                          name="terms_of_service"
-                          component={MarkdownEditor}
-                          required
-                          autoFocus
-                          hideLabel
-                          spaceless
-                        />
+                        <Field name="terms_of_service" validate={required}>
+                          {({ input, meta }) => (
+                            <MarkdownEditor
+                              input={input}
+                              meta={meta}
+                              autoFocus
+                            />
+                          )}
+                        </Field>
                       </div>
                     </Tab>
                     <Tab eventKey="preview" title={translate('Preview')}>
@@ -149,21 +149,12 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                 />
               )}
 
-              <div className="mb-3">
-                <Field
-                  name="is_active"
-                  component={AwesomeCheckboxField}
-                  label={translate('Active')}
-                />
-              </div>
+              <BooleanGroup name="is_active" label={translate('Active')} />
 
-              <div className="mb-3">
-                <Field
-                  name="requires_reconsent"
-                  component={AwesomeCheckboxField}
-                  label={translate('Requires re-consent')}
-                />
-              </div>
+              <BooleanGroup
+                name="requires_reconsent"
+                label={translate('Requires re-consent')}
+              />
 
               {values.requires_reconsent && (
                 <NumberGroup

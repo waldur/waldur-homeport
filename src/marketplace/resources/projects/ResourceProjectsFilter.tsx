@@ -10,7 +10,6 @@ export const ResourceProjectsFilter: FC = () => (
     title={translate('Show removed')}
     name="include_removed"
     badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-    type="checkbox"
     label={translate('Show removed')}
   />
 );

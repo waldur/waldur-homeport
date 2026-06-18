@@ -32,9 +32,7 @@ interface WizardModalProps extends WizardStepProps {
  * ```tsx
  * const MyStep: FC<WizardStepProps> = (props) => (
  *   <WizardModal {...props}>
- *     <FormGroup label="Name">
- *       <Field name="name" component={StringField} />
- *     </FormGroup>
+ *     <StringGroup name="name" label="Name" />
  *   </WizardModal>
  * );
  * ```

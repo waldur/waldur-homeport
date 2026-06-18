@@ -99,35 +99,47 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                     <Fragment key={node}>
                       <tr>
                         <td>
-                          <Field
-                            name={`${node}.name`}
-                            required={true}
-                            component={StringField}
-                            placeholder={translate('Node name')}
-                            validate={required}
-                          />
+                          <Field name={`${node}.name`} validate={required}>
+                            {({ input, meta }) => (
+                              <StringField
+                                input={input}
+                                meta={meta}
+                                placeholder={translate('Node name')}
+                                required={true}
+                              />
+                            )}
+                          </Field>
                         </td>
                         <td>
                           <Field
                             name={`${node}.units`}
-                            component={BoxNumberField}
                             validate={required}
-                            required={true}
-                            min={1}
-                            max={100}
                             parse={parseIntField}
                             format={formatIntField}
-                          />
+                          >
+                            {({ input, meta }) => (
+                              <BoxNumberField
+                                input={input}
+                                meta={meta}
+                                min={1}
+                                max={100}
+                                required={true}
+                              />
+                            )}
+                          </Field>
                         </td>
                         <td>
-                          <Field
-                            name={`${node}.flavor`}
-                            component={SelectField}
-                            placeholder={translate('Select flavor...')}
-                            options={flavors}
-                            validate={required}
-                            isClearable={true}
-                          />
+                          <Field name={`${node}.flavor`} validate={required}>
+                            {({ input, meta }) => (
+                              <SelectField
+                                input={input}
+                                meta={meta}
+                                placeholder={translate('Select flavor...')}
+                                options={flavors}
+                                isClearable={true}
+                              />
+                            )}
+                          </Field>
                         </td>
                         <td colSpan={3}>
                           <Field name={`${node}.roles`} validate={required}>

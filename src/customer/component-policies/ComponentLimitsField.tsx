@@ -52,40 +52,55 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                       <td>
                         <Field
                           name={`${component}.component`}
-                          component={SelectField}
                           validate={required}
-                          placeholder={translate('Select component...')}
-                          options={getAvailableOptions(details)}
-                          getOptionValue={(option) => option.uuid}
-                          getOptionLabel={(option) =>
-                            `${option.name} (${option.offering_name})`
-                          }
-                          simpleValue
-                          isClearable={false}
-                        />
+                        >
+                          {({ input, meta }) => (
+                            <SelectField
+                              input={input}
+                              meta={meta}
+                              placeholder={translate('Select component...')}
+                              options={getAvailableOptions(details)}
+                              getOptionValue={(option) => option.uuid}
+                              getOptionLabel={(option) =>
+                                `${option.name} (${option.offering_name})`
+                              }
+                              simpleValue
+                              isClearable={false}
+                            />
+                          )}
+                        </Field>
                       </td>
                       <td>
                         <Field
                           name={`${component}.limit`}
-                          component={NumberField}
                           validate={composeValidators(
                             required,
                             validateNonNegative,
                           )}
-                          placeholder="0"
-                          unit={details?.measured_unit}
-                          min={0}
-                        />
+                        >
+                          {({ input, meta }) => (
+                            <NumberField
+                              input={input}
+                              meta={meta}
+                              placeholder="0"
+                              unit={details?.measured_unit}
+                              min={0}
+                            />
+                          )}
+                        </Field>
                       </td>
                       <td>
-                        <Field
-                          name={`${component}.period`}
-                          component={SelectField}
-                          validate={required}
-                          options={Object.values(policyPeriodOptions)}
-                          simpleValue
-                          isClearable
-                        />
+                        <Field name={`${component}.period`} validate={required}>
+                          {({ input, meta }) => (
+                            <SelectField
+                              input={input}
+                              meta={meta}
+                              options={Object.values(policyPeriodOptions)}
+                              simpleValue
+                              isClearable
+                            />
+                          )}
+                        </Field>
                       </td>
                       <td>
                         <RemovalActionButton

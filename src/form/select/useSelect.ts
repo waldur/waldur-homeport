@@ -104,6 +104,8 @@ export const useSelect = <
       }
     : {};
 
+  const isDisabled = props.isDisabled || props.disabled;
+
   return {
     theme,
     ...defaultPortalingProps,
@@ -111,6 +113,7 @@ export const useSelect = <
     ...tableFilterProps,
     components: composedComponents,
     ...props,
+    isDisabled,
     inputId: props.inputId || props.id,
     id: undefined,
     value,
@@ -214,6 +217,8 @@ export const useAsyncSelect = <
       }
     : {};
 
+  const isDisabled = props.isDisabled || props.disabled;
+
   return {
     theme,
     additional: { page: 1 },
@@ -222,6 +227,7 @@ export const useAsyncSelect = <
     ...tableFilterProps,
     components: composedComponents,
     ...props,
+    isDisabled,
     inputId: props.inputId || props.id,
     id: undefined,
     value,

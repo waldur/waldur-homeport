@@ -4,7 +4,6 @@ import { type DateTimePickerProps } from 'react-flatpickr';
 
 import { FlatpickrField } from './FlatpickrField';
 import { FormField } from './types';
-import { useFlatpickrTheme } from './useFlatpickrTheme';
 
 type DateTimeFieldProps = FormField &
   DateTimePickerProps['options'] & {
@@ -13,7 +12,6 @@ type DateTimeFieldProps = FormField &
   };
 
 export const DateTimeField: FunctionComponent<DateTimeFieldProps> = (props) => {
-  useFlatpickrTheme();
   return (
     <FlatpickrField
       options={{

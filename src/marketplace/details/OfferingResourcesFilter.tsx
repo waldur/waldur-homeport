@@ -11,7 +11,6 @@ export const OfferingResourcesFilter: FunctionComponent = () => (
       title={translate('Include terminated')}
       name="include_terminated"
       badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-      type="checkbox"
       label={translate('Include terminated')}
     />
   </>

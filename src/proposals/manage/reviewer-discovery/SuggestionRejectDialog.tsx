@@ -1,13 +1,12 @@
 import { FORM_ERROR } from 'final-form';
 import { useCallback } from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   reviewerSuggestionsReject,
   ReviewerSuggestion,
 } from 'waldur-js-client';
 
-import { SubmitButton, TextField } from '@/form';
-import { FormGroup } from '@/form';
+import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -84,21 +83,17 @@ export const SuggestionRejectDialog = ({
                   { name: resolve.suggestion.reviewer_name },
                 )}
               </p>
-              <FormGroup label={translate('Rejection reason')}>
-                <Field
-                  name="reason"
-                  component={TextField}
-                  rows={3}
-                  placeholder={translate(
-                    'Optional reason for rejecting this suggestion...',
-                  )}
-                />
-                <div className="form-text text-muted">
-                  {translate(
-                    'Providing a reason helps document the decision process.',
-                  )}
-                </div>
-              </FormGroup>
+              <TextGroup
+                label={translate('Rejection reason')}
+                name="reason"
+                rows={3}
+                placeholder={translate(
+                  'Optional reason for rejecting this suggestion...',
+                )}
+                description={translate(
+                  'Providing a reason helps document the decision process.',
+                )}
+              />
             </div>
           </ModalDialog>
         </form>

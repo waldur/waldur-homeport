@@ -123,10 +123,8 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
           )}
           <BooleanGroup
             name="is_enabled"
-            checkboxLabel={translate(
-              'Send periodic summary emails to project members',
-            )}
-            label={translate('Enable digest emails')}
+            label={translate('Send periodic summary emails to project members')}
+            description={translate('Enable digest emails')}
           />
 
           {values.is_enabled && (

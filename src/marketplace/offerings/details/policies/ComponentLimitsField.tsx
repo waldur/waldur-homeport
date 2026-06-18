@@ -80,25 +80,34 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                     <Fragment key={component}>
                       <tr>
                         <td>
-                          <Field
-                            name={`${component}.type`}
-                            component={SelectField}
-                            validate={required}
-                            placeholder={translate('Select component...')}
-                            options={getAvailableOptions(details)}
-                            getOptionValue={(option) => option.type}
-                            getOptionLabel={(option) => option.name}
-                            simpleValue
-                            isClearable={false}
-                          />
+                          <Field name={`${component}.type`} validate={required}>
+                            {({ input, meta }) => (
+                              <SelectField
+                                input={input}
+                                meta={meta}
+                                placeholder={translate('Select component...')}
+                                options={getAvailableOptions(details)}
+                                getOptionValue={(option) => option.type}
+                                getOptionLabel={(option) => option.name}
+                                simpleValue
+                                isClearable={false}
+                              />
+                            )}
+                          </Field>
                         </td>
                         <td>
                           <Field
                             name={`${component}.limit`}
-                            component={NumberField}
                             validate={required}
-                            unit={details?.measured_unit}
-                          />
+                          >
+                            {({ input, meta }) => (
+                              <NumberField
+                                input={input}
+                                meta={meta}
+                                unit={details?.measured_unit}
+                              />
+                            )}
+                          </Field>
                         </td>
                         <td>
                           <RemovalActionButton

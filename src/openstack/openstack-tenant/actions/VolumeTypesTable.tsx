@@ -10,22 +10,30 @@ import { CompactActionButton } from '@/table/CompactActionButton';
 const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
   <tr>
     <td>
-      <Field
-        name={`${volumeType}.source`}
-        component={SelectField}
-        options={options.sourceVolumeTypes}
-        getOptionLabel={({ name }) => name}
-        getOptionValue={({ uuid }) => uuid}
-      />
+      <Field name={`${volumeType}.source`}>
+        {({ input, meta }) => (
+          <SelectField
+            input={input}
+            meta={meta}
+            options={options.sourceVolumeTypes}
+            getOptionLabel={({ name }) => name}
+            getOptionValue={({ uuid }) => uuid}
+          />
+        )}
+      </Field>
     </td>
     <td>
-      <Field
-        name={`${volumeType}.destination`}
-        component={SelectField}
-        options={options.destinationVolumeTypes}
-        getOptionLabel={({ name }) => name}
-        getOptionValue={({ uuid }) => uuid}
-      />
+      <Field name={`${volumeType}.destination`}>
+        {({ input, meta }) => (
+          <SelectField
+            input={input}
+            meta={meta}
+            options={options.destinationVolumeTypes}
+            getOptionLabel={({ name }) => name}
+            getOptionValue={({ uuid }) => uuid}
+          />
+        )}
+      </Field>
     </td>
     <td>
       <CompactActionButton

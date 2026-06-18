@@ -62,28 +62,24 @@ export const ProjectResourcesAllFilter: FunctionComponent<
         title={translate('Include terminated')}
         name="include_terminated"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-        type="checkbox"
         label={translate('Include terminated')}
       />
       <BooleanFilter
         title={translate('Paused')}
         name="paused"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-        type="checkbox"
         label={translate('Paused')}
       />
       <BooleanFilter
         title={translate('Downscaled')}
         name="downscaled"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-        type="checkbox"
         label={translate('Downscaled')}
       />
       <BooleanFilter
         title={translate('Restrict member access')}
         name="restrict_member_access"
         badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
-        type="checkbox"
         label={translate('Restrict member access')}
       />
     </>

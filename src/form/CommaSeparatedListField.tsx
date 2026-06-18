@@ -1,33 +1,36 @@
-import { omit } from 'lodash-es';
 import { FC } from 'react';
 import { Form, FormControlProps } from 'react-bootstrap';
+import { FieldRenderProps } from 'react-final-form';
 
 import { translate } from '@/i18n';
 
-import { FormField } from './types';
+// ── Base (Pure UI) ──────────────────────────────────────
 
-interface CommaSeparatedListFieldProps
-  extends FormField, Omit<FormControlProps, 'onBlur'> {
+interface BaseCommaSeparatedListFieldProps extends Omit<
+  FormControlProps,
+  'value' | 'onChange' | 'onBlur'
+> {
+  /** The current array value */
+  value?: string[];
+  /** Called with the parsed array on every keystroke */
+  onChange?: (value: string[]) => void;
+  /** Called on blur after filtering empty entries */
+  onBlur?: (e: React.FocusEvent) => void;
   placeholder?: string;
-  style?: any;
-  maxLength?: number;
-  autoFocus?: boolean;
   solid?: boolean;
   separator?: 'comma' | 'space';
 }
 
-export const CommaSeparatedListField: FC<CommaSeparatedListFieldProps> = ({
-  input,
+const BaseCommaSeparatedListField: FC<BaseCommaSeparatedListFieldProps> = ({
+  value: valueProp,
+  onChange: onChangeProp,
+  onBlur: onBlurProp,
   placeholder = translate('Enter comma-separated values'),
   solid,
   separator: sep = 'comma',
   ...rest
 }) => {
-  const valueProp = input ? input.value : (rest as any).value;
-  const onChangeProp = input ? input.onChange : (rest as any).onChange;
-  const onBlurProp = input ? input.onBlur : (rest as any).onBlur;
-
-  const value = Array.isArray(valueProp)
+  const displayValue = Array.isArray(valueProp)
     ? valueProp.join(sep === 'comma' ? ', ' : ' ')
     : valueProp;
 
@@ -36,45 +39,48 @@ export const CommaSeparatedListField: FC<CommaSeparatedListFieldProps> = ({
     const parsedValue = newValue
       .split(sep === 'comma' ? ',' : ' ')
       .map((item) => item.trim());
-    if (onChangeProp) {
-      onChangeProp(parsedValue);
-    }
+    onChangeProp?.(parsedValue);
   };
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: React.FocusEvent) => {
     const parsedValue = (valueProp || []).filter(
       (item) => !['', undefined, null].includes(item),
     );
-    if (onChangeProp) {
-      onChangeProp(parsedValue);
-    }
-    if (onBlurProp) {
-      onBlurProp(e);
-    }
+    onChangeProp?.(parsedValue);
+    onBlurProp?.(e);
   };
-
-  const domProps = omit(rest, [
-    'value',
-    'onChange',
-    'onBlur',
-    'name',
-    'meta',
-    'label',
-    'description',
-    'validate',
-    'spaceless',
-    'space',
-  ]);
 
   return (
     <Form.Control
       className={solid && 'form-control-solid'}
       type="text"
       placeholder={placeholder}
-      {...domProps}
-      value={value || ''}
+      {...rest}
+      value={displayValue || ''}
       onChange={handleChange}
       onBlur={handleBlur}
     />
   );
 };
+
+// ── Field Adapter ───────────────────────────────────────
+
+export interface CommaSeparatedListFieldProps extends Omit<
+  BaseCommaSeparatedListFieldProps,
+  'value' | 'onChange' | 'onBlur' | 'name'
+> {
+  input: FieldRenderProps<any>['input'];
+  meta: FieldRenderProps<any>['meta'];
+}
+
+export const CommaSeparatedListField: FC<CommaSeparatedListFieldProps> = ({
+  input,
+  meta,
+  ...rest
+}) => (
+  <BaseCommaSeparatedListField
+    isInvalid={meta.touched && meta.error}
+    {...rest}
+    {...input}
+  />
+);

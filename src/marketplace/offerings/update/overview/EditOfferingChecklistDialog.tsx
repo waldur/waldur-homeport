@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import {
   checklistsAdminList,
   marketplaceProviderOfferingsUpdateComplianceChecklist,
@@ -10,7 +10,7 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SelectField, SubmitButton } from '@/form';
+import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -79,8 +79,7 @@ export const EditOfferingChecklistDialog: FC<{
                 message={translate('Unable to load checklists.')}
               />
             ) : (
-              <Field
-                component={SelectField}
+              <SelectGroup
                 name="compliance_checklist"
                 label={translate('Assigned compliance checklist')}
                 options={data}

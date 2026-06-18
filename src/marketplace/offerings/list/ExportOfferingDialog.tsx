@@ -1,10 +1,9 @@
 import { FC, useMemo } from 'react';
 import { Modal } from 'react-bootstrap';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { OfferingExportParametersRequest } from 'waldur-js-client';
 
-import { FormFooter } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { FormFooter, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 
 export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
@@ -51,50 +50,46 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
               <div className="col-md-6">
                 <h6>{translate('Core Components')}</h6>
 
-                <Field
+                <BooleanGroup
                   name="include_components"
-                  component={AwesomeCheckboxField}
                   label={translate('Include components')}
-                  help_text={translate('Include offering components in export')}
+                  description={translate(
+                    'Include offering components in export',
+                  )}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_plans"
-                  component={AwesomeCheckboxField}
                   label={translate('Include plans')}
-                  help_text={translate('Include pricing plans in export')}
+                  description={translate('Include pricing plans in export')}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_screenshots"
-                  component={AwesomeCheckboxField}
                   label={translate('Include screenshots')}
-                  help_text={translate(
+                  description={translate(
                     'Include offering screenshots in export',
                   )}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_files"
-                  component={AwesomeCheckboxField}
                   label={translate('Include files')}
-                  help_text={translate('Include offering files in export')}
+                  description={translate('Include offering files in export')}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_endpoints"
-                  component={AwesomeCheckboxField}
                   label={translate('Include access endpoints')}
-                  help_text={translate(
+                  description={translate(
                     'Include offering access endpoints in export',
                   )}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_organization_groups"
-                  component={AwesomeCheckboxField}
                   label={translate('Include organization groups')}
-                  help_text={translate(
+                  description={translate(
                     'Include organization groups associations in export',
                   )}
                 />
@@ -103,50 +98,46 @@ export const ExportOfferingDialog: FC<any> = ({ resolve }) => {
               <div className="col-md-6">
                 <h6>{translate('Advanced Options')}</h6>
 
-                <Field
+                <BooleanGroup
                   name="include_terms_of_service"
-                  component={AwesomeCheckboxField}
                   label={translate('Include terms of service')}
-                  help_text={translate(
+                  description={translate(
                     'Include terms of service configurations in export',
                   )}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_plugin_options"
-                  component={AwesomeCheckboxField}
                   label={translate('Include plugin options')}
-                  help_text={translate('Include plugin options in export')}
+                  description={translate('Include plugin options in export')}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_secret_options"
-                  component={AwesomeCheckboxField}
                   label={translate('Include secret options')}
-                  help_text={translate(
+                  description={translate(
                     'WARNING: Include secret options in export (sensitive data)',
                   )}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_attributes"
-                  component={AwesomeCheckboxField}
                   label={translate('Include attributes')}
-                  help_text={translate('Include offering attributes in export')}
+                  description={translate(
+                    'Include offering attributes in export',
+                  )}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_options"
-                  component={AwesomeCheckboxField}
                   label={translate('Include options')}
-                  help_text={translate('Include offering options in export')}
+                  description={translate('Include offering options in export')}
                 />
 
-                <Field
+                <BooleanGroup
                   name="include_resource_options"
-                  component={AwesomeCheckboxField}
                   label={translate('Include resource options')}
-                  help_text={translate('Include resource options in export')}
+                  description={translate('Include resource options in export')}
                 />
               </div>
             </div>

@@ -1,24 +1,37 @@
-import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+import classNames from 'classnames';
+import { FC } from 'react';
+import { Form, FormControlProps } from 'react-bootstrap';
+import { FieldRenderProps } from 'react-final-form';
 
-import { FormField } from './types';
+// ── Base (Pure UI) ──────────────────────────────────────
 
-interface EmailFieldProps extends FormField {
-  maxLength?: number;
+interface BaseEmailFieldProps extends FormControlProps {
   solid?: boolean;
-  placeholder?: string;
+  isInvalid?: boolean;
 }
 
-export const EmailField: FunctionComponent<EmailFieldProps> = (props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { input, label, validate, solid, meta, ...rest } = props;
-  return (
-    <Form.Control
-      {...props.input}
-      type="email"
-      className={solid && 'form-control-solid'}
-      isInvalid={Boolean(meta?.error)}
-      {...rest}
-    />
-  );
-};
+const BaseEmailField: FC<BaseEmailFieldProps> = ({
+  solid,
+  className,
+  ...rest
+}) => (
+  <Form.Control
+    type="email"
+    className={classNames(solid && 'form-control-solid', className)}
+    {...rest}
+  />
+);
+
+// ── Field Adapter ───────────────────────────────────────
+
+export interface EmailFieldProps extends Omit<
+  BaseEmailFieldProps,
+  'value' | 'onChange' | 'onBlur' | 'onFocus' | 'name'
+> {
+  input: FieldRenderProps<any>['input'];
+  meta: FieldRenderProps<any>['meta'];
+}
+
+export const EmailField: FC<EmailFieldProps> = ({ input, meta, ...rest }) => (
+  <BaseEmailField isInvalid={meta.touched && meta.error} {...rest} {...input} />
+);

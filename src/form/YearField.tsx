@@ -1,63 +1,65 @@
 import { CalendarIcon } from '@phosphor-icons/react';
-import { omit } from 'lodash-es';
 import { FC } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
+import { Form, FormControlProps, InputGroup } from 'react-bootstrap';
+import { FieldRenderProps } from 'react-final-form';
 
-import { FormField } from './types';
+// ── Base (Pure UI) ──────────────────────────────────────
 
-interface YearFieldProps extends FormField {
-  placeholder?: string;
+const currentYear = new Date().getFullYear();
+
+interface BaseYearFieldProps extends Omit<
+  FormControlProps,
+  'type' | 'min' | 'max' | 'step'
+> {
   solid?: boolean;
   minYear?: number;
   maxYear?: number;
 }
 
-const FORM_FIELD_PROPS = [
-  'validate',
-  'normalize',
-  'format',
-  'parse',
-  'meta',
-  'noUpdateOnBlur',
-  'containerClassName',
-  'spaceless',
-  'space',
-  'hideLabel',
-] as const;
-
-const currentYear = new Date().getFullYear();
-
-export const YearField: FC<YearFieldProps> = ({
-  input,
+const BaseYearField: FC<BaseYearFieldProps> = ({
   solid = false,
   placeholder,
   minYear = 1900,
   maxYear = currentYear + 10,
+  className,
   ...rest
-}) => {
-  const props = omit(rest, FORM_FIELD_PROPS);
+}) => (
+  <InputGroup className="has-icon">
+    <div className="input-group-icon">
+      <CalendarIcon weight="bold" />
+    </div>
+    <Form.Control
+      type="number"
+      min={minYear}
+      max={maxYear}
+      step={1}
+      className={solid ? 'form-control-solid' : className}
+      placeholder={placeholder || `${minYear}–${maxYear}`}
+      onKeyDown={(e) => {
+        // Prevent decimal point and 'e' for scientific notation
+        if (e.key === '.' || e.key === 'e' || e.key === 'E') {
+          e.preventDefault();
+        }
+      }}
+      {...rest}
+    />
+  </InputGroup>
+);
 
-  return (
-    <InputGroup className="has-icon">
-      <div className="input-group-icon">
-        <CalendarIcon weight="bold" />
-      </div>
-      <Form.Control
-        {...input}
-        {...props}
-        type="number"
-        min={minYear}
-        max={maxYear}
-        step={1}
-        className={solid ? 'form-control-solid' : undefined}
-        placeholder={placeholder || `${minYear}–${maxYear}`}
-        onKeyDown={(e) => {
-          // Prevent decimal point and 'e' for scientific notation
-          if (e.key === '.' || e.key === 'e' || e.key === 'E') {
-            e.preventDefault();
-          }
-        }}
-      />
-    </InputGroup>
-  );
-};
+// ── Field Adapter ───────────────────────────────────────
+
+export interface YearFieldProps extends Omit<
+  BaseYearFieldProps,
+  'value' | 'onChange' | 'onBlur' | 'onFocus' | 'name'
+> {
+  input: FieldRenderProps<any>['input'];
+  meta?: FieldRenderProps<any>['meta'];
+}
+
+export const YearField: FC<YearFieldProps> = ({ input, meta, ...rest }) => (
+  <BaseYearField
+    isInvalid={meta?.touched && meta?.error}
+    {...rest}
+    {...input}
+  />
+);

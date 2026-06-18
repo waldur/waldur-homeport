@@ -1,14 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
-import {
-  cloneElement,
-  FC,
-  isValidElement,
-  PropsWithChildren,
-  ReactNode,
-  useMemo,
-} from 'react';
+import { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 
@@ -72,7 +65,6 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     space = 7,
     id,
     controlId: propsControlId,
-    ...rest
   } = props;
 
   const tooltip = propsTooltip || help;
@@ -83,33 +75,8 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     [propsControlId, id, input?.name],
   );
 
-  const isLegacyCloneElement = Boolean(input && isValidElement(children));
-
-  const newProps = isLegacyCloneElement
-    ? {
-        input,
-        ...rest,
-        onBlur: (event) => {
-          if (!props.noUpdateOnBlur && input) {
-            input.onBlur(event);
-          }
-        },
-        isInvalid: meta && meta.touched && (!!meta.error || !!meta.submitError),
-        id: controlId,
-        'aria-label':
-          props['aria-label'] ||
-          (hideLabel && typeof label === 'string' ? label : undefined),
-      }
-    : null;
-
   const labelNode = !hideLabel && (label || tooltip) && (
-    <Form.Label
-      // Only set `htmlFor` in the legacy clone path; in the modern path
-      // Form.Group's `controlId` context wires it automatically and
-      // react-bootstrap warns if both are present.
-      htmlFor={isLegacyCloneElement ? controlId : undefined}
-      className={classNames({ required, 'me-auto': !isLegacyCloneElement })}
-    >
+    <Form.Label className={classNames({ required, 'me-auto': true })}>
       {tooltip && !tooltipEnd && (
         <Tip
           id={'form-field-tooltip-' + controlId}
@@ -123,22 +90,16 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     </Form.Label>
   );
 
-  // In the legacy clone path we inject `id={controlId}` onto the child
-  // explicitly, so passing `controlId` to Form.Group as well would trigger
-  // react-bootstrap's "controlId is ignored on <FormControl> when id is
-  // specified" warning. In the modern path Form.Group's `controlId` is the
-  // only way the child Form.Control gets an id, so keep it.
   const mainContent = (
     <Form.Group
       className={classNames(
         {
           'flex-grow-1': Boolean(actions),
-          'position-relative': isLegacyCloneElement,
         },
         !actions && (containerClassName || className),
         !spaceless && `mb-${space}`,
       )}
-      controlId={isLegacyCloneElement ? undefined : controlId}
+      controlId={controlId}
     >
       {quickAction || (tooltip && tooltipEnd) ? (
         <div className="d-flex align-items-end">
@@ -147,28 +108,18 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           {tooltip && tooltipEnd && (
             <Tip
               id={'form-field-tooltip-' + controlId}
-              className={classNames('align-self-center ms-2', {
-                'mb-2': !isLegacyCloneElement,
-              })}
+              className="align-self-center ms-2 mb-2"
               label={tooltip}
               {...tooltipProps}
             >
-              <QuestionIcon
-                weight="bold"
-                size={isLegacyCloneElement ? 20 : 16}
-                className="text-muted"
-              />
+              <QuestionIcon weight="bold" size={16} className="text-muted" />
             </Tip>
           )}
         </div>
       ) : (
         labelNode
       )}
-      {isLegacyCloneElement ? (
-        cloneElement(children as any, newProps)
-      ) : (
-        <div>{children}</div>
-      )}
+      <div>{children}</div>
       {description && <Form.Text>{description}</Form.Text>}
       {!hideError && meta && meta.touched && (
         <FieldError error={meta.error || meta.submitError} />

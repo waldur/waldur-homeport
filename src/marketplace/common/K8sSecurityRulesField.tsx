@@ -9,7 +9,8 @@ import { Form, Alert } from 'react-bootstrap';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { required } from '@/core/validators';
-import { SelectField, TextField } from '@/form';
+import { SelectField } from '@/form';
+import { BaseTextField } from '@/form/TextField';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -125,15 +126,10 @@ const DescriptionInput: React.FC<{
   const [internalValue, setInternalValue] = useState(value);
 
   return (
-    <TextField
-      input={
-        {
-          name: 'description',
-          value: internalValue,
-          onChange: (e) => setInternalValue(e.target.value),
-          onBlur: () => onChange(internalValue),
-        } as any
-      }
+    <BaseTextField
+      value={internalValue}
+      onChange={(e) => setInternalValue(e.target.value)}
+      onBlur={() => onChange(internalValue)}
       placeholder={translate('Add description')}
     />
   );

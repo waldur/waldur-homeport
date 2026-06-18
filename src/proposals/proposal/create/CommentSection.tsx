@@ -1,6 +1,9 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, ReactNode } from 'react';
 
-import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
+import {
+  ReadOnlyChildProps,
+  ReadOnlyFormControl,
+} from '@/form/ReadOnlyFormControl';
 import { Proposal, ProposalReview } from '@/proposals/types';
 
 import { AddCommentButton } from '../create-review/AddCommentButton';
@@ -16,9 +19,10 @@ interface CommentSectionProps {
   inline?: boolean;
   spaceless?: boolean;
   onAddCommentClick?;
+  children?: ReactNode | ((props: ReadOnlyChildProps) => ReactNode);
 }
 
-export const CommentSection: FC<PropsWithChildren<CommentSectionProps>> = ({
+export const CommentSection: FC<CommentSectionProps> = ({
   proposal,
   valueField,
   commentField,

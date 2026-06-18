@@ -21,17 +21,21 @@ import { TextField } from './TextField';
 import { TimeField } from './TimeField';
 import { TimezoneField } from './TimezoneField';
 import { withFormGroup } from './withFormGroup';
+import { YearField } from './YearField';
 
 export { FieldError } from './FieldError';
 export { FileUploadField } from './FileUploadField';
 export { FormFooter } from './FormFooter';
 export { FormGroup } from './FormGroup';
 export { NumberField } from './NumberField';
-export { SecretField } from './SecretField';
 export { SelectField } from './select/SelectField';
 export { StringField } from './StringField';
 export { SubmitButton } from './SubmitButton';
 export { TextField } from './TextField';
+
+// Base components — pure UI, no form knowledge
+export { BaseStringField } from './StringField';
+export { BaseSecretField } from './SecretField';
 
 export const StringGroup = withFormGroup(StringField);
 export const SelectGroup = withFormGroup(SelectField);
@@ -58,3 +62,4 @@ export const EmailGroup = withFormGroup(EmailField);
 export const ImageGroup = withFormGroup(ImageField);
 export const CommaSeparatedListGroup = withFormGroup(CommaSeparatedListField);
 export const FileUploadGroup = withFormGroup(FileUploadField);
+export const YearGroup = withFormGroup(YearField);

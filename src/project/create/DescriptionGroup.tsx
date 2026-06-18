@@ -12,6 +12,5 @@ export const DescriptionGroup = ({ create }: { create?: boolean }) =>
       placeholder={translate('Enter a description...')}
       validate={validateMaxLength(4096)}
       label={translate('Project description')}
-      controlId="project-description"
     />
   ) : null;

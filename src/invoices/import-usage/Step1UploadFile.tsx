@@ -72,24 +72,30 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
         </h6>
         <Row className="mb-6">
           <Col md={6}>
-            <Field
-              name="year"
-              component={SelectField}
-              options={yearOptions}
-              validate={required}
-              placeholder={translate('Select year')}
-              isClearable={false}
-            />
+            <Field name="year" validate={required}>
+              {({ input, meta }) => (
+                <SelectField
+                  input={input}
+                  meta={meta}
+                  options={yearOptions}
+                  placeholder={translate('Select year')}
+                  isClearable={false}
+                />
+              )}
+            </Field>
           </Col>
           <Col md={6}>
-            <Field
-              name="month"
-              component={SelectField}
-              options={monthOptions}
-              validate={required}
-              placeholder={translate('Select month')}
-              isClearable={false}
-            />
+            <Field name="month" validate={required}>
+              {({ input, meta }) => (
+                <SelectField
+                  input={input}
+                  meta={meta}
+                  options={monthOptions}
+                  placeholder={translate('Select month')}
+                  isClearable={false}
+                />
+              )}
+            </Field>
           </Col>
         </Row>
 

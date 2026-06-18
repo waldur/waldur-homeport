@@ -1,7 +1,7 @@
 import { FileIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { FileRejection } from 'react-dropzone';
-import { FieldInputProps, FieldMetaState } from 'react-final-form';
+import { FieldInputProps } from 'react-final-form';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { UploadContainer } from '@/form/upload/UploadContainer';
@@ -29,7 +29,6 @@ type FileAnswerData = FileUploadData | ProcessedFileData;
 
 interface ChecklistFileUploadProps {
   input: FieldInputProps<FileAnswerData | FileAnswerData[] | null>;
-  meta?: FieldMetaState<any>;
   // Field types are typed as `unknown` on the generated SDK models, so accept
   // them loosely here and cast to concrete types where used.
   question: {

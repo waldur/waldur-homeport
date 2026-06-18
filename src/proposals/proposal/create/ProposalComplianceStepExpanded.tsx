@@ -263,12 +263,8 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
             {isFileQuestion ? (
               <Field
                 name={fieldName}
-                render={({ input, meta }) => (
-                  <ChecklistFileUpload
-                    input={input}
-                    meta={meta}
-                    question={question}
-                  />
+                render={({ input }) => (
+                  <ChecklistFileUpload input={input} question={question} />
                 )}
               />
             ) : (

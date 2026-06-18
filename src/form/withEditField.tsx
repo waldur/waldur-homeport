@@ -42,6 +42,7 @@ export type EditFieldProps<P = object> = Omit<
 
   tooltip?: string;
   iconNode?: ReactNode;
+  actions?: ReactNode;
 };
 
 interface WithEditFieldOptions {

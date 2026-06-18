@@ -5,8 +5,11 @@ import { FieldProps, FieldRenderProps } from 'react-final-form';
 type Formatter = NonNullable<FieldProps<any, any>['format']>;
 type Parser = NonNullable<FieldProps<any, any>['parse']>;
 
-export interface FormField extends Partial<FieldRenderProps<any, any>> {
+export interface FormField {
+  input: FieldRenderProps<any, any>['input'];
+  meta?: FieldRenderProps<any, any>['meta'];
   name?: string;
+  id?: string;
   required?: boolean;
   label?: ReactNode;
   description?: ReactNode;
@@ -14,7 +17,6 @@ export interface FormField extends Partial<FieldRenderProps<any, any>> {
   validate?: FieldValidator<any>;
   isInvalid?: boolean;
   disabled?: boolean;
-  hideLabel?: boolean;
   format?: Formatter | null;
   parse?: Parser;
 

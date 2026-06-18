@@ -33,6 +33,7 @@ const CellWrapper: FC<any> = (props) => (
     ) : (
       <NumberField
         input={props.input}
+        meta={props.meta}
         unit={props.offeringComponent.measured_unit}
         min={props.limits.min}
         max={props.limits.max}

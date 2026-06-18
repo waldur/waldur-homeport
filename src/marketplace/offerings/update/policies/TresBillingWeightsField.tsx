@@ -47,13 +47,18 @@ const FieldsListGroup = ({
                   <Fragment key={name}>
                     <tr>
                       <td>
-                        <Field
-                          name={`${name}.key`}
-                          component={StringField}
-                          validate={required}
-                          placeholder={translate('e.g., CPU, Mem, GRES/gpu')}
-                          list="tres-suggestions"
-                        />
+                        <Field name={`${name}.key`} validate={required}>
+                          {({ input, meta }) => (
+                            <StringField
+                              input={input}
+                              meta={meta}
+                              placeholder={translate(
+                                'e.g., CPU, Mem, GRES/gpu',
+                              )}
+                              list="tres-suggestions"
+                            />
+                          )}
+                        </Field>
                         <datalist id="tres-suggestions">
                           {defaultTresTypes.map((type) => (
                             <option key={type} value={type} />
@@ -61,13 +66,16 @@ const FieldsListGroup = ({
                         </datalist>
                       </td>
                       <td>
-                        <Field
-                          name={`${name}.value`}
-                          component={NumberField}
-                          validate={required}
-                          step="any"
-                          min={0}
-                        />
+                        <Field name={`${name}.value`} validate={required}>
+                          {({ input, meta }) => (
+                            <NumberField
+                              input={input}
+                              meta={meta}
+                              step="any"
+                              min={0}
+                            />
+                          )}
+                        </Field>
                       </td>
                       <td>
                         <IconButton

@@ -26,8 +26,13 @@ export const CriteriaListField: FC<OwnProps> = ({ name }) => (
             <div className="flex-grow-1">
               <Field
                 name={`${fieldName}.name`}
-                component={StringField as any}
-                placeholder={translate('Criteria name (e.g., Efficiency)')}
+                render={({ input, meta }) => (
+                  <StringField
+                    input={input}
+                    meta={meta}
+                    placeholder={translate('Criteria name (e.g., Efficiency)')}
+                  />
+                )}
               />
             </div>
             <CompactIconButton

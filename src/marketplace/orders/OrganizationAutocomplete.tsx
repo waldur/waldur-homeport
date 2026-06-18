@@ -7,7 +7,10 @@ import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
-interface OrganizationAutocompleteProps extends FormField {
+interface OrganizationAutocompleteProps extends Omit<
+  FormField,
+  'input' | 'meta'
+> {
   name?: string;
   label?: string;
   placeholder?: string;

@@ -6,7 +6,7 @@ import {
 import Papa from 'papaparse';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { useToggle } from 'react-use';
 import {
   CourseAccount,
@@ -16,9 +16,7 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton, TextGroup } from '@/form';
-import { FormGroup } from '@/form';
-import { EmailField } from '@/form/EmailField';
+import { EmailGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -287,14 +285,13 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                 onSelect={goToTab}
               >
                 <Tab eventKey="single" title={translate('Single account')}>
-                  <FormGroup label={translate('Email')} required>
-                    <Field
-                      component={EmailField}
-                      name="email"
-                      placeholder={translate('e.g. Courseaccount@example.com')}
-                      validate={activeTab === 'single' ? required : undefined}
-                    />
-                  </FormGroup>
+                  <EmailGroup
+                    label={translate('Email')}
+                    required
+                    name="email"
+                    placeholder={translate('e.g. Courseaccount@example.com')}
+                    validate={activeTab === 'single' ? required : undefined}
+                  />
                   <TextGroup
                     name="description"
                     placeholder={translate('e.g. Used for automated backups')}

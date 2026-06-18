@@ -235,16 +235,21 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                               className="d-flex align-items-start gap-2 mb-2"
                             >
                               <div style={{ flex: '0 0 220px' }}>
-                                <Field
-                                  name={`${name}.type`}
-                                  component={SelectField}
-                                  simpleValue
-                                  options={typeOptions}
-                                  placeholder={translate('Type')}
-                                  isDisabled={
-                                    hasGlobalScope || typeOptions.length === 0
-                                  }
-                                />
+                                <Field name={`${name}.type`}>
+                                  {({ input, meta }) => (
+                                    <SelectField
+                                      input={input}
+                                      meta={meta}
+                                      simpleValue
+                                      options={typeOptions}
+                                      placeholder={translate('Type')}
+                                      isDisabled={
+                                        hasGlobalScope ||
+                                        typeOptions.length === 0
+                                      }
+                                    />
+                                  )}
+                                </Field>
                               </div>
                               <div className="flex-grow-1">
                                 <Field name={`${name}.entity`}>

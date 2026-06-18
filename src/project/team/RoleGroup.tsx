@@ -43,7 +43,6 @@ export const RoleGroup: FunctionComponent<{
       validate={required}
       components={{ Option: RoleOption }}
       label={translate('Role')}
-      controlId="role"
     />
   );
 };

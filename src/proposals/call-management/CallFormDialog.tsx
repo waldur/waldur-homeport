@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo } from 'react';
-import { Field, Form, useForm } from 'react-final-form';
+import { Form, useForm } from 'react-final-form';
 import {
   callManagingOrganisationsList,
   proposalProtectedCallsAvailableComplianceChecklistsList,
@@ -15,8 +15,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { SubmitButton, StringGroup, SelectGroup } from '@/form';
-import MarkdownEditor from '@/form/MarkdownEditor';
+import { SubmitButton, StringGroup, SelectGroup, MarkdownGroup } from '@/form';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
@@ -199,9 +198,9 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
               />
 
               {isEdit && (
-                <Field
+                <MarkdownGroup
                   name="description"
-                  component={MarkdownEditor}
+                  label={translate('Description')}
                   autoFocus
                 />
               )}
@@ -224,10 +223,10 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
                   placeholder={translate(
                     'Select compliance checklist (optional)',
                   )}
-                  help_text={translate(
+                  description={translate(
                     'Optional checklist that proposal applicants must complete for compliance evaluation. Can be changed only before any proposals are submitted.',
                   )}
-                  disabled={submitting}
+                  isDisabled={submitting}
                 />
               )}
             </div>

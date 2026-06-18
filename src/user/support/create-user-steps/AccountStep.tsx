@@ -151,11 +151,15 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           >
             <div className="d-flex gap-2">
               <div className="flex-grow-1">
-                <Field
-                  name="password"
-                  component={SecretField}
-                  placeholder={translate('Password')}
-                />
+                <Field name="password">
+                  {({ input, meta }) => (
+                    <SecretField
+                      input={input}
+                      meta={meta}
+                      placeholder={translate('Password')}
+                    />
+                  )}
+                </Field>
               </div>
               <button
                 type="button"

@@ -56,23 +56,27 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
             {translate('There are no offerings')}
           </h2>
         ) : (
-          <Field<any>
-            name="offering"
-            options={options}
-            isClearable={true}
-            component={SelectField}
-            getOptionValue={(option) => option.uuid}
-            getOptionLabel={(option) => option.offering_name}
-            placeholder={translate('Select offering...')}
-            isLoading={isLoading}
-            noUpdateOnBlur
-            validate={required}
-            onChange={(value) => {
-              if (value?.uuid !== offering?.uuid) {
-                change('plan', value.plan);
-              }
-            }}
-          />
+          <Field<any> name="offering" validate={required}>
+            {({ input, meta }) => (
+              <SelectField
+                input={input}
+                meta={meta}
+                options={options}
+                isClearable={true}
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={(option) => option.offering_name}
+                placeholder={translate('Select offering...')}
+                isLoading={isLoading}
+                noUpdateOnBlur
+                onChange={(value) => {
+                  input.onChange(value);
+                  if (value?.uuid !== offering?.uuid) {
+                    change('plan', value?.plan);
+                  }
+                }}
+              />
+            )}
+          </Field>
         )}
         {offering && (
           <p>

@@ -30,7 +30,6 @@ export const CreditGroup = ({ customer }: { customer: Customer }) => {
         valueFieldDescriptionData,
         formatJsxTemplate,
       )}
-      customer={customer}
     />
   );
 };

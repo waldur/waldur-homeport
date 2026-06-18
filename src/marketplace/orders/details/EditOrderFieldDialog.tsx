@@ -122,11 +122,17 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
           parse={parseIntField}
           format={formatIntField}
           validate={composeValidators(...getOfferingComponentValidator(c))}
-          component={LimitInput}
-          min={c.min_value || 0}
-          max={c.max_value}
-          unit={c.measured_unit}
-        />
+        >
+          {({ input, meta }) => (
+            <LimitInput
+              input={input}
+              meta={meta}
+              min={c.min_value || 0}
+              max={c.max_value}
+              unit={c.measured_unit}
+            />
+          )}
+        </Field>
       </Form.Group>
     );
 
@@ -164,12 +170,16 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
             }
           >
             {resolve.name === 'start_date' ? (
-              <Field
-                name="start_date"
-                label={translate('Start date')}
-                component={DateField}
-                {...dateFieldProps}
-              />
+              <Field name="start_date">
+                {({ input, meta }) => (
+                  <DateField
+                    input={input}
+                    meta={meta}
+                    label={translate('Start date')}
+                    {...dateFieldProps}
+                  />
+                )}
+              </Field>
             ) : isBulkLimits ? (
               <>
                 {componentsToEdit.map((c) => (

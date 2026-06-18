@@ -4,7 +4,7 @@ import { useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import { formatDate, parseDate } from '@/core/dateUtils';
-import { StringField, StringGroup } from '@/form';
+import { StringGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
@@ -155,7 +155,6 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
                 'Optional note for the service provider, e.g. a PO number.',
               )}
               name="request_comment"
-              component={StringField}
               placeholder={translate('Optional')}
             />
           </div>

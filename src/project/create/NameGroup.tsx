@@ -36,7 +36,6 @@ export const NameGroup = ({
     <StringGroup
       label={translate('Project name')}
       required
-      controlId="name"
       quickAction={
         error ? (
           <LoadingErred
@@ -56,7 +55,6 @@ export const NameGroup = ({
       placeholder={translate('e.g. Community Health Outreach')}
       description={translate('This name will be visible in accounting data.')}
       validate={validate}
-      customer={customer}
     />
   );
 };

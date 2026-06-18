@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required } from '@/core/validators';
-import { StringGroup, SelectGroup } from '@/form';
+import { StringGroup, TextGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
@@ -126,14 +126,13 @@ export const CascadeStepsGroup = ({
               )}
 
               {!hasChoicesMap ? (
-                <StringGroup
+                <TextGroup
                   label={translate('Choices')}
                   description={translate(
                     'JSON array of choice objects with value and label properties',
                   )}
                   required={true}
                   name={`${name}.choices`}
-                  as="textarea"
                   rows={4}
                   validate={required}
                   placeholder={translate(
@@ -141,14 +140,13 @@ export const CascadeStepsGroup = ({
                   )}
                 />
               ) : (
-                <StringGroup
+                <TextGroup
                   label={translate('Choices Map')}
                   description={translate(
                     'JSON object mapping parent values to choice arrays',
                   )}
                   required={true}
                   name={`${name}.choices_map`}
-                  as="textarea"
                   rows={6}
                   validate={required}
                   placeholder={translate(

@@ -29,6 +29,7 @@ import enforceRenderFieldOrDash from './eslint-rules/enforce-render-field-or-das
 import noDirectBootstrapButton from './eslint-rules/no-direct-bootstrap-button.js';
 import noDirectBootstrapDropdownButton from './eslint-rules/no-direct-bootstrap-dropdown-button.js';
 import noDirectClientUsage from './eslint-rules/no-direct-client-usage.js';
+import noDirectFieldAdapter from './eslint-rules/no-direct-field-adapter.js';
 import noEditButtonSizeOverride from './eslint-rules/no-edit-button-size-override.js';
 import noManualIconColorsInBadges from './eslint-rules/no-manual-icon-colors-in-badges.js';
 import noRedundantViMock from './eslint-rules/no-redundant-vi-mock.js';
@@ -80,6 +81,7 @@ export default tseslint
             'prefer-classnames-utility': preferClassnamesUtility,
             'enforce-render-field-or-dash': enforceRenderFieldOrDash,
             'prefer-mutate-over-mutateAsync': preferMutateOverMutateAsync,
+            'no-direct-field-adapter': noDirectFieldAdapter,
             'enforce-disabled-button-tooltip': enforceDisabledButtonTooltip,
 
             // Design system rules
@@ -133,6 +135,7 @@ export default tseslint
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',
         'waldur-custom/prefer-mutate-over-mutateAsync': 'warn',
+        'waldur-custom/no-direct-field-adapter': 'error',
         'waldur-custom/enforce-disabled-button-tooltip': 'warn',
         'waldur-custom/enforce-noresult-with-cta': 'warn',
 

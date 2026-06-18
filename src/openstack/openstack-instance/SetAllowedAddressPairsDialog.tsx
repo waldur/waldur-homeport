@@ -43,7 +43,7 @@ const PairRow = ({ pair, onRemove }) => (
       <Field name={`${pair}.ip_address`} validate={validatePrivateCIDR}>
         {({ input, meta }) => (
           <>
-            <StringField input={input} />
+            <StringField input={input} meta={meta} />
             <FieldError error={meta.touched && meta.error} />
           </>
         )}
@@ -53,7 +53,7 @@ const PairRow = ({ pair, onRemove }) => (
       <Field name={`${pair}.mac_address`}>
         {({ input, meta }) => (
           <>
-            <StringField input={input} />
+            <StringField input={input} meta={meta} />
             <FieldError error={meta.touched && meta.error} />
           </>
         )}

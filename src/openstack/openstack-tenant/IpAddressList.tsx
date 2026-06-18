@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { FieldError } from '@/form/FieldError';
-import { InputField } from '@/form/InputField';
+import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
@@ -16,7 +16,7 @@ const IPAddressRow = ({ address, onRemove }) => (
       <Field name={address} validate={validateIPv4}>
         {({ input, meta }) => (
           <>
-            <InputField {...input} aria-label={translate('IP address')} />
+            <BaseInputField {...input} aria-label={translate('IP address')} />
             <FieldError error={meta.touched && meta.error} />
           </>
         )}

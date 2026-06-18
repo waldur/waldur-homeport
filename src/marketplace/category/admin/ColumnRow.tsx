@@ -43,49 +43,65 @@ export const ColumnRow = ({ column, fields, index, name }) => {
   return (
     <tr>
       <td>
-        <Field
-          name={`${name}.title`}
-          component={StringField}
-          placeholder={translate('Title is rendered as column header')}
-          aria-label={translate('Title')}
-        />
-      </td>
-      <td>
-        <Field
-          name={`${name}.attribute`}
-          component={StringField}
-          placeholder={translate(
-            'Resource attribute is rendered as table cell',
+        <Field name={`${name}.title`}>
+          {({ input, meta }) => (
+            <StringField
+              input={input}
+              meta={meta}
+              placeholder={translate('Title is rendered as column header')}
+              aria-label={translate('Title')}
+            />
           )}
-          aria-label={translate('Attribute')}
-        />
+        </Field>
       </td>
       <td>
-        <Field
-          name={`${name}.widget`}
-          component={SelectField}
-          placeholder={translate(
-            'Widget field allows to customise table cell rendering',
+        <Field name={`${name}.attribute`}>
+          {({ input, meta }) => (
+            <StringField
+              input={input}
+              meta={meta}
+              placeholder={translate(
+                'Resource attribute is rendered as table cell',
+              )}
+              aria-label={translate('Attribute')}
+            />
           )}
-          options={[
-            { value: '', label: translate('None') },
-            { value: 'csv', label: 'CSV' },
-            { value: 'filesize', label: translate('Filesize') },
-            {
-              value: 'attached_instance',
-              label: translate('Attached instance'),
-            },
-          ]}
-          isClearable
-        />
+        </Field>
       </td>
       <td>
-        <Field
-          name={`${name}.index`}
-          component={StringField}
-          placeholder={translate('Index allows to reorder columns')}
-          aria-label={translate('Index')}
-        />
+        <Field name={`${name}.widget`}>
+          {({ input, meta }) => (
+            <SelectField
+              input={input}
+              meta={meta}
+              placeholder={translate(
+                'Widget field allows to customise table cell rendering',
+              )}
+              options={[
+                { value: '', label: translate('None') },
+                { value: 'csv', label: 'CSV' },
+                { value: 'filesize', label: translate('Filesize') },
+                {
+                  value: 'attached_instance',
+                  label: translate('Attached instance'),
+                },
+              ]}
+              isClearable
+            />
+          )}
+        </Field>
+      </td>
+      <td>
+        <Field name={`${name}.index`}>
+          {({ input, meta }) => (
+            <StringField
+              input={input}
+              meta={meta}
+              placeholder={translate('Index allows to reorder columns')}
+              aria-label={translate('Index')}
+            />
+          )}
+        </Field>
       </td>
       <td>
         <RemovalActionButton action={onRemove} tooltip={translate('Remove')} />

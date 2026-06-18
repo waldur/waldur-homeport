@@ -312,9 +312,10 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                                 value === '' ? undefined : Number(value)
                               }
                             >
-                              {({ input }) => (
+                              {({ input, meta }) => (
                                 <NumberField
                                   input={input}
+                                  meta={meta}
                                   unit={component.measured_unit}
                                   min={min ?? 0}
                                   max={max}

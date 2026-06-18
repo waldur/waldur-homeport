@@ -37,11 +37,7 @@ const ResourceNameField = (props) => {
   return (
     <div className="d-flex justify-content-between">
       <div className="flex-grow-1 me-3 ">
-        <StringField
-          input={props.input}
-          isInvalid={props.isInvalid}
-          id={props.id}
-        />
+        <StringField input={props.input} meta={props.meta} id={props.id} />
       </div>
       {project ? (
         <ActionButton
@@ -81,20 +77,28 @@ export const ResourceNameGroup = ({
 }) => (
   <Field
     name="attributes.name"
-    label={nameLabel}
-    component={FormGroup}
-    required={true}
-    description={translate('This name will be visible in accounting data.')}
     validate={
       Array.isArray(nameValidate)
         ? composeValidators(...nameValidate)
         : nameValidate
     }
   >
-    <ResourceNameField
-      offering={offering}
-      project={project}
-      formatSuggestedName={props.formatSuggestedName}
-    />
+    {({ input, meta }) => (
+      <FormGroup
+        label={nameLabel}
+        required={true}
+        description={translate('This name will be visible in accounting data.')}
+        meta={meta}
+        controlId={input.name}
+      >
+        <ResourceNameField
+          offering={offering}
+          project={project}
+          formatSuggestedName={props.formatSuggestedName}
+          input={input}
+          meta={meta}
+        />
+      </FormGroup>
+    )}
   </Field>
 );

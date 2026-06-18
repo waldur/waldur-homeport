@@ -238,13 +238,17 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                 {errors.instanceAZs}
               </Alert>
             ) : instanceAZOptions.length > 0 ? (
-              <Field
-                name="selectedInstanceAZ"
-                component={SelectField}
-                options={instanceAZOptions}
-                simpleValue
-                isClearable
-              />
+              <Field name="selectedInstanceAZ">
+                {({ input, meta }) => (
+                  <SelectField
+                    input={input}
+                    meta={meta}
+                    options={instanceAZOptions}
+                    simpleValue
+                    isClearable
+                  />
+                )}
+              </Field>
             ) : (
               <p className="text-muted mb-0">
                 {translate('No instance availability zones found.')}
@@ -259,13 +263,17 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                 {errors.volumeAZs}
               </Alert>
             ) : volumeAZOptions.length > 0 ? (
-              <Field
-                name="selectedVolumeAZ"
-                component={SelectField}
-                options={volumeAZOptions}
-                simpleValue
-                isClearable
-              />
+              <Field name="selectedVolumeAZ">
+                {({ input, meta }) => (
+                  <SelectField
+                    input={input}
+                    meta={meta}
+                    options={volumeAZOptions}
+                    simpleValue
+                    isClearable
+                  />
+                )}
+              </Field>
             ) : (
               <p className="text-muted mb-0">
                 {translate('No volume availability zones found.')}

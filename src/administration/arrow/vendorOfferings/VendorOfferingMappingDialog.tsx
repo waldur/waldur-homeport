@@ -116,20 +116,24 @@ export const VendorOfferingMappingDialog: FC<
               }
             >
               <div className="size-sm">
-                <Field
-                  name="arrow_vendor_name"
-                  label={translate('Arrow vendor name')}
-                  description={translate(
-                    'Select from existing Arrow vendors or type a new name',
+                <Field name="arrow_vendor_name" validate={required}>
+                  {({ input, meta }) => (
+                    <FormGroup
+                      label={translate('Arrow vendor name')}
+                      description={translate(
+                        'Select from existing Arrow vendors or type a new name',
+                      )}
+                      required
+                      meta={meta}
+                      controlId={input.name}
+                    >
+                      <VendorNameSelect
+                        settingsUuid={mapping?.settings_uuid || settings?.uuid}
+                        defaultOption={initialValues?.arrow_vendor_name}
+                        input={input}
+                      />
+                    </FormGroup>
                   )}
-                  component={FormGroup}
-                  required
-                  validate={required}
-                >
-                  <VendorNameSelect
-                    settingsUuid={mapping?.settings_uuid || settings?.uuid}
-                    defaultOption={initialValues?.arrow_vendor_name}
-                  />
                 </Field>
                 <AsyncSelectGroup
                   name="offering"

@@ -40,7 +40,7 @@ export const SlurmPolicyPreviewDialog: FC<SlurmPolicyPreviewDialogProps> = ({
       const response = await marketplaceResourcesList({
         query: {
           offering_uuid: [resolve.offering.uuid],
-          state: ['OK', 'Erred'] as const,
+          state: ['OK', 'Erred'],
           page_size: 100,
         },
       });

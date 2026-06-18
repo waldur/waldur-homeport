@@ -1,14 +1,22 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import {
-  FunctionComponent,
-  PropsWithChildren,
-  ReactNode,
-  cloneElement,
-} from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { Form } from 'react-bootstrap';
 
 import { Tip } from '@/core/Tooltip';
+
+export interface ReadOnlyChildProps {
+  input: {
+    name: string;
+    value: any;
+    onChange: (v: any) => void;
+    onBlur: (v: any) => void;
+    onFocus: (v: any) => void;
+  };
+  value: any;
+  readOnly: boolean;
+  disabled?: boolean;
+}
 
 interface ReadOnlyFormControlProps {
   label: string;
@@ -22,10 +30,11 @@ interface ReadOnlyFormControlProps {
   spaceless?: boolean;
   actions?: ReactNode;
   tooltip?: string;
+  children?: ReactNode | ((props: ReadOnlyChildProps) => ReactNode);
 }
 
 export const ReadOnlyFormControl: FunctionComponent<
-  PropsWithChildren<ReadOnlyFormControlProps>
+  ReadOnlyFormControlProps
 > = (props) => {
   const {
     label,
@@ -44,7 +53,13 @@ export const ReadOnlyFormControl: FunctionComponent<
   } = props;
   const childProps = {
     ...rest,
-    input: { name: '', value, onChange: (v) => v },
+    input: {
+      name: '',
+      value,
+      onChange: (v) => v,
+      onBlur: (v) => v,
+      onFocus: (v) => v,
+    },
     value,
     readOnly: true,
     disabled,
@@ -76,7 +91,11 @@ export const ReadOnlyFormControl: FunctionComponent<
     >
       {labelNode}
       {children ? (
-        cloneElement(children as any, childProps)
+        typeof children === 'function' ? (
+          children(childProps)
+        ) : (
+          children
+        )
       ) : (
         <Form.Control
           readOnly

@@ -60,7 +60,7 @@ export const ExportDialog = (props: ExportDialogProps) => {
                 required={true}
                 isClearable={false}
                 validate={required}
-                disabled={submitting}
+                isDisabled={submitting}
               />
 
               <BooleanGroup
