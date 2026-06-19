@@ -1,9 +1,6 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { legacy_createStore as createStore } from 'redux';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
 import { MultiDatacenterK8sConfigurationForm } from './MultiDatacenterK8sConfigurationForm';
@@ -14,12 +11,6 @@ vi.mock('./K8sSecurityConfigSection', () => ({
   ),
 }));
 
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: false } },
-});
-
-const store = createStore((state = {}) => state);
-
 describe('MultiDatacenterK8sConfigurationForm', () => {
   const mockOnChange = vi.fn();
 
@@ -29,20 +20,16 @@ describe('MultiDatacenterK8sConfigurationForm', () => {
 
   const renderComponent = () => {
     return render(
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <MultiDatacenterK8sConfigurationForm
-            field={{ type: 'multi_datacenter_k8s_config', label: 'Multi K8s' }}
-            input={
-              {
-                name: 'k8s_multi',
-                value: undefined,
-                onChange: mockOnChange,
-              } as any
-            }
-          />
-        </QueryClientProvider>
-      </Provider>,
+      <MultiDatacenterK8sConfigurationForm
+        field={{ type: 'multi_datacenter_k8s_config', label: 'Multi K8s' }}
+        input={
+          {
+            name: 'k8s_multi',
+            value: undefined,
+            onChange: mockOnChange,
+          } as any
+        }
+      />,
     );
   };
 

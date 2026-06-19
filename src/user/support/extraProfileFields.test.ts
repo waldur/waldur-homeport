@@ -1,12 +1,7 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { User } from 'waldur-js-client';
 
 import { EXTRA_PROFILE_FIELDS } from './extraProfileFields';
-
-// translate returns the key verbatim, so labels equal their source strings.
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((key) => key),
-}));
 
 const fieldByAttr = (attr: string) => {
   const field = EXTRA_PROFILE_FIELDS.find((f) => f.attr === attr);
