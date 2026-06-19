@@ -38,6 +38,7 @@ export default {
       '@/core/EChart',
       '@/form/MarkdownEditor',
       '@/form/DateField',
+      '@/i18n',
     ];
 
     return {

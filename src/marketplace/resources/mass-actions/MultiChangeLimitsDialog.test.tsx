@@ -1,19 +1,14 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesUpdateLimits,
 } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
+
 import { MultiChangeLimitsDialog } from './MultiChangeLimitsDialog';
-
-// waldur-js-client and @/store/notify are already mocked in test/setupTests.js.
-
-vi.mock('@/i18n', () => ({ translate: (key) => key }));
 
 vi.mock('@/marketplace/common/registry', () => ({
   // Components come from the (mocked) offering, so tests control them via the
@@ -39,24 +34,8 @@ vi.mock('@/marketplace/orders/actions/selectors', () => ({
   checkOrderCanBeApproved: () => true,
 }));
 
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-      mutations: { retry: false },
-    },
-  });
-
-const mockStore = configureStore();
-
 const renderComponent = (props) =>
-  render(
-    <Provider store={mockStore({})}>
-      <QueryClientProvider client={createTestQueryClient()}>
-        <MultiChangeLimitsDialog {...props} />
-      </QueryClientProvider>
-    </Provider>,
-  );
+  renderWithProviders(<MultiChangeLimitsDialog {...props} />);
 
 const mockRows = [
   {

@@ -6,22 +6,6 @@ vi.mock('@/features/connect', () => ({
   isFeatureVisible: vi.fn(() => true),
 }));
 
-vi.mock('@/i18n', () => ({
-  translate: vi.fn((key, ctx) => {
-    if (key === 'Managed by {source}. Last synced: {date}') {
-      return `Managed by ${ctx.source}. Last synced: ${ctx.date}`;
-    }
-    if (key === 'Information is coming from {identityProvider}') {
-      return `Information is coming from ${ctx.identityProvider}`;
-    }
-    return key;
-  }),
-}));
-
-vi.mock('@/core/dateUtils', () => ({
-  formatDateTime: vi.fn((date) => `formatted-${date}`),
-}));
-
 describe('getProtectedFieldProps', () => {
   it('returns true for IDP managed fields', () => {
     const user = {
@@ -55,7 +39,7 @@ describe('getProtectedFieldProps', () => {
     );
 
     expect(result.tooltip).toBe(
-      'Managed by Tara. Last synced: formatted-2023-01-01',
+      'Managed by Tara. Last synced: Jan 1, 2023, 12:00 AM',
     );
   });
 

@@ -5,10 +5,6 @@ import { hasPermission } from '@/permissions/hasPermission';
 
 import { MultiChangeLimitsAction } from './MultiChangeLimitsAction';
 
-vi.mock('@/i18n', () => ({ translate: (key) => key }));
-
-// @/modal/actions and @/workspace/hooks are already mocked in test/setupTests.js.
-
 vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: vi.fn(),
 }));

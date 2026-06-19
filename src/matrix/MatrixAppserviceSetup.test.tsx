@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   adminMatrixAppserviceSetup,
@@ -26,13 +24,10 @@ const renderDialog = (queryClient?: QueryClient) => {
     new QueryClient({
       defaultOptions: { queries: { retry: false } },
     });
-  const store = createStore(() => ({}));
   return render(
-    <Provider store={store}>
-      <QueryClientProvider client={client}>
-        <MatrixAppserviceSetupDialog />
-      </QueryClientProvider>
-    </Provider>,
+    <QueryClientProvider client={client}>
+      <MatrixAppserviceSetupDialog />
+    </QueryClientProvider>,
   );
 };
 
