@@ -363,6 +363,12 @@ export const SettingsDescription = [
         type: 'integer',
       },
       {
+        key: 'MAINTENANCE_ANNOUNCEMENT_TRAILING_BUFFER_MINUTES',
+        description: translate('Minutes the announcement banner stays visible after maintenance completes'),
+        default: 60,
+        type: 'integer',
+      },
+      {
         key: 'MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM',
         description: translate('How maintenance notifications are delivered.'),
         default: ['AdminAnnouncement'],
