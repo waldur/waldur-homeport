@@ -15,6 +15,8 @@ import { SummaryTeamTable } from '@/user/affiliations/SummaryTeamTable';
 
 import { TableTabsContainer } from '../../customer/list/TableTabsContainer';
 
+import { ProviderProjectMetadataPanel } from './ProviderProjectMetadataPanel';
+
 interface OwnProps {
   row: Project;
   providerUuid: string;
@@ -56,6 +58,12 @@ export const ProviderProjectExpandableRow: FC<OwnProps> = ({
               count={teamCount}
               countLoading={teamCountLoading}
             />
+            <NavItem
+              title={translate('Metadata')}
+              eventKey="metadata"
+              count={row.project_metadata?.length}
+              countLoading={false}
+            />
           </Nav>
         </div>
         <Tab.Content className="overflow-auto">
@@ -67,6 +75,9 @@ export const ProviderProjectExpandableRow: FC<OwnProps> = ({
               filter={{ scope_uuid: row.uuid }}
               hideActions
             />
+          </Tab.Pane>
+          <Tab.Pane eventKey="metadata" unmountOnExit={true}>
+            <ProviderProjectMetadataPanel answers={row.project_metadata} />
           </Tab.Pane>
         </Tab.Content>
       </TableTabsContainer>
