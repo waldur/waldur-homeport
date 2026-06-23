@@ -17,6 +17,7 @@ const ProviderProjectsListComponent = ({ provider }) => {
       path: { service_provider_uuid: provider.uuid },
     }),
     queryField: 'query',
+    mandatoryFields: ['project_metadata'], // This is required to display the metadata tab in the expandable row
   });
 
   const ExpandableRow = useCallback(
