@@ -8,7 +8,12 @@ import { OfferingEditPanelProps } from '@/marketplace/offerings/update/integrati
 export const RemoteCredentialsSection: FC<OfferingEditPanelProps> = (props) => {
   return (
     <BaseCredentialsSection {...props}>
-      <StringEditField name="backend_id" label={translate('Backend ID')} />
+      <StringEditField
+        name="backend_id"
+        label={translate('Backend ID')}
+        parse={(v) => v ?? ''}
+        renderValue={(v) => v || undefined}
+      />
     </BaseCredentialsSection>
   );
 };
