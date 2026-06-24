@@ -19,6 +19,12 @@ export const RemoteOfferingSecretOptions: FunctionComponent<
         name="secret_options.customer_uuid"
         label={translate('Organization UUID')}
       />
+      <StringEditField
+        name="backend_id"
+        label={translate('Remote offering UUID')}
+        parse={(v) => v ?? ''}
+        renderValue={(v) => v || undefined}
+      />
     </BaseProvisioningConfigSection>
   );
 };
