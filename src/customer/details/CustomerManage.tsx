@@ -56,10 +56,6 @@ export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
                 ),
               }),
               image: fileSerializer(formData.image),
-              country:
-                'country' in formData && formData.country
-                  ? formData.country.value
-                  : undefined,
             },
             ...formDataOptions,
           });
