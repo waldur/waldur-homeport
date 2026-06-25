@@ -418,6 +418,9 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
   const hasOrganizationRegistryCode = isProfileAttributeEnabled(
     'organization_registry_code',
   );
+  const hasOrganizationVatCode = isProfileAttributeEnabled(
+    'organization_vat_code',
+  );
   const hasAffiliations =
     Array.isArray(user.affiliations) && user.affiliations.length > 0;
 
@@ -444,6 +447,12 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
     'organization_registry_code',
     isRequired('organization_registry_code'),
     user.organization_registry_code,
+  );
+  const orgVatProps = getProtectedFieldProps(
+    user,
+    'organization_vat_code',
+    isRequired('organization_vat_code'),
+    user.organization_vat_code,
   );
   const jobProps = getProtectedFieldProps(
     user,
@@ -520,6 +529,20 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
               : translate("The user's organization registry code")
           }
           {...orgRegistryProps}
+        />
+      )}
+      {hasOrganizationVatCode && (
+        <StringEditField
+          name="organization_vat_code"
+          label={translate('Organization VAT code')}
+          required={isRequired('organization_vat_code')}
+          disabled={disabled || orgVatProps.isProtected}
+          description={
+            isSelf
+              ? translate("Your organization's VAT code")
+              : translate("The user's organization VAT code")
+          }
+          {...orgVatProps}
         />
       )}
       <StringEditField

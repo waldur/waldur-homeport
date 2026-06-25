@@ -44,6 +44,10 @@ export const SP_USER_FIELDS: Array<{
     key: 'organization_registry_code',
     label: () => translate('Organization registry code'),
   },
+  {
+    key: 'organization_vat_code',
+    label: () => translate('Organization VAT code'),
+  },
   { key: 'eduperson_assurance', label: () => translate('EduPerson assurance') },
   { key: 'civil_number', label: () => translate('Civil number') },
   { key: 'birth_date', label: () => translate('Birth date') },

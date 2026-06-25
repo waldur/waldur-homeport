@@ -136,6 +136,13 @@ export const ALL_ATTRIBUTE_FIELDS: AttributeFieldDef[] = [
     attribute: 'organization_registry_code',
   },
   {
+    key: 'expose_organization_vat_code',
+    label: translate('Organization VAT code'),
+    description: translate("Organization's VAT code"),
+    component: AwesomeCheckboxField,
+    attribute: 'organization_vat_code',
+  },
+  {
     key: 'expose_eduperson_assurance',
     label: translate('eduPerson assurance'),
     description: translate('REFEDS assurance level'),
