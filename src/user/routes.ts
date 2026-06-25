@@ -211,6 +211,10 @@ export const states: StateDeclaration[] = [
     name: 'profile-manage',
     url: 'manage/?tab&section',
     parent: 'profile-manage-container',
+    params: {
+      tab: { dynamic: true },
+      section: { dynamic: true },
+    },
     component: lazyComponent(() =>
       import('./UserManage').then((module) => ({ default: module.UserManage })),
     ),
