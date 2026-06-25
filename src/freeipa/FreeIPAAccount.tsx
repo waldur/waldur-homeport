@@ -32,7 +32,8 @@ export const FreeIpaAccount = () => {
     queryKey: ['FreeIPAAccount', user.uuid],
     queryFn: () =>
       freeipaProfilesList({ query: { user: user.uuid } }).then(
-        (r) => r.data[0],
+        // null, not undefined — React Query rejects an undefined result (e.g. empty list).
+        (r) => r.data[0] ?? null,
       ),
   });
 

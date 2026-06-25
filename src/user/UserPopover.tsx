@@ -30,7 +30,7 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
       if (ENV.plugins.WALDUR_CORE.FREEIPA_ENABLED) {
         profile = await freeipaProfilesList({
           query: { user: user.uuid },
-        }).then((r) => r.data[0]);
+        }).then((r) => r.data[0] ?? null);
       }
       return { user, profile };
     },
