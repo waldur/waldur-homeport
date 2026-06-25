@@ -91,6 +91,52 @@ describe('useUsageExport', () => {
     );
   });
 
+  it('should export only the users passed in (mirrors the chart user filter)', () => {
+    // Data contains usage for two users, but the caller narrows the filter
+    // to user_1 only — the export must not leak the unselected user's rows.
+    const propsWithTwoUsers = {
+      ...defaultProps,
+      data: {
+        ...defaultProps.data,
+        userUsages: [
+          ...defaultProps.data.userUsages,
+          {
+            username: 'user_2',
+            component_type: 'cpu',
+            date: '2024-01-01',
+            usage: 3,
+          },
+        ],
+      },
+      users: [
+        {
+          uuid: '123',
+          username: '1b2f',
+          full_name: 'User One',
+          offering_user_username: 'user_1',
+        },
+      ],
+    };
+
+    const { result } = renderHook(() =>
+      useUsageExport(propsWithTwoUsers as any),
+    );
+    result.current('csv');
+
+    expect(exportAs).toHaveBeenCalledWith(
+      'csv',
+      'Usage history - Test Resource',
+      {
+        fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
+        data: [
+          ['user_1', 'January 2024', 5, 4],
+          ['Total of January 2024', 'January 2024', 10, 8],
+          ['Total', '01/2024', 10, 8],
+        ],
+      },
+    );
+  });
+
   it('should show error when there is no usage data', () => {
     const propsWithNoUsage = {
       ...defaultProps,
