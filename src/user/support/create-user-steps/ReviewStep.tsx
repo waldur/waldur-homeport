@@ -128,7 +128,8 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
             isProfileAttributeEnabled('nationality') ||
             isProfileAttributeEnabled('organization_country') ||
             isProfileAttributeEnabled('organization_type') ||
-            isProfileAttributeEnabled('organization_registry_code')) && (
+            isProfileAttributeEnabled('organization_registry_code') ||
+            isProfileAttributeEnabled('organization_vat_code')) && (
             <>
               <tr>
                 <td
@@ -191,6 +192,12 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
                 <ReviewRow
                   label={translate('Organization registry code')}
                   value={values.organization_registry_code}
+                />
+              )}
+              {isProfileAttributeEnabled('organization_vat_code') && (
+                <ReviewRow
+                  label={translate('Organization VAT code')}
+                  value={values.organization_vat_code}
                 />
               )}
             </>
