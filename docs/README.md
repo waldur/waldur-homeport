@@ -20,7 +20,7 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 | [ui-consistency-guidelines.md](ui-consistency-guidelines.md) | Empty states, buttons, loading indicators, tooltips, null-value display         |
 | [tables.md](tables.md)                                       | `useTable`, columns, filters, row actions, export                               |
 | [forms.md](forms.md)                                         | React Final Form, `*Group` / `*EditField` / `*Filter` patterns, `TabbedSection` |
-| [filter-migration-guide.md](filter-migration-guide.md)       | Generated table filters from the OpenAPI schema                                 |
+| [filter-migration-guide.md](table/filter-migration-guide.md)       | Generated table filters from the OpenAPI schema                                 |
 | [button-variant-linting.md](button-variant-linting.md)       | Design-token button variants and the ESLint rule enforcing them                 |
 | [theme.md](theme.md)                                         | Dark mode and theming, including third-party components                         |
 | [menu-navigation.md](menu-navigation.md)                     | Sidebar menu structure and state-based routing                                  |

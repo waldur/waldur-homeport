@@ -35,7 +35,8 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns
 - `forms.md` - React Final Form and VStepperForm patterns
-- `filter-migration-guide.md` - Generated table filters from OpenAPI schema
+- `tables.md` - Modular index for useTable, columns, filters, row actions, export, and visual customizations
+- `table/filter-migration-guide.md` - Generated table filters from OpenAPI schema
 - `development-setup.md` - Build, environment, tooling
 - `ui-consistency-guidelines.md` - Empty states, buttons, loading, tooltips
 
@@ -112,7 +113,7 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
 
-- Use **generated filters** for table filter components (see `docs/filter-migration-guide.md`):
+- Use **generated filters** for table filter components (see `docs/table/filter-migration-guide.md`):
   1. Add config to `generate-filters-config.yaml`
   2. Run `node generate-filters.cjs`
   3. Import from `@/table/generated/` — never write manual filter components
