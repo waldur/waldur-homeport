@@ -268,7 +268,11 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'organization-manage',
-    url: 'manage/?tab',
+    url: 'manage/?tab&section',
+    params: {
+      tab: { dynamic: true },
+      section: { dynamic: true },
+    },
     component: lazyComponent(() =>
       import('./details/CustomerManage').then((module) => ({
         default: module.CustomerManage,
