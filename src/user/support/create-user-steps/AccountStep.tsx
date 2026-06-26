@@ -56,6 +56,14 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
         placeholder={translate('e.g. john.doe')}
         label={translate('Username')}
         required
+        disabled={editMode}
+        description={
+          editMode
+            ? translate(
+                'The username cannot be changed after the account is created.',
+              )
+            : undefined
+        }
       />
       <StringGroup
         name="email"
