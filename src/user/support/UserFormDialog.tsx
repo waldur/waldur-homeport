@@ -46,6 +46,7 @@ export interface UserFormData {
   organization_type?: string;
   organization_registry_code?: string;
   organization_vat_code?: string;
+  organization_address?: string;
   password?: string;
   remove_password?: boolean;
   deactivation_reason?: string;
@@ -103,6 +104,7 @@ const buildBody = (formData: UserFormData): UserRequest => {
   body.organization_type = formData.organization_type || '';
   body.organization_registry_code = formData.organization_registry_code || '';
   body.organization_vat_code = formData.organization_vat_code || '';
+  body.organization_address = formData.organization_address || '';
 
   if (formData.gender !== undefined && formData.gender !== null) {
     body.gender = formData.gender;
@@ -221,6 +223,7 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
         organization_type: user.organization_type || '',
         organization_registry_code: user.organization_registry_code || '',
         organization_vat_code: user.organization_vat_code || '',
+        organization_address: user.organization_address || '',
       };
     }
     return {

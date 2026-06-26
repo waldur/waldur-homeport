@@ -78,6 +78,11 @@ export const EXTRA_PROFILE_FIELDS: ReadonlyArray<ExtraProfileField> = [
     getValue: (user) => user.organization_vat_code || null,
   },
   {
+    attr: 'organization_address',
+    label: () => translate('Organization address'),
+    getValue: (user) => user.organization_address || null,
+  },
+  {
     attr: 'eduperson_assurance',
     label: () => translate('Eduperson assurance'),
     skipWhenEmpty: true,

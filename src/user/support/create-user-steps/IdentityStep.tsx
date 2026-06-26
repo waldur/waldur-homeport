@@ -24,7 +24,8 @@ export const IdentityStep: FC<WizardStepProps> = (props) => {
     isProfileAttributeEnabled('organization_country') ||
     isProfileAttributeEnabled('organization_type') ||
     isProfileAttributeEnabled('organization_registry_code') ||
-    isProfileAttributeEnabled('organization_vat_code');
+    isProfileAttributeEnabled('organization_vat_code') ||
+    isProfileAttributeEnabled('organization_address');
 
   return (
     <WizardModal {...props}>
@@ -105,7 +106,12 @@ export const IdentityStep: FC<WizardStepProps> = (props) => {
         <StringGroup
           name="organization_vat_code"
           label={translate('Organization VAT code')}
-          spaceless
+        />
+      )}
+      {isProfileAttributeEnabled('organization_address') && (
+        <StringGroup
+          name="organization_address"
+          label={translate('Organization address')}
         />
       )}
     </WizardModal>

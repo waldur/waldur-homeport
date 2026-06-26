@@ -27,6 +27,7 @@ type ConfigurableProfileAttribute =
   | 'organization_type'
   | 'organization_registry_code'
   | 'organization_vat_code'
+  | 'organization_address'
   | 'eduperson_assurance'
   | 'civil_number'
   | 'identity_source';

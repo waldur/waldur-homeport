@@ -99,6 +99,10 @@ export const FIELD_MAPPING: Record<
     label: () => translate('Organization VAT code'),
     getValue: (user) => user.user_organization_vat_code,
   },
+  organization_address: {
+    label: () => translate('Organization address'),
+    getValue: (user) => user.user_organization_address,
+  },
   eduperson_assurance: {
     label: () => translate('EduPerson assurance'),
     getValue: (user) => user.user_eduperson_assurance,
