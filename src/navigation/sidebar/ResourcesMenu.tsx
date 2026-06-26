@@ -17,6 +17,8 @@ import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
 import { selectFiltersStorage } from '@/table/selectors';
 import { getCustomer, getProject, getResource } from '@/workspace/selectors';
 
+import { isDescendantOf } from '../useTabs';
+
 import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
 import { ResourcesMenuFilterButton } from './resources-filter/ResourcesMenuFilterButton';
@@ -143,6 +145,19 @@ export const ResourcesMenu = ({
   const workspaceProject = useSelector(getProject);
   const workspaceCustomer = useSelector(getCustomer);
 
+  const { state } = useCurrentStateAndParams();
+  const isProjectContext = useMemo(
+    () => isDescendantOf('project', state),
+    [state],
+  );
+  const isCustomerContext = useMemo(
+    () =>
+      isDescendantOf('organization', state) ||
+      isDescendantOf('call-management', state) ||
+      isDescendantOf('marketplace-provider', state),
+    [state],
+  );
+
   // Resolve project/customer to scope sidebar links by, preferring the active
   // workspace (project detail / organization detail page) over whatever is
   // persisted in the resources-filter storage. Without this, clicking
@@ -155,13 +170,23 @@ export const ResourcesMenu = ({
       (item) => item.name === 'organization',
     )?.value;
     return {
-      project: workspaceProject ?? storedProject,
+      project: isProjectContext
+        ? (workspaceProject ?? storedProject)
+        : storedProject,
       customer:
-        workspaceCustomer ??
-        (workspaceProject as any)?.customer ??
-        storedCustomer,
+        isProjectContext || isCustomerContext
+          ? (workspaceCustomer ??
+            (workspaceProject as any)?.customer ??
+            storedCustomer)
+          : storedCustomer,
     };
-  }, [resourcesFilters, workspaceProject, workspaceCustomer]);
+  }, [
+    resourcesFilters,
+    workspaceProject,
+    workspaceCustomer,
+    isProjectContext,
+    isCustomerContext,
+  ]);
 
   // Encoded as "uuid::name" to match the compact format produced by
   // src/core/filters.ts (compactFilterValue); AllResourcesList /
