@@ -421,6 +421,9 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
   const hasOrganizationVatCode = isProfileAttributeEnabled(
     'organization_vat_code',
   );
+  const hasOrganizationAddress = isProfileAttributeEnabled(
+    'organization_address',
+  );
   const hasAffiliations =
     Array.isArray(user.affiliations) && user.affiliations.length > 0;
 
@@ -453,6 +456,12 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
     'organization_vat_code',
     isRequired('organization_vat_code'),
     user.organization_vat_code,
+  );
+  const orgAddressProps = getProtectedFieldProps(
+    user,
+    'organization_address',
+    isRequired('organization_address'),
+    user.organization_address,
   );
   const jobProps = getProtectedFieldProps(
     user,
@@ -543,6 +552,20 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
               : translate("The user's organization VAT code")
           }
           {...orgVatProps}
+        />
+      )}
+      {hasOrganizationAddress && (
+        <StringEditField
+          name="organization_address"
+          label={translate('Organization address')}
+          required={isRequired('organization_address')}
+          disabled={disabled || orgAddressProps.isProtected}
+          description={
+            isSelf
+              ? translate("Your organization's postal address")
+              : translate("The user's organization address")
+          }
+          {...orgAddressProps}
         />
       )}
       <StringEditField

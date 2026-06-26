@@ -22,6 +22,7 @@ const FIELD_LABELS: Record<string, () => string> = {
   organization_type: () => translate('Organization type'),
   organization_registry_code: () => translate('Organization registry code'),
   organization_vat_code: () => translate('Organization VAT code'),
+  organization_address: () => translate('Organization address'),
 };
 
 const formatFieldName = (field: string): string => {
