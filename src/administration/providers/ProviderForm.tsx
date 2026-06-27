@@ -241,6 +241,20 @@ export const ProviderForm = () => (
         'The OIDC claim to be used as the value for the organization_registry_code field.',
       )}
     />
+    <StringGroup
+      name="attribute_mapping.organization_address"
+      label={translate('Organization address field')}
+      help={translate(
+        'The OIDC claim to be used as the value for the organization_address field.',
+      )}
+    />
+    <StringGroup
+      name="attribute_mapping.organization_vat_code"
+      label={translate('Organization VAT code field')}
+      help={translate(
+        'The OIDC claim to be used as the value for the organization_vat_code field.',
+      )}
+    />
     <AllowedRedirectsField />
     <BooleanGroup name="is_active" label={translate('Enabled')} />
     <BooleanGroup name="verify_ssl" label={translate('Verify SSL')} />
