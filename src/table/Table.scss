@@ -89,14 +89,12 @@
       overflow: hidden;
       box-sizing: border-box;
       max-width: 100%;
-      word-break: break-word;
       overflow-wrap: break-word;
 
       > div {
         min-width: 0;
         overflow: hidden;
         max-width: 100%;
-        word-break: break-word;
         overflow-wrap: break-word;
       }
     }
@@ -105,23 +103,18 @@
       min-width: 0;
       max-width: 100%;
       overflow: hidden;
-      word-break: break-word;
       overflow-wrap: break-word;
     }
 
     .card-body .d-flex {
-      word-break: break-word;
       overflow-wrap: break-word;
-      word-wrap: break-word;
     }
 
     [class*='ellipsis-lines'] {
       min-width: 0;
       overflow: hidden;
       max-width: 100%;
-      word-break: break-word;
       overflow-wrap: break-word;
-      word-wrap: break-word;
     }
   }
 
@@ -135,17 +128,13 @@
   flex: 1 1 auto;
   max-width: 100%;
   overflow: hidden;
-  word-break: break-word;
   overflow-wrap: break-word;
-  word-wrap: break-word;
 }
 
 .model-card-title {
   min-width: 0;
   max-width: 100%;
-  word-break: break-word;
   overflow-wrap: break-word;
-  word-wrap: break-word;
 }
 
 @media (width <= 767px) {
