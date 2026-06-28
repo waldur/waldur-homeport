@@ -3273,14 +3273,14 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/leaflet-geosearch@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@types/leaflet-geosearch/-/leaflet-geosearch-2.7.1.tgz#f74d241af1585d92b2b952d8bc78eeaf61f0a97c"
-  integrity sha512-rEn1vXoAbTU5wYH8fAoenxJ0gvkxq0Er5I5sV9HuUukUAacuO1QF9ZtN0EaenV4gnTnpYlQhFPLSW+VqhRFjhA==
+"@types/leaflet-geosearch@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/leaflet-geosearch/-/leaflet-geosearch-3.0.0.tgz#94d038f46b2509a5a08b9796fde5e525df3e37bb"
+  integrity sha512-eD/l1MsLwPOhM3VHRlSttddWk0V08PwhVAITnMPbrHL+ijoA8VJuA6SO2hG+nWHlLBGqYfMgFZlUTWEvYaK2Rg==
   dependencies:
-    "@types/leaflet" "*"
+    leaflet-geosearch "*"
 
-"@types/leaflet@*", "@types/leaflet@^1.5.19":
+"@types/leaflet@^1.5.19":
   version "1.9.21"
   resolved "https://registry.yarnpkg.com/@types/leaflet/-/leaflet-1.9.21.tgz#542e8f91250bc444f8a1416d472f5b518d83e979"
   integrity sha512-TbAd9DaPGSnzp6QvtYngntMZgcRk+igFELwR2N99XZn7RXUdKgsXMR+28bUO0rPsWp8MIu/f47luLIQuSLYv/w==
@@ -3299,10 +3299,10 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.17.24.tgz#4ae334fc62c0e915ca8ed8e35dcc6d4eeb29215f"
   integrity sha512-gIW7lQLZbue7lRSWEFql49QJJWThrTFFeIMJdp3eH4tKoxm1OvEPg02rm4wCCSHS0cL3/Fizimb35b7k8atwsQ==
 
-"@types/luxon@^2.0.4":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-2.4.0.tgz#897d3abc23b68d78b69d76a12c21e01eb5adab95"
-  integrity sha512-oCavjEjRXuR6URJEtQm0eBdfsBiEcGBZbq21of8iGkeKxU1+1xgKuFPClaBZl2KB8ZZBSWlgk61tH6Mf+nvZVw==
+"@types/luxon@^3.7.2":
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-3.7.2.tgz#082bb2adf54bc6fe1d514a0d80a82ac6a75cfaac"
+  integrity sha512-gW+Oib+vUtGJBtNC8V9Reww0oIpusw+4m81uncg9REGZAJfqOQHfo/nkabnc7w0QReXyPqjrbWMJk6NuAkiX3Q==
 
 "@types/mdast@^4.0.0":
   version "4.0.4"
@@ -7506,6 +7506,14 @@ layout-base@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/layout-base/-/layout-base-2.0.1.tgz#d0337913586c90f9c2c075292069f5c2da5dd285"
   integrity sha512-dp3s92+uNI1hWIpPGH3jK2kxE2lMjdXdr+DH8ynZHpd6PUlH6x6cbuXnoMmiNumznqaNO31xu9e79F0uuZ0JFg==
+
+leaflet-geosearch@*:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/leaflet-geosearch/-/leaflet-geosearch-4.4.0.tgz#cb0004cb51e36b06d64e818ff9dfe4755c2e8e1e"
+  integrity sha512-Pt/3JU0Oxvk+5ccGChNOV8yxk+Vl+3P83drGwW8/6ugF+K7zKPkx3naGDbPdhfeUmy+QuSCeVdvjN1jLCgwbaQ==
+  optionalDependencies:
+    "@googlemaps/js-api-loader" "^1.16.6"
+    leaflet "^1.6.0"
 
 leaflet-geosearch@^3.11.1:
   version "3.11.1"
