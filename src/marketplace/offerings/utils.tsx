@@ -147,6 +147,12 @@ export const isOfferingRestrictedToProject = (
   };
 };
 
+// Roles an offering is restricted to (empty if unrestricted). Passed to the
+// projects/customers list endpoints' current_user_has_role filter so the order
+// form only offers scopes where the user holds one of these roles.
+export const getOfferingRestrictedRoles = (offering: Offering): string[] =>
+  offering?.plugin_options?.restricted_to_roles || [];
+
 export const parentOfferingFilter = {
   type: 'OpenStack.Tenant',
 };

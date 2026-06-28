@@ -77,10 +77,14 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           <Col sm={6}>
             <CustomerField
               organizationGroups={props.offering.organization_groups}
+              offering={props.offering}
             />
           </Col>
           <Col sm={6}>
-            <ProjectField previewMode={props.previewMode} />
+            <ProjectField
+              previewMode={props.previewMode}
+              offering={props.offering}
+            />
           </Col>
         </Row>
       </VStepperFormStepCard>

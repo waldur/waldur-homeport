@@ -1,32 +1,46 @@
 import { FC, useCallback, useMemo } from 'react';
 import { Field, useForm } from 'react-final-form';
-import { projectsList } from 'waldur-js-client';
+import {
+  CustomersListData,
+  Offering,
+  ProjectsListData,
+  projectsList,
+} from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { FormGroup } from '@/form';
 import { AsyncSelect } from '@/form/select';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
+import { getOfferingRestrictedRoles } from '@/marketplace/offerings/utils';
 import { useModal } from '@/modal/actions';
 
 import { organizationAutocomplete } from '../common/autocompletes';
 
-const CustomerSelect = ({ input, organizationGroups }) => {
+const CustomerSelect = ({ input, organizationGroups, offering }) => {
   const { confirm } = useModal();
 
   const form = useForm();
   const { customer } = useOrderFormData();
 
+  const pickFirstAllowedProject = useCallback(
+    async (customerUuid) => {
+      const query: ProjectsListData['query'] = { customer: customerUuid };
+      const roles = offering ? getOfferingRestrictedRoles(offering) : [];
+      if (roles.length) {
+        query.current_user_has_role = roles;
+      }
+      const projects = await projectsList({ query }).then((r) => r.data);
+      form.change('project', projects[0]);
+    },
+    [offering, form],
+  );
+
   const onChange = useCallback(
     async (value) => {
       if (!customer) {
         input.onChange(value);
-        const project = await projectsList({
-          query: {
-            customer: value.uuid,
-          },
-        }).then((r) => r.data[0]);
-        form.change('project', project);
+        await pickFirstAllowedProject(value.uuid);
         return;
       }
       try {
@@ -44,34 +58,33 @@ const CustomerSelect = ({ input, organizationGroups }) => {
           },
         );
         input.onChange(value);
-        const project = await projectsList({
-          query: {
-            customer: value.uuid,
-          },
-        }).then((r) => r.data[0]);
-        form.change('project', project);
+        await pickFirstAllowedProject(value.uuid);
       } catch {
         // Swallow
       }
     },
-    [customer, form, input],
+    [customer, input, pickFirstAllowedProject],
   );
 
-  const loadOptions = useMemo(
-    () =>
-      organizationAutocomplete({
-        organization_group_uuid: organizationGroups.map((group) => group.uuid),
-        field: [
-          'name',
-          'uuid',
-          'url',
-          'payment_profiles',
-          'display_billing_info_in_projects',
-        ],
-        o: 'name',
-      }),
-    [organizationGroups],
-  );
+  const loadOptions = useMemo(() => {
+    const extra: CustomersListData['query'] = {
+      organization_group_uuid: organizationGroups.map((group) => group.uuid),
+      field: [
+        'name',
+        'uuid',
+        'url',
+        'payment_profiles',
+        'display_billing_info_in_projects',
+      ],
+      o: 'name',
+    };
+    const roles = offering ? getOfferingRestrictedRoles(offering) : [];
+    if (roles.length) {
+      // Only offer organizations where the user holds one of the required roles.
+      extra.current_user_has_role = roles;
+    }
+    return organizationAutocomplete(extra);
+  }, [organizationGroups, offering]);
 
   return (
     <AsyncSelect
@@ -88,7 +101,8 @@ const CustomerSelect = ({ input, organizationGroups }) => {
 
 export const CustomerField: FC<{
   organizationGroups;
-}> = ({ organizationGroups }) => {
+  offering?: Offering;
+}> = ({ organizationGroups, offering }) => {
   return (
     <FormGroup label={translate('Organization')} required={true} spaceless>
       <Field name="customer" validate={required}>
@@ -96,6 +110,7 @@ export const CustomerField: FC<{
           <CustomerSelect
             {...fieldProps}
             organizationGroups={organizationGroups}
+            offering={offering}
           />
         )}
       </Field>
