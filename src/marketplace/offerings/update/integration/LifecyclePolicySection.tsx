@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import {
   BooleanEditField,
@@ -11,6 +11,8 @@ import {
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
+import { Role } from '@/permissions/types';
+import { getRoles } from '@/permissions/utils';
 
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
@@ -38,10 +40,37 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
     props.refetch,
   );
 
+  const roleOptions = useMemo(() => getRoles(['project', 'customer']), []);
+  const roleLabels = useMemo(
+    () =>
+      Object.fromEntries(
+        roleOptions.map((role) => [role.name, role.description || role.name]),
+      ),
+    [roleOptions],
+  );
+
   return (
     <EditFieldProvider scope={props.offering} callback={update}>
       <TabbedSection enableSearch>
         <TabbedSection.Tab id="orders" title={translate('Orders & approval')}>
+          <SelectEditField
+            name="plugin_options.restricted_to_roles"
+            label={translate('Restrict to roles')}
+            options={roleOptions}
+            getOptionLabel={(role: Role) => role.description || role.name}
+            getOptionValue={({ name }) => name}
+            renderValue={(value) =>
+              Array.isArray(value) && value.length
+                ? value.map((name) => roleLabels[name] || name).join(', ')
+                : undefined
+            }
+            simpleValue
+            isMulti
+            isClearable
+            description={translate(
+              'If set, only users holding one of these project or organization roles can see and order this offering; other users will not see it in the catalog. Whether their orders skip consumer approval still depends on the role having the order-approval permission. Leave empty for no restriction.',
+            )}
+          />
           {props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS && (
             <BooleanEditField
               name="plugin_options.auto_approve_marketplace_script"
