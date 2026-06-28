@@ -21,7 +21,7 @@ export const useOrderStartDateBounds = (
     let minDate = tomorrow;
     if (project.start_date) {
       const projectStartDate = DateTime.fromISO(project.start_date);
-      if (projectStartDate > tomorrow) {
+      if (projectStartDate.isValid && projectStartDate > tomorrow) {
         minDate = projectStartDate;
       }
     }
