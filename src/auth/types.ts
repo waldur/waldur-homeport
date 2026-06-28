@@ -127,10 +127,7 @@ interface CoreConfiguration {
   ENABLED_REPORTING_SCREENS: string[];
   AI_ASSISTANT_ENABLED: boolean;
   AI_ASSISTANT_ENABLED_ROLES:
-    | 'disabled'
-    | 'staff'
-    | 'staff_and_support'
-    | 'all';
+    'disabled' | 'staff' | 'staff_and_support' | 'all';
   MATRIX_ENABLED: boolean;
 }
 

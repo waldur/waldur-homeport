@@ -33,8 +33,7 @@ type ConfigurableProfileAttribute =
   | 'identity_source';
 
 export type ProfileAttribute =
-  | (typeof CORE_PROFILE_ATTRIBUTES)[number]
-  | ConfigurableProfileAttribute;
+  (typeof CORE_PROFILE_ATTRIBUTES)[number] | ConfigurableProfileAttribute;
 
 export const isProfileAttributeEnabled = (
   attribute: ProfileAttribute,

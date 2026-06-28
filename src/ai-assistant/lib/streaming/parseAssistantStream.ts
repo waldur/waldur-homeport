@@ -93,8 +93,7 @@ export async function parseAssistantStream(
           if (m.id !== assistantId) return m;
 
           const existingMetadata = m.metadata?.custom as
-            | BlockBasedMetadata
-            | undefined;
+            BlockBasedMetadata | undefined;
 
           return {
             ...m,
@@ -147,8 +146,7 @@ export async function parseAssistantStream(
 
         // Mark all blocks as complete
         const existingMetadata = m.metadata?.custom as
-          | BlockBasedMetadata
-          | undefined;
+          BlockBasedMetadata | undefined;
         const existingBlocks: UIBlock[] = existingMetadata?.blocks || [];
         const completedBlocks = markBlocksComplete(existingBlocks);
 

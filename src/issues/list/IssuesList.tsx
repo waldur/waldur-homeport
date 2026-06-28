@@ -25,11 +25,7 @@ import { IssueCreateButton } from './IssueCreateButton';
 
 interface OwnProps {
   hiddenColumns?: (
-    | 'customer'
-    | 'project'
-    | 'caller'
-    | 'time_in_progress'
-    | 'resource_type'
+    'customer' | 'project' | 'caller' | 'time_in_progress' | 'resource_type'
   )[];
 
   scope?: Record<string, any>;

@@ -238,8 +238,8 @@ const SearchableListQuestion: FC<{
     const picked = (
       !next ? [] : Array.isArray(next) ? next : [next]
     ) as SelectOption[];
-    const picks = picked.map(
-      (so) => question.options!.find((o) => o.id === so.optionId)!,
+    const picks = picked.map((so) =>
+      question.options!.find((o) => o.id === so.optionId)!,
     );
     onChange({ ...answer, picks });
   };

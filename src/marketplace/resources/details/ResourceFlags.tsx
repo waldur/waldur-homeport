@@ -29,8 +29,7 @@ export const getAttribution = (
   const attrs = resource.attributes as Record<string, unknown> | undefined;
   if (!attrs) return null;
   const pa = attrs['_policy_attribution'] as
-    | Record<string, PolicyAttribution>
-    | undefined;
+    Record<string, PolicyAttribution> | undefined;
   return pa?.[field] || null;
 };
 

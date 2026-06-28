@@ -217,8 +217,7 @@ function transformResourcesToDrillDownByType(
         value: data.approved,
         percent: Math.round((data.approved / data.requests) * 100 - 70),
         direction: (data.approved / data.requests >= 0.7 ? 'up' : 'down') as
-          | 'up'
-          | 'down',
+          'up' | 'down',
       },
     }))
     .sort((a, b) => b.value - a.value);

@@ -54,13 +54,11 @@ export const useProjectResources = (projectUuid?: string) => {
       // Filter to resources with non-empty limits
       return resources
         .filter((r) => r.limits && Object.keys(r.limits).length > 0)
-        .map(
-          (r): ResourceOption => ({
-            uuid: r.uuid,
-            name: r.name || translate('Unnamed resource'),
-            resource_name: r.name || translate('Unnamed resource'),
-          }),
-        );
+        .map((r): ResourceOption => ({
+          uuid: r.uuid,
+          name: r.name || translate('Unnamed resource'),
+          resource_name: r.name || translate('Unnamed resource'),
+        }));
     },
     enabled: !!projectUuid,
     staleTime: STALE_TIME,

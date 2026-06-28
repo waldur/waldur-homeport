@@ -15,12 +15,7 @@ import { AnalyticsMode } from './analytics';
 import { isReportingScreenEnabled } from './utils';
 
 export type ReportCategory =
-  | 'resources'
-  | 'provider'
-  | 'financial'
-  | 'proposals'
-  | 'users'
-  | 'operations';
+  'resources' | 'provider' | 'financial' | 'proposals' | 'users' | 'operations';
 
 export interface ReportDefinition {
   key: string;

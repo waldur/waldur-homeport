@@ -25,10 +25,7 @@ interface TosReportingModalProps {
 }
 
 type ViewType =
-  | 'versionAdoption'
-  | 'consentStatus'
-  | 'acceptedTrend'
-  | 'revokedTrend';
+  'versionAdoption' | 'consentStatus' | 'acceptedTrend' | 'revokedTrend';
 
 export const TosReportingModal: FC<TosReportingModalProps> = ({
   offeringUuid: initialOfferingUuid,

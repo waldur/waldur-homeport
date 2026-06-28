@@ -49,9 +49,7 @@ interface ArrowSettingsCardProps {
 export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
   const { data, isLoading, error, refetch } = useArrowSettings();
   const currentSettings = (settings ?? data) as
-    | ArrowSettings
-    | null
-    | undefined;
+    ArrowSettings | null | undefined;
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -59,9 +59,7 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
 
     return evaluateQuestionVisibility(
       question.dependencies_info as unknown as
-        | DependencyInfo
-        | null
-        | undefined,
+        DependencyInfo | null | undefined,
       questionDescToFieldName,
       formValues,
     );
@@ -116,8 +114,7 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
           isClearable={!isRequired}
           options={(
             question.question_options as
-              | Array<{ label: string; uuid: string }>
-              | undefined
+              Array<{ label: string; uuid: string }> | undefined
           )?.map((opt) => ({
             label: opt.label,
             value: opt.uuid,
@@ -135,8 +132,7 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
           isClearable={!isRequired}
           options={(
             question.question_options as
-              | Array<{ label: string; uuid: string }>
-              | undefined
+              Array<{ label: string; uuid: string }> | undefined
           )?.map((opt) => ({
             label: opt.label,
             value: opt.uuid,

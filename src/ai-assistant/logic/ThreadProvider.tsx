@@ -178,8 +178,7 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
           let changed = false;
           const updated = messages.map((m) => {
             const custom = m.metadata?.custom as
-              | { backendUuid?: string }
-              | undefined;
+              { backendUuid?: string } | undefined;
             if (custom?.backendUuid !== backendUuid) return m;
             changed = true;
             return {

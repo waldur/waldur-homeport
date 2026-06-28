@@ -4,10 +4,7 @@ import type { ToSConsentDashboard } from 'waldur-js-client';
 import { translate } from '@/i18n';
 
 type TableType =
-  | 'versionAdoption'
-  | 'consentStatus'
-  | 'acceptedTrend'
-  | 'revokedTrend';
+  'versionAdoption' | 'consentStatus' | 'acceptedTrend' | 'revokedTrend';
 
 interface TosDataTablesProps {
   data: ToSConsentDashboard;

@@ -160,7 +160,7 @@ Run unit tests:
 
 Run E2E tests:
   image:
-    name: mcr.microsoft.com/playwright:v1.60.0-noble
+    name: mcr.microsoft.com/playwright:v1.61.1-noble
     entrypoint: [""]
   stage: test
   interruptible: true

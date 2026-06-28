@@ -227,8 +227,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                       <>
                         {fields.map((name, index) => {
                           const row = (values.allowed_scopes ?? [])[index] as
-                            | BindingRow
-                            | undefined;
+                            BindingRow | undefined;
                           return (
                             <div
                               key={name}

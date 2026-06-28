@@ -1,10 +1,5 @@
 export type HistoryEntityType =
-  | 'resource'
-  | 'customer'
-  | 'user'
-  | 'ssh_key'
-  | 'offering'
-  | 'plan';
+  'resource' | 'customer' | 'user' | 'ssh_key' | 'offering' | 'plan';
 
 export interface VersionHistoryButtonProps {
   entityType: HistoryEntityType;

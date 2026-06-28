@@ -82,8 +82,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
   const handleHorizontalScroll = useCallback(
     (
       event:
-        | React.UIEvent<HTMLDivElement, UIEvent>
-        | { target: HTMLDivElement },
+        React.UIEvent<HTMLDivElement, UIEvent> | { target: HTMLDivElement },
     ) => {
       const responsiveEl = event.target as HTMLDivElement;
       const tableEl = responsiveEl?.querySelector('table');

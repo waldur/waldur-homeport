@@ -12,8 +12,7 @@ export const ConsumerApproveAll = ({ orders, refetch }) => {
   // Orders requiring a purchase order upload must be approved individually.
   const approvableOrders = (orders as OrderDetails[]).filter((order) => {
     const opts = order.offering_plugin_options as
-      | Record<string, unknown>
-      | undefined;
+      Record<string, unknown> | undefined;
     return !opts?.require_purchase_order_upload;
   });
   const skippedCount = orders.length - approvableOrders.length;

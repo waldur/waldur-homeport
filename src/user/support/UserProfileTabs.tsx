@@ -690,12 +690,7 @@ const StaffTab = ({ disabled, isSelf }: TabContentProps) => {
 };
 
 type TabKey =
-  | 'basic'
-  | 'personal'
-  | 'geographic'
-  | 'organization'
-  | 'system'
-  | 'staff';
+  'basic' | 'personal' | 'geographic' | 'organization' | 'system' | 'staff';
 
 interface UserProfileTabsProps {
   user: User;

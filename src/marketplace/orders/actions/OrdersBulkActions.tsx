@@ -29,8 +29,7 @@ export const OrdersBulkActions = ({
   const approvablePendingOrders = pendingOrders.filter((order) => {
     if (order.state !== 'pending-consumer') return true;
     const opts = order.offering_plugin_options as
-      | Record<string, unknown>
-      | undefined;
+      Record<string, unknown> | undefined;
     return !opts?.require_purchase_order_upload;
   });
   const hasPurchaseOrderOrders =
