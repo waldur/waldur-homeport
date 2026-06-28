@@ -22,12 +22,7 @@ export type RoundAllocationTime = 'on_decision' | 'fixed_date';
 export type CallState = 'active' | 'draft' | 'archived';
 
 export type ProposalState =
-  | 'draft'
-  | 'submitted'
-  | 'in_review'
-  | 'accepted'
-  | 'rejected'
-  | 'canceled';
+  'draft' | 'submitted' | 'in_review' | 'accepted' | 'rejected' | 'canceled';
 
 export type CallOfferingState = 'requested' | 'accepted' | 'canceled';
 

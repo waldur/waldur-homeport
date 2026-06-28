@@ -180,8 +180,7 @@ function transformReviewersToDrillDownItems(
         value: reviewer.completed - reviewer.pending,
         percent: Math.round(reviewer.completion_rate - 70),
         direction: (reviewer.completion_rate >= 70 ? 'up' : 'down') as
-          | 'up'
-          | 'down',
+          'up' | 'down',
       },
     }))
     .sort((a, b) => b.value - a.value);

@@ -173,8 +173,7 @@ function transformCallsToDrillDownItems(
         value: call.proposals_accepted - call.proposals_rejected,
         percent: Math.round(call.acceptance_rate - 80),
         direction: (call.acceptance_rate >= 80 ? 'up' : 'down') as
-          | 'up'
-          | 'down',
+          'up' | 'down',
       },
     }))
     .sort((a, b) => b.value - a.value);

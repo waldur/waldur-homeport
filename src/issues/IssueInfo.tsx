@@ -28,8 +28,7 @@ const formatEventName = (event: string) => {
 
 const IssueLogDialog = ({ issue }: { issue: Issue }) => {
   const processingLog = (issue as any).processing_log as
-    | ProcessingLogEntry[]
-    | undefined;
+    ProcessingLogEntry[] | undefined;
 
   return (
     <ModalDialog title={translate('Processing log')} bodyClassName="p-0">

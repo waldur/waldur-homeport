@@ -4,11 +4,7 @@ export interface LiveKitCredentials {
 }
 
 export type CallState =
-  | 'idle'
-  | 'discovering'
-  | 'connecting'
-  | 'connected'
-  | 'error';
+  'idle' | 'discovering' | 'connecting' | 'connected' | 'error';
 
 export interface CallMemberInfo {
   userId: string;

@@ -3,15 +3,9 @@ import { ModalProps } from 'react-bootstrap';
 
 export type DialogSizeType = 'sm' | 'md' | 'lg' | 'xl';
 export type ConfirmationDialogType =
-  | 'primary'
-  | 'success'
-  | 'warning'
-  | 'danger';
+  'primary' | 'success' | 'warning' | 'danger';
 export type ModalAction =
-  | 'SHOW_MODAL'
-  | 'SHOW_CONFIRM'
-  | 'HIDE_MODAL'
-  | 'HIDE_CONFIRM';
+  'SHOW_MODAL' | 'SHOW_CONFIRM' | 'HIDE_MODAL' | 'HIDE_CONFIRM';
 
 export interface AppModalProps extends Omit<ModalProps, 'size'> {
   size?: DialogSizeType;

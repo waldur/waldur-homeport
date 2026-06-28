@@ -6,11 +6,7 @@ import { useUser } from '@/workspace/hooks';
 
 const h = vi.hoisted(() => ({
   callState: 'idle' as
-    | 'idle'
-    | 'discovering'
-    | 'connecting'
-    | 'connected'
-    | 'error',
+    'idle' | 'discovering' | 'connecting' | 'connected' | 'error',
   callRoomId: null as string | null,
   callRoomUuid: null as string | null,
   matrixClient: {} as any,

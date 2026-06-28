@@ -35,13 +35,7 @@ export type { GlauthTree };
 const BASE_DN = 'dc=⟨base⟩';
 
 type NodeType =
-  | 'root'
-  | 'ou'
-  | 'group'
-  | 'user'
-  | 'svcacct'
-  | 'attr'
-  | 'waldur_attr';
+  'root' | 'ou' | 'group' | 'user' | 'svcacct' | 'attr' | 'waldur_attr';
 
 interface TreeNodeData {
   id: string;

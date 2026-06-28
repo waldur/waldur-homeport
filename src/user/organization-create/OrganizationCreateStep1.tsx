@@ -36,8 +36,7 @@ export const OrganizationCreateStep1: FunctionComponent<
   const { showError } = useNotify();
 
   const validationMethod = (values.validationMethod || '') as
-    | ValidationMethodEnum
-    | BlankEnum;
+    ValidationMethodEnum | BlankEnum;
 
   const [fieldConfig, setFieldConfig] =
     useState<PersonIdentifierFieldConfig | null>(null);

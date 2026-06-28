@@ -28,11 +28,7 @@ export interface MatrixChatMessage {
 }
 
 export type MatrixConnectionState =
-  | 'idle'
-  | 'connecting'
-  | 'connected'
-  | 'error'
-  | 'disconnected';
+  'idle' | 'connecting' | 'connected' | 'error' | 'disconnected';
 
 export interface MatrixChatContextValue {
   client: MatrixClient | null;

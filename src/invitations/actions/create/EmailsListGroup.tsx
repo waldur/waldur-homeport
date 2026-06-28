@@ -40,8 +40,7 @@ const duplicateInFormValidator = (
 ) => {
   if (!value) return undefined;
   const list = allValues?._duplicateInFormEmails as
-    | Array<{ email: string; roleUuid: string }>
-    | undefined;
+    Array<{ email: string; roleUuid: string }> | undefined;
   if (!Array.isArray(list)) return undefined;
   const rowIndex = getRowIndexFromFieldName(fieldName);
   if (rowIndex == null) return undefined;
@@ -69,8 +68,7 @@ const duplicateInvitationValidator = (
 ) => {
   if (!value) return undefined;
   const list = allValues?._duplicateEmails as
-    | Array<{ email: string; roleUuid: string }>
-    | undefined;
+    Array<{ email: string; roleUuid: string }> | undefined;
   if (!Array.isArray(list)) return undefined;
   const rowIndex = getRowIndexFromFieldName(fieldName);
   if (rowIndex == null) return undefined;

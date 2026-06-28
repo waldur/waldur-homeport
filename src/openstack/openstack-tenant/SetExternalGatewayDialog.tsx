@@ -83,12 +83,10 @@ export const SetExternalGatewayDialog = ({ resolve }: OwnProps) => {
         body.enable_snat = formData.disable_snat ? false : null;
         const fixedIps = (formData.external_fixed_ips || [])
           .filter((ip) => ip.ip_address)
-          .map(
-            (ip): SetExternalGatewayFixedIpRequest => ({
-              ip_address: ip.ip_address,
-              ...(ip.subnet_id ? { subnet_id: ip.subnet_id } : {}),
-            }),
-          );
+          .map((ip): SetExternalGatewayFixedIpRequest => ({
+            ip_address: ip.ip_address,
+            ...(ip.subnet_id ? { subnet_id: ip.subnet_id } : {}),
+          }));
         if (fixedIps.length) {
           body.external_fixed_ips = fixedIps;
         }

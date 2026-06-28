@@ -80,8 +80,7 @@ const displayLabel = (n: AggregateNode | TopologyNode): string => {
   }
   if (n.type === 'port') {
     const fixed = n.attrs.fixed_ips as
-      | Array<{ ip_address?: string }>
-      | undefined;
+      Array<{ ip_address?: string }> | undefined;
     if (fixed?.length && fixed[0].ip_address) {
       return fixed[0].ip_address;
     }

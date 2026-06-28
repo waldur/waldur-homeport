@@ -11,11 +11,7 @@ export type AnalyticsMode = 'what-if' | 'why-so';
  * Parameter types for What-If simulation
  */
 type SimulationParamType =
-  | 'number'
-  | 'percentage'
-  | 'currency'
-  | 'slider'
-  | 'select';
+  'number' | 'percentage' | 'currency' | 'slider' | 'select';
 
 /**
  * A single parameter that can be adjusted in What-If simulation

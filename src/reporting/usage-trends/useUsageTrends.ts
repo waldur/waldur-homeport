@@ -34,16 +34,14 @@ export const useUsageTrends = (options: UseUsageTrendsOptions = {}) => {
 
       // Transform to our format
       const data = response.data;
-      return data.map(
-        (item): MonthlyUsageData => ({
-          period: item.period,
-          year: item.year,
-          month: item.month,
-          total_usage: parseFloat(item.total_usage) || 0,
-          resource_count: item.resource_count,
-          component_count: item.component_count,
-        }),
-      );
+      return data.map((item): MonthlyUsageData => ({
+        period: item.period,
+        year: item.year,
+        month: item.month,
+        total_usage: parseFloat(item.total_usage) || 0,
+        resource_count: item.resource_count,
+        component_count: item.component_count,
+      }));
     },
     staleTime: LONG_STALE_TIME, // 10 minutes
   });

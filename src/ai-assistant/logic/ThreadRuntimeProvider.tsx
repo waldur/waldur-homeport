@@ -79,8 +79,7 @@ export function ThreadRuntimeProvider({
         backendThreads.map((bt) => ({
           id: bt.uuid!,
           status: (bt.is_archived ? 'archived' : 'regular') as
-            | 'regular'
-            | 'archived',
+            'regular' | 'archived',
           title: bt.name || undefined,
         }));
 

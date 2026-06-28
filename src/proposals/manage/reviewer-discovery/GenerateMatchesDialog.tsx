@@ -128,8 +128,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
             .filter((k) => k.length > 0);
           body.keywords = keywordList;
           body.keyword_search_mode = values.keyword_search_mode?.value as
-            | 'expertise_only'
-            | 'full_text';
+            'expertise_only' | 'full_text';
         }
 
         if (values.min_threshold !== undefined && values.min_threshold > 0) {

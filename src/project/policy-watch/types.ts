@@ -11,18 +11,10 @@ import type {
 } from 'waldur-js-client';
 
 export type PolicyWatchVariant =
-  | 'health'
-  | 'spend'
-  | 'breakdown'
-  | 'timeline'
-  | 'matrix';
+  'health' | 'spend' | 'breakdown' | 'timeline' | 'matrix';
 
 export type ResourceStatusBucket =
-  | 'ok'
-  | 'notification'
-  | 'slowdown'
-  | 'paused'
-  | 'downscaled';
+  'ok' | 'notification' | 'slowdown' | 'paused' | 'downscaled';
 
 interface PolicyAttributionPayload {
   policy_class?: string;

@@ -48,8 +48,7 @@ export const AtlassianDiscoveryDialog: FC = () => {
   // Build initial values from current settings
   const initialValues = useMemo((): Partial<AtlassianFormValues> => {
     const settings = currentSettings?.data as
-      | Record<string, unknown>
-      | undefined;
+      Record<string, unknown> | undefined;
 
     return {
       // Credentials - pre-fill from existing settings
