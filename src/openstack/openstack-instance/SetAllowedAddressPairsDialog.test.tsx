@@ -21,7 +21,7 @@ const mockInstance = {
 } as OpenStackInstance;
 
 const mockPort = {
-  uuid: 'port-uuid',
+  url: 'http://example.com/api/openstack-ports/port-uuid/',
   allowed_address_pairs: [
     { ip_address: '10.0.0.1/32', mac_address: 'fa:16:3e:00:00:01' },
   ],
@@ -47,6 +47,17 @@ describe('SetAllowedAddressPairsDialog', () => {
     expect(screen.getByRole('table')).toBeInTheDocument();
     expect(screen.getByDisplayValue('10.0.0.1/32')).toBeInTheDocument();
     expect(screen.getByDisplayValue('fa:16:3e:00:00:01')).toBeInTheDocument();
+  });
+
+  it('renders without an instance (tenant port context)', () => {
+    renderWithProviders(
+      <SetAllowedAddressPairsDialog resolve={{ port: mockPort as any }} />,
+    );
+
+    expect(
+      screen.getByText('Set allowed address pairs (192.168.1.100)'),
+    ).toBeInTheDocument();
+    expect(screen.getByDisplayValue('10.0.0.1/32')).toBeInTheDocument();
   });
 
   it('submits the form with modified pairs', async () => {
