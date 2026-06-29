@@ -29,11 +29,12 @@ export const InvitationConfirmDialog: FunctionComponent<{
   const user = useUser();
   const asyncResult = useQuery({
     queryKey: ['invitation', token],
-
     queryFn: () =>
       userInvitationsDetailsRetrieve({ path: { uuid: token } }).then(
         (response) => response.data,
       ),
+    retry: false,
+    meta: { skipGlobalErrorRedirect: true },
   });
   const invitation = asyncResult.data;
 
