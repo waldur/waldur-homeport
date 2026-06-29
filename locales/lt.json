@@ -1472,7 +1472,7 @@
   "Fee applied according to the maximum value reported by service provider over the whole active state of resource.": "Mokestis taikomas pagal maksimalią paslaugų teikėjo nurodytą vertę per visą aktyvią išteklių būseną.",
   "Fee applied each time this plan is activated.": "Mokestis taikomas kiekvieną kartą, kai suaktyvinamas šis planas.",
   "Feedback": "Atsiliepimai",
-  "Fetching": "Žavingas",
+  "Fetching": "Gaunama",
   "Fetching...": "Gaunama...",
   "Field": "Laukas",
   "Field is synchronised from the remote offering": "Laukas sinchronizuojamas iš nuotolinio pasiūlymo",
