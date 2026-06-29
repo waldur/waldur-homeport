@@ -137,7 +137,9 @@ export function flavorValidator(model, choice) {
   return model.image.min_ram > choice.ram;
 }
 
-export const formatAddressList = (row: OpenStackNestedPort) =>
+export const formatAddressList = (
+  row: Pick<OpenStackNestedPort, 'fixed_ips'>,
+) =>
   renderFieldOrDash(
     row.fixed_ips?.map((fip) => fip.ip_address).join(', ') || null,
   );

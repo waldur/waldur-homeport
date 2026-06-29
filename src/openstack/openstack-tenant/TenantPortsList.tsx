@@ -21,14 +21,17 @@ import { ToolbarButton } from '@/table/ToolbarButton';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { SetAllowedAddressPairsAction } from '../openstack-instance/SetAllowedAddressPairsAction';
+
 import { CreatePortAction } from './actions/CreatePortAction';
 import { getPortCategory } from './portCategories';
+import { OpenStackTenant } from './types';
 
 const TABLE_ID = 'openstack-ports';
 
-export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
-  resourceScope,
-}) => {
+export const TenantPortsList: FunctionComponent<{
+  resourceScope: OpenStackTenant;
+}> = ({ resourceScope }) => {
   const dispatch = useDispatch();
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
@@ -205,6 +208,7 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
           url={row.url}
           refetch={props.fetch}
           nestedResource
+          extraActions={[SetAllowedAddressPairsAction]}
         />
       )}
       hasQuery={true}

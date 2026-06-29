@@ -7,22 +7,26 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
+import type { AllowedAddressPairsPort } from './SetAllowedAddressPairsDialog';
+
 const SetAllowedAddressPairsDialog = lazyComponent(() =>
   import('./SetAllowedAddressPairsDialog').then((module) => ({
     default: module.SetAllowedAddressPairsDialog,
   })),
 );
 
-export const SetAllowedAddressPairsButton: FunctionComponent<{
-  instance: OpenStackInstance;
-  port;
-}> = ({ instance, port }) => {
+export const SetAllowedAddressPairsAction: FunctionComponent<{
+  resource: AllowedAddressPairsPort;
+  instance?: OpenStackInstance;
+  refetch?: () => void;
+}> = ({ resource, instance, refetch }) => {
   const { openDialog: openModal } = useModal();
   const openDialog = () =>
     openModal(SetAllowedAddressPairsDialog, {
       resolve: {
         instance,
-        port,
+        port: resource,
+        refetch,
       },
       size: 'lg',
     });
