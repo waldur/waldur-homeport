@@ -1,0 +1,135 @@
+import { CalendarBlankIcon } from '@phosphor-icons/react';
+import {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from 'react';
+import Flatpickr, {
+  DateTimePickerHandle,
+  DateTimePickerProps,
+} from 'react-flatpickr';
+
+import { translate } from '@/i18n';
+
+import { FormField } from './types';
+import { useFlatpickrTheme } from './useFlatpickrTheme';
+
+export interface DateTimeRangeHandle {
+  open(): void;
+}
+
+type DateTimeRangeFieldProps = FormField &
+  Pick<DateTimePickerProps, 'placeholder' | 'disabled'> & {
+    minDate?: Date | string;
+    minuteIncrement?: number;
+    dateFormat?: string;
+    /**
+     * Called while a range is being picked, after the first date is chosen but
+     * before the second. Lets the parent react to the in-progress start date
+     * without committing it to the controlled form value (which would feed back
+     * into Flatpickr and abort the range selection).
+     */
+    onPartialStartChange?: (start?: Date) => void;
+  };
+
+// Stable empty-value reference. Flatpickr re-applies its `value` prop (calling
+// setDate, which clears the in-progress selection) whenever the reference
+// changes, so an empty state must always be the same array instance.
+const EMPTY_VALUE: Date[] = [];
+
+/**
+ * Flatpickr-backed range picker that stores `[Date, Date]` in form state.
+ * Designed for selecting a maintenance window with date + time on a single control.
+ */
+export const DateTimeRangeField = forwardRef<
+  DateTimeRangeHandle,
+  DateTimeRangeFieldProps
+>(function DateTimeRangeField(props, ref) {
+  useFlatpickrTheme();
+
+  const { onChange, onBlur, value: inputValue } = props.input;
+  const { onPartialStartChange, minDate, minuteIncrement, dateFormat } = props;
+
+  const fpRef = useRef<DateTimePickerHandle>(null);
+  useImperativeHandle(ref, () => ({
+    open: () => fpRef.current?.flatpickr?.open(),
+  }));
+
+  const value = Array.isArray(inputValue)
+    ? (inputValue as Date[])
+    : EMPTY_VALUE;
+
+  // Memoize the options (including the onChange hook). react-flatpickr keys its
+  // create/destroy effect on the options object identity — a fresh object each
+  // render would destroy and recreate the Flatpickr instance, closing the
+  // calendar mid-selection. The onChange hook lives inside the options so the
+  // library does not mutate-and-grow it on every render.
+  const options = useMemo(
+    () => ({
+      mode: 'range' as const,
+      enableTime: true,
+      time_24hr: true,
+      minuteIncrement: minuteIncrement ?? 15,
+      dateFormat: dateFormat ?? 'Y-m-d H:i',
+      // Use a Flatpickr-managed display input. react-flatpickr renders the real
+      // (now hidden) input as React-controlled with `value.toString()`; without
+      // altInput a re-render would overwrite Flatpickr's formatted text with the
+      // raw Date array string. altInput keeps the formatted display intact.
+      altInput: true,
+      altFormat: dateFormat ?? 'Y-m-d H:i',
+      altInputClass: 'form-control',
+      // Grey out past dates by default; a maintenance window is never scheduled
+      // in the past. Callers can override via `minDate`.
+      minDate: minDate ?? 'today',
+      allowInput: false,
+      onChange: (dates: Date[]) => {
+        if (dates.length === 2) {
+          onChange([dates[0], dates[1]]);
+          onPartialStartChange?.(undefined);
+        } else if (dates.length === 1) {
+          // Intermediate selection: surface the start date for the parent's
+          // chip buttons, but do NOT commit it to the controlled value — that
+          // would change Flatpickr's `value` prop and reset the in-progress
+          // range pick.
+          onPartialStartChange?.(dates[0]);
+        } else {
+          onChange(undefined);
+          onPartialStartChange?.(undefined);
+        }
+      },
+    }),
+    [onChange, onPartialStartChange, minDate, minuteIncrement, dateFormat],
+  );
+
+  const handleBlur = useCallback(() => onBlur(), [onBlur]);
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <Flatpickr
+        ref={fpRef}
+        value={value}
+        options={options}
+        onBlur={handleBlur}
+        className="form-control"
+        placeholder={
+          props.placeholder ?? translate('Pick a start and end date/time...')
+        }
+        disabled={props.disabled}
+      />
+      <span
+        className="svg-icon svg-icon-2 svg-icon-gray-500"
+        style={{
+          position: 'absolute',
+          right: 12,
+          top: '50%',
+          transform: 'translateY(-50%)',
+          pointerEvents: 'none',
+        }}
+      >
+        <CalendarBlankIcon weight="bold" />
+      </span>
+    </div>
+  );
+});

@@ -25,10 +25,8 @@ export const MAINTENANCE_IMPACT_LEVEL = {
 export interface MaintenanceForm {
   template?: MaintenanceAnnouncementTemplate; // Temporary field to hold selected template
   service_provider?: ServiceProvider; // Optional provider chosen by staff when no provider context is available
-  scheduled_start_date: string; // 'yyyy-mm-dd';
-  scheduled_start_time: string; // 'hh:mm:ss';
-  scheduled_end_time: string;
-  scheduled_end_date: string;
+  /** Combined start/end as a tuple stored by the range-mode picker. */
+  scheduled_window: [Date, Date];
   name: string;
   maintenance_type: keyof typeof MAINTENANCE_TYPE;
   message: string;
