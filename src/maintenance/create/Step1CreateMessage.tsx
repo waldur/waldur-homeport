@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useState } from 'react';
-import { useForm, useFormState } from 'react-final-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 import {
   MaintenanceAnnouncementTemplate,
   maintenanceAnnouncementsTemplateList,
@@ -15,16 +15,17 @@ import {
   SelectGroup,
   StringGroup,
   TextGroup,
-  DateGroup,
   AsyncSelectGroup,
-  TimeGroup,
+  FormGroup,
 } from '@/form';
 import { translate } from '@/i18n';
 import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { MaintenanceForm } from '../types';
-import { getMaintenanceOfferingFormFields } from '../utils';
+import { getMaintenanceOfferingFormFields, validateWindow } from '../utils';
+
+import { MaintenanceWindowPicker } from './MaintenanceWindowPicker';
 
 const maintenanceTypeOptions = [
   { label: translate('Scheduled'), value: 1 },
@@ -192,49 +193,19 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
         label={translate('Message')}
         required
       />
-      {/* Dates - side by side */}
-      <div className="row">
-        <div className="col-sm-6">
-          <DateGroup
-            name="scheduled_start_date"
-            placeholder={translate('DD/MM/YYYY')}
-            dateFormat="Y-m-d"
-            validate={required}
-            label={translate('Start date')}
-            required
-          />
-        </div>
-        <div className="col-sm-6">
-          <TimeGroup
-            name="scheduled_start_time"
-            label={translate('Start time')}
-            placeholder={translate('HH:MM')}
-            validate={required}
-            required
-          />
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-sm-6">
-          <DateGroup
-            name="scheduled_end_date"
-            placeholder={translate('DD/MM/YYYY')}
-            dateFormat="Y-m-d"
-            validate={required}
-            label={translate('End date')}
-            required
-          />
-        </div>
-        <div className="col-sm-6">
-          <TimeGroup
-            name="scheduled_end_time"
-            label={translate('End time')}
-            placeholder={translate('HH:mm')}
-            validate={required}
-            required
-          />
-        </div>
-      </div>
+
+      <FormGroup label={translate('Maintenance window')} required>
+        <Field
+          name="scheduled_window"
+          component={MaintenanceWindowPicker}
+          validate={(value) =>
+            validateWindow(value, {
+              maintenanceUuid: props.data?.maintenanceUuid,
+            })
+          }
+        />
+      </FormGroup>
+
       <StringGroup
         name="external_reference_url"
         placeholder={translate(

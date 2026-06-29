@@ -18,7 +18,6 @@ import { SelectField } from './select/SelectField';
 import { SliderNumberField } from './SliderNumberField';
 import { StringField } from './StringField';
 import { TextField } from './TextField';
-import { TimeField } from './TimeField';
 import { TimezoneField } from './TimezoneField';
 import { withFormGroup } from './withFormGroup';
 import { YearField } from './YearField';
@@ -51,7 +50,6 @@ export const RadioGroup = withFormGroup(AwesomeRadioButton, {
 });
 export const DateGroup = withFormGroup(DateField);
 export const DateTimeGroup = withFormGroup(DateTimeField);
-export const TimeGroup = withFormGroup(TimeField);
 export const SliderNumberGroup = withFormGroup(SliderNumberField);
 export const CountrySelectGroup = withFormGroup(CountrySelectField);
 export const MarkdownGroup = withFormGroup(MarkdownEditor);

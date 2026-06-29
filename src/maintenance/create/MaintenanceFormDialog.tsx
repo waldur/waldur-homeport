@@ -10,7 +10,6 @@ import {
   maintenanceAnnouncementOfferingsPartialUpdate,
 } from 'waldur-js-client';
 
-import { parseDate } from '@/core/dateUtils';
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -53,22 +52,13 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
 ) => {
   const submitMutation = useManagedMutation<any, any, MaintenanceForm>({
     mutationFn: async (formData) => {
-      const startTime = parseDate(formData.scheduled_start_time);
-      const startDate = parseDate(formData.scheduled_start_date).set({
-        hour: startTime.hour,
-        minute: startTime.minute,
-      });
-      const endTime = parseDate(formData.scheduled_end_time);
-      const endDate = parseDate(formData.scheduled_end_date).set({
-        hour: endTime.hour,
-        minute: endTime.minute,
-      });
+      const [startDate, endDate] = formData.scheduled_window;
 
       const body: MaintenanceAnnouncementRequest = {
         name: formData.name,
         message: formData.message,
-        scheduled_start: startDate.toISO(),
-        scheduled_end: endDate.toISO(),
+        scheduled_start: startDate.toISOString(),
+        scheduled_end: endDate.toISOString(),
         service_provider:
           formData.service_provider?.url ?? props.resolve.provider?.url,
         maintenance_type: formData.maintenance_type,
@@ -148,7 +138,10 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
         'This will automatically create a broadcast message and portal announcement when scheduled.',
       )}
       initialValues={props.initialValues}
-      data={{ provider: props.resolve.provider }}
+      data={{
+        provider: props.resolve.provider,
+        maintenanceUuid: props.resolve.maintenanceUuid,
+      }}
       actions={({ values }) => (
         <MaintenanceSaveAsDropdown
           formComponent={MaintenanceFormDialog}

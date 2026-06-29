@@ -1,7 +1,6 @@
 import { FC, useCallback } from 'react';
 import { MaintenanceAnnouncement, ServiceProvider } from 'waldur-js-client';
 
-import { parseDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
@@ -31,11 +30,13 @@ export const MaintenanceEditAction: FC<MaintenanceEditActionProps> = ({
 }) => {
   const { openDialog } = useModal();
   const callback = useCallback(() => {
-    const startDate = parseDate(row.scheduled_start);
-    const endDate = parseDate(row.scheduled_end);
-
     const { impact_level, impact_description } =
       getMaintenanceOfferingFormFields(row.affected_offerings);
+
+    const scheduled_window: [Date, Date] | undefined =
+      row.scheduled_start && row.scheduled_end
+        ? [new Date(row.scheduled_start), new Date(row.scheduled_end)]
+        : undefined;
 
     openDialog(MaintenanceFormDialog, {
       resolve: { provider, refetch, maintenanceUuid: row.uuid },
@@ -47,14 +48,7 @@ export const MaintenanceEditAction: FC<MaintenanceEditActionProps> = ({
         maintenance_type: row.maintenance_type,
         external_reference_url: row.external_reference_url,
         internal_notes: row.internal_notes,
-        scheduled_start_date: row.scheduled_start
-          ? startDate.toISODate()
-          : null,
-        scheduled_start_time: row.scheduled_start
-          ? startDate.toISOTime()
-          : null,
-        scheduled_end_date: row.scheduled_end ? endDate.toISODate() : null,
-        scheduled_end_time: row.scheduled_end ? endDate.toISOTime() : null,
+        scheduled_window,
         affected_offerings: row.affected_offerings,
         impact_description,
         impact_level,
