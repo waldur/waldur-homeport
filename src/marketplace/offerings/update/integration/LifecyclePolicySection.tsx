@@ -266,6 +266,15 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             description={translate(
               'Template for auto-generated resource slugs, overriding the default 10-character slugified name. Available variables: {customer_slug}, {project_slug}, {project_name}, {offering_slug}, {year}, {month}, {counter}, {counter_padded}.',
             )}
+            warnTooltip={
+              props.offering.plugin_options?.resource_slug_template &&
+              props.offering.plugin_options?.account_name_generation_policy ===
+                'project_slug'
+                ? translate(
+                    'Warning: the "Project slug" account name generation policy (User management) ignores this slug template and appends its own counter to the backend ID. Clear that policy to use the unique slug directly.',
+                  )
+                : null
+            }
             parse={(value) => value ?? null}
           />
           <NumberEditField

@@ -115,6 +115,17 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
               simpleValue
               isClearable
               disabled={!canCreateUser}
+              warnTooltip={
+                pluginOptions?.account_name_generation_policy ===
+                  'project_slug' && pluginOptions?.resource_slug_template
+                  ? translate(
+                      'Warning: this policy makes the site agent derive the backend account name from the project slug and append its own counter, ignoring the configured resource slug template ("{template}"). Leave it unset to use the unique resource slug directly.',
+                      {
+                        template: pluginOptions.resource_slug_template,
+                      },
+                    )
+                  : null
+              }
               renderValue={(value) =>
                 ACCOUNT_NAME_GENERATION_POLICY_OPTIONS.find(
                   (op) => op.value === value,
