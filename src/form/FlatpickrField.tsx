@@ -54,15 +54,21 @@ const BaseFlatpickrField: FC<BaseFlatpickrFieldProps> = ({
               : value
             : options?.defaultDate
         }
-        onChange={(dates) =>
+        onChange={(dates) => {
+          const selected = dates[0];
+          if (!(selected instanceof Date)) {
+            onChange?.(selected ?? null);
+            return;
+          }
+          const dt = DateTime.fromJSDate(selected);
           onChange?.(
-            dates[0] instanceof Date
-              ? onlyTime
-                ? DateTime.fromJSDate(dates[0]).toISOTime()
-                : DateTime.fromJSDate(dates[0]).toISODate()
-              : dates[0],
-          )
-        }
+            onlyTime
+              ? dt.toISOTime()
+              : options?.enableTime
+                ? dt.toISO()
+                : dt.toISODate(),
+          );
+        }}
         className={classNames('form-control', solid && 'form-control-solid')}
         placeholder={placeholder}
         options={options}

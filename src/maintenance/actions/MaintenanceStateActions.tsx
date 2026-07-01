@@ -1,16 +1,12 @@
 import {
-  CheckCircleIcon,
   ClockCountdownIcon,
   ClockCounterClockwiseIcon,
   PlayCircleIcon,
-  XCircleIcon,
 } from '@phosphor-icons/react';
 import { Icon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import {
   MaintenanceAnnouncement,
-  maintenanceAnnouncementsCancelMaintenance,
-  maintenanceAnnouncementsCompleteMaintenance,
   maintenanceAnnouncementsSchedule,
   maintenanceAnnouncementsStartMaintenance,
   maintenanceAnnouncementsUnschedule,
@@ -19,6 +15,10 @@ import {
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
+
+import { MaintenanceCancelAction } from './MaintenanceCancelAction';
+import { MaintenanceEndEarlyAction } from './MaintenanceEndEarlyAction';
+import { MaintenanceExtendAction } from './MaintenanceExtendAction';
 
 interface MaintenanceStateActionProps {
   row: MaintenanceAnnouncement;
@@ -32,15 +32,9 @@ interface MaintenanceAction {
   api: (params: { path: { uuid: string } }) => Promise<any>;
 }
 
-const getMaintenanceStateActions = (
+const getTransitionActions = (
   row: MaintenanceAnnouncement,
 ): MaintenanceAction[] => {
-  const cancelAction: MaintenanceAction = {
-    key: 'cancel',
-    label: translate('Cancel'),
-    icon: XCircleIcon,
-    api: maintenanceAnnouncementsCancelMaintenance,
-  };
   switch (row.state) {
     case 'Draft':
       return [
@@ -50,7 +44,6 @@ const getMaintenanceStateActions = (
           icon: ClockCountdownIcon,
           api: maintenanceAnnouncementsSchedule,
         },
-        cancelAction,
       ];
     case 'Scheduled':
       return [
@@ -62,21 +55,10 @@ const getMaintenanceStateActions = (
         },
         {
           key: 'unschedule',
-          label: translate('Unschedule'),
+          label: translate('Move back to draft'),
           icon: ClockCounterClockwiseIcon,
           api: maintenanceAnnouncementsUnschedule,
         },
-        cancelAction,
-      ];
-    case 'In progress':
-      return [
-        {
-          key: 'complete',
-          label: translate('Set as completed'),
-          icon: CheckCircleIcon,
-          api: maintenanceAnnouncementsCompleteMaintenance,
-        },
-        cancelAction,
       ];
     default:
       return [];
@@ -121,13 +103,17 @@ export const MaintenanceStateActions: FC<MaintenanceStateActionProps> = ({
   row,
   refetch,
 }) => {
-  const actions = getMaintenanceStateActions(row);
+  const transitions = getTransitionActions(row);
+  const isInProgress = row.state === 'In progress';
+  const showCancel = row.state === 'Scheduled' || row.state === 'In progress';
 
-  if (!actions.length) return null;
+  if (transitions.length === 0 && !isInProgress && !showCancel) {
+    return null;
+  }
 
   return (
     <>
-      {actions.map((action) => (
+      {transitions.map((action) => (
         <MaintenanceActionItem
           key={action.key}
           action={action}
@@ -135,6 +121,13 @@ export const MaintenanceStateActions: FC<MaintenanceStateActionProps> = ({
           refetch={refetch}
         />
       ))}
+      {isInProgress && (
+        <>
+          <MaintenanceExtendAction row={row} refetch={refetch} />
+          <MaintenanceEndEarlyAction row={row} refetch={refetch} />
+        </>
+      )}
+      {showCancel && <MaintenanceCancelAction row={row} refetch={refetch} />}
     </>
   );
 };

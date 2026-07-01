@@ -141,4 +141,28 @@ describe('FlatpickrField — DOM prop leak regression', () => {
     seen.onChange([new Date(2026, 5, 15, 12, 0, 0)]);
     expect(onChange).toHaveBeenCalledWith('2026-06-15');
   });
+
+  it('preserves the selected time for datetime fields (enableTime, calendar shown)', () => {
+    const onChange = vi.fn();
+    render(
+      <FlatpickrField
+        input={
+          {
+            name: 'scheduled_end',
+            value: '',
+            onChange,
+            onBlur: () => undefined,
+            onFocus: () => undefined,
+          } as any
+        }
+        options={{ dateFormat: 'Y-m-d H:i', enableTime: true }}
+      />,
+    );
+    const seen = flatpickrPropsLog[flatpickrPropsLog.length - 1];
+    expect(seen).toBeDefined();
+    seen.onChange([new Date(2026, 5, 15, 8, 30, 0)]);
+    // Full ISO string retaining hours and minutes, not a date-only value.
+    const [emitted] = onChange.mock.calls[0];
+    expect(emitted).toContain('2026-06-15T08:30');
+  });
 });

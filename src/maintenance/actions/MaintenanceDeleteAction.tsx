@@ -19,6 +19,7 @@ export const MaintenanceDeleteAction = ({ row, refetch }) => {
       options: { forDeletion: true },
     },
   });
+  if (row.state !== 'Draft') return null;
   return (
     <RemovalActionItem
       title={translate('Delete')}
