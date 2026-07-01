@@ -1,10 +1,10 @@
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
+import { MaintenanceCancelAction } from './MaintenanceCancelAction';
 import { MaintenanceDeleteAction } from './MaintenanceDeleteAction';
 import { MaintenanceEditAction } from './MaintenanceEditAction';
 import { MaintenanceHistoryLogAction } from './MaintenanceHistoryLogAction';
 import { MaintenanceStateActions } from './MaintenanceStateActions';
-import { MaintenanceStopAction } from './MaintenanceStopAction';
 import { MaintenanceViewAction } from './MaintenanceViewAction';
 
 export const MaintenanceRowActions = ({ provider, row, fetch }) => {
@@ -17,8 +17,8 @@ export const MaintenanceRowActions = ({ provider, row, fetch }) => {
         provider
           ? [
               // Service provider actions
-              MaintenanceEditAction,
               MaintenanceViewAction,
+              MaintenanceEditAction,
               MaintenanceStateActions,
               MaintenanceDeleteAction,
             ].filter(Boolean)
@@ -27,7 +27,7 @@ export const MaintenanceRowActions = ({ provider, row, fetch }) => {
               MaintenanceViewAction,
               MaintenanceEditAction,
               MaintenanceHistoryLogAction,
-              MaintenanceStopAction,
+              MaintenanceCancelAction,
             ].filter(Boolean)
       }
     />
