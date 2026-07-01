@@ -1,5 +1,5 @@
+import classNames from 'classnames';
 import { FC, useMemo, useState } from 'react';
-import { Nav } from 'react-bootstrap';
 
 import { MediumIconButton } from '@/core/buttons/IconButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -11,12 +11,8 @@ import { NoResult } from '@/navigation/header/search/NoResult';
 import { RoomCallState } from './call/useAllRoomCallStates';
 import { MatrixRoomListItem } from './MatrixRoomListItem';
 import { MatrixRoomRailItem } from './MatrixRoomRailItem';
-import {
-  buildRoomSections,
-  ChatRoomSummary,
-  RoomFilter,
-  RoomSection,
-} from './roomSections';
+import { PreviewKind } from './previewClassifier';
+import { buildRoomSections, ChatRoomSummary, RoomFilter } from './roomSections';
 
 interface EnrichedRoom {
   uuid: string;
@@ -28,6 +24,9 @@ interface EnrichedRoom {
   mentionCount: number;
   isMuted: boolean;
   preview: string;
+  previewKind: PreviewKind;
+  previewFileName?: string;
+  previewFileSize?: number;
   previewSender: string;
   lastActivity: number;
   members_count?: number;
@@ -42,17 +41,6 @@ interface MatrixRoomListProps {
   collapsed?: boolean;
   onToggleCollapse?: () => void;
 }
-
-const sectionLabel = (key: RoomSection['key']): string => {
-  switch (key) {
-    case 'unread':
-      return translate('Unread');
-    case 'recent':
-      return translate('Recent');
-    default:
-      return translate('Results');
-  }
-};
 
 export const MatrixRoomList: FC<MatrixRoomListProps> = ({
   rooms,
@@ -88,41 +76,40 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
     [activeRooms],
   );
 
-  const sections = useMemo(
-    () => buildRoomSections(summaries, filter, search),
+  // Flat, unread-first then most-recent order. The design shows a single list
+  // with no section headers, so the section grouping is collapsed here while
+  // `buildRoomSections` keeps the unread-before-recent ordering intact.
+  const visibleRooms = useMemo(
+    () => buildRoomSections(summaries, filter, search).flatMap((s) => s.rooms),
     [summaries, filter, search],
   );
 
-  // Flattened, unread-first room order for the collapsed rail — same
-  // ordering as the expanded list so collapse/expand never reshuffles.
+  // Same ordering as the expanded list (default filter, no search) so
+  // collapse/expand never reshuffles the rail.
   const orderedRooms = useMemo(
     () => buildRoomSections(summaries, 'all', '').flatMap((s) => s.rooms),
     [summaries],
   );
 
-  // Identical markup to the AI history sidebar's toggle — same icon, same
-  // rotation class — so the two sidebars render the button identically.
-  const toggleButton = onToggleCollapse ? (
-    <MediumIconButton
-      iconNode={
-        <span className={collapsed ? 'aui-icon-rotate-180' : ''}>
-          <SidebarToggleGraphic />
-        </span>
-      }
-      tooltip={
-        collapsed ? translate('Expand sidebar') : translate('Collapse sidebar')
-      }
-      onClick={onToggleCollapse}
-      variant="tertiary-ghost"
-    />
-  ) : null;
-
   if (collapsed) {
     return (
       <div className="team-chat tc-sidebar tc-sidebar--collapsed">
-        <div className="tc-sidebar-top">
-          <div className="aui-history-header">{toggleButton}</div>
-        </div>
+        {/* The collapse control is hidden in the design, but a persisted
+            collapsed state still needs an escape back to the full list. */}
+        {onToggleCollapse && (
+          <div className="tc-sidebar-top">
+            <MediumIconButton
+              iconNode={
+                <span className="aui-icon-rotate-180">
+                  <SidebarToggleGraphic />
+                </span>
+              }
+              tooltip={translate('Expand sidebar')}
+              onClick={onToggleCollapse}
+              variant="tertiary-ghost"
+            />
+          </div>
+        )}
         <div className="tc-rail">
           {orderedRooms.map((room) => (
             <MatrixRoomRailItem
@@ -152,42 +139,33 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
   }
 
   const hasRooms = activeRooms.length > 0;
-  const isEmpty = sections.length === 0;
+  const isEmpty = visibleRooms.length === 0;
   const isFiltered = filter !== 'all' || search.trim().length > 0;
 
-  const tab = (key: RoomFilter, label: string) => (
-    <Nav.Item className="flex-fill text-center">
-      <Nav.Link
-        as="button"
-        active={filter === key}
-        onClick={() => setFilter(key)}
-        className="w-100"
-      >
-        {label}
-      </Nav.Link>
-    </Nav.Item>
+  const segment = (key: RoomFilter, label: string) => (
+    <button
+      type="button"
+      className={classNames('tc-segment-item', { active: filter === key })}
+      onClick={() => setFilter(key)}
+    >
+      {label}
+    </button>
   );
 
   return (
     <div className="team-chat tc-sidebar">
       <div className="tc-sidebar-top">
-        <div className="aui-history-header">
-          {toggleButton}
-          <span className="aui-history-header-title">
-            {translate('History')}
-          </span>
-        </div>
         <FilterBox
           type="search"
-          placeholder={translate('Search chats...')}
+          placeholder={translate('Search...')}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Nav variant="tabs" className="nav-line-tabs w-100">
-          {tab('all', translate('All'))}
-          {tab('unread', translate('Unread'))}
-          {tab('mentions', translate('Mentions'))}
-        </Nav>
+        <div className="tc-segment" role="tablist">
+          {segment('all', translate('All'))}
+          {segment('unread', translate('Unread'))}
+          {segment('mentions', translate('Mentions'))}
+        </div>
       </div>
 
       {isEmpty ? (
@@ -215,35 +193,31 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
         </div>
       ) : (
         <div className="tc-list">
-          {sections.map((section) => (
-            <div key={section.key} className="tc-group">
-              <div className="tc-group-label fw-bold fs-7 text-muted">
-                {sectionLabel(section.key)}
-              </div>
-              {section.rooms.map((summary) => {
-                const room = byUuid.get(summary.uuid);
-                if (!room) return null;
-                return (
-                  <MatrixRoomListItem
-                    key={summary.uuid}
-                    uuid={summary.uuid}
-                    name={summary.name}
-                    scopeName={room.scope_name}
-                    preview={room.preview}
-                    previewSender={room.previewSender}
-                    unreadCount={room.unreadCount}
-                    mentionCount={room.mentionCount}
-                    isMuted={room.isMuted}
-                    membersCount={room.members_count}
-                    lastActivity={room.lastActivity}
-                    activeCall={room.activeCall}
-                    active={summary.uuid === activeRoomUuid}
-                    onClick={() => onSelect(summary.uuid)}
-                  />
-                );
-              })}
-            </div>
-          ))}
+          {visibleRooms.map((summary) => {
+            const room = byUuid.get(summary.uuid);
+            if (!room) return null;
+            return (
+              <MatrixRoomListItem
+                key={summary.uuid}
+                uuid={summary.uuid}
+                name={summary.name}
+                scopeName={room.scope_name}
+                preview={room.preview}
+                previewKind={room.previewKind}
+                previewFileName={room.previewFileName}
+                previewFileSize={room.previewFileSize}
+                previewSender={room.previewSender}
+                unreadCount={room.unreadCount}
+                mentionCount={room.mentionCount}
+                isMuted={room.isMuted}
+                membersCount={room.members_count}
+                lastActivity={room.lastActivity}
+                activeCall={room.activeCall}
+                active={summary.uuid === activeRoomUuid}
+                onClick={() => onSelect(summary.uuid)}
+              />
+            );
+          })}
         </div>
       )}
     </div>

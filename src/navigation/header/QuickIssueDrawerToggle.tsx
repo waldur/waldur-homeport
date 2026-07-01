@@ -1,26 +1,26 @@
 import { ChatsCircleIcon } from '@phosphor-icons/react';
 import React from 'react';
 
-import { lazyComponent } from '@/core/lazyComponent';
 import { useDrawer } from '@/drawer/actions';
+import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
+import { isDrawerOpenWithClass } from '@/drawer/utils';
 import { translate } from '@/i18n';
-
-import './quick-issue-drawer/QuickIssueContainer.scss';
-
-const QuickIssueContainer = lazyComponent(() =>
-  import('./quick-issue-drawer/QuickIssueContainer').then((module) => ({
-    default: module.QuickIssueContainer,
-  })),
-);
+import { useMatrixTotalUnread } from '@/matrix/chat/useMatrixTotalUnread';
+import { isMatrixChatEnabled } from '@/matrix/utils';
+import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
+import { openSupportDrawer } from '@/support/openSupportDrawer';
 
 export const QuickIssueDrawerToggle: React.FC = () => {
-  const { openDrawer } = useDrawer();
+  const { openDrawer, closeDrawer } = useDrawer();
+  const matrixUnread = useMatrixTotalUnread();
+  const showChatBullet = isMatrixChatEnabled() && matrixUnread > 0;
 
-  const handleOpenDrawer = () => {
-    openDrawer(QuickIssueContainer, {
-      title: translate('Support requests'),
-      bodyClassName: 'quick-issue-drawer-body',
-    });
+  const toggleSupportDrawer = () => {
+    if (isDrawerOpenWithClass(DRAWER_SHELL_CLASS.support)) {
+      closeDrawer();
+    } else {
+      openSupportDrawer(openDrawer);
+    }
   };
 
   return (
@@ -28,15 +28,14 @@ export const QuickIssueDrawerToggle: React.FC = () => {
       <button
         id="quick-issue-toggle"
         type="button"
-        className="btn-nav-item"
-        onClick={handleOpenDrawer}
+        className="position-relative btn-nav-item"
+        onClick={toggleSupportDrawer}
+        title={translate('Support')}
       >
-        <span
-          className="svg-icon svg-icon-2"
-          title={translate('Support requests')}
-        >
+        <span className="svg-icon svg-icon-2">
           <ChatsCircleIcon weight="bold" />
         </span>
+        {showChatBullet && <HeaderButtonBullet />}
       </button>
     </div>
   );

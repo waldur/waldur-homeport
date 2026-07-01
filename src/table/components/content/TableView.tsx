@@ -79,6 +79,7 @@ export function TableView() {
         isRowExpandable={config.isRowExpandable}
         expandableRowClassName={display.expandableRowClassName}
         rowActions={slots.rowActions}
+        onRowClick={actions.onRowClick}
         enableMultiSelect={config.enableMultiSelect}
         selectRow={actions.selectRow}
         selectedRows={selectedRows}

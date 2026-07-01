@@ -1,8 +1,10 @@
+import { ChecksIcon, FileIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import Markdown from 'markdown-to-jsx';
 import { FC, Fragment, useEffect, useMemo, useState } from 'react';
 
 import Avatar from '@/core/Avatar';
+import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
 import { getChatAvatarColor } from './chatColors';
@@ -11,6 +13,7 @@ import { MessageReactionToolbar } from './MessageReactionToolbar';
 import { MatrixChatMessage } from './types';
 import { useMatrixClient } from './useMatrixClient';
 import { formatTime, sanitizeName } from './utils';
+import { VoiceMessagePlayer } from './voice/VoiceMessagePlayer';
 
 /**
  * Fetch media via the Matrix client's authenticated endpoint and return a
@@ -208,6 +211,8 @@ interface MatrixMessageItemProps {
   message: MatrixChatMessage;
   isOwn: boolean;
   senderName: string;
+  /** Live Waldur profile image URL for the sender; falls back to initials. */
+  senderImage?: string;
   continuation?: boolean;
   memberNames?: Map<string, string>;
   currentUserId?: string | null;
@@ -277,6 +282,17 @@ const MediaContent: FC<{
         </video>
       );
     case 'm.audio':
+      // Voice notes (MSC3245) — and any m.audio carrying an MSC1767 waveform —
+      // render the waveform player; everything else falls back to native audio.
+      if (message.isVoice || (message.waveform?.length ?? 0) > 0) {
+        return (
+          <VoiceMessagePlayer
+            src={httpUrl}
+            waveform={message.waveform}
+            durationMs={message.durationMs}
+          />
+        );
+      }
       return (
         <div>
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
@@ -294,15 +310,19 @@ const MediaContent: FC<{
           href={httpUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="d-flex align-items-center gap-2 text-decoration-none"
+          className="tc-file-card"
         >
-          <i className="fa fa-file-o" />
-          <span>{message.body}</span>
-          {message.info?.size && (
-            <span className="text-muted" style={{ fontSize: '0.75rem' }}>
-              ({(message.info.size / 1024).toFixed(0)} KB)
-            </span>
-          )}
+          <span className="tc-file-card__icon">
+            <FileIcon weight="regular" />
+          </span>
+          <span className="tc-file-card__meta">
+            <span className="tc-file-card__name">{message.body}</span>
+            {message.info?.size && (
+              <span className="tc-file-card__size">
+                {formatFilesize(message.info.size, 'B')}
+              </span>
+            )}
+          </span>
         </a>
       );
     default:
@@ -321,21 +341,28 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
   message,
   isOwn,
   senderName,
+  senderImage,
   continuation = false,
   memberNames,
   currentUserId,
 }) => {
-  const color = getChatAvatarColor(message.sender);
   const cleanName = sanitizeName(senderName);
-  const avatar = continuation ? (
-    <span />
-  ) : (
-    <Avatar
-      name={cleanName}
-      size={32}
-      labelClassName={`bg-light-${color} text-${color}`}
-    />
-  );
+  // Own messages are right-aligned with no avatar (the design distinguishes them
+  // by the green bubble + read receipt), so the avatar column is built lazily for
+  // other people's messages only.
+  const renderAvatar = () => {
+    if (continuation) return <span />;
+    const color = getChatAvatarColor(message.sender);
+    return (
+      <Avatar
+        name={cleanName}
+        src={senderImage}
+        size={40}
+        circle
+        labelClassName={`bg-light-${color} text-${color}`}
+      />
+    );
+  };
   const mentionsMe =
     !!currentUserId && !!message.mentionedUserIds?.includes(currentUserId);
 
@@ -348,12 +375,19 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
         'mentions-me': mentionsMe,
       })}
     >
-      {!isOwn && avatar}
+      {!isOwn && renderAvatar()}
       <div className="tc-msg-body">
         {!continuation && (
           <div className="tc-msg-who">
             {isOwn ? translate('You') : cleanName}
             <span className="tc-msg-when">{formatTime(message.timestamp)}</span>
+            {isOwn && (
+              <ChecksIcon
+                className="tc-msg-receipt"
+                weight="bold"
+                aria-label={translate('Sent')}
+              />
+            )}
           </div>
         )}
         <div
@@ -381,7 +415,6 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
           reactors={message.reactors ?? {}}
         />
       </div>
-      {isOwn && avatar}
     </div>
   );
 };

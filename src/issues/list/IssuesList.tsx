@@ -32,12 +32,21 @@ interface OwnProps {
   scopeType?: string;
   filter?: Record<string, any>;
   standalone?: boolean;
+  /**
+   * When set, clicking a request's key selects it in place (calling this
+   * callback) instead of navigating to the detail route. Used by the expanded
+   * Helpdesk drawer's two-pane layout, where the detail renders in the right
+   * pane without a route change.
+   */
+  onIssueSelect?: (issue: Issue) => void;
+  /** UUID of the currently selected request, highlighted in the list. */
+  selectedIssueUuid?: string;
 }
 
 export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
   ...props
 }) => {
-  const { hiddenColumns = [], standalone = true } = props;
+  const { hiddenColumns = [], standalone = true, onIssueSelect } = props;
   const user = useUser();
   const supportOrStaff = user?.is_staff || user?.is_support || false;
 
@@ -57,9 +66,14 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
       {
         title: translate('Key'),
         orderField: 'key',
-        render: ({ row }) => (
-          <IssueLinkField label={renderFieldOrDash(row.key)} row={row} />
-        ),
+        // In select (two-pane) mode the whole row selects, so the key is plain
+        // text — a routing link would navigate away instead of selecting.
+        render: ({ row }) =>
+          onIssueSelect ? (
+            renderFieldOrDash(row.key)
+          ) : (
+            <IssueLinkField label={renderFieldOrDash(row.key)} row={row} />
+          ),
 
         export: (row) => renderFieldOrDash(row.key),
         exportKeys: ['key'],
@@ -158,13 +172,24 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
       });
     }
     return columns;
-  }, [hiddenColumns, supportOrStaff]);
+  }, [hiddenColumns, supportOrStaff, onIssueSelect]);
+
+  // Don't leak the two-pane-only props onto the Table/DOM via the {...props}
+  // spread below; selection is expressed through columns and rowClass instead.
+  const {
+    onIssueSelect: _omitSelect,
+    selectedIssueUuid,
+    ...tablePassthrough
+  } = props;
 
   return (
     <Table
       {...tableProps}
       formId={SupportIssuesFilterFormId}
-      filters={props.filter ? undefined : <IssuesFilter />}
+      // The expanded two-pane Helpdesk uses a minimal toolbar (search + Export
+      // + Create only), so the filter menu — which doesn't fit the narrow
+      // master pane — is dropped in select mode.
+      filters={props.filter || onIssueSelect ? undefined : <IssuesFilter />}
       columns={columns}
       title={translate('Support requests')}
       verboseName={translate('support requests')}
@@ -182,10 +207,27 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
           />
         )
       }
-      expandableRow={({ row }) => (
-        <IssuesListExpandableRow row={row} supportOrStaff={supportOrStaff} />
-      )}
-      {...props}
+      onRowClick={onIssueSelect}
+      hoverable={Boolean(onIssueSelect)}
+      // In select (two-pane) mode a row click selects the request into the
+      // right pane, so the inline expandable row is suppressed — otherwise
+      // TableBody's row-click both selects AND toggles the inline expand.
+      expandableRow={
+        onIssueSelect
+          ? undefined
+          : ({ row }) => (
+              <IssuesListExpandableRow
+                row={row}
+                supportOrStaff={supportOrStaff}
+              />
+            )
+      }
+      {...tablePassthrough}
+      rowClass={({ row }) =>
+        selectedIssueUuid && row.uuid === selectedIssueUuid
+          ? 'issues-list-row-selected'
+          : ''
+      }
     />
   );
 };

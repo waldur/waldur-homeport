@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
+import { useDrawerShellClass } from '@/drawer/useDrawerShellClass';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -21,6 +23,7 @@ const EmptyPendingItemsPlaceholder = () => {
 };
 
 export const PendingConfirmationContainer: React.FC<OwnProps> = (props) => {
+  useDrawerShellClass(DRAWER_SHELL_CLASS.confirmation);
   const showConsumerOrders = !isFeatureVisible(
     MarketplaceFeatures.conceal_pending_consumer_orders,
   );

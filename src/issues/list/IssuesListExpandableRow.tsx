@@ -70,14 +70,14 @@ export const IssuesListExpandableRow: FunctionComponent<{
       </FieldGrid>
       <FieldGrid>
         <GridField label={translate('Service type')}>
-          {renderFieldOrDash(row.project_name)}
+          {renderFieldOrDash(row.resource_type)}
         </GridField>
         <GridField label={translate('Created')}>
-          {renderFieldOrDash(row.resource_type)}
+          {formatDate(row.created)}
         </GridField>
         {supportOrStaff && (
           <GridField label={translate('Assigned to')}>
-            {formatDate(row.created)}
+            {renderFieldOrDash(row.assignee_name)}
           </GridField>
         )}
         <GridField label={translate('Type')}>

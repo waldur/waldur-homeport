@@ -36,6 +36,7 @@ interface TableBodyProps extends Pick<
   | 'expandableRow'
   | 'expandableRowClassName'
   | 'rowActions'
+  | 'onRowClick'
   | 'enableMultiSelect'
   | 'selectRow'
   | 'selectedRows'
@@ -562,6 +563,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     expandableRow,
     expandableRowClassName,
     rowActions,
+    onRowClick: onRowClickProp,
     enableMultiSelect,
     selectRow,
     selectedRows,
@@ -588,10 +590,13 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
 
     const onRowClick = useCallback(
       (row, index: number) => {
+        // Opt-in row-click handler (e.g. master/detail selection) fires first;
+        // the inline expand toggle only runs when an expandable row is set.
+        onRowClickProp?.(row);
         if (!expandableRow) return;
         toggleRow(getId(row, index));
       },
-      [expandableRow, toggleRow],
+      [onRowClickProp, expandableRow, toggleRow],
     );
 
     const onChangeField = useCallback(

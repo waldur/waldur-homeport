@@ -1,0 +1,1236 @@
+// Matrix team chat: room list, conversation, composer, voice.
+
+.team-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: $bg-primary;
+  color: $text-primary;
+  font-family: $font-family-sans-serif;
+
+  // $card-px is the drawer header + tab strip inset, so the search box,
+  // segments and rows line up with the "Support" title. The extra bottom
+  // padding gives the segment group breathing room before the first row.
+  .tc-sidebar-top {
+    display: flex;
+    flex-direction: column;
+    gap: 1.23rem;
+    padding: 1.23rem $card-px 0.923rem;
+  }
+
+  // All / Unread / Mentions room filter: a button group whose neighbours
+  // collapse their borders into single dividers so it reads as one pill.
+  .tc-segment {
+    align-self: flex-start;
+    display: inline-flex;
+    // Figma Shadow/xs - $box-shadow-xs is too diffuse and reads as a glitch.
+    filter: drop-shadow(0 1px 2px rgba($gray-900, 0.05));
+  }
+
+  .tc-segment-item {
+    padding: 0.769rem 1.23rem;
+    border: 1px solid $border-primary;
+    background: $bg-primary;
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    font-weight: 500;
+    line-height: 1.4;
+    cursor: pointer;
+
+    & + & {
+      margin-left: -1px;
+    }
+
+    &:first-child {
+      border-radius: $border-radius 0 0 $border-radius;
+    }
+
+    &:last-child {
+      border-radius: 0 $border-radius $border-radius 0;
+    }
+
+    &:hover:not(.active) {
+      background: $bg-secondary;
+    }
+
+    &.active {
+      position: relative;
+      z-index: 1;
+      background: $bg-tertiary;
+    }
+  }
+
+  .tc-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-bottom: 0.615rem;
+  }
+
+  .tc-row {
+    display: grid;
+    // Avatar column mirrors the Avatar component's px size prop.
+    grid-template-columns: 48px 1fr;
+    gap: 0.923rem;
+    width: 100%;
+    align-items: center;
+    padding: 0.923rem $card-px;
+    border: 0;
+    background: transparent;
+    text-align: start;
+
+    &:hover {
+      background: $bg-secondary;
+    }
+
+    &.active {
+      background: $bg-secondary;
+    }
+  }
+
+  .tc-row-avatar {
+    place-self: center;
+    width: 48px;
+    height: 48px;
+
+    // symbol-48px is not a generated Metronic size, so the label would fall back
+    // to its 50px default and distort the circle. Pin it square.
+    .symbol,
+    .symbol-label {
+      width: 48px;
+      height: 48px;
+      min-height: 48px;
+    }
+  }
+
+  .tc-row-meta {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.308rem;
+  }
+
+  .tc-row-top {
+    display: flex;
+    align-items: center;
+    gap: 0.615rem;
+  }
+
+  .tc-row-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: $font-size-lg;
+    font-weight: 500;
+    line-height: 1.4;
+    color: $text-secondary;
+  }
+
+  .tc-row-time {
+    flex: 0 0 auto;
+    font-size: $font-size-sm;
+    color: $text-quaternary;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tc-row-bottom {
+    display: flex;
+    align-items: center;
+    gap: 0.615rem;
+  }
+
+  .tc-row-preview {
+    flex: 1;
+    min-width: 0;
+    font-size: $font-size-lg;
+    line-height: 1.4;
+    color: $text-quaternary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Voice preview: inline mic icon + label.
+  .tc-row-preview-media {
+    display: flex;
+    align-items: center;
+    gap: 0.462rem;
+    min-width: 0;
+
+    svg {
+      flex: 0 0 auto;
+    }
+  }
+
+  .tc-row-preview-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // File / media preview: a boxed icon with the filename and size stacked.
+  .tc-row-file {
+    display: flex;
+    align-items: center;
+    gap: 0.923rem;
+    min-width: 0;
+  }
+
+  .tc-row-file-icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // Fixed box around the px-sized file glyph.
+    width: 32px;
+    height: 32px;
+    border: 1px solid $border-secondary;
+    border-radius: $border-radius;
+    color: $fg-tertiary;
+  }
+
+  .tc-row-file-meta {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tc-row-file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    color: $text-secondary;
+  }
+
+  .tc-row-file-size {
+    color: $text-quaternary;
+  }
+
+  .tc-row.unread .tc-row-title,
+  .tc-row.unread .tc-row-preview {
+    color: $text-primary;
+  }
+
+  .tc-row.unread .tc-row-title {
+    font-weight: 600;
+  }
+
+  .tc-row-muted {
+    flex: 0 0 auto;
+    color: $fg-disabled;
+  }
+
+  // Unread count: a soft pill that follows the deployment brand colour.
+  .tc-badge {
+    flex: 0 0 auto;
+    min-width: 1.692rem;
+    height: 1.692rem;
+    padding: 0 0.538rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.23rem;
+    background: $bg-brand-primary;
+    border: 1px solid $border-brand;
+    color: $text-brand-secondary;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+
+    &.mention {
+      background: $bg-error-primary;
+      border-color: $border-error;
+      color: $text-error-primary;
+    }
+  }
+
+  // Conversation header mirrors a list row's horizontal inset and avatar-to-text
+  // gap, with a compact 40px circle avatar.
+  .tc-header {
+    display: flex;
+    align-items: center;
+    gap: 0.923rem;
+    padding: 0.923rem $card-px;
+    border-bottom: 1px solid $border-secondary;
+
+    .symbol {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+
+      .symbol-label {
+        width: 40px;
+        height: 40px;
+        min-height: 40px;
+      }
+    }
+  }
+
+  .tc-header-members {
+    flex-shrink: 0;
+    padding: 2px 0.462rem;
+    border: 0;
+    border-radius: 99px;
+    background: transparent;
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    white-space: nowrap;
+
+    &:hover,
+    &[aria-describedby] {
+      background: $bg-secondary;
+      color: $text-primary;
+    }
+  }
+
+  .tc-rail {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.308rem;
+    padding: 0.308rem 0.615rem 0.615rem;
+  }
+
+  .tc-rail-item {
+    position: relative;
+    display: flex;
+    padding: 0.308rem;
+    border: 0;
+    border-radius: $border-radius-lg;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+      background: $bg-secondary;
+    }
+
+    &.active {
+      background: $bg-brand-secondary;
+    }
+  }
+
+  .tc-rail-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .tc-rail-call {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $body-bg;
+  }
+
+  .tc-stream {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden auto;
+    padding: 0.923rem 1.077rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.846rem;
+
+    > *:first-child {
+      margin-top: auto;
+    }
+  }
+
+  .tc-day {
+    display: flex;
+    align-items: center;
+    gap: 0.615rem;
+    margin: 0.308rem 0;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: $border-secondary;
+    }
+
+    span {
+      font-size: $font-size-lg;
+      font-weight: 500;
+      color: $fg-tertiary;
+    }
+  }
+
+  .tc-msg {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 0.923rem;
+
+    // Own messages have no avatar column. The body fills the track (no
+    // justify-items shrink-to-fit, which would make the bubble's % max-width a
+    // circular size dependency and collapse short messages); the bubble is
+    // right-aligned by align-items: flex-end on .tc-msg.mine .tc-msg-body.
+    &.mine {
+      grid-template-columns: 1fr;
+    }
+
+    &.continuation {
+      margin-top: -1.231rem;
+
+      .tc-msg-who {
+        display: none;
+      }
+    }
+  }
+
+  .tc-msg > .symbol {
+    align-self: flex-start;
+    width: 40px;
+    height: 40px;
+
+    .symbol-label {
+      width: 40px;
+      height: 40px;
+      min-height: 40px;
+    }
+  }
+
+  .tc-msg-body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tc-msg.mine .tc-msg-body {
+    align-items: flex-end;
+  }
+
+  .tc-msg-who {
+    display: flex;
+    align-items: center;
+    gap: 0.462rem;
+    margin-bottom: 2px;
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $text-primary;
+
+    .tc-msg-when {
+      font-size: 0.808rem;
+      font-weight: 500;
+      color: $fg-disabled;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  .tc-msg-receipt {
+    width: 14px;
+    height: 14px;
+    color: $fg-success-secondary;
+    flex-shrink: 0;
+  }
+
+  // Incoming bubble: gray-50 fill with a hairline border and the tail corner
+  // (sharp top-left, nearest the avatar). Own bubbles flip the tail and go white.
+  .tc-bubble {
+    // max-content (not fit-content): in a flex/grid column fit-content can
+    // collapse toward min-content and fold short words onto two lines. max-content
+    // sizes to the text and can't collapse; max-width caps long content, where
+    // overflow-wrap then breaks a genuinely-too-long string.
+    width: max-content;
+    max-width: 90%;
+    padding: 0.615rem 1.23rem;
+    border: 1px solid $border-secondary;
+    border-radius: 0 $border-radius-xl $border-radius-xl $border-radius-xl;
+    background: $bg-secondary;
+    color: $text-primary;
+    font-size: $font-size-lg;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+
+    a {
+      color: $text-brand-secondary;
+      font-weight: 500;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      border-radius: $border-radius;
+    }
+  }
+
+  .tc-msg.mine .tc-bubble {
+    background: $bg-primary;
+    border-radius: $border-radius-xl 0 $border-radius-xl $border-radius-xl;
+    color: $text-primary;
+  }
+
+  // Media renders flush: no tinted padding/border framing the picture.
+  .tc-bubble--media,
+  .tc-msg.mine .tc-bubble--media {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .tc-msg.mentions-me .tc-bubble {
+    background: rgba($warning-500, 0.12);
+  }
+
+  .tc-file-card {
+    display: flex;
+    align-items: center;
+    gap: 0.769rem;
+    text-decoration: none;
+    color: inherit;
+
+    .tc-file-card__icon {
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid $border-secondary;
+      border-radius: $border-radius;
+      color: $fg-tertiary;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .tc-file-card__meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .tc-file-card__name {
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .tc-file-card__size {
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  .tc-voice {
+    display: flex;
+    align-items: center;
+    gap: 0.769rem;
+    min-width: 180px;
+  }
+
+  .tc-voice__play {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: $bg-brand-solid;
+    color: $white;
+    cursor: pointer;
+
+    &:hover {
+      background: $brand-700;
+    }
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .tc-voice__bars {
+    flex: 1;
+    // Let the waveform shrink below its 40-bar intrinsic width and clip the
+    // overflowing bars, so the fixed-width duration label is never pushed past
+    // the bubble edge in a narrow drawer.
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 28px;
+  }
+
+  .tc-voice__bar {
+    flex: 1;
+    min-width: 2px;
+    border-radius: 99px;
+    background: $border-primary;
+    transition: background 0.1s ease;
+
+    &.is-played {
+      background: $bg-brand-solid;
+    }
+  }
+
+  .tc-voice__time {
+    flex-shrink: 0;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    font-variant-numeric: tabular-nums;
+  }
+
+  // Recording happens inside the composer's text block: the indicator fills the
+  // textarea slot (Cancel/Send stay in the footer), so the card keeps its size.
+  .tc-voice-recording {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 0.615rem;
+    min-height: 60px;
+  }
+
+  .tc-voice-recorder__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $danger-500;
+    animation: tc-voice-pulse 1.2s ease-in-out infinite;
+  }
+
+  .tc-voice-recorder__time {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .tc-voice-recorder__label {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+  }
+
+  .tc-msg-reactions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.308rem;
+    margin-top: 0.385rem;
+    align-items: center;
+  }
+
+  .tc-msg.mine .tc-msg-reactions {
+    justify-content: flex-end;
+  }
+
+  .tc-msg-reactions__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.308rem;
+    padding: 2px 0.615rem;
+    border-radius: 99px;
+    background: $bg-primary;
+    color: $text-primary;
+    border: 1px solid $border-primary;
+    font-size: 0.923rem;
+    line-height: 1.6;
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: $border-brand-solid;
+    }
+
+    &.is-mine {
+      background: $bg-brand-secondary;
+      color: $text-brand-primary;
+      border-color: $border-brand-solid;
+    }
+  }
+
+  .tc-msg-reactions__count {
+    font-weight: 600;
+    color: $text-secondary;
+
+    .is-mine & {
+      color: $text-brand-primary;
+    }
+  }
+
+  .tc-bubble {
+    position: relative;
+  }
+
+  .tc-msg-reactions-toolbar {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0.308rem;
+    background: $bg-primary;
+    border: 1px solid $border-primary;
+    border-radius: 99px;
+    box-shadow:
+      0 4px 14px rgba(0, 0, 0, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.04);
+    width: fit-content;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.12s ease,
+      visibility 0s linear 0.12s;
+    pointer-events: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 18px;
+      width: 10px;
+      height: 10px;
+      background: $bg-primary;
+      border-right: 1px solid $border-primary;
+      border-bottom: 1px solid $border-primary;
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+    }
+  }
+
+  .tc-msg.mine .tc-msg-reactions-toolbar {
+    left: auto;
+    right: 0;
+
+    &::after {
+      left: auto;
+      right: 18px;
+    }
+  }
+
+  .tc-msg-reactions-toolbar.is-below {
+    bottom: auto;
+    top: calc(100% + 8px);
+
+    &::after {
+      bottom: auto;
+      top: -5px;
+      border-right: none;
+      border-bottom: none;
+      border-left: 1px solid $border-primary;
+      border-top: 1px solid $border-primary;
+    }
+
+    &::before {
+      bottom: auto;
+      top: -10px;
+    }
+  }
+
+  .tc-msg:hover .tc-msg-reactions-toolbar,
+  .tc-msg:focus-within .tc-msg-reactions-toolbar {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      opacity 0.12s ease 0.4s,
+      visibility 0s linear 0.4s;
+  }
+
+  .tc-msg-reactions-toolbar__btn {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: $text-primary;
+    cursor: pointer;
+    border-radius: 99px;
+    font-size: 1.154rem;
+    line-height: 1;
+    transition:
+      background 0.12s ease,
+      transform 0.12s ease;
+
+    &:hover {
+      background: $bg-secondary;
+      transform: scale(1.08);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
+
+    &.is-active {
+      background: $bg-brand-secondary;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: $text-secondary;
+      pointer-events: none;
+    }
+  }
+
+  .tc-msg-reactions-toolbar__divider {
+    width: 1px;
+    height: 16px;
+    background: $border-primary;
+    margin: 0 2px;
+    pointer-events: none;
+  }
+
+  .tc-msg-reactions-toolbar__more {
+    color: $text-secondary;
+
+    &:hover {
+      background: $bg-secondary;
+      transform: none;
+      color: $text-primary;
+    }
+  }
+
+  .tc-msg-emoji-popover {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 10;
+    width: 240px;
+    max-width: 240px;
+    max-height: 220px;
+    overflow: hidden;
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.04);
+    border-radius: $border-radius-lg;
+
+    //noinspection CssInvalidHtmlTagReference
+    em-emoji-picker {
+      width: 240px;
+      max-width: 240px;
+      max-height: 220px;
+    }
+  }
+
+  .tc-msg-reactions-toolbar .tc-msg-emoji-popover {
+    top: auto;
+    bottom: calc(100% + 6px);
+  }
+
+  .tc-msg-reactions-toolbar.is-below .tc-msg-emoji-popover,
+  .tc-msg-reactions-toolbar.is-picker-down .tc-msg-emoji-popover {
+    top: calc(100% + 6px);
+    bottom: auto;
+  }
+
+  // Pinned footer: flex-shrink:0 keeps the composer fully visible (the message
+  // list scrolls instead), and the spacing lives here as padding so the card
+  // never clips against the drawer's rounded bottom edge.
+  .tc-composer-dock {
+    flex-shrink: 0;
+    padding: 0.615rem 0.923rem 0.923rem;
+  }
+
+  // Mirrors the AI assistant composer: one rounded card with a white textarea
+  // region above a connected gray action bar (Attach left, Send right). Shared
+  // by the input form and the voice-recorder state, so both read as one card.
+  .tc-composer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $border-primary;
+    border-radius: $border-radius;
+    background: $bg-primary;
+    box-shadow: $box-shadow-xs;
+    overflow: hidden;
+  }
+
+  .tc-composer-input-row {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.615rem 0.923rem 0.308rem;
+  }
+
+  // The mic sits over the top-right of the textarea; the textarea reserves
+  // right padding so typed text never runs under it.
+  .tc-composer-mic {
+    position: absolute;
+    right: 0.462rem;
+    top: 0.462rem;
+    color: $text-secondary;
+
+    &:hover:not(:disabled) {
+      color: $text-brand-primary;
+    }
+  }
+
+  .tc-composer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.308rem 0.769rem;
+    border-top: 1px solid $border-primary;
+    background: $bg-secondary;
+  }
+
+  .tc-composer-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.462rem;
+    padding: 0.385rem 0.615rem;
+    border: 0;
+    border-radius: $border-radius;
+    background: transparent;
+    color: $text-secondary;
+    font-weight: 500;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &:hover:not(:disabled) {
+      background: $bg-tertiary;
+    }
+
+    &:disabled {
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+
+    &.send {
+      color: $brand-700;
+
+      &:disabled {
+        color: $text-disabled;
+      }
+    }
+  }
+
+  .tc-mention-popup {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 100%;
+    max-height: 260px;
+    overflow-y: auto;
+    z-index: 10;
+    padding: 0.308rem 0;
+    background: $bg-primary;
+    border: 1px solid $border-primary;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+  }
+
+  .tc-mention-item {
+    display: flex;
+    align-items: center;
+    gap: 0.769rem;
+    width: 100%;
+    padding: 0.769rem 1.077rem;
+    border: 0;
+    text-align: start;
+    background: transparent;
+    color: $text-primary;
+    font-size: $font-size-base;
+    line-height: 1.4;
+    cursor: pointer;
+
+    .tc-mention-item__avatar {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $bg-tertiary;
+      color: $text-secondary;
+      font-size: $font-size-sm;
+      font-weight: 600;
+    }
+
+    .tc-mention-item__name {
+      font-weight: 600;
+    }
+
+    &.is-active {
+      background: $bg-brand-solid;
+      color: $text-primary_on-brand;
+
+      .tc-mention-item__avatar {
+        background: rgba(0, 0, 0, 0.15);
+        color: $text-primary_on-brand;
+      }
+    }
+  }
+
+  // Mentions read as bold inline text (no colored pill) for everyone; a
+  // self-mention is signalled by the whole-bubble tint (.tc-msg.mentions-me),
+  // so the inline tag stays neutral.
+  .tc-mention-tag {
+    font-weight: 600;
+  }
+
+  // Height mirrors the AI assistant composer (.aui-composer-input).
+  .tc-composer-input {
+    flex: 1;
+    min-width: 0;
+    min-height: 60px;
+    max-height: 250px;
+    padding: 0.308rem 2.462rem 0.308rem 0.462rem;
+    border: 0;
+    background: transparent;
+    color: $text-primary;
+    font-size: $font-size-lg;
+    line-height: 1.5;
+    resize: none;
+    overflow-x: hidden;
+
+    &::placeholder {
+      color: $text-placeholder;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:disabled {
+      color: $text-placeholder;
+    }
+
+    @include media-breakpoint-down(lg) {
+      min-height: 40px;
+      max-height: 120px;
+    }
+  }
+
+  .tc-placeholder {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.846rem;
+    text-align: center;
+    color: $text-secondary;
+  }
+}
+
+.team-chat-dock {
+  display: grid;
+  // Wider chat-history (room list) column in the expanded dock.
+  grid-template-columns: 360px minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  padding-top: 1.231rem;
+
+  &--collapsed {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  &--solo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  &--compact {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 0;
+  }
+}
+
+.team-chat-dock-list,
+.team-chat-dock-detail {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.team-chat-dock-list {
+  border-right: 1px solid $border-color;
+}
+
+// The dock supplies its own top inset; the sidebar's top padding would stack on
+// it and push the search box down only in the expanded view. Drop it here so the
+// search sits at the same height as in the narrow drawer.
+.team-chat-dock .tc-sidebar-top {
+  padding-top: 0;
+}
+
+// Single-chat (AI-off) mode: MatrixChatHeader portals its kebab into the
+// drawer's floating control row (it is appended last). Slot it between the
+// expand and close controls → expand · kebab · close. The kebab keeps the
+// default-order expand ahead of it and pushes the close button(s) after.
+#kt_drawer_header .card-toolbar:has(.tc-toolbar-kebab) {
+  .tc-toolbar-kebab {
+    order: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  > span:not(:first-child):not(.tc-toolbar-kebab) {
+    order: 2;
+  }
+}
+
+.tc-members-popover {
+  width: 260px;
+  // Bootstrap popovers default to a smaller font; pin the members list to the
+  // chat's body size so names are readable.
+  font-size: $font-size-lg;
+
+  .popover-body {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+}
+
+// Faint full-panel tint keeps the messages readable underneath; the hint
+// itself is a floating card rather than a solid colored block.
+.tc-dropzone-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: rgba($text-brand-primary, 0.06);
+}
+
+.tc-dropzone-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.615rem;
+  padding: 1.846rem 2.462rem;
+  background: $bg-primary;
+  border: 2px dashed $text-brand-primary;
+  border-radius: $border-radius-lg;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  color: $text-brand-primary;
+  font-weight: 600;
+}
+
+// Staged-attachment chips sit inside the composer card, above the input row;
+// a hairline separates them from the textarea.
+.tc-pending-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.615rem;
+  padding: 0.615rem 0.923rem;
+  border-bottom: 1px solid $border-secondary;
+}
+
+@keyframes tc-voice-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+// Typing indicator: overlapping avatars of who's typing + an animated dot
+// pulse; the full "X is typing…" text is in a tooltip and for screen readers.
+.tc-typing {
+  display: flex;
+  align-items: center;
+  gap: 0.462rem;
+  width: fit-content;
+  padding: 0.308rem 1.077rem;
+
+  .symbol {
+    width: 20px;
+    height: 20px;
+
+    .symbol-label {
+      width: 20px;
+      height: 20px;
+      min-height: 20px;
+      font-size: 0.6rem;
+    }
+  }
+}
+
+.tc-typing__avatars {
+  display: inline-flex;
+
+  // Overlap, each notched out of the next with a ring in the surface colour.
+  .symbol {
+    box-shadow: 0 0 0 1.5px $bg-primary;
+    border-radius: 50%;
+  }
+
+  > * + * {
+    margin-left: -0.462rem;
+  }
+}
+
+.tc-typing__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+
+  span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: $text-quaternary;
+    animation: tc-typing-bounce 1.2s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+}
+
+@keyframes tc-typing-bounce {
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}

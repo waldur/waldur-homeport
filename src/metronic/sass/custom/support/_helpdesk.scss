@@ -1,0 +1,151 @@
+// Support drawer (Team chat + Helpdesk tabs). Unlike the AI drawer it keeps a
+// visible card header; the tab strip and Helpdesk content line up with the
+// header's "Support" title by reusing the card's horizontal padding.
+.support-drawer {
+  .support-drawer-tabs {
+    padding: 0 $card-px;
+  }
+
+  .support-drawer-helpdesk {
+    padding: 0 $card-px;
+  }
+
+  .support-drawer-helpdesk--expanded {
+    padding-bottom: 0;
+    padding-right: 0;
+    overflow: hidden;
+  }
+}
+
+.helpdesk-expanded {
+  display: grid;
+  grid-template-columns: 50fr 50fr;
+  height: 100%;
+  min-height: 0;
+}
+
+.helpdesk-expanded-list,
+.helpdesk-expanded-detail {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.helpdesk-expanded-list {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $border-color;
+  padding-right: $card-px;
+  // Query container so the pagination can fall back to the compact pager based
+  // on this pane's width (half the drawer) rather than the viewport's.
+  container-type: inline-size;
+  container-name: helpdesk-list;
+
+  // The shared Table renders as a floating Metronic card (shadow, radius, own
+  // horizontal padding) sized to its content. In this pane it should read like
+  // the Team chat panel: flush to the edge, filling the height, with only the
+  // request table scrolling.
+  .card-table {
+    flex: 1;
+    // Without min-width:0 the card's default min-width:auto lets its nowrap
+    // toolbar push it wider than the narrow pane, overflowing past the divider
+    // and clipping the Create button. Constrain it to the pane instead.
+    min-width: 0;
+    min-height: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  // Zero the inline margin (the shared card-header keeps a $card-px right
+  // margin) so the toolbar spans the full card width and the right-aligned
+  // Export/Create line up with the table's right edge.
+  .card-table > .card-header,
+  .card-table > .card-body {
+    margin-inline: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  // The full-width default search is too wide for the narrow master pane; keep
+  // it compact so Search + Export + Create sit on one line, as in the mock.
+  .table-toolbar-search {
+    flex: 0 1 200px !important;
+    min-width: 0;
+  }
+
+  // The toolbar's default 24px gap is too generous for this narrow pane and
+  // pushes Export/Create past its edge; tighten it (but keep enough room that
+  // the search isn't cramped against the refresh button) so all four controls
+  // (Search, refresh, Export, Create) stay on one row.
+  .card-header .gap-4 {
+    gap: 0.75rem !important;
+  }
+
+  // On a narrow pane the toolbar would otherwise overflow (nowrap) and clip the
+  // right-aligned Create button. Clear the min-width floors down the flex chain
+  // so the search compresses to fit instead, keeping everything on one row.
+  .card-header .col,
+  .card-header .col > div {
+    min-width: 0;
+  }
+
+  .table-toolbar-search,
+  .table-toolbar-search .min-w-125px {
+    min-width: 0 !important;
+  }
+
+  .card-table > .card-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  // Rows select into the right pane on click, so flag them as interactive.
+  tbody tr {
+    cursor: pointer;
+  }
+
+  tr.issues-list-row-selected > td {
+    background-color: $bg-secondary;
+  }
+}
+
+// The full desktop pagination (page size, numbers, count + arrows) needs close
+// to a full-width table to fit on one line. When this half-drawer pane is
+// narrower than that, fall back to the table's own compact pager (the
+// "Page X of Y" variant it already renders below the md breakpoint) instead of
+// letting the desktop one wrap or clip. Above the threshold the default desktop
+// pager stays, so the page numbers are kept whenever there is room for them.
+@container helpdesk-list (max-width: 680px) {
+  .helpdesk-expanded-list .table-pagination.d-md-block {
+    display: none !important;
+  }
+
+  .helpdesk-expanded-list .table-pagination.d-md-none {
+    display: flex !important;
+  }
+}
+
+.helpdesk-expanded-detail {
+  padding: $card-px $card-py;
+
+  // The hero packs its header (title + Sync/Show log) and the request details
+  // into a gap-2 column, so the buttons sit right on top of the text. Give them
+  // room in this drawer (the hero is shared, so scope it here).
+  // Bootstrap's .gap-2 utility is !important, so the override must be too.
+  .public-dashboard-hero .card-body > .gap-2 {
+    gap: $card-py !important;
+  }
+
+  // In this half-width pane the title row squeezes the Sync/Show log actions
+  // until they wrap and overflow; keep them on one line and let the title wrap
+  // to take the slack instead.
+  .public-dashboard-hero .card-body .justify-content-sm-end {
+    flex-wrap: nowrap !important;
+    flex-shrink: 0;
+  }
+}
+
+.helpdesk-expanded-empty {
+  height: 100%;
+}

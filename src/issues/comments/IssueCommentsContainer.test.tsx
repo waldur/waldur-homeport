@@ -11,9 +11,9 @@ vi.mock('./IssueCommentButton', () => ({
   IssueCommentButton: () => <button data-testid="add-comment-btn">Add</button>,
 }));
 
-vi.mock('@/marketplace/common/RefreshButton', () => ({
-  RefreshButton: ({ isLoading }: { isLoading: boolean }) => (
-    <button data-testid="reload-btn" disabled={isLoading}>
+vi.mock('@/marketplace/offerings/update/components/RefreshButton', () => ({
+  RefreshButton: ({ loading }: { loading: boolean }) => (
+    <button data-testid="reload-btn" disabled={loading}>
       Reload
     </button>
   ),

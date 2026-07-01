@@ -5,6 +5,9 @@ import React from 'react';
 import { count } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
 import { useDrawer } from '@/drawer/actions';
+import { DrawerCloseButton } from '@/drawer/DrawerCloseButton';
+import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
+import { isDrawerOpenWithClass } from '@/drawer/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -23,7 +26,7 @@ const PendingConfirmationContainer = lazyComponent(() =>
 );
 
 export const ConfirmationDrawerToggle: React.FC = () => {
-  const { openDrawer } = useDrawer();
+  const { openDrawer, closeDrawer } = useDrawer();
 
   const showConsumerOrders = !isFeatureVisible(
     MarketplaceFeatures.conceal_pending_consumer_orders,
@@ -67,8 +70,16 @@ export const ConfirmationDrawerToggle: React.FC = () => {
   );
 
   const handleOpenDrawer = () => {
+    if (isDrawerOpenWithClass(DRAWER_SHELL_CLASS.confirmation)) {
+      closeDrawer();
+      return;
+    }
+    document
+      .getElementById('kt_drawer')
+      ?.classList.add(DRAWER_SHELL_CLASS.confirmation);
     openDrawer(PendingConfirmationContainer, {
       title: translate('Pending confirmations'),
+      toolbar: DrawerCloseButton,
       ...counters,
     });
   };

@@ -11,6 +11,31 @@ import {
   resolveMemberName,
 } from './utils';
 
+/**
+ * Insert or update a message in the list, reconciling an outgoing message's
+ * local echo with its later remote echo. The two share a `txnId` but differ in
+ * `eventId` (the local echo has a transient `~`-prefixed id), so matching on
+ * either avoids appending a duplicate row when the server acks. Derived
+ * reaction state is preserved across the swap.
+ */
+function upsertMessage(
+  prev: MatrixChatMessage[],
+  msg: MatrixChatMessage,
+): MatrixChatMessage[] {
+  const idx = prev.findIndex(
+    (m) =>
+      m.eventId === msg.eventId || (msg.txnId != null && m.txnId === msg.txnId),
+  );
+  if (idx === -1) return [...prev, msg];
+  const next = prev.slice();
+  next[idx] = {
+    ...msg,
+    reactions: prev[idx].reactions,
+    reactors: prev[idx].reactors,
+  };
+  return next;
+}
+
 export function useMatrixRoom() {
   const { client, activeRoomId, activeRoomUuid, connectionState } =
     useMatrixClient();
@@ -20,7 +45,9 @@ export function useMatrixRoom() {
   const memberNamesRef = useRef(memberNames);
   memberNamesRef.current = memberNames;
   const [messages, setMessages] = useState<MatrixChatMessage[]>([]);
-  const [typingUsers, setTypingUsers] = useState<string[]>([]);
+  const [typingUsers, setTypingUsers] = useState<
+    Array<{ userId: string; name: string }>
+  >([]);
   const [loading, setLoading] = useState(true);
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [hasOlderMessages, setHasOlderMessages] = useState(true);
@@ -100,9 +127,7 @@ export function useMatrixRoom() {
 
       const msg = mapEventToMessage(event, eventRoom);
       if (msg) {
-        setMessages((prev) =>
-          prev.some((m) => m.eventId === msg.eventId) ? prev : [...prev, msg],
-        );
+        setMessages((prev) => upsertMessage(prev, msg));
       }
     };
 
@@ -113,9 +138,10 @@ export function useMatrixRoom() {
       const typing = room
         .getMembers()
         .filter((m: any) => m.typing && m.userId !== client.getUserId())
-        .map((m: any) =>
-          resolveMemberName(m.userId, memberNamesRef.current, m.name),
-        );
+        .map((m: any) => ({
+          userId: m.userId as string,
+          name: resolveMemberName(m.userId, memberNamesRef.current, m.name),
+        }));
       setTypingUsers(typing);
     };
 
@@ -168,13 +194,36 @@ export function useMatrixRoom() {
       // displayed message list.
     };
 
-    // Fires when matrix-js-sdk swaps a local-echo for the real server
-    // event (after the homeserver ack). Without this, my own reactions
-    // would never capture their real event_id and `unreact` couldn't
-    // redact them.
+    // Fires when matrix-js-sdk swaps a local-echo for the real server event
+    // (after the homeserver ack). The client runs with detached pending-event
+    // ordering, so outgoing messages never hit the live timeline while pending
+    // — this is the only signal that surfaces my own message as an instant
+    // local echo (and later captures a reaction's real event_id so `unreact`
+    // can redact it).
     const onLocalEchoUpdated = (event: any, eventRoom: any) => {
       if (eventRoom?.roomId !== activeRoomId) return;
-      if (event?.getType?.() !== 'm.reaction') return;
+
+      const type = event?.getType?.();
+
+      if (type === 'm.room.message') {
+        // A send the user cancelled (or that permanently failed and was
+        // cancelled) should not linger as a phantom row.
+        if (event.status === 'cancelled') {
+          const id = event.getId?.();
+          const txnId = event.getTxnId?.();
+          setMessages((prev) =>
+            prev.filter(
+              (m) => m.eventId !== id && (txnId == null || m.txnId !== txnId),
+            ),
+          );
+          return;
+        }
+        const msg = mapEventToMessage(event, eventRoom);
+        if (msg) setMessages((prev) => upsertMessage(prev, msg));
+        return;
+      }
+
+      if (type !== 'm.reaction') return;
       const targetId = event.getContent?.()?.['m.relates_to']?.event_id;
       if (!targetId) return;
       const myUserId = client.getUserId() ?? '';

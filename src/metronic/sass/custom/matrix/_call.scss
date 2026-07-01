@@ -1,0 +1,185 @@
+.matrix-call-view {
+  position: relative;
+  background-color: var(--lk-bg);
+
+  .lk-media-device-select {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lk-focus-layout > .lk-participant-tile .lk-focus-toggle-button {
+    display: none;
+  }
+
+  // LiveKit defaults the carousel column to 1fr of 1fr:5fr, which on a
+  // narrow drawer crushes the thumbnail so names get clipped. Give it more
+  // breathing room with a sensible minimum.
+  .lk-focus-layout {
+    grid-template-columns: minmax(150px, 1.6fr) 5fr;
+  }
+
+  .lk-participant-tile {
+    border: 1px solid var(--lk-border-color);
+  }
+
+  .lk-participant-placeholder svg,
+  .lk-participant-placeholder svg path {
+    fill: $gray-400;
+  }
+
+  // The name chip sits over the video feed, so it carries its own blurred
+  // theme-surface scrim to stay legible on any frame rather than inheriting
+  // LiveKit's fixed dark scrim (which breaks once --lk-fg flips for light).
+  // LiveKit already bottom-left-anchors the name within the metadata row, which
+  // matches the mockup.
+  .lk-participant-metadata-item {
+    padding: 0.308rem 0.769rem;
+    background-color: rgba($bg-primary, 0.85);
+    color: $text-primary;
+    border: 1px solid $border-primary;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+  }
+
+  .lk-participant-name {
+    font-weight: 600;
+  }
+
+  .lk-track-muted-indicator-microphone,
+  .lk-track-muted-indicator-camera {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      transform: scale(0.72);
+    }
+  }
+
+  .lk-control-bar {
+    // LiveKit's own .lk-button rules size these unevenly (the disconnect
+    // button renders larger); pin every control to one round box and one
+    // icon size to match the mockup's circular controls.
+    .lk-button,
+    .lk-disconnect-button {
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      justify-content: center;
+      gap: 0;
+      width: 44px;
+      min-width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid var(--lk-border-color);
+      border-radius: 50%;
+    }
+
+    .lk-disconnect-button {
+      background-color: $danger-500;
+      color: $white;
+      border-color: transparent;
+
+      &:hover {
+        background-color: $danger-600;
+      }
+    }
+  }
+}
+
+// LiveKit ships only a dark theme. Re-point its variables at our design tokens
+// so the call view follows the app theme. Tokens resolve per compiled
+// stylesheet (style.scss vs style.dark.scss), so this one block themes both
+// light and dark; the attribute selector outranks LiveKit's own definitions.
+.matrix-call-view[data-lk-theme='default'] {
+  color-scheme: if(isDarkMode(), dark, light);
+  --lk-bg: #{$bg-tertiary};
+  --lk-bg2: #{$bg-primary};
+  --lk-bg3: #{$bg-secondary};
+  --lk-bg4: #{$bg-secondary};
+  --lk-bg5: #{$gray-200};
+  --lk-fg: #{$text-primary};
+  --lk-fg2: #{$text-secondary};
+  --lk-fg3: #{$text-tertiary};
+  --lk-border-color: #{$border-primary};
+  --lk-accent-bg: #{$success-500};
+  --lk-danger: #{$danger-500};
+}
+
+.matrix-call-view__connecting {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.923rem;
+  background: $bg-tertiary;
+  color: $text-secondary;
+}
+
+.matrix-call-view__error {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.923rem;
+  padding: 1.231rem;
+  text-align: center;
+  background: $bg-tertiary;
+  color: $text-secondary;
+}
+
+.matrix-call-view--compact {
+  // Single-tile compact mode has nothing to pin (there's only one tile) —
+  // hide any focus toggle the tile might render on hover.
+  .lk-participant-tile .lk-focus-toggle-button {
+    display: none;
+  }
+
+  // FocusLayout's default 2-column grid is meaningless when we only render
+  // one tile; stretch it to fill the available area instead.
+  .lk-focus-layout {
+    grid-template-columns: 1fr;
+    height: 100%;
+  }
+}
+
+.call-in-progress-banner {
+  gap: 1.23rem;
+  padding: 0.769rem $card-px;
+  // $bg-warning-primary is a bright solid in dark mode; keep the light mock
+  // colour but use a subtle amber wash over the dark surface instead.
+  background-color: if(
+    isDarkMode(),
+    rgba($warning-500, 0.15),
+    $bg-warning-primary
+  );
+  border-bottom: 1px solid $border-secondary;
+
+  .call-in-progress-banner__label {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $warning-700;
+  }
+}
+
+.call-device-settings-popover {
+  width: 280px;
+}
+
+.call-device-settings {
+  .call-device-settings__group:not(:last-child) {
+    margin-bottom: 0.923rem;
+  }
+
+  .call-device-settings__label {
+    margin-bottom: 0.308rem;
+    font-weight: 600;
+    color: $text-secondary;
+  }
+}

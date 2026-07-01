@@ -1,15 +1,19 @@
-import { ChatsCircle, HeadsetIcon, WarningIcon } from '@phosphor-icons/react';
+import {
+  ChatsCircleIcon,
+  HeadsetIcon,
+  WarningIcon,
+} from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
 
-import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { Link } from '@/core/Link';
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { useProjectMatrixRooms } from '@/matrix/chat/useProjectMatrixRooms';
 import { isMatrixChatEnabled } from '@/matrix/utils';
+import { openSupportDrawer } from '@/support/openSupportDrawer';
 
 interface ProjectActionsProps {
   project: Project;
@@ -26,7 +30,7 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
 
   const openChat = useCallback(() => {
     if (!activeRoom) return;
-    openUnifiedChatDrawer(openDrawer, {
+    openSupportDrawer(openDrawer, {
       defaultRoomUuid: activeRoom.uuid,
       matrixRoomAlias: activeRoom.room_alias,
     });
@@ -59,7 +63,7 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
       {showMatrixChat && activeRoom && (
         <button type="button" className="btn btn-secondary" onClick={openChat}>
           <span className="svg-icon svg-icon-2">
-            <ChatsCircle weight="bold" />
+            <ChatsCircleIcon weight="bold" />
           </span>
           {translate('Team chat')}
         </button>

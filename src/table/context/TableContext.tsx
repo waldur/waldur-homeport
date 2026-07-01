@@ -36,6 +36,8 @@ interface TableActions<TData = any> {
   toggleFilterMenu: (show?: boolean) => void;
   openFiltersDrawer: (filters: ReactNode, formId?: string) => void;
   renderFiltersDrawer: (filters: ReactNode, formId?: string) => void;
+  /** Opt-in: called when a row is clicked (ignored on inner buttons/links). */
+  onRowClick?: (row: TData) => void;
 }
 
 /**

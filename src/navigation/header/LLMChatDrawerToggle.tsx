@@ -6,10 +6,9 @@ import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { isLLMChatAllowedForUser, getLLMChatMode } from '@/ai-assistant/utils';
 import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { useDrawer } from '@/drawer/actions';
-import { isDrawerOpen } from '@/drawer/utils';
+import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
+import { isDrawerOpen, isDrawerOpenWithClass } from '@/drawer/utils';
 import { translate } from '@/i18n';
-import { useMatrixTotalUnread } from '@/matrix/chat/useMatrixTotalUnread';
-import { isMatrixChatEnabled } from '@/matrix/utils';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useUser } from '@/workspace/hooks';
 
@@ -19,7 +18,6 @@ export const LLMChatDrawerToggle: React.FC = () => {
   const prevUserUuid = useRef(user?.uuid);
   const { hasNewMessages, currentThreadId, clearNotification } =
     useThreadContext();
-  const matrixUnread = useMatrixTotalUnread();
 
   // Force-close drawer and clean up DOM when user changes (impersonation end/start)
   useEffect(() => {
@@ -33,14 +31,16 @@ export const LLMChatDrawerToggle: React.FC = () => {
   }, [user?.uuid, closeDrawer]);
 
   const showAI = isLLMChatAllowedForUser(user, getLLMChatMode());
-  const showMatrix = isMatrixChatEnabled();
 
-  if (!showAI && !showMatrix) {
+  if (!showAI) {
     return null;
   }
 
   const toggleChatDrawer = () => {
-    if (isDrawerOpen()) {
+    // Toggle off only when the AI drawer itself is open. If a different drawer
+    // (Support, Pending confirmations) is open, switch to the AI assistant
+    // rather than just closing it.
+    if (isDrawerOpenWithClass(DRAWER_SHELL_CLASS.ai)) {
       closeDrawer();
     } else {
       clearNotification(currentThreadId);
@@ -55,14 +55,12 @@ export const LLMChatDrawerToggle: React.FC = () => {
         type="button"
         className="position-relative btn-nav-item"
         onClick={toggleChatDrawer}
-        title={translate('Open chat')}
+        title={translate('Open AI assistant')}
       >
         <span className="svg-icon svg-icon-2">
           <SparkleIcon weight="bold" />
         </span>
-        {((showAI && hasNewMessages) || (showMatrix && matrixUnread > 0)) && (
-          <HeaderButtonBullet />
-        )}
+        {hasNewMessages && <HeaderButtonBullet />}
       </button>
     </div>
   );

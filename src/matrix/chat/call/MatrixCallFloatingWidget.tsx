@@ -8,9 +8,9 @@ import {
   useState,
 } from 'react';
 
-import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
+import { openSupportDrawer } from '@/support/openSupportDrawer';
 
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
 import { useMatrixCall } from './useMatrixCall';
@@ -46,11 +46,10 @@ export const MatrixCallFloatingWidget = forwardRef<
   const handleReturnToCall = useCallback(() => {
     requestReturnToCall();
     if (callRoomUuid) {
-      openUnifiedChatDrawer(openDrawer, { defaultRoomUuid: callRoomUuid });
+      openSupportDrawer(openDrawer, { defaultRoomUuid: callRoomUuid });
     }
   }, [requestReturnToCall, callRoomUuid, openDrawer]);
 
-  const widgetRef = useRef<HTMLDivElement>(null);
   const dragStateRef = useRef<{
     startClientX: number;
     startClientY: number;
@@ -114,7 +113,6 @@ export const MatrixCallFloatingWidget = forwardRef<
 
   return (
     <div
-      ref={widgetRef}
       className="matrix-call-widget shadow"
       style={{
         position: 'fixed',

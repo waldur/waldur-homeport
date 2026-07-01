@@ -359,7 +359,14 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
         onSyncRef.current = onSync;
         client.on(sdk.ClientEvent.Sync, onSync);
 
-        client.startClient({ initialSyncLimit: 30 });
+        // Detached pending events: reactions/relations local echo calls
+        // Room.getPendingEvents(), which throws unless ordering is detached.
+        // Without this, reacting to a freshly-sent message fails with
+        // "Cannot call getPendingEvents with pendingEventOrdering == chronological".
+        client.startClient({
+          initialSyncLimit: 30,
+          pendingEventOrdering: sdk.PendingEventOrdering.Detached,
+        });
       } catch (e) {
         // Failed before clientRef was assigned — release the latch so a
         // later connect() (e.g. user retry) can try again.

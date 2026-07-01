@@ -214,6 +214,8 @@ export interface TableProps<RowType = any> extends TableState {
   bodyClassName?: string;
   id?: string;
   rowClass?: (({ row }: { row: RowType }) => string) | string;
+  /** Opt-in row-click handler; ignored when clicking inner buttons/links. */
+  onRowClick?: (row: RowType) => void;
   hoverable?: boolean;
   hoverShadow?: { table?: boolean; grid?: boolean } | boolean;
   fullWidth?: boolean;

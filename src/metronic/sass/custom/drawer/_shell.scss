@@ -1,0 +1,99 @@
+// When the AI chat or support drawer is open, make the card and body fill the
+// drawer height so the content can use flex layout internally.
+#kt_drawer.ai-chat-drawer-active,
+#kt_drawer.support-drawer-active,
+#kt_drawer.confirmation-drawer-active {
+  top: calc(65px + 4px);
+  right: 4px;
+  max-width: calc(100% - 8px);
+  height: calc(100vh - 65px - 8px);
+
+  .outstanding-bar-enabled & {
+    top: calc(65px + 4px + var(--kt-pagebar-height));
+    height: calc(100vh - 65px - 8px - var(--kt-pagebar-height));
+  }
+  transition:
+    width 0.3s ease,
+    transform 0.3s ease-in-out;
+  box-shadow: $box-shadow-xl;
+  border-radius: 20px;
+  overflow: hidden;
+
+  &:not(.drawer-on) {
+    transform: translateX(calc(100% + 4px));
+  }
+}
+
+body:has(#kt_drawer.ai-chat-drawer-active) > .drawer-overlay,
+body:has(#kt_drawer.support-drawer-active) > .drawer-overlay,
+body:has(#kt_drawer.confirmation-drawer-active) > .drawer-overlay {
+  display: none;
+}
+
+#kt_drawer.ai-chat-drawer-active > .card,
+#kt_drawer.support-drawer-active > .card,
+#kt_drawer.confirmation-drawer-active > .card {
+  height: 100%;
+}
+
+// The drawer (z-index 110) sits above the fixed header (100), but the header's
+// dropdown menus open downward into the drawer's band. Trapped in the header's
+// own stacking context they'd paint behind the drawer, so lift the header above
+// it while a floating drawer is open.
+body:has(#kt_drawer.ai-chat-drawer-active) .header,
+body:has(#kt_drawer.support-drawer-active) .header,
+body:has(#kt_drawer.confirmation-drawer-active) .header {
+  z-index: get($drawer, z-index) + 1;
+}
+
+// The confirmation drawer keeps the default card-body scroll (unlike the chat
+// drawers, which manage their own internal scroll), so the body must fill the
+// fixed-height card and shrink below its content to scroll. Override .scroll-y's
+// permanent scrollbar with auto so a short list doesn't leave an empty gutter.
+#kt_drawer.confirmation-drawer-active #kt_drawer_body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+// Switching between the AI and Support drawers lazy-loads the new panel, so the
+// body briefly has neither chat child and the :has() override below stops
+// matching — the forced .scroll-y scrollbar flashes back. Pin overflow off the
+// shell class (present for the whole swap) so it never reappears.
+#kt_drawer.ai-chat-drawer-active #kt_drawer_body,
+#kt_drawer.support-drawer-active #kt_drawer_body {
+  overflow-y: hidden;
+}
+
+// Switching between the AI assistant and Support reuses the same drawer shell
+// and only swaps the body, which otherwise reads as an abrupt jump. A short
+// fade on the freshly-mounted content softens the transition.
+@keyframes tc-drawer-content-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.unified-chat-drawer,
+.support-drawer {
+  animation: tc-drawer-content-fade 0.2s ease;
+}
+
+#kt_drawer_body:has(.unified-chat-drawer),
+#kt_drawer_body:has(.support-drawer) {
+  overflow-y: hidden !important;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0 0 !important;
+  }
+}

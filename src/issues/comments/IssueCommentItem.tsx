@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
+import Avatar from '@/core/Avatar';
 import { ENV } from '@/core/config';
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { FormattedJira } from '@/core/FormattedJira';
 import { lazyComponent } from '@/core/lazyComponent';
-import { getAbbreviation } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
@@ -45,12 +45,14 @@ const CommentAvatar = ({ comment }) => {
   const color = nameToColor(comment.author_name);
 
   return (
-    <div className="timeline-icon symbol symbol-circle symbol-32px me-4">
-      <div
-        className={`symbol-label fs-5 fw-bold bg-light-${color} text-${color}`}
-      >
-        {getAbbreviation(comment.author_name)}
-      </div>
+    <div className="timeline-icon me-4">
+      <Avatar
+        src={comment.author_image}
+        name={comment.author_name}
+        size={32}
+        circle
+        labelClassName={`fs-5 fw-bold bg-light-${color} text-${color}`}
+      />
     </div>
   );
 };

@@ -20,9 +20,6 @@ describe('chatDrawerPreferences', () => {
   });
 
   it('round-trips a value through set and get', () => {
-    setChatDrawerPreference('activeTab', 'matrix');
-    expect(getChatDrawerPreference('activeTab')).toBe('matrix');
-
     setChatDrawerPreference('lastRoomUuid', 'room-1');
     expect(getChatDrawerPreference('lastRoomUuid')).toBe('room-1');
 

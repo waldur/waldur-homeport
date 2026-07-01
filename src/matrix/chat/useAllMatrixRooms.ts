@@ -10,9 +10,10 @@ import {
   useAllRoomCallStates,
 } from './call/useAllRoomCallStates';
 import { isRoomMuted } from './mute';
+import { classifyPreviewEvent, PreviewKind } from './previewClassifier';
 import { useMatrixClient } from './useMatrixClient';
 import { useAllRoomMemberNames } from './useRoomMemberNames';
-import { htmlToPlainText, resolveMemberName } from './utils';
+import { resolveMemberName } from './utils';
 
 // Mirrors get_members[:10] in waldur-mastermind's MatrixRoomSerializer: the room
 // list embeds at most this many members. Rooms above it need their full roster
@@ -24,11 +25,21 @@ const EMBEDDED_MEMBER_CAP = 10;
 interface RoomLiveState {
   unreadCount: number;
   mentionCount: number;
+  /** Flat text preview, kept for tooltips and the collapsed rail. */
   preview: string;
+  /** Structured kind so the row can render an icon/size for media & system lines. */
+  previewKind: PreviewKind;
+  previewFileName?: string;
+  previewFileSize?: number;
   previewSender: string;
   lastActivity: number;
   isMuted: boolean;
 }
+
+// Event types that can surface as a conversation-list preview. Anything else
+// (topic/name/avatar churn, redactions) is skipped so the row keeps showing the
+// last meaningful line.
+const PREVIEWABLE_EVENT_TYPES = new Set(['m.room.message', 'm.room.member']);
 
 interface RoomLiveMap {
   [roomId: string]: RoomLiveState;
@@ -52,30 +63,54 @@ function readRoomLiveState(
     0;
 
   let preview = '';
+  let previewKind: PreviewKind = 'none';
+  let previewFileName: string | undefined;
+  let previewFileSize: number | undefined;
   let previewSender = '';
   let lastActivity = 0;
 
   const events = room.getLiveTimeline?.()?.getEvents?.() ?? [];
   for (let i = events.length - 1; i >= 0; i--) {
     const event = events[i];
-    if (event.getType?.() !== 'm.room.message') continue;
-    const senderId = event.getSender?.() ?? '';
+    const type = event.getType?.();
+    if (!PREVIEWABLE_EVENT_TYPES.has(type)) continue;
     const content = event.getContent?.() ?? {};
-    // Prefer the rendered HTML flattened to text so previews don't show raw
-    // markdown (`**bold**`, backticks); fall back to the plaintext body.
-    preview =
-      content.format === 'org.matrix.custom.html' &&
-      typeof content.formatted_body === 'string'
-        ? htmlToPlainText(content.formatted_body)
-        : (content.body ?? '');
+
+    // Member events are state events: the affected user is the state key, and
+    // the prior membership lives in prev_content. Resolve the target to the
+    // canonical Waldur name so the system line reads "Invited Alisa Hester …".
+    const targetId =
+      type === 'm.room.member' ? event.getStateKey?.() : undefined;
+    const targetName = targetId
+      ? resolveMemberName(
+          targetId,
+          memberNames,
+          room.getMember?.(targetId)?.name,
+        )
+      : undefined;
+    const info = classifyPreviewEvent(type, content, {
+      prevMembership: event.getPrevContent?.()?.membership,
+      targetName,
+    });
+    if (info.kind === 'none') continue;
+
+    preview = info.text;
+    previewKind = info.kind;
+    previewFileName = info.fileName;
+    previewFileSize = info.fileSize;
+    const senderId = event.getSender?.() ?? '';
+    // System lines already name the actor; only message previews carry a
+    // "Sender: " prefix in the row.
     previewSender =
-      senderId && senderId === ownUserId
-        ? ownName
-        : resolveMemberName(
-            senderId,
-            memberNames,
-            room.getMember?.(senderId)?.name,
-          );
+      info.kind === 'system'
+        ? ''
+        : senderId && senderId === ownUserId
+          ? ownName
+          : resolveMemberName(
+              senderId,
+              memberNames,
+              room.getMember?.(senderId)?.name,
+            );
     lastActivity = event.getTs?.() ?? 0;
     break;
   }
@@ -84,6 +119,9 @@ function readRoomLiveState(
     unreadCount,
     mentionCount,
     preview,
+    previewKind,
+    previewFileName,
+    previewFileSize,
     previewSender,
     lastActivity,
     isMuted: isRoomMuted(client, room.roomId),
@@ -265,6 +303,9 @@ export function useAllMatrixRooms() {
         unreadCount: live?.unreadCount ?? 0,
         mentionCount: live?.mentionCount ?? 0,
         preview: live?.preview ?? '',
+        previewKind: live?.previewKind ?? ('none' as PreviewKind),
+        previewFileName: live?.previewFileName,
+        previewFileSize: live?.previewFileSize,
         previewSender: live?.previewSender ?? '',
         lastActivity: live?.lastActivity ?? 0,
         isMuted: live?.isMuted ?? false,
