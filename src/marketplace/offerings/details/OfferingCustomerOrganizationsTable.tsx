@@ -4,12 +4,10 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import {
-  AccountingRunningField,
-  getOptions,
-} from '@/customer/list/AccountingRunningField';
+import { getOptions } from '@/customer/list/AccountingRunningField';
 import { EstimatedCostField } from '@/customer/list/EstimatedCostField';
 import { translate } from '@/i18n';
+import { SelectFilter } from '@/table';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
@@ -93,7 +91,14 @@ const OrganizationsTableBody: FunctionComponent<
       showPageSizeSelector={true}
       tableActions={
         <div className="form-inline min-w-200px">
-          <AccountingRunningField />
+          <SelectFilter
+            title={translate('Accounting is running')}
+            name="accounting_is_running"
+            getValueLabel={(value) => value?.label}
+            placeholder={translate('Show with running accounting')}
+            options={getOptions()}
+            isClearable={false}
+          />
         </div>
       }
       hasQuery={false}

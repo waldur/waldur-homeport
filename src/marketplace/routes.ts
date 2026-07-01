@@ -74,7 +74,11 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'marketplace-offering-details',
-    url: 'marketplace-provider-offering-details/:offering_uuid/?tab',
+    url: 'marketplace-provider-offering-details/:offering_uuid/?tab&customerTab',
+    params: {
+      tab: { dynamic: true },
+      customerTab: { dynamic: true },
+    },
     component: lazyComponent(() =>
       import('./offerings/details/OfferingContainer').then((module) => ({
         default: module.OfferingContainer,
@@ -758,7 +762,11 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'admin-marketplace-offering-details',
-    url: 'offerings/:offering_uuid/?tab',
+    url: 'offerings/:offering_uuid/?tab&customerTab',
+    params: {
+      tab: { dynamic: true },
+      customerTab: { dynamic: true },
+    },
     component: lazyComponent(() =>
       import('./offerings/details/OfferingContainer').then((module) => ({
         default: module.OfferingContainer,
