@@ -111,6 +111,44 @@ export const stepDefinition = (id: StepEnum): StepDefinition | undefined =>
 export const stepLabel = (id: StepEnum): string =>
   stepDefinition(id)?.name ?? id;
 
+// The set of currently-enabled step ids among `steps`. Dependency checks
+// resolve against this: only an *enabled* dependency satisfies the backend
+// rule — a configured-but-disabled one does not.
+export const getEnabledStepIds = (
+  steps: { step: StepEnum; is_enabled?: boolean | null }[],
+): Set<StepEnum> =>
+  new Set(steps.filter((s) => s.is_enabled).map((s) => s.step));
+
+// Dependencies of `stepId` that are not in `enabledStepIds`. Mirrors
+// CallWorkflowStep.clean() in waldur-mastermind, which rejects enabling a step
+// until every dependency is enabled — so the UI must check enabled (not merely
+// configured) steps before offering to enable a dependent.
+export const getMissingDependencies = (
+  stepId: StepEnum,
+  enabledStepIds: Set<StepEnum>,
+): StepEnum[] =>
+  (stepDefinition(stepId)?.dependencies ?? []).filter(
+    (dep) => !enabledStepIds.has(dep),
+  );
+
+// Steps that depend on `stepId`, directly or transitively. Disabling a step
+// leaves these in a state the workflow can't run (their dependency is gone),
+// so the toggle cascades the disable to them.
+export const getDependentSteps = (stepId: StepEnum): StepEnum[] => {
+  const defs = getStepDefinitions();
+  const dependents = new Set<StepEnum>();
+  const visit = (id: StepEnum) => {
+    for (const def of defs) {
+      if (def.dependencies.includes(id) && !dependents.has(def.id)) {
+        dependents.add(def.id);
+        visit(def.id);
+      }
+    }
+  };
+  visit(stepId);
+  return [...dependents];
+};
+
 export const outcomeLabel = (outcome: OutcomeEnum | string): string => {
   switch (outcome) {
     case 'eligible':

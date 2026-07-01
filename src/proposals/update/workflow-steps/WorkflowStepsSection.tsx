@@ -82,10 +82,12 @@ const StepRowActions = ({
   row,
   fetch,
   call,
+  steps,
 }: {
   row: CallWorkflowStep;
   fetch(): void;
   call: Call;
+  steps: CallWorkflowStep[];
 }) => {
   // Backend-managed rows (e.g. award_response is provisioned by Allocation
   // Decision's include_award_response toggle) expose only Configure.
@@ -100,7 +102,12 @@ const StepRowActions = ({
       ? []
       : [
           ({ row, refetch }) => (
-            <WorkflowStepToggleAction row={row} call={call} refetch={refetch} />
+            <WorkflowStepToggleAction
+              row={row}
+              call={call}
+              steps={steps}
+              refetch={refetch}
+            />
           ),
           ({ row, refetch }) => (
             <WorkflowStepDeleteAction row={row} call={call} refetch={refetch} />
@@ -224,7 +231,12 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
               )}
             />
           ) : (
-            <StepRowActions row={row} fetch={fetch} call={call} />
+            <StepRowActions
+              row={row}
+              fetch={fetch}
+              call={call}
+              steps={sortedRows}
+            />
           )
         }
         expandableRow={WorkflowStepExpandableRow}
