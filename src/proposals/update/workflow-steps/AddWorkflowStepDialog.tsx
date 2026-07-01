@@ -27,6 +27,8 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import {
+  getEnabledStepIds,
+  getMissingDependencies,
   getStepDefinitions,
   RESPONSIBLE_ROLE_OPTIONS,
   ResponsibleRoleEnum,
@@ -127,6 +129,13 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
     [configuredSteps],
   );
 
+  // Dependencies are satisfied only by *enabled* steps — a configured-but-
+  // disabled dependency still fails the backend check, so gate on this set.
+  const enabledStepIds = useMemo(
+    () => getEnabledStepIds(configuredSteps),
+    [configuredSteps],
+  );
+
   const stepOptions = useMemo(
     () =>
       getStepDefinitions()
@@ -136,9 +145,7 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
         .filter((d) => d.id !== 'award_response')
         .filter((d) => !configuredStepIds.has(d.id))
         .map((d) => {
-          const missingDeps = d.dependencies.filter(
-            (dep) => !configuredStepIds.has(dep),
-          );
+          const missingDeps = getMissingDependencies(d.id, enabledStepIds);
           const disabled = missingDeps.length > 0;
           const labelSuffix = disabled
             ? ` (${translate('requires {step} first', {
@@ -152,7 +159,7 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
             description: d.description,
           };
         }),
-    [configuredStepIds],
+    [configuredStepIds, enabledStepIds],
   );
 
   const responsibleRoleOptions = useMemo(
