@@ -26,7 +26,7 @@ export const OfferingUserDetailsButton: FC<OfferingUserDetailsButtonProps> = ({
   const offeringUuid = offering?.uuid || row.offering_uuid;
   const callback = () =>
     openDialog(OfferingUserDetailsDialog, {
-      resolve: { offeringUser: row, offeringUuid },
+      resolve: { offeringUserUuid: row.uuid, offeringUuid },
       size: 'lg',
     });
 

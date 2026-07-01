@@ -2,6 +2,7 @@ import { UserGearIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import {
+  marketplaceOfferingUsersRetrieve,
   marketplaceProviderOfferingsUserAttributeConfigRetrieve,
   OfferingUser,
 } from 'waldur-js-client';
@@ -24,7 +25,7 @@ import { formatGender } from '@/user/support/aai-constants';
 import { IsdBadges } from '@/user/support/IsdBadges';
 
 interface OfferingUserDetailsDialogProps {
-  resolve: { offeringUser: OfferingUser; offeringUuid: string };
+  resolve: { offeringUserUuid: string; offeringUuid: string };
 }
 
 // Maps exposed_fields values to OfferingUser properties
@@ -132,13 +133,13 @@ const formatValue = (value: unknown): string => {
 };
 
 export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
-  resolve: { offeringUser, offeringUuid },
+  resolve: { offeringUserUuid, offeringUuid },
 }) => {
   const {
     data: config,
-    isLoading,
-    error,
-    refetch,
+    isLoading: isLoadingConfig,
+    error: configError,
+    refetch: refetchConfig,
   } = useQuery({
     queryKey: ['offering-user-attribute-config', offeringUuid],
     queryFn: () =>
@@ -148,8 +149,29 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
     staleTime: UI_STALE_TIME,
   });
 
+  const {
+    data: offeringUser,
+    isLoading: isLoadingOfferingUser,
+    error: offeringUserError,
+    refetch: refetchOfferingUser,
+  } = useQuery({
+    queryKey: ['offering-user', offeringUserUuid],
+    queryFn: () =>
+      marketplaceOfferingUsersRetrieve({
+        path: { uuid: offeringUserUuid },
+      }).then((response) => response.data),
+    staleTime: UI_STALE_TIME,
+  });
+
+  const isLoading = isLoadingConfig || isLoadingOfferingUser;
+  const error = configError || offeringUserError;
+  const refetch = () => {
+    refetchConfig();
+    refetchOfferingUser();
+  };
+
   const exposedUserAttributes = useMemo(() => {
-    if (!config?.exposed_fields) return [];
+    if (!config?.exposed_fields || !offeringUser) return [];
     return config.exposed_fields
       .filter((field) => FIELD_MAPPING[field])
       .map((field) => ({
@@ -162,7 +184,6 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
   return (
     <ModalDialog
       title={translate('Offering user details')}
-      subtitle={offeringUser.user_full_name}
       iconNode={<UserGearIcon weight="bold" />}
       iconColor="success"
       footer={<CloseDialogButton />}
@@ -171,10 +192,14 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
         <LoadingSpinner />
       ) : error ? (
         <LoadingErred
-          message={translate('Unable to load user attribute configuration.')}
+          message={
+            offeringUserError && !configError
+              ? translate('Unable to load offering user.')
+              : translate('Unable to load user attribute configuration.')
+          }
           loadData={refetch}
         />
-      ) : (
+      ) : offeringUser ? (
         <FormTable hideActions detailsMode className="gy-5">
           {/* Exposed user attributes from config */}
           {exposedUserAttributes.map((attr) => (
@@ -268,13 +293,11 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
             offeringUser.user_active_isds.length > 0 && (
               <FormTable.Item
                 label={translate('Active ISDs')}
-                value={
-                  <IsdBadges isds={offeringUser.user_active_isds as string[]} />
-                }
+                value={<IsdBadges isds={offeringUser.user_active_isds} />}
               />
             )}
         </FormTable>
-      )}
+      ) : null}
     </ModalDialog>
   );
 };
