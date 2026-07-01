@@ -22,6 +22,7 @@ export const OfferingCustomers = ({ offering }: OfferingCustomersProps) => {
         {
           key: 'organizations',
           title: translate('Organizations'),
+          default: true,
         },
         {
           key: 'projects',
@@ -33,7 +34,6 @@ export const OfferingCustomers = ({ offering }: OfferingCustomersProps) => {
         },
       ].map((tab) => ({
         ...tab,
-        state: 'marketplace-offering-details',
         params: {
           offering_uuid: offering.uuid,
           tab: 'customers',
