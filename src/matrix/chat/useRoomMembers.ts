@@ -1,10 +1,12 @@
 import { useMatrixClient } from './useMatrixClient';
-import { useRoomMemberNames } from './useRoomMemberNames';
+import { useRoomMemberImages, useRoomMemberNames } from './useRoomMemberNames';
 import { resolveMemberName } from './utils';
 
 interface RoomMember {
   userId: string;
   name: string;
+  /** Live Waldur profile image URL; undefined when the user has none. */
+  image?: string;
   membership: string;
   powerLevel: number;
 }
@@ -17,6 +19,7 @@ interface RoomMember {
 export function useRoomMembers(): RoomMember[] {
   const { client, activeRoomId, activeRoomUuid } = useMatrixClient();
   const memberNames = useRoomMemberNames(activeRoomUuid ?? undefined);
+  const memberImages = useRoomMemberImages(activeRoomUuid ?? undefined);
 
   if (!client || !activeRoomId) return [];
 
@@ -37,6 +40,7 @@ export function useRoomMembers(): RoomMember[] {
     .map((m: any) => ({
       userId: m.userId as string,
       name: resolveMemberName(m.userId, memberNames, m.name),
+      image: memberImages.get(m.userId),
       membership: m.membership as string,
       powerLevel: (powerLevels[m.userId] ?? 0) as number,
     }))

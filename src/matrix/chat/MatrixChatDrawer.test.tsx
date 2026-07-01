@@ -13,6 +13,7 @@ const h = vi.hoisted(() => ({
   room: {} as any,
   rooms: [] as any[],
   memberNames: new Map<string, string>(),
+  cancelRecording: vi.fn(),
 }));
 
 vi.mock('./useMatrixClient', () => ({
@@ -33,6 +34,7 @@ vi.mock('./useMatrixRoom', () => ({
 
 vi.mock('./useRoomMemberNames', () => ({
   useRoomMemberNames: () => h.memberNames,
+  useRoomMemberImages: () => new Map(),
 }));
 
 vi.mock('./call/useMatrixCall', () => ({
@@ -69,7 +71,20 @@ vi.mock('./MatrixChatHeader', () => ({
 }));
 
 vi.mock('./MatrixRoomSelector', () => ({
-  MatrixRoomSelector: () => null,
+  MatrixRoomSelector: ({ onSelect }: { onSelect: (uuid: string) => void }) => (
+    <button onClick={() => onSelect('room-2')}>switch-room</button>
+  ),
+}));
+
+vi.mock('./voice/useVoiceRecorder', () => ({
+  useVoiceRecorder: () => ({
+    state: 'recording',
+    elapsedMs: 0,
+    supported: true,
+    start: vi.fn().mockResolvedValue(undefined),
+    stop: vi.fn().mockResolvedValue(null),
+    cancel: h.cancelRecording,
+  }),
 }));
 
 vi.mock('./call/CallInProgressBanner', () => ({
@@ -101,6 +116,7 @@ beforeEach(() => {
   };
   h.rooms = [];
   h.memberNames = new Map();
+  h.cancelRecording.mockClear();
 });
 
 describe('MatrixChatDrawer — dock slot + chat layout', () => {
@@ -180,6 +196,19 @@ describe('MatrixChatDrawer — dock slot + chat layout', () => {
 
     expect(screen.getByTestId('message-list')).toBeInTheDocument();
     expect(screen.getByTestId('message-input')).toBeInTheDocument();
+  });
+
+  it('cancels an in-progress recording when switching rooms', async () => {
+    h.rooms = [
+      { uuid: 'room-1', state: 'active', room_alias: '#a:s', room_name: 'A' },
+      { uuid: 'room-2', state: 'active', room_alias: '#b:s', room_name: 'B' },
+    ];
+    const user = userEvent.setup();
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    await user.click(screen.getByRole('button', { name: 'switch-room' }));
+
+    expect(h.cancelRecording).toHaveBeenCalled();
   });
 });
 

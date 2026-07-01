@@ -150,8 +150,10 @@
   color: $gray-700;
 }
 
-// Lower AI drawer z-index so header dropdowns (z-index: 105) render on top
-#kt_drawer.ai-chat-drawer-active {
+// Lower the chat/support drawer z-index so header dropdowns (z-index: 105)
+// render on top
+#kt_drawer.ai-chat-drawer-active,
+#kt_drawer.support-drawer-active {
   z-index: 100 !important;
 }
 

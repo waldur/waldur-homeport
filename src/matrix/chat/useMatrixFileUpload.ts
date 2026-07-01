@@ -67,7 +67,14 @@ export function useMatrixFileUpload() {
   const clearPending = useCallback(() => setFiles(() => []), [setFiles]);
 
   const uploadFile = useCallback(
-    async (file: File): Promise<boolean> => {
+    async (
+      file: File,
+      // Lets callers (voice messages) supply the resolved mxc URL and override
+      // the default file content with custom event fields — e.g. the MSC3245
+      // `m.audio` + waveform payload. `buildContent` receives the freshly
+      // uploaded mxc URL so the caller doesn't have to upload separately.
+      buildContent?: (mxcUrl: string) => Record<string, any>,
+    ): Promise<boolean> => {
       if (!file || !client || !activeRoomId) return false;
 
       setUploading(true);
@@ -82,6 +89,11 @@ export function useMatrixFileUpload() {
             : uploadResponse?.content_uri;
 
         if (!mxcUrl) throw new Error('No content_uri in upload response');
+
+        if (buildContent) {
+          await client.sendMessage(activeRoomId, buildContent(mxcUrl) as any);
+          return true;
+        }
 
         const msgtype = getMsgType(file.type);
         const content: Record<string, any> = {

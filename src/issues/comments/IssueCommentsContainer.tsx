@@ -5,7 +5,7 @@ import { Issue, supportCommentsList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { RefreshButton } from '@/marketplace/common/RefreshButton';
+import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 
 import { ISSUE_COMMENTS_QUERY_KEY } from './constants';
 import { IssueCommentButton } from './IssueCommentButton';
@@ -41,7 +41,7 @@ export const IssueCommentsContainer: FC<IssueCommentsContainerProps> = ({
         <Card.Header>
           <Card.Title>
             <span className="me-2">{translate('Comments')}</span>
-            <RefreshButton refetch={refetch} isLoading={isLoading} />
+            <RefreshButton refetch={refetch} loading={isLoading} />
           </Card.Title>
           <div className="card-toolbar">
             <IssueCommentButton />

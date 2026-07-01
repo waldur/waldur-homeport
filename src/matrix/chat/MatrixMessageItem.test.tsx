@@ -70,6 +70,31 @@ describe('MatrixMessageItem markdown rendering', () => {
   });
 });
 
+describe('MatrixMessageItem sender presentation', () => {
+  it('renders an avatar and the sender name for other people’s messages', () => {
+    const { container } = renderItem('hi there');
+    // The Avatar renders a Metronic symbol with the sender's initials.
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector('.symbol')).not.toBeNull();
+    expect(screen.getByText('Alice')).toBeInTheDocument();
+  });
+
+  it('omits the avatar and shows a read receipt for own messages', () => {
+    const { container } = render(
+      <MatrixMessageItem
+        message={textMessage('my message')}
+        isOwn
+        senderName="Alice"
+      />,
+    );
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector('.symbol')).toBeNull();
+    // The read-receipt glyph carries an accessible "Sent" label.
+    expect(screen.getByLabelText('Sent')).toBeInTheDocument();
+    expect(screen.getByText('You')).toBeInTheDocument();
+  });
+});
+
 describe('MatrixMessageItem does not render raw HTML in untrusted bodies', () => {
   it('does not emit an iframe from a message body', () => {
     const { container } = renderItem(

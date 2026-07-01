@@ -1,7 +1,9 @@
 import {
   FileIcon,
+  MicrophoneIcon,
   PaperPlaneRightIcon,
   PaperclipIcon,
+  TrashIcon,
 } from '@phosphor-icons/react';
 import {
   ClipboardEvent,
@@ -22,7 +24,7 @@ import { translate } from '@/i18n';
 import { useMatrixComposerDraft } from './MatrixComposerDraftContext';
 import { useMatrixClient } from './useMatrixClient';
 import { useRoomMemberNames } from './useRoomMemberNames';
-import { resolveMemberName } from './utils';
+import { isBotUser, resolveMemberName } from './utils';
 
 interface MatrixMessageInputProps {
   uploadFile: (file: File) => Promise<boolean>;
@@ -32,11 +34,43 @@ interface MatrixMessageInputProps {
   removePending: (index: number) => void;
   setPending: (files: File[]) => void;
   clearPending: () => void;
+  /**
+   * Invoked when the user taps the microphone to start a voice message. The
+   * owner holds the recorder and swaps in the recording controls.
+   */
+  onStartRecording?: () => void;
+  /**
+   * Whether the browser supports MediaRecorder + getUserMedia. When false the
+   * mic is disabled with an explanatory tooltip rather than hidden, so the
+   * affordance stays discoverable.
+   */
+  recordingSupported?: boolean;
+  /**
+   * True while a voice clip is recording or being sent. The composer keeps its
+   * card and footer; only the textarea region is swapped for the recording UI.
+   */
+  recording?: boolean;
+  /** Elapsed recording time in ms, shown in place of the textarea. */
+  recordingElapsedMs?: number;
+  /** True while the recorded clip is being finalized and uploaded. */
+  sendingVoice?: boolean;
+  /** Discard the in-progress recording and return to the text composer. */
+  onCancelRecording?: () => void;
+  /** Stop recording, then upload and send the clip. */
+  onSendVoice?: () => void;
 }
 
 interface MentionCandidate {
   userId: string;
   displayName: string;
+}
+
+/** mm:ss for a millisecond duration; clamps negatives to 0. */
+function formatClock(ms: number): string {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 /** Extract the @-mention query from the text at the cursor position. */
@@ -120,6 +154,13 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
   removePending,
   setPending,
   clearPending,
+  onStartRecording,
+  recordingSupported = true,
+  recording = false,
+  recordingElapsedMs = 0,
+  sendingVoice = false,
+  onCancelRecording,
+  onSendVoice,
 }) => {
   const { client, activeRoomId, activeRoomUuid, connectionState, userId } =
     useMatrixClient();
@@ -143,16 +184,21 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
     if (!client || !activeRoomId) return [];
     const room = client.getRoom(activeRoomId);
     if (!room) return [];
-    return room
-      .getJoinedMembers()
-      .map((m: any) => ({
-        userId: m.userId as string,
-        displayName: resolveMemberName(m.userId, memberNames, m.name),
-      }))
-      .filter((m: MentionCandidate) => m.userId !== userId)
-      .sort((a: MentionCandidate, b: MentionCandidate) =>
-        a.displayName.localeCompare(b.displayName),
-      );
+    return (
+      room
+        .getJoinedMembers()
+        .map((m: any) => ({
+          userId: m.userId as string,
+          displayName: resolveMemberName(m.userId, memberNames, m.name),
+        }))
+        // Exclude self and the appservice bot — the bot isn't a mentionable user.
+        .filter(
+          (m: MentionCandidate) => m.userId !== userId && !isBotUser(m.userId),
+        )
+        .sort((a: MentionCandidate, b: MentionCandidate) =>
+          a.displayName.localeCompare(b.displayName),
+        )
+    );
   }, [client, activeRoomId, userId, memberNames]);
 
   const filteredMentions = useMemo(() => {
@@ -438,6 +484,10 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
               className={`tc-mention-item ${
                 i === mentionIndex ? 'is-active' : ''
               }`}
+              // The Matrix user ID disambiguates members who share a display
+              // name; surfaced as a hover tooltip rather than a permanent second
+              // line to keep the list compact.
+              title={m.userId}
               onMouseDown={(e) => {
                 e.preventDefault(); // prevent textarea blur
                 acceptMention(m);
@@ -448,13 +498,10 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                 {m.displayName.charAt(0).toUpperCase()}
               </div>
               <span className="tc-mention-item__name">{m.displayName}</span>
-              <span className="tc-mention-item__id">{m.userId}</span>
             </button>
           ))}
         </div>
       )}
-
-      <PendingAttachments files={pendingFiles} onRemove={removePending} />
 
       <form onSubmit={sendMessage} className="tc-composer">
         <input
@@ -465,47 +512,118 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
           accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.zip,.tar.gz"
           onChange={handleFileSelect}
         />
-        <button
-          type="button"
-          className="btn btn-icon btn-light"
-          disabled={disabled || busy}
-          onClick={() => fileInputRef.current?.click()}
-          title={translate('Attach file')}
-        >
-          <PaperclipIcon weight="bold" />
-        </button>
-        <textarea
-          ref={textareaRef}
-          className="tc-composer-input"
-          rows={1}
-          value={message}
-          onChange={(e) => handleInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onPaste={handlePaste}
-          onSelect={handleSelect}
-          placeholder={
-            disabled
-              ? translate('Connecting...')
-              : uploading
-                ? translate('Uploading...')
-                : translate('Type a message...')
-          }
-          disabled={disabled || uploading}
-        />
-        <button
-          type="submit"
-          className="btn btn-primary btn-icon"
-          disabled={disabled || !canSend || busy}
-          title={
-            disabled
-              ? translate('Not connected')
-              : !canSend
-                ? translate('Enter a message or attach a file')
-                : translate('Send message')
-          }
-        >
-          <PaperPlaneRightIcon weight="bold" />
-        </button>
+        {!recording && (
+          <PendingAttachments files={pendingFiles} onRemove={removePending} />
+        )}
+        <div className="tc-composer-input-row">
+          {recording ? (
+            <div className="tc-voice-recording">
+              <span className="tc-voice-recorder__dot" aria-hidden="true" />
+              <span className="tc-voice-recorder__time">
+                {formatClock(recordingElapsedMs)}
+              </span>
+              <span className="tc-voice-recorder__label">
+                {sendingVoice
+                  ? translate('Sending...')
+                  : translate('Recording...')}
+              </span>
+            </div>
+          ) : (
+            <>
+              <textarea
+                ref={textareaRef}
+                className="tc-composer-input"
+                rows={1}
+                value={message}
+                onChange={(e) => handleInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                onPaste={handlePaste}
+                onSelect={handleSelect}
+                placeholder={
+                  disabled
+                    ? translate('Connecting...')
+                    : uploading
+                      ? translate('Uploading...')
+                      : translate('Type a message...')
+                }
+                disabled={disabled || uploading}
+              />
+              <button
+                type="button"
+                className="tc-composer-mic btn btn-icon"
+                disabled={disabled || !recordingSupported}
+                onClick={onStartRecording}
+                title={
+                  !recordingSupported
+                    ? translate(
+                        'Voice messages are not supported in this browser.',
+                      )
+                    : translate('Record voice message')
+                }
+              >
+                <MicrophoneIcon weight="bold" />
+              </button>
+            </>
+          )}
+        </div>
+        <div className="tc-composer-footer">
+          {recording ? (
+            <>
+              <button
+                type="button"
+                className="tc-composer-button"
+                onClick={onCancelRecording}
+                disabled={sendingVoice}
+                title={translate('Discard recording')}
+              >
+                <TrashIcon weight="bold" />
+                {translate('Cancel')}
+              </button>
+              <button
+                type="button"
+                className="tc-composer-button send"
+                onClick={onSendVoice}
+                disabled={sendingVoice}
+                title={translate('Send voice message')}
+              >
+                <PaperPlaneRightIcon weight="bold" />
+                {translate('Send')}
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                className="tc-composer-button"
+                disabled={disabled || busy}
+                onClick={() => fileInputRef.current?.click()}
+                title={
+                  disabled
+                    ? translate('Not connected')
+                    : translate('Attach a file')
+                }
+              >
+                <PaperclipIcon weight="bold" />
+                {translate('Attach')}
+              </button>
+              <button
+                type="submit"
+                className="tc-composer-button send"
+                disabled={disabled || !canSend || busy}
+                title={
+                  disabled
+                    ? translate('Not connected')
+                    : !canSend
+                      ? translate('Enter a message or attach a file')
+                      : translate('Send message')
+                }
+              >
+                <PaperPlaneRightIcon weight="bold" />
+                {translate('Send')}
+              </button>
+            </>
+          )}
+        </div>
       </form>
     </div>
   );

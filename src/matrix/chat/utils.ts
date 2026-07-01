@@ -1,6 +1,7 @@
 import type { MatrixEvent, Room } from 'matrix-js-sdk';
 
 import { ENV } from '@/core/config';
+import { stripHtml } from '@/core/sanitize';
 import { translate } from '@/i18n';
 import { getUserLocale } from '@/i18n/LanguageUtilsService';
 
@@ -14,7 +15,14 @@ export function mapEventToMessage(
   if (type !== 'm.room.message') return null;
 
   const content = event.getContent();
-  if (!content.body) return null;
+  const isMediaMsg =
+    content.msgtype === 'm.image' ||
+    content.msgtype === 'm.video' ||
+    content.msgtype === 'm.audio' ||
+    content.msgtype === 'm.file';
+  // Drop only bodyless *text* events. Media/voice notes carry their payload in
+  // url/info/MSC fields and are valid with an empty body (some clients omit it).
+  if (!content.body && !isMediaMsg) return null;
 
   const senderId = event.getSender();
   const member = room?.getMember(senderId);
@@ -26,16 +34,36 @@ export function mapEventToMessage(
       )
     : undefined;
 
+  // MSC3245 marks a clip as a voice note; MSC1767 carries the precomputed
+  // waveform + duration so the player draws bars without re-decoding the blob.
+  const audioExt = content['org.matrix.msc1767.audio'];
+  const isVoice = content['org.matrix.msc3245.voice'] !== undefined;
+  const waveform = Array.isArray(audioExt?.waveform)
+    ? (audioExt.waveform as unknown[]).filter(
+        (v): v is number => typeof v === 'number',
+      )
+    : undefined;
+  const durationMs =
+    typeof audioExt?.duration === 'number'
+      ? audioExt.duration
+      : typeof content.info?.duration === 'number'
+        ? content.info.duration
+        : undefined;
+
   return {
     eventId: event.getId(),
+    txnId: event.getTxnId?.() ?? undefined,
     sender: senderId,
     senderDisplayName: member?.name || formatDisplayName(senderId),
-    body: content.body,
+    body: content.body ?? '',
     timestamp: event.getTs(),
     type: content.msgtype || 'm.text',
     url: content.url,
     info: content.info,
     mentionedUserIds,
+    isVoice,
+    waveform,
+    durationMs,
   };
 }
 
@@ -72,6 +100,12 @@ export function getSenderName(
   );
 }
 
+/** The Waldur appservice bot's Matrix localpart ends in `-bot`. */
+export function isBotUser(userId: string): boolean {
+  const match = userId.match(/^@([^:]+):/);
+  return Boolean(match && match[1].endsWith('-bot'));
+}
+
 export function formatDisplayName(userId: string): string {
   const match = userId.match(/^@([^:]+):/);
   if (!match) return userId;
@@ -105,15 +139,20 @@ export function sanitizeName(name: string): string {
 
 /**
  * Flatten a Matrix `formatted_body` (HTML) into a single line of plain text for
- * conversation-list previews. `DOMParser` parses into an inert document, so
- * embedded scripts never run — we only read `textContent`, which also decodes
- * entities (`&lt;` → `<`). Block boundaries are joined with spaces and runs of
- * whitespace collapsed, since the preview is a single clamped line.
+ * conversation-list previews. The security-sensitive tag stripping is delegated
+ * to the shared DOMPurify-based {@link stripHtml} sanitizer (so future hardening
+ * applies here too, and `<script>`/`<style>` *content* is dropped rather than
+ * surfaced as preview text). `stripHtml` returns an HTML string with entities
+ * still encoded, so `textContent` on the now tag-free result decodes them
+ * (`&lt;` → `<`); whitespace is then collapsed to a single clamped line.
  */
 export function htmlToPlainText(html: string): string {
   if (!html) return '';
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  return (doc.body.textContent ?? '').replace(/\s+/g, ' ').trim();
+  const sanitized = stripHtml(html);
+  const decoded =
+    new DOMParser().parseFromString(sanitized, 'text/html').body.textContent ??
+    '';
+  return decoded.replace(/\s+/g, ' ').trim();
 }
 
 export function formatTime(timestamp: number): string {

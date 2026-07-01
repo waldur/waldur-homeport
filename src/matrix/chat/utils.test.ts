@@ -8,6 +8,7 @@ import {
   aggregateReactionsForTarget,
   getSenderName,
   htmlToPlainText,
+  mapEventToMessage,
   resolveMemberName,
   sanitizeName,
 } from './utils';
@@ -24,6 +25,35 @@ const message: MatrixChatMessage = {
   timestamp: 0,
   type: 'm.text',
 };
+
+const makeEvent = (content: any, type = 'm.room.message') =>
+  ({
+    getType: () => type,
+    getContent: () => content,
+    getSender: () => '@bob:s',
+    getId: () => '$evt1',
+    getTs: () => 1000,
+  }) as any;
+
+describe('mapEventToMessage', () => {
+  it('keeps a media message that has an empty body', () => {
+    const msg = mapEventToMessage(
+      makeEvent({
+        msgtype: 'm.image',
+        body: '',
+        url: 'mxc://x',
+        info: { mimetype: 'image/png' },
+      }),
+    );
+    expect(msg).not.toBeNull();
+    expect(msg!.type).toBe('m.image');
+  });
+
+  it('still drops a text message with no body', () => {
+    const msg = mapEventToMessage(makeEvent({ msgtype: 'm.text', body: '' }));
+    expect(msg).toBeNull();
+  });
+});
 
 describe('getSenderName', () => {
   it('returns the Waldur full name when the sender is a known room member', () => {
@@ -105,10 +135,10 @@ describe('htmlToPlainText', () => {
     ).toBe('Members: a<b — bot');
   });
 
-  it('does not execute embedded scripts, only extracts text', () => {
-    expect(htmlToPlainText('<p>hi<script>alert(1)</script></p>')).toBe(
-      'hialert(1)',
-    );
+  it('drops embedded script content instead of surfacing it as text', () => {
+    // DOMPurify removes <script> along with its content, so the preview shows
+    // only the real message text — never the script body.
+    expect(htmlToPlainText('<p>hi<script>alert(1)</script></p>')).toBe('hi');
   });
 
   it('returns empty string for empty input', () => {

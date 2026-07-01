@@ -1,6 +1,6 @@
 import {
-  ArrowsClockwiseIcon,
   ClockCounterClockwiseIcon,
+  CloudArrowDownIcon,
 } from '@phosphor-icons/react';
 import { Table } from 'react-bootstrap';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
@@ -123,7 +123,7 @@ export const IssueSyncButton = ({
       onClick={() => mutate()}
       disabled={isPending}
       label={translate('Sync')}
-      iconNode={<ArrowsClockwiseIcon weight="bold" />}
+      iconNode={<CloudArrowDownIcon weight="bold" />}
       iconOnLeft
     />
   );

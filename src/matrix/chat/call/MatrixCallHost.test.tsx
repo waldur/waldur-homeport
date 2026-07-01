@@ -6,8 +6,8 @@ vi.mock('@/drawer/actions', () => ({
   useDrawer: () => ({ openDrawer: vi.fn(), closeDrawer: vi.fn() }),
 }));
 
-vi.mock('@/chat/openUnifiedChatDrawer', () => ({
-  openUnifiedChatDrawer: vi.fn(),
+vi.mock('@/support/openSupportDrawer', () => ({
+  openSupportDrawer: vi.fn(),
 }));
 
 const h = vi.hoisted(() => ({

@@ -10,6 +10,7 @@ import { RateStars } from './RateStars';
 
 interface ReviewCommentProps {
   title?: string;
+  image?: string | null;
   score?: number;
   time?: string;
   className?: string;
@@ -30,6 +31,7 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
       <Avatar
         labelClassName="bg-tertiary text-quaternary"
         name={props.title}
+        src={props.image}
         size={32}
         circle
       />

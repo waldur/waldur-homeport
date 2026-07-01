@@ -141,6 +141,7 @@ export function TableProvider<TData = any>({
         toggleFilterMenu: props.toggleFilterMenu,
         openFiltersDrawer: props.openFiltersDrawer,
         renderFiltersDrawer: props.renderFiltersDrawer,
+        onRowClick: props.onRowClick,
       },
 
       // Config
@@ -265,6 +266,7 @@ export function TableProvider<TData = any>({
       props.toggleFilterMenu,
       props.openFiltersDrawer,
       props.renderFiltersDrawer,
+      props.onRowClick,
       props.table,
       props.rowKey,
       props.hasQuery,

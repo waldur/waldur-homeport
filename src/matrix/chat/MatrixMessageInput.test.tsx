@@ -63,7 +63,7 @@ describe('MatrixMessageInput partial upload failure', () => {
 
     const textarea = screen.getByRole('textbox');
     await user.type(textarea, 'caption');
-    await user.click(screen.getByRole('button', { name: /send message/i }));
+    await user.click(screen.getByRole('button', { name: 'Send' }));
 
     await waitFor(() => expect(setPending).toHaveBeenCalledWith([fileB]));
     expect(uploadFile).toHaveBeenCalledTimes(2);
@@ -93,7 +93,7 @@ describe('MatrixMessageInput partial upload failure', () => {
     );
     const textarea = screen.getByRole('textbox');
     await user.type(textarea, 'hi');
-    await user.click(screen.getByRole('button', { name: /send message/i }));
+    await user.click(screen.getByRole('button', { name: 'Send' }));
 
     await waitFor(() =>
       expect(h.client.sendTextMessage).toHaveBeenCalledWith('!room:s', 'hi'),

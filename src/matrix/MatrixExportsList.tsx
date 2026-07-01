@@ -25,6 +25,21 @@ const exportTypeLabel = (type: string) => {
   }
 };
 
+// The export writes media into a separate ZIP archive (media_file_url),
+// distinct from the JSON message log (export_file_url). Surface its download
+// next to the count so the archive is reachable from the table at all.
+const ExportMediaFilesCell: FC<{ row: MatrixHistoryExport }> = ({ row }) => (
+  <div className="d-flex align-items-center gap-2">
+    <span>{row.media_count}</span>
+    {row.media_file_url && (
+      <FileDownloader
+        url={row.media_file_url}
+        name={`matrix-media-${row.room_name || row.room_uuid}.zip`}
+      />
+    )}
+  </div>
+);
+
 interface MatrixExportsListProps {
   room_uuid?: string;
   hasActionBar?: boolean;
@@ -74,7 +89,7 @@ export const MatrixExportsList: FC<MatrixExportsListProps> = ({
         },
         {
           title: translate('Media files'),
-          render: ({ row }) => <>{row.media_count}</>,
+          render: ({ row }) => <ExportMediaFilesCell row={row} />,
           id: 'media_count',
         },
         {
@@ -90,7 +105,7 @@ export const MatrixExportsList: FC<MatrixExportsListProps> = ({
           id: 'completed_at',
         },
         {
-          title: translate('Download'),
+          title: translate('Log'),
           render: ({ row }) =>
             row.export_file_url ? (
               <FileDownloader

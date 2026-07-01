@@ -189,7 +189,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   );
 
   return (
-    <div className="tc-header d-flex align-items-center gap-2 px-4 py-2 border-bottom">
+    <div className="tc-header">
       {onBack && (
         <button
           type="button"
@@ -204,7 +204,8 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
 
       <Avatar
         name={roomName}
-        size={32}
+        size={40}
+        circle
         labelClassName={`bg-light-${color} text-${color}`}
       />
 

@@ -17,6 +17,7 @@ import {
   useChatDrawerPreference,
 } from '@/chat/chatDrawerPreferences';
 import { GRID_BREAKPOINTS } from '@/core/constants';
+import { useDrawerExpanded } from '@/drawer/useDrawerExpanded';
 import { translate } from '@/i18n';
 
 import { MatrixCallPortalContext } from './call/MatrixCallPortalContext';
@@ -37,34 +38,6 @@ interface MatrixChatPanelProps {
    * Used by project-scoped views where cross-room navigation isn't wanted.
    */
   hideRoomList?: boolean;
-}
-
-/**
- * Tracks the drawer's expanded ("full screen") state. The conversation-list
- * sidebar only appears when expanded — same gating as the AI history sidebar,
- * which keys off `#kt_drawer[data-expanded]`.
- */
-function useDrawerExpanded(): boolean {
-  const [expanded, setExpanded] = useState(
-    () => document.getElementById('kt_drawer')?.dataset.expanded === 'true',
-  );
-  useEffect(() => {
-    // The drawer expanded state lives in the legacy Metronic DOM and is
-    // tracked here via MutationObserver because no React-side context
-    // exposes it. TODO: migrate to a context provided by DrawerProvider
-    // when that ships an expanded flag, and drop this DOM coupling.
-    const drawer = document.getElementById('kt_drawer');
-    if (!drawer) return;
-    const sync = () => setExpanded(drawer.dataset.expanded === 'true');
-    sync();
-    const observer = new MutationObserver(sync);
-    observer.observe(drawer, {
-      attributes: true,
-      attributeFilter: ['data-expanded'],
-    });
-    return () => observer.disconnect();
-  }, []);
-  return expanded;
 }
 
 export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
@@ -258,11 +231,14 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   const detailContent = renderDetailContent();
 
   return showCompactList ? (
+    // Compact list is a standalone screen (no conversation shown beside it), so
+    // no row is "active" — highlighting the last-opened room reads as a stuck
+    // selection after the user backs out of a chat.
     <MatrixRoomList
       rooms={rooms}
       isLoading={isLoading}
       onSelect={handleRoomSelect}
-      activeRoomUuid={detailRoomUuid ?? undefined}
+      activeRoomUuid={undefined}
     />
   ) : (
     <div

@@ -3,6 +3,7 @@ export interface Comment {
   author_user: string;
   author_uuid: string;
   author_email: string;
+  author_image?: string | null;
   backend_id: string;
   created: string;
   description: string;

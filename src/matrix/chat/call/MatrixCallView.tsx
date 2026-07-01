@@ -308,7 +308,7 @@ const CallStage: FC<{
 
   return (
     <div className="d-flex flex-column h-100">
-      <div className="flex-grow-1 overflow-hidden">
+      <div className="position-relative flex-grow-1 overflow-hidden">
         {compact ? (
           compactTrack ? (
             <FocusLayout trackRef={compactTrack} style={{ height: '100%' }} />
@@ -329,7 +329,8 @@ const CallStage: FC<{
       {/* Custom control bar (instead of LiveKit's <ControlBar variation="minimal">)
           so each icon-only button carries a tooltip explaining what it does.
           TrackToggle / DisconnectButton are the same primitives ControlBar uses
-          internally, so the .lk-* styling is unchanged. */}
+          internally, so the .lk-* styling is unchanged. The four primary
+          controls (mic, camera, screen-share, end-call) match the mockup. */}
       <div className="lk-control-bar">
         <Tip
           id="call-mic"
@@ -355,61 +356,66 @@ const CallStage: FC<{
         >
           <TrackToggle source={Track.Source.ScreenShare} />
         </Tip>
-        {/* The device picker is meaningless in the cramped floating widget. */}
-        {!compact && <CallSettingsMenu container={overlayContainer} />}
-        {fullscreenSupported && (
-          <Tip
-            id="call-fullscreen"
-            label={
-              isFullscreen
-                ? translate('Exit fullscreen')
-                : translate('Enter fullscreen')
-            }
-            placement="top"
-            container={overlayContainer}
-          >
-            <button
-              type="button"
-              className="lk-button"
-              onClick={toggleFullscreen}
-              aria-label={
-                isFullscreen
-                  ? translate('Exit fullscreen')
-                  : translate('Enter fullscreen')
-              }
-            >
-              {isFullscreen ? (
-                <CornersInIcon size={20} weight="bold" />
-              ) : (
-                <CornersOutIcon size={20} weight="bold" />
-              )}
-            </button>
-          </Tip>
-        )}
-        {pipSupported && (
-          <Tip
-            id="call-pip"
-            label={
-              isInDocumentPiP
-                ? translate('Close Picture-in-Picture')
-                : translate('Open in Picture-in-Picture')
-            }
-            placement="top"
-            container={overlayContainer}
-          >
-            <button
-              type="button"
-              className="lk-button"
-              onClick={requestTogglePopOut}
-              aria-label={
-                isInDocumentPiP
-                  ? translate('Close Picture-in-Picture')
-                  : translate('Open in Picture-in-Picture')
-              }
-            >
-              <PictureInPictureIcon size={20} weight="bold" />
-            </button>
-          </Tip>
+        {/* Settings / fullscreen / PiP live on the control bar alongside the
+            primary controls. Hidden in the cramped floating widget. */}
+        {!compact && (
+          <>
+            <CallSettingsMenu container={overlayContainer} />
+            {fullscreenSupported && (
+              <Tip
+                id="call-fullscreen"
+                label={
+                  isFullscreen
+                    ? translate('Exit fullscreen')
+                    : translate('Enter fullscreen')
+                }
+                placement="top"
+                container={overlayContainer}
+              >
+                <button
+                  type="button"
+                  className="lk-button"
+                  onClick={toggleFullscreen}
+                  aria-label={
+                    isFullscreen
+                      ? translate('Exit fullscreen')
+                      : translate('Enter fullscreen')
+                  }
+                >
+                  {isFullscreen ? (
+                    <CornersInIcon size={20} weight="bold" />
+                  ) : (
+                    <CornersOutIcon size={20} weight="bold" />
+                  )}
+                </button>
+              </Tip>
+            )}
+            {pipSupported && (
+              <Tip
+                id="call-pip"
+                label={
+                  isInDocumentPiP
+                    ? translate('Close Picture-in-Picture')
+                    : translate('Open in Picture-in-Picture')
+                }
+                placement="top"
+                container={overlayContainer}
+              >
+                <button
+                  type="button"
+                  className="lk-button"
+                  onClick={requestTogglePopOut}
+                  aria-label={
+                    isInDocumentPiP
+                      ? translate('Close Picture-in-Picture')
+                      : translate('Open in Picture-in-Picture')
+                  }
+                >
+                  <PictureInPictureIcon size={20} weight="bold" />
+                </button>
+              </Tip>
+            )}
+          </>
         )}
         <Tip
           id="call-leave"

@@ -8,6 +8,7 @@ import { GRID_BREAKPOINTS } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { hasSupport as hasSupportSelector } from '@/issues/hooks';
+import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
@@ -43,7 +44,9 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   const imageUrl = getIconUrl('sidebar_logo_mobile');
   const [errorImg, setErrorImg] = useState(false);
 
-  const hasSupport = hasSupportSelector();
+  // The chat-bubble drawer now hosts both Helpdesk and Team chat, so it must
+  // appear when either is available — not just when support is enabled.
+  const showSupportDrawer = hasSupportSelector() || isMatrixChatEnabled();
 
   const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.lg });
   const isResourceCreationView = stateName === 'marketplace-offering-public';
@@ -108,7 +111,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             {Boolean(user) && (
               <SearchToggle compact={Boolean(hasBreadcrumbs || isSmallScr)} />
             )}
-            {Boolean(user) && hasSupport && <QuickIssueDrawerToggle />}
+            {Boolean(user) && showSupportDrawer && <QuickIssueDrawerToggle />}
             {Boolean(user) && <ConfirmationDrawerToggle />}
             {Boolean(user) && <LLMChatDrawerToggle />}
             {Boolean(user) && isSmallScr && (

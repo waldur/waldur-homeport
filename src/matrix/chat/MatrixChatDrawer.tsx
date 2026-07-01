@@ -34,7 +34,10 @@ import { useMatrixClient } from './useMatrixClient';
 import { useMatrixFileUpload } from './useMatrixFileUpload';
 import { useMatrixRoom } from './useMatrixRoom';
 import { useMatrixRooms } from './useMatrixRooms';
-import { useRoomMemberNames } from './useRoomMemberNames';
+import { useRoomMemberImages, useRoomMemberNames } from './useRoomMemberNames';
+import { buildVoiceContent } from './voice/buildVoiceContent';
+import { generateWaveform } from './voice/generateWaveform';
+import { useVoiceRecorder } from './voice/useVoiceRecorder';
 
 interface MatrixChatDrawerProps {
   roomUuid: string;
@@ -60,6 +63,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
   const { data: rooms } = useMatrixRooms(projectUuid);
   const { rooms: allRooms } = useAllMatrixRooms();
   const memberNames = useRoomMemberNames(activeRoomUuid);
+  const memberImages = useRoomMemberImages(activeRoomUuid);
   const currentUser = useUser();
   const {
     uploadFile,
@@ -70,6 +74,37 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     setPending,
     clearPending,
   } = useMatrixFileUpload();
+  const recorder = useVoiceRecorder();
+  const [sendingVoice, setSendingVoice] = useState(false);
+
+  const startRecording = useCallback(() => {
+    // getUserMedia rejects if the user denies the mic prompt; fall back to the
+    // normal composer rather than leaving a stuck recording UI.
+    recorder.start().catch(() => {});
+  }, [recorder]);
+
+  const sendVoiceMessage = useCallback(async () => {
+    setSendingVoice(true);
+    try {
+      const result = await recorder.stop();
+      if (!result) return;
+      const { blob, durationMs } = result;
+      const { waveform } = await generateWaveform(blob);
+      await uploadFile(
+        new File([blob], 'voice-message', { type: blob.type }),
+        (mxcUrl) =>
+          buildVoiceContent({
+            url: mxcUrl,
+            mimetype: blob.type,
+            size: blob.size,
+            durationMs,
+            waveform,
+          }),
+      );
+    } finally {
+      setSendingVoice(false);
+    }
+  }, [recorder, uploadFile]);
 
   // The room member list may omit the current user; their Waldur full name is
   // authoritative, so add it so own messages never fall back to the (emoji-
@@ -98,10 +133,15 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
 
   const handleRoomSelect = useCallback(
     (uuid: string) => {
+      // Discard any in-progress recording before switching — the clip belongs to
+      // the room being left, not the one being opened (otherwise Send would post
+      // it to the newly-selected room).
+      recorder.cancel();
+      setSendingVoice(false);
       setActiveRoomUuid(uuid);
       connect(uuid);
     },
-    [connect],
+    [connect, recorder],
   );
 
   const activeRooms =
@@ -266,6 +306,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                   messages={messages}
                   userId={userId}
                   memberNames={resolvedMemberNames}
+                  memberImages={memberImages}
                   loading={loading || connectionState === 'connecting'}
                   loadingOlder={loadingOlder}
                   hasOlderMessages={hasOlderMessages}
@@ -277,18 +318,30 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
           </div>
 
           {showChat && !showConnectionError && (
-            <MatrixTypingIndicator typingUsers={typingUsers} />
+            <MatrixTypingIndicator
+              typingUsers={typingUsers}
+              memberImages={memberImages}
+            />
           )}
           {showChat && !showConnectionError && (
-            <MatrixMessageInput
-              uploadFile={uploadFile}
-              uploading={uploading}
-              pendingFiles={pendingFiles}
-              addFiles={addFiles}
-              removePending={removePending}
-              setPending={setPending}
-              clearPending={clearPending}
-            />
+            <div className="tc-composer-dock">
+              <MatrixMessageInput
+                uploadFile={uploadFile}
+                uploading={uploading}
+                pendingFiles={pendingFiles}
+                addFiles={addFiles}
+                removePending={removePending}
+                setPending={setPending}
+                clearPending={clearPending}
+                onStartRecording={startRecording}
+                recordingSupported={recorder.supported}
+                recording={recorder.state === 'recording' || sendingVoice}
+                recordingElapsedMs={recorder.elapsedMs}
+                sendingVoice={sendingVoice}
+                onCancelRecording={recorder.cancel}
+                onSendVoice={sendVoiceMessage}
+              />
+            </div>
           )}
         </div>
       )}

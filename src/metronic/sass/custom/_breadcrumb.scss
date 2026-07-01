@@ -163,7 +163,10 @@ $mobileHeaderHeight: get(
   z-index: 20;
   border-bottom: 1px solid $border-color;
 
-  + .content {
+  // General sibling (~) not adjacent (+): the always-rendered .announcements
+  // wrapper sits between .breadcrumb-mobile and .content, so + never matches and
+  // the fixed breadcrumb would overlap the page title. Matches _toolbar.scss.
+  ~ .content {
     margin-top: $mobileHeaderHeight;
   }
 

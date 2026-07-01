@@ -18,6 +18,7 @@ vi.mock('./useMatrixClient', () => ({
 
 vi.mock('./useRoomMemberNames', () => ({
   useRoomMemberNames: () => new Map(),
+  useRoomMemberImages: () => new Map(),
 }));
 
 const fakeRoom = {

@@ -11,6 +11,12 @@ export interface ReactionAggregate {
 
 export interface MatrixChatMessage {
   eventId: string;
+  /**
+   * Transaction id of an outgoing message (present only on the local echo and
+   * its own remote echo). Used to reconcile the two into one row under the
+   * client's detached pending-event ordering.
+   */
+  txnId?: string;
   sender: string;
   senderDisplayName: string;
   body: string;
@@ -25,6 +31,16 @@ export interface MatrixChatMessage {
   reactors?: Record<string, string[]>;
   /** Matrix user IDs mentioned in this message (from `m.mentions.user_ids`). */
   mentionedUserIds?: string[];
+  /** True for MSC3245 voice messages (`org.matrix.msc3245.voice` present). */
+  isVoice?: boolean;
+  /**
+   * MSC1767 audio waveform as integers 0..1024 (from
+   * `org.matrix.msc1767.audio.waveform`). Present on voice messages so the
+   * renderer can draw the bars without re-decoding the audio.
+   */
+  waveform?: number[];
+  /** Clip length in ms (from `org.matrix.msc1767.audio.duration` or info.duration). */
+  durationMs?: number;
 }
 
 export type MatrixConnectionState =

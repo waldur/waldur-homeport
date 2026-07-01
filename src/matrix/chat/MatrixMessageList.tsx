@@ -19,6 +19,7 @@ interface MatrixMessageListProps {
   messages: MatrixChatMessage[];
   userId: string | null;
   memberNames: Map<string, string>;
+  memberImages?: Map<string, string>;
   loading: boolean;
   loadingOlder: boolean;
   hasOlderMessages: boolean;
@@ -38,6 +39,9 @@ function shouldShowDateSeparator(
 
 const CONTINUATION_WINDOW_MS = 5 * 60 * 1000;
 
+// Stable empty fallback so the optional image map doesn't churn the memo.
+const EMPTY_MEMBER_IMAGES: Map<string, string> = new Map();
+
 function isContinuation(messages: MatrixChatMessage[], index: number): boolean {
   if (index === 0 || shouldShowDateSeparator(messages, index)) return false;
   const current = messages[index];
@@ -55,6 +59,7 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
   messages,
   userId,
   memberNames,
+  memberImages = EMPTY_MEMBER_IMAGES,
   loading,
   loadingOlder,
   hasOlderMessages,
@@ -293,6 +298,7 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
                 message={msg}
                 isOwn={msg.sender === userId}
                 senderName={getSenderName(msg, memberNames)}
+                senderImage={memberImages.get(msg.sender)}
                 continuation={isContinuation(messages, i)}
                 memberNames={memberNames}
                 currentUserId={userId}

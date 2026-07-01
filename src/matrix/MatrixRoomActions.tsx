@@ -20,7 +20,6 @@ import {
   matrixRoomsSyncMembers,
 } from 'waldur-js-client';
 
-import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { DisableChatRoomDialog } from '@/matrix/DisableChatRoomDialog';
@@ -28,6 +27,7 @@ import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
+import { openSupportDrawer } from '@/support/openSupportDrawer';
 
 interface MatrixRoomActionsProps {
   row: MatrixRoom;
@@ -116,7 +116,7 @@ export const OpenInTeamChatButton: FC<MatrixRoomActionsProps> = ({ row }) => {
   const { openDrawer } = useDrawer();
 
   const handleOpen = useCallback(() => {
-    openUnifiedChatDrawer(openDrawer, {
+    openSupportDrawer(openDrawer, {
       defaultRoomUuid: row.uuid,
       matrixRoomAlias: row.room_alias,
     });

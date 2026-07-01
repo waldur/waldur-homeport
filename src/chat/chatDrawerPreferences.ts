@@ -1,7 +1,7 @@
 import { useCallback, useSyncExternalStore } from 'react';
 
-/** Which tab the unified chat drawer opens on. */
-export type ChatDrawerTab = 'ai' | 'matrix';
+/** Which tab the unified chat drawer opens on. AI-only since the drawer split. */
+type ChatDrawerTab = 'ai';
 
 interface ChatDrawerPreferences {
   /** Tab to restore on the next drawer open. */
