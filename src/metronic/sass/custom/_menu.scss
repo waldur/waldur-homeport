@@ -8,3 +8,30 @@
 .menu-rounded .menu-link {
   border-radius: $border-radius-sm;
 }
+
+// Toolbar navigation tabs dropdown caret colours (design-system tokens only):
+//   - default state: $fg-quaternary (gray-500)
+//   - hover / selected / open: $fg-brand-primary
+.header-menu .menu-item {
+  > .menu-link .menu-arrow:after {
+    @include svg-bg-icon(arrow-start, $fg-quaternary);
+    /*rtl:begin:remove*/
+    @include svg-bg-icon(arrow-end, $fg-quaternary);
+    /*rtl:end:remove*/
+  }
+
+  &.here > .menu-link .menu-arrow:after,
+  &.show > .menu-link .menu-arrow:after,
+  &.hover > .menu-link .menu-arrow:after,
+  & > .menu-link:hover .menu-arrow:after {
+    @include svg-bg-icon(arrow-start, $fg-brand-primary);
+    /*rtl:begin:remove*/
+    @include svg-bg-icon(arrow-end, $fg-brand-primary);
+    /*rtl:end:remove*/
+  }
+
+  // Flip the caret to point up while the dropdown list is open (animated).
+  &.show > .menu-link .menu-arrow:after {
+    @include menu-link-arrow-rotate(270deg, -270deg);
+  }
+}
