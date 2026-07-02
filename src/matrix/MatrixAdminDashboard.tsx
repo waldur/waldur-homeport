@@ -24,6 +24,14 @@ const ROOMS_TAB = {
   ),
 };
 
+// Calls surfaces a live LiveKit snapshot from staff-only admin endpoints, so it
+// is staff-gated alongside Settings; support sees only the rooms list.
+const CALLS_TAB = {
+  key: 'calls',
+  title: translate('Calls'),
+  component: lazyComponent(() => import('./admin/livekit/LiveKitCallsTab')),
+};
+
 // Settings exposes appservice config whose backend endpoints are staff-only,
 // so the tab is staff-gated; support sees only the rooms list.
 const SETTINGS_TAB = {
@@ -39,7 +47,7 @@ const SETTINGS_TAB = {
 export const MatrixAdminDashboard = () => {
   const { openDialog } = useModal();
   const staff = useSelector(isStaffSelector);
-  const tabs = staff ? [ROOMS_TAB, SETTINGS_TAB] : [ROOMS_TAB];
+  const tabs = staff ? [ROOMS_TAB, CALLS_TAB, SETTINGS_TAB] : [ROOMS_TAB];
   // The dashboard stays reachable while Matrix is off so staff can toggle
   // MATRIX_ENABLED in the Settings tab; the appservice setup only makes sense
   // once the integration is on, so disable it with an explanatory tooltip.
