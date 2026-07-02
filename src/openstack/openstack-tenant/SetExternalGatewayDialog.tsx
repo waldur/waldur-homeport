@@ -17,6 +17,7 @@ import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useUser } from '@/workspace/hooks';
 
 import { ExternalGatewayFixedIpsTable } from './ExternalGatewayFixedIpsTable';
 
@@ -51,8 +52,21 @@ const networkLabel = (network: AvailableExternalNetwork) => {
   return `${network.name}${suffix} — ${sourceLabel}`;
 };
 
+// Advanced controls (SNAT, fixed IPs) are a privileged operation. The backend
+// allows them for an organization-owned (RBAC-shared) network, or — for any
+// external network including global ones — for staff / provider operators. We
+// mirror the staff branch of that rule here so staff are offered the fields on
+// global networks (RWA-44); the backend remains the authority and rejects any
+// request that slips through.
+const canSetAdvancedOptions = (
+  network: AvailableExternalNetwork | undefined,
+  isStaff: boolean,
+) => !!network && (network.source === 'rbac' || isStaff);
+
 export const SetExternalGatewayDialog = ({ resolve }: OwnProps) => {
   const { router, refetch } = resolve;
+  const user = useUser();
+  const isStaff = Boolean(user?.is_staff);
 
   const query = useQuery({
     queryKey: ['RouterAvailableExternalNetworks', router.uuid],
@@ -70,16 +84,12 @@ export const SetExternalGatewayDialog = ({ resolve }: OwnProps) => {
       const selected = networks.find(
         (n) => n.backend_id === formData.external_network_id,
       );
-      const isRbac = selected?.source === 'rbac';
 
       const body: SetExternalGatewayRequest = {
         external_network_id: formData.external_network_id,
       };
 
-      // Advanced controls (SNAT, fixed IPs) are only offered for
-      // organization-owned (RBAC-shared) networks to avoid leaking a global
-      // external network.
-      if (isRbac) {
+      if (canSetAdvancedOptions(selected, isStaff)) {
         body.enable_snat = formData.disable_snat ? false : null;
         const fixedIps = (formData.external_fixed_ips || [])
           .filter((ip) => ip.ip_address)
@@ -123,7 +133,7 @@ export const SetExternalGatewayDialog = ({ resolve }: OwnProps) => {
         const selected = networks.find(
           (n) => n.backend_id === values.external_network_id,
         );
-        const isRbac = selected?.source === 'rbac';
+        const canSetAdvanced = canSetAdvancedOptions(selected, isStaff);
         return (
           <form onSubmit={handleSubmit}>
             <ModalDialog
@@ -149,7 +159,7 @@ export const SetExternalGatewayDialog = ({ resolve }: OwnProps) => {
                 validate={required}
               />
 
-              {isRbac && (
+              {canSetAdvanced && (
                 <>
                   <BooleanGroup
                     name="disable_snat"
