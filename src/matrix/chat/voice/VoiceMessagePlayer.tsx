@@ -162,8 +162,13 @@ export const VoiceMessagePlayer: FC<VoiceMessagePlayerProps> = ({
   return (
     <div className="tc-voice">
       {/* Lifecycle is driven by the play/pause button; no visible controls. */}
+      {/* preload="auto" decodes the (already in-memory) blob ahead of the
+          click. With "metadata", the first play() of a finite-duration note
+          races the decoder — the bars advance but no samples are decoded yet,
+          giving a silent first play. The Infinity-duration webm case is fixed
+          separately by the duration scan in onLoaded. */}
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <audio ref={audioRef} src={src} preload="metadata" />
+      <audio ref={audioRef} src={src} preload="auto" />
       <button
         type="button"
         className="tc-voice__play"
