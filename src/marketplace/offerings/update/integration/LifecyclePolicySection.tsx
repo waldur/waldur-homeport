@@ -71,6 +71,25 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
               'If set, only users holding one of these project or organization roles can see and order this offering; other users will not see it in the catalog. Whether their orders skip consumer approval still depends on the role having the order-approval permission. Leave empty for no restriction.',
             )}
           />
+          <SelectEditField
+            name="plugin_options.auto_approve_for_roles"
+            label={translate('Auto-approve for roles')}
+            options={roleOptions}
+            getOptionLabel={(role: Role) => role.description || role.name}
+            getOptionValue={({ name }) => name}
+            renderValue={(value) =>
+              Array.isArray(value) && value.length
+                ? value.map((name) => roleLabels[name] || name).join(', ')
+                : undefined
+            }
+            simpleValue
+            isMulti
+            isClearable
+            isStaffOnly
+            description={translate(
+              'Orders created by users holding one of these project or organization roles (on the target project or its organization) skip consumer approval for this offering, regardless of the order-approval permission. Provider review and purchase-order requirements still apply. Independent of the visibility restriction above. Staff-only setting.',
+            )}
+          />
           {props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS && (
             <BooleanEditField
               name="plugin_options.auto_approve_marketplace_script"
