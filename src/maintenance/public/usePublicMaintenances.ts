@@ -6,6 +6,7 @@ import {
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { HOUR, STALE_TIME } from '@/core/constants';
+import { parseDate } from '@/core/dateUtils';
 import { getUUID } from '@/core/utils';
 
 const PUBLIC_MAINTENANCES_QUERY_KEY = [
@@ -33,7 +34,21 @@ export const usePublicMaintenances = () =>
   });
 
 /**
- * Filters maintenance announcements affecting a given offering.
+ * A maintenance is only worth surfacing to end users while its window is
+ * current or still ahead. Announcements left in Scheduled/In progress after
+ * their window has already elapsed (e.g. "Maintenance 10 months ago") are
+ * stale and hidden.
+ */
+export const isCurrentOrUpcoming = (
+  maintenance: PublicMaintenanceAnnouncement,
+): boolean => {
+  if (!maintenance.scheduled_end) return true;
+  return parseDate(maintenance.scheduled_end).toMillis() >= Date.now();
+};
+
+/**
+ * Filters maintenance announcements affecting a given offering, keeping only
+ * those whose window is current or upcoming.
  * Returns an empty array when no offering UUID is supplied so that
  * callers can safely render `null` based on the length of the result.
  */
@@ -42,10 +57,12 @@ export const getMaintenancesForOffering = (
   offeringUuid: string | undefined,
 ): PublicMaintenanceAnnouncement[] => {
   if (!announcements || !offeringUuid) return [];
-  return announcements.filter((announcement) =>
-    announcement.affected_offerings?.some(
-      (entry) => entry.offering && getUUID(entry.offering) === offeringUuid,
-    ),
+  return announcements.filter(
+    (announcement) =>
+      isCurrentOrUpcoming(announcement) &&
+      announcement.affected_offerings?.some(
+        (entry) => entry.offering && getUUID(entry.offering) === offeringUuid,
+      ),
   );
 };
 
