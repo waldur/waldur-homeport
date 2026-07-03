@@ -3,7 +3,6 @@ import { MaintenanceAnnouncement, ServiceProvider } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
-import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
 import {
@@ -56,7 +55,7 @@ export const MaintenanceEditAction: FC<MaintenanceEditActionProps> = ({
     });
   }, [row, provider, refetch]);
 
-  if (row.state !== 'Draft') return null;
+  if (!['Draft', 'Scheduled'].includes(row.state)) return null;
 
-  return <EditAction action={callback} title={translate('Edit')} />;
+  return <EditAction action={callback} />;
 };
