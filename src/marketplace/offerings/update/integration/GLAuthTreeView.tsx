@@ -48,11 +48,11 @@ interface TreeNodeData {
 const kindBadge = (kind: GlauthGroupKind): { text: string; cls: string } => {
   switch (kind) {
     case 'project':
-      return { text: 'project', cls: 'bg-secondary text-white' };
+      return { text: 'project', cls: 'badge-secondary' };
     case 'resource_role':
-      return { text: 'resource role', cls: 'bg-primary text-white' };
+      return { text: 'resource role', cls: 'badge-light-primary' };
     case 'resource_project_role':
-      return { text: 'rp role', cls: 'bg-success text-white' };
+      return { text: 'rp role', cls: 'badge-light-success' };
   }
 };
 
@@ -171,8 +171,8 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
     name: `cn=${u.username},ou=users,${BASE_DN}`,
     type: 'user',
     badge: u.disabled
-      ? { text: translate('disabled'), cls: 'bg-danger text-white' }
-      : { text: translate('active'), cls: 'bg-success text-white' },
+      ? { text: translate('disabled'), cls: 'badge-light-danger' }
+      : { text: translate('active'), cls: 'badge-light-success' },
     children: userAttributes(u),
   }));
 
@@ -182,7 +182,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
     id: `svcacct:${r.username}`,
     name: `cn=${r.username},ou=svcaccts,${BASE_DN}`,
     type: 'svcacct',
-    badge: { text: translate('service account'), cls: 'bg-info text-white' },
+    badge: { text: translate('service account'), cls: 'badge-light-info' },
     children: svcAcctAttributes(r),
   }));
 
@@ -193,7 +193,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       type: 'ou',
       badge: {
         text: translate('{n} entries', { n: tree.groups.length }),
-        cls: 'bg-secondary text-white',
+        cls: 'badge-secondary',
       },
       children: groupChildren,
     },
@@ -203,7 +203,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       type: 'ou',
       badge: {
         text: translate('{n} entries', { n: tree.users.length }),
-        cls: 'bg-secondary text-white',
+        cls: 'badge-secondary',
       },
       children: userChildren,
     },
@@ -215,7 +215,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       type: 'ou',
       badge: {
         text: translate('{n} entries', { n: tree.robot_accounts.length }),
-        cls: 'bg-secondary text-white',
+        cls: 'badge-secondary',
       },
       children: svcacctChildren,
     });
@@ -228,7 +228,7 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       type: 'root',
       badge: {
         text: translate('offering: {name}', { name: tree.offering.name }),
-        cls: 'bg-secondary text-white',
+        cls: 'badge-secondary',
       },
       children: ous,
     },

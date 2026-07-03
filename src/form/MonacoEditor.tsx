@@ -556,7 +556,7 @@ export const MonacoEditor = ({
   onChange,
   language,
   theme = 'vs-dark',
-  height,
+  height = 300,
   readOnly = false,
 }: MonacoEditorProps) => {
   const [isMonacoReady, setIsMonacoReady] = useState(false);
