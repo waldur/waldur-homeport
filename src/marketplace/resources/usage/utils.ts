@@ -342,9 +342,13 @@ export const getTotalUsagePeriod = (
 
 const getUsageBasedOfferingComponents = (components: OfferingComponent[]) => {
   return components
-    .filter((component) =>
-      // Allow to report usage for limit-based components
-      ['usage', 'limit'].includes(component.billing_type),
+    .filter(
+      (component) =>
+        // Allow to report usage for limit-based components, as well as
+        // prepaid one-time components (e.g. prepaid SLURM CPU/GPU) which
+        // record usage but use the 'one' billing type.
+        ['usage', 'limit'].includes(component.billing_type) ||
+        component.is_prepaid,
     )
     .sort((a, b) => a.name.localeCompare(b.name));
 };
