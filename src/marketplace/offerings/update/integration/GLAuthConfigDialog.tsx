@@ -59,7 +59,14 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
         <Tab.Content>
           <Tab.Pane eventKey="toml" mountOnEnter={false}>
             {hasConfig ? (
-              <MonacoEditor value={props.resolve.config} readOnly />
+              <div className="border rounded overflow-hidden">
+                <MonacoEditor
+                  value={props.resolve.config}
+                  language="ini"
+                  height={400}
+                  readOnly
+                />
+              </div>
             ) : (
               <p className="text-quaternary">
                 {translate('No configuration has been set.')}
