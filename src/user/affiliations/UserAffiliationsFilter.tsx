@@ -6,9 +6,26 @@ import { translate } from '@/i18n';
 import { InvitationRoleFilter } from '@/invitations/InvitationRoleFilter';
 import { InvitationScopeTypeFilter } from '@/invitations/InvitationScopeTypeFilter';
 import { ROLE_TYPES } from '@/permissions/constants';
-import { StringFilter } from '@/table';
+import { SelectFilter, StringFilter } from '@/table';
 
-export const UserAffiliationsFilter: FC = () => {
+const getRoleStatusFilterOptions = () => [
+  {
+    label: translate('Active only'),
+    value: '',
+  },
+  {
+    label: translate('Include revoked'),
+    value: true,
+  },
+];
+
+interface UserAffiliationsFilterProps {
+  showRoleStatus?: boolean;
+}
+
+export const UserAffiliationsFilter: FC<UserAffiliationsFilterProps> = ({
+  showRoleStatus,
+}) => {
   const hideCallScope = !isFeatureVisible(
     MarketplaceFeatures.show_call_management_functionality,
   );
@@ -31,6 +48,22 @@ export const UserAffiliationsFilter: FC = () => {
         placeholder={translate('Enter scope name')}
       />
       <InvitationRoleFilter />
+      {showRoleStatus && (
+        <SelectFilter
+          title={translate('Role status')}
+          name="show_inactive"
+          badgeValue={(value) =>
+            getRoleStatusFilterOptions().find((op) => op.value === value)?.label
+          }
+          ellipsis={false}
+          className="Select"
+          placeholder={translate('Select role status')}
+          options={getRoleStatusFilterOptions()}
+          noUpdateOnBlur={true}
+          simpleValue={true}
+          isClearable={true}
+        />
+      )}
     </>
   );
 };

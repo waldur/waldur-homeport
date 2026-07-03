@@ -1,9 +1,10 @@
-import { uniqueId } from 'lodash-es';
+import { CheckCircleIcon, MinusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { userPermissionsList, UserPermissionsListData } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { formatRoleType } from '@/permissions/utils';
 import { createFetcher } from '@/table/api';
@@ -11,8 +12,10 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
+import { useUser } from '@/workspace/hooks';
 
 import { RolePopover } from './RolePopover';
+import { UserAffiliationExpandableRow } from './UserAffiliationExpandableRow';
 import { UserAffiliationsBulkRemoveButton } from './UserAffiliationsBulkRemoveButton';
 import { UserAffiliationsDropdownActions } from './UserAffiliationsDropdownActions';
 import { UserAffiliationsFilter } from './UserAffiliationsFilter';
@@ -30,13 +33,8 @@ interface UserAffiliationsFilterValues {
   role: {
     uuid: string;
   };
+  show_inactive?: boolean | '';
 }
-
-const rowsParser = (data: any[]) => {
-  if (!data?.length) return data;
-  data.forEach((d) => Object.assign(d, { uuid: uniqueId() }));
-  return data;
-};
 
 export const UserAffiliationsList: FunctionComponent<
   UserAffiliationsListProps
@@ -47,11 +45,23 @@ export const UserAffiliationsList: FunctionComponent<
     scope_name: undefined,
     role: undefined,
   };
+  // The backend only exposes revoked/historical grants to staff and support;
+  // for everyone else the role status column and filter are meaningless, so
+  // they are hidden.
+  const currentUser = useUser();
+  const isStaffOrSupport = Boolean(
+    currentUser?.is_staff || currentUser?.is_support,
+  );
   const filter = useMemo(() => {
     const result: UserPermissionsListData['query'] = {
       user: user.uuid,
     };
 
+    // Only active grants are shown by default; staff/support can opt in to the
+    // full history (active + revoked) via the "Role status" filter.
+    if (isStaffOrSupport && formValues?.show_inactive) {
+      result.show_inactive = true;
+    }
     if (formValues?.scope_type) {
       result.scope_type =
         typeof formValues.scope_type === 'object'
@@ -68,6 +78,8 @@ export const UserAffiliationsList: FunctionComponent<
     return result;
   }, [
     user.uuid,
+    isStaffOrSupport,
+    formValues.show_inactive,
     formValues.scope_type,
     formValues.scope_name,
     formValues.role,
@@ -75,9 +87,7 @@ export const UserAffiliationsList: FunctionComponent<
   const props = useTable({
     table: 'UserAffiliationsList',
     syncFiltersToURL: true,
-    fetchData: createFetcher(userPermissionsList, {
-      parser: rowsParser,
-    }),
+    fetchData: createFetcher(userPermissionsList),
     queryField: 'name',
     filter,
   });
@@ -154,6 +164,32 @@ export const UserAffiliationsList: FunctionComponent<
       render: ({ row }) => <RolePopover roleName={row.role_name} />,
       filter: 'role',
     },
+    ...(isStaffOrSupport
+      ? [
+          {
+            title: translate('Active'),
+            render: ({ row }) =>
+              row.is_active ? (
+                <Tip label={translate('Active')} id={`active-${row.uuid}`}>
+                  <CheckCircleIcon
+                    size={20}
+                    weight="fill"
+                    className="text-success"
+                  />
+                </Tip>
+              ) : (
+                <Tip label={translate('Revoked')} id={`active-${row.uuid}`}>
+                  <MinusCircleIcon
+                    size={20}
+                    className="text-gray-500"
+                    weight="bold"
+                  />
+                </Tip>
+              ),
+            filter: 'show_inactive',
+          },
+        ]
+      : []),
     {
       title: translate('Valid till'),
       render: ({ row }) => (
@@ -173,9 +209,10 @@ export const UserAffiliationsList: FunctionComponent<
       formId="UserAffiliationsFilter"
       verboseName={translate('affiliations')}
       title={translate('Roles and permissions')}
-      filters={<UserAffiliationsFilter />}
+      filters={<UserAffiliationsFilter showRoleStatus={isStaffOrSupport} />}
       tableActions={<UserAffiliationsDropdownActions />}
       initialPageSize={10}
+      expandableRow={UserAffiliationExpandableRow}
       rowActions={UserAffiliationsRowActions}
       hasActionBar={hasActionBar}
       fullWidth={fullWidth}
