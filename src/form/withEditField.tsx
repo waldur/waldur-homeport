@@ -138,6 +138,35 @@ export function withEditField<P extends object>(
     if (parse != null) fieldProps.parse = parse;
     if (normalize != null) fieldProps.normalize = normalize;
 
+    const editButton = (
+      <FieldEditButton
+        title={label}
+        description={description as string}
+        scope={scope}
+        name={name}
+        callback={callback}
+        fieldComponent={WrappedComponent as any}
+        fieldProps={fieldProps}
+        hideLabel={hideLabel}
+        tooltip={tooltip}
+        iconNode={iconNode}
+        disabled={disabled}
+      />
+    );
+
+    // Staff-only fields always show the indicator: alongside the edit button
+    // for staff (informational), and in place of it for non-staff (read-only).
+    const actions = !isStaffOnly ? (
+      editButton
+    ) : isStaff ? (
+      <>
+        <StaffOnlyIndicator />
+        {editButton}
+      </>
+    ) : (
+      <StaffOnlyIndicator />
+    );
+
     return (
       <FormTable.Item
         label={label}
@@ -146,25 +175,7 @@ export function withEditField<P extends object>(
         required={required}
         disabled={disabled}
         warnTooltip={warnTooltip}
-        actions={
-          !isStaffOnly || isStaff ? (
-            <FieldEditButton
-              title={label}
-              description={description as string}
-              scope={scope}
-              name={name}
-              callback={callback}
-              fieldComponent={WrappedComponent as any}
-              fieldProps={fieldProps}
-              hideLabel={hideLabel}
-              tooltip={tooltip}
-              iconNode={iconNode}
-              disabled={disabled}
-            />
-          ) : (
-            <StaffOnlyIndicator />
-          )
-        }
+        actions={actions}
       />
     );
   };
