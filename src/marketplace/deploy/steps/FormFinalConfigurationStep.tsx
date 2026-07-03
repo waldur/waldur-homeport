@@ -20,10 +20,11 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
     [props.offering],
   );
 
+  const isStartDateEnabled = ENV.plugins.WALDUR_CORE.ENABLE_ORDER_START_DATE;
+
   // When prepaid is active and start date is enabled, the start date
   // is embedded in the PrepaidDurationSelector instead.
-  const startDateEmbeddedInPrepaid =
-    hasPrepaidComponents && ENV.plugins.WALDUR_CORE.ENABLE_ORDER_START_DATE;
+  const startDateEmbeddedInPrepaid = hasPrepaidComponents && isStartDateEnabled;
 
   const dateFieldProps = useOrderStartDateBounds(project);
 
@@ -47,7 +48,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         label={translate('Description')}
       />
       <div className="mb-7 border-bottom" />
-      {!startDateEmbeddedInPrepaid && (
+      {isStartDateEnabled && !startDateEmbeddedInPrepaid && (
         <DateGroup
           name="start_date"
           label={translate('Start date')}
