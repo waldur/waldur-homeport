@@ -102,7 +102,7 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
       {...tableProps}
       columns={columns}
       showPageSizeSelector={true}
-      verboseName={translate('Maintenance records')}
+      verboseName={translate('Maintenance announcements')}
       hasQuery
       tableActions={addButton}
       placeholderActions={addButton}

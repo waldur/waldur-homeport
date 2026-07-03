@@ -327,7 +327,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      breadcrumb: () => translate('Maintenance'),
+      breadcrumb: () => translate('Maintenance announcements'),
     },
   },
 

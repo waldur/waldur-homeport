@@ -55,7 +55,7 @@ const MaintenanceBadge: FC<{ maintenance: PublicMaintenanceAnnouncement }> = ({
   );
   const label = isInProgress
     ? translate('Maintenance in progress')
-    : translate('Maintenance in {when}', {
+    : translate('Maintenance {when}', {
         when: formatRelative(maintenance.scheduled_start),
       });
 
