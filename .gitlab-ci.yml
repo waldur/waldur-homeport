@@ -393,11 +393,36 @@ Trigger integration tests:
     project: waldur/waldur-integration-testing
     branch: main
     strategy: depend
+  # TRIGGER_SOURCE lets the downstream E2E suite skip backend-only jobs
+  # (ansible, mitogen, SCIM, OIDC, GLAuth) that a frontend change cannot affect.
+  variables:
+    TRIGGER_SOURCE: homeport
+  # Only run E2E when a change can actually affect the built frontend image.
+  # Docs / lint-config / unit-test-only MRs (e.g. *.md, docs/**, eslint-rules/**,
+  # e2e/**, test/**) skip the whole downstream suite. The include-list is a
+  # positive filter: it matches whenever any runtime-affecting path changed.
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      changes: &integration_test_changes
+        - src/**/*
+        - locales/**/*
+        - docker/**/*
+        - Dockerfile
+        - index.html
+        - package.json
+        - yarn.lock
+        - vite.config.ts
+        - vite-plugin-react-displayname.ts
+        - tsconfig.json
+        - typings.d.ts
+        - template.json
+        - generate-filters.cjs
+        - generate-filters-config.yaml
+        - .gitlab-ci.yml
       variables:
         WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:latest"
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes: *integration_test_changes
       variables:
         WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-e2e"
 
