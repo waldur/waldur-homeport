@@ -1932,6 +1932,17 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('Affiliates'),
+    items: [
+      {
+        key: 'AFFILIATES_ENABLED',
+        description: translate('Enable the affiliate program: staff-configured affiliate links, fee accrual from finalized invoices, and the customer-affiliates API.'),
+        default: false,
+        type: 'boolean',
+      },
+    ],
+  },
+  {
     description: translate('Matrix chat'),
     items: [
       {

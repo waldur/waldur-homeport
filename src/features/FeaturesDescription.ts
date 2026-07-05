@@ -251,6 +251,10 @@ export const FeaturesDescription: FeatureSection[] = [
     description: translate('Reseller integrations'),
     items: [
       {
+        key: 'affiliates',
+        description: translate('Show affiliate program menus and pages. Backend enforcement is controlled separately by the AFFILIATES_ENABLED Constance setting.'),
+      },
+      {
         key: 'arrow',
         description: translate('Enable Arrow integration menu in administration.'),
       },

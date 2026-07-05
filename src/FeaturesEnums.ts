@@ -73,6 +73,7 @@ export enum RancherFeatures {
 }
 
 export enum ResellerFeatures {
+  affiliates = 'reseller.affiliates',
   arrow = 'reseller.arrow',
 }
 
