@@ -23,6 +23,11 @@ const MARKETPLACE_TABS: SettingsTab[] = [
     title: translate('Development'),
     groupName: translate('Marketplace development'),
   },
+  {
+    key: 'affiliates',
+    title: translate('Affiliates'),
+    groupName: translate('Affiliates'),
+  },
 ];
 
 export const AdministrationMarketplace = () => (

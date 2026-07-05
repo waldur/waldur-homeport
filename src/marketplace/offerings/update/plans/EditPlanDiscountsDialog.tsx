@@ -18,8 +18,8 @@ const getInitialValues = (plan: Plan) => {
   if (plan.components) {
     for (const planComponent of plan.components) {
       initialDiscounts[planComponent.type] = {
-        discount_threshold: planComponent.discount_threshold,
-        discount_rate: planComponent.discount_rate,
+        discount_formula: planComponent.discount_formula,
+        discount_aggregation: planComponent.discount_aggregation || 'customer',
       };
     }
   }
@@ -41,6 +41,18 @@ export const EditPlanDiscountsDialog: FC<EditPlanDiscountsDialogProps> = (
     () => getInitialValues(props.resolve.plan),
     [props.resolve.plan],
   );
+
+  // Only components that exist on this plan can have their discount saved (the
+  // backend updates plan components), so render an editor for those only —
+  // avoids showing a scope/formula for offering components the plan lacks.
+  const components = useMemo(() => {
+    const planTypes = new Set(
+      (props.resolve.plan.components || []).map((pc) => pc.type),
+    );
+    return (props.resolve.offering.components || []).filter((component) =>
+      planTypes.has(component.type),
+    );
+  }, [props.resolve.plan.components, props.resolve.offering.components]);
 
   const updateDiscountsMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>
@@ -73,7 +85,7 @@ export const EditPlanDiscountsDialog: FC<EditPlanDiscountsDialogProps> = (
               />
             }
           >
-            <DiscountsTable components={props.resolve.offering.components} />
+            <DiscountsTable components={components} />
           </ModalDialog>
         </form>
       )}
