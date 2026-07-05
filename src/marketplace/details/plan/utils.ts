@@ -91,29 +91,14 @@ export const combinePrices = (
       // not how prices are denominated.
       const rawSubTotal = price * amount;
 
-      // Look up discount info from plan components (backend provides
-      // discounted_price and discount_description via the serializer)
+      // Volume discounts are aggregated across the whole organization and
+      // materialized at invoice finalization, so the exact per-order saving
+      // cannot be computed at order time. The component's discount description
+      // is still surfaced as an informational hint.
       const planComponent = plan.components?.find(
         (pc) => pc.type === component.type,
       );
-      const discountThreshold = planComponent?.discount_threshold;
-      const discountRate = planComponent?.discount_rate;
-      // Use the raw component value (before duration multiplication) for the
-      // discount threshold check, so that e.g. 10 units × 12 months doesn't
-      // incorrectly trigger a threshold of 100.
-      const componentValue =
-        component.is_prepaid && durationInMonths > 0
-          ? amount / durationInMonths
-          : amount;
-      const discountApplied =
-        !!discountThreshold &&
-        !!discountRate &&
-        componentValue >= discountThreshold;
-      const discountedPrice = discountApplied
-        ? Number(planComponent?.discounted_price ?? price)
-        : price;
-      const subTotal = discountApplied ? discountedPrice * amount : rawSubTotal;
-      const discountAmount = rawSubTotal - subTotal;
+      const subTotal = rawSubTotal;
       const prices = multipliers.map((mult) => mult * subTotal);
 
       return {
@@ -126,8 +111,8 @@ export const combinePrices = (
         price,
         min_value: offeringLimits[component.type].min,
         max_value: offeringLimits[component.type].max,
-        discountApplied,
-        discountAmount,
+        discountApplied: false,
+        discountAmount: 0,
         discountDescription: planComponent?.discount_description ?? null,
       };
     });

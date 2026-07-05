@@ -102,6 +102,7 @@ interface CoreConfiguration {
   USER_TABLE_COLUMNS: string;
   FREEIPA_USERNAME_PREFIX?: string;
   FREEIPA_ENABLED?: boolean;
+  AFFILIATES_ENABLED?: boolean;
   PAT_ENABLED?: boolean;
   KEYCLOAK_ICON: string;
   RANCHER_USERNAME_INPUT_LABEL: string;

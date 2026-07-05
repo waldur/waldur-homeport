@@ -5,10 +5,13 @@ import { customerCreditsList } from 'waldur-js-client';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { ENV } from '@/core/config';
 import { SHORT_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { CompactEditButton } from '@/form/CompactEditButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -18,8 +21,15 @@ import { CreditFieldEditButton } from '../credits/CreditFieldEditButton';
 import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
 
+const AdjustWithdrawableDialog = lazyComponent(() =>
+  import('../credits/AdjustWithdrawableDialog').then((module) => ({
+    default: module.AdjustWithdrawableDialog,
+  })),
+);
+
 export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
   const user = useUser();
+  const { openDialog } = useModal();
 
   const {
     data: creditData,
@@ -46,6 +56,14 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
         }),
         key: 'value',
         value: renderFieldOrDash(creditData?.value),
+      },
+      {
+        label: translate('Withdrawable balance ({currency})', {
+          currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+        }),
+        key: 'withdrawable_balance',
+        value: renderFieldOrDash(creditData?.withdrawable_balance),
+        readOnly: true,
       },
       {
         label: translate('Offering(s)'),
@@ -124,16 +142,30 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
                 )
               }
               actions={
-                user.is_staff && (
+                user.is_staff &&
+                (row.key === 'withdrawable_balance' ? (
                   <>
                     <StaffOnlyIndicator />
-                    <CreditFieldEditButton
-                      credit={creditData}
-                      name={row.key}
-                      disabled={row.disabled}
+                    <CompactEditButton
+                      onClick={() =>
+                        openDialog(AdjustWithdrawableDialog, {
+                          resolve: { credit: creditData, refetch },
+                        })
+                      }
                     />
                   </>
-                )
+                ) : (
+                  !row.readOnly && (
+                    <>
+                      <StaffOnlyIndicator />
+                      <CreditFieldEditButton
+                        credit={creditData}
+                        name={row.key}
+                        disabled={row.disabled}
+                      />
+                    </>
+                  )
+                ))
               }
             />
           ))}

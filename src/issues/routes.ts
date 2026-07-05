@@ -3,7 +3,7 @@ import { UIView } from '@uirouter/react';
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
-import { SupportFeatures } from '@/FeaturesEnums';
+import { ResellerFeatures, SupportFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isStaff, isStaffOrSupport } from '@/workspace/selectors';
 
@@ -438,6 +438,27 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Credit management'),
       permissions: [isStaff],
+    },
+  },
+
+  {
+    name: 'support-affiliates',
+    url: 'affiliates/',
+    parent: 'support-customer-support',
+    component: lazyComponent(() =>
+      import('@/administration/affiliates/AffiliateLinksList').then(
+        (module) => ({
+          default: module.AffiliateLinksList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Affiliate program'),
+      feature: ResellerFeatures.affiliates,
+      permissions: [
+        isStaff,
+        () => Boolean(ENV.plugins.WALDUR_CORE?.AFFILIATES_ENABLED),
+      ],
     },
   },
 

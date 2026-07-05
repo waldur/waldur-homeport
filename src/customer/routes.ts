@@ -8,6 +8,7 @@ import {
   CustomerFeatures,
   InvitationsFeatures,
   MarketplaceFeatures,
+  ResellerFeatures,
 } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getActivePaymentProfile } from '@/invoices/details/utils';
@@ -367,6 +368,27 @@ export const states: StateDeclaration[] = [
         (state) => Boolean(state.workspace.customer?.credit),
       ],
       priority: 137,
+    },
+  },
+
+  {
+    name: 'organization-affiliate-earnings',
+    url: 'affiliate-earnings/',
+    parent: 'organization-billing',
+    component: lazyComponent(() =>
+      import('./affiliate-earnings/AffiliateEarningsPanel').then((module) => ({
+        default: module.AffiliateEarningsPanel,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Affiliate earnings'),
+      feature: ResellerFeatures.affiliates,
+      permissions: [
+        isOwnerOrStaff,
+        () => Boolean(ENV.plugins.WALDUR_CORE?.AFFILIATES_ENABLED),
+        (state) => Boolean(state.workspace.customer?.has_affiliate_links),
+      ],
+      priority: 138,
     },
   },
 
