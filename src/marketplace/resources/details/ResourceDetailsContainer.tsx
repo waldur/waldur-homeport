@@ -1,5 +1,5 @@
 import { CheckCircleIcon, EnvelopeIcon } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
@@ -56,6 +56,17 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   const { openDialog } = useModal();
 
   const user = useUser();
+  const queryClient = useQueryClient();
+
+  const invalidateActionsPopover = useCallback(
+    (scopeUrl?: string) => {
+      if (!scopeUrl) return;
+      return queryClient.invalidateQueries({
+        queryKey: ['ActionsPopover', scopeUrl],
+      });
+    },
+    [queryClient],
+  );
 
   const {
     data: resource,
@@ -102,7 +113,8 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   const refetch = useCallback(() => {
     refetchResource();
     refetchData();
-  }, [refetchResource, refetchData]);
+    invalidateActionsPopover(resource?.scope);
+  }, [refetchResource, refetchData, resource?.scope, invalidateActionsPopover]);
 
   const { data: resourceState } = useQuery({
     queryKey: ['ResourceState', resource?.uuid],
@@ -141,8 +153,9 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         resource.order_in_progress?.provider_message
     ) {
       refetchResource();
+      invalidateActionsPopover(resource.scope);
     }
-  }, [resource, resourceState]);
+  }, [resource, resourceState, refetchResource, invalidateActionsPopover]);
 
   const isRPOnly = useIsResourceProjectOnlyViewer(resource);
   const canManageLimitRequests =
