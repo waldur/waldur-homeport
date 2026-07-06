@@ -11,7 +11,7 @@ import { MoveOfferingAction } from './MoveOfferingAction';
 import { OpenPublicOffering } from './OpenPublicOffering';
 import { PreviewOfferingButton } from './PreviewOfferingButton';
 
-export const OfferingActions = ({ row, refetch }) => (
+export const OfferingActions = ({ row, refetch, extraActions = [] }) => (
   <ActionsDropdown
     row={row}
     refetch={refetch}
@@ -24,6 +24,7 @@ export const OfferingActions = ({ row, refetch }) => (
       SetOfferingTypeAction,
       SetOfferingGroupAction,
       ChangeOfferingAvailabilityAction,
+      ...extraActions,
       DeleteOfferingButton,
     ]}
   />

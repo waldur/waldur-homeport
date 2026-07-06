@@ -10,6 +10,7 @@ import {
   marketplaceOfferingUsersSetOk,
   marketplaceOfferingUsersSetPendingAccountLinking,
   marketplaceOfferingUsersSetPendingAdditionalValidation,
+  marketplaceOfferingUsersSetPosixAttributes,
   marketplaceOfferingUsersUpdateCommentsPartialUpdate,
   marketplaceOfferingUsersUpdateRuntimeState,
   OfferingUser,
@@ -23,7 +24,16 @@ import { MarkdownGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+
+// POSIX UID/GID bounds. Below 1000 is reserved for system accounts;
+// 2^32-1 is the reserved (id_t) -1 value.
+const POSIX_MIN_ID = 1000;
+const POSIX_MAX_ID = 2 ** 32 - 2;
+const POSIX_ID_FIELD_DESCRIPTION = translate(
+  'Must be at least 1000 (lower values are reserved for system accounts). The value must fall within the offering’s POSIX ID pool and is rejected if already allocated.',
+);
 
 const STATE_TRANSITIONS: Record<OfferingUserState, OfferingUserState[]> = {
   Requested: ['Creating', 'OK', 'Error creating'],
@@ -97,7 +107,7 @@ export interface ProviderOfferingUserUpdateDialogProps {
     row: OfferingUser;
     refetch(): void;
     provider: ServiceProvider;
-    updateScope: 'username' | 'comment' | 'state' | 'runtime_state';
+    updateScope: 'username' | 'comment' | 'state' | 'runtime_state' | 'posix';
   };
 }
 
@@ -190,6 +200,39 @@ const UPDATE_FIELDS = (currentState?: OfferingUserState) => ({
       },
     ],
   },
+  posix: {
+    title: translate('Edit POSIX attributes'),
+    fields: [
+      {
+        name: 'login_shell',
+        type: 'string',
+        label: translate('Login shell'),
+        placeholder: '/bin/bash',
+      },
+      {
+        name: 'home_directory',
+        type: 'string',
+        label: translate('Home directory'),
+        placeholder: '/home/username',
+      },
+      {
+        name: 'uidnumber',
+        type: 'integer',
+        label: translate('UID'),
+        minValue: POSIX_MIN_ID,
+        maxValue: POSIX_MAX_ID,
+        description: POSIX_ID_FIELD_DESCRIPTION,
+      },
+      {
+        name: 'primarygroup',
+        type: 'integer',
+        label: translate('Primary GID'),
+        minValue: POSIX_MIN_ID,
+        maxValue: POSIX_MAX_ID,
+        description: POSIX_ID_FIELD_DESCRIPTION,
+      },
+    ],
+  },
 });
 
 export const ProviderOfferingUserUpdateDialog: FC<
@@ -198,6 +241,7 @@ export const ProviderOfferingUserUpdateDialog: FC<
   const currentState = row.state;
   const updateFields = UPDATE_FIELDS(currentState);
   const fields = updateFields[updateScope]?.fields || [];
+  const { showInfo } = useNotify();
 
   const mutation = useManagedMutation<
     any,
@@ -208,9 +252,13 @@ export const ProviderOfferingUserUpdateDialog: FC<
       service_provider_comment_url?: string;
       state?: string;
       runtime_state?: RuntimeStateEnum;
+      login_shell?: string;
+      home_directory?: string;
+      uidnumber?: number | string;
+      primarygroup?: number | string;
     }
   >({
-    mutationFn: (formData) => {
+    mutationFn: async (formData) => {
       if (updateScope === 'username') {
         return marketplaceOfferingUsersPartialUpdate({
           path: { uuid: row.uuid },
@@ -266,6 +314,27 @@ export const ProviderOfferingUserUpdateDialog: FC<
             runtime_state: formData.runtime_state,
           },
         });
+      } else if (updateScope === 'posix') {
+        // Only send a UID/GID when it actually changed: the fields are
+        // pre-filled, and re-submitting an unchanged value would needlessly
+        // re-issue the identity and re-emit its warning.
+        const changedId = (value, current?: number) =>
+          value !== '' && value != null && Number(value) !== current;
+        const response = await marketplaceOfferingUsersSetPosixAttributes({
+          path: { uuid: row.uuid },
+          body: {
+            login_shell: formData.login_shell,
+            home_directory: formData.home_directory,
+            ...(changedId(formData.uidnumber, row.uidnumber)
+              ? { uidnumber: Number(formData.uidnumber) }
+              : {}),
+            ...(changedId(formData.primarygroup, row.primarygroup)
+              ? { primarygroup: Number(formData.primarygroup) }
+              : {}),
+          },
+        });
+        (response.data?.warnings || []).forEach((warning) => showInfo(warning));
+        return response;
       }
     },
     successMessage:
@@ -275,14 +344,23 @@ export const ProviderOfferingUserUpdateDialog: FC<
           ? translate('Comment has been updated.')
           : updateScope === 'runtime_state'
             ? translate('Runtime state has been updated.')
-            : translate('Account state has been updated.'),
+            : updateScope === 'posix'
+              ? translate('POSIX attributes have been updated.')
+              : translate('Account state has been updated.'),
     errorMessage: translate('Unable to update offering user.'),
     refetch,
   });
 
+  const baseTitle = updateFields[updateScope]?.title || DASH_ESCAPE_CODE;
+  const accountLabel = row.username || row.user_username;
+  const dialogTitle =
+    updateScope === 'posix' && accountLabel
+      ? `${baseTitle} · ${accountLabel}`
+      : baseTitle;
+
   return (
     <ResourceActionDialog
-      dialogTitle={updateFields[updateScope]?.title || DASH_ESCAPE_CODE}
+      dialogTitle={dialogTitle}
       formFields={fields}
       initialValues={fields.reduce((acc, field) => {
         acc[field.name] =

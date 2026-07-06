@@ -183,4 +183,22 @@ export const ALL_ATTRIBUTE_FIELDS: AttributeFieldDef[] = [
     component: AwesomeCheckboxField,
     featureFlag: UserFeatures.show_identity_bridge,
   },
+  {
+    key: 'expose_uid_number',
+    label: translate('POSIX UID'),
+    description: translate(
+      'POSIX UID from the identity provider; exposed for offerings that source UIDs from the user attribute',
+    ),
+    component: AwesomeCheckboxField,
+    attribute: 'uid_number',
+  },
+  {
+    key: 'expose_primary_gid',
+    label: translate('POSIX primary GID'),
+    description: translate(
+      'POSIX primary GID from the identity provider; exposed for offerings that source primary GIDs from the user attribute',
+    ),
+    component: AwesomeCheckboxField,
+    attribute: 'primary_gid',
+  },
 ];

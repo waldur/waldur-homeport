@@ -21,6 +21,7 @@ import { renderFieldOrDash } from '@/table/utils';
 import { CreateOfferingButton } from '../offerings/list/CreateOfferingButton';
 import { OfferingActions } from '../offerings/list/OfferingActions';
 import { OfferingDropdownActions } from '../offerings/list/OfferingDropdownActions';
+import { OfferingGLAuthConfigActionItem } from '../offerings/list/OfferingGLAuthConfigActionItem';
 import { getStates } from '../offerings/list/OfferingStateFilter';
 import { OfferingStateField } from '../offerings/OfferingStateField';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
@@ -46,6 +47,7 @@ const mandatoryFields = [
   'resources_count', // DeleteOfferingButton
   'offering_group_uuid', // SetOfferingGroupAction (pre-populates current group)
   'offering_group_title', // SetOfferingGroupAction
+  'service_provider_can_create_offering_user', // OfferingGLAuthConfigActionItem
 ];
 
 export const ProviderOfferingsList: FC<ProviderOfferingsListProps> = ({
@@ -158,7 +160,11 @@ export const ProviderOfferingsList: FC<ProviderOfferingsListProps> = ({
       dropdownActions={<OfferingDropdownActions refetch={tableProps.fetch} />}
       tableActions={<CreateOfferingButton fetch={tableProps.fetch} />}
       rowActions={(row) => (
-        <OfferingActions row={row.row} refetch={tableProps.fetch} />
+        <OfferingActions
+          row={row.row}
+          refetch={tableProps.fetch}
+          extraActions={[OfferingGLAuthConfigActionItem]}
+        />
       )}
       filters={<ProviderOfferingsFilter offeringTypes={offeringTypes} />}
       hasQuery={true}

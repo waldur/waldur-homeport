@@ -30,7 +30,9 @@ type ConfigurableProfileAttribute =
   | 'organization_address'
   | 'eduperson_assurance'
   | 'civil_number'
-  | 'identity_source';
+  | 'identity_source'
+  | 'uid_number'
+  | 'primary_gid';
 
 export type ProfileAttribute =
   (typeof CORE_PROFILE_ATTRIBUTES)[number] | ConfigurableProfileAttribute;

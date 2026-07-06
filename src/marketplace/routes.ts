@@ -834,6 +834,26 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-provider-posix-id-pools',
+    parent: 'provider-marketplace',
+    url: 'posix-id-pools/',
+    component: lazyComponent(() =>
+      import('./service-providers/posix-id-pools/ProviderPosixIdPoolsList').then(
+        (module) => ({
+          default: module.ProviderPosixIdPoolsList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('POSIX ID pools'),
+      priority: 21,
+      permissions: [
+        () => isFeatureVisible(MarketplaceFeatures.show_posix_id_pools),
+      ],
+    },
+  },
+
+  {
     name: 'public.marketplace-providers',
     url: '/marketplace-providers/',
     component: lazyComponent(() =>

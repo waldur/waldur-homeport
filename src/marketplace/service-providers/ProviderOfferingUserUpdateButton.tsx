@@ -57,7 +57,9 @@ export const ProviderOfferingUserUpdateButton: FC<
               ? translate('Update account state')
               : props.updateScope === 'runtime_state'
                 ? translate('Update runtime state')
-                : translate('Edit external username')
+                : props.updateScope === 'posix'
+                  ? translate('Edit POSIX attributes')
+                  : translate('Edit external username')
         }
         action={() =>
           openDialog(ProviderOfferingUserUpdateDialog, {
