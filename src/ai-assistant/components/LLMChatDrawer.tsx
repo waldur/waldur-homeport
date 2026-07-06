@@ -13,6 +13,7 @@ import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
 import {
   acknowledgeDisclosure,
+  isAnonymousVisitor,
   isDisclosureAcknowledged,
 } from '@/ai-assistant/utils';
 import { useChatDrawerPreference } from '@/chat/chatDrawerPreferences';
@@ -24,6 +25,7 @@ import { useDrawerExpand } from '@/drawer/useDrawerExpand';
 import { translate } from '@/i18n';
 import { useLayout } from '@/metronic/layout/core';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
+import { useUser } from '@/workspace/hooks';
 
 interface LLMChatDrawerProps {
   close?: () => void;
@@ -60,8 +62,13 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   // History sidebar only makes sense on the AI tab; matrix has its own room
   // list. Subscribe to the shared pref so the toolbar updates as the user
   // toggles tabs inside UnifiedChatDrawer.
+  const user = useUser();
+  // The anonymous visitor panel has no full-screen layout and no history
+  // sidebar, so its toolbar reduces to the close button. Same gate as
+  // UnifiedChatDrawer ('anonymous' mode + no user = visitor).
+  const isAnonymous = isAnonymousVisitor(user);
   const [activeTab] = useChatDrawerPreference('activeTab');
-  const showHistoryToggle = activeTab === 'ai';
+  const showHistoryToggle = !isAnonymous && activeTab === 'ai';
 
   // Close the drawer when the main aside minimize state flips. The drawer's
   // layout is anchored to the main content area's width; when that changes,
@@ -119,29 +126,32 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
 
   return (
     <>
-      {/* Desktop: expand/collapse */}
-      <span className="d-none d-lg-inline-flex position-relative">
-        <MediumIconButton
-          iconNode={
-            expanded ? (
-              <ArrowsInSimpleIcon weight="bold" />
-            ) : (
-              <ArrowsOutSimpleIcon weight="bold" />
-            )
-          }
-          tooltip={
-            expanded
-              ? translate('Collapse to panel')
-              : translate('Expand to full screen')
-          }
-          onClick={toggleExpand}
-          variant="tertiary-ghost"
-          tooltipPlacement="bottom"
-        />
-        {hasNewMessages && !expanded && (
-          <HeaderButtonBullet className="pe-none" />
-        )}
-      </span>
+      {/* Desktop: expand/collapse (authenticated only — the anon panel has no
+          full-screen layout) */}
+      {!isAnonymous && (
+        <span className="d-none d-lg-inline-flex position-relative">
+          <MediumIconButton
+            iconNode={
+              expanded ? (
+                <ArrowsInSimpleIcon weight="bold" />
+              ) : (
+                <ArrowsOutSimpleIcon weight="bold" />
+              )
+            }
+            tooltip={
+              expanded
+                ? translate('Collapse to panel')
+                : translate('Expand to full screen')
+            }
+            onClick={toggleExpand}
+            variant="tertiary-ghost"
+            tooltipPlacement="bottom"
+          />
+          {hasNewMessages && !expanded && (
+            <HeaderButtonBullet className="pe-none" />
+          )}
+        </span>
+      )}
       {showHistoryToggle && (
         <>
           {/* Tablet: compact history toggle */}

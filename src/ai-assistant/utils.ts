@@ -3,7 +3,8 @@ import { isFeatureVisible } from '@/features/connect';
 import { SupportFeatures } from '@/FeaturesEnums';
 import { User } from '@/workspace/types';
 
-type LLMChatEnabledRoles = 'disabled' | 'staff' | 'staff_and_support' | 'all';
+type LLMChatEnabledRoles =
+  'disabled' | 'staff' | 'staff_and_support' | 'all' | 'anonymous';
 
 const DISCLOSURE_KEY = 'waldur/ai-assistant/disclosure-acknowledged';
 
@@ -33,5 +34,34 @@ export const isLLMChatAllowedForUser = (
       return user.is_staff || user.is_support;
     case 'all':
       return true;
+    case 'anonymous':
+      // 'anonymous' is a superset of 'all': every authenticated user gets the
+      // full assistant. The guard above already excluded the no-user case, which
+      // is routed to the visitor panel via isAnonymousAssistantEnabled() instead.
+      return true;
   }
 };
+
+/**
+ * Anonymous marketplace assistant — gated on the public config mode + feature
+ * flag, independent of any user. Drives the standalone visitor panel only;
+ * logged-in users in 'anonymous' mode are routed to the full authenticated
+ * assistant (see isLLMChatAllowedForUser), since 'anonymous' is a superset of 'all'.
+ */
+export const isAnonymousAssistantEnabled = (): boolean =>
+  getLLMChatMode() === 'anonymous' &&
+  isFeatureVisible(SupportFeatures.enable_llm_assistant);
+
+/**
+ * A logged-out visitor who should get the standalone anonymous panel: no user
+ * AND anonymous mode is on. A logged-in user always gets the full authenticated
+ * assistant instead (see isLLMChatAllowedForUser). Shared by the drawer branch
+ * and the drawer toolbar so they can't disagree on who is a visitor.
+ */
+export const isAnonymousVisitor = (user: User | undefined): boolean =>
+  !user && isAnonymousAssistantEnabled();
+
+/** True when either the authenticated assistant (for this user) or the anonymous assistant is available. */
+export const isAssistantEnabled = (user: User | undefined): boolean =>
+  isLLMChatAllowedForUser(user, getLLMChatMode()) ||
+  isAnonymousAssistantEnabled();

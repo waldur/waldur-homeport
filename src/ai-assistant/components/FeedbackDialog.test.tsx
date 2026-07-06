@@ -20,7 +20,7 @@ const renderDialog = (
   return renderWithProviders(
     <FeedbackDialog
       resolve={{
-        messageUuid: 'msg-1',
+        source: { kind: 'message', messageUuid: 'msg-1' },
         score: false,
         currentComment: '',
         currentCategory: undefined,

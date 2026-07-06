@@ -120,6 +120,9 @@ export interface BlockBasedMetadata {
   blockHistory?: BlockHistoryEntry[];
   warning?: string;
   backendUuid?: string;
+  // Anonymous marketplace assistant — per-message tokens for feedback/click attribution.
+  interactionUuid?: string;
+  feedbackToken?: string;
   feedback_score?: boolean | null;
   feedback_comment?: string | null;
   feedback_category?: FeedbackCategoryEnum | null;

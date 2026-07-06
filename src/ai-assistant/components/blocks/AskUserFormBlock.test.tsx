@@ -6,6 +6,7 @@ import { UIBlock } from '@/ai-assistant/lib/types';
 
 import {
   AskUserFormBlock,
+  AskUserFormBody,
   BUTTON_GROUP_OPTION_LIMIT,
   composeReply,
   isAnswered,
@@ -272,5 +273,42 @@ describe('AskUserFormBlock rendering', () => {
       name: /Send answers/,
     });
     expect(submit).toBeDisabled();
+  });
+});
+
+describe('AskUserFormBody locking after send', () => {
+  it('disables the freeform input once the form is stale (no longer the latest message)', () => {
+    render(
+      <AskUserFormBody
+        block={buildBlock([{ id: 'q1', question: 'What workload?' }])}
+        readOnly={false}
+        stale
+      />,
+    );
+    expect(screen.getByPlaceholderText(/Type your answer/)).toBeDisabled();
+  });
+
+  it('disables the option pills once the form is stale', () => {
+    render(
+      <AskUserFormBody
+        block={buildBlock([
+          { id: 'q1', question: 'Pick one', options: buildOptions(3) },
+        ])}
+        readOnly={false}
+        stale
+      />,
+    );
+    expect(screen.getByRole('radio', { name: 'Option 1' })).toBeDisabled();
+  });
+
+  it('keeps inputs editable while the form is still the latest message', () => {
+    render(
+      <AskUserFormBody
+        block={buildBlock([{ id: 'q1', question: 'What workload?' }])}
+        readOnly={false}
+        stale={false}
+      />,
+    );
+    expect(screen.getByPlaceholderText(/Type your answer/)).toBeEnabled();
   });
 });

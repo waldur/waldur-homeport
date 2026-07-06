@@ -1,9 +1,7 @@
-import { ThumbsDownIcon, ThumbsUpIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FC } from 'react';
 import type { FeedbackCategoryEnum } from 'waldur-js-client';
 
-import { translate } from '@/i18n';
+import { FeedbackThumbButtons } from '@/ai-assistant/components/shared/FeedbackThumbButtons';
 import { useModal } from '@/modal/actions';
 
 import { FeedbackDialog } from './FeedbackDialog';
@@ -21,15 +19,15 @@ export const FeedbackButtons: FC<Props> = ({
   feedbackComment,
   feedbackCategory,
 }) => {
-  const { openDialog: openModal } = useModal();
+  const { openDialog } = useModal();
 
-  const openDialog = (score: boolean) => {
+  const open = (score: boolean) => {
     // When the user flips their vote, drop the prior comment/category —
     // they don't belong on a newly-opposite score.
     const keepPriorDetails = score === feedbackScore;
-    openModal(FeedbackDialog, {
+    openDialog(FeedbackDialog, {
       resolve: {
-        messageUuid,
+        source: { kind: 'message', messageUuid },
         score,
         currentComment: keepPriorDetails ? feedbackComment : null,
         currentCategory: keepPriorDetails ? feedbackCategory : null,
@@ -38,39 +36,12 @@ export const FeedbackButtons: FC<Props> = ({
     });
   };
 
-  const upActive = feedbackScore === true;
-  const downActive = feedbackScore === false;
-
   return (
-    <>
-      <button
-        type="button"
-        className={classNames('aui-message-action-btn', 'is-positive')}
-        aria-label={
-          upActive
-            ? translate('Helpful (selected). Activate to edit your feedback.')
-            : translate('Helpful')
-        }
-        aria-pressed={upActive}
-        onClick={() => openDialog(true)}
-      >
-        <ThumbsUpIcon weight={upActive ? 'fill' : 'regular'} size={16} />
-      </button>
-      <button
-        type="button"
-        className={classNames('aui-message-action-btn', 'is-negative')}
-        aria-label={
-          downActive
-            ? translate(
-                'Not helpful (selected). Activate to edit your feedback.',
-              )
-            : translate('Not helpful')
-        }
-        aria-pressed={downActive}
-        onClick={() => openDialog(false)}
-      >
-        <ThumbsDownIcon weight={downActive ? 'fill' : 'regular'} size={16} />
-      </button>
-    </>
+    <FeedbackThumbButtons
+      upActive={feedbackScore === true}
+      downActive={feedbackScore === false}
+      onUp={() => open(true)}
+      onDown={() => open(false)}
+    />
   );
 };

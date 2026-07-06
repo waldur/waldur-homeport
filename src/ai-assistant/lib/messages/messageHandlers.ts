@@ -17,6 +17,7 @@ import {
 import {
   createUserMessage,
   createAssistantPlaceholder,
+  getMessageText,
 } from './messageFactories';
 
 type StartRunConfig = {
@@ -30,15 +31,7 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
     deps.setIsRunning(deps.currentThreadId, true);
 
     try {
-      const firstContent = message.content[0];
-      if (
-        typeof firstContent !== 'object' ||
-        !firstContent ||
-        firstContent.type !== 'text'
-      )
-        throw new Error('Only text messages are supported');
-
-      const input = firstContent.text;
+      const input = getMessageText(message);
       const userMessage = createUserMessage(input);
       deps.setMessages((prev) => [...prev, userMessage]);
 
@@ -86,15 +79,7 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
   return async (message: AppendMessage) => {
     deps.setIsRunning(deps.currentThreadId, true);
     try {
-      const firstContent = message.content[0];
-      if (
-        typeof firstContent !== 'object' ||
-        !firstContent ||
-        firstContent.type !== 'text'
-      )
-        throw new Error('Only text messages are supported');
-
-      const input = firstContent.text;
+      const input = getMessageText(message);
       const sourceId = message.sourceId;
 
       const userIndex = deps.messages.findIndex((m) => m.id === sourceId);

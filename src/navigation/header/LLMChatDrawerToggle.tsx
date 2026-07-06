@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { resetDrawerDOM } from '@/ai-assistant/components/LLMChatDrawer';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
-import { isLLMChatAllowedForUser, getLLMChatMode } from '@/ai-assistant/utils';
+import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { useDrawer } from '@/drawer/actions';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
@@ -30,9 +30,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
     resetDrawerDOM();
   }, [user?.uuid, closeDrawer]);
 
-  const showAI = isLLMChatAllowedForUser(user, getLLMChatMode());
-
-  if (!showAI) {
+  if (!isAssistantEnabled(user)) {
     return null;
   }
 

@@ -126,9 +126,10 @@ interface CoreConfiguration {
   SSH_KEY_ALLOWED_TYPES: string[];
   SSH_KEY_MIN_RSA_KEY_SIZE: number;
   ENABLED_REPORTING_SCREENS: string[];
+  AI_ASSISTANT_NAME: string;
   AI_ASSISTANT_ENABLED: boolean;
   AI_ASSISTANT_ENABLED_ROLES:
-    'disabled' | 'staff' | 'staff_and_support' | 'all';
+    'disabled' | 'staff' | 'staff_and_support' | 'all' | 'anonymous';
   MATRIX_ENABLED: boolean;
 }
 
