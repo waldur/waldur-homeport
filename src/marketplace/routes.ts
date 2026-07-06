@@ -737,6 +737,21 @@ export const states: StateDeclaration[] = [
       priority: 10,
     },
   },
+  {
+    name: 'admin-marketplace-duplicate-offerings',
+    parent: 'admin-marketplace',
+    url: 'openstack-duplicate-offerings/',
+    component: lazyComponent(() =>
+      import('@/marketplace/offerings/admin/DuplicateOfferingsList').then(
+        (module) => ({ default: module.DuplicateOfferingsList }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('OpenStack duplicate offerings'),
+      feature: MarketplaceFeatures.show_openstack_duplicate_offerings,
+      priority: 15,
+    },
+  },
 
   {
     name: 'admin-offering',
