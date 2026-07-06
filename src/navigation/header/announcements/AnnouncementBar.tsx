@@ -12,7 +12,12 @@ import { useTextTruncation } from './useTextTruncation';
 interface AnnouncementBarProps {
   icon: Icon;
   variant: Variant;
-  label: ReactNode;
+  /** Inline label used by non-announcement bars (offering/order/resource). */
+  label?: ReactNode;
+  /** Announcement title (e.g. the maintenance name), shown in title styling. */
+  title?: ReactNode;
+  /** Issuing service provider, appended to the title as "by {provider}". */
+  provider?: string;
   description: string;
   onShowMore?: () => void;
   actionLabel?: ReactNode;
@@ -24,6 +29,8 @@ interface AnnouncementBarProps {
 
 export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   label,
+  title,
+  provider,
   description,
   onShowMore,
   actionLabel,
@@ -41,6 +48,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   );
 
   const showMoreButton = onShowMore && isTruncated;
+  const messageClass = variant && colored ? undefined : 'text-muted';
 
   return (
     <div
@@ -62,13 +70,27 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
           ref={textRef}
           className={classNames('text-start fs-6 mb-0', ellipsis && 'ellipsis')}
         >
-          <strong className="fw-bold">
-            {label}
-            {hasColon ? ': ' : ' '}
-          </strong>
-
+          {label ? (
+            <strong className="fw-bold">
+              {label}
+              {hasColon ? ': ' : ' '}
+            </strong>
+          ) : (
+            // One line: bold title (the "what"), then the provider as a muted
+            // "by … :" byline (the "who"), then the body message.
+            <>
+              {title ? (
+                <strong className="fw-semibold">{title}. </strong>
+              ) : null}
+              {provider ? (
+                <span className={messageClass}>
+                  {translate('By {provider}', { provider })}:{' '}
+                </span>
+              ) : null}
+            </>
+          )}
           <span
-            className={variant && colored ? undefined : 'text-muted'}
+            className={messageClass}
             dangerouslySetInnerHTML={{ __html: safeDescription }}
             data-testid="announcement-description"
           />
@@ -87,7 +109,11 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
             type="button"
             className="text-anchor flex-shrink-0"
             onClick={onShowMore}
-            aria-label={`Show more details for ${label}`}
+            aria-label={
+              label || title
+                ? `Show more details for ${label || title}`
+                : translate('Show more')
+            }
           >
             {translate('Show more')}
           </button>

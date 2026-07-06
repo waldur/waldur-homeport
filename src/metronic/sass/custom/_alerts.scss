@@ -16,16 +16,23 @@
 }
 
 .announcements {
+  // The group header is a <button> reusing .bar (height + bottom border); strip
+  // the button chrome. Placed before .bar so its bottom border still applies.
+  .announcement-group-header {
+    border: 0;
+    color: inherit;
+  }
+
+  // Caret is an icon → foreground token, not a text one.
+  .announcement-group-caret {
+    color: $fg-quaternary;
+  }
+
   .bar {
     min-height: 55px;
+    // Bars stack flush: a single bottom border divides adjacent bars (grouped or
+    // not) — no gaps, no doubled top+bottom borders.
     border-bottom: 1px solid var(--bs-border-color);
-
-    &:not(:first-child) {
-      border-top: 1px solid var(--bs-border-color);
-    }
-    &:not(:last-child) {
-      margin-bottom: 8px;
-    }
 
     .ellipsis {
       overflow: hidden;
