@@ -151,6 +151,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enabled display of experimental or mocked components in marketplace.'),
       },
       {
+        key: 'show_openstack_duplicate_offerings',
+        description: translate('Show the staff diagnostics page listing tenants with duplicate per-tenant OpenStack offerings.'),
+      },
+      {
         key: 'show_posix_id_pools',
         description: translate('Render POSIX ID pool management UI for service providers.'),
       },
