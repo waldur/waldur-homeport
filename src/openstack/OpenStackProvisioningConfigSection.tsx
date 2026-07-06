@@ -6,6 +6,7 @@ import {
   CommaSeparatedListEditField,
   EditFieldProvider,
   NumberEditField,
+  SelectEditField,
   StringEditField,
   withEditField,
 } from '@/form/editFields';
@@ -19,6 +20,11 @@ import { useUpdateOfferingIntegration } from '@/marketplace/offerings/update/int
 import { OpenStackExternalIpsField } from './OpenStackExternalIpsField';
 
 const ExternalIpsEditField = withEditField(OpenStackExternalIpsField);
+
+const BILLING_SOURCE_OPTIONS = [
+  { value: 'quota', label: translate('Quota (flavor-derived)') },
+  { value: 'placement', label: translate('Placement allocations') },
+];
 
 export const OpenStackProvisioningConfigSection: FC<OfferingEditPanelProps> = (
   props,
@@ -170,6 +176,24 @@ export const OpenStackProvisioningConfigSection: FC<OfferingEditPanelProps> = (
             name="plugin_options.max_volumes"
             label={translate('Maximum number of volumes in a single tenant')}
             description={translate('Leave empty for no limit.')}
+          />
+        </TabbedSection.Tab>
+
+        <TabbedSection.Tab id="billing" title={translate('Billing')}>
+          <SelectEditField
+            name="plugin_options.billing_source"
+            label={translate('Compute usage source')}
+            description={translate(
+              'Source for OpenStack instance compute usage (cores and RAM). "Quota" (default) derives usage from instance flavors; "Placement" reads Placement allocations and can additionally bill specialty resource classes (VGPU, PCI, custom). Storage is always billed from Cinder volumes regardless of this setting.',
+            )}
+            options={BILLING_SOURCE_OPTIONS}
+            simpleValue
+            isClearable={false}
+            renderValue={(val) =>
+              BILLING_SOURCE_OPTIONS.find((o) => o.value === val)?.label ||
+              val ||
+              translate('Quota (flavor-derived)')
+            }
           />
         </TabbedSection.Tab>
 
