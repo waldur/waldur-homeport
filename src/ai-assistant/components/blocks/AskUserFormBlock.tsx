@@ -88,11 +88,12 @@ export const composeReply = (
 const OtherAnswerInput: FC<{
   value: string;
   onChange: (v: string) => void;
-}> = ({ value, onChange }) => {
+  disabled: boolean;
+}> = ({ value, onChange, disabled }) => {
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    ref.current?.focus();
-  }, []);
+    if (!disabled) ref.current?.focus();
+  }, [disabled]);
   return (
     <div
       className="aui-ask-user-input-row"
@@ -105,6 +106,7 @@ const OtherAnswerInput: FC<{
         placeholder={translate('Type your own answer…')}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        disabled={disabled}
       />
     </div>
   );
@@ -114,7 +116,8 @@ const ButtonGroupQuestion: FC<{
   question: Question;
   answer: ButtonAnswer;
   onChange: (a: ButtonAnswer) => void;
-}> = ({ question, answer, onChange }) => {
+  disabled: boolean;
+}> = ({ question, answer, onChange, disabled }) => {
   const isMulti = !!question.multiSelect;
   const isPicked = (opt: Option) => answer.picks.some((p) => p.id === opt.id);
 
@@ -158,6 +161,7 @@ const ButtonGroupQuestion: FC<{
               data-picked={picked ? '1' : '0'}
               data-dimmed={dimmed ? '1' : '0'}
               title={opt.description || undefined}
+              disabled={disabled}
             >
               {isMulti && (
                 <span className="aui-ask-user-check" aria-hidden="true">
@@ -180,6 +184,7 @@ const ButtonGroupQuestion: FC<{
           }
           className="aui-ask-user-other-toggle"
           aria-expanded={answer.otherOpen}
+          disabled={disabled}
         >
           <PlusIcon size={11} weight="bold" />
           <span>
@@ -193,6 +198,7 @@ const ButtonGroupQuestion: FC<{
         <OtherAnswerInput
           value={answer.other}
           onChange={(other) => onChange({ ...answer, other })}
+          disabled={disabled}
         />
       )}
     </div>
@@ -210,7 +216,8 @@ const SearchableListQuestion: FC<{
   question: Question;
   answer: ButtonAnswer;
   onChange: (a: ButtonAnswer) => void;
-}> = ({ question, answer, onChange }) => {
+  disabled: boolean;
+}> = ({ question, answer, onChange, disabled }) => {
   const isMulti = !!question.multiSelect;
 
   const selectOptions = useMemo<SelectOption[]>(
@@ -249,6 +256,7 @@ const SearchableListQuestion: FC<{
       <Select
         isMulti={isMulti}
         isClearable
+        isDisabled={disabled}
         value={value}
         onChange={handleChange}
         options={selectOptions}
@@ -275,6 +283,7 @@ const SearchableListQuestion: FC<{
           }
           className="aui-ask-user-other-toggle aui-ask-user-other-toggle--compact"
           aria-expanded={answer.otherOpen}
+          disabled={disabled}
         >
           <PlusIcon size={11} weight="bold" />
           <span>
@@ -287,6 +296,7 @@ const SearchableListQuestion: FC<{
           <OtherAnswerInput
             value={answer.other}
             onChange={(other) => onChange({ ...answer, other })}
+            disabled={disabled}
           />
         )}
       </div>
@@ -297,7 +307,8 @@ const SearchableListQuestion: FC<{
 const FreeformQuestion: FC<{
   answer: FreeformAnswer;
   onChange: (a: FreeformAnswer) => void;
-}> = ({ answer, onChange }) => (
+  disabled: boolean;
+}> = ({ answer, onChange, disabled }) => (
   <div
     className="aui-ask-user-input-row"
     data-has-value={answer.text.trim() ? '1' : '0'}
@@ -308,6 +319,7 @@ const FreeformQuestion: FC<{
       placeholder={translate('Type your answer…')}
       value={answer.text}
       onChange={(e) => onChange({ text: e.target.value })}
+      disabled={disabled}
     />
   </div>
 );
@@ -336,7 +348,7 @@ const AskUserFormBlockLive: FC<UIBlockProps> = ({ block }) => {
   return <AskUserFormBody block={block} readOnly={false} stale={stale} />;
 };
 
-const AskUserFormBody: FC<
+export const AskUserFormBody: FC<
   UIBlockProps & { readOnly: boolean; stale: boolean }
 > = ({ block, readOnly, stale }) => {
   const questions = block.questions || [];
@@ -363,6 +375,12 @@ const AskUserFormBody: FC<
   // appears, the user has effectively answered and re-sending would be
   // misleading.
   const showSubmitted = submitted || stale;
+
+  // Once the answer has been sent (or superseded by a later message) the
+  // inputs lock so the record can't be silently changed after the fact. The
+  // read-only log view keeps inputs interactive on purpose — there is no send
+  // path there, and existing behaviour relies on it.
+  const locked = showSubmitted;
 
   // Reading the form from chat history (OfflineBlockContext) is the only
   // case where sending is permanently blocked; otherwise we wait for the
@@ -403,18 +421,21 @@ const AskUserFormBody: FC<
                   <FreeformQuestion
                     answer={a as FreeformAnswer}
                     onChange={(next) => setAnswerAt(i, next)}
+                    disabled={locked}
                   />
                 ) : mode === 'buttons' ? (
                   <ButtonGroupQuestion
                     question={q}
                     answer={a as ButtonAnswer}
                     onChange={(next) => setAnswerAt(i, next)}
+                    disabled={locked}
                   />
                 ) : (
                   <SearchableListQuestion
                     question={q}
                     answer={a as ButtonAnswer}
                     onChange={(next) => setAnswerAt(i, next)}
+                    disabled={locked}
                   />
                 )}
               </div>

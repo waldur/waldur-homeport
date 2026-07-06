@@ -91,6 +91,21 @@ export function initApiClient() {
 // an OIDC token may already be in storage (e.g. on page reload after sign-in)
 // but the prefix flag is not yet known. Skip header attachment in that
 // window so the bootstrap request goes out unauthenticated.
+// Records whether this tab has ever sent an authenticated request. Kept in
+// memory (not storage) so it survives the token being cleared out-of-band —
+// e.g. a logout in another tab wipes shared storage, but this still-running tab
+// must know it once had a session so a subsequent 401 logs it out instead of
+// silently failing. A genuine anonymous visitor never attaches a token, so this
+// stays false and its 401s are left alone.
+let hadAuthenticatedSession = false;
+
+// Resets the in-memory session-tracking flag. Not used in production (the flag
+// is intentionally sticky for the tab's lifetime); exposed so tests can isolate
+// cases that would otherwise leak the flag across the shared module instance.
+export const resetAuthSessionTracking = () => {
+  hadAuthenticatedSession = false;
+};
+
 export const attachAuthHeader = (request: Request) => {
   if (!ENV.plugins || !AuthTokenStorage.get()) {
     return request;
@@ -98,6 +113,7 @@ export const attachAuthHeader = (request: Request) => {
   const authHeader = getAuthHeader();
   if (authHeader) {
     request.headers.set('Authorization', authHeader);
+    hadAuthenticatedSession = true;
   }
   return request;
 };
@@ -111,9 +127,17 @@ client.interceptors.error.use((error: Error, response) => {
   };
 });
 
-client.interceptors.response.use((response) => {
+// A 401 means an authenticated session expired — log out and bounce to login,
+// remembering where to return. Guarded on this tab having had a session: an
+// anonymous visitor (e.g. browsing the public marketplace) has no session to
+// lose, and its 401s from authenticated-only endpoints — the matrix rooms poll,
+// etc. — must not kick it to the login page. `hadAuthenticatedSession` covers
+// the case where the token was cleared out-of-band (logout in another tab) but
+// this tab is still showing the authenticated UI.
+export const handleUnauthorizedResponse = (response: Response) => {
   if (
     response?.status === 401 &&
+    (AuthTokenStorage.get() || hadAuthenticatedSession) &&
     response.url !== ENV.apiEndpoint + 'api-auth/password/'
   ) {
     if (router.globals.transition) {
@@ -135,7 +159,9 @@ client.interceptors.response.use((response) => {
     localLogout();
   }
   return response;
-});
+};
+
+client.interceptors.response.use(handleUnauthorizedResponse);
 
 /**
  * Constructs a URL for a specific icon by name.

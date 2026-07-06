@@ -1,9 +1,20 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { localLogout } from '@/auth/AuthService';
 import { ENV } from '@/core/config';
 import { AuthMethodStorage, AuthTokenStorage } from '@/core/StorageManager';
 
-import { attachAuthHeader, getAllPages, getAuthHeader } from './api';
+import {
+  attachAuthHeader,
+  getAllPages,
+  getAuthHeader,
+  handleUnauthorizedResponse,
+  resetAuthSessionTracking,
+} from './api';
+
+// `@/router` is globally mocked (test/mocks/router.js); only AuthService needs a
+// local mock so we can assert on localLogout.
+vi.mock('@/auth/AuthService', () => ({ localLogout: vi.fn() }));
 
 // Node 25 ships an experimental top-level `localStorage` that conflicts
 // with the one provided by jsdom; stub a plain in-memory shim so
@@ -129,6 +140,58 @@ describe('attachAuthHeader — bootstrap skip', () => {
     AuthMethodStorage.set('local');
     AuthTokenStorage.set('local-key');
     expect(run().headers.get('Authorization')).toBe('Token local-key');
+  });
+});
+
+describe('handleUnauthorizedResponse — 401 logout guard', () => {
+  let savedPlugins: any;
+
+  const resp401 = () =>
+    ({
+      status: 401,
+      url: 'http://localhost:8080/api/matrix/rooms/?member=true',
+    }) as unknown as Response;
+
+  beforeEach(() => {
+    installMemoryStorage();
+    localStorage.clear();
+    // The in-memory "tab was authenticated" flag lives on the shared module and
+    // would otherwise leak from earlier attachAuthHeader tests into these cases.
+    resetAuthSessionTracking();
+    savedPlugins = (ENV as any).plugins;
+    vi.mocked(localLogout).mockClear();
+  });
+
+  afterEach(() => {
+    (ENV as any).plugins = savedPlugins;
+    localStorage.clear();
+    vi.unstubAllGlobals();
+  });
+
+  it('does not log out an anonymous visitor (no token) on a 401', () => {
+    handleUnauthorizedResponse(resp401());
+    expect(localLogout).not.toHaveBeenCalled();
+  });
+
+  it('logs out an authenticated user (token present) on a 401', () => {
+    AuthTokenStorage.set('local-key');
+    handleUnauthorizedResponse(resp401());
+    expect(localLogout).toHaveBeenCalledTimes(1);
+  });
+
+  it('logs out a stale authenticated tab whose token was cleared out-of-band', () => {
+    // This tab made an authenticated request (sets the in-memory flag)...
+    (ENV as any).plugins = {
+      WALDUR_CORE: { OIDC_ACCESS_TOKEN_ENABLED: true },
+    };
+    AuthMethodStorage.set('eduteams');
+    AuthTokenStorage.set('oidc-jwt');
+    attachAuthHeader(new Request('http://localhost:8080/api/projects/'));
+    // ...then a logout in another tab cleared the shared token.
+    AuthTokenStorage.remove();
+
+    handleUnauthorizedResponse(resp401());
+    expect(localLogout).toHaveBeenCalledTimes(1);
   });
 });
 

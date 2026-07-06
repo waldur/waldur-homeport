@@ -1,5 +1,6 @@
 import { chatStream, ChatResponse } from 'waldur-js-client';
 
+import { readNdjsonStream } from '@/ai-assistant/lib/streaming/readNdjsonStream';
 import { translate } from '@/i18n';
 
 export async function* streamChat(
@@ -40,38 +41,5 @@ export async function* streamChat(
       translate('No stream data received from the inference API'),
     );
   }
-  const reader = stream.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop() || '';
-
-      for (const line of lines) {
-        const trimmedLine = line.trim();
-        if (!trimmedLine) continue;
-
-        let parsed: ChatResponse;
-        try {
-          parsed = JSON.parse(trimmedLine) as ChatResponse;
-        } catch {
-          continue;
-        }
-
-        // Handle error field in the response
-        if (parsed.e) {
-          throw new Error(parsed.e);
-        }
-
-        yield parsed;
-      }
-    }
-  } finally {
-    reader.releaseLock();
-  }
+  yield* readNdjsonStream(stream);
 }

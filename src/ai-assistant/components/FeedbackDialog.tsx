@@ -1,58 +1,52 @@
 import { FC } from 'react';
-import { Form as FinalForm, FormSpy } from 'react-final-form';
 import type { FeedbackCategoryEnum } from 'waldur-js-client';
 
-import { useMessageFeedbackMutation } from '@/ai-assistant/hooks/useMessageFeedbackMutation';
-import { FEEDBACK_SELECT_OPTIONS } from '@/ai-assistant/lib/feedback/categories';
+import {
+  FeedbackForm,
+  FeedbackFormValues,
+} from '@/ai-assistant/components/shared/FeedbackForm';
+import {
+  FeedbackSource,
+  useFeedbackMutation,
+} from '@/ai-assistant/hooks/useFeedbackMutation';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
-import { SelectGroup, SubmitButton, TextGroup } from '@/form';
-import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { ModalDialog } from '@/modal/ModalDialog';
-
-const COMMENT_MAX = 2000;
-const COUNTER_ID = 'feedback-comment-counter';
-
-interface FormValues {
-  comment: string;
-  category: FeedbackCategoryEnum | null;
-}
 
 interface Resolve {
-  messageUuid: string;
+  source: FeedbackSource;
   score: boolean;
   currentComment?: string | null;
   currentCategory?: FeedbackCategoryEnum | null;
+  // Anonymous votes require a category on a negative and cap the comment at 500.
+  requireCategory?: boolean;
+  commentMax?: number;
+  // Lets the anonymous panel reflect the vote (it has no persisted state to read
+  // back); fires only after a confirmed submit.
+  onSubmitted?: () => void;
 }
 
 export const FeedbackDialog: FC<{ resolve: Resolve }> = ({ resolve }) => {
   const { closeDialog } = useModal();
   const { patchMessageByBackendUuid } = useThreadContext();
-  const { submitAsync, isSubmitting } = useMessageFeedbackMutation(
-    resolve.messageUuid,
-  );
+  const { submitAsync, isSubmitting } = useFeedbackMutation(resolve.source);
 
-  const initialValues: FormValues = {
-    comment: resolve.currentComment ?? '',
-    category: resolve.currentCategory ?? null,
-  };
-
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (values: FeedbackFormValues) => {
     try {
       const updated = await submitAsync({
         score: resolve.score,
         comment: values.comment || undefined,
-        category: values.category || undefined,
+        // Category only rides a negative vote — positive rejects it server-side.
+        category: resolve.score ? undefined : values.category || undefined,
       });
-      if (updated) {
-        patchMessageByBackendUuid(resolve.messageUuid, {
+      if (resolve.source.kind === 'message' && updated) {
+        patchMessageByBackendUuid(resolve.source.messageUuid, {
           feedback_score: updated.feedback_score,
           feedback_comment: updated.feedback_comment,
           feedback_category: updated.feedback_category,
           feedback_submitted_at: updated.feedback_submitted_at,
         });
       }
+      resolve.onSubmitted?.();
       closeDialog();
     } catch {
       // mutation's onError already shows a toast; keep dialog open.
@@ -60,64 +54,16 @@ export const FeedbackDialog: FC<{ resolve: Resolve }> = ({ resolve }) => {
   };
 
   return (
-    <FinalForm<FormValues> initialValues={initialValues} onSubmit={onSubmit}>
-      {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={
-              resolve.score
-                ? translate('Tell us what worked')
-                : translate('What went wrong?')
-            }
-            subtitle={translate('Your feedback helps us improve.')}
-            footer={
-              <>
-                <CloseDialogButton />
-                <SubmitButton
-                  submitting={isSubmitting}
-                  label={translate('Submit feedback')}
-                />
-              </>
-            }
-          >
-            {resolve.score === false && (
-              <SelectGroup
-                name="category"
-                simpleValue
-                isClearable
-                placeholder={translate('Select a category')}
-                options={FEEDBACK_SELECT_OPTIONS}
-                label={translate('What type of issue was this? (optional)')}
-              />
-            )}
-
-            <TextGroup
-              label={translate('Comment (optional)')}
-              name="comment"
-              placeholder={
-                resolve.score
-                  ? translate('What was helpful about this response?')
-                  : translate('What was wrong with this response?')
-              }
-              rows={4}
-              maxLength={COMMENT_MAX}
-              aria-describedby={COUNTER_ID}
-            />
-            <FormSpy subscription={{ values: true }}>
-              {({ values: v }) => (
-                <div
-                  id={COUNTER_ID}
-                  className="text-muted small text-end mt-1"
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  {(v.comment ?? '').length} / {COMMENT_MAX}
-                </div>
-              )}
-            </FormSpy>
-          </ModalDialog>
-        </form>
-      )}
-    </FinalForm>
+    <FeedbackForm
+      score={resolve.score}
+      initialValues={{
+        comment: resolve.currentComment ?? '',
+        category: resolve.currentCategory ?? null,
+      }}
+      isSubmitting={isSubmitting}
+      onSubmit={onSubmit}
+      requireCategory={resolve.requireCategory}
+      commentMax={resolve.commentMax}
+    />
   );
 };

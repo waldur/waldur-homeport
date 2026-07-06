@@ -5,6 +5,7 @@ import { FunctionComponent, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { NotificationsProvider, setUpNotifications } from 'reapop';
 
+import { AnonymousThreadProvider } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
 import { queryClient } from '@/core/queryClient';
@@ -59,12 +60,14 @@ const ApplicationInner: FunctionComponent = () => {
                     <MatrixRoot>
                       <ThreadProvider>
                         <ThreadRuntimeProvider>
-                          <NotificationContainer />
-                          <ModalRoot />
-                          <ConfirmModalRoot />
-                          <DrawerRoot />
-                          <UIView />
-                          <MasterInit />
+                          <AnonymousThreadProvider>
+                            <NotificationContainer />
+                            <ModalRoot />
+                            <ConfirmModalRoot />
+                            <DrawerRoot />
+                            <UIView />
+                            <MasterInit />
+                          </AnonymousThreadProvider>
                         </ThreadRuntimeProvider>
                       </ThreadProvider>
                     </MatrixRoot>

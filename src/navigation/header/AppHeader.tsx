@@ -3,6 +3,7 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { getIconUrl } from '@/core/api';
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { Link } from '@/core/Link';
@@ -113,7 +114,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             )}
             {Boolean(user) && showSupportDrawer && <QuickIssueDrawerToggle />}
             {Boolean(user) && <ConfirmationDrawerToggle />}
-            {Boolean(user) && <LLMChatDrawerToggle />}
+            {isAssistantEnabled(user) && <LLMChatDrawerToggle />}
             {Boolean(user) && isSmallScr && (
               <span className="h-40px border-end align-self-center ms-1" />
             )}
