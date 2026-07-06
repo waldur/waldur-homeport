@@ -42,6 +42,7 @@ export enum MarketplaceFeatures {
   lexis_links = 'marketplace.lexis_links',
   show_call_management_functionality = 'marketplace.show_call_management_functionality',
   show_experimental_ui_components = 'marketplace.show_experimental_ui_components',
+  show_posix_id_pools = 'marketplace.show_posix_id_pools',
   show_resource_end_date = 'marketplace.show_resource_end_date',
 }
 

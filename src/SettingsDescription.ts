@@ -1932,6 +1932,17 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('POSIX ID pools'),
+    items: [
+      {
+        key: 'POSIX_ID_POOL_UTILIZATION_THRESHOLD',
+        description: translate('Utilization percentage of a POSIX ID pool namespace that triggers a warning event.'),
+        default: 90,
+        type: 'integer',
+      },
+    ],
+  },
+  {
     description: translate('Affiliates'),
     items: [
       {

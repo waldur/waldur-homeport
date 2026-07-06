@@ -351,6 +351,15 @@ export const PermissionOptions = [
     ],
   },
   {
+    label: translate('Posix_id_pool'),
+    options: [
+      {
+        label: translate('Manage posix id pool'),
+        value: 'POSIX_ID_POOL.MANAGE',
+      },
+    ],
+  },
+  {
     label: translate('Project'),
     options: [
       {

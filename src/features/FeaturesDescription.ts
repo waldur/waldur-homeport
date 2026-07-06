@@ -151,6 +151,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enabled display of experimental or mocked components in marketplace.'),
       },
       {
+        key: 'show_posix_id_pools',
+        description: translate('Render POSIX ID pool management UI for service providers.'),
+      },
+      {
         key: 'show_resource_end_date',
         description: translate('Show resource end date as a non optional column in resources list.'),
       },
