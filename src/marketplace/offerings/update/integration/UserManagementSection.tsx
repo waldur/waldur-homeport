@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { UsernameGenerationPolicyEnum } from 'waldur-js-client';
 
+import { CheckOrX } from '@/core/CheckOrX';
 import { required } from '@/core/validators';
 import {
   BooleanEditField,
   EditFieldProvider,
-  NumberEditField,
   SelectEditField,
   StringEditField,
 } from '@/form/editFields';
@@ -56,6 +56,21 @@ const ACCOUNT_NAME_GENERATION_POLICY_OPTIONS = [
   },
 ];
 
+// POSIX UID / primary GID sourcing (backend: GLAuthPluginOptionsSerializer,
+// waldur-mastermind MR !5813). 'pool' allocates from the offering's POSIX ID
+// pool; 'user_attribute' takes the value from the Waldur user's
+// uid_number / primary_gid identity attribute (e.g. an OIDC claim).
+const POSIX_ID_SOURCE_OPTIONS = [
+  {
+    label: translate('POSIX ID pool'),
+    value: 'pool',
+  },
+  {
+    label: translate('User attribute (identity provider)'),
+    value: 'user_attribute',
+  },
+];
+
 const getTooltip = (currentValue, defaultValue) =>
   !currentValue
     ? translate('Could be "{value}"', {
@@ -74,12 +89,21 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
   const pluginOptions = props.offering.plugin_options;
   const canCreateUser =
     pluginOptions?.service_provider_can_create_offering_user;
+  // enable_posix_account defaults to true; only an explicit false disables it.
+  const posixEnabled = pluginOptions?.enable_posix_account !== false;
+
+  const uidSource = pluginOptions?.uid_source;
+  const gidSource = pluginOptions?.gid_source;
 
   return (
     <FormTable.Card
       title={translate('User management')}
       className="card-bordered mb-7"
-      actions={<GLAuthConfigButton offering={props.offering} />}
+      actions={
+        posixEnabled ? (
+          <GLAuthConfigButton offering={props.offering} />
+        ) : undefined
+      }
     >
       <FormTable>
         <EditFieldProvider scope={props.offering} callback={update}>
@@ -169,27 +193,99 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
               disabled={!canCreateUser}
             />
           )}
-          <NumberEditField
-            name="plugin_options.initial_uidnumber"
-            label={translate('Initial UID number')}
-            warnTooltip={getTooltip(pluginOptions?.initial_uidnumber, 100000)}
-            disabled={!canCreateUser}
-          />
-          <NumberEditField
-            name="plugin_options.initial_primarygroup_number"
-            label={translate('Initial primary group number')}
-            warnTooltip={getTooltip(
-              pluginOptions?.initial_primarygroup_number,
-              10000,
+          <BooleanEditField
+            name="plugin_options.enable_posix_account"
+            label={translate('Manage POSIX/LDAP account')}
+            description={translate(
+              'If enabled, this offering manages a POSIX/LDAP account (UID, GID, home directory, login shell and GLAuth exposure) for its users. Disable for offerings that only need a username.',
             )}
             disabled={!canCreateUser}
+            // Unset defaults to enabled (matches posixEnabled and the backend
+            // default), so the read-only display must not render null as "off".
+            renderValue={(value) => <CheckOrX value={value !== false} />}
           />
-          <StringEditField
-            name="plugin_options.homedir_prefix"
-            label={translate('Home directory prefix')}
-            warnTooltip={getTooltip(pluginOptions?.homedir_prefix, '/home/')}
-            disabled={!canCreateUser}
-          />
+          {posixEnabled && (
+            <>
+              <SelectEditField
+                name="plugin_options.uid_source"
+                label={translate('UID source')}
+                description={translate(
+                  'Where each offering user’s UID comes from: allocated from the offering’s POSIX ID pool (default), or taken from the user’s uid_number identity attribute (e.g. an OIDC claim). Pair "User attribute" with a GID-only pool to avoid UID collisions.',
+                )}
+                options={POSIX_ID_SOURCE_OPTIONS}
+                simpleValue
+                isClearable={false}
+                disabled={!canCreateUser}
+                warnTooltip={
+                  uidSource === 'user_attribute'
+                    ? translate(
+                        'UIDs are read from each user’s uid_number attribute; users without it are left without a UID. The pool’s UID range is not used for this offering.',
+                      )
+                    : getTooltip(uidSource, translate('POSIX ID pool'))
+                }
+                renderValue={(value) =>
+                  POSIX_ID_SOURCE_OPTIONS.find((op) => op.value === value)
+                    ?.label
+                }
+              />
+              <SelectEditField
+                name="plugin_options.gid_source"
+                label={translate('Primary GID source')}
+                description={translate(
+                  'Where each offering user’s primary GID comes from: allocated from the offering’s POSIX ID pool (default), or taken from the user’s primary_gid identity attribute.',
+                )}
+                options={POSIX_ID_SOURCE_OPTIONS}
+                simpleValue
+                isClearable={false}
+                disabled={!canCreateUser}
+                warnTooltip={
+                  gidSource === 'user_attribute'
+                    ? translate(
+                        'Primary GIDs are read from each user’s primary_gid attribute; users without it are left without a primary GID. The pool’s GID range is not used for this offering.',
+                      )
+                    : getTooltip(gidSource, translate('POSIX ID pool'))
+                }
+                renderValue={(value) =>
+                  POSIX_ID_SOURCE_OPTIONS.find((op) => op.value === value)
+                    ?.label
+                }
+              />
+              <StringEditField
+                name="plugin_options.homedir_prefix"
+                label={translate('Home directory prefix')}
+                warnTooltip={getTooltip(
+                  pluginOptions?.homedir_prefix,
+                  '/home/',
+                )}
+                disabled={!canCreateUser}
+              />
+              <StringEditField
+                name="plugin_options.login_shell"
+                label={translate('Login shell')}
+                warnTooltip={getTooltip(
+                  pluginOptions?.login_shell,
+                  '/bin/bash',
+                )}
+                disabled={!canCreateUser}
+              />
+              <BooleanEditField
+                name="plugin_options.emit_display_name"
+                label={translate('Expose display name in GLAuth')}
+                description={translate(
+                  "If enabled, the user's full name is emitted as a displayName attribute (LDAP displayName) in the GLAuth configuration.",
+                )}
+                disabled={!canCreateUser}
+              />
+              <BooleanEditField
+                name="plugin_options.emit_waldur_username"
+                label={translate('Expose Waldur username in GLAuth')}
+                description={translate(
+                  'If enabled, the Waldur username is emitted as a waldurUsername attribute in the GLAuth configuration, alongside the generated POSIX login name.',
+                )}
+                disabled={!canCreateUser}
+              />
+            </>
+          )}
         </EditFieldProvider>
       </FormTable>
     </FormTable.Card>

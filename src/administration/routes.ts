@@ -551,6 +551,24 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-marketplace-posix-id-pools',
+    url: 'posix-id-pools/',
+    parent: 'admin-marketplace',
+    component: lazyComponent(() =>
+      import('@/marketplace/service-providers/posix-id-pools/ProviderPosixIdPoolsList').then(
+        (module) => ({
+          default: module.AdminPosixIdPoolsList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('POSIX ID pools'),
+      priority: 21,
+      feature: MarketplaceFeatures.show_posix_id_pools,
+    },
+  },
+
+  {
     name: 'admin-marketplace-remote-sync',
     url: 'remote-offering-sync/',
     parent: 'admin-marketplace',

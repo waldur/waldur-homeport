@@ -6,6 +6,8 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { OfferingGLAuthConfigActionItem } from '@/marketplace/offerings/list/OfferingGLAuthConfigActionItem';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -24,6 +26,15 @@ export const ProviderOfferingGroupOfferingsExpandable = ({
     table: `marketplace-offering-group-${group.uuid}-offerings`,
     fetchData: createFetcher(marketplaceProviderOfferingsList),
     filter,
+    mandatoryFields: [
+      'uuid',
+      'name',
+      'category_title',
+      'type',
+      'state',
+      'resources_count',
+      'service_provider_can_create_offering_user', // OfferingGLAuthConfigActionItem
+    ],
   });
   return (
     <Table<ProviderOffering>
@@ -54,6 +65,11 @@ export const ProviderOfferingGroupOfferingsExpandable = ({
       verboseName={translate('Offerings')}
       showPageSizeSelector={true}
       title={translate('Offerings')}
+      rowActions={({ row }) => (
+        <ActionsDropdown row={row} refetch={tableProps.fetch}>
+          <OfferingGLAuthConfigActionItem row={row} />
+        </ActionsDropdown>
+      )}
     />
   );
 };

@@ -101,6 +101,22 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         value={<FieldWithCopy value={props.user.identity_source} />}
       />
 
+      {isProfileAttributeEnabled('uid_number') &&
+        props.user.uid_number != null && (
+          <FormTable.Item
+            label={translate('POSIX UID')}
+            value={<FieldWithCopy value={String(props.user.uid_number)} />}
+          />
+        )}
+
+      {isProfileAttributeEnabled('primary_gid') &&
+        props.user.primary_gid != null && (
+          <FormTable.Item
+            label={translate('POSIX primary GID')}
+            value={<FieldWithCopy value={String(props.user.primary_gid)} />}
+          />
+        )}
+
       <FormTable.Item
         label={translate('Birth date')}
         value={

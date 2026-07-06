@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import {
   marketplaceOfferingUsersChecklistRetrieve,
+  marketplaceOfferingUsersPosixAllocationsList,
+  marketplaceOfferingUsersPosixGroupsList,
   marketplaceUserOfferingConsentsList,
   OfferingUser,
   QuestionWithAnswer,
@@ -8,6 +10,7 @@ import {
 
 import { ENV } from '@/core/config';
 import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { TruncatedDescription } from '@/core/TruncatedDescription';
 import { isFeatureVisible } from '@/features/connect';
@@ -25,6 +28,114 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { AnswerRowActions } from './AnswerRowActions';
+
+const PosixGroupsTable = ({ offeringUser }: { offeringUser: OfferingUser }) => {
+  const tableProps = useTable({
+    table: 'offeringUserPosixGroups-' + offeringUser.uuid,
+    fetchData: createFetcher(marketplaceOfferingUsersPosixGroupsList, {
+      path: { uuid: offeringUser.uuid },
+    }),
+  });
+  return (
+    <Table
+      {...tableProps}
+      columns={[
+        {
+          title: translate('GID'),
+          render: ({ row }) => row.gid,
+          copyField: (row) => String(row.gid),
+        },
+        {
+          title: translate('Organization'),
+          render: ({ row }) => renderFieldOrDash(row.customer_name),
+        },
+        {
+          title: translate('Project'),
+          render: ({ row }) =>
+            row.project_accessible && row.project_uuid ? (
+              <Link
+                state="project.dashboard"
+                params={{ uuid: row.project_uuid }}
+                label={row.project_name}
+              />
+            ) : (
+              renderFieldOrDash(row.project_name)
+            ),
+        },
+        {
+          title: translate('Offering'),
+          render: ({ row }) => renderFieldOrDash(row.offering_name),
+        },
+      ]}
+      title={translate('Project group GIDs')}
+      verboseName={translate('Project group GIDs')}
+      hideIfEmpty
+      hideRefresh
+      className="mt-7"
+      headerClassName="min-h-40px py-0"
+      titleClassName="h4 fw-bold text-gray-700"
+      minHeight="auto"
+    />
+  );
+};
+
+const POSIX_NAMESPACE_LABELS = {
+  uid: () => translate('UID'),
+  gid: () => translate('GID'),
+};
+
+const POSIX_SCOPE_LABELS = {
+  offering: () => translate('Offering'),
+  service_provider: () => translate('Service provider'),
+};
+
+const PosixIdentifiersTable = ({
+  offeringUser,
+}: {
+  offeringUser: OfferingUser;
+}) => {
+  const tableProps = useTable({
+    table: 'offeringUserPosixAllocations-' + offeringUser.uuid,
+    fetchData: createFetcher(marketplaceOfferingUsersPosixAllocationsList, {
+      path: { uuid: offeringUser.uuid },
+    }),
+  });
+  return (
+    <Table
+      {...tableProps}
+      columns={[
+        {
+          title: translate('Identifier'),
+          render: ({ row }) =>
+            POSIX_NAMESPACE_LABELS[row.namespace]?.() ??
+            renderFieldOrDash(row.namespace),
+        },
+        {
+          title: translate('Value'),
+          render: ({ row }) => row.value,
+          copyField: (row) => String(row.value),
+        },
+        {
+          title: translate('Pool scope'),
+          render: ({ row }) =>
+            row.pool_uuid
+              ? [POSIX_SCOPE_LABELS[row.scope]?.() ?? row.scope, row.scope_name]
+                  .filter(Boolean)
+                  .join(': ')
+              : renderFieldOrDash(null),
+        },
+      ]}
+      title={translate('POSIX identifiers')}
+      verboseName={translate('POSIX identifiers')}
+      hideIfEmpty
+      hideRefresh
+      className="mt-7"
+      headerClassName="min-h-40px py-0"
+      titleClassName="h4 fw-bold text-gray-700"
+      minHeight="auto"
+    />
+  );
+};
 
 export const OfferingUsersExpandableRow = ({
   row: offeringUser,
@@ -66,8 +177,12 @@ export const OfferingUsersExpandableRow = ({
 
   const consent = consentData;
 
+  const showPosix = isFeatureVisible(MarketplaceFeatures.show_posix_id_pools);
+
   return (
     <ExpandableContainer>
+      {showPosix && <PosixIdentifiersTable offeringUser={offeringUser} />}
+      {showPosix && <PosixGroupsTable offeringUser={offeringUser} />}
       {showTosFields && (
         <>
           <Field

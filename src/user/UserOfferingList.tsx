@@ -18,6 +18,8 @@ import { renderFieldOrDash } from '@/table/utils';
 import { createAttentionOfferingUsersFetcher } from '@/user/createAttentionOfferingUsersFetcher';
 import { useUser } from '@/workspace/hooks';
 
+import { UserPosixIdentitiesButton } from './UserPosixIdentitiesButton';
+
 interface OwnProps {
   user?: User;
   hasActionBar?: boolean;
@@ -77,6 +79,14 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       title: translate('Username'),
       render: ({ row }) => <>{renderFieldOrDash(row.username)}</>,
     },
+    isFeatureVisible(MarketplaceFeatures.show_posix_id_pools) && {
+      title: translate('UID'),
+      render: ({ row }) => <>{renderFieldOrDash(row.uidnumber)}</>,
+    },
+    isFeatureVisible(MarketplaceFeatures.show_posix_id_pools) && {
+      title: translate('GID'),
+      render: ({ row }) => <>{renderFieldOrDash(row.primarygroup)}</>,
+    },
     {
       title: translate('Created at'),
       render: ({ row }) => <>{formatDateTime(row.created)}</>,
@@ -110,6 +120,7 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       }
       expandableRow={OfferingUsersExpandableRow}
       formId={PROVIDER_OFFERING_USERS_FORM_ID}
+      tableActions={<UserPosixIdentitiesButton userUuid={user?.uuid} />}
     />
   );
 };

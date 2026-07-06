@@ -14,6 +14,8 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser, useProject } from '@/workspace/hooks';
 
+import { useProjectPosixGroups } from './manage/useProjectPosixGroups';
+
 const ProjectGeneral = lazyComponent(() =>
   import('./manage/ProjectGeneral').then((module) => ({
     default: module.ProjectGeneral,
@@ -54,12 +56,19 @@ const ProjectEndDateChangeRequests = lazyComponent(() =>
     default: module.ProjectEndDateChangeRequests,
   })),
 );
+const ProjectPosixGroups = lazyComponent(() =>
+  import('./manage/ProjectPosixGroups').then((module) => ({
+    default: module.ProjectPosixGroups,
+  })),
+);
 
 export const ProjectManageContainer = () => {
   const project = useProject();
   const user = useUser();
   const { data: rooms } = useProjectMatrixRooms(project?.uuid);
   const hasActiveRoom = hasActiveMatrixRoom(rooms);
+  const { data: posixGroups } = useProjectPosixGroups(project?.uuid);
+  const hasPosixGroups = Boolean(posixGroups?.length);
 
   const canSeeOrderApproval = useMemo(() => {
     if (!project) return false;
@@ -107,6 +116,11 @@ export const ProjectManageContainer = () => {
           component: ProjectEndDateChangeRequests,
           title: translate('End date change requests'),
         },
+        hasPosixGroups && {
+          key: 'posix-identities',
+          component: ProjectPosixGroups,
+          title: translate('POSIX identities'),
+        },
         isMatrixChatEnabled() &&
           (user.is_staff || hasActiveRoom) && {
             key: 'chat',
@@ -119,7 +133,13 @@ export const ProjectManageContainer = () => {
           title: translate('Remove'),
         },
       ].filter(Boolean),
-    [project, canSeeOrderApproval, user.is_staff, hasActiveRoom],
+    [
+      project,
+      canSeeOrderApproval,
+      user.is_staff,
+      hasActiveRoom,
+      hasPosixGroups,
+    ],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
 

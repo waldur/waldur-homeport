@@ -53,7 +53,10 @@ export const ProviderOfferingUsersList: FunctionComponent<
     offering?: {
       uuid: string;
       customer_uuid?: string;
-      plugin_options?: { service_provider_can_create_offering_user?: boolean };
+      plugin_options?: {
+        service_provider_can_create_offering_user?: boolean;
+        enable_posix_account?: boolean;
+      };
       has_compliance_requirements?: boolean;
     };
     tableActions?: React.ReactNode | ((tableProps: any) => React.ReactNode);
@@ -61,6 +64,12 @@ export const ProviderOfferingUsersList: FunctionComponent<
 > = ({ provider, hasOrganizationColumn, portal, offering, tableActions }) => {
   const values = useFilterValues('marketplace-offering-users');
   const filterValues = values;
+
+  // POSIX columns are hidden when the (single) offering manages no POSIX
+  // account; in the provider-wide list, offerings are mixed so they stay.
+  const showPosixColumns =
+    isFeatureVisible(MarketplaceFeatures.show_posix_id_pools) &&
+    (!offering || offering.plugin_options?.enable_posix_account !== false);
 
   const filter = useMemo(
     () => ({
@@ -245,6 +254,28 @@ export const ProviderOfferingUsersList: FunctionComponent<
       id: 'username',
       keys: ['username'],
     },
+    ...(showPosixColumns
+      ? [
+          {
+            title: translate('UID'),
+            render: ({ row }) => renderFieldOrDash(row.uidnumber),
+            export: 'uidnumber',
+            copyField: (row) =>
+              row.uidnumber != null ? String(row.uidnumber) : undefined,
+            id: 'uidnumber',
+            keys: ['uidnumber'],
+          },
+          {
+            title: translate('GID'),
+            render: ({ row }) => renderFieldOrDash(row.primarygroup),
+            export: 'primarygroup',
+            copyField: (row) =>
+              row.primarygroup != null ? String(row.primarygroup) : undefined,
+            id: 'primarygroup',
+            keys: ['primarygroup'],
+          },
+        ]
+      : []),
     {
       title: translate('Created'),
       render: ({ row }) => formatDateTime(row.created),
@@ -275,7 +306,7 @@ export const ProviderOfferingUsersList: FunctionComponent<
   ];
 
   const showExpandableRow = offering
-    ? offering.has_compliance_requirements
+    ? offering.has_compliance_requirements || showPosixColumns
     : Boolean(provider) ||
       (hasOrganizationColumn &&
         isFeatureVisible(MarketplaceFeatures.display_user_tos));

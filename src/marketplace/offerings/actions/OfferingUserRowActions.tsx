@@ -1,5 +1,7 @@
 import { OfferingUser, ServiceProvider } from 'waldur-js-client';
 
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { OfferingUserDetailsButton } from '@/marketplace/offerings/details/OfferingUserDetailsButton';
 import { ProviderOfferingUserDeleteButton } from '@/marketplace/service-providers/ProviderOfferingUserDeleteButton';
 import { ProviderOfferingUserUpdateButton } from '@/marketplace/service-providers/ProviderOfferingUserUpdateButton';
@@ -42,6 +44,11 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
         customerId: row.customer_uuid, // Use the row's customer_uuid for admin context
       });
 
+  // Hide POSIX editing when this offering manages no POSIX account.
+  const posixEnabled =
+    isFeatureVisible(MarketplaceFeatures.show_posix_id_pools) &&
+    offering?.plugin_options?.enable_posix_account !== false;
+
   return (
     <ActionsDropdown
       row={row}
@@ -78,6 +85,14 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
                   offering={offering}
                   updateScope="runtime_state"
                 />
+                {posixEnabled && (
+                  <ProviderOfferingUserUpdateButton
+                    {...props}
+                    provider={provider}
+                    offering={offering}
+                    updateScope="posix"
+                  />
+                )}
               </>
             )}
 

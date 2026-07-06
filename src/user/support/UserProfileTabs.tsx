@@ -647,6 +647,26 @@ const SystemTab = ({ user, disabled }: TabContentProps) => {
           disabled={disabled}
         />
       )}
+      {isProfileAttributeEnabled('uid_number') && user.uid_number != null && (
+        <FormTable.Item
+          label={translate('POSIX UID')}
+          value={String(user.uid_number)}
+          disabled={disabled}
+          description={translate(
+            'POSIX UID supplied by the identity provider; used by offerings whose UID source is the user attribute.',
+          )}
+        />
+      )}
+      {isProfileAttributeEnabled('primary_gid') && user.primary_gid != null && (
+        <FormTable.Item
+          label={translate('POSIX primary GID')}
+          value={String(user.primary_gid)}
+          disabled={disabled}
+          description={translate(
+            'POSIX primary GID supplied by the identity provider; used by offerings whose primary GID source is the user attribute.',
+          )}
+        />
+      )}
       {hasSlug && (
         <StringEditField
           name="slug"
