@@ -4,6 +4,7 @@ import {
   MessagePrimitive,
   ThreadPrimitive,
   type TextMessagePartComponent,
+  AuiIf,
 } from '@assistant-ui/react';
 import { PaperPlaneRightIcon, StopIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
@@ -82,11 +83,11 @@ const AssistantMessage: FC = () => (
 export const PlaygroundThread: FC = () => (
   <ThreadPrimitive.Root className="aui-root d-flex flex-column h-100">
     <ThreadPrimitive.Viewport className="flex-grow-1 overflow-auto mb-4">
-      <ThreadPrimitive.Empty>
+      <AuiIf condition={(s) => s.thread.isEmpty}>
         <div className="text-muted text-center p-10">
           {translate('Send a message to the model.')}
         </div>
-      </ThreadPrimitive.Empty>
+      </AuiIf>
       <ThreadPrimitive.Messages
         components={{ UserMessage, AssistantMessage }}
       />
@@ -99,7 +100,7 @@ export const PlaygroundThread: FC = () => (
         autoFocus
         rows={1}
       />
-      <ThreadPrimitive.If running={false}>
+      <AuiIf condition={(s) => !s.thread.isRunning}>
         <ComposerPrimitive.Send asChild>
           <button
             type="button"
@@ -109,8 +110,8 @@ export const PlaygroundThread: FC = () => (
             <PaperPlaneRightIcon weight="bold" />
           </button>
         </ComposerPrimitive.Send>
-      </ThreadPrimitive.If>
-      <ThreadPrimitive.If running>
+      </AuiIf>
+      <AuiIf condition={(s) => s.thread.isRunning}>
         <ComposerPrimitive.Cancel asChild>
           <button
             type="button"
@@ -120,7 +121,7 @@ export const PlaygroundThread: FC = () => (
             <StopIcon weight="bold" />
           </button>
         </ComposerPrimitive.Cancel>
-      </ThreadPrimitive.If>
+      </AuiIf>
     </ComposerPrimitive.Root>
   </ThreadPrimitive.Root>
 );

@@ -1,4 +1,4 @@
-import { useAssistantState } from '@assistant-ui/react';
+import { useAuiState } from '@assistant-ui/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ import {
 import { AnonymousThreadRuntimeProvider } from './AnonymousThreadRuntimeProvider';
 
 const Probe = () => {
-  const count = useAssistantState(({ thread }) => thread.messages.length);
+  const count = useAuiState(({ thread }) => thread.messages.length);
   return <div data-testid="count">{count}</div>;
 };
 

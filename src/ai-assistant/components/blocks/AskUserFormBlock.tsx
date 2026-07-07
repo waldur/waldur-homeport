@@ -1,4 +1,4 @@
-import { ThreadPrimitive, useAssistantState } from '@assistant-ui/react';
+import { ThreadPrimitive, useAuiState } from '@assistant-ui/react';
 import {
   ArrowRightIcon,
   CheckCircleIcon,
@@ -327,7 +327,7 @@ const FreeformQuestion: FC<{
 export const AskUserFormBlock: FC<UIBlockProps> = ({ block }) => {
   const readOnly = useContext(OfflineBlockContext);
   // Audit log view has no AssistantRuntimeProvider, so the live wrapper
-  // (which calls useAssistantState) must not mount in that path.
+  // (which calls useAuiState) must not mount in that path.
   return readOnly ? (
     <AskUserFormBody block={block} readOnly stale={false} />
   ) : (
@@ -339,7 +339,7 @@ export const AskUserFormBlock: FC<UIBlockProps> = ({ block }) => {
 // this form has already been answered (or otherwise superseded) and a second
 // submission would be misleading.
 const AskUserFormBlockLive: FC<UIBlockProps> = ({ block }) => {
-  const stale = useAssistantState((state) => {
+  const stale = useAuiState((state) => {
     const messageId = state.message?.id;
     const messages = state.thread.messages;
     if (!messageId || !messages || messages.length === 0) return false;

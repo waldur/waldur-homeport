@@ -4,8 +4,9 @@ import {
   ErrorPrimitive,
   MessagePrimitive,
   ThreadPrimitive,
-  useAssistantState,
+  useAuiState,
   useComposerRuntime,
+  AuiIf,
 } from '@assistant-ui/react';
 import {
   ArrowClockwiseIcon,
@@ -218,7 +219,7 @@ const useComposerDraftPersistence = () => {
 };
 
 const Composer: FC = () => {
-  const isRunning = useAssistantState(({ thread }) => thread.isRunning);
+  const isRunning = useAuiState(({ thread }) => thread.isRunning);
   const [showUsage, setShowUsage] = React.useState(false);
   const user = useUser();
 
@@ -334,11 +335,11 @@ interface BlockBasedContentProps {
  * Uses stable empty arrays and memoization to prevent infinite update loops.
  */
 const BlockBasedContent: FC<BlockBasedContentProps> = ({ selector }) => {
-  const metadata = useAssistantState((state) => {
+  const metadata = useAuiState((state) => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
-  const isRunning = useAssistantState(({ thread }) => thread.isRunning);
-  const isStreaming = useAssistantState(
+  const isRunning = useAuiState(({ thread }) => thread.isRunning);
+  const isStreaming = useAuiState(
     ({ message }) => message.status?.type === 'running',
   );
 
@@ -396,7 +397,7 @@ const BlockBasedContent: FC<BlockBasedContentProps> = ({ selector }) => {
 };
 
 const AssistantMessage: FC = () => {
-  const metadata = useAssistantState((state) => {
+  const metadata = useAuiState((state) => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
 
@@ -442,11 +443,11 @@ const AssistantMessage: FC = () => {
             </div>
 
             {vmOrderBlock && (
-              <MessagePrimitive.If last>
+              <AuiIf condition={(s) => s.message.isLast}>
                 <div className="aui-assistant-message-footer">
                   <VMOrderActions block={vmOrderBlock} />
                 </div>
-              </MessagePrimitive.If>
+              </AuiIf>
             )}
           </div>
         </MessagePrimitive.Root>
@@ -456,10 +457,10 @@ const AssistantMessage: FC = () => {
 };
 
 const AssistantActionBar: FC = () => {
-  const metadata = useAssistantState((state) => {
+  const metadata = useAuiState((state) => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
-  const messageStatus = useAssistantState(({ message }) => message.status);
+  const messageStatus = useAuiState(({ message }) => message.status);
   const { isViewingHistory } = useContext(AssistantMessageContext);
 
   const hasErrors = messageStatus?.type === 'incomplete' && messageStatus.error;
@@ -486,8 +487,7 @@ const AssistantActionBar: FC = () => {
         buttonClassName="aui-message-action-btn"
         size={16}
       />
-
-      <MessagePrimitive.If last>
+      <AuiIf condition={(s) => s.message.isLast}>
         <ActionBarPrimitive.Reload asChild>
           <button
             className="aui-message-action-btn"
@@ -496,8 +496,7 @@ const AssistantActionBar: FC = () => {
             <ArrowClockwiseIcon weight="bold" size={16} />
           </button>
         </ActionBarPrimitive.Reload>
-      </MessagePrimitive.If>
-
+      </AuiIf>
       {metadata?.backendUuid && !isViewingHistory && (
         <FeedbackButtons
           messageUuid={metadata.backendUuid}
@@ -517,8 +516,8 @@ const UserMessage: FC = () => (
 );
 
 const UserActionBar: FC = () => {
-  const messageId = useAssistantState(({ message }) => message.id);
-  const isLastUserMessage = useAssistantState((state) => {
+  const messageId = useAuiState(({ message }) => message.id);
+  const isLastUserMessage = useAuiState((state) => {
     const allMessages = state.thread.messages;
     const lastUser = allMessages
       .slice()
