@@ -1,8 +1,4 @@
-import {
-  ComposerPrimitive,
-  ThreadPrimitive,
-  useAssistantState,
-} from '@assistant-ui/react';
+import { ComposerPrimitive, useAuiState, AuiIf } from '@assistant-ui/react';
 import {
   MagnifyingGlassIcon,
   PaperPlaneTiltIcon,
@@ -31,9 +27,7 @@ export const AssistantComposer: FC<Props> = ({
   leadingActions,
   usageRow,
 }) => {
-  const isEmpty = useAssistantState(
-    ({ thread }) => thread.messages.length === 0,
-  );
+  const isEmpty = useAuiState(({ thread }) => thread.messages.length === 0);
   // With no leading actions, right-align Send/Stop so they don't hug the input.
   const alignEnd = !leadingActions;
 
@@ -64,7 +58,7 @@ export const AssistantComposer: FC<Props> = ({
         <div className="aui-composer-action-row">
           <div className="aui-composer-action-wrapper">
             {leadingActions}
-            <ThreadPrimitive.If running={false}>
+            <AuiIf condition={(s) => !s.thread.isRunning}>
               <ComposerPrimitive.Send asChild>
                 {/* asChild requires a raw <button> here, not the design-token Button */}
                 <button
@@ -78,8 +72,8 @@ export const AssistantComposer: FC<Props> = ({
                   <span>{translate('Send')}</span>
                 </button>
               </ComposerPrimitive.Send>
-            </ThreadPrimitive.If>
-            <ThreadPrimitive.If running>
+            </AuiIf>
+            <AuiIf condition={(s) => s.thread.isRunning}>
               <ComposerPrimitive.Cancel asChild>
                 <button
                   type="button"
@@ -92,7 +86,7 @@ export const AssistantComposer: FC<Props> = ({
                   <StopIcon weight="bold" />
                 </button>
               </ComposerPrimitive.Cancel>
-            </ThreadPrimitive.If>
+            </AuiIf>
           </div>
         </div>
       </ComposerPrimitive.Root>

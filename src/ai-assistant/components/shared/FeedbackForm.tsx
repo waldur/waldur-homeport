@@ -91,6 +91,7 @@ export const FeedbackForm: FC<Props> = ({
             rows={4}
             maxLength={commentMax}
             aria-describedby={COUNTER_ID}
+            spaceless
           />
           <FormSpy subscription={{ values: true }}>
             {({ values: v }) => (

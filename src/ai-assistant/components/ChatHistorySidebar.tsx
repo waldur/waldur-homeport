@@ -37,13 +37,13 @@ export const ChatHistorySidebar: FC = () => {
   const groups = useMemo(() => groupThreadsByDate(threads ?? []), [threads]);
 
   const handleNewChat = useCallback(() => {
-    runtime.switchToNewThread();
+    runtime.threads.switchToNewThread();
   }, [runtime]);
 
   const handleSwitchThread = useCallback(
     (threadId: string) => {
       if (threadId === currentThreadId) return;
-      runtime.switchToThread(threadId);
+      runtime.threads.switchToThread(threadId);
       // Close history sidebar (toolbar reads DOM state on next toggle)
       document
         .getElementById('kt_drawer')
@@ -57,7 +57,7 @@ export const ChatHistorySidebar: FC = () => {
       await chatThreadsArchive({ path: { uuid: threadId } });
       queryClient.invalidateQueries({ queryKey: [THREAD_LIST_QUERY_KEY] });
       if (threadId === currentThreadId) {
-        runtime.switchToNewThread();
+        runtime.threads.switchToNewThread();
       }
     },
     [queryClient, currentThreadId, runtime],

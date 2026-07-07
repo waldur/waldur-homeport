@@ -2,7 +2,8 @@ import {
   ErrorPrimitive,
   MessagePrimitive,
   ThreadPrimitive,
-  useAssistantState,
+  useAuiState,
+  AuiIf,
 } from '@assistant-ui/react';
 import { SparkleIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, MouseEvent, useCallback } from 'react';
@@ -57,11 +58,11 @@ const AnonymousThreadHeader: FC = () => (
 );
 
 const AnonymousAssistantMessage: FC = () => {
-  const metadata = useAssistantState(
+  const metadata = useAuiState(
     (state) => state.message.metadata?.custom as BlockBasedMetadata | undefined,
   );
-  const isRunning = useAssistantState(({ thread }) => thread.isRunning);
-  const isStreaming = useAssistantState(
+  const isRunning = useAuiState(({ thread }) => thread.isRunning);
+  const isStreaming = useAuiState(
     ({ message }) => message.status?.type === 'running',
   );
   const blocks = metadata?.blocks ?? [];
@@ -119,9 +120,7 @@ const AnonymousAssistantMessage: FC = () => {
 const AnonymousUserMessage: FC = () => <UserMessageShell />;
 
 export const AnonymousThread: FC = () => {
-  const isEmpty = useAssistantState(
-    ({ thread }) => thread.messages.length === 0,
-  );
+  const isEmpty = useAuiState(({ thread }) => thread.messages.length === 0);
 
   // Delegated CTA click → attribution, then let the _blank link navigate.
   // Reading the interaction/token from the closest assistant message wrapper
@@ -154,9 +153,9 @@ export const AnonymousThread: FC = () => {
     >
       {!isEmpty && <AnonymousThreadHeader />}
       <ThreadPrimitive.Viewport className="aui-thread-viewport">
-        <ThreadPrimitive.Empty>
+        <AuiIf condition={(s) => s.thread.isEmpty}>
           <AnonymousWelcome />
-        </ThreadPrimitive.Empty>
+        </AuiIf>
         <ThreadPrimitive.Messages
           components={{
             UserMessage: AnonymousUserMessage,
@@ -164,7 +163,6 @@ export const AnonymousThread: FC = () => {
           }}
         />
       </ThreadPrimitive.Viewport>
-
       <AssistantComposer placeholder={translate('Ask about offerings…')} />
     </ThreadPrimitive.Root>
   );
