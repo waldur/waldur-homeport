@@ -1316,6 +1316,12 @@ export const SettingsDescription = [
         options: [{ value: 'username', label: 'Username' }, { value: 'registration_method', label: 'Registration method' }, { value: 'first_name', label: 'First name' }, { value: 'last_name', label: 'Last name' }, { value: 'full_name', label: 'Full name' }, { value: 'email', label: 'Email' }, { value: 'phone_number', label: 'Phone number' }, { value: 'organization', label: 'Organization' }, { value: 'job_title', label: 'Job title' }, { value: 'affiliations', label: 'Affiliations' }, { value: 'gender', label: 'Gender' }, { value: 'personal_title', label: 'Personal title' }, { value: 'birth_date', label: 'Birth date' }, { value: 'place_of_birth', label: 'Place of birth' }, { value: 'country_of_residence', label: 'Country of residence' }, { value: 'nationality', label: 'Nationality' }, { value: 'nationalities', label: 'Nationalities' }, { value: 'organization_country', label: 'Organization country' }, { value: 'organization_type', label: 'Organization type' }, { value: 'organization_registry_code', label: 'Organization registry code' }, { value: 'organization_vat_code', label: 'Organization VAT code' }, { value: 'organization_address', label: 'Organization address' }, { value: 'eduperson_assurance', label: 'Eduperson assurance' }, { value: 'civil_number', label: 'Civil number' }, { value: 'identity_source', label: 'Identity source' }],
       },
       {
+        key: 'SCIM_INBOUND_SSH_KEYS_ENABLED',
+        description: translate('Allow inbound SCIM to manage user SSH public keys via the sshPublicKeys attribute of the Waldur User extension. When enabled, SCIM is authoritative: a full-replace (PUT / PATCH replace) that omits a key deletes it, including keys the user added via the UI. Off by default because SSH keys grant access.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
         key: 'SCIM_PULL_API_URL',
         description: translate('Base URL for outbound SCIM pull (fetching user attributes from an external IdP).'),
         default: '',
