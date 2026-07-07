@@ -53,6 +53,8 @@ const kindBadge = (kind: GlauthGroupKind): { text: string; cls: string } => {
       return { text: 'resource role', cls: 'badge-light-primary' };
     case 'resource_project_role':
       return { text: 'rp role', cls: 'badge-light-success' };
+    case 'personal':
+      return { text: 'personal', cls: 'badge-light' };
   }
 };
 
