@@ -53,12 +53,22 @@ export const getQuotaCellProps = (
     component.factor,
     resource.offering_type,
   );
+  // OpenStack tenant usage is live backend quota that legitimately decreases
+  // (volumes deleted, VMs stopped), so it must reflect current consumption and
+  // stay in step with the Quotas panel. limit_usage is a monthly high-watermark
+  // that can only grow within a billing period — correct for other limit-based
+  // offerings, misleading here. Fall back to the live current_usages instead.
+  const isTenant = resource.offering_type === TENANT_TYPE;
   return {
     usage:
+      !isTenant &&
       component.billing_type === 'limit' &&
       resource.limit_usage?.[component.type] != null
         ? normalize(resource.limit_usage[component.type], component.factor)
-        : normalize(resource.current_usages[component.type], component.factor),
+        : normalize(
+            resource.current_usages?.[component.type],
+            component.factor,
+          ),
     limit:
       (component.billing_type === 'usage' && resource.limits[component.type]) ||
       component.billing_type === 'limit' ||
