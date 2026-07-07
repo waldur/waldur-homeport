@@ -32,7 +32,7 @@ export const MultiUnlinkAction = ({ rows, refetch }) => {
     renderErrorMessage: (count) =>
       translate('{count} resources could not be unlinked.', { count }),
     confirmation: {
-      title: translate('Perform mass action'),
+      title: translate('Unlink resources'),
       body: translate(
         'Are you sure you want to unlink {count} resources? Unlinking will only remove objects from the database, it will not trigger any cleanup',
         {
@@ -48,7 +48,7 @@ export const MultiUnlinkAction = ({ rows, refetch }) => {
 
   return (
     <ActionItem
-      title={translate('Unlink')}
+      title={translate('Unlink (no cleanup)')}
       action={mutate}
       className="text-danger"
       staff

@@ -10,7 +10,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
-export const MultiDestroyAction = ({ rows, refetch }) => {
+export const MultiTerminateAction = ({ rows, refetch }) => {
   const user = useUser();
 
   const permittedResources = useMemo(
@@ -35,15 +35,15 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
     refetch,
     mutationFn: (resource) =>
       marketplaceResourcesTerminate({ path: { uuid: resource.uuid } }),
-    successMessage: translate('Resources have been destroyed.'),
+    successMessage: translate('Resources have been terminated.'),
     renderPartialSuccessMessage: (n) =>
-      translate('{n} resources have been destroyed.', { n }),
-    errorMessage: translate('Unable to destroy resources.'),
+      translate('{n} resources have been terminated.', { n }),
+    errorMessage: translate('Unable to terminate resources.'),
     renderErrorMessage: (n) =>
-      translate('{n} resources could not be destroyed.', { n }),
+      translate('{n} resources could not be terminated.', { n }),
     confirmation: {
-      title: translate('Destroy resources'),
-      body: translate('Are you sure you want to destroy {count} resources?', {
+      title: translate('Terminate resources'),
+      body: translate('Are you sure you want to terminate {count} resources?', {
         count: permittedResources.length,
       }),
       options: { forDeletion: true },
@@ -56,7 +56,7 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
 
   return (
     <ActionItem
-      title={translate('Destroy')}
+      title={translate('Terminate')}
       action={mutate}
       disabled={permittedResources.length !== rows.length || isPending}
       iconNode={<XIcon weight="bold" />}

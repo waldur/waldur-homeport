@@ -2784,5 +2784,13 @@
   "This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.": "Dieses Konto wurde von einem Administrator deaktiviert. Wenn die automatische rollenbasierte Deaktivierung aktiviert ist, aktiviert das System es nicht automatisch erneut, selbst wenn der Benutzer wieder Rollen erhält. Ein Mitarbeiter muss es manuell wieder aktivieren.",
   "Unable to deactivate user.": "Der Benutzer konnte nicht deaktiviert werden.",
   "User has been deactivated.": "Der Benutzer wurde deaktiviert.",
-  "Why is this user being deactivated?": "Warum wird dieser Benutzer deaktiviert?"
+  "Why is this user being deactivated?": "Warum wird dieser Benutzer deaktiviert?",
+  "Terminate resources": "Ressourcen beenden",
+  "Are you sure you want to terminate {count} resources?": "Sind Sie sicher, dass Sie {count} Ressourcen beenden möchten?",
+  "Resources have been terminated.": "Ressourcen wurden beendet.",
+  "{n} resources have been terminated.": "{n} Ressourcen wurden beendet.",
+  "Unable to terminate resources.": "Ressourcen konnten nicht beendet werden.",
+  "{n} resources could not be terminated.": "{n} Ressourcen konnten nicht beendet werden.",
+  "Unlink resources": "Verknüpfung der Ressourcen aufheben",
+  "Unlink (no cleanup)": "Verknüpfung aufheben (ohne Bereinigung)"
 }

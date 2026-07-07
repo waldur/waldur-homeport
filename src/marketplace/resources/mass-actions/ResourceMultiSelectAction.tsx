@@ -6,7 +6,6 @@ import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import { useUser } from '@/workspace/hooks';
 
 import { MultiChangeLimitsAction } from './MultiChangeLimitsAction';
-import { MultiDestroyAction } from './MultiDestroyAction';
 import { MultiEditOptionsAction } from './MultiEditOptionsAction';
 import { MultiMoveAction } from './MultiMoveAction';
 import { MultiPlacementMapAction } from './MultiPlacementMapAction';
@@ -19,6 +18,7 @@ import { MultiSetErredAction } from './MultiSetErredAction';
 import { MultiSetPausedAction } from './MultiSetPausedAction';
 import { MultiStartAction } from './MultiStartAction';
 import { MultiStopAction } from './MultiStopAction';
+import { MultiTerminateAction } from './MultiTerminateAction';
 import { MultiUnlinkAction } from './MultiUnlinkAction';
 
 export const ResourceMultiSelectAction = ({
@@ -41,7 +41,7 @@ export const ResourceMultiSelectAction = ({
       <MultiPullAction rows={rows} refetch={refetch} />
       <MultiMoveAction rows={rows} refetch={refetch} />
       <DropdownDivider className="border-top m-0" />
-      <MultiDestroyAction rows={rows} refetch={refetch} />
+      <MultiTerminateAction rows={rows} refetch={refetch} />
       {user.is_staff && (
         <>
           <DropdownDivider className="border-top m-0" />

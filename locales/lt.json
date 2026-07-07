@@ -5573,5 +5573,13 @@
   "This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.": "Šią paskyrą išjungė administratorius. Kai įjungtas automatinis deaktyvavimas pagal roles, sistema automatiškai jos iš naujo neaktyvuos, net jei vartotojas vėl gaus roles. Darbuotojas turi ją suaktyvinti rankiniu būdu.",
   "Unable to deactivate user.": "Nepavyko deaktyvuoti vartotojo.",
   "User has been deactivated.": "Vartotojas deaktyvuotas.",
-  "Why is this user being deactivated?": "Kodėl šis vartotojas deaktyvuojamas?"
+  "Why is this user being deactivated?": "Kodėl šis vartotojas deaktyvuojamas?",
+  "Terminate resources": "Nutraukti išteklius",
+  "Are you sure you want to terminate {count} resources?": "Ar tikrai norite nutraukti {count} išteklių?",
+  "Resources have been terminated.": "Ištekliai buvo nutraukti.",
+  "{n} resources have been terminated.": "{n} išteklių buvo nutraukta.",
+  "Unable to terminate resources.": "Nepavyko nutraukti išteklių.",
+  "{n} resources could not be terminated.": "Nepavyko nutraukti {n} išteklių.",
+  "Unlink resources": "Atsieti išteklius",
+  "Unlink (no cleanup)": "Atsieti (be valymo)"
 }
