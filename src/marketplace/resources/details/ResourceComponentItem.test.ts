@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { OfferingComponent } from 'waldur-js-client';
 
+import { TENANT_TYPE } from '@/openstack/constants';
+
 import { getDisplayUnit, getQuotaCellProps } from './ResourceComponentItem';
 
 const makeComponent = (
@@ -84,6 +86,35 @@ describe('getQuotaCellProps', () => {
     const props = getQuotaCellProps(
       makeComponent({ billing_type: 'limit' }),
       makeResource({
+        limit_usage: { node: 0.75 },
+        current_usages: { node: 0.5 },
+      }),
+    );
+    expect(props.usage).toBe('0.75');
+  });
+
+  it('should use live current_usages for OpenStack tenant limit components', () => {
+    // Storage freed mid-month: live usage dropped to 0 but limit_usage still
+    // holds the monthly peak. The tenant hero must track the live value so it
+    // matches the Quotas panel, not the stale high-watermark.
+    const props = getQuotaCellProps(
+      makeComponent({ type: 'storage', billing_type: 'limit' }),
+      makeResource({
+        offering_type: TENANT_TYPE,
+        limit_usage: { storage: 5 },
+        current_usages: { storage: 0 },
+        limits: { storage: 10 },
+      }),
+    );
+    expect(props.usage).toBe('0');
+    expect(props.limit).toBe('10');
+  });
+
+  it('should still use limit_usage peak for non-tenant limit components', () => {
+    const props = getQuotaCellProps(
+      makeComponent({ billing_type: 'limit' }),
+      makeResource({
+        offering_type: 'Marketplace.Support',
         limit_usage: { node: 0.75 },
         current_usages: { node: 0.5 },
       }),
