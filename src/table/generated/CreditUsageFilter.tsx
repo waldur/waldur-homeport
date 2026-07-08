@@ -41,7 +41,7 @@ export const CreditUsageFilter: FunctionComponent<CreditUsageFilterProps> = (
         customer_uuid: props.customerUUID,
       })}
       defaultOptions
-      getOptionValue={(option: Resource) => String(option.resource_uuid || '')}
+      getOptionValue={(option: Resource) => String(option.uuid || '')}
       getOptionLabel={(option: Resource) => String(option.name || '')}
       isClearable={true}
     />
@@ -90,7 +90,7 @@ export const selectCreditUsageFilter = (
       filter.offering_uuid = values.offering.uuid;
     }
     if (values.resource) {
-      filter.resource_uuid = values.resource.resource_uuid;
+      filter.resource_uuid = values.resource.uuid;
     }
     if (values.year) {
       filter.start_year = values.year.value;

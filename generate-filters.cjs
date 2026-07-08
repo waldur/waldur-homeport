@@ -533,7 +533,7 @@ class Generator {
         ? `, ${JSON.stringify(f.extraPath).replace(/"(props\.[a-zA-Z0-9_.]+)"/g, '$1')}`
         : '';
       props.push(
-        `loadOptions={createLoadOptions(${f.loadOptions}${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}`,
+        `loadOptions={createLoadOptions(${f.loadOptions}, ${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}`,
       );
       props.push(`defaultOptions`);
       const vType = f.valueType ? `: ${f.valueType}` : '';
