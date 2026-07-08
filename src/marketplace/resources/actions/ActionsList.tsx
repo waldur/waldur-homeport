@@ -28,6 +28,7 @@ import { PullMarketplaceResourceAction } from './PullMarketplaceResourceAction';
 import { PullOrderAction } from './PullOrderAction';
 import { PullResourceAction } from './PullResourceAction';
 import { PullRobotAccounts } from './PullRobotAccounts';
+import { RestoreResourceAction } from './RestoreResourceAction';
 import { SetDownscaledAction } from './SetDownscaledAction';
 import { SetPausedAction } from './SetPausedAction';
 import { SyncResourceTeamAction } from './SyncResourceTeamAction';
@@ -46,6 +47,7 @@ export const ActionsList = [
   SetBackendIdAction,
   SetSlugAction,
   TerminateAction,
+  RestoreResourceAction,
   UnlinkActionItem,
   SetErredActionItem,
   EditResourceEndDateAction,
@@ -77,6 +79,7 @@ export const ProviderActionsList = [
   CreateLexisLinkAction,
   CreateRobotAccountAction,
   SetErredActionItem,
+  RestoreResourceAction,
   EditResourceEndDateByProviderAction,
   ResourceDetailsAction,
   PullMarketplaceResourceAction,
