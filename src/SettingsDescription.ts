@@ -273,6 +273,12 @@ export const SettingsDescription = [
         default: 1,
         type: 'integer',
       },
+      {
+        key: 'CHECK_FOR_UPDATES',
+        description: translate('If true, the version endpoint queries GitHub for the latest released Waldur version. Disable in deployments without outbound internet access to avoid failed requests to api.github.com.'),
+        default: true,
+        type: 'boolean',
+      },
     ],
   },
   {
