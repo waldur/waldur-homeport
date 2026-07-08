@@ -9,8 +9,13 @@ import { translate } from '@/i18n';
 import { ExportData } from '@/table/exporters/types';
 
 import { MaintenanceTimelineChart } from '../charts/MaintenanceTimelineChart';
-import { TimelineGrouping } from '../types';
-import { toTimelineItems, STATE_LABELS, IMPACT_LABELS } from '../utils';
+import { TimelineColoring, TimelineGrouping } from '../types';
+import {
+  IMPACT_LABELS,
+  STATE_LABELS,
+  TIMING_LABELS,
+  toTimelineItems,
+} from '../utils';
 
 interface GroupingOption {
   value: TimelineGrouping;
@@ -18,7 +23,7 @@ interface GroupingOption {
 }
 
 interface ColorOption {
-  value: 'state' | 'impact';
+  value: TimelineColoring;
   label: string;
 }
 
@@ -30,6 +35,7 @@ const groupingOptions: GroupingOption[] = [
 const colorOptions: ColorOption[] = [
   { value: 'state', label: translate('By state') },
   { value: 'impact', label: translate('By impact') },
+  { value: 'timing', label: translate('By timing') },
 ];
 
 interface MaintenanceTimelineViewProps {
@@ -40,7 +46,7 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
   announcements,
 }) => {
   const [groupBy, setGroupBy] = useState<TimelineGrouping>('provider');
-  const [colorBy, setColorBy] = useState<'state' | 'impact'>('state');
+  const [colorBy, setColorBy] = useState<TimelineColoring>('state');
 
   const timelineItems = useMemo(
     () => toTimelineItems(announcements),
@@ -61,6 +67,11 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
       translate('Offerings'),
       translate('Scheduled Start'),
       translate('Scheduled End'),
+      translate('Actual Start'),
+      translate('Actual End'),
+      translate('Δ start (min)'),
+      translate('Δ end (min)'),
+      translate('Timing'),
       translate('Impact Level'),
     ];
     const data = timelineItems.map((item) => [
@@ -70,6 +81,15 @@ export const MaintenanceTimelineView: FC<MaintenanceTimelineViewProps> = ({
       item.offeringNames.join(', '),
       DateTime.fromJSDate(item.scheduledStart).toFormat('yyyy-MM-dd HH:mm'),
       DateTime.fromJSDate(item.scheduledEnd).toFormat('yyyy-MM-dd HH:mm'),
+      item.actualStart
+        ? DateTime.fromJSDate(item.actualStart).toFormat('yyyy-MM-dd HH:mm')
+        : '',
+      item.actualEnd
+        ? DateTime.fromJSDate(item.actualEnd).toFormat('yyyy-MM-dd HH:mm')
+        : '',
+      item.startDeltaMinutes !== null ? String(item.startDeltaMinutes) : '',
+      item.endDeltaMinutes !== null ? String(item.endDeltaMinutes) : '',
+      TIMING_LABELS[item.timingBucket],
       IMPACT_LABELS[item.maxImpactLevel] || item.maxImpactLevel,
     ]);
     return { fields, data };
