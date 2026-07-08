@@ -25,6 +25,7 @@ export const FormLocationStep = (props: FormStepProps) => {
         label={translate('Location')}
         required={true}
         loadOptions={locationLoader}
+        getOptionLabel={(option) => option.name}
         validate={required}
       />
       <SelectGroup

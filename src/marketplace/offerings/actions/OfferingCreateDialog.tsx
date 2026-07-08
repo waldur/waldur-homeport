@@ -139,6 +139,7 @@ export const OfferingCreateDialog: FC<OfferingCreateDialogProps> = ({
                   required
                   placeholder={translate('Select service provider...')}
                   loadOptions={loadOrganizations}
+                  getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.url}
                   noOptionsMessage={() => translate('No service providers')}
                   isClearable={true}

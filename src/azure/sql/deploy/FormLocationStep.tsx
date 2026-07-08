@@ -25,6 +25,7 @@ export const FormLocationStep = (props: FormStepProps) => {
       <AsyncSelectGroup
         name="attributes.location"
         loadOptions={locationLoader}
+        getOptionLabel={(option) => option.name}
         validate={required}
       />
     </VStepperFormStepCard>
