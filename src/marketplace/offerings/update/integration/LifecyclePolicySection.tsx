@@ -188,6 +188,13 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             )}
           />
           <BooleanEditField
+            name="plugin_options.can_restore_resource"
+            label={translate('Allow restoring terminated resources')}
+            description={translate(
+              'When enabled, a terminated resource can be restored back to an active state instead of creating a new one.',
+            )}
+          />
+          <BooleanEditField
             name="plugin_options.supports_downscaling"
             label={translate('Supports downscaling')}
             description={translate(
