@@ -12,6 +12,11 @@ export type MaintenanceViewTab = 'table' | 'timeline';
 
 export type TimelineGrouping = 'provider' | 'offering';
 
+export type TimelineColoring = 'state' | 'impact' | 'timing';
+
+export type TimingBucket =
+  'on_time' | 'late_start' | 'overrun' | 'early' | 'pending';
+
 export interface MaintenanceTimelineItem {
   id: string;
   name: string;
@@ -24,4 +29,7 @@ export interface MaintenanceTimelineItem {
   providerUuid: string;
   offeringNames: string[];
   maxImpactLevel: number;
+  startDeltaMinutes: number | null;
+  endDeltaMinutes: number | null;
+  timingBucket: TimingBucket;
 }

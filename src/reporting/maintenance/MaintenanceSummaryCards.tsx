@@ -62,6 +62,22 @@ export const MaintenanceSummaryCards: FC<MaintenanceSummaryCardsProps> = ({
         label: translate('On-time rate'),
         value: formatRate(summary.on_time_completion_rate),
       },
+      {
+        label: translate('On time (±15 min)'),
+        value: formatRate(
+          summary.on_time_rate_15min !== null
+            ? summary.on_time_rate_15min * 100
+            : null,
+        ),
+      },
+      {
+        label: translate('Avg overrun'),
+        value: formatDuration(summary.avg_overrun_hours),
+      },
+      {
+        label: translate('Emergency'),
+        value: summary.emergency_count,
+      },
     ],
     [summary],
   );

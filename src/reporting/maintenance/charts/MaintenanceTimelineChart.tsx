@@ -3,13 +3,17 @@ import { FC } from 'react';
 import { EChart } from '@/core/EChart';
 import { translate } from '@/i18n';
 
-import { MaintenanceTimelineItem, TimelineGrouping } from '../types';
+import {
+  MaintenanceTimelineItem,
+  TimelineColoring,
+  TimelineGrouping,
+} from '../types';
 import { formatTimelineChart } from '../utils';
 
 interface MaintenanceTimelineChartProps {
   items: MaintenanceTimelineItem[];
   groupBy: TimelineGrouping;
-  colorBy: 'state' | 'impact';
+  colorBy: TimelineColoring;
   chartRef?: React.RefObject<any>;
 }
 
