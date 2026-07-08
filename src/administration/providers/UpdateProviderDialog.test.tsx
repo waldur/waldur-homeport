@@ -267,4 +267,64 @@ describe('UpdateProviderDialog', () => {
     });
     expect(mockRefetch).not.toHaveBeenCalled();
   });
+
+  const oidcResolve = (provider: Record<string, any> = {}) => ({
+    provider: {
+      provider: 'oidc',
+      label: 'OIDC Provider',
+      client_id: '123',
+      client_secret: 'secret',
+      discovery_url: 'https://example.com',
+      ...provider,
+    },
+    type: 'OIDC',
+    refetch: mockRefetch,
+  });
+
+  it('renders the extra_fields input', () => {
+    renderWithProviders(<UpdateProviderDialog resolve={oidcResolve()} />);
+
+    expect(screen.getByText('Extra fields')).toBeInTheDocument();
+  });
+
+  it('always renders core attribute mapping fields', () => {
+    // No profile attributes enabled for this deployment.
+    ENV.plugins.WALDUR_CORE.ENABLED_USER_PROFILE_ATTRIBUTES = [];
+
+    renderWithProviders(<UpdateProviderDialog resolve={oidcResolve()} />);
+
+    expect(screen.getByText('First name field')).toBeInTheDocument();
+    expect(screen.getByText('Last name field')).toBeInTheDocument();
+    expect(screen.getByText('Email field')).toBeInTheDocument();
+  });
+
+  it('hides a non-core attribute mapping field when it is not enabled', () => {
+    ENV.plugins.WALDUR_CORE.ENABLED_USER_PROFILE_ATTRIBUTES = [];
+
+    renderWithProviders(<UpdateProviderDialog resolve={oidcResolve()} />);
+
+    expect(screen.queryByText('Civil number field')).not.toBeInTheDocument();
+  });
+
+  it('shows a non-core attribute mapping field when it is enabled', () => {
+    ENV.plugins.WALDUR_CORE.ENABLED_USER_PROFILE_ATTRIBUTES = ['civil_number'];
+
+    renderWithProviders(<UpdateProviderDialog resolve={oidcResolve()} />);
+
+    expect(screen.getByText('Civil number field')).toBeInTheDocument();
+  });
+
+  it('keeps a disabled attribute visible when it already has a saved mapping', () => {
+    // Attribute is not enabled, but a legacy mapping exists — it must stay
+    // editable rather than silently disappear.
+    ENV.plugins.WALDUR_CORE.ENABLED_USER_PROFILE_ATTRIBUTES = [];
+
+    renderWithProviders(
+      <UpdateProviderDialog
+        resolve={oidcResolve({ attribute_mapping: { civil_number: 'sub' } })}
+      />,
+    );
+
+    expect(screen.getByText('Civil number field')).toBeInTheDocument();
+  });
 });
