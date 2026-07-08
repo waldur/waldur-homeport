@@ -59,7 +59,7 @@ export const EntityScopePicker: FunctionComponent<EntityScopePickerProps> = ({
       loadOptions={loadOptions}
       defaultOptions
       getOptionValue={(option) => option.uuid}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => option.name || option.customer_name}
       placeholder={translate('Search...')}
       noOptionsMessage={() => translate('No matches')}
       isClearable

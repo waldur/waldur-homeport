@@ -91,6 +91,7 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
         required={!values.use_user_organization_as_customer_name}
         loadOptions={loadOrganizations}
         getOptionValue={({ url }) => url}
+        getOptionLabel={(option) => option.name}
         isDisabled={values.use_user_organization_as_customer_name}
         isClearable
       />
