@@ -34,6 +34,11 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
       }
       return { user, profile };
     },
+    // Seed with the caller's row (sparse fields) so the dialog renders known
+    // values immediately while usersRetrieve refetches the full object.
+    initialData: resolve.user
+      ? { user: resolve.user, profile: null }
+      : undefined,
   });
 
   return (

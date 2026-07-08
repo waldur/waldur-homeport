@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
@@ -11,6 +12,7 @@ import { useUser, useSetUser } from '@/workspace/hooks';
 
 export const useUpdateUser = (user: User) => {
   const setCurrentUser = useSetUser();
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
 
   const currentUser = useUser();
@@ -54,6 +56,10 @@ export const useUpdateUser = (user: User) => {
           }
         }
       }
+      // Refresh the cached user so the detail view reflects the new values
+      // without a page reload (e.g. staff editing another user's profile,
+      // where setCurrentUser above does not apply).
+      queryClient.invalidateQueries({ queryKey: ['User', user.uuid] });
       showSuccess(translate('User has been updated'));
     } catch (error) {
       showErrorResponse(error, translate('User could not be updated'));
