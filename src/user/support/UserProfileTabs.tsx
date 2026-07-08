@@ -241,6 +241,7 @@ const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
           name="personal_title"
           label={translate('Personal title')}
           options={getPersonalTitleOptions()}
+          simpleValue
           required={isRequired('personal_title')}
           disabled={disabled || titleProps.isProtected}
           description={
@@ -256,6 +257,7 @@ const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
           name="gender"
           label={translate('Gender')}
           options={getGenderChoices()}
+          simpleValue
           required={isRequired('gender')}
           disabled={disabled || genderProps.isProtected}
           description={
@@ -516,6 +518,7 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
           name="organization_type"
           label={translate('Organization type')}
           options={getOrganizationTypeOptions()}
+          simpleValue
           required={isRequired('organization_type')}
           disabled={disabled || orgTypeProps.isProtected}
           description={
