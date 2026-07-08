@@ -1,0 +1,150 @@
+import {
+  ArrowRightIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+} from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
+import {
+  proposalProposalsAdvanceWorkflowStep,
+  proposalProposalsRejectWorkflowStep,
+} from 'waldur-js-client';
+
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionButton } from '@/table/ActionButton';
+import { useUser } from '@/workspace/hooks';
+
+import { Proposal } from '../types';
+import { CompleteWorkflowStepDialog } from '../workflow/CompleteWorkflowStepDialog';
+import {
+  fetchProposalWorkflowStates,
+  proposalWorkflowStatesKey,
+} from '../workflow/queries';
+
+interface WorkflowStepActionsProps {
+  proposal: Proposal;
+  refetch: () => void;
+}
+
+// Call-manager controls for driving the per-proposal workflow engine. Scoped to
+// the manager-owned steps (responsible_role call_manager, i.e. administrative
+// check and the terminal allocation decision) plus manual advance — reviewer,
+// panel and applicant steps are actioned from their own surfaces. The backend
+// (can_act_on_active_workflow_step) is the authority; this only decides what to
+// surface.
+export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
+  proposal,
+  refetch,
+}) => {
+  const user = useUser();
+  const { openDialog } = useModal();
+
+  const { data } = useQuery({
+    queryKey: proposalWorkflowStatesKey(proposal.uuid),
+    queryFn: () => fetchProposalWorkflowStates(proposal.uuid),
+  });
+
+  const activeStep = useMemo(
+    () => (data ?? []).find((s) => s.status === 'active'),
+    [data],
+  );
+
+  // TODO: Remove cast once the regenerated SDK ships `awaiting_manual_advance`.
+  const awaitingManualAdvance =
+    (proposal as any).awaiting_manual_advance ?? false;
+
+  const canManage =
+    user?.is_staff ||
+    hasPermission(user, {
+      permission: PermissionEnum.APPROVE_AND_REJECT_PROPOSALS,
+      scopeId: proposal.call_uuid,
+      callOrganizerId: proposal.call_managing_organisation_uuid,
+    });
+
+  // A manager may act on manager-owned steps (or steps with no configured
+  // responsible role, where the view's own guards apply). Staff may act on any.
+  const canActOnActiveStep =
+    !!activeStep &&
+    (user?.is_staff ||
+      (canManage &&
+        (!activeStep.responsible_role ||
+          activeStep.responsible_role === 'call_manager')));
+
+  const advanceStep = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      proposalProposalsAdvanceWorkflowStep({ path: { uuid: proposal.uuid } }),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Advance the proposal to the next workflow step?'),
+    },
+    successMessage: translate('Workflow advanced.'),
+    errorMessage: translate('Unable to advance the workflow.'),
+    invalidateQueries: [{ queryKey: proposalWorkflowStatesKey(proposal.uuid) }],
+  });
+
+  const rejectStep = useManagedMutation<any, any, { input: string }>({
+    mutationFn: (variables) =>
+      proposalProposalsRejectWorkflowStep({
+        path: { uuid: proposal.uuid },
+        body: { step_uuid: activeStep!.uuid, reason: variables.input },
+      }),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Reject the proposal at the current step?'),
+      options: {
+        showInput: true,
+        inputLabel: translate('Rejection reason'),
+        inputPlaceholder: translate('Enter reason for rejection'),
+        inputRequired: true,
+      },
+    },
+    successMessage: translate('Proposal rejected.'),
+    errorMessage: translate('Unable to reject the proposal.'),
+    invalidateQueries: [{ queryKey: proposalWorkflowStatesKey(proposal.uuid) }],
+  });
+
+  if (!canManage) return null;
+
+  return (
+    <>
+      {awaitingManualAdvance && (
+        <ActionButton
+          variant="primary"
+          action={() => advanceStep.mutate()}
+          pending={advanceStep.isPending}
+          className="w-100 mt-2"
+          iconNode={<ArrowRightIcon weight="bold" />}
+          title={translate('Advance workflow')}
+        />
+      )}
+      {canActOnActiveStep && (
+        <>
+          <ActionButton
+            variant="primary"
+            action={() =>
+              openDialog(CompleteWorkflowStepDialog, {
+                resolve: { proposal, step: activeStep, refetch },
+              })
+            }
+            className="w-100 mt-2"
+            iconNode={<CheckCircleIcon weight="bold" />}
+            title={translate('Complete step')}
+          />
+          <ActionButton
+            variant="danger"
+            action={() => rejectStep.mutate()}
+            className="w-100 mt-2"
+            iconNode={<XCircleIcon weight="bold" />}
+            title={translate('Reject at step')}
+          />
+        </>
+      )}
+    </>
+  );
+};

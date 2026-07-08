@@ -4,6 +4,7 @@ import {
   PaperPlaneTiltIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
@@ -20,6 +21,10 @@ import { FormSteps } from '@/wizard';
 
 import { ProposalUsersListSummary } from '../team/ProposalUsersListSummary';
 import { Call, Proposal, ProposalReview } from '../types';
+import {
+  fetchProposalWorkflowStates,
+  proposalWorkflowStatesKey,
+} from '../workflow/queries';
 
 import { ComplianceSummary } from './create/ComplianceSummary';
 import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
@@ -32,6 +37,7 @@ import {
   useProposalDecisionActions,
 } from './create/utils';
 import { SubmitReviewDialog } from './create-review/SubmitReviewDialog';
+import { WorkflowStepActions } from './WorkflowStepActions';
 
 interface ProposalDetails {
   proposal: Proposal;
@@ -74,6 +80,18 @@ export const ProposalDetails = ({
   const canCreateReview = useCanCreateReview(proposal);
 
   const isCallManagerView = state.name?.startsWith('call-management');
+
+  // When the per-proposal workflow engine governs this proposal, decisions are
+  // made by completing its steps (see WorkflowStepActions), so the legacy
+  // Accept/Reject shortcut is hidden to keep a single decision path. Calls
+  // without a configured workflow keep the legacy actions.
+  const { data: workflowStates } = useQuery({
+    queryKey: proposalWorkflowStatesKey(proposal.uuid),
+    queryFn: () => fetchProposalWorkflowStates(proposal.uuid),
+  });
+  const hasWorkflow = (workflowStates ?? []).some(
+    (s) => s.status !== 'skipped',
+  );
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -134,7 +152,10 @@ export const ProposalDetails = ({
             title={translate('Create review')}
           />
         )}
-        {canPerformDecisionActions && isCallManagerView && (
+        {isCallManagerView && hasWorkflow && (
+          <WorkflowStepActions proposal={proposal} refetch={refetch} />
+        )}
+        {canPerformDecisionActions && isCallManagerView && !hasWorkflow && (
           <>
             <ActionButton
               variant="primary"
