@@ -21,7 +21,7 @@ export const PermissionMap = {
   offering: 'OFFERING.CREATE_PERMISSION',
   call: 'CALL.CREATE_PERMISSION',
   proposal: 'PROPOSAL.MANAGE',
-  callmanagingorganisation: 'CALL.CREATE_PERMISSION',
+  call_organizer: 'CALL.CREATE_PERMISSION',
   service_provider: 'CUSTOMER.CREATE_PERMISSION',
   resource: 'RESOURCE.CREATE_PERMISSION',
   resource_project: 'RESOURCE_PROJECT.CREATE_PERMISSION',
