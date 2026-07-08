@@ -8,6 +8,7 @@ import {
 import { formatDateTime } from '@/core/dateUtils';
 import { OrcidLogo } from '@/core/OrcidLogo';
 import {
+  CommaSeparatedListEditField,
   EditFieldProvider,
   StringEditField,
   TextEditField,
@@ -129,11 +130,14 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
             )
           }
         />
-        <StringEditField
+        <CommaSeparatedListEditField
           name="alternative_names"
           label={translate('Alternative names')}
+          placeholder={translate('Enter names separated by commas')}
           renderValue={(value) =>
-            value || (
+            Array.isArray(value) && value.length ? (
+              value.join(', ')
+            ) : (
               <span className="text-muted">{translate('Not provided')}</span>
             )
           }
