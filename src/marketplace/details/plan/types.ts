@@ -15,7 +15,8 @@ export interface Component extends OfferingComponent {
   durationInMonths?: number;
   discountApplied?: boolean;
   discountAmount?: number;
-  discountDescription?: string | null;
+  discountPercent?: number;
+  discountDeferred?: boolean;
 }
 
 export interface PricesData {

@@ -20,6 +20,10 @@ import { getBillingPeriods } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { Limits } from '@/marketplace/details/types';
 import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
+import {
+  evaluateTiers,
+  parseFormulaToTiers,
+} from '@/marketplace/offerings/update/plans/discountFormula';
 
 import { Component, PricesData } from './types';
 
@@ -91,14 +95,42 @@ export const combinePrices = (
       // not how prices are denominated.
       const rawSubTotal = price * amount;
 
-      // Volume discounts are aggregated across the whole organization and
-      // materialized at invoice finalization, so the exact per-order saving
-      // cannot be computed at order time. The component's discount description
-      // is still surfaced as an informational hint.
+      // Volume discounts are configured per plan component. A discount can be
+      // previewed live only when its scope is per-resource (otherwise it
+      // depends on the customer's other resources) and its billed quantity is
+      // known at order time (every billing type except usage-based, which is
+      // metered later) and its formula is tier-shaped (client-evaluable).
+      // Every other case is applied at invoice finalization.
       const planComponent = plan.components?.find(
         (pc) => pc.type === component.type,
       );
-      const subTotal = rawSubTotal;
+      const discountFormula = (planComponent?.discount_formula || '').trim();
+
+      let discountApplied = false;
+      let discountAmount = 0;
+      let discountPercent = 0;
+      let discountDeferred = false;
+
+      if (discountFormula) {
+        const tiers = parseFormulaToTiers(discountFormula);
+        const previewable =
+          planComponent?.discount_aggregation === 'resource' &&
+          component.billing_type !== 'usage' &&
+          tiers !== null &&
+          tiers.length > 0;
+        if (previewable) {
+          const percent = evaluateTiers(tiers, amount);
+          if (percent > 0) {
+            discountApplied = true;
+            discountPercent = percent;
+            discountAmount = (rawSubTotal * percent) / 100;
+          }
+        } else {
+          discountDeferred = true;
+        }
+      }
+
+      const subTotal = rawSubTotal - discountAmount;
       const prices = multipliers.map((mult) => mult * subTotal);
 
       return {
@@ -111,9 +143,10 @@ export const combinePrices = (
         price,
         min_value: offeringLimits[component.type].min,
         max_value: offeringLimits[component.type].max,
-        discountApplied: false,
-        discountAmount: 0,
-        discountDescription: planComponent?.discount_description ?? null,
+        discountApplied,
+        discountAmount,
+        discountPercent,
+        discountDeferred,
       };
     });
     const fixedComponents = components.filter(

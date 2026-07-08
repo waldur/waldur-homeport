@@ -552,4 +552,106 @@ describe('combinePrices', () => {
       expect(monthResult.periodKeys).toEqual(['monthly', 'annual']);
     });
   });
+
+  describe('volume discount preview', () => {
+    const planWithDiscount = (
+      quotas: Record<string, number>,
+      prices: Record<string, number>,
+      components: Array<{
+        type: string;
+        discount_formula?: string;
+        discount_aggregation?: string;
+      }>,
+    ): BasePublicPlan =>
+      ({
+        quotas,
+        prices: Object.fromEntries(
+          Object.entries(prices).map(([k, v]) => [k, String(v)]),
+        ),
+        unit: 'quantity',
+        components,
+      }) as BasePublicPlan;
+
+    it('applies a live discount for a per-resource limit component crossing a tier', () => {
+      const offering = createOffering([{ type: 'gpu', billing_type: 'limit' }]);
+      const plan = planWithDiscount({ gpu: 0 }, { gpu: 500 }, [
+        {
+          type: 'gpu',
+          discount_formula: '15 if usage >= 8 else 0',
+          discount_aggregation: 'resource',
+        },
+      ]);
+      const gpu = combinePrices(plan, { gpu: 8 }, {}, offering).components[0];
+      expect(gpu.discountApplied).toBe(true);
+      expect(gpu.discountPercent).toBe(15);
+      expect(gpu.discountDeferred).toBe(false);
+      // 500 * 8 = 4000, minus 15% = 3400
+      expect(gpu.subTotal).toBe(3400);
+    });
+
+    it('defers an aggregated-scope discount to the invoice', () => {
+      const offering = createOffering([{ type: 'gpu', billing_type: 'limit' }]);
+      const plan = planWithDiscount({ gpu: 0 }, { gpu: 500 }, [
+        {
+          type: 'gpu',
+          discount_formula: '15 if usage >= 8 else 0',
+          discount_aggregation: 'customer',
+        },
+      ]);
+      const gpu = combinePrices(plan, { gpu: 8 }, {}, offering).components[0];
+      expect(gpu.discountApplied).toBe(false);
+      expect(gpu.discountDeferred).toBe(true);
+      expect(gpu.subTotal).toBe(4000);
+    });
+
+    it('defers a usage-based discount even with per-resource scope', () => {
+      const offering = createOffering([{ type: 'ram', billing_type: 'usage' }]);
+      const plan = planWithDiscount({ ram: 0 }, { ram: 1 }, [
+        {
+          type: 'ram',
+          discount_formula: '10 if usage >= 100 else 0',
+          discount_aggregation: 'resource',
+        },
+      ]);
+      const ram = combinePrices(plan, {}, { ram: 100 }, offering).components[0];
+      expect(ram.discountApplied).toBe(false);
+      expect(ram.discountDeferred).toBe(true);
+    });
+
+    it('previews a prepaid one-time discount on the committed quantity', () => {
+      const offering = createOffering([
+        { type: 'seats', billing_type: 'one', is_prepaid: true },
+      ]);
+      const plan = planWithDiscount({ seats: 0 }, { seats: 10 }, [
+        {
+          type: 'seats',
+          discount_formula: '20 if usage >= 5 else 0',
+          discount_aggregation: 'resource',
+        },
+      ]);
+      const seats = combinePrices(plan, { seats: 5 }, {}, offering)
+        .components[0];
+      expect(seats.discountApplied).toBe(true);
+      expect(seats.discountPercent).toBe(20);
+      // subtotal is 20% off the committed quantity's charge
+      expect(seats.subTotal).toBeCloseTo(seats.price * seats.amount * 0.8);
+    });
+
+    it('defers a per-resource discount whose formula is not tier-shaped', () => {
+      const offering = createOffering([
+        { type: 'disk', billing_type: 'limit' },
+      ]);
+      const plan = planWithDiscount({ disk: 0 }, { disk: 1 }, [
+        {
+          type: 'disk',
+          discount_formula: 'MIN(20, usage / 100)',
+          discount_aggregation: 'resource',
+        },
+      ]);
+      const disk = combinePrices(plan, { disk: 500 }, {}, offering)
+        .components[0];
+      expect(disk.discountApplied).toBe(false);
+      expect(disk.discountDeferred).toBe(true);
+    });
+  });
 });
