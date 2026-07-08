@@ -6,18 +6,26 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { translate } from '@/i18n';
 
+// OpenStack tenant/instance selectors submit the backend_id string (or an
+// array of them). Legacy records may still hold the full option object, so
+// fall back to its backend_id/value for backwards compatibility.
+const toBackendId = (value) =>
+  value && typeof value === 'object'
+    ? (value.backend_id ?? value.value)
+    : value;
+
 const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   integer: (value) => value,
   text: (value) => value,
   string: (value) => value,
   select_string: (value) => value,
   select_string_multi: (value) => value.join(', '),
-  select_openstack_tenant: (value) => value.value,
-  select_openstack_instance: (value) => value.value,
+  select_openstack_tenant: (value) => toBackendId(value),
+  select_openstack_instance: (value) => toBackendId(value),
   select_multiple_openstack_tenants: (value) =>
-    value.map(({ value }) => value).join(', '),
+    (value || []).map(toBackendId).join(', '),
   select_multiple_openstack_instances: (value) =>
-    value.map(({ value }) => value).join(', '),
+    (value || []).map(toBackendId).join(', '),
   boolean: (value) => (value === true ? translate('Yes') : translate('No')),
   html_text: (value) => <FormattedHtml html={value} />,
   money: (value) => defaultCurrency(value),

@@ -9,6 +9,14 @@ const SELECT_MULTI_VALUE_TYPES = [
   'select_multiple_openstack_instances',
 ];
 
+// OpenStack tenant/instance async selects store the whole option object; the
+// backend expects the backend_id string. Fall back to `value` for any legacy
+// {value,label} shape and pass primitives through unchanged.
+const toBackendId = (value) =>
+  value && typeof value === 'object'
+    ? (value.backend_id ?? value.value)
+    : value;
+
 export const serializer = (attributes, offering) => {
   const payload: any = {};
   if (attributes) {
@@ -28,11 +36,11 @@ export const serializer = (attributes, offering) => {
       let value = attributes[key];
       if (SELECT_SINGLE_VALUE_TYPES.includes(options.type)) {
         if (value) {
-          value = typeof value === 'object' ? value.value : value;
+          value = toBackendId(value);
         }
       } else if (SELECT_MULTI_VALUE_TYPES.includes(options.type)) {
         if (value) {
-          value = value.map((item) => item.value);
+          value = value.map(toBackendId);
         }
       }
       payload[key] = value;
