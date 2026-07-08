@@ -2,6 +2,8 @@ import { FC, useMemo } from 'react';
 import {
   marketplaceComponentUsagesList,
   MarketplaceComponentUsagesListData,
+  OfferingComponent,
+  Resource,
 } from 'waldur-js-client';
 
 import { formatMonth } from '@/core/dateUtils';
@@ -12,19 +14,21 @@ import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
-export const ResourceComponentUsageTable: FC<TableWithPortal<any>> = ({
-  portal,
-  ...props
-}) => {
+export const ResourceComponentUsageTable: FC<
+  TableWithPortal<{
+    resource: Pick<Resource, 'uuid'>;
+    offeringComponent?: Pick<OfferingComponent, 'type'>;
+  }>
+> = ({ portal, ...props }) => {
   const filter = useMemo(() => {
     const result: MarketplaceComponentUsagesListData['query'] = {
-      resource_uuid: props.resource.resource_uuid,
+      resource_uuid: props.resource.uuid,
     };
     if (props.offeringComponent?.type) {
       result.type = props.offeringComponent.type;
     }
     return result;
-  }, [props.resource.resource_uuid, props.offeringComponent?.type]);
+  }, [props.resource.uuid, props.offeringComponent?.type]);
 
   const tableProps = useTable({
     table: 'ResourceUsageTable',

@@ -838,6 +838,11 @@ overrides:
       label: Resource
       name: resource
       operationId: marketplace_resources_list
+      # invoice-items filters on resource__uuid (the marketplace Resource's own
+      # uuid); without this the generator defaults to the option's resource_uuid
+      # (the backend/scope uuid, null when unprovisioned) and the filter matches
+      # nothing.
+      valueField: uuid
       extraQuery:
         customer_uuid: props.customerUUID
     start_year:
