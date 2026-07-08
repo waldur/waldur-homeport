@@ -9,7 +9,12 @@ const CORE_PROFILE_ATTRIBUTES = [
   'full_name',
 ] as const;
 
-// Configurable attributes (type-only, not used at runtime)
+// Configurable attributes (type-only, not used at runtime).
+// Mirrors ALL_PROFILE_ATTRIBUTES in waldur-mastermind
+// (waldur_core/core/user_attributes.py).
+// Exception: `native_name` is frontend-only — it is gated via
+// isProfileAttributeEnabled() by several UI components but is absent from the
+// backend ALL_PROFILE_ATTRIBUTES / USER_ATTRIBUTE_CHOICES lists.
 type ConfigurableProfileAttribute =
   | 'native_name'
   | 'phone_number'
@@ -20,6 +25,7 @@ type ConfigurableProfileAttribute =
   | 'personal_title'
   | 'birth_date'
   | 'place_of_birth'
+  | 'address'
   | 'country_of_residence'
   | 'nationality'
   | 'nationalities'
@@ -31,6 +37,7 @@ type ConfigurableProfileAttribute =
   | 'eduperson_assurance'
   | 'civil_number'
   | 'identity_source'
+  | 'active_isds'
   | 'uid_number'
   | 'primary_gid';
 
