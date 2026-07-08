@@ -612,4 +612,85 @@ describe('UserProfileTabs', () => {
       expect(screen.getByText('Disabled')).toBeInTheDocument();
     });
   });
+
+  // ── Badge counts match rendered fields ───────────────────────────────────────
+  // The tab count badge and the rendered fields are both derived from a single
+  // per-tab descriptor list, so the badge must always equal the number of
+  // fields shown. These guard against the count drifting out of sync (the
+  // regression where Affiliation showed 5 for 7 fields and Internal showed 1
+  // for 2 fields).
+
+  describe('badge counts match rendered fields', () => {
+    const getTabTotal = (name: RegExp) => {
+      const tab = screen.getByRole('tab', { name });
+      return within(tab).getByTestId('tab-badge-total').textContent;
+    };
+
+    beforeEach(() => {
+      // The badge count is read from the tab title (rendered without activating
+      // the panel). Pin the feature flag so slug visibility is deterministic
+      // and not leaked from an earlier test's mockReturnValue.
+      vi.mocked(isFeatureVisible).mockReturnValue(false);
+    });
+
+    it('counts all enabled organization fields incl. VAT code and address', () => {
+      (ENV.plugins.WALDUR_CORE as any).ENABLED_USER_PROFILE_ATTRIBUTES = [
+        ...ALL_ATTRIBUTES,
+        'organization_vat_code',
+        'organization_address',
+      ];
+
+      renderTabs(
+        makeUser({
+          organization_vat_code: 'VAT123',
+          organization_address: '1 Main St',
+        }),
+      );
+
+      // organization, country, type, registry, vat, address, job position = 7
+      expect(getTabTotal(/Affiliation/)).toBe('7');
+    });
+
+    it('includes the affiliations row in the Affiliation count when present', () => {
+      (ENV.plugins.WALDUR_CORE as any).ENABLED_USER_PROFILE_ATTRIBUTES = [
+        ...ALL_ATTRIBUTES,
+        'organization_vat_code',
+        'organization_address',
+      ];
+
+      renderTabs(
+        makeUser({
+          organization_vat_code: 'VAT123',
+          organization_address: '1 Main St',
+          affiliations: ['CERN'],
+        }),
+      );
+
+      expect(getTabTotal(/Affiliation/)).toBe('8');
+    });
+
+    it('counts Notes and Notifications on the Internal tab', () => {
+      renderTabs();
+
+      expect(getTabTotal(/Internal/)).toBe('2');
+    });
+
+    it('counts every visible System row for a staff viewer', () => {
+      renderTabs(
+        makeUser({
+          civil_number: 'CN-1',
+          eduperson_assurance: ['https://refeds.org/assurance/IAP/low'],
+        }),
+      );
+
+      // username, assurance levels, date joined, user type, ID code = 5
+      expect(getTabTotal(/System/)).toBe('5');
+    });
+
+    it('does not crash when eduperson_assurance is undefined', () => {
+      expect(() =>
+        renderTabs(makeUser({ eduperson_assurance: undefined })),
+      ).not.toThrow();
+    });
+  });
 });
