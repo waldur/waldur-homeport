@@ -34,6 +34,14 @@ const formatLimits = (offering: Offering, formData: DeployFormData) => {
   return limits;
 };
 
+// OpenStack tenant/instance async selects store the whole option object; the
+// backend expects the backend_id string. Fall back to `value` for any legacy
+// {value,label} shape and pass primitives through unchanged.
+const toBackendId = (value) =>
+  value && typeof value === 'object'
+    ? (value.backend_id ?? value.value)
+    : value;
+
 const formatAttributes = (
   offering: Offering,
   formData: DeployFormData,
@@ -65,6 +73,23 @@ const formatAttributes = (
       // For K8s config, parse JSON string if needed
       newAttributes[key] =
         typeof value === 'string' ? JSON.parse(value) : value;
+    } else if (
+      optionConfig?.type === 'select_openstack_tenant' ||
+      optionConfig?.type === 'select_openstack_instance'
+    ) {
+      // The async select stores the whole option object; the backend expects
+      // the backend_id string. Sending the object drops the value (backend_id
+      // is not under `value`) or fails validation.
+      newAttributes[key] = toBackendId(value);
+    } else if (
+      optionConfig?.type === 'select_multiple_openstack_tenants' ||
+      optionConfig?.type === 'select_multiple_openstack_instances'
+    ) {
+      // Multi async selects store an array of option objects; the backend
+      // expects an array of backend_id strings.
+      newAttributes[key] = Array.isArray(value)
+        ? value.map(toBackendId)
+        : value;
     } else if (typeof value === 'object' && !Array.isArray(value)) {
       if (optionConfig) {
         // For offering option select fields, extract the value property
