@@ -12,6 +12,7 @@ const renderRoleType = (roleType: RoleType) =>
     customer: 'O',
     project: 'P',
     service_provider: 'SP',
+    call: 'C',
     call_organizer: 'CO',
   })[roleType] || '';
 
@@ -33,11 +34,17 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => (
 
 export const RoleGroup: FunctionComponent<{
   types: RoleType[];
-}> = ({ types }) => {
+  /** When provided, restrict the offered roles to exactly these role names
+   *  (a subset of `types`) rather than every active role of those types. */
+  roleNames?: string[];
+}> = ({ types, roleNames }) => {
+  const options = roleNames
+    ? getRoles(types).filter((role) => roleNames.includes(role.name))
+    : getRoles(types);
   return (
     <SelectGroup
       name="role"
-      options={getRoles(types)}
+      options={options}
       getOptionLabel={(role: Role) => role.description || role.name}
       getOptionValue={({ name }) => name}
       validate={required}
