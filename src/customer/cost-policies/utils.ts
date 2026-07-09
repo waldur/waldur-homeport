@@ -2,9 +2,14 @@ import { translate } from '@/i18n';
 
 import { CostPolicyType } from './types';
 
-export const getCostPolicyActionOptions = (type: CostPolicyType = 'project') =>
+export const getCostPolicyActionOptions = (
+  type: CostPolicyType = 'project',
+  isResourceScoped = false,
+) =>
   [
-    {
+    // Blocking new resource creation is a project-wide action and is not
+    // available when the policy is narrowed to a single resource.
+    !isResourceScoped && {
       value: 'block_creation_of_new_resources',
       label: translate('Block creation of new resources'),
     },

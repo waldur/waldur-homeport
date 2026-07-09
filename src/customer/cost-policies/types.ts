@@ -8,6 +8,8 @@ export interface CostPolicyFormData {
   >;
   actions: { value; label };
   period: PolicyPeriodEnum;
+  resource?: { uuid: string; name: string } | null;
+  use_credit?: boolean;
   options?: {
     notify_external_user?: string;
   };

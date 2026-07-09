@@ -31,7 +31,11 @@ export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
   const isEdit = Boolean(row) && !isDuplicate;
 
   const initialValues = useMemo<Partial<CostPolicyFormData>>(() => {
-    if (!row) return { scope: [] };
+    if (!row) return { scope: [], use_credit: true };
+    const resource =
+      type === 'project' && row.resource
+        ? { uuid: row.resource, name: row.resource_name }
+        : null;
     return {
       scope: [
         {
@@ -49,11 +53,13 @@ export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
               }),
         },
       ],
-      actions: getCostPolicyActionOptions(type).find(
+      actions: getCostPolicyActionOptions(type, Boolean(resource)).find(
         (option) => option.value === row.actions,
       ) || { value: row.actions, label: row.actions },
       limit_cost: Number(row.limit_cost),
       period: row.period,
+      resource,
+      use_credit: type === 'project' ? row.use_credit : undefined,
       options: row.options,
     };
   }, [row, type]);
@@ -82,6 +88,15 @@ export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
                 ? JSON.stringify(options)
                 : undefined,
         };
+        if (type === 'project') {
+          // Resource scoping is only valid for a single project; the form
+          // clears it otherwise. Send null to clear it on the backend.
+          data.resource =
+            formData.scope.length === 1 && formData.resource
+              ? formData.resource.uuid
+              : null;
+          data.use_credit = formData.use_credit ?? true;
+        }
         if (isEdit && row) {
           return type === 'project'
             ? marketplaceProjectEstimatedCostPoliciesUpdate({

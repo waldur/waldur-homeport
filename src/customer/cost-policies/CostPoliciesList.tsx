@@ -14,6 +14,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
 import { CostPolicyActions } from './CostPolicyActions';
@@ -67,6 +68,10 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
           ),
         },
         {
+          title: translate('Resource'),
+          render: ({ row }) => <>{renderFieldOrDash(row.resource_name)}</>,
+        },
+        {
           title: (
             <>
               {translate('Action triggered')}{' '}
@@ -95,13 +100,25 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
         },
         {
           title: translate('Organization credit'),
-          render: ({ row }) =>
-            row.customer_credit ? defaultCurrency(row.customer_credit) : 'N/A',
+          render: ({ row }) => (
+            <>
+              {renderFieldOrDash(
+                row.customer_credit
+                  ? defaultCurrency(row.customer_credit)
+                  : null,
+              )}
+            </>
+          ),
         },
         {
           title: translate('Project credit'),
-          render: ({ row }) =>
-            row.project_credit ? defaultCurrency(row.project_credit) : 'N/A',
+          render: ({ row }) => (
+            <>
+              {renderFieldOrDash(
+                row.project_credit ? defaultCurrency(row.project_credit) : null,
+              )}
+            </>
+          ),
         },
         {
           title: translate('Period'),
