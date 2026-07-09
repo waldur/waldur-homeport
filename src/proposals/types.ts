@@ -13,11 +13,7 @@ export {
   type ProtectedCall as Call,
 } from 'waldur-js-client';
 
-export type RoundReviewStrategy = 'after_round' | 'after_proposal';
-
-export type RoundAllocationStrategy = 'by_call_manager' | 'automatic';
-
-export type RoundAllocationTime = 'on_decision' | 'fixed_date';
+export type AllocationTime = 'on_decision' | 'fixed_date';
 
 export type CallState = 'active' | 'draft' | 'archived';
 

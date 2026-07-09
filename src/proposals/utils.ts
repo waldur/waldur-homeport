@@ -13,48 +13,24 @@ import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { IBreadcrumbItem } from '@/navigation/types';
 import { RoleEnum } from '@/permissions/enums';
 import {
+  AllocationTime,
   Call,
   CallOfferingState,
   CallState,
   ProposalState,
-  RoundAllocationStrategy,
-  RoundAllocationTime,
-  RoundReviewStrategy,
 } from '@/proposals/types';
 
-export const getRoundReviewStrategyOptions = () =>
-  [
-    { value: 'after_round', label: translate('After round is closed') },
-    { value: 'after_proposal', label: translate('After proposal submission') },
-  ] as { value: RoundReviewStrategy; label: string }[];
-
-export const formatRoundReviewStrategy = (value: RoundReviewStrategy) =>
-  getRoundReviewStrategyOptions().find(
-    (option) => option.value === value?.toLowerCase(),
-  )?.label || value;
-
-export const getRoundAllocationStrategyOptions = () =>
-  [
-    { value: 'by_call_manager', label: translate('By call manager') },
-    {
-      value: 'automatic',
-      label: translate('Automatic based on review scoring'),
-    },
-  ] as { value: RoundAllocationStrategy; label: string }[];
-
-export const formatRoundAllocationStrategy = (value: RoundAllocationStrategy) =>
-  getRoundAllocationStrategyOptions().find(
-    (option) => option.value === value?.toLowerCase(),
-  )?.label || value;
-
-export const getRoundAllocationTimeOptions = () =>
+// Allocation timing is a call-level policy on the allocation_decision workflow
+// step (not per-round): 'on_decision' provisions immediately, 'fixed_date' uses
+// the round's allocation date.
+export const getAllocationTimeOptions = () =>
   [
     { value: 'on_decision', label: translate('On decision') },
     { value: 'fixed_date', label: translate('Fixed date') },
-  ] as { value: RoundAllocationTime; label: string }[];
+  ] as { value: AllocationTime; label: string }[];
 
-export const formatRoundAllocationTime = (value: RoundAllocationTime) =>
-  getRoundAllocationTimeOptions().find(
+export const formatAllocationTime = (value: AllocationTime) =>
+  getAllocationTimeOptions().find(
     (option) => option.value === value?.toLowerCase(),
   )?.label || value;
 

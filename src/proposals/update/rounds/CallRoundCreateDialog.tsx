@@ -1,5 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import {
   BulkRoundCreateRequestRequest,
   proposalProtectedCallsRoundsBulkSet,
@@ -11,7 +12,11 @@ import { parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { Call } from '@/proposals/types';
+import { AllocationTime, Call } from '@/proposals/types';
+import {
+  callWorkflowStepsKey,
+  fetchCallWorkflowSteps,
+} from '@/proposals/workflow/queries';
 import { ProgressStep, WizardFormContainer } from '@/wizard';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
@@ -24,12 +29,6 @@ interface CallRoundCreateDialogProps {
     refetch(): void;
   };
 }
-
-const WizardForms = [
-  WizardFormFirstPage,
-  WizardFormSecondPage,
-  WizardFormThirdPage,
-];
 
 const steps: ProgressStep[] = [
   {
@@ -61,6 +60,27 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
   props,
 ) => {
   const { closeDialog } = useModal();
+
+  // Allocation timing is a call-level policy on the allocation_decision step;
+  // the round only needs an allocation date when the call uses fixed-date mode.
+  const { data: workflowSteps } = useQuery({
+    queryKey: callWorkflowStepsKey(props.resolve.call.uuid),
+    queryFn: () => fetchCallWorkflowSteps(props.resolve.call.uuid),
+  });
+  const allocationMode = (workflowSteps?.find(
+    (s) => s.step === 'allocation_decision',
+  )?.allocation_time || 'on_decision') as AllocationTime;
+
+  const wizardForms = useMemo(
+    () => [
+      WizardFormFirstPage,
+      WizardFormSecondPage,
+      (stepProps) => (
+        <WizardFormThirdPage {...stepProps} allocationMode={allocationMode} />
+      ),
+    ],
+    [allocationMode],
+  );
 
   const createRoundMutation = useManagedMutation<
     any,
@@ -110,12 +130,7 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
             custom_interval_months: formData.custom_interval_months ?? null,
             submission_window_days: formData.submission_window_days!,
             number_of_rounds: formData.number_of_rounds!,
-            review_strategy: formData.review_strategy,
-            deciding_entity: formData.deciding_entity,
-            allocation_time: formData.allocation_time,
             review_duration_in_days: formData.review_duration_in_days,
-            minimum_number_of_reviewers: formData.minimum_number_of_reviewers,
-            minimal_average_scoring: formData.minimal_average_scoring,
           });
         } else {
           await createRoundMutation.mutateAsync(formData);
@@ -133,7 +148,7 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
       onSubmit={createRound}
       steps={steps}
       title={translate('New round')}
-      wizardForms={WizardForms}
+      wizardForms={wizardForms}
       initialValues={{ timezone: DateTime.local().zoneName }}
       submitLabel={translate('Create')}
       validate={validate}

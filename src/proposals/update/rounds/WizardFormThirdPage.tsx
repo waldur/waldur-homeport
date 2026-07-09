@@ -3,58 +3,28 @@ import { useFormState } from 'react-final-form';
 
 import { formatISOWithoutZone } from '@/core/dateUtils';
 import { required } from '@/core/validators';
-import { DateTimeGroup, SelectGroup, NumberGroup } from '@/form';
+import { DateTimeGroup } from '@/form';
 import { translate } from '@/i18n';
-import {
-  getRoundAllocationStrategyOptions,
-  getRoundAllocationTimeOptions,
-} from '@/proposals/utils';
+import { AllocationTime } from '@/proposals/types';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
-export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
-  props,
-) => {
-  const { values, submitting } = useFormState({
-    subscription: { values: true, submitting: true },
-  });
+interface WizardFormThirdPageProps extends WizardFormStepProps {
+  // The call's allocation-timing mode, configured on the allocation_decision
+  // workflow step. The round only needs a date when the call allocates on a
+  // fixed date.
+  allocationMode?: AllocationTime;
+}
 
-  const showAllocationDate = values?.allocation_time === 'fixed_date';
-  const showMinAverageScoring = values?.deciding_entity != 'by_call_manager';
+export const WizardFormThirdPage: FunctionComponent<
+  WizardFormThirdPageProps
+> = ({ allocationMode, ...props }) => {
+  const { submitting } = useFormState({ subscription: { submitting: true } });
+
+  const showAllocationDate = allocationMode === 'fixed_date';
   return (
     <WizardForm {...props}>
       <div className="size-sm">
-        <SelectGroup
-          name="deciding_entity"
-          label={translate('Deciding entity')}
-          simpleValue={true}
-          options={getRoundAllocationStrategyOptions()}
-          required={true}
-          isClearable={false}
-          validate={required}
-          disabled={submitting}
-        />
-
-        {showMinAverageScoring && (
-          <NumberGroup
-            label={translate('Minimum average scoring for allocation')}
-            name="minimal_average_scoring"
-            required
-            validate={required}
-            disabled={submitting}
-          />
-        )}
-        <SelectGroup
-          name="allocation_time"
-          label={translate('Allocation time')}
-          simpleValue={true}
-          options={getRoundAllocationTimeOptions()}
-          required={true}
-          isClearable={false}
-          validate={required}
-          disabled={submitting}
-        />
-
-        {showAllocationDate && (
+        {showAllocationDate ? (
           <DateTimeGroup
             label={translate('Allocation date')}
             name="allocation_date"
@@ -63,7 +33,14 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
             dateFormat="Y-m-d H:i"
             parse={(value) => (value ? formatISOWithoutZone(value) : value)}
             format={(value) => (value ? new Date(value) : value)}
+            disabled={submitting}
           />
+        ) : (
+          <p className="text-muted mb-0">
+            {translate(
+              'This call allocates on decision — no allocation date is needed. Change the allocation timing on the Configuration tab to set a fixed date.',
+            )}
+          </p>
         )}
       </div>
     </WizardForm>
