@@ -123,6 +123,12 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
   const projectEffectiveEnd = resource.project_effective_end_date
     ? new Date(resource.project_effective_end_date)
     : null;
+  // Grace-aware, per-resource termination date (the raw project end for
+  // grace-disabled offerings). Drives the resource-scoped conflict badge; the
+  // project's own effective end (projectEffectiveEnd) still drives "Expired".
+  const resourceEffectiveEnd = resource.resource_effective_end_date
+    ? new Date(resource.resource_effective_end_date)
+    : null;
   const resourceEnd = resource.end_date ? new Date(resource.end_date) : null;
   const isTerminal = TERMINAL_STATES.has(resource.state as string);
 
@@ -130,7 +136,7 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
   const showExpired =
     !showInGrace && projectEffectiveEnd && projectEffectiveEnd < today;
   const showConflict =
-    resourceEnd && projectEffectiveEnd && resourceEnd > projectEffectiveEnd;
+    resourceEnd && resourceEffectiveEnd && resourceEnd > resourceEffectiveEnd;
   const showOverdue = resourceEnd && resourceEnd < today && !isTerminal;
 
   return (
@@ -173,8 +179,8 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
           tooltip={translate(
             'Project is in its grace period. Resource will be terminated on {date}.',
             {
-              date: resource.project_effective_end_date
-                ? formatDate(resource.project_effective_end_date)
+              date: resource.resource_effective_end_date
+                ? formatDate(resource.resource_effective_end_date)
                 : '',
             },
           )}
@@ -202,7 +208,7 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
             'Resource end date ({resourceEnd}) extends past project effective end ({projectEnd}). Will be terminated with the project.',
             {
               resourceEnd: formatDate(resource.end_date),
-              projectEnd: formatDate(resource.project_effective_end_date),
+              projectEnd: formatDate(resource.resource_effective_end_date),
             },
           )}
           tipId="flag-ends-with-project"

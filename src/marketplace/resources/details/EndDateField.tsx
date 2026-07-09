@@ -7,29 +7,27 @@ import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 
 export const EndDateField = ({ resource }) => {
-  const resourceTerminationDate = resource.end_date;
-  const projectEndDate =
-    resource.project_effective_end_date || resource.project_end_date;
+  const ownEndDate = resource.end_date;
+  const projectEndDate = resource.project_end_date;
+  // Backend-computed: the earliest of the resource's own end date and the
+  // project-driven termination date, already grace-aware (incl. the offering's
+  // disable-grace-period flag).
+  const effectiveDate = resource.resource_effective_end_date;
 
-  if (!resourceTerminationDate && !projectEndDate) {
+  if (!effectiveDate) {
     return null;
   }
 
-  const closestDate =
-    resourceTerminationDate && projectEndDate
-      ? resourceTerminationDate < projectEndDate
-        ? resourceTerminationDate
-        : projectEndDate
-      : resourceTerminationDate || projectEndDate;
-
-  const isPastDate = closestDate < new Date();
+  // Parse to a Date: comparing the 'YYYY-MM-DD' string directly to a Date
+  // coerces it to NaN, so the comparison would always be false.
+  const isPastDate = new Date(effectiveDate) < new Date();
 
   const tooltipContent = (
     <div className="flex-grow-1">
-      {resourceTerminationDate && (
+      {ownEndDate && (
         <div>
-          {translate('Resource termination date')}: {resourceTerminationDate} (
-          {formatRelative(resourceTerminationDate)})
+          {translate('Resource termination date')}: {ownEndDate} (
+          {formatRelative(ownEndDate)})
         </div>
       )}
       {projectEndDate && (
@@ -46,8 +44,8 @@ export const EndDateField = ({ resource }) => {
       label={translate('Termination date')}
       value={
         <span className={isPastDate ? 'text-danger' : ''}>
-          {closestDate} ({formatRelative(closestDate)}) &nbsp;
-          {projectEndDate && resourceTerminationDate > projectEndDate ? (
+          {effectiveDate} ({formatRelative(effectiveDate)}) &nbsp;
+          {ownEndDate && ownEndDate > effectiveDate ? (
             <WarnTip
               id={resource.uuid}
               label={
@@ -65,7 +63,7 @@ export const EndDateField = ({ resource }) => {
               className="w-100"
               tipClassName="mw-275px"
             />
-          ) : resourceTerminationDate && projectEndDate ? (
+          ) : ownEndDate && projectEndDate ? (
             <Tip id="end-date-tooltip" label={tooltipContent}>
               <QuestionIcon size={15} weight="bold" />
             </Tip>

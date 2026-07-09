@@ -102,7 +102,7 @@
     "redux": "^4.2.1",
     "reselect": "^3.0.1",
     "text-security": "^3.2.1",
-    "waldur-js-client": "^8.0.10-dev.18",
+    "waldur-js-client": "^8.0.10-dev.22",
     "yjs": "^13.5.22"
   },
   "devDependencies": {

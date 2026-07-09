@@ -43,8 +43,8 @@ export const ResourceDetailsHero = ({
       className={offering.state === 'Unavailable' ? 'disabled-view' : undefined}
     >
       {resource.end_date &&
-        resource.project_end_date &&
-        resource.end_date > resource.project_end_date && (
+        resource.resource_effective_end_date &&
+        resource.end_date > resource.resource_effective_end_date && (
           <ResourceEndDateConflictBar />
         )}
       {resource.order_in_progress ? (

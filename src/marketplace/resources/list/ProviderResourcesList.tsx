@@ -17,6 +17,7 @@ import { translate } from '@/i18n';
 import { Option } from '@/marketplace/common/registry';
 import { ResourceFlags } from '@/marketplace/resources/details/ResourceFlags';
 import { ExpandableResourceSummary } from '@/marketplace/resources/list/ExpandableResourceSummary';
+import { ResourceTerminationDateField } from '@/marketplace/resources/list/ResourceTerminationDateField';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
@@ -77,7 +78,7 @@ const ResourceField = ({ row }) => {
         title={row.name || row.offering_name}
       />
       <BackendIdTip backendId={row.backend_id} />
-      <EndDateTooltip end_date={row.end_date} />
+      <EndDateTooltip end_date={row.resource_effective_end_date} />
       <ResourceFlags resource={row} />
     </div>
   );
@@ -230,14 +231,13 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Termination date'),
-      render: ({ row }) =>
-        row.end_date ? formatDateTime(row.end_date) : 'N/A',
+      render: ({ row }) => <ResourceTerminationDateField row={row} format />,
       orderField: 'end_date',
       id: 'end_date',
-      keys: ['end_date'],
+      keys: ['end_date', 'resource_effective_end_date'],
       optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
-      export: (row) => row.end_date,
-      exportKeys: ['end_date'],
+      export: (row) => row.resource_effective_end_date,
+      exportKeys: ['resource_effective_end_date'],
     },
     {
       title: translate('State'),
@@ -305,6 +305,7 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'state', // Almost all actions
     'slug', // SetSlugAction
     'end_date', // EditResourceEndDateByProviderAction
+    'resource_effective_end_date', // Termination date column (grace-aware)
     'resource_type', // TerminateAction
     'paused', // ResourceFlags inline badge
     'downscaled', // ResourceFlags inline badge
