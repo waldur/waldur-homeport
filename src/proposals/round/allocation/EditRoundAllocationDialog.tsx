@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import {
   proposalProtectedCallsRoundsUpdate,
@@ -8,9 +9,13 @@ import {
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { Call } from '@/proposals/types';
+import { AllocationTime, Call } from '@/proposals/types';
 import { WizardFormThirdPage } from '@/proposals/update/rounds/WizardFormThirdPage';
 import { getRoundInitialValues } from '@/proposals/utils';
+import {
+  callWorkflowStepsKey,
+  fetchCallWorkflowSteps,
+} from '@/proposals/workflow/queries';
 import { WizardFormContainer } from '@/wizard';
 
 interface EditRoundAllocationDialogProps {
@@ -29,6 +34,23 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
     [props.resolve.round],
   );
   const { closeDialog } = useModal();
+
+  const { data: workflowSteps } = useQuery({
+    queryKey: callWorkflowStepsKey(props.resolve.call.uuid),
+    queryFn: () => fetchCallWorkflowSteps(props.resolve.call.uuid),
+  });
+  const allocationMode = (workflowSteps?.find(
+    (s) => s.step === 'allocation_decision',
+  )?.allocation_time || 'on_decision') as AllocationTime;
+
+  const wizardForms = useMemo(
+    () => [
+      (stepProps) => (
+        <WizardFormThirdPage {...stepProps} allocationMode={allocationMode} />
+      ),
+    ],
+    [allocationMode],
+  );
 
   const updateRoundMutation = useManagedMutation<
     any,
@@ -67,11 +89,8 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
       steps={[
         { key: 'allocation', label: translate('Allocation'), completed: false },
       ]}
-      wizardForms={[WizardFormThirdPage]}
+      wizardForms={wizardForms}
       initialValues={{
-        deciding_entity: initialValues.deciding_entity,
-        minimal_average_scoring: initialValues.minimal_average_scoring,
-        allocation_time: initialValues.allocation_time,
         allocation_date: initialValues.allocation_date,
       }}
     />

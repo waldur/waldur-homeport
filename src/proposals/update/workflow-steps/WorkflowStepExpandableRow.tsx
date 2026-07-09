@@ -2,6 +2,8 @@ import { FC } from 'react';
 import { CallWorkflowStep, ResponsibleRoleEnum } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { AllocationTime } from '@/proposals/types';
+import { formatAllocationTime } from '@/proposals/utils';
 import {
   responsibleRoleLabel,
   transitionModeLabel,
@@ -70,6 +72,14 @@ export const WorkflowStepExpandableRow: FC<OwnProps> = ({ row }) => {
         label={translate('Min score')}
         value={row.min_score_threshold || undefined}
       />
+      {row.step === 'allocation_decision' && (
+        <Field
+          label={translate('Allocation timing')}
+          value={formatAllocationTime(
+            (row.allocation_time || 'on_decision') as AllocationTime,
+          )}
+        />
+      )}
       <Field label={translate('Criteria')} value={criteriaValue} />
       <Field label={translate('Options')} value={optionsValue} />
     </ExpandableContainer>

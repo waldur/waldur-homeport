@@ -22,7 +22,8 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { Call } from '@/proposals/types';
+import { AllocationTime, Call } from '@/proposals/types';
+import { getAllocationTimeOptions } from '@/proposals/utils';
 import {
   RESPONSIBLE_ROLE_OPTIONS,
   ResponsibleRoleEnum,
@@ -65,6 +66,7 @@ interface FormValues {
   transition_mode: TransitionModeEnum | null;
   criteria: CriterionInput[];
   include_award_response: boolean;
+  allocation_time: AllocationTime;
 }
 
 export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
@@ -113,6 +115,8 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
         .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
         .map((c, index) => ({ name: c.name ?? '', order: index })),
       include_award_response: step.include_award_response ?? false,
+      allocation_time: (step.allocation_time ||
+        'on_decision') as AllocationTime,
     }),
     [step],
   );
@@ -154,7 +158,10 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
         responsible_role: values.responsible_role || null,
         ...(criteria !== undefined ? { criteria } : {}),
         ...(showAllocationExtras
-          ? { include_award_response: !!values.include_award_response }
+          ? {
+              include_award_response: !!values.include_award_response,
+              allocation_time: values.allocation_time,
+            }
           : {}),
         transition_mode: values.transition_mode || 'automatic_on_completion',
       };
@@ -284,14 +291,29 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
             )}
 
             {showAllocationExtras && (
-              <BooleanGroup
-                name="include_award_response"
-                spaceless={true}
-                label={translate('Include award response')}
-                help_text={translate(
-                  'Require the applicant to explicitly accept or decline the award before provisioning.',
-                )}
-              />
+              <>
+                <SelectGroup
+                  name="allocation_time"
+                  label={translate('Allocation timing')}
+                  description={translate(
+                    'When a granted proposal takes effect: immediately on the decision, or on the fixed allocation date set per round.',
+                  )}
+                  required={true}
+                  options={getAllocationTimeOptions()}
+                  simpleValue={true}
+                  isClearable={false}
+                  validate={required}
+                />
+
+                <BooleanGroup
+                  name="include_award_response"
+                  spaceless={true}
+                  label={translate('Include award response')}
+                  help_text={translate(
+                    'Require the applicant to explicitly accept or decline the award before provisioning.',
+                  )}
+                />
+              </>
             )}
 
             <BooleanGroup

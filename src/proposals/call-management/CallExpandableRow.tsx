@@ -7,11 +7,7 @@ import { Field } from '@/resource/summary';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
-import {
-  formatRoundAllocationStrategy,
-  formatRoundReviewStrategy,
-  getRoundsWithStatus,
-} from '../utils';
+import { getRoundsWithStatus } from '../utils';
 
 export const CallExpandableRow: FunctionComponent<{
   row: Call;
@@ -38,18 +34,6 @@ export const CallExpandableRow: FunctionComponent<{
         }
       />
 
-      {activeRound && (
-        <Field
-          label={translate('Review strategy')}
-          value={formatRoundReviewStrategy(activeRound.review_strategy)}
-        />
-      )}
-      {activeRound && (
-        <Field
-          label={translate('Round strategy')}
-          value={formatRoundAllocationStrategy(activeRound.deciding_entity)}
-        />
-      )}
       <Field label={translate('Submissions')} value="0" />
       <Field label={translate('Pending review')} value="0" />
       <Field

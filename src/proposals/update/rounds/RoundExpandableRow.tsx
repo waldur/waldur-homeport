@@ -4,11 +4,6 @@ import { ProtectedRound } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import {
-  formatRoundAllocationStrategy,
-  formatRoundAllocationTime,
-  formatRoundReviewStrategy,
-} from '@/proposals/utils';
 import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { renderFieldOrDash } from '@/table/utils';
@@ -42,37 +37,19 @@ export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
           />
           <SectionTitle title={translate('Review settings')} className="mt-4" />
           <Field
-            label={translate('Review strategy')}
-            value={formatRoundReviewStrategy(row.review_strategy)}
-          />
-          <Field
             label={translate('Review duration in days')}
             value={renderFieldOrDash(row.review_duration_in_days)}
-          />
-          <Field
-            label={translate('Minimum number of reviewers')}
-            value={renderFieldOrDash(row.minimum_number_of_reviewers)}
           />
         </Col>
         <Col md={6}>
           <SectionTitle title={translate('Allocation settings')} />
           <Field
-            label={translate('Deciding entity')}
-            value={formatRoundAllocationStrategy(row.deciding_entity)}
-          />
-          <Field
-            label={translate('Allocation time')}
-            value={formatRoundAllocationTime(row.allocation_time)}
-          />
-          {row.allocation_time?.toLowerCase() === 'fixed_date' && (
-            <Field
-              label={translate('Allocation date')}
-              value={formatDateTime(row.allocation_date)}
-            />
-          )}
-          <Field
-            label={translate('Minimal average scoring')}
-            value={renderFieldOrDash(row.minimal_average_scoring)}
+            label={translate('Allocation date')}
+            value={
+              row.allocation_date
+                ? formatDateTime(row.allocation_date)
+                : renderFieldOrDash(null)
+            }
           />
         </Col>
       </Row>
