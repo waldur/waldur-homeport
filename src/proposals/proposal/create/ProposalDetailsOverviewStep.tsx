@@ -8,6 +8,7 @@ import { EndingField } from '@/proposals/EndingField';
 import { Proposal } from '@/proposals/types';
 import { Field } from '@/resource/summary';
 import { ActionButton } from '@/table/ActionButton';
+import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepCard, VStepperFormStepProps } from '@/wizard';
 
 const ProposalDetailsDialog = lazyComponent(() =>
@@ -54,7 +55,7 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
           <Field
             label={translate('Round deadline')}
             value={
-              <EndingField endDate={proposal.round.cutoff_time} dateFirst />
+              <EndingField endDate={proposal.round?.cutoff_time} dateFirst />
             }
             labelCol={5}
             valueCol={7}
@@ -63,7 +64,7 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
         <Col sm={6}>
           <Field
             label={translate('Round reference')}
-            value={proposal.round.name}
+            value={renderFieldOrDash(proposal.round?.name)}
             labelCol={5}
             valueCol={7}
           />
