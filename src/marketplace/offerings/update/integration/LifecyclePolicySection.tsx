@@ -209,6 +209,14 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             )}
           />
           <BooleanEditField
+            name="plugin_options.disable_grace_period"
+            label={translate('Disable grace period')}
+            isStaffOnly
+            description={translate(
+              "When enabled, this offering's resources ignore the project grace period and are terminated on the project end date. Staff-only setting.",
+            )}
+          />
+          <BooleanEditField
             name="plugin_options.create_orders_on_resource_option_change"
             label={translate('Create orders on resource option change')}
             description={translate(

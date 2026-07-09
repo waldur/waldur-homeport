@@ -87,32 +87,28 @@ export const getResourceSummaryFields = ({
       value: resource.end_date ? formatDate(resource.end_date) : null,
       tooltip:
         resource.end_date &&
-        resource.project_effective_end_date &&
+        resource.resource_effective_end_date &&
         new Date(resource.end_date) >
-          new Date(resource.project_effective_end_date)
+          new Date(resource.resource_effective_end_date)
           ? translate(
               'Resource will be terminated with the project on {date}, before its own end date.',
-              { date: formatDate(resource.project_effective_end_date) },
+              { date: formatDate(resource.resource_effective_end_date) },
             )
           : undefined,
     },
     {
       name: 'effective_termination',
       label: translate('Scheduled termination'),
-      value: (() => {
-        const candidates = [
-          resource.end_date,
-          resource.project_effective_end_date,
-        ].filter(Boolean) as string[];
-        if (candidates.length === 0) return null;
-        return formatDate(
-          candidates.reduce((a, b) => (new Date(a) < new Date(b) ? a : b)),
-        );
-      })(),
+      // Backend-computed: the earliest of the resource's own end date and the
+      // project-driven termination date, already grace-aware.
+      value: resource.resource_effective_end_date
+        ? formatDate(resource.resource_effective_end_date)
+        : null,
       tooltip:
-        !resource.end_date && resource.project_effective_end_date
+        !resource.end_date && resource.resource_effective_end_date
           ? translate(
-              'Resource has no own end date — it will be terminated when the project reaches its effective end date.',
+              'Resource has no own end date — it will be terminated with the project on {date}.',
+              { date: formatDate(resource.resource_effective_end_date) },
             )
           : undefined,
     },

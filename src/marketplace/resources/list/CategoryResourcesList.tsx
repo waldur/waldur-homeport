@@ -5,6 +5,7 @@ import { formatDateTime } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { ResourceTerminationDateField } from '@/marketplace/resources/list/ResourceTerminationDateField';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { useTitle } from '@/navigation/title';
@@ -247,10 +248,10 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = ({
   );
   columns.push({
     title: translate('Termination date'),
-    render: ({ row }) => (row.end_date ? formatDateTime(row.end_date) : 'N/A'),
+    render: ({ row }) => <ResourceTerminationDateField row={row} format />,
     orderField: 'end_date',
     id: 'end_date',
-    keys: ['end_date'],
+    keys: ['end_date', 'resource_effective_end_date'],
     optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
   });
   columns.push(SLUG_COLUMN);

@@ -98,6 +98,8 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'restrict_member_access', // ResourceFlags inline badge
     'project_is_in_grace_period', // ResourceFlags inline badge
     'project_effective_end_date', // ResourceFlags inline badge (expired/conflict)
+    'resource_effective_end_date', // ResourceFlags in-grace/conflict + Termination date column
+
     'project_uuid', // rowActions permissions check
     'state', // ResourceFlags overdue badge skips terminating/terminated
   ].filter(Boolean);
@@ -239,9 +241,9 @@ export const getResourceAllListColumns = (
         render: ResourceTerminationDateField,
         orderField: 'end_date',
         id: 'end_date',
-        keys: ['end_date', 'project_end_date'],
+        keys: ['end_date', 'resource_effective_end_date'],
         optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
-        export: (row) => row.end_date,
+        export: (row) => row.resource_effective_end_date,
       },
       {
         title: translate('State'),
