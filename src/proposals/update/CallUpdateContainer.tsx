@@ -125,9 +125,9 @@ const Body = ({ call, refetch, loading }) => {
           component: ({ call }) => (
             <TeamSection
               scope={call}
-              roles={[RoleEnum.CALL_MANAGER]}
+              roles={[RoleEnum.CALL_MANAGER, RoleEnum.CALL_PANEL_MEMBER]}
               roleTypes={['call', 'call_organizer']}
-              title={translate('Managers')}
+              title={translate('Call team')}
             />
           ),
         },

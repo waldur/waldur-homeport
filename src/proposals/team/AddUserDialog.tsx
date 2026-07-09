@@ -61,9 +61,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Add member')}
-            subtitle={translate(
-              'Select a user to assign a role within the project.',
-            )}
+            subtitle={translate('Select a user and assign a role.')}
             iconNode={<UserCirclePlusIcon weight="bold" />}
             iconColor="success"
             footer={
@@ -91,7 +89,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             />
 
             {roles && roles.length === 1 ? null : (
-              <RoleGroup types={roleTypes} />
+              <RoleGroup types={roleTypes} roleNames={roles} />
             )}
             <ExpirationTimeGroup />
           </ModalDialog>
