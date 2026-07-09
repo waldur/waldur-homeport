@@ -34,6 +34,17 @@ const RESOURCE_PROJECTS_LIMIT_POLICY_OPTIONS = [
   },
 ];
 
+const ACTION_ON_USAGE_LIMIT_OPTIONS = [
+  {
+    value: 'pause',
+    label: translate('Pause — pause resources on reaching the limit'),
+  },
+  {
+    value: 'downscale',
+    label: translate('Downscale — downscale resources on reaching the limit'),
+  },
+];
+
 export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
   const { update } = useUpdateOfferingIntegration(
     props.offering,
@@ -206,6 +217,16 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             label={translate('Supports pausing')}
             description={translate(
               'Enables pausing/unpausing operations for resources created from this offering',
+            )}
+          />
+          <SelectEditField
+            name="plugin_options.action_on_usage_limit"
+            label={translate('Action on usage limit')}
+            options={ACTION_ON_USAGE_LIMIT_OPTIONS}
+            simpleValue
+            isClearable
+            description={translate(
+              'When set, resources are automatically paused or downscaled once reported usage in the current period reaches a limit-based component’s limit, and the restriction is lifted when usage drops below it again. Leave empty to disable.',
             )}
           />
           <BooleanEditField
