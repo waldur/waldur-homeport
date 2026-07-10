@@ -1,3 +1,4 @@
+import arrayMutators from 'final-form-arrays';
 import { get, set } from 'lodash-es';
 import { useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
@@ -22,6 +23,7 @@ export const EditFieldDialog = (props: { resolve: FieldEditButtonProps }) => {
 
   return (
     <Form
+      mutators={{ ...arrayMutators }}
       initialValues={initialValues}
       onSubmit={(formData) =>
         props.resolve
