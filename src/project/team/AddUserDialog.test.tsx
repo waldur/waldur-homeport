@@ -45,9 +45,12 @@ const mockUserData = [
 describe('AddUserDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // Staff by default so getGrantableRoles is a pass-through here — these tests
+    // exercise the dialog wiring, not the grantable-role permission filter (a
+    // non-staff user with no grant permission would see an empty role list).
     vi.mocked(useUser).mockReturnValue({
       uuid: 'current-user',
-      is_staff: false,
+      is_staff: true,
     } as any);
     vi.mocked(useCustomer).mockReturnValue({ uuid: 'customer-uuid' } as any);
     vi.mocked(useProject).mockReturnValue({ uuid: 'project-uuid' } as any);
