@@ -1,12 +1,13 @@
-import { rolesList } from 'waldur-js-client';
+import { User, rolesList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
 import { ROLE_TYPES } from '@/permissions/constants';
 
-import { RoleEnum } from './enums';
-import { RoleType } from './types';
+import { PermissionMap, RoleEnum } from './enums';
+import { hasPermission } from './hasPermission';
+import { PermissionRequest, Role, RoleType } from './types';
 
 export const roleAutocomplete = createLoadOptions(rolesList, 'name', {
   field: ['uuid', 'name', 'description'],
@@ -16,6 +17,30 @@ export const getRoles = (types: RoleType[]) =>
   ENV.roles
     .filter((role) => types.includes(role.content_type) && role.is_active)
     .sort((a, b) => a.content_type.localeCompare(b.content_type));
+
+type GrantScope = Pick<
+  PermissionRequest,
+  'customerId' | 'projectId' | 'callOrganizerId' | 'scopeId'
+>;
+
+/**
+ * Roles of the given types that the acting user may actually grant, based on
+ * the create-permission required for each role's scope (PermissionMap) and the
+ * user's roles in the given scope. Prevents offering a role the backend would
+ * then 403 on (e.g. an owner being shown "Call organizer" but denied the grant).
+ */
+export const getGrantableRoles = (
+  types: RoleType[],
+  user: Pick<User, 'is_staff' | 'permissions'>,
+  scope: GrantScope,
+): Role[] =>
+  getRoles(types).filter((role) => {
+    const permission = PermissionMap[role.content_type];
+    // No known grant-permission for this scope type — don't hide it; the
+    // backend remains the authority.
+    if (!permission) return true;
+    return hasPermission(user, { permission, ...scope });
+  });
 
 export const getProjectRoles = () => getRoles(['project']);
 

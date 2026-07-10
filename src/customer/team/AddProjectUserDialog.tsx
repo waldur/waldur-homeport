@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Form } from 'react-final-form';
-import { CustomerUser, Project, projectsAddUser } from 'waldur-js-client';
+import { CustomerUser, Project, User, projectsAddUser } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -15,6 +15,7 @@ import {
 } from '@/project/team/onlyOneProjectManager';
 import { RoleGroup } from '@/project/team/RoleGroup';
 import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
+import { useCustomer, useUser } from '@/workspace/hooks';
 
 import { OrganizationProjectSelectField } from './OrganizationProjectSelectField';
 import { UserGroup } from './UserGroup';
@@ -65,6 +66,8 @@ const AddProjectUserDialogFormBody: FC<{
     typeof useManagedMutation<any, any, AddProjectUserDialogFormData>
   >;
 }> = ({ handleSubmit, invalid, values, resolve, updateMutation }) => {
+  const currentUser = useUser() as User;
+  const customer = useCustomer();
   const { data: hasActiveManager } = useProjectHasActiveManager(
     values.project?.uuid,
   );
@@ -98,7 +101,14 @@ const AddProjectUserDialogFormBody: FC<{
         <div className="size-sm">
           <UserGroup permission={resolve.customer} />
           <OrganizationProjectSelectField />
-          <RoleGroup types={['project']} />
+          <RoleGroup
+            types={['project']}
+            user={currentUser}
+            scope={{
+              customerId: customer?.uuid,
+              projectId: values.project?.uuid,
+            }}
+          />
           <ExpirationTimeGroup disabled={updateMutation.isPending} />
         </div>
       </ModalDialog>

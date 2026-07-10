@@ -368,6 +368,12 @@ const AddUserDialogForm: FC<AddUserDialogFormProps> = ({
               ? ['customer', 'project']
               : [level]
           }
+          user={currentUser}
+          scope={{
+            customerId: resolvedCustomerUuid,
+            projectId: resolvedProject?.uuid,
+            callOrganizerId: resolvedCustomer?.call_managing_organization_uuid,
+          }}
         />
 
         {level === 'customer' && values.role?.content_type === 'project' && (
