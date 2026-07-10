@@ -217,9 +217,9 @@ export const transitionModeLabel = (
 ): string => {
   switch (mode) {
     case 'automatic_on_completion':
-      return translate('Automatic on completion');
+      return translate('Advance immediately on completion');
     case 'manual':
-      return translate('Manual (call manager)');
+      return translate('Hold for manual advance');
     default:
       return '—';
   }
@@ -232,10 +232,12 @@ export const transitionModeDescription = (
 ): string => {
   switch (mode) {
     case 'automatic_on_completion':
-      return translate('Advance automatically when the step completes.');
+      return translate(
+        'Advances to the next step as soon as a human completes this one. It does not auto-decide from scores — the minimum reviewers / score are completion gates a human still clears.',
+      );
     case 'manual':
       return translate(
-        'Advance manually — a call manager confirms the transition.',
+        'Waits for a separate manual advance after the step is completed.',
       );
     default:
       return '';

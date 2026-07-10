@@ -3,8 +3,6 @@ import { useMemo } from 'react';
 import {
   CallResourceTemplate,
   Proposal,
-  proposalProposalsApprove,
-  proposalProposalsReject,
   proposalProposalsResourcesDestroy,
   proposalProposalsResourcesSet,
   RequestedResource,
@@ -12,76 +10,11 @@ import {
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { Call } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
-
-export const useProposalDecisionActions = (
-  proposal: Proposal,
-  refetch: () => void,
-) => {
-  const user = useUser();
-
-  const stateIsValid = ['submitted', 'in_review'].includes(proposal.state);
-
-  const hasPermissionForDecision = hasPermission(user, {
-    permission: PermissionEnum.APPROVE_AND_REJECT_PROPOSALS,
-    scopeId: proposal.call_uuid,
-    callOrganizerId: proposal.call_managing_organisation_uuid,
-  });
-
-  const canPerformDecisionActions = stateIsValid && hasPermissionForDecision;
-
-  const approveProposal = useManagedMutation<any, any, void>({
-    mutationFn: () =>
-      proposalProposalsApprove({ path: { uuid: proposal.uuid } }),
-    refetch,
-    confirmation: {
-      title: translate('Confirmation'),
-      body: translate(
-        'Are you sure you want to approve the proposal {name} in state {state}?',
-        {
-          name: proposal.name,
-          state: proposal.state,
-        },
-      ),
-    },
-    successMessage: translate('Proposal has been approved.'),
-    errorMessage: translate('Unable to approve the proposal.'),
-  });
-
-  const rejectProposal = useManagedMutation<any, any, { input: string }>({
-    mutationFn: (variables) =>
-      proposalProposalsReject({
-        path: { uuid: proposal.uuid },
-        body: { allocation_comment: variables.input },
-      }),
-    refetch,
-    confirmation: {
-      title: translate('Confirmation'),
-      body: translate('Are you sure you want to reject the proposal: {name}?', {
-        name: proposal.name,
-      }),
-      options: {
-        showInput: true,
-        inputLabel: translate('Rejection reason'),
-        inputPlaceholder: translate('Enter reason for rejection'),
-        inputRequired: true,
-      },
-    },
-    successMessage: translate('Proposal has been rejected.'),
-    errorMessage: translate('Unable to reject the proposal.'),
-  });
-
-  return {
-    canPerformDecisionActions,
-    handleApproveProposal: () => approveProposal.mutate(),
-    handleRejectProposal: () => rejectProposal.mutate(),
-  };
-};
 
 export const useSubmitProposalResourcesFromTemplates = (
   proposal: Proposal,
