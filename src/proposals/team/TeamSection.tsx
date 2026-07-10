@@ -149,16 +149,23 @@ export const TeamSection: FC<
               <Nav.Item className="text-nowrap">
                 <Nav.Link eventKey="users">{translate('Users')}</Nav.Link>
               </Nav.Item>
-              <Nav.Item className="text-nowrap">
-                <Nav.Link eventKey="invitations">
-                  {translate('Invitations')}
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="text-nowrap">
-                <Nav.Link eventKey="permissions">
-                  {translate('Permissions')}
-                </Nav.Link>
-              </Nav.Item>
+              {/* Invitations and the permissions log are management surfaces the
+                  backend denies to reviewers; in read-only (review) mode we show
+                  only the team roster so the info matches the viewer's role. */}
+              {!props.readOnlyMode && (
+                <>
+                  <Nav.Item className="text-nowrap">
+                    <Nav.Link eventKey="invitations">
+                      {translate('Invitations')}
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item className="text-nowrap">
+                    <Nav.Link eventKey="permissions">
+                      {translate('Permissions')}
+                    </Nav.Link>
+                  </Nav.Item>
+                </>
+              )}
             </Nav>
           </div>
           <Tab.Content className="overflow-auto">

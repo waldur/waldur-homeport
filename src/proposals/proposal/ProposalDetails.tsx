@@ -1,9 +1,4 @@
-import {
-  ChatTextIcon,
-  CheckCircleIcon,
-  PaperPlaneTiltIcon,
-  XCircleIcon,
-} from '@phosphor-icons/react';
+import { ChatTextIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
@@ -34,7 +29,6 @@ import { createProposalSteps } from './create/steps';
 import {
   CreateManualAssignmentDialog,
   useCanCreateReview,
-  useProposalDecisionActions,
 } from './create/utils';
 import { SubmitReviewDialog } from './create-review/SubmitReviewDialog';
 import { WorkflowStepActions } from './WorkflowStepActions';
@@ -70,21 +64,14 @@ export const ProposalDetails = ({
     return steps;
   }, [proposalHasCompliance]);
 
-  const {
-    canPerformDecisionActions,
-    handleApproveProposal,
-    handleRejectProposal,
-  } = useProposalDecisionActions(proposal, refetch);
-
   const { openDialog } = useModal();
   const canCreateReview = useCanCreateReview(proposal);
 
   const isCallManagerView = state.name?.startsWith('call-management');
 
-  // When the per-proposal workflow engine governs this proposal, decisions are
-  // made by completing its steps (see WorkflowStepActions), so the legacy
-  // Accept/Reject shortcut is hidden to keep a single decision path. Calls
-  // without a configured workflow keep the legacy actions.
+  // Proposal decisions are made by completing the per-proposal workflow steps
+  // (see WorkflowStepActions) — the single decision/provisioning path. The
+  // legacy one-click Accept/Reject shortcut has been removed.
   const { data: workflowStates } = useQuery({
     queryKey: proposalWorkflowStatesKey(proposal.uuid),
     queryFn: () => fetchProposalWorkflowStates(proposal.uuid),
@@ -154,24 +141,6 @@ export const ProposalDetails = ({
         )}
         {isCallManagerView && hasWorkflow && (
           <WorkflowStepActions proposal={proposal} refetch={refetch} />
-        )}
-        {canPerformDecisionActions && isCallManagerView && !hasWorkflow && (
-          <>
-            <ActionButton
-              variant="primary"
-              action={handleApproveProposal}
-              className="w-100 mt-2"
-              iconNode={<CheckCircleIcon weight="bold" />}
-              title={translate('Accept')}
-            />
-            <ActionButton
-              variant="danger"
-              action={handleRejectProposal}
-              className="w-100 mt-2"
-              iconNode={<XCircleIcon weight="bold" />}
-              title={translate('Reject')}
-            />
-          </>
         )}
       </SidebarLayout.Sidebar>
     </SidebarLayout.Container>

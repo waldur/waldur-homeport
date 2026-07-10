@@ -90,7 +90,7 @@ describe('AddWorkflowStepDialog', () => {
     await user.click(screen.getByLabelText(/Responsible role/i));
     await user.click(await screen.findByText('Reviewer'));
 
-    await user.click(screen.getByLabelText(/Automatic/i));
+    await user.click(screen.getByLabelText(/Advance immediately/i));
 
     const minReviewersInput = screen.getByLabelText(
       /Minimal amount of reviews/i,

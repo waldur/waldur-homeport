@@ -43,10 +43,15 @@ export const CallActions: FC<CallActionsProps> = ({
 
   const hasRounds = call.rounds.length > 0;
 
-  // Activating a call requires at least one enabled workflow step (and all
-  // mandatory steps configured). The backend rejects with 400 otherwise; we
-  // gate the button locally too so the affordance is clear before the click.
-  // Only fetch when the action could actually fire (draft / archived calls).
+  // `call.offerings` is accepted-only (matches the backend activation guard,
+  // which requires an accepted offering — requested/canceled don't count).
+  const hasOffering = (call.offerings ?? []).length > 0;
+
+  // Activating a call requires: >= 1 round, >= 1 enabled workflow step, every
+  // mandatory step enabled, and >= 1 offering. The backend rejects with 400
+  // otherwise; we gate the button locally too so the affordance is clear before
+  // the click. Only fetch steps when the action could actually fire (draft /
+  // archived calls).
   const canBeActivated = call.state === 'draft' || call.state === 'archived';
   const { data: workflowSteps } = useQuery({
     queryKey: callWorkflowStepsKey(call.uuid),
@@ -55,6 +60,11 @@ export const CallActions: FC<CallActionsProps> = ({
   });
   const hasEnabledStep =
     !canBeActivated || (workflowSteps?.some((s) => s.is_enabled) ?? false);
+  const mandatoryStepsEnabled =
+    !canBeActivated ||
+    (workflowSteps ?? [])
+      .filter((s) => s.is_mandatory)
+      .every((s) => s.is_enabled);
 
   const editCallState = useCallback(
     async (state, label: string) => {
@@ -105,7 +115,15 @@ export const CallActions: FC<CallActionsProps> = ({
       ? translate(
           'Call must have at least one enabled workflow step to be activated',
         )
-      : null;
+      : !mandatoryStepsEnabled
+        ? translate(
+            'All mandatory workflow steps must be enabled to activate the call',
+          )
+        : !hasOffering
+          ? translate(
+              'Call must have at least one accepted offering to be activated',
+            )
+          : null;
 
   if (call.state === 'draft') {
     return (
