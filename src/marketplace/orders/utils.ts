@@ -10,7 +10,8 @@ interface OrderType {
     | 'limits_update'
     | 'options_update'
     | 'switch_plan'
-    | 'terminate';
+    | 'terminate'
+    | 'restore';
   variant: string;
 }
 
@@ -55,6 +56,12 @@ export const getOrderType = (order: OrderDetails): OrderType => {
         label: translate('Terminate an existing resource'),
         type: 'terminate',
         variant: 'danger',
+      };
+    case 'Restore':
+      return {
+        label: translate('Restore a terminated resource'),
+        type: 'restore',
+        variant: 'success',
       };
     default:
       return { label: 'N/A', type: null, variant: 'default' };
