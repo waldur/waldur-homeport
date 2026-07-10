@@ -4,6 +4,7 @@ import { useForm } from 'react-final-form';
 import { describe, expect, it, vi } from 'vitest';
 
 import { useModal } from '@/modal/actions';
+import { OpenStackExternalIpsField } from '@/openstack/OpenStackExternalIpsField';
 import { renderWithProviders } from '@/test/harness';
 
 import { EditFieldDialog } from './EditFieldDialog';
@@ -89,5 +90,38 @@ describe('EditFieldDialog', () => {
 
     expect(screen.getByTestId('mutator-push')).toHaveTextContent('present');
     expect(screen.getByTestId('mutator-remove')).toHaveTextContent('present');
+  });
+
+  it('renders OpenStackExternalIpsField and handles fields.push mutator on Add button click', async () => {
+    const user = userEvent.setup();
+
+    const arrayProps = {
+      resolve: {
+        ...defaultProps.resolve,
+        name: 'service_attributes.external_ips',
+        scope: {
+          service_attributes: {
+            external_ips: [
+              { floating_ip: '1.2.3.4', external_ip: '192.168.1.1' },
+            ],
+          },
+        },
+        fieldComponent: OpenStackExternalIpsField,
+      },
+    };
+
+    renderWithProviders(<EditFieldDialog {...arrayProps} />);
+
+    // Verify initial values render correctly
+    expect(screen.getByDisplayValue('1.2.3.4')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('192.168.1.1')).toBeInTheDocument();
+
+    // Click "Add" button to add a new row
+    const addButton = screen.getByRole('button', { name: /Add/i });
+    await user.click(addButton);
+
+    // Verify a new row is added (2 initial inputs + 2 new inputs = 4 inputs total)
+    const inputs = screen.getAllByRole('textbox');
+    expect(inputs).toHaveLength(4);
   });
 });
