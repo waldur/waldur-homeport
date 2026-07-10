@@ -46,6 +46,11 @@ interface FlagConfig {
   recoveryMessage: string;
   icon: Icon;
   supportCheck?: string;
+  // Shown when the flag was set by the usage-limit mechanism
+  // (resource.usage_limit_restriction), as opposed to a cost policy or a
+  // manual action.
+  usageLimitLabel?: string;
+  usageLimitRecovery?: string;
 }
 
 const FLAGS: FlagConfig[] = [
@@ -57,6 +62,10 @@ const FLAGS: FlagConfig[] = [
     ),
     icon: PauseCircleIcon,
     supportCheck: 'supports_pausing',
+    usageLimitLabel: translate('Resource paused: usage limit reached'),
+    usageLimitRecovery: translate(
+      'Reported usage reached the configured limit. It will be unpaused automatically when usage drops below the limit.',
+    ),
   },
   {
     field: 'downscaled',
@@ -66,6 +75,10 @@ const FLAGS: FlagConfig[] = [
     ),
     icon: ArrowsInSimpleIcon,
     supportCheck: 'supports_downscaling',
+    usageLimitLabel: translate('Resource downscaled: usage limit reached'),
+    usageLimitRecovery: translate(
+      'Reported usage reached the configured limit. It will be restored automatically when usage drops below the limit.',
+    ),
   },
   {
     field: 'restrict_member_access',
@@ -82,11 +95,20 @@ export const PolicyAttributionBanner: FC<{ resource: Resource }> = ({
   resource,
 }) => {
   const pluginOptions = resource.offering_plugin_options as any;
+  const usageLimitRestriction = resource.usage_limit_restriction;
 
   return (
     <>
       {FLAGS.map(
-        ({ field, label, recoveryMessage, icon: Icon, supportCheck }) => {
+        ({
+          field,
+          label,
+          recoveryMessage,
+          icon: Icon,
+          supportCheck,
+          usageLimitLabel,
+          usageLimitRecovery,
+        }) => {
           if (!resource[field]) return null;
           if (supportCheck && !pluginOptions?.[supportCheck]) return null;
 
@@ -101,6 +123,25 @@ export const PolicyAttributionBanner: FC<{ resource: Resource }> = ({
                 variant="danger"
                 label={label}
                 description={`${policyDescription}. ${recoveryMessage}`}
+                colored
+              />
+            );
+          }
+
+          // Set by the usage-limit mechanism (reported usage reached the
+          // component/resource limit), not manually.
+          if (
+            usageLimitRestriction === field &&
+            usageLimitLabel &&
+            usageLimitRecovery
+          ) {
+            return (
+              <AnnouncementBar
+                key={field}
+                icon={Icon}
+                variant="danger"
+                label={usageLimitLabel}
+                description={usageLimitRecovery}
                 colored
               />
             );

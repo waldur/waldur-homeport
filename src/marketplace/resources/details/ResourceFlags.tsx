@@ -83,7 +83,9 @@ const FlagBadge = ({
 
   const tooltipLabel = attribution
     ? formatAttribution(attribution)
-    : translate('Manually set');
+    : resource.usage_limit_restriction === field
+      ? translate('Set automatically because reported usage reached the limit')
+      : translate('Manually set');
 
   return (
     <Tip id={tipId} label={tooltipLabel}>
