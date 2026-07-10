@@ -3,30 +3,10 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
-import { useUpdateOfferingIntegration } from '@/marketplace/offerings/update/integration/utils';
 import { useModal } from '@/modal/actions';
 import { renderWithProviders } from '@/test/harness';
 
 import { OpenStackProvisioningConfigSection } from './OpenStackProvisioningConfigSection';
-
-// Mock hook
-vi.mock('@/marketplace/offerings/update/integration/utils', () => ({
-  useUpdateOfferingIntegration: vi.fn(),
-}));
-
-// Mock subcomponents
-vi.mock('@/booking/EditSchedulesButton', () => ({
-  EditSchedulesButton: () => <div data-testid="edit-schedules-btn" />,
-}));
-vi.mock(
-  '@/marketplace/offerings/update/integration/GoogleCalendarActions',
-  () => ({
-    GoogleCalendarActions: () => <div data-testid="google-calendar-actions" />,
-  }),
-);
-vi.mock('@/marketplace/offerings/update/integration/RemoteActions', () => ({
-  RemoteActions: () => <div data-testid="remote-actions" />,
-}));
 
 describe('OpenStackProvisioningConfigSection', () => {
   const mockOffering = {
@@ -43,13 +23,8 @@ describe('OpenStackProvisioningConfigSection', () => {
     },
   } as any;
 
-  const mockUpdate = vi.fn().mockResolvedValue(null);
-
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(useUpdateOfferingIntegration).mockReturnValue({
-      update: mockUpdate,
-    } as any);
   });
 
   it('renders provisioning config, navigates to IP mapping tab and opens edit modal', async () => {
