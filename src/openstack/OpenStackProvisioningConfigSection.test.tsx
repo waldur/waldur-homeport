@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
@@ -7,6 +7,14 @@ import { useModal } from '@/modal/actions';
 import { renderWithProviders } from '@/test/harness';
 
 import { OpenStackProvisioningConfigSection } from './OpenStackProvisioningConfigSection';
+
+// Mock hook
+const mockUpdate = vi.fn().mockResolvedValue(null);
+vi.mock('@/marketplace/offerings/update/integration/utils', () => ({
+  useUpdateOfferingIntegration: () => ({
+    update: mockUpdate,
+  }),
+}));
 
 describe('OpenStackProvisioningConfigSection', () => {
   const mockOffering = {
@@ -75,5 +83,29 @@ describe('OpenStackProvisioningConfigSection', () => {
     // Verify a new row is added (2 initial inputs + 2 new inputs = 4 inputs total)
     const inputs = screen.getAllByRole('textbox');
     expect(inputs).toHaveLength(4);
+
+    // Type values into the new row inputs (the added fields are at index 2 and 3)
+    await user.type(inputs[2], '5.6.7.8');
+    await user.type(inputs[3], '192.168.1.2');
+
+    // Click confirm button to submit
+    const submitBtn = screen.getByRole('button', { name: /Confirm/i });
+    expect(submitBtn).toBeEnabled();
+    await user.click(submitBtn);
+
+    // Verify update callback was invoked with updated mapping values
+    expect(mockUpdate).toHaveBeenCalledWith({
+      secret_options: {
+        ipv4_external_ip_mapping: [
+          { floating_ip: '1.2.3.4', external_ip: '192.168.1.1' },
+          { floating_ip: '5.6.7.8', external_ip: '192.168.1.2' },
+        ],
+      },
+    });
+
+    // Verify dialog was closed
+    await waitFor(() => {
+      expect(useModal().closeDialog).toHaveBeenCalled();
+    });
   });
 });
