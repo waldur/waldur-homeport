@@ -21,6 +21,7 @@ import {
   proposalWorkflowStatesKey,
 } from '../workflow/queries';
 
+import { AwardResponseActions } from './AwardResponseActions';
 import { ComplianceSummary } from './create/ComplianceSummary';
 import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
 import { ProposalDetailsOverviewStep } from './create/ProposalDetailsOverviewStep';
@@ -142,6 +143,9 @@ export const ProposalDetails = ({
         {isCallManagerView && hasWorkflow && (
           <WorkflowStepActions proposal={proposal} refetch={refetch} />
         )}
+        {/* Applicant-facing award accept/decline (self-gates on the
+            award_response step + the proposal creator). */}
+        <AwardResponseActions proposal={proposal} refetch={refetch} />
       </SidebarLayout.Sidebar>
     </SidebarLayout.Container>
   );

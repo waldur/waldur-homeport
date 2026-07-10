@@ -30,10 +30,11 @@ interface WorkflowStepActionsProps {
   refetch: () => void;
 }
 
-// Call-manager controls for driving the per-proposal workflow engine. Scoped to
-// the manager-owned steps (responsible_role call_manager, i.e. administrative
-// check and the terminal allocation decision) plus manual advance — reviewer,
-// panel and applicant steps are actioned from their own surfaces. The backend
+// Call-manager controls for driving the per-proposal workflow engine. The call
+// manager drives progression and may complete/reject any NON-applicant step
+// (the backend's review/score gates remain the guardrail); reviewers/panel/
+// offering managers feed content from their own surfaces, and award_response is
+// completed by the applicant on their own view. The backend
 // (can_act_on_active_workflow_step) is the authority; this only decides what to
 // surface.
 export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
@@ -65,14 +66,12 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
       callOrganizerId: proposal.call_managing_organisation_uuid,
     });
 
-  // A manager may act on manager-owned steps (or steps with no configured
-  // responsible role, where the view's own guards apply). Staff may act on any.
+  // A manager may complete/reject any non-applicant step; award_response is the
+  // applicant's own action (surfaced elsewhere). Staff may act on any.
   const canActOnActiveStep =
     !!activeStep &&
     (user?.is_staff ||
-      (canManage &&
-        (!activeStep.responsible_role ||
-          activeStep.responsible_role === 'call_manager')));
+      (canManage && activeStep.responsible_role !== 'applicant'));
 
   const advanceStep = useManagedMutation<any, any, void>({
     mutationFn: () =>
