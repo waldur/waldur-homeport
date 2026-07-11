@@ -73,6 +73,13 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
     (user?.is_staff ||
       (canManage && activeStep.responsible_role !== 'applicant'));
 
+  // Completion is gated by the step's required checklist (enforced backend-side
+  // in _enforce_step_gates). Reflect that in the button so the manager sees why
+  // it is blocked, instead of clicking and getting a server error.
+  const completeBlockedByChecklist =
+    !!activeStep?.checklist_status?.checklist_required &&
+    (activeStep.checklist_status.unanswered_required_count ?? 0) > 0;
+
   const advanceStep = useManagedMutation<any, any, void>({
     mutationFn: () =>
       proposalProposalsAdvanceWorkflowStep({ path: { uuid: proposal.uuid } }),
@@ -126,6 +133,14 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
         <>
           <ActionButton
             variant="primary"
+            disabled={completeBlockedByChecklist}
+            disabledReason={
+              completeBlockedByChecklist
+                ? translate(
+                    'Answer the required checklist questions before completing this step.',
+                  )
+                : undefined
+            }
             action={() =>
               openDialog(CompleteWorkflowStepDialog, {
                 resolve: { proposal, step: activeStep, refetch },
