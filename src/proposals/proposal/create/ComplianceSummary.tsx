@@ -32,10 +32,17 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({ proposal }) => {
       })
         .then((response) => response.data)
         .catch((err) => {
+          const status = err.response?.status;
           if (
-            err.response?.status === 400 &&
-            err.response?.data?.detail === CHECKLIST_NO_CONFIGURED_MSG
+            (status === 400 &&
+              err.response?.data?.detail === CHECKLIST_NO_CONFIGURED_MSG) ||
+            status === 401 ||
+            status === 403
           ) {
+            // Not configured, or the viewer isn't permitted to see the
+            // compliance answers — hide the section silently rather than
+            // firing (and, via React Query's default retry, repeating) an
+            // error toast on a read-only preview.
             return null;
           }
           showErrorResponse(
