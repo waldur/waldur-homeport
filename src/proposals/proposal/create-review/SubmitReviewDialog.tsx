@@ -6,6 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { SubmitButton, TextGroup } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -19,6 +20,7 @@ interface ReviewFormValues {
   summary_score?: number;
   summary_public_comment?: string;
   summary_private_comment?: string;
+  coi_confirmed?: boolean;
 }
 
 interface SubmitReviewDialogProps {
@@ -36,17 +38,29 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
 }) => {
   const { review, refetch } = resolve;
 
+  // The call requires each reviewer to attest absence of conflict of interest
+  // before their review can be submitted (a configured workflow-step flag).
+  const coiRequired = Boolean(review.coi_confirmation_required);
+
   const initialValues: ReviewFormValues = {
     summary_score: review.summary_score,
     summary_public_comment: review.summary_public_comment,
     summary_private_comment: review.summary_private_comment,
+    coi_confirmed: review.coi_confirmed,
   };
+
+  // coi_confirmed is only writable via the submit action, not the draft PATCH.
+  const draftBody = (values: ReviewFormValues) => ({
+    summary_score: values.summary_score,
+    summary_public_comment: values.summary_public_comment,
+    summary_private_comment: values.summary_private_comment,
+  });
 
   const saveDraft = useManagedMutation<any, any, ReviewFormValues>({
     mutationFn: (values) =>
       proposalReviewsPartialUpdate({
         path: { uuid: review.uuid },
-        body: values,
+        body: draftBody(values),
       }),
     successMessage: translate('Review saved as draft.'),
     errorMessage: translate('Unable to save review.'),
@@ -58,12 +72,15 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
   const submitReview = useManagedMutation<any, any, ReviewFormValues>({
     mutationFn: async (values) => {
       // Persist the latest score/comments, then transition the review to
-      // submitted in a single user action.
+      // submitted (carrying the COI attestation) in a single user action.
       await proposalReviewsPartialUpdate({
         path: { uuid: review.uuid },
-        body: values,
+        body: draftBody(values),
       });
-      return proposalReviewsSubmit({ path: { uuid: review.uuid } });
+      return proposalReviewsSubmit({
+        path: { uuid: review.uuid },
+        body: { coi_confirmed: values.coi_confirmed },
+      });
     },
     successMessage: translate('Proposal review submitted successfully.'),
     errorMessage: translate('Unable to submit review.'),
@@ -94,7 +111,14 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
                 />
                 <SubmitButton
                   submitting={submitReview.isPending}
-                  disabled={pending}
+                  disabled={pending || (coiRequired && !values.coi_confirmed)}
+                  disabledReason={
+                    coiRequired && !values.coi_confirmed
+                      ? translate(
+                          'Confirm absence of conflict of interest to submit.',
+                        )
+                      : undefined
+                  }
                   label={translate('Submit review')}
                 />
               </>
@@ -145,6 +169,20 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
               label={translate('Notes (not visible to user)')}
               placeholder={translate('Add your notes here')}
             />
+            {coiRequired && (
+              <div className="mt-4">
+                <Field name="coi_confirmed" type="checkbox">
+                  {(props) => (
+                    <AwesomeCheckboxField
+                      {...props}
+                      label={translate(
+                        'I confirm I have no conflict of interest with this proposal',
+                      )}
+                    />
+                  )}
+                </Field>
+              </div>
+            )}
           </ModalDialog>
         </form>
       )}

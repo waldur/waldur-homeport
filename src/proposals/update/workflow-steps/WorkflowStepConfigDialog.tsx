@@ -1,9 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import arrayMutators from 'final-form-arrays';
 import { FC, useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
   CallWorkflowStep,
+  proposalProtectedCallsStepChecklistsList,
   PatchedCallWorkflowStepRequest,
   proposalProtectedCallsWorkflowStepsPartialUpdate,
   WorkflowCriterionRequest,
@@ -62,6 +64,7 @@ interface FormValues {
   requires_coi_confirmation: boolean;
   applicant_visible: boolean;
   checklist: string | null;
+  checklist_required: boolean;
   responsible_role: ResponsibleRoleEnum | null;
   transition_mode: TransitionModeEnum | null;
   criteria: CriterionInput[];
@@ -94,6 +97,26 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
     [],
   );
 
+  // Use the call-manager-accessible catalogue (WORKFLOW_STEP-typed only), not
+  // the staff-only checklist admin API which returns 403 for call managers.
+  const { data: checklists } = useQuery({
+    queryKey: ['workflowStepChecklists'],
+    queryFn: () =>
+      proposalProtectedCallsStepChecklistsList().then(
+        (response) => response.data ?? [],
+      ),
+    refetchOnWindowFocus: false,
+  });
+
+  const checklistOptions = useMemo(
+    () =>
+      (checklists ?? []).map((c) => ({
+        value: c.uuid,
+        label: c.name,
+      })),
+    [checklists],
+  );
+
   const initialValues = useMemo<FormValues>(
     () => ({
       duration_in_days: step.duration_in_days ?? null,
@@ -103,6 +126,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
       requires_coi_confirmation: step.requires_coi_confirmation ?? false,
       applicant_visible: step.applicant_visible ?? false,
       checklist: step.checklist ?? '',
+      checklist_required: step.checklist_required ?? true,
       // Coerce SDK's BlankEnum ('') to null so the SelectField shows the placeholder.
       responsible_role: (step.responsible_role ||
         null) as ResponsibleRoleEnum | null,
@@ -155,6 +179,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
         requires_coi_confirmation: values.requires_coi_confirmation,
         applicant_visible: values.applicant_visible,
         checklist: values.checklist || null,
+        checklist_required: values.checklist_required,
         responsible_role: values.responsible_role || null,
         ...(criteria !== undefined ? { criteria } : {}),
         ...(showAllocationExtras
@@ -179,7 +204,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
       onSubmit={onSubmit}
       initialValues={initialValues}
       mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, pristine }) => (
+      render={({ handleSubmit, submitting, pristine, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -314,6 +339,28 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                   )}
                 />
               </>
+            )}
+
+            <SelectGroup
+              name="checklist"
+              label={translate('Checklist')}
+              description={translate(
+                'Attach a checklist (evaluation form) for this step.',
+              )}
+              options={checklistOptions}
+              simpleValue={true}
+              isClearable={true}
+              placeholder={translate('Select...')}
+            />
+
+            {values.checklist && (
+              <BooleanGroup
+                name="checklist_required"
+                label={translate('Checklist required')}
+                help_text={translate(
+                  'Block completing this step until the checklist’s required questions are answered.',
+                )}
+              />
             )}
 
             <BooleanGroup
