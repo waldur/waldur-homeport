@@ -39,14 +39,35 @@ interface BaseButtonProps {
   [key: `data-${string}`]: string | undefined;
 }
 
-const wrapTooltip = (tooltip: string | undefined, children: ReactNode) =>
-  tooltip ? (
-    <Tip label={tooltip} id="button-tooltip">
+const wrapTooltip = (
+  tooltip: string | undefined,
+  children: ReactNode,
+  isDisabled?: boolean,
+  fullWidth?: boolean,
+) => {
+  if (!tooltip) {
+    return children;
+  }
+  // A disabled <button> has `pointer-events: none`, so the tooltip's hover
+  // trigger never fires and the explanatory tooltip stays hidden. Wrap the
+  // disabled button in an inline-block span (which does receive pointer
+  // events) so the OverlayTrigger has a live element to hover — this is what
+  // makes "disabled buttons must explain why" actually work in the UI. Mirror
+  // `w-100` onto the wrapper so full-width buttons keep their width (an
+  // inline-block wrapper would otherwise shrink-wrap them).
+  const trigger = isDisabled ? (
+    <span className={classNames('d-inline-block', { 'w-100': fullWidth })}>
       {children}
-    </Tip>
+    </span>
   ) : (
     children
   );
+  return (
+    <Tip label={tooltip} id="button-tooltip">
+      {trigger}
+    </Tip>
+  );
+};
 
 export const BaseButton: FC<BaseButtonProps> = ({
   label,
@@ -107,5 +128,7 @@ export const BaseButton: FC<BaseButtonProps> = ({
       {label}
       {!pending && iconRight && iconElement}
     </Button>,
+    isDisabled,
+    typeof className === 'string' && /\bw-100\b/.test(className),
   );
 };
