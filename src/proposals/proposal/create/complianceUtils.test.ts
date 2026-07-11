@@ -1,6 +1,32 @@
 import { describe, expect, it } from 'vitest';
 
-import { extractComplianceAnswers } from './complianceUtils';
+import {
+  extractComplianceAnswers,
+  isComplianceAnswerFilled,
+} from './complianceUtils';
+
+describe('isComplianceAnswerFilled', () => {
+  it('treats a boolean "No" (false) and 0 as answered', () => {
+    // Regression: a naive Boolean(value) marked "No"/0 as unanswered, which
+    // left the compliance step incomplete and Submit permanently disabled.
+    expect(isComplianceAnswerFilled(false)).toBe(true);
+    expect(isComplianceAnswerFilled(true)).toBe(true);
+    expect(isComplianceAnswerFilled(0)).toBe(true);
+    expect(isComplianceAnswerFilled('some text')).toBe(true);
+  });
+
+  it('treats null / undefined / empty string as unanswered', () => {
+    expect(isComplianceAnswerFilled(null)).toBe(false);
+    expect(isComplianceAnswerFilled(undefined)).toBe(false);
+    expect(isComplianceAnswerFilled('')).toBe(false);
+  });
+
+  it('treats empty arrays/objects as unanswered but non-empty as answered', () => {
+    expect(isComplianceAnswerFilled([])).toBe(false);
+    expect(isComplianceAnswerFilled({})).toBe(false);
+    expect(isComplianceAnswerFilled(['uuid'])).toBe(true);
+  });
+});
 
 describe('extractComplianceAnswers', () => {
   describe('filtering compliance fields', () => {

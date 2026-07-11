@@ -6,7 +6,6 @@ import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 import { AccordionCard } from '@/core/AccordionCard';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { isEmpty } from '@/core/utils';
 import { StringField, TextField, NumberField, SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { DateField } from '@/form/DateField';
@@ -20,6 +19,7 @@ import {
 import { useNotify } from '@/store/notify';
 import { VStepperFormStepProps } from '@/wizard';
 
+import { isComplianceAnswerFilled } from './complianceUtils';
 import { QuestionDependencyHint } from './QuestionDependencyHint';
 import { StepHeaderContent } from './StepHeaderContent';
 
@@ -102,10 +102,17 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
       })
         .then((response) => response.data)
         .catch((err) => {
+          const status = err.response?.status;
           if (
-            err.response?.status === 400 &&
-            err.response?.data?.detail === CHECKLIST_NO_CONFIGURED_MSG
+            (status === 400 &&
+              err.response?.data?.detail === CHECKLIST_NO_CONFIGURED_MSG) ||
+            status === 401 ||
+            status === 403
           ) {
+            // Not configured, or the viewer isn't permitted to see the
+            // compliance answers — hide the section silently rather than
+            // firing (and, via React Query's default retry, repeating) an
+            // error toast.
             return null;
           }
           showErrorResponse(
@@ -159,7 +166,7 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
     const answered = visibleQuestions.filter((question) => {
       const fieldName = `compliance_${question.uuid}`;
       const value = values[fieldName];
-      return typeof value === 'object' ? !isEmpty(value) : Boolean(value);
+      return isComplianceAnswerFilled(value);
     }).length;
     return { answeredCount: answered, totalCount: total };
   }, [visibleQuestions, values]);

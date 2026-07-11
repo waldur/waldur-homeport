@@ -1,3 +1,19 @@
+import { isEmpty } from '@/core/utils';
+
+/**
+ * True when a compliance answer counts as "answered".
+ *
+ * A boolean `false` ("No") and `0` are real answers — a naive `Boolean(value)`
+ * check treated them as unanswered, which blocked submission for any proposal
+ * needing a "No" answer. Only null/undefined/'' and empty objects/arrays are
+ * unanswered. (typeof null === 'object', so null falls into the object branch
+ * and isEmpty(null) === true → unanswered.)
+ */
+export const isComplianceAnswerFilled = (value: unknown): boolean =>
+  typeof value === 'object'
+    ? !isEmpty(value)
+    : value !== undefined && value !== null && value !== '';
+
 /**
  * Extract compliance answers from form data for API submission
  */

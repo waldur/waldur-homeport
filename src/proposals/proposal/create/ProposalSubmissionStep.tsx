@@ -22,7 +22,10 @@ import { evaluateCondition } from '@/marketplace-checklist/questionDependencies'
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 
-import { extractComplianceAnswers } from './complianceUtils';
+import {
+  extractComplianceAnswers,
+  isComplianceAnswerFilled,
+} from './complianceUtils';
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
 
@@ -67,8 +70,7 @@ const isComplianceComplete = (
   // Check if all visible required questions have answers
   return visibleRequiredQuestions.every((question: any) => {
     const fieldName = `compliance_${question.uuid}`;
-    const value = formValues[fieldName];
-    return typeof value === 'object' ? !isEmpty(value) : Boolean(value);
+    return isComplianceAnswerFilled(formValues[fieldName]);
   });
 };
 
@@ -165,7 +167,7 @@ export const ProposalSubmissionStep: FC<{
     if (checklistData?.questions) {
       checklistData.questions.forEach((question) => {
         const fieldName = `compliance_${question.uuid}`;
-        let answerData = question.existing_answer?.answer_data || null;
+        let answerData = question.existing_answer?.answer_data ?? null;
 
         // Transform single_select arrays to single values for UI display
         if (
