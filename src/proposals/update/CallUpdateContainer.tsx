@@ -65,11 +65,6 @@ const PageHero = ({ call, refetch }) => (
 );
 
 const Body = ({ call, refetch, loading }) => {
-  // Once the call is activated (or post-activation archived state), every
-  // configuration tab except Team becomes read-only. Rounds share a single
-  // call configuration, so further edits would silently drift across rounds.
-  const isReadOnly = call.state === 'active' || call.state === 'archived';
-
   const tabs = useMemo<PageBarTab[]>(
     () =>
       [
@@ -141,8 +136,18 @@ const Body = ({ call, refetch, loading }) => {
   useBreadcrumbs(breadcrumbItems);
 
   const {
-    tabSpec: { component: Component },
+    tabSpec: { component: Component, key: activeTabKey },
   } = usePageTabsTransmitter(tabs);
+
+  // Once a call is activated, most configuration tabs freeze (edits after
+  // activation would affect already-submitted proposals). Rounds are the
+  // exception: the backend allows creating/editing rounds on an active call
+  // (only an archived call locks them — see proposal/views.py round_detail
+  // validators), so the Rounds tab must stay editable while active to match.
+  const isReadOnly =
+    activeTabKey === 'rounds'
+      ? call.state === 'archived'
+      : call.state === 'active' || call.state === 'archived';
 
   return (
     <Component
