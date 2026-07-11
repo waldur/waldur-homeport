@@ -94,7 +94,6 @@ export const MyReviewsPage: FC = () => {
                   <Link
                     state="proposal-review"
                     params={{
-                      uuid: row.call_uuid,
                       review_uuid: row.uuid,
                     }}
                     label={(row as any).proposal_slug}

@@ -157,15 +157,24 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    // The editable "Submit review" page is review-scoped and role-neutral: both
+    // reviewers (from "My reviews") and call managers (from the review list)
+    // open the same review, and the page reads only :review_uuid. It used to
+    // live at /call-management/:uuid/review/... — a customer-workspace URL that
+    // wrongly implied call-manager scope and carried a dead :uuid segment
+    // (a call uuid via some links, a customer uuid via others), whose inherited
+    // fetchCustomer 404'd on the call-uuid variant. Now it is a standalone,
+    // layout-parented, review-scoped route.
     name: 'proposal-review',
-    url: 'review/:review_uuid/',
+    url: '/proposal-review/:review_uuid/',
     component: lazyComponent(() =>
       import('./proposal/create-review/ProposalReviewCreatePage').then(
         (module) => ({ default: module.ProposalReviewCreatePage }),
       ),
     ),
-    parent: 'call-management',
+    parent: 'layout',
     data: {
+      auth: true,
       skipHero: true,
       hideHeaderMenu: true,
     },

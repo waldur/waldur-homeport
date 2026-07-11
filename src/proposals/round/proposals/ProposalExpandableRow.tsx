@@ -110,7 +110,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
       render: ({ row: review }) => (
         <Link
           state="proposal-review"
-          params={{ uuid: review.call_uuid, review_uuid: review.uuid }}
+          params={{ review_uuid: review.uuid }}
           label={review.name} // Generated in frontend
         />
       ),
