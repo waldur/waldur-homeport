@@ -10,9 +10,12 @@ import { Panel } from '@/core/Panel';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { isReviewInFinalState } from '@/proposals/utils';
 import { ActionButton } from '@/table/ActionButton';
 import { FormSteps } from '@/wizard';
+import { useUser } from '@/workspace/hooks';
 
 import { ProposalUsersListSummary } from '../team/ProposalUsersListSummary';
 import { Call, Proposal, ProposalReview } from '../types';
@@ -32,6 +35,8 @@ import {
   useCanCreateReview,
 } from './create/utils';
 import { SubmitReviewDialog } from './create-review/SubmitReviewDialog';
+import { StepChecklistSection } from './StepChecklistSection';
+import { TechnicalAssessmentSection } from './TechnicalAssessmentSection';
 import { WorkflowStepActions } from './WorkflowStepActions';
 
 interface ProposalDetails {
@@ -66,6 +71,7 @@ export const ProposalDetails = ({
   }, [proposalHasCompliance]);
 
   const { openDialog } = useModal();
+  const user = useUser();
   const canCreateReview = useCanCreateReview(proposal);
 
   const isCallManagerView = state.name?.startsWith('call-management');
@@ -80,6 +86,29 @@ export const ProposalDetails = ({
   const hasWorkflow = (workflowStates ?? []).some(
     (s) => s.status !== 'skipped',
   );
+
+  // The active step's attached checklist is shown on the detail. The call
+  // manager (and staff) may fill it; the backend is the final authority on who
+  // may answer, so non-editors get a read-only view.
+  const activeStep = useMemo(
+    () => (workflowStates ?? []).find((s) => s.status === 'active'),
+    [workflowStates],
+  );
+  const canEditStepChecklist =
+    !!user?.is_staff ||
+    hasPermission(user, {
+      permission: PermissionEnum.APPROVE_AND_REJECT_PROPOSALS,
+      scopeId: proposal.call_uuid,
+      callOrganizerId: proposal.call_managing_organisation_uuid,
+    });
+  // The technical_assessment step is owned by offering managers (technical
+  // reviewers), whom we can't reliably identify client-side. Let any
+  // non-applicant viewer attempt to answer it while active — the backend
+  // (user_can_answer_step_checklist) is the final authority and rejects others.
+  const isApplicant = user?.uuid === proposal.created_by_uuid;
+  const canEditActiveStepChecklist =
+    canEditStepChecklist ||
+    (activeStep?.step === 'technical_assessment' && !isApplicant);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -98,6 +127,18 @@ export const ProposalDetails = ({
           </div>
         )}
         <ResourceRequestsSummary proposal={proposal} reviews={reviews} />
+        {activeStep?.checklist_status?.has_checklist && !isApplicant && (
+          // Applicants don't fill evaluation-step checklists on the detail page
+          // (they can't view them either — the backend 403s), so rendering the
+          // section for them only produced an empty accordion + error noise.
+          <StepChecklistSection
+            proposal={proposal}
+            step={activeStep}
+            canEdit={canEditActiveStepChecklist}
+            refetch={refetch}
+          />
+        )}
+        <TechnicalAssessmentSection proposal={proposal} />
         <AccordionCard
           id="step-team"
           title={translate('Project team')}
