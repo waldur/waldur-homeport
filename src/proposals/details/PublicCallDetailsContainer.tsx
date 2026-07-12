@@ -102,12 +102,23 @@ export const PublicCallDetailsContainer: FC = () => {
 
   const filteredTabs = useMemo(
     () =>
-      tabs.filter(
-        (tab) =>
-          !isFeatureVisible(MarketplaceFeatures.call_only) ||
-          tab.key !== 'rounds',
-      ),
-    [tabs],
+      tabs.filter((tab) => {
+        // Rounds are hidden for call-only (external) calls.
+        if (
+          tab.key === 'rounds' &&
+          isFeatureVisible(MarketplaceFeatures.call_only)
+        ) {
+          return false;
+        }
+        // The Documents tab is applicant-facing and read-only here, so only
+        // show it when the call actually has documents (managers attach them
+        // from the call edit view).
+        if (tab.key === 'documents' && !call?.documents?.length) {
+          return false;
+        }
+        return true;
+      }),
+    [call],
   );
 
   const { tabSpec } = usePageTabsTransmitter(filteredTabs);
