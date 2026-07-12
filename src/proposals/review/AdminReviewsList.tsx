@@ -50,7 +50,11 @@ export const AdminReviewsList: FC = () => {
         {
           title: translate('Proposal'),
           render: ({ row }) => (
-            <span className="text-gray-700 fw-bold">{row.proposal_name}</span>
+            <Link
+              state="proposal-review"
+              params={{ review_uuid: row.uuid }}
+              label={row.proposal_name}
+            />
           ),
           keys: ['proposal_name'],
           id: 'proposal',
