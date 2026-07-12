@@ -1,5 +1,6 @@
 import { ComponentType, FunctionComponent, ReactNode } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
+import { Form } from 'react-final-form';
 import {
   BasePublicPlan,
   Customer,
@@ -24,6 +25,9 @@ import {
 import { WarningTooltip } from './WarningTooltip';
 
 import './TabbedPlanComponents.scss';
+
+// A stable no-op submit for the inert read-only Form (see TabbedPlanComponents).
+const NOOP_SUBMIT = () => undefined;
 
 const COST_TAB_LABEL: Partial<Record<LimitPeriodEnum, string>> = {
   month: translate('Monthly cost'),
@@ -117,7 +121,10 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
                   ),
               )
             : null}
-          <WarningTooltip />
+          {/* WarningTooltip reads submit errors via useFormState, so it must
+              not render outside a <Form> — e.g. the read-only proposal
+              resource-request view passes viewMode with no surrounding form. */}
+          {!props.viewMode && <WarningTooltip />}
         </Nav>
 
         {/* CONTENT */}
@@ -179,7 +186,23 @@ interface TabbedPlanComponents {
   }>;
 }
 
-export const TabbedPlanComponents = (props: TabbedPlanComponents) => {
+const PlanComponentsBody = (props: TabbedPlanComponents) => {
   const prices = useOrderPrices(props);
   return <PureDetailsTable {...props} {...prices} />;
 };
+
+// The plan-components subtree is order-form-oriented: several descendants
+// (useOrderPrices, OneTimeTab's useOrderFormData, WarningTooltip) read
+// react-final-form state via hooks that throw outside a <Form>. In edit mode an
+// order form is always in context. In read-only viewMode (proposal resource
+// requests, public offering pricing) there is none, so wrap the subtree in an
+// inert Form purely to satisfy those hooks — the displayed values come from
+// props, and nothing is editable while viewMode is set.
+export const TabbedPlanComponents = (props: TabbedPlanComponents) =>
+  props.viewMode ? (
+    <Form onSubmit={NOOP_SUBMIT}>
+      {() => <PlanComponentsBody {...props} />}
+    </Form>
+  ) : (
+    <PlanComponentsBody {...props} />
+  );

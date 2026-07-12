@@ -21,6 +21,7 @@ export const ProposalUsersListSummary: FC<{ scope; reviews? }> = (props) => {
       scope={props.scope}
       hideRole={false}
       readOnly
+      hasActionBar={false}
       tableFooter={
         <FieldReviewComments
           reviews={props.reviews}

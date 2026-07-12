@@ -38,6 +38,7 @@ export const ResourceRequestsSummary = ({
       <Table<ProposalResource>
         {...tableProps}
         title={null}
+        hasActionBar={false}
         columns={[
           {
             title: translate('Offering'),

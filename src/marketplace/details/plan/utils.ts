@@ -374,16 +374,26 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
   };
 };
 
-export const useOrderPrices = (props: {
+interface OrderPricesProps {
   offering: Pick<PublicOfferingDetails, 'type' | 'components' | 'plans'>;
   plan?: any;
   limits?: any;
   order?: any;
   viewMode?: boolean;
   type?: string;
-}): PricesData => {
-  const formData = useOrderFormData();
+}
 
+// Prices track the form values (plan/limits/dates). Requires a surrounding
+// <Form> — useOrderFormData reads it via useFormState. In read-only viewMode
+// the caller supplies an inert Form (see TabbedPlanComponents), so formData is
+// empty and prices fall back to the passed plan/limits.
+export const useOrderPrices = (props: OrderPricesProps): PricesData =>
+  usePricesFromFormData(props, useOrderFormData());
+
+const usePricesFromFormData = (
+  props: OrderPricesProps,
+  formData: any,
+): PricesData => {
   const plan: Plan = useMemo(() => {
     if (props.viewMode && props.order) {
       if (props.order.plan_uuid) {
