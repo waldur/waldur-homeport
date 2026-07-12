@@ -6,6 +6,7 @@ import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
+import { RoleEnum } from '@/permissions/enums';
 import { formatRoleType } from '@/permissions/utils';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -130,6 +131,20 @@ export const UserAffiliationsList: FunctionComponent<
                 resource_uuid: row.resource_uuid,
                 tab: 'resource-projects',
               }}
+              label={row.scope_name}
+            />
+          ) : (
+            <>{row.scope_name}</>
+          );
+        }
+        if (row.scope_type === 'call') {
+          // Only the call manager can open the call management dashboard
+          // (mirrors checkIsCallManager / the CallTabs "Manage" gate), so
+          // link the scope name there only for that role.
+          return row.role_name === RoleEnum.CALL_MANAGER ? (
+            <Link
+              state="protected-call.manage"
+              params={{ call_uuid: row.scope_uuid }}
               label={row.scope_name}
             />
           ) : (
