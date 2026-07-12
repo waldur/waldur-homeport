@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { proposalPublicCallsRetrieve } from 'waldur-js-client';
+import {
+  proposalPublicCallsRetrieve,
+  type ProposalReview,
+} from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
@@ -13,13 +16,19 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { Proposal } from '@/proposals/types';
 
 import { EndingField } from '../EndingField';
+import { ReviewDetails } from '../review/ReviewExpandableRow';
 
 interface ProposalDetailsDialogProps {
   proposal: Proposal;
+  // When opened in a review context (the dedicated review page), the reviewer's
+  // review(s) are shown as "Review from X" tabs — the review page itself does
+  // not surface the score/summary comments inline.
+  reviews?: ProposalReview[];
 }
 
 export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
   proposal,
+  reviews,
 }) => {
   const {
     data: call,
@@ -82,6 +91,20 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
               />
             </FormTable>
           </Tab>
+          {(reviews ?? []).map((review) => (
+            <Tab
+              key={review.uuid}
+              eventKey={`review-${review.uuid}`}
+              title={translate('Review from {name}', {
+                name:
+                  review.reviewer_full_name || review.anonymous_reviewer_name,
+              })}
+            >
+              <div className="pt-4">
+                <ReviewDetails review={review} />
+              </div>
+            </Tab>
+          ))}
         </Tabs>
       )}
     </ModalDialog>
