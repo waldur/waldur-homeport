@@ -53,6 +53,9 @@ export interface CallOfferingFormData {
 
 export interface ProposalResource {
   attributes: AttributesType;
+  /** Requested component limits (e.g. { cpu_hours: 80000, storage: 500 });
+   * a top-level field on the requested resource, not part of attributes. */
+  limits?: Record<string, number>;
   created_by: string;
   created_by_name: string;
   description: string;
