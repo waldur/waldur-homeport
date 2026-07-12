@@ -23,6 +23,9 @@ interface TeamTableComponentProps<T> extends TableProps<T> {
   context?: 'project' | 'organization' | 'resource_project';
   userFieldPrefix?: string;
   hideRole?: boolean;
+  /** Hide the "Role expiration" column (e.g. reviewers, for whom the backend
+   * omits expiration_time). */
+  hideExpiration?: boolean;
   /**
    * Extra columns appended to the default Member/Email/Username/Role/Expiration
    * set. Useful for surfacing context-specific data per scope.
@@ -50,6 +53,7 @@ export const TeamTableComponent = <
   context,
   userFieldPrefix: prefix = '',
   hideRole,
+  hideExpiration,
   extraColumns,
   roleSuffix,
   ...props
@@ -127,7 +131,7 @@ export const TeamTableComponent = <
           id: 'role_name',
           keys: ['role_name'],
         },
-        {
+        !hideExpiration && {
           title: translate('Role expiration'),
           render: ({ row }) => renderRoleExpirationDate(row),
           className: 'w-45px',
@@ -137,7 +141,7 @@ export const TeamTableComponent = <
         },
         ...(extraColumns ?? []),
       ].filter(Boolean) as Column<T>[],
-    [context, extraColumns, roleSuffix],
+    [context, extraColumns, roleSuffix, hideRole, hideExpiration],
   );
 
   return (
