@@ -14,7 +14,6 @@ import {
 import FormTable from '@/form/FormTable';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
@@ -105,27 +104,23 @@ export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
                 value ? translate('{n} days', { n: value }) : 'N/A'
               }
             />
-            {isExperimentalUiComponentsVisible() && (
-              <AsyncSelectEditField
-                name="compliance_checklist"
-                label={translate('Compliance checklist')}
-                description={translate(
-                  'Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.',
-                )}
-                loadOptions={loadComplianceChecklists}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.name}
-                isClearable={true}
-                placeholder={translate(
-                  'Select compliance checklist (optional)',
-                )}
-                disabled={props.isReadOnly}
-                renderValue={() =>
-                  props.call.compliance_checklist_name ||
-                  translate('Not configured')
-                }
-              />
-            )}
+            <AsyncSelectEditField
+              name="compliance_checklist"
+              label={translate('Compliance checklist')}
+              description={translate(
+                'Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.',
+              )}
+              loadOptions={loadComplianceChecklists}
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              isClearable={true}
+              placeholder={translate('Select compliance checklist (optional)')}
+              disabled={props.isReadOnly}
+              renderValue={() =>
+                props.call.compliance_checklist_name ||
+                translate('Not configured')
+              }
+            />
             <BooleanEditField
               name="reviewer_identity_visible_to_submitters"
               label={translate('Reviewer identity visible to applicants')}

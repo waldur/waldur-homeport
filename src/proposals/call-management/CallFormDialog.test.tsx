@@ -10,16 +10,11 @@ import {
 } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
-import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { renderWithProviders } from '@/test/harness';
 import { createTestRouter } from '@/test/router';
 import { useCustomer } from '@/workspace/hooks';
 
 import { CallFormDialog } from './CallFormDialog';
-
-vi.mock('@/marketplace/utils', () => ({
-  isExperimentalUiComponentsVisible: vi.fn(() => false),
-}));
 
 vi.mock('@/features/connect', () => ({
   isFeatureVisible: vi.fn(() => false),
@@ -146,8 +141,7 @@ describe('CallFormDialog', () => {
     expect(await screen.findByText('Name already exists')).toBeInTheDocument();
   });
 
-  it('shows compliance checklist when experimental UI is enabled', async () => {
-    vi.mocked(isExperimentalUiComponentsVisible).mockReturnValue(true);
+  it('shows the compliance checklist selector', async () => {
     vi.mocked(
       proposalProtectedCallsAvailableComplianceChecklistsList,
     ).mockResolvedValue({

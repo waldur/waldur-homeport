@@ -1,6 +1,5 @@
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
-import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { Call } from '@/proposals/types';
 import { VStepperFormStep } from '@/wizard';
 
@@ -61,8 +60,8 @@ export const createProposalSteps = (
     },
   ];
 
-  // Conditionally add compliance step if call has compliance checklist AND experimental UI is enabled
-  if (call?.compliance_checklist && isExperimentalUiComponentsVisible()) {
+  // Add the compliance step when the call has a compliance checklist.
+  if (call?.compliance_checklist) {
     const complianceStep: VStepperFormStep = {
       label: translate('Compliance checklist'),
       id: 'step-compliance',
