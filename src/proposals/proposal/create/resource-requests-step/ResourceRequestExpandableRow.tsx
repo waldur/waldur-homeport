@@ -37,7 +37,12 @@ export const ResourceRequestExpandableRow = ({
 }: {
   row: ProposalResource;
 }) => {
-  const { limits, ...optionsValues } = row.attributes;
+  // Requested limits live on the resource itself (row.limits), not inside
+  // attributes — attributes only carries the offering option answers. Reading
+  // limits from attributes left every request showing "Quantity: 0x" even
+  // though the request had limits (e.g. cpu_hours / storage caps).
+  const limits = row.limits;
+  const optionsValues = row.attributes;
 
   return (
     <ExpandableContainer>
