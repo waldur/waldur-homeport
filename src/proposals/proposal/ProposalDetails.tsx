@@ -11,7 +11,7 @@ import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasPermission, userHasRole } from '@/permissions/hasPermission';
 import { isReviewInFinalState } from '@/proposals/utils';
 import { ActionButton } from '@/table/ActionButton';
 import { FormSteps } from '@/wizard';
@@ -106,6 +106,16 @@ export const ProposalDetails = ({
   // non-applicant viewer attempt to answer it while active — the backend
   // (user_can_answer_step_checklist) is the final authority and rejects others.
   const isApplicant = user?.uuid === proposal.created_by_uuid;
+  // Mirror the backend _is_reviewer_only_view: a reviewer/panel member who is
+  // not staff/support, the applicant, or a call manager. Used to conceal
+  // team-admin metadata (role expiration) from reviewers.
+  const isReviewerOnly =
+    !user?.is_staff &&
+    !user?.is_support &&
+    !isApplicant &&
+    !userHasRole(user, 'CALL.MANAGER', proposal.call_uuid) &&
+    (userHasRole(user, 'CALL.REVIEWER', proposal.call_uuid) ||
+      userHasRole(user, 'CALL.PANEL_MEMBER', proposal.call_uuid));
   const canEditActiveStepChecklist =
     canEditStepChecklist ||
     (activeStep?.step === 'technical_assessment' && !isApplicant);
@@ -145,7 +155,11 @@ export const ProposalDetails = ({
           subtitle={translate('Team members and their roles in the project.')}
           defaultOpen={!proposalHasCompliance}
         >
-          <ProposalUsersListSummary scope={proposal} reviews={reviews} />
+          <ProposalUsersListSummary
+            scope={proposal}
+            reviews={reviews}
+            hideExpiration={isReviewerOnly}
+          />
         </AccordionCard>
       </SidebarLayout.Body>
       <SidebarLayout.Sidebar transparent>

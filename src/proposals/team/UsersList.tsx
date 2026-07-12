@@ -11,6 +11,7 @@ interface UsersListProps {
   table;
   scope;
   hideRole?: boolean;
+  hideExpiration?: boolean;
   readOnly?: boolean;
   tableFooter?;
   cardBordered?: boolean;
@@ -23,6 +24,7 @@ export const UsersList: FC<UsersListProps> = ({
   table,
   scope,
   hideRole,
+  hideExpiration,
   readOnly,
   tableFooter,
   cardBordered,
@@ -34,6 +36,7 @@ export const UsersList: FC<UsersListProps> = ({
     <TeamTableComponent<GenericPermission>
       {...table}
       hideRole={hideRole}
+      hideExpiration={hideExpiration}
       userFieldPrefix="user_"
       title={translate('Users')}
       verboseName={translate('users')}
