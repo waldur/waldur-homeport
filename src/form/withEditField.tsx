@@ -148,7 +148,7 @@ export function withEditField<P extends object>(
         fieldComponent={WrappedComponent as any}
         fieldProps={fieldProps}
         hideLabel={hideLabel}
-        tooltip={tooltip}
+        tooltip={tooltip ?? (disabled ? ctx?.readOnlyReason : undefined)}
         iconNode={iconNode}
         disabled={disabled}
       />

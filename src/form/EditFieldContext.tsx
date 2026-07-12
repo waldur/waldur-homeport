@@ -5,6 +5,9 @@ interface EditFieldContextValue {
   scope: Record<string, any>;
   /** The callback to persist field changes. */
   callback(formData: any): Promise<any>;
+  /** Tooltip shown on a disabled edit control to explain why fields in this
+   * scope are read-only (e.g. "This call is active and cannot be edited."). */
+  readOnlyReason?: string;
 }
 
 const EditFieldContext = createContext<EditFieldContextValue | null>(null);
@@ -23,8 +26,8 @@ const EditFieldContext = createContext<EditFieldContextValue | null>(null);
  */
 export const EditFieldProvider: FC<
   PropsWithChildren<EditFieldContextValue>
-> = ({ scope, callback, children }) => (
-  <EditFieldContext.Provider value={{ scope, callback }}>
+> = ({ scope, callback, readOnlyReason, children }) => (
+  <EditFieldContext.Provider value={{ scope, callback, readOnlyReason }}>
     {children}
   </EditFieldContext.Provider>
 );

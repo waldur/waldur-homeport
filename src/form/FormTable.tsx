@@ -35,11 +35,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
   const groupValues = props.group && Array.isArray(value);
   const titleRowSpan = groupValues ? (value as any[]).length : 1;
   return (groupValues ? (value as any[]) : [value]).map((row, i) => (
-    <tr
-      key={i}
-      className={classNames(props.disabled && 'opacity-50', props.className)}
-      data-testid={props['data-testid']}
-    >
+    <tr key={i} className={props.className} data-testid={props['data-testid']}>
       {i === 0 && props.description ? (
         <th className={row ? 'col-md-4' : 'col-md-auto'} rowSpan={titleRowSpan}>
           <label

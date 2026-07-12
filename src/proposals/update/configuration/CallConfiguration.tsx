@@ -18,6 +18,7 @@ import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import { ApplicantVisibilitySection } from '@/proposals/update/applicant-visibility/ApplicantVisibilitySection';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 
 import { WorkflowStepsSection } from '../workflow-steps/WorkflowStepsSection';
 
@@ -94,7 +95,13 @@ export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
         title={translate('General configuration')}
         className="card-bordered mb-5"
       >
-        <EditFieldProvider scope={props.call} callback={handleSubmit}>
+        <EditFieldProvider
+          scope={props.call}
+          callback={handleSubmit}
+          readOnlyReason={
+            props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
+          }
+        >
           <FormTable>
             <NumberEditField
               name="fixed_duration_in_days"

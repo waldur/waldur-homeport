@@ -15,6 +15,7 @@ import { SlugTemplateHelpText } from '@/form/SlugTemplateHelpText';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 import { renderFieldOrDash } from '@/table/utils';
 
 interface CallGeneralSectionProps {
@@ -73,7 +74,13 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
       refetch={props.refetch}
       loading={props.loading}
     >
-      <EditFieldProvider scope={props.call} callback={updateCall}>
+      <EditFieldProvider
+        scope={props.call}
+        callback={updateCall}
+        readOnlyReason={
+          props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
+        }
+      >
         <FormTable>
           <StringEditField
             name="name"
