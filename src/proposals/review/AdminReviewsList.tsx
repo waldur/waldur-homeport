@@ -17,6 +17,7 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { ReviewExpandableRow } from './ReviewExpandableRow';
 import { ReviewsRowActions } from './ReviewsRowActons';
 import { ReviewStateRenderer } from './ReviewStateRenderer';
 
@@ -121,6 +122,7 @@ export const AdminReviewsList: FC = () => {
       hasQuery={true}
       filters={<ProposalReviewsFilter />}
       rowActions={ReviewsRowActions}
+      expandableRow={ReviewExpandableRow}
       showPageSizeSelector={true}
       hasOptionalColumns
       formId={ProposalReviewsFilterFormId}

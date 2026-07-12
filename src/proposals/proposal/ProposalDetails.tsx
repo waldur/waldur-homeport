@@ -129,7 +129,10 @@ export const ProposalDetails = ({
   return (
     <SidebarLayout.Container>
       <SidebarLayout.Body className="mb-10">
-        <ProposalDetailsOverviewStep id="step-general" params={{ proposal }} />
+        <ProposalDetailsOverviewStep
+          id="step-general"
+          params={{ proposal, canViewReviews: isCallManagerView }}
+        />
         <ProjectDetailsSummary proposal={proposal} reviews={reviews} />
         {proposalHasCompliance && (
           <div id="step-compliance">

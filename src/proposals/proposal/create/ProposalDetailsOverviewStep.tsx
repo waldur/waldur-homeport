@@ -1,4 +1,4 @@
-import { EyeIcon } from '@phosphor-icons/react';
+import { ClipboardTextIcon, EyeIcon } from '@phosphor-icons/react';
 import { Col, Row } from 'react-bootstrap';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -17,30 +17,59 @@ const ProposalDetailsDialog = lazyComponent(() =>
   })),
 );
 
-const DetailsOverviewButton = ({ proposal }) => {
+const ProposalReviewsDialog = lazyComponent(() =>
+  import('../ProposalReviewsDialog').then((module) => ({
+    default: module.ProposalReviewsDialog,
+  })),
+);
+
+const DetailsOverviewButton = ({ proposal, reviews }) => {
   const { openDialog } = useModal();
   return (
     <ActionButton
       action={() =>
         openDialog(ProposalDetailsDialog, {
           proposal,
+          reviews,
         })
       }
       title={translate('More details')}
       iconNode={<EyeIcon weight="bold" />}
       variant="tertiary"
-      className="ms-auto"
+    />
+  );
+};
+
+const ReviewsButton = ({ proposal }) => {
+  const { openDialog } = useModal();
+  return (
+    <ActionButton
+      action={() => openDialog(ProposalReviewsDialog, { proposal })}
+      title={translate('Reviews')}
+      iconNode={<ClipboardTextIcon weight="bold" />}
+      variant="tertiary"
     />
   );
 };
 
 export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params.proposal;
+  // Only surfaced where reviews are relevant (call-manager proposal view); the
+  // backend also scopes review visibility.
+  const canViewReviews: boolean = props.params.canViewReviews;
   return (
     <VStepperFormStepCard
       id={props.id}
       title={translate('Details overview')}
-      actions={<DetailsOverviewButton proposal={proposal} />}
+      actions={
+        <div className="d-flex gap-2">
+          {canViewReviews && <ReviewsButton proposal={proposal} />}
+          <DetailsOverviewButton
+            proposal={proposal}
+            reviews={props.params.reviews}
+          />
+        </div>
+      }
     >
       <Row className="fs-6">
         <Col sm={6}>

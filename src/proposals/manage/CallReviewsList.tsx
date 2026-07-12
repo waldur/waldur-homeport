@@ -4,6 +4,7 @@ import { proposalReviewsList } from 'waldur-js-client';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { EndingField } from '@/proposals/EndingField';
+import { ReviewExpandableRow } from '@/proposals/review/ReviewExpandableRow';
 import { ProposalReview } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import {
@@ -20,8 +21,6 @@ import { renderFieldOrDash } from '@/table/utils';
 import { ReviewsRowActions } from '../review/ReviewsRowActons';
 import { ReviewStateRenderer } from '../review/ReviewStateRenderer';
 import { Call } from '../types';
-
-import { CallReviewExpandableRow } from './CallReviewExpandableRow';
 
 interface CallReviewsListProps {
   call: Call;
@@ -121,7 +120,7 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
       verboseName={translate('Reviews')}
       rowActions={ReviewsRowActions}
       filters={<ProposalReviewsFilter callUuid={call.uuid} />}
-      expandableRow={CallReviewExpandableRow}
+      expandableRow={ReviewExpandableRow}
       formId={ProposalReviewsFilterFormId}
     />
   );
