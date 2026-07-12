@@ -227,3 +227,10 @@ export const usePublicCallBreadcrumbItems = (
     [call],
   );
 };
+
+// Tooltip explaining why a call's fields are read-only, for the disabled edit
+// controls on the call-edit tabs (a call can only be edited while draft).
+export const getCallReadOnlyReason = (call?: { state?: string }): string =>
+  call?.state === 'archived'
+    ? translate('This call is archived and cannot be edited.')
+    : translate('This call is active and cannot be edited.');

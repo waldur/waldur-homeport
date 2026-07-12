@@ -19,6 +19,7 @@ import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 
 import { COISummaryButton } from './COISummaryButton';
 
@@ -148,7 +149,11 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
       enableSearch
     >
       <TabbedSection.Tab id="detection" title={translate('Detection')}>
-        <EditFieldProvider scope={config} callback={updateConfig}>
+        <EditFieldProvider
+          scope={config}
+          callback={updateConfig}
+          readOnlyReason={isReadOnly ? getCallReadOnlyReason(call) : undefined}
+        >
           <NumberEditField
             name="coauthorship_lookback_years"
             label={translate('Co-authorship lookback')}
@@ -210,7 +215,11 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
       </TabbedSection.Tab>
 
       <TabbedSection.Tab id="automation" title={translate('Automation')}>
-        <EditFieldProvider scope={config} callback={updateConfig}>
+        <EditFieldProvider
+          scope={config}
+          callback={updateConfig}
+          readOnlyReason={isReadOnly ? getCallReadOnlyReason(call) : undefined}
+        >
           <BooleanEditField
             name="auto_detect_coauthorship"
             label={translate('Auto-detect co-authorship')}
@@ -248,7 +257,11 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
       </TabbedSection.Tab>
 
       <TabbedSection.Tab id="types" title={translate('Type handling')}>
-        <EditFieldProvider scope={config} callback={updateConfig}>
+        <EditFieldProvider
+          scope={config}
+          callback={updateConfig}
+          readOnlyReason={isReadOnly ? getCallReadOnlyReason(call) : undefined}
+        >
           <SelectEditField
             name="recusal_required_types"
             label={translate('Types requiring recusal')}
@@ -292,7 +305,11 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
       </TabbedSection.Tab>
 
       <TabbedSection.Tab id="invitations" title={translate('Invitations')}>
-        <EditFieldProvider scope={config} callback={updateConfig}>
+        <EditFieldProvider
+          scope={config}
+          callback={updateConfig}
+          readOnlyReason={isReadOnly ? getCallReadOnlyReason(call) : undefined}
+        >
           <SelectEditField
             name="invitation_proposal_disclosure"
             label={translate('Proposal disclosure level')}
