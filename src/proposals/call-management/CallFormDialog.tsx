@@ -17,7 +17,6 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { SubmitButton, StringGroup, SelectGroup, MarkdownGroup } from '@/form';
 import { translate } from '@/i18n';
-import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
@@ -70,7 +69,6 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
     staleTime: SHORT_STALE_TIME,
   });
 
-  const isExperimentalUiEnabled = isExperimentalUiComponentsVisible();
   const {
     data: complianceChecklists,
     isLoading: loadingChecklists,
@@ -84,7 +82,7 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
           customer_uuid: customer.uuid,
         },
       }).then((response) => response.data),
-    enabled: isExperimentalUiEnabled && !!customer?.uuid,
+    enabled: !!customer?.uuid,
     staleTime: STALE_TIME,
   });
 
@@ -148,9 +146,9 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
     ],
   );
 
-  if (loadingManager || (isExperimentalUiEnabled && loadingChecklists)) {
+  if (loadingManager || loadingChecklists) {
     return <LoadingSpinner />;
-  } else if (errorManager || (isExperimentalUiEnabled && errorChecklists)) {
+  } else if (errorManager || errorChecklists) {
     return (
       <LoadingErred
         message={translate('Unable to prepare the form.')}
@@ -159,13 +157,12 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
     );
   }
 
-  const checklistOptions =
-    isExperimentalUiEnabled && complianceChecklists
-      ? complianceChecklists.map((checklist) => ({
-          value: checklist.uuid,
-          label: checklist.name,
-        }))
-      : [];
+  const checklistOptions = complianceChecklists
+    ? complianceChecklists.map((checklist) => ({
+        value: checklist.uuid,
+        label: checklist.name,
+      }))
+    : [];
 
   return (
     <Form<CallFormData>
@@ -214,21 +211,19 @@ export const CallFormDialog: FC<CallFormDialogProps> = ({
                 />
               )}
 
-              {isExperimentalUiComponentsVisible() && (
-                <SelectGroup
-                  label={translate('Compliance checklist')}
-                  name="compliance_checklist"
-                  options={checklistOptions}
-                  isClearable={true}
-                  placeholder={translate(
-                    'Select compliance checklist (optional)',
-                  )}
-                  description={translate(
-                    'Optional checklist that proposal applicants must complete for compliance evaluation. Can be changed only before any proposals are submitted.',
-                  )}
-                  isDisabled={submitting}
-                />
-              )}
+              <SelectGroup
+                label={translate('Compliance checklist')}
+                name="compliance_checklist"
+                options={checklistOptions}
+                isClearable={true}
+                placeholder={translate(
+                  'Select compliance checklist (optional)',
+                )}
+                description={translate(
+                  'Optional checklist that proposal applicants must complete for compliance evaluation. Can be changed only before any proposals are submitted.',
+                )}
+                isDisabled={submitting}
+              />
             </div>
           </ModalDialog>
         </form>
