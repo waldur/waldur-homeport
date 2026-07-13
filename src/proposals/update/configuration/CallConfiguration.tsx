@@ -122,7 +122,14 @@ export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
               getOptionLabel={(option) => option.name}
               isClearable={true}
               placeholder={translate('Select compliance checklist (optional)')}
-              disabled={props.isReadOnly}
+              disabled={props.isReadOnly || props.call.has_proposals}
+              tooltip={
+                !props.isReadOnly && props.call.has_proposals
+                  ? translate(
+                      'The compliance checklist cannot be changed once proposals exist for this call.',
+                    )
+                  : undefined
+              }
               renderValue={() =>
                 props.call.compliance_checklist_name ||
                 translate('Not configured')

@@ -110,7 +110,15 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
             description={
               <SlugTemplateHelpText placeholders={PROPOSAL_SLUG_PLACEHOLDERS} />
             }
-            disabled={props.isReadOnly}
+            descriptionInEditOnly
+            disabled={props.isReadOnly || props.call.has_proposals}
+            tooltip={
+              !props.isReadOnly && props.call.has_proposals
+                ? translate(
+                    'The slug template cannot be changed once proposals exist for this call.',
+                  )
+                : undefined
+            }
             renderValue={(value) => renderFieldOrDash(value)}
           />
           {isFeatureVisible(MarketplaceFeatures.call_only) && (

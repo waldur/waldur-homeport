@@ -27,6 +27,12 @@ export type EditFieldProps<P = object> = Omit<
   name: string;
   label: string;
   description?: ReactNode;
+  /**
+   * When true, `description` is surfaced only in the edit dialog (as its
+   * subtitle) and omitted from the static read-only row. Use for long help
+   * blocks (e.g. a placeholder reference table) that would bloat the row.
+   */
+  descriptionInEditOnly?: boolean;
   disabled?: boolean;
   warnTooltip?: string;
   isStaffOnly?: boolean;
@@ -84,6 +90,7 @@ export function withEditField<P extends object>(
       name,
       label,
       description,
+      descriptionInEditOnly,
       disabled,
       warnTooltip,
       isStaffOnly,
@@ -170,7 +177,7 @@ export function withEditField<P extends object>(
     return (
       <FormTable.Item
         label={label}
-        description={description}
+        description={descriptionInEditOnly ? undefined : description}
         value={displayValue}
         required={required}
         disabled={disabled}
