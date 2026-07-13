@@ -13,8 +13,7 @@ import { StatisticsCard } from '@/core/StatisticsCard';
 import { translate } from '@/i18n';
 
 import { Call } from '../types';
-
-import { WorkflowConfigurationWidget } from './WorkflowConfigurationWidget';
+import { WorkflowStepsSection } from '../update/workflow-steps/WorkflowStepsSection';
 
 interface CallDashboardProps {
   call: Call;
@@ -98,7 +97,7 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
           <StatisticsCard title={translate('Reviews')} value={reviewsCount} />
         </Col>
       </Row>
-      <WorkflowConfigurationWidget call={call} />
+      <WorkflowStepsSection call={call} viewOnly />
     </>
   );
 };
