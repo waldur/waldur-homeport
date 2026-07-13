@@ -136,18 +136,17 @@ const Body = ({ call, refetch, loading }) => {
   useBreadcrumbs(breadcrumbItems);
 
   const {
-    tabSpec: { component: Component, key: activeTabKey },
+    tabSpec: { component: Component },
   } = usePageTabsTransmitter(tabs);
 
-  // Once a call is activated, most configuration tabs freeze (edits after
-  // activation would affect already-submitted proposals). Rounds are the
-  // exception: the backend allows creating/editing rounds on an active call
-  // (only an archived call locks them — see proposal/views.py round_detail
-  // validators), so the Rounds tab must stay editable while active to match.
-  const isReadOnly =
-    activeTabKey === 'rounds'
-      ? call.state === 'archived'
-      : call.state === 'active' || call.state === 'archived';
+  // Read-only mirrors what the backend actually enforces: only an archived
+  // call is frozen server-side (StateValidator(draft, active) on the call
+  // update + per-nested-surface archived guards). Draft and active calls are
+  // fully editable. The one field-level exception the backend still enforces
+  // is applied inside the General/Configuration sections: the slug-template
+  // and compliance-checklist fields are locked once proposals exist
+  // (call.has_proposals).
+  const isReadOnly = call.state === 'archived';
 
   return (
     <Component
