@@ -35,6 +35,11 @@ import { WorkflowStepToggleAction } from './WorkflowStepToggleAction';
 interface WorkflowStepsSectionProps {
   call: Call;
   isReadOnly?: boolean;
+  // Pure read-only presentation (e.g. the call-manage dashboard): drops the
+  // Add button, the per-row actions column, and the preview's reset control,
+  // leaving just the steps table + sequence preview. Distinct from isReadOnly,
+  // which keeps those controls visible-but-disabled (archived call edit).
+  viewOnly?: boolean;
 }
 
 // A mandatory step rendered from the catalog when the call has no backend row
@@ -120,6 +125,7 @@ const StepRowActions = ({
 export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
   call,
   isReadOnly,
+  viewOnly,
 }) => {
   const tableProps = useTable({
     table: 'CallWorkflowSteps',
@@ -212,32 +218,37 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
         title={translate('Steps & settings')}
         verboseName={translate('Workflow steps')}
         tableActions={
-          <WorkflowStepCreateButton
-            call={call}
-            configuredSteps={sortedRows}
-            refetch={tableProps.fetch}
-            disabled={isReadOnly}
-            tooltip={isReadOnly ? callLockedTooltip() : undefined}
-          />
-        }
-        rowActions={({ row, fetch }) =>
-          isReadOnly ? (
-            <ActionsDropdown disabled tooltip={callLockedTooltip()} />
-          ) : isSyntheticStep(row) ? (
-            <ActionsDropdown
-              disabled
-              tooltip={translate(
-                'This mandatory step is shown by default and is configured automatically once the call workflow is set up.',
-              )}
-            />
-          ) : (
-            <StepRowActions
-              row={row}
-              fetch={fetch}
+          viewOnly ? undefined : (
+            <WorkflowStepCreateButton
               call={call}
-              steps={sortedRows}
+              configuredSteps={sortedRows}
+              refetch={tableProps.fetch}
+              disabled={isReadOnly}
+              tooltip={isReadOnly ? callLockedTooltip() : undefined}
             />
           )
+        }
+        rowActions={
+          viewOnly
+            ? undefined
+            : ({ row, fetch }) =>
+                isReadOnly ? (
+                  <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+                ) : isSyntheticStep(row) ? (
+                  <ActionsDropdown
+                    disabled
+                    tooltip={translate(
+                      'This mandatory step is shown by default and is configured automatically once the call workflow is set up.',
+                    )}
+                  />
+                ) : (
+                  <StepRowActions
+                    row={row}
+                    fetch={fetch}
+                    call={call}
+                    steps={sortedRows}
+                  />
+                )
         }
         expandableRow={WorkflowStepExpandableRow}
         rowClass={rowClass}
@@ -245,7 +256,7 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
       <div className="mt-5">
         <WorkflowSequencePreview
           steps={sortedRows}
-          onReset={() => tableProps.fetch(true)}
+          onReset={viewOnly ? undefined : () => tableProps.fetch(true)}
         />
       </div>
     </>
