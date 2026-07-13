@@ -146,7 +146,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
             </>
           ),
         },
-      ].filter(Boolean)}
+      ]}
       verboseName={translate('Cost policies')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       rowActions={({ row }) => (

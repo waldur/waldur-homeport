@@ -5,8 +5,8 @@ import { formatDateTime } from '@/core/dateUtils';
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
-import Table from '@/table/Table';
-import { Column, TableProps } from '@/table/types';
+import Table, { TableColumns } from '@/table/Table';
+import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -59,65 +59,63 @@ export const MatrixExportsList: FC<MatrixExportsListProps> = ({
     filter,
   });
 
-  const columns: Column<MatrixHistoryExport>[] = useMemo(
-    () =>
-      [
-        !room_uuid && {
-          title: translate('Room'),
-          render: ({ row }) => renderFieldOrDash(row.room_name),
-          id: 'room_name',
-        },
-        {
-          title: translate('Type'),
-          render: ({ row }) => exportTypeLabel(row.export_type),
-          id: 'export_type',
-        },
-        {
-          title: translate('State'),
-          render: ({ row }) => (
-            <MatrixExportStateBadge
-              state={row.state}
-              errorMessage={row.error_message}
+  const columns: TableColumns<MatrixHistoryExport> = useMemo(
+    () => [
+      !room_uuid && {
+        title: translate('Room'),
+        render: ({ row }) => renderFieldOrDash(row.room_name),
+        id: 'room_name',
+      },
+      {
+        title: translate('Type'),
+        render: ({ row }) => exportTypeLabel(row.export_type),
+        id: 'export_type',
+      },
+      {
+        title: translate('State'),
+        render: ({ row }) => (
+          <MatrixExportStateBadge
+            state={row.state}
+            errorMessage={row.error_message}
+          />
+        ),
+        id: 'state',
+      },
+      {
+        title: translate('Messages'),
+        render: ({ row }) => <>{row.message_count}</>,
+        id: 'message_count',
+      },
+      {
+        title: translate('Media files'),
+        render: ({ row }) => <ExportMediaFilesCell row={row} />,
+        id: 'media_count',
+      },
+      {
+        title: translate('Started'),
+        render: ({ row }) => renderFieldOrDash(formatDateTime(row.started_at)),
+        id: 'started_at',
+      },
+      {
+        title: translate('Completed'),
+        render: ({ row }) =>
+          renderFieldOrDash(formatDateTime(row.completed_at)),
+        id: 'completed_at',
+      },
+      {
+        title: translate('Log'),
+        render: ({ row }) =>
+          row.export_file_url ? (
+            <FileDownloader
+              url={row.export_file_url}
+              name={`matrix-export-${row.room_name || row.room_uuid}.json`}
             />
+          ) : (
+            renderFieldOrDash(null)
           ),
-          id: 'state',
-        },
-        {
-          title: translate('Messages'),
-          render: ({ row }) => <>{row.message_count}</>,
-          id: 'message_count',
-        },
-        {
-          title: translate('Media files'),
-          render: ({ row }) => <ExportMediaFilesCell row={row} />,
-          id: 'media_count',
-        },
-        {
-          title: translate('Started'),
-          render: ({ row }) =>
-            renderFieldOrDash(formatDateTime(row.started_at)),
-          id: 'started_at',
-        },
-        {
-          title: translate('Completed'),
-          render: ({ row }) =>
-            renderFieldOrDash(formatDateTime(row.completed_at)),
-          id: 'completed_at',
-        },
-        {
-          title: translate('Log'),
-          render: ({ row }) =>
-            row.export_file_url ? (
-              <FileDownloader
-                url={row.export_file_url}
-                name={`matrix-export-${row.room_name || row.room_uuid}.json`}
-              />
-            ) : (
-              renderFieldOrDash(null)
-            ),
-          id: 'export_file_url',
-        },
-      ].filter(Boolean),
+        id: 'export_file_url',
+      },
+    ],
     [room_uuid],
   );
 

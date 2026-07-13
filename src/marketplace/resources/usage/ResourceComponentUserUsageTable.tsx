@@ -74,7 +74,7 @@ export const ResourceComponentUserUsageTable: FC<
       render: ({ row }) => <>{formatUsageValue(row.usage)}</>,
       orderField: 'usage',
     },
-  ].filter(Boolean);
+  ];
 
   return (
     <Table

@@ -24,7 +24,7 @@ import { TableFilters } from './TableFilters';
 import { TablePagination } from './TablePagination';
 import { TableRefreshButton } from './TableRefreshButton';
 import { TableTabs } from './TableTabs';
-import { PinnedColumns, TableProps } from './types';
+import { Column, PinnedColumns, TableProps } from './types';
 
 import './Table.scss';
 
@@ -476,6 +476,35 @@ function Table<RowType = any>(props: TableProps<RowType>) {
   return <TableInternal {...props} filterPosition={filterPosition} />;
 }
 
-export default function TableLoader<RowType = any>(props: TableProps<RowType>) {
-  return <Table {...props} />;
+/**
+ * Public columns prop. Feature-gated columns are commonly declared inline as
+ * `condition && { title, render }`, which yields a falsy entry when the
+ * condition is off. Allow those here so call sites are type-safe without an
+ * explicit `.filter(Boolean)`.
+ */
+export type TableColumns<RowType = any> = Array<
+  Column<RowType> | false | null | undefined
+>;
+
+export type TableLoaderProps<RowType = any> = Omit<
+  TableProps<RowType>,
+  'columns'
+> & {
+  columns?: TableColumns<RowType>;
+};
+
+export default function TableLoader<RowType = any>({
+  columns,
+  ...props
+}: TableLoaderProps<RowType>) {
+  // Drop falsy entries centrally. The header renders a <th> for every column
+  // while the body skips columns without a render function, so a leftover
+  // falsy entry desyncs the two and shifts every subsequent column.
+  const filteredColumns = useMemo(
+    () => (columns ?? []).filter(Boolean) as Array<Column<RowType>>,
+    [columns],
+  );
+  return (
+    <Table {...(props as TableProps<RowType>)} columns={filteredColumns} />
+  );
 }

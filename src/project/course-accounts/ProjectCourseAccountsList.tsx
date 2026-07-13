@@ -7,8 +7,7 @@ import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { TeamDropdownActions } from '@/project/team/TeamDropdownActions';
 import { createFetcher } from '@/table/api';
-import Table from '@/table/Table';
-import { Column } from '@/table/types';
+import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useProject } from '@/workspace/hooks';
 
@@ -40,48 +39,47 @@ export const ProjectCourseAccountsList = ({ admin = false }) => {
     queryField: 'email',
   });
 
-  const columns = useMemo<Column<CourseAccount>[]>(
-    () =>
-      [
-        admin && {
-          title: translate('Project'),
-          render: ({ row }) => (
-            <ProjectLink
-              row={{ uuid: row.project_uuid, name: row.project_name }}
-            />
-          ),
-          export: 'project_name',
-        },
-        {
-          title: translate('Username'),
-          render: ({ row }) => row.username,
-          export: 'username',
-        },
-        {
-          title: translate('Email'),
-          render: ({ row }) => (
-            <div className="d-flex align-items-center gap-1">
-              {row.email}
-              <CopyToClipboardButton value={row.email} />
-            </div>
-          ),
-          export: 'email',
-        },
-        {
-          title: translate('Creation date'),
-          orderField: 'created',
-          render: ({ row }) => formatDate(row.created),
-          export: (row) => formatDate(row.created),
-        },
-        {
-          title: translate('State'),
-          render: ({ row }) => (
-            <Badge variant={courseAccountState[row.state].color} pill outline>
-              {courseAccountState[row.state].label}
-            </Badge>
-          ),
-        },
-      ].filter(Boolean) as Column<CourseAccount>[],
+  const columns = useMemo<TableColumns<CourseAccount>>(
+    () => [
+      admin && {
+        title: translate('Project'),
+        render: ({ row }) => (
+          <ProjectLink
+            row={{ uuid: row.project_uuid, name: row.project_name }}
+          />
+        ),
+        export: 'project_name',
+      },
+      {
+        title: translate('Username'),
+        render: ({ row }) => row.username,
+        export: 'username',
+      },
+      {
+        title: translate('Email'),
+        render: ({ row }) => (
+          <div className="d-flex align-items-center gap-1">
+            {row.email}
+            <CopyToClipboardButton value={row.email} />
+          </div>
+        ),
+        export: 'email',
+      },
+      {
+        title: translate('Creation date'),
+        orderField: 'created',
+        render: ({ row }) => formatDate(row.created),
+        export: (row) => formatDate(row.created),
+      },
+      {
+        title: translate('State'),
+        render: ({ row }) => (
+          <Badge variant={courseAccountState[row.state].color} pill outline>
+            {courseAccountState[row.state].label}
+          </Badge>
+        ),
+      },
+    ],
     [],
   );
 

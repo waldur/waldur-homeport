@@ -53,7 +53,7 @@ export const InvitationsList: FunctionComponent<{
           orderField: 'expires',
           render: ({ row }) => formatDate(row.expires),
         },
-      ].filter(Boolean)}
+      ]}
       rowActions={({ row, fetch }) => (
         <InvitationActions invitation={row} refetch={fetch} />
       )}

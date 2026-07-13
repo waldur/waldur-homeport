@@ -17,8 +17,7 @@ import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
-import Table from '@/table/Table';
-import { Column } from '@/table/types';
+import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
@@ -131,28 +130,27 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
     tableProps.fetch();
   }, [data]);
 
-  const columns = useMemo<Column<OfferingUserRecord>[]>(
-    () =>
-      [
-        {
-          title: translate('Waldur username'),
-          render: ({ row }) => <WithTooltip label={row.user_username} />,
-        },
-        {
-          title: translate('Offering'),
-          render: ({ row }) => <WithTooltip label={row.offering_name} />,
-        },
-        {
-          title: translate('Offering username'),
-          render: ({ row }) => <WithTooltip label={row.username} />,
-        },
-        {
-          title: translate('Status'),
-          render: ({ row }) => (
-            <StatusField row={row} status={getRecordStatus(row)} />
-          ),
-        },
-      ].filter(Boolean),
+  const columns = useMemo<TableColumns<OfferingUserRecord>>(
+    () => [
+      {
+        title: translate('Waldur username'),
+        render: ({ row }) => <WithTooltip label={row.user_username} />,
+      },
+      {
+        title: translate('Offering'),
+        render: ({ row }) => <WithTooltip label={row.offering_name} />,
+      },
+      {
+        title: translate('Offering username'),
+        render: ({ row }) => <WithTooltip label={row.username} />,
+      },
+      {
+        title: translate('Status'),
+        render: ({ row }) => (
+          <StatusField row={row} status={getRecordStatus(row)} />
+        ),
+      },
+    ],
     [data, getRecordStatus],
   );
 

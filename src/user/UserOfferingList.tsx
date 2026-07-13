@@ -103,7 +103,7 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
         </>
       ),
     },
-  ].filter(Boolean);
+  ];
 
   return (
     <Table

@@ -12,8 +12,8 @@ import { translate } from '@/i18n';
 import { TableDropdownToggle } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
-import Table from '@/table/Table';
-import { Column, TableProps } from '@/table/types';
+import Table, { TableColumns } from '@/table/Table';
+import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
 import { OrderProviderActions } from '../actions/OrderProviderActions';
@@ -76,7 +76,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
     initialFilters,
   });
 
-  const columns: Array<Column<OrderDetails>> = [
+  const columns: TableColumns<OrderDetails> = [
     {
       title: translate('Name'),
       render: ({ row }) => (
@@ -201,7 +201,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
   return (
     <Table<OrderDetails>
       {...props}
-      columns={columns.filter(Boolean)}
+      columns={columns}
       placeholderActions={<OrderTablePlaceholderActions />}
       verboseName={translate('Orders')}
       hasQuery={true}

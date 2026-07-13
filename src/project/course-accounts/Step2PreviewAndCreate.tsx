@@ -7,8 +7,7 @@ import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
 import { createClientPaginatedFetcher } from '@/table/api';
-import Table from '@/table/Table';
-import { Column } from '@/table/types';
+import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -104,22 +103,21 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
     filter: useMemo(() => ({ _rev: data }), [data]),
   });
 
-  const columns = useMemo<Column<RawCourseAccount>[]>(
-    () =>
-      [
-        {
-          title: translate('Email'),
-          render: ({ row }) => renderFieldOrDash(row.email),
-        },
-        {
-          title: translate('Description'),
-          render: ({ row }) => renderFieldOrDash(row.description),
-        },
-        {
-          title: translate('Status'),
-          render: StatusField,
-        },
-      ].filter(Boolean),
+  const columns = useMemo<TableColumns<RawCourseAccount>>(
+    () => [
+      {
+        title: translate('Email'),
+        render: ({ row }) => renderFieldOrDash(row.email),
+      },
+      {
+        title: translate('Description'),
+        render: ({ row }) => renderFieldOrDash(row.description),
+      },
+      {
+        title: translate('Status'),
+        render: StatusField,
+      },
+    ],
     [data],
   );
 
