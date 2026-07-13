@@ -17,6 +17,13 @@ export const OpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
         value={renderFieldOrDash(resource.backend_id)}
         hasCopy={!!resource.backend_id}
       />
+      {resource.external_address && (
+        <Component
+          label={translate('Public IP')}
+          value={resource.external_address}
+          hasCopy
+        />
+      )}
     </>
   );
 };
