@@ -13,6 +13,7 @@ import {
   CreateManualAssignmentDialog,
   useCanCreateReview,
 } from './create/utils';
+import { ReviewProposalMyselfAction } from './ReviewProposalMyselfAction';
 
 // Proposal decisions (accept/reject) are made by driving the per-proposal
 // workflow steps on the proposal detail page (WorkflowStepActions); the legacy
@@ -43,6 +44,7 @@ export const ProposalRowActions = ({ row, refetch }) => {
         }
         iconNode={<ChatTextIcon weight="bold" />}
       />
+      <ReviewProposalMyselfAction row={row} refetch={refetch} />
     </ActionsDropdownComponent>
   );
 };
