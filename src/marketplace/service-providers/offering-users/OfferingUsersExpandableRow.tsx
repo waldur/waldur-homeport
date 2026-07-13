@@ -287,7 +287,7 @@ export const OfferingUsersExpandableRow = ({
             title: translate('Needs review'),
             render: () => <BooleanIconBadge value={false} />, // Not available atm
           },
-        ].filter(Boolean)}
+        ]}
         title={translate('Compliance metadata')}
         verboseName={translate('Answers')}
         hideIfEmpty

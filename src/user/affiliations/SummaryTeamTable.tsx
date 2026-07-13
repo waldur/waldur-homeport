@@ -135,7 +135,7 @@ export const SummaryTeamTable: FC<OwnProps> = ({
           render: ({ row }) => renderRoleExpirationDate(row),
           className: 'w-45px',
         },
-      ].filter(Boolean)}
+      ]}
       verboseName={translate('Team members')}
       hasActionBar={false}
       hoverShadow={false}

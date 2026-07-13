@@ -7,8 +7,7 @@ import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
-import Table from '@/table/Table';
-import { Column } from '@/table/types';
+import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
@@ -86,29 +85,28 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
     queryField: 'query',
   });
 
-  const columns = useMemo<Column<Customer>[]>(
-    () =>
-      [
-        {
-          title: translate('Organization name'),
-          render: ({ row }) => renderFieldOrDash(row.name),
-        },
-        {
-          title: translate('Email'),
-          render: ({ row }) => renderFieldOrDash(row.email),
-        },
-        ...getCustomerOptionalFields().map(
-          (field) =>
-            data.some((record) => Boolean(record[field.key])) && {
-              title: field.title,
-              render: ({ row }) => renderFieldOrDash(row[field.key]),
-            },
-        ),
-        {
-          title: translate('Status'),
-          render: StatusField,
-        },
-      ].filter(Boolean) as Column<Customer>[],
+  const columns = useMemo<TableColumns<Customer>>(
+    () => [
+      {
+        title: translate('Organization name'),
+        render: ({ row }) => renderFieldOrDash(row.name),
+      },
+      {
+        title: translate('Email'),
+        render: ({ row }) => renderFieldOrDash(row.email),
+      },
+      ...getCustomerOptionalFields().map(
+        (field) =>
+          data.some((record) => Boolean(record[field.key])) && {
+            title: field.title,
+            render: ({ row }) => renderFieldOrDash(row[field.key]),
+          },
+      ),
+      {
+        title: translate('Status'),
+        render: StatusField,
+      },
+    ],
     [data],
   );
 

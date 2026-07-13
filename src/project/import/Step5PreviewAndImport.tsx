@@ -19,7 +19,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
-import Table from '@/table/Table';
+import Table, { TableColumns } from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -131,91 +131,88 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
     filter: cacheFilter,
   });
 
-  const projectColumns = useMemo<Column<ImportedProject>[]>(
-    () =>
-      [
-        {
-          title: translate('Project name'),
+  const projectColumns = useMemo<TableColumns<ImportedProject>>(
+    () => [
+      {
+        title: translate('Project name'),
+        render: ({ row }) => (
+          <>
+            {row.name}
+            {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
+              row.is_industry && (
+                <Tip
+                  id={'tip-industry-' + row.uuid}
+                  label={translate('Industry project')}
+                  className="svg-icon svg-icon-4 ms-3"
+                >
+                  <FactoryIcon weight="bold" />
+                </Tip>
+              )}
+          </>
+        ),
+      },
+      data.some((project) => Boolean(project.customer_uuid)) && {
+        title: translate('Organization'),
+        render: ({ row }) => <>{renderFieldOrDash(row.customer_uuid)}</>,
+      },
+      isFeatureVisible(ProjectFeatures.show_description_in_create_dialog) &&
+        data.some((project) => Boolean(project.description)) && {
+          title: translate('Description'),
           render: ({ row }) => (
-            <>
-              {row.name}
-              {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
-                row.is_industry && (
-                  <Tip
-                    id={'tip-industry-' + row.uuid}
-                    label={translate('Industry project')}
-                    className="svg-icon svg-icon-4 ms-3"
-                  >
-                    <FactoryIcon weight="bold" />
-                  </Tip>
-                )}
-            </>
+            <>{row.description ? truncate(row.description) : 'N/A'}</>
           ),
         },
-        data.some((project) => Boolean(project.customer_uuid)) && {
-          title: translate('Organization'),
-          render: ({ row }) => <>{renderFieldOrDash(row.customer_uuid)}</>,
+      isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) &&
+        data.some((project) => Boolean(project.oecd_fos_2007_code)) && {
+          title: translate('OECD FoS code'),
+          render: ({ row }) => <>{renderFieldOrDash(row.oecd_fos_2007_code)}</>,
         },
-        isFeatureVisible(ProjectFeatures.show_description_in_create_dialog) &&
-          data.some((project) => Boolean(project.description)) && {
-            title: translate('Description'),
-            render: ({ row }) => (
-              <>{row.description ? truncate(row.description) : 'N/A'}</>
-            ),
-          },
-        isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) &&
-          data.some((project) => Boolean(project.oecd_fos_2007_code)) && {
-            title: translate('OECD FoS code'),
-            render: ({ row }) => (
-              <>{renderFieldOrDash(row.oecd_fos_2007_code)}</>
-            ),
-          },
-        isFeatureVisible(ProjectFeatures.show_type_in_create_dialog) &&
-          data.some((project) => Boolean(project.project_type)) && {
-            title: translate('Type'),
-            render: ({ row }) => <>{renderFieldOrDash(row.project_type)}</>,
-          },
-        isFeatureVisible(ProjectFeatures.show_start_date_in_create_dialog) && {
-          title: translate('Start date'),
-          render: ({ row }) => (
-            <>{row.start_date ? formatDate(row.start_date) : 'N/A'}</>
-          ),
+      isFeatureVisible(ProjectFeatures.show_type_in_create_dialog) &&
+        data.some((project) => Boolean(project.project_type)) && {
+          title: translate('Type'),
+          render: ({ row }) => <>{renderFieldOrDash(row.project_type)}</>,
         },
-        isFeatureVisible(ProjectFeatures.show_end_date_in_create_dialog) && {
-          title: translate('End date'),
-          render: ({ row }) => (
-            <>{row.end_date ? formatDate(row.end_date) : 'N/A'}</>
-          ),
-        },
-        {
-          title: translate('Status'),
-          render: ({ row }) => {
-            const isOk =
-              (parseDate(row.start_date).isValid ||
-                !isFeatureVisible(
-                  ProjectFeatures.show_start_date_in_create_dialog,
-                )) &&
-              (parseDate(row.end_date).isValid ||
-                !isFeatureVisible(
-                  ProjectFeatures.show_end_date_in_create_dialog,
-                ));
+      isFeatureVisible(ProjectFeatures.show_start_date_in_create_dialog) && {
+        title: translate('Start date'),
+        render: ({ row }) => (
+          <>{row.start_date ? formatDate(row.start_date) : 'N/A'}</>
+        ),
+      },
+      isFeatureVisible(ProjectFeatures.show_end_date_in_create_dialog) && {
+        title: translate('End date'),
+        render: ({ row }) => (
+          <>{row.end_date ? formatDate(row.end_date) : 'N/A'}</>
+        ),
+      },
+      {
+        title: translate('Status'),
+        render: ({ row }) => {
+          const isOk =
+            (parseDate(row.start_date).isValid ||
+              !isFeatureVisible(
+                ProjectFeatures.show_start_date_in_create_dialog,
+              )) &&
+            (parseDate(row.end_date).isValid ||
+              !isFeatureVisible(
+                ProjectFeatures.show_end_date_in_create_dialog,
+              ));
 
-            return (
-              <Badge
-                variant={isOk && row.name ? 'success' : 'danger'}
-                pill
-                outline
-              >
-                {!row.name
-                  ? translate('Missing name')
-                  : !isOk
-                    ? translate('Missing date')
-                    : translate('OK')}
-              </Badge>
-            );
-          },
+          return (
+            <Badge
+              variant={isOk && row.name ? 'success' : 'danger'}
+              pill
+              outline
+            >
+              {!row.name
+                ? translate('Missing name')
+                : !isOk
+                  ? translate('Missing date')
+                  : translate('OK')}
+            </Badge>
+          );
         },
-      ].filter(Boolean) as Column<ImportedProject>[],
+      },
+    ],
     [data],
   );
 
@@ -284,22 +281,16 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
         title: translate('Plan'),
         render: ({ row }) => <>{renderFieldOrDash(row.plan_name)}</>,
       },
-    ]
-      .concat(
-        (offering.components || []).map((comp) => ({
-          title: comp.name,
-          render: ({ row }) => (
-            <>{renderFieldOrDash(row?.limits?.[comp.type])}</>
-          ),
-        })),
-        Object.keys(offering.attributes || {}).map((attr) => ({
-          title: attr,
-          render: ({ row }) => (
-            <>{renderFieldOrDash(row?.attributes?.[attr])}</>
-          ),
-        })),
-      )
-      .filter(Boolean) as Column<any>[];
+    ].concat(
+      (offering.components || []).map((comp) => ({
+        title: comp.name,
+        render: ({ row }) => <>{renderFieldOrDash(row?.limits?.[comp.type])}</>,
+      })),
+      Object.keys(offering.attributes || {}).map((attr) => ({
+        title: attr,
+        render: ({ row }) => <>{renderFieldOrDash(row?.attributes?.[attr])}</>,
+      })),
+    ) as Column<any>[];
   }, [importType, offering, data]);
 
   const MemoizedExpandableRow = useMemo(

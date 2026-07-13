@@ -174,7 +174,7 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
                   render: ({ row }) => renderRoleExpirationDate(row),
                   className: 'w-45px',
                 },
-              ].filter(Boolean)}
+              ]}
               verboseName={translate('team members')}
               hasActionBar={false}
               hoverShadow={false}

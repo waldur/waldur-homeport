@@ -24,8 +24,7 @@ import {
   selectProjectResourcesFilter,
   ProjectResourcesFilterFormId,
 } from '@/table/generated/ProjectResourcesFilter';
-import Table from '@/table/Table';
-import { Column } from '@/table/types';
+import Table, { TableColumns } from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useProject } from '@/workspace/hooks';
@@ -109,70 +108,67 @@ export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
     staleTime: UI_STALE_TIME,
   });
 
-  const columns = useMemo(
-    () =>
-      [
-        {
-          title: translate('Name'),
-          render: ResourceNameField,
-          orderField: 'name',
-        },
-        {
-          title: translate('Offering'),
-          render: ({ row }) => <>{row.offering_name}</>,
-          filter: 'offering',
-          inlineFilter: (row) => ({
-            name: row.offering_name,
-            uuid: row.offering_uuid,
-          }),
-        },
-        {
-          title: translate('Used/total units'),
-          render: ({ row }) => (
-            <QuotaField
-              row={row}
-              type="limit"
-              data={data}
-              isLoading={isLoading}
-            />
-          ),
-        },
-        {
-          title: translate('Renewal'),
-          render: ({ row }) => (
-            <RenewalField
-              row={row}
-              type="limit"
-              data={data}
-              isLoading={isLoading}
-            />
-          ),
-        },
-        showCost && {
-          title: translate('Rate'),
-          render: ({ row }) => (
-            <ResourceRateField row={row} data={data} isLoading={isLoading} />
-          ),
-        },
-        isFeatureVisible(MarketplaceFeatures.show_resource_end_date) && {
-          title: translate('Expiration'),
-          render: ({ row }) => (
-            <ResourceTerminationDateField row={row} format />
-          ),
-        },
-        {
-          title: translate('Usage'),
-          render: ({ row }) => (
-            <QuotaField
-              row={row}
-              type="limit"
-              data={data}
-              isLoading={isLoading}
-              progressBar
-            />
-          ),
-        },
-      ].filter(Boolean) as Column<Resource>[],
+  const columns = useMemo<TableColumns<Resource>>(
+    () => [
+      {
+        title: translate('Name'),
+        render: ResourceNameField,
+        orderField: 'name',
+      },
+      {
+        title: translate('Offering'),
+        render: ({ row }) => <>{row.offering_name}</>,
+        filter: 'offering',
+        inlineFilter: (row) => ({
+          name: row.offering_name,
+          uuid: row.offering_uuid,
+        }),
+      },
+      {
+        title: translate('Used/total units'),
+        render: ({ row }) => (
+          <QuotaField
+            row={row}
+            type="limit"
+            data={data}
+            isLoading={isLoading}
+          />
+        ),
+      },
+      {
+        title: translate('Renewal'),
+        render: ({ row }) => (
+          <RenewalField
+            row={row}
+            type="limit"
+            data={data}
+            isLoading={isLoading}
+          />
+        ),
+      },
+      showCost && {
+        title: translate('Rate'),
+        render: ({ row }) => (
+          <ResourceRateField row={row} data={data} isLoading={isLoading} />
+        ),
+      },
+      isFeatureVisible(MarketplaceFeatures.show_resource_end_date) && {
+        title: translate('Expiration'),
+        render: ({ row }) => <ResourceTerminationDateField row={row} format />,
+      },
+      {
+        title: translate('Usage'),
+        render: ({ row }) => (
+          <QuotaField
+            row={row}
+            type="limit"
+            data={data}
+            isLoading={isLoading}
+            progressBar
+          />
+        ),
+      },
+    ],
     [data, isLoading, showCost],
   );
 

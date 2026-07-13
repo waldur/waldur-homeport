@@ -9,8 +9,7 @@ import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
-import Table from '@/table/Table';
-import { Column } from '@/table/types';
+import Table, { TableColumns } from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
 import { MaintenanceRowActions } from './actions/MaintenanceRowActions';
@@ -37,52 +36,51 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
     filter,
   });
 
-  const columns: Column<MaintenanceAnnouncement>[] = useMemo(
-    () =>
-      [
-        {
-          title: translate('Title'),
-          render: ({ row }) => row.name,
+  const columns: TableColumns<MaintenanceAnnouncement> = useMemo(
+    () => [
+      {
+        title: translate('Title'),
+        render: ({ row }) => row.name,
+      },
+      !props.provider
+        ? {
+            title: translate('Service provider'),
+            render: ({ row }) => row.service_provider_name,
+          }
+        : null,
+      {
+        title: translate('Affected offerings'),
+        render: ({ row }) => row.affected_offerings.length,
+      },
+      {
+        title: translate('Scheduled'),
+        render: ({ row }) => (
+          <>
+            <span className="d-block text-nowrap">
+              {formatDateTime(row.scheduled_start)}
+            </span>
+            <span className="d-block text-nowrap">
+              {formatDateTime(row.scheduled_end)}
+            </span>
+          </>
+        ),
+      },
+      {
+        title: translate('State'),
+        render: ({ row }) => {
+          const state = getMaintenanceState(row.state);
+          return (
+            <Badge variant={state.color} size="sm" pill outline>
+              {state.label}
+            </Badge>
+          );
         },
-        !props.provider
-          ? {
-              title: translate('Service provider'),
-              render: ({ row }) => row.service_provider_name,
-            }
-          : null,
-        {
-          title: translate('Affected offerings'),
-          render: ({ row }) => row.affected_offerings.length,
-        },
-        {
-          title: translate('Scheduled'),
-          render: ({ row }) => (
-            <>
-              <span className="d-block text-nowrap">
-                {formatDateTime(row.scheduled_start)}
-              </span>
-              <span className="d-block text-nowrap">
-                {formatDateTime(row.scheduled_end)}
-              </span>
-            </>
-          ),
-        },
-        {
-          title: translate('State'),
-          render: ({ row }) => {
-            const state = getMaintenanceState(row.state);
-            return (
-              <Badge variant={state.color} size="sm" pill outline>
-                {state.label}
-              </Badge>
-            );
-          },
-        },
-        {
-          title: translate('Maintenance type'),
-          render: ({ row }) => MAINTENANCE_TYPE[row.maintenance_type],
-        },
-      ].filter(Boolean),
+      },
+      {
+        title: translate('Maintenance type'),
+        render: ({ row }) => MAINTENANCE_TYPE[row.maintenance_type],
+      },
+    ],
     [props.provider],
   );
 
