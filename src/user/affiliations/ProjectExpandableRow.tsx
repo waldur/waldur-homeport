@@ -1,10 +1,10 @@
 import { useQueries } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { Project } from 'waldur-js-client';
+import { Project, projectsListUsersCount } from 'waldur-js-client';
 
 import { getResourcesCount } from '@/administration/api';
-import { count } from '@/core/api';
+import { fetchResultCount } from '@/core/api';
 import { translate } from '@/i18n';
 import { getStates } from '@/marketplace/resources/list/ResourceStateFilter';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -32,7 +32,10 @@ export const ProjectExpandableRow: FC<OwnProps> = (props) => {
       },
       {
         queryKey: ['teamCount', props.row.uuid],
-        queryFn: () => count(`/api/projects/${props.row.uuid}/list_users/`),
+        queryFn: () =>
+          projectsListUsersCount({
+            path: { uuid: props.row.uuid },
+          }).then(fetchResultCount),
       },
     ],
   });

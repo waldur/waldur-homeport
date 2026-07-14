@@ -1,13 +1,14 @@
 import {
   identityProvidersList,
+  marketplaceResourcesCount,
   MarketplaceResourcesListData,
 } from 'waldur-js-client';
 
-import { count, getAllPages } from '@/core/api';
+import { fetchResultCount, getAllPages } from '@/core/api';
 
 export const getResourcesCount = (
   query?: MarketplaceResourcesListData['query'],
-) => count('/api/marketplace-resources/', query);
+) => marketplaceResourcesCount({ query }).then(fetchResultCount);
 
 export const getIdentityProviders = () =>
   getAllPages((page) => identityProvidersList({ query: { page } }));

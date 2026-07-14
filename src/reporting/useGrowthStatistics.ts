@@ -1,15 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import {
+  marketplacePublicOfferingsCount,
+  marketplaceResourcesCount,
+  marketplaceServiceProvidersCount,
   marketplaceStatsAggregatedUsageTrendsList,
   marketplaceStatsCountActiveResourcesGroupedByOfferingList,
   marketplaceStatsCountUniqueUsersConnectedWithActiveResourcesOfServiceProviderList,
   marketplaceStatsProjectCreationTrendList,
   marketplaceStatsTopServiceProvidersByResourcesList,
+  projectsCount as fetchProjectsCount,
+  usersCount,
   usersUserRegistrationTrendList,
 } from 'waldur-js-client';
 
-// eslint-disable-next-line waldur-custom/no-direct-client-usage
-import { count } from '@/core/api';
+import { fetchResultCount } from '@/core/api';
 import { STALE_TIME } from '@/core/constants'; // 5 minutes
 
 export const useGrowthStatistics = () => {
@@ -48,15 +52,17 @@ export const useGrowthStatistics = () => {
           (r) => r.data || [],
         ),
 
-        count('/api/marketplace-service-providers/'),
+        marketplaceServiceProvidersCount().then(fetchResultCount),
 
-        count('/api/marketplace-public-offerings/'),
+        marketplacePublicOfferingsCount().then(fetchResultCount),
 
-        count('/api/projects/'),
+        fetchProjectsCount().then(fetchResultCount),
 
-        count('/api/marketplace-resources/', { state: ['OK'] }),
+        marketplaceResourcesCount({ query: { state: ['OK'] } }).then(
+          fetchResultCount,
+        ),
 
-        count('/api/users/', { is_active: true }),
+        usersCount({ query: { is_active: true } }).then(fetchResultCount),
       ]);
 
       return {

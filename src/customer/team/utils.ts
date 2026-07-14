@@ -1,6 +1,6 @@
-import { usersList, User } from 'waldur-js-client';
+import { customersUsersCount, usersList, User } from 'waldur-js-client';
 
-import { count } from '@/core/api';
+import { fetchResultCount } from '@/core/api';
 import { createLoadOptions } from '@/form/select';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -19,7 +19,9 @@ export const usersAutocomplete = createLoadOptions(usersList, 'query', {
 });
 
 export const getCustomerUsersCount = (customerUuid: string) =>
-  count(`/api/customers/${customerUuid}/users/`);
+  customersUsersCount({
+    path: { customer_uuid: customerUuid },
+  }).then(fetchResultCount);
 
 export const checkHasManageServiceAccountPermission = (
   user: User,

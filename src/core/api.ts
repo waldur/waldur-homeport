@@ -375,19 +375,3 @@ export function getNextPageNumber(link: string): number {
  */
 export const parseNextPage = (result) =>
   getNextPageNumber(getNextPageUrl(result.response));
-
-/**
- * Performs a HEAD request specifically to fetch the total item count of a collection.
- * @param url The resource endpoint.
- * @param query Optional filters.
- * @returns The total number of items as returned by 'x-result-count'.
- */
-export const count = (url: string, query?) =>
-  client
-    .head({
-      url,
-      query,
-      parseAs: 'text',
-      security: [{ in: 'header', type: 'http' }],
-    })
-    .then(fetchResultCount);

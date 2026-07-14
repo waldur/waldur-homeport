@@ -5,7 +5,8 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
-import { count, parseSelectData } from '@/core/api';
+import { getResourcesCount } from '@/administration/api';
+import { parseSelectData } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { SHORT_STALE_TIME, STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -143,7 +144,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     queryKey: ['limit-based-resources-count', project?.uuid],
     queryFn: () =>
       project?.uuid
-        ? count('/api/marketplace-resources/', {
+        ? getResourcesCount({
             project_uuid: project.uuid,
             state: NON_TERMINATED_STATES,
             only_limit_based: true,

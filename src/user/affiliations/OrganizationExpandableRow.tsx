@@ -1,10 +1,13 @@
 import { useQueries } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { ProjectsListData } from 'waldur-js-client';
+import {
+  ProjectsListData,
+  projectsCount as fetchProjectsCount,
+} from 'waldur-js-client';
 
 import { getResourcesCount } from '@/administration/api';
-import { count } from '@/core/api';
+import { fetchResultCount } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -49,9 +52,11 @@ export const OrganizationExpandableRow: FC<OwnProps> = (props) => {
       {
         queryKey: ['projectsCount', props.row.uuid],
         queryFn: () =>
-          count(`/api/projects/`, {
-            customer: [props.row.uuid],
-          } satisfies ProjectsListData['query']),
+          fetchProjectsCount({
+            query: {
+              customer: [props.row.uuid],
+            } satisfies ProjectsListData['query'],
+          }).then(fetchResultCount),
       },
       {
         queryKey: ['resourcesCount', props.row.uuid],
