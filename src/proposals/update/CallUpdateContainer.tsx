@@ -19,16 +19,19 @@ import { CallTabs } from '../details/CallTabs';
 import { TeamSection } from '../team/TeamSection';
 import { useCallBreadcrumbItems } from '../utils';
 
+import { ApplicantVisibilitySection } from './applicant-visibility/ApplicantVisibilitySection';
 import { CallActions } from './CallActions';
 import { CallUpdateHero } from './CallUpdateHero';
 import { COISettingsSection } from './coi-settings/COISettingsSection';
-import { CallConfiguration } from './configuration/CallConfiguration';
+import { CallResourceTemplates } from './configuration/CallResourceTemplates';
+import { GeneralConfigurationSection } from './configuration/GeneralConfigurationSection';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { MatchingSection } from './matching/MatchingSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
 import { CallRoleMappingsList } from './role-mapping/CallRoleMappingsList';
 import { CallRoundsList } from './rounds/CallRoundsList';
+import { WorkflowStepsSection } from './workflow-steps/WorkflowStepsSection';
 
 const PageHero = ({ call, refetch }) => (
   <>
@@ -74,9 +77,33 @@ const Body = ({ call, refetch, loading }) => {
           component: CallGeneralSection,
         },
         {
+          // Parent has no `component`, so it renders as a dropdown whose
+          // children each map to ?tab=<child key> (see usePageTabsTransmitter).
           key: 'configuration',
           title: translate('Configuration'),
-          component: CallConfiguration,
+          defaultKey: 'general-config',
+          children: [
+            {
+              key: 'general-config',
+              title: translate('General configuration'),
+              component: GeneralConfigurationSection,
+            },
+            {
+              key: 'applicant-visibility',
+              title: translate('Applicant data visibility'),
+              component: ApplicantVisibilitySection,
+            },
+            {
+              key: 'resource-templates',
+              title: translate('Resource templates'),
+              component: CallResourceTemplates,
+            },
+            {
+              key: 'steps-settings',
+              title: translate('Steps & settings'),
+              component: WorkflowStepsSection,
+            },
+          ],
         },
         {
           key: 'rounds',
