@@ -1,8 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { Col, Row } from 'react-bootstrap';
-import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
+import {
+  customersCount,
+  marketplaceCategoriesCount,
+  marketplaceProviderOfferingsCount,
+  MarketplaceProviderOfferingsListData,
+  projectsCount,
+  usersCount,
+} from 'waldur-js-client';
 
-import { count } from '@/core/api';
+import { fetchResultCount } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -18,14 +25,16 @@ export const AdminStatistics = () => {
     queryFn: async () => {
       // Order is important
       const promises = [
-        count(`/api/customers/`),
-        count(`/api/projects/`),
-        count(`/api/users/`),
-        count(`/api/marketplace-categories/`),
-        count(`/api/marketplace-provider-offerings/`, {
-          shared: true,
-          state: ['Active', 'Paused'],
-        } satisfies MarketplaceProviderOfferingsListData['query']),
+        customersCount().then(fetchResultCount),
+        projectsCount().then(fetchResultCount),
+        usersCount().then(fetchResultCount),
+        marketplaceCategoriesCount().then(fetchResultCount),
+        marketplaceProviderOfferingsCount({
+          query: {
+            shared: true,
+            state: ['Active', 'Paused'],
+          } satisfies MarketplaceProviderOfferingsListData['query'],
+        }).then(fetchResultCount),
         api.getResourcesCount({
           state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
         }),

@@ -1,8 +1,9 @@
 import { BellIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { marketplaceProjectUpdateRequestsCount } from 'waldur-js-client';
 
-import { count } from '@/core/api';
+import { fetchResultCount } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
 import { useDrawer } from '@/drawer/actions';
 import { DrawerCloseButton } from '@/drawer/DrawerCloseButton';
@@ -47,9 +48,9 @@ export const ConfirmationDrawerToggle: React.FC = () => {
         : 0;
       const pendingProjectUpdatesCount =
         showConsumerOrders || showProviderOrders
-          ? await count('/api/marketplace-project-update-requests/', {
-              state: ['pending'],
-            })
+          ? await marketplaceProjectUpdateRequestsCount({
+              query: { state: ['pending'] },
+            }).then(fetchResultCount)
           : 0;
       return {
         pendingOrdersCount,

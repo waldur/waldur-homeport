@@ -1,13 +1,13 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { useMediaQuery } from 'react-responsive';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { userGroupInvitationsCount } from 'waldur-js-client';
 
 import * as AuthService from '@/auth/AuthService';
-// eslint-disable-next-line waldur-custom/no-direct-client-usage
-import { count } from '@/core/api';
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
 import { createTestWrapper } from '@/test/harness';
+import { mockListResponse } from '@/test/utils';
 import { useUser } from '@/workspace/hooks';
 
 import { useFooterLinks } from './useFooterLinks';
@@ -15,13 +15,14 @@ import { useFooterLinks } from './useFooterLinks';
 vi.mock('@/auth/AuthService');
 vi.mock('@/features/connect');
 vi.mock('react-responsive');
-vi.mock('@/core/api');
 
 describe('useFooterLinks', () => {
   beforeEach(() => {
     ENV.plugins.WALDUR_CORE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS = true;
     vi.clearAllMocks();
-    vi.mocked(count).mockResolvedValue(0);
+    vi.mocked(userGroupInvitationsCount).mockResolvedValue(
+      mockListResponse([], 0),
+    );
   });
 
   it('returns desktop config when isMd is false', async () => {
@@ -50,7 +51,9 @@ describe('useFooterLinks', () => {
     vi.mocked(useMediaQuery).mockReturnValue(true);
     vi.mocked(AuthService.isAuthenticated).mockReturnValue(false);
     vi.mocked(isFeatureVisible).mockReturnValue(true);
-    vi.mocked(count).mockResolvedValue(5);
+    vi.mocked(userGroupInvitationsCount).mockResolvedValue(
+      mockListResponse([], 5),
+    );
 
     const { wrapper } = createTestWrapper();
     const { result } = renderHook(() => useFooterLinks(), { wrapper });
@@ -79,7 +82,9 @@ describe('useFooterLinks', () => {
     vi.mocked(AuthService.isAuthenticated).mockReturnValue(true);
     vi.mocked(useUser).mockReturnValue({ username: 'user' } as any);
     vi.mocked(isFeatureVisible).mockReturnValue(false); // hide_organization_information... = false
-    vi.mocked(count).mockResolvedValue(3); // public invites exist
+    vi.mocked(userGroupInvitationsCount).mockResolvedValue(
+      mockListResponse([], 3),
+    );
 
     const { wrapper } = createTestWrapper();
     const { result } = renderHook(() => useFooterLinks(), { wrapper });

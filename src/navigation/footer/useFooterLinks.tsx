@@ -2,10 +2,10 @@ import { GlobeSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { userGroupInvitationsCount } from 'waldur-js-client';
 
 import * as AuthService from '@/auth/AuthService';
-// eslint-disable-next-line waldur-custom/no-direct-client-usage
-import { count } from '@/core/api';
+import { fetchResultCount } from '@/core/api';
 import { ENV } from '@/core/config';
 import { GRID_BREAKPOINTS, SHORT_STALE_TIME } from '@/core/constants';
 import { isFeatureVisible } from '@/features/connect';
@@ -26,10 +26,12 @@ export const useFooterLinks = () => {
   const { data: publicInvitesCount } = useQuery({
     queryKey: ['publicGroupInvitationsCount'],
     queryFn: () =>
-      count('/api/user-group-invitations/', {
-        is_public: true,
-        is_active: true,
-      }),
+      userGroupInvitationsCount({
+        query: {
+          is_public: true,
+          is_active: true,
+        },
+      }).then(fetchResultCount),
     // On desktop, we only show organization links if user is logged in
     // On mobile/login page, we check the public invitations count
     staleTime: SHORT_STALE_TIME,
