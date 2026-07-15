@@ -1,7 +1,6 @@
 import { RequestResult } from 'waldur-js-client';
 
 import { fetchResultCount, parseNextPage } from '@/core/api';
-import { queryClient } from '@/core/queryClient';
 
 import { PAGE_SIZE_FULL } from './constants';
 import { Fetcher, FetcherOptions, TableRequest } from './types';
@@ -87,20 +86,25 @@ export function createFetcher<F extends SdkFunction<any, any, any>>(
       ...requestOptionsParams,
     };
 
-    const mergedOptions = { ...restOptions, ...restRequestOptions };
+    // staleTime is a React Query option, not an SDK option — keep it out of the
+    // request forwarded to the SDK.
+    const { staleTime, ...sdkOptions } = {
+      ...restOptions,
+      ...restRequestOptions,
+    };
+    void staleTime;
 
-    return queryClient.fetchQuery({
-      queryKey: ['table', request.tableKey, pathParams, mergedQueryParams],
-      queryFn: async () => {
-        const result = await sdkFunction({
-          path: pathParams,
-          query: mergedQueryParams,
-          ...mergedOptions,
-        });
-        return processApiResponse(result, parser, mergedQueryParams);
-      },
-      staleTime: request.options?.staleTime,
-    });
+    // Call the SDK directly. The caller (useTableQuery) already wraps this in a
+    // React Query useQuery that owns caching, dedupe and a fresh abort signal
+    // per attempt. A previous nested queryClient.fetchQuery here captured that
+    // signal in its own retry closure, so a single mid-flight cancellation
+    // (a concurrent refetch, or a filter/pagination change) turned into an ~8s
+    // abort/retry storm instead of a clean cancel.
+    return sdkFunction({
+      path: pathParams,
+      query: mergedQueryParams,
+      ...sdkOptions,
+    }).then((result) => processApiResponse(result, parser, mergedQueryParams));
   };
 }
 
