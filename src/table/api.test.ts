@@ -1,19 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock dependencies
-vi.mock('@/core/queryClient', () => ({
-  queryClient: {
-    fetchQuery: vi.fn(),
-  },
-}));
-
 vi.mock('@/core/api', () => ({
   fetchResultCount: vi.fn(),
   parseNextPage: vi.fn(),
 }));
 
 import { fetchResultCount, parseNextPage } from '@/core/api';
-import { queryClient } from '@/core/queryClient';
 
 import {
   processApiResponse,
@@ -124,10 +117,16 @@ describe('api', () => {
 
   describe('createFetcher', () => {
     const mockSdkFunction = vi.fn();
+    const jsonResult = (data: any[] = []) => ({
+      response: { headers: { get: () => 'application/json' } },
+      data,
+    });
 
     beforeEach(() => {
       mockSdkFunction.mockReset();
-      vi.mocked(queryClient.fetchQuery).mockReset();
+      mockSdkFunction.mockResolvedValue(jsonResult());
+      vi.mocked(fetchResultCount).mockReturnValue(0);
+      vi.mocked(parseNextPage).mockReturnValue(null);
     });
 
     it('creates a fetcher function', () => {
@@ -136,13 +135,7 @@ describe('api', () => {
       expect(typeof fetcher).toBe('function');
     });
 
-    it('calls queryClient.fetchQuery with correct queryKey', async () => {
-      vi.mocked(queryClient.fetchQuery).mockResolvedValue({
-        rows: [],
-        resultCount: 0,
-        nextPage: null,
-      });
-
+    it('calls the SDK directly with page params', async () => {
       const fetcher = createFetcher(mockSdkFunction);
 
       await fetcher({
@@ -152,25 +145,12 @@ describe('api', () => {
         filter: {},
       });
 
-      expect(queryClient.fetchQuery).toHaveBeenCalledWith(
-        expect.objectContaining({
-          queryKey: [
-            'table',
-            'TestTable',
-            undefined,
-            { page: 1, page_size: 10 },
-          ],
-        }),
+      expect(mockSdkFunction).toHaveBeenCalledWith(
+        expect.objectContaining({ query: { page: 1, page_size: 10 } }),
       );
     });
 
     it('merges filter params into query', async () => {
-      vi.mocked(queryClient.fetchQuery).mockResolvedValue({
-        rows: [],
-        resultCount: 0,
-        nextPage: null,
-      });
-
       const fetcher = createFetcher(mockSdkFunction);
 
       await fetcher({
@@ -180,25 +160,14 @@ describe('api', () => {
         filter: { status: 'active', type: 'user' },
       });
 
-      expect(queryClient.fetchQuery).toHaveBeenCalledWith(
+      expect(mockSdkFunction).toHaveBeenCalledWith(
         expect.objectContaining({
-          queryKey: [
-            'table',
-            'TestTable',
-            undefined,
-            { page: 1, page_size: 10, status: 'active', type: 'user' },
-          ],
+          query: { page: 1, page_size: 10, status: 'active', type: 'user' },
         }),
       );
     });
 
-    it('includes path params in queryKey', async () => {
-      vi.mocked(queryClient.fetchQuery).mockResolvedValue({
-        rows: [],
-        resultCount: 0,
-        nextPage: null,
-      });
-
+    it('includes path params', async () => {
       const fetcher = createFetcher(mockSdkFunction, {
         path: { organization_uuid: 'org-123' },
       });
@@ -210,25 +179,15 @@ describe('api', () => {
         filter: {},
       });
 
-      expect(queryClient.fetchQuery).toHaveBeenCalledWith(
+      expect(mockSdkFunction).toHaveBeenCalledWith(
         expect.objectContaining({
-          queryKey: [
-            'table',
-            'TestTable',
-            { organization_uuid: 'org-123' },
-            { page: 1, page_size: 10 },
-          ],
+          path: { organization_uuid: 'org-123' },
+          query: { page: 1, page_size: 10 },
         }),
       );
     });
 
     it('merges options query params', async () => {
-      vi.mocked(queryClient.fetchQuery).mockResolvedValue({
-        rows: [],
-        resultCount: 0,
-        nextPage: null,
-      });
-
       const fetcher = createFetcher(mockSdkFunction, {
         query: { is_active: true },
       });
@@ -240,25 +199,14 @@ describe('api', () => {
         filter: { status: 'pending' },
       });
 
-      expect(queryClient.fetchQuery).toHaveBeenCalledWith(
+      expect(mockSdkFunction).toHaveBeenCalledWith(
         expect.objectContaining({
-          queryKey: [
-            'table',
-            'TestTable',
-            undefined,
-            { page: 1, page_size: 10, status: 'pending', is_active: true },
-          ],
+          query: { page: 1, page_size: 10, status: 'pending', is_active: true },
         }),
       );
     });
 
     it('request params override options params', async () => {
-      vi.mocked(queryClient.fetchQuery).mockResolvedValue({
-        rows: [],
-        resultCount: 0,
-        nextPage: null,
-      });
-
       const fetcher = createFetcher(mockSdkFunction, {
         query: { status: 'default' },
       });
@@ -271,40 +219,28 @@ describe('api', () => {
         options: { params: { status: 'override' } },
       });
 
-      expect(queryClient.fetchQuery).toHaveBeenCalledWith(
+      expect(mockSdkFunction).toHaveBeenCalledWith(
         expect.objectContaining({
-          queryKey: [
-            'table',
-            'TestTable',
-            undefined,
-            { page: 1, page_size: 10, status: 'override' },
-          ],
+          query: { page: 1, page_size: 10, status: 'override' },
         }),
       );
     });
 
-    it('passes staleTime to queryClient', async () => {
-      vi.mocked(queryClient.fetchQuery).mockResolvedValue({
-        rows: [],
-        resultCount: 0,
-        nextPage: null,
-      });
-
+    it('forwards the abort signal but not staleTime to the SDK', async () => {
       const fetcher = createFetcher(mockSdkFunction);
+      const signal = new AbortController().signal;
 
       await fetcher({
         tableKey: 'TestTable',
         currentPage: 1,
         pageSize: 10,
         filter: {},
-        options: { staleTime: 5000 },
+        options: { signal, staleTime: 5000 },
       });
 
-      expect(queryClient.fetchQuery).toHaveBeenCalledWith(
-        expect.objectContaining({
-          staleTime: 5000,
-        }),
-      );
+      const arg = mockSdkFunction.mock.calls[0][0];
+      expect(arg.signal).toBe(signal);
+      expect(arg.staleTime).toBeUndefined();
     });
   });
 

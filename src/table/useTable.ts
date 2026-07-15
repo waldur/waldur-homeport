@@ -184,10 +184,17 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   // fetch() triggers React Query refetch
   const fetch = useCallback(
     (force = false) => {
+      // invalidateQueries already refetches the active table query (and busts
+      // the inner createFetcher cache). Calling refetch() as well fired a second
+      // concurrent refetch that cancelled the first in-flight request; the
+      // nested createFetcher query captured that aborted signal in its retry
+      // closure, so every retry failed on it — stalling the refresh mask for
+      // ~8s (3 retries at 1s/2s/4s backoff). Do one or the other, never both.
       if (force) {
         queryClient.invalidateQueries({ queryKey: ['table', table] });
+      } else {
+        refetch();
       }
-      refetch();
     },
     [refetch, table, queryClient],
   );
