@@ -1,5 +1,7 @@
 include:
   - project: "waldur/waldur-pipelines"
+    file: "/templates/release/tag-release.yml"
+  - project: "waldur/waldur-pipelines"
     file: "/templates/stages.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/release/publish-multiarch.yml"
@@ -515,3 +517,35 @@ Cleanup previous k8s test deployment:
   - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
     when: never
   - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+Release tag:
+  extends: .release-tag-base
+  image: registry.hpc.ut.ee/mirror/library/node:lts-alpine
+  before_script:
+    - apk add --no-cache git
+    - !reference [.release-tag-base, before_script]
+  script:
+    # Safely poll the NPM registry without polluting the Yarn cache
+    - |
+      SUCCESS=0
+      for i in $(seq 1 12); do
+        if npm info waldur-js-client@$RELEASE_VERSION > /dev/null 2>&1; then
+          SUCCESS=1
+          break
+        fi
+        echo "Attempt $i: Waiting for NPM index to update..."
+        sleep 10
+      done
+
+      if [ $SUCCESS -eq 0 ]; then
+        echo "Error: waldur-js-client@$RELEASE_VERSION did not propagate to NPM in time."
+        exit 1
+      fi
+
+    # Now that we know it exists, add it and build
+    - yarn install --frozen-lockfile
+    - yarn add waldur-js-client@$RELEASE_VERSION
+    - yarn build
+    - git add package.json yarn.lock
+    - git commit -m "chore: bump waldur-js-client to $RELEASE_VERSION" || echo "No changes"
+    - !reference [.release-tag-base, tag_script]
