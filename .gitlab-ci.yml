@@ -548,4 +548,4 @@ Release tag:
     - yarn build
     - git add package.json yarn.lock
     - git commit -m "chore: bump waldur-js-client to $RELEASE_VERSION" || echo "No changes"
-    - !reference [.release-tag-script, script]
+    - !reference [.release-tag-base, script]
