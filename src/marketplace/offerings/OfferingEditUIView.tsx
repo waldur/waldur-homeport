@@ -39,6 +39,11 @@ const ResourceDisplayOptionsSection = lazyComponent(() =>
     }),
   ),
 );
+const BackendIdRulesSection = lazyComponent(() =>
+  import('./update/integration/BackendIdRulesSection').then((module) => ({
+    default: module.BackendIdRulesSection,
+  })),
+);
 
 const AdvancedIntegrationSection = lazyComponent(() =>
   import('./update/integration/AdvancedIntegrationSection').then((module) => ({
@@ -126,6 +131,11 @@ const buildIntegrationTab = (offering: Offering): PageBarTab => {
         key: 'resource-display-options',
         component: ResourceDisplayOptionsSection,
         title: translate('Resource display options'),
+      },
+      {
+        key: 'backend-id-rules',
+        component: BackendIdRulesSection,
+        title: translate('Backend ID rules'),
       },
       UserManagementSection && {
         key: 'user-management',
