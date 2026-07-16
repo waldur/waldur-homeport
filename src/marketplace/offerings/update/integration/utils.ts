@@ -1,4 +1,6 @@
+import { merge } from 'lodash-es';
 import {
+  marketplaceProviderOfferingsUpdateBackendIdRules,
   marketplaceProviderOfferingsUpdateIntegration,
   OfferingIntegrationUpdateRequest,
   ProviderOfferingDetails,
@@ -66,6 +68,34 @@ export const useUpdateOfferingIntegration = (
     },
     successMessage: translate('Offering has been updated successfully.'),
     errorMessage: translate('Unable to update offering.'),
+    refetch,
+  });
+
+  return { update };
+};
+
+export const useUpdateOfferingBackendIdRules = (
+  offering: ProviderOfferingDetails,
+  refetch?,
+) => {
+  const { mutateAsync: update } = useManagedMutation<any, any, any>({
+    // The update_backend_id_rules action replaces the whole backend_id_rules
+    // JSON blob, but each inline EditField submits only its own path. Deep-merge
+    // the partial change into the offering's current rules so sibling keys (e.g.
+    // format.regex vs uniqueness.scope) are preserved.
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsUpdateBackendIdRules({
+        path: { uuid: offering.uuid },
+        body: {
+          backend_id_rules: merge(
+            {},
+            offering.backend_id_rules ?? {},
+            formData.backend_id_rules ?? {},
+          ),
+        },
+      }),
+    successMessage: translate('Backend ID rules have been updated.'),
+    errorMessage: translate('Unable to update backend ID rules.'),
     refetch,
   });
 
