@@ -542,11 +542,11 @@ Release tag:
         exit 1
       fi
 
-    # Now that we know it exists, add it and build
-    - yarn install --frozen-lockfile
-    - yarn add waldur-js-client@$RELEASE_VERSION
-    - yarn build
-    - git add package.json yarn.lock
-    - git commit -m "chore: bump waldur-js-client to $RELEASE_VERSION" || echo "No changes"
-    - git tag -a $RELEASE_VERSION -m "Release $RELEASE_VERSION" || echo "Tag already exists"
-    - git push origin $RELEASE_VERSION || echo "Tag already pushed"
+      # Now that we know it exists, add it and build
+      yarn install --frozen-lockfile
+      yarn add waldur-js-client@$RELEASE_VERSION
+      yarn build
+      git add package.json yarn.lock
+      git commit -m "chore: bump waldur-js-client to $RELEASE_VERSION" || echo "No changes"
+      git tag -a $RELEASE_VERSION -m "Release $RELEASE_VERSION" || echo "Tag already exists"
+      git push origin $RELEASE_VERSION || echo "Tag already pushed"
