@@ -46,7 +46,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
           />
           <BooleanEditField
             name="plugin_options.expose_inference_playground"
-            label={translate('Expose inference playground')}
+            label={translate('Enable inference service view')}
           />
           <SelectEditField
             name="plugin_options.disabled_resource_actions"
