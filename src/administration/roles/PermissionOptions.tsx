@@ -162,6 +162,10 @@ export const PermissionOptions = [
         value: 'OFFERING.CREATE',
       },
       {
+        label: translate('Create offering access subnet'),
+        value: 'OFFERING_ACCESS_SUBNET.CREATE',
+      },
+      {
         label: translate('Create permission'),
         value: 'OFFERING.CREATE_PERMISSION',
       },
@@ -184,6 +188,10 @@ export const PermissionOptions = [
       {
         label: translate('Delete offering'),
         value: 'OFFERING.DELETE',
+      },
+      {
+        label: translate('Delete offering access subnet'),
+        value: 'OFFERING_ACCESS_SUBNET.DELETE',
       },
       {
         label: translate('Delete permission'),
@@ -248,6 +256,10 @@ export const PermissionOptions = [
       {
         label: translate('Update offering'),
         value: 'OFFERING.UPDATE',
+      },
+      {
+        label: translate('Update offering access subnet'),
+        value: 'OFFERING_ACCESS_SUBNET.UPDATE',
       },
       {
         label: translate('Update options'),
