@@ -1,12 +1,23 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { rolesCreate, rolesList, rolesUpdate } from 'waldur-js-client';
+import {
+  RoleDetails,
+  rolesCreate,
+  rolesList,
+  rolesRetrieve,
+  rolesUpdate,
+} from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 import { mockListResponse } from '@/test/utils';
 
 import { RoleFormDialog } from './RoleFormDialog';
+
+// When editing, the dialog fetches the full role (the list row only carries
+// a trimmed set of fields, without `permissions`). Helper to mock that call.
+const mockRoleDetails = (role: Partial<RoleDetails>) =>
+  vi.mocked(rolesRetrieve).mockResolvedValue({ data: role } as any);
 
 describe('RoleFormDialog', () => {
   const mockRefetch = vi.fn();
@@ -22,18 +33,20 @@ describe('RoleFormDialog', () => {
     expect(screen.getByText('Type')).toBeInTheDocument();
   });
 
-  it('renders "Edit role" dialog with initial values', () => {
-    const role = {
+  it('renders "Edit role" dialog with initial values', async () => {
+    mockRoleDetails({
       uuid: 'role-uuid',
       name: 'Test Role',
       content_type: 'customer',
       permissions: ['CALL.APPROVE_AND_REJECT_PROPOSALS'],
-    };
+    });
     renderWithProviders(
-      <RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />,
+      <RoleFormDialog
+        resolve={{ row: { uuid: 'role-uuid' } as any, refetch: mockRefetch }}
+      />,
     );
+    expect(await screen.findByDisplayValue('Test Role')).toBeInTheDocument();
     expect(screen.getByText('Edit role')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('Test Role')).toBeInTheDocument();
     expect(screen.getByText('Organization')).toBeInTheDocument();
     expect(screen.getByLabelText('Approve and reject proposals')).toBeChecked();
   });
@@ -84,18 +97,20 @@ describe('RoleFormDialog', () => {
     const user = userEvent.setup();
     const updateSpy = vi.mocked(rolesUpdate).mockResolvedValue({} as any);
     vi.mocked(rolesList).mockResolvedValue(mockListResponse([]));
-    const role = {
+    mockRoleDetails({
       uuid: 'role-uuid',
       name: 'Existing Role',
       content_type: 'project',
       permissions: ['CALL.CLOSE_ROUNDS'],
-    };
+    });
 
     renderWithProviders(
-      <RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />,
+      <RoleFormDialog
+        resolve={{ row: { uuid: 'role-uuid' } as any, refetch: mockRefetch }}
+      />,
     );
 
-    const nameInput = screen.getByDisplayValue('Existing Role');
+    const nameInput = await screen.findByDisplayValue('Existing Role');
     await user.clear(nameInput);
     await user.type(nameInput, 'Updated Role');
 
@@ -113,19 +128,43 @@ describe('RoleFormDialog', () => {
     });
   });
 
-  it('disables name and type for system roles', () => {
-    const role = {
+  it('disables name and type for system roles', async () => {
+    mockRoleDetails({
       uuid: 'system-role-uuid',
       name: 'System Role',
       content_type: 'customer',
       permissions: [],
       is_system_role: true,
-    };
+    });
     renderWithProviders(
-      <RoleFormDialog resolve={{ row: role, refetch: mockRefetch }} />,
+      <RoleFormDialog
+        resolve={{
+          row: { uuid: 'system-role-uuid' } as any,
+          refetch: mockRefetch,
+        }}
+      />,
     );
 
-    expect(screen.getByLabelText(/Name/)).toBeDisabled();
+    expect(await screen.findByLabelText(/Name/)).toBeDisabled();
     expect(screen.getByLabelText(/Type/)).toBeDisabled();
+  });
+
+  it('does not fetch role details in create mode', () => {
+    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
+    expect(screen.getByText('New role')).toBeInTheDocument();
+    expect(rolesRetrieve).not.toHaveBeenCalled();
+  });
+
+  it('shows an error state instead of a submittable form when the role fails to load', async () => {
+    vi.mocked(rolesRetrieve).mockRejectedValue({ response: { status: 404 } });
+    renderWithProviders(
+      <RoleFormDialog
+        resolve={{ row: { uuid: 'role-uuid' } as any, refetch: mockRefetch }}
+      />,
+    );
+    expect(await screen.findByText('Unable to load role.')).toBeInTheDocument();
+    // The form must not render: a blank fallthrough would submit as an update.
+    expect(screen.queryByText('Save')).not.toBeInTheDocument();
+    expect(screen.queryByText('New role')).not.toBeInTheDocument();
   });
 });

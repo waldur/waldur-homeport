@@ -1,8 +1,11 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
-import { rolesUpdateDescriptionsUpdate } from 'waldur-js-client';
+import { rolesRetrieve, rolesUpdateDescriptionsUpdate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -13,12 +16,34 @@ import { getRoles } from './utils';
 
 export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
   const { closeDialog } = useModal();
+  const queryClient = useQueryClient();
+
+  // The roles list response is trimmed and no longer carries the
+  // `description_<lang>` translations this dialog edits. Fetch the full
+  // role on open to populate the per-language fields.
+  // skipGlobalErrorRedirect: a failure must surface inside the dialog rather
+  // than navigate the whole app away.
+  const {
+    data: role,
+    isLoading,
+    isError,
+    refetch: refetchRole,
+  } = useQuery({
+    queryKey: ['role-details', row.uuid],
+    queryFn: () =>
+      rolesRetrieve({ path: { uuid: row.uuid } }).then(
+        (response) => response.data,
+      ),
+    meta: { skipGlobalErrorRedirect: true },
+  });
+
   const onSubmit = async (formData) => {
     await rolesUpdateDescriptionsUpdate({
       path: { uuid: row.uuid },
       body: formData,
     });
     ENV.roles = await getRoles();
+    queryClient.invalidateQueries({ queryKey: ['role-details', row.uuid] });
     closeDialog();
     refetch();
   };
@@ -28,11 +53,33 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
       Object.fromEntries(
         ENV.languageChoices.map(({ code }) => [
           `description_${code}`,
-          row[`description_${code}`],
+          role?.[`description_${code}`],
         ]),
       ),
-    [ENV.languageChoices, row],
+    [ENV.languageChoices, role],
   );
+
+  if (isLoading) {
+    return (
+      <ModalDialog title={translate('Edit role description')}>
+        <LoadingSpinner />
+      </ModalDialog>
+    );
+  }
+
+  // Never render the (validator-free) form over descriptions we failed to
+  // load — otherwise Save would submit empty strings and wipe every existing
+  // translation for the role.
+  if (isError) {
+    return (
+      <ModalDialog title={translate('Edit role description')}>
+        <LoadingErred
+          loadData={refetchRole}
+          message={translate('Unable to load role description.')}
+        />
+      </ModalDialog>
+    );
+  }
 
   return (
     <Form
