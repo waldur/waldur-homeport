@@ -2,6 +2,7 @@ import { EditResourceEndDateAction } from '@/marketplace/resources/actions/EditR
 import { MoveResourceAction } from '@/marketplace/resources/actions/MoveResourceAction';
 import { SyncResourceAction } from '@/marketplace/resources/actions/SyncResourceAction';
 import { ChangePlanAction } from '@/marketplace/resources/change-plan/ChangePlanAction';
+import { EditResourceMetadataAction } from '@/marketplace/resources/EditResourceMetadataAction';
 import { CreateLexisLinkAction } from '@/marketplace/resources/lexis/CreateLexisLinkAction';
 import { SubmitReportAction } from '@/marketplace/resources/report/SubmitReportAction';
 import { SetBackendIdAction } from '@/marketplace/resources/SetBackendIdAction';
@@ -23,7 +24,6 @@ import { RequestLimitsChangeAction } from '../request-limits-change/RequestLimit
 import { AdjustResourceDatesAction } from './AdjustResourceDatesAction';
 import { EditAction } from './EditAction';
 import { EditResourceEndDateByProviderAction } from './EditResourceEndDateByProviderAction';
-import { PlaygroundAction } from './PlaygroundAction';
 import { PullMarketplaceResourceAction } from './PullMarketplaceResourceAction';
 import { PullOrderAction } from './PullOrderAction';
 import { PullResourceAction } from './PullResourceAction';
@@ -36,7 +36,6 @@ import { VersionHistoryAction } from './VersionHistoryAction';
 
 export const ActionsList = [
   EditAction,
-  PlaygroundAction,
   MoveResourceAction,
   SubmitReportAction,
   ChangePlanAction,
@@ -58,7 +57,6 @@ export const ActionsList = [
 
 export const CustomerResourceActions = [
   EditAction,
-  PlaygroundAction,
   ChangePlanAction,
   ChangeLimitsAction,
   RequestLimitsChangeAction,
@@ -75,6 +73,7 @@ export const ProviderActionsList = [
   ReportUsageAction,
   ReportUserUsageAction,
   SetBackendIdAction,
+  EditResourceMetadataAction,
   SubmitReportAction,
   CreateLexisLinkAction,
   CreateRobotAccountAction,

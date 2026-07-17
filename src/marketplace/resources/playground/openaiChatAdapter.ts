@@ -1,113 +1,34 @@
 import type { ChatModelAdapter } from '@assistant-ui/react';
 
-import { translate } from '@/i18n';
+import { PlaygroundMessage, streamInferenceReply } from './streamChat';
 
-// Collect the plain text from an assistant-ui thread message's parts.
+// Flatten an assistant-ui thread message's parts into plain text.
 const textOf = (message: any): string =>
   (message.content ?? [])
     .filter((part: any) => part.type === 'text')
     .map((part: any) => part.text)
     .join('');
 
-const modelIdCache: Record<string, string> = {};
-
-const reachabilityError = () =>
-  new Error(
-    translate(
-      'Could not reach the inference endpoint. It must be reachable from your browser (network/VPN) and allow cross-origin requests.',
-    ),
-  );
-
-const getModelId = async (
+// An assistant-ui ChatModelAdapter backed by our own streaming helper (DRY with
+// the non-assistant-ui path). Sends the selected model + the client's Bearer key.
+export const createOpenAIChatAdapter = (
   baseUrl: string,
-  signal?: AbortSignal,
-): Promise<string> => {
-  if (modelIdCache[baseUrl]) return modelIdCache[baseUrl];
-  let response: Response;
-  try {
-    response = await fetch(`${baseUrl}/models`, { signal });
-  } catch {
-    throw reachabilityError();
-  }
-  if (!response.ok) {
-    throw new Error(
-      translate('Endpoint returned {status} when listing models.', {
-        status: response.status,
-      }),
-    );
-  }
-  const data = await response.json();
-  const id = data?.data?.[0]?.id;
-  if (!id) {
-    throw new Error(translate('The endpoint does not expose any model.'));
-  }
-  modelIdCache[baseUrl] = id;
-  return id;
-};
-
-/**
- * Build an assistant-ui ChatModelAdapter that streams completions from an
- * OpenAI-compatible endpoint (e.g. a vLLM inference VM). The base URL is the
- * resource's access endpoint and already includes the `/v1` suffix.
- */
-export const createOpenAIChatAdapter = (baseUrl: string): ChatModelAdapter => ({
+  apiKey: string | null | undefined,
+  model: string,
+): ChatModelAdapter => ({
   async *run({ messages, abortSignal }) {
-    const model = await getModelId(baseUrl, abortSignal);
-
-    let response: Response;
-    try {
-      response = await fetch(`${baseUrl}/chat/completions`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        signal: abortSignal,
-        body: JSON.stringify({
-          model,
-          stream: true,
-          messages: messages.map((message) => ({
-            role: message.role,
-            content: textOf(message),
-          })),
-        }),
-      });
-    } catch {
-      throw reachabilityError();
-    }
-
-    if (!response.ok || !response.body) {
-      throw new Error(
-        translate('Endpoint returned {status} for the chat request.', {
-          status: response.status,
-        }),
-      );
-    }
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-    let text = '';
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop() ?? '';
-      for (const line of lines) {
-        const trimmed = line.trim();
-        if (!trimmed.startsWith('data:')) continue;
-        const payload = trimmed.slice(5).trim();
-        if (payload === '' || payload === '[DONE]') continue;
-        try {
-          const chunk = JSON.parse(payload);
-          const delta = chunk?.choices?.[0]?.delta?.content;
-          if (delta) {
-            text += delta;
-            yield { content: [{ type: 'text' as const, text }] };
-          }
-        } catch {
-          // Ignore partial/non-JSON SSE lines.
-        }
-      }
+    const history = messages.map((message: any) => ({
+      role: message.role,
+      content: textOf(message),
+    })) as PlaygroundMessage[];
+    for await (const text of streamInferenceReply(
+      baseUrl,
+      model,
+      history,
+      apiKey,
+      abortSignal,
+    )) {
+      yield { content: [{ type: 'text' as const, text }] };
     }
   },
 });

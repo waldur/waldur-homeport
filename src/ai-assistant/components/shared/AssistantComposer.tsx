@@ -17,6 +17,10 @@ interface Props {
   leadingActions?: ReactNode;
   // Rendered between the input and the action row (e.g. a token usage summary).
   usageRow?: ReactNode;
+  // Hide the AI reminder + disclaimer (e.g. an internal testing playground).
+  hideDisclaimer?: boolean;
+  // Block input + send (e.g. the playground endpoint is unreachable).
+  disabled?: boolean;
 }
 
 // Shared assistant composer: the AI reminder (empty state), the search-style
@@ -26,6 +30,8 @@ export const AssistantComposer: FC<Props> = ({
   placeholder,
   leadingActions,
   usageRow,
+  hideDisclaimer,
+  disabled,
 }) => {
   const isEmpty = useAuiState(({ thread }) => thread.messages.length === 0);
   // With no leading actions, right-align Send/Stop so they don't hug the input.
@@ -33,7 +39,7 @@ export const AssistantComposer: FC<Props> = ({
 
   return (
     <div className="aui-composer-wrapper">
-      {isEmpty && (
+      {isEmpty && !hideDisclaimer && (
         <AlertItem
           variant="info"
           type="floating"
@@ -51,6 +57,7 @@ export const AssistantComposer: FC<Props> = ({
             className="aui-composer-input"
             rows={1}
             autoFocus
+            disabled={disabled}
             aria-label={translate('Message input')}
           />
         </div>
@@ -66,6 +73,7 @@ export const AssistantComposer: FC<Props> = ({
                     'btn btn-text-primary btn-sm d-flex align-items-center gap-2',
                     alignEnd && 'ms-auto',
                   )}
+                  {...(disabled ? { disabled: true } : {})}
                   aria-label={translate('Send message')}
                 >
                   <PaperPlaneTiltIcon weight="bold" />
@@ -90,7 +98,7 @@ export const AssistantComposer: FC<Props> = ({
           </div>
         </div>
       </ComposerPrimitive.Root>
-      {!isEmpty && (
+      {!isEmpty && !hideDisclaimer && (
         <p className="text-muted fs-8 text-center mb-0 mt-1">
           {translate(
             'AI may produce inaccurate responses. Do not share sensitive credentials.',

@@ -228,6 +228,12 @@
   position: relative;
 }
 
+// The inference playground reuses the assistant composer but lives inside a
+// card body that already pads it, so drop the wrapper's own padding there only.
+.playground-thread .aui-composer-wrapper {
+  padding: 0;
+}
+
 .aui-composer-root {
   display: flex;
   flex-direction: column;

@@ -13,6 +13,7 @@ import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { countLexisLinks, countRobotAccounts } from '@/marketplace/common/api';
 import { hasEditableLimitComponents } from '@/marketplace/resources/change-limits/utils';
+import { isInferenceServiceEnabled } from '@/marketplace/resources/inference';
 import { PageBarTab } from '@/navigation/types';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
@@ -125,6 +126,18 @@ export const getResourceTabs = ({
         ),
       });
     }
+  }
+
+  if (isInferenceServiceEnabled(resource)) {
+    tabs.push({
+      key: 'inference',
+      title: translate('Inference'),
+      component: lazyComponent(() =>
+        import('./inference/InferenceServiceView').then((module) => ({
+          default: module.InferenceServiceView,
+        })),
+      ),
+    });
   }
 
   if (scope) {
