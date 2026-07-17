@@ -14,7 +14,23 @@ import { RoleCreateButton } from './RoleCreateButton';
 export const RolesList = () => {
   const tableProps = useTable({
     table: `RolesList`,
-    fetchData: createFetcher(rolesList),
+    fetchData: createFetcher(rolesList, {
+      // Only request the fields the table renders. This drops the heavy
+      // per-role `permissions` list and the 14 `description_<lang>`
+      // translations (mostly empty) from the list response. Both are
+      // fetched lazily via rolesRetrieve when an edit dialog is opened.
+      query: {
+        field: [
+          'uuid',
+          'name',
+          'content_type',
+          'description',
+          'users_count',
+          'is_active',
+          'is_system_role',
+        ],
+      },
+    }),
   });
 
   return (

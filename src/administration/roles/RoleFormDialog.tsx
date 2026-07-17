@@ -1,9 +1,18 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { FC, useCallback } from 'react';
 import { Field, Form } from 'react-final-form';
-import { rolesCreate, rolesUpdate, RoleModifyRequest } from 'waldur-js-client';
+import {
+  rolesCreate,
+  rolesRetrieve,
+  rolesUpdate,
+  RoleDetails,
+  RoleModifyRequest,
+} from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup, SelectGroup } from '@/form';
 import { FormGroup } from '@/form';
@@ -20,12 +29,12 @@ import { getRoles } from './utils';
 
 interface RoleFormDialogProps {
   resolve: {
-    row?;
+    row?: RoleDetails;
     refetch(): void;
   };
 }
 
-const RoleForm: FC<{ role? }> = (props) => {
+const RoleForm: FC<{ role?: RoleDetails }> = (props) => {
   return (
     <>
       <StringGroup
@@ -56,19 +65,45 @@ const RoleForm: FC<{ role? }> = (props) => {
 };
 
 export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
-  const role = props.resolve.row;
+  const row = props.resolve.row;
+  const isEdit = Boolean(row);
   const { closeDialog } = useModal();
   const { showErrorResponse } = useNotify();
+  const queryClient = useQueryClient();
+
+  // The roles list response is trimmed and no longer carries `permissions`,
+  // which this form edits. Fetch the full role on open when editing.
+  // skipGlobalErrorRedirect: a failure here must surface inside the dialog,
+  // not navigate the whole app away (e.g. a stale row whose role was deleted).
+  const {
+    data: role,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ['role-details', row?.uuid],
+    queryFn: () =>
+      rolesRetrieve({ path: { uuid: row.uuid } }).then(
+        (response) => response.data,
+      ),
+    enabled: isEdit,
+    meta: { skipGlobalErrorRedirect: true },
+  });
 
   const onSubmit = useCallback(
     async (formData: RoleModifyRequest) => {
       try {
-        if (role) {
-          await rolesUpdate({ path: { uuid: role.uuid }, body: formData });
+        if (isEdit) {
+          await rolesUpdate({ path: { uuid: row.uuid }, body: formData });
         } else {
           await rolesCreate({ body: formData });
         }
         ENV.roles = await getRoles();
+        if (isEdit) {
+          queryClient.invalidateQueries({
+            queryKey: ['role-details', row.uuid],
+          });
+        }
         closeDialog();
         props.resolve.refetch();
       } catch (e) {
@@ -83,8 +118,29 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
         return { [FORM_ERROR]: translate('Unable to save role.') };
       }
     },
-    [role, closeDialog, showErrorResponse, props.resolve],
+    [isEdit, row, queryClient, closeDialog, showErrorResponse, props.resolve],
   );
+
+  if (isEdit && isLoading) {
+    return (
+      <ModalDialog title={translate('Edit role')}>
+        <LoadingSpinner />
+      </ModalDialog>
+    );
+  }
+
+  // Never render a submittable form over a role we failed to load — otherwise
+  // the edit degrades into a blank "New role" that still submits as an update.
+  if (isEdit && isError) {
+    return (
+      <ModalDialog title={translate('Edit role')}>
+        <LoadingErred
+          loadData={refetch}
+          message={translate('Unable to load role.')}
+        />
+      </ModalDialog>
+    );
+  }
 
   return (
     <Form
