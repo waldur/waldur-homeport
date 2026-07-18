@@ -41,7 +41,7 @@ const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} size="sm" pill outline>
       {statusDisplay}
     </Badge>
   );
@@ -191,7 +191,7 @@ export const MyCallsPage: FC = () => {
   );
 
   return (
-    <div className="d-flex flex-column gap-6">
+    <div className="d-flex flex-column" style={{ gap: 16 }}>
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard />
 

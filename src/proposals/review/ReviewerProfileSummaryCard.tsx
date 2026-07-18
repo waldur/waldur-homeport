@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
+import Avatar from '@/core/Avatar';
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -94,13 +95,13 @@ export const ReviewerProfileSummaryCard: FC<
     <Card className="card-bordered">
       <Card.Body>
         <div className="d-flex align-items-center gap-4">
-          {/* Avatar/Icon */}
-          <div
-            className="d-flex align-items-center justify-content-center rounded-circle bg-tertiary text-quaternary"
-            style={{ width: 56, height: 56, minWidth: 56 }}
-          >
-            <UserIcon size={28} weight="regular" />
-          </div>
+          {/* Avatar */}
+          <Avatar
+            src={currentUser?.image}
+            name={currentUser?.full_name || currentUser?.username || ''}
+            size={56}
+            circle
+          />
 
           {/* Profile info */}
           <div className="flex-grow-1">
