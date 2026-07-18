@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from '@phosphor-icons/react';
+import { CheckSquareIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import {
   MaintenanceAnnouncement,
@@ -48,11 +48,15 @@ export const MaintenanceEndEarlyAction: FC<MaintenanceEndEarlyActionProps> = ({
         inputLabel: translate('Reason for ending early'),
         positiveButton: translate('End maintenance'),
         negativeButton: translate('Back'),
-        iconNode: <CheckCircleIcon weight="bold" />,
+        iconNode: <CheckSquareIcon weight="bold" />,
         type: 'success',
       },
     },
-    successMessage: translate('Maintenance has been ended.'),
+    successMessage: translate('Maintenance completed'),
+    successDescription: translate(
+      'The maintenance window {name} has been finalized and all related activities are closed.',
+      { name: row.name },
+    ),
     errorMessage: translate('Unable to end maintenance early.'),
     refetch,
   });
@@ -63,7 +67,7 @@ export const MaintenanceEndEarlyAction: FC<MaintenanceEndEarlyActionProps> = ({
     <ActionItem
       title={translate('End early')}
       action={mutate}
-      iconNode={<CheckCircleIcon weight="bold" />}
+      iconNode={<CheckSquareIcon weight="bold" />}
       iconColor="success"
       disabled={isPending}
     />

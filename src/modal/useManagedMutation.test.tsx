@@ -44,6 +44,27 @@ describe('useManagedMutation', () => {
     expect(useModal().closeDialog).toHaveBeenCalled();
   });
 
+  it('shows success description under the title when provided', async () => {
+    const mutationFn = vi.fn().mockResolvedValue('success');
+    const { result } = renderHook(
+      () =>
+        useManagedMutation({
+          mutationFn,
+          successMessage: 'Maintenance started',
+          successDescription: 'The maintenance window Demo is now in progress.',
+        }),
+      { wrapper: createWrapper() },
+    );
+
+    result.current.mutate(undefined);
+
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    expect(useNotify().showSuccess).toHaveBeenCalledWith(
+      'Maintenance started',
+      'The maintenance window Demo is now in progress.',
+    );
+  });
+
   it('does not close dialog when closeModal is false', async () => {
     const mutationFn = vi.fn().mockResolvedValue('success');
     const { result } = renderHook(
