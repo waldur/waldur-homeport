@@ -252,6 +252,20 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             )}
           />
           <BooleanEditField
+            name="plugin_options.enable_resource_access_subnets"
+            label={translate('Enable resource access subnets')}
+            description={translate(
+              'When enabled, an Access subnets tab is shown on resource detail pages, letting consumers curate the IPs allowed to reach the backend entity. The list is advisory data for external firewalls.',
+            )}
+          />
+          <BooleanEditField
+            name="plugin_options.conceal_subnet_restricted_resources"
+            label={translate('Conceal subnet-restricted resources')}
+            description={translate(
+              'When enabled, a resource of this offering that has access subnets is hidden from the consumer API unless the caller’s IP is in the resource’s allow-list. Staff and support are exempt; resources without any subnet stay visible.',
+            )}
+          />
+          <BooleanEditField
             name="plugin_options.auto_ok_resource_projects"
             label={translate('Auto-OK resource projects on creation')}
             description={translate(
