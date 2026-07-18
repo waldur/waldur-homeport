@@ -68,6 +68,11 @@ const PublicOfferingPartitions = lazyComponent(() =>
     default: module.PublicOfferingPartitions,
   })),
 );
+const PublicOfferingDocuments = lazyComponent(() =>
+  import('./details/PublicOfferingDocuments').then((module) => ({
+    default: module.PublicOfferingDocuments,
+  })),
+);
 const PublicOfferingTermsOfService = lazyComponent(() =>
   import('./details/PublicOfferingTermsOfService').then((module) => ({
     default: module.PublicOfferingTermsOfService,
@@ -144,6 +149,13 @@ const getTabs = (
           title: translate('Components'),
           key: 'components',
           component: PublicOfferingComponents,
+        },
+    !offering?.files?.length
+      ? null
+      : {
+          title: translate('Documents'),
+          key: 'documents',
+          component: PublicOfferingDocuments,
         },
     offering?.software_catalogs?.length
       ? {

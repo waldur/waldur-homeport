@@ -72,6 +72,11 @@ const OfferingPartitionsSection = lazyComponent(() =>
     default: module.OfferingPartitionsSection,
   })),
 );
+const OfferingDocumentsSection = lazyComponent(() =>
+  import('./update/documents/OfferingDocumentsSection').then((module) => ({
+    default: module.OfferingDocumentsSection,
+  })),
+);
 const OfferingOptionsSection = lazyComponent(() =>
   import('./update/options/OfferingOptionsSection').then((module) => ({
     default: module.OfferingOptionsSection,
@@ -185,6 +190,11 @@ const buildPublicInfoTab = (): PageBarTab => ({
       key: 'images',
       component: OfferingImagesList,
       title: translate('Images'),
+    },
+    {
+      key: 'documents',
+      component: OfferingDocumentsSection,
+      title: translate('Documents'),
     },
   ].filter(Boolean),
 });
