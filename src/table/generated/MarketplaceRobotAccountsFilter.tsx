@@ -34,7 +34,7 @@ export const MarketplaceRobotAccountsFilter: FunctionComponent<
     />
     <AsyncSelectFilter
       title={translate('Project')}
-      name="project"
+      name="project_uuid"
       getValueLabel={(value: NameUuid) => value?.name}
       placeholder={translate('Project')}
       loadOptions={createLoadOptions(
@@ -60,7 +60,7 @@ interface MarketplaceRobotAccountsFilterProps {
 
 export interface MarketplaceRobotAccountsFilterFormData {
   customer: NameUuid;
-  project: NameUuid;
+  project_uuid: NameUuid;
 }
 
 type MarketplaceRobotAccountsFilterQuery =
@@ -74,8 +74,8 @@ export const selectMarketplaceRobotAccountsFilter = (
     if (values.customer) {
       filter.customer_uuid = values.customer.uuid;
     }
-    if (values.project) {
-      filter.project_uuid = values.project.uuid;
+    if (values.project_uuid) {
+      filter.project_uuid = values.project_uuid.uuid;
     }
   }
   return filter;

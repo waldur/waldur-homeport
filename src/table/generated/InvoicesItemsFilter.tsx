@@ -37,7 +37,7 @@ export const InvoicesItemsFilter: FunctionComponent<
     />
     <AsyncSelectFilter
       title={translate('Project')}
-      name="project"
+      name="project_uuid"
       getValueLabel={(value: Project) => value?.name}
       placeholder={translate('Project')}
       loadOptions={createLoadOptions(projectsList, 'query', {
@@ -85,7 +85,7 @@ interface InvoicesItemsFilterProps {
 
 export interface InvoicesItemsFilterFormData {
   provider: ServiceProvider;
-  project: Project;
+  project_uuid: Project;
   offering: PublicOfferingDetails;
   conceal_compensation_items: boolean;
 }
@@ -100,8 +100,8 @@ export const selectInvoicesItemsFilter = (
     if (values.provider) {
       filter.provider_uuid = values.provider.uuid;
     }
-    if (values.project) {
-      filter.project_uuid = values.project.uuid;
+    if (values.project_uuid) {
+      filter.project_uuid = values.project_uuid.uuid;
     }
     if (values.offering) {
       filter.offering_uuid = values.offering.uuid;

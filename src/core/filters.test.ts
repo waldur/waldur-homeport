@@ -251,6 +251,47 @@ describe('filters', () => {
 
       expect(values).toBeUndefined();
     });
+
+    // A table must only absorb URL params for fields it owns, so unrelated
+    // global params (e.g. the workspace organization/project selector) are not
+    // turned into phantom filters.
+    it('only absorbs allowed URL params when allowedKeys is given', () => {
+      vi.mocked(router.urlService.search).mockReturnValue({
+        scope_type: 'customer',
+        organization: 'some-org',
+      });
+
+      const values = getInitialValues(undefined, new Set(['scope_type']));
+
+      expect(values).toEqual({ scope_type: 'customer' });
+    });
+
+    it('keeps explicit initialValues even when not in allowedKeys', () => {
+      vi.mocked(router.urlService.search).mockReturnValue({
+        organization: 'some-org',
+      });
+
+      const values = getInitialValues(
+        { status: 'active' },
+        new Set(['scope_type']),
+      );
+
+      expect(values).toEqual({ status: 'active' });
+    });
+
+    it('absorbs all URL params when allowedKeys is omitted', () => {
+      vi.mocked(router.urlService.search).mockReturnValue({
+        scope_type: 'customer',
+        organization: 'some-org',
+      });
+
+      const values = getInitialValues();
+
+      expect(values).toEqual({
+        scope_type: 'customer',
+        organization: 'some-org',
+      });
+    });
   });
 
   describe('syncFiltersToURL', () => {

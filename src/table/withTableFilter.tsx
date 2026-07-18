@@ -1,7 +1,7 @@
-import { ComponentType, FC, useContext, useMemo } from 'react';
+import { ComponentType, FC, useContext, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setFilter } from './actions';
+import { registerFilterName, setFilter } from './actions';
 import { TableFilterContext } from './FilterContextProvider';
 import { selectFilterValue } from './selectors';
 import { TableFilterItem, TableFilterItemProps } from './TableFilterItem';
@@ -85,6 +85,14 @@ export function withTableFilter<P extends object>(
     const { table } = useContext(TableFilterContext);
     const dispatch = useDispatch();
     const value = useSelector(selectFilterValue(table, props.name));
+
+    // Declare this field as one the table owns, so URL-restored filters can be
+    // scoped to real fields and unrelated global params are ignored.
+    useEffect(() => {
+      if (table && props.name) {
+        dispatch(registerFilterName(table, props.name));
+      }
+    }, [table, props.name, dispatch]);
 
     const input = useMemo(
       () => ({

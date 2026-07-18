@@ -53,6 +53,13 @@ describe('formatRoleFilter', () => {
     };
     expect(formatRoleFilter(filterMock.role)).toEqual(expected);
   });
+
+  it('should return an empty object for non-array values (e.g. a malformed URL param)', () => {
+    // A hand-edited URL can make the role filter any string; it must not crash.
+    expect(formatRoleFilter('{broken-json')).toEqual({});
+    expect(formatRoleFilter(undefined)).toEqual({});
+    expect(formatRoleFilter(null)).toEqual({});
+  });
 });
 
 describe('getOrganizationsWhereOwner', () => {

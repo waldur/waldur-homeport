@@ -118,7 +118,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
         {
           title: translate('Project name'),
           render: ({ row }) => <>{row.project_name}</>,
-          filter: 'project',
+          filter: 'project_uuid',
           orderField: 'project_name',
           inlineFilter: (row) => ({
             name: row.project_name,

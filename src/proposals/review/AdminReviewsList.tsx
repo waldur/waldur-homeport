@@ -71,7 +71,7 @@ export const AdminReviewsList: FC = () => {
           render: ({ row }) => (
             <>{renderFieldOrDash((row as any).organization_name)}</>
           ),
-          filter: 'organization',
+          filter: 'organization_uuid',
           inlineFilter: (row) => ({
             name: (row as any).organization_name,
             uuid: (row as any).organization_uuid,

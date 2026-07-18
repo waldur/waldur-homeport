@@ -45,7 +45,7 @@ export const UserUsageList: FC = () => {
     {
       title: translate('Client organization'),
       render: ({ row }) => <>{row.customer_name}</>,
-      filter: 'organization',
+      filter: 'customer_uuid',
       inlineFilter: (row) => ({
         name: row.customer_name,
         uuid: row.customer_uuid,
@@ -55,7 +55,7 @@ export const UserUsageList: FC = () => {
     {
       title: translate('Client project'),
       render: ({ row }) => <>{row.project_name}</>,
-      filter: 'project',
+      filter: 'project_uuid',
       inlineFilter: (row) => ({
         name: row.project_name,
         uuid: row.project_uuid,

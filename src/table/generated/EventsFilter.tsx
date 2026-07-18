@@ -34,7 +34,7 @@ export const EventsFilter: FunctionComponent<{}> = () => (
   <>
     <AsyncSelectFilter
       title={translate('Organization')}
-      name="organization"
+      name="customer_uuid"
       getValueLabel={(value: Customer) => value?.name}
       placeholder={translate('Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
@@ -45,7 +45,7 @@ export const EventsFilter: FunctionComponent<{}> = () => (
     />
     <AsyncSelectFilter
       title={translate('Project')}
-      name="project"
+      name="project_uuid"
       getValueLabel={(value: Project) => value?.name}
       placeholder={translate('Project')}
       loadOptions={createLoadOptions(projectsList, 'query')}
@@ -88,8 +88,8 @@ export const EventsFilter: FunctionComponent<{}> = () => (
 export const EventsFilterFormId = 'EventsFilter';
 
 export interface EventsFilterFormData {
-  organization: Customer;
-  project: Project;
+  customer_uuid: Customer;
+  project_uuid: Project;
   user: User;
   feature: FeatureOption[];
 }
@@ -101,11 +101,11 @@ export const selectEventsFilter = (
 ): EventsFilterQuery => {
   const filter: EventsFilterQuery = {} as any;
   if (values) {
-    if (values.organization) {
-      filter.customer_uuid = values.organization.uuid;
+    if (values.customer_uuid) {
+      filter.customer_uuid = values.customer_uuid.uuid;
     }
-    if (values.project) {
-      filter.project_uuid = values.project.uuid;
+    if (values.project_uuid) {
+      filter.project_uuid = values.project_uuid.uuid;
     }
     if (values.user) {
       filter.user_uuid = values.user.uuid;

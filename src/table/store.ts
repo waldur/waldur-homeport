@@ -180,6 +180,26 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         applyFilters: action.payload.apply,
       };
 
+    case actions.REGISTER_FILTER_NAME: {
+      const name = action.payload.name;
+      if (!name || state.registeredFilterNames?.includes(name)) {
+        return state;
+      }
+      return {
+        ...state,
+        registeredFilterNames: [...(state.registeredFilterNames || []), name],
+      };
+    }
+
+    case actions.CLEAR_REGISTERED_FILTER_NAMES:
+      if (!state.registeredFilterNames?.length) {
+        return state;
+      }
+      return {
+        ...state,
+        registeredFilterNames: [],
+      };
+
     case actions.CLEAR_ALL_FILTERS:
       return {
         ...state,

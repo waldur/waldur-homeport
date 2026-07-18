@@ -15,7 +15,7 @@ export const AdminArrowCustomerMappingsFilter: FunctionComponent<{}> = () => (
   <>
     <AsyncSelectFilter
       title={translate('Waldur Organization')}
-      name="organization"
+      name="waldur_customer_uuid"
       getValueLabel={(value: Customer) => value?.name}
       placeholder={translate('Waldur Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
@@ -43,7 +43,7 @@ export const AdminArrowCustomerMappingsFilterFormId =
   'AdminArrowCustomerMappingsFilter';
 
 export interface AdminArrowCustomerMappingsFilterFormData {
-  organization: Customer;
+  waldur_customer_uuid: Customer;
   arrow_reference: string;
   is_active: boolean;
 }
@@ -56,8 +56,8 @@ export const selectAdminArrowCustomerMappingsFilter = (
 ): AdminArrowCustomerMappingsFilterQuery => {
   const filter: AdminArrowCustomerMappingsFilterQuery = {} as any;
   if (values) {
-    if (values.organization) {
-      filter.waldur_customer_uuid = values.organization.uuid;
+    if (values.waldur_customer_uuid) {
+      filter.waldur_customer_uuid = values.waldur_customer_uuid.uuid;
     }
     if (values.arrow_reference) {
       filter.arrow_reference = values.arrow_reference;

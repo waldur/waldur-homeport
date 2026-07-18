@@ -75,13 +75,13 @@ export const SupportInvoiceItemsList: FunctionComponent<
             );
           },
           export: 'customer_name',
-          filter: 'organization',
+          filter: 'customer_uuid',
         },
         {
           title: translate('Project'),
           render: ({ row }) => renderFieldOrDash(row.project_name),
           export: 'project_name',
-          filter: 'project',
+          filter: 'project_uuid',
         },
         {
           title: translate('Offering'),

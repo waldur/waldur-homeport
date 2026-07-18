@@ -60,6 +60,14 @@ export const selectFiltersStorage = (state: RootState, table: string) => {
   return null;
 };
 
+// Names of the filter fields this table actually renders.
+// Returns a stable empty array when the table has no registrations yet, so it
+// is safe to use directly as a useEffect dependency.
+export const selectRegisteredFilterNames =
+  (table: string) =>
+  (state: RootState): string[] =>
+    getTableState(table)(state)?.registeredFilterNames ?? EMPTY_ARRAY;
+
 export const selectSelectedRows = (table: string) => (state: RootState) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].selectedRows;

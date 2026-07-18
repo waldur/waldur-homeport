@@ -46,9 +46,9 @@ overrides:
       - project_uuid
     customer_uuid:
       label: Organization
-      name: organization
+      name: customer_uuid
     project_uuid:
-      name: project
+      name: project_uuid
       extraQuery:
         customer: 'props.organizationUuid'
 
@@ -58,7 +58,7 @@ overrides:
       - is_finalized
     customer_uuid:
       label: Organization
-      name: organization
+      name: customer_uuid
     is_finalized:
       label: Status
       enumOverrides:
@@ -87,7 +87,7 @@ overrides:
       name: provider
       operationId: marketplace_service_providers_list
     project_uuid:
-      name: project
+      name: project_uuid
       operationId: projects_list
       extraQuery:
         customer: 'props.customerUuid'
@@ -179,7 +179,7 @@ overrides:
       isMulti: true
     customer_uuid:
       label: Organization
-      name: organization
+      name: customer_uuid
       operationId: customers_list
 
   roles:
@@ -336,7 +336,7 @@ overrides:
       - is_active
     waldur_customer_uuid:
       label: Waldur Organization
-      name: organization
+      name: waldur_customer_uuid
     arrow_reference:
       label: Arrow Reference
     is_active:
@@ -347,7 +347,7 @@ overrides:
       - customer_uuid
     customer_uuid:
       label: Organization
-      name: organization
+      name: customer_uuid
 
   chat_threads:
     filters:
@@ -375,9 +375,9 @@ overrides:
       - feature
     customer_uuid:
       label: Organization
-      name: organization
+      name: customer_uuid
     project_uuid:
-      name: project
+      name: project_uuid
     user_uuid:
       label: User
       name: user
@@ -418,7 +418,7 @@ overrides:
       extraPath:
         uuid: props.provider.uuid
     project_uuid:
-      name: project
+      name: project_uuid
       operationId: marketplace_service_providers_robot_account_projects_list
       searchParam: project_name
       extraPath:
@@ -572,7 +572,7 @@ overrides:
       searchParam: false
     organization_uuid:
       label: Organization
-      name: organization
+      name: organization_uuid
       operationId: customers_list
     created_by_uuid:
       label: Applicant
@@ -621,13 +621,13 @@ overrides:
       - offering_uuid
     customer_uuid:
       label: Organization
-      name: organization
+      name: customer_uuid
     accounting_period:
       label: Period
       options: props.accountingPeriods
       mapTo: true
     project_uuid:
-      name: project
+      name: project_uuid
     offering_uuid:
       name: offering
       operationId: marketplace_provider_offerings_list
@@ -805,7 +805,7 @@ overrides:
       searchParam: false
     organization_uuid:
       label: Organization
-      name: organization
+      name: organization_uuid
       operationId: customers_list
     reviewer_uuid:
       label: Reviewer
@@ -847,7 +847,7 @@ overrides:
       - offering
     organization_uuid:
       label: Organization
-      name: organization
+      name: organization_uuid
       operationId: customers_list
     call:
       label: Call
@@ -912,9 +912,9 @@ overrides:
       - image_name
     customer_uuid:
       label: Organization
-      name: organization
+      name: customer_uuid
     project_uuid:
-      name: project
+      name: project_uuid
       extraQuery:
         customer: 'props.organizationUuid'
     runtime_state:

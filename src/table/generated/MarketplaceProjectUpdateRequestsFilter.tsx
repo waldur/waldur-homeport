@@ -62,7 +62,7 @@ export const MarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
       />
       <AsyncSelectFilter
         title={translate('Organization')}
-        name="organization"
+        name="customer_uuid"
         getValueLabel={(value: Customer) => value?.name}
         placeholder={translate('Organization')}
         loadOptions={createLoadOptions(customersList, 'query')}
@@ -79,7 +79,7 @@ export const MarketplaceProjectUpdateRequestsFilterFormId =
 
 export interface MarketplaceProjectUpdateRequestsFilterFormData {
   state: RemoteProjectUpdateRequestStateOption[];
-  organization: Customer;
+  customer_uuid: Customer;
 }
 
 export const MarketplaceProjectUpdateRequestsFilterInitialValues = {
@@ -97,8 +97,8 @@ export const selectMarketplaceProjectUpdateRequestsFilter = (
     if (values.state) {
       filter.state = values.state.map((v: any) => v.value);
     }
-    if (values.organization) {
-      filter.customer_uuid = values.organization.uuid;
+    if (values.customer_uuid) {
+      filter.customer_uuid = values.customer_uuid.uuid;
     }
   }
   return filter;

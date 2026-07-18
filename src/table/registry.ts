@@ -9,14 +9,18 @@ export const registerTable = (options: TableOptionsType) => {
   refCounts[table] = (refCounts[table] || 0) + 1;
 };
 
-export const unregisterTable = (tableName: string) => {
+/** Returns true when this was the last live instance of the table (i.e. the
+ * table is now fully unmounted), so callers can tear down per-table state. */
+export const unregisterTable = (tableName: string): boolean => {
   if (refCounts[tableName]) {
     refCounts[tableName]--;
     if (refCounts[tableName] <= 0) {
       delete registry[tableName];
       delete refCounts[tableName];
+      return true;
     }
   }
+  return false;
 };
 
 export const getTableOptions: (name: string) => TableOptionsType = (name) => {

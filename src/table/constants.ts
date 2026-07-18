@@ -24,6 +24,7 @@ export const INITIAL_STATE: TableState = {
   },
   filterPosition: 'menu',
   filtersStorage: [],
+  registeredFilterNames: [],
   savedFilters: [],
   selectedSavedFilter: null,
   applyFilters: false,

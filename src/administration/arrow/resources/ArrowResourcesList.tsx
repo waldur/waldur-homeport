@@ -80,14 +80,14 @@ export const ArrowResourcesList: FunctionComponent<
           render: ({ row }) => (
             <span>{row.customer_name || DASH_ESCAPE_CODE}</span>
           ),
-          filter: 'organization',
+          filter: 'customer_uuid',
         },
         {
           title: translate('Project'),
           render: ({ row }) => (
             <span>{row.project_name || DASH_ESCAPE_CODE}</span>
           ),
-          filter: 'project',
+          filter: 'project_uuid',
         },
         {
           title: translate('Backend ID'),
@@ -111,7 +111,7 @@ export const ArrowResourcesList: FunctionComponent<
       hasQuery
       filters={
         <MarketplaceResourcesFilter
-          organizationUuid={formValues?.organization?.uuid}
+          organizationUuid={formValues?.customer_uuid?.uuid}
         />
       }
       tableActions={<ArrowResourceImportButton refetch={tableProps.fetch} />}

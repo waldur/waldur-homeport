@@ -8,7 +8,11 @@ import { translate } from '@/i18n';
 import { getTitle } from '@/navigation/title';
 import { router } from '@/router';
 import { type RootState } from '@/store/reducers';
-import { makeSelectTableRows, getTableState } from '@/table/selectors';
+import {
+  makeSelectTableRows,
+  getTableState,
+  selectRegisteredFilterNames,
+} from '@/table/selectors';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
@@ -43,6 +47,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   const { table } = options;
   const isRegisteredRef = useRef(false);
   const queryClient = useQueryClient();
+  const dispatch = useDispatch();
 
   // Register table on first render, unregister on unmount
   if (!isRegisteredRef.current) {
@@ -52,11 +57,14 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
 
   useEffect(() => {
     return () => {
-      unregisterTable(table);
+      // When the last instance of this table unmounts, drop its registered
+      // filter names so a later mount rebuilds them from the fields it renders.
+      if (unregisterTable(table)) {
+        dispatch(actions.clearRegisteredFilterNames(table));
+      }
     };
-  }, [table]);
+  }, [table, dispatch]);
 
-  const dispatch = useDispatch();
   const { openDrawer, renderDrawer } = useDrawer();
 
   // Get Redux state for request building
@@ -70,27 +78,60 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     applyFilters = false,
   } = tableState || {};
 
-  // Seed filtersStorage from initialFilters on first mount
-  useEffect(() => {
-    const initialFilters = options.syncFiltersToURL
-      ? getInitialValues(options.initialFilters)
-      : options.initialFilters;
+  // Filter fields this table renders (each leaf filter self-registers via
+  // withTableFilter). Used to scope URL-restored filters to fields the table
+  // actually owns.
+  const registeredFilterNames = useSelector(selectRegisteredFilterNames(table));
 
-    if (initialFilters) {
-      Object.entries(initialFilters).forEach(([name, value]) => {
-        if (value != null) {
-          dispatch(
-            actions.setFilter(table, {
-              name,
-              value,
-              label: null,
-              component: null,
-            }),
-          );
-        }
-      });
+  // Names already seeded from initialFilters / the URL during this mount, so a
+  // default the user later cleared is not resurrected on a later run.
+  const seededFilterNamesRef = useRef<Set<string>>(new Set());
+
+  // Live view of the current filtersStorage, read inside the seeding effect
+  // without making it a dependency (see below).
+  const filtersStorageRef = useRef(filtersStorage);
+  filtersStorageRef.current = filtersStorage;
+
+  // Seed filtersStorage from initialFilters (and, when opted in, the URL). When
+  // restoring from the URL, only absorb params that are either an explicit
+  // initial filter or a registered field of this table; unrelated global params
+  // (e.g. the workspace `organization`/`project` selector) are ignored so they
+  // don't show up as phantom filters.
+  //
+  // The effect depends on `registeredFilterNames`, not `filtersStorage`, so it
+  // only runs at mount and as fields register — not on every filter
+  // interaction (which would needlessly re-parse the URL). Because it no longer
+  // runs when the user clears a filter, "Clear filters" is not undone; and when
+  // it does re-run for a late-registering field it skips names already seeded
+  // (ref) or already applied (live filtersStorage ref), so it never clobbers a
+  // rendered chip.
+  useEffect(() => {
+    let initialFilters = options.initialFilters;
+    if (options.syncFiltersToURL) {
+      const allowedKeys = new Set<string>([
+        ...(options.initialFilters ? Object.keys(options.initialFilters) : []),
+        ...registeredFilterNames,
+      ]);
+      initialFilters = getInitialValues(options.initialFilters, allowedKeys);
     }
-  }, [table, dispatch]);
+
+    if (!initialFilters) {
+      return;
+    }
+    Object.entries(initialFilters).forEach(([name, value]) => {
+      if (
+        value == null ||
+        seededFilterNamesRef.current.has(name) ||
+        filtersStorageRef.current.some((f) => f.name === name)
+      ) {
+        return;
+      }
+      seededFilterNamesRef.current.add(name);
+      dispatch(
+        actions.setFilter(table, { name, value, label: null, component: null }),
+      );
+    });
+  }, [table, dispatch, registeredFilterNames]);
 
   const filterKeysRef = useRef<Set<string>>(
     new Set(options.initialFilters ? Object.keys(options.initialFilters) : []),
@@ -98,7 +139,9 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
 
   useEffect(() => {
     if (filtersStorage) {
-      filtersStorage.forEach((f) => filterKeysRef.current.add(f.name));
+      filtersStorage.forEach((f) => {
+        filterKeysRef.current.add(f.name);
+      });
     }
   }, [filtersStorage]);
 

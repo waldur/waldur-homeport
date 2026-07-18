@@ -106,7 +106,7 @@ export const OpenstackInstancesTable: FC = () => {
       render: ({ row }) => <>{renderFieldOrDash(row.customer_name)}</>,
       orderField: 'customer_name',
       keys: ['customer_name'],
-      filter: 'organization',
+      filter: 'customer_uuid',
       inlineFilter: (row) => ({
         name: row.customer_name,
         uuid: row.customer_uuid,
@@ -119,7 +119,7 @@ export const OpenstackInstancesTable: FC = () => {
       render: ({ row }) => <>{renderFieldOrDash(row.project_name)}</>,
       orderField: 'project_name',
       keys: ['project_name'],
-      filter: 'project',
+      filter: 'project_uuid',
       inlineFilter: (row) => ({
         name: row.project_name,
         uuid: row.project_uuid,
@@ -268,7 +268,7 @@ export const OpenstackInstancesTable: FC = () => {
       enableExport
       filters={
         <MarketplaceStatsOpenstackInstancesFilter
-          organizationUuid={formValues?.organization?.uuid}
+          organizationUuid={formValues?.customer_uuid?.uuid}
         />
       }
       formId={MarketplaceStatsOpenstackInstancesFilterFormId}

@@ -16,13 +16,18 @@ const options = makeLastTwelveMonthsFilterPeriods();
 export const ResourceUsageFilter: FunctionComponent = () => {
   const { table } = useContext(TableFilterContext);
   const values = useFilterValues(table);
-  const customer = values?.organization;
+  // Global staff report: use backend keys so it doesn't pick up the workspace
+  // organization/project context (?organization=/?project=).
+  const customer = values?.customer_uuid;
 
   return (
     <>
       <AccountingPeriodFilter options={options} />
-      <OrganizationFilter />
-      <ProjectFilter customer_uuid={customer ? customer.uuid : null} />
+      <OrganizationFilter name="customer_uuid" />
+      <ProjectFilter
+        name="project_uuid"
+        customer_uuid={customer ? customer.uuid : null}
+      />
       <OfferingFilter
         badgeValue={(value) =>
           value?.category_title
