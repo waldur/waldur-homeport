@@ -84,6 +84,11 @@ const OfferingEventsList = lazyComponent(() =>
     default: module.OfferingEventsList,
   })),
 );
+const OfferingAccessSubnetsPanel = lazyComponent(() =>
+  import('./details/OfferingAccessSubnetsPanel').then((module) => ({
+    default: module.OfferingAccessSubnetsPanel,
+  })),
+);
 const SlurmPolicySection = lazyComponent(() =>
   import('./update/policies/SlurmPolicySection').then((module) => ({
     default: module.SlurmPolicySection,
@@ -183,6 +188,12 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           key: 'orders',
           title: translate('Orders'),
           component: OfferingOrdersList,
+          visible: true,
+        },
+        (offering.plugin_options as any)?.enable_resource_access_subnets && {
+          key: 'resource-access-subnets',
+          title: translate('Access subnets'),
+          component: OfferingAccessSubnetsPanel,
           visible: true,
         },
       ].filter(Boolean),

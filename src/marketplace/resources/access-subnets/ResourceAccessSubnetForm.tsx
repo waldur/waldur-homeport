@@ -1,6 +1,6 @@
 import {
-  accessSubnetsCreate,
-  accessSubnetsPartialUpdate,
+  marketplaceResourceAccessSubnetsCreate,
+  marketplaceResourceAccessSubnetsPartialUpdate,
 } from 'waldur-js-client';
 
 import {
@@ -9,28 +9,31 @@ import {
 } from '@/access-subnets/AccessSubnetFormDialog';
 import { translate } from '@/i18n';
 
-export interface AccessSubnetFormData {
+export interface ResourceAccessSubnetFormData {
   refetch?(): void;
-  customer_url?: string;
+  resource_url?: string;
   row?: AccessSubnetRow;
 }
 
-interface AccessSubnetFormProps {
-  resolve: AccessSubnetFormData;
+interface ResourceAccessSubnetFormProps {
+  resolve: ResourceAccessSubnetFormData;
 }
 
-export const AccessSubnetForm = ({ resolve }: AccessSubnetFormProps) => (
+export const ResourceAccessSubnetForm = ({
+  resolve,
+}: ResourceAccessSubnetFormProps) => (
   <AccessSubnetFormDialog
     refetch={resolve.refetch}
     row={resolve.row}
     config={{
-      scopeField: 'customer',
-      scopeUrl: resolve.customer_url,
-      create: (body) => accessSubnetsCreate({ body: body as any }),
+      scopeField: 'resource',
+      scopeUrl: resolve.resource_url,
+      create: (body) =>
+        marketplaceResourceAccessSubnetsCreate({ body: body as any }),
       update: (uuid, body) =>
-        accessSubnetsPartialUpdate({ path: { uuid }, body }),
+        marketplaceResourceAccessSubnetsPartialUpdate({ path: { uuid }, body }),
       enforceSingleHost: true,
-      placeholder: translate('Example: 192.168.1.0/32'),
+      placeholder: translate('Example: 192.168.1.5/32'),
       titleCreate: translate('Create access subnet'),
       titleEdit: translate('Edit access subnet'),
       successCreate: translate('Access subnet has been created.'),

@@ -233,6 +233,20 @@ export const getResourceTabs = ({
     });
   }
 
+  if ((offering.plugin_options as any)?.enable_resource_access_subnets) {
+    tabs.push({
+      key: 'access-subnets',
+      title: translate('Access subnets'),
+      component: lazyComponent(() =>
+        import('@/marketplace/resources/access-subnets/ResourceAccessSubnetsCard').then(
+          (module) => ({
+            default: module.ResourceAccessSubnetsCard,
+          }),
+        ),
+      ),
+    });
+  }
+
   if (
     !isFeatureVisible(MarketplaceFeatures.conceal_resource_metadata) ||
     isStaff
