@@ -5,10 +5,12 @@ import {
   customersAddUser,
   customersDeleteUser,
   customersUpdateUser,
+  rolesList,
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
+import { mockListResponse } from '@/test/utils';
 import { useCustomer } from '@/workspace/hooks';
 
 import { EditUserDialog } from './EditUserDialog';
@@ -38,6 +40,26 @@ describe('EditUserDialog (Customer)', () => {
       uuid: 'customer-uuid',
       name: 'Test Customer',
     } as any);
+    // The role picker now fetches the organization's roles via
+    // available_for_customer (RoleGroup scope), so mock that list.
+    vi.mocked(rolesList).mockResolvedValue(
+      mockListResponse([
+        {
+          uuid: 'owner-role-uuid',
+          name: 'owner',
+          description: 'Owner',
+          content_type: 'customer',
+          is_active: true,
+        },
+        {
+          uuid: 'manager-role-uuid',
+          name: 'manager',
+          description: 'Manager',
+          content_type: 'customer',
+          is_active: true,
+        },
+      ]) as any,
+    );
   });
 
   it('renders dialog with correct title and user information', () => {

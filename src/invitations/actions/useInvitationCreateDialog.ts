@@ -1,7 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
-import { userInvitationsCreate } from 'waldur-js-client';
+import { rolesList, userInvitationsCreate } from 'waldur-js-client';
 import { userInvitationsCheckDuplicates } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -17,6 +19,20 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     [context],
   );
 
+  // When inviting into an organization, offer that org's roles (system +
+  // org-private clones, minus concealed). The global ENV.roles list is not used
+  // here because it would expose other organizations' private roles.
+  const customerUuid = context.customer?.uuid;
+  const { data: scopedRoles } = useQuery({
+    queryKey: ['available-roles-for-customer', customerUuid],
+    queryFn: () =>
+      getAllPages((page) =>
+        rolesList({ query: { available_for_customer: customerUuid, page } }),
+      ),
+    enabled: Boolean(customerUuid) && !context.rolesOverride,
+    staleTime: 5 * 60 * 1000,
+  });
+
   // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
   const roles = useMemo(() => {
     if (context.rolesOverride) {
@@ -24,9 +40,12 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
       // use it verbatim and skip ENV.roles + policy filtering.
       return context.rolesOverride.filter((role) => role.is_active !== false);
     }
+    // Fall back to [] (not ENV.roles) while the scoped fetch is in flight, so
+    // no other organization's clones flash into the picker.
+    const baseRoles = customerUuid ? (scopedRoles ?? []) : ENV.roles;
     const _roles = context.roles
-      ? ENV.roles.filter((role) => context.roles.includes(role.name))
-      : ENV.roles.filter(
+      ? baseRoles.filter((role) => context.roles.includes(role.name))
+      : baseRoles.filter(
           (role) =>
             InvitationPolicyService.canManageRole(context, role) &&
             role.is_active,
@@ -39,7 +58,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
       is_active: !role.name.startsWith('PROJECT'),
       tooltip: translate('There are no projects.'),
     }));
-  }, [context, defaultProject]);
+  }, [context, defaultProject, customerUuid, scopedRoles]);
 
   const defaultRole = useMemo(
     () => (roles.length > 0 ? roles[0] : null),

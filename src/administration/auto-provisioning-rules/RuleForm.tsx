@@ -12,7 +12,11 @@ import {
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { Role } from '@/permissions/types';
-import { getProjectRoles } from '@/permissions/utils';
+import {
+  formatRoleLabel,
+  getAmbiguousRoleDescriptions,
+  getProjectRoles,
+} from '@/permissions/utils';
 
 import { validateEmailPatterns } from './utils';
 
@@ -26,6 +30,14 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
         o: 'name',
       }),
     [],
+  );
+  const projectRoles = useMemo(
+    () => getProjectRoles().filter((role) => role.is_system_role),
+    [],
+  );
+  const ambiguousRoles = useMemo(
+    () => getAmbiguousRoleDescriptions(projectRoles),
+    [projectRoles],
   );
   return (
     <>
@@ -95,10 +107,13 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
         isDisabled={values.use_user_organization_as_customer_name}
         isClearable
       />
+      {/* Only deployment-wide (system) roles are offered: an auto-provisioning
+          rule applies across users/organizations, and an organization-specific
+          clone would fail to grant outside its owning organization. */}
       <SelectGroup
         name="project_role"
-        options={getProjectRoles()}
-        getOptionLabel={(role: Role) => role.description || role.name}
+        options={projectRoles}
+        getOptionLabel={(role: Role) => formatRoleLabel(role, ambiguousRoles)}
         getOptionValue={({ name }) => name}
         validate={required}
         simpleValue

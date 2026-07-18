@@ -109,7 +109,10 @@ export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
             }
           >
             <UserGroup permission={resolve.customer} />
-            <RoleGroup types={['customer']} />
+            <RoleGroup
+              types={['customer']}
+              scope={{ customerId: currentCustomer?.uuid }}
+            />
             <ExpirationTimeGroup disabled={submitting} />
           </ModalDialog>
         </form>

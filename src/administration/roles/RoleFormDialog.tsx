@@ -35,19 +35,30 @@ interface RoleFormDialogProps {
 }
 
 const RoleForm: FC<{ role?: RoleDetails }> = (props) => {
+  // An organization role's name encodes its owning organization and its scope
+  // binds it there, so both are fixed — same as system roles.
+  const isOrgScoped = Boolean(props.role?.customer_uuid);
+  const nameLocked = props.role?.is_system_role || isOrgScoped;
   return (
     <>
       <StringGroup
         name="name"
         validate={required}
-        disabled={props.role?.is_system_role}
+        disabled={nameLocked}
         label={translate('Name')}
+        description={
+          isOrgScoped
+            ? translate(
+                'The name of an organization role is fixed; only its description and permissions can be changed.',
+              )
+            : undefined
+        }
         required
       />
       <SelectGroup
         name="content_type"
         validate={required}
-        isDisabled={props.role?.is_system_role}
+        isDisabled={nameLocked}
         options={ROLE_TYPES}
         simpleValue
         label={translate('Type')}

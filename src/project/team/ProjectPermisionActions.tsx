@@ -62,7 +62,7 @@ export const ProjectPermisionActions = ({
     <ActionsDropdown
       row={row}
       refetch={fetch}
-      data={{ projectUuid, customerUuid, project }}
+      data={{ projectUuid: projectId, customerUuid: customerId, project }}
       actions={actions}
       disabled={disabled}
       tooltip={

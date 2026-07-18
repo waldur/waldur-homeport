@@ -1,6 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { checklistsAdminRetrieve, customersRetrieve } from 'waldur-js-client';
+import {
+  checklistsAdminRetrieve,
+  customersRetrieve,
+  rolesList,
+} from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -302,6 +306,31 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
 };
 
 const IdentifiersTab: FC<CustomerEditPanelProps> = (props) => {
+  // Cloned (custom) roles embed the organization slug in their name, so changing
+  // the slug renames them. Warn about that only when such roles exist.
+  const { data: hasCustomRoles } = useQuery({
+    queryKey: ['customer-has-custom-roles', props.customer.uuid],
+    queryFn: async () => {
+      const response = await rolesList({
+        query: {
+          available_for_customer: props.customer.uuid,
+          is_system_role: false,
+          page_size: 1,
+        },
+      });
+      return (response.data?.length ?? 0) > 0;
+    },
+    staleTime: UI_STALE_TIME,
+  });
+
+  const slugDescription = hasCustomRoles
+    ? translate(
+        'Warning: Changing the slug may break external integrations that rely on this value, and it will rename this organization’s custom roles (their names include the slug). Ensure that all dependent systems are updated before proceeding.',
+      )
+    : translate(
+        'Warning: Changing the slug may break external integrations that rely on this value. Ensure that all dependent systems are updated before proceeding.',
+      );
+
   return (
     <>
       <FormTable.Item label={translate('UUID')} value={props.customer.uuid} />
@@ -309,9 +338,7 @@ const IdentifiersTab: FC<CustomerEditPanelProps> = (props) => {
       <StringEditField
         name="slug"
         label={translate('Slug')}
-        description={translate(
-          'Warning: Changing the slug may break external integrations that rely on this value. Ensure that all dependent systems are updated before proceeding.',
-        )}
+        description={slugDescription}
         isStaffOnly
       />
 

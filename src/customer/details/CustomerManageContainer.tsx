@@ -26,6 +26,11 @@ const AccessControlTabsContainer = lazyComponent(() =>
     default: module.AccessControlTabsContainer,
   })),
 );
+const OrganizationRolesList = lazyComponent(() =>
+  import('../roles/OrganizationRolesList').then((module) => ({
+    default: module.OrganizationRolesList,
+  })),
+);
 const CustomerBillingPanel = lazyComponent(() =>
   import('./CustomerBillingPanel').then((module) => ({
     default: module.CustomerBillingPanel,
@@ -88,6 +93,13 @@ export const CustomerManageContainer = () => {
           component: AccessControlTabsContainer,
           title: translate('Access control'),
         },
+        isUserStaff
+          ? {
+              key: 'roles',
+              component: OrganizationRolesList,
+              title: translate('Roles'),
+            }
+          : null,
         {
           key: 'billing',
           component: CustomerBillingPanel,

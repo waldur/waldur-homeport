@@ -182,6 +182,52 @@ overrides:
       name: organization
       operationId: customers_list
 
+  roles:
+    filters:
+      - content_type
+      - is_system_role
+      - include_concealed
+    content_type:
+      label: Scope
+      options: props.scopeOptions
+      valueField: value
+      labelField: label
+    is_system_role:
+      label: Type
+      enumOverrides:
+        'true': System role
+        'false': Organization role
+    include_concealed:
+      label: Show concealed roles
+
+  admin_roles:
+    componentName: AdminRolesFilter
+    operationId: roles_list
+    filters:
+      - content_type
+      - is_system_role
+      - is_active
+    content_type:
+      label: Scope
+      enumOverrides:
+        customer: Organization
+        project: Project
+        offering: Offering
+        call: Call
+        proposal: Proposal
+        service_provider: Service provider organization
+        call_organizer: Call managing organization
+    is_system_role:
+      label: Type
+      enumOverrides:
+        'true': System
+        'false': Custom
+    is_active:
+      label: Status
+      enumOverrides:
+        'true': Active
+        'false': Inactive
+
   notification_messages:
     filters:
       - is_overridden

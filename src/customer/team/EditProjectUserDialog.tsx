@@ -22,6 +22,7 @@ import {
 } from '@/project/team/onlyOneProjectManager';
 import { RoleGroup } from '@/project/team/RoleGroup';
 import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
+import { useCustomer } from '@/workspace/hooks';
 
 import { ProjectGroup } from './ProjectGroup';
 import { UserGroup } from './UserGroup';
@@ -84,6 +85,7 @@ const EditProjectUserDialogFormBody: FC<{
     typeof useManagedMutation<any, any, EditProjectUserDialogFormData>
   >;
 }> = ({ handleSubmit, invalid, submitting, values, resolve, saveMutation }) => {
+  const customer = useCustomer();
   const { data: hasActiveManager } = useProjectHasActiveManager(
     resolve.project['project_uuid'],
   );
@@ -117,7 +119,10 @@ const EditProjectUserDialogFormBody: FC<{
         <div className="size-sm">
           <UserGroup permission={resolve.customer} />
           <ProjectGroup project={resolve.project} />
-          <RoleGroup types={['project']} />
+          <RoleGroup
+            types={['project']}
+            scope={{ customerId: customer?.uuid }}
+          />
           <ExpirationTimeGroup disabled={submitting} />
         </div>
       </ModalDialog>
@@ -139,9 +144,17 @@ export const EditProjectUserDialog: FC<EditProjectUserDialogProps> = ({
 
   const initialValues = useMemo(
     () => ({
-      role: getProjectRoles().find(
-        ({ name }) => name === resolve.project.role_name,
-      ),
+      // Preselect the member's current role by name; it may be an organization
+      // clone absent from the global list, so fall back to a minimal object.
+      role:
+        getProjectRoles().find(
+          ({ name }) => name === resolve.project.role_name,
+        ) ??
+        ({
+          name: resolve.project.role_name,
+          description: resolve.project.role_name,
+          content_type: 'project',
+        } as Role),
       expiration_time: resolve.project.expiration_time,
     }),
     [resolve.project],
