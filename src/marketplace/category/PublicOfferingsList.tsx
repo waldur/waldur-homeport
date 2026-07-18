@@ -40,6 +40,11 @@ const RowActions = ({ row }) => {
   const user = useUser();
   const router = useRouter();
   const { isAllowed } = isOfferingRestrictedToProject(row, user);
+  // An offering the user cannot order (restricted role or no accessible plan)
+  // is reported by the backend as is_accessible === false; keep its Deploy
+  // action disabled so it matches the offering detail page.
+  const isInaccessible = Boolean(user) && row.is_accessible === false;
+  const canDeploy = isAllowed && !isInaccessible;
   if (isFeatureVisible(MarketplaceFeatures.catalogue_only)) {
     return null;
   }
@@ -49,7 +54,7 @@ const RowActions = ({ row }) => {
       <Dropdown.Toggle
         variant="text-secondary"
         className="btn-icon no-arrow"
-        disabled={!isAllowed}
+        disabled={!canDeploy}
         size="sm"
       >
         <DotsThreeVerticalIcon size={22} weight="bold" />
@@ -57,7 +62,7 @@ const RowActions = ({ row }) => {
       <Dropdown.Menu flip={false}>
         <Dropdown.Item
           onClick={() => {
-            if (isAllowed) {
+            if (canDeploy) {
               setTimeout(() => {
                 router.stateService.go('marketplace-offering-public', {
                   offering_uuid: row.uuid,
@@ -65,7 +70,7 @@ const RowActions = ({ row }) => {
               }, 100);
             }
           }}
-          disabled={!isAllowed}
+          disabled={!canDeploy}
         >
           {translate('Deploy')}
         </Dropdown.Item>
@@ -121,7 +126,10 @@ export const PublicOfferingsList: FunctionComponent<{
   );
 
   const mergedFilter = useMemo(
-    () => ({ ...baseFilter, ...filter }),
+    // accessible: hide offerings the current user cannot order (e.g. restricted
+    // to roles they do not hold) from the marketplace catalog. They remain
+    // reachable from an existing resource via the offering detail page.
+    () => ({ ...baseFilter, ...filter, accessible: true }),
     [baseFilter, filter],
   );
 

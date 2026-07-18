@@ -14,9 +14,19 @@ interface OfferingAccessibility {
 }
 
 export function useOfferingAccessibility(
-  offering: Offering,
+  offering: Offering | undefined,
 ): OfferingAccessibility {
   const user = useUser();
+  if (!offering) {
+    return {
+      isRestricted: false,
+      isAllowed: true,
+      isInaccessible: false,
+      isDisabled: false,
+      tooltipMessage: false,
+      disabledButtonTooltip: undefined,
+    };
+  }
   const { isRestricted, isAllowed } = isOfferingRestrictedToProject(
     offering,
     user,

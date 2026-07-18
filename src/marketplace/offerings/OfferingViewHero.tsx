@@ -21,6 +21,7 @@ import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
 
+import { useOfferingAccessibility } from '../common/cards/useOfferingAccessibility';
 import { RefreshButton } from '../common/RefreshButton';
 import { getLabel } from '../common/registry';
 
@@ -79,7 +80,13 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
           },
     );
 
-  const canDeploy = useMemo(() => offering?.state === 'Active', [offering]);
+  const { isDisabled: isNotAccessible, disabledButtonTooltip } =
+    useOfferingAccessibility(offering);
+
+  const canDeploy = useMemo(
+    () => offering?.state === 'Active' && !isNotAccessible,
+    [offering, isNotAccessible],
+  );
 
   const isEditPage = [
     'admin-marketplace-offering-update',
@@ -236,7 +243,11 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         actions={
           <>
             {props.isPublic && (
-              <DeployButton offering={offering} disabled={!canDeploy} />
+              <DeployButton
+                offering={offering}
+                disabled={!canDeploy}
+                disabledReason={disabledButtonTooltip}
+              />
             )}
             <OfferingAccessButton offering={offering} />
             {isEditPage && (
