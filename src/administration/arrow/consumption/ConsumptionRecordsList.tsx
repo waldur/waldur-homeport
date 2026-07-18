@@ -85,7 +85,7 @@ export const ConsumptionRecordsList: FunctionComponent<
           render: ({ row }) => (
             <span>{row.customer_name || DASH_ESCAPE_CODE}</span>
           ),
-          filter: 'organization',
+          filter: 'customer_uuid',
         },
         {
           title: translate('Project'),

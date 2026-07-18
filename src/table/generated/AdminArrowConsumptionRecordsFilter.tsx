@@ -30,7 +30,7 @@ export const AdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
   <>
     <AsyncSelectFilter
       title={translate('Organization')}
-      name="organization"
+      name="customer_uuid"
       getValueLabel={(value: Customer) => value?.name}
       placeholder={translate('Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
@@ -56,7 +56,7 @@ export const AdminArrowConsumptionRecordsFilterFormId =
   'AdminArrowConsumptionRecordsFilter';
 
 export interface AdminArrowConsumptionRecordsFilterFormData {
-  organization: Customer;
+  customer_uuid: Customer;
   is_finalized: IsFinalizedOption;
 }
 
@@ -68,8 +68,8 @@ export const selectAdminArrowConsumptionRecordsFilter = (
 ): AdminArrowConsumptionRecordsFilterQuery => {
   const filter: AdminArrowConsumptionRecordsFilterQuery = {} as any;
   if (values) {
-    if (values.organization) {
-      filter.customer_uuid = values.organization.uuid;
+    if (values.customer_uuid) {
+      filter.customer_uuid = values.customer_uuid.uuid;
     }
     if (values.is_finalized) {
       filter.is_finalized = values.is_finalized.value;

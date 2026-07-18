@@ -29,6 +29,9 @@ export const RESET_COLUMNS = 'waldur/table/RESET_COLUMNS';
 export const INIT_COLUMN_POSITIONS = 'waldur/table/INIT_COLUMN_POSITIONS';
 export const SWAP_COLUMNS = 'waldur/table/SWAP_COLUMNS';
 export const CLEAR_ALL_FILTERS = 'waldur/table/CLEAR_ALL_FILTERS';
+export const REGISTER_FILTER_NAME = 'waldur/table/REGISTER_FILTER_NAME';
+export const CLEAR_REGISTERED_FILTER_NAMES =
+  'waldur/table/CLEAR_REGISTERED_FILTER_NAMES';
 
 export const fetchListDone = (
   table: string,
@@ -232,5 +235,21 @@ export const swapColumns = (
 
 export const clearAllFilters = (table: string) => ({
   type: CLEAR_ALL_FILTERS,
+  payload: { table },
+});
+
+/** Record that a filter field with the given `name` is rendered by this table.
+ * Emitted by every leaf filter via `withTableFilter`. Lets the table tell its
+ * own filter fields apart from unrelated global URL params. */
+export const registerFilterName = (table: string, name: string) => ({
+  type: REGISTER_FILTER_NAME,
+  payload: { table, name },
+});
+
+/** Drop the registered filter names for a table. Dispatched when the table is
+ * fully unmounted so a later mount (possibly a different view reusing the same
+ * table id) rebuilds the set from the fields it actually renders. */
+export const clearRegisteredFilterNames = (table: string) => ({
+  type: CLEAR_REGISTERED_FILTER_NAMES,
   payload: { table },
 });

@@ -121,6 +121,12 @@ export interface TableState {
   sorting?: SortingState;
   filterPosition?: FilterPosition;
   filtersStorage?: FilterItem[];
+  /** Names of the filter fields actually rendered by this table (each leaf
+   * filter self-registers via `withTableFilter`). Used to scope URL-restored
+   * filters to fields this table actually owns, so unrelated global URL params
+   * (e.g. the workspace `organization`/`project` selector) are not absorbed as
+   * phantom filters. */
+  registeredFilterNames?: string[];
   savedFilters?: TableFiltersGroup[];
   selectedSavedFilter?: TableFiltersGroup;
   /** Don't apply the filters at first (let's set it `false`), because the filters are empty and the request will be invalid. \

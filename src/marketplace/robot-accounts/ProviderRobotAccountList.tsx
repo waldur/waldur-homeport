@@ -63,7 +63,7 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
     {
       title: translate('Project'),
       render: ({ row }) => row.project_name,
-      filter: 'project',
+      filter: 'project_uuid',
       inlineFilter: (row) => ({
         name: row.project_name,
         uuid: row.project_uuid,

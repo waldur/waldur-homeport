@@ -51,7 +51,7 @@ export const OrganizationCostPoliciesList: FC = () => {
             />
           ),
 
-          filter: 'organization',
+          filter: 'customer_uuid',
           inlineFilter: (row) => ({
             name: row.scope_name,
             uuid: row.scope_uuid,

@@ -15,7 +15,7 @@ export const MarketplaceCustomerEstimatedCostPoliciesFilter: FunctionComponent<{
   () => (
     <AsyncSelectFilter
       title={translate('Organization')}
-      name="organization"
+      name="customer_uuid"
       getValueLabel={(value: Customer) => value?.name}
       placeholder={translate('Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
@@ -30,7 +30,7 @@ export const MarketplaceCustomerEstimatedCostPoliciesFilterFormId =
   'MarketplaceCustomerEstimatedCostPoliciesFilter';
 
 export interface MarketplaceCustomerEstimatedCostPoliciesFilterFormData {
-  organization: Customer;
+  customer_uuid: Customer;
 }
 
 type MarketplaceCustomerEstimatedCostPoliciesFilterQuery =
@@ -41,8 +41,8 @@ export const selectMarketplaceCustomerEstimatedCostPoliciesFilter = (
 ): MarketplaceCustomerEstimatedCostPoliciesFilterQuery => {
   const filter: MarketplaceCustomerEstimatedCostPoliciesFilterQuery = {} as any;
   if (values) {
-    if (values.organization) {
-      filter.customer_uuid = values.organization.uuid;
+    if (values.customer_uuid) {
+      filter.customer_uuid = values.customer_uuid.uuid;
     }
   }
   return filter;

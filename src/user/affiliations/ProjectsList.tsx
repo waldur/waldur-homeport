@@ -44,13 +44,13 @@ export const ProjectsList = () => {
 
   const filter = useMemo(() => {
     const filterObj: any = {};
-    if (stateFilter && stateFilter.organization) {
-      if (Array.isArray(stateFilter.organization)) {
-        filterObj.customer = stateFilter.organization
+    if (stateFilter && stateFilter.customer_uuid) {
+      if (Array.isArray(stateFilter.customer_uuid)) {
+        filterObj.customer = stateFilter.customer_uuid
           .map((x) => x.uuid)
           .join(',');
       } else {
-        filterObj.customer = stateFilter.organization.uuid;
+        filterObj.customer = stateFilter.customer_uuid.uuid;
       }
     }
     if (stateFilter && stateFilter.conceal_finished_projects) {
@@ -138,7 +138,7 @@ export const ProjectsList = () => {
       ),
 
       keys: ['customer_uuid', 'customer_name'],
-      filter: 'organization',
+      filter: 'customer_uuid',
       inlineFilter: (row) => [
         { name: row.customer_name, uuid: row.customer_uuid },
       ],

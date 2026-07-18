@@ -22,6 +22,7 @@ const getIsRemovedFilterOptions = () => [
 export const ProjectsListFilter: FC = () => (
   <>
     <OrganizationFilter
+      name="customer_uuid"
       getValueLabel={(option) => option.name}
       instantApply={false}
     />

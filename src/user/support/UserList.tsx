@@ -211,13 +211,13 @@ export const UserList: FunctionComponent = () => {
     const roleFilter = formatRoleFilter(filters?.role) || {};
     const filterObj: Record<string, string | boolean | string[]> = {};
 
-    if (filters?.organization?.uuid) {
-      filterObj.customer_uuid = filters.organization.uuid;
+    if (filters?.customer_uuid?.uuid) {
+      filterObj.customer_uuid = filters.customer_uuid.uuid;
     }
-    if (filters?.project_role) {
+    if (Array.isArray(filters?.project_role)) {
       filterObj.project_roles = filters.project_role.map(({ name }) => name);
     }
-    if (filters?.organization_role) {
+    if (Array.isArray(filters?.organization_role)) {
       filterObj.organization_roles = filters.organization_role.map(
         ({ name }) => name,
       );
@@ -274,7 +274,7 @@ export const UserList: FunctionComponent = () => {
       title: translate('Organization'),
       render: OrganizationField,
       orderField: 'organization',
-      filter: 'organization',
+      filter: 'customer_uuid',
       keys: ['organization'],
       id: 'organization',
       export: 'organization',
@@ -523,14 +523,17 @@ export const UserList: FunctionComponent = () => {
 };
 
 export const formatRoleFilter = (roles) => {
-  if (roles) {
-    const formattedRole = {};
-    roles.map((item) => {
-      formattedRole[item.value] = true;
-    });
-    return formattedRole;
+  // `roles` normally comes from the multi-select filter (an array of options),
+  // but a hand-edited / malformed URL can make it any string, so guard against
+  // non-array values instead of crashing on `.map`.
+  if (!Array.isArray(roles)) {
+    return {};
   }
-  return roles;
+  const formattedRole = {};
+  roles.forEach((item) => {
+    formattedRole[item.value] = true;
+  });
+  return formattedRole;
 };
 
 export const getOrganizationsWhereOwner = (user: Partial<User>) =>

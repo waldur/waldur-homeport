@@ -92,7 +92,7 @@ export const CustomerMappingsList: FunctionComponent<
           render: ({ row }) => (
             <span className="text-dark">{row.waldur_customer_name}</span>
           ),
-          filter: 'organization',
+          filter: 'waldur_customer_uuid',
         },
         {
           title: translate('Status'),

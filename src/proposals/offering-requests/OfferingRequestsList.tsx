@@ -63,7 +63,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
         {
           title: translate('Call manager'),
           render: ({ row }) => <>{row.call_managing_organisation}</>,
-          filter: 'organization',
+          filter: 'organization_uuid',
         },
         {
           title: translate('Offering'),

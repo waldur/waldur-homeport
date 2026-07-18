@@ -39,7 +39,7 @@ export const ProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
   <>
     <AsyncSelectFilter
       title={translate('Organization')}
-      name="organization"
+      name="organization_uuid"
       getValueLabel={(value: Customer) => value?.name}
       placeholder={translate('Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
@@ -96,7 +96,7 @@ export const ProposalRequestedOfferingsFilterFormId =
   'ProposalRequestedOfferingsFilter';
 
 export interface ProposalRequestedOfferingsFilterFormData {
-  organization: Customer;
+  organization_uuid: Customer;
   call: PublicCall;
   state: RequestedOfferingStatesOption[];
   offering: PublicOfferingDetails;
@@ -110,8 +110,8 @@ export const selectProposalRequestedOfferingsFilter = (
 ): ProposalRequestedOfferingsFilterQuery => {
   const filter: ProposalRequestedOfferingsFilterQuery = {} as any;
   if (values) {
-    if (values.organization) {
-      filter.organization_uuid = values.organization.uuid;
+    if (values.organization_uuid) {
+      filter.organization_uuid = values.organization_uuid.uuid;
     }
     if (values.call) {
       filter.call = values.call.url;

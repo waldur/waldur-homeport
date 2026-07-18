@@ -28,6 +28,7 @@ describe('Table reducer', () => {
       toggled: {},
       filterPosition: 'menu',
       filtersStorage: [],
+      registeredFilterNames: [],
       savedFilters: [],
       selectedSavedFilter: null,
       activeColumns: {},
@@ -65,6 +66,35 @@ describe('Table reducer', () => {
     expect(state.users.loading).toBe(false);
     expect(state.users.error).toBe(null);
     expect(state.users.pagination.resultCount).toBe(1);
+  });
+
+  // Leaf filters self-register their name so the table can tell its own filter
+  // fields apart from unrelated global URL params.
+  it('should register filter names and de-duplicate them', () => {
+    let state: any = reducer(
+      {},
+      actions.registerFilterName('users', 'scope_type'),
+    );
+    expect(state.users.registeredFilterNames).toEqual(['scope_type']);
+
+    state = reducer(state, actions.registerFilterName('users', 'role'));
+    expect(state.users.registeredFilterNames).toEqual(['scope_type', 'role']);
+
+    // Registering the same name again is a no-op (no duplicates).
+    const before = state.users.registeredFilterNames;
+    state = reducer(state, actions.registerFilterName('users', 'scope_type'));
+    expect(state.users.registeredFilterNames).toBe(before);
+  });
+
+  it('should clear registered filter names on table teardown', () => {
+    let state: any = reducer(
+      {},
+      actions.registerFilterName('users', 'scope_type'),
+    );
+    expect(state.users.registeredFilterNames).toEqual(['scope_type']);
+
+    state = reducer(state, actions.clearRegisteredFilterNames('users'));
+    expect(state.users.registeredFilterNames).toEqual([]);
   });
 
   it('should handle error action', () => {

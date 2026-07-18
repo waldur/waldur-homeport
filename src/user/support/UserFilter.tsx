@@ -13,7 +13,9 @@ import './UserFilter.scss';
 export const UserFilter: FC = () => {
   return (
     <>
-      <OrganizationFilter />
+      {/* Use the backend key as the field name so this global staff list does
+          not pick up the workspace organization context (?organization=...). */}
+      <OrganizationFilter name="customer_uuid" />
       <ProjectRoleFilter
         getValueLabel={(value) => value.description || value.name}
         instantApply={false}

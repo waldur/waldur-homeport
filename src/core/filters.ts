@@ -116,13 +116,25 @@ export const syncFiltersToURL = (form: any) => {
   }
 };
 
-export const getInitialValues = (initialValues?) => {
+/**
+ * Builds the initial filter values for a table from its explicit defaults plus
+ * the current URL query params.
+ *
+ * When `allowedKeys` is provided, only URL params whose key is in that set are
+ * absorbed. This prevents a table from swallowing unrelated global URL params
+ * (e.g. the workspace `organization`/`project` selector) as phantom filters.
+ * Explicit `initialValues` are always kept regardless.
+ */
+export const getInitialValues = (initialValues?, allowedKeys?: Set<string>) => {
   const queryParams = getQueryParams();
   if (isEmpty(queryParams)) {
     return initialValues;
   }
   const queryParamValues = initialValues ? { ...initialValues } : {};
   for (const [key, value] of Object.entries(queryParams)) {
+    if (allowedKeys && !allowedKeys.has(key)) {
+      continue;
+    }
     if (key && (Array.isArray(value) ? value.length : value)) {
       queryParamValues[key] = value;
     }

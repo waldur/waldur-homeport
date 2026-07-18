@@ -34,11 +34,11 @@ export const selectResourceUsageFilter = (usageFilter: any) => {
       filter.billing_period_year = startDate.getFullYear();
       filter.billing_period_month = startDate.getMonth() + 1;
     }
-    if (usageFilter.organization) {
-      filter.customer_uuid = usageFilter.organization.uuid;
+    if (usageFilter.customer_uuid) {
+      filter.customer_uuid = usageFilter.customer_uuid.uuid;
     }
-    if (usageFilter.project) {
-      filter.project_uuid = usageFilter.project.uuid;
+    if (usageFilter.project_uuid) {
+      filter.project_uuid = usageFilter.project_uuid.uuid;
     }
     if (usageFilter.offering) {
       filter.offering_uuid = usageFilter.offering.uuid;
@@ -80,7 +80,7 @@ export const ResourceUsageList: FC = () => {
     {
       title: translate('Client organization'),
       render: ({ row }) => <>{row.customer_name}</>,
-      filter: 'organization',
+      filter: 'customer_uuid',
       inlineFilter: (row) => ({
         name: row.customer_name,
         uuid: row.customer_uuid,
@@ -90,7 +90,7 @@ export const ResourceUsageList: FC = () => {
     {
       title: translate('Client project'),
       render: ({ row }) => <>{row.project_name}</>,
-      filter: 'project',
+      filter: 'project_uuid',
       inlineFilter: (row) => ({
         name: row.project_name,
         uuid: row.project_uuid,

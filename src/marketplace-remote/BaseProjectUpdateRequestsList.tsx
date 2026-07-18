@@ -32,7 +32,7 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
         {
           title: translate('Organization'),
           render: ({ row }) => row.customer_name,
-          filter: 'organization',
+          filter: 'customer_uuid',
           inlineFilter: (row) => ({
             name: row.customer_name,
             uuid: row.customer_uuid,

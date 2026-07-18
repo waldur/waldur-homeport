@@ -85,7 +85,7 @@ export const ProposalReviewsFilter: FunctionComponent<
     />
     <AsyncSelectFilter
       title={translate('Organization')}
-      name="organization"
+      name="organization_uuid"
       getValueLabel={(value: Customer) => value?.name}
       placeholder={translate('Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
@@ -135,7 +135,7 @@ export interface ProposalReviewsFilterFormData {
   state: ProposalReviewStateOption[];
   call: PublicCall;
   round: ProtectedRound;
-  organization: Customer;
+  organization_uuid: Customer;
   reviewer: User;
   proposal: Proposal;
 }
@@ -156,8 +156,8 @@ export const selectProposalReviewsFilter = (
     if (values.round) {
       filter.round_uuid = values.round.uuid;
     }
-    if (values.organization) {
-      filter.organization_uuid = values.organization.uuid;
+    if (values.organization_uuid) {
+      filter.organization_uuid = values.organization_uuid.uuid;
     }
     if (values.reviewer) {
       filter.reviewer_uuid = values.reviewer.uuid;
