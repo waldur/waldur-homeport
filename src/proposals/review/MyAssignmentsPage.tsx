@@ -1,3 +1,4 @@
+import { QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import {
@@ -11,6 +12,7 @@ import { Badge } from '@/core/Badge';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -43,7 +45,7 @@ const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} size="sm" pill outline>
       {statusDisplay}
     </Badge>
   );
@@ -110,7 +112,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
       )}
 
       <div className="table-responsive">
-        <table className="table table-bordered">
+        <table className="table table-bordered align-middle">
           <thead>
             <tr>
               <th>{translate('Proposal')}</th>
@@ -145,9 +147,23 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
                 </td>
                 <td>
                   {item.has_coi ? (
-                    <Badge variant="danger" outline>
-                      {translate('COI detected')}
-                    </Badge>
+                    <span className="d-inline-flex align-items-center gap-1">
+                      <Badge variant="danger" size="sm" outline>
+                        {translate('COI detected')}
+                      </Badge>
+                      <Tip
+                        id={`coi-help-${item.uuid}`}
+                        label={translate(
+                          'A potential conflict of interest was detected for this proposal. It may be blocked from assignment.',
+                        )}
+                      >
+                        <QuestionIcon
+                          size={14}
+                          className="text-muted"
+                          weight="bold"
+                        />
+                      </Tip>
+                    </span>
                   ) : (
                     <span className="text-muted">-</span>
                   )}
@@ -186,7 +202,7 @@ const BatchStatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} size="sm" pill outline>
       {statusDisplay}
     </Badge>
   );
@@ -210,7 +226,7 @@ export const MyAssignmentsPage: FC = () => {
   });
 
   return (
-    <div className="d-flex flex-column gap-6">
+    <div className="d-flex flex-column" style={{ gap: 16 }}>
       <ReviewerProfileSummaryCard />
       <ReviewStatsWidgets />
 
@@ -267,9 +283,23 @@ export const MyAssignmentsPage: FC = () => {
               <>
                 {row.expires_at ? formatDateTime(row.expires_at) : '-'}
                 {row.is_expired && (
-                  <Badge variant="danger" outline className="ms-1">
-                    {translate('Expired')}
-                  </Badge>
+                  <span className="d-inline-flex align-items-center gap-1 ms-1">
+                    <Badge variant="danger" size="sm" outline>
+                      {translate('Expired')}
+                    </Badge>
+                    <Tip
+                      id={`expired-help-${row.uuid}`}
+                      label={translate(
+                        'The response window for this assignment batch has passed.',
+                      )}
+                    >
+                      <QuestionIcon
+                        size={14}
+                        className="text-muted"
+                        weight="bold"
+                      />
+                    </Tip>
+                  </span>
                 )}
               </>
             ),
