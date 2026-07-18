@@ -30,6 +30,8 @@ interface MaintenanceAction {
   label: string;
   icon: Icon;
   api: (params: { path: { uuid: string } }) => Promise<any>;
+  successMessage: string;
+  successDescription: string;
 }
 
 const getTransitionActions = (
@@ -43,6 +45,11 @@ const getTransitionActions = (
           label: translate('Schedule'),
           icon: ClockCountdownIcon,
           api: maintenanceAnnouncementsSchedule,
+          successMessage: translate('Maintenance scheduled'),
+          successDescription: translate(
+            'The maintenance window {name} has been scheduled.',
+            { name: row.name },
+          ),
         },
       ];
     case 'Scheduled':
@@ -52,12 +59,22 @@ const getTransitionActions = (
           label: translate('Start'),
           icon: PlayCircleIcon,
           api: maintenanceAnnouncementsStartMaintenance,
+          successMessage: translate('Maintenance started'),
+          successDescription: translate(
+            'The maintenance window {name} is now in progress.',
+            { name: row.name },
+          ),
         },
         {
           key: 'unschedule',
           label: translate('Move back to draft'),
           icon: ClockCounterClockwiseIcon,
           api: maintenanceAnnouncementsUnschedule,
+          successMessage: translate('Maintenance moved to draft'),
+          successDescription: translate(
+            'The maintenance window {name} has been moved back to draft.',
+            { name: row.name },
+          ),
         },
       ];
     default:
@@ -84,7 +101,8 @@ const MaintenanceActionItem: FC<{
         iconNode: <action.icon weight="bold" />,
       },
     },
-    successMessage: translate('Maintenance announcement updated'),
+    successMessage: action.successMessage,
+    successDescription: action.successDescription,
     errorMessage: translate('Unable to update maintenance announcement state.'),
     refetch,
   });

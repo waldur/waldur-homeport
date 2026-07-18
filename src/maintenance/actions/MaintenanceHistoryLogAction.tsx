@@ -1,17 +1,9 @@
-import { BookOpenTextIcon } from '@phosphor-icons/react';
+import { MaintenanceAnnouncement } from 'waldur-js-client';
 
-import { translate } from '@/i18n';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 
-export const MaintenanceHistoryLogAction = ({ row, refetch }) => {
-  const callback = () => {
-    if (row) refetch();
-  };
-  return (
-    <ActionItem
-      title={translate('History log')}
-      action={callback}
-      iconNode={<BookOpenTextIcon weight="bold" />}
-    />
-  );
-};
+export const MaintenanceHistoryLogAction = ({
+  row,
+}: {
+  row: MaintenanceAnnouncement;
+}) => <FilteredEventsButton filter={{ scope: row.url }} asDropdownItem />;

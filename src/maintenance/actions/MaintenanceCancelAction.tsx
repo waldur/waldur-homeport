@@ -52,7 +52,11 @@ export const MaintenanceCancelAction: FC<MaintenanceCancelActionProps> = ({
         type: 'danger',
       },
     },
-    successMessage: translate('Maintenance announcement has been cancelled.'),
+    successMessage: translate('Maintenance cancelled'),
+    successDescription: translate(
+      'The maintenance window {name} has been cancelled.',
+      { name: row.name },
+    ),
     errorMessage: translate('Unable to cancel maintenance announcement.'),
     refetch,
   });

@@ -23,6 +23,8 @@ export interface ManagedMutationProps<
   TVariables,
 > extends UseMutationOptions<TData, TError, TVariables> {
   successMessage?: string;
+  /** Optional secondary line shown under the success title. */
+  successDescription?: string;
   errorMessage?: string;
   refetch?: () => void | Promise<void>;
   invalidateQueries?: Array<InvalidateQueryFilters>;
@@ -35,6 +37,7 @@ export interface ManagedMutationProps<
  */
 export function useManagedMutation<TData, TError, TVariables>({
   successMessage,
+  successDescription,
   errorMessage,
   refetch,
   onSuccess,
@@ -74,7 +77,13 @@ export function useManagedMutation<TData, TError, TVariables>({
         closeDialog();
       }
 
-      if (successMessage) showSuccess(successMessage);
+      if (successMessage) {
+        if (successDescription) {
+          showSuccess(successMessage, successDescription);
+        } else {
+          showSuccess(successMessage);
+        }
+      }
       if (onSuccess) onSuccess(data, variables, onMutateResult, context);
     },
     onError: (error, variables, onMutateResult, context) => {
