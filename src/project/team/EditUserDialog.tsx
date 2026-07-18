@@ -85,7 +85,16 @@ const EditUserDialogFormBody: FC<{
   values: EditUserDialogFormData;
   project: Project;
   permission: GenericPermission;
-}> = ({ handleSubmit, invalid, submitting, values, project, permission }) => {
+  customerId?: string;
+}> = ({
+  handleSubmit,
+  invalid,
+  submitting,
+  values,
+  project,
+  permission,
+  customerId,
+}) => {
   const permissionRoleName = permission.role_name;
   const { data: hasActiveManager } = useProjectHasActiveManager(project?.uuid);
   const isProjectManagerBlocked = isProjectManagerSelectionBlocked(
@@ -116,7 +125,7 @@ const EditUserDialogFormBody: FC<{
         }
       >
         <UserGroup permission={permission} />
-        <RoleGroup types={['project']} />
+        <RoleGroup types={['project']} scope={{ customerId }} />
         <ExpirationTimeGroup disabled={submitting} />
       </ModalDialog>
     </form>
@@ -129,9 +138,18 @@ export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
   const project = resolve.project || currentProject;
 
   const initialValues = {
-    role: getProjectRoles().find(
-      ({ name }) => name === resolve.permission.role_name,
-    ),
+    // Preselect the member's current role by name. It may be an organization
+    // clone that is not in the global list, so fall back to a minimal role
+    // object carrying the name (the picker matches options by name).
+    role:
+      getProjectRoles().find(
+        ({ name }) => name === resolve.permission.role_name,
+      ) ??
+      ({
+        name: resolve.permission.role_name,
+        description: resolve.permission.role_name,
+        content_type: 'project',
+      } as Role),
     expiration_time: resolve.permission.expiration_time,
   };
 
@@ -156,6 +174,7 @@ export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
           values={values}
           project={project}
           permission={resolve.permission}
+          customerId={resolve.customerUuid}
         />
       )}
     </Form>

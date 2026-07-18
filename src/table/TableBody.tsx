@@ -136,11 +136,14 @@ const hasFilterMenu = (key: string) => {
 // into the tooltip.
 const showTruncationTooltip = (e: React.MouseEvent<HTMLTableCellElement>) => {
   const td = e.currentTarget;
+  // Prefer the inner `.td-data` element when present: in the first column of an
+  // expandable table the ellipsis truncation lives on `.td-data` while the `td`
+  // itself does not overflow, so checking only the `td` would miss it.
+  const inner = td.querySelector('.td-data') as HTMLElement | null;
+  const source = inner ?? td;
   // +1 px tolerance avoids sub-pixel false positives reported by some
   // browsers/zoom levels.
-  if (td.scrollWidth > td.clientWidth + 1) {
-    const inner = td.querySelector('.td-data') as HTMLElement | null;
-    const source = inner ?? td;
+  if (source.scrollWidth > source.clientWidth + 1) {
     const text = (source.innerText || '').trim();
     if (text && td.getAttribute('title') !== text) {
       td.setAttribute('title', text);

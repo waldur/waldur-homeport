@@ -1,6 +1,9 @@
 import { UsersThreeIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
+import { rolesList } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -24,9 +27,21 @@ export const GroupInvitationCreateButton: FC<{
   const user = useUser();
   const customer = useCustomer();
   const { openDialog } = useModal();
+  // Offer this organization's roles (system + org-private clones, minus
+  // concealed) rather than the global ENV.roles list, so group invitations
+  // respect the same org scoping as the other invite/add-member pickers.
+  const { data: scopedRoles } = useQuery({
+    queryKey: ['available-roles-for-customer', customer?.uuid],
+    queryFn: () =>
+      getAllPages((page) =>
+        rolesList({ query: { available_for_customer: customer.uuid, page } }),
+      ),
+    enabled: Boolean(customer?.uuid),
+    staleTime: 5 * 60 * 1000,
+  });
   const roles = useMemo(
     () =>
-      ENV.roles.filter(
+      (scopedRoles ?? []).filter(
         (role) =>
           InvitationPolicyService.canManageRole(
             {
@@ -37,7 +52,7 @@ export const GroupInvitationCreateButton: FC<{
             role,
           ) && role.is_active, // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
       ),
-    [customer, user],
+    [scopedRoles, customer, user],
   );
   const callback = () =>
     openDialog(GroupInvitationCreateDialog, {

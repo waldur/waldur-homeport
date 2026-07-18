@@ -1,4 +1,4 @@
-import { User, usersMeRetrieve } from 'waldur-js-client';
+import { User, UserMe, usersMeRetrieve } from 'waldur-js-client';
 
 import { getRoles } from '@/administration/roles/utils';
 import { getHeaders, initApiClient } from '@/core/api';
@@ -12,7 +12,15 @@ import { getUser } from '@/workspace/selectors';
 export const getCurrentUser = async (
   options?: Parameters<typeof usersMeRetrieve>[0],
 ) => {
-  const user = await usersMeRetrieve(options).then((response) => response.data);
+  // /users/me/ returns UserMe (a User plus profile_completeness, and a
+  // `permissions: MePermission[]` shape). The app models the signed-in user as
+  // `User`; the runtime object carries every field the app reads (including
+  // profile_completeness, accessed via a cast in getProfileCompleteness), so
+  // it is narrowed to `User` at this boundary. Widening the store to `UserMe`
+  // app-wide is a separate, deployment-wide change.
+  const user = await usersMeRetrieve(options).then(
+    (response) => response.data as UserMe as unknown as User,
+  );
   if (ENV.roles.length === 0) {
     ENV.roles = await getRoles();
   }

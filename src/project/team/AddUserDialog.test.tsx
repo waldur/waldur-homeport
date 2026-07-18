@@ -6,6 +6,7 @@ import {
   customersUsersList,
   projectsAddUser,
   projectsOtherUsersList,
+  rolesList,
   usersList,
   usersMeRetrieve,
 } from 'waldur-js-client';
@@ -65,6 +66,26 @@ describe('AddUserDialog', () => {
     vi.mocked(usersMeRetrieve).mockResolvedValue({
       data: { uuid: 'user-uuid', full_name: 'Test User' },
     } as any);
+    // RoleGroup now fetches the organization's roles via available_for_customer
+    // when a customer is in scope (see useCustomer mock above).
+    vi.mocked(rolesList).mockResolvedValue(
+      mockListResponse([
+        {
+          uuid: 'customer-role-uuid',
+          name: 'customer_role',
+          description: 'customer role',
+          content_type: 'customer',
+          is_active: true,
+        },
+        {
+          uuid: 'project-role-uuid',
+          name: 'project_role',
+          description: 'project role',
+          content_type: 'project',
+          is_active: true,
+        },
+      ]),
+    );
   });
 
   it('renders dialog with correct title and form fields', () => {
