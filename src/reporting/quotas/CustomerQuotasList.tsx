@@ -5,6 +5,7 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
   CustomerQuotasFilter,
+  CustomerQuotasFilterInitialValues,
   selectCustomerQuotasFilter,
   CustomerQuotasFilterFormId,
 } from '@/table/generated/CustomerQuotasFilter';
@@ -26,6 +27,9 @@ export const CustomerQuotasList = () => {
     syncFiltersToURL: true,
     fetchData: createFetcher(customerQuotasList),
     filter,
+    // The /customer-quotas/ endpoint requires a quota_name; seed the default so
+    // the first request is valid (otherwise it 400s and the table never loads).
+    initialFilters: CustomerQuotasFilterInitialValues,
   });
 
   const activeQuota = getQuotas(true).find((q) => q.key === filter?.quota_name);
