@@ -51,6 +51,10 @@ const createOfferingListFilterSelector = (
       return {
         page_size: pageSize,
         state: ['Active', 'Paused'],
+        // Hide offerings the current user cannot order (e.g. restricted to
+        // roles they do not hold) from the catalog; they stay reachable from an
+        // existing resource via the offering detail page.
+        accessible: true,
         ...additionalFilters,
         ...contextFilter,
       } as MarketplacePublicOfferingsListData['query'];

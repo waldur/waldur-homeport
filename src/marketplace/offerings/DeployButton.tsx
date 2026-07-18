@@ -15,9 +15,11 @@ import { useUser } from '@/workspace/hooks';
 export const DeployButton = ({
   offering,
   disabled,
+  disabledReason,
 }: {
   offering: Offering;
   disabled?: boolean;
+  disabledReason?: string;
 }) => {
   const { confirm } = useModal();
   const user = useUser();
@@ -60,7 +62,10 @@ export const DeployButton = ({
   return (
     <Tip
       id="tip-deploy"
-      label={offering.state === 'Paused' ? offering.paused_reason : null}
+      label={
+        disabledReason ||
+        (offering.state === 'Paused' ? offering.paused_reason : null)
+      }
       className="order-2 order-sm-1 flex-sm-column-auto flex-root"
     >
       {user ? (

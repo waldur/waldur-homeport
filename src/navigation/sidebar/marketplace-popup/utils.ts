@@ -21,6 +21,10 @@ export const fetchCategories = (
         page_size: MAX_PAGE_SIZE,
         ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
         ...(project ? { project_uuid: project.uuid } : {}),
+        // accessible: keep the quick-add category list (and its offering_count)
+        // in sync with the catalog by hiding offerings the current user cannot
+        // order (e.g. restricted to roles they do not hold).
+        accessible: true,
         field: ['uuid', 'title', 'offering_count', 'icon', 'group'],
         offering_name,
       },
@@ -44,6 +48,10 @@ export const fetchOfferingsByPage = async (
       ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
       ...(project ? { project_uuid: project.uuid } : {}),
       ...(importable ? { importable: 'true' } : {}),
+      // accessible: hide offerings the current user cannot order (matches the
+      // catalog); skipped for the provider "importable" flow which lists the
+      // provider's own offerings.
+      ...(importable ? {} : { accessible: true }),
       category_uuid: category.uuid,
       name: search,
       field: [
@@ -89,6 +97,9 @@ export const fetchLastNOfferings = async (
         page_size,
         ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
         ...(project ? { project_uuid: project.uuid } : {}),
+        // accessible: hide offerings the current user cannot order (matches the
+        // catalog) from the "Recently added offerings" quick-add shortcut.
+        accessible: true,
         field: [
           'uuid',
           'category_uuid',
