@@ -468,6 +468,10 @@ export const PermissionOptions = [
         value: 'SERVICE_PROVIDER.LIST_USERS',
       },
       {
+        label: translate('Manage maintenance announcement for service provider'),
+        value: 'SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT',
+      },
+      {
         label: translate('Manage offerings username'),
         value: 'SERVICE_PROVIDER.SET_OFFERINGS_USERNAME',
       },
