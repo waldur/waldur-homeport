@@ -256,6 +256,18 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'PROJECT_NAME_REGEX',
+        description: translate('Regular expression that a project name must fully match when creating or renaming a project. The whole name has to match the pattern. Leave empty to disable the check. Examples: \'^.{1,32}$\' limits the name to at most 32 characters; \'^[A-Za-z0-9 _-]{1,32}$\' also restricts it to letters, digits, spaces, underscores and hyphens; \'^[A-Za-z].{0,31}$\' additionally requires it to start with a letter.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'PROJECT_NAME_REGEX_ERROR_MESSAGE',
+        description: translate('Custom validation error shown when a project name does not match PROJECT_NAME_REGEX. Leave empty to use the default message.'),
+        default: '',
+        type: 'string',
+      },
     ],
   },
   {

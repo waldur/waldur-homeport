@@ -1,7 +1,49 @@
 import { debounce } from 'lodash-es';
 import { projectsList } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
+
+const getProjectNameRegex = (): { regex: string; message: string } => ({
+  regex: ENV.plugins?.WALDUR_CORE?.PROJECT_NAME_REGEX || '',
+  message: ENV.plugins?.WALDUR_CORE?.PROJECT_NAME_REGEX_ERROR_MESSAGE || '',
+});
+
+// Human-readable hint for the configured project-name pattern, or undefined when
+// no restriction is set. Shown as a tooltip on the project name field.
+export const getProjectNameRestrictionHint = (): string | undefined => {
+  const { regex, message } = getProjectNameRegex();
+  if (!regex) {
+    return undefined;
+  }
+  return (
+    message ||
+    translate('Project name must match the pattern: {pattern}', {
+      pattern: regex,
+    })
+  );
+};
+
+// Mirror the backend PROJECT_NAME_REGEX check (a full-string match) so the user
+// gets immediate feedback. An invalid pattern is an admin misconfiguration and
+// is skipped, matching the backend.
+const checkProjectNameRegex = (value: string) => {
+  const { regex, message } = getProjectNameRegex();
+  if (!regex) {
+    return undefined;
+  }
+  try {
+    if (!new RegExp(`^(?:${regex})$`).test(value)) {
+      return (
+        message ||
+        translate('Project name does not match the required pattern.')
+      );
+    }
+  } catch {
+    // Invalid regex configured; leave enforcement to the backend.
+  }
+  return undefined;
+};
 
 const checkPattern = (value: string) => {
   if (!value) {
@@ -14,6 +56,7 @@ const checkPattern = (value: string) => {
   if (length > 500) {
     return translate('Must be 500 characters or less.');
   }
+  return checkProjectNameRegex(value);
 };
 
 // State for debounced validation

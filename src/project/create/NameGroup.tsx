@@ -5,7 +5,10 @@ import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
 
-import { validateProjectName } from '../validators';
+import {
+  getProjectNameRestrictionHint,
+  validateProjectName,
+} from '../validators';
 
 interface NameGroupProps {
   customer;
@@ -32,10 +35,12 @@ export const NameGroup = ({
     },
     [customer],
   );
+  const restrictionHint = getProjectNameRestrictionHint();
   return (
     <StringGroup
       label={translate('Project name')}
       required
+      tooltip={restrictionHint}
       quickAction={
         error ? (
           <LoadingErred
