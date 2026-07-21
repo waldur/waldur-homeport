@@ -468,7 +468,9 @@ export const PermissionOptions = [
         value: 'SERVICE_PROVIDER.LIST_USERS',
       },
       {
-        label: translate('Manage maintenance announcement for service provider'),
+        label: translate(
+          'Manage maintenance announcement for service provider',
+        ),
         value: 'SERVICE_PROVIDER.MANAGE_MAINTENANCE_ANNOUNCEMENT',
       },
       {
