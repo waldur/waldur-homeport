@@ -8,7 +8,23 @@ import {
   getUUID,
   pick,
   truncate,
+  LATIN_NAME_PATTERN,
 } from './utils';
+
+describe('LATIN_NAME_PATTERN', () => {
+  it('accepts a name starting with a digit (e.g. derived from slug "2go")', () => {
+    expect(LATIN_NAME_PATTERN.test('2go-cluster-1')).toBe(true);
+  });
+
+  it('accepts a name starting with a letter', () => {
+    expect(LATIN_NAME_PATTERN.test('go-cluster-1')).toBe(true);
+  });
+
+  it('rejects a name starting with a disallowed symbol', () => {
+    expect(LATIN_NAME_PATTERN.test('-go')).toBe(false);
+    expect(LATIN_NAME_PATTERN.test('#go')).toBe(false);
+  });
+});
 
 describe('formatFilesize', () => {
   // https://opennode.atlassian.net/browse/WAL-378
