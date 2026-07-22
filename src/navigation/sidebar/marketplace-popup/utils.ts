@@ -5,7 +5,7 @@ import {
   Project,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { fetchResultCount, getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { Category } from '@/marketplace/types';
 import { Customer } from '@/workspace/types';
 
@@ -73,9 +73,15 @@ export const fetchOfferingsByPage = async (
     },
   });
   if (Array.isArray(response.data)) {
+    // itemCount must be the TOTAL number of matching offerings (from the
+    // 'x-result-count' header), not the length of this page. It seeds
+    // InfiniteLoader's item count; using the page length made it believe
+    // every item was already loaded, so categories with more than one page
+    // of offerings never fetched pages 2+ and silently capped at page_size.
+    const total = fetchResultCount(response);
     return {
       pageElements: response.data,
-      itemCount: response.data.length,
+      itemCount: Number.isNaN(total) ? response.data.length : total,
     };
   } else {
     return {

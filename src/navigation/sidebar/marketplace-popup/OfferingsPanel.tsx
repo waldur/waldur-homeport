@@ -26,7 +26,13 @@ import { RECENTLY_ADDED_OFFERINGS_UUID } from './constants';
 import { fetchOfferingsByPage } from './utils';
 
 const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
-const LIST_HEIGHT = 500;
+// Fallback height (px) used until the viewport is measured. Matches the
+// `max-height` of `.offering-listing-viewport` so the first paint never
+// over-renders. The real height is measured at runtime (see below) because
+// the pane height is responsive (`calc(100vh - 270px)`, clamped) and
+// react-window needs the actual pixel height to virtualize and scroll
+// correctly — a hardcoded value disagreed with the CSS-clamped box.
+const FALLBACK_LIST_HEIGHT = 320;
 const ITEM_SIZE = 68;
 
 type ProviderOfferingResponse = Awaited<
@@ -123,6 +129,23 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
 }) => {
   const [selectedOffering, selectOffering] = useState<Offering>();
   const router = useRouter();
+
+  // Measure the scroll viewport so react-window's `height` matches the actual
+  // CSS-clamped box (`.offering-listing-viewport`). A callback ref keeps the
+  // ResizeObserver in sync as the node mounts/unmounts and the viewport
+  // resizes (responsive height + window resize).
+  const [listHeight, setListHeight] = useState(FALLBACK_LIST_HEIGHT);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const viewportRef = useCallback((node: HTMLDivElement | null) => {
+    resizeObserverRef.current?.disconnect();
+    if (node && typeof ResizeObserver !== 'undefined') {
+      const measure = () =>
+        setListHeight(node.clientHeight || FALLBACK_LIST_HEIGHT);
+      measure();
+      resizeObserverRef.current = new ResizeObserver(measure);
+      resizeObserverRef.current.observe(node);
+    }
+  }, []);
 
   const handleOfferingClick = useCallback(
     (offering: Offering) => {
@@ -268,28 +291,30 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
       {itemCount === 0 ? (
         <EmptyOfferingListPlaceholder />
       ) : (
-        // @ts-ignore
-        <InfiniteLoader
-          isItemLoaded={isItemLoaded}
-          itemCount={itemCount ?? VIRTUALIZED_SELECTOR_PAGE_SIZE}
-          loadMoreItems={loadMoreItems}
-          minimumBatchSize={VIRTUALIZED_SELECTOR_PAGE_SIZE}
-        >
-          {({ onItemsRendered, ref }) => (
-            // @ts-ignore
-            <List
-              ref={ref}
-              onItemsRendered={onItemsRendered}
-              height={LIST_HEIGHT}
-              itemSize={ITEM_SIZE}
-              itemCount={itemCount ?? VIRTUALIZED_SELECTOR_PAGE_SIZE}
-              width="100%"
-              className="scrollbar-view"
-            >
-              {rowRenderer}
-            </List>
-          )}
-        </InfiniteLoader>
+        <div className="offering-listing-viewport" ref={viewportRef}>
+          {/* @ts-ignore */}
+          <InfiniteLoader
+            isItemLoaded={isItemLoaded}
+            itemCount={itemCount ?? VIRTUALIZED_SELECTOR_PAGE_SIZE}
+            loadMoreItems={loadMoreItems}
+            minimumBatchSize={VIRTUALIZED_SELECTOR_PAGE_SIZE}
+          >
+            {({ onItemsRendered, ref }) => (
+              // @ts-ignore
+              <List
+                ref={ref}
+                onItemsRendered={onItemsRendered}
+                height={listHeight}
+                itemSize={ITEM_SIZE}
+                itemCount={itemCount ?? VIRTUALIZED_SELECTOR_PAGE_SIZE}
+                width="100%"
+                className="scrollbar-view"
+              >
+                {rowRenderer}
+              </List>
+            )}
+          </InfiniteLoader>
+        </div>
       )}
     </div>
   );
