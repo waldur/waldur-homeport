@@ -64,10 +64,17 @@
     width: 50%;
     flex-basis: 50%;
 
-    .scrollbar-view {
-      height: calc(100vh - 270px) !important;
+    // Owns the responsive height of the (virtualized) offerings list. Its
+    // measured height is handed to react-window so its scroll viewport matches
+    // this box exactly — see OfferingsPanel's viewportRef.
+    .offering-listing-viewport {
+      height: calc(100vh - 270px);
       min-height: 200px;
       max-height: 320px;
+      overflow: hidden;
+    }
+
+    .scrollbar-view {
       overflow-y: auto;
       overflow-x: hidden;
     }
@@ -162,7 +169,7 @@
       width: 100%;
       height: 50%;
 
-      .scrollbar-view {
+      .offering-listing-viewport {
         max-height: 303px;
       }
 
