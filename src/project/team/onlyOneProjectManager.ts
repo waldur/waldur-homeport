@@ -46,7 +46,7 @@ export const projectHasActiveManager = async (
   const response = await projectsListUsersList({
     path: { uuid: projectUuid },
     query: {
-      role: RoleEnum.PROJECT_MANAGER,
+      role: [RoleEnum.PROJECT_MANAGER],
       page_size: 1,
       field: ['role_name'],
     },

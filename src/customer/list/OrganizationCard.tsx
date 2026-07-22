@@ -94,8 +94,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
                 valueCol={6}
               />
 
-              {(organization.customer_credit ||
-                organization.customer_credit === 0) && (
+              {organization.customer_credit != null && (
                 <Field
                   label={translate('Remaining credit')}
                   value={renderFieldOrDash(
