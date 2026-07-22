@@ -188,7 +188,11 @@ export const omit = (object, prop) => {
   }
 };
 
-export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z][A-Za-z0-9-._ ()]+$');
+// Allow a leading digit: names are derived from customer/project slugs (e.g.
+// "2go"), which permit a leading digit, and every downstream consumer (the
+// backend order serializer, the SLURM allocation regex, and Slurm itself)
+// already accepts one. RFC 1123 also permits a leading digit in hostnames.
+export const LATIN_NAME_PATTERN = new RegExp('^[A-Za-z0-9][A-Za-z0-9-._ ()]+$');
 
 export const range = (n) => Array.from(Array(n).keys());
 
