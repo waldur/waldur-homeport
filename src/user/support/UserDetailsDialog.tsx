@@ -63,7 +63,7 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
             <UserDetailsTable user={user} />
           </Tab>
           <Tab eventKey={3} title={translate('Audit log')}>
-            <UserEvents user={user} hasActionBar={false} />
+            <UserEvents user={user} />
           </Tab>
           {isFeatureVisible(UserFeatures.ssh_keys) ? (
             <Tab eventKey={4} title={translate('Keys')}>

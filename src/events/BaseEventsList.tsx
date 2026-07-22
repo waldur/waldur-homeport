@@ -7,18 +7,23 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
-import { TableProps } from '@/table/types';
+import { TableOptionsType, TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
 import { ExpandableEventDetails } from './ExpandableEventDetails';
 
 const EventDateField = ({ row }) => <>{formatDateTime(row.created)}</>;
 
-export const BaseEventsList: FunctionComponent<Partial<TableProps>> = ({
+type BaseEventsListProps = Partial<TableProps> & {
+  initialFilters?: TableOptionsType['initialFilters'];
+};
+
+export const BaseEventsList: FunctionComponent<BaseEventsListProps> = ({
   filter,
   table,
   title,
   hasActionBar = true,
+  initialFilters,
   ...rest
 }) => {
   const options = useMemo(
@@ -27,8 +32,9 @@ export const BaseEventsList: FunctionComponent<Partial<TableProps>> = ({
       filter,
       fetchData: createFetcher(eventsList),
       queryField: 'message',
+      initialFilters,
     }),
-    [table, filter],
+    [table, filter, initialFilters],
   );
   const props = useTable(options);
 

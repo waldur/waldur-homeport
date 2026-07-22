@@ -71,8 +71,9 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
                 {translate('Total paid')}{' '}
                 <span
                   style={
-                    activeFixedPricePaymentProfile.attributes.contract_sum !==
-                    totalOfSumPaid
+                    Number(
+                      activeFixedPricePaymentProfile.attributes.contract_sum,
+                    ) !== totalOfSumPaid
                       ? {
                           color: 'red',
                           fontWeight: 'bold',
