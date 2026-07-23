@@ -35,8 +35,16 @@ stages:
 
 image: registry.hpc.ut.ee/mirror/library/node:lts-alpine3.22
 
-cache:
-  key: "$CI_COMMIT_REF_NAME"
+# Cache was previously keyed on the branch name with policy:pull and NO job ever
+# pushing it, so it was permanently empty — every node job paid a full ~60s cold
+# `yarn install` to do a few seconds of real work. Key on the lockfile so the
+# cache is shared across all branches/MRs, keep the default policy:pull for the
+# many consumer jobs, and let the dedicated "Prime yarn cache" job below (.pre
+# stage, pull-push) populate it once per pipeline.
+cache: &yarn_cache
+  key:
+    files:
+      - yarn.lock
   policy: pull
   paths:
     - .yarn
@@ -46,6 +54,28 @@ before_script:
   - apk add git || echo "Non-Alpine image, skipping"
   - yarn config set cache-folder .yarn
   - yarn install --frozen-lockfile
+
+# Runs before every other stage and is the single writer of the yarn cache.
+# Its global before_script does the actual `yarn install`; here we only push the
+# resulting .yarn + node_modules so downstream jobs restore them and their own
+# `yarn install --frozen-lockfile` becomes a near-instant no-op.
+Prime yarn cache:
+  stage: .pre
+  interruptible: true
+  # Without explicit rules a job defaults to `only: branches/tags`, which EXCLUDES
+  # merge_request pipelines — so the cache would never be primed where it matters.
+  # Run wherever the cache consumers run (MRs, develop, tags).
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: $CI_COMMIT_TAG
+  cache:
+    <<: *yarn_cache
+    policy: pull-push
+  script:
+    - echo "Yarn dependencies installed and cached by the global before_script."
 
 Scan JS dependencies:
   extends: .Vulnerability scan template
@@ -282,7 +312,12 @@ Test Multi-arch docker image build:
       changes:
         - Dockerfile
         - docker/**/*
-        - .gitlab-ci.yml
+        # NOTE: `.gitlab-ci.yml` intentionally removed as a trigger. The emulated
+        # arm64 leg of this buildx job runs `yarn install` under QEMU and exceeds
+        # the 1h job timeout, so it fails on every CI-only MR while providing no
+        # image-coverage signal. Gate it on image-affecting paths only. (The arm64
+        # emulation timeout itself is a separate infra issue: native arm runners
+        # or dropping arm64 from the MR smoke build.)
   variables:
     DOCKER_DRIVER: overlay2
     DOCKER_REGISTRY: registry.hpc.ut.ee/mirror/
