@@ -1,0 +1,8 @@
+.cookie-settings-dialog .modal-title {
+  font-size: 1.385rem;
+}
+
+.cookie-settings-category:last-child {
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}

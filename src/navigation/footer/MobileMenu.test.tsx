@@ -21,22 +21,20 @@ describe('MobileMenu', () => {
       { id: '1', label: 'Item 1' },
       { id: '2', label: 'Item 2' },
     ] as any;
-    const tosItem = { id: 'tos', label: 'ToS' } as any;
 
-    render(<MobileMenu dynamicItems={dynamicItems} tosItem={tosItem} />);
+    render(<MobileMenu dynamicItems={dynamicItems} />);
 
     expect(screen.getByTestId('footer-dropdown')).toBeInTheDocument();
     expect(screen.getByText('More')).toBeInTheDocument();
-    expect(screen.getAllByTestId('menu-item')).toHaveLength(3); // 2 dynamic + 1 ToS
+    expect(screen.getAllByTestId('menu-item')).toHaveLength(2);
   });
 
   it('renders standalone items when dynamicItems length < 2', () => {
     const dynamicItems = [{ id: '1', label: 'Item 1' }] as any;
-    const tosItem = { id: 'tos', label: 'ToS' } as any;
 
-    render(<MobileMenu dynamicItems={dynamicItems} tosItem={tosItem} />);
+    render(<MobileMenu dynamicItems={dynamicItems} />);
 
     expect(screen.queryByTestId('footer-dropdown')).not.toBeInTheDocument();
-    expect(screen.getAllByTestId('menu-item')).toHaveLength(2); // 1 dynamic + 1 ToS
+    expect(screen.getAllByTestId('menu-item')).toHaveLength(1);
   });
 });

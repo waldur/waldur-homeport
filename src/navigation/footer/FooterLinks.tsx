@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { MenuComponent } from '@/metronic/components';
 
+import { LegalPrivacyMenu } from './LegalPrivacyMenu';
 import { MenuItem } from './MenuItem';
 import { MobileMenu } from './MobileMenu';
 import { SupportMenu } from './SupportMenu';
@@ -23,20 +24,12 @@ export const FooterLinks = () => {
     >
       {isMd ? (
         /* Mobile Layout */
-        <>
-          <MenuItem {...config.privacy} />
-          <MobileMenu dynamicItems={config.dynamic} tosItem={config.tos} />
-        </>
+        <MobileMenu dynamicItems={config.dynamic} />
       ) : (
         /* Desktop Layout */
-        <>
-          {config.dynamic.map((item) => (
-            <MenuItem key={item.id} {...item} />
-          ))}
-          <MenuItem {...config.privacy} />
-          <MenuItem {...config.tos} />
-        </>
+        config.dynamic.map((item) => <MenuItem key={item.id} {...item} />)
       )}
+      <LegalPrivacyMenu />
       {/* Support is always at the end in both layouts */}
       <SupportMenu />
     </ul>
