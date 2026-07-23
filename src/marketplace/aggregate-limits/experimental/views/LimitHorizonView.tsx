@@ -7,6 +7,10 @@ import {
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
+import {
+  getChartThemeColors,
+  getSaturationRamp,
+} from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { getUserLocale } from '@/i18n/LanguageUtilsService';
 import { Customer } from '@/workspace/types';
@@ -39,10 +43,11 @@ interface RowData {
 }
 
 const SATURATION_COLOR = (ratio: number): string => {
-  if (ratio >= 1.0) return '#dc2626'; // red — over cap
-  if (ratio >= 0.9) return '#f97316'; // orange — almost at cap
-  if (ratio >= 0.7) return '#facc15'; // yellow — warning
-  return '#16a34a'; // green — healthy
+  const ramp = getSaturationRamp();
+  if (ratio >= 1.0) return ramp.danger; // over cap
+  if (ratio >= 0.9) return ramp.warning; // almost at cap
+  if (ratio >= 0.7) return ramp.notice; // warning
+  return ramp.ok; // healthy
 };
 
 const formatDate = (ms: number) =>
@@ -146,6 +151,7 @@ export const LimitHorizonView: FC<Props> = ({
   }, [byProjectQueries]);
 
   const todayMs = Date.now();
+  const tc = getChartThemeColors();
   const banner = (
     <MixBanner
       mix={mix}
@@ -153,7 +159,7 @@ export const LimitHorizonView: FC<Props> = ({
         'one row per (offering · component) — bar spans current_period_start → current_period_end',
       )}
       normalization={translate(
-        'inner-fill width = usage / limit; colour: <70% green, <90% yellow, <100% orange, ≥100% red',
+        'inner-fill width = usage / limit; colour: <70% green, <90% amber, <100% orange, ≥100% red',
       )}
       scenarioNote={
         !rows.length
@@ -272,7 +278,7 @@ export const LimitHorizonView: FC<Props> = ({
           height,
           r: 3,
         },
-        style: { fill: '#7f1d1d', opacity: 0.7 },
+        style: { fill: '#d92d20', opacity: 0.7 },
       });
     }
 
@@ -280,7 +286,7 @@ export const LimitHorizonView: FC<Props> = ({
     children.push({
       type: 'circle',
       shape: { cx: x + w, cy: yCenter, r: 4 },
-      style: { fill: '#0ea5e9' },
+      style: { fill: '#6938ef' },
     });
 
     return { type: 'group', children };
@@ -300,7 +306,7 @@ export const LimitHorizonView: FC<Props> = ({
           : '';
         const headerLines = [
           `<strong>${r.offeringName} · ${r.componentName}</strong>`,
-          `<small style="color:#6b7280">${translate('Type')}: <code>${r.componentType}</code> · ${
+          `<small style="color:#667085">${translate('Type')}: <code>${r.componentType}</code> · ${
             r.billingType === 'limit'
               ? translate('Limit-based')
               : translate('Usage-based')
@@ -308,7 +314,7 @@ export const LimitHorizonView: FC<Props> = ({
           period,
           `${translate('Period')}: ${formatDate(r.start)} → <strong>${formatDate(r.end)}</strong>`,
           `${translate('Used')}: <strong>${r.used.toLocaleString()}</strong> / ${r.limit.toLocaleString()} ${r.measuredUnit} (${pct}%)`,
-          `<small style="color:#0ea5e9">↻ ${translate('Next reset')}: ${formatDate(r.end)}</small>`,
+          `<small style="color:#6938ef">↻ ${translate('Next reset')}: ${formatDate(r.end)}</small>`,
         ];
 
         // Per-project breakdown (customer scope only).
@@ -330,15 +336,15 @@ export const LimitHorizonView: FC<Props> = ({
               .join('');
             headerLines.push(
               `<hr style="margin:6px 0;border-color:#e4e7ec"/>` +
-                `<small style="color:#6b7280">${translate('Per-project split')} (${breakdown.length} ${translate('projects')})</small>` +
+                `<small style="color:#667085">${translate('Per-project split')} (${breakdown.length} ${translate('projects')})</small>` +
                 rows2 +
                 (rest > 0
-                  ? `<small style="color:#6b7280">+ ${rest} ${translate('more…')}</small>`
+                  ? `<small style="color:#667085">+ ${rest} ${translate('more…')}</small>`
                   : ''),
             );
           } else if (breakdown && !breakdown.length) {
             headerLines.push(
-              `<hr style="margin:6px 0;border-color:#e4e7ec"/><small style="color:#6b7280">${translate('No per-project usage reported.')}</small>`,
+              `<hr style="margin:6px 0;border-color:#e4e7ec"/><small style="color:#667085">${translate('No per-project usage reported.')}</small>`,
             );
           }
         }
@@ -372,7 +378,7 @@ export const LimitHorizonView: FC<Props> = ({
         },
         rich: {
           name: {
-            color: '#475467',
+            color: '#344054',
             fontWeight: 500,
             fontSize: 12,
             lineHeight: 16,
@@ -383,8 +389,8 @@ export const LimitHorizonView: FC<Props> = ({
             lineHeight: 14,
           },
           type: {
-            color: '#0ea5e9',
-            backgroundColor: '#e0f2fe',
+            color: '#6938ef',
+            backgroundColor: '#f4f3ff',
             padding: [1, 4, 1, 4],
             borderRadius: 3,
             fontSize: 10,
@@ -408,10 +414,10 @@ export const LimitHorizonView: FC<Props> = ({
           data: [
             {
               xAxis: todayMs,
-              lineStyle: { color: '#16a34a', width: 2 },
+              lineStyle: { color: tc.brand500, width: 2 },
               label: {
                 formatter: translate('Today'),
-                color: '#16a34a',
+                color: tc.brand500,
                 position: 'insideStartTop',
                 fontWeight: 600,
               },
@@ -442,7 +448,7 @@ export const LimitHorizonView: FC<Props> = ({
               width: 10,
               height: 10,
               borderRadius: 2,
-              background: '#16a34a',
+              background: tc.brand500,
             }}
           />
           {translate('Usage <70%')}
@@ -454,7 +460,7 @@ export const LimitHorizonView: FC<Props> = ({
               width: 10,
               height: 10,
               borderRadius: 2,
-              background: '#facc15',
+              background: '#fdb022',
             }}
           />
           {translate('70–90%')}
@@ -466,7 +472,7 @@ export const LimitHorizonView: FC<Props> = ({
               width: 10,
               height: 10,
               borderRadius: 2,
-              background: '#f97316',
+              background: '#dc6803',
             }}
           />
           {translate('90–100%')}
@@ -478,7 +484,7 @@ export const LimitHorizonView: FC<Props> = ({
               width: 10,
               height: 10,
               borderRadius: 2,
-              background: '#dc2626',
+              background: '#d92d20',
             }}
           />
           {translate('Over cap')}
@@ -489,7 +495,7 @@ export const LimitHorizonView: FC<Props> = ({
               display: 'inline-block',
               width: 2,
               height: 14,
-              background: '#16a34a',
+              background: tc.brand500,
             }}
           />
           {translate('Today')}
@@ -501,7 +507,7 @@ export const LimitHorizonView: FC<Props> = ({
               width: 8,
               height: 8,
               borderRadius: '50%',
-              background: '#0ea5e9',
+              background: '#6938ef',
             }}
           />
           {translate('Next reset')}

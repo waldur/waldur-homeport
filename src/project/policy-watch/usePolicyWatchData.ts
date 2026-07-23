@@ -22,6 +22,7 @@ import { Project } from '@/workspace/types';
 
 import {
   BreakdownBucket,
+  CreditBreakdown,
   CreditRunway,
   CreditTerms,
   PacingSnapshot,
@@ -430,10 +431,19 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
 
     const perResource: ResourceHealth[] = resources.map((r) => {
       const sp = findMatchingSlurmPolicy(r, slurmPolicies);
+      // A real limit-based quota needs actual limit AND usage entries — not just
+      // a truthy (possibly empty {}) object, which every resource carries.
+      const quotaKeys = r.limits
+        ? Object.keys(r.limits as Record<string, number>).length
+        : 0;
+      const usageKeys = r.limit_usage
+        ? Object.keys(r.limit_usage as Record<string, number>).length
+        : 0;
+      const hasQuota = quotaKeys > 0 && usageKeys > 0;
       let saturation = 0;
       if (sp) {
         saturation = computeSlurmSaturation(r, sp).saturation;
-      } else if (r.limit_usage && r.limits) {
+      } else if (hasQuota) {
         const allocSum = Object.values(
           r.limits as Record<string, number>,
         ).reduce((a, b) => a + b, 0);
@@ -442,6 +452,9 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         ).reduce((a, b) => a + b, 0);
         saturation = allocSum > 0 ? (usageSum / allocSum) * 100 : 0;
       }
+      // "% of policy threshold" is only meaningful with a SLURM usage policy or
+      // a limit-based quota; cost-policy-only / usage-billed resources have none.
+      const hasThreshold = Boolean(sp) || hasQuota;
       const bucket = bucketForResource(r, saturation);
 
       const attribution =
@@ -463,6 +476,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         resource: r,
         bucket,
         saturationPct: saturation,
+        hasThreshold,
         matchedPolicy,
         attribution,
         attributionField,
@@ -702,6 +716,34 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       };
     }
 
+    // --- Credit lifecycle breakdown: used + lost + remaining = granted.
+    // Reconstructed from the monthly costs series without a new endpoint. Each
+    // month's credit debited is |compensation|; the part matching real usage is
+    // "used", and the floor-draw shortfall (debited beyond incurred) is "lost"
+    // and hard to recover. Remaining is the current balance, so the three parts
+    // always reconcile to the granted total no matter the changes made.
+    let creditBreakdown: CreditBreakdown | null = null;
+    if (creditTerms) {
+      let used = 0;
+      let lost = 0;
+      for (const inv of invoices as Array<{
+        incurred?: number | string;
+        compensation?: number | string;
+      }>) {
+        const incurred = safeNumber(inv.incurred);
+        const debited = Math.abs(safeNumber(inv.compensation));
+        used += Math.min(incurred, debited);
+        lost += Math.max(0, debited - incurred);
+      }
+      const remaining = creditTerms.value;
+      creditBreakdown = {
+        used,
+        lost,
+        remaining,
+        granted: used + lost + remaining,
+      };
+    }
+
     const isLoading =
       projectPoliciesQ.isLoading ||
       customerPoliciesQ.isLoading ||
@@ -737,6 +779,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       breakdownCharges,
       breakdownCompensations,
       creditTerms,
+      creditBreakdown,
       isLoading,
       hasError,
     };

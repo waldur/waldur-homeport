@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { EChart } from '@/core/EChart';
+import { getSaturationRamp } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
 import { LimitPeriodChip } from '../LimitPeriodChip';
@@ -46,11 +47,12 @@ const PERIOD_GAUGE_LABEL: Record<string, string> = {
 
 function buildGaugeOption(row: GaugeRow) {
   const value = Math.min(row.pct, 200);
+  const ramp = getSaturationRamp();
   const palette = [
-    [0.7, '#16a34a'], // green
-    [0.9, '#facc15'], // yellow
-    [1.0, '#f97316'], // orange
-    [2.0, '#dc2626'], // red (overage)
+    [0.7, ramp.ok], // healthy
+    [0.9, ramp.notice], // early notice
+    [1.0, ramp.warning], // approaching
+    [2.0, ramp.danger], // overage
   ];
   // The period subtitle inside the dial removes the need for the reader to
   // glance back at the card header — at 0–100 % the question "of what?"
@@ -76,21 +78,21 @@ function buildGaugeOption(row: GaugeRow) {
         pointer: {
           length: '60%',
           width: 4,
-          itemStyle: { color: '#444' },
+          itemStyle: { color: '#344054' },
         },
         axisTick: { show: false },
         splitLine: { length: 8, lineStyle: { color: '#fff', width: 2 } },
         axisLabel: {
           distance: -28,
           fontSize: 10,
-          color: '#888',
+          color: '#667085',
           formatter: (v: number) => `${Math.round(v * 100)}`,
         },
         title: {
           offsetCenter: [0, '78%'],
           fontSize: 11,
           fontWeight: 500,
-          color: '#6b7280',
+          color: '#667085',
         },
         detail: {
           valueAnimation: false,

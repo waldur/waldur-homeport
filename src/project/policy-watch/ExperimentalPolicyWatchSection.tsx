@@ -9,7 +9,6 @@ import { Project } from '@/workspace/types';
 import { PolicyWatchVariant } from './types';
 import { usePolicyWatchData } from './usePolicyWatchData';
 import { BreakdownView } from './views/BreakdownView';
-import { HealthView } from './views/HealthView';
 import { MatrixView } from './views/MatrixView';
 import { SpendView } from './views/SpendView';
 import { TimelineView } from './views/TimelineView';
@@ -21,13 +20,8 @@ interface VariantInfo {
 }
 
 const VARIANTS: VariantInfo[] = [
-  {
-    key: 'health',
-    label: translate('Health'),
-    hint: translate(
-      'Runway, pacing, per-resource state, and the cause of each pause/downscale at a glance.',
-    ),
-  },
+  // Health is now a first-class block (ProjectCreditHealthBlock), shown whenever
+  // the project has a credit — no longer a tab here.
   {
     key: 'spend',
     label: translate('Spend'),
@@ -63,7 +57,7 @@ interface Props {
 }
 
 export const ExperimentalPolicyWatchSection: FC<Props> = ({ project }) => {
-  const [variant, setVariant] = useState<PolicyWatchVariant>('health');
+  const [variant, setVariant] = useState<PolicyWatchVariant>('spend');
   const data = usePolicyWatchData(project);
 
   const activeVariant = VARIANTS.find((v) => v.key === variant) ?? VARIANTS[0];
@@ -146,7 +140,6 @@ export const ExperimentalPolicyWatchSection: FC<Props> = ({ project }) => {
           </div>
         ) : (
           <>
-            {variant === 'health' && <HealthView data={data} />}
             {variant === 'spend' && <SpendView data={data} />}
             {variant === 'breakdown' && <BreakdownView data={data} />}
             {variant === 'timeline' && <TimelineView data={data} />}

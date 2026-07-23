@@ -134,7 +134,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
     const unit = mode === 'pct' ? '%' : '';
     const label = meta?.label ?? info.name;
     const levelChip = meta?.level
-      ? `<span style="display:inline-block;background:#f3f4f6;color:#374151;padding:1px 6px;border-radius:8px;font-size:10px;margin-right:4px">${meta.level}</span>`
+      ? `<span style="display:inline-block;background:#f2f4f7;color:#667085;padding:1px 6px;border-radius:8px;font-size:10px;margin-right:4px">${meta.level}</span>`
       : '';
     const detail = meta?.detail ? `<br/><small>${meta.detail}</small>` : '';
     return `${levelChip}<strong>${label}</strong><br/>${
@@ -156,8 +156,8 @@ export const TreemapView: FC<Props> = ({ components }) => {
           top: 0,
           itemStyle: {
             color: '#f6f6f6',
-            borderColor: '#e6e6e6',
-            textStyle: { color: '#444' },
+            borderColor: '#e4e7ec',
+            textStyle: { color: '#344054' },
           },
         },
         label: {
@@ -233,7 +233,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
           </span>
           <span
             className="rounded px-2 py-0 small"
-            style={{ background: '#e0e7ff', color: '#3730a3' }}
+            style={{ background: '#f4f3ff', color: '#6938ef' }}
             title={translate('Top-level rectangles — one per offering')}
           >
             {translate('Offering')}
@@ -241,7 +241,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
           <span className="text-secondary">›</span>
           <span
             className="rounded px-2 py-0 small"
-            style={{ background: '#fef3c7', color: '#92400e' }}
+            style={{ background: '#fffaeb', color: '#dc6803' }}
             title={translate(
               'Inside each offering — usage-based vs limit-based components',
             )}
@@ -251,7 +251,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
           <span className="text-secondary">›</span>
           <span
             className="rounded px-2 py-0 small"
-            style={{ background: '#dcfce7', color: '#166534' }}
+            style={{ background: '#ecfdf3', color: '#039855' }}
             title={translate('Leaf rectangles — one per OfferingComponent')}
           >
             {translate('Component')}

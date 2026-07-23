@@ -32,6 +32,7 @@ import { useUser, useProject } from '@/workspace/hooks';
 
 import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
 import { ExperimentalPolicyWatchSection } from './policy-watch/ExperimentalPolicyWatchSection';
+import { ProjectCreditHealthBlock } from './policy-watch/ProjectCreditHealthBlock';
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
 import { ProjectDashboardCredit } from './ProjectDashboardCredit';
 import { getProjectTeamChart } from './utils';
@@ -303,6 +304,10 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           <ProjectDashboardCredit project={project} className="mb-5" />
         )}
       </Row>
+      {/* Promoted (non-experimental): the Health block shows when billing is
+          visible and the project has a credit. The remaining views stay
+          behind the experimental flag below. */}
+      {showBillingInfo && <ProjectCreditHealthBlock project={project} />}
       {isExperimentalUiComponentsVisible() && (
         <ExperimentalUsageSection project={project} />
       )}
