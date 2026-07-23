@@ -8,6 +8,7 @@ import { generateBrandColors } from '@/core/generateColors';
 import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';
 
+import { getWatchColors } from '../chartColors';
 import { PolicyWatchData } from '../types';
 
 const currency = () => ENV.plugins.WALDUR_CORE.CURRENCY_NAME;
@@ -94,17 +95,14 @@ const findXAxisBucket = (date: string, labels: string[]): string | null => {
   }
 };
 
-const POLICY_FIRED_COLOR = '#dc3545';
-const POLICY_APPROACHING_COLOR = '#f59e0b';
-const POLICY_IDLE_COLOR = '#0d6efd';
-
 const policyMarkerColor = (
   hasFired: boolean,
   saturationPct: number,
 ): string => {
-  if (hasFired) return POLICY_FIRED_COLOR;
-  if (saturationPct >= 80) return POLICY_APPROACHING_COLOR;
-  return POLICY_IDLE_COLOR;
+  const c = getWatchColors();
+  if (hasFired) return c.danger;
+  if (saturationPct >= 80) return c.warning;
+  return c.muted;
 };
 
 // Cost-axis threshold lines for project + customer cost policies.
@@ -178,6 +176,7 @@ const policyFireDateMarkers = (data: PolicyWatchData, xLabels: string[]) => {
 const burnDownOptions = (data: PolicyWatchData): any => {
   const brand = getBrandColor();
   const brandColors = generateBrandColors(brand);
+  const c = getWatchColors();
   const creditValue = Number(data.runway.credit?.value || 0);
   if (creditValue <= 0) return null;
   const series = padMonths(data.invoices, 6, 0);
@@ -262,7 +261,7 @@ const burnDownOptions = (data: PolicyWatchData): any => {
                 formatter: translate('Zero'),
                 position: 'insideEndTop' as const,
               },
-              lineStyle: { color: '#dc3545', type: 'dashed' as const },
+              lineStyle: { color: c.danger, type: 'dashed' as const },
             },
             ...policyFireDateMarkers(data, xAxis),
           ],
@@ -272,7 +271,7 @@ const burnDownOptions = (data: PolicyWatchData): any => {
         name: translate('Projected'),
         type: 'line',
         data: projectedSeries,
-        color: '#9aa1a9',
+        color: c.neutral,
         smooth: false,
         showSymbol: true,
         symbolSize: 6,
@@ -299,6 +298,7 @@ const forecastFanOptions = (data: PolicyWatchData): any => {
 
   const brand = getBrandColor();
   const brandColors = generateBrandColors(brand);
+  const c = getWatchColors();
 
   const histPadded = [...historicalCosts, ...Array(horizon).fill(null)];
   const lo = [...Array(historicalCosts.length).fill(null), ...p10];
@@ -350,7 +350,7 @@ const forecastFanOptions = (data: PolicyWatchData): any => {
         name: translate('Forecast P10'),
         type: 'line',
         data: lo,
-        color: '#9aa1a9',
+        color: c.neutral,
         showSymbol: false,
         lineStyle: { width: 0 },
         stack: 'fan-lo',
@@ -359,17 +359,17 @@ const forecastFanOptions = (data: PolicyWatchData): any => {
         name: translate('Forecast band'),
         type: 'line',
         data: hi.map((v, i) => (v === null ? null : v - (lo[i] || 0))),
-        color: '#9aa1a9',
+        color: c.neutral,
         showSymbol: false,
         lineStyle: { width: 0 },
         stack: 'fan-lo',
-        areaStyle: { color: 'rgba(154, 161, 169, 0.25)' },
+        areaStyle: { color: 'rgba(208, 213, 221, 0.25)' },
       },
       {
         name: translate('Forecast P50'),
         type: 'line',
         data: mid,
-        color: '#6c757d',
+        color: c.muted,
         smooth: false,
         showSymbol: true,
         symbolSize: 5,
@@ -441,7 +441,7 @@ export const SpendView: FC<Props> = ({ data }) => {
             <EChart options={forecast} height="320px" />
             <small className="text-muted d-block text-center mt-2">
               {translate(
-                'Solid: actual monthly spend. Dashed: P50 projection. Shaded band: P10–P90. Horizontal dashed lines: cost-policy thresholds (red = fired, amber = approaching, blue = idle). Vertical thin lines: projected fire date for cost or SLURM policies.',
+                'Solid: actual monthly spend. Dashed: P50 projection. Shaded band: P10–P90. Horizontal dashed lines: cost-policy thresholds (red = fired, orange = approaching, gray = idle). Vertical thin lines: projected fire date for cost or SLURM policies.',
               )}
             </small>
           </div>

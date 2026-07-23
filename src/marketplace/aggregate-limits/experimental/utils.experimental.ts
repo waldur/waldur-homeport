@@ -81,7 +81,7 @@ export function useAggregateLimitChart(
         axisPointer: {
           type: 'shadow',
           crossStyle: {
-            color: '#999',
+            color: '#667085',
           },
         },
         formatter: function (params) {
@@ -125,7 +125,7 @@ export function useAggregateLimitChart(
         itemHeight: 8,
         textStyle: {
           fontSize: 12,
-          color: '#555',
+          color: '#667085',
         },
         itemGap: 8,
         top: 0,

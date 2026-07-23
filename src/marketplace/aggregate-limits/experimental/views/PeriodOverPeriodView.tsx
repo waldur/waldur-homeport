@@ -8,6 +8,7 @@ import {
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { Customer } from '@/workspace/types';
@@ -141,6 +142,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
           10
         : null;
 
+    const tc = getChartThemeColors();
     const seriesList: any[] = [
       {
         name: `${current.current_period_label}`,
@@ -148,6 +150,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         smooth: true,
         symbol: 'circle',
         symbolSize: 6,
+        color: tc.brand500,
         data: currentSeries,
         areaStyle: { opacity: 0.18 },
       },
@@ -161,6 +164,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         smooth: true,
         symbol: 'emptyCircle',
         symbolSize: 5,
+        color: tc.muted,
         lineStyle: { type: 'dashed' },
         data: previousSeries,
       });
@@ -171,7 +175,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         type: 'line',
         markLine: {
           symbol: 'none',
-          lineStyle: { type: 'dashed', color: '#dc2626' },
+          lineStyle: { type: 'dashed', color: '#d92d20' },
           data: [
             {
               yAxis: current.limit,

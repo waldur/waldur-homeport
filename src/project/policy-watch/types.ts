@@ -56,6 +56,10 @@ export interface ResourceHealth {
   resource: ResourceWithAttribution;
   bucket: ResourceStatusBucket;
   saturationPct: number;
+  /** True only when the resource has a SLURM usage policy or a limit-based
+   *  quota to measure saturation against; false for cost-policy-only / usage-
+   *  billed resources (where "% of policy threshold" would be a meaningless 0). */
+  hasThreshold: boolean;
   matchedPolicy?: PolicySaturation;
   attribution?: PolicyAttributionPayload;
   attributionField?: 'paused' | 'downscaled';
@@ -115,6 +119,19 @@ export interface CreditTerms {
   consumptionLastMonth: number;
 }
 
+export interface CreditBreakdown {
+  /** Initial grant plus every later change; equals used + lost + remaining
+   *  regardless of top-ups or reductions. */
+  granted: number;
+  /** Credit consumed against real usage: Σ min(incurred, credit debited). */
+  used: number;
+  /** Credit forfeited to the minimal-consumption floor (and expiry): the
+   *  Σ max(0, credit debited − incurred) shortfall. Hard to recover. */
+  lost: number;
+  /** Current remaining balance (ProjectCredit.value). */
+  remaining: number;
+}
+
 export interface BreakdownBucket {
   /** Display label (offering or resource name). */
   label: string;
@@ -168,6 +185,7 @@ export interface PolicyWatchData {
   breakdownCharges: BreakdownBucket[];
   breakdownCompensations: BreakdownBucket[];
   creditTerms: CreditTerms | null;
+  creditBreakdown: CreditBreakdown | null;
   isLoading: boolean;
   hasError: boolean;
 }

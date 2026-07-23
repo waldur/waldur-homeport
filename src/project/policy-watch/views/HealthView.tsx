@@ -1,5 +1,6 @@
 import {
   ArrowsInSimpleIcon,
+  ChartPieIcon,
   CheckCircleIcon,
   ClockCountdownIcon,
   PauseCircleIcon,
@@ -10,11 +11,21 @@ import { FC } from 'react';
 
 import { formatDate, formatMediumDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
+import { lazyComponent } from '@/core/lazyComponent';
 import { ProgressBar } from '@/core/ProgressBar';
 import { StateIndicator } from '@/core/StateIndicator';
+import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 import { POLICY_LABELS } from '@/marketplace/resources/details/ResourceFlags';
+import { useModal } from '@/modal/actions';
 
+const ResourceShowUsageDialog = lazyComponent(() =>
+  import('@/marketplace/resources/usage/ResourceShowUsageDialog').then(
+    (module) => ({ default: module.ResourceShowUsageDialog }),
+  ),
+);
+
+import { CreditBreakdownCard } from '../components/CreditBreakdownCard';
 import { CreditTermsCard } from '../components/CreditTermsCard';
 import { PacingIndicator } from '../components/PacingIndicator';
 import {
@@ -92,7 +103,7 @@ const RunwayCard: FC<{ data: PolicyWatchData }> = ({ data }) => {
 
   return (
     <div
-      className={`card card-bordered mb-3 ${
+      className={`border-start border-4 ps-3 mt-3 ${
         isCritical
           ? 'border-danger'
           : isWarn
@@ -100,7 +111,7 @@ const RunwayCard: FC<{ data: PolicyWatchData }> = ({ data }) => {
             : 'border-success'
       }`}
     >
-      <div className="card-body py-3 d-flex flex-wrap align-items-center gap-3">
+      <div className="d-flex flex-wrap align-items-center gap-3">
         <div>
           <small className="text-muted d-block">
             {translate('Credit runway')}
@@ -176,15 +187,46 @@ const RunwayCard: FC<{ data: PolicyWatchData }> = ({ data }) => {
 };
 
 const ResourceCard: FC<{ health: ResourceHealth }> = ({ health }) => {
-  const { resource, bucket, saturationPct, attribution, matchedPolicy } =
-    health;
+  const {
+    resource,
+    bucket,
+    saturationPct,
+    hasThreshold,
+    attribution,
+    matchedPolicy,
+  } = health;
+  const { openDialog } = useModal();
   const variant = BUCKET_VARIANT[bucket];
   const policyTypeLabel = attribution?.policy_class
     ? POLICY_LABELS[attribution.policy_class] || attribution.policy_class
     : null;
+  const canShowUsage = Boolean(
+    resource.is_usage_based || resource.is_limit_based,
+  );
+  const openUsage = () =>
+    openDialog(ResourceShowUsageDialog, {
+      resolve: { resource },
+      size: 'lg',
+    });
 
   return (
-    <div className="card card-bordered h-100">
+    <div
+      className="card card-bordered h-100"
+      role={canShowUsage ? 'button' : undefined}
+      tabIndex={canShowUsage ? 0 : undefined}
+      onClick={canShowUsage ? openUsage : undefined}
+      onKeyDown={
+        canShowUsage
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openUsage();
+              }
+            }
+          : undefined
+      }
+      style={canShowUsage ? { cursor: 'pointer' } : undefined}
+    >
       <div className="card-body p-3">
         <div className="d-flex justify-content-between align-items-start mb-2 gap-2">
           <div className="flex-grow-1 min-w-0">
@@ -203,22 +245,29 @@ const ResourceCard: FC<{ health: ResourceHealth }> = ({ health }) => {
             outline
           />
         </div>
-        <div className="d-flex align-items-center gap-2 mb-2">
-          <BucketGlyph bucket={bucket} />
-          <div className="flex-grow-1">
-            <ProgressBar
-              now={Math.min(Math.max(saturationPct, 0), 100)}
-              max={100}
-              variant={saturationVariant(bucket)}
-              compact
-            />
-            <small className="text-muted">
-              {translate('{pct}% of policy threshold', {
-                pct: saturationPct.toFixed(1),
-              })}
-            </small>
+        {canShowUsage && (
+          <small className="text-primary d-flex align-items-center gap-1 mb-2">
+            <ChartPieIcon weight="bold" /> {translate('View usage')}
+          </small>
+        )}
+        {hasThreshold && (
+          <div className="d-flex align-items-center gap-2 mb-2">
+            <BucketGlyph bucket={bucket} />
+            <div className="flex-grow-1">
+              <ProgressBar
+                now={Math.min(Math.max(saturationPct, 0), 100)}
+                max={100}
+                variant={saturationVariant(bucket)}
+                compact
+              />
+              <small className="text-muted">
+                {translate('{pct}% of usage quota', {
+                  pct: saturationPct.toFixed(1),
+                })}
+              </small>
+            </div>
           </div>
-        </div>
+        )}
         {(bucket === 'paused' || bucket === 'downscaled') && (
           <div className="mb-2">
             <small className="text-danger fw-medium d-block">
@@ -311,23 +360,41 @@ export const HealthView: FC<Props> = ({ data }) => {
 
   return (
     <>
-      <RunwayCard data={data} />
-      <PacingIndicator pacing={data.pacing} />
-      {data.creditTerms && <CreditTermsCard terms={data.creditTerms} />}
-      {data.policies.length === 0 && (
-        <div className="alert alert-info py-2">
-          {translate(
-            'No cost or SLURM usage policies are configured for this project.',
-          )}
-        </div>
-      )}
-      <div className="row g-3">
-        {sorted.map((h) => (
-          <div className="col-md-6 col-xl-4" key={h.resource.uuid}>
-            <ResourceCard health={h} />
+      <WidgetCard
+        cardTitle={translate("This month's credit consumption")}
+        className="mb-3"
+      >
+        <PacingIndicator pacing={data.pacing} creditTerms={data.creditTerms} />
+        {data.creditTerms && <CreditTermsCard terms={data.creditTerms} />}
+      </WidgetCard>
+
+      <WidgetCard cardTitle={translate('Overall credit')} className="mb-3">
+        <RunwayCard data={data} />
+        {data.creditBreakdown && (
+          <CreditBreakdownCard
+            breakdown={data.creditBreakdown}
+            endDate={data.creditTerms?.endDate}
+            daysUntilEndDate={data.creditTerms?.daysUntilEndDate}
+          />
+        )}
+      </WidgetCard>
+
+      <WidgetCard cardTitle={translate('Resources')} className="mb-3">
+        {data.policies.length === 0 && (
+          <div className="alert alert-info py-2 mt-3">
+            {translate(
+              'No cost or SLURM usage policies are configured for this project.',
+            )}
           </div>
-        ))}
-      </div>
+        )}
+        <div className="row g-3 mt-1">
+          {sorted.map((h) => (
+            <div className="col-md-6 col-xl-4" key={h.resource.uuid}>
+              <ResourceCard health={h} />
+            </div>
+          ))}
+        </div>
+      </WidgetCard>
     </>
   );
 };

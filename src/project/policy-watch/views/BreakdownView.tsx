@@ -10,6 +10,7 @@ import { translate } from '@/i18n';
 import { SimpleTable } from '@/table/SimpleTable';
 import type { Column } from '@/table/types';
 
+import { getWatchColors } from '../chartColors';
 import { BreakdownBucket, PolicyWatchData } from '../types';
 
 const currency = () => ENV.plugins.WALDUR_CORE.CURRENCY_NAME;
@@ -199,7 +200,7 @@ export const BreakdownView: FC<Props> = ({ data }) => {
           title={translate('Compensations (credit applied)')}
           rows={data.breakdownCompensations}
           total={compensation}
-          color="#198754"
+          color={getWatchColors().success}
         />
       )}
     </>

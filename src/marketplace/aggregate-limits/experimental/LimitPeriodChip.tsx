@@ -14,10 +14,10 @@ interface Props {
 }
 
 const PERIOD_STYLE: Record<string, { bg: string; text: string }> = {
-  month: { bg: '#dbeafe', text: '#1d4ed8' },
-  quarterly: { bg: '#dcfce7', text: '#15803d' },
-  annual: { bg: '#fef3c7', text: '#b45309' },
-  total: { bg: '#e5e7eb', text: '#374151' },
+  month: { bg: '#f4f3ff', text: '#6938ef' },
+  quarterly: { bg: '#ecfdf3', text: '#039855' },
+  annual: { bg: '#fffaeb', text: '#dc6803' },
+  total: { bg: '#f2f4f7', text: '#667085' },
 };
 
 function familyLabelFor(limitPeriod: string | null | undefined): string {
@@ -50,8 +50,8 @@ export const LimitPeriodChip: FC<Props> = ({
       <span
         className="d-inline-flex align-items-center gap-1 rounded-pill px-2 py-1"
         style={{
-          background: '#f3f4f6',
-          color: '#6b7280',
+          background: '#f2f4f7',
+          color: '#667085',
           fontSize: size === 'sm' ? 11 : 13,
           fontWeight: 600,
           lineHeight: 1,
@@ -67,8 +67,8 @@ export const LimitPeriodChip: FC<Props> = ({
   }
 
   const style = PERIOD_STYLE[limitPeriod ?? ''] ?? {
-    bg: '#fde68a',
-    text: '#92400e',
+    bg: '#fffaeb',
+    text: '#dc6803',
   };
 
   const familyLabel = familyLabelFor(limitPeriod);
