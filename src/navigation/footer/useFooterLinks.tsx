@@ -93,19 +93,8 @@ export const useFooterLinks = () => {
       joinOrgItem,
     ].filter(Boolean);
 
-    // 4. Constant Links
     return {
       dynamic,
-      privacy: {
-        id: 'privacy',
-        label: translate('Privacy policy'),
-        state: 'about.privacy',
-      },
-      tos: {
-        id: 'tos',
-        label: translate('Terms of service'),
-        state: 'about.tos',
-      },
     };
   }, [user, isMd, hasNonProjectPerms, publicInvitesCount]);
 

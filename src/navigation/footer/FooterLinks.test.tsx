@@ -18,6 +18,11 @@ vi.mock('./MobileMenu', () => ({
 vi.mock('./SupportMenu', () => ({
   SupportMenu: () => <li data-testid="support-menu">Support Menu</li>,
 }));
+vi.mock('./LegalPrivacyMenu', () => ({
+  LegalPrivacyMenu: () => (
+    <li data-testid="legal-privacy-menu">Legal & Privacy Menu</li>
+  ),
+}));
 
 describe('FooterLinks', () => {
   beforeEach(() => {
@@ -29,17 +34,14 @@ describe('FooterLinks', () => {
       isMd: false,
       config: {
         dynamic: [{ id: 'calls', label: 'Calls', state: 'calls' }],
-        privacy: { id: 'privacy', label: 'Privacy', state: 'privacy' },
-        tos: { id: 'tos', label: 'ToS', state: 'tos' },
       },
     } as any);
 
     render(<FooterLinks />);
 
-    expect(screen.getAllByTestId('menu-item')).toHaveLength(3);
+    expect(screen.getAllByTestId('menu-item')).toHaveLength(1);
     expect(screen.getByText('Calls')).toBeInTheDocument();
-    expect(screen.getByText('Privacy')).toBeInTheDocument();
-    expect(screen.getByText('ToS')).toBeInTheDocument();
+    expect(screen.getByTestId('legal-privacy-menu')).toBeInTheDocument();
     expect(screen.getByTestId('support-menu')).toBeInTheDocument();
   });
 
@@ -48,16 +50,13 @@ describe('FooterLinks', () => {
       isMd: true,
       config: {
         dynamic: [{ id: 'calls', label: 'Calls', state: 'calls' }],
-        privacy: { id: 'privacy', label: 'Privacy', state: 'privacy' },
-        tos: { id: 'tos', label: 'ToS', state: 'tos' },
       },
     } as any);
 
     render(<FooterLinks />);
 
-    expect(screen.getByTestId('menu-item')).toBeInTheDocument(); // Only Privacy is standalone
-    expect(screen.getByText('Privacy')).toBeInTheDocument();
     expect(screen.getByTestId('mobile-menu')).toBeInTheDocument();
+    expect(screen.getByTestId('legal-privacy-menu')).toBeInTheDocument();
     expect(screen.getByTestId('support-menu')).toBeInTheDocument();
   });
 });
