@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'lodash-es';
-import { Card, Col, Dropdown, Row } from 'react-bootstrap';
+import { useMemo } from 'react';
+import { Card, Col, Dropdown, Nav, Row, Tab } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
 import { ServiceDeskProviderLogo } from '@/administration/service-desk/ServiceDeskProviderLogo';
@@ -15,6 +16,8 @@ import { SettingsDescription } from '@/SettingsDescription';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 import { FieldRow } from '../settings/FieldRow';
+import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
+import { SupportUsersList } from '../support-users/SupportUsersList';
 
 import { IssueStatusList } from './issue-statuses';
 
@@ -101,12 +104,55 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   );
 };
 
+const SERVICE_DESK_PROVIDERS = ['atlassian', 'zammad', 'smax'];
+
+const ConfigurationTab = ({ data }) =>
+  INTEGRATION_SETTINGS ? (
+    <FormTable>
+      {INTEGRATION_SETTINGS.items.map((item) => (
+        <FieldRow key={item.key} item={item} value={data[item.key]} />
+      ))}
+    </FormTable>
+  ) : null;
+
+const CredentialsTab = ({ data }) => (
+  <Row>
+    {SERVICE_DESK_PROVIDERS.map((serviceDeskProvider) => (
+      <Col key={serviceDeskProvider} xs={12} md={6} xl={4} className="mb-6">
+        <ServiceDeskProviderCard
+          serviceDeskProvider={serviceDeskProvider}
+          initialValues={data}
+        />
+      </Col>
+    ))}
+  </Row>
+);
+
 export const AdministrationServiceDesk = () => {
-  const serviceDeskProviders = ['atlassian', 'zammad', 'smax'];
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['AdministrationServiceDesk'],
     queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
   });
+
+  // Issue statuses and support users only exist once a helpdesk is configured.
+  const supportEnabled = hasSupport();
+  const tabs = useMemo(
+    () => [
+      { key: 'configuration', title: translate('Configuration') },
+      { key: 'credentials', title: translate('Credentials') },
+      ...(supportEnabled
+        ? [
+            {
+              key: 'issue-statuses',
+              title: translate('Issue status mapping'),
+            },
+            { key: 'support-users', title: translate('Support users') },
+          ]
+        : []),
+    ],
+    [supportEnabled],
+  );
+  const { activeKey, handleSelect } = useSettingsUrlSync(tabs);
 
   return isLoading ? (
     <LoadingSpinner />
@@ -116,43 +162,43 @@ export const AdministrationServiceDesk = () => {
       loadData={refetch}
     />
   ) : data ? (
-    <>
-      <SettingsGroupCard group={INTEGRATION_SETTINGS} data={data} />
-
-      <Card className="card-bordered mb-6">
-        <Card.Body>
-          <Row>
-            {serviceDeskProviders.map((serviceDeskProvider, index) => (
-              <Col key={index} xs={12} md={6} xl={4} className="mb-6">
-                <ServiceDeskProviderCard
-                  serviceDeskProvider={serviceDeskProvider}
-                  initialValues={data}
-                />
-              </Col>
+    <Card className="card-bordered">
+      <Card.Header>
+        <Card.Title>
+          <h3>{translate('Service desk integration')}</h3>
+        </Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <Tab.Container activeKey={activeKey} onSelect={handleSelect}>
+          <Nav variant="tabs" className="nav-line-tabs mb-5">
+            {tabs.map((tab) => (
+              <Nav.Item key={tab.key}>
+                <Nav.Link eventKey={tab.key} className="cursor-pointer">
+                  {tab.title}
+                </Nav.Link>
+              </Nav.Item>
             ))}
-          </Row>
-        </Card.Body>
-      </Card>
-
-      {hasSupport() && <IssueStatusList />}
-    </>
+          </Nav>
+          <Tab.Content>
+            <Tab.Pane eventKey="configuration">
+              <ConfigurationTab data={data} />
+            </Tab.Pane>
+            <Tab.Pane eventKey="credentials">
+              <CredentialsTab data={data} />
+            </Tab.Pane>
+            {supportEnabled && (
+              <Tab.Pane eventKey="issue-statuses" unmountOnExit={true}>
+                <IssueStatusList />
+              </Tab.Pane>
+            )}
+            {supportEnabled && (
+              <Tab.Pane eventKey="support-users" unmountOnExit={true}>
+                <SupportUsersList />
+              </Tab.Pane>
+            )}
+          </Tab.Content>
+        </Tab.Container>
+      </Card.Body>
+    </Card>
   ) : null;
-};
-
-const SettingsGroupCard = ({ group, data }) => {
-  if (!group) return null;
-
-  return (
-    <FormTable.Card
-      title={group.description}
-      key={group.description}
-      className="card-bordered mb-5"
-    >
-      <FormTable>
-        {group.items.map((item) => (
-          <FieldRow key={item.key} item={item} value={data[item.key]} />
-        ))}
-      </FormTable>
-    </FormTable.Card>
-  );
 };

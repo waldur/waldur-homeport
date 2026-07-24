@@ -307,7 +307,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-service-desk-settings',
-    url: 'service-desk-settings/',
+    url: 'service-desk-settings/?tab',
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./service-desk/AdministrationServiceDesk').then((module) => ({

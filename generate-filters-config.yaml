@@ -228,6 +228,20 @@ overrides:
         'true': Active
         'false': Inactive
 
+  admin_support_users:
+    componentName: AdminSupportUsersFilter
+    operationId: support_users_list
+    filters:
+      - backend_name
+      - is_active
+    backend_name:
+      label: Helpdesk
+    is_active:
+      label: Status
+      enumOverrides:
+        'true': Active
+        'false': Inactive
+
   notification_messages:
     filters:
       - is_overridden
