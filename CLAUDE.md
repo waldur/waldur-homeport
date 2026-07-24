@@ -61,6 +61,30 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   );
   ```
 
+- **Never hand-roll a table with `react-bootstrap`'s `<Table>`** (or raw
+  `<table>`/`<thead>`/`<tbody>`). Every list — including small ones nested inside
+  an expandable row, a tab or a modal — must use `@/table/Table` with `useTable`.
+  A hand-rolled table silently loses the header styling, sort carets, column
+  sizing, hover/selection, loading skeletons and the shared `NoResult` empty
+  state, so it looks visibly foreign next to every other list in the app.
+
+  For data you already hold in memory (or that comes from one aggregate
+  endpoint), `fetchData` may resolve rows directly instead of using
+  `createFetcher`:
+
+  ```typescript
+  const tableProps = useTable({
+    table: `my-nested-table-${scopeUuid}`,
+    fetchData: () => Promise.resolve({ rows, resultCount: rows.length }),
+  });
+  // Nested/embedded tables: drop the chrome the parent already provides.
+  <Table {...tableProps} columns={columns} verboseName={translate('items')}
+         hideTitle hasActionBar={false} placeholderHasRetry={false} />
+  ```
+
+  Reference: `src/customer/roles/RoleUsersExpandableRow.tsx`,
+  `src/administration/celery/CeleryTaskTable.tsx` (in-memory rows).
+
 - **Table imports** — there is no barrel `@/table` export. Always import from subpaths:
 
   ```typescript
