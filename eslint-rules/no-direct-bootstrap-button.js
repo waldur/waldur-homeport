@@ -26,6 +26,7 @@ const ALLOWED_FILES = [
   'src/navigation/Toolbar.tsx',
   // Uses Button as OverlayTrigger child for popover
   'src/table/TableColumnsButton.tsx',
+  'src/table/ExpandableRowToolbar.tsx',
 ];
 
 export default {

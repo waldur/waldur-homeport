@@ -28,7 +28,13 @@ export const ResourceDetailsTable: FC<OwnProps> = ({ resource }) => {
   );
 
   return (
-    <FormTable hideActions alignTop detailsMode className="gy-5">
+    <FormTable
+      hideActions
+      alignTop
+      detailsMode
+      bordered={false}
+      className="gy-5"
+    >
       {fields.map((field) => (
         <FormTable.Item
           key={field.name}

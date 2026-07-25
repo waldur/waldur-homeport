@@ -11,11 +11,17 @@ import { BatchSetEndDateAction } from './BatchSetEndDateAction';
 export const BatchProjectActions = ({
   rows,
   refetch,
+  className,
 }: {
   rows: Project[];
   refetch;
+  className?: string;
 }) => (
-  <ActionDropdownButton variant="primary" title={translate('All actions')}>
+  <ActionDropdownButton
+    variant="primary"
+    title={translate('All actions')}
+    className={className}
+  >
     <BatchMoveProjectAction rows={rows} refetch={refetch} />
     <BatchSetEndDateAction rows={rows} refetch={refetch} />
     <DropdownDivider className="border-top m-0" />

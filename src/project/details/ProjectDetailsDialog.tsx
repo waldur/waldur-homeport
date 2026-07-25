@@ -27,7 +27,13 @@ export const ProjectDetailsDialog: FC<{
       iconNode={<ClipboardTextIcon weight="bold" />}
       iconColor="success"
     >
-      <FormTable hideActions alignTop detailsMode className="gy-5">
+      <FormTable
+        hideActions
+        alignTop
+        detailsMode
+        bordered={false}
+        className="gy-5"
+      >
         <FormTable.Item
           label={translate('Name')}
           value={<FieldWithCopy value={project.name} />}

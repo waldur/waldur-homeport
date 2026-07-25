@@ -45,6 +45,7 @@ export const SummaryOrganizationProjects = ({ customer }) => {
       table={`SummaryOrganizationProjects-${customer.uuid}`}
       customer={customer}
       hasActionBar={false}
+      cardBordered={false}
       hoverShadow={false}
       initialSorting={{ field: 'name', mode: 'asc' }}
       initialPageSize={5}
