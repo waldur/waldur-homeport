@@ -104,6 +104,36 @@ table .expandable-container {
       }
     }
   }
+
+  // The .table-toolbar-search class in _table.scss is scoped under
+  // .card-header .card-toolbar so it doesn't apply inside the expanded-row
+  // toolbar. Duplicate the same rule here.
+  .table-toolbar-search {
+    flex: 0 0 320px;
+    max-width: 320px;
+    width: 320px;
+
+    @media (max-width: 767px) {
+      flex: 1 1 auto;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+
+  // Keep the pagination on a single row inside the narrower expanded view
+  // (it shouldn't wrap into multiple rows). The default Bootstrap columns
+  // already lay it out like a regular pagination — page-size selector left
+  // (.col-sm-auto), page numbers in the growing middle (.col-sm), count +
+  // prev/next right (.col-sm-auto) — so we only stop it wrapping and center
+  // the page numbers within their column.
+  .table-pagination > .row {
+    flex-wrap: nowrap;
+
+    > .col-sm {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
 
 // Mobile screens (no aside)

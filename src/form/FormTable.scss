@@ -88,6 +88,26 @@
       font-weight: 400;
     }
   }
+
+  // Borderless details tables ONLY (callers pass `bordered={false}`, so the
+  // table has no `.table-bordered`) — e.g. the details modals. Show just the
+  // horizontal dividers between rows, no box on any side. Regular details
+  // panels keep `bordered={true}` (`.table-bordered`) and are left untouched.
+  &.details-mode:not(.table-bordered) {
+    &,
+    thead,
+    tbody,
+    tfoot,
+    tr,
+    th,
+    td {
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+    tr:not(:last-child) > * {
+      border-bottom: 1px solid var(--bs-border-color) !important;
+    }
+  }
 }
 
 @media (min-width: 576px) {
@@ -100,4 +120,12 @@
   .table.form-table tr th:first-child {
     min-width: 200px;
   }
+}
+
+// The react-bootstrap `responsive` wrapper around a borderless details table
+// carries the box border — remove it so only the row dividers remain. Scoped
+// to `:not(.table-bordered)` so only the borderless modals are affected.
+.table-responsive:has(> .form-table.details-mode:not(.table-bordered)) {
+  border: 0 !important;
+  box-shadow: none !important;
 }

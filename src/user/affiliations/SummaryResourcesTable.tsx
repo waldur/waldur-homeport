@@ -95,6 +95,7 @@ export const SummaryResourcesTable: FC<OwnProps> = ({ scope, context }) => {
       verboseName={translate('Resources')}
       initialSorting={{ field: 'name', mode: 'asc' }}
       hasActionBar={false}
+      cardBordered={false}
       hoverShadow={false}
       initialPageSize={5}
       minHeight="auto"

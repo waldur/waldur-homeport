@@ -138,6 +138,7 @@ export const SummaryTeamTable: FC<OwnProps> = ({
       ]}
       verboseName={translate('Team members')}
       hasActionBar={false}
+      cardBordered={false}
       hoverShadow={false}
       initialSorting={
         (context === 'organization' && {

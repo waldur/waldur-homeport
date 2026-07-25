@@ -24,13 +24,19 @@ import { MultiUnlinkAction } from './MultiUnlinkAction';
 export const ResourceMultiSelectAction = ({
   rows,
   refetch,
+  className,
 }: {
   rows: Resource[];
   refetch(): void;
+  className?: string;
 }) => {
   const user = useUser();
   return (
-    <ActionDropdownButton variant="primary" title={translate('All actions')}>
+    <ActionDropdownButton
+      variant="primary"
+      title={translate('All actions')}
+      className={className}
+    >
       <MultiRenewAllocationsAction rows={rows} refetch={refetch} />
       <MultiChangeLimitsAction rows={rows} refetch={refetch} />
       <MultiSetEndDateAction rows={rows} refetch={refetch} />
