@@ -22,6 +22,8 @@ import { useUser } from '@/workspace/hooks';
 
 import { DropdownLink } from '../list/DropdownLink';
 
+import { DuplicateOfferingResolveButton } from './DuplicateOfferingResolveButton';
+
 const EditOfferingAction = ({
   row,
   customerUuid,
@@ -155,6 +157,13 @@ export const DuplicateOfferingsList: FunctionComponent = () => {
       title={translate('OpenStack duplicate offerings')}
       verboseName={translate('OpenStack duplicate offerings')}
       expandableRow={DuplicateOfferingsExpandableRow}
+      rowActions={({ row }) => (
+        <ActionsDropdown
+          row={row}
+          refetch={tableProps.fetch}
+          actions={[DuplicateOfferingResolveButton]}
+        />
+      )}
       enableExport
     />
   );
