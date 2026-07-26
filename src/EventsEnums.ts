@@ -260,6 +260,8 @@ export const ResourcesEnum = {
   marketplace_order_rejected: 'marketplace_order_rejected',
   marketplace_order_terminated: 'marketplace_order_terminated',
   marketplace_order_unlinked: 'marketplace_order_unlinked',
+  marketplace_resource_api_key_revealed: 'marketplace_resource_api_key_revealed',
+  marketplace_resource_api_key_rotated: 'marketplace_resource_api_key_rotated',
   marketplace_resource_create_canceled: 'marketplace_resource_create_canceled',
   marketplace_resource_create_failed: 'marketplace_resource_create_failed',
   marketplace_resource_create_requested: 'marketplace_resource_create_requested',
