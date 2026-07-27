@@ -36,7 +36,19 @@ export const OrganizationCreatePage: FC = () => {
   const [step, setStep] = useState(0);
   const [lastVisitedStep, setLastVisitedStep] = useState(0);
   const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [submitDisabledReason, setSubmitDisabledReason] = useState('');
   const [validationMethod, setValidationMethod] = useState<string>('');
+
+  // A step (Step 2's incomplete-profile gate, Step 3's escalation) can disable
+  // the footer's Next/Create button; the reason surfaces as its tooltip so a
+  // disabled control always explains why (see ui-consistency guideline 2.2).
+  const handleSubmitDisabledChange = useCallback(
+    (disabled: boolean, reason?: string) => {
+      setSubmitDisabled(disabled);
+      setSubmitDisabledReason(disabled ? reason || '' : '');
+    },
+    [],
+  );
 
   const isManual = validationMethod === 'manual';
   const skipSteps = useMemo(() => (isManual ? [2] : []), [isManual]);
@@ -125,6 +137,10 @@ export const OrganizationCreatePage: FC = () => {
   }, [step, skipSteps, lastVisitedStep]);
 
   const prevStep = useCallback(() => {
+    // Clear any step-scoped block (e.g. Step 2's incomplete-profile gate) so it
+    // doesn't leak onto an earlier step that has nothing to disable.
+    setSubmitDisabled(false);
+    setSubmitDisabledReason('');
     let prevStepIndex = step - 1;
     while (skipSteps.includes(prevStepIndex) && prevStepIndex >= 0) {
       prevStepIndex--;
@@ -338,6 +354,7 @@ export const OrganizationCreatePage: FC = () => {
                       {step === 1 && (
                         <OrganizationCreateStep2
                           getChecklistData={getChecklistData}
+                          onSubmitDisabledChange={handleSubmitDisabledChange}
                         />
                       )}
                       {step === 2 && (
@@ -345,7 +362,7 @@ export const OrganizationCreatePage: FC = () => {
                           validationResult={validationResult}
                           validationLoading={validationLoading}
                           isManual={isManual}
-                          onSubmitDisabledChange={setSubmitDisabled}
+                          onSubmitDisabledChange={handleSubmitDisabledChange}
                         />
                       )}
                       {step === 3 && (
@@ -383,6 +400,7 @@ export const OrganizationCreatePage: FC = () => {
                             isLast ? translate('Create') : translate('Next')
                           }
                           invalid={submitDisabled}
+                          disabledReason={submitDisabledReason || undefined}
                           className="btn-icon-right min-w-125px"
                           children={
                             submitting ? (

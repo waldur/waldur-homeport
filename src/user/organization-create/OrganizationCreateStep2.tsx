@@ -1,4 +1,5 @@
 import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
+import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Form as BootstrapForm, Card, Col, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
@@ -32,12 +33,15 @@ interface OrganizationCreateStep2Props {
     checklistCustomerUuid: string;
     checklistIntentUuid: string;
   }>;
+  onSubmitDisabledChange?: (disabled: boolean, reason?: string) => void;
 }
 
 export const OrganizationCreateStep2: FunctionComponent<
   OrganizationCreateStep2Props
 > = (props) => {
+  const { onSubmitDisabledChange } = props;
   const form = useForm();
+  const router = useRouter();
   const { values } = useFormState<OrganizationCreateFormValues>({
     subscription: { values: true },
   });
@@ -71,6 +75,42 @@ export const OrganizationCreateStep2: FunctionComponent<
 
     return false;
   };
+
+  // D&B (Dun & Bradstreet) methods source the person's identity — name, date
+  // of birth, personnummer — from the user's account (populated by the eID
+  // login / profile), never from a form field the applicant types. So instead
+  // of the editable fallback, an incomplete profile must be completed first.
+  const isDnb = validationMethod.startsWith('dnb_');
+
+  // Labels of the account fields the current method needs but the profile is
+  // missing — shown so the user knows exactly what to add to their profile.
+  const getMissingProfileLabels = (): string[] => {
+    const pif = fieldConfig?.person_identifier_fields;
+    if (!pif || !user) return [];
+    if (pif.type === 'string') {
+      return user[pif.field] ? [] : [pif.label];
+    }
+    if (pif.type === 'object') {
+      return Object.entries(pif.fields)
+        .filter(([fieldName]) => !user[fieldName])
+        .map(([, spec]) => spec.label);
+    }
+    return [];
+  };
+  const missingProfileLabels = getMissingProfileLabels().join(', ');
+
+  // Block advancing while a D&B profile is incomplete: the account can't yet
+  // supply the required identity, and there is no form field to fall back on.
+  // The reason travels to the footer button so the disabled Next explains why.
+  const blockForIncompleteProfile = isDnb && !hasRequiredFields();
+  useEffect(() => {
+    onSubmitDisabledChange?.(
+      blockForIncompleteProfile,
+      blockForIncompleteProfile
+        ? translate('Complete your profile to continue.')
+        : undefined,
+    );
+  }, [blockForIncompleteProfile, onSubmitDisabledChange]);
 
   const updateUploadedFiles = useCallback(
     (files: AttachmentUploading[]) => {
@@ -201,6 +241,38 @@ export const OrganizationCreateStep2: FunctionComponent<
                               'This will be used to check your company representative rights.',
                             )}
                           </div>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  ) : isDnb ? (
+                    <Card className="card-bordered mb-4">
+                      <Card.Body className="d-flex gap-3">
+                        <div className="flex-shrink-0">
+                          <InfoIcon size={24} weight="duotone" />
+                        </div>
+                        <div className="flex-grow-1">
+                          <div className="fw-semibold text-gray-800 mb-1">
+                            {translate('Complete your profile to continue')}
+                          </div>
+                          <div className="text-gray-700 mb-3">
+                            {missingProfileLabels
+                              ? translate(
+                                  'This check uses your identity from your account, but your profile is missing: {attributes}. Add it to your profile to continue.',
+                                  { attributes: missingProfileLabels },
+                                )
+                              : translate(
+                                  'This check uses your identity from your account. Complete your profile to continue.',
+                                )}
+                          </div>
+                          <button
+                            type="button"
+                            className="btn btn-primary btn-sm"
+                            onClick={() =>
+                              router.stateService.go('profile-manage')
+                            }
+                          >
+                            {translate('Complete profile')}
+                          </button>
                         </div>
                       </Card.Body>
                     </Card>
