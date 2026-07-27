@@ -17,7 +17,10 @@ import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
-import { getValidationMethodInfo } from './constants';
+import {
+  getValidationMethodInfo,
+  getValidationMethodOptions,
+} from './constants';
 import { PersonIdentifierFieldConfig } from './PersonIdentifierFieldsRenderer';
 import { OrganizationCreateFormValues } from './types';
 import { fetchPersonIdentifierFields } from './utils';
@@ -35,8 +38,8 @@ export const OrganizationCreateStep1: FunctionComponent<
   });
   const { showError } = useNotify();
 
-  const validationMethod = (values.validationMethod || '') as
-    ValidationMethodEnum | BlankEnum;
+  const rawMethod = values.validationMethod || '';
+  const validationMethod = rawMethod as ValidationMethodEnum | BlankEnum;
 
   const [fieldConfig, setFieldConfig] =
     useState<PersonIdentifierFieldConfig | null>(null);
@@ -44,26 +47,7 @@ export const OrganizationCreateStep1: FunctionComponent<
 
   const validationMethodOptions = useMemo(() => {
     const methods = ENV.plugins.WALDUR_CORE.ONBOARDING_VALIDATION_METHODS || [];
-
-    // Map method names to user-friendly labels
-    const methodLabels = {
-      ariregister: translate('Estonian Business Register (Äriregister)'),
-      wirtschaftscompass: translate(
-        'Austrian Business Register (WirtschaftsCompass)',
-      ),
-      bolagsverket: translate(
-        'Swedish Companies Registration Office (Bolagsverket)',
-      ),
-      manual: translate('Manual verification'),
-    };
-
-    // Always include manual as the last option
-    const allMethods = [...methods, 'manual'];
-
-    return allMethods.map((method) => ({
-      value: method,
-      label: methodLabels[method] || method,
-    }));
+    return getValidationMethodOptions(methods);
   }, []);
 
   // Fetch person identifier fields when validation method changes
