@@ -2178,6 +2178,18 @@ export const SettingsDescription = [
         default: 20,
         type: 'integer',
       },
+      {
+        key: 'PAT_MAX_ACL_ENTRIES',
+        description: translate('Maximum number of network ACL entries per personal access token.'),
+        default: 20,
+        type: 'integer',
+      },
+      {
+        key: 'PAT_MAX_AUDIT_EVENTS_PER_HOUR',
+        description: translate('Maximum audit events a single personal access token may generate per hour, counted separately for source-address changes and for rejections. Bounds the event table against a caller who holds one valid token and rotates source addresses.'),
+        default: 50,
+        type: 'integer',
+      },
     ],
   },
   {
