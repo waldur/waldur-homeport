@@ -532,6 +532,9 @@ Cleanup test k8s deployment:
     name: "registry.hpc.ut.ee/mirror/alpine/kubectl:1.33.3"
     entrypoint: ['']
   interruptible: false
+  # No artifacts needed; without this the stop job fails with
+  # missing_dependency_failure when triggered after earlier jobs' artifacts expire.
+  dependencies: []
   rules:
   - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
     when: never
