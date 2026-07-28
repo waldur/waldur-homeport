@@ -1,6 +1,7 @@
 import store from '@/store/store';
 
 import { MatomoInstance } from './afterBootstrap';
+import { clearAuthCache } from './auth/authNavigation';
 import * as AuthService from './auth/AuthService';
 import {
   GroupInvitationTokenStorage,
@@ -220,7 +221,7 @@ export function attachTransitions() {
         toState: transition.to().name,
         toParams: transition.to().params,
       });
-      AuthService.clearAuthCache();
+      clearAuthCache();
       return transition.router.stateService.target('login');
     }
     if (error && error.detail) {

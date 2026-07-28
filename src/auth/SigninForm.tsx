@@ -6,6 +6,7 @@ import { format } from '@/core/ErrorMessageFormatter';
 import { SubmitButton, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 
+import { redirectOnSuccess } from './authNavigation';
 import * as AuthService from './AuthService';
 import { PasswordGroup } from './PasswordGroup';
 
@@ -33,7 +34,7 @@ const signin = async (values: FormData) => {
     } else {
       await AuthService.signinByToken(values.token);
     }
-    await AuthService.redirectOnSuccess();
+    await redirectOnSuccess();
   } catch (error) {
     let renderedError;
     try {

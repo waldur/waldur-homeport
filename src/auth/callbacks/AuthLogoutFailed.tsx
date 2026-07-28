@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react';
 import { getQueryString } from '@/core/utils';
 import { translate } from '@/i18n';
 
-import * as AuthService from '../AuthService';
+import { explicitLogout } from '../authNavigation';
 
 export const AuthLogoutFailed: FunctionComponent = () => {
   const qs = Qs.parse(getQueryString());
@@ -16,11 +16,7 @@ export const AuthLogoutFailed: FunctionComponent = () => {
       <h3 className="app-title centered">{translate('Logout failed')}</h3>
       {typeof message === 'string' && <p className="mt-3">{message}</p>}
       <p className="mt-3">
-        <button
-          className="text-btn"
-          type="button"
-          onClick={AuthService.explicitLogout}
-        >
+        <button className="text-btn" type="button" onClick={explicitLogout}>
           <span className="svg-icon svg-icon-2">
             <SignOutIcon weight="bold" />
           </span>{' '}

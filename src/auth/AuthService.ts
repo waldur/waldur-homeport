@@ -1,18 +1,17 @@
 import { apiAuthPassword, apiAuthTokenExchange } from 'waldur-js-client';
 
 import { initApiClient } from '@/core/api';
-import { router } from '@/router';
-import store from '@/store/store';
-import { clearImpersonationData, UsersService } from '@/user/UsersService';
-import { setCurrentUser } from '@/workspace/actions';
+import { UsersService } from '@/user/UsersService';
 
-import {
-  RedirectStorage,
-  AuthTokenStorage,
-  AuthMethodStorage,
-} from '../core/StorageManager';
+import { AuthTokenStorage, AuthMethodStorage } from '../core/StorageManager';
 
-const DEFAULT_REDIRECT_STATE = 'profile.details';
+/**
+ * Pure auth core: token exchange, credential checks, and session bootstrap.
+ * Deliberately has no dependency on @/router or @/store/store so it can run
+ * in any host app (homeport today, a standalone auth app later). Navigation
+ * and app-wide session state live in ./authNavigation, which homeport wires
+ * on top of this module.
+ */
 
 export async function exchangeToken(code: string) {
   const response = await apiAuthTokenExchange({ body: { code } });
@@ -23,8 +22,10 @@ export async function loginUser(token: string, method: string) {
   AuthTokenStorage.set(token);
   AuthMethodStorage.set(method);
   initApiClient();
-  const user = await UsersService.getCurrentUser();
-  store.dispatch(setCurrentUser(user));
+  // UsersService.getCurrentUser() caches the fetched user into the host
+  // app's store as a side effect; a host with no store (e.g. a standalone
+  // auth app that never calls UsersService) simply won't get that caching.
+  await UsersService.getCurrentUser();
 }
 
 export function isAuthenticated() {
@@ -45,51 +46,7 @@ export async function signinByToken(token) {
   await loginUser(token, 'local');
 }
 
-export function storeRedirect() {
-  if (
-    router.globals.params?.toState &&
-    router.globals.params?.toState !== DEFAULT_REDIRECT_STATE &&
-    !router.globals.params?.toState.startsWith('error')
-  ) {
-    RedirectStorage.set({
-      toState: router.globals.params.toState,
-      toParams: router.globals.params.toParams,
-    });
-  }
-}
-
-export async function redirectOnSuccess() {
-  const redirect = RedirectStorage.get();
-  let targetState = DEFAULT_REDIRECT_STATE;
-  let targetParams = {};
-  if (redirect && redirect.toState && redirect.toParams) {
-    RedirectStorage.remove();
-    if (!targetState.startsWith('error')) {
-      targetState = redirect.toState;
-      targetParams = redirect.toParams;
-    }
-  }
-  try {
-    await router.stateService.go(targetState, targetParams);
-  } catch {
-    await router.stateService.go(DEFAULT_REDIRECT_STATE);
-  }
-  document.location.reload();
-}
-
-export function clearAuthCache() {
-  store.dispatch(setCurrentUser(undefined));
-  clearImpersonationData();
+export function clearAuthTokens() {
   AuthTokenStorage.remove();
   AuthMethodStorage.remove();
-}
-
-export function localLogout() {
-  clearAuthCache();
-  router.stateService.go('login');
-}
-
-export function explicitLogout() {
-  RedirectStorage.remove();
-  localLogout();
 }
