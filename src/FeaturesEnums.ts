@@ -40,6 +40,7 @@ export enum MarketplaceFeatures {
   hide_organization_information_from_project_members = 'marketplace.hide_organization_information_from_project_members',
   import_resources = 'marketplace.import_resources',
   lexis_links = 'marketplace.lexis_links',
+  realtime_updates = 'marketplace.realtime_updates',
   show_call_management_functionality = 'marketplace.show_call_management_functionality',
   show_experimental_ui_components = 'marketplace.show_experimental_ui_components',
   show_openstack_duplicate_offerings = 'marketplace.show_openstack_duplicate_offerings',

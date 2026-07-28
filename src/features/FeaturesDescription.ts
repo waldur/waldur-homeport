@@ -143,6 +143,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enabled LEXIS link integrations for offerings.'),
       },
       {
+        key: 'realtime_updates',
+        description: translate('Enable push-driven UI updates over the event-consumer WebSocket (experimental). When disabled, the UI relies on polling and manual refresh as before. Requires RabbitMQ web-STOMP to be reachable at /rmqws-stomp on the API host.'),
+      },
+      {
         key: 'show_call_management_functionality',
         description: translate('Enabled display of call management functionality.'),
       },
