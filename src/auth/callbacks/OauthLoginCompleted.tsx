@@ -9,8 +9,8 @@ import { getQueryString } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useRequestToAccessOrganization } from '@/invitations/join-organization/submission';
 
-import * as AuthService from '../AuthService';
-import { loginUser } from '../AuthService';
+import { redirectOnSuccess } from '../authNavigation';
+import { exchangeToken, loginUser } from '../AuthService';
 
 export const OauthLoginCompleted: FunctionComponent = () => {
   const router = useRouter();
@@ -25,7 +25,7 @@ export const OauthLoginCompleted: FunctionComponent = () => {
       const qs = Qs.parse(getQueryString());
       try {
         const code = qs.code as string;
-        const token = await AuthService.exchangeToken(code);
+        const token = await exchangeToken(code);
         await loginUser(token, provider);
         // Only check for pending group invitation if NOT redirecting to user-group-invitation
         // (that route handles invitations via its own confirmation dialog)
@@ -33,7 +33,7 @@ export const OauthLoginCompleted: FunctionComponent = () => {
         if (redirect?.toState !== 'user-group-invitation') {
           await checkAndRequest();
         }
-        AuthService.redirectOnSuccess();
+        redirectOnSuccess();
       } catch (e) {
         setError(
           e.response?.data?.detail ||

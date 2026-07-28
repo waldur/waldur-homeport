@@ -2,7 +2,7 @@ import Qs from 'qs';
 import { formDataBodySerializer, RequestResult } from 'waldur-js-client';
 import { client } from 'waldur-js-client/client.gen';
 
-import { localLogout } from '@/auth/AuthService';
+import { localLogout } from '@/auth/authNavigation';
 import { ENV } from '@/core/config';
 import {
   ImpersonationStorage,

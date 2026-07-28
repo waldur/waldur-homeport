@@ -19,14 +19,14 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { RedirectStorage } from '@/core/StorageManager';
 import { translate } from '@/i18n';
 
-import * as AuthService from './AuthService';
+import { clearAuthCache } from './authNavigation';
 
 export const LogoutPage: FunctionComponent = () => {
   const router = useRouter();
   useEffect(() => {
     apiAuthLogout().then((response) => {
       RedirectStorage.remove();
-      AuthService.clearAuthCache();
+      clearAuthCache();
       if (typeof response.data === 'object' && response.data.logout_url) {
         document.location.href = response.data.logout_url;
       } else {

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { localLogout } from '@/auth/AuthService';
+import { localLogout } from '@/auth/authNavigation';
 import { ENV } from '@/core/config';
 import { AuthMethodStorage, AuthTokenStorage } from '@/core/StorageManager';
 
@@ -12,9 +12,9 @@ import {
   resetAuthSessionTracking,
 } from './api';
 
-// `@/router` is globally mocked (test/mocks/router.js); only AuthService needs a
+// `@/router` is globally mocked (test/mocks/router.js); only authNavigation needs a
 // local mock so we can assert on localLogout.
-vi.mock('@/auth/AuthService', () => ({ localLogout: vi.fn() }));
+vi.mock('@/auth/authNavigation', () => ({ localLogout: vi.fn() }));
 
 // Node 25 ships an experimental top-level `localStorage` that conflicts
 // with the one provided by jsdom; stub a plain in-memory shim so

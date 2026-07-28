@@ -3,11 +3,11 @@ import { useEffect, FunctionComponent } from 'react';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
-import * as AuthService from '../AuthService';
+import { explicitLogout } from '../authNavigation';
 
 export const AuthLogoutCompleted: FunctionComponent = () => {
   useEffect(() => {
-    AuthService.explicitLogout();
+    explicitLogout();
   }, []);
   return (
     <div className="middle-box text-center">
