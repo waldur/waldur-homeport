@@ -75,6 +75,7 @@ interface FormValues {
   scopes: string[];
   expires_at: string;
   allowed_scopes: BindingRow[];
+  allowed_networks?: string;
 }
 
 export const PersonalAccessTokenCreateDialog: React.FC<
@@ -130,6 +131,10 @@ export const PersonalAccessTokenCreateDialog: React.FC<
         allowed_scopes: (values.allowed_scopes ?? [])
           .filter((b) => b.type && b.entity?.uuid)
           .map((b) => ({ type: b.type as string, uuid: b.entity!.uuid })),
+        allowed_networks: (values.allowed_networks ?? '')
+          .split(',')
+          .map((entry: string) => entry.trim())
+          .filter(Boolean),
       };
       try {
         const response = await personalAccessTokensCreate({ body: payload });
@@ -306,6 +311,14 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                   required
                   description={translate(
                     'The token will stop working after this date.',
+                  )}
+                />
+
+                <StringGroup
+                  name="allowed_networks"
+                  label={translate('Allowed networks')}
+                  description={translate(
+                    'Optional comma-separated list of CIDR networks, e.g. 203.0.113.0/24. Leave empty to allow any source.',
                   )}
                 />
               </div>

@@ -49,6 +49,12 @@ export const PersonalAccessTokenExpandableRow: FunctionComponent<{
         {renderFieldOrDash(row.last_used_ip)}
       </p>
       <p>
+        <b className="me-2">{translate('Allowed networks')}:</b>
+        {row.allowed_networks?.length
+          ? row.allowed_networks.join(', ')
+          : translate('Unrestricted')}
+      </p>
+      <p>
         <b className="me-2">{translate('Total usage count')}:</b>
         {renderFieldOrDash(row.use_count)}
       </p>
