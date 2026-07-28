@@ -98,11 +98,26 @@ export function initMatomoTracker() {
     });
 }
 
-export function afterBootstrap() {
+function initPageTitle() {
   document.title = ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE;
+}
+
+function initI18n() {
+  LanguageUtilsService.checkLanguage();
+}
+
+/**
+ * Composes the init* steps above in order. Split out so each concern
+ * (analytics, error tracking, i18n, router transitions, brand CSS
+ * variables) can be reasoned about and changed independently, and so a
+ * future standalone auth app has a clear, small set of steps to copy
+ * rather than one monolithic function to pick apart.
+ */
+export function afterBootstrap() {
+  initPageTitle();
   initMatomoTracker();
   initSentry();
-  LanguageUtilsService.checkLanguage();
+  initI18n();
   attachTransitions();
   initCssVariables();
 }

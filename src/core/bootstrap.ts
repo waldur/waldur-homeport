@@ -24,7 +24,13 @@ const parseLanguages = (inputValue) => {
     }));
 };
 
-export async function loadConfig() {
+/**
+ * Fetches the backend's public configuration (branding, feature flags,
+ * language choices, plugin settings) and populates ENV. Pure data loading,
+ * no DOM/analytics/router side effects — kept separate from afterBootstrap's
+ * composition so the two concerns can be reasoned about independently.
+ */
+async function loadPublicConfig() {
   const restApi = getApiUrl();
   if (restApi === '__API_URL__') {
     throw new Error('API URL is not configured');
@@ -58,6 +64,10 @@ export async function loadConfig() {
     (wrapped as Error & { cause?: unknown }).cause = error;
     throw wrapped;
   }
+}
+
+export async function loadConfig() {
+  await loadPublicConfig();
   afterBootstrap();
   return true;
 }
