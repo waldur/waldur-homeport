@@ -119,7 +119,12 @@ export const combinePrices = (
           tiers !== null &&
           tiers.length > 0;
         if (previewable) {
-          const percent = evaluateTiers(tiers, amount);
+          // The tier threshold is expressed in component units (e.g. TB), so
+          // evaluate it on the raw entered volume — for prepaid components
+          // `amount` is already duration-multiplied and would cross the tier
+          // regardless of the actual volume. The resulting percentage still
+          // applies to the whole (duration-multiplied) charge.
+          const percent = evaluateTiers(tiers, displayAmount ?? amount);
           if (percent > 0) {
             discountApplied = true;
             discountPercent = percent;
