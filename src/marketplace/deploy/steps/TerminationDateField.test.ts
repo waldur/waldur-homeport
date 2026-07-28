@@ -3,12 +3,12 @@ import { describe, expect, it } from 'vitest';
 
 import { getTerminationDateProps } from './TerminationDateField';
 
-const NOW = DateTime.fromISO('2026-02-23');
+const NOW = DateTime.fromISO('2026-07-24');
 
 describe('getTerminationDateProps', () => {
   it('sets minDate to today when not required', () => {
-    const result = getTerminationDateProps(undefined, NOW);
-    expect(result.minDate).toBe('2026-02-23');
+    const result = getTerminationDateProps(undefined, { now: NOW });
+    expect(result.minDate).toBe('2026-07-24');
     expect(result.maxDate).toBeUndefined();
     expect(result.defaultDate).toBeUndefined();
     expect(result.isClearable).toBeUndefined();
@@ -17,11 +17,19 @@ describe('getTerminationDateProps', () => {
   it('sets minDate to today when required is false', () => {
     const result = getTerminationDateProps(
       { is_resource_termination_date_required: false },
-      NOW,
+      { now: NOW },
     );
-    expect(result.minDate).toBe('2026-02-23');
+    expect(result.minDate).toBe('2026-07-24');
     expect(result.maxDate).toBeUndefined();
     expect(result.defaultDate).toBeUndefined();
+  });
+
+  it('caps maxDate at project end date even when termination is optional', () => {
+    const result = getTerminationDateProps(
+      { is_resource_termination_date_required: false },
+      { now: NOW, projectEndDate: '2026-12-04' },
+    );
+    expect(result.maxDate).toBe('2026-12-04');
   });
 
   describe('when termination date is required', () => {
@@ -31,24 +39,22 @@ describe('getTerminationDateProps', () => {
           is_resource_termination_date_required: true,
           default_resource_termination_offset_in_days: 90,
         },
-        NOW,
+        { now: NOW },
       );
-      expect(result.minDate).toBe('2026-02-23');
-      expect(result.defaultDate).toBe('2026-05-24'); // 2026-02-23 + 90 days
+      expect(result.minDate).toBe('2026-07-24');
+      expect(result.defaultDate).toBe('2026-10-22'); // 2026-07-24 + 90 days
       expect(result.maxDate).toBeUndefined();
       expect(result.isClearable).toBe(false);
     });
 
     it('does not set maxDate when max_resource_termination_offset_in_days is undefined (bug fix)', () => {
-      // This was the original bug: undefined maxOffsetDays caused
-      // maxDate = today, which is before minDate
       const result = getTerminationDateProps(
         {
           is_resource_termination_date_required: true,
           default_resource_termination_offset_in_days: 90,
           max_resource_termination_offset_in_days: undefined,
         },
-        NOW,
+        { now: NOW },
       );
       expect(result.maxDate).toBeUndefined();
     });
@@ -60,9 +66,9 @@ describe('getTerminationDateProps', () => {
           default_resource_termination_offset_in_days: 90,
           max_resource_termination_offset_in_days: 180,
         },
-        NOW,
+        { now: NOW },
       );
-      expect(result.maxDate).toBe('2026-08-22'); // 2026-02-23 + 180 days
+      expect(result.maxDate).toBe('2027-01-20'); // 2026-07-24 + 180 days
     });
 
     it('sets maxDate from latest_date_for_resource_termination when only that is set', () => {
@@ -72,7 +78,7 @@ describe('getTerminationDateProps', () => {
           default_resource_termination_offset_in_days: 90,
           latest_date_for_resource_termination: '2031-02-01',
         },
-        NOW,
+        { now: NOW },
       );
       expect(result.maxDate).toBe('2031-02-01');
     });
@@ -85,9 +91,9 @@ describe('getTerminationDateProps', () => {
           max_resource_termination_offset_in_days: 30,
           latest_date_for_resource_termination: '2031-02-01',
         },
-        NOW,
+        { now: NOW },
       );
-      expect(result.maxDate).toBe('2026-03-25'); // 2026-02-23 + 30 days (earlier)
+      expect(result.maxDate).toBe('2026-08-23'); // 2026-07-24 + 30 days
     });
 
     it('uses earlier of max offset and latest date when both are set (latest date is earlier)', () => {
@@ -98,47 +104,94 @@ describe('getTerminationDateProps', () => {
           max_resource_termination_offset_in_days: 3650,
           latest_date_for_resource_termination: '2027-01-01',
         },
-        NOW,
+        { now: NOW },
       );
-      expect(result.maxDate).toBe('2027-01-01'); // latest date is earlier than +3650 days
+      expect(result.maxDate).toBe('2027-01-01');
     });
 
-    it('reproduces the production bug scenario: required=true, default=90, no max offset, latest=2031', () => {
-      // This is the exact configuration from the DigiDefense Slurm cluster offering
+    it('caps max and default at project end date', () => {
       const result = getTerminationDateProps(
         {
           is_resource_termination_date_required: true,
           default_resource_termination_offset_in_days: 90,
-          latest_date_for_resource_termination: '2031-02-01',
+          max_resource_termination_offset_in_days: 120,
         },
-        NOW,
+        { now: NOW, projectEndDate: '2026-12-04' },
       );
-      expect(result.minDate).toBe('2026-02-23');
-      expect(result.defaultDate).toBe('2026-05-24');
-      expect(result.maxDate).toBe('2031-02-01');
-      expect(result.isClearable).toBe(false);
-      // maxDate must be after minDate for the date picker to work
-      expect(result.maxDate > result.minDate).toBe(true);
+      // today+90 = Oct 22, today+120 ≈ Nov 21 — both before project end
+      expect(result.defaultDate).toBe('2026-10-22');
+      expect(result.maxDate).toBe('2026-11-21');
     });
 
-    it('ensures maxDate is always after minDate when max offset is set', () => {
+    it('clamps default to project end when default offset overshoots', () => {
+      const result = getTerminationDateProps(
+        {
+          is_resource_termination_date_required: true,
+          default_resource_termination_offset_in_days: 200,
+          max_resource_termination_offset_in_days: 365,
+        },
+        { now: NOW, projectEndDate: '2026-12-04' },
+      );
+      expect(result.defaultDate).toBe('2026-12-04');
+      expect(result.maxDate).toBe('2026-12-04');
+    });
+  });
+
+  describe('with future order start date', () => {
+    const START = '2026-09-17';
+
+    it('measures offsets from start date and raises minDate', () => {
       const result = getTerminationDateProps(
         {
           is_resource_termination_date_required: true,
           default_resource_termination_offset_in_days: 90,
-          max_resource_termination_offset_in_days: 60,
+          max_resource_termination_offset_in_days: 120,
         },
-        NOW,
+        { now: NOW, startDate: START },
       );
-      // minDate = 2026-02-23, maxDate = 2026-04-24 (60 days from now)
-      expect(result.maxDate > result.minDate).toBe(true);
+      expect(result.minDate).toBe(START);
+      expect(result.defaultDate).toBe('2026-12-16'); // Sep 17 + 90
+      expect(result.maxDate).toBe('2027-01-15'); // Sep 17 + 120
+    });
+
+    it('allows project end in December when offsets are from September start', () => {
+      // Reproduces the client scenario: project Sep 17 – Dec 4, offering 90/120
+      const result = getTerminationDateProps(
+        {
+          is_resource_termination_date_required: true,
+          default_resource_termination_offset_in_days: 90,
+          max_resource_termination_offset_in_days: 120,
+        },
+        {
+          now: NOW,
+          startDate: START,
+          projectEndDate: '2026-12-04',
+        },
+      );
+      expect(result.minDate).toBe(START);
+      expect(result.maxDate).toBe('2026-12-04');
+      expect(result.defaultDate).toBe('2026-12-04'); // Dec 16 clamped to project end
+    });
+
+    it('ignores past start dates for offset base', () => {
+      const result = getTerminationDateProps(
+        {
+          is_resource_termination_date_required: true,
+          default_resource_termination_offset_in_days: 90,
+          max_resource_termination_offset_in_days: 120,
+        },
+        { now: NOW, startDate: '2026-01-01' },
+      );
+      expect(result.minDate).toBe('2026-07-24');
+      expect(result.defaultDate).toBe('2026-10-22');
+      expect(result.maxDate).toBe('2026-11-21');
     });
   });
 
   describe('edge cases', () => {
     it('handles empty plugin_options', () => {
-      const result = getTerminationDateProps({}, NOW);
-      expect(result.minDate).toBe('2026-02-23');
+      const result = getTerminationDateProps({}, { now: NOW });
+      expect(result.minDate).toBe('2026-07-24');
       expect(result.maxDate).toBeUndefined();
       expect(result.defaultDate).toBeUndefined();
     });
@@ -150,9 +203,8 @@ describe('getTerminationDateProps', () => {
           default_resource_termination_offset_in_days: 90,
           max_resource_termination_offset_in_days: 0,
         },
-        NOW,
+        { now: NOW },
       );
-      // 0 is falsy, so maxDate should not be set from offset
       expect(result.maxDate).toBeUndefined();
     });
   });

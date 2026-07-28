@@ -56,7 +56,7 @@ export interface OfferingConfiguration<
   ) => OfferingComponent[];
 }
 export interface DeployFormData {
-  project?: Pick<Project, 'uuid' | 'name' | 'end_date' | 'url'>;
+  project?: Pick<Project, 'uuid' | 'name' | 'start_date' | 'end_date' | 'url'>;
   customer?: Pick<
     Customer,
     | 'uuid'
