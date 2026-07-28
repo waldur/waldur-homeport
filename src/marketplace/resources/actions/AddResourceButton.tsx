@@ -22,9 +22,9 @@ export const AddResourceButton = (props: AddResourceButtonProps) => {
       }).then((r) => r.data),
   });
 
-  const relatedOfferingUuid = value?.length
-    ? value.find((offering) => offering.type === props.offeringType).uuid
-    : null;
+  const relatedOfferingUuid =
+    value?.find((offering) => offering.type === props.offeringType)?.uuid ??
+    null;
 
   return loading ? (
     <ActionButton variant="primary" pending action={() => {}} />
