@@ -43,6 +43,19 @@ export const ExpandableEventDetailsTable: FunctionComponent<
       value={event.context.ip_address}
     />
 
+    {event.context?.auth_method && (
+      <ExpandableEventField
+        label={translate('Authenticated via')}
+        value={
+          event.context.auth_method === 'pat'
+            ? translate('Personal access token: {name}', {
+                name: event.context.pat_name,
+              })
+            : event.context.auth_method
+        }
+      />
+    )}
+
     <ExpandableEventField
       label={translate('Event type')}
       value={event.event_type}

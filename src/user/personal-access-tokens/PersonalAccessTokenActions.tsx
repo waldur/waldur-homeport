@@ -1,5 +1,6 @@
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
+import { PersonalAccessTokenNetworkAclButton } from './PersonalAccessTokenNetworkAclButton';
 import { PersonalAccessTokenRevokeButton } from './PersonalAccessTokenRevokeButton';
 import { PersonalAccessTokenRotateButton } from './PersonalAccessTokenRotateButton';
 
@@ -10,6 +11,7 @@ export const PersonalAccessTokenActions = ({ row, fetch }) =>
       refetch={fetch}
       actions={[
         PersonalAccessTokenRotateButton,
+        PersonalAccessTokenNetworkAclButton,
         PersonalAccessTokenRevokeButton,
       ]}
     />

@@ -1,4 +1,5 @@
 import { AuthEvents } from '@/auth/AuthEvents';
+import { PatEvents } from '@/auth/PatEvents';
 import { OrganizationEvents } from '@/customer/events';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { InvoiceEvents } from '@/invoices/events';
@@ -48,6 +49,7 @@ export class EventRegistry {
 const registry = new EventRegistry();
 
 registry.registerGroup(AuthEvents);
+registry.registerGroup(PatEvents);
 registry.registerGroup(IssueEvents);
 registry.registerGroup(OrganizationEvents);
 registry.registerGroup(RoleEvents);
