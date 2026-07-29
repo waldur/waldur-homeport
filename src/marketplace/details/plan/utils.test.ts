@@ -637,6 +637,60 @@ describe('combinePrices', () => {
       expect(seats.subTotal).toBeCloseTo(seats.price * seats.amount * 0.8);
     });
 
+    it('evaluates a prepaid tier on the raw volume, not the duration-multiplied amount', () => {
+      // Regression: 10 TB prepaid for 24 months used to evaluate as
+      // usage = 240 >= 100 and get discounted regardless of the volume.
+      const offering = createOffering([
+        { type: 'storage', billing_type: 'one', is_prepaid: true },
+      ]);
+      const plan = planWithDiscount({ storage: 0 }, { storage: 10 }, [
+        {
+          type: 'storage',
+          discount_formula: '20 if usage >= 100 else 0',
+          discount_aggregation: 'resource',
+        },
+      ]);
+      const storage = combinePrices(
+        plan,
+        { storage: 10 },
+        {},
+        offering,
+        '2028-01-01',
+        '2026-01-01',
+      ).components[0];
+      expect(storage.displayAmount).toBe(10);
+      expect(storage.amount).toBe(240); // 10 TB × 24 months
+      expect(storage.discountApplied).toBe(false);
+      expect(storage.discountDeferred).toBe(false);
+      expect(storage.subTotal).toBe(2400); // 10 × 240, undiscounted
+    });
+
+    it('applies a prepaid tier crossed by the raw volume to the whole prepaid charge', () => {
+      const offering = createOffering([
+        { type: 'storage', billing_type: 'one', is_prepaid: true },
+      ]);
+      const plan = planWithDiscount({ storage: 0 }, { storage: 10 }, [
+        {
+          type: 'storage',
+          discount_formula: '20 if usage >= 100 else 0',
+          discount_aggregation: 'resource',
+        },
+      ]);
+      const storage = combinePrices(
+        plan,
+        { storage: 120 },
+        {},
+        offering,
+        '2028-01-01',
+        '2026-01-01',
+      ).components[0];
+      expect(storage.discountApplied).toBe(true);
+      expect(storage.discountPercent).toBe(20);
+      // 20% of the full prepaid charge: 10 × 120 × 24 = 28800 → 23040
+      expect(storage.discountAmount).toBeCloseTo(5760);
+      expect(storage.subTotal).toBeCloseTo(23040);
+    });
+
     it('defers a per-resource discount whose formula is not tier-shaped', () => {
       const offering = createOffering([
         { type: 'disk', billing_type: 'limit' },
