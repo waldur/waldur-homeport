@@ -55,6 +55,7 @@
     "@phosphor-icons/react": "^2.1.7",
     "@popperjs/core": "~2.10.1",
     "@sentry/react": "^8.55.0",
+    "@stomp/stompjs": "^7.3.0",
     "@tanstack/react-query": "^5.80.6",
     "@uirouter/react": "^1.0.7",
     "attr-accept": "^3.0.0",

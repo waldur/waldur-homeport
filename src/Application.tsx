@@ -14,6 +14,7 @@ import { DrawerRoot } from '@/drawer/DrawerRoot';
 import { MatrixRoot } from '@/matrix/MatrixRoot';
 import { ModalProvider } from '@/modal/ModalContext';
 import { ModalRoot } from '@/modal/ModalRoot';
+import { RealtimeRoot } from '@/realtime/RealtimeRoot';
 import store from '@/store/store';
 
 import { loadConfig } from './core/bootstrap';
@@ -61,6 +62,7 @@ const ApplicationInner: FunctionComponent = () => {
                       <ThreadProvider>
                         <ThreadRuntimeProvider>
                           <AnonymousThreadProvider>
+                            <RealtimeRoot />
                             <NotificationContainer />
                             <ModalRoot />
                             <ConfirmModalRoot />

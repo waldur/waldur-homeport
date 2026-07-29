@@ -41,6 +41,14 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/lk-jwt/, ''),
       },
+      // RabbitMQ web-STOMP for the realtime module. Production exposes it at
+      // /rmqws-stomp on the API host (Caddy/ingress); dev serves the same path
+      // here so the client needs no environment-specific configuration.
+      '/rmqws-stomp': {
+        target: process.env.VITE_STOMP_WS_URL || 'ws://localhost:15674',
+        ws: true,
+        rewrite: (path) => path.replace(/^\/rmqws-stomp/, '/ws'),
+      },
     },
   },
   plugins,

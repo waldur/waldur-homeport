@@ -18,21 +18,37 @@ import { apiAuthLogout } from 'waldur-js-client';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { RedirectStorage } from '@/core/StorageManager';
 import { translate } from '@/i18n';
+import { teardownRealtimeConsumers } from '@/realtime/useRealtimeConnection';
 
 import { clearAuthCache } from './authNavigation';
 
 export const LogoutPage: FunctionComponent = () => {
   const router = useRouter();
   useEffect(() => {
-    apiAuthLogout().then((response) => {
-      RedirectStorage.remove();
-      clearAuthCache();
-      if (typeof response.data === 'object' && response.data.logout_url) {
-        document.location.href = response.data.logout_url;
-      } else {
-        router.stateService.go('login');
-      }
-    });
+    // Delete this session's event consumers while still authenticated — the
+    // backend tears down their RabbitMQ queues and users, so the DRF token
+    // being deleted below stops working as a broker credential immediately
+    // instead of after the daily stale sweep. Best-effort and bounded:
+    // logout must never hang on it.
+    // Deliberately NOT gated on the realtime_updates feature flag: cleanup is
+    // guarded by what exists (the session's registered-consumer set — empty
+    // and an instant no-op when the feature never ran), not by what is
+    // enabled, so consumers can never leak if registration paths or flag
+    // state evolve.
+    Promise.race([
+      teardownRealtimeConsumers(),
+      new Promise((resolve) => setTimeout(resolve, 2000)),
+    ]).then(() =>
+      apiAuthLogout().then((response) => {
+        RedirectStorage.remove();
+        clearAuthCache();
+        if (typeof response.data === 'object' && response.data.logout_url) {
+          document.location.href = response.data.logout_url;
+        } else {
+          router.stateService.go('login');
+        }
+      }),
+    );
   }, []);
   return (
     <div className="middle-box text-center">
