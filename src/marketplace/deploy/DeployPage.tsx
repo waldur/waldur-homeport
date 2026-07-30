@@ -51,6 +51,7 @@ import { DeployPageSidebar } from './DeployPageSidebar';
 import { resolveCustomer, resolveProject } from './initUtils';
 import { NavigationBlocker } from './NavigationBlocker';
 import { useOrderFormData } from './selectors';
+import { isPartitionQosRequired } from './steps/FormQoSSelectionStep';
 import { OfferingConfigurationFormStep } from './types';
 import { hasStepWithField } from './utils';
 
@@ -126,9 +127,21 @@ export const BaseDeployPage = ({
               ),
             };
           }
+          // QoS requiredness depends on the selected partition's allow-list.
+          if (step.id === 'step-qos-selection') {
+            const qosRequired = isPartitionQosRequired(
+              selectedOffering,
+              formData?.attributes?.partition,
+            );
+            return {
+              ...step,
+              required: qosRequired,
+              requiredFields: qosRequired ? ['attributes.qos'] : [],
+            };
+          }
           return step;
         }),
-    [selectedOffering],
+    [selectedOffering, formData?.attributes?.partition],
   );
 
   const stepRefs = useRef([]);

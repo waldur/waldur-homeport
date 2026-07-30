@@ -104,8 +104,18 @@ export const OfferingPartitionExpandableRow: FC<OwnProps> = ({ row }) => (
           space={2}
         />
         <Field
-          label={translate('Quality of service (QOS) name')}
-          value={row.qos}
+          label={translate('Allowed QoS')}
+          value={
+            row.qos_options?.length
+              ? row.qos_options
+                  .map((o) =>
+                    o.is_default
+                      ? `${o.qos_name} (${translate('default')})`
+                      : o.qos_name,
+                  )
+                  .join(', ')
+              : translate('All')
+          }
           space={2}
         />
         <Field

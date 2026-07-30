@@ -117,10 +117,6 @@ export const OfferingPartitionForm: FC = () => {
         label={translate('Priority tier for scheduling and preemption')}
         name="priority_tier"
       />
-      <StringGroup
-        name="qos"
-        label={translate('Quality of service (QOS) name')}
-      />
       <BooleanGroup
         label={translate('Require reservation for job allocation')}
         name="req_resv"
