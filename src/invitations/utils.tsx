@@ -9,24 +9,34 @@ export function getGroupInvitationLink(invitation) {
 
 /**
  * Where to send the user once a group-invitation permission request has been
- * submitted: the created project or the organization when auto-approved,
- * the pending requests list otherwise.
+ * submitted: the created project, the scope project or organization when
+ * auto-approved, the pending requests list otherwise.
  */
 export const getPostJoinDestination = (
-  res: Pick<SubmitRequestResponse, 'auto_approved' | 'scope_uuid'> & {
-    project_uuid?: string | null;
-  },
+  res: Pick<
+    SubmitRequestResponse,
+    'auto_approved' | 'scope_uuid' | 'project_uuid' | 'scope_type'
+  >,
 ): { state: string; params?: Record<string, string> } => {
-  if (res.auto_approved && res.project_uuid) {
+  if (!res.auto_approved) {
+    return { state: 'profile.permission-requests' };
+  }
+  if (res.project_uuid) {
     return { state: 'project.dashboard', params: { uuid: res.project_uuid } };
   }
-  if (res.auto_approved && res.scope_uuid) {
+  if (res.scope_uuid && res.scope_type === 'project') {
+    return { state: 'project.dashboard', params: { uuid: res.scope_uuid } };
+  }
+  // scope_type is absent on backends that predate it; keep the historical
+  // organization fallback in that case.
+  if (res.scope_uuid && (!res.scope_type || res.scope_type === 'customer')) {
     return {
       state: 'organization.dashboard',
       params: { uuid: res.scope_uuid },
     };
   }
-  return { state: 'profile.permission-requests' };
+  // Auto-approved on a scope without a dashboard route (offering, call, ...).
+  return { state: 'profile.details' };
 };
 
 export const isDuplicateOrConflictError = (errorMessage: unknown): boolean =>
