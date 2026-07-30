@@ -182,7 +182,11 @@ const formatCreditChart = (
   creditValue: string | number,
 ): CreditChart => {
   let items: DateValuePair[] = invoices.map((invoice) => ({
-    value: Number(invoice.price),
+    // `price` nets compensation against incurred cost, so it reads ~0 in a
+    // month where credit happens to fully offset that month's usage.
+    // `compensation` is the credit actually drawn (always <= 0), matching
+    // the pattern already used by formatProjectCostChart/formatOrganizationCostChart.
+    value: Number(invoice.compensation) * -1,
     date: DateTime.fromObject({ year: invoice.year, month: invoice.month }),
   }));
 
