@@ -107,6 +107,10 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
 export const getResourceAllListColumns = (
   hasCustomer = false,
   hasProject = false,
+  // On a list already scoped to a single offering, category and offering hold
+  // the same value in every row. They stay available in the column picker, but
+  // showing them by default only costs horizontal space.
+  { isOfferingScoped = false }: { isOfferingScoped?: boolean } = {},
 ) =>
   (
     [
@@ -128,6 +132,7 @@ export const getResourceAllListColumns = (
       {
         title: translate('Backend ID'),
         render: ({ row }) => renderFieldOrDash(row.backend_id),
+        orderField: 'backend_id',
         id: 'backend_id',
         keys: ['backend_id'],
         optional: true,
@@ -142,11 +147,13 @@ export const getResourceAllListColumns = (
         }),
         id: 'category',
         keys: ['category_title', 'category_uuid'],
+        optional: isOfferingScoped,
         export: (row) => row.category_title,
       },
       {
         title: translate('Offering'),
         render: ({ row }) => <>{row.offering_name}</>,
+        orderField: 'offering_name',
         filter: 'offering',
         inlineFilter: (row) => ({
           name: row.offering_name,
@@ -154,6 +161,7 @@ export const getResourceAllListColumns = (
         }),
         id: 'offering',
         keys: ['offering_name', 'offering_uuid'],
+        optional: isOfferingScoped,
         export: (row) => row.offering_name,
       },
       {
@@ -167,8 +175,14 @@ export const getResourceAllListColumns = (
       {
         title: translate('Plan'),
         render: ({ row }) => <>{renderFieldOrDash(row.plan_name)}</>,
+        orderField: 'plan_name',
+        filter: 'plan',
+        inlineFilter: (row) => ({
+          name: row.plan_name,
+          uuid: row.plan_uuid,
+        }),
         id: 'plan',
-        keys: ['plan_name'],
+        keys: ['plan_name', 'plan_uuid'],
         optional: true,
       },
       ...(hasCustomer
@@ -176,6 +190,7 @@ export const getResourceAllListColumns = (
             {
               title: translate('Organization'),
               render: ({ row }) => <>{row.customer_name}</>,
+              orderField: 'customer_name',
               filter: 'organization',
               inlineFilter: (row) => ({
                 name: row.customer_name,
@@ -282,7 +297,8 @@ export const getResourceAllListColumns = (
         render: ({ row }) => (
           <BooleanField value={row.restrict_member_access} />
         ),
-
+        filter: 'restrict_member_access',
+        inlineFilter: () => true,
         id: 'restrict_member_access',
         keys: ['restrict_member_access'],
         optional: true,
