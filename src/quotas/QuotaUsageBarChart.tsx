@@ -15,9 +15,12 @@ interface QuotaUsageBarChartProps {
 
 export const exceeds = (quota) => quota.usage + quota.required > quota.limit;
 
+const getTotalUsage = (quota: Quota) =>
+  (quota.usage || 0) + (quota.required || 0);
+
 export const getSummary = (quota) =>
   translate('{usage} of {limit} used', {
-    usage: formatQuotaValue(quota.usage, quota.name),
+    usage: formatQuotaValue(getTotalUsage(quota), quota.name),
     limit: formatQuotaValue(quota.limit, quota.name),
   });
 
@@ -32,7 +35,7 @@ export const getPlanned = (quota) =>
   });
 
 export const getAvailable = (quota) => {
-  const availableQuota = quota.limit - quota.usage;
+  const availableQuota = quota.limit - getTotalUsage(quota);
   return translate('Available quota usage: {usage}', {
     usage: formatQuotaValue(availableQuota, quota.name),
   });
