@@ -69,6 +69,9 @@ export function useCustomerCreditChart(customer: Customer) {
       year: invoice.year,
       month: invoice.month,
       price: Number(invoice.price),
+      // Invoice exposes `compensations` (plural); InvoiceCost (project-level)
+      // exposes `compensation`.
+      compensation: Number(invoice.compensations),
     }));
     return getCreditChartAndOptions(invoiceCosts, customer.credit?.value);
   }, [invoices, customer]);

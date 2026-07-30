@@ -35,4 +35,24 @@ describe('Dashboard chart API', () => {
       DateTime.fromISO('2018-08-01'),
     );
   });
+
+  it('credit chart plots compensation, not net price, for a fully-offset month', () => {
+    vi.setSystemTime(new Date(2026, 6, 28)); // 2026-07-28, 0-indexed month
+    const invoiceCosts = [
+      {
+        year: 2026,
+        month: 1,
+        // Incurred cost and credit compensation nearly cancel out, so net
+        // `price` reads ~0 even though real credit was consumed that month.
+        price: 0.53,
+        compensation: -3739.32,
+      },
+    ] as any;
+
+    const { chart } = api.getCreditChartAndOptions(invoiceCosts, 0);
+    const january = chart.data.find((datum) => datum.xAxisValue === 'Jan');
+
+    expect(january).toBeDefined();
+    expect(january.value).toBeCloseTo(3739.32);
+  });
 });
