@@ -60,15 +60,25 @@ export const ProjectUsersBadge = (props: OwnProps) => {
 
     staleTime: UI_STALE_TIME,
     enabled: Boolean(props.projectId),
+    // This badge renders its own error state (and hides on 403), so the
+    // global QueryCache onError must not redirect the whole app to the
+    // no-permission page when a resource-scoped user gets a 403 here.
+    meta: { skipGlobalErrorRedirect: true },
   });
 
   return isPending ? (
     <LoadingSpinner />
   ) : error ? (
-    <LoadingErred
-      loadData={refetch}
-      message={translate('Unable to load users')}
-    />
+    // A 403 is expected for users whose roles are scoped to the
+    // resource or its sub-projects only — they are not allowed to see
+    // the parent project team. That is not an error condition; hide
+    // the badge instead of rendering an error with a retry button.
+    error['response']?.status === 403 ? null : (
+      <LoadingErred
+        loadData={refetch}
+        message={translate('Unable to load users')}
+      />
+    )
   ) : props.compact ? (
     <UserRoleGroup
       altLabel={translate('Team')}

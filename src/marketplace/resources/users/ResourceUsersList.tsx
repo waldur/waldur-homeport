@@ -42,6 +42,9 @@ export const ResourceUsersList = ({
       'image',
       'role_name',
       'role_uuid',
+      // All resource-scope grants; the Role column renders one badge
+      // per entry so multi-role users are not collapsed to one badge.
+      'roles',
       'expiration_time',
       'resource_projects',
     ],

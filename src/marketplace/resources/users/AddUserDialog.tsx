@@ -5,6 +5,7 @@ import {
   marketplaceOfferingRolesList,
   marketplaceResourceProjectsAddUser,
   marketplaceResourcesAddUser,
+  OfferingRole,
   usersList,
 } from 'waldur-js-client';
 
@@ -122,6 +123,25 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
                 options={filteredRoles}
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={(option) => option.name}
+                // Roles are provider-defined labels whose effect lives in
+                // the provider's backend (e.g. a mapped Rancher role);
+                // surface the provider's description so the assigner
+                // knows what they are granting. Menu only — the closed
+                // control shows just the name.
+                formatOptionLabel={(option: OfferingRole, { context }) =>
+                  context === 'menu' ? (
+                    <div>
+                      <div>{option.name}</div>
+                      {option.description ? (
+                        <small className="text-muted">
+                          {option.description}
+                        </small>
+                      ) : null}
+                    </div>
+                  ) : (
+                    option.name
+                  )
+                }
                 label={translate('Role')}
                 required
               />

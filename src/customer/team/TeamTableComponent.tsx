@@ -19,6 +19,20 @@ export const renderRoleExpirationDate = (row) => {
     : DASH_ESCAPE_CODE;
 };
 
+/** All role names on a row — one per roles[] grant when the endpoint
+ * provides them (resource team), else the scalar role_name. */
+const getRowRoleNames = (row): string[] => {
+  if (Array.isArray(row.roles) && row.roles.length > 0) {
+    return row.roles.map((grant) => grant.role_name);
+  }
+  return row.role_name ? [row.role_name] : [];
+};
+
+const exportRowRoles = (row) =>
+  getRowRoleNames(row)
+    .map((name) => exportRoleField({ role_name: name }))
+    .join(', ') || DASH_ESCAPE_CODE;
+
 interface TeamTableComponentProps<T> extends TableProps<T> {
   context?: 'project' | 'organization' | 'resource_project';
   userFieldPrefix?: string;
@@ -110,9 +124,19 @@ export const TeamTableComponent = <
               : translate('Role'),
         render: ({ row }) => {
           const suffix = roleSuffix ? roleSuffix(row as T) : null;
+          // The resource team endpoint returns every resource-scope
+          // grant in roles[]; render one badge per grant. Other
+          // contexts only provide the scalar role_name.
+          const roles = (row as any).roles;
           return (
-            <span className="d-inline-flex align-items-center gap-2">
-              <RoleField row={row} />
+            <span className="d-inline-flex align-items-center gap-2 flex-wrap">
+              {Array.isArray(roles) && roles.length > 0 ? (
+                roles.map((grant) => (
+                  <RoleField key={grant.role_uuid} row={grant} />
+                ))
+              ) : (
+                <RoleField row={row} />
+              )}
               {suffix && <span className="text-muted small">{suffix}</span>}
             </span>
           );
@@ -125,8 +149,8 @@ export const TeamTableComponent = <
               ? 'project_role'
               : 'role',
         inlineFilter: (row) =>
-          ENV.roles.filter((role) => role.name === row.role_name),
-        export: exportRoleField,
+          ENV.roles.filter((role) => getRowRoleNames(row).includes(role.name)),
+        export: exportRowRoles,
         id: 'role_name',
         keys: ['role_name'],
       },
