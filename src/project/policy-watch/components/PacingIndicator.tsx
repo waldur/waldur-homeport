@@ -80,7 +80,7 @@ export const PacingIndicator: FC<Props> = ({ pacing, creditTerms }) => {
   const statusLabel = behind
     ? translate('Behind pace')
     : ahead
-      ? translate('Ahead of pace')
+      ? translate('Ahead of pace (may reduce job scheduling priority)')
       : translate('On pace');
 
   return (
@@ -207,10 +207,10 @@ export const PacingIndicator: FC<Props> = ({ pacing, creditTerms }) => {
       <div className="text-muted mt-2" style={{ fontSize: 11 }}>
         {minimalFraction !== null
           ? translate(
-              '"today" = linear target for the day of month · "min" = minimum draw ({pct} of expected, grace {grace}%)',
+              '"today" = ideal consumption for today · "min" = minimum draw ({pct} of expected, grace {grace}%)',
               { pct: pct0(minimalFraction), grace: gracePct },
             )
-          : translate('"today" = linear target for the day of month')}
+          : translate('"today" = ideal consumption for today')}
       </div>
     </div>
   );
