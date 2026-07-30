@@ -31,13 +31,3 @@ export const getInferenceEndpoint = (
   );
   return match ? match.url.replace(/\/+$/, '') : null;
 };
-
-// The client's API key for this resource. The Envoy site-agent reports it (plus
-// the client_id) in `resource.backend_metadata`, which the SDK types as a fixed
-// struct, so read it through a cast. Returns null when no key is present.
-export const getInferenceApiKey = (resource: Resource): string | null => {
-  const key = (
-    resource?.backend_metadata as Record<string, unknown> | undefined
-  )?.api_key;
-  return typeof key === 'string' && key ? key : null;
-};
