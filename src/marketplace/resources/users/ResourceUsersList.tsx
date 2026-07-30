@@ -11,6 +11,7 @@ import { useTable } from '@/table/useTable';
 import { ResourcePermissionsLogButton } from './ResourcePermissionsLogButton';
 import { ResourceTeamAddDropdown } from './ResourceTeamAddDropdown';
 import { ResourceUsersListExpandableRow } from './ResourceUsersListExpandableRow';
+import { ResyncMembershipButton } from './ResyncMembershipButton';
 
 export const ResourceUsersList = ({
   resource,
@@ -56,16 +57,24 @@ export const ResourceUsersList = ({
       title={title ?? translate('Team')}
       tabs={tableTabs}
       tableActions={
-        <ResourceTeamAddDropdown
-          scope="resource"
-          scopeUuid={resource.uuid}
-          scopeUrl={resource.url}
-          scopeLabel={resource.name}
-          projectUuid={resource.project_uuid}
-          customerUuid={resource.customer_uuid}
-          offering={offering}
-          refetch={tableProps.fetch}
-        />
+        <>
+          {offering?.plugin_options?.enable_membership_sync_status && (
+            <ResyncMembershipButton
+              resourceUuid={resource.uuid}
+              offering={offering}
+            />
+          )}
+          <ResourceTeamAddDropdown
+            scope="resource"
+            scopeUuid={resource.uuid}
+            scopeUrl={resource.url}
+            scopeLabel={resource.name}
+            projectUuid={resource.project_uuid}
+            customerUuid={resource.customer_uuid}
+            offering={offering}
+            refetch={tableProps.fetch}
+          />
+        </>
       }
       dropdownActions={<ResourcePermissionsLogButton scopeUrl={resource.url} />}
       enableExport

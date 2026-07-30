@@ -246,7 +246,7 @@ export function parseSelectData<TData = {}>(
  * @param data Optional request body.
  */
 export async function post(endpoint: string, data?: object) {
-  await fetch(fixURL(endpoint), {
+  const response = await fetch(fixURL(endpoint), {
     method: 'POST',
     body: data ? JSON.stringify(data) : undefined,
     headers: {
@@ -254,6 +254,10 @@ export async function post(endpoint: string, data?: object) {
       Authorization: getAuthHeader(),
     },
   });
+  if (!response.ok) {
+    throw response;
+  }
+  return response;
 }
 
 /**
