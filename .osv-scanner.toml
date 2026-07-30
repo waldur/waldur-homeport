@@ -1,0 +1,18 @@
+# osv-scanner suppressions. See https://google.github.io/osv-scanner/configuration/
+# The CI "Scan JS dependencies" job passes --config=.osv-scanner.toml when this
+# file exists (waldur-pipelines /templates/test/vulnerability-scan.yml).
+
+[[IgnoredVulns]]
+id = "GHSA-mh99-v99m-4gvg"
+# brace-expansion ReDoS/OOM. The only remaining occurrence is 1.1.16, pulled
+# transitively via minimatch@3.x by ESLint dev tooling (@eslint/eslintrc,
+# eslint-plugin-import/react/jsx-a11y) and `serve` (serve-handler). The
+# advisory's only fixed version, 5.0.8, is a breaking API change (named
+# `expand` export instead of the default function) that crashes minimatch 3.x
+# — verified: forcing it breaks `yarn lint:check`. As of 2026-07 no published
+# version of those consumers has migrated off minimatch 3.x, so there is no
+# compatible fixed version. The modern (^5.0.5) consumers are already on the
+# patched 5.0.8; only the dev/build-time tooling path remains, which never
+# processes untrusted runtime input. Re-evaluate once the ESLint ecosystem
+# moves to minimatch >=10.
+reason = "Unfixable transitive via minimatch@3.x in ESLint/serve dev tooling; fixed brace-expansion 5.0.8 breaks minimatch 3.x. Build-time only, no untrusted input. Re-evaluate when upstream adopts minimatch >=10."
