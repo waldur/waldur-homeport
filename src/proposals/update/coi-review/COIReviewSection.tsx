@@ -1,6 +1,10 @@
 import { FC, useMemo } from 'react';
-import { Form, useFormState } from 'react-final-form';
-import { conflictsOfInterestList, ConflictOfInterest } from 'waldur-js-client';
+import {
+  conflictsOfInterestList,
+  CoiSeverityLevel,
+  ConflictOfInterest,
+  ConflictOfInterestStatusEnum,
+} from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { formatDate } from '@/core/dateUtils';
@@ -19,6 +23,7 @@ import {
   ConflictsOfInterestFilterFormId,
 } from '@/table/generated/ConflictsOfInterestFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
 import { COIExpandableRow } from './COIExpandableRow';
@@ -29,7 +34,7 @@ interface COIReviewSectionProps {
   refetch: () => void;
 }
 
-const SeverityBadge: FC<{ severity: string; display: string }> = ({
+const SeverityBadge: FC<{ severity: CoiSeverityLevel; display: string }> = ({
   severity,
   display,
 }) => {
@@ -42,7 +47,7 @@ const SeverityBadge: FC<{ severity: string; display: string }> = ({
       case 'potential':
         return 'info';
       default:
-        return 'secondary';
+        return 'default';
     }
   }, [severity]);
 
@@ -53,23 +58,20 @@ const SeverityBadge: FC<{ severity: string; display: string }> = ({
   );
 };
 
-const StatusBadge: FC<{ status: string; display: string }> = ({
-  status,
-  display,
-}) => {
+const StatusBadge: FC<{
+  status?: ConflictOfInterestStatusEnum;
+  display: string;
+}> = ({ status, display }) => {
   const variant = useMemo(() => {
     switch (status) {
-      case 'confirmed':
-        return 'danger';
-      case 'dismissed':
-        return 'secondary';
       case 'waived':
         return 'warning';
       case 'recused':
         return 'info';
+      case 'dismissed':
       case 'pending':
       default:
-        return 'primary';
+        return 'default';
     }
   }, [status]);
 
@@ -80,8 +82,8 @@ const StatusBadge: FC<{ status: string; display: string }> = ({
   );
 };
 
-const COIReviewSectionTable: FC<COIReviewSectionProps> = ({ call }) => {
-  const { values } = useFormState();
+export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
+  const values = useFilterValues('COIReviewTable');
 
   const formFilters = useMemo(
     () => selectConflictsOfInterestFilter(values),
@@ -102,6 +104,7 @@ const COIReviewSectionTable: FC<COIReviewSectionProps> = ({ call }) => {
     table: 'COIReviewTable',
     fetchData: createFetcher(conflictsOfInterestList),
     filter,
+    queryField: 'reviewer_name',
   });
 
   const columns = useMemo(
@@ -217,15 +220,3 @@ const COIReviewSectionTable: FC<COIReviewSectionProps> = ({ call }) => {
     />
   );
 };
-
-export const COIReviewSection: FC<any> = (props) => (
-  <Form
-    id={ConflictsOfInterestFilterFormId}
-    onSubmit={() => {}}
-    subscription={{
-      values: true,
-    }}
-  >
-    {() => <COIReviewSectionTable {...props} />}
-  </Form>
-);

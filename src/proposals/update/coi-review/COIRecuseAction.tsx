@@ -9,6 +9,8 @@ import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
+import { COIConfirmationBody } from './COIConfirmationBody';
+
 interface COIRecuseActionProps {
   row: ConflictOfInterest;
   fetch: () => void;
@@ -31,47 +33,29 @@ export const COIRecuseAction: FC<COIRecuseActionProps> = ({ row, fetch }) => {
     confirmation: {
       title: translate('Recuse reviewer'),
       body: (
-        <div>
-          <p>
-            {translate(
-              'You are about to remove this reviewer from reviewing the proposal.',
-            )}
-          </p>
-          <div className="bg-light-danger rounded p-3 mb-3">
-            <strong className="d-block mb-2">
-              {translate('What happens next:')}
-            </strong>
-            <ul className="mb-0 ps-3">
-              <li>
-                {translate(
-                  'The reviewer will be permanently removed from this proposal.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Any existing review or scores from this reviewer will be discarded.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'You may need to assign a replacement reviewer to maintain review coverage.',
-                )}
-              </li>
-            </ul>
-          </div>
-          <div className="text-muted small">
-            <strong>{translate('Reviewer')}:</strong> {row.reviewer_name}
-            <br />
-            <strong>{translate('Proposal')}:</strong> {row.proposal_name}
-            <br />
-            <strong>{translate('Conflict type')}:</strong>{' '}
-            {row.coi_type_display}
-          </div>
-        </div>
+        <COIConfirmationBody
+          intro={translate(
+            'You are about to remove this reviewer from reviewing the proposal.',
+          )}
+          consequences={[
+            translate(
+              'The reviewer will be permanently removed from this proposal.',
+            ),
+            translate(
+              'Any existing review or scores from this reviewer will be discarded.',
+            ),
+            translate(
+              'You may need to assign a replacement reviewer to maintain review coverage.',
+            ),
+          ]}
+          row={row}
+        />
       ),
       options: {
         positiveButton: translate('Recuse reviewer'),
+        negativeButton: translate('Cancel'),
         positiveButtonVariant: 'danger',
+        bodyClassName: 'pt-0',
         type: 'danger',
       },
     },

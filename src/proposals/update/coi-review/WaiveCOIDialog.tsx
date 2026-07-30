@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Modal } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { ConflictOfInterest, conflictsOfInterestWaive } from 'waldur-js-client';
 
@@ -7,7 +6,9 @@ import { required } from '@/core/validators';
 import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { Field } from '@/resource/summary';
 
 interface WaiveCOIDialogProps {
   resolve: {
@@ -50,10 +51,20 @@ export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
       initialValues={initialValues}
       render={({ handleSubmit, invalid }) => (
         <form onSubmit={handleSubmit}>
-          <Modal.Header closeButton>
-            <Modal.Title>{translate('Waive conflict of interest')}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+          <ModalDialog
+            title={translate('Waive conflict of interest')}
+            bodyClassName="pt-0"
+            footer={
+              <>
+                <CloseDialogButton disabled={waivedMutation.isPending} />
+                <SubmitButton
+                  submitting={waivedMutation.isPending}
+                  disabled={invalid}
+                  label={translate('Waive conflict')}
+                />
+              </>
+            }
+          >
             <p className="text-muted mb-4">
               {translate(
                 'Waiving allows the reviewer to continue despite the conflict. A management plan is required to document how the conflict will be managed.',
@@ -61,18 +72,18 @@ export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
             </p>
 
             <div className="mb-4">
-              {translate('Reviewer')}:{' '}
-              <strong>{resolve.coi.reviewer_name}</strong>
-            </div>
-
-            <div className="mb-4">
-              {translate('Proposal')}:{' '}
-              <strong>{resolve.coi.proposal_name}</strong>
-            </div>
-
-            <div className="mb-4">
-              {translate('Conflict type')}:{' '}
-              <strong>{resolve.coi.coi_type_display}</strong>
+              <Field
+                label={translate('Reviewer')}
+                value={resolve.coi.reviewer_name}
+              />
+              <Field
+                label={translate('Proposal')}
+                value={resolve.coi.proposal_name}
+              />
+              <Field
+                label={translate('Conflict type')}
+                value={resolve.coi.coi_type_display}
+              />
             </div>
 
             <TextGroup
@@ -95,15 +106,7 @@ export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
               placeholder={translate('Additional notes...')}
               rows={2}
             />
-          </Modal.Body>
-          <Modal.Footer>
-            <CloseDialogButton disabled={waivedMutation.isPending} />
-            <SubmitButton
-              submitting={waivedMutation.isPending}
-              disabled={invalid}
-              label={translate('Waive conflict')}
-            />
-          </Modal.Footer>
+          </ModalDialog>
         </form>
       )}
     />

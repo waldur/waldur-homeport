@@ -21,6 +21,8 @@ export interface ConfirmationOptions {
   positiveButtonVariant?: string;
   onlyPositiveButton?: boolean;
   iconNode?: ReactNode;
+  hideIcon?: boolean;
+  bodyClassName?: string;
   showInput?: boolean;
   inputLabel?: string;
   inputPlaceholder?: string;
