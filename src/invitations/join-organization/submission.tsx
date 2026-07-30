@@ -1,4 +1,5 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
+import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
 import {
   GroupInvitation,
@@ -16,19 +17,27 @@ import { UsersService } from '@/user/UsersService';
 
 import {
   getDuplicateErrorDialogOptions,
+  getPostJoinDestination,
   isDuplicateOrConflictError,
 } from '../utils';
 
 import { ProjectDetailsDialog } from './ProjectDetailsDialog';
 
+/**
+ * All callbacks resolve with a boolean: true when the request was submitted
+ * and the user was navigated to the resulting destination, false when the
+ * flow was cancelled or failed. Callers with their own post-login navigation
+ * (e.g. AuthLoginCompleted) use it to avoid clobbering that destination.
+ */
 export const useRequestToAccessOrganization = () => {
   const { openDialog, confirm } = useModal();
+  const router = useRouter();
 
   const submitRequest = useCallback(
     async (
       groupInvitationUuid: string,
       body?: { project_name?: string; project_description?: string },
-    ) => {
+    ): Promise<boolean> => {
       try {
         const res = await userGroupInvitationsSubmitRequest({
           path: { uuid: groupInvitationUuid },
@@ -79,6 +88,12 @@ export const useRequestToAccessOrganization = () => {
             },
           );
         }
+        // Leave for the request's destination so the user doesn't linger on
+        // whatever page happened to trigger the flow (e.g. the invitation
+        // route, where a reload would restart the whole dialog).
+        const destination = getPostJoinDestination(groupInvitation);
+        router.stateService.go(destination.state, destination.params);
+        return true;
       } catch (err) {
         GroupInvitationTokenStorage.remove();
         const errorMessage = format(err);
@@ -107,33 +122,41 @@ export const useRequestToAccessOrganization = () => {
             iconNode: <XCircleIcon weight="bold" />,
           });
         }
+        return false;
       }
     },
-    [confirm],
+    [confirm, router],
   );
 
   const request = useCallback(
-    async (invitationOrUuid: GroupInvitation | string) => {
+    async (invitationOrUuid: GroupInvitation | string): Promise<boolean> => {
       let invitation: GroupInvitation;
       if (typeof invitationOrUuid === 'string') {
-        const res = await userGroupInvitationsRetrieve({
-          path: { uuid: invitationOrUuid },
-        });
-        invitation = res.data;
+        try {
+          const res = await userGroupInvitationsRetrieve({
+            path: { uuid: invitationOrUuid },
+          });
+          invitation = res.data;
+        } catch {
+          // The stored token points to a deleted or expired invitation.
+          // Drop it so it can't wedge every subsequent login.
+          GroupInvitationTokenStorage.remove();
+          return false;
+        }
       } else {
         invitation = invitationOrUuid;
       }
 
       if (invitation.allow_custom_project_details) {
-        return new Promise<void>((resolve) => {
+        return new Promise<boolean>((resolve) => {
           openDialog(ProjectDetailsDialog, {
             resolve: {
               onSubmit: (data) => {
-                submitRequest(invitation.uuid, data).then(() => resolve());
+                submitRequest(invitation.uuid, data).then(resolve);
               },
               onCancel: () => {
                 GroupInvitationTokenStorage.remove();
-                resolve();
+                resolve(false);
               },
             },
             size: 'md',
@@ -145,7 +168,7 @@ export const useRequestToAccessOrganization = () => {
     [openDialog, submitRequest],
   );
 
-  const checkAndRequest = useCallback(async () => {
+  const checkAndRequest = useCallback(async (): Promise<boolean> => {
     const groupToken = GroupInvitationTokenStorage.get();
     if (groupToken) {
       const user = await UsersService.getCurrentUser();
@@ -156,6 +179,7 @@ export const useRequestToAccessOrganization = () => {
         return request(groupToken);
       }
     }
+    return false;
   }, [request]);
 
   return { request, checkAndRequest };

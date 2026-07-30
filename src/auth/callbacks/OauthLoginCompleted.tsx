@@ -30,10 +30,17 @@ export const OauthLoginCompleted: FunctionComponent = () => {
         // Only check for pending group invitation if NOT redirecting to user-group-invitation
         // (that route handles invitations via its own confirmation dialog)
         const redirect = RedirectStorage.get();
+        let handled = false;
         if (redirect?.toState !== 'user-group-invitation') {
-          await checkAndRequest();
+          handled = await checkAndRequest();
         }
-        redirectOnSuccess();
+        if (handled) {
+          // checkAndRequest already navigated to the request's destination;
+          // drop the stored redirect so it can't fire on a later login.
+          RedirectStorage.remove();
+        } else {
+          await redirectOnSuccess();
+        }
       } catch (e) {
         setError(
           e.response?.data?.detail ||

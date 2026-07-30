@@ -6,6 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
+import { router } from '@/router';
 import { createTestWrapper } from '@/test/harness';
 
 import { useRequestToAccessOrganization } from './submission';
@@ -260,6 +261,156 @@ describe('useRequestToAccessOrganization', () => {
         expect.objectContaining({ type: 'danger' }),
       );
       expect(mockGroupInvitationTokenRemove).toHaveBeenCalled();
+    });
+
+    it('should remove stale token and resolve false when retrieval fails', async () => {
+      vi.mocked(userGroupInvitationsRetrieve).mockRejectedValue({
+        response: { data: 'Not found' },
+      } as any);
+
+      const { result } = setupHook();
+
+      let handled: boolean;
+      await act(async () => {
+        handled = await result.current.request('stale-token');
+      });
+
+      expect(handled).toBe(false);
+      expect(mockGroupInvitationTokenRemove).toHaveBeenCalled();
+      expect(
+        vi.mocked(userGroupInvitationsSubmitRequest),
+      ).not.toHaveBeenCalled();
+      expect(vi.mocked(router.stateService.go)).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('navigation after submission', () => {
+    it('should navigate to the created project when auto-approved with a project', async () => {
+      vi.mocked(userGroupInvitationsSubmitRequest).mockResolvedValue({
+        data: {
+          auto_approved: true,
+          scope_name: 'Test Org',
+          scope_uuid: 'scope-1',
+          project_uuid: 'project-1',
+        },
+      } as any);
+
+      const { result } = setupHook();
+
+      let handled: boolean;
+      await act(async () => {
+        handled = await result.current.request({
+          uuid: 'invitation-123',
+          allow_custom_project_details: false,
+        } as any);
+      });
+
+      expect(handled).toBe(true);
+      expect(vi.mocked(router.stateService.go)).toHaveBeenCalledWith(
+        'project.dashboard',
+        { uuid: 'project-1' },
+      );
+    });
+
+    it('should navigate to the organization when auto-approved without a project', async () => {
+      vi.mocked(userGroupInvitationsSubmitRequest).mockResolvedValue({
+        data: {
+          auto_approved: true,
+          scope_name: 'Test Org',
+          scope_uuid: 'scope-1',
+        },
+      } as any);
+
+      const { result } = setupHook();
+
+      let handled: boolean;
+      await act(async () => {
+        handled = await result.current.request({
+          uuid: 'invitation-123',
+          allow_custom_project_details: false,
+        } as any);
+      });
+
+      expect(handled).toBe(true);
+      expect(vi.mocked(router.stateService.go)).toHaveBeenCalledWith(
+        'organization.dashboard',
+        { uuid: 'scope-1' },
+      );
+    });
+
+    it('should navigate to permission requests when pending approval', async () => {
+      vi.mocked(userGroupInvitationsSubmitRequest).mockResolvedValue({
+        data: {
+          auto_approved: false,
+          scope_name: 'Test Org',
+          scope_uuid: 'scope-1',
+        },
+      } as any);
+
+      const { result } = setupHook();
+
+      let handled: boolean;
+      await act(async () => {
+        handled = await result.current.request({
+          uuid: 'invitation-123',
+          allow_custom_project_details: false,
+        } as any);
+      });
+
+      expect(handled).toBe(true);
+      expect(vi.mocked(router.stateService.go)).toHaveBeenCalledWith(
+        'profile.permission-requests',
+        undefined,
+      );
+    });
+
+    it('should not navigate and resolve false on submission error', async () => {
+      vi.mocked(userGroupInvitationsSubmitRequest).mockRejectedValue({
+        response: { data: 'Some other error' },
+      } as any);
+
+      const { result } = setupHook();
+
+      let handled: boolean;
+      await act(async () => {
+        handled = await result.current.request({
+          uuid: 'invitation-123',
+          allow_custom_project_details: false,
+        } as any);
+      });
+
+      expect(handled).toBe(false);
+      expect(vi.mocked(router.stateService.go)).not.toHaveBeenCalled();
+    });
+
+    it('should not navigate and resolve false when project details dialog is cancelled', async () => {
+      vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
+        data: {
+          uuid: 'invitation-123',
+          allow_custom_project_details: true,
+          scope_name: 'Test Org',
+        },
+      } as any);
+
+      vi.mocked(useModal().openDialog).mockImplementation(
+        (_component, options) => {
+          options.resolve.onCancel();
+        },
+      );
+
+      const { result } = setupHook();
+
+      let handled: boolean;
+      await act(async () => {
+        handled = await result.current.request('group-token-123');
+      });
+
+      expect(handled).toBe(false);
+      expect(mockGroupInvitationTokenRemove).toHaveBeenCalled();
+      expect(
+        vi.mocked(userGroupInvitationsSubmitRequest),
+      ).not.toHaveBeenCalled();
+      expect(vi.mocked(router.stateService.go)).not.toHaveBeenCalled();
     });
   });
 });

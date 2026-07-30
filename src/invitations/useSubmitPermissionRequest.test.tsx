@@ -164,4 +164,121 @@ describe('useSubmitPermissionRequest', () => {
       }),
     );
   });
+
+  it('should clear the stored token on successful submission', async () => {
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
+      data: { allow_custom_project_details: false },
+    } as any);
+    vi.mocked(userGroupInvitationsSubmitRequest).mockResolvedValue({
+      data: {
+        auto_approved: true,
+        scope_name: 'Test Org',
+        scope_uuid: 'scope-1',
+      },
+    } as any);
+    mockRefreshCurrentUser.mockResolvedValue(undefined);
+
+    const { result } = setupHook();
+
+    act(() => {
+      result.current.submit();
+    });
+
+    const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
+    const onConfirm = dialogCall[1].resolve.onConfirm;
+
+    await act(async () => {
+      await onConfirm();
+    });
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(GroupInvitationTokenStorage.remove).toHaveBeenCalled();
+    expect(router.stateService.go).toHaveBeenCalledWith(
+      'organization.dashboard',
+      { uuid: 'scope-1' },
+    );
+  });
+
+  it('should clear the stored token on submission error', async () => {
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
+      data: { allow_custom_project_details: false },
+    } as any);
+    vi.mocked(userGroupInvitationsSubmitRequest).mockRejectedValue({
+      message: 'User already has this role in the scope.',
+    } as any);
+    vi.mocked(useModal().confirm).mockResolvedValue(undefined);
+
+    const { result } = setupHook();
+
+    act(() => {
+      result.current.submit();
+    });
+
+    const dialogCall = vi.mocked(useModal().openDialog).mock.calls[0];
+    const onConfirm = dialogCall[1].resolve.onConfirm;
+
+    await act(async () => {
+      await onConfirm();
+    });
+    await new Promise((resolve) => setTimeout(resolve, 50));
+
+    expect(GroupInvitationTokenStorage.remove).toHaveBeenCalled();
+    expect(router.stateService.go).toHaveBeenCalledWith('profile.details');
+  });
+
+  it('should abort without submitting when ProjectDetailsDialog is cancelled', async () => {
+    vi.mocked(userGroupInvitationsRetrieve).mockResolvedValue({
+      data: { allow_custom_project_details: true },
+    } as any);
+
+    const { result } = setupHook();
+
+    act(() => {
+      result.current.submit();
+    });
+
+    const confirmCall = vi.mocked(useModal().openDialog).mock.calls[0];
+    const onConfirm = confirmCall[1].resolve.onConfirm;
+
+    let confirmPromise: Promise<void>;
+    await act(async () => {
+      confirmPromise = onConfirm();
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    });
+
+    const detailsCall = vi.mocked(useModal().openDialog).mock.calls[1];
+    expect(detailsCall[0]).toBe('ProjectDetailsDialog');
+
+    await act(async () => {
+      detailsCall[1].resolve.onCancel();
+      await confirmPromise;
+    });
+
+    expect(vi.mocked(userGroupInvitationsSubmitRequest)).not.toHaveBeenCalled();
+    expect(GroupInvitationTokenStorage.remove).toHaveBeenCalled();
+    expect(router.stateService.go).toHaveBeenCalledWith('profile.details');
+  });
+
+  it('should abort when the invitation retrieve fails after confirm', async () => {
+    vi.mocked(userGroupInvitationsRetrieve).mockRejectedValue({
+      message: 'Not found',
+    } as any);
+
+    const { result } = setupHook();
+
+    act(() => {
+      result.current.submit();
+    });
+
+    const confirmCall = vi.mocked(useModal().openDialog).mock.calls[0];
+    const onConfirm = confirmCall[1].resolve.onConfirm;
+
+    await act(async () => {
+      await onConfirm();
+    });
+
+    expect(vi.mocked(userGroupInvitationsSubmitRequest)).not.toHaveBeenCalled();
+    expect(GroupInvitationTokenStorage.remove).toHaveBeenCalled();
+    expect(router.stateService.go).toHaveBeenCalledWith('profile.details');
+  });
 });

@@ -18,6 +18,7 @@ import { GroupInvitationConfirmDialog } from './GroupInvitationConfirmDialog';
 import { ProjectDetailsDialog } from './join-organization/ProjectDetailsDialog';
 import {
   getDuplicateErrorDialogOptions,
+  getPostJoinDestination,
   isDuplicateOrConflictError,
 } from './utils';
 
@@ -41,6 +42,11 @@ const BACKEND_ERROR_TRANSLATIONS: Record<string, string> = {
 const translateBackendError = (message: string): string =>
   BACKEND_ERROR_TRANSLATIONS[message] || message;
 
+type ProjectDetailsResult = {
+  cancelled: boolean;
+  details?: { project_name?: string; project_description?: string };
+};
+
 function resolveProjectNameTemplate(
   template: string,
   user: { username?: string; email?: string; full_name?: string },
@@ -55,7 +61,7 @@ function resolveProjectNameTemplate(
 export function useSubmitPermissionRequest(token: string) {
   const routerInstance = useRouter();
   const { openDialog, confirm } = useModal();
-  const { showSuccess } = useNotify();
+  const { showSuccess, showError } = useNotify();
   const user = useUser();
 
   const submitMutation = useMutation({
@@ -68,13 +74,13 @@ export function useSubmitPermissionRequest(token: string) {
         body: body || {},
       }),
     onSuccess: async (res) => {
-      const {
-        auto_approved,
-        scope_name,
-        scope_uuid,
-        project_uuid,
-        project_created,
-      } = res.data;
+      // The token was written to storage when this route was visited; clear it
+      // now, or the app-root InvitationCheck re-triggers the whole flow from
+      // storage after we navigate away.
+      GroupInvitationTokenStorage.remove();
+      const { auto_approved, scope_name, project_uuid, project_created } =
+        res.data;
+      const destination = getPostJoinDestination(res.data);
       if (!auto_approved) {
         showSuccess(
           translate(
@@ -83,7 +89,7 @@ export function useSubmitPermissionRequest(token: string) {
           ),
           translate('Request submitted'),
         );
-        routerInstance.stateService.go('profile.permission-requests');
+        routerInstance.stateService.go(destination.state, destination.params);
         return;
       }
       await UsersService.refreshCurrentUser();
@@ -100,21 +106,19 @@ export function useSubmitPermissionRequest(token: string) {
                 },
               ),
         );
-        routerInstance.stateService.go('project.dashboard', {
-          uuid: project_uuid,
-        });
-        return;
+      } else {
+        showSuccess(
+          translate('You have successfully joined {organization}', {
+            organization: scope_name,
+          }),
+        );
       }
-      showSuccess(
-        translate('You have successfully joined {organization}', {
-          organization: scope_name,
-        }),
-      );
-      routerInstance.stateService.go('organization.dashboard', {
-        uuid: scope_uuid,
-      });
+      routerInstance.stateService.go(destination.state, destination.params);
     },
     onError: async (error) => {
+      // Clear the stored token here too — every error branch below navigates
+      // into the app, where a stale token would re-open the flow on mount.
+      GroupInvitationTokenStorage.remove();
       const errorMessage = format(error);
       if (isDuplicateOrConflictError(errorMessage)) {
         try {
@@ -149,25 +153,22 @@ export function useSubmitPermissionRequest(token: string) {
   });
 
   const collectProjectDetails = useCallback(
-    (
-      invitationToken: string,
-    ): Promise<{
-      project_name?: string;
-      project_description?: string;
-    } | null> => {
+    (invitationToken: string): Promise<ProjectDetailsResult> => {
       return userGroupInvitationsRetrieve({
         path: { uuid: invitationToken },
       }).then((res) => {
         const invitation = res.data;
-        if (!invitation.allow_custom_project_details) return null;
+        if (!invitation.allow_custom_project_details) {
+          return { cancelled: false };
+        }
         const defaultProjectName = invitation.project_name_template
           ? resolveProjectNameTemplate(invitation.project_name_template, user)
           : '';
         return new Promise((resolve) => {
           openDialog(ProjectDetailsDialog, {
             resolve: {
-              onSubmit: (data) => resolve(data),
-              onCancel: () => resolve(null),
+              onSubmit: (data) => resolve({ cancelled: false, details: data }),
+              onCancel: () => resolve({ cancelled: true }),
               defaultProjectName,
             },
             size: 'md',
@@ -178,18 +179,32 @@ export function useSubmitPermissionRequest(token: string) {
     [openDialog, user],
   );
 
+  const abortFlow = useCallback(() => {
+    GroupInvitationTokenStorage.remove();
+    routerInstance.stateService.go('profile.details');
+  }, [routerInstance]);
+
   const submit = useCallback(() => {
     openDialog(GroupInvitationConfirmDialog, {
       resolve: {
         token,
         onConfirm: async () => {
-          const projectDetails = await collectProjectDetails(token);
-          submitMutation.mutate(projectDetails || undefined);
+          const result: ProjectDetailsResult = await collectProjectDetails(
+            token,
+          ).catch(() => {
+            // The invitation vanished between the confirm dialog and here
+            // (deleted or expired) — bail out instead of leaving the user
+            // stranded with the token still stored.
+            showError(translate('This invitation is no longer available.'));
+            return { cancelled: true };
+          });
+          if (result.cancelled) {
+            abortFlow();
+          } else {
+            submitMutation.mutate(result.details);
+          }
         },
-        onCancel: () => {
-          GroupInvitationTokenStorage.remove();
-          routerInstance.stateService.go('profile.details');
-        },
+        onCancel: abortFlow,
       },
       backdrop: 'static',
     });
@@ -198,7 +213,8 @@ export function useSubmitPermissionRequest(token: string) {
     openDialog,
     collectProjectDetails,
     submitMutation,
-    routerInstance,
+    abortFlow,
+    showError,
   ]);
 
   return { submit, isPending: submitMutation.isPending };
