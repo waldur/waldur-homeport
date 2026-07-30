@@ -268,7 +268,9 @@ export const getCostChartAndOptions = (
       type: 'bar',
       stack: 'compensation',
       data: chart.compensation.slice(0, chart.compensation.length - 1),
-      color: brandColors[300],
+      // A darker step of the same hue: incurred and compensation are paired
+      // series, so they stay in one family but must not read as one colour.
+      color: brandColors[700],
     },
     {
       name: translate('Estimated cost'),
@@ -286,7 +288,7 @@ export const getCostChartAndOptions = (
       data: Array.from({ length: chart.compensation.length - 1 }).concat(
         chart.compensation[chart.compensation.length - 1],
       ),
-      color: '#d0d5dd', // gray-300
+      color: '#98a2b3', // gray-400 — same darker step as the actual pair
     },
   ].filter(Boolean) as SeriesOption[];
 
