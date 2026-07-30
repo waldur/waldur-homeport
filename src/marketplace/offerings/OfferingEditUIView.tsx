@@ -72,6 +72,11 @@ const OfferingPartitionsSection = lazyComponent(() =>
     default: module.OfferingPartitionsSection,
   })),
 );
+const OfferingQoSSection = lazyComponent(() =>
+  import('./update/qos/OfferingQoSSection').then((module) => ({
+    default: module.OfferingQoSSection,
+  })),
+);
 const OfferingDocumentsSection = lazyComponent(() =>
   import('./update/documents/OfferingDocumentsSection').then((module) => ({
     default: module.OfferingDocumentsSection,
@@ -180,6 +185,11 @@ const buildPublicInfoTab = (): PageBarTab => ({
       key: 'slurm_partitions',
       component: OfferingPartitionsSection,
       title: translate('Slurm partitions'),
+    },
+    isFeatureVisible(MarketplaceFeatures.display_offering_partitions) && {
+      key: 'slurm_qos',
+      component: OfferingQoSSection,
+      title: translate('QoS profiles'),
     },
     {
       key: 'category',

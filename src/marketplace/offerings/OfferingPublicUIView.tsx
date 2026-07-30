@@ -68,6 +68,11 @@ const PublicOfferingPartitions = lazyComponent(() =>
     default: module.PublicOfferingPartitions,
   })),
 );
+const PublicOfferingQoS = lazyComponent(() =>
+  import('./details/PublicOfferingQoS').then((module) => ({
+    default: module.PublicOfferingQoS,
+  })),
+);
 const PublicOfferingDocuments = lazyComponent(() =>
   import('./details/PublicOfferingDocuments').then((module) => ({
     default: module.PublicOfferingDocuments,
@@ -170,6 +175,14 @@ const getTabs = (
           title: translate('Slurm partitions'),
           key: 'partitions',
           component: PublicOfferingPartitions,
+        }
+      : null,
+    isFeatureVisible(MarketplaceFeatures.display_offering_partitions) &&
+    offering?.qos_profiles?.length
+      ? {
+          title: translate('QoS profiles'),
+          key: 'qos-profiles',
+          component: PublicOfferingQoS,
         }
       : null,
     offering?.screenshots.length

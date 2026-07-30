@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CallCoiConfiguration } from 'waldur-js-client';
+import { CallCoiConfiguration, CoiTypeEnum } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { MermaidChart } from '@/core/MermaidChart';
@@ -147,7 +147,7 @@ const COI_TYPE_INFO: Record<
 type BadgeVariant = 'danger' | 'warning' | 'info' | 'secondary';
 
 const getHandlingLabel = (
-  type: string,
+  type: CoiTypeEnum,
   config: CallCoiConfiguration,
 ): { label: string; variant: BadgeVariant } => {
   if (config.recusal_required_types?.includes(type)) {
@@ -232,7 +232,7 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
   const { config } = resolve;
 
   // Get all COI types
-  const allTypes = Object.keys(COI_TYPE_INFO);
+  const allTypes = Object.keys(COI_TYPE_INFO) as CoiTypeEnum[];
 
   return (
     <ModalDialog

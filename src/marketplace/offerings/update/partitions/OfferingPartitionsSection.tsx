@@ -13,6 +13,7 @@ import { OfferingSectionProps } from '../types';
 import { AddOfferingPartitionButton } from './AddOfferingPartitionButton';
 import { DeleteOfferingPartition } from './DeleteOfferingPartition';
 import { EditOfferingPartitionButton } from './EditOfferingPartitionButton';
+import { ManagePartitionQoSButton } from './ManagePartitionQoSButton';
 import { OfferingPartitionExpandableRow } from './OfferingPartitionExpandableRow';
 
 const RowActions = ({ row, refetch, offering }) => {
@@ -21,7 +22,11 @@ const RowActions = ({ row, refetch, offering }) => {
       row={row}
       refetch={refetch}
       data={{ offering }}
-      actions={[EditOfferingPartitionButton, DeleteOfferingPartition]}
+      actions={[
+        EditOfferingPartitionButton,
+        ManagePartitionQoSButton,
+        DeleteOfferingPartition,
+      ]}
     />
   );
 };

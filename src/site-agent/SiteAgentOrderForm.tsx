@@ -7,6 +7,7 @@ import {
   DetailsOverviewStep,
   FinalConfigurationStep,
   PlanStep,
+  QoSSelectionStep,
 } from '@/marketplace/deploy/steps/constants';
 import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
 
@@ -14,6 +15,7 @@ const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   DetailsOverviewStep,
   PlanStep,
   AdditionalConfigurationStep,
+  QoSSelectionStep,
   {
     ...FinalConfigurationStep,
     params: {
