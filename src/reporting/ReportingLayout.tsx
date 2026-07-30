@@ -52,7 +52,7 @@ export const ReportingLayout: FC = () => {
               as={Link}
               state={tab.state}
               active={router.stateService.includes(tab.state)}
-              className="text-active-primary text-decoration-none"
+              className="text-decoration-none"
             >
               <span>{tab.title}</span>
             </Nav.Link>
