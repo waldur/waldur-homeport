@@ -1,15 +1,13 @@
 import { CaretDownIcon, CaretUpIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useState } from 'react';
 import { Card, Collapse } from 'react-bootstrap';
-import { Offering, Resource } from 'waldur-js-client';
+import { Offering, Resource, ResourceApiKeyStatus } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
-import { SecretField } from '@/marketplace/common/SecretField';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
 import {
-  getInferenceApiKey,
   getInferenceEndpoint,
   isInferenceServiceEnabled,
 } from '../../inference';
@@ -19,9 +17,11 @@ import {
   InferenceModelState,
   useInferenceModels,
 } from '../../playground/useInferenceModels';
+import {
+  useResourceApiKeysTable,
+  useRevealedApiKey,
+} from '../api-keys/useResourceApiKeys';
 
-// Stacked label/value row — clearer than a two-column Field in the narrow 1/3
-// credentials column.
 const CredentialRow: FC<{ label: string; children: ReactNode }> = ({
   label,
   children,
@@ -32,11 +32,8 @@ const CredentialRow: FC<{ label: string; children: ReactNode }> = ({
   </div>
 );
 
-const EndpointCard: FC<{ endpoint: string; apiKey: string | null }> = ({
-  endpoint,
-  apiKey,
-}) => (
-  <Card className="card-bordered">
+const EndpointCard: FC<{ endpoint: string }> = ({ endpoint }) => (
+  <Card className="card-bordered mb-6">
     <Card.Header>
       <Card.Title>
         <h3>{translate('Endpoint')}</h3>
@@ -49,21 +46,9 @@ const EndpointCard: FC<{ endpoint: string; apiKey: string | null }> = ({
           <CopyToClipboardButton value={endpoint} />
         </div>
       </CredentialRow>
-
-      <CredentialRow label={translate('API key')}>
-        {apiKey ? (
-          <SecretField value={apiKey} />
-        ) : (
-          <span className="text-muted fw-normal">
-            {translate('Not assigned')}
-          </span>
-        )}
-      </CredentialRow>
-
       <CredentialRow label={translate('Auth')}>
         {translate('Bearer · API key')}
       </CredentialRow>
-
       <CredentialRow label={translate('Compatibility')}>
         {translate('OpenAI v1')}
       </CredentialRow>
@@ -71,15 +56,18 @@ const EndpointCard: FC<{ endpoint: string; apiKey: string | null }> = ({
   </Card>
 );
 
-// Collapsed by default — just the title and a caret. The playground body only
-// mounts once opened, so the tab stays compact until the user asks to try the
-// model.
+// The playground authenticates with the first active key, revealed on open.
 const PlaygroundCard: FC<{
   endpoint: string;
-  apiKey: string | null;
+  activeKey?: ResourceApiKeyStatus;
   modelState: InferenceModelState;
-}> = ({ endpoint, apiKey, modelState }) => {
+  playgroundKey: ReturnType<typeof useRevealedApiKey>;
+}> = ({ endpoint, activeKey, modelState, playgroundKey }) => {
   const [open, setOpen] = useState(false);
+  const toggle = () => {
+    if (!open && activeKey && !playgroundKey.value) playgroundKey.reveal();
+    setOpen((value) => !value);
+  };
   return (
     <Card className="card-bordered">
       <Card.Header className="d-flex justify-content-between align-items-center">
@@ -103,7 +91,7 @@ const PlaygroundCard: FC<{
                 ? translate('Collapse playground')
                 : translate('Open playground')
             }
-            onClick={() => setOpen((value) => !value)}
+            onClick={toggle}
           >
             {open ? (
               <CaretUpIcon weight="bold" size={16} />
@@ -119,7 +107,7 @@ const PlaygroundCard: FC<{
             <InferencePlayground
               endpoint={endpoint}
               model={modelState.model}
-              apiKey={apiKey}
+              apiKey={playgroundKey.value}
               error={modelState.error}
               height="55vh"
             />
@@ -130,10 +118,10 @@ const PlaygroundCard: FC<{
   );
 };
 
-// Inference service view: endpoint + credentials on the left third, an inline
-// playground on the right two-thirds. Gated on the "Enable inference service
-// view" offering flag. The endpoint/API key are read-only here — providers
-// manage them from the resource's provider actions.
+// Inference service view: the OpenAI-compatible endpoint on the left third, an
+// inline playground on the right two-thirds. Gated on the "Enable inference
+// service view" offering flag. The keys themselves live in the resource's
+// "API keys" tab — one home for every backend that exposes them.
 export const InferenceServiceView = ({
   resource,
   offering,
@@ -142,14 +130,18 @@ export const InferenceServiceView = ({
   offering: Offering;
 }) => {
   const endpoint = getInferenceEndpoint(resource, offering);
-  const apiKey = getInferenceApiKey(resource);
-  const modelState = useInferenceModels(endpoint, apiKey);
+  // The keys themselves are managed in the resource's "API keys" tab; here they
+  // are only needed to pick the key the playground authenticates with.
+  const { rows } = useResourceApiKeysTable(resource);
+  const activeKey = (rows as ResourceApiKeyStatus[] | undefined)?.find(
+    (key) => key.state === 'OK',
+  );
+  const playgroundKey = useRevealedApiKey(activeKey?.uuid ?? '');
+  const modelState = useInferenceModels(endpoint, playgroundKey.value);
 
   if (!isInferenceServiceEnabled(resource)) {
     return null;
   }
-  // No endpoint → the whole tab is the error; the credential/playground cards
-  // would be empty and useless.
   if (!endpoint) {
     return (
       <NoResult
@@ -164,13 +156,14 @@ export const InferenceServiceView = ({
   return (
     <div className="row">
       <div className="col-lg-5 mb-6">
-        <EndpointCard endpoint={endpoint} apiKey={apiKey} />
+        <EndpointCard endpoint={endpoint} />
       </div>
       <div className="col-lg-7 mb-6">
         <PlaygroundCard
           endpoint={endpoint}
-          apiKey={apiKey}
+          activeKey={activeKey}
           modelState={modelState}
+          playgroundKey={playgroundKey}
         />
       </div>
     </div>

@@ -1,10 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  getInferenceApiKey,
-  getInferenceEndpoint,
-  isInferenceServiceEnabled,
-} from './inference';
+import { getInferenceEndpoint, isInferenceServiceEnabled } from './inference';
 
 describe('isInferenceServiceEnabled', () => {
   it('is true when the offering opted into the inference service view', () => {
@@ -65,21 +61,5 @@ describe('getInferenceEndpoint', () => {
     expect(getInferenceEndpoint(resource, offering)).toBe(
       'https://gateway.hpc.ut.ee/v1',
     );
-  });
-});
-
-describe('getInferenceApiKey', () => {
-  it('returns the api_key from backend_metadata when present', () => {
-    expect(
-      getInferenceApiKey({ backend_metadata: { api_key: 'sk-abc' } } as any),
-    ).toBe('sk-abc');
-  });
-
-  it('returns null when the key is missing or empty', () => {
-    expect(getInferenceApiKey({ backend_metadata: {} } as any)).toBeNull();
-    expect(
-      getInferenceApiKey({ backend_metadata: { api_key: '' } } as any),
-    ).toBeNull();
-    expect(getInferenceApiKey({} as any)).toBeNull();
   });
 });

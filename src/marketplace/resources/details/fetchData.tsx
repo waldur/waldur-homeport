@@ -140,6 +140,22 @@ export const getResourceTabs = ({
     });
   }
 
+  // Any backend that reports API keys gets the tab — the resource says whether it
+  // owns any, so there is no offering type or flag for a provider to get wrong.
+  // The cast goes away once a waldur-js-client carrying has_api_keys is published;
+  // the field ships with the mastermind side of this change.
+  if ((resource as Resource & { has_api_keys?: boolean }).has_api_keys) {
+    tabs.push({
+      key: 'api-keys',
+      title: translate('API keys'),
+      component: lazyComponent(() =>
+        import('./api-keys/ResourceApiKeysTab').then((module) => ({
+          default: module.ResourceApiKeysTab,
+        })),
+      ),
+    });
+  }
+
   if (scope) {
     const resourceTabs = getTabs(scope.resource_type) as any[];
     if (
