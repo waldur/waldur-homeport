@@ -1,0 +1,22 @@
+// Bullet markers sit flush with the surrounding text; wrapped lines
+// keep a hanging indent instead of running under the marker.
+.coi-consequences-list {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    position: relative;
+    padding-left: 1.25em;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.1em;
+      top: 0.55em;
+      width: 0.35em;
+      height: 0.35em;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+  }
+}

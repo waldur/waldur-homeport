@@ -1,4 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import React, { ReactNode, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
@@ -26,6 +27,8 @@ interface ConfirmationDialogProps {
     positiveButtonVariant?: string;
     onlyPositiveButton?: boolean;
     iconNode?: ReactNode;
+    hideIcon?: boolean;
+    bodyClassName?: string;
     showInput?: boolean;
     inputRequired?: boolean;
     inputLabel?: string;
@@ -46,6 +49,8 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
     positiveButtonVariant,
     onlyPositiveButton,
     iconNode,
+    hideIcon = false,
+    bodyClassName,
     showInput = false,
     inputRequired = false,
     inputLabel,
@@ -84,9 +89,11 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   return (
     <ModalDialog
       title={title}
-      iconNode={iconNode || <WarningCircleIcon weight="bold" />}
+      iconNode={
+        hideIcon ? null : iconNode || <WarningCircleIcon weight="bold" />
+      }
       iconColor={type}
-      bodyClassName="text-quaternary"
+      bodyClassName={classNames('text-quaternary', bodyClassName)}
       closeButton={!onlyPositiveButton}
       onHide={handleCancel}
       footer={
