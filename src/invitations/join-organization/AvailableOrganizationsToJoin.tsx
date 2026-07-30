@@ -42,8 +42,9 @@ export const AvailableOrganizationsToJoin: FC = () => {
   const { request } = useRequestToAccessOrganization();
 
   const onSubmit = useCallback(
-    (formData) => {
-      return request(formData.invitation);
+    async (formData) => {
+      // Discard the boolean result — final-form expects undefined on success.
+      await request(formData.invitation);
     },
     [request],
   );

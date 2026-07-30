@@ -15,8 +15,12 @@ export const AuthLoginCompleted: FunctionComponent = () => {
     async function handleLogin() {
       const token = await exchangeToken(params.code);
       await loginUser(token, params.method);
-      await checkAndRequest();
-      router.stateService.go('profile.details');
+      // When a pending group invitation was submitted, checkAndRequest has
+      // already navigated to its destination — don't clobber it.
+      const handled = await checkAndRequest();
+      if (!handled) {
+        router.stateService.go('profile.details');
+      }
     }
     handleLogin();
   }, [router, params]);
