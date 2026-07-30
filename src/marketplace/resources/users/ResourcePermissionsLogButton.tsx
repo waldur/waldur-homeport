@@ -18,7 +18,16 @@ export const ResourcePermissionsLogButton: FC<
   <FilteredEventsButton
     filter={{
       scope: scopeUrl,
-      event_type: ['role_granted', 'role_revoked', 'role_updated'],
+      event_type: [
+        'role_granted',
+        'role_revoked',
+        'role_updated',
+        // Resource-project lifecycle: who created/removed/recovered a
+        // sub-project, scoped to the resource via the event feed.
+        'marketplace_resource_project_created',
+        'marketplace_resource_project_removed',
+        'marketplace_resource_project_recovered',
+      ],
     }}
     asDropdownItem
   />

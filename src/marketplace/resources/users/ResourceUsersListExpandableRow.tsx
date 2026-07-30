@@ -9,6 +9,7 @@ import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { MemberSyncStateIndicator } from '@/user/affiliations/MemberSyncStateIndicator';
 import { RoleField } from '@/user/affiliations/RoleField';
 
 import { DeleteUserAction } from './DeleteUserAction';
@@ -21,6 +22,11 @@ interface ResourceProjectGrant {
   role_name: string;
   role_uuid: string;
   expiration_time: string | null;
+  // Agent-reported propagation state; present only when the offering
+  // opted into membership sync status reporting.
+  sync_state?: 'synced' | 'pending' | 'missing_in_idp' | 'error' | null;
+  sync_message?: string | null;
+  sync_reported_at?: string | null;
 }
 
 interface ResourceTeamMember {
@@ -123,7 +129,12 @@ export const ResourceUsersListExpandableRow: FunctionComponent<{
           },
           {
             title: translate('Role'),
-            render: ({ row: grant }) => <RoleField row={grant} />,
+            render: ({ row: grant }) => (
+              <span className="d-inline-flex align-items-center gap-1">
+                <RoleField row={grant} />
+                <MemberSyncStateIndicator grant={grant} />
+              </span>
+            ),
           },
           {
             title: translate('Expiration time'),

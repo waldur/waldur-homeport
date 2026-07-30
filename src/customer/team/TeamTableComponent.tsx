@@ -10,6 +10,7 @@ import { GenericPermission } from '@/permissions/types';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table, { TableColumns } from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
+import { MemberSyncStateIndicator } from '@/user/affiliations/MemberSyncStateIndicator';
 import { RoleField } from '@/user/affiliations/RoleField';
 import { exportRoleField } from '@/user/affiliations/RolePopover';
 
@@ -132,7 +133,13 @@ export const TeamTableComponent = <
             <span className="d-inline-flex align-items-center gap-2 flex-wrap">
               {Array.isArray(roles) && roles.length > 0 ? (
                 roles.map((grant) => (
-                  <RoleField key={grant.role_uuid} row={grant} />
+                  <span
+                    key={grant.role_uuid}
+                    className="d-inline-flex align-items-center gap-1"
+                  >
+                    <RoleField row={grant} />
+                    <MemberSyncStateIndicator grant={grant} />
+                  </span>
                 ))
               ) : (
                 <RoleField row={row} />
