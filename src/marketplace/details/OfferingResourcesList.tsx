@@ -13,6 +13,7 @@ import {
   TABLE_OFFERING_RESOURCE,
 } from '@/marketplace/details/constants';
 import { createFetcher } from '@/table/api';
+import { selectProviderOfferingResourcesFilter } from '@/table/generated/ProviderOfferingResourcesFilter';
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
@@ -33,6 +34,7 @@ interface OwnProps {
 interface FilterValues {
   state?: { value: ResourceState; label: string }[];
   include_terminated?: boolean;
+  runtime_state?: { value: string; label: string };
 }
 
 export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
@@ -42,7 +44,8 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
   const filterValues: FilterValues = values;
 
   const filter = useMemo(() => {
-    const filterObj: MarketplaceProviderResourcesListData['query'] = {};
+    const filterObj: MarketplaceProviderResourcesListData['query'] =
+      selectProviderOfferingResourcesFilter(values);
     if (filterValues?.state) {
       filterObj.state = filterValues.state.map((option) => option.value);
       if (filterValues?.include_terminated) {
@@ -53,11 +56,14 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
         filterObj.state = NON_TERMINATED_STATES;
       }
     }
+    if (filterValues?.runtime_state) {
+      filterObj.runtime_state = filterValues.runtime_state.value;
+    }
     return {
       offering_uuid: props.offering.uuid,
       ...filterObj,
     };
-  }, [props.offering, filterValues]);
+  }, [props.offering, values]);
 
   const tableProps = useTable({
     table: TABLE_OFFERING_RESOURCE,
@@ -73,7 +79,9 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
       {...tableProps}
       formId={FILTER_OFFERING_RESOURCE}
       title={translate('Resources')}
-      columns={getResourceAllListColumns(true, true)}
+      columns={getResourceAllListColumns(true, true, {
+        isOfferingScoped: true,
+      })}
       hasOptionalColumns
       verboseName={translate('offering resources')}
       enableExport={true}
@@ -84,7 +92,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
       rowActions={({ row }) => (
         <ProviderResourceActions resource={row} refetch={tableProps.fetch} />
       )}
-      filters={<OfferingResourcesFilter />}
+      filters={<OfferingResourcesFilter offeringUuid={props.offering.uuid} />}
     />
   );
 };

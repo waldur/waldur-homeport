@@ -557,6 +557,44 @@ overrides:
       extraQuery:
         project_uuid: 'props.project.uuid'
 
+  # Resources of a single offering, shown on the provider offering details page.
+  # The offering itself is fixed by the page, so it is not a filter here; state
+  # and runtime state stay manual because they carry extra behaviour (the
+  # include-terminated default and the dynamic option list respectively).
+  provider_offering_resources:
+    operationId: marketplace_provider_resources_list
+    filters:
+      - customer_uuid
+      - project_uuid
+      - plan_uuid
+      - paused
+      - downscaled
+      - restrict_member_access
+      - created
+      - created_before
+    # The filter names must match the `filter` ids declared on the resource
+    # columns (see getResourceAllListColumns), otherwise the per-cell "Add
+    # filter" button cannot find the filter and is not rendered at all.
+    customer_uuid:
+      label: Client organization
+      name: organization
+    project_uuid:
+      name: project
+      extraQuery:
+        customer: 'props.organizationUuid'
+    plan_uuid:
+      label: Plan
+      name: plan
+      searchParam: false
+      extraQuery:
+        offering_uuid: 'props.offeringUuid'
+    created:
+      label: Created after
+      component: DateField
+    created_before:
+      label: Created before
+      component: DateField
+
   proposal_proposals:
     filters:
       - state
