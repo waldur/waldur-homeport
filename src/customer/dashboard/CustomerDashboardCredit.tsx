@@ -1,6 +1,8 @@
 import { EyeIcon, WarningOctagonIcon } from '@phosphor-icons/react';
+import { DateTime } from 'luxon';
 import { Col } from 'react-bootstrap';
 
+import { formatDate } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -63,7 +65,11 @@ export const CustomerDashboardCredit = ({
           <>
             {chart.title}
             <small className="text-muted fs-7 ms-4 fw-normal">
-              ({translate('Current balance')}: {defaultCurrency(credit.value)})
+              (
+              {translate('{date} balance', {
+                date: formatDate(DateTime.now().startOf('month')),
+              })}
+              : {defaultCurrency(credit.value)})
             </small>
             {credit.allocated_to_projects > Number(credit.value) && (
               <Tip
