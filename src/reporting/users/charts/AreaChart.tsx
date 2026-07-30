@@ -2,7 +2,7 @@ import { EChartsOption, graphic } from 'echarts';
 import React, { useMemo } from 'react';
 
 import { EChart } from '@/core/EChart';
-import { generateBrandColors } from '@/core/generateColors';
+import { generateBrandColors, hexToRgb } from '@/core/generateColors';
 import { getChartBrandColor } from '@/dashboard/constants';
 
 interface AreaChartItem {
@@ -40,7 +40,6 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
           axisPointer: {
             type: 'line',
             lineStyle: {
-              color: 'rgba(0, 0, 0, 0.1)',
               width: 1,
             },
           },
@@ -56,13 +55,7 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
           type: 'category',
           boundaryGap: false,
           data: categories,
-          axisLine: {
-            lineStyle: {
-              color: '#eee',
-            },
-          },
           axisLabel: {
-            color: '#999',
             interval: 'auto',
             rotate: categories.length > 10 ? 45 : 0,
           },
@@ -72,11 +65,7 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
           splitLine: {
             lineStyle: {
               type: 'dashed',
-              color: '#eee',
             },
-          },
-          axisLabel: {
-            color: '#999',
           },
         },
         series: [
@@ -101,7 +90,7 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
                 },
                 {
                   offset: 1,
-                  color: 'rgba(255, 255, 255, 1)',
+                  color: `rgba(${hexToRgb(color)}, 0)`,
                 },
               ]),
               opacity: 0.6,

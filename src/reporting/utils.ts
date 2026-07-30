@@ -103,7 +103,6 @@ export const getUsageLineChartOptions = (
       splitLine: {
         show: true,
         lineStyle: {
-          color: 'rgba(129, 129, 129, 0.3)',
           type: 'solid',
         },
       },
