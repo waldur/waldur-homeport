@@ -12,7 +12,6 @@ import { ResourcesOverTimeChart } from './growth/ResourcesOverTimeChart';
 import { TopOfferingsTable } from './growth/TopOfferingsTable';
 import { TopProvidersTable } from './growth/TopProvidersTable';
 import { UsersOverTimeChart } from './growth/UsersOverTimeChart';
-import { ReportingTitle } from './ReportingTitle';
 import { useGrowthStatistics } from './useGrowthStatistics';
 
 export const GrowthPage: FC = () => {
@@ -23,7 +22,6 @@ export const GrowthPage: FC = () => {
 
   return (
     <>
-      <ReportingTitle reportKey="growth" hideTitle />
       <SummaryWidget
         stats={[
           {
