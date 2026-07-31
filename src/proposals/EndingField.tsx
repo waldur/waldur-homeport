@@ -15,7 +15,11 @@ export const EndingField = ({
     if (!endDate) return {};
     const endDateParsed = parseDate(endDate);
     const diffNowDays = endDateParsed.diffNow().as('days');
-    const textClass = diffNowDays <= 4 ? 'text-danger' : '';
+    // Only an approaching deadline is urgent. Once it passes there is nothing
+    // left to act on, and "Has ended" already says so without flagging an
+    // error on states where ending is a normal outcome, such as an accepted
+    // proposal whose call has closed.
+    const textClass = diffNowDays > 0 && diffNowDays <= 4 ? 'text-danger' : '';
     return {
       text:
         diffNowDays > 0 ? endDateParsed.toRelative() : translate('Has ended'),
