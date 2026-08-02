@@ -181,6 +181,7 @@ Run unit tests:
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
     when: always
+    expire_in: 1 week
     paths:
       - junit.xml
       - coverage/
@@ -380,6 +381,10 @@ Generate Codebase SBOM:
     - echo "SBOM archived. Size:"
     - du -h waldur-homeport-${CI_COMMIT_TAG}-source.cyclonedx.tar.gz
   artifacts:
+    # Tag-scoped SBOM kept longer than the 1 week used elsewhere as release
+    # evidence. Durable copies belong in the package registry, not here — raise
+    # this only against a stated supply-chain retention requirement.
+    expire_in: 90 days
     paths:
       - waldur-homeport-${CI_COMMIT_TAG}-source.cyclonedx.tar.gz
 
