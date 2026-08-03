@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/react';
 
 import { ENV } from './core/config';
 import { generateBrandColors, hexToRgb } from './core/generateColors';
+import { beforeBreadcrumb } from './core/sentry';
 import { getBrandColor } from './core/utils';
 import { LanguageUtilsService } from './i18n/LanguageUtilsService';
 import { getConsent } from './navigation/cookies/CookiesStorage';
@@ -20,6 +21,7 @@ function initSentry() {
       tracesSampleRate:
         ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_TRACES_SAMPLE_RATE || 0.2,
       tracePropagationTargets: [hostname, /^\//],
+      beforeBreadcrumb,
     });
   }
 }
