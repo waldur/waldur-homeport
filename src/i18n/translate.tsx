@@ -73,6 +73,7 @@ const DOMAIN_MESSAGES = {
     'Explore {deployment} Marketplace': translate(
       'Explore {deployment} service catalog',
     ),
+    'Explore marketplace': translate('Explore service catalog'),
     'Go to marketplace': translate('Go to service catalog'),
     'Label that is visible to users in Marketplace.': translate(
       'Label that is visible to users in service catalog.',
@@ -112,6 +113,7 @@ const DOMAIN_MESSAGES = {
     'Explore {deployment} Marketplace': translate(
       'Explore {deployment} service catalog',
     ),
+    'Explore marketplace': translate('Explore service catalog'),
     'Go to marketplace': translate('Go to service catalog'),
     'Label that is visible to users in Marketplace.': translate(
       'Label that is visible to users in service catalog.',
@@ -156,6 +158,7 @@ const DOMAIN_MESSAGES = {
     'Explore {deployment} Marketplace': translate(
       'Explore {deployment} service catalog',
     ),
+    'Explore marketplace': translate('Explore service catalog'),
     'Go to marketplace': translate('Go to service catalog'),
     'Label that is visible to users in Marketplace.': translate(
       'Label that is visible to users in service catalog.',
