@@ -39,7 +39,7 @@ describe('getProtectedFieldProps', () => {
     );
 
     expect(result.tooltip).toBe(
-      'Managed by Tara. Last synced: Jan 1, 2023, 12:00 AM',
+      'Managed by Tara. Last synced: 1 Jan 2023, 12:00 AM',
     );
   });
 
