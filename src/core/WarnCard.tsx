@@ -19,6 +19,7 @@ export const WarnCard: FC<WarnCardProps> = ({
   prominent,
 }) => (
   <Card
+    role="alert"
     className={classNames(
       'card-bordered rounded-3',
       prominent && 'bg-light-warning border-start border-2 border-warning',

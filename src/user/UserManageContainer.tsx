@@ -259,7 +259,12 @@ export const UserManageContainer = ({ isPersonal }) => {
   );
 
   usePermissionView(() => {
-    if (isPersonal && !isValidUser) {
+    // Not before ToS is accepted: the profile form is disabled until then.
+    if (
+      isPersonal &&
+      user?.agreement_date &&
+      profileCompleteness?.is_complete === false
+    ) {
       return {
         permission: 'custom',
         banner: (
@@ -268,7 +273,7 @@ export const UserManageContainer = ({ isPersonal }) => {
       };
     }
     return null;
-  }, [isPersonal, isValidUser, blockedPage]);
+  }, [isPersonal, user, profileCompleteness, blockedPage]);
 
   if (isLoading) {
     return <LoadingSpinner />;
