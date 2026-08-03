@@ -4,6 +4,7 @@ import { client } from 'waldur-js-client/client.gen';
 
 import { localLogout } from '@/auth/authNavigation';
 import { ENV } from '@/core/config';
+import { addApiErrorBreadcrumb } from '@/core/sentry';
 import {
   ImpersonationStorage,
   RedirectStorage,
@@ -162,6 +163,7 @@ export const handleUnauthorizedResponse = (response: Response) => {
 };
 
 client.interceptors.response.use(handleUnauthorizedResponse);
+client.interceptors.response.use(addApiErrorBreadcrumb);
 
 /**
  * Constructs a URL for a specific icon by name.
