@@ -24,7 +24,7 @@ export const PublicCallsPage: FunctionComponent<PublicCallsPageProps> = ({
     <>
       <LandingHeroSection
         header={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-        title={translate('Calls for proposals')}
+        title={translate('All calls')}
         context="calls"
       />
 
