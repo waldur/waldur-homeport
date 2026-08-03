@@ -7,6 +7,7 @@ import {
   ResourceApiKeyStatus,
 } from 'waldur-js-client';
 
+import { formatDateTime } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -37,8 +38,8 @@ const ApiKeyActions: FC<{
   const { openDialog } = useModal();
   const invalidateReveal = useInvalidateRevealedKey();
   const { active: busy } = getStateVariant(row.state);
-  // Only an OK key has a stable value the gateway accepts; the reveal endpoint
-  // rejects anything else, so don't offer reveal until then.
+  // Only an OK key has a value the backend has actually accepted; the reveal
+  // endpoint rejects anything else, so don't offer reveal until then.
   const revealable = row.state === 'OK';
   // Rotating an Erred key re-mints it — surface that as "Retry".
   const isErred = row.state === 'Erred';
@@ -53,8 +54,8 @@ const ApiKeyActions: FC<{
       : {
           title: translate('Rotate API key'),
           body: translate(
-            'Replace the value of API key {name}? Anything using the current value loses access once the new key reaches the gateway. The other keys are unaffected.',
-            { name: <strong>{row.fingerprint}</strong> },
+            'Replace the credentials for API key {name}? Anything still using them will stop working, and the key ID may change too. Your other keys are unaffected, so rotate one at a time to stay online.',
+            { name: <strong>{row.client_id}</strong> },
             formatJsxTemplate,
           ),
           options: { positiveButton: translate('Yes') },
@@ -104,8 +105,11 @@ const ApiKeyActions: FC<{
 
 const getColumns = (): Column<ResourceApiKeyStatus>[] => [
   {
-    title: translate('Key'),
-    render: ({ row }) => <code>{row.fingerprint || '••••••••'}</code>,
+    // The public half of the credential — an S3 access key id for croit, a slot
+    // name for inference keys. Named for what it is, since neither backend's own
+    // term covers the other. Never blank: client_id is half of unique_together.
+    title: translate('Key ID'),
+    render: ({ row }) => <code>{row.client_id}</code>,
   },
   {
     title: translate('State'),
@@ -122,6 +126,14 @@ const getColumns = (): Column<ResourceApiKeyStatus>[] => [
         />
       );
     },
+  },
+  {
+    // Rotation rewrites the row in place, so `modified` is the age of the secret
+    // currently in use — the number that matters for a credential — rather than
+    // the age of the slot holding it.
+    title: translate('Issued'),
+    render: ({ row }) =>
+      row.modified ? <>{formatDateTime(row.modified)}</> : <>&mdash;</>,
   },
 ];
 

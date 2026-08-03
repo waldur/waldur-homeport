@@ -19,5 +19,13 @@ export const ResourceOrderExpandableRow = ({ row }: { row: OrderDetails }) => (
     {row.request_comment ? (
       <Field label={translate('PO reference')} value={row.request_comment} />
     ) : null}
+
+    {/* Without this the row expands to an empty box on exactly the orders
+        someone opens it for, and the reason is only reachable by navigating
+        into the order. Kept per-order rather than on the resource: a resource
+        that failed to terminate four times has four reasons. */}
+    {row.error_message ? (
+      <Field label={translate('Error message')} value={row.error_message} />
+    ) : null}
   </ExpandableContainer>
 );
