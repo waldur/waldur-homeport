@@ -33,17 +33,20 @@ export const parseDate = (value: DateInput) => {
   }
 };
 
+// Date order is pinned, not taken from the locale, which puts the month first
+// in English. Month names and the clock stay localised.
+
 /** @example 2027-02-26 */
 export const formatISODate: DateFormatter = (date) =>
   parseDate(date).toISODate();
 
 /** @example 26 Feb 2027 */
 export const formatDate: DateFormatter = (date) =>
-  parseDate(date).toLocaleString(DateTime.DATE_MED);
+  parseDate(date).toFormat('d LLL yyyy');
 
-/** @example 26 Feb 2027 14:00 */
+/** @example 26 Feb 2027, 14:00 */
 export const formatDateTime: DateFormatter = (date) =>
-  parseDate(date).toLocaleString(DateTime.DATETIME_MED);
+  parseDate(date).toFormat('d LLL yyyy, t');
 
 /** @example 14:21 */
 export const formatTime: DateFormatter = (date) =>
@@ -71,13 +74,17 @@ export const formatRelativeWithHour: DateFormatter = (date) => {
   }
 };
 
-/** @example July 22, 2024 at 2:00:00 PM GMT+2 */
+// MMMM, not LLLL: the format form carries the right grammatical case when the
+// day precedes the month (fi heinäkuuta, ru июля, lt liepos). Identical in
+// English. The abbreviated formatters keep LLL — MMM degrades to a bare number
+// in Finnish and Czech, which is the thing this file exists to avoid.
+/** @example 22 July 2024, 14:00 GMT+2 */
 export const formatMediumDateTime: DateFormatter = (date) =>
-  parseDate(date).toFormat('FFF');
+  parseDate(date).toFormat('d MMMM yyyy, t ZZZZ');
 
-/** @example Jul 7/22/2024, 14:00 */
+/** @example 22 Jul 2024, 14:00 */
 export const formatShortDateTime: DateFormatter = (date) =>
-  parseDate(date).toFormat('MMM D, T');
+  parseDate(date).toFormat('d LLL yyyy, t');
 
 /** @example 2024-07-22T14:00 */
 export const formatISOWithoutZone: DateFormatter = (date) =>
