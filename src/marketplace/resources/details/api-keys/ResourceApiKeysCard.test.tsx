@@ -39,11 +39,18 @@ const RESOURCE = {
 } as any;
 
 const KEYS = [
-  { uuid: 'k1', state: 'OK', fingerprint: 'sk-a...b1', error_message: '' },
+  {
+    uuid: 'k1',
+    state: 'OK',
+    client_id: 'EUMVPW5J5U2ZUQ5AL9L4',
+    modified: '2026-07-30T12:00:00Z',
+    error_message: '',
+  },
   {
     uuid: 'k2',
     state: 'Updating',
-    fingerprint: 'sk-c...d2',
+    client_id: '9LEVW594YBQ97LE4WKNY',
+    modified: '2026-07-30T13:00:00Z',
     error_message: '',
   },
 ];
@@ -96,8 +103,9 @@ describe('ResourceApiKeysCard', () => {
   it('lists the keys with their state via the standard table', async () => {
     vi.mocked(hasPermission).mockReturnValue(true);
     renderCard(KEYS);
-    expect(await screen.findByText('sk-a...b1')).toBeInTheDocument();
-    expect(screen.getByText('sk-c...d2')).toBeInTheDocument();
+    // The id is what a user matches against their own configuration.
+    expect(await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4')).toBeInTheDocument();
+    expect(screen.getByText('9LEVW594YBQ97LE4WKNY')).toBeInTheDocument();
     expect(screen.getByText('OK')).toBeInTheDocument();
     expect(screen.getByText('Updating')).toBeInTheDocument();
   });
@@ -105,7 +113,7 @@ describe('ResourceApiKeysCard', () => {
   it('offers reveal to everyone and rotate to managers, no add or revoke', async () => {
     vi.mocked(hasPermission).mockReturnValue(true);
     renderCard(KEYS);
-    await screen.findByText('sk-a...b1');
+    await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4');
     // The count is fixed at provisioning: rotate re-mints in place, and neither
     // adding nor removing a key is offered.
     expect(
@@ -120,7 +128,7 @@ describe('ResourceApiKeysCard', () => {
   it('offers only reveal without manage permission', async () => {
     vi.mocked(hasPermission).mockReturnValue(false);
     renderCard(KEYS);
-    await screen.findByText('sk-a...b1');
+    await screen.findByText('EUMVPW5J5U2ZUQ5AL9L4');
     await openRowActions(0);
     expect(screen.getByText('Reveal')).toBeInTheDocument();
     expect(screen.queryByText('Rotate')).not.toBeInTheDocument();
