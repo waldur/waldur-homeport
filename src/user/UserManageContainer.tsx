@@ -200,6 +200,9 @@ export const UserManageContainer = ({ isPersonal }) => {
           title: translate('Termination actions'),
           // Staff viewing others: always enabled; otherwise: requires valid user
           disabled: currentUser?.is_staff && !isPersonal ? false : !isValidUser,
+          disabledReason: !user?.agreement_date
+            ? translate('Terms of service not accepted')
+            : translate('Profile is incomplete'),
         },
       ].filter(Boolean),
     [user, currentUser, isValidUser, isPersonal],

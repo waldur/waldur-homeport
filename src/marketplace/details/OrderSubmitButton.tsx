@@ -41,12 +41,13 @@ export const OrderSubmitButton = () => {
     errors?.limits ||
     errors?.plan_entries;
 
+  const isDisabled =
+    Boolean(errorsExist) || formState.invalid || formState.submitting;
+
   const Btn = (
     <SubmitButton
       submitting={formState.submitting}
-      disabled={
-        Boolean(errorsExist) || formState.invalid || formState.submitting
-      }
+      disabled={isDisabled}
       type="submit"
       className="w-100"
       label={translate('Create')}
@@ -57,9 +58,18 @@ export const OrderSubmitButton = () => {
 
   return (
     <FloatingButton>
-      {errorsExist ? (
+      {/* Tied to `isDisabled`, not just `errorsExist`: a missing plan or
+          project disables the button without landing in errorsExist, which
+          left it disabled and silent. */}
+      {isDisabled ? (
         <Tip
-          label={<FieldErrorMessage error={projectError || errors} />}
+          label={
+            formState.submitting ? (
+              translate('Submission in progress')
+            ) : (
+              <FieldErrorMessage error={projectError || errors} />
+            )
+          }
           id="offering-button-errors"
           autoWidth
           className="w-100"

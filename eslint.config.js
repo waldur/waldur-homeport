@@ -136,7 +136,7 @@ export default tseslint
         'waldur-custom/enforce-render-field-or-dash': 'error',
         'waldur-custom/prefer-mutate-over-mutateAsync': 'warn',
         'waldur-custom/no-direct-field-adapter': 'error',
-        'waldur-custom/enforce-disabled-button-tooltip': 'warn',
+        'waldur-custom/enforce-disabled-button-tooltip': 'error',
         'waldur-custom/enforce-noresult-with-cta': 'warn',
 
         // Design system rules

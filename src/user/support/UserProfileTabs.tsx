@@ -79,6 +79,7 @@ interface FieldBuilderContext {
   user: User;
   currentUser: User;
   disabled: boolean;
+  disabledReason?: string;
   isSelf: boolean;
 }
 
@@ -145,6 +146,7 @@ const FieldList = ({
 const buildBasicFields = ({
   user,
   disabled,
+  disabledReason,
   isSelf,
 }: FieldBuilderContext): ProfileField[] => {
   const firstNameProps = getProtectedFieldProps(
@@ -184,7 +186,13 @@ const buildBasicFields = ({
       label: translate('Avatar'),
       enabled: true,
       countable: false,
-      node: <UserEditAvatarFormItem user={user} disabled={disabled} />,
+      node: (
+        <UserEditAvatarFormItem
+          user={user}
+          disabled={disabled}
+          disabledReason={disabledReason}
+        />
+      ),
     },
     {
       name: 'first_name',
@@ -946,12 +954,13 @@ type TabKey =
 interface UserProfileTabsProps {
   user: User;
   disabled?: boolean;
+  disabledReason?: string;
 }
 
 const useProfileTabFields = (
   ctx: FieldBuilderContext,
 ): Record<TabKey, ProfileField[]> => {
-  const { user, currentUser, disabled, isSelf } = ctx;
+  const { user, currentUser, disabled, disabledReason, isSelf } = ctx;
   return useMemo(
     () => ({
       basic: buildBasicFields(ctx),
@@ -962,13 +971,14 @@ const useProfileTabFields = (
       staff: buildStaffFields(ctx),
     }),
     // ctx is rebuilt from these primitives on every render; depend on them.
-    [user, currentUser, disabled, isSelf],
+    [user, currentUser, disabled, disabledReason, isSelf],
   );
 };
 
 export const UserProfileTabs = ({
   user,
   disabled = false,
+  disabledReason,
 }: UserProfileTabsProps) => {
   const currentUser = useUser();
   const { confirm } = useModal();
@@ -980,6 +990,7 @@ export const UserProfileTabs = ({
     user,
     currentUser,
     disabled,
+    disabledReason,
     isSelf,
   });
 
