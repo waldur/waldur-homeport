@@ -85,6 +85,11 @@ export const ProjectsList = () => {
       'customer_uuid',
       'customer_name',
       'customer_display_billing_info_in_projects',
+      // The grid view's ProjectCard always shows a cost estimation row, while
+      // the table column for it only exists when project.estimated_cost is on.
+      // Without this the field is never requested and the card renders a
+      // fabricated 0 instead of the real estimate.
+      'billing_price_estimate',
       'image',
       'grace_period_days',
       'is_in_grace_period',

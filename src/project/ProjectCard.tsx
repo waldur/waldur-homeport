@@ -137,11 +137,11 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
             <>
               <Field
                 label={translate('Cost estimation')}
-                value={defaultCurrency(
-                  (project.billing_price_estimate &&
-                    project.billing_price_estimate.total) ||
-                    0,
-                )}
+                value={
+                  project.billing_price_estimate
+                    ? defaultCurrency(project.billing_price_estimate.total || 0)
+                    : DASH_ESCAPE_CODE
+                }
                 space={2}
                 labelCol={6}
                 valueCol={6}
