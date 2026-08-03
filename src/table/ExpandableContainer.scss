@@ -91,14 +91,16 @@ table .expandable-container {
         thead > tr {
           background-color: var(--bs-gray-100);
 
-          > th.header-actions {
+          > th.header-actions,
+          > th.pinned {
             background-color: var(--bs-gray-100);
           }
         }
         tbody > tr {
           background-color: var(--bs-gray-50);
 
-          > td.row-actions {
+          > td.row-actions,
+          > td.pinned {
             background-color: var(--bs-gray-50);
           }
         }

@@ -7,6 +7,7 @@ import {
   FilterPosition,
   Pagination,
   PinnedColumns,
+  PinnedOffsets,
   Sorting,
   TableProps,
 } from '../types';
@@ -33,6 +34,7 @@ interface TableActions<TData = any> {
   initColumnPositions: (ids: string[]) => void;
   swapColumns: (column1: string, column2: string) => void;
   resetColumns: () => void;
+  toggleColumnPin?: (id: string) => void;
   toggleFilterMenu: (show?: boolean) => void;
   openFiltersDrawer: (filters: ReactNode, formId?: string) => void;
   renderFiltersDrawer: (filters: ReactNode, formId?: string) => void;
@@ -141,6 +143,8 @@ export interface TableContextValue<TData = any> {
   activeColumns: Record<string, string[] | false>;
   columnPositions: string[];
   pinnedColumns: PinnedColumns;
+  /** Sticky insets (px) for pinned columns, keyed by pin key */
+  pinnedOffsets: PinnedOffsets;
 
   // Filters
   filter?: Record<string, any>;

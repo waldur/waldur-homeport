@@ -1,7 +1,7 @@
 import { ReactNode, useMemo, useRef } from 'react';
 
 import { COLUMN_ACTIONS_KEY } from '../constants';
-import { PinnedColumns, TableProps } from '../types';
+import { PinnedColumns, PinnedOffsets, TableProps } from '../types';
 
 import { TableContext, TableContextValue } from './TableContext';
 
@@ -15,6 +15,8 @@ interface TableProviderProps<TData = any> extends TableProps<TData> {
   showFilterMenuToggle: boolean;
   /** Pinned columns state for horizontal scroll handling */
   pinnedColumns: PinnedColumns;
+  /** Sticky insets (px) for pinned columns, keyed by pin key */
+  pinnedOffsets?: PinnedOffsets;
 }
 
 /**
@@ -105,6 +107,7 @@ export function TableProvider<TData = any>({
       activeColumns: props.activeColumns || {},
       columnPositions: props.columnPositions || [],
       pinnedColumns: props.pinnedColumns,
+      pinnedOffsets: props.pinnedOffsets ?? {},
 
       // Filters
       filter: props.filter,
@@ -138,6 +141,7 @@ export function TableProvider<TData = any>({
         initColumnPositions: props.initColumnPositions,
         swapColumns: props.swapColumns,
         resetColumns: props.resetColumns,
+        toggleColumnPin: props.toggleColumnPin,
         toggleFilterMenu: props.toggleFilterMenu,
         openFiltersDrawer: props.openFiltersDrawer,
         renderFiltersDrawer: props.renderFiltersDrawer,
@@ -237,6 +241,7 @@ export function TableProvider<TData = any>({
       props.activeColumns,
       props.columnPositions,
       props.pinnedColumns,
+      props.pinnedOffsets,
       props.filter,
       props.filterPosition,
       props.filtersStorage,
@@ -263,6 +268,7 @@ export function TableProvider<TData = any>({
       props.initColumnPositions,
       props.swapColumns,
       props.resetColumns,
+      props.toggleColumnPin,
       props.toggleFilterMenu,
       props.openFiltersDrawer,
       props.renderFiltersDrawer,

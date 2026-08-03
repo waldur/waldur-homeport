@@ -1,5 +1,16 @@
 @import '@/metronic/sass/core/components/_variables.scss';
 
+// 5px vertical gradient strip marking the edge of a floating (pinned) column.
+@mixin pinned-shadow-strip($gradient) {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 5px;
+  height: 100%;
+  background: $gradient;
+}
+
 /* TABLE */
 .table {
   &:not(.h-auto) {
@@ -33,11 +44,20 @@
           color: $brand;
         }
       }
-      &.filter-column > button {
+      &.filter-column .th-main > button,
+      &.filter-column .th-main > .th-wrapper > button {
         &:hover svg {
           color: $gray-500;
         }
         &.show svg {
+          color: $brand;
+        }
+      }
+      .pin-toggle {
+        &:hover svg {
+          color: $gray-500;
+        }
+        &.active svg {
           color: $brand;
         }
       }
@@ -203,26 +223,51 @@
   th.pinned,
   td.pinned {
     position: sticky;
-    right: 0;
     z-index: 2;
     background-color: $bg-secondary;
+  }
+  // `td.has-filter` sets position: relative with a higher-specificity
+  // selector, which would turn the sticky insets into a literal offset from
+  // the cell's normal position. Pinned always stays sticky.
+  tbody > tr > td.pinned {
+    position: sticky;
+  }
+  th.pinned-end,
+  td.pinned-end {
+    right: 0;
   }
   td.pinned {
     background-color: $card-bg;
   }
   th.is-floating,
   td.is-floating {
-    &.pinned::before {
-      content: ' ';
-      position: absolute;
+    &.pinned-end::before {
+      @include pinned-shadow-strip(
+        linear-gradient(-90deg, rgba(0, 0, 0, 0.1), transparent)
+      );
       left: 0;
-      top: 0;
-      display: block;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1), transparent);
       margin-left: -5px;
     }
+  }
+  // Floating shadows at the boundaries of the pinned group: `shadow-end` on
+  // the cell stuck at the left edge (content slides under its right side),
+  // `shadow-start` on the cell stuck at the right edge. Same gradient as the
+  // actions column's shadow, but painted just inside the cell edge — body
+  // cells clip protruding pseudo content (ellipsis overflow hidden), and
+  // box-shadow is not rendered on cells of border-collapsed tables.
+  th.shadow-end::before,
+  td.shadow-end::before {
+    @include pinned-shadow-strip(
+      linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1))
+    );
+    right: 0;
+  }
+  th.shadow-start::before,
+  td.shadow-start::before {
+    @include pinned-shadow-strip(
+      linear-gradient(-90deg, transparent, rgba(0, 0, 0, 0.1))
+    );
+    left: 0;
   }
 }
 

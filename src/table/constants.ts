@@ -33,4 +33,5 @@ export const INITIAL_STATE: TableState = {
   firstFetch: true,
   activeColumns: {},
   columnPositions: [],
+  pinnedColumnKeys: [],
 };

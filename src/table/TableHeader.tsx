@@ -1,15 +1,22 @@
-import { CaretDownIcon } from '@phosphor-icons/react';
+import { CaretDownIcon, PushPinIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
+import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFiltersMenu } from './TableFiltersMenu';
-import { TableProps, Column, Sorting, PinnedColumns } from './types';
-import { getId } from './utils';
+import {
+  TableProps,
+  Column,
+  Sorting,
+  PinnedColumns,
+  PinnedOffsets,
+} from './types';
+import { getColumnPinKey, getId } from './utils';
 
 import './TableHeader.scss';
 
@@ -37,6 +44,8 @@ interface TableHeaderProps {
   equalColWidth?: boolean;
   toggleFilterMenu(show?): void;
   pinnedColumns?: PinnedColumns;
+  pinnedOffsets?: PinnedOffsets;
+  toggleColumnPin?(id: string): void;
 }
 
 function renderSortingIcon(
@@ -100,6 +109,11 @@ const TableTh = ({
   toggleAll,
   hasLeadingCheckbox,
   style,
+  pinKey,
+  pinned,
+  shadow,
+  pinOffset,
+  onTogglePin,
 }) => (
   <th
     className={
@@ -107,68 +121,102 @@ const TableTh = ({
         column.orderField && 'sorting-column',
         column.filter && filters && 'filter-column',
         isFirstDataColumn && expandableRow && 'first-expandable-column',
+        pinned && 'pinned pinned-start',
+        pinned && shadow === 'end' && 'shadow-end',
+        pinned && shadow === 'start' && 'shadow-start',
       ) || undefined
     }
-    style={style}
+    style={
+      pinned && pinOffset
+        ? { ...style, left: pinOffset.left, right: pinOffset.right }
+        : style
+    }
+    data-pin-key={pinKey}
   >
-    {WithThMeta(
-      <>
-        <span
-          className={
-            isFirstDataColumn && expandableRow
-              ? 'cell-with-expander-header'
-              : undefined
-          }
-          style={
-            isFirstDataColumn && expandableRow
-              ? {
-                  paddingLeft: hasLeadingCheckbox ? 12 : 16,
-                  paddingRight: 16,
-                }
-              : undefined
-          }
-        >
-          {isFirstDataColumn && expandableRow && !hideExpandToggle && (
+    <div className="th-content">
+      <div className="th-main">
+        {WithThMeta(
+          <>
             <span
-              className={classNames(
-                'all-rows-expander',
-                toggledAll ? 'active' : '',
-              )}
-              role="button"
-              tabIndex={0}
-              aria-label={
-                toggledAll
-                  ? translate('Collapse all rows')
-                  : translate('Expand all rows')
+              className={
+                isFirstDataColumn && expandableRow
+                  ? 'cell-with-expander-header'
+                  : undefined
               }
-              onClick={toggleAll}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  toggleAll();
-                }
-              }}
+              style={
+                isFirstDataColumn && expandableRow
+                  ? {
+                      paddingLeft: hasLeadingCheckbox ? 12 : 16,
+                      paddingRight: 16,
+                    }
+                  : undefined
+              }
             >
-              <CaretDownIcon size={20} weight="bold" className="rotate-180" />
+              {isFirstDataColumn && expandableRow && !hideExpandToggle && (
+                <span
+                  className={classNames(
+                    'all-rows-expander',
+                    toggledAll ? 'active' : '',
+                  )}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={
+                    toggledAll
+                      ? translate('Collapse all rows')
+                      : translate('Expand all rows')
+                  }
+                  onClick={toggleAll}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      toggleAll();
+                    }
+                  }}
+                >
+                  <CaretDownIcon
+                    size={20}
+                    weight="bold"
+                    className="rotate-180"
+                  />
+                </span>
+              )}
+              {column.title}
+              {renderSortingIcon(column, currentSorting, onSortClick)}
             </span>
-          )}
-          {column.title}
-          {renderSortingIcon(column, currentSorting, onSortClick)}
-        </span>
-        {column.filter && filters && (
-          <TableFiltersMenu
-            filters={filters}
-            filterPosition="menu"
-            filtersStorage={filtersStorage}
-            setFilter={setFilter}
-            applyFiltersFn={applyFiltersFn}
-            openName={column.filter}
-            toggleFilterMenu={toggleFilterMenu}
-          />
+            {column.filter && filters && (
+              <TableFiltersMenu
+                filters={filters}
+                filterPosition="menu"
+                filtersStorage={filtersStorage}
+                setFilter={setFilter}
+                applyFiltersFn={applyFiltersFn}
+                openName={column.filter}
+                toggleFilterMenu={toggleFilterMenu}
+              />
+            )}
+          </>,
+          column.meta,
         )}
-      </>,
-      column.meta,
-    )}
+      </div>
+      {onTogglePin && (
+        <button
+          type="button"
+          className={classNames('text-btn pin-toggle', pinned && 'active')}
+          data-testid={`pin-toggle-${pinKey}`}
+          aria-label={
+            pinned ? translate('Unpin column') : translate('Pin column')
+          }
+          onClick={() => onTogglePin(pinKey)}
+        >
+          <Tip
+            id={`tip-pin-${pinKey}`}
+            label={pinned ? translate('Unpin column') : translate('Pin column')}
+          >
+            <PushPinIcon size={16} weight={pinned ? 'fill' : 'bold'} />
+          </Tip>
+        </button>
+      )}
+    </div>
   </th>
 );
 
@@ -195,6 +243,8 @@ export const TableHeader: FC<TableHeaderProps> = ({
   equalColWidth,
   toggleFilterMenu,
   pinnedColumns = {},
+  pinnedOffsets = {},
+  toggleColumnPin,
 }) => {
   const isAllSelected = selectedRows?.length >= rows?.length;
 
@@ -323,6 +373,11 @@ export const TableHeader: FC<TableHeaderProps> = ({
                         toggledAll={toggledAll}
                         toggleAll={toggleAll}
                         hasLeadingCheckbox={hasLeadingCheckbox}
+                        pinKey={id}
+                        pinned={id in pinnedColumns}
+                        shadow={pinnedColumns[id]}
+                        pinOffset={pinnedOffsets[id]}
+                        onTogglePin={toggleColumnPin}
                         style={
                           expandableRow && index === firstVisibleDataIndex
                             ? { paddingLeft: 0, paddingRight: 0 }
@@ -331,38 +386,46 @@ export const TableHeader: FC<TableHeaderProps> = ({
                       />
                     ),
                 )
-            : columns.map(
-                (column, index) =>
-                  (column.visible ?? true) && (
-                    <TableTh
-                      key={index}
-                      column={column}
-                      onSortClick={onSortClick}
-                      currentSorting={currentSorting}
-                      filters={filters}
-                      filtersStorage={filtersStorage}
-                      setFilter={setFilter}
-                      applyFiltersFn={applyFiltersFn}
-                      toggleFilterMenu={toggleFilterMenu}
-                      isFirstDataColumn={index === firstVisibleDataIndex}
-                      expandableRow={expandableRow}
-                      hideExpandToggle={hideExpandToggle}
-                      toggledAll={toggledAll}
-                      toggleAll={toggleAll}
-                      hasLeadingCheckbox={hasLeadingCheckbox}
-                      style={
-                        expandableRow && index === firstVisibleDataIndex
-                          ? { paddingLeft: 0, paddingRight: 0 }
-                          : undefined
-                      }
-                    />
-                  ),
-              )}
+            : columns.map((column, index) => {
+                if (!(column.visible ?? true)) {
+                  return false;
+                }
+                const pinKey = getColumnPinKey(column, index);
+                return (
+                  <TableTh
+                    key={index}
+                    column={column}
+                    onSortClick={onSortClick}
+                    currentSorting={currentSorting}
+                    filters={filters}
+                    filtersStorage={filtersStorage}
+                    setFilter={setFilter}
+                    applyFiltersFn={applyFiltersFn}
+                    toggleFilterMenu={toggleFilterMenu}
+                    isFirstDataColumn={index === firstVisibleDataIndex}
+                    expandableRow={expandableRow}
+                    hideExpandToggle={hideExpandToggle}
+                    toggledAll={toggledAll}
+                    toggleAll={toggleAll}
+                    hasLeadingCheckbox={hasLeadingCheckbox}
+                    pinKey={pinKey}
+                    pinned={pinKey in pinnedColumns}
+                    shadow={pinnedColumns[pinKey]}
+                    pinOffset={pinnedOffsets[pinKey]}
+                    onTogglePin={toggleColumnPin}
+                    style={
+                      expandableRow && index === firstVisibleDataIndex
+                        ? { paddingLeft: 0, paddingRight: 0 }
+                        : undefined
+                    }
+                  />
+                );
+              })}
           {showActions ? (
             <th
               className={classNames(
                 'header-actions',
-                COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned',
+                COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned pinned-end',
                 pinnedColumns[COLUMN_ACTIONS_KEY] && 'is-floating',
               )}
             >
