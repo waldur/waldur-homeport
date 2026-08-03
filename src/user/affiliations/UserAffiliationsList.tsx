@@ -171,7 +171,7 @@ export const UserAffiliationsList: FunctionComponent<
             label={row.customer_name}
           />
         ) : (
-          <>N/A</>
+          <>{DASH_ESCAPE_CODE}</>
         ),
     },
     {
