@@ -29,6 +29,7 @@ export const createMockTableContext = (
   activeColumns: {},
   columnPositions: [],
   pinnedColumns: {},
+  pinnedOffsets: {},
   filterPosition: 'menu',
   filtersStorage: [],
   showFilterMenuToggle: false,

@@ -23,16 +23,36 @@
   padding-right: 0 !important;
 }
 
-.filter-column > button,
-.filter-column > .th-wrapper > button {
+.filter-column .th-main > button,
+.filter-column .th-main > .th-wrapper > button {
   margin-left: 4px;
 }
 
-.sorting-column > span,
-.sorting-column > .th-wrapper > span {
+.sorting-column .th-main > span,
+.sorting-column .th-main > .th-wrapper > span {
   vertical-align: middle;
 
   .sorting-buttons {
     margin-left: 4px;
+  }
+}
+
+// Header cell layout: title/sorting/filter on the left, pin toggle on the right.
+.th-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 4px;
+
+  .th-main {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .pin-toggle {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
   }
 }

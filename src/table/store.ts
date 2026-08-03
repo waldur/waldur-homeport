@@ -312,11 +312,22 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
       };
     }
 
+    case actions.TOGGLE_COLUMN_PIN: {
+      const current = state.pinnedColumnKeys || [];
+      return {
+        ...state,
+        pinnedColumnKeys: current.includes(action.payload.id)
+          ? current.filter((key) => key !== action.payload.id)
+          : [...current, action.payload.id],
+      };
+    }
+
     case actions.RESET_COLUMNS:
       return {
         ...state,
         activeColumns: {},
         columnPositions: [],
+        pinnedColumnKeys: [],
       };
 
     default:

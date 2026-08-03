@@ -8,13 +8,13 @@ Waldur Homeport tables support standard rendering styles, layouts, and display o
 
 Apply standard CSS class strings to target table wrapper elements:
 
-| Prop/Location | Type | Description |
-|---|---|---|
-| `className` (Column) | `string` | Applied directly to `<td>` tags in that column (e.g. `'text-end'`). |
-| `headerClassName` (Column) | `string` | Applied directly to column title `<th>` tags. |
-| `headerClassName` (Table) | `string` | Applied to the Card Header toolbar wrapper. |
-| `titleClassName` (Table) | `string` | Applied to the card title element. |
-| `bodyClassName` (Table) | `string` | Applied to the main `Card.Body` wrapper. |
+| Prop/Location              | Type     | Description                                                         |
+| -------------------------- | -------- | ------------------------------------------------------------------- |
+| `className` (Column)       | `string` | Applied directly to `<td>` tags in that column (e.g. `'text-end'`). |
+| `headerClassName` (Column) | `string` | Applied directly to column title `<th>` tags.                       |
+| `headerClassName` (Table)  | `string` | Applied to the Card Header toolbar wrapper.                         |
+| `titleClassName` (Table)   | `string` | Applied to the card title element.                                  |
+| `bodyClassName` (Table)    | `string` | Applied to the main `Card.Body` wrapper.                            |
 
 ---
 
@@ -99,8 +99,12 @@ For list actions that affect the table globally, instead of using `tableActions`
   {...tableProps}
   dropdownActions={
     <>
-      <DropdownItem onClick={handleBulkImport}>{translate('Import from file')}</DropdownItem>
-      <DropdownItem onClick={handleDeleteAll}>{translate('Clear list')}</DropdownItem>
+      <DropdownItem onClick={handleBulkImport}>
+        {translate('Import from file')}
+      </DropdownItem>
+      <DropdownItem onClick={handleDeleteAll}>
+        {translate('Clear list')}
+      </DropdownItem>
     </>
   }
 />
@@ -132,3 +136,14 @@ Customize empty/error displays:
 - **`placeholderComponent`**: React Node rendering a custom blank slate instead of the default icon/text.
 - **`placeholderActions`**: Action buttons rendered below the placeholder.
 - **`placeholderHasRetry`**: Defaults to `true` (renders a retry link on error). Set to `false` to hide the link.
+
+---
+
+## Column Pinning
+
+Every data column header renders a pin toggle (`PushPinIcon`). Pinning makes the column sticky while scrolling horizontally, the way the actions column is pinned to the right by default — no per-column configuration is needed.
+
+- Pinned columns clamp to the **left edge** once scrolled past, clamp to the **right edge** (stacking before the actions column) while their natural position is off-screen, and sit in their normal flow in between — so a pinned column is always visible.
+- Multiple pins stack in column order on both edges. A vertical gradient marks the boundary of a floating group (rightmost cell of a left-stuck group, leftmost cell of a right-stuck group), matching the actions column's shadow.
+- Pin state lives in the per-table Redux state (`pinnedColumnKeys`, toggled via `TOGGLE_COLUMN_PIN`), is session-only, and is cleared by the column-settings **Reset** button.
+- Sticky offsets are measured from the rendered header cells of the table's own `<thead>` (nested tables in expanded rows are excluded), and recomputed on pin/visibility/order changes and table resizes.

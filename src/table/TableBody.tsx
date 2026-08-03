@@ -24,8 +24,8 @@ import { MenuComponent } from '@/metronic/components';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFilterContext } from './FilterContextProvider';
-import { Column, PinnedColumns, TableProps } from './types';
-import { getId } from './utils';
+import { Column, PinnedColumns, PinnedOffsets, TableProps } from './types';
+import { getColumnPinKey, getId } from './utils';
 
 interface TableBodyProps extends Pick<
   TableProps,
@@ -52,6 +52,7 @@ interface TableBodyProps extends Pick<
   | 'isRowExpandable'
 > {
   pinnedColumns?: PinnedColumns;
+  pinnedOffsets?: PinnedOffsets;
 }
 
 interface TableCellsProps {
@@ -60,6 +61,8 @@ interface TableCellsProps {
   columnsMap: Record<string, Column>;
   columnPositions: TableProps['columnPositions'];
   hasOptionalColumns: TableProps['hasOptionalColumns'];
+  pinnedColumns: PinnedColumns;
+  pinnedOffsets: PinnedOffsets;
   expander?: {
     canExpand: boolean;
     isExpanded: boolean;
@@ -160,6 +163,9 @@ const TableCell = memo(
     isFirstColumn,
     expander,
     hasLeadingCheckbox,
+    pinned,
+    shadow,
+    pinOffset,
   }: {
     column: Column;
     row;
@@ -169,6 +175,9 @@ const TableCell = memo(
       isExpanded: boolean;
     };
     hasLeadingCheckbox?: boolean;
+    pinned?: boolean;
+    shadow?: boolean | 'start' | 'end';
+    pinOffset?: { left: number; right: number };
   }) => {
     // Skip rendering if column is not visible
     if (column.visible === false) {
@@ -194,7 +203,14 @@ const TableCell = memo(
       column.className,
       column.inlineFilter && 'has-filter',
       ellipsisEnabled && 'ellipsis',
+      pinned && 'pinned pinned-start',
+      pinned && shadow === 'end' && 'shadow-end',
+      pinned && shadow === 'start' && 'shadow-start',
     );
+    const pinStyle =
+      pinned && pinOffset
+        ? { left: pinOffset.left, right: pinOffset.right }
+        : undefined;
     const onCellMouseEnter = ellipsisEnabled
       ? showTruncationTooltip
       : undefined;
@@ -229,7 +245,7 @@ const TableCell = memo(
           className={cellClassName}
           onClick={handleClick}
           onMouseEnter={onCellMouseEnter}
-          style={{ paddingLeft: 0, paddingRight: 0 }}
+          style={{ paddingLeft: 0, paddingRight: 0, ...pinStyle }}
         >
           <div
             style={{
@@ -259,6 +275,7 @@ const TableCell = memo(
         className={cellClassName}
         onClick={handleClick}
         onMouseEnter={onCellMouseEnter}
+        style={pinStyle}
       >
         {content}
       </td>
@@ -275,6 +292,8 @@ const TableCells = memo(
     columnsMap,
     columnPositions,
     hasOptionalColumns,
+    pinnedColumns,
+    pinnedOffsets,
     expander,
     hasLeadingCheckbox,
   }: TableCellsProps) => {
@@ -297,20 +316,29 @@ const TableCells = memo(
                     isFirstColumn={index === firstVisibleIndex}
                     expander={expander}
                     hasLeadingCheckbox={hasLeadingCheckbox}
+                    pinned={id in pinnedColumns}
+                    shadow={pinnedColumns[id]}
+                    pinOffset={pinnedOffsets[id]}
                   />
                 </Fragment>
               ))
-          : columns.map((column, colIndex) => (
-              <Fragment key={colIndex}>
-                <TableCell
-                  column={column}
-                  row={row}
-                  isFirstColumn={colIndex === firstVisibleIndex}
-                  expander={expander}
-                  hasLeadingCheckbox={hasLeadingCheckbox}
-                />
-              </Fragment>
-            ))}
+          : columns.map((column, colIndex) => {
+              const pinKey = getColumnPinKey(column, colIndex);
+              return (
+                <Fragment key={colIndex}>
+                  <TableCell
+                    column={column}
+                    row={row}
+                    isFirstColumn={colIndex === firstVisibleIndex}
+                    expander={expander}
+                    hasLeadingCheckbox={hasLeadingCheckbox}
+                    pinned={pinKey in pinnedColumns}
+                    shadow={pinnedColumns[pinKey]}
+                    pinOffset={pinnedOffsets[pinKey]}
+                  />
+                </Fragment>
+              );
+            })}
       </>
     );
   },
@@ -336,6 +364,7 @@ interface TableRowProps {
   columnPositions: TableProps['columnPositions'];
   hasOptionalColumns: TableProps['hasOptionalColumns'];
   pinnedColumns: PinnedColumns;
+  pinnedOffsets: PinnedOffsets;
   onRowClick: (row, index: number) => void;
   onChangeField: (row, input) => void;
   fieldProps?: { input; meta };
@@ -362,6 +391,7 @@ const TableRow = memo<TableRowProps>(
     columnPositions,
     hasOptionalColumns,
     pinnedColumns,
+    pinnedOffsets,
     onRowClick,
     onChangeField,
     fieldProps,
@@ -482,6 +512,8 @@ const TableRow = memo<TableRowProps>(
           columnsMap={columnsMap}
           columnPositions={columnPositions}
           hasOptionalColumns={hasOptionalColumns}
+          pinnedColumns={pinnedColumns}
+          pinnedOffsets={pinnedOffsets}
           expander={
             expandableRow
               ? {
@@ -497,7 +529,7 @@ const TableRow = memo<TableRowProps>(
           <td
             className={classNames(
               'row-actions',
-              COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned',
+              COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned pinned-end',
               pinnedColumns[COLUMN_ACTIONS_KEY] && 'is-floating',
             )}
             onClick={(e) => e.stopPropagation()}
@@ -580,6 +612,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     columnPositions,
     hasOptionalColumns,
     pinnedColumns = {},
+    pinnedOffsets = {},
     isRowExpandable,
   }) => {
     const columnsMap = useMemo(
@@ -652,6 +685,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           columnPositions={columnPositions}
           hasOptionalColumns={hasOptionalColumns}
           pinnedColumns={pinnedColumns}
+          pinnedOffsets={pinnedOffsets}
           onRowClick={onRowClick}
           onChangeField={onChangeField}
           fieldProps={fieldProps}
@@ -677,6 +711,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
         columnPositions,
         hasOptionalColumns,
         pinnedColumns,
+        pinnedOffsets,
         onRowClick,
         onChangeField,
       ],

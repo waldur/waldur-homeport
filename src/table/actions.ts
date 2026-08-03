@@ -28,6 +28,7 @@ export const TOGGLE_COLUMN = 'waldur/table/TOGGLE_COLUMN';
 export const RESET_COLUMNS = 'waldur/table/RESET_COLUMNS';
 export const INIT_COLUMN_POSITIONS = 'waldur/table/INIT_COLUMN_POSITIONS';
 export const SWAP_COLUMNS = 'waldur/table/SWAP_COLUMNS';
+export const TOGGLE_COLUMN_PIN = 'waldur/table/TOGGLE_COLUMN_PIN';
 export const CLEAR_ALL_FILTERS = 'waldur/table/CLEAR_ALL_FILTERS';
 export const REGISTER_FILTER_NAME = 'waldur/table/REGISTER_FILTER_NAME';
 export const CLEAR_REGISTERED_FILTER_NAMES =
@@ -230,6 +231,14 @@ export const swapColumns = (
     table,
     column1,
     column2,
+  },
+});
+
+export const toggleColumnPin = (table: string, id: string) => ({
+  type: TOGGLE_COLUMN_PIN,
+  payload: {
+    table,
+    id,
   },
 });
 

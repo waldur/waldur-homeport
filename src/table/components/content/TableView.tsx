@@ -21,6 +21,7 @@ export function TableView() {
     selectedRows,
     toggled,
     pinnedColumns,
+    pinnedOffsets,
     columnPositions,
     filtersStorage,
     display,
@@ -66,6 +67,8 @@ export function TableView() {
           hasOptionalColumns={config.hasOptionalColumns}
           toggleFilterMenu={actions.toggleFilterMenu}
           pinnedColumns={pinnedColumns}
+          pinnedOffsets={pinnedOffsets}
+          toggleColumnPin={actions.toggleColumnPin}
           equalColWidth={config.equalColWidth}
         />
       )}
@@ -92,6 +95,7 @@ export function TableView() {
         columnPositions={columnPositions}
         hasOptionalColumns={config.hasOptionalColumns}
         pinnedColumns={pinnedColumns}
+        pinnedOffsets={pinnedOffsets}
       />
     </table>
   );

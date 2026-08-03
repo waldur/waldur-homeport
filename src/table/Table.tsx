@@ -24,7 +24,8 @@ import { TableFilters } from './TableFilters';
 import { TablePagination } from './TablePagination';
 import { TableRefreshButton } from './TableRefreshButton';
 import { TableTabs } from './TableTabs';
-import { Column, PinnedColumns, TableProps } from './types';
+import { Column, PinnedColumns, PinnedOffsets, TableProps } from './types';
+import { computePinnedOffsets, computePinnedShadows } from './utils';
 
 import './Table.scss';
 
@@ -56,9 +57,26 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
   const [closedHiddenActionsMessage, setClosedHiddenActionsMessage] =
     useState(false);
   const [showFilterMenuToggle, setShowFilterMenuToggle] = useState(false);
-  const [pinnedColumns, setPinnedColumns] = useState<PinnedColumns>({
-    [COLUMN_ACTIONS_KEY]: false,
-  });
+  const [actionsFloating, setActionsFloating] = useState(false);
+  const [pinnedOffsets, setPinnedOffsets] = useState<PinnedOffsets>({});
+  const [pinnedShadows, setPinnedShadows] = useState<
+    Record<string, 'start' | 'end'>
+  >({});
+
+  const pinnedColumnKeys = props.pinnedColumnKeys;
+
+  // Geometry of the pinned header cells (natural x within the table, width,
+  // sticky insets), captured at measurement time and read on scroll to derive
+  // which cells are stuck to an edge.
+  const pinnedCellsRef = useRef<
+    Array<{
+      key: string;
+      x: number;
+      width: number;
+      left: number;
+      right: number;
+    }>
+  >([]);
 
   // Refs
   const tableResponsiveRef = useRef<HTMLDivElement>(null);
@@ -94,17 +112,16 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
       const tableWidth =
         tableEl.getBoundingClientRect()?.width || responsiveEl.clientWidth;
 
-      const actionsIsFloating =
-        responsiveWidth + responsiveEl.scrollLeft < tableWidth - 4;
-
-      setPinnedColumns((prev) => {
-        if (prev[COLUMN_ACTIONS_KEY] !== actionsIsFloating) {
-          return {
-            ...prev,
-            [COLUMN_ACTIONS_KEY]: actionsIsFloating,
-          };
-        }
-        return prev;
+      setActionsFloating(
+        responsiveWidth + responsiveEl.scrollLeft < tableWidth - 4,
+      );
+      setPinnedShadows((prev) => {
+        const next = computePinnedShadows(
+          pinnedCellsRef.current,
+          responsiveEl.scrollLeft,
+          responsiveEl.clientWidth,
+        );
+        return isEqual(prev, next) ? prev : next;
       });
     },
     [],
@@ -118,6 +135,88 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
       timeoutId = setTimeout(() => handleHorizontalScroll(event), 10);
     };
   }, [handleHorizontalScroll]);
+
+  // Measure rendered header cell widths to derive the sticky insets of pinned
+  // columns. DOM order is the source of truth for column order. The first
+  // `table` under the wrapper is this table itself (nested tables live inside
+  // its tbody), and the direct-child scoping below keeps header cells of
+  // nested tables — which may reuse the same column ids — out of the
+  // measurement.
+  const recomputePinnedOffsets = useCallback(() => {
+    const tableEl = tableResponsiveRef.current?.querySelector('table');
+    const headerCells = tableEl?.querySelectorAll<HTMLElement>(
+      ':scope > thead > tr > *',
+    );
+    // Natural x = cumulative width of the preceding header cells. Computed
+    // from widths rather than offsetLeft because a stuck sticky cell reports
+    // its displaced position, which would corrupt the geometry.
+    const cells: Array<{ key: string; x: number; width: number }> = [];
+    let acc = 0;
+    Array.from(headerCells || []).forEach((el) => {
+      const width = el.getBoundingClientRect().width;
+      if (el.dataset.pinKey) {
+        cells.push({ key: el.dataset.pinKey, x: acc, width });
+      }
+      acc += width;
+    });
+    // Right-stuck pinned columns stack just before the right-pinned actions
+    // column, so its width is the base of every `right` inset.
+    const actionsTh = tableEl?.querySelector<HTMLElement>(
+      ':scope > thead > tr > th.header-actions',
+    );
+    const offsets = computePinnedOffsets(
+      cells,
+      pinnedColumnKeys || [],
+      actionsTh ? actionsTh.getBoundingClientRect().width : 0,
+    );
+    pinnedCellsRef.current = cells
+      .filter((cell) => offsets[cell.key])
+      .map((cell) => ({ ...cell, ...offsets[cell.key] }));
+    setPinnedOffsets((prev) => (isEqual(prev, offsets) ? prev : offsets));
+    // Re-derive the stuck state from the fresh geometry.
+    if (tableResponsiveRef.current) {
+      const { scrollLeft, clientWidth } = tableResponsiveRef.current;
+      setPinnedShadows((prev) => {
+        const next = computePinnedShadows(
+          pinnedCellsRef.current,
+          scrollLeft,
+          clientWidth,
+        );
+        return isEqual(prev, next) ? prev : next;
+      });
+    }
+  }, [pinnedColumnKeys]);
+
+  useEffect(() => {
+    recomputePinnedOffsets();
+    const tableEl = tableResponsiveRef.current?.querySelector('table');
+    if (!tableEl || typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(() => recomputePinnedOffsets());
+    observer.observe(tableEl);
+    return () => observer.disconnect();
+  }, [
+    recomputePinnedOffsets,
+    props.rows,
+    props.activeColumns,
+    props.columnPositions,
+    props.mode,
+  ]);
+
+  // Merged pin record consumed by header/body cells: key present = pinned;
+  // the value marks the edge of the floating shadow (see PinnedColumns).
+  // When data columns are stuck at the right edge they form one floating
+  // group with the actions column — the group's left-boundary shadow (on its
+  // leftmost cell) replaces the actions column's own shadow.
+  const pinnedColumns = useMemo<PinnedColumns>(() => {
+    const hasRightStuckGroup = Object.values(pinnedShadows).includes('start');
+    const merged: PinnedColumns = {
+      [COLUMN_ACTIONS_KEY]: actionsFloating && !hasRightStuckGroup,
+    };
+    Object.keys(pinnedOffsets).forEach((key) => {
+      merged[key] = pinnedShadows[key] ?? false;
+    });
+    return merged;
+  }, [actionsFloating, pinnedOffsets, pinnedShadows]);
 
   // Track whether we've applied the initial mode resolver
   const initialModeResolvedRef = useRef(false);
@@ -250,6 +349,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
         toggleFilterMenu={toggleFilterMenu}
         showFilterMenuToggle={showFilterMenuToggle}
         pinnedColumns={pinnedColumns}
+        pinnedOffsets={pinnedOffsets}
       >
         {/* Standalone header */}
         {props.standalone && (

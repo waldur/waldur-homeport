@@ -95,7 +95,16 @@ export type DisplayMode = 'table' | 'grid';
 
 export type FilterPosition = 'menu' | 'sidebar' | 'header';
 
-export type PinnedColumns = Record<string, boolean>;
+/** Key present = column is pinned. For the actions column the value is the
+ * classic is-floating boolean. For data columns the value carries the edge of
+ * the floating shadow: 'end' while the cell is stuck at the left edge (content
+ * slides under its right side), 'start' while stuck at the right edge. */
+export type PinnedColumns = Record<string, boolean | 'start' | 'end'>;
+
+/** Sticky insets (px) per pinned column key. `left` pins the column at the
+ * left edge when scrolled past it; `right` pins it at the right edge (before
+ * the actions column) while its natural position is off-screen. */
+export type PinnedOffsets = Record<string, { left: number; right: number }>;
 
 export interface Pagination {
   resultCount: number;
@@ -137,6 +146,8 @@ export interface TableState {
   firstFetch?: boolean;
   activeColumns: Record<string, string[] | false>;
   columnPositions: string[];
+  /** Ids of columns pinned (sticky) to the left edge. Session-only. */
+  pinnedColumnKeys?: string[];
 }
 
 export interface Sorting {
@@ -275,6 +286,7 @@ export interface TableProps<RowType = any> extends TableState {
   initColumnPositions?(ids: string[]): void;
   swapColumns?(column1: string, column2: string): void;
   resetColumns?(): void;
+  toggleColumnPin?(id: string): void;
   initialMode?: 'grid' | 'table';
   /** Function to determine initial display mode based on result count.
    * Called after first data fetch. Takes precedence over initialMode when provided. */

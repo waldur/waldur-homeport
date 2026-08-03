@@ -34,6 +34,7 @@ describe('Table reducer', () => {
       activeColumns: {},
       applyFilters: false,
       columnPositions: [],
+      pinnedColumnKeys: [],
       selectedRows: [],
       firstFetch: true,
     });
