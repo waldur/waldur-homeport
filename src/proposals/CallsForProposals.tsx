@@ -39,7 +39,7 @@ export const CallsForProposals: FunctionComponent = () => {
             state="calls-for-proposals-all-calls"
             className="btn w-200px btn-primary"
           >
-            {translate('See all calls')}
+            {translate('All calls')}
           </Link>
         </div>
       </LandingHeroSection>
