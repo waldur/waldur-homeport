@@ -13,7 +13,7 @@ import {
 import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { required } from '@/core/validators';
+import { composeValidators, required } from '@/core/validators';
 import { SubmitButton, StringGroup, SelectGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -25,7 +25,7 @@ import { useNotify } from '@/store/notify';
 import { ROLE_TYPES } from '../../permissions/constants';
 
 import { PermissionField } from './PermissionField';
-import { getRoles } from './utils';
+import { getRoles, isRoleCode } from './utils';
 
 interface RoleFormDialogProps {
   resolve: {
@@ -35,30 +35,63 @@ interface RoleFormDialogProps {
 }
 
 const RoleForm: FC<{ role?: RoleDetails }> = (props) => {
-  // An organization role's name encodes its owning organization and its scope
+  // An organization role's code encodes its owning organization and its scope
   // binds it there, so both are fixed — same as system roles.
   const isOrgScoped = Boolean(props.role?.customer_uuid);
-  const nameLocked = props.role?.is_system_role || isOrgScoped;
+  const codeLocked = props.role?.is_system_role || isOrgScoped;
+  const isNew = !props.role;
   return (
     <>
+      {/*
+        The human-readable label lives in `description`; `name` is the technical
+        code. Collected on create only: on edit, `description_<lang>` values are
+        round-tripped through the same PUT, and modeltranslation resolves
+        `description` from the active language field, so editing the base value
+        here could silently be overwritten. Editing goes through the dedicated
+        per-language dialog (RoleDescriptionEditDialog) instead.
+      */}
+      {isNew ? (
+        <StringGroup
+          name="description"
+          validate={required}
+          label={translate('Name')}
+          description={translate(
+            'Human-readable name shown to users throughout the portal.',
+          )}
+          placeholder={translate('e.g. Researcher')}
+          required
+        />
+      ) : (
+        <StringGroup
+          name="description"
+          label={translate('Name')}
+          disabled
+          description={translate(
+            'Editable, together with its translations, from the "Edit name translations" action.',
+          )}
+        />
+      )}
       <StringGroup
         name="name"
-        validate={required}
-        disabled={nameLocked}
-        label={translate('Name')}
+        label={translate('Code')}
+        disabled={codeLocked}
+        placeholder="PROJECT.RESEARCHER"
         description={
           isOrgScoped
             ? translate(
-                'The name of an organization role is fixed; only its description and permissions can be changed.',
+                'The code of an organization role is fixed; only its name and permissions can be changed.',
               )
-            : undefined
+            : translate(
+                'Permanent technical identifier used by the API and by permission checks. It cannot be changed once the role has been created.',
+              )
         }
+        validate={isNew ? composeValidators(required, isRoleCode) : required}
         required
       />
       <SelectGroup
         name="content_type"
         validate={required}
-        isDisabled={nameLocked}
+        isDisabled={codeLocked}
         options={ROLE_TYPES}
         simpleValue
         label={translate('Type')}

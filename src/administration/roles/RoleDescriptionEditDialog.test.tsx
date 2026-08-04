@@ -92,7 +92,7 @@ describe('RoleDescriptionEditDialog', () => {
     );
 
     expect(
-      await screen.findByText('Unable to load role description.'),
+      await screen.findByText('Unable to load role name translations.'),
     ).toBeInTheDocument();
     // No Save button → the validator-free form can't submit empty strings and
     // wipe the role's existing translations.
