@@ -45,6 +45,12 @@ export const constructIssuePayload = (
     payload.customer = formData.customer.url;
   }
 
+  // Independent of the scope above: routes the request to the offering's
+  // provider helpdesk (backend resolves offering -> provider).
+  if (formData.offering) {
+    payload.offering = formData.offering;
+  }
+
   return payload;
 };
 

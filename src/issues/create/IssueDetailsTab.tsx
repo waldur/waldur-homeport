@@ -83,6 +83,15 @@ export const IssueDetailsTab = ({
         project_uuid: scope.project_uuid,
         offering_name: scope.offering_name,
       });
+    } else if (context.scopeType === 'offering') {
+      // Ticket opened from an offering: prefill the offering's organization and
+      // set the offering so the backend routes it to that provider's helpdesk.
+      change('customer', {
+        name: scope.customer_name,
+        uuid: scope.customer_uuid,
+        url: scope.customer,
+      });
+      change('offering', scope.uuid);
     }
   }, [context, change]);
 

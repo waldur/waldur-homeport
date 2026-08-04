@@ -30,6 +30,7 @@ import { DeployButton } from './DeployButton';
 import { OfferingAccessButton } from './OfferingAccessButton';
 import { OfferingExtraActionsButton } from './OfferingExtraActionsButton';
 import { OfferingStateField } from './OfferingStateField';
+import { OfferingSupportButton } from './OfferingSupportButton';
 
 interface OfferingViewHeroProps {
   offering: Offering;
@@ -249,6 +250,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 disabledReason={disabledButtonTooltip}
               />
             )}
+            {props.isPublic && <OfferingSupportButton offering={offering} />}
             <OfferingAccessButton offering={offering} />
             {isEditPage && (
               <OfferingStateActions
