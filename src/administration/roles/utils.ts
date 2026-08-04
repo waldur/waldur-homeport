@@ -4,14 +4,17 @@ import { getAllPages } from '@/core/api';
 
 // Fields needed by the global ENV.roles cache (client-side permission checks
 // in @/permissions, role-name/description lookups, autocompletes). `permissions`
-// must stay — hasPermission() relies on it. The 14 description_<lang>
-// translations are dropped here since no ENV.roles consumer reads them.
+// must stay — hasPermission() relies on it. `is_system_role` must stay — the
+// clone-role and auto-provisioning pickers filter on it, and dropping it makes
+// them silently empty. The 14 description_<lang> translations are dropped here
+// since no ENV.roles consumer reads them.
 const ROLES_CACHE_FIELDS = [
   'uuid',
   'name',
   'content_type',
   'description',
   'is_active',
+  'is_system_role',
   'permissions',
 ] as const;
 
