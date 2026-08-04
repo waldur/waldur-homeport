@@ -1265,5 +1265,17 @@
   "vSphere Virtual Machine": "Machine virtuelle vSphere",
   "virtual machine": "machine virtuelle",
   "volume snapshot": "instantané de volume",
-  "workloads": "charges de travail"
+  "workloads": "charges de travail",
+  "Code": "Code",
+  "Edit name translations": "Modifier les traductions du nom",
+  "Human-readable name shown to users throughout the portal.": "Nom lisible affiché aux utilisateurs dans tout le portail.",
+  "e.g. Researcher": "p. ex. Chercheur",
+  "Permanent technical identifier used by the API and by permission checks. It cannot be changed once the role has been created.": "Identifiant technique permanent utilisé par l'API et par les contrôles de permissions. Il ne peut plus être modifié une fois le rôle créé.",
+  "The code of an organization role is fixed; only its name and permissions can be changed.": "Le code d'un rôle d'organisation est figé ; seuls son nom et ses permissions peuvent être modifiés.",
+  "Use the SCOPE.NAME format, e.g. PROJECT.RESEARCHER.": "Utilisez le format SCOPE.NAME, p. ex. PROJECT.RESEARCHER.",
+  "The name shown to users for this role, in each language. The role code is edited separately.": "Le nom affiché aux utilisateurs pour ce rôle, dans chaque langue. Le code du rôle se modifie séparément.",
+  "Editable, together with its translations, from the \"Edit name translations\" action.": "Modifiable, avec ses traductions, via l'action « Modifier les traductions du nom ».",
+  "Edit permissions of {name} ({code})": "Modifier les permissions de {name} ({code})",
+  "Edit permissions of {code}": "Modifier les permissions de {code}",
+  "Unable to load role name translations.": "Impossible de charger les traductions du nom du rôle."
 }

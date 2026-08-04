@@ -36,6 +36,7 @@ import {
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
 import { RoleUsersExpandableRow } from './RoleUsersExpandableRow';
@@ -259,13 +260,16 @@ export const OrganizationRolesList: FC = () => {
       columns={[
         {
           title: translate('Name'),
-          orderField: 'name',
-          render: ({ row }) => row.name,
-          copyField: (row) => row.name,
+          render: ({ row }) => renderFieldOrDash(row.description),
         },
         {
-          title: translate('Description'),
-          render: ({ row }) => row.description,
+          // `name` is the technical code, not a label — see RolesList.
+          title: translate('Code'),
+          orderField: 'name',
+          render: ({ row }) => (
+            <span className="font-monospace">{row.name}</span>
+          ),
+          copyField: (row) => row.name,
         },
         {
           title: translate('Type'),

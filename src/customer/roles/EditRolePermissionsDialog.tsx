@@ -62,9 +62,16 @@ export const EditRolePermissionsDialog: FC<{
       {({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Edit permissions of {name}', {
-              name: row.description || row.name,
-            })}
+            // `name` is the technical code and `description` the human-readable
+            // name; show both, unless the role has no distinct name to show.
+            title={
+              row.description && row.description !== row.name
+                ? translate('Edit permissions of {name} ({code})', {
+                    name: row.description,
+                    code: row.name,
+                  })
+                : translate('Edit permissions of {code}', { code: row.name })
+            }
             footer={
               <>
                 <SubmitButton submitting={submitting}>

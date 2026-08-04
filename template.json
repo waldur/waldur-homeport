@@ -3108,6 +3108,7 @@
           "table/generated/MarketplaceResourcesFilter.tsx",
           "table/generated/MarketplaceRobotAccountsFilter.tsx",
           "table/generated/MarketplaceStatsOpenstackInstancesFilter.tsx",
+          "table/generated/ProviderOfferingResourcesFilter.tsx",
           "table/generated/UserInvitationsFilter.tsx",
           "user/UserPermissionRequestsList.tsx",
           "user/UserPosixIdentitiesDialog.tsx",
@@ -3159,7 +3160,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 89
+      "usage_count": 90
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -23908,7 +23909,6 @@
           "notifications",
           "steps",
           "quick-shortcuts",
-          "roles",
           "issue-templates",
           "details",
           "project-digest",
@@ -23930,6 +23930,7 @@
           "plans",
           "policies",
           "qos",
+          "roles",
           "type-based",
           "projects",
           "usage",
@@ -23991,7 +23992,6 @@
           "administration/providers/oidc-discovery/steps/DiscoveryStep.tsx",
           "administration/quick-shortcuts/QuickShortcutForm.tsx",
           "administration/quick-shortcuts/QuickShortcutsList.tsx",
-          "administration/roles/RolesList.tsx",
           "administration/service-desk/atlassian-discovery/steps/RequestTypesStep.tsx",
           "administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx",
           "administration/service-desk/issue-templates/IssueTemplateForm.tsx",
@@ -24001,7 +24001,6 @@
           "customer/details/CustomerAccessControlPanel.tsx",
           "customer/details/CustomerDetailsPanel.tsx",
           "customer/project-digest/ProjectDigestSummaryDialog.tsx",
-          "customer/roles/OrganizationRolesList.tsx",
           "customer/service-accounts/ServiceAccountExpandableRow.tsx",
           "customer/service-accounts/ServiceAccountFormDialog.tsx",
           "invitations/join-organization/GroupInvitationDetails.tsx",
@@ -24160,7 +24159,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 138
+      "usage_count": 136
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -30183,23 +30182,27 @@
         ],
         "feature_areas": [
           "affiliated-organizations",
+          "roles",
           "science-domains",
           "details"
         ],
         "component_types": [
           "form",
           "list",
-          "component",
-          "dialog"
+          "dialog",
+          "component"
         ],
         "paths": [
           "administration/affiliated-organizations/AffiliatedOrganizationForm.tsx",
           "administration/affiliated-organizations/AffiliatedOrganizationsList.tsx",
+          "administration/roles/RoleFormDialog.tsx",
+          "administration/roles/RolesList.tsx",
           "administration/science-domains/ScienceDomainForm.tsx",
           "administration/science-domains/ScienceDomainsList.tsx",
           "administration/science-domains/ScienceSubDomainForm.tsx",
           "administration/science-domains/ScienceSubDomainsExpandableRow.tsx",
-          "customer/details/EditDefaultAffiliationsDialog.tsx"
+          "customer/details/EditDefaultAffiliationsDialog.tsx",
+          "customer/roles/OrganizationRolesList.tsx"
         ]
       },
       "jsx_context": {
@@ -30223,7 +30226,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 7
+      "usage_count": 10
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -33389,6 +33392,7 @@
           "offerings",
           "admin",
           "policies",
+          "api-keys",
           "list",
           "projects",
           "modal",
@@ -33439,6 +33443,7 @@
           "marketplace/offerings/update/policies/SlurmPolicySummaryDialog.tsx",
           "marketplace/orders/details/OrderMetadataTab.tsx",
           "marketplace/orders/list/OrderAutoApprovedFilter.tsx",
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx",
           "marketplace/resources/list/AllResourcesFilter.tsx",
           "marketplace/resources/list/CategoryColumnField.tsx",
           "marketplace/resources/list/ProjectResourcesAllFilter.tsx",
@@ -33499,7 +33504,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 51
+      "usage_count": 52
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -38864,6 +38869,7 @@
           "reports",
           "assignments",
           "update",
+          "coi-review",
           "cluster",
           "site-agent",
           "table",
@@ -38919,6 +38925,8 @@
           "proposals/assignments/CancelAction.tsx",
           "proposals/details/DuplicateCallDialog.tsx",
           "proposals/update/CallActions.tsx",
+          "proposals/update/coi-review/COIDismissAction.tsx",
+          "proposals/update/coi-review/COIRecuseAction.tsx",
           "rancher/cluster/RedeployWorkloadAction.tsx",
           "site-agent/SlurmOfferingActions.tsx",
           "table/TableFilterActions.tsx",
@@ -38957,7 +38965,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 46
+      "usage_count": 48
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -40257,6 +40265,7 @@
           "marketplace/orders/list/OrdersListExpandableRow.tsx",
           "marketplace/orders/list/OrdersTableComponent.tsx",
           "marketplace/orders/list/ResourceOrders.tsx",
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx",
           "marketplace/resources/lexis/BasicLexisLinkList.tsx",
           "marketplace/resources/list/CategoryResourcesList.tsx",
           "marketplace/resources/list/ProviderResourcesList.tsx",
@@ -40390,7 +40399,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 131
+      "usage_count": 132
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -41117,14 +41126,16 @@
         "domains": [
           "admin",
           "marketplace",
-          "project_management"
+          "project_management",
+          "general"
         ],
         "feature_areas": [
           "billing",
           "details",
           "list",
           "policies",
-          "views"
+          "views",
+          "generated"
         ],
         "component_types": [
           "card",
@@ -41148,7 +41159,8 @@
           "marketplace/resources/list/utils.tsx",
           "project/policy-watch/views/HealthView.tsx",
           "table/generated/MarketplaceProviderOfferingsFilter.tsx",
-          "table/generated/MarketplaceStatsOpenstackInstancesFilter.tsx"
+          "table/generated/MarketplaceStatsOpenstackInstancesFilter.tsx",
+          "table/generated/ProviderOfferingResourcesFilter.tsx"
         ]
       },
       "jsx_context": {
@@ -41173,7 +41185,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 15
+      "usage_count": 16
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -67679,7 +67691,8 @@
         "Panel",
         "PlanCard",
         "Select",
-        "ModalDialog"
+        "ModalDialog",
+        "AsyncSelectFilter"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -67724,6 +67737,7 @@
           "resource-requests-step",
           "configuration",
           "plan-usage",
+          "generated",
           "UserPendingActionsList"
         ],
         "component_types": [
@@ -67764,6 +67778,7 @@
           "reporting/plan-usage/PlanUsageAnalytics.tsx",
           "reporting/plan-usage/PlanUsageDialog.tsx",
           "reporting/plan-usage/PlanUsageList.tsx",
+          "table/generated/ProviderOfferingResourcesFilter.tsx",
           "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx"
         ]
       },
@@ -67778,7 +67793,8 @@
           "Panel",
           "PlanCard",
           "Select",
-          "strong"
+          "strong",
+          "AsyncSelectFilter"
         ],
         "conditional_render": true
       },
@@ -67797,7 +67813,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 29
+      "usage_count": 30
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -74351,13 +74367,14 @@
         "title",
         "label",
         "unknown",
-        "property_value",
-        "generic_element"
+        "generic_element",
+        "property_value"
       ],
       "components": [
         "Table",
         "ExpandableContainer",
-        "Form",
+        "Field",
+        "ModalDialog",
         "AsyncSelectFilter"
       ],
       "is_user_facing": true,
@@ -74408,8 +74425,7 @@
           "proposals/review/AdminReviewsList.tsx",
           "proposals/review/CustomerReviewsList.tsx",
           "proposals/review/MyAssignmentsPage.tsx",
-          "proposals/update/coi-review/COIDismissAction.tsx",
-          "proposals/update/coi-review/COIRecuseAction.tsx",
+          "proposals/update/coi-review/COIConfirmationBody.tsx",
           "proposals/update/coi-review/COIReviewSection.tsx",
           "proposals/update/coi-review/WaiveCOIDialog.tsx",
           "proposals/update/matching/MatchingSummaryDialog.tsx",
@@ -74423,8 +74439,7 @@
         "tags": [
           "Table",
           "th",
-          "strong",
-          "div",
+          "Field",
           "AsyncSelectFilter"
         ],
         "conditional_render": true
@@ -74441,9 +74456,9 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 8
       },
-      "usage_count": 20
+      "usage_count": 19
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -78595,18 +78610,20 @@
   "Support": {
     "message": "Support",
     "context": {
-      "primary_ui_type": "title",
+      "primary_ui_type": "action_button",
       "ui_types": [
         "unknown",
         "label",
         "property_value",
         "title",
+        "action_button",
         "generic_element",
         "menu_item"
       ],
       "components": [
         "Col",
         "Link",
+        "ActionButton",
         "IssuesList",
         "FooterDropdown",
         "MenuItem",
@@ -78646,6 +78663,7 @@
           "dashboard",
           "customer",
           "issues",
+          "offerings",
           "details",
           "footer",
           "header",
@@ -78671,6 +78689,7 @@
           "customer/dashboard/CustomerActions.tsx",
           "customer/routes.ts",
           "issues/routes.ts",
+          "marketplace/offerings/OfferingSupportButton.tsx",
           "marketplace/resources/details/ResourceIssuesCard.tsx",
           "marketplace/resources/details/fetchData.tsx",
           "navigation/footer/SupportMenu.tsx",
@@ -78694,6 +78713,7 @@
       "jsx_context": {
         "tags": [
           "Link",
+          "ActionButton",
           "IssuesList",
           "FooterDropdown",
           "button",
@@ -78719,10 +78739,10 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 24
+      "usage_count": 25
     },
     "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
+      "This text appears on a button. Keep it short and action-oriented.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
@@ -135435,85 +135455,21 @@
       "This appears in administrative interface. Use formal, technical language."
     ]
   },
-  "Edit descriptions": {
-    "message": "Edit descriptions",
+  "Edit name translations": {
+    "message": "Edit name translations",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "ActionItem"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "admin"
-        ],
-        "feature_areas": [
-          "roles"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "administration/roles/RoleDescriptionEditButton.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ActionItem"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
+        "generic_element",
         "unknown"
       ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in administrative interface. Use formal, technical language."
-    ]
-  },
-  "Edit role description": {
-    "message": "Edit role description",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown",
-        "generic_element"
-      ],
       "components": [
+        "ActionItem",
         "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 21,
+        "length": 22,
         "wordCount": 3,
         "hasVariables": false,
         "hasMarkup": false,
@@ -135534,14 +135490,17 @@
           "roles"
         ],
         "component_types": [
+          "form",
           "dialog"
         ],
         "paths": [
+          "administration/roles/RoleDescriptionEditButton.tsx",
           "administration/roles/RoleDescriptionEditDialog.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
+          "ActionItem",
           "ModalDialog"
         ],
         "conditional_render": false
@@ -135560,15 +135519,15 @@
         "has_validation": true,
         "max_nesting_level": 6
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Unable to load role description.": {
-    "message": "Unable to load role description.",
+  "Unable to load role name translations.": {
+    "message": "Unable to load role name translations.",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -135580,8 +135539,8 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 32,
-        "wordCount": 5,
+        "length": 38,
+        "wordCount": 6,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -135626,6 +135585,73 @@
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "The name shown to users for this role, in each language. The role code is edited separately.": {
+    "message": "The name shown to users for this role, in each language. The role code is edited separately.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ModalDialog",
+        "Form"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 92,
+        "wordCount": 17,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "roles"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "administration/roles/RoleDescriptionEditDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
       },
       "usage_count": 1
     },
@@ -135708,8 +135734,8 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "The name of an organization role is fixed; only its description and permissions can be changed.": {
-    "message": "The name of an organization role is fixed; only its description and permissions can be changed.",
+  "Human-readable name shown to users throughout the portal.": {
+    "message": "Human-readable name shown to users throughout the portal.",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -135720,8 +135746,275 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 95,
+        "length": 57,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "roles"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "administration/roles/RoleFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "StringGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "e.g. Researcher": {
+    "message": "e.g. Researcher",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "StringGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "roles"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "administration/roles/RoleFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "StringGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Editable, together with its translations, from the \"Edit name translations\" action.": {
+    "message": "Editable, together with its translations, from the \"Edit name translations\" action.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "StringGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 83,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "roles"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "administration/roles/RoleFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "StringGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "The code of an organization role is fixed; only its name and permissions can be changed.": {
+    "message": "The code of an organization role is fixed; only its name and permissions can be changed.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "StringGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 88,
         "wordCount": 16,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "roles"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "administration/roles/RoleFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "StringGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Permanent technical identifier used by the API and by permission checks. It cannot be changed once the role has been created.": {
+    "message": "Permanent technical identifier used by the API and by permission checks. It cannot be changed once the role has been created.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "StringGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 125,
+        "wordCount": 21,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -136771,6 +137064,58 @@
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language."
     ]
+  },
+  "Use the SCOPE.NAME format, e.g. PROJECT.RESEARCHER.": {
+    "message": "Use the SCOPE.NAME format, e.g. PROJECT.RESEARCHER.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 51,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "administration/roles/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
   },
   "Administration": {
     "message": "Administration",
@@ -155883,6 +156228,7 @@
         "Card",
         "FieldRows",
         "Table",
+        "ModalDialog",
         "ExpandableContainer"
       ],
       "is_user_facing": true,
@@ -155912,6 +156258,7 @@
           "integration",
           "options",
           "resources",
+          "api-keys",
           "project-templates",
           "apps"
         ],
@@ -155928,6 +156275,7 @@
           "marketplace/offerings/update/options/StorageDataTypeArrayField.tsx",
           "marketplace/resources/EditResourceMetadataDialog.tsx",
           "marketplace/resources/KeyValueTable.tsx",
+          "marketplace/resources/details/api-keys/RevealApiKeyDialog.tsx",
           "openportal/project-templates/ProjectTemplateExpandableRow.tsx",
           "rancher/cluster/apps/ApplicationDetailsDialog.tsx"
         ]
@@ -155956,7 +156304,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 8
+      "usage_count": 9
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -164918,6 +165266,7 @@
       "components": [
         "AuiIf",
         "ActionItem",
+        "ActionsDropdown",
         "CompactActionButton",
         "Card",
         "SubmitButton",
@@ -164946,6 +165295,7 @@
         "feature_areas": [
           "ai-assistant",
           "actions",
+          "api-keys",
           "resource-pending",
           "matrix",
           "livekit",
@@ -164955,12 +165305,14 @@
         "component_types": [
           "component",
           "button",
+          "card",
           "page",
           "navigation"
         ],
         "paths": [
           "ai-assistant/components/Thread.tsx",
           "marketplace/orders/actions/RetryOrderButton.tsx",
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx",
           "marketplace/resources/resource-pending/OrderErredView.tsx",
           "matrix/MatrixAppserviceSetup.tsx",
           "matrix/MatrixRoomActions.tsx",
@@ -164994,7 +165346,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 8
+      "usage_count": 9
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -197336,6 +197688,7 @@
           "table/generated/InvoicesItemsFilter.tsx",
           "table/generated/MarketplaceSoftwarePackagesFilter.tsx",
           "table/generated/ProposalPublicCallsFilter.tsx",
+          "table/generated/ProviderOfferingResourcesFilter.tsx",
           "table/generated/RolesFilter.tsx",
           "table/generated/UserGroupInvitationsFilter.tsx",
           "table/generated/UserPendingActionsFilter.tsx"
@@ -197365,7 +197718,7 @@
         "has_validation": false,
         "max_nesting_level": 8
       },
-      "usage_count": 19
+      "usage_count": 20
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -220371,21 +220724,20 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Edit permissions of {name}": {
-    "message": "Edit permissions of {name}",
+  "Edit permissions of {name} ({code})": {
+    "message": "Edit permissions of {name} ({code})",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
         "unknown"
       ],
       "components": [
-        "ModalDialog",
-        "Form"
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 26,
-        "wordCount": 4,
+        "length": 35,
+        "wordCount": 5,
         "hasVariables": true,
         "hasMarkup": false,
         "isQuestion": false,
@@ -220393,12 +220745,15 @@
         "isSentence": false,
         "startsWithCapital": true,
         "hasNumbers": false,
-        "hasSpecialChars": false,
+        "hasSpecialChars": true,
         "isAllCaps": false
       },
       "variables": {
         "name": {
           "type": "string"
+        },
+        "code": {
+          "type": "unknown"
         }
       },
       "file_context": {
@@ -220433,12 +220788,82 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 7
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "Contains variables: name. Variable types: string.",
+      "Contains variables: name, code. Variable types: string, unknown.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Edit permissions of {code}": {
+    "message": "Edit permissions of {code}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 4,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "code": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "roles"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/roles/EditRolePermissionsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: code. Variable types: unknown.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -221206,7 +221631,8 @@
         "generic_element"
       ],
       "components": [
-        "ActionItem"
+        "ActionItem",
+        "ActionsDropdown"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -221225,16 +221651,20 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management"
+          "customer_management",
+          "marketplace"
         ],
         "feature_areas": [
-          "roles"
+          "roles",
+          "api-keys"
         ],
         "component_types": [
-          "list"
+          "list",
+          "card"
         ],
         "paths": [
-          "customer/roles/OrganizationRolesList.tsx"
+          "customer/roles/OrganizationRolesList.tsx",
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
         ]
       },
       "jsx_context": {
@@ -221255,10 +221685,13 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 4
+        "max_nesting_level": 5
       },
-      "usage_count": 1
-    }
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
   },
   "Available roles": {
     "message": "Available roles",
@@ -223798,16 +224231,20 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management"
+          "customer_management",
+          "marketplace"
         ],
         "feature_areas": [
-          "service-accounts"
+          "service-accounts",
+          "api-keys"
         ],
         "component_types": [
-          "button"
+          "button",
+          "card"
         ],
         "paths": [
-          "customer/service-accounts/ServiceAccountRotateApiKeyAction.tsx"
+          "customer/service-accounts/ServiceAccountRotateApiKeyAction.tsx",
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
         ]
       },
       "jsx_context": {
@@ -223830,10 +224267,11 @@
         "has_validation": true,
         "max_nesting_level": 4
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -229434,6 +229872,7 @@
         "feature_areas": [
           "events",
           "invitations",
+          "list",
           "details",
           "resource-pending",
           "summary"
@@ -229447,6 +229886,7 @@
         "paths": [
           "events/ExpandableEventDetailsTable.tsx",
           "invitations/InvitationExpandableRow.tsx",
+          "marketplace/orders/list/ResourceOrderExpandableRow.tsx",
           "marketplace/resources/details/utils.tsx",
           "marketplace/resources/resource-pending/ResourceOrderErrorDialog.tsx",
           "resource/summary/ErrorMessageField.tsx"
@@ -229473,9 +229913,9 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 8
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -238219,6 +238659,58 @@
     "translator_notes": [
       "Contains variables: deployment. Variable types: unknown."
     ]
+  },
+  "Explore service catalog": {
+    "message": "Explore service catalog",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 23,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "i18n/translate.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
   },
   "Go to service catalog": {
     "message": "Go to service catalog",
@@ -251344,7 +251836,8 @@
         "paths": [
           "invitations/join-organization/AvailableOrganizationsToJoin.tsx",
           "marketplace/common/DeployButton.tsx",
-          "marketplace/offerings/DeployButton.tsx"
+          "marketplace/offerings/DeployButton.tsx",
+          "marketplace/offerings/OfferingSupportButton.tsx"
         ]
       },
       "jsx_context": {
@@ -251365,7 +251858,7 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -290467,6 +290960,7 @@
         "paths": [
           "marketplace/common/DeployButton.tsx",
           "marketplace/offerings/DeployButton.tsx",
+          "marketplace/offerings/OfferingSupportButton.tsx",
           "transitions.ts"
         ]
       },
@@ -290488,7 +290982,7 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -311181,6 +311675,134 @@
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Regarding offering: {name}": {
+    "message": "Regarding offering: {name}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 3,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "offerings"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/offerings/OfferingSupportButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: name. Variable types: string."
+    ]
+  },
+  "Please log in to create a support request. You will be redirected to the login page.": {
+    "message": "Please log in to create a support request. You will be redirected to the login page.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "dialog_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 84,
+        "wordCount": 16,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "offerings"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/offerings/OfferingSupportButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Marketplace offering": {
@@ -381058,13 +381680,15 @@
       "file_context": {
         "domains": [
           "marketplace",
-          "project_management"
+          "project_management",
+          "general"
         ],
         "feature_areas": [
           "policies",
           "details",
           "list",
-          "views"
+          "views",
+          "generated"
         ],
         "component_types": [
           "dialog",
@@ -381081,7 +381705,8 @@
           "marketplace/resources/list/ProjectResourcesAllFilter.tsx",
           "marketplace/resources/list/ProviderResourcesFilter.tsx",
           "marketplace/resources/list/utils.tsx",
-          "project/policy-watch/views/HealthView.tsx"
+          "project/policy-watch/views/HealthView.tsx",
+          "table/generated/ProviderOfferingResourcesFilter.tsx"
         ]
       },
       "jsx_context": {
@@ -381106,7 +381731,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 9
+      "usage_count": 10
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -410125,7 +410750,8 @@
       ],
       "components": [
         "OrganizationFilter",
-        "SummaryField"
+        "SummaryField",
+        "AsyncSelectFilter"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -410151,7 +410777,8 @@
           "list",
           "details",
           "usage",
-          "resource-usage"
+          "resource-usage",
+          "generated"
         ],
         "component_types": [
           "list",
@@ -410166,14 +410793,16 @@
           "marketplace/resources/usage/ResourceMetaInfo.tsx",
           "marketplace/resources/usage/ResourceUsageForm.tsx",
           "reporting/resource-usage/ResourceUsageList.tsx",
-          "reporting/resource-usage/UserUsageList.tsx"
+          "reporting/resource-usage/UserUsageList.tsx",
+          "table/generated/ProviderOfferingResourcesFilter.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "OrganizationFilter",
           "b",
-          "SummaryField"
+          "SummaryField",
+          "AsyncSelectFilter"
         ],
         "conditional_render": true
       },
@@ -410191,7 +410820,7 @@
         "has_validation": true,
         "max_nesting_level": 6
       },
-      "usage_count": 8
+      "usage_count": 9
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -422326,6 +422955,932 @@
       "Contains variables: type. Variable types: unknown."
     ]
   },
+  "Replace the credentials for API key {name}? Anything still using them will stop working, and the key ID may change too. Your other keys are unaffected, so rotate one at a time to stay online.": {
+    "message": "Replace the credentials for API key {name}? Anything still using them will stop working, and the key ID may change too. Your other keys are unaffected, so rotate one at a time to stay online.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 191,
+        "wordCount": 35,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: name. Variable types: string.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "API key generation retried": {
+    "message": "API key generation retried",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "API key rotation requested": {
+    "message": "API key rotation requested",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to rotate the API key.": {
+    "message": "Unable to rotate the API key.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "The key can be revealed once it is active.": {
+    "message": "The key can be revealed once it is active.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ActionItem",
+        "ActionsDropdown"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 42,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionItem"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Rotate": {
+    "message": "Rotate",
+    "context": {
+      "primary_ui_type": "submit_button",
+      "ui_types": [
+        "generic_element",
+        "submit_button"
+      ],
+      "components": [
+        "ActionItem",
+        "ActionsDropdown",
+        "SubmitButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "user_management"
+        ],
+        "feature_areas": [
+          "api-keys",
+          "personal-access-tokens"
+        ],
+        "component_types": [
+          "card",
+          "dialog",
+          "button"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx",
+          "marketplace/resources/details/api-keys/RevealApiKeyDialog.tsx",
+          "user/personal-access-tokens/PersonalAccessTokenRotateButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionItem",
+          "SubmitButton"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown",
+        "create"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This text appears on a button. Keep it short and action-oriented.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This relates to creation actions. Use encouraging, positive language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "An operation is already in progress.": {
+    "message": "An operation is already in progress.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ActionItem",
+        "ActionsDropdown"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 36,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionItem"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Key ID": {
+    "message": "Key ID",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Issued": {
+    "message": "Issued",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title",
+        "unknown"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "posix-id-pools"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx",
+          "marketplace/service-providers/posix-id-pools/PosixIdPoolIdentitiesDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "API keys": {
+    "message": "API keys",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "generic_element",
+        "title"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys",
+          "details"
+        ],
+        "component_types": [
+          "card",
+          "component"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/ResourceApiKeysCard.tsx",
+          "marketplace/resources/details/fetchData.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "API key": {
+    "message": "API key",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/RevealApiKeyDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to reveal the API key.": {
+    "message": "Unable to reveal the API key.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/RevealApiKeyDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Revealing…": {
+    "message": "Revealing…",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/RevealApiKeyDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Keep this key secret. You can reveal it again anytime, or rotate it if it is ever exposed.": {
+    "message": "Keep this key secret. You can reveal it again anytime, or rotate it if it is ever exposed.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 90,
+        "wordCount": 18,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "api-keys"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/resources/details/api-keys/RevealApiKeyDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Security groups": {
     "message": "Security groups",
     "context": {
@@ -422897,147 +424452,6 @@
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "API key": {
-    "message": "API key",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "CredentialRow",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "inference"
-        ],
-        "component_types": [
-          "page"
-        ],
-        "paths": [
-          "marketplace/resources/details/inference/InferenceServiceView.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "CredentialRow"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Not assigned": {
-    "message": "Not assigned",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown",
-        "property_value"
-      ],
-      "components": [
-        "CredentialRow",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 12,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "infrastructure"
-        ],
-        "feature_areas": [
-          "inference",
-          "openstack-floating-ips",
-          "node"
-        ],
-        "component_types": [
-          "page",
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/details/inference/InferenceServiceView.tsx",
-          "openstack/openstack-floating-ips/FloatingIpsList.tsx",
-          "rancher/node/ClusterNodesList.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span",
-          "Table"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Auth": {
@@ -424584,11 +425998,13 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "marketplace"
+          "marketplace",
+          "general"
         ],
         "feature_areas": [
           "details",
-          "list"
+          "list",
+          "generated"
         ],
         "component_types": [
           "component",
@@ -424601,7 +426017,8 @@
           "marketplace/resources/list/ProjectResourcesAllFilter.tsx",
           "marketplace/resources/list/ProviderResourcesFilter.tsx",
           "marketplace/resources/list/ProviderResourcesList.tsx",
-          "marketplace/resources/list/utils.tsx"
+          "marketplace/resources/list/utils.tsx",
+          "table/generated/ProviderOfferingResourcesFilter.tsx"
         ]
       },
       "jsx_context": {
@@ -424622,9 +426039,9 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 4
+        "max_nesting_level": 6
       },
-      "usage_count": 7
+      "usage_count": 8
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -447094,6 +448511,453 @@
       "Variable contains numbers. Consider plural handling in your language."
     ]
   },
+  "Membership re-sync requested.": {
+    "message": "Membership re-sync requested.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "users"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/resources/users/ResyncMembershipButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Applied on the next agent cycle at the latest; badges refresh after the agent reports back.": {
+    "message": "Applied on the next agent cycle at the latest; badges refresh after the agent reports back.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 91,
+        "wordCount": 16,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "users"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/resources/users/ResyncMembershipButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "A re-sync was already requested recently.": {
+    "message": "A re-sync was already requested recently.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 41,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "users"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/resources/users/ResyncMembershipButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "You are not allowed to trigger a re-sync for this resource.": {
+    "message": "You are not allowed to trigger a re-sync for this resource.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 59,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "users"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/resources/users/ResyncMembershipButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to request membership re-sync.": {
+    "message": "Unable to request membership re-sync.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 37,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "users"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/resources/users/ResyncMembershipButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Re-sync memberships": {
+    "message": "Re-sync memberships",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ToolbarButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "users"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/resources/users/ResyncMembershipButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ToolbarButton"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Ask the offering agent to re-apply role grants on the provider side.": {
+    "message": "Ask the offering agent to re-apply role grants on the provider side.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ToolbarButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 68,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "users"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/resources/users/ResyncMembershipButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ToolbarButton"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
   "Update expiration": {
     "message": "Update expiration",
     "context": {
@@ -448391,8 +450255,7 @@
         "component_types": [
           "component",
           "navigation",
-          "list",
-          "page"
+          "list"
         ],
         "paths": [
           "marketplace/routes.ts",
@@ -448400,7 +450263,6 @@
           "navigation/sidebar/CallPublicMenu.tsx",
           "proposals/CallsForProposals.tsx",
           "proposals/PublicCallsList.tsx",
-          "proposals/PublicCallsPage.tsx",
           "proposals/routes.ts",
           "proposals/utils.ts"
         ]
@@ -448427,7 +450289,7 @@
         "has_validation": false,
         "max_nesting_level": 5
       },
-      "usage_count": 8
+      "usage_count": 7
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -459627,72 +461489,6 @@
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Issued": {
-    "message": "Issued",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 6,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "posix-id-pools"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/service-providers/posix-id-pools/PosixIdPoolIdentitiesDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 5
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -530167,6 +531963,68 @@
       "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
+  "Not assigned": {
+    "message": "Not assigned",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "openstack-floating-ips",
+          "node"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "openstack/openstack-floating-ips/FloatingIpsList.tsx",
+          "rancher/node/ClusterNodesList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    }
+  },
   "floating IPs": {
     "message": "floating IPs",
     "context": {
@@ -597403,12 +599261,14 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "See all calls": {
-    "message": "See all calls",
+  "All calls": {
+    "message": "All calls",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "unknown",
+        "generic_element",
+        "property_value"
       ],
       "components": [
         "Link",
@@ -597416,8 +599276,8 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 13,
-        "wordCount": 3,
+        "length": 9,
+        "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -597437,15 +599297,19 @@
           "proposals"
         ],
         "component_types": [
-          "component"
+          "component",
+          "page"
         ],
         "paths": [
-          "proposals/CallsForProposals.tsx"
+          "proposals/CallsForProposals.tsx",
+          "proposals/PublicCallsPage.tsx",
+          "proposals/routes.ts"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Link"
+          "Link",
+          "LandingHeroSection"
         ],
         "conditional_render": false
       },
@@ -597463,7 +599327,7 @@
         "has_validation": false,
         "max_nesting_level": 4
       },
-      "usage_count": 1
+      "usage_count": 3
     }
   },
   "Open calls": {
@@ -597590,11 +599454,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
-    }
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
   "Fixed duration": {
     "message": "Fixed duration",
@@ -598596,8 +600463,8 @@
         "title",
         "generic_element",
         "tab_label",
-        "property_value",
-        "unknown"
+        "unknown",
+        "property_value"
       ],
       "components": [
         "SelectGroup",
@@ -598605,7 +600472,7 @@
         "Table",
         "Tab",
         "Tabs",
-        "Form",
+        "Field",
         "AsyncSelectFilter"
       ],
       "is_user_facing": true,
@@ -598657,8 +600524,7 @@
           "proposals/review/AdminReviewsList.tsx",
           "proposals/review/CustomerReviewsList.tsx",
           "proposals/round/proposals/ProposalExpandableRow.tsx",
-          "proposals/update/coi-review/COIDismissAction.tsx",
-          "proposals/update/coi-review/COIRecuseAction.tsx",
+          "proposals/update/coi-review/COIConfirmationBody.tsx",
           "proposals/update/coi-review/COIReviewSection.tsx",
           "proposals/update/coi-review/WaiveCOIDialog.tsx",
           "proposals/update/reviewer-pool/ReviewerPoolSection.tsx",
@@ -598673,8 +600539,7 @@
           "SelectGroup",
           "Table",
           "Tab",
-          "strong",
-          "div",
+          "Field",
           "AsyncSelectFilter"
         ],
         "conditional_render": true
@@ -598692,9 +600557,9 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 8
       },
-      "usage_count": 19
+      "usage_count": 18
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -606615,8 +608480,8 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "No open or scheduled round available.": {
-    "message": "No open or scheduled round available.",
+  "No open round available.": {
+    "message": "No open round available.",
     "context": {
       "primary_ui_type": "submit_button",
       "ui_types": [
@@ -606629,8 +608494,8 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 37,
-        "wordCount": 6,
+        "length": 24,
+        "wordCount": 4,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -616660,14 +618525,13 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
+        "has_validation": false,
         "max_nesting_level": 7
       },
       "usage_count": 10
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -629017,64 +630881,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "All calls": {
-    "message": "All calls",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 9,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "proposals"
-        ],
-        "component_types": [
-          "component"
-        ],
-        "paths": [
-          "proposals/routes.ts"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
   "User has been added.": {
     "message": "User has been added.",
     "context": {
@@ -632036,6 +633842,134 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "What happens next:": {
+    "message": "What happens next:",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 18,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "coi-review"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/update/coi-review/COIConfirmationBody.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "strong"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    }
+  },
+  "Conflict type": {
+    "message": "Conflict type",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "coi-review"
+        ],
+        "component_types": [
+          "form",
+          "dialog"
+        ],
+        "paths": [
+          "proposals/update/coi-review/COIConfirmationBody.tsx",
+          "proposals/update/coi-review/WaiveCOIDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Conflict of interest dismissed.": {
     "message": "Conflict of interest dismissed.",
     "context": {
@@ -632227,9 +634161,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "COIConfirmationBody"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 60,
@@ -632261,68 +634197,7 @@
       },
       "jsx_context": {
         "tags": [
-          "p"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 3
-      },
-      "usage_count": 1
-    }
-  },
-  "What happens next:": {
-    "message": "What happens next:",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 18,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "coi-review"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/update/coi-review/COIDismissAction.tsx",
-          "proposals/update/coi-review/COIRecuseAction.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "strong"
+          "COIConfirmationBody"
         ],
         "conditional_render": false
       },
@@ -632340,7 +634215,7 @@
         "has_validation": false,
         "max_nesting_level": 4
       },
-      "usage_count": 2
+      "usage_count": 1
     }
   },
   "The conflict will be marked as a false positive and removed from active review.": {
@@ -632348,9 +634223,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "COIConfirmationBody"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 79,
@@ -632382,7 +634259,7 @@
       },
       "jsx_context": {
         "tags": [
-          "li"
+          "COIConfirmationBody"
         ],
         "conditional_render": false
       },
@@ -632408,9 +634285,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "COIConfirmationBody"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 71,
@@ -632442,7 +634321,7 @@
       },
       "jsx_context": {
         "tags": [
-          "li"
+          "COIConfirmationBody"
         ],
         "conditional_render": false
       },
@@ -632468,9 +634347,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "COIConfirmationBody"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 48,
@@ -632502,7 +634383,7 @@
       },
       "jsx_context": {
         "tags": [
-          "li"
+          "COIConfirmationBody"
         ],
         "conditional_render": false
       },
@@ -632522,76 +634403,6 @@
       },
       "usage_count": 1
     }
-  },
-  "Conflict type": {
-    "message": "Conflict type",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "property_value",
-        "generic_element"
-      ],
-      "components": [
-        "Form"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 13,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "coi-review"
-        ],
-        "component_types": [
-          "form",
-          "dialog"
-        ],
-        "paths": [
-          "proposals/update/coi-review/COIDismissAction.tsx",
-          "proposals/update/coi-review/COIRecuseAction.tsx",
-          "proposals/update/coi-review/WaiveCOIDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "strong",
-          "div"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 10
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
   },
   "Dismiss conflict": {
     "message": "Dismiss conflict",
@@ -633103,7 +634914,8 @@
       "components": [
         "Field",
         "ExpandableContainer",
-        "TextGroup"
+        "TextGroup",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -633356,9 +635168,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "COIConfirmationBody"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 66,
@@ -633390,7 +635204,7 @@
       },
       "jsx_context": {
         "tags": [
-          "p"
+          "COIConfirmationBody"
         ],
         "conditional_render": false
       },
@@ -633406,7 +635220,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 3
+        "max_nesting_level": 4
       },
       "usage_count": 1
     }
@@ -633416,9 +635230,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "COIConfirmationBody"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 60,
@@ -633450,7 +635266,7 @@
       },
       "jsx_context": {
         "tags": [
-          "li"
+          "COIConfirmationBody"
         ],
         "conditional_render": false
       },
@@ -633476,9 +635292,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "COIConfirmationBody"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 67,
@@ -633510,7 +635328,7 @@
       },
       "jsx_context": {
         "tags": [
-          "li"
+          "COIConfirmationBody"
         ],
         "conditional_render": false
       },
@@ -633536,9 +635354,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "COIConfirmationBody"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 74,
@@ -633570,7 +635390,7 @@
       },
       "jsx_context": {
         "tags": [
-          "li"
+          "COIConfirmationBody"
         ],
         "conditional_render": false
       },
@@ -633767,14 +635587,13 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
+        "has_validation": false,
         "max_nesting_level": 0
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
+      "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
   "Severity": {
@@ -633847,14 +635666,13 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
+        "has_validation": false,
         "max_nesting_level": 9
       },
       "usage_count": 4
     },
     "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
+      "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
   "Detection": {
@@ -633983,14 +635801,13 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
+        "has_validation": false,
         "max_nesting_level": 0
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
+      "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
   "conflicts of interest": {
@@ -634049,14 +635866,11 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
+        "has_validation": false,
         "max_nesting_level": 4
       },
       "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
+    }
   },
   "Waive": {
     "message": "Waive",
@@ -634252,7 +636066,7 @@
         "generic_element"
       ],
       "components": [
-        "Form"
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -634284,11 +636098,79 @@
         ]
       },
       "jsx_context": {
-        "tags": [],
+        "tags": [
+          "ModalDialog"
+        ],
         "conditional_render": false
       },
       "action_types": [
         "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Waive conflict": {
+    "message": "Waive conflict",
+    "context": {
+      "primary_ui_type": "submit_button",
+      "ui_types": [
+        "submit_button"
+      ],
+      "components": [
+        "SubmitButton",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "coi-review"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "proposals/update/coi-review/WaiveCOIDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "SubmitButton"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "create"
       ],
       "api_context": {
         "endpoints": [],
@@ -634304,6 +636186,8 @@
       "usage_count": 1
     },
     "translator_notes": [
+      "This text appears on a button. Keep it short and action-oriented.",
+      "This relates to creation actions. Use encouraging, positive language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -634315,6 +636199,7 @@
         "generic_element"
       ],
       "components": [
+        "ModalDialog",
         "Form"
       ],
       "is_user_facing": true,
@@ -634380,7 +636265,8 @@
         "generic_element"
       ],
       "components": [
-        "TextGroup"
+        "TextGroup",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -634445,7 +636331,8 @@
         "generic_element"
       ],
       "components": [
-        "TextGroup"
+        "TextGroup",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -634510,7 +636397,8 @@
         "generic_element"
       ],
       "components": [
-        "TextGroup"
+        "TextGroup",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -634575,7 +636463,8 @@
         "generic_element"
       ],
       "components": [
-        "TextGroup"
+        "TextGroup",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -634629,73 +636518,6 @@
       "usage_count": 1
     },
     "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Waive conflict": {
-    "message": "Waive conflict",
-    "context": {
-      "primary_ui_type": "submit_button",
-      "ui_types": [
-        "submit_button"
-      ],
-      "components": [
-        "SubmitButton"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 14,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "coi-review"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "proposals/update/coi-review/WaiveCOIDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "SubmitButton"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "create"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This text appears on a button. Keep it short and action-oriented.",
-      "This relates to creation actions. Use encouraging, positive language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -725396,6 +727218,138 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Unpin column": {
+    "message": "Unpin column",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Tip"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "table"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "table/TableHeader.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "button",
+          "Tip"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Pin column": {
+    "message": "Pin column",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Tip"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "table"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "table/TableHeader.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "button",
+          "Tip"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Showing {sliceStart} to {sliceEnd} of {resultCount} entries.": {
     "message": "Showing {sliceStart} to {sliceEnd} of {resultCount} entries.",
     "context": {
@@ -728590,6 +730544,130 @@
       "usage_count": 1
     }
   },
+  "Created after": {
+    "message": "Created after",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "DateFilter"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "generated"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "table/generated/ProviderOfferingResourcesFilter.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "DateFilter"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    }
+  },
+  "Created before": {
+    "message": "Created before",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "DateFilter"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "generated"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "table/generated/ProviderOfferingResourcesFilter.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "DateFilter"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    }
+  },
   "Rancher project": {
     "message": "Rancher project",
     "context": {
@@ -731609,6 +733687,315 @@
     },
     "translator_notes": [
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Access is active on the provider side.": {
+    "message": "Access is active on the provider side.",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 38,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "affiliations"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/affiliations/MemberSyncStateIndicator.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Waiting for the provider backend to apply this role.": {
+    "message": "Waiting for the provider backend to apply this role.",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 52,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "affiliations"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/affiliations/MemberSyncStateIndicator.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "User is not known to the identity provider yet; access activates after their first login.": {
+    "message": "User is not known to the identity provider yet; access activates after their first login.",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 89,
+        "wordCount": 15,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "affiliations"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/affiliations/MemberSyncStateIndicator.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Provider-side synchronization failed.": {
+    "message": "Provider-side synchronization failed.",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 37,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "affiliations"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/affiliations/MemberSyncStateIndicator.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Reported: {time}": {
+    "message": "Reported: {time}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "time": {
+          "type": "date"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "affiliations"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/affiliations/MemberSyncStateIndicator.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: time. Variable types: date."
     ]
   },
   "Domain": {
@@ -751421,68 +753808,6 @@
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
-  },
-  "Rotate": {
-    "message": "Rotate",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "ActionItem"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 6,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "user_management"
-        ],
-        "feature_areas": [
-          "personal-access-tokens"
-        ],
-        "component_types": [
-          "button"
-        ],
-        "paths": [
-          "user/personal-access-tokens/PersonalAccessTokenRotateButton.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ActionItem"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    }
   },
   "Cannot rotate a revoked token.": {
     "message": "Cannot rotate a revoked token.",

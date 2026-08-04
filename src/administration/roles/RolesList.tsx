@@ -16,6 +16,7 @@ import {
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { RoleActions } from './RoleActions';
 import { RoleCreateButton } from './RoleCreateButton';
@@ -58,13 +59,18 @@ export const RolesList = () => {
       columns={[
         {
           title: translate('Name'),
-          orderField: 'name',
-          render: ({ row }) => row.name,
-          copyField: (row) => row.name,
+          render: ({ row }) => renderFieldOrDash(row.description),
         },
         {
-          title: translate('Description'),
-          render: ({ row }) => row.description,
+          // `name` is the technical code (globally unique, scope-prefixed, sent
+          // as `role_name` in permission payloads), so it is rendered as one and
+          // stays the copyable field.
+          title: translate('Code'),
+          orderField: 'name',
+          render: ({ row }) => (
+            <span className="font-monospace">{row.name}</span>
+          ),
+          copyField: (row) => row.name,
         },
         {
           title: translate('Scope'),

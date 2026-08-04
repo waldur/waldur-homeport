@@ -29,7 +29,10 @@ describe('RoleFormDialog', () => {
   it('renders "New role" dialog correctly', () => {
     renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
     expect(screen.getByText('New role')).toBeInTheDocument();
+    // The human-readable label (`description`) and the technical code (`name`)
+    // are two distinct fields.
     expect(screen.getByText('Name')).toBeInTheDocument();
+    expect(screen.getByText('Code')).toBeInTheDocument();
     expect(screen.getByText('Type')).toBeInTheDocument();
   });
 
@@ -64,9 +67,11 @@ describe('RoleFormDialog', () => {
 
     renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
 
-    // Name field
-    const nameInput = screen.getByLabelText(/Name/);
-    await user.type(nameInput, 'New Role');
+    // Human-readable name, stored in `description`
+    await user.type(screen.getByLabelText(/Name/), 'New role');
+
+    // Technical code, stored in `name`
+    await user.type(screen.getByLabelText(/Code/), 'CUSTOMER.NEW_ROLE');
 
     // Type field
     const typeInput = screen.getByLabelText(/Type/);
@@ -83,7 +88,8 @@ describe('RoleFormDialog', () => {
     await waitFor(() => {
       expect(createSpy).toHaveBeenCalledWith({
         body: expect.objectContaining({
-          name: 'New Role',
+          name: 'CUSTOMER.NEW_ROLE',
+          description: 'New role',
           content_type: 'customer',
           permissions: ['CALL.APPROVE_AND_REJECT_PROPOSALS'],
         }),
@@ -91,6 +97,20 @@ describe('RoleFormDialog', () => {
       expect(rolesList).toHaveBeenCalled();
       expect(mockRefetch).toHaveBeenCalled();
     });
+  });
+
+  it('rejects a code that does not follow the SCOPE.NAME convention', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
+
+    await user.type(screen.getByLabelText(/Name/), 'Researcher');
+    await user.type(
+      screen.getByLabelText(/Code/),
+      'Researcher (project member)',
+    );
+    await user.click(screen.getByLabelText('Approve and reject proposals'));
+
+    await waitFor(() => expect(screen.getByText('Save')).toBeDisabled());
   });
 
   it('handles successful role update', async () => {
@@ -128,7 +148,29 @@ describe('RoleFormDialog', () => {
     });
   });
 
-  it('disables name and type for system roles', async () => {
+  it('keeps a legacy off-convention code editable', async () => {
+    // Roles created before the convention was enforced must stay editable —
+    // the code format is only validated when creating a role. If the validator
+    // ran here too, the form would be invalid and Save permanently disabled.
+    mockRoleDetails({
+      uuid: 'role-uuid',
+      name: 'Researcher (project member)',
+      content_type: 'project',
+      permissions: ['CALL.CLOSE_ROUNDS'],
+    });
+
+    renderWithProviders(
+      <RoleFormDialog
+        resolve={{ row: { uuid: 'role-uuid' } as any, refetch: mockRefetch }}
+      />,
+    );
+
+    await screen.findByDisplayValue('Researcher (project member)');
+
+    await waitFor(() => expect(screen.getByText('Save')).toBeEnabled());
+  });
+
+  it('disables code and type for system roles', async () => {
     mockRoleDetails({
       uuid: 'system-role-uuid',
       name: 'System Role',
@@ -145,7 +187,7 @@ describe('RoleFormDialog', () => {
       />,
     );
 
-    expect(await screen.findByLabelText(/Name/)).toBeDisabled();
+    expect(await screen.findByLabelText(/Code/)).toBeDisabled();
     expect(screen.getByLabelText(/Type/)).toBeDisabled();
   });
 

@@ -61,7 +61,7 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
 
   if (isLoading) {
     return (
-      <ModalDialog title={translate('Edit role description')}>
+      <ModalDialog title={translate('Edit name translations')}>
         <LoadingSpinner />
       </ModalDialog>
     );
@@ -72,10 +72,10 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
   // translation for the role.
   if (isError) {
     return (
-      <ModalDialog title={translate('Edit role description')}>
+      <ModalDialog title={translate('Edit name translations')}>
         <LoadingErred
           loadData={refetchRole}
-          message={translate('Unable to load role description.')}
+          message={translate('Unable to load role name translations.')}
         />
       </ModalDialog>
     );
@@ -88,7 +88,7 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Edit role description')}
+            title={translate('Edit name translations')}
             footer={
               <>
                 <CloseDialogButton label={translate('Cancel')} />
@@ -100,6 +100,11 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
               </>
             }
           >
+            <p className="text-muted">
+              {translate(
+                'The name shown to users for this role, in each language. The role code is edited separately.',
+              )}
+            </p>
             <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <table className="table">
                 <tbody>

@@ -653,7 +653,6 @@
   "Edit component": "Komponente bearbeiten",
   "Edit credit": "Guthaben bearbeiten",
   "Edit description": "Beschreibung bearbeiten",
-  "Edit descriptions": "Beschreibungen bearbeiten",
   "Edit environment variables": "Bearbeiten Sie Umgebungsvariablen",
   "Edit group invitation": "Gruppeneinladung bearbeiten",
   "Edit item": "Element bearbeiten",
@@ -2830,5 +2829,17 @@
   "Start script": "Startskript",
   "Automation": "Automatisierung",
   "Enable config drive": "Config Drive aktivieren",
-  "Config drive is a small read-only disk attached to the instance at boot. Cloud-init reads metadata, the SSH key and your start script from it, without needing to reach the OpenStack metadata service over the network (http://169.254.169.254). Enable this when the instance has no DHCP, sits on an isolated network, or must be configured before networking is up. Leave it off when the metadata service is reachable — that is the usual case.": "Config Drive ist eine kleine schreibgeschützte Festplatte, die beim Booten an die Instanz angehängt wird. Cloud-init liest daraus Metadaten, den SSH-Schlüssel und Ihr Startskript, ohne den OpenStack-Metadatendienst über das Netzwerk erreichen zu müssen (http://169.254.169.254). Aktivieren Sie dies, wenn die Instanz kein DHCP hat, sich in einem isolierten Netzwerk befindet oder konfiguriert werden muss, bevor das Netzwerk verfügbar ist. Lassen Sie es deaktiviert, wenn der Metadatendienst erreichbar ist — das ist der Normalfall."
+  "Config drive is a small read-only disk attached to the instance at boot. Cloud-init reads metadata, the SSH key and your start script from it, without needing to reach the OpenStack metadata service over the network (http://169.254.169.254). Enable this when the instance has no DHCP, sits on an isolated network, or must be configured before networking is up. Leave it off when the metadata service is reachable — that is the usual case.": "Config Drive ist eine kleine schreibgeschützte Festplatte, die beim Booten an die Instanz angehängt wird. Cloud-init liest daraus Metadaten, den SSH-Schlüssel und Ihr Startskript, ohne den OpenStack-Metadatendienst über das Netzwerk erreichen zu müssen (http://169.254.169.254). Aktivieren Sie dies, wenn die Instanz kein DHCP hat, sich in einem isolierten Netzwerk befindet oder konfiguriert werden muss, bevor das Netzwerk verfügbar ist. Lassen Sie es deaktiviert, wenn der Metadatendienst erreichbar ist — das ist der Normalfall.",
+  "Code": "Code",
+  "Edit name translations": "Namensübersetzungen bearbeiten",
+  "Human-readable name shown to users throughout the portal.": "Lesbarer Name, der Benutzern im gesamten Portal angezeigt wird.",
+  "e.g. Researcher": "z. B. Forscher",
+  "Permanent technical identifier used by the API and by permission checks. It cannot be changed once the role has been created.": "Dauerhafter technischer Bezeichner, der von der API und von Berechtigungsprüfungen verwendet wird. Nach dem Anlegen der Rolle kann er nicht mehr geändert werden.",
+  "The code of an organization role is fixed; only its name and permissions can be changed.": "Der Code einer Organisationsrolle ist unveränderlich; nur Name und Berechtigungen können geändert werden.",
+  "Use the SCOPE.NAME format, e.g. PROJECT.RESEARCHER.": "Verwenden Sie das Format SCOPE.NAME, z. B. PROJECT.RESEARCHER.",
+  "The name shown to users for this role, in each language. The role code is edited separately.": "Der Name, der Benutzern für diese Rolle angezeigt wird, in der jeweiligen Sprache. Der Rollencode wird separat bearbeitet.",
+  "Editable, together with its translations, from the \"Edit name translations\" action.": "Bearbeitbar, zusammen mit den Übersetzungen, über die Aktion „Namensübersetzungen bearbeiten“.",
+  "Edit permissions of {name} ({code})": "Berechtigungen von {name} ({code}) bearbeiten",
+  "Edit permissions of {code}": "Berechtigungen von {code} bearbeiten",
+  "Unable to load role name translations.": "Namensübersetzungen der Rolle konnten nicht geladen werden."
 }
