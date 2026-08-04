@@ -103,6 +103,14 @@ export const PageBarTabs: FC<PageBarTabsProps> = (props) => {
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
 
+  // The observer below reacts to later DOM changes but never fires for the
+  // initial render, so the tabs have to be published once on mount as well.
+  // Without this the container renders empty until something unrelated
+  // mutates the page.
+  useEffect(() => {
+    addTabs(props.tabs);
+  }, [props.tabs]);
+
   useDOMChangeObserver(() => {
     addTabs(props.tabs);
   }, [props.tabs]);
