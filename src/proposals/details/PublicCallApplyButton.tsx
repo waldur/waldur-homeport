@@ -41,9 +41,7 @@ export const PublicCallApplyButton: FC<PublicCallApplyButtonProps> = ({
       label={title}
       disabled={!activeRound}
       disabledReason={
-        !activeRound
-          ? translate('No open or scheduled round available.')
-          : undefined
+        !activeRound ? translate('No open round available.') : undefined
       }
     />
   );

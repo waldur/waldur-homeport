@@ -34,15 +34,12 @@ export const usePublicCallApply = (
     if (preferredRound) {
       return preferredRound.status === 'open' ? preferredRound : null;
     }
+    // Any open round, not merely the first in the list: rounds come back
+    // unsorted, so taking rounds[0] hid the Apply action on a call whose open
+    // round happened to follow an ended one. A scheduled round is not offered —
+    // the backend refuses a proposal until its round opens.
     const items = getRoundsWithStatus(call.rounds);
-    const first = items[0];
-    if (
-      first &&
-      (first.status.value === 'open' || first.status.value === 'scheduled')
-    ) {
-      return first;
-    }
-    return null;
+    return items.find((item) => item.status.value === 'open') || null;
   }, [call, preferredRound]);
 
   const hidden =

@@ -19,11 +19,7 @@ export const PublicCallApplyAction: FC<{ call: Call }> = ({ call }) => {
       action={handleApply}
       iconNode={<PaperPlaneTiltIcon weight="bold" />}
       disabled={!activeRound}
-      tooltip={
-        !activeRound
-          ? translate('No open or scheduled round available.')
-          : undefined
-      }
+      tooltip={!activeRound ? translate('No open round available.') : undefined}
     />
   );
 };
