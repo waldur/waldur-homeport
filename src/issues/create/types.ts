@@ -13,6 +13,9 @@ export interface IssueFormData {
   customer?: Customer;
   project?: Project;
   resource?: any;
+  /** Offering UUID — set when a request is opened from an offering, so the
+   * backend can route it to that offering's provider helpdesk. */
+  offering?: string;
 }
 
 export interface IssueTypeOption {

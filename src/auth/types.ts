@@ -163,6 +163,7 @@ interface SupportConfiguration {
   ENABLED: boolean;
   DISPLAY_REQUEST_TYPE: boolean;
   ACTIVE_BACKEND_TYPE: 'atlassian' | 'zammad' | 'smax';
+  PROVIDER_ROUTING_ENABLED: boolean;
 }
 
 interface OpenPortalConfiguration {
