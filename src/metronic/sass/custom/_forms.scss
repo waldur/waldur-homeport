@@ -16,6 +16,19 @@
 }
 
 /* FORM CONTROL (INPUT) */
+.form-control,
+.form-select,
+.form-check-input,
+.metronic-select__control {
+  &:hover:not(:disabled):not([readonly]):not(:checked):not(:focus):not(
+      .is-invalid
+    ):not(.metronic-select__control--is-disabled):not(
+      .metronic-select__control--is-focused
+    ) {
+    border-color: var(--bs-primary);
+  }
+}
+
 .form-control {
   &:focus {
     box-shadow: $input-focus-box-shadow;
