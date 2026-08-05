@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { DateTime } from 'luxon';
+import { FC, useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -12,10 +13,33 @@ import { ResourcesOverTimeChart } from './growth/ResourcesOverTimeChart';
 import { TopOfferingsTable } from './growth/TopOfferingsTable';
 import { TopProvidersTable } from './growth/TopProvidersTable';
 import { UsersOverTimeChart } from './growth/UsersOverTimeChart';
+import { ReportingPeriodContext } from './ReportingLayout';
 import { useGrowthStatistics } from './useGrowthStatistics';
 
 export const GrowthPage: FC = () => {
   const { data, isLoading, error, refetch } = useGrowthStatistics();
+  const months = useContext(ReportingPeriodContext);
+  const from = DateTime.now().minus({ months: months - 1 });
+  const cutoff = months ? from.toFormat('yyyy-MM') : '';
+  // Buckets are 'yyyy-MM'; the users endpoint emits 'unknown' for accounts
+  // without a join date, which no period should include.
+  const dated = (items, key) =>
+    (items || []).filter((i) => /^\d{4}-\d{2}$/.test(i[key]));
+  const slice = (items, key) =>
+    dated(items, key).filter((i) => i[key] >= cutoff);
+  // Cumulative charts build a running total, so the months dropped from the
+  // head are folded into the first visible bucket instead of restarting at 0.
+  const sliceTotal = (items, key) => {
+    const rows = dated(items, key);
+    const cut = rows.findIndex((i) => i[key] >= cutoff);
+    if (cut === -1) return [];
+    if (cut === 0) return rows;
+    const carried = rows.slice(0, cut).reduce((sum, i) => sum + i.count, 0);
+    return [
+      { ...rows[cut], count: rows[cut].count + carried },
+      ...rows.slice(cut + 1),
+    ];
+  };
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <LoadingErred loadData={refetch} />;
@@ -46,16 +70,20 @@ export const GrowthPage: FC = () => {
 
       <Row className="g-5 mb-5">
         <Col lg={6}>
-          <UsersOverTimeChart data={data?.userTrends} />
+          <UsersOverTimeChart data={sliceTotal(data?.userTrends, 'month')} />
         </Col>
         <Col lg={6}>
-          <ProjectsOverTimeChart data={data?.projectTrends} />
+          <ProjectsOverTimeChart
+            data={sliceTotal(data?.projectTrends, 'month')}
+          />
         </Col>
       </Row>
 
       <Row className="g-5 mb-5">
         <Col lg={6}>
-          <ResourcesOverTimeChart data={data?.resourceTrends} />
+          <ResourcesOverTimeChart
+            data={slice(data?.resourceTrends, 'period')}
+          />
         </Col>
         <Col lg={6}>
           <ActiveUsersByProviderChart data={data?.activeUsers} />
