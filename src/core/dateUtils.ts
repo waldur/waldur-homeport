@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { DateTime, ToRelativeUnit } from 'luxon';
 
 type DateInput = DateTime | Date | string | number | number[];
 
@@ -52,8 +52,52 @@ export const formatDateTime: DateFormatter = (date) =>
 export const formatTime: DateFormatter = (date) =>
   parseDate(date).toFormat('T');
 
-export const formatRelative: DateFormatter = (date) =>
-  parseDate(date).toRelative();
+// Luxon picks the display unit (years/months/days/...) from the un-rounded
+// diff, then rounds the number within that unit. That means a value like
+// 11.8 months (raw years diff 0.98, below the years bucket's own >=1
+// threshold) never crosses into "years" — it prints "in 12 months" instead
+// of "in 1 year". After Luxon picks a bucket, check whether the rounded
+// count reaches that unit's exact conversion into the next one up and, if
+// so, carry it over — the same rollover you'd want when rounding 59.6
+// seconds to "1 minute" rather than "60 seconds".
+const RELATIVE_UNITS: ToRelativeUnit[] = [
+  'years',
+  'months',
+  'days',
+  'hours',
+  'minutes',
+  'seconds',
+];
+
+const CARRY_THRESHOLDS: Partial<
+  Record<ToRelativeUnit, [ToRelativeUnit, number]>
+> = {
+  months: ['years', 12],
+  hours: ['days', 24],
+  minutes: ['hours', 60],
+  seconds: ['minutes', 60],
+};
+
+export const formatRelative: DateFormatter = (date) => {
+  const target = parseDate(date);
+  const now = DateTime.fromObject({}, { zone: target.zone });
+
+  for (const [index, unit] of RELATIVE_UNITS.entries()) {
+    const rawCount = target.diff(now, unit).get(unit);
+    const isLastUnit = index === RELATIVE_UNITS.length - 1;
+
+    if (Math.abs(rawCount) >= 1 || isLastUnit) {
+      const carry = CARRY_THRESHOLDS[unit];
+      const crossesIntoNextUnit =
+        carry && Math.abs(Math.round(rawCount)) >= carry[1];
+      const displayUnit = crossesIntoNextUnit ? carry[0] : unit;
+
+      return target.toRelative({ unit: displayUnit, rounding: 'round' });
+    }
+  }
+
+  return target.toRelative({ rounding: 'round' });
+};
 
 export const formatRelativeWithHour: DateFormatter = (date) => {
   const dateDiff = parseDate(date).diffNow(['hours', 'minutes']);
