@@ -268,6 +268,13 @@ export const SettingsDescription = [
         default: '',
         type: 'string',
       },
+      {
+        key: 'OPENPORTAL_MEMBERSHIP_SYNC_MODE',
+        description: translate('How to add a user to a project when an OpenPortal award lists them as a member. \'invitation\': create a pending invitation, so the user accepts, agrees to the terms and is provisioned locally before gaining access. \'direct\': create the account if it does not exist and grant the role immediately. A pending invitation is reported back to the allocating portal as a member either way, so the award reaches a consistent state without waiting for the user to act.'),
+        default: 'invitation',
+        type: 'choice_field',
+        options: [{ value: 'invitation', label: 'Invite the user and wait for them to accept' }, { value: 'direct', label: 'Add the user to the project immediately' }],
+      },
     ],
   },
   {
