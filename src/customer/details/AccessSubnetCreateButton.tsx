@@ -13,10 +13,11 @@ const AccessSubnetForm = lazyComponent(() =>
 export const AccessSubnetCreateButton = ({
   refetch,
   customer_url,
+  customer_uuid,
 }: Omit<AccessSubnetFormData, 'row'>) => (
   <CreateModalButton
     dialog={AccessSubnetForm}
-    resolve={{ refetch, customer_url }}
+    resolve={{ refetch, customer_url, customer_uuid }}
     size="lg"
     title={translate('Add access subnet')}
   />

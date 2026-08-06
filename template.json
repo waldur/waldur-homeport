@@ -23268,40 +23268,33 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Only /32 mask is allowed.": {
-    "message": "Only /32 mask is allowed.",
+  "Enter a CIDR address.": {
+    "message": "Enter a CIDR address.",
     "context": {
-      "primary_ui_type": "error_message",
+      "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown",
-        "error_message"
+        "unknown"
       ],
       "components": [],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 25,
-        "wordCount": 5,
+        "length": 21,
+        "wordCount": 4,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
         "isExclamation": false,
         "isSentence": true,
         "startsWithCapital": true,
-        "hasNumbers": true,
+        "hasNumbers": false,
         "hasSpecialChars": true,
         "isAllCaps": false
       },
       "variables": {},
       "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "access-subnets"
-        ],
-        "component_types": [
-          "dialog"
-        ],
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
         "paths": [
           "access-subnets/AccessSubnetFormDialog.tsx"
         ]
@@ -23319,17 +23312,175 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Enter a valid CIDR address.": {
+    "message": "Enter a valid CIDR address.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 27,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "access-subnets/AccessSubnetFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "A /0 mask is not allowed: it matches every address.": {
+    "message": "A /0 mask is not allowed: it matches every address.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 51,
+        "wordCount": 10,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": true,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "access-subnets/AccessSubnetFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Only a single IP address (/{prefix}) is allowed.": {
+    "message": "Only a single IP address (/{prefix}) is allowed.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 48,
+        "wordCount": 8,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "prefix": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "access-subnets/AccessSubnetFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
         "max_nesting_level": 0
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
+      "Contains variables: prefix. Variable types: unknown."
     ]
   },
   "Update": {
@@ -23773,11 +23924,10 @@
         ],
         "paths": [
           "access-subnets/AccessSubnetFormDialog.tsx",
-          "customer/details/AccessControlTabsContainer.tsx",
           "customer/details/CustomerAccessControlPanel.tsx",
           "marketplace/common/K8sSecurityRulesField.tsx",
+          "marketplace/offerings/access-subnets/OfferingConsumerSubnetsTable.tsx",
           "marketplace/offerings/access-subnets/OfferingDefaultSubnetsTable.tsx",
-          "marketplace/offerings/access-subnets/OfferingResourceSubnetsTable.tsx",
           "marketplace/resources/access-subnets/ResourceAccessSubnetsCard.tsx",
           "openstack/openstack-instance/deploy/FormNetworkSecurityStep.tsx",
           "openstack/openstack-security-groups/rule-editor/RulesList.tsx",
@@ -23811,7 +23961,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 12
+      "usage_count": 11
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -23997,7 +24147,7 @@
           "administration/service-desk/issue-templates/IssueTemplateForm.tsx",
           "administration/settings/LoginPageListEditDialog.tsx",
           "azure/vm/deploy/steps.ts",
-          "customer/details/AccessControlTabsContainer.tsx",
+          "customer/details/AccessSubnetMatrix.tsx",
           "customer/details/CustomerAccessControlPanel.tsx",
           "customer/details/CustomerDetailsPanel.tsx",
           "customer/project-digest/ProjectDigestSummaryDialog.tsx",
@@ -24019,8 +24169,8 @@
           "marketplace/details/OfferingTabs.tsx",
           "marketplace/details/plan/PlanSection.tsx",
           "marketplace/offerings/OfferingPublicUIView.tsx",
+          "marketplace/offerings/access-subnets/OfferingConsumerSubnetsTable.tsx",
           "marketplace/offerings/access-subnets/OfferingDefaultSubnetsTable.tsx",
-          "marketplace/offerings/access-subnets/OfferingResourceSubnetsTable.tsx",
           "marketplace/offerings/actions/RequestActionDialog.tsx",
           "marketplace/offerings/details/PublicOfferingComponentsTable.tsx",
           "marketplace/offerings/details/PublicOfferingInfo.tsx",
@@ -27737,7 +27887,6 @@
           "marketplace/offerings/update/qos/DeleteOfferingQoS.tsx",
           "marketplace/offerings/update/software-catalogs/DeleteSoftwareCatalogButton.tsx",
           "marketplace/orders/actions/OrderUnlinkButton.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetDeleteButton.tsx",
           "marketplace/resources/lexis/LexisLinkDeleteButton.tsx",
           "marketplace/resources/projects/DeleteProjectAction.tsx",
           "marketplace/resources/projects/ResourceUserInvitationsList.tsx",
@@ -27799,7 +27948,7 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 92
+      "usage_count": 91
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -28044,7 +28193,6 @@
           "marketplace/offerings/update/options/StorageDataTypeArrayField.tsx",
           "marketplace/offerings/update/policies/TresBillingWeightsField.tsx",
           "marketplace/resources/EditResourceMetadataDialog.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetDeleteButton.tsx",
           "marketplace/resources/common/AttachmentRow.tsx",
           "marketplace/resources/lexis/LexisLinkDeleteButton.tsx",
           "marketplace/resources/users/DeleteUserAction.tsx",
@@ -28124,7 +28272,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 89
+      "usage_count": 88
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -30786,6 +30934,7 @@
           "deploy",
           "steps",
           "landing",
+          "access-subnets",
           "actions",
           "admin",
           "import",
@@ -30865,6 +31014,7 @@
           "marketplace/deploy/steps/FormDetailsOverviewStep.tsx",
           "marketplace/details/CustomerField.tsx",
           "marketplace/landing/MarketplaceLandingFilter.tsx",
+          "marketplace/offerings/access-subnets/OfferingConsumerSubnetsTable.tsx",
           "marketplace/offerings/actions/ChangeOfferingAvailabilityDialog.tsx",
           "marketplace/offerings/admin/DuplicateOfferingsList.tsx",
           "marketplace/offerings/details/OfferingCustomerOrganizationsTable.tsx",
@@ -30982,7 +31132,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 106
+      "usage_count": 107
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -41848,12 +41998,11 @@
           "resources",
           "cost-policies",
           "credits",
+          "details",
           "events",
           "create",
-          "access-subnets",
           "profiles",
           "policies",
-          "details",
           "list",
           "mass-actions",
           "renew-allocation",
@@ -41888,9 +42037,9 @@
           "customer/cost-policies/CostPoliciesList.tsx",
           "customer/cost-policies/CostPolicyForm.tsx",
           "customer/credits/CreditUsageDialog.tsx",
+          "customer/details/AccessSubnetImpactDialog.tsx",
           "events/ExpandableEventDetailsTable.tsx",
           "issues/create/IssueDetailsStepLabel.tsx",
-          "marketplace/offerings/access-subnets/OfferingResourceSubnetsTable.tsx",
           "marketplace/offerings/profiles/OfferingProfileDetail.tsx",
           "marketplace/offerings/update/policies/SlurmPolicyEvaluateDialog.tsx",
           "marketplace/offerings/update/policies/SlurmPolicyExecutionLogDialog.tsx",
@@ -53037,6 +53186,7 @@
           "administration/site-agents/AgentIdentitiesList.tsx",
           "administration/site-agents/AgentIdentityForm.tsx",
           "customer/credits/CreditUsageDialog.tsx",
+          "customer/details/AccessSubnetImpactDialog.tsx",
           "invoices/details/InvoiceItemsTable.tsx",
           "invoices/import-usage/Step2ColumnMapping.tsx",
           "marketplace/aggregate-limits/AggregateLimitsExpandableRow.tsx",
@@ -53161,7 +53311,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 100
+      "usage_count": 101
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -53592,7 +53742,8 @@
         "generic_element"
       ],
       "components": [
-        "Table"
+        "Table",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -53612,20 +53763,24 @@
       "file_context": {
         "domains": [
           "admin",
+          "customer_management",
           "general"
         ],
         "feature_areas": [
           "resources",
+          "details",
           "organization-summary",
           "provider",
           "usage-monitoring"
         ],
         "component_types": [
           "list",
+          "dialog",
           "page"
         ],
         "paths": [
           "administration/arrow/resources/ArrowResourcesList.tsx",
+          "customer/details/AccessSubnetImpactDialog.tsx",
           "reporting/organization-summary/OrganizationResourcesTable.tsx",
           "reporting/provider/ProviderResourcesPage.tsx",
           "reporting/usage-monitoring/UsageMonitoringPage.tsx"
@@ -53649,9 +53804,9 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 4
+        "max_nesting_level": 5
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
@@ -91343,6 +91498,7 @@
       "primary_ui_type": "label",
       "ui_types": [
         "generic_element",
+        "property_value",
         "unknown",
         "label"
       ],
@@ -91369,11 +91525,13 @@
       "file_context": {
         "domains": [
           "admin",
+          "customer_management",
           "marketplace",
           "general"
         ],
         "feature_areas": [
           "organizations",
+          "details",
           "policies",
           "marketplace-checklist",
           "proposal"
@@ -91385,6 +91543,7 @@
         ],
         "paths": [
           "administration/organizations/OnboardingJustificationExpandableRow.tsx",
+          "customer/details/AccessSubnetImpactDialog.tsx",
           "marketplace/offerings/update/policies/SlurmPolicyExecutionLogDialog.tsx",
           "marketplace-checklist/LikertField.tsx",
           "proposals/proposal/ComplianceStatusBadge.tsx",
@@ -91394,9 +91553,10 @@
       "jsx_context": {
         "tags": [
           "Field",
+          "span",
           "Badge"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -91412,10 +91572,11 @@
         "has_validation": false,
         "max_nesting_level": 6
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence.",
       "Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language."
     ]
   },
@@ -127620,128 +127781,6 @@
       "This appears in administrative interface. Use formal, technical language."
     ]
   },
-  "Create resource access subnet": {
-    "message": "Create resource access subnet",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 29,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "admin"
-        ],
-        "feature_areas": [
-          "roles"
-        ],
-        "component_types": [
-          "component"
-        ],
-        "paths": [
-          "administration/roles/PermissionOptions.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in administrative interface. Use formal, technical language."
-    ]
-  },
-  "Delete resource access subnet": {
-    "message": "Delete resource access subnet",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 29,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "admin"
-        ],
-        "feature_areas": [
-          "roles"
-        ],
-        "component_types": [
-          "component"
-        ],
-        "paths": [
-          "administration/roles/PermissionOptions.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in administrative interface. Use formal, technical language."
-    ]
-  },
   "List importable for resource": {
     "message": "List importable for resource",
     "context": {
@@ -128242,67 +128281,6 @@
       "text_characteristics": {
         "length": 15,
         "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "admin"
-        ],
-        "feature_areas": [
-          "roles"
-        ],
-        "component_types": [
-          "component"
-        ],
-        "paths": [
-          "administration/roles/PermissionOptions.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in administrative interface. Use formal, technical language."
-    ]
-  },
-  "Update resource access subnet": {
-    "message": "Update resource access subnet",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 29,
-        "wordCount": 4,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -131520,12 +131498,9 @@
     "context": {
       "primary_ui_type": "label",
       "ui_types": [
-        "label",
-        "property_value"
+        "label"
       ],
-      "components": [
-        "AccessSubnetFormDialog"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 20,
@@ -131543,29 +131518,20 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "admin",
-          "customer_management",
-          "marketplace"
+          "admin"
         ],
         "feature_areas": [
-          "roles",
-          "details",
-          "access-subnets"
+          "roles"
         ],
         "component_types": [
-          "component",
-          "form"
+          "component"
         ],
         "paths": [
-          "administration/roles/PermissionOptions.tsx",
-          "customer/details/AccessSubnetForm.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetForm.tsx"
+          "administration/roles/PermissionOptions.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [
-          "AccessSubnetFormDialog"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -131579,14 +131545,13 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
+        "has_validation": false,
+        "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
+      "This appears in administrative interface. Use formal, technical language."
     ]
   },
   "Create lexis link": {
@@ -197681,6 +197646,7 @@
           "project/manage/ProjectEndDateChangeRequests.tsx",
           "proposals/call-tabs.tsx",
           "reporting/growth/RevenueGrowthChart.tsx",
+          "table/generated/AccessSubnetsFilter.tsx",
           "table/generated/AdminArrowCustomerMappingsFilter.tsx",
           "table/generated/ChatThreadsFilter.tsx",
           "table/generated/CustomersFilter.tsx",
@@ -197718,7 +197684,7 @@
         "has_validation": false,
         "max_nesting_level": 8
       },
-      "usage_count": 20
+      "usage_count": 21
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -199768,18 +199734,21 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Allowed access subnets": {
-    "message": "Allowed access subnets",
+  "Access subnets": {
+    "message": "Access subnets",
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
-        "title"
+        "title",
+        "generic_element"
       ],
-      "components": [],
+      "components": [
+        "Table"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 22,
-        "wordCount": 3,
+        "length": 14,
+        "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -199788,6 +199757,84 @@
         "startsWithCapital": true,
         "hasNumbers": false,
         "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "user_management"
+        ],
+        "feature_areas": [
+          "offerings",
+          "access-subnets",
+          "details",
+          "affiliations"
+        ],
+        "component_types": [
+          "page",
+          "list",
+          "card",
+          "component"
+        ],
+        "paths": [
+          "customer/details/AccessControlTabsContainer.tsx",
+          "marketplace/offerings/OfferingDetailsUIView.tsx",
+          "marketplace/offerings/access-subnets/OfferingConsumerSubnetsTable.tsx",
+          "marketplace/offerings/access-subnets/OfferingDefaultSubnetsTable.tsx",
+          "marketplace/resources/access-subnets/ResourceAccessSubnetsCard.tsx",
+          "marketplace/resources/details/fetchData.tsx",
+          "user/affiliations/OrganizationsList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 7
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Networks this organization trusts. Each entry says what it is trusted for: signing in to the portal, reaching resources of a given offering, or both.": {
+    "message": "Networks this organization trusts. Each entry says what it is trusted for: signing in to the portal, reaching resources of a given offering, or both.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "tooltip"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 149,
+        "wordCount": 25,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
         "isAllCaps": false
       },
       "variables": {},
@@ -199818,10 +199865,7 @@
         "max_nesting_level": 0
       },
       "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language."
-    ]
+    }
   },
   "Membership restrictions": {
     "message": "Membership restrictions",
@@ -199994,7 +200038,7 @@
           "h3",
           "Table"
         ],
-        "conditional_render": true
+        "conditional_render": false
       },
       "action_types": [
         "unknown"
@@ -200008,13 +200052,12 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 9
+        "max_nesting_level": 5
       },
       "usage_count": 4
     },
     "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
+      "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
   "Add access subnet": {
@@ -200022,10 +200065,14 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "generic_element",
+        "property_value"
       ],
       "components": [
-        "CreateModalButton"
+        "CreateModalButton",
+        "AccessSubnetFormDialog",
+        "ActionItem",
+        "ActionsDropdownComponent"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -200044,26 +200091,28 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
-          "form"
+          "form",
+          "list"
         ],
         "paths": [
           "customer/details/AccessSubnetCreateButton.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetCreateButton.tsx"
+          "customer/details/AccessSubnetForm.tsx",
+          "customer/details/AccessSubnetTableActions.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "CreateModalButton"
+          "CreateModalButton",
+          "AccessSubnetFormDialog",
+          "ActionItem"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -200076,13 +200125,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
+        "has_validation": true,
+        "max_nesting_level": 8
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Are you sure you want to delete the {inet} access subnet?": {
@@ -200114,19 +200164,16 @@
       },
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
           "button"
         ],
         "paths": [
-          "customer/details/AccessSubnetDeleteButton.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetDeleteButton.tsx"
+          "customer/details/AccessSubnetDeleteButton.tsx"
         ]
       },
       "jsx_context": {
@@ -200147,10 +200194,9 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
       "Contains variables: inet. Variable types: unknown.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This is a question. Ensure question format is appropriate in your language."
@@ -200181,19 +200227,16 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
           "button"
         ],
         "paths": [
-          "customer/details/AccessSubnetDeleteButton.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetDeleteButton.tsx"
+          "customer/details/AccessSubnetDeleteButton.tsx"
         ]
       },
       "jsx_context": {
@@ -200214,11 +200257,10 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -200247,19 +200289,16 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
           "button"
         ],
         "paths": [
-          "customer/details/AccessSubnetDeleteButton.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetDeleteButton.tsx"
+          "customer/details/AccessSubnetDeleteButton.tsx"
         ]
       },
       "jsx_context": {
@@ -200280,16 +200319,15 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
       "This is an error message. Ensure tone is helpful and not alarming.",
-      "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Example: 192.168.1.0/32": {
-    "message": "Example: 192.168.1.0/32",
+  "Example: 192.168.1.5/32": {
+    "message": "Example: 192.168.1.5/32",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -200380,19 +200418,16 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
           "form"
         ],
         "paths": [
-          "customer/details/AccessSubnetForm.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetForm.tsx"
+          "customer/details/AccessSubnetForm.tsx"
         ]
       },
       "jsx_context": {
@@ -200415,10 +200450,9 @@
         "has_validation": true,
         "max_nesting_level": 6
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -200449,19 +200483,16 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
           "form"
         ],
         "paths": [
-          "customer/details/AccessSubnetForm.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetForm.tsx"
+          "customer/details/AccessSubnetForm.tsx"
         ]
       },
       "jsx_context": {
@@ -200484,19 +200515,19 @@
         "has_validation": true,
         "max_nesting_level": 6
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Access subnet has been updated.": {
     "message": "Access subnet has been updated.",
     "context": {
-      "primary_ui_type": "unknown",
+      "primary_ui_type": "success_message",
       "ui_types": [
-        "property_value"
+        "property_value",
+        "success_message"
       ],
       "components": [
         "AccessSubnetFormDialog"
@@ -200518,19 +200549,18 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
-          "form"
+          "form",
+          "component"
         ],
         "paths": [
           "customer/details/AccessSubnetForm.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetForm.tsx"
+          "customer/details/AccessSubnetMatrix.tsx"
         ]
       },
       "jsx_context": {
@@ -200556,7 +200586,7 @@
       "usage_count": 2
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
+      "This is a success message. Use positive, confirming language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -200587,19 +200617,16 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
           "form"
         ],
         "paths": [
-          "customer/details/AccessSubnetForm.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetForm.tsx"
+          "customer/details/AccessSubnetForm.tsx"
         ]
       },
       "jsx_context": {
@@ -200622,19 +200649,19 @@
         "has_validation": true,
         "max_nesting_level": 6
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Unable to update access subnet.": {
     "message": "Unable to update access subnet.",
     "context": {
-      "primary_ui_type": "unknown",
+      "primary_ui_type": "error_message",
       "ui_types": [
-        "property_value"
+        "property_value",
+        "error_message"
       ],
       "components": [
         "AccessSubnetFormDialog"
@@ -200656,19 +200683,18 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "customer_management",
-          "marketplace"
+          "customer_management"
         ],
         "feature_areas": [
-          "details",
-          "access-subnets"
+          "details"
         ],
         "component_types": [
-          "form"
+          "form",
+          "component"
         ],
         "paths": [
           "customer/details/AccessSubnetForm.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetForm.tsx"
+          "customer/details/AccessSubnetMatrix.tsx"
         ]
       },
       "jsx_context": {
@@ -200694,8 +200720,1799 @@
       "usage_count": 2
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
+      "This is an error message. Ensure tone is helpful and not alarming.",
       "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Show resource impact": {
+    "message": "Show resource impact",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ActionItem",
+        "ActionsDropdownComponent"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "card",
+          "list"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactActionItem.tsx",
+          "customer/details/AccessSubnetTableActions.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionItem"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 2
+    }
+  },
+  "This offering does not support access subnets.": {
+    "message": "This offering does not support access subnets.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 46,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    }
+  },
+  "Reachable from anywhere — no addresses listed.": {
+    "message": "Reachable from anywhere — no addresses listed.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 46,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    }
+  },
+  "Published by the service provider.": {
+    "message": "Published by the service provider.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [
+        "Badge"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 34,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Badge"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "Sent to the firewall as {packed}": {
+    "message": "Sent to the firewall as {packed}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 32,
+        "wordCount": 6,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "packed": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "small"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: packed. Variable types: unknown.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Resources reached by {inet}": {
+    "message": "Resources reached by {inet}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 27,
+        "wordCount": 4,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "inet": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: inet. Variable types: unknown."
+    ]
+  },
+  "Resource impact": {
+    "message": "Resource impact",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "{count} resource(s) are reachable from anywhere": {
+    "message": "{count} resource(s) are reachable from anywhere",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AlertItem",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 47,
+        "wordCount": 6,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AlertItem"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Their offering supports access subnets, but no address is listed for them.": {
+    "message": "Their offering supports access subnets, but no address is listed for them.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AlertItem",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 74,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AlertItem"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "{count} resource(s) are advisory only": {
+    "message": "{count} resource(s) are advisory only",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AlertItem",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 37,
+        "wordCount": 5,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AlertItem"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "The list is published for an external firewall to enforce. This portal does not block traffic on it.": {
+    "message": "The list is published for an external firewall to enforce. This portal does not block traffic on it.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AlertItem",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 100,
+        "wordCount": 18,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AlertItem"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Reachable from": {
+    "message": "Reachable from",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [
+        "Table",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Enforcement": {
+    "message": "Enforcement",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [
+        "Table",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Enforced": {
+    "message": "Enforced",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [
+        "Badge"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Badge"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Advisory": {
+    "message": "Advisory",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [
+        "Badge"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetImpactDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Badge"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Once any address is listed for {site}, only listed addresses can sign in on behalf of this organization.": {
+    "message": "Once any address is listed for {site}, only listed addresses can sign in on behalf of this organization.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 104,
+        "wordCount": 18,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "site": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: site. Variable types: unknown.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Apply to {target}?": {
+    "message": "Apply to {target}?",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "dialog_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 18,
+        "wordCount": 3,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": true,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "read"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: target. Variable types: unknown.",
+      "This is a question. Ensure question format is appropriate in your language."
+    ]
+  },
+  "Stop applying to {target}?": {
+    "message": "Stop applying to {target}?",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "dialog_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 4,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": true,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "read"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: target. Variable types: unknown.",
+      "This is a question. Ensure question format is appropriate in your language."
+    ]
+  },
+  "{inet} will apply to {target}.": {
+    "message": "{inet} will apply to {target}.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "dialog_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 30,
+        "wordCount": 5,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "inet": {
+          "type": "unknown"
+        },
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "read"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 3
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: inet, target. Variable types: unknown."
+    ]
+  },
+  "{inet} will no longer apply to {target}.": {
+    "message": "{inet} will no longer apply to {target}.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "dialog_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 40,
+        "wordCount": 7,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "inet": {
+          "type": "unknown"
+        },
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "read"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 3
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: inet, target. Variable types: unknown."
+    ]
+  },
+  "IP": {
+    "message": "IP",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 2,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": true
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language."
+    ]
+  },
+  "Added by staff. It cannot be changed here.": {
+    "message": "Added by staff. It cannot be changed here.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [
+        "Tip"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 42,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Tip"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Subnets": {
+    "message": "Subnets",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "generic_element",
+        "title",
+        "unknown"
+      ],
+      "components": [
+        "Table",
+        "StringEditField"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "details",
+          "openstack-network",
+          "openstack-subnet",
+          "actions",
+          "openstack-tenant"
+        ],
+        "component_types": [
+          "component",
+          "list",
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx",
+          "customer/details/CustomerDetailsPanel.tsx",
+          "openstack/openstack-network/TenantNetworksList.tsx",
+          "openstack/openstack-subnet/TenantSubnetsList.tsx",
+          "openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
+          "openstack/openstack-tenant/tabs.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table",
+          "StringEditField"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 6
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "subnets": {
+    "message": "subnets",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "details",
+          "openstack-subnet"
+        ],
+        "component_types": [
+          "component",
+          "list"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetMatrix.tsx",
+          "openstack/openstack-subnet/TenantSubnetsList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 2
+    }
+  },
+  "Applies to": {
+    "message": "Applies to",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "unknown",
+        "title"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details",
+          "roles"
+        ],
+        "component_types": [
+          "field",
+          "form"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetScopeFields.tsx",
+          "marketplace/offerings/update/roles/RolesSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Once any address is listed for sign-in, only listed addresses can sign in on behalf of this organization.": {
+    "message": "Once any address is listed for sign-in, only listed addresses can sign in on behalf of this organization.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 105,
+        "wordCount": 18,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "field"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetScopeFields.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "This organization has no resources of an offering that supports access subnets.": {
+    "message": "This organization has no resources of an offering that supports access subnets.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 79,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "field"
+        ],
+        "paths": [
+          "customer/details/AccessSubnetScopeFields.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Accounting start date": {
@@ -202536,88 +204353,6 @@
       "usage_count": 1
     },
     "translator_notes": [
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Subnets": {
-    "message": "Subnets",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "generic_element",
-        "title",
-        "unknown"
-      ],
-      "components": [
-        "StringEditField",
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "customer_management",
-          "infrastructure"
-        ],
-        "feature_areas": [
-          "details",
-          "openstack-network",
-          "openstack-subnet",
-          "actions",
-          "openstack-tenant"
-        ],
-        "component_types": [
-          "component",
-          "list",
-          "dialog"
-        ],
-        "paths": [
-          "customer/details/CustomerDetailsPanel.tsx",
-          "openstack/openstack-network/TenantNetworksList.tsx",
-          "openstack/openstack-subnet/TenantSubnetsList.tsx",
-          "openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
-          "openstack/openstack-tenant/tabs.ts"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "StringEditField",
-          "Table"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 7
-      },
-      "usage_count": 5
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -309803,85 +311538,6 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
-  "Access subnets": {
-    "message": "Access subnets",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title",
-        "generic_element"
-      ],
-      "components": [
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 14,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "user_management"
-        ],
-        "feature_areas": [
-          "offerings",
-          "access-subnets",
-          "details",
-          "affiliations"
-        ],
-        "component_types": [
-          "page",
-          "list",
-          "card",
-          "component"
-        ],
-        "paths": [
-          "marketplace/offerings/OfferingDetailsUIView.tsx",
-          "marketplace/offerings/access-subnets/OfferingDefaultSubnetsTable.tsx",
-          "marketplace/offerings/access-subnets/OfferingResourceSubnetsTable.tsx",
-          "marketplace/resources/access-subnets/ResourceAccessSubnetsCard.tsx",
-          "marketplace/resources/details/fetchData.tsx",
-          "user/affiliations/OrganizationsList.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Table"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 6
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
   "Plans": {
     "message": "Plans",
     "context": {
@@ -313265,6 +314921,72 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
+  "consumer access subnets": {
+    "message": "consumer access subnets",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 23,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "access-subnets"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "marketplace/offerings/access-subnets/OfferingConsumerSubnetsTable.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "default access subnets": {
     "message": "default access subnets",
     "context": {
@@ -313302,71 +315024,6 @@
         ],
         "paths": [
           "marketplace/offerings/access-subnets/OfferingDefaultSubnetsTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Table"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "resource access subnets": {
-    "message": "resource access subnets",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 23,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": false,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "access-subnets"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/offerings/access-subnets/OfferingResourceSubnetsTable.tsx"
         ]
       },
       "jsx_context": {
@@ -321716,8 +323373,8 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
-  "Access subnets by resource": {
-    "message": "Access subnets by resource",
+  "Access subnets by organization": {
+    "message": "Access subnets by organization",
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
@@ -321726,7 +323383,7 @@
       "components": [],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 26,
+        "length": 30,
         "wordCount": 4,
         "hasVariables": false,
         "hasMarkup": false,
@@ -395790,72 +397447,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Applies to": {
-    "message": "Applies to",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title"
-      ],
-      "components": [
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 10,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "roles"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/roles/RolesSection.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Table"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
   "All offerings of type \"{type}\"": {
     "message": "All offerings of type \"{type}\"",
     "context": {
@@ -413025,72 +414616,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Example: 192.168.1.5/32": {
-    "message": "Example: 192.168.1.5/32",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "placeholder"
-      ],
-      "components": [
-        "AccessSubnetFormDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 23,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": true,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "access-subnets"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/resources/access-subnets/ResourceAccessSubnetForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "AccessSubnetFormDialog"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
   "Default allowed (from provider)": {
     "message": "Default allowed (from provider)",
     "context": {
@@ -413153,6 +414678,69 @@
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Defined for this organization and offering, and applied to all of its resources of that offering. Managed under the organization’s access control.": {
+    "message": "Defined for this organization and offering, and applied to all of its resources of that offering. Managed under the organization’s access control.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 146,
+        "wordCount": 22,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "access-subnets"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/access-subnets/ResourceAccessSubnetsCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
   "Search": {
@@ -554352,68 +555940,6 @@
       "jsx_context": {
         "tags": [
           "Component"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    }
-  },
-  "subnets": {
-    "message": "subnets",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": false,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "infrastructure"
-        ],
-        "feature_areas": [
-          "openstack-subnet"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "openstack/openstack-subnet/TenantSubnetsList.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Table"
         ],
         "conditional_render": false
       },
@@ -727747,6 +729273,192 @@
     "translator_notes": [
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
+  },
+  "Applies to sign-in": {
+    "message": "Applies to sign-in",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "BooleanFilter"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 18,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "generated"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "table/generated/AccessSubnetsFilter.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "BooleanFilter"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "Managed by staff": {
+    "message": "Managed by staff",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "BooleanFilter"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "generated"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "table/generated/AccessSubnetsFilter.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "BooleanFilter"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "Applies to offering": {
+    "message": "Applies to offering",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AsyncSelectFilter"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "generated"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "table/generated/AccessSubnetsFilter.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AsyncSelectFilter"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    }
   },
   "Period from": {
     "message": "Period from",

@@ -8,6 +8,8 @@ import { translate } from '@/i18n';
 import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-providers/selectors';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
@@ -74,6 +76,21 @@ export const CustomerManageContainer = () => {
     () => checkIsOwnerOrStaff(customer, user),
     [customer, user],
   );
+  // Access control was previously shown to anyone who could reach this page,
+  // including users whose only management permission is unrelated (e.g.
+  // UPDATE_CUSTOMER). The backend rejects their writes, so this is disclosure
+  // rather than a hole, but the tab should follow the permissions it exposes.
+  const canManageAccessControl = useMemo(
+    () =>
+      [
+        PermissionEnum.CREATE_ACCESS_SUBNET,
+        PermissionEnum.UPDATE_ACCESS_SUBNET,
+        PermissionEnum.DELETE_ACCESS_SUBNET,
+      ].some((permission) =>
+        hasPermission(user, { permission, customerId: customer?.uuid }),
+      ),
+    [customer, user],
+  );
 
   const tabs = useMemo<PageBarTab[]>(
     () =>
@@ -88,11 +105,13 @@ export const CustomerManageContainer = () => {
           component: CustomerContactPanel,
           title: translate('Contact'),
         },
-        {
-          key: 'access-control',
-          component: AccessControlTabsContainer,
-          title: translate('Access control'),
-        },
+        canManageAccessControl
+          ? {
+              key: 'access-control',
+              component: AccessControlTabsContainer,
+              title: translate('Access control'),
+            }
+          : null,
         isUserStaff
           ? {
               key: 'roles',
@@ -144,7 +163,7 @@ export const CustomerManageContainer = () => {
             }
           : null,
       ].filter(Boolean),
-    [user, customer, canRegisterServiceProvider],
+    [user, customer, canRegisterServiceProvider, canManageAccessControl],
   );
 
   const { tabSpec } = usePageTabsTransmitter(tabs);

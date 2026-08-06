@@ -8,9 +8,6 @@ export const Access_subnetsEnum = {
   offering_access_subnet_creation_succeeded: 'offering_access_subnet_creation_succeeded',
   offering_access_subnet_deletion_succeeded: 'offering_access_subnet_deletion_succeeded',
   offering_access_subnet_update_succeeded: 'offering_access_subnet_update_succeeded',
-  resource_access_subnet_creation_succeeded: 'resource_access_subnet_creation_succeeded',
-  resource_access_subnet_deletion_succeeded: 'resource_access_subnet_deletion_succeeded',
-  resource_access_subnet_update_succeeded: 'resource_access_subnet_update_succeeded',
 };
 
 export const AuthEnum = {
