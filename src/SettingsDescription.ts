@@ -128,6 +128,13 @@ export const SettingsDescription = [
         options: [{ value: 'show_all', label: 'Show all shared offerings' }, { value: 'show_restricted_disabled', label: 'Show all but mark inaccessible as disabled' }, { value: 'hide_inaccessible', label: 'Hide offerings user cannot access' }, { value: 'require_membership', label: 'Hide all unless user belongs to an organization/project' }],
       },
       {
+        key: 'SERVICE_ACCESS_MODE',
+        description: translate('How users reach services. \'calls\': only through calls for proposals, no marketplace navigation. \'marketplace\': the marketplace is the single entry point; calls are reached through an offering and proposals are tracked in the user profile. \'both\': marketplace and calls are browsable independently. Navigation only — the API serves the same data in every mode.'),
+        default: 'both',
+        type: 'choice_field',
+        options: [{ value: 'calls', label: 'Calls only' }, { value: 'marketplace', label: 'Marketplace only' }, { value: 'both', label: 'Marketplace and calls' }],
+      },
+      {
         key: 'SHOW_OFFERING_COVER_IMAGE',
         description: translate('Show offering cover image as a banner above the name on the offering page.'),
         default: false,
@@ -1854,6 +1861,23 @@ export const SettingsDescription = [
         key: 'TABLE_GROWTH_MIN_SIZE_BYTES',
         description: translate('Minimum table size in bytes (default 1MB) to monitor. Smaller tables are ignored.'),
         default: 1048576,
+        type: 'integer',
+      },
+    ],
+  },
+  {
+    description: translate('User Revision History'),
+    items: [
+      {
+        key: 'USER_REVISION_RETENTION_DAYS',
+        description: translate('Delete user profile revision history older than this many days. Set to 0 to keep it forever.'),
+        default: 730,
+        type: 'integer',
+      },
+      {
+        key: 'USER_REVISION_KEEP_MINIMUM',
+        description: translate('Always keep at least this many most recent revisions per user, however old they are. Must be above 0, otherwise pruning can erase a user\'s history entirely.'),
+        default: 20,
         type: 'integer',
       },
     ],
