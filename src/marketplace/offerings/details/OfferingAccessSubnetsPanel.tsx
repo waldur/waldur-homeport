@@ -4,15 +4,15 @@ import { Offering } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { TableTab } from '@/table/types';
 
+import { OfferingConsumerSubnetsTable } from '../access-subnets/OfferingConsumerSubnetsTable';
 import { OfferingDefaultSubnetsTable } from '../access-subnets/OfferingDefaultSubnetsTable';
-import { OfferingResourceSubnetsTable } from '../access-subnets/OfferingResourceSubnetsTable';
 
 interface OwnProps {
   offering: Offering;
 }
 
 export const OfferingAccessSubnetsPanel: FC<OwnProps> = ({ offering }) => {
-  const [activeTab, setActiveTab] = useState<'defaults' | 'resources'>(
+  const [activeTab, setActiveTab] = useState<'defaults' | 'consumers'>(
     'defaults',
   );
 
@@ -21,14 +21,14 @@ export const OfferingAccessSubnetsPanel: FC<OwnProps> = ({ offering }) => {
       {
         key: 'defaults',
         title: translate('Default allowed subnets'),
-        onSelect: (key) => setActiveTab(key as 'defaults' | 'resources'),
+        onSelect: (key) => setActiveTab(key as 'defaults' | 'consumers'),
         active: activeTab === 'defaults',
       },
       {
-        key: 'resources',
-        title: translate('Access subnets by resource'),
-        onSelect: (key) => setActiveTab(key as 'defaults' | 'resources'),
-        active: activeTab === 'resources',
+        key: 'consumers',
+        title: translate('Access subnets by organization'),
+        onSelect: (key) => setActiveTab(key as 'defaults' | 'consumers'),
+        active: activeTab === 'consumers',
       },
     ],
     [activeTab],
@@ -37,6 +37,6 @@ export const OfferingAccessSubnetsPanel: FC<OwnProps> = ({ offering }) => {
   return activeTab === 'defaults' ? (
     <OfferingDefaultSubnetsTable offering={offering} tabs={tabs} />
   ) : (
-    <OfferingResourceSubnetsTable offering={offering} tabs={tabs} />
+    <OfferingConsumerSubnetsTable offering={offering} tabs={tabs} />
   );
 };

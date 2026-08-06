@@ -59,7 +59,11 @@ export const CustomerAccessControlPanel: FunctionComponent<
         </>
       }
       rowActions={({ row }) => (
-        <AccessSubnetRowActions row={row} refetch={tableProps.fetch} />
+        <AccessSubnetRowActions
+          row={row}
+          refetch={tableProps.fetch}
+          customerUuid={customer.uuid}
+        />
       )}
     />
   );

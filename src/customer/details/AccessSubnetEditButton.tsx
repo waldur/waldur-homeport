@@ -12,11 +12,12 @@ const AccessSubnetForm = lazyComponent(() =>
 export const AccessSubnetEditButton = ({
   row,
   refetch,
+  customer_uuid,
 }: AccessSubnetFormData) => (
   <EditModalButton
     dialog={AccessSubnetForm}
     row={row}
-    buildResolve={(r) => ({ row: r, refetch })}
+    buildResolve={(r) => ({ row: r, refetch, customer_uuid })}
     size="lg"
   />
 );

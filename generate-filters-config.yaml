@@ -1,4 +1,17 @@
 overrides:
+  access_subnets:
+    filters:
+      - applies_to_portal
+      - is_staff_managed
+      - offering_uuid
+    applies_to_portal:
+      label: Applies to sign-in
+    is_staff_managed:
+      label: Managed by staff
+    offering_uuid:
+      label: Applies to offering
+      operationId: marketplace_provider_offerings_list
+
   customers:
     filters:
       - accounting_is_running

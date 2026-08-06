@@ -1,47 +1,50 @@
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Card, Table as BsTable } from 'react-bootstrap';
 import {
+  AccessSubnet,
   Offering,
   Resource,
-  ResourceAccessSubnet,
-  marketplaceResourceAccessSubnetsList,
+  accessSubnetsList,
 } from 'waldur-js-client';
 
+import { Tip } from '@/core/Tooltip';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { useUser } from '@/workspace/hooks';
-
-import { ResourceAccessSubnetCreateButton } from './ResourceAccessSubnetCreateButton';
-import { ResourceAccessSubnetRowActions } from './ResourceAccessSubnetRowActions';
 
 interface ResourceAccessSubnetsCardProps {
   resource: Resource;
   offering?: Offering;
 }
 
+/**
+ * Read-only view of the access subnets that apply to this resource.
+ *
+ * The list is defined once per (customer, offering) pair and applies to every
+ * resource the organization holds of that offering, so it is not editable from
+ * here — this view exists so that "why can my IP not reach this?" is answerable
+ * where the user is actually looking. Editing lives on the organization's
+ * access-control page.
+ */
 export const ResourceAccessSubnetsCard: FunctionComponent<
   ResourceAccessSubnetsCardProps
 > = ({ resource, offering }) => {
   const defaults = offering?.default_access_subnets ?? [];
-  const resource_uuid = resource.uuid;
-  const filter = useMemo(() => ({ resource_uuid }), [resource_uuid]);
+  const filter = useMemo(
+    () => ({
+      customer_uuid: resource.customer_uuid,
+      offering_uuid: resource.offering_uuid,
+    }),
+    [resource.customer_uuid, resource.offering_uuid],
+  );
   const tableProps = useTable({
-    table: 'resourceAccessSubnets',
+    table: `resourceEffectiveAccessSubnets-${resource.uuid}`,
     filter,
-    fetchData: createFetcher(marketplaceResourceAccessSubnetsList),
+    fetchData: createFetcher(accessSubnetsList),
     queryField: 'description',
-  });
-
-  const user = useUser();
-  const canManage = hasPermission(user, {
-    permission: PermissionEnum.UPDATE_RESOURCE,
-    projectId: resource.project_uuid,
-    customerId: resource.customer_uuid,
   });
 
   return (
@@ -74,10 +77,26 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
         </Card>
       )}
 
-      <Table<ResourceAccessSubnet>
+      <Table<AccessSubnet>
         {...tableProps}
         id="resource-access-subnets"
-        title={translate('Access subnets')}
+        // The explanation rides on the title rather than sitting above the
+        // table: it answers "why can I not edit this here?", which is only
+        // asked once, and a standing paragraph competes with the data.
+        title={
+          <>
+            {translate('Access subnets')}
+            <Tip
+              id="resource-access-subnets-help"
+              label={translate(
+                'Defined for this organization and offering, and applied to all of its resources of that offering. Managed under the organization’s access control.',
+              )}
+              className="ms-2"
+            >
+              <QuestionIcon size={16} weight="bold" className="text-muted" />
+            </Tip>
+          </>
+        }
         columns={[
           {
             title: translate('CIDR'),
@@ -91,28 +110,9 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
         verboseName={translate('Access subnets')}
         hasQuery
         tableActions={
-          <>
-            <FilteredEventsButton
-              filter={{ scope: resource.url, feature: ['access_subnets'] }}
-            />
-
-            {canManage && (
-              <ResourceAccessSubnetCreateButton
-                refetch={tableProps.fetch}
-                resource_url={resource.url}
-              />
-            )}
-          </>
-        }
-        rowActions={
-          canManage
-            ? ({ row }) => (
-                <ResourceAccessSubnetRowActions
-                  row={row}
-                  refetch={tableProps.fetch}
-                />
-              )
-            : undefined
+          <FilteredEventsButton
+            filter={{ scope: resource.url, feature: ['access_subnets'] }}
+          />
         }
       />
     </>

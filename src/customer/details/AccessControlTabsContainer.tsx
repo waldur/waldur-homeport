@@ -1,17 +1,14 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FC, useMemo, useState } from 'react';
+import { FC, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
-import { AccessSubnet, accessSubnetsList } from 'waldur-js-client';
 
 import { Tip } from '@/core/Tooltip';
-import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
-import { createFetcher } from '@/table/api';
-import Table from '@/table/Table';
-import { useTable } from '@/table/useTable';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
-import { AccessSubnetCreateButton } from './AccessSubnetCreateButton';
-import { AccessSubnetRowActions } from './AccessSubnetRowActions';
+import { AccessSubnetMatrix } from './AccessSubnetMatrix';
 import { CustomerMembershipRestrictionsPanel } from './CustomerMembershipRestrictionsPanel';
 import { CustomerEditPanelProps } from './types';
 
@@ -22,7 +19,13 @@ const getSubTabs = (): Array<{
   title: string;
   tooltip?: string;
 }> => [
-  { key: 'subnets', title: translate('Allowed access subnets') },
+  {
+    key: 'subnets',
+    title: translate('Access subnets'),
+    tooltip: translate(
+      'Networks this organization trusts. Each entry says what it is trusted for: signing in to the portal, reaching resources of a given offering, or both.',
+    ),
+  },
   {
     key: 'restrictions',
     title: translate('Membership restrictions'),
@@ -36,27 +39,13 @@ export const AccessControlTabsContainer: FC<CustomerEditPanelProps> = ({
   customer,
 }) => {
   const [activeKey, setActiveKey] = useState<SubTabKey>('subnets');
-
   const customer_uuid = customer.uuid;
-  const filter = useMemo(() => ({ customer_uuid }), [customer_uuid]);
-  const tableProps = useTable({
-    table: 'customerAccessControl',
-    filter,
-    fetchData: createFetcher(accessSubnetsList),
-    queryField: 'description',
-  });
 
-  const subnetsActions = (
-    <>
-      <FilteredEventsButton
-        filter={{ customer_uuid, feature: 'access_subnets' }}
-      />
-      <AccessSubnetCreateButton
-        refetch={tableProps.fetch}
-        customer_url={customer.url}
-      />
-    </>
-  );
+  const user = useUser();
+  const canManage = hasPermission(user, {
+    permission: PermissionEnum.CREATE_ACCESS_SUBNET,
+    customerId: customer_uuid,
+  });
 
   return (
     <Card className="card-bordered">
@@ -64,9 +53,6 @@ export const AccessControlTabsContainer: FC<CustomerEditPanelProps> = ({
         <Card.Title>
           <h3>{translate('Access control')}</h3>
         </Card.Title>
-        <div className="card-toolbar d-flex gap-2">
-          {activeKey === 'subnets' && subnetsActions}
-        </div>
       </Card.Header>
       <Card.Header className="border-bottom align-items-stretch py-0 min-h-auto">
         <Tab.Container
@@ -104,27 +90,7 @@ export const AccessControlTabsContainer: FC<CustomerEditPanelProps> = ({
       </Card.Header>
       <Card.Body className="p-0">
         {activeKey === 'subnets' && (
-          <Table<AccessSubnet>
-            {...tableProps}
-            id="access-control-subnets"
-            columns={[
-              {
-                title: translate('CIDR'),
-                render: ({ row }) => <>{row.inet}</>,
-              },
-              {
-                title: translate('Description'),
-                render: ({ row }) => <>{row.description}</>,
-              },
-            ]}
-            verboseName={translate('Access control')}
-            hasQuery
-            hasActionBar={false}
-            cardBordered={false}
-            rowActions={({ row }) => (
-              <AccessSubnetRowActions row={row} refetch={tableProps.fetch} />
-            )}
-          />
+          <AccessSubnetMatrix customer={customer} canManage={canManage} />
         )}
         {activeKey === 'restrictions' && (
           <CustomerMembershipRestrictionsPanel customer={customer} />

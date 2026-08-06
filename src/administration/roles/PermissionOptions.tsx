@@ -93,14 +93,6 @@ export const PermissionOptions = [
         value: 'RESOURCE.CONSUMPTION_LIMITATION',
       },
       {
-        label: translate('Create resource access subnet'),
-        value: 'RESOURCE_ACCESS_SUBNET.CREATE',
-      },
-      {
-        label: translate('Delete resource access subnet'),
-        value: 'RESOURCE_ACCESS_SUBNET.DELETE',
-      },
-      {
         label: translate('List importable for resource'),
         value: 'RESOURCE.LIST_IMPORTABLE',
       },
@@ -135,10 +127,6 @@ export const PermissionOptions = [
       {
         label: translate('Update resource'),
         value: 'RESOURCE.UPDATE',
-      },
-      {
-        label: translate('Update resource access subnet'),
-        value: 'RESOURCE_ACCESS_SUBNET.UPDATE',
       },
     ],
   },
