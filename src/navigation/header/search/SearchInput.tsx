@@ -15,6 +15,7 @@ interface SearchProps {
   className?: string;
   autoFocus?: boolean;
   showShortcut?: boolean;
+  onFocus?: () => void;
 }
 
 const getShortcutHint = () => {
@@ -32,6 +33,7 @@ export const SearchInput = ({
   className,
   autoFocus,
   showShortcut,
+  onFocus,
 }: SearchProps) => {
   const isLoading = result.isLoading || result.isRefetching;
   const shortcutHint = useMemo(() => getShortcutHint(), []);
@@ -46,6 +48,7 @@ export const SearchInput = ({
           placeholder={translate('Search...')}
           icon={<MagnifyingGlassIcon weight="bold" />}
           autoFocus={autoFocus}
+          onFocus={onFocus}
         />
 
         {/* Keyboard shortcut hint */}

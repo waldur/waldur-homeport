@@ -7,6 +7,7 @@ import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { getIconUrl } from '@/core/api';
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { hasSupport as hasSupportSelector } from '@/issues/hooks';
 import { isMatrixChatEnabled } from '@/matrix/utils';
@@ -20,15 +21,22 @@ import { SearchToggle } from './search/SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
 
 const AsideMobileToggle: FunctionComponent = () => (
-  <button
-    className="btn-nav-item me-1"
-    id="kt_aside_mobile_toggle"
-    type="button"
+  <Tip
+    label={translate('Toggle navigation menu')}
+    id="aside-mobile-toggle"
+    placement="bottom"
   >
-    <span className="svg-icon svg-icon-1x">
-      <ListIcon weight="bold" />
-    </span>
-  </button>
+    <button
+      className="btn-nav-item me-1"
+      id="kt_aside_mobile_toggle"
+      type="button"
+      aria-label={translate('Toggle navigation menu')}
+    >
+      <span className="svg-icon svg-icon-1x">
+        <ListIcon weight="bold" />
+      </span>
+    </button>
+  </Tip>
 );
 
 interface AppHeaderProps {

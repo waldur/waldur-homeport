@@ -3,6 +3,8 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
 import { useModal } from '@/modal/actions';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
@@ -34,20 +36,23 @@ export const ResourcesMenuFilterButton = () => {
     e.stopPropagation();
   };
   return (
-    <button
-      type="button"
-      className="text-btn menu-btn btn-filter-resources position-relative"
-      onClick={callback}
-    >
-      <FunnelSimpleIcon size={20} weight="bold" />
-      {(values?.organization || values?.project) && (
-        <HeaderButtonBullet
-          size={9}
-          blink={false}
-          variant="primary"
-          className="me-n2 mt-2 border border-2"
-        />
-      )}
-    </button>
+    <Tip label={translate('Filter resources')} id="resources-menu-filter-tip">
+      <button
+        type="button"
+        className="text-btn menu-btn btn-filter-resources position-relative"
+        onClick={callback}
+        aria-label={translate('Filter resources')}
+      >
+        <FunnelSimpleIcon size={20} weight="bold" />
+        {(values?.organization || values?.project) && (
+          <HeaderButtonBullet
+            size={9}
+            blink={false}
+            variant="primary"
+            className="me-n2 mt-2 border border-2"
+          />
+        )}
+      </button>
+    </Tip>
   );
 };

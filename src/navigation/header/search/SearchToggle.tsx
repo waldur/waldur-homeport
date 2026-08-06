@@ -2,6 +2,9 @@ import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { useEffect } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+
 import { SearchInput } from './SearchInput';
 import { SearchPopover } from './SearchPopover';
 import { useSearch } from './useSearch';
@@ -66,18 +69,24 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
       }
       rootClose={true}
     >
-      <div
-        className="d-flex align-items-center"
-        id="searchContainer"
-        onClick={() => setShow(true)}
-        aria-hidden="true"
-      >
+      <div className="d-flex align-items-center" id="searchContainer">
         {compact ? (
-          <button className="btn-nav-item" type="button">
-            <span className="svg-icon svg-icon-2">
-              <MagnifyingGlassIcon weight="bold" />
-            </span>
-          </button>
+          <Tip
+            label={translate('Search')}
+            id="search-toggle-tip"
+            placement="bottom"
+          >
+            <button
+              className="btn-nav-item"
+              type="button"
+              onClick={() => setShow(true)}
+              aria-label={translate('Search')}
+            >
+              <span className="svg-icon svg-icon-2">
+                <MagnifyingGlassIcon weight="bold" />
+              </span>
+            </button>
+          </Tip>
         ) : (
           <>
             <SearchInput
@@ -87,12 +96,24 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
               show={show}
               className="d-none d-lg-block"
               showShortcut={!show}
+              onFocus={() => setShow(true)}
             />
-            <button className="btn-nav-item d-lg-none" type="button">
-              <span className="svg-icon svg-icon-2">
-                <MagnifyingGlassIcon weight="bold" />
-              </span>
-            </button>
+            <Tip
+              label={translate('Search')}
+              id="search-toggle-mobile-tip"
+              placement="bottom"
+            >
+              <button
+                className="btn-nav-item d-lg-none"
+                type="button"
+                onClick={() => setShow(true)}
+                aria-label={translate('Search')}
+              >
+                <span className="svg-icon svg-icon-2">
+                  <MagnifyingGlassIcon weight="bold" />
+                </span>
+              </button>
+            </Tip>
           </>
         )}
       </div>
