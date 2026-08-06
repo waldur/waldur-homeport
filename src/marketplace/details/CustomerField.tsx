@@ -23,7 +23,7 @@ const CustomerSelect = ({ input, organizationGroups, offering }) => {
   const form = useForm();
   const { customer } = useOrderFormData();
 
-  const pickFirstAllowedProject = useCallback(
+  const preselectSoleProject = useCallback(
     async (customerUuid) => {
       const query: ProjectsListData['query'] = { customer: customerUuid };
       const roles = offering ? getOfferingRestrictedRoles(offering) : [];
@@ -31,7 +31,10 @@ const CustomerSelect = ({ input, organizationGroups, offering }) => {
         query.current_user_has_role = roles;
       }
       const projects = await projectsList({ query }).then((r) => r.data);
-      form.change('project', projects[0]);
+      // Preselect only when there is nothing to decide. Picking the first of
+      // several would place the order in an arbitrary project. Clearing is
+      // deliberate: the previous organization's project must not survive.
+      form.change('project', projects.length === 1 ? projects[0] : undefined);
     },
     [offering, form],
   );
@@ -40,7 +43,7 @@ const CustomerSelect = ({ input, organizationGroups, offering }) => {
     async (value) => {
       if (!customer) {
         input.onChange(value);
-        await pickFirstAllowedProject(value.uuid);
+        await preselectSoleProject(value.uuid);
         return;
       }
       try {
@@ -58,12 +61,12 @@ const CustomerSelect = ({ input, organizationGroups, offering }) => {
           },
         );
         input.onChange(value);
-        await pickFirstAllowedProject(value.uuid);
+        await preselectSoleProject(value.uuid);
       } catch {
         // Swallow
       }
     },
-    [customer, input, pickFirstAllowedProject],
+    [customer, input, preselectSoleProject],
   );
 
   const loadOptions = useMemo(() => {

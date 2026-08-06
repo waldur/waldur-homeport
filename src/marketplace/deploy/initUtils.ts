@@ -1,6 +1,13 @@
-import { Project, projectsRetrieve, Offering } from 'waldur-js-client';
+import {
+  Project,
+  projectsRetrieve,
+  Offering,
+  customersList,
+  CustomersListData,
+} from 'waldur-js-client';
 
 import { getCustomer } from '@/customer/utils';
+import { getOfferingRestrictedRoles } from '@/marketplace/offerings/utils';
 import { Customer } from '@/workspace/types';
 
 import { MarketplaceFilterItem } from '../landing/filter/types';
@@ -97,6 +104,7 @@ export const resolveProject = async (
  * 2. URL params (organization_uuid or organization object)
  * 3. Marketplace filters
  * 4. Current workspace customer
+ * 5. The only organization the user may order from, when there is just one
  *
  * Handles legacy compact URL format (uuid::name) by fetching full customer.
  */
@@ -147,5 +155,38 @@ export const resolveCustomer = async (
   }
 
   // Priority 4: Current workspace
-  return currentCustomer;
+  if (currentCustomer) {
+    return currentCustomer;
+  }
+
+  // Priority 5: the only organization on offer, since that is no decision at
+  // all. The query mirrors the organization select's own, so this can never
+  // pick something the select would not list.
+  try {
+    const query: CustomersListData['query'] = {
+      field: ['name', 'uuid', 'url', 'payment_profiles'],
+      // Two results are enough to tell "the only one" from "one of several".
+      page_size: 2,
+    };
+    const organizationGroups = selectedOffering?.organization_groups ?? [];
+    if (organizationGroups.length) {
+      query.organization_group_uuid = organizationGroups.map(
+        (group) => group.uuid,
+      );
+    }
+    const roles = selectedOffering
+      ? getOfferingRestrictedRoles(selectedOffering)
+      : [];
+    if (roles.length) {
+      query.current_user_has_role = roles;
+    }
+    const customers = await customersList({ query }).then((r) => r.data);
+    if (customers.length === 1) {
+      return customers[0] as Customer;
+    }
+  } catch {
+    // Failed to load organizations, leave the field for the user to fill
+  }
+
+  return undefined;
 };
