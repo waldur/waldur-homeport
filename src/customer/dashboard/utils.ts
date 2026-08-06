@@ -72,6 +72,10 @@ export function useCustomerCreditChart(customer: Customer) {
       // Invoice exposes `compensations` (plural); InvoiceCost (project-level)
       // exposes `compensation`.
       compensation: Number(invoice.compensations),
+      // Likewise `incurred_costs` against InvoiceCost's `incurred`: the gross
+      // cost, of which `price` is the net after compensation. Already in the
+      // requested field list above.
+      incurred: Number(invoice.incurred_costs),
     }));
     return getCreditChartAndOptions(invoiceCosts, customer.credit?.value);
   }, [invoices, customer]);

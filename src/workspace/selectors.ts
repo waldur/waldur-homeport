@@ -60,12 +60,34 @@ export const checkIsOwnerOrStaff = (
   return customer && checkIsOwner(customer, user);
 };
 
+const checkIsReader = (
+  customer: AtLeast<Customer, 'uuid'>,
+  user: User,
+): boolean =>
+  !!user?.permissions?.find(
+    (permission) =>
+      permission.scope_type === 'customer' &&
+      permission.scope_uuid === customer?.uuid &&
+      permission.role_name === RoleEnum.CUSTOMER_READER,
+  );
+
 export const isOwner = createSelector(getCustomer, getUser, checkIsOwner);
 
 export const isOwnerOrStaff = createSelector(
   getCustomer,
   getUser,
   checkIsOwnerOrStaff,
+);
+
+/**
+ * Organisation readers hold a read-only role, so they belong wherever a page
+ * only displays organisation data and offers no way to change it.
+ */
+export const isOwnerOrStaffOrReader = createSelector(
+  getCustomer,
+  getUser,
+  (customer, user) =>
+    checkIsOwnerOrStaff(customer, user) || checkIsReader(customer, user),
 );
 
 /**

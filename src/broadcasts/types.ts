@@ -1,3 +1,5 @@
+import { IdNamePair } from 'waldur-js-client';
+
 interface Message {
   subject: string;
   body: string;
@@ -7,10 +9,7 @@ export interface MessageTemplate extends Message {
   uuid: string;
 }
 
-export interface IdNamePair {
-  name: string;
-  uuid: string;
-}
+export type { IdNamePair };
 
 interface Broadcast extends Message {
   send_at: string;

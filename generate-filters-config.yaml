@@ -301,6 +301,52 @@ overrides:
     filters:
       - state
 
+  openportal_remote_projects:
+    filters:
+      - state
+
+  openportal_managed_project_audit:
+    filters:
+      - event_type
+      - timestamp_after
+      - timestamp_before
+    event_type:
+      label: Event type
+      enumOverrides:
+        created: Created
+        approved: Approved
+        rejected: Rejected
+        deleted: Deleted
+        note_added: Note added
+        details_updated: Details updated
+        project_attached: Project attached
+        project_detached: Project detached
+    timestamp_after:
+      label: From
+    timestamp_before:
+      label: To
+
+  openportal_remote_project_audit:
+    filters:
+      - event_type
+      - timestamp_after
+      - timestamp_before
+    event_type:
+      label: Event type
+      enumOverrides:
+        award_attempted: Award attempted
+        award_rejected: Award rejected
+        award_created: Award created
+        award_updated: Award updated
+        award_update_confirmed: Award update confirmed
+        award_update_rejected: Award update rejected
+        state_changed: State changed
+        resource_deleted: Resource deleted
+    timestamp_after:
+      label: From
+    timestamp_before:
+      label: To
+
   marketplace_plan_components:
     filters:
       - offering_uuid
