@@ -5,6 +5,7 @@ import { resetDrawerDOM } from '@/ai-assistant/components/LLMChatDrawer';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
+import { Tip } from '@/core/Tooltip';
 import { useDrawer } from '@/drawer/actions';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { isDrawerOpen, isDrawerOpenWithClass } from '@/drawer/utils';
@@ -48,18 +49,24 @@ export const LLMChatDrawerToggle: React.FC = () => {
 
   return (
     <div className="d-flex align-items-center ms-1">
-      <button
-        id="llm-chat-drawer-toggle"
-        type="button"
-        className="position-relative btn-nav-item"
-        onClick={toggleChatDrawer}
-        title={translate('Open AI assistant')}
+      <Tip
+        label={translate('Open AI assistant')}
+        id="llm-chat-drawer-toggle-tip"
+        placement="bottom"
       >
-        <span className="svg-icon svg-icon-2">
-          <SparkleIcon weight="bold" />
-        </span>
-        {hasNewMessages && <HeaderButtonBullet />}
-      </button>
+        <button
+          id="llm-chat-drawer-toggle"
+          type="button"
+          className="position-relative btn-nav-item"
+          onClick={toggleChatDrawer}
+          aria-label={translate('Open AI assistant')}
+        >
+          <span className="svg-icon svg-icon-2">
+            <SparkleIcon weight="bold" />
+          </span>
+          {hasNewMessages && <HeaderButtonBullet />}
+        </button>
+      </Tip>
     </div>
   );
 };

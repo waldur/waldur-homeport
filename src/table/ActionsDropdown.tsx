@@ -12,15 +12,11 @@ import {
   useEffect,
   useState,
 } from 'react';
-import {
-  Dropdown,
-  DropdownProps,
-  OverlayTrigger,
-  Tooltip,
-} from 'react-bootstrap';
+import { Dropdown, DropdownProps } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 import { createPortal } from 'react-dom';
 
+import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 import { DropdownActionItemType } from './types';
@@ -113,12 +109,9 @@ export const TableDropdownToggle = ({
 
   if (tooltipMessage && disabled) {
     return (
-      <OverlayTrigger
-        placement="top"
-        overlay={<Tooltip>{tooltipMessage}</Tooltip>}
-      >
+      <Tip label={tooltipMessage} id="actions-dropdown-tip">
         <span className="d-inline-block">{renderToggle()}</span>
-      </OverlayTrigger>
+      </Tip>
     );
   }
 

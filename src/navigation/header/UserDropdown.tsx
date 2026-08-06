@@ -21,12 +21,14 @@ export const UserDropdownMenu: FunctionComponent = () => {
   const user = useUser();
   return (
     <>
-      <div
+      <button
+        type="button"
         className="btn d-flex align-items-center gap-4 py-2 px-2"
         data-kt-menu-trigger="click"
         data-kt-menu-attach="parent"
         data-kt-menu-placement="bottom"
         data-kt-menu-flip="bottom"
+        aria-label={translate('User menu')}
       >
         <div className="cursor-pointer symbol symbol-30px symbol-md-40px justify-content-center">
           {!user ? (
@@ -56,7 +58,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
             </Badge>
           )}
         </div>
-      </div>
+      </button>
       <div
         className="menu-dropdown-default menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold py-4 fs-6 w-275px"
         data-kt-menu="true"

@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CompactIconButton, MediumIconButton } from '@/core/buttons/IconButton';
+import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { resetSelection, setFilterQuery, toggleColumn } from '@/table/actions';
 import { getTableState, selectSelectedRows } from '@/table/selectors';
@@ -165,18 +166,24 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
               </Popover>
             }
           >
-            <Button
-              variant="tertiary"
-              size="sm"
-              type="button"
-              aria-label={translate('Toggle visible columns')}
-              title={translate('Toggle visible columns')}
-              className="btn-icon btn-icon-md"
-            >
-              <span className="svg-icon svg-icon-2">
-                <GearSixIcon weight="bold" />
-              </span>
-            </Button>
+            <span className="d-inline-flex">
+              <Tip
+                label={translate('Toggle visible columns')}
+                id="expandable-row-settings-tip"
+              >
+                <Button
+                  variant="tertiary"
+                  size="sm"
+                  type="button"
+                  aria-label={translate('Toggle visible columns')}
+                  className="btn-icon btn-icon-md"
+                >
+                  <span className="svg-icon svg-icon-2">
+                    <GearSixIcon weight="bold" />
+                  </span>
+                </Button>
+              </Tip>
+            </span>
           </OverlayTrigger>
         ) : (
           <MediumIconButton

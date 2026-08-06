@@ -28,6 +28,7 @@ import {
 } from 'react-bootstrap';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
+import { Tip } from '@/core/Tooltip';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 
@@ -216,16 +217,24 @@ export const TableColumnButton: FC<TableProps> = ({
       }
       rootClose
     >
-      <Button
-        disabled={mode !== 'table'}
-        variant="tertiary"
-        size="lg"
-        className="btn-icon"
-      >
-        <span className="svg-icon svg-icon-2">
-          <GearIcon weight="bold" />
-        </span>
-      </Button>
+      <span className="d-inline-flex">
+        <Tip
+          label={translate('Toggle visible columns')}
+          id="table-columns-button-tip"
+        >
+          <Button
+            disabled={mode !== 'table'}
+            variant="tertiary"
+            size="lg"
+            className="btn-icon"
+            aria-label={translate('Toggle visible columns')}
+          >
+            <span className="svg-icon svg-icon-2">
+              <GearIcon weight="bold" />
+            </span>
+          </Button>
+        </Tip>
+      </span>
     </OverlayTrigger>
   );
 };
