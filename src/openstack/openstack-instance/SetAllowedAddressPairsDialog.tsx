@@ -26,7 +26,7 @@ import { validatePrivateCIDR } from '../utils';
 import { formatAddressList } from './utils';
 
 export interface AllowedAddressPairsPort {
-  url: string;
+  url?: string;
   fixed_ips?: OpenStackFixedIp[];
   allowed_address_pairs?: OpenStackAllowedAddressPair[];
 }

@@ -10,3 +10,4 @@ yarn-error.log
 locales/llm-prompts
 locales/*backup*
 e2e-visual/snapshots/
+/waldur_api.yaml

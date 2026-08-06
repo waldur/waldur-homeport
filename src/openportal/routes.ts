@@ -1,11 +1,20 @@
+import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
-import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { isStaffOrSupport, isOwnerOrStaff } from '@/workspace/selectors';
+import {
+  isStaffOrSupport,
+  isOwnerOrStaff,
+  isOwnerOrStaffOrReader,
+} from '@/workspace/selectors';
 
 const isOrganisationMemberOrStaffOrSupport = (state) =>
   isOwnerOrStaff(state) || isStaffOrSupport(state);
+
+// The remote project pages are read-only views of organisation data, so
+// organisation readers belong here too, alongside owners, staff and support.
+const canViewRemoteProjects = (state) =>
+  isOrganisationMemberOrStaffOrSupport(state) || isOwnerOrStaffOrReader(state);
 
 export const states: StateDeclaration[] = [
   {
@@ -19,8 +28,10 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Usage report'),
       priority: 105,
-      permissions: [isOrganisationMemberOrStaffOrSupport],
-      feature: MarketplaceFeatures.show_experimental_ui_components,
+      permissions: [
+        isOrganisationMemberOrStaffOrSupport,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
     },
   },
   {
@@ -35,8 +46,10 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Usage report'),
       priority: 105,
-      permissions: [isOrganisationMemberOrStaffOrSupport],
-      feature: MarketplaceFeatures.show_experimental_ui_components,
+      permissions: [
+        isOrganisationMemberOrStaffOrSupport,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
     },
   },
   {
@@ -51,8 +64,10 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Usage report'),
       priority: 101,
-      permissions: [isStaffOrSupport],
-      feature: MarketplaceFeatures.show_experimental_ui_components,
+      permissions: [
+        isStaffOrSupport,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
     },
   },
   {
@@ -67,8 +82,10 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Allocation summary'),
       priority: 106,
-      permissions: [isOrganisationMemberOrStaffOrSupport],
-      feature: MarketplaceFeatures.show_experimental_ui_components,
+      permissions: [
+        isOrganisationMemberOrStaffOrSupport,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
     },
   },
 
@@ -83,7 +100,80 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Check user access'),
       priority: 102,
-      feature: MarketplaceFeatures.show_experimental_ui_components,
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+    },
+  },
+  {
+    name: 'organization-remote-projects',
+    url: 'remote-projects/',
+    parent: 'organization',
+    component: lazyComponent(() =>
+      import('./remote-projects/RemoteProjectsList').then((module) => ({
+        default: module.RemoteProjectsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Remote Projects'),
+      priority: 107,
+      permissions: [
+        canViewRemoteProjects,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
+    },
+  },
+  {
+    name: 'organization-remote-project-detail',
+    url: 'remote-projects/:remoteProjectUuid/',
+    parent: 'organization',
+    component: lazyComponent(() =>
+      import('./remote-projects/RemoteProjectDetail').then((module) => ({
+        default: module.RemoteProjectDetail,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Remote project'),
+      priority: 107,
+      permissions: [
+        canViewRemoteProjects,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
+    },
+  },
+  {
+    name: 'organization-remote-project-audit',
+    url: 'remote-projects/:remoteProjectUuid/audit/',
+    parent: 'organization',
+    component: lazyComponent(() =>
+      import('./remote-projects/RemoteProjectAuditLog').then((module) => ({
+        default: module.RemoteProjectAuditLog,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Audit Log'),
+      skipBreadcrumb: true,
+      priority: 107,
+      permissions: [
+        canViewRemoteProjects,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
+    },
+  },
+  {
+    name: 'organization-remote-projects-audit',
+    url: 'remote-projects-audit/',
+    parent: 'organization',
+    component: lazyComponent(() =>
+      import('./remote-projects/AllRemoteProjectsAuditLog').then((module) => ({
+        default: module.AllRemoteProjectsAuditLog,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Remote Projects Audit Log'),
+      priority: 107,
+      permissions: [
+        canViewRemoteProjects,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
     },
   },
 ];

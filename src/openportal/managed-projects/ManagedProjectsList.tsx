@@ -1,9 +1,18 @@
+import { ChatTeardropTextIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { openportalManagedProjectsList } from 'waldur-js-client';
+import {
+  ManagedProject,
+  openportalManagedProjectsList,
+} from 'waldur-js-client';
 
+import { Badge } from '@/core/Badge';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { useTitle } from '@/navigation/title';
+import { BooleanFilter } from '@/table';
+import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
@@ -19,6 +28,34 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { ManagedProjectActions } from './ManagedProjectActions';
 import { ManagedProjectExpandableRow } from './ManagedProjectExpandableRow';
+import { ManagedProjectNotesDialog } from './ManagedProjectNotesDialog';
+import { isEmbargoed } from './utils';
+
+const NotesButton = ({
+  row,
+  refetch,
+}: {
+  row: ManagedProject;
+  refetch: () => void;
+}) => {
+  const { openDialog } = useModal();
+  const count = row.details?.notes?.length ?? 0;
+
+  return (
+    <ActionButton
+      title={String(count)}
+      iconNode={<ChatTeardropTextIcon weight="bold" />}
+      variant="tertiary"
+      action={() =>
+        openDialog(ManagedProjectNotesDialog, {
+          row,
+          resolve: { refetch },
+          size: 'md',
+        })
+      }
+    />
+  );
+};
 
 const renderProjectTemplate = (row: any) => {
   if (row.project_template_data) {
@@ -45,6 +82,7 @@ export const ManagedProjectsList = () => {
   useTitle(translate('Managed Projects'), '', 'browser');
 
   const values = useFilterValues(`ManagedProjectsList`);
+  const hideEmbargoed = Boolean(values?.hide_embargoed);
 
   const filter = useMemo(
     () => selectOpenportalManagedProjectsFilter(values),
@@ -59,6 +97,9 @@ export const ManagedProjectsList = () => {
     filter: {
       ...filter,
       state: filter?.state || ['pending'],
+      // Filtered server-side: dropping rows from the fetched page instead
+      // would leave the result count and the page contents disagreeing.
+      ...(hideEmbargoed ? { hide_embargoed: true } : {}),
     },
   });
 
@@ -66,9 +107,23 @@ export const ManagedProjectsList = () => {
     {
       title: translate('Project'),
       orderField: 'row.details.name',
-      render: ({ row }) => renderFieldOrDash(row.details.name),
+      render: ({ row }) => (
+        <Link
+          state="marketplace-provider-managed-project-detail"
+          params={{ identifier: row.identifier, destination: row.destination }}
+        >
+          {row.details.name || row.identifier || DASH_ESCAPE_CODE}
+        </Link>
+      ),
       keys: ['name'],
       id: 'managedproject',
+    },
+    {
+      title: translate('Notes'),
+      render: ({ row }) => <NotesButton row={row} refetch={tableProps.fetch} />,
+      keys: ['notes'],
+      optional: true,
+      id: 'notes',
     },
     {
       title: translate('Offering'),
@@ -134,7 +189,16 @@ export const ManagedProjectsList = () => {
     },
     {
       title: translate('State'),
-      render: ({ row }) => <>{row.state}</>,
+      render: ({ row }) => (
+        <>
+          {row.state}
+          {isEmbargoed(row) && (
+            <Badge variant="warning" pill outline className="ms-1">
+              {translate('Embargoed')}
+            </Badge>
+          )}
+        </>
+      ),
       keys: ['state'],
       id: 'state',
     },
@@ -151,10 +215,26 @@ export const ManagedProjectsList = () => {
       hasOptionalColumns
       expandableRowClassName="py-2 pe-2"
       expandableRow={ManagedProjectExpandableRow}
+      tableActions={
+        <Link
+          state="marketplace-provider-managed-projects-audit"
+          buttonVariant="outline-primary"
+        >
+          {translate('Audit Log')}
+        </Link>
+      }
       rowActions={({ row }) => (
         <ManagedProjectActions project={row} refetch={tableProps.fetch} />
       )}
-      filters={<OpenportalManagedProjectsFilter />}
+      filters={
+        <>
+          <OpenportalManagedProjectsFilter />
+          <BooleanFilter
+            title={translate('Hide embargoed')}
+            name="hide_embargoed"
+          />
+        </>
+      }
       formId={OpenportalManagedProjectsFilterFormId}
     />
   );

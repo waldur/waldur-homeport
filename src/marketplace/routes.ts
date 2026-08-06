@@ -678,6 +678,36 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-provider-managed-project-detail',
+    url: 'managed-projects/:identifier/:destination/',
+    component: lazyComponent(() =>
+      import('@/openportal/managed-projects/ManagedProjectDetail').then(
+        (module) => ({ default: module.ManagedProjectDetail }),
+      ),
+    ),
+    parent: 'managed-projects',
+    data: {
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+      breadcrumb: () => translate('Managed project'),
+    },
+  },
+
+  {
+    name: 'marketplace-provider-managed-projects-audit',
+    url: 'managed-projects-audit/',
+    component: lazyComponent(() =>
+      import('@/openportal/managed-projects/AllManagedProjectsAuditLog').then(
+        (module) => ({ default: module.AllManagedProjectsAuditLog }),
+      ),
+    ),
+    parent: 'managed-projects',
+    data: {
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+      breadcrumb: () => translate('Managed Projects Audit Log'),
+    },
+  },
+
+  {
     name: 'marketplace-provider-project-templates',
     url: 'project-templates/',
     component: lazyComponent(() =>

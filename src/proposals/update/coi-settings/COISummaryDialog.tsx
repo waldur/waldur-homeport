@@ -14,9 +14,8 @@ interface Props {
 }
 
 // COI type labels for display
-const COI_TYPE_INFO: Record<
-  string,
-  { label: string; description: string; severity: string }
+const COI_TYPE_INFO: Partial<
+  Record<CoiTypeEnum, { label: string; description: string; severity: string }>
 > = {
   INST_SAME: {
     label: translate('Same institution'),
