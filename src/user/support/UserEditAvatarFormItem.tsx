@@ -14,11 +14,13 @@ import { useUpdateUser } from './useUpdateUser';
 interface OwnProps {
   user: User;
   disabled?: boolean;
+  disabledReason?: string;
 }
 
 export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
   user,
   disabled,
+  disabledReason,
 }) => {
   const currentUser = useUser();
   const [image, setImage] = useState(user.image);
@@ -39,6 +41,7 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
         <WideImageField
           name="image"
           disabled={disabled}
+          disabledReason={disabledReason}
           alt={getItemAbbreviation(user, 'full_name')}
           initialValue={user.image}
           max={2 * 1024 * 1024} // 2MB
@@ -53,7 +56,7 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
                 disabledReason={
                   isTooLarge
                     ? translate('File exceeds 2 MB size limit')
-                    : translate('Profile editing is currently disabled')
+                    : disabledReason
                 }
                 pending={isLoading}
                 action={() => callback({ image })}

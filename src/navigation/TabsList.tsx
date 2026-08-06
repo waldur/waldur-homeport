@@ -10,6 +10,7 @@ import { isMatch } from 'lodash-es';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
 
 import { isDescendantOf, useTabs } from './useTabs';
 
@@ -142,7 +143,19 @@ export const TabsList: FC = () => {
               }
               disabled={parentTab.disabled}
             >
-              <span className="menu-title">{parentTab.title}</span>
+              {/* A disabled tab must say why it is unavailable. The tooltip
+                  sits inside the link because `.menu-link.disabled` keeps
+                  pointer events, so the hover trigger still fires. */}
+              {parentTab.disabled && parentTab.disabledReason ? (
+                <Tip
+                  id={`tab-disabled-reason-${parentIndex}`}
+                  label={parentTab.disabledReason}
+                >
+                  <span className="menu-title">{parentTab.title}</span>
+                </Tip>
+              ) : (
+                <span className="menu-title">{parentTab.title}</span>
+              )}
             </MenuLink>
           </span>
         ) : null,

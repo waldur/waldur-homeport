@@ -59,7 +59,11 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
           </div>
         </Card.Header>
         <Card.Body>
-          <UserProfileTabs user={user} disabled={isDisabled} />
+          <UserProfileTabs
+            user={user}
+            disabled={isDisabled}
+            disabledReason={translate('Terms of service not accepted')}
+          />
         </Card.Body>
       </Card>
     </>
