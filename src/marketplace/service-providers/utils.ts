@@ -4,12 +4,12 @@ import { IBreadcrumbItem } from '@/navigation/types';
 export const getProviderBreadcrumbItems = (provider): IBreadcrumbItem[] => [
   {
     key: 'marketplace',
-    text: 'Marketplace',
+    text: translate('Marketplace'),
     to: 'public.marketplace-landing',
   },
   {
     key: 'service-providers',
-    text: 'Service providers',
+    text: translate('Service providers'),
     to: 'public.marketplace-providers',
   },
   {

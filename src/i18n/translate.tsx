@@ -79,7 +79,15 @@ const DOMAIN_MESSAGES = {
       'Label that is visible to users in service catalog.',
     ),
     Marketplace: translate('Service catalog'),
+    'Marketplace offering': translate('Service catalog offering'),
     'Marketplace offerings': translate('Service catalog offerings'),
+    'Marketplace resource pull has been scheduled.': translate(
+      'Resource pull has been scheduled.',
+    ),
+    'Marketplace UUID': translate('Service catalog UUID'),
+    'Unable to pull marketplace resource.': translate(
+      'Unable to pull resource.',
+    ),
     'Welcome to marketplace': translate('Welcome to service catalog'),
     'Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.':
       translate(
@@ -92,6 +100,10 @@ const DOMAIN_MESSAGES = {
     'Resource is not connected to the marketplace yet.': translate(
       'Resource is not connected to the service catalog yet.',
     ),
+    'Tell me what you need and I will help you find the best offering in the marketplace.':
+      translate(
+        'Tell me what you need and I will help you find the best offering in the service catalog.',
+      ),
     'There are no categories in marketplace yet.': translate(
       'There are no categories in catalog yet.',
     ),
@@ -119,7 +131,15 @@ const DOMAIN_MESSAGES = {
       'Label that is visible to users in service catalog.',
     ),
     Marketplace: translate('Service catalog'),
+    'Marketplace offering': translate('Service catalog offering'),
     'Marketplace offerings': translate('Service catalog offerings'),
+    'Marketplace resource pull has been scheduled.': translate(
+      'Resource pull has been scheduled.',
+    ),
+    'Marketplace UUID': translate('Service catalog UUID'),
+    'Unable to pull marketplace resource.': translate(
+      'Unable to pull resource.',
+    ),
     'Welcome to marketplace': translate('Welcome to service catalog'),
     'Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.':
       translate(
@@ -132,6 +152,10 @@ const DOMAIN_MESSAGES = {
     'Resource is not connected to the marketplace yet.': translate(
       'Resource is not connected to the service catalog yet.',
     ),
+    'Tell me what you need and I will help you find the best offering in the marketplace.':
+      translate(
+        'Tell me what you need and I will help you find the best offering in the service catalog.',
+      ),
     'There are no categories in marketplace yet.': translate(
       'There are no categories in catalog yet.',
     ),
@@ -164,7 +188,15 @@ const DOMAIN_MESSAGES = {
       'Label that is visible to users in service catalog.',
     ),
     Marketplace: translate('Service catalog'),
+    'Marketplace offering': translate('Service catalog offering'),
     'Marketplace offerings': translate('Service catalog offerings'),
+    'Marketplace resource pull has been scheduled.': translate(
+      'Resource pull has been scheduled.',
+    ),
+    'Marketplace UUID': translate('Service catalog UUID'),
+    'Unable to pull marketplace resource.': translate(
+      'Unable to pull resource.',
+    ),
     'Welcome to marketplace': translate('Welcome to service catalog'),
     'Marketplace services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.':
       translate(
@@ -177,6 +209,10 @@ const DOMAIN_MESSAGES = {
     'Resource is not connected to the marketplace yet.': translate(
       'Resource is not connected to the service catalog yet.',
     ),
+    'Tell me what you need and I will help you find the best offering in the marketplace.':
+      translate(
+        'Tell me what you need and I will help you find the best offering in the service catalog.',
+      ),
     'There are no categories in marketplace yet.': translate(
       'There are no categories in catalog yet.',
     ),
