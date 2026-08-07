@@ -41,7 +41,7 @@ export const ChecklistExpandableRow: FC<{
                 ?.label || row.question_type,
           },
           {
-            title: translate('Order'),
+            title: translate('Display order'),
             render: ({ row }) => row.order,
           },
         ]}

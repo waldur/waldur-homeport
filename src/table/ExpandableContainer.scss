@@ -139,6 +139,21 @@ table .expandable-container {
   }
 }
 
+// Opt-out for tables that don't span the content area. The viewport arithmetic
+// above assumes the table is as wide as the page minus the aside; a table in a
+// narrower column (a proposal panel beside the progress rail, a modal) gets an
+// expanded panel wider than the table itself, and that width propagates back as
+// the cell's minimum — pushing the last columns behind a horizontal scroll the
+// collapsed table never needed. `fluid` takes the width it is given instead.
+table .expandable-container.fluid {
+  width: auto;
+  position: static;
+
+  &.has-multiselect {
+    width: auto;
+  }
+}
+
 // Mobile screens (no aside)
 @media (max-width: 992px) {
   table .expandable-container {
@@ -148,6 +163,13 @@ table .expandable-container {
 
     &.has-multiselect {
       width: calc(100vw - $tableSidesSpace - $checkboxWidth + 30px) !important;
+    }
+
+    // The rules above win on specificity *and* !important, so repeat the
+    // opt-out here rather than letting it silently stop applying on mobile.
+    &.fluid,
+    &.fluid.has-multiselect {
+      width: auto !important;
     }
   }
 }

@@ -21,7 +21,7 @@ export const AvailableOfferingCard: FC<{ availableOffering }> = ({
             params={{ offering_uuid: availableOffering.uuid }}
             buttonVariant="text-primary"
             className="btn-sm"
-            label={translate('Apply')}
+            label={translate('Apply to call')}
           />
 
           <OfferingDetailsLink

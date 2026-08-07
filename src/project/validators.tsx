@@ -27,7 +27,11 @@ export const getProjectNameRestrictionHint = (): string | undefined => {
 // Mirror the backend PROJECT_NAME_REGEX check (a full-string match) so the user
 // gets immediate feedback. An invalid pattern is an admin misconfiguration and
 // is skipped, matching the backend.
-const checkProjectNameRegex = (value: string) => {
+//
+// Exported for the proposal name field: a proposal name becomes part of the
+// project name created on approval, and ProposalSerializer.validate_name holds
+// it to this same pattern.
+export const checkProjectNameRegex = (value: string) => {
   const { regex, message } = getProjectNameRegex();
   if (!regex) {
     return undefined;

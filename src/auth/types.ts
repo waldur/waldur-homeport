@@ -42,6 +42,9 @@ type OfferingVisibilityMode =
   | 'hide_inaccessible'
   | 'require_membership';
 
+/** How a user reaches services. Navigation only; the API serves the same data. */
+export type ServiceAccessMode = 'calls' | 'marketplace' | 'both';
+
 interface CoreConfiguration {
   INVITATION_USE_WEBHOOKS: boolean;
   DEFAULT_IDP: Pick<IdentityProvider, 'provider' | 'auth_url' | 'client_id'>;
@@ -53,6 +56,7 @@ interface CoreConfiguration {
   ANONYMOUS_USER_CAN_VIEW_OFFERINGS: boolean;
   SHOW_OFFERING_COVER_IMAGE?: boolean;
   RESTRICTED_OFFERING_VISIBILITY_MODE?: OfferingVisibilityMode;
+  SERVICE_ACCESS_MODE?: ServiceAccessMode;
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;
   MASTERMIND_URL: string;

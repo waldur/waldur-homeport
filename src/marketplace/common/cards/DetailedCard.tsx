@@ -11,10 +11,10 @@ import { getAbbreviation } from '@/core/utils';
 import { translate } from '@/i18n';
 import Placeholder from '@/images/logo_w.svg';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import { CardRequestAccessButton } from '@/marketplace/offerings/access/CardRequestAccessButton';
 import { TagBadges } from '@/marketplace/tags/TagBadges';
 import { wrapTooltip } from '@/table/ActionButton';
 
-import { DeployButton } from '../DeployButton';
 import { getOfferingImage } from '../getOfferingImage';
 import { ViewOfferingButton } from '../ViewOfferingButton';
 
@@ -162,10 +162,9 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
 
         {/* Footer */}
         <Card.Footer className="py-4 px-5 d-flex justify-content-end gap-2">
-          <DeployButton
+          <CardRequestAccessButton
             offering={offering}
-            disabled={isDisabled}
-            disabledReason={disabledButtonTooltip}
+            orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}
           />
           <ViewOfferingButton
             offering={offering}

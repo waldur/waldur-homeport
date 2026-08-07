@@ -7,9 +7,9 @@ import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { getAbbreviation } from '@/core/utils';
 import Placeholder from '@/images/logo_w.svg';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import { CardRequestAccessButton } from '@/marketplace/offerings/access/CardRequestAccessButton';
 import { wrapTooltip } from '@/table/ActionButton';
 
-import { DeployButton } from '../DeployButton';
 import { getOfferingImage } from '../getOfferingImage';
 import { ViewOfferingButton } from '../ViewOfferingButton';
 
@@ -76,10 +76,9 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
 
         {/* Footer */}
         <Card.Footer className="py-4 px-5 d-flex justify-content-end gap-4">
-          <DeployButton
+          <CardRequestAccessButton
             offering={offering}
-            disabled={isDisabled}
-            disabledReason={disabledButtonTooltip}
+            orderDisabledReason={isDisabled ? disabledButtonTooltip : undefined}
           />
           <ViewOfferingButton
             offering={offering}

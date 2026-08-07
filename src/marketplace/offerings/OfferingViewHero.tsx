@@ -25,8 +25,8 @@ import { useOfferingAccessibility } from '../common/cards/useOfferingAccessibili
 import { RefreshButton } from '../common/RefreshButton';
 import { getLabel } from '../common/registry';
 
+import { RequestAccessButton } from './access/RequestAccessButton';
 import { OfferingStateActions } from './actions/OfferingStateActions';
-import { DeployButton } from './DeployButton';
 import { OfferingAccessButton } from './OfferingAccessButton';
 import { OfferingExtraActionsButton } from './OfferingExtraActionsButton';
 import { OfferingStateField } from './OfferingStateField';
@@ -244,10 +244,11 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         actions={
           <>
             {props.isPublic && (
-              <DeployButton
+              <RequestAccessButton
                 offering={offering}
-                disabled={!canDeploy}
-                disabledReason={disabledButtonTooltip}
+                orderDisabledReason={
+                  !canDeploy ? disabledButtonTooltip : undefined
+                }
               />
             )}
             {props.isPublic && <OfferingSupportButton offering={offering} />}

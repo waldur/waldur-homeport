@@ -30,6 +30,7 @@ export const OFFERING_CARD_MANDATORY_FIELDS: MarketplacePublicOfferingsListData[
     'paused_reason',
     'tags',
     'is_accessible',
+    'open_for_proposals',
   ];
 
 const createOfferingListFilterSelector = (

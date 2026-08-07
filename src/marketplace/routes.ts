@@ -38,7 +38,15 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-offering-public',
-    url: '/marketplace-provider-offering/:offering_uuid/',
+    // organization_uuid/project_uuid preselect the deploy form. They were
+    // already read from the URL by resolveCustomer/resolveProject, but were
+    // undeclared — so stateService.go dropped them and only a hand-typed URL
+    // carried them through.
+    url: '/marketplace-provider-offering/:offering_uuid/?organization_uuid&project_uuid',
+    params: {
+      organization_uuid: { dynamic: true, squash: true, value: null },
+      project_uuid: { dynamic: true, squash: true, value: null },
+    },
     component: lazyComponent(() =>
       import('./details/DetailsPage').then((module) => ({
         default: module.OfferingDetailsPage,

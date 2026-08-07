@@ -16,7 +16,7 @@ export const CallsAvailableOfferingsList: FC = () => {
   const filter = useMemo(
     (): MarketplacePublicOfferingsListData['query'] => ({
       page_size: 6,
-      accessible_via_calls: true,
+      open_for_proposals: true,
     }),
     [],
   );

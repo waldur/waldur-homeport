@@ -7,6 +7,7 @@ import {
 import { translate } from '@/i18n';
 import { CallOfferingStateField } from '@/proposals/details/CallOfferingStateField';
 import { Call } from '@/proposals/types';
+import { UnpreviewableDiscountWarning } from '@/proposals/UnpreviewableDiscountWarning';
 import { callLockedTooltip } from '@/proposals/workflow/constants';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
@@ -38,7 +39,15 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
       columns={[
         {
           title: translate('Offering name'),
-          render: ({ row }) => <>{row.offering_name}</>,
+          render: ({ row }) => (
+            <span className="d-inline-flex align-items-center gap-2">
+              {row.offering_name}
+              <UnpreviewableDiscountWarning
+                planComponents={(row.plan_details as any)?.components}
+                offeringComponents={row.components as any}
+              />
+            </span>
+          ),
         },
         {
           title: translate('Provider'),

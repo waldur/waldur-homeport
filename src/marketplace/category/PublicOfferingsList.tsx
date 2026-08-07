@@ -93,6 +93,7 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   'type',
   'tags',
   'is_accessible',
+  'open_for_proposals',
   // OfferingCard and RowActions
   'customer_uuid',
   'shared',

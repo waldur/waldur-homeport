@@ -71,7 +71,10 @@ const CustomerSelect = ({ input, organizationGroups, offering }) => {
 
   const loadOptions = useMemo(() => {
     const extra: CustomersListData['query'] = {
-      organization_group_uuid: organizationGroups.map((group) => group.uuid),
+      // Absent on sparse payloads; callers that filter by it must fetch it.
+      organization_group_uuid: (organizationGroups || []).map(
+        (group) => group.uuid,
+      ),
       field: [
         'name',
         'uuid',

@@ -34,6 +34,8 @@ export interface CallOffering {
   offering: string;
   offering_uuid: string;
   offering_name: string;
+  /** Plugin type; drives the per-type component filter a cost estimate needs. */
+  offering_type?: string;
   provider_name: string;
   state: CallOfferingState;
   category_name?: string;
@@ -41,6 +43,8 @@ export interface CallOffering {
   plan_details: Plan;
   options?: Offering['options'];
   components?: Offering['components'];
+  /** Set by the call manager, seeded from the offering's upload requirement. */
+  require_purchase_order?: boolean;
 }
 
 export interface CallOfferingFormData {
@@ -63,6 +67,12 @@ export interface ProposalResource {
   resource: any;
   url: string;
   uuid: string;
+  /** Purchase order authorising the spend, collected before submission. */
+  purchase_order_reference?: string;
+  attachment?: string | null;
+  /** Resolved server-side from the call entry, so the form need not re-derive it. */
+  purchase_order_required?: boolean;
+  has_purchase_order?: boolean;
 }
 
 export interface ProposalResourceFormData {
@@ -70,4 +80,7 @@ export interface ProposalResourceFormData {
   attributes: AttributesType;
   plan: Plan;
   limits?: Limits;
+  purchase_order_reference?: string;
+  /** Newly picked document; null means keep whatever is already stored. */
+  attachment?: File | null;
 }

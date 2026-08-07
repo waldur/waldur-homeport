@@ -55,6 +55,7 @@ export const OneTimeTab = ({
           <PrepaidRows
             components={oneTime.prepaidRows}
             overageComponents={oneTime.overageRows}
+            viewMode={viewMode}
           />
         )}
 
