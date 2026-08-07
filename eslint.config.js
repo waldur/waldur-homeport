@@ -26,6 +26,7 @@ import enforceNavTabsPattern from './eslint-rules/enforce-nav-tabs-pattern.js';
 import enforceNoResultWithCta from './eslint-rules/enforce-noresult-with-cta.js';
 import enforcePhosphorIconWeight from './eslint-rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './eslint-rules/enforce-render-field-or-dash.js';
+import noHandRolledTable from './eslint-rules/no-hand-rolled-table.js';
 import noDirectBootstrapButton from './eslint-rules/no-direct-bootstrap-button.js';
 import noDirectBootstrapDropdownButton from './eslint-rules/no-direct-bootstrap-dropdown-button.js';
 import noDirectClientUsage from './eslint-rules/no-direct-client-usage.js';
@@ -34,6 +35,7 @@ import noEditButtonSizeOverride from './eslint-rules/no-edit-button-size-overrid
 import noManualIconColorsInBadges from './eslint-rules/no-manual-icon-colors-in-badges.js';
 import noRedundantViMock from './eslint-rules/no-redundant-vi-mock.js';
 import noTemplateInTranslate from './eslint-rules/no-template-in-translate.js';
+import preferAlertItem from './eslint-rules/prefer-alert-item.js';
 import preferClassnamesUtility from './eslint-rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './eslint-rules/prefer-mutate-over-mutateAsync.js';
 
@@ -72,6 +74,8 @@ export default tseslint
             'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
             'enforce-button-variants': enforceButtonVariants,
             'no-direct-bootstrap-button': noDirectBootstrapButton,
+            'no-hand-rolled-table': noHandRolledTable,
+            'prefer-alert-item': preferAlertItem,
             'no-direct-bootstrap-dropdown-button':
               noDirectBootstrapDropdownButton,
             'no-direct-client-usage': noDirectClientUsage,
@@ -127,6 +131,11 @@ export default tseslint
         'waldur-custom/enforce-badge-right-icon-pattern': 'error',
         'waldur-custom/enforce-button-variants': 'error',
         'waldur-custom/no-direct-bootstrap-button': 'error',
+        // Warnings rather than errors: the tree still carries dozens of each,
+        // and converting one is a per-screen judgement rather than a mechanical
+        // swap. They steer new code; promote to 'error' once the count is down.
+        'waldur-custom/no-hand-rolled-table': 'warn',
+        'waldur-custom/prefer-alert-item': 'warn',
         'waldur-custom/no-direct-bootstrap-dropdown-button': 'error',
         'waldur-custom/no-direct-client-usage': 'error',
         'waldur-custom/no-edit-button-size-override': 'error',
