@@ -20,17 +20,23 @@ export const ResourcesOverTimeChart: FC<ResourcesOverTimeChartProps> = ({
 
   const getExportData = useCallback(
     () => ({
-      fields: [translate('Period'), translate('Count')],
+      fields: [translate('Period'), translate('Resources with usage')],
       data: (data || []).map((item) => [item.period, item.resource_count]),
     }),
     [data],
   );
 
   return (
+    // Counts resources reporting usage per period, not resources in OK state
+    // like the "Active resources" tile — the title must not imply otherwise.
     <ChartCard
-      title={translate('Resources over time')}
+      title={translate('Resources with reported usage')}
+      summary={translate('Latest period: {count}', {
+        count: chartData.length ? chartData[chartData.length - 1].value : 0,
+      })}
       getExportData={getExportData}
       isEmpty={!data || data.length === 0}
+      chartHeight="160px"
     >
       {(ref) => <AreaChart height="160px" data={chartData} ref={ref} />}
     </ChartCard>
