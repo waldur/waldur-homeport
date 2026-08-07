@@ -34,8 +34,12 @@ export const UsersOverTimeChart: FC<UsersOverTimeChartProps> = ({ data }) => {
   return (
     <ChartCard
       title={translate('Users over time')}
+      summary={translate('Total: {count}', {
+        count: chartData.length ? chartData[chartData.length - 1].value : 0,
+      })}
       getExportData={getExportData}
       isEmpty={!data || data.length === 0}
+      chartHeight="160px"
     >
       {(ref) => <AreaChart height="160px" data={chartData} ref={ref} />}
     </ChartCard>

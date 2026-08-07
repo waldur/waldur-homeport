@@ -62,6 +62,8 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
         },
         yAxis: {
           type: 'value',
+          // Every series here is a count, so fractional ticks are meaningless.
+          minInterval: 1,
           splitLine: {
             lineStyle: {
               type: 'dashed',
@@ -73,7 +75,8 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
             data: values,
             type: 'line',
             smooth: true,
-            showSymbol: showPoints,
+            // A single point draws no line segment, so it needs a symbol.
+            showSymbol: showPoints || values.length === 1,
             symbolSize: 8,
             itemStyle: {
               color: color,
