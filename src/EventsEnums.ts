@@ -24,6 +24,7 @@ export const AuthEnum = {
   pat_used_from_new_ip: 'pat_used_from_new_ip',
   token_created: 'token_created',
   token_lifetime_updated: 'token_lifetime_updated',
+  user_blocked: 'user_blocked',
 };
 
 export const CallEnum = {
