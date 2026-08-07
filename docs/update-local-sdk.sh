@@ -71,21 +71,23 @@ if changed:
 
 # Step 4: Link js-client into HomePort
 echo "[4/6] Linking js-client in HomePort..."
-# By default yarn link uses the machine-global registry (~/.config/yarn/link),
-# which is keyed only by package name. Running this script from a second
-# workspace on the same machine would clobber the first workspace's link.
-# Set YARN_LINK_FOLDER to a workspace-local path (e.g. ../.yarn-link) to keep
-# each workspace's SDK link isolated; leave it unset for the global default.
-LINK_ARGS=()
-if [ -n "${YARN_LINK_FOLDER:-}" ]; then
-  LINK_FOLDER_ABS="$(mkdir -p "$YARN_LINK_FOLDER" && cd "$YARN_LINK_FOLDER" && pwd)"
-  LINK_ARGS=(--link-folder "$LINK_FOLDER_ABS")
-  echo "      Using isolated link folder: $LINK_FOLDER_ABS"
-fi
-cd "$JS_CLIENT_PATH"
-yarn link "${LINK_ARGS[@]}" 2>/dev/null || true
+# HomePort is a Yarn 4 (Berry) project. Yarn 4 dropped the Yarn 1 global link
+# registry (~/.config/yarn/link) and its --link-folder isolation flag — the old
+# `yarn link waldur-js-client --link-folder <dir>` is a syntax error there, so
+# it failed without linking anything and the frontend silently kept using the
+# published SDK version.
+#
+# `yarn link -r <path>` instead records a relative `portal:` entry under
+# "resolutions" in package.json and symlinks node_modules/waldur-js-client at
+# the local build. Because the resolution lives in this checkout's package.json,
+# several workspaces on one machine can no longer clobber each other's link —
+# which is what YARN_LINK_FOLDER used to work around.
 cd "$WH2_PATH"
-yarn link waldur-js-client "${LINK_ARGS[@]}"
+if [ -n "${YARN_LINK_FOLDER:-}" ]; then
+  echo "      Note: YARN_LINK_FOLDER is a Yarn 1 setting and is now ignored."
+fi
+yarn link -r "$JS_CLIENT_PATH"
+echo "      Linked: $(readlink node_modules/waldur-js-client)"
 
 # Step 5: Generate enums and descriptions from Mastermind
 echo "[5/6] Generating enums and descriptions..."
@@ -128,3 +130,8 @@ echo ""
 echo "=== Done! ==="
 echo "SDK and enums have been regenerated and linked to HomePort."
 echo "Run 'yarn tsgo --noEmit' to verify TypeScript compilation."
+echo ""
+echo "The link added a local 'waldur-js-client: portal:...' resolution to"
+echo "package.json — do not commit it. Once the SDK is published, bump the"
+echo "waldur-js-client version in package.json and drop the link with:"
+echo "  yarn unlink $JS_CLIENT_PATH && git checkout package.json yarn.lock"
