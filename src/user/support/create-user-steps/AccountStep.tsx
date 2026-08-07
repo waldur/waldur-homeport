@@ -14,7 +14,7 @@ import { SecretField } from '@/form/SecretField';
 import { translate } from '@/i18n';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
-import { UserFormData, UserFormDialogData } from '../UserFormDialog';
+import { UserFormData, UserFormDialogData } from '../UserFormTypes';
 
 const usernameValidator = (value: string) =>
   value && !/^[a-z0-9@.+\-_]+$/.test(value)

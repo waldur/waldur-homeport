@@ -1,8 +1,8 @@
 import store from '@/store/store';
 
-import { MatomoInstance } from './afterBootstrap';
 import { clearAuthCache } from './auth/authNavigation';
 import * as AuthService from './auth/AuthService';
+import { MatomoInstance } from './core/matomo';
 import {
   GroupInvitationTokenStorage,
   RedirectStorage,

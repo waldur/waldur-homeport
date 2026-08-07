@@ -1,8 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useState, FunctionComponent, useEffect } from 'react';
 
-import { initMatomoTracker, MatomoInstance } from '@/afterBootstrap';
 import { lazyComponent } from '@/core/lazyComponent';
+import { initMatomoTracker, MatomoInstance } from '@/core/matomo';
 import { isFeatureVisible } from '@/features/connect';
 import { DeploymentFeatures } from '@/FeaturesEnums';
 import { useModal } from '@/modal/actions';

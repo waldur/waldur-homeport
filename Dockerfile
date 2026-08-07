@@ -4,13 +4,13 @@ ARG DOCKER_REGISTRY=docker.io/
 FROM ${DOCKER_REGISTRY}node:lts-alpine AS build
 WORKDIR /app
 ENV PATH=/app/node_modules/.bin:$PATH
-COPY package.json yarn.lock /app/
+COPY package.json yarn.lock .yarnrc.yml /app/
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 # Skip unnecessary post-install scripts - not needed for production builds
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
 ENV HUSKY=0
-RUN apk add --no-cache git && yarn install --frozen-lockfile
+RUN corepack enable && apk add --no-cache git && yarn install --immutable
 
 COPY . /app
 

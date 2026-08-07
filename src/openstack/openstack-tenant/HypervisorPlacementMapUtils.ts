@@ -1,4 +1,4 @@
-import { PlacementInstance } from './HypervisorPlacementMapContent';
+import { PlacementInstance } from './HypervisorPlacementMapTypes';
 
 interface ServerGroupInfo {
   name: string;

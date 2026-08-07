@@ -17,8 +17,7 @@ import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { OfferingProfileRoleRemoveButton } from './OfferingProfileRoleRemoveButton';
-
-export const PROFILE_KEY = (uuid: string) => ['offering-profile', uuid];
+import { PROFILE_KEY } from './queryKeys';
 
 export const OfferingProfileDetail: FC = () => {
   const { params } = useCurrentStateAndParams();
