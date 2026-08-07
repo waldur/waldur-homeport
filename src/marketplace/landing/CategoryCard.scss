@@ -30,18 +30,25 @@
     align-items: center;
     overflow: hidden;
     margin-bottom: 16px;
-    border-radius: 8px;
-    border: 1px solid var(--bs-border-color);
-
-    svg {
-      color: var(--bs-gray-600);
-    }
 
     & > img,
     & > svg {
       display: block;
       width: 100%;
       margin-bottom: 0;
+    }
+  }
+
+  // Long category names truncate to one line instead of wrapping, so every
+  // tile in the row keeps the same height. Full name stays available on hover.
+  .category-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+
+    svg {
+      flex-shrink: 0;
     }
   }
 }
