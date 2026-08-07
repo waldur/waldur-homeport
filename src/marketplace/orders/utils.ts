@@ -68,6 +68,27 @@ export const getOrderType = (order: OrderDetails): OrderType => {
   }
 };
 
+interface MessagingOrder {
+  consumer_message?: string | null;
+  consumer_message_attachment?: string | null;
+  provider_message_updated_at?: string | null;
+  consumer_message_updated_at?: string | null;
+}
+
+export const hasFreshConsumerResponse = (order: MessagingOrder): boolean => {
+  if (!order.consumer_message && !order.consumer_message_attachment) {
+    return false;
+  }
+  const providerTs = order.provider_message_updated_at;
+  const consumerTs = order.consumer_message_updated_at;
+  if (providerTs && consumerTs) {
+    return consumerTs >= providerTs;
+  }
+  // Orders predating the timestamps: a provider-side timestamp alone means the
+  // provider wrote after the consumer's untimestamped response.
+  return !providerTs;
+};
+
 export const getPlanUnitAbbr = (planUnit: BillingUnit) =>
   planUnit === 'hour'
     ? translate('/hr')

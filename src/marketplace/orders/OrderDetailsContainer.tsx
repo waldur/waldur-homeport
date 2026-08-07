@@ -15,6 +15,7 @@ import { useExtraAnnouncementBar } from '@/navigation/context';
 import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 
 import { OrderDetails } from './details/OrderDetails';
+import { hasFreshConsumerResponse } from './utils';
 
 async function loadOrder(order_uuid: string) {
   const order = await marketplaceOrdersRetrieve({
@@ -66,18 +67,20 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
         tab: 'provider-info',
       });
     const plainMessage = order.provider_message.replace(/<[^>]*>/g, '');
-    const description = order.provider_message_url
+    const providerDescription = order.provider_message_url
       ? `${plainMessage} — ${order.provider_message_url}`
       : plainMessage;
-    const hasCustomerResponse =
-      order.consumer_message || order.consumer_message_attachment;
-    return hasCustomerResponse ? (
+    return hasFreshConsumerResponse(order) ? (
       <AnnouncementBar
         icon={CheckCircleIcon}
         variant="success"
         label={translate('Customer responded')}
-        description={description}
-        actionLabel={translate('Read more')}
+        hasColon
+        description={
+          (order.consumer_message || '').replace(/<[^>]*>/g, '') ||
+          providerDescription
+        }
+        actionLabel={translate('View response')}
         onAction={goToProviderInfo}
         colored
       />
@@ -86,8 +89,9 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
         icon={EnvelopeIcon}
         variant="warning"
         label={translate('Information requested')}
-        description={description}
-        actionLabel={translate('Read more')}
+        hasColon
+        description={providerDescription}
+        actionLabel={translate('View and respond')}
         onAction={goToProviderInfo}
         colored
       />

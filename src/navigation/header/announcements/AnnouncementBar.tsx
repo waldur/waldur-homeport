@@ -94,16 +94,16 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
             dangerouslySetInnerHTML={{ __html: safeDescription }}
             data-testid="announcement-description"
           />
-          {onAction && actionLabel ? (
-            <button
-              type="button"
-              className="text-anchor border-0 bg-transparent p-0 ms-1"
-              onClick={onAction}
-            >
-              {actionLabel}
-            </button>
-          ) : null}
         </div>
+        {onAction && actionLabel ? (
+          <button
+            type="button"
+            className="btn btn-sm btn-tertiary flex-shrink-0 ms-auto"
+            onClick={onAction}
+          >
+            {actionLabel}
+          </button>
+        ) : null}
         {showMoreButton && (
           <button
             type="button"
