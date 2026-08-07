@@ -7,9 +7,12 @@ import {
   marketplaceOfferingTermsOfServiceList,
   marketplacePublicOfferingsRetrieve,
   Offering,
+  proposalMyRequestedResourcesCount,
 } from 'waldur-js-client';
 
 import { isAuthenticated } from '@/auth/AuthService';
+import { fetchResultCount } from '@/core/api';
+import { Badge } from '@/core/Badge';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isEmpty } from '@/core/utils';
@@ -22,11 +25,18 @@ import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { useUser } from '@/workspace/hooks';
 
+import { isProposalRequestEnabled } from '../serviceAccessMode';
 import { Category } from '../types';
 
 import { PUBLIC_OFFERING_DATA_QUERY_KEY } from './constants';
 import { OfferingViewHero } from './OfferingViewHero';
 import { getPublicOfferingBreadcrumbItems } from './utils';
+
+const OfferingResourceRequests = lazyComponent(() =>
+  import('@/proposals/requests/OfferingResourceRequests').then((module) => ({
+    default: module.OfferingResourceRequests,
+  })),
+);
 
 const PublicOfferingInfo = lazyComponent(() =>
   import('./details/PublicOfferingInfo').then((module) => ({
@@ -94,6 +104,7 @@ const getTabs = (
   category?: Category,
   hasActiveTos = false,
   concealPricing = false,
+  resourceRequestCount = 0,
 ): PageBarTab[] => {
   if (!offering) {
     // Return an empty array or placeholders until the offering is loaded
@@ -213,6 +224,22 @@ const getTabs = (
           component: PublicOfferingDocumentationAndSupport,
         }
       : null,
+    // Same gate as the Request button, and only when there is something to
+    // show — an always-present empty tab is noise on every other offering.
+    isProposalRequestEnabled() && resourceRequestCount > 0
+      ? {
+          title: (
+            <>
+              {translate('My requests')}{' '}
+              <Badge variant="secondary" pill>
+                {resourceRequestCount}
+              </Badge>
+            </>
+          ),
+          key: 'my-requests',
+          component: OfferingResourceRequests,
+        }
+      : null,
   ].filter(Boolean);
 };
 
@@ -276,6 +303,20 @@ export const OfferingPublicUIView = () => {
     staleTime: UI_STALE_TIME,
   });
 
+  // Counts only what this user requested for this offering, so the tab appears
+  // exactly when it would have rows. Anonymous visitors never have any.
+  const { data: resourceRequestCount } = useQuery({
+    queryKey: ['OfferingResourceRequestCount', uuid, user?.uuid],
+    queryFn: () =>
+      // The count action answers in the X-Result-Count header, not the body.
+      proposalMyRequestedResourcesCount({
+        query: { offering_uuid: uuid },
+      }).then((result) => fetchResultCount(result) || 0),
+    enabled: Boolean(user && isProposalRequestEnabled()),
+    refetchOnWindowFocus: false,
+    staleTime: UI_STALE_TIME,
+  });
+
   const tabs = useMemo(
     () =>
       getTabs(
@@ -283,8 +324,9 @@ export const OfferingPublicUIView = () => {
         data?.category,
         data?.hasActiveTos,
         data?.concealPricing,
+        resourceRequestCount,
       ),
-    [data],
+    [data, resourceRequestCount],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
 

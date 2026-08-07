@@ -52,7 +52,7 @@ export const RequestTypesList: FC = () => {
       id: 'issue_type_name',
     },
     {
-      title: translate('Order'),
+      title: translate('Display order'),
       render: ({ row }) => row.order,
       keys: ['order'],
       id: 'order',

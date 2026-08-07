@@ -654,6 +654,25 @@ overrides:
       label: Created before
       component: DateField
 
+  proposal_my_requested_resources:
+    filters:
+      - proposal_state
+      - offering_uuid
+    proposal_state:
+      label: Proposal state
+      isMulti: true
+      enumOverrides:
+        draft: Draft
+        submitted: Submitted
+        in_review: In review
+        accepted: Accepted
+        rejected: Rejected
+        canceled: Canceled
+    offering_uuid:
+      label: Offering
+      name: offering
+      operationId: marketplace_public_offerings_list
+
   proposal_proposals:
     filters:
       - state

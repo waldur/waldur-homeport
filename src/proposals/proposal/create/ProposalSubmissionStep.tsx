@@ -20,6 +20,7 @@ import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { evaluateCondition } from '@/marketplace-checklist/questionDependencies';
 import { useModal } from '@/modal/actions';
+import { hasRequestedAmount } from '@/proposals/requestedResourceCost';
 import { useNotify } from '@/store/notify';
 
 import {
@@ -327,6 +328,14 @@ export const ProposalSubmissionStep: FC<{
           // Special handling for compliance step - real-time client-side validation
           if (step.id === 'step-compliance') {
             return isComplianceComplete(checklistData, values);
+          }
+          // A row on its own is not a request. Attaching an offering creates
+          // one asking for nothing, which would otherwise tick this step green
+          // and let the applicant submit a proposal awarded zero of everything
+          // — validate_requested_amounts_present refuses exactly that.
+          if (step.id === 'step-resource-requests') {
+            const rows = values?.resources_init || [];
+            return rows.length > 0 && rows.every(hasRequestedAmount);
           }
           if (step.required && step.requiredFields?.length) {
             return step.requiredFields.every((fieldName) => {

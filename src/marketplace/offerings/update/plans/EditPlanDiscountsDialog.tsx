@@ -11,6 +11,7 @@ import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import { ActiveCallDiscountNotice } from './ActiveCallDiscountNotice';
 import { DiscountsTable } from './DiscountsTable';
 
 const getInitialValues = (plan: Plan) => {
@@ -85,6 +86,9 @@ export const EditPlanDiscountsDialog: FC<EditPlanDiscountsDialogProps> = (
               />
             }
           >
+            <ActiveCallDiscountNotice
+              offeringUuid={props.resolve.offering.uuid}
+            />
             <DiscountsTable components={components} />
           </ModalDialog>
         </form>

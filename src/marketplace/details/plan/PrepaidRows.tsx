@@ -17,9 +17,12 @@ import { getPrepaidCostParts } from './utils';
 const PrepaidRow = ({
   component,
   overageComponent,
+  viewMode,
 }: {
   component: Component;
   overageComponent?: Component;
+  /** Read-only surfaces (proposal resource requests, public plan details). */
+  viewMode?: boolean;
 }) => {
   const formData = useOrderFormData();
   const endDate = formData?.attributes?.end_date;
@@ -38,15 +41,28 @@ const PrepaidRow = ({
         label={component.name}
         description={<ComponentCost component={component} />}
         value={
-          <Field
-            name={`limits.${component.type}`}
-            parse={parseIntField}
-            format={formatIntField}
-            validate={validateValue}
-            render={({ input }) => (
-              <MeasuredUnitInput input={input} component={component} />
-            )}
-          />
+          // Every other row honours viewMode; this one did not, so a read-only
+          // proposal showed an editable box bound to a form nothing submits —
+          // and it read 0 regardless of the quantity actually requested.
+          // displayAmount is the requested figure before the duration
+          // multiplier, which is what the total beside it already accounts for.
+          viewMode ? (
+            <span>
+              {translate('Quantity')}:{' '}
+              {component.displayAmount ?? component.amount}
+              {component.measured_unit ? ` ${component.measured_unit}` : 'x'}
+            </span>
+          ) : (
+            <Field
+              name={`limits.${component.type}`}
+              parse={parseIntField}
+              format={formatIntField}
+              validate={validateValue}
+              render={({ input }) => (
+                <MeasuredUnitInput input={input} component={component} />
+              )}
+            />
+          )
         }
         actions={
           <>
@@ -86,6 +102,7 @@ const PrepaidRow = ({
 export const PrepaidRows = (props: {
   components: Component[];
   overageComponents?: Component[];
+  viewMode?: boolean;
 }) => {
   return (
     <>
@@ -93,6 +110,7 @@ export const PrepaidRows = (props: {
         <PrepaidRow
           key={component.type}
           component={component}
+          viewMode={props.viewMode}
           overageComponent={props.overageComponents?.find(
             (o) => o.type === component.overage_component,
           )}

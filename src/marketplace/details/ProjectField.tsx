@@ -15,11 +15,19 @@ interface ProjectFieldProps {
   previewMode?: boolean;
   hideLabel?: boolean;
   offering?: Offering;
+  /**
+   * Whether picking a project also switches the workspace to it. True for the
+   * deploy wizard, where the choice is already committed to. Set false in a
+   * dialog the user can still cancel, so a cancelled request does not leave
+   * the whole workspace pointing somewhere else.
+   */
+  setCurrentProjectOnChange?: boolean;
 }
 
 export const ProjectField: FC<ProjectFieldProps> = ({
   previewMode,
   offering,
+  setCurrentProjectOnChange = true,
 }) => {
   const setCurrentProject = useSetProject();
   const { customer } = useOrderFormData();
@@ -40,9 +48,11 @@ export const ProjectField: FC<ProjectFieldProps> = ({
 
   const onChange = useCallback(
     (value) => {
-      setCurrentProject(value);
+      if (setCurrentProjectOnChange) {
+        setCurrentProject(value);
+      }
     },
-    [setCurrentProject],
+    [setCurrentProject, setCurrentProjectOnChange],
   );
 
   return (

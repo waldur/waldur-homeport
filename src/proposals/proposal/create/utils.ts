@@ -13,6 +13,7 @@ import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { Call } from '@/proposals/types';
+import { isReviewBearingStep } from '@/proposals/workflow/constants';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
@@ -122,7 +123,16 @@ export const CreateManualAssignmentDialog = lazyComponent(() =>
 // in lockstep on eligibility (state window + reviewer-management permission).
 export const useCanCreateReview = (proposal: Proposal): boolean => {
   const user = useUser();
+  // A proposal on a workflow offers this only while it sits on a step the
+  // reviewers own. It used to be offered at every step, so a manager could be
+  // invited to assign expert reviewers during the eligibility check — before
+  // there was anything to review. A proposal with no active step (a call
+  // running no workflow at all) keeps the unconditional affordance, or reviews
+  // would be unreachable for it.
+  const stepAllows =
+    !proposal.workflow_step || isReviewBearingStep(proposal.workflow_step);
   return (
+    stepAllows &&
     ['submitted', 'in_review'].includes(proposal.state) &&
     hasPermission(user, {
       permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,

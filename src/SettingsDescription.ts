@@ -128,6 +128,13 @@ export const SettingsDescription = [
         options: [{ value: 'show_all', label: 'Show all shared offerings' }, { value: 'show_restricted_disabled', label: 'Show all but mark inaccessible as disabled' }, { value: 'hide_inaccessible', label: 'Hide offerings user cannot access' }, { value: 'require_membership', label: 'Hide all unless user belongs to an organization/project' }],
       },
       {
+        key: 'SERVICE_ACCESS_MODE',
+        description: translate('How users reach services. \'calls\': only through calls for proposals, no marketplace navigation. \'marketplace\': the marketplace is the single entry point; calls are reached through an offering and proposals are tracked in the user profile. \'both\': marketplace and calls are browsable independently. Navigation only — the API serves the same data in every mode.'),
+        default: 'both',
+        type: 'choice_field',
+        options: [{ value: 'calls', label: 'Calls only' }, { value: 'marketplace', label: 'Marketplace only' }, { value: 'both', label: 'Marketplace and calls' }],
+      },
+      {
         key: 'SHOW_OFFERING_COVER_IMAGE',
         description: translate('Show offering cover image as a banner above the name on the offering page.'),
         default: false,

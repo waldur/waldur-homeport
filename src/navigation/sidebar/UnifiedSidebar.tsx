@@ -5,6 +5,10 @@ import { useEffect, useMemo } from 'react';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import {
+  getServiceAccessMode,
+  isMarketplaceVisible,
+} from '@/marketplace/serviceAccessMode';
 import { MenuComponent } from '@/metronic/components';
 import { CallPublicMenu } from '@/navigation/sidebar/CallPublicMenu';
 import { PermissionEnum } from '@/permissions/enums';
@@ -92,6 +96,18 @@ export const UnifiedSidebar = () => {
       MarketplaceFeatures.hide_organization_information_from_project_members,
     ) || hasNonProjectPerms;
 
+  // In marketplace-only mode the marketplace is the entry point, so it ends the
+  // consumer run of the sidebar and the operator section sits below it. In the
+  // other modes calls are part of what everyone browses, so they keep their
+  // place in the middle.
+  const isMarketplaceMode = getServiceAccessMode() === 'marketplace';
+  const callMenu = (
+    <CallPublicMenu
+      disabled={shouldBlockNavigation}
+      disabledTooltip={disabledTooltip}
+    />
+  );
+
   return (
     <Sidebar>
       {canCreateOrder && (user.is_staff || user.permissions?.length !== 0) ? (
@@ -119,11 +135,8 @@ export const UnifiedSidebar = () => {
         disabled={shouldBlockNavigation}
         disabledTooltip={disabledTooltip}
       />
-      <CallPublicMenu
-        disabled={shouldBlockNavigation}
-        disabledTooltip={disabledTooltip}
-      />
-      {canAccessMarketplace && (
+      {!isMarketplaceMode && callMenu}
+      {canAccessMarketplace && isMarketplaceVisible() && (
         <MenuItem
           activeState={
             [
@@ -142,6 +155,7 @@ export const UnifiedSidebar = () => {
           disabledTooltip={disabledTooltip}
         />
       )}
+      {isMarketplaceMode && callMenu}
     </Sidebar>
   );
 };

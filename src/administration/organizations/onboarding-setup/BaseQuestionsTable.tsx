@@ -378,7 +378,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
       ),
     },
     {
-      title: translate('Order'),
+      title: translate('Display order'),
       render: ({ row }) => (
         <span className="text-gray-800 fw-bold">{row.order}</span>
       ),

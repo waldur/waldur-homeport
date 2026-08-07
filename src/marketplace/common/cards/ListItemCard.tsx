@@ -6,9 +6,9 @@ import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { getAbbreviation } from '@/core/utils';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import { CardRequestAccessButton } from '@/marketplace/offerings/access/CardRequestAccessButton';
 import { wrapTooltip } from '@/table/ActionButton';
 
-import { DeployButton } from '../DeployButton';
 import { ViewOfferingButton } from '../ViewOfferingButton';
 
 import { OfferingCardVariantProps } from './types';
@@ -84,10 +84,11 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
               disabled={isDisabled}
               disabledReason={disabledButtonTooltip}
             />
-            <DeployButton
+            <CardRequestAccessButton
               offering={offering}
-              disabled={isDisabled}
-              disabledReason={disabledButtonTooltip}
+              orderDisabledReason={
+                isDisabled ? disabledButtonTooltip : undefined
+              }
             />
           </div>
         </Card.Body>

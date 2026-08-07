@@ -15,7 +15,7 @@ export const PublicCallApplyAction: FC<{ call: Call }> = ({ call }) => {
 
   return (
     <ActionItem
-      title={translate('Apply')}
+      title={translate('Apply to call')}
       action={handleApply}
       iconNode={<PaperPlaneTiltIcon weight="bold" />}
       disabled={!activeRound}

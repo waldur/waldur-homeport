@@ -12,6 +12,10 @@ import {
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import {
+  isCallsSectionVisible,
+  isProposalRequestEnabled,
+} from '@/marketplace/serviceAccessMode';
+import {
   getUser,
   hasNonProjectPermissions,
   isStaffOrSupport,
@@ -104,6 +108,39 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Onboarding applications'),
       feature: CustomerFeatures.show_onboarding,
       priority: 121,
+    },
+  },
+  {
+    name: 'profile.resource-requests',
+    url: 'resource-requests/',
+    component: lazyComponent(() =>
+      import('@/proposals/requests/ProfileResourceRequests').then((module) => ({
+        default: module.ProfileResourceRequests,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Resource requests'),
+      // Same gate as the Request button; with calls as the only way in there
+      // is no offering page to request from.
+      permissions: [() => isProposalRequestEnabled()],
+      priority: 122,
+    },
+  },
+  {
+    // Marketplace-only deployments have no calls section, so a submitted
+    // proposal would otherwise be untrackable. Everything personal already
+    // lives here, next to Resource requests.
+    name: 'profile.proposals',
+    url: 'proposals/',
+    component: lazyComponent(() =>
+      import('@/proposals/proposal/UserProposalsList').then((module) => ({
+        default: module.UserProposalsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('My proposals'),
+      permissions: [() => !isCallsSectionVisible()],
+      priority: 123,
     },
   },
   {

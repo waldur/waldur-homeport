@@ -30,7 +30,7 @@ const CallsAvailableOfferingsTable: FunctionComponent = () => {
   );
 
   const filter = useMemo(
-    () => ({ ...stateFilter, accessible_via_calls: true }),
+    () => ({ ...stateFilter, open_for_proposals: true }),
     [stateFilter],
   );
 

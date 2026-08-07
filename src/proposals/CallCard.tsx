@@ -78,7 +78,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
             <Stack direction="horizontal" gap={2}>
               <PublicCallApplyButton
                 call={call}
-                title={translate('Apply')}
+                title={translate('Apply to call')}
                 variant="text-primary"
                 size="sm"
               />

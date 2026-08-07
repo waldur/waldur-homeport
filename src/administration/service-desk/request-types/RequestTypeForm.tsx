@@ -117,7 +117,7 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
             />
 
             <NumberGroup
-              label={translate('Order')}
+              label={translate('Display order')}
               name="order"
               min={0}
               parse={Number}

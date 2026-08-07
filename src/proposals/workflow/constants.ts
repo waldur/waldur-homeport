@@ -111,6 +111,23 @@ export const stepDefinition = (id: StepEnum): StepDefinition | undefined =>
 export const stepLabel = (id: StepEnum): string =>
   stepDefinition(id)?.name ?? id;
 
+/**
+ * Steps whose work is carried out by reviewers.
+ *
+ * Derived from the responsible role rather than listed by hand, so a step added
+ * to the catalog with a reviewing role is covered without a second edit here.
+ */
+const REVIEWING_ROLES: ResponsibleRoleEnum[] = ['reviewer', 'panel_member'];
+
+/** Whether assigning a review is part of what this step is for. */
+export const isReviewBearingStep = (id: StepEnum | null | undefined): boolean =>
+  Boolean(
+    id &&
+    REVIEWING_ROLES.includes(
+      stepDefinition(id)?.defaultResponsibleRole as ResponsibleRoleEnum,
+    ),
+  );
+
 // The set of currently-enabled step ids among `steps`. Dependency checks
 // resolve against this: only an *enabled* dependency satisfies the backend
 // rule — a configured-but-disabled one does not.

@@ -12,11 +12,14 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
+import { PurchaseOrderCell } from '@/proposals/PurchaseOrderCell';
+import { getRequestedResourceCost } from '@/proposals/requestedResourceCost';
+import { RequestedResourceCostLabel } from '@/proposals/RequestedResourceCostLabel';
 import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepProps } from '@/wizard';
 
 import { AddCommentButton } from '../../create-review/AddCommentButton';
@@ -62,6 +65,10 @@ const ProposalResourcesTableComponent: FC<any> = ({
   return (
     <Table<ProposalResource>
       {...tableProps}
+      // Provider and category live in the expanded row instead: the progress
+      // rail narrows this panel, and six columns pushed estimated cost and
+      // purchase order — what a reviewer is here for — behind a sideways
+      // scroll.
       columns={[
         {
           title: translate('Offering'),
@@ -73,17 +80,31 @@ const ProposalResourcesTableComponent: FC<any> = ({
           }),
         },
         {
-          title: translate('Provider'),
-          render: ({ row }) => <>{row.requested_offering.provider_name}</>,
-        },
-        {
-          title: translate('Category'),
+          // Estimated, not billed: computed here from the plan's price list,
+          // while the amount actually charged is recomputed by the backend at
+          // allocation.
+          title: translate('Estimated cost'),
           render: ({ row }) => (
-            <>{renderFieldOrDash(row.requested_offering.category_name)}</>
+            <RequestedResourceCostLabel
+              cost={getRequestedResourceCost(row)}
+              stacked
+            />
           ),
         },
+        {
+          title: translate('Purchase order'),
+          render: ({ row }) => <PurchaseOrderCell row={row} />,
+        },
       ]}
-      title={stepProps.title}
+      // The step card above already carries this heading and its own border;
+      // repeating both gave the panel a second "Resource requests" title inside
+      // a nested box. Same treatment the project team step gives its table.
+      hideTitle
+      cardBordered={false}
+      // Drop the nested card's own insets too, so the toolbar and the table
+      // line up with the step's heading instead of stepping in from it.
+      bodyClassName="px-0"
+      headerClassName="mx-0"
       verboseName={translate('Resources')}
       emptyMessage={
         readOnlyMode
@@ -128,12 +149,18 @@ const ProposalResourcesTableComponent: FC<any> = ({
         ) : null
       }
       footer={
-        <FieldReviewComments
-          reviews={reviews}
-          fieldName="comment_resource_requests"
-          space={0}
-          className="mt-5"
-        />
+        <>
+          <ProposalCostTotal
+            rows={tableProps.rows}
+            resultCount={tableProps.pagination?.resultCount}
+          />
+          <FieldReviewComments
+            reviews={reviews}
+            fieldName="comment_resource_requests"
+            space={0}
+            className="mt-5"
+          />
+        </>
       }
       formId={FORM_ID}
     />
@@ -230,7 +257,6 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
         <ResourceRequestTemplates
           call={call}
           proposal={proposal}
-          title={props.title}
           change={change}
           reviews={reviews}
         />
