@@ -47,18 +47,18 @@ cache: &yarn_cache
       - yarn.lock
   policy: pull
   paths:
-    - .yarn
+    - .yarn/cache
     - node_modules/
 
 before_script:
   - apk add git || echo "Non-Alpine image, skipping"
-  - yarn config set cache-folder .yarn
-  - yarn install --frozen-lockfile
+  - corepack enable
+  - yarn install --immutable
 
 # Runs before every other stage and is the single writer of the yarn cache.
 # Its global before_script does the actual `yarn install`; here we only push the
-# resulting .yarn + node_modules so downstream jobs restore them and their own
-# `yarn install --frozen-lockfile` becomes a near-instant no-op.
+# resulting .yarn/cache + node_modules so downstream jobs restore them and their own
+# `yarn install --immutable` becomes a near-instant no-op.
 Prime yarn cache:
   stage: .pre
   interruptible: true
@@ -298,7 +298,7 @@ Publish multiarch docker image with specific version:
   variables:
     EXTRA_BUILD_ARGS: "--build-arg COMMIT_INFO=${CI_COMMIT_TAG} --build-arg VERSION=${CI_COMMIT_TAG}"
 
-Test Multi-arch docker image build:
+Test docker image build:
   stage: test
   interruptible: true
   image: registry.hpc.ut.ee/mirror/docker:latest
@@ -313,12 +313,8 @@ Test Multi-arch docker image build:
       changes:
         - Dockerfile
         - docker/**/*
-        # NOTE: `.gitlab-ci.yml` intentionally removed as a trigger. The emulated
-        # arm64 leg of this buildx job runs `yarn install` under QEMU and exceeds
-        # the 1h job timeout, so it fails on every CI-only MR while providing no
-        # image-coverage signal. Gate it on image-affecting paths only. (The arm64
-        # emulation timeout itself is a separate infra issue: native arm runners
-        # or dropping arm64 from the MR smoke build.)
+        # `.gitlab-ci.yml` intentionally left out: this job is scoped to
+        # paths that actually affect the built image.
   variables:
     DOCKER_DRIVER: overlay2
     DOCKER_REGISTRY: registry.hpc.ut.ee/mirror/
@@ -332,10 +328,15 @@ Test Multi-arch docker image build:
     - docker context create builder
     - docker buildx version
     - docker buildx create builder --use
-    - docker buildx build --platform linux/amd64,linux/arm64 --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch --push .
-    - docker buildx imagetools inspect ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch
-    - docker pull ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch
-    - docker image inspect ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch
+    # arm64 dropped: the emulated QEMU leg of this buildx job crashes/times
+    # out running `yarn install` (see MR discussion) and provided no real
+    # image-coverage signal for an MR-time smoke build. Real multi-arch
+    # images are still produced by "Publish multiarch docker image with
+    # specific version" on tags, which is unaffected by this change.
+    - docker buildx build --platform linux/amd64 --build-arg DOCKER_REGISTRY=$DOCKER_REGISTRY -t ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-image-smoke --push .
+    - docker buildx imagetools inspect ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-image-smoke
+    - docker pull ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-image-smoke
+    - docker image inspect ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-image-smoke
 
 Lint docker image:
   extends: .Lint docker image template

@@ -1,6 +1,6 @@
 import { DOMEventHandlerUtil } from './_DOMEventHandlerUtil';
 import { ElementStyleUtil } from './_ElementStyleUtil';
-import { getElementOffset } from './DomHelpers';
+import { getElementOffset } from './getElementOffset';
 
 export class ElementAnimateUtil {
   public static animate(

@@ -1,27 +1,11 @@
 import { CpuIcon, QuestionIcon, UsersThreeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { OpenStackInstance } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { PlacementInstance } from './HypervisorPlacementMapTypes';
 import { formatRam, groupByHypervisor } from './HypervisorPlacementMapUtils';
-
-export interface PlacementInstance extends Pick<
-  OpenStackInstance,
-  | 'uuid'
-  | 'cores'
-  | 'customer_name'
-  | 'hypervisor_hostname'
-  | 'name'
-  | 'project_name'
-  | 'ram'
-  | 'runtime_state'
-  | 'server_group'
-> {
-  /** Offering name from the marketplace Resource (used as "Tenant" label) */
-  offering_name?: string;
-}
 
 interface Props {
   instances: PlacementInstance[];

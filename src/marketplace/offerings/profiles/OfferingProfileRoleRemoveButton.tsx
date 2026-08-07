@@ -5,7 +5,7 @@ import { marketplaceOfferingProfilesRemoveRole } from 'waldur-js-client';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { PROFILE_KEY } from './OfferingProfileDetail';
+import { PROFILE_KEY } from './queryKeys';
 
 interface OfferingProfileRoleRemoveButtonProps {
   profileUuid: string;

@@ -14,7 +14,7 @@ vi.mock('@/store/store', () => ({
   default: { dispatch: vi.fn(), getState: vi.fn() },
 }));
 
-vi.mock('./afterBootstrap', () => ({
+vi.mock('./core/matomo', () => ({
   MatomoInstance: null,
 }));
 

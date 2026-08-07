@@ -10,7 +10,7 @@ import {
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
-import { UserFormData, UserFormDialogData } from '../UserFormDialog';
+import { UserFormData, UserFormDialogData } from '../UserFormTypes';
 
 const ReviewRow = ({
   label,
