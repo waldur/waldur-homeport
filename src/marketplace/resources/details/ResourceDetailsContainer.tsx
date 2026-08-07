@@ -14,6 +14,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { ErrorView } from '@/ErrorView';
 import { translate } from '@/i18n';
 import { PublicMaintenanceCard } from '@/maintenance/public/PublicMaintenanceCard';
+import { hasFreshConsumerResponse } from '@/marketplace/orders/utils';
 import { useModal } from '@/modal/actions';
 import {
   useBreadcrumbs,
@@ -129,11 +130,13 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
               field: [
                 'state',
                 'order_in_progress',
-                // provider_message is an Order field, not a Resource field,
+                // Messaging fields are Order fields, not Resource fields,
                 // but the backend field filter also applies to the nested
-                // order_in_progress serializer, so including it here ensures
-                // the nested order object contains provider_message.
+                // order_in_progress serializer, so including them here ensures
+                // the nested order object contains them.
                 'provider_message' as any,
+                'provider_message_updated_at' as any,
+                'consumer_message_updated_at' as any,
               ],
             },
           }).then((r) => r.data)
@@ -150,7 +153,11 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
       resourceState.order_in_progress?.state !==
         resource.order_in_progress?.state ||
       resourceState.order_in_progress?.provider_message !==
-        resource.order_in_progress?.provider_message
+        resource.order_in_progress?.provider_message ||
+      resourceState.order_in_progress?.provider_message_updated_at !==
+        resource.order_in_progress?.provider_message_updated_at ||
+      resourceState.order_in_progress?.consumer_message_updated_at !==
+        resource.order_in_progress?.consumer_message_updated_at
     ) {
       refetchResource();
       invalidateActionsPopover(resource.scope);
@@ -288,18 +295,27 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     const order = resource?.order_in_progress;
     if (order?.state !== 'pending-provider' || !order?.provider_message)
       return null;
+    const goToProviderInfo = () =>
+      router.stateService.go('marketplace-orders.details', {
+        order_uuid: order.uuid,
+        tab: 'provider-info',
+      });
     const plainMessage = order.provider_message.replace(/<[^>]*>/g, '');
-    const description = order.provider_message_url
+    const providerDescription = order.provider_message_url
       ? `${plainMessage} — ${order.provider_message_url}`
       : plainMessage;
-    const hasCustomerResponse =
-      order.consumer_message || order.consumer_message_attachment;
-    return hasCustomerResponse ? (
+    return hasFreshConsumerResponse(order) ? (
       <AnnouncementBar
         icon={CheckCircleIcon}
         variant="success"
         label={translate('Customer responded')}
-        description={description}
+        hasColon
+        description={
+          (order.consumer_message || '').replace(/<[^>]*>/g, '') ||
+          providerDescription
+        }
+        actionLabel={translate('View response')}
+        onAction={goToProviderInfo}
         colored
       />
     ) : (
@@ -307,7 +323,10 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         icon={EnvelopeIcon}
         variant="warning"
         label={translate('Information requested')}
-        description={description}
+        hasColon
+        description={providerDescription}
+        actionLabel={translate('View and respond')}
+        onAction={goToProviderInfo}
         colored
       />
     );

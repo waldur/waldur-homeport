@@ -5,12 +5,12 @@
   align-items: center;
 
   &.bar-warning {
-    background-color: $bg-warning-primary;
+    background-color: if(isDarkMode(), $warning-25, $warning-50);
     color: if(isDarkMode(), $warning-700, $warning-800);
   }
 
   &.bar-danger {
-    background-color: $bg-error-primary;
+    background-color: if(isDarkMode(), $danger-25, $danger-50);
     color: if(isDarkMode(), $danger-700, $danger-800);
   }
 }
@@ -50,18 +50,21 @@
       white-space: nowrap;
     }
 
+    // In dark mode the bg-*-primary tokens resolve to solid *-400 fills, which
+    // drown the *-700 text; use the deep *-25 tints there instead. Light mode
+    // keeps the same pale *-50 tints as before.
     &.bar-warning {
-      background-color: $bg-warning-primary;
+      background-color: if(isDarkMode(), $warning-25, $warning-50);
       color: if(isDarkMode(), $warning-700, $warning-800) !important;
     }
 
     &.bar-danger {
-      background-color: $bg-error-primary;
+      background-color: if(isDarkMode(), $danger-25, $danger-50);
       color: if(isDarkMode(), $danger-700, $danger-800) !important;
     }
 
     &.bar-success {
-      background-color: $bg-success-primary;
+      background-color: if(isDarkMode(), $success-25, $success-50);
       color: if(isDarkMode(), $success-700, $success-800) !important;
     }
 
