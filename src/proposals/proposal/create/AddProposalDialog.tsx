@@ -77,17 +77,11 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
 
   // The name is carried into the project created on approval, so it is held to
   // the deployment's project-name pattern — same rule the backend applies in
-  // ProposalSerializer.validate_name.
-  const nameRestriction = getProjectNameRestrictionHint();
-  // What becomes of the name is shown, not described: the preview below spells
-  // out the composed project name, which prose can only repeat and get wrong —
-  // the applicant's text is the last third of it, not the whole thing.
-  const nameDescription = [
-    translate('Describe your work, not the service.'),
-    nameRestriction,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  // ProposalSerializer.validate_name. That rule is the only description worth
+  // showing: the placeholder already says to name the project, and the preview
+  // below shows what the name becomes, so a sentence between them was only
+  // something more to read.
+  const nameDescription = getProjectNameRestrictionHint();
   const validateName = (value: string) =>
     required(value) || checkProjectNameRegex(value);
 
