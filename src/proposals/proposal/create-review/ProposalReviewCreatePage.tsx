@@ -22,6 +22,7 @@ import { useNotify } from '@/store/notify';
 
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
 
+import { ConflictOfInterestNotice } from './ConflictOfInterestNotice';
 import { CreatePageSidebar } from './CreatePageSidebar';
 import { ReviewHeader } from './ReviewHeader';
 import { createReviewSteps } from './steps/steps';
@@ -129,6 +130,8 @@ export const ProposalReviewCreatePage = () => {
             </SidebarLayout.Header>
             <SidebarLayout.Container>
               <SidebarLayout.Body>
+                {/* Before the proposal body, not after it. */}
+                <ConflictOfInterestNotice review={reviewObject} />
                 {formSteps.map((step, i) => (
                   <div ref={stepRefs.current[i]} key={step.id}>
                     <step.component

@@ -25,6 +25,7 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import {
   buildCallTabs,
+  resolveCallStateFilter,
   CALL_STATE_VARIANT,
   fetchAllCallCounts,
 } from './call-tabs';
@@ -153,9 +154,16 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = ({
   const values = useFilterValues('PublicCallsList');
   const callTabs = useCallTabs(props.offering_uuid, props.provider_uuid);
 
-  const filters = useMemo(
-    () => selectProposalPublicCallsFilter(values),
-    [values],
+  // State is resolved separately: the tabs and the filter form both write
+  // `?state`, in different shapes. See resolveCallStateFilter.
+  const filters = useMemo(() => {
+    const { state: _state, ...rest } = values ?? {};
+    return selectProposalPublicCallsFilter(rest);
+  }, [values]);
+
+  const stateFilter = useMemo(
+    () => resolveCallStateFilter(values?.state, params.state),
+    [values?.state, params.state],
   );
 
   const filter = useMemo(() => {
@@ -166,14 +174,15 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = ({
     if (props.provider_uuid) {
       result.offerings_provider_uuid = props.provider_uuid;
     }
-    if (params.state) {
-      result.state = params.state;
+    if (stateFilter) {
+      result.state = stateFilter;
     }
     return result;
-  }, [filters, props.offering_uuid, props.provider_uuid, params.state]);
+  }, [filters, props.offering_uuid, props.provider_uuid, stateFilter]);
   const tableProps = useTable({
     table: 'PublicCallsList',
-    syncFiltersToURL: true,
+    // The state tabs own `?state`; see resolveCallStateFilter.
+    syncFiltersToURL: false,
     fetchData: createFetcher(proposalPublicCallsList),
     filter,
     queryField: 'name',

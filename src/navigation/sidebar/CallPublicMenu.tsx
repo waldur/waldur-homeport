@@ -21,6 +21,49 @@ const hasCallManagerRole = (user) =>
   );
 
 /**
+ * The organisations whose calls this user manages.
+ *
+ * A call-manager permission already carries the organisation that runs the
+ * call, so the manager's own surface can be linked without asking the API
+ * again. One entry per organisation, not per call: managing three calls for
+ * one council is the common case and must not read as three destinations.
+ *
+ * Empty for everyone else — reviewers and panel members have work on a call
+ * but nothing to manage.
+ */
+export const getCallManagerCustomerUuids = (user): string[] => [
+  ...new Set<string>(
+    (user?.permissions ?? [])
+      .filter(
+        (permission) =>
+          permission.scope_type === 'call' &&
+          permission.role_name === RoleEnum.CALL_MANAGER &&
+          permission.customer_uuid,
+      )
+      .map((permission) => permission.customer_uuid as string),
+  ),
+];
+
+/**
+ * Whether this user has any calls to manage.
+ *
+ * Staff and support hold no call-scoped roles — their reach comes from the
+ * flags, not from permission rows — so a permission scan alone would leave
+ * them with no entry point at all.
+ *
+ * The destination does not depend on the answer: `manage-calls` lists the
+ * calls the user can manage, whichever organisation runs them, because the
+ * protected calls endpoint is already scoped by role. An earlier version sent
+ * anyone with more than one organisation to the organisations list, which
+ * answered "which calls do I run" with "here is every organisation, work it
+ * out" — and for staff that is every organisation on the deployment.
+ */
+export const canManageCalls = (user): boolean =>
+  Boolean(user?.is_staff) ||
+  Boolean(user?.is_support) ||
+  getCallManagerCustomerUuids(user).length > 0;
+
+/**
  * Anyone with work to do on a call — managing it, reviewing for it, sitting on
  * its panel. Used to keep the operator surface reachable in marketplace mode,
  * where applicants get no calls section at all.
@@ -51,6 +94,34 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
   const mode = getServiceAccessMode();
 
   const isOperator = user?.is_staff || user?.is_support || hasCallRole(user);
+  // Managers get their own calls; everyone else gets the catalogue, named as
+  // the browsing surface it is rather than as management they cannot do.
+  const showManageCalls = canManageCalls(user);
+  const browseCallsItem = (
+    <MenuItem
+      title={translate('Calls for proposals')}
+      state="calls-for-proposals-dashboard"
+      activeState={
+        ['calls-for-proposals', 'protected-call', 'public-calls'].some((name) =>
+          isDescendantOf(name, state),
+        )
+          ? state.name
+          : undefined
+      }
+    />
+  );
+  const manageCallsItem = showManageCalls ? (
+    <MenuItem
+      title={translate('Manage calls')}
+      state="manage-calls"
+      activeState={
+        isDescendantOf('call-management', state) ||
+        state.name === 'manage-calls'
+          ? state.name
+          : undefined
+      }
+    />
+  ) : null;
 
   // Marketplace-only: applicants reach services through offerings and track
   // their proposals in the profile, so they get no calls section.
@@ -84,17 +155,8 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
           disabled={disabled}
           disabledTooltip={disabledTooltip}
         >
-          <MenuItem
-            title={translate('Manage calls')}
-            state="calls-for-proposals-dashboard"
-            activeState={
-              ['calls-for-proposals', 'protected-call', 'public-calls'].some(
-                (name) => isDescendantOf(name, state),
-              )
-                ? state.name
-                : undefined
-            }
-          />
+          {manageCallsItem}
+          {browseCallsItem}
           <MenuItem
             title={translate('My reviews')}
             state="reviews-all-reviews"
@@ -176,17 +238,8 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
       disabled={disabled}
       disabledTooltip={disabledTooltip}
     >
-      <MenuItem
-        title={translate('Calls for proposals')}
-        state="calls-for-proposals-dashboard"
-        activeState={
-          ['calls-for-proposals', 'protected-call', 'public-calls'].some(
-            (name) => isDescendantOf(name, state),
-          )
-            ? state.name
-            : undefined
-        }
-      />
+      {manageCallsItem}
+      {browseCallsItem}
 
       <MenuItem
         title={translate('My proposals')}

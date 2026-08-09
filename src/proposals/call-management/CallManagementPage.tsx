@@ -14,6 +14,7 @@ import {
   buildCallTabs,
   CALL_STATE_VARIANT,
   fetchAllCallCounts,
+  resolveCallStateFilter,
 } from '@/proposals/call-tabs';
 import { Call } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
@@ -25,33 +26,56 @@ import {
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
 import { formatCallState, getCallStateOptions } from '../utils';
 
 import { CallCreateButton } from './CallCreateButton';
-import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
 
-export const CallManagementPage: FunctionComponent = () => {
+interface CallManagementPageProps {
+  /**
+   * Narrow the list to the organisation currently in context.
+   *
+   * True on an organisation's own Call management tab. False for the standalone
+   * "Manage calls" page, which answers "the calls I can manage" across every
+   * organisation — `useCustomer()` reads workspace state that survives
+   * navigation, so leaving it to chance would silently scope that page to
+   * whichever organisation happened to be visited last.
+   */
+  scopeToCustomer?: boolean;
+}
+
+export const CallManagementPage: FunctionComponent<CallManagementPageProps> = ({
+  scopeToCustomer = true,
+}) => {
   const { params } = useCurrentStateAndParams();
-  const customer = useCustomer();
+  const selectedCustomer = useCustomer();
+  const customer = scopeToCustomer ? selectedCustomer : undefined;
   const values = useFilterValues('CallManagementList');
-  const filterValues = useMemo(
-    () => selectProposalPublicCallsFilter(values),
-    [values],
+
+  const stateFilter = useMemo(
+    () => resolveCallStateFilter(values?.state, params.state),
+    [values?.state, params.state],
   );
+
+  // Everything except state, which is resolved above.
+  const filterValues = useMemo(() => {
+    const { state: _state, ...rest } = values ?? {};
+    return selectProposalPublicCallsFilter(rest);
+  }, [values]);
 
   const filter = useMemo(() => {
     const result: ProposalProtectedCallsListData['query'] = { ...filterValues };
     if (customer) {
       result.customer_uuid = customer.uuid;
     }
-    if (params.state) {
-      result.state = params.state;
+    if (stateFilter) {
+      result.state = stateFilter as any;
     }
     return result;
-  }, [customer, filterValues, params.state]);
+  }, [customer, filterValues, stateFilter]);
 
   const { data: counts } = useQuery({
     queryKey: ['callManagementTabCounts', customer?.uuid],
@@ -69,7 +93,11 @@ export const CallManagementPage: FunctionComponent = () => {
 
   const tableProps = useTable({
     table: 'CallManagementList',
-    syncFiltersToURL: true,
+    // The state tabs own `?state`. With URL syncing on, the filter form wrote
+    // its own value back over the tab's on every render, so the first tab click
+    // stuck and the rest did nothing. The form still filters — it just keeps
+    // its selection in memory instead of racing the tabs for the query string.
+    syncFiltersToURL: false,
     fetchData: createFetcher(proposalProtectedCallsList),
     queryField: 'name',
     filter,
@@ -86,13 +114,37 @@ export const CallManagementPage: FunctionComponent = () => {
           orderField: 'name',
           render: ({ row }) => (
             <Link
-              state="protected-call.main"
+              /* The working surface — proposals, reviews, reviewer pool —
+                 rather than the configuration form. A manager opening a call
+                 from their own list is going to work on it, not to reconfigure
+                 it; Edit is one tab away. */
+              state="protected-call.manage"
               params={{ call_uuid: row.uuid }}
               label={row.name}
             />
           ),
           copyField: (row) => row.name,
         },
+        // Only on the cross-organisation list. On an organisation's own tab
+        // every row would name the same organisation.
+        ...(scopeToCustomer
+          ? []
+          : [
+              {
+                title: translate('Organization'),
+                render: ({ row }) =>
+                  row.customer_uuid ? (
+                    <Link
+                      state="call-management.call-list"
+                      params={{ uuid: row.customer_uuid }}
+                      label={row.customer_name}
+                    />
+                  ) : (
+                    <>{renderFieldOrDash(row.customer_name)}</>
+                  ),
+                copyField: (row) => row.customer_name || '',
+              },
+            ]),
         {
           title: translate('Created'),
           orderField: 'created',
@@ -117,7 +169,6 @@ export const CallManagementPage: FunctionComponent = () => {
       ]}
       verboseName={translate('Calls')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      rowActions={({ row }) => <CallEditButton row={row} />}
       hasQuery={true}
       tableActions={<CallCreateButton refetch={tableProps.fetch} />}
       expandableRow={CallExpandableRow}

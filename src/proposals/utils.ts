@@ -106,6 +106,28 @@ export const formatReviewState = (value: ProposalReviewStateEnum) =>
   getReviewStateOptions().find((option) => option.value === value)?.label ||
   value;
 
+/**
+ * The same states, named from the reviewer's own side.
+ *
+ * `in_review` describes the proposal — it is under review — which in a
+ * reviewer's own list reads as "someone is handling this" when it means "you
+ * have not done this yet". `rejected` is likewise the system's word for the
+ * reviewer having declined the assignment.
+ *
+ * Only for a reviewer looking at their own work; a manager reading someone
+ * else's review wants the neutral wording.
+ */
+export const getOwnReviewStateOptions = () =>
+  [
+    { value: 'in_review', label: translate('To do') },
+    { value: 'submitted', label: translate('Submitted') },
+    { value: 'rejected', label: translate('Declined') },
+  ] as { value: ProposalReviewStateEnum; label: string }[];
+
+export const formatOwnReviewState = (value: ProposalReviewStateEnum) =>
+  getOwnReviewStateOptions().find((option) => option.value === value)?.label ||
+  value;
+
 export const getReviewStateBadgeVariant = (value: ProposalReviewStateEnum) =>
   value === 'in_review' || value === 'submitted'
     ? 'warning'

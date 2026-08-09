@@ -71,6 +71,34 @@ const TabTitle: FC<{ label: string; count?: number }> = ({ label, count }) => (
   </span>
 );
 
+/**
+ * The call states a list should be filtered by, from either writer of `?state`.
+ *
+ * The state tabs below navigate with `?state=active` — a bare string — while a
+ * table with `syncFiltersToURL` writes the multi-select filter's
+ * `{value, label}` objects back to the same parameter as JSON. Two writers, one
+ * key: whichever wrote last, the other misread it. The generated filter
+ * selector called `.map` on a string and threw, taking the whole page down.
+ *
+ * Lists using these tabs should therefore leave `?state` to the tabs
+ * (`syncFiltersToURL: false`) and resolve the value through this, which accepts
+ * either shape so an existing bookmark of either form still works.
+ */
+export const resolveCallStateFilter = (
+  ...sources: unknown[]
+): CallStates[] | undefined => {
+  const raw = sources.find((source) =>
+    Array.isArray(source) ? source.length : Boolean(source),
+  );
+  if (!raw) {
+    return undefined;
+  }
+  const values = (Array.isArray(raw) ? raw : [raw])
+    .map((item: any) => (typeof item === 'string' ? item : item?.value))
+    .filter(Boolean);
+  return values.length ? (values as CallStates[]) : undefined;
+};
+
 export const buildCallTabs = (counts?: CallCounts): TableTab[] => [
   {
     key: 'all',

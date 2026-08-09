@@ -16,11 +16,14 @@ export const CallCreateButton = ({ refetch }) => {
   const customer = useCustomer();
   const canCreateCall = hasPermission(user, {
     permission: PermissionEnum.CREATE_CALL,
-    callOrganizerId: customer.call_managing_organization_uuid,
+    callOrganizerId: customer?.call_managing_organization_uuid,
   });
   const { openDialog } = useModal();
 
-  if (!canCreateCall) {
+  // A call belongs to a managing organisation, so there is nothing to create
+  // from a cross-organisation list. The organisation's own Call management tab
+  // is where a call is started.
+  if (!customer || !canCreateCall) {
     return null;
   }
 
