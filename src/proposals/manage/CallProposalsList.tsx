@@ -16,12 +16,13 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { EndingField } from '../EndingField';
 import { ComplianceStatusBadge } from '../proposal/ComplianceStatusBadge';
 import { ProposalBadge } from '../proposal/ProposalBadge';
 import { ProposalRowActions } from '../proposal/ProposalRowActions';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 import { Call } from '../types';
+
+import { ProposalStepCell } from './ProposalStepCell';
 
 interface CallProposalsListProps {
   call: Call;
@@ -87,33 +88,18 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
           }),
         },
         {
-          title: translate('Round ID'),
-          render: ({ row }) => <>{renderFieldOrDash(row.round?.slug)}</>,
-          copyField: (row) => row.round?.slug || '',
-          orderField: 'round__cutoff_time',
-          keys: ['round'],
-          id: 'round',
-          filter: 'round',
-          inlineFilter: (row) =>
-            row.round
-              ? {
-                  name: row.round.slug,
-                  uuid: row.round.uuid,
-                }
-              : null,
-        },
-        {
-          title: translate('Ending'),
+          // The queue's reason for existing: which proposals are waiting on
+          // this manager rather than on a reviewer or the applicant.
+          title: translate('Step'),
           render: ({ row }) => (
-            <EndingField
-              endDate={row.round?.cutoff_time}
-              hasFixedDuration={Boolean(row.duration_in_days)}
-            />
+            <ProposalStepCell callUuid={call.uuid} step={row.workflow_step} />
           ),
-          className: 'text-nowrap',
-          keys: ['round', 'duration_in_days'],
-          id: 'ending',
+          keys: ['workflow_step'],
+          id: 'step',
         },
+        // Round ID and Ending are properties of the round, identical on every
+        // row inside one call, and between them they took the width that left
+        // State clipped. They stay on the cross-call lists, where they vary.
         {
           title: translate('Created'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,

@@ -318,6 +318,23 @@ export const states: StateDeclaration[] = [
     ),
   },
 
+  // Every call this user can manage, whichever organisation runs it. The
+  // organisation-scoped list at call-management.call-list stays for the
+  // Call management tab of a single organisation.
+  {
+    name: 'manage-calls',
+    url: '/manage-calls/?{state}',
+    parent: 'layout',
+    component: lazyComponent(() =>
+      import('./call-management/ManageCallsPage').then((module) => ({
+        default: module.ManageCallsPage,
+      })),
+    ),
+    data: {
+      title: () => translate('Manage calls'),
+      breadcrumb: () => translate('Manage calls'),
+    },
+  },
   // Admin routes for staff/support/call managers
   {
     name: 'admin-proposals',

@@ -4,7 +4,7 @@ import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { ProposalReview } from '@/proposals/types';
-import { getReviewStateOptions } from '@/proposals/utils';
+import { getOwnReviewStateOptions } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import {
   ProposalReviewsFilter,
@@ -19,10 +19,10 @@ import { useUser } from '@/workspace/hooks';
 
 import { EndingField } from '../EndingField';
 
+import { OwnReviewStateRenderer } from './OwnReviewStateRenderer';
 import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewsExpandableRow } from './ReviewsExpandableRow';
 import { ReviewsRowActions } from './ReviewsRowActons';
-import { ReviewStateRenderer } from './ReviewStateRenderer';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
 
@@ -89,6 +89,16 @@ export const MyReviewsPage: FC = () => {
                 optional: true,
               },
               {
+                title: translate('Proposal name'),
+                render: ({ row }) => (
+                  <span className="text-gray-700 fw-bold">
+                    {row.proposal_name}
+                  </span>
+                ),
+                keys: ['proposal_name'],
+                id: 'proposal',
+              },
+              {
                 title: translate('Proposal slug'),
                 render: ({ row }) => (
                   <Link
@@ -101,16 +111,6 @@ export const MyReviewsPage: FC = () => {
                 ),
                 keys: ['proposal_slug'] as any,
                 id: 'proposal_slug',
-              },
-              {
-                title: translate('Proposal name'),
-                render: ({ row }) => (
-                  <span className="text-gray-700 fw-bold">
-                    {row.proposal_name}
-                  </span>
-                ),
-                keys: ['proposal_name'],
-                id: 'proposal',
               },
               {
                 title: translate('Call'),
@@ -140,10 +140,12 @@ export const MyReviewsPage: FC = () => {
               },
               {
                 title: translate('State'),
-                render: ReviewStateRenderer,
+                render: OwnReviewStateRenderer,
                 filter: 'state',
                 inlineFilter: (row) =>
-                  getReviewStateOptions().filter((s) => s.value === row.state),
+                  getOwnReviewStateOptions().filter(
+                    (s) => s.value === row.state,
+                  ),
                 keys: ['state'],
                 id: 'state',
               },
