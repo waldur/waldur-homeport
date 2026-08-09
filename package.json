@@ -246,6 +246,7 @@
     "serve/ajv": "^8.18.0",
     "table/ajv": "^8.18.0",
     "postcss": "^8.5.18",
+    "postcss/nanoid": "^3.3.17",
     "fast-uri": "^3.1.1",
     "ws": "^8.20.1",
     "js-cookie": "^3.0.7",
