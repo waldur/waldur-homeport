@@ -88,8 +88,14 @@ const RunwayCard: FC<{ data: PolicyWatchData }> = ({ data }) => {
   const { runway } = data;
   const burnPerDay = runway.burnPerDay;
   const days = runway.daysRemaining;
+  // Only alarm when the organization balance is what blocks spending. An
+  // allocation that is simply zero — never funded, or fully spent — reports a
+  // zero spendable value too, and has always rendered as an ordinary state.
+  const isBlockedByOrganization = runway.isLimitedByOrganizationCredit;
   const isWarn = days !== null && days < 14;
-  const isCritical = days !== null && days < 4;
+  const isCritical =
+    (isBlockedByOrganization && runway.spendableValue <= 0) ||
+    (days !== null && days < 4);
 
   if (!runway.credit) {
     return (
@@ -119,16 +125,34 @@ const RunwayCard: FC<{ data: PolicyWatchData }> = ({ data }) => {
           <h4 className="mb-0">
             {days === null
               ? translate('No burn detected')
-              : translate('~{days} days', { days })}
+              : days === 0
+                ? translate('Exhausted')
+                : translate('~{days} days', { days })}
           </h4>
         </div>
         <div className="vr d-none d-md-block" />
         <div>
+          {/* The allocation, matching the credit lifecycle beside this card,
+              the timeline and the burn-down chart. What is actually drawable
+              is a separate figure below, shown only when the two differ. */}
           <small className="text-muted d-block">{translate('Balance')}</small>
           <div className="fw-semibold">
             {defaultCurrency(runway.credit.value)}
           </div>
         </div>
+        {isBlockedByOrganization && (
+          <>
+            <div className="vr d-none d-md-block" />
+            <div>
+              <small className="text-muted d-block">
+                {translate('Spendable now')}
+              </small>
+              <div className="fw-semibold text-danger">
+                {defaultCurrency(runway.spendableValue)}
+              </div>
+            </div>
+          </>
+        )}
         <div className="vr d-none d-md-block" />
         <div>
           <small className="text-muted d-block">
@@ -182,6 +206,21 @@ const RunwayCard: FC<{ data: PolicyWatchData }> = ({ data }) => {
           </>
         )}
       </div>
+      {isBlockedByOrganization && (
+        <div className="text-danger small mt-2">
+          {runway.spendableValue <= 0
+            ? translate(
+                'Organization credit is exhausted, so none of this allocation can be drawn. Contact an organization owner to top it up.',
+              )
+            : translate(
+                'Only {spendable} of the {allocated} allocated can be drawn — the organization credit balance is lower than this allocation.',
+                {
+                  spendable: defaultCurrency(runway.spendableValue),
+                  allocated: defaultCurrency(runway.credit.value),
+                },
+              )}
+        </div>
+      )}
     </div>
   );
 };

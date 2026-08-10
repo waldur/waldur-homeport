@@ -69,6 +69,12 @@ export interface ResourceHealth {
 export interface CreditRunway {
   credit: ProjectCredit | null;
   customerCredit: CustomerCredit | null;
+  /** Credit that can actually be drawn: the allocation capped by the
+   *  organization balance. Compensation stops once organization credit is
+   *  exhausted, so `credit.value` alone overstates what is spendable. */
+  spendableValue: number;
+  /** True when the organization balance, not this allocation, is binding. */
+  isLimitedByOrganizationCredit: boolean;
   burnPerDay: number;
   daysRemaining: number | null;
   exhaustionDate: string | null;
