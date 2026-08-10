@@ -5,6 +5,9 @@
   "repository": "https://github.com/waldur/waldur-homeport",
   "license": "MIT",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "postinstall": "husky",
     "start": "VITE_API_URL=http://localhost:8000/ vite --port 8001",
@@ -148,6 +151,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-testing-library": "^7.16.2",
+    "eslint-plugin-waldur": "workspace:*",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "knip": "^6.5.0",
