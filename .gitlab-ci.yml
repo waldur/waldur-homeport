@@ -441,8 +441,9 @@ Trigger integration tests:
   variables:
     TRIGGER_SOURCE: homeport
   # Only run E2E when a change can actually affect the built frontend image.
-  # Docs / lint-config / unit-test-only MRs (e.g. *.md, docs/**, eslint-rules/**,
-  # e2e/**, test/**) skip the whole downstream suite. The include-list is a
+  # Docs / lint-config / unit-test-only MRs (e.g. *.md, docs/**,
+  # packages/eslint-plugin-waldur/**, e2e/**, test/**) skip the whole downstream
+  # suite. The include-list is a
   # positive filter: it matches whenever any runtime-affecting path changed.
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

@@ -5,6 +5,7 @@ FROM ${DOCKER_REGISTRY}node:lts-alpine AS build
 WORKDIR /app
 ENV PATH=/app/node_modules/.bin:$PATH
 COPY package.json yarn.lock .yarnrc.yml /app/
+COPY packages/eslint-plugin-waldur/package.json /app/packages/eslint-plugin-waldur/package.json
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 # Skip unnecessary post-install scripts - not needed for production builds

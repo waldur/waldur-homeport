@@ -9500,6 +9500,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-waldur@workspace:*, eslint-plugin-waldur@workspace:packages/eslint-plugin-waldur":
+  version: 0.0.0-use.local
+  resolution: "eslint-plugin-waldur@workspace:packages/eslint-plugin-waldur"
+  languageName: unknown
+  linkType: soft
+
 "eslint-scope@npm:^8.4.0":
   version: 8.4.0
   resolution: "eslint-scope@npm:8.4.0"
@@ -17391,6 +17397,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^5.1.0"
     eslint-plugin-react-refresh: "npm:^0.4.19"
     eslint-plugin-testing-library: "npm:^7.16.2"
+    eslint-plugin-waldur: "workspace:*"
     final-form: "npm:^4.20.10"
     final-form-arrays: "npm:^3.1.0"
     final-form-calculate: "npm:1.3.2"

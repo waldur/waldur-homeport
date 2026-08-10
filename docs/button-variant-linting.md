@@ -136,7 +136,7 @@ yarn lint:check src/path/to/file.tsx
 
 ## Configuration
 
-The rule is configured in `eslint.config.js` and the implementation is in `eslint-rules/enforce-button-variants.js`.
+The rule is configured in `eslint.config.js` and the implementation is in `packages/eslint-plugin-waldur/rules/enforce-button-variants.js`.
 
 To modify the mappings or add new deprecated patterns, edit the constants at the top of the rule file:
 
