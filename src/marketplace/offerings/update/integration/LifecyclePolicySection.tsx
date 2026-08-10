@@ -114,7 +114,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             name="plugin_options.auto_approve_in_service_provider_projects"
             label={translate('Auto approve in service provider projects')}
             description={translate(
-              "Skips consumer approval for orders placed in the service provider's own projects. The requester is recorded as the approver, so anyone who can place an order for this offering obtains its effect without a second party signing off — including changes that would otherwise need someone else to approve. Provider review and purchase-order requirements still apply. Enable this only where self-service is intended.",
+              'Automatically approves orders in service provider projects without manual approval',
             )}
           />
           <BooleanEditField
@@ -248,7 +248,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             name="plugin_options.enable_resource_end_date_change_requests"
             label={translate('Enable resource end date change requests')}
             description={translate(
-              'Lets project members who may not change a resource end date ask for it, and users who may change resource limits set it directly. Requests are approved or rejected on the resource, and approval applies the date immediately. Requests are also published as events, so an external approval system can decide instead. Does not apply to prepaid offerings, which extend through renewal instead.',
+              'Lets users who may not change a resource end date themselves ask for it. Holders of the end date permission approve or reject on the resource, and approval applies the date immediately. Requests are also published as events, so an external approval system can decide instead. Does not apply to prepaid offerings, which extend through renewal instead.',
             )}
           />
           <BooleanEditField
