@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
-import { formatDateTime } from '@/core/dateUtils';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
 import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
@@ -70,7 +70,10 @@ const getTranslatedOrderType = (type) =>
       ? translate('Termination')
       : translate('Change');
 
-const getSteps = (resource: Resource, offering?: PublicOfferingDetails) => {
+export const getSteps = (
+  resource: Resource,
+  offering?: PublicOfferingDetails,
+) => {
   const order = resource.order_in_progress;
   const steps: Array<{ label; description?; completed; variant? }> = [];
   steps.push({
@@ -142,11 +145,27 @@ const getSteps = (resource: Resource, offering?: PublicOfferingDetails) => {
     completed: isStep3Completed,
   });
 
-  if (order.state === 'pending-start-date') {
+  if (order.state === 'pending-project') {
+    // The order is held until the project itself starts. The order's own start
+    // date is validated to be no earlier than the project start date, so when it
+    // is set it is the effective provisioning date; otherwise only the project
+    // start date gates it, and that date is not exposed on the resource.
+    steps.push({
+      label: translate('Pending project start'),
+      description: [
+        order.start_date
+          ? `${translate('Scheduled to start on')}: ${formatDate(
+              order.start_date,
+            )}`
+          : translate('Waiting for the project to start'),
+      ],
+      completed: false, // This is the current, active step
+    });
+  } else if (order.state === 'pending-start-date') {
     steps.push({
       label: translate('Scheduled'),
       description: [
-        `${translate('Scheduled to start on')}: ${formatDateTime(
+        `${translate('Scheduled to start on')}: ${formatDate(
           resource.creation_order.start_date,
         )}`,
       ],
@@ -174,6 +193,9 @@ const getSteps = (resource: Resource, offering?: PublicOfferingDetails) => {
   const isStep4Completed =
     steps[steps.length - 1].completed &&
     ['done', 'canceled', 'erred', 'rejected'].includes(order.state);
+  // Only an actually failed order may paint this step red. Every other state is
+  // either successful or still in progress, and must keep the neutral variant.
+  const isStep4Failed = ['canceled', 'erred', 'rejected'].includes(order.state);
   steps.push({
     label: translate('Completed'),
     description: isStep4Completed
@@ -194,7 +216,7 @@ const getSteps = (resource: Resource, offering?: PublicOfferingDetails) => {
               : translate('Resource successfully updated'),
         ],
     completed: isStep4Completed,
-    variant: order.state === 'done' ? 'primary' : 'danger',
+    variant: isStep4Failed ? 'danger' : 'primary',
   });
   return steps;
 };
