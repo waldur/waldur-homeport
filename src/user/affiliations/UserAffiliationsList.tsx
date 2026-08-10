@@ -93,6 +93,11 @@ export const UserAffiliationsList: FunctionComponent<
     filter,
   });
 
+  // The retry/clear button only makes sense once a query or filter is actually
+  // narrowing the list; with none it is a dead end.
+  const hasSearchOrFilters =
+    Boolean(props.query) || props.filtersStorage?.length > 0;
+
   const columns = [
     {
       title: translate('Scope type'),
@@ -222,8 +227,13 @@ export const UserAffiliationsList: FunctionComponent<
       {...props}
       columns={columns}
       formId="UserAffiliationsFilter"
-      verboseName={translate('affiliations')}
+      verboseName={translate('roles')}
       title={translate('Roles and permissions')}
+      emptyMessage={translate(
+        'Roles are granted by creating an organization or accepting an invitation to an organization or project.',
+      )}
+      placeholderActions={<UserAffiliationsDropdownActions />}
+      placeholderHasRetry={hasSearchOrFilters}
       filters={<UserAffiliationsFilter showRoleStatus={isStaffOrSupport} />}
       tableActions={<UserAffiliationsDropdownActions />}
       initialPageSize={10}

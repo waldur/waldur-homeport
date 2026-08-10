@@ -146,7 +146,7 @@ export default tseslint
         'waldur-custom/prefer-mutate-over-mutateAsync': 'warn',
         'waldur-custom/no-direct-field-adapter': 'error',
         'waldur-custom/enforce-disabled-button-tooltip': 'error',
-        'waldur-custom/enforce-noresult-with-cta': 'warn',
+        'waldur-custom/enforce-noresult-with-cta': 'error',
 
         // Design system rules
         'waldur-custom/enforce-featured-icon': 'error',
