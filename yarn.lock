@@ -17377,7 +17377,7 @@ __metadata:
     classnames: "npm:^2.2.5"
     cross-env: "npm:^10.1.0"
     cssnano: "npm:^8.0.2"
-    dompurify: "npm:^3.4.11"
+    dompurify: "npm:^3.4.13"
     echarts: "npm:^6.0.0"
     emoji-mart: "npm:^5.6.0"
     eslint: "npm:^9.30.0"
