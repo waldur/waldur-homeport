@@ -114,7 +114,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             name="plugin_options.auto_approve_in_service_provider_projects"
             label={translate('Auto approve in service provider projects')}
             description={translate(
-              'Automatically approves orders in service provider projects without manual approval',
+              "Skips consumer approval for orders placed in the service provider's own projects. The requester is recorded as the approver, so anyone who can place an order for this offering obtains its effect without a second party signing off — including changes that would otherwise need someone else to approve. Provider review and purchase-order requirements still apply. Enable this only where self-service is intended.",
             )}
           />
           <BooleanEditField
