@@ -19,6 +19,7 @@ import { ReportUserUsageAction } from '../list/ReportUserUsageAction';
 import { ShowUsageAction } from '../list/ShowUsageAction';
 import { ReallocateLimitsAction } from '../reallocate-limits/ReallocateLimitsAction';
 import { RenewAllocationActionAction } from '../renew-allocation/RenewAllocationAction';
+import { RequestEndDateChangeAction } from '../request-end-date-change/RequestEndDateChangeAction';
 import { RequestLimitsChangeAction } from '../request-limits-change/RequestLimitsChangeAction';
 
 import { AdjustResourceDatesAction } from './AdjustResourceDatesAction';
@@ -41,6 +42,7 @@ export const ActionsList = [
   ChangePlanAction,
   ChangeLimitsAction,
   RequestLimitsChangeAction,
+  RequestEndDateChangeAction,
   RenewAllocationActionAction,
   ReallocateLimitsAction,
   SetBackendIdAction,
@@ -60,6 +62,7 @@ export const CustomerResourceActions = [
   ChangePlanAction,
   ChangeLimitsAction,
   RequestLimitsChangeAction,
+  RequestEndDateChangeAction,
   RenewAllocationActionAction,
   ReallocateLimitsAction,
   EditResourceEndDateAction,

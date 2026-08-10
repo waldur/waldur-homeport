@@ -11,7 +11,11 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures, OpenstackFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
-import { countLexisLinks, countRobotAccounts } from '@/marketplace/common/api';
+import {
+  countEndDateChangeRequests,
+  countLexisLinks,
+  countRobotAccounts,
+} from '@/marketplace/common/api';
 import { hasEditableLimitComponents } from '@/marketplace/resources/change-limits/utils';
 import { isInferenceServiceEnabled } from '@/marketplace/resources/inference';
 import { PageBarTab } from '@/navigation/types';
@@ -37,6 +41,8 @@ export const getResourceTabs = ({
   isSupport,
   isRPOnly = false,
   canManageLimitRequests = false,
+  canManageEndDateRequests = false,
+  endDateChangeRequestsCount = 0,
 }: {
   resource: Resource;
   offering: Offering;
@@ -47,6 +53,8 @@ export const getResourceTabs = ({
   isSupport?: boolean;
   isRPOnly?: boolean;
   canManageLimitRequests?: boolean;
+  canManageEndDateRequests?: boolean;
+  endDateChangeRequestsCount?: number;
 }) => {
   // Generate tabs
   const tabs: PageBarTab<{
@@ -363,6 +371,13 @@ export const getResourceTabs = ({
     });
   }
 
+  // Requests a consumer raises for someone to approve. Limits and end dates are
+  // separate endpoints with separate permissions, so each is gated on its own
+  // and they are grouped only when both are actually available — a dropdown
+  // holding a single entry is worse than a plain tab, and one of the two is the
+  // common case.
+  const changeRequestTabs = [];
+
   // Show only when a limit change is actually feasible for this resource,
   // mirroring the conditions under which ChangeLimitsAction is usable:
   // editable limit components and an associated plan. This hides the tab on
@@ -373,8 +388,9 @@ export const getResourceTabs = ({
     hasEditableLimitComponents(offering) &&
     Boolean(resource.plan_uuid)
   ) {
-    tabs.push({
+    changeRequestTabs.push({
       key: 'limit-change-requests',
+      groupedTitle: translate('Limits'),
       title: translate('Limit change requests'),
       component: lazyComponent(() =>
         import('@/marketplace/resources/request-limits-change/ResourceLimitChangeRequests').then(
@@ -383,6 +399,43 @@ export const getResourceTabs = ({
           }),
         ),
       ),
+    });
+  }
+
+  // Only offerings that accept end date change requests have anything to show
+  // here, and only whoever may decide one sees the tab.
+  if (
+    (canManageEndDateRequests || endDateChangeRequestsCount > 0) &&
+    offering?.plugin_options?.enable_resource_end_date_change_requests &&
+    !offering?.components?.some((component) => component.is_prepaid)
+  ) {
+    changeRequestTabs.push({
+      key: 'end-date-change-requests',
+      groupedTitle: translate('End date'),
+      title: translate('End date change requests'),
+      component: lazyComponent(() =>
+        import('@/marketplace/resources/request-end-date-change/ResourceEndDateChangeRequests').then(
+          (module) => ({
+            default: module.ResourceEndDateChangeRequests,
+          }),
+        ),
+      ),
+    });
+  }
+
+  if (changeRequestTabs.length === 1) {
+    const [{ groupedTitle: _groupedTitle, ...tab }] = changeRequestTabs;
+    tabs.push(tab);
+  } else if (changeRequestTabs.length > 1) {
+    tabs.push({
+      key: 'change-requests',
+      title: translate('Change requests'),
+      // Child keys are unchanged, so existing ?tab= deep links keep working.
+      defaultKey: changeRequestTabs[0].key,
+      children: changeRequestTabs.map(({ groupedTitle, ...tab }) => ({
+        ...tab,
+        title: groupedTitle,
+      })),
     });
   }
 
@@ -427,11 +480,23 @@ export const fetchData = async (resource: Resource) => {
     resource: resource.url,
   });
 
+  // The requester is not an approver, so the tab is otherwise invisible to
+  // them and they cannot tell what became of what they asked for. The list
+  // endpoint already scopes rows to own-or-decidable, so counting without a
+  // created_by filter answers "is there anything here for me?" for both.
+  let endDateChangeRequestsCount = 0;
+  if (offering?.plugin_options?.enable_resource_end_date_change_requests) {
+    endDateChangeRequestsCount = await countEndDateChangeRequests({
+      resource_uuid: resource.uuid,
+    });
+  }
+
   return {
     scope,
     components,
     offering,
     lexisLinksCount,
     robotAccountsCount,
+    endDateChangeRequestsCount,
   };
 };

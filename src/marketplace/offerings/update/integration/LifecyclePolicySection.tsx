@@ -245,6 +245,13 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             )}
           />
           <BooleanEditField
+            name="plugin_options.enable_resource_end_date_change_requests"
+            label={translate('Enable resource end date change requests')}
+            description={translate(
+              'Lets project members who may not change a resource end date ask for it, and users who may change resource limits set it directly. Requests are approved or rejected on the resource, and approval applies the date immediately. Requests are also published as events, so an external approval system can decide instead. Does not apply to prepaid offerings, which extend through renewal instead.',
+            )}
+          />
+          <BooleanEditField
             name="plugin_options.enable_resource_projects"
             label={translate('Enable resource projects')}
             description={translate(

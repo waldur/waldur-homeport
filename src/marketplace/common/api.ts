@@ -6,6 +6,8 @@ import {
   MarketplaceCategoryGroupsListData,
   marketplaceOrdersCount,
   MarketplaceOrdersListData,
+  marketplaceResourceEndDateChangeRequestsCount,
+  MarketplaceResourceEndDateChangeRequestsListData,
   marketplaceRobotAccountsCount,
   MarketplaceRobotAccountsListData,
   marketplaceServiceProvidersList,
@@ -41,3 +43,10 @@ export const countRobotAccounts = (
 
 export const countLexisLinks = (query?: LexisLinksListData['query']) =>
   lexisLinksCount({ query }).then(fetchResultCount);
+
+export const countEndDateChangeRequests = (
+  query: MarketplaceResourceEndDateChangeRequestsListData['query'],
+) =>
+  marketplaceResourceEndDateChangeRequestsCount({ query }).then(
+    fetchResultCount,
+  );
