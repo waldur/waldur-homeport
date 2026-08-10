@@ -175,6 +175,18 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
           customerId: resource.customer_uuid,
         })
       : false);
+  // End date requests are decided by whoever may set the date outright, which
+  // is a different permission from the one governing limit requests.
+  const canManageEndDateRequests =
+    user?.is_staff ||
+    user?.is_support ||
+    (resource
+      ? hasPermission(user, {
+          permission: PermissionEnum.SET_RESOURCE_END_DATE,
+          projectId: resource.project_uuid,
+          customerId: resource.customer_uuid,
+        })
+      : false);
   const tabs = useMemo(
     () =>
       data
@@ -185,6 +197,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
             isSupport: user?.is_support,
             isRPOnly,
             canManageLimitRequests,
+            canManageEndDateRequests,
           })
         : [],
     [
@@ -194,6 +207,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
       user?.is_support,
       isRPOnly,
       canManageLimitRequests,
+      canManageEndDateRequests,
     ],
   );
 

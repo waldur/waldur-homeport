@@ -64,6 +64,8 @@ export const EditResourceEndDateAction: ActionItemType = ({
       },
     });
 
+  // Setting the date takes this one permission. Everyone else — project
+  // managers included — asks via RequestEndDateChangeAction.
   if (
     !hasPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_END_DATE,
