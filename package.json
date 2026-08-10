@@ -239,7 +239,7 @@
     "@xmldom/xmldom": "^0.8.13",
     "flatted": "^3.4.2",
     "smol-toml": "^1.6.1",
-    "dompurify": "^3.4.11",
+    "dompurify": "^3.4.13",
     "sass/immutable": "^5.1.5",
     "vite": "^8.0.16",
     "attr-accept": "^3.0.0",
