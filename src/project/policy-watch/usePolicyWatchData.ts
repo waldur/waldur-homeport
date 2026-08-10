@@ -308,10 +308,24 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
 
     const monthlyBurn = safeNumber(projectCredit?.consumption_last_month);
     const burnPerDay = monthlyBurn / 30;
+    // The allocation. It stays the headline balance so this card agrees with
+    // the credit lifecycle beside it, the timeline, and the burn-down chart,
+    // all of which are denominated in the allocation.
     const creditValue = safeNumber(projectCredit?.value);
+    // What can actually be drawn: the allocation capped by the organization
+    // balance, since compensation stops once that reaches zero.
+    const spendableValue = safeNumber(projectCredit?.spendable_value);
+    // Read the flag rather than inferring it from a zero spendable value — an
+    // unfunded allocation and an organization-capped one both report zero, and
+    // only the latter is worth alarming about.
+    const isLimitedByOrganizationCredit = Boolean(
+      projectCredit?.is_limited_by_organization_credit,
+    );
+    // Runway measures what is left to draw, so a zero spendable balance is
+    // zero days, not "unknown". Only an unknown burn rate yields null.
     const daysRemaining =
-      burnPerDay > 0 && creditValue > 0
-        ? Math.floor(creditValue / burnPerDay)
+      burnPerDay > 0
+        ? Math.floor(Math.max(0, spendableValue) / burnPerDay)
         : null;
     const exhaustionDate =
       daysRemaining !== null ? isoDate(addDays(today, daysRemaining)) : null;
@@ -319,6 +333,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     const runway: CreditRunway = {
       credit: projectCredit,
       customerCredit,
+      spendableValue,
+      isLimitedByOrganizationCredit,
       burnPerDay,
       daysRemaining,
       exhaustionDate,
@@ -327,6 +343,10 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     const policies: PolicySaturation[] = [];
 
     for (const p of projectPolicies) {
+      // billing_price_estimate.total already nets credit: PriceEstimate sums
+      // every invoice item for the month and compensations are items with a
+      // negative unit_price. Do not subtract compensation again here — when
+      // the estimate looks un-netted it is stale, which is a backend concern.
       const currentTotal = safeNumber(p.billing_price_estimate?.total);
       const limit = safeNumber(p.limit_cost);
       const sat = limit > 0 ? (currentTotal / limit) * 100 : 0;
