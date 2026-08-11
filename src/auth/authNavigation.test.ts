@@ -19,6 +19,7 @@ vi.mock('@/workspace/actions', () => ({
 }));
 
 // `@/router` is globally mocked (test/mocks/router.js).
+import { setupAuthCore } from '../core/authCoreSetup';
 import {
   AuthMethodStorage,
   AuthTokenStorage,
@@ -32,6 +33,11 @@ import {
   localLogout,
   explicitLogout,
 } from './authNavigation';
+
+// clearAuthTokens (called by clearAuthCache) now lives in waldur-auth-core
+// and requires configureAuthCore() to have run — wire it to the same
+// storage singletons this test asserts against.
+setupAuthCore();
 
 // Node 25 ships an experimental top-level `localStorage` that conflicts with
 // the one provided by jsdom; stub a plain in-memory shim so storage-backed

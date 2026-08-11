@@ -7,8 +7,6 @@ import { SET_CURRENT_USER } from '@/workspace/constants';
 
 import { ENV } from './config';
 
-export { addApiErrorBreadcrumb } from 'waldur-telemetry';
-
 /**
  * Initializes Sentry from this app's runtime config (branding/plugin
  * settings fetched from the backend). No-ops when the backend hasn't
