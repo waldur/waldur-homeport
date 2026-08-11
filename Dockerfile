@@ -5,7 +5,12 @@ FROM ${DOCKER_REGISTRY}node:lts-alpine AS build
 WORKDIR /app
 ENV PATH=/app/node_modules/.bin:$PATH
 COPY package.json yarn.lock .yarnrc.yml /app/
+# Each workspace member's package.json must be present before `yarn install`
+# resolves `workspace:*` dependencies (see git history for the first instance
+# of this failure) — add a line here whenever a new package lands under
+# packages/.
 COPY packages/eslint-plugin-waldur/package.json /app/packages/eslint-plugin-waldur/package.json
+COPY packages/telemetry/package.json /app/packages/telemetry/package.json
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 # Skip unnecessary post-install scripts - not needed for production builds
