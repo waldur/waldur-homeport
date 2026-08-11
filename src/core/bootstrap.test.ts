@@ -18,6 +18,10 @@ beforeEach(() => {
 });
 
 describe('loadConfig — error wrapping', () => {
+  // Full branch coverage of the error-classification logic itself lives in
+  // packages/runtime-config/src/configError.test.ts; this just checks the
+  // wiring — that a fetch failure actually propagates through loadConfig()
+  // with its cause preserved.
   it('wraps an object-shaped SDK error so the original is preserved on Error.cause', async () => {
     const sdkError = { response: undefined, message: 'underlying failure' };
     vi.mocked(configurationRetrieve).mockRejectedValueOnce(sdkError);
@@ -41,18 +45,6 @@ describe('loadConfig — error wrapping', () => {
         'Please check if you can connect to http://localhost:8080/',
       ),
       cause: networkError,
-    });
-  });
-
-  it('keeps the HTTP-status message for response errors and carries the cause', async () => {
-    const httpError = { response: { status: 503 }, statusText: 'Bad Gateway' };
-    vi.mocked(configurationRetrieve).mockRejectedValueOnce(httpError);
-
-    const { loadConfig } = await import('./bootstrap');
-
-    await expect(loadConfig()).rejects.toMatchObject({
-      message: expect.stringContaining('Error message: Bad Gateway'),
-      cause: httpError,
     });
   });
 });
