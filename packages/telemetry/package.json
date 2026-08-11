@@ -1,0 +1,16 @@
+{
+  "name": "waldur-telemetry",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared Sentry/Matomo telemetry bootstrap for Waldur frontend apps",
+  "type": "module",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@jonkoops/matomo-tracker": "^0.7.0",
+    "@sentry/react": "^8.55.0"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0"
+  }
+}

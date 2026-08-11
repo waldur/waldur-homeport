@@ -17465,6 +17465,7 @@ __metadata:
     vitest: "npm:4"
     vitest-location-mock: "npm:^1.0.4"
     waldur-js-client: "npm:8.1.0-rc.23.dev.20260810054419.140"
+    waldur-telemetry: "workspace:*"
     yjs: "npm:^13.5.22"
   languageName: unknown
   linkType: soft
@@ -17475,6 +17476,17 @@ __metadata:
   checksum: 10c0/f2a641fa2c5fe21206f043d011b6b7a584061942601966dfb29221728e4d5747268b80ae9ed4478ad24c86801f3634aeb2fa3be8375aa1e45fc06e098fdf6522
   languageName: node
   linkType: hard
+
+"waldur-telemetry@workspace:*, waldur-telemetry@workspace:packages/telemetry":
+  version: 0.0.0-use.local
+  resolution: "waldur-telemetry@workspace:packages/telemetry"
+  dependencies:
+    "@jonkoops/matomo-tracker": "npm:^0.7.0"
+    "@sentry/react": "npm:^8.55.0"
+  peerDependencies:
+    react: ^18.3.0
+  languageName: unknown
+  linkType: soft
 
 "walk-up-path@npm:^4.0.0":
   version: 4.0.0

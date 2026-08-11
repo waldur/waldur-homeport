@@ -1,29 +1,10 @@
-import * as Sentry from '@sentry/react';
-
 import { ENV } from './core/config';
 import { generateBrandColors, hexToRgb } from './core/generateColors';
 import { initMatomoTracker } from './core/matomo';
-import { beforeBreadcrumb } from './core/sentry';
+import { initSentry } from './core/sentry';
 import { getBrandColor } from './core/utils';
 import { LanguageUtilsService } from './i18n/LanguageUtilsService';
 import { attachTransitions } from './transitions';
-
-function initSentry() {
-  if (ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN) {
-    const { hostname } = new URL(ENV.apiEndpoint);
-    Sentry.init({
-      release: `waldur-homeport@${ENV.buildId}`,
-      dsn: ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN,
-      environment:
-        ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_ENVIRONMENT || 'unknown',
-      integrations: [Sentry.browserTracingIntegration()],
-      tracesSampleRate:
-        ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_TRACES_SAMPLE_RATE || 0.2,
-      tracePropagationTargets: [hostname, /^\//],
-      beforeBreadcrumb,
-    });
-  }
-}
 
 const generateCheckboxSvgUrl = (color) => {
   const svg = `<svg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M11 1.25L4.125 8.125L1 5' stroke='${color}' stroke-width='1.6666' stroke-linecap='round' stroke-linejoin='round'/></svg>`;
