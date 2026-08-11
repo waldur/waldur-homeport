@@ -7,11 +7,9 @@ import type {
   ProjectEstimatedCostPolicy,
   Resource,
   SlurmPeriodicUsagePolicy,
-  SlurmPolicyEvaluationLog,
 } from 'waldur-js-client';
 
-export type PolicyWatchVariant =
-  'health' | 'spend' | 'breakdown' | 'timeline' | 'matrix';
+export type PolicyWatchVariant = 'health' | 'spend' | 'breakdown' | 'matrix';
 
 export type ResourceStatusBucket =
   'ok' | 'notification' | 'slowdown' | 'paused' | 'downscaled';
@@ -151,40 +149,15 @@ export interface BreakdownBucket {
   resourceUuid?: string;
 }
 
-export type PolicyWatchEventType =
-  | 'credit-funded'
-  | 'policy-notified'
-  | 'policy-downscaled'
-  | 'policy-paused'
-  | 'policy-terminated'
-  | 'policy-cleared'
-  | 'today'
-  | 'projected-policy'
-  | 'projected-credit-exhaustion';
-
-export interface PolicyWatchEvent {
-  id: string;
-  date: string;
-  type: PolicyWatchEventType;
-  title: string;
-  subtitle?: string;
-  resourceUuid?: string;
-  resourceName?: string;
-  policyUuid?: string;
-  isFuture: boolean;
-}
-
 export interface PolicyWatchData {
   projectPolicies: ProjectEstimatedCostPolicy[];
   customerPolicies: CustomerEstimatedCostPolicy[];
   slurmPolicies: SlurmPeriodicUsagePolicy[];
   resources: ResourceWithAttribution[];
-  slurmLogs: SlurmPolicyEvaluationLog[];
   runway: CreditRunway;
   pacing: PacingSnapshot;
   policies: PolicySaturation[];
   perResource: ResourceHealth[];
-  events: PolicyWatchEvent[];
   invoices: InvoiceCost[];
   currentMonthItems: InvoiceCostItem[];
   breakdown: BreakdownBucket[];

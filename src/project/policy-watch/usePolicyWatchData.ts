@@ -6,18 +6,15 @@ import {
   marketplaceCustomerEstimatedCostPoliciesList,
   marketplaceProjectEstimatedCostPoliciesList,
   marketplaceResourcesList,
-  marketplaceSlurmPeriodicUsagePoliciesEvaluationLogsList,
   marketplaceSlurmPeriodicUsagePoliciesList,
   projectCreditsList,
   Resource,
   SlurmPeriodicUsagePolicy,
-  SlurmPolicyEvaluationLog,
 } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
-import { POLICY_LABELS } from '@/marketplace/resources/details/ResourceFlags';
 import { Project } from '@/workspace/types';
 
 import {
@@ -28,7 +25,6 @@ import {
   PacingSnapshot,
   PolicySaturation,
   PolicyWatchData,
-  PolicyWatchEvent,
   ResourceHealth,
   ResourceStatusBucket,
   ResourceWithAttribution,
@@ -126,35 +122,6 @@ const formatPolicyAction = (actions: string): string => {
     .map((a) => options.find((o) => o.value === a)?.label || a)
     .join(', ');
 };
-
-const buildPolicyAttributionEvent = (
-  resource: ResourceWithAttribution,
-  field: 'paused' | 'downscaled',
-): PolicyWatchEvent | null => {
-  const attr = resource.attributes?._policy_attribution?.[field];
-  if (!attr || !attr.timestamp) return null;
-  const type = field === 'paused' ? 'policy-paused' : 'policy-downscaled';
-  const policyTypeLabel = attr.policy_class
-    ? POLICY_LABELS[attr.policy_class] || attr.policy_class
-    : translate('Policy');
-  return {
-    id: `attribution-${resource.uuid}-${field}`,
-    date: attr.timestamp,
-    type,
-    title:
-      field === 'paused'
-        ? translate('Resource paused')
-        : translate('Resource downscaled'),
-    subtitle: `${policyTypeLabel}${attr.scope_name ? ` — ${attr.scope_name}` : ''}`,
-    resourceUuid: resource.uuid,
-    resourceName: resource.name,
-    policyUuid: attr.policy_uuid,
-    isFuture: false,
-  };
-};
-
-const sortByDate = (a: PolicyWatchEvent, b: PolicyWatchEvent) =>
-  a.date.localeCompare(b.date);
 
 export const usePolicyWatchData = (project: Project): PolicyWatchData => {
   const projectUuid = project?.uuid;
@@ -271,29 +238,6 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
   const slurmPolicies: SlurmPeriodicUsagePolicy[] = useMemo(
     () => slurmPoliciesQueries.flatMap((q) => q.data || []),
     [slurmPoliciesQueries],
-  );
-
-  const slurmPolicyUuids = useMemo(
-    () => slurmPolicies.map((p) => p.uuid),
-    [slurmPolicies],
-  );
-
-  const slurmLogQueries = useQueries({
-    queries: slurmPolicyUuids.map((policyUuid) => ({
-      queryKey: ['policy-watch-slurm-logs', policyUuid],
-      queryFn: () =>
-        marketplaceSlurmPeriodicUsagePoliciesEvaluationLogsList({
-          path: { uuid: policyUuid },
-          query: { page_size: 50 },
-        }).then((r) => r.data || []),
-      staleTime: SHORT_STALE_TIME,
-      refetchOnWindowFocus: false,
-    })),
-  });
-
-  const slurmLogs: SlurmPolicyEvaluationLog[] = useMemo(
-    () => slurmLogQueries.flatMap((q) => q.data || []),
-    [slurmLogQueries],
   );
 
   return useMemo<PolicyWatchData>(() => {
@@ -504,122 +448,6 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       };
     });
 
-    const events: PolicyWatchEvent[] = [];
-
-    if (customerCredit?.value) {
-      events.push({
-        id: `credit-${customerCredit.uuid}`,
-        date: customerCredit.end_date || isoDate(today),
-        type: 'credit-funded',
-        title: translate('Organization credit active'),
-        subtitle: `${customerCredit.value} — ${customerCredit.allocated_to_projects} ${translate('allocated to projects')}`,
-        isFuture: false,
-      });
-    }
-
-    if (projectCredit?.value) {
-      events.push({
-        id: `project-credit-${projectCredit.uuid}`,
-        date: isoDate(today),
-        type: 'credit-funded',
-        title: translate('Project credit'),
-        subtitle: `${projectCredit.value} ${translate('available')}, ${projectCredit.consumption_last_month} ${translate('spent last month')}`,
-        isFuture: false,
-      });
-    }
-
-    for (const r of resources) {
-      const pausedEvent = buildPolicyAttributionEvent(r, 'paused');
-      if (pausedEvent) events.push(pausedEvent);
-      const downEvent = buildPolicyAttributionEvent(r, 'downscaled');
-      if (downEvent) events.push(downEvent);
-    }
-
-    for (const policy of [...projectPolicies, ...customerPolicies]) {
-      if (policy.has_fired && policy.fired_datetime) {
-        events.push({
-          id: `policy-fired-${policy.uuid}`,
-          date: policy.fired_datetime,
-          type: 'policy-notified',
-          title: translate('Cost policy fired'),
-          subtitle: `${policy.scope_name} — ${formatPolicyAction(policy.actions)}`,
-          policyUuid: policy.uuid,
-          isFuture: false,
-        });
-      }
-    }
-
-    for (const sp of slurmPolicies) {
-      if (sp.has_fired && sp.fired_datetime) {
-        events.push({
-          id: `slurm-fired-${sp.uuid}`,
-          date: sp.fired_datetime,
-          type: 'policy-paused',
-          title: translate('SLURM policy fired'),
-          subtitle: `${sp.scope_name} — ${formatPolicyAction(sp.actions)}`,
-          policyUuid: sp.uuid,
-          isFuture: false,
-        });
-      }
-    }
-
-    for (const log of slurmLogs.slice(0, 30)) {
-      const actions = log.actions_taken || [];
-      if (actions.length === 0) continue;
-      events.push({
-        id: `slurm-eval-${log.uuid}`,
-        date: log.evaluated_at,
-        type: actions.includes('pause') ? 'policy-paused' : 'policy-downscaled',
-        title: translate('SLURM evaluation: {action}', {
-          action: actions.join(', '),
-        }),
-        subtitle: `${log.resource_name} — ${log.usage_percentage.toFixed(1)}% ${translate('usage')}`,
-        resourceUuid: log.resource_uuid,
-        resourceName: log.resource_name,
-        isFuture: false,
-      });
-    }
-
-    events.push({
-      id: 'today-marker',
-      date: isoDate(today),
-      type: 'today',
-      title: translate('Today'),
-      isFuture: false,
-    });
-
-    if (exhaustionDate && daysRemaining !== null && daysRemaining > 0) {
-      events.push({
-        id: 'projected-credit-exhaustion',
-        date: exhaustionDate,
-        type: 'projected-credit-exhaustion',
-        title: translate('Projected credit exhaustion'),
-        subtitle: translate('At current burn of {burn}/day, in ~{days} days', {
-          burn: burnPerDay.toFixed(2),
-          days: daysRemaining,
-        }),
-        isFuture: true,
-      });
-    }
-
-    for (const ps of policies) {
-      if (!ps.hasFired && ps.etaDays !== null && ps.etaDate && ps.etaDays > 0) {
-        events.push({
-          id: `projected-${ps.policyUuid}`,
-          date: ps.etaDate,
-          type: 'projected-policy',
-          title: translate('{label} threshold projected', {
-            label: ps.thresholdLabel,
-          }),
-          subtitle: `${ps.scopeName} — ${ps.actionLabel} (~${ps.etaDays}d)`,
-          policyUuid: ps.policyUuid,
-          isFuture: true,
-        });
-      }
-    }
-
-    events.sort(sortByDate);
-
     // The /api/invoice-items/costs/ endpoint exposes three top-level numbers
     // per month: `incurred` (gross), `compensation` (negative, credit applied)
     // and `price` (net = incurred − |compensation|). These match
@@ -771,8 +599,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       projectCreditQ.isLoading ||
       customerCreditQ.isLoading ||
       invoicesQ.isLoading ||
-      slurmPoliciesQueries.some((q) => q.isLoading) ||
-      slurmLogQueries.some((q) => q.isLoading);
+      slurmPoliciesQueries.some((q) => q.isLoading);
 
     const hasError =
       !!projectPoliciesQ.error ||
@@ -787,12 +614,10 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       customerPolicies,
       slurmPolicies,
       resources,
-      slurmLogs,
       runway,
       pacing,
       policies,
       perResource,
-      events,
       invoices,
       currentMonthItems,
       breakdown,
@@ -823,8 +648,6 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     invoicesQ.isLoading,
     invoicesQ.error,
     slurmPolicies,
-    slurmLogs,
     slurmPoliciesQueries,
-    slurmLogQueries,
   ]);
 };
