@@ -10,6 +10,7 @@ COPY package.json yarn.lock .yarnrc.yml /app/
 # of this failure) — add a line here whenever a new package lands under
 # packages/.
 COPY packages/api-client/package.json /app/packages/api-client/package.json
+COPY packages/auth-core/package.json /app/packages/auth-core/package.json
 COPY packages/eslint-plugin-waldur/package.json /app/packages/eslint-plugin-waldur/package.json
 COPY packages/i18n-runtime/package.json /app/packages/i18n-runtime/package.json
 COPY packages/runtime-config/package.json /app/packages/runtime-config/package.json

@@ -9,7 +9,6 @@ const setSentryUser = vi.fn();
 vi.mock('waldur-telemetry', () => ({
   initSentry: vi.fn(),
   setSentryUser: (...args: unknown[]) => setSentryUser(...args),
-  addApiErrorBreadcrumb: vi.fn((x) => x),
 }));
 
 beforeEach(() => {

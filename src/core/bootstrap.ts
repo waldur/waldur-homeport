@@ -8,6 +8,7 @@ import { afterBootstrap } from '@/afterBootstrap';
 import { ENV } from '@/core/config';
 
 import { initApiClient } from './api';
+import { setupAuthCore } from './authCoreSetup';
 
 /**
  * Fetches the backend's public configuration (branding, feature flags,
@@ -16,6 +17,7 @@ import { initApiClient } from './api';
  * composition so the two concerns can be reasoned about independently.
  */
 async function loadPublicConfig() {
+  setupAuthCore();
   const restApi = getApiUrlFromMeta();
   if (restApi === '__API_URL__') {
     throw new Error('API URL is not configured');

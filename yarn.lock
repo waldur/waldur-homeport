@@ -17333,6 +17333,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"waldur-auth-core@workspace:*, waldur-auth-core@workspace:packages/auth-core":
+  version: 0.0.0-use.local
+  resolution: "waldur-auth-core@workspace:packages/auth-core"
+  dependencies:
+    qs: "npm:^6.14.2"
+    waldur-api-client: "workspace:*"
+    waldur-telemetry: "workspace:*"
+  peerDependencies:
+    react: ^18.3.0
+  languageName: unknown
+  linkType: soft
+
 "waldur-homeport@workspace:.":
   version: 0.0.0-use.local
   resolution: "waldur-homeport@workspace:."
@@ -17473,6 +17485,7 @@ __metadata:
     vitest: "npm:4"
     vitest-location-mock: "npm:^1.0.4"
     waldur-api-client: "workspace:*"
+    waldur-auth-core: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
     waldur-js-client: "npm:8.1.0-rc.23.dev.20260810054419.140"
     waldur-runtime-config: "workspace:*"
