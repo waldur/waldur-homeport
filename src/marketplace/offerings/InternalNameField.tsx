@@ -4,13 +4,13 @@ import { composeValidators, required } from '@/core/validators';
 import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
 
+import { INTERNAL_NAME_PATTERN } from './internalName';
+
 interface InternalNameFieldProps {
   name: string;
   disabled?: boolean;
   readOnly?: boolean;
 }
-
-const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_\\-/:]+$');
 
 const validateInternalName = (value: string) =>
   !value || !value.match(INTERNAL_NAME_PATTERN)
