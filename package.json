@@ -107,6 +107,7 @@
     "reselect": "^3.0.1",
     "text-security": "^3.2.1",
     "tslib": "^2.8.1",
+    "waldur-api-client": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
     "waldur-js-client": "8.1.0-rc.23.dev.20260810054419.140",
     "waldur-telemetry": "workspace:*",

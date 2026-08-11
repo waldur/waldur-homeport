@@ -1,19 +1,18 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock dependencies
-vi.mock('@/core/api', () => ({
+vi.mock('./requestHelpers', () => ({
   fetchResultCount: vi.fn(),
   parseNextPage: vi.fn(),
 }));
 
-import { fetchResultCount, parseNextPage } from '@/core/api';
-
+import { fetchResultCount, parseNextPage } from './requestHelpers';
 import {
   processApiResponse,
   createFetcher,
   createClientPaginatedFetcher,
   fetchAll,
-} from './api';
+} from './tableFetcher';
 
 describe('api', () => {
   beforeEach(() => {

@@ -9,6 +9,7 @@ COPY package.json yarn.lock .yarnrc.yml /app/
 # resolves `workspace:*` dependencies (see git history for the first instance
 # of this failure) — add a line here whenever a new package lands under
 # packages/.
+COPY packages/api-client/package.json /app/packages/api-client/package.json
 COPY packages/eslint-plugin-waldur/package.json /app/packages/eslint-plugin-waldur/package.json
 COPY packages/i18n-runtime/package.json /app/packages/i18n-runtime/package.json
 COPY packages/telemetry/package.json /app/packages/telemetry/package.json
