@@ -11,7 +11,6 @@ import { usePolicyWatchData } from './usePolicyWatchData';
 import { BreakdownView } from './views/BreakdownView';
 import { MatrixView } from './views/MatrixView';
 import { SpendView } from './views/SpendView';
-import { TimelineView } from './views/TimelineView';
 
 interface VariantInfo {
   key: PolicyWatchVariant;
@@ -34,13 +33,6 @@ const VARIANTS: VariantInfo[] = [
     label: translate('Breakdown'),
     hint: translate(
       'Where the current-month spend is going, sorted by line item.',
-    ),
-  },
-  {
-    key: 'timeline',
-    label: translate('Timeline'),
-    hint: translate(
-      'Past policy events, today, and projected future events on a single vertical track.',
     ),
   },
   {
@@ -142,7 +134,6 @@ export const ExperimentalPolicyWatchSection: FC<Props> = ({ project }) => {
           <>
             {variant === 'spend' && <SpendView data={data} />}
             {variant === 'breakdown' && <BreakdownView data={data} />}
-            {variant === 'timeline' && <TimelineView data={data} />}
             {variant === 'matrix' && <MatrixView data={data} />}
           </>
         )}
