@@ -3,6 +3,8 @@ import { useFormState } from 'react-final-form';
 import { BooleanGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 
+import { InternalNamePrefill } from '../../InternalNamePrefill';
+
 import { ChoicesOptionConfig } from './ChoicesOptionConfig';
 import { ComponentMultiplierConfiguration } from './ComponentMultiplierConfiguration';
 import { ConditionalCascadeConfiguration } from './ConditionalCascadeConfiguration';
@@ -36,8 +38,9 @@ export const OptionForm = ({ resourceType, offering }) => {
 
   return (
     <>
-      <InternalNameField />
       <DisplayNameField />
+      <InternalNameField />
+      <InternalNamePrefill source="label" target="name" />
       <StringGroup label={translate('Description')} name="help_text" />
       <OptionTypeGroup />
       {OptionComponent && <OptionComponent offering={offering} />}

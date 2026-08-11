@@ -49,4 +49,13 @@ describe('ComponentForm', () => {
     renderComponent({ offering: mockOffering, readOnly: true });
     expect(screen.getByLabelText(/Measured unit/i)).toBeDisabled();
   });
+
+  it('auto-fills the internal name from the display name', async () => {
+    renderComponent({ offering: mockOffering });
+    await user.type(screen.getByLabelText(/Display name/i), 'CPU hours');
+    const internalNameInput = screen.getByLabelText(
+      /Internal name/i,
+    ) as HTMLInputElement;
+    expect(internalNameInput.value).toBe('cpu_hours');
+  });
 });

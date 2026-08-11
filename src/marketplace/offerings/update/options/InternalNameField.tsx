@@ -4,7 +4,7 @@ import { required } from '@/core/validators';
 import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
 
-const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_\\-/:]+$');
+import { INTERNAL_NAME_PATTERN } from '../../internalName';
 
 const validateInternalName = (value: string) =>
   !value.match(INTERNAL_NAME_PATTERN)
