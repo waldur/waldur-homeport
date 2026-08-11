@@ -5,7 +5,7 @@ import { Form } from 'react-final-form';
 import { describe, expect, it, vi } from 'vitest';
 
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
-import { OptionsForm } from './OptionsForm';
+import { getComponentAndParams, OptionsForm } from './OptionsForm';
 
 vi.mock('./fetchOpenstackOptions', () => ({
   fetchOpenstackOptions: vi.fn(),
@@ -281,6 +281,83 @@ describe('OptionsForm Integration', () => {
       expect(screen.getByTestId('mock-k8s-multi')).toBeInTheDocument();
       // Storage folder manager isn't explicitly mocked above, but it renders a FormGroup/Select natively.
       expect(screen.getByText('Folder Mgr')).toBeInTheDocument();
+    });
+  });
+
+  describe('Kubernetes configuration options', () => {
+    const incompleteConfig = {
+      kubernetes_version: '1.30.0',
+      topology: '1-datacenter' as const,
+      datacenters: [
+        {
+          id: 'datacenter-1',
+          name: 'Datacenter 1',
+          node_groups: [
+            {
+              id: 'dc1-worker-1',
+              type: 'worker' as const,
+              node_count: 3,
+              disk_config: {
+                system_disk_size_gb: 20,
+                data_disk_size_gb: 100,
+              },
+            },
+          ],
+        },
+      ],
+    };
+
+    it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
+      'does not validate completeness of an optional %s',
+      (type) => {
+        const { params } = getComponentAndParams(
+          { type, label: 'Cluster', required: false },
+          'cluster',
+          undefined,
+        );
+        // An optional cluster config must not block the form. OptionsForm is
+        // also used by the resource option dialogs, where a rejected submit has
+        // nowhere to surface and would take every other option down with it.
+        expect(params.validate).toBeUndefined();
+      },
+    );
+
+    it.each(['single_datacenter_k8s_config', 'multi_datacenter_k8s_config'])(
+      'validates completeness of a required %s',
+      (type) => {
+        const { params } = getComponentAndParams(
+          { type, label: 'Cluster', required: true },
+          'cluster',
+          undefined,
+        );
+        expect(params.validate(incompleteConfig)).toEqual([
+          expect.stringContaining('OpenStack infrastructure must be selected'),
+          expect.stringContaining('OpenStack flavor must be selected'),
+        ]);
+      },
+    );
+
+    it('does not draw a FormGroup label row for a Kubernetes option', () => {
+      // The K8s forms render their own titled card. Leaving the FormGroup
+      // chrome in place produces a stray asterisk and help icon with no field
+      // name next to them.
+      renderForm({
+        order: ['cluster'],
+        options: {
+          cluster: {
+            type: 'single_datacenter_k8s_config',
+            label: 'Cluster config',
+            help_text: 'Size your cluster',
+            required: true,
+          },
+        },
+      });
+
+      expect(screen.getByTestId('mock-k8s-single')).toBeInTheDocument();
+      // No label row at all: no help tooltip and no label to hang the
+      // required marker on. K8sOptionCard names the block instead.
+      expect(screen.queryByTestId('QuestionIcon')).not.toBeInTheDocument();
+      expect(screen.queryByText('Cluster config')).not.toBeInTheDocument();
     });
   });
 

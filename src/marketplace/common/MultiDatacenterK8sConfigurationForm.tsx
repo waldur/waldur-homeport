@@ -16,6 +16,7 @@ import { useCustomer } from '@/workspace/hooks';
 import { K8sFormSection } from './K8sFormSection';
 import { K8sKubernetesConfigSection } from './K8sKubernetesConfigSection';
 import { K8sNodeGroupCard } from './K8sNodeGroupCard';
+import { K8sOptionCard } from './K8sOptionCard';
 import { K8sSecurityConfigSection } from './K8sSecurityConfigSection';
 import { K8sTotalResourcesCard } from './K8sTotalResourcesCard';
 import {
@@ -305,7 +306,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
 
 export const MultiDatacenterK8sConfigurationForm: React.FC<
   MultiDatacenterK8sConfigurationFormProps
-> = ({ field, input }) => {
+> = ({ field, input, meta }) => {
   const customer = useCustomer();
 
   // Extract default configurations from the field (set via EditOptionDialog)
@@ -403,7 +404,12 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
   );
 
   return (
-    <div className="multi-datacenter-k8s-configuration">
+    <K8sOptionCard
+      label={field?.label}
+      helpText={field?.help_text}
+      required={field?.required}
+      error={meta?.error}
+    >
       <K8sKubernetesConfigSection
         defaultConfigs={defaultConfigs}
         kubernetesVersion={clusterConfig.kubernetes_version}
@@ -469,6 +475,6 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
           })
         }
       />
-    </div>
+    </K8sOptionCard>
   );
 };

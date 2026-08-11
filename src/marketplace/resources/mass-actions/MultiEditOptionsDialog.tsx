@@ -1,6 +1,6 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
   marketplaceResourcesOfferingRetrieve,
@@ -28,6 +28,18 @@ interface MultiEditOptionsDialogOwnProps {
 export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
   resolve,
 }) => {
+  // react-final-form compares `initialValues` with shallowEqual and
+  // re-initializes the form whenever the reference changes. An inline object
+  // literal changes on every render of this dialog, which discards values the
+  // fields have already written (`keepDirtyOnReinitialize` is off).
+  const initialValues = useMemo(
+    () =>
+      resolve.rows.length === 1
+        ? { attributes: { ...(resolve.rows[0].options as object) } }
+        : null,
+    [resolve.rows],
+  );
+
   const updateOptionsMutation = useManagedMutation<
     any,
     any,
@@ -62,11 +74,7 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
       onSubmit={(values: { attributes: any }) =>
         updateOptionsMutation.mutateAsync(values)
       }
-      initialValues={
-        resolve.rows.length === 1
-          ? { attributes: { ...(resolve.rows[0].options as object) } }
-          : null
-      }
+      initialValues={initialValues}
     >
       {({
         handleSubmit,

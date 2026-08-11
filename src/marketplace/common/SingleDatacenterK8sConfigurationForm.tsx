@@ -17,6 +17,7 @@ import { useCustomer } from '@/workspace/hooks';
 import { K8sFormSection } from './K8sFormSection';
 import { K8sKubernetesConfigSection } from './K8sKubernetesConfigSection';
 import { K8sNodeGroupCard } from './K8sNodeGroupCard';
+import { K8sOptionCard } from './K8sOptionCard';
 import { K8sSecurityConfigSection } from './K8sSecurityConfigSection';
 import { K8sTotalResourcesCard } from './K8sTotalResourcesCard';
 import {
@@ -39,7 +40,7 @@ interface SingleDatacenterK8sConfigurationFormProps extends FormField {
 
 export const SingleDatacenterK8sConfigurationForm: React.FC<
   SingleDatacenterK8sConfigurationFormProps
-> = ({ field, input }) => {
+> = ({ field, input, meta }) => {
   const customer = useCustomer();
 
   // Extract default configurations from the field
@@ -214,7 +215,12 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
   const lbLogsDisk = defaultConfigs?.default_lb_logs_disk_gb || 20;
 
   return (
-    <div className="single-datacenter-k8s-configuration">
+    <K8sOptionCard
+      label={field?.label}
+      helpText={field?.help_text}
+      required={field?.required}
+      error={meta?.error}
+    >
       <K8sKubernetesConfigSection
         defaultConfigs={defaultConfigs}
         kubernetesVersion={clusterConfig.kubernetes_version}
@@ -406,6 +412,6 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
           })
         }
       />
-    </div>
+    </K8sOptionCard>
   );
 };
