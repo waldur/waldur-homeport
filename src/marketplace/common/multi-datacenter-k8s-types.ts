@@ -202,8 +202,15 @@ export const createDefaultClusterConfig = (
     ],
   }));
 
+  // Preselect the first version the offering actually advertises. A hardcoded
+  // default would leave the select showing its placeholder (the value is not
+  // among its options) while the form silently holds a version the offering
+  // does not support. An empty string keeps the field unset, so the required
+  // check in validateMultiDatacenterConfiguration reports it.
+  const [defaultVersion] = getAvailableKubernetesVersions(defaultConfigs);
+
   return {
-    kubernetes_version: '1.26.6', // Default recommended version
+    kubernetes_version: defaultVersion?.value ?? '',
     topology,
     datacenters,
   };

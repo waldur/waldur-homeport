@@ -51,6 +51,25 @@ const validateK8sConfig = (value) => {
   return undefined;
 };
 
+/**
+ * The K8s forms render their own titled card (`K8sOptionCard`), so the enclosing
+ * `FormGroup` must not draw a label row of its own — otherwise the option shows
+ * up as a stray asterisk and help icon with no field name next to them.
+ */
+const getK8sParams = (option) => ({
+  hideLabel: true,
+  // The generic `FormFieldError` only renders once a field is touched, and
+  // these forms never blur an input; `K8sOptionCard` renders `meta.error`.
+  hideError: true,
+  field: option,
+  // Cluster completeness (infrastructure and flavour per node group) is only
+  // enforced when the provider marked the option mandatory. An optional K8s
+  // option must never block the form — and since `OptionsForm` is also used by
+  // the resource option dialogs, which have no place to surface a blocked
+  // submit, that would leave every other option in the form unsavable too.
+  validate: option.required ? validateK8sConfig : undefined,
+});
+
 const VALIDATOR_MAPPING = {
   gt: greaterThanField,
   gte: greaterThanOrEqualField,
@@ -224,26 +243,14 @@ export const getComponentAndParams = (option, key, customer, loaders?: any) => {
     case 'single_datacenter_k8s_config':
       if (isExperimentalUiComponentsVisible()) {
         OptionField = SingleDatacenterK8sConfigurationForm;
-        params = {
-          hideLabel: true,
-          hideHelp: true,
-          hideError: true, // Errors shown in Progress block
-          field: option,
-          validate: validateK8sConfig,
-        };
+        params = getK8sParams(option);
       }
       break;
 
     case 'multi_datacenter_k8s_config':
       if (isExperimentalUiComponentsVisible()) {
         OptionField = MultiDatacenterK8sConfigurationForm;
-        params = {
-          hideLabel: true,
-          hideHelp: true,
-          hideError: true, // Errors shown in Progress block
-          field: option,
-          validate: validateK8sConfig,
-        };
+        params = getK8sParams(option);
       }
       break;
   }
@@ -299,13 +306,18 @@ export const OptionsForm = ({
             params.validate,
           );
 
+          // Fields that render their own heading opt out of the whole
+          // `FormGroup` label row: passing only `label={false}` would still
+          // leave the required marker and the help tooltip behind.
+          const hideLabel = Boolean(params.hideLabel);
+
           return (
             <FormGroup
               key={key}
-              label={!params.hideLabel && option.label}
-              help={option.help_text}
+              label={hideLabel ? undefined : option.label}
+              help={hideLabel ? undefined : option.help_text}
               helpEnd
-              required={option.required}
+              required={hideLabel ? undefined : option.required}
             >
               {(() => {
                 const { key: remountKey, ...fieldParams } = params;
