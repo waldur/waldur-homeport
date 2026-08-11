@@ -17475,6 +17475,7 @@ __metadata:
     waldur-api-client: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
     waldur-js-client: "npm:8.1.0-rc.23.dev.20260810054419.140"
+    waldur-runtime-config: "workspace:*"
     waldur-telemetry: "workspace:*"
     yjs: "npm:^13.5.22"
   languageName: unknown
@@ -17496,6 +17497,12 @@ __metadata:
   checksum: 10c0/f2a641fa2c5fe21206f043d011b6b7a584061942601966dfb29221728e4d5747268b80ae9ed4478ad24c86801f3634aeb2fa3be8375aa1e45fc06e098fdf6522
   languageName: node
   linkType: hard
+
+"waldur-runtime-config@workspace:*, waldur-runtime-config@workspace:packages/runtime-config":
+  version: 0.0.0-use.local
+  resolution: "waldur-runtime-config@workspace:packages/runtime-config"
+  languageName: unknown
+  linkType: soft
 
 "waldur-telemetry@workspace:*, waldur-telemetry@workspace:packages/telemetry":
   version: 0.0.0-use.local

@@ -12,6 +12,7 @@ COPY package.json yarn.lock .yarnrc.yml /app/
 COPY packages/api-client/package.json /app/packages/api-client/package.json
 COPY packages/eslint-plugin-waldur/package.json /app/packages/eslint-plugin-waldur/package.json
 COPY packages/i18n-runtime/package.json /app/packages/i18n-runtime/package.json
+COPY packages/runtime-config/package.json /app/packages/runtime-config/package.json
 COPY packages/telemetry/package.json /app/packages/telemetry/package.json
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
