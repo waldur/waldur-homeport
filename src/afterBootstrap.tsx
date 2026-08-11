@@ -3,7 +3,10 @@ import { generateBrandColors, hexToRgb } from './core/generateColors';
 import { initMatomoTracker } from './core/matomo';
 import { initSentry } from './core/sentry';
 import { getBrandColor } from './core/utils';
-import { LanguageUtilsService } from './i18n/LanguageUtilsService';
+import {
+  initLanguageUtils,
+  LanguageUtilsService,
+} from './i18n/LanguageUtilsService';
 import { attachTransitions } from './transitions';
 
 const generateCheckboxSvgUrl = (color) => {
@@ -70,6 +73,7 @@ function initPageTitle() {
 }
 
 function initI18n() {
+  initLanguageUtils();
   LanguageUtilsService.checkLanguage();
 }
 
