@@ -415,12 +415,19 @@ class FilterMapper {
   _collapseRangePairs(filters, opKey) {
     const numberFilters = new Map();
     for (const f of filters) {
-      if (f.component !== 'NumberField') continue;
+      // Date pairs collapse on the `_after`/`_before` suffix only. Filters that
+      // spell their bounds `start_date`/`end_date` (data-access logs, system
+      // logs, user data-access history) or `_from`/`_to` (arrow billing syncs)
+      // are deliberately left as two independent DateFilters.
+      const isDate = f.component === 'DateField';
+      if (f.component !== 'NumberField' && !isDate) continue;
       const origName = f.mapTo || f.name;
-      if (origName.endsWith('_min') || origName.endsWith('_max')) {
-        const base = origName.replace(/_(min|max)$/, '');
+      const suffixes = isDate ? /_(after|before)$/ : /_(min|max)$/;
+      const lower = isDate ? '_after' : '_min';
+      if (suffixes.test(origName)) {
+        const base = origName.replace(suffixes, '');
         if (!numberFilters.has(base)) numberFilters.set(base, {});
-        numberFilters.get(base)[origName.endsWith('_min') ? 'min' : 'max'] = f;
+        numberFilters.get(base)[origName.endsWith(lower) ? 'min' : 'max'] = f;
       }
     }
 
@@ -433,7 +440,10 @@ class FilterMapper {
       const merged = {
         name: rangeName,
         label: rangeLabel,
-        component: 'RangeNumberField',
+        component:
+          pair.min.component === 'DateField'
+            ? 'RangeDateField'
+            : 'RangeNumberField',
         rangeMinParam: pair.min.mapTo || pair.min.name,
         rangeMaxParam: pair.max.mapTo || pair.max.name,
       };
@@ -473,7 +483,10 @@ class Generator {
         `badgeValue={(value) => value ? translate("${trueLabel}") : translate("${falseLabel}")}`,
       );
       props.push(`ellipsis={false}`);
-    } else if (f.component === 'RangeNumberField') {
+    } else if (
+      f.component === 'RangeNumberField' ||
+      f.component === 'RangeDateField'
+    ) {
       props.push('badgeValue={formatRangeBadge}');
     } else if (
       ['StringField', 'NumberField', 'DateField', 'DateTimeField'].includes(
@@ -509,6 +522,7 @@ class Generator {
       DateTimeField: 'DateTimeFilter',
       NumberField: 'NumberFilter',
       RangeNumberField: 'NumberRangeFilter',
+      RangeDateField: 'DateRangeFilter',
       Autocomplete: 'AsyncSelectFilter',
       Select: 'SelectFilter',
     };
@@ -612,7 +626,7 @@ ${jsx}    )}\n`
     if (f.mapTo === false) {
       return '';
     }
-    if (f.component === 'RangeNumberField') {
+    if (f.component === 'RangeNumberField' || f.component === 'RangeDateField') {
       return (
         `      if (values.${f.name}?.min != null) {\n` +
         `        filter.${f.rangeMinParam} = values.${f.name}.min;\n` +
@@ -679,6 +693,8 @@ ${jsx}    )}\n`
             else if (f.component === 'NumberField') type = 'number';
             else if (f.component === 'RangeNumberField')
               type = '{ min?: number; max?: number }';
+            else if (f.component === 'RangeDateField')
+              type = '{ min?: string; max?: string }';
             else if (f.component === 'AwesomeCheckboxField') type = 'boolean';
             else if (
               f.optionsPlaceholder &&
@@ -762,11 +778,15 @@ ${filters.map(Generator.selector).join('')}  }
       .join('\n');
 
     const hasRangeField = opIds.some((id) =>
-      operationFilters[id].some((f) => f.component === 'RangeNumberField'),
+      operationFilters[id].some(
+        (f) =>
+          f.component === 'RangeNumberField' ||
+          f.component === 'RangeDateField',
+      ),
     );
 
     const rangeHelper = hasRangeField
-      ? `const formatRangeBadge = (value?: { min?: number; max?: number }) => {
+      ? `const formatRangeBadge = (value?: { min?: number | string; max?: number | string }) => {
   if (!value) return '';
   if (value.min != null && value.max != null) return \`\${value.min} – \${value.max}\`;
   if (value.min != null) return \`≥ \${value.min}\`;
@@ -819,6 +839,7 @@ ${filters.map(Generator.selector).join('')}  }
       DateTimeField: 'DateTimeFilter',
       NumberField: 'NumberFilter',
       RangeNumberField: 'NumberRangeFilter',
+      RangeDateField: 'DateRangeFilter',
       Autocomplete: 'AsyncSelectFilter',
       Select: 'SelectFilter',
     };

@@ -12,10 +12,10 @@ import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import {
   AsyncSelectFilter,
-  SelectFilter,
   BooleanFilter,
-  DateFilter,
+  DateRangeFilter,
   NumberRangeFilter,
+  SelectFilter,
 } from '@/table';
 
 export const InjectionSeverityOptions: InjectionSeverityOption[] = [
@@ -45,7 +45,10 @@ export interface InjectionSeverityOption {
   value: InjectionSeverityEnum;
 }
 
-const formatRangeBadge = (value?: { min?: number; max?: number }) => {
+const formatRangeBadge = (value?: {
+  min?: number | string;
+  max?: number | string;
+}) => {
   if (!value) return '';
   if (value.min != null && value.max != null)
     return `${value.min} – ${value.max}`;
@@ -56,14 +59,16 @@ const formatRangeBadge = (value?: { min?: number; max?: number }) => {
 
 export const ChatThreadsFilter: FunctionComponent<{}> = () => (
   <>
-    <DateFilter
+    <DateRangeFilter
       title={translate('Created')}
-      name="created"
+      name="created_range"
+      badgeValue={formatRangeBadge}
       placeholder={translate('Created')}
     />
-    <DateFilter
+    <DateRangeFilter
       title={translate('Modified')}
-      name="modified"
+      name="modified_range"
+      badgeValue={formatRangeBadge}
       placeholder={translate('Modified')}
     />
     <AsyncSelectFilter
@@ -72,7 +77,6 @@ export const ChatThreadsFilter: FunctionComponent<{}> = () => (
       getValueLabel={(value: User) =>
         value?.full_name || value?.username || value?.email
       }
-      placeholder={translate('User')}
       loadOptions={createLoadOptions(usersList, 'full_name')}
       defaultOptions
       getOptionValue={(option: User) => String(option.uuid || '')}
@@ -80,6 +84,7 @@ export const ChatThreadsFilter: FunctionComponent<{}> = () => (
         String(option.full_name || option.username || option.email || '')
       }
       isClearable={true}
+      placeholder={translate('User')}
     />
     <BooleanFilter
       title={translate('Is flagged')}
@@ -94,11 +99,11 @@ export const ChatThreadsFilter: FunctionComponent<{}> = () => (
       title={translate('Max severity')}
       name="max_severity"
       getValueLabel={(value: InjectionSeverityOption) => value?.label}
-      placeholder={translate('Max severity')}
       options={InjectionSeverityOptions}
       getOptionValue={(option: InjectionSeverityOption) => String(option.value)}
       getOptionLabel={(option: InjectionSeverityOption) => option.label}
       isClearable={true}
+      placeholder={translate('Max severity')}
     />
     <BooleanFilter
       title={translate('Is archived')}
@@ -123,18 +128,21 @@ export const ChatThreadsFilter: FunctionComponent<{}> = () => (
       name="input_tokens_range"
       badgeValue={formatRangeBadge}
       min={0}
+      placeholder={translate('Input tokens')}
     />
     <NumberRangeFilter
       title={translate('Output tokens')}
       name="output_tokens_range"
       badgeValue={formatRangeBadge}
       min={0}
+      placeholder={translate('Output tokens')}
     />
     <NumberRangeFilter
       title={translate('Total tokens')}
       name="total_tokens_range"
       badgeValue={formatRangeBadge}
       min={0}
+      placeholder={translate('Total tokens')}
     />
   </>
 );
@@ -142,8 +150,8 @@ export const ChatThreadsFilter: FunctionComponent<{}> = () => (
 export const ChatThreadsFilterFormId = 'ChatThreadsFilter';
 
 export interface ChatThreadsFilterFormData {
-  created: string;
-  modified: string;
+  created_range: { min?: string; max?: string };
+  modified_range: { min?: string; max?: string };
   user: User;
   is_flagged: boolean;
   max_severity: InjectionSeverityOption;
@@ -161,11 +169,17 @@ export const selectChatThreadsFilter = (
 ): ChatThreadsFilterQuery => {
   const filter: ChatThreadsFilterQuery = {} as any;
   if (values) {
-    if (values.created) {
-      filter.created = values.created;
+    if (values.created_range?.min != null) {
+      filter.created_after = values.created_range.min;
     }
-    if (values.modified) {
-      filter.modified = values.modified;
+    if (values.created_range?.max != null) {
+      filter.created_before = values.created_range.max;
+    }
+    if (values.modified_range?.min != null) {
+      filter.modified_after = values.modified_range.min;
+    }
+    if (values.modified_range?.max != null) {
+      filter.modified_before = values.modified_range.max;
     }
     if (values.user) {
       filter.user = values.user.uuid;

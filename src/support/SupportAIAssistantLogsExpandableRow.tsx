@@ -1,8 +1,4 @@
-import {
-  ShieldWarningIcon,
-  ThumbsDownIcon,
-  ThumbsUpIcon,
-} from '@phosphor-icons/react';
+import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import React, {
@@ -12,9 +8,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import {
-  ActionTakenEnum,
   chatMessagesList,
   FeedbackCategoryEnum,
   ThreadSession,
@@ -34,85 +28,24 @@ import {
 } from '@/ai-assistant/lib/messages/messageUtils';
 import { uiRegistry } from '@/ai-assistant/lib/registry/uiRegistry';
 import { Badge } from '@/core/Badge';
-import { FAST_STALE_TIME, GRID_BREAKPOINTS } from '@/core/constants';
+import { FAST_STALE_TIME } from '@/core/constants';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDateTime, formatShortDateTime } from '@/core/dateUtils';
-import { formatUsageValue } from '@/core/formatNumber';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import {
+  actionLabels,
+  FeedbackStrip,
+  formatDetectionCategories,
+  getActionBadgeVariant,
   getSeverityBadgeVariant,
+  MessageGutter,
   severityLabels,
-} from '@/support/SupportAIAssistantLogsList';
+  toFeedbackSentiment,
+  TokenUsageBadge,
+} from '@/support/ai-assistant/chatLogsShared';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-
-const formatDetectionCategories = (
-  injectionCategories: unknown,
-  piiCategories: unknown,
-): React.ReactNode => {
-  const parts: string[] = [];
-  if (Array.isArray(injectionCategories) && injectionCategories.length > 0) {
-    parts.push(
-      translate('Injection: {categories}', {
-        categories: injectionCategories.join(', '),
-      }),
-    );
-  }
-  if (Array.isArray(piiCategories) && piiCategories.length > 0) {
-    parts.push(
-      translate('PII: {categories}', {
-        categories: piiCategories.join(', '),
-      }),
-    );
-  }
-  if (parts.length === 0) return translate('Flagged');
-  return <span style={{ whiteSpace: 'pre-line' }}>{parts.join('\n')}</span>;
-};
-
-const getActionBadgeVariant = (
-  action: ActionTakenEnum,
-): 'danger' | 'orange' | 'warning' | 'secondary' => {
-  switch (action) {
-    case 'block':
-      return 'danger';
-    case 'redact':
-      return 'orange';
-    case 'warn':
-      return 'warning';
-    case 'flag':
-    default:
-      return 'secondary';
-  }
-};
-
-const actionLabels: Record<ActionTakenEnum, string> = {
-  block: translate('Block'),
-  redact: translate('Redact'),
-  warn: translate('Warn'),
-  flag: translate('Flag'),
-  allow: translate('Allow'),
-};
-
-const TokenUsageBadge: FunctionComponent<{
-  id: string;
-  label: string;
-  inputTokens?: number | null;
-  outputTokens?: number | null;
-  prefix?: string;
-}> = ({ id, label, inputTokens, outputTokens, prefix }) => {
-  if (inputTokens == null && outputTokens == null) return null;
-  return (
-    <Tip id={id} label={label}>
-      <span className="text-muted">
-        {prefix}
-        {inputTokens != null && <>↓ {formatUsageValue(inputTokens)}</>}
-        {inputTokens != null && outputTokens != null && ' / '}
-        {outputTokens != null && <>↑ {formatUsageValue(outputTokens)}</>}
-      </span>
-    </Tip>
-  );
-};
 
 const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
   messageGroup,
@@ -133,9 +66,6 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
       messageGroup.versions.slice(0, -1).some((v) => v.is_flagged),
     [selectedMessage?.is_flagged, messageGroup.versions],
   );
-
-  const isDesktop = useMediaQuery({ minWidth: GRID_BREAKPOINTS.sm });
-  const formatDate = isDesktop ? formatDateTime : formatShortDateTime;
 
   const [feedbackExpanded, setFeedbackExpanded] = useState(false);
   const [feedbackOverflows, setFeedbackOverflows] = useState(false);
@@ -165,44 +95,22 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
   const isViewingHistory = clampedIndex < messageGroup.versions.length - 1;
   const hasVersions = messageGroup.versions.length > 1;
 
-  const feedbackSentiment: 'positive' | 'negative' | null =
-    selectedMessage.feedback_score === true
-      ? 'positive'
-      : selectedMessage.feedback_score === false
-        ? 'negative'
-        : null;
+  const feedbackSentiment = toFeedbackSentiment(selectedMessage.feedback_score);
   const hasTopRowItems =
     selectedMessage.is_flagged ||
     hasHistoricalFlag ||
     isViewingHistory ||
     hasVersions;
-  const feedbackVariant =
-    feedbackSentiment === 'positive' ? 'success' : 'danger';
-  const feedbackLabel =
-    feedbackSentiment === 'positive'
-      ? translate('Positive feedback')
-      : translate('Negative feedback');
 
   return (
     <div className="message-item">
-      <div className="message-gutter d-flex flex-column gap-2 text-muted">
-        <div>
-          <Badge variant={isAssistant ? 'primary' : 'info'} size="sm" outline>
-            {isAssistant ? translate('Assistant') : translate('User')}
-          </Badge>
-        </div>
-        <span className="text-nowrap">
-          {formatDate(selectedMessage.created)}
-        </span>
-        {isAssistant && (
-          <TokenUsageBadge
-            id={`tokens-${selectedMessage.uuid}`}
-            label={translate('Message input / output tokens')}
-            inputTokens={selectedMessage.input_tokens}
-            outputTokens={selectedMessage.output_tokens}
-          />
-        )}
-      </div>
+      <MessageGutter
+        sender={isAssistant ? 'assistant' : 'user'}
+        created={selectedMessage.created}
+        tokenId={`tokens-${selectedMessage.uuid}`}
+        inputTokens={isAssistant ? selectedMessage.input_tokens : null}
+        outputTokens={isAssistant ? selectedMessage.output_tokens : null}
+      />
       <div className="message-body">
         {hasTopRowItems && (
           <div className="d-flex align-items-center gap-2 mb-1">
@@ -306,39 +214,16 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
           {isAssistant && <MessageDataInspector blocks={blocks} />}
         </div>
         {feedbackSentiment !== null && (
-          <div
-            className={classNames(
-              'message-feedback mt-1 px-3 py-2 rounded border small',
-              `bg-light-${feedbackVariant}`,
-            )}
+          <FeedbackStrip
+            sentiment={feedbackSentiment}
+            category={
+              typeof selectedMessage.feedback_category === 'string'
+                ? getFeedbackCategoryLabel(
+                    selectedMessage.feedback_category as FeedbackCategoryEnum,
+                  )
+                : null
+            }
           >
-            <Badge
-              variant={feedbackVariant}
-              size="sm"
-              leftIcon={
-                feedbackSentiment === 'positive' ? (
-                  <ThumbsUpIcon weight="fill" />
-                ) : (
-                  <ThumbsDownIcon weight="fill" />
-                )
-              }
-              outline
-              className="message-feedback-label"
-            >
-              {feedbackLabel}
-            </Badge>
-            {typeof selectedMessage.feedback_category === 'string' && (
-              <Badge
-                variant={feedbackVariant}
-                size="sm"
-                outline
-                className="message-feedback-category"
-              >
-                {getFeedbackCategoryLabel(
-                  selectedMessage.feedback_category as FeedbackCategoryEnum,
-                )}
-              </Badge>
-            )}
             {selectedMessage.feedback_comment &&
               (() => {
                 const clickable = feedbackOverflows || feedbackExpanded;
@@ -383,7 +268,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                 </span>
               </span>
             )}
-          </div>
+          </FeedbackStrip>
         )}
       </div>
     </div>

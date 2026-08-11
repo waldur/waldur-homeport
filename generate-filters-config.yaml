@@ -424,8 +424,11 @@ overrides:
 
   chat_threads:
     filters:
-      - created
-      - modified
+      # Collapsed into single range pickers by the _after/_before rule.
+      - created_after
+      - created_before
+      - modified_after
+      - modified_before
       - user
       - is_flagged
       - max_severity
@@ -439,6 +442,32 @@ overrides:
       - total_tokens_max
     user:
       searchParam: full_name
+
+  anonymous_chat_interactions_conversations:
+    filters:
+      - created_after
+      - created_before
+      # Named after the aggregate it bounds, labelled after the column it
+      # matches — the anonymous row is last active, never modified.
+      - last_active_after
+      - last_active_before
+      - user_slug
+      - is_flagged
+      - severity
+      - has_feedback
+      - is_reviewed
+      - input_tokens_min
+      - input_tokens_max
+      - output_tokens_min
+      - output_tokens_max
+      - total_tokens_min
+      - total_tokens_max
+    user_slug:
+      label: Visitor
+      placeholder: 'Visitor hash contains'
+    last_active_after:
+      # Matches the column, which mirrors the authenticated table's "Modified".
+      rangeLabel: Modified
 
   events:
     filters:
