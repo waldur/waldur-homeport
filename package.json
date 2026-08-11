@@ -109,7 +109,7 @@
     "tslib": "^2.8.1",
     "waldur-api-client": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
-    "waldur-js-client": "8.1.0-rc.23.dev.20260810054419.140",
+    "waldur-js-client": "8.1.0-rc.24.dev.20260811062039.146",
     "waldur-runtime-config": "workspace:*",
     "waldur-telemetry": "workspace:*",
     "yjs": "^13.5.22"

@@ -5,6 +5,7 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { NumberField } from '@/form/NumberField';
+import { RangeDateField } from '@/form/RangeDateField';
 import { RangeNumberField } from '@/form/RangeNumberField';
 import { AsyncSelect } from '@/form/select';
 import { StringField } from '@/form/StringField';
@@ -39,3 +40,5 @@ export const DateTimeFilter = withTableFilter(DateTimeField);
 export const NumberFilter = withTableFilter(NumberField);
 
 export const NumberRangeFilter = withTableFilter(RangeNumberField);
+
+export const DateRangeFilter = withTableFilter(RangeDateField);

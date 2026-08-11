@@ -132,7 +132,7 @@ const blockExtractors: Record<string, (block: UIBlock) => string> = {
  * emitting the tool block without its nested payload followed by the result
  * as a sibling.
  */
-const flattenToolBlocks = (
+export const flattenToolBlocks = (
   rawBlocks: readonly unknown[] | null | undefined,
 ): UIBlock[] => {
   if (!rawBlocks?.length) return [];

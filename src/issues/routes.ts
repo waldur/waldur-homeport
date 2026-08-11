@@ -208,12 +208,14 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'support-ai-assistant-logs',
-    url: 'ai-assistant-logs/',
+    url: 'ai-assistant-logs/?tab',
     parent: 'support-logs',
     component: lazyComponent(() =>
-      import('@/support/SupportAIAssistantLogsList').then((module) => ({
-        default: module.SupportAIAssistantLogsList,
-      })),
+      import('@/support/ai-assistant/SupportAIAssistantDashboard').then(
+        (module) => ({
+          default: module.SupportAIAssistantDashboard,
+        }),
+      ),
     ),
     data: {
       breadcrumb: () => translate('AI assistant logs'),

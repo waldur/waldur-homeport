@@ -22,9 +22,12 @@ export interface DateTimeRangeHandle {
 
 type DateTimeRangeFieldProps = FormField &
   Pick<DateTimePickerProps, 'placeholder' | 'disabled'> & {
-    minDate?: Date | string;
+    /** `null` removes the lower bound; omitting it keeps the `today` floor. */
+    minDate?: Date | string | null;
     minuteIncrement?: number;
     dateFormat?: string;
+    /** Set false for a date-only range, e.g. filtering a log by day. */
+    enableTime?: boolean;
     /**
      * Called while a range is being picked, after the first date is chosen but
      * before the second. Lets the parent react to the in-progress start date
@@ -50,7 +53,13 @@ export const DateTimeRangeField = forwardRef<
   useFlatpickrTheme();
 
   const { onChange, onBlur, value: inputValue } = props.input;
-  const { onPartialStartChange, minDate, minuteIncrement, dateFormat } = props;
+  const {
+    onPartialStartChange,
+    minDate,
+    minuteIncrement,
+    dateFormat,
+    enableTime = true,
+  } = props;
 
   const fpRef = useRef<DateTimePickerHandle>(null);
   useImperativeHandle(ref, () => ({
@@ -66,23 +75,25 @@ export const DateTimeRangeField = forwardRef<
   // render would destroy and recreate the Flatpickr instance, closing the
   // calendar mid-selection. The onChange hook lives inside the options so the
   // library does not mutate-and-grow it on every render.
-  const options = useMemo(
-    () => ({
+  const options = useMemo(() => {
+    const format = dateFormat ?? (enableTime ? 'Y-m-d H:i' : 'Y-m-d');
+    return {
       mode: 'range' as const,
-      enableTime: true,
+      enableTime,
       time_24hr: true,
       minuteIncrement: minuteIncrement ?? 15,
-      dateFormat: dateFormat ?? 'Y-m-d H:i',
+      dateFormat: format,
       // Use a Flatpickr-managed display input. react-flatpickr renders the real
       // (now hidden) input as React-controlled with `value.toString()`; without
       // altInput a re-render would overwrite Flatpickr's formatted text with the
       // raw Date array string. altInput keeps the formatted display intact.
       altInput: true,
-      altFormat: dateFormat ?? 'Y-m-d H:i',
+      altFormat: format,
       altInputClass: 'form-control',
       // Grey out past dates by default; a maintenance window is never scheduled
-      // in the past. Callers can override via `minDate`.
-      minDate: minDate ?? 'today',
+      // in the past. Callers override via `minDate`, and pass null to remove the
+      // bound outright — a filter over recorded history only looks backwards.
+      minDate: minDate === null ? undefined : (minDate ?? 'today'),
       allowInput: false,
       onChange: (dates: Date[]) => {
         if (dates.length === 2) {
@@ -99,9 +110,15 @@ export const DateTimeRangeField = forwardRef<
           onPartialStartChange?.(undefined);
         }
       },
-    }),
-    [onChange, onPartialStartChange, minDate, minuteIncrement, dateFormat],
-  );
+    };
+  }, [
+    onChange,
+    onPartialStartChange,
+    minDate,
+    minuteIncrement,
+    dateFormat,
+    enableTime,
+  ]);
 
   const handleBlur = useCallback(() => onBlur(), [onBlur]);
 

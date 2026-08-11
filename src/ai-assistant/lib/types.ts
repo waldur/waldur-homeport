@@ -103,6 +103,19 @@ export interface UIBlock {
     }>;
   }>;
   context?: string;
+
+  // Tool-call fields (when key === 'tool'). A tool block is a wrapper: the
+  // renderable payload is `result`, itself a full block (ask_user_form,
+  // resource_list, …). Live chat renders the wrapper only as a loading
+  // skeleton and drops it once complete, so anything replaying stored blocks
+  // (the support logs) must render `result` to show what the assistant did.
+  tool?: {
+    name: string;
+    call_id?: string;
+    summary?: string;
+    arguments?: Record<string, unknown>;
+  };
+  result?: UIBlock;
 }
 
 export interface UIBlockProps {
