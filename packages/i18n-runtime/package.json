@@ -1,0 +1,15 @@
+{
+  "name": "waldur-i18n-runtime",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared translate/language-switching runtime for Waldur frontend apps",
+  "type": "module",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "luxon": "^3.7.2"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0"
+  }
+}
