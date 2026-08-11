@@ -2,51 +2,15 @@ import { FieldValidator } from 'final-form';
 import React, { ComponentType, ReactNode } from 'react';
 import { ColProps } from 'react-bootstrap';
 
+import { Fetcher, FetcherOptions, TableRequest } from 'waldur-api-client';
+
 import { TableFiltersGroup } from './TableFilterService';
 
-interface RequestConfigExtended extends RequestInit {
-  staleTime?: number;
-  params?: Record<string, any>;
-}
-
-export interface TableRequest {
-  tableKey: string;
-  pageSize: number;
-  currentPage: number;
-  filter?: any;
-  query?: string;
-  sortField?: string;
-  sortOrder?: boolean;
-  options?: RequestConfigExtended;
-}
+export type { Fetcher, FetcherOptions, TableRequest };
 
 export interface StateTables {
   tables: { [key: string]: TableState };
 }
-
-interface TableResponse<RowType = any> {
-  rows: RowType[];
-  resultCount?: number;
-  nextPage?: number;
-}
-
-export type Fetcher<RowType = any> = (
-  request: TableRequest,
-) => Promise<TableResponse<RowType>>;
-
-export type FetcherOptions<
-  QueryPayload = any,
-  PathPayload = any,
-  RowType = any,
-> = {
-  query?: QueryPayload;
-  path?: PathPayload;
-  /** Parser function to transform API response data into row array.
-   * Use when the API returns an object with nested array, e.g.:
-   * `parser: (data) => data.questions` for `{ questions: [...] }` response
-   */
-  parser?: (data: any, query?: any) => RowType[];
-};
 
 export interface TableOptionsType<RowType = any> {
   table: string;
