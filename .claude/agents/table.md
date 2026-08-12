@@ -7,6 +7,7 @@ This guide outlines constraints, checks, and rules for LLM agents implementing t
 ## Specialization & Scope
 
 Use this agent guide for:
+
 - Implementing list and grid views using the standard `Table` component and `useTable` hook.
 - Writing row action components (`ActionsDropdown` + `ActionItem`) and bulk select actions.
 - Integrating auto-generated OpenAPI filters.
@@ -33,7 +34,9 @@ For detailed specifications, options tables, callbacks, and integrations, **alwa
 ## Critical Rules for LLM Agents
 
 ### 1. Core Component Imports (No Barrel Imports)
+
 There is no barrel export for core table components. **NEVER** import them from `@/table`. Always import them from their exact subpaths:
+
 ```typescript
 // ✅ CORRECT
 import Table from '@/table/Table';
@@ -46,7 +49,9 @@ import { Table, useTable, createFetcher, ActionsDropdown } from '@/table';
 ```
 
 ### 2. Preventing Infinite Re-render Loops (Memoize Filters)
+
 The `filter` object passed to `useTable` **MUST** be wrapped in `useMemo`. If you pass a raw object literal, it will have a new identity on every render, triggering an endless fetch loop.
+
 ```typescript
 // ❌ WRONG - Triggers infinite API requests
 const filter = { customer_uuid: customer.uuid };
@@ -61,7 +66,9 @@ const tableProps = useTable({ table: 'list', fetchData, filter });
 ```
 
 ### 3. Null and Empty Value Handling
+
 Never display raw values directly, and do not use fallbacks like `|| 'N/A'`. **ALWAYS** wrap cell output renders with the `renderFieldOrDash` utility.
+
 ```typescript
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -73,7 +80,9 @@ render: ({ row }) => row.description || 'N/A'
 ```
 
 ### 4. Row Action Patterns
+
 All row actions **MUST** use the 3-dots dropdown menu pattern (`ActionsDropdown` + `ActionItem`). Individual inline buttons (e.g. `<ActionButton>`) are discouraged in standard row cells.
+
 ```typescript
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -92,7 +101,9 @@ rowActions={({ row }) => (
 ```
 
 ### 5. Table Filters Creation
+
 Do **NOT** write manual filter components. All filters must be generated from the OpenAPI schema.
+
 1. Configure overrides in `generate-filters-config.yaml`.
 2. Run `node generate-filters.cjs`.
 3. Import the generated filter and selector from `@/table/generated/*`.

@@ -37,7 +37,7 @@ Use this agent when:
 
 All documentation goes in `docs/` with this structure:
 
-```
+```text
 docs/
 ├── development-workflow.md      # Planning and TDD processes
 ├── code-quality.md             # Quality standards, linting, TS
@@ -147,11 +147,10 @@ export const ExampleUsage = () => (
 - [Development Workflow](docs/development-workflow.md)
 - [Architecture Guide](docs/architecture.md)
 
-```
-
 ## Update Strategy
 
 When updating existing documentation:
+
 1. Read the entire document to understand current content
 2. Verify accuracy against current codebase
 3. Update examples to use current patterns (React Final Form, SDK types)
@@ -172,4 +171,3 @@ When updating existing documentation:
 - Don't document obvious React patterns
 - Don't duplicate existing documentation in `docs/`
 - Don't create backend API documentation (this is frontend-focused)
-```

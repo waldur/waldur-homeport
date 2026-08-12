@@ -93,7 +93,7 @@ React Final Form requires all form-related components within `<Form>` context:
 - **Better Accessibility**: Automatic `controlId` generation for proper label/input association.
 - **Unified Props**: Layout props (`label`, `help`, `required`) and field props (`name`, `validate`) are passed to a single component.
 
-### Implementation Patterns
+### FormGroup Implementation Patterns
 
 #### ✅ Modern: Autonomous Field Group (Preferred)
 

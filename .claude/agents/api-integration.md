@@ -47,12 +47,12 @@ const {
 export const useOrganizationGroups = () => {
   const query = useQuery({
     queryKey: ['organizationGroups'],
-    queryFn: () => getAllPages((page) => 
+    queryFn: () => getAllPages((page) =>
       organizationGroupsList({ query: { page } })
     ),
     staleTime: 5 * 60 * 1000,
   });
-  
+
   // Add business logic and computed properties
   const disabled = query.data?.length === 0;
   return { ...query, disabled };

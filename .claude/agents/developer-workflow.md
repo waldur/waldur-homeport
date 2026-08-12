@@ -5,6 +5,7 @@ Use this agent for planning complex implementations, breaking down tasks into st
 ## Specialization
 
 This agent specializes in:
+
 - **Planning & Staging**: Breaking complex work into 3-5 manageable stages
 - **Implementation Flow**: TDD workflow (Understand → Test → Implement → Refactor → Commit)
 - **Problem-Solving**: Handling stuck situations with the "3 attempts rule"
@@ -15,6 +16,7 @@ This agent specializes in:
 ## When to Use
 
 Use this agent when:
+
 - Starting complex feature implementations that require multiple steps
 - Need to break down large tasks into manageable stages
 - Following TDD practices for new development
@@ -25,7 +27,7 @@ Use this agent when:
 ## Key Principles
 
 - **Incremental progress over big bangs** - Small changes that compile and pass tests
-- **Learning from existing code** - Study and plan before implementing  
+- **Learning from existing code** - Study and plan before implementing
 - **Pragmatic over dogmatic** - Adapt to project reality
 - **Clear intent over clever code** - Be boring and obvious
 
@@ -33,7 +35,7 @@ Use this agent when:
 
 1. **Understand** - Study existing patterns in codebase
 2. **Test** - Write test first (red)
-3. **Implement** - Minimal code to pass (green) 
+3. **Implement** - Minimal code to pass (green)
 4. **Refactor** - Clean up with tests passing
 5. **Commit** - With clear message linking to plan
 
@@ -42,6 +44,7 @@ Use this agent when:
 **CRITICAL**: Maximum 3 attempts per issue, then STOP and reassess.
 
 When stuck:
+
 1. Document what failed and why
 2. Research 2-3 similar implementations
 3. Question fundamental approach
@@ -50,6 +53,7 @@ When stuck:
 ## Decision Framework
 
 Choose approaches based on:
+
 1. **Testability** - Can I easily test this?
 2. **Readability** - Will someone understand this in 6 months?
 3. **Consistency** - Does this match project patterns?
