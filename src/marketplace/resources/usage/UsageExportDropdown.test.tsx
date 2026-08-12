@@ -137,6 +137,46 @@ describe('useUsageExport', () => {
     );
   });
 
+  it('should include robot account usage when no user filter is applied', () => {
+    // Robot accounts are not project users, so they never appear in the
+    // team roster — with no filter their usage rows must still be exported.
+    const propsWithRobotUsage = {
+      ...defaultProps,
+      data: {
+        ...defaultProps.data,
+        userUsages: [
+          ...defaultProps.data.userUsages,
+          {
+            username: 'robot_1',
+            component_type: 'cpu',
+            date: '2024-01-01',
+            usage: 3,
+          },
+        ],
+      },
+      users: [],
+    };
+
+    const { result } = renderHook(() =>
+      useUsageExport(propsWithRobotUsage as any),
+    );
+    result.current('csv');
+
+    expect(exportAs).toHaveBeenCalledWith(
+      'csv',
+      'Usage history - Test Resource',
+      {
+        fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
+        data: [
+          ['robot_1', 'January 2024', 3, '0'],
+          ['user_1', 'January 2024', 5, 4],
+          ['Total of January 2024', 'January 2024', 10, 8],
+          ['Total', '01/2024', 10, 8],
+        ],
+      },
+    );
+  });
+
   it('should show error when there is no usage data', () => {
     const propsWithNoUsage = {
       ...defaultProps,
