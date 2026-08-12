@@ -12,6 +12,7 @@ import { states as marketplaceRemoteRoutes } from '@/marketplace-remote/routes';
 import { states as openportalRoutes } from '@/openportal/routes';
 import { states as projectRoutes } from '@/project/routes';
 import { states as proposalsRoutes } from '@/proposals/routes';
+import { states as providerHelpdeskRoutes } from '@/provider-helpdesk/routes';
 import { states as rancherRoutes } from '@/rancher/routes';
 import { states as reportingRoutes } from '@/reporting/routes';
 import { states as userRoutes } from '@/user/routes';
@@ -32,6 +33,7 @@ export const states: StateDeclaration[] = [
   ...invoicesRoutes,
   ...issuesRoutes,
   ...marketplaceRoutes,
+  ...providerHelpdeskRoutes,
   ...marketplaceChecklistRoutes,
   ...marketplaceRemoteRoutes,
   ...administrationRoutes,

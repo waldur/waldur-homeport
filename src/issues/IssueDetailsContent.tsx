@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 import { Issue } from 'waldur-js-client';
 
@@ -16,14 +16,23 @@ import { Field } from '@/resource/summary';
 import { useUser } from '@/workspace/hooks';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
+import { AttachResourceButton } from './AttachResourceButton';
 import { IssueCommentsContainer } from './comments/IssueCommentsContainer';
+import { EscalateButton } from './EscalateButton';
+import { hasProviderRouting } from './hooks';
 import { IssueLogButton, IssueSyncButton } from './IssueInfo';
+import { IssueSlaBadge } from './IssueSlaBadge';
 import { IssueStatus } from './IssueStatus';
+import { ProviderRoutingInfo } from './ProviderRoutingInfo';
+import { RerouteButton } from './RerouteButton';
+import { RouteToProviderButton } from './RouteToProviderButton';
 
 interface IssueDetailsContentProps {
   issue: Issue;
   refetch: () => void;
   isRefetching?: boolean;
+  context?: 'staff' | 'provider';
+  renderActions?: (issue: Issue, refetch: () => void) => ReactNode;
 }
 
 /**
@@ -34,7 +43,7 @@ interface IssueDetailsContentProps {
  */
 export const IssueDetailsContent: FunctionComponent<
   IssueDetailsContentProps
-> = ({ issue, refetch, isRefetching }) => {
+> = ({ issue, refetch, isRefetching, context = 'staff', renderActions }) => {
   const user = useUser();
   const staffOrSupport = user?.is_staff || user?.is_support;
 
@@ -50,14 +59,29 @@ export const IssueDetailsContent: FunctionComponent<
               {issue.key ? `${issue.key}: ${issue.summary}` : issue.summary}
             </h3>
             <IssueStatus status={issue.status} />
+            {(staffOrSupport || context === 'provider') && (
+              <IssueSlaBadge issue={issue} />
+            )}
             <RefreshButton refetch={refetch} loading={isRefetching} />
           </div>
         }
         actions={
-          <>
-            <IssueSyncButton issue={issue} refetch={refetch} />
-            <IssueLogButton issue={issue} />
-          </>
+          context === 'provider' ? (
+            renderActions?.(issue, refetch)
+          ) : (
+            <>
+              <IssueSyncButton issue={issue} refetch={refetch} />
+              <IssueLogButton issue={issue} />
+              {staffOrSupport && hasProviderRouting() && (
+                <>
+                  <AttachResourceButton issue={issue} refetch={refetch} />
+                  <RouteToProviderButton issue={issue} refetch={refetch} />
+                  <RerouteButton issue={issue} refetch={refetch} />
+                  <EscalateButton issue={issue} refetch={refetch} />
+                </>
+              )}
+            </>
+          )
         }
       >
         <div className="mw-450px">
@@ -120,6 +144,10 @@ export const IssueDetailsContent: FunctionComponent<
           )}
         </div>
       </PublicDashboardHero>
+
+      {staffOrSupport && hasProviderRouting() && (
+        <ProviderRoutingInfo issue={issue} />
+      )}
 
       <Card className="card-bordered mb-5">
         <Card.Header>

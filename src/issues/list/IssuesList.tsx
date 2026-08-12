@@ -1,12 +1,16 @@
 import { FC, useMemo } from 'react';
 import { Issue, supportIssuesList } from 'waldur-js-client';
 
+import { Badge } from '@/core/Badge';
 import { formatDate, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { hasProviderRouting } from '@/issues/hooks';
+import { getSlaLabel, IssueSlaBadge } from '@/issues/IssueSlaBadge';
 import { IssueLinkField } from '@/issues/list/IssueLinkField';
 import { IssuesListExpandableRow } from '@/issues/list/IssuesListExpandableRow';
 import { StatusColumn } from '@/issues/list/StatusColumn';
 import { TitleColumn } from '@/issues/list/TitleColumn';
+import { providerTicketInfo } from '@/issues/providerTicketInfo';
 import { createFetcher } from '@/table/api';
 import {
   SupportIssuesFilter as IssuesFilter,
@@ -140,6 +144,38 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
     }
 
     if (supportOrStaff) {
+      if (hasProviderRouting()) {
+        const providerName = (row: Issue) =>
+          providerTicketInfo(row)('provider_name');
+        columns.push({
+          title: translate('Provider'),
+          render: ({ row }) =>
+            row.is_routed ? (
+              <div className="d-flex align-items-center gap-2">
+                <Badge variant="info" pill outline>
+                  {translate('Routed')}
+                </Badge>
+                {providerName(row) && <span>{providerName(row)}</span>}
+              </div>
+            ) : (
+              renderFieldOrDash(null)
+            ),
+          export: (row) =>
+            row.is_routed ? (providerName(row) ?? translate('Routed')) : '',
+          exportKeys: ['is_routed'],
+        });
+      }
+      columns.push({
+        title: translate('SLA'),
+        render: ({ row }) =>
+          getSlaLabel(row) ? (
+            <IssueSlaBadge issue={row} />
+          ) : (
+            renderFieldOrDash(null)
+          ),
+        export: (row) => getSlaLabel(row),
+        exportKeys: ['sla_status', 'sla_breached'],
+      });
       columns.push({
         visible: false,
         title: translate('Reporter'),

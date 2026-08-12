@@ -6,12 +6,14 @@ import {
   supportIssuesComment,
 } from 'waldur-js-client';
 
+import { getUUID } from '@/core/utils';
 import { required } from '@/core/validators';
 import { SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { CannedResponseSelector } from '@/provider-helpdesk/canned-responses/CannedResponseSelector';
 
 import { ISSUE_COMMENTS_QUERY_KEY } from './constants';
 import { Comment } from './types';
@@ -67,11 +69,24 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
       : {};
   }, [props.resolve]);
 
+  // Provider (routed child) issues carry a provider_helpdesk; only those get the
+  // canned-response picker, and only when replying (not when editing a comment).
+  const helpdeskUuid =
+    !isEdit && issue?.provider_helpdesk
+      ? getUUID(issue.provider_helpdesk)
+      : null;
+  const cannedResponseContext = {
+    customer_name: issue?.customer_name ?? '',
+    caller_name: issue?.caller_full_name ?? '',
+    key: issue?.key ?? '',
+    summary: issue?.summary ?? '',
+  };
+
   return (
     <Form<CommentFormData>
       onSubmit={(values) => commentMutation.mutateAsync(values)}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid, pristine }) => (
+      render={({ handleSubmit, submitting, invalid, pristine, form }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -89,6 +104,19 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
               </>
             }
           >
+            {helpdeskUuid && (
+              <CannedResponseSelector
+                helpdeskUuid={helpdeskUuid}
+                context={cannedResponseContext}
+                onInsert={(text) => {
+                  const current = form.getState().values.description ?? '';
+                  form.change(
+                    'description',
+                    current ? `${current}\n\n${text}` : text,
+                  );
+                }}
+              />
+            )}
             <TextGroup
               name="description"
               spaceless
