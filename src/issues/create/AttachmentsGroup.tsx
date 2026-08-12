@@ -19,7 +19,18 @@ export const AttachmentsGroup = () => {
           return (
             <>
               <UploadContainer
-                onDrop={onChange}
+                // Append newly dropped files to the existing selection instead
+                // of replacing it; skip duplicates by name + size.
+                onDrop={(acceptedFiles) => {
+                  const existing = Array.from(filesList as FileList);
+                  const added = acceptedFiles.filter(
+                    (file) =>
+                      !existing.some(
+                        (e) => e.name === file.name && e.size === file.size,
+                      ),
+                  );
+                  onChange([...existing, ...added]);
+                }}
                 disabled={submitting}
                 message={translate('SVG, PNG, JPG or GIF (max. 800x400px)')}
               />

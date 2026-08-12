@@ -1,7 +1,7 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { SupportIssuesListData } from 'waldur-js-client';
+import { ProviderTicketsListData } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { BooleanFilter, SelectFilter } from '@/table';
@@ -29,7 +29,7 @@ export interface StatusOption {
   value: string;
 }
 
-export const SupportIssuesFilter: FunctionComponent<{}> = () => (
+export const ProviderTicketsFilter: FunctionComponent<{}> = () => (
   <>
     <SelectFilter
       title={translate('Status')}
@@ -42,10 +42,19 @@ export const SupportIssuesFilter: FunctionComponent<{}> = () => (
       placeholder={translate('Status')}
     />
     <BooleanFilter
-      title={translate('Routed to provider')}
-      name="is_routed"
+      title={translate('Escalated')}
+      name="is_escalated"
       badgeValue={(value) =>
-        value ? translate('Routed to provider') : translate('All')
+        value ? translate('Escalated') : translate('All')
+      }
+      ellipsis={false}
+      parse={(v) => v || undefined}
+    />
+    <BooleanFilter
+      title={translate('SLA breached')}
+      name="sla_breached"
+      badgeValue={(value) =>
+        value ? translate('SLA breached') : translate('All')
       }
       ellipsis={false}
       parse={(v) => v || undefined}
@@ -53,25 +62,29 @@ export const SupportIssuesFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const SupportIssuesFilterFormId = 'SupportIssuesFilter';
+export const ProviderTicketsFilterFormId = 'ProviderTicketsFilter';
 
-export interface SupportIssuesFilterFormData {
+export interface ProviderTicketsFilterFormData {
   status: StatusOption;
-  is_routed: boolean;
+  is_escalated: boolean;
+  sla_breached: boolean;
 }
 
-type SupportIssuesFilterQuery = SupportIssuesListData['query'];
+type ProviderTicketsFilterQuery = ProviderTicketsListData['query'];
 
-export const selectSupportIssuesFilter = (
-  values?: Partial<SupportIssuesFilterFormData>,
-): SupportIssuesFilterQuery => {
-  const filter: SupportIssuesFilterQuery = {} as any;
+export const selectProviderTicketsFilter = (
+  values?: Partial<ProviderTicketsFilterFormData>,
+): ProviderTicketsFilterQuery => {
+  const filter: ProviderTicketsFilterQuery = {} as any;
   if (values) {
     if (values.status) {
       filter.status = values.status.value;
     }
-    if (values.is_routed) {
-      filter.is_routed = values.is_routed;
+    if (values.is_escalated) {
+      filter.is_escalated = values.is_escalated;
+    }
+    if (values.sla_breached) {
+      filter.sla_breached = values.sla_breached;
     }
   }
   return filter;

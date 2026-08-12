@@ -11,6 +11,7 @@ import { CustomerProfile } from '@/customer/dashboard/CustomerProfile';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { hasProviderRouting } from '@/issues/hooks';
 import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { IBreadcrumbItem } from '@/navigation/types';
@@ -32,6 +33,8 @@ const getDashboardState = (state: StateDeclaration) => {
     return 'call-management.dashboard';
   } else if (isDescendantOf('marketplace-provider', state)) {
     return 'marketplace-provider-dashboard';
+  } else if (isDescendantOf('provider-helpdesk', state)) {
+    return 'provider-helpdesk-overview';
   }
   return '';
 };
@@ -51,6 +54,17 @@ const PageHero = ({ customer }) => {
   const showServiceProvider =
     customer?.is_service_provider &&
     (checkIsServiceManager(customer, user) || isOwnerOrStaff);
+
+  // Helpdesk is a distinct support-agent domain; surface it as its own mode once
+  // a helpdesk is configured. Support-agent-only visibility (a support user with
+  // no org role) needs a backend membership flag and is a follow-up; for now
+  // owners/service-managers/staff/support see it.
+  const showHelpdesk =
+    hasProviderRouting() &&
+    customer?.has_active_helpdesk &&
+    (isOwnerOrStaff ||
+      checkIsServiceManager(customer, user) ||
+      user?.is_support);
 
   const canViewCustomerManagement =
     // Can update customer details
@@ -85,7 +99,10 @@ const PageHero = ({ customer }) => {
     user?.is_support;
 
   const showTabs =
-    showCallManagement || showServiceProvider || canViewCustomerManagement;
+    showCallManagement ||
+    showServiceProvider ||
+    showHelpdesk ||
+    canViewCustomerManagement;
 
   const dashboardState = getDashboardState(router.globals.current);
 
@@ -115,6 +132,13 @@ const PageHero = ({ customer }) => {
               eventKey="marketplace-provider-dashboard"
               title={translate('Service provider')}
               data-testid="organization-tab-service-provider"
+            />
+          )}
+          {showHelpdesk && (
+            <Tab
+              eventKey="provider-helpdesk-overview"
+              title={translate('Helpdesk')}
+              data-testid="organization-tab-helpdesk"
             />
           )}
           {canViewCustomerManagement && (

@@ -801,12 +801,31 @@ overrides:
   support_issues:
     filters:
       - status
+      - is_routed
     status:
       enumOverrides:
         Closed: Closed
         Open: Open
         Resolved: Resolved
         'Waiting for support': Waiting for support
+    is_routed:
+      label: Routed to provider
+
+  provider_tickets:
+    filters:
+      - status
+      - is_escalated
+      - sla_breached
+    status:
+      enumOverrides:
+        Closed: Closed
+        Open: Open
+        Resolved: Resolved
+        'Waiting for support': Waiting for support
+    is_escalated:
+      label: Escalated
+    sla_breached:
+      label: SLA breached
 
   user_tos_filters:
     operationId: marketplace_public_offerings_list
