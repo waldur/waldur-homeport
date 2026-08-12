@@ -5477,5 +5477,10 @@
   "{count} resource(s) are advisory only": "{count} ressursi puhul on nimekiri üksnes soovituslik",
   "{count} resource(s) are reachable from anywhere": "{count} ressurssi on ligipääsetavad kõikjalt",
   "{inet} will apply to {target}.": "{inet} hakkab kehtima teenusele {target}.",
-  "{inet} will no longer apply to {target}.": "{inet} ei kehti enam teenusele {target}."
+  "{inet} will no longer apply to {target}.": "{inet} ei kehti enam teenusele {target}.",
+  "Important: If you lose the SSH private key selected here, you will permanently lose access to your virtual machine (VM). It cannot be recovered without the key.": "Tähtis: kui kaotate siin valitud SSH privaatvõtme, kaotate jäädavalt ligipääsu oma virtuaalmasinale (VM). Ilma võtmeta ei ole seda võimalik taastada.",
+  "To reduce this risk, we strongly recommend that you:": "Riski vähendamiseks soovitame tungivalt:",
+  "Keep your SSH private key secure and back it up in a safe location.": "Hoidke oma SSH privaatvõtit turvaliselt ja varundage see kindlasse kohta.",
+  "Configure at least one additional trusted user with root-level privileges and SSH access to the VM as a backup.": "Seadistage varuvariandina vähemalt üks täiendav kasutaja, kellel on root-taseme õigused ja SSH ligipääs virtuaalmasinale.",
+  "As a service provider, we do not retain access or any backdoor to your VM, meaning we cannot add, modify, or recover SSH keys for you after creation. Managing system access is strictly the client's responsibility.": "Teenusepakkujana ei säilita me ligipääsu ega tagauksi teie virtuaalmasinale, mistõttu ei saa me pärast loomist SSH võtmeid lisada, muuta ega taastada. Süsteemi ligipääsu haldamine on rangelt kliendi vastutus."
 }

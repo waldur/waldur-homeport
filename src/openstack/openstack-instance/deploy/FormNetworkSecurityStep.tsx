@@ -24,6 +24,7 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
+import { AlertItem } from '@/core/AlertItem';
 import { getAllPages } from '@/core/api';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -355,6 +356,8 @@ const renderNetworkRows = ({
 export const FormNetworkSecurityStep = (props: FormStepProps) => {
   const [customIpEnabled, setCustomIpEnabled] = useToggle(false);
   const [portSecurityEnabled, setPortSecurityEnabled] = useToggle(true);
+  const showSshKeyWarning = (props.offering.plugin_options as any)
+    ?.show_ssh_key_loss_warning;
   const form = useForm();
   const { values } = useFormState({ subscription: { values: true } });
 
@@ -456,6 +459,41 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
       disabledTooltip={props.disabledTooltip}
     >
       <div className="mb-5 mt-n4 border-bottom">
+        {showSshKeyWarning && (
+          <AlertItem
+            variant="warning"
+            className="mb-4"
+            title={translate(
+              'Important: If you lose the SSH private key selected here, you will permanently lose access to your virtual machine (VM). It cannot be recovered without the key.',
+            )}
+            body={
+              <>
+                <p className="mb-1">
+                  {translate(
+                    'To reduce this risk, we strongly recommend that you:',
+                  )}
+                </p>
+                <ul className="mb-2">
+                  <li>
+                    {translate(
+                      'Keep your SSH private key secure and back it up in a safe location.',
+                    )}
+                  </li>
+                  <li>
+                    {translate(
+                      'Configure at least one additional trusted user with root-level privileges and SSH access to the VM as a backup.',
+                    )}
+                  </li>
+                </ul>
+                <p className="mb-0">
+                  {translate(
+                    "As a service provider, we do not retain access or any backdoor to your VM, meaning we cannot add, modify, or recover SSH keys for you after creation. Managing system access is strictly the client's responsibility.",
+                  )}
+                </p>
+              </>
+            }
+          />
+        )}
         <FormSSHPublicKeysField
           cardBordered={false}
           minHeight="auto"
