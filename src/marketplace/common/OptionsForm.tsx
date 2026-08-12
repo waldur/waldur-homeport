@@ -30,8 +30,6 @@ import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { useCustomer } from '@/workspace/hooks';
 
-import { isExperimentalUiComponentsVisible } from '../utils';
-
 import { ComponentMultiplierField } from './ComponentMultiplierField';
 import { ConditionalCascadeField } from './ConditionalCascadeField';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
@@ -241,17 +239,13 @@ export const getComponentAndParams = (option, key, customer, loaders?: any) => {
       break;
 
     case 'single_datacenter_k8s_config':
-      if (isExperimentalUiComponentsVisible()) {
-        OptionField = SingleDatacenterK8sConfigurationForm;
-        params = getK8sParams(option);
-      }
+      OptionField = SingleDatacenterK8sConfigurationForm;
+      params = getK8sParams(option);
       break;
 
     case 'multi_datacenter_k8s_config':
-      if (isExperimentalUiComponentsVisible()) {
-        OptionField = MultiDatacenterK8sConfigurationForm;
-        params = getK8sParams(option);
-      }
+      OptionField = MultiDatacenterK8sConfigurationForm;
+      params = getK8sParams(option);
       break;
   }
 
