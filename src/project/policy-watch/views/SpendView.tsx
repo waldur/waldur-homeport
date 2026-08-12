@@ -16,9 +16,31 @@ const currency = () => ENV.plugins.WALDUR_CORE.CURRENCY_NAME;
 interface MonthPoint {
   iso: string;
   label: string;
+  /** Net of credit — what the organization actually pays, and what a cost
+   *  policy with `use_credit` is enforced against. */
   cost: number;
+  /** Gross charge before credit compensation. */
+  incurred: number;
+  /** Credit drawn down that month (positive). */
+  compensation: number;
+  /** False when the month has no invoice at all, as opposed to an invoice
+   *  that genuinely totals ~0 because credit covered it. */
+  hasInvoice: boolean;
   isFuture: boolean;
 }
+
+// `/api/invoice-items/costs/` returns three figures per month; the SDK type
+// only declares `price`, so the other two are read as untyped fields.
+type InvoiceCostFigures = {
+  price?: number | string;
+  incurred?: number | string;
+  compensation?: number | string;
+};
+
+const num = (value: unknown): number => {
+  const n = typeof value === 'string' ? parseFloat(value) : Number(value);
+  return Number.isFinite(n) ? n : 0;
+};
 
 const padMonths = (
   invoices: PolicyWatchData['invoices'],
@@ -31,11 +53,15 @@ const padMonths = (
     const d = now.plus({ months: i });
     const match = invoices.find(
       (inv) => inv.year === d.year && inv.month === d.month,
-    );
+    ) as InvoiceCostFigures | undefined;
     points.push({
       iso: d.toISODate() || '',
       label: d.toFormat('LLL yy'),
-      cost: Number(match?.price || 0),
+      cost: num(match?.price),
+      incurred: num(match?.incurred),
+      // Compensation arrives negative; credit drawn is its magnitude.
+      compensation: Math.abs(num(match?.compensation)),
+      hasInvoice: match !== undefined,
       isFuture: i > 0,
     });
   }
@@ -46,7 +72,10 @@ const linearForecastBand = (
   history: number[],
   horizon: number,
 ): { p10: number[]; p50: number[]; p90: number[] } => {
-  const valid = history.filter((v) => v > 0);
+  // Callers pass only months that have an invoice. A month that really cost
+  // ~0 — typically because credit covered all of it — is a genuine data point;
+  // the previous `> 0` filter discarded exactly those and biased the trend up.
+  const valid = history.map((v) => Math.max(0, v));
   if (valid.length < 2) {
     const last = valid[valid.length - 1] ?? 0;
     return {
@@ -108,12 +137,17 @@ const policyMarkerColor = (
 // Cost-axis threshold lines for project + customer cost policies.
 // Returns an array of horizontal markLine entries keyed at `yAxis: limit`.
 const costPolicyThresholdLines = (data: PolicyWatchData) => {
+  // Only caps that are enforced against the series plotted here.
+  //
+  // Organization caps measure the whole organization's spend; drawn over a
+  // single project they invite reading that project's cost as a fraction of an
+  // organization-wide limit. Resource-scoped policies measure one resource's
+  // invoice items, which is likewise not this series. Both are excluded and
+  // called out in the chart footnote instead of being drawn misleadingly.
+  const rawByUuid = new Map(data.projectPolicies.map((p) => [p.uuid, p]));
   return data.policies
-    .filter(
-      (p) =>
-        (p.policyKind === 'project-cost' || p.policyKind === 'customer-cost') &&
-        p.thresholdValue > 0,
-    )
+    .filter((p) => p.policyKind === 'project-cost' && p.thresholdValue > 0)
+    .filter((p) => !rawByUuid.get(p.policyUuid)?.resource)
     .map((p) => {
       const color = policyMarkerColor(p.hasFired, p.saturationPct);
       const status = p.hasFired
@@ -121,13 +155,19 @@ const costPolicyThresholdLines = (data: PolicyWatchData) => {
         : p.saturationPct >= 80
           ? translate('approaching')
           : translate('idle');
+      // is_triggered compares net cost when the policy uses credit, and the
+      // raw invoice total when it does not — say which line to read it against.
+      const basis =
+        rawByUuid.get(p.policyUuid)?.use_credit === false
+          ? translate('vs incurred')
+          : translate('vs net of credit');
       return {
         yAxis: p.thresholdValue,
         lineStyle: { color, type: 'dashed' as const, width: 2 },
         label: {
           show: true,
           position: 'insideEndTop' as const,
-          formatter: `${p.thresholdLabel} ${defaultCurrency(p.thresholdValue)} · ${status}`,
+          formatter: `${p.thresholdLabel} ${defaultCurrency(p.thresholdValue)} · ${basis} · ${status}`,
           color,
           fontSize: 10,
         },
@@ -180,14 +220,17 @@ const burnDownOptions = (data: PolicyWatchData): any => {
   const creditValue = Number(data.runway.credit?.value || 0);
   if (creditValue <= 0) return null;
   const series = padMonths(data.invoices, 6, 0);
-  // Running balance: start at credit value, then subtract per-month credit
-  // debits (compensation amount + minimal-consumption tail). When invoice data
-  // doesn't break out compensations historically, we fall back to gross price
-  // capped at the rolling balance.
-  let balance = creditValue + series.reduce((s, p) => s + p.cost, 0);
+  // Credit drawn in a month is the compensation, not the net cost. Netting
+  // already subtracts the credit, so a month fully covered by credit has a
+  // price near zero and would read as "no burn" — the same mistake fixed for
+  // the credit consumption chart in b0c1bef39.
+  //
+  // Walk backwards from today's balance so the line ends where the balance
+  // actually is: start = current balance + everything drawn since.
+  const drawn = series.reduce((s, p) => s + p.compensation, 0);
+  let balance = creditValue + drawn;
   const balancePoints = series.map((p) => {
-    const debit = Math.min(p.cost, Math.max(0, balance));
-    balance = Math.max(0, balance - debit);
+    balance = Math.max(0, balance - p.compensation);
     return balance;
   });
   // Use the credit's expected_consumption as the projected monthly burn when
@@ -284,8 +327,14 @@ const burnDownOptions = (data: PolicyWatchData): any => {
 const forecastFanOptions = (data: PolicyWatchData): any => {
   const series = padMonths(data.invoices, 6, 0);
   const historicalCosts = series.map((p) => p.cost);
+  const historicalIncurred = series.map((p) => p.incurred);
   const horizon = 3;
-  const { p10, p50, p90 } = linearForecastBand(historicalCosts, horizon);
+  // Regress on invoiced months only; padded gaps are absence of data, not a
+  // month that cost nothing.
+  const { p10, p50, p90 } = linearForecastBand(
+    series.filter((p) => p.hasInvoice).map((p) => p.cost),
+    horizon,
+  );
   const labels = [
     ...series.map((s) => s.label),
     ...Array.from({ length: horizon }, (_, i) =>
@@ -328,8 +377,20 @@ const forecastFanOptions = (data: PolicyWatchData): any => {
       axisLabel: { formatter: (v: number) => defaultCurrency(v) },
     },
     series: [
+      // Both bases are plotted because a cap is enforced against one or the
+      // other: with credit in play a single line cannot be read against every
+      // threshold. Where no credit was applied the two lines coincide.
       {
-        name: translate('Actual'),
+        name: translate('Incurred'),
+        type: 'line',
+        data: [...historicalIncurred, ...Array(horizon).fill(null)],
+        color: c.muted,
+        smooth: false,
+        showSymbol: false,
+        lineStyle: { width: 1, type: 'dotted' },
+      },
+      {
+        name: translate('Net of credit'),
         type: 'line',
         data: histPadded,
         color: brandColors[500],
@@ -420,7 +481,7 @@ export const SpendView: FC<Props> = ({ data }) => {
                 data.runway.exhaustionDate && (
                   <small className="text-muted d-block text-center mt-2">
                     {translate(
-                      'Projected exhaustion: {date} at current daily burn of {burn}/d',
+                      'Balance history reflects credit actually drawn each month. Projected exhaustion: {date} at current daily burn of {burn}/d',
                       {
                         date: data.runway.exhaustionDate,
                         burn: defaultCurrency(
@@ -441,7 +502,7 @@ export const SpendView: FC<Props> = ({ data }) => {
             <EChart options={forecast} height="320px" />
             <small className="text-muted d-block text-center mt-2">
               {translate(
-                'Solid: actual monthly spend. Dashed: P50 projection. Shaded band: P10–P90. Horizontal dashed lines: cost-policy thresholds (red = fired, orange = approaching, gray = idle). Vertical thin lines: projected fire date for cost or SLURM policies.',
+                'Solid: monthly spend net of credit. Dotted: incurred before credit. Dashed: P50 projection. Shaded band: P10–P90. Horizontal dashed lines: project cost-policy thresholds, labelled with the figure each is enforced against (red = fired, orange = approaching, gray = idle). Organization-wide and single-resource caps are not shown here, because neither is measured against this project-wide series.',
               )}
             </small>
           </div>
