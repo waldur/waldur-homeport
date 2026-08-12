@@ -11,10 +11,6 @@ vi.mock('./fetchOpenstackOptions', () => ({
   fetchOpenstackOptions: vi.fn(),
 }));
 
-vi.mock('../utils', () => ({
-  isExperimentalUiComponentsVisible: vi.fn(() => true),
-}));
-
 vi.mock('./ConditionalCascadeField', () => ({
   ConditionalCascadeField: () => <div data-testid="mock-conditional-cascade" />,
 }));
