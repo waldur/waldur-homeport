@@ -9,6 +9,7 @@ import {
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getResourceActionOptions } from '@/marketplace/resources/actions/utils';
+import { TENANT_TYPE } from '@/openstack/constants';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 
 import { OfferingEditPanelProps } from './types';
@@ -61,6 +62,15 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
               name="plugin_options.enable_display_of_order_actions_for_service_provider"
               label={translate(
                 'Enable display of order actions for service provider',
+              )}
+            />
+          )}
+          {props.offering.type === TENANT_TYPE && (
+            <BooleanEditField
+              name="plugin_options.show_ssh_key_loss_warning"
+              label={translate('Show SSH key loss warning')}
+              description={translate(
+                'Show a warning about unrecoverable loss of the SSH private key on the VM order forms of this cloud.',
               )}
             />
           )}
