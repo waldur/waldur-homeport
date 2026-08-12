@@ -5,6 +5,7 @@ Use this agent for UI component development, BaseDeployPage customization, type-
 ## Specialization
 
 This agent specializes in:
+
 - **UI Component Library**: 200+ reusable components across categories
 - **BaseDeployPage Pattern**: Multi-step deployment form architecture
 - **Type-Specific Fields**: Dynamic form field selection systems
@@ -15,6 +16,7 @@ This agent specializes in:
 ## When to Use
 
 Use this agent when:
+
 - Building new UI components or customizing existing ones
 - Implementing marketplace deployment flows with BaseDeployPage
 - Creating type-specific form fields and dynamic form generation
@@ -26,26 +28,31 @@ Use this agent when:
 ## Component Categories
 
 ### Tables and Data Display
+
 - **Table**: Main table with filtering, sorting, pagination, export
 - **ActionButton**: Reusable actions with tooltips and loading states
 - **ExpandableContainer**: Collapsible row details and expansion
 
 ### Forms and Input Components
+
 - **WizardForm**: Multi-step forms with validation and progress
 - **Field Components**: StringField, NumberField, SelectField, DateField
 - **Specialized Fields**: SecretField, FileUploadField, MarkdownEditor
 
 ### Modal and Dialog Components
+
 - **ModalDialog**: Base modal with header, body, footer support
 - **ConfirmationDialog**: Destructive action confirmations
 - **ActionDialog**: Generic action dialogs with form integration
 
 ### Navigation Components
+
 - **TabsList**: Tab navigation with nested dropdowns
 - **Layout**: Application layout with responsive design
 - **Breadcrumbs**: Hierarchical navigation patterns
 
 ### Data Display Components
+
 - **Badge**: Status indicators with variants and tooltips
 - **LoadingSpinner**: Consistent loading indicators
 - **TruncatedText**: Responsive text with expansion
@@ -55,21 +62,24 @@ Use this agent when:
 Central foundation for marketplace offering deployment flows:
 
 ### Key Features
+
 - **Step Management**: Progressive validation and completion tracking
 - **State Integration**: React Final Form state and user selections
 - **Layout Management**: Sidebar with progress tracking
 - **API Integration**: Order submission and error handling
 
 ### Implementation Pattern
+
 1. Define steps as `OfferingConfigurationFormStep[]` array
 2. Wrap with BaseDeployPage component
 3. Register in marketplace registry
 
 ### Step Definition Structure
+
 ```typescript
 interface VStepperFormStep {
   label: string;                    // Display name
-  id: string;                      // Unique identifier  
+  id: string;                      // Unique identifier
   component: React.ComponentType;   // React component
   fields?: Array<string>;          // Form fields
   required?: boolean;              // Mandatory step
@@ -82,6 +92,7 @@ interface VStepperFormStep {
 Dynamic form field selection system:
 
 ### Supported Field Types
+
 - `string` - StringField for basic text input
 - `boolean` - AwesomeCheckboxField for toggles
 - `email_field` - EmailField with validation
@@ -90,6 +101,7 @@ Dynamic form field selection system:
 - `secret_field` - SecretField for passwords
 
 ### Implementation Pattern
+
 ```typescript
 const FieldRow = ({ field, ...rest }) =>
   field.type === 'string' ? (

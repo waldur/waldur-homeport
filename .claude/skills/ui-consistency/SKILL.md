@@ -9,14 +9,16 @@ Ensures consistent, accessible UI across Waldur HomePort.
 
 ## Quick Reference (Critical Rules)
 
-**Null/Empty Values**
+### Null/Empty Values
+
 ```tsx
 // ALWAYS use renderFieldOrDash - never || 'N/A' or || ''
 import { renderFieldOrDash } from '@/table/utils';
 {renderFieldOrDash(value)}
 ```
 
-**Disabled Buttons**
+### Disabled Buttons
+
 ```tsx
 // ALWAYS provide tooltip explaining WHY disabled
 <Tip label={disabled ? translate('Resource must be in OK state') : null}>
@@ -24,7 +26,8 @@ import { renderFieldOrDash } from '@/table/utils';
 </Tip>
 ```
 
-**Empty States**
+### Empty States
+
 ```tsx
 // ALWAYS use NoResult with actionable CTA
 <NoResult
@@ -34,7 +37,8 @@ import { renderFieldOrDash } from '@/table/utils';
 />
 ```
 
-**Disabled Styling**
+### Disabled Styling
+
 ```tsx
 // Use solid color tokens - NEVER opacity
 className={isDisabled ? 'text-muted' : ''}  // correct
@@ -44,10 +48,12 @@ className={isDisabled ? 'opacity-50' : ''}  // wrong
 ## Decision Trees
 
 **Hide vs Disable Button?**
+
 - User PERMANENTLY lacks permission → HIDE
 - Temporary/fixable condition → DISABLE + tooltip
 
 **Which Empty State?**
+
 - Active filters, no results → "No results match your filters" + Clear filters button
 - First-time use → Encouraging message + Create CTA
 - Search query, no match → "Your search '{query}' did not match any {items}"
@@ -58,6 +64,7 @@ For full patterns, examples, and anti-patterns:
 **[docs/ui-consistency-guidelines.md](../../../docs/ui-consistency-guidelines.md)**
 
 Sections include:
+
 - Empty states and NoResult component
 - Button visibility (hide vs disable matrix)
 - Loading states and error handling

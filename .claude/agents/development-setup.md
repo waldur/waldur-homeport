@@ -95,14 +95,14 @@ Use this agent when:
 
 ### Environment Variables
 
-- `VITE_API_URL` - Backend API endpoint (default: http://localhost:8000/)
+- `VITE_API_URL` - Backend API endpoint (default: <http://localhost:8000/>)
 
 ### Development Setup Steps
 
 1. **Prerequisites**: Node.js v23.7.0, Yarn, Backend API
 2. **Installation**: `yarn install`
 3. **Environment**: Configure `.env` file
-4. **Development**: `yarn start` → http://localhost:8001
+4. **Development**: `yarn start` → <http://localhost:8001>
 5. **Docker**: Use `yarn devcontainer` for containers
 
 ## Development Tools
