@@ -120,10 +120,8 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
           <UsageExportDropdown
             resource={resourceRef}
             data={value}
-            // Mirror the chart's user filter in the export: when the user
-            // narrows the chart to specific users, export only those users
-            // (fall back to the whole team when no filter is applied).
-            users={users.length ? users : team}
+            // Mirror the chart's user filter; empty selection exports all usernames, incl. robot accounts
+            users={users}
             months={period}
           />
 
