@@ -11,10 +11,12 @@ import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { useUser } from '@/workspace/hooks';
 
 import { AwesomeCheckboxField } from './AwesomeCheckboxField';
+import { BoxNumberField } from './BoxNumberField';
 import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { useEditFieldContext } from './EditFieldContext';
 import { FieldEditButton } from './FieldEditButton';
 import FormTable from './FormTable';
+import { NumberField } from './NumberField';
 import { SecretField as FormSecretField } from './SecretField';
 import { TextField } from './TextField';
 
@@ -42,6 +44,11 @@ export type EditFieldProps<P = object> = Omit<
   format?: NonNullable<FieldProps<any, any>['format']> | null;
   parse?: NonNullable<FieldProps<any, any>['parse']>;
   normalize?: (value: any) => any;
+  /**
+   * Value submitted when the control is cleared. Defaults to `''` (`null` for
+   * numeric controls) — override when the API expects a different empty shape.
+   */
+  emptyValue?: any;
 
   /** Override the read-only value display */
   renderValue?(value: any): ReactNode;
@@ -104,6 +111,7 @@ export function withEditField<P extends object>(
       format,
       parse,
       normalize,
+      emptyValue,
       // Everything else is field-component-specific props
       ...fieldSpecificProps
     } = props;
@@ -155,6 +163,12 @@ export function withEditField<P extends object>(
         fieldComponent={WrappedComponent as any}
         fieldProps={fieldProps}
         hideLabel={hideLabel}
+        emptyValue={
+          // `??` would swallow a deliberate null override.
+          emptyValue === undefined
+            ? getDefaultEmptyValue(WrappedComponent)
+            : emptyValue
+        }
         tooltip={tooltip ?? (disabled ? ctx?.readOnlyReason : undefined)}
         iconNode={iconNode}
         disabled={disabled}
@@ -192,6 +206,18 @@ export function withEditField<P extends object>(
   })`;
 
   return EditField;
+}
+
+/**
+ * The value submitted when a control is cleared. Text-like inputs map to `''`
+ * because the columns behind them are non-nullable; numeric inputs map to
+ * `null` because a blank string is not a valid number server-side.
+ */
+function getDefaultEmptyValue(Component: ComponentType<any>): any {
+  if (Component === NumberField || Component === BoxNumberField) {
+    return null;
+  }
+  return '';
 }
 
 /** Auto-detect a sensible read-only display based on the field component identity. */

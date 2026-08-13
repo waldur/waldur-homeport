@@ -7,6 +7,7 @@ import { renderWithProviders } from '@/test/harness';
 
 import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { EditFieldProvider } from './EditFieldContext';
+import { NumberField } from './NumberField';
 import { withEditField } from './withEditField';
 
 // Mock FormTable.Item to easily inspect what props it received
@@ -30,6 +31,7 @@ vi.mock('./FieldEditButton', () => ({
       data-testid="field-edit-button"
       data-tooltip={props.tooltip}
       data-icon={props.iconNode ? 'custom-icon' : 'default'}
+      data-empty-value={JSON.stringify(props.emptyValue)}
     />
   ),
 }));
@@ -165,6 +167,38 @@ describe('withEditField', () => {
     expect(screen.getByTestId('fti-value')).toHaveTextContent(
       'info@agri.ee, alt@agri.ee',
     );
+  });
+
+  describe('emptyValue', () => {
+    const renderField = (node) => {
+      renderWithProviders(
+        <EditFieldProvider scope={{ test: 'x', limit: 1 }} callback={vi.fn()}>
+          {node}
+        </EditFieldProvider>,
+      );
+      return screen
+        .getByTestId('field-edit-button')
+        .getAttribute('data-empty-value');
+    };
+
+    it('defaults to an empty string for text-like fields', () => {
+      expect(renderField(<EnhancedField name="test" label="Test" />)).toBe(
+        '""',
+      );
+    });
+
+    it('defaults to null for numeric fields', () => {
+      const NumberEditField = withEditField(NumberField);
+      expect(renderField(<NumberEditField name="limit" label="Limit" />)).toBe(
+        'null',
+      );
+    });
+
+    it('honours an explicit override', () => {
+      expect(
+        renderField(<EnhancedField name="test" label="Test" emptyValue={[]} />),
+      ).toBe('[]');
+    });
   });
 
   it('renders an empty string for a null comma-separated value', () => {

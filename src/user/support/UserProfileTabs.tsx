@@ -39,6 +39,11 @@ import { useProfileFieldWarnings } from './useProfileFieldWarnings';
 import { UserEditAvatarFormItem } from './UserEditAvatarFormItem';
 import { useUpdateUser } from './useUpdateUser';
 
+// Selects hand back `null` when cleared, but every profile column below is a
+// non-nullable CharField — the API answers "This field may not be null." Map
+// the cleared value to a blank string so these fields can be emptied too.
+const clearToBlank = (value: any) => value ?? '';
+
 const isRequired = (field: string) => {
   return (
     (ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS || []).includes(field) ||
@@ -341,6 +346,7 @@ const buildPersonalFields = ({
           label={translate('Personal title')}
           options={getPersonalTitleOptions()}
           simpleValue
+          parse={clearToBlank}
           required={isRequired('personal_title')}
           disabled={disabled || titleProps.isProtected}
           description={
@@ -363,6 +369,7 @@ const buildPersonalFields = ({
           label={translate('Gender')}
           options={getGenderChoices()}
           simpleValue
+          parse={clearToBlank}
           required={isRequired('gender')}
           disabled={disabled || genderProps.isProtected}
           description={
@@ -450,6 +457,7 @@ const buildGeographicFields = ({
         <CountryEditField
           name="country_of_residence"
           label={translate('Country of residence')}
+          parse={clearToBlank}
           required={isRequired('country_of_residence')}
           disabled={disabled || countryProps.isProtected}
           description={
@@ -479,6 +487,7 @@ const buildGeographicFields = ({
         <CountryEditField
           name="nationality"
           label={translate('Nationality')}
+          parse={clearToBlank}
           required={isRequired('nationality')}
           disabled={disabled || nationalityProps.isProtected}
           description={
@@ -617,6 +626,7 @@ const buildOrganizationFields = ({
         <CountryEditField
           name="organization_country"
           label={translate('Organization country')}
+          parse={clearToBlank}
           required={isRequired('organization_country')}
           disabled={disabled || orgCountryProps.isProtected}
           description={
@@ -648,6 +658,7 @@ const buildOrganizationFields = ({
           label={translate('Organization type')}
           options={getOrganizationTypeOptions()}
           simpleValue
+          parse={clearToBlank}
           required={isRequired('organization_type')}
           disabled={disabled || orgTypeProps.isProtected}
           description={
