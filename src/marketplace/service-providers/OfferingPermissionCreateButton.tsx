@@ -10,11 +10,9 @@ import { ActionButton } from '@/table/ActionButton';
 import { useUser, useCustomer } from '@/workspace/hooks';
 
 const OfferingPermissionCreateDialog = lazyComponent(() =>
-  import('../offerings/details/permissions/OfferingPermissionCreateDialog').then(
-    (module) => ({
-      default: module.OfferingPermissionCreateDialog,
-    }),
-  ),
+  import('./permissions/OfferingPermissionCreateDialog').then((module) => ({
+    default: module.OfferingPermissionCreateDialog,
+  })),
 );
 
 export const OfferingPermissionCreateButton: React.FC<{ fetch }> = ({

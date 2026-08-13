@@ -57,6 +57,11 @@ export const hasPermission = (
       return true;
     }
   }
+  if (request.offeringId) {
+    if (checkScope(user, 'offering', request.offeringId, request.permission)) {
+      return true;
+    }
+  }
   if (request.scopeId) {
     if (
       checkScope(user, 'call', request.scopeId, request.permission) ||

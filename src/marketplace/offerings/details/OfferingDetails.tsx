@@ -22,7 +22,11 @@ interface OfferingDetailsProps {
 
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
   useToolbarActions(
-    props.offering.integration_status.length > 0 ? (
+    // `integration_status` is null — not [] — for callers the backend does not
+    // consider offering administrators; see `get_integration_status` in the
+    // marketplace serializer and the `| null` in the SDK type. A throw here
+    // takes down every tab of the page, since this runs in the shared shell.
+    props.offering.integration_status?.length > 0 ? (
       <ConnectionStatusIndicator status={props.offering.integration_status} />
     ) : null,
     [props.offering],

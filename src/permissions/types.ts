@@ -44,5 +44,11 @@ export interface PermissionRequest {
   projectId?: string;
   customerId?: string;
   callOrganizerId?: string;
+  /**
+   * Offering uuid, for permissions held directly on an offering (OFFERING.MANAGER
+   * and its org-private clones). Kept separate from `scopeId` because the latter
+   * is resolved against the call/proposal content types.
+   */
+  offeringId?: string;
   scopeId?: string;
 }
