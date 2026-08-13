@@ -1308,15 +1308,15 @@ export const SettingsDescription = [
       },
       {
         key: 'FREEIPA_USERNAME_PREFIX',
-        description: translate('Prefix to be appended to all usernames created in FreeIPA by Waldur'),
+        description: translate('Prefix to be appended to all usernames created in FreeIPA by Waldur. It marks which accounts are managed by Waldur, so it may not be empty.'),
         default: 'waldur_',
-        type: 'string',
+        type: 'non_empty_field',
       },
       {
         key: 'FREEIPA_GROUPNAME_PREFIX',
-        description: translate('Prefix to be appended to all group names created in FreeIPA by Waldur'),
+        description: translate('Prefix to be appended to all group names created in FreeIPA by Waldur. It marks which groups are managed by Waldur, so it may not be empty.'),
         default: 'waldur_',
-        type: 'string',
+        type: 'non_empty_field',
       },
       {
         key: 'FREEIPA_BLACKLISTED_USERNAMES',
