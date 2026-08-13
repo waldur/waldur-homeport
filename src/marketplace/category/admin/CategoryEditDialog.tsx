@@ -180,15 +180,6 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
               )}
               className="mb-5"
             />
-
-            <BooleanGroup
-              name="default_tenant_category"
-              label={translate('Default tenant category')}
-              description={translate(
-                'Set to true if this category is for OpenStack Tenant. Only one category can have "true" value.',
-              )}
-              className="mb-5"
-            />
           </ModalDialog>
         </form>
       )}
