@@ -38,7 +38,10 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
         </div>
       ) : null}
       {showPurchaseOrder ? (
-        <PurchaseOrderFields isRequired={isRequired} />
+        <PurchaseOrderFields
+          isRequired={isRequired}
+          existingAttachment={props.data?.existingAttachment}
+        />
       ) : null}
     </WizardForm>
   );

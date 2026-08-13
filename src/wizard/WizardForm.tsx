@@ -15,6 +15,8 @@ import '@/wizard/wizard.scss';
 export interface WizardFormStepProps {
   title: string;
   subtitle?: string;
+  /** Label for the final step's button; steps pass it through to WizardForm. */
+  submitLabel?: string;
   step: number;
   steps: ProgressStep[];
   onPrev(values?: any): void;

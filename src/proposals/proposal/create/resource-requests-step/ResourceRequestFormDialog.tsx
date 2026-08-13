@@ -194,6 +194,10 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
           uuid: props.resolve.proposal.call_uuid,
           name: props.resolve.proposal.call_name,
         },
+        // The picker cannot hold the stored document — it is a URL, not a File
+        // — so hand it to the purchase order block separately, or an editor
+        // sees an empty field where their attachment should be.
+        existingAttachment: props.resolve.resourceRequest?.attachment,
       }}
       onChange={handleFormChange}
     />
