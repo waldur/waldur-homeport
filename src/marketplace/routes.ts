@@ -82,10 +82,13 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'marketplace-offering-details',
-    url: 'marketplace-provider-offering-details/:offering_uuid/?tab&customerTab',
+    url: 'marketplace-provider-offering-details/:offering_uuid/?tab&customerTab&team_tab',
     params: {
       tab: { dynamic: true },
       customerTab: { dynamic: true },
+      // Sub-tab of the Team tab (active / invitations / log). Dynamic so
+      // switching it re-renders only the tab body, not the whole page.
+      team_tab: { dynamic: true },
     },
     component: lazyComponent(() =>
       import('./offerings/details/OfferingContainer').then((module) => ({

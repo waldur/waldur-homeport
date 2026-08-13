@@ -8,10 +8,9 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
 
-import { OfferingPermissionActions } from '../offerings/details/permissions/OfferingPermissionActions';
-
 import { OFFERING_PERMISSIONS_LIST_ID } from './constants';
 import { OfferingPermissionCreateButton } from './OfferingPermissionCreateButton';
+import { OfferingPermissionActions } from './permissions/OfferingPermissionActions';
 
 export const OfferingPermissionsList: FunctionComponent = () => {
   const customer = useCustomer();

@@ -49,9 +49,9 @@ const OfferingUsersTable = lazyComponent(() =>
     default: module.OfferingUsersTable,
   })),
 );
-const OfferingPermissionsList = lazyComponent(() =>
-  import('./details/permissions/OfferingPermissionsList').then((module) => ({
-    default: module.OfferingPermissionsList,
+const OfferingTeamTab = lazyComponent(() =>
+  import('./details/team/OfferingTeamTab').then((module) => ({
+    default: module.OfferingTeamTab,
   })),
 );
 const OfferingCustomers = lazyComponent(() =>
@@ -236,9 +236,11 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       component: OfferingUsersTable,
     },
     {
-      title: translate('Permissions'),
+      title: translate('Team'),
+      // The key stays `permissions` — it is what ?tab= carries in existing
+      // links and bookmarks — while the label reads Team.
       key: 'permissions',
-      component: OfferingPermissionsList,
+      component: OfferingTeamTab,
     },
     {
       title: translate('Customers'),
