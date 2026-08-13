@@ -25,11 +25,23 @@ export const useUpdateUser = (user: User) => {
     try {
       // Only use FormData when uploading an image file
       const hasImageFile = data.image instanceof File;
+      // Removing an avatar sends null, which is what the API expects to clear
+      // it. Any other non-file value is the existing image URL, which must stay
+      // out of the body — echoing it back is rejected as "not a file".
+      const isImageRemoval = 'image' in data && data.image === null;
 
       const body = {
         ...data,
         agree_with_policy: true,
-        image: hasImageFile ? fileSerializer(data.image) : undefined,
+        image: hasImageFile
+          ? fileSerializer(data.image)
+          : isImageRemoval
+            ? null
+            : undefined,
+        // Deliberately omitted when absent: callers that are not editing the
+        // token lifetime must leave the stored value alone, and this field has
+        // no "cleared" state in the UI.
+        // eslint-disable-next-line waldur-custom/no-undefined-in-mutation-body
         token_lifetime:
           'token_lifetime' in data && data.token_lifetime
             ? data.token_lifetime.value

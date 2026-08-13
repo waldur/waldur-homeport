@@ -62,9 +62,10 @@ export const AffiliationFormDialog = ({
     mutationFn: (formValues) => {
       const body: ReviewerAffiliationRequest = {
         organization_name: formValues.organization_name,
-        organization_identifier:
-          formValues.organization_identifier || undefined,
-        department: formValues.department || undefined,
+        // Blank string, not undefined: an undefined value is dropped from the
+        // JSON body, so clearing the field would silently keep the old value.
+        organization_identifier: formValues.organization_identifier || '',
+        department: formValues.department || '',
         position_title: formValues.position_title,
         start_date: formValues.start_date,
         end_date: formValues.end_date || null,
