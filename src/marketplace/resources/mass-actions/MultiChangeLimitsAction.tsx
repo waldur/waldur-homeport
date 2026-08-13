@@ -8,7 +8,7 @@ import { ResourceAction } from '@/marketplace/resources/actions/constants';
 import { useModal } from '@/modal/actions';
 import { TENANT_TYPE } from '@/openstack/constants';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
@@ -51,13 +51,18 @@ export const MultiChangeLimitsAction = ({
   const { hidden, tooltip } = useMemo(() => {
     if (!rows.length) return { hidden: true, tooltip: undefined };
 
+    // Each row submits a marketplace order, so order creation rights are
+    // needed alongside the limits permission.
     const lacksPermission = rows.some(
       (resource) =>
-        !hasPermission(user, {
-          permission: PermissionEnum.UPDATE_RESOURCE_LIMITS,
-          projectId: resource.project_uuid,
-          customerId: resource.customer_uuid,
-        }),
+        !hasAllPermissions(
+          user,
+          [PermissionEnum.UPDATE_RESOURCE_LIMITS, PermissionEnum.CREATE_ORDER],
+          {
+            projectId: resource.project_uuid,
+            customerId: resource.customer_uuid,
+          },
+        ),
     );
     if (lacksPermission) return { hidden: true, tooltip: undefined };
 

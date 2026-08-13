@@ -8,6 +8,7 @@ import { ChangeLimitsAction } from './ChangeLimitsAction';
 
 vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: () => true,
+  hasAllPermissions: () => true,
 }));
 
 describe('ChangeLimitsAction', () => {

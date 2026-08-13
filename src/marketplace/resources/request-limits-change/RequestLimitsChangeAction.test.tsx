@@ -9,6 +9,7 @@ import { RequestLimitsChangeAction } from './RequestLimitsChangeAction';
 
 vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: () => false,
+  hasAllPermissions: () => false,
 }));
 
 const renderAction = (resource) => {
