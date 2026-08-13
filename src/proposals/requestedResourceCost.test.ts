@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -101,6 +102,34 @@ describe('requested resource cost', () => {
 
     expect(cost.oneTime).toBe(5000);
     expect(cost.monthly).toBe(0);
+  });
+
+  it('charges a prepaid component for the whole requested period', () => {
+    // The configure step multiplies a prepaid component by the chosen period
+    // and shows the result; this estimate has to agree with it, or the
+    // applicant sees one figure while choosing and a smaller one afterwards.
+    const prepaid = {
+      type: 'cpu_hours',
+      name: 'CPU hours',
+      billing_type: 'one',
+      is_prepaid: true,
+      measured_unit: 'hours',
+    };
+    const sixMonths = DateTime.now().plus({ months: 6 }).toISODate();
+    const request = {
+      limits: { cpu_hours: 1000 },
+      attributes: { end_date: sixMonths },
+      requested_offering: {
+        offering_type: 'Marketplace.Basic',
+        components: [prepaid],
+        plan_details: plan('month', { cpu_hours: '2.5' }),
+      },
+    };
+
+    expect(getRequestedResourceCost(request).oneTime).toBe(15000);
+
+    const { attributes: _period, ...withoutPeriod } = request;
+    expect(getRequestedResourceCost(withoutPeriod).oneTime).toBe(2500);
   });
 
   it('stays unknown only when not one row could be priced', () => {

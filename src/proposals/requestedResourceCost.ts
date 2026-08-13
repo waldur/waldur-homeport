@@ -101,16 +101,29 @@ export const computeRequestedCost = (
   plan: any,
   limits: Record<string, number> | null | undefined,
   offering: { type?: string; components?: unknown } | undefined,
+  /**
+   * End of the requested subscription period, as the configure step stored it.
+   * Prepaid components are bought per month and charged for the whole period,
+   * so without it a six-month request is priced as one month — and the figure
+   * here contradicts the one the applicant just saw while choosing.
+   */
+  endDate?: string | null,
 ): RequestedResourceCost => {
   if (!plan) {
     // A call may accept an offering without pinning a plan; there is then no
     // price list to estimate from.
     return EMPTY_COST;
   }
-  const prices = combinePrices(plan, limits || {}, {}, {
-    type: offering?.type,
-    components: (offering?.components as any) || [],
-  } as Pick<PublicOfferingDetails, 'type' | 'components'>);
+  const prices = combinePrices(
+    plan,
+    limits || {},
+    {},
+    {
+      type: offering?.type,
+      components: (offering?.components as any) || [],
+    } as Pick<PublicOfferingDetails, 'type' | 'components'>,
+    endDate || undefined,
+  );
   if (!prices.components.length) {
     return EMPTY_COST;
   }
@@ -166,10 +179,15 @@ export const getRequestedResourceCost = (
     row?.limits && Object.keys(row.limits).length
       ? row.limits
       : ((row?.attributes?.limits as Record<string, number>) ?? {});
-  return computeRequestedCost(requestedOffering?.plan_details, limits, {
-    type: requestedOffering?.offering_type,
-    components: requestedOffering?.components,
-  });
+  return computeRequestedCost(
+    requestedOffering?.plan_details,
+    limits,
+    {
+      type: requestedOffering?.offering_type,
+      components: requestedOffering?.components,
+    },
+    row?.attributes?.end_date as string | undefined,
+  );
 };
 
 /** Adds up rows, staying "unknown" only when not a single row could be priced. */

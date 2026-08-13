@@ -24,7 +24,14 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
   );
   // Shown next to the purchase order on purpose: a PO authorises a sum, so the
   // sum belongs beside it.
-  const cost = computeRequestedCost(plan, limits, _offering);
+  // The configure step stores the chosen subscription period here; without it
+  // this estimate would disagree with the total shown on that step.
+  const cost = computeRequestedCost(
+    plan,
+    limits,
+    _offering,
+    values.attributes?.end_date,
+  );
 
   return (
     <WizardForm {...props}>
