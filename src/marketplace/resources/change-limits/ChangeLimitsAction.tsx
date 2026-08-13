@@ -3,7 +3,7 @@ import { TimerIcon } from '@phosphor-icons/react';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionItemType } from '@/resource/actions/types';
@@ -53,12 +53,17 @@ export const ChangeLimitsAction: ActionItemType = ({
   const user = useUser();
   const buttonProps = useChangeLimits({ resource, refetch });
 
+  // Changing limits submits a marketplace order, so it needs order creation
+  // rights on top of the limits permission.
   if (
-    !hasPermission(user, {
-      permission: PermissionEnum.UPDATE_RESOURCE_LIMITS,
-      projectId: resource.project_uuid,
-      customerId: resource.customer_uuid,
-    })
+    !hasAllPermissions(
+      user,
+      [PermissionEnum.UPDATE_RESOURCE_LIMITS, PermissionEnum.CREATE_ORDER],
+      {
+        projectId: resource.project_uuid,
+        customerId: resource.customer_uuid,
+      },
+    )
   ) {
     return null;
   }

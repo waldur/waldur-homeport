@@ -67,6 +67,21 @@ export const hasPermission = (
   }
 };
 
+/**
+ * True only if every listed permission is held in the same scope request.
+ * Used by actions that need more than one right at once — for example
+ * changing resource limits, which both mutates the resource and submits a
+ * marketplace order.
+ */
+export const hasAllPermissions = (
+  user: Pick<User, 'is_staff' | 'permissions'>,
+  permissions: string[],
+  request: Omit<PermissionRequest, 'permission'>,
+): boolean =>
+  permissions.every((permission) =>
+    Boolean(hasPermission(user, { ...request, permission })),
+  );
+
 export const hasPermissionOnAnyCustomer = (
   user: User,
   permission: string,

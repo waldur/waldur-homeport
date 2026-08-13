@@ -3,7 +3,7 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionItemType } from '@/resource/actions/types';
@@ -33,12 +33,16 @@ export const ReallocateLimitsAction: ActionItemType = ({
     { size: 'xl', fullscreen: 'lg-down', contentClassName: 'overflow-auto' },
   );
 
+  // Reallocation submits one marketplace order per affected resource.
   if (
-    !hasPermission(user, {
-      permission: PermissionEnum.UPDATE_RESOURCE_LIMITS,
-      projectId: resource.project_uuid,
-      customerId: resource.customer_uuid,
-    })
+    !hasAllPermissions(
+      user,
+      [PermissionEnum.UPDATE_RESOURCE_LIMITS, PermissionEnum.CREATE_ORDER],
+      {
+        projectId: resource.project_uuid,
+        customerId: resource.customer_uuid,
+      },
+    )
   ) {
     return null;
   }

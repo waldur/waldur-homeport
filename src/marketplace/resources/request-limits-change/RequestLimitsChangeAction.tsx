@@ -3,7 +3,7 @@ import { TimerIcon } from '@phosphor-icons/react';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionItemType } from '@/resource/actions/types';
@@ -45,12 +45,18 @@ export const RequestLimitsChangeAction: ActionItemType = ({
     refetch,
   });
 
+  // Updating limits directly also submits an order, so it takes both rights.
+  // Someone holding only the limits permission still belongs in the request
+  // flow, otherwise they would be left with no route at all.
   const canUpdateDirectly =
-    hasPermission(user, {
-      permission: PermissionEnum.UPDATE_RESOURCE_LIMITS,
-      projectId: resource.project_uuid,
-      customerId: resource.customer_uuid,
-    }) ||
+    hasAllPermissions(
+      user,
+      [PermissionEnum.UPDATE_RESOURCE_LIMITS, PermissionEnum.CREATE_ORDER],
+      {
+        projectId: resource.project_uuid,
+        customerId: resource.customer_uuid,
+      },
+    ) ||
     user?.is_staff ||
     user?.is_support;
 

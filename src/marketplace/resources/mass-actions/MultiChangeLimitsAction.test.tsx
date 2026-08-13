@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 
 import { MultiChangeLimitsAction } from './MultiChangeLimitsAction';
 
 vi.mock('@/permissions/hasPermission', () => ({
-  hasPermission: vi.fn(),
+  hasAllPermissions: vi.fn(),
 }));
 
 // Avoid pulling the lazy-loaded dialog (and its heavy deps) into the test.
@@ -31,7 +31,7 @@ const tenant = (overrides = {}) => ({
 describe('MultiChangeLimitsAction', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(hasPermission).mockReturnValue(true);
+    vi.mocked(hasAllPermissions).mockReturnValue(true);
   });
 
   it('shows the action when all rows are OK OpenStack tenants with a plan and the user has permission', () => {
@@ -87,7 +87,7 @@ describe('MultiChangeLimitsAction', () => {
   });
 
   it('hides the action when the user lacks the change-limits permission', () => {
-    vi.mocked(hasPermission).mockReturnValue(false);
+    vi.mocked(hasAllPermissions).mockReturnValue(false);
     const { container } = render(
       <MultiChangeLimitsAction rows={[tenant()] as any} refetch={vi.fn()} />,
     );

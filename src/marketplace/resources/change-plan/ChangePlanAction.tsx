@@ -9,7 +9,7 @@ import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 import { validateState } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
 import { ActionItemType } from '@/resource/actions/types';
@@ -62,13 +62,17 @@ export const ChangePlanAction: ActionItemType = ({ resource, refetch }) => {
     return null;
   }
 
-  // Hide if user lacks permission to switch plan
+  // Hide if user lacks permission to switch plan. Switching submits a
+  // marketplace order, so order creation rights are required too.
   if (
-    !hasPermission(user, {
-      permission: PermissionEnum.SWITCH_RESOURCE_PLAN,
-      projectId: resource.project_uuid,
-      customerId: resource.customer_uuid,
-    })
+    !hasAllPermissions(
+      user,
+      [PermissionEnum.SWITCH_RESOURCE_PLAN, PermissionEnum.CREATE_ORDER],
+      {
+        projectId: resource.project_uuid,
+        customerId: resource.customer_uuid,
+      },
+    )
   ) {
     return null;
   }

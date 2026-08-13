@@ -6,7 +6,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
@@ -31,11 +31,18 @@ export const MultiRenewAllocationsAction = ({
       rows.filter(
         (resource) =>
           ['OK'].includes(resource.state) &&
-          hasPermission(user, {
-            permission: PermissionEnum.UPDATE_RESOURCE_LIMITS,
-            projectId: resource.project_uuid,
-            customerId: resource.customer_uuid,
-          }),
+          // Renewal submits a marketplace order per resource.
+          hasAllPermissions(
+            user,
+            [
+              PermissionEnum.UPDATE_RESOURCE_LIMITS,
+              PermissionEnum.CREATE_ORDER,
+            ],
+            {
+              projectId: resource.project_uuid,
+              customerId: resource.customer_uuid,
+            },
+          ),
       ),
     [rows, user],
   );

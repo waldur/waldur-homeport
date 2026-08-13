@@ -11,12 +11,15 @@ import {
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 interface Props {
   resource: Resource;
@@ -27,8 +30,10 @@ const isPending = (row: { state: string }) =>
 
 const ApproveAction: FC<{
   row: ResourceLimitChangeRequest;
+  resource: Resource;
   refetch(): void;
-}> = ({ row, refetch }) => {
+}> = ({ row, resource, refetch }) => {
+  const user = useUser();
   const { mutate, isPending: isMutating } = useManagedMutation({
     mutationFn: () =>
       marketplaceResourceLimitChangeRequestsApprove({
@@ -42,6 +47,18 @@ const ApproveAction: FC<{
       body: translate('Are you sure you want to approve this request?'),
     },
   });
+
+  // Approving applies the limits through a marketplace order, so it needs
+  // order creation rights. Rejecting creates nothing and stays available.
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.CREATE_ORDER,
+      projectId: resource.project_uuid,
+      customerId: resource.customer_uuid,
+    })
+  ) {
+    return null;
+  }
 
   return (
     <ActionItem
@@ -191,7 +208,7 @@ export const ResourceLimitChangeRequests: FunctionComponent<Props> = ({
       rowActions={({ row }) =>
         isPending(row) ? (
           <ActionsDropdown row={row}>
-            <ApproveAction row={row} refetch={refetch} />
+            <ApproveAction row={row} resource={resource} refetch={refetch} />
             <RejectAction row={row} refetch={refetch} />
           </ActionsDropdown>
         ) : null

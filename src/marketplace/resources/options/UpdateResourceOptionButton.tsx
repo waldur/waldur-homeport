@@ -5,7 +5,7 @@ import { EditButton } from '@/form/EditButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 import { UpdateResourceOptionDialogProps } from './UpdateResourceOptionDialog';
@@ -20,8 +20,17 @@ export const UpdateResourceOptionButton: FunctionComponent<
   UpdateResourceOptionDialogProps['resolve']
 > = (props) => {
   const user = useUser();
-  const hasPerms = hasPermission(user, {
-    permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,
+  // Some offerings apply option changes through a marketplace order rather
+  // than writing them straight to the resource. Those need order creation
+  // rights on top of the options permission.
+  const createsOrder = Boolean(
+    (props.resource.offering_plugin_options as any)
+      ?.create_orders_on_resource_option_change,
+  );
+  const requiredPermissions = createsOrder
+    ? [PermissionEnum.UPDATE_RESOURCE_OPTIONS, PermissionEnum.CREATE_ORDER]
+    : [PermissionEnum.UPDATE_RESOURCE_OPTIONS];
+  const hasPerms = hasAllPermissions(user, requiredPermissions, {
     projectId: props.resource.project_uuid,
     customerId: props.resource.customer_uuid,
   });

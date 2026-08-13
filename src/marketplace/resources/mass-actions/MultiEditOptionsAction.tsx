@@ -7,7 +7,7 @@ import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasAllPermissions } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
@@ -32,15 +32,30 @@ export const MultiEditOptionsAction = ({
   const canShow = useMemo(() => {
     // Check if the offering of all resources is the same & check permission
     const offeringUuid = rows[0].offering_uuid;
-    return rows.every(
-      (resource) =>
+    return rows.every((resource) => {
+      // Offerings that apply option changes through a marketplace order need
+      // order creation rights as well.
+      const createsOrder = Boolean(
+        (resource.offering_plugin_options as any)
+          ?.create_orders_on_resource_option_change,
+      );
+      return (
         resource.offering_uuid === offeringUuid &&
-        hasPermission(user, {
-          permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,
-          projectId: resource.project_uuid,
-          customerId: resource.customer_uuid,
-        }),
-    );
+        hasAllPermissions(
+          user,
+          createsOrder
+            ? [
+                PermissionEnum.UPDATE_RESOURCE_OPTIONS,
+                PermissionEnum.CREATE_ORDER,
+              ]
+            : [PermissionEnum.UPDATE_RESOURCE_OPTIONS],
+          {
+            projectId: resource.project_uuid,
+            customerId: resource.customer_uuid,
+          },
+        )
+      );
+    });
   }, [rows, user]);
 
   const callback = () =>
