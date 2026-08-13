@@ -128,6 +128,7 @@ export const RolesList = () => {
       expandableRow={RoleUsersExpandableRow}
       filters={<AdminRolesFilter />}
       formId={AdminRolesFilterFormId}
+      hasQuery={true}
       rowActions={({ row }) => (
         <RoleActions row={row} refetch={tableProps.fetch} />
       )}
