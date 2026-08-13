@@ -145,12 +145,6 @@ interface OpenStackConfiguration {
   REQUIRE_AVAILABILITY_ZONE: boolean;
 }
 
-interface MarketplaceOpenStackTenantConfiguration {
-  TENANT_CATEGORY_UUID: string;
-  INSTANCE_CATEGORY_UUID: string;
-  VOLUME_CATEGORY_UUID: string;
-}
-
 interface RancherConfiguration {
   SYSTEM_VOLUME_MIN_SIZE: number;
   READ_ONLY_MODE: boolean;
@@ -182,7 +176,6 @@ export interface PluginConfiguration {
   WALDUR_CORE: CoreConfiguration;
   WALDUR_OPENSTACK: Partial<OpenStackConfiguration>;
   WALDUR_OPENPORTAL: Partial<OpenPortalConfiguration>;
-  WALDUR_MARKETPLACE_OPENSTACK: Partial<MarketplaceOpenStackTenantConfiguration>;
   WALDUR_RANCHER: RancherConfiguration;
   WALDUR_VMWARE: Partial<VMWareConfiguration>;
 }
