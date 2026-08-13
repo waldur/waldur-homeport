@@ -16,6 +16,8 @@ import {
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
 import { useSetProject, useUser } from '@/workspace/hooks';
@@ -35,6 +37,14 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
   const setProject = useSetProject();
   const { openDialog } = useModal();
   const { showErrorResponse } = useNotify();
+
+  // Mirrors the backend, which guards writes to end_date with PROJECT.DELETE on
+  // the customer. Gating on is_staff hid the edit from organization owners, who
+  // are the role the backend actually grants it to.
+  const canSetEndDate = hasPermission(user, {
+    permission: PermissionEnum.DELETE_PROJECT,
+    customerId: project.customer_uuid,
+  });
 
   const updateProject = async (formData) => {
     try {
@@ -106,7 +116,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             value={renderFieldOrDash(project.end_date)}
             actions={
               <>
-                {user.is_staff && (
+                {canSetEndDate && (
                   <CompactEditButton
                     onClick={() =>
                       openDialog(EditEndDateDialog, {

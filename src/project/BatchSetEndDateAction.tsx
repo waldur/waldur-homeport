@@ -26,12 +26,14 @@ export const BatchSetEndDateAction = ({
   const { openDialog } = useModal();
   const user = useUser();
 
+  // The dialog PATCHes end_date, which the backend guards with DELETE_PROJECT
+  // on the customer. Filtering on UPDATE_PROJECT offered the action to project
+  // managers, who then got 403 on submit.
   const validProjects = useMemo(
     () =>
       rows.filter((project) =>
         hasPermission(user, {
-          permission: PermissionEnum.UPDATE_PROJECT,
-          projectId: project.uuid,
+          permission: PermissionEnum.DELETE_PROJECT,
           customerId: project.customer_uuid,
         }),
       ),
