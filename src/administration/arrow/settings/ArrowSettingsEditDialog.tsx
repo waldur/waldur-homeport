@@ -51,8 +51,12 @@ export const ArrowSettingsEditDialog = ({
         body: {
           api_url: values.api_url,
           ...(values.api_key ? { api_key: values.api_key } : {}),
-          export_type_reference: values.export_type_reference || undefined,
-          classification_filter: values.classification_filter || undefined,
+          // An undefined value is dropped from the JSON body, so clearing
+          // these would silently keep the old value. `classification_filter`
+          // is a non-blankable column with a default, so an emptied input
+          // resets it rather than sending a blank string the API rejects.
+          export_type_reference: values.export_type_reference || '',
+          classification_filter: values.classification_filter || 'IAAS',
           sync_enabled: values.sync_enabled,
           invoice_price_source: (values.invoice_price_source?.value ||
             'sell') as InvoicePriceSourceEnum,

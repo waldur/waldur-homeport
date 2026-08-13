@@ -25,6 +25,7 @@ import {
 } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { TabbedSection } from '@/form/TabbedSection';
+import { clearToBlank } from '@/form/utils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { renderFieldOrDash } from '@/table/utils';
@@ -180,6 +181,7 @@ const AddressTab: FC<CustomerEditPanelProps> = (props) => {
       <CountryEditField
         name="country"
         label={translate('Country')}
+        parse={clearToBlank}
         renderValue={() => props.customer.country_name}
       />
       <StringEditField name="city" label={translate('City')} />

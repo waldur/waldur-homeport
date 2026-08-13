@@ -17,6 +17,28 @@ import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+// Every optional column here is a non-nullable CharField(blank=True). A cleared
+// text input arrives as `undefined` and a cleared country select as `null`;
+// both would be dropped from the JSON body, so the update would silently keep
+// the old value. Send a blank string instead, which is what they accept.
+const OPTIONAL_TEXT_FIELDS = [
+  'abbreviation',
+  'description',
+  'email',
+  'homepage',
+  'country',
+  'address',
+] as const;
+
+const withClearedFields = (values: AffiliatedOrganizationRequest) => ({
+  ...values,
+  ...Object.fromEntries(
+    OPTIONAL_TEXT_FIELDS.filter((field) => values[field] == null).map(
+      (field) => [field, ''],
+    ),
+  ),
+});
+
 export const AffiliatedOrganizationForm = ({ resolve }) => {
   const isEdit = Boolean(resolve.affiliatedOrganization?.uuid);
   const onSubmitMutation = useManagedMutation<
@@ -28,9 +50,9 @@ export const AffiliatedOrganizationForm = ({ resolve }) => {
       isEdit
         ? affiliatedOrganizationsPartialUpdate({
             path: { uuid: resolve.affiliatedOrganization.uuid },
-            body: values,
+            body: withClearedFields(values),
           })
-        : affiliatedOrganizationsCreate({ body: values }),
+        : affiliatedOrganizationsCreate({ body: withClearedFields(values) }),
     successMessage: isEdit
       ? translate('The affiliation has been updated.')
       : translate('The affiliation has been created.'),

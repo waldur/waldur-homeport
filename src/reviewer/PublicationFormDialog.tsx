@@ -45,7 +45,9 @@ export const PublicationFormDialog = ({
         doi: formValues.doi || null,
         publication_year: formValues.publication_year,
         venue: formValues.venue,
-        abstract: formValues.abstract || undefined,
+        // Blank string, not undefined: an undefined value is dropped from the
+        // JSON body, so clearing the abstract would silently keep the old text.
+        abstract: formValues.abstract || '',
       };
       if (isEdit) {
         return nestedReviewerProfilePublicationsPartialUpdate({

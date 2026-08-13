@@ -110,11 +110,16 @@ export const OidcDiscoveryDialog: FC<OidcDiscoveryDialogProps> = ({
         client_secret: values.client_secret,
         verify_ssl: values.verify_ssl,
         label: values.label,
-        management_url: values.management_url || undefined,
+        // An undefined value is dropped from the JSON body, and DRF ignores a
+        // key that is absent, so clearing any of these would silently keep the
+        // old value. `user_field`/`user_claim` are non-blankable columns with
+        // defaults, so an emptied input resets them the way the placeholders
+        // and the preview step already imply.
+        management_url: values.management_url || '',
         protected_fields: buildProtectedFields(values.protected_fields),
-        extra_scope: values.extra_scope || undefined,
-        user_field: values.user_field || undefined,
-        user_claim: values.user_claim || undefined,
+        extra_scope: values.extra_scope || '',
+        user_field: values.user_field || 'username',
+        user_claim: values.user_claim || 'sub',
         allowed_redirects: values.allowed_redirects,
         enable_pkce: values.enable_pkce,
         enable_post_logout_redirect: values.enable_post_logout_redirect,
