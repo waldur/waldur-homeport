@@ -10,12 +10,14 @@ import {
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { useSetProject } from '@/workspace/hooks';
+import { useSetProject, useUser } from '@/workspace/hooks';
 
 import { ApproveRequestAction } from './ApproveRequestAction';
 import { RejectRequestAction } from './RejectRequestAction';
@@ -45,6 +47,19 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
   ProjectEndDateChangeRequestsProps
 > = ({ project }) => {
   const setCurrentProject = useSetProject();
+  const user = useUser();
+
+  // Mirrors the backend: reviewing a request needs UPDATE_PROJECT on the project
+  // or its customer, and a request may never be reviewed by whoever raised it.
+  const canReview = useMemo(
+    () =>
+      hasPermission(user, {
+        permission: PermissionEnum.UPDATE_PROJECT,
+        projectId: project?.uuid,
+        customerId: project?.customer_uuid,
+      }),
+    [user, project?.uuid, project?.customer_uuid],
+  );
 
   const queryClient = useQueryClient();
   const { params } = useCurrentStateAndParams();
@@ -170,7 +185,7 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
       verboseName={translate('end date change requests')}
       enableExport={false}
       rowActions={({ row }) =>
-        isPending(row) ? (
+        isPending(row) && canReview && row.created_by_uuid !== user?.uuid ? (
           <ActionsDropdown row={row}>
             <ApproveRequestAction
               row={row}
