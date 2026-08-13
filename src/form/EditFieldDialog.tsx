@@ -21,13 +21,27 @@ export const EditFieldDialog = (props: { resolve: FieldEditButtonProps }) => {
     [props.resolve],
   );
 
+  // An emptied text input arrives as `undefined` (React Final Form's default
+  // parse), and `JSON.stringify` then drops the key from the PATCH body — so
+  // clearing a field used to be a silent no-op. Substitute an explicit empty
+  // value instead. `??` is deliberately avoided: a field may declare `null` as
+  // its empty value, and that must survive.
+  const resolveValue = (value: any) => {
+    if (value !== undefined) {
+      return value;
+    }
+    return props.resolve.emptyValue === undefined
+      ? ''
+      : props.resolve.emptyValue;
+  };
+
   return (
     <Form
       mutators={{ ...arrayMutators }}
       initialValues={initialValues}
       onSubmit={(formData) =>
         props.resolve
-          .callback(set({}, props.resolve.name, formData.value))
+          .callback(set({}, props.resolve.name, resolveValue(formData.value)))
           .then(() => {
             closeDialog();
           })
