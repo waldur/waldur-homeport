@@ -17,6 +17,7 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { AddOfferingButton } from './AddOfferingButton';
 import { CallOfferingExpandableRow } from './CallOfferingExpandableRow';
+import { CallOfferingPurchaseOrderField } from './CallOfferingPurchaseOrderField';
 import { CallOfferingRowActions } from './CallOfferingRowActions';
 
 interface CallOfferingsSectionProps {
@@ -52,6 +53,10 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
         {
           title: translate('Provider'),
           render: ({ row }) => <>{renderFieldOrDash(row.provider_name)}</>,
+        },
+        {
+          title: translate('Purchase order'),
+          render: CallOfferingPurchaseOrderField,
         },
         {
           title: translate('Requested by'),
