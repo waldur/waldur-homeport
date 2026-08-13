@@ -275,6 +275,8 @@ export const TRANSITION_MODE_OPTIONS: TransitionModeEnum[] = [
 ];
 
 // Reused by every call-config section to explain why edit/add/delete actions
-// are disabled once the call is no longer in draft.
+// are disabled. The lock is driven by CallUpdateContainer's
+// `call.state === 'archived'`, mirroring the backend's
+// `validate_call_not_archived` — an active call is still editable.
 export const callLockedTooltip = () =>
-  translate('Call configuration cannot be changed once the call is activated.');
+  translate('Call configuration cannot be changed once the call is archived.');
