@@ -9,8 +9,11 @@ import { useBatchMutation } from '@/modal/useBatchMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 export const ConsumerApproveAll = ({ orders, refetch }) => {
-  // Orders requiring a purchase order upload must be approved individually.
+  // Orders still missing a purchase order upload must be approved
+  // individually. One that already carries the document — a proposal hands its
+  // purchase order to the order it allocates — has nothing left to collect.
   const approvableOrders = (orders as OrderDetails[]).filter((order) => {
+    if (order.attachment) return true;
     const opts = order.offering_plugin_options as
       Record<string, unknown> | undefined;
     return !opts?.require_purchase_order_upload;

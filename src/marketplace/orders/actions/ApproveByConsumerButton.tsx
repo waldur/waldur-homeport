@@ -38,8 +38,13 @@ export const ApproveByConsumerButton: FC<
 
   const callback = useCallback(() => {
     if (
-      offering?.plugin_options?.enable_purchase_order_upload ||
-      offering?.plugin_options?.require_purchase_order_upload
+      // An order can arrive with the document already on it — a proposal
+      // collects the purchase order from the applicant and hands it to the
+      // order it allocates. Asking again would make the approver find a second
+      // copy, and the dialog's upload replaces the one already there.
+      !order.attachment &&
+      (offering?.plugin_options?.enable_purchase_order_upload ||
+        offering?.plugin_options?.require_purchase_order_upload)
     ) {
       openDialog(UploadPurchaseOrderDialog, {
         order,

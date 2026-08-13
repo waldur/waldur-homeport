@@ -24,10 +24,13 @@ export const OrdersBulkActions = ({
   );
   const isPendingOrderSelected = pendingOrders.length > 0;
 
-  // Pending-consumer orders requiring a purchase order upload cannot be bulk-approved —
-  // each needs an individual upload via the approval dialog.
+  // Pending-consumer orders still missing a purchase order upload cannot be
+  // bulk-approved — each needs an individual upload via the approval dialog.
+  // One that already carries the document, as a proposal-allocated order does,
+  // has nothing left to collect.
   const approvablePendingOrders = pendingOrders.filter((order) => {
     if (order.state !== 'pending-consumer') return true;
+    if (order.attachment) return true;
     const opts = order.offering_plugin_options as
       Record<string, unknown> | undefined;
     return !opts?.require_purchase_order_upload;

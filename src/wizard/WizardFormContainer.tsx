@@ -35,6 +35,7 @@ export const WizardFormContainer = <
   wizardForms,
   title,
   subtitle,
+  submitLabel,
   data,
   modalProps,
   onCancel,
@@ -99,6 +100,11 @@ export const WizardFormContainer = <
           <CurrentStep
             title={title}
             subtitle={subtitle}
+            // Steps spread their props into WizardForm, which falls back to
+            // "Submit" when this is absent. Without forwarding it here every
+            // caller's label — "Create", "Import", "Confirm" — was accepted and
+            // then silently dropped.
+            submitLabel={submitLabel}
             step={step}
             steps={steps}
             onPrev={prevStep}

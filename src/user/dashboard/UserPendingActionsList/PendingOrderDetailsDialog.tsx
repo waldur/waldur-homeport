@@ -316,8 +316,12 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
 
   const handleApprove = useCallback(() => {
     if (
-      offering?.plugin_options?.enable_purchase_order_upload ||
-      offering?.plugin_options?.require_purchase_order_upload
+      // Already carrying the document — a proposal hands its purchase order to
+      // the order it allocates — there is nothing left to ask for, and the
+      // dialog's upload would replace what is there.
+      !order?.attachment &&
+      (offering?.plugin_options?.enable_purchase_order_upload ||
+        offering?.plugin_options?.require_purchase_order_upload)
     ) {
       openDialog(UploadPurchaseOrderDialog, {
         order,
