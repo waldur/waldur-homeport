@@ -211,6 +211,7 @@
     "ignore": [
       "src/metronic/**",
       "src/EventsEnums.ts",
+      "src/FeaturesEnums.ts",
       "locales/tools/*.cjs",
       "generate-filters.cjs",
       "src/table/generated/*.tsx",
