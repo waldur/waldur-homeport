@@ -35,6 +35,55 @@ describe('CountrySelectorDialog', () => {
     expect(deCheckbox).not.toBeChecked();
   });
 
+  it('offers countries outside the default European set', () => {
+    renderWithProviders(<CountrySelectorDialog resolve={resolve} />);
+
+    expect(screen.getByTestId('country_US')).toBeInTheDocument();
+    expect(screen.getByTestId('country_JP')).toBeInTheDocument();
+    expect(screen.getByTestId('country_US')).not.toBeChecked();
+  });
+
+  it('keeps a configured country selected even if it is not a known option', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(
+      <CountrySelectorDialog
+        resolve={{ value: ['EE', 'ZZ'], settingKey: 'COUNTRIES' }}
+      />,
+    );
+
+    expect(screen.getByTestId('country_ZZ')).toBeChecked();
+
+    const jpCheckbox = screen.getByTestId('country_JP');
+    await user.click(jpCheckbox);
+    await user.click(screen.getByText('Save'));
+
+    await waitFor(() => {
+      expect(overrideSettings).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: {
+            COUNTRIES: ['EE', 'JP', 'ZZ'],
+          },
+        }),
+      );
+    });
+  });
+
+  it('filters countries by name as well as by code', () => {
+    vi.useFakeTimers();
+    renderWithProviders(<CountrySelectorDialog resolve={resolve} />);
+
+    const queryInput = screen.getByPlaceholderText('Search...');
+    fireEvent.change(queryInput, { target: { value: 'japan' } }); // eslint-disable-line testing-library/prefer-user-event
+
+    act(() => {
+      vi.runAllTimers();
+    });
+
+    expect(screen.getByTestId('country_JP')).toBeInTheDocument();
+    expect(screen.queryByTestId('country_EE')).not.toBeInTheDocument();
+    vi.useRealTimers();
+  });
+
   it('filters countries based on query', () => {
     vi.useFakeTimers();
     renderWithProviders(<CountrySelectorDialog resolve={resolve} />);
