@@ -14,13 +14,28 @@ import { SettingsDescription } from '@/SettingsDescription';
 import { useNotify } from '@/store/notify';
 import { TableQuery } from '@/table/TableQuery';
 
-// Get the list of all available country codes from settings configuration default value
-const AVAILABLE_COUNTRIES =
-  (SettingsDescription.find(
-    (group) => group.description === translate('Marketplace Branding'),
-  )?.items.find(
-    (item) => item.key === 'COUNTRIES' && item.type === 'country_list_field',
-  )?.default as string[]) || [];
+interface CountryOption {
+  value: string;
+  label: string;
+}
+
+const COUNTRIES_SETTING = SettingsDescription.find(
+  (group) => group.description === translate('Marketplace Branding'),
+)?.items.find(
+  (item) => item.key === 'COUNTRIES' && item.type === 'country_list_field',
+) as unknown as { default?: string[]; options?: CountryOption[] } | undefined;
+
+// Every valid country is offered, not just the ones enabled by default.
+// Older backends do not expose the options, so fall back to the default set.
+const AVAILABLE_COUNTRIES: CountryOption[] = (
+  COUNTRIES_SETTING?.options ??
+  (COUNTRIES_SETTING?.default || []).map((code) => ({
+    value: code,
+    label: code,
+  }))
+)
+  .slice()
+  .sort((a, b) => a.label.localeCompare(b.label));
 
 interface CountrySelectorProps {
   resolve: {
@@ -42,15 +57,33 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
   const { showError, showErrorResponse, showSuccess } = useNotify();
 
   // Handle array with single string element containing comma-separated values
-  const initialValue = useMemo(() => {
-    const list =
+  const selectedCountries = useMemo(
+    () =>
       Array.isArray(value) && value.length === 1 && typeof value[0] === 'string'
         ? value[0].split(',')
         : Array.isArray(value)
           ? value
-          : [];
-    return list.reduce((acc, code) => ({ ...acc, [code]: true }), {});
-  }, [value]);
+          : [],
+    [value],
+  );
+
+  const initialValue = useMemo(
+    () =>
+      selectedCountries.reduce((acc, code) => ({ ...acc, [code]: true }), {}),
+    [selectedCountries],
+  );
+
+  // A configured code that the backend does not know about must still be shown
+  // as selected, otherwise saving the dialog would silently drop it.
+  const countryOptions = useMemo(() => {
+    const known = new Set(AVAILABLE_COUNTRIES.map((option) => option.value));
+    const unknown = selectedCountries
+      .filter((code) => !known.has(code))
+      .map((code) => ({ value: code, label: code }));
+    return unknown.length
+      ? [...unknown, ...AVAILABLE_COUNTRIES]
+      : AVAILABLE_COUNTRIES;
+  }, [selectedCountries]);
 
   const saveCountryOptions = async (values: CountrySelectorFormData) => {
     const selectedCountries = Object.keys(values.countries || {}).filter(
@@ -80,11 +113,13 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
   const filteredCountries = useMemo(() => {
     const q = query.trim().toLowerCase();
     return !q
-      ? AVAILABLE_COUNTRIES
-      : AVAILABLE_COUNTRIES.filter((country) =>
-          country.toLowerCase().includes(q),
+      ? countryOptions
+      : countryOptions.filter(
+          (country) =>
+            country.value.toLowerCase().includes(q) ||
+            country.label.toLowerCase().includes(q),
         );
-  }, [query]);
+  }, [query, countryOptions]);
 
   return (
     <Form<CountrySelectorFormData>
@@ -114,12 +149,12 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
               <TableQuery query={query} setQuery={setQuery} />
             </div>
             <Row className="mb-n1">
-              {filteredCountries.map((countryCode) => (
-                <Col key={countryCode} sm={6} md={4}>
+              {filteredCountries.map((country) => (
+                <Col key={country.value} sm={6} md={4}>
                   <div className="border-bottom py-5">
                     <BooleanGroup
-                      data-testid={`country_${countryCode}`}
-                      name={`countries.${countryCode}`}
+                      data-testid={`country_${country.value}`}
+                      name={`countries.${country.value}`}
                       alignMiddle
                       className="d-flex justify-content-between flex-row-reverse w-100"
                       size="sm"
@@ -127,12 +162,19 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                         <div className="d-flex align-items-center">
                           <div className="symbol symbol-20px me-2">
                             <CountryFlag
-                              countryCode={countryCode}
+                              countryCode={country.value}
                               fontSize={16}
                               className="lh-1"
                             />
                           </div>
-                          {countryCode}
+                          <span className="text-muted me-2">
+                            {country.value}
+                          </span>
+                          {country.label !== country.value && (
+                            <span className="text-truncate">
+                              {country.label}
+                            </span>
+                          )}
                         </div>
                       }
                     />
