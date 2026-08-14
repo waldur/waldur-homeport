@@ -21,9 +21,8 @@ import { EditButton } from '@/form/EditButton';
 import { translate } from '@/i18n';
 import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
 import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
-import { ExperimentalUsageSection } from '@/marketplace/aggregate-limits/experimental/ExperimentalUsageSection';
+import { UsageViewsSection } from '@/marketplace/aggregate-limits/usage-views/UsageViewsSection';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
-import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -31,7 +30,6 @@ import { ActionButton } from '@/table/ActionButton';
 import { useUser, useProject } from '@/workspace/hooks';
 
 import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
-import { ExperimentalPolicyWatchSection } from './policy-watch/ExperimentalPolicyWatchSection';
 import { ProjectCreditHealthBlock } from './policy-watch/ProjectCreditHealthBlock';
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
 import { ProjectDashboardCredit } from './ProjectDashboardCredit';
@@ -304,16 +302,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           <ProjectDashboardCredit project={project} className="mb-5" />
         )}
       </Row>
-      {/* Promoted (non-experimental): the Health block shows when billing is
-          visible and the project has a credit. The remaining views stay
-          behind the experimental flag below. */}
+      {/* The Health block shows when billing is visible and the project has a
+          credit. The sections below gate themselves per view — each renders
+          only where its dashboard.* feature is enabled. */}
       {showBillingInfo && <ProjectCreditHealthBlock project={project} />}
-      {isExperimentalUiComponentsVisible() && (
-        <ExperimentalUsageSection project={project} />
-      )}
-      {isExperimentalUiComponentsVisible() && (
-        <ExperimentalPolicyWatchSection project={project} />
-      )}
+      <UsageViewsSection project={project} />
     </>
   );
 };

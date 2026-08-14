@@ -1,376 +1,197 @@
-import {
-  ArrowsInSimpleIcon,
-  ChartPieIcon,
-  CheckCircleIcon,
-  ClockCountdownIcon,
-  PauseCircleIcon,
-  WarningCircleIcon,
-  WarningOctagonIcon,
-} from '@phosphor-icons/react';
-import { FC } from 'react';
+import { InfoIcon } from '@phosphor-icons/react';
+import { FC, ReactNode } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
-import { formatDate, formatMediumDateTime } from '@/core/dateUtils';
+import { AlertItem } from '@/core/AlertItem';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { lazyComponent } from '@/core/lazyComponent';
-import { ProgressBar } from '@/core/ProgressBar';
-import { StateIndicator } from '@/core/StateIndicator';
+import { StatsCard } from '@/core/StatsCard';
+import { Tip } from '@/core/Tooltip';
 import { WidgetCard } from '@/dashboard/WidgetCard';
+import { isFeatureVisible } from '@/features/connect';
+import { DashboardFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { POLICY_LABELS } from '@/marketplace/resources/details/ResourceFlags';
-import { useModal } from '@/modal/actions';
-
-const ResourceShowUsageDialog = lazyComponent(() =>
-  import('@/marketplace/resources/usage/ResourceShowUsageDialog').then(
-    (module) => ({ default: module.ResourceShowUsageDialog }),
-  ),
-);
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { CreditBreakdownCard } from '../components/CreditBreakdownCard';
-import { CreditTermsCard } from '../components/CreditTermsCard';
+import { CreditBurnDownChart } from '../components/CreditBurnDownChart';
+import { CreditHorizon } from '../components/CreditHorizon';
 import { PacingIndicator } from '../components/PacingIndicator';
-import {
-  PolicyWatchData,
-  ResourceHealth,
-  ResourceStatusBucket,
-} from '../types';
+import { PolicyWatchData } from '../types';
 
-const bucketLabel = (bucket: ResourceStatusBucket): string => {
-  switch (bucket) {
-    case 'ok':
-      return translate('OK');
-    case 'notification':
-      return translate('Approaching limit');
-    case 'slowdown':
-      return translate('Over limit');
-    case 'paused':
-      return translate('Paused');
-    case 'downscaled':
-      return translate('Downscaled');
-  }
-};
+const DAY_MS = 24 * 60 * 60 * 1000;
 
-const BUCKET_VARIANT: Record<
-  ResourceStatusBucket,
-  'success' | 'warning' | 'danger'
-> = {
-  ok: 'success',
-  notification: 'warning',
-  slowdown: 'warning',
-  paused: 'danger',
-  downscaled: 'danger',
-};
+const Metric: FC<{ value: ReactNode; caption: ReactNode; tone?: string }> = ({
+  value,
+  caption,
+  tone,
+}) => (
+  <>
+    <span className={tone ? `text-${tone}` : undefined}>{value}</span>
+    <span className="d-block fs-6 fw-normal text-muted mt-1">{caption}</span>
+  </>
+);
 
-const BucketGlyph: FC<{ bucket: ResourceStatusBucket }> = ({ bucket }) => {
-  switch (bucket) {
-    case 'paused':
-      return <PauseCircleIcon weight="bold" />;
-    case 'downscaled':
-      return <ArrowsInSimpleIcon weight="bold" />;
-    case 'slowdown':
-      return <WarningOctagonIcon weight="bold" />;
-    case 'notification':
-      return <WarningCircleIcon weight="bold" />;
-    default:
-      return <CheckCircleIcon weight="bold" />;
-  }
-};
+/** An info tip in the tile's corner, for a figure whose derivation is not
+ *  obvious from its label. */
+const MetricTip: FC<{ id: string; label: string }> = ({ id, label }) => (
+  <Tip id={id} label={label}>
+    <InfoIcon weight="bold" className="text-muted" />
+  </Tip>
+);
 
-const saturationVariant = (
-  bucket: ResourceStatusBucket,
-): 'success' | 'warning' | 'danger' =>
-  bucket === 'paused' || bucket === 'downscaled' || bucket === 'slowdown'
-    ? 'danger'
-    : bucket === 'notification'
-      ? 'warning'
-      : 'success';
-
-const RunwayCard: FC<{ data: PolicyWatchData }> = ({ data }) => {
+/**
+ * The money: what is left, what can actually be drawn, and how fast it is
+ * going. What ends — and what each ending does — is the horizon table below,
+ * because those are different questions and ranking them against each other is
+ * what used to force a "but see above" caveat onto this card.
+ */
+const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
   const { runway } = data;
-  const burnPerDay = runway.burnPerDay;
   const days = runway.daysRemaining;
   // Only alarm when the organization balance is what blocks spending. An
   // allocation that is simply zero — never funded, or fully spent — reports a
   // zero spendable value too, and has always rendered as an ordinary state.
   const isBlockedByOrganization = runway.isLimitedByOrganizationCredit;
-  const isWarn = days !== null && days < 14;
+  // Severity follows the events, not just the balance: a credit that has
+  // already expired leaves months of runway on paper.
+  const bindingEvent = runway.events.find((event) => event.isBinding);
+  const daysToBinding = bindingEvent
+    ? Math.round((new Date(bindingEvent.date).getTime() - Date.now()) / DAY_MS)
+    : null;
+  const isWarn =
+    (days !== null && days < 14) ||
+    (daysToBinding !== null && daysToBinding < 30) ||
+    (bindingEvent?.tone === 'danger' &&
+      daysToBinding !== null &&
+      daysToBinding < 60);
   const isCritical =
     (isBlockedByOrganization && runway.spendableValue <= 0) ||
-    (days !== null && days < 4);
+    (days !== null && days < 4) ||
+    (bindingEvent?.tone === 'danger' &&
+      daysToBinding !== null &&
+      daysToBinding < 14);
 
   if (!runway.credit) {
-    return (
-      <div className="alert alert-info py-2 mb-3">
-        {translate(
-          'No project credit allocated — runway projection not available.',
-        )}
-      </div>
-    );
+    // No allocation, no credit widget — an empty runway block would only
+    // advertise a feature this project does not use.
+    return null;
   }
 
+  const lastMonthDraw = data.creditTerms?.consumptionLastMonth || 0;
+
+  const stats = [
+    {
+      label: translate('Remaining'),
+      icon: (
+        <MetricTip
+          id="credit-remaining"
+          label={translate(
+            'Credit still available to this project. It is drawn down as usage is compensated each month, and set to zero if the credit reaches its end date.',
+          )}
+        />
+      ),
+      value: (
+        <Metric
+          value={defaultCurrency(runway.credit.value)}
+          caption={
+            data.creditBreakdown
+              ? translate('of {granted} allocated', {
+                  granted: defaultCurrency(data.creditBreakdown.granted),
+                })
+              : translate('current balance')
+          }
+          tone={isCritical ? 'danger' : isWarn ? 'warning' : undefined}
+        />
+      ),
+    },
+    isBlockedByOrganization && {
+      label: translate('Drawable today'),
+      icon: (
+        <MetricTip
+          id="credit-drawable"
+          label={translate(
+            'Compensation stops once the organization credit is exhausted, so only this much of the allocation can actually be drawn right now.',
+          )}
+        />
+      ),
+      value: (
+        <Metric
+          value={defaultCurrency(runway.spendableValue)}
+          caption={translate('organization balance is lower')}
+          tone="danger"
+        />
+      ),
+    },
+    {
+      label: translate('Average daily draw'),
+      // The figure is last month's draw spread over 30 days, and it is what
+      // every run-out date on this page is projected from — neither of which
+      // the number says on its own.
+      icon: (
+        <MetricTip
+          id="credit-daily-draw"
+          label={translate(
+            "Last month this project drew {amount} of credit. Spread over 30 days that is {rate} a day, which is the rate the projections on this page use — this month's own draw is still in progress, so it is not used.",
+            {
+              amount: defaultCurrency(lastMonthDraw),
+              rate: defaultCurrency(runway.burnPerDay.toFixed(2)),
+            },
+          )}
+        />
+      ),
+      value: (
+        <Metric
+          value={
+            <>
+              {defaultCurrency(runway.burnPerDay.toFixed(2))}
+              <span className="fs-4">{translate('/d')}</span>
+            </>
+          }
+          caption={
+            lastMonthDraw > 0
+              ? translate('{amount} drawn last month ÷ 30 days', {
+                  amount: defaultCurrency(lastMonthDraw),
+                })
+              : translate('no credit drawn last month')
+          }
+        />
+      ),
+    },
+  ].filter(Boolean) as Array<{
+    label: string;
+    value: ReactNode;
+    icon?: ReactNode;
+  }>;
+
   return (
-    <div
-      className={`border-start border-4 ps-3 mt-3 ${
-        isCritical
-          ? 'border-danger'
-          : isWarn
-            ? 'border-warning'
-            : 'border-success'
-      }`}
-    >
-      <div className="d-flex flex-wrap align-items-center gap-3">
-        <div>
-          <small className="text-muted d-block">
-            {translate('Credit runway')}
-          </small>
-          <h4 className="mb-0">
-            {days === null
-              ? translate('No burn detected')
-              : days === 0
-                ? translate('Exhausted')
-                : translate('~{days} days', { days })}
-          </h4>
-        </div>
-        <div className="vr d-none d-md-block" />
-        <div>
-          {/* The allocation, matching the credit lifecycle beside this card,
-              the timeline and the burn-down chart. What is actually drawable
-              is a separate figure below, shown only when the two differ. */}
-          <small className="text-muted d-block">{translate('Balance')}</small>
-          <div className="fw-semibold">
-            {defaultCurrency(runway.credit.value)}
-          </div>
-        </div>
-        {isBlockedByOrganization && (
-          <>
-            <div className="vr d-none d-md-block" />
-            <div>
-              <small className="text-muted d-block">
-                {translate('Spendable now')}
-              </small>
-              <div className="fw-semibold text-danger">
-                {defaultCurrency(runway.spendableValue)}
-              </div>
-            </div>
-          </>
-        )}
-        <div className="vr d-none d-md-block" />
-        <div>
-          <small className="text-muted d-block">
-            {translate('Daily burn')}
-          </small>
-          <div className="fw-semibold">
-            {defaultCurrency(burnPerDay.toFixed(2))}
-            <small className="text-muted">/d</small>
-          </div>
-        </div>
-        {runway.exhaustionDate && (
-          <>
-            <div className="vr d-none d-md-block" />
-            <div>
-              <small className="text-muted d-block">
-                {translate('Exhaustion date')}
-              </small>
-              <div className="fw-semibold">
-                {formatDate(runway.exhaustionDate)}
-              </div>
-            </div>
-          </>
-        )}
-        {data.policies.some(
-          (p) => !p.hasFired && p.etaDays && p.etaDays > 0,
-        ) && (
-          <>
-            <div className="vr d-none d-md-block" />
-            <div>
-              <small className="text-muted d-block">
-                {translate('Next policy event')}
-              </small>
-              <div className="fw-semibold d-flex align-items-center gap-1">
-                <ClockCountdownIcon weight="bold" />
-                {(() => {
-                  const next = [...data.policies]
-                    .filter(
-                      (p) => !p.hasFired && p.etaDays !== null && p.etaDays > 0,
-                    )
-                    .sort(
-                      (a, b) => (a.etaDays as number) - (b.etaDays as number),
-                    )[0];
-                  if (!next) return '—';
-                  return translate('{action} in ~{days}d', {
-                    action: next.actionLabel,
-                    days: next.etaDays as number,
-                  });
-                })()}
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+    <>
+      <Row className="g-4 mb-5">
+        {stats.map((stat, index) => (
+          <Col md={stats.length > 2 ? 4 : 6} key={index}>
+            <StatsCard label={stat.label} value={stat.value} icon={stat.icon} />
+          </Col>
+        ))}
+      </Row>
       {isBlockedByOrganization && (
-        <div className="text-danger small mt-2">
-          {runway.spendableValue <= 0
-            ? translate(
-                'Organization credit is exhausted, so none of this allocation can be drawn. Contact an organization owner to top it up.',
-              )
-            : translate(
-                'Only {spendable} of the {allocated} allocated can be drawn — the organization credit balance is lower than this allocation.',
-                {
-                  spendable: defaultCurrency(runway.spendableValue),
-                  allocated: defaultCurrency(runway.credit.value),
-                },
-              )}
-        </div>
-      )}
-    </div>
-  );
-};
-
-const ResourceCard: FC<{ health: ResourceHealth }> = ({ health }) => {
-  const {
-    resource,
-    bucket,
-    saturationPct,
-    hasThreshold,
-    attribution,
-    matchedPolicy,
-  } = health;
-  const { openDialog } = useModal();
-  const variant = BUCKET_VARIANT[bucket];
-  const policyTypeLabel = attribution?.policy_class
-    ? POLICY_LABELS[attribution.policy_class] || attribution.policy_class
-    : null;
-  const canShowUsage = Boolean(
-    resource.is_usage_based || resource.is_limit_based,
-  );
-  const openUsage = () =>
-    openDialog(ResourceShowUsageDialog, {
-      resolve: { resource },
-      size: 'lg',
-    });
-
-  return (
-    <div
-      className="card card-bordered h-100"
-      role={canShowUsage ? 'button' : undefined}
-      tabIndex={canShowUsage ? 0 : undefined}
-      onClick={canShowUsage ? openUsage : undefined}
-      onKeyDown={
-        canShowUsage
-          ? (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                openUsage();
-              }
-            }
-          : undefined
-      }
-      style={canShowUsage ? { cursor: 'pointer' } : undefined}
-    >
-      <div className="card-body p-3">
-        <div className="d-flex justify-content-between align-items-start mb-2 gap-2">
-          <div className="flex-grow-1 min-w-0">
-            <div className="fw-semibold text-truncate" title={resource.name}>
-              {resource.name}
-            </div>
-            <small className="text-muted text-truncate d-block">
-              {resource.offering_name}
-            </small>
-          </div>
-          <StateIndicator
-            label={bucketLabel(bucket)}
-            variant={variant}
-            size="sm"
-            pill
-            outline
-          />
-        </div>
-        {canShowUsage && (
-          <small className="text-primary d-flex align-items-center gap-1 mb-2">
-            <ChartPieIcon weight="bold" /> {translate('View usage')}
-          </small>
-        )}
-        {hasThreshold && (
-          <div className="d-flex align-items-center gap-2 mb-2">
-            <BucketGlyph bucket={bucket} />
-            <div className="flex-grow-1">
-              <ProgressBar
-                now={Math.min(Math.max(saturationPct, 0), 100)}
-                max={100}
-                variant={saturationVariant(bucket)}
-                compact
-              />
-              <small className="text-muted">
-                {translate('{pct}% of usage quota', {
-                  pct: saturationPct.toFixed(1),
-                })}
-              </small>
-            </div>
-          </div>
-        )}
-        {(bucket === 'paused' || bucket === 'downscaled') && (
-          <div className="mb-2">
-            <small className="text-danger fw-medium d-block">
-              {translate('Why?')}
-            </small>
-            {attribution ? (
-              <small className="d-block">
-                {policyTypeLabel && <span>{policyTypeLabel}</span>}
-                {attribution.scope_name && (
-                  <span> — {attribution.scope_name}</span>
-                )}
-                {attribution.limit_cost && (
-                  <span>
-                    {' '}
-                    ({translate('limit')}: {attribution.limit_cost})
-                  </span>
-                )}
-                {attribution.timestamp && (
-                  <span className="d-block text-muted">
-                    {formatMediumDateTime(attribution.timestamp)}
-                  </span>
-                )}
-              </small>
-            ) : (
-              <small className="text-muted d-block">
-                {translate('Manually set — no policy attribution recorded.')}
-              </small>
-            )}
-          </div>
-        )}
-        {bucket === 'ok' &&
-          matchedPolicy?.etaDate &&
-          matchedPolicy.etaDays !== null && (
-            <div>
-              <small className="text-muted d-block">{translate('When?')}</small>
-              <small>
-                {matchedPolicy.etaDays === 0
-                  ? translate('Threshold reached')
-                  : translate('~{days} days until {action}', {
-                      days: matchedPolicy.etaDays,
-                      action: matchedPolicy.actionLabel,
-                    })}
-              </small>
-            </div>
-          )}
-        {(bucket === 'notification' || bucket === 'slowdown') &&
-          matchedPolicy && (
-            <div>
-              <small className="text-warning fw-medium d-block">
-                {translate('Heads up')}
-              </small>
-              <small>
-                {translate(
-                  '{label}: {action} will fire when threshold is exceeded.',
+        <AlertItem
+          variant="error"
+          className="mb-3"
+          title={
+            runway.spendableValue <= 0
+              ? translate(
+                  'Organization credit is exhausted, so none of this allocation can be drawn. Contact an organization owner to top it up.',
+                )
+              : translate(
+                  'Only {spendable} of the {allocated} allocated can be drawn — the organization credit balance is lower than this allocation.',
                   {
-                    label: matchedPolicy.thresholdLabel,
-                    action: matchedPolicy.actionLabel,
+                    spendable: defaultCurrency(runway.spendableValue),
+                    allocated: defaultCurrency(runway.credit.value),
                   },
-                )}
-              </small>
-            </div>
-          )}
-      </div>
-    </div>
+                )
+          }
+        />
+      )}
+    </>
   );
 };
 
@@ -381,59 +202,53 @@ interface Props {
 export const HealthView: FC<Props> = ({ data }) => {
   if (data.resources.length === 0) {
     return (
-      <div className="alert alert-info">
-        {translate('No resources to evaluate against policies.')}
-      </div>
+      <NoResult
+        title={translate('No resources')}
+        message={translate(
+          'Policy evaluation appears once this project has resources.',
+        )}
+        noAction
+      />
     );
   }
-  const sorted = [...data.perResource].sort((a, b) => {
-    const order: Record<ResourceStatusBucket, number> = {
-      paused: 0,
-      downscaled: 1,
-      slowdown: 2,
-      notification: 3,
-      ok: 4,
-    };
-    return order[a.bucket] - order[b.bucket];
-  });
-
   return (
     <>
+      {/* Each card names the subject its figures belong to. Without that frame,
+          "Remaining" and "Burning" read as generic dashboard numbers rather
+          than as this project's credit. */}
       <WidgetCard
         cardTitle={translate("This month's credit consumption")}
-        className="mb-3"
+        className="mb-5"
       >
+        <div className="separator mt-4 mb-5" />
         <PacingIndicator pacing={data.pacing} creditTerms={data.creditTerms} />
-        {data.creditTerms && <CreditTermsCard terms={data.creditTerms} />}
       </WidgetCard>
 
-      <WidgetCard cardTitle={translate('Overall credit')} className="mb-3">
-        <RunwayCard data={data} />
+      <WidgetCard cardTitle={translate('Overall credit')} className="mb-5">
+        <div className="separator mt-4 mb-5" />
+        <CreditMetrics data={data} />
         {data.creditBreakdown && (
-          <CreditBreakdownCard
-            breakdown={data.creditBreakdown}
-            endDate={data.creditTerms?.endDate}
-            daysUntilEndDate={data.creditTerms?.daysUntilEndDate}
-          />
+          <CreditBreakdownCard breakdown={data.creditBreakdown} />
+        )}
+        {isFeatureVisible(DashboardFeatures.spend_forecast) && (
+          <CreditBurnDownChart data={data} />
         )}
       </WidgetCard>
 
-      <WidgetCard cardTitle={translate('Resources')} className="mb-3">
-        {data.policies.length === 0 && (
-          <div className="alert alert-info py-2 mt-3">
-            {translate(
-              'No cost or SLURM usage policies are configured for this project.',
-            )}
-          </div>
-        )}
-        <div className="row g-3 mt-1">
-          {sorted.map((h) => (
-            <div className="col-md-6 col-xl-4" key={h.resource.uuid}>
-              <ResourceCard health={h} />
-            </div>
-          ))}
-        </div>
-      </WidgetCard>
+      {data.runway.credit && <CreditHorizon events={data.runway.events} />}
+
+      {/* Per-resource limits and the policy governing them live in the
+          "Active limit-based resources" table above, as an expandable row —
+          a second resource list here only split the same story in two. */}
+      {data.policies.length === 0 && (
+        <AlertItem
+          variant="info"
+          className="mb-3"
+          title={translate(
+            'No cost or SLURM usage policies are configured for this project.',
+          )}
+        />
+      )}
     </>
   );
 };

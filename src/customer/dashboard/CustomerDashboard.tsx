@@ -6,8 +6,7 @@ import { customersStatsRetrieve } from 'waldur-js-client';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
 import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
-import { ExperimentalUsageSection } from '@/marketplace/aggregate-limits/experimental/ExperimentalUsageSection';
-import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { UsageViewsSection } from '@/marketplace/aggregate-limits/usage-views/UsageViewsSection';
 import { ProjectsList } from '@/project/ProjectsList';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import {
@@ -116,11 +115,9 @@ export const CustomerDashboard: FunctionComponent = () => {
               <CustomerDashboardCredit customer={customer} />
             </Col>
           )}
-          {isExperimentalUiComponentsVisible() && (
-            <Col xs={12}>
-              <ExperimentalUsageSection customer={customer} />
-            </Col>
-          )}
+          <Col xs={12}>
+            <UsageViewsSection customer={customer} />
+          </Col>
           <Col xs={12}>
             <ProjectsList customer={customer} />
           </Col>

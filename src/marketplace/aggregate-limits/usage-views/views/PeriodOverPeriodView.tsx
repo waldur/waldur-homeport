@@ -236,33 +236,6 @@ export const PeriodOverPeriodView: FC<Props> = ({
         scenarioNote={translate(
           'Mix-agnostic: each (offering, component) compares against its own previous period — periods are aligned per row, not across rows.',
         )}
-        trace={[
-          {
-            label: translate('Current period endpoint'),
-            value: isProject
-              ? 'GET /api/marketplace-project-usage/{uuid}/components-usage-timeseries/?period_offset=0'
-              : 'GET /api/marketplace-customer-usage/{uuid}/components-usage-timeseries/?period_offset=0',
-          },
-          {
-            label: translate('Previous period endpoint'),
-            value: 'Same URL with period_offset=-1.',
-          },
-          {
-            label: translate('Bucket alignment'),
-            value:
-              'Buckets are matched by INDEX, not date. Bucket #i of current period sits next to bucket #i of previous period — equivalent positions within the period.',
-          },
-          {
-            label: translate('Δ% calculation'),
-            value:
-              '(SUM(current.usage) − SUM(previous.usage)) / SUM(previous.usage) × 100, rounded to 1 decimal.',
-          },
-          {
-            label: translate('Frontend code'),
-            value:
-              'src/marketplace/aggregate-limits/experimental/views/PeriodOverPeriodView.tsx',
-          },
-        ]}
       />
       <div className="d-flex flex-wrap align-items-center gap-3 mb-3">
         <div className="d-flex align-items-center gap-2">

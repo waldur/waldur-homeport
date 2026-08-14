@@ -24,6 +24,7 @@ export const EChart = React.forwardRef<any, ChartProps>(
     const resizeObserverRef = useRef<ResizeObserver | null>(null);
     const [loading, setLoading] = useState(false);
     const { theme } = useTheme();
+    const previousThemeRef = useRef(theme);
 
     React.useImperativeHandle(ref, () => chartRef.current);
 
@@ -43,8 +44,14 @@ export const EChart = React.forwardRef<any, ChartProps>(
       };
     }, []);
 
-    // Update chart with new theme
+    // Update chart with new theme. It must not run on mount: the mount effect
+    // above is already drawing, and a second pass here either re-enters
+    // drawChart (the dynamic import has not resolved yet, so chartRef is still
+    // empty) or disposes the fresh instance and re-initialises it. Either way
+    // the entry animation plays twice on every page load.
     useEffect(() => {
+      if (previousThemeRef.current === theme) return;
+      previousThemeRef.current = theme;
       if (!containerRef.current) return;
 
       import('@/echarts').then((module) => {

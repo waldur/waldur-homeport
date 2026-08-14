@@ -13,6 +13,7 @@ import {
 } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 import { getUserLocale } from '@/i18n/LanguageUtilsService';
+import { NoResult } from '@/navigation/header/search/NoResult';
 import { Customer } from '@/workspace/types';
 
 import { LimitPeriodChip } from '../LimitPeriodChip';
@@ -170,38 +171,6 @@ export const LimitHorizonView: FC<Props> = ({
               'A single "Today" line crosses every row, and the right edge of each bar is implicitly the next reset for that row (visible because periods can differ across rows).',
             )
       }
-      trace={[
-        {
-          label: translate('Bar bounds'),
-          value:
-            'ComponentStatsPerOffering.current_period_start / .current_period_end (server-resolved by _resolve_period_bounds in waldur-mastermind/src/waldur_mastermind/marketplace/utils.py:1261).',
-        },
-        {
-          label: translate('Inner fill'),
-          value:
-            '100 × ComponentStatsPerOffering.limit_usage / .limit. Capped visually at 100% bar width; values above 100% colour the fill red as overage.',
-        },
-        {
-          label: translate('Today line'),
-          value:
-            'Client wall time at render. The figma reference uses a server-supplied today, but ComponentStatsPerOffering does not expose it; we fall back to Date.now().',
-        },
-        {
-          label: translate('Filtering'),
-          value:
-            'Skips usage-only components (no cap to render) and limit components missing limit/period bounds. Skipped count surfaced under the chart.',
-        },
-        {
-          label: translate('Inspiration'),
-          value:
-            'Figma frame "Limit Cuts Summary" (node 21726-38689). Applied/Scheduled cut markers from the figma require server-side cut history that the API does not yet expose — they are reserved for a future iteration.',
-        },
-        {
-          label: translate('Frontend code'),
-          value:
-            'src/marketplace/aggregate-limits/experimental/views/LimitHorizonView.tsx',
-        },
-      ]}
     />
   );
 
@@ -209,11 +178,13 @@ export const LimitHorizonView: FC<Props> = ({
     return (
       <>
         {banner}
-        <div className="alert alert-info">
-          {translate(
-            'No limit-based components with caps and period bounds for this scope. Try the Treemap or Timeline.',
+        <NoResult
+          title={translate('Nothing to plot')}
+          message={translate(
+            'This view needs components with a cap and period bounds; none were found here.',
           )}
-        </div>
+          noAction
+        />
       </>
     );
   }
