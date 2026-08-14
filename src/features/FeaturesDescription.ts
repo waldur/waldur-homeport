@@ -35,6 +35,48 @@ export const FeaturesDescription: FeatureSection[] = [
     ],
   },
   {
+    key: 'dashboard',
+    description: translate('Project and organization dashboards'),
+    items: [
+      {
+        key: 'policy_matrix',
+        description: translate('Show active policies with their thresholds, current saturation and resulting action on the project dashboard.'),
+      },
+      {
+        key: 'spend_breakdown',
+        description: translate('Show where the current month\'s spend is going, by line item, on the project dashboard.'),
+      },
+      {
+        key: 'spend_forecast',
+        description: translate('Show credit burn-down with a projected exhaustion date, and a monthly spend forecast with a confidence band, on the project dashboard.'),
+      },
+      {
+        key: 'usage_gauges',
+        description: translate('Show one saturation dial per limit-based component. Components without a limit are omitted.'),
+      },
+      {
+        key: 'usage_limit_horizon',
+        description: translate('Show a saturation bar per offering component against a timeline, with the current date and the next limit reset marked.'),
+      },
+      {
+        key: 'usage_per_offering_bars',
+        description: translate('Show usage against the remaining cap as one stacked bar per offering.'),
+      },
+      {
+        key: 'usage_period_over_period',
+        description: translate('Show usage for the current period overlaid on the previous one, per offering component.'),
+      },
+      {
+        key: 'usage_timeline',
+        description: translate('Show per-offering usage bucketed over time.'),
+      },
+      {
+        key: 'usage_treemap',
+        description: translate('Show usage as a treemap of offering, billing type and component.'),
+      },
+    ],
+  },
+  {
     key: 'deployment',
     description: translate('Waldur deployment settings'),
     items: [

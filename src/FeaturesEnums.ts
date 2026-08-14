@@ -10,6 +10,18 @@ export enum CustomerFeatures {
   show_project_digest = 'customer.show_project_digest',
 }
 
+export enum DashboardFeatures {
+  policy_matrix = 'dashboard.policy_matrix',
+  spend_breakdown = 'dashboard.spend_breakdown',
+  spend_forecast = 'dashboard.spend_forecast',
+  usage_gauges = 'dashboard.usage_gauges',
+  usage_limit_horizon = 'dashboard.usage_limit_horizon',
+  usage_per_offering_bars = 'dashboard.usage_per_offering_bars',
+  usage_period_over_period = 'dashboard.usage_period_over_period',
+  usage_timeline = 'dashboard.usage_timeline',
+  usage_treemap = 'dashboard.usage_treemap',
+}
+
 export enum DeploymentFeatures {
   enable_cookie_notice = 'deployment.enable_cookie_notice',
   enable_disclaimer_area = 'deployment.enable_disclaimer_area',
@@ -104,6 +116,7 @@ export enum UserFeatures {
 
 export type FeaturesEnum =
   | CustomerFeatures
+  | DashboardFeatures
   | DeploymentFeatures
   | InvitationsFeatures
   | MarketplaceFeatures
