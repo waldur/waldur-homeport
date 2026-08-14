@@ -1,7 +1,7 @@
-import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
+import { Variant } from 'react-bootstrap/types';
 
-import { formatDate } from '@/core/dateUtils';
+import { Badge } from '@/core/Badge';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
@@ -10,8 +10,6 @@ import { CreditBreakdown } from '../types';
 
 interface Props {
   breakdown: CreditBreakdown;
-  endDate?: string | null;
-  daysUntilEndDate?: number | null;
 }
 
 interface Segment {
@@ -19,14 +17,11 @@ interface Segment {
   label: string;
   value: number;
   color: string;
+  variant: Variant;
   hint: string;
 }
 
-export const CreditBreakdownCard: FC<Props> = ({
-  breakdown,
-  endDate,
-  daysUntilEndDate,
-}) => {
+export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
   const { granted, used, lost, remaining } = breakdown;
 
   if (granted <= 0) {
@@ -42,6 +37,7 @@ export const CreditBreakdownCard: FC<Props> = ({
       label: translate('Used'),
       value: used,
       color: c.brand300,
+      variant: 'success',
       hint: translate('Credit consumed against real usage.'),
     },
     {
@@ -49,6 +45,7 @@ export const CreditBreakdownCard: FC<Props> = ({
       label: translate('Lost'),
       value: lost,
       color: c.danger,
+      variant: 'danger',
       hint: translate(
         'Credit forfeited to the minimum-draw floor or expiry — hard to recover.',
       ),
@@ -58,22 +55,30 @@ export const CreditBreakdownCard: FC<Props> = ({
       label: translate('Remaining'),
       value: remaining,
       color: c.neutral,
+      variant: 'secondary',
       hint: translate('Credit still available to spend.'),
     },
   ];
 
   const pct = (value: number) =>
     Math.max(0, Math.min(100, (value / granted) * 100));
-  const expiringSoon = daysUntilEndDate != null && daysUntilEndDate < 31;
+  const consumedPct = pct(used + lost);
 
   return (
-    <div className="mt-3">
-      <div className="d-flex justify-content-between align-items-baseline mb-2">
-        <span className="fw-semibold">{translate('Credit lifecycle')}</span>
-        <span className="text-muted small">
-          {translate('Allocated')}: {defaultCurrency(granted)}
+    <>
+      <div className="d-flex justify-content-between align-items-baseline mb-2 gap-3">
+        <span className="text-muted">
+          {translate('Allocated {amount}', {
+            amount: defaultCurrency(granted),
+          })}
+        </span>
+        <span className="text-muted">
+          {translate('{pct}% consumed', { pct: consumedPct.toFixed(0) })}
         </span>
       </div>
+      {/* Three segments rather than one progress value: "Lost" is the only
+          figure that tells a project it is forfeiting credit, and a single
+          consumed bar hides it inside the same band as real usage. */}
       <div
         className="d-flex rounded overflow-hidden mb-3"
         style={{ height: 16 }}
@@ -88,46 +93,25 @@ export const CreditBreakdownCard: FC<Props> = ({
           ) : null,
         )}
       </div>
-      <div className="d-flex flex-wrap gap-4 align-items-start">
+      <div className="d-flex flex-wrap gap-2">
         {segments.map((s) => (
-          <div key={s.key} title={s.hint}>
-            <div className="d-flex align-items-center gap-2">
-              <span
-                className="rounded-circle d-inline-block"
-                style={{ width: 10, height: 10, backgroundColor: s.color }}
-              />
-              <small className="text-muted">{s.label}</small>
-            </div>
-            <div className="fw-semibold">
-              {defaultCurrency(s.value)}
-              <small className="text-muted ms-1">
-                {((s.value / granted) * 100).toFixed(0)}%
-              </small>
-            </div>
-          </div>
+          <Badge
+            key={s.key}
+            variant={s.variant}
+            size="sm"
+            pill
+            outline
+            hasBullet
+            tooltip={s.hint}
+          >
+            {translate('{label} {amount} · {pct}%', {
+              label: s.label,
+              amount: defaultCurrency(s.value),
+              pct: pct(s.value).toFixed(0),
+            })}
+          </Badge>
         ))}
-        {endDate && (
-          <div className="ms-auto text-md-end">
-            <div className="d-flex align-items-center gap-2">
-              <CalendarBlankIcon
-                weight="bold"
-                className={expiringSoon ? 'text-danger' : 'text-muted'}
-              />
-              <small className="text-muted">{translate('Expires')}</small>
-            </div>
-            <div className={`fw-semibold ${expiringSoon ? 'text-danger' : ''}`}>
-              {formatDate(endDate)}
-              {daysUntilEndDate != null && (
-                <small
-                  className={`ms-1 ${expiringSoon ? 'text-danger' : 'text-muted'}`}
-                >
-                  {translate('(in {days}d)', { days: daysUntilEndDate })}
-                </small>
-              )}
-            </div>
-          </div>
-        )}
       </div>
-    </div>
+    </>
   );
 };

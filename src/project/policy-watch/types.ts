@@ -2,14 +2,11 @@ import type {
   CustomerCredit,
   CustomerEstimatedCostPolicy,
   InvoiceCost,
-  InvoiceCostItem,
   ProjectCredit,
   ProjectEstimatedCostPolicy,
   Resource,
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
-
-export type PolicyWatchVariant = 'health' | 'spend' | 'breakdown' | 'matrix';
 
 export type ResourceStatusBucket =
   'ok' | 'notification' | 'slowdown' | 'paused' | 'downscaled';
@@ -54,6 +51,15 @@ export interface ResourceHealth {
   resource: ResourceWithAttribution;
   bucket: ResourceStatusBucket;
   saturationPct: number;
+  /** Absolute consumption and cap behind saturationPct. */
+  usedTotal: number;
+  limitTotal: number;
+  endDate: string | null;
+  /** Where linear consumption would stand today, as a percentage of the cap.
+   *  Null when the resource has no end date to extrapolate along. */
+  idealPct: number | null;
+  /** Date the cap runs out at the rate observed so far, if it will. */
+  projectedExhaustion: string | null;
   /** True only when the resource has a SLURM usage policy or a limit-based
    *  quota to measure saturation against; false for cost-policy-only / usage-
    *  billed resources (where "% of policy threshold" would be a meaningless 0). */
@@ -62,6 +68,38 @@ export interface ResourceHealth {
   attribution?: PolicyAttributionPayload;
   attributionField?: 'paused' | 'downscaled';
   unblocksOn?: string;
+}
+
+/** The kinds of end condition a credit-funded project runs into. They are not
+ *  comparable: a credit expiry confiscates unspent money while the resources
+ *  keep running, a project end date stops the work without touching the money,
+ *  and an empty balance stops neither — it only ends compensation. Each is
+ *  therefore carried with its own consequence instead of being ranked into a
+ *  single "time left" figure that then needs a caveat to be true. */
+type CreditEventKind =
+  | 'blocked'
+  | 'exhaustion'
+  | 'credit-expiry'
+  | 'project-pause'
+  | 'project-end'
+  | 'resources-end'
+  | 'policy';
+
+export interface CreditEvent {
+  kind: CreditEventKind;
+  /** ISO date the event lands on; today or earlier when already in effect. */
+  date: string;
+  /** What happens, e.g. "Credit expires". */
+  title: string;
+  /** What it does to the money and to the resources. */
+  consequence: string;
+  tone: 'danger' | 'warning' | 'muted';
+  /** The soonest event that actually stops something. Exactly one event is
+   *  binding when any is; later ones stay for context. */
+  isBinding: boolean;
+  /** Shown instead of the calendar-derived relative label when the date is an
+   *  estimate rather than a scheduled one — a policy ETA, for instance. */
+  approximate?: boolean;
 }
 
 export interface CreditRunway {
@@ -76,6 +114,8 @@ export interface CreditRunway {
   burnPerDay: number;
   daysRemaining: number | null;
   exhaustionDate: string | null;
+  /** Everything that ends, soonest first, each with its consequence. */
+  events: CreditEvent[];
 }
 
 export interface PacingSnapshot {
@@ -136,19 +176,6 @@ export interface CreditBreakdown {
   remaining: number;
 }
 
-export interface BreakdownBucket {
-  /** Display label (offering or resource name). */
-  label: string;
-  /** Total cost in current period. */
-  cost: number;
-  /** True when this row is a negative invoice item credited against
-   *  customer/project credit (matches the "Credit compensation." prefix or
-   *  a non-positive item price). */
-  isCompensation: boolean;
-  /** Optional resource link details. */
-  resourceUuid?: string;
-}
-
 export interface PolicyWatchData {
   projectPolicies: ProjectEstimatedCostPolicy[];
   customerPolicies: CustomerEstimatedCostPolicy[];
@@ -159,12 +186,10 @@ export interface PolicyWatchData {
   policies: PolicySaturation[];
   perResource: ResourceHealth[];
   invoices: InvoiceCost[];
-  currentMonthItems: InvoiceCostItem[];
-  breakdown: BreakdownBucket[];
-  breakdownCharges: BreakdownBucket[];
-  breakdownCompensations: BreakdownBucket[];
   creditTerms: CreditTerms | null;
   creditBreakdown: CreditBreakdown | null;
   isLoading: boolean;
   hasError: boolean;
+  /** Retries every query behind the view. */
+  refetch(): void;
 }

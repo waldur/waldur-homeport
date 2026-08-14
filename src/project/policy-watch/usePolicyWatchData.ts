@@ -1,5 +1,5 @@
 import { useQueries, useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import {
   customerCreditsList,
   invoiceItemsCostsList,
@@ -17,8 +17,8 @@ import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { Project } from '@/workspace/types';
 
+import { buildCreditEvents } from './creditEvents';
 import {
-  BreakdownBucket,
   CreditBreakdown,
   CreditRunway,
   CreditTerms,
@@ -74,6 +74,13 @@ const weightedSum = (
   return total;
 };
 
+/** `current_cost` is served by the policy endpoints but not yet in the SDK
+ *  types, the same way `incurred`/`compensation` are read off the costs
+ *  endpoint. Undefined on backends that predate it. */
+const policyCurrentCost = (policy: unknown): number | undefined =>
+  (policy as { current_cost?: number | string })?.current_cost as
+    number | undefined;
+
 const findMatchingSlurmPolicy = (
   resource: Resource,
   slurmPolicies: SlurmPeriodicUsagePolicy[],
@@ -111,6 +118,18 @@ const bucketForResource = (
   return 'ok';
 };
 
+// SLURM usage policies add two actions on top of the cost-policy set
+// (SlurmPeriodicUsagePolicy.available_actions). Without them the matrix
+// printed the raw key next to humanised labels for every other action.
+const SLURM_ACTION_LABELS: Record<string, string> = {
+  request_slurm_resource_downscaling: translate(
+    'Request downscaling of SLURM allocations',
+  ),
+  request_slurm_resource_pausing: translate(
+    'Request pausing of SLURM allocations',
+  ),
+};
+
 const formatPolicyAction = (actions: string): string => {
   const list = (actions || '')
     .split(',')
@@ -119,7 +138,12 @@ const formatPolicyAction = (actions: string): string => {
   if (!list.length) return translate('No action');
   const options = getCostPolicyActionOptions();
   return list
-    .map((a) => options.find((o) => o.value === a)?.label || a)
+    .map(
+      (a) =>
+        options.find((o) => o.value === a)?.label ||
+        SLURM_ACTION_LABELS[a] ||
+        a,
+    )
     .join(', ');
 };
 
@@ -194,6 +218,12 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
             'name',
             'paused',
             'downscaled',
+            // The lifetime the pace and exhaustion columns extrapolate along.
+            'created',
+            'end_date',
+            // The date the resource actually terminates: its own end date or the
+            // project-driven one, grace period included.
+            'resource_effective_end_date',
             'attributes',
             'offering_uuid',
             'offering_name',
@@ -240,6 +270,26 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     [slurmPoliciesQueries],
   );
 
+  // Retry every source behind the view at once, so the error state can offer a
+  // single "try again" the way other widgets do.
+  const refetch = useCallback(() => {
+    projectPoliciesQ.refetch();
+    customerPoliciesQ.refetch();
+    projectCreditQ.refetch();
+    customerCreditQ.refetch();
+    invoicesQ.refetch();
+    resourcesQ.refetch();
+    slurmPoliciesQueries.forEach((q) => q.refetch());
+  }, [
+    projectPoliciesQ,
+    customerPoliciesQ,
+    projectCreditQ,
+    customerCreditQ,
+    invoicesQ,
+    resourcesQ,
+    slurmPoliciesQueries,
+  ]);
+
   return useMemo<PolicyWatchData>(() => {
     const projectPolicies = projectPoliciesQ.data || [];
     const customerPolicies = customerPoliciesQ.data || [];
@@ -274,24 +324,18 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     const exhaustionDate =
       daysRemaining !== null ? isoDate(addDays(today, daysRemaining)) : null;
 
-    const runway: CreditRunway = {
-      credit: projectCredit,
-      customerCredit,
-      spendableValue,
-      isLimitedByOrganizationCredit,
-      burnPerDay,
-      daysRemaining,
-      exhaustionDate,
-    };
-
     const policies: PolicySaturation[] = [];
 
     for (const p of projectPolicies) {
-      // billing_price_estimate.total already nets credit: PriceEstimate sums
-      // every invoice item for the month and compensations are items with a
-      // negative unit_price. Do not subtract compensation again here — when
-      // the estimate looks un-netted it is stale, which is a backend concern.
-      const currentTotal = safeNumber(p.billing_price_estimate?.total);
+      // `current_cost` is the figure the policy itself compares against
+      // limit_cost: the cost over its own period (1, 3 or 12 months), less the
+      // credit already applied and the credit still to be drawn — the last of
+      // which only the server can simulate. Prefer it over the price estimate,
+      // which covers the current month only and knows nothing of the pending
+      // draw. The fallback keeps older backends working.
+      const currentTotal = safeNumber(
+        policyCurrentCost(p) ?? p.billing_price_estimate?.total,
+      );
       const limit = safeNumber(p.limit_cost);
       const sat = limit > 0 ? (currentTotal / limit) * 100 : 0;
       const remaining = limit - currentTotal;
@@ -326,10 +370,23 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     for (const p of customerPolicies) {
       const limit = safeNumber(p.limit_cost);
       const currentTotal = safeNumber(
-        (p as { billing_price_estimate?: { total?: string } })
-          .billing_price_estimate?.total,
+        policyCurrentCost(p) ??
+          (p as { billing_price_estimate?: { total?: string } })
+            .billing_price_estimate?.total,
       );
       const sat = limit > 0 ? (currentTotal / limit) * 100 : 0;
+      // Same projection as the project cost policy. Without it an organization
+      // cap can only ever be reported after it fires, and it never reaches the
+      // dated list of what happens next. The rate is this project's draw, so
+      // the estimate is a ceiling: sibling projects spending against the same
+      // cap bring the date closer, never further out.
+      const remaining = limit - currentTotal;
+      const etaDays =
+        burnPerDay > 0 && remaining > 0
+          ? Math.floor(remaining / burnPerDay)
+          : remaining <= 0
+            ? 0
+            : null;
       policies.push({
         policyUuid: p.uuid,
         policyKind: 'customer-cost',
@@ -341,8 +398,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         saturationPct: sat,
         action: p.actions,
         actionLabel: formatPolicyAction(p.actions),
-        etaDays: null,
-        etaDate: null,
+        etaDays,
+        etaDate: etaDays !== null ? isoDate(addDays(today, etaDays)) : null,
         hasFired: p.has_fired,
         firedDatetime: p.fired_datetime || null,
         affectedResourcesCount: p.affected_resources_count || 0,
@@ -393,6 +450,44 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       });
     }
 
+    // Each end condition is kept whole, with what it does, rather than ranked
+    // into one countdown: they are not the same kind of event. See
+    // buildCreditEvents for the consequences each one carries.
+    const events = buildCreditEvents(
+      {
+        balance: creditValue,
+        spendableValue,
+        isLimitedByOrganizationCredit,
+        exhaustionDate,
+        burnPerDay,
+        creditEndDate: projectCredit?.end_date || null,
+        project,
+        resources,
+        // Policies fire on an estimate, but the estimate still has to sort
+        // against the dated events, so it is carried as a date too.
+        policies: policies
+          .filter((p) => !p.hasFired)
+          .map((p) => ({
+            actionLabel: p.actionLabel,
+            etaDays: p.etaDays,
+            kind: p.policyKind,
+            scopeName: p.scopeName,
+          })),
+      },
+      today,
+    );
+
+    const runway: CreditRunway = {
+      credit: projectCredit,
+      customerCredit,
+      spendableValue,
+      isLimitedByOrganizationCredit,
+      burnPerDay,
+      daysRemaining,
+      exhaustionDate,
+      events,
+    };
+
     const perResource: ResourceHealth[] = resources.map((r) => {
       const sp = findMatchingSlurmPolicy(r, slurmPolicies);
       // A real limit-based quota needs actual limit AND usage entries — not just
@@ -405,16 +500,47 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         : 0;
       const hasQuota = quotaKeys > 0 && usageKeys > 0;
       let saturation = 0;
+      // Absolute figures alongside the percentage: "84% of quota" does not say
+      // whether that is 84 core-hours or 84 000.
+      let usedTotal = 0;
+      let limitTotal = 0;
       if (sp) {
-        saturation = computeSlurmSaturation(r, sp).saturation;
+        const slurm = computeSlurmSaturation(r, sp);
+        saturation = slurm.saturation;
+        usedTotal = slurm.currentValue;
+        limitTotal = slurm.thresholdValue;
       } else if (hasQuota) {
-        const allocSum = Object.values(
-          r.limits as Record<string, number>,
-        ).reduce((a, b) => a + b, 0);
-        const usageSum = Object.values(
+        limitTotal = Object.values(r.limits as Record<string, number>).reduce(
+          (a, b) => a + b,
+          0,
+        );
+        usedTotal = Object.values(
           r.limit_usage as Record<string, number>,
         ).reduce((a, b) => a + b, 0);
-        saturation = allocSum > 0 ? (usageSum / allocSum) * 100 : 0;
+        saturation = limitTotal > 0 ? (usedTotal / limitTotal) * 100 : 0;
+      }
+
+      // Pace against the resource's own lifetime: where consumption should be
+      // today if the quota were spread evenly from creation to end date, and
+      // when it will run out at the rate observed so far. Both need an end
+      // date; without one there is no line to extrapolate along.
+      const createdAt = r.created ? new Date(r.created) : null;
+      const endsAt = r.end_date ? new Date(r.end_date) : null;
+      let idealPct: number | null = null;
+      let projectedExhaustion: string | null = null;
+      if (createdAt && endsAt && endsAt > createdAt) {
+        const span = endsAt.getTime() - createdAt.getTime();
+        const elapsed = today.getTime() - createdAt.getTime();
+        idealPct = Math.min(Math.max((elapsed / span) * 100, 0), 100);
+
+        const elapsedDays = Math.max(elapsed / DAY_MS, 1);
+        const burnPerDay = usedTotal / elapsedDays;
+        if (burnPerDay > 0 && limitTotal > usedTotal) {
+          const daysLeft = (limitTotal - usedTotal) / burnPerDay;
+          projectedExhaustion = addDays(today, daysLeft)
+            .toISOString()
+            .slice(0, 10);
+        }
       }
       // "% of policy threshold" is only meaningful with a SLURM usage policy or
       // a limit-based quota; cost-policy-only / usage-billed resources have none.
@@ -440,6 +566,11 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         resource: r,
         bucket,
         saturationPct: saturation,
+        usedTotal,
+        limitTotal,
+        endDate: r.end_date || null,
+        idealPct,
+        projectedExhaustion,
         hasThreshold,
         matchedPolicy,
         attribution,
@@ -449,9 +580,15 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     });
 
     // The /api/invoice-items/costs/ endpoint exposes three top-level numbers
-    // per month: `incurred` (gross), `compensation` (negative, credit applied)
-    // and `price` (net = incurred − |compensation|). These match
-    // ProjectEstimatedCostPolicy.is_triggered's `total − compensation` check.
+    // per month: `incurred` (gross), `compensation` (negative, credit already
+    // applied) and `price` (net = incurred − |compensation|). `price` is the
+    // same figure ProjectEstimatedCostPolicy.is_triggered calls `total`.
+    //
+    // The policy then subtracts the credit still to be drawn this month, which
+    // only the backend can simulate (MonthlyCompensation). Until the monthly
+    // compensation is written, the policy therefore evaluates a slightly lower
+    // cost than shown here — saturation and ETAs read marginally early, never
+    // late, which is the safe direction for a warning.
     // The SDK type omits incurred/compensation; we read them as untyped fields.
     const currentInvoice = invoices.find(
       (inv) =>
@@ -463,11 +600,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
           compensation?: number | string;
           year: number;
           month: number;
-          items?: (typeof invoices)[number]['items'];
         }
       | undefined;
-    const currentMonthItems = currentInvoice?.items || [];
-
     const incurredCost = safeNumber(currentInvoice?.incurred);
     const compensationAmount = Math.abs(
       safeNumber(currentInvoice?.compensation),
@@ -513,28 +647,6 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       paceDelta,
       projectedMonthlyCost,
     };
-
-    // The /api/invoice-items/costs/ items list only contains positive line
-    // items (unit_price > 0 in views.py:_get_current_month_items). Per-item
-    // compensation rows are not exposed individually — only as the top-level
-    // `compensation` total. So the breakdown shows charges only; the header
-    // surfaces the compensation total.
-    const breakdownMap = new Map<string, BreakdownBucket>();
-    for (const item of currentMonthItems) {
-      const label = item.name || translate('Uncategorized');
-      const cost = safeNumber(item.price);
-      const existing = breakdownMap.get(label);
-      if (existing) {
-        existing.cost += cost;
-      } else {
-        breakdownMap.set(label, { label, cost, isCompensation: false });
-      }
-    }
-    const breakdown: BreakdownBucket[] = Array.from(breakdownMap.values()).sort(
-      (a, b) => b.cost - a.cost,
-    );
-    const breakdownCharges = breakdown;
-    const breakdownCompensations: BreakdownBucket[] = [];
 
     // --- Credit terms snapshot for HealthView
     let creditTerms: CreditTerms | null = null;
@@ -619,16 +731,14 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       policies,
       perResource,
       invoices,
-      currentMonthItems,
-      breakdown,
-      breakdownCharges,
-      breakdownCompensations,
       creditTerms,
       creditBreakdown,
       isLoading,
       hasError,
+      refetch,
     };
   }, [
+    refetch,
     projectPoliciesQ.data,
     projectPoliciesQ.isLoading,
     projectPoliciesQ.error,

@@ -18,6 +18,7 @@ import { ResourceActionsButton } from '@/marketplace/resources/list/ResourceActi
 import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameField';
 import { ResourceTerminationDateField } from '@/marketplace/resources/list/ResourceTerminationDateField';
 import { resourcesListRequiredFields } from '@/marketplace/resources/list/utils';
+import { ProjectResourceLimitDetails } from '@/project/policy-watch/components/ResourceLimitDetails';
 import { createFetcher } from '@/table/api';
 import {
   ProjectResourcesFilter,
@@ -184,6 +185,7 @@ export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
         verboseName={translate('limit-based resources')}
         initialSorting={{ field: 'created', mode: 'desc' }}
         initialPageSize={5}
+        expandableRow={ProjectResourceLimitDetails}
         rowActions={({ row }) => (
           <ResourceActionsButton row={row} refetch={tableProps.fetch} />
         )}

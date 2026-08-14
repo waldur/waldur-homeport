@@ -1,9 +1,11 @@
 import { FC, useMemo, useState } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
+import { Badge } from '@/core/Badge';
 import { EChart } from '@/core/EChart';
 import { generateBrandColors } from '@/core/generateColors';
 import { getBrandColor } from '@/core/utils';
+import { useChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
 import { MixBanner } from '../MixBanner';
@@ -116,6 +118,9 @@ export const TreemapView: FC<Props> = ({ components }) => {
   const [mode, setMode] = useState<SizeMode>(mix.hasLimit ? 'pct' : 'usage');
 
   const brandColors = useMemo(() => generateBrandColors(getBrandColor()), []);
+  // Treemap gaps, breadcrumb and labels are drawn on canvas, so they need
+  // resolved colors rather than CSS variables — and they must follow the theme.
+  const colors = useChartThemeColors();
 
   const data = useMemo(
     () => buildHierarchy(components ?? [], mode, brandColors),
@@ -134,7 +139,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
     const unit = mode === 'pct' ? '%' : '';
     const label = meta?.label ?? info.name;
     const levelChip = meta?.level
-      ? `<span style="display:inline-block;background:#f2f4f7;color:#667085;padding:1px 6px;border-radius:8px;font-size:10px;margin-right:4px">${meta.level}</span>`
+      ? `<span style="display:inline-block;background:${colors.track};color:${colors.muted};padding:1px 6px;border-radius:8px;font-size:10px;margin-right:4px">${meta.level}</span>`
       : '';
     const detail = meta?.detail ? `<br/><small>${meta.detail}</small>` : '';
     return `${levelChip}<strong>${label}</strong><br/>${
@@ -155,9 +160,9 @@ export const TreemapView: FC<Props> = ({ components }) => {
           show: true,
           top: 0,
           itemStyle: {
-            color: '#f6f6f6',
-            borderColor: '#e4e7ec',
-            textStyle: { color: '#344054' },
+            color: colors.track,
+            borderColor: colors.border,
+            textStyle: { color: colors.text },
           },
         },
         label: {
@@ -167,19 +172,31 @@ export const TreemapView: FC<Props> = ({ components }) => {
             const unit = mode === 'pct' ? '%' : '';
             return `${info.name}\n${v}${unit}`;
           },
-          textStyle: { fontSize: 11 },
+          textStyle: { fontSize: 11, color: colors.text },
         },
         upperLabel: { show: true, height: 20 },
         levels: [
           {
-            itemStyle: { borderColor: '#fff', borderWidth: 4, gapWidth: 4 },
+            itemStyle: {
+              borderColor: colors.surface,
+              borderWidth: 4,
+              gapWidth: 4,
+            },
           },
           {
-            itemStyle: { borderColor: '#fafafa', borderWidth: 2, gapWidth: 2 },
+            itemStyle: {
+              borderColor: colors.surface,
+              borderWidth: 2,
+              gapWidth: 2,
+            },
             colorSaturation: [0.35, 0.6],
           },
           {
-            itemStyle: { borderColor: '#fff', borderWidth: 1, gapWidth: 1 },
+            itemStyle: {
+              borderColor: colors.surface,
+              borderWidth: 1,
+              gapWidth: 1,
+            },
           },
         ],
         data,
@@ -208,54 +225,40 @@ export const TreemapView: FC<Props> = ({ components }) => {
               )
             : undefined
         }
-        trace={[
-          {
-            label: translate('Hierarchy levels'),
-            value:
-              'L1 = offering_name; L2 = billing_type (usage/limit); L3 = component.name. Rows come from ComponentsUsageStatsPerOffering.components (one row per (offering, type, billing_type)).',
-          },
-          {
-            label: translate('Mode → field'),
-            value:
-              'usage → ComponentStatsPerOffering.usage (or .limit_usage when billing_type=limit). limit → .limit (Resource.limits[type] aggregated). pct → 100 × usage / limit (skipped if no limit).',
-          },
-          {
-            label: translate('Frontend code'),
-            value:
-              'src/marketplace/aggregate-limits/experimental/views/TreemapView.tsx',
-          },
-        ]}
       />
       <div className="d-flex flex-wrap align-items-center gap-3 mb-2">
         <div className="d-flex align-items-center gap-1 small">
           <span className="text-secondary fw-medium">
             {translate('Levels')}:
           </span>
-          <span
-            className="rounded px-2 py-0 small"
-            style={{ background: '#f4f3ff', color: '#6938ef' }}
-            title={translate('Top-level rectangles — one per offering')}
+          <Badge
+            variant="indigo"
+            light
+            roundless
+            tooltip={translate('Top-level rectangles — one per offering')}
           >
             {translate('Offering')}
-          </span>
+          </Badge>
           <span className="text-secondary">›</span>
-          <span
-            className="rounded px-2 py-0 small"
-            style={{ background: '#fffaeb', color: '#dc6803' }}
-            title={translate(
+          <Badge
+            variant="warning"
+            light
+            roundless
+            tooltip={translate(
               'Inside each offering — usage-based vs limit-based components',
             )}
           >
             {translate('Billing type')}
-          </span>
+          </Badge>
           <span className="text-secondary">›</span>
-          <span
-            className="rounded px-2 py-0 small"
-            style={{ background: '#ecfdf3', color: '#039855' }}
-            title={translate('Leaf rectangles — one per OfferingComponent')}
+          <Badge
+            variant="success"
+            light
+            roundless
+            tooltip={translate('Leaf rectangles — one per OfferingComponent')}
           >
             {translate('Component')}
-          </span>
+          </Badge>
         </div>
         <small className="text-secondary">{translate('Size by')}:</small>
         <ToggleButtonGroup
