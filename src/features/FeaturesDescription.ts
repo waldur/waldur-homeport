@@ -39,20 +39,8 @@ export const FeaturesDescription: FeatureSection[] = [
     description: translate('Project and organization dashboards'),
     items: [
       {
-        key: 'policy_matrix',
-        description: translate('Show active policies with their thresholds, current saturation and resulting action on the project dashboard.'),
-      },
-      {
-        key: 'spend_breakdown',
-        description: translate('Show where the current month\'s spend is going, by line item, on the project dashboard.'),
-      },
-      {
         key: 'spend_forecast',
-        description: translate('Show credit burn-down with a projected exhaustion date, and a monthly spend forecast with a confidence band, on the project dashboard.'),
-      },
-      {
-        key: 'usage_gauges',
-        description: translate('Show one saturation dial per limit-based component. Components without a limit are omitted.'),
+        description: translate('Show credit burn-down with a projected exhaustion date on the project dashboard.'),
       },
       {
         key: 'usage_limit_horizon',
@@ -65,10 +53,6 @@ export const FeaturesDescription: FeatureSection[] = [
       {
         key: 'usage_period_over_period',
         description: translate('Show usage for the current period overlaid on the previous one, per offering component.'),
-      },
-      {
-        key: 'usage_timeline',
-        description: translate('Show per-offering usage bucketed over time.'),
       },
       {
         key: 'usage_treemap',

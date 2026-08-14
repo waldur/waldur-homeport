@@ -11,14 +11,10 @@ export enum CustomerFeatures {
 }
 
 export enum DashboardFeatures {
-  policy_matrix = 'dashboard.policy_matrix',
-  spend_breakdown = 'dashboard.spend_breakdown',
   spend_forecast = 'dashboard.spend_forecast',
-  usage_gauges = 'dashboard.usage_gauges',
   usage_limit_horizon = 'dashboard.usage_limit_horizon',
   usage_per_offering_bars = 'dashboard.usage_per_offering_bars',
   usage_period_over_period = 'dashboard.usage_period_over_period',
-  usage_timeline = 'dashboard.usage_timeline',
   usage_treemap = 'dashboard.usage_treemap',
 }
 
