@@ -7,7 +7,7 @@ import { fetchResultCount } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { useDrawer } from '@/drawer/actions';
-import { DrawerCloseButton } from '@/drawer/DrawerCloseButton';
+import { DrawerExpandToolbar } from '@/drawer/DrawerExpandToolbar';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { isDrawerOpenWithClass } from '@/drawer/utils';
 import { isFeatureVisible } from '@/features/connect';
@@ -81,7 +81,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
       ?.classList.add(DRAWER_SHELL_CLASS.confirmation);
     openDrawer(PendingConfirmationContainer, {
       title: translate('Pending confirmations'),
-      toolbar: DrawerCloseButton,
+      toolbar: DrawerExpandToolbar,
       ...counters,
     });
   };

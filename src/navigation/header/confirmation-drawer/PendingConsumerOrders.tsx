@@ -34,7 +34,6 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
         {
           title: translate('Resource'),
           render: ResourceNameField,
-          ellipsis: false,
         },
         {
           title: translate('Organization'),
