@@ -18,21 +18,20 @@ import { OrderDetails } from './details/OrderDetails';
 import { hasFreshConsumerResponse } from './utils';
 
 async function loadOrder(order_uuid: string) {
-  const order = await marketplaceOrdersRetrieve({
-    path: { uuid: order_uuid },
-  }).then((response) => response.data);
-
-  const resource = await marketplaceOrdersResourceRetrieve({
-    path: { uuid: order_uuid },
-  }).then((response) => response.data);
-
-  const offering = await marketplaceOrdersOfferingRetrieve({
-    path: { uuid: order.uuid },
-  }).then((response) => response.data);
-
-  const plugins = await marketplacePluginsList().then(
-    (response) => response.data,
-  );
+  // All four requests key off the order UUID from the route, so none of them
+  // depends on another's response — issue them together rather than in series.
+  const [order, resource, offering, plugins] = await Promise.all([
+    marketplaceOrdersRetrieve({ path: { uuid: order_uuid } }).then(
+      (response) => response.data,
+    ),
+    marketplaceOrdersResourceRetrieve({ path: { uuid: order_uuid } }).then(
+      (response) => response.data,
+    ),
+    marketplaceOrdersOfferingRetrieve({ path: { uuid: order_uuid } }).then(
+      (response) => response.data,
+    ),
+    marketplacePluginsList().then((response) => response.data),
+  ]);
 
   const pluginLimits = plugins.find(
     (plugin) => plugin.offering_type === offering.type,
