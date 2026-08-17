@@ -21,6 +21,11 @@ export function loadTheme(theme: ThemeName) {
   hrefs[theme]().then((url) => {
     styleTag.href = url.default as string;
   });
+  // Mirrors the active theme onto the DOM so consumers that can't read
+  // ThemeContext (CSS, e.g. Tailwind's dark: variant in the migration spike)
+  // still have a signal to key off. The stylesheet swap above remains the
+  // source of truth for existing Bootstrap/Metronic styling.
+  document.documentElement.setAttribute('data-theme', theme);
 }
 
 /** Get initial theme from local storage or user preference */

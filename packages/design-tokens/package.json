@@ -1,0 +1,14 @@
+{
+  "name": "waldur-design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared brand color-ramp generation and CSS custom-property bootstrap for Waldur frontend apps",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./colors.css": "./src/colors.css",
+    "./buttonColors.css": "./src/buttonColors.css"
+  },
+  "license": "MIT"
+}

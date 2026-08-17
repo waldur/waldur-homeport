@@ -1,7 +1,8 @@
 import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 
-import { generateBrandColors } from '@/core/generateColors';
+import { generateBrandColors } from 'waldur-design-tokens';
+
 import { getBrandColor } from '@/core/utils';
 import { getChartBrandColor } from '@/dashboard/constants';
 import { translate } from '@/i18n';

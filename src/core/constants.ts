@@ -1,21 +1,6 @@
 export const RATING_STAR_ACTIVE_COLOR = '#f79009'; // warning-500
 export const RATING_STAR_INACTIVE_COLOR = '#98a2b3'; // gray-400
 
-export const DEFAULT_PRIMARY_COLORS = {
-  25: '#fafcf9',
-  50: '#f1f7ef',
-  100: '#e6f0e3',
-  200: '#c3dabb',
-  300: '#97bf89',
-  400: '#6ca359',
-  500: '#398500',
-  600: '#307300',
-  700: '#286100',
-  800: '#1f5000',
-  900: '#174000',
-  950: '#103000',
-};
-
 export const GRID_BREAKPOINTS = {
   xs: 0,
   sm: 576,

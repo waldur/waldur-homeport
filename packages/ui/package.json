@@ -1,0 +1,20 @@
+{
+  "name": "waldur-ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared Tailwind/shadcn UI primitives for Waldur frontend apps",
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
+    "@radix-ui/react-tooltip": "^1.2.16",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.6.0"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "license": "MIT"
+}

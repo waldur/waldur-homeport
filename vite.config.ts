@@ -7,6 +7,11 @@ import svgr from 'vite-plugin-svgr';
 
 import reactDisplayNamePlugin from './vite-plugin-react-displayname';
 
+// No Tailwind plugin here — nothing the main app bundle reaches imports
+// tailwind.css. BaseButtonTw/tailwind.css only exist in Storybook
+// (.storybook/main.ts has its own, separate Tailwind Vite plugin) and the
+// Playwright parity spec (which runs against Storybook, not this app). See
+// docs/tailwind-shadcn-migration-notes.md.
 const plugins: PluginOption[] = [
   react(),
   svgr({

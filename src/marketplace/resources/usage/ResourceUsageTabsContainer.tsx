@@ -6,7 +6,8 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { generateColors } from '@/core/generateColors';
+import { generateColors } from 'waldur-design-tokens';
+
 import { ResourceMetaInfo } from '@/marketplace/resources/usage/ResourceMetaInfo';
 import { ResourceUsageTabs } from '@/marketplace/resources/usage/ResourceUsageTabs';
 

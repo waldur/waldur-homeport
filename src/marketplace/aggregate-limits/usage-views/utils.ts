@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { ComponentsUsageStatsPerOffering } from 'waldur-js-client';
 
-import { generateBrandColors } from '@/core/generateColors';
+import { generateBrandColors } from 'waldur-design-tokens';
+
 import { getBrandColor } from '@/core/utils';
 import { CHART_BAR_ROUNDING } from '@/dashboard/constants';
 import { translate } from '@/i18n';

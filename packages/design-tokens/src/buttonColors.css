@@ -1,0 +1,124 @@
+/**
+ * Button color tokens for the Tailwind/shadcn BaseButton rebuild.
+ *
+ * Composed from the base ramps in colors.css and the runtime brand ramp
+ * (--waldur-brand-*, set by this package's initBrandTokens()). Every
+ * mapping below was cross-checked against the real BaseButton via
+ * getComputedStyle and against Waldur's reference design system — see
+ * waldur-homeport/docs/tailwind-shadcn-migration-notes.md for the
+ * cross-check methodology and the evidence behind every per-state color
+ * fix below.
+ *
+ * primary/secondary reference the runtime --waldur-brand-* ramp directly
+ * (brand-reactive). tertiary/danger/warning/success compose from the fixed
+ * gray/error/warning/success ramps (not brand-reactive).
+ *
+ * Zero dependency on Metronic's compiled SCSS — deliberate, so any
+ * consumer gets the same look without shipping Metronic.
+ */
+@import './colors.css';
+
+:root {
+  --btn-primary-bg: var(--waldur-brand-600);
+  --btn-primary-bg-hover: var(--waldur-brand-700);
+  --btn-primary-bg-pressed: var(--waldur-brand-800);
+  --btn-primary-text: #ffffff;
+  --btn-primary-focus-ring: var(--waldur-brand-600);
+
+  --btn-secondary-bg: var(--waldur-brand-50);
+  --btn-secondary-bg-hover: var(--waldur-brand-200);
+  --btn-secondary-bg-pressed: var(--waldur-brand-200);
+  --btn-secondary-border: var(--waldur-brand-300);
+  --btn-secondary-text: var(--waldur-brand-900);
+  --btn-secondary-focus-ring: var(--waldur-brand-600);
+
+  --btn-tertiary-bg: #ffffff;
+  --btn-tertiary-bg-hover: var(--color-gray-50);
+  --btn-tertiary-bg-pressed: var(--color-gray-100);
+  --btn-tertiary-border: var(--color-gray-300);
+  --btn-tertiary-text: var(--color-gray-700);
+  --btn-tertiary-focus-ring: var(--color-gray-500);
+
+  /* Deliberately separate from --btn-tertiary-bg-hover — see migration notes. */
+  --btn-text-secondary-hover-bg: var(--color-gray-100);
+
+  --btn-danger-bg: var(--color-error-50);
+  --btn-danger-bg-hover: var(--color-error-200);
+  --btn-danger-bg-pressed: var(--color-error-200);
+  --btn-danger-border: var(--color-error-300);
+  --btn-danger-text: var(--color-error-600);
+  --btn-danger-focus-ring: var(--color-error-600);
+
+  --btn-warning-bg: var(--color-warning-50);
+  --btn-warning-bg-hover: var(--color-warning-200);
+  --btn-warning-bg-pressed: var(--color-warning-200);
+  --btn-warning-border: var(--color-warning-500);
+  --btn-warning-text: var(--color-warning-600);
+  --btn-warning-focus-ring: var(--color-warning-600);
+
+  --btn-success-bg: var(--color-success-50);
+  --btn-success-bg-hover: var(--color-success-200);
+  --btn-success-bg-pressed: var(--color-success-200);
+  --btn-success-border: var(--color-success-300);
+  --btn-success-text: var(--color-success-600);
+  --btn-success-focus-ring: var(--color-success-600);
+
+  --btn-disabled-bg: var(--color-gray-100);
+  --btn-disabled-text: var(--color-gray-400);
+
+  /* text-primary is genuinely asymmetric between themes — light is
+     brand-reactive, dark is a fixed gray. See migration notes. */
+  --btn-text-primary-color: var(--waldur-brand-700);
+  --btn-text-secondary-color: var(--color-gray-700);
+  --btn-text-danger-color: var(--color-error-700);
+  --btn-text-warning-color: var(--color-warning-600);
+  --btn-text-success-color: var(--color-success-700);
+}
+
+:root[data-theme='dark'] {
+  --btn-secondary-bg: var(--waldur-brand-900);
+  --btn-secondary-bg-hover: var(--waldur-brand-700);
+  --btn-secondary-bg-pressed: var(--waldur-brand-700);
+  --btn-secondary-border: var(--waldur-brand-400);
+  --btn-secondary-text: var(--color-gray-50);
+  --btn-secondary-focus-ring: var(--waldur-brand-500);
+
+  --btn-tertiary-bg: var(--color-gray-950);
+  --btn-tertiary-bg-hover: var(--color-gray-900);
+  --btn-tertiary-bg-pressed: var(--color-gray-700);
+  --btn-tertiary-border: var(--color-gray-700);
+  --btn-tertiary-text: var(--color-gray-300);
+  --btn-tertiary-focus-ring: var(--color-gray-400);
+
+  --btn-text-secondary-hover-bg: var(--color-gray-800);
+
+  --btn-danger-bg: var(--color-error-900);
+  --btn-danger-bg-hover: var(--color-error-700);
+  --btn-danger-bg-pressed: var(--color-error-700);
+  --btn-danger-border: var(--color-error-400);
+  --btn-danger-text: var(--color-error-400);
+  --btn-danger-focus-ring: var(--color-error-400);
+
+  --btn-warning-bg: var(--color-warning-900);
+  --btn-warning-bg-hover: var(--color-warning-700);
+  --btn-warning-bg-pressed: var(--color-warning-700);
+  --btn-warning-border: var(--color-warning-500);
+  --btn-warning-text: var(--color-warning-400);
+  --btn-warning-focus-ring: var(--color-warning-400);
+
+  --btn-success-bg: var(--color-success-900);
+  --btn-success-bg-hover: var(--color-success-700);
+  --btn-success-bg-pressed: var(--color-success-700);
+  --btn-success-border: var(--color-success-400);
+  --btn-success-text: var(--color-success-400);
+  --btn-success-focus-ring: var(--color-success-400);
+
+  --btn-disabled-bg: var(--color-gray-800);
+  --btn-disabled-text: var(--color-gray-500);
+
+  --btn-text-primary-color: var(--color-gray-300);
+  --btn-text-secondary-color: var(--color-gray-300);
+  --btn-text-danger-color: var(--color-error-200);
+  --btn-text-warning-color: var(--color-warning-300);
+  --btn-text-success-color: var(--color-success-200);
+}

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { generateBrandColors } from '@/core/generateColors';
+import { generateBrandColors } from 'waldur-design-tokens';
+
 import { getBrandColor } from '@/core/utils';
 import { useTheme } from '@/theme/useTheme';
 

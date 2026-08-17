@@ -7,7 +7,8 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { generateColors } from '@/core/generateColors';
+import { generateColors } from 'waldur-design-tokens';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { ResourceUsageTabs } from '@/marketplace/resources/usage/ResourceUsageTabs';

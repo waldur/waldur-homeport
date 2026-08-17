@@ -1,8 +1,9 @@
 import { EChartsOption, graphic } from 'echarts';
 import React, { useMemo } from 'react';
 
+import { generateBrandColors, hexToRgb } from 'waldur-design-tokens';
+
 import { EChart } from '@/core/EChart';
-import { generateBrandColors, hexToRgb } from '@/core/generateColors';
 import { getChartBrandColor } from '@/dashboard/constants';
 
 interface AreaChartItem {

@@ -1,5 +1,6 @@
+import { initBrandTokens } from 'waldur-design-tokens';
+
 import { ENV } from './core/config';
-import { generateBrandColors, hexToRgb } from './core/generateColors';
 import { initMatomoTracker } from './core/matomo';
 import { initSentry } from './core/sentry';
 import { getBrandColor } from './core/utils';
@@ -25,19 +26,7 @@ const generateRadioSvgUrl = (color) => {
 };
 
 function initCssVariables() {
-  const brand600 = getBrandColor();
-  document.documentElement.style.setProperty('--waldur-brand-color', brand600);
-  const brandRgb = hexToRgb(brand600);
-  document.documentElement.style.setProperty(
-    `--waldur-brand-color-rgb`,
-    brandRgb,
-  );
-
-  const brandColors = generateBrandColors(brand600);
-
-  Object.entries(brandColors).forEach(([key, color]) => {
-    document.documentElement.style.setProperty(`--waldur-brand-${key}`, color);
-  });
+  initBrandTokens(getBrandColor());
 
   // Font family
   const fontFamily = ENV.plugins.WALDUR_CORE.FONT_FAMILY || 'Inter';

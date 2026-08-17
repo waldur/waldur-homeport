@@ -1,0 +1,64 @@
+/**
+ * Tailwind entry point — loaded only by .storybook/preview.tsx, never by
+ * the main Application (src/index.tsx has no Tailwind-migration footprint
+ * at all). Full reasoning for every choice below:
+ * docs/tailwind-shadcn-migration-notes.md.
+ */
+
+/* Layer order theme < base (preflight) < bootstrap < utilities — NOT
+   bootstrap ranked below everything, which broke the real BaseButton
+   outright (Tailwind's preflight reset wiped Bootstrap's own styling). Does
+   NOT fix Bootstrap's !important utility classes (.border, .bg-transparent)
+   colliding with same-named Tailwind utilities — those still need
+   differently-named classes at the call site. See migration notes. */
+@layer theme, base, bootstrap, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import 'waldur-design-tokens/buttonColors.css';
+
+/* Metronic forces a 13px root font-size !important; Tailwind's rem-based
+   scale silently resizes against that instead of the assumed 16px. Cascade
+   layering doesn't fix this (it decides which declaration wins, not what a
+   rem-relative value computes to) — these are explicit px overrides instead. */
+@theme {
+  --spacing: 4px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-base: 16px;
+  --text-base--line-height: 24px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+/* No `.dark` class in this app — dark mode swaps compiled stylesheets
+   (src/theme/utils.ts). data-theme on <html> gives Tailwind's dark:
+   variant a real signal to key off instead of introducing a second toggle. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme {
+  --font-sans: var(--waldur-font-family), Helvetica, sans-serif;
+
+  /* Token bridge, not new colors — points at CSS custom properties the app
+     already sets at runtime (afterBootstrap.tsx's initCssVariables) or
+     compiles per-theme (_root.scss), so BRAND_COLOR/theme changes re-theme
+     these with zero code here changing. */
+  --color-brand-25: var(--waldur-brand-25);
+  --color-brand-50: var(--waldur-brand-50);
+  --color-brand-100: var(--waldur-brand-100);
+  --color-brand-200: var(--waldur-brand-200);
+  --color-brand-300: var(--waldur-brand-300);
+  --color-brand-400: var(--waldur-brand-400);
+  --color-brand-500: var(--waldur-brand-500);
+  --color-brand-600: var(--waldur-brand-600);
+  --color-brand-700: var(--waldur-brand-700);
+  --color-brand-800: var(--waldur-brand-800);
+  --color-brand-900: var(--waldur-brand-900);
+  --color-brand-950: var(--waldur-brand-950);
+  --color-brand: var(--waldur-brand-color);
+
+  --color-bg-primary: var(--waldur-bg-primary);
+  --color-border-secondary: var(--waldur-border-secondary);
+  --color-border-brand-solid: var(--waldur-border-brand-solid);
+  --color-border-danger: var(--waldur-border-danger);
+}

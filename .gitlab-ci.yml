@@ -177,7 +177,11 @@ Run unit tests:
         - test/*
       allow_failure: true
   script:
-    - yarn vitest --run --reporter junit --outputFile junit.xml --coverage
+    # --project=unit: excludes the "storybook" Vitest project (added
+    # alongside @storybook/addon-vitest) — that one needs a real browser
+    # (Playwright/Chromium), which this job's plain node image doesn't
+    # have. See "Run Storybook tests" below.
+    - yarn vitest --project=unit --run --reporter junit --outputFile junit.xml --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
     when: always
@@ -190,6 +194,38 @@ Run unit tests:
       coverage_report:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
+
+# Smoke-tests every Storybook story (renders it in a real browser via the
+# "storybook" Vitest project, added alongside @storybook/addon-vitest —
+# see vitest.config.ts) — catches a story that doesn't render/errors out,
+# distinct from "Run unit tests" above which explicitly excludes this
+# project. Needs the Playwright browser image, like the E2E jobs below.
+Run Storybook tests:
+  image:
+    name: mcr.microsoft.com/playwright:v1.61.1-noble
+    entrypoint: [""]
+  stage: test
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - src/**/*.css
+        - src/**/*.scss
+        - src/**/*.ts
+        - src/**/*.tsx
+        - package.json
+        - yarn.lock
+        - tsconfig.json
+        - typings.d.ts
+        - vite.config.ts
+        - vitest.config.ts
+        - .storybook/**/*
+      allow_failure: true
+  script:
+    - yarn test:storybook
 
 Run E2E tests:
   image:
@@ -217,6 +253,55 @@ Run E2E tests:
       allow_failure: true
   script:
     - yarn test:e2e
+  artifacts:
+    expire_in: 1 week
+    when: always
+    paths:
+      - test-results/
+
+# The `visual` Playwright project (e2e-visual/) was never wired into any CI
+# job before this — only `--project e2e` ran. --workers=1: a full run at
+# higher worker counts has exhausted available RAM (see
+# docs/tailwind-shadcn-migration-notes.md); the visual project's per-test
+# screenshot diffing is heavier than the plain e2e project's.
+#
+# Scoped to base-button-parity only, not the whole e2e-visual/ directory:
+# charts.spec.ts and wizards.spec.ts log in with real credentials against a
+# real backend (no page.route() mocking, unlike e2e/login.spec.ts) and this
+# job provisions no backend at all — they'd fail 100% of the time, every
+# run, regardless of any code change. base-button-parity.spec.ts is the one
+# spec in this directory built to need no backend (it renders via a
+# Storybook story, not a live app route), which is exactly why it's the
+# one that can run here. Run charts/wizards locally against a real dev
+# stack instead (yarn test:visual, or ./scripts/start-dev-stack.sh).
+Run E2E visual tests:
+  image:
+    name: mcr.microsoft.com/playwright:v1.61.1-noble
+    entrypoint: [""]
+  stage: test
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - src/**/*.css
+        - src/**/*.scss
+        - src/**/*.ts
+        - src/**/*.tsx
+        - package.json
+        - yarn.lock
+        - tsconfig.json
+        - typings.d.ts
+        - vite.config.ts
+        - vitest.config.ts
+        - e2e-visual/**/*
+        - playwright.config.ts
+        - .storybook/**/*
+      allow_failure: true
+  script:
+    - yarn test:e2e:visual base-button-parity
   artifacts:
     expire_in: 1 week
     when: always

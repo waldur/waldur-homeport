@@ -1,2 +1,7 @@
 $mode: default;
-@import 'init';
+// Named cascade layer so Tailwind utilities can outrank this on pages
+// where both are loaded — matches src/tailwind.css's `@layer bootstrap`
+// order. See docs/tailwind-shadcn-migration-notes.md for why.
+@layer bootstrap {
+  @import 'init';
+}
