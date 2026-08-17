@@ -1,8 +1,9 @@
 import { EChartsOption, graphic } from 'echarts';
 
+import { hexToRgb } from 'waldur-design-tokens';
+
 import { ENV } from '@/core/config';
 import { formatUsageValue } from '@/core/formatNumber';
-import { hexToRgb } from '@/core/generateColors';
 import { getChartBrandColor } from '@/dashboard/constants';
 import { translate } from '@/i18n';
 

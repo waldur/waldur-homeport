@@ -1,4 +1,5 @@
-import { generateBrandColors } from '@/core/generateColors';
+import { generateBrandColors } from 'waldur-design-tokens';
+
 import { getBrandColor } from '@/core/utils';
 
 export const getChartBrandColor = () =>

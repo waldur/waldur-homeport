@@ -1,0 +1,88 @@
+/**
+ * Base color ramps (25-950) that semantic tokens (buttonColors.css, and
+ * future Badge/Alert/ProgressBar tokens) compose from. Cross-checked
+ * against Waldur's reference design system and the live app — see
+ * waldur-homeport/docs/tailwind-shadcn-migration-notes.md for the
+ * methodology.
+ *
+ * Only gray has genuinely distinct light/dark palettes. Error/warning/
+ * success are theme-invariant single ramps — dark-mode UI reuses the SAME
+ * ramp at different steps (e.g. error-50 for light becomes error-900 for
+ * the equivalent dark background) rather than a parallel dark scale.
+ *
+ * Brand is deliberately NOT here — it stays runtime-injected via
+ * --waldur-brand-* (this package's initBrandTokens(), called once at
+ * bootstrap by each consuming app), since it's tenant-configurable.
+ */
+
+:root {
+  --color-gray-25: #fcfcfd;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f2f4f7;
+  --color-gray-200: #e4e7ec;
+  --color-gray-300: #d0d5dd;
+  --color-gray-400: #98a2b3;
+  --color-gray-500: #667085;
+  --color-gray-600: #475467;
+  --color-gray-700: #344054;
+  --color-gray-800: #182230;
+  --color-gray-900: #101828;
+  --color-gray-950: #0c111d;
+
+  --color-error-25: #fffbfa;
+  --color-error-50: #fef3f2;
+  --color-error-100: #fee4e2;
+  --color-error-200: #fecdca;
+  --color-error-300: #fda29b;
+  --color-error-400: #f97066;
+  --color-error-500: #f04438;
+  --color-error-600: #d92d20;
+  --color-error-700: #b42318;
+  --color-error-800: #912018;
+  --color-error-900: #7a271a;
+  --color-error-950: #55160c;
+
+  --color-warning-25: #fffcf5;
+  --color-warning-50: #fffaeb;
+  --color-warning-100: #fef0c7;
+  --color-warning-200: #fedf89;
+  --color-warning-300: #fec84b;
+  --color-warning-400: #fdb022;
+  --color-warning-500: #f79009;
+  --color-warning-600: #dc6803;
+  --color-warning-700: #b54708;
+  --color-warning-800: #93370d;
+  --color-warning-900: #7a2e0e;
+  --color-warning-950: #4e1d09;
+
+  /* Waldur-specific green, not the reference's stock success scale — see
+     header. Anchored to the two steps confirmed live (50, 600); the rest
+     of the ramp is interpolated and NOT independently verified yet. */
+  --color-success-25: #f6fefc;
+  --color-success-50: #ecfdf3;
+  --color-success-100: #d1fadf;
+  --color-success-200: #a9efc5;
+  --color-success-300: #6ce9a6;
+  --color-success-400: #32d583;
+  --color-success-500: #12b76a;
+  --color-success-600: #039855;
+  --color-success-700: #027a48;
+  --color-success-800: #05603a;
+  --color-success-900: #054f31;
+  --color-success-950: #053321;
+}
+
+:root[data-theme='dark'] {
+  --color-gray-25: #fafafa;
+  --color-gray-50: #f5f5f6;
+  --color-gray-100: #f0f1f1;
+  --color-gray-200: #ececed;
+  --color-gray-300: #cecfd2;
+  --color-gray-400: #94969c;
+  --color-gray-500: #85888e;
+  --color-gray-600: #61646c;
+  --color-gray-700: #333741;
+  --color-gray-800: #1f242f;
+  --color-gray-900: #161b26;
+  --color-gray-950: #0c111d;
+}

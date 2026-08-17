@@ -22,9 +22,19 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: 'yarn start',
-    url: 'http://localhost:8001',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: 'yarn start',
+      url: 'http://localhost:8001',
+      reuseExistingServer: !process.env.CI,
+    },
+    // base-button-parity.spec.ts renders old-vs-new pairs via a Storybook
+    // story (see .storybook/preview.tsx and BaseButtonParity.stories.tsx)
+    // instead of a route on the main app — needs its own server.
+    {
+      command: 'yarn storybook --ci',
+      url: 'http://localhost:6006',
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 });

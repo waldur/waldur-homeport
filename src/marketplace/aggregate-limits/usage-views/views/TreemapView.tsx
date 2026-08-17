@@ -1,9 +1,10 @@
 import { FC, useMemo, useState } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
+import { generateBrandColors } from 'waldur-design-tokens';
+
 import { Badge } from '@/core/Badge';
 import { EChart } from '@/core/EChart';
-import { generateBrandColors } from '@/core/generateColors';
 import { getBrandColor } from '@/core/utils';
 import { useChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';

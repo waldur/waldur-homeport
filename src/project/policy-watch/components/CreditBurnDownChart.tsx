@@ -2,10 +2,11 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 
+import { generateBrandColors } from 'waldur-design-tokens';
+
 import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { generateBrandColors } from '@/core/generateColors';
 import { Tip } from '@/core/Tooltip';
 import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';

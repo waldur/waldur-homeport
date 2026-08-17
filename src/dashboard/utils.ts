@@ -2,10 +2,11 @@ import { SeriesOption } from 'echarts';
 import { DateTime } from 'luxon';
 import { dailyQuotasRetrieve, Invoice, InvoiceCost } from 'waldur-js-client';
 
+import { generateBrandColors } from 'waldur-design-tokens';
+
 import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { generateBrandColors } from '@/core/generateColors';
 import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';
 

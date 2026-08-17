@@ -1,5 +1,6 @@
+import { DEFAULT_PRIMARY_COLORS } from 'waldur-design-tokens';
+
 import { ENV } from '@/core/config';
-import { DEFAULT_PRIMARY_COLORS } from '@/core/constants';
 import { PhoneNumber } from '@/workspace/types';
 
 export const getBrandColor = () =>

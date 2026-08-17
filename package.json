@@ -16,13 +16,15 @@
     "preview": "vite preview",
     "format:check": "prettier --check \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
     "format:fix": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
-    "style:check": "stylelint \"src/**/*.css\" \"src/**/*.scss\"",
+    "style:check": "stylelint \"src/**/*.css\" \"src/**/*.scss\" \"packages/**/*.css\"",
     "lint:check": "eslint src locales/tools",
     "lint:fix": "eslint --fix src locales/tools",
     "deps:unused": "knip --include files,types,enumMembers,exports",
     "deps:circular": "madge --exclude 'broadcasts/BroadcastFooter' --exclude 'js-client' --circular src/**/*",
-    "test": "vitest",
+    "test": "vitest --project=unit",
     "test:e2e": "playwright test --project e2e",
+    "test:e2e:visual": "playwright test --project visual --workers=1",
+    "test:storybook": "vitest --project=storybook run",
     "i18n:extract": "node locales/tools/extractLiteralsFromFiles.cjs",
     "i18n:check": "node locales/tools/checkTranslations.cjs",
     "i18n:check:dry": "node locales/tools/checkTranslations.cjs --dry-run",
@@ -36,7 +38,9 @@
     "i18n:analyze-changes": "node locales/tools/analyzeTranslations.cjs",
     "i18n:edit": "node locales/tools/translationEdit.cjs",
     "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots"
+    "test:visual:update": "playwright test --update-snapshots",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@assistant-ui/react": "^0.14.26",
@@ -57,13 +61,16 @@
     "@monaco-editor/react": "^4.7.0",
     "@phosphor-icons/react": "^2.1.7",
     "@popperjs/core": "~2.10.1",
+    "@radix-ui/react-slot": "^1.3.3",
     "@sentry/react": "^8.55.0",
     "@stomp/stompjs": "^7.3.0",
     "@tanstack/react-query": "^5.80.6",
     "@uirouter/react": "^1.0.7",
     "attr-accept": "^3.0.0",
     "bootstrap": "5.1.3",
+    "class-variance-authority": "^0.7.1",
     "classnames": "^2.2.5",
+    "clsx": "^2.1.1",
     "dompurify": "^3.4.13",
     "echarts": "^6.0.0",
     "emoji-mart": "^5.6.0",
@@ -105,22 +112,30 @@
     "reapop": "^4.2.2",
     "redux": "^4.2.1",
     "reselect": "^3.0.1",
+    "tailwind-merge": "^3.6.0",
     "text-security": "^3.2.1",
     "tslib": "^2.8.1",
     "waldur-api-client": "workspace:*",
     "waldur-auth-core": "workspace:*",
+    "waldur-design-tokens": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
     "waldur-js-client": "8.1.0-rc.24.dev.20260811062039.146",
     "waldur-runtime-config": "workspace:*",
     "waldur-telemetry": "workspace:*",
+    "waldur-ui": "workspace:*",
     "yjs": "^13.5.22"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@playwright/test": "^1.58.0",
+    "@storybook/addon-a11y": "^10.5.8",
+    "@storybook/addon-docs": "^10.5.8",
+    "@storybook/addon-vitest": "^10.5.8",
+    "@storybook/react-vite": "^10.5.8",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-svgo": "^8.1.0",
+    "@tailwindcss/vite": "^4.3.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
@@ -132,6 +147,8 @@
     "@types/lodash-es": "^4.17.12",
     "@types/luxon": "^3.7.2",
     "@types/node": "^20.19.0",
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.5",
     "@types/qs": "^6.9.18",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
@@ -141,7 +158,8 @@
     "@types/react-window-infinite-loader": "^1.0.9",
     "@typescript/native-preview": "^7.0.0-dev.20260421.2",
     "@vitejs/plugin-react": "^6.0.2",
-    "@vitest/coverage-v8": "4",
+    "@vitest/browser-playwright": "4.1.10",
+    "@vitest/coverage-v8": "^4.1.10",
     "autoprefixer": "^10.4.20",
     "cross-env": "^10.1.0",
     "cssnano": "^8.0.2",
@@ -155,6 +173,7 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "eslint-plugin-storybook": "^10.5.8",
     "eslint-plugin-testing-library": "^7.16.2",
     "eslint-plugin-waldur": "workspace:*",
     "husky": "^9.1.7",
@@ -164,6 +183,9 @@
     "madge": "^8.0.0",
     "mock-match-media": "^0.4.3",
     "oxlint": "^1.67.0",
+    "pixelmatch": "^7.2.0",
+    "playwright": "1.61.1",
+    "pngjs": "^7.0.0",
     "postcss": "^8.5.18",
     "postcss-import": "^16.1.1",
     "prettier": "^3.6.2",
@@ -173,15 +195,18 @@
     "sass": "^1.85.0",
     "serve": "^14.2.4",
     "source-map": "^0.7.6",
+    "storybook": "^10.5.8",
+    "storybook-addon-pseudo-states": "^10.5.8",
     "stylelint": "^17.14.0",
     "stylelint-config-standard-scss": "^17.0.0",
+    "tailwindcss": "^4.3.3",
     "ts-import-plugin": "^3.0.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.24.0",
     "vite": "^8.0.16",
     "vite-plugin-markdown": "^2.2.0",
     "vite-plugin-svgr": "^4.5.0",
-    "vitest": "4",
+    "vitest": "^4.1.10",
     "vitest-location-mock": "^1.0.4"
   },
   "prettier": {
@@ -215,7 +240,8 @@
       "locales/tools/*.cjs",
       "generate-filters.cjs",
       "src/table/generated/*.tsx",
-      "test/mocks/svg.tsx"
+      "test/mocks/svg.tsx",
+      "vitest.shims.d.ts"
     ]
   },
   "stylelint": {
@@ -226,7 +252,31 @@
     "rules": {
       "no-descending-specificity": null,
       "scss/load-no-partial-leading-underscore": null
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "src/tailwind.css"
+        ],
+        "rules": {
+          "scss/at-rule-no-unknown": [
+            true,
+            {
+              "ignoreAtRules": [
+                "theme",
+                "custom-variant",
+                "apply",
+                "config",
+                "plugin",
+                "reference",
+                "utility",
+                "variant"
+              ]
+            }
+          ]
+        }
+      }
+    ]
   },
   "jscpd": {
     "ignore": [
@@ -257,14 +307,17 @@
     "table/ajv": "^8.18.0",
     "postcss": "^8.5.18",
     "postcss/nanoid": "^3.3.17",
-    "fast-uri": "^3.1.1",
+    "fast-uri": "^3.1.5",
     "ws": "^8.20.1",
     "js-cookie": "^3.0.7",
     "form-data": "^4.0.6",
     "js-yaml": "^4.3.1",
     "markdown-it": "^14.2.0",
     "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0"
+    "@types/react-dom": "^18.3.0",
+    "brace-expansion@^1.1.7": "^1.1.17",
+    "brace-expansion@^5.0.5": "^5.0.8",
+    "undici": "^7.29.0"
   },
   "packageManager": "yarn@4.18.0+sha512.fcb8716fe7cd0eece141ffc18b92193a9df9204c1ba83189c288835223fc0bbe64af473bab0d5e9927a7daeb5caf2bb07eb2787cc9338ca040ea125f2a1f2f7e"
 }

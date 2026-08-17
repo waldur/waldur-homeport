@@ -24,6 +24,7 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 | [button-variant-linting.md](button-variant-linting.md)       | Design-token button variants and the ESLint rule enforcing them                 |
 | [theme.md](theme.md)                                         | Dark mode and theming, including third-party components                         |
 | [menu-navigation.md](menu-navigation.md)                     | Sidebar menu structure and state-based routing                                  |
+| [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) | Bootstrap → Tailwind/shadcn migration: cascade layers, token extraction, visual-parity test methodology |
 
 ## API and data
 

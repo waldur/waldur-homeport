@@ -1,3 +1,5 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+
 import eslint from '@eslint/js';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import importPlugin from 'eslint-plugin-import';
@@ -7,10 +9,12 @@ import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import storybook from 'eslint-plugin-storybook';
 import testingLibrary from 'eslint-plugin-testing-library';
-import waldurCustom from 'eslint-plugin-waldur';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+
+import waldurCustom from 'eslint-plugin-waldur';
 
 const browserGlobals = {
   ...globals.browser,
@@ -24,6 +28,7 @@ export default tseslint
     eslint.configs.recommended,
     tseslint.configs.recommended,
     jsxA11yPlugin.flatConfigs.recommended,
+    ...storybook.configs['flat/recommended'],
     {
       files: ['**/*.{js,ts,tsx}'],
       plugins: {
