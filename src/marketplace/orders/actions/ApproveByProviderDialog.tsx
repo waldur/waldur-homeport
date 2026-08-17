@@ -31,6 +31,8 @@ import {
   TABLE_PUBLIC_ORDERS,
 } from '../list/constants';
 
+import { OrderSummaryRows } from './OrderSummaryRows';
+
 interface ApproveByProviderDialogProps {
   resolve: {
     order: OrderDetails;
@@ -164,6 +166,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
               </>
             }
           >
+            <OrderSummaryRows order={resolve.order} />
             {offeringQuery.isLoading ? (
               <LoadingSpinner />
             ) : offeringQuery.error ? (

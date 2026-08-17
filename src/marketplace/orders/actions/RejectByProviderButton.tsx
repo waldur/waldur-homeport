@@ -17,6 +17,8 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 import { ActionButton } from '@/table/ActionButton';
 
+import { OrderSummaryRows } from './OrderSummaryRows';
+
 interface RejectByProviderButtonProps {
   row: OrderDetails;
   refetch?: () => void;
@@ -37,12 +39,18 @@ export const RejectByProviderButton: FunctionComponent<
     errorMessage: translate('Unable to reject order.'),
     confirmation: {
       title: translate('Reject order'),
-      body:
-        props.row.offering_type === SITE_AGENT_PLUGIN
-          ? translate(
-              'Provider rejection is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.',
-            )
-          : translate('Are you sure you want to reject this order?'),
+      body: (
+        <>
+          <OrderSummaryRows order={props.row} />
+          <p className="mt-4 mb-0">
+            {props.row.offering_type === SITE_AGENT_PLUGIN
+              ? translate(
+                  'Provider rejection is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.',
+                )
+              : translate('Are you sure you want to reject this order?')}
+          </p>
+        </>
+      ),
       options: {
         showInput: true,
         inputLabel: translate('Rejection reason (optional)'),

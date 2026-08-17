@@ -51,6 +51,10 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'request_comment',
   // Approval badge
   'auto_approved',
+  // Order summary shown in the approve/reject dialogs, which must identify the
+  // order even when the matching columns are hidden.
+  'project_name',
+  'customer_name',
 ];
 
 const formatName = (row: OrderDetails) => {
