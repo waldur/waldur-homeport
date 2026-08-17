@@ -98,6 +98,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       orderField: 'created',
       keys: ['created'],
       id: 'created',
+      optional: true,
       export: (row) => formatDateTime(row.created),
     },
     {
@@ -108,6 +109,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       >,
 
       id: 'created_by',
+      optional: true,
       export: (row) => row.created_by_full_name || row.created_by_username,
     },
     {
@@ -141,6 +143,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
         uuid: row.project_uuid,
       }),
       id: 'project',
+      optional: true,
     },
     !hideColumns.includes('organization') && {
       title: translate('Client organization'),
@@ -152,6 +155,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
         uuid: row.customer_uuid,
       }),
       id: 'client_organization',
+      optional: true,
     },
     {
       title: translate('Approved at'),
@@ -191,6 +195,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
         'auto_approved',
       ],
       id: 'approved_by',
+      optional: true,
       export: (row) =>
         row.consumer_reviewed_by_full_name ||
         row.consumer_reviewed_by_username ||
