@@ -27,7 +27,7 @@
 
   --btn-secondary-bg: var(--waldur-brand-50);
   --btn-secondary-bg-hover: var(--waldur-brand-200);
-  --btn-secondary-bg-pressed: var(--waldur-brand-200);
+  --btn-secondary-bg-pressed: var(--waldur-brand-300);
   --btn-secondary-border: var(--waldur-brand-300);
   --btn-secondary-text: var(--waldur-brand-900);
   --btn-secondary-focus-ring: var(--waldur-brand-600);
@@ -44,27 +44,34 @@
 
   --btn-danger-bg: var(--color-error-50);
   --btn-danger-bg-hover: var(--color-error-200);
-  --btn-danger-bg-pressed: var(--color-error-200);
+  --btn-danger-bg-pressed: var(--color-error-500);
   --btn-danger-border: var(--color-error-300);
   --btn-danger-text: var(--color-error-600);
   --btn-danger-focus-ring: var(--color-error-600);
 
   --btn-warning-bg: var(--color-warning-50);
   --btn-warning-bg-hover: var(--color-warning-200);
-  --btn-warning-bg-pressed: var(--color-warning-200);
+  --btn-warning-bg-pressed: var(--color-warning-600);
   --btn-warning-border: var(--color-warning-500);
   --btn-warning-text: var(--color-warning-600);
   --btn-warning-focus-ring: var(--color-warning-600);
 
   --btn-success-bg: var(--color-success-50);
   --btn-success-bg-hover: var(--color-success-200);
-  --btn-success-bg-pressed: var(--color-success-200);
+  --btn-success-bg-pressed: var(--color-success-500);
   --btn-success-border: var(--color-success-300);
   --btn-success-text: var(--color-success-600);
   --btn-success-focus-ring: var(--color-success-600);
 
   --btn-disabled-bg: var(--color-gray-100);
   --btn-disabled-text: var(--color-gray-400);
+
+  /* danger/warning/success text flips to this on press (a solid, vivid
+     fill at that point, unlike hover which stays a light tint) — shared
+     across all three since the real button uses the same value for all
+     of them, same precedent as the shared --btn-disabled-* tokens above.
+     See migration notes. */
+  --btn-pressed-text-on-vivid: #ffffff;
 
   /* text-primary is genuinely asymmetric between themes — light is
      brand-reactive, dark is a fixed gray. See migration notes. */
@@ -73,12 +80,22 @@
   --btn-text-danger-color: var(--color-error-700);
   --btn-text-warning-color: var(--color-warning-600);
   --btn-text-success-color: var(--color-success-700);
+
+  /* text-primary's press feedback (no background to darken, so the text
+     itself has to shift): light stays the same brand-700 — already dark
+     enough against the page background to read as "pressed" — while dark
+     brightens all the way to gray-50, since gray-300's contrast against a
+     dark page is too weak to double as feedback. Genuinely asymmetric,
+     unlike --btn-pressed-text-on-vivid above (which is symmetric because
+     it's always sitting on a solid vivid fill in both themes). See
+     migration notes. */
+  --btn-text-primary-pressed: var(--btn-text-primary-color);
 }
 
 :root[data-theme='dark'] {
   --btn-secondary-bg: var(--waldur-brand-900);
   --btn-secondary-bg-hover: var(--waldur-brand-700);
-  --btn-secondary-bg-pressed: var(--waldur-brand-700);
+  --btn-secondary-bg-pressed: var(--waldur-brand-600);
   --btn-secondary-border: var(--waldur-brand-400);
   --btn-secondary-text: var(--color-gray-50);
   --btn-secondary-focus-ring: var(--waldur-brand-500);
@@ -94,21 +111,21 @@
 
   --btn-danger-bg: var(--color-error-900);
   --btn-danger-bg-hover: var(--color-error-700);
-  --btn-danger-bg-pressed: var(--color-error-700);
+  --btn-danger-bg-pressed: var(--color-error-400);
   --btn-danger-border: var(--color-error-400);
   --btn-danger-text: var(--color-error-400);
   --btn-danger-focus-ring: var(--color-error-400);
 
   --btn-warning-bg: var(--color-warning-900);
   --btn-warning-bg-hover: var(--color-warning-700);
-  --btn-warning-bg-pressed: var(--color-warning-700);
+  --btn-warning-bg-pressed: var(--color-warning-300);
   --btn-warning-border: var(--color-warning-500);
   --btn-warning-text: var(--color-warning-400);
   --btn-warning-focus-ring: var(--color-warning-400);
 
   --btn-success-bg: var(--color-success-900);
   --btn-success-bg-hover: var(--color-success-700);
-  --btn-success-bg-pressed: var(--color-success-700);
+  --btn-success-bg-pressed: var(--color-success-400);
   --btn-success-border: var(--color-success-400);
   --btn-success-text: var(--color-success-400);
   --btn-success-focus-ring: var(--color-success-400);
@@ -116,7 +133,10 @@
   --btn-disabled-bg: var(--color-gray-800);
   --btn-disabled-text: var(--color-gray-500);
 
+  --btn-pressed-text-on-vivid: var(--color-gray-50);
+
   --btn-text-primary-color: var(--color-gray-300);
+  --btn-text-primary-pressed: var(--color-gray-50);
   --btn-text-secondary-color: var(--color-gray-300);
   --btn-text-danger-color: var(--color-error-200);
   --btn-text-warning-color: var(--color-warning-300);
