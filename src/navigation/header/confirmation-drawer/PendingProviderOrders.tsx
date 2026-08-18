@@ -13,7 +13,6 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
-import { BulkProviderActions } from './BulkProviderActions';
 import { PENDING_PROVIDER_ORDERS_FILTER } from './constants';
 import { OrderExpandableRow } from './OrderExpandableRow';
 
@@ -61,7 +60,6 @@ export const PendingProviderOrders: React.FC<{}> = () => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
       expandableRow={OrderExpandableRow}
-      tableActions={<BulkProviderActions orders={tableProps.rows} />}
       rowActions={({ row }) => (
         <OrderProviderActions
           order={row}
