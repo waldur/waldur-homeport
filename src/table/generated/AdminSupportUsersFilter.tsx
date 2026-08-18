@@ -2,8 +2,8 @@
 
 import { FunctionComponent } from 'react';
 import {
-  SupportUserBackendNameEnum,
   SupportUsersListData,
+  WaldursupportactivebackendtypeEnum,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -24,27 +24,28 @@ export interface IsActiveOption {
   value: boolean;
 }
 
-export const SupportUserBackendNameOptions: SupportUserBackendNameOption[] = [
-  {
-    label: translate('Atlassian'),
-    value: 'atlassian',
-  },
-  {
-    label: translate('Basic'),
-    value: 'basic',
-  },
-  {
-    label: translate('Smax'),
-    value: 'smax',
-  },
-  {
-    label: translate('Zammad'),
-    value: 'zammad',
-  },
-];
-export interface SupportUserBackendNameOption {
+export const WaldursupportactivebackendtypeOptions: WaldursupportactivebackendtypeOption[] =
+  [
+    {
+      label: translate('Atlassian'),
+      value: 'atlassian',
+    },
+    {
+      label: translate('Basic'),
+      value: 'basic',
+    },
+    {
+      label: translate('Smax'),
+      value: 'smax',
+    },
+    {
+      label: translate('Zammad'),
+      value: 'zammad',
+    },
+  ];
+export interface WaldursupportactivebackendtypeOption {
   label: string;
-  value: SupportUserBackendNameEnum;
+  value: WaldursupportactivebackendtypeEnum;
 }
 
 export const AdminSupportUsersFilter: FunctionComponent<{}> = () => (
@@ -52,12 +53,16 @@ export const AdminSupportUsersFilter: FunctionComponent<{}> = () => (
     <SelectFilter
       title={translate('Helpdesk')}
       name="backend_name"
-      getValueLabel={(value: SupportUserBackendNameOption) => value?.label}
-      options={SupportUserBackendNameOptions}
-      getOptionValue={(option: SupportUserBackendNameOption) =>
+      getValueLabel={(value: WaldursupportactivebackendtypeOption) =>
+        value?.label
+      }
+      options={WaldursupportactivebackendtypeOptions}
+      getOptionValue={(option: WaldursupportactivebackendtypeOption) =>
         String(option.value)
       }
-      getOptionLabel={(option: SupportUserBackendNameOption) => option.label}
+      getOptionLabel={(option: WaldursupportactivebackendtypeOption) =>
+        option.label
+      }
       isClearable={true}
       placeholder={translate('Helpdesk')}
     />
@@ -77,7 +82,7 @@ export const AdminSupportUsersFilter: FunctionComponent<{}> = () => (
 export const AdminSupportUsersFilterFormId = 'AdminSupportUsersFilter';
 
 export interface AdminSupportUsersFilterFormData {
-  backend_name: SupportUserBackendNameOption;
+  backend_name: WaldursupportactivebackendtypeOption;
   is_active: IsActiveOption;
 }
 
