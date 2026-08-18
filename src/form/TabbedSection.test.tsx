@@ -240,4 +240,69 @@ describe('TabbedSection', () => {
     );
     expect(screen.getByText('Field 1')).toBeInTheDocument();
   });
+
+  describe('syncKey', () => {
+    const renderWithSyncKey = () =>
+      render(
+        <TabbedSection syncKey="coi_tab">
+          <TabbedSection.Tab id="tab1" title="Tab 1">
+            <DummyField label="Field 1" />
+          </TabbedSection.Tab>
+          <TabbedSection.Tab id="tab2" title="Tab 2">
+            <DummyField label="Field 2" />
+          </TabbedSection.Tab>
+        </TabbedSection>,
+      );
+
+    it('writes the active tab to the custom param instead of "section"', async () => {
+      const user = userEvent.setup();
+      renderWithSyncKey();
+
+      await user.click(screen.getByRole('tab', { name: 'Tab 2' }));
+
+      expect(mockRouter.stateService.go).toHaveBeenCalledWith(
+        'test-state',
+        { coi_tab: 'tab2' },
+        { location: 'replace' },
+      );
+    });
+
+    it('restores the active tab from the custom param, ignoring "section"', () => {
+      vi.mocked(useCurrentStateAndParams).mockReturnValue({
+        state: { name: 'test-state' } as any,
+        params: { section: 'tab1', coi_tab: 'tab2' },
+      });
+
+      renderWithSyncKey();
+
+      expect(screen.getByRole('tab', { name: 'Tab 2' })).toHaveAttribute(
+        'aria-selected',
+        'true',
+      );
+      expect(screen.getByRole('tab', { name: 'Tab 1' })).toHaveAttribute(
+        'aria-selected',
+        'false',
+      );
+    });
+
+    // The tab only survives a re-render if its param round-trips through the
+    // route, so sibling params must be carried along untouched.
+    it('keeps sibling route params when switching tabs', async () => {
+      const user = userEvent.setup();
+      vi.mocked(useCurrentStateAndParams).mockReturnValue({
+        state: { name: 'test-state' } as any,
+        params: { tab: 'coi', matching_tab: 'reviewers', coi_tab: 'tab1' },
+      });
+
+      renderWithSyncKey();
+
+      await user.click(screen.getByRole('tab', { name: 'Tab 2' }));
+
+      expect(mockRouter.stateService.go).toHaveBeenCalledWith(
+        'test-state',
+        { tab: 'coi', matching_tab: 'reviewers', coi_tab: 'tab2' },
+        { location: 'replace' },
+      );
+    });
+  });
 });
