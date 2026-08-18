@@ -20,6 +20,7 @@ import { OrderProviderActions } from '../actions/OrderProviderActions';
 import { OrderStateField } from '../details/OrderStateField';
 import { createOrderStateOptions } from '../OrderStates';
 
+import { OrderCommunicationCell } from './OrderCommunicationCell';
 import { OrdersListExpandableRow } from './OrdersListExpandableRow';
 import { OrderTablePlaceholderActions } from './OrderTablePlaceholderActions';
 import { OrderTypeCell } from './OrderTypeCell';
@@ -51,6 +52,12 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'request_comment',
   // Approval badge
   'auto_approved',
+  // Communication column
+  'provider_message',
+  'consumer_message',
+  'provider_message_updated_at',
+  'consumer_message_updated_at',
+  'consumer_message_attachment',
   // Order summary shown in the approve/reject dialogs, which must identify the
   // order even when the matching columns are hidden.
   'project_name',
@@ -127,6 +134,14 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       inlineFilter: (row) =>
         createOrderStateOptions().find((op) => op.value === row.state),
       id: 'state',
+    },
+    {
+      title: translate('Communication'),
+      render: OrderCommunicationCell,
+      keys: ['provider_message', 'consumer_message'] as Array<
+        keyof OrderDetails
+      >,
+      id: 'communication',
     },
     {
       title: translate('Type'),
