@@ -55,6 +55,8 @@ export const RejectByProviderButton: FunctionComponent<
         showInput: true,
         inputLabel: translate('Rejection reason (optional)'),
         positiveButton: translate('Reject'),
+        positiveButtonVariant: 'danger',
+        negativeButton: translate('Cancel'),
       },
     },
     refetch: props.refetch,
