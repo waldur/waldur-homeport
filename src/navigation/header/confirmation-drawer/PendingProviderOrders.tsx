@@ -14,7 +14,7 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
 import { PENDING_PROVIDER_ORDERS_FILTER } from './constants';
-import { OrderExpandableRow } from './OrderExpandableRow';
+import { PendingOrderExpandableRow } from './PendingOrderExpandableRow';
 
 export const PendingProviderOrders: React.FC<{}> = () => {
   const tableProps = useTable({
@@ -59,7 +59,7 @@ export const PendingProviderOrders: React.FC<{}> = () => {
       verboseName={translate('Orders')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
-      expandableRow={OrderExpandableRow}
+      expandableRow={PendingOrderExpandableRow}
       rowActions={({ row }) => (
         <OrderProviderActions
           order={row}
