@@ -67,12 +67,14 @@ const OptionRow: FC<{
         <OptionValue option={option} value={submittedValue} />
       </td>
       <td>
-        <Field
-          name={`attributes.${optionKey}`}
-          component={OptionField}
-          validate={validateFn}
-          {...params}
-        />
+        <div style={option?.type === 'integer' ? { width: 96 } : undefined}>
+          <Field
+            name={`attributes.${optionKey}`}
+            component={OptionField}
+            validate={validateFn}
+            {...params}
+          />
+        </div>
         <FormFieldError name={`attributes.${optionKey}`} />
       </td>
     </tr>
@@ -174,32 +176,40 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
             ) : hasOptions ? (
               <>
                 {hasUserSubmittedOptions ? (
-                  <div className="table-responsive">
-                    <table className="table table-row-bordered mb-0 align-middle">
-                      <thead>
-                        <tr>
-                          <th>{translate('Option')}</th>
-                          <th>{translate('Submitted value')}</th>
-                          <th>{translate('New value')}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {resourceOptions.order.map((key) => {
-                          const option = resourceOptions.options[key];
-                          const submittedValue = userSubmittedOptions[key];
-                          if (submittedValue === undefined) return null;
-                          return (
-                            <OptionRow
-                              key={key}
-                              optionKey={key}
-                              option={option}
-                              submittedValue={submittedValue}
-                              resourceOptions={resourceOptions}
-                            />
-                          );
-                        })}
-                      </tbody>
-                    </table>
+                  // Rounding lives on the outer box so its `overflow-hidden`
+                  // cannot override `table-responsive`'s horizontal scroll.
+                  <div className="border rounded overflow-hidden">
+                    <div className="table-responsive">
+                      <table className="table table-sm table-row-bordered mb-0 align-middle">
+                        <thead>
+                          <tr>
+                            <th>{translate('Option')}</th>
+                            <th>{translate('Submitted value')}</th>
+                            {/* Shrink to the field it holds instead of taking
+                                the table's remaining width. */}
+                            <th style={{ width: '1%' }}>
+                              {translate('New value')}
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {resourceOptions.order.map((key) => {
+                            const option = resourceOptions.options[key];
+                            const submittedValue = userSubmittedOptions[key];
+                            if (submittedValue === undefined) return null;
+                            return (
+                              <OptionRow
+                                key={key}
+                                optionKey={key}
+                                option={option}
+                                submittedValue={submittedValue}
+                                resourceOptions={resourceOptions}
+                              />
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 ) : (
                   <OptionsForm options={resourceOptions} />

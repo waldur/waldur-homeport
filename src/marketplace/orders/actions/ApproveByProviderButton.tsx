@@ -32,7 +32,7 @@ export const ApproveByProviderButton: FunctionComponent<
         order: props.row,
         refetch: props.refetch,
       },
-      size: 'lg',
+      size: 'md',
     });
   };
 

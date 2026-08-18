@@ -14,7 +14,7 @@ import { getOrderType } from '../utils';
  */
 export const OrderSummaryRows: FC<{ order: OrderDetails }> = ({ order }) => {
   return (
-    <FormTable detailsMode>
+    <FormTable hideActions detailsMode bordered={false}>
       <FormTable.Item
         label={translate('Resource')}
         value={<ResourceNameField row={order} />}
