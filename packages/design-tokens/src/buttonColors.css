@@ -37,10 +37,14 @@
   --btn-tertiary-bg-pressed: var(--color-gray-100);
   --btn-tertiary-border: var(--color-gray-300);
   --btn-tertiary-text: var(--color-gray-700);
-  --btn-tertiary-focus-ring: var(--color-gray-500);
+  --btn-tertiary-focus-ring: var(--color-gray-100);
 
   /* Deliberately separate from --btn-tertiary-bg-hover — see migration notes. */
   --btn-text-secondary-hover-bg: var(--color-gray-100);
+  /* Deliberately separate from --btn-tertiary-focus-ring too — the real
+     button's text-secondary focus ring is one step darker than
+     tertiary's, not the same value, despite both being gray rings. */
+  --btn-text-secondary-focus-ring: var(--color-gray-200);
 
   --btn-danger-bg: var(--color-error-50);
   --btn-danger-bg-hover: var(--color-error-200);
@@ -93,6 +97,11 @@
 }
 
 :root[data-theme='dark'] {
+  /* Missing entirely before — fell back to :root's brand-600, one step
+     too dark for a ring meant to stand out against a dark page. See
+     migration notes. */
+  --btn-primary-focus-ring: var(--waldur-brand-500);
+
   --btn-secondary-bg: var(--waldur-brand-900);
   --btn-secondary-bg-hover: var(--waldur-brand-700);
   --btn-secondary-bg-pressed: var(--waldur-brand-600);
@@ -105,30 +114,31 @@
   --btn-tertiary-bg-pressed: var(--color-gray-700);
   --btn-tertiary-border: var(--color-gray-700);
   --btn-tertiary-text: var(--color-gray-300);
-  --btn-tertiary-focus-ring: var(--color-gray-400);
+  --btn-tertiary-focus-ring: var(--color-gray-800);
 
   --btn-text-secondary-hover-bg: var(--color-gray-800);
+  --btn-text-secondary-focus-ring: var(--color-gray-700);
 
   --btn-danger-bg: var(--color-error-900);
   --btn-danger-bg-hover: var(--color-error-700);
   --btn-danger-bg-pressed: var(--color-error-400);
   --btn-danger-border: var(--color-error-400);
   --btn-danger-text: var(--color-error-400);
-  --btn-danger-focus-ring: var(--color-error-400);
+  --btn-danger-focus-ring: var(--color-error-500);
 
   --btn-warning-bg: var(--color-warning-900);
   --btn-warning-bg-hover: var(--color-warning-700);
   --btn-warning-bg-pressed: var(--color-warning-300);
   --btn-warning-border: var(--color-warning-500);
   --btn-warning-text: var(--color-warning-400);
-  --btn-warning-focus-ring: var(--color-warning-400);
+  --btn-warning-focus-ring: var(--color-warning-500);
 
   --btn-success-bg: var(--color-success-900);
   --btn-success-bg-hover: var(--color-success-700);
   --btn-success-bg-pressed: var(--color-success-400);
   --btn-success-border: var(--color-success-400);
   --btn-success-text: var(--color-success-400);
-  --btn-success-focus-ring: var(--color-success-400);
+  --btn-success-focus-ring: var(--color-success-500);
 
   --btn-disabled-bg: var(--color-gray-800);
   --btn-disabled-text: var(--color-gray-500);

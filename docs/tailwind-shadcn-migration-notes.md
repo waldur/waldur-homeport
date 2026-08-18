@@ -154,6 +154,29 @@ navigation:
   focus for unrelated reasons, so only these three needed it added
   explicitly.
 
+### Focus ring color
+
+The ring's color is its own per-variant token
+(`--btn-<variant>-focus-ring`), not derived from the variant's border or
+text color, and light/dark are independent values — dark mode is not
+simply a computed lighten/darken of light mode. Two things that aren't
+obvious from the naming:
+
+- `tertiary`/`tertiary-ghost` share `--btn-tertiary-focus-ring`
+  (`gray-100` light, `gray-800` dark) — a deliberately faint ring, barely
+  visible against the page. `text-secondary` looks similar (also a gray
+  ring on a gray-bordered-adjacent button) but uses its own
+  `--btn-text-secondary-focus-ring` (`gray-200` light, `gray-700` dark) —
+  one step darker in both themes, not the same value.
+- `primary`/`text-primary` share `--btn-primary-focus-ring`, and
+  `secondary`/`text-secondary`'s background states share
+  `--btn-secondary-focus-ring` — both are `brand-600` in light but
+  `brand-500` in dark, a brighter step than the light value's ramp
+  position, not the same brand ramp index carried over unchanged.
+  `danger`/`warning`/`success` (and their `text-*` counterparts) follow
+  the same pattern against their own ramps: `-600` in light, `-500` in
+  dark.
+
 ### Active/pressed state
 
 Pressed-state colors are their own ramp step, not a duplicate of hover's:
