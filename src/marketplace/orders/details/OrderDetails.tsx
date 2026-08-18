@@ -14,6 +14,9 @@ import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { useTitle } from '@/navigation/title';
 import { IBreadcrumbItem, PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 import { OrderActionsButton } from '../actions/OrderActionsButton';
 
@@ -210,6 +213,16 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
     getOrganizationProjectsBreadcrumbItem,
   } = usePresetBreadcrumbItems();
 
+  const user = useUser();
+  const canActAsProvider = useMemo(
+    () =>
+      hasPermission(user, {
+        permission: PermissionEnum.APPROVE_ORDER,
+        customerId: props.order?.provider_uuid,
+      }),
+    [user, props.order?.provider_uuid],
+  );
+
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
     const order = props.order;
     if (!order) return [];
@@ -251,6 +264,15 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
         truncate: true,
         tooltipText: `${order.category_title}: ${order.resource_name}`,
       },
+      // A provider arriving from their Orders table would otherwise have no way
+      // back to it: the rest of this trail is the customer's project hierarchy.
+      canActAsProvider && {
+        key: 'marketplace-provider-orders',
+        text: translate('Orders'),
+        to: 'marketplace-provider-orders',
+        params: { uuid: order.provider_uuid },
+        ellipsis: 'xxl',
+      },
       {
         key: 'order',
         text:
@@ -264,8 +286,8 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
         active: true,
         truncate: true,
       },
-    ];
-  }, [props.order]);
+    ].filter(Boolean) as IBreadcrumbItem[];
+  }, [props.order, canActAsProvider]);
   useBreadcrumbs(breadcrumbItems);
 
   const tabs = useMemo(
