@@ -74,13 +74,6 @@ const weightedSum = (
   return total;
 };
 
-/** `current_cost` is served by the policy endpoints but not yet in the SDK
- *  types, the same way `incurred`/`compensation` are read off the costs
- *  endpoint. Undefined on backends that predate it. */
-const policyCurrentCost = (policy: unknown): number | undefined =>
-  (policy as { current_cost?: number | string })?.current_cost as
-    number | undefined;
-
 const findMatchingSlurmPolicy = (
   resource: Resource,
   slurmPolicies: SlurmPeriodicUsagePolicy[],
@@ -334,7 +327,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       // which covers the current month only and knows nothing of the pending
       // draw. The fallback keeps older backends working.
       const currentTotal = safeNumber(
-        policyCurrentCost(p) ?? p.billing_price_estimate?.total,
+        p.current_cost ?? p.billing_price_estimate?.total,
       );
       const limit = safeNumber(p.limit_cost);
       const sat = limit > 0 ? (currentTotal / limit) * 100 : 0;
@@ -370,7 +363,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     for (const p of customerPolicies) {
       const limit = safeNumber(p.limit_cost);
       const currentTotal = safeNumber(
-        policyCurrentCost(p) ??
+        p.current_cost ??
           (p as { billing_price_estimate?: { total?: string } })
             .billing_price_estimate?.total,
       );

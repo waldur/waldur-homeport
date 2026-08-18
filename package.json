@@ -119,7 +119,7 @@
     "waldur-auth-core": "workspace:*",
     "waldur-design-tokens": "workspace:*",
     "waldur-i18n-runtime": "workspace:*",
-    "waldur-js-client": "8.1.0-rc.24.dev.20260811062039.146",
+    "waldur-js-client": "8.1.3-rc.1.dev.20260818074340.184",
     "waldur-runtime-config": "workspace:*",
     "waldur-telemetry": "workspace:*",
     "waldur-ui": "workspace:*",
