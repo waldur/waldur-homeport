@@ -202,7 +202,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-secondary-color)]',
           'hover:bg-[var(--btn-text-secondary-hover-bg)]',
-          'focus:bg-[var(--btn-text-secondary-hover-bg)] focus:shadow-[0_0_0_2px_var(--btn-tertiary-focus-ring)]',
+          'focus:bg-[var(--btn-text-secondary-hover-bg)] focus:shadow-[0_0_0_2px_var(--btn-text-secondary-focus-ring)]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
