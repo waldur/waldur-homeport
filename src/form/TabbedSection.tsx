@@ -22,6 +22,11 @@ interface TabbedSectionProps {
   enableSearch?: boolean;
   hideActions?: boolean;
   children: ReactNode;
+  // URL query param used to persist the active tab. Must be declared as a
+  // dynamic param on the enclosing route, otherwise UI-Router drops it and the
+  // active tab silently resets to the first tab on any re-render (e.g. after a
+  // field save refetch). Defaults to 'section' to match the settings routes.
+  syncKey?: string;
 }
 
 export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
@@ -30,6 +35,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
   enableSearch,
   hideActions,
   children,
+  syncKey = 'section',
 }) => {
   const [query, setQuery] = useState('');
 
@@ -49,7 +55,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
 
   const { activeKey, handleSelect, defaultActiveKey } = useSettingsUrlSync(
     tabDefs,
-    'section',
+    syncKey,
   );
 
   // 2. Filter fields

@@ -149,13 +149,15 @@ const getHandlingLabel = (
   type: CoiTypeEnum,
   config: CallCoiConfiguration,
 ): { label: string; variant: BadgeVariant } => {
-  if (config.recusal_required_types?.includes(type)) {
+  const includesType = (types: readonly string[] | undefined) =>
+    Boolean(types?.includes(type));
+  if (includesType(config.recusal_required_types)) {
     return { label: translate('Recusal'), variant: 'danger' };
   }
-  if (config.management_allowed_types?.includes(type)) {
+  if (includesType(config.management_allowed_types)) {
     return { label: translate('Management'), variant: 'warning' };
   }
-  if (config.disclosure_only_types?.includes(type)) {
+  if (includesType(config.disclosure_only_types)) {
     return { label: translate('Disclosure'), variant: 'info' };
   }
   return { label: translate('Not configured'), variant: 'secondary' };

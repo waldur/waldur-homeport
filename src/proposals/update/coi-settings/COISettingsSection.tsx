@@ -2,6 +2,7 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import {
+  type CallCoiConfiguration,
   proposalProtectedCallsCoiConfigurationPartialUpdate,
   proposalProtectedCallsCoiConfigurationRetrieve,
 } from 'waldur-js-client';
@@ -50,7 +51,7 @@ const DISCLOSURE_LEVEL_OPTIONS = [
   { value: 'full_details', label: translate('Full proposal details') },
 ];
 
-const COI_TYPE_OPTIONS = [
+export const COI_TYPE_OPTIONS = [
   // Real conflicts (must recuse)
   { value: 'INST_SAME', label: translate('Same institution') },
   { value: 'FIN_DIRECT', label: translate('Direct financial interest') },
@@ -85,6 +86,33 @@ const COI_TYPE_LABELS = COI_TYPE_OPTIONS.reduce(
 const formatTypeList = (types: string[] | undefined) => {
   if (!types?.length) return translate('Not configured');
   return types.map((t) => COI_TYPE_LABELS[t] || t).join(', ');
+};
+
+// The three mutually-exclusive type-handling rule selectors. A conflict type
+// may only be assigned to a single rule, so options already picked in the other
+// rules are removed from a selector's list (WAL-9601).
+const TYPE_HANDLING_FIELDS = [
+  'recusal_required_types',
+  'management_allowed_types',
+  'disclosure_only_types',
+] as const;
+
+type TypeHandlingField = (typeof TYPE_HANDLING_FIELDS)[number];
+
+export const getAvailableTypeOptions = (
+  config: CallCoiConfiguration | undefined,
+  currentField: TypeHandlingField,
+) => {
+  const currentValues = new Set<string>(config?.[currentField] ?? []);
+  const usedInOtherFields = new Set<string>(
+    TYPE_HANDLING_FIELDS.filter((field) => field !== currentField).flatMap(
+      (field) => config?.[field] ?? [],
+    ),
+  );
+  // Keep the current selection visible; drop only types owned by other rules.
+  return COI_TYPE_OPTIONS.filter(
+    (opt) => currentValues.has(opt.value) || !usedInOtherFields.has(opt.value),
+  );
 };
 
 export const COISettingsSection: FC<COISettingsSectionProps> = ({
@@ -147,6 +175,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
       }
       actions={<COISummaryButton config={config} />}
       enableSearch
+      syncKey="coi_tab"
     >
       <TabbedSection.Tab id="detection" title={translate('Detection')}>
         <EditFieldProvider
@@ -268,7 +297,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             description={translate(
               'Conflict types that require the reviewer to withdraw from reviewing the proposal entirely',
             )}
-            options={COI_TYPE_OPTIONS}
+            options={getAvailableTypeOptions(config, 'recusal_required_types')}
             isMulti
             simpleValue
             placeholder={translate('Select COI types...')}
@@ -281,7 +310,10 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             description={translate(
               'Conflict types where the reviewer may continue with an approved management plan',
             )}
-            options={COI_TYPE_OPTIONS}
+            options={getAvailableTypeOptions(
+              config,
+              'management_allowed_types',
+            )}
             isMulti
             simpleValue
             placeholder={translate('Select COI types...')}
@@ -294,7 +326,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             description={translate(
               'Conflict types that only need to be disclosed but do not require further action',
             )}
-            options={COI_TYPE_OPTIONS}
+            options={getAvailableTypeOptions(config, 'disclosure_only_types')}
             isMulti
             simpleValue
             placeholder={translate('Select COI types...')}
