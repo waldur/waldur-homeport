@@ -13,7 +13,6 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
-import { BulkConsumerActions } from './BulkConsumerActions';
 import { PENDING_CONSUMER_ORDERS_FILTER } from './constants';
 
 export const PendingConsumerOrders: React.FC<{}> = () => {
@@ -57,12 +56,6 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
       minHeight="auto"
-      tableActions={
-        <BulkConsumerActions
-          orders={tableProps.rows}
-          refetch={tableProps.fetch}
-        />
-      }
       rowActions={({ row }) => (
         <OrderConsumerActions
           order={row}
