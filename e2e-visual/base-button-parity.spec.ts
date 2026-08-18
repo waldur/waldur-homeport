@@ -103,7 +103,22 @@ function readPng(buffer: Buffer): PNG {
   return PNG.sync.read(buffer);
 }
 
-const MAX_DIMENSION_SLACK = 4; // px allowance for font padding & subpixel text layout rounding
+// Empirically measured across all 12 variants × 2 sizes × 2 themes
+// (enabled), via locator.boundingBox() — exact CSS pixels, not the
+// screenshot PNG's rounded integer dimensions: the real noise ceiling is
+// 0.0625px. PNG dimensions were tried first and rejected — Playwright's
+// screenshot clip region rounds based on the element's exact fractional
+// *position* on the page, not just its own width, so a genuinely tiny
+// ~0.06px difference and a real ~2px regression could both round to the
+// same 1px integer PNG delta depending on where the element happened to
+// sit. Confirmed by deliberately reintroducing a real ~1.94px width bug
+// and finding it produced the exact same 1px *PNG* delta as the correct
+// code's own noise (73 vs 74, same magnitude as 75 vs 74) — the PNG-based
+// version of this check would have silently passed it. See migration
+// notes for the full investigation. 0.5 gives ~8x headroom over the
+// measured 0.0625px noise ceiling while staying far below any real
+// regression (the bug this replaced measured ~1.94px).
+const MAX_DIMENSION_SLACK_PX = 0.5;
 
 /** Copies src into a width×height canvas, top-left aligned, extra area fully opaque black. */
 function padTo(png: PNG, width: number, height: number): PNG {
@@ -112,27 +127,49 @@ function padTo(png: PNG, width: number, height: number): PNG {
   return out;
 }
 
-/** Diffs two already-captured screenshot buffers and asserts pixel parity. */
-function expectBufferParity(oldBuf: Buffer, newBuf: Buffer, name: string) {
-  let oldPng = readPng(oldBuf);
-  let newPng = readPng(newBuf);
+interface Box {
+  width: number;
+  height: number;
+}
 
-  const widthDelta = Math.abs(oldPng.width - newPng.width);
-  const heightDelta = Math.abs(oldPng.height - newPng.height);
+/**
+ * Diffs two already-captured screenshot buffers and asserts pixel parity.
+ * oldBox/newBox are each locator's exact-pixel boundingBox() at capture
+ * time — the actual size-parity decision happens on those, not on the
+ * PNG's rounded dimensions (see MAX_DIMENSION_SLACK_PX above for why).
+ */
+function expectBufferParity(
+  oldBuf: Buffer,
+  newBuf: Buffer,
+  oldBox: Box,
+  newBox: Box,
+  name: string,
+) {
+  const widthDeltaPx = Math.abs(oldBox.width - newBox.width);
+  const heightDeltaPx = Math.abs(oldBox.height - newBox.height);
 
-  if (widthDelta > MAX_DIMENSION_SLACK || heightDelta > MAX_DIMENSION_SLACK) {
+  if (
+    widthDeltaPx > MAX_DIMENSION_SLACK_PX ||
+    heightDeltaPx > MAX_DIMENSION_SLACK_PX
+  ) {
     throw new Error(
-      `${name}: dimension mismatch — old ${oldPng.width}x${oldPng.height} vs new ${newPng.width}x${newPng.height} ` +
-        `(beyond the ${MAX_DIMENSION_SLACK}px subpixel-rounding allowance). Not a color/rendering difference — ` +
+      `${name}: dimension mismatch — old ${oldBox.width}x${oldBox.height} vs new ${newBox.width}x${newBox.height} ` +
+        `(beyond the ${MAX_DIMENSION_SLACK_PX}px exact-pixel allowance). Not a color/rendering difference — ` +
         `the components are sized differently.`,
     );
   }
 
-  // Within slack: pad the smaller buffer instead of throwing, and let the
-  // padded region count as fully differing pixels in the ratio below — a
-  // real few-px size bug still fails on ratio, a subpixel rounding
-  // difference doesn't.
-  if (widthDelta > 0 || heightDelta > 0) {
+  let oldPng = readPng(oldBuf);
+  let newPng = readPng(newBuf);
+
+  // The precise CSS-pixel check above is the real size-parity decision.
+  // This is purely mechanical: pixelmatch requires equal-sized buffers,
+  // and the PNG's rounded dimensions can still differ by a pixel even
+  // when the exact box sizes above are within tolerance (screenshot clip
+  // rounding) — pad the smaller one so pixelmatch has something to
+  // compare; the padded region counts as fully differing pixels in the
+  // ratio below.
+  if (oldPng.width !== newPng.width || oldPng.height !== newPng.height) {
     const width = Math.max(oldPng.width, newPng.width);
     const height = Math.max(oldPng.height, newPng.height);
     oldPng = padTo(oldPng, width, height);
@@ -177,10 +214,10 @@ function expectBufferParity(oldBuf: Buffer, newBuf: Buffer, name: string) {
 
 const FOREGROUND_DISTANCE_THRESHOLD = 30; // per-channel-sum distance from background to count as "content"
 
-// Recalibrated after the harness moved from a raw ?tw-parity route to a
+// Recalibrated after the harness moved from a raw route to a
 // Storybook story (different DOM wrapper chain around the buttons shifts
 // sub-pixel rendering slightly, even though the components/tokens are
-// unchanged) — the old ceiling (5, from the ?tw-parity harness) started
+// unchanged) — the old ceiling (5, from the raw-route harness) started
 // flaking here. Measured the new ceiling across three separate full
 // 192-case runs, including one against a genuinely cold Storybook server
 // (the scenario CI always hits) — all three converged on an identical max
@@ -258,17 +295,30 @@ function expectDominantColorParity(oldPng: PNG, newPng: PNG, name: string) {
   ).toBeLessThanOrEqual(CHROMATICITY_TOLERANCE);
 }
 
+/** Locator.boundingBox() is typed nullable (detached/hidden element) — these are always-visible test fixtures, so null means something is genuinely wrong. */
+async function requireBox(locator: Locator, name: string): Promise<Box> {
+  const box = await locator.boundingBox();
+  if (!box) {
+    throw new Error(
+      `${name}: boundingBox() returned null — element not visible/attached?`,
+    );
+  }
+  return box;
+}
+
 /** Screenshots both locators (assumed to already be in matching states) and diffs them. */
 async function expectPixelParity(
   oldLocator: Locator,
   newLocator: Locator,
   name: string,
 ) {
-  const [oldBuf, newBuf] = await Promise.all([
+  const [oldBuf, newBuf, oldBox, newBox] = await Promise.all([
     oldLocator.screenshot(),
     newLocator.screenshot(),
+    requireBox(oldLocator, name),
+    requireBox(newLocator, name),
   ]);
-  expectBufferParity(oldBuf, newBuf, name);
+  expectBufferParity(oldBuf, newBuf, oldBox, newBox, name);
 }
 
 for (const theme of ['light', 'dark'] as const) {
@@ -313,15 +363,98 @@ for (const theme of ['light', 'dark'] as const) {
           await oldBtn.hover();
           await page.waitForTimeout(350);
           const oldBuf = await oldBtn.screenshot();
+          const oldBox = await requireBox(oldBtn, `${theme}-${pairId}-hover`);
           await page.mouse.move(0, 0);
           await newBtn.hover();
           await page.waitForTimeout(350);
           const newBuf = await newBtn.screenshot();
-          expectBufferParity(oldBuf, newBuf, `${theme}-${pairId}-hover`);
+          const newBox = await requireBox(newBtn, `${theme}-${pairId}-hover`);
+          expectBufferParity(
+            oldBuf,
+            newBuf,
+            oldBox,
+            newBox,
+            `${theme}-${pairId}-hover`,
+          );
         });
 
-        test(`${pairId} — focus-visible`, async ({ page }) => {
+        test(`${pairId} — active`, async ({ page }) => {
+          // page.mouse.down() + an async getComputedStyle() can silently
+          // fail to reflect real :active state — especially testing
+          // several elements in one page load, where prior mouse moves
+          // leave stale layout/coordinate assumptions. Each Playwright
+          // test already gets its own fresh page, but the explicit
+          // matches(':active') check below still guards against a
+          // mouse.down() that missed (e.g. a scroll-position mismatch),
+          // since a false pass here would silently reintroduce the
+          // pressed-state bug this test exists to catch. See migration
+          // notes.
+          const oldBtn = page.locator(
+            `[data-pair="${pairId}"][data-role="old"]`,
+          );
+          const newBtn = page.locator(
+            `[data-pair="${pairId}"][data-role="new"]`,
+          );
+
+          await oldBtn.scrollIntoViewIfNeeded();
+          const oldRawBox = await requireBox(
+            oldBtn,
+            `${theme}-${pairId}-active`,
+          );
+          await page.mouse.move(
+            oldRawBox.x + oldRawBox.width / 2,
+            oldRawBox.y + oldRawBox.height / 2,
+          );
+          await page.mouse.down();
+          await page.waitForTimeout(350);
+          if (!(await oldBtn.evaluate((el) => el.matches(':active')))) {
+            throw new Error(
+              `${theme}-${pairId}-active: old button never entered :active state — mouse.down() missed?`,
+            );
+          }
+          const oldBuf = await oldBtn.screenshot();
+          const oldBox = await requireBox(oldBtn, `${theme}-${pairId}-active`);
+          await page.mouse.up();
+
+          await newBtn.scrollIntoViewIfNeeded();
+          const newRawBox = await requireBox(
+            newBtn,
+            `${theme}-${pairId}-active`,
+          );
+          await page.mouse.move(
+            newRawBox.x + newRawBox.width / 2,
+            newRawBox.y + newRawBox.height / 2,
+          );
+          await page.mouse.down();
+          await page.waitForTimeout(350);
+          if (!(await newBtn.evaluate((el) => el.matches(':active')))) {
+            throw new Error(
+              `${theme}-${pairId}-active: new button never entered :active state — mouse.down() missed?`,
+            );
+          }
+          const newBuf = await newBtn.screenshot();
+          const newBox = await requireBox(newBtn, `${theme}-${pairId}-active`);
+          await page.mouse.up();
+
+          expectBufferParity(
+            oldBuf,
+            newBuf,
+            oldBox,
+            newBox,
+            `${theme}-${pairId}-active`,
+          );
+        });
+
+        test(`${pairId} — focus (keyboard/programmatic)`, async ({ page }) => {
           // See the hover test above for why the wait is load-bearing.
+          // Named "keyboard/programmatic" (not "focus-visible") because
+          // that's genuinely what .focus() exercises here — a JS-level
+          // focus() call, which Chromium's :focus-visible heuristic
+          // treats the same as keyboard navigation. BaseButtonTw ties its
+          // ring to plain :focus (not :focus-visible — see BaseButton.tsx
+          // for why), so this test alone can't distinguish the two; the
+          // — focus (mouse click) test below exercises the path that
+          // actually differs between them. See migration notes.
           const oldBtn = page.locator(
             `[data-pair="${pairId}"][data-role="old"]`,
           );
@@ -331,10 +464,59 @@ for (const theme of ['light', 'dark'] as const) {
           await oldBtn.focus();
           await page.waitForTimeout(350);
           const oldBuf = await oldBtn.screenshot();
+          const oldBox = await requireBox(oldBtn, `${theme}-${pairId}-focus`);
           await newBtn.focus();
           await page.waitForTimeout(350);
           const newBuf = await newBtn.screenshot();
-          expectBufferParity(oldBuf, newBuf, `${theme}-${pairId}-focus`);
+          const newBox = await requireBox(newBtn, `${theme}-${pairId}-focus`);
+          expectBufferParity(
+            oldBuf,
+            newBuf,
+            oldBox,
+            newBox,
+            `${theme}-${pairId}-focus`,
+          );
+        });
+
+        test(`${pairId} — focus (mouse click)`, async ({ page }) => {
+          // A real .click() — not .focus() — is the only way to trigger
+          // Chromium's :focus-visible-suppression heuristic for
+          // pointer-originated focus. This is what caught the bug the
+          // test above couldn't: BaseButtonTw originally used
+          // focus-visible:, which (correctly, per spec) never applies
+          // after a mouse click, silently leaving only whatever :hover
+          // had already set — a real, user-reported divergence from the
+          // old button, which ties its ring to plain :focus regardless
+          // of input method. See migration notes.
+          const oldBtn = page.locator(
+            `[data-pair="${pairId}"][data-role="old"]`,
+          );
+          const newBtn = page.locator(
+            `[data-pair="${pairId}"][data-role="new"]`,
+          );
+          await oldBtn.scrollIntoViewIfNeeded();
+          await oldBtn.click();
+          await page.waitForTimeout(350);
+          const oldBuf = await oldBtn.screenshot();
+          const oldBox = await requireBox(
+            oldBtn,
+            `${theme}-${pairId}-focus-click`,
+          );
+          await newBtn.scrollIntoViewIfNeeded();
+          await newBtn.click();
+          await page.waitForTimeout(350);
+          const newBuf = await newBtn.screenshot();
+          const newBox = await requireBox(
+            newBtn,
+            `${theme}-${pairId}-focus-click`,
+          );
+          expectBufferParity(
+            oldBuf,
+            newBuf,
+            oldBox,
+            newBox,
+            `${theme}-${pairId}-focus-click`,
+          );
         });
       }
     }
