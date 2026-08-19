@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { usersRetrieve } from 'waldur-js-client';
 
 import { usePermissionView } from '@/auth/PermissionLayout';
@@ -14,9 +14,15 @@ import { translate } from '@/i18n';
 import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { IBreadcrumbItem, PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { router } from '@/router';
 import { UserProfileHero } from '@/user/dashboard/UserProfileHero';
 import { useUser } from '@/workspace/hooks';
 
+import {
+  clearBlockedNavigation,
+  getBlockedNavigation,
+  getStateLabel,
+} from './blockedNavigation';
 import { CompleteYourProfileBanner } from './CompleteYourProfileBanner';
 import { useProfileCompleteness } from './useProfileCompleteness';
 
@@ -129,6 +135,37 @@ export const UserManageContainer = ({ isPersonal }) => {
     [user, profileCompleteness],
   );
 
+  // Read once on mount: the gate stores the intent just before redirecting here.
+  const blockedPage = useMemo(() => {
+    const blocked = getBlockedNavigation();
+    return blocked
+      ? { ...blocked, label: getStateLabel(blocked.toState) }
+      : undefined;
+  }, []);
+
+  // Return the user to what they asked for, once the gate is satisfied. Only if
+  // they were *seen* blocked here: a server-side 428 can redirect someone who
+  // already looks valid, and resuming on mount would loop back into that 428.
+  const wasBlocked = useRef(false);
+  useEffect(() => {
+    if (!isPersonal || !blockedPage) {
+      return;
+    }
+    // Not loaded yet: `isValidUser` is falsy for lack of data, not because the
+    // user is actually blocked, so recording it here would be wrong.
+    if (!user || !profileCompleteness) {
+      return;
+    }
+    if (!isValidUser) {
+      wasBlocked.current = true;
+      return;
+    }
+    if (wasBlocked.current) {
+      clearBlockedNavigation();
+      router.stateService.go(blockedPage.toState, blockedPage.toParams);
+    }
+  }, [isPersonal, isValidUser, blockedPage, user, profileCompleteness]);
+
   const tabs = useMemo<PageBarTab[]>(
     () =>
       [
@@ -226,14 +263,12 @@ export const UserManageContainer = ({ isPersonal }) => {
       return {
         permission: 'custom',
         banner: (
-          <CompleteYourProfileBanner
-            missingFields={profileCompleteness?.missing_fields}
-          />
+          <CompleteYourProfileBanner blockedPageLabel={blockedPage?.label} />
         ),
       };
     }
     return null;
-  }, [isPersonal, isValidUser, profileCompleteness]);
+  }, [isPersonal, isValidUser, blockedPage]);
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -28,6 +28,7 @@ vi.mock('./core/StorageManager', () => ({
     set: (...args) => mockGroupInvitationTokenSet(...args),
   },
   RedirectStorage: { set: vi.fn() },
+  BlockedNavigationStorage: { set: vi.fn(), get: vi.fn(), remove: vi.fn() },
 }));
 
 vi.mock('./core/utils', () => ({
