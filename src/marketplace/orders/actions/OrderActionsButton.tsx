@@ -18,6 +18,7 @@ import { MarkAsDoneButton } from './MarkAsDoneButton';
 import { OrderConsumerActions } from './OrderConsumerActions';
 import { OrderProviderActions } from './OrderProviderActions';
 import { RetryOrderButton } from './RetryOrderButton';
+import { shouldHideProviderActions } from './selectors';
 import { SetAsErredButton } from './SetAsErredButton';
 
 export const OrderActionsButton = ({
@@ -31,11 +32,10 @@ export const OrderActionsButton = ({
 }) => {
   const user = useUser();
 
-  // Hide provider actions for site agent offerings when display is disabled
-  const hideProviderActions =
-    order.offering_type === SITE_AGENT_PLUGIN &&
-    !offering?.plugin_options
-      ?.enable_display_of_order_actions_for_service_provider;
+  const hideProviderActions = shouldHideProviderActions(
+    order,
+    offering?.plugin_options,
+  );
 
   const showCancelButton = useMemo(() => {
     return (

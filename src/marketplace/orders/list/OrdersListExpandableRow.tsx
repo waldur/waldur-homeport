@@ -12,8 +12,6 @@ import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { OrderProviderActions } from '../actions/OrderProviderActions';
-
 export const OrdersListExpandableRow: FunctionComponent<{
   row: OrderDetails;
 }> = ({ row: order }) => (
@@ -78,12 +76,5 @@ export const OrdersListExpandableRow: FunctionComponent<{
         }
       />
     ) : null}
-
-    {order.state === 'pending-provider' && (
-      <Field
-        label={translate('Actions')}
-        value={<OrderProviderActions order={order} size="sm" />}
-      />
-    )}
   </ExpandableContainer>
 );
