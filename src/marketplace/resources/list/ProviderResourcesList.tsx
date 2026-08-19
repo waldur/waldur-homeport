@@ -306,6 +306,8 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'slug', // SetSlugAction
     'end_date', // EditResourceEndDateByProviderAction
     'resource_effective_end_date', // Termination date column (grace-aware)
+    'project_end_date', // Resource details popup
+    'project_effective_end_date', // Resource details popup (grace period display)
     'resource_type', // TerminateAction
     'paused', // ResourceFlags inline badge
     'downscaled', // ResourceFlags inline badge
