@@ -302,11 +302,16 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           <ProjectDashboardCredit project={project} className="mb-5" />
         )}
       </Row>
-      {/* The Health block shows when billing is visible and the project has a
-          credit. The sections below gate themselves per view — each renders
-          only where its dashboard.* feature is enabled. */}
-      {showBillingInfo && <ProjectCreditHealthBlock project={project} />}
-      <UsageViewsSection project={project} />
+      {/* The Health block shows when billing is visible, the project is opted
+          into credit reports, and it has a credit. The sections below gate
+          themselves per view — each renders only where its dashboard.* feature
+          is enabled. */}
+      {showBillingInfo && project.display_credit_reports && (
+        <ProjectCreditHealthBlock project={project} />
+      )}
+      {project.display_credit_reports && (
+        <UsageViewsSection project={project} />
+      )}
     </>
   );
 };

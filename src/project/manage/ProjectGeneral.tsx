@@ -6,6 +6,7 @@ import { ENV } from '@/core/config';
 import { parseDate } from '@/core/dateUtils';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import {
+  BooleanEditField,
   DateEditField,
   EditFieldProvider,
   MarkdownEditField,
@@ -184,6 +185,15 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
               'The maximum number of service accounts that can be created in this project.',
             )}
             min={0}
+            isStaffOnly
+          />
+
+          <BooleanEditField
+            name="display_credit_reports"
+            label={translate('Credit reports')}
+            description={translate(
+              'Show credit burn-down and usage analytics on this project dashboard.',
+            )}
             isStaffOnly
           />
         </FormTable>
