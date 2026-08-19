@@ -119,6 +119,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
               <>
                 {canSetEndDate && (
                   <CompactEditButton
+                    variant="secondary"
                     onClick={() =>
                       openDialog(EditEndDateDialog, {
                         resolve: { project, name: 'end_date' },
