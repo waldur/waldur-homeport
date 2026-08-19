@@ -97,6 +97,7 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'downscaled', // ResourceFlags inline badge
     'restrict_member_access', // ResourceFlags inline badge
     'project_is_in_grace_period', // ResourceFlags inline badge
+    'project_end_date', // Project end date column + resource details popup
     'project_effective_end_date', // ResourceFlags inline badge (expired/conflict)
     'resource_effective_end_date', // ResourceFlags in-grace/conflict + Termination date column
 

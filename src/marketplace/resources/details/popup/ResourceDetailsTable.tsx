@@ -22,6 +22,8 @@ export const ResourceDetailsTable: FC<OwnProps> = ({ resource }) => {
           'project_name',
           'status',
           'created',
+          'project_end_date',
+          'effective_termination',
         ],
       }),
     [resource],
@@ -39,7 +41,10 @@ export const ResourceDetailsTable: FC<OwnProps> = ({ resource }) => {
         <FormTable.Item
           key={field.name}
           label={field.label}
-          value={<FieldWithCopy value={field.value} />}
+          value={
+            field.hasCopy ? <FieldWithCopy value={field.value} /> : field.value
+          }
+          tooltip={field.tooltip}
         />
       ))}
     </FormTable>
