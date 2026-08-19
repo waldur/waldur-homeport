@@ -8,24 +8,52 @@ chmod g+rwx $TEMP_DIR
 envsubst '$ASSET_PATH' < /etc/nginx/nginx-tpl.conf > $TEMP_DIR/nginx.conf
 cp $TEMP_DIR/nginx.conf /etc/nginx/nginx.conf || true
 
-# Work with index.html in temp directory first
-cp /usr/share/nginx/html/index.orig.html $TEMP_DIR/index.html
+# One nginx location block per apps/* micro-app actually present under the
+# html root, regenerated on every start — see docs/micro-apps.md for why
+# this is keyed off $ASSET_PATH (same as the root app's own build/routing
+# below) rather than always pinned to the domain root. -mindepth/-maxdepth 2
+# scopes this to apps/* only, excluding the root app's own index.orig.html
+# one level up.
+MICRO_APPS_CONF=/etc/nginx/conf.d/micro-apps.conf
+: > "$MICRO_APPS_CONF"
+find /usr/share/nginx/html -mindepth 2 -maxdepth 2 -name index.orig.html | while read -r ORIG; do
+    APP_NAME=$(basename "$(dirname "$ORIG")")
+    cat >> "$MICRO_APPS_CONF" <<EOF
+location /${ASSET_PATH}${APP_NAME}/ {
+    alias /usr/share/nginx/html/${ASSET_PATH}${APP_NAME}/;
+    index index.html;
+    try_files \$uri \$uri/ /${ASSET_PATH}${APP_NAME}/index.html;
 
-if [ -n "${TITLE}" ]; then
-    sed "s/<title>Waldur | Cloud Service Management<\/title>/<title>${TITLE}<\/title>/" $TEMP_DIR/index.html > $TEMP_DIR/index.html.tmp
-    mv $TEMP_DIR/index.html.tmp $TEMP_DIR/index.html
-fi
+    location = /${ASSET_PATH}${APP_NAME}/index.html {
+        expires -1;
+    }
+}
+EOF
+done
 
-if [ -n "${API_URL}" ]; then
-    sed -E '/<link.*rel="shortcut icon".*href="[^"]*\/?favicon\.ico[^"]*".*>/s#href="[^"]*\/?favicon\.ico[^"]*"#href="'${API_URL}'api/icons/favicon"#' $TEMP_DIR/index.html > $TEMP_DIR/index.html.tmp
-    mv $TEMP_DIR/index.html.tmp $TEMP_DIR/index.html
+# Process every index.orig.html under the html root — the root app's own,
+# plus one per apps/* micro-app — into a sibling index.html. See
+# docs/micro-apps.md.
+find /usr/share/nginx/html -name index.orig.html | while read -r ORIG; do
+    DEST_DIR=$(dirname "$ORIG")
+    cp "$ORIG" $TEMP_DIR/index.html
 
-    sed "s|__API_URL__|${API_URL}|" $TEMP_DIR/index.html > $TEMP_DIR/index.html.tmp
-    mv $TEMP_DIR/index.html.tmp $TEMP_DIR/index.html
-fi
+    if [ -n "${TITLE}" ]; then
+        sed "s/<title>Waldur | Cloud Service Management<\/title>/<title>${TITLE}<\/title>/" $TEMP_DIR/index.html > $TEMP_DIR/index.html.tmp
+        mv $TEMP_DIR/index.html.tmp $TEMP_DIR/index.html
+    fi
 
-# Copy processed file back
-cp $TEMP_DIR/index.html /usr/share/nginx/html/index.html || true
+    if [ -n "${API_URL}" ]; then
+        sed -E '/<link.*rel="shortcut icon".*href="[^"]*\/?favicon\.ico[^"]*".*>/s#href="[^"]*\/?favicon\.ico[^"]*"#href="'${API_URL}'api/icons/favicon"#' $TEMP_DIR/index.html > $TEMP_DIR/index.html.tmp
+        mv $TEMP_DIR/index.html.tmp $TEMP_DIR/index.html
+
+        sed "s|__API_URL__|${API_URL}|" $TEMP_DIR/index.html > $TEMP_DIR/index.html.tmp
+        mv $TEMP_DIR/index.html.tmp $TEMP_DIR/index.html
+    fi
+
+    # Copy processed file back
+    cp $TEMP_DIR/index.html "$DEST_DIR/index.html" || true
+done
 
 # Handle asset path
 if [ -n "${ASSET_PATH}" ]; then

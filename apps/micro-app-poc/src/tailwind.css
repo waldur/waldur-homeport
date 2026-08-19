@@ -1,0 +1,25 @@
+/**
+ * Unlike waldur-homeport main src/tailwind.css, this needs none of the
+ * Metronic-workaround theme overrides (--spacing, --text-*, --radius-*
+ * pinned to px). There is no Metronic here forcing a 13px root font-size,
+ * so Tailwind default rem scale (assuming the standard 16px) is already
+ * correct. That in itself is a small piece of portability evidence: those
+ * overrides are a homeport-specific patch, not something BaseButton
+ * requires to render correctly.
+ */
+@import 'tailwindcss';
+@import 'waldur-design-tokens/buttonColors.css';
+
+/* Tailwind v4's automatic content detection scans outward from this file
+   toward the nearest .git/package.json root, but stops at this app's own
+   package.json (apps/micro-app-poc/package.json) rather than walking
+   further up to sibling workspace packages — waldur-ui resolves only
+   through node_modules symlinking, which auto-detection skips by
+   convention. Without this, BaseButton's classes never make it into the
+   generated CSS: the component renders with the right className string
+   (cva/cn both work fine standalone) but with no matching rules at all.
+   Explicit @source is the correct fix for a genuinely standalone
+   consumer anyway, not a workaround — relying on git-root
+   auto-detection only worked for waldur-homeport's own Storybook config
+   because it happens to share this same repository. */
+@source '../../../packages/ui/src';

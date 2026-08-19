@@ -6,7 +6,8 @@
   "license": "MIT",
   "type": "module",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
     "postinstall": "husky",
@@ -25,6 +26,8 @@
     "test:e2e": "playwright test --project e2e",
     "test:e2e:visual": "playwright test --project visual --workers=1",
     "test:storybook": "vitest --project=storybook run",
+    "apps:typecheck": "yarn workspaces foreach -A --include 'apps/*' run typecheck",
+    "apps:build": "yarn workspaces foreach -A --include 'apps/*' run build",
     "i18n:extract": "node locales/tools/extractLiteralsFromFiles.cjs",
     "i18n:check": "node locales/tools/checkTranslations.cjs",
     "i18n:check:dry": "node locales/tools/checkTranslations.cjs --dry-run",
