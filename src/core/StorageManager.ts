@@ -59,6 +59,12 @@ export const RedirectStorage = new JsonStorageManager<{
   toParams: object;
 }>('waldur/auth/redirect');
 
+/** Separate from RedirectStorage, which the login flow overwrites constantly. */
+export const BlockedNavigationStorage = new JsonStorageManager<{
+  toState: string;
+  toParams: object;
+}>('waldur/navigation/blocked');
+
 export const ImpersonationStorage = new StringStorageManager(
   'waldur/auth/impersonation',
 );

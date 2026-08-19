@@ -16,6 +16,11 @@ import { translate } from './i18n';
 import { ModalService } from './modal/actions';
 import { router } from './router';
 import { NotifyService } from './store/notify';
+import {
+  clearBlockedNavigation,
+  isResumableState,
+  rememberBlockedNavigation,
+} from './user/blockedNavigation';
 import { UsersService } from './user/UsersService';
 
 export function attachTransitions() {
@@ -79,6 +84,7 @@ export function attachTransitions() {
         if (result) {
           return;
         }
+        rememberBlockedNavigation(toStateName, transition.params());
         return transition.router.stateService.target('profile-manage');
       } catch {
         return transition.router.stateService.target('errorPage.serverError');
@@ -253,6 +259,13 @@ export function attachTransitions() {
     if (fromName) {
       setPrevState(fromName);
       setPrevParams(transition.params('from'));
+    }
+  });
+
+  // Reaching a gated page means the user is through the gate: intent is spent.
+  router.transitionService.onSuccess({}, (transition) => {
+    if (isResumableState(transition.to().name)) {
+      clearBlockedNavigation();
     }
   });
 
