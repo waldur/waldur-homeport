@@ -17,6 +17,7 @@ import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
 import { OrderProviderActions } from '../actions/OrderProviderActions';
+import { shouldHideProviderActions } from '../actions/selectors';
 import { OrderStateField } from '../details/OrderStateField';
 import { createOrderStateOptions } from '../OrderStates';
 
@@ -58,6 +59,9 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'provider_message_updated_at',
   'consumer_message_updated_at',
   'consumer_message_attachment',
+  // Provider action visibility + the site-agent rejection warning
+  'offering_type',
+  'offering_plugin_options',
   // Order summary shown in the approve/reject dialogs, which must identify the
   // order even when the matching columns are hidden.
   'project_name',
@@ -234,7 +238,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       enableExport={true}
       expandableRow={OrdersListExpandableRow}
       rowActions={({ row }) =>
-        row.state === 'pending-provider' ? (
+        row.state === 'pending-provider' && !shouldHideProviderActions(row) ? (
           <OrderProviderActions order={row} refetch={props.fetch} size="sm" />
         ) : (
           <TableDropdownToggle size="sm" disabled tooltip />
