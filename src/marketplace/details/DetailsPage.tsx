@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { startCase } from 'lodash-es';
 import React from 'react';
 import {
@@ -11,6 +11,7 @@ import {
 import { usePermissionView } from '@/auth/PermissionLayout';
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import { useProject } from '@/workspace/hooks';
@@ -33,8 +34,6 @@ export const OfferingDetailsPage: React.FC = () => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
-
-  const router = useRouter();
 
   const {
     isLoading: loading,
@@ -100,7 +99,7 @@ export const OfferingDetailsPage: React.FC = () => {
   }
 
   if (value.offering.state !== 'Active') {
-    router.stateService.go('errorPage.notFound');
+    goToNotFound();
     return null;
   }
 

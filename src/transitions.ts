@@ -250,7 +250,14 @@ export function attachTransitions() {
     if (error && error['redirectTo'] && error['status'] !== -1) {
       return transition.router.stateService.target(error['redirectTo']);
     } else {
-      return transition.router.stateService.target('errorPage.notFound');
+      // `location: false` keeps the address that produced the error; the
+      // error states have no url of their own, so the address bar would
+      // otherwise be rewritten to '/' while the 404 page is displayed.
+      return transition.router.stateService.target(
+        'errorPage.notFound',
+        undefined,
+        { location: false },
+      );
     }
   });
 

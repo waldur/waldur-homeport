@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, ReactNode } from 'react';
 import { Issue, supportIssuesRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
 import { useBreadcrumbs } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
@@ -32,10 +33,9 @@ export const IssueDetails: FunctionComponent<IssueDetailsProps> = ({
   const {
     params: { issue_uuid },
   } = useCurrentStateAndParams();
-  const router = useRouter();
 
   if (!issue_uuid) {
-    router.stateService.go('errorPage.notFound');
+    goToNotFound();
   }
 
   const {

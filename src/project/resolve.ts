@@ -3,13 +3,13 @@ import { projectsRetrieve } from 'waldur-js-client';
 
 import { queryClient } from '@/core/queryClient';
 import { getCustomer } from '@/customer/utils';
+import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
 import {
   fetchProjectMatrixRooms,
   projectMatrixRoomsKey,
 } from '@/matrix/chat/useProjectMatrixRooms';
 import { isMatrixChatEnabled } from '@/matrix/utils';
-import { router } from '@/router';
 import { NotifyService } from '@/store/notify';
 import store from '@/store/store';
 import { setCurrentCustomer, setCurrentProject } from '@/workspace/actions';
@@ -35,7 +35,7 @@ async function primeProjectMatrixRooms(projectUuid: string) {
 
 export function loadProject(transition: Transition) {
   if (!transition.params().uuid) {
-    return router.stateService.go('errorPage.notFound');
+    return goToNotFound();
   }
 
   async function loadData() {
@@ -71,7 +71,7 @@ export function loadProject(transition: Transition) {
       store.dispatch(setCurrentProject(project.data));
     } catch (error) {
       if (error.response?.status === 404) {
-        router.stateService.go('errorPage.notFound');
+        goToNotFound();
       }
     }
   }

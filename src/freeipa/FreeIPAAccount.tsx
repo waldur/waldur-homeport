@@ -5,8 +5,8 @@ import { freeipaProfilesList } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
-import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
@@ -20,7 +20,7 @@ export const FreeIpaAccount = () => {
 
   if (!ENV.plugins.WALDUR_CORE.FREEIPA_ENABLED) {
     showError(translate('FreeIPA extension is disabled.'));
-    router.stateService.go('errorPage.notFound');
+    goToNotFound();
   }
 
   const {

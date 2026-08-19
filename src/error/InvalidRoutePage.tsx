@@ -6,13 +6,14 @@ import { useTitle } from '@/navigation/title';
 import { ErrorPageView } from './ErrorPageView';
 
 export const InvalidRoutePage: FunctionComponent = () => {
-  useTitle(translate('Object is not found.'));
+  const title = translate('Page is not found');
+  useTitle(title);
   return (
     <ErrorPageView
       code="404"
-      altTitle={translate('Page is not found')}
+      altTitle={title}
       altDescription={translate(
-        "You've either entered invalid URL or trying to reach disabled feature.",
+        'The URL may be incorrect, or the feature may be disabled.',
       )}
     />
   );

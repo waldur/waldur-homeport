@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
 import { invoicesRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import { useNotify } from '@/store/notify';
@@ -21,7 +22,6 @@ export const BillingDetails: FunctionComponent = () => {
       : translate('Invoice'),
   );
 
-  const router = useRouter();
   const {
     params: { invoice_uuid: invoiceId, status },
   } = useCurrentStateAndParams();
@@ -42,13 +42,13 @@ export const BillingDetails: FunctionComponent = () => {
 
   useEffect(() => {
     if (!invoiceId) {
-      router.stateService.go('errorPage.notFound');
+      goToNotFound();
     }
   }, [invoiceId]);
 
   useEffect(() => {
     if ((error as any)?.status === 404) {
-      router.stateService.go('errorPage.notFound');
+      goToNotFound();
     }
   }, [error]);
 

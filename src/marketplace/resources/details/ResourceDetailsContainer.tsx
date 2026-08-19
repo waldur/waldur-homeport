@@ -11,6 +11,7 @@ import { usePermissionView } from '@/auth/PermissionLayout';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { goToNotFound } from '@/error/utils';
 import { ErrorView } from '@/ErrorView';
 import { translate } from '@/i18n';
 import { PublicMaintenanceCard } from '@/maintenance/public/PublicMaintenanceCard';
@@ -407,7 +408,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
 
   if (error) {
     if (error['response']?.status === 404) {
-      router.stateService.go('errorPage.notFound');
+      goToNotFound();
       return null;
     } else {
       return <ErrorView error={error} />;
