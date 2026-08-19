@@ -123,6 +123,24 @@ export const getResourceAllListColumns = (
         keys: ['name'],
         export: (row) => row.name || row.offering_name, // render as ResourceNameField label
       },
+      // State sits beside the name rather than at the end of the row. It is the
+      // field the row is scanned for, and as the last column it fell outside the
+      // viewport on narrow screens — reachable only by scrolling past the sticky
+      // actions column.
+      {
+        title: translate('State'),
+        render: ({ row }) => <ResourceStateField resource={row} pill outline />,
+        filter: 'state',
+        orderField: 'state',
+        inlineFilter: (row) =>
+          getStates().filter((op) => op.value === row.state),
+        id: 'state',
+        keys: ['state', 'backend_metadata'],
+        export: (row) =>
+          row.backend_metadata?.runtime_state ||
+          row.backend_metadata?.state ||
+          row.state,
+      },
       {
         title: translate('UUID'),
         render: ({ row }) => <>{row.uuid}</>,
@@ -260,20 +278,6 @@ export const getResourceAllListColumns = (
         keys: ['end_date', 'resource_effective_end_date'],
         optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
         export: (row) => row.resource_effective_end_date,
-      },
-      {
-        title: translate('State'),
-        render: ({ row }) => <ResourceStateField resource={row} pill outline />,
-        filter: 'state',
-        orderField: 'state',
-        inlineFilter: (row) =>
-          getStates().filter((op) => op.value === row.state),
-        id: 'state',
-        keys: ['state', 'backend_metadata'],
-        export: (row) =>
-          row.backend_metadata?.runtime_state ||
-          row.backend_metadata?.state ||
-          row.state,
       },
       {
         title: translate('Paused'),
