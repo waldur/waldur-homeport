@@ -112,6 +112,26 @@ Run type checking:
   script:
     - yarn tsgo -b
 
+# apps/* members aren't covered by the root `yarn tsgo -b` above — see
+# docs/micro-apps.md for the full apps/* pipeline this is one piece of.
+Run apps typecheck and build:
+  stage: test
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - apps/**/*
+        - packages/**/*
+        - package.json
+        - yarn.lock
+        - .gitlab-ci.yml
+  script:
+    - yarn apps:typecheck
+    - yarn apps:build
+
 Run JS linters:
   <<: *linter-rules
   script:
@@ -398,6 +418,7 @@ Test docker image build:
       changes:
         - Dockerfile
         - docker/**/*
+        - apps/**/* # the Dockerfile builds apps/* into the image too — docs/micro-apps.md
         # `.gitlab-ci.yml` intentionally left out: this job is scoped to
         # paths that actually affect the built image.
   variables:
@@ -495,10 +516,15 @@ Build test docker image:
     - echo "${CI_REGISTRY_PASSWORD}" | buildah login -u "${CI_REGISTRY_USER}" --password-stdin "${CI_REGISTRY}"
   script:
     # 1. Build a standard image for E2E tests (No ASSET_PATH)
+    #
+    # INCLUDE_DEPLOY_FALSE_APPS=true here (and below) live-tests every
+    # apps/* member without shipping opted-out ones to production — see
+    # docs/micro-apps.md.
     - echo "[+] Building standard image for E2E tests"
     - |
       buildah bud \
         --build-arg DOCKER_REGISTRY="${DOCKER_REGISTRY}" \
+        --build-arg INCLUDE_DEPLOY_FALSE_APPS=true \
         -t "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-e2e" \
         -f "${CI_PROJECT_DIR}/Dockerfile" \
         "${CI_PROJECT_DIR}"
@@ -510,6 +536,7 @@ Build test docker image:
       buildah bud \
         --build-arg DOCKER_REGISTRY="${DOCKER_REGISTRY}" \
         --build-arg ASSET_PATH="/${CI_MERGE_REQUEST_ID}/" \
+        --build-arg INCLUDE_DEPLOY_FALSE_APPS=true \
         -t "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}" \
         -f "${CI_PROJECT_DIR}/Dockerfile" \
         "${CI_PROJECT_DIR}"

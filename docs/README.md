@@ -38,6 +38,12 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 | [configuration-management.md](configuration-management.md) | Settings UI, `SettingsDescription` / `FeaturesEnums` generation              |
 | [invitations.md](invitations.md)                           | Invitation flow architecture                                                 |
 
+## Deployment and infra
+
+| Guide                             | Covers                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------ |
+| [micro-apps.md](micro-apps.md)     | `apps/*` build/serve pipeline, `ASSET_PATH`, `waldur.deploy`, adding a new micro-app |
+
 ## Localization and terminology
 
 | Guide                                          | Covers                                                           |

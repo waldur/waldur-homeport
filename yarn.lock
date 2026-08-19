@@ -19766,6 +19766,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"waldur-micro-app-poc@workspace:apps/micro-app-poc":
+  version: 0.0.0-use.local
+  resolution: "waldur-micro-app-poc@workspace:apps/micro-app-poc"
+  dependencies:
+    "@tailwindcss/vite": "npm:^4.3.3"
+    "@types/react": "npm:^18.3.0"
+    "@types/react-dom": "npm:^18.3.0"
+    "@vitejs/plugin-react": "npm:^6.0.2"
+    react: "npm:^18.3.0"
+    react-dom: "npm:^18.3.0"
+    tailwindcss: "npm:^4.3.3"
+    typescript: "npm:^5.7.3"
+    vite: "npm:^8.0.16"
+    waldur-api-client: "workspace:*"
+    waldur-auth-core: "workspace:*"
+    waldur-design-tokens: "workspace:*"
+    waldur-i18n-runtime: "workspace:*"
+    waldur-runtime-config: "workspace:*"
+    waldur-telemetry: "workspace:*"
+    waldur-ui: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "waldur-runtime-config@workspace:*, waldur-runtime-config@workspace:packages/runtime-config":
   version: 0.0.0-use.local
   resolution: "waldur-runtime-config@workspace:packages/runtime-config"

@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "homeport",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["start"],
+      "port": 8001
+    },
+    {
+      "name": "homeport-storybook",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["storybook"],
+      "port": 6006
+    },
+    {
+      "name": "micro-app-poc",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["workspace", "waldur-micro-app-poc", "dev"],
+      "port": 5180
+    }
+  ]
+}
