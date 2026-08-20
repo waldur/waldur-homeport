@@ -14,6 +14,8 @@ import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
+import { getMissingUsagePolicyLabel } from './missingUsagePolicy';
+
 export const ResourceComponentUsageTable: FC<
   TableWithPortal<{
     resource: Pick<Resource, 'uuid'>;
@@ -45,6 +47,12 @@ export const ResourceComponentUsageTable: FC<
       title: translate('Usage'),
       render: ({ row }) => <>{formatUsageValue(row.usage)}</>,
       orderField: 'usage',
+    },
+    {
+      title: translate('Missing usage policy'),
+      render: ({ row }) => (
+        <>{getMissingUsagePolicyLabel(row.missing_usage_policy)}</>
+      ),
     },
   ];
 

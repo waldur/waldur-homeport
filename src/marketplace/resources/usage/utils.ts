@@ -315,6 +315,11 @@ export const getUsageHistoryPeriodOptions = (
   return options;
 };
 
+/**
+ * Options for ComponentUsage.missing_usage_policy — what the backend records
+ * for this component when the next billing period passes with no usage report.
+ * Built lazily so that the labels pick up the active locale.
+ */
 export const getBillingTypeLabel = (value) =>
   renderFieldOrDash(
     getAccountingTypeOptions().find((option) => option.value === value)?.label,

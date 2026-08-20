@@ -2,14 +2,22 @@ import { FunctionComponent, useContext } from 'react';
 
 import { AccountingPeriodFilter } from '@/customer/list/AccountingPeriodFilter';
 import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
+import { translate } from '@/i18n';
 import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 import { OrganizationFilter } from '@/marketplace/orders/OrganizationFilter';
 import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { getMissingUsagePolicyChoices } from '@/marketplace/resources/usage/missingUsagePolicy';
 import { ResourceFilter } from '@/resource/ResourceFilter';
+import { SelectFilter } from '@/table';
 import { TableFilterContext } from '@/table/FilterContextProvider';
 import { useFilterValues } from '@/table/useFilterValues';
 
 export const FORM_ID = 'ResourceUsageFilter';
+
+interface MissingUsagePolicyOption {
+  label: string;
+  value: string;
+}
 
 const options = makeLastTwelveMonthsFilterPeriods();
 
@@ -37,6 +45,17 @@ export const ResourceUsageFilter: FunctionComponent = () => {
         offeringFilter={{ shared: true }}
       />
       <ResourceFilter />
+      <SelectFilter
+        title={translate('Missing usage policy')}
+        name="missing_usage_policy"
+        getValueLabel={(value: MissingUsagePolicyOption) => value?.label}
+        placeholder={translate('Missing usage policy')}
+        options={getMissingUsagePolicyChoices()}
+        getOptionValue={(option: MissingUsagePolicyOption) => option.value}
+        getOptionLabel={(option: MissingUsagePolicyOption) => option.label}
+        isClearable={true}
+        isMulti={true}
+      />
     </>
   );
 };

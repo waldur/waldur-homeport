@@ -23,6 +23,7 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
+import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { UI_STALE_TIME } from '@/core/constants';
 import { parseDate } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -35,11 +36,14 @@ import {
   SelectGroup,
   StringGroup,
 } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 
 import { getPeriodRange } from './api';
+import {
+  getMissingUsagePolicyChoices,
+  MISSING_USAGE_POLICY_DEFAULT,
+} from './missingUsagePolicy';
 import { UsageReportContext } from './types';
 import { getBillingTypeLabel } from './utils';
 
@@ -468,19 +472,28 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                     </Field>
                   </div>
 
-                  <Field
-                    name={`components.${component.type}.recurring`}
-                    type="checkbox"
-                  >
-                    {({ input }) => (
-                      <AwesomeCheckboxField
-                        input={input}
-                        label={translate(
-                          'Reported value is reused every month until changed.',
-                        )}
-                      />
-                    )}
-                  </Field>
+                  {/* The policy belongs to the total usage record; the
+                      per-user endpoint neither accepts nor stores it. */}
+                  {!isUserUsage && (
+                    <Field
+                      name={`components.${component.type}.missing_usage_policy`}
+                      // A component with no usage record for the period has no
+                      // entry in initialValues; without this the radio group
+                      // renders with nothing selected.
+                      defaultValue={MISSING_USAGE_POLICY_DEFAULT}
+                    >
+                      {({ input }) => (
+                        <AwesomeRadioButton
+                          input={input}
+                          label={translate(
+                            'When no usage is reported for the next month',
+                          )}
+                          choices={getMissingUsagePolicyChoices()}
+                          gap={2}
+                        />
+                      )}
+                    </Field>
+                  )}
                 </div>
               </Tab.Pane>
             ))}
