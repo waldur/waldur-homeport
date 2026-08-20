@@ -43,6 +43,8 @@ describe('EditPlanPricesDialog', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockPlan.prices = { cpu: 10, ram: 5 };
+    mockPlan.future_prices = {};
+    mockPlan.resources_count = 0;
   });
 
   it('should successfully update prices', async () => {
@@ -137,6 +139,89 @@ describe('EditPlanPricesDialog', () => {
           prices: { cpu: 0, ram: 0 },
         },
       });
+    });
+  });
+
+  it('should prefill the current price when there is no pending future price', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplacePlansUpdatePrices).mockResolvedValue({} as any);
+    // A plan in use with no pending price change: the API returns null future prices.
+    mockPlan.future_prices = { cpu: null, ram: null } as any;
+    mockPlan.resources_count = 3;
+
+    renderComponent();
+
+    const inputs = screen.getAllByRole('spinbutton');
+    expect(inputs[0]).toHaveValue(10);
+    expect(inputs[1]).toHaveValue(5);
+
+    await user.click(screen.getByText('Save'));
+
+    await waitFor(() => {
+      expect(marketplacePlansUpdatePrices).toHaveBeenCalledWith({
+        path: { uuid: 'plan-1' },
+        body: { prices: { cpu: 10, ram: 5 } },
+      });
+    });
+  });
+
+  it('should keep a pending future price of zero', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplacePlansUpdatePrices).mockResolvedValue({} as any);
+    mockPlan.future_prices = { cpu: 0, ram: null } as any;
+    mockPlan.resources_count = 3;
+
+    renderComponent();
+
+    const inputs = screen.getAllByRole('spinbutton');
+    expect(inputs[0]).toHaveValue(0);
+    expect(inputs[1]).toHaveValue(5);
+
+    await user.click(screen.getByText('Save'));
+
+    await waitFor(() => {
+      expect(marketplacePlansUpdatePrices).toHaveBeenCalledWith({
+        path: { uuid: 'plan-1' },
+        body: { prices: { cpu: 0, ram: 5 } },
+      });
+    });
+  });
+
+  it('should submit a price of zero typed by the user', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplacePlansUpdatePrices).mockResolvedValue({} as any);
+    mockPlan.future_prices = { cpu: null, ram: null } as any;
+    mockPlan.resources_count = 3;
+
+    renderComponent();
+
+    const inputs = screen.getAllByRole('spinbutton');
+    await user.clear(inputs[0]);
+    await user.type(inputs[0], '0');
+
+    await user.click(screen.getByText('Save'));
+
+    await waitFor(() => {
+      expect(marketplacePlansUpdatePrices).toHaveBeenCalledWith({
+        path: { uuid: 'plan-1' },
+        body: { prices: { cpu: 0, ram: 5 } },
+      });
+    });
+  });
+
+  it('should not allow submitting a blank price', async () => {
+    const user = userEvent.setup();
+    vi.mocked(marketplacePlansUpdatePrices).mockResolvedValue({} as any);
+
+    renderComponent();
+
+    const inputs = screen.getAllByRole('spinbutton');
+    await user.clear(inputs[0]);
+
+    await user.click(screen.getByText('Save'));
+
+    await waitFor(() => {
+      expect(marketplacePlansUpdatePrices).not.toHaveBeenCalled();
     });
   });
 

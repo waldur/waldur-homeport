@@ -21,15 +21,22 @@ const parsePrice = (value: unknown): number => {
 
 const getInitialValues = (plan: Plan, components: OfferingComponent[]) => {
   const availableComponentTypes = new Set(components.map((c) => c.type));
-  const filterPrices = (prices) =>
+  const filterPrices = (prices, skipEmpty = false) =>
     Object.fromEntries(
       Object.entries(prices || {})
-        .filter(([key]) => availableComponentTypes.has(key))
+        .filter(
+          ([key, value]) =>
+            availableComponentTypes.has(key) &&
+            (!skipEmpty || (value !== null && value !== undefined)),
+        )
         .map(([key, value]) => [key, parsePrice(value)]),
     );
 
   const filteredPrices = filterPrices(plan.prices);
-  const filteredFuturePrices = filterPrices(plan.future_prices);
+  // A component without a pending price change has a null future price, which
+  // must not overwrite the current price with 0. A future price of 0 is a real
+  // value and is kept.
+  const filteredFuturePrices = filterPrices(plan.future_prices, true);
 
   return {
     prices: filteredPrices,
