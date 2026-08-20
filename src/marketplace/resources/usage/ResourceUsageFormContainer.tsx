@@ -40,7 +40,7 @@ const mapComponents = (components: BaseComponentUsage[], userUsage = false) =>
             uuid: component.uuid,
             amount: component.usage ? parseFloat(component.usage) : 0,
             description: component.description,
-            recurring: component.recurring,
+            missing_usage_policy: component.missing_usage_policy || 'none',
           },
     }),
     {},
@@ -88,7 +88,7 @@ export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
           type: key,
           amount: components[key].amount.toString(),
           description: components[key].description,
-          recurring: components[key].recurring,
+          missing_usage_policy: components[key].missing_usage_policy,
         }));
         // Report resource usage
         const requestBody: ComponentUsageCreateRequest = {

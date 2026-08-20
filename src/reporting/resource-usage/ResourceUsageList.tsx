@@ -10,6 +10,7 @@ import { formatUsageValue } from '@/core/formatNumber';
 import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
 import { translate } from '@/i18n';
 import { getStartAndEndDatesOfMonth } from '@/issues/utils';
+import { getMissingUsagePolicyLabel } from '@/marketplace/resources/usage/missingUsagePolicy';
 import { ResourceLink } from '@/resource/ResourceLink';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -45,6 +46,11 @@ export const selectResourceUsageFilter = (usageFilter: any) => {
     }
     if (usageFilter.resource) {
       filter.resource_uuid = usageFilter.resource.uuid;
+    }
+    if (usageFilter.missing_usage_policy?.length) {
+      filter.missing_usage_policy = usageFilter.missing_usage_policy.map(
+        (option) => option.value,
+      );
     }
   }
   return filter;
@@ -111,6 +117,13 @@ export const ResourceUsageList: FC = () => {
       title: translate('Plan component name'),
       render: ({ row }) => <>{row.name}</>,
       export: 'name',
+    },
+    {
+      title: translate('Missing usage policy'),
+      render: ({ row }) => (
+        <>{getMissingUsagePolicyLabel(row.missing_usage_policy)}</>
+      ),
+      export: 'missing_usage_policy',
     },
     {
       title: translate('Date of reporting'),

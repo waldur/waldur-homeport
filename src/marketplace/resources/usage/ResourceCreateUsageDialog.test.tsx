@@ -137,11 +137,15 @@ describe('ResourceCreateUsageDialog', () => {
       expect(submitSpy).toHaveBeenCalledWith({
         body: {
           plan_period: 'period-1',
+          resource: undefined,
           usages: [
             {
               type: 'comp1',
               amount: '10',
               description: 'Test usage',
+              // Reporting always states the policy explicitly, so that
+              // re-reporting clears a policy set on an earlier report.
+              missing_usage_policy: 'none',
             },
           ],
         },
