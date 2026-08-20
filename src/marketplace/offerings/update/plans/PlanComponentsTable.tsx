@@ -35,7 +35,10 @@ export const PlanComponentsTable: FC<OwnProps> = (props) => (
           </td>
           <td>{parseFloat(props.row.prices[component.type])}</td>
           <td>
-            {props.row.future_prices[component.type] ?? translate('No update')}
+            {props.row.future_prices[component.type] !== null &&
+            props.row.future_prices[component.type] !== undefined
+              ? parseFloat(props.row.future_prices[component.type])
+              : translate('No update')}
           </td>
           <td>
             <div className="form-control-static">{component.measured_unit}</div>

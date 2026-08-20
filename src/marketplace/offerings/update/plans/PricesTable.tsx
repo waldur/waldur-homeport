@@ -5,6 +5,7 @@ import {
   ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
+import { composeValidators, required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { validateNonNegative } from '@/marketplace/common/utils';
 
@@ -12,6 +13,12 @@ interface PricesTableProps {
   components: OfferingComponent[];
   plan: Plan;
 }
+
+const parseInput = (value) => {
+  if (value === '' || value === undefined || value === null) return undefined;
+  const num = parseFloat(value);
+  return isNaN(num) ? value : num;
+};
 
 const formatPrice = (value) => {
   if (value === undefined || value === null || value === '') return '0';
@@ -43,7 +50,10 @@ export const PricesTable: FC<PricesTableProps> = (props) => (
               className="form-control"
               name={`new_prices.${component.type}`}
               type="number"
-              validate={validateNonNegative}
+              // An omitted component is priced at 0 by the backend, so a blank
+              // field must block submission instead of silently zeroing.
+              validate={composeValidators(required, validateNonNegative)}
+              parse={parseInput}
               inputMode="numeric"
               step="0.0000001"
             />
