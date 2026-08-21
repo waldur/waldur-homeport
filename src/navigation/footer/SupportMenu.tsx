@@ -11,18 +11,16 @@ import { IssuesLink } from './IssuesLink';
 const SupportSubMenuItem = ({ title, onCopy }) =>
   title ? (
     <div className="menu-item">
-      <span
+      <button
+        type="button"
         className="menu-link px-3 cursor-pointer overflow-hidden"
         onClick={() => onCopy(title)}
-        onKeyUp={() => onCopy(title)}
-        role="button"
-        tabIndex={-1}
       >
         <span className="menu-title text-nowrap text-truncate">{title}</span>
         <span className="menu-badge ms-2">
           <CopyIcon weight="bold" />
         </span>
-      </span>
+      </button>
     </div>
   ) : null;
 

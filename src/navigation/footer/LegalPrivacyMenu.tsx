@@ -29,15 +29,13 @@ export const LegalPrivacyMenu = () => {
   return (
     <FooterDropdown title={translate('Legal & Privacy')}>
       <div className="menu-item">
-        <span
+        <button
+          type="button"
           className="menu-link px-3"
-          role="button"
           onClick={openCookieSettings}
-          onKeyDown={openCookieSettings}
-          tabIndex={-1}
         >
           <span className="menu-title">{translate('Cookie settings')}</span>
-        </span>
+        </button>
       </div>
       <FooterMenuLink
         label={translate('Privacy policy')}

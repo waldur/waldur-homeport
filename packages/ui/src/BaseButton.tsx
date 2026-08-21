@@ -47,13 +47,12 @@ const buttonVariants = cva(
   // snapped instantly — a jarring, half-animated hover effect. See
   // migration notes.
   //
-  // focus:outline-none, not focus-visible:outline-none: every focus:
-  // ring below deliberately fires on plain :focus, not :focus-visible —
-  // see the variant-group comment below for why — so the native outline
-  // needs suppressing under the same condition, or a mouse click would
-  // show both the native outline and this component's own ring stacked
-  // on top of each other.
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:pointer-events-none focus:outline-none',
+  // No focus:outline-none: each variant's ring below IS an outline now. As a
+  // box-shadow it was suppressed by any `box-shadow: none/unset !important`
+  // (button groups, .btn-no-focus, elevation utilities, unlayered page CSS)
+  // and never painted in forced-colors mode. Still plain :focus, not
+  // :focus-visible — see the variant-group comment below.
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:pointer-events-none',
   {
     variants: {
       // Each variant's classes are grouped one state per line (base
@@ -97,7 +96,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)]',
           'hover:bg-[var(--btn-primary-bg-hover)]',
-          'focus:bg-[var(--btn-primary-bg-hover)] focus:shadow-[0_0_0_2px_var(--btn-primary-focus-ring)]',
+          'focus:bg-[var(--btn-primary-bg-hover)] focus:[outline:2px_solid_var(--btn-primary-focus-ring)] focus:[outline-offset:0px]',
           'active:bg-[var(--btn-primary-bg-pressed)] active:shadow-none',
           'disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -112,7 +111,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_var(--btn-secondary-border)]',
           'bg-[var(--btn-secondary-bg)] text-[var(--btn-secondary-text)]',
           'hover:bg-[var(--btn-secondary-bg-hover)]',
-          'focus:bg-[var(--btn-secondary-bg-hover)] focus:shadow-[inset_0_0_0_1px_var(--btn-secondary-border),0_0_0_2px_var(--btn-secondary-focus-ring)]',
+          'focus:bg-[var(--btn-secondary-bg-hover)] focus:shadow-[inset_0_0_0_1px_var(--btn-secondary-border)] focus:[outline:2px_solid_var(--btn-secondary-focus-ring)] focus:[outline-offset:0px]',
           'active:bg-[var(--btn-secondary-bg-pressed)] active:shadow-none',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -120,7 +119,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)]',
           'bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-text)]',
           'hover:bg-[var(--btn-tertiary-bg-hover)]',
-          'focus:bg-[var(--btn-tertiary-bg-hover)] focus:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border),0_0_0_2px_var(--btn-tertiary-focus-ring)]',
+          'focus:bg-[var(--btn-tertiary-bg-hover)] focus:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus:[outline-offset:0px]',
           'active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -140,7 +139,7 @@ const buttonVariants = cva(
           'bg-[transparent] text-[var(--btn-tertiary-text)]',
           'hover:bg-[var(--btn-tertiary-bg-hover)]',
           'active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none',
-          'focus:bg-[var(--btn-tertiary-bg-hover)] focus:shadow-[0_0_0_2px_var(--btn-tertiary-focus-ring)]',
+          'focus:bg-[var(--btn-tertiary-bg-hover)] focus:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus:[outline-offset:0px]',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         // danger/warning/success: focus:bg resets explicitly back to the
@@ -163,7 +162,7 @@ const buttonVariants = cva(
           'bg-[var(--btn-danger-bg)] text-[var(--btn-danger-text)]',
           'hover:bg-[var(--btn-danger-bg-hover)]',
           'active:bg-[var(--btn-danger-bg-pressed)] active:text-[var(--btn-pressed-text-on-vivid)] active:shadow-none',
-          'focus:bg-[var(--btn-danger-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-danger-bg),0_0_0_2px_var(--btn-danger-focus-ring)]',
+          'focus:bg-[var(--btn-danger-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-danger-bg)] focus:[outline:2px_solid_var(--btn-danger-focus-ring)] focus:[outline-offset:0px]',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         warning: [
@@ -173,7 +172,7 @@ const buttonVariants = cva(
           // with danger/success above, confirmed not assumed.
           'hover:bg-[var(--btn-warning-bg-hover)] hover:shadow-[inset_0_0_0_1px_var(--btn-warning-bg-hover)]',
           'active:bg-[var(--btn-warning-bg-pressed)] active:text-[var(--btn-pressed-text-on-vivid)] active:shadow-none',
-          'focus:bg-[var(--btn-warning-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-warning-bg),0_0_0_2px_var(--btn-warning-focus-ring)]',
+          'focus:bg-[var(--btn-warning-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-warning-bg)] focus:[outline:2px_solid_var(--btn-warning-focus-ring)] focus:[outline-offset:0px]',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         success: [
@@ -181,7 +180,7 @@ const buttonVariants = cva(
           'bg-[var(--btn-success-bg)] text-[var(--btn-success-text)]',
           'hover:bg-[var(--btn-success-bg-hover)]',
           'active:bg-[var(--btn-success-bg-pressed)] active:text-[var(--btn-pressed-text-on-vivid)] active:shadow-none',
-          'focus:bg-[var(--btn-success-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-success-bg),0_0_0_2px_var(--btn-success-focus-ring)]',
+          'focus:bg-[var(--btn-success-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-success-bg)] focus:[outline:2px_solid_var(--btn-success-focus-ring)] focus:[outline-offset:0px]',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         // active:bg-[transparent] on every text-* variant below: without
@@ -194,7 +193,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-primary-color)]',
           'hover:bg-[var(--btn-secondary-bg)]',
-          'focus:bg-[var(--btn-secondary-bg-hover)] focus:shadow-[0_0_0_2px_var(--btn-primary-focus-ring)]',
+          'focus:bg-[var(--btn-secondary-bg-hover)] focus:[outline:2px_solid_var(--btn-primary-focus-ring)] focus:[outline-offset:0px]',
           'active:bg-[transparent] active:text-[var(--btn-text-primary-pressed)] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -202,7 +201,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-secondary-color)]',
           'hover:bg-[var(--btn-text-secondary-hover-bg)]',
-          'focus:bg-[var(--btn-text-secondary-hover-bg)] focus:shadow-[0_0_0_2px_var(--btn-text-secondary-focus-ring)]',
+          'focus:bg-[var(--btn-text-secondary-hover-bg)] focus:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -217,7 +216,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-danger-color)]',
           'hover:bg-[var(--btn-danger-bg-hover)] hover:text-[var(--btn-danger-text)]',
-          'focus:bg-[var(--btn-danger-bg)] focus:text-[var(--btn-danger-text)] focus:shadow-[0_0_0_2px_var(--btn-danger-focus-ring)]',
+          'focus:bg-[var(--btn-danger-bg)] focus:text-[var(--btn-danger-text)] focus:[outline:2px_solid_var(--btn-danger-focus-ring)] focus:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -225,7 +224,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-warning-color)]',
           'hover:bg-[var(--btn-warning-bg-hover)] hover:text-[var(--btn-warning-text)]',
-          'focus:bg-[var(--btn-warning-bg)] focus:text-[var(--btn-warning-text)] focus:shadow-[0_0_0_2px_var(--btn-warning-focus-ring)]',
+          'focus:bg-[var(--btn-warning-bg)] focus:text-[var(--btn-warning-text)] focus:[outline:2px_solid_var(--btn-warning-focus-ring)] focus:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -233,7 +232,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-success-color)]',
           'hover:bg-[var(--btn-success-bg-hover)] hover:text-[var(--btn-success-text)]',
-          'focus:bg-[var(--btn-success-bg)] focus:text-[var(--btn-success-text)] focus:shadow-[0_0_0_2px_var(--btn-success-focus-ring)]',
+          'focus:bg-[var(--btn-success-bg)] focus:text-[var(--btn-success-text)] focus:[outline:2px_solid_var(--btn-success-focus-ring)] focus:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),

@@ -4,13 +4,25 @@
 
 // Button
 .btn {
-  // Reset outline
-  outline: none !important;
+  // Not `!important`: in `.btn-check + .btn` toggle groups the focus sits on the
+  // sibling input, so the label matches this and would lose its ring.
+  &:not(:focus-visible) {
+    outline: none;
+  }
 
-  // Reset focus shadow
+  // Baseline ring for variants that declare none of their own (e.g. .btn-link).
+  // An `outline`, so no `box-shadow` reset can suppress it (WCAG 2.4.7).
+  &:focus-visible {
+    outline: $focus-ring-width solid $focus-ring-primary;
+    outline-offset: $focus-ring-offset;
+  }
+
+  // Reset focus shadow. The `:not(:focus)` exemption that used to be here
+  // existed for the ring; now the ring is an outline, it only let Bootstrap's
+  // own `.btn:focus` glow paint underneath.
   &:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(
       .btn-outline.show
-    ):not(:focus) {
+    ) {
     box-shadow: none !important;
   }
 
@@ -41,8 +53,14 @@
     padding-right: 0 !important;
     color: $brand;
     font-weight: $btn-font-weight;
-    box-shadow: none !important;
     text-align: left;
+
+    box-shadow: none !important;
+
+    // padding is forced to 0 above, so the ring needs its own breathing room.
+    &:focus-visible {
+      outline-offset: 2px;
+    }
 
     &:focus,
     &:hover {
@@ -73,8 +91,11 @@
 
   // No focus
   &.btn-no-focus {
-    outline: none !important;
     box-shadow: none !important;
+
+    &:not(:focus-visible) {
+      outline: none !important;
+    }
   }
 
   // Flush
