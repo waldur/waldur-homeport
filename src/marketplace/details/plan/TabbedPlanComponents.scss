@@ -1,4 +1,17 @@
 .plan-details-container {
+  // 16px between the cost tab bar and the table under it. The first row's own
+  // top padding is dropped so the two do not add up to 32.
+  .nav-line-tabs {
+    margin-bottom: 16px;
+  }
+
+  .nav-line-tabs + .tab-content table.form-table tr:first-child {
+    th,
+    td {
+      padding-top: 0;
+    }
+  }
+
   table.form-table {
     th,
     td {

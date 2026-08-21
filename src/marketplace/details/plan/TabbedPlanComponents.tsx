@@ -92,35 +92,80 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
     ? 'onetime'
     : 'periodic-' + LIMIT_PERIODS.find((per) => canShowTab(per));
 
+  const tabs: Array<{
+    eventKey: string | number;
+    title: ReactNode;
+    content: ReactNode;
+  }> = [
+    ...(props.extraTabs || []).map((tab) => ({
+      eventKey: tab.eventKey,
+      title: tab.title,
+      content: <tab.component />,
+    })),
+    ...(oneTime.hasOneTimeCost
+      ? [
+          {
+            eventKey: 'onetime',
+            title: COST_TAB_LABEL['total'],
+            content: (
+              <OneTimeTab
+                oneTime={oneTime}
+                viewMode={props.viewMode}
+                concealBillingInfo={props.concealBillingInfo}
+                offering={props.offering}
+              />
+            ),
+          },
+        ]
+      : []),
+    ...(periodic.hasPeriodicCost
+      ? LIMIT_PERIODS.filter(canShowTab).map((period) => ({
+          eventKey: `periodic-${period}`,
+          title: COST_TAB_LABEL[period],
+          content: (
+            <PeriodicTab
+              periodic={periodic}
+              limitPeriod={period}
+              customer={customer}
+              viewMode={props.viewMode}
+              periodKeys={props.periodKeys}
+              periods={props.periods}
+              concealBillingInfo={props.concealBillingInfo}
+              offering={props.offering}
+            />
+          ),
+        }))
+      : []),
+  ];
+
+  // A lone "Monthly cost" tab is chrome with no navigational function — the
+  // table below already reads "per month" and "/mo" — so its pane is shown
+  // directly. Every other label ("One time cost", "Quarterly cost", ...) is the
+  // only place its period is named, so those keep the bar even when alone.
+  if (tabs.length === 1 && tabs[0].eventKey === 'periodic-month') {
+    return (
+      <div className="plan-details-container">
+        {/* The bar is also where WarningTooltip lives — keep it in edit mode. */}
+        {!props.viewMode && (
+          <div className="d-flex mb-2">
+            <WarningTooltip />
+          </div>
+        )}
+        {tabs[0].content}
+      </div>
+    );
+  }
+
   return (
     <div className="plan-details-container">
       <Tab.Container defaultActiveKey={defaultActiveKey}>
         {/* TABS */}
         <Nav variant="tabs" className="nav-line-tabs">
-          {props.extraTabs
-            ? props.extraTabs.map((tab) => (
-                <Nav.Item key={tab.eventKey}>
-                  <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
-                </Nav.Item>
-              ))
-            : null}
-          {oneTime.hasOneTimeCost ? (
-            <Nav.Item>
-              <Nav.Link eventKey="onetime">{COST_TAB_LABEL['total']}</Nav.Link>
+          {tabs.map((tab) => (
+            <Nav.Item key={tab.eventKey}>
+              <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
             </Nav.Item>
-          ) : null}
-          {periodic.hasPeriodicCost
-            ? LIMIT_PERIODS.map(
-                (period) =>
-                  canShowTab(period) && (
-                    <Nav.Item key={period}>
-                      <Nav.Link eventKey={`periodic-${period}`}>
-                        {COST_TAB_LABEL[period]}
-                      </Nav.Link>
-                    </Nav.Item>
-                  ),
-              )
-            : null}
+          ))}
           {/* WarningTooltip reads submit errors via useFormState, so it must
               not render outside a <Form> — e.g. the read-only proposal
               resource-request view passes viewMode with no surrounding form. */}
@@ -129,43 +174,11 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
 
         {/* CONTENT */}
         <Tab.Content>
-          {props.extraTabs
-            ? props.extraTabs.map((tab) => (
-                <Tab.Pane key={tab.eventKey} eventKey={tab.eventKey}>
-                  <tab.component />
-                </Tab.Pane>
-              ))
-            : null}
-          {oneTime.hasOneTimeCost ? (
-            <Tab.Pane eventKey="onetime">
-              <OneTimeTab
-                oneTime={oneTime}
-                viewMode={props.viewMode}
-                concealBillingInfo={props.concealBillingInfo}
-                offering={props.offering}
-              />
+          {tabs.map((tab) => (
+            <Tab.Pane key={tab.eventKey} eventKey={tab.eventKey}>
+              {tab.content}
             </Tab.Pane>
-          ) : null}
-
-          {periodic.hasPeriodicCost
-            ? LIMIT_PERIODS.map(
-                (period) =>
-                  canShowTab(period) && (
-                    <Tab.Pane key={period} eventKey={`periodic-${period}`}>
-                      <PeriodicTab
-                        periodic={periodic}
-                        limitPeriod={period}
-                        customer={customer}
-                        viewMode={props.viewMode}
-                        periodKeys={props.periodKeys}
-                        periods={props.periods}
-                        concealBillingInfo={props.concealBillingInfo}
-                        offering={props.offering}
-                      />
-                    </Tab.Pane>
-                  ),
-              )
-            : null}
+          ))}
         </Tab.Content>
       </Tab.Container>
     </div>
