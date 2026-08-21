@@ -11,8 +11,8 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
-import DefaultHeroImage from '../estonian-bog.jpg';
 import { HeroButton } from '../HeroButton';
+import { getHeroBackgroundImage } from '../heroImage';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -23,8 +23,6 @@ import './FullHeroLayout.css';
 export const FullHeroLayout = () => {
   const features = useAuthFeatures();
   const imageUrl = getIconUrl('login_logo');
-  const customHeroImage = getIconUrl('hero_image');
-  const backgroundImage = customHeroImage || DefaultHeroImage;
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['IdentityProvidersConfigurations'],
@@ -34,7 +32,7 @@ export const FullHeroLayout = () => {
   return (
     <div
       className="layout-full-hero"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage: getHeroBackgroundImage() }}
     >
       <div className="layout-full-hero-overlay">
         <div className="layout-full-hero-header">

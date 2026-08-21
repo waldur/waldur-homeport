@@ -26,15 +26,15 @@
   margin: 0 18px;
 }
 
+/* Sits directly under the identity-provider buttons, which are sized by their
+   30px logo rather than by their text (see .login-button in LoginButton.css).
+   Pin the same height and centre the label so the stack does not step. */
 .login-with-local-account-button {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  text-decoration: underline;
-  color: var(--waldur-brand-color);
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
-  border: 0;
-  background: transparent;
 }
 
 .login-submit-button {

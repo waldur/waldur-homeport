@@ -12,7 +12,7 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
-import DefaultHeroImage from '../estonian-bog.jpg';
+import { getHeroBackgroundImage } from '../heroImage';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -38,8 +38,6 @@ const DEFAULT_SLIDES = [
 export const CarouselLayout = () => {
   const features = useAuthFeatures();
   const imageUrl = getIconUrl('login_logo');
-  const customHeroImage = getIconUrl('hero_image');
-  const backgroundImage = customHeroImage || DefaultHeroImage;
   const slides = ENV.plugins.WALDUR_CORE.LOGIN_PAGE_CAROUSEL_SLIDES?.length
     ? ENV.plugins.WALDUR_CORE.LOGIN_PAGE_CAROUSEL_SLIDES
     : DEFAULT_SLIDES;
@@ -94,7 +92,7 @@ export const CarouselLayout = () => {
       </div>
       <div
         className="layout-carousel-hero"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        style={{ backgroundImage: getHeroBackgroundImage() }}
       >
         <div className="layout-carousel-hero-overlay">
           <div className="layout-carousel-slide" key={activeSlide}>
