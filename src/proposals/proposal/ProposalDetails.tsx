@@ -24,6 +24,10 @@ import {
   proposalWorkflowStatesKey,
 } from '../workflow/queries';
 
+import {
+  AllocationOutcomeSection,
+  AllocationStartBanner,
+} from './AllocationOutcomeSection';
 import { AwardResponseActions } from './AwardResponseActions';
 import { ComplianceSummary } from './create/ComplianceSummary';
 import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
@@ -129,6 +133,8 @@ export const ProposalDetails = ({
   return (
     <SidebarLayout.Container>
       <SidebarLayout.Body className="mb-10">
+        <AllocationStartBanner proposal={proposal} />
+        <AllocationOutcomeSection proposal={proposal} />
         <ProposalDetailsOverviewStep
           id="step-general"
           params={{ proposal, canViewReviews: isCallManagerView }}

@@ -8,6 +8,8 @@ import { FieldReviewComments } from '../proposal/create-review/FieldReviewCommen
 
 import { UsersList } from './UsersList';
 
+import '@/proposals/flushTable.scss';
+
 export const ProposalUsersListSummary: FC<{
   scope;
   reviews?;
@@ -22,20 +24,23 @@ export const ProposalUsersListSummary: FC<{
     }),
   });
   return (
-    <UsersList
-      table={usersTable}
-      scope={props.scope}
-      hideRole={false}
-      hideExpiration={props.hideExpiration}
-      readOnly
-      hasActionBar={false}
-      tableFooter={
-        <FieldReviewComments
-          reviews={props.reviews}
-          fieldName="comment_team"
-          space={0}
-        />
-      }
-    />
+    <div className="proposal-flush-table">
+      <UsersList
+        table={usersTable}
+        scope={props.scope}
+        hideRole={false}
+        hideExpiration={props.hideExpiration}
+        readOnly
+        cardBordered={false}
+        hasActionBar={false}
+        tableFooter={
+          <FieldReviewComments
+            reviews={props.reviews}
+            fieldName="comment_team"
+            space={0}
+          />
+        }
+      />
+    </div>
   );
 };
