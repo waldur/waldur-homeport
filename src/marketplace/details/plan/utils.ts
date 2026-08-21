@@ -88,6 +88,13 @@ export const combinePrices = (
               : 1;
         }
       }
+      // A limit component carries no plan-side quantity: the customer picks it
+      // when ordering. Without any limits behind the plan (public offering
+      // pricing) `amount` falls back to 0, which is not an included quantity.
+      // A limits object that merely omits this component is a placed order that
+      // requested none of it, so only a wholly absent one counts as unknown.
+      const quantityUnknown = component.billing_type === 'limit' && !limits;
+
       const price = Number(plan.prices[component.type]) || 0;
       // The price from the plan component is always per billing unit
       // (per the plan's unit field: hour, day, month, etc.).
@@ -141,6 +148,7 @@ export const combinePrices = (
       return {
         ...component,
         amount,
+        quantityUnknown,
         displayAmount,
         durationInMonths: displayAmount != null ? durationInMonths : undefined,
         prices,
@@ -420,7 +428,9 @@ const usePricesFromFormData = (
   const limits: Limits = useMemo(() => {
     const limitParser = getFormLimitParser(props.offering.type);
     if (props.viewMode && props.order) {
-      return limitParser(props.order.limits);
+      // An order always answers the question, even when it requested no limits
+      // at all — normalise so its plan never reads as "chosen at order time".
+      return limitParser(props.order.limits) || {};
     }
     return formData?.limits || props.limits;
   }, [props, formData]);

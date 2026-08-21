@@ -13,6 +13,12 @@ export interface Component extends OfferingComponent {
   subTotal: number;
   displayAmount?: number;
   durationInMonths?: number;
+  /**
+   * True when the component's quantity is chosen by the customer at order time
+   * and no order supplies it yet (public offering pricing). `amount` is 0 by
+   * fallback in that case and must not be presented as an included quantity.
+   */
+  quantityUnknown?: boolean;
   discountApplied?: boolean;
   discountAmount?: number;
   discountPercent?: number;

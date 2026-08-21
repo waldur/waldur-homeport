@@ -380,6 +380,53 @@ describe('combinePrices', () => {
     });
   });
 
+  describe('configurable (limit) components without an order', () => {
+    it('marks the quantity unknown when no limits are supplied', () => {
+      const offering = createOffering([
+        { type: 'cpu', billing_type: 'limit', measured_unit: 'core' },
+        { type: 'management_fee', billing_type: 'fixed' },
+      ]);
+      const plan = createPlan(
+        { management_fee: 1 },
+        { cpu: 4.5, management_fee: 20 },
+        'month',
+      );
+
+      // Public offering pricing renders a plan with no order behind it.
+      const [cpu, fee] = combinePrices(
+        plan,
+        undefined,
+        {},
+        offering,
+      ).components;
+
+      expect(cpu.quantityUnknown).toBe(true);
+      expect(fee.quantityUnknown).toBe(false);
+    });
+
+    it('does not mark the quantity unknown once limits are supplied', () => {
+      const offering = createOffering([
+        { type: 'cpu', billing_type: 'limit', measured_unit: 'core' },
+      ]);
+      const plan = createPlan({}, { cpu: 4.5 }, 'month');
+
+      expect(
+        combinePrices(plan, { cpu: 4 }, {}, offering).components[0]
+          .quantityUnknown,
+      ).toBe(false);
+      // An explicit zero is a chosen quantity, not a missing one.
+      expect(
+        combinePrices(plan, { cpu: 0 }, {}, offering).components[0]
+          .quantityUnknown,
+      ).toBe(false);
+      // A placed order that requested none of the component still counts as
+      // answered — only a wholly absent limits object is unknown.
+      expect(
+        combinePrices(plan, {}, {}, offering).components[0].quantityUnknown,
+      ).toBe(false);
+    });
+  });
+
   describe('fixed components', () => {
     it('should use plan quotas for amount and scale with plan multipliers', () => {
       const offering = createOffering([

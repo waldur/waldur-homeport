@@ -103,7 +103,15 @@ export const OneTimeTab = ({
         )}
 
         {!shouldConcealPrices && (
-          <ComponentRowTotal amount={oneTime.oneTimeTotal} />
+          <ComponentRowTotal
+            amount={oneTime.oneTimeTotal}
+            isFloor={
+              viewMode &&
+              oneTime.totalLimitedRows.some(
+                (component) => component.quantityUnknown,
+              )
+            }
+          />
         )}
       </FormTable>
     </section>

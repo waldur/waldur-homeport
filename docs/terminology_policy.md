@@ -26,3 +26,18 @@ undeploying is applied to:
 * VMs
 
 Please use "synchronise" instead of "pull" in action title.
+
+## Units of measurement
+
+Component units (`measured_unit`) are written in the **singular**. They appear
+mainly in rate expressions — "Cost: EUR 4.50 per core", "EUR 0.02 per GB",
+"EUR 1.20 per hour" — and in a "Unit" column, both of which read as singular.
+
+* Write `core`, `hour`, `node hour`, `GPU hour`, `seat`.
+* Not `cores`, `hours`, `node hours`, `units`.
+
+Symbols and abbreviations keep their standard form and are never pluralised:
+`GB`, `TB`, `vCPU`, `GB-hour`.
+
+Where a display needs a plural ("120 hours used"), pluralise in the copy around
+the value — never by storing a plural unit.

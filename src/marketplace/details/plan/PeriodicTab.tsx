@@ -66,6 +66,16 @@ export const PeriodicTab = ({
     return periodic.limitedRowsByPeriod[limitPeriod].totalPeriods;
   }, [limitPeriod, periodic]);
 
+  const limitedRows = !limitPeriod
+    ? periodic.limitedRows
+    : periodic.limitedRowsByPeriod[limitPeriod].rows;
+
+  // Configurable components contribute nothing until a quantity is chosen, so
+  // the sum below is the cheapest the plan can be rather than its price. On the
+  // order form the customer supplies the quantities, so the sum is exact.
+  const isFloor =
+    viewMode && limitedRows.some((component) => component.quantityUnknown);
+
   return (
     <section className="plan-details-section">
       <FormTable>
@@ -98,11 +108,7 @@ export const PeriodicTab = ({
         {/* Limit */}
         {periodic.limitedRows.length > 0 && (
           <ControlRows
-            components={
-              !limitPeriod
-                ? periodic.limitedRows
-                : periodic.limitedRowsByPeriod[limitPeriod].rows
-            }
+            components={limitedRows}
             hidePrices={Boolean(shouldConcealPrices)}
             viewMode={viewMode}
             period={selectedPeriod}
@@ -116,6 +122,7 @@ export const PeriodicTab = ({
             amount={totalPeriods[activePriceIndex]}
             period={selectedPeriod}
             setPeriod={periods.length > 1 ? setSelectedPeriod : null}
+            isFloor={isFloor}
           />
         ) : null}
       </FormTable>
