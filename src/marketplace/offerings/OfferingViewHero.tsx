@@ -126,7 +126,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 >
                   <Nav.Link
                     disabled
-                    className="d-flex align-items-center text-center min-w-60px opacity-50"
+                    className="d-flex align-items-center text-center min-w-60px"
                     data-testid="offering-tab-public"
                   >
                     {translate('Public')}

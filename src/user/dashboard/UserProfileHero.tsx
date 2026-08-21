@@ -1,10 +1,11 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useMemo } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Nav, Tab } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { isDescendantOf } from '@/navigation/useTabs';
 
@@ -40,37 +41,57 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
 
   const showViewTab = isDescendantOf('profile', state);
 
+  const disabledReason = !user?.agreement_date
+    ? translate('Terms of service not accepted')
+    : translate('Profile is incomplete');
+
   return isLoading ? (
     <LoadingSpinner />
   ) : error ? (
     <LoadingErred loadData={refetch} />
   ) : (
     <div className="container-fluid my-5">
-      <Tabs
+      <Tab.Container
         defaultActiveKey={
           state.name === 'profile-manage' || !showViewTab
             ? 'profile-manage'
             : 'profile.details'
         }
-        className="nav-line-tabs mb-4"
         onSelect={showViewTab ? goTo : null}
       >
-        {showViewTab && (
-          <Tab
-            eventKey="profile.details"
-            title={translate('View')}
-            disabled={!isValidUser}
-            tabClassName={
-              'text-center min-w-60px' + (isValidUser ? '' : ' opacity-50')
-            }
-          />
-        )}
-        <Tab
-          eventKey="profile-manage"
-          title={translate('Edit')}
-          tabClassName="text-center min-w-60px"
-        />
-      </Tabs>
+        <Nav variant="tabs" className="nav-line-tabs mb-4">
+          {showViewTab && (
+            <Nav.Item>
+              {isValidUser ? (
+                <Nav.Link
+                  eventKey="profile.details"
+                  className="text-center min-w-60px"
+                >
+                  {translate('View')}
+                </Nav.Link>
+              ) : (
+                // The tooltip has to wrap the link from the outside: a
+                // disabled nav link stops receiving hover, so a tooltip
+                // nested inside it would never open. Same arrangement as the
+                // draft-offering tab in OfferingViewHero.
+                <Tip id="tip-profile-view-disabled" label={disabledReason}>
+                  <Nav.Link disabled className="text-center min-w-60px">
+                    {translate('View')}
+                  </Nav.Link>
+                </Tip>
+              )}
+            </Nav.Item>
+          )}
+          <Nav.Item>
+            <Nav.Link
+              eventKey="profile-manage"
+              className="text-center min-w-60px"
+            >
+              {translate('Edit')}
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Tab.Container>
       <UserProfile user={user} />
     </div>
   );
