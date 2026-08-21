@@ -11,7 +11,7 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
-import DefaultHeroImage from '../estonian-bog.jpg';
+import { getHeroBackgroundImage } from '../heroImage';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -22,8 +22,6 @@ import './CenteredCardLayout.css';
 export const CenteredCardLayout = () => {
   const features = useAuthFeatures();
   const imageUrl = getIconUrl('login_logo');
-  const customHeroImage = getIconUrl('hero_image');
-  const backgroundImage = customHeroImage || DefaultHeroImage;
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['IdentityProvidersConfigurations'],
@@ -33,7 +31,7 @@ export const CenteredCardLayout = () => {
   return (
     <div
       className="layout-centered-card"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage: getHeroBackgroundImage() }}
     >
       <div className="layout-centered-card-overlay">
         <div className="layout-centered-card-header">

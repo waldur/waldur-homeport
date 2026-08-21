@@ -65,9 +65,12 @@
   }
 }
 
+/* The hero sits on the solid half of the diagonal split, not on the image,
+   so it takes the ordinary body colour rather than the white every other
+   hero layout uses over its scrim. */
 .layout-diagonal-hero {
   display: none;
-  color: white;
+  color: var(--bs-body-color);
   max-width: 350px;
 }
 

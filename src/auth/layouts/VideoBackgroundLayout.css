@@ -1,8 +1,13 @@
+/* The hero image sits on the container itself so something is always behind
+   the video — a `poster` takes a single URL and cannot layer a fallback, and
+   a failing `<source>` fires its error at the source rather than the video. */
 .layout-video-bg {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
   background: #1a1a2e;
+  background-size: cover;
+  background-position: center;
 }
 
 .layout-video-bg-video {

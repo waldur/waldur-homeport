@@ -13,7 +13,7 @@ import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
 import DefaultVideoBackground from '../default-video-background.mp4';
-import DefaultHeroImage from '../estonian-bog.jpg';
+import { getHeroBackgroundImage } from '../heroImage';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -24,8 +24,6 @@ import './VideoBackgroundLayout.css';
 export const VideoBackgroundLayout = () => {
   const features = useAuthFeatures();
   const imageUrl = getIconUrl('login_logo');
-  const customHeroImage = getIconUrl('hero_image');
-  const fallbackImage = customHeroImage || DefaultHeroImage;
   const videoUrl =
     ENV.plugins.WALDUR_CORE.LOGIN_PAGE_VIDEO_URL || DefaultVideoBackground;
   const [videoFailed, setVideoFailed] = useState(false);
@@ -40,7 +38,10 @@ export const VideoBackgroundLayout = () => {
   };
 
   return (
-    <div className="layout-video-bg">
+    <div
+      className="layout-video-bg"
+      style={{ backgroundImage: getHeroBackgroundImage() }}
+    >
       {!videoFailed ? (
         <video
           className="layout-video-bg-video"
@@ -48,7 +49,7 @@ export const VideoBackgroundLayout = () => {
           loop
           muted
           playsInline
-          poster={fallbackImage}
+          poster={getIconUrl('hero_image')}
           onError={handleVideoError}
         >
           <source src={videoUrl} type="video/mp4" />
@@ -56,7 +57,7 @@ export const VideoBackgroundLayout = () => {
       ) : (
         <div
           className="layout-video-bg-fallback"
-          style={{ backgroundImage: `url(${fallbackImage})` }}
+          style={{ backgroundImage: getHeroBackgroundImage() }}
         />
       )}
       <div className="layout-video-bg-overlay">

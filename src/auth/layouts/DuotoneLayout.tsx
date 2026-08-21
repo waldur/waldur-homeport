@@ -12,8 +12,8 @@ import { FooterLinks } from '@/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
-import DefaultHeroImage from '../estonian-bog.jpg';
 import { HeroButton } from '../HeroButton';
+import { getHeroBackgroundImage } from '../heroImage';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -24,8 +24,6 @@ import './DuotoneLayout.css';
 export const DuotoneLayout = () => {
   const features = useAuthFeatures();
   const imageUrl = getIconUrl('login_logo');
-  const customHeroImage = getIconUrl('hero_image');
-  const backgroundImage = customHeroImage || DefaultHeroImage;
   const brandColor = getBrandColor();
 
   const { data, isLoading, error, refetch } = useQuery({
@@ -76,7 +74,7 @@ export const DuotoneLayout = () => {
       >
         <div
           className="layout-duotone-hero-image"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
+          style={{ backgroundImage: getHeroBackgroundImage() }}
         />
         <div className="layout-duotone-hero-overlay" />
         <div className="layout-duotone-hero-content">
