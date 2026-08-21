@@ -113,3 +113,13 @@ $ring-gray-600: 0 0 0 0.155rem rgba($gray-600, 1);
 $ring-error-100: 0 0 0 0.155rem rgba($border-error-solid, 1);
 $ring-warning-100: 0 0 0 0.155rem rgba($border-warning-solid, 1);
 $ring-success-100: 0 0 0 0.155rem rgba($border-success-solid, 1);
+
+// Focus ring (use as `outline`, not `box-shadow` — an outline survives the
+// `box-shadow: none/unset !important` resets across the codebase and is still
+// painted in forced-colors mode).
+$focus-ring-width: 2px;
+$focus-ring-offset: 0;
+$focus-ring-primary: $border-brand-solid;
+$focus-ring-error: $border-error-solid;
+$focus-ring-warning: $border-warning-solid;
+$focus-ring-success: $border-success-solid;

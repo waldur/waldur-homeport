@@ -267,9 +267,13 @@ function expectDominantColorParity(oldPng: PNG, newPng: PNG, name: string) {
   // Corner pixel: outside any border-radius arc, so it's always the page's
   // own background, never the button's fill — works for solid-fill and
   // transparent-background variants alike.
-  const oldBackground = pixelAt(oldPng, 0, 0);
-  const oldColor = foregroundAverage(oldPng, oldBackground);
-  const newColor = foregroundAverage(newPng, pixelAt(newPng, 0, 0));
+  // One shared reference, not a per-image probe: a corner pixel can be pure
+  // page background in one render and an antialiased page/fill blend in the
+  // other, which flips whether the button's text clears the threshold — so the
+  // two averages end up measuring different things (fill vs fill+text).
+  const background = pixelAt(oldPng, 0, 0);
+  const oldColor = foregroundAverage(oldPng, background);
+  const newColor = foregroundAverage(newPng, background);
   if (!oldColor || !newColor) return;
 
   // Chromaticity (each channel's share of total brightness) cancels out

@@ -144,8 +144,8 @@
       $border-focused
     );
     @if ($ring-focused != null) {
-      outline: 0;
-      box-shadow: $ring-focused;
+      outline: $focus-ring-width solid $ring-focused;
+      outline-offset: $focus-ring-offset;
     }
   }
 
@@ -242,8 +242,9 @@
 
   @if ($bg-color-active != null) {
     @include button-state-focus {
-      outline: 0;
-      box-shadow: 0 0 0 0.25rem rgba($bg-color-active, 0.25);
+      // Full opacity, not the old 25%-alpha ring, which failed WCAG 1.4.11.
+      outline: $focus-ring-width solid $bg-color-active;
+      outline-offset: $focus-ring-offset;
     }
   }
 

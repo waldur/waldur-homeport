@@ -10,8 +10,11 @@
  * fix below.
  *
  * primary/secondary reference the runtime --waldur-brand-* ramp directly
- * (brand-reactive). tertiary/danger/warning/success compose from the fixed
- * gray/error/warning/success ramps (not brand-reactive).
+ * (brand-reactive). danger/warning/success compose from the fixed
+ * error/warning/success ramps (not brand-reactive). tertiary is a mixed
+ * case: its backgrounds, border and text come from the fixed gray ramp,
+ * but its focus ring references the brand ramp, so tertiary buttons do
+ * need the brand tokens seeded.
  *
  * Zero dependency on Metronic's compiled SCSS — deliberate, so any
  * consumer gets the same look without shipping Metronic.
@@ -37,14 +40,13 @@
   --btn-tertiary-bg-pressed: var(--color-gray-100);
   --btn-tertiary-border: var(--color-gray-300);
   --btn-tertiary-text: var(--color-gray-700);
-  --btn-tertiary-focus-ring: var(--color-gray-100);
+  /* Brand, not gray: the gray ring was 1.10:1 on white, failing WCAG 1.4.11. */
+  --btn-tertiary-focus-ring: var(--waldur-brand-600);
 
   /* Deliberately separate from --btn-tertiary-bg-hover — see migration notes. */
   --btn-text-secondary-hover-bg: var(--color-gray-100);
-  /* Deliberately separate from --btn-tertiary-focus-ring too — the real
-     button's text-secondary focus ring is one step darker than
-     tertiary's, not the same value, despite both being gray rings. */
-  --btn-text-secondary-focus-ring: var(--color-gray-200);
+  /* Now the same brand ring as tertiary; the hover bg above stays separate. */
+  --btn-text-secondary-focus-ring: var(--waldur-brand-600);
 
   --btn-danger-bg: var(--color-error-50);
   --btn-danger-bg-hover: var(--color-error-200);
@@ -114,10 +116,10 @@
   --btn-tertiary-bg-pressed: var(--color-gray-700);
   --btn-tertiary-border: var(--color-gray-700);
   --btn-tertiary-text: var(--color-gray-300);
-  --btn-tertiary-focus-ring: var(--color-gray-800);
+  --btn-tertiary-focus-ring: var(--waldur-brand-500);
 
   --btn-text-secondary-hover-bg: var(--color-gray-800);
-  --btn-text-secondary-focus-ring: var(--color-gray-700);
+  --btn-text-secondary-focus-ring: var(--waldur-brand-500);
 
   --btn-danger-bg: var(--color-error-900);
   --btn-danger-bg-hover: var(--color-error-700);

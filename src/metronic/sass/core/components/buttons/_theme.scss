@@ -419,9 +419,10 @@
     &:focus:not(.btn-active):not(:active),
     &.show:not(.btn-active):not(:active) {
       background-color: $bg-color !important;
-      outline: 0;
       border-color: $border-color;
-      box-shadow: 0 0 0 0.25rem $gray-200;
+      // Was a $gray-200 ring at 1.24:1 against white; WCAG 1.4.11 needs 3:1.
+      outline: $focus-ring-width solid $focus-ring-primary;
+      outline-offset: $focus-ring-offset;
     }
 
     .btn-check:checked + &,

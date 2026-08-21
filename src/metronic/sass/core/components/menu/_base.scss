@@ -30,16 +30,37 @@
   display: block;
   padding: 0;
 
+  // Triggers/actions are <button>s so the keyboard can reach them (WCAG 2.1.1).
+  // Scoped to button so the <a> links keep their own colour and font rules.
+  button.menu-link {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+  }
+
   // Menu Link
   .menu-link {
     cursor: pointer;
+
     display: flex;
     align-items: center;
     padding: 0;
     flex: 0 0 100%;
     padding: get($menu, link, self, padding-y) get($menu, link, self, padding-x);
     transition: none;
-    outline: none !important;
+
+    // Pointer focus only; keyboard focus keeps a ring (WCAG 2.4.7).
+    &:not(:focus-visible) {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $focus-ring-primary;
+      outline-offset: $focus-ring-offset;
+    }
 
     &.disabled {
       cursor: not-allowed !important;
