@@ -8,8 +8,8 @@ import {
 } from 'waldur-js-client';
 
 import { fetchResultCount, getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
-import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 import store from '@/store/store';
 import { setCurrentCustomer } from '@/workspace/actions';
@@ -20,7 +20,7 @@ import { getCustomer } from '../utils';
 export async function fetchCustomer(transition: Transition) {
   const customerId = transition.params()?.uuid;
   if (!customerId) {
-    router.stateService.go('errorPage.notFound');
+    goToNotFound();
   } else {
     try {
       const currentCustomer = await getCustomer(customerId);
@@ -42,7 +42,7 @@ export async function fetchCustomer(transition: Transition) {
       });
       store.dispatch(setCurrentCustomer(currentCustomer));
     } catch {
-      router.stateService.go('errorPage.notFound');
+      goToNotFound();
     }
   }
 }

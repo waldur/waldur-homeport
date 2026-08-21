@@ -1,5 +1,6 @@
 import { QueryCache, QueryClient } from '@tanstack/react-query';
 
+import { goToNotFound } from '@/error/utils';
 import { router } from '@/router';
 
 export const queryClient = new QueryClient({
@@ -44,7 +45,7 @@ export const queryClient = new QueryClient({
       } else if (error?.response?.status === 503) {
         router.stateService.target('errorPage.serviceNotAvailable');
       } else if (error?.response?.status == 404) {
-        router.stateService.go('errorPage.notFound');
+        goToNotFound();
       }
     },
   }),

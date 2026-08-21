@@ -1,8 +1,9 @@
-import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 import { usersRetrieve } from 'waldur-js-client';
 
+import { goToNotFound } from '@/error/utils';
 import { usePageHero } from '@/navigation/context';
 import { useSetUser, useUser } from '@/workspace/hooks';
 
@@ -19,7 +20,6 @@ const WithHero = () => {
 
 export const UserDetailsPage: FunctionComponent = () => {
   const { state, params } = useCurrentStateAndParams();
-  const router = useRouter();
   const currentUser = useUser();
   const setCurrentUser = useSetUser();
 
@@ -35,11 +35,11 @@ export const UserDetailsPage: FunctionComponent = () => {
           setCurrentUser(user.data);
         } catch (error) {
           if (error.response?.status === 404) {
-            router.stateService.go('errorPage.notFound');
+            goToNotFound();
           }
         }
       } else {
-        router.stateService.go('errorPage.notFound');
+        goToNotFound();
       }
     }
     loadUser();

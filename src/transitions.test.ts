@@ -221,3 +221,33 @@ describe('Profile validity transition guard', () => {
     });
   });
 });
+
+describe('Transition error fallback', () => {
+  let errorHook: any;
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    onBeforeHandlers.length = 0;
+    onStartHandlers.length = 0;
+    onSuccessHandlers.length = 0;
+    onErrorHandlers.length = 0;
+
+    attachTransitions();
+
+    expect(onErrorHandlers).toHaveLength(1);
+    errorHook = onErrorHandlers[0];
+  });
+
+  it('shows the 404 page without rewriting the address bar', () => {
+    const transition = {
+      ...createMockTransition('some-state'),
+      error: () => ({}),
+    };
+
+    errorHook.callback(transition);
+
+    expect(mockTarget).toHaveBeenCalledWith('errorPage.notFound', undefined, {
+      location: false,
+    });
+  });
+});

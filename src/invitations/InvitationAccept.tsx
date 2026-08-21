@@ -1,15 +1,15 @@
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { goToNotFound } from '@/error/utils';
 import { translate } from '@/i18n';
 
 import { useCheckAndAccept } from './useCheckAndAccept';
 
 export const InvitationAccept: FunctionComponent = () => {
-  const router = useRouter();
   const {
     params: { uuid },
   } = useCurrentStateAndParams();
@@ -18,7 +18,7 @@ export const InvitationAccept: FunctionComponent = () => {
 
   useEffectOnce(() => {
     if (!ENV.plugins.WALDUR_CORE.INVITATIONS_ENABLED) {
-      router.stateService.go('errorPage.notFound');
+      goToNotFound();
       return;
     }
     checkAndAccept();

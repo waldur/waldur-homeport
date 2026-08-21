@@ -18,3 +18,14 @@ export const goBack = () => {
     router.stateService.go('profile.details');
   }
 };
+
+/**
+ * The error states have no url of their own, so a plain transition into one
+ * lets UI-Router sync the address bar to the layout's empty url: the 404 page
+ * renders while the address bar reads '/', and refreshing or copying the link
+ * no longer reproduces what is on screen. `location: false` keeps the address
+ * that produced the error, matching the url='*path' catch-all state that
+ * already handles fully unknown routes.
+ */
+export const goToNotFound = () =>
+  router.stateService.go('errorPage.notFound', undefined, { location: false });
