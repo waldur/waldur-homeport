@@ -8,6 +8,7 @@ import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -21,6 +22,8 @@ interface ComponentRowProps {
   hidePrices?: boolean;
   hasX?: boolean;
   className?: string;
+  /** Set when the quantity is unknown, so no total can be stated yet. */
+  hideTotal?: boolean;
 }
 
 export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
@@ -94,7 +97,10 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
       }
       value={props.children}
       actions={
-        !props.hidePrices && (
+        !props.hidePrices &&
+        (props.hideTotal ? (
+          <span className="d-block">{DASH_ESCAPE_CODE}</span>
+        ) : (
           <>
             <span className="d-block">
               {translate('Total')}
@@ -119,7 +125,7 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
               </span>
             ) : null}
           </>
-        )
+        ))
       }
     />
   );
