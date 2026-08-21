@@ -110,7 +110,7 @@ export const UnifiedSidebar = () => {
 
   return (
     <Sidebar>
-      {canCreateOrder && (user.is_staff || user.permissions?.length !== 0) ? (
+      {canCreateOrder ? (
         <MarketplaceTrigger
           disabled={shouldBlockNavigation}
           disabledTooltip={disabledTooltip}
