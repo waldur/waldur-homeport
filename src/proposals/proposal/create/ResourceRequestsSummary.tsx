@@ -8,6 +8,8 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import '@/proposals/flushTable.scss';
+
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 
 import { ResourceRequestExpandableRow } from './resource-requests-step/ResourceRequestExpandableRow';
@@ -37,6 +39,8 @@ export const ResourceRequestsSummary = ({
     >
       <Table<ProposalResource>
         {...tableProps}
+        className="proposal-flush-table"
+        cardBordered={false}
         title={null}
         hasActionBar={false}
         columns={[

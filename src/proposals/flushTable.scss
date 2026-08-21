@@ -1,0 +1,56 @@
+// Tables nested inside a card on the proposal page.
+
+// Table draws itself as a card: a border plus a 24px body inset, then the cells
+// add their own edge padding on top. Nested inside a section card that already
+// supplies both, the rows end up double-indented from a border they do not
+// need. This strips that second layer so the columns line up with the headings
+// above them.
+
+// Applies whether the class lands on the table's own card or on a wrapper
+// around it, since not every caller can pass a class down.
+.proposal-flush-table {
+  &.card-table > .card-body,
+  .card-table > .card-body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  // The bottom inset exists to separate the rows from the pagination bar; these
+  // lists are short enough that the bar is usually absent, leaving dead space.
+  // Keyed off the bar itself, so the gap returns when it does appear.
+  &.card-table:not(:has(.table-pagination)) > .card-body,
+  .card-table:not(:has(.table-pagination)) > .card-body {
+    padding-bottom: 0;
+  }
+
+  // The card's own 24px inset is gone, so the row's edge spacing comes from the
+  // cells instead: the header band then runs the full width of the card while
+  // the content sits one spacing step in. 1.25rem is the theme's step 5 — the
+  // same value `p-5` resolves to — not a hand-picked pixel figure.
+  // The theme zeroes the final row's rule with `!important`, which is right for
+  // a table that owns a bordered card — the card closes it off. Stripped of
+  // that card the table would bleed into the next heading, so the closing line
+  // is drawn on the scroll wrapper rather than fighting that rule.
+  .table-responsive {
+    border-bottom: 1px solid var(--bs-border-color);
+  }
+
+  .table {
+    td:first-child,
+    th:first-child {
+      padding-left: 1.25rem;
+    }
+
+    td:last-child,
+    th:last-child {
+      padding-right: 1.25rem;
+    }
+  }
+}
+
+// Where a card body opens straight onto one of these tables, its top inset only
+// pushes the header band away from the card's own rule. Bodies that start with
+// fields keep theirs — they have no band to lean on.
+.card-body:has(> .proposal-flush-table:first-child) {
+  padding-top: 0;
+}
