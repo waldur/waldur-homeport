@@ -9,10 +9,12 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:subpath": "cross-env DEV_SUBPATH=1 vite",
     "build": "vite build",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "waldur-api-client": "workspace:*",
@@ -28,6 +30,7 @@
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^6.0.2",
+    "cross-env": "^10.1.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.7.3",
     "vite": "^8.0.16"

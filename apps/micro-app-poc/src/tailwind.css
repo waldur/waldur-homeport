@@ -9,6 +9,21 @@
  */
 @import 'tailwindcss';
 @import 'waldur-design-tokens/buttonColors.css';
+@import 'waldur-design-tokens/surfaceColors.css';
+
+/* Same bridge the main app's own src/tailwind.css uses: --font-sans reads
+   the runtime-injected --waldur-font-family custom property rather than a
+   hardcoded font name. App.tsx sets it — synchronously to 'Inter' at
+   module load (so this variable is never unset on first paint; an unset
+   var() here would invalidate the whole font-family value, falling back
+   to Tailwind's generic system-font stack, not just skip to the next
+   fallback name — see docs/tailwind-shadcn-migration-notes.md's brand
+   token note for the same pitfall), then again from
+   ENV.plugins.WALDUR_CORE.FONT_FAMILY once fetchRuntimeConfig() resolves,
+   same as afterBootstrap.tsx's initCssVariables(). */
+@theme {
+  --font-sans: var(--waldur-font-family), Helvetica, sans-serif;
+}
 
 /* Tailwind v4's automatic content detection scans outward from this file
    toward the nearest .git/package.json root, but stops at this app's own

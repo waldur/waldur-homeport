@@ -36,6 +36,20 @@ yarn apps:build                     # vite build for every apps/* member
 `yarn workspaces foreach -A --include 'apps/*' run <script>` — one generic
 command instead of a hand-maintained script pair per app.
 
+### Testing the subpath locally, with HMR
+
+The root app's own `vite.config.ts` can proxy a micro-app's subpath to its
+dev server, mirroring the production nginx routing below without a full
+Docker build — see `apps/micro-app-poc/README.md` for the exact commands.
+This needs the micro-app's own `vite.config.ts` to set its `base` to match
+(env-var-gated, so standalone dev stays at `/`) — otherwise Vite's own dev
+paths (`/@vite/client`, `/@fs/*`) collide between the two dev servers
+sharing one origin. Currently hardcoded to `micro-app-poc`'s one proxy
+entry/port; generalizing to every `apps/*` member automatically would need
+a small discoverable ports registry (e.g. extending the `waldur.deploy`
+package.json convention below with a `devPort` field) — not worth it with
+only one real example today.
+
 ## Build & serve pipeline
 
 Every `apps/*` member ships inside the **same production image** as the
@@ -75,7 +89,7 @@ domain. It exists in two forms that must not be confused:
   leading slash — the leading slash comes from the literal `/` already in
   `docker/nginx-tpl.conf`'s `location /${ASSET_PATH}`): drives nginx
   routing and `entrypoint.sh`'s "Handle asset path" step, which duplicates
-  the whole html tree (root app *and* every micro-app directory) into
+  the whole html tree (root app _and_ every micro-app directory) into
   `/usr/share/nginx/html/${ASSET_PATH}/`.
 
 A micro-app's own build and its generated nginx location block both key off
@@ -106,19 +120,19 @@ so a real new micro-app needs no `package.json` change to be deployed.
 
 ### Live-testing without shipping
 
-`waldur.deploy: false` only controls *production* images. CI/preview
+`waldur.deploy: false` only controls _production_ images. CI/preview
 builds override it with a second Dockerfile arg,
 `INCLUDE_DEPLOY_FALSE_APPS=true`, so every `apps/*` member — including
 opted-out ones — is still built, packaged, served, and `API_URL`-substituted
 on every MR:
 
-| Job (`.gitlab-ci.yml`)                | `INCLUDE_DEPLOY_FALSE_APPS` | Purpose                                             |
-| -------------------------------------- | :--------------------------: | ---------------------------------------------------- |
-| `Build test docker image` (E2E image)  | `true`                        | Image the downstream E2E suite runs against          |
-| `Build test docker image` (k8s preview)| `true`                        | Feeds `Test k8s deployment`'s live MR preview         |
-| `Publish YOLO docker image`            | unset (`false`)               | Real `develop`-branch production image                |
-| `Publish latest docker image`          | unset (`false`)               | Retags YOLO → `latest`                                 |
-| `Publish multiarch ... specific version`| unset (`false`)              | Real tagged-release production image                   |
+| Job (`.gitlab-ci.yml`)                   | `INCLUDE_DEPLOY_FALSE_APPS` | Purpose                                       |
+| ---------------------------------------- | :-------------------------: | --------------------------------------------- |
+| `Build test docker image` (E2E image)    |           `true`            | Image the downstream E2E suite runs against   |
+| `Build test docker image` (k8s preview)  |           `true`            | Feeds `Test k8s deployment`'s live MR preview |
+| `Publish YOLO docker image`              |       unset (`false`)       | Real `develop`-branch production image        |
+| `Publish latest docker image`            |       unset (`false`)       | Retags YOLO → `latest`                        |
+| `Publish multiarch ... specific version` |       unset (`false`)       | Real tagged-release production image          |
 
 So `apps/micro-app-poc` is reachable at `/micro-app-poc/` (or
 `/<mr-id>/micro-app-poc/` under the preview env's `ASSET_PATH`) in every

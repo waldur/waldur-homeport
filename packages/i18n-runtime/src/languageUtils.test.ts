@@ -22,6 +22,15 @@ const setUrlLanguage = (code: string | null) => {
   window.location.assign(code ? `?language=${code}` : '?');
 };
 
+describe('LanguageUtilsService.getChoices', () => {
+  it('returns an empty array before init() has ever been called', () => {
+    // A consumer that never reaches a live backend (e.g. a standalone
+    // micro-app with no session) may call getChoices() with no prior
+    // init() at all — this must not throw.
+    expect(LanguageUtilsService.getChoices()).toEqual([]);
+  });
+});
+
 describe('LanguageUtilsService.checkLanguage', () => {
   it('prefers the URL param over stored/default language', () => {
     setUrlLanguage('et');
