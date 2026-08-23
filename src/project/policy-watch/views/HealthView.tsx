@@ -239,16 +239,11 @@ export const HealthView: FC<Props> = ({ data }) => {
 
       {/* Per-resource limits and the policy governing them live in the
           "Active limit-based resources" table above, as an expandable row —
-          a second resource list here only split the same story in two. */}
-      {data.policies.length === 0 && (
-        <AlertItem
-          variant="info"
-          className="mb-3"
-          title={translate(
-            'No cost or SLURM usage policies are configured for this project.',
-          )}
-        />
-      )}
+          a second resource list here only split the same story in two.
+
+          Having no policies is not a finding, so it gets no banner: nothing
+          is wrong, there is nothing to act on, and the notice sat under every
+          healthy project's credit card as permanent furniture. */}
     </>
   );
 };

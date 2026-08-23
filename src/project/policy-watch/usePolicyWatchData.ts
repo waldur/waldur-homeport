@@ -1,6 +1,7 @@
 import { useQueries, useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 import {
+  creditTransactionsList,
   customerCreditsList,
   invoiceItemsCostsList,
   marketplaceCustomerEstimatedCostPoliciesList,
@@ -17,6 +18,7 @@ import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { Project } from '@/workspace/types';
 
+import { buildCreditBreakdown } from './creditBreakdown';
 import { buildCreditEvents } from './creditEvents';
 import {
   CreditBreakdown,
@@ -199,6 +201,37 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     refetchOnWindowFocus: false,
   });
 
+  // The credit whose drawdown the lifecycle card describes: the project
+  // allocation when there is one, otherwise the organization balance. Mirrors
+  // the `projectCredit || customerCredit` choice the card itself makes.
+  const ledgerCreditUuid = projectCreditQ.data
+    ? null
+    : customerCreditQ.data?.uuid || null;
+  const ledgerProjectUuid = projectCreditQ.data ? projectUuid : null;
+
+  const creditLedgerQ = useQuery({
+    queryKey: [
+      'policy-watch-credit-ledger',
+      ledgerProjectUuid,
+      ledgerCreditUuid,
+    ],
+    queryFn: () =>
+      creditTransactionsList({
+        query: {
+          ...(ledgerProjectUuid
+            ? { project_uuid: ledgerProjectUuid }
+            : { credit_uuid: ledgerCreditUuid }),
+          // A credit's whole history, not a page of it: the card states
+          // lifetime totals, and a truncated ledger understates forfeiture
+          // without saying so.
+          page_size: 500,
+        },
+      }).then((r) => r.data || []),
+    enabled: !!ledgerProjectUuid || !!ledgerCreditUuid,
+    staleTime: SHORT_STALE_TIME,
+    refetchOnWindowFocus: false,
+  });
+
   const resourcesQ = useQuery({
     queryKey: ['policy-watch-resources', projectUuid],
     queryFn: () =>
@@ -271,6 +304,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     projectCreditQ.refetch();
     customerCreditQ.refetch();
     invoicesQ.refetch();
+    creditLedgerQ.refetch();
     resourcesQ.refetch();
     slurmPoliciesQueries.forEach((q) => q.refetch());
   }, [
@@ -279,6 +313,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     projectCreditQ,
     customerCreditQ,
     invoicesQ,
+    creditLedgerQ,
     resourcesQ,
     slurmPoliciesQueries,
   ]);
@@ -290,6 +325,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     const projectCredit = projectCreditQ.data || null;
     const customerCredit = customerCreditQ.data || null;
     const invoices = invoicesQ.data || [];
+    const creditLedger = creditLedgerQ.data || [];
 
     const today = new Date();
 
@@ -670,31 +706,13 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     }
 
     // --- Credit lifecycle breakdown: used + lost + remaining = granted.
-    // Reconstructed from the monthly costs series without a new endpoint. Each
-    // month's credit debited is |compensation|; the part matching real usage is
-    // "used", and the floor-draw shortfall (debited beyond incurred) is "lost"
-    // and hard to recover. Remaining is the current balance, so the three parts
-    // always reconcile to the granted total no matter the changes made.
+    // Read from the credit ledger, which records both ways a balance is drawn.
+    // The invoice items record only one of them: the minimal-consumption floor
+    // takes its shortfall straight off the balance and writes no item, so a
+    // breakdown inferred from items could never show forfeiture at all.
     let creditBreakdown: CreditBreakdown | null = null;
     if (creditTerms) {
-      let used = 0;
-      let lost = 0;
-      for (const inv of invoices as Array<{
-        incurred?: number | string;
-        compensation?: number | string;
-      }>) {
-        const incurred = safeNumber(inv.incurred);
-        const debited = Math.abs(safeNumber(inv.compensation));
-        used += Math.min(incurred, debited);
-        lost += Math.max(0, debited - incurred);
-      }
-      const remaining = creditTerms.value;
-      creditBreakdown = {
-        used,
-        lost,
-        remaining,
-        granted: used + lost + remaining,
-      };
+      creditBreakdown = buildCreditBreakdown(creditLedger, creditTerms.value);
     }
 
     const isLoading =
@@ -704,6 +722,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       projectCreditQ.isLoading ||
       customerCreditQ.isLoading ||
       invoicesQ.isLoading ||
+      creditLedgerQ.isLoading ||
       slurmPoliciesQueries.some((q) => q.isLoading);
 
     const hasError =
@@ -712,7 +731,8 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       !!resourcesQ.error ||
       !!projectCreditQ.error ||
       !!customerCreditQ.error ||
-      !!invoicesQ.error;
+      !!invoicesQ.error ||
+      !!creditLedgerQ.error;
 
     return {
       projectPolicies,
@@ -750,6 +770,9 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     invoicesQ.data,
     invoicesQ.isLoading,
     invoicesQ.error,
+    creditLedgerQ.data,
+    creditLedgerQ.isLoading,
+    creditLedgerQ.error,
     slurmPolicies,
     slurmPoliciesQueries,
   ]);

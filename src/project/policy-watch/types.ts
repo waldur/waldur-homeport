@@ -167,10 +167,11 @@ export interface CreditBreakdown {
   /** Initial grant plus every later change; equals used + lost + remaining
    *  regardless of top-ups or reductions. */
   granted: number;
-  /** Credit consumed against real usage: Σ min(incurred, credit debited). */
+  /** Credit consumed against real usage: the ledger's `compensation` rows, net
+   *  of any roll-back that reversed them. */
   used: number;
-  /** Credit forfeited to the minimal-consumption floor (and expiry): the
-   *  Σ max(0, credit debited − incurred) shortfall. Hard to recover. */
+  /** Credit forfeited without buying anything: the ledger's `minimal_draw` and
+   *  `expiry` rows. Hard to recover. */
   lost: number;
   /** Current remaining balance (ProjectCredit.value). */
   remaining: number;
