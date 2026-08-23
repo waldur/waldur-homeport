@@ -4,8 +4,20 @@
 TEMP_DIR=$(mktemp -d)
 chmod g+rwx $TEMP_DIR
 
+# Listen on IPv6 too when the kernel has it, so the container is reachable on
+# IPv6-only and dual-stack clusters — without it nginx binds 0.0.0.0 only and
+# the readiness probe against the pod's IPv6 address is refused forever.
+# /proc/net/if_inet6 is absent exactly when IPv6 is compiled out or disabled at
+# boot, where opening a [::] socket would fail and nginx would refuse to start.
+if [ -f /proc/net/if_inet6 ]; then
+    IPV6_LISTEN="listen [::]:8080;"
+else
+    IPV6_LISTEN=""
+fi
+export IPV6_LISTEN
+
 # Process nginx config using temp directory
-envsubst '$ASSET_PATH' < /etc/nginx/nginx-tpl.conf > $TEMP_DIR/nginx.conf
+envsubst '$ASSET_PATH $IPV6_LISTEN' < /etc/nginx/nginx-tpl.conf > $TEMP_DIR/nginx.conf
 cp $TEMP_DIR/nginx.conf /etc/nginx/nginx.conf || true
 
 # One nginx location block per apps/* micro-app actually present under the
