@@ -7,9 +7,9 @@ export const getOauthURL = (provider: Pick<IdentityProvider, 'provider'>) => {
   const baseUrl = `${ENV.apiEndpoint}api-auth/${provider.provider}/init/`;
   const params = new URLSearchParams();
 
-  // Add redirect_uri parameter (origin-only, no paths/query/fragments, HTTPS unless localhost)
-  const redirectUri = window.location.origin;
-  params.append('redirect_uri', redirectUri);
+  // Backend matches this against the provider's allowed_redirects on origin only.
+  const returnUrl = window.location.origin;
+  params.append('return_url', returnUrl);
 
   // Add language preference if available
   const langCode = LanguageUtilsService.getCurrentLanguage()?.code;
