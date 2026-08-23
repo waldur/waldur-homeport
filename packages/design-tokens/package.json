@@ -8,7 +8,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./colors.css": "./src/colors.css",
-    "./buttonColors.css": "./src/buttonColors.css"
+    "./buttonColors.css": "./src/buttonColors.css",
+    "./surfaceColors.css": "./src/surfaceColors.css"
   },
   "license": "MIT"
 }

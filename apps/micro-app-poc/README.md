@@ -10,36 +10,65 @@ importable via workspace hoisting.
 
 ```bash
 cp apps/micro-app-poc/.env.example apps/micro-app-poc/.env  # once, point VITE_API_URL at a real backend
-yarn workspace waldur-micro-app-poc dev      # dev server, port 5180
+yarn workspace waldur-micro-app-poc dev      # standalone dev server, port 5180
 yarn apps:typecheck                          # tsc --noEmit for every apps/* member
 yarn apps:build                              # vite build for every apps/* member
 ```
 
+### Under the root app's own dev server, at `/micro-app-poc/`
+
+Mirrors the production nginx subpath routing (see
+[docs/micro-apps.md](../../docs/micro-apps.md)), with real HMR, for testing
+subpath-specific concerns locally (asset base-path resolution, real
+same-origin session sharing) without a full Docker build:
+
+```bash
+yarn workspace waldur-micro-app-poc dev:subpath   # this app, base set to /micro-app-poc/
+yarn start                                        # root app, in a second terminal — proxies /micro-app-poc to the above
+```
+
+Then visit `http://localhost:8001/micro-app-poc/`. The root app's
+`vite.config.ts` proxy entry is hardcoded to this one app's port for now —
+see its comment for why generalizing to more `apps/*` members isn't worth
+it yet.
+
 ## What it touches
 
-`src/App.tsx` calls a real entry point from each of the seven extracted
+`src/App.tsx` calls a real entry point from several of the extracted
 packages — not just an import — with no backend running:
 
-- **`waldur-ui`**: renders `BaseButton` (`primary`/`secondary`/`danger`).
 - **`waldur-design-tokens`**: `initBrandTokens()` themes the brand-reactive
   variants from a single hex color, with no code borrowed from
   `afterBootstrap.tsx`.
-- **`waldur-i18n-runtime`**: `translate()`, safely falling back to the raw
-  string with no catalog loaded.
 - **`waldur-auth-core`**: `configureAuthCore()` with a real
-  `localStorage`-backed `StorageAdapter` (namespaced under
-  `waldur-micro-app-poc/`), then `isAuthenticated()`.
-- **`waldur-api-client`**: `fixURL()`.
+  `localStorage`-backed `StorageAdapter` reading/writing the exact
+  `waldur/auth/*` keys `waldur-homeport`'s own `src/core/StorageManager.ts`
+  uses (not namespaced) — same-origin session sharing, not an isolated
+  demo: a user already logged into the root app shouldn't have to log in
+  again on this subpath.
 - **`waldur-runtime-config`**: `getApiUrlFromMeta()`, reading the same
   `VITE_API_URL`-backed `<meta name="api-url">` tag waldur-homeport's own
-  `index.html` uses (see `.env.example`); and `fetchRuntimeConfig()` — a
-  real network request via `waldur-js-client`'s `configurationRetrieve()`,
-  wired up through `waldur-auth-core`'s `initApiClient()` exactly as
-  `src/core/bootstrap.ts` does. Requires a live backend at `VITE_API_URL`;
-  with none running the request fails and the failure is shown in the
-  checks list below, same as a real host app would surface it.
+  `index.html` uses (see `.env.example`), wired up through
+  `waldur-auth-core`'s `initApiClient()` exactly as `src/core/bootstrap.ts`
+  does.
 - **`waldur-telemetry`**: `initSentry()` with an empty DSN, which the SDK
   no-ops on safely.
+
+## Dashboard mock
+
+The app's only page — `OrgDashboardMock.tsx` composes the `Dashboard/*`
+primitives from `packages/ui` (`StatCard`, `StatusPill`, `DataTable`,
+`Sidebar`, `TopBar`) into a full page matching an organization-admin
+dashboard mockup, wired to real Waldur data via `waldur-js-client`
+(`customersList`/`projectsList`/`invoicesList`/`projectsListUsersCount`).
+Moved here from `packages/ui`'s own Storybook (where each primitive still
+has its own isolated story) to validate the same composition works in a
+real standalone app, not just Storybook's build pipeline. Supports both
+light and dark themes, toggled via a Sun/Moon `IconButton` in the TopBar —
+`waldur-design-tokens/theme.ts` reads/writes the same shared
+`waldur/theme/name` localStorage key and `data-theme` attribute the main
+app's own `src/theme/` uses, so a theme choice made in either app carries
+over to the other.
 
 ## Deployment
 

@@ -1,56 +1,115 @@
-import { useEffect, useState } from 'react';
-import { fixURL } from 'waldur-api-client';
+import { useEffect } from 'react';
 import {
   configureAuthCore,
   initApiClient,
-  isAuthenticated,
   StorageAdapter,
 } from 'waldur-auth-core';
-import { initBrandTokens } from 'waldur-design-tokens';
-import { translate } from 'waldur-i18n-runtime';
+import { initBrandTokens, initFontFamily } from 'waldur-design-tokens';
+import { LanguageUtilsService } from 'waldur-i18n-runtime';
 import { fetchRuntimeConfig, getApiUrlFromMeta } from 'waldur-runtime-config';
 import { initSentry } from 'waldur-telemetry';
-import { BaseButton } from 'waldur-ui';
+
+import { OrgDashboardMock } from './OrgDashboardMock';
 
 /**
- * Real localStorage-backed adapter — same persistence choice
- * waldur-homeport's own src/core/StorageManager.ts makes, namespaced under
- * this app's own key prefix so it can never collide with a real host's
- * `waldur/auth/*` keys even when both run on the same origin.
+ * Reads/writes the exact keys waldur-homeport's own
+ * src/core/StorageManager.ts uses — NOT namespaced. A real dashboard
+ * micro-app can't namespace its own auth storage the way an earlier version
+ * of this file did: a user already logged into the root app shouldn't have
+ * to log in again just because they're now on this subpath. Since both are
+ * served from the same origin (see docs/micro-apps.md), reading the same
+ * localStorage keys the root app already wrote to is enough — no token
+ * hand-off needed.
  */
-function createLocalStorage(key: string): StorageAdapter {
-  const namespacedKey = `waldur-micro-app-poc/${key}`;
+function createStorage(key: string): StorageAdapter {
+  const sharedKey = `waldur/${key}`;
   return {
-    get: () => localStorage.getItem(namespacedKey),
-    set: (next) => localStorage.setItem(namespacedKey, next),
-    remove: () => localStorage.removeItem(namespacedKey),
+    get: () => localStorage.getItem(sharedKey),
+    set: (next) => localStorage.setItem(sharedKey, next),
+    remove: () => localStorage.removeItem(sharedKey),
   };
 }
 
 const apiUrl = getApiUrlFromMeta();
+const languageStorage = createStorage('i18n/lang');
 
 configureAuthCore({
   storage: {
-    token: createLocalStorage('auth/token'),
-    method: createLocalStorage('auth/method'),
-    impersonation: createLocalStorage('auth/impersonation'),
-    language: createLocalStorage('i18n/lang'),
+    token: createStorage('auth/token'),
+    method: createStorage('auth/method'),
+    impersonation: createStorage('auth/impersonation'),
+    language: languageStorage,
   },
   getApiEndpoint: () => apiUrl,
   isConfigLoaded: () => true,
   isOidcAccessTokenEnabled: () => false,
+  // Same-origin, so a plain redirect (not a router transition) is the
+  // correct handoff to a real host's login — this app has none of its own.
   onSessionExpired: () => {
-    // No router in this skeleton — a real host would redirect to login here.
+    window.location.href = '/';
   },
 });
 
 initApiClient();
 
-export const App = () => {
-  const [checks, setChecks] = useState<Record<string, string>>({});
+// Same locales/*.json files waldur-homeport's own src/i18n/LanguageUtilsService.ts
+// imports (one extra `../` — this file sits one directory deeper). Not
+// republished as a package: these are static translation-catalog data,
+// not application code, so a relative reach-through here isn't the same
+// kind of coupling this app otherwise avoids (no @/ aliases, no shared
+// src/ components) — there's no backend endpoint that serves them
+// instead (translate() is a pure client-side dictionary lookup, see
+// waldur-i18n-runtime/src/translate.ts).
+function getLocaleData(locale: string) {
+  return import(`../../../locales/${locale}.json`);
+}
 
+// Set synchronously at module load, not inside an effect — App's first
+// render already resolves tailwind.css's `--font-sans: var(--waldur-font-family), ...`,
+// and an unset custom property there invalidates the whole font-family
+// value (falls back to Tailwind's generic system-font stack, not just the
+// next name in the list — see tailwind.css's comment). This guarantees
+// it's never unset, with the real tenant value (if any) applied on top
+// once fetchRuntimeConfig() resolves below.
+initFontFamily('Inter');
+
+export const App = () => {
+  // Light/dark theme is applied by OrgDashboardMock itself (see its own
+  // useTheme effect there) — it needs to live where the toggle button
+  // does, and this shell has nothing else that depends on it.
   useEffect(() => {
     initBrandTokens('#175CD3');
+
+    // Same source as the main app's afterBootstrap.tsx's
+    // initCssVariables() — a tenant-configurable ENV.plugins.WALDUR_CORE.
+    // FONT_FAMILY. Silently keeps the 'Inter' default set above on any
+    // failure (no backend, not authenticated) — same fallback afterBootstrap.tsx
+    // itself uses (`|| 'Inter'`) when the plugin value is empty.
+    fetchRuntimeConfig()
+      .then((config) => {
+        const fontFamily = config.plugins?.WALDUR_CORE?.FONT_FAMILY;
+        if (fontFamily) {
+          initFontFamily(fontFamily);
+        }
+
+        // Same wiring as the main app's own initLanguageUtils() — picks
+        // up a language already chosen there via the shared
+        // waldur/i18n/lang key (or the ?language= URL param, or the
+        // backend's defaultLanguage), and loads that dictionary here too.
+        // translate() calls below fall back to the raw English string
+        // until this resolves, and forever if it never does (no
+        // backend/not authenticated) — there's no untranslated flash to
+        // avoid the way there was for font-family, since "untranslated"
+        // and "the default state" are the same thing here.
+        LanguageUtilsService.init({
+          languageChoices: config.languageChoices,
+          defaultLanguage: config.defaultLanguage,
+          loadLocale: getLocaleData,
+          storage: languageStorage,
+        });
+        LanguageUtilsService.checkLanguage();
+      })
+      .catch(() => {});
 
     initSentry({
       dsn: '',
@@ -58,85 +117,7 @@ export const App = () => {
       environment: 'development',
       tracePropagationTargets: [],
     });
-
-    setChecks({
-      'waldur-auth-core: isAuthenticated()': String(isAuthenticated()),
-      'waldur-api-client: fixURL()': fixURL('/marketplace-offerings/'),
-      'waldur-runtime-config: getApiUrlFromMeta()': apiUrl,
-      'waldur-i18n-runtime: translate()': translate(
-        'Hello from a standalone micro-app',
-      ),
-    });
-
-    // waldur-runtime-config: fetchRuntimeConfig() — a real SDK request
-    // (configurationRetrieve() from waldur-js-client) against apiUrl. No
-    // mock: run a real backend at apiUrl to see this succeed, otherwise the
-    // request fails and that failure is shown below like any other API
-    // error a real host app would surface.
-    fetchRuntimeConfig()
-      .then((config) =>
-        setChecks((prev) => ({
-          ...prev,
-          'waldur-runtime-config: fetchRuntimeConfig()': `ok — default language: ${config.defaultLanguage}`,
-        })),
-      )
-      .catch((error: { response?: Response } | Error) => {
-        // waldur-auth-core's error interceptor spreads the thrown Error into
-        // a plain object (losing its non-enumerable .message), so a network
-        // failure here surfaces only a possible `.response`, not a message.
-        const reason =
-          error instanceof Error
-            ? error.message
-            : error.response
-              ? `HTTP ${error.response.status}`
-              : `no response — is a backend running at ${apiUrl}?`;
-        setChecks((prev) => ({
-          ...prev,
-          'waldur-runtime-config: fetchRuntimeConfig()': `failed — ${reason}`,
-        }));
-      });
   }, []);
 
-  return (
-    <div className="mx-auto flex max-w-xl flex-col gap-6 p-8">
-      <h1 className="text-xl font-semibold text-gray-900">
-        {translate('waldur-micro-app-poc')}
-      </h1>
-      <p className="text-sm text-gray-600">
-        Every control below is <code>waldur-ui</code>'s real{' '}
-        <code>BaseButton</code>, themed by <code>waldur-design-tokens</code>{' '}
-        with zero CSS or config copied from waldur-homeport's <code>src/</code>.
-      </p>
-
-      <div className="flex flex-wrap gap-3">
-        <BaseButton
-          label={translate('Primary')}
-          variant="primary"
-          size="lg"
-          onClick={() => {}}
-        />
-        <BaseButton
-          label={translate('Secondary')}
-          variant="secondary"
-          size="lg"
-          onClick={() => {}}
-        />
-        <BaseButton
-          label={translate('Danger')}
-          variant="danger"
-          size="lg"
-          onClick={() => {}}
-        />
-      </div>
-
-      <dl className="flex flex-col gap-1 rounded-lg border border-gray-200 p-4 text-sm">
-        {Object.entries(checks).map(([label, value]) => (
-          <div key={label} className="flex justify-between gap-4">
-            <dt className="text-gray-500">{label}</dt>
-            <dd className="font-mono text-gray-900">{value}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  );
+  return <OrgDashboardMock />;
 };

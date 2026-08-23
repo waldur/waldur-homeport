@@ -64,7 +64,7 @@ class LanguageUtilsServiceClass {
   }
 
   getChoices() {
-    return this.config.languageChoices;
+    return this.config?.languageChoices ?? [];
   }
 }
 

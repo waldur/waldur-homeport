@@ -54,6 +54,19 @@ export default defineConfig({
         ws: true,
         rewrite: (path) => path.replace(/^\/rmqws-stomp/, '/ws'),
       },
+      // apps/micro-app-poc's own dev server, reachable at this same
+      // subpath in production (see docs/micro-apps.md). Requires it
+      // running separately with its base set to match — see its
+      // dev:subpath script. ws: true forwards its own Vite HMR client,
+      // same as /rmqws-stomp above. Hardcoded to this one app for now;
+      // generalizing to every apps/* member (each on its own dev port)
+      // would need a small discoverable ports registry, not worth it
+      // until there's a second real one.
+      '/micro-app-poc': {
+        target: 'http://localhost:5180',
+        changeOrigin: true,
+        ws: true,
+      },
     },
   },
   plugins,

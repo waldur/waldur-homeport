@@ -16,6 +16,7 @@
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css' layer(utilities);
 @import 'waldur-design-tokens/buttonColors.css';
+@import 'waldur-design-tokens/surfaceColors.css';
 
 /* Metronic forces a 13px root font-size !important; Tailwind's rem-based
    scale silently resizes against that instead of the assumed 16px. Cascade

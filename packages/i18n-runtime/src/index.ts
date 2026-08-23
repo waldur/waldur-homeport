@@ -17,3 +17,5 @@ export type {
 } from './languageUtils';
 
 export type { LanguageOption, MessageTransform, Translate } from './types';
+
+export { useLanguageSelector } from './useLanguageSelector';

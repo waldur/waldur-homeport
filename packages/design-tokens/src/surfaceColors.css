@@ -1,0 +1,127 @@
+/**
+ * Layout/surface tokens for dashboard-style micro-apps (stat cards, data
+ * tables, sidebar navigation, status pills) — composed from the base ramps
+ * in colors.css and the runtime --waldur-brand-* ramp, same pattern as
+ * buttonColors.css.
+ *
+ * Unlike buttonColors.css, these have no existing Bootstrap/Metronic
+ * component to empirically cross-check against — there's no "real" sidebar
+ * nav or stat card in waldur-homeport's own src/ that this ports. Values
+ * below are chosen to compose correctly with the existing gray/success/
+ * warning/error/brand ramps, not extracted via getComputedStyle. Treat
+ * them as a reasonable starting point, not verified-parity values the way
+ * buttonColors.css's are.
+ */
+@import './colors.css';
+
+:root {
+  --surface-page-bg: var(--color-gray-50);
+  --surface-sidebar-bg: var(--color-gray-25);
+  --surface-sidebar-border: var(--color-gray-200);
+  --surface-card-bg: #ffffff;
+  --surface-card-border: var(--color-gray-200);
+  --surface-hover-bg: var(--color-gray-50);
+
+  --surface-text-primary: var(--color-gray-900);
+  --surface-text-secondary: var(--color-gray-500);
+  --surface-text-muted: var(--color-gray-400);
+
+  --nav-item-text: var(--color-gray-600);
+  --nav-item-hover-bg: var(--color-gray-100);
+  --nav-item-active-bg: var(--waldur-brand-600);
+  --nav-item-active-text: #ffffff;
+  --nav-section-label: var(--color-gray-400);
+
+  --pill-success-bg: var(--color-success-50);
+  --pill-success-text: var(--color-success-700);
+  --pill-success-dot: var(--color-success-600);
+
+  --pill-warning-bg: var(--color-warning-50);
+  --pill-warning-text: var(--color-warning-700);
+  --pill-warning-dot: var(--color-warning-600);
+
+  --pill-danger-bg: var(--color-error-50);
+  --pill-danger-text: var(--color-error-700);
+  --pill-danger-dot: var(--color-error-600);
+
+  --pill-neutral-bg: var(--color-gray-100);
+  --pill-neutral-text: var(--color-gray-600);
+  --pill-neutral-dot: var(--color-gray-500);
+
+  --table-header-bg: var(--color-gray-50);
+  --table-header-text: var(--color-gray-500);
+  --table-row-border: var(--color-gray-100);
+  --table-row-hover-bg: var(--color-gray-50);
+
+  /* Unlike the rest of this file, these two DO have a real Metronic
+     source: src/metronic/sass/core/components/_variables.scss's $menu
+     map (dropdown.box-shadow, consumed by Metronic's own data-kt-menu
+     dropdowns — see UserDropdown.tsx's ThemeSwitcher) and its $drawer map
+     (box-shadow/overlay-bg-color, Metronic's mobile slide-in panel,
+     directly analogous to Sheet.tsx). Read from the SCSS source
+     (`$dropdown-box-shadow`/`$drawer`'s `if(isDarkMode(), ...)` branches),
+     not live-measured via getComputedStyle the way buttonColors.css's
+     values are — there's no easy unauthenticated page to measure a real
+     one from. */
+  --dropdown-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
+  --drawer-shadow: 0px 1px 9px -3px rgba(0, 0, 0, 0.05);
+  --drawer-overlay-bg: rgba(0, 0, 0, 0.2);
+
+  /* Same real-source reasoning as the shadow tokens above, from
+     src/metronic/sass/core/components/_card.scss's .card rule:
+     `box-shadow: $card-box-shadow` unconditionally, `border` only
+     `@if ($card-border-enabled)` — which is itself `if(isDarkMode(),
+     true, false)`. Metronic's real card relies on the shadow alone in
+     light mode (no border at all) and flips to a border with no shadow
+     in dark mode — the opposite of what Card.tsx did before this
+     token existed (always bordered, never shadowed, in both themes). */
+  --card-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
+  --card-border-color: transparent;
+}
+
+:root[data-theme='dark'] {
+  --surface-page-bg: var(--color-gray-950);
+  --surface-sidebar-bg: var(--color-gray-950);
+  --surface-sidebar-border: var(--color-gray-800);
+  --surface-card-bg: var(--color-gray-900);
+  --surface-card-border: var(--color-gray-800);
+  --surface-hover-bg: var(--color-gray-900);
+
+  --surface-text-primary: var(--color-gray-25);
+  --surface-text-secondary: var(--color-gray-400);
+  --surface-text-muted: var(--color-gray-500);
+
+  --nav-item-text: var(--color-gray-400);
+  --nav-item-hover-bg: var(--color-gray-900);
+  --nav-item-active-bg: var(--waldur-brand-600);
+  --nav-item-active-text: #ffffff;
+  --nav-section-label: var(--color-gray-600);
+
+  --pill-success-bg: var(--color-success-900);
+  --pill-success-text: var(--color-success-400);
+  --pill-success-dot: var(--color-success-400);
+
+  --pill-warning-bg: var(--color-warning-900);
+  --pill-warning-text: var(--color-warning-400);
+  --pill-warning-dot: var(--color-warning-400);
+
+  --pill-danger-bg: var(--color-error-900);
+  --pill-danger-text: var(--color-error-400);
+  --pill-danger-dot: var(--color-error-400);
+
+  --pill-neutral-bg: var(--color-gray-800);
+  --pill-neutral-text: var(--color-gray-400);
+  --pill-neutral-dot: var(--color-gray-500);
+
+  --table-header-bg: var(--color-gray-900);
+  --table-header-text: var(--color-gray-400);
+  --table-row-border: var(--color-gray-800);
+  --table-row-hover-bg: var(--color-gray-900);
+
+  --dropdown-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  --drawer-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  --drawer-overlay-bg: rgba(0, 0, 0, 0.4);
+
+  --card-shadow: none;
+  --card-border-color: var(--surface-card-border);
+}

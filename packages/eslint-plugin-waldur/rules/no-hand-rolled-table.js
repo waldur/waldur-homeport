@@ -15,8 +15,17 @@
  * The rule is here to steer new code.
  */
 
-// The shared table implementation, and markup that is not a data table.
-const ALLOWED_FILES = ['src/table/', 'src/core/RichTextEditor'];
+// The shared table implementation, markup that is not a data table, and
+// packages/ui/src/Table.tsx — the shadcn-recipe table primitive
+// (DataTable.tsx builds on it) for standalone micro-apps (apps/*), which
+// deliberately can't depend on @/table/Table (Redux table-store +
+// Bootstrap coupled to homeport's own src/). See docs/micro-apps.md and
+// Table.tsx's own header comment.
+const ALLOWED_FILES = [
+  'src/table/',
+  'src/core/RichTextEditor',
+  'packages/ui/src/Table.tsx',
+];
 
 export default {
   meta: {
