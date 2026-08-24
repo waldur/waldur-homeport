@@ -12,7 +12,9 @@ export const ActionGroup = ({ title, children }) => {
           {title}
         </Dropdown.ItemText>
       )}
-      <div className="action-list">{children}</div>
+      <div className="action-list" data-testid="action-list">
+        {children}
+      </div>
     </div>
   );
 };

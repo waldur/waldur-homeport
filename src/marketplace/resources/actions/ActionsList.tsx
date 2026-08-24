@@ -68,6 +68,10 @@ export const CustomerResourceActions = [
   EditResourceEndDateAction,
   SyncResourceAction,
   PullMarketplaceResourceAction,
+  // Read-only views of data the consumer already owns. They are listed for the
+  // provider too; ResourceActionComponent renders shared entries once.
+  ShowUsageAction,
+  ResourceDetailsAction,
   TerminateAction,
 ];
 
