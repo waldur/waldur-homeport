@@ -1,7 +1,9 @@
 import { FC, useMemo } from 'react';
 
+import { maxItems } from '@/core/validators';
 import {
   BooleanEditField,
+  CommaSeparatedListEditField,
   DateEditField,
   EditFieldProvider,
   NumberEditField,
@@ -12,10 +14,13 @@ import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
 import { Role } from '@/permissions/types';
-import { getRoles } from '@/permissions/utils';
+import { getRoleLabels, getRoles } from '@/permissions/utils';
 
 import { OfferingEditPanelProps } from './types';
-import { useUpdateOfferingIntegration } from './utils';
+import {
+  canSeeOfferingSecretOptions,
+  useUpdateOfferingIntegration,
+} from './utils';
 
 const RESOURCE_PROJECTS_LIMIT_POLICY_OPTIONS = [
   {
@@ -33,6 +38,10 @@ const RESOURCE_PROJECTS_LIMIT_POLICY_OPTIONS = [
     ),
   },
 ];
+
+// Mirrors MAX_ORDER_NOTIFICATION_EMAILS / MAX_ORDER_NOTIFICATION_ROLES in the
+// marketplace serializers, which reject a longer list with a 400.
+const MAX_ORDER_NOTIFICATION_RECIPIENTS = 10;
 
 const ACTION_ON_USAGE_LIMIT_OPTIONS = [
   {
@@ -52,12 +61,28 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
   );
 
   const roleOptions = useMemo(() => getRoles(['project', 'customer']), []);
-  const roleLabels = useMemo(
-    () =>
-      Object.fromEntries(
-        roleOptions.map((role) => [role.name, role.description || role.name]),
-      ),
-    [roleOptions],
+  const roleLabels = useMemo(() => getRoleLabels(roleOptions), [roleOptions]);
+
+  // Order notification roles are resolved on the provider side — on the
+  // offering's organization and on the offering itself — so they are picked
+  // from a different role list than the consumer-side options above.
+  const providerRoleOptions = useMemo(
+    () => getRoles(['customer', 'offering']),
+    [],
+  );
+  const providerRoleLabels = useMemo(
+    () => getRoleLabels(providerRoleOptions),
+    [providerRoleOptions],
+  );
+
+  // Both order-notification options live in secret_options, which the backend
+  // omits from the payload for anyone who is not an owner or service manager of
+  // the provider organization — even though such a user may still hold the
+  // permission to PATCH integration settings. Editing them from an empty render
+  // would overwrite recipients the user cannot see.
+  const secretOptionsHidden = !canSeeOfferingSecretOptions(props.offering);
+  const secretOptionsHiddenReason = translate(
+    'Only owners and service managers of the provider organization can view or change this setting.',
   );
 
   return (
@@ -150,6 +175,45 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             label={translate('Send email notifications for messages')}
             description={translate(
               'Sends email notifications when providers or customers exchange messages on pending orders',
+            )}
+          />
+          <SelectEditField
+            name="secret_options.order_notification_roles"
+            label={translate('Notify roles about new orders')}
+            options={providerRoleOptions}
+            getOptionLabel={(role: Role) => role.description || role.name}
+            getOptionValue={({ name }) => name}
+            renderValue={(value) =>
+              Array.isArray(value) && value.length
+                ? value
+                    .map((name) => providerRoleLabels[name] || name)
+                    .join(', ')
+                : undefined
+            }
+            simpleValue
+            isMulti
+            isClearable
+            validate={maxItems(MAX_ORDER_NOTIFICATION_RECIPIENTS)}
+            disabled={secretOptionsHidden}
+            tooltip={
+              secretOptionsHidden ? secretOptionsHiddenReason : undefined
+            }
+            description={translate(
+              'Holders of these roles are emailed about every new order for this offering, regardless of whether the order needs approval. Names are resolved on your organization and on the offering itself. Users who disabled notifications in their profile are skipped. At most {n} roles. Visible only to owners and service managers of your organization.',
+              { n: MAX_ORDER_NOTIFICATION_RECIPIENTS },
+            )}
+          />
+          <CommaSeparatedListEditField
+            name="secret_options.order_notification_emails"
+            label={translate('Notify addresses about new orders')}
+            validate={maxItems(MAX_ORDER_NOTIFICATION_RECIPIENTS)}
+            disabled={secretOptionsHidden}
+            tooltip={
+              secretOptionsHidden ? secretOptionsHiddenReason : undefined
+            }
+            description={translate(
+              'Email addresses notified about every new order for this offering, regardless of whether the order needs approval. Intended for mailboxes which do not belong to a Waldur user, so these addresses are notified even if a user with the same address disabled notifications. At most {n} addresses, comma-separated. Visible only to owners and service managers of your organization.',
+              { n: MAX_ORDER_NOTIFICATION_RECIPIENTS },
             )}
           />
         </TabbedSection.Tab>
