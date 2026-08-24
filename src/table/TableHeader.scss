@@ -37,11 +37,12 @@
   }
 }
 
-// Header cell layout: title/sorting/filter on the left, pin toggle on the right.
+// Header cell layout: pin toggle sits right after the title/sorting/filter,
+// not at the far edge of the cell where it reads as the next column's icon.
 .th-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   column-gap: 4px;
 
   .th-main {

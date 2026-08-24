@@ -46,9 +46,7 @@ export const OrganizationProjectsExpandable = ({
         {
           title: translate('End date'),
           render: ({ row }) =>
-            row.project_end_date
-              ? formatDate(row.end_date)
-              : translate('No end date'),
+            row.end_date ? formatDate(row.end_date) : translate('No end date'),
         },
         {
           title: translate('Resources'),
