@@ -26,6 +26,11 @@ const badgeVariants = cva(
           'border-transparent bg-[var(--pill-danger-bg)] text-[var(--pill-danger-text)]',
         neutral:
           'border-transparent bg-[var(--pill-neutral-bg)] text-[var(--pill-neutral-text)]',
+        // Metronic's real .badge-outline-purple (see surfaceColors.css's
+        // comment on --pill-purple-*) — genuinely bordered, unlike the
+        // other variants' border-transparent solid fill.
+        purple:
+          'border-[var(--pill-purple-border)] bg-[var(--pill-purple-bg)] text-[var(--pill-purple-text)]',
         outline: 'text-[var(--surface-text-primary)]',
       },
     },

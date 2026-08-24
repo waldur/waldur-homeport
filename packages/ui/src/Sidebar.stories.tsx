@@ -51,37 +51,37 @@ export const OrganisationAdminExample: Story = {
         <SidebarContent>
           <SidebarSection label="ORGANISATION">
             <SidebarNavItem
-              icon={<SquaresFourIcon size={16} weight="bold" />}
+              icon={<SquaresFourIcon size={20} weight="bold" />}
               label="Overview"
             />
             <SidebarNavItem
-              icon={<FolderIcon size={16} weight="bold" />}
+              icon={<FolderIcon size={20} weight="bold" />}
               label="Projects"
               count={12}
             />
             <SidebarNavItem
-              icon={<UsersIcon size={16} weight="bold" />}
+              icon={<UsersIcon size={20} weight="bold" />}
               label="Members"
               active
             />
           </SidebarSection>
           <SidebarSection label="FINANCE">
             <SidebarNavItem
-              icon={<ReceiptIcon size={16} weight="bold" />}
+              icon={<ReceiptIcon size={20} weight="bold" />}
               label="Invoices"
             />
             <SidebarNavItem
-              icon={<GaugeIcon size={16} weight="bold" />}
+              icon={<GaugeIcon size={20} weight="bold" />}
               label="Quotas"
             />
           </SidebarSection>
           <SidebarSection label="ADMIN">
             <SidebarNavItem
-              icon={<GearIcon size={16} weight="bold" />}
+              icon={<GearIcon size={20} weight="bold" />}
               label="Settings"
             />
             <SidebarNavItem
-              icon={<ListBulletsIcon size={16} weight="bold" />}
+              icon={<ListBulletsIcon size={20} weight="bold" />}
               label="Audit log"
             />
           </SidebarSection>
