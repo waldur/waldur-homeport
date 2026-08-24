@@ -4,19 +4,22 @@
  * in colors.css and the runtime --waldur-brand-* ramp, same pattern as
  * buttonColors.css.
  *
- * Unlike buttonColors.css, these have no existing Bootstrap/Metronic
- * component to empirically cross-check against — there's no "real" sidebar
- * nav or stat card in waldur-homeport's own src/ that this ports. Values
+ * Unlike buttonColors.css, most of these have no existing Bootstrap/
+ * Metronic component to empirically cross-check against — there's no
+ * "real" stat card in waldur-homeport's own src/ that this ports. Values
  * below are chosen to compose correctly with the existing gray/success/
  * warning/error/brand ramps, not extracted via getComputedStyle. Treat
  * them as a reasonable starting point, not verified-parity values the way
  * buttonColors.css's are.
+ *
+ * The --nav-item-* and --surface-sidebar-bg tokens are the exception —
+ * see the per-[data-sidebar-style] block below, which is real-source
+ * Metronic parity, not a guess.
  */
 @import './colors.css';
 
 :root {
   --surface-page-bg: var(--color-gray-50);
-  --surface-sidebar-bg: var(--color-gray-25);
   --surface-sidebar-border: var(--color-gray-200);
   --surface-card-bg: #ffffff;
   --surface-card-border: var(--color-gray-200);
@@ -26,10 +29,6 @@
   --surface-text-secondary: var(--color-gray-500);
   --surface-text-muted: var(--color-gray-400);
 
-  --nav-item-text: var(--color-gray-600);
-  --nav-item-hover-bg: var(--color-gray-100);
-  --nav-item-active-bg: var(--waldur-brand-600);
-  --nav-item-active-text: #ffffff;
   --nav-section-label: var(--color-gray-400);
 
   --pill-success-bg: var(--color-success-50);
@@ -47,6 +46,21 @@
   --pill-neutral-bg: var(--color-gray-100);
   --pill-neutral-text: var(--color-gray-600);
   --pill-neutral-dot: var(--color-gray-500);
+
+  /* Real source: src/metronic/sass/core/components/_badge.scss's
+     .badge-outline-#{$name} recipe (bg = theme-50-color, border =
+     theme-200-color, text = theme-700-color), 'purple' key — the exact
+     variant UserDropdownMenu.tsx's real Staff badge uses
+     (`<Badge variant="purple" outline pill>`). Not part of the generated
+     brand/gray/success/warning/error ramps (there's no other consumer of
+     a purple scale), so these are the literal $purple-50/200/700 hex
+     values from src/metronic/sass/_colors.scss, not colors.css-generated.
+     Unlike the other pill-* variants, this one has a visible border —
+     Metronic's outline style is genuinely bordered, not a transparent-
+     border solid fill. */
+  --pill-purple-bg: #f4f3ff;
+  --pill-purple-border: #d9d6fe;
+  --pill-purple-text: #5925dc;
 
   --table-header-bg: var(--color-gray-50);
   --table-header-text: var(--color-gray-500);
@@ -77,11 +91,20 @@
      token existed (always bordered, never shadowed, in both themes). */
   --card-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
   --card-border-color: transparent;
+
+  /* Generic "colored badge/avatar swatch" tokens — Avatar.tsx's
+     AvatarFallback, SidebarModeCard's icon square, and OrgSwitcher's org
+     badge all need one, unrelated to which SIDEBAR_STYLE is configured
+     (see the sidebar-styles block below). Deliberately theme-invariant,
+     matching what --nav-item-active-bg/-text used to be before this file
+     supported more than one sidebar style — not Metronic-sourced, just a
+     reasonable brand-colored default like the rest of this file. */
+  --badge-brand-bg: var(--waldur-brand-600);
+  --badge-brand-text: #ffffff;
 }
 
 :root[data-theme='dark'] {
   --surface-page-bg: var(--color-gray-950);
-  --surface-sidebar-bg: var(--color-gray-950);
   --surface-sidebar-border: var(--color-gray-800);
   --surface-card-bg: var(--color-gray-900);
   --surface-card-border: var(--color-gray-800);
@@ -91,10 +114,6 @@
   --surface-text-secondary: var(--color-gray-400);
   --surface-text-muted: var(--color-gray-500);
 
-  --nav-item-text: var(--color-gray-400);
-  --nav-item-hover-bg: var(--color-gray-900);
-  --nav-item-active-bg: var(--waldur-brand-600);
-  --nav-item-active-text: #ffffff;
   --nav-section-label: var(--color-gray-600);
 
   --pill-success-bg: var(--color-success-900);
@@ -113,6 +132,12 @@
   --pill-neutral-text: var(--color-gray-400);
   --pill-neutral-dot: var(--color-gray-500);
 
+  /* Same $purple-50/200/700 source as the light block above — its
+     if(isDarkMode(), ...) branch swaps to the dark-mode hex triplet. */
+  --pill-purple-bg: #3e1c96;
+  --pill-purple-border: #5925dc;
+  --pill-purple-text: #d9d6fe;
+
   --table-header-bg: var(--color-gray-900);
   --table-header-text: var(--color-gray-400);
   --table-row-border: var(--color-gray-800);
@@ -124,4 +149,101 @@
 
   --card-shadow: none;
   --card-border-color: var(--surface-card-border);
+}
+
+/**
+ * Sidebar colors — one block per Metronic aside style (src/metronic/sass/
+ * layout/aside/_base.scss's backgrounds, _menu.scss's $asides map for
+ * title/icon/bg-hover/bg-active), selected via [data-sidebar-style] on
+ * <html>. That attribute mirrors ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE
+ * (see src/navigation/sidebar/Sidebar.tsx, which maps the same values to
+ * real aside-{style} classes) and is applied at runtime by
+ * applySidebarStyle() (initSidebarStyle.ts), called from
+ * apps/micro-app-poc/src/App.tsx the same way initFontFamily()/
+ * applyTheme() are. Values are read straight from that SCSS source, not
+ * getComputedStyle-measured — there's no easy unauthenticated page
+ * configured with anything but "accent" (the real reference deployment's
+ * style: its visibly blue "+Add resource" border in the accent-only
+ * $custom-aside map is the tell) to measure the other four from.
+ *
+ * "dark" and "light" are the two variants whose Metronic source
+ * genuinely branches on isDarkMode() — INVERTED, not matched: e.g.
+ * .aside-dark's background is `if(isDarkMode(), $gray-25, $gray-950)`,
+ * flipping to near-white when the *page* goes dark, to keep contrast
+ * against the (also-inverted) content area. The :not([data-sidebar-style])
+ * rules are the fallback for markup that never calls applySidebarStyle()
+ * (e.g. a Storybook story) — matching Sidebar.tsx's own `|| 'dark'`
+ * default, not "accent". "primary"/"accent"/"accent-light" have no such
+ * branch at all in Metronic's own source — each is declared once,
+ * unconditionally.
+ *
+ * Nav item text/icon color never changes between default and active/here
+ * state in any variant — Metronic's menu-link-default-state()/
+ * menu-link-here-state() mixins are called with the identical
+ * $title-color/$icon-color for both; only the background does
+ * (bg-hover on :hover, bg-active when .here).
+ */
+:root:not([data-sidebar-style]),
+[data-sidebar-style='dark'] {
+  --surface-sidebar-bg: var(--color-gray-950);
+  --nav-item-hover-bg: var(--color-gray-900);
+  --nav-item-active-bg: var(--color-gray-800);
+  --nav-item-text: var(--color-gray-100);
+  --nav-item-active-text: var(--color-gray-100);
+  --nav-item-icon: var(--color-gray-300);
+}
+
+:root[data-theme='dark']:not([data-sidebar-style]),
+[data-sidebar-style='dark'][data-theme='dark'] {
+  --surface-sidebar-bg: var(--color-gray-25);
+  --nav-item-hover-bg: var(--color-gray-50);
+  --nav-item-active-bg: var(--color-gray-100);
+  --nav-item-text: var(--color-gray-800);
+  --nav-item-active-text: var(--color-gray-800);
+  --nav-item-icon: var(--color-gray-600);
+}
+
+[data-sidebar-style='light'] {
+  --surface-sidebar-bg: var(--color-gray-25);
+  --nav-item-hover-bg: var(--color-gray-50);
+  --nav-item-active-bg: var(--color-gray-100);
+  --nav-item-text: var(--color-gray-700);
+  --nav-item-active-text: var(--color-gray-700);
+  --nav-item-icon: var(--color-gray-500);
+}
+
+[data-sidebar-style='light'][data-theme='dark'] {
+  --surface-sidebar-bg: var(--color-gray-950);
+  --nav-item-hover-bg: var(--color-gray-900);
+  --nav-item-active-bg: var(--color-gray-800);
+  --nav-item-text: var(--color-gray-200);
+  --nav-item-active-text: var(--color-gray-200);
+  --nav-item-icon: var(--color-gray-400);
+}
+
+[data-sidebar-style='primary'] {
+  --surface-sidebar-bg: var(--waldur-brand-color);
+  --nav-item-hover-bg: rgba(255, 255, 255, 0.1);
+  --nav-item-active-bg: rgba(255, 255, 255, 0.15);
+  --nav-item-text: rgba(255, 255, 255, 0.85);
+  --nav-item-active-text: rgba(255, 255, 255, 0.85);
+  --nav-item-icon: rgba(255, 255, 255, 0.7);
+}
+
+[data-sidebar-style='accent'] {
+  --surface-sidebar-bg: var(--waldur-brand-950);
+  --nav-item-hover-bg: var(--waldur-brand-900);
+  --nav-item-active-bg: var(--waldur-brand-800);
+  --nav-item-text: var(--waldur-brand-100);
+  --nav-item-active-text: var(--waldur-brand-100);
+  --nav-item-icon: var(--waldur-brand-300);
+}
+
+[data-sidebar-style='accent-light'] {
+  --surface-sidebar-bg: var(--waldur-brand-25);
+  --nav-item-hover-bg: var(--waldur-brand-50);
+  --nav-item-active-bg: var(--waldur-brand-100);
+  --nav-item-text: var(--waldur-brand-800);
+  --nav-item-active-text: var(--waldur-brand-800);
+  --nav-item-icon: var(--waldur-brand-600);
 }

@@ -14,6 +14,7 @@ import {
 } from 'react';
 
 import { cn } from './cn';
+import { ICON_BUTTON_BASE_CLASSNAME } from './iconButtonStyles';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from './Sheet';
 import { Tooltip } from './Tooltip';
 import { useIsMobile } from './useIsMobile';
@@ -44,7 +45,9 @@ import { useIsMobile } from './useIsMobile';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = '16rem';
+// Metronic's real $aside-config.width (src/metronic/sass/layout/_variables.scss)
+// — a literal 300px, not rem-based, so no root-font-size scaling applies.
+const SIDEBAR_WIDTH = '300px';
 const SIDEBAR_WIDTH_MOBILE = '18rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
@@ -267,10 +270,11 @@ export function SidebarTrigger({
     <button
       type="button"
       aria-label="Toggle sidebar"
-      className={cn(
-        'flex size-9 items-center justify-center rounded-lg text-[var(--surface-text-secondary)] hover:bg-[var(--nav-item-hover-bg)]',
-        className,
-      )}
+      // Same ICON_BUTTON_BASE_CLASSNAME as TopBar.tsx's IconButton —
+      // despite living in this file, SidebarTrigger itself is rendered in
+      // the TopBar (see OrgDashboardMock.tsx), not inside <Sidebar>, so
+      // it's genuinely the same kind of button, not a coincidence.
+      className={cn(ICON_BUTTON_BASE_CLASSNAME, className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
@@ -298,10 +302,19 @@ export function SidebarInset({ className, ...props }: ComponentProps<'main'>) {
   );
 }
 
+// p-4's 16px side padding, unreduced in collapsed mode, leaves only 16px
+// of inner width inside the 48px (--sidebar-width-icon) rail — less than
+// sidebarMenuButtonVariants' standard 36px (size-9) collapsed icon button
+// needs, so it overflows past the rail's right edge and gets visually
+// clipped by the sidebar's own overflow-hidden. px-1.5 (6px each side)
+// leaves exactly 48 - 6*2 = 36px, centering that button with zero
+// overflow. Shared by every direct padded slot (header/content/footer).
+const SIDEBAR_SLOT_PADDING = 'p-4 group-data-[collapsible=icon]:px-1.5';
+
 export function SidebarHeader({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={cn('flex flex-col gap-2 p-4', className)}
+      className={cn('flex flex-col gap-2', SIDEBAR_SLOT_PADDING, className)}
       data-sidebar="header"
       {...props}
     />
@@ -311,7 +324,7 @@ export function SidebarHeader({ className, ...props }: ComponentProps<'div'>) {
 export function SidebarFooter({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={cn('flex flex-col gap-2 p-4', className)}
+      className={cn('flex flex-col gap-2', SIDEBAR_SLOT_PADDING, className)}
       data-sidebar="footer"
       {...props}
     />
@@ -335,7 +348,9 @@ export function SidebarContent({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'flex min-h-0 flex-1 flex-col gap-4 overflow-auto p-4 group-data-[collapsible=icon]:overflow-hidden',
+        'flex min-h-0 flex-1 flex-col gap-4 overflow-auto',
+        SIDEBAR_SLOT_PADDING,
+        'group-data-[collapsible=icon]:overflow-hidden',
         className,
       )}
       {...props}
@@ -386,13 +401,21 @@ export function SidebarMenuItem({ className, ...props }: ComponentProps<'li'>) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  'flex w-full items-center gap-2.5 overflow-hidden rounded-lg p-2 text-left text-sm font-medium transition-colors group-data-[collapsible=icon]:size-9 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0',
+  // px-3 py-2 (12px/8px) matches Metronic's real aside menu-link padding
+  // (src/metronic/sass/layout/aside/_menu.scss: padding-x 12px from
+  // $aside-config, padding-top/bottom 0.55rem ≈ 7px at its real 13px
+  // root) closely enough that an arbitrary px value isn't worth it.
+  // text-[var(--nav-item-text)] applies regardless of active state —
+  // Metronic's real menu-link-default-state()/menu-link-here-state() both
+  // receive the exact same $title-color/$icon-color for every aside style
+  // variant (src/metronic/sass/layout/aside/_menu.scss's $asides loop);
+  // only the background differs between default and active/here.
+  'flex w-full items-center gap-2.5 overflow-hidden rounded-lg px-3 py-2 text-left text-sm font-medium text-[var(--nav-item-text)] transition-colors group-data-[collapsible=icon]:size-9 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0',
   {
     variants: {
       active: {
-        true: 'bg-[var(--nav-item-active-bg)] text-[var(--nav-item-active-text)]',
-        false:
-          'text-[var(--nav-item-text)] hover:bg-[var(--nav-item-hover-bg)]',
+        true: 'bg-[var(--nav-item-active-bg)]',
+        false: 'hover:bg-[var(--nav-item-hover-bg)]',
       },
     },
     defaultVariants: {
@@ -499,7 +522,12 @@ const SidebarNavItemContent = ({
 }: Pick<SidebarNavItemProps, 'icon' | 'label' | 'count'>) => (
   <>
     {icon && (
-      <span className="flex size-4 shrink-0 items-center justify-center">
+      // size-5 (20px) + the icon itself passed at size={20} by the
+      // consumer — Metronic's real $aside-config.icon-size. Colored
+      // separately from the label text (--nav-item-icon vs --nav-item-text)
+      // — Metronic's real nav icon color is a distinct, more saturated
+      // step from its title-text color, not inherited.
+      <span className="flex size-5 shrink-0 items-center justify-center text-[var(--nav-item-icon)]">
         {icon}
       </span>
     )}
@@ -549,7 +577,7 @@ export const SidebarModeCard = ({
       className="flex items-center gap-3 rounded-lg border border-[var(--surface-card-border)] bg-[var(--surface-hover-bg)] p-3 text-left group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:border-0 group-data-[collapsible=icon]:bg-transparent group-data-[collapsible=icon]:p-0"
     >
       {icon && (
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-[var(--nav-item-active-bg)] text-[var(--nav-item-active-text)]">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-[var(--badge-brand-bg)] text-[var(--badge-brand-text)]">
           {icon}
         </span>
       )}

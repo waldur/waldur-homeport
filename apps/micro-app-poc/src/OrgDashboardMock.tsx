@@ -1,24 +1,21 @@
 import {
   BellIcon,
   BuildingsIcon,
-  CheckIcon,
   FolderIcon,
   GaugeIcon,
   GearIcon,
-  GlobeIcon,
   ListBulletsIcon,
-  MoonIcon,
   QuestionIcon,
   ReceiptIcon,
   SquaresFourIcon,
-  SunIcon,
   UsersIcon,
 } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
-import { fetchResultCount } from 'waldur-api-client';
 import {
+  applySidebarStyle,
   applyTheme,
   getInitialTheme,
+  resolveSidebarStyle,
   setStoredTheme,
   ThemeName,
 } from 'waldur-design-tokens';
@@ -27,31 +24,13 @@ import {
   translate,
   useLanguageSelector,
 } from 'waldur-i18n-runtime';
-// waldur-js-client is deliberately absent from this app's own package.json
-// — same reasoning as packages/api-client/src/requestHelpers.ts and
-// packages/auth-core/src/client.ts: resolving it via workspace hoisting
-// means this always sees root's exact pinned/linked SDK build, not a
-// second, potentially-drifted copy declared here.
 import {
-  Customer,
-  customersList,
-  invoicesList,
-  projectsList,
-  projectsListUsersCount,
-} from 'waldur-js-client';
-import {
-  Avatar,
   BaseButton,
   Card,
   CardContent,
   CardHeader,
   DataTable,
   DataTableColumn,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
   IconButton,
   OrgSwitcher,
   SearchField,
@@ -66,9 +45,14 @@ import {
   SidebarTrigger,
   StatCard,
   StatusPill,
-  StatusTone,
   TopBar,
+  UserMenu,
 } from 'waldur-ui';
+
+import { OrgSwitcherMenu } from './OrgSwitcherMenu';
+import { configuredSidebarStyle } from './sidebarStyleConfig';
+import { useCurrentUser } from './useCurrentUser';
+import { ProjectRow, useDashboardData } from './useDashboardData';
 
 /**
  * Moved here from packages/ui's own Storybook (DashboardPreview.stories.tsx)
@@ -91,7 +75,13 @@ import {
  * Sidebar is now the real shadcn Sidebar (see Sidebar.tsx) — collapsible,
  * has a real mobile Sheet drawer, and Cmd/Ctrl+B toggles it — so this
  * needs a SidebarProvider wrapping both Sidebar and SidebarInset, and the
- * old inert "Toggle sidebar" IconButton is now a real SidebarTrigger.
+ * old inert "Toggle sidebar" IconButton is now a real SidebarTrigger. Its
+ * width/icon size, and its colors per SIDEBAR_STYLE variant, are Metronic's
+ * real aside style values (see surfaceColors.css's comment on the
+ * --nav-item-* and --surface-sidebar-bg tokens) — App.tsx applies
+ * data-sidebar-style from ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE the same
+ * way it applies font-family. Nav icons pass
+ * size={20} to match Metronic's real $aside-config.icon-size.
  *
  * OrgSwitcher is now a real Radix DropdownMenu (see DropdownMenu.tsx),
  * wired to an actual switchable list: useDashboardData() fetches the
@@ -113,12 +103,15 @@ import {
  * second, per-organisation fetch that re-runs on switch, so those three
  * briefly show a loading/empty state while it's in flight rather than
  * holding the previous organisation's numbers under the new one's name.
- * projectsCount/usersCount/invoiceTotal/invoiceHint still fall back to
- * the original mockup's illustrative numbers when there's no backend/no
- * customers to show; orgName and the Projects table don't — an empty
- * table and a "No organisation" placeholder are honest "no data", where
- * a fabricated org name or four fabricated projects would look like real
- * ones. "Quota health" is never
+ * None of projectsCount/usersCount/invoiceTotal/invoiceHint fall back to
+ * illustrative mock numbers when there's no backend/no customers to
+ * show — a dash, same honest "no data" treatment orgName and the
+ * Projects table already had (an empty table and a "No organisation"
+ * placeholder), not a fabricated number that would look like a real
+ * one. The old mock fallbacks (MOCK_PROJECTS_COUNT/MOCK_USERS_COUNT/
+ * MOCK_INVOICE_TOTAL/MOCK_INVOICE_DUE, plus the Projects tile's
+ * mock-only "+2 this quarter" trend badge) are gone for the same
+ * reason MOCK_ORG_NAME was dropped earlier. "Quota health" is never
  * live: /api/customer-quotas/ returns one row per customer for a single
  * quota_name at a time ({customer_name, value}), no limit to compare
  * against, so it can't honestly produce a Good/Warning verdict the way
@@ -134,11 +127,8 @@ import {
  * text appears whenever this component next re-renders for any other
  * reason (e.g. useDashboardData()'s own fetches), same eventual-
  * consistency the main app relies on via its own incidental re-renders.
- * Mock/illustrative data values (MOCK_INVOICE_DUE's fake date, project
- * names, org names) are left untranslated — they're fake data, not UI
- * chrome, the same reasoning MOCK_ORG_NAME being dropped rested on.
  *
- * The Globe IconButton in the TopBar is a real language switcher —
+ * The Language row inside TopBar's user menu is a real language switcher —
  * useLanguageSelector() (waldur-i18n-runtime, portable counterpart to
  * the main app's own src/i18n/useLanguageSelector.tsx) lists whatever
  * languageChoices App.tsx's LanguageUtilsService.init() was given.
@@ -147,207 +137,15 @@ import {
  * translated text once the new dictionary loads. Hidden entirely with
  * no backend (empty languageChoices), same as OrgSwitcher's own
  * disabled-not-fabricated approach.
+ *
+ * useCurrentUser()/useDashboardData() and ProjectRow's shape live in their
+ * own files (useCurrentUser.ts, useDashboardData.ts) — this file is
+ * composition only: read their exported hooks/values, render the page.
+ * UserMenu (with its own LanguageMenu and language→flag-emoji helper) and
+ * the CurrentUser type itself moved one level further out, into
+ * waldur-ui, once a second micro-app made "reusable, not duplicated"
+ * matter — see UserMenu.tsx's own header comment there.
  */
-
-interface ProjectRow {
-  uuid: string;
-  name: string;
-  status: string;
-  statusTone: StatusTone;
-  members: number | string;
-  monthlySpend: string;
-}
-
-const MOCK_PROJECTS_COUNT = 12;
-const MOCK_USERS_COUNT = 48;
-const MOCK_INVOICE_TOTAL = '€4,284';
-const MOCK_INVOICE_DUE = 'pays May 30';
-
-interface DashboardData {
-  orgName: string;
-  projectsCount: number;
-  usersCount: number;
-  invoiceTotal: string;
-  invoiceHint: string;
-  rows: ProjectRow[];
-}
-
-interface OrgProjectData {
-  invoiceTotal: string;
-  invoiceHint: string;
-  rows: ProjectRow[];
-}
-
-/** Real fetch/derive from status, not the mockup's status vocabulary — the
- * API has no plain status enum on Project (see ProjectLifecycleBadge.tsx
- * for the fuller real model); this is an honest two-state approximation
- * from actual fields, not an invented value. */
-function deriveProjectStatus(project: { end_date?: string | null }): {
-  status: string;
-  tone: StatusTone;
-} {
-  const isPast = project.end_date
-    ? new Date(project.end_date).getTime() < Date.now()
-    : false;
-  return isPast
-    ? { status: translate('Closed'), tone: 'neutral' }
-    : { status: translate('Active'), tone: 'success' };
-}
-
-// waldur-auth-core's error interceptor spreads the thrown Error into a
-// plain object, losing its non-enumerable .message, so a network/HTTP
-// failure here surfaces only a possible .response.
-function describeFetchError(thrown: unknown): string {
-  const withResponse = thrown as { response?: Response };
-  return thrown instanceof Error
-    ? thrown.message
-    : withResponse.response
-      ? withResponse.response.status === 401
-        ? 'HTTP 401 — not authenticated (log into a real Waldur instance on this same origin first)'
-        : `HTTP ${withResponse.response.status}`
-      : `no response — is a backend running at ${document.querySelector<HTMLMetaElement>('meta[name="api-url"]')?.content}?`;
-}
-
-function useDashboardData() {
-  const [customers, setCustomers] = useState<Customer[]>([]);
-  const [selectedUuid, setSelectedUuid] = useState<string | null>(null);
-  const [projectData, setProjectData] = useState<OrgProjectData | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  // First page of organisations — populates OrgSwitcher's menu and picks
-  // the first one as the initial selection.
-  useEffect(() => {
-    let cancelled = false;
-
-    customersList({ query: { page_size: 10 } })
-      .then((result) => {
-        if (cancelled) return;
-        const orgs = result.data ?? [];
-        if (orgs.length === 0) {
-          throw new Error('no customers found on this backend');
-        }
-        setCustomers(orgs);
-        setSelectedUuid(orgs[0].uuid);
-      })
-      .catch((thrown) => {
-        if (!cancelled) {
-          setError(describeFetchError(thrown));
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  // Whichever organisation is currently selected — its projects and most
-  // recent invoice. Re-runs on every switch; clears the previous
-  // selection's rows first so a switch never shows stale data under the
-  // new organisation's name.
-  useEffect(() => {
-    if (!selectedUuid) return;
-    let cancelled = false;
-    setLoading(true);
-    setProjectData(null);
-
-    (async () => {
-      try {
-        const [invoicesResult, projectsResult] = await Promise.all([
-          invoicesList({
-            query: {
-              customer_uuid: selectedUuid,
-              page_size: 1,
-              o: ['-created'],
-            },
-          }),
-          projectsList({
-            query: { customer: [selectedUuid], page_size: 10 },
-          }),
-        ]);
-
-        const rows: ProjectRow[] = await Promise.all(
-          (projectsResult.data ?? []).map(async (project) => {
-            const { status, tone } = deriveProjectStatus(project);
-            let members: number | string = '—';
-            try {
-              const countResult = await projectsListUsersCount({
-                path: { uuid: project.uuid },
-              });
-              members = fetchResultCount(countResult as never);
-            } catch {
-              members = '—';
-            }
-            return {
-              uuid: project.uuid,
-              name: project.name,
-              status,
-              statusTone: tone,
-              members,
-              monthlySpend: project.billing_price_estimate?.total
-                ? `€${project.billing_price_estimate.total}`
-                : '—',
-            };
-          }),
-        );
-
-        const invoice = invoicesResult.data?.[0];
-
-        if (!cancelled) {
-          setProjectData({
-            invoiceTotal: invoice ? `€${invoice.total}` : '—',
-            invoiceHint: invoice
-              ? translate('due {date}', { date: invoice.due_date })
-              : translate('no invoices yet'),
-            rows,
-          });
-        }
-      } catch (thrown) {
-        if (!cancelled) {
-          setError(describeFetchError(thrown));
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [selectedUuid]);
-
-  const selectedCustomer =
-    customers.find((customer) => customer.uuid === selectedUuid) ?? null;
-
-  const data: DashboardData | null = selectedCustomer
-    ? {
-        orgName: selectedCustomer.name,
-        projectsCount: selectedCustomer.projects_count,
-        usersCount: selectedCustomer.users_count,
-        // renderFieldOrDash() lives in @/table/utils — this app is
-        // deliberately decoupled from src/table/* (see DataTable.tsx's
-        // header comment), so that convention doesn't apply here.
-        // eslint-disable-next-line waldur-custom/enforce-render-field-or-dash
-        invoiceTotal: projectData?.invoiceTotal ?? '—',
-        invoiceHint:
-          projectData?.invoiceHint ??
-          (loading ? translate('loading…') : translate('no invoices')),
-        rows: projectData?.rows ?? [],
-      }
-    : null;
-
-  return {
-    customers,
-    selectedUuid,
-    selectCustomer: setSelectedUuid,
-    data,
-    error,
-    loading,
-  };
-}
 
 export const OrgDashboardMock = () => {
   // Rebuilt every render (not a module-level constant) so its translate()
@@ -373,6 +171,7 @@ export const OrgDashboardMock = () => {
   ];
 
   const { customers, selectedUuid, selectCustomer, data } = useDashboardData();
+  const currentUser = useCurrentUser();
   const [theme, setTheme] = useState<ThemeName>(getInitialTheme);
 
   useEffect(() => {
@@ -383,6 +182,11 @@ export const OrgDashboardMock = () => {
     const next: ThemeName = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
     setStoredTheme(next);
+    // Only matters when SIDEBAR_STYLE is 'auto' (src/navigation/sidebar/
+    // Sidebar.tsx's real "Match theme" option) — resolveSidebarStyle() is a
+    // no-op passthrough for the other five, so this is safe to call
+    // unconditionally rather than branching on configuredSidebarStyle here.
+    applySidebarStyle(resolveSidebarStyle(configuredSidebarStyle, next));
   };
 
   const { currentLanguage, languageChoices, setLanguage } =
@@ -397,11 +201,20 @@ export const OrgDashboardMock = () => {
     window.location.reload();
   };
 
+  // No more mock-number fallbacks here — same honest-"no data" treatment
+  // orgName and the Projects table already had (see the file header
+  // comment): a dash is what's actually true when there's no backend/no
+  // customers, not a fabricated illustrative number that would look like
+  // a real one. renderFieldOrDash() lives in @/table/utils — this app is
+  // deliberately decoupled from src/table/* (see DataTable.tsx's header
+  // comment), so that convention doesn't apply here.
+  /* eslint-disable waldur-custom/enforce-render-field-or-dash */
   const orgName = data?.orgName ?? translate('No organisation');
-  const projectsCount = data?.projectsCount ?? MOCK_PROJECTS_COUNT;
-  const usersCount = data?.usersCount ?? MOCK_USERS_COUNT;
-  const invoiceTotal = data?.invoiceTotal ?? MOCK_INVOICE_TOTAL;
-  const invoiceHint = data?.invoiceHint ?? MOCK_INVOICE_DUE;
+  const projectsCount = data?.projectsCount ?? '—';
+  const usersCount = data?.usersCount ?? '—';
+  const invoiceTotal = data?.invoiceTotal ?? '—';
+  const invoiceHint = data?.invoiceHint ?? '—';
+  /* eslint-enable waldur-custom/enforce-render-field-or-dash */
   const rows = data?.rows ?? [];
 
   return (
@@ -421,37 +234,37 @@ export const OrgDashboardMock = () => {
         <SidebarContent>
           <SidebarSection label={translate('ORGANISATION')}>
             <SidebarNavItem
-              icon={<SquaresFourIcon size={16} weight="bold" />}
+              icon={<SquaresFourIcon size={20} weight="bold" />}
               label={translate('Overview')}
             />
             <SidebarNavItem
-              icon={<FolderIcon size={16} weight="bold" />}
+              icon={<FolderIcon size={20} weight="bold" />}
               label={translate('Projects')}
               count={projectsCount}
+              active
             />
             <SidebarNavItem
-              icon={<UsersIcon size={16} weight="bold" />}
+              icon={<UsersIcon size={20} weight="bold" />}
               label={translate('Members')}
-              active
             />
           </SidebarSection>
           <SidebarSection label={translate('FINANCE')}>
             <SidebarNavItem
-              icon={<ReceiptIcon size={16} weight="bold" />}
+              icon={<ReceiptIcon size={20} weight="bold" />}
               label={translate('Invoices')}
             />
             <SidebarNavItem
-              icon={<GaugeIcon size={16} weight="bold" />}
+              icon={<GaugeIcon size={20} weight="bold" />}
               label={translate('Quotas')}
             />
           </SidebarSection>
           <SidebarSection label={translate('ADMIN')}>
             <SidebarNavItem
-              icon={<GearIcon size={16} weight="bold" />}
+              icon={<GearIcon size={20} weight="bold" />}
               label={translate('Settings')}
             />
             <SidebarNavItem
-              icon={<ListBulletsIcon size={16} weight="bold" />}
+              icon={<ListBulletsIcon size={20} weight="bold" />}
               label={translate('Audit log')}
             />
           </SidebarSection>
@@ -464,33 +277,12 @@ export const OrgDashboardMock = () => {
             <>
               <SidebarTrigger />
               <OrgSwitcher badge="NO" name={orgName}>
-                <DropdownMenuLabel>
-                  {translate('Organisations')}
-                </DropdownMenuLabel>
-                {customers.length > 0 ? (
-                  customers.map((customer) => (
-                    <DropdownMenuItem
-                      key={customer.uuid}
-                      onClick={() => selectCustomer(customer.uuid)}
-                    >
-                      <CheckIcon
-                        size={16}
-                        weight="bold"
-                        className={
-                          customer.uuid === selectedUuid
-                            ? undefined
-                            : 'invisible'
-                        }
-                      />
-                      {customer.name}
-                    </DropdownMenuItem>
-                  ))
-                ) : (
-                  <DropdownMenuItem>
-                    <CheckIcon size={16} weight="bold" />
-                    {orgName}
-                  </DropdownMenuItem>
-                )}
+                <OrgSwitcherMenu
+                  customers={customers}
+                  selectedUuid={selectedUuid}
+                  onSelect={selectCustomer}
+                  orgName={orgName}
+                />
               </OrgSwitcher>
             </>
           }
@@ -522,54 +314,39 @@ export const OrgDashboardMock = () => {
                 label={translate('Notifications')}
                 hasIndicator
               />
-              {languageChoices.length > 0 && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <IconButton
-                      icon={<GlobeIcon size={18} weight="bold" />}
-                      label={translate('Language')}
-                    />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>
-                      {translate('Language')}
-                    </DropdownMenuLabel>
-                    {languageChoices.map((language) => (
-                      <DropdownMenuItem
-                        key={language.code}
-                        onClick={() => handleLanguageChange(language)}
-                      >
-                        <CheckIcon
-                          size={16}
-                          weight="bold"
-                          className={
-                            currentLanguage?.code === language.code
-                              ? undefined
-                              : 'invisible'
-                          }
-                        />
-                        {language.label}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
-              <IconButton
-                icon={
-                  theme === 'dark' ? (
-                    <SunIcon size={18} weight="bold" />
-                  ) : (
-                    <MoonIcon size={18} weight="bold" />
-                  )
-                }
-                label={
-                  theme === 'dark'
-                    ? translate('Switch to light mode')
-                    : translate('Switch to dark mode')
-                }
-                onClick={toggleTheme}
+              {
+                // UserDropdownMenu.tsx's real header trigger nests
+                // LanguageSelectorDropdown and ThemeSwitcher inside its own
+                // dropdown rather than exposing them as separate top-level
+                // icons the way this app used to — see waldur-ui's
+                // UserMenu.tsx (shared, not app-local, so any future
+                // micro-app gets the same dropdown for free). Every string
+                // it needs arrives pre-translated via `labels` — that
+                // package has no i18n dependency of its own.
+                // UserDropdownMenuItems (profile-section nav tabs, sourced
+                // from @uirouter's live state registry) has no equivalent
+                // here — this app has no router/profile section to link to
+                // — and "Log out" isn't wired either, since nothing in this
+                // app's auth-core config exposes a working sign-out path yet.
+              }
+              <UserMenu
+                currentUser={currentUser}
+                theme={theme}
+                onToggleTheme={toggleTheme}
+                currentLanguage={currentLanguage}
+                languageChoices={languageChoices}
+                onLanguageChange={handleLanguageChange}
+                labels={{
+                  hello: translate('Hello'),
+                  language: translate('Language'),
+                  darkTheme: translate('Dark theme'),
+                  staff: translate('Staff'),
+                  apiToken: translate('API token'),
+                  ipAddress: translate('IP address'),
+                  copy: translate('Copy'),
+                  copied: translate('Copied'),
+                }}
               />
-              <Avatar initials="MS" />
             </>
           }
         />
@@ -602,12 +379,7 @@ export const OrgDashboardMock = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            <StatCard
-              label={translate('Projects')}
-              value={projectsCount}
-              hint={data ? undefined : translate('this quarter')}
-              trend={data ? undefined : { label: '+2', tone: 'success' }}
-            />
+            <StatCard label={translate('Projects')} value={projectsCount} />
             <StatCard
               label={translate('Members')}
               value={usersCount}

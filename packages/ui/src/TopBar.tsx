@@ -8,6 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from './DropdownMenu';
+import { ICON_BUTTON_BASE_CLASSNAME } from './iconButtonStyles';
 import { Tooltip } from './Tooltip';
 
 /**
@@ -79,12 +80,16 @@ export const OrgSwitcher = ({
           // flex items default to min-width:auto, which ignores flex-shrink
           // and any child's own truncate class otherwise.
           'flex min-w-0 items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-medium',
-          'text-[var(--surface-text-primary)] hover:bg-[var(--nav-item-hover-bg)]',
+          // --surface-hover-bg, not --nav-item-hover-bg — see DropdownMenu.tsx's
+          // comment on the same substitution. OrgSwitcher sits in the TopBar,
+          // not the sidebar, so it shouldn't inherit the sidebar's own
+          // SIDEBAR_STYLE-driven hover color.
+          'text-[var(--surface-text-primary)] hover:bg-[var(--surface-hover-bg)]',
           className,
         )}
       >
         {badge && (
-          <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--nav-item-active-bg)] text-xs font-semibold text-[var(--nav-item-active-text)]">
+          <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--badge-brand-bg)] text-xs font-semibold text-[var(--badge-brand-text)]">
             {badge}
           </span>
         )}
@@ -161,15 +166,19 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         type="button"
         aria-label={label}
-        className={cn(
-          'relative flex size-9 items-center justify-center rounded-lg text-[var(--surface-text-secondary)] hover:bg-[var(--nav-item-hover-bg)]',
-          className,
-        )}
+        className={cn('relative', ICON_BUTTON_BASE_CLASSNAME, className)}
         {...props}
       >
         {icon}
         {hasIndicator && (
-          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[var(--pill-danger-dot)]" />
+          // --pill-success-dot, not danger: Metronic's real equivalent
+          // (HeaderButtonBullet, src/navigation/header/HeaderButtonBullet.tsx)
+          // defaults to `variant = 'success'` (green) for "there's something
+          // new here" — every one of its real callers (ConfirmationDrawerToggle,
+          // QuickIssueDrawerToggle) uses that default. Danger/red is reserved
+          // for an actual error state, which this generic "has notifications"
+          // dot isn't.
+          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[var(--pill-success-dot)]" />
         )}
       </button>
     </Tooltip>

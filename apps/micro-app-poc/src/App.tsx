@@ -4,12 +4,20 @@ import {
   initApiClient,
   StorageAdapter,
 } from 'waldur-auth-core';
-import { initBrandTokens, initFontFamily } from 'waldur-design-tokens';
+import {
+  applySidebarStyle,
+  ConfiguredSidebarStyle,
+  getInitialTheme,
+  initBrandTokens,
+  initFontFamily,
+  resolveSidebarStyle,
+} from 'waldur-design-tokens';
 import { LanguageUtilsService } from 'waldur-i18n-runtime';
 import { fetchRuntimeConfig, getApiUrlFromMeta } from 'waldur-runtime-config';
 import { initSentry } from 'waldur-telemetry';
 
 import { OrgDashboardMock } from './OrgDashboardMock';
+import { setConfiguredSidebarStyle } from './sidebarStyleConfig';
 
 /**
  * Reads/writes the exact keys waldur-homeport's own
@@ -73,6 +81,27 @@ function getLocaleData(locale: string) {
 // once fetchRuntimeConfig() resolves below.
 initFontFamily('Inter');
 
+const SIDEBAR_STYLES: readonly ConfiguredSidebarStyle[] = [
+  'dark',
+  'light',
+  'primary',
+  'accent',
+  'accent-light',
+  'auto',
+];
+
+function isConfiguredSidebarStyle(
+  value: string,
+): value is ConfiguredSidebarStyle {
+  return (SIDEBAR_STYLES as readonly string[]).includes(value);
+}
+
+// Same synchronous-at-module-load reasoning as initFontFamily('Inter')
+// above — surfaceColors.css's [data-sidebar-style] rules key off this
+// attribute from first paint, and 'dark' is the same fallback
+// src/navigation/sidebar/Sidebar.tsx's own `SIDEBAR_STYLE || 'dark'` uses.
+applySidebarStyle('dark');
+
 export const App = () => {
   // Light/dark theme is applied by OrgDashboardMock itself (see its own
   // useTheme effect there) — it needs to live where the toggle button
@@ -90,6 +119,23 @@ export const App = () => {
         const fontFamily = config.plugins?.WALDUR_CORE?.FONT_FAMILY;
         if (fontFamily) {
           initFontFamily(fontFamily);
+        }
+
+        // Same tenant-configurable source as the main app's
+        // src/navigation/sidebar/Sidebar.tsx. Validated against the known
+        // variant list — SIDEBAR_STYLE is typed as a plain `string` in
+        // src/auth/types.ts, not a union, so a stale/typo'd backend value
+        // shouldn't set an attribute surfaceColors.css has no rule for
+        // (which would fall through to the unstyled shadcn defaults).
+        // getInitialTheme() re-reads current theme state, not a cached
+        // page-load value, so this resolves correctly even if the user
+        // toggled theme in the moment before this fetch resolved.
+        const sidebarStyle = config.plugins?.WALDUR_CORE?.SIDEBAR_STYLE;
+        if (sidebarStyle && isConfiguredSidebarStyle(sidebarStyle)) {
+          setConfiguredSidebarStyle(sidebarStyle);
+          applySidebarStyle(
+            resolveSidebarStyle(sidebarStyle, getInitialTheme()),
+          );
         }
 
         // Same wiring as the main app's own initLanguageUtils() — picks

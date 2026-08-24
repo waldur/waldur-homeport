@@ -93,10 +93,47 @@ export default {
   },
 
   create(context) {
+    // waldur-ui's own Badge (packages/ui/src/Badge.tsx) is an unrelated
+    // shadcn-recipe component that shares only the name with the real
+    // Bootstrap Badge this rule migrates (src/core/Badge.tsx, and its
+    // re-exports/relative imports) — it has no bg/outline/light/text/
+    // onlyIcon props at all, so "fixing" it here would insert a prop
+    // TypeScript rejects. Two ways a file can be using that fake one
+    // rather than the real one: importing it as 'waldur-ui' (any consumer
+    // outside the package), or — since UserMenu.tsx/LanguageMenu.tsx etc.
+    // import it as a relative sibling ('./Badge') — simply living inside
+    // packages/ui/src/ itself, where the real Bootstrap Badge never
+    // exists. Neither an import-source deny-list alone nor a path check
+    // alone covers both cases.
+    const filename = (context.filename ?? context.getFilename()).replace(
+      /\\/g,
+      '/',
+    );
+    if (filename.includes('/packages/ui/src/')) {
+      return {};
+    }
+
+    // Deny-list just the one known false-positive import source rather
+    // than allow-listing the real component's path: the real one is
+    // imported multiple ways across src/ (relative './Badge' from within
+    // src/core/ itself, '@/core/Badge' elsewhere), and an allow-list
+    // would silently drop coverage for every path it didn't enumerate.
+    let badgeImportSource;
+
     return {
+      ImportDeclaration(node) {
+        const hasBadgeSpecifier = node.specifiers.some(
+          (spec) =>
+            spec.type === 'ImportSpecifier' && spec.imported.name === 'Badge',
+        );
+        if (hasBadgeSpecifier) {
+          badgeImportSource = node.source.value;
+        }
+      },
       JSXOpeningElement(node) {
         // Only check Badge components
         if (node.name?.name !== 'Badge') return;
+        if (badgeImportSource === 'waldur-ui') return;
 
         const attrs = node.attributes.filter(
           (attr) => attr.type === 'JSXAttribute',
