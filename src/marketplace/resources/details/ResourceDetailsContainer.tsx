@@ -290,6 +290,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         <TosConsentWarningBanner
           offering={data.offering}
           userHasConsent={data.offering?.user_has_consent}
+          userHasOfferingUser={data.offering?.user_has_offering_user}
         />
         <ProfileCompletenessWarningBanner offering={data.offering} />
         <ResourceDetailsHero
