@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Form, FormControlProps } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
 
@@ -30,23 +30,33 @@ const BaseCommaSeparatedListField: FC<BaseCommaSeparatedListFieldProps> = ({
   separator: sep = 'comma',
   ...rest
 }) => {
-  const displayValue = Array.isArray(valueProp)
-    ? valueProp.join(sep === 'comma' ? ', ' : ' ')
-    : valueProp;
+  // The text being typed is held locally so that a separator the user has
+  // entered but not yet filled in ("a, ") stays on screen, while the value
+  // handed to the form stays free of the empty entries that produces. Filtering
+  // them on blur instead is not enough: a form can be submitted straight from
+  // the keyboard, and an empty entry reaching a list-of-emails API is a 400.
+  const [draft, setDraft] = useState<string | null>(null);
+
+  const separator = sep === 'comma' ? ',' : ' ';
+  const joiner = sep === 'comma' ? ', ' : ' ';
+
+  const displayValue =
+    draft ?? (Array.isArray(valueProp) ? valueProp.join(joiner) : valueProp);
+
+  const parse = (text: string) =>
+    text
+      .split(separator)
+      .map((item) => item.trim())
+      .filter(Boolean);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    const parsedValue = newValue
-      .split(sep === 'comma' ? ',' : ' ')
-      .map((item) => item.trim());
-    onChangeProp?.(parsedValue);
+    setDraft(e.target.value);
+    onChangeProp?.(parse(e.target.value));
   };
 
   const handleBlur = (e: React.FocusEvent) => {
-    const parsedValue = (valueProp || []).filter(
-      (item) => !['', undefined, null].includes(item),
-    );
-    onChangeProp?.(parsedValue);
+    // Drop the draft so the input re-renders from the cleaned value.
+    setDraft(null);
     onBlurProp?.(e);
   };
 
