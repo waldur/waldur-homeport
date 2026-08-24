@@ -26,11 +26,13 @@ interface TosConsentWarningBannerProps {
     state?: OfferingState;
   };
   userHasConsent?: boolean;
+  userHasOfferingUser?: boolean;
 }
 
 export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
   offering,
   userHasConsent,
+  userHasOfferingUser,
 }) => {
   const user = useUser();
   const dispatch = useDispatch();
@@ -64,12 +66,15 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
       enforceConsent &&
       canCreateUser &&
       hasActiveTos &&
+      userHasOfferingUser === true &&
       userHasConsent === false
     );
   }, [
     offering.plugin_options?.service_provider_can_create_offering_user,
     hasActiveTos,
+    userHasOfferingUser,
     userHasConsent,
+    user.is_staff,
   ]);
 
   if (!shouldShowBanner) {
