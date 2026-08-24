@@ -124,6 +124,17 @@ const PosixIdentifiersTable = ({
                   .join(': ')
               : renderFieldOrDash(null),
         },
+        {
+          // The value belongs to the user within the pool, not to this account:
+          // every offering listed here hands the user the very same number.
+          title: translate('Shared with'),
+          render: ({ row }) =>
+            row.shared_with_offerings?.length
+              ? row.shared_with_offerings
+                  .map((offering) => offering.name)
+                  .join(', ')
+              : renderFieldOrDash(null),
+        },
       ]}
       title={translate('POSIX identifiers')}
       verboseName={translate('POSIX identifiers')}
