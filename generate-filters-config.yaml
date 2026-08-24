@@ -12,6 +12,32 @@ overrides:
       label: Applies to offering
       operationId: marketplace_provider_offerings_list
 
+  marketplace_posix_identities:
+    filters:
+      - consumer_type
+      - is_released
+      - recyclable
+    consumer_type:
+      label: Principal kind
+      placeholder: 'Any principal'
+      enumOverrides:
+        'user': User
+        'robotaccount': Robot account
+        'offeringusergroup': Project group
+        'offeringrolegroup': Role group
+    is_released:
+      label: Status
+      enumOverrides:
+        'undefined': Any status
+        'true': Released
+        'false': Active
+    recyclable:
+      label: Recyclable
+      enumOverrides:
+        'undefined': All
+        'true': Returned to the pool
+        'false': Withheld from the pool
+
   customers:
     filters:
       - accounting_is_running

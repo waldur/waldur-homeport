@@ -27,7 +27,7 @@ export const PosixIdPoolIdentitiesButton: FC<
       action={() =>
         openDialog(PosixIdPoolIdentitiesDialog, {
           resolve: { pool: row },
-          size: 'lg',
+          size: 'xl',
         })
       }
       iconNode={<UsersIcon weight="bold" />}
