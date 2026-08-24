@@ -22,6 +22,16 @@ export const filterRolesByType = (roles: Role[], types: RoleType[]) =>
 export const getRoles = (types: RoleType[]) =>
   filterRolesByType(ENV.roles, types);
 
+/**
+ * Map role name to its human-readable label, for rendering a stored list of
+ * role names (which is what the role-valued offering options hold) without
+ * looking each one up again.
+ */
+export const getRoleLabels = (roles: Role[]): Record<string, string> =>
+  Object.fromEntries(
+    roles.map((role) => [role.name, role.description || role.name]),
+  );
+
 type GrantScope = Pick<
   PermissionRequest,
   'customerId' | 'projectId' | 'callOrganizerId' | 'scopeId'

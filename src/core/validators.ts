@@ -37,6 +37,11 @@ export const requiredArray = (value) =>
     ? undefined
     : translate('This field is required.');
 
+export const maxItems = (n: number) => (value) =>
+  Array.isArray(value) && value.length > n
+    ? translate('At most {n} entries are allowed.', { n })
+    : undefined;
+
 export const lessThanOrEqual = (n) => (value: number) =>
   value && value > n ? translate('Must be {n} or less.', { n }) : undefined;
 
