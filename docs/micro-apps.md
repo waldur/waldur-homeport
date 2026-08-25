@@ -17,6 +17,16 @@ micro-frontend would — not through the root app's own `src/`, its
 what building one that way surfaced about `packages/*`'s own portability
 gaps.
 
+A new micro-app that wants the same Sidebar/TopBar chrome and app
+bootstrap sequence (auth, font/brand-token, sidebar-style, i18n, Sentry)
+doesn't need to rebuild any of that — see `packages/shell` (`waldur-shell`)
+and [`apps/micro-app-poc/README.md`](../apps/micro-app-poc/README.md)'s
+"Shared app-shell" section.
+Reach for it directly rather than re-deriving the same bootstrap wiring
+`micro-app-poc` used to have inline; see this doc's "Known gaps" section
+for why it was extracted deliberately rather than left as a pattern to
+copy per app.
+
 **The convention is directory presence, not a manifest.** Every `apps/*`
 member is picked up automatically — by `yarn install` (via the
 workspace glob), by the Dockerfile's build loop, by CI's typecheck/build
@@ -62,8 +72,8 @@ rather than naming it:
    (the same `$ASSET_PATH` build arg the root app's build uses — see
    "ASSET_PATH (relocated deployments)" below), and nests the
    result into `dist/<name>/` alongside the root app's own `dist/`. The
-   final image stage is then a single `COPY --from=build /app/dist
-   /usr/share/nginx/html` — no per-app `COPY` lines.
+   final image stage is then one single `COPY` of the whole tree — no
+   per-app `COPY` lines.
 2. **`docker/entrypoint.sh`** — at container start, generates one nginx
    `location` block per `apps/*` directory it finds under the html root,
    into `/etc/nginx/conf.d/micro-apps.conf` (created empty at build time so
@@ -159,12 +169,18 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
    `<meta name="api-url" content="%VITE_API_URL%">`, same as the root
    app's), `vite.config.ts` (own dev port — check `.claude/launch.json` and
    existing `apps/*` for ports already taken), `tsconfig.json`.
-2. Decide whether it ships: omit `"waldur": { "deploy": false }` to ship by
+2. Add `waldur-shell` as a dependency and call its `initAppShellSync()`/
+   `bootstrapAppShellAsync()` from your own entry point, and compose
+   `<AppShell>` for the page chrome — see `apps/micro-app-poc/src/App.tsx`/
+   `OrgDashboardMock.tsx` for the reference wiring. Skip this only if the
+   new app genuinely needs different chrome, not just different nav
+   content (`AppShell` already takes nav items/page content as props).
+3. Decide whether it ships: omit `"waldur": { "deploy": false }` to ship by
    default, or add it if it's a demo/POC that should stay CI/preview-only
    (see above).
-3. That's it for Dockerfile/nginx/`entrypoint.sh`/CI — all four scan for
+4. That's it for Dockerfile/nginx/`entrypoint.sh`/CI — all four scan for
    `apps/*` content, none hand-list app names.
-4. Optional, for local dev convenience: add an entry to `.claude/launch.json`
+5. Optional, for local dev convenience: add an entry to `.claude/launch.json`
    (both the repo-root one and, if working from the `waldur-claude-workspace`
    hub, its own hub-level copy — these can drift out of sync since nothing
    keeps them in sync automatically) so `preview_start` can launch it by
@@ -176,16 +192,25 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
   static list read by an external tool, one port per entry — a new
   micro-app still needs a hand-added entry there, and the hub-level and
   repo-level copies can drift.
-- **Shared bootstrap code vs. the portability proof.** If several
-  micro-apps accumulate the same `configureAuthCore`/`initApiClient`/
-  storage-adapter wiring, extracting it into a shared `packages/*` package
-  would be reasonable DRY — but it also means later micro-apps stop being
-  independent evidence that `packages/*` needs no shared internal glue.
-  Decide this on purpose if/when it comes up, not by accretion.
+- **Shared bootstrap code, resolved: `packages/shell` (`waldur-shell`).**
+  Extracted deliberately — before a second real micro-app existed to force
+  the issue, not from actual accumulated duplication — once it was clear
+  the Sidebar/TopBar chrome and the `configureAuthCore`/`initApiClient`/
+  font/brand-token/sidebar-style/i18n/Sentry bootstrap sequence would be
+  identical for any future micro-app. See
+  [`apps/micro-app-poc/README.md`](../apps/micro-app-poc/README.md)'s
+  "Shared app-shell" section for what it covers and what a new micro-app
+  gets for free versus what stays its own responsibility (nav content,
+  page content, org/customer data). A genuinely different micro-app (a
+  different chrome shape
+  entirely, not just different nav items) is still real, independent
+  evidence about `packages/ui`'s own primitives — `waldur-shell` only
+  removes duplication in the _composition_ of those primitives into one
+  particular chrome, not in the primitives themselves.
 - **One shared image vs. one image per micro-app.** Today every micro-app
   is coupled to the root app's release cadence (a micro-app change forces a
   full homeport rebuild/redeploy). True per-micro-app deploy independence
-  would mean separate images (still reusing the manifest-prune `yarn
-  install` trick) composed at the ingress/Helm layer instead of in this
+  would mean separate images (still reusing the manifest-prune install
+  trick) composed at the ingress/Helm layer instead of in this
   repo's `nginx-tpl.conf` — real infra work, only worth it once independent
   deploy cadence is an actual requirement.

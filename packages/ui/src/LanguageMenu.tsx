@@ -1,3 +1,5 @@
+import { LanguageOption, translate } from 'waldur-i18n-runtime';
+
 import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -7,18 +9,12 @@ import {
 } from './DropdownMenu';
 import { getLanguageFlag } from './languageFlags';
 
-export interface LanguageOption {
-  code: string;
-  label: string;
-}
+export type { LanguageOption };
 
 export interface LanguageMenuProps {
   currentLanguage: LanguageOption;
   languageChoices: LanguageOption[];
   onLanguageChange: (language: LanguageOption) => void;
-  /** Already translated by the caller — this package has no i18n
-   * dependency of its own (same boundary CopyButton.tsx documents). */
-  label: string;
 }
 
 /**
@@ -30,17 +26,22 @@ export interface LanguageMenuProps {
  * hover-trigger submenu mode). Selection uses real
  * role="menuitemradio"/aria-checked semantics — see DropdownMenu.tsx's
  * comment on RadioItem.
+ *
+ * Calls translate() directly (waldur-i18n-runtime is now a real dependency
+ * of this package) rather than taking a pre-translated `label` prop — the
+ * package's earlier "no i18n dependency" boundary was dropped once every
+ * consumer turned out to need translate() anyway, making the labels-prop
+ * indirection pure ceremony rather than a real portability guarantee.
  */
 export function LanguageMenu({
   currentLanguage,
   languageChoices,
   onLanguageChange,
-  label,
 }: LanguageMenuProps) {
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger>
-        {label}
+        {translate('Language')}
         <span className="ml-auto flex items-center gap-1.5 rounded bg-[var(--surface-hover-bg)] px-2 py-0.5 text-xs">
           {currentLanguage.label}
           <span aria-hidden="true">

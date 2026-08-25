@@ -19,3 +19,5 @@ export type {
 export type { LanguageOption, MessageTransform, Translate } from './types';
 
 export { useLanguageSelector } from './useLanguageSelector';
+
+export { loadSharedLocale } from './loadSharedLocale';

@@ -1,3 +1,5 @@
+import { translate } from 'waldur-i18n-runtime';
+
 import { Badge } from './Badge';
 import { CopyButton } from './CopyButton';
 import {
@@ -21,33 +23,17 @@ export interface CurrentUser {
   ipAddress: string;
 }
 
-export interface UserMenuLabels {
-  hello: string;
-  language: string;
-  darkTheme: string;
-  staff: string;
-  apiToken: string;
-  ipAddress: string;
-  copy: string;
-  copied: string;
-}
-
 export interface UserMenuProps {
   currentUser: CurrentUser | null;
   /** Plain 'light' | 'dark' rather than importing waldur-design-tokens'
-   * ThemeName — same "no dependency this package doesn't need" reasoning
-   * as the labels prop below. Any ThemeName value is a valid value here
-   * without a cast; the two types are structurally identical. */
+   * ThemeName — this package has no dependency on that package, and the
+   * two types are structurally identical, so any ThemeName value is a
+   * valid value here without a cast. */
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
   currentLanguage: LanguageOption | undefined;
   languageChoices: LanguageOption[];
   onLanguageChange: (language: LanguageOption) => void;
-  /** Already translated by the caller — this package has no i18n
-   * dependency of its own (same boundary CopyButton.tsx documents), so
-   * every string that would otherwise be a translate() call here arrives
-   * as a prop instead. */
-  labels: UserMenuLabels;
 }
 
 // Same acronym derivation as src/core/Avatar.tsx's real Avatar component —
@@ -73,6 +59,11 @@ function getInitials(name: string): string {
  * piece looks the way it does (LanguageMenu/RadioItem for the
  * org-switcher-shaped language list, the real toggle switch instead of a
  * checkmark, etc.) — this file only composes them.
+ *
+ * Calls translate() directly (waldur-i18n-runtime is now a real dependency
+ * of this package, same as LanguageMenu.tsx) rather than taking a
+ * pre-translated `labels` prop — see that file's comment on why the
+ * package's earlier "no i18n dependency" boundary was dropped.
  */
 export function UserMenu({
   currentUser,
@@ -81,7 +72,6 @@ export function UserMenu({
   currentLanguage,
   languageChoices,
   onLanguageChange,
-  labels,
 }: UserMenuProps) {
   return (
     <DropdownMenu>
@@ -104,7 +94,7 @@ export function UserMenu({
             <div className="hidden flex-col items-start md:flex">
               {!currentUser.isStaff && (
                 <span className="text-xs text-[var(--surface-text-muted)]">
-                  {labels.hello}
+                  {translate('Hello')}
                 </span>
               )}
               {/* font-medium (500), not font-bold (700) — real
@@ -127,7 +117,7 @@ export function UserMenu({
                   variant="purple"
                   className="mt-0.5 rounded-full px-1.5 py-0"
                 >
-                  {labels.staff}
+                  {translate('Staff')}
                 </Badge>
               )}
             </div>
@@ -170,7 +160,6 @@ export function UserMenu({
               currentLanguage={currentLanguage}
               languageChoices={languageChoices}
               onLanguageChange={onLanguageChange}
-              label={labels.language}
             />
             <DropdownMenuSeparator />
           </>
@@ -184,7 +173,7 @@ export function UserMenu({
             would double-toggle when a click on it bubbles up to the row
             anyway. */}
         <DropdownMenuItem onClick={onToggleTheme}>
-          {labels.darkTheme}
+          {translate('Dark theme')}
           <Switch
             checked={theme === 'dark'}
             onCheckedChange={() => {}}
@@ -197,7 +186,7 @@ export function UserMenu({
             <DropdownMenuSeparator />
             <div className="flex flex-col gap-1.5 px-2 py-1.5">
               <span className="text-xs font-medium text-[var(--surface-text-muted)]">
-                {labels.apiToken}
+                {translate('API token')}
               </span>
               <div className="flex items-center gap-1.5">
                 <input
@@ -208,8 +197,8 @@ export function UserMenu({
                 />
                 <CopyButton
                   value={currentUser.token}
-                  label={labels.copy}
-                  copiedLabel={labels.copied}
+                  label={translate('Copy')}
+                  copiedLabel={translate('Copied')}
                 />
               </div>
             </div>
@@ -220,7 +209,7 @@ export function UserMenu({
             <DropdownMenuSeparator />
             <div className="flex flex-col gap-1.5 px-2 py-1.5">
               <span className="text-xs font-medium text-[var(--surface-text-muted)]">
-                {labels.ipAddress}
+                {translate('IP address')}
               </span>
               <div className="flex items-center justify-between gap-1.5">
                 <span className="text-sm text-[var(--surface-text-muted)]">
@@ -228,8 +217,8 @@ export function UserMenu({
                 </span>
                 <CopyButton
                   value={currentUser.ipAddress}
-                  label={labels.copy}
-                  copiedLabel={labels.copied}
+                  label={translate('Copy')}
+                  copiedLabel={translate('Copied')}
                 />
               </div>
             </div>

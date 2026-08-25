@@ -19988,11 +19988,10 @@ __metadata:
     typescript: "npm:^5.7.3"
     vite: "npm:^8.0.16"
     waldur-api-client: "workspace:*"
-    waldur-auth-core: "workspace:*"
     waldur-design-tokens: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
     waldur-runtime-config: "workspace:*"
-    waldur-telemetry: "workspace:*"
+    waldur-shell: "workspace:*"
     waldur-ui: "workspace:*"
   languageName: unknown
   linkType: soft
@@ -20000,6 +19999,23 @@ __metadata:
 "waldur-runtime-config@workspace:*, waldur-runtime-config@workspace:packages/runtime-config":
   version: 0.0.0-use.local
   resolution: "waldur-runtime-config@workspace:packages/runtime-config"
+  languageName: unknown
+  linkType: soft
+
+"waldur-shell@workspace:*, waldur-shell@workspace:packages/shell":
+  version: 0.0.0-use.local
+  resolution: "waldur-shell@workspace:packages/shell"
+  dependencies:
+    "@phosphor-icons/react": "npm:^2.1.7"
+    waldur-auth-core: "workspace:*"
+    waldur-design-tokens: "workspace:*"
+    waldur-i18n-runtime: "workspace:*"
+    waldur-runtime-config: "workspace:*"
+    waldur-telemetry: "workspace:*"
+    waldur-ui: "workspace:*"
+  peerDependencies:
+    react: ^18.3.0
+    react-dom: ^18.3.0
   languageName: unknown
   linkType: soft
 
@@ -20027,6 +20043,7 @@ __metadata:
     class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
     tailwind-merge: "npm:^3.6.0"
+    waldur-i18n-runtime: "workspace:*"
   peerDependencies:
     react: ^18.3.0
     react-dom: ^18.3.0

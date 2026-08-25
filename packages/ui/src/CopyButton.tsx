@@ -5,10 +5,12 @@ import { BaseButton } from './BaseButton';
 
 export interface CopyButtonProps {
   value: string;
-  /** Already translated by the caller — this package has no i18n dependency
-   * of its own (see Sidebar.tsx's hardcoded aria-labels for the same
-   * boundary), so text always arrives as a prop, never a translate() call
-   * made in here. */
+  /** Already translated by the caller, unlike UserMenu.tsx/LanguageMenu.tsx
+   * (which call translate() directly now that waldur-i18n-runtime is a real
+   * dependency of this package) — those two have one fixed, non-reusable
+   * set of strings; this component's label legitimately varies by call site
+   * ("Copy", "Copy token", "Copy link", ...), so it stays a prop rather than
+   * a hardcoded translate() call. */
   label: string;
   copiedLabel: string;
   className?: string;
