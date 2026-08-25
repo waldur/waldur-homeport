@@ -302,16 +302,13 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           <ProjectDashboardCredit project={project} className="mb-5" />
         )}
       </Row>
-      {/* The Health block shows when billing is visible, the project is opted
-          into credit reports, and it has a credit. The sections below gate
-          themselves per view — each renders only where its dashboard.* feature
-          is enabled. */}
-      {showBillingInfo && project.display_credit_reports && (
-        <ProjectCreditHealthBlock project={project} />
-      )}
-      {project.display_credit_reports && (
-        <UsageViewsSection project={project} />
-      )}
+      {/* The Health block is for projects with a credit allocation and gates
+          itself on one — it renders nothing without. The usage views are about
+          quota rather than credit, so they are not tied to an allocation; each
+          view ships behind its own dashboard.usage_* feature flag and the
+          section renders nothing until an operator enables one. */}
+      {showBillingInfo && <ProjectCreditHealthBlock project={project} />}
+      <UsageViewsSection project={project} />
     </>
   );
 };
