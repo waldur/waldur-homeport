@@ -14,7 +14,7 @@ import { VStepperFormStepCard } from '@/wizard';
 import { minOne, useVMwareLimitsLoader } from './utils';
 
 const coresPerSocketValidator = (coresPerSocket, values) => {
-  const cores = (values.limits && values.limits.cpu) || 1;
+  const cores = values?.limits?.cpu || 1;
   if (cores % coresPerSocket !== 0) {
     return translate(
       'Number of CPU cores should be multiple of cores per socket.',
