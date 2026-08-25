@@ -322,8 +322,18 @@ Run E2E visual tests:
         - playwright.config.ts
         - .storybook/**/*
       allow_failure: true
+  # 288 cases (12 variants x 2 sizes x 2 themes x 6 states) at --workers=1 took
+  # 12.1 min, and Playwright itself flagged it: "Slow test file ... Consider
+  # running tests from slow files in parallel."
+  #
+  # Shard across runners rather than raising --workers: the worker count is held
+  # at 1 by the RAM ceiling documented above, and each shard is its own runner
+  # with its own RAM, so this cuts wall-clock ~3x without touching that ceiling.
+  # Verified locally: --shard=1/3, 2/3 and 3/3 list 96 tests each, 288 total.
+  # See waldur/waldur-mastermind#293.
+  parallel: 3
   script:
-    - yarn test:e2e:visual base-button-parity
+    - yarn test:e2e:visual base-button-parity --shard=${CI_NODE_INDEX}/${CI_NODE_TOTAL}
   artifacts:
     expire_in: 1 week
     when: always
@@ -550,6 +560,19 @@ Trigger integration tests:
     project: waldur/waldur-integration-testing
     branch: main
     strategy: depend
+  # Without `needs:` this bridge is only stage-ordered, so it could not start
+  # until every job in `test`, `build` and `release` had finished — including the
+  # ~15-minute "Run E2E visual tests" job, which is `allow_failure: true` and so
+  # was delaying the downstream suite without even being able to block the merge.
+  # All the bridge depends on is the frontend image. Both needs are `optional`
+  # because only one producer exists in any given pipeline: the MR build on merge
+  # requests, the release job on develop.
+  # See waldur/waldur-mastermind#293.
+  needs:
+    - job: Build test docker image
+      optional: true
+    - job: Publish latest docker image
+      optional: true
   # TRIGGER_SOURCE lets the downstream E2E suite skip backend-only jobs
   # (ansible, mitogen, SCIM, OIDC, GLAuth) that a frontend change cannot affect.
   variables:
