@@ -133,20 +133,22 @@ export const UserProposalsList = () => {
     },
   ];
 
-  if (isFeatureVisible(ProjectFeatures.oecd_fos_2007_code)) {
+  if (isFeatureVisible(ProjectFeatures.science_domain)) {
     columns.push({
-      title: translate('OECD FoS code'),
+      title: translate('Science domain'),
       render: ({ row }) => (
         <>
-          {row.oecd_fos_2007_code
-            ? `${row.oecd_fos_2007_code}. ${row.oecd_fos_2007_label}`
+          {row.science_sub_domain_name
+            ? [row.science_domain_name, row.science_sub_domain_name]
+                .filter(Boolean)
+                .join(' > ')
             : DASH_ESCAPE_CODE}
         </>
       ),
 
       optional: true,
-      keys: ['oecd_fos_2007_code', 'oecd_fos_2007_label'],
-      id: 'oecd_fos_code',
+      keys: ['science_domain_name', 'science_sub_domain_name'],
+      id: 'science_domain',
     });
   }
 

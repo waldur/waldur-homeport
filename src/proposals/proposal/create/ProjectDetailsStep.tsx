@@ -4,14 +4,13 @@ import { Field, useForm } from 'react-final-form';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@/core/AccordionCard';
-import { ENV } from '@/core/config';
 import { isEmpty } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
-import { StringGroup, TextGroup, BooleanGroup, SelectGroup } from '@/form';
+import { StringGroup, TextGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
-import { OECD_FOS_2007_CODES } from '@/project/OECD_FOS_2007_CODES';
+import { ScienceDomainGroup } from '@/project/create/ScienceDomainGroup';
 import { Call, ProposalReview } from '@/proposals/types';
 import { VStepperFormStepProps } from '@/wizard';
 
@@ -20,14 +19,12 @@ import { FieldReviewComments } from '../create-review/FieldReviewComments';
 import { StepHeaderContent } from './StepHeaderContent';
 import { UploadDocumentationFiles } from './UploadDocumentationFiles';
 
-const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
-
 // Fields to track for completion count
 const PROJECT_DETAIL_FIELDS = [
   'name',
   'project_summary',
   'description',
-  'oecd_fos_2007_code',
+  'science_sub_domain',
   'duration_in_days',
   'supporting_documentation',
 ] as const;
@@ -41,14 +38,26 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const isOpen = props.params?.isOpen;
   const onToggle = props.params?.onToggle;
 
+  // The science domain picker renders nothing when its feature is off, so
+  // counting the field would leave the step permanently one short of its total.
+  const trackedFields = useMemo(
+    () =>
+      isFeatureVisible(ProjectFeatures.science_domain)
+        ? PROJECT_DETAIL_FIELDS
+        : PROJECT_DETAIL_FIELDS.filter(
+            (fieldName) => fieldName !== 'science_sub_domain',
+          ),
+    [],
+  );
+
   // Count filled fields for metadata display
   const filledFieldsCount = useMemo(() => {
     if (!values) return 0;
-    return PROJECT_DETAIL_FIELDS.filter((fieldName) => {
+    return trackedFields.filter((fieldName) => {
       const value = values[fieldName];
       return typeof value === 'object' ? !isEmpty(value) : Boolean(value);
     }).length;
-  }, [values]);
+  }, [values, trackedFields]);
 
   const { data: call } = useQuery({
     queryKey: ['Call', proposal.call_uuid],
@@ -85,7 +94,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           isRequired={isRequired}
           metadata={translate('{filled}/{total} fields filled', {
             filled: filledFieldsCount,
-            total: PROJECT_DETAIL_FIELDS.length,
+            total: trackedFields.length,
           })}
         />
       }
@@ -121,35 +130,15 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_description"
       />
-      <BooleanGroup
-        name="project_has_civilian_purpose"
-        label={translate('Project for civilian purpose?')}
-        size="sm"
-      />
-      <FieldReviewComments
-        reviews={reviews}
-        fieldName="comment_project_has_civilian_purpose"
-      />
-      {isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
-        <SelectGroup
-          name="oecd_fos_2007_code"
-          options={OECD_FOS_2007_CODES}
-          getOptionValue={(option) => option.value}
-          getOptionLabel={(option) => `${option.value}. ${option.label}`}
-          isClearable={true}
-          simpleValue
-          label={translate('Research field (OECD code)')}
-          required={isCodeRequired}
-        />
-      ) : null}
-      <BooleanGroup
-        name="project_is_confidential"
-        label={translate('Is the project confidential?')}
-        size="sm"
-      />
-      <FieldReviewComments
-        reviews={reviews}
-        fieldName="comment_project_is_confidential"
+      <ScienceDomainGroup
+        initialDomain={
+          proposal.science_domain_uuid
+            ? {
+                uuid: proposal.science_domain_uuid,
+                name: proposal.science_domain_name,
+              }
+            : null
+        }
       />
       <StringGroup
         name="duration_in_days"

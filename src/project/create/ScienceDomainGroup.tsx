@@ -8,11 +8,19 @@ import { SelectField, SelectGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 
-export const ScienceDomainGroup = () => {
+interface ScienceDomainGroupProps {
+  // Preselects the parent domain when the form already holds a sub-domain, so
+  // an edit form opens with its sub-domain list loaded rather than disabled.
+  initialDomain?: { uuid: string; name: string } | null;
+}
+
+export const ScienceDomainGroup = ({
+  initialDomain = null,
+}: ScienceDomainGroupProps = {}) => {
   const form = useForm();
   const [domains, setDomains] = useState([]);
   const [subDomains, setSubDomains] = useState([]);
-  const [selectedDomain, setSelectedDomain] = useState(null);
+  const [selectedDomain, setSelectedDomain] = useState(initialDomain);
   const [loadingDomains, setLoadingDomains] = useState(true);
   const [loadingSubDomains, setLoadingSubDomains] = useState(false);
 
@@ -35,22 +43,46 @@ export const ScienceDomainGroup = () => {
     };
   }, [featureVisible]);
 
-  const handleDomainChange = useCallback(
-    async (option) => {
-      setSelectedDomain(option);
-      form.change('science_sub_domain', null);
+  // Loading is keyed on the selected domain rather than done inside the change
+  // handler, so a domain preselected from an existing value loads its
+  // sub-domains on mount too.
+  useEffect(() => {
+    if (!featureVisible || !selectedDomain) {
       setSubDomains([]);
-      if (option) {
-        setLoadingSubDomains(true);
-        try {
-          const { data } = await scienceSubDomainsList({
-            query: { domain_uuid: option.uuid, page_size: 100 },
-          });
+      return;
+    }
+    let cancelled = false;
+    setLoadingSubDomains(true);
+    scienceSubDomainsList({
+      query: { domain_uuid: selectedDomain.uuid, page_size: 100 },
+    })
+      .then(({ data }) => {
+        if (!cancelled) {
           setSubDomains(data);
-        } finally {
+        }
+      })
+      .catch(() => {
+        // A failed lookup leaves the sub-domain select empty rather than
+        // rejecting unhandled; the domain stays selected so the user can retry
+        // by reselecting it.
+        if (!cancelled) {
+          setSubDomains([]);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
           setLoadingSubDomains(false);
         }
-      }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [featureVisible, selectedDomain]);
+
+  const handleDomainChange = useCallback(
+    (option) => {
+      setSelectedDomain(option);
+      form.change('science_sub_domain', null);
     },
     [form],
   );
