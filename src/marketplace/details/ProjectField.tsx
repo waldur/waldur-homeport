@@ -7,7 +7,7 @@ import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { getOfferingRestrictedRoles } from '@/marketplace/offerings/utils';
 import { ProjectCreateButton } from '@/project/create/ProjectCreateButton';
-import { useSetProject } from '@/workspace/hooks';
+import { useSetProject, useUser } from '@/workspace/hooks';
 
 import { projectAutocomplete } from '../common/autocompletes';
 
@@ -31,20 +31,21 @@ export const ProjectField: FC<ProjectFieldProps> = ({
 }) => {
   const setCurrentProject = useSetProject();
   const { customer } = useOrderFormData();
+  const user = useUser();
 
   const loadOptions = useMemo(() => {
     const extra: ProjectsListData['query'] = {
       // UUID is used in suggest name API request
       field: ['name', 'url', 'uuid', 'end_date'],
     };
-    const roles = offering ? getOfferingRestrictedRoles(offering) : [];
+    const roles = offering ? getOfferingRestrictedRoles(offering, user) : [];
     if (roles.length) {
       // For a restricted offering, only show projects where the user holds one
       // of the required roles.
       extra.current_user_has_role = roles;
     }
     return projectAutocomplete(customer?.uuid, extra);
-  }, [customer?.uuid, offering]);
+  }, [customer?.uuid, offering, user]);
 
   const onChange = useCallback(
     (value) => {

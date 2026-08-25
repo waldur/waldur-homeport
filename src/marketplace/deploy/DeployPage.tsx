@@ -384,6 +384,7 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
   const router = useRouter();
 
   const marketplaceFilters = useSelector(getMarketplaceFilters);
+  const user = useUser();
   const currentCustomer = useCustomer();
   const currentProject = useProject();
 
@@ -402,6 +403,7 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
         currentProject,
         currentCustomer,
         selectedOffering: props.offering,
+        user,
       };
 
       // Initialize project
@@ -434,7 +436,13 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
     };
 
     initializeFormValues();
-  }, [props.offering, marketplaceFilters, currentCustomer, currentProject]);
+  }, [
+    props.offering,
+    marketplaceFilters,
+    currentCustomer,
+    currentProject,
+    user,
+  ]);
 
   const handleMutate = useCallback(
     async (values: DeployFormData) => {

@@ -8,7 +8,7 @@ import {
 
 import { getCustomer } from '@/customer/utils';
 import { getOfferingRestrictedRoles } from '@/marketplace/offerings/utils';
-import { Customer } from '@/workspace/types';
+import { Customer, User } from '@/workspace/types';
 
 import { MarketplaceFilterItem } from '../landing/filter/types';
 
@@ -18,6 +18,7 @@ interface InitContext {
   currentProject: Project;
   currentCustomer: Customer;
   selectedOffering?: Offering;
+  user?: User;
 }
 
 /**
@@ -175,7 +176,7 @@ export const resolveCustomer = async (
       );
     }
     const roles = selectedOffering
-      ? getOfferingRestrictedRoles(selectedOffering)
+      ? getOfferingRestrictedRoles(selectedOffering, context.user)
       : [];
     if (roles.length) {
       query.current_user_has_role = roles;

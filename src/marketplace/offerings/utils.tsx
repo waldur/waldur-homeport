@@ -3,7 +3,10 @@ import { User, Offering } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { IBreadcrumbItem } from '@/navigation/types';
-import { checkIsOwnerOrStaff } from '@/workspace/selectors';
+import {
+  checkIsOwnerOrStaff,
+  checkIsStaffOrSupport,
+} from '@/workspace/selectors';
 
 import { PublicOfferingBreadcrumbPopover } from './PublicOfferingBreadcrumbPopover';
 
@@ -150,8 +153,16 @@ export const isOfferingRestrictedToProject = (
 // Roles an offering is restricted to (empty if unrestricted). Passed to the
 // projects/customers list endpoints' current_user_has_role filter so the order
 // form only offers scopes where the user holds one of these roles.
-export const getOfferingRestrictedRoles = (offering: Offering): string[] =>
-  offering?.plugin_options?.restricted_to_roles || [];
+// Staff and support are not subject to the restriction (the backend exempts
+// them too), so filtering their scopes by these roles would leave the order
+// form with nothing to select whenever they do not happen to hold one.
+export const getOfferingRestrictedRoles = (
+  offering: Offering,
+  user?: User,
+): string[] =>
+  checkIsStaffOrSupport(user)
+    ? []
+    : offering?.plugin_options?.restricted_to_roles || [];
 
 export const parentOfferingFilter = {
   type: 'OpenStack.Tenant',
