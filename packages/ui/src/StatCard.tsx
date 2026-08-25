@@ -18,12 +18,13 @@ import { StatusTone } from './StatusPill';
  * label+value-only card. Composed as one CardContent now instead.
  *
  * Real values (root font-size is 13px in that app, not 16px — see
- * src/metronic/sass/layout/_variables.scss's $root-font-size, so its rem
- * values below are recalculated against 13px, not the 16px this app's
- * own tailwind.css correctly uses instead — see that file's comment):
- * padding is `.card-body.py-5` = 29.25px sides ($card-px, unchanged from
- * the default card) / 16.25px top+bottom (Bootstrap's `.py-5` spacer,
- * overriding the default card's 26px) — not Card.tsx's own 29px/26px.
+ * src/metronic/sass/layout/_variables.scss's $root-font-size; expressed
+ * below as arbitrary rem values, not their px-at-13px-root equivalents,
+ * so this actually stays in sync if the root font-size ever changes —
+ * see Card.tsx's own comment on the same choice):
+ * padding is `.card-body.py-5` = 2.25rem sides ($card-px, unchanged from
+ * the default card) / 1.25rem top+bottom (Bootstrap's `.py-5` spacer,
+ * overriding the default card's 2rem) — not Card.tsx's own 2.25rem/2rem.
  * The value is a hardcoded `style={{ fontSize: '32px' }}`, not a rem
  * token, so text-[32px] here matches it exactly rather than
  * approximating with Tailwind's own text-3xl (30px). The label is
@@ -62,15 +63,46 @@ export const StatCard = ({
   className,
 }: StatCardProps) => (
   <Card
-    className={cn('shadow-none border-[var(--surface-card-border)]', className)}
+    className={cn(
+      'shadow-none border-[var(--surface-card-border)]',
+      // dark:bg override, not a change to --surface-card-bg itself: the
+      // real bordered card (measured live via
+      // e2e-visual/stat-card-parity.spec.ts) sits flush with the page in
+      // dark mode (rgb(12,17,29) = --color-gray-950, same as
+      // --surface-page-bg) rather than getting an elevated tint — a
+      // border-only card doesn't need one. --surface-card-bg's dark value
+      // (--color-gray-900, one step lighter) is correct for Card's default
+      // shadow-only/no-border light-mode-style rendering elsewhere, which
+      // has no live Metronic source to verify against yet — only this
+      // specific bordered variant has been confirmed, so only this
+      // instance is overridden.
+      'dark:bg-[var(--surface-page-bg)]',
+      className,
+    )}
   >
-    <CardContent className="flex flex-col gap-3 px-[29px] py-[16px]">
+    {/* No `gap` here: the real component uses two different row gaps
+        (label->value is .mt-3 = 0.75rem, value->footer is .mt-2 = 0.5rem) —
+        a single uniform gap-3 (measured via e2e-visual/stat-card-parity.spec.ts)
+        made the value->footer gap 0.25rem too wide. Applied as mt-[..] on
+        each row instead, as rem (not their px-at-13px-root equivalents —
+        see this file's top comment on why). */}
+    <CardContent className="flex flex-col px-[2.25rem] py-[1.25rem]">
       <CardTitle>{label}</CardTitle>
-      <div className="text-[32px] font-semibold text-[var(--surface-text-primary)]">
+      {/* leading-[1.2] + mb-[0.5rem]: the real component renders this as an
+          <h1>, which — unlike CardTitle's h3, deliberately zeroed above —
+          keeps its real Bootstrap heading typography here: $headings-
+          line-height: 1.2 (not the font's own much taller ~1.43 "normal"
+          this div would otherwise inherit) and $headings-margin-bottom:
+          0.5rem. That margin isn't just the gap before an optional footer
+          (mt-[0.5rem] below already covers that as its own leading margin)
+          — it's real trailing space on the value itself, present even with
+          no footer at all, confirmed via e2e-visual/stat-card-parity.spec.ts:
+          without it, this card measured ~0.5rem short. */}
+      <div className="mt-[0.75rem] mb-[0.5rem] text-[32px] leading-[1.2] font-semibold text-[var(--surface-text-primary)]">
         {value}
       </div>
       {(trend || hint) && (
-        <div className="flex flex-wrap items-center gap-2 text-sm">
+        <div className="mt-[0.5rem] flex flex-wrap items-center gap-2 text-sm">
           {trend && (
             <Badge variant={trend.tone ?? 'neutral'}>{trend.label}</Badge>
           )}
