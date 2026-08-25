@@ -1,0 +1,22 @@
+{
+  "name": "waldur-shell",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared app-shell bootstrap and chrome layout (sidebar/topbar/footer) for Waldur micro-apps",
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
+    "waldur-auth-core": "workspace:*",
+    "waldur-design-tokens": "workspace:*",
+    "waldur-i18n-runtime": "workspace:*",
+    "waldur-runtime-config": "workspace:*",
+    "waldur-telemetry": "workspace:*",
+    "waldur-ui": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "license": "MIT"
+}

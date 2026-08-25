@@ -32,39 +32,56 @@ Then visit `http://localhost:8001/micro-app-poc/`. The root app's
 see its comment for why generalizing to more `apps/*` members isn't worth
 it yet.
 
-## What it touches
+## Shared app-shell (`waldur-shell`)
 
-`src/App.tsx` calls a real entry point from several of the extracted
-packages — not just an import — with no backend running:
+`src/App.tsx` doesn't call the individual packages directly anymore — it
+calls `waldur-shell`'s two bootstrap entry points, which do that
+internally. `waldur-shell` exists because the chrome/bootstrap code below
+is identical across every micro-app, not specific to this one — see
+`docs/micro-apps.md`'s note on why this was extracted deliberately rather
+than waiting for actual duplication to accumulate across several real
+micro-apps (there's still only one).
 
-- **`waldur-design-tokens`**: `initBrandTokens()` themes the brand-reactive
-  variants from a single hex color, with no code borrowed from
-  `afterBootstrap.tsx`.
-- **`waldur-auth-core`**: `configureAuthCore()` with a real
-  `localStorage`-backed `StorageAdapter` reading/writing the exact
-  `waldur/auth/*` keys `waldur-homeport`'s own `src/core/StorageManager.ts`
-  uses (not namespaced) — same-origin session sharing, not an isolated
-  demo: a user already logged into the root app shouldn't have to log in
-  again on this subpath.
-- **`waldur-runtime-config`**: `getApiUrlFromMeta()`, reading the same
-  `VITE_API_URL`-backed `<meta name="api-url">` tag waldur-homeport's own
-  `index.html` uses (see `.env.example`), wired up through
-  `waldur-auth-core`'s `initApiClient()` exactly as `src/core/bootstrap.ts`
-  does.
-- **`waldur-telemetry`**: `initSentry()` with an empty DSN, which the SDK
-  no-ops on safely.
+- **`initAppShellSync()`** (synchronous, before first render — some of
+  this sets CSS custom properties/attributes read from first paint, so it
+  can't wait for a `useEffect`): `waldur-auth-core`'s
+  `configureAuthCore()`/`initApiClient()`, with a real `localStorage`-backed
+  `StorageAdapter` reading/writing the exact `waldur/auth/*` keys
+  `waldur-homeport`'s own `src/core/StorageManager.ts` uses (not
+  namespaced) — same-origin session sharing, not an isolated demo: a user
+  already logged into the root app shouldn't have to log in again on this
+  subpath. Also sets `waldur-design-tokens`'s font-family/sidebar-style
+  defaults.
+- **`bootstrapAppShellAsync()`** (async, after mount): `waldur-runtime-config`'s
+  `fetchRuntimeConfig()` (this app's own `getApiUrlFromMeta()` call feeds
+  `initAppShellSync()` instead, reading the same `VITE_API_URL`-backed
+  `<meta name="api-url">` tag waldur-homeport's own `index.html` uses — see
+  `.env.example`), `waldur-design-tokens`'s `initBrandTokens()`,
+  `waldur-i18n-runtime`'s `LanguageUtilsService`/`loadSharedLocale()` (the
+  same repo-root `locales/*.json` catalogs `waldur-homeport`'s own
+  `src/i18n` loads), and `waldur-telemetry`'s `initSentry()` (empty DSN,
+  which the SDK no-ops on safely).
+
+This app no longer lists `waldur-auth-core`/`waldur-telemetry` as its own
+direct dependencies — both are consumed exclusively through `waldur-shell`
+now, which already declares them itself.
 
 ## Dashboard mock
 
-The app's only page — `OrgDashboardMock.tsx` composes the `Dashboard/*`
-primitives from `packages/ui` (`StatCard`, `StatusPill`, `DataTable`,
-`Sidebar`, `TopBar`) into a full page matching an organization-admin
-dashboard mockup, wired to real Waldur data via `waldur-js-client`
+The app's only page — `OrgDashboardMock.tsx` composes `waldur-shell`'s
+`<AppShell>` (the Sidebar/TopBar layout skeleton, plus the TopBar's
+Apps/Help/Notifications/`UserMenu` cluster) with `packages/ui` primitives
+(`StatCard`, `StatusPill`, `DataTable`) for its own page content, wired to
+real Waldur data via `waldur-js-client`
 (`customersList`/`projectsList`/`invoicesList`/`projectsListUsersCount`).
-Moved here from `packages/ui`'s own Storybook (where each primitive still
-has its own isolated story) to validate the same composition works in a
-real standalone app, not just Storybook's build pipeline. Supports both
-light and dark themes, toggled via a Sun/Moon `IconButton` in the TopBar —
+Nav items, the org switcher's data, and all page content stay this app's
+own responsibility — everything else (the chrome, the theme toggle) comes
+from `AppShell`/`useShellTheme()`. Moved here from `packages/ui`'s own
+Storybook (where each primitive still has its own isolated story) to
+validate the same composition works in a real standalone app, not just
+Storybook's build pipeline. Supports both light and dark themes, toggled
+via the user-menu dropdown in the TopBar (not a standalone TopBar icon —
+matches `waldur-homeport`'s own real `UserDropdownMenu.tsx`) —
 `waldur-design-tokens/theme.ts` reads/writes the same shared
 `waldur/theme/name` localStorage key and `data-theme` attribute the main
 app's own `src/theme/` uses, so a theme choice made in either app carries
@@ -110,4 +127,31 @@ actually-deployable micro-app.
   Metronic forces a 13px root font-size. This app has no Metronic, so
   Tailwind's default rem scale (assuming 16px) is already correct with no
   override — evidence that override is a homeport-specific patch, not
-  something `BaseButton` itself requires.
+  something `BaseButton` itself requires. `Card.tsx`/`StatCard.tsx` lean on
+  this directly: their padding/gaps are arbitrary rem values (`px-[2.25rem]`,
+  not `px-[29px]`), matching the real Bootstrap component's own rem-based
+  spacing at _any_ root font-size — this app's genuine 16px root and
+  `waldur-homeport`'s forced 13px root both resolve correctly from the
+  same class, with no per-app override needed.
+- **`useIsMobile()`'s `window.innerWidth` read raced the real viewport.**
+  Running `Sidebar` in this app (not just Storybook) surfaced a real,
+  reproducible bug: `window.innerWidth` measured `0` at the exact moment
+  the hook's mount effect first ran, latching `isMobile` to `true` at a
+  genuine 1280px viewport with nothing to ever self-correct it (a real
+  viewport never crosses the 768px `matchMedia` threshold it's also
+  watching) — the desktop sidebar silently stayed replaced by a closed,
+  invisible mobile `Sheet` for the rest of the session. Fixed by reading
+  `matchMedia`'s own `.matches` instead, which can't observe a transient
+  `0`. Sheet's own primitives had a real, separate ref-forwarding bug too
+  (shadcn's canonical recipe wraps them in `forwardRef`; this port hadn't),
+  invisible until the mobile path above actually mounted here.
+- **The same `getLocaleData(locale)` dynamic-import wrapper existed twice**
+  — once in `waldur-homeport`'s own `src/i18n/LanguageUtilsService.ts`,
+  once in this app's `App.tsx` — differing only in how many `../` reached
+  the repo root's `locales/*.json` from each file's own location. Only
+  visible as duplication once a second real consumer existed. Centralized
+  as `waldur-i18n-runtime`'s `loadSharedLocale()`: a dynamic `import()`
+  with a template literal resolves relative to the file it's _written_ in,
+  not the caller, so one shared function's fixed location in the monorepo
+  gives every consumer — this app, the root app, and any future micro-app —
+  a correct path for free, with no Vite alias or per-app config.
