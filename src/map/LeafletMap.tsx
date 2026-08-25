@@ -1,13 +1,13 @@
 import { LatLngTuple } from 'leaflet';
 import React from 'react';
-import { MapContainer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 
 import { translate } from '@/i18n';
 import { CustomMarkerIcon } from '@/map/CustomMarkerIcon';
 
 import './LeafletMap.scss';
 
+import { MapContainer } from './MapContainer';
+import { Marker, Popup } from './Marker';
 import { OpenStreetMapTileLayer } from './OpenStreetMapTileLayer';
 import { GeolocationPoint } from './types';
 

@@ -1,10 +1,11 @@
 import { LeafletEvent } from 'leaflet';
 import { GeoSearchControl } from 'leaflet-geosearch';
 import { useEffect, FunctionComponent } from 'react';
-import { useMap } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-geosearch/assets/css/leaflet.css';
+
+import { useMap } from './MapContext';
 
 export const GeoSearchControlElement: FunctionComponent<any> = (props) => {
   const map = useMap();
@@ -15,14 +16,16 @@ export const GeoSearchControlElement: FunctionComponent<any> = (props) => {
 
     map.addControl(searchControl);
 
-    map.on('layeradd', (e: LeafletEvent) => {
+    const onLayerAdd = (e: LeafletEvent) => {
       if (e.layer._latlng) {
         props.onLocationFound(e.layer._latlng);
         map.setZoom(10);
       }
-    });
+    };
+    map.on('layeradd', onLayerAdd);
 
     return () => {
+      map.off('layeradd', onLayerAdd);
       map.removeControl(searchControl);
     };
   }, [props, map]);

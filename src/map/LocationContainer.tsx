@@ -1,5 +1,4 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
-import { MapContainer, Marker, Popup } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-geosearch/assets/css/leaflet.css';
@@ -8,6 +7,8 @@ import { translate } from '@/i18n';
 import { CustomMarkerIcon } from '@/map/CustomMarkerIcon';
 
 import { GeoSearchControlElement } from './GeoSearchControlElement';
+import { MapContainer } from './MapContainer';
+import { Marker, Popup } from './Marker';
 import { OpenStreetMapTileLayer } from './OpenStreetMapTileLayer';
 import './SetLocationDialog.scss';
 
