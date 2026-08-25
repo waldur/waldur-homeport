@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest';
 
 import { buildCreditEvents, CreditEventInput } from './creditEvents';
 
-const TODAY = new Date('2026-08-14T00:00:00Z');
+// Local midnight, not an instant pinned to UTC: the event dates are formatted
+// in the reader's own calendar, so a UTC-anchored fixture resolves to the 13th
+// for anyone west of Greenwich and the dated assertions below fail on their
+// machine but not in CI.
+const TODAY = new Date(2026, 7, 14);
 
 const base: CreditEventInput = {
   balance: 60000,
@@ -35,6 +39,42 @@ describe('buildCreditEvents', () => {
     expect(kinds(events)).toEqual(['credit-expiry', 'exhaustion']);
   });
 
+  it('dates the expiry on end_date and names the month before it as the last', () => {
+    // Verified against mastermind: with end_date = 1 Aug, the 1 Aug run
+    // finalizes July's invoice and compensates it (the credit survives, since
+    // the filter is end_date__lt=effective_date and effective_date is the 1st);
+    // the 1 Sep run zeroes the credit before August's compensation, so August
+    // gets nothing. July is the last covered month.
+    const [expiry] = build({
+      exhaustionDate: null,
+      creditEndDate: '2026-10-01',
+    });
+    expect(expiry.kind).toBe('credit-expiry');
+    expect(expiry.date).toBe('2026-10-01');
+    expect(expiry.title).toBe('Credit expires');
+    expect(expiry.consequence).toContain('September 2026');
+    expect(expiry.consequence).toContain('1 Nov 2026');
+  });
+
+  it('reports an expired credit as expired, and names the residue', () => {
+    // The case that read as "16 days ago" under a label saying the money was
+    // gone, while the balance was still on screen. Both halves are true and
+    // neither replaces the other: compensation stopped on 1 Aug, and the
+    // balance shown is written off on 1 Sep.
+    const [expiry] = build({
+      balance: 22000,
+      exhaustionDate: null,
+      creditEndDate: '2026-08-01',
+    });
+    expect(expiry.date).toBe('2026-08-01');
+    expect(expiry.title).toBe('Credit has expired');
+    expect(expiry.consequence).toContain('July 2026');
+    expect(expiry.consequence).toContain('written off');
+    expect(expiry.consequence).toContain('1 Sep 2026');
+    // No claim that any of it is still spendable.
+    expect(expiry.consequence).not.toContain('can still be spent');
+  });
+
   it('binds on the soonest event that stops something, not on the balance', () => {
     // The balance empties first, but that only ends compensation — the credit
     // expiry is what actually takes the money away.
@@ -53,10 +93,10 @@ describe('buildCreditEvents', () => {
     expect(events[0].isBinding).toBe(true);
   });
 
-  it('says the credit expiry forfeits the balance and waives the grace', () => {
+  it('says the credit expiry writes off the balance and waives the grace', () => {
     const [expiry] = build({ creditEndDate: '2026-09-01' });
     expect(expiry.kind).toBe('credit-expiry');
-    expect(expiry.consequence).toContain('forfeited');
+    expect(expiry.consequence).toContain('written off');
     expect(expiry.consequence).toContain('grace coefficient');
   });
 
@@ -192,11 +232,42 @@ describe('buildCreditEvents', () => {
     ]);
   });
 
-  it('still projects exhaustion when the organization only caps the allocation', () => {
+  it('flags a partly capped allocation, and still projects exhaustion', () => {
     const events = build({
       spendableValue: 500,
       isLimitedByOrganizationCredit: true,
     });
+    expect(kinds(events)).toEqual(['blocked', 'exhaustion']);
+    expect(events[0].title).toBe('Only part of the allocation can be drawn');
+    expect(events[0].consequence).toContain('only that much');
+    // The projection is about the organization's balance, not this allocation,
+    // which is shown untouched beside it.
+    expect(events[1].title).toBe('Organization credit runs out');
+    expect(events[1].consequence).toContain('still drawable');
+  });
+
+  it('drops the exhaustion projection when nothing can be drawn', () => {
+    // With no drawable balance the rate is meaningless, and the blocked row
+    // already says what is happening.
+    const events = build({
+      spendableValue: 0,
+      isLimitedByOrganizationCredit: true,
+      exhaustionDate: '2026-08-14',
+    });
+    expect(kinds(events)).toEqual(['blocked']);
+  });
+
+  it('still reports a project that has drawn its own allocation to zero', () => {
+    // Nothing drawable, but the organization is not the reason — there is no
+    // blocked row to carry the news, so dropping the projection here would
+    // leave an empty credit reading "Nothing is scheduled to end".
+    const events = build({
+      balance: 0,
+      spendableValue: 0,
+      isLimitedByOrganizationCredit: false,
+      exhaustionDate: '2026-08-14',
+    });
     expect(kinds(events)).toEqual(['exhaustion']);
+    expect(events[0].title).toBe('Credit balance is empty');
   });
 });

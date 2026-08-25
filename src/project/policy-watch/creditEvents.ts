@@ -1,6 +1,13 @@
+import {
+  formatDate,
+  formatISODate,
+  formatMonth,
+  parseDate,
+} from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
+import { finalCoveredMonth, writeOffDate } from './creditRunway';
 import { CreditEvent } from './types';
 
 interface ResourceEndDates {
@@ -40,9 +47,7 @@ export interface CreditEventInput {
   }[];
 }
 
-const DAY_MS = 24 * 60 * 60 * 1000;
-
-const isoDate = (d: Date) => d.toISOString().slice(0, 10);
+const isoDate = formatISODate;
 
 /**
  * Everything that ends, each carrying what it does.
@@ -54,10 +59,11 @@ const isoDate = (d: Date) => d.toISOString().slice(0, 10);
  *   future date at all.
  * - **Balance empty** — compensation stops; resources keep running and their
  *   cost lands on the invoice.
- * - **Credit expiry** — the remaining balance is zeroed at the next monthly
- *   finalization and forfeited. Resources are untouched. The final month also
- *   waives the grace coefficient, so the minimum draw jumps to the full
- *   expected consumption (`BaseCredit.minimal_consumption`).
+ * - **Credit expiry** — compensation stops on `end_date`; the month before it
+ *   is the last one covered, and waives the grace coefficient, so the minimum
+ *   draw jumps to the full expected consumption
+ *   (`BaseCredit.minimal_consumption`). The balance left over is written off a
+ *   month later. Resources are untouched throughout.
  * - **Project end date** — resources are paused at the raw end date and
  *   terminated once the grace period is over.
  * - **Last resource ends** — the work stops; the money is unaffected.
@@ -69,42 +75,106 @@ export const buildCreditEvents = (
   const todayIso = isoDate(today);
   const events: CreditEvent[] = [];
 
-  if (input.isLimitedByOrganizationCredit && input.spendableValue <= 0) {
-    // Already in effect, so it is dated today rather than projected: nothing
-    // can be drawn until an owner tops the organization credit up.
+  if (input.isLimitedByOrganizationCredit) {
+    // Already in effect, so it is dated today rather than projected. A partly
+    // capped allocation counts: the project cannot draw what the card shows it
+    // holds, which is exactly the surprise worth stating, and it used to
+    // produce no row at all.
+    const exhausted = input.spendableValue <= 0;
     events.push({
       kind: 'blocked',
       date: todayIso,
-      title: translate('Spending is already blocked'),
-      consequence: translate(
-        'The organization credit is exhausted, so none of the {balance} allocated can be drawn. Costs are landing on the invoice uncompensated.',
-        { balance: defaultCurrency(input.balance) },
-      ),
+      title: exhausted
+        ? translate('Spending is already blocked')
+        : translate('Only part of the allocation can be drawn'),
+      consequence: exhausted
+        ? translate(
+            'The organization credit is exhausted, so none of the {balance} allocated can be drawn. Costs are landing on the invoice uncompensated.',
+            { balance: defaultCurrency(input.balance) },
+          )
+        : translate(
+            'The organization credit behind this allocation is down to {spendable}, so only that much of the {balance} can be drawn. The rest is unavailable until an organization owner tops it up.',
+            {
+              spendable: defaultCurrency(input.spendableValue),
+              balance: defaultCurrency(input.balance),
+            },
+          ),
       tone: 'danger',
       isBinding: false,
     });
-  } else if (input.exhaustionDate) {
+  }
+
+  // A capped project with nothing drawable has no rate to project from, so an
+  // exhaustion date would be noise on top of the blocked row above. A project
+  // that has drawn its own allocation to zero has no such row, so it keeps the
+  // projection — dated today — rather than being left with nothing to show.
+  const cappedWithNothingDrawable =
+    input.isLimitedByOrganizationCredit && input.spendableValue <= 0;
+  if (input.exhaustionDate && !cappedWithNothingDrawable) {
+    // The projection runs against what can actually be drawn. When the
+    // organization is the constraint that is the organization's balance, not
+    // this allocation — titling it "credit balance is empty" contradicted the
+    // untouched balance shown right above it.
+    const capped = input.isLimitedByOrganizationCredit;
     events.push({
       kind: 'exhaustion',
       date: input.exhaustionDate,
-      title: translate('Credit balance is empty'),
-      consequence: translate(
-        'At {burn}/day. Compensation stops and costs start landing on the invoice; resources keep running.',
-        { burn: defaultCurrency(input.burnPerDay.toFixed(2)) },
-      ),
+      title: capped
+        ? translate('Organization credit runs out')
+        : translate('Credit balance is empty'),
+      consequence: capped
+        ? translate(
+            'The {spendable} still drawable lasts this long at {burn}/day. The rest of this allocation stays unavailable, and costs start landing on the invoice uncompensated.',
+            {
+              spendable: defaultCurrency(input.spendableValue),
+              burn: defaultCurrency(input.burnPerDay.toFixed(2)),
+            },
+          )
+        : translate(
+            'At {burn}/day. Compensation stops and costs start landing on the invoice; resources keep running.',
+            { burn: defaultCurrency(input.burnPerDay.toFixed(2)) },
+          ),
       tone: 'warning',
       isBinding: false,
     });
   }
 
   if (input.creditEndDate) {
+    // Two dates, and conflating them is what made this row wrong in both
+    // directions. `end_date` is when the credit stops compensating; the
+    // write-off is a month later. Month-end finalization runs
+    // set_to_zero_overdue_credits with effective_date pinned to the 1st,
+    // filtering `end_date__lt=effective_date` — so a credit dated 1 Aug
+    // survives the 1 Aug run and compensates July one last time (with the
+    // grace coefficient waived, since end_date's month is the running month),
+    // then is zeroed by the 1 Sep run *before* September's compensation is
+    // applied. Nothing spent in August is ever compensated.
+    //
+    // So the row is dated on end_date — that is the event that binds — and the
+    // balance still on screen afterwards is named as the residue it is, rather
+    // than offered as something left to spend.
+    const expired = input.creditEndDate <= todayIso;
+    const finalMonth = formatMonth(finalCoveredMonth(input.creditEndDate));
+    const writtenOff = formatDate(writeOffDate(input.creditEndDate));
     events.push({
       kind: 'credit-expiry',
       date: input.creditEndDate,
-      title: translate('Credit expires'),
-      consequence: translate(
-        'Whatever is left of the credit is set to zero and forfeited. Resources keep running, uncompensated. The final month also waives the grace coefficient, so the minimum draw is the full expected consumption.',
-      ),
+      title: expired
+        ? translate('Credit has expired')
+        : translate('Credit expires'),
+      consequence: expired
+        ? translate(
+            '{month} was the last month this credit compensated. Nothing spent since has been drawn against it, and the {balance} still shown is written off at the month-end run on {writtenOff}. Resources keep running, uncompensated.',
+            {
+              month: finalMonth,
+              balance: defaultCurrency(input.balance),
+              writtenOff,
+            },
+          )
+        : translate(
+            '{month} is the last month this credit compensates, and it waives the grace coefficient — the minimum draw is the full expected consumption. Nothing spent after that is compensated, and whatever is left is written off at the month-end run on {writtenOff}. Resources keep running.',
+            { month: finalMonth, writtenOff },
+          ),
       tone: 'danger',
       isBinding: false,
     });
@@ -176,7 +246,7 @@ export const buildCreditEvents = (
     }
     events.push({
       kind: 'policy',
-      date: isoDate(new Date(today.getTime() + policy.etaDays * DAY_MS)),
+      date: isoDate(parseDate(today).plus({ days: policy.etaDays })),
       title: policy.actionLabel,
       // An organization-wide cap is measured against every project under it,
       // so the reader has to know the action is not driven by this project

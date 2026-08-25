@@ -111,6 +111,9 @@ export interface CreditRunway {
   spendableValue: number;
   /** True when the organization balance, not this allocation, is binding. */
   isLimitedByOrganizationCredit: boolean;
+  /** True once `end_date` has arrived: the credit no longer compensates, and
+   *  any balance still shown is awaiting write-off. */
+  isCreditExpired: boolean;
   burnPerDay: number;
   daysRemaining: number | null;
   exhaustionDate: string | null;
