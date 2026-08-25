@@ -23,8 +23,9 @@ const Line: FC<{ label: string; value?: string | null }> = ({
  * What an applicant needs to choose between rounds.
  *
  * The row itself carries the deadline, which is when they must act. This adds
- * the things that decide whether the deadline is worth meeting: when a decision
- * lands, how long the award then runs, and whether they are eligible at all.
+ * the things that decide whether the deadline is worth meeting: who runs the
+ * call, when a decision lands, how long the award then runs, and whether they
+ * are eligible at all.
  *
  * Fields that vary per deployment are simply omitted when unset rather than
  * rendered empty — a call that publishes no allocation date should not show a
@@ -42,6 +43,10 @@ export const RoundExpandableRow: FC<{ row: SubmittableRound }> = ({ row }) => {
 
   return (
     <div className="d-flex flex-column gap-2 p-4 fs-7">
+      {/* Who is behind the deadline. The row itself only names the call when
+          several are in play, so without this the organisation awarding the
+          access is nowhere on screen. */}
+      <Line label={translate('Managed by')} value={call.customer_name} />
       <Line
         label={translate('Submissions opened')}
         value={formatDate(round.start_time)}
