@@ -21,6 +21,8 @@ include:
     file: "/templates/sbom/upload-sboms-to-docs.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/sbom/generate-image-sbom.yml"
+  - project: "waldur/waldur-pipelines"
+    file: "/templates/test/license-scan.yml"
 variables:
   COMPONENT_VERSION: "latest"
 
@@ -685,3 +687,25 @@ Release tag:
     - |
       git tag -a $RELEASE_VERSION -m "Release $RELEASE_VERSION" || echo "Tag already exists"
       git push origin $RELEASE_VERSION || echo "Tag already pushed"
+
+# Fails when a dependency arrives under a licence Waldur cannot ship — strong
+# copyleft (GPL, AGPL), source-available (SSPL, BUSL, Elastic) or non-OSI
+# use-restricted (Hippocratic, JSON). LGPL and MPL pass but stay listed in the
+# job artifact. See waldur/waldur-mastermind#285.
+#
+# `yarn licenses` comes from the yarn-plugin-licenses plugin committed under
+# .yarn/plugins, so this needs no network fetch at pipeline time.
+#
+# before_script mirrors the repo-global one rather than taking the template's:
+# extending replaces the global hook, and every other job here installs through
+# `apk add git` first. The shared yarn cache makes the install a near no-op.
+#
+# allow_failure is inherited as true from the template. Drop it to false once
+# #222 (react-leaflet is Hippocratic-2.1) is closed.
+Check dependency licences:
+  extends: .Licence gate (node) template
+  cache: *yarn_cache
+  before_script:
+    - apk add git || echo "Non-Alpine image, skipping"
+    - corepack enable
+    - yarn install --immutable
