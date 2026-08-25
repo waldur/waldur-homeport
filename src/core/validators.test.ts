@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import {
+  composeValidators,
   email,
   greaterThanField,
   greaterThanOrEqualField,
@@ -601,5 +602,37 @@ describe('validateEmails', () => {
     expect(validateEmails('a@example.com, notanemail')).toBe(
       'Invalid email: notanemail',
     );
+  });
+});
+
+describe('composeValidators', () => {
+  it('returns the first error produced by a validator', () => {
+    const fails = () => 'Invalid';
+    const passes = () => undefined;
+    expect(composeValidators(passes, fails)(1)).toBe('Invalid');
+    expect(composeValidators(passes, passes)(1)).toBeUndefined();
+  });
+
+  it('forwards allValues and meta to each validator', () => {
+    const allValues = { limits: { cpu: 4 } };
+    const meta = { touched: true };
+    const seen = [];
+    const spy = (...args) => {
+      seen.push(args);
+      return undefined;
+    };
+
+    composeValidators(spy, spy)(2, allValues, meta);
+
+    expect(seen).toEqual([
+      [2, allValues, meta],
+      [2, allValues, meta],
+    ]);
+  });
+
+  it('stays usable when called with the value alone', () => {
+    const cpuCheck = (_value, values) =>
+      values?.limits?.cpu ? 'x' : undefined;
+    expect(() => composeValidators(cpuCheck)(1)).not.toThrow();
   });
 });

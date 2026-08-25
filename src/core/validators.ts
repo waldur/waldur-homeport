@@ -2,11 +2,13 @@ import { ENV } from '@/core/config';
 import { LATIN_NAME_PATTERN } from '@/core/utils';
 import { translate } from '@/i18n';
 
+// Validators receive (value, allValues, meta) from react-final-form; forward all
+// three so composed validators can cross-check other fields in the form.
 export const composeValidators =
   (...validators) =>
-  (value) =>
+  (value, allValues?, meta?) =>
     validators.reduce(
-      (error, validator) => error || validator(value),
+      (error, validator) => error || validator(value, allValues, meta),
       undefined,
     );
 
