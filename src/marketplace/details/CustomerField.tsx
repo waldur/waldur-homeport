@@ -14,6 +14,7 @@ import { formatJsxTemplate, translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { getOfferingRestrictedRoles } from '@/marketplace/offerings/utils';
 import { useModal } from '@/modal/actions';
+import { useUser } from '@/workspace/hooks';
 
 import { organizationAutocomplete } from '../common/autocompletes';
 
@@ -22,11 +23,12 @@ const CustomerSelect = ({ input, organizationGroups, offering }) => {
 
   const form = useForm();
   const { customer } = useOrderFormData();
+  const user = useUser();
 
   const preselectSoleProject = useCallback(
     async (customerUuid) => {
       const query: ProjectsListData['query'] = { customer: customerUuid };
-      const roles = offering ? getOfferingRestrictedRoles(offering) : [];
+      const roles = offering ? getOfferingRestrictedRoles(offering, user) : [];
       if (roles.length) {
         query.current_user_has_role = roles;
       }
@@ -36,7 +38,7 @@ const CustomerSelect = ({ input, organizationGroups, offering }) => {
       // deliberate: the previous organization's project must not survive.
       form.change('project', projects.length === 1 ? projects[0] : undefined);
     },
-    [offering, form],
+    [offering, form, user],
   );
 
   const onChange = useCallback(
@@ -84,13 +86,13 @@ const CustomerSelect = ({ input, organizationGroups, offering }) => {
       ],
       o: 'name',
     };
-    const roles = offering ? getOfferingRestrictedRoles(offering) : [];
+    const roles = offering ? getOfferingRestrictedRoles(offering, user) : [];
     if (roles.length) {
       // Only offer organizations where the user holds one of the required roles.
       extra.current_user_has_role = roles;
     }
     return organizationAutocomplete(extra);
-  }, [organizationGroups, offering]);
+  }, [organizationGroups, offering, user]);
 
   return (
     <AsyncSelect
