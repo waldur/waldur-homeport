@@ -14,12 +14,14 @@ import {
 } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
+import { formatISODate } from '@/core/dateUtils';
 import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
 import { translate } from '@/i18n';
 import { Project } from '@/workspace/types';
 
 import { buildCreditBreakdown } from './creditBreakdown';
 import { buildCreditEvents } from './creditEvents';
+import { projectCreditRunway, safeNumber } from './creditRunway';
 import {
   CreditBreakdown,
   CreditRunway,
@@ -34,15 +36,10 @@ import {
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-const safeNumber = (value: unknown, fallback = 0): number => {
-  const n = typeof value === 'string' ? parseFloat(value) : Number(value);
-  return Number.isFinite(n) ? n : fallback;
-};
-
 const addDays = (start: Date, days: number): Date =>
   new Date(start.getTime() + days * DAY_MS);
 
-const isoDate = (d: Date) => d.toISOString().slice(0, 10);
+const isoDate = formatISODate;
 
 const tresWeights = (
   policy: SlurmPeriodicUsagePolicy,
@@ -329,8 +326,14 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
 
     const today = new Date();
 
-    const monthlyBurn = safeNumber(projectCredit?.consumption_last_month);
-    const burnPerDay = monthlyBurn / 30;
+    // The rate and the date it produces are the numbers people plan against,
+    // so they live in creditRunway.ts where they can be tested on their own.
+    const {
+      burnPerDay,
+      daysRemaining,
+      exhaustionDate,
+      hasExpired: isCreditExpired,
+    } = projectCreditRunway(projectCredit, today);
     // The allocation. It stays the headline balance so this card agrees with
     // the credit lifecycle beside it, the timeline, and the burn-down chart,
     // all of which are denominated in the allocation.
@@ -344,15 +347,6 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     const isLimitedByOrganizationCredit = Boolean(
       projectCredit?.is_limited_by_organization_credit,
     );
-    // Runway measures what is left to draw, so a zero spendable balance is
-    // zero days, not "unknown". Only an unknown burn rate yields null.
-    const daysRemaining =
-      burnPerDay > 0
-        ? Math.floor(Math.max(0, spendableValue) / burnPerDay)
-        : null;
-    const exhaustionDate =
-      daysRemaining !== null ? isoDate(addDays(today, daysRemaining)) : null;
-
     const policies: PolicySaturation[] = [];
 
     for (const p of projectPolicies) {
@@ -511,6 +505,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       customerCredit,
       spendableValue,
       isLimitedByOrganizationCredit,
+      isCreditExpired,
       burnPerDay,
       daysRemaining,
       exhaustionDate,

@@ -37,6 +37,12 @@ const markerLabel = (fraction: number): CSSProperties => ({
 interface Props {
   pacing: PacingSnapshot;
   creditTerms?: CreditTerms | null;
+  /** True when the organization balance, not this allocation, is what bounds
+   *  spending. The pace verdict is withheld in that case. */
+  isLimitedByOrganizationCredit?: boolean;
+  /** True once the credit's end_date has passed. The verdict is withheld then
+   *  too: there is no draw left to be behind on. */
+  isCreditExpired?: boolean;
 }
 
 /**
@@ -46,7 +52,12 @@ interface Props {
  * of month. Keying the bar to expected (not the cost-policy budget) keeps the
  * monthly view in one frame of reference.
  */
-export const PacingIndicator: FC<Props> = ({ pacing, creditTerms }) => {
+export const PacingIndicator: FC<Props> = ({
+  pacing,
+  creditTerms,
+  isLimitedByOrganizationCredit,
+  isCreditExpired,
+}) => {
   const { incurredCost, periodFraction, monthlyBudget } = pacing;
   const c = getWatchColors();
 
@@ -87,27 +98,49 @@ export const PacingIndicator: FC<Props> = ({ pacing, creditTerms }) => {
   const willMissMinimal =
     minimalFraction !== null && projectedFraction < minimalFraction;
   const willMissExpected = projectedFraction < 0.999;
-  const tone: Variant = willMissMinimal
-    ? 'danger'
-    : behind || willMissExpected
-      ? 'warning'
-      : ahead
-        ? 'info'
-        : 'success';
-  const statusLabel = behind
-    ? translate('Behind pace')
-    : ahead
-      ? translate('Ahead of pace')
-      : translate('On pace');
-  const statusHint = ahead
+  const tone: Variant = isCreditExpired
+    ? // Neutral rather than alarming: an expired credit is settled, not going
+      // wrong. There is nothing here for the team to act on.
+      'secondary'
+    : isLimitedByOrganizationCredit
+      ? 'danger'
+      : willMissMinimal
+        ? 'danger'
+        : behind || willMissExpected
+          ? 'warning'
+          : ahead
+            ? 'info'
+            : 'success';
+  // "Behind pace" is a verdict on the team, and neither of these two cases is
+  // theirs to answer for: an organization that has run its credit down caps
+  // what this project may draw, and an expired credit is not drawn at all.
+  // Name the cause instead.
+  const statusLabel = isCreditExpired
+    ? translate('Credit has expired')
+    : isLimitedByOrganizationCredit
+      ? translate('Limited by organization credit')
+      : behind
+        ? translate('Behind pace')
+        : ahead
+          ? translate('Ahead of pace')
+          : translate('On pace');
+  const statusHint = isCreditExpired
     ? translate(
-        'Drawing faster than the linear ideal for this month, which may reduce job scheduling priority.',
+        'Compensation stopped when the credit expired, so there is no draw left to keep pace with. Costs land on the invoice in full.',
       )
-    : willMissMinimal
+    : isLimitedByOrganizationCredit
       ? translate(
-          'At this rate the month ends below the minimum draw, and the shortfall is taken from the credit as lost.',
+          'Compensation stops at the organization balance, so this project cannot draw to its plan however much it uses.',
         )
-      : undefined;
+      : ahead
+        ? translate(
+            'Drawing faster than the linear ideal for this month, which may reduce job scheduling priority.',
+          )
+        : willMissMinimal
+          ? translate(
+              'At this rate the month ends below the minimum draw, and the shortfall is taken from the credit as lost.',
+            )
+          : undefined;
 
   const shareOfExpected = (fraction: number) => (
     <>

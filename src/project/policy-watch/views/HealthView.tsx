@@ -16,6 +16,7 @@ import { CreditBreakdownCard } from '../components/CreditBreakdownCard';
 import { CreditBurnDownChart } from '../components/CreditBurnDownChart';
 import { CreditHorizon } from '../components/CreditHorizon';
 import { PacingIndicator } from '../components/PacingIndicator';
+import { monthlyDraw } from '../creditRunway';
 import { PolicyWatchData } from '../types';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -77,7 +78,23 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
     return null;
   }
 
-  const lastMonthDraw = data.creditTerms?.consumptionLastMonth || 0;
+  // The same rule the projection uses, so the caption cannot drift from the
+  // figure it explains — including the expiry case, where the projection is
+  // zero and the terms still report a grace-waived floor.
+  const isExpired = runway.isCreditExpired;
+  const {
+    lastMonth: lastMonthDraw,
+    floor: monthlyFloor,
+    floorSetsTheRate,
+  } = monthlyDraw({
+    consumptionLastMonth: isExpired
+      ? 0
+      : data.creditTerms?.consumptionLastMonth || 0,
+    minimalConsumption: isExpired
+      ? 0
+      : data.creditTerms?.minimalConsumption || 0,
+    applyAsMinimalConsumption: data.creditTerms?.applyAsMinimalConsumption,
+  });
 
   const stats = [
     {
@@ -130,13 +147,19 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
       icon: (
         <MetricTip
           id="credit-daily-draw"
-          label={translate(
-            "Last month this project drew {amount} of credit. Spread over 30 days that is {rate} a day, which is the rate the projections on this page use — this month's own draw is still in progress, so it is not used.",
-            {
-              amount: defaultCurrency(lastMonthDraw),
-              rate: defaultCurrency(runway.burnPerDay.toFixed(2)),
-            },
-          )}
+          label={
+            isExpired
+              ? translate(
+                  'The credit has expired, so nothing is drawn from it any more and there is no rate to project from.',
+                )
+              : translate(
+                  "Last month this project drew {amount} of credit. Spread over 30 days that is {rate} a day, which is the rate the projections on this page use — this month's own draw is still in progress, so it is not used.",
+                  {
+                    amount: defaultCurrency(lastMonthDraw),
+                    rate: defaultCurrency(runway.burnPerDay.toFixed(2)),
+                  },
+                )
+          }
         />
       ),
       value: (
@@ -148,11 +171,17 @@ const CreditMetrics: FC<{ data: PolicyWatchData }> = ({ data }) => {
             </>
           }
           caption={
-            lastMonthDraw > 0
-              ? translate('{amount} drawn last month ÷ 30 days', {
-                  amount: defaultCurrency(lastMonthDraw),
-                })
-              : translate('no credit drawn last month')
+            isExpired
+              ? translate('the credit no longer draws')
+              : floorSetsTheRate
+                ? translate('minimum draw of {floor} ÷ 30 days', {
+                    floor: defaultCurrency(monthlyFloor),
+                  })
+                : lastMonthDraw > 0
+                  ? translate('{amount} drawn last month ÷ 30 days', {
+                      amount: defaultCurrency(lastMonthDraw),
+                    })
+                  : translate('no credit drawn last month')
           }
         />
       ),
@@ -221,7 +250,14 @@ export const HealthView: FC<Props> = ({ data }) => {
         className="mb-5"
       >
         <div className="separator mt-4 mb-5" />
-        <PacingIndicator pacing={data.pacing} creditTerms={data.creditTerms} />
+        <PacingIndicator
+          pacing={data.pacing}
+          creditTerms={data.creditTerms}
+          isLimitedByOrganizationCredit={
+            data.runway.isLimitedByOrganizationCredit
+          }
+          isCreditExpired={data.runway.isCreditExpired}
+        />
       </WidgetCard>
 
       <WidgetCard cardTitle={translate('Overall credit')} className="mb-5">
