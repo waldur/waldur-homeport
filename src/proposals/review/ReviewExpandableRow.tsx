@@ -21,14 +21,6 @@ const COMMENT_FIELDS: { key: keyof ProposalReview; label: string }[] = [
   },
   { key: 'comment_project_duration', label: translate('Project duration') },
   {
-    key: 'comment_project_is_confidential',
-    label: translate('Confidentiality'),
-  },
-  {
-    key: 'comment_project_has_civilian_purpose',
-    label: translate('Civilian purpose'),
-  },
-  {
     key: 'comment_project_supporting_documentation',
     label: translate('Supporting documentation'),
   },

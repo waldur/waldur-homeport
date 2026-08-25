@@ -75,6 +75,18 @@ const isComplianceComplete = (
   });
 };
 
+// The picker holds the sub-domain as an option object while the API takes a
+// bare uuid. A plain string is passed through: clearing a value the form never
+// wrapped would silently drop the applicant's science domain.
+const toProjectDetailsBody = (formValues: any) => {
+  const subDomain = formValues.science_sub_domain;
+  return {
+    ...formValues,
+    science_sub_domain:
+      typeof subDomain === 'string' ? subDomain : (subDomain?.uuid ?? null),
+  };
+};
+
 const attachDocuments = async (proposal_uuid, supporting_documentation) => {
   if (supporting_documentation) {
     const files: File[] = Object.values(supporting_documentation);
@@ -155,9 +167,14 @@ export const ProposalSubmissionStep: FC<{
       name: proposal.name,
       description: proposal.description,
       project_summary: proposal.project_summary,
-      project_has_civilian_purpose: proposal.project_has_civilian_purpose,
-      oecd_fos_2007_code: proposal.oecd_fos_2007_code,
-      project_is_confidential: proposal.project_is_confidential,
+      // The picker works with option objects; the API takes a bare uuid, so the
+      // value is unwrapped again in toProjectDetailsBody before it is sent.
+      science_sub_domain: proposal.science_sub_domain
+        ? {
+            uuid: proposal.science_sub_domain,
+            name: proposal.science_sub_domain_name,
+          }
+        : null,
       duration_in_days: proposal.duration_in_days,
       resources: [],
       resources_init: [], // Temporary field to hold current resource requests
@@ -263,7 +280,7 @@ export const ProposalSubmissionStep: FC<{
       try {
         await proposalProposalsUpdateProjectDetails({
           path: { uuid: proposal_uuid },
-          body: formValues,
+          body: toProjectDetailsBody(formValues),
         });
         await submitComplianceAnswers(proposal_uuid, formValues, checklistData);
         await attachDocuments(
@@ -295,7 +312,7 @@ export const ProposalSubmissionStep: FC<{
       try {
         await proposalProposalsUpdateProjectDetails({
           path: { uuid: proposal_uuid },
-          body: formValues,
+          body: toProjectDetailsBody(formValues),
         });
         await submitComplianceAnswers(proposal_uuid, formValues, checklistData);
         await attachDocuments(

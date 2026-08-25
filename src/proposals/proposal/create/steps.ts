@@ -1,4 +1,3 @@
-import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
 import { VStepperFormStep } from '@/wizard';
@@ -8,8 +7,6 @@ import { ProposalComplianceStepExpanded } from './ProposalComplianceStepExpanded
 import { ProposalDetailsOverviewStep } from './ProposalDetailsOverviewStep';
 import { ProposalTeamStep } from './ProposalTeamStep';
 import { FormResourceRequestsStep } from './resource-requests-step/FormResourceRequestsStep';
-
-const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
 export const createProposalSteps = (
   call?: Pick<Call, 'compliance_checklist'>,
@@ -28,19 +25,12 @@ export const createProposalSteps = (
         'name',
         'project_summary',
         'description',
-        'project_has_civilian_purpose',
-        'oecd_fos_2007_code',
-        'project_is_confidential',
+        'science_sub_domain',
         'duration_in_days',
         'supporting_documentation',
       ],
       required: true,
-      requiredFields: [
-        'name',
-        'project_summary',
-        isCodeRequired ? 'oecd_fos_2007_code' : null,
-        'duration_in_days',
-      ].filter(Boolean),
+      requiredFields: ['name', 'project_summary', 'duration_in_days'],
     },
     {
       label: translate('Resource requests'),

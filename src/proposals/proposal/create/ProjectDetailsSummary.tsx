@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import { AccordionCard } from '@/core/AccordionCard';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
 import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';
@@ -67,58 +66,22 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         )}
       </CommentSection>
 
-      <CommentSection
-        commentField="comment_project_has_civilian_purpose"
-        valueField="project_has_civilian_purpose"
-        onAddCommentClick={onAddCommentClick}
-        reviews={reviews}
-        proposal={proposal}
-        inline
-      >
-        {(props) => (
-          <AwesomeCheckboxField
-            label={translate('Project for civilian purpose?')}
-            tooltip={translate('Mark if the project has a civilian purpose.')}
-            tooltipEnd
-            alignMiddle
-            className="flex-grow-1"
-            {...props}
-          />
-        )}
-      </CommentSection>
-
       <ReadOnlyFormControl
-        label={translate('Research field (OECD code)')}
-        value={renderFieldOrDash(proposal.oecd_fos_2007_label)}
-        tooltip={translate('Select the main research field for the project.')}
+        label={translate('Science domain')}
+        value={renderFieldOrDash(
+          proposal.science_sub_domain_name
+            ? [proposal.science_domain_name, proposal.science_sub_domain_name]
+                .filter(Boolean)
+                .join(' > ')
+            : null,
+        )}
+        tooltip={translate('Main research field of the project.')}
         actions={
           <div style={{ width: 42.5 }}>
             {/* Dummy spacing to align with other fields. */}
           </div>
         }
       />
-
-      <CommentSection
-        valueField="project_is_confidential"
-        commentField="comment_project_is_confidential"
-        onAddCommentClick={onAddCommentClick}
-        reviews={reviews}
-        proposal={proposal}
-        inline
-      >
-        {(props) => (
-          <AwesomeCheckboxField
-            label={translate('Is the project confidential?')}
-            tooltip={translate(
-              'Select if the project proposal contains confidential information.',
-            )}
-            tooltipEnd
-            alignMiddle
-            className="flex-grow-1"
-            {...props}
-          />
-        )}
-      </CommentSection>
 
       <CommentSection
         label={translate('Project duration in days')}
