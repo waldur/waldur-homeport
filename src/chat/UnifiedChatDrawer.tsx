@@ -25,7 +25,7 @@ export const UnifiedChatDrawer: FC<UnifiedChatDrawerProps> = (props) => {
   if (isAnonymousVisitor(user)) {
     return (
       <div className="unified-chat-drawer unified-chat-drawer--single h-100 d-flex flex-column">
-        <AnonymousChatPanel />
+        <AnonymousChatPanel close={props.close} />
       </div>
     );
   }
