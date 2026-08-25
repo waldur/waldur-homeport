@@ -10,7 +10,6 @@ import {
 } from '@/marketplace/details/constants';
 import { OrdersListFilter } from '@/marketplace/orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '@/marketplace/orders/list/OrdersTableComponent';
-import { createOrderStateOptions } from '@/marketplace/orders/OrderStates';
 import { useFilterValues } from '@/table/useFilterValues';
 
 interface OwnProps {
@@ -56,9 +55,6 @@ export const OfferingOrdersList: FunctionComponent<OwnProps> = (props) => {
       formId={OFFERING_ORDERS_LIST_FILTER_FORM_ID}
       filters={<OrdersListFilter hasOrganization />}
       filter={filter}
-      initialFilters={{
-        state: createOrderStateOptions()[0],
-      }}
     />
   );
 };
