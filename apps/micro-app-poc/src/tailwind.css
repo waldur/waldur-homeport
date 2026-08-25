@@ -11,6 +11,18 @@
 @import 'waldur-design-tokens/buttonColors.css';
 @import 'waldur-design-tokens/surfaceColors.css';
 
+/* Same override as the main app's own src/tailwind.css: OrgDashboardMock.tsx
+   sets data-theme via the shared waldur/theme/name localStorage key, not an
+   OS-level preference, so Tailwind's dark: variant needs to key off that
+   attribute — its own default (prefers-color-scheme) would ignore this
+   app's manual toggle entirely. Most dark-mode styling here is unaffected
+   either way (surfaceColors.css/buttonColors.css's :root[data-theme='dark']
+   blocks are plain CSS, not gated by this variant at all — a token's
+   *value* just changes), but any component that needs a literal dark:
+   utility (e.g. StatCard.tsx's dark:bg override) needs this to actually
+   engage. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
 /* Same bridge the main app's own src/tailwind.css uses: --font-sans reads
    the runtime-injected --waldur-font-family custom property rather than a
    hardcoded font name. App.tsx sets it — synchronously to 'Inter' at

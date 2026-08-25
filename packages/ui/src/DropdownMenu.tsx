@@ -47,16 +47,35 @@ export const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
 const MENU_PANEL_BASE_CLASSNAME = cn(
   'z-50 min-w-40 max-h-(--radix-dropdown-menu-content-available-height) overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-[var(--dropdown-shadow)]',
   'border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] text-[var(--surface-text-primary)]',
-  // Plain opacity transition keyed off Radix's own data-state, not the
-  // tailwindcss-animate plugin's animate-in/zoom-in-95 utilities — that
-  // plugin isn't installed (and isn't Tailwind v4-native), so those class
-  // names would silently generate no CSS at all. See Sheet.tsx for the
-  // same reasoning. duration-300 matches Metronic's real
-  // $menu.dropdown.animation-speed (0.3s, src/metronic/sass/core/
-  // components/_variables.scss) — its own entrance slide
-  // (animation-move-offset: 0.75rem) is still absent, the same
-  // tailwindcss-animate-avoidance simplification.
-  'transition-opacity duration-300 data-[state=closed]:opacity-0 data-[state=open]:opacity-100',
+  // Opacity + translateY keyed off Radix's own data-state/data-side, not
+  // the tailwindcss-animate plugin's animate-in/slide-in-from-* utilities —
+  // that plugin isn't installed (and isn't Tailwind v4-native), so those
+  // class names would silently generate no CSS at all. See Sheet.tsx for
+  // the same reasoning.
+  //
+  // Ports Metronic's real dropdown entrance (src/metronic/sass/core/
+  // components/menu/_base.scss's menu-sub-dropdown-animation-fade-in +
+  // -move-up/-move-down keyframes, speed/offset from _variables.scss's
+  // $menu.dropdown map): fade 0->1 opacity while sliding 0.75rem (9.75px at
+  // this app's real 13px root, not 12px) toward the trigger, both over
+  // animation-speed (0.3s) with plain `ease`. Metronic branches the slide
+  // direction on Popper's `data-popper-placement`: only an explicit
+  // top/top-start/top-end placement gets "move-down" (starts translated up,
+  // i.e. margin-bottom shrinking); every other placement — including a
+  // *sideways*-opening one, e.g. a submenu — falls through to the same
+  // "move-up" default (starts translated down, margin-top shrinking).
+  // Radix's `data-side` is the direct analog of `data-popper-placement`, so
+  // that same fallthrough is reproduced here: only `data-[side=top]` gets
+  // the reversed offset, `bottom`/`left`/`right` all share the default.
+  // translateY (not Metronic's own margin-top/-bottom) achieves the
+  // identical visual result without the layout-shifting side effects a
+  // margin-based approach has, and Radix's own "wait for the exit
+  // animation to finish before unmounting" behavior tracks any transition/
+  // animation on the element, transform included.
+  '[transition-timing-function:ease] transition-[opacity,transform] duration-300',
+  'data-[state=closed]:opacity-0 data-[state=open]:opacity-100',
+  'data-[state=closed]:translate-y-[9.75px] data-[state=open]:translate-y-0',
+  'data-[side=top]:data-[state=closed]:-translate-y-[9.75px]',
 );
 
 // Shared by DropdownMenuItem and DropdownMenuSubTrigger — every selectable
