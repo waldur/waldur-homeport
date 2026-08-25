@@ -48,9 +48,13 @@ export const OfferViaCallAction = ({
     <ActionItem
       title={translate('Offer via call')}
       action={() =>
-        openDialog(OfferViaCallDialog, { resolve: { offering: row, refetch } })
+        openDialog(OfferViaCallDialog, {
+          resolve: { offering: row, refetch },
+          size: 'lg',
+        })
       }
       iconNode={<MegaphoneIcon weight="bold" />}
+      staff
     />
   );
 };

@@ -5,6 +5,8 @@ import {
   proposalProtectedCallsCreate,
   proposalProtectedCallsOfferingsSet,
   proposalProtectedCallsRoundsSet,
+  proposalProtectedCallsWorkflowStepsList,
+  proposalProtectedCallsWorkflowStepsPartialUpdate,
   proposalRequestedOfferingsAccept,
 } from 'waldur-js-client';
 
@@ -24,23 +26,49 @@ import { ENV } from '@/core/config';
  */
 export interface OfferViaCallInput {
   offeringUuid: string;
-  customerUuid: string;
+  /**
+   * Organisation that will run the call. Chosen rather than assumed: the
+   * provider publishing an offering and the body handling the requests for it
+   * are routinely different organisations, and the call manager is the one
+   * whose members end up reviewing proposals.
+   */
+  managerCustomerUuid: string;
   /** Name for the call; the offering's own name is a sensible default. */
   name: string;
   /** ISO timestamp after which the call stops accepting requests. */
   cutoffTime: string;
   /** Priced against this. `activate` refuses an accepted offering without one. */
   planUuid: string;
+  /**
+   * Workflow steps to leave enabled, on top of the mandatory allocation
+   * decision. Empty means the request goes straight to a single approve or
+   * reject, which is what this action is for; anything more is a review
+   * process the operator asked for explicitly.
+   */
+  enabledSteps: string[];
   onProgress?: (step: OfferViaCallStep) => void;
 }
 
 export type OfferViaCallStep =
-  'organisation' | 'call' | 'round' | 'offering' | 'accept' | 'activate';
+  | 'organisation'
+  | 'call'
+  | 'workflow'
+  | 'round'
+  | 'offering'
+  | 'accept'
+  | 'activate';
+
+/**
+ * Provisioned by the allocation decision's `include_award_response` flag rather
+ * than on its own, and the serializer refuses a direct write — so it is never
+ * part of what this action reconciles.
+ */
+const AWARD_RESPONSE_STEP = 'award_response';
 
 const apiUrl = (path: string, uuid: string) =>
   `${ENV.apiEndpoint}api/${path}/${uuid}/`;
 
-/** Reuses the customer's managing organisation, else registers one. */
+/** Reuses the organisation's call-manager registration, else creates one. */
 const ensureManagingOrganisation = async (customerUuid: string) => {
   const existing = await callManagingOrganisationsList({
     query: { customer_uuid: customerUuid },
@@ -56,6 +84,44 @@ const ensureManagingOrganisation = async (customerUuid: string) => {
 };
 
 /**
+ * Brings the call's seeded steps in line with what was asked for.
+ *
+ * The backend seeds every catalogue step on creation and enables the
+ * call-manager-owned ones — today the administrative check as well as the
+ * allocation decision — so leaving it alone would hand back a two-stage call
+ * nobody asked for. Only the differences are written.
+ *
+ * Mandatory steps are enabled whatever the caller says: the API refuses to
+ * disable one, and `activate` refuses a call missing one.
+ */
+const applyWorkflowSteps = async (callUuid: string, enabled: string[]) => {
+  const steps = await proposalProtectedCallsWorkflowStepsList({
+    path: { uuid: callUuid },
+  });
+  // The endpoint returns the steps in catalogue order, which is also
+  // dependency order — expert review before the panel review that needs it.
+  const rows = ((steps.data as any[]) || []).filter(
+    (row) => row.step !== AWARD_RESPONSE_STEP,
+  );
+  const wanted = (row: any) => row.is_mandatory || enabled.includes(row.step);
+  const changed = rows.filter((row) => Boolean(row.is_enabled) !== wanted(row));
+
+  // Sequential, and dependents are torn down before the step they depend on
+  // while dependencies are switched on before the steps that need them — an
+  // intermediate state where a dependent outlives its dependency is rejected.
+  const ordered = [
+    ...changed.filter((row) => !wanted(row)).reverse(),
+    ...changed.filter(wanted),
+  ];
+  for (const row of ordered) {
+    await proposalProtectedCallsWorkflowStepsPartialUpdate({
+      path: { uuid: callUuid, obj_uuid: row.uuid },
+      body: { is_enabled: wanted(row) },
+    });
+  }
+};
+
+/**
  * Runs the chain and returns the new call's uuid.
  *
  * Deliberately not transactional — there is no endpoint that would make it so.
@@ -68,13 +134,16 @@ export const offerViaCall = async (
   const announce = (step: OfferViaCallStep) => input.onProgress?.(step);
 
   announce('organisation');
-  const manager = await ensureManagingOrganisation(input.customerUuid);
+  const manager = await ensureManagingOrganisation(input.managerCustomerUuid);
 
   announce('call');
   const call = await proposalProtectedCallsCreate({
     body: { name: input.name, manager },
   });
   const callUuid = (call.data as any).uuid as string;
+
+  announce('workflow');
+  await applyWorkflowSteps(callUuid, input.enabledSteps);
 
   // Rounds are the submission windows; without one the call cannot activate.
   // Opening it now rather than at some future date is the point of the whole

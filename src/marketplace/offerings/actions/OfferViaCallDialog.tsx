@@ -1,20 +1,29 @@
-import { MegaphoneIcon } from '@phosphor-icons/react';
+import {
+  CaretLeftIcon,
+  CaretRightIcon,
+  MegaphoneIcon,
+} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
-import { Form } from 'react-final-form';
 import { marketplacePlansList, ProviderOffering } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { required } from '@/core/validators';
-import { DateGroup, SelectGroup, StringGroup, SubmitButton } from '@/form';
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { Field } from '@/resource/summary';
+import { ProgressStep, Wizard, WizardFooterRenderProps } from '@/wizard';
 
 import { offerViaCall, OfferViaCallStep } from './offerViaCall';
+import { OfferViaCallDetailsStep } from './OfferViaCallDetailsStep';
+import {
+  defaultSteps,
+  enabledStepIds,
+  OfferViaCallFormData,
+} from './offerViaCallForm';
+import { OfferViaCallWorkflowStep } from './OfferViaCallWorkflowStep';
 
 interface OfferViaCallDialogProps {
   resolve: {
@@ -23,29 +32,53 @@ interface OfferViaCallDialogProps {
   };
 }
 
-interface FormData {
-  name: string;
-  cutoff_time: string;
-  plan: { value: string; label: string };
-}
+// Two pages rather than one long form: the details are always filled in, the
+// workflow almost never is. Keeping them apart lets the second page carry the
+// explanation the choice needs without pushing the required fields off screen.
+const wizardSteps = (): ProgressStep[] => [
+  { key: 'details', label: translate('Call details'), completed: false },
+  { key: 'workflow', label: translate('Workflow'), completed: false },
+];
 
-const stepLabel = (step: OfferViaCallStep): string => {
-  switch (step) {
-    case 'organisation':
-      return translate('Registering the managing organisation');
-    case 'call':
-      return translate('Creating the call');
-    case 'round':
-      return translate('Opening a submission window');
-    case 'offering':
-      return translate('Adding the offering');
-    case 'accept':
-      return translate('Accepting the offering');
-    case 'activate':
-      return translate('Activating the call');
-    default:
-      return step;
-  }
+const wizardForms = [OfferViaCallDetailsStep, OfferViaCallWorkflowStep];
+
+/**
+ * Named buttons rather than the wizard's default footer, whose Next button
+ * renders as a bare caret: an unlabelled arrow is a poor thing to ask someone
+ * to press when the next page decides how the call is reviewed.
+ */
+const renderFooter = ({
+  step,
+  totalSteps,
+  submitting,
+  invalid,
+  onPrev,
+}: WizardFooterRenderProps<OfferViaCallFormData>) => {
+  const isLast = step === totalSteps - 1;
+  return (
+    <>
+      {step > 0 && (
+        <SubmitButton
+          type="button"
+          variant="tertiary"
+          className="min-w-125px me-auto"
+          submitting={false}
+          onClick={() => onPrev()}
+          label={translate('Back')}
+          iconNode={<CaretLeftIcon weight="bold" />}
+          iconOnLeft
+        />
+      )}
+      <CloseDialogButton variant="tertiary" className="min-w-125px" />
+      <SubmitButton
+        submitting={submitting}
+        invalid={invalid}
+        label={isLast ? translate('Create') : translate('Next')}
+        iconNode={isLast ? undefined : <CaretRightIcon weight="bold" />}
+        className="min-w-125px"
+      />
+    </>
+  );
 };
 
 /** A year out: long enough that nobody has to babysit a pilot or a demo. */
@@ -55,10 +88,20 @@ const defaultCutoff = () => {
   return date.toISOString().slice(0, 10);
 };
 
+const dialogShell = (children) => (
+  <ModalDialog
+    title={translate('Offer via call')}
+    iconNode={<MegaphoneIcon weight="bold" />}
+    footer={<CloseDialogButton className="min-w-125px" />}
+  >
+    {children}
+  </ModalDialog>
+);
+
 export const OfferViaCallDialog: FC<OfferViaCallDialogProps> = (props) => {
   const { offering, refetch } = props.resolve;
   const router = useRouter();
-  const [step, setStep] = useState<OfferViaCallStep | null>(null);
+  const [chainStep, setChainStep] = useState<OfferViaCallStep | null>(null);
 
   // Fetched rather than read off the row: the provider offering list asks for
   // a sparse field set that leaves `plans` out, so a row alone cannot tell an
@@ -87,20 +130,26 @@ export const OfferViaCallDialog: FC<OfferViaCallDialogProps> = (props) => {
       cutoff_time: defaultCutoff(),
       // Choose for the operator when there is nothing to choose between.
       plan: planOptions.length === 1 ? planOptions[0] : undefined,
+      // `manager` is deliberately absent. The service provider is only
+      // sometimes the right call manager, and prefilling it would get accepted
+      // unread — a call cannot change manager afterwards, so the wrong guess
+      // is expensive.
+      steps: defaultSteps(),
     }),
     [offering.name, planOptions],
   );
 
-  const { mutateAsync, isPending } = useManagedMutation<any, any, FormData>({
+  const { mutateAsync } = useManagedMutation<any, any, OfferViaCallFormData>({
     mutationFn: (values) =>
       offerViaCall({
         offeringUuid: offering.uuid,
-        customerUuid: offering.customer_uuid,
+        managerCustomerUuid: values.manager.uuid,
         name: values.name,
         // The picker yields a date; the call closes at the end of that day.
         cutoffTime: new Date(`${values.cutoff_time}T23:59:59`).toISOString(),
         planUuid: values.plan.value,
-        onProgress: setStep,
+        enabledSteps: enabledStepIds(values.steps),
+        onProgress: setChainStep,
       }),
     successMessage: translate('The offering can now be requested via a call.'),
     // The chain is not transactional, so say what survived rather than
@@ -115,109 +164,36 @@ export const OfferViaCallDialog: FC<OfferViaCallDialogProps> = (props) => {
   });
 
   if (plansLoading) {
-    return (
-      <ModalDialog
-        title={translate('Offer via call')}
-        iconNode={<MegaphoneIcon weight="bold" />}
-        footer={<CloseDialogButton className="min-w-125px" />}
-      >
-        <LoadingSpinner />
-      </ModalDialog>
-    );
+    return dialogShell(<LoadingSpinner />);
   }
 
   if (!planOptions.length) {
-    return (
-      <ModalDialog
-        title={translate('Offer via call')}
-        iconNode={<MegaphoneIcon weight="bold" />}
-        footer={<CloseDialogButton className="min-w-125px" />}
-      >
-        <p className="mb-0">
-          {translate(
-            'This offering has no active plan. Requests through a call are priced against a plan, so add one first.',
-          )}
-        </p>
-      </ModalDialog>
+    return dialogShell(
+      <p className="mb-0">
+        {translate(
+          'This offering has no active plan. Requests through a call are priced against a plan, so add one first.',
+        )}
+      </p>,
     );
   }
 
   return (
-    <Form<FormData>
-      onSubmit={mutateAsync}
+    <Wizard<OfferViaCallFormData>
+      title={translate('Offer via call')}
+      subtitle={translate(
+        'Creates a call, opens a submission window and lists this offering in it, so users can request access.',
+      )}
+      steps={wizardSteps()}
+      wizardForms={wizardForms}
       initialValues={initialValues}
-      render={({ handleSubmit, invalid, submitting }) => {
-        const busy = submitting || isPending;
-        return (
-          <form onSubmit={handleSubmit}>
-            <ModalDialog
-              title={translate('Offer via call')}
-              subtitle={translate(
-                'Creates a call, opens a submission window and lists this offering in it, so users can request access.',
-              )}
-              iconNode={<MegaphoneIcon weight="bold" />}
-              iconColor="success"
-              footer={
-                <>
-                  <CloseDialogButton
-                    variant="tertiary"
-                    className="min-w-125px"
-                  />
-                  <SubmitButton
-                    disabled={invalid}
-                    submitting={busy}
-                    label={translate('Create')}
-                    className="btn btn-primary min-w-125px"
-                  />
-                </>
-              }
-            >
-              <Field
-                label={translate('Offering')}
-                value={offering.name}
-                labelCol={4}
-                valueCol={8}
-                space={2}
-              />
-              <div className="mt-7">
-                <StringGroup
-                  name="name"
-                  label={translate('Call name')}
-                  required
-                  validate={required}
-                  disabled={busy}
-                />
-                <DateGroup
-                  name="cutoff_time"
-                  label={translate('Submission closes')}
-                  description={translate(
-                    'Requests are accepted until the end of this day.',
-                  )}
-                  required
-                  validate={required}
-                  disabled={busy}
-                />
-                <SelectGroup
-                  name="plan"
-                  label={translate('Plan')}
-                  description={translate(
-                    'Requests are priced against this plan.',
-                  )}
-                  options={planOptions}
-                  required
-                  validate={required}
-                  isClearable={false}
-                  isDisabled={busy}
-                  spaceless
-                />
-              </div>
-              {step && busy ? (
-                <p className="text-muted fs-7 mt-4 mb-0">{stepLabel(step)}…</p>
-              ) : null}
-            </ModalDialog>
-          </form>
-        );
+      onSubmit={(values) => mutateAsync(values)}
+      submitLabel={translate('Create')}
+      modalProps={{
+        iconNode: <MegaphoneIcon weight="bold" />,
+        iconColor: 'success',
       }}
+      renderFooter={renderFooter}
+      data={{ offering, planOptions, chainStep }}
     />
   );
 };
