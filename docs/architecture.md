@@ -243,12 +243,33 @@ Bootstrap Button (internal only, wrapped by BaseButton)
 
 #### ESLint Enforcement
 
-The `no-direct-bootstrap-button` ESLint rule prevents direct Bootstrap Button imports. Allowed wrapper files:
+Two rules cover the two ways a Bootstrap button reaches the tree.
+
+`waldur-custom/no-direct-bootstrap-button` (**error**) catches the import —
+`import { Button } from 'react-bootstrap'`.
+
+`waldur-custom/no-bootstrap-button-markup` (**warning**) catches the hand-rolled
+form — `<button className="btn btn-danger">` — which carries no import and so was
+invisible to the rule above. It is a warning rather than an error because the tree
+still holds well over a hundred of these and converting one is a per-screen
+judgement, not a mechanical swap; promote it to `error` once the count reaches zero.
+`waldur-custom/prefer-alert-item` works the same way for `<div className="alert">`.
+
+Each rule keeps its own `ALLOWED_FILES` list at the top of
+`packages/eslint-plugin-waldur/rules/`, and the two lists differ on purpose — the
+import rule additionally exempts files that reference `Button` only as a type or
+compose it with `ButtonGroup`/`Dropdown`, which says nothing about markup. The
+wrappers exempted from both are:
 
 - `src/core/buttons/BaseButton.tsx`
-- `src/table/ActionButton.tsx`
-- `src/form/SubmitButton.tsx`
+- `src/core/buttons/IconButton.tsx`
+- `src/core/SaveButton.tsx`
 - `src/modal/CloseDialogButton.tsx`
+- `src/table/ToolbarButton.tsx`
+
+`src/core/Link.tsx` is exempt from the markup rule only: its `buttonVariant` prop is
+the sanctioned link-as-button, so the `btn` class it composes is the abstraction
+rather than an instance of the problem.
 
 ## Key Directories
 

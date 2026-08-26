@@ -74,6 +74,9 @@ export default tseslint
         'waldur-custom/enforce-badge-right-icon-pattern': 'error',
         'waldur-custom/enforce-button-variants': 'error',
         'waldur-custom/no-direct-bootstrap-button': 'error',
+        // Warning while the existing hand-rolled buttons are converted; see the
+        // rule's docblock. Promote to 'error' once the count reaches zero.
+        'waldur-custom/no-bootstrap-button-markup': 'warn',
         // Warnings rather than errors: the tree still carries dozens of each,
         // and converting one is a per-screen judgement rather than a mechanical
         // swap. They steer new code; promote to 'error' once the count is down.

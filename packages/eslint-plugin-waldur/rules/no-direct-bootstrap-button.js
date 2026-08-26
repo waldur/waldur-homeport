@@ -1,7 +1,14 @@
 /**
- * ESLint rule to prevent direct import of Bootstrap Button component
- * Encourages use of Waldur wrapper components (SubmitButton, ActionButton, etc.)
+ * ESLint rule to prevent direct import of Bootstrap Button component.
+ * Encourages use of Waldur wrapper components (BaseButton, SubmitButton, ...).
+ *
+ * The sibling rule `no-bootstrap-button-markup` covers the other half — `btn`
+ * classes applied by hand to a native `<button>`, which carries no import and
+ * so is invisible here. It lives in its own rule because it is reported as a
+ * warning while the existing usages are converted, whereas this one is an error.
  */
+
+import { WRAPPERS } from './bootstrap-button-wrappers.js';
 
 // Files that are allowed to import Button directly (wrapper components)
 const ALLOWED_FILES = [
@@ -42,11 +49,7 @@ export default {
     messages: {
       noDirectBootstrapButton:
         'Avoid importing Button directly from react-bootstrap. Use Waldur wrapper components instead:\n' +
-        '  - SubmitButton: for form submit and action buttons\n' +
-        '  - IconButton: for icon-only buttons with tooltips\n' +
-        '  - ToolbarButton: for table/panel toolbar buttons\n' +
-        '  - ActionButton: for table row actions\n' +
-        '  - CloseDialogButton: for modal cancel/close buttons',
+        WRAPPERS,
     },
   },
 
