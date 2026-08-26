@@ -1,7 +1,10 @@
 import {
+  CallProposalFieldConfig,
   RequestedOffering,
   ProviderOfferingDetails as Offering,
   ProviderPlanDetails as Plan,
+  ProposalFieldMetadata as SdkProposalFieldMetadata,
+  ProposalFieldStateEnum,
 } from 'waldur-js-client';
 
 import { Limits } from '@/marketplace/details/types';
@@ -12,6 +15,47 @@ export {
   ProposalReview,
   type ProtectedCall as Call,
 } from 'waldur-js-client';
+
+/** How a call treats one Project details field on the submission form.
+ * Generated from the backend's single ProposalFieldStates choice set. */
+export type ProposalFieldState = ProposalFieldStateEnum;
+
+/** Configurable Project details fields. `name` and `duration_in_days` are not
+ * configurable: the first names the proposal and forms part of the awarded
+ * project's name, the second states the length of the award.
+ *
+ * Narrower than the SDK's `field: string`, which OpenAPI cannot express: the
+ * label maps in the UI are keyed on exactly these four. */
+export type ProposalFieldName =
+  | 'project_summary'
+  | 'description'
+  | 'science_sub_domain'
+  | 'supporting_documentation';
+
+/** Consumers a field feeds, as reported by the backend. Labels are translated
+ * in the UI rather than sent over the wire; likewise narrower than the SDK's
+ * `usage: string[]`. */
+export type ProposalFieldUsage =
+  | 'applicant_form'
+  | 'reviewer_comment'
+  | 'reviewer_matching'
+  | 'manager_lists'
+  | 'ai_assistant'
+  | 'export_import';
+
+/** The generated row, with its loose string fields narrowed to the unions the
+ * UI switches on. */
+export interface ProposalFieldMetadata extends Omit<
+  SdkProposalFieldMetadata,
+  'field' | 'allowed_states' | 'usage'
+> {
+  field: ProposalFieldName;
+  /** Omits 'required' once the call has proposals — see locked_reason. */
+  allowed_states: ProposalFieldState[];
+  usage: ProposalFieldUsage[];
+}
+
+export type ProposalFieldConfig = CallProposalFieldConfig;
 
 export type AllocationTime = 'on_decision' | 'fixed_date';
 

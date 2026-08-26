@@ -71,6 +71,10 @@ export const ProposalManagePage = () => {
             'manager_uuid',
             'compliance_checklist',
             'compliance_checklist_name',
+            // Drives which Project details fields the form asks for.
+            'proposal_field_config',
+            // Cast: compliance_checklist* are protected-call fields, so the
+            // list is not assignable to keyof PublicCall.
           ] as any,
         },
       }).then((res) => res.data),

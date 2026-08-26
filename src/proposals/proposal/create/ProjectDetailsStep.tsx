@@ -5,8 +5,6 @@ import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { isEmpty } from '@/core/utils';
-import { isFeatureVisible } from '@/features/connect';
-import { ProjectFeatures } from '@/FeaturesEnums';
 import { StringGroup, TextGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -16,18 +14,14 @@ import { VStepperFormStepProps } from '@/wizard';
 
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 
+import {
+  getFieldStates,
+  getTrackedFields,
+  isFieldRequired,
+  isFieldVisible,
+} from './proposalFields';
 import { StepHeaderContent } from './StepHeaderContent';
 import { UploadDocumentationFiles } from './UploadDocumentationFiles';
-
-// Fields to track for completion count
-const PROJECT_DETAIL_FIELDS = [
-  'name',
-  'project_summary',
-  'description',
-  'science_sub_domain',
-  'duration_in_days',
-  'supporting_documentation',
-] as const;
 
 export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const reviews: ProposalReview[] = props.params?.reviews;
@@ -38,16 +32,15 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const isOpen = props.params?.isOpen;
   const onToggle = props.params?.onToggle;
 
-  // The science domain picker renders nothing when its feature is off, so
-  // counting the field would leave the step permanently one short of its total.
+  // Only the fields this call actually asks for are counted, so the step can
+  // reach its own total. A field the call hides is neither rendered nor tracked.
+  const fieldStates = useMemo(
+    () => getFieldStates(props.params?.call?.proposal_field_config),
+    [props.params?.call],
+  );
   const trackedFields = useMemo(
-    () =>
-      isFeatureVisible(ProjectFeatures.science_domain)
-        ? PROJECT_DETAIL_FIELDS
-        : PROJECT_DETAIL_FIELDS.filter(
-            (fieldName) => fieldName !== 'science_sub_domain',
-          ),
-    [],
+    () => getTrackedFields(fieldStates),
+    [fieldStates],
   );
 
   // Count filled fields for metadata display
@@ -109,37 +102,49 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_title"
       />
-      <TextGroup
-        name="project_summary"
-        placeholder={translate('Enter a summary...')}
-        maxLength={1000}
-        label={translate('Summary')}
-        required
-      />
-      <FieldReviewComments
-        reviews={reviews}
-        fieldName="comment_project_summary"
-      />
-      <TextGroup
-        name="description"
-        placeholder={translate('Enter a description...')}
-        maxLength={1000}
-        label={translate('Description')}
-      />
-      <FieldReviewComments
-        reviews={reviews}
-        fieldName="comment_project_description"
-      />
-      <ScienceDomainGroup
-        initialDomain={
-          proposal.science_domain_uuid
-            ? {
-                uuid: proposal.science_domain_uuid,
-                name: proposal.science_domain_name,
-              }
-            : null
-        }
-      />
+      {isFieldVisible(fieldStates, 'project_summary') && (
+        <>
+          <TextGroup
+            name="project_summary"
+            placeholder={translate('Enter a summary...')}
+            maxLength={1000}
+            label={translate('Summary')}
+            required={isFieldRequired(fieldStates, 'project_summary')}
+          />
+          <FieldReviewComments
+            reviews={reviews}
+            fieldName="comment_project_summary"
+          />
+        </>
+      )}
+      {isFieldVisible(fieldStates, 'description') && (
+        <>
+          <TextGroup
+            name="description"
+            placeholder={translate('Enter a description...')}
+            maxLength={1000}
+            label={translate('Description')}
+            required={isFieldRequired(fieldStates, 'description')}
+          />
+          <FieldReviewComments
+            reviews={reviews}
+            fieldName="comment_project_description"
+          />
+        </>
+      )}
+      {isFieldVisible(fieldStates, 'science_sub_domain') && (
+        <ScienceDomainGroup
+          required={isFieldRequired(fieldStates, 'science_sub_domain')}
+          initialDomain={
+            proposal.science_domain_uuid
+              ? {
+                  uuid: proposal.science_domain_uuid,
+                  name: proposal.science_domain_name,
+                }
+              : null
+          }
+        />
+      )}
       <StringGroup
         name="duration_in_days"
         placeholder={translate('Enter number of days...')}
@@ -151,23 +156,30 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_duration"
       />
-      <FormGroup label={translate('Upload supporting documentation')}>
-        <Field
-          name="supporting_documentation"
-          render={({ input, meta }) => (
-            <UploadDocumentationFiles
-              input={input}
-              meta={meta}
-              proposal={props.params.proposal}
-              refetch={props.params.refetch}
+      {isFieldVisible(fieldStates, 'supporting_documentation') && (
+        <>
+          <FormGroup
+            label={translate('Upload supporting documentation')}
+            required={isFieldRequired(fieldStates, 'supporting_documentation')}
+          >
+            <Field
+              name="supporting_documentation"
+              render={({ input, meta }) => (
+                <UploadDocumentationFiles
+                  input={input}
+                  meta={meta}
+                  proposal={props.params.proposal}
+                  refetch={props.params.refetch}
+                />
+              )}
             />
-          )}
-        />
-      </FormGroup>
-      <FieldReviewComments
-        reviews={reviews}
-        fieldName="comment_project_supporting_documentation"
-      />
+          </FormGroup>
+          <FieldReviewComments
+            reviews={reviews}
+            fieldName="comment_project_supporting_documentation"
+          />
+        </>
+      )}
     </AccordionCard>
   );
 };

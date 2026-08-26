@@ -12,10 +12,14 @@ interface ScienceDomainGroupProps {
   // Preselects the parent domain when the form already holds a sub-domain, so
   // an edit form opens with its sub-domain list loaded rather than disabled.
   initialDomain?: { uuid: string; name: string } | null;
+  // Marks the sub-domain as mandatory. The parent domain is a navigation aid
+  // for picking one, so only the sub-domain carries the asterisk.
+  required?: boolean;
 }
 
 export const ScienceDomainGroup = ({
   initialDomain = null,
+  required = false,
 }: ScienceDomainGroupProps = {}) => {
   const form = useForm();
   const [domains, setDomains] = useState([]);
@@ -124,6 +128,7 @@ export const ScienceDomainGroup = ({
             : translate('Select a domain first')
         }
         label={translate('Science sub-domain')}
+        required={required}
       />
     </>
   );
