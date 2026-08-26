@@ -4,11 +4,10 @@ import { Nav, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@/core/Link';
-import { isFeatureVisible } from '@/features/connect';
 import { translate } from '@/i18n';
 import { useFullPage } from '@/navigation/context';
 
-import { getCategoryConfig } from './constants';
+import { getReportingTabs } from './tabs';
 
 export const ReportingPeriodContext = createContext(0);
 
@@ -22,29 +21,7 @@ export const ReportingLayout: FC = () => {
   const { state } = useCurrentStateAndParams();
   const isDashboard = state.name === 'reporting-dashboard';
 
-  const tabs = useMemo(() => {
-    const categories = getCategoryConfig();
-    const result = [
-      { title: translate('Overview'), state: 'reporting-dashboard' },
-    ];
-
-    Object.entries(categories).forEach(([key, category]) => {
-      if (category.feature && !isFeatureVisible(category.feature)) {
-        return;
-      }
-      if (category.permission && !category.permission({ workspace } as any)) {
-        return;
-      }
-      if (category.reports.length > 0) {
-        result.push({
-          title: category.title,
-          state: `reporting-${key}-list`,
-        });
-      }
-    });
-
-    return result;
-  }, [workspace]);
+  const tabs = useMemo(() => getReportingTabs(workspace), [workspace]);
 
   return (
     <div className="container-fluid py-9">

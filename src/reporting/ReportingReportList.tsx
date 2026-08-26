@@ -8,10 +8,10 @@ import { Tip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
-import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 
 import {
   getCategoryConfig,
+  getVisibleReports,
   ReportCategory,
   ReportDefinition,
 } from './constants';
@@ -69,23 +69,10 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
 }) => {
   const config = useMemo(() => getCategoryConfig()[category], [category]);
 
-  const showExperimental = useMemo(
-    () => isExperimentalUiComponentsVisible(),
-    [],
-  );
+  const filteredReports = useMemo(() => getVisibleReports(config), [config]);
 
-  const filteredReports = useMemo(() => {
-    if (!config) return [];
-    return config.reports.filter(
-      (report) =>
-        (!report.feature || isFeatureVisible(report.feature)) &&
-        (!report.attribute || isProfileAttributeEnabled(report.attribute)) &&
-        (!report.isExperimental || showExperimental) &&
-        !report.isHidden,
-    );
-  }, [config, showExperimental]);
-
-  if (!config) {
+  // Deep link to a category of a feature this deployment does not run.
+  if (!config || (config.feature && !isFeatureVisible(config.feature))) {
     return null;
   }
 
