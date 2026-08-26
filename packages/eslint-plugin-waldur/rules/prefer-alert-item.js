@@ -1,5 +1,9 @@
 /**
- * ESLint rule steering react-bootstrap's Alert towards Waldur's AlertItem.
+ * ESLint rule steering Bootstrap alerts towards Waldur's AlertItem.
+ *
+ * Two shapes are reported: `import { Alert } from 'react-bootstrap'`, and
+ * `<div className="alert alert-warning">` — the hand-rolled form, which carries
+ * no import and so used to slip through the rule entirely.
  *
  * Bootstrap's Alert paints its own colours rather than the design tokens, so a
  * screen using it reads as foreign next to the rest of the portal. AlertItem
@@ -10,6 +14,17 @@
  * rule is here to steer new code; the count can be driven down before this is
  * promoted to an error.
  */
+
+import {
+  getClassNameAttribute,
+  getClassNameTokens,
+  isNativeElement,
+} from './class-name-tokens.js';
+
+const RATIONALE =
+  '  Bootstrap alerts render their own colours instead of the design tokens,\n' +
+  '  so the result looks foreign next to the rest of the portal.\n' +
+  "  AlertItem takes title, body and variant ('info' | 'warning' | 'error').";
 
 // AlertItem itself, and places where a bare Bootstrap alert is deliberate.
 const ALLOWED_FILES = ['src/core/AlertItem.tsx'];
@@ -28,9 +43,10 @@ export default {
     messages: {
       preferAlertItem:
         "Prefer AlertItem from '@/core/AlertItem' over react-bootstrap's Alert.\n" +
-        '  Bootstrap Alert renders its own colours instead of the design tokens,\n' +
-        '  so the result looks foreign next to the rest of the portal.\n' +
-        "  AlertItem takes title, body and variant ('info' | 'warning' | 'error').",
+        RATIONALE,
+      preferAlertItemOverMarkup:
+        'Prefer AlertItem from \'@/core/AlertItem\' over a hand-rolled <{{ element }} className="alert">.\n' +
+        RATIONALE,
     },
   },
 
@@ -54,6 +70,26 @@ export default {
         if (alertImport) {
           context.report({ node: alertImport, messageId: 'preferAlertItem' });
         }
+      },
+
+      JSXOpeningElement(node) {
+        // Deliberately no tag filter, unlike `no-bootstrap-button-markup`'s
+        // BUTTON_ELEMENTS: Bootstrap's `.alert` is a plain container style that
+        // reads the same on a div, a span or a p, whereas `.btn` only means a
+        // button on the handful of elements Bootstrap styles as one.
+        if (!isNativeElement(node)) {
+          return;
+        }
+        // Exact token: AlertItem's own `alert-icon` / `alert-actions` and
+        // Bootstrap's `alert-heading` are inner parts, not the alert container.
+        if (!getClassNameTokens(node).has('alert')) {
+          return;
+        }
+        context.report({
+          node: getClassNameAttribute(node) || node,
+          messageId: 'preferAlertItemOverMarkup',
+          data: { element: node.name.name },
+        });
       },
     };
   },
