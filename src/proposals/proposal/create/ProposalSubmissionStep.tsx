@@ -223,8 +223,13 @@ export const ProposalSubmissionStep: FC<{
   // Get panel IDs for accordion URL state management
   const panelIds = useMemo(() => formSteps.map((step) => step.id), [formSteps]);
 
-  // Manage accordion open/closed state via URL query params
-  const { isPanelOpen, togglePanel } = useAccordionUrlState(panelIds, []);
+  // Manage accordion open/closed state via URL query params.
+  // Project details is open on arrival: it holds the first fields the
+  // applicant has to fill in, so an all-collapsed page gives no hint of where
+  // to start. An explicit `panels` param in the URL still wins.
+  const { isPanelOpen, togglePanel } = useAccordionUrlState(panelIds, [
+    'step-project',
+  ]);
 
   const stepRefs = useRef([]);
   // Recalculate step refs when steps change (e.g., when compliance step is added)
