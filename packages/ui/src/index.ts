@@ -6,7 +6,7 @@ export { LoadingSpinner } from './LoadingSpinner';
 export { Tooltip } from './Tooltip';
 
 export { Badge } from './Badge';
-export type { BadgeProps } from './Badge';
+export type { BadgeProps, BadgeTone, BadgeVariant } from './Badge';
 
 export {
   Card,

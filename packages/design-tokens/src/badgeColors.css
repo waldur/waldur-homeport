@@ -1,0 +1,266 @@
+/**
+ * Badge variant/tone tokens — src/core/Badge.tsx's real Metronic recipe
+ * (src/metronic/sass/core/components/_badge.scss), for the new Badge's
+ * expanded variant+tone system built to replace it (see the Badge
+ * migration brainstorm/audit). Deliberately separate from this package's
+ * existing --pill-* tokens (surfaceColors.css): those back StatusPill, a
+ * bespoke dashboard-mockup shape that was never a port of the real Badge
+ * and keeps its own colors unchanged — reusing them here would have
+ * silently changed StatusPill's already-shipped appearance the moment
+ * Badge's own variant styling changed.
+ *
+ * Real recipe, confirmed against _badge.scss's `@each $name, $value in
+ * $theme-colors` loop (solid) and its outline/light sibling rules:
+ * - solid:   bg = the color's real Bootstrap variable (600 for success/
+ *            warning/danger/info; 500 for purple/blue/indigo/moss/pink —
+ *            a genuine asymmetry in the source, not a typo here), text =
+ *            inverse (white, except secondary), border = same as bg.
+ * - light:   bg = the color's light step (50 for most), text = the same
+ *            600/500 step solid uses, border = same as bg.
+ * - outline: bg = 50, text = 700, border = 200 — except neutral, which
+ *            Metronic hand-writes as `.badge-outline-default` outside the
+ *            generated loop (gray-100/700/300, not derived from a 50/700/
+ *            200 step on any ramp).
+ *
+ * Dark mode: these are theme-invariant single ramps, same as colors.css's
+ * gray/error/warning/success — confirmed directly against Metronic's own
+ * `if(isDarkMode(), dark, light)` branches for every step of every new
+ * color added this pass: dark-mode-N always equals light-mode's
+ * complementary step (50↔900, 200↔700, 300↔600, 400↔500), with zero
+ * exceptions across every color checked. So dark mode below just swaps
+ * which step of the *same* light-mode ramp in colors.css each token
+ * points at — no separate dark hex values needed anywhere in this file.
+ */
+
+:root {
+  --badge-text-on-solid: #ffffff;
+
+  /* primary/secondary derive from the runtime brand ramp (initBrandTokens()),
+     not colors.css — same source buttonColors.css's own primary/secondary
+     tokens use. secondary's solid text is brand-700, not white: Metronic's
+     theme-inverse-color('secondary') returns $brand-700, since secondary's
+     solid fill is a light brand tint, not a vivid one. */
+  --badge-primary-solid-bg: var(--waldur-brand-600);
+  --badge-primary-solid-text: var(--badge-text-on-solid);
+  --badge-primary-light-bg: var(--waldur-brand-50);
+  --badge-primary-light-text: var(--waldur-brand-600);
+  --badge-primary-outline-bg: var(--waldur-brand-50);
+  --badge-primary-outline-text: var(--waldur-brand-700);
+  --badge-primary-outline-border: var(--waldur-brand-200);
+
+  --badge-secondary-solid-bg: var(--waldur-brand-50);
+  --badge-secondary-solid-text: var(--waldur-brand-700);
+  --badge-secondary-light-bg: var(--waldur-brand-50);
+  --badge-secondary-light-text: var(--waldur-brand-600);
+  --badge-secondary-outline-bg: var(--waldur-brand-50);
+  --badge-secondary-outline-text: var(--waldur-brand-700);
+  --badge-secondary-outline-border: var(--waldur-brand-200);
+
+  --badge-success-solid-bg: var(--color-success-600);
+  --badge-success-solid-text: var(--badge-text-on-solid);
+  --badge-success-light-bg: var(--color-success-50);
+  --badge-success-light-text: var(--color-success-600);
+  --badge-success-outline-bg: var(--color-success-50);
+  --badge-success-outline-text: var(--color-success-700);
+  --badge-success-outline-border: var(--color-success-200);
+
+  --badge-warning-solid-bg: var(--color-warning-600);
+  --badge-warning-solid-text: var(--badge-text-on-solid);
+  --badge-warning-light-bg: var(--color-warning-50);
+  --badge-warning-light-text: var(--color-warning-600);
+  --badge-warning-outline-bg: var(--color-warning-50);
+  --badge-warning-outline-text: var(--color-warning-700);
+  --badge-warning-outline-border: var(--color-warning-200);
+
+  --badge-danger-solid-bg: var(--color-error-600);
+  --badge-danger-solid-text: var(--badge-text-on-solid);
+  --badge-danger-light-bg: var(--color-error-50);
+  --badge-danger-light-text: var(--color-error-600);
+  --badge-danger-outline-bg: var(--color-error-50);
+  --badge-danger-outline-text: var(--color-error-700);
+  --badge-danger-outline-border: var(--color-error-200);
+
+  --badge-info-solid-bg: var(--color-info-600);
+  --badge-info-solid-text: var(--badge-text-on-solid);
+  --badge-info-light-bg: var(--color-info-50);
+  --badge-info-light-text: var(--color-info-600);
+  --badge-info-outline-bg: var(--color-info-50);
+  --badge-info-outline-text: var(--color-info-700);
+  --badge-info-outline-border: var(--color-info-200);
+
+  --badge-purple-solid-bg: var(--color-purple-500);
+  --badge-purple-solid-text: var(--badge-text-on-solid);
+  --badge-purple-light-bg: var(--color-purple-50);
+  --badge-purple-light-text: var(--color-purple-500);
+  --badge-purple-outline-bg: var(--color-purple-50);
+  --badge-purple-outline-text: var(--color-purple-700);
+  --badge-purple-outline-border: var(--color-purple-200);
+
+  --badge-blue-solid-bg: var(--color-blue-500);
+  --badge-blue-solid-text: var(--badge-text-on-solid);
+  --badge-blue-light-bg: var(--color-blue-50);
+  --badge-blue-light-text: var(--color-blue-500);
+  --badge-blue-outline-bg: var(--color-blue-50);
+  --badge-blue-outline-text: var(--color-blue-700);
+  --badge-blue-outline-border: var(--color-blue-200);
+
+  --badge-indigo-solid-bg: var(--color-indigo-500);
+  --badge-indigo-solid-text: var(--badge-text-on-solid);
+  --badge-indigo-light-bg: var(--color-indigo-50);
+  --badge-indigo-light-text: var(--color-indigo-500);
+  --badge-indigo-outline-bg: var(--color-indigo-50);
+  --badge-indigo-outline-text: var(--color-indigo-700);
+  --badge-indigo-outline-border: var(--color-indigo-200);
+
+  --badge-moss-solid-bg: var(--color-moss-500);
+  --badge-moss-solid-text: var(--badge-text-on-solid);
+  --badge-moss-light-bg: var(--color-moss-50);
+  --badge-moss-light-text: var(--color-moss-500);
+  --badge-moss-outline-bg: var(--color-moss-50);
+  --badge-moss-outline-text: var(--color-moss-700);
+  --badge-moss-outline-border: var(--color-moss-200);
+
+  --badge-pink-solid-bg: var(--color-pink-500);
+  --badge-pink-solid-text: var(--badge-text-on-solid);
+  --badge-pink-light-bg: var(--color-pink-50);
+  --badge-pink-light-text: var(--color-pink-500);
+  --badge-pink-outline-bg: var(--color-pink-50);
+  --badge-pink-outline-text: var(--color-pink-700);
+  --badge-pink-outline-border: var(--color-pink-200);
+
+  /* neutral solid/light follow the same ramp-based pattern as the others
+     for API consistency, though the real Badge never actually uses them
+     solid/light (see below) — only real caller is variant="default", and
+     every one of those 57 real usages combines it with outline. */
+  --badge-neutral-solid-bg: var(--color-gray-600);
+  --badge-neutral-solid-text: var(--badge-text-on-solid);
+  --badge-neutral-light-bg: var(--color-gray-50);
+  --badge-neutral-light-text: var(--color-gray-600);
+  /* Metronic hand-writes `.badge-outline-default` outside the generated
+     $theme-colors loop — gray-100/300/700, not a 50/200/700 step on any
+     single ramp the way every other outline variant above is. */
+  --badge-neutral-outline-bg: var(--color-gray-100);
+  --badge-neutral-outline-text: var(--color-gray-700);
+  --badge-neutral-outline-border: var(--color-gray-300);
+}
+
+:root[data-theme='dark'] {
+  /* primary/secondary don't follow the generic ramp's mirror rule
+     mechanically (measured live against real Metronic, not derived): only
+     bg mirrors 600->300 (solid) / 50->900 (light, outline, and secondary's
+     always-light-tinted solid); text uses whichever step the real
+     rendering actually showed, which for primary-light's text is the
+     *unmirrored* 600 (not 300) — the brand token path is hand-written
+     Metronic CSS distinct from the generic $theme-colors loop the other
+     colors below go through, so it doesn't share their symmetric mirror.
+     primary-solid is also the one variant/tone anywhere in this file
+     whose real border isn't just its own bg restated (Badge.tsx's
+     non-outline border falls back to var(--badge-*-bg) precisely because
+     every other combination, in both themes, measured bg==border) — dark
+     primary-solid's border is brand-600 while its bg is brand-300.
+     One genuine upstream bug reproduced as-is for pixel parity, not
+     silently fixed: badge-light-secondary's real dark text is brand-900 —
+     identical to its own background, i.e. invisible text in production
+     Metronic today. */
+  --badge-primary-solid-bg: var(--waldur-brand-300);
+  --badge-primary-solid-border: var(--waldur-brand-600);
+  --badge-primary-light-bg: var(--waldur-brand-900);
+  --badge-primary-light-text: var(--waldur-brand-600);
+  --badge-primary-outline-bg: var(--waldur-brand-900);
+  --badge-primary-outline-text: var(--waldur-brand-200);
+  --badge-primary-outline-border: var(--waldur-brand-700);
+
+  --badge-secondary-solid-bg: var(--waldur-brand-900);
+  --badge-secondary-solid-text: var(--waldur-brand-200);
+  --badge-secondary-light-bg: var(--waldur-brand-900);
+  --badge-secondary-light-text: var(--waldur-brand-900);
+  --badge-secondary-outline-bg: var(--waldur-brand-900);
+  --badge-secondary-outline-text: var(--waldur-brand-200);
+  --badge-secondary-outline-border: var(--waldur-brand-700);
+
+  --badge-success-solid-bg: var(--color-success-300);
+  --badge-success-light-bg: var(--color-success-900);
+  --badge-success-light-text: var(--color-success-300);
+  --badge-success-outline-bg: var(--color-success-900);
+  --badge-success-outline-text: var(--color-success-200);
+  --badge-success-outline-border: var(--color-success-700);
+
+  --badge-warning-solid-bg: var(--color-warning-300);
+  --badge-warning-light-bg: var(--color-warning-900);
+  --badge-warning-light-text: var(--color-warning-300);
+  --badge-warning-outline-bg: var(--color-warning-900);
+  --badge-warning-outline-text: var(--color-warning-200);
+  --badge-warning-outline-border: var(--color-warning-700);
+
+  --badge-danger-solid-bg: var(--color-error-300);
+  --badge-danger-light-bg: var(--color-error-900);
+  --badge-danger-light-text: var(--color-error-300);
+  --badge-danger-outline-bg: var(--color-error-900);
+  --badge-danger-outline-text: var(--color-error-200);
+  --badge-danger-outline-border: var(--color-error-700);
+
+  --badge-info-solid-bg: var(--color-info-300);
+  --badge-info-light-bg: var(--color-info-900);
+  --badge-info-light-text: var(--color-info-300);
+  --badge-info-outline-bg: var(--color-info-900);
+  --badge-info-outline-text: var(--color-info-200);
+  --badge-info-outline-border: var(--color-info-700);
+
+  /* purple/blue/indigo/moss/pink's flat source variable is NOT pinned to
+     the same 500 step in both themes — that was wrong (caught live:
+     dark-theme purple didn't match between old and new Badge despite
+     :root's value applying unchanged). Re-reading src/metronic/sass/
+     _colors.scss directly: `$purple-500: if(isDarkMode(), #9b8afb,
+     #7a5af8) !default` — dark mode uses its OWN distinct, more-vivid
+     shade with no equivalent anywhere in this ramp's other steps (the
+     200/700/900/50 steps below, by contrast, genuinely are just this
+     ramp's own light-theme hexes swapped in pairs — 900<->50, 700<->200 —
+     which *is* representable with existing tokens). These five
+     dark-solid-bg/light-text values are that vivid shade, hardcoded
+     per-color since there's nothing else in the ramp to reference. Same
+     source confirms outline-bg is the 900 step, not 950 (950 is a third,
+     genuinely fixed-across-themes shade, correctly used for light-bg
+     below) — `$purple-50: if(isDarkMode(), #3e1c96 [==this ramp's own
+     purple-900], #f4f3ff)`. */
+  --badge-purple-solid-bg: #9b8afb;
+  --badge-purple-light-bg: var(--color-purple-950);
+  --badge-purple-light-text: #9b8afb;
+  --badge-purple-outline-bg: var(--color-purple-900);
+  --badge-purple-outline-text: var(--color-purple-200);
+  --badge-purple-outline-border: var(--color-purple-700);
+
+  --badge-blue-solid-bg: #53b1fd;
+  --badge-blue-light-bg: var(--color-blue-950);
+  --badge-blue-light-text: #53b1fd;
+  --badge-blue-outline-bg: var(--color-blue-900);
+  --badge-blue-outline-text: var(--color-blue-200);
+  --badge-blue-outline-border: var(--color-blue-700);
+
+  --badge-indigo-solid-bg: #8098f9;
+  --badge-indigo-light-bg: var(--color-indigo-950);
+  --badge-indigo-light-text: #8098f9;
+  --badge-indigo-outline-bg: var(--color-indigo-900);
+  --badge-indigo-outline-text: var(--color-indigo-200);
+  --badge-indigo-outline-border: var(--color-indigo-700);
+
+  --badge-moss-solid-bg: #86cb3c;
+  --badge-moss-light-bg: var(--color-moss-950);
+  --badge-moss-light-text: #86cb3c;
+  --badge-moss-outline-bg: var(--color-moss-900);
+  --badge-moss-outline-text: var(--color-moss-200);
+  --badge-moss-outline-border: var(--color-moss-700);
+
+  --badge-pink-solid-bg: #f670c7;
+  --badge-pink-light-bg: var(--color-pink-950);
+  --badge-pink-light-text: #f670c7;
+  --badge-pink-outline-bg: var(--color-pink-900);
+  --badge-pink-outline-text: var(--color-pink-200);
+  --badge-pink-outline-border: var(--color-pink-700);
+
+  --badge-neutral-solid-bg: var(--color-gray-400);
+  --badge-neutral-light-bg: var(--color-gray-800);
+  --badge-neutral-light-text: var(--color-gray-400);
+  --badge-neutral-outline-bg: var(--color-gray-800);
+  --badge-neutral-outline-text: var(--color-gray-300);
+  --badge-neutral-outline-border: var(--color-gray-600);
+}

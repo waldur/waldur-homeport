@@ -107,15 +107,17 @@ export function UserMenu({
                 {currentUser.firstName}
               </span>
               {currentUser.isStaff && (
-                // variant="purple" + rounded-full: Metronic's real Staff
-                // badge is `<Badge variant="purple" outline pill>`
-                // (UserDropdownMenu.tsx) — see Badge.tsx's comment on the
-                // purple variant for the exact SCSS source. rounded-full
-                // overrides Badge's own rounded-md default, same pattern
-                // StatusPill.tsx uses for its own non-default shape.
+                // Metronic's real Staff badge is
+                // `<Badge variant="purple" outline pill>`
+                // (UserDropdownMenu.tsx) — now a direct, real Badge
+                // variant/tone/pill combination (see badgeColors.css),
+                // not a hand-rolled color override the way it was before
+                // Badge grew a real variant/tone system.
                 <Badge
                   variant="purple"
-                  className="mt-0.5 rounded-full px-1.5 py-0"
+                  tone="outline"
+                  pill
+                  className="mt-0.5 px-1.5 py-0"
                 >
                   {translate('Staff')}
                 </Badge>

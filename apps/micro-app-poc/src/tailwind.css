@@ -10,6 +10,7 @@
 @import 'tailwindcss';
 @import 'waldur-design-tokens/buttonColors.css';
 @import 'waldur-design-tokens/surfaceColors.css';
+@import 'waldur-design-tokens/badgeColors.css';
 
 /* Same override as the main app's own src/tailwind.css: OrgDashboardMock.tsx
    sets data-theme via the shared waldur/theme/name localStorage key, not an
