@@ -400,6 +400,7 @@ export const ProposalSubmissionStep: FC<{
                   editable={proposal.state === 'draft'}
                   submitting={submitting}
                   completedSteps={completedSteps}
+                  canSubmit={proposal.can_submit}
                 />
               </SidebarLayout.Sidebar>
             </SidebarLayout.Container>
