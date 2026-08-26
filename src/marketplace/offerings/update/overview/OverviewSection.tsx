@@ -20,6 +20,7 @@ import {
 import FormTable from '@/form/FormTable';
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
+import { formatCoordinates } from '@/map/coordinates';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -193,9 +194,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             label={translate('Location')}
             description={translate('Specify where the offering is hosted.')}
             value={
-              <CheckOrX
-                value={props.offering.latitude && props.offering.longitude}
-              />
+              formatCoordinates(props.offering) ?? <CheckOrX value={false} />
             }
             actions={
               <OfferingLocationButton
