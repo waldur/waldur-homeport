@@ -1005,6 +1005,20 @@ export const SettingsDescription = [
         type: 'integer',
       },
       {
+        key: 'DEFAULT_PROPOSAL_REQUIRED_FIELDS',
+        description: translate('Project details fields a new call requires by default. Applied when the call is created; changing this never alters an existing call.'),
+        default: ['project_summary'],
+        type: 'multiple_choice_field',
+        options: [{ value: 'project_summary', label: 'Summary' }, { value: 'description', label: 'Description' }, { value: 'science_sub_domain', label: 'Science domain' }, { value: 'supporting_documentation', label: 'Supporting documentation' }],
+      },
+      {
+        key: 'DEFAULT_PROPOSAL_HIDDEN_FIELDS',
+        description: translate('Project details fields a new call does not ask for at all. Applied when the call is created; changing this never alters an existing call.'),
+        default: [],
+        type: 'multiple_choice_field',
+        options: [{ value: 'project_summary', label: 'Summary' }, { value: 'description', label: 'Description' }, { value: 'science_sub_domain', label: 'Science domain' }, { value: 'supporting_documentation', label: 'Supporting documentation' }],
+      },
+      {
         key: 'REVIEWER_PROFILES_ENABLED',
         description: translate('Enable reviewer profile management features.'),
         default: true,
