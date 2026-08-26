@@ -25,6 +25,7 @@ import { CallUpdateHero } from './CallUpdateHero';
 import { COISettingsSection } from './coi-settings/COISettingsSection';
 import { CallResourceTemplates } from './configuration/CallResourceTemplates';
 import { GeneralConfigurationSection } from './configuration/GeneralConfigurationSection';
+import { ProposalFieldsSection } from './configuration/ProposalFieldsSection';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { MatchingSection } from './matching/MatchingSection';
@@ -87,6 +88,11 @@ const Body = ({ call, refetch, loading }) => {
               key: 'general-config',
               title: translate('General configuration'),
               component: GeneralConfigurationSection,
+            },
+            {
+              key: 'proposal-fields',
+              title: translate('Project details fields'),
+              component: ProposalFieldsSection,
             },
             {
               key: 'applicant-visibility',

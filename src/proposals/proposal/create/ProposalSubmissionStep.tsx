@@ -130,7 +130,7 @@ export const ProposalSubmissionStep: FC<{
   call?;
   reviews?: ProposalReview[];
   refetch;
-}> = ({ proposal, reviews, refetch }) => {
+}> = ({ proposal, call, reviews, refetch }) => {
   const { confirm } = useModal();
   const router = useRouter();
 
@@ -211,12 +211,14 @@ export const ProposalSubmissionStep: FC<{
 
   // Calculate steps based on whether proposal has meaningful compliance checklist
   const formSteps = useMemo(() => {
-    // Only create compliance step if checklist has questions
-    const fakeCallForSteps = shouldAddComplianceStep
-      ? { compliance_checklist: 'exists' }
-      : undefined;
-    return createProposalSteps(fakeCallForSteps);
-  }, [shouldAddComplianceStep]);
+    // The compliance step is driven by the checklist query rather than the
+    // call's own flag, so a synthetic value stands in for it; the field config
+    // comes from the real call.
+    return createProposalSteps({
+      compliance_checklist: shouldAddComplianceStep ? 'exists' : undefined,
+      proposal_field_config: call?.proposal_field_config,
+    });
+  }, [shouldAddComplianceStep, call]);
 
   // Get panel IDs for accordion URL state management
   const panelIds = useMemo(() => formSteps.map((step) => step.id), [formSteps]);
@@ -376,6 +378,7 @@ export const ProposalSubmissionStep: FC<{
                       title={step.label}
                       params={{
                         proposal,
+                        call,
                         refetch,
                         reviews,
                         form,

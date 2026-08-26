@@ -1,16 +1,26 @@
 import { translate } from '@/i18n';
-import { Call } from '@/proposals/types';
+import { Call, ProposalFieldConfig } from '@/proposals/types';
 import { VStepperFormStep } from '@/wizard';
 
 import { ProjectDetailsStep } from './ProjectDetailsStep';
 import { ProposalComplianceStepExpanded } from './ProposalComplianceStepExpanded';
 import { ProposalDetailsOverviewStep } from './ProposalDetailsOverviewStep';
+import {
+  getFieldStates,
+  getRequiredFields,
+  getTrackedFields,
+} from './proposalFields';
 import { ProposalTeamStep } from './ProposalTeamStep';
 import { FormResourceRequestsStep } from './resource-requests-step/FormResourceRequestsStep';
 
 export const createProposalSteps = (
-  call?: Pick<Call, 'compliance_checklist'>,
+  call?: Pick<Call, 'compliance_checklist'> & {
+    proposal_field_config?: ProposalFieldConfig;
+  },
 ): VStepperFormStep[] => {
+  // Which fields the Project details step asks for, and which of them block
+  // submission, is per-call configuration rather than a constant.
+  const fieldStates = getFieldStates(call?.proposal_field_config);
   const baseSteps: VStepperFormStep[] = [
     {
       label: translate('Details overview'),
@@ -21,16 +31,9 @@ export const createProposalSteps = (
       label: translate('Project details'),
       id: 'step-project',
       component: ProjectDetailsStep,
-      fields: [
-        'name',
-        'project_summary',
-        'description',
-        'science_sub_domain',
-        'duration_in_days',
-        'supporting_documentation',
-      ],
+      fields: getTrackedFields(fieldStates),
       required: true,
-      requiredFields: ['name', 'project_summary', 'duration_in_days'],
+      requiredFields: getRequiredFields(fieldStates),
     },
     {
       label: translate('Resource requests'),
