@@ -242,6 +242,7 @@
       "locales/tools/*.cjs",
       "generate-filters.cjs",
       "src/table/generated/*.tsx",
+      "stubs/**",
       "test/mocks/svg.tsx",
       "vitest.shims.d.ts"
     ]
@@ -292,6 +293,7 @@
     ]
   },
   "resolutions": {
+    "@codesandbox/nodebox": "portal:./stubs/nodebox",
     "systeminformation": "^5.31.6",
     "lodash": "^4.18.0",
     "lodash-es": "^4.18.0",

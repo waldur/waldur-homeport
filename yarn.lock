@@ -959,15 +959,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codesandbox/nodebox@npm:0.1.8":
-  version: 0.1.8
-  resolution: "@codesandbox/nodebox@npm:0.1.8"
-  dependencies:
-    outvariant: "npm:^1.4.0"
-    strict-event-emitter: "npm:^0.4.3"
-  checksum: 10c0/f7c3da0d371ea8801aa362259eb8fc5c1a102d9fc49167236fef6a18452fd1dfd60d302b34b5f166aeee336fd9f066d643609beddedcb86451c3a2c290444225
+"@codesandbox/nodebox@portal:./stubs/nodebox::locator=waldur-homeport%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@codesandbox/nodebox@portal:./stubs/nodebox::locator=waldur-homeport%40workspace%3A."
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@codesandbox/sandpack-client@npm:^2.19.8":
   version: 2.19.8
@@ -15320,7 +15316,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"outvariant@npm:^1.3.0, outvariant@npm:^1.4.0":
+"outvariant@npm:^1.3.0":
   version: 1.4.3
   resolution: "outvariant@npm:1.4.3"
   checksum: 10c0/5976ca7740349cb8c71bd3382e2a762b1aeca6f33dc984d9d896acdf3c61f78c3afcf1bfe9cc633a7b3c4b295ec94d292048f83ea2b2594fae4496656eba992c
@@ -18217,13 +18213,6 @@ __metadata:
   dependencies:
     any-promise: "npm:^1.1.0"
   checksum: 10c0/19d66e4e3c12e0aadd8755027edf7d90b696bd978eec5111a5cd2b67befa8851afd8c1b618121c3059850165c4ee4afc307f84869cf6db7fb24708d3523958f8
-  languageName: node
-  linkType: hard
-
-"strict-event-emitter@npm:^0.4.3":
-  version: 0.4.6
-  resolution: "strict-event-emitter@npm:0.4.6"
-  checksum: 10c0/d0231ef081cb1937b1445da59a1ec202d1c097d825c504f398600532490a4104e200b0dce4137467a8eaac5f8f9718d01c99869687afad78cad3b14c4b2e6a39
   languageName: node
   linkType: hard
 
