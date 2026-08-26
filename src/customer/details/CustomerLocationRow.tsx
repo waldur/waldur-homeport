@@ -1,10 +1,11 @@
-import { CheckIcon, XIcon, TrashIcon } from '@phosphor-icons/react';
+import { XIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { customersPartialUpdate } from 'waldur-js-client';
 
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { formatCoordinates } from '@/map/coordinates';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 import { useCustomer, useSetCustomer } from '@/workspace/hooks';
@@ -44,16 +45,12 @@ export const CustomerLocationRow: FC<{
     },
   });
 
+  const coordinates = formatCoordinates(customer);
+
   return (
     <FormTable.Item
       label={translate('Location')}
-      value={
-        customer.latitude && customer.longitude ? (
-          <CheckIcon weight="bold" className="text-info" />
-        ) : (
-          <XIcon weight="bold" className="text-danger" />
-        )
-      }
+      value={coordinates ?? <XIcon weight="bold" className="text-danger" />}
       actions={
         canUpdate ? (
           <>
