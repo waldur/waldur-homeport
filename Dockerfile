@@ -24,6 +24,13 @@ ENV PATH=/app/node_modules/.bin:$PATH
 COPY package.json yarn.lock .yarnrc.yml /app/
 COPY --from=manifests /manifests/packages /app/packages
 COPY --from=manifests /manifests/apps /app/apps
+# stubs/ holds local packages that `resolutions` points at over `portal:`
+# (see stubs/nodebox). Yarn resolves those targets during `yarn install`, so
+# they have to be here before it runs — the later `COPY . /app` is too late,
+# and the failure is "Manifest not found" at the resolution step. Copied whole
+# rather than manifest-only: portal: links the directory, not just its
+# package.json. Tiny and near-static, so it costs the install layer nothing.
+COPY stubs /app/stubs
 # Git is needed to refer with yarn to unrealised versions of libraries from github
 # --no-cache: download package index on-the-fly, no need to cleanup afterwards
 # Skip unnecessary post-install scripts - not needed for production builds
