@@ -1055,259 +1055,64 @@ class EnhancedTranslationExtractor {
     const template = {};
 
     for (const [literal, entry] of this.literals) {
-      // Aggregate context from all occurrences
-      const allUiTypes = [
+      // Only the fields a consumer actually reads are aggregated and persisted,
+      // and only when they carry information. The rest of what this used to emit
+      // was dead (nothing under locales/tools/ read `ui_types`, `components`,
+      // `jsx_context`, `interaction_context`, `file_context.paths`,
+      // `api_context.endpoints` or `usage_count`), a duplicate of the key
+      // (`message`), constant (`is_user_facing`), or derivable on demand
+      // (`text_characteristics` and `translator_notes`, both now built by
+      // simpleLLMProcessor — the only consumer that ever wanted them). Storing
+      // it all cost 19 MB and made every regeneration an unreviewable diff.
+      // See waldur/waldur-homeport#229.
+      const context = {};
+
+      const primaryUiType = this.determinePrimaryUIType([
         ...new Set(
           entry.contexts.map((ctx) => ctx.uiElementType).filter(Boolean),
         ),
-      ];
-      const primaryUiType = this.determinePrimaryUIType(allUiTypes);
-
-      // Collect file contexts
-      const domains = [
-        ...new Set(
-          entry.contexts.map((ctx) => ctx.fileContext?.domain).filter(Boolean),
-        ),
-      ];
-      const featureAreas = [
-        ...new Set(
-          entry.contexts
-            .map((ctx) => ctx.fileContext?.feature_area)
-            .filter(Boolean),
-        ),
-      ];
-      const componentTypes = [
-        ...new Set(
-          entry.contexts
-            .map((ctx) => ctx.fileContext?.component_type)
-            .filter(Boolean),
-        ),
-      ];
-
-      // Collect action types
-      const actionTypes = [
-        ...new Set(entry.contexts.map((ctx) => ctx.actionType).filter(Boolean)),
-      ];
-
-      // Collect API context
-      const apiEndpoints = [
-        ...new Set(
-          entry.contexts
-            .map((ctx) => ctx.apiContext?.api_endpoint)
-            .filter(Boolean),
-        ),
-      ];
-      const httpMethods = [
-        ...new Set(
-          entry.contexts
-            .map((ctx) => ctx.apiContext?.http_method)
-            .filter(Boolean),
-        ),
-      ];
-
-      // Collect state and interaction context
-      const modifiesState = entry.contexts.some(
-        (ctx) => ctx.stateContext?.modifies_state,
-      );
-      const triggersNavigation = entry.contexts.some(
-        (ctx) => ctx.navigationContext?.triggers_navigation,
-      );
-      const hasValidation = entry.contexts.some(
-        (ctx) => ctx.validationContext?.has_validation,
-      );
-
-      // Collect JSX context
-      const jsxTags = [
-        ...new Set(
-          entry.contexts.map((ctx) => ctx.jsxContext?.jsx_tag).filter(Boolean),
-        ),
-      ];
-      const conditionalRender = entry.contexts.some(
-        (ctx) => ctx.jsxContext?.conditional_render,
-      );
-
-      // Collect component hierarchy info
-      const parentComponents = [
-        ...new Set(
-          entry.contexts.flatMap(
-            (ctx) => ctx.componentHierarchy?.parent_components || [],
-          ),
-        ),
-      ];
-      const maxNestingLevel = Math.max(
-        ...entry.contexts.map(
-          (ctx) => ctx.componentHierarchy?.nesting_level || 0,
-        ),
-      );
-
-      // Build enhanced context object
-      const enhancedContext = {
-        primary_ui_type: primaryUiType,
-        ui_types: allUiTypes,
-        components: parentComponents,
-        is_user_facing: true, // assume all extracted strings are user-facing
-
-        // Text characteristics
-        text_characteristics: entry.textCharacteristics,
-
-        // Variables with enhanced info
-        variables: entry.variables,
-
-        // PHASE 1 ENHANCEMENTS
-        file_context: {
-          domains: domains,
-          feature_areas: featureAreas,
-          component_types: componentTypes,
-          paths: Array.from(entry.locations),
-        },
-
-        jsx_context: {
-          tags: jsxTags,
-          conditional_render: conditionalRender,
-        },
-
-        action_types: actionTypes,
-
-        api_context: {
-          endpoints: apiEndpoints,
-          http_methods: httpMethods,
-          has_api_calls: apiEndpoints.length > 0,
-        },
-
-        // PHASE 2 ENHANCEMENTS
-        interaction_context: {
-          modifies_state: modifiesState,
-          triggers_navigation: triggersNavigation,
-          has_validation: hasValidation,
-          max_nesting_level: maxNestingLevel,
-        },
-
-        usage_count: entry.locations.size,
-      };
-
-      // Generate enhanced translator notes
-      const translatorNotes = this.generateEnhancedTranslatorNotes(
-        enhancedContext,
-        literal,
-      );
-
-      template[literal] = {
-        message: literal,
-        context: enhancedContext,
-        translator_notes: translatorNotes,
-      };
-    }
-
-    return template;
-  }
-
-  // Generate enhanced translator notes using new context
-  generateEnhancedTranslatorNotes(context, _literal) {
-    const notes = [];
-
-    // UI context notes
-    if (context.primary_ui_type.includes('button')) {
-      notes.push(
-        'This text appears on a button. Keep it short and action-oriented.',
-      );
-    } else if (context.primary_ui_type.includes('title')) {
-      notes.push(
-        'This is a title/heading. Use title case if appropriate in your language.',
-      );
-    } else if (context.primary_ui_type.includes('error')) {
-      notes.push(
-        'This is an error message. Ensure tone is helpful and not alarming.',
-      );
-    } else if (context.primary_ui_type.includes('success')) {
-      notes.push(
-        'This is a success message. Use positive, confirming language.',
-      );
-    }
-
-    // Domain-specific notes
-    if (context.file_context.domains.includes('marketplace')) {
-      notes.push(
-        'This appears in the marketplace context. Use business-appropriate language.',
-      );
-    } else if (context.file_context.domains.includes('admin')) {
-      notes.push(
-        'This appears in administrative interface. Use formal, technical language.',
-      );
-    } else if (context.file_context.domains.includes('billing')) {
-      notes.push(
-        'This appears in billing context. Ensure financial terminology is accurate.',
-      );
-    }
-
-    // Action context notes
-    if (context.action_types.includes('delete')) {
-      notes.push(
-        'This relates to delete/removal actions. Use clear, cautionary language.',
-      );
-    } else if (context.action_types.includes('create')) {
-      notes.push(
-        'This relates to creation actions. Use encouraging, positive language.',
-      );
-    }
-
-    // Variable handling notes
-    if (Object.keys(context.variables).length > 0) {
-      const varTypes = Object.values(context.variables).map((v) => v.type);
-      notes.push(
-        `Contains variables: ${Object.keys(context.variables).join(', ')}. Variable types: ${[...new Set(varTypes)].join(', ')}.`,
-      );
-
-      if (varTypes.includes('number')) {
-        notes.push(
-          'Variable contains numbers. Consider plural handling in your language.',
-        );
+      ]);
+      if (primaryUiType && primaryUiType !== 'unknown') {
+        context.primary_ui_type = primaryUiType;
       }
+
+      if (entry.variables && Object.keys(entry.variables).length > 0) {
+        context.variables = entry.variables;
+      }
+
+      // One feature area is all any consumer reads, and "general" says nothing.
+      const featureArea = entry.contexts
+        .map((ctx) => ctx.fileContext?.feature_area)
+        .find((area) => area && area !== 'general');
+      if (featureArea) {
+        context.feature_area = featureArea;
+      }
+
+      const actionType = entry.contexts
+        .map((ctx) => ctx.actionType)
+        .find((type) => type && type !== 'unknown');
+      if (actionType) {
+        context.action_type = actionType;
+      }
+
+      if (entry.contexts.some((ctx) => ctx.apiContext?.api_endpoint)) {
+        context.has_api_calls = true;
+      }
+
+      template[literal] = Object.keys(context).length > 0 ? { context } : {};
     }
 
-    // Interaction context notes
-    if (context.interaction_context.modifies_state) {
-      notes.push(
-        'This action modifies application state. Use clear, actionable language.',
-      );
-    }
-
-    if (context.interaction_context.triggers_navigation) {
-      notes.push(
-        'This action triggers navigation. Consider using navigation-appropriate language.',
-      );
-    }
-
-    if (context.interaction_context.has_validation) {
-      notes.push(
-        'This appears in a form with validation. Ensure message supports user guidance.',
-      );
-    }
-
-    // Conditional rendering notes
-    if (context.jsx_context.conditional_render) {
-      notes.push(
-        'This text may be conditionally shown/hidden. Ensure context independence.',
-      );
-    }
-
-    // Text format notes
-    if (context.text_characteristics.hasMarkup) {
-      notes.push('Contains HTML/JSX markup. Preserve all tags and structure.');
-    }
-
-    if (context.text_characteristics.isQuestion) {
-      notes.push(
-        'This is a question. Ensure question format is appropriate in your language.',
-      );
-    }
-
-    if (context.text_characteristics.isAllCaps) {
-      notes.push(
-        'Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language.',
-      );
-    }
-
-    return notes.length > 0 ? notes : undefined;
+    // Sorted on write. The map is built in source-discovery order, so without
+    // this any added or removed source file shuffles unrelated entries and the
+    // diff records reordering rather than what actually changed.
+    //
+    // One caveat: JS hoists integer-like keys to the front of an object, so the
+    // "12345678" string lands first whatever we do here. That is stable and
+    // deterministic, so diffs stay clean -- but a reader checking the output
+    // with a sort that has no such rule will see index 0 disagree.
+    return Object.fromEntries(
+      Object.entries(template).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)),
+    );
   }
 
   // Process a single TypeScript file with enhanced error handling
@@ -1381,27 +1186,26 @@ class EnhancedTranslationExtractor {
     console.log(`💾 Enhanced template saved to: ${path.basename(outputFile)}`);
 
     // Statistics
-    const userFacingCount = Object.values(template).filter(
-      (entry) => entry.context.is_user_facing,
+    const entries = Object.values(template);
+    const withVariables = entries.filter(
+      (entry) => entry.context?.variables,
     ).length;
-    const withVariables = Object.values(template).filter(
-      (entry) => entry.context.variables,
-    ).length;
+    const withContext = entries.filter((entry) => entry.context).length;
     const uiTypes = [
       ...new Set(
-        Object.values(template).map((entry) => entry.context.primary_ui_type),
+        entries.map((entry) => entry.context?.primary_ui_type).filter(Boolean),
       ),
     ];
+    const bytes = fs.statSync(outputFile).size;
 
     console.log('\n📊 Statistics:');
-    console.log(
-      `User-facing strings: ${userFacingCount}/${this.literals.size}`,
-    );
+    console.log(`Strings with context: ${withContext}/${this.literals.size}`);
     console.log(`Strings with variables: ${withVariables}`);
     console.log(`UI element types found: ${uiTypes.length}`);
     console.log(
       `Primary UI types: ${uiTypes.slice(0, 10).join(', ')}${uiTypes.length > 10 ? '...' : ''}`,
     );
+    console.log(`Template size: ${(bytes / 1024 / 1024).toFixed(2)} MB`);
   }
 }
 

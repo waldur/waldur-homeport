@@ -18,6 +18,100 @@ class SimpleLLMProcessor {
     this.contextualGuidance = this.getContextualGuidance();
   }
 
+  // template.json stores only what cannot be recomputed. Everything a string
+  // says about itself -- is it a question, does it shout, does it interpolate --
+  // is derived here instead of being persisted 12,000 times over.
+  // See waldur/waldur-homeport#229.
+  static describe(text) {
+    const trimmed = text.trim();
+    return {
+      isQuestion: trimmed.endsWith('?'),
+      isExclamation: trimmed.endsWith('!'),
+      isSentence: /[.!?]$/.test(trimmed) && trimmed.split(/\s+/).length > 3,
+      hasVariables: /\{\w+\}/.test(text),
+      hasMarkup: /<[^>]+>/.test(text),
+      isAllCaps: text === text.toUpperCase() && /[A-Z]/.test(text),
+    };
+  }
+
+  // Translator notes used to be baked into template.json -- 17,976 copies of
+  // 398 distinct strings, all a pure function of the context. They are built on
+  // demand here, the only place that ever read them.
+  static buildTranslatorNotes(text, context = {}) {
+    const notes = [];
+    const ui = context.primary_ui_type || '';
+    const tc = SimpleLLMProcessor.describe(text);
+
+    if (ui.includes('button')) {
+      notes.push(
+        'This text appears on a button. Keep it short and action-oriented.',
+      );
+    } else if (ui.includes('title')) {
+      notes.push(
+        'This is a title/heading. Use title case if appropriate in your language.',
+      );
+    } else if (ui.includes('error')) {
+      notes.push(
+        'This is an error message. Ensure tone is helpful and not alarming.',
+      );
+    } else if (ui.includes('success')) {
+      notes.push(
+        'This is a success message. Use positive, confirming language.',
+      );
+    }
+
+    if (context.feature_area === 'marketplace') {
+      notes.push(
+        'This appears in the marketplace context. Use business-appropriate language.',
+      );
+    }
+
+    if (context.action_type === 'delete') {
+      notes.push(
+        'This relates to delete/removal actions. Use clear, cautionary language.',
+      );
+    } else if (context.action_type === 'create') {
+      notes.push(
+        'This relates to creation actions. Use encouraging, positive language.',
+      );
+    }
+
+    const variables = context.variables || {};
+    if (Object.keys(variables).length > 0) {
+      const varTypes = [
+        ...new Set(
+          Object.values(variables)
+            .map((v) => v.type)
+            .filter(Boolean),
+        ),
+      ];
+      notes.push(
+        `Contains variables: ${Object.keys(variables).join(', ')}.${varTypes.length > 0 ? ` Variable types: ${varTypes.join(', ')}.` : ''}`,
+      );
+      if (varTypes.includes('number')) {
+        notes.push(
+          'Variable contains numbers. Consider plural handling in your language.',
+        );
+      }
+    }
+
+    if (tc.hasMarkup) {
+      notes.push('Contains HTML/JSX markup. Preserve all tags and structure.');
+    }
+    if (tc.isQuestion) {
+      notes.push(
+        'This is a question. Ensure question format is appropriate in your language.',
+      );
+    }
+    if (tc.isAllCaps) {
+      notes.push(
+        'Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language.',
+      );
+    }
+
+    return notes;
+  }
+
   loadData() {
     const rootDir = path.join(__dirname, '../../');
 
@@ -296,25 +390,23 @@ ${entries
     if (ctx.primary_ui_type) contextParts.push(`UI: ${ctx.primary_ui_type}`);
 
     // Text characteristics
-    if (ctx.text_characteristics) {
-      const tc = ctx.text_characteristics;
-      const charInfo = [];
-      if (tc.isQuestion) charInfo.push('question');
-      if (tc.isExclamation) charInfo.push('exclamation');
-      if (tc.isSentence) charInfo.push('sentence');
-      if (tc.hasVariables) charInfo.push('has-variables');
-      if (tc.isAllCaps) charInfo.push('all-caps');
-      if (charInfo.length > 0) contextParts.push(`Text: ${charInfo.join(',')}`);
-    }
+    const tc = SimpleLLMProcessor.describe(entry.english);
+    const charInfo = [];
+    if (tc.isQuestion) charInfo.push('question');
+    if (tc.isExclamation) charInfo.push('exclamation');
+    if (tc.isSentence) charInfo.push('sentence');
+    if (tc.hasVariables) charInfo.push('has-variables');
+    if (tc.isAllCaps) charInfo.push('all-caps');
+    if (charInfo.length > 0) contextParts.push(`Text: ${charInfo.join(',')}`);
 
     // Feature area
-    if (ctx.file_context?.feature_areas?.length > 0) {
-      contextParts.push(`Feature: ${ctx.file_context.feature_areas[0]}`);
+    if (ctx.feature_area) {
+      contextParts.push(`Feature: ${ctx.feature_area}`);
     }
 
     // Action context
-    if (ctx.action_types?.length > 0 && ctx.action_types[0] !== 'unknown') {
-      contextParts.push(`Action: ${ctx.action_types[0]}`);
+    if (ctx.action_type) {
+      contextParts.push(`Action: ${ctx.action_type}`);
     }
 
     // Variables info
@@ -327,7 +419,7 @@ ${entries
     }
 
     // API context
-    if (ctx.api_context?.has_api_calls) {
+    if (ctx.has_api_calls) {
       contextParts.push('API-related');
     }
 
@@ -399,29 +491,30 @@ ${issueType === 'missing' ? 'For missing translations, provide natural, contextu
       }
 
       // Text characteristics
-      if (ctx.text_characteristics?.isQuestion) {
+      const tc = SimpleLLMProcessor.describe(entry.english);
+      if (tc.isQuestion) {
         guidelines.add(
           '**Questions**: Ensure proper question format and punctuation',
         );
       }
-      if (ctx.text_characteristics?.hasVariables) {
+      if (tc.hasVariables) {
         guidelines.add(
           '**Variables**: Consider variable reordering, plural handling, and context',
         );
       }
-      if (ctx.text_characteristics?.isAllCaps) {
+      if (tc.isAllCaps) {
         guidelines.add(
           '**Emphasis**: Consider if ALL CAPS emphasis is appropriate in your language',
         );
       }
 
       // Feature-specific
-      if (ctx.file_context?.feature_areas?.includes('marketplace')) {
+      if (ctx.feature_area === 'marketplace') {
         guidelines.add(
           '**Marketplace**: Use commercial/business-appropriate terminology',
         );
       }
-      if (ctx.api_context?.has_api_calls) {
+      if (ctx.has_api_calls) {
         guidelines.add(
           '**API-related**: Technical terms may need careful localization vs keeping English',
         );
@@ -437,12 +530,10 @@ ${issueType === 'missing' ? 'For missing translations, provide natural, contextu
 
     entries.forEach((entry) => {
       const templateData = this.template[entry.english];
-      if (
-        templateData?.translator_notes &&
-        Array.isArray(templateData.translator_notes)
-      ) {
-        templateData.translator_notes.forEach((note) => notes.add(`- ${note}`));
-      }
+      SimpleLLMProcessor.buildTranslatorNotes(
+        entry.english,
+        templateData?.context,
+      ).forEach((note) => notes.add(`- ${note}`));
     });
 
     return notes.size > 0

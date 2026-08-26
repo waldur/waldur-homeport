@@ -148,6 +148,20 @@ Run style and dependency checks:
     - yarn deps:unused
     - yarn deps:circular
 
+# template.json is generated from src/ but nothing regenerated it, so it drifted
+# for weeks at a time and i18n:validate started reporting a negative unused
+# count. Extraction is deterministic and takes ~3s, so the check is simply
+# "re-run it and expect no diff". See waldur/waldur-homeport#229.
+Check translation template is current:
+  <<: *linter-rules
+  script:
+    - yarn i18n:extract
+    - |
+      if ! git diff --exit-code --stat template.json; then
+        echo "template.json is out of date. Run 'yarn i18n:extract' and commit the result."
+        exit 1
+      fi
+
 Run code duplication detection:
   stage: test
   interruptible: true
@@ -596,7 +610,6 @@ Trigger integration tests:
         - vite-plugin-react-displayname.ts
         - tsconfig.json
         - typings.d.ts
-        - template.json
         - generate-filters.cjs
         - generate-filters-config.yaml
         - .gitlab-ci.yml
