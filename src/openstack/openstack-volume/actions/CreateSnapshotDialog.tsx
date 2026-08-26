@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { openstackVolumesSnapshot } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import {
   createLatinNameField,
@@ -36,6 +37,9 @@ export const CreateSnapshotDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create snapshot for OpenStack volume')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Volume name')} name={resource.name} />
+      }
       formFields={[
         createLatinNameField(),
         createDescriptionField(),

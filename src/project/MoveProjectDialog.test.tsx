@@ -30,7 +30,8 @@ describe('MoveProjectDialog', () => {
 
   it('renders correctly', () => {
     renderDialog();
-    expect(screen.getByText(/Move project Test Project/)).toBeDefined();
+    expect(screen.getByText('Move project')).toBeDefined();
+    expect(screen.getByText(/Test Project/)).toBeDefined();
     expect(screen.getByText('Move to organization')).toBeDefined();
     expect(screen.getByLabelText('Preserve project permissions')).toBeDefined();
   });

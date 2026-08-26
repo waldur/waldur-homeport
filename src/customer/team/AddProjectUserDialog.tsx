@@ -6,6 +6,7 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Role } from '@/permissions/types';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
@@ -80,6 +81,12 @@ const AddProjectUserDialogFormBody: FC<{
     <form onSubmit={handleSubmit}>
       <ModalDialog
         title={translate('Add project role')}
+        subtitle={
+          <ScopeSubtitle
+            label={translate('Member')}
+            name={resolve.customer.full_name || resolve.customer.username}
+          />
+        }
         footer={
           <>
             <CloseDialogButton />

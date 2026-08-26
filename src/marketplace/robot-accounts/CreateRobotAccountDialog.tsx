@@ -4,6 +4,7 @@ import { marketplaceRobotAccountsCreate, usersList } from 'waldur-js-client';
 import { LATIN_NAME_PATTERN } from '@/core/utils';
 import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
@@ -100,9 +101,13 @@ export const CreateRobotAccountDialog = ({
   const fields = useRobotAccountFields(resource);
   return (
     <ResourceActionDialog
-      dialogTitle={translate('Create robot account for {resource_name}', {
-        resource_name: resource.name,
-      })}
+      dialogTitle={translate('Create robot account')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Resource name')}
+          name={resource.name}
+        />
+      }
       formFields={fields}
       initialValues={{
         type: 'cicd',

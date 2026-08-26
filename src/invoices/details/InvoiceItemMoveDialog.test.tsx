@@ -63,7 +63,7 @@ describe('InvoiceItemMoveDialog', () => {
     renderDialog();
 
     expect(
-      screen.getByText('Move item Test Resource from invoice 2026-5'),
+      screen.getByText('Move item from invoice 2026-5'),
     ).toBeInTheDocument();
     expect(screen.getByText('Target invoice')).toBeInTheDocument();
 

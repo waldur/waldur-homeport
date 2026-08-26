@@ -10,6 +10,7 @@ import {
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionButton } from '@/table/ActionButton';
@@ -89,6 +90,12 @@ const RerouteDialog: FC<{
   return (
     <ResourceActionDialog
       dialogTitle={translate('Reroute to another provider')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Ticket')}
+          name={issue.key || issue.summary}
+        />
+      }
       dialogSubmitLabel={translate('Reroute')}
       formFields={[
         {

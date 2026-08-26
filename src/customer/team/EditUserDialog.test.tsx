@@ -68,8 +68,8 @@ describe('EditUserDialog (Customer)', () => {
     expect(screen.getByText('Edit organization member')).toBeInTheDocument();
     expect(screen.getByText('User')).toBeInTheDocument();
     expect(
-      screen.getByText((content) => content.includes('Jane Smith')),
-    ).toBeInTheDocument();
+      screen.getAllByText((content) => content.includes('Jane Smith')).length,
+    ).toBeGreaterThan(0);
     expect(
       screen.getByText((content) => content.includes('jane@example.com')),
     ).toBeInTheDocument();
@@ -167,8 +167,8 @@ describe('EditUserDialog (Customer)', () => {
 
     expect(screen.getByText('Edit organization member')).toBeInTheDocument();
     expect(
-      screen.getByText((content) => content.includes('Jane Smith')),
-    ).toBeInTheDocument();
+      screen.getAllByText((content) => content.includes('Jane Smith')).length,
+    ).toBeGreaterThan(0);
   });
 
   it('handles API errors gracefully', () => {
@@ -191,8 +191,8 @@ describe('EditUserDialog (Customer)', () => {
     renderDialog({ ...mockResolve, customer: customerWithoutEmail });
 
     expect(
-      screen.getByText((content) => content.includes('Jane Smith')),
-    ).toBeInTheDocument();
+      screen.getAllByText((content) => content.includes('Jane Smith')).length,
+    ).toBeGreaterThan(0);
     expect(screen.getByText('Username')).toBeInTheDocument();
     expect(screen.queryByText('Email')).not.toBeInTheDocument();
   });

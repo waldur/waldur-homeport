@@ -14,6 +14,7 @@ import { AsyncSelectGroup, FormFooter, NumberGroup, StringGroup } from '@/form';
 import { NameGroup } from '@/form/NameGroup';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionDialogProps } from '@/resource/actions/types';
 
@@ -74,7 +75,16 @@ export const CreateMemberDialog: FC<ActionDialogProps<OpenStackPool>> = ({
       }}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <ModalDialog title={translate('Add member')} footer={<FormFooter />}>
+          <ModalDialog
+            title={translate('Add member')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Pool name')}
+                name={resource.name}
+              />
+            }
+            footer={<FormFooter />}
+          >
             <NameGroup required={false} />
             <StringGroup
               name="address"

@@ -6,6 +6,7 @@ import { AsyncSelectGroup, FormFooter, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const CreateOfferingUserDialog = ({
@@ -37,6 +38,12 @@ export const CreateOfferingUserDialog = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Create offering user')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Offering name')}
+                name={offering.name}
+              />
+            }
             footer={<FormFooter />}
           >
             <AsyncSelectGroup

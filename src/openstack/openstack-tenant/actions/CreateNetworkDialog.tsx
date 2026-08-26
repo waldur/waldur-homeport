@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { openstackTenantsCreateNetwork } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import {
   createLatinNameField,
@@ -32,6 +33,9 @@ export const CreateNetworkDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create network for OpenStack tenant')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Tenant name')} name={resource.name} />
+      }
       formFields={[createLatinNameField(), createDescriptionField()]}
       submitForm={mutation.mutateAsync}
     />

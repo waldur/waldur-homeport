@@ -14,6 +14,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useNotify } from '@/store/notify';
 
 import { Call } from '../../types';
@@ -199,6 +200,12 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Generate reviewer matches')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Call name')}
+                name={resolve.call.name}
+              />
+            }
             footer={
               <>
                 <SubmitButton

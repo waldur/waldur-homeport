@@ -10,6 +10,7 @@ import { AsyncSelectGroup, FormFooter } from '@/form';
 import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionDialogProps } from '@/resource/actions/types';
 
@@ -40,6 +41,12 @@ export const AttachDialog: FC<ActionDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Attach OpenStack Volume to Instance')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Volume name')}
+                name={resource.name}
+              />
+            }
             footer={<FormFooter />}
           >
             <AsyncSelectGroup

@@ -43,7 +43,11 @@ describe('MoveOfferingDialog', () => {
 
   it('renders correctly', () => {
     renderComponent();
-    expect(screen.getByText('Move offering Test Offering')).toBeInTheDocument();
+    expect(screen.getByText('Move offering')).toBeInTheDocument();
+    expect(
+      screen.getAllByText((content) => content.includes('Test Offering'))
+        .length,
+    ).toBeGreaterThan(0);
     expect(screen.getByText('Move to service provider')).toBeInTheDocument();
     expect(
       screen.getByLabelText('Preserve offering permissions'),

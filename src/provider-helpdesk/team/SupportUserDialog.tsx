@@ -3,6 +3,7 @@ import { ProviderSupportUser } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 import { useCreateSupportUser, useUpdateSupportUser } from '../api';
@@ -95,6 +96,14 @@ export const SupportUserDialog: FC<OwnProps> = ({
     <ResourceActionDialog
       dialogTitle={
         isEdit ? translate('Edit team member') : translate('Add team member')
+      }
+      dialogSubtitle={
+        isEdit ? (
+          <ScopeSubtitle
+            label={translate('Team member')}
+            name={user!.user_full_name}
+          />
+        ) : undefined
       }
       formFields={fields}
       initialValues={initialValues}

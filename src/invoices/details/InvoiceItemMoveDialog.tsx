@@ -7,6 +7,7 @@ import { AsyncSelectGroup, FormFooter } from '@/form';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 import { useCustomer } from '@/workspace/hooks';
@@ -77,10 +78,15 @@ export const InvoiceItemMoveDialog = ({
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Move item {name} from invoice {origin}', {
-              name: resource.name,
+            title={translate('Move item from invoice {origin}', {
               origin: formatDate(invoice),
             })}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Invoice item')}
+                name={resource.name}
+              />
+            }
             footer={<FormFooter />}
           >
             <AsyncSelectGroup

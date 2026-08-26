@@ -8,6 +8,7 @@ import { ImageGroup, StringGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const CreateImageDialog = (props: {
@@ -37,6 +38,12 @@ export const CreateImageDialog = (props: {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Add offering image')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Offering name')}
+                name={props.resolve.offering.name}
+              />
+            }
             iconNode={<PlusCircleIcon weight="bold" />}
             iconColor="success"
             footer={

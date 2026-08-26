@@ -16,6 +16,7 @@ import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/useOrderStar
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
@@ -151,6 +152,12 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
                   : component
                     ? translate('Edit {name}', { name: component.name })
                     : translate('Edit plan details')
+            }
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Resource name')}
+                name={resolve.order.resource_name}
+              />
             }
             footer={
               <>

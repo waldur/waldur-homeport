@@ -10,6 +10,7 @@ import {
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { createNameField } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
@@ -52,6 +53,12 @@ const EditHealthMonitorDialog: FC<
   return (
     <ResourceActionDialog
       dialogTitle={translate('Edit health monitor')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Health monitor name')}
+          name={resource.name}
+        />
+      }
       submitForm={submitForm}
       formFields={[
         { ...createNameField(), required: false },

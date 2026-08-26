@@ -10,6 +10,7 @@ import { SubmitButton, AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { offeringGroupAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface SetOfferingGroupDialogProps {
@@ -78,6 +79,12 @@ export const SetOfferingGroupDialog = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Set offering group')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Offering name')}
+                name={resolve.offering.name}
+              />
+            }
             footer={
               <SubmitButton submitting={submitting} label={translate('Save')} />
             }

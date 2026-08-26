@@ -5,6 +5,7 @@ import { required } from '@/core/validators';
 import { FormFooter, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const InvoiceItemCompensationDialog = ({
@@ -36,9 +37,13 @@ export const InvoiceItemCompensationDialog = ({
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Create compensation for invoice item {name}', {
-              name: resource.name,
-            })}
+            title={translate('Create compensation for invoice item')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Invoice item')}
+                name={resource.name}
+              />
+            }
             footer={<FormFooter />}
           >
             <StringGroup

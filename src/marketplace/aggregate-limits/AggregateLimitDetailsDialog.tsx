@@ -11,6 +11,7 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useNotify } from '@/store/notify';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -132,9 +133,15 @@ export const AggregateLimitDetailsDialog = ({
 
   return (
     <ModalDialog
-      title={translate('Usage and limits details for {object}', {
-        object: project?.name || customer.name,
-      })}
+      title={translate('Usage and limits details')}
+      subtitle={
+        <ScopeSubtitle
+          label={
+            project ? translate('Project name') : translate('Organization')
+          }
+          name={project?.name || customer.name}
+        />
+      }
     >
       <div className="row d-flex justify-content-end">
         <div className="col-md-4">

@@ -68,10 +68,10 @@ export const ProjectDashboardCostLimits = ({
   const viewBreakdown = useCallback(
     () =>
       openDialog(CostBreakdownDialog, {
-        resolve: { items: currentMonthItems },
+        resolve: { items: currentMonthItems, project },
         size: 'lg',
       }),
-    [currentMonthItems],
+    [currentMonthItems, project],
   );
 
   if (isLoading) {

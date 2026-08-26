@@ -5,6 +5,7 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -32,6 +33,12 @@ export const AttachFloatingIpDialog: FC<
   return (
     <ResourceActionDialog
       dialogTitle={translate('Attach floating IP')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Load balancer name')}
+          name={resource.name}
+        />
+      }
       submitForm={async (values) => {
         try {
           await attachMutation.mutateAsync(values);

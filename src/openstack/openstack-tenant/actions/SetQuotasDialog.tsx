@@ -13,6 +13,7 @@ import { translate } from '@/i18n';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { QUOTA_CATEGORIES } from '@/quotas/constants';
 import { Quota } from '@/quotas/types';
@@ -430,6 +431,12 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
           <DirtyStateReporter />
           <ModalDialog
             title={translate('Change quotas')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Tenant name')}
+                name={resource.name}
+              />
+            }
             footer={
               <>
                 {/* Wire Cancel to the guarded close so the dirty-form prompt fires */}

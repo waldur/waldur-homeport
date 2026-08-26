@@ -9,6 +9,7 @@ import {
 import { getAllPages } from '@/core/api';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -82,6 +83,9 @@ export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Update port IP')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Port name')} name={resource.name} />
+      }
       loading={isLoading}
       error={error}
       refetch={refetchSubnets}

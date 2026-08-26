@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { openstackPoolsCreate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -32,6 +33,12 @@ export const CreatePoolDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create pool')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Load balancer name')}
+          name={resource.name}
+        />
+      }
       submitForm={async (values) => {
         try {
           await createMutation.mutateAsync(values);

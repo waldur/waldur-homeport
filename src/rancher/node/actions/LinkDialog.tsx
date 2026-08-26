@@ -8,6 +8,7 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -66,6 +67,9 @@ export const LinkDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Link OpenStack Instance')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Node name')} name={resource.name} />
+      }
       formFields={fields}
       submitForm={mutation.mutateAsync}
     />

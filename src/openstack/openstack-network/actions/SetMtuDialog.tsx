@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { openstackNetworksSetMtu } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -24,6 +25,9 @@ export const SetMtuDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Set MTU')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Network name')} name={resource.name} />
+      }
       formFields={[
         {
           name: 'mtu',

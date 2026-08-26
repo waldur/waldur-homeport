@@ -13,6 +13,7 @@ import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameFiel
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -42,6 +43,12 @@ export const RevokeTosDialog = ({
   return (
     <ModalDialog
       title={translate('Revoke ToS Consent')}
+      subtitle={
+        <ScopeSubtitle
+          label={translate('Offering name')}
+          name={offering?.name}
+        />
+      }
       iconNode={<XIcon weight="bold" />}
       iconColor="danger"
       footer={

@@ -8,6 +8,7 @@ import {
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionButton } from '@/table/ActionButton';
@@ -45,6 +46,12 @@ const RouteToProviderDialog: FC<{
   return (
     <ResourceActionDialog
       dialogTitle={translate('Route to provider')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Ticket')}
+          name={issue.key || issue.summary}
+        />
+      }
       formFields={[
         {
           name: 'helpdesk',

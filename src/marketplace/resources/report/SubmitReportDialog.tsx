@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { marketplaceProviderResourcesSubmitReport } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -27,6 +28,12 @@ export const SubmitReportDialog: FC<ActionDialogProps> = ({
     <ResourceActionDialog
       submitForm={mutation.mutateAsync}
       dialogTitle={translate('Submit report')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Resource name')}
+          name={resource.name}
+        />
+      }
       formFields={[
         {
           name: 'report',
