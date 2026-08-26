@@ -1,4 +1,6 @@
-import { FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
+import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
@@ -9,6 +11,7 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { CommentSection } from './CommentSection';
 import { DocumentationFiles } from './DocumentationFiles';
+import { getFieldStates, shouldRenderField } from './proposalFields';
 
 interface ProjectDetailsSummaryProps {
   proposal: Proposal;
@@ -21,6 +24,24 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
   reviews,
   onAddCommentClick,
 }) => {
+  // Which fields this call asked for. Same fetch as ProjectDetailsStep, so the
+  // two share a React Query cache entry when both are on screen.
+  const { data: call } = useQuery({
+    queryKey: ['Call', proposal.call_uuid],
+    queryFn: () =>
+      proposalPublicCallsRetrieve({
+        path: { uuid: proposal.call_uuid },
+        query: { field: ['proposal_field_config'] },
+      }).then((response) => response.data),
+    enabled: !!proposal.call_uuid,
+    refetchOnWindowFocus: false,
+  });
+
+  const fieldStates = useMemo(
+    () => getFieldStates(call?.proposal_field_config),
+    [call],
+  );
+
   return (
     <AccordionCard
       id="step-project"
@@ -40,48 +61,62 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         reviews={reviews}
       />
 
-      <CommentSection
-        label={translate('Summary')}
-        valueField="project_summary"
-        commentField="comment_project_summary"
-        tooltip={translate('Brief description of the project.')}
-        onAddCommentClick={onAddCommentClick}
-        reviews={reviews}
-        proposal={proposal}
-      />
+      {shouldRenderField(
+        fieldStates,
+        'project_summary',
+        proposal.project_summary,
+      ) && (
+        <CommentSection
+          label={translate('Summary')}
+          valueField="project_summary"
+          commentField="comment_project_summary"
+          tooltip={translate('Brief description of the project.')}
+          onAddCommentClick={onAddCommentClick}
+          reviews={reviews}
+          proposal={proposal}
+        />
+      )}
 
-      <CommentSection
-        label={translate('Description')}
-        valueField="description"
-        commentField="comment_project_description"
-        tooltip={translate(
-          'Explanation of the scientific case of the project for which the resources are intended to be used.',
-        )}
-        onAddCommentClick={onAddCommentClick}
-        reviews={reviews}
-        proposal={proposal}
-      >
-        {(props) => (
-          <BaseTextField solid value={props.value} readOnly disabled />
-        )}
-      </CommentSection>
+      {shouldRenderField(fieldStates, 'description', proposal.description) && (
+        <CommentSection
+          label={translate('Description')}
+          valueField="description"
+          commentField="comment_project_description"
+          tooltip={translate(
+            'Explanation of the scientific case of the project for which the resources are intended to be used.',
+          )}
+          onAddCommentClick={onAddCommentClick}
+          reviews={reviews}
+          proposal={proposal}
+        >
+          {(props) => (
+            <BaseTextField solid value={props.value} readOnly disabled />
+          )}
+        </CommentSection>
+      )}
 
-      <ReadOnlyFormControl
-        label={translate('Science domain')}
-        value={renderFieldOrDash(
-          proposal.science_sub_domain_name
-            ? [proposal.science_domain_name, proposal.science_sub_domain_name]
-                .filter(Boolean)
-                .join(' > ')
-            : null,
-        )}
-        tooltip={translate('Main research field of the project.')}
-        actions={
-          <div style={{ width: 42.5 }}>
-            {/* Dummy spacing to align with other fields. */}
-          </div>
-        }
-      />
+      {shouldRenderField(
+        fieldStates,
+        'science_sub_domain',
+        proposal.science_sub_domain,
+      ) && (
+        <ReadOnlyFormControl
+          label={translate('Science domain')}
+          value={renderFieldOrDash(
+            proposal.science_sub_domain_name
+              ? [proposal.science_domain_name, proposal.science_sub_domain_name]
+                  .filter(Boolean)
+                  .join(' > ')
+              : null,
+          )}
+          tooltip={translate('Main research field of the project.')}
+          actions={
+            <div style={{ width: 42.5 }}>
+              {/* Dummy spacing to align with other fields. */}
+            </div>
+          }
+        />
+      )}
 
       <CommentSection
         label={translate('Project duration in days')}

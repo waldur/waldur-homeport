@@ -6,6 +6,7 @@ import {
   getTrackedFields,
   isFieldRequired,
   isFieldVisible,
+  shouldRenderField,
 } from './proposalFields';
 
 describe('proposal field states', () => {
@@ -76,5 +77,41 @@ describe('proposal field states', () => {
       'science_sub_domain',
       'duration_in_days',
     ]);
+  });
+});
+
+describe('shouldRenderField', () => {
+  it('renders a field the call asks for, even when empty', () => {
+    const states = getFieldStates({ field_description: 'optional' });
+
+    expect(shouldRenderField(states, 'description', '')).toBe(true);
+  });
+
+  it('skips a hidden field the proposal never filled in', () => {
+    const states = getFieldStates({ field_description: 'hidden' });
+
+    expect(shouldRenderField(states, 'description', '')).toBe(false);
+    expect(shouldRenderField(states, 'description', null)).toBe(false);
+  });
+
+  it('keeps a hidden field that an older proposal already answered', () => {
+    // The call dropped the question after this proposal was written; reviewers
+    // still need to see what was submitted.
+    const states = getFieldStates({ field_description: 'hidden' });
+
+    expect(shouldRenderField(states, 'description', 'Legacy answer')).toBe(
+      true,
+    );
+  });
+
+  it('treats an empty list as no value', () => {
+    const states = getFieldStates({ field_supporting_documentation: 'hidden' });
+
+    expect(shouldRenderField(states, 'supporting_documentation', [])).toBe(
+      false,
+    );
+    expect(
+      shouldRenderField(states, 'supporting_documentation', [{ uuid: 'x' }]),
+    ).toBe(true);
   });
 });

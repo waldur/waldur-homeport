@@ -61,3 +61,23 @@ export const getRequiredFields = (
   ...CONFIGURABLE_FIELDS.filter((field) => isFieldRequired(states, field)),
   'duration_in_days',
 ];
+
+/**
+ * Whether a read-only view should render a configurable field.
+ *
+ * A field the call does not ask for is skipped — unless the proposal already
+ * carries a value for it, which happens when the call dropped the field after
+ * that proposal was written. Reviewers and managers keep seeing what an
+ * applicant actually submitted; nothing new is offered for a question the call
+ * no longer asks.
+ */
+export const shouldRenderField = (
+  states: Record<ProposalFieldName, ProposalFieldState>,
+  field: ProposalFieldName,
+  value: unknown,
+): boolean => {
+  if (isFieldVisible(states, field)) {
+    return true;
+  }
+  return Array.isArray(value) ? value.length > 0 : Boolean(value);
+};
