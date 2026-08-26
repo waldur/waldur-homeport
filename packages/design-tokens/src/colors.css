@@ -70,6 +70,74 @@
   --color-success-800: #05603a;
   --color-success-900: #054f31;
   --color-success-950: #053321;
+
+  /* Added for Badge's expanded variant set (see the Badge migration
+     brainstorm) — read directly from src/metronic/sass/_colors.scss's own
+     info/purple/blue/indigo/moss/pink color declarations, not
+     interpolated: every step below is a real value from that file, not a
+     guess. Steps Metronic itself never defines (25/100/800, and 400 for
+     everything but info) are omitted rather than fabricated — this ramp
+     is intentionally sparser than gray/error/warning/success above.
+     info and purple are byte-identical at every step — confirmed against
+     source, not a copy-paste mistake: this app's "info" hue is the same
+     violet as "purple", not blue. Like error/warning/success, these are
+     theme-invariant single ramps (dark mode reuses the same ramp at a
+     mirrored step) — no separate dark block needed. */
+  --color-info-50: #f4f3ff;
+  --color-info-200: #d9d6fe;
+  --color-info-300: #bdb4fe;
+  --color-info-400: #9b8afb;
+  --color-info-500: #7a5af8;
+  --color-info-600: #6938ef;
+  --color-info-700: #5925dc;
+  --color-info-900: #3e1c96;
+
+  --color-purple-50: #f4f3ff;
+  --color-purple-200: #d9d6fe;
+  --color-purple-300: #bdb4fe;
+  --color-purple-500: #7a5af8;
+  --color-purple-600: #6938ef;
+  --color-purple-700: #5925dc;
+  --color-purple-900: #3e1c96;
+  --color-purple-950: #27115f;
+
+  --color-blue-50: #eff8ff;
+  --color-blue-200: #b2ddff;
+  --color-blue-300: #84caff;
+  --color-blue-400: #53b1fd;
+  --color-blue-500: #2e90fa;
+  --color-blue-600: #1570ef;
+  --color-blue-700: #175cd3;
+  --color-blue-900: #194185;
+  --color-blue-950: #102a56;
+
+  --color-indigo-50: #eef4ff;
+  --color-indigo-200: #c7d7fe;
+  --color-indigo-300: #a4bcfd;
+  --color-indigo-400: #8098f9;
+  --color-indigo-500: #6172f3;
+  --color-indigo-600: #444ce7;
+  --color-indigo-700: #3538cd;
+  --color-indigo-900: #2d3282;
+  --color-indigo-950: #1f235b;
+
+  --color-moss-50: #f5fbee;
+  --color-moss-200: #ceeab0;
+  --color-moss-300: #acdc79;
+  --color-moss-500: #669f2a;
+  --color-moss-600: #4f7a21;
+  --color-moss-700: #3f621a;
+  --color-moss-900: #2b4212;
+  --color-moss-950: #1a280b;
+
+  --color-pink-50: #fdf2fa;
+  --color-pink-200: #fcceee;
+  --color-pink-300: #faa7e0;
+  --color-pink-500: #ee46bc;
+  --color-pink-600: #dd2590;
+  --color-pink-700: #c11574;
+  --color-pink-900: #851651;
+  --color-pink-950: #4e0d30;
 }
 
 :root[data-theme='dark'] {

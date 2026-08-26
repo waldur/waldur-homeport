@@ -200,6 +200,15 @@ export function createParityHarness(
         '*, *::before, *::after { transition: none !important; animation: none !important; }',
     });
 
+    // Without this, a webfont (Inter) can finish loading in the gap between
+    // the old and new locator's concurrent screenshot() calls in
+    // expectPixelParity's Promise.all — one capture lands in the fallback
+    // font, the other in Inter, and the differing glyph widths blow up the
+    // pixel-diff ratio on small text-heavy elements (first caught by
+    // badge-parity.spec.ts: every case failing at ~10-18% despite every
+    // computed style matching exactly).
+    await page.evaluate(() => document.fonts.ready);
+
     await page.waitForTimeout(100);
   }
 
@@ -288,12 +297,46 @@ export function createParityHarness(
     newLocator: Locator,
     name: string,
   ) {
-    const [oldBuf, newBuf, oldBox, newBox] = await Promise.all([
-      oldLocator.screenshot(),
-      newLocator.screenshot(),
+    // page.screenshot({clip}) below is viewport-relative and, unlike
+    // locator.screenshot(), never auto-scrolls — every pair below the
+    // fold failed with "Clipped area is... outside the resulting image"
+    // until this was added. Old and new sit in the same row, so scrolling
+    // one into view brings both into the viewport.
+    await oldLocator.scrollIntoViewIfNeeded();
+
+    const [oldBox, newBox] = await Promise.all([
       requireBox(oldLocator, name),
       requireBox(newLocator, name),
     ]);
+
+    // locator.screenshot() clips using each element's own raw (unrounded)
+    // page position, so two elements with equal CSS width but different
+    // fractional x offsets (e.g. one sits at x=52, the other at
+    // x=115.9375, ordinary flex-row layout) come back as PNGs with
+    // different integer widths, and — worse — the fractional offset is
+    // baked into where the element's true edge falls *within* the cropped
+    // frame. padTo() below only pads the size gap; it can't undo that
+    // sub-pixel misalignment, which reads as a false diff around the
+    // element's entire perimeter. First caught by badge-parity.spec.ts —
+    // Badge is small and text-heavy enough (54x24px) that this dwarfed
+    // every real signal (every case failed at 8-18% even with byte-
+    // identical computed styles). Rounding both boxes' origin the same
+    // way and sharing one explicit clip size keeps the two crops aligned
+    // to the same pixel grid.
+    const width = Math.round((oldBox.width + newBox.width) / 2);
+    const height = Math.round((oldBox.height + newBox.height) / 2);
+    const page = oldLocator.page();
+    // Sequential, not Promise.all: both locators share this same page, so
+    // two concurrent page.screenshot() calls would be two overlapping
+    // Page.captureScreenshot CDP commands against one target — the page
+    // itself is static in between, so there's no correctness reason to
+    // race them, only risk.
+    const oldBuf = await page.screenshot({
+      clip: { x: Math.round(oldBox.x), y: Math.round(oldBox.y), width, height },
+    });
+    const newBuf = await page.screenshot({
+      clip: { x: Math.round(newBox.x), y: Math.round(newBox.y), width, height },
+    });
     expectBufferParity(oldBuf, newBuf, oldBox, newBox, name);
   }
 

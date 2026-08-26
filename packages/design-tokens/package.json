@@ -9,7 +9,8 @@
     ".": "./src/index.ts",
     "./colors.css": "./src/colors.css",
     "./buttonColors.css": "./src/buttonColors.css",
-    "./surfaceColors.css": "./src/surfaceColors.css"
+    "./surfaceColors.css": "./src/surfaceColors.css",
+    "./badgeColors.css": "./src/badgeColors.css"
   },
   "license": "MIT"
 }
