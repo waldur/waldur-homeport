@@ -2,21 +2,19 @@ import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
 import { Link } from '@/core/Link';
-import { isFeatureVisible } from '@/features/connect';
 import { translate } from '@/i18n';
 import { useBreadcrumbs } from '@/navigation/context';
 import { IBreadcrumbItem } from '@/navigation/types';
-import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 
 import {
   getCategoryConfig,
+  getVisibleReports,
   ReportCategory,
   ReportDefinition,
 } from './constants';
 
 // Stable empty array to avoid infinite re-renders
 const EMPTY_ITEMS: IBreadcrumbItem[] = [];
-const EMPTY_REPORTS: ReportDefinition[] = [];
 
 const categoryConfig = getCategoryConfig();
 
@@ -89,16 +87,9 @@ export const useReportBreadcrumbs = ({
   );
   const reportTitle = currentReportDef?.title || currentReport;
 
-  // Filter reports by feature visibility and profile attribute availability
-  const visibleReports = useMemo(
-    () =>
-      config?.reports?.filter(
-        (report) =>
-          (!report.feature || isFeatureVisible(report.feature)) &&
-          (!report.attribute || isProfileAttributeEnabled(report.attribute)),
-      ) || EMPTY_REPORTS,
-    [config?.reports],
-  );
+  // Filtered exactly as the category page and the tab list filter it, so the
+  // dropdown never offers a report those two leave out.
+  const visibleReports = useMemo(() => getVisibleReports(config), [config]);
 
   // Only show dropdown if there are multiple visible reports and no additional items
   const hasMultipleReports = visibleReports.length > 1;

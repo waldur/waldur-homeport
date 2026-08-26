@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
 import { Link } from '@/core/Link';
+import { isStateVisible } from '@/core/stateVisibility';
 import { Tip } from '@/core/Tooltip';
 
 interface MenuItemProps {
@@ -22,6 +23,12 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
   const isActive = props.activeState
     ? useIsActive(props.activeState)
     : useIsActive(props.state, props.params);
+
+  // A menu entry pointing at a feature this deployment has disabled is dropped
+  // entirely rather than left to fail on click.
+  if (props.state && !isStateVisible(props.state)) {
+    return null;
+  }
 
   const content = (
     <>

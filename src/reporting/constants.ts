@@ -1,10 +1,14 @@
+import { isFeatureVisible } from '@/features/connect';
 import {
   FeaturesEnum,
   MarketplaceFeatures,
   SupportFeatures,
 } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { ProfileAttribute } from '@/user/support/profileAttributes';
+import {
+  isProfileAttributeEnabled,
+  ProfileAttribute,
+} from '@/user/support/profileAttributes';
 import {
   hasAnyOrganizationAccess,
   isServiceProviderManager,
@@ -36,7 +40,7 @@ export interface ReportDefinition {
   isHidden?: boolean;
 }
 
-interface CategoryConfig {
+export interface CategoryConfig {
   title: string;
   reports: ReportDefinition[];
   feature?: FeaturesEnum;
@@ -407,4 +411,24 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
   });
 
   return config;
+};
+
+/**
+ * Reports of a category that this deployment actually shows. Shared by the
+ * category page and by the category tabs, so a tab can never lead to a page
+ * that renders nothing.
+ */
+export const getVisibleReports = (
+  category: CategoryConfig,
+): ReportDefinition[] => {
+  const showExperimental = isFeatureVisible(
+    MarketplaceFeatures.show_experimental_ui_components,
+  );
+  return (category?.reports || []).filter(
+    (report) =>
+      (!report.feature || isFeatureVisible(report.feature)) &&
+      (!report.attribute || isProfileAttributeEnabled(report.attribute)) &&
+      (!report.isExperimental || showExperimental) &&
+      !report.isHidden,
+  );
 };
