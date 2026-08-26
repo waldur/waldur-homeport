@@ -127,6 +127,12 @@ export interface PacingSnapshot {
   monthlyBudget: number | null;
   /** Gross cost charged this month (positive invoice items). */
   incurredCost: number;
+  /** The part of this month's cost the credit is eligible to be drawn against:
+   *  lines from offerings the organization credit covers, net of paired volume
+   *  discounts. Falls back to incurredCost when the backend reports nothing.
+   *  This — not incurredCost — is what pacing against expected consumption
+   *  compares like with like. */
+  creditableCost: number;
   /** Absolute value of compensation items (negative invoice items credited
    *  against the customer/project credit). */
   compensationAmount: number;

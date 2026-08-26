@@ -58,7 +58,7 @@ export const PacingIndicator: FC<Props> = ({
   isLimitedByOrganizationCredit,
   isCreditExpired,
 }) => {
-  const { incurredCost, periodFraction, monthlyBudget } = pacing;
+  const { creditableCost, periodFraction, monthlyBudget } = pacing;
   const c = getWatchColors();
 
   // Prefer the credit's monthly expected consumption as the 100% reference;
@@ -82,11 +82,14 @@ export const PacingIndicator: FC<Props> = ({
   const minimalFraction = minimal > 0 ? minimal / reference : null;
   const gracePct = creditTerms?.graceCoefficient ?? 0;
 
-  const usageFraction = incurredCost / reference;
+  // Against the credit's expected consumption, so the numerator has to be
+  // credit-scoped too — the whole project invoice would count cost no credit
+  // covers.
+  const usageFraction = creditableCost / reference;
   const isOver = usageFraction > 1;
   const overFraction = Math.max(0, usageFraction - 1);
   // Linear extrapolation of month-end consumption at the current daily rate.
-  const projected = periodFraction > 0 ? incurredCost / periodFraction : 0;
+  const projected = periodFraction > 0 ? creditableCost / periodFraction : 0;
   const projectedFraction = projected / reference;
 
   // Pace vs where a linear ramp says we should be today.
@@ -169,7 +172,7 @@ export const PacingIndicator: FC<Props> = ({
         <Col md={4}>
           <StatsCard
             label={translate('Drawn so far')}
-            value={defaultCurrency(incurredCost)}
+            value={defaultCurrency(creditableCost)}
             footer={shareOfExpected(usageFraction)}
           />
         </Col>

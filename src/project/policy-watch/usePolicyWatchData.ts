@@ -21,6 +21,7 @@ import { Project } from '@/workspace/types';
 
 import { buildCreditBreakdown } from './creditBreakdown';
 import { buildCreditEvents } from './creditEvents';
+import { creditableCostThisMonth } from './creditPacing';
 import { projectCreditRunway, safeNumber } from './creditRunway';
 import {
   CreditBreakdown,
@@ -632,6 +633,10 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     );
     const netCost = Math.max(0, safeNumber(currentInvoice?.price));
 
+    // What the credit is actually on the hook for this month, as opposed to
+    // what the project spent. The reasoning lives in creditPacing.ts.
+    const creditableCost = creditableCostThisMonth(projectCredit, incurredCost);
+
     const daysInMonth = new Date(
       today.getFullYear(),
       today.getMonth() + 1,
@@ -663,6 +668,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     const pacing: PacingSnapshot = {
       monthlyBudget,
       incurredCost,
+      creditableCost,
       compensationAmount,
       netCost,
       spentThisMonth: netCost,
