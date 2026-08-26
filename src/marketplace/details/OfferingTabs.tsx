@@ -1,5 +1,6 @@
 import { NestedSection, PublicOfferingDetails } from 'waldur-js-client';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -11,7 +12,12 @@ import { PublicOfferingPricing } from '../offerings/details/PublicOfferingPricin
 
 import { AttributesTable } from './attributes/AttributesTable';
 import { OfferingTab } from './OfferingTabsComponent';
-import { ProviderLocationTab } from './ProviderLocationTab';
+
+const ProviderLocationTab = lazyComponent(() =>
+  import('./ProviderLocationTab').then((module) => ({
+    default: module.ProviderLocationTab,
+  })),
+);
 
 interface OfferingTabsProps {
   sections: NestedSection[];
