@@ -14,7 +14,10 @@ export const ResourceShowMoreComponents = ({
   resource,
   components,
 }: {
-  resource: Pick<Resource, 'current_usages' | 'limits' | 'limit_usage'>;
+  resource: Pick<
+    Resource,
+    'name' | 'current_usages' | 'limits' | 'limit_usage'
+  >;
   components: OfferingComponent[];
 }) => {
   const { openDialog } = useModal();

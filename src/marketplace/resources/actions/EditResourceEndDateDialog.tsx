@@ -9,6 +9,7 @@ import { SubmitButton, DateGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface FormData {
@@ -61,10 +62,10 @@ export const EditResourceEndDateDialog: FunctionComponent<
             <ModalDialog
               title={translate('Set termination date')}
               subtitle={
-                <>
-                  <b>{translate('Resource name')}</b>:{' '}
-                  {props.resolve.resource.name}
-                </>
+                <ScopeSubtitle
+                  label={translate('Resource name')}
+                  name={props.resolve.resource.name}
+                />
               }
               footer={
                 <>

@@ -12,6 +12,7 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { type Role } from '@/permissions/types';
 import { getProjectRoles } from '@/permissions/utils';
@@ -99,6 +100,19 @@ const EditProjectUserDialogFormBody: FC<{
     <form onSubmit={handleSubmit}>
       <ModalDialog
         title={translate('Edit project member')}
+        subtitle={
+          <>
+            <ScopeSubtitle
+              label={translate('Member')}
+              name={resolve.customer.full_name || resolve.customer.username}
+            />
+            {' \u00b7 '}
+            <ScopeSubtitle
+              label={translate('Project name')}
+              name={resolve.project.name}
+            />
+          </>
+        }
         footer={
           <>
             <CloseDialogButton />

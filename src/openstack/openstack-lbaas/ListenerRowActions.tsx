@@ -15,6 +15,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { createNameField } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
@@ -89,6 +90,12 @@ const EditListenerDialog: FC<ActionDialogProps<OpenStackListener>> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Edit listener')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Listener name')}
+          name={resource.name}
+        />
+      }
       submitForm={submitForm}
       formFields={[
         createNameField(),

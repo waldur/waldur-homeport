@@ -9,6 +9,7 @@ import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 
@@ -63,9 +64,13 @@ export const MoveProjectDialog: FunctionComponent<{
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Move project {projectName}', {
-              projectName: project.name,
-            })}
+            title={translate('Move project')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Project name')}
+                name={project.name}
+              />
+            }
             footer={
               <>
                 <CloseDialogButton />

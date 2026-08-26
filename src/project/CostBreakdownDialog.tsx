@@ -1,17 +1,23 @@
-import { InvoiceCostItem, BillingUnit } from 'waldur-js-client';
+import { InvoiceCostItem, BillingUnit, Project } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getPlanUnitAbbr } from '@/marketplace/orders/utils';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 
 export const CostBreakdownDialog = ({
-  resolve: { items },
+  resolve: { items, project },
 }: {
-  resolve: { items: InvoiceCostItem[] };
+  resolve: { items: InvoiceCostItem[]; project: Project };
 }) => {
   return (
-    <ModalDialog title={translate('Cost breakdown')}>
+    <ModalDialog
+      title={translate('Cost breakdown')}
+      subtitle={
+        <ScopeSubtitle label={translate('Project name')} name={project.name} />
+      }
+    >
       <table className="table table-hover mb-0">
         <thead>
           <tr>

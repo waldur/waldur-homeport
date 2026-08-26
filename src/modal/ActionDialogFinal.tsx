@@ -7,6 +7,7 @@ import { ModalDialog } from './ModalDialog';
 
 interface ActionDialogProps {
   title?: string;
+  subtitle?: React.ReactNode;
   submitLabel?: string;
   submitting?: boolean;
   loading?: boolean;
@@ -22,6 +23,7 @@ export const ActionDialogFinal: React.FC<
   <form onSubmit={props.onSubmit}>
     <ModalDialog
       title={props.title}
+      subtitle={props.subtitle}
       footer={
         <FormFooter
           submitLabel={props.submitLabel}

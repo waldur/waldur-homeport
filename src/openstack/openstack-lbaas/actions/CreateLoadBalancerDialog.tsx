@@ -8,6 +8,7 @@ import { AsyncSelectGroup, FormFooter } from '@/form';
 import { NameGroup } from '@/form/NameGroup';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { OpenStackTenant } from '@/openstack/openstack-tenant/types';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -48,6 +49,12 @@ export const CreateLoadBalancerDialog: FC<
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Create load balancer')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Tenant name')}
+                name={resource.name}
+              />
+            }
             footer={<FormFooter />}
           >
             <NameGroup />

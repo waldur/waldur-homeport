@@ -15,6 +15,7 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { isMatchPattern, required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { CustomIpFieldFinal as CustomIpField } from '@/openstack/openstack-instance/actions/update-internal-ips/CustomIpFieldFinal';
 import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
@@ -198,6 +199,9 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create port for OpenStack network')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Network name')} name={resource.name} />
+      }
       loading={isLoadingNetworks}
       error={errorNetworks}
       refetch={refetchNetworks}

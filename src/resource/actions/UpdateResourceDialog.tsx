@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { Resource } from '../types';
@@ -46,15 +47,13 @@ export const UpdateResourceDialog: FC<UpdateResourceDialogProps> = ({
   return (
     <ResourceActionDialog
       submitForm={mutation.mutateAsync}
-      dialogTitle={
-        resource.name
-          ? translate('Update {resourceType} {resourceName}', {
-              resourceType: verboseName,
-              resourceName: resource.name,
-            })
-          : translate('Update {resourceType}', {
-              resourceType: verboseName,
-            })
+      dialogTitle={translate('Update {resourceType}', {
+        resourceType: verboseName,
+      })}
+      dialogSubtitle={
+        resource.name ? (
+          <ScopeSubtitle label={translate('Name')} name={resource.name} />
+        ) : undefined
       }
       formFields={fields}
       initialValues={initialValues}

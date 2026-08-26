@@ -8,6 +8,7 @@ import { pick } from '@/core/utils';
 import { FormFooter } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { OfferingScheduler } from './OfferingScheduler';
@@ -58,6 +59,12 @@ export const EditSchedulesDialog = (props: {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Update schedule')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Offering name')}
+                name={props.resolve.offering.name}
+              />
+            }
             footer={<FormFooter submitLabel={translate('Update')} />}
           >
             <div className="size-xl">

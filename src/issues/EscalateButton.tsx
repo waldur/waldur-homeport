@@ -3,6 +3,7 @@ import { Issue, supportIssuesEscalate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionButton } from '@/table/ActionButton';
@@ -23,6 +24,12 @@ const EscalateDialog: FC<{
   return (
     <ResourceActionDialog
       dialogTitle={translate('Escalate ticket')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Ticket')}
+          name={issue.key || issue.summary}
+        />
+      }
       formFields={[
         {
           name: 'reason',

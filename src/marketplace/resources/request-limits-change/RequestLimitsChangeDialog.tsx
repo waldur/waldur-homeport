@@ -10,6 +10,7 @@ import { ChangeLimitsComponent } from '@/marketplace/resources/change-limits/Cha
 import { loadData } from '@/marketplace/resources/change-limits/utils';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface RequestLimitsChangeDialogProps {
@@ -52,6 +53,12 @@ export const RequestLimitsChangeDialog: React.FC<
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Request limit change')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Resource name')}
+                name={asyncState.value?.resource.name}
+              />
+            }
             footer={
               <>
                 <CloseDialogButton label={translate('Cancel')} />

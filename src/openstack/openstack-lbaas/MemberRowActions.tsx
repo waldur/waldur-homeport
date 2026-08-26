@@ -10,6 +10,7 @@ import {
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { createNameField } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
@@ -48,6 +49,9 @@ const EditMemberDialog: FC<ActionDialogProps<OpenStackPoolMember>> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Edit member')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Member name')} name={resource.name} />
+      }
       submitForm={submitForm}
       formFields={[
         createNameField(),

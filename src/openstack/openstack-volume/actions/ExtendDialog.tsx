@@ -6,6 +6,7 @@ import { FormFooter, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { parseIntField, formatIntField } from '@/marketplace/common/utils';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface VolumeExtendDialogOwnProps {
@@ -46,12 +47,14 @@ export const VolumeExtendDialog = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Extend OpenStack volume')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Volume name')}
+                name={resource.name}
+              />
+            }
             footer={<FormFooter />}
           >
-            <p>
-              <strong>{translate('Volume name')}:</strong> {resource.name}
-            </p>
-
             <p>
               <strong>{translate('Current size')}:</strong>{' '}
               {formatFilesize(resource.size)}

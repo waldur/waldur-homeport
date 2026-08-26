@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { openstackSnapshotsRestore } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import {
   createLatinNameField,
@@ -32,6 +33,12 @@ export const RestoreSnapshotDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Restore volume snapshot')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Snapshot name')}
+          name={resource.name}
+        />
+      }
       formFields={[createLatinNameField(), createDescriptionField()]}
       initialValues={{
         mtu: resource.mtu,

@@ -8,6 +8,7 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -78,6 +79,12 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create port')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Virtual machine name')}
+          name={resource.name}
+        />
+      }
       formFields={fields}
       submitForm={mutation.mutateAsync}
     />

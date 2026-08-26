@@ -3,6 +3,7 @@ import { openstackListenersCreate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -44,6 +45,12 @@ export const CreateListenerDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create listener')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Load balancer name')}
+          name={resource.name}
+        />
+      }
       submitForm={async (values) => {
         try {
           await createMutation.mutateAsync(values);

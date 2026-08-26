@@ -15,6 +15,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useNotify } from '@/store/notify';
 
 interface AttachDocumentsProps {
@@ -140,6 +141,9 @@ export const AttachDocumentsDialog: FC<AttachDocumentsProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Add call attachments')}
+            subtitle={
+              <ScopeSubtitle label={translate('Call name')} name={call.name} />
+            }
             footer={
               <>
                 <CloseDialogButton />

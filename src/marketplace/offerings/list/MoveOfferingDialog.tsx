@@ -7,6 +7,7 @@ import { FormFooter, BooleanGroup, AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 
@@ -56,9 +57,13 @@ export const MoveOfferingDialog: FunctionComponent<{
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Move offering {offeringName}', {
-              offeringName: offering.name,
-            })}
+            title={translate('Move offering')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Offering name')}
+                name={offering.name}
+              />
+            }
             footer={<FormFooter submitLabel={translate('Save')} />}
           >
             <AsyncSelectGroup

@@ -10,11 +10,12 @@ import { FormFooter, SubmitButton } from '@/form';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ViewYAMLDialogProps {
   resolve: {
-    resource: { uuid?: string };
+    resource: { uuid?: string; name?: string };
     yamlRetrieve;
     yamlUpdate;
   };
@@ -61,7 +62,16 @@ export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
       enableReinitialize={true}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <ModalDialog title={translate('Edit YAML')} footer={<FormFooter />}>
+          <ModalDialog
+            title={translate('Edit YAML')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Cluster name')}
+                name={resolve.resource.name}
+              />
+            }
+            footer={<FormFooter />}
+          >
             {loading ? (
               <LoadingSpinner />
             ) : (

@@ -22,6 +22,7 @@ import {
 import { url } from '@/core/validators';
 import { MarkdownGroup } from '@/form';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { useNotify } from '@/store/notify';
@@ -351,16 +352,20 @@ export const ProviderOfferingUserUpdateDialog: FC<
     refetch,
   });
 
-  const baseTitle = updateFields[updateScope]?.title || DASH_ESCAPE_CODE;
+  const dialogTitle = updateFields[updateScope]?.title || DASH_ESCAPE_CODE;
   const accountLabel = row.username || row.user_username;
-  const dialogTitle =
-    updateScope === 'posix' && accountLabel
-      ? `${baseTitle} · ${accountLabel}`
-      : baseTitle;
 
   return (
     <ResourceActionDialog
       dialogTitle={dialogTitle}
+      dialogSubtitle={
+        accountLabel ? (
+          <ScopeSubtitle
+            label={translate('Offering user')}
+            name={accountLabel}
+          />
+        ) : undefined
+      }
       formFields={fields}
       initialValues={fields.reduce((acc, field) => {
         acc[field.name] =

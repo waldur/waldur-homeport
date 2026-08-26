@@ -8,6 +8,7 @@ import { required } from '@/core/validators';
 import { DateTimeGroup, FormFooter, NumberGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const InvoiceItemUpdateDialog = ({
@@ -55,9 +56,13 @@ export const InvoiceItemUpdateDialog = ({
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            title={translate('Update invoice item {name}', {
-              name: resource.name,
-            })}
+            title={translate('Update invoice item')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Invoice item')}
+                name={resource.name}
+              />
+            }
             footer={<FormFooter />}
           >
             <StringGroup

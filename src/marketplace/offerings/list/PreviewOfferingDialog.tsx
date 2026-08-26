@@ -6,6 +6,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 
 import { DeployPage } from '../../deploy/DeployPage';
 
@@ -46,6 +47,12 @@ export const PreviewOfferingDialog = (props: PreviewOfferingOwnProps) => {
   return (
     <ModalDialog
       title={translate('Preview offering')}
+      subtitle={
+        <ScopeSubtitle
+          label={translate('Offering name')}
+          name={initialOffering.name}
+        />
+      }
       footer={<CloseDialogButton />}
     >
       {shouldLoadFullOffering ? (

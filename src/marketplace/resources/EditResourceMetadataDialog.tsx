@@ -15,6 +15,7 @@ import { required } from '@/core/validators';
 import { FieldError, StringField } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -184,6 +185,12 @@ export const EditResourceMetadataForm: FC<{
   return (
     <ResourceActionDialog
       dialogTitle={translate('Edit metadata')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Resource name')}
+          name={resource.name}
+        />
+      }
       formFields={[{ name: 'metadata-editor', component: MetadataEditor }]}
       initialValues={initialValues}
       submitForm={mutation.mutateAsync}
@@ -217,7 +224,15 @@ export const EditResourceMetadataDialog: FC<ActionDialogProps> = ({
     return <EditResourceMetadataForm resource={data} refetch={refetch} />;
   }
   return (
-    <ModalDialog title={translate('Edit metadata')}>
+    <ModalDialog
+      title={translate('Edit metadata')}
+      subtitle={
+        <ScopeSubtitle
+          label={translate('Resource name')}
+          name={resource.name}
+        />
+      }
+    >
       {isError ? (
         <h3>{translate('Unable to load resource metadata.')}</h3>
       ) : (

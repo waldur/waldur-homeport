@@ -1,5 +1,5 @@
 import arrayMutators from 'final-form-arrays';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, ReactNode, useCallback, useMemo } from 'react';
 import { Form, useForm, useFormState } from 'react-final-form';
 
 import { LoadingErred } from '@/core/LoadingErred';
@@ -23,6 +23,8 @@ import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 interface ResourceActionDialogProps {
   submitForm(formData): void;
   dialogTitle: string;
+  /** Names the object being acted on — see ScopeSubtitle. */
+  dialogSubtitle?: ReactNode;
   dialogFullButtons?: boolean;
   dialogSubmitLabel?: string;
   formFields?: any[] | ((values: any) => any[]);
@@ -47,6 +49,7 @@ const ResourceActionDialogInner: FC<any> = ({
   submitting,
   invalid,
   dialogTitle,
+  dialogSubtitle,
   dialogFullButtons,
   dialogSubmitLabel = translate('Submit'),
   loading,
@@ -170,6 +173,7 @@ const ResourceActionDialogInner: FC<any> = ({
   return (
     <ActionDialogFinal
       title={dialogTitle}
+      subtitle={dialogSubtitle}
       submitLabel={dialogSubmitLabel}
       onSubmit={handleSubmit}
       submitting={submitting}

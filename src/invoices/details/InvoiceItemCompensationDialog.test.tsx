@@ -38,9 +38,7 @@ describe('InvoiceItemCompensationDialog', () => {
     });
 
     expect(
-      await screen.findByText(
-        'Create compensation for invoice item Invoice Item 1',
-      ),
+      await screen.findByText('Create compensation for invoice item'),
     ).toBeInTheDocument();
 
     const nameInput = screen.getByLabelText(/Name/i);

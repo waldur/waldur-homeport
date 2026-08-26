@@ -9,6 +9,7 @@ import {
 import { getAllPages } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -75,6 +76,12 @@ export const ChangeFlavorDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Change flavor')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Instance name')}
+          name={resource.name}
+        />
+      }
       loading={asyncState.isLoading}
       error={asyncState.error}
       formFields={fields}

@@ -66,8 +66,8 @@ describe('EditUserDialog (Project)', () => {
     expect(screen.getByText('Edit project member')).toBeInTheDocument();
     expect(screen.getByText('User')).toBeInTheDocument();
     expect(
-      screen.getByText((content) => content.includes('John Doe')),
-    ).toBeInTheDocument();
+      screen.getAllByText((content) => content.includes('John Doe')).length,
+    ).toBeGreaterThan(0);
     expect(
       screen.getByText((content) => content.includes('john@example.com')),
     ).toBeInTheDocument();
@@ -175,8 +175,8 @@ describe('EditUserDialog (Project)', () => {
     renderDialog({ ...mockResolve, permission: permissionWithoutEmail });
 
     expect(
-      screen.getByText((content) => content.includes('John Doe')),
-    ).toBeInTheDocument();
+      screen.getAllByText((content) => content.includes('John Doe')).length,
+    ).toBeGreaterThan(0);
     expect(screen.getByText('Username')).toBeInTheDocument();
     expect(screen.queryByText('Email')).not.toBeInTheDocument();
   });

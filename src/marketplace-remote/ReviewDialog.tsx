@@ -4,6 +4,7 @@ import { Form } from 'react-final-form';
 import { FormFooter, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ReviewDialogProps {
@@ -26,6 +27,12 @@ export const ReviewDialog: FC<ReviewDialogProps> = ({ resolve }) => {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Review request')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Resource name')}
+                name={resolve.resource.name}
+              />
+            }
             footer={<FormFooter />}
           >
             <div className="size-sm">

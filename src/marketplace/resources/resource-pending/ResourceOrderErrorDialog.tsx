@@ -1,5 +1,6 @@
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { Field } from '@/resource/summary';
 
 export const ResourceOrderErrorDialog = ({ resolve }) => {
@@ -7,7 +8,15 @@ export const ResourceOrderErrorDialog = ({ resolve }) => {
   const { error_message, error_traceback } = creationOrder;
   const tracebackVisible = 'error_traceback' in creationOrder;
   return (
-    <ModalDialog title={translate('Order errors')}>
+    <ModalDialog
+      title={translate('Order errors')}
+      subtitle={
+        <ScopeSubtitle
+          label={translate('Resource name')}
+          name={resolve.resource.name}
+        />
+      }
+    >
       <Field label={translate('Error message')}>
         {error_message || translate('No error message reported.')}
       </Field>

@@ -17,6 +17,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useNotify } from '@/store/notify';
 import { RoleField } from '@/user/affiliations/RoleField';
 import { useUser } from '@/workspace/hooks';
@@ -127,6 +128,12 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Recover Project')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Project name')}
+                name={project.name}
+              />
+            }
             iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
             footer={
               <>

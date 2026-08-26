@@ -5,12 +5,16 @@ import { Resource, OfferingComponent } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 
 import { ResourceComponentItem } from './ResourceComponentItem';
 
 interface ResourceComponentsDialogProps {
   resolve: {
-    resource: Pick<Resource, 'current_usages' | 'limits' | 'limit_usage'>;
+    resource: Pick<
+      Resource,
+      'name' | 'current_usages' | 'limits' | 'limit_usage'
+    >;
     components: OfferingComponent[];
   };
 }
@@ -23,6 +27,12 @@ export const ResourceComponentsDialog: React.FC<
   return (
     <ModalDialog
       title={translate('Components')}
+      subtitle={
+        <ScopeSubtitle
+          label={translate('Resource name')}
+          name={resolve.resource?.name}
+        />
+      }
       footer={<CloseDialogButton label={translate('Done')} />}
     >
       <Row>

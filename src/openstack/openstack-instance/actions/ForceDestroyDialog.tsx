@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { DestroyInstanceParams } from '@/openstack/api';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -27,9 +28,13 @@ export const ForceDestroyDialog: FC<ActionDialogProps> = ({
 
   return (
     <ResourceActionDialog
-      dialogTitle={translate('Force destroy {name} instance', {
-        name: resource.name,
-      })}
+      dialogTitle={translate('Force destroy instance')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Instance name')}
+          name={resource.name}
+        />
+      }
       {...getDeleteField()}
       submitForm={mutation.mutateAsync}
     />

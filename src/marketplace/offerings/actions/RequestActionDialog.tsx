@@ -8,6 +8,7 @@ import { ISSUE_IDS } from '@/issues/types/constants';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useUser, useCustomer } from '@/workspace/hooks';
 
 const IssueCreateDialog = lazyComponent(() =>
@@ -85,10 +86,15 @@ export const RequestActionDialog: FunctionComponent<{
 
   return (
     <ModalDialog
-      title={translate('Request {mode} of {name}', {
-        name: offering.name,
+      title={translate('Request {mode} of offering', {
         mode: offeringRequestMode,
       })}
+      subtitle={
+        <ScopeSubtitle
+          label={translate('Offering name')}
+          name={offering.name}
+        />
+      }
       footer={<CloseDialogButton label={translate('Ok')} />}
     >
       <p>

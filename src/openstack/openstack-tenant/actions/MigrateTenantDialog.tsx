@@ -26,6 +26,7 @@ import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { TENANT_TYPE } from '@/openstack/constants';
 
@@ -126,6 +127,12 @@ export const MigrateTenantDialog: FC<MigrateTenantDialogProps> = ({
             title={translate(
               'Replicate tenant to another OpenStack deployment',
             )}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Tenant name')}
+                name={resource.name}
+              />
+            }
             footer={
               <div>
                 <CloseDialogButton className="me-3" />

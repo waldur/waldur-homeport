@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { ProviderCannedResponse } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 
 import { useCreateCannedResponse, useUpdateCannedResponse } from '../api';
@@ -65,6 +66,14 @@ export const CannedResponseDialog: FC<OwnProps> = ({
         isEdit
           ? translate('Edit canned response')
           : translate('Add canned response')
+      }
+      dialogSubtitle={
+        isEdit ? (
+          <ScopeSubtitle
+            label={translate('Response name')}
+            name={response!.name}
+          />
+        ) : undefined
       }
       formFields={fields}
       initialValues={initialValues}

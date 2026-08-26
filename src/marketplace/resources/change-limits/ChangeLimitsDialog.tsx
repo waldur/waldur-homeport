@@ -16,6 +16,7 @@ import { AttachmentRow } from '@/marketplace/resources/common/AttachmentRow';
 import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseOrderConfig';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
@@ -91,6 +92,12 @@ export const ChangeLimitsDialog: React.FC<ChangeLimitsDialogProps> = (
           <form onSubmit={handleSubmit}>
             <ModalDialog
               title={translate('Change resource limits')}
+              subtitle={
+                <ScopeSubtitle
+                  label={translate('Resource name')}
+                  name={resource?.name}
+                />
+              }
               footer={
                 <>
                   <CloseDialogButton />

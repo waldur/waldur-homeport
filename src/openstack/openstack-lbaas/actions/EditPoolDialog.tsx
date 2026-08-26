@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { OpenStackPool, openstackPoolsPartialUpdate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -24,6 +25,9 @@ export const EditPoolDialog: FC<ActionDialogProps<OpenStackPool>> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Edit pool')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Pool name')} name={resource.name} />
+      }
       submitForm={mutateAsync}
       formFields={[createNameField()]}
       initialValues={{ name: resource.name }}

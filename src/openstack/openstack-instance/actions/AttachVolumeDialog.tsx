@@ -5,6 +5,7 @@ import { OpenStackVolume } from 'waldur-js-client';
 import { getAllPages } from '@/core/api';
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -48,6 +49,12 @@ export const AttachVolumeDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Attach volume')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Instance name')}
+          name={resource.name}
+        />
+      }
       formFields={[
         {
           name: 'volume',

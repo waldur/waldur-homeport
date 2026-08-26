@@ -12,6 +12,7 @@ import { getTabs } from '@/marketplace/details/OfferingTabs';
 import { OfferingTabsComponent } from '@/marketplace/details/OfferingTabsComponent';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { Field } from '@/resource/summary';
 
 interface OfferingDetailsDialogProps {
@@ -48,6 +49,12 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
   return (
     <ModalDialog
       title={translate('Offering details')}
+      subtitle={
+        <ScopeSubtitle
+          label={translate('Offering name')}
+          name={props.resolve.offering.name}
+        />
+      }
       bodyClassName="h-500px"
       footer={
         <OfferingDetailsLink

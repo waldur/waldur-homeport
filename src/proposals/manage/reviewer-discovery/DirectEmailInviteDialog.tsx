@@ -7,6 +7,7 @@ import { SubmitButton, TextGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 
@@ -63,6 +64,12 @@ export const DirectEmailInviteDialog = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Invite reviewer by email')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Call name')}
+                name={resolve.call.name}
+              />
+            }
             footer={
               <>
                 <SubmitButton

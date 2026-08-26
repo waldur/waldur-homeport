@@ -8,6 +8,7 @@ import { FormFooter } from '@/form';
 import { ChoicesTable } from '@/form/ChoicesTable';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -58,6 +59,12 @@ const ChangePlanComponent = (props: FetchedData & { refetch? }) => {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Change resource plan')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Resource name')}
+                name={props.resource.name}
+              />
+            }
             footer={
               <FormFooter
                 submitLabel={

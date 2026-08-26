@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { OpenStackPool, openstackHealthMonitorsCreate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
@@ -37,6 +38,9 @@ export const CreateHealthMonitorDialog: FC<
   return (
     <ResourceActionDialog
       dialogTitle={translate('Add health monitor')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Pool name')} name={resource.name} />
+      }
       submitForm={async (values) => {
         try {
           await createMutation.mutateAsync(values);

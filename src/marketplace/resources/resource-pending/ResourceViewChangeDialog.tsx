@@ -6,6 +6,7 @@ import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumer
 import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { Field } from '@/resource/summary';
 import { ActionButton } from '@/table/ActionButton';
 
@@ -35,6 +36,12 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
           : hasLimitChangeRequest
             ? translate('Resource limit change request')
             : translate('Plan change request')
+      }
+      subtitle={
+        <ScopeSubtitle
+          label={translate('Resource name')}
+          name={resource.name}
+        />
       }
       footer={
         <>

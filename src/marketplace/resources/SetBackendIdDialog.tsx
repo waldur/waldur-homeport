@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { marketplaceProviderResourcesSetBackendId } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -24,6 +25,12 @@ export const SetBackendIdDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Set backend ID')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Resource name')}
+          name={resource.name}
+        />
+      }
       formFields={[
         {
           name: 'backend_id',

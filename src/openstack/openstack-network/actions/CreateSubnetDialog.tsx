@@ -15,6 +15,7 @@ import { FormGroup } from '@/form';
 import { NameGroup } from '@/form/NameGroup';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { InternalNetworkAllocationPool } from '@/openstack/openstack-subnet/AllocationPoolsField';
 import { networkAutocomplete } from '@/openstack/openstack-subnet/networkAutocomplete';
@@ -84,6 +85,12 @@ export const CreateSubnetDialog: FC<
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Create subnet')}
+            subtitle={
+              <ScopeSubtitle
+                label={translate('Network name')}
+                name={resource.name}
+              />
+            }
             footer={<FormFooter />}
           >
             {showNetworkField && (

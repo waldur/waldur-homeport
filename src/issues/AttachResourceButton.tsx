@@ -4,6 +4,7 @@ import { Issue, supportIssuesAttachResource } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { useModal } from '@/modal/actions';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionButton } from '@/table/ActionButton';
@@ -39,6 +40,12 @@ const AttachResourceDialog: FC<{
   return (
     <ResourceActionDialog
       dialogTitle={translate('Attach resource')}
+      dialogSubtitle={
+        <ScopeSubtitle
+          label={translate('Ticket')}
+          name={issue.key || issue.summary}
+        />
+      }
       formFields={[
         {
           name: 'resource',

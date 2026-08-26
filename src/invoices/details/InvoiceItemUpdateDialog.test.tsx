@@ -46,9 +46,7 @@ describe('InvoiceItemUpdateDialog', () => {
   it('renders correctly for fixed billing type', () => {
     renderDialog(fakeResourceFixed);
 
-    expect(
-      screen.getByText('Update invoice item Fixed Server'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Update invoice item')).toBeInTheDocument();
 
     const articleInput = screen.getByLabelText('Article code');
     expect(articleInput).toHaveValue('ART-01');
@@ -74,9 +72,7 @@ describe('InvoiceItemUpdateDialog', () => {
     const user = userEvent.setup();
     renderDialog(fakeResourceUsage);
 
-    expect(
-      screen.getByText('Update invoice item Usage Server'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Update invoice item')).toBeInTheDocument();
 
     const articleInput = screen.getByLabelText('Article code');
     expect(articleInput).toHaveValue('ART-02');

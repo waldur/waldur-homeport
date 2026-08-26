@@ -7,6 +7,7 @@ import {
 
 import { createLoadOptions } from '@/form/select';
 import { translate } from '@/i18n';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
@@ -47,7 +48,10 @@ export const ShareNetworkDialog: FC<ActionDialogProps> = ({
 
   return (
     <ResourceActionDialog
-      dialogTitle={translate('Share {name} network', { name: resource.name })}
+      dialogTitle={translate('Share network')}
+      dialogSubtitle={
+        <ScopeSubtitle label={translate('Network name')} name={resource.name} />
+      }
       dialogFullButtons
       dialogSubmitLabel={translate('Share')}
       formFields={[
