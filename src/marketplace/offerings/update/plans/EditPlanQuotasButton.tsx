@@ -18,11 +18,19 @@ export const EditPlanQuotasButton: FunctionComponent<{
   refetch;
 }> = ({ offering, plan, refetch }) => {
   const { openDialog } = useModal();
+  // Mirrors what update_quotas accepts: the billing types whose charge is the
+  // plan's amount times its price, and never a prepaid component. A prepaid
+  // component's quantity is the limit the customer requests times the length of
+  // the subscription, so a value entered here would be saved nowhere and
+  // ignored everywhere — and since the dialog posts every row it shows in one
+  // payload, offering one the backend refuses fails the whole save, taking the
+  // other components with it.
   const components = offering.components.filter(
     (c) =>
-      c.billing_type === 'fixed' ||
-      c.billing_type === 'one' ||
-      c.billing_type === 'few',
+      !c.is_prepaid &&
+      (c.billing_type === 'fixed' ||
+        c.billing_type === 'one' ||
+        c.billing_type === 'few'),
   );
   if (components.length === 0) {
     return null;
