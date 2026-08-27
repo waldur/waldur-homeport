@@ -9950,7 +9950,7 @@
   },
   "Conceal finished projects": {
     "context": {
-      "feature_area": "affiliations"
+      "feature_area": "generated"
     }
   },
   "Conceal offering pricing tab in the offering's public view.": {
@@ -22431,7 +22431,7 @@
   },
   "Include removed": {
     "context": {
-      "feature_area": "affiliations"
+      "feature_area": "generated"
     }
   },
   "Include resource options": {
@@ -39764,7 +39764,7 @@
   },
   "Removal status": {
     "context": {
-      "feature_area": "affiliations"
+      "feature_area": "generated"
     }
   },
   "Remove": {
@@ -44836,7 +44836,7 @@
   },
   "Select removal status": {
     "context": {
-      "feature_area": "affiliations"
+      "feature_area": "generated"
     }
   },
   "Select request type...": {

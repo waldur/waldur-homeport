@@ -23,6 +23,8 @@ import { Customer, Project } from '@/workspace/types';
 
 import { useOfferingCategories } from '../utils';
 
+import { pruneMissingScope } from './pruneMissingScope';
+
 interface ResourceFilterValues {
   organization?: Pick<Customer, 'name' | 'uuid' | 'abbreviation'>;
   project?: Pick<
@@ -238,23 +240,47 @@ export const useOrganizationAndProjectAutocompletesForResources = (
       urlParams.organization || urlParams.project,
     );
 
+    let restored: ResourceFilterValues;
     if (hasOrgOrProjectInUrl) {
       // Use URL params - they were set intentionally (e.g., shared link)
-      const normalized = normalizeFilter(urlParams);
-      syncResourceFilters(normalized);
+      restored = normalizeFilter(urlParams);
+      syncResourceFilters(restored);
       // Also save to localStorage for persistence
-      ResourcesFilterStorage.set(normalized);
+      ResourcesFilterStorage.set(restored);
     } else {
       // Fall back to localStorage
       const filter = ResourcesFilterStorage.get();
-      const normalized = normalizeFilter(filter);
-      syncResourceFilters(normalized);
+      restored = normalizeFilter(filter);
+      syncResourceFilters(restored);
       // Sync restored filters to URL so they are visible and shareable.
       // Only emit organization/project — never republish unrelated keys here.
-      if (normalized.organization || normalized.project) {
-        syncFiltersToURL(normalized);
+      if (restored.organization || restored.project) {
+        syncFiltersToURL(restored);
       }
     }
+
+    // The scope above is a snapshot that outlives what it names, and a stale
+    // one is invisible: the list endpoints answer an unknown uuid with an
+    // empty page rather than an error, so the user gets an empty catalog and
+    // no filter chip to remove. Confirm it still resolves and drop what does
+    // not. Deliberately after the restore rather than before it, so the
+    // ordinary case — a scope that is still good — pays no latency and the
+    // sidebar does not flicker through an unfiltered state on every load.
+    let cancelled = false;
+    pruneMissingScope(restored).then((pruned) => {
+      // Same reference means nothing was pruned.
+      if (cancelled || pruned === restored) return;
+      // Writes the storage and rewrites the URL on its own — syncFiltersToURL
+      // deletes the key for a null value, which is what clears the stale param
+      // out of the address bar so the next load does not restore it again.
+      syncResourceFilters({
+        organization: pruned.organization ?? null,
+        project: pruned.project ?? null,
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return { syncResourceFilters, clearAllFilters, removeFilter };
