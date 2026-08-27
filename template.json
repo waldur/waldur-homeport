@@ -36807,6 +36807,8 @@
       "feature_area": "update"
     }
   },
+  "Project details fields a new call does not ask for at all. Applied when the call is created; changing this never alters an existing call.": {},
+  "Project details fields a new call requires by default. Applied when the call is created; changing this never alters an existing call.": {},
   "Project details fields have been updated.": {
     "context": {
       "primary_ui_type": "success_message",
