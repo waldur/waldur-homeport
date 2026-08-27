@@ -391,10 +391,9 @@ export const AnonymousChatPanel: FunctionComponent = () => {
       }),
       maxSeverityColumn<AnonymousChatConversation>({
         id: 'max_severity',
-        // Sorts the stored label alphabetically, which puts low above medium.
-        // The aggregate computes a real severity_rank but does not serialize
-        // it; ordering by that would need a backend field.
-        orderField: 'max_severity',
+        // Numeric ordinal serialized by the backend (0=none … 4=critical) —
+        // sorting the label alphabetically would put low above medium.
+        orderField: 'max_severity_rank',
       }),
       {
         title: translate('Reviewed'),
