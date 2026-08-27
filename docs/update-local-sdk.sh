@@ -59,9 +59,17 @@ echo "      Schema generated: $SCHEMA_FILE"
 # Step 2: Generate + patch + build the SDK via js-client's own generator.
 # RELEASE_VERSION pins a local version so the script does not depend on
 # CI_PIPELINE_IID (only set in GitLab CI).
+#
+# It must differ on every run. The generator calls `npm version`, which fails
+# with "Version not changed" when package.json already carries that value, and
+# `set -e` then aborts the generator *after* it has rewritten the schema but
+# before it regenerates the TypeScript. The visible result is a second run
+# that appears to succeed while leaving the previous run's types in place —
+# which is a genuinely nasty way to lose an afternoon, because the SDK then
+# disagrees with the schema it was supposedly built from.
 echo "[2/6] Generating and building SDK in js-client..."
 cd "$JS_CLIENT_PATH"
-RELEASE_VERSION="${RELEASE_VERSION:-0.0.0-local}" bash scripts/generate-ts-sdk.sh
+RELEASE_VERSION="${RELEASE_VERSION:-0.0.0-local.$(date +%Y%m%d%H%M%S)}" bash scripts/generate-ts-sdk.sh
 
 # Step 3: Generate SDK reference catalog + js-client CLAUDE.md from the schema
 echo "[3/6] Generating SDK reference catalog and CLAUDE.md..."

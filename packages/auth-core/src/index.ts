@@ -20,3 +20,4 @@ export {
   signinByToken,
   clearAuthTokens,
 } from './authService';
+export type { SigninResult } from './authService';

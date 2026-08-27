@@ -28,9 +28,17 @@ export const useAuthFeatures = () => {
     ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_URL &&
     ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_LABEL;
 
+  // Passwordless sign-in only. PASSKEY_MFA is a step *inside* the password
+  // form, not a login method of its own, so it must not put a button here.
+  const showPasskey = methods.PASSKEY_SIGNIN;
+
   const enableSeparator = !!(
     showSigninForm &&
-    (showValimo || showSaml2 || showSaml2Providers || showSaml2Discovery)
+    (showValimo ||
+      showSaml2 ||
+      showSaml2Providers ||
+      showSaml2Discovery ||
+      showPasskey)
   );
 
   return {
@@ -39,6 +47,7 @@ export const useAuthFeatures = () => {
     saml2: showSaml2,
     saml2providers: showSaml2Providers,
     saml2discovery: showSaml2Discovery,
+    passkey: showPasskey,
     enableSeperator: enableSeparator,
   };
 };
