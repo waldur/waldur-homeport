@@ -10,7 +10,12 @@
     "./colors.css": "./src/colors.css",
     "./buttonColors.css": "./src/buttonColors.css",
     "./surfaceColors.css": "./src/surfaceColors.css",
-    "./badgeColors.css": "./src/badgeColors.css"
+    "./badgeColors.css": "./src/badgeColors.css",
+    "./fonts.css": "./src/fonts.css"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/maven-pro": "^5.2.10"
   },
   "license": "MIT"
 }

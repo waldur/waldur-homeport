@@ -2,7 +2,7 @@ import { ConfiguredSidebarStyle } from 'waldur-design-tokens';
 
 /**
  * The one raw ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE value ('auto' included)
- * that two otherwise-unrelated places both need: bootstrapAppShellAsync()
+ * that two otherwise-unrelated places both need: bootstrapMicroApp()
  * sets it once at boot, useShellTheme()'s toggle re-reads it on every
  * toggle to decide whether the sidebar needs to follow (only 'auto' does —
  * see resolveSidebarStyle() in waldur-design-tokens). A plain module export
@@ -15,7 +15,7 @@ export let configuredSidebarStyle: ConfiguredSidebarStyle = 'dark';
 
 // A live-binding `let` export can't be assigned from outside its own
 // module (ESM import bindings are read-only views) — this setter is the
-// module's own write access, called by bootstrapAppShellAsync() once its
+// module's own write access, called by bootstrapMicroApp() once its
 // config fetch resolves.
 export function setConfiguredSidebarStyle(value: ConfiguredSidebarStyle) {
   configuredSidebarStyle = value;

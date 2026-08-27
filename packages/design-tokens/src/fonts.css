@@ -1,0 +1,30 @@
+/**
+ * Every @font-face this app or any micro-app can end up needing, in one
+ * place. initFontFamily() (see initFontFamily.ts) only sets
+ * --waldur-font-family to a font name — it doesn't make the browser able
+ * to render it, and FONT_FAMILY is a runtime, tenant-configurable choice
+ * between exactly these two typefaces (see src/SettingsDescription.ts's
+ * choice_field options), so both need to be loaded up front: no consumer
+ * knows which one a given tenant configured until fetchRuntimeConfig()
+ * resolves, well after this CSS has already been requested.
+ *
+ * Previously duplicated verbatim as JS-side @fontsource imports in both
+ * src/vendor.ts (the main app) and apps/micro-app-poc/src/main.tsx, each
+ * also declaring its own @fontsource/inter + @fontsource/maven-pro
+ * package.json dependency — the exact "every micro-app redeclares and
+ * re-imports the same ten files" duplication this file exists to end. A
+ * consumer now needs one line (`import 'waldur-design-tokens/fonts.css';`
+ * or the CSS-file equivalent `@import`) and no @fontsource dependency of
+ * its own.
+ */
+@import '@fontsource/inter/index.css';
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+
+@import '@fontsource/maven-pro/400.css';
+@import '@fontsource/maven-pro/500.css';
+@import '@fontsource/maven-pro/600.css';
+@import '@fontsource/maven-pro/700.css';

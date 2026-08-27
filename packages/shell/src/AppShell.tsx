@@ -1,9 +1,7 @@
 import { BellIcon, QuestionIcon, SquaresFourIcon } from '@phosphor-icons/react';
 import { ReactNode } from 'react';
-import { ThemeName } from 'waldur-design-tokens';
-import { LanguageOption, translate } from 'waldur-i18n-runtime';
+import { translate } from 'waldur-i18n-runtime';
 import {
-  CurrentUser,
   IconButton,
   SearchField,
   Sidebar,
@@ -13,8 +11,13 @@ import {
   SidebarProvider,
   SidebarTrigger,
   TopBar,
-  UserMenu,
 } from 'waldur-ui';
+
+import { ShellErrorBoundary } from './ShellErrorBoundary';
+import { CurrentUserProvider } from './useCurrentUser';
+import { UserMenu } from './UserMenu';
+import { ShellLanguageProvider } from './useShellLanguage';
+import { ShellThemeProvider } from './useShellTheme';
 
 export interface AppShellProps {
   /** SidebarHeader content — e.g. a SidebarModeCard. App-specific: each
@@ -34,12 +37,6 @@ export interface AppShellProps {
   onHelpClick?: () => void;
   onNotificationsClick?: () => void;
   hasNotifications?: boolean;
-  currentUser: CurrentUser | null;
-  theme: ThemeName;
-  onToggleTheme: () => void;
-  currentLanguage: LanguageOption | undefined;
-  languageChoices: LanguageOption[];
-  onLanguageChange: (language: LanguageOption) => void;
   /** No default Waldur footer design exists yet (the real Bootstrap/Metronic
    * app has none either) — this is a structural slot for whenever one is,
    * not an extracted duplicate. Renders below the scrollable content area,
@@ -51,11 +48,28 @@ export interface AppShellProps {
 /**
  * The chrome every micro-app shares: the Sidebar/TopBar/content-area layout
  * skeleton, plus TopBar's right-side cluster (Apps/Help/Notifications/
- * UserMenu) — none of which varies by app, only by the data (current user,
- * theme, language) each app already fetches or computes for itself via
- * useShellTheme()/its own auth hook. Nav content, the sidebar's own header,
- * the org switcher, and all page content stay the caller's responsibility —
- * see each prop's own comment for why.
+ * UserMenu). Current user, theme and language are no longer props — each is
+ * constructed once inside AppShell itself (CurrentUserProvider/
+ * ShellThemeProvider/ShellLanguageProvider, one per concern rather than a
+ * single combined context, matching how each was already an independent
+ * hook) since none of them need anything app-specific: theme/language read
+ * shared storage/singletons bootstrapMicroApp() already wired up, and
+ * currentUser is the same authenticated /users/me/ call regardless of which
+ * micro-app is asking. An app that previously called useShellTheme() or an
+ * app-local useCurrentUser() itself just to hand the result to this
+ * component no longer needs to — see OrgDashboardMock.tsx. UserMenu itself
+ * reads all three hooks directly (see its own comment) rather than
+ * AppShellContent computing them just to pass them one level down — the
+ * same three exported hooks (useCurrentUser/useShellTheme/useShellLanguage)
+ * work the same way for any other page content nested inside children,
+ * since they're all real descendants of these providers.
+ *
+ * Nav content, the sidebar's own header, the org switcher, and all page
+ * content stay the caller's responsibility — see each remaining prop's own
+ * comment for why those genuinely can't move in here the same way.
+ * children is wrapped in ShellErrorBoundary (see its own comment): a crash
+ * in one page's content shows a fallback there while the chrome around it
+ * — Sidebar/TopBar/UserMenu — stays usable.
  *
  * Calls translate() directly for its own chrome strings (waldur-shell
  * already depends on waldur-i18n-runtime for loadSharedLocale()/
@@ -63,7 +77,19 @@ export interface AppShellProps {
  * UserMenu does the same internally now; see its own comment for why that
  * package's earlier "no i18n dependency" boundary was dropped.
  */
-export function AppShell({
+export function AppShell(props: AppShellProps) {
+  return (
+    <CurrentUserProvider>
+      <ShellThemeProvider>
+        <ShellLanguageProvider>
+          <AppShellContent {...props} />
+        </ShellLanguageProvider>
+      </ShellThemeProvider>
+    </CurrentUserProvider>
+  );
+}
+
+function AppShellContent({
   sidebarHeader,
   sidebarContent,
   orgSwitcher,
@@ -72,12 +98,6 @@ export function AppShell({
   onHelpClick,
   onNotificationsClick,
   hasNotifications,
-  currentUser,
-  theme,
-  onToggleTheme,
-  currentLanguage,
-  languageChoices,
-  onLanguageChange,
   footer,
   children,
 }: AppShellProps) {
@@ -133,19 +153,14 @@ export function AppShell({
                 hasIndicator={hasNotifications}
                 onClick={onNotificationsClick}
               />
-              <UserMenu
-                currentUser={currentUser}
-                theme={theme}
-                onToggleTheme={onToggleTheme}
-                currentLanguage={currentLanguage}
-                languageChoices={languageChoices}
-                onLanguageChange={onLanguageChange}
-              />
+              <UserMenu />
             </>
           }
         />
 
-        <div className="flex flex-1 flex-col overflow-y-auto">{children}</div>
+        <div className="flex flex-1 flex-col overflow-y-auto">
+          <ShellErrorBoundary>{children}</ShellErrorBoundary>
+        </div>
         {footer}
       </SidebarInset>
     </SidebarProvider>
