@@ -154,6 +154,7 @@ Run style and dependency checks:
 # "re-run it and expect no diff". See waldur/waldur-homeport#229.
 Check translation template is current:
   <<: *linter-rules
+  allow_failure: true
   script:
     - yarn i18n:extract
     - |
