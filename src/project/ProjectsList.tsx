@@ -5,13 +5,19 @@ import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures, ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { PROJECTS_LIST } from '@/project/constants';
+import { CUSTOMER_PROJECTS_LIST } from '@/project/constants';
 import { ProjectEndDateField } from '@/project/ProjectEndDateField';
 import { ProjectsListActions } from '@/project/ProjectsListActions';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+import {
+  ProjectsFilter,
+  ProjectsFilterFormId,
+  selectProjectsFilter,
+} from '@/table/generated/ProjectsFilter';
 import Table from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { formatLongText } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
@@ -149,15 +155,18 @@ export const ProjectsList: FC<ProjectsListProps> = ({
   ...props
 }) => {
   const currentCustomer = useCustomer();
+  const table = props.table || CUSTOMER_PROJECTS_LIST;
+  const filterValues = useFilterValues(table);
   const filter = useMemo(
     () => ({
       customer: customer ? customer.uuid : currentCustomer?.uuid,
       o: 'name',
+      ...selectProjectsFilter(filterValues),
     }),
-    [currentCustomer, customer],
+    [currentCustomer, customer, filterValues],
   );
   const tableProps = useTable({
-    table: props.table || PROJECTS_LIST,
+    table,
     fetchData: createFetcher(projectsList),
     queryField: 'query',
     filter,
@@ -167,6 +176,8 @@ export const ProjectsList: FC<ProjectsListProps> = ({
   return (
     <ProjectsListTable
       {...tableProps}
+      filters={<ProjectsFilter />}
+      formId={ProjectsFilterFormId}
       {...props}
       customer={customer || currentCustomer}
       optionalColumns={optionalColumns}

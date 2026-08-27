@@ -1144,3 +1144,38 @@ overrides:
     image_name:
       label: Image
       placeholder: Image name...
+
+  projects:
+    filters:
+      - conceal_finished_projects
+      - include_terminated
+      - is_removed
+    conceal_finished_projects:
+      label: Conceal finished projects
+      badgeLabels:
+        true: Yes
+        false: No
+    include_terminated:
+      label: Include removed
+      badgeLabels:
+        true: Yes
+        false: No
+    is_removed:
+      label: Removal status
+      placeholder: Select removal status
+      enumOverrides:
+        'undefined': All projects
+        'false': Not removed
+        'true': Removed
+
+  marketplace_service_providers_projects:
+    # is_removed is deliberately omitted: the backend viewset queries
+    # Project.available_objects (non-removed only), so the advertised
+    # is_removed param can never match removed projects.
+    filters:
+      - conceal_finished_projects
+    conceal_finished_projects:
+      label: Conceal finished projects
+      badgeLabels:
+        true: Yes
+        false: No
