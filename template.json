@@ -1988,6 +1988,12 @@
       "feature_area": "openstack-instance"
     }
   },
+  "Add passkey": {
+    "context": {
+      "primary_ui_type": "action_button",
+      "feature_area": "passkeys"
+    }
+  },
   "Add payment": {
     "context": {
       "feature_area": "payments"
@@ -2190,6 +2196,12 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "Added": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "passkeys"
     }
   },
   "Added by staff. It cannot be changed here.": {
@@ -5252,6 +5264,11 @@
         }
       },
       "feature_area": "team"
+    }
+  },
+  "Are you sure you want to revoke this passkey? You will no longer be able to sign in with it. This action cannot be undone.": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "Are you sure you want to revoke this permission?": {
@@ -10328,6 +10345,13 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "mappings"
+    }
+  },
+  "Confirm with passkey": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "auth",
+      "action_type": "create"
     }
   },
   "Confirmation": {
@@ -20504,6 +20528,11 @@
       "feature_area": "overview"
     }
   },
+  "Give this passkey a name you will recognise later, then follow your device prompt. Nothing secret leaves your device.": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "Given base allocation of {base} Nh, previous usage of {prev} Nh, and current usage of {current} Nh:": {
     "context": {
       "variables": {
@@ -24370,7 +24399,7 @@
   "Last used": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "personal-access-tokens"
+      "feature_area": "passkeys"
     }
   },
   "Last used from IP": {
@@ -29240,6 +29269,11 @@
       "feature_area": "mappings"
     }
   },
+  "No built-in authenticator on this device": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "No cap": {
     "context": {
       "feature_area": "usage-views"
@@ -30009,6 +30043,12 @@
   "No participants in this room.": {
     "context": {
       "feature_area": "livekit"
+    }
+  },
+  "No passkey was used. If you have not set one up on this device yet, sign in with your password first and add a passkey from your profile.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "auth"
     }
   },
   "No pending confirmations": {
@@ -33934,6 +33974,40 @@
       "feature_area": "settings"
     }
   },
+  "Passkey": {},
+  "Passkey enrolment failed": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
+  "Passkey has been registered.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "passkeys"
+    }
+  },
+  "Passkey has been renamed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "passkeys"
+    }
+  },
+  "Passkey has been revoked.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "passkeys"
+    }
+  },
+  "Passkey verification failed": {
+    "context": {
+      "feature_area": "auth"
+    }
+  },
+  "Passkeys": {
+    "context": {
+      "feature_area": "user"
+    }
+  },
   "Password": {
     "context": {
       "primary_ui_type": "title",
@@ -33956,6 +34030,11 @@
   "Password will be removed when you save.": {
     "context": {
       "feature_area": "create-user-steps"
+    }
+  },
+  "Passwordless": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "Passwords and credentials": {
@@ -35181,7 +35260,11 @@
     }
   },
   "Please enter a valid mac address": {},
-  "Please enter access token.": {},
+  "Please enter access token.": {
+    "context": {
+      "feature_area": "auth"
+    }
+  },
   "Please enter at least one keyword.": {
     "context": {
       "feature_area": "reviewer-discovery"
@@ -35197,7 +35280,11 @@
       "feature_area": "actions"
     }
   },
-  "Please enter username and password.": {},
+  "Please enter username and password.": {
+    "context": {
+      "feature_area": "auth"
+    }
+  },
   "Please fill in all required fields": {
     "context": {
       "primary_ui_type": "action_button",
@@ -36057,6 +36144,13 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "Preparing the passkey challenge.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "auth",
+      "action_type": "create"
     }
   },
   "Present": {
@@ -40144,6 +40238,16 @@
       "feature_area": "details"
     }
   },
+  "Rename": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
+  "Rename passkey": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "Render POSIX ID pool management UI for service providers.": {
     "context": {
       "feature_area": "features"
@@ -42690,6 +42794,12 @@
       "feature_area": "affiliations"
     }
   },
+  "Revoke passkey": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "passkeys"
+    }
+  },
   "Revoke selected permissions": {
     "context": {
       "feature_area": "affiliations"
@@ -44109,6 +44219,11 @@
       "feature_area": "deploy"
     }
   },
+  "Second factor only": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "Seconds to cache successful token introspection results. Reduces load on the introspection endpoint. Set to 0 to disable caching. Default: 300 (5 minutes).": {},
   "Secret options": {
     "context": {
@@ -44217,6 +44332,7 @@
       "feature_area": "openstack-security-groups"
     }
   },
+  "Security key": {},
   "Security rules": {
     "context": {
       "feature_area": "common"
@@ -46843,6 +46959,12 @@
       }
     }
   },
+  "Sign-in": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "passkeys"
+    }
+  },
   "Significant (+50%)": {
     "context": {
       "primary_ui_type": "label",
@@ -48552,6 +48674,7 @@
       "feature_area": "billing"
     }
   },
+  "Synced passkey": {},
   "Synced {date}": {
     "context": {
       "variables": {
@@ -50915,6 +51038,11 @@
       "feature_area": "assignments"
     }
   },
+  "This browser does not support passkeys. Try a recent version of Chrome, Safari, Edge or Firefox.": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "This call allocates on decision — no allocation date is needed. Change the allocation timing on the Configuration tab to set a fixed date.": {
     "context": {
       "feature_area": "rounds"
@@ -50987,6 +51115,7 @@
       "feature_area": "coi-review"
     }
   },
+  "This device": {},
   "This email already has a pending invitation.": {
     "context": {
       "feature_area": "create"
@@ -55308,6 +55437,12 @@
       "feature_area": "cluster"
     }
   },
+  "Unable to register passkey.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "passkeys"
+    }
+  },
   "Unable to register service provider.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -55702,6 +55837,12 @@
       "feature_area": "openstack-security-groups"
     }
   },
+  "Unable to rename passkey.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "passkeys"
+    }
+  },
   "Unable to render canned response.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -55836,6 +55977,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "affiliations"
+    }
+  },
+  "Unable to revoke passkey.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "passkeys"
     }
   },
   "Unable to revoke permission {userName}.": {
@@ -56139,10 +56286,22 @@
       "feature_area": "actions"
     }
   },
+  "Unable to sign in with a passkey.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "auth"
+    }
+  },
   "Unable to silence action.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "UserPendingActionsList"
+    }
+  },
+  "Unable to start passkey enrolment.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "passkeys"
     }
   },
   "Unable to start your review of this proposal.": {
@@ -57586,6 +57745,11 @@
   "Untitled": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Unusable": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "Unused": {
@@ -60433,6 +60597,11 @@
       "feature_area": "affiliations"
     }
   },
+  "Waiting for your device to respond.": {
+    "context": {
+      "feature_area": "auth"
+    }
+  },
   "Waiting locks": {
     "context": {
       "feature_area": "database-stats"
@@ -62103,6 +62272,11 @@
       "feature_area": "organization-create"
     }
   },
+  "Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enrol using a phone or a security key from the next prompt.": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "Your comment...": {
     "context": {
       "feature_area": "service-providers"
@@ -62200,6 +62374,11 @@
   "Your organization's registry code": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Your password was accepted. Confirm with your passkey to finish signing in.": {
+    "context": {
+      "feature_area": "auth"
     }
   },
   "Your personnummer is checked against the company's signatories in Dun & Bradstreet's Nordic Right to Sign service.": {},
@@ -62346,6 +62525,11 @@
   "a minute": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "a passkey": {
+    "context": {
+      "feature_area": "auth"
     }
   },
   "a second": {},
@@ -62702,6 +62886,11 @@
   "e.g. MIN(20, usage / 100)": {
     "context": {
       "feature_area": "plans"
+    }
+  },
+  "e.g. MacBook Touch ID": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "e.g. My Organization": {
@@ -63379,6 +63568,11 @@
   "organizations": {
     "context": {
       "feature_area": "organizations"
+    }
+  },
+  "passkeys": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "pause {count} resources": {

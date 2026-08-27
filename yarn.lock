@@ -6310,6 +6310,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@simplewebauthn/browser@npm:^13.3.0":
+  version: 13.3.0
+  resolution: "@simplewebauthn/browser@npm:13.3.0"
+  checksum: 10c0/23a9c14777c4ef6d15fd6c876a1035e6e597e92f96cd0ffe83b0b869f0e4db7789a591da9a39d1fe2c0529c42ecc291c4a30227fc705f0b7729c255f9ccc7c21
+  languageName: node
+  linkType: hard
+
 "@sindresorhus/merge-streams@npm:^4.0.0":
   version: 4.0.0
   resolution: "@sindresorhus/merge-streams@npm:4.0.0"
@@ -19801,6 +19808,7 @@ __metadata:
     "@popperjs/core": "npm:~2.10.1"
     "@radix-ui/react-slot": "npm:^1.3.3"
     "@sentry/react": "npm:^8.55.0"
+    "@simplewebauthn/browser": "npm:^13.3.0"
     "@stomp/stompjs": "npm:^7.3.0"
     "@storybook/addon-a11y": "npm:^10.5.8"
     "@storybook/addon-docs": "npm:^10.5.8"
@@ -19935,7 +19943,7 @@ __metadata:
     waldur-auth-core: "workspace:*"
     waldur-design-tokens: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
-    waldur-js-client: "npm:8.1.3-rc.4.dev.20260826083749.232"
+    waldur-js-client: "npm:8.1.3-rc.6.dev.20260827184234.238"
     waldur-runtime-config: "workspace:*"
     waldur-telemetry: "workspace:*"
     waldur-ui: "workspace:*"
@@ -19953,10 +19961,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"waldur-js-client@npm:8.1.3-rc.4.dev.20260826083749.232":
-  version: 8.1.3-rc.4.dev.20260826083749.232
-  resolution: "waldur-js-client@npm:8.1.3-rc.4.dev.20260826083749.232"
-  checksum: 10c0/040f83a8c85cf0840ca1a44ae37789722c780e392877a03ca17901668ac4353c6e1867b7afaa5b3ab67f7c97effaca83491d56219ecac750596218dfbf6c1f47
+"waldur-js-client@npm:8.1.3-rc.6.dev.20260827184234.238":
+  version: 8.1.3-rc.6.dev.20260827184234.238
+  resolution: "waldur-js-client@npm:8.1.3-rc.6.dev.20260827184234.238"
+  checksum: 10c0/20c56cd40645662e02771e49cca8a04bd5886b017713f037ccb94da32456418f2e53eb70cf267758ae9cdd5a517b42cb4c17fe83113f0bca0645701c95d8a62f
   languageName: node
   linkType: hard
 

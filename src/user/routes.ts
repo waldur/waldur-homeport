@@ -36,6 +36,13 @@ const canUsePersonalAccessTokens = (state) => {
   );
 };
 
+// Passkeys are inert unless an operator enabled one of the two flows, so the
+// whole section is hidden rather than shown empty.
+const arePasskeysEnabled = () => {
+  const methods = ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS ?? [];
+  return methods.includes('PASSKEY_SIGNIN') || methods.includes('PASSKEY_MFA');
+};
+
 const canAccessOrganization = (state) => {
   const hideFromProjectMembers = isFeatureVisible(
     MarketplaceFeatures.hide_organization_information_from_project_members,
@@ -79,7 +86,8 @@ export const states: StateDeclaration[] = [
           !isFeatureVisible(UserFeatures.conceal_remote_accounts) ||
           isStaffOrSupport(state) ||
           !isFeatureVisible(UserFeatures.conceal_api_token) ||
-          canUsePersonalAccessTokens(state),
+          canUsePersonalAccessTokens(state) ||
+          arePasskeysEnabled(),
       ],
     },
   },
@@ -328,6 +336,20 @@ export const states: StateDeclaration[] = [
           !isFeatureVisible(UserFeatures.conceal_api_token) ||
           isStaffOrSupport(state),
       ],
+    },
+  },
+  {
+    name: 'profile-passkeys',
+    url: 'passkeys/',
+    component: lazyComponent(() =>
+      import('./passkeys/PasskeysList').then((module) => ({
+        default: module.PasskeysList,
+      })),
+    ),
+    parent: 'profile-credentials',
+    data: {
+      breadcrumb: () => translate('Passkeys'),
+      permissions: [() => arePasskeysEnabled()],
     },
   },
   {

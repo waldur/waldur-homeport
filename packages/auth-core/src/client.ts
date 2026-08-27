@@ -11,9 +11,16 @@ import { getAuthCoreConfig } from './config';
 const querySerializer = (params) =>
   Qs.stringify(params, { arrayFormat: 'repeat' });
 
+// Methods whose token is a DRF Token issued by Waldur itself, rather than an
+// OIDC access token. A passkey login yields exactly the same DRF token as a
+// password login, so it belongs here — without it, a passkey session on an
+// OIDC-enabled deployment would send `Bearer <drf-token>` and 401 on every
+// request after login.
+const DRF_TOKEN_METHODS = ['local', 'passkey'];
+
 const getAuthPrefix = (): 'Token' | 'Bearer' => {
   const config = getAuthCoreConfig();
-  if (config.storage.method.get() === 'local') {
+  if (DRF_TOKEN_METHODS.includes(config.storage.method.get())) {
     return 'Token';
   }
   return config.isOidcAccessTokenEnabled() ? 'Bearer' : 'Token';
@@ -114,7 +121,18 @@ client.interceptors.error.use((error: Error, response) => {
   };
 });
 
-const LOGIN_ENDPOINT_PATH = 'api-auth/password/';
+// Endpoints that are part of *becoming* authenticated. A 401 from any of them
+// means "these credentials did not work", not "your session expired", so it
+// must not trigger a logout. Missing one is not cosmetic: during a passkey
+// ceremony the user is mid-login, and calling onSessionExpired() would tear
+// down the flow they are in the middle of completing.
+const LOGIN_ENDPOINT_PATHS = [
+  'api-auth/password/',
+  'api/passkeys/signin/begin/',
+  'api/passkeys/signin/finish/',
+  'api/passkeys/mfa/begin/',
+  'api/passkeys/mfa/finish/',
+];
 
 // A 401 means an authenticated session expired — hand off to the host's
 // onSessionExpired (remember where to return, then log out). Guarded on this
@@ -129,7 +147,9 @@ export const handleUnauthorizedResponse = (response: Response) => {
   if (
     response?.status === 401 &&
     (config.storage.token.get() || hadAuthenticatedSession) &&
-    response.url !== config.getApiEndpoint() + LOGIN_ENDPOINT_PATH
+    !LOGIN_ENDPOINT_PATHS.some(
+      (path) => response.url === config.getApiEndpoint() + path,
+    )
   ) {
     config.onSessionExpired();
   }

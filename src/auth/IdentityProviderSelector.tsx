@@ -1,6 +1,7 @@
 import { IdentityProvider } from 'waldur-js-client';
 
 import { OauthLoginButton } from './OauthLoginButton';
+import { PasskeyLoginButton } from './PasskeyLoginButton';
 import { Saml2Button } from './Saml2Button';
 import { Saml2DiscoveryButton } from './Saml2DiscoveryButton';
 import { Saml2ProvidersButton } from './Saml2ProvidersButton';
@@ -22,5 +23,6 @@ export const IdentityProviderSelector = ({
     {features.saml2providers && <Saml2ProvidersButton />}
     {features.saml2discovery && <Saml2DiscoveryButton />}
     {features.valimo && <ValimoButton />}
+    {features.passkey && <PasskeyLoginButton />}
   </>
 );
