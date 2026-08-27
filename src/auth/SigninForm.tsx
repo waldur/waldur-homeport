@@ -138,6 +138,7 @@ export const SigninForm = () => (
             submitting={submitting}
             label={translate('Login')}
             className="login-submit-button"
+            data-testid="login-submit"
           />
 
           {formError && (
