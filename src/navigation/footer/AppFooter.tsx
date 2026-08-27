@@ -84,7 +84,11 @@ export const AppFooter: FunctionComponent = () => {
       <div className="py-4 d-flex flex-lg-column">
         <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between fs-6">
           <div className="text-dark fw-bold order-2 order-md-1 icon-align">
-            {translate('Version')}: {ENV.buildId}
+            {user && (
+              <>
+                {translate('Version')}: {ENV.buildId}
+              </>
+            )}
             <BackendHealthStatusIndicator />
             {showUpgradeAvailable && (
               <Tip
