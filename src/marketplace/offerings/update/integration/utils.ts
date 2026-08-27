@@ -42,20 +42,26 @@ export const SCRIPT_ROWS = [
 /**
  * Whether the current user may see this offering's secret options.
  *
- * The backend gates reading them on owner or service-manager access to the
- * provider organization, while the integration PATCH itself is permitted at
- * offering scope too — so a user can hold the write permission and still get a
- * payload with no `secret_options` key at all. Rather than restate that rule
- * here, take the response as the answer: the field is dropped from the
- * serializer exactly when the user may not see it.
+ * The backend gates reading them on the permission to change them, held on the
+ * offering, its organization, or that organization's service provider — so a
+ * user who may open the offering-update page at all can still get a payload
+ * with no `secret_options` key. Rather than restate that rule here, take the
+ * response as the answer: the field is dropped from the serializer exactly
+ * when the user may not see it.
  *
- * Controls bound to a `secret_options.*` path must be read-only when this is
- * false; otherwise they render as empty and a save silently overwrites a value
- * the user was never shown.
+ * Everything reading a `secret_options.*` path must handle its absence:
+ * controls bound to one must be read-only, or a save silently overwrites a
+ * value the user was never shown, and a direct read must be optional, or the
+ * whole section throws while rendering.
  */
 export const canSeeOfferingSecretOptions = (
   offering: ProviderOfferingDetails,
 ): boolean => offering.secret_options !== undefined;
+
+/** Why a control bound to `secret_options` is read-only for this user. */
+export const SECRET_OPTIONS_HIDDEN_REASON = translate(
+  "Only users who can manage this offering's integration settings can view or change it.",
+);
 
 export const useUpdateOfferingIntegration = (
   offering: ProviderOfferingDetails,

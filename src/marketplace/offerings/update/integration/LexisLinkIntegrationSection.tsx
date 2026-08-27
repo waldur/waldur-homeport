@@ -11,7 +11,11 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
 import { OfferingEditPanelProps } from './types';
-import { useUpdateOfferingIntegration } from './utils';
+import {
+  canSeeOfferingSecretOptions,
+  SECRET_OPTIONS_HIDDEN_REASON,
+  useUpdateOfferingIntegration,
+} from './utils';
 
 export const LexisLinkIntegrationSection: FC<OfferingEditPanelProps> = (
   props,
@@ -24,6 +28,11 @@ export const LexisLinkIntegrationSection: FC<OfferingEditPanelProps> = (
   if (!isFeatureVisible(MarketplaceFeatures.lexis_links)) {
     return null;
   }
+
+  // Both passwords live in secret_options, which the backend omits from the
+  // payload of anyone who may not change the offering's integration settings.
+  // Editing one from an empty render would clear it in place.
+  const secretOptionsHidden = !canSeeOfferingSecretOptions(props.offering);
 
   return (
     <FormTable.Card
@@ -51,10 +60,18 @@ export const LexisLinkIntegrationSection: FC<OfferingEditPanelProps> = (
           <SecretEditField
             name="secret_options.heappe_password"
             label={translate('HEAppE password')}
+            disabled={secretOptionsHidden}
+            tooltip={
+              secretOptionsHidden ? SECRET_OPTIONS_HIDDEN_REASON : undefined
+            }
           />
           <SecretEditField
             name="secret_options.heappe_cluster_password"
             label={translate('HEAppE cluster password')}
+            disabled={secretOptionsHidden}
+            tooltip={
+              secretOptionsHidden ? SECRET_OPTIONS_HIDDEN_REASON : undefined
+            }
           />
         </FormTable>
       </EditFieldProvider>

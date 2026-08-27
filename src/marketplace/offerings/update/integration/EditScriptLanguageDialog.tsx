@@ -55,7 +55,7 @@ export const EditScriptLanguageDialog: FC<EditScriptLanguageDialogProps> = ({
     <Form
       onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={{
-        language: resolve.offering.secret_options[resolve.type],
+        language: resolve.offering.secret_options?.[resolve.type],
       }}
       render={({ handleSubmit, invalid, submitting }) => (
         <form onSubmit={handleSubmit}>
