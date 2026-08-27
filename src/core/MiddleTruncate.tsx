@@ -38,8 +38,17 @@ export const MiddleTruncate: FunctionComponent<MiddleTruncateProps> = ({
 
   return (
     <span className={classes} title={text}>
-      <span className="middle-truncate-head">{head}</span>
-      <span className="middle-truncate-tail">{tail}</span>
+      {/* The head/tail split is a layout device: on its own it would put two
+          mid-word fragments ("HPC Cl" + "uster Access") into the accessibility
+          tree. Carry the intact string in a visually hidden node and hide the
+          fragments from assistive technology so the name is announced once. */}
+      <span className="visually-hidden">{text}</span>
+      <span className="middle-truncate-head" aria-hidden="true">
+        {head}
+      </span>
+      <span className="middle-truncate-tail" aria-hidden="true">
+        {tail}
+      </span>
     </span>
   );
 };
