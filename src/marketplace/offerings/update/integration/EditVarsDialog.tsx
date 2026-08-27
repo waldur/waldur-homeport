@@ -45,7 +45,7 @@ export const EditVarsDialog: FC<EditVarsDialogProps> = ({ resolve }) => {
     <Form
       onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={{
-        environ: resolve.offering.secret_options.environ,
+        environ: resolve.offering.secret_options?.environ,
       }}
       mutators={{ ...arrayMutators }}
       render={({ handleSubmit, invalid, submitting }) => (

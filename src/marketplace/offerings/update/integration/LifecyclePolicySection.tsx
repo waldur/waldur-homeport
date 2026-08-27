@@ -19,6 +19,7 @@ import { getRoleLabels, getRoles } from '@/permissions/utils';
 import { OfferingEditPanelProps } from './types';
 import {
   canSeeOfferingSecretOptions,
+  SECRET_OPTIONS_HIDDEN_REASON,
   useUpdateOfferingIntegration,
 } from './utils';
 
@@ -76,14 +77,10 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
   );
 
   // Both order-notification options live in secret_options, which the backend
-  // omits from the payload for anyone who is not an owner or service manager of
-  // the provider organization — even though such a user may still hold the
-  // permission to PATCH integration settings. Editing them from an empty render
-  // would overwrite recipients the user cannot see.
+  // omits from the payload of anyone who may not change the offering's
+  // integration settings. Editing them from an empty render would overwrite
+  // recipients the user cannot see.
   const secretOptionsHidden = !canSeeOfferingSecretOptions(props.offering);
-  const secretOptionsHiddenReason = translate(
-    'Only owners and service managers of the provider organization can view or change this setting.',
-  );
 
   return (
     <EditFieldProvider scope={props.offering} callback={update}>
@@ -196,10 +193,10 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             validate={maxItems(MAX_ORDER_NOTIFICATION_RECIPIENTS)}
             disabled={secretOptionsHidden}
             tooltip={
-              secretOptionsHidden ? secretOptionsHiddenReason : undefined
+              secretOptionsHidden ? SECRET_OPTIONS_HIDDEN_REASON : undefined
             }
             description={translate(
-              'Holders of these roles are emailed about every new order for this offering, regardless of whether the order needs approval. Names are resolved on your organization and on the offering itself. Users who disabled notifications in their profile are skipped. At most {n} roles. Visible only to owners and service managers of your organization.',
+              'Holders of these roles are emailed about every new order for this offering, regardless of whether the order needs approval. Names are resolved on your organization and on the offering itself. Users who disabled notifications in their profile are skipped. At most {n} roles. Visible only to users who can manage the integration settings of this offering.',
               { n: MAX_ORDER_NOTIFICATION_RECIPIENTS },
             )}
           />
@@ -209,10 +206,10 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             validate={maxItems(MAX_ORDER_NOTIFICATION_RECIPIENTS)}
             disabled={secretOptionsHidden}
             tooltip={
-              secretOptionsHidden ? secretOptionsHiddenReason : undefined
+              secretOptionsHidden ? SECRET_OPTIONS_HIDDEN_REASON : undefined
             }
             description={translate(
-              'Email addresses notified about every new order for this offering, regardless of whether the order needs approval. Intended for mailboxes which do not belong to a Waldur user, so these addresses are notified even if a user with the same address disabled notifications. At most {n} addresses, comma-separated. Visible only to owners and service managers of your organization.',
+              'Email addresses notified about every new order for this offering, regardless of whether the order needs approval. Intended for mailboxes which do not belong to a Waldur user, so these addresses are notified even if a user with the same address disabled notifications. At most {n} addresses, comma-separated. Visible only to users who can manage the integration settings of this offering.',
               { n: MAX_ORDER_NOTIFICATION_RECIPIENTS },
             )}
           />

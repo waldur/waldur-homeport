@@ -15,7 +15,11 @@ import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 
 import { GLAuthConfigButton } from './GLAuthConfigButton';
 import { OfferingEditPanelProps } from './types';
-import { useUpdateOfferingIntegration } from './utils';
+import {
+  canSeeOfferingSecretOptions,
+  SECRET_OPTIONS_HIDDEN_REASON,
+  useUpdateOfferingIntegration,
+} from './utils';
 
 type UsernameGenerationPolicyOption = {
   label: string;
@@ -95,6 +99,11 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
   const uidSource = pluginOptions?.uid_source;
   const gidSource = pluginOptions?.gid_source;
 
+  // The shared password lives in secret_options, which the backend omits from
+  // the payload of anyone who may not change the offering's integration
+  // settings. Editing it from an empty render would clear the password in place.
+  const secretOptionsHidden = !canSeeOfferingSecretOptions(props.offering);
+
   return (
     <FormTable.Card
       title={translate('User management')}
@@ -113,7 +122,10 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
             description={translate(
               'If defined, will be set as a password for all offering users',
             )}
-            disabled={!canCreateUser}
+            disabled={!canCreateUser || secretOptionsHidden}
+            tooltip={
+              secretOptionsHidden ? SECRET_OPTIONS_HIDDEN_REASON : undefined
+            }
           />
           <BooleanEditField
             name="plugin_options.service_provider_can_create_offering_user"

@@ -50,7 +50,7 @@ export const EditScriptDialog = ({
 
   const initialValues = useMemo(
     () => ({
-      script: initialSecretOptions[scriptOption.type] || '',
+      script: initialSecretOptions?.[scriptOption.type] || '',
     }),
     [initialSecretOptions, scriptOption.type],
   );
@@ -61,7 +61,7 @@ export const EditScriptDialog = ({
 
   const [executing, setExecuting] = useState<boolean>(false);
   const [scriptExecutionResult, setScriptExecutionResult] = useState('');
-  const language = resolve.offering.secret_options.language;
+  const language = resolve.offering.secret_options?.language;
 
   const updateScript = useCallback(
     async (formData: FormData, form) => {
@@ -323,7 +323,7 @@ export const EditScriptDialog = ({
                     {({ input }) => (
                       <MonacoField
                         input={input}
-                        language={resolve.offering.secret_options.language}
+                        language={language}
                         height={450}
                       />
                     )}

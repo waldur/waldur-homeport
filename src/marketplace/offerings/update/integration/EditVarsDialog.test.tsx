@@ -15,12 +15,12 @@ const fakeOffering = {
   },
 };
 
-const renderDialog = () => {
+const renderDialog = (offering: any = fakeOffering) => {
   return renderWithProviders(
     <EditVarsDialog
       resolve={
         {
-          offering: fakeOffering as any,
+          offering: offering as any,
           refetch: vi.fn(),
         } as any
       }
@@ -37,6 +37,13 @@ describe('EditVarsDialog', () => {
     renderDialog();
     expect(screen.getByDisplayValue('VAR1')).toBeInTheDocument();
     expect(screen.getByDisplayValue('VAL1')).toBeInTheDocument();
+  });
+
+  // The backend omits secret_options from the payload of a user who may not
+  // see it, and reading environ off it used to throw as the dialog rendered.
+  it('renders an empty list when secret_options are not visible', () => {
+    renderDialog({ uuid: 'offering-uuid', name: 'Test Offering' });
+    expect(screen.getByText('No variable defined')).toBeInTheDocument();
   });
 
   it('adds a new variable row when clicking add button', async () => {

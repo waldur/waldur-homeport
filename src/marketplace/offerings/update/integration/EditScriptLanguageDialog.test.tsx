@@ -16,12 +16,12 @@ const fakeOffering = {
   },
 };
 
-const renderDialog = (type = 'language') => {
+const renderDialog = (type = 'language', offering: any = fakeOffering) => {
   return renderWithProviders(
     <EditScriptLanguageDialog
       resolve={
         {
-          offering: fakeOffering as any,
+          offering: offering as any,
           type: type,
           label: 'Script Language',
           refetch: vi.fn(),
@@ -39,6 +39,13 @@ describe('EditScriptLanguageDialog', () => {
   it('renders with initial value from offering secret_options', () => {
     renderDialog();
     expect(screen.getByText('Python')).toBeInTheDocument();
+  });
+
+  // secret_options is absent from the payload of a user who may not see it.
+  it('renders without an initial value when secret_options are not visible', () => {
+    renderDialog('language', { uuid: 'offering-uuid', name: 'Test Offering' });
+    expect(screen.getByText('Confirm')).toBeInTheDocument();
+    expect(screen.queryByText('Python')).not.toBeInTheDocument();
   });
 
   it('updates offering integration on submission', async () => {

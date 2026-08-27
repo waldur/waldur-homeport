@@ -16264,7 +16264,7 @@
       "feature_area": "details"
     }
   },
-  "Email addresses notified about every new order for this offering, regardless of whether the order needs approval. Intended for mailboxes which do not belong to a Waldur user, so these addresses are notified even if a user with the same address disabled notifications. At most {n} addresses, comma-separated. Visible only to owners and service managers of your organization.": {
+  "Email addresses notified about every new order for this offering, regardless of whether the order needs approval. Intended for mailboxes which do not belong to a Waldur user, so these addresses are notified even if a user with the same address disabled notifications. At most {n} addresses, comma-separated. Visible only to users who can manage the integration settings of this offering.": {
     "context": {
       "variables": {
         "n": {
@@ -21233,7 +21233,7 @@
       "feature_area": "actions"
     }
   },
-  "Holders of these roles are emailed about every new order for this offering, regardless of whether the order needs approval. Names are resolved on your organization and on the offering itself. Users who disabled notifications in their profile are skipped. At most {n} roles. Visible only to owners and service managers of your organization.": {
+  "Holders of these roles are emailed about every new order for this offering, regardless of whether the order needs approval. Names are resolved on your organization and on the offering itself. Users who disabled notifications in their profile are skipped. At most {n} roles. Visible only to users who can manage the integration settings of this offering.": {
     "context": {
       "variables": {
         "n": {
@@ -32007,7 +32007,6 @@
       "feature_area": "manage"
     }
   },
-  "Only owners and service managers of the provider organization can view or change this setting.": {},
   "Only part of the allocation can be drawn": {
     "context": {
       "primary_ui_type": "title",
@@ -32060,6 +32059,7 @@
       "feature_area": "actions"
     }
   },
+  "Only users who can manage this offering's integration settings can view or change it.": {},
   "Only your messages are sent to an external LLM service for processing. Your personal data is not shared. Do not share information you would not want processed by a third-party service.": {
     "context": {
       "feature_area": "ai-assistant"
