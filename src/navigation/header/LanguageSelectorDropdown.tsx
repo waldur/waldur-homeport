@@ -16,6 +16,7 @@ export const LanguageCountry = {
   es: 'es',
   et: 'ee',
   fr: 'fr',
+  hr: 'hr',
   it: 'it',
   km: 'kh',
   lt: 'lt',
