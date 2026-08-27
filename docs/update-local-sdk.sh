@@ -37,9 +37,23 @@ echo "HomePort:   $WH2_PATH"
 echo ""
 
 # Step 1: Generate OpenAPI schema from Mastermind into js-client
+#
+# Both the environment and the settings module must match how CI generates the
+# TypeScript schema (waldur-mastermind/.gitlab-ci.yml, "Generate OpenAPI schema"
+# job) — keep this command in step with that line.
+#
+# SKIP_MAKE_FIELDS_OPTIONAL decides which of two mutually exclusive
+# post-processing hooks runs. Unset, make_fields_optional empties required[] for
+# the response of every endpoint taking a `field` query parameter — most of the
+# API — and every property generates as optional. Set, make_readonly_fields_required
+# runs instead and read-only fields stay required, which is what the published
+# waldur-js-client reflects. Generating without it yields an SDK that type-checks
+# code the published one rejects.
 echo "[1/6] Generating OpenAPI schema..."
 cd "$MASTERMIND_PATH"
-uv run waldur spectacular --file "$SCHEMA_FILE" --fail-on-warn
+SKIP_MAKE_FIELDS_OPTIONAL=true \
+  DJANGO_SETTINGS_MODULE=waldur_core.server.doc_settings \
+  uv run waldur spectacular --file "$SCHEMA_FILE" --fail-on-warn
 echo "      Schema generated: $SCHEMA_FILE"
 
 # Step 2: Generate + patch + build the SDK via js-client's own generator.
