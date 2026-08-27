@@ -1137,7 +1137,7 @@ export const SettingsDescription = [
       {
         key: 'LANGUAGE_CHOICES',
         description: translate('List of enabled languages'),
-        default: 'en,et,lt,lv,ru,it,de,da,sv,es,fr,nb,ar,cs,km',
+        default: 'en,et,lt,lv,ru,it,de,da,sv,es,fr,nb,ar,cs,hr,km',
         type: 'string',
       },
     ],
