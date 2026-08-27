@@ -116,6 +116,3 @@ export { getLanguageFlag } from './languageFlags';
 
 export { LanguageMenu } from './LanguageMenu';
 export type { LanguageMenuProps, LanguageOption } from './LanguageMenu';
-
-export { UserMenu } from './UserMenu';
-export type { CurrentUser, UserMenuProps } from './UserMenu';

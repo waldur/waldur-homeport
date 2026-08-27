@@ -34,53 +34,65 @@ it yet.
 
 ## Shared app-shell (`waldur-shell`)
 
-`src/App.tsx` doesn't call the individual packages directly anymore — it
-calls `waldur-shell`'s two bootstrap entry points, which do that
-internally. `waldur-shell` exists because the chrome/bootstrap code below
-is identical across every micro-app, not specific to this one — see
+`src/main.tsx` doesn't call the individual packages directly — it calls
+`waldur-shell`'s single `bootstrapMicroApp()` entry point, which does that
+internally. `waldur-shell` exists because this bootstrap code is identical
+across every micro-app, not specific to this one — see
 `docs/micro-apps.md`'s note on why this was extracted deliberately rather
 than waiting for actual duplication to accumulate across several real
-micro-apps (there's still only one).
+micro-apps (there's still only one). Every option `bootstrapMicroApp()`
+takes is optional with a sane default, down to the API URL itself (reads
+the same `VITE_API_URL`-backed `<meta name="api-url">` tag
+`waldur-homeport`'s own `index.html` uses — see `.env.example`) and the
+brand color (the backend's own real `BRAND_COLOR` setting default) — this
+app calls it with no arguments at all.
 
-- **`initAppShellSync()`** (synchronous, before first render — some of
-  this sets CSS custom properties/attributes read from first paint, so it
-  can't wait for a `useEffect`): `waldur-auth-core`'s
-  `configureAuthCore()`/`initApiClient()`, with a real `localStorage`-backed
-  `StorageAdapter` reading/writing the exact `waldur/auth/*` keys
-  `waldur-homeport`'s own `src/core/StorageManager.ts` uses (not
-  namespaced) — same-origin session sharing, not an isolated demo: a user
-  already logged into the root app shouldn't have to log in again on this
-  subpath. Also sets `waldur-design-tokens`'s font-family/sidebar-style
-  defaults.
-- **`bootstrapAppShellAsync()`** (async, after mount): `waldur-runtime-config`'s
-  `fetchRuntimeConfig()` (this app's own `getApiUrlFromMeta()` call feeds
-  `initAppShellSync()` instead, reading the same `VITE_API_URL`-backed
-  `<meta name="api-url">` tag waldur-homeport's own `index.html` uses — see
-  `.env.example`), `waldur-design-tokens`'s `initBrandTokens()`,
-  `waldur-i18n-runtime`'s `LanguageUtilsService`/`loadSharedLocale()` (the
-  same repo-root `locales/*.json` catalogs `waldur-homeport`'s own
-  `src/i18n` loads), and `waldur-telemetry`'s `initSentry()` (empty DSN,
-  which the SDK no-ops on safely).
+Internally, `bootstrapMicroApp()` runs a synchronous half before returning
+(some of it sets CSS custom properties/attributes read from first paint,
+so it can't wait for a `useEffect`): `waldur-auth-core`'s
+`configureAuthCore()`/`initApiClient()`, with a real `localStorage`-backed
+`StorageAdapter` reading/writing the exact `waldur/auth/*` keys
+`waldur-homeport`'s own `src/core/StorageManager.ts` uses (not
+namespaced) — same-origin session sharing, not an isolated demo: a user
+already logged into the root app shouldn't have to log in again on this
+subpath — plus `waldur-design-tokens`'s font/brand/sidebar-style defaults.
+It then kicks off (without awaiting) a genuinely async half: fetching
+`waldur-runtime-config`'s `fetchRuntimeConfig()`, refining those same
+font/brand/sidebar-style tokens with the tenant's real values,
+initializing `waldur-i18n-runtime`'s `LanguageUtilsService`/
+`loadSharedLocale()` (the same repo-root `locales/*.json` catalogs
+`waldur-homeport`'s own `src/i18n` loads), and `waldur-telemetry`'s
+`initSentry()` if a real DSN is passed (omitted here — this app has none
+yet). The returned promise resolves with the fetched config, for a
+micro-app that needs it for its own app-specific plugin settings; this
+app doesn't.
 
 This app no longer lists `waldur-auth-core`/`waldur-telemetry` as its own
 direct dependencies — both are consumed exclusively through `waldur-shell`
 now, which already declares them itself.
 
+`<AppShell>` itself (not `bootstrapMicroApp()`) constructs current user,
+theme, and language once internally — via `CurrentUserProvider`/
+`ShellThemeProvider`/`ShellLanguageProvider` — and wraps page content in
+a Sentry error boundary, so a crash there shows a fallback in the content
+area while the Sidebar/TopBar/`UserMenu` chrome stays usable. This app
+doesn't call any of those three hooks, or set up its own error handling,
+at all.
+
 ## Dashboard mock
 
 The app's only page — `OrgDashboardMock.tsx` composes `waldur-shell`'s
 `<AppShell>` (the Sidebar/TopBar layout skeleton, plus the TopBar's
-Apps/Help/Notifications/`UserMenu` cluster) with `packages/ui` primitives
-(`StatCard`, `StatusPill`, `DataTable`) for its own page content, wired to
-real Waldur data via `waldur-js-client`
+Apps/Help/Notifications/`UserMenu` cluster, and an error boundary around
+page content — see `ShellErrorBoundary.tsx`) with `packages/ui`
+primitives (`StatCard`, `StatusPill`, `DataTable`) for its own page
+content, wired to real Waldur data via `waldur-js-client`
 (`customersList`/`projectsList`/`invoicesList`/`projectsListUsersCount`).
 Nav items, the org switcher's data, and all page content stay this app's
-own responsibility — everything else (the chrome, the theme toggle) comes
-from `AppShell`/`useShellTheme()`. Moved here from `packages/ui`'s own
-Storybook (where each primitive still has its own isolated story) to
-validate the same composition works in a real standalone app, not just
-Storybook's build pipeline. Supports both light and dark themes, toggled
-via the user-menu dropdown in the TopBar (not a standalone TopBar icon —
+own responsibility — current user, theme, language, and the error
+boundary all come from `AppShell` itself; this file doesn't call any of
+those hooks directly. Supports both light and dark themes, toggled via
+the user-menu dropdown in the TopBar (not a standalone TopBar icon —
 matches `waldur-homeport`'s own real `UserDropdownMenu.tsx`) —
 `waldur-design-tokens/theme.ts` reads/writes the same shared
 `waldur/theme/name` localStorage key and `data-theme` attribute the main
@@ -147,7 +159,7 @@ actually-deployable micro-app.
   invisible until the mobile path above actually mounted here.
 - **The same `getLocaleData(locale)` dynamic-import wrapper existed twice**
   — once in `waldur-homeport`'s own `src/i18n/LanguageUtilsService.ts`,
-  once in this app's `App.tsx` — differing only in how many `../` reached
+  once in this app's own entry point — differing only in how many `../` reached
   the repo root's `locales/*.json` from each file's own location. Only
   visible as duplication once a second real consumer existed. Centralized
   as `waldur-i18n-runtime`'s `loadSharedLocale()`: a dynamic `import()`

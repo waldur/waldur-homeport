@@ -1,17 +1,20 @@
 import { translate } from 'waldur-i18n-runtime';
-
-import { Badge } from './Badge';
-import { CopyButton } from './CopyButton';
 import {
+  Avatar,
+  Badge,
+  CopyButton,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './DropdownMenu';
-import { LanguageMenu, LanguageOption } from './LanguageMenu';
-import { Switch } from './Switch';
-import { Avatar } from './TopBar';
+  LanguageMenu,
+  Switch,
+} from 'waldur-ui';
+
+import { useCurrentUser } from './useCurrentUser';
+import { useShellLanguage } from './useShellLanguage';
+import { useShellTheme } from './useShellTheme';
 
 export interface CurrentUser {
   fullName: string;
@@ -21,19 +24,6 @@ export interface CurrentUser {
   imageSrc?: string;
   token?: string;
   ipAddress: string;
-}
-
-export interface UserMenuProps {
-  currentUser: CurrentUser | null;
-  /** Plain 'light' | 'dark' rather than importing waldur-design-tokens'
-   * ThemeName — this package has no dependency on that package, and the
-   * two types are structurally identical, so any ThemeName value is a
-   * valid value here without a cast. */
-  theme: 'light' | 'dark';
-  onToggleTheme: () => void;
-  currentLanguage: LanguageOption | undefined;
-  languageChoices: LanguageOption[];
-  onLanguageChange: (language: LanguageOption) => void;
 }
 
 // Same acronym derivation as src/core/Avatar.tsx's real Avatar component —
@@ -51,28 +41,35 @@ function getInitials(name: string): string {
 /**
  * UserDropdownMenu.tsx's real component — TopBar's avatar trigger plus
  * its full dropdown content (header block, language switcher, dark-theme
- * toggle, API token, IP address). Originally a micro-app-poc-local file;
- * moved here once a second micro-app made "reusable, not duplicated"
- * matter — nothing about this component is specific to any one app, only
- * to the shape of a signed-in user, a theme, and a language list, all of
- * which arrive as props. See DropdownMenu.tsx's comments for why each
- * piece looks the way it does (LanguageMenu/RadioItem for the
- * org-switcher-shaped language list, the real toggle switch instead of a
- * checkmark, etc.) — this file only composes them.
+ * toggle, API token, IP address). Originally a micro-app-poc-local file,
+ * then a waldur-ui one once a second micro-app made "reusable, not
+ * duplicated" matter; moved again into waldur-shell once AppShell started
+ * constructing currentUser/theme/language itself (see AppShell.tsx's own
+ * comment) — this component is really shell chrome, not a general-purpose
+ * UI primitive, so it belongs next to the providers that feed it rather
+ * than in the primitives package. Imports every piece it composes (Badge,
+ * CopyButton, the DropdownMenu family, LanguageMenu, Switch, Avatar) from
+ * waldur-ui, a dependency waldur-shell already has.
  *
- * Calls translate() directly (waldur-i18n-runtime is now a real dependency
- * of this package, same as LanguageMenu.tsx) rather than taking a
- * pre-translated `labels` prop — see that file's comment on why the
- * package's earlier "no i18n dependency" boundary was dropped.
+ * Takes no props — reads useCurrentUser()/useShellTheme()/
+ * useShellLanguage() directly instead of AppShellContent computing all
+ * three just to hand them straight back down one level (the exact
+ * passthrough these hooks/providers were built to eliminate; see
+ * AppShell.tsx's own comment). Only works as a descendant of <AppShell>,
+ * same requirement each of those hooks already documents on its own.
+ *
+ * Calls translate() directly (waldur-i18n-runtime is a dependency of this
+ * package too, same as useShellLanguage.tsx) rather than taking a
+ * pre-translated `labels` prop — see waldur-ui's LanguageMenu.tsx comment
+ * on why that package's earlier "no i18n dependency" boundary was dropped;
+ * the same reasoning applies here.
  */
-export function UserMenu({
-  currentUser,
-  theme,
-  onToggleTheme,
-  currentLanguage,
-  languageChoices,
-  onLanguageChange,
-}: UserMenuProps) {
+export function UserMenu() {
+  const currentUser = useCurrentUser();
+  const { theme, toggleTheme } = useShellTheme();
+  const { currentLanguage, languageChoices, onLanguageChange } =
+    useShellLanguage();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -174,7 +171,7 @@ export function UserMenu({
             (pointer-events-none) — wiring its own onCheckedChange too
             would double-toggle when a click on it bubbles up to the row
             anyway. */}
-        <DropdownMenuItem onClick={onToggleTheme}>
+        <DropdownMenuItem onClick={toggleTheme}>
           {translate('Dark theme')}
           <Switch
             checked={theme === 'dark'}

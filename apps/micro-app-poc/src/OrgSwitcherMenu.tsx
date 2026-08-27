@@ -20,9 +20,9 @@ export interface OrgSwitcherMenuProps {
 }
 
 /**
- * OrgSwitcher's dropdown content — the organisation list, split out the
- * same way UserMenu.tsx is: a self-contained piece with clear inputs,
- * previously inlined in OrgDashboardMock.tsx's TopBar `left` slot.
+ * OrgSwitcher's dropdown content — the organisation list, a self-contained
+ * piece with clear inputs, split out of OrgDashboardMock.tsx the same way
+ * UserMenu.tsx is.
  */
 export function OrgSwitcherMenu({
   customers,

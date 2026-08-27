@@ -19770,6 +19770,9 @@ __metadata:
 "waldur-design-tokens@workspace:*, waldur-design-tokens@workspace:packages/design-tokens":
   version: 0.0.0-use.local
   resolution: "waldur-design-tokens@workspace:packages/design-tokens"
+  dependencies:
+    "@fontsource/inter": "npm:^5.2.8"
+    "@fontsource/maven-pro": "npm:^5.2.10"
   languageName: unknown
   linkType: soft
 
@@ -19785,8 +19788,6 @@ __metadata:
     "@dnd-kit/sortable": "npm:^8.0.0"
     "@emoji-mart/data": "npm:^1.2.1"
     "@emoji-mart/react": "npm:^1.1.1"
-    "@fontsource/inter": "npm:^5.2.8"
-    "@fontsource/maven-pro": "npm:^5.2.10"
     "@fontsource/open-sans": "npm:^4.5.14"
     "@iconify-json/ph": "npm:^1.2.2"
     "@jonkoops/matomo-tracker": "npm:^0.7.0"
@@ -19963,8 +19964,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "waldur-micro-app-poc@workspace:apps/micro-app-poc"
   dependencies:
-    "@fontsource/inter": "npm:^5.2.8"
-    "@fontsource/maven-pro": "npm:^5.2.10"
     "@phosphor-icons/react": "npm:^2.1.7"
     "@tailwindcss/vite": "npm:^4.3.3"
     "@types/react": "npm:^18.3.0"

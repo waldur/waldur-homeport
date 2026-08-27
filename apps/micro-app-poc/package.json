@@ -14,8 +14,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/maven-pro": "^5.2.10",
     "@phosphor-icons/react": "^2.1.7",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",

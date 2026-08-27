@@ -16,14 +16,12 @@ micro-frontend would — not through the root app's own `src/`, its
 `apps/micro-app-poc` for a concrete example and what building one that
 way surfaced about `packages/*`'s own portability gaps.
 
-A new micro-app that wants the same Sidebar/TopBar chrome and app
-bootstrap sequence (auth, font/brand-token, sidebar-style, i18n, Sentry)
-doesn't need to rebuild any of that — see `packages/shell` (`waldur-shell`)
-and `apps/micro-app-poc/README.md`'s "Shared app-shell" section.
-Reach for it directly rather than re-deriving the same bootstrap wiring
-`micro-app-poc` used to have inline; see this doc's "Known gaps" section
-for why it was extracted deliberately rather than left as a pattern to
-copy per app.
+A new micro-app that wants the same Sidebar/TopBar chrome, page-content
+error boundary, and app bootstrap sequence (auth, font/brand-token,
+sidebar-style, i18n, Sentry) doesn't need to rebuild any of that — see
+`packages/shell` (`waldur-shell`) and `apps/micro-app-poc/README.md`'s
+"Shared app-shell" section. Reach for it directly rather than re-deriving
+the same wiring per app.
 
 **The convention is directory presence, not a manifest.** Every `apps/*`
 member is picked up automatically — by `yarn install` (via the
@@ -167,10 +165,10 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
    `<meta name="api-url" content="%VITE_API_URL%">`, same as the root
    app's), `vite.config.ts` (own dev port — check `.claude/launch.json` and
    existing `apps/*` for ports already taken), `tsconfig.json`.
-2. Add `waldur-shell` as a dependency and call its `initAppShellSync()`/
-   `bootstrapAppShellAsync()` from your own entry point, and compose
-   `<AppShell>` for the page chrome — see `apps/micro-app-poc/src/App.tsx`/
-   `OrgDashboardMock.tsx` for the reference wiring. Skip this only if the
+2. Add `waldur-shell` as a dependency and call its `bootstrapMicroApp()`
+   from your own entry point, and compose `<AppShell>` for the page chrome
+   — see `apps/micro-app-poc/src/main.tsx`/`OrgDashboardMock.tsx` for the
+   reference wiring. Skip this only if the
    new app genuinely needs different chrome, not just different nav
    content (`AppShell` already takes nav items/page content as props).
 3. Decide whether it ships: omit `"waldur": { "deploy": false }` to ship by
@@ -190,20 +188,12 @@ MR's live k8s preview, while never appearing in a real `Publish` image.
   static list read by an external tool, one port per entry — a new
   micro-app still needs a hand-added entry there, and the hub-level and
   repo-level copies can drift.
-- **Shared bootstrap code, resolved: `packages/shell` (`waldur-shell`).**
-  Extracted deliberately — before a second real micro-app existed to force
-  the issue, not from actual accumulated duplication — once it was clear
-  the Sidebar/TopBar chrome and the `configureAuthCore`/`initApiClient`/
-  font/brand-token/sidebar-style/i18n/Sentry bootstrap sequence would be
-  identical for any future micro-app. See
-  `apps/micro-app-poc/README.md`'s "Shared app-shell" section for what it
-  covers and what a new micro-app gets for free versus what stays its own
-  responsibility (nav content, page content, org/customer data). A
-  genuinely different micro-app (a different chrome shape entirely, not
-  just different nav items) is still real, independent
-  evidence about `packages/ui`'s own primitives — `waldur-shell` only
-  removes duplication in the _composition_ of those primitives into one
-  particular chrome, not in the primitives themselves.
+- **`waldur-shell` only dedupes chrome _composition_, not `packages/ui`'s
+  primitives themselves.** A genuinely different micro-app (a different
+  chrome shape entirely, not just different nav items) is still real,
+  independent evidence about those primitives' own portability — see
+  `apps/micro-app-poc/README.md`'s "Shared app-shell" section for what
+  `waldur-shell` covers versus what stays each app's own responsibility.
 - **One shared image vs. one image per micro-app.** Today every micro-app
   is coupled to the root app's release cadence (a micro-app change forces a
   full homeport rebuild/redeploy). True per-micro-app deploy independence
