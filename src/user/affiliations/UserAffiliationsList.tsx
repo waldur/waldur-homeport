@@ -142,6 +142,20 @@ export const UserAffiliationsList: FunctionComponent<
             <>{row.scope_name}</>
           );
         }
+        if (row.scope_type === 'proposal') {
+          // No role gate here, unlike calls below: the proposal role *is* the
+          // grant. The backend answers a proposal retrieve 200 for anyone
+          // holding PROPOSAL.MANAGER or PROPOSAL.MEMBER on it and 404 for
+          // everyone else, so any row that reached this table can open its
+          // own scope.
+          return (
+            <Link
+              state="proposals.manage-proposal"
+              params={{ proposal_uuid: row.scope_uuid }}
+              label={row.scope_name}
+            />
+          );
+        }
         if (row.scope_type === 'call') {
           // Only the call manager can open the call management dashboard
           // (mirrors checkIsCallManager / the CallTabs "Manage" gate), so

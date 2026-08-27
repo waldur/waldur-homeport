@@ -43,34 +43,42 @@ export interface ProposalStatesOption {
   value: ProposalStates;
 }
 
-export const ProposalsFilter: FunctionComponent<{}> = () => (
+export const ProposalsFilter: FunctionComponent<ProposalsFilterProps> = (
+  props,
+) => (
   <>
     <SelectFilter
       title={translate('State')}
       name="state"
       getValueLabel={(value: ProposalStatesOption) => value?.label}
-      placeholder={translate('State')}
       options={ProposalStatesOptions}
       getOptionValue={(option: ProposalStatesOption) => String(option.value)}
       getOptionLabel={(option: ProposalStatesOption) => option.label}
       isClearable={true}
       isMulti={true}
+      placeholder={translate('State')}
     />
-    <AsyncSelectFilter
-      title={translate('Call')}
-      name="call"
-      getValueLabel={(value: PublicCall) => value?.name}
-      placeholder={translate('Call')}
-      loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
-      defaultOptions
-      getOptionValue={(option: PublicCall) => String(option.uuid || '')}
-      getOptionLabel={(option: PublicCall) => String(option.name || '')}
-      isClearable={true}
-    />
+    {!props.hideCall && (
+      <AsyncSelectFilter
+        title={translate('Call')}
+        name="call"
+        getValueLabel={(value: PublicCall) => value?.name}
+        loadOptions={createLoadOptions(proposalPublicCallsList, 'name')}
+        defaultOptions
+        getOptionValue={(option: PublicCall) => String(option.uuid || '')}
+        getOptionLabel={(option: PublicCall) => String(option.name || '')}
+        isClearable={true}
+        placeholder={translate('Call')}
+      />
+    )}
   </>
 );
 
 export const ProposalsFilterFormId = 'ProposalsFilter';
+
+interface ProposalsFilterProps {
+  hideCall?: boolean;
+}
 
 export interface ProposalsFilterFormData {
   state: ProposalStatesOption[];

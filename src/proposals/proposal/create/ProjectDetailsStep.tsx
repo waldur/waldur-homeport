@@ -9,6 +9,8 @@ import { StringGroup, TextGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ScienceDomainGroup } from '@/project/create/ScienceDomainGroup';
+import { publicCallKey } from '@/proposals/callQueries';
+import { showsProposalDuration } from '@/proposals/presentation';
 import { Call, ProposalReview } from '@/proposals/types';
 import { VStepperFormStepProps } from '@/wizard';
 
@@ -23,6 +25,8 @@ import {
 import { StepHeaderContent } from './StepHeaderContent';
 import { UploadDocumentationFiles } from './UploadDocumentationFiles';
 
+const DURATION_FIELDS = ['fixed_duration_in_days'] as const;
+
 export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const reviews: ProposalReview[] = props.params?.reviews;
   const proposal = props.params?.proposal;
@@ -33,7 +37,9 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const onToggle = props.params?.onToggle;
 
   // Only the fields this call actually asks for are counted, so the step can
-  // reach its own total. A field the call hides is neither rendered nor tracked.
+  // reach its own total. A field the call hides is neither rendered nor tracked,
+  // and getTrackedFields applies the same rule to the duration.
+  const showsDuration = showsProposalDuration();
   const fieldStates = useMemo(
     () => getFieldStates(props.params?.call?.proposal_field_config),
     [props.params?.call],
@@ -53,26 +59,35 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   }, [values, trackedFields]);
 
   const { data: call } = useQuery({
-    queryKey: ['Call', proposal.call_uuid],
+    queryKey: publicCallKey(proposal.call_uuid, DURATION_FIELDS),
 
     queryFn: () =>
       proposalPublicCallsRetrieve({
         path: { uuid: proposal.call_uuid },
-        query: { field: ['fixed_duration_in_days'] },
+        query: { field: DURATION_FIELDS },
       }).then(
         (response) => response.data as Pick<Call, 'fixed_duration_in_days'>,
       ),
 
+    // The call is fetched for one reason: to prefill the duration. With the
+    // field hidden there is nothing to prefill, so don't ask for it.
+    enabled: showsDuration,
     refetchOnWindowFocus: false,
   });
 
   // Set duration from call's fixed_duration_in_days if available
   const form = useForm();
   useEffect(() => {
+    if (!showsDuration) return;
     if (call?.fixed_duration_in_days && !values?.duration_in_days) {
       form.change('duration_in_days', call.fixed_duration_in_days);
     }
-  }, [call?.fixed_duration_in_days, form, values?.duration_in_days]);
+  }, [
+    showsDuration,
+    call?.fixed_duration_in_days,
+    form,
+    values?.duration_in_days,
+  ]);
 
   return (
     <AccordionCard
@@ -145,17 +160,21 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           }
         />
       )}
-      <StringGroup
-        name="duration_in_days"
-        placeholder={translate('Enter number of days...')}
-        disabled={!!call?.fixed_duration_in_days}
-        label={translate('Project duration in days')}
-        required
-      />
-      <FieldReviewComments
-        reviews={reviews}
-        fieldName="comment_project_duration"
-      />
+      {showsDuration && (
+        <>
+          <StringGroup
+            name="duration_in_days"
+            placeholder={translate('Enter number of days...')}
+            disabled={!!call?.fixed_duration_in_days}
+            label={translate('Project duration in days')}
+            required
+          />
+          <FieldReviewComments
+            reviews={reviews}
+            fieldName="comment_project_duration"
+          />
+        </>
+      )}
       {isFieldVisible(fieldStates, 'supporting_documentation') && (
         <>
           <FormGroup

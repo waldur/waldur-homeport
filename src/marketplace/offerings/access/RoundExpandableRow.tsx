@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { SubmittableRound } from '@/marketplace/offerings/apply/eligibleCalls';
+import { usesCallVocabulary } from '@/proposals/presentation';
 
 /** One label/value line, omitted entirely when there is no value to show. */
 const Line: FC<{ label: string; value?: string | null }> = ({
@@ -53,7 +54,14 @@ export const RoundExpandableRow: FC<{ row: SubmittableRound }> = ({ row }) => {
       />
       <Line label={translate('Decision expected')} value={decision} />
       <Line
-        label={translate('Award duration')}
+        // The duration is dropped from the request form where the deployment
+        // does not run calls, but it belongs here either way: it is how long
+        // the access lasts, which is part of choosing a deadline at all.
+        label={
+          usesCallVocabulary()
+            ? translate('Award duration')
+            : translate('Access lasts')
+        }
         value={
           call.fixed_duration_in_days
             ? translate('{count} days', { count: call.fixed_duration_in_days })
@@ -65,9 +73,13 @@ export const RoundExpandableRow: FC<{ row: SubmittableRound }> = ({ row }) => {
       {call.has_eligibility_restrictions ? (
         <div className="d-flex align-items-center gap-2 text-warning">
           <WarningCircleIcon weight="bold" />
-          {translate(
-            'This call restricts who may apply. Check the terms before submitting.',
-          )}
+          {usesCallVocabulary()
+            ? translate(
+                'This call restricts who may apply. Check the terms before submitting.',
+              )
+            : translate(
+                'Not everyone is eligible to apply here. Check the terms before submitting.',
+              )}
         </div>
       ) : null}
       {call.description ? (
@@ -80,7 +92,9 @@ export const RoundExpandableRow: FC<{ row: SubmittableRound }> = ({ row }) => {
           rel="noopener noreferrer"
           className="mt-1"
         >
-          {translate('Call details')}
+          {usesCallVocabulary()
+            ? translate('Call details')
+            : translate('More information')}
         </a>
       ) : null}
     </div>

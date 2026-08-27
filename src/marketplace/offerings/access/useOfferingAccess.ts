@@ -11,13 +11,11 @@ import {
   getSubmittableRounds,
   SubmittableRound,
 } from '@/marketplace/offerings/apply/eligibleCalls';
-import {
-  hasCallVocabulary,
-  isProposalRequestEnabled,
-} from '@/marketplace/serviceAccessMode';
+import { isProposalRequestEnabled } from '@/marketplace/serviceAccessMode';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
@@ -117,7 +115,7 @@ export const useOfferingAccess = (
       items.push({
         key: 'apply',
         label: translate('Apply for access'),
-        description: hasCallVocabulary()
+        description: usesCallVocabulary()
           ? translate(
               'Submitted to an open call and reviewed by the provider. If it is accepted, a new project is created with the resources you asked for.',
             )
@@ -207,7 +205,7 @@ export const useOfferingAccess = (
       if (routes.length === 1 && rounds.length === 1) {
         openDialog(AddProposalDialog, {
           // See RequestAccessDialog: the inline request needs the room.
-          size: hasCallVocabulary() ? undefined : 'lg',
+          size: usesCallVocabulary() ? undefined : 'lg',
           resolve: {
             call: rounds[0].call,
             round: rounds[0].round,

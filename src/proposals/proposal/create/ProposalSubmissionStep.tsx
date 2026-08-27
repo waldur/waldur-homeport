@@ -20,6 +20,7 @@ import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { evaluateCondition } from '@/marketplace-checklist/questionDependencies';
 import { useModal } from '@/modal/actions';
+import { usesCallVocabulary, requestListState } from '@/proposals/presentation';
 import { hasRequestedAmount } from '@/proposals/requestedResourceCost';
 import { useNotify } from '@/store/notify';
 
@@ -294,7 +295,11 @@ export const ProposalSubmissionStep: FC<{
           proposal_uuid,
           formValues.supporting_documentation,
         );
-        showSuccess(translate('Proposal updated successfully'));
+        showSuccess(
+          usesCallVocabulary()
+            ? translate('Proposal updated successfully')
+            : translate('Access request updated successfully'),
+        );
         // Invalidate checklist query to refresh compliance answers with stored file info
         await queryClient.invalidateQueries({
           queryKey: ['ProposalChecklist', proposal_uuid],
@@ -311,7 +316,9 @@ export const ProposalSubmissionStep: FC<{
       try {
         await confirm(
           translate('Confirmation'),
-          translate('Are you sure you want to submit the proposal?'),
+          usesCallVocabulary()
+            ? translate('Are you sure you want to submit the proposal?')
+            : translate('Are you sure you want to submit the access request?'),
         );
       } catch {
         return;
@@ -327,12 +334,16 @@ export const ProposalSubmissionStep: FC<{
           formValues.supporting_documentation,
         );
         await proposalProposalsSubmit({ path: { uuid: proposal_uuid } });
-        showSuccess(translate('Proposal submitted successfully'));
+        showSuccess(
+          usesCallVocabulary()
+            ? translate('Proposal submitted successfully')
+            : translate('Access request submitted successfully'),
+        );
         // Leave the edit page rather than mutating it in place: on submit the
         // proposal flips out of 'draft', which would swap the form for the
         // read-only view and pop the stepper in above — a jarring live update.
         // Send the applicant to their proposals list instead.
-        router.stateService.go('proposals-all-proposals');
+        router.stateService.go(requestListState());
       } catch (error) {
         showErrorResponse(error, translate('Something went wrong'));
       }

@@ -247,7 +247,11 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           isRequired={isRequired}
           metadata={
             resourceCount > 0
-              ? translate('{count} resources', { count: resourceCount })
+              ? // Whole strings per form rather than a noun after a number:
+                // inflected languages do not take "{count} resource(s)".
+                resourceCount === 1
+                ? translate('{count} resource', { count: resourceCount })
+                : translate('{count} resources', { count: resourceCount })
               : undefined
           }
         />

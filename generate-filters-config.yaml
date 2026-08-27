@@ -1042,6 +1042,10 @@ overrides:
       label: Call
       name: call
       operationId: proposal_public_calls_list
+      # The applicant list drops this where the deployment hides calls; the
+      # call-manager list keeps it in every mode, so it is a prop rather than
+      # a second generated component.
+      isHidden: props.hideCall
 
   proposal_requested_offerings:
     filters:

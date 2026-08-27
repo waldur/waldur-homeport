@@ -9,6 +9,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
+import { showsCallContext } from '@/proposals/presentation';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
 
 export const ResourceRequestWizardFormFirstPage: FunctionComponent<
@@ -67,13 +68,19 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
             </h2>
             {hasPlanlessOfferings ? (
               <p className="mb-0">
-                {translate(
-                  'This call lists offerings, but none of them has a plan, so none can be requested. Ask the call manager to set one.',
-                )}
+                {showsCallContext()
+                  ? translate(
+                      'This call lists offerings, but none of them has a plan, so none can be requested. Ask the call manager to set one.',
+                    )
+                  : translate(
+                      'The offerings here are not priced yet, so none can be requested. Please contact support.',
+                    )}
               </p>
             ) : (
               <p className="mb-0">
-                {translate('No offerings have been added to this call yet.')}
+                {showsCallContext()
+                  ? translate('No offerings have been added to this call yet.')
+                  : translate('There is nothing available to request yet.')}
               </p>
             )}
           </div>

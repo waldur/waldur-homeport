@@ -10,10 +10,10 @@ import { translate } from '@/i18n';
 import { CustomerField } from '@/marketplace/details/CustomerField';
 import { ProjectField } from '@/marketplace/details/ProjectField';
 import { SubmittableRound } from '@/marketplace/offerings/apply/eligibleCalls';
-import { hasCallVocabulary } from '@/marketplace/serviceAccessMode';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { usesCallVocabulary } from '@/proposals/presentation';
 
 import { RoundSelectTable } from './RoundSelectTable';
 import { AccessMethod, AccessMethodKey } from './types';
@@ -118,7 +118,7 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
     openDialog(AddProposalDialog, {
       // Marketplace mode folds the amounts and their prices into that dialog,
       // which the default width clips.
-      size: hasCallVocabulary() ? undefined : 'lg',
+      size: usesCallVocabulary() ? undefined : 'lg',
       resolve: {
         call: selected.call,
         round: selected.round,
@@ -137,7 +137,7 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
             title={
               methods.length > 1
                 ? translate('Choose how to request this offering')
-                : hasCallVocabulary()
+                : usesCallVocabulary()
                   ? translate('Choose a round for your application')
                   : translate('Choose a submission deadline')
             }
@@ -206,12 +206,12 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                   <div>
                     {methods.length > 1 ? <hr className="mt-0" /> : null}
                     <div className="fw-bold">
-                      {hasCallVocabulary()
+                      {usesCallVocabulary()
                         ? translate('Round')
                         : translate('Submission deadline')}
                     </div>
                     <div className="text-muted fs-7 mb-4">
-                      {hasCallVocabulary()
+                      {usesCallVocabulary()
                         ? translate(
                             'Your proposal is reviewed under the call and round you pick.',
                           )

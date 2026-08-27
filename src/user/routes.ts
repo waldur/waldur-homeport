@@ -15,6 +15,7 @@ import {
   isCallsSectionVisible,
   isProposalRequestEnabled,
 } from '@/marketplace/serviceAccessMode';
+import { requestListTitle } from '@/proposals/presentation';
 import {
   getUser,
   hasNonProjectPermissions,
@@ -138,7 +139,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      breadcrumb: () => translate('My proposals'),
+      breadcrumb: () => requestListTitle(),
       permissions: [() => !isCallsSectionVisible()],
       priority: 123,
     },

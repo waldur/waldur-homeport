@@ -14,7 +14,14 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { PageBarProvider } from '@/marketplace/context';
+import { useBreadcrumbs } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
+import {
+  useCallManagedProposalBreadcrumbItems,
+  useProposalBreadcrumbItems,
+} from '@/proposals/breadcrumbs';
+import { usesCallVocabulary } from '@/proposals/presentation';
+import { Proposal } from '@/proposals/types';
 import { useUser } from '@/workspace/hooks';
 
 import { ProposalDetails } from '../ProposalDetails';
@@ -23,6 +30,35 @@ import { WorkflowTimeline } from '../WorkflowTimeline';
 
 import { ProposalHeader } from './ProposalHeader';
 import { ProposalSubmissionStep } from './ProposalSubmissionStep';
+
+/**
+ * Sets the applicant's breadcrumb chain.
+ *
+ * A component rather than a bare hook call in the page, so it can be left out
+ * entirely for the call-manager view: that route hangs off `call-management`,
+ * whose OrganizationUIView already publishes the organisation chain, and
+ * setting an empty list from here would strip it.
+ */
+const ApplicantBreadcrumbs = ({ proposal }: { proposal: Proposal }) => {
+  useBreadcrumbs(useProposalBreadcrumbItems(proposal));
+  return null;
+};
+
+/**
+ * The call team's chain, down the structure that owns the proposal rather than
+ * through anyone's profile. Same component-not-hook reason as above: the two
+ * are mutually exclusive, and a hook cannot be called conditionally.
+ */
+const CallManagerBreadcrumbs = ({
+  call,
+  proposal,
+}: {
+  call: any;
+  proposal: Proposal;
+}) => {
+  useBreadcrumbs(useCallManagedProposalBreadcrumbItems(call, proposal));
+  return null;
+};
 
 export const ProposalManagePage = () => {
   const {
@@ -46,10 +82,14 @@ export const ProposalManagePage = () => {
     refetchOnWindowFocus: false,
   });
 
-  const title =
-    proposal?.state === 'draft'
+  const isDraft = proposal?.state === 'draft';
+  const title = usesCallVocabulary()
+    ? isDraft
       ? translate('Update proposal')
-      : translate('View proposal');
+      : translate('View proposal')
+    : isDraft
+      ? translate('Update access request')
+      : translate('View access request');
   useTitle(title);
 
   const user = useUser();
@@ -67,7 +107,10 @@ export const ProposalManagePage = () => {
         query: {
           field: [
             'uuid',
+            'name',
             'customer_uuid',
+            // Both name the call-manager breadcrumb chain.
+            'customer_name',
             'manager_uuid',
             'compliance_checklist',
             'compliance_checklist_name',
@@ -144,6 +187,11 @@ export const ProposalManagePage = () => {
     <PageBarProvider scrollOffset={100}>
       <SidebarLayout.Header className="pb-5">
         <div className="w-100">
+          {isCallManagerView ? (
+            <CallManagerBreadcrumbs call={call} proposal={proposal} />
+          ) : (
+            <ApplicantBreadcrumbs proposal={proposal} />
+          )}
           <ProposalRoleBasedTabs
             review={userReview}
             proposal={proposal}

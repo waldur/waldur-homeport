@@ -20,6 +20,7 @@ import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { ProjectLink } from '@/project/ProjectLink';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 import { ResourceLink } from '@/resource/ResourceLink';
 import { Field } from '@/resource/summary';
@@ -203,7 +204,11 @@ const AllocationOutcome: FC<{ proposal: Proposal; projectUuid: string }> = ({
       // submission's own cards, the title is what marks the boundary between
       // what was asked for and what came of it.
       title={translate('Allocation outcome')}
-      subtitle={translate('What this proposal produced once it was accepted.')}
+      subtitle={
+        usesCallVocabulary()
+          ? translate('What this proposal produced once it was accepted.')
+          : translate('What this request produced once it was approved.')
+      }
       defaultOpen
     >
       <Row className="fs-6 mb-4">

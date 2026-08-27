@@ -852,6 +852,16 @@
       "action_type": "create"
     }
   },
+  "Accept \"{name}\"? The requested resources will be provisioned.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "proposal"
+    }
+  },
   "Accept & continue": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -1041,6 +1051,11 @@
       "feature_area": "affiliations"
     }
   },
+  "Access lasts": {
+    "context": {
+      "feature_area": "access"
+    }
+  },
   "Access management": {
     "context": {
       "feature_area": "sidebar"
@@ -1062,6 +1077,26 @@
       "feature_area": "actions"
     }
   },
+  "Access request": {},
+  "Access request created successfully": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "create"
+    }
+  },
+  "Access request submitted successfully": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "create"
+    }
+  },
+  "Access request updated successfully": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "create"
+    }
+  },
+  "Access requests": {},
   "Access resource": {
     "context": {
       "feature_area": "resource"
@@ -3737,11 +3772,6 @@
       "feature_area": "workflow-steps"
     }
   },
-  "Applicants can see step details, not just status.": {
-    "context": {
-      "feature_area": "workflow-steps"
-    }
-  },
   "Applicants must give a purchase order reference or attach the document before the proposal can be submitted. The provider sets this on the offering; the call keeps the setting it had when the offering was added.": {
     "context": {
       "feature_area": "offerings"
@@ -5279,6 +5309,11 @@
       }
     }
   },
+  "Are you sure you want to submit the access request?": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Are you sure you want to submit the order?": {
     "context": {
       "feature_area": "deploy"
@@ -6778,6 +6813,7 @@
       "feature_area": "policies"
     }
   },
+  "Awaiting your response": {},
   "Award": {
     "context": {
       "feature_area": "managed-projects"
@@ -9824,11 +9860,8 @@
       "feature_area": "offering-users"
     }
   },
-  "Compliance questions answered during proposal submission.": {
-    "context": {
-      "feature_area": "create"
-    }
-  },
+  "Compliance questions answered during proposal submission.": {},
+  "Compliance questions answered when the request was submitted.": {},
   "Compliance rate": {
     "context": {
       "primary_ui_type": "title",
@@ -13310,9 +13343,30 @@
       "feature_area": "access"
     }
   },
+  "Decision expected by {date}.": {
+    "context": {
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "proposal"
+    }
+  },
   "Decline": {
     "context": {
+      "primary_ui_type": "action_button",
       "feature_area": "invitations"
+    }
+  },
+  "Decline \"{name}\"? The request will be withdrawn.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "proposal"
     }
   },
   "Decline assignment": {
@@ -17055,6 +17109,11 @@
       "feature_area": "create"
     }
   },
+  "Enter a reason for declining": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Enter a reason for declining the award": {
     "context": {
       "feature_area": "proposal"
@@ -19082,6 +19141,11 @@
   "Favourites": {
     "context": {
       "feature_area": "search"
+    }
+  },
+  "Feasibility decisions from the service provider.": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "Feasibility decisions from the technical reviewers.": {
@@ -27910,6 +27974,11 @@
       "feature_area": "chat"
     }
   },
+  "More information": {
+    "context": {
+      "feature_area": "access"
+    }
+  },
   "Most used checklists": {
     "context": {
       "primary_ui_type": "title"
@@ -28199,6 +28268,7 @@
       "action_type": "create"
     }
   },
+  "My access requests": {},
   "My offerings": {
     "context": {
       "feature_area": "marketplace"
@@ -30704,6 +30774,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Not everyone is eligible to apply here. Check the terms before submitting.": {
+    "context": {
+      "feature_area": "access"
+    }
+  },
   "Not helpful": {
     "context": {
       "feature_area": "shared"
@@ -31830,6 +31905,11 @@
   "On track": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "On, applicants see this step by name on their progress tracker. Off, they see only that their proposal is in review while it runs.": {
+    "context": {
+      "feature_area": "workflow-steps"
     }
   },
   "On-time rate": {
@@ -37860,6 +37940,11 @@
       "feature_area": "resource"
     }
   },
+  "Provider feedback": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Provider info": {
     "context": {
       "primary_ui_type": "title",
@@ -40324,6 +40409,11 @@
       "feature_area": "access"
     }
   },
+  "Request ID": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Request SLURM resource downscaling (slowdown QoS)": {
     "context": {
       "primary_ui_type": "label"
@@ -40338,6 +40428,12 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "steps"
+    }
+  },
+  "Request accepted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "proposal"
     }
   },
   "Request access": {
@@ -40368,6 +40464,12 @@
       "action_type": "create"
     }
   },
+  "Request declined.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "proposal"
+    }
+  },
   "Request deletion": {
     "context": {
       "feature_area": "cluster"
@@ -40379,6 +40481,11 @@
     }
   },
   "Request detail": {},
+  "Request details overview": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Request downscaling of SLURM allocations": {},
   "Request downscaling of resources": {
     "context": {
@@ -40459,6 +40566,11 @@
   "Request limit change": {
     "context": {
       "feature_area": "request-limits-change"
+    }
+  },
+  "Request not available.": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "Request pausing of SLURM allocations": {},
@@ -41740,6 +41852,11 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "Resources requested for this access request.": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "Resources requested for this proposal.": {
@@ -50033,6 +50150,11 @@
       "feature_area": "import"
     }
   },
+  "The offerings here are not priced yet, so none can be requested. Please contact support.": {
+    "context": {
+      "feature_area": "resource-requests-step"
+    }
+  },
   "The official registration number of your company": {
     "context": {
       "feature_area": "organization-create"
@@ -50555,6 +50677,11 @@
       "feature_area": "actions"
     }
   },
+  "There are no proposals in this round.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "There are no questions in this checklist yet": {
     "context": {
       "feature_area": "questions"
@@ -50650,6 +50777,11 @@
   "There is no user with this username.": {
     "context": {
       "feature_area": "import-users"
+    }
+  },
+  "There is nothing available to request yet.": {
+    "context": {
+      "feature_area": "resource-requests-step"
     }
   },
   "There was an error on the server. Please wait, we will fix it soon.": {},
@@ -51076,12 +51208,22 @@
       "feature_area": "offerings"
     }
   },
+  "This offering requires a purchase order. Give its reference, attach the document, or both. You can save the request now and add it before submitting the access request.": {
+    "context": {
+      "feature_area": "proposals"
+    }
+  },
   "This offering requires a purchase order. Give its reference, attach the document, or both. You can save the request now and add it before submitting the proposal.": {
     "context": {
       "feature_area": "proposals"
     }
   },
   "This offering requires a purchase order. The proposal cannot be submitted until one is attached.": {
+    "context": {
+      "feature_area": "proposals"
+    }
+  },
+  "This offering requires a purchase order. The request cannot be submitted until one is attached.": {
     "context": {
       "feature_area": "proposals"
     }
@@ -52655,6 +52797,11 @@
       "feature_area": "project"
     }
   },
+  "Type in name of proposal...": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Type in name of resource...": {
     "context": {
       "feature_area": "details"
@@ -52859,6 +53006,12 @@
     }
   },
   "Unable to accept the award.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "proposal"
+    }
+  },
+  "Unable to accept the request.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "proposal"
@@ -53840,6 +53993,12 @@
     }
   },
   "Unable to decline the award.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "proposal"
+    }
+  },
+  "Unable to decline the request.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "proposal"
@@ -57482,6 +57641,11 @@
       "feature_area": "plans"
     }
   },
+  "Update access request": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Update access subnet": {
     "context": {
       "primary_ui_type": "label",
@@ -59869,6 +60033,11 @@
       "feature_area": "cluster"
     }
   },
+  "View access request": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "View accounts": {
     "context": {
       "feature_area": "user"
@@ -60619,6 +60788,11 @@
     }
   },
   "What this proposal produced once it was accepted.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
+  "What this request produced once it was approved.": {
     "context": {
       "feature_area": "proposal"
     }
@@ -61940,6 +62114,11 @@
       "feature_area": "organization-create"
     }
   },
+  "Your confirmation is needed before resources are set up.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Your current country of residence": {
     "context": {
       "feature_area": "support"
@@ -62058,6 +62237,11 @@
       "feature_area": "review"
     }
   },
+  "Your proposal is being reviewed.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Your proposal is reviewed under the call and round you pick.": {
     "context": {
       "feature_area": "access"
@@ -62076,6 +62260,11 @@
   "Your request is being processed.": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Your request is being reviewed.": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "Your request to join the organization {name} has been submitted. You'll receive a notification once it's reviewed and approved.": {
@@ -64313,6 +64502,16 @@
       "feature_area": "setup"
     }
   },
+  "{count} member": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
   "{count} members": {
     "context": {
       "variables": {
@@ -64752,6 +64951,16 @@
         }
       },
       "feature_area": "steps"
+    }
+  },
+  "{count} resource": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "resource-requests-step"
     }
   },
   "{count} resource(s) are advisory only": {

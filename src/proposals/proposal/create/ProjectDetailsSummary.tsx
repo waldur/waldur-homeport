@@ -6,6 +6,8 @@ import { AccordionCard } from '@/core/AccordionCard';
 import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
 import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';
+import { publicCallKey } from '@/proposals/callQueries';
+import { showsProposalDuration } from '@/proposals/presentation';
 import { Proposal, ProposalReview } from '@/proposals/types';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -19,6 +21,8 @@ interface ProjectDetailsSummaryProps {
   onAddCommentClick?({ commentField, label }): void;
 }
 
+const FIELD_CONFIG_FIELDS = ['proposal_field_config'] as const;
+
 export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
   proposal,
   reviews,
@@ -27,11 +31,11 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
   // Which fields this call asked for. Same fetch as ProjectDetailsStep, so the
   // two share a React Query cache entry when both are on screen.
   const { data: call } = useQuery({
-    queryKey: ['Call', proposal.call_uuid],
+    queryKey: publicCallKey(proposal.call_uuid, FIELD_CONFIG_FIELDS),
     queryFn: () =>
       proposalPublicCallsRetrieve({
         path: { uuid: proposal.call_uuid },
-        query: { field: ['proposal_field_config'] },
+        query: { field: FIELD_CONFIG_FIELDS },
       }).then((response) => response.data),
     enabled: !!proposal.call_uuid,
     refetchOnWindowFocus: false,
@@ -118,17 +122,19 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         />
       )}
 
-      <CommentSection
-        label={translate('Project duration in days')}
-        valueField="duration_in_days"
-        commentField="comment_project_duration"
-        tooltip={translate(
-          'Expected project duration in days once resources have been granted.',
-        )}
-        onAddCommentClick={onAddCommentClick}
-        reviews={reviews}
-        proposal={proposal}
-      />
+      {showsProposalDuration() && (
+        <CommentSection
+          label={translate('Project duration in days')}
+          valueField="duration_in_days"
+          commentField="comment_project_duration"
+          tooltip={translate(
+            'Expected project duration in days once resources have been granted.',
+          )}
+          onAddCommentClick={onAddCommentClick}
+          reviews={reviews}
+          proposal={proposal}
+        />
+      )}
 
       {proposal.supporting_documentation?.length > 0 && (
         <CommentSection

@@ -5,6 +5,7 @@ import { useForm, useFormState } from 'react-final-form';
 import { FormGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { AttachmentRow } from '@/marketplace/resources/common/AttachmentRow';
+import { usesCallVocabulary } from '@/proposals/presentation';
 
 interface PurchaseOrderFieldsProps {
   /** The call demands one, so the proposal cannot be submitted without it. */
@@ -49,9 +50,13 @@ export const PurchaseOrderFields: FC<PurchaseOrderFieldsProps> = ({
       <div className="fw-bold">{translate('Purchase order')}</div>
       <div className="text-muted fs-7 mb-4">
         {isRequired
-          ? translate(
-              'This offering requires a purchase order. Give its reference, attach the document, or both. You can save the request now and add it before submitting the proposal.',
-            )
+          ? usesCallVocabulary()
+            ? translate(
+                'This offering requires a purchase order. Give its reference, attach the document, or both. You can save the request now and add it before submitting the proposal.',
+              )
+            : translate(
+                'This offering requires a purchase order. Give its reference, attach the document, or both. You can save the request now and add it before submitting the access request.',
+              )
           : translate(
               'Optional. Attach a purchase order if your organisation needs one to authorise this spend.',
             )}

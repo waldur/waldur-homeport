@@ -61,6 +61,16 @@ export const ProposalRoleBasedTabs = ({
     MarketplaceFeatures.show_call_management_functionality,
   );
 
+  const showsReviewerTab = Boolean(review);
+  const showsCallManagerTab =
+    (userIsCallManager || userIsCallOrganizer) && showCallManagement;
+
+  // With nothing to switch between, the bar is a control that does nothing —
+  // which is every applicant on a marketplace-only deployment.
+  if (!showsReviewerTab && !showsCallManagerTab) {
+    return null;
+  }
+
   return (
     <Tabs
       defaultActiveKey={router.globals.current.name}
@@ -71,7 +81,7 @@ export const ProposalRoleBasedTabs = ({
         eventKey="proposals.manage-proposal"
         title={translate('Applicant')}
       />
-      {review ? (
+      {showsReviewerTab ? (
         <Tab
           eventKey={
             router.globals.current.parent === 'reviews'
@@ -81,7 +91,7 @@ export const ProposalRoleBasedTabs = ({
           title={translate('Reviewer')}
         />
       ) : null}
-      {(userIsCallManager || userIsCallOrganizer) && showCallManagement && (
+      {showsCallManagerTab && (
         <Tab
           eventKey="call-management.proposal-details"
           title={translate('Call manager')}

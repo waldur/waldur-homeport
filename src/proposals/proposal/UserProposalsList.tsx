@@ -6,6 +6,13 @@ import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import {
+  requestListTitle,
+  requestNoun,
+  requestNounPlural,
+  showsCallColumns,
+  showsProposalDuration,
+} from '@/proposals/presentation';
 import { getProposalStateOptions } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -65,9 +72,26 @@ export const UserProposalsList = () => {
     mandatoryFields,
   });
 
+  const callColumn: Column<Proposal> = {
+    title: translate('Call'),
+    render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
+    keys: ['call_name'],
+    filter: 'call',
+    inlineFilter: (row) => ({ name: row.call_name, uuid: row.call_uuid }),
+    id: 'call',
+  };
+
+  const durationColumn: Column<Proposal> = {
+    title: translate('Duration in days'),
+    render: ({ row }) => <>{row.duration_in_days || DASH_ESCAPE_CODE}</>,
+    keys: ['duration_in_days'],
+    optional: true,
+    id: 'duration_in_days',
+  };
+
   const columns: Column<Proposal>[] = [
     {
-      title: translate('Proposal'),
+      title: requestNoun(),
       render: ({ row }) => (
         <Link
           state="proposals.manage-proposal"
@@ -79,14 +103,7 @@ export const UserProposalsList = () => {
       keys: ['name'],
       id: 'proposal',
     },
-    {
-      title: translate('Call'),
-      render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
-      keys: ['call_name'],
-      filter: 'call',
-      inlineFilter: (row) => ({ name: row.call_name, uuid: row.call_uuid }),
-      id: 'call',
-    },
+    ...(showsCallColumns() ? [callColumn] : []),
     {
       title: translate('Ending'),
       render: ({ row }) => (
@@ -124,13 +141,7 @@ export const UserProposalsList = () => {
       optional: true,
       id: 'created',
     },
-    {
-      title: translate('Duration in days'),
-      render: ({ row }) => <>{row.duration_in_days || DASH_ESCAPE_CODE}</>,
-      keys: ['duration_in_days'],
-      optional: true,
-      id: 'duration_in_days',
-    },
+    ...(showsProposalDuration() ? [durationColumn] : []),
   ];
 
   if (isFeatureVisible(ProjectFeatures.science_domain)) {
@@ -157,13 +168,15 @@ export const UserProposalsList = () => {
       {...tableProps}
       formId={ProposalsFilterFormId}
       columns={columns}
-      title={translate('My proposals')}
-      verboseName={translate('Proposals')}
+      title={requestListTitle()}
+      verboseName={requestNounPlural()}
       standalone
       hasQuery={true}
       hasOptionalColumns
       showPageSizeSelector={true}
-      filters={<ProposalsFilter />}
+      // Same predicate as the Call column above: a deployment that hides
+      // calls must not offer to filter by one.
+      filters={<ProposalsFilter hideCall={!showsCallColumns()} />}
     />
   );
 };

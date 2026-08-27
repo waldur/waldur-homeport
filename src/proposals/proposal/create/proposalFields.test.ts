@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
+
+import { ENV } from '@/core/config';
 
 import {
   getFieldStates,
@@ -9,7 +11,21 @@ import {
   shouldRenderField,
 } from './proposalFields';
 
+const setAccessMode = (mode?: string) => {
+  (ENV as any).plugins = {
+    ...(ENV as any).plugins,
+    WALDUR_CORE: {
+      ...(ENV as any).plugins?.WALDUR_CORE,
+      SERVICE_ACCESS_MODE: mode,
+    },
+  };
+};
+
 describe('proposal field states', () => {
+  // The duration is gated on the access mode, so every other case in here
+  // needs the call-managed default rather than whatever ran last.
+  afterEach(() => setAccessMode(undefined));
+
   it('falls back to the pre-configuration behaviour', () => {
     // Matters for calls created before the feature, and for the moment before
     // the call request resolves: the form must still render.
@@ -65,6 +81,29 @@ describe('proposal field states', () => {
       'science_sub_domain',
       'duration_in_days',
     ]);
+  });
+
+  it('drops the duration where the deployment does not ask for it', () => {
+    // Second axis: the duration is a question a *call* asks, so the
+    // marketplace-only applicant view has no field to fill. Both lists have to
+    // agree with what the step renders — a field listed but not rendered parks
+    // the applicant on a step it can never report complete.
+    setAccessMode('marketplace');
+    const states = getFieldStates(undefined);
+
+    expect(getTrackedFields(states)).not.toContain('duration_in_days');
+    expect(getRequiredFields(states)).not.toContain('duration_in_days');
+    expect(getRequiredFields(states)).toEqual(['name', 'project_summary']);
+  });
+
+  it('keeps the duration in call-managed modes', () => {
+    for (const mode of ['both', 'calls', undefined]) {
+      setAccessMode(mode);
+      const states = getFieldStates(undefined);
+
+      expect(getTrackedFields(states)).toContain('duration_in_days');
+      expect(getRequiredFields(states)).toContain('duration_in_days');
+    }
   });
 
   it('promotes a configured field into the required set', () => {

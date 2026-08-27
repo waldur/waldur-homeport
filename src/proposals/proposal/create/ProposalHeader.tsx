@@ -1,3 +1,5 @@
+import { translate } from '@/i18n';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 
 import { EntityHeader } from '../EntityHeader';
@@ -16,6 +18,7 @@ export const ProposalHeader = ({
     title={proposal.name}
     slug={proposal.slug}
     badge={<ProposalBadge state={proposal.state} />}
+    idLabel={usesCallVocabulary() ? undefined : translate('Request ID')}
     className={className}
   />
 );

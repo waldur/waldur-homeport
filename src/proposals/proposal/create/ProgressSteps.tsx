@@ -1,5 +1,5 @@
 import { XIcon } from '@phosphor-icons/react';
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
@@ -10,6 +10,10 @@ interface ProgressStepsProps {
   proposal: Proposal;
   bgClass?: string;
   className?: string;
+  /** Rendered inside the panel, under the stepper. This component owns the
+   *  card, so a caller that appended its own note would leave it stranded on
+   *  the page background below the tracker rather than reading as part of it. */
+  footer?: ReactNode;
 }
 
 const getSortedSteps = (proposal: Proposal) => [
@@ -63,6 +67,7 @@ export const ProgressSteps: FC<ProgressStepsProps> = ({
   proposal,
   className,
   bgClass,
+  footer,
 }) => {
   const steps = useMemo(() => getSteps(proposal), [proposal]);
   return (
@@ -72,6 +77,7 @@ export const ProgressSteps: FC<ProgressStepsProps> = ({
         bgClass={bgClass}
         className={className}
       />
+      {footer}
     </Panel>
   );
 };

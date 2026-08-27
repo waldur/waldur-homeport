@@ -6,6 +6,7 @@ import { AccordionCard } from '@/core/AccordionCard';
 import { Badge } from '@/core/Badge';
 import { formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 
 import { ReviewComment } from './create-review/ReviewComment';
@@ -52,10 +53,16 @@ export const TechnicalAssessmentSection: FC<
   return (
     <AccordionCard
       id="step-technical-assessment"
-      title={translate('Technical assessment decisions')}
-      subtitle={translate(
-        'Feasibility decisions from the technical reviewers.',
-      )}
+      title={
+        usesCallVocabulary()
+          ? translate('Technical assessment decisions')
+          : translate('Provider feedback')
+      }
+      subtitle={
+        usesCallVocabulary()
+          ? translate('Feasibility decisions from the technical reviewers.')
+          : translate('Feasibility decisions from the service provider.')
+      }
     >
       <div className="d-flex flex-column gap-4">
         {groups.map((group) => {
