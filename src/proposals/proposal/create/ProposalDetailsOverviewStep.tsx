@@ -5,6 +5,10 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { EndingField } from '@/proposals/EndingField';
+// This card renders in the submission form, the read-only detail view and the
+// call-manager view alike, so the gate is the deployment's presentation
+// policy, never which page it happens to be mounted in.
+import { showsCallContext } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 import { Field } from '@/resource/summary';
 import { ActionButton } from '@/table/ActionButton';
@@ -64,25 +68,35 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
       actions={
         <div className="d-flex gap-2">
           {canViewReviews && <ReviewsButton proposal={proposal} />}
-          <DetailsOverviewButton
-            proposal={proposal}
-            reviews={props.params.reviews}
-          />
+          {/* Without call context the dialog holds only review tabs; with no
+              reviews either it opens empty, so don't offer it. */}
+          {(showsCallContext() || props.params.reviews?.length > 0) && (
+            <DetailsOverviewButton
+              proposal={proposal}
+              reviews={props.params.reviews}
+            />
+          )}
         </div>
       }
     >
       <Row className="fs-6">
+        {showsCallContext() && (
+          <Col sm={6}>
+            <Field
+              label={translate('Call name')}
+              value={proposal.call_name}
+              labelCol={5}
+              valueCol={7}
+            />
+          </Col>
+        )}
         <Col sm={6}>
           <Field
-            label={translate('Call name')}
-            value={proposal.call_name}
-            labelCol={5}
-            valueCol={7}
-          />
-        </Col>
-        <Col sm={6}>
-          <Field
-            label={translate('Round deadline')}
+            label={
+              showsCallContext()
+                ? translate('Round deadline')
+                : translate('Submission closes')
+            }
             value={
               <EndingField endDate={proposal.round?.cutoff_time} dateFirst />
             }
@@ -90,14 +104,16 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
             valueCol={7}
           />
         </Col>
-        <Col sm={6}>
-          <Field
-            label={translate('Round reference')}
-            value={renderFieldOrDash(proposal.round?.name)}
-            labelCol={5}
-            valueCol={7}
-          />
-        </Col>
+        {showsCallContext() && (
+          <Col sm={6}>
+            <Field
+              label={translate('Round reference')}
+              value={renderFieldOrDash(proposal.round?.name)}
+              labelCol={5}
+              valueCol={7}
+            />
+          </Col>
+        )}
         <Col sm={6}>
           <Field
             label={translate('Created by')}

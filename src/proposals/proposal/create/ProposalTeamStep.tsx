@@ -32,7 +32,9 @@ export const ProposalTeamStep = (props: VStepperFormStepProps) => {
           isRequired={isRequired}
           metadata={
             memberCount > 0
-              ? translate('{count} members', { count: memberCount })
+              ? memberCount === 1
+                ? translate('{count} member', { count: memberCount })
+                : translate('{count} members', { count: memberCount })
               : undefined
           }
         />

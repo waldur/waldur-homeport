@@ -27,14 +27,29 @@ export const MiddleTruncate: FunctionComponent<MiddleTruncateProps> = ({
   // Too short to benefit from a head/tail split — render as one ellipsis span.
   if (text.length <= tailLength + 4) {
     return (
-      <span className={`${classes} middle-truncate--simple`} title={text}>
+      <span
+        className={`${classes} middle-truncate--simple`}
+        title={text}
+        data-testid="middle-truncate-whole"
+      >
         {text}
       </span>
     );
   }
 
-  const head = text.slice(0, text.length - tailLength);
-  const tail = text.slice(text.length - tailLength);
+  const rawHead = text.slice(0, text.length - tailLength);
+  const rawTail = text.slice(text.length - tailLength);
+  // A split landing on a space swallows it: whitespace at the boundary between
+  // the two inline spans is collapsed, so "Quantum Error Correction Simulations"
+  // rendered as "…CorrectionSimulations". Whichever side the space falls on,
+  // pin it to the head as a non-breaking one — it cannot collapse, and keeping
+  // it out of the tail leaves the pinned suffix the width it was sized for.
+  const head = /^\s/.test(rawTail)
+    ? `${rawHead}\u00A0`
+    : /\s$/.test(rawHead)
+      ? rawHead.replace(/\s+$/, '\u00A0')
+      : rawHead;
+  const tail = rawTail.replace(/^\s+/, '');
 
   return (
     <span className={classes} title={text}>
@@ -43,10 +58,18 @@ export const MiddleTruncate: FunctionComponent<MiddleTruncateProps> = ({
           tree. Carry the intact string in a visually hidden node and hide the
           fragments from assistive technology so the name is announced once. */}
       <span className="visually-hidden">{text}</span>
-      <span className="middle-truncate-head" aria-hidden="true">
+      <span
+        className="middle-truncate-head"
+        aria-hidden="true"
+        data-testid="middle-truncate-head"
+      >
         {head}
       </span>
-      <span className="middle-truncate-tail" aria-hidden="true">
+      <span
+        className="middle-truncate-tail"
+        aria-hidden="true"
+        data-testid="middle-truncate-tail"
+      >
         {tail}
       </span>
     </span>

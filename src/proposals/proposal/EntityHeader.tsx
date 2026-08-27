@@ -1,10 +1,14 @@
 import { ReactNode } from 'react';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { translate } from '@/i18n';
 
 interface EntityHeaderProps {
   title: string;
   slug: string;
+  /** Defaults to "ID". The slug is what a user quotes to support, so it is
+   *  relabelled rather than hidden where the object has another name. */
+  idLabel?: string;
   badge: ReactNode;
   helpText?: string;
   className?: string;
@@ -16,6 +20,7 @@ export const EntityHeader = ({
   badge,
   helpText,
   className,
+  idLabel,
 }: EntityHeaderProps) => (
   <div className={className}>
     <div className="d-flex align-items-center mb-1">
@@ -23,7 +28,7 @@ export const EntityHeader = ({
       <div className="ms-4">{badge}</div>
     </div>
     <p className="fs-6 text-muted mb-1">
-      ID: {slug}{' '}
+      {idLabel ?? translate('ID')}: {slug}{' '}
       <CopyToClipboardButton
         value={slug}
         onlyButton

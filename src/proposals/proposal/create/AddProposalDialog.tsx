@@ -13,7 +13,6 @@ import {
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { hasCallVocabulary } from '@/marketplace/serviceAccessMode';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -22,6 +21,7 @@ import {
   getProjectNameRestrictionHint,
 } from '@/project/validators';
 import { EndingField } from '@/proposals/EndingField';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { getProposalProjectName } from '@/proposals/proposalProjectName';
 import { Call } from '@/proposals/types';
 import { Field } from '@/resource/summary';
@@ -139,7 +139,9 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
         proposal_uuid: response.data.uuid,
       });
     },
-    successMessage: translate('Proposal created successfully'),
+    successMessage: usesCallVocabulary()
+      ? translate('Proposal created successfully')
+      : translate('Access request created successfully'),
   });
 
   return (
@@ -159,7 +161,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
           <form onSubmit={handleSubmit}>
             <ModalDialog
               title={
-                hasCallVocabulary()
+                usesCallVocabulary()
                   ? translate('Create proposal')
                   : translate('Request access')
               }
@@ -185,7 +187,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
             >
               <Field
                 label={
-                  hasCallVocabulary()
+                  usesCallVocabulary()
                     ? translate('Call name')
                     : translate('Available under')
                 }
@@ -194,7 +196,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                 valueCol={8}
                 space={2}
               />
-              {hasCallVocabulary() ? (
+              {usesCallVocabulary() ? (
                 <Field
                   label={translate('Round reference')}
                   value={props.resolve.round.name}
@@ -205,7 +207,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
               ) : null}
               <Field
                 label={
-                  hasCallVocabulary()
+                  usesCallVocabulary()
                     ? translate('Round deadline')
                     : translate('Submission closes')
                 }

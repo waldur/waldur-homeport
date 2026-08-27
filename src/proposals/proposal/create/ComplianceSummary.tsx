@@ -9,8 +9,18 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
+
+/** Rendered twice below — the loading card and the loaded one — so the two
+ *  cannot drift apart when the wording changes. */
+const complianceSubtitle = () =>
+  usesCallVocabulary()
+    ? translate('Compliance questions answered during proposal submission.')
+    : translate(
+        'Compliance questions answered when the request was submitted.',
+      );
 
 interface ComplianceSummaryProps {
   proposal: Proposal;
@@ -59,9 +69,7 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({ proposal }) => {
     return (
       <AccordionCard
         title={translate('Compliance checklist')}
-        subtitle={translate(
-          'Compliance questions answered during proposal submission.',
-        )}
+        subtitle={complianceSubtitle()}
         defaultOpen={false}
       >
         <LoadingSpinner />
@@ -76,9 +84,7 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({ proposal }) => {
   return (
     <AccordionCard
       title={translate('Compliance checklist')}
-      subtitle={translate(
-        'Compliance questions answered during proposal submission.',
-      )}
+      subtitle={complianceSubtitle()}
       defaultOpen={false}
     >
       <FormTable>

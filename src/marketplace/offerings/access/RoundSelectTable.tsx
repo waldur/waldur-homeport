@@ -4,7 +4,7 @@ import { formatDate } from '@/core/dateUtils';
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { SubmittableRound } from '@/marketplace/offerings/apply/eligibleCalls';
-import { hasCallVocabulary } from '@/marketplace/serviceAccessMode';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -47,7 +47,14 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
   // they cannot see anywhere else.
   const spansSeveralCalls =
     new Set(rounds.map((row) => row.call.uuid)).size > 1;
-  const showCallColumn = hasCallVocabulary() && spansSeveralCalls;
+  const showCallColumn = usesCallVocabulary() && spansSeveralCalls;
+
+  // Where the call name is dropped, the managing organisation is what is left
+  // to tell two deadlines apart — but only when it differs between them.
+  // Repeated under every row it is the same constant the call column is
+  // suppressed for being.
+  const spansSeveralOrgs =
+    new Set(rounds.map((row) => row.call.customer_name)).size > 1;
 
   const columns = useMemo(
     () =>
@@ -73,15 +80,21 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
             <span className="d-flex flex-column">
               <span>{formatDate(row.round.cutoff_time)}</span>
               {/* Without the column, two rows from different calls would be
-                  told apart only by date — and two calls can share one. */}
-              {!showCallColumn && spansSeveralCalls ? (
-                <span className="text-muted fs-7">{row.call.name}</span>
+                  told apart only by date — and two calls can share one. This
+                  branch is reached only where the call column is suppressed
+                  because the deployment hides calls, so it names the managing
+                  organisation instead: the same disambiguation without the
+                  word the rest of this flow has dropped. */}
+              {!showCallColumn && spansSeveralCalls && spansSeveralOrgs ? (
+                <span className="text-muted fs-7">
+                  {row.call.customer_name}
+                </span>
               ) : null}
             </span>
           ),
         },
       ].filter(Boolean),
-    [showCallColumn, spansSeveralCalls],
+    [showCallColumn, spansSeveralCalls, spansSeveralOrgs],
   );
 
   return (

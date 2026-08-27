@@ -5,6 +5,7 @@ import { proposalProposalsCompleteWorkflowStep } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
@@ -51,14 +52,25 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
       }),
     refetch,
     confirmation: {
-      title: translate('Accept award'),
-      body: translate(
-        'Accept the award for "{name}"? The requested resources will be provisioned.',
-        { name: proposal.name },
-      ),
+      title: usesCallVocabulary()
+        ? translate('Accept award')
+        : translate('Accept'),
+      body: usesCallVocabulary()
+        ? translate(
+            'Accept the award for "{name}"? The requested resources will be provisioned.',
+            { name: proposal.name },
+          )
+        : translate(
+            'Accept "{name}"? The requested resources will be provisioned.',
+            { name: proposal.name },
+          ),
     },
-    successMessage: translate('Award accepted.'),
-    errorMessage: translate('Unable to accept the award.'),
+    successMessage: usesCallVocabulary()
+      ? translate('Award accepted.')
+      : translate('Request accepted.'),
+    errorMessage: usesCallVocabulary()
+      ? translate('Unable to accept the award.')
+      : translate('Unable to accept the request.'),
     invalidateQueries: [{ queryKey: proposalWorkflowStatesKey(proposal.uuid) }],
   });
 
@@ -74,20 +86,32 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
       }),
     refetch,
     confirmation: {
-      title: translate('Decline award'),
-      body: translate(
-        'Decline the award for "{name}"? The proposal will be canceled.',
-        { name: proposal.name },
-      ),
+      title: usesCallVocabulary()
+        ? translate('Decline award')
+        : translate('Decline'),
+      body: usesCallVocabulary()
+        ? translate(
+            'Decline the award for "{name}"? The proposal will be canceled.',
+            { name: proposal.name },
+          )
+        : translate('Decline "{name}"? The request will be withdrawn.', {
+            name: proposal.name,
+          }),
       options: {
         showInput: true,
         inputLabel: translate('Reason for declining'),
-        inputPlaceholder: translate('Enter a reason for declining the award'),
+        inputPlaceholder: usesCallVocabulary()
+          ? translate('Enter a reason for declining the award')
+          : translate('Enter a reason for declining'),
         inputRequired: true,
       },
     },
-    successMessage: translate('Award declined.'),
-    errorMessage: translate('Unable to decline the award.'),
+    successMessage: usesCallVocabulary()
+      ? translate('Award declined.')
+      : translate('Request declined.'),
+    errorMessage: usesCallVocabulary()
+      ? translate('Unable to decline the award.')
+      : translate('Unable to decline the request.'),
     invalidateQueries: [{ queryKey: proposalWorkflowStatesKey(proposal.uuid) }],
   });
 
@@ -101,7 +125,9 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
         pending={acceptAward.isPending}
         className="w-100 mt-2"
         iconNode={<CheckCircleIcon weight="bold" />}
-        title={translate('Accept award')}
+        title={
+          usesCallVocabulary() ? translate('Accept award') : translate('Accept')
+        }
       />
       <ActionButton
         variant="danger"
@@ -109,7 +135,11 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
         pending={declineAward.isPending}
         className="w-100 mt-2"
         iconNode={<XCircleIcon weight="bold" />}
-        title={translate('Decline award')}
+        title={
+          usesCallVocabulary()
+            ? translate('Decline award')
+            : translate('Decline')
+        }
       />
     </>
   );

@@ -2,6 +2,7 @@ import { proposalProposalsResourcesList } from 'waldur-js-client';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { translate } from '@/i18n';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -30,11 +31,37 @@ export const ResourceRequestsSummary = ({
     }),
   });
 
+  // What the card holds, without opening it. Named while there are few
+  // enough to read at a glance — the offering is the thing actually chosen —
+  // and counted once a list would crowd the header.
+  const rows = tableProps.rows ?? [];
+  const count = tableProps.pagination?.resultCount ?? rows.length;
+  const chosen =
+    count === 0
+      ? undefined
+      : count <= 2 && rows.length === count
+        ? rows
+            .map((row) => row.requested_offering.offering_name)
+            .filter(Boolean)
+            .join(', ')
+        : count === 1
+          ? translate('{count} offering', { count })
+          : translate('{count} offerings', { count });
+
   return (
     <AccordionCard
       id="step-resource-requests"
       title={translate('Resource requests')}
-      subtitle={translate('Resources requested for this proposal.')}
+      actions={
+        chosen ? (
+          <span className="text-muted fw-semibold fs-7">{chosen}</span>
+        ) : undefined
+      }
+      subtitle={
+        usesCallVocabulary()
+          ? translate('Resources requested for this proposal.')
+          : translate('Resources requested for this access request.')
+      }
       defaultOpen={false}
     >
       <Table<ProposalResource>

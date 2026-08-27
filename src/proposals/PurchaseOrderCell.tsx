@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 interface PurchaseOrderCellProps {
@@ -28,9 +29,15 @@ export const PurchaseOrderCell: FC<PurchaseOrderCellProps> = ({ row }) => {
     return (
       <Tip
         id="purchase-order-missing"
-        label={translate(
-          'This offering requires a purchase order. The proposal cannot be submitted until one is attached.',
-        )}
+        label={
+          usesCallVocabulary()
+            ? translate(
+                'This offering requires a purchase order. The proposal cannot be submitted until one is attached.',
+              )
+            : translate(
+                'This offering requires a purchase order. The request cannot be submitted until one is attached.',
+              )
+        }
       >
         <span className="d-inline-flex align-items-center gap-2 text-warning">
           <WarningCircleIcon weight="bold" />

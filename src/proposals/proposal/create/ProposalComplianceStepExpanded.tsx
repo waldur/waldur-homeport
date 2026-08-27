@@ -16,6 +16,7 @@ import {
   DependencyInfo,
   evaluateQuestionVisibility,
 } from '@/marketplace-checklist/questionDependencies';
+import { usesCallVocabulary } from '@/proposals/presentation';
 import { useNotify } from '@/store/notify';
 import { VStepperFormStepProps } from '@/wizard';
 
@@ -83,7 +84,9 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
         }
       >
         <div className="text-center text-muted p-4">
-          {translate('Proposal not available.')}
+          {usesCallVocabulary()
+            ? translate('Proposal not available.')
+            : translate('Request not available.')}
         </div>
       </AccordionCard>
     );

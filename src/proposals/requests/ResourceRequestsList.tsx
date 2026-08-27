@@ -7,6 +7,7 @@ import {
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { requestNoun, showsCallColumns } from '@/proposals/presentation';
 import { createFetcher } from '@/table/api';
 import {
   ProposalMyRequestedResourcesFilter,
@@ -80,12 +81,14 @@ export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
               orderField: 'offering__name',
               render: ({ row }) => renderFieldOrDash(row.offering_name),
             },
-        {
-          id: 'call',
-          title: translate('Call'),
-          orderField: 'call__name',
-          render: ({ row }) => renderFieldOrDash(row.call_name),
-        },
+        showsCallColumns()
+          ? {
+              id: 'call',
+              title: translate('Call'),
+              orderField: 'call__name',
+              render: ({ row }) => renderFieldOrDash(row.call_name),
+            }
+          : null,
         {
           id: 'limits',
           title: translate('Requested amount'),
@@ -109,7 +112,7 @@ export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
         },
         {
           id: 'proposal_state',
-          title: translate('Proposal'),
+          title: requestNoun(),
           orderField: 'proposal__state',
           render: ({ row }) => (
             <ProposalStateBadge state={row.proposal_state} />

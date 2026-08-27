@@ -31,6 +31,11 @@ export const createProposalSteps = (
       label: translate('Project details'),
       id: 'step-project',
       component: ProjectDetailsStep,
+      // Both lists have to agree with what the step renders: `requiredFields`
+      // drives the "n/m filled" count and whether the step can ever report
+      // complete, so a field listed here but not rendered parks the applicant
+      // on a step with no field left to fill. Both helpers apply the same
+      // visibility rules the step does.
       fields: getTrackedFields(fieldStates),
       required: true,
       requiredFields: getRequiredFields(fieldStates),

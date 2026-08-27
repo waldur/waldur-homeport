@@ -367,8 +367,12 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
               name="applicant_visible"
               spaceless={true}
               label={translate('Applicant visible')}
+              // Says what *off* does, not just what on does. Off is the
+              // default and the flag is now honoured on the applicant's
+              // tracker, so a call manager who reads only the on-case will not
+              // realise the step is hidden from applicants until one asks.
               help_text={translate(
-                'Applicants can see step details, not just status.',
+                'On, applicants see this step by name on their progress tracker. Off, they see only that their proposal is in review while it runs.',
               )}
             />
           </ModalDialog>

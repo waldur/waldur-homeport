@@ -1,3 +1,4 @@
+import { showsProposalDuration } from '@/proposals/presentation';
 import {
   ProposalFieldConfig,
   ProposalFieldName,
@@ -42,16 +43,25 @@ export const isFieldRequired = (
 
 /** Fields the Project details step tracks for its filled/total counter — the
  * ones actually rendered, so the count can reach its own total. */
-/* `name` and `duration_in_days` bracket every list below: they are always asked
- * and always required. The name identifies the proposal and forms the last
- * third of the awarded project's name (see getProposalProjectName), and the
- * duration states the length of the award. */
+/* `name` brackets every list below: it is always asked and always required —
+ * it identifies the proposal and forms the last third of the awarded project's
+ * name (see getProposalProjectName).
+ *
+ * `duration_in_days` is always required *when asked at all*, but it answers to
+ * a second axis: it is a question a call asks, so the marketplace-only
+ * applicant view drops it (see showsProposalDuration). It is filtered here
+ * rather than at each call site so the step's own tracked list and the
+ * wizard's `fields`/`requiredFields` cannot disagree — a field listed but not
+ * rendered leaves the step permanently short of its total. */
+const durationFields = (): string[] =>
+  showsProposalDuration() ? ['duration_in_days'] : [];
+
 export const getTrackedFields = (
   states: Record<ProposalFieldName, ProposalFieldState>,
 ): string[] => [
   'name',
   ...CONFIGURABLE_FIELDS.filter((field) => isFieldVisible(states, field)),
-  'duration_in_days',
+  ...durationFields(),
 ];
 
 export const getRequiredFields = (
@@ -59,7 +69,7 @@ export const getRequiredFields = (
 ): string[] => [
   'name',
   ...CONFIGURABLE_FIELDS.filter((field) => isFieldRequired(states, field)),
-  'duration_in_days',
+  ...durationFields(),
 ];
 
 /**

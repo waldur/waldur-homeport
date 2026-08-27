@@ -22,9 +22,14 @@ vi.mock('@/features/connect', () => ({
 
 vi.mock('@/marketplace/serviceAccessMode', () => ({
   isProposalRequestEnabled: vi.fn(),
+}));
+
+vi.mock('@/proposals/presentation', () => ({
   // These tests cover the routing, not the wording; the calls vocabulary is
-  // the default and keeps the assertions readable.
-  hasCallVocabulary: vi.fn(() => true),
+  // the default and keeps the assertions readable. Mocked at the presentation
+  // module because that is where the hook resolves it from — mocking
+  // serviceAccessMode no longer reaches it.
+  usesCallVocabulary: vi.fn(() => true),
 }));
 
 vi.mock('@/permissions/hasPermission', () => ({
