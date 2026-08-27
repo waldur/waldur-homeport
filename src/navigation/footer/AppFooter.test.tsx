@@ -42,6 +42,17 @@ describe('AppFooter', () => {
     expect(screen.getByTestId('disclaimer')).toBeInTheDocument();
   });
 
+  it('hides the version string for anonymous visitors', () => {
+    vi.mocked(useUser).mockReturnValue(null);
+
+    render(<AppFooter />);
+
+    expect(screen.queryByText(/Version/)).not.toBeInTheDocument();
+    expect(screen.getByTestId('health-indicator')).toBeInTheDocument();
+    expect(screen.getByTestId('footer-links')).toBeInTheDocument();
+    expect(screen.getByTestId('disclaimer')).toBeInTheDocument();
+  });
+
   it('checks version for staff', async () => {
     vi.mocked(useUser).mockReturnValue({
       is_staff: true,
