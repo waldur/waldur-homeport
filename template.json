@@ -1686,6 +1686,16 @@
       "feature_area": "offerings"
     }
   },
+  "Add a passkey to continue": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
+  "Add a second passkey": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "Add access subnet": {
     "context": {
       "feature_area": "details"
@@ -1991,8 +2001,9 @@
   },
   "Add passkey": {
     "context": {
-      "primary_ui_type": "action_button",
-      "feature_area": "passkeys"
+      "primary_ui_type": "submit_button",
+      "feature_area": "passkeys",
+      "action_type": "create"
     }
   },
   "Add payment": {
@@ -34027,6 +34038,11 @@
       "feature_area": "passkeys"
     }
   },
+  "Passkey required": {
+    "context": {
+      "feature_area": "user"
+    }
+  },
   "Passkey verification failed": {
     "context": {
       "feature_area": "auth"
@@ -47016,6 +47032,16 @@
       "feature_area": "passkeys"
     }
   },
+  "Signed in as {username}": {
+    "context": {
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "feature_area": "passkeys"
+    }
+  },
   "Significant (+50%)": {
     "context": {
       "primary_ui_type": "label",
@@ -51169,6 +51195,11 @@
   "This decision will be logged for audit purposes.": {
     "context": {
       "feature_area": "coi-review"
+    }
+  },
+  "This deployment requires a passkey for administrator accounts. Add one now to carry on — it takes a moment, and you can use your device screen lock or a security key.": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "This device": {},
@@ -62172,6 +62203,11 @@
   "You have no quotas yet.": {
     "context": {
       "feature_area": "quotas"
+    }
+  },
+  "You have one passkey. If you lose that device you will need an administrator to remove it before you can sign in again. A second passkey — on a phone, or a security key — avoids that.": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "You have successfully joined {organization}": {

@@ -325,6 +325,21 @@ export const states: StateDeclaration[] = [
     },
   },
   {
+    // Deliberately not under profile-credentials: this is an interstitial the
+    // transition hook forces users onto, not a tab they browse to.
+    name: 'profile-passkeys-required',
+    url: '/passkey-required/',
+    component: lazyComponent(() =>
+      import('./passkeys/PasskeyEnrollmentRequired').then((module) => ({
+        default: module.PasskeyEnrollmentRequired,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Passkey required'),
+      permissions: [() => arePasskeysEnabled()],
+    },
+  },
+  {
     name: 'profile-passkeys',
     url: 'passkeys/',
     component: lazyComponent(() =>
