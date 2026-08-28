@@ -17071,6 +17071,7 @@
     }
   },
   "Enter a valid CIDR address.": {},
+  "Enter a whole number of days, 1 or more.": {},
   "Enter address...": {
     "context": {
       "feature_area": "map"
@@ -51337,7 +51338,7 @@
       "feature_area": "create"
     }
   },
-  "This will also update durations of connected proposals in Draft or In Review states. Continue?": {
+  "This will also update the duration of connected proposals which have not been allocated yet. Continue?": {
     "context": {
       "feature_area": "configuration"
     }
@@ -51350,6 +51351,11 @@
   "This will be used to check your company representative rights.": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "This will clear the duration of connected proposals which have not been allocated yet, so applicants will be able to choose it themselves. Continue?": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "This will delete all existing questions and replace them with predefined {type} questions.": {
