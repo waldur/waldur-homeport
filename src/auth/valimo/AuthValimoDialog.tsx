@@ -1,5 +1,4 @@
 import { SignInIcon } from '@phosphor-icons/react';
-import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { Form as FinalForm, Field } from 'react-final-form';
@@ -19,12 +18,12 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 
+import { redirectOnSuccess } from '../authNavigation';
 import { loginUser } from '../AuthService';
 
 export const AuthValimoDialog = () => {
   const [challengeCode, setChallengeCode] = useState<string>();
   const { showError, showErrorResponse } = useNotify();
-  const router = useRouter();
   const isMounted = useMountedState();
 
   const pollAuthResult = async (authResultId: string) => {
@@ -42,13 +41,13 @@ export const AuthValimoDialog = () => {
     return result;
   };
 
-  const parseAuthResult = (result: AuthResult) => {
+  const parseAuthResult = async (result: AuthResult) => {
     if (!isMounted()) {
       return;
     }
     if (result.state === 'OK') {
-      loginUser(result.token, 'valimo');
-      router.stateService.go('profile.details');
+      await loginUser(result.token, 'valimo');
+      await redirectOnSuccess();
     } else if (result.state === 'Canceled') {
       if (result.details === 'User is not registered.') {
         showError(result.details);
@@ -76,7 +75,7 @@ export const AuthValimoDialog = () => {
       }).then((r) => r.data);
       setChallengeCode(message);
       const authResult = await pollAuthResult(uuid);
-      parseAuthResult(authResult);
+      await parseAuthResult(authResult);
     } catch (error) {
       showErrorResponse(
         error,

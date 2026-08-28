@@ -3,6 +3,9 @@ import { QueryCache, QueryClient } from '@tanstack/react-query';
 import { goToNotFound } from '@/error/utils';
 import { router } from '@/router';
 
+/** Key of the root suspense query that bootstraps the app (Application.tsx). */
+export const BOOTSTRAP_QUERY_KEY = ['Application'];
+
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

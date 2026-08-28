@@ -1,6 +1,6 @@
 import store from '@/store/store';
 
-import { clearAuthCache } from './auth/authNavigation';
+import { clearAuthCache, resolvePostLoginTarget } from './auth/authNavigation';
 import * as AuthService from './auth/AuthService';
 import { MatomoInstance } from './core/matomo';
 import {
@@ -19,9 +19,7 @@ import { NotifyService } from './store/notify';
 import {
   clearBlockedNavigation,
   isResumableState,
-  rememberBlockedNavigation,
 } from './user/blockedNavigation';
-import { needsPasskeyEnrollment } from './user/passkeys/enforcement';
 import { UsersService } from './user/UsersService';
 
 export function attachTransitions() {
@@ -84,28 +82,21 @@ export function attachTransitions() {
       }
 
       try {
-        // Passkey enforcement is checked here rather than in a hook of its
-        // own: transitions.test.ts locates the profile-validity hook as "the
+        // The gate rules (passkey enforcement first, then profile validity)
+        // live in resolvePostLoginTarget so the login flow and this guard can
+        // never disagree about where a user must go first. Kept as a single
+        // hook: transitions.test.ts locates the profile-validity hook as "the
         // first onBefore with a `to` criteria", so adding a second one ahead
         // of it silently retargets that test at the wrong callback.
-        //
-        // It also has to come before the validity check, because that treats
-        // staff and support as always valid — which is exactly the group
-        // enforcement applies to.
         const user = await UsersService.getCurrentUser();
-        if (needsPasskeyEnrollment(user)) {
-          rememberBlockedNavigation(toStateName, transition.params());
-          return transition.router.stateService.target(
-            'profile-passkeys-required',
-          );
-        }
-
-        const result = await UsersService.isCurrentUserValid();
-        if (result) {
+        const target = resolvePostLoginTarget(user, {
+          toState: toStateName,
+          toParams: transition.params(),
+        });
+        if (target.toState === toStateName) {
           return;
         }
-        rememberBlockedNavigation(toStateName, transition.params());
-        return transition.router.stateService.target('profile-manage');
+        return transition.router.stateService.target(target.toState);
       } catch {
         return transition.router.stateService.target('errorPage.serverError');
       }
@@ -302,9 +293,14 @@ export function attachTransitions() {
     }
   });
 
+  // Remember the last page worth returning to after an expired session.
+  // isResumableState skips profile, error, login and home states, so gate
+  // pages (profile-manage, the passkey interstitial) — where the user was
+  // *sent*, not where they were going — are never stored as a destination.
   router.transitionService.onSuccess({}, (transition) => {
     if (
       transition.to().data?.auth &&
+      isResumableState(transition.to().name) &&
       !Object.prototype.hasOwnProperty.call(transition.params(), 'toState')
     ) {
       RedirectStorage.set({

@@ -1,6 +1,7 @@
 import { configureAuthCore } from 'waldur-auth-core';
 
 import { localLogout } from '@/auth/authNavigation';
+import { resetSessionState } from '@/auth/sessionReset';
 import { router } from '@/router';
 import { UsersService } from '@/user/UsersService';
 
@@ -50,6 +51,11 @@ export function setupAuthCore() {
       }
       localLogout();
     },
-    onLogin: () => UsersService.getCurrentUser(),
+    // Start every session from a clean slate, then load the *new* user — the
+    // cached getCurrentUser() would hand back whoever was signed in before.
+    onLogin: async () => {
+      resetSessionState();
+      await UsersService.refreshCurrentUser();
+    },
   });
 }

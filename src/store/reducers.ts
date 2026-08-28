@@ -5,14 +5,24 @@ import { tableInitialReducer as tables } from '@/table/store';
 import { type TableState } from '@/table/types';
 import { reducer as workspace } from '@/workspace/reducers';
 
-export const staticReducers = {
+const staticReducers = {
   workspace,
   marketplace,
   tables,
 };
 
-const _rootReducer = combineReducers(staticReducers);
+const combined = combineReducers(staticReducers);
 
-export type RootState = ReturnType<typeof _rootReducer> & {
+export const RESET_SESSION = 'waldur/session/RESET';
+
+/** Drops every slice at once — what a document reload used to do for free. */
+export const resetSession = () => ({ type: RESET_SESSION });
+
+export const rootReducer: typeof combined = (state, action) =>
+  action.type === RESET_SESSION
+    ? combined(undefined, action)
+    : combined(state, action);
+
+export type RootState = ReturnType<typeof combined> & {
   tables: Record<string, TableState>;
 };

@@ -8,7 +8,7 @@ import { NotificationsProvider, setUpNotifications } from 'reapop';
 import { AnonymousThreadProvider } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
-import { queryClient } from '@/core/queryClient';
+import { BOOTSTRAP_QUERY_KEY, queryClient } from '@/core/queryClient';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
 import { MatrixRoot } from '@/matrix/MatrixRoot';
@@ -41,7 +41,7 @@ setUpNotifications({
 
 const ApplicationInner: FunctionComponent = () => {
   useSuspenseQuery({
-    queryKey: ['Application'],
+    queryKey: BOOTSTRAP_QUERY_KEY,
     queryFn: loadConfig,
   });
 

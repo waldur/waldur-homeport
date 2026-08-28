@@ -1,12 +1,9 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 
 import { sentryUserMiddleware } from '@/core/sentry';
 
-import { staticReducers } from './reducers';
+import { rootReducer } from './reducers';
 
-const store = createStore(
-  combineReducers(staticReducers),
-  applyMiddleware(sentryUserMiddleware),
-);
+const store = createStore(rootReducer, applyMiddleware(sentryUserMiddleware));
 
 export default store;

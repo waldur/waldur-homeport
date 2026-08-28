@@ -9,6 +9,38 @@ import { getProfileCompleteness } from '@/user/useProfileCompleteness';
 import { setCurrentUser, setImpersonatorUser } from '@/workspace/actions';
 import { getUser } from '@/workspace/selectors';
 
+// In-flight requests shared by concurrent callers. At boot the transition
+// guard, the login hook and the layout all ask for the current user before the
+// store has one; without this each of them fetched /users/me/ and crawled the
+// whole paginated roles list on its own.
+let rolesInFlight: Promise<void> | null = null;
+let userInFlight: Promise<User> | null = null;
+
+/** Forget any in-flight fetches — the next call starts fresh. */
+export const resetUserCache = () => {
+  rolesInFlight = null;
+  userInFlight = null;
+};
+
+const ensureRoles = (): Promise<void> => {
+  if (ENV.roles.length > 0) {
+    return Promise.resolve();
+  }
+  if (!rolesInFlight) {
+    const request = getRoles()
+      .then((roles) => {
+        ENV.roles = roles;
+      })
+      .finally(() => {
+        if (rolesInFlight === request) {
+          rolesInFlight = null;
+        }
+      });
+    rolesInFlight = request;
+  }
+  return rolesInFlight;
+};
+
 export const getCurrentUser = async (
   options?: Parameters<typeof usersMeRetrieve>[0],
 ) => {
@@ -18,23 +50,43 @@ export const getCurrentUser = async (
   // profile_completeness, accessed via a cast in getProfileCompleteness), so
   // it is narrowed to `User` at this boundary. Widening the store to `UserMe`
   // app-wide is a separate, deployment-wide change.
-  const user = await usersMeRetrieve(options).then(
-    (response) => response.data as UserMe as unknown as User,
-  );
-  if (ENV.roles.length === 0) {
-    ENV.roles = await getRoles();
-  }
+  //
+  // Roles don't depend on the user, so both requests go out together.
+  const [user] = await Promise.all([
+    usersMeRetrieve(options).then(
+      (response) => response.data as UserMe as unknown as User,
+    ),
+    ensureRoles(),
+  ]);
   return user;
 };
 
+/**
+ * Whether the user may use the application without first completing their
+ * profile. Staff and support are always valid; everyone else needs a complete
+ * profile and accepted terms. Frontend always enforces profile completeness
+ * (enforcement_enabled is for API only).
+ */
+export const isUserValid = (user: User): boolean => {
+  if (user.is_staff || user.is_support) {
+    return true;
+  }
+  const completeness = getProfileCompleteness(user);
+  return completeness.is_complete && Boolean(user.agreement_date);
+};
+
+// Both setters change the headers every request carries, so a /users/me/
+// already in flight answers for the wrong identity and must not be shared.
 export const setImpersonationData = (userUuid: string) => {
   ImpersonationStorage.set(userUuid);
   initApiClient();
+  resetUserCache();
 };
 
 export const clearImpersonationData = () => {
   ImpersonationStorage.remove();
   initApiClient();
+  resetUserCache();
   store.dispatch(setImpersonatorUser(null));
 };
 
@@ -56,9 +108,31 @@ class UsersServiceClass {
   }
 
   async refreshCurrentUser(options?: Parameters<typeof usersMeRetrieve>[0]) {
-    const user = await getCurrentUser(options);
-    store.dispatch(setCurrentUser(user));
-    return user;
+    if (options) {
+      // Custom headers (impersonation) must not share the plain request.
+      const user = await getCurrentUser(options);
+      store.dispatch(setCurrentUser(user));
+      return user;
+    }
+    if (!userInFlight) {
+      const request: Promise<User> = getCurrentUser()
+        .then((user) => {
+          // A request outlived by a reset (login, logout, impersonation)
+          // belongs to a session that no longer exists; don't let its late
+          // answer overwrite the user fetched after it.
+          if (userInFlight === request) {
+            store.dispatch(setCurrentUser(user));
+          }
+          return user;
+        })
+        .finally(() => {
+          if (userInFlight === request) {
+            userInFlight = null;
+          }
+        });
+      userInFlight = request;
+    }
+    return userInFlight;
   }
 
   getCachedUser() {
@@ -66,16 +140,7 @@ class UsersServiceClass {
   }
 
   isCurrentUserValid() {
-    return this.getCurrentUser().then((user) => {
-      // Staff and support users are always valid
-      if (user.is_staff || user.is_support) {
-        return true;
-      }
-      // Frontend always enforces profile completeness (enforcement_enabled is for API only)
-      const completeness = getProfileCompleteness(user);
-      // Check profile completeness and agreement date
-      return completeness.is_complete && Boolean((user as User).agreement_date);
-    });
+    return this.getCurrentUser().then(isUserValid);
   }
 
   /**
