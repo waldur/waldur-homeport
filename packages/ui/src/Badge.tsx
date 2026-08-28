@@ -6,10 +6,10 @@ import { cn } from './cn';
 /**
  * src/core/Badge.tsx's real Metronic recipe (src/metronic/sass/core/
  * components/_badge.scss) — variant (color) × tone (solid/light/outline),
- * built out following a real usage audit of all 429 real call sites (see
- * the Badge migration brainstorm): outline (89% of usages) and pill (67%)
- * are the dominant real shape, not solid-fill, which is why both are
- * first-class here rather than afterthoughts.
+ * built out following a real usage audit of all 429 real call sites:
+ * outline (89% of usages) and pill (67%) are the dominant real shape, not
+ * solid-fill, which is why both are first-class here rather than
+ * afterthoughts.
  *
  * variant/tone don't enumerate every combination as a literal Tailwind
  * class (that's a 12-variant × 3-tone = 36-entry cva explosion Tailwind's

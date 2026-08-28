@@ -156,8 +156,7 @@ export interface IconButtonProps extends ComponentProps<'button'> {
  * merely the menu failing to open). The forwarded ref lands on the same
  * <button> Tooltip's own Trigger asChild already puts a ref on; Radix's
  * Slot composes multiple refs on one element rather than clobbering, so
- * both work together. See OrgDashboardMock.tsx's language switcher for
- * the first real consumer.
+ * both work together.
  */
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ icon, label, hasIndicator, className, ...props }, ref) => (

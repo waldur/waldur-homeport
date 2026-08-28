@@ -19,9 +19,9 @@ export interface LanguageMenuProps {
 
 /**
  * LanguageSelectorDropdown.tsx's real menu-item, as its own reusable
- * piece (previously baked directly into UserMenu.tsx) — a single
- * collapsed row (data-kt-menu-trigger="hover" there) showing the current
- * language, not a flat inline list. The full choice list lives in a
+ * piece — a single collapsed row (data-kt-menu-trigger="hover" there)
+ * showing the current language, not a flat inline list. The full choice
+ * list lives in a
  * nested submenu, revealed on hover there / on click here (Radix has no
  * hover-trigger submenu mode). Selection uses real
  * role="menuitemradio"/aria-checked semantics — see DropdownMenu.tsx's

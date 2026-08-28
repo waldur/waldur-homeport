@@ -56,16 +56,12 @@ const buttonVariants = cva(
   {
     variants: {
       // Each variant's classes are grouped one state per line (base
-      // shadow/bg/text, then hover, focus, active, disabled) and
-      // joined with a space — purely a formatting choice, the same
-      // literal class strings Tailwind's scanner already saw as one dense
-      // line. Splitting them out is what would have made the last three
-      // bugs found in this file easy to spot in review: the disabled
-      // hover-color leak (a missing disabled: line), the focus
-      // shadow needing to combine the border-replacement with the ring
-      // (one state, one line, easy to eyeball against its neighbors), and
-      // the transition-property gap (a base-string concern, unaffected
-      // by this reflow). See migration notes for the full bug writeups.
+      // shadow/bg/text, then hover, focus, active, disabled) and joined
+      // with a space — purely a formatting choice, the same literal class
+      // strings Tailwind's scanner already saw as one dense line. One
+      // state per line is what makes a missing disabled:/focus:/active:
+      // override easy to spot against its neighbors in review — see
+      // migration notes for real bugs this shape already caught.
       //
       // focus:, not focus-visible:: the real Bootstrap button ties its
       // ring to plain :focus, which fires on every focus method —
@@ -242,10 +238,8 @@ const buttonVariants = cva(
       // real BaseButton (Bootstrap sets no explicit size either). Padding
       // is 1px larger on every side than a literal border would need,
       // since box-shadow (unlike border) doesn't consume padding-box
-      // space in EITHER dimension — this needed applying to px- as well
-      // as py-, not just py- (the first pass here only compensated
-      // vertically, leaving every button ~2px narrower than the real one
-      // until a follow-up measurement caught it): sm = 28px tall
+      // space in EITHER dimension — applies to px- exactly as much as
+      // py-, not just the vertical axis: sm = 28px tall
       // (py-[4px] + leading-5 [20px] + 2×1px shadow-replaced border, 6px
       // radius), lg = 44px tall (py-[10px] + leading-6 [24px] + 2×1px
       // shadow-replaced border, 8px radius); width for both is content +
