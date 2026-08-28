@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 import { Proposal, proposalProposalsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -34,7 +34,18 @@ import { ProposalBadge } from './ProposalBadge';
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
-export const UserProposalsList = () => {
+interface UserProposalsListProps {
+  /** Rendered in the card toolbar beside search. */
+  actions?: ReactNode;
+  /** Standalone puts the title above the panel, which suits a page of its own
+   *  but not a tab inside one — see UserOfferingList for the in-tab shape. */
+  standalone?: boolean;
+}
+
+export const UserProposalsList: FC<UserProposalsListProps> = ({
+  actions,
+  standalone = true,
+}) => {
   const {
     params: { call },
   } = useCurrentStateAndParams();
@@ -55,7 +66,14 @@ export const UserProposalsList = () => {
 
   const filter = useMemo(
     () => ({
-      my_proposals: true,
+      // Deliberately no `my_proposals: true`. It means "created by the
+      // current user" (proposal/filters.py: filter_my_proposals), while the
+      // resource lens beside it scopes to proposals the user can *read* —
+      // which includes ones they only hold a role on. The two would otherwise
+      // list different sets: a PROPOSAL.MEMBER saw a team-mate's line items
+      // in the resource lens and no sign of the request they belong to. Two
+      // projections of one page cannot disagree about what is in it, so both
+      // use the readable scope.
       o: ['-round__cutoff_time'],
       ...formFilters,
     }),
@@ -168,9 +186,10 @@ export const UserProposalsList = () => {
       {...tableProps}
       formId={ProposalsFilterFormId}
       columns={columns}
-      title={requestListTitle()}
+      title={standalone ? requestListTitle() : undefined}
       verboseName={requestNounPlural()}
-      standalone
+      standalone={standalone}
+      tableActions={actions}
       hasQuery={true}
       hasOptionalColumns
       showPageSizeSelector={true}

@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 import {
   proposalMyRequestedResourcesList,
   UserRequestedResource,
@@ -7,7 +7,7 @@ import {
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { requestNoun, showsCallColumns } from '@/proposals/presentation';
+import { requestStateLabel, showsCallColumns } from '@/proposals/presentation';
 import { createFetcher } from '@/table/api';
 import {
   ProposalMyRequestedResourcesFilter,
@@ -26,11 +26,14 @@ interface ResourceRequestsListProps {
   /** Narrows the list to one offering; omit for the profile-wide view. */
   offeringUuid?: string;
   title?: string;
+  /** Rendered in the card toolbar beside search. */
+  actions?: ReactNode;
 }
 
 export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
   offeringUuid,
   title,
+  actions,
 }) => {
   const tableId = offeringUuid
     ? `ResourceRequests-${offeringUuid}`
@@ -60,9 +63,15 @@ export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
       [
         {
           id: 'resource',
-          // Falls back to the proposal name: the resource has no name of its
-          // own until it is provisioned, so "Resource" would mislead here.
-          title: translate('Request'),
+          // "Resource request" is what this object is called everywhere else —
+          // the wizard step, the summary, the review section, this table's own
+          // verboseName. Not the bare "Request" it used to be: two of its
+          // neighbours are requests too (the amount asked for, the parent
+          // request's state), so the unqualified word named all three.
+          //
+          // Not "Resource" either: the value falls back to the parent's name
+          // because a resource has none of its own until it is provisioned.
+          title: translate('Resource request'),
           orderField: 'resource__name',
           render: ({ row }) => (
             <Link
@@ -106,13 +115,18 @@ export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
         },
         {
           id: 'created',
-          title: translate('Requested'),
+          // "Created", as every other list in the app titles a creation date —
+          // and not a second "Requested" sitting beside "Requested amount",
+          // where it reads as another quantity rather than a date.
+          title: translate('Created'),
           orderField: 'created',
           render: ({ row }) => renderFieldOrDash(formatDate(row.created)),
         },
         {
           id: 'proposal_state',
-          title: requestNoun(),
+          // The parent's state, not the parent: "Resource state" next to it
+          // says state, so this must too.
+          title: requestStateLabel(),
           orderField: 'proposal__state',
           render: ({ row }) => (
             <ProposalStateBadge state={row.proposal_state} />
@@ -132,11 +146,20 @@ export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
   return (
     <Table<UserRequestedResource>
       {...tableProps}
-      title={title || translate('Resource requests')}
+      title={title}
       columns={columns}
+      tableActions={actions}
       verboseName={translate('resource requests')}
       hasQuery
-      hasOptionalColumns
+      // No hasOptionalColumns: the whole mechanism narrows the request via
+      // `field`, building it from each column's `keys`
+      // (useTableQuery: activeColumns -> field). This endpoint takes no
+      // `field` param, so these columns carry no keys — and a keyless column
+      // renders unconditionally (TableProvider: `!column.keys || ...`) while
+      // its checkbox reads the unset `activeColumns` entry as off. The menu
+      // therefore listed every column unchecked and toggling did nothing.
+      // Giving them keys to satisfy the widget would put a bogus `field=` on
+      // every request; the control simply does not apply here.
       filters={<ProposalMyRequestedResourcesFilter />}
       formId={ProposalMyRequestedResourcesFilterFormId}
     />

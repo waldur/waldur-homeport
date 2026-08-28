@@ -120,36 +120,28 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'profile.resource-requests',
-    url: 'resource-requests/',
+    // One entry replacing `profile.resource-requests` and
+    // `profile.proposals`, which sat next to each other both ending in
+    // "requests". The page carries a lens switch between the two instead.
+    //
+    // The permission gate is the union of the two it replaces: the resource
+    // view needs somewhere to have requested from (isProposalRequestEnabled),
+    // and the request view was previously marketplace-only because calls own
+    // the list in the other modes. Keeping the union means the page appears
+    // wherever either half used to.
+    name: 'profile.requests',
+    url: 'requests/',
     component: lazyComponent(() =>
-      import('@/proposals/requests/ProfileResourceRequests').then((module) => ({
-        default: module.ProfileResourceRequests,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Resource requests'),
-      // Same gate as the Request button; with calls as the only way in there
-      // is no offering page to request from.
-      permissions: [() => isProposalRequestEnabled()],
-      priority: 122,
-    },
-  },
-  {
-    // Marketplace-only deployments have no calls section, so a submitted
-    // proposal would otherwise be untrackable. Everything personal already
-    // lives here, next to Resource requests.
-    name: 'profile.proposals',
-    url: 'proposals/',
-    component: lazyComponent(() =>
-      import('@/proposals/proposal/UserProposalsList').then((module) => ({
-        default: module.UserProposalsList,
+      import('@/proposals/requests/ProfileRequests').then((module) => ({
+        default: module.ProfileRequests,
       })),
     ),
     data: {
       breadcrumb: () => requestListTitle(),
-      permissions: [() => !isCallsSectionVisible()],
-      priority: 123,
+      permissions: [
+        () => isProposalRequestEnabled() || !isCallsSectionVisible(),
+      ],
+      priority: 122,
     },
   },
   {
