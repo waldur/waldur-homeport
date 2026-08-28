@@ -139,6 +139,7 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
 
   const submitForm = useCallback(
     async (values) => {
+      let templateUuid: string;
       try {
         const action = isEdit
           ? supportTemplatesUpdate({
@@ -148,24 +149,7 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
           : supportTemplatesCreate({ body: values });
 
         const response = await action;
-        const templateUuid = response.data.uuid;
-
-        // Apply pending attachment deletions for the edit case
-        if (isEdit && pendingDeleteUuids.length) {
-          await supportTemplatesDeleteAttachments({
-            path: { uuid: resolve.issueTemplate.uuid },
-            body: { attachment_ids: pendingDeleteUuids },
-          });
-        }
-
-        await attachFiles(templateUuid);
-        resolve.refetch();
-        showSuccess(
-          isEdit
-            ? translate('The issue template has been updated.')
-            : translate('New issue template has been created.'),
-        );
-        closeDialog();
+        templateUuid = response.data.uuid;
       } catch (error) {
         showErrorResponse(
           error,
@@ -173,7 +157,41 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
             ? translate('Unable to update issue template.')
             : translate('Unable to create issue template.'),
         );
+        return;
       }
+
+      // The template is stored from here on, so an attachment failure must not
+      // be reported as a failed save: resubmitting would create a duplicate
+      // template. Both steps report their own errors and the dialog closes
+      // either way, leaving the attachments to be retried by editing the
+      // template.
+      if (isEdit && pendingDeleteUuids.length) {
+        try {
+          await supportTemplatesDeleteAttachments({
+            path: { uuid: resolve.issueTemplate.uuid },
+            body: { attachment_ids: pendingDeleteUuids },
+          });
+        } catch (error) {
+          showErrorResponse(
+            error,
+            translate('Unable to remove the selected attachments.'),
+          );
+        }
+      }
+
+      try {
+        await attachFiles(templateUuid);
+      } catch {
+        // attachFiles has already notified the user.
+      }
+
+      resolve.refetch();
+      showSuccess(
+        isEdit
+          ? translate('The issue template has been updated.')
+          : translate('New issue template has been created.'),
+      );
+      closeDialog();
     },
     [
       resolve,
