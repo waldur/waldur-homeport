@@ -1,18 +1,80 @@
 import { FingerprintIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { router } from '@/router';
+import { useNotify } from '@/store/notify';
+import { getBlockedNavigation } from '@/user/blockedNavigation';
+import { needsPasskeyEnrollment } from '@/user/passkeys/enforcement';
+import { UsersService } from '@/user/UsersService';
 import { useUser } from '@/workspace/hooks';
+
+const DEFAULT_STATE = 'profile.details';
 
 const PasskeyRegisterDialog = lazyComponent(() =>
   import('./PasskeyRegisterDialog').then((module) => ({
     default: module.PasskeyRegisterDialog,
   })),
 );
+
+type Notify = Pick<
+  ReturnType<typeof useNotify>,
+  'showError' | 'showErrorResponse'
+>;
+
+/**
+ * Runs after a successful enrolment. Refreshes the signed-in user so the
+ * transition guard sees has_passkey, then resumes the page the guard
+ * remembered when it sent the user here — the same handoff the
+ * profile-manage gate does once the terms are accepted.
+ *
+ * Exported for tests; the dialog calls it fire-and-forget, so it must never
+ * reject.
+ */
+export const resumeAfterEnrolment = async ({
+  showError,
+  showErrorResponse,
+}: Notify): Promise<void> => {
+  let user;
+  try {
+    user = await UsersService.refreshCurrentUser();
+  } catch (e) {
+    showErrorResponse(
+      e,
+      translate(
+        'The passkey was registered, but your account could not be refreshed. Reload the page to continue.',
+      ),
+    );
+    return;
+  }
+  // Navigating now would only bounce straight back here with a success
+  // toast and no explanation, and a second click would enrol another key.
+  if (needsPasskeyEnrollment(user)) {
+    showError(
+      translate(
+        'The passkey was registered, but your account still reports none. Reload the page to continue.',
+      ),
+    );
+    return;
+  }
+  const blocked = getBlockedNavigation();
+  const target =
+    blocked && router.stateRegistry.get(blocked.toState)
+      ? blocked
+      : { toState: DEFAULT_STATE, toParams: {} };
+  // The remembered page is left in storage: the onSuccess hook in
+  // transitions.ts clears it on arrival, so a superseded or aborted attempt
+  // keeps the intent for the next gate. A rejected go() means another
+  // transition (the user's own click, or a guard redirect) already took
+  // over — there is nothing further to do or report.
+  await router.stateService
+    .go(target.toState, target.toParams)
+    .catch(() => undefined);
+};
 
 /**
  * Shown instead of the requested page when a privileged account has not yet
@@ -25,19 +87,24 @@ const PasskeyRegisterDialog = lazyComponent(() =>
 export const PasskeyEnrollmentRequired: FunctionComponent = () => {
   const user = useUser();
   const { openDialog } = useModal();
+  const notify = useNotify();
+  // The dialog closes before the resume finishes; keep the button busy until
+  // then so a slow refresh can't be answered with a second enrolment.
+  const [resuming, setResuming] = useState(false);
 
-  const enrol = useCallback(
-    () =>
-      openDialog(PasskeyRegisterDialog, {
-        resolve: {
-          // A successful enrolment changes has_passkey, so the simplest
-          // correct thing is a full reload: it refetches the user and the
-          // transition hook then lets them through to where they were going.
-          refetch: () => window.location.reload(),
+  const enrol = () =>
+    openDialog(PasskeyRegisterDialog, {
+      resolve: {
+        refetch: async () => {
+          setResuming(true);
+          try {
+            await resumeAfterEnrolment(notify);
+          } finally {
+            setResuming(false);
+          }
         },
-      }),
-    [openDialog],
-  );
+      },
+    });
 
   return (
     <Container className="py-10">
@@ -57,7 +124,7 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
                 )}
               </p>
               <SubmitButton
-                submitting={false}
+                submitting={resuming}
                 onClick={enrol}
                 type="button"
                 label={translate('Add passkey')}
