@@ -9,7 +9,7 @@ const meta: Meta<typeof StatCard> = {
     docs: {
       description: {
         component:
-          'New dashboard primitive, not a port of an existing component — see StatCard.tsx.',
+          'Ports src/core/StatsCard.tsx, the real KPI-tile component — see StatCard.tsx.',
       },
     },
   },

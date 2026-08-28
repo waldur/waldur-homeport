@@ -36,11 +36,9 @@ import { useIsMobile } from './useIsMobile';
  * upstream recipe, if a real consumer needs them rather than guessing the
  * shape upfront.
  *
- * SidebarModeCard/SidebarNavItem/SidebarSection below are this app's own
- * convenience layer on top of the primitives above (no shadcn equivalent
- * for SidebarModeCard specifically) — their public API is unchanged from
- * before this migration, so OrgDashboardMock.tsx didn't need to change
- * except for adding the now-required SidebarProvider wrapper.
+ * SidebarModeCard/SidebarNavItem/SidebarSection below are this package's
+ * own convenience layer on top of the primitives above — no shadcn
+ * equivalent for SidebarModeCard specifically.
  */
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
@@ -272,8 +270,8 @@ export function SidebarTrigger({
       aria-label="Toggle sidebar"
       // Same ICON_BUTTON_BASE_CLASSNAME as TopBar.tsx's IconButton —
       // despite living in this file, SidebarTrigger itself is rendered in
-      // the TopBar (see OrgDashboardMock.tsx), not inside <Sidebar>, so
-      // it's genuinely the same kind of button, not a coincidence.
+      // the TopBar, not inside <Sidebar>, so it's genuinely the same kind
+      // of button, not a coincidence.
       className={cn(ICON_BUTTON_BASE_CLASSNAME, className)}
       onClick={(event) => {
         onClick?.(event);

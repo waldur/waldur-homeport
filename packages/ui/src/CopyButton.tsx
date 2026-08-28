@@ -5,10 +5,10 @@ import { BaseButton } from './BaseButton';
 
 export interface CopyButtonProps {
   value: string;
-  /** Already translated by the caller, unlike UserMenu.tsx/LanguageMenu.tsx
-   * (which call translate() directly now that waldur-i18n-runtime is a real
-   * dependency of this package) — those two have one fixed, non-reusable
-   * set of strings; this component's label legitimately varies by call site
+  /** Already translated by the caller, unlike LanguageMenu.tsx (which calls
+   * translate() directly, since waldur-i18n-runtime is a real dependency of
+   * this package) — that component has one fixed, non-reusable set of
+   * strings; this component's label legitimately varies by call site
    * ("Copy", "Copy token", "Copy link", ...), so it stays a prop rather than
    * a hardcoded translate() call. */
   label: string;
@@ -21,9 +21,9 @@ export interface CopyButtonProps {
  * @/store/notify, a whole app-wide notification system with no equivalent
  * in a standalone consumer — a transient label swap on the button itself
  * (label → copiedLabel, then back) is the honest equivalent, not a
- * fabricated toast. Extracted here after the same value/label/onClick/
- * useState shape showed up twice in OrgDashboardMock.tsx (API token, IP
- * address) with nothing app-specific about it.
+ * fabricated toast. Extracted here since the same value/label/onClick/
+ * useState shape shows up twice in waldur-shell's UserMenu.tsx (API
+ * token, IP address) with nothing app-specific about it.
  */
 export function CopyButton({
   value,

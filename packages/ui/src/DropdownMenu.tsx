@@ -19,13 +19,9 @@ import { cn } from './cn';
  *
  * Scoped to what its consumers actually need — DropdownMenuCheckboxItem is
  * still omitted, but DropdownMenuRadioGroup/RadioItem and the
- * DropdownMenuSub* nested-submenu family are now here too. RadioItem
- * replaced three hand-rolled "leading CheckIcon, invisible unless selected"
- * DropdownMenuItems in OrgDashboardMock.tsx (org switcher, language list) —
- * same visual result, but role="menuitemradio"/aria-checked instead of a
- * plain menuitem with a cosmetic icon, and one indicator recipe instead of
- * three ad hoc ones that had already drifted (leading vs trailing, with vs
- * without ml-auto).
+ * DropdownMenuSub* nested-submenu family are now here too — see RadioItem's
+ * own comment for why a real "pick one" primitive beat a hand-rolled
+ * checkmark pattern.
  *
  * max-h-(--radix-dropdown-menu-content-available-height) + overflow-y-auto
  * on the content wrapper IS part of that real shadcn recipe, not an extra
@@ -210,13 +206,13 @@ export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 /**
  * shadcn's real recipe: an absolutely-positioned indicator in a left
  * gutter (pl-8 on the row makes room for it), not inline content — one
- * indicator recipe shared by every "pick one from this list" menu instead
- * of the three ad hoc ones this replaced in OrgDashboardMock.tsx (org
- * switcher, "no organisation" fallback, language list), which had already
- * drifted from each other (leading vs trailing checkmark, with vs without
- * ml-auto). Real role="menuitemradio"/aria-checked semantics come from
- * Radix for free — the ad hoc versions were plain menuitems with a
- * decorative icon, not actually exposed as selectable to assistive tech.
+ * indicator recipe shared by every "pick one from this list" menu (the org
+ * switcher, the language list) instead of a hand-rolled "leading CheckIcon,
+ * invisible unless selected" DropdownMenuItem per call site, which drifts
+ * (leading vs trailing checkmark, with vs without ml-auto) and only looks
+ * selectable — it's a plain menuitem with a decorative icon, not exposed
+ * as selectable to assistive tech. Real role="menuitemradio"/aria-checked
+ * semantics come from Radix here for free.
  */
 export function DropdownMenuRadioItem({
   className,

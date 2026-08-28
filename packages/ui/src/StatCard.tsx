@@ -6,16 +6,14 @@ import { cn } from './cn';
 import { StatusTone } from './StatusPill';
 
 /**
- * There IS a real, single, reusable KPI-tile component this ports —
- * src/core/StatsCard.tsx (used via src/core/SummaryWidget.tsx by pages
- * like src/reporting/GrowthPage.tsx) — not a from-scratch shape as an
- * earlier version of this comment claimed. Its real markup is one padded
+ * Ports a real, single, reusable KPI-tile component — src/core/StatsCard.tsx
+ * (used via src/core/SummaryWidget.tsx by pages like
+ * src/reporting/GrowthPage.tsx). Its real markup is one padded
  * `.card.card-flush.card-bordered` box (label, then value, then an
- * optional footer row), not this component's previous header+content
- * split — that split left a real gap: CardHeader's own bottom padding was
- * zeroed on the assumption a footer section would always follow to
- * provide it, which silently broke (zero bottom padding) for any
- * label+value-only card. Composed as one CardContent now instead.
+ * optional footer row) — composed here as a single CardContent, not a
+ * CardHeader+CardContent split: CardHeader's own bottom padding is zeroed
+ * on the assumption a footer section always follows to provide it, which
+ * silently breaks (zero bottom padding) for a label+value-only card.
  *
  * Real values (root font-size is 13px in that app, not 16px — see
  * src/metronic/sass/layout/_variables.scss's $root-font-size; expressed
@@ -33,11 +31,9 @@ import { StatusTone } from './StatusPill';
  * Bootstrap's font-weight scale (src/metronic/sass/core/components/
  * _variables.scss: `$font-weight-bold: 500` — Bootstrap's own default is
  * 700 — `$font-weight-bolder: 600`), so real `.fw-bold` is genuinely
- * Tailwind's font-medium (500), not font-bold (700); an earlier version
- * of this component added an unnecessary (and wrong) font-bold override
- * here on that mistaken assumption. The value's own font-semibold (600)
- * is correct as-is: it has no explicit weight class in the real
- * component, so it inherits `$headings-font-weight: $font-weight-bolder`
+ * Tailwind's font-medium (500), not font-bold (700). The value's own
+ * font-semibold (600) is correct as-is: it has no explicit weight class in
+ * the real component, so it inherits `$headings-font-weight: $font-weight-bolder`
  * = 600 from its real `<h1>` tag. The card itself is `.card-bordered`
  * (unconditionally bordered, box-shadow: none in BOTH themes) — a
  * different real variant than Card.tsx's own default (theme-conditional
