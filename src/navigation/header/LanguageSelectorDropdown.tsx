@@ -21,9 +21,11 @@ export const LanguageCountry = {
   km: 'kh',
   lt: 'lt',
   lv: 'lv',
+  mk: 'mk',
   nb: 'no',
   ru: 'ru',
   sl: 'si',
+  sq: 'al',
   sv: 'se',
   uk: 'ua',
 };

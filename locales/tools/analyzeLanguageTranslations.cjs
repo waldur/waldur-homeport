@@ -36,6 +36,7 @@ function showUsage() {
 
   // Map language names to codes for display
   const languageMap = {
+    albanian: 'sq',
     arabic: 'ar',
     azerbaijani: 'az',
     bengali: 'bn',
@@ -54,6 +55,7 @@ function showUsage() {
     kyrgyz: 'ky',
     latvian: 'lv',
     lithuanian: 'lt',
+    macedonian: 'mk',
     norwegian: 'nb',
     persian: 'fa',
     polish: 'pl',
@@ -104,12 +106,14 @@ function getAnalyzerFileName(langCode) {
     ky: 'analyzeKyrgyzTranslations.cjs',
     lt: 'analyzeLithuanianTranslations.cjs',
     lv: 'analyzeLatvianTranslations.cjs',
+    mk: 'analyzeMacedonianTranslations.cjs',
     nb: 'analyzeNorwegianTranslations.cjs',
     nl: 'analyzeDutchTranslations.cjs',
     'nl-BE': 'analyzeBelgianDutchTranslations.cjs',
     pl: 'analyzePolishTranslations.cjs',
     ru: 'analyzeRussianTranslations.cjs',
     sl: 'analyzeSlovenianTranslations.cjs',
+    sq: 'analyzeAlbanianTranslations.cjs',
     sv: 'analyzeSwedishTranslations.cjs',
     th: 'analyzeThaiTranslations.cjs',
     uk: 'analyzeUkrainianTranslations.cjs',
