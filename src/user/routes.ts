@@ -22,6 +22,7 @@ import {
   isStaffOrSupport,
 } from '@/workspace/selectors';
 
+import { arePasskeysEnabled } from './passkeys/utils';
 import { UsersService } from './UsersService';
 
 // PAT is gated globally (PAT_ENABLED) and then per-user: staff are implicitly
@@ -34,13 +35,6 @@ const canUsePersonalAccessTokens = (state) => {
   return Boolean(
     user && (user.is_staff || user.can_use_personal_access_tokens),
   );
-};
-
-// Passkeys are inert unless an operator enabled one of the two flows, so the
-// whole section is hidden rather than shown empty.
-const arePasskeysEnabled = () => {
-  const methods = ENV.plugins.WALDUR_CORE.AUTHENTICATION_METHODS ?? [];
-  return methods.includes('PASSKEY_SIGNIN') || methods.includes('PASSKEY_MFA');
 };
 
 const canAccessOrganization = (state) => {

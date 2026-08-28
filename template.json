@@ -1084,6 +1084,7 @@
       "feature_area": "create"
     }
   },
+  "Access request state": {},
   "Access request submitted successfully": {
     "context": {
       "primary_ui_type": "success_message",
@@ -7720,6 +7721,7 @@
       "feature_area": "invitations"
     }
   },
+  "By access request": {},
   "By affiliation": {
     "context": {
       "feature_area": "usage-by-creator"
@@ -7770,15 +7772,11 @@
       "feature_area": "reports"
     }
   },
+  "By proposal": {},
   "By provider": {
     "context": {
       "primary_ui_type": "label",
       "feature_area": "resource-pending"
-    }
-  },
-  "By request": {
-    "context": {
-      "feature_area": "requests"
     }
   },
   "By resource": {
@@ -9160,6 +9158,12 @@
   "Claims not exposed": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Clarification": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "ai-assistant"
     }
   },
   "Classification Filter": {
@@ -22988,6 +22992,20 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Interactions where the assistant asked a clarifying question instead of recommending — {count} of {total}.": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "ai-assistant"
+    }
+  },
   "Interactive analysis of user distribution by identity and education": {
     "context": {
       "feature_area": "reporting"
@@ -34016,6 +34034,7 @@
   },
   "Passkeys": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "user"
     }
   },
@@ -39319,6 +39338,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Recorded in the audit log and visible to the account holder.": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "Recording...": {
     "context": {
       "feature_area": "chat"
@@ -40520,7 +40544,6 @@
   },
   "Request": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "access"
     }
   },
@@ -41597,6 +41620,12 @@
     }
   },
   "Resource pull has been scheduled.": {},
+  "Resource request": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "requests"
+    }
+  },
   "Resource request has been deleted.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -42772,6 +42801,12 @@
       "feature_area": "version-history"
     }
   },
+  "Revocation reason": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "passkeys"
+    }
+  },
   "Revoke": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -42846,6 +42881,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "tos"
+    }
+  },
+  "Revoking it leaves the user with none. If passkeys are required for their account they will be held at the enrolment page until they add another, so make sure they can reach a device first.": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "Revoking {role} role for {scope}. This will remove associated permissions immediately.": {
@@ -50969,6 +51009,11 @@
       "feature_area": "credits"
     }
   },
+  "They will not be able to use this passkey again. If it was their only one and passkeys are required for their account, they will be asked to enrol a new one before they can continue.": {
+    "context": {
+      "feature_area": "passkeys"
+    }
+  },
   "Thick arrow": {
     "context": {
       "primary_ui_type": "label"
@@ -51233,6 +51278,11 @@
   "This is the primary database": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "This is their only passkey": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "This justification has already been reviewed": {
@@ -51529,6 +51579,11 @@
   "This session has expired. Please start a new conversation.": {
     "context": {
       "feature_area": "anonymous"
+    }
+  },
+  "This signs the user out of that credential": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "This site only uses <b>essential cookies</b>, which are necessary for the platform to function correctly. These cookies enable you to log in, access secure areas, and navigate throughout the site. No other types of cookies are used.": {
@@ -62897,6 +62952,11 @@
   "e.g. Image name...": {
     "context": {
       "feature_area": "images"
+    }
+  },
+  "e.g. Laptop reported stolen": {
+    "context": {
+      "feature_area": "passkeys"
     }
   },
   "e.g. MIN(20, usage / 100)": {
