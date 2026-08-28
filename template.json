@@ -50414,6 +50414,18 @@
       "feature_area": "error"
     }
   },
+  "The passkey was registered, but your account could not be refreshed. Reload the page to continue.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "passkeys"
+    }
+  },
+  "The passkey was registered, but your account still reports none. Reload the page to continue.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "passkeys"
+    }
+  },
   "The plan name is not specified in one or more resource records.": {
     "context": {
       "feature_area": "import"
