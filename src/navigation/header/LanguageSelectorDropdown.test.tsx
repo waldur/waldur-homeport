@@ -25,6 +25,8 @@ const BACKEND_LANGUAGE_CODES = [
   'el',
   'bg',
   'km',
+  'mk',
+  'sq',
 ];
 
 describe('LanguageCountry', () => {
