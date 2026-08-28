@@ -154,10 +154,30 @@ export const AnonymousChatPanel: FunctionComponent = () => {
               value: asPercent(kpi.click_through_rate),
             },
             {
+              label: (
+                <>
+                  {translate('Clarification')}{' '}
+                  <Tip
+                    id="anon-chat-clarification"
+                    label={translate(
+                      'Interactions where the assistant asked a clarifying question instead of recommending — {count} of {total}.',
+                      {
+                        count:
+                          kpi.clarification_requests_total.toLocaleString(),
+                        total: kpi.interactions_total.toLocaleString(),
+                      },
+                    )}
+                  >
+                    <QuestionIcon weight="bold" />
+                  </Tip>
+                </>
+              ),
+              value: asPercent(kpi.clarification_rate),
+            },
+            {
               // Combined rather than split across two tiles like the
-              // authenticated tab: a sixth tile drops SummaryWidget out of its
-              // five-stat auto-width case into a wrapping row. The split is
-              // still one hover away.
+              // authenticated tab: a seventh tile would push SummaryWidget's
+              // single row into wrapping. The split is still one hover away.
               label: (
                 <>
                   {translate('Tokens')}{' '}
