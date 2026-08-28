@@ -8,7 +8,7 @@ export const SummaryWidget = ({
   stats,
   className,
 }: {
-  stats: Array<{ label: ReactNode; value: ReactNode }>;
+  stats: Array<{ label: ReactNode; value: ReactNode; footer?: ReactNode }>;
   // Callers outside a padded container (e.g. a TableWithTabs pane) pass `mx-0`
   // to cancel the row's negative gutter margins, which would otherwise bleed
   // past the pane and get clipped by its overflow.
@@ -23,7 +23,11 @@ export const SummaryWidget = ({
     <Row className={classNames('g-4 mb-5', className)}>
       {stats.map((stat, index) => (
         <Col key={index} sm={colWidth}>
-          <StatsCard label={stat.label} value={stat.value} />
+          <StatsCard
+            label={stat.label}
+            value={stat.value}
+            footer={stat.footer}
+          />
         </Col>
       ))}
     </Row>

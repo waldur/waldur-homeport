@@ -20855,6 +20855,11 @@
       "feature_area": "table-growth"
     }
   },
+  "Growth data unavailable": {
+    "context": {
+      "feature_area": "reporting"
+    }
+  },
   "Growth scenario": {
     "context": {
       "primary_ui_type": "label"
@@ -63308,6 +63313,16 @@
   "imported licenses": {
     "context": {
       "feature_area": "import"
+    }
+  },
+  "in the last {months} months": {
+    "context": {
+      "variables": {
+        "months": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "reporting"
     }
   },
   "in {count} projects": {
