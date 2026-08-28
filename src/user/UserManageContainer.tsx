@@ -16,6 +16,7 @@ import { IBreadcrumbItem, PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { router } from '@/router';
 import { UserProfileHero } from '@/user/dashboard/UserProfileHero';
+import { arePasskeysEnabled } from '@/user/passkeys/utils';
 import { useUser } from '@/workspace/hooks';
 
 import {
@@ -69,6 +70,11 @@ const UserAffiliationsList = lazyComponent(() =>
 const ReviewerProfileTab = lazyComponent(() =>
   import('@/user/ReviewerProfileTab').then((module) => ({
     default: module.ReviewerProfileTab,
+  })),
+);
+const StaffPasskeysList = lazyComponent(() =>
+  import('@/user/passkeys/StaffPasskeysList').then((module) => ({
+    default: module.StaffPasskeysList,
   })),
 );
 const DataAccessTab = lazyComponent(() =>
@@ -207,6 +213,17 @@ export const UserManageContainer = ({ isPersonal }) => {
             key: 'remote-accounts',
             component: UserOfferingList,
             title: translate('Remote accounts'),
+          },
+        // Passkeys - staff viewing other users. Recovery for a lost
+        // authenticator is a staff revoke plus the user enrolling again;
+        // there are deliberately no backup codes. Staff only, not support:
+        // revoking a credential is a change, not a lookup.
+        arePasskeysEnabled() &&
+          currentUser?.is_staff &&
+          !isPersonal && {
+            key: 'passkeys',
+            component: StaffPasskeysList,
+            title: translate('Passkeys'),
           },
         // Roles and permissions - staff/support viewing other users (personal has affiliations in dashboard)
         (currentUser?.is_staff || currentUser?.is_support) &&
