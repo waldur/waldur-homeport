@@ -65,6 +65,8 @@ const kpiFixture = (overrides: Record<string, unknown> = {}) => ({
   satisfaction_rate: 0.4,
   clicks_total: 9,
   click_through_rate: 0.08,
+  clarification_requests_total: 13,
+  clarification_rate: 0.12,
   input_tokens_total: 842193,
   output_tokens_total: 361402,
   reviewed_total: 0,
@@ -241,13 +243,23 @@ describe('AnonymousChatPanel', () => {
 
     // Same sequence as the authenticated tab: reach, then whether it went well,
     // then what it cost. Satisfaction reads as an afterthought anywhere later.
-    expect(statValues().slice(0, 5)).toEqual([
+    expect(statValues().slice(0, 6)).toEqual([
       '24',
       '1',
       '40%',
       '8%',
+      '12%',
       '1,203,595',
     ]);
+
+    const clarificationTip = screen
+      .getByText('Clarification')
+      // eslint-disable-next-line testing-library/no-node-access
+      .querySelector('span');
+    await userEvent.hover(clarificationTip!);
+    await screen.findByText(
+      'Interactions where the assistant asked a clarifying question instead of recommending — 13 of 111.',
+    );
 
     // The split still has to be reachable, and in the right order. Tip renders
     // its trigger as a bare span with no role or name, so there is nothing to
@@ -278,7 +290,7 @@ describe('AnonymousChatPanel', () => {
     // rather than a ratio against the thread total shown two tiles left.
     await screen.findByText('142');
 
-    expect(statValues().slice(5)).toEqual([
+    expect(statValues().slice(6)).toEqual([
       '142',
       '3.8 / 5',
       '4%',
@@ -290,7 +302,7 @@ describe('AnonymousChatPanel', () => {
     // visitor Tokens tile at the end of row 1 — the two run on separate
     // budgets, and one merged number would hide the split that separation
     // exists to protect.
-    expect(statValues()[4]).toBe('1,203,595');
+    expect(statValues()[5]).toBe('1,203,595');
 
     // eslint-disable-next-line testing-library/no-node-access
     const reviewTip = screen.getByText('Review tokens').querySelector('span');
@@ -309,6 +321,6 @@ describe('AnonymousChatPanel', () => {
     // The backend drops the rate fields entirely at zero coverage. Hiding the
     // row on that basis would make a dead nightly pass look like a healthy
     // dashboard — the counts stay, the rates read N/A.
-    expect(statValues().slice(5)).toEqual(['0', 'N/A', 'N/A', 'N/A', '0']);
+    expect(statValues().slice(6)).toEqual(['0', 'N/A', 'N/A', 'N/A', '0']);
   });
 });
