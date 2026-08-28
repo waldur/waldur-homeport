@@ -27144,7 +27144,6 @@
   },
   "Media": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "details"
     }
   },
@@ -55881,6 +55880,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "details"
+    }
+  },
+  "Unable to remove the selected attachments.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "issue-templates"
     }
   },
   "Unable to remove user {userName}.": {

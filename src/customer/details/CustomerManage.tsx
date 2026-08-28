@@ -3,21 +3,13 @@ import { customersPartialUpdate } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
-import { isFeatureVisible } from '@/features/connect';
-import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { PageBarProvider } from '@/marketplace/context';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { useCustomer, useSetCustomer, useUser } from '@/workspace/hooks';
 
-import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
-import { CustomerEditPanels } from './CustomerEditPanels';
-import { CustomerManagePageBar } from './CustomerManagePageBar';
-import { CustomerMarketplacePanel } from './CustomerMarketplacePanel';
-import { CustomerRemovePanel } from './CustomerRemovePanel';
 import { serializeNotificationEmails } from './utils';
 
 const CustomerErrorDialog = lazyComponent(() =>
@@ -80,32 +72,15 @@ export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
     [canEditCustomer, customer, openDialog, showSuccess, showErrorResponse],
   );
 
-  if (tabSpec) {
-    return (
-      <tabSpec.component
-        customer={customer}
-        callback={update}
-        canUpdate={canEditCustomer}
-      />
-    );
+  if (!tabSpec) {
+    return null;
   }
 
   return (
-    <PageBarProvider>
-      <CustomerManagePageBar />
-      <div className="container-fluid py-10">
-        <CustomerEditPanels
-          customer={customer}
-          callback={update}
-          canUpdate={canEditCustomer}
-        />
-
-        <CustomerMarketplacePanel />
-        {isFeatureVisible(
-          MarketplaceFeatures.show_call_management_functionality,
-        ) && <CustomerCallManagerPanel />}
-        <CustomerRemovePanel />
-      </div>
-    </PageBarProvider>
+    <tabSpec.component
+      customer={customer}
+      callback={update}
+      canUpdate={canEditCustomer}
+    />
   );
 };
