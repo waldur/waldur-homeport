@@ -21,6 +21,7 @@ import {
   isResumableState,
   rememberBlockedNavigation,
 } from './user/blockedNavigation';
+import { needsPasskeyEnrollment } from './user/passkeys/enforcement';
 import { UsersService } from './user/UsersService';
 
 export function attachTransitions() {
@@ -61,6 +62,9 @@ export function attachTransitions() {
         'home.login_failed',
         'home.logout_completed',
         'home.logout_failed',
+        // The enrollment interstitial itself, or the hook below would send
+        // the user to the page they are already on, forever.
+        'profile-passkeys-required',
       ];
       const toStateName = transition.to().name;
       if (
@@ -80,6 +84,22 @@ export function attachTransitions() {
       }
 
       try {
+        // Passkey enforcement is checked here rather than in a hook of its
+        // own: transitions.test.ts locates the profile-validity hook as "the
+        // first onBefore with a `to` criteria", so adding a second one ahead
+        // of it silently retargets that test at the wrong callback.
+        //
+        // It also has to come before the validity check, because that treats
+        // staff and support as always valid — which is exactly the group
+        // enforcement applies to.
+        const user = await UsersService.getCurrentUser();
+        if (needsPasskeyEnrollment(user)) {
+          rememberBlockedNavigation(toStateName, transition.params());
+          return transition.router.stateService.target(
+            'profile-passkeys-required',
+          );
+        }
+
         const result = await UsersService.isCurrentUserValid();
         if (result) {
           return;

@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { passkeysList } from 'waldur-js-client';
 
+import { AlertItem } from '@/core/AlertItem';
 import { Badge } from '@/core/Badge';
 import { formatDate, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -90,14 +91,34 @@ export const PasskeysList: FunctionComponent = () => {
     },
   ];
 
+  // Recovery is a staff revoke plus holding more than one credential — there
+  // are deliberately no backup codes. A user with exactly one is therefore one
+  // lost device away from needing staff intervention, which is worth saying
+  // before it happens rather than after.
+  const activeCount = (props.rows ?? []).filter(
+    (row) => row.is_active && !row.is_orphaned,
+  ).length;
+
   return (
-    <Table
-      {...props}
-      columns={columns}
-      verboseName={translate('passkeys')}
-      tableActions={<PasskeyRegisterButton refetch={props.fetch} />}
-      rowActions={PasskeyActions}
-      showPageSizeSelector={true}
-    />
+    <>
+      {activeCount === 1 && (
+        <AlertItem
+          variant="info"
+          title={translate('Add a second passkey')}
+          body={translate(
+            'You have one passkey. If you lose that device you will need an administrator to remove it before you can sign in again. A second passkey — on a phone, or a security key — avoids that.',
+          )}
+          className="mb-4"
+        />
+      )}
+      <Table
+        {...props}
+        columns={columns}
+        verboseName={translate('passkeys')}
+        tableActions={<PasskeyRegisterButton refetch={props.fetch} />}
+        rowActions={PasskeyActions}
+        showPageSizeSelector={true}
+      />
+    </>
   );
 };

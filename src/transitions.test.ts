@@ -2,6 +2,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 const mockIsAuthenticated = vi.fn();
 const mockIsCurrentUserValid = vi.fn();
+const mockGetCurrentUser = vi.fn();
+const mockNeedsPasskeyEnrollment = vi.fn();
 const mockGroupInvitationTokenSet = vi.fn();
 const mockTarget = vi.fn();
 
@@ -71,7 +73,15 @@ vi.mock('./router', () => ({
 vi.mock('./user/UsersService', () => ({
   UsersService: {
     isCurrentUserValid: (...args) => mockIsCurrentUserValid(...args),
+    getCurrentUser: (...args) => mockGetCurrentUser(...args),
   },
+}));
+
+// The passkey guard shares the profile-validity hook, so every test through
+// that hook now resolves a user. Default to one that needs nothing, so the
+// existing cases keep testing what they were written to test.
+vi.mock('./user/passkeys/enforcement', () => ({
+  needsPasskeyEnrollment: (...args) => mockNeedsPasskeyEnrollment(...args),
 }));
 
 import { attachTransitions } from './transitions';
@@ -103,6 +113,11 @@ describe('Profile validity transition guard', () => {
     onErrorHandlers.length = 0;
 
     mockIsAuthenticated.mockReturnValue(true);
+    // Defaults that preserve what the pre-existing cases test: a user is
+    // resolvable and does not owe a passkey, so the hook falls through to the
+    // profile-validity check as before.
+    mockGetCurrentUser.mockResolvedValue({ username: 'alice' });
+    mockNeedsPasskeyEnrollment.mockReturnValue(false);
 
     attachTransitions();
 
@@ -181,6 +196,52 @@ describe('Profile validity transition guard', () => {
 
       expect(mockTarget).toHaveBeenCalledWith('errorPage.serverError');
       expect(result).toBe('error-redirect');
+    });
+  });
+
+  describe('passkey enforcement guard', () => {
+    it('sends a privileged account with no passkey to the interstitial', async () => {
+      mockNeedsPasskeyEnrollment.mockReturnValue(true);
+      const transition = createMockTransition('projects');
+
+      const result = await profileValidityHook.callback(transition);
+
+      expect(mockTarget).toHaveBeenCalledWith('profile-passkeys-required');
+      expect(result).toBeDefined();
+    });
+
+    it('does not run the profile validity check when a passkey is owed', async () => {
+      // Staff and support are "always valid" for profile completeness, so the
+      // passkey check has to come first or it would never be reached.
+      mockNeedsPasskeyEnrollment.mockReturnValue(true);
+
+      await profileValidityHook.callback(createMockTransition('projects'));
+
+      expect(mockIsCurrentUserValid).not.toHaveBeenCalled();
+    });
+
+    it('lets the interstitial itself through', async () => {
+      // Otherwise the hook redirects to the page the user is already on.
+      mockNeedsPasskeyEnrollment.mockReturnValue(true);
+
+      const result = await profileValidityHook.callback(
+        createMockTransition('profile-passkeys-required'),
+      );
+
+      expect(result).toBeUndefined();
+      expect(mockNeedsPasskeyEnrollment).not.toHaveBeenCalled();
+    });
+
+    it('does not interfere when no passkey is owed', async () => {
+      mockNeedsPasskeyEnrollment.mockReturnValue(false);
+      mockIsCurrentUserValid.mockResolvedValue(true);
+
+      const result = await profileValidityHook.callback(
+        createMockTransition('projects'),
+      );
+
+      expect(result).toBeUndefined();
+      expect(mockIsCurrentUserValid).toHaveBeenCalled();
     });
   });
 

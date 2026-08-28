@@ -47,6 +47,8 @@ export type ServiceAccessMode = 'calls' | 'marketplace' | 'both';
 
 interface CoreConfiguration {
   INVITATION_USE_WEBHOOKS: boolean;
+  /** Staff and support accounts must hold a passkey and have satisfied it. */
+  PASSKEY_ENFORCED_FOR_STAFF?: boolean;
   DEFAULT_IDP: Pick<IdentityProvider, 'provider' | 'auth_url' | 'client_id'>;
   LOGIN_PAGE_LAYOUT: string;
   LOGIN_PAGE_VIDEO_URL: string;
