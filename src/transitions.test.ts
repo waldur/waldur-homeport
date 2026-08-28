@@ -5,6 +5,7 @@ const mockIsCurrentUserValid = vi.fn();
 const mockGetCurrentUser = vi.fn();
 const mockNeedsPasskeyEnrollment = vi.fn();
 const mockGroupInvitationTokenSet = vi.fn();
+const mockRedirectStorageSet = vi.fn();
 const mockTarget = vi.fn();
 
 const onBeforeHandlers: Array<{ criteria: any; callback: any }> = [];
@@ -29,7 +30,7 @@ vi.mock('./core/StorageManager', () => ({
   GroupInvitationTokenStorage: {
     set: (...args) => mockGroupInvitationTokenSet(...args),
   },
-  RedirectStorage: { set: vi.fn() },
+  RedirectStorage: { set: (...args) => mockRedirectStorageSet(...args) },
   BlockedNavigationStorage: { set: vi.fn(), get: vi.fn(), remove: vi.fn() },
 }));
 
@@ -72,9 +73,11 @@ vi.mock('./router', () => ({
 
 vi.mock('./user/UsersService', () => ({
   UsersService: {
-    isCurrentUserValid: (...args) => mockIsCurrentUserValid(...args),
     getCurrentUser: (...args) => mockGetCurrentUser(...args),
   },
+  // The guard validates the resolved user through resolvePostLoginTarget,
+  // which calls the synchronous isUserValid.
+  isUserValid: (...args) => mockIsCurrentUserValid(...args),
 }));
 
 // The passkey guard shares the profile-validity hook, so every test through
@@ -167,7 +170,7 @@ describe('Profile validity transition guard', () => {
 
   describe('protected states require valid profile', () => {
     it('should allow navigation when profile is valid', async () => {
-      mockIsCurrentUserValid.mockResolvedValue(true);
+      mockIsCurrentUserValid.mockReturnValue(true);
       const transition = createMockTransition('profile.details');
 
       const result = await profileValidityHook.callback(transition);
@@ -177,7 +180,7 @@ describe('Profile validity transition guard', () => {
     });
 
     it('should redirect to profile-manage when profile is invalid', async () => {
-      mockIsCurrentUserValid.mockResolvedValue(false);
+      mockIsCurrentUserValid.mockReturnValue(false);
       mockTarget.mockReturnValue('redirect');
       const transition = createMockTransition('profile.details');
 
@@ -188,7 +191,7 @@ describe('Profile validity transition guard', () => {
     });
 
     it('should redirect to errorPage.serverError on API failure', async () => {
-      mockIsCurrentUserValid.mockRejectedValue(new Error('Network error'));
+      mockGetCurrentUser.mockRejectedValue(new Error('Network error'));
       mockTarget.mockReturnValue('error-redirect');
       const transition = createMockTransition('organization.dashboard');
 
@@ -234,7 +237,7 @@ describe('Profile validity transition guard', () => {
 
     it('does not interfere when no passkey is owed', async () => {
       mockNeedsPasskeyEnrollment.mockReturnValue(false);
-      mockIsCurrentUserValid.mockResolvedValue(true);
+      mockIsCurrentUserValid.mockReturnValue(true);
 
       const result = await profileValidityHook.callback(
         createMockTransition('projects'),
@@ -247,7 +250,7 @@ describe('Profile validity transition guard', () => {
 
   describe('group invitation token preservation', () => {
     it('should preserve group invitation token before redirect', async () => {
-      mockIsCurrentUserValid.mockResolvedValue(false);
+      mockIsCurrentUserValid.mockReturnValue(false);
       mockTarget.mockReturnValue('redirect');
       const transition = createMockTransition('user-group-invitation', {
         token: 'my-token-123',
@@ -260,7 +263,7 @@ describe('Profile validity transition guard', () => {
     });
 
     it('should not set token when token param is missing', async () => {
-      mockIsCurrentUserValid.mockResolvedValue(false);
+      mockIsCurrentUserValid.mockReturnValue(false);
       mockTarget.mockReturnValue('redirect');
       const transition = createMockTransition('user-group-invitation', {});
 
@@ -281,6 +284,58 @@ describe('Profile validity transition guard', () => {
       expect(profileValidityHook.criteria.to()).toBe(false);
     });
   });
+});
+
+describe('Redirect persistence on success', () => {
+  const findRedirectHook = () =>
+    onSuccessHandlers.find((h) => {
+      mockRedirectStorageSet.mockClear();
+      h.callback({
+        ...createMockTransition('project.details'),
+        to: () => ({ name: 'project.details', data: { auth: true } }),
+      });
+      return mockRedirectStorageSet.mock.calls.length > 0;
+    });
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    onBeforeHandlers.length = 0;
+    onStartHandlers.length = 0;
+    onSuccessHandlers.length = 0;
+    onErrorHandlers.length = 0;
+    attachTransitions();
+  });
+
+  it('remembers a regular authenticated page', () => {
+    const hook = findRedirectHook();
+    expect(hook).toBeTruthy();
+    mockRedirectStorageSet.mockClear();
+
+    hook.callback({
+      ...createMockTransition('project.details', { uuid: '1' }),
+      to: () => ({ name: 'project.details', data: { auth: true } }),
+    });
+
+    expect(mockRedirectStorageSet).toHaveBeenCalledWith({
+      toState: 'project.details',
+      toParams: { uuid: '1' },
+    });
+  });
+
+  it.each(['profile-manage', 'profile-passkeys-required'])(
+    'never remembers the gate page %s as a login destination',
+    (gate) => {
+      const hook = findRedirectHook();
+      mockRedirectStorageSet.mockClear();
+
+      hook.callback({
+        ...createMockTransition(gate),
+        to: () => ({ name: gate, data: { auth: true } }),
+      });
+
+      expect(mockRedirectStorageSet).not.toHaveBeenCalled();
+    },
+  );
 });
 
 describe('Transition error fallback', () => {

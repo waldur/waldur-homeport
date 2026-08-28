@@ -1,14 +1,14 @@
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useRequestToAccessOrganization } from '@/invitations/join-organization/submission';
 
+import { redirectOnSuccess } from '../authNavigation';
 import { loginUser, exchangeToken } from '../AuthService';
 
 export const AuthLoginCompleted: FunctionComponent = () => {
-  const router = useRouter();
   const { params } = useCurrentStateAndParams();
   const { checkAndRequest } = useRequestToAccessOrganization();
   useEffect(() => {
@@ -19,11 +19,11 @@ export const AuthLoginCompleted: FunctionComponent = () => {
       // already navigated to its destination — don't clobber it.
       const handled = await checkAndRequest();
       if (!handled) {
-        router.stateService.go('profile.details');
+        await redirectOnSuccess();
       }
     }
     handleLogin();
-  }, [router, params]);
+  }, [params]);
 
   return (
     <div className="middle-box text-center">
