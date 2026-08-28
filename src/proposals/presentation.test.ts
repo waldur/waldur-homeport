@@ -4,6 +4,9 @@ import { ENV } from '@/core/config';
 
 import {
   usesCallVocabulary,
+  requestNoun,
+  requestStateLabel,
+  requestViewLabel,
   showsCallColumns,
   showsCallContext,
   showsProposalDuration,
@@ -60,6 +63,42 @@ describe('request presentation', () => {
       for (const block of blocks) {
         expect(block()).toBe(usesCallVocabulary());
       }
+    }
+  });
+});
+
+describe('request vocabulary', () => {
+  it('names the request lens after whatever the request is called', () => {
+    setMode('both');
+    expect(requestNoun()).toBe('Proposal');
+    expect(requestViewLabel()).toBe('By proposal');
+
+    setMode('marketplace');
+    expect(requestNoun()).toBe('Access request');
+    expect(requestViewLabel()).toBe('By access request');
+  });
+
+  // The opposite lens is "By resource" — a resource *request*. Shortening this
+  // one to "By request" would make the pair name the same thing twice.
+  it('keeps the qualifier that tells the two lenses apart', () => {
+    setMode('marketplace');
+    expect(requestViewLabel()).not.toBe('By request');
+  });
+
+  it('titles the state column with a state, not with the noun', () => {
+    setMode('both');
+    expect(requestStateLabel()).toBe('Proposal state');
+
+    setMode('marketplace');
+    expect(requestStateLabel()).toBe('Access request state');
+  });
+
+  // The bare noun titles the *name* column on the request list. Reusing it
+  // over a state badge would give one word two meanings on adjacent lenses.
+  it('never titles the state column with the bare noun', () => {
+    for (const mode of ['both', 'calls', 'marketplace', undefined]) {
+      setMode(mode);
+      expect(requestStateLabel()).not.toBe(requestNoun());
     }
   });
 });

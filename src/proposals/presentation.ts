@@ -73,9 +73,9 @@ export const showsCallColumns = (): boolean => usesCallVocabulary();
 /**
  * What the object is called.
  *
- * "Access request" rather than plain "request": `profile.resource-requests`
- * already owns that word for the individual asks *inside* one, and two
- * adjacent pages of "requests" at different granularities would not be
+ * "Access request" rather than plain "request": the resource lens on the same
+ * page already owns that word for the individual asks *inside* one, and two
+ * sets of "requests" at different granularities, a click apart, would not be
  * distinguishable.
  *
  * Getters, not constants: translate() must run at render time, after the
@@ -101,14 +101,41 @@ export const requestListTitle = (): string =>
     : translate('My access requests');
 
 /**
+ * The header over the parent request's state badge, in the list of the
+ * individual resources asked for.
+ *
+ * Deliberately not requestNoun(): that titles the *name* column on the request
+ * list, so the bare noun would mean "the proposal" on one lens and "the
+ * proposal's state" on the next — one word for two different cells, which is
+ * the collision this module exists to prevent.
+ */
+export const requestStateLabel = (): string =>
+  usesCallVocabulary()
+    ? translate('Proposal state')
+    : translate('Access request state');
+
+/**
+ * The label for the request lens on that list, opposite "By resource".
+ *
+ * Whole strings per mode rather than "By {noun}": the frame inflects with the
+ * noun in most languages, so this cannot be built from requestNoun(). It says
+ * "By access request", not "By request", for that helper's own reason — the
+ * other lens is a request too, and the qualifier is what tells them apart.
+ */
+export const requestViewLabel = (): string =>
+  usesCallVocabulary()
+    ? translate('By proposal')
+    : translate('By access request');
+
+/**
  * Where that list lives.
  *
  * Two routes render it. `proposals-all-proposals` sits under the calls
  * section, which marketplace-only mode does not show, so there the list is
- * reached through the profile instead — and `profile.proposals` is permitted
- * on exactly the inverse condition (see user/routes.ts). Anything navigating
+ * reached through the profile instead — and `profile.requests` is permitted
+ * wherever either half of it used to be (see user/routes.ts). Anything navigating
  * to the list must ask here rather than pick one, or it lands an applicant on
  * a route their deployment refuses to resolve.
  */
 export const requestListState = (): string =>
-  isCallsSectionVisible() ? 'proposals-all-proposals' : 'profile.proposals';
+  isCallsSectionVisible() ? 'proposals-all-proposals' : 'profile.requests';

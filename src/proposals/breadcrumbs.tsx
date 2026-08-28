@@ -14,10 +14,10 @@ import { Call, Proposal } from '@/proposals/types';
  * call-manager role the role tab bar does not render either, so without this
  * the request is a dead end with no way back but the browser button.
  *
- * The chain is Profile -> the request list -> this request. Not by way of
- * `profile.resource-requests`: that page lists the individual resource asks
- * *inside* a request, so routing through it would put the child above the
- * parent and tell the applicant the opposite of how the two relate.
+ * The chain is Profile -> the request list -> this request. Not by way of the
+ * list's resource lens: that shows the individual resource asks *inside* a
+ * request, so routing through it would put the child above the parent and
+ * tell the applicant the opposite of how the two relate.
  *
  * `requestListState` rather than a fixed route because the list lives under
  * the calls section in one mode and under the profile in the other, and
