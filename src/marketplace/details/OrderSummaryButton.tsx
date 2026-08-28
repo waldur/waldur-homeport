@@ -1,4 +1,4 @@
-import { EyeIcon } from '@phosphor-icons/react';
+import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { useForm } from 'react-final-form';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -43,7 +43,7 @@ export const OrderSummaryButton = ({
       disabled={disabled}
       disabledReason={disabledReason}
       title={label}
-      iconNode={<EyeIcon weight="bold" />}
+      iconNode={<ClipboardTextIcon weight="bold" />}
     />
   );
 };

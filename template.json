@@ -2189,10 +2189,10 @@
       "feature_area": "create-review"
     }
   },
-  "Add {category}": {
+  "Add {offering}": {
     "context": {
       "variables": {
-        "category": {
+        "offering": {
           "type": "unknown"
         }
       }

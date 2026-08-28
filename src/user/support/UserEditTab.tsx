@@ -1,6 +1,7 @@
 import { Card } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
+import { LOCAL_IDP } from '@/auth/providers/constants';
 import { ExternalLink } from '@/core/ExternalLink';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
@@ -48,7 +49,16 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
             </h3>
           </Card.Title>
           <div className="card-toolbar gap-4">
-            <IdentityProviderIndicator user={user} showManagementLink={false} />
+            {/* Users signed in against the local database have no external
+                identity provider to point at, so the logo and backend name
+                are noise on their own profile. */}
+            {user.registration_method &&
+              user.registration_method !== LOCAL_IDP && (
+                <IdentityProviderIndicator
+                  user={user}
+                  showManagementLink={false}
+                />
+              )}
             {user.identity_provider_management_url && (
               <ExternalLink
                 label={translate('Manage profile')}

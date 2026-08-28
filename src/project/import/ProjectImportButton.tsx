@@ -1,4 +1,4 @@
-import { DownloadSimpleIcon } from '@phosphor-icons/react';
+import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -64,7 +64,7 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
           },
         })
       }
-      iconNode={<DownloadSimpleIcon weight="bold" />}
+      iconNode={<UploadSimpleIcon weight="bold" />}
     />
   );
 };
