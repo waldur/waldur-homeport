@@ -1,4 +1,4 @@
-import { DownloadSimpleIcon } from '@phosphor-icons/react';
+import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
@@ -43,7 +43,7 @@ export const UserImportButton: FC<UserImportButtonProps> = ({
           resolve: { provider, refetch },
         })
       }
-      iconNode={<DownloadSimpleIcon weight="bold" />}
+      iconNode={<UploadSimpleIcon weight="bold" />}
       disabled={!canCreateOfferingUser}
       tooltip={
         !canCreateOfferingUser &&

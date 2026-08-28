@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { startCase } from 'lodash-es';
 import React from 'react';
 import {
   marketplacePluginsList,
@@ -44,11 +43,12 @@ export const OfferingDetailsPage: React.FC = () => {
     queryFn: () => loadData(offering_uuid),
   });
 
+  // The page heading reads "Add <offering name>"; naming the category here
+  // instead made the browser tab and the heading disagree on what is being
+  // ordered ("Add Compute" vs "Add Basic VM").
   useTitle(
-    value?.offering?.category_title
-      ? translate('Add {category}', {
-          category: startCase(value.offering.category_title.toLowerCase()),
-        })
+    value?.offering?.name
+      ? translate('Add {offering}', { offering: value.offering.name })
       : translate('Add resource'),
   );
 

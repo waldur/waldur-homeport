@@ -215,9 +215,12 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 </>
               )}
             </p>
-            <Table className="mb-0 px-0 h-auto fs-7 w-auto mt-1">
-              <tbody>
-                {!props.isPublic && (
+            {/* Plugin type is an internal integration detail: it names the
+                backend the offering is wired to, not anything a prospective
+                customer can act on. Keep it to the provider/staff view. */}
+            {!props.isPublic && (
+              <Table className="mb-0 px-0 h-auto fs-7 w-auto mt-1">
+                <tbody>
                   <tr>
                     <th className="fw-bold w-150px p-0 pe-3">
                       {translate('Shared/Billing enabled')}:
@@ -230,15 +233,17 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                           : translate('No'))}
                     </td>
                   </tr>
-                )}
-                <tr>
-                  <th className="fw-bold w-100px p-0 pe-3">
-                    {translate('Type')}:
-                  </th>
-                  <td className="text-muted p-0">{getLabel(offering.type)}</td>
-                </tr>
-              </tbody>
-            </Table>
+                  <tr>
+                    <th className="fw-bold w-100px p-0 pe-3">
+                      {translate('Type')}:
+                    </th>
+                    <td className="text-muted p-0">
+                      {getLabel(offering.type)}
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
+            )}
           </div>
         }
         actions={
