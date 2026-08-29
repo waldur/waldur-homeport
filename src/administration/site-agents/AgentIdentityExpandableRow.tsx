@@ -3,9 +3,15 @@ import { AgentIdentity } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
+
+import { isConsumerQueue } from '../rabbitmq/utils';
+
+import { AgentQueuesTable } from './AgentQueuesTable';
+import { useAgentConnectionStats } from './useAgentConnectionStats';
 
 interface AgentIdentityExpandableRowProps {
   row: AgentIdentity;
@@ -24,11 +30,71 @@ const getStateBadgeVariant = (state: string) => {
   }
 };
 
+const EventDeliverySection: FC<{ agentUuid: string }> = ({ agentUuid }) => {
+  const { data, isLoading, isError } = useAgentConnectionStats();
+  const agent = data?.agents.find((a) => a.uuid === agentUuid);
+  const queues = agent?.queues ?? [];
+  const hasConsumerQueue = queues.some((q) => isConsumerQueue(q.name));
+
+  return (
+    <>
+      <h6 className="mb-3 d-flex align-items-center gap-2">
+        {translate('Event delivery')}
+        {!isLoading && !isError && (
+          <Badge
+            variant={
+              hasConsumerQueue
+                ? 'primary'
+                : queues.length > 0
+                  ? 'secondary'
+                  : 'warning'
+            }
+            pill
+            outline={!hasConsumerQueue}
+          >
+            {hasConsumerQueue
+              ? translate('Unified consumer')
+              : queues.length > 0
+                ? translate('Legacy subscriptions')
+                : translate('No queue found')}
+          </Badge>
+        )}
+      </h6>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : isError ? (
+        <p className="text-muted">
+          {translate('Unable to load connection data')}
+        </p>
+      ) : queues.length > 0 ? (
+        // useTable ignores a changed fetchData under the same table id, so
+        // remount when the connection-stats snapshot changes.
+        <AgentQueuesTable
+          key={JSON.stringify(queues)}
+          agentUuid={agentUuid}
+          queues={queues}
+        />
+      ) : (
+        <p className="text-muted">
+          {translate(
+            'No event queue for this agent was found in RabbitMQ. Either the agent has not registered one, or the broker statistics could not be read.',
+          )}
+        </p>
+      )}
+    </>
+  );
+};
+
 export const AgentIdentityExpandableRow: FC<
   AgentIdentityExpandableRowProps
 > = ({ row }) => {
   return (
     <ExpandableContainer>
+      <div className="row mb-4">
+        <div className="col-12">
+          <EventDeliverySection agentUuid={row.uuid} />
+        </div>
+      </div>
       <div className="row">
         <div className="col-md-6">
           <h6 className="mb-3">{translate('Configuration')}</h6>

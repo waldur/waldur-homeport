@@ -7,7 +7,9 @@ import type { RmqQueueStats } from './api';
 
 type QueueHealthStatus = 'healthy' | 'warning' | 'alert' | 'critical';
 
-export const getQueueHealth = (queue: RmqQueueStats): QueueHealthStatus => {
+export const getQueueHealth = (
+  queue: Pick<RmqQueueStats, 'messages' | 'consumers'>,
+): QueueHealthStatus => {
   if (queue.consumers > 0) return 'healthy';
   if (queue.messages < 1000) return 'warning';
   if (queue.messages < 10000) return 'alert';
@@ -25,7 +27,7 @@ const healthConfig: Record<
 };
 
 interface RabbitMQQueueHealthBadgeProps {
-  queue: RmqQueueStats;
+  queue: Pick<RmqQueueStats, 'messages' | 'consumers'>;
 }
 
 export const RabbitMQQueueHealthBadge: FC<RabbitMQQueueHealthBadgeProps> = ({
