@@ -17832,7 +17832,7 @@
       "feature_area": "pubsub"
     }
   },
-  "Event subscriptions": {
+  "Event subscriptions (legacy)": {
     "context": {
       "feature_area": "event-subscriptions"
     }
@@ -24630,6 +24630,11 @@
   "Legacy": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Legacy event subscriptions are deprecated": {
+    "context": {
+      "feature_area": "event-subscriptions"
     }
   },
   "Legal & Privacy": {
@@ -34533,6 +34538,11 @@
   "Per-actor (authenticated OR anonymous) weekly token cap. -1 means unlimited.": {},
   "Per-actor daily token cap (authenticated OR anonymous). -1 means unlimited.": {},
   "Per-object-type event subscription queue": {},
+  "Per-object-type event subscriptions are superseded by unified event consumers, which receive every enabled event type on a single queue. New integrations should register through /api/event-consumers/ instead.": {
+    "context": {
+      "feature_area": "event-subscriptions"
+    }
+  },
   "Per-offering bars": {
     "context": {
       "primary_ui_type": "label"
@@ -60430,6 +60440,11 @@
       "feature_area": "plan"
     }
   },
+  "View event consumers": {
+    "context": {
+      "feature_area": "event-subscriptions"
+    }
+  },
   "View identities": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -60497,6 +60512,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "View site agents": {
+    "context": {
+      "feature_area": "event-subscriptions"
     }
   },
   "View statistics": {

@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import { EventSubscription, eventSubscriptionsList } from 'waldur-js-client';
 
+import { AlertItem } from '@/core/AlertItem';
 import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -84,20 +86,40 @@ export const EventSubscriptionsList: FC = () => {
   ];
 
   return (
-    <Table<EventSubscription>
-      {...tableProps}
-      columns={columns}
-      title={translate('Event subscriptions')}
-      verboseName={translate('Event subscription')}
-      hasQuery
-      enableExport
-      expandableRow={EventSubscriptionExpandableRow}
-      rowActions={({ row }) => (
-        <EventSubscriptionRowActions row={row} refetch={tableProps.fetch} />
-      )}
-      tableActions={
-        <EventSubscriptionCreateButton refetch={tableProps.fetch} />
-      }
-    />
+    <>
+      <AlertItem
+        variant="warning"
+        title={translate('Legacy event subscriptions are deprecated')}
+        body={
+          <>
+            {translate(
+              'Per-object-type event subscriptions are superseded by unified event consumers, which receive every enabled event type on a single queue. New integrations should register through /api/event-consumers/ instead.',
+            )}{' '}
+            <Link state="admin-pubsub-health">
+              {translate('View event consumers')}
+            </Link>
+            {' · '}
+            <Link state="admin-site-agents">
+              {translate('View site agents')}
+            </Link>
+          </>
+        }
+      />
+      <Table<EventSubscription>
+        {...tableProps}
+        columns={columns}
+        title={translate('Event subscriptions (legacy)')}
+        verboseName={translate('Event subscription')}
+        hasQuery
+        enableExport
+        expandableRow={EventSubscriptionExpandableRow}
+        rowActions={({ row }) => (
+          <EventSubscriptionRowActions row={row} refetch={tableProps.fetch} />
+        )}
+        tableActions={
+          <EventSubscriptionCreateButton refetch={tableProps.fetch} />
+        }
+      />
+    </>
   );
 };
