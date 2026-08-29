@@ -19,7 +19,7 @@ export interface QueueOwner {
 
 // One shared query: every expanded row / vhost table reads the same cache
 // entry instead of issuing its own request.
-const useAgentConnectionStats = () =>
+export const useAgentConnectionStats = () =>
   useQuery<AgentConnectionStatsResponse>({
     queryKey: AGENT_CONNECTION_STATS_QUERY_KEY,
     queryFn: () =>
@@ -48,7 +48,7 @@ const getAgentByQueueName = (
 };
 
 export const useAgentByQueueName = () => {
-  const { data, isError } = useAgentConnectionStats();
+  const { data, isError, isLoading } = useAgentConnectionStats();
   const agentByQueue = useMemo(() => getAgentByQueueName(data?.agents), [data]);
-  return { agentByQueue, isError };
+  return { agentByQueue, isError, isLoading };
 };

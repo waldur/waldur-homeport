@@ -7011,6 +7011,12 @@
     }
   },
   "Backing up": {},
+  "Backlog": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "site-agents"
+    }
+  },
   "Backport historical consumption data for a resource. Fetches Arrow consumption for a date range (default: last 12 months) and creates usage records for billing.": {},
   "Balance history reflects credit actually drawn each month. Projected exhaustion: {date} at current daily burn of {burn}/d": {
     "context": {
@@ -17839,6 +17845,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Event delivery": {
+    "context": {
+      "feature_area": "site-agents"
+    }
+  },
   "Event message": {
     "context": {
       "feature_area": "events"
@@ -24671,6 +24682,11 @@
       "feature_area": "event-subscriptions"
     }
   },
+  "Legacy subscriptions": {
+    "context": {
+      "feature_area": "site-agents"
+    }
+  },
   "Legal & Privacy": {
     "context": {
       "feature_area": "footer"
@@ -25533,6 +25549,11 @@
   "Loading required fields...": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "Loading site agent data...": {
+    "context": {
+      "feature_area": "rabbitmq"
     }
   },
   "Loading step…": {
@@ -29716,6 +29737,11 @@
       "feature_area": "policies"
     }
   },
+  "No event queue for this agent was found in RabbitMQ. Either the agent has not registered one, or the broker statistics could not be read.": {
+    "context": {
+      "feature_area": "site-agents"
+    }
+  },
   "No event subscription queues found.": {
     "context": {
       "feature_area": "pubsub"
@@ -30312,6 +30338,11 @@
   "No publications added.": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "No queue found": {
+    "context": {
+      "feature_area": "site-agents"
     }
   },
   "No queues found.": {
@@ -30922,7 +30953,7 @@
   },
   "Not connected": {
     "context": {
-      "feature_area": "chat"
+      "feature_area": "site-agents"
     }
   },
   "Not equal to": {
@@ -55159,6 +55190,11 @@
       "feature_area": "create"
     }
   },
+  "Unable to load connection data": {
+    "context": {
+      "feature_area": "site-agents"
+    }
+  },
   "Unable to load custom scripts configuration.": {
     "context": {
       "feature_area": "custom-scripts"
@@ -57717,6 +57753,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "providers"
+    }
+  },
+  "Unified consumer": {
+    "context": {
+      "feature_area": "site-agents"
     }
   },
   "Unified pub/sub consumers registered through /api/event-consumers/. Site-agent consumers are managed on the Site agents page.": {
