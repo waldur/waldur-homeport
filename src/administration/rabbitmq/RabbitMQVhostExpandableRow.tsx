@@ -1,7 +1,9 @@
 import { FC, useMemo } from 'react';
 
+import { Badge } from '@/core/Badge';
 import { Link } from '@/core/Link';
 import { StateIndicator } from '@/core/StateIndicator';
+import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -10,10 +12,34 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
+import { useAgentByQueueName } from '../site-agents/useAgentConnectionStats';
+
 import type { RmqQueueStats, RmqVhostStats } from './api';
 import { RabbitMQQueueActions } from './RabbitMQQueueActions';
 import { RabbitMQQueueConfigPopover } from './RabbitMQQueueConfigPopover';
 import { RabbitMQQueueHealthBadge } from './RabbitMQQueueHealthBadge';
+import { getConsumerUuid, getQueueKind, getRmqQueueType } from './utils';
+
+const KIND_BADGES = {
+  consumer: {
+    variant: 'primary',
+    outline: false,
+    label: translate('Consumer'),
+    tip: translate('Unified pub/sub queue: receives every enabled event type'),
+  },
+  legacy: {
+    variant: 'secondary',
+    outline: true,
+    label: translate('Legacy'),
+    tip: translate('Per-object-type event subscription queue'),
+  },
+  unknown: {
+    variant: 'light',
+    outline: true,
+    label: translate('Unknown'),
+    tip: translate('Not a Waldur event queue'),
+  },
+} as const;
 
 interface RabbitMQVhostExpandableRowProps {
   row: RmqVhostStats;
@@ -24,6 +50,7 @@ export const RabbitMQVhostExpandableRow: FC<
 > = ({ row }) => {
   const user = useUser();
   const isStaff = user?.is_staff;
+  const { agentByQueue, isError: agentsUnavailable } = useAgentByQueueName();
 
   const tableProps = useTable({
     table: `RabbitMQQueues-${row.name}`,
@@ -35,37 +62,47 @@ export const RabbitMQVhostExpandableRow: FC<
       {
         title: translate('Queue name'),
         render: ({ row: queue }: { row: RmqQueueStats }) => (
-          <code className="fs-8" title={queue.name}>
-            {queue.name.length > 40
-              ? `${queue.name.substring(0, 40)}...`
-              : queue.name}
-          </code>
+          <code className="fs-8 text-nowrap">{queue.name}</code>
         ),
         copyField: (queue: RmqQueueStats) => queue.name,
+        // consumer_<uuid> is 41 characters; never cut it.
+        ellipsis: false,
       },
       {
-        title: translate('Type'),
+        title: translate('Kind'),
+        render: ({ row: queue }: { row: RmqQueueStats }) => {
+          const kind = KIND_BADGES[getQueueKind(queue)];
+          return (
+            <Tip label={kind.tip} id={`queue-kind-${queue.name}`}>
+              <Badge variant={kind.variant} pill outline={kind.outline}>
+                {kind.label}
+              </Badge>
+            </Tip>
+          );
+        },
+      },
+      {
+        title: translate('Object type'),
         render: ({ row: queue }: { row: RmqQueueStats }) =>
           renderFieldOrDash(queue.object_type),
       },
       {
         title: translate('Queue type'),
         render: ({ row: queue }: { row: RmqQueueStats }) => {
-          if (!queue.queue_type) return <span className="text-muted">-</span>;
-          const isClassic =
-            queue.queue_type !== 'quorum' && queue.queue_type !== 'stream';
+          const queueType = getRmqQueueType(queue);
+          if (!queueType) return renderFieldOrDash(queueType);
           const variant =
-            queue.queue_type === 'quorum'
+            queueType === 'quorum'
               ? 'primary'
-              : queue.queue_type === 'stream'
+              : queueType === 'stream'
                 ? 'info'
                 : 'secondary';
           return (
             <StateIndicator
-              label={queue.queue_type}
+              label={queueType}
               variant={variant}
               pill
-              outline={isClassic}
+              outline={queueType === 'classic'}
             />
           );
         },
@@ -109,34 +146,66 @@ export const RabbitMQVhostExpandableRow: FC<
         ),
       },
       {
-        title: translate('Subscription'),
-        render: ({ row: queue }: { row: RmqQueueStats }) =>
-          queue.subscription_uuid ? (
-            <span className="text-info">
-              {queue.subscription_uuid.substring(0, 8)}...
-            </span>
-          ) : (
-            <span className="text-muted">-</span>
-          ),
-        copyField: (queue: RmqQueueStats) => queue.subscription_uuid || '',
+        title: translate('Consumer / subscription'),
+        render: ({ row: queue }: { row: RmqQueueStats }) => {
+          const consumerUuid = getConsumerUuid(queue.name);
+          const owner = consumerUuid ? agentByQueue.get(queue.name) : null;
+          if (consumerUuid) {
+            return (
+              <Tip
+                label={
+                  owner
+                    ? translate(
+                        'Consumer queue registered by site agent {name}',
+                        {
+                          name: owner.agentName,
+                        },
+                      )
+                    : agentsUnavailable
+                      ? translate('Site agent connection data unavailable')
+                      : translate('Not owned by a site agent')
+                }
+                id={`queue-consumer-${queue.name}`}
+              >
+                <span className="text-primary">
+                  {consumerUuid.substring(0, 8)}...
+                </span>
+              </Tip>
+            );
+          }
+          return queue.subscription_uuid
+            ? renderFieldOrDash(
+                <span className="text-info">
+                  {queue.subscription_uuid.substring(0, 8)}...
+                </span>,
+              )
+            : renderFieldOrDash(queue.subscription_uuid);
+        },
+        copyField: (queue: RmqQueueStats) =>
+          getConsumerUuid(queue.name) || queue.subscription_uuid || '',
       },
       {
         title: translate('Offering'),
-        render: ({ row: queue }: { row: RmqQueueStats }) =>
-          queue.offering_uuid ? (
+        render: ({ row: queue }: { row: RmqQueueStats }) => {
+          const owner = agentByQueue.get(queue.name);
+          const offeringUuid = queue.offering_uuid || owner?.offeringUuid;
+          if (!offeringUuid) return renderFieldOrDash(offeringUuid);
+          return (
             <Link
               state="admin-marketplace-offering-details"
-              params={{ offering_uuid: queue.offering_uuid }}
+              params={{ offering_uuid: offeringUuid }}
             >
-              {queue.offering_uuid.substring(0, 8)}...
+              {owner?.offeringName ?? `${offeringUuid.substring(0, 8)}...`}
             </Link>
-          ) : (
-            <span className="text-muted">-</span>
-          ),
-        copyField: (queue: RmqQueueStats) => queue.offering_uuid || '',
+          );
+        },
+        copyField: (queue: RmqQueueStats) =>
+          queue.offering_uuid ||
+          agentByQueue.get(queue.name)?.offeringUuid ||
+          '',
       },
     ],
-    [],
+    [agentByQueue, agentsUnavailable],
   );
 
   if (row.queues.length === 0) {
