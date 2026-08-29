@@ -3077,7 +3077,7 @@
   },
   "All types": {
     "context": {
-      "feature_area": "maintenance"
+      "feature_area": "pubsub"
     }
   },
   "All usage": {
@@ -7530,6 +7530,11 @@
       "feature_area": "role-availabilities"
     }
   },
+  "Bound to no scope: receives every event in the system, including events about all users.": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Branch": {
     "context": {
       "feature_area": "catalog"
@@ -10728,7 +10733,8 @@
   },
   "Consumer": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
     }
   },
   "Consumer / subscription": {
@@ -10763,6 +10769,12 @@
     }
   },
   "Consumers": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
+    }
+  },
+  "Consumers connected": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "pubsub"
@@ -14395,6 +14407,17 @@
       "feature_area": "roles"
     }
   },
+  "Deregister": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
+  "Deregister event consumer": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
+    }
+  },
   "Derived from the Storage quota; not separately settable.": {},
   "Describe how this conflict of interest will be managed...": {
     "context": {
@@ -17805,6 +17828,17 @@
       "feature_area": "issues"
     }
   },
+  "Event consumer deregistered.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "pubsub"
+    }
+  },
+  "Event consumers": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "Event message": {
     "context": {
       "feature_area": "events"
@@ -17825,11 +17859,6 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "event-subscriptions"
-    }
-  },
-  "Event subscription queues": {
-    "context": {
-      "feature_area": "pubsub"
     }
   },
   "Event subscriptions (legacy)": {
@@ -20603,7 +20632,7 @@
   },
   "Global": {
     "context": {
-      "feature_area": "project"
+      "feature_area": "pubsub"
     }
   },
   "Global federation of identity providers for researchers.": {
@@ -24630,6 +24659,11 @@
   "Legacy": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Legacy event subscription queues": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Legacy event subscriptions are deprecated": {
@@ -31433,6 +31467,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "event-subscriptions"
+    }
+  },
+  "Object types": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
     }
   },
   "Observable objects": {
@@ -38861,12 +38901,18 @@
   },
   "Queue": {
     "context": {
-      "feature_area": "rabbitmq"
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
     }
   },
   "Queue configuration": {
     "context": {
       "feature_area": "rabbitmq"
+    }
+  },
+  "Queue created": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Queue deleted successfully": {
@@ -38890,6 +38936,11 @@
   "Queue name": {
     "context": {
       "primary_ui_type": "title",
+      "feature_area": "pubsub"
+    }
+  },
+  "Queue pending": {
+    "context": {
       "feature_area": "pubsub"
     }
   },
@@ -39010,6 +39061,12 @@
   },
   "REFEDS assurance level": {},
   "RFC 7662 Token Introspection endpoint URL. Used to validate API bearer tokens. When a client sends Authorization: Bearer <token>, Waldur calls this endpoint to verify the token is active.": {},
+  "RMQ username": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
+    }
+  },
   "ROR, GRID, or other external identifier (optional)": {
     "context": {
       "feature_area": "reviewer"
@@ -39028,6 +39085,11 @@
   "RabbitMQ service unavailable": {
     "context": {
       "feature_area": "rabbitmq"
+    }
+  },
+  "RabbitMQ statistics are unavailable; message and consumer counts are not shown.": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "RabbitMQ subscription queues": {
@@ -44134,6 +44196,12 @@
     }
   },
   "Scoped affiliation": {},
+  "Scopes": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
+    }
+  },
   "Score": {
     "context": {
       "primary_ui_type": "title",
@@ -47182,7 +47250,7 @@
   },
   "Site agents": {
     "context": {
-      "feature_area": "administration"
+      "feature_area": "pubsub"
     }
   },
   "Site-wide burst cap across all assistant traffic.": {},
@@ -51267,6 +51335,11 @@
       "feature_area": "coi-review"
     }
   },
+  "This deletes the RabbitMQ queue and broker user of this consumer. The client will stop receiving events until it registers again. Continue?": {
+    "context": {
+      "feature_area": "pubsub"
+    }
+  },
   "This deployment requires a passkey for administrator accounts. Add one now to carry on — it takes a moment, and you can use your device screen lock or a security key.": {
     "context": {
       "feature_area": "passkeys"
@@ -54729,6 +54802,12 @@
       "feature_area": "actions"
     }
   },
+  "Unable to deregister event consumer.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "pubsub"
+    }
+  },
   "Unable to destroy instance.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -57638,6 +57717,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "providers"
+    }
+  },
+  "Unified pub/sub consumers registered through /api/event-consumers/. Site-agent consumers are managed on the Site agents page.": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "Unified pub/sub queue: receives every enabled event type": {},
@@ -63355,6 +63439,11 @@
   "estimated": {
     "context": {
       "feature_area": "growth"
+    }
+  },
+  "event consumers": {
+    "context": {
+      "feature_area": "pubsub"
     }
   },
   "events": {
