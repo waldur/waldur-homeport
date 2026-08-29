@@ -1,8 +1,7 @@
+import classNames from 'classnames';
 import { ReactNode, useContext } from 'react';
 
 import { PermissionContext } from './PermissionLayout';
-
-import './WarningBar.scss';
 
 export default function WarningBar() {
   const { permission, banner } = useContext(PermissionContext);
@@ -19,11 +18,18 @@ export default function WarningBar() {
     return (
       <div
         className={
-          permission === 'restricted' ? 'bar bar-danger' : 'bar bar-warning'
+          permission === 'restricted'
+            ? 'layout-warning-bar bar-danger'
+            : 'layout-warning-bar bar-warning'
         }
       >
-        <div className={banner?.options?.className ?? ''}>
-          <p>
+        <div
+          className={classNames(
+            'w-100 text-center',
+            banner?.options?.className,
+          )}
+        >
+          <p className="mb-0 py-2">
             <strong>{banner.title}</strong>
             {Boolean(banner.title && banner.message) && ':'} {banner.message}
           </p>
