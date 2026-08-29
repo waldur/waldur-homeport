@@ -10726,6 +10726,27 @@
       "feature_area": "consumption"
     }
   },
+  "Consumer": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Consumer / subscription": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "rabbitmq"
+    }
+  },
+  "Consumer queue registered by site agent {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "rabbitmq"
+    }
+  },
   "Consumer rejection reason": {
     "context": {
       "feature_area": "details"
@@ -24136,6 +24157,12 @@
       "feature_area": "matching"
     }
   },
+  "Kind": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "rabbitmq"
+    }
+  },
   "Kubernetes & Nodes": {
     "context": {
       "feature_area": "create"
@@ -24598,6 +24625,11 @@
   "Left": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Legacy": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Legal & Privacy": {
@@ -30819,6 +30851,7 @@
       "feature_area": "UserTosManagement"
     }
   },
+  "Not a Waldur event queue": {},
   "Not accepted": {
     "context": {
       "primary_ui_type": "label",
@@ -30886,6 +30919,11 @@
   "Not overridden": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Not owned by a site agent": {
+    "context": {
+      "feature_area": "rabbitmq"
     }
   },
   "Not provided": {
@@ -31388,6 +31426,7 @@
   },
   "Object type": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "event-subscriptions"
     }
   },
@@ -34493,6 +34532,7 @@
   "Per-actor (authenticated OR anonymous) monthly token cap. -1 means unlimited.": {},
   "Per-actor (authenticated OR anonymous) weekly token cap. -1 means unlimited.": {},
   "Per-actor daily token cap (authenticated OR anonymous). -1 means unlimited.": {},
+  "Per-object-type event subscription queue": {},
   "Per-offering bars": {
     "context": {
       "primary_ui_type": "label"
@@ -47120,6 +47160,11 @@
       "feature_area": "policies"
     }
   },
+  "Site agent connection data unavailable": {
+    "context": {
+      "feature_area": "rabbitmq"
+    }
+  },
   "Site agent status": {
     "context": {
       "feature_area": "policies"
@@ -48228,7 +48273,6 @@
   },
   "Subscription": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "billing"
     }
   },
@@ -57586,6 +57630,7 @@
       "feature_area": "providers"
     }
   },
+  "Unified pub/sub queue: receives every enabled event type": {},
   "Unique ID of a resource created via Marketplace": {
     "context": {
       "feature_area": "summary"
