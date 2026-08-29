@@ -20,7 +20,7 @@ export const EventSubscriptionQueuesCard: FC = () => {
   return (
     <AccordionCard
       id="event-subscription-queues"
-      title={translate('Event subscription queues')}
+      title={translate('Legacy event subscription queues')}
       subtitle={
         data
           ? translate('{count} queues', { count: data.length })

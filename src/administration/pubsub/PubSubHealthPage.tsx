@@ -8,6 +8,7 @@ import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
 
 import { getPubSubOverview } from './api';
+import { EventConsumersCard } from './EventConsumersCard';
 import { EventSubscriptionQueuesCard } from './EventSubscriptionQueuesCard';
 import { PubSubCircuitBreakerCard } from './PubSubCircuitBreakerCard';
 import { PubSubCircuitBreakerResetButton } from './PubSubCircuitBreakerResetButton';
@@ -87,6 +88,7 @@ export const PubSubHealthPage = () => {
       <PubSubMetricsCard />
       <PubSubDeadLetterQueueCard />
       <PubSubTopQueuesCard />
+      <EventConsumersCard />
       <EventSubscriptionQueuesCard />
     </Panel>
   );
