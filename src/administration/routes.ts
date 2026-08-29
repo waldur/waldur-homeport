@@ -258,7 +258,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      breadcrumb: () => translate('Event subscriptions'),
+      breadcrumb: () => translate('Event subscriptions (legacy)'),
       permissions: [isStaffOrSupport],
     },
   },
