@@ -68,7 +68,13 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
           }
         }}
         noOptionsMessage={() => translate('No offerings')}
-        reactSelectProps={props.reactSelectProps}
+        reactSelectProps={{
+          // Drop react-select-async-paginate's per-query cache when the
+          // filter changes (e.g. the sibling category field in the
+          // proposal wizard), otherwise the old filter's options persist.
+          cacheUniqs: [props.offeringFilter, field, providerOfferings],
+          ...props.reactSelectProps,
+        }}
       />
 
       {props.description && (
